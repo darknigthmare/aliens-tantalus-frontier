@@ -1,4 +1,4 @@
-# Bible sprites & animations v47
+# Bible sprites & animations v47.1
 
 ## Masters intégrés
 
@@ -8,6 +8,14 @@
 | `xenomorph-sprite-sheet.png` | 1254×1254 | Ovomorphe, facehugger, chestburster, Drone, Warrior, castes lourdes, attaques acides, Reine |
 | `arsenal-props-atlas.png` | 1402×1122 | Armes, équipements, terminaux, portes, sentry, P-5000, APC, dropship et véhicules coloniaux |
 | `tantalus-base-environment.png` | 1672×941 | Décor multi-plan latéral de Tantalus Base |
+| `echo9-classes-animation-sheet.png` | 1024×1024 | Commandement, smartgunner, ingénierie/démolition, corpsman/xénobiologie |
+| `human-factions-animation-sheet.png` | 1024×1024 | USCM, commandos corporatistes, UPP/Seegson, survivants Crucible/ATARAX |
+| `synthetic-android-animation-sheet.png` | 1024×1024 | Synthétique de terrain, utilitaire, combat et endommagé |
+| `pathogen-fauna-animation-sheet.png` | 1024×1024 | Néomorphe, lignée deacon, abomination pathogène et faune locale |
+| `neuro-xeno-animation-sheet.png` | 1024×1024 | Red Hive, K-Series, Xenoborg/Ripper et ATARAX |
+| `vehicle-animation-sheet.png` | 1024×1024 | Power loader, APC, dropship et rover/submersible |
+| `combat-vfx-animation-sheet.png` | 1024×1024 | Tirs, flammes, acide, explosions, fumée et étincelles |
+| `interactive-props-animation-sheet.png` | 1024×1024 | Sas, sentry, terminal/réacteur et transit/quarantaine |
 
 Ces images sont des **masters de production OpenAI**. Le runtime v47 utilise aussi des silhouettes Canvas paramétriques afin que les 568 variantes restent jouables sans prétendre qu’un master équivaut à 568 dessins uniques.
 
@@ -48,4 +56,6 @@ Production complète : 8 directions pour les vues tactiques, profil gauche/droit
 
 ## Découpe et alpha
 
-Les copies intégrées ont un canal alpha réel vérifié; le pipeline reproductible est `scripts/clean-atlas-alpha.mjs`. Avant un export moteur final, chaque planche doit encore être découpée visuellement et les cellules réalignées sur le pivot. Les originaux de génération restent la source de provenance.
+Les copies v47 historiques ont un canal alpha réel vérifié par `scripts/clean-atlas-alpha.mjs`. Les huit plaques v47.1 passent par `scripts/sprite-sheet-normalize.mjs` : alpha réel, sortie RGBA 1024×1024, cellules 256 px, gardes transparentes de 8 px, contrôle des 16 cellules et des duplications.
+
+Les originaux ImageGen restent sous le dossier de génération OpenAI et les copies normalisées sont les sources du runtime. La découpe finale peut utiliser directement la grille 4×4 déclarée dans `src/visuals.js`.

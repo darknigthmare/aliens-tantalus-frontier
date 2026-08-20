@@ -7,6 +7,7 @@
   <meta name="description" content="ALIENS: TANTALUS FRONTIER — archive jouable v1 à v46, runtime v47.">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/sprite-gallery.css">
   <title>ALIENS: TANTALUS FRONTIER</title>
 </head>
 <body>
@@ -34,7 +35,7 @@
         <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
         <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
         <button class="nav-button" data-view="editor"><span>09</span> Éditeur</button>
-        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v46</button>
+        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v47.1</button>
         <button class="nav-button" data-view="settings"><span>11</span> Système</button>
       </nav>
       <div class="rail-footer">
@@ -52,7 +53,7 @@
         </div>
         <div class="top-metrics">
           <span><b id="clock">J01 06:00</b> TEMPS NAVIRE</span>
-          <span><b>v47.0.0</b> RUNTIME</span>
+          <span><b>v47.1.0</b> RUNTIME</span>
           <button id="quick-save" class="button compact">SAUVEGARDER</button>
         </div>
       </header>
@@ -141,14 +142,16 @@
         </section>
 
         <section class="view" data-panel="codex">
-          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v46</h2></div><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a></div>
-          <div id="timeline" class="timeline"></div>
-          <div class="art-bible">
-            <article><img src="/assets/openai/tantalus-base-environment.png" alt="Décor industriel de Tantalus Base généré par OpenAI"><h3>Décors & parallax</h3><p>Silhouette canonique, pluie, vapeur, éclairages de sécurité et profondeur multi-plan.</p></article>
-            <article><img src="/assets/openai/echo9-sprite-sheet.png" alt="Sprite sheet des Marines et synthétiques Echo-9"><h3>Personnages</h3><p>Cycles cohérents, point d’ancrage constant et lecture latérale.</p></article>
-            <article><img src="/assets/openai/xenomorph-sprite-sheet.png" alt="Sprite sheet des formes xénomorphes"><h3>Menaces</h3><p>Cycle de vie, castes et états de combat séparés.</p></article>
-            <article><img src="/assets/openai/arsenal-props-atlas.png" alt="Atlas des armes, accessoires et véhicules"><h3>Arsenal & props</h3><p>Atlas normalisé pour armurerie, pickups et interactions.</p></article>
+          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v47.1</h2></div><div class="button-row"><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a><a class="button primary" href="/docs/POSTULATE_PARITY_AUDIT.md" target="_blank">AUDIT DU POSTULAT</a></div></div>
+          <div class="postulate-audit" aria-label="État de parité du postulat de base">
+            <article><b>27/27</b><span>AXES CONSERVÉS</span><p>Aucun postulat retiré.</p></article>
+            <article><b>4</b><span>VERROUILLÉS</span><p>Vérifiables tels quels.</p></article>
+            <article><b>14</b><span>SYSTÉMIQUES</span><p>Catalogues et systèmes partagés.</p></article>
+            <article class="audit-warning"><b>9</b><span>PARTIELS</span><p>Production matérielle à poursuivre.</p></article>
           </div>
+          <div id="timeline" class="timeline"></div>
+          <div class="section-intro compact-intro"><div><p class="eyebrow">PRODUCTION SPRITES OPENAI</p><h2>Plaques d’animation & masters</h2></div><span id="sprite-wave-count" class="chip success">CHARGEMENT</span></div>
+          <div id="art-bible" class="art-bible"></div>
         </section>
 
         <section class="view" data-panel="settings">

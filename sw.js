@@ -1,5 +1,5 @@
-const CACHE = 'atf-v47-shell-1';
-const CORE = ['/', '/index.html', '/styles.css', '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/save.js', '/src/game.js', '/src/editor.js', '/src/audio.js'];
+const CACHE = 'atf-v47-1-shell-2';
+const CORE = ['/', '/index.html', '/styles.css', '/sprite-gallery.css', '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/visuals.js', '/src/save.js', '/src/game.js', '/src/editor.js', '/src/audio.js'];
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', (event) => {

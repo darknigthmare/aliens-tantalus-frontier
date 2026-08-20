@@ -6,6 +6,7 @@ import { SaveSystem } from './save.js';
 import { AudioDirector } from './audio.js';
 import { GameEngine } from './game.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
+import { VISUAL_ASSETS, NEW_SPRITE_FRAME_COUNT, NEW_SPRITE_SHEETS } from './visuals.js';
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -213,6 +214,11 @@ function renderTimeline() {
   $('#timeline').innerHTML = timelineGroups.map(([version, title, text]) => `<article class="timeline-entry"><span class="eyebrow">${version}</span><h3>${title}</h3><p>${text}</p></article>`).join('');
 }
 
+function renderArtBible() {
+  $('#art-bible').innerHTML = VISUAL_ASSETS.map((asset) => `<article><div class="asset-frame"><img src="${asset.file}" alt="${asset.alt}" loading="lazy" decoding="async"></div><div class="asset-copy"><div class="asset-meta"><span>${asset.provider}</span><span>${asset.grid ? `${asset.grid} · ${asset.frames} cellules` : 'MASTER DÉCOR'}</span>${asset.wave ? `<span class="chip success">${asset.wave}</span>` : ''}</div><h3>${asset.title}</h3><p>${asset.description}</p></div></article>`).join('');
+  $('#sprite-wave-count').textContent = `${NEW_SPRITE_SHEETS.length} PLAQUES · ${NEW_SPRITE_FRAME_COUNT} CELLULES`;
+}
+
 function renderProfiles() {
   $('#profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<div class="profile-row"><div><strong>PROFIL ${profile.profile}</strong><span>${profile.empty ? 'Emplacement vide' : `${profile.release} · ${formatTime(profile.playSeconds)}`}</span></div><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : 'CHARGER'}</button></div>`).join('');
   $('#setting-difficulty').value = saveSystem.data.settings.difficulty;
@@ -302,7 +308,7 @@ function setupEditor() {
 }
 
 function renderAll() {
-  renderCommand(); renderGalaxy(); renderCampaigns(); renderArmory(); renderEnemies(); renderVehicles(); renderHub(); renderCrew(); renderTimeline(); renderProfiles(); updateSaveState();
+  renderCommand(); renderGalaxy(); renderCampaigns(); renderArmory(); renderEnemies(); renderVehicles(); renderHub(); renderCrew(); renderTimeline(); renderArtBible(); renderProfiles(); updateSaveState();
 }
 
 async function boot() {

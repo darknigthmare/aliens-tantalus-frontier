@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version jouable web **v47.0.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46 et lui ajoute un runtime, une interface, des sauvegardes migrables, une PWA et quatre masters visuels OpenAI.
+Version jouable web **v47.1.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46, publie l’audit exhaustif des 27 postulats et intègre huit nouvelles plaques 4×4 OpenAI, en plus des quatre masters v47.
 
 ## Jouer
 
@@ -50,9 +50,11 @@ npm run qa
 ## Dossier de production
 
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
-- [Historique v1→v46](docs/VERSION_HISTORY.md)
+- [Audit exhaustif des 27 postulats](docs/POSTULATE_PARITY_AUDIT.md)
+- [Historique v1→v47.1](docs/VERSION_HISTORY.md)
 - [Bible sprites et animations](docs/SPRITE_ANIMATION_BIBLE.md)
 - [Provenance artistique et prompts](docs/ART_PROVENANCE.md)
+- [Provenance et prompts de la vague v47.1](docs/ART_PROVENANCE_V47_1.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Licence et propriété intellectuelle](LICENSE_NOTICE.md)
 

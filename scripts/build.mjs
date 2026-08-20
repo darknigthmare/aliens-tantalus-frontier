@@ -9,7 +9,7 @@ if (!validation.ok) throw new Error(`Content contract failed: ${validation.failu
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const path of ['index.html', 'styles.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
+for (const path of ['index.html', 'styles.css', 'sprite-gallery.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
   await cp(join(root, path), join(output, path));
 }
 for (const directory of ['src', 'assets', 'docs']) {

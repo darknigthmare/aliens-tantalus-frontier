@@ -1,6 +1,6 @@
 # Provenance artistique OpenAI
 
-Date de génération : 20 août 2026. Fournisseur : OpenAI ImageGen. Les quatre fichiers sous `assets/openai/` ont été créés durant cette production et non copiés depuis un jeu. Les références servent à la fidélité d’un projet dont l’utilisateur déclare détenir la licence.
+Date de génération : 20 août 2026. Fournisseur : OpenAI ImageGen. Les quatre masters v47 sous `assets/openai/` ont été créés durant cette production et non copiés depuis un jeu. Les huit plaques ajoutées en v47.1 et leurs prompts exacts sont consignés dans [`ART_PROVENANCE_V47_1.md`](ART_PROVENANCE_V47_1.md). Les références servent à la fidélité d’un projet dont l’utilisateur déclare détenir la licence.
 
 ## Sources de direction visuelle
 
