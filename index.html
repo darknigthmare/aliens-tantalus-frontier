@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER — archive jouable v1 à v46, runtime v47.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER — archive jouable v1 à v46, runtime v48 et USS Tantalus navigable.">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/sprite-gallery.css">
+  <link rel="stylesheet" href="/hub-level.css">
   <title>ALIENS: TANTALUS FRONTIER</title>
 </head>
 <body>
@@ -35,7 +36,7 @@
         <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
         <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
         <button class="nav-button" data-view="editor"><span>09</span> Éditeur</button>
-        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v47.1</button>
+        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v48</button>
         <button class="nav-button" data-view="settings"><span>11</span> Système</button>
       </nav>
       <div class="rail-footer">
@@ -53,7 +54,7 @@
         </div>
         <div class="top-metrics">
           <span><b id="clock">J01 06:00</b> TEMPS NAVIRE</span>
-          <span><b>v47.1.0</b> RUNTIME</span>
+          <span><b>v48.0.0</b> RUNTIME</span>
           <button id="quick-save" class="button compact">SAUVEGARDER</button>
         </div>
       </header>
@@ -104,10 +105,23 @@
         </section>
 
         <section class="view" data-panel="hub">
-          <div class="section-intro"><div><p class="eyebrow">BASE MOBILE NAVIGABLE // 4 PONTS</p><h2>USS Tantalus</h2></div><span class="chip">158 MODULES</span></div>
-          <div class="hub-layout">
-            <div class="ship-cutaway"><div class="ship-silhouette" aria-hidden="true"></div><div id="ship-rooms" class="ship-rooms"></div></div>
-            <aside id="room-detail" class="panel"></aside>
+          <div class="hub-level-heading">
+            <div><p class="eyebrow">NIVEAU HUB JOUABLE // 4 PONTS // 16 COMPARTIMENTS</p><h2>USS Tantalus</h2></div>
+            <div id="hub-system-readout" class="hub-system-readout" aria-label="Systèmes du vaisseau"></div>
+          </div>
+          <div class="hub-level-shell">
+            <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus. Utilisez A et D pour marcher, Espace pour franchir, E pour interagir, W et S près d’un ascenseur."></canvas>
+            <div class="hub-touch-controls" aria-label="Contrôles tactiles du hub">
+              <button type="button" data-hub-control="left" aria-label="Marcher à gauche">←</button>
+              <button type="button" data-hub-control="right" aria-label="Marcher à droite">→</button>
+              <button type="button" data-hub-control="jump" aria-label="Franchir">↑</button>
+              <button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
+            </div>
+          </div>
+          <div class="hub-level-readout" aria-live="polite">
+            <span id="hub-deck-label">PONT COMMANDEMENT</span>
+            <strong id="hub-room-label">Passerelle</strong>
+            <span id="hub-prompt">A / D marcher · ESPACE franchir · E utiliser · W / S ascenseur</span>
           </div>
         </section>
 
@@ -142,7 +156,7 @@
         </section>
 
         <section class="view" data-panel="codex">
-          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v47.1</h2></div><div class="button-row"><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a><a class="button primary" href="/docs/POSTULATE_PARITY_AUDIT.md" target="_blank">AUDIT DU POSTULAT</a></div></div>
+          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v48</h2></div><div class="button-row"><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a><a class="button primary" href="/docs/POSTULATE_PARITY_AUDIT.md" target="_blank">AUDIT DU POSTULAT</a></div></div>
           <div class="postulate-audit" aria-label="État de parité du postulat de base">
             <article><b>27/27</b><span>AXES CONSERVÉS</span><p>Aucun postulat retiré.</p></article>
             <article><b>4</b><span>VERROUILLÉS</span><p>Vérifiables tels quels.</p></article>

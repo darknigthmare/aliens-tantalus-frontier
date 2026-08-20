@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version jouable web **v47.1.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46, publie l’audit exhaustif des 27 postulats et intègre huit nouvelles plaques 4×4 OpenAI, en plus des quatre masters v47.
+Version jouable web **v48.0.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46, publie l’audit exhaustif des 27 postulats et intègre un USS Tantalus jouable sur quatre ponts, cinq nouveaux bitmaps OpenAI et les plaques de production v47.1.
 
 ## Jouer
 
@@ -8,7 +8,7 @@ Version jouable web **v47.1.0**, reconstruite à partir du fil de production v1�
 npm run dev
 ```
 
-Ouvrir `http://127.0.0.1:4173`. Dans une opération : `A/D` ou les flèches pour se déplacer, `E` pour interagir, `F` ou clic pour tirer, `Q` pour le tracker, `V` pour entrer/sortir du véhicule, `Espace` pour sauter et `P` pour mettre en pause. Le joueur 2 utilise `I/J/L/O` lorsque la coop locale est activée.
+Ouvrir `http://127.0.0.1:4173`. À bord du Tantalus : `A/D` marcher, `Espace` franchir, `E` utiliser et `W/S` changer de pont près d’un ascenseur. Dans une opération : `A/D` ou les flèches pour se déplacer, `E` pour interagir, `F` ou clic pour tirer, `Q` pour le tracker, `V` pour entrer/sortir du véhicule, `Espace` pour sauter et `P` pour mettre en pause. Le joueur 2 utilise `I/J/L/O` lorsque la coop locale est activée.
 
 ## Contenu verrouillé
 
@@ -51,7 +51,8 @@ npm run qa
 
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
 - [Audit exhaustif des 27 postulats](docs/POSTULATE_PARITY_AUDIT.md)
-- [Historique v1→v47.1](docs/VERSION_HISTORY.md)
+- [Historique v1→v48](docs/VERSION_HISTORY.md)
+- [Provenance des quatre ponts et de l’équipage v48](docs/ART_PROVENANCE_V48.md)
 - [Bible sprites et animations](docs/SPRITE_ANIMATION_BIBLE.md)
 - [Provenance artistique et prompts](docs/ART_PROVENANCE.md)
 - [Provenance et prompts de la vague v47.1](docs/ART_PROVENANCE_V47_1.md)

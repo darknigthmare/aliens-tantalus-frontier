@@ -1,6 +1,6 @@
 import { CREW, RELEASE, WORLDS } from './content.js';
 
-export const SAVE_SCHEMA = 47;
+export const SAVE_SCHEMA = 48;
 export const SAVE_PREFIX = 'atf-v47-profile-';
 export const LEGACY_KEYS = [
   'ALIENS_INFESTATION_BLACKOUT_SAVE',
@@ -48,9 +48,11 @@ export function createDefaultSave(profile = 1) {
     })),
     hub: {
       deck: 0,
+      positionX: 180,
       roomId: 'bridge',
-      visited: ['bridge', 'briefing'],
+      visited: ['bridge'],
       systems: { hull: 100, power: 92, oxygen: 100, security: 76, quarantine: 64, morale: 72, supplies: 78, research: 0 },
+      services: {},
       moduleIds: ['module-001', 'module-002', 'module-003'],
       activeCrisis: null
     },
@@ -87,32 +89,111 @@ export function createDefaultSave(profile = 1) {
   };
 }
 
+const isRecord = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const CREW_STATUSES = new Set(['active', 'injured', 'recovering', 'missing', 'captured', 'deceased']);
+const numberBetween = (value, fallback, min = 0, max = Number.MAX_SAFE_INTEGER) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? Math.max(min, Math.min(max, parsed)) : fallback;
+};
+const stringList = (value, fallback = []) => Array.isArray(value)
+  ? [...new Set(value.filter((entry) => typeof entry === 'string' && entry.length <= 120))]
+  : [...fallback];
+const mergeNumbers = (base, candidate, min = 0, max = Number.MAX_SAFE_INTEGER) => {
+  const source = isRecord(candidate) ? candidate : {};
+  return Object.fromEntries(Object.entries(base).map(([key, fallback]) => [key, numberBetween(source[key], fallback, min, max)]));
+};
+
 export function migrateSave(input, profile = 1) {
   const base = createDefaultSave(profile);
-  if (!input || typeof input !== 'object') return base;
+  if (!isRecord(input)) return base;
   const migrated = structuredClone(base);
   const source = structuredClone(input);
 
-  if (source.player) Object.assign(migrated.player, source.player);
-  if (source.hub) {
-    Object.assign(migrated.hub, source.hub);
-    migrated.hub.systems = { ...base.hub.systems, ...(source.hub.systems || {}) };
+  const player = isRecord(source.player) ? source.player : {};
+  Object.assign(migrated.player, player);
+  migrated.player.name = typeof player.name === 'string' ? player.name.slice(0, 80) : base.player.name;
+  for (const key of ['health', 'armor', 'stress']) migrated.player[key] = numberBetween(player[key], base.player[key], 0, 100);
+  migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
+  migrated.player.equipmentIds = stringList(player.equipmentIds, base.player.equipmentIds);
+  migrated.player.ammo = mergeNumbers(base.player.ammo, player.ammo, 0, 999999);
+
+  const hub = isRecord(source.hub) ? source.hub : {};
+  Object.assign(migrated.hub, hub);
+  migrated.hub.deck = Math.floor(numberBetween(hub.deck, base.hub.deck, 0, 3));
+  migrated.hub.positionX = numberBetween(hub.positionX, base.hub.positionX, 40, 2470);
+  migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
+  migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
+  migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})
+    .filter(([key, value]) => /^service:[a-z-]{1,32}$/.test(key) && Number.isFinite(Number(value)))
+    .map(([key, value]) => [key, Math.max(0, Math.floor(Number(value)))]));
+  migrated.hub.visited = stringList(hub.visited, base.hub.visited).filter((id) => /^[a-z0-9-]{1,40}$/.test(id));
+  migrated.hub.moduleIds = stringList(hub.moduleIds, base.hub.moduleIds);
+
+  const galaxy = isRecord(source.galaxy) ? source.galaxy : {};
+  Object.assign(migrated.galaxy, galaxy);
+  migrated.galaxy.resources = mergeNumbers(base.galaxy.resources, galaxy.resources, 0, 999999999);
+  migrated.galaxy.unlockedWorldIds = stringList(galaxy.unlockedWorldIds, base.galaxy.unlockedWorldIds);
+  migrated.galaxy.completedCampaignIds = stringList(galaxy.completedCampaignIds, base.galaxy.completedCampaignIds);
+  const worldState = isRecord(galaxy.worldState) ? galaxy.worldState : {};
+  migrated.galaxy.worldState = Object.fromEntries(Object.entries(base.galaxy.worldState).map(([id, fallback]) => {
+    const candidate = isRecord(worldState[id]) ? worldState[id] : {};
+    return [id, {
+      ...fallback,
+      stability: numberBetween(candidate.stability, fallback.stability, 0, 100),
+      infestation: numberBetween(candidate.infestation, fallback.infestation, 0, 100),
+      colonyLevel: Math.floor(numberBetween(candidate.colonyLevel, fallback.colonyLevel, 0, 100)),
+      faction: typeof candidate.faction === 'string' ? candidate.faction.slice(0, 80) : fallback.faction,
+      quarantine: numberBetween(candidate.quarantine, fallback.quarantine, 0, 100),
+      population: Math.floor(numberBetween(candidate.population, fallback.population, 0, 999999999))
+    }];
+  }));
+  migrated.galaxy.alerts = Array.isArray(galaxy.alerts) ? galaxy.alerts.filter(isRecord).slice(0, 256) : base.galaxy.alerts;
+
+  const clock = isRecord(source.clock) ? source.clock : {};
+  const day = Math.floor(numberBetween(clock.day, base.clock.day, 1, 100000));
+  const hour = numberBetween(clock.hour, base.clock.hour, 0, 2400000);
+  const absoluteHours = (day - 1) * 24 + hour;
+  migrated.clock = { day: Math.floor(absoluteHours / 24) + 1, hour: Math.round((absoluteHours % 24) * 100) / 100 };
+
+  for (const key of ['scene', 'worldId', 'levelSeedId', 'difficulty']) {
+    if (typeof source[key] === 'string') migrated[key] = source[key].slice(0, 120);
   }
-  if (source.galaxy) {
-    Object.assign(migrated.galaxy, source.galaxy);
-    migrated.galaxy.resources = { ...base.galaxy.resources, ...(source.galaxy.resources || {}) };
-    migrated.galaxy.worldState = { ...base.galaxy.worldState, ...(source.galaxy.worldState || {}) };
-  }
-  for (const key of ['clock', 'scene', 'worldId', 'campaignId', 'levelSeedId', 'difficulty', 'crew', 'editor', 'memorial', 'settings', 'statistics']) {
-    if (source[key] !== undefined) migrated[key] = source[key];
-  }
-  migrated.settings = { ...base.settings, ...(source.settings || {}) };
-  migrated.statistics = { ...base.statistics, ...(source.statistics || {}) };
+  if (typeof source.campaignId === 'string' || source.campaignId === null) migrated.campaignId = source.campaignId;
+
+  const importedCrew = Array.isArray(source.crew) ? source.crew.filter(isRecord) : [];
+  migrated.crew = base.crew.map((fallback, index) => {
+    const candidate = importedCrew.find((member) => member.id === fallback.id) || importedCrew[index] || {};
+    return {
+      ...fallback,
+      ...candidate,
+      id: fallback.id,
+      status: CREW_STATUSES.has(candidate.status) ? candidate.status : fallback.status,
+      health: numberBetween(candidate.health, fallback.health, 0, 100),
+      stress: numberBetween(candidate.stress, fallback.stress, 0, 100),
+      fatigue: numberBetween(candidate.fatigue, fallback.fatigue, 0, 100),
+      loyalty: numberBetween(candidate.loyalty, fallback.loyalty, 0, 100),
+      missions: Math.floor(numberBetween(candidate.missions, fallback.missions, 0, 999999)),
+      kills: Math.floor(numberBetween(candidate.kills, fallback.kills, 0, 999999)),
+      injuries: Array.isArray(candidate.injuries) ? candidate.injuries.slice(0, 64) : fallback.injuries
+    };
+  });
+
+  const editor = isRecord(source.editor) ? source.editor : {};
+  migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };
+  migrated.memorial = Array.isArray(source.memorial) ? source.memorial.filter(isRecord).slice(0, 512) : base.memorial;
+  const settings = isRecord(source.settings) ? source.settings : {};
+  migrated.settings = { ...base.settings, ...settings };
+  for (const key of ['subtitles', 'reducedMotion', 'coop']) migrated.settings[key] = typeof settings[key] === 'boolean' ? settings[key] : base.settings[key];
+  const statistics = isRecord(source.statistics) ? source.statistics : {};
+  migrated.statistics = mergeNumbers(base.statistics, statistics, 0, 999999999);
+
   migrated.schema = SAVE_SCHEMA;
   migrated.release = RELEASE.version;
-  migrated.profile = profile;
+  migrated.profile = Math.max(1, Math.min(3, Math.floor(Number(profile) || 1)));
+  migrated.createdAt = numberBetween(source.createdAt, base.createdAt, 0);
   migrated.updatedAt = Date.now();
-  migrated.migratedFrom = source.release || source.version || `schema-${source.schema ?? 'legacy'}`;
+  const previousVersion = typeof source.release === 'string' ? source.release : typeof source.version === 'string' ? source.version : null;
+  migrated.migratedFrom = previousVersion || `schema-${Number.isFinite(Number(source.schema)) ? source.schema : 'legacy'}`;
   return migrated;
 }
 

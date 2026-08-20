@@ -12,18 +12,18 @@ Date de contrôle : 20 août 2026. Source de vérité : conversation partagée �
 
 | # | Postulat d’origine | État | Preuve actuelle | Écart matériel restant |
 |---:|---|---|---|---|
-| 1 | Jeu professionnel, cohérent, menus, contenu, level design et visuels OpenAI | Partiel | Runtime v47, PWA, onze catalogues, éditeur, masters OpenAI | Direction artistique finale, contenu artisanal et finition commerciale de toutes les surfaces |
+| 1 | Jeu professionnel, cohérent, menus, contenu, level design et visuels OpenAI | Partiel | Runtime v48, PWA, onze catalogues, éditeur, hub physique et masters OpenAI | Direction artistique finale, contenu artisanal et finition commerciale de toutes les surfaces |
 | 2 | Suite spirituelle complète d’*Aliens: Infestation* | Partiel | Boucle Metroidvania tactique jouable et continuité 2204 | Campagne complète, boss, transitions et équilibrage final |
 | 3 | Arsenal et équipement de toute la franchise et des jeux demandés | Systémique | 146 armes et 106 équipements catalogués | Comportement, son, animation et pickup uniques pour chaque entrée |
 | 4 | Tenues Marines, personnalisation, androïdes jouables/NPC/ennemis | Systémique | 392 combinaisons, rôles Echo-9 et biologies synthétiques | Rigs, portraits et variantes visuelles individuels |
 | 5 | Toutes les menaces, lieux, statistiques, fréquence et lore | Systémique | 568 fiches filtrables avec stats, biologie, caste et provenance | Rencontres et comportements faits main pour chaque variante |
 | 6 | Véhicules terrestres, aériens et maritimes, alliés aux sièges | Partiel | 279 châssis avec sièges/actions, mécanique générique en mission | Pilotage, physique, armes et équipage propres à chaque châssis |
-| 7 | Vaisseau-base et au moins 50 planètes/colonies/complexes/extérieurs | Systémique | USS Tantalus, 158 modules et 64 mondes | Vaisseau physique complet et niveaux artisanaux pour chaque monde |
+| 7 | Vaisseau-base et au moins 50 planètes/colonies/complexes/extérieurs | Systémique | USS Tantalus physique sur quatre ponts, 158 modules et 64 mondes | Niveaux artisanaux complets pour chaque monde |
 | 8 | Tout produire intégralement, sans simple prototype | Partiel | Architecture, sauvegarde, gameplay et catalogues réels | Production commerciale multi-années encore inachevée |
-| 9 | Audits répétés, corrections et développement additif | Verrouillé | Historique v1→v47, validations de contrat et tests | Maintenir ce gate à chaque vague |
-| 10 | Génération OpenAI pour les images manquantes | Partiel | Masters et vague v47.1 intégrés avec provenance | Banque exhaustive par entrée, cinématiques et décors de tous les mondes |
-| 11 | USS Tantalus navigable comme un niveau | Partiel | Quatre ponts et seize compartiments navigables par interface | Exploration side-scroller continue, conduits, incidents et combats à bord |
-| 12 | Ne rien retirer de la v1 à la dernière version | Verrouillé | Contrat additif v46 et migration de sauvegarde v47 | Rejouer le gate de non-régression à chaque version |
+| 9 | Audits répétés, corrections et développement additif | Verrouillé | Historique v1→v48, validations de contrat et tests | Maintenir ce gate à chaque vague |
+| 10 | Génération OpenAI pour les images manquantes | Partiel | Masters, vague v47.1 et cinq bitmaps v48 intégrés avec provenance | Banque exhaustive par entrée, cinématiques et décors de tous les mondes |
+| 11 | USS Tantalus navigable comme un niveau | Partiel | Niveau Canvas side-scroller continu : marche, saut, caméra, ascenseurs, PNJ et seize terminaux persistants | Conduits, incidents dynamiques et combats à bord |
+| 12 | Ne rien retirer de la v1 à la dernière version | Verrouillé | Contrat additif v46 et migration de sauvegarde v48 | Rejouer le gate de non-régression à chaque version |
 | 13 | Éditeur bloc/écran complet pour missions et intérieur du vaisseau | Partiel | Frontier Forge, modes mission/vaisseau, import/export et playtest | Validation, scripting, liens d’écrans, événements, undo/redo et packaging |
 | 14 | Beaucoup de contenu, ennemis et planètes | Verrouillé | 3 443 entrées validées, dont 64 mondes et 568 menaces | Transformer la quantité systémique en diversité vécue |
 | 15 | Environ 100 castes xénomorphes originales et factions humaines manquantes | Systémique | 244 Apex, 234 Neuro-Xeno, factions et profils dérivés | Silhouettes, IA et animations uniques par caste |
@@ -42,6 +42,6 @@ Date de contrôle : 20 août 2026. Source de vérité : conversation partagée �
 
 ## Conclusion vérifiable
 
-Les **27 axes sont tous suivis** : 4 verrouillés, 14 systémiques et 9 partiels. Donc rien n’a été supprimé du postulat, mais il serait faux de déclarer le jeu « complet » au sens commercial. Les plus gros écarts sont les 436 missions artisanales, le hub physique, les 279 véhicules individuellement jouables, le monde Metroidvania interconnecté et les rigs exhaustifs de chaque entrée.
+Les **27 axes sont tous suivis** : 4 verrouillés, 14 systémiques et 9 partiels. Donc rien n’a été supprimé du postulat, mais il serait faux de déclarer le jeu « complet » au sens commercial. Les plus gros écarts sont les 436 missions artisanales, les incidents et combats à bord, les 279 véhicules individuellement jouables, le monde Metroidvania interconnecté et les rigs exhaustifs de chaque entrée.
 
-La vague v47.1 réduit spécifiquement le manque visuel avec huit plaques 4×4 nouvelles, soit 128 cellules de production : classes Echo-9, factions humaines, synthétiques, pathogènes/faune, Neuro-Xeno, véhicules, VFX et props interactifs.
+La vague v47.1 réduit spécifiquement le manque visuel avec huit plaques 4×4, soit 128 cellules de production. La v48 ajoute quatre panoramas 16:9 du vaisseau et une neuvième plaque 4×4 pour les PNJ du hub, normalisée en 1024×1024 avec alpha réel.

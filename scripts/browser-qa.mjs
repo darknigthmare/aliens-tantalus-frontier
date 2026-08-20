@@ -58,8 +58,8 @@ if (!mission.active || mission.canvasWidth !== 1280 || !mission.title.trim()) th
 const screenshot = await command('Page.captureScreenshot', { format: 'jpeg', quality: 76, captureBeyondViewport: false });
 await writeFile('.qa-mission.jpg', Buffer.from(screenshot.data, 'base64'));
 await evaluate(`document.querySelector('#exit-mission').click()`);
-const returned = await evaluate(`document.querySelector('[data-panel="command"]').classList.contains('active')`);
-if (!returned) throw new Error('Mission exit did not return to command.');
+const returned = await evaluate(`document.querySelector('[data-panel="hub"]').classList.contains('active')`);
+if (!returned) throw new Error('Mission exit did not return to the Tantalus hub.');
 if (exceptions.length) throw new Error(`Browser exceptions: ${exceptions.join(' | ')}`);
 socket.close();
 console.log(JSON.stringify({ ok: true, shell, mission, exceptions }, null, 2));

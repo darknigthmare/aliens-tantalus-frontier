@@ -1,4 +1,4 @@
-# Historique consolidé v1→v47.1
+# Historique consolidé v1→v48
 
 Cet historique regroupe les jalons du fil partagé. Il privilégie les changements vérifiables et le principe additif; il ne transforme pas chaque réponse conversationnelle en fausse release indépendante.
 
@@ -21,6 +21,7 @@ Cet historique regroupe les jalons du fil partagé. Il privilégie les changemen
 | v46 | Colonial Marines & Crucible Enemy Pass : +4 mondes, +8 campagnes, +48 ennemis, +12 Apex, +48 Neuro-Link, +2 factions, +4 armes et +4 équipements. Totaux finaux : 436/64/146/106/568/279/244/234. |
 | v47 | Runtime web, PWA, interface complète, éditeur, QA, provenance et masters OpenAI intégrés. |
 | v47.1 | Audit exhaustif des 27 postulats; huit plaques d’animation 4×4, 128 cellules, alpha normalisé, galerie Codex et QA dédiée. |
+| v48 | Hub USS Tantalus converti en niveau Canvas : marche, saut, caméra, quatre ponts OpenAI, PNJ animés, ascenseurs, 16 interactions et conséquences persistantes. |
 
 ## Médias et continuités représentés
 

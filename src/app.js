@@ -1,10 +1,11 @@
 import {
   RELEASE, CONTENT_COUNTS, WORLDS, CAMPAIGNS, WEAPONS, EQUIPMENT, ENEMIES, VEHICLES,
-  CREW, COSTUMES, SHIP_MODULES, LEVEL_SEEDS, APEX_DOSSIERS, NEURO_XENO_PROFILES, validateContent
+  CREW, COSTUMES, LEVEL_SEEDS, validateContent
 } from './content.js';
 import { SaveSystem } from './save.js';
 import { AudioDirector } from './audio.js';
 import { GameEngine } from './game.js';
+import { HubGame, HUB_DECKS } from './hub-game.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { VISUAL_ASSETS, NEW_SPRITE_FRAME_COUNT, NEW_SPRITE_SHEETS } from './visuals.js';
 
@@ -13,6 +14,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const formatNumber = (value) => new Intl.NumberFormat('fr-FR').format(value);
 const formatTime = (seconds = 0) => `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m`;
 const titleCase = (value = '') => value.replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
+const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
 const memoryStorage = (() => {
   const values = new Map();
@@ -23,6 +25,7 @@ const saveSystem = new SaveSystem(globalThis.localStorage || memoryStorage);
 saveSystem.load(1);
 const audio = new AudioDirector();
 const engine = new GameEngine($('#game-canvas'), { audio, onEvent: handleGameEvent });
+const hubEngine = new HubGame($('#hub-canvas'), { audio, onAction: handleHubAction, onPersist: persistHub, onStatus: renderHub });
 let editor;
 let activeView = 'command';
 let activeWorld = WORLDS[4];
@@ -56,9 +59,18 @@ function download(name, text, type = 'application/json') {
   setTimeout(() => URL.revokeObjectURL(url), 500);
 }
 
+function advanceClock(hours) {
+  const clock = saveSystem.data.clock;
+  const next = Math.max(0, (clock.day - 1) * 24 + clock.hour + hours);
+  clock.day = Math.floor(next / 24) + 1;
+  clock.hour = Math.round((next % 24) * 100) / 100;
+}
+
 function showView(name) {
   if (!viewMeta[name]) return;
+  const enteringHub = activeView !== 'hub' && name === 'hub';
   if (activeView === 'play' && name !== 'play') engine.stop();
+  if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
   activeView = name;
   $$('.view').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === name));
   $$('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
@@ -66,6 +78,10 @@ function showView(name) {
   $('#view-title').textContent = viewMeta[name][1];
   $('.rail').classList.remove('open');
   globalThis.scrollTo({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+  if (enteringHub) {
+    hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
+    hubEngine.start(saveSystem.data.hub);
+  }
 }
 
 function meter(label, value, invert = false) {
@@ -172,23 +188,90 @@ function renderVehicles() {
   $('#vehicle-list').innerHTML = filtered.slice(0, 48).map((item, index) => catalogCard(item, index, 'vehicle')).join('');
 }
 
-const roomNames = ['Bridge', 'Briefing', 'Combat Information', 'Cryo Bay', 'Crew Quarters', 'Mess', 'Medical', 'Science Lab', 'Quarantine', 'Armory', 'Workshop', 'Vehicle Bay', 'Dropship Hangar', 'Reactor', 'Life Support', 'Sensor Array'];
+function renderHub(status = {}) {
+  const deckIndex = status.deck ?? saveSystem.data.hub.deck ?? 0;
+  const deck = HUB_DECKS[deckIndex] || HUB_DECKS[0];
+  const roomId = status.roomId || saveSystem.data.hub.roomId;
+  const room = deck.rooms.find((entry) => entry.id === roomId) || deck.rooms[0];
+  $('#hub-deck-label').textContent = status.deckName || deck.name;
+  $('#hub-room-label').textContent = status.roomName || room.name;
+  $('#hub-prompt').textContent = status.prompt || 'A / D marcher · ESPACE franchir · E utiliser · W / S ascenseur';
+  const systems = saveSystem.data.hub.systems;
+  $('#hub-system-readout').innerHTML = `<span>ÉNERGIE <b>${Math.round(systems.power)}%</b></span><span>OXYGÈNE <b>${Math.round(systems.oxygen)}%</b></span><span>QUARANTAINE <b>${Math.round(systems.quarantine)}%</b></span><span>VISITÉS <b>${status.visited ?? saveSystem.data.hub.visited.length}/16</b></span>`;
+}
 
-function renderHub(active = saveSystem.data.hub.roomId) {
-  $('#ship-rooms').innerHTML = roomNames.map((name, index) => {
-    const id = name.toLowerCase().replaceAll(' ', '-');
-    return `<button class="room-button ${id === active ? 'active' : ''}" data-room-id="${id}" data-room-index="${index}">PONT ${Math.floor(index / 4) + 1}<br><strong>${name.toUpperCase()}</strong></button>`;
-  }).join('');
-  const selectedIndex = Math.max(0, roomNames.findIndex((name) => name.toLowerCase().replaceAll(' ', '-') === active));
-  const modules = SHIP_MODULES.filter((module) => module.deck === Math.floor(selectedIndex / 4)).slice(0, 6);
-  $('#room-detail').innerHTML = `<p class="eyebrow">PONT ${Math.floor(selectedIndex / 4) + 1} // COMPARTIMENT ${selectedIndex + 1}</p><h3 class="detail-title">${roomNames[selectedIndex]}</h3><p class="detail-copy">Compartiment navigable relié aux ascenseurs, conduits, sas et systèmes persistants du vaisseau.</p><div class="data-list">${modules.map((module) => `<span>${module.name}</span><b>NIV.${module.level}</b>`).join('')}</div><button class="button primary wide" id="visit-room">VISITER LE COMPARTIMENT</button>`;
-  $('#visit-room').onclick = () => { saveSystem.data.hub.roomId = active; saveSystem.data.hub.deck = Math.floor(selectedIndex / 4); if (!saveSystem.data.hub.visited.includes(active)) saveSystem.data.hub.visited.push(active); saveSystem.commit(); toast(`${roomNames[selectedIndex]} ajouté au journal de navigation.`); };
+function persistHub(patch) {
+  saveSystem.data.hub = {
+    ...saveSystem.data.hub,
+    ...patch,
+    services: { ...saveSystem.data.hub.services, ...(patch.services || {}) },
+    systems: { ...saveSystem.data.hub.systems }
+  };
+  saveSystem.data.statistics.rooms = Math.max(saveSystem.data.statistics.rooms, saveSystem.data.hub.visited.length);
+  saveSystem.commit();
+  renderHub();
+}
+
+function handleHubAction(interaction) {
+  if (interaction.action.startsWith('navigate:')) {
+    const target = interaction.action.slice('navigate:'.length);
+    toast(`${interaction.name} — terminal connecté.`);
+    showView(target);
+    return;
+  }
+  const totalHours = (saveSystem.data.clock.day - 1) * 24 + saveSystem.data.clock.hour;
+  const serviceWindow = Math.floor(totalHours / 6);
+  if (saveSystem.data.hub.services[interaction.action] === serviceWindow) {
+    toast(`${interaction.name} : cycle déjà effectué sur cette relève.`);
+    return;
+  }
+  const systems = saveSystem.data.hub.systems;
+  const resources = saveSystem.data.galaxy.resources;
+  let message = '';
+  if (interaction.action === 'service:rest') {
+    for (const member of saveSystem.data.crew) { member.stress = Math.max(0, member.stress - 18); member.fatigue = Math.max(0, member.fatigue - 22); }
+    systems.morale = Math.min(100, systems.morale + 4);
+    advanceClock(1.5);
+    message = 'Relève partagée : stress et fatigue de l’équipage réduits.';
+  }
+  if (interaction.action === 'service:medical') {
+    if (resources.medical <= 0) { toast('Bloc médical : réserves médicales épuisées.'); return; }
+    resources.medical -= 1;
+    saveSystem.data.player.health = Math.min(100, saveSystem.data.player.health + 35);
+    for (const member of saveSystem.data.crew) member.health = Math.min(100, member.health + 18);
+    advanceClock(0.5);
+    message = 'Protocole médical terminé : opérateurs stabilisés.';
+  }
+  if (interaction.action === 'service:quarantine') {
+    systems.quarantine = Math.min(100, systems.quarantine + 7);
+    systems.power = Math.max(0, systems.power - 2);
+    advanceClock(0.25);
+    message = 'Confinement renforcé au prix de 2% d’énergie.';
+  }
+  if (interaction.action === 'service:power') {
+    if (resources.fuel <= 0) { toast('Réacteur : aucune unité de carburant disponible.'); return; }
+    resources.fuel -= 1;
+    systems.power = Math.min(100, systems.power + 9);
+    advanceClock(0.25);
+    message = 'Une unité de carburant injectée : réseau principal restauré.';
+  }
+  if (interaction.action === 'service:oxygen') {
+    systems.oxygen = Math.min(100, systems.oxygen + 8);
+    systems.power = Math.max(0, systems.power - 1);
+    advanceClock(0.25);
+    message = 'Filtres purgés : oxygène restauré, consommation énergétique appliquée.';
+  }
+  if (!message) return;
+  saveSystem.data.hub.services[interaction.action] = serviceWindow;
+  saveSystem.commit();
+  renderCommand(); renderHub(); updateSaveState();
+  toast(message);
 }
 
 function renderCrew() {
   $('#crew-list').innerHTML = CREW.map((member, index) => {
     const state = saveSystem.data.crew.find((entry) => entry.id === member.id) || member;
-    return `<article class="crew-card"><div class="portrait" aria-hidden="true">${index + 1}</div><div class="crew-info"><span class="eyebrow">${member.species} // ${state.status}</span><h3>${member.name}</h3><p>${member.role} · ${member.specialty}</p>${meter('SANTÉ', state.health)}${meter('LOYALTY', state.loyalty)}</div></article>`;
+    return `<article class="crew-card"><div class="portrait" aria-hidden="true">${index + 1}</div><div class="crew-info"><span class="eyebrow">${member.species} // ${escapeHtml(state.status)}</span><h3>${member.name}</h3><p>${member.role} · ${member.specialty}</p>${meter('SANTÉ', state.health)}${meter('LOYALTY', state.loyalty)}</div></article>`;
   }).join('');
   $('#costume-list').innerHTML = COSTUMES.slice(0, 24).map((item, index) => catalogCard(item, index, 'costume')).join('');
 }
@@ -207,7 +290,8 @@ const timelineGroups = [
   ['v42–v44', 'Double canon & Neuro-Xeno', '206 paires MIRE/Frontier, contrôleurs ATARAX, Ripper, xénoarmures et profils jouables.'],
   ['v45', 'Animation Bible', '186 profils xénomorphes, guide d’animation, pivots, événements et besoins de sprites par acteur.'],
   ['v46', 'Colonial Marines & Crucible Pass', '4 mondes, 8 campagnes, 48 ennemis, 12 Apex, 48 Neuro-Link, deux factions et nouveaux équipements additifs.'],
-  ['v47', 'OpenAI Art Production & Runtime', 'Implémentation web professionnelle, assets originaux de production, PWA, QA et publication continue.']
+  ['v47', 'OpenAI Art Production & Runtime', 'Implémentation web professionnelle, assets originaux de production, PWA, QA et publication continue.'],
+  ['v48', 'Tantalus jouable', 'Le hub-menu devient un niveau physique : quatre ponts illustrés, caméra, déplacement, PNJ, ascenseurs, terminaux et conséquences persistantes.']
 ];
 
 function renderTimeline() {
@@ -220,7 +304,7 @@ function renderArtBible() {
 }
 
 function renderProfiles() {
-  $('#profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<div class="profile-row"><div><strong>PROFIL ${profile.profile}</strong><span>${profile.empty ? 'Emplacement vide' : `${profile.release} · ${formatTime(profile.playSeconds)}`}</span></div><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : 'CHARGER'}</button></div>`).join('');
+  $('#profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<div class="profile-row"><div><strong>PROFIL ${profile.profile}</strong><span>${profile.empty ? 'Emplacement vide' : `${escapeHtml(profile.release)} · ${formatTime(profile.playSeconds)}`}</span></div><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : 'CHARGER'}</button></div>`).join('');
   $('#setting-difficulty').value = saveSystem.data.settings.difficulty;
   $('#setting-coop').checked = saveSystem.data.settings.coop;
   $('#setting-motion').checked = saveSystem.data.settings.reducedMotion;
@@ -238,7 +322,7 @@ function launchCampaign(campaign = CAMPAIGNS.find((item) => item.mode === 'FRONT
   saveSystem.data.scene = 'mission';
   saveSystem.data.worldId = world.id;
   saveSystem.data.campaignId = campaign.id;
-  saveSystem.data.clock.hour += 0.25;
+  advanceClock(0.25);
   saveSystem.commit();
   $('#mission-title').textContent = campaign.name;
   $('#mission-log').textContent = `MU/TH/UR: ${campaign.objective.toUpperCase()} — ${world.name}. Contact Echo-9 confirmé.`;
@@ -264,12 +348,22 @@ function handleGameEvent(event) {
   }
 }
 
+function setupHubControls() {
+  $$('[data-hub-control]').forEach((button) => {
+    const control = button.dataset.hubControl;
+    const activate = (event) => { event.preventDefault(); audio.unlock(); hubEngine.setControl(control, true); };
+    const release = (event) => { event.preventDefault(); hubEngine.setControl(control, false); };
+    button.addEventListener('pointerdown', activate);
+    for (const name of ['pointerup', 'pointercancel', 'pointerleave']) button.addEventListener(name, release);
+  });
+}
+
 function bind() {
   $('#nav').addEventListener('click', (event) => { const button = event.target.closest('[data-view]'); if (button) { audio.unlock(); audio.ui(); showView(button.dataset.view); } });
   $('#menu-toggle').onclick = () => $('.rail').classList.toggle('open');
   $('#quick-save').onclick = () => { saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); sessionStart = Date.now(); saveSystem.commit(); updateSaveState(); toast('Profil sauvegardé localement.'); };
   $$('[data-action="continue"]').forEach((button) => { button.onclick = () => { const campaign = CAMPAIGNS.find((item) => item.id === saveSystem.data.campaignId) || CAMPAIGNS.find((item) => item.mode === 'FRONTIER'); launchCampaign(campaign); }; });
-  $$('[data-action="new-operation"]').forEach((button) => { button.onclick = () => { saveSystem.newGame(saveSystem.profile); renderAll(); showView('operations'); toast('Nouvelle chronologie Frontier créée.'); }; });
+  $$('[data-action="new-operation"]').forEach((button) => { button.onclick = () => { hubEngine.stop(false); saveSystem.newGame(saveSystem.profile); renderAll(); showView('hub'); toast('Nouvelle chronologie : rejoignez la salle de briefing à pied.'); }; });
   $('#world-search').addEventListener('input', renderGalaxy);
   $('#campaign-mode').addEventListener('change', () => { campaignLimit = 30; renderCampaigns(); });
   $('#campaign-search').addEventListener('input', () => { campaignLimit = 30; renderCampaigns(); });
@@ -278,23 +372,22 @@ function bind() {
   $('#armory-kind').addEventListener('change', renderArmory); $('#armory-search').addEventListener('input', renderArmory);
   $('#biology-filter').addEventListener('change', renderEnemies); $('#enemy-search').addEventListener('input', renderEnemies);
   $('#vehicle-search').addEventListener('input', renderVehicles);
-  $('#ship-rooms').addEventListener('click', (event) => { const button = event.target.closest('[data-room-id]'); if (button) renderHub(button.dataset.roomId); });
-  $('#exit-mission').onclick = () => { engine.stop(); saveSystem.data.scene = 'hub'; saveSystem.commit(); renderCommand(); showView('command'); };
+  $('#exit-mission').onclick = () => { engine.stop(); saveSystem.data.scene = 'hub'; saveSystem.commit(); renderCommand(); showView('hub'); };
   $('#editor-mode').onchange = (event) => editor.setShipMode(event.target.value === 'ship');
   $('#editor-clear').onclick = () => editor.clear();
   $('#editor-export').onclick = () => download(`atf-${editor.shipMode ? 'ship' : 'mission'}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   $('#editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); toast('Plan importé dans Frontier Forge.'); } catch (error) { toast(error.message); } };
   $('#editor-play').onclick = () => launchCampaign(CAMPAIGNS.find((campaign) => campaign.mode === 'CRUCIBLE'));
-  $('#profile-list').onclick = (event) => { const profile = Number(event.target.dataset.profile); if (!profile) return; const entry = saveSystem.listProfiles().find((item) => item.profile === profile); entry.empty ? saveSystem.newGame(profile) : saveSystem.load(profile); renderAll(); toast(`Profil ${profile} actif.`); };
+  $('#profile-list').onclick = (event) => { const profile = Number(event.target.dataset.profile); if (!profile) return; hubEngine.stop(false); const wasHub = activeView === 'hub'; const entry = saveSystem.listProfiles().find((item) => item.profile === profile); entry.empty ? saveSystem.newGame(profile) : saveSystem.load(profile); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast(`Profil ${profile} actif.`); };
   $('#setting-difficulty').onchange = (event) => { saveSystem.data.settings.difficulty = event.target.value; saveSystem.commit(); };
   $('#setting-coop').onchange = (event) => { saveSystem.data.settings.coop = event.target.checked; saveSystem.commit(); engine.setCoop(event.target.checked); };
-  $('#setting-motion').onchange = (event) => { saveSystem.data.settings.reducedMotion = event.target.checked; document.documentElement.classList.toggle('reduced-motion', event.target.checked); saveSystem.commit(); };
+  $('#setting-motion').onchange = (event) => { saveSystem.data.settings.reducedMotion = event.target.checked; document.documentElement.classList.toggle('reduced-motion', event.target.checked); hubEngine.setReducedMotion(event.target.checked); saveSystem.commit(); };
   $('#setting-subtitles').onchange = (event) => { saveSystem.data.settings.subtitles = event.target.checked; saveSystem.commit(); };
   $('#save-export').onclick = () => download(`aliens-tantalus-frontier-profile-${saveSystem.profile}.json`, saveSystem.export());
-  $('#save-import').onchange = async (event) => { try { saveSystem.import(await event.target.files[0].text()); renderAll(); toast('Sauvegarde importée et migrée vers le schéma v47.'); } catch (error) { toast(error.message); } };
+  $('#save-import').onchange = async (event) => { try { hubEngine.stop(false); const wasHub = activeView === 'hub'; saveSystem.import(await event.target.files[0].text()); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast('Sauvegarde importée et migrée vers le schéma v48.'); } catch (error) { toast(error.message); } };
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; $('#install-app').hidden = false; });
   $('#install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; $('#install-app').hidden = true; };
-  globalThis.addEventListener('beforeunload', () => { saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); saveSystem.commit(); });
+  globalThis.addEventListener('beforeunload', () => { hubEngine.stop(); saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); saveSystem.commit(); });
 }
 
 function setupEditor() {
@@ -308,21 +401,22 @@ function setupEditor() {
 }
 
 function renderAll() {
-  renderCommand(); renderGalaxy(); renderCampaigns(); renderArmory(); renderEnemies(); renderVehicles(); renderHub(); renderCrew(); renderTimeline(); renderArtBible(); renderProfiles(); updateSaveState();
+  renderCommand(); renderGalaxy(); renderCampaigns(); renderArmory(); renderEnemies(); renderVehicles(); renderHub({}); renderCrew(); renderTimeline(); renderArtBible(); renderProfiles(); updateSaveState();
 }
 
 async function boot() {
   const validation = validateContent();
   if (!validation.ok) throw new Error(`Contrat de contenu invalide: ${validation.failures.join(', ')}`);
-  setupEditor(); bind(); renderAll();
+  setupEditor(); setupHubControls(); bind(); renderAll();
   document.documentElement.classList.toggle('reduced-motion', saveSystem.data.settings.reducedMotion);
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
-  setTimeout(() => { $('#boot').remove(); $('#app').hidden = false; }, 650);
+  globalThis.__ATF_HUB__ = hubEngine;
+  setTimeout(() => { $('#boot').remove(); $('#app').hidden = false; showView('hub'); }, 650);
 }
 
 boot().catch((error) => {
   console.error(error);
-  $('#boot').innerHTML = `<div class="boot-mark">ERR</div><p>${error.message}</p>`;
+  $('#boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { launchCampaign, renderAll, showView };
+export { launchCampaign, renderAll, showView, hubEngine };

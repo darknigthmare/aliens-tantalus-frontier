@@ -32,6 +32,7 @@ export class GameEngine {
 
   bind() {
     globalThis.addEventListener('keydown', (event) => {
+      if (!this.running) return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
       this.keys.add(event.code);
       if (event.code === 'KeyP' || event.code === 'Escape') this.togglePause();
