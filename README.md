@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version jouable web **v48.0.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46, publie l’audit exhaustif des 27 postulats et intègre un USS Tantalus jouable sur quatre ponts, cinq nouveaux bitmaps OpenAI et les plaques de production v47.1.
+Version jouable web **v49.0.0**, reconstruite à partir du fil de production v1→v46 « Alien infestation Suite spirituelles ». Le dépôt conserve le contrat additif de la v46, publie l’audit exhaustif des 27 postulats et remplace le hub panoramique v48 par un véritable niveau modulaire : quatre ponts de 3 840 unités, seize salles OpenAI distinctes, quatre couches lointaines et seize props PNG indépendants.
 
 ## Jouer
 
@@ -8,7 +8,7 @@ Version jouable web **v48.0.0**, reconstruite à partir du fil de production v1�
 npm run dev
 ```
 
-Ouvrir `http://127.0.0.1:4173`. À bord du Tantalus : `A/D` marcher, `Espace` franchir, `E` utiliser et `W/S` changer de pont près d’un ascenseur. Dans une opération : `A/D` ou les flèches pour se déplacer, `E` pour interagir, `F` ou clic pour tirer, `Q` pour le tracker, `V` pour entrer/sortir du véhicule, `Espace` pour sauter et `P` pour mettre en pause. Le joueur 2 utilise `I/J/L/O` lorsque la coop locale est activée.
+Ouvrir `http://127.0.0.1:4173`. À bord du Tantalus : `A/D` ou les flèches marcher, `Maj` courir, `Espace` sauter, `E` interagir à proximité et `W/S` changer de pont près d’un ascenseur. Les portes coulissantes, collisions, obstacles, PNJ et changements de salle se jouent directement dans le Canvas; ils ne sont pas remplacés par une grille de boutons. Dans une opération : `A/D` ou les flèches pour se déplacer, `E` pour interagir, `F` ou clic pour tirer, `Q` pour le tracker, `V` pour entrer/sortir du véhicule, `Espace` pour sauter et `P` pour mettre en pause. Le joueur 2 utilise `I/J/L/O` lorsque la coop locale est activée.
 
 ## Contenu verrouillé
 
@@ -32,7 +32,7 @@ Les 412 campagnes historiques sont structurées en 206 paires : une reconstituti
 ## Surfaces jouables
 
 - Metroidvania latéral Canvas 2D : salles horizontales et verticales, plateformes, portes, tracker, combat, ennemis, objectif et véhicule.
-- Hub USS Tantalus navigable par quatre ponts, seize compartiments et 158 modules persistants.
+- Hub USS Tantalus navigable par quatre ponts de 3 840 unités et seize salles indépendantes : décors par salle, portes coulissantes, parallaxe lointaine/viewport/avant-plan, trois obstacles par salle, PNJ, ascenseurs et interactions de proximité.
 - Carte de 64 mondes avec stabilité, infestation, atmosphère, factions et campagnes liées.
 - Armurerie, équipements, bestiaire, dossiers Apex, Neuro-Xeno, véhicules et actions par siège.
 - Echo-9, santé, stress, loyauté, statistiques, trois profils de sauvegarde et migration des anciennes clés.
@@ -45,13 +45,14 @@ Les 412 campagnes historiques sont structurées en 206 paires : une reconstituti
 npm run qa
 ```
 
-`qa` contrôle la syntaxe, les invariants v46, les relations entre catalogues, la migration des sauvegardes, les surfaces HTML, les assets OpenAI et le build statique dans `dist/`.
+`qa` contrôle la syntaxe, les invariants v46, les relations entre catalogues, la migration des sauvegardes, les surfaces HTML, les assets OpenAI et le build statique dans `dist/`. La release v49 passe 15 tests et le build; son hub a aussi été vérifié en navigateur sur les parcours desktop et mobile.
 
 ## Dossier de production
 
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
 - [Audit exhaustif des 27 postulats](docs/POSTULATE_PARITY_AUDIT.md)
-- [Historique v1→v48](docs/VERSION_HISTORY.md)
+- [Historique v1→v49](docs/VERSION_HISTORY.md)
+- [Provenance du hub modulaire v49](docs/ART_PROVENANCE_V49.md)
 - [Provenance des quatre ponts et de l’équipage v48](docs/ART_PROVENANCE_V48.md)
 - [Bible sprites et animations](docs/SPRITE_ANIMATION_BIBLE.md)
 - [Provenance artistique et prompts](docs/ART_PROVENANCE.md)

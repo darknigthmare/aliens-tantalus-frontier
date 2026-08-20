@@ -195,7 +195,7 @@ function renderHub(status = {}) {
   const room = deck.rooms.find((entry) => entry.id === roomId) || deck.rooms[0];
   $('#hub-deck-label').textContent = status.deckName || deck.name;
   $('#hub-room-label').textContent = status.roomName || room.name;
-  $('#hub-prompt').textContent = status.prompt || 'A / D marcher · ESPACE franchir · E utiliser · W / S ascenseur';
+  $('#hub-prompt').textContent = status.prompt || 'A / D marcher · MAJ courir · ESPACE franchir · E utiliser · W / S ascenseur';
   const systems = saveSystem.data.hub.systems;
   $('#hub-system-readout').innerHTML = `<span>ÉNERGIE <b>${Math.round(systems.power)}%</b></span><span>OXYGÈNE <b>${Math.round(systems.oxygen)}%</b></span><span>QUARANTAINE <b>${Math.round(systems.quarantine)}%</b></span><span>VISITÉS <b>${status.visited ?? saveSystem.data.hub.visited.length}/16</b></span>`;
 }
@@ -291,7 +291,8 @@ const timelineGroups = [
   ['v45', 'Animation Bible', '186 profils xénomorphes, guide d’animation, pivots, événements et besoins de sprites par acteur.'],
   ['v46', 'Colonial Marines & Crucible Pass', '4 mondes, 8 campagnes, 48 ennemis, 12 Apex, 48 Neuro-Link, deux factions et nouveaux équipements additifs.'],
   ['v47', 'OpenAI Art Production & Runtime', 'Implémentation web professionnelle, assets originaux de production, PWA, QA et publication continue.'],
-  ['v48', 'Tantalus jouable', 'Le hub-menu devient un niveau physique : quatre ponts illustrés, caméra, déplacement, PNJ, ascenseurs, terminaux et conséquences persistantes.']
+  ['v48', 'Tantalus jouable', 'Le hub-menu devient un niveau physique : quatre ponts illustrés, caméra, déplacement, PNJ, ascenseurs, terminaux et conséquences persistantes.'],
+  ['v49', 'Hub modulaire multicouche', 'Seize salles indépendantes remplacent les panoramas : portes et props séparés, parallaxe par pont, monde élargi, collisions par salle et transitions animées.']
 ];
 
 function renderTimeline() {
@@ -384,7 +385,7 @@ function bind() {
   $('#setting-motion').onchange = (event) => { saveSystem.data.settings.reducedMotion = event.target.checked; document.documentElement.classList.toggle('reduced-motion', event.target.checked); hubEngine.setReducedMotion(event.target.checked); saveSystem.commit(); };
   $('#setting-subtitles').onchange = (event) => { saveSystem.data.settings.subtitles = event.target.checked; saveSystem.commit(); };
   $('#save-export').onclick = () => download(`aliens-tantalus-frontier-profile-${saveSystem.profile}.json`, saveSystem.export());
-  $('#save-import').onchange = async (event) => { try { hubEngine.stop(false); const wasHub = activeView === 'hub'; saveSystem.import(await event.target.files[0].text()); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast('Sauvegarde importée et migrée vers le schéma v48.'); } catch (error) { toast(error.message); } };
+  $('#save-import').onchange = async (event) => { try { hubEngine.stop(false); const wasHub = activeView === 'hub'; saveSystem.import(await event.target.files[0].text()); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast('Sauvegarde importée et migrée vers le schéma v49.'); } catch (error) { toast(error.message); } };
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; $('#install-app').hidden = false; });
   $('#install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; $('#install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => { hubEngine.stop(); saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); saveSystem.commit(); });

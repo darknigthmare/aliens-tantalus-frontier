@@ -1,6 +1,6 @@
 import { CREW, RELEASE, WORLDS } from './content.js';
 
-export const SAVE_SCHEMA = 48;
+export const SAVE_SCHEMA = 49;
 export const SAVE_PREFIX = 'atf-v47-profile-';
 export const LEGACY_KEYS = [
   'ALIENS_INFESTATION_BLACKOUT_SAVE',
@@ -120,7 +120,9 @@ export function migrateSave(input, profile = 1) {
   const hub = isRecord(source.hub) ? source.hub : {};
   Object.assign(migrated.hub, hub);
   migrated.hub.deck = Math.floor(numberBetween(hub.deck, base.hub.deck, 0, 3));
-  migrated.hub.positionX = numberBetween(hub.positionX, base.hub.positionX, 40, 2470);
+  const legacyHubPosition = numberBetween(hub.positionX, base.hub.positionX, 40, 3750);
+  migrated.hub.positionX = Number(source.schema) === 48
+    ? numberBetween(legacyHubPosition * 1.5, base.hub.positionX, 40, 3750) : legacyHubPosition;
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
   migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})

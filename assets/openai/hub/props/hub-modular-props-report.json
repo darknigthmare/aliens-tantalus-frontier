@@ -1,0 +1,193 @@
+{
+  "pipeline": "OpenAI ImageGen master + deterministic Pillow alpha cleanup and 4x4 crop",
+  "source": "assets/openai/hub/props/hub-modular-props-atlas.png",
+  "cleanAtlas": "assets/openai/hub/props/hub-modular-props-atlas-clean.png",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "normalizedDimensions": [
+    1024,
+    1024
+  ],
+  "cellSize": 256,
+  "guard": 5,
+  "exports": [
+    {
+      "name": "bulkhead-door",
+      "file": "assets/openai/hub/props/bulkhead-door.png",
+      "sourceCell": {
+        "column": 0,
+        "row": 0
+      },
+      "width": 195,
+      "height": 186,
+      "transparentRatio": 0.1836
+    },
+    {
+      "name": "lift-door",
+      "file": "assets/openai/hub/props/lift-door.png",
+      "sourceCell": {
+        "column": 1,
+        "row": 0
+      },
+      "width": 187,
+      "height": 191,
+      "transparentRatio": 0.1978
+    },
+    {
+      "name": "bridge-terminal",
+      "file": "assets/openai/hub/props/bridge-terminal.png",
+      "sourceCell": {
+        "column": 2,
+        "row": 0
+      },
+      "width": 239,
+      "height": 157,
+      "transparentRatio": 0.2141
+    },
+    {
+      "name": "briefing-table",
+      "file": "assets/openai/hub/props/briefing-table.png",
+      "sourceCell": {
+        "column": 3,
+        "row": 0
+      },
+      "width": 219,
+      "height": 147,
+      "transparentRatio": 0.3671
+    },
+    {
+      "name": "cryopod",
+      "file": "assets/openai/hub/props/cryopod.png",
+      "sourceCell": {
+        "column": 0,
+        "row": 1
+      },
+      "width": 241,
+      "height": 131,
+      "transparentRatio": 0.3023
+    },
+    {
+      "name": "bunk-module",
+      "file": "assets/openai/hub/props/bunk-module.png",
+      "sourceCell": {
+        "column": 1,
+        "row": 1
+      },
+      "width": 228,
+      "height": 170,
+      "transparentRatio": 0.2149
+    },
+    {
+      "name": "mess-table",
+      "file": "assets/openai/hub/props/mess-table.png",
+      "sourceCell": {
+        "column": 2,
+        "row": 1
+      },
+      "width": 220,
+      "height": 139,
+      "transparentRatio": 0.3372
+    },
+    {
+      "name": "medical-bed",
+      "file": "assets/openai/hub/props/medical-bed.png",
+      "sourceCell": {
+        "column": 3,
+        "row": 1
+      },
+      "width": 225,
+      "height": 174,
+      "transparentRatio": 0.5382
+    },
+    {
+      "name": "lab-console",
+      "file": "assets/openai/hub/props/lab-console.png",
+      "sourceCell": {
+        "column": 0,
+        "row": 2
+      },
+      "width": 223,
+      "height": 164,
+      "transparentRatio": 0.2457
+    },
+    {
+      "name": "quarantine-unit",
+      "file": "assets/openai/hub/props/quarantine-unit.png",
+      "sourceCell": {
+        "column": 1,
+        "row": 2
+      },
+      "width": 189,
+      "height": 186,
+      "transparentRatio": 0.2526
+    },
+    {
+      "name": "armory-rack",
+      "file": "assets/openai/hub/props/armory-rack.png",
+      "sourceCell": {
+        "column": 2,
+        "row": 2
+      },
+      "width": 221,
+      "height": 172,
+      "transparentRatio": 0.187
+    },
+    {
+      "name": "workbench",
+      "file": "assets/openai/hub/props/workbench.png",
+      "sourceCell": {
+        "column": 3,
+        "row": 2
+      },
+      "width": 232,
+      "height": 175,
+      "transparentRatio": 0.2682
+    },
+    {
+      "name": "vehicle-lift",
+      "file": "assets/openai/hub/props/vehicle-lift.png",
+      "sourceCell": {
+        "column": 0,
+        "row": 3
+      },
+      "width": 235,
+      "height": 199,
+      "transparentRatio": 0.591
+    },
+    {
+      "name": "reactor-column",
+      "file": "assets/openai/hub/props/reactor-column.png",
+      "sourceCell": {
+        "column": 1,
+        "row": 3
+      },
+      "width": 186,
+      "height": 205,
+      "transparentRatio": 0.3901
+    },
+    {
+      "name": "life-support-scrubber",
+      "file": "assets/openai/hub/props/life-support-scrubber.png",
+      "sourceCell": {
+        "column": 2,
+        "row": 3
+      },
+      "width": 226,
+      "height": 179,
+      "transparentRatio": 0.2523
+    },
+    {
+      "name": "sensor-console",
+      "file": "assets/openai/hub/props/sensor-console.png",
+      "sourceCell": {
+        "column": 3,
+        "row": 3
+      },
+      "width": 215,
+      "height": 188,
+      "transparentRatio": 0.2746
+    }
+  ]
+}

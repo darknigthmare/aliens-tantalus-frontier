@@ -43,7 +43,7 @@ const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, mill
 
 async function key(code, keyValue = code) {
   await command('Input.dispatchKeyEvent', { type: 'keyDown', code, key: keyValue });
-  await wait(60);
+  await wait(70);
   await command('Input.dispatchKeyEvent', { type: 'keyUp', code, key: keyValue });
 }
 
@@ -51,7 +51,20 @@ async function hold(code, keyValue, milliseconds) {
   await command('Input.dispatchKeyEvent', { type: 'keyDown', code, key: keyValue });
   await wait(milliseconds);
   await command('Input.dispatchKeyEvent', { type: 'keyUp', code, key: keyValue });
-  await wait(120);
+  await wait(140);
+}
+
+async function signature() {
+  return evaluate(`(() => {
+    const canvas = document.querySelector('#hub-canvas');
+    const data = canvas.getContext('2d').getImageData(120, 160, 1040, 430).data;
+    let hash = 2166136261;
+    for (let offset = 0; offset < data.length; offset += 257) {
+      hash ^= data[offset] + data[offset + 1] * 3 + data[offset + 2] * 7 + data[offset + 3] * 11;
+      hash = Math.imul(hash, 16777619) >>> 0;
+    }
+    return hash;
+  })()`);
 }
 
 await command('Page.enable');
@@ -65,8 +78,18 @@ await evaluate(`new Promise((resolve, reject) => {
   const started = performance.now();
   const check = () => {
     if (globalThis.__ATF_HUB__?.getSnapshot().running && !document.querySelector('#boot')) return resolve(true);
-    if (performance.now() - started > 6000) return reject(new Error('hub boot timeout'));
+    if (performance.now() - started > 8000) return reject(new Error('hub boot timeout'));
     requestAnimationFrame(check);
+  };
+  check();
+})`);
+await evaluate(`new Promise((resolve, reject) => {
+  const started = performance.now();
+  const check = () => {
+    const report = globalThis.__ATF_HUB__?.getAssetReport();
+    if (report?.readyAssetCount === 36) return resolve(report);
+    if (performance.now() - started > 20000) return reject(new Error('modular asset timeout: ' + JSON.stringify(report)));
+    setTimeout(check, 100);
   };
   check();
 })`);
@@ -85,78 +108,83 @@ const desktop = await evaluate(`(() => {
     oldRoomButtons: document.querySelectorAll('.room-button').length,
     canvas: { width: canvas.width, height: canvas.height, cssWidth: Math.round(canvas.getBoundingClientRect().width), sampledColors: colors.size },
     snapshot: hub.getSnapshot(),
-    backgrounds: hub.backgrounds.map((image) => ({ width: image.naturalWidth, height: image.naturalHeight })),
+    assets: hub.getAssetReport(),
+    roomDimensions: [...hub.roomImages.values()].map((image) => [image.naturalWidth, image.naturalHeight]),
+    parallaxDimensions: [...hub.farLayers.values()].map((image) => [image.naturalWidth, image.naturalHeight]),
+    propDimensions: [...hub.propImages.values()].map((image) => [image.naturalWidth, image.naturalHeight]),
     crewSheet: { width: hub.crewSheet.naturalWidth, height: hub.crewSheet.naturalHeight },
-    propsSheet: { width: hub.propsSheet.naturalWidth, height: hub.propsSheet.naturalHeight },
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')),
     textLength: document.body.innerText.trim().length
   };
 })()`);
-if (!desktop.appVisible || !desktop.hubActive || desktop.oldRoomButtons || desktop.canvas.width !== 1280 || desktop.canvas.sampledColors < 25 || desktop.snapshot.npcCount !== 4 || desktop.backgrounds.some((image) => !image.width) || desktop.overlay || desktop.textLength < 500) throw new Error(`Desktop shell failed: ${JSON.stringify(desktop)}`);
+if (!desktop.appVisible || !desktop.hubActive || desktop.oldRoomButtons || desktop.canvas.width !== 1280 || desktop.canvas.sampledColors < 25 || desktop.snapshot.npcCount !== 4 || desktop.snapshot.obstacleCount !== 12 || desktop.assets.roomAssetsReady !== 16 || desktop.assets.parallaxAssetsReady !== 4 || desktop.assets.propAssetsReady !== 16 || desktop.assets.modularAssetCount !== 36 || desktop.assets.readyAssetCount !== 36 || desktop.roomDimensions.some(([width]) => !width) || desktop.parallaxDimensions.some(([width]) => !width) || desktop.propDimensions.some(([width]) => !width) || desktop.overlay || desktop.textLength < 500) throw new Error(`Desktop modular shell failed: ${JSON.stringify(desktop)}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 180, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 120, y: 520, vx: 0, vy: 0 })`);
 const beforeMove = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-await hold('KeyD', 'd', 1000);
+await hold('KeyD', 'd', 260);
 const afterMove = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-if (afterMove.x < beforeMove.x + 180) throw new Error(`Physical movement failed: ${JSON.stringify({ beforeMove, afterMove })}`);
+if (afterMove.x < beforeMove.x + 35 || afterMove.roomId !== 'bridge') throw new Error(`Physical movement failed: ${JSON.stringify({ beforeMove, afterMove })}`);
+
 const groundedY = afterMove.y;
 await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'KeyD', key: 'd' });
 await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'Space', key: ' ' });
-await wait(60);
+await wait(120);
 const afterJump = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-if (afterJump.y >= groundedY - 15) throw new Error(`Jump failed: ${JSON.stringify({ groundedY, afterJump })}`);
-await wait(850);
+if (afterJump.y >= groundedY - 18) throw new Error(`Jump failed: ${JSON.stringify({ groundedY, afterJump })}`);
+await wait(820);
 await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'KeyD', key: 'd' });
 await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'Space', key: ' ' });
-await wait(120);
-let afterObstacle = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-if (afterObstacle.x < 625) {
-  await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'KeyD', key: 'd' });
-  await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'Space', key: ' ' });
-  await wait(900);
-  await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'KeyD', key: 'd' });
-  await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'Space', key: ' ' });
-  await wait(120);
-  afterObstacle = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-}
-if (afterObstacle.x < 625) throw new Error(`Obstacle traversal failed: ${JSON.stringify(afterObstacle)}`);
-await wait(450);
+await wait(160);
+const afterObstacle = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
+if (afterObstacle.x < 315) throw new Error(`Obstacle traversal failed: ${JSON.stringify(afterObstacle)}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1245, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 880, y: 520, vx: 0, vy: 0 })`);
+await wait(360);
+const beforeDoor = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
+const bridgeSignature = await signature();
+if (beforeDoor.activeDoorState < 0.55) throw new Error(`Door did not open near the player: ${JSON.stringify(beforeDoor)}`);
+await hold('KeyD', 'd', 720);
+const afterRoom = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
+const briefingSignature = await signature();
+if (afterRoom.roomId !== 'briefing' || afterRoom.roomBackground === beforeDoor.roomBackground || briefingSignature === bridgeSignature || afterRoom.cameraX <= beforeDoor.cameraX) throw new Error(`Modular room transition failed: ${JSON.stringify({ beforeDoor, afterRoom, bridgeSignature, briefingSignature })}`);
+
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1890, y: 520, vx: 0, vy: 0 })`);
+await wait(260);
+const beforeLift = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 await key('KeyS', 's');
-await wait(180);
+await wait(220);
 const afterLift = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
-if (afterLift.deck !== 1 || afterLift.visited !== afterObstacle.visited + 1) throw new Error(`Lift traversal failed: ${JSON.stringify({ afterObstacle, afterLift })}`);
+if (afterLift.deck !== 1 || afterLift.visited !== beforeLift.visited + 1 || afterLift.parallaxAssetsReady !== 4) throw new Error(`Lift traversal failed: ${JSON.stringify({ beforeLift, afterLift })}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1050, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1603, y: 520, vx: 0, vy: 0 })`);
 await key('KeyE', 'e');
-await wait(180);
+await wait(220);
 const service = await evaluate(`(() => {
   const save = JSON.parse(localStorage.getItem('atf-v47-profile-1'));
   return { hour: save.clock.hour, morale: save.hub.systems.morale, restStamp: save.hub.services['service:rest'], active: document.querySelector('[data-panel="hub"]').classList.contains('active') };
 })()`);
 if (!service.active || service.hour <= 6 || service.restStamp === undefined) throw new Error(`Diegetic service failed: ${JSON.stringify(service)}`);
 
-await evaluate(`(() => { globalThis.__ATF_HUB__.state.services = { 'service:rest': 0 }; globalThis.__ATF_HUB__.persist(); })()`);
+await evaluate(`globalThis.__ATF_HUB__.persist()`);
 const serviceAfterPersist = await evaluate(`(() => { const save = JSON.parse(localStorage.getItem('atf-v47-profile-1')); return { hour: save.clock.hour, restStamp: save.hub.services['service:rest'] }; })()`);
 if (serviceAfterPersist.restStamp !== 1 || serviceAfterPersist.hour !== 7.5) throw new Error(`Physical persistence overwrote service state: ${JSON.stringify(serviceAfterPersist)}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1245, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1890, y: 520, vx: 0, vy: 0 })`);
 await key('KeyW', 'w');
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 410, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 643, y: 520, vx: 0, vy: 0 })`);
 await key('KeyE', 'e');
-await wait(180);
+await wait(220);
 const routeOpened = await evaluate(`document.querySelector('[data-panel="galaxy"]').classList.contains('active')`);
 if (!routeOpened) throw new Error('Bridge terminal did not open the galaxy surface.');
 await evaluate(`document.querySelector('[data-view="hub"]').click()`);
-await wait(450);
+await wait(520);
 
 const desktopShot = await command('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
 await writeFile('.qa-hub-desktop.png', Buffer.from(desktopShot.data, 'base64'));
 
 await command('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true, screenWidth: 390, screenHeight: 844 });
 await command('Page.reload', { ignoreCache: true });
-await wait(2300);
+await wait(3000);
 const mobile = await evaluate(`(() => {
   const canvas = document.querySelector('#hub-canvas');
   const controls = document.querySelector('.hub-touch-controls');
@@ -167,13 +195,14 @@ const mobile = await evaluate(`(() => {
     controlsDisplay: getComputedStyle(controls).display,
     controlCount: controls.querySelectorAll('button').length,
     running: globalThis.__ATF_HUB__.getSnapshot().running,
+    modularAssetCount: globalThis.__ATF_HUB__.getSnapshot().modularAssetCount,
     room: document.querySelector('#hub-room-label').textContent
   };
 })()`);
-if (mobile.width !== 390 || !mobile.hubActive || mobile.canvasWidth > 390 || mobile.canvasWidth < 300 || mobile.controlsDisplay === 'none' || mobile.controlCount !== 4 || !mobile.running) throw new Error(`Mobile hub failed: ${JSON.stringify(mobile)}`);
+if (mobile.width !== 390 || !mobile.hubActive || mobile.canvasWidth > 390 || mobile.canvasWidth < 300 || mobile.controlsDisplay === 'none' || mobile.controlCount !== 4 || !mobile.running || mobile.modularAssetCount !== 36) throw new Error(`Mobile hub failed: ${JSON.stringify(mobile)}`);
 const mobileShot = await command('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
 await writeFile('.qa-hub-mobile.png', Buffer.from(mobileShot.data, 'base64'));
 
 if (exceptions.length || consoleErrors.length) throw new Error(`Browser errors: ${JSON.stringify({ exceptions, consoleErrors })}`);
 socket.close();
-console.log(JSON.stringify({ ok: true, desktop, afterMove, afterJump, afterObstacle, afterLift, service, serviceAfterPersist, routeOpened, mobile, exceptions, consoleErrors }, null, 2));
+console.log(JSON.stringify({ ok: true, desktop, beforeMove, afterMove, afterJump, afterObstacle, beforeDoor, afterRoom, bridgeSignature, briefingSignature, beforeLift, afterLift, service, serviceAfterPersist, routeOpened, mobile, exceptions, consoleErrors }, null, 2));

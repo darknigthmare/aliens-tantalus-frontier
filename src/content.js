@@ -1,7 +1,7 @@
 export const RELEASE = Object.freeze({
   name: 'ALIENS: TANTALUS FRONTIER',
-  version: '48.0.0',
-  subtitle: 'Playable Tantalus Hub & OpenAI Environment Runtime',
+  version: '49.0.0',
+  subtitle: 'Modular Tantalus Hub & OpenAI Layered Level Runtime',
   year: 2204,
   sourceVersion: '46.0.0'
 });

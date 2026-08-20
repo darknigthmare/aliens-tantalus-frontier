@@ -17,7 +17,7 @@ test('default profile contains the persistent strategic layers', () => {
 
 test('legacy saves migrate additively without dropping player progress', () => {
   const migrated = migrateSave({ version: '18.0.0', player: { name: 'Ripley', health: 71 }, statistics: { kills: 42 }, galaxy: { resources: { credits: 9999 } } }, 3);
-  assert.equal(migrated.schema, 48); assert.equal(migrated.player.name, 'Ripley'); assert.equal(migrated.player.health, 71);
+  assert.equal(migrated.schema, SAVE_SCHEMA); assert.equal(migrated.player.name, 'Ripley'); assert.equal(migrated.player.health, 71);
   assert.equal(migrated.statistics.kills, 42); assert.equal(migrated.galaxy.resources.credits, 9999);
   assert.ok(migrated.galaxy.resources.fuel > 0); assert.equal(migrated.profile, 3);
   const malformedHub = migrateSave({ hub: { services: null, visited: 'bridge' }, crew: {}, clock: null }, 1);
@@ -29,6 +29,9 @@ test('legacy saves migrate additively without dropping player progress', () => {
 });
 
 test('three profile storage round-trips and exports', () => {
+  const v48Hub = migrateSave({ schema: 48, hub: { positionX: 1600, roomId: 'combat-information' } }, 1);
+  assert.equal(v48Hub.hub.positionX, 2400);
+  assert.equal(v48Hub.hub.roomId, 'combat-information');
   const backend = storage(); const system = new SaveSystem(backend);
   system.newGame(1); system.data.statistics.kills = 7; system.commit();
   const restored = new SaveSystem(backend); restored.load(1);

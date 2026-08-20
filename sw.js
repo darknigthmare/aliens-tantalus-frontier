@@ -1,4 +1,4 @@
-const CACHE = 'atf-v48-shell-2';
+const CACHE = 'atf-v49-shell-1';
 const CORE = ['/', '/index.html', '/styles.css', '/sprite-gallery.css', '/hub-level.css', '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/visuals.js', '/src/save.js', '/src/game.js', '/src/hub-game.js', '/src/editor.js', '/src/audio.js'];
 self.addEventListener('install', (event) => event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting())));
 self.addEventListener('activate', (event) => event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim())));

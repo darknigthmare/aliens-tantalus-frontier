@@ -37,6 +37,67 @@ export const ENVIRONMENT_MASTERS = [
   )
 ];
 
+const HUB_ROOM_LIBRARY = [
+  ['command-bridge', 'Passerelle modulaire', 'Salle de passerelle autonome avec sol continu et seuils latéraux.'],
+  ['command-briefing', 'Briefing modulaire', 'Salle de briefing autonome, traversable et distincte de la passerelle.'],
+  ['command-cic', 'CIC modulaire', 'Centre d’information tactique autonome avec équipements de fond.'],
+  ['command-cryo', 'Cryogénie modulaire', 'Baie cryogénique autonome avec pods en retrait.'],
+  ['habitat-quarters', 'Quartiers modulaires', 'Quartiers équipage autonomes avec couche de circulation dégagée.'],
+  ['habitat-mess', 'Mess modulaire', 'Mess autonome avec mobilier au second plan.'],
+  ['habitat-medical', 'Bloc médical modulaire', 'Salle médicale autonome avec route jouable lisible.'],
+  ['habitat-lab', 'Laboratoire modulaire', 'Laboratoire autonome avec instruments et confinement en retrait.'],
+  ['industrial-quarantine', 'Quarantaine modulaire', 'Compartiment de quarantaine autonome et traversable.'],
+  ['industrial-armory', 'Armurerie modulaire', 'Armurerie autonome aux racks sécurisés.'],
+  ['industrial-workshop', 'Atelier modulaire', 'Atelier autonome avec machines en fond.'],
+  ['industrial-vehicle-bay', 'Baie véhicules modulaire', 'Baie de maintenance autonome sans véhicule au premier plan.'],
+  ['engineering-hangar', 'Hangar modulaire', 'Hangar ingénierie autonome avec berceau vide.'],
+  ['engineering-reactor', 'Réacteur modulaire', 'Chambre réacteur autonome et blindée.'],
+  ['engineering-life-support', 'Support-vie modulaire', 'Salle de filtration et réservoirs autonome.'],
+  ['engineering-sensors', 'Capteurs modulaires', 'Salle de traitement des capteurs autonome.']
+];
+
+export const HUB_ROOM_MODULES = HUB_ROOM_LIBRARY.map(([id, title, description]) => makeAsset(
+  `hub-room-${id}`,
+  `hub/rooms/${id}.png`,
+  title,
+  description,
+  { kind: 'environment', wave: 'v49', alt: `${title} générée par OpenAI` }
+));
+
+const HUB_PARALLAX_LIBRARY = [
+  ['command-far', 'Parallaxe Commandement'],
+  ['habitat-far', 'Parallaxe Habitat'],
+  ['industrial-far', 'Parallaxe Industriel'],
+  ['engineering-far', 'Parallaxe Ingénierie']
+];
+
+export const HUB_PARALLAX_LAYERS = HUB_PARALLAX_LIBRARY.map(([id, title]) => makeAsset(
+  `hub-parallax-${id}`,
+  `hub/parallax/${id}.png`,
+  title,
+  'Couche lointaine indépendante déplacée à une vitesse différente de la salle et du premier plan.',
+  { kind: 'environment', wave: 'v49', alt: `${title} générée par OpenAI` }
+));
+
+const HUB_PROP_LIBRARY = [
+  ['bulkhead-door', 'Porte de cloison'], ['lift-door', 'Porte d’ascenseur'],
+  ['bridge-terminal', 'Terminal passerelle'], ['briefing-table', 'Table de briefing'],
+  ['cryopod', 'Cryopod'], ['bunk-module', 'Module couchettes'],
+  ['mess-table', 'Table du mess'], ['medical-bed', 'Lit médical'],
+  ['lab-console', 'Console laboratoire'], ['quarantine-unit', 'Unité de quarantaine'],
+  ['armory-rack', 'Rack armurerie'], ['workbench', 'Établi'],
+  ['vehicle-lift', 'Pont élévateur'], ['reactor-column', 'Colonne réacteur'],
+  ['life-support-scrubber', 'Épurateur support-vie'], ['sensor-console', 'Console capteurs']
+];
+
+export const HUB_PROP_MODULES = HUB_PROP_LIBRARY.map(([id, title]) => makeAsset(
+  `hub-prop-${id}`,
+  `hub/props/${id}.png`,
+  title,
+  'Prop PNG transparent indépendant, extrait du master OpenAI v49 et utilisé par le niveau Canvas.',
+  { kind: 'prop', wave: 'v49', alt: `${title} isolé sur fond transparent` }
+));
+
 export const SPRITE_SHEETS = [
   makeAsset('echo9-master', 'echo9-sprite-sheet.png', 'Echo-9 — master historique', 'Marine et synthétique : déplacement, visée, tir, rechargement, conduit et dégâts.', { kind: 'animation', grid: '8×8', frames: 64, legacy: true, alt: 'Plaque historique des animations Echo-9' }),
   makeAsset('xenomorph-master', 'xenomorph-sprite-sheet.png', 'Xénomorphes — master historique', 'Cycle de vie, castes adultes, attaques acides, formes lourdes et Reine.', { kind: 'animation', grid: '8×8', frames: 64, legacy: true, alt: 'Plaque historique des animations xénomorphes' }),
@@ -52,6 +113,6 @@ export const SPRITE_SHEETS = [
   makeAsset('tantalus-hub-crew', 'tantalus-hub-crew-animation-sheet.png', 'Équipage du hub Tantalus', 'Officier, technicien, corpsman et synthétique de service en cycles de marche.', { kind: 'animation', grid: '4×4', frames: 16, wave: 'v48', alt: 'Plaque 4 par 4 des PNJ du hub Tantalus' })
 ];
 
-export const VISUAL_ASSETS = [...ENVIRONMENT_MASTERS, ...SPRITE_SHEETS];
+export const VISUAL_ASSETS = [...ENVIRONMENT_MASTERS, ...HUB_ROOM_MODULES, ...HUB_PARALLAX_LAYERS, ...HUB_PROP_MODULES, ...SPRITE_SHEETS];
 export const NEW_SPRITE_SHEETS = SPRITE_SHEETS.filter((asset) => asset.wave);
 export const NEW_SPRITE_FRAME_COUNT = NEW_SPRITE_SHEETS.reduce((total, asset) => total + asset.frames, 0);
