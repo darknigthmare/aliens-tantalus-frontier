@@ -48,4 +48,4 @@ Production complète : 8 directions pour les vues tactiques, profil gauche/droit
 
 ## Découpe et alpha
 
-Les masters sont conservés sans extraction destructive. Avant un export moteur final, la planche doit être découpée visuellement, les cellules réalignées sur le pivot, puis le fond de présentation validé ou détouré en alpha réel. Les originaux de génération restent la source de provenance.
+Les copies intégrées ont un canal alpha réel vérifié; le pipeline reproductible est `scripts/clean-atlas-alpha.mjs`. Avant un export moteur final, chaque planche doit encore être découpée visuellement et les cellules réalignées sur le pivot. Les originaux de génération restent la source de provenance.

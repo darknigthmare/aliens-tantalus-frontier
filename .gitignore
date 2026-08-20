@@ -5,6 +5,7 @@ node_modules/
 .qa-*.png
 .qa-*.jpg
 .tmp-chrome-profile*/
+.alpha-output/
 *.log
 .DS_Store
 Thumbs.db
