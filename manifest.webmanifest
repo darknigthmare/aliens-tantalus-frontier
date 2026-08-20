@@ -1,0 +1,11 @@
+{
+  "name": "ALIENS: Tantalus Frontier",
+  "short_name": "Tantalus",
+  "description": "Suite spirituelle Metroidvania tactique sur la frontière coloniale.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020806",
+  "theme_color": "#7ec8a0",
+  "orientation": "landscape",
+  "icons": []
+}

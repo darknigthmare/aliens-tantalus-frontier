@@ -1,0 +1,10 @@
+dist/
+.vercel/
+node_modules/
+.qa/
+.qa-*.png
+.qa-*.jpg
+.tmp-chrome-profile*/
+*.log
+.DS_Store
+Thumbs.db

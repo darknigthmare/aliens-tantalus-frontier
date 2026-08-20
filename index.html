@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07100c">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER — archive jouable v1 à v46, runtime v47.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <title>ALIENS: TANTALUS FRONTIER</title>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Aller au contenu</a>
+  <div id="boot" class="boot" role="status">
+    <div class="boot-mark">ATF</div>
+    <p>WEYLAND-YUTANI // FRONTIER OPERATIONS</p>
+    <div class="boot-track"><span></span></div>
+  </div>
+
+  <div id="app" class="app" hidden>
+    <aside class="rail" aria-label="Navigation principale">
+      <div class="brand" aria-label="Aliens Tantalus Frontier">
+        <span class="brand-kicker">ALIENS</span>
+        <strong>TANTALUS</strong>
+        <span>FRONTIER // 2204</span>
+      </div>
+      <nav id="nav">
+        <button class="nav-button active" data-view="command"><span>01</span> Commandement</button>
+        <button class="nav-button" data-view="galaxy"><span>02</span> Carte galactique</button>
+        <button class="nav-button" data-view="operations"><span>03</span> Opérations</button>
+        <button class="nav-button" data-view="hub"><span>04</span> USS Tantalus</button>
+        <button class="nav-button" data-view="armory"><span>05</span> Armurerie</button>
+        <button class="nav-button" data-view="bestiary"><span>06</span> Xénobiologie</button>
+        <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
+        <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
+        <button class="nav-button" data-view="editor"><span>09</span> Éditeur</button>
+        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v46</button>
+        <button class="nav-button" data-view="settings"><span>11</span> Système</button>
+      </nav>
+      <div class="rail-footer">
+        <span class="status-dot"></span> Liaison MU/TH/UR active
+        <small id="save-state">Aucune sauvegarde chargée</small>
+      </div>
+    </aside>
+
+    <section class="shell">
+      <header class="topbar">
+        <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
+        <div>
+          <span id="breadcrumb">COMMAND // OVERVIEW</span>
+          <h1 id="view-title">Centre de commandement</h1>
+        </div>
+        <div class="top-metrics">
+          <span><b id="clock">J01 06:00</b> TEMPS NAVIRE</span>
+          <span><b>v47.0.0</b> RUNTIME</span>
+          <button id="quick-save" class="button compact">SAUVEGARDER</button>
+        </div>
+      </header>
+
+      <main id="workspace" tabindex="-1">
+        <section class="view active" data-panel="command">
+          <div class="hero">
+            <div class="hero-copy">
+              <p class="eyebrow">CONTRAT DE CONTENU v1 → v46 VERROUILLÉ</p>
+              <h2>La Frontière se souvient de tout.</h2>
+              <p>Une campagne Metroidvania tactique dans laquelle chaque intervention modifie les colonies, l’infestation, l’équipage et l’USS Tantalus.</p>
+              <div class="button-row">
+                <button class="button primary" data-action="continue">CONTINUER L’OPÉRATION</button>
+                <button class="button" data-action="new-operation">NOUVELLE OPÉRATION</button>
+              </div>
+            </div>
+            <div class="hero-scan" aria-hidden="true"><span></span><i>BASE TANTALUS // LETHE</i></div>
+          </div>
+          <div id="release-counts" class="metric-grid"></div>
+          <div class="dashboard-grid">
+            <article class="panel span-2">
+              <header><div><span class="eyebrow">SITUATION FRONTIÈRE</span><h3>Alertes stratégiques</h3></div><span class="chip danger">3 PRIORITAIRES</span></header>
+              <div id="alerts" class="alert-list"></div>
+            </article>
+            <article class="panel">
+              <header><div><span class="eyebrow">ÉCHO-9</span><h3>État de l’escouade</h3></div></header>
+              <div id="squad-summary"></div>
+            </article>
+            <article class="panel">
+              <header><div><span class="eyebrow">TANTALUS</span><h3>Systèmes critiques</h3></div></header>
+              <div id="ship-summary"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" data-panel="galaxy">
+          <div class="section-intro"><div><p class="eyebrow">64 MONDES // CONSÉQUENCES PERSISTANTES</p><h2>Carte galactique</h2></div><label class="search">RECHERCHER <input id="world-search" type="search" placeholder="Lethe, Acheron, Ceto…"></label></div>
+          <div class="galaxy-layout">
+            <div id="star-map" class="star-map" aria-label="Carte des mondes"></div>
+            <aside id="world-detail" class="panel sticky"></aside>
+          </div>
+        </section>
+
+        <section class="view" data-panel="operations">
+          <div class="section-intro"><div><p class="eyebrow">218 LIGNES // 436 CAMPAGNES</p><h2>Archives MIRE & continuité Frontier</h2></div><div class="filter-row"><select id="campaign-mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" placeholder="Source, monde, objectif…"></div></div>
+          <div id="campaign-list" class="catalog-grid"></div>
+          <button id="more-campaigns" class="button wide">CHARGER PLUS D’OPÉRATIONS</button>
+        </section>
+
+        <section class="view" data-panel="hub">
+          <div class="section-intro"><div><p class="eyebrow">BASE MOBILE NAVIGABLE // 4 PONTS</p><h2>USS Tantalus</h2></div><span class="chip">158 MODULES</span></div>
+          <div class="hub-layout">
+            <div class="ship-cutaway"><div class="ship-silhouette" aria-hidden="true"></div><div id="ship-rooms" class="ship-rooms"></div></div>
+            <aside id="room-detail" class="panel"></aside>
+          </div>
+        </section>
+
+        <section class="view" data-panel="armory">
+          <div class="section-intro"><div><p class="eyebrow">146 ARMES // 106 ÉQUIPEMENTS</p><h2>Armurerie & dotations</h2></div><div class="filter-row"><select id="armory-kind"><option value="weapons">Armes</option><option value="equipment">Équipements</option></select><input id="armory-search" type="search" placeholder="M41A, tracker, Ripper…"></div></div>
+          <div id="armory-list" class="catalog-grid"></div>
+        </section>
+
+        <section class="view" data-panel="bestiary">
+          <div class="section-intro"><div><p class="eyebrow">568 MENACES // 244 APEX // 234 NEURO-XENO</p><h2>Xénobiologie tactique</h2></div><div class="filter-row"><select id="biology-filter"><option value="all">Toutes biologies</option><option>xenomorph</option><option>pathogen</option><option>synthetic</option><option>human</option><option>fauna</option></select><input id="enemy-search" type="search" placeholder="Drone, Reine, ATARAX…"></div></div>
+          <div id="enemy-list" class="catalog-grid"></div>
+        </section>
+
+        <section class="view" data-panel="vehicles">
+          <div class="section-intro"><div><p class="eyebrow">279 CHÂSSIS // ACTIONS PAR SIÈGE</p><h2>Parc de véhicules</h2></div><input id="vehicle-search" type="search" placeholder="APC, Cheyenne, P-5000…"></div>
+          <div id="vehicle-list" class="catalog-grid"></div>
+        </section>
+
+        <section class="view" data-panel="crew">
+          <div class="section-intro"><div><p class="eyebrow">16 MEMBRES // MORT PERMANENTE</p><h2>Équipe Echo-9</h2></div><span class="chip success">PRÊTE AU DÉPLOIEMENT</span></div>
+          <div id="crew-list" class="crew-grid"></div>
+          <div class="section-intro compact-intro"><div><p class="eyebrow">392 COMBINAISONS</p><h2>Personnalisation modulaire</h2></div></div>
+          <div id="costume-list" class="catalog-grid compact-catalog"></div>
+        </section>
+
+        <section class="view" data-panel="editor">
+          <div class="section-intro"><div><p class="eyebrow">ÉDITEUR BLOC/ÉCRAN // MISSION & VAISSEAU</p><h2>Frontier Forge</h2></div><div class="button-row"><button id="editor-export" class="button">EXPORTER JSON</button><label class="button file-button">IMPORTER<input id="editor-import" type="file" accept="application/json"></label><button id="editor-play" class="button primary">PLAYTEST</button></div></div>
+          <div class="editor-layout">
+            <aside class="panel tool-panel"><label>MODE<select id="editor-mode"><option value="mission">Mission</option><option value="ship">Intérieur USS Tantalus</option></select></label><div id="editor-tools" class="tool-grid"></div><button id="editor-clear" class="button danger-outline">EFFACER LE PLAN</button><p class="hint">Clic gauche : placer · Maj/clic droit : effacer. Les exports conservent les positions, le type et le mode.</p></aside>
+            <div class="editor-stage"><canvas id="editor-canvas" width="1280" height="720" aria-label="Grille de l’éditeur"></canvas></div>
+          </div>
+        </section>
+
+        <section class="view" data-panel="codex">
+          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v46</h2></div><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a></div>
+          <div id="timeline" class="timeline"></div>
+          <div class="art-bible">
+            <article><img src="/assets/openai/tantalus-base-environment.png" alt="Décor industriel de Tantalus Base généré par OpenAI"><h3>Décors & parallax</h3><p>Silhouette canonique, pluie, vapeur, éclairages de sécurité et profondeur multi-plan.</p></article>
+            <article><img src="/assets/openai/echo9-sprite-sheet.png" alt="Sprite sheet des Marines et synthétiques Echo-9"><h3>Personnages</h3><p>Cycles cohérents, point d’ancrage constant et lecture latérale.</p></article>
+            <article><img src="/assets/openai/xenomorph-sprite-sheet.png" alt="Sprite sheet des formes xénomorphes"><h3>Menaces</h3><p>Cycle de vie, castes et états de combat séparés.</p></article>
+            <article><img src="/assets/openai/arsenal-props-atlas.png" alt="Atlas des armes, accessoires et véhicules"><h3>Arsenal & props</h3><p>Atlas normalisé pour armurerie, pickups et interactions.</p></article>
+          </div>
+        </section>
+
+        <section class="view" data-panel="settings">
+          <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE, ACCESSIBILITÉ, COOP</p><h2>Système</h2></div></div>
+          <div class="settings-grid">
+            <article class="panel"><header><h3>Profils</h3></header><div id="profile-list"></div></article>
+            <article class="panel"><header><h3>Expérience</h3></header><label>Difficulté<select id="setting-difficulty"><option value="story">Histoire</option><option value="standard">Standard</option><option value="nightmare">Cauchemar</option></select></label><label><input id="setting-coop" type="checkbox"> Coop locale (joueur 2 : I/J/L/O)</label><label><input id="setting-motion" type="checkbox"> Réduire les mouvements</label><label><input id="setting-subtitles" type="checkbox"> Sous-titres</label></article>
+            <article class="panel"><header><h3>Données</h3></header><button id="save-export" class="button wide">EXPORTER LA SAUVEGARDE</button><label class="button wide file-button">IMPORTER UNE SAUVEGARDE<input id="save-import" type="file" accept="application/json"></label><button id="install-app" class="button wide" hidden>INSTALLER L’APPLICATION</button></article>
+          </div>
+        </section>
+
+        <section class="view play-view" data-panel="play">
+          <div class="game-toolbar"><div><span class="eyebrow">RUNTIME METROIDVANIA TACTIQUE</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D déplacer · E interagir · F tirer · Q tracker · V véhicule · P pause</span><button id="exit-mission" class="button">QUITTER</button></div></div>
+          <div class="game-frame"><canvas id="game-canvas" width="1280" height="720" aria-label="Zone de jeu"></canvas></div>
+          <div id="mission-log" class="mission-log" aria-live="polite"></div>
+        </section>
+      </main>
+    </section>
+  </div>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
