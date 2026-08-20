@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9223';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
-const target = await fetch(`${endpoint}/json/new?${encodeURIComponent(appUrl)}`, { method: 'PUT' }).then(async (response) => {
+const target = await fetch(`${endpoint}/json/new?${encodeURIComponent('about:blank')}`, { method: 'PUT' }).then(async (response) => {
   if (!response.ok) throw new Error(`Cannot create Chrome target: ${response.status}`);
   return response.json();
 });
@@ -33,7 +33,9 @@ async function evaluate(expression) {
 
 await command('Page.enable');
 await command('Runtime.enable');
-await evaluate('new Promise(resolve => setTimeout(resolve, 1200))');
+await command('Page.navigate', { url: appUrl });
+await new Promise((resolve) => setTimeout(resolve, 2500));
+await evaluate('new Promise(resolve => setTimeout(resolve, 500))');
 const shell = await evaluate(`({
   title: document.title,
   bootRemoved: !document.querySelector('#boot'),
