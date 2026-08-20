@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 
-const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9223';
+const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const target = await fetch(`${endpoint}/json/new?${encodeURIComponent('about:blank')}`, { method: 'PUT' }).then(async (response) => {
   if (!response.ok) throw new Error(`Cannot create Chrome target: ${response.status}`);
@@ -35,6 +35,7 @@ await command('Page.enable');
 await command('Runtime.enable');
 await command('Page.navigate', { url: appUrl });
 await new Promise((resolve) => setTimeout(resolve, 2500));
+await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
 await evaluate('new Promise(resolve => setTimeout(resolve, 500))');
 const shell = await evaluate(`({
   title: document.title,
@@ -53,13 +54,39 @@ const operationsActive = await evaluate(`document.querySelector('[data-panel="op
 if (!operationsActive) throw new Error('Operations navigation did not activate.');
 await evaluate(`document.querySelector('[data-campaign-id]').click()`);
 await evaluate('new Promise(resolve => setTimeout(resolve, 350))');
-const mission = await evaluate(`({ active: document.querySelector('[data-panel="play"]').classList.contains('active'), title: document.querySelector('#mission-title').textContent, canvasWidth: document.querySelector('#game-canvas').width, log: document.querySelector('#mission-log').textContent })`);
-if (!mission.active || mission.canvasWidth !== 1280 || !mission.title.trim()) throw new Error(`Mission launch failed: ${JSON.stringify(mission)}`);
+await evaluate(`new Promise((resolve, reject) => {
+  const started = performance.now();
+  const check = () => {
+    const report = globalThis.__ATF_GAME__?.getAssetReport();
+    if (globalThis.__ATF_GAME__?.getSnapshot().running && report?.missing.length === 0) return resolve(report);
+    if (performance.now() - started > 20000) return reject(new Error('mission asset timeout: ' + JSON.stringify(report)));
+    setTimeout(check, 100);
+  };
+  check();
+})`);
+const mission = await evaluate(`({ active: document.querySelector('[data-panel="play"]').classList.contains('active'), title: document.querySelector('#mission-title').textContent, canvasWidth: document.querySelector('#game-canvas').width, canvasCssWidth: Math.round(document.querySelector('#game-canvas').getBoundingClientRect().width), log: document.querySelector('#mission-log').textContent, missionMode: document.documentElement.classList.contains('mission-mode'), railDisplay: getComputedStyle(document.querySelector('.rail')).display, snapshot: globalThis.__ATF_GAME__.getSnapshot() })`);
+if (!mission.active || !mission.missionMode || mission.railDisplay !== 'none' || mission.canvasWidth !== 1280 || mission.canvasCssWidth < 1200 || !mission.title.trim() || mission.snapshot.worldWidth !== 6200 || mission.snapshot.worldHeight !== 1080 || mission.snapshot.platformCount !== 16 || mission.snapshot.ladderCount !== 6 || mission.snapshot.doorCount !== 4 || mission.snapshot.assets.missing.length) throw new Error(`Mission launch failed: ${JSON.stringify(mission)}`);
 const screenshot = await command('Page.captureScreenshot', { format: 'jpeg', quality: 76, captureBeyondViewport: false });
 await writeFile('.qa-mission.jpg', Buffer.from(screenshot.data, 'base64'));
+await evaluate(`Object.assign(globalThis.__ATF_GAME__.player, { x: 450, y: 838, vx: 0, vy: 0, grounded: true, climbing: false })`);
+await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'KeyW', key: 'w' });
+await new Promise((resolve) => setTimeout(resolve, 360));
+await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'KeyW', key: 'w' });
+await new Promise((resolve) => setTimeout(resolve, 80));
+const climbed = await evaluate(`globalThis.__ATF_GAME__.getSnapshot()`);
+if (!climbed.player.climbing || climbed.player.y >= 820) throw new Error(`Ladder traversal failed: ${JSON.stringify(climbed)}`);
+
+await evaluate(`Object.assign(globalThis.__ATF_GAME__.player, { x: 1879, y: 630, vx: 0, vy: 0, grounded: true, climbing: false })`);
+await command('Input.dispatchKeyEvent', { type: 'keyDown', code: 'KeyE', key: 'e' });
+await new Promise((resolve) => setTimeout(resolve, 80));
+await command('Input.dispatchKeyEvent', { type: 'keyUp', code: 'KeyE', key: 'e' });
+await new Promise((resolve) => setTimeout(resolve, 120));
+const powered = await evaluate(`globalThis.__ATF_GAME__.getSnapshot()`);
+if (!powered.powerRestored) throw new Error(`Power gate failed: ${JSON.stringify(powered)}`);
+
 await evaluate(`document.querySelector('#exit-mission').click()`);
 const returned = await evaluate(`document.querySelector('[data-panel="hub"]').classList.contains('active')`);
 if (!returned) throw new Error('Mission exit did not return to the Tantalus hub.');
 if (exceptions.length) throw new Error(`Browser exceptions: ${exceptions.join(' | ')}`);
 socket.close();
-console.log(JSON.stringify({ ok: true, shell, mission, exceptions }, null, 2));
+console.log(JSON.stringify({ ok: true, shell, mission, climbed, powered, exceptions }, null, 2));

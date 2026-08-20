@@ -117,7 +117,7 @@ const desktop = await evaluate(`(() => {
     textLength: document.body.innerText.trim().length
   };
 })()`);
-if (!desktop.appVisible || !desktop.hubActive || desktop.oldRoomButtons || desktop.canvas.width !== 1280 || desktop.canvas.sampledColors < 25 || desktop.snapshot.npcCount !== 4 || desktop.snapshot.obstacleCount !== 12 || desktop.assets.roomAssetsReady !== 16 || desktop.assets.parallaxAssetsReady !== 4 || desktop.assets.propAssetsReady !== 16 || desktop.assets.modularAssetCount !== 36 || desktop.assets.readyAssetCount !== 36 || desktop.roomDimensions.some(([width]) => !width) || desktop.parallaxDimensions.some(([width]) => !width) || desktop.propDimensions.some(([width]) => !width) || desktop.overlay || desktop.textLength < 500) throw new Error(`Desktop modular shell failed: ${JSON.stringify(desktop)}`);
+if (!desktop.appVisible || !desktop.hubActive || desktop.oldRoomButtons || desktop.canvas.width !== 1280 || desktop.canvas.sampledColors < 25 || desktop.snapshot.npcCount !== 4 || desktop.snapshot.obstacleCount !== 12 || desktop.assets.roomAssetsReady !== 16 || desktop.assets.parallaxAssetsReady !== 4 || desktop.assets.propAssetsReady !== 16 || desktop.assets.runtimeArtReady !== 9 || desktop.assets.modularAssetCount !== 36 || desktop.assets.readyAssetCount !== 36 || desktop.assets.totalReadyAssetCount !== 45 || desktop.roomDimensions.some(([width]) => !width) || desktop.parallaxDimensions.some(([width]) => !width) || desktop.propDimensions.some(([width]) => !width) || desktop.overlay || desktop.textLength < 6) throw new Error(`Desktop modular shell failed: ${JSON.stringify(desktop)}`);
 
 await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 120, y: 520, vx: 0, vy: 0 })`);
 const beforeMove = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
@@ -138,7 +138,7 @@ await wait(160);
 const afterObstacle = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 if (afterObstacle.x < 315) throw new Error(`Obstacle traversal failed: ${JSON.stringify(afterObstacle)}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 880, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1160, y: 520, vx: 0, vy: 0 })`);
 await wait(360);
 const beforeDoor = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 const bridgeSignature = await signature();
@@ -148,7 +148,7 @@ const afterRoom = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 const briefingSignature = await signature();
 if (afterRoom.roomId !== 'briefing' || afterRoom.roomBackground === beforeDoor.roomBackground || briefingSignature === bridgeSignature || afterRoom.cameraX <= beforeDoor.cameraX) throw new Error(`Modular room transition failed: ${JSON.stringify({ beforeDoor, afterRoom, bridgeSignature, briefingSignature })}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1890, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 2440, y: 520, vx: 0, vy: 0 })`);
 await wait(260);
 const beforeLift = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 await key('KeyS', 's');
@@ -156,7 +156,7 @@ await wait(220);
 const afterLift = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
 if (afterLift.deck !== 1 || afterLift.visited !== beforeLift.visited + 1 || afterLift.parallaxAssetsReady !== 4) throw new Error(`Lift traversal failed: ${JSON.stringify({ beforeLift, afterLift })}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1603, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 2130, y: 520, vx: 0, vy: 0 })`);
 await key('KeyE', 'e');
 await wait(220);
 const service = await evaluate(`(() => {
@@ -169,9 +169,9 @@ await evaluate(`globalThis.__ATF_HUB__.persist()`);
 const serviceAfterPersist = await evaluate(`(() => { const save = JSON.parse(localStorage.getItem('atf-v47-profile-1')); return { hour: save.clock.hour, restStamp: save.hub.services['service:rest'] }; })()`);
 if (serviceAfterPersist.restStamp !== 1 || serviceAfterPersist.hour !== 7.5) throw new Error(`Physical persistence overwrote service state: ${JSON.stringify(serviceAfterPersist)}`);
 
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 1890, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 2440, y: 520, vx: 0, vy: 0 })`);
 await key('KeyW', 'w');
-await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 643, y: 520, vx: 0, vy: 0 })`);
+await evaluate(`Object.assign(globalThis.__ATF_HUB__.player, { x: 840, y: 520, vx: 0, vy: 0 })`);
 await key('KeyE', 'e');
 await wait(220);
 const routeOpened = await evaluate(`document.querySelector('[data-panel="galaxy"]').classList.contains('active')`);

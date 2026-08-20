@@ -15,8 +15,8 @@ const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const rooms = HUB_DECKS.flatMap((deck) => deck.rooms);
 const assetFile = (publicUrl) => resolve(repoRoot, publicUrl.replace(/^\//, ''));
 
-test('the v49 Tantalus hub is a modular four-deck physical level', () => {
-  assert.deepEqual(HUB_WORLD, { width: 3840, roomWidth: 960, floorY: 624 });
+test('the v50 Tantalus hub is a camera-wide modular four-deck physical level', () => {
+  assert.deepEqual(HUB_WORLD, { width: 5120, roomWidth: 1280, floorY: 624 });
   assert.equal(HUB_DECKS.length, 4);
   assert.equal(HUB_ROOM_COUNT, 16);
   assert.ok(HUB_DECKS.every((deck) => deck.rooms.length === 4));

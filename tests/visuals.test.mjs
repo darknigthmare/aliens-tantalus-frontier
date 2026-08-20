@@ -4,8 +4,8 @@ import { access, readFile } from 'node:fs/promises';
 import { VISUAL_ASSETS, NEW_SPRITE_SHEETS, NEW_SPRITE_FRAME_COUNT } from '../src/visuals.js';
 
 test('the OpenAI sprite production waves cover every runtime family', async () => {
-  assert.equal(NEW_SPRITE_SHEETS.length, 9);
-  assert.equal(NEW_SPRITE_FRAME_COUNT, 144);
+  assert.equal(NEW_SPRITE_SHEETS.length, 27);
+  assert.equal(NEW_SPRITE_FRAME_COUNT, 432);
   assert.equal(new Set(VISUAL_ASSETS.map((asset) => asset.file)).size, VISUAL_ASSETS.length);
   for (const asset of VISUAL_ASSETS) await access(asset.file.replace(/^\//, ''));
   for (const sheet of NEW_SPRITE_SHEETS) {

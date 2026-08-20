@@ -46,7 +46,7 @@ const expression = `(async () => {
     if (image.decode) await image.decode().catch(() => {});
   }
   scrollTo(0, 0);
-  const newSheets = images.filter(image => /animation-sheet/.test(image.src));
+  const newSheets = images.filter(image => image.src.includes('/sprites/normalized/') || /animation-sheet/.test(image.src));
   const pixelChecks = [];
   for (const image of newSheets) {
     const canvas = document.createElement('canvas');
@@ -83,9 +83,9 @@ await writeFile('.qa-sprite-gallery.png', Buffer.from(screenshot.data, 'base64')
 const failures = [];
 if (!report.bootRemoved || !report.appVisible || report.activePanel !== 'codex') failures.push('application/codex not visible');
 if (report.auditCards !== 4 || !report.auditText.includes('27/27')) failures.push('parity audit missing');
-if (report.artCards !== 12 || report.images.length !== 12) failures.push('visual gallery incomplete');
+if (report.artCards !== 71 || report.images.length !== 71) failures.push('visual gallery incomplete');
 if (!report.images.every((image) => image.complete && image.width > 0 && image.height > 0)) failures.push('image failed to load');
-if (report.waveLabel !== '8 PLAQUES · 128 CELLULES') failures.push('wave count mismatch');
+if (report.waveLabel !== '27 PLAQUES · 432 CELLULES') failures.push('wave count mismatch');
 if (!report.styleLoaded || report.horizontalOverflow > 1) failures.push('layout/style failure');
 if (!report.pixelChecks.every((image) => image.width === 1024 && image.height === 1024 && image.cornerAlpha.every((alpha) => alpha === 0))) failures.push('sprite dimensions/alpha failure');
 if (runtimeErrors.length) failures.push('runtime errors');

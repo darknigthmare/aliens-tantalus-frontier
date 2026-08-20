@@ -72,6 +72,8 @@ function showView(name) {
   if (activeView === 'play' && name !== 'play') engine.stop();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
   activeView = name;
+  document.documentElement.classList.toggle('hub-mode', name === 'hub');
+  document.documentElement.classList.toggle('mission-mode', name === 'play');
   $$('.view').forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === name));
   $$('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   $('#breadcrumb').textContent = viewMeta[name][0];
@@ -292,7 +294,8 @@ const timelineGroups = [
   ['v46', 'Colonial Marines & Crucible Pass', '4 mondes, 8 campagnes, 48 ennemis, 12 Apex, 48 Neuro-Link, deux factions et nouveaux équipements additifs.'],
   ['v47', 'OpenAI Art Production & Runtime', 'Implémentation web professionnelle, assets originaux de production, PWA, QA et publication continue.'],
   ['v48', 'Tantalus jouable', 'Le hub-menu devient un niveau physique : quatre ponts illustrés, caméra, déplacement, PNJ, ascenseurs, terminaux et conséquences persistantes.'],
-  ['v49', 'Hub modulaire multicouche', 'Seize salles indépendantes remplacent les panoramas : portes et props séparés, parallaxe par pont, monde élargi, collisions par salle et transitions animées.']
+  ['v49', 'Hub modulaire multicouche', 'Seize salles indépendantes remplacent les panoramas : portes et props séparés, parallaxe par pont, monde élargi, collisions par salle et transitions animées.'],
+  ['v50', 'Passe Metroidvania et sprites runtime', 'Verticalité, ladders, portes physiques, raccourci ventilé, couches bitmap indépendantes et plaques OpenAI RGBA réellement utilisées par le jeu.']
 ];
 
 function renderTimeline() {
@@ -337,6 +340,10 @@ function handleGameEvent(event) {
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') { saveSystem.data.statistics.kills += 1; $('#mission-log').textContent = `MENACE NEUTRALISÉE: ${event.enemy.name} · total ${saveSystem.data.statistics.kills}`; }
   if (event.type === 'vehicle') $('#mission-log').textContent = event.occupied ? 'P-5000/APC: liaison conducteur établie.' : 'Véhicule sécurisé. Progression à pied.';
+  if (event.type === 'locked') $('#mission-log').textContent = `ACCÈS REFUSÉ · ${event.requirement}`;
+  if (event.type === 'power-restored') $('#mission-log').textContent = 'CIRCUIT AUXILIAIRE RÉTABLI · le verrou central peut maintenant être ouvert.';
+  if (event.type === 'shortcut') $('#mission-log').textContent = 'RACCOURCI DE MAINTENANCE OUVERT · retour rapide sécurisé.';
+  if (event.type === 'supply') $('#mission-log').textContent = `${event.item} RÉCUPÉRÉ · 60 munitions ajoutées.`;
   if (event.type === 'player-down') { $('#mission-log').textContent = 'MARINE À TERRE — extraction médicale requise.'; audio.alarm(); saveSystem.data.statistics.deaths += 1; }
   if (event.type === 'mission-complete') {
     const campaign = CAMPAIGNS.find((item) => item.id === saveSystem.data.campaignId);
@@ -374,6 +381,7 @@ function bind() {
   $('#biology-filter').addEventListener('change', renderEnemies); $('#enemy-search').addEventListener('input', renderEnemies);
   $('#vehicle-search').addEventListener('input', renderVehicles);
   $('#exit-mission').onclick = () => { engine.stop(); saveSystem.data.scene = 'hub'; saveSystem.commit(); renderCommand(); showView('hub'); };
+  $('#exit-hub').onclick = () => { hubEngine.stop(); saveSystem.commit(); renderCommand(); showView('command'); };
   $('#editor-mode').onchange = (event) => editor.setShipMode(event.target.value === 'ship');
   $('#editor-clear').onclick = () => editor.clear();
   $('#editor-export').onclick = () => download(`atf-${editor.shipMode ? 'ship' : 'mission'}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
@@ -385,7 +393,7 @@ function bind() {
   $('#setting-motion').onchange = (event) => { saveSystem.data.settings.reducedMotion = event.target.checked; document.documentElement.classList.toggle('reduced-motion', event.target.checked); hubEngine.setReducedMotion(event.target.checked); saveSystem.commit(); };
   $('#setting-subtitles').onchange = (event) => { saveSystem.data.settings.subtitles = event.target.checked; saveSystem.commit(); };
   $('#save-export').onclick = () => download(`aliens-tantalus-frontier-profile-${saveSystem.profile}.json`, saveSystem.export());
-  $('#save-import').onchange = async (event) => { try { hubEngine.stop(false); const wasHub = activeView === 'hub'; saveSystem.import(await event.target.files[0].text()); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast('Sauvegarde importée et migrée vers le schéma v49.'); } catch (error) { toast(error.message); } };
+  $('#save-import').onchange = async (event) => { try { hubEngine.stop(false); const wasHub = activeView === 'hub'; saveSystem.import(await event.target.files[0].text()); renderAll(); showView('hub'); if (wasHub) hubEngine.start(saveSystem.data.hub); toast('Sauvegarde importée et migrée vers le schéma v50.'); } catch (error) { toast(error.message); } };
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; $('#install-app').hidden = false; });
   $('#install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; $('#install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => { hubEngine.stop(); saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); saveSystem.commit(); });
@@ -412,6 +420,7 @@ async function boot() {
   document.documentElement.classList.toggle('reduced-motion', saveSystem.data.settings.reducedMotion);
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
   globalThis.__ATF_HUB__ = hubEngine;
+  globalThis.__ATF_GAME__ = engine;
   setTimeout(() => { $('#boot').remove(); $('#app').hidden = false; showView('hub'); }, 650);
 }
 
@@ -420,4 +429,4 @@ boot().catch((error) => {
   $('#boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { launchCampaign, renderAll, showView, hubEngine };
+export { launchCampaign, renderAll, showView, hubEngine, engine };

@@ -48,7 +48,7 @@ const evaluated = await command('Runtime.evaluate', {
 if (evaluated.exceptionDetails) throw new Error(evaluated.exceptionDetails.text);
 const report = evaluated.result.value;
 report.errors = errors;
-report.ok = report.panel === 'codex' && report.artCards === 12 && report.overflow <= 1 && report.menuToggleVisible && report.auditColumns.split(' ').length === 1 && report.galleryColumns.split(' ').length === 1 && errors.length === 0;
+report.ok = report.panel === 'codex' && report.artCards === 71 && report.overflow <= 1 && report.menuToggleVisible && report.auditColumns.split(' ').length === 1 && report.galleryColumns.split(' ').length === 1 && errors.length === 0;
 socket.close();
 console.log(JSON.stringify(report, null, 2));
 if (!report.ok) process.exitCode = 1;

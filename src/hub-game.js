@@ -1,6 +1,6 @@
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
-const WORLD_WIDTH = 3840;
+const WORLD_WIDTH = 5120;
 const ROOM_WIDTH = WORLD_WIDTH / 4;
 const FLOOR_Y = 624;
 const GRAVITY = 1900;
@@ -8,6 +8,17 @@ const GRAVITY = 1900;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const assetReady = (image) => Boolean(image?.complete && image.naturalWidth);
+const HUB_FOREGROUND = '/assets/openai/metroidvania/tantalus-mission-foreground.png';
+const NPC_SPRITE_FILES = Object.freeze([
+  '/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/noor-okafor-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/bishop-9-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/tamsin-velez-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png'
+]);
+const PLAYER_SPRITE_FILE = '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png';
 
 export const HUB_WORLD = Object.freeze({ width: WORLD_WIDTH, roomWidth: ROOM_WIDTH, floorY: FLOOR_Y });
 
@@ -138,8 +149,10 @@ export class HubGame {
     this.roomImages = new Map(HUB_DECKS.flatMap((deck) => deck.rooms).map((room) => [room.background, createImage(room.background)]));
     this.farLayers = new Map(HUB_DECKS.map((deck) => [deck.farBackground, createImage(deck.farBackground)]));
     this.propImages = new Map(HUB_MODULAR_PROP_FILES.map((source) => [source, createImage(source)]));
-    this.playerSheet = createImage('/assets/openai/echo9-sprite-sheet.png');
-    this.crewSheet = createImage('/assets/openai/tantalus-hub-crew-animation-sheet.png');
+    this.playerSheet = createImage(PLAYER_SPRITE_FILE);
+    this.npcSheets = NPC_SPRITE_FILES.map(createImage);
+    this.crewSheet = this.npcSheets[0];
+    this.foregroundLayer = createImage(HUB_FOREGROUND);
     this.keys = new Set();
     this.running = false;
     this.last = 0;
@@ -153,7 +166,7 @@ export class HubGame {
       { x: ROOM_WIDTH, lift: false, progress: 0 },
       { x: ROOM_WIDTH * 2, lift: true, progress: 0 },
       { x: ROOM_WIDTH * 3, lift: false, progress: 0 },
-      { x: WORLD_WIDTH - 76, lift: true, progress: 0 }
+      { x: WORLD_WIDTH - 118, lift: true, progress: 0 }
     ];
     this.bind();
   }
@@ -185,7 +198,7 @@ export class HubGame {
       positionX: clamp(Number(hubState.positionX) || defaultX, 40, WORLD_WIDTH - 90),
       visited: Array.isArray(hubState.visited) ? [...new Set(hubState.visited)] : []
     };
-    this.player = { x: this.state.positionX, y: FLOOR_Y - 104, w: 58, h: 104, vx: 0, vy: 0, grounded: true, facing: 1 };
+    this.player = { x: this.state.positionX, y: FLOOR_Y - 92, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: 1 };
     this.camera = { x: clamp(this.player.x - LOGICAL_WIDTH / 2, 0, WORLD_WIDTH - LOGICAL_WIDTH) };
     this.npcs = this.createNpcs(deck);
     this.obstacles = this.createObstacles(deck);
@@ -282,14 +295,15 @@ export class HubGame {
 
   createNpcs(deckIndex) {
     return HUB_DECKS[deckIndex].rooms.map((room, index) => ({
-      row: room.npcRow,
-      x: room.xStart + 350,
-      y: FLOOR_Y - 118,
-      w: 72,
-      h: 118,
+      sheet: (room.npcRow + index + deckIndex * 2) % NPC_SPRITE_FILES.length,
+      row: 1,
+      x: room.xStart + 420 + index * 34,
+      y: FLOOR_Y - 92,
+      w: 44,
+      h: 92,
       vx: index % 2 ? -25 : 22,
-      min: room.xStart + 320,
-      max: room.xEnd - 150
+      min: room.xStart + 390,
+      max: room.xEnd - 210
     }));
   }
 
@@ -298,6 +312,16 @@ export class HubGame {
   }
 
   resolveHorizontal(previousX) {
+    for (const door of this.doorStates) {
+      const collider = { x: door.x - 34, y: FLOOR_Y - (door.lift ? 216 : 198), w: 68, h: door.lift ? 216 : 198 };
+      if (door.progress >= 0.82 || !overlap(this.player, collider)) continue;
+      if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
+        this.player.x = collider.x - this.player.w;
+      } else if (this.player.vx < 0 && previousX >= collider.x + collider.w - 8) {
+        this.player.x = collider.x + collider.w;
+      }
+      this.player.vx = 0;
+    }
     for (const obstacle of this.obstacles) {
       if (!overlap(this.player, obstacle)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= obstacle.x + 7) {
@@ -417,6 +441,7 @@ export class HubGame {
     const roomAssetsReady = [...this.roomImages.values()].filter(assetReady).length;
     const parallaxAssetsReady = [...this.farLayers.values()].filter(assetReady).length;
     const propAssetsReady = [...this.propImages.values()].filter(assetReady).length;
+    const runtimeArtReady = [this.playerSheet, this.foregroundLayer, ...this.npcSheets].filter(assetReady).length;
     return {
       roomAssetsReady,
       roomAssetCount: this.roomImages.size,
@@ -425,7 +450,10 @@ export class HubGame {
       propAssetsReady,
       propAssetCount: this.propImages.size,
       readyAssetCount: roomAssetsReady + parallaxAssetsReady + propAssetsReady,
-      modularAssetCount: HUB_MODULAR_ASSETS.length
+      modularAssetCount: HUB_MODULAR_ASSETS.length,
+      runtimeArtReady,
+      runtimeArtCount: this.npcSheets.length + 2,
+      totalReadyAssetCount: roomAssetsReady + parallaxAssetsReady + propAssetsReady + runtimeArtReady
     };
   }
 
@@ -450,7 +478,9 @@ export class HubGame {
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
       propAssetsReady: assetReport.propAssetsReady,
       modularAssetCount: assetReport.modularAssetCount,
-      readyAssetCount: assetReport.readyAssetCount
+      readyAssetCount: assetReport.readyAssetCount,
+      runtimeArtReady: assetReport.runtimeArtReady,
+      totalReadyAssetCount: assetReport.totalReadyAssetCount
     };
   }
 
@@ -512,8 +542,12 @@ export class HubGame {
     }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     for (const npc of this.npcs) {
-      const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 7 + npc.row) % 4;
-      this.drawSheetCell(ctx, this.crewSheet, frame, npc.row, npc.x, npc.y, npc.w, npc.h, npc.vx < 0, 4, 4);
+      const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
+      const image = this.npcSheets[npc.sheet] || this.crewSheet;
+      const renderWidth = 92;
+      const renderHeight = 140;
+      const renderY = npc.y + npc.h - renderHeight * (240 / 256);
+      this.drawSheetCell(ctx, image, frame, 1, npc.x + npc.w / 2 - renderWidth / 2, renderY, renderWidth, renderHeight, npc.vx < 0, 4, 4);
     }
     this.drawPlayer(ctx);
     for (const door of this.doorStates) this.drawDoor(ctx, door);
@@ -529,7 +563,6 @@ export class HubGame {
       const y = FLOOR_Y - height * 0.82;
       ctx.drawImage(image, room.xStart, y, width, height);
     }
-    this.drawViewportParallax(ctx, room.viewport, farImage);
     const edgeShade = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
     edgeShade.addColorStop(0, 'rgba(0, 3, 4, .42)');
     edgeShade.addColorStop(0.08, 'rgba(0, 3, 4, 0)');
@@ -547,11 +580,13 @@ export class HubGame {
     ctx.clip();
     ctx.fillStyle = '#020809';
     ctx.fillRect(viewport.x, viewport.y, viewport.w, viewport.h);
-    const height = viewport.h * 1.32;
-    const width = image.naturalWidth * (height / image.naturalHeight);
-    const drift = (this.camera.x * 0.19) % Math.max(1, width - viewport.w + 120);
+    const scale = Math.max(viewport.w / image.naturalWidth, viewport.h / image.naturalHeight) * 1.18;
+    const height = image.naturalHeight * scale;
+    const width = image.naturalWidth * scale;
+    const maxDrift = Math.max(0, width - viewport.w);
+    const drift = maxDrift ? (this.camera.x * 0.09) % maxDrift : 0;
     ctx.globalAlpha = 0.68;
-    ctx.drawImage(image, viewport.x - drift, viewport.y - viewport.h * 0.16, width, height);
+    ctx.drawImage(image, viewport.x - drift, viewport.y - (height - viewport.h) / 2, width, height);
     ctx.globalAlpha = 1;
     const glass = ctx.createLinearGradient(viewport.x, viewport.y, viewport.x, viewport.y + viewport.h);
     glass.addColorStop(0, 'rgba(139, 200, 203, .16)');
@@ -570,6 +605,7 @@ export class HubGame {
 
   drawRoomMarker(ctx, room) {
     const current = this.currentRoom().id === room.id;
+    if (!current || this.roomChangePulse <= 0) return;
     ctx.fillStyle = current ? 'rgba(9, 21, 17, .82)' : 'rgba(3, 9, 9, .66)';
     ctx.fillRect(room.xStart + 22, 176, 268, 34);
     ctx.strokeStyle = current ? '#8ac89b' : '#3e584d';
@@ -607,16 +643,14 @@ export class HubGame {
     ];
     const image = this.propImages.get(sources[obstacle.style]);
     if (assetReady(image)) {
-      const height = obstacle.h + 22;
-      const width = obstacle.w + 22;
-      ctx.drawImage(image, obstacle.x - 11, FLOOR_Y - height, width, height);
+      const scale = Math.min((obstacle.w + 10) / image.naturalWidth, (obstacle.h + 10) / image.naturalHeight);
+      const width = image.naturalWidth * scale;
+      const height = image.naturalHeight * scale;
+      ctx.drawImage(image, obstacle.x + (obstacle.w - width) / 2, FLOOR_Y - height, width, height);
     } else {
       ctx.fillStyle = '#2b3732';
       ctx.fillRect(obstacle.x, obstacle.y, obstacle.w, obstacle.h);
     }
-    ctx.strokeStyle = 'rgba(181, 164, 90, .74)';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(obstacle.x + 1, obstacle.y + 1, obstacle.w - 2, obstacle.h - 2);
   }
 
   drawDoor(ctx, door) {
@@ -641,9 +675,15 @@ export class HubGame {
 
   drawPlayer(ctx) {
     const moving = Math.abs(this.player.vx) > 8;
-    const frame = moving && !this.reducedMotion ? Math.floor(this.animationTime * (Math.abs(this.player.vx) > 300 ? 12 : 9)) % 4 : 0;
+    const airborne = !this.player.grounded;
+    const row = airborne ? 2 : moving ? 1 : 0;
+    const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * (airborne ? 8 : Math.abs(this.player.vx) > 300 ? 12 : moving ? 9 : 4)) % 4;
     if (assetReady(this.playerSheet)) {
-      this.drawSheetCell(ctx, this.playerSheet, frame, 0, this.player.x - 36, this.player.y - 28, 130, 154, this.player.facing < 0, 8, 8);
+      const width = 110;
+      const height = 148;
+      const x = this.player.x + this.player.w / 2 - width / 2;
+      const y = this.player.y + this.player.h - height * (240 / 256);
+      this.drawSheetCell(ctx, this.playerSheet, frame, row, x, y, width, height, this.player.facing < 0, 4, 4);
       return;
     }
     ctx.save();
@@ -672,13 +712,17 @@ export class HubGame {
   }
 
   drawForegroundParallax(ctx) {
-    const image = this.propImages.get('/assets/openai/hub/props/bulkhead-door.png');
+    const image = this.foregroundLayer;
     if (!assetReady(image)) return;
-    const spacing = 960;
-    const offset = -((this.camera.x * 1.075) % spacing);
+    const height = 220;
+    const width = image.naturalWidth * (height / image.naturalHeight);
+    const spacing = Math.max(320, width - 18);
+    const offset = -((this.camera.x * 1.1) % spacing);
     ctx.save();
-    ctx.globalAlpha = 0.085;
-    for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) ctx.drawImage(image, x + 842, 332, 172, 292);
+    ctx.globalAlpha = 0.25;
+    for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) {
+      ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
+    }
     ctx.restore();
   }
 
@@ -687,32 +731,36 @@ export class HubGame {
     const room = this.currentRoom();
     const interaction = this.nearestInteraction();
     const lift = this.nearestLift();
-    ctx.fillStyle = 'rgba(2, 8, 7, .88)';
-    ctx.fillRect(18, 18, 520, 84);
+    ctx.fillStyle = 'rgba(2, 8, 7, .78)';
+    ctx.fillRect(18, 18, 420, 66);
     ctx.strokeStyle = '#648270';
-    ctx.strokeRect(18.5, 18.5, 520, 84);
+    ctx.strokeRect(18.5, 18.5, 420, 66);
     ctx.fillStyle = '#9adbac';
     ctx.font = '700 15px ui-monospace, monospace';
     ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 46);
     ctx.fillStyle = '#d3ddd5';
-    ctx.font = '700 20px ui-monospace, monospace';
-    ctx.fillText(room.name.toUpperCase(), 36, 75);
+    ctx.font = '700 17px ui-monospace, monospace';
+    ctx.fillText(room.name.toUpperCase(), 36, 70);
     ctx.fillStyle = '#8fa398';
-    ctx.font = '12px ui-monospace, monospace';
-    ctx.fillText(`PONT ${this.state.deck + 1}/4 · ${this.state.visited.length}/${HUB_ROOM_COUNT} VISITÉS`, 320, 75);
+    ctx.font = '11px ui-monospace, monospace';
+    ctx.fillText(`P${this.state.deck + 1}/4 · ${this.state.visited.length}/${HUB_ROOM_COUNT}`, 322, 70);
 
-    ctx.fillStyle = 'rgba(2, 8, 7, .9)';
-    ctx.fillRect(18, 656, 1244, 46);
-    ctx.strokeStyle = interaction || lift !== undefined ? '#98d7a8' : '#536b5d';
-    ctx.strokeRect(18.5, 656.5, 1244, 46);
-    ctx.fillStyle = interaction || lift !== undefined ? '#b4edc1' : '#a9b9af';
-    ctx.font = '700 14px ui-monospace, monospace';
-    const prompt = interaction
-      ? `E  ${interaction.description.toUpperCase()}`
-      : lift !== undefined
-        ? 'W / S  CHANGER DE PONT     E  PONT SUIVANT'
-        : 'A / D  MARCHER     MAJ  COURIR     ESPACE  FRANCHIR     E  UTILISER';
-    ctx.fillText(prompt, 38, 685);
+    if (interaction || lift !== undefined) {
+      ctx.font = '700 14px ui-monospace, monospace';
+      const prompt = interaction
+        ? `E  ${interaction.description.toUpperCase()}`
+        : lift !== undefined
+          ? 'W / S  CHANGER DE PONT     E  PONT SUIVANT'
+          : 'A / D  MARCHER     MAJ  COURIR     ESPACE  FRANCHIR     E  UTILISER';
+      const promptWidth = Math.min(900, ctx.measureText(prompt).width + 48);
+      const promptX = (LOGICAL_WIDTH - promptWidth) / 2;
+      ctx.fillStyle = 'rgba(2, 8, 7, .82)';
+      ctx.fillRect(promptX, 656, promptWidth, 46);
+      ctx.strokeStyle = '#98d7a8';
+      ctx.strokeRect(promptX + 0.5, 656.5, promptWidth, 46);
+      ctx.fillStyle = '#b4edc1';
+      ctx.fillText(prompt, promptX + 24, 685);
+    }
 
     if (!this.state.visited.includes('briefing')) {
       ctx.fillStyle = 'rgba(6, 15, 11, .9)';

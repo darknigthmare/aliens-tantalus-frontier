@@ -30,7 +30,7 @@ test('legacy saves migrate additively without dropping player progress', () => {
 
 test('three profile storage round-trips and exports', () => {
   const v48Hub = migrateSave({ schema: 48, hub: { positionX: 1600, roomId: 'combat-information' } }, 1);
-  assert.equal(v48Hub.hub.positionX, 2400);
+  assert.equal(v48Hub.hub.positionX, 3200);
   assert.equal(v48Hub.hub.roomId, 'combat-information');
   const backend = storage(); const system = new SaveSystem(backend);
   system.newGame(1); system.data.statistics.kills = 7; system.commit();

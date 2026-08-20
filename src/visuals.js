@@ -1,3 +1,5 @@
+import { V50_SPRITE_VISUALS } from './v50-visuals.js';
+
 const makeAsset = (id, file, title, description, options = {}) => ({
   id,
   file: `/assets/openai/${file}`,
@@ -99,6 +101,7 @@ export const HUB_PROP_MODULES = HUB_PROP_LIBRARY.map(([id, title]) => makeAsset(
 ));
 
 export const SPRITE_SHEETS = [
+  ...V50_SPRITE_VISUALS,
   makeAsset('echo9-master', 'echo9-sprite-sheet.png', 'Echo-9 — master historique', 'Marine et synthétique : déplacement, visée, tir, rechargement, conduit et dégâts.', { kind: 'animation', grid: '8×8', frames: 64, legacy: true, alt: 'Plaque historique des animations Echo-9' }),
   makeAsset('xenomorph-master', 'xenomorph-sprite-sheet.png', 'Xénomorphes — master historique', 'Cycle de vie, castes adultes, attaques acides, formes lourdes et Reine.', { kind: 'animation', grid: '8×8', frames: 64, legacy: true, alt: 'Plaque historique des animations xénomorphes' }),
   makeAsset('arsenal-props-master', 'arsenal-props-atlas.png', 'Arsenal & props — master historique', 'Armes, équipements, terminaux, portes, sentry et silhouettes de véhicules.', { kind: 'atlas', grid: '8×6', frames: 48, legacy: true, alt: 'Atlas historique des armes accessoires et véhicules' }),

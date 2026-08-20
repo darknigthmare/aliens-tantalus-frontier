@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER — archive jouable v1 à v46, runtime v49 et USS Tantalus modulaire multicouche.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER — runtime v50, hub jouable et mission Metroidvania multicouche avec sprites OpenAI normalisés.">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/sprite-gallery.css">
   <link rel="stylesheet" href="/hub-level.css">
+  <link rel="stylesheet" href="/runtime-level.css">
   <title>ALIENS: TANTALUS FRONTIER</title>
 </head>
 <body>
@@ -36,7 +37,7 @@
         <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
         <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
         <button class="nav-button" data-view="editor"><span>09</span> Éditeur</button>
-        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v49</button>
+        <button class="nav-button" data-view="codex"><span>10</span> Codex v1–v50</button>
         <button class="nav-button" data-view="settings"><span>11</span> Système</button>
       </nav>
       <div class="rail-footer">
@@ -54,7 +55,7 @@
         </div>
         <div class="top-metrics">
           <span><b id="clock">J01 06:00</b> TEMPS NAVIRE</span>
-          <span><b>v49.0.0</b> RUNTIME</span>
+          <span><b>v50.0.0</b> RUNTIME</span>
           <button id="quick-save" class="button compact">SAUVEGARDER</button>
         </div>
       </header>
@@ -105,6 +106,7 @@
         </section>
 
         <section class="view" data-panel="hub">
+          <button id="exit-hub" class="button runtime-exit" type="button">QUITTER</button>
           <div class="hub-level-heading">
             <div><p class="eyebrow">NIVEAU HUB JOUABLE // 4 PONTS // 16 COMPARTIMENTS</p><h2>USS Tantalus</h2></div>
             <div id="hub-system-readout" class="hub-system-readout" aria-label="Systèmes du vaisseau"></div>
@@ -156,7 +158,7 @@
         </section>
 
         <section class="view" data-panel="codex">
-          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v49</h2></div><div class="button-row"><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a><a class="button primary" href="/docs/POSTULATE_PARITY_AUDIT.md" target="_blank">AUDIT DU POSTULAT</a></div></div>
+          <div class="section-intro"><div><p class="eyebrow">ARCHIVE DE PRODUCTION</p><h2>Codex v1 → v50</h2></div><div class="button-row"><a class="button" href="/docs/CONTENT_CONTRACT.md" target="_blank">CONTRAT COMPLET</a><a class="button primary" href="/docs/LEVEL_DESIGN_AUDIT_V50.md" target="_blank">AUDIT LEVEL DESIGN</a></div></div>
           <div class="postulate-audit" aria-label="État de parité du postulat de base">
             <article><b>27/27</b><span>AXES CONSERVÉS</span><p>Aucun postulat retiré.</p></article>
             <article><b>4</b><span>VERROUILLÉS</span><p>Vérifiables tels quels.</p></article>
