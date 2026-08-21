@@ -1,17 +1,36 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
+import { V52_NPC_SPRITE_VISUALS } from '../src/v50-visuals.js';
 import { VISUAL_ASSETS, NEW_SPRITE_SHEETS, NEW_SPRITE_FRAME_COUNT } from '../src/visuals.js';
 
-test('the OpenAI sprite production waves cover every runtime family', async () => {
-  assert.equal(NEW_SPRITE_SHEETS.length, 27);
-  assert.equal(NEW_SPRITE_FRAME_COUNT, 432);
+test('the OpenAI sprite production waves cover every visual family through v52', async () => {
+  assert.equal(NEW_SPRITE_SHEETS.length, 36);
+  assert.equal(NEW_SPRITE_FRAME_COUNT, 576);
+  assert.equal(V52_NPC_SPRITE_VISUALS.length, 9);
   assert.equal(new Set(VISUAL_ASSETS.map((asset) => asset.file)).size, VISUAL_ASSETS.length);
+  assert.equal(new Set(V52_NPC_SPRITE_VISUALS.map((asset) => asset.id)).size, 9);
+
+  const manifest = JSON.parse(await readFile('assets/openai/sprites/manifest.json', 'utf8'));
+  const v52ManifestFiles = manifest.sheets
+    .filter((sheet) => sheet.wave === 'v52')
+    .map((sheet) => sheet.files.normalized)
+    .sort();
+  assert.deepEqual(
+    V52_NPC_SPRITE_VISUALS.map((asset) => asset.file).sort(),
+    v52ManifestFiles,
+    'the v52 gallery registry must expose every newly normalized NPC sheet'
+  );
+
   for (const asset of VISUAL_ASSETS) await access(asset.file.replace(/^\//, ''));
   for (const sheet of NEW_SPRITE_SHEETS) {
     assert.equal(sheet.grid, '4×4');
     assert.equal(sheet.frames, 16);
     assert.equal(sheet.provider, 'OpenAI ImageGen');
+  }
+  for (const sheet of V52_NPC_SPRITE_VISUALS) {
+    assert.equal(sheet.wave, 'v52');
+    assert.equal(sheet.family, 'npc');
   }
 });
 

@@ -172,6 +172,14 @@ html.mission-mode body {
     justify-content: center;
   }
 
+  .hub-mode .view[data-panel="hub"] {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-top: max(76px, calc(env(safe-area-inset-top) + 62px));
+    background: radial-gradient(circle at 50% 28%, rgba(35, 65, 50, .24), transparent 48%), #010403;
+  }
+
   .hub-mode .view[data-panel="hub"]::before {
     content: 'MODE PAYSAGE RECOMMANDÉ';
     position: fixed;
@@ -186,6 +194,13 @@ html.mission-mode body {
   .hub-mode .hub-touch-controls {
     position: fixed;
     inset: auto max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom));
+  }
+
+  .hub-mode .hub-level-readout {
+    display: grid;
+    width: 100%;
+    min-height: 72px;
+    border-top: 1px solid rgba(96, 124, 105, .48);
   }
 }
 

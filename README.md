@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v51.0.0**. Cette release transforme le contrat v1→v51 en une boucle persistante : préparer l'opération à bord du Tantalus, équiper Echo-9, jouer la mission, subir ou rapporter ses conséquences, résoudre les crises physiques du vaisseau, puis repartir avec un monde modifié.
+Version web jouable **v52.0.0**. Cette release transforme le contrat v1→v52 en une boucle persistante et physiquement matérialisée : préparer l'opération à bord du Tantalus, former Echo-9, parcourir un niveau multi-route, combattre avec jusqu'à trois alliés IA, reprendre exactement l'opération sauvegardée, résoudre les crises du vaisseau, puis repartir avec un monde modifié.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -16,15 +16,16 @@ Ouvrir `http://127.0.0.1:4173`.
 
 - Commandement : décisions datées, ressources, recherches, modules, journal et pression de crise persistants ; la diplomatie avance l'horloge, applique une transaction unique puis verrouille le canal jusqu'à son cooldown.
 - Préparation : achat, inventaire, arme, équipement à charges, véhicule, équipage, soins, costume, dossier Apex et profil Neuro-Xeno.
-- Opération : géométrie issue du monde/campagne/Forge, danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
+- Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
+- Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : navigation Canvas, portes, ascenseurs, PNJ, objectifs et crises xénomorphe, synthétique ou pathogène neutralisées dans le niveau avant résolution stratégique.
+- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
-- Reprise native : l'opération recharge checkpoint, joueur/coop, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule, charges d'équipement et état Neuro-Xeno. Les identifiants sont recoupés, les nombres bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
+- Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Cela signifie que chaque entrée influence le runtime par ses données ; cela ne signifie pas que des centaines de niveaux, IA ou plaques ont tous été fabriqués individuellement à la main. L'audit classe honnêtement les 27 promesses en **5 effectives**, **15 systémiques** et **7 partielles**.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Les 436 campagnes sont reliées à leur monde et objectif, les 800 seeds couvrent le domaine des dangers, et 27 atlas normalisés (432 cellules gardées) alimentent les acteurs runtime. Cela signifie que chaque entrée influence le runtime par ses données ; cela ne signifie pas que des centaines de niveaux ont tous été fabriqués individuellement à la main. L'audit classe honnêtement les 27 promesses en **5 effectives**, **18 systémiques** et **4 partielles**.
 
 ## Contrôles
 
@@ -41,7 +42,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v51 |
+| Catalogue | Total v52 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -64,16 +65,17 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate v51 final local : lint de **59 modules**, **81/81 tests Node** et build statique **51.0.0** de **3 443 entrées**.
+Gate v52 finale locale : lint de **72 modules**, **105/105 tests Node** et build statique **52.0.0** de **3 443 entrées**.
 
-`scripts/browser-qa-v51.mjs` valide **10 checkpoints** réels dans un contexte Chrome local isolé : boot v51 et accessibilité, stratégie avec diplomatie temporisée/cooldown, dotation, mission de production et captions, reprise native après rechargement, retraite persistée, crise physique du hub, Forge mission/vaisseau, rechargement mobile et fermeture PWA hors ligne. Le service worker couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le dernier passage ne relève aucune exception, erreur console ni requête échouée.
+`npm.cmd run qa:browser:v52` valide **12 checkpoints** réels dans un contexte Chrome isolé : boot v52, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le dernier passage ne relève aucune exception, erreur console ni requête échouée.
 
 ## Dossier de production
 
 - [Source consolidée des promesses v1→v51](docs/GAMEPLAY_PROMISE_SOURCE_V51.md)
-- [Matrice d'audit et preuves exécutables](docs/GAMEPLAY_PROMISE_AUDIT_V51.md)
-- [Architecture runtime v51](docs/ARCHITECTURE_V51.md)
-- [Historique de release v51](docs/VERSION_HISTORY_V51.md)
+- [Matrice d'audit et preuves exécutables v52](docs/GAMEPLAY_PROMISE_AUDIT_V52.md)
+- [Architecture runtime v52](docs/ARCHITECTURE_V52.md)
+- [Historique de release v52](docs/VERSION_HISTORY_V52.md)
+- [Audit v51 conservé](docs/GAMEPLAY_PROMISE_AUDIT_V51.md)
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
 - [Audit level design v50 et comparaison avec Aliens: Infestation](docs/LEVEL_DESIGN_AUDIT_V50.md)
 - [Bible sprites et animations](docs/SPRITE_ANIMATION_BIBLE.md)

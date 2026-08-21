@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '51.0.0',
-  subtitle: 'Effective Gameplay Contract & Persistent Frontier Simulation',
-  sourceVersion: '50.0.0'
+  version: '52.0.0',
+  subtitle: 'Manifest-Driven Squad & Multiroute Frontier Worlds',
+  sourceVersion: '51.0.0'
 });

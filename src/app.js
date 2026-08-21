@@ -17,7 +17,8 @@ import {
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { GameEngine } from './game-production-runtime.js';
-import { HubGame, HUB_DECKS } from './hub-v51-runtime.js';
+import { buildMissionLevelV52 } from './mission-levels-v52.js';
+import { HubGame, HUB_DECKS } from './hub-v52-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 
@@ -570,11 +571,22 @@ function launchCampaign(campaign = null) {
   const equipment = operationLoadout.equipment;
   const vehicle = operationLoadout.vehicle;
   const costume = operationLoadout.costume;
-  const levelSeed = LEVEL_SEEDS[CAMPAIGNS.indexOf(campaign) % LEVEL_SEEDS.length];
+  const missionLevel = buildMissionLevelV52({
+    campaign,
+    world: { ...world, ...worldState },
+    levelSeeds: LEVEL_SEEDS,
+    variant: 0
+  });
+  const levelSeed = missionLevel.levelSeed;
+  Object.assign(deployment.operation, {
+    levelSeedId: levelSeed.id,
+    missionTemplateId: missionLevel.templateId,
+    missionLevelSignature: missionLevel.signature
+  });
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
   saveSystem.commit();
   byId('mission-title').textContent = campaign.name;
-  byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · RISQUE ${deployment.operation.risk}%`;
+  byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
   engine.setCoop(saveSystem.data.settings.coop);
   engine.start({
@@ -588,6 +600,7 @@ function launchCampaign(campaign = null) {
     vehicle,
     costume,
     levelSeed,
+    missionLevel,
     apexDossier: operationLoadout.apexDossier,
     neuroProfile: operationLoadout.neuroProfile,
     difficulty: operationLoadout.difficulty,
@@ -627,6 +640,45 @@ function handleGameEvent(event) {
     if (saveSystem.data.settings.subtitles) log.textContent = `SOUS-TITRE · ${event.text || event.channel || ''}`;
     return;
   }
+  if (event.type === 'mission-level-ready') {
+    log.textContent = `NIVEAU ${String(event.templateId || '').toUpperCase()} · ${event.routes} routes · ${event.zones} zones · ${event.events} événements`;
+  }
+  if (event.type === 'mission-zone') {
+    log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${String(event.biome || 'inconnu').toUpperCase()}`;
+  }
+  if (event.type === 'mission-level-event') {
+    recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
+    log.textContent = `ÉVÉNEMENT TERRAIN · ${String(event.eventId || '').toUpperCase()}`;
+  }
+  if (event.type === 'squad-ready') {
+    log.textContent = `ESCOUADE DÉPLOYÉE · ${event.members?.length || 0} alliés IA physiques · ${event.animationSheets || 0} plaques animées`;
+  }
+  if (event.type === 'squad-action') {
+    log.textContent = `ESCOUADE · ${String(event.action || 'support').toUpperCase()} · ${event.crewId || 'allié'}`;
+  }
+  if (event.type === 'squad-down') {
+    recordOperationFlag(saveSystem.data, `squad-down-${event.crewId}`);
+    log.textContent = `ALLIÉ À TERRE · ${event.crewId} · ${event.revivable ? 'réanimation possible' : 'aucun médecin disponible'}`;
+  }
+  if (event.type === 'squad-revived') {
+    recordOperationFlag(saveSystem.data, `squad-revived-${event.targetId}`);
+    log.textContent = `RÉANIMATION · ${event.crewId} a stabilisé ${event.targetId}`;
+  }
+  if (event.type === 'squad-lost') {
+    const lost = saveSystem.data.crew.find((member) => member.id === event.crewId);
+    if (lost && lost.status !== 'deceased') {
+      lost.health = 0;
+      lost.status = 'deceased';
+      lost.injuries = Array.isArray(lost.injuries) ? lost.injuries : [];
+      lost.injuries.push({ type: 'mission-casualty', day: saveSystem.data.clock.day, severity: 100 });
+      if (!saveSystem.data.memorial.some((entry) => entry.crewId === lost.id && entry.campaignId === saveSystem.data.strategy.currentOperation?.campaignId)) {
+        saveSystem.data.memorial.push({ crewId: lost.id, day: saveSystem.data.clock.day, campaignId: saveSystem.data.strategy.currentOperation?.campaignId, reason: 'squad-lost' });
+      }
+      saveSystem.data.statistics.deaths += 1;
+    }
+    recordOperationFlag(saveSystem.data, `squad-lost-${event.crewId}`);
+    log.textContent = `PERTE CONFIRMÉE · ${event.name || event.crewId} rejoint le mémorial`;
+  }
   if (event.type === 'shot') saveSystem.data.statistics.shots += 1;
   if (event.type === 'kill') {
     saveSystem.data.statistics.kills += 1;
@@ -663,7 +715,8 @@ function handleGameEvent(event) {
   const persistentEvents = new Set([
     'checkpoint', 'power-restored', 'shortcut', 'archive-recovered', 'supply', 'resource',
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
-    'equipment-used', 'objective-action'
+    'equipment-used', 'objective-action', 'mission-zone', 'mission-level-event',
+    'squad-action', 'squad-down', 'squad-revived', 'squad-lost'
   ]);
   if (persistentEvents.has(event.type) && saveSystem.data.strategy.currentOperation) {
     persistMissionResumeState();
@@ -897,7 +950,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v51-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v52-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v50",
+  "release": "v52",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -280,6 +280,240 @@
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
       "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+    },
+    {
+      "id": "npc.rook.locomotion",
+      "family": "npc",
+      "subject": "Rook",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/rook-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_ART_WAVE_1_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-d35976d8-c308-4a4e-af80-86ce6d6cc988.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.inez-harlow.locomotion",
+      "family": "npc",
+      "subject": "Inez Harlow",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/inez-harlow-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_ART_WAVE_1_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-dcaf239d-42d4-4b26-813a-f3d263bc8006.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.david-8r.locomotion",
+      "family": "npc",
+      "subject": "DAVID-8R",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/david-8r-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/david-8r-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_ART_WAVE_1_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-f2ec05cd-31b0-464d-902d-3cdf18fc6b7f.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.jun-park.locomotion",
+      "family": "npc",
+      "subject": "Jun Park",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/jun-park-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/jun-park-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_WAVE_3_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-ce668f5d-b49d-486a-b7c6-6bb8329742fe.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.asha-mbaye.locomotion",
+      "family": "npc",
+      "subject": "Asha Mbaye",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/asha-mbaye-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/asha-mbaye-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_WAVE_3_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-62a240a8-51dd-485e-af44-776badbc8a23.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.pablo-reyes.locomotion",
+      "family": "npc",
+      "subject": "Pablo Reyes",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/pablo-reyes-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/pablo-reyes-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_NPC_WAVE_3_PROMPTS.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-a791f25a-2eb6-4865-a9f5-9568059e64bf.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.echo-a.locomotion",
+      "family": "npc",
+      "subject": "ECHO-A",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/echo-a-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/echo-a-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_ECHO_A_PROMPT.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-c4bf00c2-5774-4c84-9532-e3689ec7f2a3.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.leila-sorensen.locomotion",
+      "family": "npc",
+      "subject": "Leila Sørensen",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/leila-s-rensen-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_LEILA_PROMPT.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-2d419a1e-18e7-49bf-944d-2276dbc1276a.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
+    },
+    {
+      "id": "npc.cal-mercer.locomotion",
+      "family": "npc",
+      "subject": "Cal Mercer",
+      "wave": "v52",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/cal-mercer-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-locomotion",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "promptDocument": "/docs/prompts/V52_CAL_MERCER_PROMPT.md",
+        "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021cb-bfa4-7812-999f-92069d309261\\exec-34e27d09-e2b5-423e-b7d5-91f59bff54b3.png"
+      },
+      "runtime": {
+        "status": "gallery-only",
+        "consumers": [
+          "src/v50-visuals.js"
+        ]
+      }
     },
     {
       "id": "vehicle.m577-apc.action",

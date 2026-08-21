@@ -1,4 +1,4 @@
-const sheet = (id, file, title, description, family) => ({
+const sheet = (id, file, title, description, family, wave = 'v50') => ({
   id,
   file: `/assets/openai/sprites/normalized/${file}`,
   title,
@@ -8,7 +8,7 @@ const sheet = (id, file, title, description, family) => ({
   kind: 'animation',
   grid: '4×4',
   frames: 16,
-  wave: 'v50',
+  wave,
   alt: `Plaque d’animation ${title} générée par OpenAI et normalisée en RGBA`
 });
 
@@ -31,4 +31,16 @@ export const V50_SPRITE_VISUALS = Object.freeze([
   sheet('v50-maksim-orlov', 'npcs/maksim-orlov-locomotion-sheet.png', 'Maksim Orlov — PNJ', 'Idle, marche, pilotage et réaction d’alerte.', 'npc'),
   sheet('v50-m577-apc', 'vehicles/m577-apc-action-sheet.png', 'M577 APC — actions', 'Ralenti moteur, roulage, tourelle et dommages critiques.', 'vehicle'),
   sheet('v50-m41a', 'weapons/m41a-pulse-rifle-action-sheet.png', 'M41A — actions', 'Arme au repos, recul, rechargement et incident de tir.', 'weapon')
+]);
+
+export const V52_NPC_SPRITE_VISUALS = Object.freeze([
+  sheet('v52-rook', 'npcs/rook-locomotion-sheet.png', 'Rook — PNJ', 'Idle de reconnaissance, marche, scan tactique et réaction d’alerte.', 'npc', 'v52'),
+  sheet('v52-inez-harlow', 'npcs/inez-harlow-locomotion-sheet.png', 'Inez Harlow — PNJ', 'Idle, marche, analyse xénobiologique et réaction d’alerte.', 'npc', 'v52'),
+  sheet('v52-david-8r', 'npcs/david-8r-locomotion-sheet.png', 'DAVID-8R — PNJ', 'Idle synthétique, marche, infiltration technique et réaction d’alerte.', 'npc', 'v52'),
+  sheet('v52-jun-park', 'npcs/jun-park-locomotion-sheet.png', 'Jun Park — PNJ', 'Idle, marche, maintenance technique et réaction d’alarme.', 'npc', 'v52'),
+  sheet('v52-asha-mbaye', 'npcs/asha-mbaye-locomotion-sheet.png', 'Asha Mbaye — PNJ', 'Idle, marche, coordination de liaison et réaction d’alerte.', 'npc', 'v52'),
+  sheet('v52-pablo-reyes', 'npcs/pablo-reyes-locomotion-sheet.png', 'Pablo Reyes — PNJ', 'Idle, marche, travail de démolition et réaction de protection.', 'npc', 'v52'),
+  sheet('v52-echo-a', 'npcs/echo-a-locomotion-sheet.png', 'ECHO-A — PNJ', 'Idle synthétique, marche tactique, diagnostic d’assaut et réaction d’alerte.', 'npc', 'v52'),
+  sheet('v52-leila-sorensen', 'npcs/leila-s-rensen-locomotion-sheet.png', 'Leila Sørensen — PNJ', 'Idle, marche d’éclaireuse, travail Pathfinder et réaction environnementale.', 'npc', 'v52'),
+  sheet('v52-cal-mercer', 'npcs/cal-mercer-locomotion-sheet.png', 'Cal Mercer — PNJ', 'Idle, marche lourde, maintenance véhicule et réaction d’alarme.', 'npc', 'v52')
 ]);

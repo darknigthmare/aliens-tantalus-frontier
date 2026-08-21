@@ -1,4 +1,4 @@
-const CACHE = 'atf-v51-shell-4';
+const CACHE = 'atf-v52-runtime-1';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
   '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
@@ -6,7 +6,44 @@ const CORE = [
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
-  '/src/hub-v51-runtime.js', '/src/hub-game.js', '/src/editor.js', '/src/audio.js'
+  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/mission-levels-v52.js',
+  '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/editor.js', '/src/audio.js',
+  '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png',
+  '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
+  '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/tamsin-velez-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/noor-okafor-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/bishop-9-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/david-8r-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/jun-park-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/asha-mbaye-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/pablo-reyes-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/echo-a-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png',
+  '/assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png',
+  '/assets/openai/metroidvania/tantalus-mission-far.png',
+  '/assets/openai/metroidvania/tantalus-mission-mid.png',
+  '/assets/openai/metroidvania/tantalus-mission-foreground.png',
+  '/assets/openai/metroidvania/colony-multiroute-far.png',
+  '/assets/openai/metroidvania/colony-multiroute-mid.png',
+  '/assets/openai/metroidvania/colony-multiroute-foreground.png',
+  '/assets/openai/metroidvania/planet-exterior-far.png',
+  '/assets/openai/metroidvania/planet-exterior-mid.png',
+  '/assets/openai/metroidvania/planet-exterior-foreground.png'
 ];
 
 self.addEventListener('install', (event) => event.waitUntil(

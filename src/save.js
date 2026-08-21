@@ -525,7 +525,9 @@ const sanitizeNativeResumeValue = (value, depth = 0) => {
   if (depth > 8 || value === undefined || typeof value === 'function') return null;
   if (value === null || typeof value === 'boolean') return value;
   if (typeof value === 'string') return value.slice(0, 180);
-  if (typeof value === 'number') return Number.isFinite(value) ? Math.max(-999999999, Math.min(999999999, value)) : 0;
+  if (typeof value === 'number') return Number.isFinite(value)
+    ? Math.max(-Number.MAX_SAFE_INTEGER, Math.min(Number.MAX_SAFE_INTEGER, value))
+    : 0;
   if (Array.isArray(value)) return value.slice(0, 256).map((entry) => sanitizeNativeResumeValue(entry, depth + 1));
   if (!isRecord(value)) return null;
   return Object.fromEntries(Object.entries(value)

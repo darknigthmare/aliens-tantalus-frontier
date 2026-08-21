@@ -9,16 +9,21 @@ const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 
-const [manifest, report, gameSource, hubSource] = await Promise.all([
+const [manifest, report, gameSource, hubSource, gallerySource] = await Promise.all([
   readFile(manifestPath, 'utf8').then(JSON.parse),
   readFile(reportPath, 'utf8').then(JSON.parse),
   readFile(resolve(repoRoot, 'src/game.js'), 'utf8'),
-  readFile(resolve(repoRoot, 'src/hub-game.js'), 'utf8')
+  readFile(resolve(repoRoot, 'src/hub-game.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/v50-visuals.js'), 'utf8')
 ]);
 
 const runtimeSources = new Map([
   ['src/game.js', gameSource],
   ['src/hub-game.js', hubSource]
+]);
+
+const gallerySources = new Map([
+  ['src/v50-visuals.js', gallerySource]
 ]);
 
 const toRepoPath = (publicPath) => publicPath.replace(/^\//, '');
@@ -40,12 +45,25 @@ function repoPathFromAbsolute(file) {
   return relative(repoRoot, file).split(sep).join('/');
 }
 
-test('the v50 sprite manifest covers every raw and normalized 4x4 sheet', async () => {
-  assert.equal(manifest.release, 'v50');
+test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v52', async () => {
+  assert.equal(manifest.release, 'v52');
   assert.equal(manifest.normalization.status, 'ready');
   assert.equal(manifest.normalization.rawMastersPreserved, true);
-  assert.equal(manifest.sheets.length, 18);
+  assert.equal(manifest.sheets.length, 27);
   assert.equal(new Set(manifest.sheets.map((sheet) => sheet.id)).size, manifest.sheets.length);
+
+  const v52NpcSheets = manifest.sheets.filter((sheet) => sheet.wave === 'v52');
+  assert.equal(v52NpcSheets.length, 9);
+  for (const sheet of v52NpcSheets) {
+    assert.equal(sheet.family, 'npc', `${sheet.id}: v52 family`);
+    assert.equal(sheet.provenance.provider, 'OpenAI ImageGen', `${sheet.id}: provenance provider`);
+    assert.match(sheet.provenance.sourceAsset, /^[A-Z]:.+\.png$/i, `${sheet.id}: ImageGen source path`);
+    await access(absoluteFromPublic(sheet.provenance.promptDocument));
+    assert.deepEqual(sheet.runtime, {
+      status: 'gallery-only',
+      consumers: ['src/v50-visuals.js']
+    }, `${sheet.id}: honest gallery-only claim`);
+  }
 
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
@@ -60,7 +78,7 @@ test('the v50 sprite manifest covers every raw and normalized 4x4 sheet', async 
   assert.deepEqual(
     manifest.sheets.map((sheet) => toRepoPath(sheet.files.raw)).sort(),
     rawFiles,
-    'every raw v50 master must have exactly one manifest entry'
+    'every raw sprite master must have exactly one manifest entry'
   );
   assert.deepEqual(
     manifest.sheets.map((sheet) => toRepoPath(sheet.files.normalized)).sort(),
@@ -117,7 +135,10 @@ test('the v50 sprite manifest covers every raw and normalized 4x4 sheet', async 
   }
 });
 
-test('the v50 normalization report certifies 1024x1024 RGBA sheets and transparent guards', async () => {
+test('the shared normalization report certifies 27 RGBA atlases and 432 guarded cells', async () => {
+  assert.equal(report.release, 'v52');
+  assert.equal(report.spriteAtlasCount, 27);
+  assert.equal(report.spriteCellCount, 432);
   assert.deepEqual(report.grid, { columns: 4, rows: 4, cellSize: 256, guard: 16 });
   assert.equal(report.rawMastersPreserved, true);
   assert.equal(report.spriteAtlases.length, manifest.sheets.length);
@@ -137,21 +158,35 @@ test('the v50 normalization report certifies 1024x1024 RGBA sheets and transpare
   }
 });
 
-test('player, xenomorph and NPC runtime claims match source references exactly', () => {
+test('runtime and gallery-only consumer claims match source references exactly', () => {
   const referenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'referenced');
+  const galleryOnly = manifest.sheets.filter((sheet) => sheet.runtime.status === 'gallery-only');
   const notReferenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'not-referenced');
 
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
-  assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'NPC sheet must be referenced');
-  assert.equal(notReferenced.length, 0, 'all 18 v50 sheets must now be integrated');
+  assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
+  assert.equal(referenced.length, 18, 'the original 18 sheets retain direct game/hub consumers');
+  assert.equal(galleryOnly.length, 9, 'the nine v52 NPC sheets are exposed by the gallery only');
+  assert.ok(galleryOnly.every((sheet) => sheet.wave === 'v52'), 'only v52 NPC sheets may be gallery-only');
+  assert.equal(notReferenced.length, 0, 'all 27 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
-    const actualConsumers = [...runtimeSources]
+    const runtimeConsumers = [...runtimeSources]
       .filter(([, source]) => source.includes(sheet.files.normalized))
       .map(([file]) => file);
-    const expectedStatus = actualConsumers.length ? 'referenced' : 'not-referenced';
+    const galleryRegistryPath = sheet.files.normalized.replace('/assets/openai/sprites/normalized/', '');
+    const galleryConsumers = [...gallerySources]
+      .filter(([, source]) => source.includes(galleryRegistryPath))
+      .map(([file]) => file);
+    const expectedStatus = runtimeConsumers.length
+      ? 'referenced'
+      : galleryConsumers.length
+        ? 'gallery-only'
+        : 'not-referenced';
+    const expectedConsumers = expectedStatus === 'referenced' ? runtimeConsumers : galleryConsumers;
+
     assert.equal(sheet.runtime.status, expectedStatus, `${sheet.id}: honest integration status`);
-    assert.deepEqual(sheet.runtime.consumers, actualConsumers, `${sheet.id}: exact runtime consumers`);
+    assert.deepEqual(sheet.runtime.consumers, expectedConsumers, `${sheet.id}: exact declared consumers`);
   }
 });

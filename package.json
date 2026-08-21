@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "51.0.0",
+  "version": "52.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,9 @@
     "lint": "node scripts/lint.mjs",
     "normalize:sprites": "node scripts/sprite-sheet-normalize.mjs",
     "build": "node scripts/build.mjs",
-    "qa": "npm run lint && npm test && npm run build"
+    "qa:browser:v52": "node scripts/browser-qa-v52.mjs",
+    "qa": "npm run lint && npm test && npm run build",
+    "qa:release": "npm run qa && npm run qa:browser:v52"
   },
   "engines": {
     "node": ">=20"

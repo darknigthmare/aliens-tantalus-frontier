@@ -11,10 +11,11 @@ const [app, html, styles] = await Promise.all([
   readFile(stylesPath, 'utf8')
 ]);
 
-test('le point d’entrée v51 branche les runtimes de production et toutes les conséquences', () => {
+test('le point d’entrée v52 branche niveaux, escouade, hub et conséquences de production', () => {
   for (const contract of [
     "from './game-production-runtime.js'",
-    "from './hub-v51-runtime.js'",
+    "from './mission-levels-v52.js'",
+    "from './hub-v52-runtime.js'",
     "from './world-crisis.js'",
     "from './campaign-consequences.js'",
     "from './advanced-systems.js'",
@@ -26,9 +27,14 @@ test('le point d’entrée v51 branche les runtimes de production et toutes les 
     'procureCatalogItem', 'equipCatalogItem', 'selectStrategicVehicle', 'assignCrewMember',
     'treatCrewMember', 'applyCostume', 'performDiplomacy', 'selectNeuroProfile',
     'selectApexDossier', 'beginOperation', 'resolveOperation', 'applyCampaignConsequence',
-    'advanceGalaxy', 'resolveHubCrisisEvent'
+    'advanceGalaxy', 'resolveHubCrisisEvent', 'buildMissionLevelV52'
   ]) assert.match(app, new RegExp(`\\b${action}\\b`), `${action} doit être raccordé`);
 
+  assert.match(app, /missionLevel,/);
+  assert.match(app, /missionTemplateId:/);
+  assert.match(app, /mission-level-event/);
+  assert.match(app, /squad-action/);
+  assert.match(app, /squad-lost/);
   assert.match(app, /editor\.validate\(\)/);
   assert.match(app, /editor\.undo\(\)/);
   assert.match(app, /editor\.redo\(\)/);
@@ -61,9 +67,10 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
+  assert.match(html, /v52\.0\.0/);
 });
 
-test('la couche visuelle v51 reste modulaire, tactile et accessible', () => {
+test('la couche visuelle v52 reste modulaire, tactile et accessible', () => {
   assert.match(styles, /@import url\('\/styles-v50\.css'\)/);
   assert.match(styles, /\.strategy-grid/);
   assert.match(styles, /\.operations-layout/);

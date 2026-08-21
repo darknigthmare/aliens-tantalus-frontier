@@ -2,10 +2,13 @@ import {
   GameEngine as ProductionCoreEngine,
   buildEnemyEncounterEligibility as buildCoreEnemyEncounterEligibility
 } from './game-production-core.js';
+import { withV52MissionRuntime } from './game-v52-runtime.js';
+import { withV52LevelRuntime } from './game-v52-level-runtime.js';
 
 export * from './game-production-core.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+const V52ProductionEngine = withV52MissionRuntime(withV52LevelRuntime(ProductionCoreEngine));
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -18,7 +21,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends ProductionCoreEngine {
+export class GameEngine extends V52ProductionEngine {
   applyCostumeRuntime() {
     if (!this.costumeRuntime?.active || !this.player) return;
     this.player.maxArmor = 100 + this.costumeRuntime.armor;
