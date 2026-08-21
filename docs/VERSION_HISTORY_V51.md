@@ -10,7 +10,7 @@
 
 La v51 est une passe de gameplay et de vérité de production. Son objectif n'est pas d'augmenter les compteurs, mais de donner un consommateur réel aux promesses historiques : planifier, équiper, jouer, échouer ou réussir, puis retrouver les conséquences dans la sauvegarde.
 
-Le catalogue v50 reste la source additive. Aucun volume n'a été réduit : 64 mondes, 436 campagnes, 146 armes, 106 équipements, 568 ennemis, 279 véhicules, 244 Apex, 234 Neuro-Xeno, 16 membres, 392 costumes, 159 modules et 800 graines de niveau.
+Le catalogue v50 reste la source additive. Aucun volume n'a été réduit : 64 mondes, 436 campagnes, 146 armes, 106 équipements, 568 ennemis, 279 véhicules, 244 Apex, 234 Neuro-Xeno, 16 membres, 392 costumes, 158 modules et 800 graines de niveau.
 
 ## Différence fonctionnelle avec la v50
 
@@ -51,7 +51,7 @@ La taille active est limitée à quatre. Une opération utilise les membres disp
 
 ### Modules du Tantalus
 
-Les 159 modules passent par :
+Les 158 modules passent par :
 
 - devis crédits/alliage ;
 - puissance disponible et charge installée ;

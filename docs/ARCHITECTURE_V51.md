@@ -98,7 +98,7 @@ Ce module possède les mutations stratégiques de base :
 
 Ces modules portent :
 
-- installation, charge électrique, intégrité, dégâts et réparation des 159 modules ;
+- installation, charge électrique, intégrité, dégâts et réparation des 158 modules ;
 - sélection d'un dossier Apex et résolution de sa cible ;
 - sélection d'un profil Neuro-Xeno compatible ;
 - modèle de signal, difficulté de contrôle et mode d'échec ;
