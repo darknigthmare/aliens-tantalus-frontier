@@ -10,6 +10,9 @@ export class LevelEditor {
     this.tool = 'floor';
     this.tiles = new Map();
     this.dragging = false;
+    this.lastPaintKey = null;
+    this.history = [];
+    this.future = [];
     this.shipMode = false;
     this.bind();
     this.draw();
@@ -22,35 +25,105 @@ export class LevelEditor {
       const y = Math.floor(((event.clientY - rect.top) / rect.height) * this.rows);
       if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
       const key = `${x}:${y}`;
-      if (event.button === 2 || event.shiftKey) this.tiles.delete(key);
-      else this.tiles.set(key, this.tool);
-      this.draw();
-      this.onChange(this.serialize());
+      const erase = event.button === 2 || event.shiftKey;
+      if (this.lastPaintKey === `${key}:${erase ? 'erase' : this.tool}`) return;
+      this.lastPaintKey = `${key}:${erase ? 'erase' : this.tool}`;
+      this.mutate(() => {
+        if (erase) this.tiles.delete(key);
+        else this.tiles.set(key, this.tool);
+      });
     };
     this.canvas.addEventListener('pointerdown', (event) => { this.dragging = true; paint(event); });
     this.canvas.addEventListener('pointermove', (event) => { if (this.dragging) paint(event); });
-    globalThis.addEventListener('pointerup', () => { this.dragging = false; });
+    globalThis.addEventListener('pointerup', () => { this.dragging = false; this.lastPaintKey = null; });
     this.canvas.addEventListener('contextmenu', (event) => event.preventDefault());
   }
 
   setTool(tool) { if (TILE_TYPES.includes(tool)) this.tool = tool; }
-  setShipMode(enabled) { this.shipMode = Boolean(enabled); this.draw(); }
-  clear() { this.tiles.clear(); this.draw(); this.onChange(this.serialize()); }
+  setShipMode(enabled) {
+    const next = Boolean(enabled);
+    if (next === this.shipMode) return;
+    this.mutate(() => { this.shipMode = next; });
+  }
+
+  state() {
+    return { shipMode: this.shipMode, tiles: [...this.tiles] };
+  }
+
+  restore(state, notify = true) {
+    this.shipMode = Boolean(state.shipMode);
+    this.tiles = new Map(state.tiles || []);
+    this.draw();
+    if (notify) this.onChange(this.serialize());
+  }
+
+  mutate(callback) {
+    const before = this.state();
+    const signature = JSON.stringify(before);
+    callback();
+    if (JSON.stringify(this.state()) === signature) return;
+    this.history.push(before);
+    this.history = this.history.slice(-100);
+    this.future = [];
+    this.draw();
+    this.onChange(this.serialize());
+  }
+
+  clear() { this.mutate(() => this.tiles.clear()); }
+
+  undo() {
+    const previous = this.history.pop();
+    if (!previous) return false;
+    this.future.push(this.state());
+    this.restore(previous);
+    return true;
+  }
+
+  redo() {
+    const next = this.future.pop();
+    if (!next) return false;
+    this.history.push(this.state());
+    this.restore(next);
+    return true;
+  }
+
+  validate() {
+    const counts = Object.fromEntries(TILE_TYPES.map((type) => [type, 0]));
+    for (const type of this.tiles.values()) if (Object.hasOwn(counts, type)) counts[type] += 1;
+    const errors = [];
+    if (!counts.spawn) errors.push('Un point de spawn est requis.');
+    if (!counts.objective) errors.push('Un objectif est requis.');
+    if (!(counts.floor || counts.platform)) errors.push('Au moins un sol ou une plateforme est requis.');
+    return { ok: errors.length === 0, errors, counts };
+  }
+
+  getSnapshot() {
+    return {
+      ...this.serialize(),
+      tool: this.tool,
+      canUndo: this.history.length > 0,
+      canRedo: this.future.length > 0
+    };
+  }
 
   serialize() {
     return {
-      schema: 1,
+      schema: 2,
       kind: this.shipMode ? 'ship' : 'mission',
       size: [this.cols, this.rows],
-      tiles: [...this.tiles].map(([position, type]) => ({ position, type }))
+      tiles: [...this.tiles].map(([position, type]) => ({ position, type })),
+      validation: this.validate()
     };
   }
 
   load(project) {
     if (!project?.tiles) throw new Error('Projet éditeur invalide.');
+    this.history.push(this.state());
+    this.future = [];
     this.shipMode = project.kind === 'ship';
     this.tiles = new Map(project.tiles.map((tile) => [tile.position, tile.type]));
     this.draw();
+    this.onChange(this.serialize());
   }
 
   draw() {

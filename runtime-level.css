@@ -188,3 +188,43 @@ html.mission-mode body {
     inset: auto max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom));
   }
 }
+
+@media (orientation: portrait) and (max-width: 720px) {
+  .hub-mode .hub-level-shell,
+  .mission-mode .game-frame {
+    position: static;
+    inset: auto;
+    width: 100vw;
+    margin: 0;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: visible;
+  }
+
+  .hub-mode .hub-touch-controls,
+  .mission-mode .mission-touch-controls {
+    position: static;
+    inset: auto;
+    display: grid;
+    width: 100%;
+    padding: 0 10px max(8px, env(safe-area-inset-bottom));
+    opacity: .78;
+  }
+
+  .hub-mode .hub-touch-controls {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .mission-mode .mission-touch-controls {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .hub-mode .hub-touch-controls button,
+  .mission-mode .mission-touch-controls button {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+  }
+}
