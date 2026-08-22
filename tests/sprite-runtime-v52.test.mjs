@@ -21,7 +21,7 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   const report = spriteRuntimeReport();
   assert.equal(report.invalid.length, 0);
   assert.equal(report.runtimeReady, report.sheets);
-  assert.ok(report.sheets >= 27);
+  assert.equal(report.sheets, 31);
 
   const crewIds = new Set(CREW.map((member) => member.id));
   assert.deepEqual(new Set(Object.keys(CREW_SPRITE_IDS)), crewIds);
@@ -70,7 +70,7 @@ test('le contrôleur émet chaque événement de frame une seule fois par transi
 
   const first = controller.sample('player', request, 10);
   assert.equal(first.frame, 4);
-  assert.deepEqual(first.events, []);
+  assert.deepEqual(first.events.map((event) => event.event), ['weapon:shot']);
 
   controller.sample('player', request, 10.08);
   controller.sample('player', request, 10.08);
@@ -86,4 +86,14 @@ test('le contrôleur émet chaque événement de frame une seule fois par transi
 
   controller.reset('player');
   assert.equal(controller.snapshot().length, 0);
+});
+
+test('les deux plaques ennemies v54 exposent le contrat action QA-validé', () => {
+  for (const id of ['enemy.pathogen-mimic.action', 'enemy.pale-crucible-hunter.action']) {
+    const sheet = resolveSpriteSheet(id);
+    assert.equal(sheet.sourceFacing, 1);
+    assert.equal(sheet.identityVerified, true);
+    assert.deepEqual(SPRITE_CLIP_SETS[sheet.clipSet].map((clip) => [clip.id, clip.row]), [['idle', 0], ['chase', 1], ['attack', 2], ['death', 3]]);
+    assert.ok(SPRITE_HITBOXES[sheet.hitbox].width >= 192);
+  }
 });

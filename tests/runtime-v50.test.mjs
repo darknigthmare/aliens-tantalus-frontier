@@ -39,7 +39,9 @@ test('v50 mission runtime builds a vertical Metroidvania traversal graph', () =>
         { id: 'queen', name: 'Xenomorph Queen', caste: 'royal', biology: 'xenomorph', health: 220, damage: 22, speed: 0.8 },
         { id: 'hugger', name: 'Facehugger', biology: 'xenomorph', health: 30, damage: 8, speed: 1.7 },
         { id: 'neo', name: 'Neomorph', biology: 'pathogen', health: 90, damage: 14, speed: 1.5 },
-        { id: 'joe', name: 'Working Joe', biology: 'synthetic', health: 100, damage: 12, speed: 0.9 }
+        { id: 'joe', name: 'Working Joe', biology: 'synthetic', health: 100, damage: 12, speed: 0.9 },
+        { id: 'mimic', name: 'Pathogen Mimic', biology: 'pathogen', health: 96, damage: 16, speed: 1.35 },
+        { id: 'pale', name: 'Pale Crucible Hunter', biology: 'xenomorph', health: 118, damage: 18, speed: 1.4 }
       ]
     });
     const snapshot = engine.getSnapshot();
@@ -51,6 +53,19 @@ test('v50 mission runtime builds a vertical Metroidvania traversal graph', () =>
     assert.deepEqual({ w: snapshot.player.w, h: snapshot.player.h }, { w: 42, h: 92 });
     assert.equal(snapshot.assets.missing.length, 0);
     assert.ok(new Set(engine.enemies.map((enemy) => enemy.spriteKey)).size >= 5);
+    const mimic = engine.enemies.find((enemy) => enemy.spriteKey === 'pathogenMimic');
+    const pale = engine.enemies.find((enemy) => enemy.spriteKey === 'paleCrucibleHunter');
+    assert.equal(mimic?.behavior, 'hunter');
+    assert.equal(pale?.behavior, 'pouncer');
+    assert.equal(engine.images.get('pathogenMimic')?.currentSrc, '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png');
+    assert.equal(engine.images.get('paleCrucibleHunter')?.currentSrc, '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png');
+
+    const drawCalls = [];
+    const drawContext = { save() {}, restore() {}, translate() {}, scale() {}, drawImage(...args) { drawCalls.push(args); }, fillRect() {} };
+    engine.drawEnemy(drawContext, { ...mimic, alert: false, attacking: false, facing: -1 });
+    assert.deepEqual(drawCalls.at(-1).slice(-2), [132, 96]);
+    engine.drawEnemy(drawContext, { ...pale, alert: false, attacking: false, facing: -1 });
+    assert.deepEqual(drawCalls.at(-1).slice(-2), [142, 106]);
     assert.equal(engine.weaponPickup.taken, false);
   } finally {
     globalThis.Image = previousImage;

@@ -2,6 +2,8 @@
 
 Date de génération : 20 août 2026. Fournisseur : OpenAI ImageGen. Les quatre masters v47 sous `assets/openai/` ont été créés durant cette production et non copiés depuis un jeu. Les huit plaques ajoutées en v47.1 et leurs prompts exacts sont consignés dans [`ART_PROVENANCE_V47_1.md`](ART_PROVENANCE_V47_1.md). Les références servent à la fidélité d’un projet dont l’utilisateur déclare détenir la licence.
 
+La vague v54 ajoute cinq masters ImageGen réellement intégrés — Echo‑9 combat, Xenomorph Runner, Ripper Queen, Pathogen Mimic et Pale Crucible Hunter — avec chemins, prompts, variantes rejetées et gates techniques détaillés dans [`ART_PROVENANCE_V54.md`](ART_PROVENANCE_V54.md).
+
 ## Sources de direction visuelle
 
 - [Focus Entertainment — correctif officiel citant Tantalus Base, son lift, la queen room, le P-5000, la mountain door et les sentries](https://support.focus-entmt.com/hc/en-us/articles/12816621940754-PC-PLAYSTATION-XBOX-UPDATE-AUGUST-1-2023)

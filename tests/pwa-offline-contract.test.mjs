@@ -60,6 +60,7 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
     ...Object.values(MISSION_LEVEL_LAYER_FILES_V52).flatMap((layers) => Object.values(layers)),
     ...Object.values(MISSION_STRUCTURAL_PROP_FILES),
   ]);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 31);
   for (const assetPath of runtimeAssets) {
     await access(localPath(assetPath));
     assert.ok(
@@ -68,7 +69,7 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
     );
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v53-/);
+  assert.match(worker, /const CACHE = ['"]atf-v54-/);
   assert.match(worker, /event\.request\.mode === 'navigate'/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

@@ -14,7 +14,7 @@ import { resolveEnemyAnimation } from '../src/sprite-animation-runtime.js';
 const EXPECTED = new Map([
   ['Ovomorph', ['xenoDrone', null, null]], ['Facehugger', ['facehugger', null, null]],
   ['Chestburster', ['xenoDrone', null, null]], ['Drone / Big Chap', ['xenoDrone', null, null]],
-  ['Warrior', ['xenoWarrior', null, null]], ['Runner', ['xenoDrone', null, null]],
+  ['Warrior', ['xenoWarrior', null, null]], ['Runner', ['xenoRunner', null, null]],
   ['Praetorian', ['xenoDrone', null, null]], ['Queen', ['xenoQueen', null, null]],
   ['Crusher', ['xenoDrone', null, null]], ['Spitter', ['xenoDrone', null, null]],
   ['Lurker', ['xenoDrone', null, null]], ['Carrier', ['xenoDrone', null, null]],
@@ -23,15 +23,15 @@ const EXPECTED = new Map([
   ['Monica Line', ['xenoDrone', null, null]], ['Specimen Six Line', ['xenoDrone', null, null]],
   ['Red Xenomorph', ['legacy', 'neuroXeno', 0]], ['K-Series Yellow Xenomorph', ['legacy', 'neuroXeno', 1]],
   ['Neuro-Xeno Drone', ['legacy', 'neuroXeno', 3]], ['Xenoborg', ['legacy', 'neuroXeno', 2]],
-  ['ATARAX Ripper', ['legacy', 'neuroXeno', 2]], ['Ripper Queen', ['xenoQueen', null, null]],
+  ['ATARAX Ripper', ['legacy', 'neuroXeno', 2]], ['Ripper Queen', ['ripperQueen', null, null]],
   ['Foundry Drone', ['xenoDrone', null, null]], ['Foundry Crusher', ['xenoDrone', null, null]],
   ['Reef Stalker', ['xenoDrone', null, null]], ['Reef Spitter', ['xenoDrone', null, null]],
-  ['Siege Royal', ['xenoDrone', null, null]], ['Pale Crucible Hunter', ['xenoDrone', null, null]],
-  ['Dust Runner', ['xenoDrone', null, null]], ['Salvage Hive Brute', ['xenoDrone', null, null]],
+  ['Siege Royal', ['xenoDrone', null, null]], ['Pale Crucible Hunter', ['paleCrucibleHunter', null, null]],
+  ['Dust Runner', ['xenoRunner', null, null]], ['Salvage Hive Brute', ['xenoDrone', null, null]],
   ['Arcology Lurker', ['xenoDrone', null, null]], ['Caravan Stalker', ['xenoDrone', null, null]],
   ['Trilobite Echo', ['legacy', 'pathogen', 2]], ['Deacon Line', ['legacy', 'pathogen', 1]],
   ['Neomorph', ['neomorph', null, null]], ['Protomorph', ['legacy', 'pathogen', 1]],
-  ['Abomination', ['legacy', 'pathogen', 2]], ['Pathogen Mimic', ['legacy', 'pathogen', 2]],
+  ['Abomination', ['legacy', 'pathogen', 2]], ['Pathogen Mimic', ['pathogenMimic', null, null]],
   ['Working Joe', ['workingJoe', null, null]], ['Combat Synthetic', ['legacy', 'synthetic', 2]],
   ['Weyland-Yutani Commando', ['legacy', 'human', 1]], ['UPP Vanguard', ['legacy', 'human', 2]],
   ['Seegson Security', ['legacy', 'human', 2]], ['Colonial Raider', ['legacy', 'human', 3]],
@@ -78,14 +78,41 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   const report = enemyVisualCoverageReport(ENEMIES);
   assert.equal(report.total, 568);
   assert.equal(report.uniqueArchetypes, 52);
-  assert.equal(report.modern, 341);
-  assert.equal(report.legacy, 227);
+  assert.equal(report.modern, 352);
+  assert.equal(report.legacy, 216);
   assert.deepEqual(report.bySpriteKey, {
-    xenoDrone: 275, facehugger: 11, xenoWarrior: 11, xenoQueen: 22,
-    legacy: 227, neomorph: 11, workingJoe: 11
+    xenoDrone: 242, facehugger: 11, xenoWarrior: 11, xenoRunner: 22, xenoQueen: 11,
+    ripperQueen: 11, paleCrucibleHunter: 11, legacy: 216, neomorph: 11,
+    pathogenMimic: 11, workingJoe: 11
   });
-  assert.deepEqual(report.byImageKey, { neuroXeno: 55, pathogen: 95, synthetic: 11, human: 66 });
-  assert.deepEqual(report.byIdentityStatus, { 'missing-dedicated-art': 297, exact: 66, 'authored-family': 205 });
+  assert.deepEqual(report.byImageKey, { neuroXeno: 55, pathogen: 84, synthetic: 11, human: 66 });
+  assert.deepEqual(report.byIdentityStatus, { 'missing-dedicated-art': 242, exact: 110, 'authored-family': 216 });
+});
+
+test('Pathogen Mimic et Pale Crucible Hunter utilisent leurs plaques exactes sur les 11 variantes', () => {
+  const expected = new Map([
+    ['Pathogen Mimic', ['pathogenMimic', 'enemy.pathogen-mimic.action']],
+    ['Pale Crucible Hunter', ['paleCrucibleHunter', 'enemy.pale-crucible-hunter.action']]
+  ]);
+  for (const [archetype, [spriteKey, sheetId]] of expected) {
+    const variants = ENEMIES.filter((enemy) => resolveEnemyArchetype(enemy) === archetype);
+    assert.equal(variants.length, 11, archetype);
+    for (const enemy of variants) {
+      const resolved = resolveEnemyVisualProfile(enemy);
+      assert.equal(resolved.spriteKey, spriteKey, enemy.name);
+      assert.equal(resolved.sheetId, sheetId, enemy.name);
+      assert.equal(resolved.identityStatus, 'exact', enemy.name);
+      assert.equal(resolved.approximate, false, enemy.name);
+      assert.equal(resolved.fallbackReason, null, enemy.name);
+    }
+  }
+});
+
+test('Runner et Ripper Queen utilisent leurs plaques v54 dans toutes les phases', () => {
+  assert.equal(resolveEnemyAnimation({ spriteKey: 'xenoRunner', alive: true, alert: true }).sheetId, 'enemy.xenomorph-runner.action');
+  assert.equal(resolveEnemyAnimation({ spriteKey: 'xenoRunner', alive: true, attacking: true }).clipId, 'pounce-bite');
+  assert.equal(resolveEnemyAnimation({ spriteKey: 'ripperQueen', alive: true, attacking: true }).sheetId, 'enemy.ripper-queen.action');
+  assert.equal(resolveEnemyAnimation({ spriteKey: 'ripperQueen', alive: false }).clipId, 'wounded-death');
 });
 
 test('le Combat Synthetic ne devient jamais silencieusement un Working Joe', () => {

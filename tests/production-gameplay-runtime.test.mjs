@@ -166,12 +166,17 @@ test('dynamic stealth makes crouching and cover delay detection and emits spotte
   assert.ok(hidden < standing * 0.65);
   const encounterDistance = Math.min(580, Math.round((standing + hidden) / 2));
   Object.assign(enemy, { x: engine.player.x + encounterDistance, spawnX: engine.player.x + encounterDistance, y: engine.player.y, alert: false, revealed: 0, searchClock: 0 });
+  const squadMember = engine.activeSquadActors()[0];
+  Object.assign(squadMember, { x: enemy.x - 40, y: enemy.y, fireClock: 0, inVehicle: false, alive: true });
   engine.updateEnemy(enemy, 0.05);
   assert.equal(enemy.alert, false, 'crouched player remains hidden');
+  assert.equal(engine.updateSquadCombat(squadMember), false, 'squad holds fire while the contact is unaware');
   Object.assign(engine.player, { crouching: false, inCover: false });
   engine.refreshStealth(engine.player);
   engine.updateEnemy(enemy, 0.05);
   assert.equal(enemy.alert, true, 'standing player is detected at the same range');
+  squadMember.fireClock = 0;
+  assert.equal(engine.updateSquadCombat(squadMember), true, 'squad engages after the contact is detected');
   assert.ok(events.some((event) => event.type === 'spotted' && event.enemyId === enemy.id));
   enemy.x = engine.player.x + 1800;
   enemy.revealed = 0;

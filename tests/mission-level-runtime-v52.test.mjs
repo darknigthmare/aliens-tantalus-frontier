@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GameEngine as ProductionCoreEngine } from '../src/game-production-core.js';
-import { MISSION_STRUCTURAL_PROP_FILES } from '../src/game-v51-runtime.js';
+import {
+  MISSION_STRUCTURAL_PROP_FILES,
+  getMissionSurfaceMetrics
+} from '../src/game-v51-runtime.js';
 import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
 import { MISSION_LEVEL_LAYER_FILES_V52, withV52LevelRuntime } from '../src/game-v52-level-runtime.js';
 import { MISSION_TEMPLATE_IDS_V52, buildMissionLevelV52 } from '../src/mission-levels-v52.js';
@@ -216,4 +219,42 @@ test('les bounds de collision d’un sas fermé égalent ses bounds bitmap', () 
   Object.assign(engine.player, { x: bounds.x - engine.player.w + 3, y: bounds.y + bounds.h - engine.player.h, vx: 120 });
   engine.resolveHorizontal(engine.player, previousX);
   assert.equal(engine.player.x, bounds.x - engine.player.w);
+}));
+
+test('surfaceOffset partage exactement la pose, la collision et le rendu des sols et plateformes', () => withBrowserMocks(() => {
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-surface-contract', objective: 'board a drifting vessel', worldId: WORLDS[6].id };
+  const plan = buildMissionLevelV52({ campaign, world: WORLDS[6], levelSeeds: LEVEL_SEEDS, templateId: 'ship-interior-vertical' });
+  const engine = createEngine();
+  engine.start(optionsFor(plan));
+
+  const platform = { x: 520, y: 704, w: 320, h: 24, art: 'catwalk' };
+  const metrics = getMissionSurfaceMetrics(platform);
+  assert.ok(metrics.surfaceOffset > 0, 'le catwalk possède une ligne de contact interne au bitmap');
+  assert.equal(metrics.renderY + metrics.surfaceOffset, metrics.surfaceY);
+
+  const platformContext = recordingContext();
+  engine.drawPlatform(platformContext, platform);
+  const platformDraw = platformContext.drawCalls.find((call) => call[0] === engine.images.get('catwalk'));
+  assert.ok(platformDraw);
+  assert.equal(platformDraw[2], metrics.renderY);
+  assert.equal(platformDraw[4], metrics.renderHeight);
+
+  const actor = { x: platform.x + 40, y: metrics.surfaceY - 82, w: 42, h: 92, vy: 180, grounded: false };
+  engine.platforms = [platform];
+  engine.resolveVertical(actor, metrics.surfaceY - 5);
+  assert.equal(actor.y + actor.h, metrics.surfaceY);
+  assert.equal(actor.y + actor.h, platformDraw[2] + metrics.surfaceOffset);
+  assert.equal(actor.grounded, true);
+
+  const floor = { x: -200, y: 930, w: 1800, h: 150, art: 'floor', floor: true };
+  const floorMetrics = getMissionSurfaceMetrics(floor);
+  assert.equal(floorMetrics.surfaceOffset, 0);
+  assert.equal(floorMetrics.renderY, floorMetrics.surfaceY);
+  engine.platforms = [floor];
+  const floorContext = recordingContext();
+  engine.drawFloors(floorContext);
+  const floorDraw = floorContext.drawCalls.find((call) => call[0] === engine.images.get('floor'));
+  assert.ok(floorDraw);
+  assert.equal(floorDraw[2], floorMetrics.surfaceY);
+  assert.equal(floorDraw[4], floorMetrics.renderHeight);
 }));

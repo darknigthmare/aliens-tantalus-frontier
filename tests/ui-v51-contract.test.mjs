@@ -67,7 +67,7 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
-  assert.match(html, /v53\.0\.0/);
+  assert.match(html, /v54\.0\.0/);
 });
 
 test('la couche visuelle v52 reste modulaire, tactile et accessible', () => {

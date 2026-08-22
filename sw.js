@@ -1,4 +1,4 @@
-const CACHE = 'atf-v53-runtime-1';
+const CACHE = 'atf-v54-runtime-2';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
   '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
@@ -14,6 +14,10 @@ const CORE = [
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/xenomorph-runner-action-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
+  '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
   '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png',

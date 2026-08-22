@@ -8,6 +8,27 @@ const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
 
+export const MISSION_LEVEL_TIMER_PROFILES = Object.freeze({
+  extraction: Object.freeze({
+    id: 'extraction',
+    label: 'NAVETTE D’EXTRACTION EN APPROCHE',
+    seconds: Object.freeze({ story: 10, standard: 14, nightmare: 18 })
+  })
+});
+
+function timerDuration(profile, difficultyId) {
+  return profile.seconds[difficultyId] || profile.seconds.standard;
+}
+
+function timerSnapshot(timer) {
+  return {
+    id: timer.id, label: timer.label, state: timer.state,
+    duration: timer.duration, remaining: timer.remaining,
+    startedAt: timer.startedAt, completedAt: timer.completedAt,
+    sourceEventId: timer.sourceEventId
+  };
+}
+
 export const MISSION_LEVEL_LAYER_FILES_V52 = Object.freeze({
   'ship-interior-vertical': Object.freeze({
     far: '/assets/openai/metroidvania/tantalus-mission-far.png',
@@ -83,6 +104,9 @@ export function withV52LevelRuntime(BaseEngine) {
         eventFlash: 0
       };
       this.missionLevelTelemetry = { transitions: 0, events: 0, spawns: 0, artChanges: 0, doorChanges: 0, hazardChanges: 0 };
+      this.missionLevelTimers = new Map();
+      this.missionLevelExtractionTimer = null;
+      this.missionLevelExtractionUnlocked = false;
       this.loadMissionLevelArt(plan.templateId);
       this.compileMissionLevelGeometry(plan);
       this.compileMissionLevelActors(plan);
@@ -281,6 +305,7 @@ export function withV52LevelRuntime(BaseEngine) {
       super.update(delta);
       if (!this.missionLevelRuntime || this.mission?.state !== 'active') return;
       this.missionLevelVisualState.eventFlash = Math.max(0, this.missionLevelVisualState.eventFlash - delta * 1.8);
+      this.updateMissionLevelTimers(delta);
       this.refreshMissionLevelZone(false);
       if (this.mission?.objectives?.extract) {
         for (const event of this.missionLevelEvents.values()) if (event.trigger?.type === 'objective-complete') this.triggerMissionLevelEvent(event.id, 'objective-complete');
@@ -301,6 +326,57 @@ export function withV52LevelRuntime(BaseEngine) {
       if (!initial) this.onEvent({ type: 'mission-zone', zoneId: zone.id, name: zone.name, biome: zone.biome });
       for (const event of this.missionLevelEvents.values()) if (event.trigger?.type === 'enter-zone' && event.trigger.zoneId === zone.id) this.triggerMissionLevelEvent(event.id, 'enter-zone');
       return zone;
+    }
+
+    startMissionLevelTimer(timerId, event = {}) {
+      const profile = MISSION_LEVEL_TIMER_PROFILES[timerId];
+      if (!profile) return { timer: null, started: false };
+      const existing = this.missionLevelTimers.get(timerId);
+      if (existing) return { timer: existing, started: false };
+      const duration = timerDuration(profile, this.difficultyRuntime?.id || this.difficulty || 'standard');
+      const timer = {
+        id: profile.id,
+        label: profile.label,
+        state: 'running',
+        duration,
+        remaining: duration,
+        startedAt: Number(this.mission?.elapsed) || 0,
+        completedAt: null,
+        sourceEventId: event.id || null
+      };
+      this.missionLevelTimers.set(timer.id, timer);
+      if (timer.id === 'extraction') {
+        this.missionLevelExtractionTimer = timer;
+        this.missionLevelExtractionUnlocked = false;
+      }
+      this.onEvent({ type: 'mission-timer-started', timerId: timer.id, duration: timer.duration, eventId: timer.sourceEventId });
+      return { timer, started: true };
+    }
+
+    updateMissionLevelTimers(delta) {
+      for (const timer of this.missionLevelTimers?.values() || []) {
+        if (timer.state !== 'running') continue;
+        timer.remaining = Math.max(0, timer.remaining - Math.max(0, Number(delta) || 0));
+        if (timer.remaining > 0) continue;
+        timer.state = 'complete';
+        timer.completedAt = Number(this.mission?.elapsed) || timer.startedAt + timer.duration;
+        if (timer.id === 'extraction') this.missionLevelExtractionUnlocked = true;
+        this.onEvent({ type: 'mission-timer-complete', timerId: timer.id, duration: timer.duration, eventId: timer.sourceEventId });
+      }
+    }
+
+    missingExtractionRequirement() {
+      const inherited = super.missingExtractionRequirement();
+      if (inherited) return inherited;
+      const timer = this.missionLevelTimers?.get('extraction');
+      if (timer?.state === 'running') return `TENIR LA ZONE · ${Math.max(1, Math.ceil(timer.remaining))} S`;
+      return '';
+    }
+
+    phaseLabel() {
+      const timer = this.missionLevelTimers?.get('extraction');
+      if (timer?.state === 'running') return `TENIR LA BALISE · ${Math.max(1, Math.ceil(timer.remaining))} S`;
+      return super.phaseLabel();
     }
 
     triggerMissionLevelEvent(eventId, source = 'runtime') {
@@ -370,8 +446,8 @@ export function withV52LevelRuntime(BaseEngine) {
         return { action, changed: true };
       }
       if (kind === 'timer') {
-        this.missionLevelExtractionTimer = { id: value, startedAt: this.mission?.elapsed || 0 };
-        return { action, changed: true };
+        const result = this.startMissionLevelTimer(value, event);
+        return { action, changed: result.started, duration: result.timer?.duration || 0 };
       }
       if (kind === 'unlock' && value === 'extraction') {
         this.missionLevelExtractionUnlocked = true;
@@ -489,6 +565,25 @@ export function withV52LevelRuntime(BaseEngine) {
       this.drawForegroundPipes(ctx);
     }
 
+    drawHud(ctx) {
+      super.drawHud(ctx);
+      const timer = this.missionLevelTimers?.get('extraction');
+      if (!timer || timer.state !== 'running') return;
+      const x = 474;
+      const y = this.coopEnabled ? 94 : 48;
+      const width = 332;
+      const height = 42;
+      const progress = clamp(1 - timer.remaining / Math.max(1, timer.duration), 0, 1);
+      ctx.save();
+      ctx.fillStyle = 'rgba(18, 7, 5, .9)'; ctx.fillRect(x, y, width, height);
+      ctx.strokeStyle = '#d07855'; ctx.strokeRect(x + 0.5, y + 0.5, width, height);
+      ctx.fillStyle = '#f1c69b'; ctx.font = 'bold 11px monospace';
+      ctx.fillText(`${timer.label} · ${Math.max(1, Math.ceil(timer.remaining))} S`, x + 12, y + 17);
+      ctx.fillStyle = '#3b211a'; ctx.fillRect(x + 12, y + 27, width - 24, 5);
+      ctx.fillStyle = '#df8059'; ctx.fillRect(x + 12, y + 27, (width - 24) * progress, 5);
+      ctx.restore();
+    }
+
     captureResumeState() {
       const state = super.captureResumeState();
       if (!this.missionLevelRuntime) return state;
@@ -501,7 +596,8 @@ export function withV52LevelRuntime(BaseEngine) {
           events: [...this.missionLevelEvents.values()].map((event) => ({ id: event.id, triggered: Boolean(event.triggered), triggerCount: event.triggerCount })),
           spawns: [...this.missionLevelSpawns.values()].map((spawn) => ({ id: spawn.id, active: Boolean(spawn.active), activatedAt: spawn.activatedAt })),
           visualState: { ...this.missionLevelVisualState },
-          telemetry: { ...this.missionLevelTelemetry }
+          telemetry: { ...this.missionLevelTelemetry },
+          timers: [...this.missionLevelTimers.values()].map(timerSnapshot)
         }
       };
     }
@@ -531,6 +627,41 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       if (source.visualState && typeof source.visualState === 'object') Object.assign(this.missionLevelVisualState, source.visualState);
       if (source.telemetry && typeof source.telemetry === 'object') Object.assign(this.missionLevelTelemetry, source.telemetry);
+      const savedTimers = asList(source.timers);
+      for (const saved of savedTimers) {
+        const profile = MISSION_LEVEL_TIMER_PROFILES[saved?.id];
+        if (!profile) continue;
+        const savedDuration = Number(saved.duration);
+        const savedRemaining = Number(saved.remaining);
+        const duration = clamp(Number.isFinite(savedDuration) && savedDuration > 0 ? savedDuration : timerDuration(profile, this.difficultyRuntime?.id || this.difficulty || 'standard'), 1, 600);
+        const state = saved.state === 'complete' ? 'complete' : 'running';
+        const timer = {
+          id: profile.id,
+          label: profile.label,
+          state,
+          duration,
+          remaining: state === 'complete' ? 0 : clamp(Number.isFinite(savedRemaining) ? savedRemaining : duration, 0.01, duration),
+          startedAt: Math.max(0, Number(saved.startedAt) || 0),
+          completedAt: state === 'complete' ? Math.max(0, Number(saved.completedAt) || Number(this.mission?.elapsed) || 0) : null,
+          sourceEventId: typeof saved.sourceEventId === 'string' ? saved.sourceEventId : null
+        };
+        this.missionLevelTimers.set(timer.id, timer);
+        if (timer.id === 'extraction') {
+          this.missionLevelExtractionTimer = timer;
+          this.missionLevelExtractionUnlocked = timer.state === 'complete';
+        }
+      }
+      if (!savedTimers.length) {
+        const legacyTimerEvent = [...this.missionLevelEvents.values()].find((event) => event.triggered && asList(event.actions).includes('timer:extraction'));
+        if (legacyTimerEvent) {
+          const profile = MISSION_LEVEL_TIMER_PROFILES.extraction;
+          const duration = timerDuration(profile, this.difficultyRuntime?.id || this.difficulty || 'standard');
+          const timer = { id: profile.id, label: profile.label, state: 'complete', duration, remaining: 0, startedAt: 0, completedAt: Number(this.mission?.elapsed) || 0, sourceEventId: legacyTimerEvent.id };
+          this.missionLevelTimers.set(timer.id, timer);
+          this.missionLevelExtractionTimer = timer;
+          this.missionLevelExtractionUnlocked = true;
+        }
+      }
       return { ...result, missionLevelRestored: true };
     }
 
@@ -550,7 +681,8 @@ export function withV52LevelRuntime(BaseEngine) {
         events: this.missionLevelEvents ? [...this.missionLevelEvents.values()].map((event) => ({ id: event.id, triggered: event.triggered, triggerCount: event.triggerCount })) : [],
         spawns: this.missionLevelSpawns ? [...this.missionLevelSpawns.values()].map((spawn) => ({ id: spawn.id, active: spawn.active, count: spawn.count })) : [],
         artLayers: MISSION_LEVEL_LAYER_FILES_V52[plan.templateId] || null,
-        telemetry: this.missionLevelTelemetry ? { ...this.missionLevelTelemetry } : null
+        telemetry: this.missionLevelTelemetry ? { ...this.missionLevelTelemetry } : null,
+        timers: this.missionLevelTimers ? [...this.missionLevelTimers.values()].map(timerSnapshot) : []
       };
     }
 

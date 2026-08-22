@@ -1,8 +1,8 @@
 {
-  "release": "v52",
-  "spriteAtlasCount": 27,
-  "spriteCellCount": 432,
-  "pipeline": "OpenAI ImageGen + deterministic non-destructive Pillow flood-fill, stable-scale repack and guard validation",
+  "release": "v54",
+  "spriteAtlasCount": 31,
+  "spriteCellCount": 496,
+  "pipeline": "OpenAI ImageGen + deterministic neutral/chroma extraction, connected-component cell recovery, stable-scale repack and guard validation",
   "grid": {
     "columns": 4,
     "rows": 4,
@@ -526,6 +526,777 @@
       ]
     },
     {
+      "file": "assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.94118,
+      "occupiedPixels": 93491,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            0,
+            0,
+            190,
+            97
+          ],
+          "renderBox": [
+            38,
+            149,
+            179,
+            91
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            0,
+            0,
+            179,
+            100
+          ],
+          "renderBox": [
+            300,
+            146,
+            168,
+            94
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            0,
+            0,
+            200,
+            102
+          ],
+          "renderBox": [
+            546,
+            144,
+            188,
+            96
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            0,
+            0,
+            194,
+            102
+          ],
+          "renderBox": [
+            804,
+            144,
+            183,
+            96
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            0,
+            0,
+            188,
+            85
+          ],
+          "renderBox": [
+            39,
+            416,
+            177,
+            80
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            0,
+            0,
+            200,
+            88
+          ],
+          "renderBox": [
+            290,
+            413,
+            188,
+            83
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            0,
+            0,
+            200,
+            85
+          ],
+          "renderBox": [
+            546,
+            416,
+            188,
+            80
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            0,
+            0,
+            197,
+            86
+          ],
+          "renderBox": [
+            803,
+            415,
+            185,
+            81
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            0,
+            0,
+            176,
+            82
+          ],
+          "renderBox": [
+            45,
+            675,
+            166,
+            77
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            0,
+            0,
+            230,
+            104
+          ],
+          "renderBox": [
+            276,
+            654,
+            216,
+            98
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            0,
+            0,
+            238,
+            112
+          ],
+          "renderBox": [
+            528,
+            647,
+            224,
+            105
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            0,
+            0,
+            196,
+            83
+          ],
+          "renderBox": [
+            804,
+            674,
+            184,
+            78
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            0,
+            0,
+            151,
+            130
+          ],
+          "renderBox": [
+            57,
+            886,
+            142,
+            122
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            0,
+            0,
+            171,
+            130
+          ],
+          "renderBox": [
+            303,
+            886,
+            161,
+            122
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            0,
+            0,
+            175,
+            78
+          ],
+          "renderBox": [
+            557,
+            935,
+            165,
+            73
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            0,
+            0,
+            215,
+            34
+          ],
+          "renderBox": [
+            795,
+            976,
+            202,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 1.12,
+      "occupiedPixels": 137920,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            0,
+            0,
+            173,
+            86
+          ],
+          "renderBox": [
+            31,
+            144,
+            194,
+            96
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            0,
+            0,
+            165,
+            85
+          ],
+          "renderBox": [
+            291,
+            145,
+            185,
+            95
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            0,
+            0,
+            157,
+            135
+          ],
+          "renderBox": [
+            552,
+            89,
+            176,
+            151
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            0,
+            0,
+            157,
+            85
+          ],
+          "renderBox": [
+            808,
+            145,
+            176,
+            95
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            0,
+            0,
+            178,
+            86
+          ],
+          "renderBox": [
+            28,
+            400,
+            199,
+            96
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            0,
+            0,
+            185,
+            85
+          ],
+          "renderBox": [
+            280,
+            401,
+            207,
+            95
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            0,
+            0,
+            185,
+            77
+          ],
+          "renderBox": [
+            536,
+            410,
+            207,
+            86
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            0,
+            0,
+            179,
+            76
+          ],
+          "renderBox": [
+            796,
+            411,
+            200,
+            85
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            0,
+            0,
+            137,
+            81
+          ],
+          "renderBox": [
+            51,
+            661,
+            153,
+            91
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            0,
+            0,
+            200,
+            103
+          ],
+          "renderBox": [
+            272,
+            637,
+            224,
+            115
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            0,
+            0,
+            163,
+            78
+          ],
+          "renderBox": [
+            548,
+            665,
+            183,
+            87
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            0,
+            0,
+            120,
+            79
+          ],
+          "renderBox": [
+            829,
+            664,
+            134,
+            88
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            0,
+            0,
+            132,
+            90
+          ],
+          "renderBox": [
+            54,
+            907,
+            148,
+            101
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            0,
+            0,
+            142,
+            84
+          ],
+          "renderBox": [
+            304,
+            914,
+            159,
+            94
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            0,
+            0,
+            161,
+            56
+          ],
+          "renderBox": [
+            550,
+            945,
+            180,
+            63
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            0,
+            0,
+            174,
+            37
+          ],
+          "renderBox": [
+            798,
+            967,
+            195,
+            41
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.71565,
+      "occupiedPixels": 185320,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            30,
+            98,
+            280,
+            308
+          ],
+          "renderBox": [
+            38,
+            90,
+            179,
+            150
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            13,
+            96,
+            269,
+            308
+          ],
+          "renderBox": [
+            292,
+            88,
+            183,
+            152
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            35,
+            60,
+            260,
+            306
+          ],
+          "renderBox": [
+            559,
+            64,
+            161,
+            176
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            0,
+            101,
+            224,
+            307
+          ],
+          "renderBox": [
+            816,
+            93,
+            160,
+            147
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            24,
+            82,
+            270,
+            280
+          ],
+          "renderBox": [
+            40,
+            354,
+            176,
+            142
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            6,
+            79,
+            245,
+            282
+          ],
+          "renderBox": [
+            298,
+            351,
+            171,
+            145
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            0,
+            81,
+            313,
+            282
+          ],
+          "renderBox": [
+            528,
+            352,
+            224,
+            144
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            0,
+            79,
+            268,
+            282
+          ],
+          "renderBox": [
+            800,
+            351,
+            192,
+            145
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            15,
+            50,
+            314,
+            259
+          ],
+          "renderBox": [
+            21,
+            602,
+            214,
+            150
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            0,
+            55,
+            304,
+            264
+          ],
+          "renderBox": [
+            275,
+            602,
+            218,
+            150
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            0,
+            25,
+            313,
+            262
+          ],
+          "renderBox": [
+            528,
+            582,
+            224,
+            170
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            0,
+            79,
+            289,
+            267
+          ],
+          "renderBox": [
+            792,
+            617,
+            207,
+            135
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            23,
+            32,
+            314,
+            235
+          ],
+          "renderBox": [
+            24,
+            863,
+            208,
+            145
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            0,
+            0,
+            313,
+            236
+          ],
+          "renderBox": [
+            272,
+            839,
+            224,
+            169
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            0,
+            109,
+            313,
+            237
+          ],
+          "renderBox": [
+            528,
+            916,
+            224,
+            92
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            0,
+            140,
+            302,
+            235
+          ],
+          "renderBox": [
+            788,
+            940,
+            216,
+            68
+          ]
+        }
+      ]
+    },
+    {
       "file": "assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png",
       "sourceSize": [
         1254,
@@ -793,23 +1564,23 @@
         1024
       ],
       "mode": "RGBA",
-      "scale": 0.71338,
-      "occupiedPixels": 194941,
+      "scale": 0.71565,
+      "occupiedPixels": 184949,
       "guardViolations": 0,
       "cells": [
         {
           "cell": 0,
           "sourceBox": [
-            0,
-            0,
+            40,
+            62,
             300,
             314
           ],
           "renderBox": [
-            21,
-            16,
-            214,
-            224
+            35,
+            60,
+            186,
+            180
           ]
         },
         {
@@ -822,9 +1593,9 @@
           ],
           "renderBox": [
             290,
-            70,
-            187,
-            170
+            69,
+            188,
+            171
           ]
         },
         {
@@ -837,9 +1608,9 @@
           ],
           "renderBox": [
             558,
-            65,
+            64,
             163,
-            175
+            176
           ]
         },
         {
@@ -868,7 +1639,7 @@
           "renderBox": [
             30,
             346,
-            195,
+            196,
             150
           ]
         },
@@ -883,7 +1654,7 @@
           "renderBox": [
             272,
             348,
-            223,
+            224,
             148
           ]
         },
@@ -897,24 +1668,24 @@
           ],
           "renderBox": [
             528,
-            338,
-            223,
-            158
+            337,
+            224,
+            159
           ]
         },
         {
           "cell": 7,
           "sourceBox": [
-            0,
+            17,
             119,
             260,
             306
           ],
           "renderBox": [
-            803,
-            363,
-            185,
-            133
+            809,
+            362,
+            174,
+            134
           ]
         },
         {
@@ -927,9 +1698,9 @@
           ],
           "renderBox": [
             34,
-            584,
-            187,
-            168
+            583,
+            188,
+            169
           ]
         },
         {
@@ -942,9 +1713,9 @@
           ],
           "renderBox": [
             310,
-            576,
+            575,
             148,
-            176
+            177
           ]
         },
         {
@@ -958,7 +1729,7 @@
           "renderBox": [
             529,
             597,
-            221,
+            222,
             155
           ]
         },
@@ -972,9 +1743,9 @@
           ],
           "renderBox": [
             805,
-            629,
+            628,
             182,
-            123
+            124
           ]
         },
         {
@@ -986,10 +1757,10 @@
             248
           ],
           "renderBox": [
-            33,
-            844,
-            190,
-            164
+            32,
+            843,
+            191,
+            165
           ]
         },
         {
@@ -1003,7 +1774,7 @@
           "renderBox": [
             281,
             853,
-            205,
+            206,
             155
           ]
         },
@@ -1017,9 +1788,9 @@
           ],
           "renderBox": [
             528,
-            932,
-            223,
-            76
+            931,
+            224,
+            77
           ]
         },
         {
@@ -1028,13 +1799,13 @@
             0,
             177,
             284,
-            262
+            254
           ],
           "renderBox": [
             794,
-            947,
+            953,
             203,
-            61
+            55
           ]
         }
       ]
@@ -1051,7 +1822,7 @@
       ],
       "mode": "RGBA",
       "scale": 0.71565,
-      "occupiedPixels": 156075,
+      "occupiedPixels": 154474,
       "guardViolations": 0,
       "cells": [
         {
@@ -1223,15 +1994,15 @@
           "cell": 11,
           "sourceBox": [
             10,
-            0,
+            134,
             235,
             295
           ],
           "renderBox": [
             815,
-            541,
+            637,
             161,
-            211
+            115
           ]
         },
         {
@@ -1308,7 +2079,7 @@
       ],
       "mode": "RGBA",
       "scale": 0.75676,
-      "occupiedPixels": 267172,
+      "occupiedPixels": 252536,
       "guardViolations": 0,
       "cells": [
         {
@@ -1554,6 +2325,263 @@
       ]
     },
     {
+      "file": "assets/openai/sprites/normalized/enemies/xenomorph-runner-action-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.71565,
+      "occupiedPixels": 100864,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            26,
+            164,
+            293,
+            277
+          ],
+          "renderBox": [
+            32,
+            159,
+            191,
+            81
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            29,
+            157,
+            284,
+            278
+          ],
+          "renderBox": [
+            293,
+            153,
+            182,
+            87
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            22,
+            181,
+            284,
+            278
+          ],
+          "renderBox": [
+            546,
+            171,
+            188,
+            69
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            10,
+            183,
+            273,
+            277
+          ],
+          "renderBox": [
+            802,
+            173,
+            188,
+            67
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            19,
+            128,
+            294,
+            231
+          ],
+          "renderBox": [
+            29,
+            422,
+            197,
+            74
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            4,
+            136,
+            279,
+            245
+          ],
+          "renderBox": [
+            285,
+            418,
+            197,
+            78
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            0,
+            130,
+            286,
+            224
+          ],
+          "renderBox": [
+            537,
+            429,
+            205,
+            67
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            0,
+            134,
+            285,
+            252
+          ],
+          "renderBox": [
+            794,
+            412,
+            204,
+            84
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            23,
+            142,
+            269,
+            228
+          ],
+          "renderBox": [
+            40,
+            690,
+            176,
+            62
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            10,
+            97,
+            287,
+            219
+          ],
+          "renderBox": [
+            285,
+            665,
+            198,
+            87
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            11,
+            63,
+            272,
+            176
+          ],
+          "renderBox": [
+            546,
+            671,
+            187,
+            81
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            18,
+            140,
+            274,
+            236
+          ],
+          "renderBox": [
+            804,
+            683,
+            183,
+            69
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            34,
+            62,
+            254,
+            202
+          ],
+          "renderBox": [
+            49,
+            908,
+            157,
+            100
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            6,
+            107,
+            313,
+            205
+          ],
+          "renderBox": [
+            274,
+            938,
+            220,
+            70
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            0,
+            128,
+            313,
+            207
+          ],
+          "renderBox": [
+            528,
+            951,
+            224,
+            57
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            0,
+            155,
+            282,
+            208
+          ],
+          "renderBox": [
+            795,
+            970,
+            202,
+            38
+          ]
+        }
+      ]
+    },
+    {
       "file": "assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png",
       "sourceSize": [
         1254,
@@ -1565,7 +2593,7 @@
       ],
       "mode": "RGBA",
       "scale": 0.71565,
-      "occupiedPixels": 217438,
+      "occupiedPixels": 201866,
       "guardViolations": 0,
       "cells": [
         {
@@ -1663,13 +2691,13 @@
           "sourceBox": [
             17,
             53,
-            313,
+            234,
             308
           ],
           "renderBox": [
-            534,
+            562,
             314,
-            212,
+            155,
             182
           ]
         },
@@ -1806,6 +2834,263 @@
             945,
             202,
             63
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/asha-mbaye-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.76712,
+      "occupiedPixels": 174779,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            140,
+            14,
+            233,
+            306
+          ],
+          "renderBox": [
+            92,
+            16,
+            71,
+            224
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            436,
+            14,
+            530,
+            306
+          ],
+          "renderBox": [
+            348,
+            16,
+            72,
+            224
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            726,
+            14,
+            819,
+            306
+          ],
+          "renderBox": [
+            604,
+            16,
+            71,
+            224
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1015,
+            14,
+            1109,
+            306
+          ],
+          "renderBox": [
+            860,
+            16,
+            72,
+            224
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            97,
+            331,
+            265,
+            610
+          ],
+          "renderBox": [
+            63,
+            282,
+            129,
+            214
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            380,
+            334,
+            551,
+            610
+          ],
+          "renderBox": [
+            318,
+            284,
+            131,
+            212
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            674,
+            331,
+            844,
+            609
+          ],
+          "renderBox": [
+            575,
+            283,
+            130,
+            213
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            978,
+            331,
+            1117,
+            608
+          ],
+          "renderBox": [
+            842,
+            284,
+            107,
+            212
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            124,
+            636,
+            252,
+            921
+          ],
+          "renderBox": [
+            79,
+            533,
+            98,
+            219
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            410,
+            637,
+            502,
+            921
+          ],
+          "renderBox": [
+            348,
+            534,
+            71,
+            218
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            701,
+            637,
+            850,
+            921
+          ],
+          "renderBox": [
+            583,
+            534,
+            114,
+            218
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            992,
+            637,
+            1093,
+            921
+          ],
+          "renderBox": [
+            857,
+            534,
+            77,
+            218
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            102,
+            944,
+            241,
+            1222
+          ],
+          "renderBox": [
+            74,
+            795,
+            107,
+            213
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            379,
+            946,
+            566,
+            1222
+          ],
+          "renderBox": [
+            312,
+            796,
+            143,
+            212
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            677,
+            1006,
+            826,
+            1218
+          ],
+          "renderBox": [
+            583,
+            845,
+            114,
+            163
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            972,
+            948,
+            1105,
+            1222
+          ],
+          "renderBox": [
+            845,
+            798,
+            102,
+            210
           ]
         }
       ]
@@ -2068,6 +3353,777 @@
       ]
     },
     {
+      "file": "assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.76712,
+      "occupiedPixels": 204377,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            161,
+            32,
+            277,
+            324
+          ],
+          "renderBox": [
+            85,
+            32,
+            85,
+            208
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            446,
+            34,
+            559,
+            324
+          ],
+          "renderBox": [
+            342,
+            34,
+            83,
+            206
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            706,
+            33,
+            823,
+            324
+          ],
+          "renderBox": [
+            597,
+            34,
+            87,
+            206
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            997,
+            32,
+            1112,
+            324
+          ],
+          "renderBox": [
+            854,
+            32,
+            84,
+            208
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            131,
+            344,
+            299,
+            618
+          ],
+          "renderBox": [
+            66,
+            294,
+            124,
+            202
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            398,
+            349,
+            579,
+            618
+          ],
+          "renderBox": [
+            317,
+            297,
+            133,
+            199
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            682,
+            351,
+            847,
+            618
+          ],
+          "renderBox": [
+            579,
+            299,
+            122,
+            197
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            956,
+            350,
+            1135,
+            618
+          ],
+          "renderBox": [
+            830,
+            298,
+            132,
+            198
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            159,
+            637,
+            292,
+            913
+          ],
+          "renderBox": [
+            79,
+            549,
+            98,
+            203
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            418,
+            641,
+            565,
+            914
+          ],
+          "renderBox": [
+            330,
+            551,
+            108,
+            201
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            703,
+            641,
+            878,
+            915
+          ],
+          "renderBox": [
+            576,
+            551,
+            128,
+            201
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            983,
+            638,
+            1098,
+            915
+          ],
+          "renderBox": [
+            853,
+            548,
+            85,
+            204
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            130,
+            944,
+            282,
+            1213
+          ],
+          "renderBox": [
+            72,
+            809,
+            112,
+            199
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            397,
+            956,
+            574,
+            1211
+          ],
+          "renderBox": [
+            319,
+            821,
+            130,
+            187
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            678,
+            1010,
+            835,
+            1212
+          ],
+          "renderBox": [
+            582,
+            859,
+            116,
+            149
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            969,
+            945,
+            1103,
+            1214
+          ],
+          "renderBox": [
+            846,
+            811,
+            99,
+            197
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/david-8r-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.76976,
+      "occupiedPixels": 180792,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            155,
+            16,
+            241,
+            306
+          ],
+          "renderBox": [
+            95,
+            17,
+            66,
+            223
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            432,
+            16,
+            518,
+            306
+          ],
+          "renderBox": [
+            351,
+            17,
+            66,
+            223
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            718,
+            16,
+            804,
+            306
+          ],
+          "renderBox": [
+            607,
+            17,
+            66,
+            223
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1002,
+            16,
+            1088,
+            306
+          ],
+          "renderBox": [
+            863,
+            17,
+            66,
+            223
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            111,
+            326,
+            262,
+            614
+          ],
+          "renderBox": [
+            70,
+            274,
+            116,
+            222
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            396,
+            326,
+            564,
+            614
+          ],
+          "renderBox": [
+            319,
+            274,
+            129,
+            222
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            688,
+            326,
+            858,
+            614
+          ],
+          "renderBox": [
+            574,
+            274,
+            131,
+            222
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            963,
+            331,
+            1137,
+            614
+          ],
+          "renderBox": [
+            829,
+            278,
+            134,
+            218
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            139,
+            634,
+            257,
+            920
+          ],
+          "renderBox": [
+            82,
+            532,
+            91,
+            220
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            437,
+            635,
+            591,
+            920
+          ],
+          "renderBox": [
+            324,
+            533,
+            119,
+            219
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            730,
+            635,
+            835,
+            920
+          ],
+          "renderBox": [
+            599,
+            533,
+            81,
+            219
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            991,
+            635,
+            1090,
+            920
+          ],
+          "renderBox": [
+            858,
+            533,
+            76,
+            219
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            110,
+            935,
+            260,
+            1224
+          ],
+          "renderBox": [
+            70,
+            786,
+            115,
+            222
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            392,
+            941,
+            558,
+            1223
+          ],
+          "renderBox": [
+            320,
+            791,
+            128,
+            217
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            702,
+            940,
+            818,
+            1224
+          ],
+          "renderBox": [
+            595,
+            789,
+            89,
+            219
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            997,
+            933,
+            1085,
+            1224
+          ],
+          "renderBox": [
+            862,
+            784,
+            68,
+            224
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/echo-a-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.74419,
+      "occupiedPixels": 166929,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            122,
+            18,
+            253,
+            318
+          ],
+          "renderBox": [
+            79,
+            17,
+            97,
+            223
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            433,
+            17,
+            564,
+            318
+          ],
+          "renderBox": [
+            335,
+            16,
+            97,
+            224
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            723,
+            17,
+            852,
+            318
+          ],
+          "renderBox": [
+            592,
+            16,
+            96,
+            224
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1020,
+            17,
+            1150,
+            318
+          ],
+          "renderBox": [
+            847,
+            16,
+            97,
+            224
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            83,
+            331,
+            246,
+            613
+          ],
+          "renderBox": [
+            67,
+            286,
+            121,
+            210
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            395,
+            331,
+            557,
+            613
+          ],
+          "renderBox": [
+            323,
+            286,
+            121,
+            210
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            701,
+            331,
+            844,
+            613
+          ],
+          "renderBox": [
+            587,
+            286,
+            106,
+            210
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            994,
+            332,
+            1146,
+            613
+          ],
+          "renderBox": [
+            839,
+            287,
+            113,
+            209
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            106,
+            629,
+            238,
+            927
+          ],
+          "renderBox": [
+            79,
+            530,
+            98,
+            222
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            427,
+            629,
+            547,
+            927
+          ],
+          "renderBox": [
+            339,
+            530,
+            89,
+            222
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            713,
+            630,
+            847,
+            928
+          ],
+          "renderBox": [
+            590,
+            530,
+            100,
+            222
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            1020,
+            632,
+            1149,
+            929
+          ],
+          "renderBox": [
+            848,
+            531,
+            96,
+            221
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            69,
+            946,
+            234,
+            1229
+          ],
+          "renderBox": [
+            66,
+            797,
+            123,
+            211
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            387,
+            946,
+            566,
+            1229
+          ],
+          "renderBox": [
+            317,
+            797,
+            133,
+            211
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            698,
+            1014,
+            872,
+            1226
+          ],
+          "renderBox": [
+            575,
+            850,
+            129,
+            158
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            1019,
+            945,
+            1147,
+            1231
+          ],
+          "renderBox": [
+            848,
+            795,
+            95,
+            213
+          ]
+        }
+      ]
+    },
+    {
       "file": "assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png",
       "sourceSize": [
         1024,
@@ -2320,6 +4376,777 @@
             795,
             121,
             213
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.78596,
+      "occupiedPixels": 168727,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            135,
+            16,
+            218,
+            301
+          ],
+          "renderBox": [
+            95,
+            16,
+            65,
+            224
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            420,
+            16,
+            535,
+            301
+          ],
+          "renderBox": [
+            339,
+            16,
+            90,
+            224
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            713,
+            16,
+            815,
+            301
+          ],
+          "renderBox": [
+            600,
+            16,
+            80,
+            224
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1015,
+            16,
+            1128,
+            301
+          ],
+          "renderBox": [
+            851,
+            16,
+            89,
+            224
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            110,
+            327,
+            270,
+            594
+          ],
+          "renderBox": [
+            65,
+            286,
+            126,
+            210
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            394,
+            327,
+            552,
+            595
+          ],
+          "renderBox": [
+            322,
+            285,
+            124,
+            211
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            692,
+            327,
+            853,
+            595
+          ],
+          "renderBox": [
+            576,
+            285,
+            127,
+            211
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            991,
+            327,
+            1150,
+            594
+          ],
+          "renderBox": [
+            833,
+            286,
+            125,
+            210
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            113,
+            656,
+            242,
+            849
+          ],
+          "renderBox": [
+            77,
+            600,
+            101,
+            152
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            403,
+            654,
+            533,
+            850
+          ],
+          "renderBox": [
+            333,
+            598,
+            102,
+            154
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            709,
+            655,
+            838,
+            850
+          ],
+          "renderBox": [
+            589,
+            599,
+            101,
+            153
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            978,
+            613,
+            1118,
+            848
+          ],
+          "renderBox": [
+            841,
+            567,
+            110,
+            185
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            123,
+            890,
+            236,
+            1156
+          ],
+          "renderBox": [
+            83,
+            799,
+            89,
+            209
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            419,
+            890,
+            517,
+            1155
+          ],
+          "renderBox": [
+            345,
+            800,
+            77,
+            208
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            707,
+            957,
+            824,
+            1150
+          ],
+          "renderBox": [
+            594,
+            856,
+            92,
+            152
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            1022,
+            890,
+            1130,
+            1156
+          ],
+          "renderBox": [
+            853,
+            799,
+            85,
+            209
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/jun-park-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.81455,
+      "occupiedPixels": 207926,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            107,
+            15,
+            203,
+            290
+          ],
+          "renderBox": [
+            89,
+            16,
+            78,
+            224
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            398,
+            16,
+            493,
+            290
+          ],
+          "renderBox": [
+            345,
+            17,
+            77,
+            223
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            707,
+            17,
+            801,
+            290
+          ],
+          "renderBox": [
+            601,
+            18,
+            77,
+            222
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            997,
+            19,
+            1091,
+            291
+          ],
+          "renderBox": [
+            857,
+            18,
+            77,
+            222
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            78,
+            322,
+            230,
+            585
+          ],
+          "renderBox": [
+            66,
+            282,
+            124,
+            214
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            379,
+            324,
+            490,
+            586
+          ],
+          "renderBox": [
+            339,
+            283,
+            90,
+            213
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            665,
+            324,
+            835,
+            585
+          ],
+          "renderBox": [
+            571,
+            283,
+            138,
+            213
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            969,
+            322,
+            1105,
+            584
+          ],
+          "renderBox": [
+            840,
+            283,
+            111,
+            213
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            88,
+            623,
+            226,
+            893
+          ],
+          "renderBox": [
+            72,
+            532,
+            112,
+            220
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            365,
+            630,
+            522,
+            895
+          ],
+          "renderBox": [
+            320,
+            536,
+            128,
+            216
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            673,
+            637,
+            840,
+            895
+          ],
+          "renderBox": [
+            572,
+            542,
+            136,
+            210
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            985,
+            625,
+            1122,
+            893
+          ],
+          "renderBox": [
+            840,
+            534,
+            112,
+            218
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            73,
+            930,
+            211,
+            1183
+          ],
+          "renderBox": [
+            72,
+            802,
+            112,
+            206
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            354,
+            949,
+            504,
+            1183
+          ],
+          "renderBox": [
+            323,
+            817,
+            122,
+            191
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            655,
+            1015,
+            814,
+            1181
+          ],
+          "renderBox": [
+            575,
+            873,
+            130,
+            135
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            987,
+            930,
+            1116,
+            1183
+          ],
+          "renderBox": [
+            843,
+            802,
+            105,
+            206
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.8,
+      "occupiedPixels": 203759,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            131,
+            34,
+            249,
+            314
+          ],
+          "renderBox": [
+            81,
+            16,
+            94,
+            224
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            412,
+            33,
+            534,
+            313
+          ],
+          "renderBox": [
+            335,
+            16,
+            98,
+            224
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            702,
+            37,
+            828,
+            314
+          ],
+          "renderBox": [
+            589,
+            18,
+            101,
+            222
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1005,
+            35,
+            1122,
+            315
+          ],
+          "renderBox": [
+            849,
+            16,
+            94,
+            224
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            94,
+            344,
+            265,
+            609
+          ],
+          "renderBox": [
+            59,
+            284,
+            137,
+            212
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            397,
+            342,
+            533,
+            609
+          ],
+          "renderBox": [
+            329,
+            282,
+            109,
+            214
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            681,
+            341,
+            844,
+            609
+          ],
+          "renderBox": [
+            575,
+            282,
+            130,
+            214
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            992,
+            341,
+            1153,
+            609
+          ],
+          "renderBox": [
+            831,
+            282,
+            129,
+            214
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            121,
+            633,
+            252,
+            903
+          ],
+          "renderBox": [
+            75,
+            536,
+            105,
+            216
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            413,
+            636,
+            551,
+            903
+          ],
+          "renderBox": [
+            329,
+            538,
+            110,
+            214
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            679,
+            732,
+            841,
+            902
+          ],
+          "renderBox": [
+            575,
+            616,
+            130,
+            136
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            972,
+            632,
+            1166,
+            903
+          ],
+          "renderBox": [
+            818,
+            535,
+            155,
+            217
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            88,
+            939,
+            278,
+            1201
+          ],
+          "renderBox": [
+            52,
+            798,
+            152,
+            210
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            386,
+            966,
+            556,
+            1201
+          ],
+          "renderBox": [
+            316,
+            820,
+            136,
+            188
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            679,
+            1053,
+            837,
+            1200
+          ],
+          "renderBox": [
+            577,
+            890,
+            126,
+            118
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            965,
+            953,
+            1107,
+            1201
+          ],
+          "renderBox": [
+            839,
+            810,
+            114,
+            198
           ]
         }
       ]
@@ -3096,6 +5923,520 @@
       ]
     },
     {
+      "file": "assets/openai/sprites/normalized/npcs/pablo-reyes-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.78049,
+      "occupiedPixels": 237174,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            100,
+            16,
+            222,
+            301
+          ],
+          "renderBox": [
+            80,
+            18,
+            95,
+            222
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            395,
+            16,
+            517,
+            301
+          ],
+          "renderBox": [
+            336,
+            18,
+            95,
+            222
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            700,
+            16,
+            822,
+            301
+          ],
+          "renderBox": [
+            592,
+            18,
+            95,
+            222
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            1007,
+            16,
+            1130,
+            302
+          ],
+          "renderBox": [
+            848,
+            17,
+            96,
+            223
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            81,
+            330,
+            244,
+            605
+          ],
+          "renderBox": [
+            64,
+            281,
+            127,
+            215
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            379,
+            329,
+            548,
+            605
+          ],
+          "renderBox": [
+            318,
+            281,
+            132,
+            215
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            684,
+            329,
+            852,
+            605
+          ],
+          "renderBox": [
+            574,
+            281,
+            131,
+            215
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            992,
+            329,
+            1158,
+            606
+          ],
+          "renderBox": [
+            831,
+            280,
+            130,
+            216
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            72,
+            654,
+            235,
+            875
+          ],
+          "renderBox": [
+            64,
+            580,
+            127,
+            172
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            372,
+            659,
+            576,
+            876
+          ],
+          "renderBox": [
+            304,
+            583,
+            159,
+            169
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            690,
+            657,
+            868,
+            876
+          ],
+          "renderBox": [
+            570,
+            581,
+            139,
+            171
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            1002,
+            638,
+            1160,
+            877
+          ],
+          "renderBox": [
+            834,
+            565,
+            123,
+            187
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            80,
+            906,
+            221,
+            1192
+          ],
+          "renderBox": [
+            73,
+            785,
+            110,
+            223
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            380,
+            930,
+            521,
+            1194
+          ],
+          "renderBox": [
+            329,
+            802,
+            110,
+            206
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            687,
+            1008,
+            843,
+            1194
+          ],
+          "renderBox": [
+            579,
+            863,
+            122,
+            145
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            999,
+            907,
+            1145,
+            1194
+          ],
+          "renderBox": [
+            839,
+            784,
+            114,
+            224
+          ]
+        }
+      ]
+    },
+    {
+      "file": "assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "scale": 0.86486,
+      "occupiedPixels": 225910,
+      "guardViolations": 0,
+      "cells": [
+        {
+          "cell": 0,
+          "sourceBox": [
+            112,
+            36,
+            242,
+            295
+          ],
+          "renderBox": [
+            72,
+            16,
+            112,
+            224
+          ]
+        },
+        {
+          "cell": 1,
+          "sourceBox": [
+            392,
+            36,
+            522,
+            295
+          ],
+          "renderBox": [
+            328,
+            16,
+            112,
+            224
+          ]
+        },
+        {
+          "cell": 2,
+          "sourceBox": [
+            700,
+            37,
+            829,
+            295
+          ],
+          "renderBox": [
+            584,
+            17,
+            112,
+            223
+          ]
+        },
+        {
+          "cell": 3,
+          "sourceBox": [
+            993,
+            36,
+            1122,
+            295
+          ],
+          "renderBox": [
+            840,
+            16,
+            112,
+            224
+          ]
+        },
+        {
+          "cell": 4,
+          "sourceBox": [
+            77,
+            339,
+            221,
+            597
+          ],
+          "renderBox": [
+            65,
+            273,
+            125,
+            223
+          ]
+        },
+        {
+          "cell": 5,
+          "sourceBox": [
+            377,
+            340,
+            523,
+            598
+          ],
+          "renderBox": [
+            321,
+            273,
+            126,
+            223
+          ]
+        },
+        {
+          "cell": 6,
+          "sourceBox": [
+            681,
+            339,
+            836,
+            597
+          ],
+          "renderBox": [
+            573,
+            273,
+            134,
+            223
+          ]
+        },
+        {
+          "cell": 7,
+          "sourceBox": [
+            991,
+            341,
+            1132,
+            598
+          ],
+          "renderBox": [
+            835,
+            274,
+            122,
+            222
+          ]
+        },
+        {
+          "cell": 8,
+          "sourceBox": [
+            95,
+            643,
+            245,
+            901
+          ],
+          "renderBox": [
+            63,
+            529,
+            130,
+            223
+          ]
+        },
+        {
+          "cell": 9,
+          "sourceBox": [
+            392,
+            643,
+            554,
+            901
+          ],
+          "renderBox": [
+            314,
+            529,
+            140,
+            223
+          ]
+        },
+        {
+          "cell": 10,
+          "sourceBox": [
+            686,
+            643,
+            830,
+            901
+          ],
+          "renderBox": [
+            577,
+            529,
+            125,
+            223
+          ]
+        },
+        {
+          "cell": 11,
+          "sourceBox": [
+            989,
+            646,
+            1113,
+            901
+          ],
+          "renderBox": [
+            842,
+            531,
+            107,
+            221
+          ]
+        },
+        {
+          "cell": 12,
+          "sourceBox": [
+            89,
+            949,
+            208,
+            1201
+          ],
+          "renderBox": [
+            76,
+            790,
+            103,
+            218
+          ]
+        },
+        {
+          "cell": 13,
+          "sourceBox": [
+            377,
+            951,
+            545,
+            1201
+          ],
+          "renderBox": [
+            311,
+            792,
+            145,
+            216
+          ]
+        },
+        {
+          "cell": 14,
+          "sourceBox": [
+            675,
+            978,
+            865,
+            1201
+          ],
+          "renderBox": [
+            558,
+            815,
+            164,
+            193
+          ]
+        },
+        {
+          "cell": 15,
+          "sourceBox": [
+            987,
+            946,
+            1112,
+            1201
+          ],
+          "renderBox": [
+            842,
+            787,
+            108,
+            221
+          ]
+        }
+      ]
+    },
+    {
       "file": "assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png",
       "sourceSize": [
         1024,
@@ -3620,248 +6961,248 @@
         1024
       ],
       "mode": "RGBA",
-      "scale": 0.76976,
-      "occupiedPixels": 194053,
+      "scale": 0.78322,
+      "occupiedPixels": 193176,
       "guardViolations": 0,
       "cells": [
         {
           "cell": 0,
           "sourceBox": [
-            83,
-            41,
-            226,
-            309
+            88,
+            46,
+            243,
+            302
           ],
           "renderBox": [
-            73,
-            34,
-            110,
-            206
+            67,
+            39,
+            121,
+            201
           ]
         },
         {
           "cell": 1,
           "sourceBox": [
-            69,
-            40,
-            239,
-            309
+            85,
+            48,
+            250,
+            302
           ],
           "renderBox": [
-            318,
-            33,
-            131,
-            207
+            319,
+            41,
+            129,
+            199
           ]
         },
         {
           "cell": 2,
           "sourceBox": [
-            39,
-            54,
-            226,
-            309
+            76,
+            61,
+            240,
+            302
           ],
           "renderBox": [
-            568,
-            44,
-            144,
-            196
+            576,
+            51,
+            128,
+            189
           ]
         },
         {
           "cell": 3,
           "sourceBox": [
-            29,
+            67,
             66,
-            229,
-            310
+            240,
+            302
           ],
           "renderBox": [
-            819,
-            52,
-            154,
-            188
+            828,
+            55,
+            135,
+            185
           ]
         },
         {
           "cell": 4,
           "sourceBox": [
-            56,
-            44,
-            241,
-            296
+            75,
+            57,
+            284,
+            292
           ],
           "renderBox": [
-            57,
-            302,
-            142,
-            194
+            46,
+            312,
+            164,
+            184
           ]
         },
         {
           "cell": 5,
           "sourceBox": [
-            44,
-            47,
-            279,
-            296
+            76,
+            48,
+            252,
+            292
           ],
           "renderBox": [
-            293,
-            304,
-            181,
-            192
+            315,
+            305,
+            138,
+            191
           ]
         },
         {
           "cell": 6,
           "sourceBox": [
-            20,
-            50,
-            275,
-            297
+            77,
+            61,
+            231,
+            292
           ],
           "renderBox": [
-            542,
-            306,
-            196,
-            190
+            579,
+            315,
+            121,
+            181
           ]
         },
         {
           "cell": 7,
           "sourceBox": [
-            8,
-            54,
-            209,
-            300
+            51,
+            61,
+            255,
+            292
           ],
           "renderBox": [
-            818,
-            307,
-            155,
-            189
+            816,
+            315,
+            160,
+            181
           ]
         },
         {
           "cell": 8,
           "sourceBox": [
-            61,
-            22,
-            212,
-            313
+            81,
+            31,
+            223,
+            271
           ],
           "renderBox": [
-            70,
-            528,
-            116,
-            224
+            72,
+            564,
+            111,
+            188
           ]
         },
         {
           "cell": 9,
           "sourceBox": [
-            31,
-            22,
-            184,
-            275
+            66,
+            36,
+            210,
+            271
           ],
           "renderBox": [
-            325,
-            557,
-            118,
-            195
+            327,
+            568,
+            113,
+            184
           ]
         },
         {
           "cell": 10,
           "sourceBox": [
-            26,
-            25,
-            178,
-            277
+            65,
+            31,
+            205,
+            271
           ],
           "renderBox": [
-            581,
-            558,
-            117,
-            194
+            585,
+            564,
+            110,
+            188
           ]
         },
         {
           "cell": 11,
           "sourceBox": [
-            27,
-            26,
-            175,
-            278
+            56,
+            51,
+            198,
+            271
           ],
           "renderBox": [
-            839,
-            558,
-            114,
-            194
+            840,
+            580,
+            111,
+            172
           ]
         },
         {
           "cell": 12,
           "sourceBox": [
-            34,
-            0,
-            238,
-            240
+            77,
+            8,
+            237,
+            242
           ],
           "renderBox": [
-            49,
-            823,
-            157,
-            185
+            65,
+            825,
+            125,
+            183
           ]
         },
         {
           "cell": 13,
           "sourceBox": [
-            44,
-            22,
-            184,
-            237
+            66,
+            28,
+            211,
+            239
           ],
           "renderBox": [
-            330,
+            327,
             843,
-            108,
+            114,
             165
           ]
         },
         {
           "cell": 14,
           "sourceBox": [
-            7,
-            64,
-            193,
+            27,
+            97,
+            313,
             240
           ],
           "renderBox": [
-            568,
-            873,
-            143,
-            135
+            528,
+            896,
+            224,
+            112
           ]
         },
         {
           "cell": 15,
           "sourceBox": [
-            30,
-            3,
-            174,
-            240
+            0,
+            165,
+            270,
+            243
           ],
           "renderBox": [
-            840,
-            826,
-            111,
-            182
+            790,
+            947,
+            211,
+            61
           ]
         }
       ]
@@ -4636,16 +7977,7 @@
           ]
         }
       ]
-    },
-    {"file":"assets/openai/sprites/normalized/npcs/rook-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.86486,"occupiedPixels":225910,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[112,36,242,295],"renderBox":[72,16,112,224]},{"cell":1,"sourceBox":[392,36,522,295],"renderBox":[328,16,112,224]},{"cell":2,"sourceBox":[700,37,829,295],"renderBox":[584,17,112,223]},{"cell":3,"sourceBox":[993,36,1122,295],"renderBox":[840,16,112,224]},{"cell":4,"sourceBox":[77,339,221,597],"renderBox":[65,273,125,223]},{"cell":5,"sourceBox":[377,340,523,598],"renderBox":[321,273,126,223]},{"cell":6,"sourceBox":[681,339,836,597],"renderBox":[573,273,134,223]},{"cell":7,"sourceBox":[991,341,1132,598],"renderBox":[835,274,122,222]},{"cell":8,"sourceBox":[95,643,245,901],"renderBox":[63,529,130,223]},{"cell":9,"sourceBox":[392,643,554,901],"renderBox":[314,529,140,223]},{"cell":10,"sourceBox":[686,643,830,901],"renderBox":[577,529,125,223]},{"cell":11,"sourceBox":[989,646,1113,901],"renderBox":[842,531,107,221]},{"cell":12,"sourceBox":[89,949,208,1201],"renderBox":[76,790,103,218]},{"cell":13,"sourceBox":[377,951,545,1201],"renderBox":[311,792,145,216]},{"cell":14,"sourceBox":[675,978,865,1201],"renderBox":[558,815,164,193]},{"cell":15,"sourceBox":[987,946,1112,1201],"renderBox":[842,787,108,221]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/inez-harlow-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.78596,"occupiedPixels":168727,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[135,16,218,301],"renderBox":[95,16,65,224]},{"cell":1,"sourceBox":[420,16,535,301],"renderBox":[339,16,90,224]},{"cell":2,"sourceBox":[713,16,815,301],"renderBox":[600,16,80,224]},{"cell":3,"sourceBox":[1015,16,1128,301],"renderBox":[851,16,89,224]},{"cell":4,"sourceBox":[110,327,270,594],"renderBox":[65,286,126,210]},{"cell":5,"sourceBox":[394,327,552,595],"renderBox":[322,285,124,211]},{"cell":6,"sourceBox":[692,327,853,595],"renderBox":[576,285,127,211]},{"cell":7,"sourceBox":[991,327,1150,594],"renderBox":[833,286,125,210]},{"cell":8,"sourceBox":[113,656,242,849],"renderBox":[77,600,101,152]},{"cell":9,"sourceBox":[403,654,533,850],"renderBox":[333,598,102,154]},{"cell":10,"sourceBox":[709,655,838,850],"renderBox":[589,599,101,153]},{"cell":11,"sourceBox":[978,613,1118,848],"renderBox":[841,567,110,185]},{"cell":12,"sourceBox":[123,890,236,1156],"renderBox":[83,799,89,209]},{"cell":13,"sourceBox":[419,890,517,1155],"renderBox":[345,800,77,208]},{"cell":14,"sourceBox":[707,957,824,1150],"renderBox":[594,856,92,152]},{"cell":15,"sourceBox":[1022,890,1130,1156],"renderBox":[853,799,85,209]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/david-8r-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.76976,"occupiedPixels":180792,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[155,16,241,306],"renderBox":[95,17,66,223]},{"cell":1,"sourceBox":[432,16,518,306],"renderBox":[351,17,66,223]},{"cell":2,"sourceBox":[718,16,804,306],"renderBox":[607,17,66,223]},{"cell":3,"sourceBox":[1002,16,1088,306],"renderBox":[863,17,66,223]},{"cell":4,"sourceBox":[111,326,262,614],"renderBox":[70,274,116,222]},{"cell":5,"sourceBox":[396,326,564,614],"renderBox":[319,274,129,222]},{"cell":6,"sourceBox":[688,326,858,614],"renderBox":[574,274,131,222]},{"cell":7,"sourceBox":[963,331,1137,614],"renderBox":[829,278,134,218]},{"cell":8,"sourceBox":[139,634,257,920],"renderBox":[82,532,91,220]},{"cell":9,"sourceBox":[437,635,591,920],"renderBox":[324,533,119,219]},{"cell":10,"sourceBox":[730,635,835,920],"renderBox":[599,533,81,219]},{"cell":11,"sourceBox":[991,635,1090,920],"renderBox":[858,533,76,219]},{"cell":12,"sourceBox":[110,935,260,1224],"renderBox":[70,786,115,222]},{"cell":13,"sourceBox":[392,941,558,1223],"renderBox":[320,791,128,217]},{"cell":14,"sourceBox":[702,940,818,1224],"renderBox":[595,789,89,219]},{"cell":15,"sourceBox":[997,933,1085,1224],"renderBox":[862,784,68,224]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/jun-park-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.81455,"occupiedPixels":207926,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[107,15,203,290],"renderBox":[89,16,78,224]},{"cell":1,"sourceBox":[398,16,493,290],"renderBox":[345,17,77,223]},{"cell":2,"sourceBox":[707,17,801,290],"renderBox":[601,18,77,222]},{"cell":3,"sourceBox":[997,19,1091,291],"renderBox":[857,18,77,222]},{"cell":4,"sourceBox":[78,322,230,585],"renderBox":[66,282,124,214]},{"cell":5,"sourceBox":[379,324,490,586],"renderBox":[339,283,90,213]},{"cell":6,"sourceBox":[665,324,835,585],"renderBox":[571,283,138,213]},{"cell":7,"sourceBox":[969,322,1105,584],"renderBox":[840,283,111,213]},{"cell":8,"sourceBox":[88,623,226,893],"renderBox":[72,532,112,220]},{"cell":9,"sourceBox":[365,630,522,895],"renderBox":[320,536,128,216]},{"cell":10,"sourceBox":[673,637,840,895],"renderBox":[572,542,136,210]},{"cell":11,"sourceBox":[985,625,1122,893],"renderBox":[840,534,112,218]},{"cell":12,"sourceBox":[73,930,211,1183],"renderBox":[72,802,112,206]},{"cell":13,"sourceBox":[354,949,504,1183],"renderBox":[323,817,122,191]},{"cell":14,"sourceBox":[655,1015,814,1181],"renderBox":[575,873,130,135]},{"cell":15,"sourceBox":[987,930,1116,1183],"renderBox":[843,802,105,206]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/asha-mbaye-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.76712,"occupiedPixels":174779,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[140,14,233,306],"renderBox":[92,16,71,224]},{"cell":1,"sourceBox":[436,14,530,306],"renderBox":[348,16,72,224]},{"cell":2,"sourceBox":[726,14,819,306],"renderBox":[604,16,71,224]},{"cell":3,"sourceBox":[1015,14,1109,306],"renderBox":[860,16,72,224]},{"cell":4,"sourceBox":[97,331,265,610],"renderBox":[63,282,129,214]},{"cell":5,"sourceBox":[380,334,551,610],"renderBox":[318,284,131,212]},{"cell":6,"sourceBox":[674,331,844,609],"renderBox":[575,283,130,213]},{"cell":7,"sourceBox":[978,331,1117,608],"renderBox":[842,284,107,212]},{"cell":8,"sourceBox":[124,636,252,921],"renderBox":[79,533,98,219]},{"cell":9,"sourceBox":[410,637,502,921],"renderBox":[348,534,71,218]},{"cell":10,"sourceBox":[701,637,850,921],"renderBox":[583,534,114,218]},{"cell":11,"sourceBox":[992,637,1093,921],"renderBox":[857,534,77,218]},{"cell":12,"sourceBox":[102,944,241,1222],"renderBox":[74,795,107,213]},{"cell":13,"sourceBox":[379,946,566,1222],"renderBox":[312,796,143,212]},{"cell":14,"sourceBox":[677,1006,826,1218],"renderBox":[583,845,114,163]},{"cell":15,"sourceBox":[972,948,1105,1222],"renderBox":[845,798,102,210]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/pablo-reyes-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.78049,"occupiedPixels":237174,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[100,16,222,301],"renderBox":[80,18,95,222]},{"cell":1,"sourceBox":[395,16,517,301],"renderBox":[336,18,95,222]},{"cell":2,"sourceBox":[700,16,822,301],"renderBox":[592,18,95,222]},{"cell":3,"sourceBox":[1007,16,1130,302],"renderBox":[848,17,96,223]},{"cell":4,"sourceBox":[81,330,244,605],"renderBox":[64,281,127,215]},{"cell":5,"sourceBox":[379,329,548,605],"renderBox":[318,281,132,215]},{"cell":6,"sourceBox":[684,329,852,605],"renderBox":[574,281,131,215]},{"cell":7,"sourceBox":[992,329,1158,606],"renderBox":[831,280,130,216]},{"cell":8,"sourceBox":[72,654,235,875],"renderBox":[64,580,127,172]},{"cell":9,"sourceBox":[372,659,576,876],"renderBox":[304,583,159,169]},{"cell":10,"sourceBox":[690,657,868,876],"renderBox":[570,581,139,171]},{"cell":11,"sourceBox":[1002,638,1160,877],"renderBox":[834,565,123,187]},{"cell":12,"sourceBox":[80,906,221,1192],"renderBox":[73,785,110,223]},{"cell":13,"sourceBox":[380,930,521,1194],"renderBox":[329,802,110,206]},{"cell":14,"sourceBox":[687,1008,843,1194],"renderBox":[579,863,122,145]},{"cell":15,"sourceBox":[999,907,1145,1194],"renderBox":[839,784,114,224]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/echo-a-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.74419,"occupiedPixels":166929,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[122,18,253,318],"renderBox":[79,17,97,223]},{"cell":1,"sourceBox":[433,17,564,318],"renderBox":[335,16,97,224]},{"cell":2,"sourceBox":[723,17,852,318],"renderBox":[592,16,96,224]},{"cell":3,"sourceBox":[1020,17,1150,318],"renderBox":[847,16,97,224]},{"cell":4,"sourceBox":[83,331,246,613],"renderBox":[67,286,121,210]},{"cell":5,"sourceBox":[395,331,557,613],"renderBox":[323,286,121,210]},{"cell":6,"sourceBox":[701,331,844,613],"renderBox":[587,286,106,210]},{"cell":7,"sourceBox":[994,332,1146,613],"renderBox":[839,287,113,209]},{"cell":8,"sourceBox":[106,629,238,927],"renderBox":[79,530,98,222]},{"cell":9,"sourceBox":[427,629,547,927],"renderBox":[339,530,89,222]},{"cell":10,"sourceBox":[713,630,847,928],"renderBox":[590,530,100,222]},{"cell":11,"sourceBox":[1020,632,1149,929],"renderBox":[848,531,96,221]},{"cell":12,"sourceBox":[69,946,234,1229],"renderBox":[66,797,123,211]},{"cell":13,"sourceBox":[387,946,566,1229],"renderBox":[317,797,133,211]},{"cell":14,"sourceBox":[698,1014,872,1226],"renderBox":[575,850,129,158]},{"cell":15,"sourceBox":[1019,945,1147,1231],"renderBox":[848,795,95,213]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/leila-s-rensen-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.8,"occupiedPixels":203759,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[131,34,249,314],"renderBox":[81,16,94,224]},{"cell":1,"sourceBox":[412,33,534,313],"renderBox":[335,16,98,224]},{"cell":2,"sourceBox":[702,37,828,314],"renderBox":[589,18,101,222]},{"cell":3,"sourceBox":[1005,35,1122,315],"renderBox":[849,16,94,224]},{"cell":4,"sourceBox":[94,344,265,609],"renderBox":[59,284,137,212]},{"cell":5,"sourceBox":[397,342,533,609],"renderBox":[329,282,109,214]},{"cell":6,"sourceBox":[681,341,844,609],"renderBox":[575,282,130,214]},{"cell":7,"sourceBox":[992,341,1153,609],"renderBox":[831,282,129,214]},{"cell":8,"sourceBox":[121,633,252,903],"renderBox":[75,536,105,216]},{"cell":9,"sourceBox":[413,636,551,903],"renderBox":[329,538,110,214]},{"cell":10,"sourceBox":[679,732,841,902],"renderBox":[575,616,130,136]},{"cell":11,"sourceBox":[972,632,1166,903],"renderBox":[818,535,155,217]},{"cell":12,"sourceBox":[88,939,278,1201],"renderBox":[52,798,152,210]},{"cell":13,"sourceBox":[386,966,556,1201],"renderBox":[316,820,136,188]},{"cell":14,"sourceBox":[679,1053,837,1200],"renderBox":[577,890,126,118]},{"cell":15,"sourceBox":[965,953,1107,1201],"renderBox":[839,810,114,198]}]},
-    {"file":"assets/openai/sprites/normalized/npcs/cal-mercer-locomotion-sheet.png","sourceSize":[1254,1254],"size":[1024,1024],"mode":"RGBA","scale":0.76712,"occupiedPixels":204377,"guardViolations":0,"cells":[{"cell":0,"sourceBox":[161,32,277,324],"renderBox":[85,32,85,208]},{"cell":1,"sourceBox":[446,34,559,324],"renderBox":[342,34,83,206]},{"cell":2,"sourceBox":[706,33,823,324],"renderBox":[597,34,87,206]},{"cell":3,"sourceBox":[997,32,1112,324],"renderBox":[854,32,84,208]},{"cell":4,"sourceBox":[131,344,299,618],"renderBox":[66,294,124,202]},{"cell":5,"sourceBox":[398,349,579,618],"renderBox":[317,297,133,199]},{"cell":6,"sourceBox":[682,351,847,618],"renderBox":[579,299,122,197]},{"cell":7,"sourceBox":[956,350,1135,618],"renderBox":[830,298,132,198]},{"cell":8,"sourceBox":[159,637,292,913],"renderBox":[79,549,98,203]},{"cell":9,"sourceBox":[418,641,565,914],"renderBox":[330,551,108,201]},{"cell":10,"sourceBox":[703,641,878,915],"renderBox":[576,551,128,201]},{"cell":11,"sourceBox":[983,638,1098,915],"renderBox":[853,548,85,204]},{"cell":12,"sourceBox":[130,944,282,1213],"renderBox":[72,809,112,199]},{"cell":13,"sourceBox":[397,956,574,1211],"renderBox":[319,821,130,187]},{"cell":14,"sourceBox":[678,1010,835,1212],"renderBox":[582,859,116,149]},{"cell":15,"sourceBox":[969,945,1103,1214],"renderBox":[846,811,99,197]}]}
+    }
   ],
   "traversalAtlas": {
     "file": "assets/openai/metroidvania/props/tantalus-traversal-kit-atlas-clean.png",

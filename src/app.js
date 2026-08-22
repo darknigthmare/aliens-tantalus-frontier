@@ -650,6 +650,14 @@ function handleGameEvent(event) {
     recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
     log.textContent = `ÉVÉNEMENT TERRAIN · ${String(event.eventId || '').toUpperCase()}`;
   }
+  if (event.type === 'mission-timer-started') {
+    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-started`);
+    log.textContent = `HOLDOUT · ${String(event.timerId || 'extraction').toUpperCase()} · ${Math.ceil(Number(event.duration) || 0)} S`;
+  }
+  if (event.type === 'mission-timer-complete') {
+    recordOperationFlag(saveSystem.data, `timer-${event.timerId}-complete`);
+    log.textContent = `HOLDOUT TERMINÉ · ${String(event.timerId || 'extraction').toUpperCase()} DÉVERROUILLÉE`;
+  }
   if (event.type === 'squad-ready') {
     log.textContent = `ESCOUADE DÉPLOYÉE · ${event.members?.length || 0} alliés IA physiques · ${event.animationSheets || 0} plaques animées`;
   }
@@ -716,7 +724,8 @@ function handleGameEvent(event) {
     'checkpoint', 'power-restored', 'shortcut', 'archive-recovered', 'supply', 'resource',
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
     'equipment-used', 'objective-action', 'mission-zone', 'mission-level-event',
-    'squad-action', 'squad-down', 'squad-revived', 'squad-lost'
+    'squad-action', 'squad-down', 'squad-revived', 'squad-lost',
+    'mission-timer-started', 'mission-timer-complete'
   ]);
   if (persistentEvents.has(event.type) && saveSystem.data.strategy.currentOperation) {
     persistMissionResumeState();
@@ -950,7 +959,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v53-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v54-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],

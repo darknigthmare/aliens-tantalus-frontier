@@ -17,6 +17,9 @@ export const SPRITE_HITBOXES = Object.freeze({
   'player-standing': Object.freeze({ x: 84, y: 34, width: 88, height: 206 }),
   'npc-standing': Object.freeze({ x: 88, y: 34, width: 80, height: 206 }),
   'xenomorph-standing': Object.freeze({ x: 50, y: 56, width: 156, height: 184 }),
+  'runner-ground': Object.freeze({ x: 28, y: 134, width: 200, height: 106 }),
+  'pathogen-mimic-large': Object.freeze({ x: 24, y: 52, width: 208, height: 188 }),
+  'pale-crucible-hunter-large': Object.freeze({ x: 32, y: 42, width: 192, height: 198 }),
   'queen-standing': Object.freeze({ x: 32, y: 38, width: 192, height: 202 }),
   'facehugger-ground': Object.freeze({ x: 38, y: 142, width: 180, height: 98 }),
   'apc-hull': Object.freeze({ x: 18, y: 106, width: 220, height: 134 }),
@@ -33,7 +36,7 @@ export const SPRITE_CLIP_SETS = Object.freeze({
   ]),
   'player-combat': freezeList([
     { id: 'aim-ready', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 1, type: 'weapon:aim-ready' }] },
-    { id: 'primary-fire', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 5, type: 'weapon:shot' }, { frame: 6, type: 'weapon:recoil' }] },
+    { id: 'primary-fire', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
     { id: 'reload', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'weapon:magazine-out' }, { frame: 10, type: 'weapon:magazine-in' }, { frame: 11, type: 'weapon:chamber' }] },
     { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
   ]),
@@ -54,6 +57,18 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'claw-attack', frames: [4, 5, 6, 7], fps: 11, loop: false, events: [{ frame: 6, type: 'combat:claw-hit' }] },
     { id: 'tail-attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:tail-hit' }] },
     { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'runner-action': freezeList([
+    { id: 'idle-prowl', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 2, type: 'creature:breath' }] },
+    { id: 'sprint', frames: [4, 5, 6, 7], fps: 12, loop: true, events: [{ frame: 4, type: 'audio:claw-step-right' }, { frame: 6, type: 'audio:claw-step-left' }] },
+    { id: 'pounce-bite', frames: [8, 9, 10, 11], fps: 11, loop: false, events: [{ frame: 9, type: 'movement:takeoff' }, { frame: 10, type: 'combat:pounce-window' }, { frame: 11, type: 'combat:bite-hit' }] },
+    { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 8, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'enemy-action-v54': freezeList([
+    { id: 'idle', row: 0, frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'creature:breathe' }] },
+    { id: 'chase', row: 1, frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
+    { id: 'attack', row: 2, frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:attack-hit' }] },
+    { id: 'death', row: 3, frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
   ]),
   'facehugger-locomotion': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 2, type: 'creature:twitch' }] },
@@ -78,6 +93,12 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'advance', frames: [4, 5, 6, 7], fps: 7, loop: true, events: [{ frame: 4, type: 'audio:heavy-step-right' }, { frame: 6, type: 'audio:heavy-step-left' }] },
     { id: 'claw-tail', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'combat:claw-hit' }, { frame: 11, type: 'combat:tail-hit' }] },
     { id: 'roar-hurt', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 13, type: 'audio:roar' }, { frame: 14, type: 'state:hurt' }] }
+  ]),
+  'ripper-queen-action': freezeList([
+    { id: 'threat-idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'creature:crown-lift' }] },
+    { id: 'royal-advance', frames: [4, 5, 6, 7], fps: 7, loop: true, events: [{ frame: 4, type: 'audio:heavy-step-right' }, { frame: 6, type: 'audio:heavy-step-left' }] },
+    { id: 'claw-tail', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'combat:claw-hit' }, { frame: 11, type: 'combat:tail-hit' }] },
+    { id: 'wounded-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 13, type: 'audio:roar' }, { frame: 15, type: 'state:death-lock' }] }
   ]),
   'apc-action': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 2, loop: true, events: [{ frame: 2, type: 'vehicle:engine-idle' }] },
@@ -111,11 +132,15 @@ const NPC_SHEETS = [
 
 export const SPRITE_SHEETS = Object.freeze({
   'player.echo9-marine.locomotion': sheet('player.echo9-marine.locomotion', 'playerLocomotion', '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png', 'player-locomotion', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
-  'player.echo9-marine.combat': sheet('player.echo9-marine.combat', 'playerCombat', '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', 'player-combat', 'humanoid-feet', 'player-standing', 110, 148, 'player', 1, true, false),
+  'player.echo9-marine.combat': sheet('player.echo9-marine.combat', 'playerCombat', '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', 'player-combat', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
   'enemy.xenomorph-drone.locomotion': sheet('enemy.xenomorph-drone.locomotion', 'xenoLocomotion', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png', 'xenomorph-locomotion', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy'),
   'enemy.xenomorph-drone.combat': sheet('enemy.xenomorph-drone.combat', 'xenoCombat', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy', -1),
   'enemy.xenomorph-warrior.combat': sheet('enemy.xenomorph-warrior.combat', 'xenoWarrior', '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 158, 120, 'enemy'),
+  'enemy.xenomorph-runner.action': sheet('enemy.xenomorph-runner.action', 'xenoRunner', '/assets/openai/sprites/normalized/enemies/xenomorph-runner-action-sheet.png', 'runner-action', 'creature-ground', 'runner-ground', 168, 100, 'enemy'),
   'enemy.xenomorph-queen.combat': sheet('enemy.xenomorph-queen.combat', 'xenoQueen', '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png', 'queen-combat', 'creature-ground', 'queen-standing', 224, 170, 'enemy'),
+  'enemy.ripper-queen.action': sheet('enemy.ripper-queen.action', 'ripperQueen', '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png', 'ripper-queen-action', 'creature-ground', 'queen-standing', 224, 170, 'enemy'),
+  'enemy.pathogen-mimic.action': sheet('enemy.pathogen-mimic.action', 'pathogenMimic', '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png', 'enemy-action-v54', 'creature-ground', 'pathogen-mimic-large', 132, 96, 'enemy'),
+  'enemy.pale-crucible-hunter.action': sheet('enemy.pale-crucible-hunter.action', 'paleCrucibleHunter', '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png', 'enemy-action-v54', 'creature-ground', 'pale-crucible-hunter-large', 142, 106, 'enemy'),
   'enemy.facehugger.locomotion': sheet('enemy.facehugger.locomotion', 'facehugger', '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png', 'facehugger-locomotion', 'creature-ground', 'facehugger-ground', 112, 72, 'enemy'),
   'enemy.neomorph.locomotion': sheet('enemy.neomorph.locomotion', 'neomorph', '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png', 'neomorph-locomotion', 'creature-ground', 'xenomorph-standing', 146, 112, 'enemy'),
   'enemy.working-joe.combat': sheet('enemy.working-joe.combat', 'workingJoe', '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png', 'working-joe-combat', 'humanoid-feet', 'npc-standing', 88, 116, 'enemy'),
@@ -199,7 +224,12 @@ export function resolveEnemyAnimation(enemy = {}) {
   const dead = !enemy.alive;
   const attacking = Boolean(enemy.attacking);
   const moving = Math.abs(enemy.vx || 0) > 8 || Boolean(enemy.alert);
+  const v54ActionClip = dead || hurt ? 'death' : attacking ? 'attack' : moving ? 'chase' : 'idle';
+  if (enemy.spriteKey === 'pathogenMimic') return { sheetId: 'enemy.pathogen-mimic.action', clipId: v54ActionClip };
+  if (enemy.spriteKey === 'paleCrucibleHunter') return { sheetId: 'enemy.pale-crucible-hunter.action', clipId: v54ActionClip };
+  if (enemy.spriteKey === 'ripperQueen') return { sheetId: 'enemy.ripper-queen.action', clipId: dead || hurt ? 'wounded-death' : attacking ? 'claw-tail' : moving ? 'royal-advance' : 'threat-idle' };
   if (enemy.spriteKey === 'xenoQueen') return { sheetId: 'enemy.xenomorph-queen.combat', clipId: dead || hurt ? 'roar-hurt' : attacking ? 'claw-tail' : moving ? 'advance' : 'idle' };
+  if (enemy.spriteKey === 'xenoRunner') return { sheetId: 'enemy.xenomorph-runner.action', clipId: dead || hurt ? 'hurt-death' : attacking ? 'pounce-bite' : moving ? 'sprint' : 'idle-prowl' };
   if (enemy.spriteKey === 'facehugger') return { sheetId: 'enemy.facehugger.locomotion', clipId: dead || hurt ? 'hurt-death' : attacking ? 'leap-attach' : moving ? 'scuttle' : 'idle' };
   if (enemy.spriteKey === 'neomorph') return { sheetId: 'enemy.neomorph.locomotion', clipId: dead || hurt ? 'hurt-death' : attacking ? 'leap' : moving ? 'run' : 'idle' };
   if (enemy.spriteKey === 'workingJoe') return { sheetId: 'enemy.working-joe.combat', clipId: dead ? 'damaged-death' : hurt ? 'hurt' : attacking ? 'grab-punch' : 'idle-walk' };

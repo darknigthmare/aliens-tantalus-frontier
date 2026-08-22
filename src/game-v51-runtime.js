@@ -23,6 +23,23 @@ export const MISSION_STRUCTURAL_PROP_FILES = Object.freeze({
   foregroundPipes: '/assets/openai/metroidvania/props/foreground-pipes.png'
 });
 
+export const MISSION_SURFACE_PROFILES = Object.freeze({
+  floor: Object.freeze({ renderHeight: 92, surfaceOffset: 0 }),
+  catwalk: Object.freeze({ renderHeight: 64, surfaceOffset: 42 }),
+  ledge: Object.freeze({ renderHeight: 72, surfaceOffset: 0 }),
+  drop: Object.freeze({ renderHeight: 64, surfaceOffset: 0 })
+});
+
+export function getMissionSurfaceMetrics(platform = {}) {
+  const key = platform.floor ? 'floor' : platform.art;
+  const profile = MISSION_SURFACE_PROFILES[key] || MISSION_SURFACE_PROFILES.catwalk;
+  const renderHeight = Number.isFinite(platform.renderHeight) ? platform.renderHeight : profile.renderHeight;
+  const scaledOffset = profile.surfaceOffset * (renderHeight / profile.renderHeight);
+  const surfaceOffset = Number.isFinite(platform.surfaceOffset) ? platform.surfaceOffset : scaledOffset;
+  const surfaceY = Number(platform.y) || 0;
+  return Object.freeze({ renderHeight, surfaceOffset, surfaceY, renderY: surfaceY - surfaceOffset });
+}
+
 
 const ASSETS = Object.freeze({
   far: '/assets/openai/metroidvania/tantalus-mission-far.png',
@@ -36,7 +53,11 @@ const ASSETS = Object.freeze({
   neomorph: '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png',
   workingJoe: '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png',
   xenoWarrior: '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png',
+  xenoRunner: '/assets/openai/sprites/normalized/enemies/xenomorph-runner-action-sheet.png',
   xenoQueen: '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png',
+  ripperQueen: '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png',
+  paleCrucibleHunter: '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
+  pathogenMimic: '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
   rifle: '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
   apc: '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
   human: '/assets/openai/human-factions-animation-sheet.png',
@@ -127,7 +148,10 @@ function createImage(source) {
 
 function enemyBehavior(spriteKey, biology) {
   if (spriteKey === 'facehugger') return 'pouncer';
-  if (spriteKey === 'xenoQueen') return 'boss';
+  if (spriteKey === 'xenoRunner') return 'pouncer';
+  if (spriteKey === 'paleCrucibleHunter') return 'pouncer';
+  if (spriteKey === 'pathogenMimic') return 'hunter';
+  if (spriteKey === 'xenoQueen' || spriteKey === 'ripperQueen') return 'boss';
   if (spriteKey === 'workingJoe') return 'bruiser';
   if (biology === 'synthetic') return 'bruiser';
   if (spriteKey === 'neomorph') return 'hunter';
@@ -773,9 +797,10 @@ export class GameEngine {
 
   resolveVertical(entity, previousBottom) {
     for (const platform of this.platforms) {
+      const { surfaceY } = getMissionSurfaceMetrics(platform);
       const horizontal = entity.x + entity.w > platform.x + 4 && entity.x < platform.x + platform.w - 4;
-      if (horizontal && entity.vy >= 0 && previousBottom <= platform.y + 12 && entity.y + entity.h >= platform.y) {
-        entity.y = platform.y - entity.h;
+      if (horizontal && entity.vy >= 0 && previousBottom <= surfaceY + 12 && entity.y + entity.h >= surfaceY) {
+        entity.y = surfaceY - entity.h;
         entity.vy = 0;
         entity.grounded = true;
       }
@@ -1241,7 +1266,8 @@ export class GameEngine {
     ctx.globalAlpha = 0.78;
     for (const platform of anchors) {
       const x = platform.x + Math.max(8, (platform.w - width) * 0.5);
-      const baseline = platform.y + Math.min(18, platform.h || 0);
+      const { surfaceY } = getMissionSurfaceMetrics(platform);
+      const baseline = surfaceY + Math.min(18, platform.h || 0);
       ctx.drawImage(image, x, baseline - height, width, height);
     }
     ctx.restore();
@@ -1302,32 +1328,34 @@ export class GameEngine {
   drawFloors(ctx) {
     const image = this.images.get('floor');
     for (const floor of this.platforms.filter((platform) => platform.floor)) {
+      const metrics = getMissionSurfaceMetrics(floor);
       ctx.fillStyle = '#121a18';
-      ctx.fillRect(floor.x, floor.y, floor.w, Math.max(floor.h, 52));
+      ctx.fillRect(floor.x, metrics.surfaceY, floor.w, Math.max(floor.h, 52));
       if (!ready(image)) continue;
-      const height = 92;
-      const width = image.naturalWidth * (height / image.naturalHeight);
+      const width = image.naturalWidth * (metrics.renderHeight / image.naturalHeight);
       ctx.save();
       ctx.beginPath();
-      ctx.rect(floor.x, floor.y - 28, floor.w, height);
+      ctx.rect(floor.x, metrics.renderY, floor.w, metrics.renderHeight);
       ctx.clip();
-      for (let x = floor.x; x < floor.x + floor.w + width; x += width - 4) ctx.drawImage(image, x, floor.y - 28, width, height);
+      for (let x = floor.x; x < floor.x + floor.w + width; x += width - 4) {
+        ctx.drawImage(image, x, metrics.renderY, width, metrics.renderHeight);
+      }
       ctx.restore();
     }
   }
 
   drawPlatform(ctx, platform) {
     const image = this.images.get(platform.art);
+    const metrics = getMissionSurfaceMetrics(platform);
     ctx.fillStyle = '#19231f';
-    ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
+    ctx.fillRect(platform.x, metrics.surfaceY, platform.w, platform.h);
     if (!ready(image)) return;
-    const height = platform.art === 'ledge' ? 72 : 64;
-    const width = image.naturalWidth * (height / image.naturalHeight);
+    const width = image.naturalWidth * (metrics.renderHeight / image.naturalHeight);
     ctx.save();
     ctx.beginPath();
-    ctx.rect(platform.x, platform.y - height + 22, platform.w, height + 12);
+    ctx.rect(platform.x, metrics.renderY, platform.w, metrics.renderHeight + 12);
     ctx.clip();
-    for (let x = platform.x; x < platform.x + platform.w + width; x += Math.max(24, width - 8)) ctx.drawImage(image, x, platform.y - height + 22, width, height);
+    for (let x = platform.x; x < platform.x + platform.w + width; x += Math.max(24, width - 8)) ctx.drawImage(image, x, metrics.renderY, width, metrics.renderHeight);
     ctx.restore();
   }
 
@@ -1465,7 +1493,11 @@ export class GameEngine {
     let frame = legacyCell.frame;
     let renderWidth = 84;
     let renderHeight = 112;
-    if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
+    if (enemy.spriteKey === 'ripperQueen') { image = this.images.get('ripperQueen'); sheetId = 'enemy.ripper-queen.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
+    else if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
+    else if (enemy.spriteKey === 'xenoRunner') { image = this.images.get('xenoRunner'); sheetId = 'enemy.xenomorph-runner.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 168; renderHeight = 100; }
+    else if (enemy.spriteKey === 'paleCrucibleHunter') { image = this.images.get('paleCrucibleHunter'); sheetId = 'enemy.pale-crucible-hunter.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 142; renderHeight = 106; }
+    else if (enemy.spriteKey === 'pathogenMimic') { image = this.images.get('pathogenMimic'); sheetId = 'enemy.pathogen-mimic.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 132; renderHeight = 96; }
     else if (enemy.spriteKey === 'xenoWarrior') { image = this.images.get('xenoWarrior'); sheetId = 'enemy.xenomorph-warrior.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 158; renderHeight = 120; }
     else if (enemy.spriteKey === 'facehugger') { image = this.images.get('facehugger'); sheetId = 'enemy.facehugger.locomotion'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 112; renderHeight = 72; }
     else if (enemy.spriteKey === 'neomorph') { image = this.images.get('neomorph'); sheetId = 'enemy.neomorph.locomotion'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 146; renderHeight = 112; }

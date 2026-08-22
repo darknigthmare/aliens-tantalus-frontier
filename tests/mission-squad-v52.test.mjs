@@ -2,6 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GameEngine } from '../src/game-production-runtime.js';
 import {
+  SQUAD_FORMATION_GAP,
+  getSquadSeparationDistance,
+  getSquadVisualWidth
+} from '../src/game-v52-runtime.js';
+import {
   CAMPAIGNS,
   CREW,
   ENEMIES,
@@ -206,4 +211,47 @@ test('le hot-join coop transfère l’état et un événement IA ne sérialise j
   assert.equal(capturedDuringDown.coop.x, 125);
   assert.equal(capturedDuringDown.coop.health, 77);
   assert.notEqual(capturedDuringDown.coop.x, target.x);
+}));
+
+test('les slots et la séparation empêchent toute interpénétration des largeurs visuelles', () => withBrowserMocks(() => {
+  const engine = createEngine();
+  engine.start(missionOptions());
+  engine.walls = [];
+  engine.doors = [];
+  engine.covers = [];
+  engine.enemies = [];
+  engine.hazards = [];
+  engine.vehicle.active = false;
+  engine.coopEnabled = false;
+
+  const player = engine.player;
+  const members = engine.activeSquadActors();
+  Object.assign(player, { x: 1200, y: 700, w: 42, h: 92, facing: 1, alive: true, inVehicle: false, climbing: false });
+  const sharedCenter = player.x + player.w / 2;
+  const sharedBottom = player.y + player.h;
+  for (const member of members) {
+    Object.assign(member, {
+      x: sharedCenter - member.w / 2,
+      y: sharedBottom - member.h,
+      vx: 0,
+      alive: true,
+      inVehicle: false,
+      climbing: false
+    });
+    assert.ok(member.formationSlot >= getSquadVisualWidth(member) + SQUAD_FORMATION_GAP);
+  }
+
+  engine.updateMissionSquad(0);
+  assert.ok(engine.squadTelemetry.separations >= members.length);
+
+  const actors = [player, ...members];
+  for (let firstIndex = 0; firstIndex < actors.length; firstIndex += 1) {
+    for (let secondIndex = firstIndex + 1; secondIndex < actors.length; secondIndex += 1) {
+      const first = actors[firstIndex];
+      const second = actors[secondIndex];
+      const centerDistance = Math.abs((first.x + first.w / 2) - (second.x + second.w / 2));
+      const minimum = getSquadSeparationDistance(first, second);
+      assert.ok(centerDistance >= minimum - 0.01, `${first.crewId || 'player'} / ${second.crewId || 'player'}: ${centerDistance} >= ${minimum}`);
+    }
+  }
 }));

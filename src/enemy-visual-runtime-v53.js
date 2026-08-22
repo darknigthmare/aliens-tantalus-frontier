@@ -67,7 +67,7 @@ const REGISTRY = Object.freeze({
     'Warrior',
     'La planche Warrior couvre le combat; la locomotion réutilise encore la planche Drone.'
   ),
-  Runner: missingXeno('Runner'),
+  Runner: modern('xenoRunner', 'enemy.xenomorph-runner.action', ENEMY_VISUAL_IDENTITY.exact, 'Runner'),
   Praetorian: missingXeno('Praetorian'),
   Queen: modern(
     'xenoQueen',
@@ -94,20 +94,25 @@ const REGISTRY = Object.freeze({
   ),
   Xenoborg: legacy('neuroXeno', 2, ENEMY_VISUAL_IDENTITY.family, 'Xenoborg', familyReason('Xenoborg', 'Xenoborg/Ripper')),
   'ATARAX Ripper': legacy('neuroXeno', 2, ENEMY_VISUAL_IDENTITY.family, 'ATARAX Ripper', familyReason('ATARAX Ripper', 'Xenoborg/Ripper')),
-  'Ripper Queen': modern(
-    'xenoQueen',
-    'enemy.xenomorph-queen.combat',
-    ENEMY_VISUAL_IDENTITY.missing,
-    'Ripper Queen',
-    missingReason('Ripper Queen', 'la Queen standard')
-  ),
+  'Ripper Queen': modern('ripperQueen', 'enemy.ripper-queen.action', ENEMY_VISUAL_IDENTITY.exact, 'Ripper Queen'),
   'Foundry Drone': missingXeno('Foundry Drone'),
   'Foundry Crusher': missingXeno('Foundry Crusher'),
   'Reef Stalker': missingXeno('Reef Stalker'),
   'Reef Spitter': missingXeno('Reef Spitter'),
   'Siege Royal': missingXeno('Siege Royal'),
-  'Pale Crucible Hunter': missingXeno('Pale Crucible Hunter'),
-  'Dust Runner': missingXeno('Dust Runner'),
+  'Pale Crucible Hunter': modern(
+    'paleCrucibleHunter',
+    'enemy.pale-crucible-hunter.action',
+    ENEMY_VISUAL_IDENTITY.exact,
+    'Pale Crucible Hunter'
+  ),
+  'Dust Runner': modern(
+    'xenoRunner',
+    'enemy.xenomorph-runner.action',
+    ENEMY_VISUAL_IDENTITY.family,
+    'Dust Runner',
+    familyReason('Dust Runner', 'Runner')
+  ),
   'Salvage Hive Brute': missingXeno('Salvage Hive Brute'),
   'Arcology Lurker': missingXeno('Arcology Lurker'),
   'Caravan Stalker': missingXeno('Caravan Stalker'),
@@ -117,8 +122,11 @@ const REGISTRY = Object.freeze({
   Neomorph: modern('neomorph', 'enemy.neomorph.locomotion', ENEMY_VISUAL_IDENTITY.exact, 'Neomorph'),
   Protomorph: legacy('pathogen', 1, ENEMY_VISUAL_IDENTITY.family, 'Protomorph', familyReason('Protomorph', 'Deacon/Protomorph')),
   Abomination: legacy('pathogen', 2, ENEMY_VISUAL_IDENTITY.family, 'Abomination', familyReason('Abomination', 'Trilobite/Abomination')),
-  'Pathogen Mimic': legacy(
-    'pathogen', 2, ENEMY_VISUAL_IDENTITY.missing, 'Pathogen Mimic', missingReason('Pathogen Mimic', 'la ligne Trilobite/Abomination')
+  'Pathogen Mimic': modern(
+    'pathogenMimic',
+    'enemy.pathogen-mimic.action',
+    ENEMY_VISUAL_IDENTITY.exact,
+    'Pathogen Mimic'
   ),
 
   'Working Joe': modern('workingJoe', 'enemy.working-joe.combat', ENEMY_VISUAL_IDENTITY.exact, 'Working Joe'),

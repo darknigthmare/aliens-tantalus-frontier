@@ -1,3 +1,5 @@
+import { shouldFlipSprite } from './sprite-animation-runtime.js';
+
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
 const WORLD_WIDTH = 6200;
@@ -22,7 +24,11 @@ const ASSETS = Object.freeze({
   neomorph: '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png',
   workingJoe: '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png',
   xenoWarrior: '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png',
+  xenoRunner: '/assets/openai/sprites/normalized/enemies/xenomorph-runner-action-sheet.png',
   xenoQueen: '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png',
+  ripperQueen: '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png',
+  paleCrucibleHunter: '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
+  pathogenMimic: '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
   rifle: '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
   apc: '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
   human: '/assets/openai/human-factions-animation-sheet.png',
@@ -96,13 +102,23 @@ function createImage(source) {
 
 function selectEnemySprite(source) {
   const name = String(source.name || '').toLowerCase();
+  if (name.includes('pale crucible hunter')) return 'paleCrucibleHunter';
+  if (name.includes('pathogen mimic')) return 'pathogenMimic';
+  if (name.includes('ripper queen')) return 'ripperQueen';
   if (source.caste === 'royal' || name.includes('queen') || name.includes('reine')) return 'xenoQueen';
+  if (name === 'runner' || name.includes('dust runner')) return 'xenoRunner';
   if (name.includes('facehugger')) return 'facehugger';
   if (name.includes('neomorph')) return 'neomorph';
   if (source.biology === 'synthetic') return 'workingJoe';
   if (name.includes('warrior') || name.includes('guerrier')) return 'xenoWarrior';
   if (source.biology === 'xenomorph') return 'xenoDrone';
   return 'legacy';
+}
+
+function enemyBehavior(spriteKey) {
+  if (spriteKey === 'paleCrucibleHunter') return 'pouncer';
+  if (spriteKey === 'pathogenMimic') return 'hunter';
+  return 'stalker';
 }
 
 export class GameEngine {
@@ -169,6 +185,7 @@ export class GameEngine {
     this.particles = [];
     this.enemies = Array.from({ length: 16 }, (_, index) => {
       const source = enemyCatalog[(index * 11 + seed) % Math.max(1, enemyCatalog.length)] || { name: 'Xenomorph Warrior', health: 80, damage: 12, speed: 1.2, biology: 'xenomorph' };
+      const spriteKey = selectEnemySprite(source);
       const royal = source.caste === 'royal';
       const platform = index % 4 === 2 ? PLATFORM_LAYOUT[(index * 3) % PLATFORM_LAYOUT.length] : null;
       const height = royal ? 112 : source.biology === 'xenomorph' ? 74 : 88;
@@ -177,7 +194,8 @@ export class GameEngine {
         id: `${source.id || 'enemy'}:${index}`,
         name: source.name,
         biology: source.biology,
-        spriteKey: selectEnemySprite(source),
+        spriteKey,
+        behavior: enemyBehavior(spriteKey),
         row: index % 4,
         x: 660 + index * 325 + random() * 90,
         y: groundY - height,
@@ -246,13 +264,14 @@ export class GameEngine {
       if (Math.abs(distance) < 520) enemy.alert = true;
       if (enemy.alert && Math.abs(distance) > enemy.w * 0.7) {
         enemy.facing = Math.sign(distance) || enemy.facing;
-        enemy.x += enemy.facing * enemy.speed * delta;
+        const speedMultiplier = enemy.behavior === 'hunter' ? 1.28 : enemy.behavior === 'pouncer' ? 1.38 : 1;
+        enemy.x += enemy.facing * enemy.speed * speedMultiplier * delta;
       }
       enemy.attackClock -= delta;
       enemy.attacking = Math.abs(distance) < 90 && enemy.attackClock < 0.28;
       if (overlap(enemy, target) && enemy.attackClock <= 0) {
         this.damagePlayer(target, enemy.damage);
-        enemy.attackClock = 0.8;
+        enemy.attackClock = enemy.behavior === 'pouncer' ? 1.1 : 0.8;
       }
       for (const bullet of this.bullets) {
         if (!bullet.hit && overlap(bullet, enemy)) {
@@ -668,28 +687,43 @@ export class GameEngine {
   drawEnemy(ctx, enemy) {
     let image;
     let row = enemy.row;
+    let sheetId = null;
     const frame = Math.floor(this.animationTime * (enemy.alert ? 9 : 4) + enemy.row) % 4;
     let renderWidth = 84;
     let renderHeight = 112;
-    if (enemy.spriteKey === 'xenoQueen') {
-      image = this.images.get('xenoQueen'); row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 224; renderHeight = 170;
+    if (enemy.spriteKey === 'ripperQueen') {
+      image = this.images.get('ripperQueen'); sheetId = 'enemy.ripper-queen.action'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 224; renderHeight = 170;
+    } else if (enemy.spriteKey === 'xenoQueen') {
+      image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 224; renderHeight = 170;
+    } else if (enemy.spriteKey === 'xenoRunner') {
+      image = this.images.get('xenoRunner'); sheetId = 'enemy.xenomorph-runner.action'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 168; renderHeight = 100;
+    } else if (enemy.spriteKey === 'paleCrucibleHunter') {
+      image = this.images.get('paleCrucibleHunter'); sheetId = 'enemy.pale-crucible-hunter.action'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 142; renderHeight = 106;
+    } else if (enemy.spriteKey === 'pathogenMimic') {
+      image = this.images.get('pathogenMimic'); sheetId = 'enemy.pathogen-mimic.action'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 132; renderHeight = 96;
     } else if (enemy.spriteKey === 'xenoWarrior') {
-      image = this.images.get('xenoWarrior'); row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 158; renderHeight = 120;
+      image = this.images.get('xenoWarrior'); sheetId = 'enemy.xenomorph-warrior.combat'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 158; renderHeight = 120;
     } else if (enemy.spriteKey === 'facehugger') {
-      image = this.images.get('facehugger'); row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 112; renderHeight = 72;
+      image = this.images.get('facehugger'); sheetId = 'enemy.facehugger.locomotion'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 112; renderHeight = 72;
     } else if (enemy.spriteKey === 'neomorph') {
-      image = this.images.get('neomorph'); row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 146; renderHeight = 112;
+      image = this.images.get('neomorph'); sheetId = 'enemy.neomorph.locomotion'; row = enemy.attacking ? 2 : enemy.alert ? 1 : 0; renderWidth = 146; renderHeight = 112;
     } else if (enemy.spriteKey === 'workingJoe') {
-      image = this.images.get('workingJoe'); row = enemy.attacking ? 1 : 0; renderWidth = 88; renderHeight = 116;
+      image = this.images.get('workingJoe'); sheetId = 'enemy.working-joe.combat'; row = enemy.attacking ? 1 : 0; renderWidth = 88; renderHeight = 116;
     } else if (enemy.spriteKey === 'xenoDrone') {
       image = this.images.get(enemy.attacking ? 'xenoCombat' : 'xenoLocomotion');
+      sheetId = enemy.attacking ? 'enemy.xenomorph-drone.combat' : 'enemy.xenomorph-drone.locomotion';
       row = enemy.attacking ? 1 : enemy.alert ? 1 : 0; renderWidth = 142; renderHeight = 106;
-    } else if (enemy.biology === 'human') image = this.images.get('human');
-    else if (enemy.biology === 'synthetic') image = this.images.get('synthetic');
-    else { image = this.images.get('pathogen'); renderWidth = 132; renderHeight = 96; }
+    } else if (enemy.biology === 'human') {
+      image = this.images.get('human');
+    } else if (enemy.biology === 'synthetic') {
+      image = this.images.get('synthetic');
+    } else {
+      image = this.images.get('pathogen'); renderWidth = 132; renderHeight = 96;
+    }
     const x = enemy.x + enemy.w / 2 - renderWidth / 2;
     const y = enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing > 0);
+    const flip = sheetId ? shouldFlipSprite(sheetId, enemy.facing) : enemy.facing > 0;
+    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, flip);
     if (enemy.alert) {
       ctx.fillStyle = '#be5551';
       ctx.fillRect(enemy.x, enemy.y - 10, enemy.w * (enemy.health / enemy.maxHealth), 3);

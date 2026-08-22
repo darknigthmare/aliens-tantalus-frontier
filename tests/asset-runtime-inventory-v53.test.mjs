@@ -5,9 +5,9 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const inventory = JSON.parse(await readFile(resolve(repoRoot, 'docs/ASSET_RUNTIME_INVENTORY_V53.json'), 'utf8'));
+const inventory = JSON.parse(await readFile(resolve(repoRoot, 'docs/ASSET_RUNTIME_INVENTORY_V54.json'), 'utf8'));
 
-test('l’inventaire v53 conserve tous les totaux du catalogue et des niveaux physiques', () => {
+test('l’inventaire v54 conserve tous les totaux du catalogue et des niveaux physiques', () => {
   assert.deepEqual(inventory.summary, {
     playerSubjects: 1,
     playerSheets: 2,
@@ -38,8 +38,10 @@ test('les variantes ennemies et véhicules s’additionnent sans profil fantôme
 
 test('aucun trou connu n’est masqué par un faux statut terminé', () => {
   const combat = inventory.player.sheets.find((sheet) => sheet.id === 'player.echo9-marine.combat');
-  assert.equal(combat.identityVerified, false);
-  assert.equal(combat.runtimeState, 'blocked-identity');
+  assert.equal(combat.identityVerified, true);
+  assert.equal(combat.runtimeState, 'loaded-exact');
+  assert.equal(inventory.enemies.exactProfileCount, 110);
+  assert.equal(inventory.enemies.missingDedicatedProfileCount, 242);
   assert.equal(inventory.npcs.unknownIdFallback, null);
   assert.ok(inventory.enemies.archetypes.every((entry) => entry.identityStatus === 'exact' || entry.fallbackReason));
   assert.equal(inventory.vehicles.chassis.filter((entry) => entry.dedicatedBitmapState === 'loaded-exact').length, 1);

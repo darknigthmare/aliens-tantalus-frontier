@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v53.0.0**. Cette release conserve toute la boucle v1→v52 et ajoute un registre visuel exhaustif, des orientations source fiables, la quarantaine d’identité du joueur, des proportions/collisions mesurées dans le hub et davantage de couches bitmap physiques dans les missions.
+Version web jouable **v54.0.0**. Cette release conserve toute la boucle v1→v53, active la plaque combat fidèle d’Echo‑9, ajoute cinq masters OpenAI réellement consommés, transforme l’extraction en holdout jouable et persistant, puis aligne surface visuelle, collision et espacement d’escouade.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -25,7 +25,7 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Les 436 campagnes sont reliées à leur monde et objectif, les 800 seeds couvrent le domaine des dangers, et 27 atlas normalisés (432 cellules gardées) alimentent les acteurs runtime. Cela signifie que chaque entrée influence le runtime par ses données ; cela ne signifie pas que des centaines de niveaux ont tous été fabriqués individuellement à la main. L'audit classe honnêtement les 27 promesses en **5 effectives**, **18 systémiques** et **4 partielles**.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Les 436 campagnes sont reliées à leur monde et objectif, les 800 seeds couvrent le domaine des dangers, et 31 atlas normalisés (496 cellules gardées) alimentent les acteurs runtime. Cela signifie que chaque entrée influence le runtime par ses données ; cela ne signifie pas que des centaines de niveaux ont tous été fabriqués individuellement à la main. Pour les 568 profils ennemis, l’inventaire déclare honnêtement 110 rendus exacts, 216 réemplois de famille et 242 profils encore sans art dédié.
 
 ## Contrôles
 
@@ -42,7 +42,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v53 |
+| Catalogue | Total v54 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -65,19 +65,20 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate v53 finale locale : lint de **80 modules**, **124/124 tests Node** et build statique **53.0.0** de **3 443 entrées**.
+Gate v54 locale du 22 août 2026 : lint de **83 modules**, **133/133 tests Node** et build statique **54.0.0** de **3 443 entrées**.
 
-`npm.cmd run qa:browser:v52` valide la release v53 sur **12 checkpoints** réels dans un contexte Chrome isolé : boot v53, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le dernier passage ne relève aucune exception, erreur console ni requête échouée.
+`npm.cmd run qa:browser:v54` valide la release v54 sur **12/12 checkpoints** réels dans un contexte Chrome isolé : boot v54, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker `atf-v54-runtime-2` couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le passage du 22 août 2026 ne relève aucune exception, erreur console ni requête échouée.
 
 ## Dossier de production
 
 - [Source consolidée des promesses v1→v51](docs/GAMEPLAY_PROMISE_SOURCE_V51.md)
-- [Matrice d'audit des promesses et preuves exécutables v53](docs/GAMEPLAY_PROMISE_AUDIT_V53.md)
-- [Inventaire exhaustif runtime v53 : personnages, ennemis, véhicules, props et couches](docs/ASSET_RUNTIME_INVENTORY_V53.md)
-- [Inventaire machine v53](docs/ASSET_RUNTIME_INVENTORY_V53.json)
+- [Matrice d'audit des promesses et preuves exécutables v54](docs/GAMEPLAY_PROMISE_AUDIT_V54.md)
+- [Inventaire exhaustif runtime v54 : personnages, ennemis, véhicules, props et couches](docs/ASSET_RUNTIME_INVENTORY_V54.md)
+- [Inventaire machine v54](docs/ASSET_RUNTIME_INVENTORY_V54.json)
 - [Architecture runtime v52](docs/ARCHITECTURE_V52.md)
-- [Historique de release v53](docs/VERSION_HISTORY_V53.md)
-- [Spécification de la feuille de combat joueur à régénérer](docs/prompts/V53_PLAYER_COMBAT_IDENTITY_PROMPT.md)
+- [Historique de release v54](docs/VERSION_HISTORY_V54.md)
+- [Vague ImageGen v54 : prompts, chemins et gates](docs/prompts/V54_IMAGEGEN_WAVE.md)
+- [Provenance des cinq masters OpenAI v54](docs/ART_PROVENANCE_V54.md)
 - [Audit v51 conservé](docs/GAMEPLAY_PROMISE_AUDIT_V51.md)
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
 - [Audit level design v50 et comparaison avec Aliens: Infestation](docs/LEVEL_DESIGN_AUDIT_V50.md)

@@ -10,13 +10,14 @@ const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 
-const [manifest, report, gameSource, hubSource, gallerySource, spriteRuntimeSource, gameV52Source, hubV52Source] = await Promise.all([
+const [manifest, report, gameSource, hubSource, gallerySource, spriteRuntimeSource, enemyVisualRuntimeSource, gameV52Source, hubV52Source] = await Promise.all([
   readFile(manifestPath, 'utf8').then(JSON.parse),
   readFile(reportPath, 'utf8').then(JSON.parse),
   readFile(resolve(repoRoot, 'src/game.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/hub-game.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/v50-visuals.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/sprite-animation-runtime.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/enemy-visual-runtime-v53.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/game-v52-runtime.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/hub-v52-runtime.js'), 'utf8')
 ]);
@@ -25,6 +26,7 @@ const runtimeSources = new Map([
   ['src/game.js', gameSource],
   ['src/hub-game.js', hubSource],
   ['src/sprite-animation-runtime.js', spriteRuntimeSource],
+  ['src/enemy-visual-runtime-v53.js', enemyVisualRuntimeSource],
   ['src/game-v52-runtime.js', gameV52Source],
   ['src/hub-v52-runtime.js', hubV52Source]
 ]);
@@ -52,11 +54,11 @@ function repoPathFromAbsolute(file) {
   return relative(repoRoot, file).split(sep).join('/');
 }
 
-test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v52', async () => {
-  assert.equal(manifest.release, 'v52');
+test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v54', async () => {
+  assert.equal(manifest.release, 'v54');
   assert.equal(manifest.normalization.status, 'ready');
   assert.equal(manifest.normalization.rawMastersPreserved, true);
-  assert.equal(manifest.sheets.length, 27);
+  assert.equal(manifest.sheets.length, 31);
   assert.equal(new Set(manifest.sheets.map((sheet) => sheet.id)).size, manifest.sheets.length);
 
   const v52NpcSheets = manifest.sheets.filter((sheet) => sheet.wave === 'v52');
@@ -77,6 +79,17 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
     }, `${sheet.id}: v52 runtime and gallery consumers`);
   }
   assert.ok(v52NpcSheets.some((sheet) => sheet.id === 'npc.leila-s-rensen.locomotion'), 'Leila id mirrors the runtime slug');
+
+  for (const id of ['enemy.pathogen-mimic.action', 'enemy.pale-crucible-hunter.action']) {
+    const sheet = manifest.sheets.find((entry) => entry.id === id);
+    assert.ok(sheet, `${id}: v54 sheet`);
+    assert.equal(sheet.sourceFacing, 'right');
+    assert.equal(sheet.identityVerified, true);
+    assert.equal(sheet.grid, 'v50-4x4');
+    assert.equal(sheet.clips, 'enemy-action-v54');
+    assert.deepEqual(manifest.clipSets[sheet.clips].map((clip) => [clip.id, clip.row]), [['idle', 0], ['chase', 1], ['attack', 2], ['death', 3]]);
+    assert.ok(manifest.contracts.hitboxes[sheet.hitbox].width >= 192, `${id}: large hitbox`);
+  }
 
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
@@ -115,7 +128,7 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
     assert.ok(['left', 'right'].includes(sheet.sourceFacing), `${sheet.id}: explicit source orientation`);
     assert.equal(sheet.sourceFacing, sheet.id === 'enemy.xenomorph-drone.combat' ? 'left' : 'right', `${sheet.id}: audited source orientation`);
     assert.equal(typeof sheet.identityVerified, 'boolean', `${sheet.id}: identity verification flag`);
-    assert.equal(sheet.identityVerified, sheet.id !== 'player.echo9-marine.combat', `${sheet.id}: combat identity quarantine`);
+    assert.equal(sheet.identityVerified, true, `${sheet.id}: verified identity`);
     assert.ok(manifest.contracts.pivots[sheet.pivot], `${sheet.id}: missing pivot ${sheet.pivot}`);
     assert.ok(manifest.contracts.hitboxes[sheet.hitbox], `${sheet.id}: missing hitbox ${sheet.hitbox}`);
     assert.ok(manifest.clipSets[sheet.clips], `${sheet.id}: missing clips ${sheet.clips}`);
@@ -152,10 +165,10 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
   }
 });
 
-test('the shared normalization report certifies 27 RGBA atlases and 432 guarded cells', async () => {
-  assert.equal(report.release, 'v52');
-  assert.equal(report.spriteAtlasCount, 27);
-  assert.equal(report.spriteCellCount, 432);
+test('the shared normalization report certifies 31 RGBA atlases and 496 guarded cells', async () => {
+  assert.equal(report.release, 'v54');
+  assert.equal(report.spriteAtlasCount, 31);
+  assert.equal(report.spriteCellCount, 496);
   assert.deepEqual(report.grid, { columns: 4, rows: 4, cellSize: 256, guard: 16 });
   assert.equal(report.rawMastersPreserved, true);
   assert.equal(report.spriteAtlases.length, manifest.sheets.length);
@@ -183,9 +196,9 @@ test('all sprite sheets expose a truthful runtime registry and declared consumer
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
-  assert.equal(referenced.length, 27, 'all normalized sheets are connected to the animation registry');
+  assert.equal(referenced.length, 31, 'all normalized sheets are connected to the animation registry');
   assert.equal(galleryOnly.length, 0, 'no runtime NPC is mislabeled gallery-only');
-  assert.equal(notReferenced.length, 0, 'all 27 normalized sheets must have an honest consumer');
+  assert.equal(notReferenced.length, 0, 'all 31 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
     assert.equal(SPRITE_SHEETS[sheet.id]?.path, sheet.files.normalized, `${sheet.id}: normalized bitmap registered in runtime`);

@@ -30,18 +30,17 @@ test('la direction logique reste stable entre locomotion et combat du Drone', ()
   assert.equal(shouldFlipSprite(null, -1), true);
 });
 
-test('la plaque combat joueur non vérifiée ne remplace jamais son identité', () => {
-  assert.equal(resolveSpriteSheet('player.echo9-marine.combat').identityVerified, false);
+test('la plaque combat joueur v54 conserve son identité et ses actions dédiées', () => {
+  assert.equal(resolveSpriteSheet('player.echo9-marine.combat').identityVerified, true);
   assert.deepEqual(resolveVerifiedPlayerCombat('primary-fire'), {
-    sheetId: 'player.echo9-marine.locomotion',
-    clipId: 'idle',
-    degraded: 'combat-identity-unverified'
+    sheetId: 'player.echo9-marine.combat',
+    clipId: 'primary-fire'
   });
-  assert.equal(resolveVerifiedPlayerCombat('hurt-death').clipId, 'jump-fall');
+  assert.equal(resolveVerifiedPlayerCombat('hurt-death').clipId, 'hurt-death');
 
   const marine = resolvePlayerAnimation({ alive: true, grounded: true, v52FireClock: 1 }, true);
   const xeno = resolvePlayerAnimation({ alive: true, grounded: true, visualForm: 'xenomorph', v52FireClock: 1 }, true);
-  assert.equal(marine.sheetId, 'player.echo9-marine.locomotion');
+  assert.equal(marine.sheetId, 'player.echo9-marine.combat');
   assert.equal(xeno.sheetId, 'enemy.xenomorph-drone.combat');
 });
 
@@ -49,4 +48,19 @@ test('un PNJ inconnu ne prend jamais silencieusement l’identité de Mara', () 
   assert.equal(resolveNpcAnimation({ crewId: 'crew-inconnu', alive: true }), null);
   assert.equal(resolveNpcAnimation({ crewId: 'crew-01-mara-vega', alive: true }).sheetId, 'npc.mara-vega.locomotion');
   assert.equal(resolveEnemyAnimation({ spriteKey: 'xenoWarrior', alive: true, alert: true }).sheetId, 'enemy.xenomorph-drone.locomotion');
+});
+
+test('Pathogen Mimic et Pale Crucible Hunter restent à droite et gardent leur identité', () => {
+  for (const [spriteKey, sheetId] of [
+    ['pathogenMimic', 'enemy.pathogen-mimic.action'],
+    ['paleCrucibleHunter', 'enemy.pale-crucible-hunter.action']
+  ]) {
+    const sheet = resolveSpriteSheet(sheetId);
+    assert.equal(sheet.sourceFacing, 1);
+    assert.equal(sheet.identityVerified, true);
+    assert.equal(shouldFlipSprite(sheet, 1), false);
+    assert.equal(resolveEnemyAnimation({ spriteKey, alive: true, alert: true }).clipId, 'chase');
+    assert.equal(resolveEnemyAnimation({ spriteKey, alive: true, attacking: true }).clipId, 'attack');
+    assert.equal(resolveEnemyAnimation({ spriteKey, alive: false }).clipId, 'death');
+  }
 });

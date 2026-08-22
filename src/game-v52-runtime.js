@@ -24,6 +24,52 @@ const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + 
 const overlaps = (a, b) => Boolean(a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
 
+export const SQUAD_FORMATION_GAP = 12;
+export const DEFAULT_SQUAD_RENDER_WIDTH = 92;
+
+export function getSquadVisualWidth(actor = {}) {
+  const sheet = resolveSpriteSheet(actor.spriteId || actor.sheetId);
+  const playerWidth = SPRITE_SHEETS['player.echo9-marine.locomotion']?.renderWidth || 110;
+  const familyWidth = actor.squadMember || actor.crewId
+    ? DEFAULT_SQUAD_RENDER_WIDTH
+    : actor.coop !== undefined || actor.operatorId
+      ? playerWidth
+      : DEFAULT_SQUAD_RENDER_WIDTH;
+  return Math.max(
+    Number(actor.w) || 0,
+    Number(actor.visualWidth) || 0,
+    Number(sheet?.renderWidth) || 0,
+    familyWidth
+  );
+}
+
+export function getSquadSeparationDistance(first = {}, second = {}) {
+  return (getSquadVisualWidth(first) + getSquadVisualWidth(second)) / 2 + SQUAD_FORMATION_GAP;
+}
+
+export function getSquadFormationX(
+  anchor = {},
+  member = {},
+  index = 0,
+  worldWidth = WORLD_WIDTH,
+  preferredDirection = null
+) {
+  const bodyWidth = Math.max(1, Number(member.w) || 1);
+  const maximumX = Math.max(0, (Number(worldWidth) || WORLD_WIDTH) - bodyWidth);
+  const anchorCenter = (Number(anchor.x) || 0) + (Number(anchor.w) || 0) / 2;
+  const slotIndex = Math.max(0, Math.floor(Number(index) || 0));
+  const slotWidth = getSquadVisualWidth(member) + SQUAD_FORMATION_GAP;
+  const offset = getSquadSeparationDistance(anchor, member) + slotIndex * slotWidth;
+  const facing = Math.sign(Number(anchor.facing) || 1) || 1;
+  const direction = Math.sign(Number(preferredDirection)) || -facing;
+  const targetFor = (side) => anchorCenter + side * offset - bodyWidth / 2;
+  const preferred = targetFor(direction);
+  const opposite = targetFor(-direction);
+  const preferredFits = preferred >= 0 && preferred <= maximumX;
+  const oppositeFits = opposite >= 0 && opposite <= maximumX;
+  return clamp(preferredFits || !oppositeFits ? preferred : opposite, 0, maximumX);
+}
+
 const ROLE_PROFILES = Object.freeze({
   command: Object.freeze({ action: 'command-aura', damage: 15, interval: 0.72, range: 610, armor: 34, supportCharges: 2 }),
   assault: Object.freeze({ action: 'suppressive-fire', damage: 19, interval: 0.46, range: 560, armor: 46, supportCharges: 1 }),
@@ -59,7 +105,8 @@ export function buildSquadRoleRuntime(member = {}) {
 
 function createSquadActor(member, index, leader) {
   const profile = buildSquadRoleRuntime(member);
-  return {
+  const spriteId = CREW_SPRITE_IDS[member.id] || CREW_SPRITE_IDS['crew-01-mara-vega'];
+  const actor = {
     id: `squad:${member.id}`,
     crewId: member.id,
     name: member.name,
@@ -68,7 +115,7 @@ function createSquadActor(member, index, leader) {
     specialty: profile.specialty,
     action: profile.action,
     profile,
-    spriteId: CREW_SPRITE_IDS[member.id] || CREW_SPRITE_IDS['crew-01-mara-vega'],
+    spriteId,
     x: clamp((leader?.x || 160) - 72 - index * 58, 24, WORLD_WIDTH - 50),
     y: leader?.y || FLOOR_Y - 90,
     w: 40,
@@ -100,8 +147,12 @@ function createSquadActor(member, index, leader) {
     shots: 0,
     actions: 0,
     damageTaken: 0,
-    squadMember: true
+    squadMember: true,
+    formationIndex: index
   };
+  actor.visualWidth = getSquadVisualWidth(actor);
+  actor.formationSlot = actor.visualWidth + SQUAD_FORMATION_GAP;
+  return actor;
 }
 
 export function withV52MissionRuntime(BaseEngine) {
@@ -163,6 +214,7 @@ export function withV52MissionRuntime(BaseEngine) {
         repairs: 0,
         scans: 0,
         rallies: 0,
+        separations: 0,
         boarded: 0,
         consequences: []
       };
@@ -241,7 +293,37 @@ export function withV52MissionRuntime(BaseEngine) {
       if (!candidates.length) return super.updateEnemy(enemy, delta);
       const nearest = candidates.reduce((best, actor) => Math.abs(actor.x - enemy.x) < Math.abs(best.x - enemy.x) ? actor : best, candidates[0]);
       if (!nearest.squadMember) return super.updateEnemy(enemy, delta);
-      return this.updateEnemyAgainstSquad(enemy, nearest, delta);
+      if (!this.stealthRuntime) return this.updateEnemyAgainstSquad(enemy, nearest, delta);
+
+      // Squad retargeting must preserve the production stealth lifecycle; the
+      // companion changes the combat target, never the leader's detection state.
+      const stealthActors = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive);
+      const detectionDistance = stealthActors.length
+        ? Math.min(...stealthActors.map((actor) => distance(actor.inVehicle && this.vehicle?.active ? this.vehicle : actor, enemy)))
+        : Infinity;
+      const wasAlert = enemy.alert;
+      const detectionRadius = this.stealthRuntime.detectionRadius * (enemy.isBoss ? 1.18 : enemy.behavior === 'stalker' ? 1.08 : 1);
+      if (!wasAlert && detectionDistance <= detectionRadius) enemy.revealed = Math.max(enemy.revealed || 0, 0.12);
+      if (enemy.jammedClock > 0) {
+        enemy.jammedClock = Math.max(0, enemy.jammedClock - delta);
+        enemy.alert = false;
+        enemy.speed *= 0.985;
+      }
+      this.updateEnemyAgainstSquad(enemy, nearest, delta);
+      if (!wasAlert && enemy.alert && detectionDistance > detectionRadius && (enemy.revealed || 0) <= 0.01) enemy.alert = false;
+      if (enemy.alert && detectionDistance > detectionRadius * 1.65 && (enemy.revealed || 0) <= 0.01) {
+        enemy.searchClock = (enemy.searchClock || 0) + delta;
+        if (enemy.searchClock >= 2.4) enemy.alert = false;
+      } else enemy.searchClock = 0;
+      if (!wasAlert && enemy.alert) {
+        this.stealthRuntime.spottedBy.add(enemy.id);
+        this.stealthRuntime.lastEvent = 'spotted';
+        this.onEvent({ type: 'spotted', enemyId: enemy.id, radius: Math.round(detectionRadius), visibility: Math.round(this.stealthRuntime.visibility), noise: Math.round(this.stealthRuntime.noise) });
+      } else if (wasAlert && !enemy.alert) {
+        this.stealthRuntime.spottedBy.delete(enemy.id);
+        this.stealthRuntime.lastEvent = 'lost';
+        this.onEvent({ type: 'lost', enemyId: enemy.id, radius: Math.round(detectionRadius) });
+      }
     }
 
     updateEnemyAgainstSquad(enemy, target, delta) {
@@ -303,6 +385,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const leader = this.player?.alive ? this.player : this.coopEnabled && this.coop?.alive ? this.coop : this.player;
       if (!leader) return;
       const active = this.activeSquadActors();
+      const fixedActors = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive && !actor.inVehicle);
       for (const [index, member] of active.entries()) {
         member.fireClock = Math.max(0, member.fireClock - delta);
         member.supportClock = Math.max(0, member.supportClock - delta);
@@ -323,6 +406,65 @@ export function withV52MissionRuntime(BaseEngine) {
         this.updateSquadSupport(member, active, leader);
         this.applySquadHazard(member);
       }
+      this.squadTelemetry.separations += this.separateSquadFormation(active, fixedActors);
+    }
+
+    sameSquadSurface(first, second) {
+      if (!first || !second) return false;
+      const firstBottom = (Number(first.y) || 0) + (Number(first.h) || 0);
+      const secondBottom = (Number(second.y) || 0) + (Number(second.h) || 0);
+      return Math.abs(firstBottom - secondBottom) <= 44;
+    }
+
+    moveSquadMemberForSeparation(member, targetX) {
+      const previousX = member.x;
+      member.x = clamp(targetX, 0, WORLD_WIDTH - member.w);
+      this.resolveHorizontal(member, previousX);
+      return Math.abs(member.x - previousX) > 0.01;
+    }
+
+    separateSquadFormation(members = this.activeSquadActors(), fixedActors = null) {
+      const mobile = asList(members).filter((member) => member?.alive && !member.inVehicle && !member.climbing);
+      const anchors = asList(fixedActors || [this.player, this.coopEnabled ? this.coop : null])
+        .filter((actor) => actor?.alive && !actor.inVehicle && !actor.climbing);
+      if (!mobile.length || !anchors.length) return 0;
+      let corrections = 0;
+
+      const ensureDistance = (member, anchor, preferredDirection) => {
+        if (!this.sameSquadSurface(member, anchor)) return false;
+        const memberCenter = member.x + member.w / 2;
+        const anchorCenter = anchor.x + anchor.w / 2;
+        const minimum = getSquadSeparationDistance(member, anchor);
+        const delta = memberCenter - anchorCenter;
+        if (Math.abs(delta) >= minimum - 0.01) return false;
+        let direction = Math.sign(delta) || Math.sign(preferredDirection) || -(Math.sign(anchor.facing) || 1);
+        const maximumX = WORLD_WIDTH - member.w;
+        const candidate = anchorCenter + direction * minimum - member.w / 2;
+        const opposite = anchorCenter - direction * minimum - member.w / 2;
+        if ((candidate < 0 || candidate > maximumX) && opposite >= 0 && opposite <= maximumX) direction *= -1;
+        const moved = this.moveSquadMemberForSeparation(member, anchorCenter + direction * minimum - member.w / 2);
+        if (moved) corrections += 1;
+        return moved;
+      };
+
+      for (let pass = 0; pass < 6; pass += 1) {
+        let changed = false;
+        for (const member of mobile) {
+          const slotDirection = -(Math.sign((anchors[0]?.facing) || 1) || 1);
+          for (const anchor of anchors) changed = ensureDistance(member, anchor, slotDirection) || changed;
+        }
+        for (let firstIndex = 0; firstIndex < mobile.length; firstIndex += 1) {
+          const first = mobile[firstIndex];
+          for (let secondIndex = firstIndex + 1; secondIndex < mobile.length; secondIndex += 1) {
+            const second = mobile[secondIndex];
+            const delta = (second.x + second.w / 2) - (first.x + first.w / 2);
+            const slotDirection = Math.sign(delta) || -(Math.sign((anchors[0]?.facing) || 1) || 1);
+            changed = ensureDistance(second, first, slotDirection) || changed;
+          }
+        }
+        if (!changed) break;
+      }
+      return corrections;
     }
 
     updateSquadVehicleSeat(member, index, leader, delta) {
@@ -330,8 +472,9 @@ export function withV52MissionRuntime(BaseEngine) {
       if (!vehicle?.active || vehicle.destroyed || !vehicle.occupied) {
         if (member.inVehicle) {
           member.inVehicle = false;
-          member.x = clamp((vehicle?.x || leader.x) - 54 - index * 38, 0, WORLD_WIDTH - member.w);
+          member.x = getSquadFormationX(leader, member, member.formationIndex ?? index);
           member.y = clamp((vehicle?.y || leader.y) + (vehicle?.h || 0) - member.h, 0, WORLD_HEIGHT - member.h);
+          this.separateSquadFormation([member], [leader]);
         }
         return false;
       }
@@ -361,14 +504,20 @@ export function withV52MissionRuntime(BaseEngine) {
 
     updateSquadMovement(member, index, leader, delta) {
       const targetEnemy = this.closestEnemy(member, member.profile.range);
+      const formationIndex = member.formationIndex ?? index;
+      const formationSlot = Math.max(
+        Number(member.formationSlot) || 0,
+        getSquadVisualWidth(member) + SQUAD_FORMATION_GAP
+      );
+      const enemyDirection = targetEnemy ? -(Math.sign(targetEnemy.x - member.x) || member.facing || 1) : 0;
       const formationX = targetEnemy
-        ? targetEnemy.x - (Math.sign(targetEnemy.x - member.x) || member.facing) * (170 + index * 28)
-        : leader.x - (leader.facing || 1) * (72 + index * 58);
+        ? clamp(targetEnemy.x + targetEnemy.w / 2 + enemyDirection * (170 + formationIndex * formationSlot) - member.w / 2, 0, WORLD_WIDTH - member.w)
+        : getSquadFormationX(leader, member, formationIndex);
       const targetY = targetEnemy ? targetEnemy.y + targetEnemy.h : leader.y + leader.h;
       const gapX = formationX - member.x;
       const gapY = targetY - (member.y + member.h);
       if ((Math.abs(gapX) > 960 || Math.abs(gapY) > 470) && member.rallyClock <= 0) {
-        member.x = clamp(leader.x - (leader.facing || 1) * (88 + index * 48), 0, WORLD_WIDTH - member.w);
+        member.x = getSquadFormationX(leader, member, formationIndex);
         member.y = clamp(leader.y + leader.h - member.h, 0, WORLD_HEIGHT - member.h);
         member.vx = 0;
         member.vy = 0;
@@ -410,7 +559,7 @@ export function withV52MissionRuntime(BaseEngine) {
       member.grounded = false;
       this.resolveVertical(member, previousBottom);
       if (member.y > WORLD_HEIGHT + 80) {
-        member.x = clamp(leader.x - 90 - index * 46, 0, WORLD_WIDTH - member.w);
+        member.x = getSquadFormationX(leader, member, formationIndex);
         member.y = clamp(leader.y + leader.h - member.h, 0, WORLD_HEIGHT - member.h);
         member.vy = 0;
       }
@@ -427,7 +576,9 @@ export function withV52MissionRuntime(BaseEngine) {
 
     closestEnemy(member, maximumRange = 620) {
       return asList(this.enemies)
-        .filter((enemy) => enemy.alive && distance(member, enemy) <= maximumRange)
+        .filter((enemy) => enemy.alive
+          && (!this.stealthRuntime || enemy.alert || (enemy.revealed || 0) > 0)
+          && distance(member, enemy) <= maximumRange)
         .sort((a, b) => distance(member, a) - distance(member, b))[0] || null;
     }
 
