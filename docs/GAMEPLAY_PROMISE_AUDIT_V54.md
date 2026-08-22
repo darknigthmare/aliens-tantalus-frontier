@@ -50,7 +50,7 @@ npm.cmd run art:v54:check
 npm.cmd run lint
 npm.cmd test
 npm.cmd run build
-npm.cmd run qa:browser:v52
+npm.cmd run qa:browser:v54
 ```
 
 Une promesse est considérée effective seulement si l’action, son effet runtime, sa persistance éventuelle et sa preuve passent ensemble.
