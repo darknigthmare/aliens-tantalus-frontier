@@ -21,8 +21,80 @@ const GRAVITY = 1900;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
-const overlaps = (a, b) => Boolean(a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
+const overlaps = (a, b) => {
+  const first = getEntitySpriteCollisionBounds(a);
+  const second = getEntitySpriteCollisionBounds(b);
+  return Boolean(first && second && first.x < second.x + second.w && first.x + first.w > second.x && first.y < second.y + second.h && first.y + first.h > second.y);
+};
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
+const V55_VEHICLE_SHEETS = new Set([
+  'vehicle.m577-command-apc.action',
+  'vehicle.m22a3-jackson-tank.action',
+  'vehicle.p5000-powered-work-loader.action',
+  'vehicle.ud4l-cheyenne-dropship.action'
+]);
+
+export function buildSpriteHitboxRuntime(entity = {}, sheetOrId = null) {
+  const sheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
+  const pivot = sheet && SPRITE_PIVOTS[sheet.pivot];
+  const hitbox = sheet && SPRITE_HITBOXES[sheet.hitbox];
+  const entityX = Number(entity.x);
+  const entityY = Number(entity.y);
+  const entityWidth = Number(entity.w);
+  const entityHeight = Number(entity.h);
+  if (!sheet || !pivot || !hitbox || ![entityX, entityY, entityWidth, entityHeight].every(Number.isFinite)) return null;
+  const width = Number(sheet.renderWidth);
+  const height = Number(sheet.renderHeight);
+  if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return null;
+  const scaleX = width / SPRITE_GRID.cellWidth;
+  const scaleY = height / SPRITE_GRID.cellHeight;
+  const flip = shouldFlipSprite(sheet, entity.facing);
+  const anchorX = entityX + entityWidth / 2;
+  const anchorY = entityY + entityHeight;
+  const pivotX = flip ? SPRITE_GRID.cellWidth - pivot.x : pivot.x;
+  const spriteX = anchorX - pivotX * scaleX;
+  const spriteY = anchorY - pivot.y * scaleY;
+  const hitboxX = flip ? SPRITE_GRID.cellWidth - hitbox.x - hitbox.width : hitbox.x;
+  const world = {
+    x: spriteX + hitboxX * scaleX,
+    y: spriteY + hitbox.y * scaleY,
+    w: hitbox.width * scaleX,
+    h: hitbox.height * scaleY
+  };
+  return {
+    id: sheet.hitbox,
+    sheetId: sheet.id,
+    source: hitbox,
+    flip,
+    world,
+    local: { x: world.x - entityX, y: world.y - entityY, w: world.w, h: world.h },
+    sprite: { x: spriteX, y: spriteY, width, height, scaleX, scaleY },
+    pivot: { id: sheet.pivot, source: pivot, world: { x: anchorX, y: anchorY } }
+  };
+}
+
+export function getEntitySpriteCollisionBounds(entity) {
+  if (!entity) return null;
+  const local = entity.spriteHitbox?.local;
+  if (!local) return entity;
+  const values = [entity.x, entity.y, local.x, local.y, local.w, local.h].map(Number);
+  if (!values.every(Number.isFinite) || values[4] <= 0 || values[5] <= 0) return entity;
+  return { x: values[0] + values[2], y: values[1] + values[3], w: values[4], h: values[5] };
+}
+
+export function getV55VehiclePhysicalProfile(vehicle = {}) {
+  const request = resolveVehicleAnimation(vehicle);
+  if (!request || !V55_VEHICLE_SHEETS.has(request.sheetId)) return null;
+  const sheet = resolveSpriteSheet(request.sheetId);
+  const hitbox = sheet && SPRITE_HITBOXES[sheet.hitbox];
+  if (!sheet || !hitbox) return null;
+  return {
+    sheetId: sheet.id,
+    hitboxId: sheet.hitbox,
+    width: hitbox.width * sheet.renderWidth / SPRITE_GRID.cellWidth,
+    height: hitbox.height * sheet.renderHeight / SPRITE_GRID.cellHeight
+  };
+}
 
 export const SQUAD_FORMATION_GAP = 12;
 export const DEFAULT_SQUAD_RENDER_WIDTH = 92;
@@ -161,7 +233,9 @@ export function withV52MissionRuntime(BaseEngine) {
       this.pendingSquadResume = null;
       const snapshot = super.start(options);
       this.configureSpriteRuntime();
+      this.configureV55VehiclePhysicalBounds();
       this.configureMissionSquad();
+      this.refreshSpriteCollisionProfiles();
       const pendingSquad = this.pendingSquadResume;
       const squadRestored = pendingSquad && this.lastResumeResult?.applied ? this.restoreSquadState(pendingSquad) : 0;
       if (this.lastResumeResult?.applied) this.lastResumeResult = { ...this.lastResumeResult, squadRestored };
@@ -195,6 +269,74 @@ export function withV52MissionRuntime(BaseEngine) {
         image.decoding = 'async';
         image.src = entry.path;
         this.images.set(entry.imageKey, image);
+      }
+    }
+
+    configureV55VehiclePhysicalBounds() {
+      const profile = getV55VehiclePhysicalProfile(this.vehicle);
+      if (!profile || !this.vehicle) return null;
+      const previousWidth = Number(this.vehicle.w) || profile.width;
+      const previousHeight = Number(this.vehicle.h) || profile.height;
+      const centerX = (Number(this.vehicle.x) || 0) + previousWidth / 2;
+      const bottom = (Number(this.vehicle.y) || 0) + previousHeight;
+      const groundBottom = Number.isFinite(Number(this.vehicle.groundY))
+        ? Number(this.vehicle.groundY) + previousHeight
+        : null;
+      this.vehicle.w = profile.width;
+      this.vehicle.h = profile.height;
+      this.vehicle.x = clamp(centerX - profile.width / 2, 0, WORLD_WIDTH - profile.width);
+      this.vehicle.y = bottom - profile.height;
+      if (groundBottom !== null) this.vehicle.groundY = groundBottom - profile.height;
+      if (Number.isFinite(Number(this.vehicle.waterLine))) this.vehicle.waterLine = FLOOR_Y - profile.height - 18;
+      this.vehicle.v55PhysicalProfile = { ...profile };
+      const hitboxRuntime = buildSpriteHitboxRuntime(this.vehicle, profile.sheetId);
+      if (hitboxRuntime) this.vehicle.spriteHitbox = hitboxRuntime;
+      return profile;
+    }
+
+    refreshSpriteCollisionProfiles() {
+      for (const enemy of asList(this.enemies)) {
+        const request = resolveEnemyAnimation(enemy);
+        const runtime = request && buildSpriteHitboxRuntime(enemy, request.sheetId);
+        if (runtime) enemy.spriteHitbox = runtime;
+      }
+      if (this.vehicle?.active) {
+        const request = resolveVehicleAnimation(this.vehicle);
+        const runtime = request && buildSpriteHitboxRuntime(this.vehicle, request.sheetId);
+        if (runtime) this.vehicle.spriteHitbox = runtime;
+      }
+    }
+
+    withEnemySpriteCollisionGeometry(callback) {
+      const restores = [];
+      for (const enemy of asList(this.enemies)) {
+        if (!enemy?.spriteHitbox?.local) continue;
+        const bounds = getEntitySpriteCollisionBounds(enemy);
+        if (!bounds || bounds === enemy) continue;
+        restores.push({
+          enemy,
+          x: enemy.x,
+          y: enemy.y,
+          w: enemy.w,
+          h: enemy.h,
+          spriteHitbox: enemy.spriteHitbox
+        });
+        enemy.x = bounds.x;
+        enemy.y = bounds.y;
+        enemy.w = bounds.w;
+        enemy.h = bounds.h;
+        enemy.spriteHitbox = null;
+      }
+      try {
+        return callback();
+      } finally {
+        for (const restore of restores) {
+          restore.enemy.x = restore.x;
+          restore.enemy.y = restore.y;
+          restore.enemy.w = restore.w;
+          restore.enemy.h = restore.h;
+          restore.enemy.spriteHitbox = restore.spriteHitbox;
+        }
       }
     }
 
@@ -253,9 +395,31 @@ export function withV52MissionRuntime(BaseEngine) {
         this.vehicle.v52HurtClock = Math.max(0, (this.vehicle.v52HurtClock || 0) - delta);
         this.vehicle.v52TurretClock = Math.max(0, (this.vehicle.v52TurretClock || 0) - delta);
       }
+      this.refreshSpriteCollisionProfiles();
       super.update(delta);
       if (this.mission?.state === 'active') this.updateMissionSquad(delta);
       this.updateSpriteAnimationEvents();
+      this.refreshSpriteCollisionProfiles();
+    }
+
+    updateBullets(delta) {
+      this.refreshSpriteCollisionProfiles();
+      return this.withEnemySpriteCollisionGeometry(() => super.updateBullets(delta));
+    }
+
+    updateVehicleDriver(player, delta, controls) {
+      const beforeX = Number(this.vehicle?.x) || 0;
+      this.refreshSpriteCollisionProfiles();
+      const result = this.withEnemySpriteCollisionGeometry(() => super.updateVehicleDriver(player, delta, controls));
+      if (this.vehicle?.active && this.vehicle.driver === player) {
+        const travelled = (Number(this.vehicle.x) || 0) - beforeX;
+        const horizontalMotion = Math.abs(travelled) > 0.01 ? travelled : Number(this.vehicle.vx) || 0;
+        if (Math.abs(horizontalMotion) > 0.5) this.vehicle.facing = Math.sign(horizontalMotion);
+        const request = resolveVehicleAnimation(this.vehicle);
+        const runtime = request && buildSpriteHitboxRuntime(this.vehicle, request.sheetId);
+        if (runtime) this.vehicle.spriteHitbox = runtime;
+      }
+      return result;
     }
 
     fire(actor) {
@@ -400,6 +564,17 @@ export function withV52MissionRuntime(BaseEngine) {
           }
           continue;
         }
+        if (member.hazardKind === 'electrical' && member.hazardClock > 0) {
+          member.vx = 0;
+          member.climbing = false;
+          member.crouching = false;
+          const previousBottom = member.y + member.h;
+          member.vy += GRAVITY * delta;
+          member.y += member.vy * delta;
+          member.grounded = false;
+          this.resolveVertical(member, previousBottom);
+          continue;
+        }
         if (this.updateSquadVehicleSeat(member, index, leader, delta)) continue;
         this.updateSquadMovement(member, index, leader, delta);
         this.updateSquadCombat(member);
@@ -424,7 +599,8 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     separateSquadFormation(members = this.activeSquadActors(), fixedActors = null) {
-      const mobile = asList(members).filter((member) => member?.alive && !member.inVehicle && !member.climbing);
+      const mobile = asList(members).filter((member) => member?.alive && !member.inVehicle && !member.climbing
+        && !(member.hazardKind === 'electrical' && member.hazardClock > 0));
       const anchors = asList(fixedActors || [this.player, this.coopEnabled ? this.coop : null])
         .filter((actor) => actor?.alive && !actor.inVehicle && !actor.climbing);
       if (!mobile.length || !anchors.length) return 0;
@@ -675,11 +851,19 @@ export function withV52MissionRuntime(BaseEngine) {
       const feet = { x: member.x + 5, y: member.y + member.h - 12, w: member.w - 10, h: 12 };
       const hazard = asList(this.hazards).find((candidate) => candidate.active && overlaps(feet, candidate));
       if (!hazard) return;
-      const resistance = member.specialty === 'survival' ? 0.35 : member.species === 'synthetic' && ['toxic', 'vacuum'].includes(hazard.kind) ? 0.4 : 1;
+      const kind = hazard.kind || 'hazard';
+      const resistance = member.specialty === 'survival' ? 0.35 : member.species === 'synthetic' && ['toxic', 'vacuum'].includes(kind) ? 0.4 : 1;
       const damage = Number(hazard.damage ?? 12);
-      if (damage > 0) this.damageSquadMember(member, damage * resistance, { source: hazard.kind || 'hazard' });
-      member.hazardClock = member.specialty === 'survival' ? 1.2 : 0.75;
-      if (damage > 0 || hazard.knockback) member.vy = -190;
+      const stun = Math.max(0, Number(hazard.stun ?? hazard.stunSeconds) || 0);
+      const impulse = Math.max(0, Number(hazard.impulse ?? hazard.knockback) || 0);
+      if (damage > 0) this.damageSquadMember(member, damage * resistance, { source: kind });
+      member.hazardKind = kind;
+      member.hazardClock = kind === 'electrical'
+        ? Math.max(0.72, stun)
+        : member.specialty === 'survival' ? Math.max(1.2, stun) : Math.max(0.75, stun);
+      if (kind === 'electrical') member.vx = 0;
+      if (impulse > 0) member.vy = -impulse;
+      else if (damage > 0 || hazard.knockback) member.vy = -190;
     }
 
     damageSquadMember(member, amount, { source = 'enemy' } = {}) {
@@ -786,7 +970,7 @@ export function withV52MissionRuntime(BaseEngine) {
         ['coop', this.coopEnabled ? this.coop : null, this.coopEnabled && this.coop ? resolvePlayerAnimation(this.coop, false) : null],
         ...this.activeSquadActors().map((member) => [member.crewId, member, resolveNpcAnimation(member)]),
         ...asList(this.enemies).map((enemy) => [enemy.id, enemy, resolveEnemyAnimation(enemy)]),
-        [this.vehicle?.id || 'vehicle', this.vehicle?.active ? this.vehicle : null, this.vehicle?.active && (this.vehicle.family || 'ground') === 'ground' ? resolveVehicleAnimation(this.vehicle) : null]
+        [this.vehicle?.id || 'vehicle', this.vehicle?.active ? this.vehicle : null, this.vehicle?.active ? resolveVehicleAnimation(this.vehicle) : null]
       ];
       for (const [entityId, entity, request] of samples) {
         if (entity?.visualIdentityStatus && entity.visualIdentityStatus !== 'exact') {
@@ -903,7 +1087,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawVehicle(ctx) {
-      if (!this.vehicle?.active || (this.vehicle.family || 'ground') !== 'ground') return super.drawVehicle(ctx);
+      if (!this.vehicle?.active) return super.drawVehicle(ctx);
       const request = resolveVehicleAnimation(this.vehicle);
       const sample = this.spriteAnimation?.sample(this.vehicle.id || 'vehicle', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       if (!this.drawSpriteSample(ctx, sample, this.vehicle)) super.drawVehicle(ctx);
@@ -944,32 +1128,22 @@ export function withV52MissionRuntime(BaseEngine) {
     drawSpriteSample(ctx, sample, entity) {
       if (!ctx || !sample || !entity) return false;
       const entry = sample.sheet;
-      const flip = shouldFlipSprite(entry, entity.facing);
       const image = this.images?.get(entry.imageKey);
       if (!imageReady(image)) return false;
-      const pivot = SPRITE_PIVOTS[entry.pivot];
-      const hitbox = SPRITE_HITBOXES[entry.hitbox];
-      if (!pivot || !hitbox) return false;
-      const width = entry.renderWidth;
-      const height = entry.renderHeight;
-      const scaleX = width / SPRITE_GRID.cellWidth;
-      const scaleY = height / SPRITE_GRID.cellHeight;
-      const anchorX = entity.x + entity.w / 2;
-      const anchorY = entity.y + entity.h;
-      const pivotX = flip ? SPRITE_GRID.cellWidth - pivot.x : pivot.x;
-      const x = anchorX - pivotX * scaleX;
-      const y = anchorY - pivot.y * scaleY;
+      const runtime = buildSpriteHitboxRuntime(entity, entry);
+      if (!runtime) return false;
+      const { flip, sprite } = runtime;
       const sourceWidth = (image.naturalWidth || image.width) / SPRITE_GRID.columns;
       const sourceHeight = (image.naturalHeight || image.height) / SPRITE_GRID.rows;
       ctx.save();
       if (flip) {
-        ctx.translate(x + width, y);
+        ctx.translate(sprite.x + sprite.width, sprite.y);
         ctx.scale(-1, 1);
-        ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, width, height);
-      } else ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, x, y, width, height);
+        ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, 0, 0, sprite.width, sprite.height);
+      } else ctx.drawImage(image, sample.column * sourceWidth, sample.row * sourceHeight, sourceWidth, sourceHeight, sprite.x, sprite.y, sprite.width, sprite.height);
       ctx.restore();
-      entity.spriteHitbox = { id: entry.hitbox, source: hitbox, world: { x: entity.x, y: entity.y, w: entity.w, h: entity.h } };
-      entity.spritePivot = { id: entry.pivot, source: pivot, world: { x: anchorX, y: anchorY } };
+      entity.spriteHitbox = runtime;
+      entity.spritePivot = runtime.pivot;
       return true;
     }
 

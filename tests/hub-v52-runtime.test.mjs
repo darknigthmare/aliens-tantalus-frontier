@@ -11,7 +11,7 @@ import {
   HubGame,
   buildHubNpcInteractionEvent
 } from '../src/hub-v52-runtime.js';
-import { CREW_SPRITE_IDS, resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
+import { CREW_MISSION_SPRITE_IDS, CREW_SPRITE_IDS, resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -135,7 +135,7 @@ test('walking to each NPC emits a serializable strategic action and a persistabl
   assert.equal(seenCrew.size, 16);
 }));
 
-test('NPC animation sampling reaches idle, walk, role-work and alert rows instead of universal row one', () => withRuntime(() => {
+test('NPC animation sampling keeps idle/walk locomotion then uses role and alert mission cells', () => withRuntime(() => {
   const hub = createHub();
   hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
   const npc = hub.npcs[0];
@@ -161,15 +161,18 @@ test('NPC animation sampling reaches idle, walk, role-work and alert rows instea
   hub.hubNpcAnimation.reset(npc.crewId);
   samples.push(hub.sampleNpcAnimation(npc));
 
-  assert.deepEqual(samples.map((sample) => sample.clip.id), ['idle', 'walk', 'role-work', 'alert-reaction']);
-  assert.deepEqual(samples.map((sample) => sample.row), [0, 1, 2, 3]);
-  assert.ok(samples.every((sample) => sample.sheet.id === CREW_SPRITE_IDS[npc.crewId]));
+  assert.deepEqual(samples.map((sample) => sample.clip.id), ['idle', 'walk', 'role-support', 'ready']);
+  assert.deepEqual(samples.map((sample) => sample.row), [0, 1, 3, 0]);
+  assert.deepEqual(samples.map((sample) => sample.sheet.id), [
+    CREW_SPRITE_IDS[npc.crewId], CREW_SPRITE_IDS[npc.crewId],
+    CREW_MISSION_SPRITE_IDS[npc.crewId], CREW_MISSION_SPRITE_IDS[npc.crewId]
+  ]);
 
   hub.draw();
   const snapshot = hub.getSnapshot();
   const animated = snapshot.npcAnimations.find((entry) => entry.crewId === npc.crewId);
-  assert.equal(animated.clipId, 'alert-reaction');
-  assert.equal(animated.row, 3);
+  assert.equal(animated.clipId, 'ready');
+  assert.equal(animated.row, 0);
 }));
 
 test('active crises keep priority, alert the crew and still resolve through the v51 combat contract', () => withRuntime(() => {
@@ -179,7 +182,10 @@ test('active crises keep priority, alert the crew and still resolve through the 
   hub.start({ deck: 0, roomId: 'bridge', positionX: 180, activeCrisis: { id: 'v52-breach', kind: 'xenomorph', count: 1 } });
   assert.equal(hub.getSnapshot().crisisActive, true);
   assert.ok(hub.npcs.every((npc) => npc.alerted));
-  assert.ok(hub.getSnapshot().npcAnimations.every((entry) => entry.clipId === 'alert-reaction'));
+  const crisisClips = hub.getSnapshot().npcAnimations.map((entry) => entry.clipId);
+  assert.ok(crisisClips.every((clipId) => ['ready', 'alert-reaction'].includes(clipId)));
+  assert.ok(crisisClips.includes('ready'));
+  assert.ok(crisisClips.includes('alert-reaction'));
 
   const npc = hub.npcs[0];
   Object.assign(hub.player, { x: npc.x, y: npc.y, vx: 0, vy: 0, grounded: true });

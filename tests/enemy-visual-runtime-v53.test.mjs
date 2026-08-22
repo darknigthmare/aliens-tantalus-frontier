@@ -12,13 +12,13 @@ import {
 import { resolveEnemyAnimation } from '../src/sprite-animation-runtime.js';
 
 const EXPECTED = new Map([
-  ['Ovomorph', ['xenoDrone', null, null]], ['Facehugger', ['facehugger', null, null]],
-  ['Chestburster', ['xenoDrone', null, null]], ['Drone / Big Chap', ['xenoDrone', null, null]],
+  ['Ovomorph', ['ovomorph', null, null]], ['Facehugger', ['facehugger', null, null]],
+  ['Chestburster', ['chestburster', null, null]], ['Drone / Big Chap', ['xenoDrone', null, null]],
   ['Warrior', ['xenoWarrior', null, null]], ['Runner', ['xenoRunner', null, null]],
-  ['Praetorian', ['xenoDrone', null, null]], ['Queen', ['xenoQueen', null, null]],
-  ['Crusher', ['xenoDrone', null, null]], ['Spitter', ['xenoDrone', null, null]],
-  ['Lurker', ['xenoDrone', null, null]], ['Carrier', ['xenoDrone', null, null]],
-  ['Ravager', ['xenoDrone', null, null]], ['Boiler', ['xenoDrone', null, null]],
+  ['Praetorian', ['xenoPraetorian', null, null]], ['Queen', ['xenoQueen', null, null]],
+  ['Crusher', ['xenoCrusher', null, null]], ['Spitter', ['xenoSpitter', null, null]],
+  ['Lurker', ['xenoLurker', null, null]], ['Carrier', ['xenoCarrier', null, null]],
+  ['Ravager', ['xenoRavager', null, null]], ['Boiler', ['xenoDrone', null, null]],
   ['Prowler', ['xenoDrone', null, null]], ['Burster', ['xenoDrone', null, null]],
   ['Monica Line', ['xenoDrone', null, null]], ['Specimen Six Line', ['xenoDrone', null, null]],
   ['Red Xenomorph', ['legacy', 'neuroXeno', 0]], ['K-Series Yellow Xenomorph', ['legacy', 'neuroXeno', 1]],
@@ -41,7 +41,7 @@ const EXPECTED = new Map([
 ]);
 
 const signature = (profile) => JSON.stringify([
-  profile.spriteKey, profile.imageKey, profile.row, profile.identityStatus, profile.artSubject
+  profile.spriteKey, profile.imageKey, profile.row, profile.artSubject
 ]);
 
 test('le registre v53 couvre exactement les 52 archétypes du catalogue', () => {
@@ -81,15 +81,17 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   assert.equal(report.modern, 352);
   assert.equal(report.legacy, 216);
   assert.deepEqual(report.bySpriteKey, {
-    xenoDrone: 242, facehugger: 11, xenoWarrior: 11, xenoRunner: 22, xenoQueen: 11,
+    ovomorph: 11, facehugger: 11, chestburster: 11, xenoDrone: 154, xenoWarrior: 11, xenoRunner: 22,
+    xenoPraetorian: 11, xenoQueen: 11, xenoCrusher: 11, xenoSpitter: 11, xenoLurker: 11,
+    xenoCarrier: 11, xenoRavager: 11,
     ripperQueen: 11, paleCrucibleHunter: 11, legacy: 216, neomorph: 11,
     pathogenMimic: 11, workingJoe: 11
   });
   assert.deepEqual(report.byImageKey, { neuroXeno: 55, pathogen: 84, synthetic: 11, human: 66 });
-  assert.deepEqual(report.byIdentityStatus, { 'missing-dedicated-art': 242, exact: 110, 'authored-family': 216 });
+  assert.deepEqual(report.byIdentityStatus, { exact: 18, 'authored-family': 396, 'missing-dedicated-art': 154 });
 });
 
-test('Pathogen Mimic et Pale Crucible Hunter utilisent leurs plaques exactes sur les 11 variantes', () => {
+test('Pathogen Mimic et Pale Crucible Hunter gardent leur plaque mais seuls leurs profils de base sont exacts', () => {
   const expected = new Map([
     ['Pathogen Mimic', ['pathogenMimic', 'enemy.pathogen-mimic.action']],
     ['Pale Crucible Hunter', ['paleCrucibleHunter', 'enemy.pale-crucible-hunter.action']]
@@ -101,9 +103,11 @@ test('Pathogen Mimic et Pale Crucible Hunter utilisent leurs plaques exactes sur
       const resolved = resolveEnemyVisualProfile(enemy);
       assert.equal(resolved.spriteKey, spriteKey, enemy.name);
       assert.equal(resolved.sheetId, sheetId, enemy.name);
-      assert.equal(resolved.identityStatus, 'exact', enemy.name);
-      assert.equal(resolved.approximate, false, enemy.name);
-      assert.equal(resolved.fallbackReason, null, enemy.name);
+      const isBase = Number(enemy.id.match(/^enemy-(\d+)-/)?.[1]) <= 52;
+      assert.equal(resolved.identityStatus, isBase ? 'exact' : 'authored-family', enemy.name);
+      assert.equal(resolved.approximate, !isBase, enemy.name);
+      if (isBase) assert.equal(resolved.fallbackReason, null, enemy.name);
+      else assert.match(resolved.fallbackReason, /modifier systémique/, enemy.name);
     }
   }
 });

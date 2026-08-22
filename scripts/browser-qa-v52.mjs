@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v54') && shell.release === '54.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v55') && shell.release === '55.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -284,7 +284,7 @@ try {
   requireThat(missionStart.missionLevelRuntime?.schemaVersion === 52 && missionStart.missionLevelRuntime.routes.length >= 2 && missionStart.missionLevelRuntime.zones.length >= 4, `Niveau multi-routes v52 absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.missionLevelRuntime.artLayers?.far && missionStart.missionLevelRuntime.artLayers?.mid && missionStart.missionLevelRuntime.artLayers?.foreground, `Couches v52 non branchées: ${JSON.stringify(missionStart.missionLevelRuntime?.artLayers)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
-  requireThat(missionStart.animationRuntime?.sheets === 31 && missionStart.animationRuntime.runtimeReady === 31 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  requireThat(missionStart.animationRuntime?.sheets === 51 && missionStart.animationRuntime.runtimeReady === 51 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v55 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
   const squadCombat = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const ally = game.activeSquadActors().find((member) => member.alive && !member.inVehicle);
@@ -374,10 +374,10 @@ try {
 
   await click('[data-view="operations"]');
   await click('[data-plan-campaign="signature-01"]:not([disabled])');
-  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.plannedCampaignId === 'signature-01'`, 'Campagne holdout v54 non planifiée');
+  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.plannedCampaignId === 'signature-01'`, 'Campagne holdout v55 non planifiée');
   await click('#operation-launch');
-  await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission holdout v54 non lancée', 20000);
-  await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission holdout v54 manquants', 30000);
+  await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission holdout v55 non lancée', 20000);
+  await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission holdout v55 manquants', 30000);
   const extractionHoldout = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const playerOrigin = { x: game.player.x, y: game.player.y, vx: game.player.vx, vy: game.player.vy };
@@ -427,11 +427,11 @@ try {
       && extractionHoldout.persistedTimer?.state === 'running'
       && extractionHoldout.completedSnapshot?.state === 'complete'
       && extractionHoldout.extractionUnlocked,
-    `Holdout extraction v54 non fonctionnel: ${JSON.stringify(extractionHoldout)}`
+    `Holdout extraction v55 non fonctionnel: ${JSON.stringify(extractionHoldout)}`
   );
   report.extractionHoldout = extractionHoldout;
   await click('#retreat-mission');
-  await waitFor(`Boolean(!globalThis.__ATF_V51__.saveSystem.data.strategy.currentOperation && document.querySelector('[data-panel="hub"]').classList.contains('active'))`, 'Sortie mission holdout v54 non finalisée');
+  await waitFor(`Boolean(!globalThis.__ATF_V51__.saveSystem.data.strategy.currentOperation && document.querySelector('[data-panel="hub"]').classList.contains('active'))`, 'Sortie mission holdout v55 non finalisée');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -477,6 +477,39 @@ try {
   requireThat(hubNpc.roster === 16 && hubNpc.after === hubNpc.before + 1, `PNJ hub v52 sans interaction persistée: ${JSON.stringify(hubNpc)}`);
   report.hubNpc = hubNpc;
   report.checkpoints.push('hub-npc-interaction');
+
+  await evaluate(`(() => {
+    const api = globalThis.__ATF_V51__;
+    const hub = globalThis.__ATF_HUB__;
+    api.showView('hub');
+    hub.stop(false);
+    hub.start({ deck: 3, roomId: 'dropship-hangar', positionX: 80, playerHealth: 100, activeCrisis: null });
+    return hub.getSnapshot();
+  })()`);
+  await waitFor(`(() => {
+    const snapshot = globalThis.__ATF_HUB__.getSnapshot();
+    return snapshot.running && snapshot.roomComposition === 'modular-v55' && snapshot.hubArtAssetsReady === 4;
+  })()`, 'Hangar modulaire v55 ou ses quatre bitmaps indisponibles', 30000);
+  const modularHangar = await evaluate(`(() => {
+    const hub = globalThis.__ATF_HUB__;
+    const before = hub.getSnapshot();
+    Object.assign(hub.player, { x: 930, y: 624 - hub.player.h, vx: 80, vy: 0, grounded: true });
+    hub.hangarHazardCooldown = 0;
+    hub.update(0.016);
+    const after = hub.getSnapshot();
+    return { before, after, assets: hub.getAssetReport() };
+  })()`);
+  requireThat(
+    modularHangar.before.roomBackground === null
+      && modularHangar.before.roomComposition === 'modular-v55'
+      && modularHangar.after.hubIntegrity < modularHangar.before.hubIntegrity
+      && modularHangar.after.shockHits === modularHangar.before.shockHits + 1
+      && modularHangar.assets.npcMissionSpriteAssetsReady === 8,
+    `Hangar v55 non physique/modulaire: ${JSON.stringify(modularHangar)}`
+  );
+  report.screenshots.push(await capture('alien-tantalus-v55-hangar-desktop.png'));
+  report.modularHangar = modularHangar;
+  report.checkpoints.push('hub-modular-v55');
 
   await click('[data-view="editor"]');
   await click('#editor-clear');
@@ -572,7 +605,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '54.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v54 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '55.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v55 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

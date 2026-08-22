@@ -22,7 +22,8 @@ test('v52 upgrades the 800 legacy seeds across the complete hazard domain', () =
     distribution.set(seed.hazards[0], distribution.get(seed.hazards[0]) + 1);
   }
   assert.deepEqual([...distribution.keys()].sort(), [...HAZARD_KINDS_V52].sort());
-  assert.ok([...distribution.values()].every((count) => count >= 110));
+  assert.ok([...distribution.values()].every((count) => count >= 95));
+  assert.ok(distribution.get('electrical') >= 95);
 });
 
 test('v52 maps all 436 campaigns to a seed with the correct world and objective', () => {

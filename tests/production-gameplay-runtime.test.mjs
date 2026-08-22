@@ -245,7 +245,8 @@ test('boss profile remains contextual in a synthetic lockdown and never coerces 
   assert.equal(bosses[0].spriteKey, 'legacy');
   assert.equal(bosses[0].visualImageKey, 'synthetic');
   assert.equal(bosses[0].visualRow, 2);
-  assert.equal(bosses[0].visualIdentityStatus, 'exact');
+  assert.equal(bosses[0].visualIdentityStatus, 'authored-family');
+  assert.match(bosses[0].visualFallbackReason, /réemplo|variante/i);
   assert.equal(bosses[0].isRoyal, false);
   assert.equal(engine.enemies.some((enemy) => enemy.spriteKey === 'xenoQueen'), false);
 

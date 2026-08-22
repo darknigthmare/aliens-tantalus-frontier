@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { CREW } from '../src/content.js';
 import {
+  CREW_MISSION_SPRITE_IDS,
   CREW_SPRITE_IDS,
   SPRITE_CLIP_SETS,
   SPRITE_GRID,
@@ -21,11 +22,13 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   const report = spriteRuntimeReport();
   assert.equal(report.invalid.length, 0);
   assert.equal(report.runtimeReady, report.sheets);
-  assert.equal(report.sheets, 31);
+  assert.equal(report.sheets, 51);
 
   const crewIds = new Set(CREW.map((member) => member.id));
   assert.deepEqual(new Set(Object.keys(CREW_SPRITE_IDS)), crewIds);
   assert.equal(new Set(Object.values(CREW_SPRITE_IDS)).size, CREW.length);
+  assert.equal(Object.keys(CREW_MISSION_SPRITE_IDS).length, 8);
+  assert.equal(new Set(Object.values(CREW_MISSION_SPRITE_IDS)).size, 8);
 
   for (const member of CREW) {
     const sheetId = CREW_SPRITE_IDS[member.id];

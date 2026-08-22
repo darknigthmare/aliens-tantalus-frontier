@@ -5,6 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 import { MISSION_LEVEL_LAYER_FILES_V52 } from '../src/game-v52-level-runtime.js';
 import { MISSION_STRUCTURAL_PROP_FILES } from '../src/game-v51-runtime.js';
 import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
+import { HUB_ART_ASSETS_V55 } from '../src/hub-art-runtime-v55.js';
 
 const relativeImports = (source) => {
   const imports = [];
@@ -47,11 +48,15 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
     '/src/game-v52-runtime.js',
     '/src/game-v52-level-runtime.js',
     '/src/sprite-animation-runtime.js',
-    '/src/mission-levels-v52.js'
+    '/src/mission-levels-v52.js',
+    '/src/enemy-visual-overrides-v55.js',
+    '/src/npc-mission-runtime-v55.js',
+    '/src/vehicle-visual-runtime-v55.js',
+    '/src/hub-art-runtime-v55.js',
   ]) {
     assert.ok(
       worker.includes(`'${modulePath}'`) || worker.includes(`"${modulePath}"`),
-      `${modulePath} manque dans CORE v52`
+      `${modulePath} manque dans CORE v55`
     );
   }
 
@@ -59,17 +64,18 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
     ...Object.values(SPRITE_SHEETS).map((sheet) => sheet.path),
     ...Object.values(MISSION_LEVEL_LAYER_FILES_V52).flatMap((layers) => Object.values(layers)),
     ...Object.values(MISSION_STRUCTURAL_PROP_FILES),
+    ...HUB_ART_ASSETS_V55,
   ]);
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 31);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 51);
   for (const assetPath of runtimeAssets) {
     await access(localPath(assetPath));
     assert.ok(
       worker.includes(`'${assetPath}'`) || worker.includes(`"${assetPath}"`),
-      `${assetPath} manque dans CORE v52`
+      `${assetPath} manque dans CORE v55`
     );
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v54-/);
+  assert.match(worker, /const CACHE = ['"]atf-v55-/);
   assert.match(worker, /event\.request\.mode === 'navigate'/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

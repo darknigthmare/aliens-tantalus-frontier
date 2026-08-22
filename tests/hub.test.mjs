@@ -51,8 +51,8 @@ test('each room owns a measured render profile and an authored prop collider', (
 
   assert.equal(HUB_MODULAR_PROP_FILES.length, 16);
   assert.equal(new Set(HUB_MODULAR_PROP_FILES).size, 16);
-  assert.equal(HUB_MODULAR_ASSETS.length, 36);
-  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 36);
+  assert.equal(HUB_MODULAR_ASSETS.length, 39);
+  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 39);
 
   for (const source of HUB_MODULAR_ASSETS) {
     const file = assetFile(source);

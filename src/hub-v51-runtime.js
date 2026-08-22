@@ -8,6 +8,7 @@ import {
   getHubDoorBounds,
   HUB_WORLD
 } from './hub-game.js';
+import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 
 export { HUB_DECKS, HUB_MODULAR_ASSETS, HUB_MODULAR_PROP_FILES, HUB_ROOM_PROFILES, HUB_ROOM_COUNT, HUB_WORLD, getHubDoorBounds };
 
@@ -435,15 +436,18 @@ export class HubGame extends HubGameV50 {
     this.roomChangePulse = Math.max(0, this.roomChangePulse - delta);
     this.player.fireClock = Math.max(0, this.player.fireClock - delta);
     this.player.invulnerability = Math.max(0, this.player.invulnerability - delta);
-    const left = this.keys.has('KeyA') || this.keys.has('ArrowLeft');
-    const right = this.keys.has('KeyD') || this.keys.has('ArrowRight');
-    const up = this.keys.has('KeyW') || this.keys.has('ArrowUp');
-    const down = this.keys.has('KeyS') || this.keys.has('ArrowDown');
+    this.player.shockClock = Math.max(0, (this.player.shockClock || 0) - delta);
+    this.hangarHazardCooldown = Math.max(0, (this.hangarHazardCooldown || 0) - delta);
+    const controlsLocked = this.player.shockClock > 0;
+    const left = !controlsLocked && (this.keys.has('KeyA') || this.keys.has('ArrowLeft'));
+    const right = !controlsLocked && (this.keys.has('KeyD') || this.keys.has('ArrowRight'));
+    const up = !controlsLocked && (this.keys.has('KeyW') || this.keys.has('ArrowUp'));
+    const down = !controlsLocked && (this.keys.has('KeyS') || this.keys.has('ArrowDown'));
     const ladder = this.nearestTraversalLadder();
     if (this.player.alive) {
       if (ladder && (up || down)) this.player.climbing = true;
       if (this.player.climbing && !ladder) this.player.climbing = false;
-      this.player.crouching = this.keys.has('KeyC') && this.player.grounded && !this.player.climbing;
+      this.player.crouching = !controlsLocked && this.keys.has('KeyC') && this.player.grounded && !this.player.climbing;
       const sprinting = this.keys.has('ShiftLeft') || this.keys.has('ShiftRight');
       const speed = this.player.crouching ? 105 : sprinting ? 370 : 270;
       const targetVelocity = (Number(right) - Number(left)) * speed;
@@ -478,6 +482,7 @@ export class HubGame extends HubGameV50 {
       const previousX = this.player.x;
       this.player.x = clamp(this.player.x + this.player.vx * delta, 24, HUB_WORLD.width - this.player.w - 24);
       this.resolveHorizontal(previousX);
+      if (!this.editorPlaytest) this.applyHangarHazard();
     } else {
       this.player.vx = 0;
     }
@@ -741,7 +746,10 @@ export class HubGame extends HubGameV50 {
       ctx.fillRect(0, HUB_WORLD.floorY, HUB_WORLD.width, 4);
     }
     this.drawTraversal(ctx);
-    for (const room of deck.rooms) { this.drawRoomMarker(ctx, room); this.drawInteractionProp(ctx, room); }
+    for (const room of deck.rooms) {
+      this.drawRoomMarker(ctx, room);
+      if (room.id !== DROPSHIP_HANGAR_ART_V55.roomId) this.drawInteractionProp(ctx, room);
+    }
     for (const obstacle of this.obstacles) this.drawObstacle(ctx, obstacle);
     for (const npc of this.npcs) {
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
@@ -759,6 +767,11 @@ export class HubGame extends HubGameV50 {
     }
     if (!this.editorPlaytest) for (const door of this.doorStates) this.drawDoor(ctx, door);
     for (const door of this.v51Doors) this.drawRuntimeDoor(ctx, door);
+    if (!this.editorPlaytest) {
+      for (const room of deck.rooms) {
+        if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
+      }
+    }
   }
 
   drawTraversal(ctx) {

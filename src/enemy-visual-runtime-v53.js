@@ -1,3 +1,5 @@
+import { resolveEnemyVisualOverrideV55 } from './enemy-visual-overrides-v55.js';
+
 const MODIFIER_PREFIXES = Object.freeze([
   'Acid-Blooded', 'Cryo-Adapted', 'Vacuum-Adapted', 'Neuro-Linked',
   'Hive Guard', 'Standard', 'Albino', 'Armored', 'Apex', 'Juvenile', 'Elder'
@@ -149,7 +151,9 @@ export const ENEMY_VISUAL_PROFILE_COUNT = ENEMY_VISUAL_ARCHETYPES.length;
 export const ENEMY_VISUAL_PROFILES = REGISTRY;
 
 export function resolveEnemyArchetype(source = {}) {
-  const rawName = String(source.name ?? source.archetype ?? '').trim();
+  const rawName = typeof source === 'string'
+    ? source.trim()
+    : String(source.name ?? source.archetype ?? '').trim();
   if (!rawName) return '';
   if (REGISTRY[rawName]) return rawName;
 
@@ -197,10 +201,51 @@ const unknownFamilyProfile = (source, archetype) => {
   return missingXeno(subject);
 };
 
+const sourceName = (source) => typeof source === 'string'
+  ? source.trim()
+  : String(source?.name ?? source?.archetype ?? '').trim();
+
+const isBaseEnemyIdentity = (source, archetype) => {
+  const id = typeof source === 'object' && source !== null ? String(source.id ?? '') : '';
+  const ordinal = Number(id.match(/^enemy-(\d+)-/)?.[1]);
+  if (Number.isFinite(ordinal) && ordinal > 0) return ordinal <= 52;
+  if (source?.provenance === 'systemic-variant') return false;
+  const rawName = sourceName(source);
+  if (rawName && rawName !== archetype) return false;
+  const modifier = typeof source === 'object' && source !== null ? String(source.modifier ?? '') : '';
+  return !modifier || modifier === 'Standard';
+};
+
+const asAuthoredFamilyVariant = (source, archetype, baseProfile) => {
+  const label = sourceName(source) || archetype;
+  return Object.freeze({
+    archetype,
+    ...baseProfile,
+    identityStatus: ENEMY_VISUAL_IDENTITY.family,
+    approximate: true,
+    fallbackReason: `La plaque exacte de ${baseProfile.artSubject} est réemployée pour ${label}; son modifier systémique n'est pas dessiné séparément.`
+  });
+};
+
 export function resolveEnemyVisualProfile(source = {}) {
+  const dedicatedV55 = resolveEnemyVisualOverrideV55(source);
+  if (dedicatedV55) return Object.freeze({
+    ...dedicatedV55,
+    imageKey: null,
+    row: null,
+    artSubject: dedicatedV55.archetype,
+    legacy: false
+  });
   const archetype = resolveEnemyArchetype(source);
   const baseProfile = REGISTRY[archetype] ?? unknownFamilyProfile(source, archetype);
-  return Object.freeze({ archetype, ...baseProfile, approximate: baseProfile.identityStatus !== ENEMY_VISUAL_IDENTITY.exact });
+  if (baseProfile.identityStatus === ENEMY_VISUAL_IDENTITY.exact && !isBaseEnemyIdentity(source, archetype)) {
+    return asAuthoredFamilyVariant(source, archetype, baseProfile);
+  }
+  return Object.freeze({
+    archetype,
+    ...baseProfile,
+    approximate: baseProfile.identityStatus !== ENEMY_VISUAL_IDENTITY.exact
+  });
 }
 
 export function resolveLegacyEnemyCell(enemy = {}, animationTime = 0) {

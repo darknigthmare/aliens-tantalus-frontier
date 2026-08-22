@@ -8,6 +8,7 @@ import {
   compileShipProject
 } from './hub-v51-runtime.js';
 import {
+  CREW_MISSION_SPRITE_IDS,
   CREW_SPRITE_IDS,
   SPRITE_GRID,
   SpriteAnimationController,
@@ -75,6 +76,12 @@ export const HUB_NPC_ROSTER = Object.freeze([
 ]);
 
 export const HUB_NPC_SPRITE_FILES = Object.freeze(HUB_NPC_ROSTER.map((entry) => entry.spritePath));
+export const HUB_NPC_MISSION_SPRITE_FILES = Object.freeze(HUB_NPC_ROSTER.flatMap((entry) => {
+  const sheetId = CREW_MISSION_SPRITE_IDS[entry.crewId];
+  const sprite = resolveSpriteSheet(sheetId);
+  return sprite?.path ? [sprite.path] : [];
+}));
+
 
 const PROFILE_BY_ROOM = new Map(HUB_NPC_ROSTER.map((entry, sheetIndex) => [entry.roomId, Object.freeze({ ...entry, sheetIndex })]));
 const PROFILE_BY_CREW = new Map(HUB_NPC_ROSTER.map((entry) => [entry.crewId, entry]));
@@ -146,6 +153,15 @@ export class HubGame extends HubGameV51 {
     this.npcSheets = HUB_NPC_SPRITE_FILES.map(createImage);
     this.crewSheet = this.npcSheets[0];
     this.npcImageCrewIds = new Map(this.npcSheets.map((image, index) => [image, HUB_NPC_ROSTER[index].crewId]));
+    this.npcImagesBySheetId = new Map(this.npcSheets.map((image, index) => [HUB_NPC_ROSTER[index].spriteId, image]));
+    this.npcMissionSheets = new Map(HUB_NPC_ROSTER.flatMap((entry) => {
+      const sheetId = CREW_MISSION_SPRITE_IDS[entry.crewId];
+      const sprite = resolveSpriteSheet(sheetId);
+      if (!sprite?.path) return [];
+      const image = createImage(sprite.path);
+      this.npcImagesBySheetId.set(sheetId, image);
+      return [[entry.crewId, image]];
+    }));
     this.hubNpcInteractions = {};
     this.hubNpcSequence = 0;
     this.hubNpcAnimation = new SpriteAnimationController({
@@ -314,7 +330,10 @@ export class HubGame extends HubGameV51 {
     if (crewId) {
       const npc = this.npcs?.find((entry) => entry.crewId === crewId);
       const sample = this.sampleNpcAnimation(npc, { emit: true });
-      if (sample) return super.drawSheetCell(ctx, image, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
+      if (sample) {
+        const sampleImage = this.npcImagesBySheetId?.get(sample.sheet.id) || image;
+        return super.drawSheetCell(ctx, sampleImage, sample.column, sample.row, x, y, width, height, flip, SPRITE_GRID.columns, SPRITE_GRID.rows);
+      }
     }
     return super.drawSheetCell(ctx, image, column, row, x, y, width, height, flip, columns, rows);
   }
@@ -348,7 +367,9 @@ export class HubGame extends HubGameV51 {
       ...report,
       npcRosterCount: HUB_NPC_ROSTER.length,
       npcUniqueSpriteCount: new Set(HUB_NPC_SPRITE_FILES).size,
-      npcSpriteAssetsReady: this.npcSheets.filter(imageReady).length
+      npcSpriteAssetsReady: this.npcSheets.filter(imageReady).length,
+      npcMissionSpriteAssetCount: this.npcMissionSheets.size,
+      npcMissionSpriteAssetsReady: [...this.npcMissionSheets.values()].filter(imageReady).length
     };
   }
 

@@ -6,6 +6,7 @@ export const HAZARD_KINDS_V52 = Object.freeze([
   'vacuum',
   'fire',
   'steam',
+  'electrical',
   'radiation',
   'flood',
   'darkness'
@@ -22,6 +23,7 @@ const HAZARD_CONTRACTS = Object.freeze({
   vacuum: Object.freeze({ effect: 'decompression', damage: 8, oxygenDrain: 22 }),
   fire: Object.freeze({ effect: 'burn', damage: 22, armorDrain: 3 }),
   steam: Object.freeze({ effect: 'scald', damage: 18, impulse: 120 }),
+  electrical: Object.freeze({ effect: 'shock', damage: 22, stun: 1.25, impulse: 80 }),
   radiation: Object.freeze({ effect: 'irradiation', damage: 10, exposure: 16 }),
   flood: Object.freeze({ effect: 'drag', damage: 6, slow: 0.48 }),
   darkness: Object.freeze({ effect: 'visibility', damage: 0, visibility: 0.28 })
@@ -168,12 +170,12 @@ const SHIP_TEMPLATE = Object.freeze({
   ]),
   hazards: Object.freeze([
     Object.freeze({ id: 'ship-hazard-vacuum', kind: 'vacuum', zoneId: 'ship-cargo', x: 1320, y: FLOOR_Y - 20, w: 260, h: 20, eventId: 'ship-decompression' }),
-    Object.freeze({ id: 'ship-hazard-steam', kind: 'steam', zoneId: 'ship-engineering', x: 2320, y: FLOOR_Y - 20, w: 180, h: 20, eventId: 'ship-power-cascade' }),
+    Object.freeze({ id: 'ship-hazard-electrical', kind: 'electrical', zoneId: 'ship-engineering', x: 2320, y: FLOOR_Y - 20, w: 180, h: 20, eventId: 'ship-power-cascade' }),
     Object.freeze({ id: 'ship-hazard-seed', kind: '$seed-primary', zoneId: 'ship-extraction', x: 4300, y: FLOOR_Y - 20, w: 160, h: 20 })
   ]),
   events: Object.freeze([
     Object.freeze({ id: 'ship-decompression', trigger: Object.freeze({ type: 'enter-zone', zoneId: 'ship-cargo' }), actions: Object.freeze(['activate:ship-hazard-vacuum', 'close:cargo-bulkhead', 'art:emergency']) }),
-    Object.freeze({ id: 'ship-power-cascade', trigger: Object.freeze({ type: 'interact-anchor', anchorId: 'power' }), actions: Object.freeze(['toggle:ship-hazard-steam', 'open:cargo-bulkhead', 'power:restore']) }),
+    Object.freeze({ id: 'ship-power-cascade', trigger: Object.freeze({ type: 'interact-anchor', anchorId: 'power' }), actions: Object.freeze(['toggle:ship-hazard-electrical', 'open:cargo-bulkhead', 'power:restore']) }),
     Object.freeze({ id: 'ship-bridge-ambush', trigger: Object.freeze({ type: 'enter-zone', zoneId: 'ship-command' }), actions: Object.freeze(['spawn:ship-command-wave', 'lock:aft-bulkhead']) })
   ]),
   spawns: Object.freeze([

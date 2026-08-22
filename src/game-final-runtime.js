@@ -113,6 +113,7 @@ function hazardContract(type = 'industrial', danger = 5) {
     vacuum: { effect: 'decompression', damage: 8, oxygenDrain: 22, slow: 0 },
     fire: { effect: 'burn', damage: 22, armorDrain: 3, slow: 0 },
     steam: { effect: 'scald-knockback', damage: 12, knockback: 280, slow: 0.4 },
+    electrical: { effect: 'shock', damage: 22, stun: 1.25, impulse: 80, slow: 0 },
     radiation: { effect: 'irradiation', damage: 7, trackerDrain: 18, slow: 0 },
     flood: { effect: 'drag', damage: 0, trackerDrain: 5, slow: 0.58 },
     darkness: { effect: 'obscurity', damage: 0, trackerDrain: 10, slow: 0 },
@@ -604,9 +605,15 @@ export class GameEngine extends CompleteGameEngine {
     if (contract.oxygenDrain && !player.inVehicle) this.environmentStatus.oxygen = Math.max(0, this.environmentStatus.oxygen - contract.oxygenDrain * reduction);
     if (contract.trackerDrain) this.tracker.energy = Math.max(0, this.tracker.energy - contract.trackerDrain * reduction);
     if (contract.slow) { this.environmentStatus.slowUntil = this.animationTime + 1.25; this.environmentStatus.slowFactor = 1 - contract.slow; }
-    if (contract.knockback && !player.inVehicle) player.vy = -contract.knockback;
+    const impulse = Math.max(0, Number(contract.impulse ?? contract.knockback) || 0);
+    if (impulse && !player.inVehicle) player.vy = -impulse;
+    if (contract.kind === 'electrical' && !player.inVehicle) {
+      player.vx = 0;
+      player.actionClock = Math.max(player.actionClock || 0, Number(contract.stun) || 0);
+    }
     this.environmentStatus.lastHazard = contract.kind;
-    player.hazardClock = 0.72;
+    player.hazardKind = contract.kind;
+    player.hazardClock = Math.max(0.72, Number(contract.stun) || 0);
     this.onEvent({ type: 'hazard-effect', kind: contract.kind, effect: contract.effect, reduction, player: player.coop ? 'coop' : 'primary' });
   }
 

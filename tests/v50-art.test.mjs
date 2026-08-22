@@ -10,7 +10,20 @@ const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 
-const [manifest, report, gameSource, hubSource, gallerySource, spriteRuntimeSource, enemyVisualRuntimeSource, gameV52Source, hubV52Source] = await Promise.all([
+const [
+  manifest,
+  report,
+  gameSource,
+  hubSource,
+  gallerySource,
+  spriteRuntimeSource,
+  enemyVisualRuntimeSource,
+  enemyVisualOverridesV55Source,
+  vehicleVisualRuntimeV55Source,
+  npcMissionRuntimeV55Source,
+  gameV52Source,
+  hubV52Source
+] = await Promise.all([
   readFile(manifestPath, 'utf8').then(JSON.parse),
   readFile(reportPath, 'utf8').then(JSON.parse),
   readFile(resolve(repoRoot, 'src/game.js'), 'utf8'),
@@ -18,6 +31,9 @@ const [manifest, report, gameSource, hubSource, gallerySource, spriteRuntimeSour
   readFile(resolve(repoRoot, 'src/v50-visuals.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/sprite-animation-runtime.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/enemy-visual-runtime-v53.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/enemy-visual-overrides-v55.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/vehicle-visual-runtime-v55.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/npc-mission-runtime-v55.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/game-v52-runtime.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/hub-v52-runtime.js'), 'utf8')
 ]);
@@ -27,6 +43,9 @@ const runtimeSources = new Map([
   ['src/hub-game.js', hubSource],
   ['src/sprite-animation-runtime.js', spriteRuntimeSource],
   ['src/enemy-visual-runtime-v53.js', enemyVisualRuntimeSource],
+  ['src/enemy-visual-overrides-v55.js', enemyVisualOverridesV55Source],
+  ['src/vehicle-visual-runtime-v55.js', vehicleVisualRuntimeV55Source],
+  ['src/npc-mission-runtime-v55.js', npcMissionRuntimeV55Source],
   ['src/game-v52-runtime.js', gameV52Source],
   ['src/hub-v52-runtime.js', hubV52Source]
 ]);
@@ -54,11 +73,11 @@ function repoPathFromAbsolute(file) {
   return relative(repoRoot, file).split(sep).join('/');
 }
 
-test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v54', async () => {
-  assert.equal(manifest.release, 'v54');
+test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v55', async () => {
+  assert.equal(manifest.release, 'v55');
   assert.equal(manifest.normalization.status, 'ready');
   assert.equal(manifest.normalization.rawMastersPreserved, true);
-  assert.equal(manifest.sheets.length, 31);
+  assert.equal(manifest.sheets.length, 51);
   assert.equal(new Set(manifest.sheets.map((sheet) => sheet.id)).size, manifest.sheets.length);
 
   const v52NpcSheets = manifest.sheets.filter((sheet) => sheet.wave === 'v52');
@@ -165,10 +184,10 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
   }
 });
 
-test('the shared normalization report certifies 31 RGBA atlases and 496 guarded cells', async () => {
-  assert.equal(report.release, 'v54');
-  assert.equal(report.spriteAtlasCount, 31);
-  assert.equal(report.spriteCellCount, 496);
+test('the shared normalization report certifies 51 RGBA atlases and 816 guarded cells', async () => {
+  assert.equal(report.release, 'v55');
+  assert.equal(report.spriteAtlasCount, 51);
+  assert.equal(report.spriteCellCount, 816);
   assert.deepEqual(report.grid, { columns: 4, rows: 4, cellSize: 256, guard: 16 });
   assert.equal(report.rawMastersPreserved, true);
   assert.equal(report.spriteAtlases.length, manifest.sheets.length);
@@ -196,9 +215,9 @@ test('all sprite sheets expose a truthful runtime registry and declared consumer
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
-  assert.equal(referenced.length, 31, 'all normalized sheets are connected to the animation registry');
+  assert.equal(referenced.length, 51, 'all normalized sheets are connected to the animation registry');
   assert.equal(galleryOnly.length, 0, 'no runtime NPC is mislabeled gallery-only');
-  assert.equal(notReferenced.length, 0, 'all 31 normalized sheets must have an honest consumer');
+  assert.equal(notReferenced.length, 0, 'all 51 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
     assert.equal(SPRITE_SHEETS[sheet.id]?.path, sheet.files.normalized, `${sheet.id}: normalized bitmap registered in runtime`);

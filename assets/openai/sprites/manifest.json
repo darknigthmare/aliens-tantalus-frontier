@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v54",
+  "release": "v55",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -114,6 +114,90 @@
         "y": 42,
         "width": 192,
         "height": 198,
+        "unit": "cell-pixel"
+      },
+      "ovomorph-small": {
+        "x": 82,
+        "y": 92,
+        "width": 92,
+        "height": 148,
+        "unit": "cell-pixel"
+      },
+      "chestburster-small": {
+        "x": 54,
+        "y": 168,
+        "width": 148,
+        "height": 72,
+        "unit": "cell-pixel"
+      },
+      "spitter-medium": {
+        "x": 28,
+        "y": 132,
+        "width": 200,
+        "height": 108,
+        "unit": "cell-pixel"
+      },
+      "lurker-medium": {
+        "x": 32,
+        "y": 138,
+        "width": 192,
+        "height": 102,
+        "unit": "cell-pixel"
+      },
+      "praetorian-large": {
+        "x": 44,
+        "y": 48,
+        "width": 168,
+        "height": 192,
+        "unit": "cell-pixel"
+      },
+      "crusher-large": {
+        "x": 24,
+        "y": 100,
+        "width": 216,
+        "height": 140,
+        "unit": "cell-pixel"
+      },
+      "carrier-large": {
+        "x": 30,
+        "y": 58,
+        "width": 196,
+        "height": 182,
+        "unit": "cell-pixel"
+      },
+      "ravager-large": {
+        "x": 38,
+        "y": 48,
+        "width": 180,
+        "height": 192,
+        "unit": "cell-pixel"
+      },
+      "m577-command-hull": {
+        "x": 20,
+        "y": 104,
+        "width": 216,
+        "height": 136,
+        "unit": "cell-pixel"
+      },
+      "m22a3-tank-hull": {
+        "x": 16,
+        "y": 108,
+        "width": 224,
+        "height": 132,
+        "unit": "cell-pixel"
+      },
+      "p5000-loader-frame": {
+        "x": 64,
+        "y": 42,
+        "width": 128,
+        "height": 198,
+        "unit": "cell-pixel"
+      },
+      "ud4l-dropship-hull": {
+        "x": 18,
+        "y": 112,
+        "width": 220,
+        "height": 128,
         "unit": "cell-pixel"
       }
     }
@@ -1316,9 +1400,539 @@
           }
         ]
       }
+    ],
+    "npc-mission-v55": [
+      {
+        "id": "ready",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "state:mission-ready"
+          }
+        ]
+      },
+      {
+        "id": "traversal",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:footstep-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:footstep-left"
+          }
+        ]
+      },
+      {
+        "id": "role-action",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "interaction:role-action"
+          }
+        ]
+      },
+      {
+        "id": "wounded-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
+    ],
+    "ovomorph-cycle-v55": [
+      {
+        "id": "sealed",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:egg-pulse"
+          }
+        ]
+      },
+      {
+        "id": "opening",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 6,
+            "type": "creature:egg-open"
+          }
+        ]
+      },
+      {
+        "id": "hatch",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:hatch-window"
+          }
+        ]
+      },
+      {
+        "id": "destroyed",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
+    ],
+    "m577-command-action-v55": [
+      {
+        "id": "command-idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "vehicle:sensor-mast"
+          },
+          {
+            "frame": 3,
+            "type": "vehicle:command-online"
+          }
+        ]
+      },
+      {
+        "id": "roll",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 5,
+            "type": "vehicle:wheel-cycle"
+          }
+        ]
+      },
+      {
+        "id": "command-action",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "vehicle:sensor-scan"
+          },
+          {
+            "frame": 10,
+            "type": "vehicle:defensive-shot"
+          }
+        ]
+      },
+      {
+        "id": "damage",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ]
+      }
+    ],
+    "m22a3-tank-action-v55": [
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true,
+        "events": [
+          {
+            "frame": 1,
+            "type": "vehicle:engine-start"
+          }
+        ]
+      },
+      {
+        "id": "roll",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 6,
+            "type": "vehicle:track-cycle"
+          }
+        ]
+      },
+      {
+        "id": "cannon",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "vehicle:cannon-shot"
+          },
+          {
+            "frame": 11,
+            "type": "vehicle:cannon-recoil"
+          }
+        ]
+      },
+      {
+        "id": "damage",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ]
+      }
+    ],
+    "p5000-loader-action-v55": [
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "vehicle:hydraulic-idle"
+          }
+        ]
+      },
+      {
+        "id": "walk",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:loader-step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:loader-step-left"
+          }
+        ]
+      },
+      {
+        "id": "work",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 9,
+            "type": "vehicle:claw-close"
+          },
+          {
+            "frame": 10,
+            "type": "vehicle:load-lift"
+          }
+        ]
+      },
+      {
+        "id": "damage",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ]
+      }
+    ],
+    "ud4l-dropship-action-v55": [
+      {
+        "id": "hangar",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "vehicle:ramp-opening"
+          },
+          {
+            "frame": 3,
+            "type": "vehicle:boarding-ready"
+          }
+        ]
+      },
+      {
+        "id": "launch",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 5,
+            "type": "vehicle:engine-spool"
+          },
+          {
+            "frame": 7,
+            "type": "vehicle:gear-retract"
+          }
+        ]
+      },
+      {
+        "id": "flight",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 10,
+            "type": "vehicle:boost"
+          },
+          {
+            "frame": 11,
+            "type": "vehicle:nose-shot"
+          }
+        ]
+      },
+      {
+        "id": "damage",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ]
+      }
     ]
   },
   "sheets": [
+    {
+      "id": "enemy.chestburster.action",
+      "family": "enemy",
+      "subject": "Chestburster",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/chestburster-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/chestburster-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "chestburster-small",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
     {
       "id": "enemy.facehugger.locomotion",
       "family": "enemy",
@@ -1368,6 +1982,32 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "enemy.ovomorph.cycle",
+      "family": "enemy",
+      "subject": "Ovomorph",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/ovomorph-cycle-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/ovomorph-cycle-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "ovomorph-cycle-v55",
+      "pivot": "creature-ground",
+      "hitbox": "ovomorph-small",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "enemy.pale-crucible-hunter.action",
@@ -1470,6 +2110,58 @@
       "identityVerified": true
     },
     {
+      "id": "enemy.xenomorph-carrier.action",
+      "family": "enemy",
+      "subject": "Carrier",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-carrier-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-carrier-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "carrier-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-crusher.action",
+      "family": "enemy",
+      "subject": "Crusher",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-crusher-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-crusher-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "crusher-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.xenomorph-drone.combat",
       "family": "enemy",
       "subject": "Xenomorph Drone",
@@ -1520,6 +2212,58 @@
       "identityVerified": true
     },
     {
+      "id": "enemy.xenomorph-lurker.action",
+      "family": "enemy",
+      "subject": "Lurker",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-lurker-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-lurker-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "lurker-medium",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-praetorian.action",
+      "family": "enemy",
+      "subject": "Praetorian",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-praetorian-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-praetorian-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "praetorian-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.xenomorph-queen.combat",
       "family": "enemy",
       "subject": "Xenomorph Queen",
@@ -1545,6 +2289,32 @@
       "identityVerified": true
     },
     {
+      "id": "enemy.xenomorph-ravager.action",
+      "family": "enemy",
+      "subject": "Ravager",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-ravager-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-ravager-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "ravager-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.xenomorph-runner.action",
       "family": "enemy",
       "subject": "Xenomorph Runner",
@@ -1564,6 +2334,32 @@
         "consumers": [
           "src/sprite-animation-runtime.js",
           "src/game-v52-runtime.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-spitter.action",
+      "family": "enemy",
+      "subject": "Spitter",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-spitter-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-spitter-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v54",
+      "pivot": "creature-ground",
+      "hitbox": "spitter-medium",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v55.js",
           "src/enemy-visual-runtime-v53.js",
           "src/game.js"
         ]
@@ -1649,6 +2445,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.bishop-9.mission",
+      "family": "npc",
+      "subject": "BISHOP-9 — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/bishop-9-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/bishop-9-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "npc.cal-mercer.locomotion",
@@ -1769,6 +2590,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.idris-kwan.mission",
+      "family": "npc",
+      "subject": "Idris Kwan — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/idris-kwan-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/idris-kwan-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.inez-harlow.locomotion",
       "family": "npc",
       "subject": "Inez Harlow",
@@ -1887,6 +2733,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.maksim-orlov.mission",
+      "family": "npc",
+      "subject": "Maksim Orlov — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/maksim-orlov-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/maksim-orlov-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.mara-vega.locomotion",
       "family": "npc",
       "subject": "Mara Vega",
@@ -1912,6 +2783,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.mara-vega.mission",
+      "family": "npc",
+      "subject": "Mara Vega — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/mara-vega-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/mara-vega-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.noor-okafor.locomotion",
       "family": "npc",
       "subject": "Noor Okafor",
@@ -1935,6 +2831,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.noor-okafor.mission",
+      "family": "npc",
+      "subject": "Noor Okafor — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/noor-okafor-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/noor-okafor-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "npc.pablo-reyes.locomotion",
@@ -1999,6 +2920,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.rook.mission",
+      "family": "npc",
+      "subject": "Rook — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/rook-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/rook-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.sanaa-doyle.locomotion",
       "family": "npc",
       "subject": "Sanaa Doyle",
@@ -2024,6 +2970,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.sanaa-doyle.mission",
+      "family": "npc",
+      "subject": "Sanaa Doyle — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/sanaa-doyle-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/sanaa-doyle-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.tamsin-velez.locomotion",
       "family": "npc",
       "subject": "Tamsin Velez",
@@ -2047,6 +3018,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.tamsin-velez.mission",
+      "family": "npc",
+      "subject": "Tamsin Velez — mission",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/tamsin-velez-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/tamsin-velez-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "player.echo9-marine.combat",
@@ -2098,6 +3094,31 @@
       "identityVerified": true
     },
     {
+      "id": "vehicle.m22a3-jackson-tank.action",
+      "family": "vehicle",
+      "subject": "M22A3 Jackson Tank",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m22a3-jackson-tank-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m22a3-jackson-tank-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "m22a3-tank-action-v55",
+      "pivot": "vehicle-ground",
+      "hitbox": "m22a3-tank-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "vehicle.m577-apc.action",
       "family": "vehicle",
       "subject": "M577 APC",
@@ -2120,6 +3141,81 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "vehicle.m577-command-apc.action",
+      "family": "vehicle",
+      "subject": "M577 Command APC",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m577-command-apc-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m577-command-apc-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "m577-command-action-v55",
+      "pivot": "vehicle-ground",
+      "hitbox": "m577-command-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.p5000-powered-work-loader.action",
+      "family": "vehicle",
+      "subject": "P-5000 Powered Work Loader",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/p-5000-powered-work-loader-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/p-5000-powered-work-loader-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "p5000-loader-action-v55",
+      "pivot": "vehicle-ground",
+      "hitbox": "p5000-loader-frame",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ud4l-cheyenne-dropship.action",
+      "family": "vehicle",
+      "subject": "UD-4L Cheyenne Dropship",
+      "wave": "v55",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ud-4l-cheyenne-dropship-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "ud4l-dropship-action-v55",
+      "pivot": "vehicle-ground",
+      "hitbox": "ud4l-dropship-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "weapon.m41a-pulse-rifle.action",

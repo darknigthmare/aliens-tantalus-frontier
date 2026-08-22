@@ -1,4 +1,4 @@
-import { shouldFlipSprite } from './sprite-animation-runtime.js';
+import { resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
 
 const LOGICAL_WIDTH = 1280;
@@ -15,6 +15,20 @@ const EDITOR_TILE_TYPES = new Set(['floor', 'platform', 'wall', 'door', 'vent', 
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => Boolean(a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
+export function getEntityCollisionBounds(entity) {
+  if (!entity) return null;
+  const local = entity.spriteHitbox?.local;
+  if (!local) return entity;
+  const values = [entity.x, entity.y, local.x, local.y, local.w, local.h].map(Number);
+  if (!values.every(Number.isFinite) || values[4] <= 0 || values[5] <= 0) return entity;
+  return {
+    x: values[0] + values[2],
+    y: values[1] + values[3],
+    w: values[4],
+    h: values[5]
+  };
+}
+export const combatOverlap = (a, b) => overlap(getEntityCollisionBounds(a), getEntityCollisionBounds(b));
 const ready = (image) => Boolean(image?.complete && image.naturalWidth);
 const distanceBetween = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
 export const MISSION_STRUCTURAL_PROP_FILES = Object.freeze({
@@ -78,6 +92,7 @@ const ASSETS = Object.freeze({
   crates: '/assets/openai/metroidvania/props/supply-crates.png',
   lamp: '/assets/openai/metroidvania/props/warning-lamp.png',
   acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png',
+  electricalArc: '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
   ...MISSION_STRUCTURAL_PROP_FILES
 });
 
@@ -315,8 +330,10 @@ export class GameEngine {
 
   createVehicle(x, y) {
     return {
-      id: 'm577-apc', x, y, w: 190, h: 104, active: true, occupied: false, driver: null,
-      passengers: [], hull: 340, maxHull: 340, fuel: 100, turretAmmo: 80, ramClock: 0, destroyed: false
+      id: 'vehicle-001-m577-armored-personnel-carrier', name: 'M577 Armored Personnel Carrier', fit: 'Standard',
+      x, y, w: 190, h: 104, vx: 0, vy: 0, facing: 1,
+      active: true, occupied: false, driver: null, passengers: [],
+      hull: 340, maxHull: 340, fuel: 100, turretAmmo: 80, ramClock: 0, destroyed: false
     };
   }
 
@@ -519,11 +536,13 @@ export class GameEngine {
       if (this.keys.has(controls.fire)) this.fire(player);
       return;
     }
-    const left = this.keys.has(controls.left) || (!player.coop && this.keys.has('ArrowLeft'));
-    const right = this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight'));
-    const up = this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp'));
-    const down = this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown'));
+    const stunned = player.hazardKind === 'electrical' && player.hazardClock > 0;
+    const left = !stunned && (this.keys.has(controls.left) || (!player.coop && this.keys.has('ArrowLeft')));
+    const right = !stunned && (this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight')));
+    const up = !stunned && (this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp')));
+    const down = !stunned && (this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown')));
     const ladder = this.nearestLadder(player);
+    if (stunned) player.climbing = false;
     if (ladder && (up || down)) player.climbing = true;
     if (player.climbing && !ladder) player.climbing = false;
     player.crouching = down && !player.climbing && player.grounded;
@@ -545,7 +564,7 @@ export class GameEngine {
     } else {
       if (player.grounded) player.coyoteTime = 0.1;
       else player.coyoteTime = Math.max(0, player.coyoteTime - delta);
-      if ((player.jumpBuffer > 0 || this.keys.has(controls.jump)) && player.coyoteTime > 0) {
+      if (!stunned && (player.jumpBuffer > 0 || this.keys.has(controls.jump)) && player.coyoteTime > 0) {
         player.vy = -665;
         player.grounded = false;
         player.coyoteTime = 0;
@@ -561,7 +580,7 @@ export class GameEngine {
     player.x = clamp(player.x + player.vx * delta, 0, WORLD_WIDTH - player.w);
     this.resolveHorizontal(player, previousX);
     player.inCover = Boolean(player.crouching && this.findCover(player));
-    if (this.keys.has(controls.fire)) this.fire(player);
+    if (!stunned && this.keys.has(controls.fire)) this.fire(player);
     this.applyHazards(player);
     if (player.y > WORLD_HEIGHT + 100) {
       this.damagePlayer(player, 35, { bypassCover: true, source: 'fall' });
@@ -582,10 +601,22 @@ export class GameEngine {
     const right = this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight'));
     const direction = Number(right) - Number(left);
     const previousX = this.vehicle.x;
-    const speed = this.vehicle.fuel > 0 ? 390 : 90;
+    const baseSpeed = Math.max(90, Number(this.vehicle.runtimeSpeed) || 390);
+    const speed = this.vehicle.fuel > 0 ? baseSpeed : Math.min(90, baseSpeed);
     this.vehicle.vx = direction * speed;
+    if (Math.abs(this.vehicle.vx) > 0.5) this.vehicle.facing = Math.sign(this.vehicle.vx);
     this.vehicle.x = clamp(this.vehicle.x + this.vehicle.vx * delta, 0, WORLD_WIDTH - this.vehicle.w);
-    if (direction) this.vehicle.fuel = Math.max(0, this.vehicle.fuel - delta * 1.9);
+    if (this.vehicle.family === 'air') {
+      const up = this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp'));
+      const down = this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown'));
+      const vertical = Number(down) - Number(up);
+      this.vehicle.vy = vertical * speed * 0.72;
+      this.vehicle.y = clamp(this.vehicle.y + this.vehicle.vy * delta, 150, FLOOR_Y - this.vehicle.h);
+      if (direction || vertical) this.vehicle.fuel = Math.max(0, this.vehicle.fuel - delta * 2.4);
+    } else {
+      this.vehicle.vy = 0;
+      if (direction) this.vehicle.fuel = Math.max(0, this.vehicle.fuel - delta * 1.9);
+    }
     this.resolveVehicleHorizontal(previousX);
     this.vehicle.ramClock = Math.max(0, this.vehicle.ramClock - delta);
     for (const cover of this.covers) {
@@ -596,7 +627,7 @@ export class GameEngine {
       }
     }
     for (const enemy of this.enemies) {
-      if (!enemy.alive || this.vehicle.ramClock > 0 || !overlap(this.vehicle, enemy) || Math.abs(this.vehicle.vx) < 120) continue;
+      if (!enemy.alive || this.vehicle.ramClock > 0 || !combatOverlap(this.vehicle, enemy) || Math.abs(this.vehicle.vx) < 120) continue;
       this.applyEnemyDamage(enemy, 95, { owner: player, kind: 'ram' });
       this.damageVehicle(8, 'ram');
       this.vehicle.ramClock = 0.35;
@@ -616,7 +647,7 @@ export class GameEngine {
       for (const wall of this.walls) if (!bullet.hit && overlap(bullet, wall)) bullet.hit = true;
       for (const door of this.closedDoorColliders()) if (!bullet.hit && overlap(bullet, door)) bullet.hit = true;
       for (const enemy of this.enemies) {
-        if (bullet.hit || !enemy.alive || !overlap(bullet, enemy)) continue;
+        if (bullet.hit || !enemy.alive || !combatOverlap(bullet, enemy)) continue;
         this.applyEnemyDamage(enemy, bullet.damage, bullet);
         bullet.hit = true;
       }
@@ -661,7 +692,7 @@ export class GameEngine {
       enemy.attackClock = 1.3;
       enemy.attacking = true;
     }
-    if ((overlap(enemy, targetEntity) || (Math.abs(distance) < stopRange + 28 && verticalDistance < 95)) && enemy.attackClock <= 0) {
+    if ((combatOverlap(enemy, targetEntity) || (Math.abs(distance) < stopRange + 28 && verticalDistance < 95)) && enemy.attackClock <= 0) {
       if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
       else this.damagePlayer(target, enemy.damage, { source: enemy.name });
       enemy.attackClock = enemy.isBoss ? 0.65 : enemy.behavior === 'pouncer' ? 1.1 : 0.82;
@@ -973,9 +1004,14 @@ export class GameEngine {
     const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
     const hazard = this.hazards.find((candidate) => candidate.active && overlap(feet, candidate));
     if (!hazard) return;
-    this.damagePlayer(player, hazard.damage, { bypassCover: true, source: 'acid' });
-    player.hazardClock = 0.72;
-    player.vy = -240;
+    const kind = hazard.kind || 'acid';
+    this.damagePlayer(player, hazard.damage, { bypassCover: true, source: kind });
+    player.hazardClock = Math.max(0.72, Number(hazard.stun) || Number(hazard.stunSeconds) || 0);
+    if (kind === 'electrical') {
+      player.vx = 0;
+      player.actionClock = Math.max(player.actionClock || 0, player.hazardClock);
+      player.vy = -120;
+    } else player.vy = -240;
   }
 
   interact(actor = this.player) {
@@ -1390,9 +1426,10 @@ export class GameEngine {
 
   drawHazard(ctx, hazard) {
     if (!hazard.active) return;
-    const image = this.images.get('acid');
+    const electrical = hazard.kind === 'electrical';
+    const image = this.images.get(electrical ? 'electricalArc' : 'acid');
     if (ready(image)) ctx.drawImage(image, hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
-    else { ctx.fillStyle = '#7e9b37'; ctx.fillRect(hazard.x, hazard.y, hazard.w, hazard.h); }
+    else { ctx.fillStyle = electrical ? '#65bddd' : '#7e9b37'; ctx.fillRect(hazard.x, hazard.y, hazard.w, hazard.h); }
   }
 
   drawResource(ctx, supply) {
@@ -1451,15 +1488,17 @@ export class GameEngine {
 
   drawVehicle(ctx) {
     if (!this.vehicle?.active) return;
+    const request = resolveVehicleAnimation(this.vehicle);
+    if (request?.sheetId !== 'vehicle.m577-apc.action') return;
     const image = this.images.get('apc');
     if (!ready(image)) return;
-    const row = this.vehicle.destroyed ? 3 : this.vehicle.occupied ? 1 : this.vehicle.hull < 200 ? 3 : 0;
-    const frame = Math.floor(this.animationTime * (this.vehicle.occupied ? 9 : 2)) % 4;
+    const row = request.clipId === 'damage' ? 3 : request.clipId === 'turret' ? 2 : request.clipId === 'roll' ? 1 : 0;
+    const frame = Math.floor(this.animationTime * (request.clipId === 'roll' ? 9 : request.clipId === 'idle' ? 2 : 6)) % 4;
     const width = 250;
     const height = 140;
     const x = this.vehicle.x + this.vehicle.w / 2 - width / 2;
     const y = this.vehicle.y + this.vehicle.h - height * (240 / CELL_SIZE);
-    this.drawSheetCell(ctx, image, frame, row, x, y, width, height, false);
+    this.drawSheetCell(ctx, image, frame, row, x, y, width, height, shouldFlipSprite(resolveSpriteSheet(request.sheetId), this.vehicle.facing));
   }
 
   drawActor(ctx, actor) {
@@ -1598,7 +1637,7 @@ export class GameEngine {
     if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130) return 'E  EXTRAIRE LES ARCHIVES';
     if (this.vents.some((vent) => distanceBetween(actor, vent) < 125)) return this.inventory.cutter || this.vents.every((vent) => !vent.requiresTool) ? 'E  OUVRIR / EMPRUNTER LE CONDUIT' : 'CHALUMEAU REQUIS';
     if (this.objective && distanceBetween(actor, this.objective) < 125) return this.missingExtractionRequirement() ? `E  EXTRACTION BLOQUÉE — ${this.missingExtractionRequirement()}` : 'E  CONFIRMER L’EXTRACTION';
-    if (this.vehicle?.active && distanceBetween(actor, this.vehicle) < 210) return actor.inVehicle ? 'V  QUITTER LE M577' : 'V  PRENDRE LE VOLANT DU M577';
+    if (this.vehicle?.active && distanceBetween(actor, this.vehicle) < 210) return actor.inVehicle ? `V  QUITTER ${this.vehicle.name || 'LE VÉHICULE'}` : `V  PILOTER ${this.vehicle.name || 'LE VÉHICULE'}`;
     if (this.findCover(actor)) return 'S  COUVERTURE · F  TIR · R  RECHARGER';
     if (this.nearestLadder(actor)) return 'W / S  GRIMPER · ESPACE  SAUTER';
     return '';
@@ -1625,8 +1664,8 @@ export class GameEngine {
     }
     if (this.vehicle?.occupied) {
       ctx.fillStyle = 'rgba(3, 10, 8, .8)'; ctx.fillRect(822, 18, 232, 58);
-      ctx.fillStyle = '#8bb2c8'; ctx.fillText(`M577 COQUE ${Math.ceil(this.vehicle.hull)}/${this.vehicle.maxHull}`, 838, 41);
-      ctx.fillText(`CARB ${Math.ceil(this.vehicle.fuel)} · TOURELLE ${this.vehicle.turretAmmo}`, 838, 62);
+      ctx.fillStyle = '#8bb2c8'; ctx.fillText(`${String(this.vehicle.name || 'VÉHICULE').slice(0, 22)} · ${Math.ceil(this.vehicle.hull)}/${this.vehicle.maxHull}`, 838, 41);
+      ctx.fillText(`CARB ${Math.ceil(this.vehicle.fuel)} · ARMEMENT ${this.vehicle.turretAmmo}`, 838, 62);
     }
     const prompt = this.getInteractionPrompt();
     if (prompt) {
