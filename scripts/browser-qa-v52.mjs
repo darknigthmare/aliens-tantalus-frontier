@@ -76,7 +76,7 @@ async function waitFor(expression, label, timeout = 12000) {
     }
     await wait(100);
   }
-  throw new Error(`${label} (délai ${timeout} ms, dernière valeur ${JSON.stringify(lastValue)})`);
+  throw new Error(`${label} (délai ${timeout} ms, dernière valeur ${JSON.stringify(lastValue)}, diagnostics ${JSON.stringify({ exceptions, consoleErrors, failedRequests })})`);
 }
 
 async function click(selector) {
@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v52') && shell.release === '52.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v53') && shell.release === '53.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -511,7 +511,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '52.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v52 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '53.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v53 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

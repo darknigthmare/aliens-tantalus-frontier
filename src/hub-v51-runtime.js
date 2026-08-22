@@ -3,11 +3,13 @@ import {
   HUB_DECKS,
   HUB_MODULAR_ASSETS,
   HUB_MODULAR_PROP_FILES,
+  HUB_ROOM_PROFILES,
   HUB_ROOM_COUNT,
+  getHubDoorBounds,
   HUB_WORLD
 } from './hub-game.js';
 
-export { HUB_DECKS, HUB_MODULAR_ASSETS, HUB_MODULAR_PROP_FILES, HUB_ROOM_COUNT, HUB_WORLD };
+export { HUB_DECKS, HUB_MODULAR_ASSETS, HUB_MODULAR_PROP_FILES, HUB_ROOM_PROFILES, HUB_ROOM_COUNT, HUB_WORLD, getHubDoorBounds };
 
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
@@ -21,6 +23,11 @@ const CRISIS_SPRITES = Object.freeze({
   xenomorph: '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',
   synthetic: '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png',
   pathogen: '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png'
+});
+export const HUB_CRISIS_SOURCE_FACING = Object.freeze({
+  xenomorph: -1,
+  synthetic: 1,
+  pathogen: 1
 });
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -305,6 +312,29 @@ export class HubGame extends HubGameV50 {
       return;
     }
     const traversal = fallbackTraversal(this.state.deck);
+    const deck = HUB_DECKS[this.state.deck];
+    if (deck.rooms.every((room) => room.profile?.authoredCollision)) {
+      this.v51Floors = [];
+      this.v51Platforms = [];
+      this.v51Ladders = [];
+      this.v51Vents = [];
+      this.v51Walls = [];
+      this.v51Doors = [];
+      this.route = {
+        id: `deck-${this.state.deck + 1}-room-profile`,
+        source: 'room-profile',
+        nodeCount: deck.rooms.length + this.obstacles.length,
+        verticalLinks: 0,
+        crawlLinks: 0,
+        doorCount: this.doorStates.length,
+        objectiveCount: 0,
+        hazardCount: 0
+      };
+      this.floorY = HUB_WORLD.floorY;
+      this.useGlobalFloor = true;
+      return;
+    }
+
     this.v51Floors = [];
     this.v51Platforms = traversal.platforms;
     this.v51Ladders = traversal.ladders;
@@ -353,7 +383,10 @@ export class HubGame extends HubGameV50 {
       maxHealth: kind === 'synthetic' ? 90 : kind === 'pathogen' ? 68 : 80,
       damage: kind === 'pathogen' ? 13 : 11,
       speed: kind === 'synthetic' ? 72 : kind === 'pathogen' ? 112 : 92,
-      facing: -1, attackClock: index * 0.11, alive: true, attacking: false
+      facing: -1,
+      sourceFacing: HUB_CRISIS_SOURCE_FACING[kind],
+      attackClock: index * 0.11,
+      alive: true, attacking: false
     };
   }
 
@@ -481,7 +514,7 @@ export class HubGame extends HubGameV50 {
     const colliders = [];
     if (!this.editorPlaytest) {
       for (const door of this.doorStates) {
-        if (door.progress < 0.82) colliders.push({ x: door.x - 34, y: HUB_WORLD.floorY - (door.lift ? 216 : 198), w: 68, h: door.lift ? 216 : 198 });
+        if (door.progress < 0.82) colliders.push(getHubDoorBounds(door));
       }
     }
     for (const door of this.v51Doors) if (door.progress < 0.82) colliders.push(door);
@@ -785,7 +818,8 @@ export class HubGame extends HubGameV50 {
     const renderHeight = enemy.kind === 'synthetic' ? 116 : enemy.kind === 'pathogen' ? 104 : 106;
     const x = enemy.x + enemy.w / 2 - renderWidth / 2;
     const y = enemy.y + enemy.h - renderHeight * (240 / 256);
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing > 0, 4, 4);
+    const sourceFacing = enemy.sourceFacing ?? HUB_CRISIS_SOURCE_FACING[enemy.kind] ?? -1;
+    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing !== sourceFacing, 4, 4);
     ctx.fillStyle = '#b94f4b';
     ctx.fillRect(enemy.x, enemy.y - 8, enemy.w * Math.max(0, enemy.health / enemy.maxHealth), 3);
   }

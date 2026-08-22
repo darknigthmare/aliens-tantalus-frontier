@@ -82,32 +82,23 @@ test('compileShipProject converts every Forge ship tile into runtime geometry', 
   assert.equal(compileShipProject({ kind: 'mission', tiles: [] }), null);
 });
 
-test('fallback Tantalus decks expose vertical routes and crouch-only vents', () => withRuntime(() => {
+test('profiled Tantalus decks reject generic traversal overlays and keep physical props', () => withRuntime(() => {
   const canvas = { width: 1280, height: 720, getContext: mockContext, addEventListener() {} };
   const hub = new HubGame(canvas);
   hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
   const snapshot = hub.getSnapshot();
   assert.equal(snapshot.editorPlaytest, false);
-  assert.ok(snapshot.platformCount >= 8);
-  assert.ok(snapshot.ladderCount >= 8);
-  assert.ok(snapshot.ventCount >= 4);
-  assert.equal(snapshot.route.source, 'fallback');
+  assert.equal(snapshot.platformCount, 0);
+  assert.equal(snapshot.ladderCount, 0);
+  assert.equal(snapshot.ventCount, 0);
+  assert.equal(snapshot.obstacleCount, 4);
+  assert.equal(snapshot.route.source, 'room-profile');
 
-  const ladder = hub.v51Ladders[0];
-  Object.assign(hub.player, { x: ladder.x - hub.player.w / 2, y: ladder.bottom - hub.player.h, grounded: true, climbing: false, vx: 0, vy: 0 });
-  hub.keys.add('KeyW');
-  hub.update(0.08);
-  hub.keys.delete('KeyW');
-  assert.equal(hub.player.climbing, true);
-  assert.ok(hub.player.y < ladder.bottom - hub.player.h);
-
-  const vent = hub.v51Vents[0];
-  Object.assign(hub.player, { x: vent.x + 4, y: vent.y + vent.h - hub.player.h, vx: 120, crouching: false });
-  hub.resolveHorizontal(vent.x - hub.player.w);
-  assert.equal(hub.player.x, vent.x - hub.player.w, 'standing player is stopped by the conduit lip');
-  Object.assign(hub.player, { x: vent.x + 4, vx: 120, crouching: true });
-  hub.resolveHorizontal(vent.x - hub.player.w);
-  assert.equal(hub.player.x, vent.x + 4, 'crouching player traverses the conduit');
+  const obstacle = hub.obstacles[0];
+  const previousX = obstacle.x - hub.player.w - 2;
+  Object.assign(hub.player, { x: obstacle.x - hub.player.w + 4, y: HUB_WORLD.floorY - hub.player.h, vx: 120, crouching: false });
+  hub.resolveHorizontal(previousX);
+  assert.equal(hub.player.x, obstacle.x - hub.player.w, 'the visible interaction prop owns the collision instead of a generic overlay');
 }));
 
 test('ship playtest runs editor enemies, hazards, objectives and a persistent crisis', () => withRuntime(() => {

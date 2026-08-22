@@ -93,8 +93,11 @@ export const SPRITE_CLIP_SETS = Object.freeze({
   ])
 });
 
-const sheet = (id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family, releaseReady = true) => Object.freeze({
-  id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family, releaseReady
+const sheet = (id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family, sourceFacing = 1, releaseReady = true, identityVerified = true) => Object.freeze({
+  id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family,
+  sourceFacing: sourceFacing < 0 ? -1 : 1,
+  releaseReady,
+  identityVerified
 });
 
 const NPC_SHEETS = [
@@ -108,9 +111,9 @@ const NPC_SHEETS = [
 
 export const SPRITE_SHEETS = Object.freeze({
   'player.echo9-marine.locomotion': sheet('player.echo9-marine.locomotion', 'playerLocomotion', '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png', 'player-locomotion', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
-  'player.echo9-marine.combat': sheet('player.echo9-marine.combat', 'playerCombat', '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', 'player-combat', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
+  'player.echo9-marine.combat': sheet('player.echo9-marine.combat', 'playerCombat', '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', 'player-combat', 'humanoid-feet', 'player-standing', 110, 148, 'player', 1, true, false),
   'enemy.xenomorph-drone.locomotion': sheet('enemy.xenomorph-drone.locomotion', 'xenoLocomotion', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png', 'xenomorph-locomotion', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy'),
-  'enemy.xenomorph-drone.combat': sheet('enemy.xenomorph-drone.combat', 'xenoCombat', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy'),
+  'enemy.xenomorph-drone.combat': sheet('enemy.xenomorph-drone.combat', 'xenoCombat', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy', -1),
   'enemy.xenomorph-warrior.combat': sheet('enemy.xenomorph-warrior.combat', 'xenoWarrior', '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 158, 120, 'enemy'),
   'enemy.xenomorph-queen.combat': sheet('enemy.xenomorph-queen.combat', 'xenoQueen', '/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png', 'queen-combat', 'creature-ground', 'queen-standing', 224, 170, 'enemy'),
   'enemy.facehugger.locomotion': sheet('enemy.facehugger.locomotion', 'facehugger', '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png', 'facehugger-locomotion', 'creature-ground', 'facehugger-ground', 112, 72, 'enemy'),
@@ -138,8 +141,31 @@ export function resolveSpriteClip(sheetId, clipId) {
   return resolvedSheet ? clipBySet.get(resolvedSheet.clipSet)?.get(clipId) || null : null;
 }
 
+export function shouldFlipSprite(sheetOrId, actorFacing = 1) {
+  const resolvedSheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
+  const sourceFacing = Number(resolvedSheet?.sourceFacing) < 0 ? -1 : 1;
+  const targetFacing = Number(actorFacing) < 0 ? -1 : 1;
+  return sourceFacing !== targetFacing;
+}
+
+const PLAYER_COMBAT_FALLBACKS = Object.freeze({
+  'primary-fire': 'idle',
+  reload: 'idle',
+  'hurt-death': 'jump-fall'
+});
+
+export function resolveVerifiedPlayerCombat(clipId) {
+  const combatSheet = resolveSpriteSheet('player.echo9-marine.combat');
+  if (combatSheet?.identityVerified) return { sheetId: combatSheet.id, clipId };
+  return {
+    sheetId: 'player.echo9-marine.locomotion',
+    clipId: PLAYER_COMBAT_FALLBACKS[clipId] || 'idle',
+    degraded: 'combat-identity-unverified'
+  };
+}
+
 export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
-  if (neuroActive) {
+  if (neuroActive && actor.visualForm === 'xenomorph') {
     if (!actor.alive) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
     if ((actor.v52HurtClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
     if ((actor.v52FireClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'claw-attack' };
@@ -148,10 +174,10 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
     if (Math.abs(actor.vx || 0) > 12) return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'stalk-run' };
     return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'idle' };
   }
-  if (!actor.alive) return { sheetId: 'player.echo9-marine.combat', clipId: 'hurt-death' };
-  if ((actor.v52HurtClock || 0) > 0) return { sheetId: 'player.echo9-marine.combat', clipId: 'hurt-death' };
-  if (actor.reloading) return { sheetId: 'player.echo9-marine.combat', clipId: 'reload' };
-  if ((actor.v52FireClock || 0) > 0) return { sheetId: 'player.echo9-marine.combat', clipId: 'primary-fire' };
+  if (!actor.alive) return resolveVerifiedPlayerCombat('hurt-death');
+  if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt-death');
+  if (actor.reloading) return resolveVerifiedPlayerCombat('reload');
+  if ((actor.v52FireClock || 0) > 0) return resolveVerifiedPlayerCombat('primary-fire');
   if (actor.climbing) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'climb' };
   if (actor.crouching) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'crouch' };
   if (!actor.grounded) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'jump-fall' };
@@ -160,7 +186,8 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
 }
 
 export function resolveNpcAnimation(actor = {}) {
-  const sheetId = CREW_SPRITE_IDS[actor.crewId] || 'npc.mara-vega.locomotion';
+  const sheetId = CREW_SPRITE_IDS[actor.crewId];
+  if (!sheetId) return null;
   if (!actor.alive || actor.alertClock > 0 || actor.downed) return { sheetId, clipId: 'alert-reaction' };
   if (actor.workClock > 0 || actor.fireClock > 0 || actor.supportClock > 0) return { sheetId, clipId: 'role-work' };
   if (Math.abs(actor.vx || 0) > 8 || actor.climbing) return { sheetId, clipId: 'walk' };
@@ -180,7 +207,7 @@ export function resolveEnemyAnimation(enemy = {}) {
     if (dead || hurt || attacking) return { sheetId: 'enemy.xenomorph-warrior.combat', clipId: dead || hurt ? 'hurt-death' : 'tail-attack' };
     return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: moving ? 'stalk-run' : 'idle' };
   }
-  if (enemy.spriteKey === 'xenoDrone' || enemy.biology === 'xenomorph') {
+  if (enemy.spriteKey === 'xenoDrone') {
     if (dead || hurt || attacking) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: dead || hurt ? 'hurt-death' : 'claw-attack' };
     return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: moving ? 'stalk-run' : 'idle' };
   }

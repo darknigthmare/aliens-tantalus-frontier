@@ -10,6 +10,7 @@ import {
   resolvePlayerAnimation,
   resolveSpriteSheet,
   resolveVehicleAnimation,
+  shouldFlipSprite,
   spriteRuntimeReport
 } from './sprite-animation-runtime.js';
 
@@ -129,6 +130,9 @@ export function withV52MissionRuntime(BaseEngine) {
         byEvent: {},
         activeClips: {},
         fallbackFamilies: new Set(),
+        approximatedEnemyVisuals: new Set(asList(this.enemies)
+          .filter((enemy) => enemy?.visualIdentityStatus && enemy.visualIdentityStatus !== 'exact')
+          .map((enemy) => `${enemy.visualArchetype}:${enemy.visualIdentityStatus}`)),
         frameEffects: 0
       };
       this.spriteAnimation = new SpriteAnimationController({ onEvent: (payload) => this.handleSpriteFrameEvent(payload) });
@@ -255,6 +259,7 @@ export function withV52MissionRuntime(BaseEngine) {
         enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
         return;
       }
+      enemy.facing = Math.sign(horizontal) || enemy.facing || 1;
       const ranged = enemy.behavior === 'spitter' || enemy.behavior === 'shooter' || enemy.isBoss;
       if (ranged && Math.abs(horizontal) < (enemy.isBoss ? 640 : 500) && Math.abs(horizontal) > 115 && vertical < 180 && enemy.rangedClock <= 0) {
         this.spawnEnemyProjectile(enemy, targetEntity);
@@ -264,7 +269,6 @@ export function withV52MissionRuntime(BaseEngine) {
       const stopRange = enemy.isBoss ? 94 : enemy.behavior === 'pouncer' ? 42 : 58;
       if (enemy.staggerClock <= 0 && Math.abs(horizontal) > stopRange && vertical < 160) {
         const speedMultiplier = enemy.behavior === 'hunter' ? 1.28 : enemy.behavior === 'pouncer' ? 1.38 : enemy.isBoss ? 0.75 : 1;
-        enemy.facing = Math.sign(horizontal) || enemy.facing;
         const previousX = enemy.x;
         enemy.x += enemy.facing * enemy.speed * speedMultiplier * delta;
         this.resolveEnemyHorizontal(enemy, previousX);
@@ -634,6 +638,9 @@ export function withV52MissionRuntime(BaseEngine) {
         [this.vehicle?.id || 'vehicle', this.vehicle?.active ? this.vehicle : null, this.vehicle?.active && (this.vehicle.family || 'ground') === 'ground' ? resolveVehicleAnimation(this.vehicle) : null]
       ];
       for (const [entityId, entity, request] of samples) {
+        if (entity?.visualIdentityStatus && entity.visualIdentityStatus !== 'exact') {
+          this.animationTelemetry.approximatedEnemyVisuals.add(`${entity.visualArchetype}:${entity.visualIdentityStatus}`);
+        }
         if (!entity || !request) {
           if (entity?.biology) this.animationTelemetry.fallbackFamilies.add(entity.biology);
           continue;
@@ -709,7 +716,7 @@ export function withV52MissionRuntime(BaseEngine) {
     drawActor(ctx, actor) {
       const request = resolvePlayerAnimation(actor, Boolean(this.neuro?.active && actor === this.player));
       const sample = this.spriteAnimation?.sample(actor?.operatorId || (actor?.coop ? 'coop' : 'player'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
-      if (!this.drawSpriteSample(ctx, sample, actor, actor?.facing < 0)) return super.drawActor(ctx, actor);
+      if (!this.drawSpriteSample(ctx, sample, actor)) return super.drawActor(ctx, actor);
       if (actor.inCover) {
         ctx.strokeStyle = '#79c895';
         ctx.strokeRect(actor.x - 3, actor.y + 32, actor.w + 6, actor.h - 29);
@@ -734,7 +741,7 @@ export function withV52MissionRuntime(BaseEngine) {
       ctx.save();
       if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
       if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
-      const drawn = this.drawSpriteSample(ctx, sample, enemy, enemy.facing > 0);
+      const drawn = this.drawSpriteSample(ctx, sample, enemy);
       ctx.restore();
       if (!drawn) return super.drawEnemy(ctx, enemy);
       if (enemy.alive && (enemy.alert || enemy.isBoss)) {
@@ -748,14 +755,14 @@ export function withV52MissionRuntime(BaseEngine) {
       if (!this.vehicle?.active || (this.vehicle.family || 'ground') !== 'ground') return super.drawVehicle(ctx);
       const request = resolveVehicleAnimation(this.vehicle);
       const sample = this.spriteAnimation?.sample(this.vehicle.id || 'vehicle', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
-      if (!this.drawSpriteSample(ctx, sample, this.vehicle, false)) super.drawVehicle(ctx);
+      if (!this.drawSpriteSample(ctx, sample, this.vehicle)) super.drawVehicle(ctx);
     }
 
     drawWeaponPickup(ctx) {
       if (!this.weaponPickup?.taken) {
         const sample = this.spriteAnimation?.sample('weapon-pickup', { sheetId: 'weapon.m41a-pulse-rifle.action', clipId: 'idle' }, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
         const anchor = this.weaponPickup ? { ...this.weaponPickup, x: this.weaponPickup.x, y: this.weaponPickup.y, w: this.weaponPickup.w, h: this.weaponPickup.h } : null;
-        if (!this.drawSpriteSample(ctx, sample, anchor, false)) super.drawWeaponPickup(ctx);
+        if (!this.drawSpriteSample(ctx, sample, anchor)) super.drawWeaponPickup(ctx);
       }
       this.drawAllies(ctx);
     }
@@ -769,7 +776,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const sample = this.spriteAnimation?.sample(member.crewId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       ctx.save();
       if (!member.alive) ctx.globalAlpha = member.downed ? 0.72 : 0.38;
-      const drawn = this.drawSpriteSample(ctx, sample, member, member.facing < 0);
+      const drawn = this.drawSpriteSample(ctx, sample, member);
       ctx.restore();
       if (!drawn) {
         ctx.fillStyle = member.species === 'synthetic' ? '#c4d5d2' : '#7fa88a';
@@ -783,9 +790,10 @@ export function withV52MissionRuntime(BaseEngine) {
       this.squadTelemetry.rendered += 1;
     }
 
-    drawSpriteSample(ctx, sample, entity, flip = false) {
+    drawSpriteSample(ctx, sample, entity) {
       if (!ctx || !sample || !entity) return false;
       const entry = sample.sheet;
+      const flip = shouldFlipSprite(entry, entity.facing);
       const image = this.images?.get(entry.imageKey);
       if (!imageReady(image)) return false;
       const pivot = SPRITE_PIVOTS[entry.pivot];
@@ -946,6 +954,7 @@ export function withV52MissionRuntime(BaseEngine) {
           activeClips: { ...this.animationTelemetry.activeClips },
           fallbackFamilies: [...this.animationTelemetry.fallbackFamilies],
           frameEffects: this.animationTelemetry.frameEffects,
+          approximatedEnemyVisuals: [...this.animationTelemetry.approximatedEnemyVisuals],
           controller: this.spriteAnimation?.snapshot() || []
         } : null
       };

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { access, readFile } from 'node:fs/promises';
 import { MISSION_LEVEL_LAYER_FILES_V52 } from '../src/game-v52-level-runtime.js';
+import { MISSION_STRUCTURAL_PROP_FILES } from '../src/game-v51-runtime.js';
 import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
 
 const relativeImports = (source) => {
@@ -56,7 +57,8 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
 
   const runtimeAssets = new Set([
     ...Object.values(SPRITE_SHEETS).map((sheet) => sheet.path),
-    ...Object.values(MISSION_LEVEL_LAYER_FILES_V52).flatMap((layers) => Object.values(layers))
+    ...Object.values(MISSION_LEVEL_LAYER_FILES_V52).flatMap((layers) => Object.values(layers)),
+    ...Object.values(MISSION_STRUCTURAL_PROP_FILES),
   ]);
   for (const assetPath of runtimeAssets) {
     await access(localPath(assetPath));
@@ -66,7 +68,7 @@ test('le cache hors-ligne couvre toute la fermeture ESM publique sans fallback H
     );
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v52-/);
+  assert.match(worker, /const CACHE = ['"]atf-v53-/);
   assert.match(worker, /event\.request\.mode === 'navigate'/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

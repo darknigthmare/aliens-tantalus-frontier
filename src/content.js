@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '52.0.0',
+  version: '53.0.0',
   subtitle: 'Manifest-Driven Squad & Multiroute Frontier Worlds',
   sourceVersion: '51.0.0'
 });

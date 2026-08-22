@@ -1,0 +1,2156 @@
+{
+  "schemaVersion": 1,
+  "release": "v53",
+  "auditedRuntime": "v52+v53-fixes",
+  "auditDate": "2026-08-22",
+  "truthRules": [
+    "catalogued is not the same as rendered",
+    "loaded is not the same as visually exact",
+    "family reuse and missing dedicated art must remain explicit",
+    "an ImageGen prompt is not an asset until a real file passes normalization and in-game QA"
+  ],
+  "summary": {
+    "playerSubjects": 1,
+    "playerSheets": 2,
+    "npcs": 16,
+    "enemyArchetypes": 52,
+    "enemyModifiers": 11,
+    "enemyProfiles": 568,
+    "vehicleChassis": 36,
+    "vehicleFits": 8,
+    "vehicleProfiles": 279,
+    "hubRooms": 16,
+    "hubProps": 16,
+    "hubFarLayers": 4,
+    "missionProps": 16,
+    "missionTemplates": 3,
+    "missionGlobalLayers": 9
+  },
+  "player": {
+    "sheets": [
+      {
+        "id": "player.echo9-marine.locomotion",
+        "asset": "/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+        "sourceFacing": "right",
+        "identityVerified": true,
+        "runtimeState": "loaded-exact",
+        "fallbackWhenBlocked": null
+      },
+      {
+        "id": "player.echo9-marine.combat",
+        "asset": "/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png",
+        "sourceFacing": "right",
+        "identityVerified": false,
+        "runtimeState": "blocked-identity",
+        "fallbackWhenBlocked": "player.echo9-marine.locomotion"
+      }
+    ],
+    "remainingMissing": [
+      "identity-preserved combat",
+      "melee",
+      "interaction",
+      "wounded variants",
+      "visually verified locked death"
+    ],
+    "generationGate": "docs/prompts/V53_PLAYER_COMBAT_IDENTITY_PROMPT.md"
+  },
+  "npcs": {
+    "entries": [
+      {
+        "crewId": "crew-01-mara-vega",
+        "name": "Mara Vega",
+        "role": "Commander",
+        "species": "human",
+        "specialty": "command",
+        "sheetId": "npc.mara-vega.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-02-tamsin-velez",
+        "name": "Tamsin Velez",
+        "role": "Sergeant",
+        "species": "human",
+        "specialty": "assault",
+        "sheetId": "npc.tamsin-velez.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-03-idris-kwan",
+        "name": "Idris Kwan",
+        "role": "Engineer",
+        "species": "human",
+        "specialty": "engineering",
+        "sheetId": "npc.idris-kwan.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-04-noor-okafor",
+        "name": "Noor Okafor",
+        "role": "Corpsman",
+        "species": "human",
+        "specialty": "medical",
+        "sheetId": "npc.noor-okafor.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-05-bishop-9",
+        "name": "BISHOP-9",
+        "role": "Synthetic Science Officer",
+        "species": "synthetic",
+        "specialty": "science",
+        "sheetId": "npc.bishop-9.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-06-rook",
+        "name": "Rook",
+        "role": "Recon Marine",
+        "species": "human",
+        "specialty": "recon",
+        "sheetId": "npc.rook.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-07-sanaa-doyle",
+        "name": "Sanaa Doyle",
+        "role": "Smartgunner",
+        "species": "human",
+        "specialty": "heavy",
+        "sheetId": "npc.sanaa-doyle.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-08-maksim-orlov",
+        "name": "Maksim Orlov",
+        "role": "Pilot",
+        "species": "human",
+        "specialty": "pilot",
+        "sheetId": "npc.maksim-orlov.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-09-inez-harlow",
+        "name": "Inez Harlow",
+        "role": "Xenobiologist",
+        "species": "human",
+        "specialty": "science",
+        "sheetId": "npc.inez-harlow.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-10-david-8r",
+        "name": "DAVID-8R",
+        "role": "Recovered Synthetic",
+        "species": "synthetic",
+        "specialty": "infiltration",
+        "sheetId": "npc.david-8r.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-11-jun-park",
+        "name": "Jun Park",
+        "role": "Technician",
+        "species": "human",
+        "specialty": "engineering",
+        "sheetId": "npc.jun-park.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-12-asha-mbaye",
+        "name": "Asha Mbaye",
+        "role": "Colonial Liaison",
+        "species": "human",
+        "specialty": "diplomacy",
+        "sheetId": "npc.asha-mbaye.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-13-pablo-reyes",
+        "name": "Pablo Reyes",
+        "role": "Demolitions",
+        "species": "human",
+        "specialty": "demolition",
+        "sheetId": "npc.pablo-reyes.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-14-echo-a",
+        "name": "ECHO-A",
+        "role": "Tactical Synthetic",
+        "species": "synthetic",
+        "specialty": "assault",
+        "sheetId": "npc.echo-a.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-15-leila-s-rensen",
+        "name": "Leila Sørensen",
+        "role": "Pathfinder",
+        "species": "human",
+        "specialty": "survival",
+        "sheetId": "npc.leila-s-rensen.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      },
+      {
+        "crewId": "crew-16-cal-mercer",
+        "name": "Cal Mercer",
+        "role": "Vehicle Chief",
+        "species": "human",
+        "specialty": "vehicle",
+        "sheetId": "npc.cal-mercer.locomotion",
+        "runtimeState": "loaded-locomotion",
+        "availableClips": [
+          "idle",
+          "walk",
+          "role-work",
+          "alert-reaction"
+        ],
+        "missingClips": [
+          "combat",
+          "crouch",
+          "jump-fall",
+          "climb",
+          "wounded",
+          "death",
+          "role-specific-mission-action"
+        ]
+      }
+    ],
+    "unknownIdFallback": null
+  },
+  "enemies": {
+    "modifierProfileCounts": {
+      "Standard": 52,
+      "Albino": 52,
+      "Armored": 52,
+      "Acid-Blooded": 52,
+      "Cryo-Adapted": 52,
+      "Vacuum-Adapted": 52,
+      "Hive Guard": 52,
+      "Apex": 52,
+      "Juvenile": 52,
+      "Elder": 52,
+      "Neuro-Linked": 48
+    },
+    "coverage": {
+      "total": 568,
+      "modern": 341,
+      "legacy": 227,
+      "uniqueArchetypes": 52,
+      "bySpriteKey": {
+        "xenoDrone": 275,
+        "facehugger": 11,
+        "xenoWarrior": 11,
+        "xenoQueen": 22,
+        "legacy": 227,
+        "neomorph": 11,
+        "workingJoe": 11
+      },
+      "byImageKey": {
+        "neuroXeno": 55,
+        "pathogen": 95,
+        "synthetic": 11,
+        "human": 66
+      },
+      "byIdentityStatus": {
+        "missing-dedicated-art": 297,
+        "exact": 66,
+        "authored-family": 205
+      },
+      "approximatedArchetypes": [
+        "ATARAX Controller",
+        "ATARAX Ripper",
+        "Abomination",
+        "Arcology Lurker",
+        "Boiler",
+        "Burster",
+        "Caravan Stalker",
+        "Carrier",
+        "Ceto Reef Predator",
+        "Chestburster",
+        "Colonial Raider",
+        "Crusher",
+        "Cult Host",
+        "Deacon Line",
+        "Drone / Big Chap",
+        "Dust Runner",
+        "Foundry Crusher",
+        "Foundry Drone",
+        "Korari Stalker",
+        "Lurker",
+        "Monica Line",
+        "Neuro-Xeno Drone",
+        "Ovomorph",
+        "Pale Crucible Hunter",
+        "Pathogen Mimic",
+        "Praetorian",
+        "Protomorph",
+        "Prowler",
+        "Queen",
+        "Ravager",
+        "Reef Spitter",
+        "Reef Stalker",
+        "Ripper Queen",
+        "Runner",
+        "Salvage Hive Brute",
+        "Seegson Security",
+        "Siege Royal",
+        "Specimen Six Line",
+        "Spitter",
+        "Tantalus Tunnel Vermin",
+        "Trilobite Echo",
+        "UPP Vanguard",
+        "Warrior",
+        "Weyland-Yutani Commando",
+        "Wild Boar Host",
+        "Xenoborg"
+      ]
+    },
+    "exactProfileCount": 66,
+    "familyReuseProfileCount": 205,
+    "missingDedicatedProfileCount": 297,
+    "modernSheetCount": 7,
+    "modernSubjectCount": 6,
+    "archetypes": [
+      {
+        "name": "Ovomorph",
+        "biology": "xenomorph",
+        "caste": "egg",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Ovomorph; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Facehugger",
+        "biology": "xenomorph",
+        "caste": "parasite",
+        "profileCount": 11,
+        "spriteKey": "facehugger",
+        "sheetId": "enemy.facehugger.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "Chestburster",
+        "biology": "xenomorph",
+        "caste": "juvenile",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Chestburster; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Drone / Big Chap",
+        "biology": "xenomorph",
+        "caste": "stalker",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Drone couvre la famille de Drone / Big Chap, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Warrior",
+        "biology": "xenomorph",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "xenoWarrior",
+        "sheetId": "enemy.xenomorph-warrior.combat",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Warrior couvre le combat; la locomotion réutilise encore la planche Drone."
+      },
+      {
+        "name": "Runner",
+        "biology": "xenomorph",
+        "caste": "runner",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Runner; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Praetorian",
+        "biology": "xenomorph",
+        "caste": "guardian",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Praetorian; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Queen",
+        "biology": "xenomorph",
+        "caste": "royal",
+        "profileCount": 11,
+        "spriteKey": "xenoQueen",
+        "sheetId": "enemy.xenomorph-queen.combat",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La Queen possède une planche de combat, mais pas encore une locomotion complète validée."
+      },
+      {
+        "name": "Crusher",
+        "biology": "xenomorph",
+        "caste": "siege",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Crusher; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Spitter",
+        "biology": "xenomorph",
+        "caste": "ranged",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Spitter; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Lurker",
+        "biology": "xenomorph",
+        "caste": "ambush",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Lurker; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Carrier",
+        "biology": "xenomorph",
+        "caste": "carrier",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Carrier; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Ravager",
+        "biology": "xenomorph",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Ravager; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Boiler",
+        "biology": "xenomorph",
+        "caste": "explosive",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Boiler; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Prowler",
+        "biology": "xenomorph",
+        "caste": "ambush",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Prowler; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Burster",
+        "biology": "xenomorph",
+        "caste": "explosive",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Burster; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Monica Line",
+        "biology": "xenomorph",
+        "caste": "stalker",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Monica Line; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Specimen Six Line",
+        "biology": "xenomorph",
+        "caste": "adaptive",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Specimen Six Line; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Red Xenomorph",
+        "biology": "xenomorph",
+        "caste": "rival-hive",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "neuroXeno",
+        "legacyRow": 0,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "K-Series Yellow Xenomorph",
+        "biology": "xenomorph",
+        "caste": "rival-hive",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "neuroXeno",
+        "legacyRow": 1,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "Neuro-Xeno Drone",
+        "biology": "xenomorph",
+        "caste": "controlled",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "neuroXeno",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche ATARAX/neuro-liée couvre la famille de Neuro-Xeno Drone, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Xenoborg",
+        "biology": "xenomorph",
+        "caste": "cybernetic",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "neuroXeno",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Xenoborg/Ripper couvre la famille de Xenoborg, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "ATARAX Ripper",
+        "biology": "xenomorph",
+        "caste": "armored",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "neuroXeno",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Xenoborg/Ripper couvre la famille de ATARAX Ripper, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Ripper Queen",
+        "biology": "xenomorph",
+        "caste": "royal",
+        "profileCount": 11,
+        "spriteKey": "xenoQueen",
+        "sheetId": "enemy.xenomorph-queen.combat",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Ripper Queen; la Queen standard reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Foundry Drone",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Foundry Drone; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Foundry Crusher",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Foundry Crusher; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Reef Stalker",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Reef Stalker; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Reef Spitter",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Reef Spitter; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Siege Royal",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Siege Royal; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Pale Crucible Hunter",
+        "biology": "xenomorph",
+        "caste": "concept-crucible",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Pale Crucible Hunter; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Dust Runner",
+        "biology": "xenomorph",
+        "caste": "concept-crucible",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Dust Runner; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Salvage Hive Brute",
+        "biology": "xenomorph",
+        "caste": "concept-crucible",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Salvage Hive Brute; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Arcology Lurker",
+        "biology": "xenomorph",
+        "caste": "concept-crucible",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Arcology Lurker; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Caravan Stalker",
+        "biology": "xenomorph",
+        "caste": "concept-crucible",
+        "profileCount": 11,
+        "spriteKey": "xenoDrone",
+        "sheetId": "enemy.xenomorph-drone.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Caravan Stalker; la silhouette Drone reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Trilobite Echo",
+        "biology": "pathogen",
+        "caste": "apex",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Trilobite/Abomination couvre la famille de Trilobite Echo, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Deacon Line",
+        "biology": "pathogen",
+        "caste": "apex",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 1,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Deacon/Protomorph couvre la famille de Deacon Line, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Neomorph",
+        "biology": "pathogen",
+        "caste": "stalker",
+        "profileCount": 11,
+        "spriteKey": "neomorph",
+        "sheetId": "enemy.neomorph.locomotion",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "Protomorph",
+        "biology": "pathogen",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 1,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Deacon/Protomorph couvre la famille de Protomorph, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Abomination",
+        "biology": "pathogen",
+        "caste": "brute",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche Trilobite/Abomination couvre la famille de Abomination, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Pathogen Mimic",
+        "biology": "pathogen",
+        "caste": "adaptive",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 2,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Pathogen Mimic; la ligne Trilobite/Abomination reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Working Joe",
+        "biology": "synthetic",
+        "caste": "security",
+        "profileCount": 11,
+        "spriteKey": "workingJoe",
+        "sheetId": "enemy.working-joe.combat",
+        "legacyImageKey": null,
+        "legacyRow": null,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "Combat Synthetic",
+        "biology": "synthetic",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "synthetic",
+        "legacyRow": 2,
+        "identityStatus": "exact",
+        "fallbackReason": null
+      },
+      {
+        "name": "Weyland-Yutani Commando",
+        "biology": "human",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 1,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche corporate commando couvre la famille de Weyland-Yutani Commando, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "UPP Vanguard",
+        "biology": "human",
+        "caste": "assault",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche sécurité UPP/Seegson couvre la famille de UPP Vanguard, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Seegson Security",
+        "biology": "human",
+        "caste": "security",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 2,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche sécurité UPP/Seegson couvre la famille de Seegson Security, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Colonial Raider",
+        "biology": "human",
+        "caste": "ambush",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche raider/ATARAX couvre la famille de Colonial Raider, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "ATARAX Controller",
+        "biology": "human",
+        "caste": "controller",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche raider/ATARAX couvre la famille de ATARAX Controller, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Cult Host",
+        "biology": "human",
+        "caste": "cult",
+        "profileCount": 11,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "human",
+        "legacyRow": 3,
+        "identityStatus": "missing-dedicated-art",
+        "fallbackReason": "Aucune planche dédiée validée pour Cult Host; la ligne raider/ATARAX reste un fallback explicitement signalé."
+      },
+      {
+        "name": "Wild Boar Host",
+        "biology": "fauna",
+        "caste": "host",
+        "profileCount": 10,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche faune de frontière couvre la famille de Wild Boar Host, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Korari Stalker",
+        "biology": "fauna",
+        "caste": "predator",
+        "profileCount": 10,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche faune de frontière couvre la famille de Korari Stalker, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Ceto Reef Predator",
+        "biology": "fauna",
+        "caste": "aquatic",
+        "profileCount": 10,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche faune de frontière couvre la famille de Ceto Reef Predator, sans identité animée dédiée à cette variante."
+      },
+      {
+        "name": "Tantalus Tunnel Vermin",
+        "biology": "fauna",
+        "caste": "swarm",
+        "profileCount": 10,
+        "spriteKey": "legacy",
+        "sheetId": null,
+        "legacyImageKey": "pathogen",
+        "legacyRow": 3,
+        "identityStatus": "authored-family",
+        "fallbackReason": "La planche faune de frontière couvre la famille de Tantalus Tunnel Vermin, sans identité animée dédiée à cette variante."
+      }
+    ],
+    "registryEntries": 52
+  },
+  "vehicles": {
+    "fitProfileCounts": {
+      "Standard": 36,
+      "Recon": 36,
+      "Assault": 36,
+      "Rescue": 36,
+      "Colonial": 36,
+      "Frontier": 36,
+      "Prototype": 36,
+      "Apex": 27
+    },
+    "exactProfileCount": 1,
+    "missingDedicatedProfileCount": 278,
+    "chassis": [
+      {
+        "name": "M577 Armored Personnel Carrier",
+        "family": "ground",
+        "seats": 8,
+        "profileCount": 8,
+        "exactBaseProfile": true,
+        "runtimeRender": "bitmap:m577-apc",
+        "dedicatedBitmapState": "loaded-exact"
+      },
+      {
+        "name": "M577 Command APC",
+        "family": "ground",
+        "seats": 7,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "M570 Armored Personnel Carrier",
+        "family": "ground",
+        "seats": 8,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "M22A3 Jackson Tank",
+        "family": "ground",
+        "seats": 4,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "M40 Ridgeway Tank",
+        "family": "ground",
+        "seats": 4,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "M292 Combat Buggy",
+        "family": "ground",
+        "seats": 3,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "P-5000 Powered Work Loader",
+        "family": "exosuit",
+        "seats": 1,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:exosuit",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Combat Power Loader",
+        "family": "exosuit",
+        "seats": 1,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:exosuit",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "UD-4L Cheyenne Dropship",
+        "family": "air",
+        "seats": 12,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "UD-4B Dropship",
+        "family": "air",
+        "seats": 10,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "AD-19CD Dropship",
+        "family": "air",
+        "seats": 12,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "UA-571 Remote Sentry Carrier",
+        "family": "ground",
+        "seats": 2,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "USCSS Nostromo Shuttle",
+        "family": "space",
+        "seats": 7,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:space",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "USCSS Covenant Lander",
+        "family": "air",
+        "seats": 8,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "USCSS Prometheus Rover",
+        "family": "ground",
+        "seats": 6,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "ATV Survey Rover",
+        "family": "ground",
+        "seats": 4,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Seegson Maintenance Tram",
+        "family": "rail",
+        "seats": 20,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:rail",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Acheron Colony Tractor",
+        "family": "ground",
+        "seats": 3,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Submersible Survey Skiff",
+        "family": "maritime",
+        "seats": 6,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:maritime",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Ceto Patrol Boat",
+        "family": "maritime",
+        "seats": 8,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:maritime",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Tantalus Command Skiff",
+        "family": "air",
+        "seats": 6,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Echo-9 Recon Bike",
+        "family": "ground",
+        "seats": 2,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Crucible Caravan Crawler",
+        "family": "ground",
+        "seats": 10,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Neuro-Xeno Transport Rig",
+        "family": "ground",
+        "seats": 5,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "USCM Assault Gunship",
+        "family": "air",
+        "seats": 8,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Orbital Lifeboat",
+        "family": "space",
+        "seats": 12,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:space",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Colony Cargo Lifter",
+        "family": "air",
+        "seats": 3,
+        "profileCount": 8,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Weyland-Yutani Executive Shuttle",
+        "family": "space",
+        "seats": 10,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:space",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "UPP Combat Aerodyne",
+        "family": "air",
+        "seats": 6,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:air",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Hyperdyne Synthetic Carrier",
+        "family": "ground",
+        "seats": 8,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Mining Bore Crawler",
+        "family": "ground",
+        "seats": 9,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Atmospheric Processor Elevator",
+        "family": "rail",
+        "seats": 30,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:rail",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Maglev Personnel Car",
+        "family": "rail",
+        "seats": 18,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:rail",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Ice Driller",
+        "family": "ground",
+        "seats": 5,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "wrong-reuse:m577-apc",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Reef Hydrofoil",
+        "family": "maritime",
+        "seats": 5,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:maritime",
+        "dedicatedBitmapState": "missing"
+      },
+      {
+        "name": "Ripper Siege Loader",
+        "family": "exosuit",
+        "seats": 1,
+        "profileCount": 7,
+        "exactBaseProfile": false,
+        "runtimeRender": "canvas-family-silhouette:exosuit",
+        "dedicatedBitmapState": "missing"
+      }
+    ],
+    "remainingMissing": [
+      "dedicated bitmap sheets for 35 chassis",
+      "fit-specific damage states",
+      "entry-exit animation",
+      "destruction animation"
+    ]
+  },
+  "hub": {
+    "rooms": [
+      {
+        "deckId": "command",
+        "roomId": "bridge",
+        "name": "Passerelle",
+        "background": "/assets/openai/hub/rooms/command-bridge.png",
+        "parallax": "/assets/openai/hub/parallax/command-far.png",
+        "prop": "/assets/openai/hub/props/bridge-terminal.png",
+        "sceneScale": 1.01,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 184,
+          "height": 76
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "command",
+        "roomId": "briefing",
+        "name": "Salle de briefing",
+        "background": "/assets/openai/hub/rooms/command-briefing.png",
+        "parallax": "/assets/openai/hub/parallax/command-far.png",
+        "prop": "/assets/openai/hub/props/briefing-table.png",
+        "sceneScale": 1.05,
+        "floorRatio": 0.815,
+        "propCollider": {
+          "width": 176,
+          "height": 48
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "command",
+        "roomId": "combat-information",
+        "name": "Centre d’information tactique",
+        "background": "/assets/openai/hub/rooms/command-cic.png",
+        "parallax": "/assets/openai/hub/parallax/command-far.png",
+        "prop": "/assets/openai/hub/props/sensor-console.png",
+        "sceneScale": 1.03,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 168,
+          "height": 70
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "command",
+        "roomId": "cryo-bay",
+        "name": "Baie cryogénique",
+        "background": "/assets/openai/hub/rooms/command-cryo.png",
+        "parallax": "/assets/openai/hub/parallax/command-far.png",
+        "prop": "/assets/openai/hub/props/cryopod.png",
+        "sceneScale": 1.06,
+        "floorRatio": 0.825,
+        "propCollider": {
+          "width": 188,
+          "height": 54
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "habitat",
+        "roomId": "crew-quarters",
+        "name": "Quartiers équipage",
+        "background": "/assets/openai/hub/rooms/habitat-quarters.png",
+        "parallax": "/assets/openai/hub/parallax/habitat-far.png",
+        "prop": "/assets/openai/hub/props/bunk-module.png",
+        "sceneScale": 1.06,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 174,
+          "height": 82
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "habitat",
+        "roomId": "mess",
+        "name": "Mess",
+        "background": "/assets/openai/hub/rooms/habitat-mess.png",
+        "parallax": "/assets/openai/hub/parallax/habitat-far.png",
+        "prop": "/assets/openai/hub/props/mess-table.png",
+        "sceneScale": 1.05,
+        "floorRatio": 0.815,
+        "propCollider": {
+          "width": 174,
+          "height": 44
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "habitat",
+        "roomId": "medical",
+        "name": "Bloc médical",
+        "background": "/assets/openai/hub/rooms/habitat-medical.png",
+        "parallax": "/assets/openai/hub/parallax/habitat-far.png",
+        "prop": "/assets/openai/hub/props/medical-bed.png",
+        "sceneScale": 1.04,
+        "floorRatio": 0.825,
+        "propCollider": {
+          "width": 184,
+          "height": 44
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "habitat",
+        "roomId": "science-lab",
+        "name": "Laboratoire scientifique",
+        "background": "/assets/openai/hub/rooms/habitat-lab.png",
+        "parallax": "/assets/openai/hub/parallax/habitat-far.png",
+        "prop": "/assets/openai/hub/props/lab-console.png",
+        "sceneScale": 1.03,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 174,
+          "height": 68
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "industrial",
+        "roomId": "quarantine",
+        "name": "Quarantaine",
+        "background": "/assets/openai/hub/rooms/industrial-quarantine.png",
+        "parallax": "/assets/openai/hub/parallax/industrial-far.png",
+        "prop": "/assets/openai/hub/props/quarantine-unit.png",
+        "sceneScale": 1.02,
+        "floorRatio": 0.83,
+        "propCollider": {
+          "width": 150,
+          "height": 104
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "industrial",
+        "roomId": "armory",
+        "name": "Armurerie",
+        "background": "/assets/openai/hub/rooms/industrial-armory.png",
+        "parallax": "/assets/openai/hub/parallax/industrial-far.png",
+        "prop": "/assets/openai/hub/props/armory-rack.png",
+        "sceneScale": 1.05,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 174,
+          "height": 82
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "industrial",
+        "roomId": "workshop",
+        "name": "Atelier",
+        "background": "/assets/openai/hub/rooms/industrial-workshop.png",
+        "parallax": "/assets/openai/hub/parallax/industrial-far.png",
+        "prop": "/assets/openai/hub/props/workbench.png",
+        "sceneScale": 1.04,
+        "floorRatio": 0.82,
+        "propCollider": {
+          "width": 184,
+          "height": 64
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "industrial",
+        "roomId": "vehicle-bay",
+        "name": "Baie véhicules",
+        "background": "/assets/openai/hub/rooms/industrial-vehicle-bay.png",
+        "parallax": "/assets/openai/hub/parallax/industrial-far.png",
+        "prop": "/assets/openai/hub/props/vehicle-lift.png",
+        "sceneScale": 1,
+        "floorRatio": 0.825,
+        "propCollider": {
+          "width": 204,
+          "height": 42
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "engineering",
+        "roomId": "dropship-hangar",
+        "name": "Hangar dropship",
+        "background": "/assets/openai/hub/rooms/engineering-hangar.png",
+        "parallax": "/assets/openai/hub/parallax/engineering-far.png",
+        "prop": "/assets/openai/hub/props/vehicle-lift.png",
+        "sceneScale": 1,
+        "floorRatio": 0.825,
+        "propCollider": {
+          "width": 204,
+          "height": 42
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "engineering",
+        "roomId": "reactor",
+        "name": "Réacteur",
+        "background": "/assets/openai/hub/rooms/engineering-reactor.png",
+        "parallax": "/assets/openai/hub/parallax/engineering-far.png",
+        "prop": "/assets/openai/hub/props/reactor-column.png",
+        "sceneScale": 1.01,
+        "floorRatio": 0.83,
+        "propCollider": {
+          "width": 136,
+          "height": 116
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "engineering",
+        "roomId": "life-support",
+        "name": "Support-vie",
+        "background": "/assets/openai/hub/rooms/engineering-life-support.png",
+        "parallax": "/assets/openai/hub/parallax/engineering-far.png",
+        "prop": "/assets/openai/hub/props/life-support-scrubber.png",
+        "sceneScale": 1.03,
+        "floorRatio": 0.825,
+        "propCollider": {
+          "width": 176,
+          "height": 84
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      },
+      {
+        "deckId": "engineering",
+        "roomId": "sensor-array",
+        "name": "Réseau de capteurs",
+        "background": "/assets/openai/hub/rooms/engineering-sensors.png",
+        "parallax": "/assets/openai/hub/parallax/engineering-far.png",
+        "prop": "/assets/openai/hub/props/sensor-console.png",
+        "sceneScale": 1.03,
+        "floorRatio": 0.815,
+        "propCollider": {
+          "width": 166,
+          "height": 76
+        },
+        "collisionSource": "room-profile",
+        "runtimeState": "loaded-profiled"
+      }
+    ],
+    "props": [
+      {
+        "key": "bulkhead-door",
+        "asset": "/assets/openai/hub/props/bulkhead-door.png",
+        "usages": [
+          "inter-room-bulkheads"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "lift-door",
+        "asset": "/assets/openai/hub/props/lift-door.png",
+        "usages": [
+          "deck-lifts"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "bridge-terminal",
+        "asset": "/assets/openai/hub/props/bridge-terminal.png",
+        "usages": [
+          "bridge"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "briefing-table",
+        "asset": "/assets/openai/hub/props/briefing-table.png",
+        "usages": [
+          "briefing"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "cryopod",
+        "asset": "/assets/openai/hub/props/cryopod.png",
+        "usages": [
+          "cryo-bay"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "bunk-module",
+        "asset": "/assets/openai/hub/props/bunk-module.png",
+        "usages": [
+          "crew-quarters"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "mess-table",
+        "asset": "/assets/openai/hub/props/mess-table.png",
+        "usages": [
+          "mess"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "medical-bed",
+        "asset": "/assets/openai/hub/props/medical-bed.png",
+        "usages": [
+          "medical"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "lab-console",
+        "asset": "/assets/openai/hub/props/lab-console.png",
+        "usages": [
+          "science-lab"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "quarantine-unit",
+        "asset": "/assets/openai/hub/props/quarantine-unit.png",
+        "usages": [
+          "quarantine"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "armory-rack",
+        "asset": "/assets/openai/hub/props/armory-rack.png",
+        "usages": [
+          "armory"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "workbench",
+        "asset": "/assets/openai/hub/props/workbench.png",
+        "usages": [
+          "workshop"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "vehicle-lift",
+        "asset": "/assets/openai/hub/props/vehicle-lift.png",
+        "usages": [
+          "vehicle-bay",
+          "dropship-hangar"
+        ],
+        "reused": true,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "reactor-column",
+        "asset": "/assets/openai/hub/props/reactor-column.png",
+        "usages": [
+          "reactor"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "life-support-scrubber",
+        "asset": "/assets/openai/hub/props/life-support-scrubber.png",
+        "usages": [
+          "life-support"
+        ],
+        "reused": false,
+        "runtimeState": "loaded"
+      },
+      {
+        "key": "sensor-console",
+        "asset": "/assets/openai/hub/props/sensor-console.png",
+        "usages": [
+          "combat-information",
+          "sensor-array"
+        ],
+        "reused": true,
+        "runtimeState": "loaded"
+      }
+    ],
+    "farLayers": [
+      {
+        "deckId": "command",
+        "asset": "/assets/openai/hub/parallax/command-far.png",
+        "runtimeState": "loaded-and-drawn"
+      },
+      {
+        "deckId": "habitat",
+        "asset": "/assets/openai/hub/parallax/habitat-far.png",
+        "runtimeState": "loaded-and-drawn"
+      },
+      {
+        "deckId": "industrial",
+        "asset": "/assets/openai/hub/parallax/industrial-far.png",
+        "runtimeState": "loaded-and-drawn"
+      },
+      {
+        "deckId": "engineering",
+        "asset": "/assets/openai/hub/parallax/engineering-far.png",
+        "runtimeState": "loaded-and-drawn"
+      }
+    ],
+    "doorBounds": "shared-render-and-collision-profile",
+    "genericTraversalOverlays": 0,
+    "remainingMissing": [
+      "dedicated hub foreground layer",
+      "physical dropship prop in dropship hangar",
+      "room-specific ceiling and foreground modules"
+    ]
+  },
+  "mission": {
+    "props": [
+      {
+        "key": "floor-segment",
+        "runtimeKey": "floor",
+        "asset": "/assets/openai/metroidvania/props/floor-segment.png",
+        "usage": "terrain",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "overhead-catwalk",
+        "runtimeKey": "catwalk",
+        "asset": "/assets/openai/metroidvania/props/overhead-catwalk.png",
+        "usage": "platform",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "short-ledge",
+        "runtimeKey": "ledge",
+        "asset": "/assets/openai/metroidvania/props/short-ledge.png",
+        "usage": "platform",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "drop-platform",
+        "runtimeKey": "drop",
+        "asset": "/assets/openai/metroidvania/props/drop-platform.png",
+        "usage": "platform",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "wall-ladder",
+        "runtimeKey": "ladder",
+        "asset": "/assets/openai/metroidvania/props/wall-ladder.png",
+        "usage": "traversal",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "maintenance-pipe",
+        "runtimeKey": "maintenancePipe",
+        "asset": "/assets/openai/metroidvania/props/maintenance-pipe.png",
+        "usage": "ship-architecture-layer",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "vent-entrance",
+        "runtimeKey": "vent",
+        "asset": "/assets/openai/metroidvania/props/vent-entrance.png",
+        "usage": "shortcut",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "breakable-panel",
+        "runtimeKey": "breakable",
+        "asset": "/assets/openai/metroidvania/props/breakable-panel.png",
+        "usage": "breakable-and-objective",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "locked-bulkhead",
+        "runtimeKey": "lockedDoor",
+        "asset": "/assets/openai/metroidvania/props/locked-bulkhead.png",
+        "usage": "closed-door",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "open-bulkhead",
+        "runtimeKey": "openDoor",
+        "asset": "/assets/openai/metroidvania/props/open-bulkhead.png",
+        "usage": "open-door",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "cargo-cover",
+        "runtimeKey": "cover",
+        "asset": "/assets/openai/metroidvania/props/cargo-cover.png",
+        "usage": "cover",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "supply-crates",
+        "runtimeKey": "crates",
+        "asset": "/assets/openai/metroidvania/props/supply-crates.png",
+        "usage": "resource-and-objective",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "ceiling-cables",
+        "runtimeKey": "ceilingCables",
+        "asset": "/assets/openai/metroidvania/props/ceiling-cables.png",
+        "usage": "ship-ceiling-layer",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "foreground-pipes",
+        "runtimeKey": "foregroundPipes",
+        "asset": "/assets/openai/metroidvania/props/foreground-pipes.png",
+        "usage": "ship-foreground-layer",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "warning-lamp",
+        "runtimeKey": "lamp",
+        "asset": "/assets/openai/metroidvania/props/warning-lamp.png",
+        "usage": "terminal-and-objective",
+        "fileState": "present",
+        "loadState": "loaded"
+      },
+      {
+        "key": "acid-floor-hazard",
+        "runtimeKey": "acid",
+        "asset": "/assets/openai/metroidvania/props/acid-floor-hazard.png",
+        "usage": "acid-hazard-and-generic-hazard-fallback",
+        "fileState": "present",
+        "loadState": "loaded"
+      }
+    ],
+    "layers": [
+      {
+        "templateId": "ship-interior-vertical",
+        "depth": "far",
+        "asset": "/assets/openai/metroidvania/tantalus-mission-far.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "ship-interior-vertical",
+        "depth": "mid",
+        "asset": "/assets/openai/metroidvania/tantalus-mission-mid.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "ship-interior-vertical",
+        "depth": "foreground",
+        "asset": "/assets/openai/metroidvania/tantalus-mission-foreground.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "colony-multiroute",
+        "depth": "far",
+        "asset": "/assets/openai/metroidvania/colony-multiroute-far.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "colony-multiroute",
+        "depth": "mid",
+        "asset": "/assets/openai/metroidvania/colony-multiroute-mid.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "colony-multiroute",
+        "depth": "foreground",
+        "asset": "/assets/openai/metroidvania/colony-multiroute-foreground.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "planet-exterior",
+        "depth": "far",
+        "asset": "/assets/openai/metroidvania/planet-exterior-far.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "planet-exterior",
+        "depth": "mid",
+        "asset": "/assets/openai/metroidvania/planet-exterior-mid.png",
+        "runtimeState": "loaded-global-layer"
+      },
+      {
+        "templateId": "planet-exterior",
+        "depth": "foreground",
+        "asset": "/assets/openai/metroidvania/planet-exterior-foreground.png",
+        "runtimeState": "loaded-global-layer"
+      }
+    ],
+    "doorBounds": "shared-render-and-collision-profile",
+    "invisibleCoverKeys": 0,
+    "remainingMissing": [
+      "independent far/mid/architecture/foreground sets per zone",
+      "non-acid art for fire, steam, radiation, flood, vacuum and darkness",
+      "dedicated sprites for resource drops and archive terminals"
+    ]
+  },
+  "evidence": [
+    "src/content-core-v50.js",
+    "src/enemy-visual-runtime-v53.js",
+    "src/sprite-animation-runtime.js",
+    "src/game-v51-runtime.js",
+    "src/game-v52-runtime.js",
+    "src/game-v52-level-runtime.js",
+    "src/hub-game.js",
+    "src/hub-profiles-v53.js",
+    "assets/openai/sprites/manifest.json"
+  ]
+}

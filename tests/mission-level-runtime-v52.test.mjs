@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GameEngine as ProductionCoreEngine } from '../src/game-production-core.js';
+import { MISSION_STRUCTURAL_PROP_FILES } from '../src/game-v51-runtime.js';
 import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
 import { MISSION_LEVEL_LAYER_FILES_V52, withV52LevelRuntime } from '../src/game-v52-level-runtime.js';
 import { MISSION_TEMPLATE_IDS_V52, buildMissionLevelV52 } from '../src/mission-levels-v52.js';
@@ -48,6 +49,22 @@ function createEngine(events = []) {
   return new V52RuntimeEngine(canvas, { onEvent: (event) => events.push(event) });
 }
 
+function recordingContext() {
+  const gradient = { addColorStop() {} };
+  const drawCalls = [];
+  const base = {
+    drawCalls,
+    drawImage: (...args) => drawCalls.push(args),
+    createLinearGradient: () => gradient,
+    createRadialGradient: () => gradient,
+    measureText: (text) => ({ width: String(text).length * 8 })
+  };
+  return new Proxy(base, {
+    get: (target, key) => key in target ? target[key] : () => {},
+    set: (target, key, value) => { target[key] = value; return true; }
+  });
+}
+
 function optionsFor(plan) {
   return {
     seed: plan.levelSeed.seed,
@@ -91,6 +108,8 @@ test('les trois templates sont réellement consommés par le runtime mission', (
     assert.ok(engine.ladders.length > 0);
     assert.ok(engine.enemies.some((enemy) => enemy.levelSpawnId));
     assert.ok(events.some((event) => event.type === 'mission-level-ready' && event.templateId === templateId));
+    assert.ok(engine.covers.length > 0);
+    assert.ok(engine.covers.every((cover) => engine.images.has(cover.art)), `unmapped cover art in ${templateId}`);
 
     const layerFiles = MISSION_LEVEL_LAYER_FILES_V52[templateId];
     assert.deepEqual(runtime.artLayers, layerFiles);
@@ -145,4 +164,56 @@ test('les événements contextuels activent spawns, hazards et état visuel une 
   assert.equal(engine.missionLevelEvents.get(event.id).triggerCount, 1);
   assert.ok(engine.missionLevelTelemetry.events >= 1);
   assert.ok(events.some((entry) => entry.type === 'mission-level-event' && entry.eventId === event.id));
+}));
+
+test('les trois props structurels sont chargés et dessinés dans le vaisseau', () => withBrowserMocks(() => {
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-ship-props', objective: 'board a drifting vessel', worldId: WORLDS[6].id };
+  const plan = buildMissionLevelV52({
+    campaign,
+    world: WORLDS[6],
+    levelSeeds: LEVEL_SEEDS,
+    templateId: 'ship-interior-vertical',
+    variant: 2
+  });
+  const engine = createEngine();
+  engine.start(optionsFor(plan));
+  for (const [key, path] of Object.entries(MISSION_STRUCTURAL_PROP_FILES)) {
+    assert.equal(engine.images.get(key)?.currentSrc, path, `${key} loaded by production runtime`);
+  }
+
+  const ctx = recordingContext();
+  assert.ok(engine.drawCeilingCables(ctx) > 0);
+  assert.ok(engine.drawMaintenancePipes(ctx) > 0);
+  assert.ok(engine.drawForegroundPipes(ctx) > 0);
+  for (const key of Object.keys(MISSION_STRUCTURAL_PROP_FILES)) {
+    const image = engine.images.get(key);
+    assert.ok(ctx.drawCalls.some((call) => call[0] === image), `${key} consumed by a draw call`);
+  }
+}));
+
+test('les bounds de collision d’un sas fermé égalent ses bounds bitmap', () => withBrowserMocks(() => {
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-ship-door-bounds', objective: 'board a drifting vessel', worldId: WORLDS[6].id };
+  const plan = buildMissionLevelV52({ campaign, world: WORLDS[6], levelSeeds: LEVEL_SEEDS, templateId: 'ship-interior-vertical' });
+  const engine = createEngine();
+  engine.start(optionsFor(plan));
+  const locked = engine.images.get('lockedDoor');
+  Object.assign(locked, { naturalWidth: 185, naturalHeight: 176 });
+  const door = engine.doors[0];
+  door.progress = 0;
+  const bounds = engine.getDoorRenderState(door, { open: false });
+  assert.ok(bounds.w > door.w * 3, 'the old 44px collider did not cover the 168px bitmap');
+  assert.equal(bounds.h, door.h + 28);
+
+  const ctx = recordingContext();
+  engine.drawDoor(ctx, door);
+  const draw = ctx.drawCalls.find((call) => call[0] === locked);
+  assert.ok(draw);
+  assert.deepEqual(draw.slice(1), [bounds.x, bounds.y, bounds.w, bounds.h]);
+
+  engine.walls = [];
+  engine.covers = [];
+  const previousX = bounds.x - engine.player.w - 2;
+  Object.assign(engine.player, { x: bounds.x - engine.player.w + 3, y: bounds.y + bounds.h - engine.player.h, vx: 120 });
+  engine.resolveHorizontal(engine.player, previousX);
+  assert.equal(engine.player.x, bounds.x - engine.player.w);
 }));

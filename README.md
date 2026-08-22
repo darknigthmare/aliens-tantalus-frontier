@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v52.0.0**. Cette release transforme le contrat v1→v52 en une boucle persistante et physiquement matérialisée : préparer l'opération à bord du Tantalus, former Echo-9, parcourir un niveau multi-route, combattre avec jusqu'à trois alliés IA, reprendre exactement l'opération sauvegardée, résoudre les crises du vaisseau, puis repartir avec un monde modifié.
+Version web jouable **v53.0.0**. Cette release conserve toute la boucle v1→v52 et ajoute un registre visuel exhaustif, des orientations source fiables, la quarantaine d’identité du joueur, des proportions/collisions mesurées dans le hub et davantage de couches bitmap physiques dans les missions.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -42,7 +42,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v52 |
+| Catalogue | Total v53 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -65,16 +65,19 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate v52 finale locale : lint de **72 modules**, **105/105 tests Node** et build statique **52.0.0** de **3 443 entrées**.
+Gate v53 finale locale : lint de **80 modules**, **124/124 tests Node** et build statique **53.0.0** de **3 443 entrées**.
 
-`npm.cmd run qa:browser:v52` valide **12 checkpoints** réels dans un contexte Chrome isolé : boot v52, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le dernier passage ne relève aucune exception, erreur console ni requête échouée.
+`npm.cmd run qa:browser:v52` valide la release v53 sur **12 checkpoints** réels dans un contexte Chrome isolé : boot v53, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu'aux navigations. Le dernier passage ne relève aucune exception, erreur console ni requête échouée.
 
 ## Dossier de production
 
 - [Source consolidée des promesses v1→v51](docs/GAMEPLAY_PROMISE_SOURCE_V51.md)
-- [Matrice d'audit et preuves exécutables v52](docs/GAMEPLAY_PROMISE_AUDIT_V52.md)
+- [Matrice d'audit des promesses et preuves exécutables v53](docs/GAMEPLAY_PROMISE_AUDIT_V53.md)
+- [Inventaire exhaustif runtime v53 : personnages, ennemis, véhicules, props et couches](docs/ASSET_RUNTIME_INVENTORY_V53.md)
+- [Inventaire machine v53](docs/ASSET_RUNTIME_INVENTORY_V53.json)
 - [Architecture runtime v52](docs/ARCHITECTURE_V52.md)
-- [Historique de release v52](docs/VERSION_HISTORY_V52.md)
+- [Historique de release v53](docs/VERSION_HISTORY_V53.md)
+- [Spécification de la feuille de combat joueur à régénérer](docs/prompts/V53_PLAYER_COMBAT_IDENTITY_PROMPT.md)
 - [Audit v51 conservé](docs/GAMEPLAY_PROMISE_AUDIT_V51.md)
 - [Contrat de contenu](docs/CONTENT_CONTRACT.md)
 - [Audit level design v50 et comparaison avec Aliens: Infestation](docs/LEVEL_DESIGN_AUDIT_V50.md)

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v52-runtime-1';
+const CACHE = 'atf-v53-runtime-1';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
   '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
@@ -6,8 +6,8 @@ const CORE = [
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
-  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/mission-levels-v52.js',
-  '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/editor.js', '/src/audio.js',
+  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/mission-levels-v52.js',
+  '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
@@ -38,6 +38,14 @@ const CORE = [
   '/assets/openai/metroidvania/tantalus-mission-far.png',
   '/assets/openai/metroidvania/tantalus-mission-mid.png',
   '/assets/openai/metroidvania/tantalus-mission-foreground.png',
+  '/assets/openai/metroidvania/props/maintenance-pipe.png',
+  '/assets/openai/metroidvania/props/ceiling-cables.png',
+  '/assets/openai/metroidvania/props/foreground-pipes.png',
+  '/assets/openai/human-factions-animation-sheet.png',
+  '/assets/openai/synthetic-android-animation-sheet.png',
+  '/assets/openai/pathogen-fauna-animation-sheet.png',
+  '/assets/openai/neuro-xeno-animation-sheet.png',
+  '/assets/openai/combat-vfx-animation-sheet.png',
   '/assets/openai/metroidvania/colony-multiroute-far.png',
   '/assets/openai/metroidvania/colony-multiroute-mid.png',
   '/assets/openai/metroidvania/colony-multiroute-foreground.png',

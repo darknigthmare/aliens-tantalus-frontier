@@ -20,88 +20,1019 @@
       }
     },
     "pivots": {
-      "humanoid-feet": { "kind": "feet", "x": 128, "y": 240, "unit": "cell-pixel" },
-      "creature-ground": { "kind": "ground-contact", "x": 128, "y": 240, "unit": "cell-pixel" },
-      "vehicle-ground": { "kind": "wheel-contact", "x": 128, "y": 240, "unit": "cell-pixel" },
-      "weapon-grip": { "kind": "grip", "x": 96, "y": 144, "unit": "cell-pixel" }
+      "humanoid-feet": {
+        "kind": "feet",
+        "x": 128,
+        "y": 240,
+        "unit": "cell-pixel"
+      },
+      "creature-ground": {
+        "kind": "ground-contact",
+        "x": 128,
+        "y": 240,
+        "unit": "cell-pixel"
+      },
+      "vehicle-ground": {
+        "kind": "wheel-contact",
+        "x": 128,
+        "y": 240,
+        "unit": "cell-pixel"
+      },
+      "weapon-grip": {
+        "kind": "grip",
+        "x": 96,
+        "y": 144,
+        "unit": "cell-pixel"
+      }
     },
     "hitboxes": {
-      "player-standing": { "x": 84, "y": 34, "width": 88, "height": 206, "unit": "cell-pixel" },
-      "npc-standing": { "x": 88, "y": 34, "width": 80, "height": 206, "unit": "cell-pixel" },
-      "xenomorph-standing": { "x": 50, "y": 56, "width": 156, "height": 184, "unit": "cell-pixel" },
-      "queen-standing": { "x": 32, "y": 38, "width": 192, "height": 202, "unit": "cell-pixel" },
-      "facehugger-ground": { "x": 38, "y": 142, "width": 180, "height": 98, "unit": "cell-pixel" },
-      "apc-hull": { "x": 18, "y": 106, "width": 220, "height": 134, "unit": "cell-pixel" },
-      "weapon-pickup": { "x": 18, "y": 94, "width": 220, "height": 96, "unit": "cell-pixel" }
+      "player-standing": {
+        "x": 84,
+        "y": 34,
+        "width": 88,
+        "height": 206,
+        "unit": "cell-pixel"
+      },
+      "npc-standing": {
+        "x": 88,
+        "y": 34,
+        "width": 80,
+        "height": 206,
+        "unit": "cell-pixel"
+      },
+      "xenomorph-standing": {
+        "x": 50,
+        "y": 56,
+        "width": 156,
+        "height": 184,
+        "unit": "cell-pixel"
+      },
+      "queen-standing": {
+        "x": 32,
+        "y": 38,
+        "width": 192,
+        "height": 202,
+        "unit": "cell-pixel"
+      },
+      "facehugger-ground": {
+        "x": 38,
+        "y": 142,
+        "width": 180,
+        "height": 98,
+        "unit": "cell-pixel"
+      },
+      "apc-hull": {
+        "x": 18,
+        "y": 106,
+        "width": 220,
+        "height": 134,
+        "unit": "cell-pixel"
+      },
+      "weapon-pickup": {
+        "x": 18,
+        "y": 94,
+        "width": 220,
+        "height": 96,
+        "unit": "cell-pixel"
+      }
     }
   },
   "clipSets": {
     "player-locomotion": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "body:breath" }] },
-      { "id": "walk-run", "row": 1, "frames": [4, 5, 6, 7], "fps": 10, "loop": true, "events": [{ "frame": 4, "type": "audio:footstep-right" }, { "frame": 6, "type": "audio:footstep-left" }] },
-      { "id": "jump-fall", "row": 2, "frames": [8, 9, 10, 11], "fps": 8, "loop": false, "events": [{ "frame": 8, "type": "movement:takeoff" }, { "frame": 10, "type": "movement:apex" }, { "frame": 11, "type": "movement:land-ready" }] },
-      { "id": "crouch", "row": 3, "frames": [12, 13], "fps": 5, "loop": true, "events": [{ "frame": 12, "type": "stance:crouch" }] },
-      { "id": "climb", "row": 3, "frames": [14, 15], "fps": 8, "loop": true, "events": [{ "frame": 15, "type": "movement:climb-contact" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "body:breath"
+          }
+        ]
+      },
+      {
+        "id": "walk-run",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 10,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:footstep-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:footstep-left"
+          }
+        ]
+      },
+      {
+        "id": "jump-fall",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "movement:takeoff"
+          },
+          {
+            "frame": 10,
+            "type": "movement:apex"
+          },
+          {
+            "frame": 11,
+            "type": "movement:land-ready"
+          }
+        ]
+      },
+      {
+        "id": "crouch",
+        "row": 3,
+        "frames": [
+          12,
+          13
+        ],
+        "fps": 5,
+        "loop": true,
+        "events": [
+          {
+            "frame": 12,
+            "type": "stance:crouch"
+          }
+        ]
+      },
+      {
+        "id": "climb",
+        "row": 3,
+        "frames": [
+          14,
+          15
+        ],
+        "fps": 8,
+        "loop": true,
+        "events": [
+          {
+            "frame": 15,
+            "type": "movement:climb-contact"
+          }
+        ]
+      }
     ],
     "player-combat": [
-      { "id": "aim-ready", "row": 0, "frames": [0, 1, 2, 3], "fps": 5, "loop": true, "events": [{ "frame": 1, "type": "weapon:aim-ready" }] },
-      { "id": "primary-fire", "row": 1, "frames": [4, 5, 6, 7], "fps": 13, "loop": false, "events": [{ "frame": 5, "type": "weapon:shot" }, { "frame": 6, "type": "weapon:recoil" }] },
-      { "id": "reload", "row": 2, "frames": [8, 9, 10, 11], "fps": 9, "loop": false, "events": [{ "frame": 9, "type": "weapon:magazine-out" }, { "frame": 10, "type": "weapon:magazine-in" }, { "frame": 11, "type": "weapon:chamber" }] },
-      { "id": "hurt-death", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 12, "type": "state:hurt" }, { "frame": 15, "type": "state:death-lock" }] }
+      {
+        "id": "aim-ready",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5,
+        "loop": true,
+        "events": [
+          {
+            "frame": 1,
+            "type": "weapon:aim-ready"
+          }
+        ]
+      },
+      {
+        "id": "primary-fire",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 13,
+        "loop": false,
+        "events": [
+          {
+            "frame": 5,
+            "type": "weapon:shot"
+          },
+          {
+            "frame": 6,
+            "type": "weapon:recoil"
+          }
+        ]
+      },
+      {
+        "id": "reload",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 9,
+            "type": "weapon:magazine-out"
+          },
+          {
+            "frame": 10,
+            "type": "weapon:magazine-in"
+          },
+          {
+            "frame": 11,
+            "type": "weapon:chamber"
+          }
+        ]
+      },
+      {
+        "id": "hurt-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
     ],
     "npc-locomotion": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "body:breath" }] },
-      { "id": "walk", "row": 1, "frames": [4, 5, 6, 7], "fps": 8, "loop": true, "events": [{ "frame": 4, "type": "audio:footstep-right" }, { "frame": 6, "type": "audio:footstep-left" }] },
-      { "id": "role-work", "row": 2, "frames": [8, 9, 10, 11], "fps": 6, "loop": false, "events": [{ "frame": 10, "type": "interaction:work" }] },
-      { "id": "alert-reaction", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 12, "type": "state:alert" }, { "frame": 15, "type": "state:recover" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "body:breath"
+          }
+        ]
+      },
+      {
+        "id": "walk",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:footstep-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:footstep-left"
+          }
+        ]
+      },
+      {
+        "id": "role-work",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "interaction:work"
+          }
+        ]
+      },
+      {
+        "id": "alert-reaction",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:alert"
+          },
+          {
+            "frame": 15,
+            "type": "state:recover"
+          }
+        ]
+      }
     ],
     "xenomorph-locomotion": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "creature:breathe" }] },
-      { "id": "stalk-run", "row": 1, "frames": [4, 5, 6, 7], "fps": 9, "loop": true, "events": [{ "frame": 4, "type": "audio:step-right" }, { "frame": 6, "type": "audio:step-left" }] },
-      { "id": "leap", "row": 2, "frames": [8, 9, 10, 11], "fps": 9, "loop": false, "events": [{ "frame": 8, "type": "movement:takeoff" }, { "frame": 10, "type": "combat:leap-window" }] },
-      { "id": "crawl", "row": 3, "frames": [12, 13, 14, 15], "fps": 8, "loop": true, "events": [{ "frame": 14, "type": "audio:claw-contact" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:breathe"
+          }
+        ]
+      },
+      {
+        "id": "stalk-run",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:step-left"
+          }
+        ]
+      },
+      {
+        "id": "leap",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "movement:takeoff"
+          },
+          {
+            "frame": 10,
+            "type": "combat:leap-window"
+          }
+        ]
+      },
+      {
+        "id": "crawl",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 8,
+        "loop": true,
+        "events": [
+          {
+            "frame": 14,
+            "type": "audio:claw-contact"
+          }
+        ]
+      }
     ],
     "xenomorph-combat": [
-      { "id": "threat-idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "state:threat" }] },
-      { "id": "claw-attack", "row": 1, "frames": [4, 5, 6, 7], "fps": 11, "loop": false, "events": [{ "frame": 6, "type": "combat:claw-hit" }] },
-      { "id": "tail-attack", "row": 2, "frames": [8, 9, 10, 11], "fps": 10, "loop": false, "events": [{ "frame": 10, "type": "combat:tail-hit" }] },
-      { "id": "hurt-death", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 12, "type": "state:hurt" }, { "frame": 15, "type": "state:death-lock" }] }
+      {
+        "id": "threat-idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "state:threat"
+          }
+        ]
+      },
+      {
+        "id": "claw-attack",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 11,
+        "loop": false,
+        "events": [
+          {
+            "frame": 6,
+            "type": "combat:claw-hit"
+          }
+        ]
+      },
+      {
+        "id": "tail-attack",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 10,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:tail-hit"
+          }
+        ]
+      },
+      {
+        "id": "hurt-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
     ],
     "facehugger-locomotion": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 5, "loop": true, "events": [{ "frame": 2, "type": "creature:twitch" }] },
-      { "id": "scuttle", "row": 1, "frames": [4, 5, 6, 7], "fps": 12, "loop": true, "events": [{ "frame": 5, "type": "audio:scuttle" }] },
-      { "id": "leap-attach", "row": 2, "frames": [8, 9, 10, 11], "fps": 12, "loop": false, "events": [{ "frame": 8, "type": "movement:takeoff" }, { "frame": 10, "type": "combat:attach-window" }] },
-      { "id": "hurt-death", "row": 3, "frames": [12, 13, 14, 15], "fps": 8, "loop": false, "events": [{ "frame": 12, "type": "state:hurt" }, { "frame": 15, "type": "state:death-lock" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:twitch"
+          }
+        ]
+      },
+      {
+        "id": "scuttle",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 12,
+        "loop": true,
+        "events": [
+          {
+            "frame": 5,
+            "type": "audio:scuttle"
+          }
+        ]
+      },
+      {
+        "id": "leap-attach",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 12,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "movement:takeoff"
+          },
+          {
+            "frame": 10,
+            "type": "combat:attach-window"
+          }
+        ]
+      },
+      {
+        "id": "hurt-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
     ],
     "neomorph-locomotion": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 5, "loop": true, "events": [{ "frame": 2, "type": "creature:breathe" }] },
-      { "id": "run", "row": 1, "frames": [4, 5, 6, 7], "fps": 12, "loop": true, "events": [{ "frame": 4, "type": "audio:step-right" }, { "frame": 6, "type": "audio:step-left" }] },
-      { "id": "leap", "row": 2, "frames": [8, 9, 10, 11], "fps": 11, "loop": false, "events": [{ "frame": 8, "type": "movement:takeoff" }, { "frame": 10, "type": "combat:leap-window" }] },
-      { "id": "hurt-death", "row": 3, "frames": [12, 13, 14, 15], "fps": 8, "loop": false, "events": [{ "frame": 12, "type": "state:hurt" }, { "frame": 15, "type": "state:death-lock" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 5,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:breathe"
+          }
+        ]
+      },
+      {
+        "id": "run",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 12,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:step-left"
+          }
+        ]
+      },
+      {
+        "id": "leap",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 11,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "movement:takeoff"
+          },
+          {
+            "frame": 10,
+            "type": "combat:leap-window"
+          }
+        ]
+      },
+      {
+        "id": "hurt-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
     ],
     "working-joe-combat": [
-      { "id": "idle-walk", "row": 0, "frames": [0, 1, 2, 3], "fps": 6, "loop": true, "events": [{ "frame": 2, "type": "audio:synthetic-step" }] },
-      { "id": "grab-punch", "row": 1, "frames": [4, 5, 6, 7], "fps": 9, "loop": false, "events": [{ "frame": 5, "type": "combat:grab-window" }, { "frame": 7, "type": "combat:punch-hit" }] },
-      { "id": "hurt", "row": 2, "frames": [8, 9, 10, 11], "fps": 7, "loop": false, "events": [{ "frame": 8, "type": "state:hurt" }] },
-      { "id": "damaged-death", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 12, "type": "state:damaged" }, { "frame": 15, "type": "state:death-lock" }] }
+      {
+        "id": "idle-walk",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 6,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "audio:synthetic-step"
+          }
+        ]
+      },
+      {
+        "id": "grab-punch",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 5,
+            "type": "combat:grab-window"
+          },
+          {
+            "frame": 7,
+            "type": "combat:punch-hit"
+          }
+        ]
+      },
+      {
+        "id": "hurt",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "state:hurt"
+          }
+        ]
+      },
+      {
+        "id": "damaged-death",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:damaged"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ]
+      }
     ],
     "queen-combat": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "creature:crown-lift" }] },
-      { "id": "advance", "row": 1, "frames": [4, 5, 6, 7], "fps": 7, "loop": true, "events": [{ "frame": 4, "type": "audio:heavy-step-right" }, { "frame": 6, "type": "audio:heavy-step-left" }] },
-      { "id": "claw-tail", "row": 2, "frames": [8, 9, 10, 11], "fps": 9, "loop": false, "events": [{ "frame": 9, "type": "combat:claw-hit" }, { "frame": 11, "type": "combat:tail-hit" }] },
-      { "id": "roar-hurt", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 13, "type": "audio:roar" }, { "frame": 14, "type": "state:hurt" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:crown-lift"
+          }
+        ]
+      },
+      {
+        "id": "advance",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 7,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:heavy-step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:heavy-step-left"
+          }
+        ]
+      },
+      {
+        "id": "claw-tail",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 9,
+            "type": "combat:claw-hit"
+          },
+          {
+            "frame": 11,
+            "type": "combat:tail-hit"
+          }
+        ]
+      },
+      {
+        "id": "roar-hurt",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 13,
+            "type": "audio:roar"
+          },
+          {
+            "frame": 14,
+            "type": "state:hurt"
+          }
+        ]
+      }
     ],
     "apc-action": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 2, "loop": true, "events": [{ "frame": 2, "type": "vehicle:engine-idle" }] },
-      { "id": "roll", "row": 1, "frames": [4, 5, 6, 7], "fps": 9, "loop": true, "events": [{ "frame": 6, "type": "vehicle:wheel-cycle" }] },
-      { "id": "turret", "row": 2, "frames": [8, 9, 10, 11], "fps": 7, "loop": false, "events": [{ "frame": 10, "type": "vehicle:turret-ready" }] },
-      { "id": "damage", "row": 3, "frames": [12, 13, 14, 15], "fps": 6, "loop": false, "events": [{ "frame": 12, "type": "state:hurt" }, { "frame": 15, "type": "vehicle:critical" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 2,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "vehicle:engine-idle"
+          }
+        ]
+      },
+      {
+        "id": "roll",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 6,
+            "type": "vehicle:wheel-cycle"
+          }
+        ]
+      },
+      {
+        "id": "turret",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "vehicle:turret-ready"
+          }
+        ]
+      },
+      {
+        "id": "damage",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:critical"
+          }
+        ]
+      }
     ],
     "rifle-action": [
-      { "id": "idle", "row": 0, "frames": [0, 1, 2, 3], "fps": 4, "loop": true, "events": [{ "frame": 2, "type": "weapon:idle" }] },
-      { "id": "recoil", "row": 1, "frames": [4, 5, 6, 7], "fps": 13, "loop": false, "events": [{ "frame": 5, "type": "weapon:shot" }, { "frame": 6, "type": "weapon:recoil" }] },
-      { "id": "reload", "row": 2, "frames": [8, 9, 10, 11], "fps": 9, "loop": false, "events": [{ "frame": 9, "type": "weapon:magazine-out" }, { "frame": 10, "type": "weapon:magazine-in" }, { "frame": 11, "type": "weapon:chamber" }] },
-      { "id": "jam-inspect", "row": 3, "frames": [12, 13, 14, 15], "fps": 7, "loop": false, "events": [{ "frame": 12, "type": "weapon:jam" }, { "frame": 15, "type": "weapon:inspection-complete" }] }
+      {
+        "id": "idle",
+        "row": 0,
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "weapon:idle"
+          }
+        ]
+      },
+      {
+        "id": "recoil",
+        "row": 1,
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 13,
+        "loop": false,
+        "events": [
+          {
+            "frame": 5,
+            "type": "weapon:shot"
+          },
+          {
+            "frame": 6,
+            "type": "weapon:recoil"
+          }
+        ]
+      },
+      {
+        "id": "reload",
+        "row": 2,
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 9,
+            "type": "weapon:magazine-out"
+          },
+          {
+            "frame": 10,
+            "type": "weapon:magazine-in"
+          },
+          {
+            "frame": 11,
+            "type": "weapon:chamber"
+          }
+        ]
+      },
+      {
+        "id": "jam-inspect",
+        "row": 3,
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "weapon:jam"
+          },
+          {
+            "frame": 15,
+            "type": "weapon:inspection-complete"
+          }
+        ]
+      }
     ]
   },
   "sheets": [
@@ -109,177 +1040,393 @@
       "id": "player.echo9-marine.locomotion",
       "family": "player",
       "subject": "Echo-9 Marine",
-      "files": { "raw": "/assets/openai/sprites/player/echo9-marine-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/player/echo9-marine-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "player-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "player-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js", "src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "player.echo9-marine.combat",
       "family": "player",
       "subject": "Echo-9 Marine",
-      "files": { "raw": "/assets/openai/sprites/player/echo9-marine-combat-sheet.png", "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/player/echo9-marine-combat-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "player-combat",
       "pivot": "humanoid-feet",
       "hitbox": "player-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": false
     },
     {
       "id": "enemy.facehugger.locomotion",
       "family": "enemy",
       "subject": "Facehugger",
-      "files": { "raw": "/assets/openai/sprites/enemies/facehugger-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/facehugger-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "facehugger-locomotion",
       "pivot": "creature-ground",
       "hitbox": "facehugger-ground",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "enemy.neomorph.locomotion",
       "family": "enemy",
       "subject": "Neomorph",
-      "files": { "raw": "/assets/openai/sprites/enemies/neomorph-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/neomorph-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "neomorph-locomotion",
       "pivot": "creature-ground",
       "hitbox": "xenomorph-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "enemy.working-joe.combat",
       "family": "enemy",
       "subject": "Working Joe",
-      "files": { "raw": "/assets/openai/sprites/enemies/working-joe-combat-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/working-joe-combat-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "working-joe-combat",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "enemy.xenomorph-drone.combat",
       "family": "enemy",
       "subject": "Xenomorph Drone",
-      "files": { "raw": "/assets/openai/sprites/enemies/xenomorph-drone-combat-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-drone-combat-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "xenomorph-combat",
       "pivot": "creature-ground",
       "hitbox": "xenomorph-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "left",
+      "identityVerified": true
     },
     {
       "id": "enemy.xenomorph-drone.locomotion",
       "family": "enemy",
       "subject": "Xenomorph Drone",
-      "files": { "raw": "/assets/openai/sprites/enemies/xenomorph-drone-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-drone-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "xenomorph-locomotion",
       "pivot": "creature-ground",
       "hitbox": "xenomorph-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "enemy.xenomorph-queen.combat",
       "family": "enemy",
       "subject": "Xenomorph Queen",
-      "files": { "raw": "/assets/openai/sprites/enemies/xenomorph-queen-combat-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-queen-combat-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-queen-combat-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "queen-combat",
       "pivot": "creature-ground",
       "hitbox": "queen-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "enemy.xenomorph-warrior.combat",
       "family": "enemy",
       "subject": "Xenomorph Warrior",
-      "files": { "raw": "/assets/openai/sprites/enemies/xenomorph-warrior-combat-sheet.png", "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-warrior-combat-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "xenomorph-combat",
       "pivot": "creature-ground",
       "hitbox": "xenomorph-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.bishop-9.locomotion",
       "family": "npc",
       "subject": "Bishop-9",
-      "files": { "raw": "/assets/openai/sprites/npcs/bishop-9-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/bishop-9-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/bishop-9-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/bishop-9-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.idris-kwan.locomotion",
       "family": "npc",
       "subject": "Idris Kwan",
-      "files": { "raw": "/assets/openai/sprites/npcs/idris-kwan-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/idris-kwan-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.maksim-orlov.locomotion",
       "family": "npc",
       "subject": "Maksim Orlov",
-      "files": { "raw": "/assets/openai/sprites/npcs/maksim-orlov-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/maksim-orlov-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.mara-vega.locomotion",
       "family": "npc",
       "subject": "Mara Vega",
-      "files": { "raw": "/assets/openai/sprites/npcs/mara-vega-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/mara-vega-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.noor-okafor.locomotion",
       "family": "npc",
       "subject": "Noor Okafor",
-      "files": { "raw": "/assets/openai/sprites/npcs/noor-okafor-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/noor-okafor-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/noor-okafor-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/noor-okafor-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.sanaa-doyle.locomotion",
       "family": "npc",
       "subject": "Sanaa Doyle",
-      "files": { "raw": "/assets/openai/sprites/npcs/sanaa-doyle-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/sanaa-doyle-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.tamsin-velez.locomotion",
       "family": "npc",
       "subject": "Tamsin Velez",
-      "files": { "raw": "/assets/openai/sprites/npcs/tamsin-velez-locomotion-sheet.png", "normalized": "/assets/openai/sprites/normalized/npcs/tamsin-velez-locomotion-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/tamsin-velez-locomotion-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/tamsin-velez-locomotion-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "npc-locomotion",
       "pivot": "humanoid-feet",
       "hitbox": "npc-standing",
-      "runtime": { "status": "referenced", "consumers": ["src/hub-game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
+          "src/hub-game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.rook.locomotion",
@@ -301,11 +1448,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-d35976d8-c308-4a4e-af80-86ce6d6cc988.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.inez-harlow.locomotion",
@@ -327,11 +1479,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-dcaf239d-42d4-4b26-813a-f3d263bc8006.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.david-8r.locomotion",
@@ -353,11 +1510,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-f2ec05cd-31b0-464d-902d-3cdf18fc6b7f.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.jun-park.locomotion",
@@ -379,11 +1541,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-ce668f5d-b49d-486a-b7c6-6bb8329742fe.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.asha-mbaye.locomotion",
@@ -405,11 +1572,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-62a240a8-51dd-485e-af44-776badbc8a23.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.pablo-reyes.locomotion",
@@ -431,11 +1603,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-a791f25a-2eb6-4865-a9f5-9568059e64bf.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.echo-a.locomotion",
@@ -457,14 +1634,19 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a02202-6aae-7750-9983-99f7b5d0ffe2\\exec-c4bf00c2-5774-4c84-9532-e3689ec7f2a3.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
-      "id": "npc.leila-sorensen.locomotion",
+      "id": "npc.leila-s-rensen.locomotion",
       "family": "npc",
       "subject": "Leila Sørensen",
       "wave": "v52",
@@ -483,11 +1665,16 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021b7-47e2-7a53-8b15-aa45e39e1fd2\\exec-2d419a1e-18e7-49bf-944d-2276dbc1276a.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "npc.cal-mercer.locomotion",
@@ -509,33 +1696,64 @@
         "sourceAsset": "C:\\Users\\chuck\\.codex\\generated_images\\01a021cb-bfa4-7812-999f-92069d309261\\exec-34e27d09-e2b5-423e-b7d5-91f59bff54b3.png"
       },
       "runtime": {
-        "status": "gallery-only",
+        "status": "referenced",
         "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/hub-v52-runtime.js",
           "src/v50-visuals.js"
         ]
-      }
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "vehicle.m577-apc.action",
       "family": "vehicle",
       "subject": "M577 APC",
-      "files": { "raw": "/assets/openai/sprites/vehicles/m577-apc-action-sheet.png", "normalized": "/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m577-apc-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "apc-action",
       "pivot": "vehicle-ground",
       "hitbox": "apc-hull",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     },
     {
       "id": "weapon.m41a-pulse-rifle.action",
       "family": "weapon",
       "subject": "M41A Pulse Rifle",
-      "files": { "raw": "/assets/openai/sprites/weapons/m41a-pulse-rifle-action-sheet.png", "normalized": "/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png", "normalizedStatus": "ready" },
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m41a-pulse-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
       "grid": "v50-4x4",
       "clips": "rifle-action",
       "pivot": "weapon-grip",
       "hitbox": "weapon-pickup",
-      "runtime": { "status": "referenced", "consumers": ["src/game.js"] }
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/game.js"
+        ]
+      },
+      "sourceFacing": "right",
+      "identityVerified": true
     }
   ]
 }

@@ -1,3 +1,6 @@
+import { shouldFlipSprite } from './sprite-animation-runtime.js';
+import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
+
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
 const WORLD_WIDTH = 6200;
@@ -14,6 +17,12 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => Boolean(a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
 const ready = (image) => Boolean(image?.complete && image.naturalWidth);
 const distanceBetween = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
+export const MISSION_STRUCTURAL_PROP_FILES = Object.freeze({
+  maintenancePipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
+  ceilingCables: '/assets/openai/metroidvania/props/ceiling-cables.png',
+  foregroundPipes: '/assets/openai/metroidvania/props/foreground-pipes.png'
+});
+
 
 const ASSETS = Object.freeze({
   far: '/assets/openai/metroidvania/tantalus-mission-far.png',
@@ -33,6 +42,7 @@ const ASSETS = Object.freeze({
   human: '/assets/openai/human-factions-animation-sheet.png',
   synthetic: '/assets/openai/synthetic-android-animation-sheet.png',
   pathogen: '/assets/openai/pathogen-fauna-animation-sheet.png',
+  neuroXeno: '/assets/openai/neuro-xeno-animation-sheet.png',
   vfx: '/assets/openai/combat-vfx-animation-sheet.png',
   floor: '/assets/openai/metroidvania/props/floor-segment.png',
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -46,7 +56,8 @@ const ASSETS = Object.freeze({
   cover: '/assets/openai/metroidvania/props/cargo-cover.png',
   crates: '/assets/openai/metroidvania/props/supply-crates.png',
   lamp: '/assets/openai/metroidvania/props/warning-lamp.png',
-  acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png'
+  acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png',
+  ...MISSION_STRUCTURAL_PROP_FILES
 });
 
 const PLATFORM_LAYOUT = Object.freeze([
@@ -113,21 +124,12 @@ function createImage(source) {
   return image;
 }
 
-function selectEnemySprite(source) {
-  const name = String(source.name || '').toLowerCase();
-  if (source.caste === 'royal' || name.includes('queen') || name.includes('reine')) return 'xenoQueen';
-  if (name.includes('facehugger')) return 'facehugger';
-  if (name.includes('neomorph')) return 'neomorph';
-  if (source.biology === 'synthetic') return 'workingJoe';
-  if (name.includes('warrior') || name.includes('guerrier')) return 'xenoWarrior';
-  if (source.biology === 'xenomorph') return 'xenoDrone';
-  return 'legacy';
-}
 
 function enemyBehavior(spriteKey, biology) {
   if (spriteKey === 'facehugger') return 'pouncer';
   if (spriteKey === 'xenoQueen') return 'boss';
   if (spriteKey === 'workingJoe') return 'bruiser';
+  if (biology === 'synthetic') return 'bruiser';
   if (spriteKey === 'neomorph') return 'hunter';
   if (biology === 'pathogen') return 'spitter';
   if (biology === 'human') return 'shooter';
@@ -295,7 +297,8 @@ export class GameEngine {
   }
 
   createEnemy(source = {}, index = 0, x = 660, groundY = FLOOR_Y, { boss = false, keyCarrier = false } = {}) {
-    const spriteKey = selectEnemySprite(source);
+    const visual = resolveEnemyVisualProfile(source);
+    const spriteKey = visual.spriteKey;
     const royal = isRoyalEnemyProfile(source) || spriteKey === 'xenoQueen';
     const isBoss = Boolean(boss);
     const biology = source.biology || 'xenomorph';
@@ -307,9 +310,16 @@ export class GameEngine {
       id: `${source.id || 'enemy'}:${index}`,
       name: source.name || (royal ? 'Xenomorph Queen' : 'Xenomorph Warrior'),
       biology,
+      visualArchetype: visual.archetype,
+      visualImageKey: visual.imageKey,
+      visualRow: visual.row,
+      visualIdentityStatus: visual.identityStatus,
+      visualApproximation: visual.approximate,
+      visualFallbackReason: visual.fallbackReason,
       spriteKey,
       behavior: enemyBehavior(spriteKey, biology),
-      row: index % 4,
+      animationPhase: index % 4,
+      row: visual.row ?? 0,
       x, spawnX: x, y: groundY - height, groundY,
       w: royal ? 82 : biology === 'xenomorph' ? 52 : 42, h: height,
       health: maxHealth, maxHealth, armor: Math.max(0, Math.min(22, Number(source.armor) || (royal ? 14 : 0))),
@@ -580,7 +590,7 @@ export class GameEngine {
       bullet.x += bullet.vx * delta;
       bullet.life -= delta;
       for (const wall of this.walls) if (!bullet.hit && overlap(bullet, wall)) bullet.hit = true;
-      for (const door of this.doors) if (!bullet.hit && door.progress < 0.82 && overlap(bullet, door)) bullet.hit = true;
+      for (const door of this.closedDoorColliders()) if (!bullet.hit && overlap(bullet, door)) bullet.hit = true;
       for (const enemy of this.enemies) {
         if (bullet.hit || !enemy.alive || !overlap(bullet, enemy)) continue;
         this.applyEnemyDamage(enemy, bullet.damage, bullet);
@@ -604,10 +614,11 @@ export class GameEngine {
     if (enemy.isBoss && !enemy.alert && target.x < 4200) return;
     if (Math.abs(distance) < 620 || enemy.revealed > 0) enemy.alert = true;
     if (!enemy.alert) {
-      enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.row) > 0 ? 1 : -1;
+      enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.animationPhase) > 0 ? 1 : -1;
       enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
       return;
     }
+    enemy.facing = Math.sign(distance) || enemy.facing || 1;
     const ranged = enemy.behavior === 'spitter' || enemy.behavior === 'shooter' || enemy.isBoss;
     if (ranged && Math.abs(distance) < (enemy.isBoss ? 640 : 500) && Math.abs(distance) > 115 && verticalDistance < 180 && enemy.rangedClock <= 0) {
       this.spawnEnemyProjectile(enemy, targetEntity);
@@ -617,7 +628,6 @@ export class GameEngine {
     const stopRange = enemy.isBoss ? 94 : enemy.behavior === 'pouncer' ? 42 : 58;
     if (enemy.staggerClock <= 0 && Math.abs(distance) > stopRange && verticalDistance < 160) {
       const speedMultiplier = enemy.behavior === 'hunter' ? 1.28 : enemy.behavior === 'pouncer' ? 1.38 : enemy.isBoss ? 0.75 : 1;
-      enemy.facing = Math.sign(distance) || enemy.facing;
       const previousX = enemy.x;
       enemy.x += enemy.facing * enemy.speed * speedMultiplier * delta;
       this.resolveEnemyHorizontal(enemy, previousX);
@@ -650,7 +660,7 @@ export class GameEngine {
       projectile.life -= delta;
       for (const cover of this.covers) if (!cover.destroyed && overlap(projectile, cover)) projectile.hit = true;
       for (const wall of this.walls) if (!projectile.hit && overlap(projectile, wall)) projectile.hit = true;
-      for (const door of this.doors) if (!projectile.hit && door.progress < 0.82 && overlap(projectile, door)) projectile.hit = true;
+      for (const door of this.closedDoorColliders()) if (!projectile.hit && overlap(projectile, door)) projectile.hit = true;
       if (!projectile.hit && this.vehicle?.occupied && overlap(projectile, this.vehicle)) {
         this.damageVehicle(projectile.damage, projectile.acid ? 'acid' : 'projectile');
         projectile.hit = true;
@@ -708,9 +718,31 @@ export class GameEngine {
     const center = entity.x + entity.w / 2;
     return this.covers.find((cover) => !cover.destroyed && center > cover.x - 28 && center < cover.x + cover.w + 28 && entity.y + entity.h > cover.y + 12);
   }
+  getDoorRenderState(door, { open = door?.progress >= 0.82 } = {}) {
+    const image = this.images.get(open ? 'openDoor' : 'lockedDoor');
+    const height = Math.max(1, Number(door?.h || 0) + 28);
+    const fallbackRatio = open ? 160 / 232 : 185 / 176;
+    const ratio = ready(image) ? image.naturalWidth / image.naturalHeight : fallbackRatio;
+    const width = Math.max(82, height * ratio);
+    return {
+      image,
+      open,
+      x: Number(door?.x || 0) + Number(door?.w || 0) / 2 - width / 2,
+      y: Number(door?.y || 0) + Number(door?.h || 0) - height,
+      w: width,
+      h: height
+    };
+  }
+
+  closedDoorColliders() {
+    return this.doors
+      .filter((door) => door.progress < 0.82)
+      .map((door) => this.getDoorRenderState(door, { open: false }));
+  }
+
 
   resolveHorizontal(entity, previousX) {
-    for (const obstacle of [...this.doors.filter((door) => door.progress < 0.82), ...this.walls]) {
+    for (const obstacle of [...this.closedDoorColliders(), ...this.walls]) {
       if (!overlap(entity, obstacle)) continue;
       if (entity.vx > 0 && previousX + entity.w <= obstacle.x + 8) entity.x = obstacle.x - entity.w;
       else if (entity.vx < 0 && previousX >= obstacle.x + obstacle.w - 8) entity.x = obstacle.x + obstacle.w;
@@ -731,7 +763,7 @@ export class GameEngine {
   }
 
   resolveVehicleHorizontal(previousX) {
-    for (const obstacle of [...this.doors.filter((door) => door.progress < 0.82), ...this.walls]) {
+    for (const obstacle of [...this.closedDoorColliders(), ...this.walls]) {
       if (!overlap(this.vehicle, obstacle)) continue;
       if (this.vehicle.vx > 0 && previousX + this.vehicle.w <= obstacle.x + 12) this.vehicle.x = obstacle.x - this.vehicle.w;
       else if (this.vehicle.vx < 0 && previousX >= obstacle.x + obstacle.w - 12) this.vehicle.x = obstacle.x + obstacle.w;
@@ -1161,6 +1193,61 @@ export class GameEngine {
     ctx.globalAlpha = 1;
   }
 
+  usesShipStructuralProps() {
+    return !this.missionLevelRuntime || this.missionLevelRuntime.templateId === 'ship-interior-vertical';
+  }
+
+  drawRepeatedMissionProp(ctx, key, { height, y, factor, alpha, gap = 72 }) {
+    if (!this.usesShipStructuralProps()) return 0;
+    const image = this.images.get(key);
+    if (!ready(image)) return 0;
+    const width = image.naturalWidth * (height / image.naturalHeight);
+    const spacing = Math.max(40, width + gap);
+    const offset = -(((this.camera?.x || 0) * factor) % spacing);
+    let draws = 0;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) {
+      ctx.drawImage(image, x, y, width, height);
+      draws += 1;
+    }
+    ctx.restore();
+    return draws;
+  }
+
+  drawCeilingCables(ctx) {
+    return this.drawRepeatedMissionProp(ctx, 'ceilingCables', {
+      height: 132, y: -18, factor: 0.64, alpha: 0.56, gap: 72
+    });
+  }
+
+  drawForegroundPipes(ctx) {
+    return this.drawRepeatedMissionProp(ctx, 'foregroundPipes', {
+      height: 205, y: LOGICAL_HEIGHT - 190, factor: 1.18, alpha: 0.4, gap: 112
+    });
+  }
+
+  drawMaintenancePipes(ctx) {
+    if (!this.usesShipStructuralProps()) return 0;
+    const image = this.images.get('maintenancePipe');
+    if (!ready(image)) return 0;
+    const anchors = this.platforms
+      .filter((platform) => !platform.floor)
+      .filter((_, index) => index % 4 === 1)
+      .slice(0, 10);
+    const height = 176;
+    const width = image.naturalWidth * (height / image.naturalHeight);
+    ctx.save();
+    ctx.globalAlpha = 0.78;
+    for (const platform of anchors) {
+      const x = platform.x + Math.max(8, (platform.w - width) * 0.5);
+      const baseline = platform.y + Math.min(18, platform.h || 0);
+      ctx.drawImage(image, x, baseline - height, width, height);
+    }
+    ctx.restore();
+    return anchors.length;
+  }
+
   drawBackdrop(ctx) {
     const gradient = ctx.createLinearGradient(0, 0, 0, LOGICAL_HEIGHT);
     gradient.addColorStop(0, '#020608');
@@ -1174,6 +1261,7 @@ export class GameEngine {
     else if (ready(this.fallbackBackground)) this.drawCoverLayer(ctx, this.fallbackBackground, 0.08, 0.04, 0.28, 1.08);
     this.drawCoverLayer(ctx, mid, 0.42, 0.18, 0.78, 1.14, 90);
     const vignette = ctx.createRadialGradient(640, 350, 190, 640, 350, 760);
+    this.drawCeilingCables(ctx);
     vignette.addColorStop(0, 'rgba(0,0,0,0)');
     vignette.addColorStop(1, 'rgba(0,3,4,.62)');
     ctx.fillStyle = vignette;
@@ -1182,6 +1270,7 @@ export class GameEngine {
 
   drawWorld(ctx) {
     this.drawFloors(ctx);
+    this.drawMaintenancePipes(ctx);
     for (const platform of this.platforms.filter((item) => !item.floor)) this.drawPlatform(ctx, platform);
     for (const wall of this.walls) this.drawWall(ctx, wall);
     for (const ladder of this.ladders) this.drawLadder(ctx, ladder);
@@ -1304,17 +1393,13 @@ export class GameEngine {
   }
 
   drawDoor(ctx, door) {
-    const image = this.images.get(door.progress >= 0.82 ? 'openDoor' : 'lockedDoor');
-    const height = door.h + 28;
-    const width = ready(image) ? Math.max(82, image.naturalWidth * (height / image.naturalHeight)) : door.w;
-    const x = door.x + door.w / 2 - width / 2;
-    const y = door.y + door.h - height;
-    ctx.globalAlpha = door.progress >= 0.82 ? 0.82 : 1;
+    const { image, open, x, y, w: width, h: height } = this.getDoorRenderState(door);
+    ctx.globalAlpha = open ? 0.82 : 1;
     if (ready(image)) ctx.drawImage(image, x, y, width, height);
-    else { ctx.fillStyle = '#353c38'; ctx.fillRect(door.x, door.y, door.w, door.h); }
+    else { ctx.fillStyle = '#353c38'; ctx.fillRect(x, y, width, height); }
     ctx.globalAlpha = 1;
     ctx.fillStyle = this.doorRequirement(door) ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';
-    ctx.fillRect(door.x + door.w + 8, y + 30, 7, 13);
+    ctx.fillRect(x + width + 8, y + 30, 7, 13);
   }
 
   drawWeaponPickup(ctx) {
@@ -1374,17 +1459,23 @@ export class GameEngine {
 
   drawEnemy(ctx, enemy) {
     let image;
-    let row = enemy.row;
-    let frame = Math.floor(this.animationTime * (enemy.alert ? 9 : 4) + enemy.row) % 4;
+    let sheetId = null;
+    const legacyCell = resolveLegacyEnemyCell(enemy, this.animationTime);
+    let row = legacyCell.row;
+    let frame = legacyCell.frame;
     let renderWidth = 84;
     let renderHeight = 112;
-    if (!enemy.alive) { row = 3; frame = 3; }
-    if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
-    else if (enemy.spriteKey === 'xenoWarrior') { image = this.images.get('xenoWarrior'); row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 158; renderHeight = 120; }
-    else if (enemy.spriteKey === 'facehugger') { image = this.images.get('facehugger'); row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 112; renderHeight = 72; }
-    else if (enemy.spriteKey === 'neomorph') { image = this.images.get('neomorph'); row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 146; renderHeight = 112; }
-    else if (enemy.spriteKey === 'workingJoe') { image = this.images.get('workingJoe'); row = enemy.alive ? enemy.attacking ? 1 : 0 : 3; renderWidth = 88; renderHeight = 116; }
-    else if (enemy.spriteKey === 'xenoDrone') { image = this.images.get(enemy.attacking ? 'xenoCombat' : 'xenoLocomotion'); row = enemy.alive ? enemy.attacking ? 1 : enemy.alert ? 1 : 0 : 3; renderWidth = 142; renderHeight = 106; }
+    if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
+    else if (enemy.spriteKey === 'xenoWarrior') { image = this.images.get('xenoWarrior'); sheetId = 'enemy.xenomorph-warrior.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 158; renderHeight = 120; }
+    else if (enemy.spriteKey === 'facehugger') { image = this.images.get('facehugger'); sheetId = 'enemy.facehugger.locomotion'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 112; renderHeight = 72; }
+    else if (enemy.spriteKey === 'neomorph') { image = this.images.get('neomorph'); sheetId = 'enemy.neomorph.locomotion'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 146; renderHeight = 112; }
+    else if (enemy.spriteKey === 'workingJoe') { image = this.images.get('workingJoe'); sheetId = 'enemy.working-joe.combat'; row = enemy.alive ? enemy.attacking ? 1 : 0 : 3; renderWidth = 88; renderHeight = 116; }
+    else if (enemy.spriteKey === 'xenoDrone') { image = this.images.get(enemy.attacking ? 'xenoCombat' : 'xenoLocomotion'); sheetId = enemy.attacking ? 'enemy.xenomorph-drone.combat' : 'enemy.xenomorph-drone.locomotion'; row = enemy.alive ? enemy.attacking ? 1 : enemy.alert ? 1 : 0 : 3; renderWidth = 142; renderHeight = 106; }
+    else if (enemy.visualImageKey) {
+      image = this.images.get(enemy.visualImageKey);
+      if (enemy.visualImageKey === 'pathogen') { renderWidth = 132; renderHeight = 96; }
+      else if (enemy.visualImageKey === 'neuroXeno') { renderWidth = 142; renderHeight = 106; }
+    }
     else if (enemy.biology === 'human') image = this.images.get('human');
     else if (enemy.biology === 'synthetic') image = this.images.get('synthetic');
     else { image = this.images.get('pathogen'); renderWidth = 132; renderHeight = 96; }
@@ -1393,7 +1484,7 @@ export class GameEngine {
     ctx.save();
     if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
     if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, enemy.facing > 0);
+    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, shouldFlipSprite(sheetId, enemy.facing));
     ctx.restore();
     if (enemy.alive && (enemy.alert || enemy.isBoss)) {
       ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
@@ -1445,14 +1536,16 @@ export class GameEngine {
 
   drawForeground(ctx) {
     const image = this.images.get('foreground');
-    if (!ready(image)) return;
-    const height = 220;
-    const width = image.naturalWidth * (height / image.naturalHeight);
-    const offset = -((this.camera.x * 1.12) % width);
-    ctx.save();
-    ctx.globalAlpha = 0.3;
-    for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
-    ctx.restore();
+    if (ready(image)) {
+      const height = 220;
+      const width = image.naturalWidth * (height / image.naturalHeight);
+      const offset = -((this.camera.x * 1.12) % width);
+      ctx.save();
+      ctx.globalAlpha = 0.3;
+      for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
+      ctx.restore();
+    }
+    this.drawForegroundPipes(ctx);
   }
 
   phaseLabel() {
@@ -1466,7 +1559,8 @@ export class GameEngine {
     if (!actor?.alive) return this.mission?.state === 'failed' ? 'ENTRÉE  REPRENDRE AU CHECKPOINT' : '';
     const ally = actor === this.player ? this.coop : this.player;
     if (this.coopEnabled && ally?.downed && distanceBetween(actor, ally) < REVIVE_RANGE) return 'E  RÉANIMER LE COÉQUIPIER';
-    const door = this.doors.find((candidate) => Math.abs(actor.x - candidate.x) < 118);
+    const actorCenter = actor.x + actor.w / 2;
+    const door = this.doors.find((candidate) => Math.abs(actorCenter - (candidate.x + candidate.w / 2)) < 118);
     if (door) return this.doorRequirement(door) ? `E  VERROUILLÉ — ${this.doorRequirement(door)}` : 'E  ACTIONNER LA PORTE';
     if (this.powerNode && !this.powerNode.active && distanceBetween(actor, this.powerNode) < 130) return 'E  RÉTABLIR LE CIRCUIT AUXILIAIRE';
     if (this.archiveTerminal && !this.archiveTerminal.recovered && distanceBetween(actor, this.archiveTerminal) < 130) return 'E  EXTRAIRE LES ARCHIVES';

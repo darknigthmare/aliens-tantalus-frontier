@@ -190,7 +190,7 @@ export function withV52LevelRuntime(BaseEngine) {
         y: node.y - 46,
         w: 82,
         h: 46,
-        art: index % 2 ? 'crates' : 'barricade',
+        art: index % 2 ? 'crates' : 'cover',
         health: 100,
         destroyed: false,
         zoneId: node.zoneId
@@ -414,6 +414,7 @@ export function withV52LevelRuntime(BaseEngine) {
       const zone = asList(plan.biomeZones).find((entry) => entry.id === this.missionLevelVisualState.activeZoneId);
       if (zone?.visual?.tint) {
         ctx.globalAlpha = this.missionLevelVisualState.blackout ? 0.5 : 0.2;
+      this.drawCeilingCables(ctx);
         ctx.fillStyle = zone.visual.tint;
         ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
       }
@@ -468,7 +469,7 @@ export function withV52LevelRuntime(BaseEngine) {
       const plan = this.missionLevelRuntime;
       if (!plan) return super.drawForeground(ctx);
       const image = this.images?.get(layerKey(plan.templateId, 'foreground'));
-      if (!imageReady(image)) return;
+      if (!imageReady(image)) { this.drawForegroundPipes(ctx); return; }
       const height = plan.templateId === 'planet-exterior' ? 250 : 230;
       const width = (image.naturalWidth || image.width) * (height / (image.naturalHeight || image.height));
       const offset = -((this.camera.x * 1.12) % Math.max(1, width));
@@ -485,6 +486,7 @@ export function withV52LevelRuntime(BaseEngine) {
         }
       }
       ctx.restore();
+      this.drawForegroundPipes(ctx);
     }
 
     captureResumeState() {

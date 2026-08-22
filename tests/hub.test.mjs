@@ -7,6 +7,7 @@ import {
   HUB_DECKS,
   HUB_MODULAR_ASSETS,
   HUB_MODULAR_PROP_FILES,
+  HUB_ROOM_PROFILES,
   HUB_ROOM_COUNT,
   HUB_WORLD
 } from '../src/hub-game.js';
@@ -36,10 +37,16 @@ test('the v50 Tantalus hub is a camera-wide modular four-deck physical level', (
   assert.doesNotMatch(JSON.stringify(HUB_DECKS), /tantalus-hub-(command|habitat|industrial|engineering)-deck/i);
 });
 
-test('each deck owns twelve traversal obstacles and every modular asset exists', () => {
+test('each room owns a measured render profile and an authored prop collider', () => {
+  assert.equal(Object.keys(HUB_ROOM_PROFILES).length, 16);
   for (const deck of HUB_DECKS) {
-    assert.ok(deck.rooms.every((room) => room.geometry.length === 3), `${deck.id}: three obstacles per room`);
-    assert.equal(deck.rooms.reduce((total, room) => total + room.geometry.length, 0), 12, `${deck.id}: twelve obstacles`);
+    assert.ok(deck.rooms.every((room) => room.profile === HUB_ROOM_PROFILES[room.id]), `${deck.id}: explicit room profiles`);
+    assert.ok(deck.rooms.every((room) => room.profile.worldWidth === HUB_WORLD.roomWidth), `${deck.id}: stable world boundaries`);
+    assert.ok(deck.rooms.every((room) => room.profile.sceneScale >= 1 && room.profile.sceneScale <= 1.06), `${deck.id}: bounded scene scale`);
+    assert.ok(deck.rooms.every((room) => room.profile.floorRatio >= 0.815 && room.profile.floorRatio <= 0.83), `${deck.id}: measured floor ratio`);
+    assert.ok(deck.rooms.every((room) => room.collisionSource === 'room-profile'), `${deck.id}: no generic collision fallback`);
+    assert.ok(deck.rooms.every((room) => room.geometry.length === 1 && room.geometry[0].collisionOnly), `${deck.id}: one authored prop collider per room`);
+    assert.equal(deck.rooms.reduce((total, room) => total + room.geometry.length, 0), 4, `${deck.id}: four authored colliders`);
   }
 
   assert.equal(HUB_MODULAR_PROP_FILES.length, 16);

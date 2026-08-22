@@ -237,7 +237,10 @@ test('boss profile remains contextual in a synthetic lockdown and never coerces 
   const bosses = engine.enemies.filter((enemy) => enemy.isBoss);
   assert.equal(bosses.length, 1);
   assert.equal(bosses[0].biology, 'synthetic');
-  assert.equal(bosses[0].spriteKey, 'workingJoe');
+  assert.equal(bosses[0].spriteKey, 'legacy');
+  assert.equal(bosses[0].visualImageKey, 'synthetic');
+  assert.equal(bosses[0].visualRow, 2);
+  assert.equal(bosses[0].visualIdentityStatus, 'exact');
   assert.equal(bosses[0].isRoyal, false);
   assert.equal(engine.enemies.some((enemy) => enemy.spriteKey === 'xenoQueen'), false);
 

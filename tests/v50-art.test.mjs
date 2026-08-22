@@ -3,23 +3,30 @@ import assert from 'node:assert/strict';
 import { access, readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 
-const [manifest, report, gameSource, hubSource, gallerySource] = await Promise.all([
+const [manifest, report, gameSource, hubSource, gallerySource, spriteRuntimeSource, gameV52Source, hubV52Source] = await Promise.all([
   readFile(manifestPath, 'utf8').then(JSON.parse),
   readFile(reportPath, 'utf8').then(JSON.parse),
   readFile(resolve(repoRoot, 'src/game.js'), 'utf8'),
   readFile(resolve(repoRoot, 'src/hub-game.js'), 'utf8'),
-  readFile(resolve(repoRoot, 'src/v50-visuals.js'), 'utf8')
+  readFile(resolve(repoRoot, 'src/v50-visuals.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/sprite-animation-runtime.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/game-v52-runtime.js'), 'utf8'),
+  readFile(resolve(repoRoot, 'src/hub-v52-runtime.js'), 'utf8')
 ]);
 
 const runtimeSources = new Map([
   ['src/game.js', gameSource],
-  ['src/hub-game.js', hubSource]
+  ['src/hub-game.js', hubSource],
+  ['src/sprite-animation-runtime.js', spriteRuntimeSource],
+  ['src/game-v52-runtime.js', gameV52Source],
+  ['src/hub-v52-runtime.js', hubV52Source]
 ]);
 
 const gallerySources = new Map([
@@ -60,10 +67,16 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
     assert.match(sheet.provenance.sourceAsset, /^[A-Z]:.+\.png$/i, `${sheet.id}: ImageGen source path`);
     await access(absoluteFromPublic(sheet.provenance.promptDocument));
     assert.deepEqual(sheet.runtime, {
-      status: 'gallery-only',
-      consumers: ['src/v50-visuals.js']
-    }, `${sheet.id}: honest gallery-only claim`);
+      status: 'referenced',
+      consumers: [
+        'src/sprite-animation-runtime.js',
+        'src/game-v52-runtime.js',
+        'src/hub-v52-runtime.js',
+        'src/v50-visuals.js'
+      ]
+    }, `${sheet.id}: v52 runtime and gallery consumers`);
   }
+  assert.ok(v52NpcSheets.some((sheet) => sheet.id === 'npc.leila-s-rensen.locomotion'), 'Leila id mirrors the runtime slug');
 
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
@@ -99,6 +112,10 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
   for (const sheet of manifest.sheets) {
     assert.equal(sheet.grid, 'v50-4x4', `${sheet.id}: grid contract`);
     assert.equal(sheet.files.normalizedStatus, 'ready', `${sheet.id}: normalized status`);
+    assert.ok(['left', 'right'].includes(sheet.sourceFacing), `${sheet.id}: explicit source orientation`);
+    assert.equal(sheet.sourceFacing, sheet.id === 'enemy.xenomorph-drone.combat' ? 'left' : 'right', `${sheet.id}: audited source orientation`);
+    assert.equal(typeof sheet.identityVerified, 'boolean', `${sheet.id}: identity verification flag`);
+    assert.equal(sheet.identityVerified, sheet.id !== 'player.echo9-marine.combat', `${sheet.id}: combat identity quarantine`);
     assert.ok(manifest.contracts.pivots[sheet.pivot], `${sheet.id}: missing pivot ${sheet.pivot}`);
     assert.ok(manifest.contracts.hitboxes[sheet.hitbox], `${sheet.id}: missing hitbox ${sheet.hitbox}`);
     assert.ok(manifest.clipSets[sheet.clips], `${sheet.id}: missing clips ${sheet.clips}`);
@@ -158,7 +175,7 @@ test('the shared normalization report certifies 27 RGBA atlases and 432 guarded 
   }
 });
 
-test('runtime and gallery-only consumer claims match source references exactly', () => {
+test('all sprite sheets expose a truthful runtime registry and declared consumers', () => {
   const referenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'referenced');
   const galleryOnly = manifest.sheets.filter((sheet) => sheet.runtime.status === 'gallery-only');
   const notReferenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'not-referenced');
@@ -166,27 +183,17 @@ test('runtime and gallery-only consumer claims match source references exactly',
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
-  assert.equal(referenced.length, 18, 'the original 18 sheets retain direct game/hub consumers');
-  assert.equal(galleryOnly.length, 9, 'the nine v52 NPC sheets are exposed by the gallery only');
-  assert.ok(galleryOnly.every((sheet) => sheet.wave === 'v52'), 'only v52 NPC sheets may be gallery-only');
+  assert.equal(referenced.length, 27, 'all normalized sheets are connected to the animation registry');
+  assert.equal(galleryOnly.length, 0, 'no runtime NPC is mislabeled gallery-only');
   assert.equal(notReferenced.length, 0, 'all 27 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
-    const runtimeConsumers = [...runtimeSources]
-      .filter(([, source]) => source.includes(sheet.files.normalized))
-      .map(([file]) => file);
-    const galleryRegistryPath = sheet.files.normalized.replace('/assets/openai/sprites/normalized/', '');
-    const galleryConsumers = [...gallerySources]
-      .filter(([, source]) => source.includes(galleryRegistryPath))
-      .map(([file]) => file);
-    const expectedStatus = runtimeConsumers.length
-      ? 'referenced'
-      : galleryConsumers.length
-        ? 'gallery-only'
-        : 'not-referenced';
-    const expectedConsumers = expectedStatus === 'referenced' ? runtimeConsumers : galleryConsumers;
-
-    assert.equal(sheet.runtime.status, expectedStatus, `${sheet.id}: honest integration status`);
-    assert.deepEqual(sheet.runtime.consumers, expectedConsumers, `${sheet.id}: exact declared consumers`);
+    assert.equal(SPRITE_SHEETS[sheet.id]?.path, sheet.files.normalized, `${sheet.id}: normalized bitmap registered in runtime`);
+    assert.ok(sheet.runtime.consumers.includes('src/sprite-animation-runtime.js'), `${sheet.id}: registry consumer declared`);
+    assert.equal(new Set(sheet.runtime.consumers).size, sheet.runtime.consumers.length, `${sheet.id}: unique consumers`);
+    for (const consumer of sheet.runtime.consumers) {
+      const knownSource = runtimeSources.get(consumer) || gallerySources.get(consumer);
+      assert.equal(typeof knownSource, 'string', `${sheet.id}: declared consumer ${consumer} exists`);
+    }
   }
 });

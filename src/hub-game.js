@@ -1,3 +1,5 @@
+import { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds } from './hub-profiles-v53.js';
+
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
 const WORLD_WIDTH = 5120;
@@ -21,6 +23,7 @@ const NPC_SPRITE_FILES = Object.freeze([
 const PLAYER_SPRITE_FILE = '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png';
 
 export const HUB_WORLD = Object.freeze({ width: WORLD_WIDTH, roomWidth: ROOM_WIDTH, floorY: FLOOR_Y });
+export { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds };
 
 const GEOMETRY_TEMPLATES = Object.freeze([
   Object.freeze([{ dx: 238, w: 76, h: 38, style: 0 }, { dx: 488, w: 112, h: 27, style: 1 }, { dx: 822, w: 58, h: 48, style: 2 }]),
@@ -31,6 +34,19 @@ const GEOMETRY_TEMPLATES = Object.freeze([
 
 const makeRoom = (id, name, action, description, index, npcRow, art, prop, geometryVariant, viewport, propHeight = 138) => {
   const xStart = index * ROOM_WIDTH;
+  const profile = HUB_ROOM_PROFILES[id];
+  const worldWidth = profile?.worldWidth || ROOM_WIDTH;
+  const propX = xStart + worldWidth * 0.7;
+  const profileGeometry = profile?.authoredCollision && profile.propCollider
+    ? [Object.freeze({
+        x: propX - profile.propCollider.width / 2,
+        y: FLOOR_Y - profile.propCollider.height,
+        w: profile.propCollider.width,
+        h: profile.propCollider.height,
+        role: 'interaction-prop',
+        collisionOnly: true
+      })]
+    : null;
   return Object.freeze({
     id,
     name,
@@ -39,13 +55,15 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     index,
     npcRow,
     xStart,
-    xEnd: xStart + ROOM_WIDTH,
-    x: xStart + ROOM_WIDTH * 0.7,
+    xEnd: xStart + worldWidth,
+    x: propX,
+    profile,
+    collisionSource: profileGeometry ? 'room-profile' : 'fallback',
     background: `/assets/openai/hub/rooms/${art}.png`,
     prop: `/assets/openai/hub/props/${prop}.png`,
     propHeight,
     viewport: Object.freeze({ x: xStart + viewport.x, y: viewport.y, w: viewport.w, h: viewport.h }),
-    geometry: Object.freeze(GEOMETRY_TEMPLATES[geometryVariant].map((item) => Object.freeze({
+    geometry: Object.freeze(profileGeometry || GEOMETRY_TEMPLATES[geometryVariant].map((item) => Object.freeze({
       x: xStart + item.dx,
       y: FLOOR_Y - item.h,
       w: item.w,
@@ -313,7 +331,7 @@ export class HubGame {
 
   resolveHorizontal(previousX) {
     for (const door of this.doorStates) {
-      const collider = { x: door.x - 34, y: FLOOR_Y - (door.lift ? 216 : 198), w: 68, h: door.lift ? 216 : 198 };
+      const collider = getHubDoorBounds(door);
       if (door.progress >= 0.82 || !overlap(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
         this.player.x = collider.x - this.player.w;
@@ -473,6 +491,9 @@ export class HubGame {
       visited: this.state?.visited?.length || 0,
       npcCount: this.npcs?.length || 0,
       obstacleCount: this.obstacles?.length || 0,
+      roomSceneScale: room.profile?.sceneScale || 1,
+      roomFloorRatio: room.profile?.floorRatio || 0.82,
+      roomCollisionSource: room.collisionSource || 'fallback',
       activeDoorState: Number((activeDoor?.progress || 0).toFixed(2)),
       roomAssetsReady: assetReport.roomAssetsReady,
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
@@ -555,21 +576,29 @@ export class HubGame {
 
   drawRoomModule(ctx, room, farImage) {
     const image = this.roomImages.get(room.background);
+    const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
     ctx.fillStyle = room.index % 2 ? '#0a1111' : '#080e0f';
-    ctx.fillRect(room.xStart, 0, ROOM_WIDTH, FLOOR_Y);
+    ctx.fillRect(room.xStart, 0, roomWidth, FLOOR_Y);
     if (assetReady(image)) {
-      const width = ROOM_WIDTH;
+      const width = roomWidth * (room.profile?.sceneScale || 1);
       const height = image.naturalHeight * (width / image.naturalWidth);
-      const y = FLOOR_Y - height * 0.82;
-      ctx.drawImage(image, room.xStart, y, width, height);
+      const x = room.xStart + (roomWidth - width) / 2;
+      const y = FLOOR_Y - height * (room.profile?.floorRatio || 0.82);
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
+      ctx.clip();
+      ctx.drawImage(image, x, y, width, height);
+      ctx.restore();
     }
+    this.drawViewportParallax(ctx, room.viewport, farImage);
     const edgeShade = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
     edgeShade.addColorStop(0, 'rgba(0, 3, 4, .42)');
     edgeShade.addColorStop(0.08, 'rgba(0, 3, 4, 0)');
     edgeShade.addColorStop(0.92, 'rgba(0, 3, 4, 0)');
     edgeShade.addColorStop(1, 'rgba(0, 3, 4, .42)');
     ctx.fillStyle = edgeShade;
-    ctx.fillRect(room.xStart, 160, ROOM_WIDTH, FLOOR_Y - 160);
+    ctx.fillRect(room.xStart, 160, roomWidth, FLOOR_Y - 160);
   }
 
   drawViewportParallax(ctx, viewport, image) {
@@ -636,6 +665,7 @@ export class HubGame {
   }
 
   drawObstacle(ctx, obstacle) {
+    if (obstacle.collisionOnly) return;
     const sources = [
       '/assets/openai/hub/props/vehicle-lift.png',
       '/assets/openai/hub/props/mess-table.png',
@@ -657,10 +687,7 @@ export class HubGame {
     const source = door.lift ? '/assets/openai/hub/props/lift-door.png' : '/assets/openai/hub/props/bulkhead-door.png';
     const image = this.propImages.get(source);
     if (!assetReady(image)) return;
-    const height = door.lift ? 216 : 198;
-    const width = image.naturalWidth * (height / image.naturalHeight);
-    const y = FLOOR_Y - height;
-    const x = door.x - width / 2;
+    const { x, y, w: width, h: height } = getHubDoorBounds(door);
     const halfSource = image.naturalWidth / 2;
     const halfTarget = width / 2;
     const slide = door.progress * halfTarget * 0.78;
