@@ -4,15 +4,15 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
-  NPC_MISSION_CLIP_SETS_V55,
+  NPC_MISSION_CLIP_SETS_V56,
   NPC_MISSION_GRID_V55,
-  NPC_MISSION_IDENTITIES_V55,
+  NPC_MISSION_IDENTITIES_V56,
   resolveNpcMissionAnimationV55,
   resolveNpcMissionIdentityV55
 } from '../src/npc-mission-runtime-v55.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const identities = Object.values(NPC_MISSION_IDENTITIES_V55);
+const identities = Object.values(NPC_MISSION_IDENTITIES_V56);
 
 const EXPECTED_ROLES = Object.freeze({
   'crew-01-mara-vega': 'command-order',
@@ -22,11 +22,19 @@ const EXPECTED_ROLES = Object.freeze({
   'crew-05-bishop-9': 'science-analysis',
   'crew-06-rook': 'recon-scan',
   'crew-07-sanaa-doyle': 'smartgun-burst',
-  'crew-08-maksim-orlov': 'flight-control-repair'
+  'crew-08-maksim-orlov': 'flight-control-repair',
+  'crew-09-inez-harlow': 'xenobiology-analysis',
+  'crew-10-david-8r': 'synthetic-infiltration',
+  'crew-11-jun-park': 'technical-repair',
+  'crew-12-asha-mbaye': 'colonial-coordination',
+  'crew-13-pablo-reyes': 'breaching-charge',
+  'crew-14-echo-a': 'tactical-scan',
+  'crew-15-leila-s-rensen': 'pathfinder-scan',
+  'crew-16-cal-mercer': 'vehicle-repair'
 });
 
 test('les huit identités possèdent leurs propres plaques mission et locomotion normalisées', () => {
-  assert.equal(identities.length, 8);
+  assert.equal(identities.length, 16);
   assert.deepEqual(NPC_MISSION_GRID_V55, {
     columns: 4,
     rows: 4,
@@ -49,10 +57,10 @@ test('les huit identités possèdent leurs propres plaques mission et locomotion
     locomotionPaths.add(identity.locomotionPath);
     sheetIds.add(identity.missionSheetId);
   }
-  assert.equal(missionPaths.size, 8);
-  assert.equal(locomotionPaths.size, 8);
-  assert.equal(sheetIds.size, 8);
-  assert.equal(Object.keys(NPC_MISSION_CLIP_SETS_V55).length, 8);
+  assert.equal(missionPaths.size, 16);
+  assert.equal(locomotionPaths.size, 16);
+  assert.equal(sheetIds.size, 16);
+  assert.equal(Object.keys(NPC_MISSION_CLIP_SETS_V56).length, 16);
 });
 
 test('chaque rôle utilise une action pertinente et un clip borné dans la grille 4x4', () => {

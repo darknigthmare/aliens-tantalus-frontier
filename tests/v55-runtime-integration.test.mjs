@@ -84,7 +84,7 @@ test('les vingt plaques v55 sont réellement résolubles et échantillonnables',
     assert.equal(request.sheetId, sheetId);
     assert.ok(controller.sample(id, request, 0.2), id);
   }
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 51);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 178);
 });
 
 test('la sélection catalogue des quatre véhicules atteint leur bitmap dans le vrai GameEngine', () => withBrowserRuntime(() => {
@@ -134,7 +134,7 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   assert.equal(snapshot.roomBackground, null);
   assert.equal(snapshot.hubArtAssetsReady, 4);
   assert.ok(hub.obstacles.some((entry) => entry.role === 'dropship-hull'));
-  assert.equal(hub.getAssetReport().npcMissionSpriteAssetsReady, 8);
+  assert.equal(hub.getAssetReport().npcMissionSpriteAssetsReady, 16);
 
   Object.assign(hub.player, { x: 930, y: 624 - hub.player.h, vx: 80, vy: 0, grounded: true });
   hub.update(0.016);

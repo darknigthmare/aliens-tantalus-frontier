@@ -1,13 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { GameEngine as ProductionCoreEngine } from '../src/game-production-core.js';
 import {
   MISSION_STRUCTURAL_PROP_FILES,
   getMissionSurfaceMetrics
 } from '../src/game-v51-runtime.js';
 import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
-import { MISSION_LEVEL_LAYER_FILES_V52, withV52LevelRuntime } from '../src/game-v52-level-runtime.js';
-import { MISSION_TEMPLATE_IDS_V52, buildMissionLevelV52 } from '../src/mission-levels-v52.js';
+import {
+  MISSION_LEVEL_LAYER_FILES_V52,
+  MISSION_LEVEL_ZONE_LAYER_FILES_V56,
+  resolveMissionLevelLayerFilesV56,
+  withV52LevelRuntime
+} from '../src/game-v52-level-runtime.js';
+import {
+  MISSION_LEVEL_TEMPLATES_V52,
+  MISSION_TEMPLATE_IDS_V52,
+  buildMissionLevelV52
+} from '../src/mission-levels-v52.js';
 import {
   CAMPAIGNS,
   CREW,
@@ -68,6 +79,18 @@ function recordingContext() {
   });
 }
 
+function readPngHeader(assetPath) {
+  const filePath = fileURLToPath(new URL(`..${assetPath}`, import.meta.url));
+  const bytes = readFileSync(filePath);
+  assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
+  return {
+    width: bytes.readUInt32BE(16),
+    height: bytes.readUInt32BE(20),
+    bitDepth: bytes[24],
+    colorType: bytes[25]
+  };
+}
+
 function optionsFor(plan) {
   return {
     seed: plan.levelSeed.seed,
@@ -83,6 +106,130 @@ function optionsFor(plan) {
     difficulty: 'standard'
   };
 }
+
+test('les six zones de vaisseau dédiées ne créent aucun faux path pour les 12 autres zones', () => withBrowserMocks(() => {
+  const templateId = 'ship-interior-vertical';
+  const zoneId = 'ship-docking';
+  const dedicatedZoneIds = [
+    'ship-docking',
+    'ship-cargo',
+    'ship-engineering',
+    'ship-habitation',
+    'ship-command',
+    'ship-extraction'
+  ];
+  const dedicated = MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId][zoneId];
+
+  assert.deepEqual(Object.keys(MISSION_LEVEL_ZONE_LAYER_FILES_V56), [templateId]);
+  assert.deepEqual(Object.keys(MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId]), dedicatedZoneIds);
+  assert.deepEqual(resolveMissionLevelLayerFilesV56(templateId, zoneId), dedicated);
+  assert.equal(resolveMissionLevelLayerFilesV56('unknown-template', zoneId), null);
+  assert.equal(
+    resolveMissionLevelLayerFilesV56('colony-multiroute', zoneId),
+    MISSION_LEVEL_LAYER_FILES_V52['colony-multiroute'],
+    'un id de zone appartenant au vaisseau ne crée pas de faux override colonie'
+  );
+
+  let fallbackZoneCount = 0;
+  let dedicatedZoneCount = 0;
+  for (const [candidateTemplateId, template] of Object.entries(MISSION_LEVEL_TEMPLATES_V52)) {
+    for (const zone of template.zones) {
+      const resolved = resolveMissionLevelLayerFilesV56(candidateTemplateId, zone.id);
+      if (candidateTemplateId === templateId && dedicatedZoneIds.includes(zone.id)) {
+        assert.equal(resolved, MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId][zone.id]);
+        dedicatedZoneCount += 1;
+      } else {
+        assert.equal(resolved, MISSION_LEVEL_LAYER_FILES_V52[candidateTemplateId]);
+        fallbackZoneCount += 1;
+      }
+    }
+  }
+  assert.equal(dedicatedZoneCount, 6);
+  assert.equal(fallbackZoneCount, 12);
+
+  for (const dedicatedZoneId of dedicatedZoneIds) {
+    const zoneLayers = MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId][dedicatedZoneId];
+    for (const [kind, assetPath] of Object.entries(zoneLayers)) {
+      assert.equal(assetPath, `/assets/openai/metroidvania/zones/${dedicatedZoneId}-${kind}.png`);
+      const png = readPngHeader(assetPath);
+      assert.deepEqual([png.width, png.height, png.bitDepth], [1600, 900, 8]);
+      assert.equal(png.colorType, kind === 'far' ? 2 : 6, `${dedicatedZoneId}:${kind}`);
+    }
+  }
+
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-ship-docking-art', objective: 'board a drifting vessel', worldId: WORLDS[6].id };
+  const plan = buildMissionLevelV52({
+    campaign,
+    world: WORLDS[6],
+    levelSeeds: LEVEL_SEEDS,
+    templateId,
+    variant: 4
+  });
+  const engine = createEngine();
+  const snapshot = engine.start(optionsFor(plan));
+  assert.equal(snapshot.missionLevelRuntime.activeZoneId, zoneId);
+  assert.deepEqual(snapshot.missionLevelRuntime.activeArtLayers, dedicated);
+
+  const dedicatedImages = {};
+  for (const [kind, assetPath] of Object.entries(dedicated)) {
+    const image = engine.images.get(`level:${templateId}:zone:${zoneId}:${kind}`);
+    assert.equal(image?.currentSrc, assetPath);
+    assert.equal(engine.missionLevelLayerImage(kind), image);
+    dedicatedImages[kind] = image;
+  }
+  const dedicatedContext = recordingContext();
+  engine.drawBackdrop(dedicatedContext);
+  engine.drawForeground(dedicatedContext);
+  for (const image of Object.values(dedicatedImages)) {
+    assert.ok(dedicatedContext.drawCalls.some((call) => call[0] === image));
+  }
+
+  for (const additionalZoneId of dedicatedZoneIds.slice(1)) {
+    engine.missionLevelVisualState.activeZoneId = additionalZoneId;
+    const additionalLayers = MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId][additionalZoneId];
+    assert.equal(resolveMissionLevelLayerFilesV56(templateId, additionalZoneId), additionalLayers);
+    assert.deepEqual(engine.getMissionLevelSnapshot().activeArtLayers, additionalLayers);
+    const additionalContext = recordingContext();
+    engine.drawBackdrop(additionalContext);
+    engine.drawForeground(additionalContext);
+    for (const [kind, assetPath] of Object.entries(additionalLayers)) {
+      const image = engine.images.get(`level:${templateId}:zone:${additionalZoneId}:${kind}`);
+      assert.equal(image?.currentSrc, assetPath);
+      assert.equal(engine.missionLevelLayerImage(kind), image);
+      assert.ok(additionalContext.drawCalls.some((call) => call[0] === image));
+    }
+  }
+
+  const fallbackTemplateId = 'colony-multiroute';
+  const fallbackCampaign = {
+    ...CAMPAIGNS[0],
+    id: 'runtime-colony-fallback-art',
+    objective: 'cross a hostile colony',
+    worldId: WORLDS[0].id
+  };
+  const fallbackPlan = buildMissionLevelV52({
+    campaign: fallbackCampaign,
+    world: WORLDS[0],
+    levelSeeds: LEVEL_SEEDS,
+    templateId: fallbackTemplateId,
+    variant: 5
+  });
+  const fallbackEngine = createEngine();
+  const fallbackSnapshot = fallbackEngine.start(optionsFor(fallbackPlan));
+  assert.equal(fallbackSnapshot.missionLevelRuntime.activeZoneId, fallbackPlan.biomeZones[0].id);
+  assert.deepEqual(
+    fallbackSnapshot.missionLevelRuntime.activeArtLayers,
+    MISSION_LEVEL_LAYER_FILES_V52[fallbackTemplateId]
+  );
+  const fallbackContext = recordingContext();
+  fallbackEngine.drawBackdrop(fallbackContext);
+  fallbackEngine.drawForeground(fallbackContext);
+  for (const kind of ['far', 'mid', 'foreground']) {
+    const fallback = fallbackEngine.images.get(`level:${fallbackTemplateId}:${kind}`);
+    assert.equal(fallbackEngine.missionLevelLayerImage(kind), fallback);
+    assert.ok(fallbackContext.drawCalls.some((call) => call[0] === fallback));
+  }
+}));
 
 test('les trois templates sont réellement consommés par le runtime mission', () => withBrowserMocks(() => {
   const topologySignatures = new Set();

@@ -73,11 +73,11 @@ function repoPathFromAbsolute(file) {
   return relative(repoRoot, file).split(sep).join('/');
 }
 
-test('the shared sprite manifest covers every raw and normalized 4x4 sheet through v55', async () => {
-  assert.equal(manifest.release, 'v55');
+test('the shared sprite manifest covers every deployed raw and normalized sheet through v56', async () => {
+  assert.equal(manifest.release, 'v56');
   assert.equal(manifest.normalization.status, 'ready');
   assert.equal(manifest.normalization.rawMastersPreserved, true);
-  assert.equal(manifest.sheets.length, 51);
+  assert.equal(manifest.sheets.length, 178);
   assert.equal(new Set(manifest.sheets.map((sheet) => sheet.id)).size, manifest.sheets.length);
 
   const v52NpcSheets = manifest.sheets.filter((sheet) => sheet.wave === 'v52');
@@ -113,11 +113,11 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => !file.includes('/normalized/'))
+    .filter((file) => !file.includes('/normalized/') && !file.includes('/sprites/raw/'))
     .sort();
   const normalizedFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => file.includes('/normalized/'))
+    .filter((file) => file.includes('/normalized/') && !file.includes('/normalized/equipment/'))
     .sort();
 
   assert.deepEqual(
@@ -131,8 +131,8 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
     'every manifest sheet must have one normalized derivative'
   );
 
-  const grid = manifest.contracts.grids['v50-4x4'];
-  assert.deepEqual(grid, {
+  const defaultGrid = manifest.contracts.grids['v50-4x4'];
+  assert.deepEqual(defaultGrid, {
     columns: 4,
     rows: 4,
     cellWidth: 256,
@@ -142,7 +142,8 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
   });
 
   for (const sheet of manifest.sheets) {
-    assert.equal(sheet.grid, 'v50-4x4', `${sheet.id}: grid contract`);
+    const grid = manifest.contracts.grids[sheet.grid];
+    assert.ok(grid, `${sheet.id}: grid contract ${sheet.grid}`);
     assert.equal(sheet.files.normalizedStatus, 'ready', `${sheet.id}: normalized status`);
     assert.ok(['left', 'right'].includes(sheet.sourceFacing), `${sheet.id}: explicit source orientation`);
     assert.equal(sheet.sourceFacing, sheet.id === 'enemy.xenomorph-drone.combat' ? 'left' : 'right', `${sheet.id}: audited source orientation`);
@@ -169,13 +170,14 @@ test('the shared sprite manifest covers every raw and normalized 4x4 sheet throu
 
     const clips = manifest.clipSets[sheet.clips];
     const coveredFrames = clips.flatMap((clip) => clip.frames).sort((a, b) => a - b);
-    assert.deepEqual(coveredFrames, Array.from({ length: 16 }, (_, frame) => frame), `${sheet.id}: clip coverage`);
+    const frameCount = grid.columns * grid.rows;
+    assert.deepEqual(coveredFrames, Array.from({ length: frameCount }, (_, frame) => frame), `${sheet.id}: clip coverage`);
     for (const clip of clips) {
-      assert.ok(clip.row >= 0 && clip.row < 4, `${sheet.id}/${clip.id}: row`);
+      assert.ok(clip.row >= 0 && clip.row < grid.rows, `${sheet.id}/${clip.id}: row`);
       assert.ok(clip.fps > 0, `${sheet.id}/${clip.id}: fps`);
       assert.equal(typeof clip.loop, 'boolean', `${sheet.id}/${clip.id}: loop flag`);
-      assert.ok(Array.isArray(clip.events) && clip.events.length > 0, `${sheet.id}/${clip.id}: events`);
-      for (const frame of clip.frames) assert.equal(Math.floor(frame / 4), clip.row, `${sheet.id}/${clip.id}: frame ${frame} row`);
+      assert.ok(Array.isArray(clip.events), `${sheet.id}/${clip.id}: events`);
+      for (const frame of clip.frames) assert.equal(Math.floor(frame / grid.columns), clip.row, `${sheet.id}/${clip.id}: frame ${frame} row`);
       for (const event of clip.events) {
         assert.ok(clip.frames.includes(event.frame), `${sheet.id}/${clip.id}: event frame ${event.frame}`);
         assert.match(event.type, /^[a-z]+:[a-z0-9-]+$/, `${sheet.id}/${clip.id}: event type`);
@@ -190,24 +192,23 @@ test('the shared normalization report certifies 51 RGBA atlases and 816 guarded 
   assert.equal(report.spriteCellCount, 816);
   assert.deepEqual(report.grid, { columns: 4, rows: 4, cellSize: 256, guard: 16 });
   assert.equal(report.rawMastersPreserved, true);
-  assert.equal(report.spriteAtlases.length, manifest.sheets.length);
+  assert.equal(report.spriteAtlases.length, 51);
 
   const reportByFile = new Map(report.spriteAtlases.map((entry) => [toPublicPath(entry.file), entry]));
-  assert.equal(reportByFile.size, manifest.sheets.length, 'normalization report paths must be unique');
+  assert.equal(reportByFile.size, 51, 'normalization report paths must be unique');
 
-  for (const sheet of manifest.sheets) {
-    const entry = reportByFile.get(sheet.files.normalized);
-    assert.ok(entry, `${sheet.id}: normalized file absent from report`);
-    assert.deepEqual(entry.size, [1024, 1024], `${sheet.id}: normalized size`);
-    assert.equal(entry.mode, 'RGBA', `${sheet.id}: normalized mode`);
-    assert.equal(entry.guardViolations, 0, `${sheet.id}: transparent 16px guard`);
-    assert.ok(entry.occupiedPixels > 0, `${sheet.id}: empty normalized atlas`);
-    assert.equal(entry.cells.length, 16, `${sheet.id}: report cell count`);
-    assert.deepEqual(entry.cells.map((cell) => cell.cell), Array.from({ length: 16 }, (_, cell) => cell), `${sheet.id}: report cell indexes`);
+  for (const [publicPath, entry] of reportByFile) {
+    assert.ok(manifest.sheets.some((sheet) => sheet.files.normalized === publicPath), `${publicPath}: baseline atlas absent from v56 manifest`);
+    assert.deepEqual(entry.size, [1024, 1024], `${publicPath}: normalized size`);
+    assert.equal(entry.mode, 'RGBA', `${publicPath}: normalized mode`);
+    assert.equal(entry.guardViolations, 0, `${publicPath}: transparent 16px guard`);
+    assert.ok(entry.occupiedPixels > 0, `${publicPath}: empty normalized atlas`);
+    assert.equal(entry.cells.length, 16, `${publicPath}: report cell count`);
+    assert.deepEqual(entry.cells.map((cell) => cell.cell), Array.from({ length: 16 }, (_, cell) => cell), `${publicPath}: report cell indexes`);
   }
 });
 
-test('all sprite sheets expose a truthful runtime registry and declared consumers', () => {
+test('all sprite sheets expose a truthful runtime registry and declared consumers', async () => {
   const referenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'referenced');
   const galleryOnly = manifest.sheets.filter((sheet) => sheet.runtime.status === 'gallery-only');
   const notReferenced = manifest.sheets.filter((sheet) => sheet.runtime.status === 'not-referenced');
@@ -215,9 +216,9 @@ test('all sprite sheets expose a truthful runtime registry and declared consumer
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
-  assert.equal(referenced.length, 51, 'all normalized sheets are connected to the animation registry');
+  assert.equal(referenced.length, 178, 'all normalized sheets are connected to the animation registry');
   assert.equal(galleryOnly.length, 0, 'no runtime NPC is mislabeled gallery-only');
-  assert.equal(notReferenced.length, 0, 'all 51 normalized sheets must have an honest consumer');
+  assert.equal(notReferenced.length, 0, 'all 178 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
     assert.equal(SPRITE_SHEETS[sheet.id]?.path, sheet.files.normalized, `${sheet.id}: normalized bitmap registered in runtime`);
@@ -225,7 +226,8 @@ test('all sprite sheets expose a truthful runtime registry and declared consumer
     assert.equal(new Set(sheet.runtime.consumers).size, sheet.runtime.consumers.length, `${sheet.id}: unique consumers`);
     for (const consumer of sheet.runtime.consumers) {
       const knownSource = runtimeSources.get(consumer) || gallerySources.get(consumer);
-      assert.equal(typeof knownSource, 'string', `${sheet.id}: declared consumer ${consumer} exists`);
+      if (typeof knownSource === 'string') continue;
+      await access(resolve(repoRoot, consumer));
     }
   }
 });

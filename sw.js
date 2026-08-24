@@ -1,13 +1,17 @@
-const CACHE = 'atf-v55-runtime-1';
+const CACHE = 'atf-v56-runtime-1';
+const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
-  '/manifest.webmanifest', '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/manifest.webmanifest', SPRITE_MANIFEST, '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
   '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/mission-levels-v52.js',
-  '/src/enemy-visual-overrides-v55.js', '/src/npc-mission-runtime-v55.js', '/src/vehicle-visual-runtime-v55.js', '/src/hub-art-runtime-v55.js',
+  '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
+  '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
+  '/src/weapon-visual-runtime-v56.js', '/src/equipment-visual-runtime-v56.js',
+  '/src/mission-interactive-art-v56.js', '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js',
   '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
@@ -79,11 +83,87 @@ const CORE = [
   '/assets/openai/metroidvania/colony-multiroute-foreground.png',
   '/assets/openai/metroidvania/planet-exterior-far.png',
   '/assets/openai/metroidvania/planet-exterior-mid.png',
-  '/assets/openai/metroidvania/planet-exterior-foreground.png'
+  '/assets/openai/metroidvania/planet-exterior-foreground.png',
+  '/assets/openai/metroidvania/hazards/darkness-visibility-mask-cycle.png',
+  '/assets/openai/metroidvania/hazards/fire-hazard-cycle.png',
+  '/assets/openai/metroidvania/hazards/flood-ripple-splash-cycle.png',
+  '/assets/openai/metroidvania/hazards/flood-waterline-tiles.png',
+  '/assets/openai/metroidvania/hazards/radiation-exposure-cycle.png',
+  '/assets/openai/metroidvania/hazards/steam-jet-cycle.png',
+  '/assets/openai/metroidvania/hazards/vacuum-breach-airflow-cycle.png',
+  '/assets/openai/metroidvania/hazards/vacuum-frost-debris-overlay.png',
+  '/assets/openai/metroidvania/drops/ammo-drop-sheet.png',
+  '/assets/openai/metroidvania/drops/armor-drop-sheet.png',
+  '/assets/openai/metroidvania/drops/medkit-drop-sheet.png',
+  '/assets/openai/metroidvania/drops/salvage-drop-sheet.png',
+  '/assets/openai/metroidvania/drops/security-key-drop-sheet.png',
+  '/assets/openai/metroidvania/terminals/colony-medical-archive-terminal-sheet.png',
+  '/assets/openai/metroidvania/terminals/planet-field-archive-beacon-sheet.png',
+  '/assets/openai/metroidvania/terminals/ship-command-archive-terminal-sheet.png',
+  '/assets/openai/metroidvania/zones/ship-docking-far.png',
+  '/assets/openai/metroidvania/zones/ship-docking-mid.png',
+  '/assets/openai/metroidvania/zones/ship-docking-foreground.png',
+  '/assets/openai/metroidvania/zones/ship-cargo-far.png',
+  '/assets/openai/metroidvania/zones/ship-cargo-mid.png',
+  '/assets/openai/metroidvania/zones/ship-cargo-foreground.png',
+  '/assets/openai/metroidvania/zones/ship-engineering-far.png',
+  '/assets/openai/metroidvania/zones/ship-engineering-mid.png',
+  '/assets/openai/metroidvania/zones/ship-engineering-foreground.png',
+  '/assets/openai/metroidvania/zones/ship-habitation-far.png',
+  '/assets/openai/metroidvania/zones/ship-habitation-mid.png',
+  '/assets/openai/metroidvania/zones/ship-habitation-foreground.png',
+  '/assets/openai/metroidvania/zones/ship-command-far.png',
+  '/assets/openai/metroidvania/zones/ship-command-mid.png',
+  '/assets/openai/metroidvania/zones/ship-command-foreground.png',
+  '/assets/openai/metroidvania/zones/ship-extraction-far.png',
+  '/assets/openai/metroidvania/zones/ship-extraction-mid.png',
+  '/assets/openai/metroidvania/zones/ship-extraction-foreground.png',
+  '/assets/openai/hub/layers/command-bridge-overhead.png',
+  '/assets/openai/hub/layers/command-bridge-foreground.png',
+  '/assets/openai/hub/layers/command-briefing-overhead.png',
+  '/assets/openai/hub/layers/command-briefing-foreground.png',
+  '/assets/openai/hub/layers/command-cic-overhead.png',
+  '/assets/openai/hub/layers/command-cic-foreground.png',
+  '/assets/openai/hub/layers/command-cryo-overhead.png',
+  '/assets/openai/hub/layers/command-cryo-foreground.png',
+  '/assets/openai/hub/layers/habitat-quarters-overhead.png',
+  '/assets/openai/hub/layers/habitat-quarters-foreground.png',
+  '/assets/openai/hub/layers/habitat-mess-overhead.png',
+  '/assets/openai/hub/layers/habitat-mess-foreground.png',
+  '/assets/openai/hub/layers/habitat-medical-overhead.png',
+  '/assets/openai/hub/layers/habitat-medical-foreground.png',
+  '/assets/openai/hub/layers/habitat-lab-overhead.png',
+  '/assets/openai/hub/layers/habitat-lab-foreground.png',
+  '/assets/openai/hub/layers/industrial-quarantine-overhead.png',
+  '/assets/openai/hub/layers/industrial-quarantine-foreground.png',
+  '/assets/openai/hub/layers/industrial-armory-overhead.png',
+  '/assets/openai/hub/layers/industrial-armory-foreground.png',
+  '/assets/openai/hub/layers/industrial-workshop-overhead.png',
+  '/assets/openai/hub/layers/industrial-workshop-foreground.png',
+  '/assets/openai/hub/layers/industrial-vehicle-bay-overhead.png',
+  '/assets/openai/hub/layers/industrial-vehicle-bay-foreground.png',
+  '/assets/openai/hub/layers/engineering-reactor-overhead.png',
+  '/assets/openai/hub/layers/engineering-reactor-foreground.png',
+  '/assets/openai/hub/layers/engineering-life-support-overhead.png',
+  '/assets/openai/hub/layers/engineering-life-support-foreground.png',
+  '/assets/openai/hub/layers/engineering-sensors-overhead.png',
+  '/assets/openai/hub/layers/engineering-sensors-foreground.png'
 ];
 
+async function precacheV56() {
+  const cache = await caches.open(CACHE);
+  await cache.addAll(CORE);
+  const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Sprite manifest unavailable: ${response.status}`);
+  const manifest = await response.json();
+  const normalizedSprites = [...new Set((manifest.sheets || [])
+    .map((sheet) => sheet.files?.normalized)
+    .filter((path) => typeof path === 'string' && path.includes('/sprites/normalized/')))];
+  await cache.addAll(normalizedSprites);
+}
+
 self.addEventListener('install', (event) => event.waitUntil(
-  caches.open(CACHE).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting())
+  precacheV56().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

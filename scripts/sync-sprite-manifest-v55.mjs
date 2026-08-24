@@ -203,6 +203,7 @@ export function assertSpriteManifestV55(manifest) {
 export function buildSpriteManifestV55(sourceManifest) {
   if (!sourceManifest || typeof sourceManifest !== 'object') throw new TypeError('A source sprite manifest is required.');
   const manifest = clone(sourceManifest);
+  manifest.sheets = (manifest.sheets || []).filter((sheet) => sheet.wave !== 'v56');
   manifest.release = 'v55';
   manifest.contracts ||= {};
   manifest.contracts.hitboxes ||= {};

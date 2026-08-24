@@ -1,0 +1,1669 @@
+{
+  "schemaVersion": "1.0",
+  "release": "v56",
+  "auditDate": "2026-08-22",
+  "language": "fr-FR",
+  "scope": {
+    "inventory": "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+    "total": 34,
+    "inventoryStatusCounts": {
+      "missing-dedicated-art": 14,
+      "authored-family": 20
+    }
+  },
+  "classificationDefinitions": {
+    "CANON_REFERENCE": "Le nom vise directement une créature, un individu ou une faction publiée dans une œuvre officielle ou licenciée identifiée.",
+    "PROJECT_ADAPTATION": "Le projet dérive une lignée, un rôle ou une variante à partir d'un modèle ou corpus externe; le résultat précis n'est pas un modèle officiel.",
+    "PROJECT_ORIGINAL": "Aucun modèle de créature/personnage externe correspondant n'a été trouvé; la forme est définie par le canon interne du projet.",
+    "EXACT_EXTERNAL_MODEL": "Le modèle externe visuel et le nom cible correspondent directement, sous réserve des conflits de continuité signalés.",
+    "DERIVED_FROM_EXTERNAL_MODEL": "Il existe une ancre visuelle externe exploitable, mais pas le modèle exact sous ce nom et avec cette biologie.",
+    "NO_EXTERNAL_MODEL": "Aucun modèle externe exact ou dérivé suffisamment spécifique n'a été identifié."
+  },
+  "methodology": [
+    "Priorité aux pages éditeur, studio, manuel officiel, matériel licencié et entretiens d'artistes; les wikis spécialisés servent à consolider les détails absents des pages primaires.",
+    "Les recherches exactes sans résultat crédible ne sont pas transformées en preuve positive: les noms concernés restent PROJECT_ORIGINAL ou PROJECT_ADAPTATION selon leur ancre de projet.",
+    "Aucun fichier, rendu, texture, capture ou concept officiel ne doit être téléchargé, copié, détouré ou livré dans le projet; les URL ne servent qu'à l'étude.",
+    "Le dessin final doit être une interprétation originale, compatible avec le droit d'auteur et avec la continuité explicitement choisie."
+  ],
+  "globalProductionRules": [
+    "Un seul sujet complet par frame, profil latéral orthographique, tourné vers la droite, sans perspective trois-quarts ni regard vers la caméra.",
+    "Silhouette, crâne, membres, queue, équipement et palette doivent rester identiques d'une frame à l'autre; seules la pose et la déformation d'animation changent.",
+    "Fond transparent, ligne de sol et échelle stables, marges sûres autour de la tête, des pieds, des armes et de la queue.",
+    "Aucun texte, lettre, nombre ajouté, logo, watermark, décor, sol peint ou reproduction d'une image officielle. Les marques diégétiques citées ne sont admises que lorsqu'elles sont un invariant du modèle."
+  ],
+  "entries": [
+    {
+      "name": "Drone / Big Chap",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Alien (1979), avec terminologie de caste postérieure",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.20thcenturystudios.com/movies/alien",
+          "use": "Film source du Big Chap."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/",
+          "use": "Sculpt licencié lisible sous plusieurs angles."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Drone",
+          "use": "Terminologie et distinction Drone/Warrior."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Très grand bipède filiforme, crâne lisse extrêmement allongé, taille étroite, longs membres, longue queue et quatre tubes dorsaux lisibles.",
+        "colorMaterial": "Noir bleuté/gunmetal humide et biomécanique; dents ivoire; translucidité du dôme seulement suggérée, jamais transformée en casque de verre.",
+        "anatomy": "Sans yeux visibles, relief de crâne humain sous le dôme, côtes externes, mains longues aux doigts groupés, double mâchoire télescopique.",
+        "equipment": "Aucun vêtement, armure, arme, harnais ou implant.",
+        "cameraFacing": "Profil droit strict; tête, tubes, mains, pieds et queue intégralement dans la frame; aucune rotation frontale du visage."
+      },
+      "redesignProhibitions": [
+        "Pas de crâne côtelé de Warrior.",
+        "Pas de couronne royale, yeux lumineux, armure ou arme.",
+        "Pas de musculature de brute ni de palette vive."
+      ],
+      "canonConflicts": [
+        "Big Chap désigne l'individu/design de 1979 tandis que Drone est une catégorie élargie ultérieurement; pour cette entrée double, la silhouette écran de 1979 prime sur une moyenne générique de Drones. "
+      ]
+    },
+    {
+      "name": "Warrior",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens (1986)",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "use": "Film source."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://store.necaonline.com/products/aliens-40th-anniversary-ultimate-xenomorph-warrior-7-inch-scale-action-figure",
+          "use": "Sculpt licencié du Warrior 1986."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Warrior",
+          "use": "Détails de caste et variantes de représentation."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Bipède athlétique plus ramassé que Big Chap, crâne allongé à fortes côtes transversales, épaules et cage thoracique plus robustes, tubes dorsaux et longue queue.",
+        "colorMaterial": "Carapace noire à reflets bleu acier/brun sous l'éclairage; matières organiques et humides, jamais une couleur locale saturée.",
+        "anatomy": "Sans yeux visibles, double mâchoire, doigts griffus, jambes digitigrades lisibles et plaques céphaliques côtelées continues.",
+        "equipment": "Aucun équipement externe.",
+        "cameraFacing": "Profil droit strict, pose d'assaut basse mais corps entier lisible; crâne côtelé non masqué par le bras avant."
+      },
+      "redesignProhibitions": [
+        "Pas de dôme lisse de Big Chap.",
+        "Pas de couronne de Queen/Praetorian.",
+        "Pas d'armure militaire, canon biologique ou yeux."
+      ],
+      "canonConflicts": [
+        "Les Warriors paraissent bleus, noirs ou bruns selon lumière, restauration et produits dérivés; la structure de 1986 prime sur la teinte d'une reproduction. "
+      ]
+    },
+    {
+      "name": "Queen",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens (1986)",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "use": "Film source."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://necaonline.com/48662/products/toys/action-figures/aliens-xenomorph-queen-ultra-deluxe-boxed-action-figure/",
+          "use": "Sculpt licencié complet."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.space.com/entertainment/space-movies-shows/we-knew-we-had-a-lot-to-live-up-to-as-aliens-turns-40-we-chat-to-the-legendary-vfx-masters-who-created-the-alien-queen-interview",
+          "use": "Entretien 2026 avec l'équipe d'effets sur le design de Cameron/Winston."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Échelle colossale, large couronne bipartite, cou très long, quatre bras plus deux jambes puissantes, taille étroite, longue queue segmentée; abdomen/ovipositeur seulement en état de ponte.",
+        "colorMaterial": "Noir bleuté, luisant et insecto-biomécanique, arêtes de carapace plus claires sous lumière froide.",
+        "anatomy": "Six membres locomoteurs/préhenseurs visibles, double mâchoire, doigts longs, jambes digitigrades massives et crête royale stratifiée.",
+        "equipment": "Aucun équipement; l'ovipositeur est un organe temporairement relié, pas une jupe ou une armure.",
+        "cameraFacing": "Profil droit strict; la couronne, les deux paires de bras, les deux jambes et la queue doivent être séparables en silhouette."
+      },
+      "redesignProhibitions": [
+        "Pas de Queen réduite aux proportions d'un Warrior.",
+        "Pas de bijoux, trône, armure, yeux ou arme.",
+        "Pas d'ovipositeur permanent dans les animations de combat mobiles."
+      ],
+      "canonConflicts": [
+        "Les versions ultérieures modifient proportions et coloration; le modèle Aliens 1986 est la référence de contrôle. "
+      ]
+    },
+    {
+      "name": "Neuro-Xeno Drone",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Frontier",
+      "sources": [],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Drone noir lisible sous un dispositif de contrôle compact; le casque ne remplace pas le crâne allongé.",
+        "colorMaterial": "Tissu biomécanique noir, métal industriel gunmetal, isolants sombres et petits témoins ambre uniquement.",
+        "anatomy": "Anatomie xénomorphe complète et eyeless intacte; câbles fixés aux tempes et le long de la colonne, sans visage robotique.",
+        "equipment": "Casque neuro-industriel, pinces temporales, câble spinal isolé et micro-indicateurs ambre; aucune arme greffée.",
+        "cameraFacing": "Profil droit strict; casque, deux pinces et trajet du câble dorsal doivent se lire sans vue frontale."
+      },
+      "redesignProhibitions": [
+        "Pas de Xenoborg à canons laser.",
+        "Pas d'œil bleu géant, corps entièrement mécanique ou humanoïde en armure.",
+        "Pas de plaques ivoire/tendons du Ripper."
+      ],
+      "canonConflicts": [
+        "Aucun résultat crédible pour le nom exact; ne jamais présenter ce modèle comme une caste officielle de la franchise. "
+      ]
+    },
+    {
+      "name": "Xenoborg",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens versus Predator (1999/Classic 2000), continuité AVP licenciée",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3730/manuals/Aliens%20Versus%20Predator%20Classic%202000%20Manual.pdf?t=1579791217",
+          "use": "Manuel officiel: cybernétique et armes greffées."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://store.steampowered.com/app/3730/Aliens_versus_Predator?l=english",
+          "use": "Édition officielle actuellement distribuée."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Xenoborg",
+          "use": "Silhouette, canons laser, ciblage et lenteur."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe rendu lourd et anguleux par des greffes mécaniques, plateformes d'armes visibles et tête équipée d'un système de visée.",
+        "colorMaterial": "Chair noire humide opposée à du métal gunmetal/chrome mat; capteurs ponctuels, sans aplat néon.",
+        "anatomy": "Base xénomorphe encore identifiable, mais mobilité ralentie et masse augmentée par les métaux; mâchoire et queue conservées.",
+        "equipment": "Canons laser greffés et système de ciblage céphalique sont constitutifs du modèle, non des accessoires portés.",
+        "cameraFacing": "Profil droit strict; au moins un canon, la visée céphalique et la jonction chair/métal doivent être immédiatement lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de Drone naturel avec simple casque.",
+        "Pas de mécha humanoïde cachant toute anatomie xénomorphe.",
+        "Pas de remplacement par le rig ambre ATARAX."
+      ],
+      "canonConflicts": [
+        "Le Xenoborg appartient à la continuité crossover/licenciée, pas au canon écran Alien; Hunter's Planet et le jeu divergent, le manuel/jeu 1999 contrôle cette cible. "
+      ]
+    },
+    {
+      "name": "ATARAX Ripper",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Frontier",
+      "sources": [],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/prompts/V54_IMAGEGEN_WAVE.md",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Caste d'assaut lourde mais encore xénomorphe, crâne et dos renforcés de plaques ivoire, avant-bras puissants et longue queue libre.",
+        "colorMaterial": "Tissu biomécanique noir humide, armure osseuse blanc cassé, contention gunmetal, cicatrices neurales rouges discrètes et un capteur bleu compact.",
+        "anatomy": "Crâne allongé, double mâchoire, membres digitigrades et queue intacts; tendons/câbles intégrés sans effacer l'organique.",
+        "equipment": "Plaques de contention pratiques, câbles et unique capteur bleu; la létalité reste mêlée/griffe, pas artillerie.",
+        "cameraFacing": "Profil droit strict; plaques crâniennes/dorsales, capteur et mains de frappe lisibles sans trois-quarts."
+      },
+      "redesignProhibitions": [
+        "Pas de canons laser de Xenoborg.",
+        "Pas de couronne de Queen, armure blanche intégrale ou robot bipède.",
+        "Pas de multiplication des capteurs ou de néons."
+      ],
+      "canonConflicts": [
+        "Aucun modèle externe ni occurrence crédible du nom exact; l'héritage visuel Xenoborg est une décision du projet, pas une équivalence canonique. "
+      ]
+    },
+    {
+      "name": "Dust Runner",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Runner écran + corpus annulé Aliens: Crucible",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "use": "Ancre écran du xénomorphe quadrupède."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+          "use": "Sculpt licencié du Dog Alien/Runner."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/",
+          "use": "Périmètre et castes attestées du projet annulé."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "use": "Confirmation du projet annulé et de ses concepts."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Runner très bas et long, locomotion quadrupède, crâne lisse, torse en tonneau, queue-lame et absence de tubes dorsaux.",
+        "colorMaterial": "Carapace noir-russet abrasée par sable et poussière ocre; dépôts mats sur une matière humide, pas un recolor jaune uniforme.",
+        "anatomy": "Eyeless, double mâchoire, membres arrière digitigrades et pattes avant de sprint; adaptation climatique superficielle.",
+        "equipment": "Aucun équipement ni armure rapportée.",
+        "cameraFacing": "Profil droit strict en course basse; quatre appuis et queue séparés, tête jamais tournée vers le spectateur."
+      },
+      "redesignProhibitions": [
+        "Pas d'ailes, cornes de monture ou plaques métalliques.",
+        "Pas de tubes dorsaux de Drone/Warrior.",
+        "Pas de copie d'un concept Crucible non publié."
+      ],
+      "canonConflicts": [
+        "Dust Runner n'est pas un nom attesté dans Crucible; le jeu annulé n'est pas une autorité canonique et ne fournit qu'une grammaire d'adaptation. "
+      ]
+    },
+    {
+      "name": "Trilobite Echo",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Prometheus (2012) prolongé par le canon interne",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "use": "Film source du Trilobite."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://monsterlegacy.net/2013/03/04/prometheus-trilobite-deacon-hammerpede-alien/",
+          "use": "Historique de conception et distinctions des créatures."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.denofgeek.com/movies/prometheus-we-meet-the-designers-behind-the-film/",
+          "use": "Entretien avec l'équipe de design/effets."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Très grand parasite pâle de type céphalopode/facehugger, corps central mou et couronne radiale de longs tentacules préhensiles.",
+        "colorMaterial": "Chair ivoire, beige rosé et translucide, humide et organique; veines discrètes, aucune carapace noire biomécanique.",
+        "anatomy": "Appareil d'implantation central, membres souples nombreux et absence de morphologie humaine; ce n'est pas un xénomorphe adulte.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit/lateralisation claire du corps central; tentacules déployés sans former une tache illisible ni regarder la caméra."
+      },
+      "redesignProhibitions": [
+        "Pas de dôme allongé, tubes dorsaux, queue-lame ou double mâchoire de Xénomorphe.",
+        "Pas de poulpe bleu réaliste ni de facehugger miniature.",
+        "Pas de copie du plan exact de Prometheus."
+      ],
+      "canonConflicts": [
+        "Le film ne montre qu'un organisme spécifique et son stade de croissance; Echo est une lignée/variante du projet, pas une caste publiée. "
+      ]
+    },
+    {
+      "name": "Deacon Line",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Prometheus (2012) prolongé par le canon interne",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "use": "Film source du Deacon."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://avp.fandom.com/wiki/Deacon",
+          "use": "Détails anatomiques du modèle écran et historique Ultramorph."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://monsterlegacy.net/2013/03/04/prometheus-trilobite-deacon-hammerpede-alien/",
+          "use": "Conception et différences film/concepts."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Grand bipède élancé à tête bleu sombre pointue comme une mitre, torse organique, sans queue et sans tubes dorsaux.",
+        "colorMaterial": "Bleu nuit/iridescent, peau organique de type membrane placentaire; moins biomécanique et moins noire que XX121.",
+        "anatomy": "Sans yeux visibles, mâchoire protrusive avec dents externes plus humaines et dents internes crochues; membres longs et griffus.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict mettant en évidence la pointe crânienne, l'absence de queue et le contour dorsal nu."
+      },
+      "redesignProhibitions": [
+        "Pas de queue, tubes dorsaux ou dôme lisse de Big Chap.",
+        "Pas de bleu néon, armure ou stature de Queen.",
+        "Pas d'Ultramorph conceptuel à la place du résultat écran."
+      ],
+      "canonConflicts": [
+        "Deacon Line étend un individu de film en lignée; les concepts Ultramorph et l'organisme final divergent, et seul le résultat écran contrôle la base. "
+      ]
+    },
+    {
+      "name": "Protomorph",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Alien: Covenant (2017), nomenclature de projet",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.20thcenturystudios.com/movies/alien-covenant",
+          "use": "Film source de la créature adulte."
+        },
+        {
+          "tier": "PRIMARY_INTERVIEW",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://vfxblog.com/2017/06/09/practical-creature-effects-alien-covenant/",
+          "use": "Entretien effets: corps écorché, côtes, muscles, finesse et échelle."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "NAMING_GUARDRAIL",
+          "url": "https://avp.fandom.com/wiki/Praetomorph",
+          "use": "Conflit Protomorph/Praetomorph et terminologie RPG."
+        }
+      ],
+      "projectEvidence": [
+        "docs/ART_PROVENANCE_V47_1.md",
+        "src/content-core-v50.js"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe adulte extrêmement fin et haut, crâne allongé, côtes exposées, longs membres, tubes dorsaux et longue queue.",
+        "colorMaterial": "Rouge-noir chair écorchée, muscles et os visibles sous une peau sombre; plus organique et moins biomécanique que Big Chap.",
+        "anatomy": "Eyeless, double mâchoire, mains griffues, proportions presque impossiblement minces autour de neuf pieds selon l'équipe d'effets.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict; thorax écorché, crâne, tubes et queue lisibles sans vue frontale."
+      },
+      "redesignProhibitions": [
+        "Pas de peau blanche de Neomorph.",
+        "Pas de Big Chap noir métallique ou de Deacon sans queue.",
+        "Pas de stade intermédiaire arbitraire présenté comme évolution canonique."
+      ],
+      "canonConflicts": [
+        "Le générique du film emploie Xenomorph; Protomorph a circulé pendant la conception et Praetomorph est la désignation de l'ALIEN RPG. Le nom de projet ne doit pas être déclaré nom écran officiel. "
+      ]
+    },
+    {
+      "name": "Abomination",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Pathogen Brute d'Aliens: Fireteam Elite; homonyme AVP explicitement exclu",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+          "use": "Présentation officielle des ennemis Pathogen et du Brute."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+          "use": "Terminologie officielle du contenu Pathogen."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "NAME_CONFLICT",
+          "url": "https://avp.fandom.com/wiki/Predalien_%28caste%29",
+          "use": "Distingue l'Abomination Predalien d'AVP 2010 du brute Pathogen."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "NAME_CONFLICT",
+          "url": "https://store.steampowered.com/app/10680/Aliens_vs_Predator/",
+          "use": "Jeu licencié portant l'homonyme Abomination."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/ART_PROVENANCE_V47_1.md"
+      ],
+      "invariants": {
+        "silhouette": "Brute Pathogen très large et asymétrique, torse bas, bras avant hypertrophiés terminés par des masses en forme de poings, sans queue.",
+        "colorMaterial": "Chair pâle/grise contaminée, croûtes sombres et veines Pathogen discrètes; surface organique, non biomécanique.",
+        "anatomy": "Bipède monstrueux, tête petite enchâssée, épaules et avant-bras disproportionnés pour frapper le sol; aucune caractéristique Yautja.",
+        "equipment": "Aucun équipement; les masses de frappe sont des excroissances anatomiques.",
+        "cameraFacing": "Profil droit strict en appui lourd; les deux bras-massues, l'absence de queue et le volume du torse doivent rester lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de dreadlocks, mandibules ou trophées Yautja du Predalien Abomination.",
+        "Pas de queue xénomorphe, canon ou armure mécanique.",
+        "Pas de géant rouge/orange générique détaché du vocabulaire Pathogen."
+      ],
+      "canonConflicts": [
+        "Dans Aliens vs. Predator (2010), Abomination est un Predalien issu de Wolf; le registre du projet classe pourtant cette cible pathogen/brute. La référence visuelle doit donc être le Pathogen Brute ou l'entrée doit être renommée avant production. Ne jamais hybrider silencieusement les deux modèles."
+      ]
+    },
+    {
+      "name": "Weyland-Yutani Commando",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Alien 3 et continuité licenciée ALIEN RPG",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "use": "Film source de l'équipe Weyland-Yutani en apesuits."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://freeleaguepublishing.com/wp-content/uploads/2023/09/ALIEN-Evolved-Edition-Miniatures-Set-Rapture-Protocol-rules-booklet.pdf",
+          "use": "Silhouette licenciée de commando Weyland-Yutani."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Weyland-Yutani_Commando",
+          "use": "Inventaire de l'uniforme et des armes selon les apparitions."
+        },
+        {
+          "tier": "PRIMARY_ARCHIVE",
+          "relation": "PROP_REFERENCE",
+          "url": "https://content.propstore.com/auction/emlaus25-2/catalog/EMLA-US_SUMMER25_Catalog_WEB_LO.pdf",
+          "use": "Référence photographique de costume/prop authentifié."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Humain en combinaison pressurisée volumineuse blanc cassé, casque intégral à museau/visière sombre, sac dorsal et arme longue compacte.",
+        "colorMaterial": "Apesuit blanc/crème mat, joints et gants noirs, détails gris; marquages corporatifs minimaux et non ajoutés sous forme de texte lisible.",
+        "anatomy": "Proportions humaines entièrement couvertes; visage invisible derrière le casque, démarche disciplinée.",
+        "equipment": "Combinaison étanche, casque, sac de survie, M41A noir ou blanc selon continuité et éventuellement perche de capture; équipement cohérent d'une animation à l'autre.",
+        "cameraFacing": "Profil droit strict; casque, sac et arme dégagés du torse, canon orienté dans l'axe droit et jamais vers la caméra."
+      },
+      "redesignProhibitions": [
+        "Pas d'armure olive de Colonial Marine standard.",
+        "Pas de soldat futuriste noir générique ou logo géant.",
+        "Pas de visage découvert, exosquelette lourd ou arme énergétique inventée."
+      ],
+      "canonConflicts": [
+        "Les commandos varient entre les apesuits blancs d'Alien 3 et des interprétations licenciées plus tactiques; la silhouette blanche scellée d'Alien 3 est la référence de contrôle sauf choix de continuité documenté."
+      ]
+    },
+    {
+      "name": "UPP Vanguard",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Union of Progressive Peoples de l'ALIEN RPG, rôle Vanguard interne",
+      "sources": [
+        {
+          "tier": "LICENSED",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "use": "Source licenciée de l'UPP et de ses forces spéciales."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.mynewsdesk.com/us/free-league/pressreleases/lock-and-load-your-pulse-rifle-colonial-marines-operations-manual-announced-for-the-alien-rpg-3049911",
+          "use": "Annonce officielle du corpus militaire et géopolitique."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://avp.fandom.com/wiki/Union_of_Progressive_Peoples",
+          "use": "Synthèse des forces, doctrines et équipements UPP."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Fantassin humain compact en protection utilitaire, casque bas, plaques souples et fusil d'assaut à profil AK/pulse rifle distinct du M41A.",
+        "colorMaterial": "Vert gris, olive désaturé, toile sombre et métal usé; accents rouges uniquement fonctionnels, jamais costume national caricatural.",
+        "anatomy": "Proportions humaines réalistes, visage partiellement protégé, posture d'élite mobile plutôt qu'exosquelette.",
+        "equipment": "Armure légère UPP, communications, chargeurs et arme à impulsion de conception propre/rétro-ingénierie; paquetage sobre.",
+        "cameraFacing": "Profil droit strict; casque et fusil lisibles, arme pointée à droite sans raccourci frontal."
+      },
+      "redesignProhibitions": [
+        "Pas d'USCM recoloré avec M41A inchangé.",
+        "Pas d'uniforme soviétique historique, étoile géante ou propagande stéréotypée.",
+        "Pas d'armure science-fiction brillante ou de railgun inventé."
+      ],
+      "canonConflicts": [
+        "L'UPP et ses SOF sont publiés dans le canon licencié, mais Vanguard n'est pas une classe/uniforme visuel attesté; son dessin demeure une adaptation du projet."
+      ]
+    },
+    {
+      "name": "Seegson Security",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Alien: Isolation",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://alienisolation.sega.jp/special_conceptart.html",
+          "use": "Concepts officiellement publiés par SEGA/Creative Assembly."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://titanbooks.com/7252-the-art-of-alien-isolation/",
+          "use": "Artbook licencié de la production."
+        },
+        {
+          "tier": "PRIMARY_INTERVIEW",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://blog.playstation.com/2014/06/10/new-alien-isolation-details-revealed/",
+          "use": "Présentation développeur de Sevastopol et de son langage visuel."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Seegson_Security",
+          "use": "Distingue apparitions jouables et concepts coupés."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Agent humain de sécurité industrielle légère, chemise/uniforme de station, petit plastron et casque antiémeute blanc facultatif; silhouette non militaire lourde.",
+        "colorMaterial": "Blanc cassé, bleu pâle, gris et noir, tissus de travail usés et plastique rétrofuturiste années 1970.",
+        "anatomy": "Proportions humaines ordinaires, visage visible sauf casque, posture nerveuse de garde civil.",
+        "equipment": "Fusil à pompe, revolver ou matraque selon rôle; radio, lampe et protections légères, sans arsenal USCM.",
+        "cameraFacing": "Profil droit strict; visage/casque, petit plastron et arme clairement séparés; canon jamais dirigé vers l'objectif."
+      },
+      "redesignProhibitions": [
+        "Pas de Working Joe, de commando corporatif blanc scellé ou d'USCM.",
+        "Pas de fusil automatique de concept coupé pris comme équipement obligatoire.",
+        "Pas de cyberpunk néon ni de police moderne."
+      ],
+      "canonConflicts": [
+        "Une sécurité privée Seegson plus militarisée existe dans des concepts partiellement coupés; le jeu livré montre surtout un équipement civil/antiémeute limité. La version jouable prime et l'arme automatique ne doit pas devenir l'invariant."
+      ]
+    },
+    {
+      "name": "Colonial Raider",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Frontier",
+      "sources": [],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Pillard humain léger et asymétrique, manteau court ou couches de survie, masque respiratoire partiel et carabine récupérée; mobilité d'embuscade.",
+        "colorMaterial": "Toile sable/gris, cuir synthétique brun, métal rayé et quelques rubans d'identification ternes; récupération crédible, pas fantasy.",
+        "anatomy": "Proportions humaines réalistes, membres libres pour courir et s'accroupir, visage partiellement visible ou protégé contre la poussière.",
+        "equipment": "Carabine coloniale usée, sac léger, filtres et outils de récupération; aucune pièce ne copie exactement un uniforme de faction canonique.",
+        "cameraFacing": "Profil droit strict; masque, sac et arme lisibles; canon dans l'axe droit, pose basse sans torse frontal."
+      },
+      "redesignProhibitions": [
+        "Pas de Space Marine, cowboy ou raider post-apocalyptique à pointes.",
+        "Pas de logo USCM/UPP/Weyland-Yutani ni de M41A copié.",
+        "Pas de membres cybernétiques ou costume ATARAX sans preuve interne."
+      ],
+      "canonConflicts": [
+        "Aucun ennemi nommé Colonial Raider ni uniforme externe exact trouvé; ne pas le présenter comme faction officielle Alien."
+      ]
+    },
+    {
+      "name": "ATARAX Controller",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Frontier",
+      "sources": [],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Opérateur humain technique plutôt que fantassin lourd, combinaison de contrôle, casque ou serre-tête compact, module dorsal et télécommande portée au torse.",
+        "colorMaterial": "Anthracite/gunmetal, textiles industriels sombres, isolants noirs, petites lumières ambre et un seul retour bleu si nécessaire.",
+        "anatomy": "Proportions humaines réalistes, mains libres pour contrôler le réseau, visage humain encore lisible sous une protection sobre.",
+        "equipment": "Console de contrôle neurale compacte, antenne courte, câbles protégés et arme de défense secondaire; aucun canon lourd.",
+        "cameraFacing": "Profil droit strict; contrôleur, module dorsal et main opératrice dégagés sans montrer l'écran de face."
+      },
+      "redesignProhibitions": [
+        "Pas de scientifique Weyland-Yutani recoloré ou de mage technologique.",
+        "Pas d'armure intégrale lumineuse, tentacules mécaniques ou casque VR géant.",
+        "Pas de copie du Xenoborg ou du Neuro-Xeno contrôlé."
+      ],
+      "canonConflicts": [
+        "ATARAX et ce rôle humain n'ont pas de modèle externe identifié; leur fidélité se mesure uniquement au vocabulaire industriel et neural défini par le projet."
+      ]
+    },
+    {
+      "name": "Wild Boar Host",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Faune hôte du projet; distinction avec le jouet Wild Boar Alien de Kenner",
+      "sources": [
+        {
+          "tier": "PRIMARY_ARCHIVE",
+          "relation": "NAME_GUARDRAIL",
+          "url": "https://wheeljackslab.com/files/uploads/16Kenner-1994-Toy-Fair-Employee-Dealer-Vendor-Rep-Catalog-Page-22719616-fcda-4dc7-a45f-7810254d4e86.pdf",
+          "use": "Catalogue Kenner d'époque montrant l'homonyme Wild Boar Alien."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "NAME_GUARDRAIL",
+          "url": "https://avp.fandom.com/wiki/Aliens_%28Kenner%29",
+          "use": "Contexte de la gamme Kenner et de ses hybrides animaux."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "HOST_PHENOTYPE_ANCHOR",
+          "url": "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+          "use": "Règle franchise de phénotype dérivé de l'hôte, sans être le modèle de l'hôte lui-même."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Sanglier naturel compact, bas, avant-train lourd, cou court, groin allongé, petites oreilles, défenses et ligne de soies dorsales.",
+        "colorMaterial": "Peau/fourrure brun noir terreux, soies grises et défenses ivoire sales; aucune matière biomécanique.",
+        "anatomy": "Quadrupède ongulé reconnaissable, yeux latéraux, sabots fendus, queue courte; animal hôte vivant, non xénomorphe.",
+        "equipment": "Aucun équipement, harnais ou implantation visible sauf si un état narratif séparé le demande.",
+        "cameraFacing": "Profil droit strict; groin, deux défenses, quatre appuis et dos hérissé lisibles; œil latéral visible, pas de face caméra."
+      },
+      "redesignProhibitions": [
+        "Ne pas reproduire le Wild Boar Alien Kenner vert olive/osseux.",
+        "Pas de dôme, double mâchoire, queue-lame ou tubes dorsaux.",
+        "Pas de porc domestique rose, monture harnachée ou monstre fantasy."
+      ],
+      "canonConflicts": [
+        "Le nom rappelle un Xénomorphe Kenner, mais l'entrée du projet est biology=fauna, caste=host: elle représente le sanglier hôte, pas sa progéniture xénomorphe."
+      ]
+    },
+    {
+      "name": "Korari Stalker",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Faune originale sur Korari; toponyme de la continuité AVP2 licenciée",
+      "sources": [
+        {
+          "tier": "SECONDARY",
+          "relation": "SETTING_ONLY",
+          "url": "https://www.avpgalaxy.net/games/avp2/",
+          "use": "Contexte du jeu AVP2 où Korari est mentionnée, sans créature correspondante."
+        },
+        {
+          "tier": "LICENSED_ARCHIVE",
+          "relation": "SETTING_ONLY",
+          "url": "https://oldgamesdownload.com/wp-content/uploads/Aliens_versus_Predator_2_Prima_Guide.pdf",
+          "use": "Guide licencié corroborant le contexte de Korari; aucun Stalker de ce nom."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Prédateur forestier quadrupède bas, corps félin/reptilien original, membres souples, tête cunéiforme à organes sensoriels visibles et longue queue d'équilibre non tranchante.",
+        "colorMaterial": "Peau écailleuse/veloutée charbon et vert mousse, motifs d'écorce et photophores cyan rares sous le flanc.",
+        "anatomy": "Yeux ou capteurs naturels visibles, mâchoire unique, quatre membres et respiration animale; aucune anatomie XX121.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict en traque basse; œil latéral, pattes et queue séparés, tête non tournée vers le spectateur."
+      },
+      "redesignProhibitions": [
+        "Pas de dôme xénomorphe, mâchoire interne, sang acide ou queue-lame.",
+        "Pas de camouflage technologique Predator, dreadlocks ou armure Yautja.",
+        "Pas de panthère terrestre recolorée sans anatomie extraterrestre originale."
+      ],
+      "canonConflicts": [
+        "Korari est associé à la continuité crossover AVP2, distincte du canon écran Alien; aucun Korari Stalker externe n'a été trouvé. Les URL documentent seulement le lieu, pas le modèle."
+      ]
+    },
+    {
+      "name": "Ceto Reef Predator",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Frontier; statut licensed-continuity de Ceto à vérifier",
+      "sources": [],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Prédateur amphibie quadrupède fuselé, tête plate, cou court, membres-pagaies articulés, queue natatoire profonde et crête dorsale basse.",
+        "colorMaterial": "Noir bleuté/vert profond, peau humide avec plaques fines et bioluminescence cyan très retenue le long des flancs.",
+        "anatomy": "Yeux latéraux, fentes branchiales et mâchoire unique; quatre membres capables d'appui, aucun organe xénomorphe.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict, silhouette entièrement latérale; œil, branchies, quatre membres et nageoire caudale lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de Xénomorphe aquatique, dôme aveugle, double mâchoire ou tubes dorsaux.",
+        "Pas de requin terrestre, sirène ou léviathan boss hors échelle.",
+        "Pas de néon sur toute la peau ni de couleurs tropicales saturées."
+      ],
+      "canonConflicts": [
+        "Les recherches exactes Ceto + Alien/Weyland-Yutani/Colonial Marines/ALIEN RPG n'ont fourni aucune source de franchise crédible. Le champ licensed-continuity du monde dans le projet doit être vérifié séparément; la créature reste originale."
+      ]
+    },
+    {
+      "name": "Tantalus Tunnel Vermin",
+      "inventoryStatus": "authored-family",
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "continuity": "Canon interne Tantalus Reach",
+      "sources": [],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Petite vermine cavernicole très basse, corps segmenté, six à huit membres fins, tête fouisseuse protégée et appendices tactiles courts.",
+        "colorMaterial": "Chitine ivoire grise/pâle, articulations translucides et rares points photophores froids; salissure minérale mate.",
+        "anatomy": "Arthropode extraterrestre de meute, yeux réduits ou capteurs simples, mandibules fouisseuses; pas de cycle xénomorphe.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict au ras du sol; tous les membres majeurs, segmentation et antennes lisibles, sans vue dorsale."
+      },
+      "redesignProhibitions": [
+        "Pas de facehugger, chestburster ou mini-Xénomorphe.",
+        "Pas de taille de boss, de tentacules géants ou de carapace métallique.",
+        "Pas d'essaimage représenté par plusieurs sujets dans une même frame."
+      ],
+      "canonConflicts": [
+        "Aucun modèle externe exact identifié. Ne pas confondre le Tantalus Reach/USS Tantalus du projet avec Tantalus Base sur Lethe dans Aliens: Dark Descent; cette collision de nom ne crée aucun lien biologique."
+      ]
+    },
+    {
+      "name": "Boiler",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens: Colonial Marines",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié source de la caste Boiler."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/49540/manuals/ACM_STEAM_MG_UK_hr.pdf?t=1763649735",
+          "use": "Manuel officiel du jeu."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Boiler",
+          "use": "Morphologie, comportement aveugle et autodétonation acide."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe debout mais voûté, immobile/crouchissant comme une carcasse fossile, membres déformés et pustules volumineuses sur le corps.",
+        "colorMaterial": "Gris blanchâtre cadavérique, carapace mate et pustules acides jaunâtres faiblement lumineuses; salissures de ruche.",
+        "anatomy": "Aveugle même selon les standards xénomorphes, tête abîmée, posture boiteuse, double mâchoire et queue encore présentes mais secondaires.",
+        "equipment": "Aucun équipement; l'explosion est biologique.",
+        "cameraFacing": "Profil droit strict en pose basse; pustules, voûte du dos et contour de tête déformé doivent se lire sans vue frontale."
+      },
+      "redesignProhibitions": [
+        "Pas de Burster quadrupède beige de Fireteam Elite.",
+        "Pas de kamikaze rond générique ou bombe mécanique.",
+        "Pas de silhouette saine de Drone avec simple recolor blanc."
+      ],
+      "canonConflicts": [
+        "Le Boiler est propre à la continuité licenciée controversée d'Aliens: Colonial Marines; ne pas le présenter comme caste apparue dans les films."
+      ]
+    },
+    {
+      "name": "Prowler",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens: Fireteam Elite",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.focus-entmt.com/en/games/aliens-fireteam-elite",
+          "use": "Page éditeur officielle du jeu source."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+          "use": "Nomenclature officielle des ennemis."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://store.necaonline.com/products/aliens-fireteam-elite-7-scale-action-figure-prowler-alien",
+          "use": "Sculpt licencié complet et palette."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Prowler",
+          "use": "Détails de silhouette et comportement d'embuscade."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Quadrupède rouge-noir très bas et puissant, petit bouclier crânien apparenté au Crusher, dos sans grands tubes et queue robuste à lame.",
+        "colorMaterial": "Carapace rouge brun/noir, ventre sombre et reflets humides; motifs organiques, pas aplat rouge vif.",
+        "anatomy": "Eyeless, double mâchoire, épaules massives, pattes de bond et queue épaisse; profil d'ambusher distinct du Runner filiforme.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict en bond ou rampe basse; quatre appuis, petit crest et queue entièrement lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de grand bouclier de Crusher ou couronne de Praetorian.",
+        "Pas de tubes dorsaux de Warrior, yeux ou fourrure.",
+        "Pas de palette rouge néon uniforme."
+      ],
+      "canonConflicts": [
+        "La teinte varie avec l'éclairage du jeu et les produits licenciés; le contraste rouge-noir et le petit crest restent les invariants, pas une valeur RGB unique."
+      ]
+    },
+    {
+      "name": "Burster",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "CANON_REFERENCE",
+      "referenceMatch": "EXACT_EXTERNAL_MODEL",
+      "continuity": "Aliens: Fireteam Elite",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.focus-entmt.com/en/games/aliens-fireteam-elite",
+          "use": "Page éditeur officielle du jeu source."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+          "use": "Nomenclature officielle des ennemis."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_MODEL",
+          "url": "https://store.necaonline.com/products/aliens-fireteam-elite-burster-alien-7-inch-scale-action-figure",
+          "use": "Sculpt licencié complet et distribution des cystes."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_MODEL",
+          "url": "https://avp.fandom.com/wiki/Burster",
+          "use": "Morphologie et comportement explosif acide."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Quadrupède agile apparenté au Runner, corps bas beige, crâne plus court et grappes de cystes gonflés autour de la tête, du cou et des membres antérieurs.",
+        "colorMaterial": "Carapace tan/beige et brun pâle, cystes acides jaune-vert lumineux sous membrane translucide; pas de corps entier fluorescent.",
+        "anatomy": "Eyeless, double mâchoire, quatre membres de course, longue queue et vésicules biologiques destinées à éclater à proximité de la cible.",
+        "equipment": "Aucun équipement; charge et explosion sont biologiques.",
+        "cameraFacing": "Profil droit strict en course basse; cystes crâniens/pectoraux, quatre appuis et queue doivent être séparés en silhouette."
+      },
+      "redesignProhibitions": [
+        "Pas de Boiler gris debout et pustuleux d'Aliens: Colonial Marines.",
+        "Pas de bombe sphérique, armure ou sac explosif.",
+        "Pas de Prowler rouge avec quelques pustules ajoutées."
+      ],
+      "canonConflicts": [
+        "Burster et Boiler sont deux castes licenciées différentes malgré leur fonction explosive; ne jamais fusionner leurs silhouettes ou palettes."
+      ]
+    },
+    {
+      "name": "Monica Line",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Aliens: Infiltrator / Aliens: Fireteam Elite prolongé en lignée interne",
+      "sources": [
+        {
+          "tier": "LICENSED",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.penguinrandomhouse.com/books/635223/aliens-infiltrator-by-weston-ochse/",
+          "use": "Roman licencié source de Monica Enright et de l'expérimentation."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.aliensfireteamelite.com/en/purchase/",
+          "use": "Jeu officiel qui met en scène Three/Monica."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_INDIVIDUAL",
+          "url": "https://avp.fandom.com/wiki/Three_%28Drone%29",
+          "use": "Détails visuels et biologiques de Three."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "IDENTITY_CONTEXT",
+          "url": "https://avp.fandom.com/wiki/Monica_Enright",
+          "use": "Lien entre Monica Enright et le spécimen."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Drone anormalement grand et résistant, encore reconnaissable comme XX121, crâne lisse, longs membres, tubes dorsaux et queue; masse légèrement accrue sans devenir Crusher.",
+        "colorMaterial": "Peau/carapace très sombre et cuirassée, bandes ou zébrures grises irrégulières liées à la mutation Pathogen, brillance organique retenue.",
+        "anatomy": "Eyeless, double mâchoire, anatomie de Drone complète et modifications Pathogen non mécaniques; aucune physionomie humaine résiduelle.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict; crâne, tubes, zébrures, membres et queue entièrement lisibles, sans regard caméra."
+      },
+      "redesignProhibitions": [
+        "Pas de visage féminin, cheveux, vêtement ou plaque nominative Monica.",
+        "Pas de brute Pathogen sans queue ni de Queen.",
+        "Pas de reproduction exacte de Three si la cible est une lignée distincte: conserver une variation originale contrôlée."
+      ],
+      "canonConflicts": [
+        "Monica/Three est un individu unique, pas une caste ou lignée publiée. Monica Line est une extrapolation du projet; les zébrures et la grande taille peuvent être héritées, mais l'identité de Monica ne doit pas être clonée sur toute une population."
+      ]
+    },
+    {
+      "name": "Specimen Six Line",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Aliens vs. Predator (2010) prolongé en lignée interne",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/10680/manuals/AVP_G4W_MG_UK_DD.pdf?t=1763676764",
+          "use": "Manuel officiel du jeu et campagne Alien."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://store.steampowered.com/app/10680/Aliens_vs_Predator/",
+          "use": "Jeu licencié source de Specimen Six."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DIRECT_INDIVIDUAL",
+          "url": "https://avp.fandom.com/wiki/Specimen_6",
+          "use": "Étapes Warrior, Praetorian et Queen, intelligence et marque."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "DIRECT_INDIVIDUAL",
+          "url": "https://prodosgames.com/sites/prodosgames.com/files/files/avpunleashed_specimen6.pdf",
+          "use": "Profil de jeu de figurines licencié consacré à Six."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Base Warrior athlétique et intelligente; une variante de progression peut gagner une petite crête Praetorian, mais chaque asset doit choisir un stade clair et stable.",
+        "colorMaterial": "Carapace noire/brun sombre humide, crâne côtelé au stade Warrior; aucune couleur héroïque ou lueur surnaturelle.",
+        "anatomy": "Eyeless, double mâchoire, tubes dorsaux, longue queue; proportions propres au stade choisi, sans mélange miniature Warrior/Queen.",
+        "equipment": "Aucun équipement; la marque 6 frontale est une cicatrice/marque diégétique propre à l'individu original, pas un accessoire.",
+        "cameraFacing": "Profil droit strict; stade, crâne et queue lisibles. Si la marque 6 apparaît, elle reste latérale et discrète, jamais tournée vers la caméra pour la montrer."
+      },
+      "redesignProhibitions": [
+        "Pas de chiffre 6 imprimé sur tous les membres de la lignée.",
+        "Pas de couronne de Queen sur un corps de Warrior ni d'évolution mélangée.",
+        "Pas d'armure, télépathie visualisée par aura ou visage expressif humain."
+      ],
+      "canonConflicts": [
+        "Six est un individu unique qui évolue Warrior vers Praetorian puis Queen. Specimen Six Line est une adaptation; le chiffre et le parcours exact ne sont pas héréditaires et ne doivent pas devenir les invariants de toute la lignée."
+      ]
+    },
+    {
+      "name": "Foundry Drone",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Corpus de production Aliens: Colonial Marines, variante interne de fonderie",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié et castes de base du corpus."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/49540/manuals/ACM_STEAM_MG_UK_hr.pdf?t=1763649735",
+          "use": "Manuel officiel et vocabulaire de gameplay."
+        },
+        {
+          "tier": "PRIMARY_ARTIST",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://icon-ninja.artstation.com/projects/oOoGew",
+          "use": "Portfolio du production artist Kale Menges."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+          "use": "Galerie documentaire des concepts de production."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Drone classique lisse et élancé, crâne allongé, quatre tubes dorsaux et longue queue; adaptation environnementale de surface seulement.",
+        "colorMaterial": "Noir gunmetal couvert de suie, zones brunies par chaleur et cicatrices minérales mates; aucune lave interne.",
+        "anatomy": "Anatomie XX121 intacte, eyeless et biomécanique; fissures/cicatrices non lumineuses, articulations fonctionnelles.",
+        "equipment": "Aucun équipement; aucun morceau de fonderie porté comme armure.",
+        "cameraFacing": "Profil droit strict; crâne lisse, tubes, zones de brûlure, pieds et queue visibles sans raccourci."
+      },
+      "redesignProhibitions": [
+        "Pas d'élémentaire de lave, fissures orange lumineuses ou cornes volcaniques.",
+        "Pas de Crusher miniature ni de Warrior côtelé.",
+        "Pas de copie d'un concept ACM précis non attesté sous ce nom."
+      ],
+      "canonConflicts": [
+        "Foundry Drone n'est pas un nom/caste retrouvé dans les sources publiées d'Aliens: Colonial Marines. Le tag concept-acm du projet autorise une dérivation originale, pas l'attribution d'un concept coupé sans preuve."
+      ]
+    },
+    {
+      "name": "Foundry Crusher",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Crusher d'Aliens: Colonial Marines adapté à la fonderie",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié source du Crusher."
+        },
+        {
+          "tier": "PRIMARY_ARTIST",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://icon-ninja.artstation.com/projects/oOoGew",
+          "use": "Portfolio d'un production artist du jeu."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.complex.com/pop-culture/a/michael-rougeau/interview-aliens-colonial-marines-design-director-on-the-legacy-prometheus-and-making-a-modern-game",
+          "use": "Entretien avec le design director sur les nouvelles castes, dont Crusher."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+          "use": "Galerie documentaire de la production."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Tank quadrupède très bas: immense plaque crânienne de bélier, cou court, avant-train massif, arrière-train plus petit et queue d'équilibre.",
+        "colorMaterial": "Carapace noir-brun/gunmetal, plaque frontale durcie et abrasée, suie et marques thermiques ocre sans incandescence.",
+        "anatomy": "Eyeless, mâchoire protégée sous le bouclier, épaules puissantes et locomotion de charge; le bouclier est anatomique et pare-balles.",
+        "equipment": "Aucun équipement ni plaque métallique ajoutée.",
+        "cameraFacing": "Profil droit strict en charge; plaque frontale, quatre appuis et différence avant/arrière immédiatement lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de corne de rhinocéros, canon ou blindage industriel boulonné.",
+        "Pas de couronne de Queen/Praetorian.",
+        "Pas de monstre de magma lumineux."
+      ],
+      "canonConflicts": [
+        "Crusher est licencié, Foundry Crusher ne l'est pas: les marques de fonderie restent une adaptation superficielle et ne doivent pas altérer le bouclier anatomique canonique."
+      ]
+    },
+    {
+      "name": "Reef Stalker",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Corpus de production Aliens: Colonial Marines, variante aquatique interne",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié et grammaire des castes."
+        },
+        {
+          "tier": "PRIMARY_ARTIST",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://icon-ninja.artstation.com/projects/oOoGew",
+          "use": "Portfolio d'un production artist du jeu."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+          "use": "Galerie documentaire des concepts."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CONTEXT",
+          "url": "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/",
+          "use": "Contexte de publication d'art de production supplémentaire."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe amphibie fuselé, locomotion quadrupède basse, crâne lisse, éléments dorsaux aplatis comme des nageoires et longue queue propulsive à lame verticale contenue.",
+        "colorMaterial": "Carapace noire bleu-vert, humide, iridescence froide et dépôts de sel/algues très légers; pas d'écailles de poisson colorées.",
+        "anatomy": "Eyeless et double mâchoire, membres XX121 adaptés à la nage sans devenir nageoires sans doigts; cage biomécanique conservée.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict; crâne, nageoires dorsales, quatre membres et queue natatoire entièrement lisibles."
+      },
+      "redesignProhibitions": [
+        "Pas de visage de poisson, yeux, branchies géantes ou gueule de requin.",
+        "Pas de sirène, tentacules ou reptile marin générique.",
+        "Pas de copie attribuée à tort à un concept ACM précis."
+      ],
+      "canonConflicts": [
+        "Aucun Reef Stalker publié sous ce nom n'a été trouvé dans le corpus ACM; le modèle est une adaptation originale à partir de la grammaire XX121 et de concepts environnementaux non canoniques."
+      ]
+    },
+    {
+      "name": "Reef Spitter",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Spitter/Ranger d'Aliens: Colonial Marines adapté au récif",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié source de la caste Spitter/Ranger."
+        },
+        {
+          "tier": "PRIMARY_ARTIST",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://icon-ninja.artstation.com/projects/oOoGew",
+          "use": "Portfolio d'un production artist du jeu."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://avp.fandom.com/wiki/Spitter_%28Ranger%29",
+          "use": "Posture, glandes acides et attaque à distance."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+          "use": "Galerie documentaire des concepts."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Variante de récif plus haute de l'avant que Reef Stalker, cou/gorge gonflable, crâne étroit relevé pour cracher et queue natatoire longue.",
+        "colorMaterial": "Noir bleu-vert humide, sacs glandulaires jaune acide sous la gorge seulement et fines plaques dorsales aquatiques.",
+        "anatomy": "Eyeless, double mâchoire, glandes biologiques connectées à la bouche, membres de Xénomorphe amphibie et non canon tubulaire.",
+        "equipment": "Aucun équipement; projectile acide biologique non visible hors animation d'attaque.",
+        "cameraFacing": "Profil droit strict; ligne bouche-gorge, sac acide et queue lisibles, jet éventuel horizontal à droite et jamais vers la caméra."
+      },
+      "redesignProhibitions": [
+        "Pas de fusil/canon biologique, trompe ou gueule de poisson.",
+        "Pas de sacs néon géants couvrant tout le torse.",
+        "Pas de Spitter terrestre simplement recoloré sans adaptations du récif."
+      ],
+      "canonConflicts": [
+        "Reef Spitter n'est pas une caste ACM attestée; seule la fonction du Spitter/Ranger et la grammaire xénomorphe sont externes, l'écophénotype marin est original au projet."
+      ]
+    },
+    {
+      "name": "Siege Royal",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Castes royales et corpus Aliens: Colonial Marines, rôle de siège interne",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+          "use": "Jeu licencié et castes du corpus."
+        },
+        {
+          "tier": "PRIMARY_ARTIST",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://icon-ninja.artstation.com/projects/oOoGew",
+          "use": "Portfolio d'un production artist du jeu."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+          "use": "Galerie documentaire des concepts."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CONTEXT",
+          "url": "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/",
+          "use": "Contexte de publication d'art de production."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Royal de taille Praetorian, bipède lourd, large crête stratifiée mais nettement plus petite que la couronne d'une Queen, épaules puissantes et queue de siège.",
+        "colorMaterial": "Carapace noire/gunmetal avec arêtes brun sombre, cicatrices de combat et humidité organique; aucune livrée héraldique.",
+        "anatomy": "Eyeless, double mâchoire, quatre tubes dorsaux réduits, mains griffues et jambes digitigrades; aucune paire de petits bras de Queen.",
+        "equipment": "Aucun équipement; le rôle de siège vient de la masse et de la crête, pas d'une arme portée.",
+        "cameraFacing": "Profil droit strict; contour de crête, bras, jambes et queue séparés, torse jamais frontal."
+      },
+      "redesignProhibitions": [
+        "Pas de Queen miniature avec six membres ou ovipositeur.",
+        "Pas d'armure, bouclier porté, bijoux ou canon.",
+        "Pas de Crusher quadrupède avec simple couronne."
+      ],
+      "canonConflicts": [
+        "Siege Royal n'est pas un nom attesté dans ACM. Le niveau Praetorian est l'ancre de proportion; toute hiérarchie biologique supplémentaire relève du projet et ne doit pas être déclarée canonique."
+      ]
+    },
+    {
+      "name": "Salvage Hive Brute",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Corpus annulé Aliens: Crucible, caste interne",
+      "sources": [
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "use": "Informations rétrospectives sur le jeu annulé."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/",
+          "use": "Dossier documentaire sur Crucible."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/gallery/",
+          "use": "Galerie des matériaux récupérés du projet."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CONTEXT",
+          "url": "https://gizmodo.com/the-weird-creatures-we-would-have-met-in-aliens-crucib-5741984",
+          "use": "Compte rendu contemporain des créatures montrées."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe très trapu de ruche, épaules et avant-bras lourds, tête protégée, démarche bipède/knuckle-walk basse; morceaux de salvage pris dans résine et carapace.",
+        "colorMaterial": "Carapace noir-brun, résine ambrée mate, métal rouillé et câbles morts incrustés; aucun élément alimenté ou propre.",
+        "anatomy": "Eyeless, double mâchoire, queue et articulation XX121 intactes sous une masse de brute; les débris ne remplacent pas les organes.",
+        "equipment": "Salvage passif enchâssé dans la résine de ruche, jamais arme tenue, exosquelette fonctionnel ou sac à dos.",
+        "cameraFacing": "Profil droit strict; tête, masse des bras, queue et quelques incrustations lisibles sans masquer la silhouette."
+      },
+      "redesignProhibitions": [
+        "Pas de mécha, cyborg ou armure de ferraille articulée.",
+        "Pas de mutant Fallout à chaîne ou massue.",
+        "Pas de copie d'une créature Crucible divulguée sans attribution exacte."
+      ],
+      "canonConflicts": [
+        "Salvage Hive Brute n'apparaît pas parmi les noms attestés de Crucible; le jeu annulé et ses fuites ne sont pas canon. Cette entrée est une adaptation originale de son ambiance, pas une restauration historique."
+      ]
+    },
+    {
+      "name": "Arcology Lurker",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Corpus annulé Aliens: Crucible, caste interne",
+      "sources": [
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "use": "Informations rétrospectives sur le jeu annulé."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/",
+          "use": "Dossier documentaire sur Crucible."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/gallery/",
+          "use": "Galerie des matériaux récupérés du projet."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CONTEXT",
+          "url": "https://gizmodo.com/the-weird-creatures-we-would-have-met-in-aliens-crucib-5741984",
+          "use": "Compte rendu contemporain des créatures montrées."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe extrêmement fin de murs et conduits, longs avant-bras/doigts, jambes repliables, crâne étroit et queue préhensile; volume minimal pour l'embuscade.",
+        "colorMaterial": "Noir graphite moucheté de gris industriel, carapace peu brillante et contamination de poussière; camouflage optique uniquement naturel par valeur.",
+        "anatomy": "Eyeless, double mâchoire, articulation XX121 hypermobile et doigts adhésifs/griffus; aucune technologie Predator.",
+        "equipment": "Aucun équipement.",
+        "cameraFacing": "Profil droit strict plaqué ou accroupi; longueur des membres, doigts, crâne et queue clairement séparés."
+      },
+      "redesignProhibitions": [
+        "Pas d'invisibilité Predator, effet transparent ou appareil de camouflage.",
+        "Pas d'araignée à huit pattes ni de Slenderman humain.",
+        "Pas de copie d'un Stalker Crucible non vérifié."
+      ],
+      "canonConflicts": [
+        "Arcology Lurker n'est pas un nom attesté de Crucible; même l'éventuel Stalker du corpus annulé ne suffit pas à établir cette anatomie comme canon. La forme doit rester une adaptation originale."
+      ]
+    },
+    {
+      "name": "Caravan Stalker",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Corpus annulé Aliens: Crucible, caste interne de frontière",
+      "sources": [
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "use": "Informations rétrospectives sur le jeu annulé."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/",
+          "use": "Dossier documentaire sur Crucible."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CORPUS",
+          "url": "https://www.avpgalaxy.net/games/aliens-crucible/gallery/",
+          "use": "Galerie des matériaux récupérés du projet."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "CONCEPT_CONTEXT",
+          "url": "https://gizmodo.com/the-weird-creatures-we-would-have-met-in-aliens-crucib-5741984",
+          "use": "Compte rendu contemporain des créatures montrées."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Xénomorphe quadrupède moyen, bas et endurant, crâne lisse, membres de course, tubes dorsaux réduits et longue queue d'équilibre adaptée au terrain ouvert.",
+        "colorMaterial": "Carapace noir-brun usée, poussière sable et arêtes mates blanchies; aucune couverture textile.",
+        "anatomy": "Eyeless, double mâchoire et quatre membres XX121; adaptation de locomotion sans devenir un animal terrestre ordinaire.",
+        "equipment": "Aucun équipement, selle, sac, chaîne ou trophée de caravane.",
+        "cameraFacing": "Profil droit strict en course basse; quatre appuis, crâne et queue complets, tête non tournée vers le public."
+      },
+      "redesignProhibitions": [
+        "Pas de monture harnachée, cheval alien ou chameau biomécanique.",
+        "Pas de Raider humain fusionné à la créature.",
+        "Pas de copie d'un concept Crucible divulgué sans correspondance de nom."
+      ],
+      "canonConflicts": [
+        "Caravan Stalker n'est pas un nom attesté de Crucible. Le monde de frontière et la locomotion sont des choix du projet; aucun concept annulé ne doit être présenté comme modèle exact."
+      ]
+    },
+    {
+      "name": "Cult Host",
+      "inventoryStatus": "missing-dedicated-art",
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "continuity": "Cultistes/Guardian d'Aliens: Dark Descent et corpus de romans ALIEN",
+      "sources": [
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+          "use": "Jeu officiel source du culte de Lethe."
+        },
+        {
+          "tier": "PRIMARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://www.focus-entmt.com/en/news/tindalos-and-focus-reveal-story-trailer-for-aliens-dark-descent",
+          "use": "Bande-annonce narrative et contexte officiel des cultistes."
+        },
+        {
+          "tier": "SECONDARY",
+          "relation": "DERIVATION_ANCHOR",
+          "url": "https://avp.fandom.com/wiki/Guardian_%28Lethe%29",
+          "use": "Détails du Guardian, de l'Embryostatis et des modifications."
+        },
+        {
+          "tier": "LICENSED",
+          "relation": "CORPUS_ANCHOR",
+          "url": "https://media.titanbooks.com/rights/guides/files/rights_fbf24.pdf",
+          "use": "Guide de droits Titan documentant le roman licencié Alien: Cult."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "invariants": {
+        "silhouette": "Humain colon amaigri en vêtements de travail, posture volontaire mais fiévreuse, modifications de contention abdominale/pectorale et appareillage médical récupéré très limité.",
+        "colorMaterial": "Textiles gris, beige et brun de colonie, peau malsaine, sang séché et métal médical mat; symboles rituels sobres non textuels.",
+        "anatomy": "Proportions humaines conservées, visage humain visible, ventre/thorax contenant ou protégeant un embryon selon variante; pas de transformation xénomorphe complète.",
+        "equipment": "Harnais médical/Embryostatis simplifié, attaches, injecteurs et arme improvisée optionnelle; aucun bâton magique ou reliquaire fantasy.",
+        "cameraFacing": "Profil droit strict; visage, abdomen appareillé et outil/arme lisibles, dispositif jamais montré frontalement comme une icône."
+      },
+      "redesignProhibitions": [
+        "Pas de zombie, démon, prêtre en robe fantasy ou Xénomorphe humanoïde.",
+        "Pas de chestburster exposé comme mascotte permanente hors stade narratif.",
+        "Pas de symboles religieux réels, texte, logo ou reproduction exacte du Guardian."
+      ],
+      "canonConflicts": [
+        "Guardian est un individu/rôle spécifique de Lethe doté d'Embryostatis, pas une classe universelle nommée Cult Host. Le projet peut dériver un hôte cultiste, mais doit conserver son humanité et ne pas déclarer cette variante canonique."
+      ]
+    }
+  ],
+  "summary": {
+    "referenceStatusCounts": {
+      "CANON_REFERENCE": 9,
+      "PROJECT_ORIGINAL": 7,
+      "PROJECT_ADAPTATION": 18
+    },
+    "referenceMatchCounts": {
+      "EXACT_EXTERNAL_MODEL": 9,
+      "NO_EXTERNAL_MODEL": 7,
+      "DERIVED_FROM_EXTERNAL_MODEL": 18
+    },
+    "exactExternalModels": [
+      "Drone / Big Chap",
+      "Warrior",
+      "Queen",
+      "Xenoborg",
+      "Weyland-Yutani Commando",
+      "Seegson Security",
+      "Boiler",
+      "Prowler",
+      "Burster"
+    ],
+    "derivedExternalModels": [
+      "Dust Runner",
+      "Trilobite Echo",
+      "Deacon Line",
+      "Protomorph",
+      "Abomination",
+      "UPP Vanguard",
+      "Wild Boar Host",
+      "Monica Line",
+      "Specimen Six Line",
+      "Foundry Drone",
+      "Foundry Crusher",
+      "Reef Stalker",
+      "Reef Spitter",
+      "Siege Royal",
+      "Salvage Hive Brute",
+      "Arcology Lurker",
+      "Caravan Stalker",
+      "Cult Host"
+    ],
+    "noExternalModels": [
+      "Neuro-Xeno Drone",
+      "ATARAX Ripper",
+      "Colonial Raider",
+      "ATARAX Controller",
+      "Korari Stalker",
+      "Ceto Reef Predator",
+      "Tantalus Tunnel Vermin"
+    ],
+    "withoutExactExternalModel": [
+      "Neuro-Xeno Drone",
+      "ATARAX Ripper",
+      "Dust Runner",
+      "Trilobite Echo",
+      "Deacon Line",
+      "Protomorph",
+      "Abomination",
+      "UPP Vanguard",
+      "Colonial Raider",
+      "ATARAX Controller",
+      "Wild Boar Host",
+      "Korari Stalker",
+      "Ceto Reef Predator",
+      "Tantalus Tunnel Vermin",
+      "Monica Line",
+      "Specimen Six Line",
+      "Foundry Drone",
+      "Foundry Crusher",
+      "Reef Stalker",
+      "Reef Spitter",
+      "Siege Royal",
+      "Salvage Hive Brute",
+      "Arcology Lurker",
+      "Caravan Stalker",
+      "Cult Host"
+    ]
+  }
+}

@@ -4,6 +4,10 @@ import {
   ELECTRICAL_HAZARD_ART_V55,
   HUB_ART_ASSETS_V55
 } from './hub-art-runtime-v55.js';
+import {
+  HUB_ROOM_ART_ASSETS_V56,
+  resolveHubRoomArtV56
+} from './hub-art-runtime-v56.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -15,7 +19,6 @@ const GRAVITY = 1900;
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const assetReady = (image) => Boolean(image?.complete && image.naturalWidth);
-const HUB_FOREGROUND = '/assets/openai/metroidvania/tantalus-mission-foreground.png';
 const NPC_SPRITE_FILES = Object.freeze([
   '/assets/openai/sprites/normalized/npcs/mara-vega-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/npcs/idris-kwan-locomotion-sheet.png',
@@ -151,8 +154,9 @@ export const HUB_DECKS = Object.freeze([
 export const HUB_ROOM_COUNT = HUB_DECKS.reduce((total, deck) => total + deck.rooms.length, 0);
 export const HUB_MODULAR_ASSETS = Object.freeze([...new Set([
   ...HUB_DECKS.flatMap((deck) => [deck.farBackground, ...deck.rooms.flatMap((room) => (
-    room.id === DROPSHIP_HANGAR_ART_V55.roomId ? [] : [room.background, room.prop]
+    room.id === DROPSHIP_HANGAR_ART_V55.roomId ? [] : [room.prop]
   ))]),
+  ...HUB_ROOM_ART_ASSETS_V56,
   ...HUB_MODULAR_PROP_FILES,
   ...HUB_ART_ASSETS_V55
 ])]);
@@ -172,14 +176,14 @@ export class HubGame {
     this.onAction = onAction;
     this.onPersist = onPersist;
     this.onStatus = onStatus;
-    this.roomImages = new Map(HUB_DECKS.flatMap((deck) => deck.rooms).filter((room) => room.id !== DROPSHIP_HANGAR_ART_V55.roomId).map((room) => [room.background, createImage(room.background)]));
+    this.roomImages = new Map(HUB_DECKS.flatMap((deck) => deck.rooms).filter((room) => room.id !== DROPSHIP_HANGAR_ART_V55.roomId && !resolveHubRoomArtV56(room.id)).map((room) => [room.background, createImage(room.background)]));
+    this.roomLayerImages = new Map(HUB_ROOM_ART_ASSETS_V56.map((source) => [source, createImage(source)]));
     this.farLayers = new Map(HUB_DECKS.map((deck) => [deck.farBackground, createImage(deck.farBackground)]));
     this.propImages = new Map(HUB_MODULAR_PROP_FILES.map((source) => [source, createImage(source)]));
     this.hubArtImages = new Map(HUB_ART_ASSETS_V55.map((source) => [source, createImage(source)]));
     this.playerSheet = createImage(PLAYER_SPRITE_FILE);
     this.npcSheets = NPC_SPRITE_FILES.map(createImage);
     this.crewSheet = this.npcSheets[0];
-    this.foregroundLayer = createImage(HUB_FOREGROUND);
     this.keys = new Set();
     this.running = false;
     this.last = 0;
@@ -515,24 +519,27 @@ export class HubGame {
 
   getAssetReport() {
     const roomAssetsReady = [...this.roomImages.values()].filter(assetReady).length;
+    const roomLayerAssetsReady = [...this.roomLayerImages.values()].filter(assetReady).length;
     const parallaxAssetsReady = [...this.farLayers.values()].filter(assetReady).length;
     const propAssetsReady = [...this.propImages.values()].filter(assetReady).length;
     const hubArtAssetsReady = [...this.hubArtImages.values()].filter(assetReady).length;
-    const runtimeArtReady = [this.playerSheet, this.foregroundLayer, ...this.npcSheets].filter(assetReady).length;
+    const runtimeArtReady = [this.playerSheet, ...this.npcSheets].filter(assetReady).length;
     return {
       roomAssetsReady,
       roomAssetCount: this.roomImages.size,
+      roomLayerAssetsReady,
+      roomLayerAssetCount: this.roomLayerImages.size,
       parallaxAssetsReady,
       parallaxAssetCount: this.farLayers.size,
       propAssetsReady,
       propAssetCount: this.propImages.size,
       hubArtAssetsReady,
       hubArtAssetCount: this.hubArtImages.size,
-      readyAssetCount: roomAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady,
+      readyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady,
       modularAssetCount: HUB_MODULAR_ASSETS.length,
       runtimeArtReady,
-      runtimeArtCount: this.npcSheets.length + 2,
-      totalReadyAssetCount: roomAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady + runtimeArtReady
+      runtimeArtCount: this.npcSheets.length + 1,
+      totalReadyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady + runtimeArtReady
     };
   }
 
@@ -545,8 +552,9 @@ export class HubGame {
       running: this.running,
       deck: this.state?.deck ?? 0,
       roomId: room.id,
-      roomBackground: room.id === DROPSHIP_HANGAR_ART_V55.roomId ? null : room.background,
-      roomComposition: room.id === DROPSHIP_HANGAR_ART_V55.roomId ? 'modular-v55' : 'room-bitmap',
+      roomBackground: room.id === DROPSHIP_HANGAR_ART_V55.roomId || resolveHubRoomArtV56(room.id) ? null : room.background,
+      roomComposition: room.id === DROPSHIP_HANGAR_ART_V55.roomId
+        ? 'modular-v55' : resolveHubRoomArtV56(room.id) ? 'modular-v56' : 'room-bitmap',
       x: Math.round(this.player?.x || 0),
       y: Math.round(this.player?.y || 0),
       cameraX: Math.round(this.camera?.x || 0),
@@ -558,6 +566,7 @@ export class HubGame {
       roomCollisionSource: room.collisionSource || 'fallback',
       activeDoorState: Number((activeDoor?.progress || 0).toFixed(2)),
       roomAssetsReady: assetReport.roomAssetsReady,
+      roomLayerAssetsReady: assetReport.roomLayerAssetsReady,
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
       propAssetsReady: assetReport.propAssetsReady,
       hubArtAssetsReady: assetReport.hubArtAssetsReady,
@@ -638,29 +647,38 @@ export class HubGame {
     }
     this.drawPlayer(ctx);
     for (const door of this.doorStates) this.drawDoor(ctx, door);
-    for (const room of deck.rooms) if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
+    for (const room of deck.rooms) {
+      if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
+      else if (resolveHubRoomArtV56(room.id)) this.drawModularRoomV56(ctx, room, 'front');
+    }
   }
 
   drawRoomModule(ctx, room, farImage) {
     const image = this.roomImages.get(room.background);
     const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
     const modularHangar = room.id === DROPSHIP_HANGAR_ART_V55.roomId;
+    const modularRoom = resolveHubRoomArtV56(room.id);
     ctx.fillStyle = room.index % 2 ? '#0a1111' : '#080e0f';
     ctx.fillRect(room.xStart, 0, roomWidth, FLOOR_Y);
-    if (modularHangar) this.drawModularHangar(ctx, room, 'back');
-    else if (assetReady(image)) {
-      const width = roomWidth * (room.profile?.sceneScale || 1);
-      const height = image.naturalHeight * (width / image.naturalWidth);
-      const x = room.xStart + (roomWidth - width) / 2;
-      const y = FLOOR_Y - height * (room.profile?.floorRatio || 0.82);
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
-      ctx.clip();
-      ctx.drawImage(image, x, y, width, height);
-      ctx.restore();
+    if (modularRoom) {
+      this.drawViewportParallax(ctx, room.viewport, farImage);
+      this.drawModularRoomV56(ctx, room, 'back');
+    } else {
+      if (modularHangar) this.drawModularHangar(ctx, room, 'back');
+      else if (assetReady(image)) {
+        const width = roomWidth * (room.profile?.sceneScale || 1);
+        const height = image.naturalHeight * (width / image.naturalWidth);
+        const x = room.xStart + (roomWidth - width) / 2;
+        const y = FLOOR_Y - height * (room.profile?.floorRatio || 0.82);
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
+        ctx.clip();
+        ctx.drawImage(image, x, y, width, height);
+        ctx.restore();
+      }
+      this.drawViewportParallax(ctx, room.viewport, farImage);
     }
-    this.drawViewportParallax(ctx, room.viewport, farImage);
     const edgeShade = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
     edgeShade.addColorStop(0, 'rgba(0, 3, 4, .42)');
     edgeShade.addColorStop(0.08, 'rgba(0, 3, 4, 0)');
@@ -701,6 +719,26 @@ export class HubGame {
       }
       ctx.restore();
     }
+    ctx.restore();
+  }
+
+  drawModularRoomV56(ctx, room, phase) {
+    const contract = resolveHubRoomArtV56(room.id);
+    if (!contract) return;
+    const entry = contract.renderStack.find((candidate) => candidate.phase === phase && candidate.asset);
+    const image = entry && this.roomLayerImages.get(entry.asset);
+    if (!entry || !assetReady(image)) return;
+    const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
+    const scaleX = roomWidth / LOGICAL_WIDTH;
+    const target = entry.renderBounds;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
+    ctx.clip();
+    ctx.drawImage(
+      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      room.xStart + target.x * scaleX, target.y, target.w * scaleX, target.h
+    );
     ctx.restore();
   }
 
@@ -841,20 +879,8 @@ export class HubGame {
     ctx.restore();
   }
 
-  drawForegroundParallax(ctx) {
-    if (this.currentRoom()?.id === DROPSHIP_HANGAR_ART_V55.roomId) return;
-    const image = this.foregroundLayer;
-    if (!assetReady(image)) return;
-    const height = 220;
-    const width = image.naturalWidth * (height / image.naturalHeight);
-    const spacing = Math.max(320, width - 18);
-    const offset = -((this.camera.x * 1.1) % spacing);
-    ctx.save();
-    ctx.globalAlpha = 0.25;
-    for (let x = offset - spacing; x < LOGICAL_WIDTH + spacing; x += spacing) {
-      ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
-    }
-    ctx.restore();
+  drawForegroundParallax() {
+    // Every authored hub room now supplies its own perspective-correct foreground layer.
   }
 
   drawHud(ctx) {

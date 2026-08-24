@@ -138,9 +138,12 @@ test('combat, resources, cover, tracker, gates, boss, archive and extraction cha
   assert.equal(engine.interact(engine.player), true);
   assert.equal(engine.player.weaponMode, 'rifle');
   assert.equal(engine.player.magazineSize, baseOptions.weapon.magazine);
+  const liveEnemies = engine.enemies.filter((enemy) => enemy.alive);
+  for (const enemy of liveEnemies) enemy.alive = false;
   const ammoBefore = engine.player.ammo;
   assert.equal(engine.fire(engine.player), true);
   assert.equal(engine.player.ammo, ammoBefore - 1);
+  for (const enemy of liveEnemies) enemy.alive = true;
   engine.player.fireClock = 0;
   engine.player.ammo = 0;
   assert.equal(engine.reload(engine.player), true);

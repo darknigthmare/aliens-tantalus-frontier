@@ -182,10 +182,14 @@ test('active crises keep priority, alert the crew and still resolve through the 
   hub.start({ deck: 0, roomId: 'bridge', positionX: 180, activeCrisis: { id: 'v52-breach', kind: 'xenomorph', count: 1 } });
   assert.equal(hub.getSnapshot().crisisActive, true);
   assert.ok(hub.npcs.every((npc) => npc.alerted));
-  const crisisClips = hub.getSnapshot().npcAnimations.map((entry) => entry.clipId);
-  assert.ok(crisisClips.every((clipId) => ['ready', 'alert-reaction'].includes(clipId)));
-  assert.ok(crisisClips.includes('ready'));
-  assert.ok(crisisClips.includes('alert-reaction'));
+  const crisisAnimations = hub.getSnapshot().npcAnimations;
+  assert.equal(crisisAnimations.length, 4);
+  assert.ok(crisisAnimations.every((entry) => entry.clipId === 'ready'));
+  for (const entry of crisisAnimations) {
+    assert.equal(entry.sheetId, CREW_MISSION_SPRITE_IDS[entry.crewId], `${entry.crewId}: plaque mission dédiée`);
+  }
+  assert.equal(new Set(crisisAnimations.map((entry) => entry.sheetId)).size, 4, 'aucun partage de plaque entre identités');
+  assert.equal(crisisAnimations.some((entry) => entry.clipId === 'alert-reaction'), false, 'aucun retour locomotion quand la plaque mission existe');
 
   const npc = hub.npcs[0];
   Object.assign(hub.player, { x: npc.x, y: npc.y, vx: 0, vy: 0, grounded: true });

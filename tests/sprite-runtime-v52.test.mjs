@@ -6,7 +6,6 @@ import {
   CREW_MISSION_SPRITE_IDS,
   CREW_SPRITE_IDS,
   SPRITE_CLIP_SETS,
-  SPRITE_GRID,
   SPRITE_HITBOXES,
   SPRITE_PIVOTS,
   SPRITE_SHEETS,
@@ -22,13 +21,13 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   const report = spriteRuntimeReport();
   assert.equal(report.invalid.length, 0);
   assert.equal(report.runtimeReady, report.sheets);
-  assert.equal(report.sheets, 51);
+  assert.equal(report.sheets, 178);
 
   const crewIds = new Set(CREW.map((member) => member.id));
   assert.deepEqual(new Set(Object.keys(CREW_SPRITE_IDS)), crewIds);
   assert.equal(new Set(Object.values(CREW_SPRITE_IDS)).size, CREW.length);
-  assert.equal(Object.keys(CREW_MISSION_SPRITE_IDS).length, 8);
-  assert.equal(new Set(Object.values(CREW_MISSION_SPRITE_IDS)).size, 8);
+  assert.equal(Object.keys(CREW_MISSION_SPRITE_IDS).length, 16);
+  assert.equal(new Set(Object.values(CREW_MISSION_SPRITE_IDS)).size, 16);
 
   for (const member of CREW) {
     const sheetId = CREW_SPRITE_IDS[member.id];
@@ -40,12 +39,12 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
 
   for (const sheet of Object.values(SPRITE_SHEETS)) {
     const png = await readFile(localPath(sheet.path));
-    assert.equal(png.readUInt32BE(16), SPRITE_GRID.columns * SPRITE_GRID.cellWidth, sheet.path);
-    assert.equal(png.readUInt32BE(20), SPRITE_GRID.rows * SPRITE_GRID.cellHeight, sheet.path);
+    assert.equal(png.readUInt32BE(16), sheet.columns * sheet.cellWidth, sheet.path);
+    assert.equal(png.readUInt32BE(20), sheet.rows * sheet.cellHeight, sheet.path);
   }
 });
 
-test('chaque feuille utilise des clips, pivots et hitboxes bornés dans une cellule 4x4', () => {
+test('chaque feuille utilise des clips, pivots et hitboxes bornés dans sa grille déclarée', () => {
   for (const sheet of Object.values(SPRITE_SHEETS)) {
     const clips = SPRITE_CLIP_SETS[sheet.clipSet];
     const pivot = SPRITE_PIVOTS[sheet.pivot];
@@ -53,14 +52,14 @@ test('chaque feuille utilise des clips, pivots et hitboxes bornés dans une cell
     assert.ok(clips?.length, `${sheet.id}: clips absents`);
     assert.ok(pivot, `${sheet.id}: pivot absent`);
     assert.ok(hitbox, `${sheet.id}: hitbox absente`);
-    assert.ok(pivot.x >= 0 && pivot.x <= SPRITE_GRID.cellWidth, `${sheet.id}: pivot x`);
-    assert.ok(pivot.y >= 0 && pivot.y <= SPRITE_GRID.cellHeight, `${sheet.id}: pivot y`);
+    assert.ok(pivot.x >= 0 && pivot.x <= sheet.cellWidth, `${sheet.id}: pivot x`);
+    assert.ok(pivot.y >= 0 && pivot.y <= sheet.cellHeight, `${sheet.id}: pivot y`);
     assert.ok(hitbox.x >= 0 && hitbox.y >= 0, `${sheet.id}: origine hitbox`);
-    assert.ok(hitbox.x + hitbox.width <= SPRITE_GRID.cellWidth, `${sheet.id}: largeur hitbox`);
-    assert.ok(hitbox.y + hitbox.height <= SPRITE_GRID.cellHeight, `${sheet.id}: hauteur hitbox`);
+    assert.ok(hitbox.x + hitbox.width <= sheet.cellWidth, `${sheet.id}: largeur hitbox`);
+    assert.ok(hitbox.y + hitbox.height <= sheet.cellHeight, `${sheet.id}: hauteur hitbox`);
     for (const clip of clips) {
       assert.equal(resolveSpriteClip(sheet.id, clip.id), clip);
-      assert.ok(clip.frames.every((frame) => Number.isInteger(frame) && frame >= 0 && frame < 16), `${sheet.id}:${clip.id}`);
+      assert.ok(clip.frames.every((frame) => Number.isInteger(frame) && frame >= 0 && frame < sheet.columns * sheet.rows), `${sheet.id}:${clip.id}`);
       assert.ok(clip.events.every((event) => clip.frames.includes(event.frame)), `${sheet.id}:${clip.id}: événement hors clip`);
     }
   }

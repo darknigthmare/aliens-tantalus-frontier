@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '55.0.0',
-  subtitle: 'Dedicated Sprite Wave & Modular Dropship Hangar',
+  version: '56.0.0',
+  subtitle: 'Runtime Art Truth & Dedicated Equipment Atlases',
   sourceVersion: '51.0.0'
 });

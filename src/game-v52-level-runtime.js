@@ -47,6 +47,47 @@ export const MISSION_LEVEL_LAYER_FILES_V52 = Object.freeze({
   })
 });
 
+export const MISSION_LEVEL_ZONE_LAYER_FILES_V56 = Object.freeze({
+  'ship-interior-vertical': Object.freeze({
+    'ship-docking': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-docking-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-docking-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-docking-foreground.png'
+    }),
+    'ship-cargo': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-cargo-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-cargo-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-cargo-foreground.png'
+    }),
+    'ship-engineering': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-engineering-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-engineering-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-engineering-foreground.png'
+    }),
+    'ship-habitation': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-habitation-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-habitation-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-habitation-foreground.png'
+    }),
+    'ship-command': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-command-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-command-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-command-foreground.png'
+    }),
+    'ship-extraction': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/ship-extraction-far.png',
+      mid: '/assets/openai/metroidvania/zones/ship-extraction-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/ship-extraction-foreground.png'
+    })
+  })
+});
+
+export function resolveMissionLevelLayerFilesV56(templateId, zoneId) {
+  const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
+  if (!fallback) return null;
+  return MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId]?.[zoneId] || fallback;
+}
+
 function zoneForPosition(plan, actor) {
   if (!plan || !actor) return null;
   const nodes = asList(plan.graph?.nodes);
@@ -60,6 +101,10 @@ function zoneForPosition(plan, actor) {
 
 function layerKey(templateId, kind) {
   return `level:${templateId}:${kind}`;
+}
+
+function zoneLayerKey(templateId, zoneId, kind) {
+  return `level:${templateId}:zone:${zoneId}:${kind}`;
 }
 
 function sourceForSpawn(engine, index) {
@@ -107,7 +152,7 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelTimers = new Map();
       this.missionLevelExtractionTimer = null;
       this.missionLevelExtractionUnlocked = false;
-      this.loadMissionLevelArt(plan.templateId);
+      this.loadMissionLevelArt(plan);
       this.compileMissionLevelGeometry(plan);
       this.compileMissionLevelActors(plan);
       this.refreshMissionLevelZone(true);
@@ -124,7 +169,8 @@ export function withV52LevelRuntime(BaseEngine) {
       return this.getMissionLevelSnapshot();
     }
 
-    loadMissionLevelArt(templateId) {
+    loadMissionLevelArt(plan) {
+      const templateId = plan?.templateId;
       const files = MISSION_LEVEL_LAYER_FILES_V52[templateId];
       if (!files || !this.images || typeof globalThis.Image !== 'function') return;
       for (const [kind, path] of Object.entries(files)) {
@@ -135,6 +181,29 @@ export function withV52LevelRuntime(BaseEngine) {
         image.src = path;
         this.images.set(key, image);
       }
+      const declaredZoneIds = new Set(asList(plan?.biomeZones).map((zone) => zone.id));
+      const zoneFiles = MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId] || {};
+      for (const [zoneId, layers] of Object.entries(zoneFiles)) {
+        if (!declaredZoneIds.has(zoneId)) continue;
+        for (const [kind, path] of Object.entries(layers)) {
+          const key = zoneLayerKey(templateId, zoneId, kind);
+          if (this.images.has(key)) continue;
+          const image = new globalThis.Image();
+          image.decoding = 'async';
+          image.src = path;
+          this.images.set(key, image);
+        }
+      }
+    }
+
+    missionLevelLayerImage(kind) {
+      const templateId = this.missionLevelRuntime?.templateId;
+      const zoneId = this.missionLevelVisualState?.activeZoneId;
+      const dedicated = MISSION_LEVEL_ZONE_LAYER_FILES_V56[templateId]?.[zoneId]?.[kind]
+        ? this.images?.get(zoneLayerKey(templateId, zoneId, kind))
+        : null;
+      if (imageReady(dedicated)) return dedicated;
+      return this.images?.get(layerKey(templateId, kind)) || null;
     }
 
     compileMissionLevelGeometry(plan) {
@@ -481,9 +550,8 @@ export function withV52LevelRuntime(BaseEngine) {
       gradient.addColorStop(1, plan.palette?.floor || '#161b17');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
-      const templateId = plan.templateId;
-      const far = this.images?.get(layerKey(templateId, 'far'));
-      const mid = this.images?.get(layerKey(templateId, 'mid'));
+      const far = this.missionLevelLayerImage('far');
+      const mid = this.missionLevelLayerImage('mid');
       ctx.save();
       if (imageReady(far)) this.drawMissionLevelCover(ctx, far, 0.075, 0.94, 1.08, 0);
       if (imageReady(mid)) this.drawMissionLevelCover(ctx, mid, 0.32, 0.72, 1.08, 22);
@@ -544,8 +612,25 @@ export function withV52LevelRuntime(BaseEngine) {
     drawForeground(ctx) {
       const plan = this.missionLevelRuntime;
       if (!plan) return super.drawForeground(ctx);
-      const image = this.images?.get(layerKey(plan.templateId, 'foreground'));
-      if (!imageReady(image)) { this.drawForegroundPipes(ctx); return; }
+      const image = this.missionLevelLayerImage('foreground');
+      if (!imageReady(image)) {
+        this.drawHazardForegroundOverlays(ctx);
+        this.drawForegroundPipes(ctx);
+        return;
+      }
+      const hasDedicatedZoneLayer = Boolean(
+        MISSION_LEVEL_ZONE_LAYER_FILES_V56[plan.templateId]?.[this.missionLevelVisualState?.activeZoneId]?.foreground
+      );
+      if (hasDedicatedZoneLayer) {
+        ctx.save();
+        const factor = this.accessibilityRuntime?.reducedMotion ? 1 : 1.12;
+        const alpha = this.accessibilityRuntime?.reducedMotion ? 0.48 : 0.66;
+        this.drawMissionLevelCover(ctx, image, factor, alpha, 1, 0);
+        ctx.restore();
+        this.drawHazardForegroundOverlays(ctx);
+        this.drawForegroundPipes(ctx);
+        return;
+      }
       const height = plan.templateId === 'planet-exterior' ? 250 : 230;
       const width = (image.naturalWidth || image.width) * (height / (image.naturalHeight || image.height));
       const offset = -((this.camera.x * 1.12) % Math.max(1, width));
@@ -562,6 +647,7 @@ export function withV52LevelRuntime(BaseEngine) {
         }
       }
       ctx.restore();
+      this.drawHazardForegroundOverlays(ctx);
       this.drawForegroundPipes(ctx);
     }
 
@@ -681,6 +767,7 @@ export function withV52LevelRuntime(BaseEngine) {
         events: this.missionLevelEvents ? [...this.missionLevelEvents.values()].map((event) => ({ id: event.id, triggered: event.triggered, triggerCount: event.triggerCount })) : [],
         spawns: this.missionLevelSpawns ? [...this.missionLevelSpawns.values()].map((spawn) => ({ id: spawn.id, active: spawn.active, count: spawn.count })) : [],
         artLayers: MISSION_LEVEL_LAYER_FILES_V52[plan.templateId] || null,
+        activeArtLayers: resolveMissionLevelLayerFilesV56(plan.templateId, this.missionLevelVisualState?.activeZoneId),
         telemetry: this.missionLevelTelemetry ? { ...this.missionLevelTelemetry } : null,
         timers: this.missionLevelTimers ? [...this.missionLevelTimers.values()].map(timerSnapshot) : []
       };

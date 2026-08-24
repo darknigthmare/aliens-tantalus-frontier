@@ -1,0 +1,1454 @@
+{
+  "schemaVersion": 1,
+  "release": "V56",
+  "auditDate": "2026-08-22",
+  "scope": {
+    "sourceInventory": "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+    "selection": "31 vehicle chassis with runtimeState=missing",
+    "entryCount": 31,
+    "purpose": "Web reference audit only. This file does not authorize copying, tracing, extracting, or redistributing official art."
+  },
+  "classificationDefinitions": {
+    "CANON_REFERENCE": "The exact named chassis or its explicitly documented product family exists in released Alien-franchise material. Art must preserve the published identity; family-only references remain blocked until a variant is chosen.",
+    "PROJECT_ADAPTATION": "The exact runtime chassis is not attested, but it adapts a documented vehicle, object, faction, corporation, location, or cancelled franchise concept. It must be labeled as a project adaptation.",
+    "PROJECT_ORIGINAL": "No reliable external match for the named chassis was found. The name and silhouette are project continuity and must not be presented as franchise canon."
+  },
+  "classificationCounts": {
+    "CANON_REFERENCE": 11,
+    "PROJECT_ADAPTATION": 13,
+    "PROJECT_ORIGINAL": 7
+  },
+  "sourcePolicy": [
+    "Prefer 20th Century Studios, SEGA, and Free League product pages as primary publication anchors.",
+    "Use documented secondary indexes for vehicle-specific names and dimensions when no public primary specification page exists.",
+    "A cancelled draft or game is a non-canon production reference, never proof of released continuity.",
+    "Search-result absence is not proof of non-existence; PROJECT_ORIGINAL means no reliable exact match was located in this audit."
+  ],
+  "globalArtContract": {
+    "copyright": "Create a new project-owned bitmap. Do not copy, trace, photobash, crop, vectorize, or repaint an official still, prop photograph, concept sheet, game capture, book illustration, logo, or fan asset.",
+    "sidePerspective": "Strict gameplay side view, vehicle facing right, orthographic or near-orthographic. Yaw may not exceed 8 degrees and may only expose functional depth. No cinematic three-quarter view, fisheye, top-down, or front view.",
+    "metroidvaniaReadability": "Entire chassis visible and unclipped on transparent alpha, with breathing room. Contact points share one ground, rail, or water datum. Cockpit and doors must establish human scale at gameplay zoom.",
+    "lighting": "Single restrained upper-left key, readable shadow groups, no environment, floor, cast-shadow plate, bloom wall, or atmospheric backdrop.",
+    "markings": "Use only diegetic era/faction markings supported by the entry. New serial numbers must be project-original. No modern real-world branding, poster typography, UI labels, watermark, or copied studio/game logo.",
+    "redesignBan": "Do not merge unrelated chassis, add fashionable wings/wheels/weapons, smooth away industrial structure, or turn utilitarian retro-future hardware into a sleek contemporary supercar/jet."
+  },
+  "entries": [
+    {
+      "index": 1,
+      "id": "vehicle-003-m570-armored-personnel-carrier",
+      "inventoryName": "M570 Armored Personnel Carrier",
+      "recommendedName": "Resolve as M570 Series APC or M570 All-Terrain Transport",
+      "family": "ground",
+      "inventorySeats": 8,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "CONFLICTING_PUBLISHED_IDENTITIES",
+      "artGate": "BLOCKED_PENDING_VARIANT",
+      "verdict": "The current entry hybridizes two published lineages: older technical-manual continuity identifies an M570 All-Terrain Transport/prime mover distinct from the M577, while the Alien RPG core identifies an M570 Series APC with the M577 as its standard model. The current APC noun plus seats=8 does not cleanly resolve either branch.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/games/alien/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed Alien RPG publication anchor for the Evolved core vehicle line."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/M577_Armored_Personnel_Carrier",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Documents the M577 as the standard model in the M570 series."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/M570_All-Terrain_Transport",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Documents the older M570 All-Terrain Transport identity distinct from M577."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/List_of_USCM_weapons_and_equipment",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Cross-checks USCM vehicle nomenclature."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Series-APC branch: low broad four-wheel armored wedge with sliding/stowable main weapon lineage. ATT branch: a land-based prime mover/cargo transport distinct from M577; its own reference silhouette must be secured before art.",
+        "proportions": "Series-APC branch: about 9.2 m and 13 published passengers, full-squad volume. ATT branch: do not import the APC dimensions or M577 proportions; seats=8 is not evidence for the Series-APC branch.",
+        "sidePerspective": "Right-facing orthographic side view with all contacts on one datum; render only the selected branch and use a stowed main weapon only for the Series-APC lineage.",
+        "metroidvania": "Selected branch must show driver station, access/cargo function, running gear, and human scale distinctly; the ATT cannot read as a duplicate combat APC.",
+        "markings": "Restrained USCM/UA military stencil language and an original hull serial; no copied Sulaco APC nose art."
+      },
+      "forbiddenRedesign": [
+        "Do not combine the older M570 ATT name/capacity with the Alien RPG M570 Series APC silhouette.",
+        "Do not add tracks, extra axles, or a modern remote weapon station without a selected variant source.",
+        "Do not invent a unique M570 silhouette while calling it canon."
+      ],
+      "requiredCorrections": [
+        "Choose one branch: M570 Series APC, M570 All-Terrain Transport, or merge/remove the duplicate.",
+        "For M570 Series APC, replace seats=8 with published passengers=13 and choose a weapon configuration distinct from the existing M577; for M570 ATT, rename and re-source its prime-mover geometry/capacity before art.",
+        "Replace the global licensed-reference claim with a family-level reference note."
+      ]
+    },
+    {
+      "index": 2,
+      "id": "vehicle-005-m40-ridgeway-tank",
+      "inventoryName": "M40 Ridgeway Tank",
+      "recommendedName": "M40 Ridgeway Heavy Tank",
+      "family": "ground",
+      "inventorySeats": 4,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The chassis is attested, but its full name is M40 Ridgeway Heavy Tank and published crew is 2–3, not 4.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed vehicle publication anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/M40_Ridgeway_Heavy_Tank",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Vehicle-specific name, dimensions, crew, armament, and amphibious role."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Heavy tracked combat hull with a substantial rear-biased turret and dominant 115 mm cannon; separate smaller defensive system.",
+        "proportions": "Approximately 9.77 m long; broad armored mass, low ground clearance, turret visibly smaller than hull but not APC-like.",
+        "sidePerspective": "Strict right-facing side profile with complete tracks and cannon in a neutral near-horizontal travel pose.",
+        "metroidvania": "Track run, turret ring, main cannon, and crew-scale hatch must separate cleanly at gameplay zoom.",
+        "markings": "USCM/United States military stencil grammar, muted armor panels, original tactical number."
+      },
+      "forbiddenRedesign": [
+        "Do not reuse the M577 wheeled wedge.",
+        "Do not substitute the later M40-E silhouette without renaming the entry.",
+        "Do not turn the 115 mm cannon into twin sci-fi barrels or a railgun."
+      ],
+      "requiredCorrections": [
+        "Rename to M40 Ridgeway Heavy Tank.",
+        "Change seats/crew from 4 to 2–3.",
+        "Keep M40 and M40-E as distinct variants."
+      ]
+    },
+    {
+      "index": 3,
+      "id": "vehicle-006-m292-combat-buggy",
+      "inventoryName": "M292 Combat Buggy",
+      "recommendedName": "M292 Self-Propelled Artillery — A2 only if laser CIWS is selected",
+      "family": "ground",
+      "inventorySeats": 3,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_DESIGNATION_CONFLICT",
+      "artGate": "BLOCKED_IDENTITY_CONFLICT",
+      "verdict": "Critical conflict: M292 denotes a six-crew heavy tracked self-propelled artillery system with a 158 mm howitzer, never a light combat buggy. M292A2 is the air-defense-laser variant and must not be assumed unless that CIWS is depicted.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed manual anchor for M292/M292A2 self-propelled artillery."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/M292_Self-Propelled_Artillery",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Vehicle-specific identity and artillery role."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/USCM_Corps_Ordnance",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Cross-checks the 158 mm artillery armament."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Long armored tracked artillery chassis dominated by one 158 mm howitzer; protected six-crew volume, with roof laser CIWS only on A2.",
+        "proportions": "Approximately 11.1 m and 38-ton visual mass; gun length must dominate the vehicle and overhang the forward hull; no exposed buggy frame.",
+        "sidePerspective": "Right-facing orthographic artillery profile, complete track run, gun in low neutral travel/elevation pose.",
+        "metroidvania": "The single huge gun, track silhouette, crew hatch, and rear machinery must read instantly as self-propelled artillery.",
+        "markings": "USCM artillery unit stencils and original hull serial; no sports/racing numbers."
+      },
+      "forbiddenRedesign": [
+        "Absolutely no buggy, bike, open roll cage, or lightweight four-wheel silhouette.",
+        "Do not preserve seats=3: the documented M292 crew is 6.",
+        "Do not confuse the M292 designation with a fictional fast-attack model."
+      ],
+      "requiredCorrections": [
+        "Rename and redesign as M292 Self-Propelled Artillery, selecting M292A2 only if its laser CIWS is included; otherwise give the buggy a completely new project designation.",
+        "Replace seats=3 with documented crew=6 for the artillery branch.",
+        "Treat this as a P0 lore/data correction before art generation."
+      ]
+    },
+    {
+      "index": 4,
+      "id": "vehicle-008-combat-power-loader",
+      "inventoryName": "Combat Power Loader",
+      "recommendedName": "Project Weaponized Power Loader",
+      "family": "exosuit",
+      "inventorySeats": 1,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_BASE_PROJECT_VARIANT",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "The P-5000 Powered Work Loader is exact canon reference; Combat Power Loader is not a stable model name. A militarized version is an adaptation unless renamed to a specifically documented exosuit variant.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film page includes the Power Loader as visual reference."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/P-5000_Powered_Work_Loader",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "P-5000 identity, function, one-pilot arrangement, and variants."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Exosuit",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Documented militarized/exosuit lineage."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Open one-pilot anthropomorphic loader frame, tall biped legs, overhead roll cage, long hydraulic lifting arms.",
+        "proportions": "Human pilot visibly enclosed by the frame; arms longer and heavier than the pilot; broad stabilizing feet.",
+        "sidePerspective": "Right-facing orthographic side stance, both feet sharing one ground datum, arms in safe lowered gameplay pose.",
+        "metroidvania": "Pilot, cage, arm joints, claws, and feet must remain separately readable; compact enough for a character-scale traversal lane.",
+        "markings": "Industrial safety blocks and restrained USCM retrofit stencils; original serials only."
+      },
+      "forbiddenRedesign": [
+        "Do not close it into a power-armored humanoid suit.",
+        "Do not copy the Aliens loader frame line-for-line.",
+        "Do not add oversized shoulder missiles or anime-mecha anatomy."
+      ],
+      "requiredCorrections": [
+        "Mark as project adaptation, not licensed-reference exact art.",
+        "If exact canon is desired, rename to P-5000 Powered Work Loader and remove unsupported combat equipment."
+      ]
+    },
+    {
+      "index": 5,
+      "id": "vehicle-010-ud-4b-dropship",
+      "inventoryName": "UD-4B Dropship",
+      "recommendedName": "UA Northridge UD-4B Cheyenne production model",
+      "family": "air",
+      "inventorySeats": 10,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_REFERENCE",
+      "verdict": "UD-4B is the initial Cheyenne production model: eight passengers plus flight crew fits the current total of 10. It is shorter and less armed than later UD-4 variants and cannot carry an M577.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed publication anchor for Cheyenne variants."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/UD-4B_production_model",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact UD-4B variant specifications and distinguishing features."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/UD-4_%22Cheyenne%22_Dropship",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Cheyenne family comparison."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Compact Cheyenne lineage with blunt cockpit, high shoulder nacelles, short fuselage, and landing gear; no standard nose gun.",
+        "proportions": "About 24.8 m in the RPG reference, visibly shorter/cleaner than later cargo-capable Cheyennes; cabin sized for eight passengers.",
+        "sidePerspective": "Right-facing orthographic landed profile, wings/nacelles not foreshortened into a frontal V.",
+        "metroidvania": "Cockpit, passenger hatch, nacelles, and gear must read as four separate functional groups.",
+        "markings": "Early UA Northridge/USCM or documented civilian-paramilitary livery; original tail code."
+      },
+      "forbiddenRedesign": [
+        "Do not add the later nose gun or secondary deployable weapon arrays as standard.",
+        "Do not give it an M577-sized cargo bay.",
+        "Do not copy the film UD-4L paint/nose art onto this earlier model."
+      ],
+      "requiredCorrections": [
+        "Describe seats as 2 flight crew plus 8 passengers.",
+        "Keep UD-4B distinct from UD-4L/UD-4C."
+      ]
+    },
+    {
+      "index": 6,
+      "id": "vehicle-011-ad-19cd-dropship",
+      "inventoryName": "AD-19CD Dropship",
+      "recommendedName": "UA Northridge AD-19C/D Bearcat VTOL Strikeship",
+      "family": "air",
+      "inventorySeats": 12,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "VARIANT_PAIR",
+      "artGate": "BLOCKED_PENDING_C_OR_D",
+      "verdict": "The attested designation is AD-19C/D Bearcat VTOL Strikeship, not AD-19CD Dropship. C and D have different cabins: crew 2 versus 4; optional medivac panniers do not turn it into a 12-seat dropship.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed manual lists the AD-19C/D Bearcat."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/AD-19_%22Bearcat%22_Strikeship",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact model family, compact dimensions, crew variants, and armament."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/List_of_USCM_weapons_and_equipment",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "USCM vehicle-name cross-check."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Very compact roughly 8.8 m VTOL strike craft, twin turbofans, short armed nose, tight crew cabin.",
+        "proportions": "Fighter-like footprint rather than troop transport; C cabin fits two, D cabin fits four; optional underslung medivac panniers stay visibly external.",
+        "sidePerspective": "Right-facing orthographic landed/hover profile with both turbofans readable, no dramatic bank.",
+        "metroidvania": "Cockpit, twin lift fans, landing structure, nose gun, and optional pannier must remain distinct at small scale.",
+        "markings": "USCM strike-squadron stencils and original tail/side number."
+      },
+      "forbiddenRedesign": [
+        "Do not stretch it into a 12-seat dropship.",
+        "Do not merge C and D cabin geometries without selecting a variant.",
+        "Do not replace the twin-fan compact profile with a Cheyenne silhouette."
+      ],
+      "requiredCorrections": [
+        "Rename to AD-19C Bearcat or AD-19D Bearcat and identify it as VTOL Strikeship.",
+        "Change capacity to crew 2 for C or crew 4 for D; track six wounded separately only if medivac panniers are equipped.",
+        "Block art until C or D is chosen."
+      ]
+    },
+    {
+      "index": 7,
+      "id": "vehicle-012-ua-571-remote-sentry-carrier",
+      "inventoryName": "UA-571 Remote Sentry Carrier",
+      "recommendedName": "Project UA 571-C Mobile Sentry Carrier",
+      "family": "ground",
+      "inventorySeats": 2,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_PAYLOAD_PROJECT_CHASSIS",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "UA 571-C is a tripod-mounted automated sentry gun, not a vehicle or carrier. A mobile two-seat carrier can exist only as a project retrofit with the canon sentry visibly detachable.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film-continuity anchor for the sentry system."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/UA_571-C_Automated_Sentry_Gun",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact sentry identity and tripod form."
+        },
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed USCM equipment context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Small low utility carrier carrying a recognizable detachable UA 571-C tripod gun; operator cabin remains secondary.",
+        "proportions": "Payload gun and folded tripod must retain portable-equipment scale; carrier cannot grow to APC/tank mass.",
+        "sidePerspective": "Right-facing orthographic ground profile with wheels/tracks and the sentry mount on one clear datum.",
+        "metroidvania": "Separate carrier, mounting cradle, ammo/power pack, and detachable sentry silhouette.",
+        "markings": "USCM logistics stencils plus a clear project retrofit serial; never imply an official UA model number for the carrier."
+      },
+      "forbiddenRedesign": [
+        "Do not call the mobile chassis itself UA 571-C.",
+        "Do not turn the sentry into a tank turret.",
+        "Do not hide the tripod/payload identity inside an armored hull."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project adaptation.",
+        "Name the mobile platform independently and reserve UA 571-C for its payload."
+      ]
+    },
+    {
+      "index": 8,
+      "id": "vehicle-013-uscss-nostromo-shuttle",
+      "inventoryName": "USCSS Nostromo Shuttle",
+      "recommendedName": "Narcissus — Nostromo lifeboat",
+      "family": "space",
+      "inventorySeats": 7,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The named shuttle is Narcissus, a modified Lockmart Starcub Light Intrasystem Shuttle and Nostromo lifeboat. Standard crew is three with two stasis capsules; it is not a seven-seat crew shuttle.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Narcissus",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact name, class, dimensions, crew, stasis, and propulsion layout."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/USCSS_Nostromo",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Parent-vessel and docking relationship."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Broad flattened lifeboat/shuttle with a compact central cabin, twin forward and four rear thrust tunnels, and folding tricycle gear.",
+        "proportions": "Approximately 21.3 m long by 16.2 m wide by 7 m high; notably broad rather than needle-shaped.",
+        "sidePerspective": "Right-facing orthographic free-flight or landed profile; preserve broad cabin mass without fake perspective foreshortening.",
+        "metroidvania": "Cockpit glazing, lifeboat cabin, forward/rear thrust apertures, docking interface, and gear read cleanly.",
+        "markings": "Narcissus and 1809-E1 may be referenced only as diegetic identity; render lettering freshly and avoid tracing film graphics."
+      },
+      "forbiddenRedesign": [
+        "Do not call it USCSS Nostromo as if the shuttle shares the tug's ship prefix/name.",
+        "Do not make it a seven-person airliner or sleek fighter.",
+        "Do not copy the filming miniature or its texture map."
+      ],
+      "requiredCorrections": [
+        "Rename to Narcissus — Nostromo lifeboat.",
+        "Change seats from 7 to standard crew 3; track two stasis capsules separately.",
+        "Keep sister shuttle Salmacis out of this slot unless explicitly selected."
+      ]
+    },
+    {
+      "index": 9,
+      "id": "vehicle-014-uscss-covenant-lander",
+      "inventoryName": "USCSS Covenant Lander",
+      "recommendedName": "Lander One — Class E Lander-Type Drop Shuttle",
+      "family": "air",
+      "inventorySeats": 8,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The Covenant vehicle has a proper name and class: Lander One, Class E Lander-Type Drop Shuttle. Its documented complement is one pilot, one copilot, and ten passengers.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-covenant",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Lander_One",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact vehicle name, class, dimensions, and complement."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/USCSS_Covenant",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Parent-vessel relationship."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Large utilitarian Class E drop shuttle with broad central cabin, heavy landing gear, dorsal/side machinery, and clear loading access.",
+        "proportions": "Approximately 38 m overall; cabin scale must support twelve persons total and read larger than the Narcissus or AD-19.",
+        "sidePerspective": "Right-facing orthographic landed profile, full gear visible and hull unclipped.",
+        "metroidvania": "Cockpit, passenger module, engines, landing legs, and entry ramp must remain readable as discrete masses.",
+        "markings": "Covenant mission/Weyland-Yutani-era diegetic grammar and an original asset serial; no copied hull texture."
+      },
+      "forbiddenRedesign": [
+        "Do not compress it into an eight-seat light shuttle.",
+        "Do not call the lander itself USCSS Covenant.",
+        "Do not turn it into a military gunship."
+      ],
+      "requiredCorrections": [
+        "Rename to Lander One — Class E Lander-Type Drop Shuttle.",
+        "Change capacity from 8 to 12 total: 2 flight crew plus 10 passengers."
+      ]
+    },
+    {
+      "index": 10,
+      "id": "vehicle-015-uscss-prometheus-rover",
+      "inventoryName": "USCSS Prometheus Rover",
+      "recommendedName": "RT Series Group Transport / RT01",
+      "family": "ground",
+      "inventorySeats": 6,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_VEHICLE_FAMILY",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The film vehicle is the Weyland RT Series Group Transport, also called the Rover/RT01. Standard personnel bay capacity is up to 20 passengers plus driver; an open-bed variant carries the NR-9.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/RT_Series_Group_Transport",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact family name, eight-wheel chassis, configurations, and personnel capacity."
+        },
+        {
+          "url": "https://www.imcdb.org/v521752.html",
+          "tier": "SECONDARY_PROP_INDEX",
+          "use": "Independent film-prop/vehicle visual cross-check."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Massive elongated eight-wheel enclosed transport, four wheels per side, high armored industrial cabin, blunt ends.",
+        "proportions": "Long wheelbase and personnel bay dominate; wheels are large but do not swallow the tall rectangular body; driver scale makes it bus/APC-sized.",
+        "sidePerspective": "Strict right-facing side view showing all four visible wheels; no front-biased cinematic angle.",
+        "metroidvania": "Four-wheel rhythm, forward driver glazing, long personnel bay, doors, and roof equipment must survive sprite reduction.",
+        "markings": "Weyland Corp expedition-era utility markings and original RT unit serial; no copied prop decals."
+      },
+      "forbiddenRedesign": [
+        "Do not reduce it to a six-seat SUV.",
+        "Do not use the open-bed NR-9 carrier configuration while depicting a closed personnel cabin.",
+        "Do not reuse the M577 wedge."
+      ],
+      "requiredCorrections": [
+        "Rename to RT Series Group Transport / RT01.",
+        "Change passenger capacity from 6 to up to 20, with driver tracked separately.",
+        "Select closed personnel or open-bed carrier configuration before art."
+      ]
+    },
+    {
+      "index": 11,
+      "id": "vehicle-016-atv-survey-rover",
+      "inventoryName": "ATV Survey Rover",
+      "recommendedName": "NR-9 Series All Terrain Vehicle / EUV01",
+      "family": "ground",
+      "inventorySeats": 4,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The small Prometheus ATV is the NR-9 Series All Terrain Vehicle, also identified as EUV01/ATV NR6 in production references. It carries two people back-to-back, not four.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/prometheus",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/NR-9_Series_All_Terrain_Vehicle",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact name, compact scale, seating, and distinctive wheel system."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/RT_Series_Group_Transport",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Confirms the NR-9 carrier relationship."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Tiny open survey ATV with two occupants back-to-back, roll cage, and four distinctive tri-bogie track-belted wheel units.",
+        "proportions": "About 3.2 m long; human bodies dominate the chassis and establish its much smaller scale than the RT transport.",
+        "sidePerspective": "Right-facing orthographic profile; four contact units aligned, both opposite-facing seats legible.",
+        "metroidvania": "Roll cage, two seats, controls, and unusual wheel/belt system must not collapse into a generic quad bike.",
+        "markings": "Minimal Weyland Corp survey labeling with new unit serial."
+      },
+      "forbiddenRedesign": [
+        "Do not add a second row of seats.",
+        "Do not replace the tri-bogie belt wheels with ordinary tires or tank tracks.",
+        "Do not enlarge it into a conventional rover cabin."
+      ],
+      "requiredCorrections": [
+        "Rename to NR-9 Series All Terrain Vehicle / EUV01.",
+        "Change seats from 4 to 2."
+      ]
+    },
+    {
+      "index": 12,
+      "id": "vehicle-017-seegson-maintenance-tram",
+      "inventoryName": "Seegson Maintenance Tram",
+      "recommendedName": "Project Seegson Towerlink Maintenance Car",
+      "family": "rail",
+      "inventorySeats": 20,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_TRANSIT_SYSTEM_PROJECT_VARIANT",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "Sevastopol has Towerlink passenger transit cars in pressurized tubes. No exact Seegson model called Maintenance Tram was located; this must be a maintenance conversion, not a claimed canon chassis.",
+      "sources": [
+        {
+          "url": "https://alienisolation.sega.jp/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official SEGA Alien: Isolation publication anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Towerlink",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact Sevastopol passenger-transit system reference."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Sevastopol_Station",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Station and Seegson context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Short enclosed tube-transit car converted for service, with blunt cab ends, side access, tool lockers, and maintenance couplers.",
+        "proportions": "Towerlink-derived passenger-car envelope; service conversion reduces seating and adds equipment without becoming a locomotive.",
+        "sidePerspective": "Right-facing orthographic rail/tube profile; wheel/guide interface aligned to one rail datum.",
+        "metroidvania": "Cab windows, side doors, service panels, coupler, and tube-clearance envelope must read at gameplay scale.",
+        "markings": "Seegson/Towerlink maintenance color blocking, caution bars, and an original service-car number."
+      },
+      "forbiddenRedesign": [
+        "Do not claim Maintenance Tram as an exact canonical model.",
+        "Do not call Towerlink a maglev without evidence.",
+        "Do not turn it into a terrestrial subway or bullet train."
+      ],
+      "requiredCorrections": [
+        "Mark as project adaptation.",
+        "Separate this service conversion from the passenger-car slot.",
+        "Revalidate seats=20 because a maintenance conversion should prioritize equipment space."
+      ]
+    },
+    {
+      "index": 13,
+      "id": "vehicle-018-acheron-colony-tractor",
+      "inventoryName": "Acheron Colony Tractor",
+      "recommendedName": "Daihotai Tractor / Colony Tractor",
+      "family": "ground",
+      "inventorySeats": 3,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "The Hadley's Hope vehicle is the Daihotai Tractor, commonly Colony Tractor. The film configuration is a large eight-wheel suspended rover with room for at least five, not a three-seat farm tractor.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Daihotai_Tractor",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact vehicle identity and visual configuration."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Hadley%27s_Hope",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Acheron/Hadley's Hope context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Wide eight-wheel rover with four articulated twin-wheel bogies, high suspended central cabin, towing gear, and spotlights.",
+        "proportions": "Very broad stance relative to roughly 6.6 m length; cabin sits above/between wheel bogies and supports five or more occupants.",
+        "sidePerspective": "Right-facing orthographic side view showing four visible wheels/two paired bogie groups; cabin level and ground datum clear.",
+        "metroidvania": "Wheel-bogie articulation, elevated cabin, sealed door, tow point, and lights must read immediately.",
+        "markings": "Colonial utility wear and original Hadley's Hope/Daihotai-style service number; no copied film texture."
+      },
+      "forbiddenRedesign": [
+        "Do not depict a six-wheel novel-only variation when film fidelity is the target.",
+        "Do not turn it into a farm tractor with exposed driver.",
+        "Do not reuse the M577 body."
+      ],
+      "requiredCorrections": [
+        "Rename to Daihotai Tractor / Colony Tractor.",
+        "Change seats from 3 to at least 5; document any higher gameplay capacity."
+      ]
+    },
+    {
+      "index": 14,
+      "id": "vehicle-019-submersible-survey-skiff",
+      "inventoryName": "Submersible Survey Skiff",
+      "recommendedName": "Weyland EVA-7C Series Pressure Pod",
+      "family": "maritime",
+      "inventorySeats": 6,
+      "status": "CANON_REFERENCE",
+      "referenceGranularity": "EXACT_CHASSIS_MATCH",
+      "artGate": "READY_AFTER_DATA_FIX",
+      "verdict": "A precise six-person reference exists: the roughly 8 m Weyland EVA-7C Series Pressure Pod, crew two plus four passengers, intended for deep underwater and gas-giant survey. Skiff is the wrong vehicle noun.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/building-better-worlds/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed frontier-vehicle publication anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Weyland_EVA-7C_Series_Pressure_Pod",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact name, size, complement, manipulators, pods, sensors, and underwater role."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Compact sealed pressure pod with rounded pressure hull, thruster clusters, side storage/airlock pods, forward manipulators and digging tools.",
+        "proportions": "About 8 m long; two-crew control section plus four-passenger pressure volume; dense and pod-like, not long and boat-like.",
+        "sidePerspective": "Right-facing orthographic submerged profile, no water background; thrusters and manipulators fully inside canvas.",
+        "metroidvania": "Pressure hull, viewing/control area, airlock/storage modules, thrusters, and manipulators remain separately legible.",
+        "markings": "Weyland EVA hazard/depth markings and new pod serial; no copied book illustration decals."
+      },
+      "forbiddenRedesign": [
+        "Do not depict an open skiff, surface boat, or hydrofoil.",
+        "Do not add a submarine conning tower or military torpedoes.",
+        "Do not alter the six-person pressure-pod scale."
+      ],
+      "requiredCorrections": [
+        "Rename to Weyland EVA-7C Series Pressure Pod.",
+        "Keep capacity 6 but record it as 2 crew plus 4 passengers.",
+        "Optionally refine family from maritime to submersible."
+      ]
+    },
+    {
+      "index": 15,
+      "id": "vehicle-020-ceto-patrol-boat",
+      "inventoryName": "Ceto Patrol Boat",
+      "recommendedName": "Ceto Patrol Boat — project original",
+      "family": "maritime",
+      "inventorySeats": 8,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "NO_RELIABLE_EXACT_MATCH",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "No reliable Alien-franchise Ceto location/faction or exact patrol boat was located. The current licensed-continuity treatment is unsupported; Ceto is project continuity.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Low rugged eight-person patrol launch with enclosed wheelhouse, shallow armored bow, side fenders, stern drive, and practical boarding step.",
+        "proportions": "Compact working boat rather than yacht; wheelhouse occupies roughly the middle third and leaves readable bow/stern work areas.",
+        "sidePerspective": "Right-facing orthographic waterline profile on transparent alpha; straight water datum, no wake or sea background.",
+        "metroidvania": "Bow, wheelhouse, entry point, deck rail, and propulsion must read as traversal/boarding affordances.",
+        "markings": "Project-created Ceto maritime authority colors, emblem, and serial; no real coast-guard or franchise logo."
+      },
+      "forbiddenRedesign": [
+        "Do not label Ceto as licensed or canon.",
+        "Do not copy a real patrol-boat model or coast-guard livery.",
+        "Do not turn it into a luxury speedboat or military missile craft."
+      ],
+      "requiredCorrections": [
+        "Change provenance from licensed-continuity/licensed-reference to project-original.",
+        "Document Ceto as a project location/faction before asset production."
+      ]
+    },
+    {
+      "index": 16,
+      "id": "vehicle-021-tantalus-command-skiff",
+      "inventoryName": "Tantalus Command Skiff",
+      "recommendedName": "Tantalus Command Skiff — project original",
+      "family": "air",
+      "inventorySeats": 6,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "PROJECT_CONTINUITY",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "USS Tantalus is project continuity; no exact external vehicle reference exists. The design must be original while staying within utilitarian Alien retro-future grammar.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Compact six-person command VTOL with armored cockpit, short operations cabin, paired lift units, landing skids, and sensor mast.",
+        "proportions": "Cabin volume visibly supports six without approaching dropship scale; sensors outweigh weapons in visual hierarchy.",
+        "sidePerspective": "Right-facing orthographic landed/hover profile, no bank and no perspective-distorted wings.",
+        "metroidvania": "Cockpit, command cabin door, lift units, landing points, and sensor mast read at gameplay zoom.",
+        "markings": "Only project-created Tantalus task-force insignia, command stripe, and serial."
+      },
+      "forbiddenRedesign": [
+        "Do not present it as a canonical USCM craft.",
+        "Do not clone the Cheyenne, Bearcat, Covenant lander, or Star Wars skiff.",
+        "Do not overload it with weapons that contradict a command role."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Keep all names, markings, and hull geometry original."
+      ]
+    },
+    {
+      "index": 17,
+      "id": "vehicle-022-echo-9-recon-bike",
+      "inventoryName": "Echo-9 Recon Bike",
+      "recommendedName": "Echo-9 Recon Bike — project original",
+      "family": "ground",
+      "inventorySeats": 2,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "PROJECT_CONTINUITY",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "Echo-9 is a project designation and no exact franchise bike was located. It must not be conflated with the documented XT-37 Stinger fast-attack vehicle.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Low two-person tandem reconnaissance bike with protective front cowl, exposed rear utility rack, long suspension, and two primary contact wheels.",
+        "proportions": "Human riders establish motorcycle scale; narrow cabin/cowl, long wheelbase, minimal armor, no car-width body.",
+        "sidePerspective": "Strict right-facing orthographic side profile, both wheels on one datum and steering angle neutral.",
+        "metroidvania": "Two seats, handlebar/control area, suspension, wheels, and compact sensor pack remain legible.",
+        "markings": "Project Echo-9 recon stripe, original serial, muted field-service paint."
+      },
+      "forbiddenRedesign": [
+        "Do not call it an XT-37 or copy the Stinger.",
+        "Do not add anti-gravity, a third wheel, or a closed car cabin.",
+        "Do not use modern commercial motorcycle branding."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Define Echo-9 as project unit/location metadata."
+      ]
+    },
+    {
+      "index": 18,
+      "id": "vehicle-023-crucible-caravan-crawler",
+      "inventoryName": "Crucible Caravan Crawler",
+      "recommendedName": "Crucible Caravan Crawler — project adaptation",
+      "family": "ground",
+      "inventorySeats": 10,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANCELLED_CONCEPT_NAME_ONLY",
+      "artGate": "READY_WITH_NONCANON_LABEL",
+      "verdict": "Aliens: Crucible was a cancelled Obsidian/SEGA project. No caravan crawler from it was verified. The runtime vehicle is original geometry adapting a non-canon production concept/name and must never be described as a recovered canonical chassis.",
+      "sources": [
+        {
+          "url": "https://avp.fandom.com/wiki/Aliens%3A_Crucible",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Cancelled-project identity, setting, and non-release status."
+        },
+        {
+          "url": "https://www.gamespot.com/articles/obsidian-sega-confirm-aliens-rpg-no-longer-in-development/1100-6212665/",
+          "tier": "SECONDARY_REPORTING",
+          "use": "Contemporaneous confirmation of cancellation."
+        },
+        {
+          "url": "https://www.unseen64.net/2009/10/02/aliens-rpg-crucible-x360ps3-cancelled/",
+          "tier": "SECONDARY_ARCHIVE",
+          "use": "Production-history cross-check."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Long ten-person survival crawler with segmented armored living module, multiple low track bogies, roof cargo, and repairable external systems.",
+        "proportions": "Caravan length and habitable volume dominate; low speed/terrain clearance, not tank stance; human-scale door and storage establish size.",
+        "sidePerspective": "Right-facing orthographic ground profile with all bogies aligned and full caravan body unclipped.",
+        "metroidvania": "Entry door, driver cab, module seams, roof cargo, ladder, and track units act as readable traversal landmarks.",
+        "markings": "Project-created Crucible survivor/caravan markings; no Obsidian, SEGA, or cancelled-game logo."
+      },
+      "forbiddenRedesign": [
+        "Do not claim that the exact vehicle appeared in Aliens: Crucible.",
+        "Do not reproduce leaked/cancelled concept art.",
+        "Do not convert it into an M577 or military main battle tank."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project adaptation from a cancelled, non-canon concept.",
+        "State explicitly that the chassis itself is project-original."
+      ]
+    },
+    {
+      "index": 19,
+      "id": "vehicle-024-neuro-xeno-transport-rig",
+      "inventoryName": "Neuro-Xeno Transport Rig",
+      "recommendedName": "Neuro-Xeno Transport Rig — project original",
+      "family": "ground",
+      "inventorySeats": 5,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "PROJECT_CONTINUITY",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "Neuro-Xeno and the transport rig are project continuity. No exact external vehicle reference was located.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Heavy five-person containment tractor with sealed forward cab, central isolated specimen capsule, rear life-support/power module, and broad crawler tracks.",
+        "proportions": "Containment capsule is the visual center and remains smaller than the total vehicle; cab supports crew without becoming an APC troop bay.",
+        "sidePerspective": "Right-facing orthographic ground profile, full tracks and capsule visible, no obscuring three-quarter cage.",
+        "metroidvania": "Cab door, quarantine capsule, service ladder, external conduits, and rear module must be readable interaction zones.",
+        "markings": "Project quarantine chevrons, hazard class, Neuro-Xeno program code, and original serial."
+      },
+      "forbiddenRedesign": [
+        "Do not use a canonical company/model claim.",
+        "Do not copy the Alien Resurrection specimen cages or Jurassic Park transport design.",
+        "Do not expose the specimen without a sealed containment boundary."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Keep Neuro-Xeno terminology explicitly within project continuity."
+      ]
+    },
+    {
+      "index": 20,
+      "id": "vehicle-025-uscm-assault-gunship",
+      "inventoryName": "USCM Assault Gunship",
+      "recommendedName": "Project USCM Assault Gunship, or select UD-4C/UD-22",
+      "family": "air",
+      "inventorySeats": 8,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "GENERIC_ROLE_WITH_CANON_OPTIONS",
+      "artGate": "BLOCKED_PENDING_MODEL_OR_ADAPTATION",
+      "verdict": "USCM Assault Gunship is a generic role, not a unique documented model. Canon options include gunship-configured Cheyenne variants such as UD-4C and other named craft; the project must select one or label an original chassis.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed manual for named USCM aerospace craft."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/UD-4_%22Cheyenne%22_Dropship",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Documents the UD-4C gunship configuration and Cheyenne variants."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/List_of_USCM_weapons_and_equipment",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Cross-checks named gunship options."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "If project-original: compact armored VTOL gunship with clear cockpit, lift/drive units, short assault cabin, and bounded weapon hardpoints; if UD-4C, preserve Cheyenne lineage.",
+        "proportions": "Weapons remain subordinate to a flyable airframe; eight-person gameplay capacity requires visible cabin volume and cannot be inferred from a fighter fuselage.",
+        "sidePerspective": "Right-facing orthographic landed/hover profile with gear and weapon arcs readable; no banking hero shot.",
+        "metroidvania": "Cockpit, cabin hatch, landing gear, propulsion, and each weapon family must separate at gameplay zoom.",
+        "markings": "USCM squadron grammar and original tail number; exact model designation only after selection."
+      },
+      "forbiddenRedesign": [
+        "Do not invent a silhouette and call it canon USCM.",
+        "Do not blend Bearcat, Cheyenne, and UPP Krokodil features.",
+        "Do not add more weapons than the selected model documents."
+      ],
+      "requiredCorrections": [
+        "Select a named canon gunship model and align capacity, or retain the generic name as project adaptation.",
+        "Do not keep licensed-reference provenance for an unspecified chassis."
+      ]
+    },
+    {
+      "index": 21,
+      "id": "vehicle-026-orbital-lifeboat",
+      "inventoryName": "Orbital Lifeboat",
+      "recommendedName": "Project 12-person Orbital Lifeboat, or Type 337 EEV",
+      "family": "space",
+      "inventorySeats": 12,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "GENERIC_ROLE_WITH_CANON_ANALOG",
+      "artGate": "BLOCKED_PENDING_MODEL_OR_ADAPTATION",
+      "verdict": "Orbital Lifeboat is generic. The recognizable Alien 3 reference is the asymmetric Type 337 EEV, which carries five, not twelve. Retain 12 only for a clearly project-designed lifeboat.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official Alien 3 anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Type_337_EEV",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact EEV identity, asymmetric silhouette, dimensions, and five-person complement."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/EEV_Unit_2650",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Screen-used unit/context cross-check."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "For Type 337: asymmetric L-shaped enclosed EEV with cryotube volume and docking collar; for project 12-person craft: visibly larger but still blunt emergency hardware.",
+        "proportions": "Type 337 is about 13.2 m and five-person scale; a twelve-person adaptation must gain cabin length/volume rather than merely relabel capacity.",
+        "sidePerspective": "Right-facing orthographic space profile with docking collar and reentry underside readable.",
+        "metroidvania": "Emergency hatch, docking collar, cabin/cryo volume, thrusters, and landing/recovery points remain distinct.",
+        "markings": "High-contrast emergency/rescue blocks and original unit number; no copied Sulaco EEV lettering."
+      },
+      "forbiddenRedesign": [
+        "Do not draw a Type 337 silhouette and claim twelve seats.",
+        "Do not turn a lifeboat into a luxury shuttle or fighter.",
+        "Do not symmetrize the Type 337 if that model is selected."
+      ],
+      "requiredCorrections": [
+        "Choose Type 337 with capacity 5, or keep 12 and label/design a project adaptation.",
+        "Record the selected model before art."
+      ]
+    },
+    {
+      "index": 22,
+      "id": "vehicle-027-colony-cargo-lifter",
+      "inventoryName": "Colony Cargo Lifter",
+      "recommendedName": "Project Colony Cargo Lifter, or Weyland-Yutani WY-37B Cargo Lifter Sled",
+      "family": "air",
+      "inventorySeats": 3,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "GENERIC_NAME_WITH_EXACT_CANON_ANALOG",
+      "artGate": "READY_AFTER_MODEL_CHOICE",
+      "verdict": "A close exact franchise vehicle exists: the WY-37B cargo lifter sled. The current generic label can remain only as an adaptation; exact canon requires the WY-37B name and open sled configuration.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-covenant",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film anchor for the Covenant cargo lifter."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/WY-37B_cargo_lifter_sled",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Exact name, cargo-sled structure, dimensions, and frontier use."
+        },
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/building-better-worlds/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed frontier equipment anchor."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Open heavy cargo sled with broad platform/ramp, four powerful lift/drive units, compact operator station, and optional crane/claw equipment.",
+        "proportions": "Cargo deck dominates roughly 33.7 m retracted length; operator volume remains small and cannot read as a passenger dropship.",
+        "sidePerspective": "Right-facing orthographic landed/hover profile, ramp state explicit, all engines and deck edges unclipped.",
+        "metroidvania": "Operator station, loading ramp, cargo deck, engine pods, tie-downs, and crane interaction points remain legible.",
+        "markings": "Weyland-Yutani/colony cargo hazard blocks and original equipment number."
+      },
+      "forbiddenRedesign": [
+        "Do not close the WY-37B into a passenger shuttle.",
+        "Do not add military missiles or fighter wings.",
+        "Do not claim a generic design is the exact WY-37B without its open sled/ramp identity."
+      ],
+      "requiredCorrections": [
+        "Select and rename to WY-37B for canon-reference treatment, or mark current generic chassis as adaptation.",
+        "Validate seats=3 against operator layout; do not treat cargo passengers as certified seats."
+      ]
+    },
+    {
+      "index": 23,
+      "id": "vehicle-028-weyland-yutani-executive-shuttle",
+      "inventoryName": "Weyland-Yutani Executive Shuttle",
+      "recommendedName": "Project Weyland-Yutani Executive Shuttle",
+      "family": "space",
+      "inventorySeats": 10,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "NONCANON_TEXTUAL_ANCHOR_ONLY",
+      "artGate": "READY_WITH_NONCANON_LABEL",
+      "verdict": "No released exact chassis was verified. An executive shuttle appears textually in William Gibson's unproduced Alien III draft, which is not canon and supplies no safe fixed screen silhouette.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official released-film boundary; the Gibson draft was not the released film."
+        },
+        {
+          "url": "https://www.avpgalaxy.net/files/scripts/alien-3-william-gibson-1988-01.pdf",
+          "tier": "PRIMARY_SOURCE_MIRROR_NONCANON",
+          "use": "Unproduced draft textual phrase only; explicitly not canon visual evidence."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Weyland-Yutani_Corporation",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Corporate-era context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Original ten-person corporate shuttle with enclosed executive cabin, restrained docking nose, paired engines, robust gear, and utilitarian service access beneath a refined shell.",
+        "proportions": "Cabin volume visibly supports ten; refinement comes from panel discipline, not implausibly thin luxury-jet proportions.",
+        "sidePerspective": "Right-facing orthographic landed/space profile; no glamour three-quarter presentation.",
+        "metroidvania": "Cockpit, passenger door, docking interface, engine modules, and gear remain strong gameplay landmarks.",
+        "markings": "Era-consistent Weyland-Yutani corporate blocks and an original registration; do not reproduce a logo asset from a film/game."
+      },
+      "forbiddenRedesign": [
+        "Do not call Gibson-draft material released canon.",
+        "Do not invent an official model number.",
+        "Do not turn it into a contemporary private jet or copy another franchise shuttle."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project adaptation.",
+        "Add an explicit non-canon-draft note wherever the Gibson reference is cited."
+      ]
+    },
+    {
+      "index": 24,
+      "id": "vehicle-029-upp-combat-aerodyne",
+      "inventoryName": "UPP Combat Aerodyne",
+      "recommendedName": "Project UPP Combat Aerodyne, or select Mi-220/UPP-DS3",
+      "family": "air",
+      "inventorySeats": 6,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_FACTION_AND_SEPARATE_VEHICLE_FAMILIES",
+      "artGate": "BLOCKED_PENDING_MODEL_OR_ADAPTATION",
+      "verdict": "No exact UPP Combat Aerodyne was verified. Aerodyne names a separate light civilian VTOL gyrocar family with 5 published passengers, while UPP has named military craft such as Mi-220 Krokodil and UPP-DS3 Accipiter. These identities cannot be blended.",
+      "sources": [
+        {
+          "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official licensed UPP military-vehicle anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Aerodyne_Light_VTOL_Automotive_Gyrocar",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Aerodyne civilian/light VTOL identity."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Mi-220_Krokodil_Attack_Dropship",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Named UPP attack-dropship reference."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/UPP-DS3_Accipiter",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Named UPP Cheyenne-derived craft reference."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "If retaining aerodyne: compact automotive VTOL/gyrocar with road-vehicle cabin and bounded lift units, not a full dropship; named UPP options follow their own silhouettes.",
+        "proportions": "Aerodyne remains about 5.2 m automotive scale with 5 published passengers; seats=6 is valid only if the runtime field counts one operator plus those five passengers. Krokodil/Accipiter scale must not leak into it.",
+        "sidePerspective": "Right-facing orthographic hover/landed profile with lift units and cabin baseline clear.",
+        "metroidvania": "Cockpit, cabin doors, lift units, gear/skids, sensors, and limited weapon mounts remain legible.",
+        "markings": "UPP muted grey/green and restrained red identification blocks, original Cyrillic-style serial without copied emblem art."
+      },
+      "forbiddenRedesign": [
+        "Do not combine civilian Aerodyne, Mi-220, and Accipiter geometry.",
+        "Do not use USCM Cheyenne markings.",
+        "Do not call the project vehicle canon without a model selection."
+      ],
+      "requiredCorrections": [
+        "Choose a named UPP craft or retain Project UPP Combat Aerodyne as adaptation.",
+        "Document whether seats counts total occupants: keep seats=6 only as one operator plus the Aerodyne's 5 published passengers."
+      ]
+    },
+    {
+      "index": 25,
+      "id": "vehicle-030-hyperdyne-synthetic-carrier",
+      "inventoryName": "Hyperdyne Synthetic Carrier",
+      "recommendedName": "Project Hyperdyne Synthetic Carrier",
+      "family": "ground",
+      "inventorySeats": 8,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_COMPANY_PROJECT_CHASSIS",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "Hyperdyne is attested as a synthetic manufacturer, but no exact Synthetic Carrier appears in its documented product set. The chassis is a project invention using a franchise corporation.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official film-continuity anchor for Hyperdyne synthetic references."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Hyperdyne_Corporation",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Corporate identity and synthetic-manufacturer role."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Category:Hyperdyne_products",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Product-list cross-check showing no carrier chassis."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Original eight-unit ground transport with sealed rectangular synthetic racks, low autonomous cab, service arms, and industrial wheels/tracks.",
+        "proportions": "Transport/rack volume dominates; driver cab may be minimal because cargo is synthetic, but human-scale service access remains visible.",
+        "sidePerspective": "Right-facing orthographic ground profile with all contacts on one datum and rack doors unobscured.",
+        "metroidvania": "Control cab, rack bays, service panel, loading door, and mobility units form distinct interaction zones.",
+        "markings": "Hyperdyne-era corporate text grammar and original fleet serial; no invented official model badge."
+      },
+      "forbiddenRedesign": [
+        "Do not claim it is a documented Hyperdyne product.",
+        "Do not reuse the M577 APC silhouette.",
+        "Do not expose eight human-like bodies as decorative cargo."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project adaptation.",
+        "State that only the corporation is referenced; chassis and model are original."
+      ]
+    },
+    {
+      "index": 26,
+      "id": "vehicle-031-mining-bore-crawler",
+      "inventoryName": "Mining Bore Crawler",
+      "recommendedName": "Mining Bore Crawler — project original",
+      "family": "ground",
+      "inventorySeats": 9,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "NO_RELIABLE_EXACT_MATCH",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "Mining is common franchise context, but no exact named nine-seat Mining Bore Crawler was found. The chassis must be project-original rather than inferred from generic mining references.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Long low crawler with one dominant forward boring head, protected nine-person operations cabin, multiple track bogies, spoil conveyor, and rear power plant.",
+        "proportions": "Bore diameter is large enough for an access tunnel but remains below total chassis height; cabin and machinery visibly account for nine crew.",
+        "sidePerspective": "Right-facing orthographic ground profile, boring head fully visible and tracks sharing one datum.",
+        "metroidvania": "Bore head, operator cabin, access ladder, conveyor, track units, and rear generator read as traversal/hazard landmarks.",
+        "markings": "Project mining consortium colors, hazard chevrons, and original equipment serial."
+      },
+      "forbiddenRedesign": [
+        "Do not label a generic drilling machine as a canon Alien model.",
+        "Do not copy a real tunnel-boring machine or another franchise's crawler.",
+        "Do not replace the bore with weapons."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Define manufacturer/location in project lore before final markings."
+      ]
+    },
+    {
+      "index": 27,
+      "id": "vehicle-032-atmospheric-processor-elevator",
+      "inventoryName": "Atmospheric Processor Elevator",
+      "recommendedName": "Project Atmosphere Processor Service Elevator",
+      "family": "rail",
+      "inventorySeats": 30,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_INFRASTRUCTURE_PROJECT_CAR",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "Atmosphere Processing Plants are documented infrastructure, but no exact 30-seat vehicle model was verified. This is a building-bound service elevator/cage, not an independent vehicle.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official atmosphere-processor/Hadley's Hope film anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Atmosphere_Processing_Plant",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Infrastructure identity and scale."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Hadley%27s_Hope",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Colony context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Tall enclosed industrial service cage/cabin captured with short guide-rail and cable interfaces, broad sliding doors, and external maintenance panels.",
+        "proportions": "Thirty-person freight/passenger capacity requires a large vertical cabin and wide doors; guide hardware establishes that it cannot travel independently.",
+        "sidePerspective": "Strict lateral orthographic elevation; cabin base aligned to a rail/shaft datum, no floating perspective.",
+        "metroidvania": "Door, control panel, roof cable/guide assembly, maintenance hatch, and shaft-contact rollers read as interaction points.",
+        "markings": "Atmosphere processor zone code, capacity plate, industrial hazard bars, and original car number."
+      },
+      "forbiddenRedesign": [
+        "Do not render it as a train, hovercraft, or flying elevator.",
+        "Do not claim a canon model number.",
+        "Do not omit the guide/cable interfaces that establish infrastructure."
+      ],
+      "requiredCorrections": [
+        "Reclassify in content as infrastructure/rail cabin rather than standalone vehicle where schema permits.",
+        "Change provenance to project adaptation."
+      ]
+    },
+    {
+      "index": 28,
+      "id": "vehicle-033-maglev-personnel-car",
+      "inventoryName": "Maglev Personnel Car",
+      "recommendedName": "Project Towerlink-Style Personnel Car",
+      "family": "rail",
+      "inventorySeats": 18,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_TRANSIT_ANALOG_UNVERIFIED_MAGLEV",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "Towerlink passenger cars are documented on Sevastopol, but the searched material describes pressurized-tube transit, not a confirmed maglev model. Maglev is therefore an unsupported project technology label.",
+      "sources": [
+        {
+          "url": "https://alienisolation.sega.jp/",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official SEGA Alien: Isolation anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Towerlink",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Passenger transit car/system reference."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Sevastopol_Station",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Station transport context."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Enclosed eighteen-person tube-transit car with blunt rounded ends, repeated side windows/doors, guide interface, and pressure-compatible seals.",
+        "proportions": "Passenger cabin length and repeated seating/window rhythm dominate; lower guide hardware stays shallow and functional.",
+        "sidePerspective": "Right-facing orthographic rail/tube profile on one guide datum; no bullet-train perspective cone.",
+        "metroidvania": "Doors, windows, couplers, emergency hatch, undercarriage/guide interface, and destination panel read at sprite scale.",
+        "markings": "Project transit operator route blocks and original car number; use Seegson only if story ownership is explicit."
+      },
+      "forbiddenRedesign": [
+        "Do not assert maglev propulsion as canon.",
+        "Do not duplicate the maintenance tram silhouette; this is a passenger car.",
+        "Do not make a sleek contemporary high-speed train."
+      ],
+      "requiredCorrections": [
+        "Rename to Towerlink-style Personnel Car unless a maglev source is produced.",
+        "Change provenance to project adaptation.",
+        "Keep passenger and maintenance rail assets visually and semantically distinct."
+      ]
+    },
+    {
+      "index": 29,
+      "id": "vehicle-034-ice-driller",
+      "inventoryName": "Ice Driller",
+      "recommendedName": "Ice Driller — project original",
+      "family": "ground",
+      "inventorySeats": 5,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "NO_RELIABLE_EXACT_MATCH",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "No exact Alien-franchise five-seat Ice Driller chassis was located. AVP ice-boring activity is setting context, not a vehicle reference.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Compact five-person polar crawler with forward heated drill/auger, sealed insulated cab, broad low-temperature tracks, and rear thermal/power module.",
+        "proportions": "Cab supports five in a tight work layout; drill assembly is prominent but not larger than the whole crawler; low center of gravity.",
+        "sidePerspective": "Right-facing orthographic ground profile, full auger and track run visible, one snow/ground datum but no snow background.",
+        "metroidvania": "Drill hazard, cab door, roof beacon, track units, service panel, and rear heat exchanger remain readable.",
+        "markings": "Project polar survey/mining colors, cold hazard symbols, and original serial."
+      },
+      "forbiddenRedesign": [
+        "Do not claim the AVP expedition's bore was this vehicle.",
+        "Do not copy a real polar drilling rig.",
+        "Do not turn the auger into a siege weapon."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Define project operator and environment before final livery."
+      ]
+    },
+    {
+      "index": 30,
+      "id": "vehicle-035-reef-hydrofoil",
+      "inventoryName": "Reef Hydrofoil",
+      "recommendedName": "Reef Hydrofoil — project original",
+      "family": "maritime",
+      "inventorySeats": 5,
+      "status": "PROJECT_ORIGINAL",
+      "referenceGranularity": "NO_RELIABLE_EXACT_MATCH",
+      "artGate": "READY_ORIGINAL",
+      "verdict": "No exact Alien-franchise Reef Hydrofoil was located. It belongs to the project's ocean-world continuity.",
+      "sources": [],
+      "strictInvariants": {
+        "silhouette": "Narrow five-person survey hydrofoil with enclosed forward cockpit, raised hull, two clearly separated foil struts, aft drive, and compact sample rack.",
+        "proportions": "Long light hull rather than patrol-boat mass; foil span/struts support the hull and remain plausible at human scale.",
+        "sidePerspective": "Right-facing orthographic waterline profile on transparent alpha; foils fully visible below a straight water datum, no wake.",
+        "metroidvania": "Cockpit, boarding point, sample rack, foil struts, and aft propulsion read as gameplay affordances.",
+        "markings": "Project reef-survey palette, original vessel name/serial, no real manufacturer or race livery."
+      },
+      "forbiddenRedesign": [
+        "Do not present it as a canon Alien vehicle.",
+        "Do not copy a current commercial hydrofoil.",
+        "Do not add guns, deep-submergence pressure pods, or luxury-yacht styling."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project-original.",
+        "Define reef/ocean operator in project lore."
+      ]
+    },
+    {
+      "index": 31,
+      "id": "vehicle-036-ripper-siege-loader",
+      "inventoryName": "Ripper Siege Loader",
+      "recommendedName": "Ripper Siege Loader — project weaponized loader adaptation",
+      "family": "exosuit",
+      "inventorySeats": 1,
+      "status": "PROJECT_ADAPTATION",
+      "referenceGranularity": "CANON_LOADER_GRAMMAR_PROJECT_CHASSIS",
+      "artGate": "READY_WITH_ADAPTATION_LABEL",
+      "verdict": "Ripper is project continuity. Its loader role may inherit readable P-5000 industrial grammar, but the siege chassis and weaponization are not an exact published model.",
+      "sources": [
+        {
+          "url": "https://www.20thcenturystudios.com/movies/aliens",
+          "tier": "PRIMARY_OFFICIAL",
+          "use": "Official Power Loader visual anchor."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/P-5000_Powered_Work_Loader",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Canon industrial loader proportions and one-pilot layout."
+        },
+        {
+          "url": "https://avp.fandom.com/wiki/Exosuit",
+          "tier": "SECONDARY_DOCUMENTED",
+          "use": "Militarized-loader context without asserting an exact Ripper model."
+        }
+      ],
+      "strictInvariants": {
+        "silhouette": "Original one-pilot heavy siege loader with exposed protected operator cage, biped industrial legs, oversized demolition arms, and added armor that does not erase loader joints.",
+        "proportions": "Pilot remains visible for scale; arms and feet carry the mass; armor plates sit on an industrial frame rather than forming a humanoid torso.",
+        "sidePerspective": "Right-facing orthographic planted stance, both feet on one datum, tools/weapons lowered inside a readable gameplay envelope.",
+        "metroidvania": "Pilot cage, shoulder pivots, demolition tools, knees, feet, and service power unit remain separately readable.",
+        "markings": "Project Ripper/ATARAX siege code, hazard paint, and original serial; no claim of Caterpillar/USCM production model."
+      },
+      "forbiddenRedesign": [
+        "Do not call Ripper a canon P-5000 variant.",
+        "Do not copy the film Power Loader geometry or any game exosuit asset.",
+        "Do not turn it into sealed anime power armor or a giant robot."
+      ],
+      "requiredCorrections": [
+        "Change provenance to project adaptation.",
+        "State that Ripper identity, armor, tools, and markings are project-created."
+      ]
+    }
+  ],
+  "conflictSummary": [
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-006-m292-combat-buggy"
+      ],
+      "issue": "M292 is self-propelled artillery, not a combat buggy.",
+      "requiredAction": "Rename/redesign as six-crew M292 Self-Propelled Artillery; use M292A2 only with its laser CIWS. Otherwise assign the buggy a new project designation before art."
+    },
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-003-m570-armored-personnel-carrier"
+      ],
+      "issue": "M570 is edition/source ambiguous: older continuity has a distinct M570 All-Terrain Transport, while Alien RPG defines an M570 Series APC whose standard model is M577. The inventory mixes the APC noun with seats=8.",
+      "requiredAction": "Choose the ATT branch and re-source its own geometry, or choose the Series-APC branch with passengers=13 and a documented non-M577 weapon configuration, or merge/remove the slot. Never generate a second M577 clone."
+    },
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-011-ad-19cd-dropship"
+      ],
+      "issue": "AD-19C/D Bearcat is a compact VTOL strikeship variant pair, not an AD-19CD twelve-seat dropship.",
+      "requiredAction": "Choose C or D, rename, and change crew capacity to 2 or 4."
+    },
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-013-uscss-nostromo-shuttle",
+        "vehicle-014-uscss-covenant-lander",
+        "vehicle-015-uscss-prometheus-rover",
+        "vehicle-016-atv-survey-rover",
+        "vehicle-018-acheron-colony-tractor",
+        "vehicle-019-submersible-survey-skiff"
+      ],
+      "issue": "Six generic/informal names hide exact published vehicles and several capacities are wrong.",
+      "requiredAction": "Use Narcissus (3 crew, 2 stasis), Lander One (2+10), RT Series Group Transport (driver plus up to 20 passengers), NR-9 (2), Daihotai Tractor (5+), and EVA-7C Pressure Pod (2+4)."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-005-m40-ridgeway-tank"
+      ],
+      "issue": "Name and crew are imprecise.",
+      "requiredAction": "Use M40 Ridgeway Heavy Tank and crew 2–3, not seats 4."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-012-ua-571-remote-sentry-carrier"
+      ],
+      "issue": "UA 571-C identifies the tripod sentry gun, not a carrier.",
+      "requiredAction": "Give the project carrier a separate designation and keep the canon gun detachable."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-017-seegson-maintenance-tram",
+        "vehicle-033-maglev-personnel-car"
+      ],
+      "issue": "Both currently lean on Towerlink, risking duplicate silhouettes; maglev propulsion is not verified.",
+      "requiredAction": "Differentiate service conversion from passenger car and remove unsupported canon-maglev language."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-025-uscm-assault-gunship",
+        "vehicle-026-orbital-lifeboat",
+        "vehicle-027-colony-cargo-lifter",
+        "vehicle-029-upp-combat-aerodyne"
+      ],
+      "issue": "Generic role labels overlap named canon models but do not identify one.",
+      "requiredAction": "Select a named model with matching capacity/silhouette or explicitly retain a project adaptation."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-028-weyland-yutani-executive-shuttle"
+      ],
+      "issue": "The only exact phrase found is in an unproduced William Gibson Alien III draft.",
+      "requiredAction": "Keep it as project adaptation and never cite the draft as released canon."
+    },
+    {
+      "severity": "P1",
+      "ids": [
+        "vehicle-032-atmospheric-processor-elevator"
+      ],
+      "issue": "This is building-bound infrastructure, not an autonomous vehicle.",
+      "requiredAction": "Reclassify as a service elevator/rail cabin where the content schema permits."
+    },
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-020-ceto-patrol-boat",
+        "vehicle-021-tantalus-command-skiff",
+        "vehicle-022-echo-9-recon-bike",
+        "vehicle-024-neuro-xeno-transport-rig",
+        "vehicle-031-mining-bore-crawler",
+        "vehicle-034-ice-driller",
+        "vehicle-035-reef-hydrofoil"
+      ],
+      "issue": "These seven exact chassis have no reliable external match and are project originals.",
+      "requiredAction": "Remove licensed-reference/licensed-continuity provenance and keep names, silhouettes, serials, and markings project-owned."
+    },
+    {
+      "severity": "P0",
+      "ids": [
+        "vehicle-008-combat-power-loader",
+        "vehicle-012-ua-571-remote-sentry-carrier",
+        "vehicle-017-seegson-maintenance-tram",
+        "vehicle-023-crucible-caravan-crawler",
+        "vehicle-025-uscm-assault-gunship",
+        "vehicle-026-orbital-lifeboat",
+        "vehicle-027-colony-cargo-lifter",
+        "vehicle-028-weyland-yutani-executive-shuttle",
+        "vehicle-029-upp-combat-aerodyne",
+        "vehicle-030-hyperdyne-synthetic-carrier",
+        "vehicle-032-atmospheric-processor-elevator",
+        "vehicle-033-maglev-personnel-car",
+        "vehicle-036-ripper-siege-loader"
+      ],
+      "issue": "These thirteen entries are adaptations, not exact licensed-reference chassis.",
+      "requiredAction": "Change provenance and UI/lore wording to PROJECT_ADAPTATION before presenting their future art."
+    }
+  ]
+}

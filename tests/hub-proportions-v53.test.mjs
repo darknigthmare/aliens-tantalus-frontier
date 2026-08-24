@@ -8,6 +8,7 @@ import {
   HUB_WORLD,
   getHubDoorBounds
 } from '../src/hub-game.js';
+import { resolveHubRoomArtV56 } from '../src/hub-art-runtime-v56.js';
 import { HubGame, HUB_CRISIS_SOURCE_FACING } from '../src/hub-v51-runtime.js';
 
 class MockImage {
@@ -57,7 +58,7 @@ function withRuntime(run) {
 
 const closeTo = (actual, expected, epsilon = 0.001) => assert.ok(Math.abs(actual - expected) <= epsilon, `${actual} ≈ ${expected}`);
 
-test('les seize salles ont une échelle, un sol et une collision prop mesurés', () => withRuntime(() => {
+test('les seize salles gardent leurs profils mesurés et le briefing rend son calque modulaire v56', () => withRuntime(() => {
   const rooms = HUB_DECKS.flatMap((deck) => deck.rooms);
   assert.equal(rooms.length, 16);
   assert.equal(Object.keys(HUB_ROOM_PROFILES).length, 16);
@@ -75,12 +76,18 @@ test('les seize salles ont une échelle, un sol et une collision prop mesurés',
   hub.drawViewportParallax = (_ctx, viewport, image) => { parallax = { viewport, image }; };
   hub.drawRoomModule(ctx, room, farImage);
 
-  const backgroundDraw = ctx.drawCalls.find((call) => call[0]?.currentSrc === room.background && call.length === 5);
-  assert.ok(backgroundDraw);
-  const [, x, y, width, height] = backgroundDraw;
-  closeTo(width, HUB_WORLD.roomWidth * room.profile.sceneScale);
-  closeTo(x, room.xStart + (HUB_WORLD.roomWidth - width) / 2);
-  closeTo(y + height * room.profile.floorRatio, HUB_WORLD.floorY);
+  const art = resolveHubRoomArtV56(room.id);
+  assert.ok(art);
+  const backgroundDraw = ctx.drawCalls.find((call) => call[0]?.currentSrc === art.overhead.asset && call.length === 9);
+  assert.ok(backgroundDraw, 'le plafond modulaire v56 doit remplacer le bitmap monolithique');
+  const [image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height] = backgroundDraw;
+  assert.deepEqual([sourceX, sourceY, sourceWidth, sourceHeight], [0, 0, image.naturalWidth, image.naturalHeight]);
+  const scaleX = room.profile.worldWidth / 1280;
+  closeTo(x, room.xStart + art.overhead.renderBounds.x * scaleX);
+  closeTo(y, art.overhead.renderBounds.y);
+  closeTo(width, art.overhead.renderBounds.w * scaleX);
+  closeTo(height, art.overhead.renderBounds.h);
+  assert.equal(ctx.drawCalls.some((call) => call[0]?.currentSrc === room.background), false, 'aucun ancien fond monolithique');
   assert.deepEqual(parallax?.viewport, room.viewport);
   assert.equal(parallax?.image, farImage);
 }));

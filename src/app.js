@@ -21,6 +21,10 @@ import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { HubGame, HUB_DECKS } from './hub-v52-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
+import { resolveWeaponVisualProfileV56 } from './weapon-visual-runtime-v56.js';
+import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
+import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import { resolveSpriteSheet, resolveVehicleAnimation } from './sprite-animation-runtime.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -30,6 +34,21 @@ const number = (value) => new Intl.NumberFormat('fr-FR').format(Math.round(Numbe
 const absoluteHours = (clock) => (Math.max(1, Number(clock?.day) || 1) - 1) * 24 + (Number(clock?.hour) || 0);
 const title = (value = '') => String(value).replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+function appendCatalogSprite(card, visual, label) {
+  if (!card || !visual?.path) return;
+  const frame = document.createElement('figure');
+  frame.className = 'catalog-sprite-frame';
+  frame.dataset.identityStatus = visual.identityStatus || 'exact';
+  frame.setAttribute('aria-label', `${label} - première cellule de la plaquette dédiée`);
+  const image = document.createElement('img');
+  image.src = visual.path;
+  image.alt = '';
+  image.loading = 'lazy';
+  image.style.width = `${112 * (Number(visual.columns) || 4)}px`;
+  image.style.height = `${112 * (Number(visual.rows) || 4)}px`;
+  frame.append(image);
+  card.insertBefore(frame, card.querySelector('p'));
+}
 const memoryStorage = (() => {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: (key) => values.delete(key) };
@@ -368,6 +387,15 @@ function renderArmory() {
       : `${item.description} · ${item.charges} charges · ${item.mass} kg`;
     return `<article class="catalog-card"><span class="eyebrow">${kind.toUpperCase()} · ${escapeHtml(item.rarity)}</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(description)}</p><div class="mini-tags"><span>${escapeHtml(item.family || item.utility)}</span><span>${escapeHtml(item.mark || item.grade)}</span></div><footer><span>${item.id}</span>${procurementAction(kind, item)}</footer></article>`;
   }).join('');
+  all('.catalog-card', byId('armory-list')).forEach((card, index) => {
+    const item = items[index];
+    const visual = kind === 'weapon'
+      ? resolveWeaponVisualProfileV56(item)
+      : resolveEquipmentVisualProfileV56(item);
+    const heading = card.querySelector('h3');
+    if (visual?.displayName && heading) heading.textContent = visual.displayName;
+    appendCatalogSprite(card, visual, visual?.displayName || item.name);
+  });
 }
 
 function renderEnemies() {
@@ -375,12 +403,20 @@ function renderEnemies() {
   const term = byId('enemy-search').value.trim().toLowerCase();
   const items = ENEMIES.filter((enemy) => (biology === 'all' || enemy.biology === biology) && JSON.stringify(enemy).toLowerCase().includes(term));
   byId('enemy-list').innerHTML = items.map((enemy) => `<article class="catalog-card"><span class="eyebrow">${escapeHtml(enemy.biology)} · ${escapeHtml(enemy.frequency)}</span><h3>${escapeHtml(enemy.name)}</h3><p>PV ${enemy.health} · dégâts ${enemy.damage} · vitesse ${enemy.speed} · armure ${enemy.armor}</p><div class="mini-tags"><span>${escapeHtml(enemy.caste)}</span>${[enemy.behavior].filter(Boolean).map((behavior) => `<span>${escapeHtml(behavior)}</span>`).join('')}</div><footer><span>${enemy.id}</span><span>${escapeHtml(enemy.habitats.slice(0, 2).join(' · '))}</span></footer></article>`).join('');
+  all('.catalog-card', byId('enemy-list')).forEach((card, index) => {
+    appendCatalogSprite(card, resolveEnemyVisualProfile(items[index]), items[index].name);
+  });
 }
 
 function renderVehicles() {
   const term = byId('vehicle-search').value.trim().toLowerCase();
   const items = VEHICLES.filter((vehicle) => JSON.stringify(vehicle).toLowerCase().includes(term));
   byId('vehicle-list').innerHTML = items.map((vehicle) => `<article class="catalog-card"><span class="eyebrow">${escapeHtml(vehicle.family)} · ${escapeHtml(vehicle.fit)}</span><h3>${escapeHtml(vehicle.name)}</h3><p>Coque ${vehicle.hull} · vitesse ${vehicle.speed} · cargo ${vehicle.cargo} · ${vehicle.seats.length} sièges</p><div class="mini-tags">${vehicle.seats.map((seat) => `<span>${escapeHtml(seat.role)}</span>`).join('')}${vehicle.actions.map((action) => `<span>${escapeHtml(action)}</span>`).join('')}</div><footer><span>${vehicle.id}</span>${procurementAction('vehicle', vehicle)}</footer></article>`).join('');
+  all('.catalog-card', byId('vehicle-list')).forEach((card, index) => {
+    const request = resolveVehicleAnimation(items[index]);
+    const sheet = request ? resolveSpriteSheet(request.sheetId) : null;
+    appendCatalogSprite(card, sheet, items[index].name);
+  });
 }
 
 function renderCrew() {
@@ -959,7 +995,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v55-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v56-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],

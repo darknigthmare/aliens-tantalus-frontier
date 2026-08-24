@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v55",
+  "release": "v56",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -13,6 +13,14 @@
       "v50-4x4": {
         "columns": 4,
         "rows": 4,
+        "cellWidth": 256,
+        "cellHeight": 256,
+        "guard": 16,
+        "frameOrder": "row-major"
+      },
+      "v56-equipment-2x2": {
+        "columns": 2,
+        "rows": 2,
         "cellWidth": 256,
         "cellHeight": 256,
         "guard": 16,
@@ -42,6 +50,12 @@
         "kind": "grip",
         "x": 96,
         "y": 144,
+        "unit": "cell-pixel"
+      },
+      "equipment-center": {
+        "kind": "center",
+        "x": 128,
+        "y": 128,
         "unit": "cell-pixel"
       }
     },
@@ -198,6 +212,258 @@
         "y": 112,
         "width": 220,
         "height": 128,
+        "unit": "cell-pixel"
+      },
+      "m40-ridgeway-hull": {
+        "x": 12,
+        "y": 98,
+        "width": 232,
+        "height": 142,
+        "unit": "cell-pixel"
+      },
+      "ud4b-dropship-hull": {
+        "x": 8,
+        "y": 98,
+        "width": 240,
+        "height": 142,
+        "unit": "cell-pixel"
+      },
+      "narcissus-lifeboat-hull": {
+        "x": 12,
+        "y": 104,
+        "width": 232,
+        "height": 130,
+        "unit": "cell-pixel"
+      },
+      "lander-one-hull": {
+        "x": 8,
+        "y": 88,
+        "width": 240,
+        "height": 152,
+        "unit": "cell-pixel"
+      },
+      "rt01-transport-hull": {
+        "x": 10,
+        "y": 112,
+        "width": 236,
+        "height": 128,
+        "unit": "cell-pixel"
+      },
+      "nr9-euv01-hull": {
+        "x": 18,
+        "y": 90,
+        "width": 220,
+        "height": 150,
+        "unit": "cell-pixel"
+      },
+      "daihotai-tractor-hull": {
+        "x": 18,
+        "y": 80,
+        "width": 220,
+        "height": 160,
+        "unit": "cell-pixel"
+      },
+      "eva7c-pressure-pod-hull": {
+        "x": 24,
+        "y": 60,
+        "width": 208,
+        "height": 180,
+        "unit": "cell-pixel"
+      },
+      "trilobite-sprawl": {
+        "x": 20,
+        "y": 126,
+        "width": 216,
+        "height": 114,
+        "unit": "cell-pixel"
+      },
+      "boar-ground": {
+        "x": 24,
+        "y": 140,
+        "width": 208,
+        "height": 100,
+        "unit": "cell-pixel"
+      },
+      "combat-power-loader-frame": {
+        "x": 60,
+        "y": 36,
+        "width": 136,
+        "height": 204,
+        "unit": "cell-pixel"
+      },
+      "ua571-carrier-hull": {
+        "x": 18,
+        "y": 120,
+        "width": 220,
+        "height": 120,
+        "unit": "cell-pixel"
+      },
+      "seegson-tram-hull": {
+        "x": 10,
+        "y": 112,
+        "width": 236,
+        "height": 128,
+        "unit": "cell-pixel"
+      },
+      "crucible-crawler-hull": {
+        "x": 8,
+        "y": 104,
+        "width": 240,
+        "height": 136,
+        "unit": "cell-pixel"
+      },
+      "assault-gunship-hull": {
+        "x": 10,
+        "y": 112,
+        "width": 236,
+        "height": 128,
+        "unit": "cell-pixel"
+      },
+      "orbital-lifeboat-hull": {
+        "x": 12,
+        "y": 116,
+        "width": 232,
+        "height": 124,
+        "unit": "cell-pixel"
+      },
+      "cargo-lifter-hull": {
+        "x": 14,
+        "y": 118,
+        "width": 228,
+        "height": 122,
+        "unit": "cell-pixel"
+      },
+      "executive-shuttle-hull": {
+        "x": 10,
+        "y": 108,
+        "width": 236,
+        "height": 132,
+        "unit": "cell-pixel"
+      },
+      "upp-aerodyne-hull": {
+        "x": 10,
+        "y": 116,
+        "width": 236,
+        "height": 124,
+        "unit": "cell-pixel"
+      },
+      "hyperdyne-carrier-hull": {
+        "x": 12,
+        "y": 116,
+        "width": 232,
+        "height": 124,
+        "unit": "cell-pixel"
+      },
+      "processor-elevator-cage": {
+        "x": 30,
+        "y": 18,
+        "width": 196,
+        "height": 222,
+        "unit": "cell-pixel"
+      },
+      "maglev-car-hull": {
+        "x": 8,
+        "y": 152,
+        "width": 240,
+        "height": 88,
+        "unit": "cell-pixel"
+      },
+      "ripper-siege-loader-frame": {
+        "x": 48,
+        "y": 34,
+        "width": 160,
+        "height": 206,
+        "unit": "cell-pixel"
+      },
+      "neuro-xeno-ground": {
+        "x": 20,
+        "y": 126,
+        "width": 216,
+        "height": 114,
+        "unit": "cell-pixel"
+      },
+      "atarax-ripper-ground": {
+        "x": 24,
+        "y": 116,
+        "width": 216,
+        "height": 124,
+        "unit": "cell-pixel"
+      },
+      "korari-stalker-ground": {
+        "x": 20,
+        "y": 144,
+        "width": 216,
+        "height": 96,
+        "unit": "cell-pixel"
+      },
+      "ceto-reef-predator-water": {
+        "x": 16,
+        "y": 150,
+        "width": 224,
+        "height": 90,
+        "unit": "cell-pixel"
+      },
+      "tantalus-tunnel-vermin-ground": {
+        "x": 16,
+        "y": 156,
+        "width": 224,
+        "height": 84,
+        "unit": "cell-pixel"
+      },
+      "ceto-patrol-boat-hull": {
+        "x": 8,
+        "y": 110,
+        "width": 240,
+        "height": 130,
+        "unit": "cell-pixel"
+      },
+      "tantalus-command-skiff-hull": {
+        "x": 10,
+        "y": 118,
+        "width": 236,
+        "height": 122,
+        "unit": "cell-pixel"
+      },
+      "echo9-recon-bike-frame": {
+        "x": 36,
+        "y": 78,
+        "width": 184,
+        "height": 162,
+        "unit": "cell-pixel"
+      },
+      "neuro-xeno-transport-rig-hull": {
+        "x": 12,
+        "y": 90,
+        "width": 232,
+        "height": 150,
+        "unit": "cell-pixel"
+      },
+      "mining-bore-crawler-hull": {
+        "x": 8,
+        "y": 120,
+        "width": 240,
+        "height": 120,
+        "unit": "cell-pixel"
+      },
+      "ice-driller-hull": {
+        "x": 8,
+        "y": 116,
+        "width": 240,
+        "height": 124,
+        "unit": "cell-pixel"
+      },
+      "reef-hydrofoil-hull": {
+        "x": 8,
+        "y": 128,
+        "width": 240,
+        "height": 112,
+        "unit": "cell-pixel"
+      },
+      "equipment-pickup": {
+        "x": 34,
+        "y": 34,
+        "width": 188,
+        "height": 188,
         "unit": "cell-pixel"
       }
     }
@@ -1904,9 +2170,667 @@
           }
         ]
       }
+    ],
+    "player-melee-v56": [
+      {
+        "id": "knife-ready",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 6,
+        "loop": true,
+        "events": [
+          {
+            "frame": 1,
+            "type": "combat:melee-ready"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "knife-attack",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 12,
+        "loop": false,
+        "events": [
+          {
+            "frame": 6,
+            "type": "combat:knife-hit"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "rifle-bash",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 11,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:rifle-bash-hit"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "melee-defense",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 13,
+            "type": "combat:deflect-window"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "player-interaction-v56": [
+      {
+        "id": "control-use",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 2,
+            "type": "interaction:control"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "lift-carry",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 7,
+        "loop": true,
+        "events": [
+          {
+            "frame": 6,
+            "type": "interaction:carry"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "ground-interact",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "interaction:pickup"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "force-interact",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 14,
+            "type": "interaction:force"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "player-tool-use-v56": [
+      {
+        "id": "motion-tracker",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 2,
+            "type": "tool:tracker-pulse"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "cutting-torch",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 6,
+            "type": "tool:cutting-spark"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "access-tuner",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "tool:access-confirm"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "maintenance-jack",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 14,
+            "type": "tool:jack-impact"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "enemy-action-v56": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "creature:breathe"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "chase",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 10,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:step-left"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "attack",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 10,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:attack-hit"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "death",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "vehicle-action-v56": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 3,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "vehicle:systems-idle"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "move",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 8,
+        "loop": true,
+        "events": [
+          {
+            "frame": 6,
+            "type": "vehicle:propulsion-cycle"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "action",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "vehicle:primary-action"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "damage",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "weapon-action-v56": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "weapon:idle"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "action",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 11,
+        "loop": false,
+        "events": [
+          {
+            "frame": 6,
+            "type": "weapon:action"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "reload",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 8,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "weapon:reload"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "service",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 15,
+            "type": "weapon:service-complete"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "equipment-use-v56": [
+      {
+        "id": "packed",
+        "frames": [
+          0
+        ],
+        "fps": 1,
+        "loop": true,
+        "events": [],
+        "row": 0
+      },
+      {
+        "id": "ready",
+        "frames": [
+          1
+        ],
+        "fps": 1,
+        "loop": true,
+        "events": [],
+        "row": 0
+      },
+      {
+        "id": "use",
+        "frames": [
+          2
+        ],
+        "fps": 1,
+        "loop": false,
+        "events": [
+          {
+            "frame": 2,
+            "type": "equipment:use"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "spent",
+        "frames": [
+          3
+        ],
+        "fps": 1,
+        "loop": false,
+        "events": [
+          {
+            "frame": 3,
+            "type": "equipment:spent"
+          }
+        ],
+        "row": 1
+      }
     ]
   },
   "sheets": [
+    {
+      "id": "enemy.abomination-pathogen-brute.action.v56",
+      "family": "enemy",
+      "subject": "enemy.abomination-pathogen-brute.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/abomination-pathogen-brute-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/abomination-pathogen-brute-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "crusher-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.arcology-lurker.action.v56",
+      "family": "enemy",
+      "subject": "enemy.arcology-lurker.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/arcology-lurker-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "lurker-medium",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.atarax-controller.action.v56",
+      "family": "enemy",
+      "subject": "enemy.atarax-controller.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/atarax-controller-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.atarax-ripper.action.v56",
+      "family": "enemy",
+      "subject": "enemy.atarax-ripper.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/atarax-ripper-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "atarax-ripper-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.caravan-stalker.action.v56",
+      "family": "enemy",
+      "subject": "enemy.caravan-stalker.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/caravan-stalker-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "runner-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.ceto-reef-predator.action.v56",
+      "family": "enemy",
+      "subject": "enemy.ceto-reef-predator.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/ceto-reef-predator-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "ceto-reef-predator-water",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
     {
       "id": "enemy.chestburster.action",
       "family": "enemy",
@@ -1930,6 +2854,106 @@
           "src/enemy-visual-overrides-v55.js",
           "src/enemy-visual-runtime-v53.js",
           "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.colonial-raider.action.v56",
+      "family": "enemy",
+      "subject": "enemy.colonial-raider.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/colonial-raider-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/colonial-raider-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.cult-host.action.v56",
+      "family": "enemy",
+      "subject": "enemy.cult-host.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/cult-host-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.deacon-line.action.v56",
+      "family": "enemy",
+      "subject": "enemy.deacon-line.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/deacon-line-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.dust-runner.action.v56",
+      "family": "enemy",
+      "subject": "enemy.dust-runner.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/dust-runner-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "runner-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
         ]
       }
     },
@@ -1959,6 +2983,106 @@
       "identityVerified": true
     },
     {
+      "id": "enemy.foundry-crusher.action.v56",
+      "family": "enemy",
+      "subject": "enemy.foundry-crusher.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/foundry-crusher-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "crusher-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.foundry-drone.action.v56",
+      "family": "enemy",
+      "subject": "enemy.foundry-drone.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/foundry-drone-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/foundry-drone-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.korari-stalker.action.v56",
+      "family": "enemy",
+      "subject": "enemy.korari-stalker.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/korari-stalker-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/korari-stalker-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "korari-stalker-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.monica-line.action.v56",
+      "family": "enemy",
+      "subject": "enemy.monica-line.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/monica-line-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.neomorph.locomotion",
       "family": "enemy",
       "subject": "Neomorph",
@@ -1982,6 +3106,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "enemy.neuro-xeno-drone.action.v56",
+      "family": "enemy",
+      "subject": "enemy.neuro-xeno-drone.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/neuro-xeno-drone-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/neuro-xeno-drone-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "neuro-xeno-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
     },
     {
       "id": "enemy.ovomorph.cycle",
@@ -2060,6 +3209,81 @@
       }
     },
     {
+      "id": "enemy.protomorph.action.v56",
+      "family": "enemy",
+      "subject": "enemy.protomorph.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/protomorph-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.reef-spitter.action.v56",
+      "family": "enemy",
+      "subject": "enemy.reef-spitter.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/reef-spitter-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/reef-spitter-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "spitter-medium",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.reef-stalker.action.v56",
+      "family": "enemy",
+      "subject": "enemy.reef-stalker.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/reef-stalker-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "lurker-medium",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.ripper-queen.action",
       "family": "enemy",
       "subject": "Ripper Queen",
@@ -2081,6 +3305,231 @@
           "src/game-v52-runtime.js",
           "src/enemy-visual-runtime-v53.js",
           "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.salvage-hive-brute.action.v56",
+      "family": "enemy",
+      "subject": "enemy.salvage-hive-brute.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "crusher-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.seegson-security.action.v56",
+      "family": "enemy",
+      "subject": "enemy.seegson-security.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/seegson-security-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.siege-royal.action.v56",
+      "family": "enemy",
+      "subject": "enemy.siege-royal.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/siege-royal-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "praetorian-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.specimen-six-line.action.v56",
+      "family": "enemy",
+      "subject": "enemy.specimen-six-line.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/specimen-six-line-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.tantalus-tunnel-vermin.action.v56",
+      "family": "enemy",
+      "subject": "enemy.tantalus-tunnel-vermin.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "tantalus-tunnel-vermin-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.trilobite-echo.action.v56",
+      "family": "enemy",
+      "subject": "enemy.trilobite-echo.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/trilobite-echo-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "trilobite-sprawl",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.upp-vanguard.action.v56",
+      "family": "enemy",
+      "subject": "enemy.upp-vanguard.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/upp-vanguard-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.weyland-yutani-commando.action.v56",
+      "family": "enemy",
+      "subject": "enemy.weyland-yutani-commando.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/weyland-yutani-commando-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.wild-boar-host.action.v56",
+      "family": "enemy",
+      "subject": "enemy.wild-boar-host.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/wild-boar-host-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "boar-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
         ]
       }
     },
@@ -2108,6 +3557,106 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "enemy.xenoborg.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenoborg.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenoborg-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenoborg-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-big-chap.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-big-chap.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-big-chap-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-big-chap-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-boiler.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-boiler.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-boiler-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-burster.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-burster.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-burster-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-burster-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "runner-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
     },
     {
       "id": "enemy.xenomorph-carrier.action",
@@ -2264,6 +3813,56 @@
       }
     },
     {
+      "id": "enemy.xenomorph-prowler.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-prowler.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-prowler-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-prowler-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "runner-ground",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.xenomorph-queen.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-queen.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-queen-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "queen-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.xenomorph-queen.combat",
       "family": "enemy",
       "subject": "Xenomorph Queen",
@@ -2366,6 +3965,31 @@
       }
     },
     {
+      "id": "enemy.xenomorph-warrior.action.v56",
+      "family": "enemy",
+      "subject": "enemy.xenomorph-warrior.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/xenomorph-warrior-action-sheet-v56.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/xenomorph-warrior-action-sheet-v56.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "enemy-action-v56",
+      "pivot": "creature-ground",
+      "hitbox": "xenomorph-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.xenomorph-warrior.combat",
       "family": "enemy",
       "subject": "Xenomorph Warrior",
@@ -2389,6 +4013,731 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "equipment.ammo-satchel.use",
+      "family": "equipment",
+      "subject": "equipment.ammo-satchel.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/ammo-satchel-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/ammo-satchel-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.apesuit-mk3.use",
+      "family": "equipment",
+      "subject": "equipment.apesuit-mk3.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/apesuit-mk3-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/apesuit-mk3-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.atarax-control-rig.use",
+      "family": "equipment",
+      "subject": "equipment.atarax-control-rig.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/atarax-control-rig-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/atarax-control-rig-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.catch-pole.use",
+      "family": "equipment",
+      "subject": "equipment.catch-pole.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/catch-pole-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/catch-pole-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.colony-beacon.use",
+      "family": "equipment",
+      "subject": "equipment.colony-beacon.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/colony-beacon-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/colony-beacon-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.cryo-mine.use",
+      "family": "equipment",
+      "subject": "equipment.cryo-mine.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/cryo-mine-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/cryo-mine-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.drone-controller.use",
+      "family": "equipment",
+      "subject": "equipment.drone-controller.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/drone-controller-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/drone-controller-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.electroshock-trap.use",
+      "family": "equipment",
+      "subject": "equipment.electroshock-trap.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/electroshock-trap-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/electroshock-trap-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.flashlight.use",
+      "family": "equipment",
+      "subject": "equipment.flashlight.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/flashlight-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/flashlight-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.hazmat-suit.use",
+      "family": "equipment",
+      "subject": "equipment.hazmat-suit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/hazmat-suit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/hazmat-suit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.incinerator-fuel-pack.use",
+      "family": "equipment",
+      "subject": "equipment.incinerator-fuel-pack.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/incinerator-fuel-pack-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/incinerator-fuel-pack-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.m3-personnel-armor.use",
+      "family": "equipment",
+      "subject": "equipment.m3-personnel-armor.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/m3-personnel-armor-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/m3-personnel-armor-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.m314-motion-tracker.use",
+      "family": "equipment",
+      "subject": "equipment.m314-motion-tracker.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/m314-motion-tracker-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/m314-motion-tracker-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.maintenance-jack.use",
+      "family": "equipment",
+      "subject": "equipment.maintenance-jack.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/maintenance-jack-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/maintenance-jack-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.medkit.use",
+      "family": "equipment",
+      "subject": "equipment.medkit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/medkit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/medkit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.neuro-link-helmet.use",
+      "family": "equipment",
+      "subject": "equipment.neuro-link-helmet.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/neuro-link-helmet-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/neuro-link-helmet-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.pathogen-scanner.use",
+      "family": "equipment",
+      "subject": "equipment.pathogen-scanner.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/pathogen-scanner-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/pathogen-scanner-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.portable-battery.use",
+      "family": "equipment",
+      "subject": "equipment.portable-battery.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/portable-battery-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/portable-battery-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.portable-quarantine.use",
+      "family": "equipment",
+      "subject": "equipment.portable-quarantine.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/portable-quarantine-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/portable-quarantine-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.portable-sentry.use",
+      "family": "equipment",
+      "subject": "equipment.portable-sentry.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/portable-sentry-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/portable-sentry-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.pressure-suit.use",
+      "family": "equipment",
+      "subject": "equipment.pressure-suit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/pressure-suit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/pressure-suit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.rebreather.use",
+      "family": "equipment",
+      "subject": "equipment.rebreather.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/rebreather-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/rebreather-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.ripper-xenoarmor.use",
+      "family": "equipment",
+      "subject": "equipment.ripper-xenoarmor.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/ripper-xenoarmor-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/ripper-xenoarmor-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.security-access-tuner.use",
+      "family": "equipment",
+      "subject": "equipment.security-access-tuner.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/security-access-tuner-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/security-access-tuner-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.seismic-surveyor.use",
+      "family": "equipment",
+      "subject": "equipment.seismic-surveyor.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/seismic-surveyor-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/seismic-surveyor-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.signal-jammer.use",
+      "family": "equipment",
+      "subject": "equipment.signal-jammer.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/signal-jammer-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/signal-jammer-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.synthetic-repair-kit.use",
+      "family": "equipment",
+      "subject": "equipment.synthetic-repair-kit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/synthetic-repair-kit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/synthetic-repair-kit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.trauma-kit.use",
+      "family": "equipment",
+      "subject": "equipment.trauma-kit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/trauma-kit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/trauma-kit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "equipment.welding-kit.use",
+      "family": "equipment",
+      "subject": "equipment.welding-kit.use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/tools/welding-kit-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/tools/welding-kit-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v56-equipment-2x2",
+      "clips": "equipment-use-v56",
+      "pivot": "equipment-center",
+      "hitbox": "equipment-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/equipment-visual-runtime-v56.js",
+          "src/app.js"
+        ]
+      }
     },
     {
       "id": "npc.asha-mbaye.locomotion",
@@ -2420,6 +4769,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.asha-mbaye.mission",
+      "family": "npc",
+      "subject": "Asha Mbaye - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/asha-mbaye-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/asha-mbaye-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "npc.bishop-9.locomotion",
@@ -2503,6 +4877,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.cal-mercer.mission",
+      "family": "npc",
+      "subject": "Cal Mercer - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/cal-mercer-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/cal-mercer-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.david-8r.locomotion",
       "family": "npc",
       "subject": "DAVID-8R",
@@ -2534,6 +4933,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.david-8r.mission",
+      "family": "npc",
+      "subject": "DAVID-8R - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/david-8r-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/david-8r-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.echo-a.locomotion",
       "family": "npc",
       "subject": "ECHO-A",
@@ -2563,6 +4987,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.echo-a.mission",
+      "family": "npc",
+      "subject": "ECHO-A - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/echo-a-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/echo-a-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "npc.idris-kwan.locomotion",
@@ -2646,6 +5095,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.inez-harlow.mission",
+      "family": "npc",
+      "subject": "Inez Harlow - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/inez-harlow-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/inez-harlow-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.jun-park.locomotion",
       "family": "npc",
       "subject": "Jun Park",
@@ -2677,6 +5151,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.jun-park.mission",
+      "family": "npc",
+      "subject": "Jun Park - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/jun-park-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/jun-park-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.leila-s-rensen.locomotion",
       "family": "npc",
       "subject": "Leila Sørensen",
@@ -2706,6 +5205,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "npc.leila-s-rensen.mission",
+      "family": "npc",
+      "subject": "Leila Sørensen - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/leila-s-rensen-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/leila-s-rensen-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
     },
     {
       "id": "npc.maksim-orlov.locomotion",
@@ -2889,6 +5413,31 @@
       "identityVerified": true
     },
     {
+      "id": "npc.pablo-reyes.mission",
+      "family": "npc",
+      "subject": "Pablo Reyes - mission",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/npcs/pablo-reyes-mission-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/npcs/pablo-reyes-mission-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "npc-mission-v55",
+      "pivot": "humanoid-feet",
+      "hitbox": "npc-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/npc-mission-runtime-v55.js",
+          "src/game.js"
+        ]
+      }
+    },
+    {
       "id": "npc.rook.locomotion",
       "family": "npc",
       "subject": "Rook",
@@ -3069,6 +5618,31 @@
       "identityVerified": true
     },
     {
+      "id": "player.echo9-marine.interaction",
+      "family": "player",
+      "subject": "player.echo9-marine.interaction",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/player/echo9-marine-interaction-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "player-interaction-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "player-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "player.echo9-marine.locomotion",
       "family": "player",
       "subject": "Echo-9 Marine",
@@ -3094,6 +5668,331 @@
       "identityVerified": true
     },
     {
+      "id": "player.echo9-marine.melee",
+      "family": "player",
+      "subject": "player.echo9-marine.melee",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/player/echo9-marine-melee-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "player-melee-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "player-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "player.echo9-marine.tool-use",
+      "family": "player",
+      "subject": "player.echo9-marine.tool-use",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/player/echo9-marine-tool-use-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "player-tool-use-v56",
+      "pivot": "humanoid-feet",
+      "hitbox": "player-standing",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.atmospheric-processor-elevator.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.atmospheric-processor-elevator.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/atmospheric-processor-elevator-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/atmospheric-processor-elevator-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "processor-elevator-cage",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ceto-patrol-boat.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.ceto-patrol-boat.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ceto-patrol-boat-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ceto-patrol-boat-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "ceto-patrol-boat-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.colony-cargo-lifter.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.colony-cargo-lifter.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/colony-cargo-lifter-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/colony-cargo-lifter-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "cargo-lifter-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.combat-power-loader.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.combat-power-loader.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/combat-power-loader-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/combat-power-loader-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "combat-power-loader-frame",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.crucible-caravan-crawler.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.crucible-caravan-crawler.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/crucible-caravan-crawler-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/crucible-caravan-crawler-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "crucible-crawler-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.daihotai-tractor.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.daihotai-tractor.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/daihotai-tractor-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/daihotai-tractor-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "daihotai-tractor-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.echo-9-recon-bike.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.echo-9-recon-bike.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/echo-9-recon-bike-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/echo-9-recon-bike-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "echo9-recon-bike-frame",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.eva7c-pressure-pod.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.eva7c-pressure-pod.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/eva-7c-pressure-pod-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/eva-7c-pressure-pod-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "eva7c-pressure-pod-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.hyperdyne-synthetic-carrier.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.hyperdyne-synthetic-carrier.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/hyperdyne-synthetic-carrier-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/hyperdyne-synthetic-carrier-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "hyperdyne-carrier-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ice-driller.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.ice-driller.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ice-driller-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ice-driller-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "ice-driller-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.lander-one-class-e.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.lander-one-class-e.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/lander-one-class-e-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/lander-one-class-e-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "lander-one-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "vehicle.m22a3-jackson-tank.action",
       "family": "vehicle",
       "subject": "M22A3 Jackson Tank",
@@ -3115,6 +6014,31 @@
           "src/sprite-animation-runtime.js",
           "src/vehicle-visual-runtime-v55.js",
           "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.m40-ridgeway-heavy-tank.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.m40-ridgeway-heavy-tank.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m40-ridgeway-heavy-tank-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m40-ridgeway-heavy-tank-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "m40-ridgeway-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
         ]
       }
     },
@@ -3168,6 +6092,156 @@
       }
     },
     {
+      "id": "vehicle.maglev-personnel-car.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.maglev-personnel-car.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/maglev-personnel-car-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/maglev-personnel-car-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "maglev-car-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.mining-bore-crawler.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.mining-bore-crawler.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/mining-bore-crawler-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/mining-bore-crawler-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "mining-bore-crawler-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.narcissus-lifeboat.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.narcissus-lifeboat.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/narcissus-lifeboat-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/narcissus-lifeboat-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "narcissus-lifeboat-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.neuro-xeno-transport-rig.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.neuro-xeno-transport-rig.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/neuro-xeno-transport-rig-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/neuro-xeno-transport-rig-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "neuro-xeno-transport-rig-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.nr9-euv01-atv.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.nr9-euv01-atv.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/nr-9-euv01-atv-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/nr-9-euv01-atv-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "nr9-euv01-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.orbital-lifeboat.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.orbital-lifeboat.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/orbital-lifeboat-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/orbital-lifeboat-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "orbital-lifeboat-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "vehicle.p5000-powered-work-loader.action",
       "family": "vehicle",
       "subject": "P-5000 Powered Work Loader",
@@ -3189,6 +6263,181 @@
           "src/sprite-animation-runtime.js",
           "src/vehicle-visual-runtime-v55.js",
           "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.reef-hydrofoil.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.reef-hydrofoil.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/reef-hydrofoil-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/reef-hydrofoil-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "reef-hydrofoil-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ripper-siege-loader.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.ripper-siege-loader.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ripper-siege-loader-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ripper-siege-loader-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "ripper-siege-loader-frame",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.rt01-group-transport.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.rt01-group-transport.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/rt01-group-transport-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/rt01-group-transport-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "rt01-transport-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.seegson-maintenance-tram.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.seegson-maintenance-tram.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/seegson-maintenance-tram-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/seegson-maintenance-tram-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "seegson-tram-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.tantalus-command-skiff.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.tantalus-command-skiff.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/tantalus-command-skiff-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/tantalus-command-skiff-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "tantalus-command-skiff-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ua571-remote-sentry-carrier.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.ua571-remote-sentry-carrier.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ua-571-remote-sentry-carrier-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ua-571-remote-sentry-carrier-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "ua571-carrier-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ud4b-cheyenne-dropship.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.ud4b-cheyenne-dropship.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ud-4b-cheyenne-dropship-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ud-4b-cheyenne-dropship-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "ud4b-dropship-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
         ]
       }
     },
@@ -3218,6 +6467,331 @@
       }
     },
     {
+      "id": "vehicle.upp-combat-aerodyne.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.upp-combat-aerodyne.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/upp-combat-aerodyne-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/upp-combat-aerodyne-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "upp-aerodyne-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.uscm-assault-gunship.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.uscm-assault-gunship.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/uscm-assault-gunship-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/uscm-assault-gunship-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "assault-gunship-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.weyland-yutani-executive-shuttle.action.v56",
+      "family": "vehicle",
+      "subject": "vehicle.weyland-yutani-executive-shuttle.action.v56",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/weyland-yutani-executive-shuttle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/weyland-yutani-executive-shuttle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-action-v56",
+      "pivot": "vehicle-ground",
+      "hitbox": "executive-shuttle-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.bolt-gun.action",
+      "family": "weapon",
+      "subject": "weapon.bolt-gun.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/bolt-gun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/bolt-gun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.combat-knife.action",
+      "family": "weapon",
+      "subject": "weapon.combat-knife.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/combat-knife-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/combat-knife-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.combi-stick.action",
+      "family": "weapon",
+      "subject": "weapon.combi-stick.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/combi-stick-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/combi-stick-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.cryo-lance.action",
+      "family": "weapon",
+      "subject": "weapon.cryo-lance.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/cryo-lance-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/cryo-lance-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.cutting-torch.action",
+      "family": "weapon",
+      "subject": "weapon.cutting-torch.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/cutting-torch-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/cutting-torch-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.fire-axe.action",
+      "family": "weapon",
+      "subject": "weapon.fire-axe.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/fire-axe-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/fire-axe-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.foundry-nailgun.action",
+      "family": "weapon",
+      "subject": "weapon.foundry-nailgun.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/foundry-nailgun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/foundry-nailgun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m240-incinerator-unit.action",
+      "family": "weapon",
+      "subject": "weapon.m240-incinerator-unit.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m240-incinerator-unit-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m240-incinerator-unit-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m37a2-pump-shotgun.action",
+      "family": "weapon",
+      "subject": "weapon.m37a2-pump-shotgun.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m37a2-pump-shotgun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m37a2-pump-shotgun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m40-hedp-grenade.action",
+      "family": "weapon",
+      "subject": "weapon.m40-hedp-grenade.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m40-hedp-grenade-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m40-hedp-grenade-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.m41a-pulse-rifle.action",
       "family": "weapon",
       "subject": "M41A Pulse Rifle",
@@ -3240,6 +6814,381 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "weapon.m41a2-pulse-rifle.action",
+      "family": "weapon",
+      "subject": "weapon.m41a2-pulse-rifle.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m41a2-pulse-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m41a2-pulse-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m4a3-service-pistol.action",
+      "family": "weapon",
+      "subject": "weapon.m4a3-service-pistol.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m4a3-service-pistol-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m4a3-service-pistol-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m56-smartgun.action",
+      "family": "weapon",
+      "subject": "weapon.m56-smartgun.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m56-smartgun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m56-smartgun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.magnum-357-revolver.action",
+      "family": "weapon",
+      "subject": "weapon.magnum-357-revolver.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/357-magnum-revolver-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/357-magnum-revolver-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.maintenance-jack.action",
+      "family": "weapon",
+      "subject": "weapon.maintenance-jack.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/maintenance-jack-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/maintenance-jack-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.neuro-link-disruptor.action",
+      "family": "weapon",
+      "subject": "weapon.neuro-link-disruptor.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/neuro-link-disruptor-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/neuro-link-disruptor-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.pathogen-containment-projector.action",
+      "family": "weapon",
+      "subject": "weapon.pathogen-containment-projector.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/pathogen-containment-projector-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/pathogen-containment-projector-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.reef-caster.action",
+      "family": "weapon",
+      "subject": "weapon.reef-caster.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/reef-caster-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/reef-caster-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.ripper-acid-projector.action",
+      "family": "weapon",
+      "subject": "weapon.ripper-acid-projector.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/ripper-acid-projector-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/ripper-acid-projector-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.smart-disc.action",
+      "family": "weapon",
+      "subject": "weapon.smart-disc.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/smart-disc-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/smart-disc-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.sonic-harpoon.action",
+      "family": "weapon",
+      "subject": "weapon.sonic-harpoon.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/sonic-harpoon-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/sonic-harpoon-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.stun-baton.action",
+      "family": "weapon",
+      "subject": "weapon.stun-baton.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/stun-baton-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/stun-baton-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.ua-571c-sentry-gun.action",
+      "family": "weapon",
+      "subject": "weapon.ua-571c-sentry-gun.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/ua-571c-sentry-gun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/ua-571c-sentry-gun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.vp70-combat-pistol.action",
+      "family": "weapon",
+      "subject": "weapon.vp70-combat-pistol.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/vp70-combat-pistol-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/vp70-combat-pistol-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.wrist-blades.action",
+      "family": "weapon",
+      "subject": "weapon.wrist-blades.action",
+      "wave": "v56",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/wrist-blades-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/wrist-blades-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
     }
   ]
 }

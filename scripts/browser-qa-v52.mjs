@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v55') && shell.release === '55.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v56') && shell.release === '56.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -229,6 +229,26 @@ try {
 
   await click('[data-view="armory"]');
   await selectValue('#armory-kind', 'equipment');
+  const equipmentVisual = await evaluate(`(async () => {
+    const image = document.querySelector('#armory-list .catalog-sprite-frame img');
+    if (!image) return null;
+    image.loading = 'eager';
+    await image.decode();
+    return { src: image.getAttribute('src'), naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight, displayWidth: image.style.width, displayHeight: image.style.height };
+  })()`);
+  requireThat(equipmentVisual?.src?.includes('/sprites/normalized/tools/') && equipmentVisual.naturalWidth === 512 && equipmentVisual.naturalHeight === 512 && equipmentVisual.displayWidth === '224px' && equipmentVisual.displayHeight === '224px', `Plaque équipement v56 non chargée: ${JSON.stringify(equipmentVisual)}`);
+  await selectValue('#armory-kind', 'weapon');
+  const pathogenVisual = await evaluate(`(async () => {
+    const image = document.querySelector('#armory-list img[src$="/pathogen-containment-projector-action-sheet.png"]');
+    if (!image) return null;
+    image.loading = 'eager';
+    await image.decode();
+    return { src: image.getAttribute('src'), naturalWidth: image.naturalWidth, naturalHeight: image.naturalHeight };
+  })()`);
+  requireThat(pathogenVisual?.src?.includes('/sprites/normalized/weapons/') && pathogenVisual.naturalWidth === 1024 && pathogenVisual.naturalHeight === 1024, `Plaque Pathogen v56 non chargée: ${JSON.stringify(pathogenVisual)}`);
+  report.armoryVisuals = { equipment: equipmentVisual, pathogen: pathogenVisual };
+  report.checkpoints.push('armory-v56-bitmaps');
+  await selectValue('#armory-kind', 'equipment');
   const equipmentProcurement = await click('[data-procure-kind="equipment"]:not([disabled])');
   const equipmentId = equipmentProcurement.dataset.procureId;
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.inventory.equipmentIds.includes(${JSON.stringify(equipmentId)})`, 'Acquisition équipement non persistée');
@@ -284,17 +304,100 @@ try {
   requireThat(missionStart.missionLevelRuntime?.schemaVersion === 52 && missionStart.missionLevelRuntime.routes.length >= 2 && missionStart.missionLevelRuntime.zones.length >= 4, `Niveau multi-routes v52 absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.missionLevelRuntime.artLayers?.far && missionStart.missionLevelRuntime.artLayers?.mid && missionStart.missionLevelRuntime.artLayers?.foreground, `Couches v52 non branchées: ${JSON.stringify(missionStart.missionLevelRuntime?.artLayers)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
-  requireThat(missionStart.animationRuntime?.sheets === 51 && missionStart.animationRuntime.runtimeReady === 51 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v55 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  requireThat(missionStart.animationRuntime?.sheets === 178 && missionStart.animationRuntime.runtimeReady === 178 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v56 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
   const squadCombat = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const ally = game.activeSquadActors().find((member) => member.alive && !member.inVehicle);
-    const enemy = game.enemies.find((entry) => entry.alive && !entry.isBoss);
-    const before = enemy.health;
-    Object.assign(enemy, { x: ally.x + 150, y: ally.y + ally.h - enemy.h, dormant: false, alive: true, alert: true, damage: 0, speed: 0, attackClock: 99, rangedClock: 99 });
-    game.debugStep(0.55, 33);
-    return { before, after: enemy.health, squad: game.getSnapshot().squadRuntime, animation: game.getSnapshot().animationRuntime };
+    game.refreshSpriteCollisionProfiles();
+    const enemy = game.enemies
+      .filter((entry) => entry.alive && !entry.isBoss)
+      .sort((first, second) => (second.spriteHitbox?.local?.h || second.h) - (first.spriteHitbox?.local?.h || first.h))[0];
+    if (!ally || !enemy) throw new Error('Scène de combat alliée impossible à isoler.');
+
+    const original = {
+      squadActors: game.squadActors,
+      enemies: game.enemies,
+      walls: game.walls,
+      doors: game.doors,
+      covers: game.covers,
+      hazards: game.hazards,
+      bullets: game.bullets,
+      particles: game.particles,
+      onEvent: game.onEvent,
+      ally: { ...ally },
+      enemy: { ...enemy },
+      squadTelemetry: { ...game.squadTelemetry },
+      penetrationTelemetry: { ...game.penetrationTelemetry }
+    };
+    const restoreEntity = (entity, state) => {
+      for (const key of Object.keys(entity)) if (!(key in state)) delete entity[key];
+      Object.assign(entity, state);
+    };
+    const events = [];
+    let result;
+    try {
+      const floor = game.platforms.find((platform) => platform.floor)
+        || [...game.platforms].sort((first, second) => second.w - first.w)[0];
+      const floorY = Number(floor?.y) || ally.y + ally.h;
+      game.squadActors = [ally];
+      game.enemies = [enemy];
+      game.walls = [];
+      game.doors = [];
+      game.covers = [];
+      game.hazards = [];
+      game.bullets = [];
+      game.particles = [];
+      game.onEvent = (event) => events.push(event);
+      Object.assign(ally, { x: 640, y: floorY - ally.h, vx: 0, vy: 0, facing: 1, grounded: true, climbing: false, crouching: false, inVehicle: false, downed: false, alive: true, fireClock: 0, supportClock: 99 });
+      Object.assign(enemy, { x: 772, y: floorY - enemy.h, facing: -1, dormant: false, alive: true, alert: true, revealed: 1, speed: 0, attackClock: 99, rangedClock: 99, staggerClock: 99, health: Math.max(100, enemy.health) });
+      game.refreshSpriteCollisionProfiles();
+
+      const before = enemy.health;
+      const shotsBefore = game.squadTelemetry.shots;
+      const hitsBefore = game.penetrationTelemetry.hits;
+      game.updateMissionSquad(1 / 60);
+      for (let frame = 0; frame < 20 && enemy.health === before; frame += 1) game.updateBullets(1 / 60);
+      const squadFire = events.filter((event) => event.type === 'squad-fire');
+      const snapshot = game.getSnapshot();
+      result = {
+        allyId: ally.crewId,
+        targetId: enemy.id,
+        before,
+        after: enemy.health,
+        damage: before - enemy.health,
+        shots: game.squadTelemetry.shots - shotsBefore,
+        hits: game.penetrationTelemetry.hits - hitsBefore,
+        squadFire: squadFire.map((event) => ({ crewId: event.crewId, targetId: event.targetId, damage: event.damage })),
+        squad: snapshot.squadRuntime,
+        animation: snapshot.animationRuntime
+      };
+    } finally {
+      game.squadActors = original.squadActors;
+      game.enemies = original.enemies;
+      game.walls = original.walls;
+      game.doors = original.doors;
+      game.covers = original.covers;
+      game.hazards = original.hazards;
+      game.bullets = original.bullets;
+      game.particles = original.particles;
+      game.onEvent = original.onEvent;
+      restoreEntity(ally, original.ally);
+      restoreEntity(enemy, original.enemy);
+      Object.assign(game.squadTelemetry, original.squadTelemetry);
+      Object.assign(game.penetrationTelemetry, original.penetrationTelemetry);
+    }
+    return result;
   })()`);
-  requireThat(squadCombat.squad.telemetry.shots > 0 && squadCombat.after < squadCombat.before, `Alliés IA sans tir ni dégâts: ${JSON.stringify(squadCombat)}`);
+  requireThat(
+    squadCombat.shots === 1
+      && squadCombat.hits === 1
+      && squadCombat.squadFire.length === 1
+      && squadCombat.squadFire[0].crewId === squadCombat.allyId
+      && squadCombat.squadFire[0].targetId === squadCombat.targetId
+      && squadCombat.damage > 0
+      && squadCombat.after < squadCombat.before,
+    `Allié IA sans tir ciblé ni dégâts physiques: ${JSON.stringify(squadCombat)}`
+  );
   report.squadCombat = squadCombat;
   report.checkpoints.push('v52-level-squad-animation');
   await key('KeyX', 'x');
@@ -504,7 +607,7 @@ try {
       && modularHangar.before.roomComposition === 'modular-v55'
       && modularHangar.after.hubIntegrity < modularHangar.before.hubIntegrity
       && modularHangar.after.shockHits === modularHangar.before.shockHits + 1
-      && modularHangar.assets.npcMissionSpriteAssetsReady === 8,
+      && modularHangar.assets.npcMissionSpriteAssetsReady === 16,
     `Hangar v55 non physique/modulaire: ${JSON.stringify(modularHangar)}`
   );
   report.screenshots.push(await capture('alien-tantalus-v55-hangar-desktop.png'));
@@ -605,7 +708,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '55.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v55 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '56.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v56 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

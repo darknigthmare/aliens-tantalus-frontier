@@ -31,7 +31,35 @@ const V55_VEHICLE_SHEETS = new Set([
   'vehicle.m577-command-apc.action',
   'vehicle.m22a3-jackson-tank.action',
   'vehicle.p5000-powered-work-loader.action',
-  'vehicle.ud4l-cheyenne-dropship.action'
+  'vehicle.ud4l-cheyenne-dropship.action',
+  'vehicle.m40-ridgeway-heavy-tank.action.v56',
+  'vehicle.ud4b-cheyenne-dropship.action.v56',
+  'vehicle.narcissus-lifeboat.action.v56',
+  'vehicle.lander-one-class-e.action.v56',
+  'vehicle.rt01-group-transport.action.v56',
+  'vehicle.nr9-euv01-atv.action.v56',
+  'vehicle.daihotai-tractor.action.v56',
+  'vehicle.eva7c-pressure-pod.action.v56',
+  'vehicle.combat-power-loader.action.v56',
+  'vehicle.ua571-remote-sentry-carrier.action.v56',
+  'vehicle.seegson-maintenance-tram.action.v56',
+  'vehicle.crucible-caravan-crawler.action.v56',
+  'vehicle.uscm-assault-gunship.action.v56',
+  'vehicle.orbital-lifeboat.action.v56',
+  'vehicle.colony-cargo-lifter.action.v56',
+  'vehicle.weyland-yutani-executive-shuttle.action.v56',
+  'vehicle.upp-combat-aerodyne.action.v56',
+  'vehicle.hyperdyne-synthetic-carrier.action.v56',
+  'vehicle.atmospheric-processor-elevator.action.v56',
+  'vehicle.maglev-personnel-car.action.v56',
+  'vehicle.ripper-siege-loader.action.v56',
+  'vehicle.ceto-patrol-boat.action.v56',
+  'vehicle.tantalus-command-skiff.action.v56',
+  'vehicle.echo-9-recon-bike.action.v56',
+  'vehicle.neuro-xeno-transport-rig.action.v56',
+  'vehicle.mining-bore-crawler.action.v56',
+  'vehicle.ice-driller.action.v56',
+  'vehicle.reef-hydrofoil.action.v56'
 ]);
 
 export function buildSpriteHitboxRuntime(entity = {}, sheetOrId = null) {
@@ -525,6 +553,7 @@ export function withV52MissionRuntime(BaseEngine) {
         enemy.attacking = true;
       }
       if ((overlaps(enemy, targetEntity) || (Math.abs(horizontal) < stopRange + 28 && vertical < 95)) && enemy.attackClock <= 0) {
+        if (enemy.behavior === 'exploder') return void this.detonateEnemy(enemy, target);
         if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
         else this.damageSquadMember(target, enemy.damage, { source: enemy.name });
         enemy.attackClock = enemy.isBoss ? 0.65 : enemy.behavior === 'pouncer' ? 1.1 : 0.82;
@@ -1102,6 +1131,15 @@ export function withV52MissionRuntime(BaseEngine) {
       this.drawAllies(ctx);
     }
 
+    drawWeaponPickup(ctx) {
+      if (!this.weaponPickup?.taken) {
+        const request = { sheetId: this.weaponVisual?.sheetId || 'weapon.m41a-pulse-rifle.action', clipId: 'idle' };
+        const sample = this.spriteAnimation?.sample('weapon-pickup', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+        const anchor = this.weaponPickup ? { ...this.weaponPickup } : null;
+        if (!this.drawSpriteSample(ctx, sample, anchor)) super.drawWeaponPickup(ctx);
+      }
+      this.drawAllies(ctx);
+    }
     drawAllies(ctx) {
       for (const member of this.activeSquadActors()) if (!member.inVehicle) this.drawSquadActor(ctx, member);
     }

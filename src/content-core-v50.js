@@ -273,15 +273,30 @@ export const ENEMIES = Object.freeze(Array.from({ length: 568 }, (_, index) => {
 
 const vehicleSeeds = [
   ['M577 Armored Personnel Carrier', 'ground', 8], ['M577 Command APC', 'ground', 7],
-  ['M570 Armored Personnel Carrier', 'ground', 8], ['M22A3 Jackson Tank', 'ground', 4],
-  ['M40 Ridgeway Tank', 'ground', 4], ['M292 Combat Buggy', 'ground', 3],
+  ['M570 Series APC', 'ground', 13, 'M570 Armored Personnel Carrier', {
+    canonicalVariant: 'Alien RPG M570 Series APC (non-M577 configuration unresolved)',
+    referenceStatus: 'CANON_REFERENCE',
+    visualStatus: 'BLOCKED_NO_PUBLISHED_SILHOUETTE',
+    referenceNote: 'The licensed RPG establishes the series and passenger count, but publishes only the M577 standard-model profile.'
+  }], ['M22A3 Jackson Tank', 'ground', 4],
+  ['M40 Ridgeway Heavy Tank', 'ground', 3, 'M40 Ridgeway Tank'], ['M292 Self-Propelled Artillery', 'ground', 6, 'M292 Combat Buggy', {
+    canonicalVariant: 'M292 baseline self-propelled artillery (not M292A2)',
+    referenceStatus: 'CANON_REFERENCE',
+    visualStatus: 'BLOCKED_SINGLE_LEFT_PROFILE',
+    referenceNote: 'Only one licensed left elevation is available; a complete animation sheet would require invented geometry.'
+  }],
   ['P-5000 Powered Work Loader', 'exosuit', 1], ['Combat Power Loader', 'exosuit', 1],
-  ['UD-4L Cheyenne Dropship', 'air', 12], ['UD-4B Dropship', 'air', 10],
-  ['AD-19CD Dropship', 'air', 12], ['UA-571 Remote Sentry Carrier', 'ground', 2],
-  ['USCSS Nostromo Shuttle', 'space', 7], ['USCSS Covenant Lander', 'air', 8],
-  ['USCSS Prometheus Rover', 'ground', 6], ['ATV Survey Rover', 'ground', 4],
-  ['Seegson Maintenance Tram', 'rail', 20], ['Acheron Colony Tractor', 'ground', 3],
-  ['Submersible Survey Skiff', 'maritime', 6], ['Ceto Patrol Boat', 'maritime', 8],
+  ['UD-4L Cheyenne Dropship', 'air', 12], ['UA Northridge UD-4B Cheyenne', 'air', 10, 'UD-4B Dropship'],
+  ['AD-19D Bearcat VTOL Strikeship', 'air', 4, 'AD-19CD Dropship', {
+    canonicalVariant: 'UA Northridge AD-19D Bearcat',
+    referenceStatus: 'CANON_REFERENCE',
+    visualStatus: 'BLOCKED_VARIANT_AND_REAR_GEOMETRY_UNRESOLVED',
+    referenceNote: 'The D variant has four crew; optional external medevac panniers are not passenger seats and are not illustrated from enough angles.'
+  }], ['UA-571 Remote Sentry Carrier', 'ground', 2],
+  ['Narcissus - Nostromo Lifeboat', 'space', 3, 'USCSS Nostromo Shuttle'], ['Lander One - Class E Lander-Type Drop Shuttle', 'air', 12, 'USCSS Covenant Lander'],
+  ['RT Series Group Transport / RT01', 'ground', 21, 'USCSS Prometheus Rover'], ['NR-9 Series All Terrain Vehicle / EUV01', 'ground', 2, 'ATV Survey Rover'],
+  ['Seegson Maintenance Tram', 'rail', 20], ['Daihotai Tractor / Colony Tractor', 'ground', 5, 'Acheron Colony Tractor'],
+  ['Weyland EVA-7C Series Pressure Pod', 'submersible', 6, 'Submersible Survey Skiff'], ['Ceto Patrol Boat', 'maritime', 8],
   ['Tantalus Command Skiff', 'air', 6], ['Echo-9 Recon Bike', 'ground', 2],
   ['Crucible Caravan Crawler', 'ground', 10], ['Neuro-Xeno Transport Rig', 'ground', 5],
   ['USCM Assault Gunship', 'air', 8], ['Orbital Lifeboat', 'space', 12],
@@ -294,16 +309,24 @@ const vehicleSeeds = [
 const vehicleFits = ['Standard', 'Recon', 'Assault', 'Rescue', 'Colonial', 'Frontier', 'Prototype', 'Apex'];
 export const VEHICLES = Object.freeze(Array.from({ length: 279 }, (_, index) => {
   const seed = vehicleSeeds[index % vehicleSeeds.length];
+  const reference = seed[4] || null;
   const fit = vehicleFits[Math.floor(index / vehicleSeeds.length) % vehicleFits.length];
   const name = index < vehicleSeeds.length ? seed[0] : `${seed[0]} — ${fit}`;
+  const stableBaseName = seed[3] || seed[0];
+  const stableName = index < vehicleSeeds.length ? stableBaseName : `${stableBaseName} ${fit}`;
   const seats = Array.from({ length: seed[2] }, (_, seatIndex) => ({
     id: `seat-${seatIndex + 1}`,
     role: seatIndex === 0 ? 'driver' : seatIndex === 1 && seed[2] > 2 ? 'gunner' : seatIndex === 2 && seed[2] > 4 ? 'commander' : 'passenger',
     actions: seatIndex === 0 ? ['drive', 'boost', 'brake'] : seatIndex === 1 ? ['aim', 'fire', 'reload'] : ['observe', 'support', 'disembark']
   }));
   return {
-    id: `vehicle-${String(index + 1).padStart(3, '0')}-${slug(name)}`,
+    id: `vehicle-${String(index + 1).padStart(3, '0')}-${slug(stableName)}`,
     name, family: seed[1], fit, seats,
+    legacyCatalogName: seed[3] || null,
+    canonicalVariant: reference?.canonicalVariant || null,
+    referenceStatus: index < vehicleSeeds.length ? (reference?.referenceStatus || 'CANON_REFERENCE') : 'PROJECT_ADAPTATION',
+    visualStatus: reference?.visualStatus || 'ELIGIBLE_FOR_REFERENCE_AUDIT',
+    referenceNote: reference?.referenceNote || null,
     hull: 90 + (index * 29) % 410, speed: 18 + (index * 17) % 180,
     cargo: (index * 7) % 60, armor: clamp((index * 13) % 101, 0, 100),
     actions: [...new Set(seats.flatMap((seat) => seat.actions))],

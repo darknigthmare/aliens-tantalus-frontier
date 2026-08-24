@@ -1,3 +1,4 @@
+import { resolveEnemyVisualOverrideV56 } from './enemy-visual-overrides-v56.js';
 import { resolveEnemyVisualOverrideV55 } from './enemy-visual-overrides-v55.js';
 
 const MODIFIER_PREFIXES = Object.freeze([
@@ -228,6 +229,14 @@ const asAuthoredFamilyVariant = (source, archetype, baseProfile) => {
 };
 
 export function resolveEnemyVisualProfile(source = {}) {
+  const dedicatedV56 = resolveEnemyVisualOverrideV56(source);
+  if (dedicatedV56) return Object.freeze({
+    ...dedicatedV56,
+    imageKey: null,
+    row: null,
+    artSubject: dedicatedV56.archetype,
+    legacy: false
+  });
   const dedicatedV55 = resolveEnemyVisualOverrideV55(source);
   if (dedicatedV55) return Object.freeze({
     ...dedicatedV55,

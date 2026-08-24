@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "55.0.0",
+  "version": "56.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,13 +18,17 @@
     "inventory:v55": "node scripts/build-asset-runtime-inventory-v55.mjs",
     "inventory:v55:check": "node scripts/build-asset-runtime-inventory-v55.mjs --check",
     "sprites:v55:check": "node scripts/sync-sprite-manifest-v55.mjs --check",
+    "inventory:v56:check": "node --test tests/v55-manifest-inventory-contract.test.mjs",
+    "sprites:v56:check": "node scripts/sync-sprite-manifest-v56.mjs --check",
     "art:v55:check": "py scripts/check-sprite-alpha-v55.py",
+    "art:v56:check": "py scripts/check-sprite-alpha-v56.py",
     "build": "node scripts/build.mjs",
     "qa:browser:v52": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v54": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v55": "node scripts/browser-qa-v52.mjs",
-    "qa": "npm run inventory:v55:check && npm run sprites:v55:check && npm run art:v55:check && npm run lint && npm test && npm run build",
-    "qa:release": "npm run qa && npm run qa:browser:v55"
+    "qa:browser:v56": "node scripts/browser-qa-v52.mjs",
+    "qa": "npm run inventory:v56:check && npm run sprites:v56:check && npm run art:v56:check && npm run lint && npm test && npm run build",
+    "qa:release": "npm run qa && npm run qa:browser:v56"
   },
   "engines": {
     "node": ">=20"

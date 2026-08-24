@@ -101,9 +101,90 @@ const DEFINITIONS = Object.freeze([
     roleFrames: [3, 7],
     hurtFrames: [12],
     downedFrames: [13, 14]
+  }),
+  Object.freeze({
+    crewId: 'crew-09-inez-harlow',
+    slug: 'inez-harlow',
+    name: 'Inez Harlow',
+    role: 'science',
+    roleAction: 'xenobiology-analysis',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-10-david-8r',
+    slug: 'david-8r',
+    name: 'DAVID-8R',
+    role: 'infiltration',
+    roleAction: 'synthetic-infiltration',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-11-jun-park',
+    slug: 'jun-park',
+    name: 'Jun Park',
+    role: 'engineering',
+    roleAction: 'technical-repair',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-12-asha-mbaye',
+    slug: 'asha-mbaye',
+    name: 'Asha Mbaye',
+    role: 'diplomacy',
+    roleAction: 'colonial-coordination',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-13-pablo-reyes',
+    slug: 'pablo-reyes',
+    name: 'Pablo Reyes',
+    role: 'demolition',
+    roleAction: 'breaching-charge',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-14-echo-a',
+    slug: 'echo-a',
+    name: 'ECHO-A',
+    role: 'assault',
+    roleAction: 'tactical-scan',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-15-leila-s-rensen',
+    slug: 'leila-s-rensen',
+    name: 'Leila Sørensen',
+    role: 'survival',
+    roleAction: 'pathfinder-scan',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
+  }),
+  Object.freeze({
+    crewId: 'crew-16-cal-mercer',
+    slug: 'cal-mercer',
+    name: 'Cal Mercer',
+    role: 'vehicle',
+    roleAction: 'vehicle-repair',
+    roleFrames: [12],
+    hurtFrames: [13],
+    downedFrames: [14]
   })
 ]);
 
+const DEFINITIONS_V55 = Object.freeze(DEFINITIONS.slice(0, 8));
 const makeMissionClipSet = (definition) => {
   const woundedDeathFrames = [...definition.hurtFrames, ...definition.downedFrames, 15];
   return Object.freeze({
@@ -142,15 +223,24 @@ const makeIdentity = (definition) => {
 };
 
 export const NPC_MISSION_IDENTITIES_V55 = Object.freeze(Object.fromEntries(
-  DEFINITIONS.map((definition) => [definition.crewId, makeIdentity(definition)])
+  DEFINITIONS_V55.map((definition) => [definition.crewId, makeIdentity(definition)])
 ));
 
 export const NPC_MISSION_CLIP_SETS_V55 = Object.freeze(Object.fromEntries(
   Object.values(NPC_MISSION_IDENTITIES_V55).map((identity) => [identity.missionClipSetId, identity.missionClips])
 ));
 
+// V56 extends the same stable mission contract to the complete sixteen-person roster.
+export const NPC_MISSION_GRID_V56 = NPC_MISSION_GRID_V55;
+export const NPC_MISSION_IDENTITIES_V56 = Object.freeze(Object.fromEntries(
+  DEFINITIONS.map((definition) => [definition.crewId, makeIdentity(definition)])
+));
+export const NPC_MISSION_CLIP_SETS_V56 = Object.freeze(Object.fromEntries(
+  Object.values(NPC_MISSION_IDENTITIES_V56).map((identity) => [identity.missionClipSetId, identity.missionClips])
+));
+
 export function resolveNpcMissionIdentityV55(crewId) {
-  return NPC_MISSION_IDENTITIES_V55[String(crewId || '')] || null;
+  return NPC_MISSION_IDENTITIES_V56[String(crewId || '')] || null;
 }
 
 const missionResult = (identity, clipId, state) => Object.freeze({

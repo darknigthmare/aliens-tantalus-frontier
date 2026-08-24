@@ -217,6 +217,24 @@ button:disabled {
   opacity: .42;
 }
 
+.catalog-sprite-frame {
+  width: 112px;
+  height: 112px;
+  align-self: center;
+  margin: 4px 0 8px;
+  overflow: hidden;
+  border: 1px solid rgba(143, 205, 163, .2);
+  background: radial-gradient(circle, rgba(113, 164, 129, .1), rgba(3, 9, 7, .76));
+}
+
+.catalog-sprite-frame img {
+  display: block;
+  width: 448px;
+  height: 448px;
+  max-width: none;
+  object-fit: fill;
+}
+
 @media (pointer: coarse), (max-width: 900px) {
   .runtime-touch {
     position: absolute;

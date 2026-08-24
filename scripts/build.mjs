@@ -17,6 +17,9 @@ for (const directory of ['src', 'assets', 'docs']) {
     if (directory !== 'docs') throw error;
   }
 }
+// QA masters and superseded duplicate atlases remain local, never deployed.
+await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
+await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });
 const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({

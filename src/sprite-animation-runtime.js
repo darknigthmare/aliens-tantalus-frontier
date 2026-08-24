@@ -1,7 +1,13 @@
+import { resolveVehicleVisualAnimationV56 } from './vehicle-visual-overrides-v56.js';
 import {
-  NPC_MISSION_CLIP_SETS_V55,
+  NPC_MISSION_CLIP_SETS_V56,
   resolveNpcMissionAnimationV55
 } from './npc-mission-runtime-v55.js';
+import { WEAPON_VISUAL_PROFILES_V56 } from './weapon-visual-runtime-v56.js';
+import {
+  EQUIPMENT_SHEET_GRID_V56,
+  EQUIPMENT_VISUAL_PROFILES_V56
+} from './equipment-visual-runtime-v56.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -15,7 +21,8 @@ export const SPRITE_PIVOTS = Object.freeze({
   'humanoid-feet': Object.freeze({ kind: 'feet', x: 128, y: 240 }),
   'creature-ground': Object.freeze({ kind: 'ground-contact', x: 128, y: 240 }),
   'vehicle-ground': Object.freeze({ kind: 'wheel-contact', x: 128, y: 240 }),
-  'weapon-grip': Object.freeze({ kind: 'grip', x: 96, y: 144 })
+  'weapon-grip': Object.freeze({ kind: 'grip', x: 96, y: 144 }),
+  'equipment-center': Object.freeze({ kind: 'center', x: 128, y: 128 })
 });
 
 export const SPRITE_HITBOXES = Object.freeze({
@@ -29,6 +36,7 @@ export const SPRITE_HITBOXES = Object.freeze({
   'facehugger-ground': Object.freeze({ x: 38, y: 142, width: 180, height: 98 }),
   'apc-hull': Object.freeze({ x: 18, y: 106, width: 220, height: 134 }),
   'weapon-pickup': Object.freeze({ x: 18, y: 94, width: 220, height: 96 }),
+  'equipment-pickup': Object.freeze({ x: 34, y: 34, width: 188, height: 188 }),
   'praetorian-large': Object.freeze({ x: 44, y: 48, width: 168, height: 192 }),
   'spitter-medium': Object.freeze({ x: 28, y: 132, width: 200, height: 108 }),
   'ovomorph-small': Object.freeze({ x: 82, y: 92, width: 92, height: 148 }),
@@ -40,11 +48,46 @@ export const SPRITE_HITBOXES = Object.freeze({
   'm577-command-hull': Object.freeze({ x: 20, y: 104, width: 216, height: 136 }),
   'm22a3-tank-hull': Object.freeze({ x: 16, y: 108, width: 224, height: 132 }),
   'p5000-loader-frame': Object.freeze({ x: 64, y: 42, width: 128, height: 198 }),
-  'ud4l-dropship-hull': Object.freeze({ x: 18, y: 112, width: 220, height: 128 })
+  'ud4l-dropship-hull': Object.freeze({ x: 18, y: 112, width: 220, height: 128 }),
+  'm40-ridgeway-hull': Object.freeze({ x: 12, y: 98, width: 232, height: 142 }),
+  'ud4b-dropship-hull': Object.freeze({ x: 8, y: 98, width: 240, height: 142 }),
+  'narcissus-lifeboat-hull': Object.freeze({ x: 12, y: 104, width: 232, height: 130 }),
+  'lander-one-hull': Object.freeze({ x: 8, y: 88, width: 240, height: 152 }),
+  'rt01-transport-hull': Object.freeze({ x: 10, y: 112, width: 236, height: 128 }),
+  'nr9-euv01-hull': Object.freeze({ x: 18, y: 90, width: 220, height: 150 }),
+  'daihotai-tractor-hull': Object.freeze({ x: 18, y: 80, width: 220, height: 160 }),
+  'eva7c-pressure-pod-hull': Object.freeze({ x: 24, y: 60, width: 208, height: 180 }),
+  'trilobite-sprawl': Object.freeze({ x: 20, y: 126, width: 216, height: 114 }),
+  'boar-ground': Object.freeze({ x: 24, y: 140, width: 208, height: 100 }),
+  'combat-power-loader-frame': Object.freeze({ x: 60, y: 36, width: 136, height: 204 }),
+  'ua571-carrier-hull': Object.freeze({ x: 18, y: 120, width: 220, height: 120 }),
+  'seegson-tram-hull': Object.freeze({ x: 10, y: 112, width: 236, height: 128 }),
+  'crucible-crawler-hull': Object.freeze({ x: 8, y: 104, width: 240, height: 136 }),
+  'assault-gunship-hull': Object.freeze({ x: 10, y: 112, width: 236, height: 128 }),
+  'orbital-lifeboat-hull': Object.freeze({ x: 12, y: 116, width: 232, height: 124 }),
+  'cargo-lifter-hull': Object.freeze({ x: 14, y: 118, width: 228, height: 122 }),
+  'executive-shuttle-hull': Object.freeze({ x: 10, y: 108, width: 236, height: 132 }),
+  'upp-aerodyne-hull': Object.freeze({ x: 10, y: 116, width: 236, height: 124 }),
+  'hyperdyne-carrier-hull': Object.freeze({ x: 12, y: 116, width: 232, height: 124 }),
+  'processor-elevator-cage': Object.freeze({ x: 30, y: 18, width: 196, height: 222 }),
+  'maglev-car-hull': Object.freeze({ x: 8, y: 152, width: 240, height: 88 }),
+  'ripper-siege-loader-frame': Object.freeze({ x: 48, y: 34, width: 160, height: 206 }),
+  'neuro-xeno-ground': Object.freeze({ x: 20, y: 126, width: 216, height: 114 }),
+  'atarax-ripper-ground': Object.freeze({ x: 24, y: 116, width: 216, height: 124 }),
+  'korari-stalker-ground': Object.freeze({ x: 20, y: 144, width: 216, height: 96 }),
+  'ceto-reef-predator-water': Object.freeze({ x: 16, y: 150, width: 224, height: 90 }),
+  'tantalus-tunnel-vermin-ground': Object.freeze({ x: 16, y: 156, width: 224, height: 84 }),
+  'ceto-patrol-boat-hull': Object.freeze({ x: 8, y: 110, width: 240, height: 130 }),
+  'tantalus-command-skiff-hull': Object.freeze({ x: 10, y: 118, width: 236, height: 122 }),
+  'echo9-recon-bike-frame': Object.freeze({ x: 36, y: 78, width: 184, height: 162 }),
+  'neuro-xeno-transport-rig-hull': Object.freeze({ x: 12, y: 90, width: 232, height: 150 }),
+  'mining-bore-crawler-hull': Object.freeze({ x: 8, y: 120, width: 240, height: 120 }),
+  'ice-driller-hull': Object.freeze({ x: 8, y: 116, width: 240, height: 124 }),
+  'reef-hydrofoil-hull': Object.freeze({ x: 8, y: 128, width: 240, height: 112 }),
 });
 
 export const SPRITE_CLIP_SETS = Object.freeze({
-  ...Object.fromEntries(Object.entries(NPC_MISSION_CLIP_SETS_V55).map(([id, clips]) => [
+  ...Object.fromEntries(Object.entries(NPC_MISSION_CLIP_SETS_V56).map(([id, clips]) => [
     id, freezeList(Object.values(clips))
   ])),
   'player-locomotion': freezeList([
@@ -59,6 +102,30 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'primary-fire', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
     { id: 'reload', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'weapon:magazine-out' }, { frame: 10, type: 'weapon:magazine-in' }, { frame: 11, type: 'weapon:chamber' }] },
     { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'player-melee-v56': freezeList([
+    { id: 'knife-ready', frames: [0, 1, 2, 3], fps: 6, loop: true, events: [{ frame: 1, type: 'combat:melee-ready' }] },
+    { id: 'knife-attack', frames: [4, 5, 6, 7], fps: 12, loop: false, events: [{ frame: 6, type: 'combat:knife-hit' }] },
+    { id: 'rifle-bash', frames: [8, 9, 10, 11], fps: 11, loop: false, events: [{ frame: 10, type: 'combat:rifle-bash-hit' }] },
+    { id: 'melee-defense', frames: [12, 13, 14, 15], fps: 8, loop: false, events: [{ frame: 13, type: 'combat:deflect-window' }] }
+  ]),
+  'player-interaction-v56': freezeList([
+    { id: 'control-use', frames: [0, 1, 2, 3], fps: 7, loop: false, events: [{ frame: 2, type: 'interaction:control' }] },
+    { id: 'lift-carry', frames: [4, 5, 6, 7], fps: 7, loop: true, events: [{ frame: 6, type: 'interaction:carry' }] },
+    { id: 'ground-interact', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 10, type: 'interaction:pickup' }] },
+    { id: 'force-interact', frames: [12, 13, 14, 15], fps: 9, loop: false, events: [{ frame: 14, type: 'interaction:force' }] }
+  ]),
+  'player-tool-use-v56': freezeList([
+    { id: 'motion-tracker', frames: [0, 1, 2, 3], fps: 7, loop: false, events: [{ frame: 2, type: 'tool:tracker-pulse' }] },
+    { id: 'cutting-torch', frames: [4, 5, 6, 7], fps: 9, loop: true, events: [{ frame: 6, type: 'tool:cutting-spark' }] },
+    { id: 'access-tuner', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 10, type: 'tool:access-confirm' }] },
+    { id: 'maintenance-jack', frames: [12, 13, 14, 15], fps: 9, loop: false, events: [{ frame: 14, type: 'tool:jack-impact' }] }
+  ]),
+  'enemy-action-v56': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'creature:breathe' }] },
+    { id: 'chase', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
+    { id: 'attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:attack-hit' }] },
+    { id: 'death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
   ]),
   'npc-locomotion': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'body:breath' }] },
@@ -126,6 +193,12 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'turret', frames: [8, 9, 10, 11], fps: 7, loop: false, events: [{ frame: 10, type: 'vehicle:turret-ready' }] },
     { id: 'damage', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'vehicle:critical' }] }
   ]),
+  'vehicle-action-v56': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 3, loop: true, events: [{ frame: 2, type: 'vehicle:systems-idle' }] },
+    { id: 'move', frames: [4, 5, 6, 7], fps: 8, loop: true, events: [{ frame: 6, type: 'vehicle:propulsion-cycle' }] },
+    { id: 'action', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 10, type: 'vehicle:primary-action' }] },
+    { id: 'damage', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'vehicle:wreck-lock' }] }
+  ]),
   'npc-mission-v55': freezeList([
     { id: 'ready', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 2, type: 'state:mission-ready' }] },
     { id: 'traversal', frames: [4, 5, 6, 7], fps: 9, loop: true, events: [{ frame: 4, type: 'audio:footstep-right' }, { frame: 6, type: 'audio:footstep-left' }] },
@@ -162,6 +235,18 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'flight', frames: [8, 9, 10, 11], fps: 9, loop: true, events: [{ frame: 10, type: 'vehicle:boost' }] },
     { id: 'damage', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'vehicle:wreck-lock' }] }
   ]),
+  'equipment-use-v56': freezeList([
+    { id: 'packed', frames: [0], fps: 1, loop: true },
+    { id: 'ready', frames: [1], fps: 1, loop: true },
+    { id: 'use', frames: [2], fps: 1, loop: false, events: [{ frame: 2, type: 'equipment:use' }] },
+    { id: 'spent', frames: [3], fps: 1, loop: false, events: [{ frame: 3, type: 'equipment:spent' }] }
+  ]),
+  'weapon-action-v56': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'weapon:idle' }] },
+    { id: 'action', frames: [4, 5, 6, 7], fps: 11, loop: false, events: [{ frame: 6, type: 'weapon:action' }] },
+    { id: 'reload', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 10, type: 'weapon:reload' }] },
+    { id: 'service', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 15, type: 'weapon:service-complete' }] }
+  ]),
   'rifle-action': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'weapon:idle' }] },
     { id: 'recoil', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 5, type: 'weapon:shot' }, { frame: 6, type: 'weapon:recoil' }] },
@@ -170,8 +255,15 @@ export const SPRITE_CLIP_SETS = Object.freeze({
   ])
 });
 
-const sheet = (id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family, sourceFacing = 1, releaseReady = true, identityVerified = true) => Object.freeze({
+const sheet = (
   id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family,
+  sourceFacing = 1, releaseReady = true, identityVerified = true, grid = SPRITE_GRID
+) => Object.freeze({
+  id, imageKey, path, clipSet, pivot, hitbox, renderWidth, renderHeight, family,
+  columns: grid.columns,
+  rows: grid.rows,
+  cellWidth: grid.cellWidth,
+  cellHeight: grid.cellHeight,
   sourceFacing: sourceFacing < 0 ? -1 : 1,
   releaseReady,
   identityVerified
@@ -190,12 +282,53 @@ const NPC_MISSION_SHEETS = [
   ['crew-01-mara-vega', 'mara-vega'], ['crew-02-tamsin-velez', 'tamsin-velez'],
   ['crew-03-idris-kwan', 'idris-kwan'], ['crew-04-noor-okafor', 'noor-okafor'],
   ['crew-05-bishop-9', 'bishop-9'], ['crew-06-rook', 'rook'],
-  ['crew-07-sanaa-doyle', 'sanaa-doyle'], ['crew-08-maksim-orlov', 'maksim-orlov']
+  ['crew-07-sanaa-doyle', 'sanaa-doyle'], ['crew-08-maksim-orlov', 'maksim-orlov'],
+  ['crew-09-inez-harlow', 'inez-harlow'], ['crew-10-david-8r', 'david-8r'],
+  ['crew-11-jun-park', 'jun-park'], ['crew-12-asha-mbaye', 'asha-mbaye'],
+  ['crew-13-pablo-reyes', 'pablo-reyes'], ['crew-14-echo-a', 'echo-a'],
+  ['crew-15-leila-s-rensen', 'leila-s-rensen'], ['crew-16-cal-mercer', 'cal-mercer']
 ];
 
 export const SPRITE_SHEETS = Object.freeze({
   'player.echo9-marine.locomotion': sheet('player.echo9-marine.locomotion', 'playerLocomotion', '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png', 'player-locomotion', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
   'player.echo9-marine.combat': sheet('player.echo9-marine.combat', 'playerCombat', '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png', 'player-combat', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
+  'player.echo9-marine.melee': sheet('player.echo9-marine.melee', 'playerMeleeV56', '/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png', 'player-melee-v56', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
+  'player.echo9-marine.interaction': sheet('player.echo9-marine.interaction', 'playerInteractionV56', '/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png', 'player-interaction-v56', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
+  'player.echo9-marine.tool-use': sheet('player.echo9-marine.tool-use', 'playerToolUseV56', '/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png', 'player-tool-use-v56', 'humanoid-feet', 'player-standing', 110, 148, 'player'),
+  'enemy.xenomorph-big-chap.action.v56': sheet('enemy.xenomorph-big-chap.action.v56', 'xenoBigChapV56', '/assets/openai/sprites/normalized/enemies/xenomorph-big-chap-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 148, 116, 'enemy'),
+  'enemy.xenomorph-warrior.action.v56': sheet('enemy.xenomorph-warrior.action.v56', 'xenoWarriorV56', '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 162, 124, 'enemy'),
+  'enemy.xenomorph-queen.action.v56': sheet('enemy.xenomorph-queen.action.v56', 'xenoQueenV56', '/assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'queen-standing', 224, 170, 'enemy'),
+  'enemy.xenoborg.action.v56': sheet('enemy.xenoborg.action.v56', 'xenoborgV56', '/assets/openai/sprites/normalized/enemies/xenoborg-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 164, 136, 'enemy'),
+  'enemy.weyland-yutani-commando.action.v56': sheet('enemy.weyland-yutani-commando.action.v56', 'weylandYutaniCommandoV56', '/assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 96, 132, 'enemy'),
+  'enemy.seegson-security.action.v56': sheet('enemy.seegson-security.action.v56', 'seegsonSecurityV56', '/assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 96, 132, 'enemy'),
+  'enemy.xenomorph-boiler.action.v56': sheet('enemy.xenomorph-boiler.action.v56', 'xenoBoilerV56', '/assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 152, 110, 'enemy'),
+  'enemy.xenomorph-prowler.action.v56': sheet('enemy.xenomorph-prowler.action.v56', 'xenoProwlerV56', '/assets/openai/sprites/normalized/enemies/xenomorph-prowler-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'runner-ground', 174, 96, 'enemy'),
+  'enemy.xenomorph-burster.action.v56': sheet('enemy.xenomorph-burster.action.v56', 'xenoBursterV56', '/assets/openai/sprites/normalized/enemies/xenomorph-burster-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'runner-ground', 162, 92, 'enemy'),
+  'enemy.monica-line.action.v56': sheet('enemy.monica-line.action.v56', 'monicaLineV56', '/assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 164, 126, 'enemy'),
+  'enemy.specimen-six-line.action.v56': sheet('enemy.specimen-six-line.action.v56', 'specimenSixLineV56', '/assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 160, 122, 'enemy'),
+  'enemy.dust-runner.action.v56': sheet('enemy.dust-runner.action.v56', 'dustRunnerV56', '/assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'runner-ground', 170, 88, 'enemy'),
+  'enemy.trilobite-echo.action.v56': sheet('enemy.trilobite-echo.action.v56', 'trilobiteEchoV56', '/assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'trilobite-sprawl', 184, 104, 'enemy'),
+  'enemy.deacon-line.action.v56': sheet('enemy.deacon-line.action.v56', 'deaconLineV56', '/assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 148, 136, 'enemy'),
+  'enemy.protomorph.action.v56': sheet('enemy.protomorph.action.v56', 'protomorphV56', '/assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 164, 136, 'enemy'),
+  'enemy.abomination-pathogen-brute.action.v56': sheet('enemy.abomination-pathogen-brute.action.v56', 'pathogenAbominationV56', '/assets/openai/sprites/normalized/enemies/abomination-pathogen-brute-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'crusher-large', 190, 132, 'enemy'),
+  'enemy.upp-vanguard.action.v56': sheet('enemy.upp-vanguard.action.v56', 'uppVanguardV56', '/assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 98, 134, 'enemy'),
+  'enemy.wild-boar-host.action.v56': sheet('enemy.wild-boar-host.action.v56', 'wildBoarHostV56', '/assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'boar-ground', 158, 88, 'enemy'),
+  'enemy.foundry-drone.action.v56': sheet('enemy.foundry-drone.action.v56', 'foundryDroneV56', '/assets/openai/sprites/normalized/enemies/foundry-drone-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'xenomorph-standing', 164, 126, 'enemy'),
+  'enemy.foundry-crusher.action.v56': sheet('enemy.foundry-crusher.action.v56', 'foundryCrusherV56', '/assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'crusher-large', 190, 128, 'enemy'),
+  'enemy.reef-stalker.action.v56': sheet('enemy.reef-stalker.action.v56', 'reefStalkerV56', '/assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'lurker-medium', 174, 92, 'enemy'),
+  'enemy.reef-spitter.action.v56': sheet('enemy.reef-spitter.action.v56', 'reefSpitterV56', '/assets/openai/sprites/normalized/enemies/reef-spitter-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'spitter-medium', 172, 120, 'enemy'),
+  'enemy.siege-royal.action.v56': sheet('enemy.siege-royal.action.v56', 'siegeRoyalV56', '/assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'praetorian-large', 180, 142, 'enemy'),
+  'enemy.salvage-hive-brute.action.v56': sheet('enemy.salvage-hive-brute.action.v56', 'salvageHiveBruteV56', '/assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'crusher-large', 184, 124, 'enemy'),
+  'enemy.arcology-lurker.action.v56': sheet('enemy.arcology-lurker.action.v56', 'arcologyLurkerV56', '/assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'lurker-medium', 166, 96, 'enemy'),
+  'enemy.caravan-stalker.action.v56': sheet('enemy.caravan-stalker.action.v56', 'caravanStalkerV56', '/assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'runner-ground', 174, 92, 'enemy'),
+  'enemy.cult-host.action.v56': sheet('enemy.cult-host.action.v56', 'cultHostV56', '/assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 98, 140, 'enemy'),
+  'enemy.neuro-xeno-drone.action.v56': sheet('enemy.neuro-xeno-drone.action.v56', 'neuroXenoDroneV56', '/assets/openai/sprites/normalized/enemies/neuro-xeno-drone-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'neuro-xeno-ground', 176, 104, 'enemy'),
+  'enemy.atarax-ripper.action.v56': sheet('enemy.atarax-ripper.action.v56', 'ataraxRipperV56', '/assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'atarax-ripper-ground', 184, 112, 'enemy'),
+  'enemy.colonial-raider.action.v56': sheet('enemy.colonial-raider.action.v56', 'colonialRaiderV56', '/assets/openai/sprites/normalized/enemies/colonial-raider-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 98, 138, 'enemy'),
+  'enemy.atarax-controller.action.v56': sheet('enemy.atarax-controller.action.v56', 'ataraxControllerV56', '/assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png', 'enemy-action-v56', 'humanoid-feet', 'npc-standing', 100, 142, 'enemy'),
+  'enemy.korari-stalker.action.v56': sheet('enemy.korari-stalker.action.v56', 'korariStalkerV56', '/assets/openai/sprites/normalized/enemies/korari-stalker-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'korari-stalker-ground', 176, 88, 'enemy'),
+  'enemy.ceto-reef-predator.action.v56': sheet('enemy.ceto-reef-predator.action.v56', 'cetoReefPredatorV56', '/assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'ceto-reef-predator-water', 186, 82, 'enemy'),
+  'enemy.tantalus-tunnel-vermin.action.v56': sheet('enemy.tantalus-tunnel-vermin.action.v56', 'tantalusTunnelVerminV56', '/assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'tantalus-tunnel-vermin-ground', 180, 76, 'enemy'),
   'enemy.xenomorph-drone.locomotion': sheet('enemy.xenomorph-drone.locomotion', 'xenoLocomotion', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png', 'xenomorph-locomotion', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy'),
   'enemy.xenomorph-drone.combat': sheet('enemy.xenomorph-drone.combat', 'xenoCombat', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy', -1),
   'enemy.xenomorph-warrior.combat': sheet('enemy.xenomorph-warrior.combat', 'xenoWarrior', '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 158, 120, 'enemy'),
@@ -220,7 +353,47 @@ export const SPRITE_SHEETS = Object.freeze({
   'vehicle.m22a3-jackson-tank.action': sheet('vehicle.m22a3-jackson-tank.action', 'm22a3Jackson', '/assets/openai/sprites/normalized/vehicles/m22a3-jackson-tank-action-sheet.png', 'm22a3-tank-action-v55', 'vehicle-ground', 'm22a3-tank-hull', 292, 150, 'vehicle'),
   'vehicle.p5000-powered-work-loader.action': sheet('vehicle.p5000-powered-work-loader.action', 'p5000Loader', '/assets/openai/sprites/normalized/vehicles/p-5000-powered-work-loader-action-sheet.png', 'p5000-loader-action-v55', 'vehicle-ground', 'p5000-loader-frame', 150, 192, 'vehicle'),
   'vehicle.ud4l-cheyenne-dropship.action': sheet('vehicle.ud4l-cheyenne-dropship.action', 'ud4lCheyenne', '/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png', 'ud4l-dropship-action-v55', 'vehicle-ground', 'ud4l-dropship-hull', 320, 154, 'vehicle'),
+  'vehicle.m40-ridgeway-heavy-tank.action.v56': sheet('vehicle.m40-ridgeway-heavy-tank.action.v56', 'm40RidgewayV56', '/assets/openai/sprites/normalized/vehicles/m40-ridgeway-heavy-tank-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'm40-ridgeway-hull', 292, 150, 'vehicle'),
+  'vehicle.ud4b-cheyenne-dropship.action.v56': sheet('vehicle.ud4b-cheyenne-dropship.action.v56', 'ud4bCheyenneV56', '/assets/openai/sprites/normalized/vehicles/ud-4b-cheyenne-dropship-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ud4b-dropship-hull', 300, 154, 'vehicle'),
+  'vehicle.narcissus-lifeboat.action.v56': sheet('vehicle.narcissus-lifeboat.action.v56', 'narcissusV56', '/assets/openai/sprites/normalized/vehicles/narcissus-lifeboat-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'narcissus-lifeboat-hull', 286, 130, 'vehicle'),
+  'vehicle.lander-one-class-e.action.v56': sheet('vehicle.lander-one-class-e.action.v56', 'landerOneV56', '/assets/openai/sprites/normalized/vehicles/lander-one-class-e-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'lander-one-hull', 300, 164, 'vehicle'),
+  'vehicle.rt01-group-transport.action.v56': sheet('vehicle.rt01-group-transport.action.v56', 'rt01V56', '/assets/openai/sprites/normalized/vehicles/rt01-group-transport-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'rt01-transport-hull', 286, 142, 'vehicle'),
+  'vehicle.nr9-euv01-atv.action.v56': sheet('vehicle.nr9-euv01-atv.action.v56', 'nr9Euv01V56', '/assets/openai/sprites/normalized/vehicles/nr-9-euv01-atv-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'nr9-euv01-hull', 250, 160, 'vehicle'),
+  'vehicle.daihotai-tractor.action.v56': sheet('vehicle.daihotai-tractor.action.v56', 'daihotaiV56', '/assets/openai/sprites/normalized/vehicles/daihotai-tractor-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'daihotai-tractor-hull', 270, 176, 'vehicle'),
+  'vehicle.eva7c-pressure-pod.action.v56': sheet('vehicle.eva7c-pressure-pod.action.v56', 'eva7cV56', '/assets/openai/sprites/normalized/vehicles/eva-7c-pressure-pod-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'eva7c-pressure-pod-hull', 240, 190, 'vehicle'),
+  'vehicle.combat-power-loader.action.v56': sheet('vehicle.combat-power-loader.action.v56', 'combatPowerLoaderV56', '/assets/openai/sprites/normalized/vehicles/combat-power-loader-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'combat-power-loader-frame', 156, 194, 'vehicle'),
+  'vehicle.ua571-remote-sentry-carrier.action.v56': sheet('vehicle.ua571-remote-sentry-carrier.action.v56', 'ua571CarrierV56', '/assets/openai/sprites/normalized/vehicles/ua-571-remote-sentry-carrier-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ua571-carrier-hull', 214, 128, 'vehicle'),
+  'vehicle.seegson-maintenance-tram.action.v56': sheet('vehicle.seegson-maintenance-tram.action.v56', 'seegsonTramV56', '/assets/openai/sprites/normalized/vehicles/seegson-maintenance-tram-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'seegson-tram-hull', 268, 142, 'vehicle'),
+  'vehicle.crucible-caravan-crawler.action.v56': sheet('vehicle.crucible-caravan-crawler.action.v56', 'crucibleCrawlerV56', '/assets/openai/sprites/normalized/vehicles/crucible-caravan-crawler-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'crucible-crawler-hull', 300, 160, 'vehicle'),
+  'vehicle.uscm-assault-gunship.action.v56': sheet('vehicle.uscm-assault-gunship.action.v56', 'uscmAssaultGunshipV56', '/assets/openai/sprites/normalized/vehicles/uscm-assault-gunship-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'assault-gunship-hull', 290, 146, 'vehicle'),
+  'vehicle.orbital-lifeboat.action.v56': sheet('vehicle.orbital-lifeboat.action.v56', 'orbitalLifeboatV56', '/assets/openai/sprites/normalized/vehicles/orbital-lifeboat-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'orbital-lifeboat-hull', 280, 136, 'vehicle'),
+  'vehicle.colony-cargo-lifter.action.v56': sheet('vehicle.colony-cargo-lifter.action.v56', 'colonyCargoLifterV56', '/assets/openai/sprites/normalized/vehicles/colony-cargo-lifter-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'cargo-lifter-hull', 270, 142, 'vehicle'),
+  'vehicle.weyland-yutani-executive-shuttle.action.v56': sheet('vehicle.weyland-yutani-executive-shuttle.action.v56', 'executiveShuttleV56', '/assets/openai/sprites/normalized/vehicles/weyland-yutani-executive-shuttle-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'executive-shuttle-hull', 286, 148, 'vehicle'),
+  'vehicle.upp-combat-aerodyne.action.v56': sheet('vehicle.upp-combat-aerodyne.action.v56', 'uppCombatAerodyneV56', '/assets/openai/sprites/normalized/vehicles/upp-combat-aerodyne-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'upp-aerodyne-hull', 286, 134, 'vehicle'),
+  'vehicle.hyperdyne-synthetic-carrier.action.v56': sheet('vehicle.hyperdyne-synthetic-carrier.action.v56', 'hyperdyneCarrierV56', '/assets/openai/sprites/normalized/vehicles/hyperdyne-synthetic-carrier-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'hyperdyne-carrier-hull', 280, 130, 'vehicle'),
+  'vehicle.atmospheric-processor-elevator.action.v56': sheet('vehicle.atmospheric-processor-elevator.action.v56', 'processorElevatorV56', '/assets/openai/sprites/normalized/vehicles/atmospheric-processor-elevator-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'processor-elevator-cage', 190, 220, 'vehicle'),
+  'vehicle.maglev-personnel-car.action.v56': sheet('vehicle.maglev-personnel-car.action.v56', 'maglevPersonnelCarV56', '/assets/openai/sprites/normalized/vehicles/maglev-personnel-car-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'maglev-car-hull', 288, 108, 'vehicle'),
+  'vehicle.ripper-siege-loader.action.v56': sheet('vehicle.ripper-siege-loader.action.v56', 'ripperSiegeLoaderV56', '/assets/openai/sprites/normalized/vehicles/ripper-siege-loader-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ripper-siege-loader-frame', 170, 200, 'vehicle'),
   'weapon.m41a-pulse-rifle.action': sheet('weapon.m41a-pulse-rifle.action', 'rifle', '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png', 'rifle-action', 'weapon-grip', 'weapon-pickup', 126, 72, 'weapon'),
+  ...Object.fromEntries(WEAPON_VISUAL_PROFILES_V56
+    .filter((entry) => entry.sheetId !== 'weapon.m41a-pulse-rifle.action')
+    .map((entry) => [entry.sheetId, sheet(
+      entry.sheetId, entry.imageKey, entry.path, entry.clipSet, entry.pivot, entry.hitbox, entry.width, entry.height, 'weapon'
+    )])),
+  ...Object.fromEntries(EQUIPMENT_VISUAL_PROFILES_V56
+    .filter((entry) => !entry.manifestAlias)
+    .map((entry) => [entry.sheetId, sheet(
+      entry.sheetId, entry.imageKey, entry.path, entry.clipSet, entry.pivot, entry.hitbox,
+      entry.renderWidth, entry.renderHeight, 'equipment', 1, true, entry.identityVerified,
+      EQUIPMENT_SHEET_GRID_V56
+    )])),
+  'vehicle.ceto-patrol-boat.action.v56': sheet('vehicle.ceto-patrol-boat.action.v56', 'cetoPatrolBoatV56', '/assets/openai/sprites/normalized/vehicles/ceto-patrol-boat-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ceto-patrol-boat-hull', 300, 154, 'vehicle'),
+  'vehicle.tantalus-command-skiff.action.v56': sheet('vehicle.tantalus-command-skiff.action.v56', 'tantalusCommandSkiffV56', '/assets/openai/sprites/normalized/vehicles/tantalus-command-skiff-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'tantalus-command-skiff-hull', 286, 142, 'vehicle'),
+  'vehicle.echo-9-recon-bike.action.v56': sheet('vehicle.echo-9-recon-bike.action.v56', 'echo9ReconBikeV56', '/assets/openai/sprites/normalized/vehicles/echo-9-recon-bike-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'echo9-recon-bike-frame', 224, 164, 'vehicle'),
+  'vehicle.neuro-xeno-transport-rig.action.v56': sheet('vehicle.neuro-xeno-transport-rig.action.v56', 'neuroXenoTransportRigV56', '/assets/openai/sprites/normalized/vehicles/neuro-xeno-transport-rig-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'neuro-xeno-transport-rig-hull', 270, 166, 'vehicle'),
+  'vehicle.mining-bore-crawler.action.v56': sheet('vehicle.mining-bore-crawler.action.v56', 'miningBoreCrawlerV56', '/assets/openai/sprites/normalized/vehicles/mining-bore-crawler-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'mining-bore-crawler-hull', 294, 140, 'vehicle'),
+  'vehicle.ice-driller.action.v56': sheet('vehicle.ice-driller.action.v56', 'iceDrillerV56', '/assets/openai/sprites/normalized/vehicles/ice-driller-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ice-driller-hull', 288, 144, 'vehicle'),
+  'vehicle.reef-hydrofoil.action.v56': sheet('vehicle.reef-hydrofoil.action.v56', 'reefHydrofoilV56', '/assets/openai/sprites/normalized/vehicles/reef-hydrofoil-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'reef-hydrofoil-hull', 286, 130, 'vehicle'),
   ...Object.fromEntries(NPC_SHEETS.map(([crewId, slug]) => {
     const id = `npc.${slug}.locomotion`;
     return [id, sheet(id, `squad:${crewId}`, `/assets/openai/sprites/normalized/npcs/${slug}-locomotion-sheet.png`, 'npc-locomotion', 'humanoid-feet', 'npc-standing', 92, 140, 'npc')];
@@ -281,6 +454,20 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
   }
   if (!actor.alive) return resolveVerifiedPlayerCombat('hurt-death');
   if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt-death');
+  if ((actor.meleeClock || 0) > 0) return {
+    sheetId: 'player.echo9-marine.melee',
+    clipId: actor.meleeKind === 'rifle-bash' ? 'rifle-bash' : actor.meleeKind === 'defense' ? 'melee-defense' : 'knife-attack'
+  };
+  if ((actor.toolUseClock || 0) > 0) {
+    const toolClip = { cutter: 'cutting-torch', 'cutting-torch': 'cutting-torch', tuner: 'access-tuner', 'access-tuner': 'access-tuner', jack: 'maintenance-jack', 'maintenance-jack': 'maintenance-jack' }[actor.toolId] || 'motion-tracker';
+    return { sheetId: 'player.echo9-marine.tool-use', clipId: toolClip };
+  }
+  if ((actor.interactionClock || 0) > 0) {
+    const interactionClip = ['control-use', 'lift-carry', 'ground-interact', 'force-interact'].includes(actor.interactionKind)
+      ? actor.interactionKind
+      : 'control-use';
+    return { sheetId: 'player.echo9-marine.interaction', clipId: interactionClip };
+  }
   if (actor.reloading) return resolveVerifiedPlayerCombat('reload');
   if ((actor.v52FireClock || 0) > 0) return resolveVerifiedPlayerCombat('primary-fire');
   if (actor.climbing) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'climb' };
@@ -307,6 +494,11 @@ export function resolveEnemyAnimation(enemy = {}) {
   const attacking = Boolean(enemy.attacking);
   const moving = Math.abs(enemy.vx || 0) > 8 || Boolean(enemy.alert);
   const v54ActionClip = dead || hurt ? 'death' : attacking ? 'attack' : moving ? 'chase' : 'idle';
+  const dedicatedV56 = typeof enemy.visualSheetId === 'string'
+    && SPRITE_SHEETS[enemy.visualSheetId]?.clipSet === 'enemy-action-v56'
+    ? enemy.visualSheetId
+    : null;
+  if (dedicatedV56) return { sheetId: dedicatedV56, clipId: v54ActionClip };
   if (enemy.spriteKey === 'ovomorph') return { sheetId: 'enemy.ovomorph.cycle', clipId: dead || hurt ? 'destroyed' : attacking ? 'hatch' : moving ? 'opening' : 'sealed' };
   const v55Enemies = {
     xenoPraetorian: 'enemy.xenomorph-praetorian.action',
@@ -370,6 +562,8 @@ function resolveExactVehicleSpriteSheet(vehicle = {}) {
 }
 
 export function resolveVehicleAnimation(vehicle = {}) {
+  const v56 = resolveVehicleVisualAnimationV56(vehicle);
+  if (v56) return v56;
   const sheetId = resolveExactVehicleSpriteSheet(vehicle);
   if (!sheetId) return null;
   const damaged = vehicle.destroyed || (vehicle.v52HurtClock || 0) > 0 || (vehicle.maxHull > 0 && vehicle.hull < vehicle.maxHull * 0.28);
@@ -454,8 +648,8 @@ export class SpriteAnimationController {
       sheet: sheetEntry,
       clip,
       frame,
-      column: frame % SPRITE_GRID.columns,
-      row: Math.floor(frame / SPRITE_GRID.columns),
+      column: frame % (sheetEntry.columns || SPRITE_GRID.columns),
+      row: Math.floor(frame / (sheetEntry.columns || SPRITE_GRID.columns)),
       complete: !clip.loop && rawStep >= lastIndex,
       elapsed,
       events: Object.freeze(events)

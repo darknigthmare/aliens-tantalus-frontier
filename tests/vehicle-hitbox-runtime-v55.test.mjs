@@ -134,7 +134,7 @@ test('le vrai GameEngine applique les quatre dimensions physiques v55 sans agran
 }));
 
 test('le vrai GameEngine garde son fallback famille et met à jour le miroir selon le mouvement horizontal', () => withBrowserRuntime(() => {
-  const uncoveredAir = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-010-ud-4b-dropship');
+  const uncoveredAir = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-011-ad-19cd-dropship');
   const fallbackEngine = buildEngine(uncoveredAir);
   assert.equal(resolveVehicleAnimation(fallbackEngine.vehicle), null);
   let familyPaths = 0;

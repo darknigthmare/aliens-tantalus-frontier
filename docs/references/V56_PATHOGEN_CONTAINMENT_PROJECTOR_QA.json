@@ -1,0 +1,41 @@
+{
+  "release": "v56",
+  "assetId": "weapon.pathogen-containment-projector.action",
+  "displayName": "Pathogen Containment Projector",
+  "status": "PROJECT_ORIGINAL_VALIDATED",
+  "canonClaim": false,
+  "generation": {
+    "provider": "OpenAI ImageGen",
+    "generationId": "exec-a52d9ef1-79e9-49a9-8d5e-ae5e61f4069c",
+    "sourcePath": "assets/openai/sprites/raw/weapons/pathogen-containment-projector-action-sheet.raw.png",
+    "sourceSize": [1254, 1254],
+    "sourceMode": "RGB",
+    "sourceSha256": "086b9c6b1c70cab0c97757acc5fc08aaed1c7bd43d7b5c95ee0a3d494a936706"
+  },
+  "production": {
+    "path": "assets/openai/sprites/weapons/pathogen-containment-projector-action-sheet.png",
+    "normalizedPath": "assets/openai/sprites/normalized/weapons/pathogen-containment-projector-action-sheet.png",
+    "sha256": "ae5fe17cf87784690040aa09f44f5fc100f6a7fa36894bfad8cb80b0180d820b",
+    "size": [1024, 1024],
+    "mode": "RGBA",
+    "grid": [4, 4],
+    "cellCount": 16,
+    "occupiedPixels": 305421,
+    "guardPixels": 0,
+    "hiddenRgbNonzeroChannelsAtAlphaZero": 0
+  },
+  "animationRows": [
+    "idle",
+    "aim-charge",
+    "discharge",
+    "cooldown-reload"
+  ],
+  "visualReview": {
+    "passed": true,
+    "direction": "right-facing in all cells",
+    "modelConsistency": "same housing, canister and proportions across all 16 cells",
+    "cellSeparation": "no subject crosses a normalized cell guard",
+    "readableTextOrLogo": false
+  },
+  "designLock": "Original colonial quarantine hardware only; no pathogen tissue, black goo, Engineer glyph, copied franchise prop, readable text, logo or watermark."
+}

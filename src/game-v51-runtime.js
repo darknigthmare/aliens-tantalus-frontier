@@ -1,5 +1,19 @@
 import { resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
+import {
+  MISSION_INTERACTIVE_ART_ASSET_COUNT_V56,
+  MISSION_INTERACTIVE_ART_FILES_V56,
+  resolveMissionArchiveArtV56,
+  resolveMissionDropArtV56,
+  resolveMissionHazardArtV56
+} from './mission-interactive-art-v56.js';
+import { WEAPON_VISUAL_ASSETS_V56, WEAPON_VISUAL_BASE_COUNT_V56, resolveWeaponVisualProfileV56 } from './weapon-visual-runtime-v56.js';
+import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
+
+export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
+  id: 'equipment-004-cutting-torch',
+  name: 'Cutting Torch'
+});
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -12,6 +26,22 @@ const MAGAZINE_SIZE = 30;
 const TRACKER_COST = 24;
 const REVIVE_RANGE = 86;
 const EDITOR_TILE_TYPES = new Set(['floor', 'platform', 'wall', 'door', 'vent', 'ladder', 'lift', 'spawn', 'objective', 'enemy', 'vehicle', 'terminal', 'hazard']);
+const PROJECT_ORIGINAL_ENEMY_SHEET_IDS = Object.freeze([
+  'enemy.neuro-xeno-drone.action.v56',
+  'enemy.atarax-ripper.action.v56',
+  'enemy.colonial-raider.action.v56',
+  'enemy.atarax-controller.action.v56',
+  'enemy.korari-stalker.action.v56',
+  'enemy.ceto-reef-predator.action.v56',
+  'enemy.tantalus-tunnel-vermin.action.v56'
+]);
+const PROJECT_ORIGINAL_ENEMY_SHEET_ID_SET = new Set(PROJECT_ORIGINAL_ENEMY_SHEET_IDS);
+const PROJECT_ORIGINAL_ENEMY_ASSETS = Object.freeze(Object.fromEntries(
+  PROJECT_ORIGINAL_ENEMY_SHEET_IDS
+    .map((sheetId) => resolveSpriteSheet(sheetId))
+    .filter(Boolean)
+    .map((sheet) => [sheet.imageKey, sheet.path])
+));
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const overlap = (a, b) => Boolean(a && b && a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y);
@@ -72,6 +102,8 @@ const ASSETS = Object.freeze({
   ripperQueen: '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png',
   paleCrucibleHunter: '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
   pathogenMimic: '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
+  ...PROJECT_ORIGINAL_ENEMY_ASSETS,
+  ...WEAPON_VISUAL_ASSETS_V56,
   rifle: '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
   apc: '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
   human: '/assets/openai/human-factions-animation-sheet.png',
@@ -93,6 +125,7 @@ const ASSETS = Object.freeze({
   lamp: '/assets/openai/metroidvania/props/warning-lamp.png',
   acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png',
   electricalArc: '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
+  ...MISSION_INTERACTIVE_ART_FILES_V56,
   ...MISSION_STRUCTURAL_PROP_FILES
 });
 
@@ -164,18 +197,29 @@ function createImage(source) {
 function enemyBehavior(spriteKey, biology) {
   if (spriteKey === 'facehugger') return 'pouncer';
   if (spriteKey === 'xenoRunner') return 'pouncer';
+  if (spriteKey === 'korariStalkerV56' || spriteKey === 'tantalusTunnelVerminV56') return 'pouncer';
+  if (spriteKey === 'xenoProwlerV56') return 'pouncer';
+  if (spriteKey === 'dustRunnerV56' || spriteKey === 'reefStalkerV56' || spriteKey === 'caravanStalkerV56') return 'pouncer';
+  if (spriteKey === 'xenoBoilerV56' || spriteKey === 'xenoBursterV56') return 'exploder';
+  if (spriteKey === 'ataraxRipperV56') return 'bruiser';
+  if (spriteKey === 'xenoborgV56') return 'bruiser';
+  if (spriteKey === 'pathogenAbominationV56' || spriteKey === 'trilobiteEchoV56' || spriteKey === 'wildBoarHostV56' || spriteKey === 'foundryCrusherV56' || spriteKey === 'salvageHiveBruteV56') return 'bruiser';
+  if (spriteKey === 'xenoQueenV56' || spriteKey === 'siegeRoyalV56') return 'boss';
   if (spriteKey === 'paleCrucibleHunter') return 'pouncer';
+  if (spriteKey === 'deaconLineV56' || spriteKey === 'protomorphV56' || spriteKey === 'arcologyLurkerV56') return 'hunter';
+  if (spriteKey === 'neuroXenoDroneV56' || spriteKey === 'cetoReefPredatorV56') return 'hunter';
   if (spriteKey === 'pathogenMimic') return 'hunter';
   if (spriteKey === 'xenoQueen' || spriteKey === 'ripperQueen') return 'boss';
   if (spriteKey === 'workingJoe') return 'bruiser';
   if (biology === 'synthetic') return 'bruiser';
   if (spriteKey === 'neomorph') return 'hunter';
+  if (spriteKey === 'colonialRaiderV56' || spriteKey === 'ataraxControllerV56') return 'shooter';
   if (biology === 'pathogen') return 'spitter';
   if (biology === 'human') return 'shooter';
   return 'stalker';
 }
 
-const isRoyalEnemyProfile = (source = {}) => source.caste === 'royal' || /queen|reine/i.test(source.name || '');
+const isRoyalEnemyProfile = (source = {}) => source.caste === 'royal' || /queen|reine|royal/i.test(source.name || '');
 
 function bossProfileScore(source = {}, index = 0) {
   const frequencyScore = { common: 0, uncommon: 24, rare: 52, apex: 88, scripted: 76 }[String(source.frequency || 'common').toLowerCase()] || 0;
@@ -248,6 +292,7 @@ export class GameEngine {
     this.world = world;
     this.campaign = campaign;
     this.weapon = weapon || { name: 'M41A', damage: 26 };
+    this.weaponVisual = resolveWeaponVisualProfileV56(this.weapon);
     this.room = 0;
     this.camera = { x: 0, y: 250 };
     this.player = this.createPlayer(160, FLOOR_Y - 92, '#92d6a6', false);
@@ -271,7 +316,23 @@ export class GameEngine {
     this.ventShortcut = this.vents[0];
     this.vehicle = this.createVehicle(4210, FLOOR_Y - 104);
     this.weaponPickup = { id: 'm41a', x: 1080, y: FLOOR_Y - 54, w: 126, h: 54, taken: false };
-    this.toolPickup = { id: 'cutter', x: 3030, y: FLOOR_Y - 48, w: 54, h: 48, taken: false };
+    if (this.weaponVisual) Object.assign(this.weaponPickup, {
+      id: this.weaponVisual.sheetId,
+      visualSheetId: this.weaponVisual.sheetId,
+      imageKey: this.weaponVisual.imageKey,
+      w: Math.max(54, this.weaponVisual.width),
+      h: Math.max(42, this.weaponVisual.height)
+    });
+    this.toolPickup = {
+      id: 'cutter',
+      visualSheetId: MISSION_TOOL_PICKUP_VISUAL_V56?.sheetId || null,
+      imageKey: MISSION_TOOL_PICKUP_VISUAL_V56?.imageKey || null,
+      x: 3030,
+      y: FLOOR_Y - 48,
+      w: Math.max(54, MISSION_TOOL_PICKUP_VISUAL_V56?.renderWidth || 0),
+      h: Math.max(48, MISSION_TOOL_PICKUP_VISUAL_V56?.renderHeight || 0),
+      taken: false
+    };
     this.supplies = SUPPLY_LAYOUT.map((supply) => ({ ...supply, used: false }));
     this.hazards = HAZARD_LAYOUT.map((hazard, index) => ({ ...hazard, id: `acid-${index}`, active: true }));
     this.drops = [];
@@ -324,6 +385,7 @@ export class GameEngine {
       health: 100, maxHealth: 100, armor: 50, maxArmor: 100, ammo: 12, ammoReserve: 72, magazineSize: 12,
       weaponMode: 'sidearm', color, coop, alive: true, downed: false, bleedOut: 0, inVehicle: false,
       fireClock: 0, reloadClock: 0, reloading: false, actionClock: 0, hazardClock: 0, jumpBuffer: 0,
+      meleeClock: 0, meleeKind: 'knife-attack', toolUseClock: 0, toolId: null, interactionClock: 0, interactionKind: null,
       coyoteTime: 0.1, kills: 0, damageTaken: 0, damageBlocked: 0, shots: 0, inCover: false
     };
   }
@@ -353,6 +415,7 @@ export class GameEngine {
       biology,
       visualArchetype: visual.archetype,
       visualImageKey: visual.imageKey,
+      visualSheetId: visual.sheetId,
       visualRow: visual.row,
       visualIdentityStatus: visual.identityStatus,
       visualApproximation: visual.approximate,
@@ -526,6 +589,9 @@ export class GameEngine {
     player.fireClock = Math.max(0, player.fireClock - delta);
     player.actionClock = Math.max(0, player.actionClock - delta);
     player.hazardClock = Math.max(0, player.hazardClock - delta);
+    player.meleeClock = Math.max(0, Number(player.meleeClock) - delta || 0);
+    player.toolUseClock = Math.max(0, Number(player.toolUseClock) - delta || 0);
+    player.interactionClock = Math.max(0, Number(player.interactionClock) - delta || 0);
     if (player.reloading) {
       player.reloadClock -= delta;
       if (player.reloadClock <= 0) this.finishReload(player);
@@ -654,6 +720,25 @@ export class GameEngine {
     }
     this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0 && bullet.x > -100 && bullet.x < WORLD_WIDTH + 100);
   }
+  detonateEnemy(enemy, target) {
+    if (!enemy?.alive || !target) return false;
+    const blastDamage = Math.max(20, Math.round((Number(enemy.damage) || 16) * 1.35));
+    enemy.attacking = true;
+    enemy.attackClock = 99;
+    if (target.inVehicle) this.damageVehicle(blastDamage, `${enemy.name}:detonation`);
+    else this.damagePlayer(target, blastDamage, { bypassCover: true, source: `${enemy.name}:detonation` });
+    for (let index = 0; index < 3; index += 1) {
+      this.spawnImpact(enemy.x + enemy.w / 2, enemy.y + enemy.h * (0.32 + index * 0.16), '#b7cf4c');
+    }
+    this.applyEnemyDamage(enemy, enemy.maxHealth + enemy.armor + 1, {
+      owner: null,
+      kind: 'self-detonation',
+      x: enemy.x + enemy.w / 2,
+      y: enemy.y + enemy.h / 2
+    });
+    this.onEvent({ type: 'enemy-detonation', enemyId: enemy.id, targetId: target.id || null, damage: blastDamage });
+    return true;
+  }
 
   updateEnemy(enemy, delta) {
     if (!enemy.alive) return;
@@ -693,6 +778,7 @@ export class GameEngine {
       enemy.attacking = true;
     }
     if ((combatOverlap(enemy, targetEntity) || (Math.abs(distance) < stopRange + 28 && verticalDistance < 95)) && enemy.attackClock <= 0) {
+      if (enemy.behavior === 'exploder') return void this.detonateEnemy(enemy, target);
       if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
       else this.damagePlayer(target, enemy.damage, { source: enemy.name });
       enemy.attackClock = enemy.isBoss ? 0.65 : enemy.behavior === 'pouncer' ? 1.1 : 0.82;
@@ -843,9 +929,51 @@ export class GameEngine {
     if (player.weaponMode === 'rifle') return { mode: 'rifle', damage: Math.max(24, Number(this.weapon?.damage) || 26), interval: 0.13, spread: 0, ammo: player.ammo };
     return { mode: 'sidearm', damage: 16, interval: 0.28, spread: 0, ammo: player.ammo };
   }
+  setInteractionAnimation(actor, kind = 'control-use', duration = 0.65) {
+    if (!actor) return false;
+    actor.interactionKind = kind;
+    actor.interactionClock = Math.max(Number(actor.interactionClock) || 0, duration);
+    actor.actionClock = Math.max(Number(actor.actionClock) || 0, duration);
+    return true;
+  }
+
+  setToolAnimation(actor, toolId = 'motion-tracker', duration = 0.7) {
+    if (!actor) return false;
+    actor.toolId = toolId;
+    actor.toolUseClock = Math.max(Number(actor.toolUseClock) || 0, duration);
+    actor.actionClock = Math.max(Number(actor.actionClock) || 0, duration);
+    return true;
+  }
+
+  performContextualMelee(player) {
+    if (!player || player.inVehicle || (player.meleeClock || 0) > 0) return false;
+    const playerCenterX = player.x + player.w / 2;
+    const playerCenterY = player.y + player.h / 2;
+    const target = this.enemies
+      .filter((enemy) => enemy.alive
+        && Math.abs((enemy.x + enemy.w / 2) - playerCenterX) <= 92
+        && Math.abs((enemy.y + enemy.h / 2) - playerCenterY) <= 96)
+      .sort((left, right) => distanceBetween(player, left) - distanceBetween(player, right))[0];
+    if (!target) return false;
+    player.facing = Math.sign((target.x + target.w / 2) - playerCenterX) || player.facing || 1;
+    player.meleeKind = player.weaponMode === 'rifle' ? 'rifle-bash' : 'knife-attack';
+    player.meleeClock = player.meleeKind === 'rifle-bash' ? 0.48 : 0.42;
+    player.fireClock = player.meleeClock;
+    player.actionClock = player.meleeClock;
+    const damage = player.meleeKind === 'rifle-bash' ? 34 : 22;
+    this.applyEnemyDamage(target, damage, {
+      owner: player,
+      kind: player.meleeKind,
+      x: target.x + target.w / 2,
+      y: target.y + target.h * 0.48
+    });
+    this.onEvent({ type: 'melee', attack: player.meleeKind, target: target.id, damage });
+    return true;
+  }
 
   fire(player) {
     if (!player?.alive || player.fireClock > 0 || player.reloading || this.paused || this.mission?.state !== 'active') return false;
+    if (this.performContextualMelee(player)) return true;
     const profile = this.weaponProfile(player);
     if (profile.ammo <= 0) { this.reload(player); return false; }
     player.fireClock = profile.interval;
@@ -890,6 +1018,7 @@ export class GameEngine {
     this.inventory.medkits -= 1;
     player.health = Math.min(player.maxHealth, player.health + 48);
     player.actionClock = 0.65;
+    this.setInteractionAnimation(player, 'ground-interact', 0.65);
     this.onEvent({ type: 'resource-used', resource: 'medkit', coop: player.coop });
     return true;
   }
@@ -900,6 +1029,7 @@ export class GameEngine {
     this.tracker.cooldown = 2.1;
     this.tracker.pulses += 1;
     this.trackerPulse = 1;
+    this.setToolAnimation(player, 'motion-tracker', 0.7);
     const contacts = this.enemies.filter((enemy) => enemy.alive && distanceBetween(player, enemy) < 900);
     for (const enemy of contacts) {
       enemy.revealed = 4;
@@ -1027,6 +1157,7 @@ export class GameEngine {
       this.setCheckpoint('security', actor.x, actor.y);
       this.onEvent({ type: 'resource', resource: 'security-key', amount: 1 });
       this.audio?.ui();
+      this.setInteractionAnimation(actor, 'ground-interact', 0.55);
       return true;
     }
     const supply = this.supplies.find((candidate) => !candidate.used && distanceBetween(actor, candidate) < 105);
@@ -1037,6 +1168,7 @@ export class GameEngine {
       actor.magazineSize = MAGAZINE_SIZE;
       actor.ammo = MAGAZINE_SIZE;
       actor.ammoReserve += 60;
+      this.setInteractionAnimation(actor, 'ground-interact', 0.65);
       this.onEvent({ type: 'supply', item: 'M41A', amount: 60 });
       this.audio?.ui();
       return true;
@@ -1044,6 +1176,7 @@ export class GameEngine {
     if (!this.toolPickup.taken && distanceBetween(actor, this.toolPickup) < 105) {
       this.toolPickup.taken = true;
       this.inventory.cutter = true;
+      this.setInteractionAnimation(actor, 'ground-interact', 0.65);
       this.onEvent({ type: 'supply', item: 'CHALUMEAU', amount: 1 });
       this.audio?.ui();
       return true;
@@ -1052,6 +1185,7 @@ export class GameEngine {
       this.powerNode.active = true;
       this.mission.objectives.power = true;
       this.setCheckpoint('power', actor.x, actor.y);
+      this.setInteractionAnimation(actor, 'control-use', 0.8);
       this.onEvent({ type: 'power-restored' });
       this.audio?.ui();
       return true;
@@ -1062,6 +1196,7 @@ export class GameEngine {
       this.mission.objectives.archive = true;
       this.inventory.intel += 3;
       this.setCheckpoint('archive', actor.x, actor.y);
+      this.setInteractionAnimation(actor, 'control-use', 0.85);
       this.onEvent({ type: 'archive-recovered', intel: 3 });
       this.audio?.ui();
       return true;
@@ -1069,6 +1204,7 @@ export class GameEngine {
     const vent = this.vents.find((candidate) => distanceBetween(actor, candidate) < 125);
     if (vent) {
       if (vent.requiresTool && !this.inventory.cutter) return this.locked('CHALUMEAU DE MAINTENANCE REQUIS');
+      this.setToolAnimation(actor, 'cutting-torch', 0.95);
       vent.open = true;
       actor.x = vent.targetX;
       actor.y = vent.targetY;
@@ -1083,6 +1219,8 @@ export class GameEngine {
       const requirement = this.doorRequirement(door);
       if (requirement) return this.locked(requirement);
       door.open = !door.open;
+      if (door.lockedBy) this.setToolAnimation(actor, 'access-tuner', 0.7);
+      else this.setInteractionAnimation(actor, 'force-interact', 0.7);
       this.onEvent({ type: 'door', doorId: door.id, open: door.open });
       this.audio?.ui();
       return true;
@@ -1090,6 +1228,7 @@ export class GameEngine {
     if (this.objective && distanceBetween(actor, this.objective) < 125) {
       const missing = this.missingExtractionRequirement();
       if (missing) return this.locked(missing);
+      this.setInteractionAnimation(actor, 'control-use', 0.7);
       this.completeMission(actor);
       return true;
     }
@@ -1105,6 +1244,7 @@ export class GameEngine {
 
   collectSupply(actor, supply) {
     supply.used = true;
+    this.setInteractionAnimation(actor, 'ground-interact', 0.55);
     if (supply.type === 'medkit') this.inventory.medkits += supply.amount;
     if (supply.type === 'armor') actor.armor = Math.min(actor.maxArmor, actor.armor + supply.amount);
     if (supply.type === 'ammo') actor.ammoReserve += supply.amount;
@@ -1131,6 +1271,7 @@ export class GameEngine {
 
   toggleVehicle(actor = this.player) {
     if (!actor?.alive || !this.vehicle?.active || this.vehicle.destroyed) return false;
+    this.setInteractionAnimation(actor, 'force-interact', 0.55);
     if (actor.inVehicle) {
       actor.inVehicle = false;
       actor.x = clamp(this.vehicle.x + this.vehicle.w + 18, 0, WORLD_WIDTH - actor.w);
@@ -1424,23 +1565,89 @@ export class GameEngine {
     ctx.drawImage(image, x + ((fallbackWidth || width) - width) / 2, baseline - height, width, height);
   }
 
+  drawAtlasFrame(ctx, descriptor, frame, x, y, width, height) {
+    const image = descriptor && this.images.get(descriptor.key);
+    if (!descriptor || !ready(image)) return false;
+    const columns = Math.max(1, descriptor.columns || 1);
+    const rows = Math.max(1, descriptor.rows || 1);
+    const safeFrame = Math.abs(Math.floor(frame || 0)) % Math.max(1, descriptor.frameCount || columns * rows);
+    const cellWidth = image.naturalWidth / columns;
+    const cellHeight = image.naturalHeight / rows;
+    const column = safeFrame % columns;
+    const row = Math.floor(safeFrame / columns);
+    ctx.drawImage(
+      image,
+      column * cellWidth, row * cellHeight, cellWidth, cellHeight,
+      x, y, width, height
+    );
+    return true;
+  }
+
   drawHazard(ctx, hazard) {
     if (!hazard.active) return;
+    const profile = resolveMissionHazardArtV56(hazard.kind);
+    if (profile) {
+      const frame = this.reducedMotion
+        ? 0
+        : Math.floor(this.animationTime * profile.fps + Math.abs(hazard.x) * 0.01);
+      const height = Math.max(hazard.h + 34, profile.renderHeight);
+      const y = hazard.y + hazard.h - height;
+      ctx.save();
+      if (hazard.kind === 'darkness') ctx.globalAlpha = 0.72;
+      const drawn = this.drawAtlasFrame(ctx, profile.world, frame, hazard.x, y, hazard.w, height);
+      if (drawn && profile.accent) {
+        const accentHeight = Math.max(48, height * 0.62);
+        this.drawAtlasFrame(ctx, profile.accent, frame, hazard.x, hazard.y + hazard.h - accentHeight, hazard.w, accentHeight);
+      }
+      ctx.restore();
+      if (drawn) return;
+    }
     const electrical = hazard.kind === 'electrical';
     const image = this.images.get(electrical ? 'electricalArc' : 'acid');
     if (ready(image)) ctx.drawImage(image, hazard.x, hazard.y - 22, hazard.w, hazard.h + 34);
     else { ctx.fillStyle = electrical ? '#65bddd' : '#7e9b37'; ctx.fillRect(hazard.x, hazard.y, hazard.w, hazard.h); }
   }
 
+  drawHazardForegroundOverlays(ctx) {
+    const actor = this.player;
+    const vacuum = this.hazards?.find((hazard) => {
+      if (!hazard.active || hazard.kind !== 'vacuum') return false;
+      if (!actor) return true;
+      const actorCenter = actor.x + actor.w / 2;
+      const hazardCenter = hazard.x + hazard.w / 2;
+      return Math.abs(actorCenter - hazardCenter) < Math.max(900, hazard.w * 3);
+    });
+    const profile = vacuum && resolveMissionHazardArtV56('vacuum');
+    const image = profile?.foreground && this.images.get(profile.foreground.key);
+    if (!vacuum || !ready(image)) return 0;
+    ctx.save();
+    ctx.globalAlpha = this.reducedMotion ? 0.34 : 0.42 + Math.sin(this.animationTime * 2.4) * 0.08;
+    ctx.drawImage(image, 0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
+    ctx.restore();
+    return 1;
+  }
+
   drawResource(ctx, supply) {
+    const descriptor = resolveMissionDropArtV56(supply.type);
+    const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 4 + supply.x * 0.01) % 4;
+    const width = Math.max(supply.w, supply.type === 'armor' ? 60 : 54);
+    const height = Math.max(supply.h, supply.type === 'armor' ? 58 : 52);
+    const x = supply.x + supply.w / 2 - width / 2;
+    const y = supply.y + supply.h - height + (this.reducedMotion ? 0 : Math.sin(this.animationTime * 4 + supply.x) * 2);
+    if (this.drawAtlasFrame(ctx, descriptor, frame, x, y, width, height)) return;
     this.drawWorldProp(ctx, 'crates', supply.x, supply.y + supply.h, supply.h, supply.w);
-    ctx.fillStyle = supply.type === 'medkit' ? '#d9e6d9' : supply.type === 'armor' ? '#75a7c8' : '#d8b968';
-    ctx.fillRect(supply.x + supply.w / 2 - 5, supply.y - 8 + Math.sin(this.animationTime * 4) * 3, 10, 5);
   }
 
   drawDrop(ctx, drop) {
+    const descriptor = resolveMissionDropArtV56(drop.type);
+    const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 5 + drop.x * 0.02) % 4;
+    const width = Math.max(drop.w, drop.type === 'security-key' ? 44 : 38);
+    const height = Math.max(drop.h, drop.type === 'security-key' ? 42 : 34);
+    const x = drop.x + drop.w / 2 - width / 2;
+    const y = drop.y + drop.h - height + (this.reducedMotion ? 0 : Math.sin(this.animationTime * 5 + drop.x) * 3);
+    if (this.drawAtlasFrame(ctx, descriptor, frame, x, y, width, height)) return;
     ctx.fillStyle = drop.type === 'security-key' ? '#e6bf55' : drop.type === 'ammo' ? '#c98d5b' : '#72c293';
-    ctx.fillRect(drop.x, drop.y + Math.sin(this.animationTime * 5 + drop.x) * 3, drop.w, drop.h);
+    ctx.fillRect(drop.x, drop.y, drop.w, drop.h);
   }
 
   drawPowerNode(ctx) {
@@ -1452,9 +1659,16 @@ export class GameEngine {
 
   drawArchiveTerminal(ctx) {
     if (!this.archiveTerminal) return;
+    const descriptor = resolveMissionArchiveArtV56(this.missionLevelRuntime?.templateId);
+    const frame = this.archiveTerminal.recovered
+      ? 3
+      : this.reducedMotion ? 0 : Math.floor(this.animationTime * 3) % 3;
+    const width = Math.max(this.archiveTerminal.w, 70);
+    const height = Math.max(this.archiveTerminal.h, 92);
+    const x = this.archiveTerminal.x + this.archiveTerminal.w / 2 - width / 2;
+    const y = this.archiveTerminal.y + this.archiveTerminal.h - height;
+    if (this.drawAtlasFrame(ctx, descriptor, frame, x, y, width, height)) return;
     this.drawWorldProp(ctx, this.archiveTerminal.recovered ? 'lamp' : 'crates', this.archiveTerminal.x, this.archiveTerminal.y + this.archiveTerminal.h, this.archiveTerminal.h, this.archiveTerminal.w);
-    ctx.fillStyle = this.archiveTerminal.recovered ? '#76d69b' : '#5fc4bc';
-    ctx.fillRect(this.archiveTerminal.x + 15, this.archiveTerminal.y + 12, 28, 7);
   }
 
   drawDoor(ctx, door) {
@@ -1469,21 +1683,27 @@ export class GameEngine {
 
   drawWeaponPickup(ctx) {
     if (this.weaponPickup.taken) return;
-    const image = this.images.get('rifle');
+    const visual = this.weaponVisual || resolveWeaponVisualProfileV56(this.weapon);
+    const image = this.images.get(visual?.imageKey || 'rifle');
     if (!ready(image)) return;
     const frame = Math.floor(this.animationTime * 4) % 4;
-    const width = 126;
-    const height = 72;
+    const width = visual?.width || 126;
+    const height = visual?.height || 72;
     const x = this.weaponPickup.x + this.weaponPickup.w / 2 - width / 2;
     const y = this.weaponPickup.y + this.weaponPickup.h - height * (240 / CELL_SIZE);
     this.drawSheetCell(ctx, image, frame, 0, x, y, width, height, false);
   }
-
   drawToolPickup(ctx) {
     if (this.toolPickup.taken) return;
-    this.drawWorldProp(ctx, 'breakable', this.toolPickup.x, this.toolPickup.y + this.toolPickup.h, this.toolPickup.h, this.toolPickup.w);
-    ctx.fillStyle = '#e0a554';
-    ctx.fillRect(this.toolPickup.x + 8, this.toolPickup.y + 8, 34, 6);
+    const visual = MISSION_TOOL_PICKUP_VISUAL_V56;
+    const image = this.images.get(this.toolPickup.imageKey || visual?.imageKey);
+    if (!visual || !ready(image)) return;
+    const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 4) % 4;
+    const width = visual.renderWidth;
+    const height = visual.renderHeight;
+    const x = this.toolPickup.x + this.toolPickup.w / 2 - width / 2;
+    const y = this.toolPickup.y + this.toolPickup.h - height * (240 / CELL_SIZE);
+    this.drawSheetCell(ctx, image, frame, 0, x, y, width, height, false);
   }
 
   drawVehicle(ctx) {
@@ -1527,12 +1747,24 @@ export class GameEngine {
   drawEnemy(ctx, enemy) {
     let image;
     let sheetId = null;
+    const projectOriginalSheet = PROJECT_ORIGINAL_ENEMY_SHEET_ID_SET.has(enemy.visualSheetId)
+      ? resolveSpriteSheet(enemy.visualSheetId)
+      : null;
     const legacyCell = resolveLegacyEnemyCell(enemy, this.animationTime);
     let row = legacyCell.row;
     let frame = legacyCell.frame;
     let renderWidth = 84;
     let renderHeight = 112;
-    if (enemy.spriteKey === 'ripperQueen') { image = this.images.get('ripperQueen'); sheetId = 'enemy.ripper-queen.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
+    if (projectOriginalSheet) {
+      image = this.images.get(projectOriginalSheet.imageKey);
+      sheetId = projectOriginalSheet.id;
+      row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3;
+      const fps = row === 0 ? 4 : row === 3 ? 7 : 10;
+      frame = Math.floor(this.animationTime * fps) % 4;
+      renderWidth = projectOriginalSheet.renderWidth;
+      renderHeight = projectOriginalSheet.renderHeight;
+    }
+    else if (enemy.spriteKey === 'ripperQueen') { image = this.images.get('ripperQueen'); sheetId = 'enemy.ripper-queen.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
     else if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
     else if (enemy.spriteKey === 'xenoRunner') { image = this.images.get('xenoRunner'); sheetId = 'enemy.xenomorph-runner.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 168; renderHeight = 100; }
     else if (enemy.spriteKey === 'paleCrucibleHunter') { image = this.images.get('paleCrucibleHunter'); sheetId = 'enemy.pale-crucible-hunter.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 142; renderHeight = 106; }
@@ -1616,6 +1848,7 @@ export class GameEngine {
       for (let x = offset - width; x < LOGICAL_WIDTH + width; x += width - 12) ctx.drawImage(image, x, LOGICAL_HEIGHT - height, width, height);
       ctx.restore();
     }
+    this.drawHazardForegroundOverlays(ctx);
     this.drawForegroundPipes(ctx);
   }
 
@@ -1700,7 +1933,20 @@ export class GameEngine {
 
   getAssetReport() {
     const entries = [...this.images.entries()];
-    return { ready: entries.filter(([, image]) => ready(image)).length, total: entries.length, missing: entries.filter(([, image]) => !ready(image)).map(([name]) => name) };
+    const interactiveKeys = Object.keys(MISSION_INTERACTIVE_ART_FILES_V56);
+    return {
+      ready: entries.filter(([, image]) => ready(image)).length,
+      total: entries.length,
+      missing: entries.filter(([, image]) => !ready(image)).map(([name]) => name),
+      interactiveArtCount: MISSION_INTERACTIVE_ART_ASSET_COUNT_V56,
+      interactiveArtReady: interactiveKeys.filter((key) => ready(this.images.get(key))).length
+    };
+  }
+  getWeaponAssetReport() {
+    return {
+      weaponVisualCount: WEAPON_VISUAL_BASE_COUNT_V56,
+      weaponVisualReady: Object.keys(WEAPON_VISUAL_ASSETS_V56).filter((key) => ready(this.images.get(key))).length,
+    };
   }
 
   getGameplayReport() {

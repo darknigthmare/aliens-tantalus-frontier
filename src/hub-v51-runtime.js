@@ -770,6 +770,7 @@ export class HubGame extends HubGameV50 {
     if (!this.editorPlaytest) {
       for (const room of deck.rooms) {
         if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
+        else this.drawModularRoomV56(ctx, room, 'front');
       }
     }
   }

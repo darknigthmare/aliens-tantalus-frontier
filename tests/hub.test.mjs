@@ -11,6 +11,7 @@ import {
   HUB_ROOM_COUNT,
   HUB_WORLD
 } from '../src/hub-game.js';
+import { HUB_ROOM_ART_ASSETS_V56 } from '../src/hub-art-runtime-v56.js';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const rooms = HUB_DECKS.flatMap((deck) => deck.rooms);
@@ -51,8 +52,12 @@ test('each room owns a measured render profile and an authored prop collider', (
 
   assert.equal(HUB_MODULAR_PROP_FILES.length, 16);
   assert.equal(new Set(HUB_MODULAR_PROP_FILES).size, 16);
-  assert.equal(HUB_MODULAR_ASSETS.length, 39);
-  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 39);
+  assert.equal(HUB_ROOM_ART_ASSETS_V56.length, 30);
+  assert.equal(new Set(HUB_ROOM_ART_ASSETS_V56).size, 30);
+  assert.equal(HUB_MODULAR_ASSETS.length, 54);
+  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 54);
+  assert.ok(HUB_ROOM_ART_ASSETS_V56.every((source) => HUB_MODULAR_ASSETS.includes(source)));
+  assert.ok(rooms.every((room) => !HUB_MODULAR_ASSETS.includes(room.background)), 'les bitmaps monolithiques ne sont plus préchargés');
 
   for (const source of HUB_MODULAR_ASSETS) {
     const file = assetFile(source);
