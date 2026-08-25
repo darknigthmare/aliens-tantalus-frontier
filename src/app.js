@@ -673,7 +673,10 @@ function handleGameEvent(event) {
   const log = byId('mission-log');
   if (!event?.type) return;
   if (event.type === 'caption') {
-    if (saveSystem.data.settings.subtitles) log.textContent = `SOUS-TITRE · ${event.text || event.channel || ''}`;
+    if (saveSystem.data.settings.subtitles) {
+      log.dataset.captionUntil = String(Date.now() + 1800);
+      log.textContent = `SOUS-TITRE · ${event.text || event.channel || ''}`;
+    }
     return;
   }
   if (event.type === 'mission-level-ready') {
@@ -698,6 +701,7 @@ function handleGameEvent(event) {
     log.textContent = `ESCOUADE DÉPLOYÉE · ${event.members?.length || 0} alliés IA physiques · ${event.animationSheets || 0} plaques animées`;
   }
   if (event.type === 'squad-action') {
+    if (Number(log.dataset.captionUntil || 0) > Date.now()) return;
     log.textContent = `ESCOUADE · ${String(event.action || 'support').toUpperCase()} · ${event.crewId || 'allié'}`;
   }
   if (event.type === 'squad-down') {
@@ -995,7 +999,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v56-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v57-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],

@@ -419,6 +419,22 @@ export function resolveSpriteClip(sheetId, clipId) {
   return resolvedSheet ? clipBySet.get(resolvedSheet.clipSet)?.get(clipId) || null : null;
 }
 
+const NEURO_XENOMORPH_SHEETS = Object.freeze(new Set([
+  'enemy.xenomorph-drone.locomotion',
+  'enemy.xenomorph-drone.combat'
+]));
+
+export function isExplicitXenomorphAnimationEntity(actor = {}, neuroActive = false) {
+  if (actor.visualForm !== 'xenomorph') return false;
+  return Boolean(
+    neuroActive
+    || actor.neuroActive === true
+    || actor.playerClass === 'neuro-xeno'
+    || actor.biology === 'xenomorph'
+    || actor.species === 'xenomorph'
+  );
+}
+
 export function shouldFlipSprite(sheetOrId, actorFacing = 1) {
   const resolvedSheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
   const sourceFacing = Number(resolvedSheet?.sourceFacing) < 0 ? -1 : 1;
@@ -443,7 +459,7 @@ export function resolveVerifiedPlayerCombat(clipId) {
 }
 
 export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
-  if (neuroActive && actor.visualForm === 'xenomorph') {
+  if (isExplicitXenomorphAnimationEntity(actor, neuroActive)) {
     if (!actor.alive) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
     if ((actor.v52HurtClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
     if ((actor.v52FireClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'claw-attack' };
@@ -479,13 +495,39 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
 
 export function resolveNpcAnimation(actor = {}) {
   const dedicatedV55 = resolveNpcMissionAnimationV55(actor);
-  if (dedicatedV55) return { sheetId: dedicatedV55.sheetId, clipId: dedicatedV55.clipId };
+  const allowedSheetIds = new Set([
+    CREW_SPRITE_IDS[actor.crewId],
+    CREW_MISSION_SPRITE_IDS[actor.crewId]
+  ].filter(Boolean));
+  if (dedicatedV55 && allowedSheetIds.has(dedicatedV55.sheetId)) {
+    const dedicatedSheet = resolveSpriteSheet(dedicatedV55.sheetId);
+    if (dedicatedSheet?.family === 'npc') return { sheetId: dedicatedV55.sheetId, clipId: dedicatedV55.clipId };
+  }
   const sheetId = CREW_SPRITE_IDS[actor.crewId];
   if (!sheetId) return null;
   if (!actor.alive || actor.alertClock > 0 || actor.downed) return { sheetId, clipId: 'alert-reaction' };
   if (actor.workClock > 0 || actor.fireClock > 0 || actor.supportClock > 0) return { sheetId, clipId: 'role-work' };
   if (Math.abs(actor.vx || 0) > 8 || actor.climbing) return { sheetId, clipId: 'walk' };
   return { sheetId, clipId: 'idle' };
+}
+
+export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { role = 'player', neuroActive = false } = {}) {
+  const requestedSheet = resolveSpriteSheet(request?.sheetId);
+  const explicitXenomorph = isExplicitXenomorphAnimationEntity(actor, neuroActive);
+  if (requestedSheet?.family === 'enemy' && explicitXenomorph && NEURO_XENOMORPH_SHEETS.has(requestedSheet.id)) return request;
+
+  if (role === 'npc') {
+    const allowedSheetIds = new Set([
+      CREW_SPRITE_IDS[actor.crewId],
+      CREW_MISSION_SPRITE_IDS[actor.crewId]
+    ].filter(Boolean));
+    if (requestedSheet?.family === 'npc' && allowedSheetIds.has(requestedSheet.id)) return request;
+    const fallback = resolveNpcAnimation(actor);
+    return fallback ? { ...fallback, degraded: 'npc-animation-identity-rejected' } : null;
+  }
+
+  if (requestedSheet?.family === 'player') return request;
+  return { ...resolvePlayerAnimation(actor, false), degraded: 'player-animation-identity-rejected' };
 }
 
 export function resolveEnemyAnimation(enemy = {}) {

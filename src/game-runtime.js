@@ -287,13 +287,17 @@ export class GameEngine extends MissionEngine {
     if (this.neuro.active) {
       const baseline = this.player.y + this.player.h;
       this.player.playerClass = 'neuro-xeno';
+      this.player.visualForm = 'xenomorph';
       this.player.weaponMode = 'neuro-melee';
       this.player.w = 52;
       this.player.h = 74;
       this.player.y = baseline - this.player.h;
       this.player.armor = Math.max(this.player.armor, 24);
       this.onEvent({ type: 'neuro-link', profileId: this.neuro.id, harness: this.neuro.harness, signal: this.neuro.signal });
-    } else this.player.playerClass = 'marine';
+    } else {
+      this.player.playerClass = 'marine';
+      this.player.visualForm = 'marine';
+    }
     this.mission.contract = {
       campaignId: plan.campaign.id,
       objective: plan.campaign.objective,

@@ -1,4 +1,4 @@
-const CACHE = 'atf-v56-runtime-1';
+const CACHE = 'atf-v57-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
@@ -71,6 +71,10 @@ const CORE = [
   '/assets/openai/metroidvania/props/ceiling-cables.png',
   '/assets/openai/metroidvania/props/foreground-pipes.png',
   '/assets/openai/hub/layers/engineering-hangar-overhead.png',
+  '/assets/openai/metroidvania/props/overhead-catwalk.png',
+  '/assets/openai/metroidvania/props/drop-platform.png',
+  '/assets/openai/metroidvania/props/wall-ladder.png',
+  '/assets/openai/metroidvania/props/vent-entrance.png',
   '/assets/openai/hub/layers/engineering-hangar-foreground.png',
   '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
   '/assets/openai/human-factions-animation-sheet.png',
@@ -84,6 +88,24 @@ const CORE = [
   '/assets/openai/metroidvania/planet-exterior-far.png',
   '/assets/openai/metroidvania/planet-exterior-mid.png',
   '/assets/openai/metroidvania/planet-exterior-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-approach-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-approach-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-approach-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-surface-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-surface-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-surface-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ridge-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-caves-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-caves-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-caves-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-ruins-foreground.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-evac-far.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-evac-mid.png',
+  '/assets/openai/metroidvania/zones/planet-exterior/planet-evac-foreground.png',
   '/assets/openai/metroidvania/hazards/darkness-visibility-mask-cycle.png',
   '/assets/openai/metroidvania/hazards/fire-hazard-cycle.png',
   '/assets/openai/metroidvania/hazards/flood-ripple-splash-cycle.png',
@@ -150,7 +172,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-foreground.png'
 ];
 
-async function precacheV56() {
+async function precacheV57() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -163,7 +185,7 @@ async function precacheV56() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV56().then(() => self.skipWaiting())
+  precacheV57().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

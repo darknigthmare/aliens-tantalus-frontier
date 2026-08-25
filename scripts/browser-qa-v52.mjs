@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v56') && shell.release === '56.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v57') && shell.release === '57.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -498,6 +498,15 @@ try {
     const runningSnapshot = game.getSnapshot().missionLevelRuntime.timers.find((entry) => entry.id === 'extraction');
     const persistedTimer = game.captureResumeState().missionLevel.timers.find((entry) => entry.id === 'extraction');
     const phaseLabel = game.phaseLabel();
+    const remainingInZone = timer.remaining;
+    const spawn = game.missionLevelRuntime.anchors.spawn;
+    Object.assign(game.player, { x: spawn.x - game.player.w / 2, y: spawn.y - game.player.h, vx: 0, vy: 0 });
+    game.updateMissionLevelTimers(2);
+    const pausedSnapshot = game.getSnapshot().missionLevelRuntime.timers.find((entry) => entry.id === 'extraction');
+    const persistedPaused = game.captureResumeState().missionLevel.timers.find((entry) => entry.id === 'extraction');
+    Object.assign(game.player, { x: game.objective.x + game.objective.w / 2 - game.player.w / 2, y: game.objective.y + game.objective.h - game.player.h, vx: 0, vy: 0 });
+    game.updateMissionLevelTimers(0.5);
+    const resumedSnapshot = game.getSnapshot().missionLevelRuntime.timers.find((entry) => entry.id === 'extraction');
     game.updateMissionLevelTimers(timer.remaining + 0.01);
     const completedSnapshot = game.getSnapshot().missionLevelRuntime.timers.find((entry) => entry.id === 'extraction');
     const unlockedRequirement = game.missingExtractionRequirement();
@@ -513,6 +522,10 @@ try {
       waveEnemies: waveEnemies.length,
       runningSnapshot,
       persistedTimer,
+      remainingInZone,
+      pausedSnapshot,
+      persistedPaused,
+      resumedSnapshot,
       completedSnapshot,
       extractionUnlocked: game.missionLevelExtractionUnlocked
     };
@@ -528,6 +541,11 @@ try {
       && extractionHoldout.waveEnemies > 0
       && extractionHoldout.runningSnapshot?.state === 'running'
       && extractionHoldout.persistedTimer?.state === 'running'
+      && extractionHoldout.pausedSnapshot?.state === 'paused'
+      && extractionHoldout.persistedPaused?.state === 'paused'
+      && extractionHoldout.pausedSnapshot?.remaining === extractionHoldout.remainingInZone
+      && extractionHoldout.resumedSnapshot?.state === 'running'
+      && extractionHoldout.resumedSnapshot?.remaining < extractionHoldout.remainingInZone
       && extractionHoldout.completedSnapshot?.state === 'complete'
       && extractionHoldout.extractionUnlocked,
     `Holdout extraction v55 non fonctionnel: ${JSON.stringify(extractionHoldout)}`
@@ -580,6 +598,42 @@ try {
   requireThat(hubNpc.roster === 16 && hubNpc.after === hubNpc.before + 1, `PNJ hub v52 sans interaction persistée: ${JSON.stringify(hubNpc)}`);
   report.hubNpc = hubNpc;
   report.checkpoints.push('hub-npc-interaction');
+
+  const hubTraversal = await evaluate(`(() => {
+    const hub = globalThis.__ATF_HUB__;
+    const ladder = hub.v51Ladders[0];
+    const startY = ladder.bottom - hub.player.h;
+    Object.assign(hub.player, {
+      x: ladder.x - hub.player.w / 2,
+      y: startY,
+      vx: 0,
+      vy: 0,
+      grounded: true,
+      climbing: false
+    });
+    hub.keys.add('KeyW');
+    for (let index = 0; index < 8; index += 1) hub.update(0.08);
+    hub.keys.delete('KeyW');
+    return {
+      startY,
+      endY: hub.player.y,
+      snapshot: hub.getSnapshot(),
+      assets: hub.getAssetReport()
+    };
+  })()`);
+  requireThat(
+    hubTraversal.snapshot.platformCount === 8
+      && hubTraversal.snapshot.ladderCount === 8
+      && hubTraversal.snapshot.ventCount === 4
+      && hubTraversal.snapshot.route.verticalLinks === 8
+      && hubTraversal.snapshot.route.crawlLinks === 4
+      && hubTraversal.assets.traversalArtReady === 4
+      && hubTraversal.endY < hubTraversal.startY - 40,
+    `Traversal verticale bitmap du hub invalide: ${JSON.stringify(hubTraversal)}`
+  );
+  report.screenshots.push(await capture('alien-tantalus-v57-hub-traversal-desktop.png'));
+  report.hubTraversal = hubTraversal;
+  report.checkpoints.push('hub-v57-vertical-traversal');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -708,7 +762,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '56.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v56 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '57.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v57 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

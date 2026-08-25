@@ -33,6 +33,38 @@ const PLAYER_SPRITE_FILE = '/assets/openai/sprites/normalized/player/echo9-marin
 export const HUB_WORLD = Object.freeze({ width: WORLD_WIDTH, roomWidth: ROOM_WIDTH, floorY: FLOOR_Y });
 export { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds };
 
+export function getHubRoomLayerBounds(room, renderBounds) {
+  const roomWidth = room?.profile?.worldWidth || ROOM_WIDTH;
+  const scaleX = roomWidth / LOGICAL_WIDTH;
+  const sceneScale = room?.profile?.sceneScale || 1;
+  const floorRatio = room?.profile?.floorRatio || 0.82;
+  const width = renderBounds.w * scaleX * sceneScale;
+  const height = renderBounds.h * sceneScale;
+  return {
+    x: room.xStart + (roomWidth - renderBounds.w * scaleX * sceneScale) / 2 + renderBounds.x * scaleX * sceneScale,
+    y: FLOOR_Y - height * floorRatio + renderBounds.y * sceneScale,
+    w: width,
+    h: height
+  };
+}
+
+const HUB_PROP_SOURCE_SIZES = Object.freeze({
+  'bridge-terminal': Object.freeze({ width: 239, height: 157 }),
+  'briefing-table': Object.freeze({ width: 219, height: 147 }),
+  'sensor-console': Object.freeze({ width: 215, height: 188 }),
+  cryopod: Object.freeze({ width: 241, height: 131 }),
+  'bunk-module': Object.freeze({ width: 228, height: 170 }),
+  'mess-table': Object.freeze({ width: 220, height: 139 }),
+  'medical-bed': Object.freeze({ width: 225, height: 174 }),
+  'lab-console': Object.freeze({ width: 223, height: 164 }),
+  'quarantine-unit': Object.freeze({ width: 189, height: 186 }),
+  'armory-rack': Object.freeze({ width: 221, height: 172 }),
+  workbench: Object.freeze({ width: 232, height: 175 }),
+  'vehicle-lift': Object.freeze({ width: 235, height: 199 }),
+  'reactor-column': Object.freeze({ width: 186, height: 205 }),
+  'life-support-scrubber': Object.freeze({ width: 226, height: 179 })
+});
+
 const GEOMETRY_TEMPLATES = Object.freeze([
   Object.freeze([{ dx: 238, w: 76, h: 38, style: 0 }, { dx: 488, w: 112, h: 27, style: 1 }, { dx: 822, w: 58, h: 48, style: 2 }]),
   Object.freeze([{ dx: 188, w: 92, h: 29, style: 1 }, { dx: 454, w: 64, h: 52, style: 2 }, { dx: 804, w: 104, h: 35, style: 0 }]),
@@ -45,12 +77,25 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
   const propX = xStart + worldWidth * 0.7;
+  const sourceSize = HUB_PROP_SOURCE_SIZES[prop] || { width: 1, height: 1 };
+  const renderWidth = sourceSize.width * (propHeight / sourceSize.height);
+  const propRenderBounds = Object.freeze({
+    x: propX - renderWidth / 2,
+    y: FLOOR_Y - propHeight,
+    w: renderWidth,
+    h: propHeight
+  });
+  const propCollisionBounds = profile?.propCollider ? Object.freeze({
+    x: propX - Math.min(profile.propCollider.width, renderWidth) / 2,
+    y: FLOOR_Y - Math.min(profile.propCollider.height, propHeight),
+    w: Math.min(profile.propCollider.width, renderWidth),
+    h: Math.min(profile.propCollider.height, propHeight)
+  }) : null;
+  const interactionWidth = Math.max(renderWidth, propCollisionBounds?.w || 0) + 96;
+  const propInteractionBounds = Object.freeze({ x: propX - interactionWidth / 2, y: FLOOR_Y - propHeight - 32, w: interactionWidth, h: propHeight + 64 });
   const profileGeometry = profile?.authoredCollision && profile.propCollider
     ? [Object.freeze({
-        x: propX - profile.propCollider.width / 2,
-        y: FLOOR_Y - profile.propCollider.height,
-        w: profile.propCollider.width,
-        h: profile.propCollider.height,
+        ...propCollisionBounds,
         role: 'interaction-prop',
         collisionOnly: true
       })]
@@ -69,6 +114,9 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     collisionSource: profileGeometry ? 'room-profile' : 'fallback',
     background: `/assets/openai/hub/rooms/${art}.png`,
     prop: `/assets/openai/hub/props/${prop}.png`,
+    propRenderBounds,
+    propCollisionBounds,
+    propInteractionBounds,
     propHeight,
     viewport: Object.freeze({ x: xStart + viewport.x, y: viewport.y, w: viewport.w, h: viewport.h }),
     geometry: Object.freeze(profileGeometry || GEOMETRY_TEMPLATES[geometryVariant].map((item) => Object.freeze({
@@ -448,7 +496,9 @@ export class HubGame {
 
   nearestInteraction() {
     const room = this.currentRoom();
-    return Math.abs((this.player.x + this.player.w / 2) - room.x) < 150 ? room : null;
+    const bounds = room.propInteractionBounds;
+    const playerCenter = this.player.x + this.player.w / 2;
+    return bounds && playerCenter >= bounds.x && playerCenter <= bounds.x + bounds.w ? room : null;
   }
 
   interact() {
@@ -729,15 +779,14 @@ export class HubGame {
     const image = entry && this.roomLayerImages.get(entry.asset);
     if (!entry || !assetReady(image)) return;
     const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
-    const scaleX = roomWidth / LOGICAL_WIDTH;
-    const target = entry.renderBounds;
+    const target = getHubRoomLayerBounds(room, entry.renderBounds);
     ctx.save();
     ctx.beginPath();
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
     ctx.clip();
     ctx.drawImage(
       image, 0, 0, image.naturalWidth, image.naturalHeight,
-      room.xStart + target.x * scaleX, target.y, target.w * scaleX, target.h
+      target.x, target.y, target.w, target.h
     );
     ctx.restore();
   }
@@ -789,20 +838,21 @@ export class HubGame {
     const image = this.propImages.get(room.prop);
     const active = this.nearestInteraction()?.id === room.id;
     const pulse = this.reducedMotion ? 0.45 : 0.45 + Math.sin(this.animationTime * 4) * 0.15;
+    const bounds = room.propRenderBounds;
     if (active) {
-      const glow = ctx.createRadialGradient(room.x, FLOOR_Y - room.propHeight * 0.45, 8, room.x, FLOOR_Y - room.propHeight * 0.45, room.propHeight);
+      const glow = ctx.createRadialGradient(room.x, bounds.y + bounds.h * 0.55, 8, room.x, bounds.y + bounds.h * 0.55, bounds.h);
       glow.addColorStop(0, `rgba(127, 225, 159, ${pulse})`);
       glow.addColorStop(1, 'rgba(127, 225, 159, 0)');
       ctx.fillStyle = glow;
-      ctx.fillRect(room.x - room.propHeight, FLOOR_Y - room.propHeight * 1.45, room.propHeight * 2, room.propHeight * 1.6);
+      ctx.fillRect(bounds.x - 24, bounds.y - 24, bounds.w + 48, bounds.h + 48);
     }
     if (assetReady(image)) {
-      const height = room.propHeight * (active ? 1.04 : 1);
-      const width = image.naturalWidth * (height / image.naturalHeight);
+      const height = bounds.h * (active ? 1.04 : 1);
+      const width = bounds.w * (active ? 1.04 : 1);
       ctx.drawImage(image, room.x - width / 2, FLOOR_Y - height, width, height);
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
-    ctx.fillRect(room.x - 3, FLOOR_Y - room.propHeight - 14, 6, 6);
+    ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);
   }
 
   drawObstacle(ctx, obstacle) {

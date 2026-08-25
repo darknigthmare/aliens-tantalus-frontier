@@ -751,7 +751,6 @@ export class GameEngine {
     const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
     const distance = targetEntity.x - enemy.x;
     const verticalDistance = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
-    if (enemy.isBoss && !enemy.alert && target.x < 4200) return;
     if (Math.abs(distance) < 620 || enemy.revealed > 0) enemy.alert = true;
     if (!enemy.alert) {
       enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.animationPhase) > 0 ? 1 : -1;
@@ -1135,13 +1134,16 @@ export class GameEngine {
     const hazard = this.hazards.find((candidate) => candidate.active && overlap(feet, candidate));
     if (!hazard) return;
     const kind = hazard.kind || 'acid';
-    this.damagePlayer(player, hazard.damage, { bypassCover: true, source: kind });
+    player.hazardKind = kind;
+    if ((Number(hazard.damage) || 0) > 0) this.damagePlayer(player, hazard.damage, { bypassCover: true, source: kind });
     player.hazardClock = Math.max(0.72, Number(hazard.stun) || Number(hazard.stunSeconds) || 0);
     if (kind === 'electrical') {
       player.vx = 0;
       player.actionClock = Math.max(player.actionClock || 0, player.hazardClock);
       player.vy = -120;
-    } else player.vy = -240;
+    } else if (kind === 'steam') player.vy = -240;
+    else if (kind === 'flood') player.vx *= 0.45;
+    else if (kind === 'vacuum') player.vx *= 1.35;
   }
 
   interact(actor = this.player) {

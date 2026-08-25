@@ -126,6 +126,12 @@ test('le temps restant est repris sans redémarrer la vague et les anciennes sau
   const plan = missionPlan();
   const first = createEngine();
   first.start(optionsFor(plan, { difficulty: 'story' }));
+  Object.assign(first.player, {
+    x: first.objective.x + first.objective.w / 2 - first.player.w / 2,
+    y: first.objective.y + first.objective.h - first.player.h,
+    vx: 0,
+    vy: 0
+  });
   assert.equal(first.triggerMissionLevelEvent('planet-beacon-defense', 'test'), true);
   first.updateMissionLevelTimers(3.25);
   const before = first.missionLevelTimers.get('extraction');

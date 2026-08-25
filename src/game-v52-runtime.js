@@ -5,6 +5,7 @@ import {
   SPRITE_PIVOTS,
   SPRITE_SHEETS,
   SpriteAnimationController,
+  enforceHumanoidAnimationIdentity,
   resolveEnemyAnimation,
   resolveNpcAnimation,
   resolvePlayerAnimation,
@@ -27,6 +28,26 @@ const overlaps = (a, b) => {
   return Boolean(first && second && first.x < second.x + second.w && first.x + first.w > second.x && first.y < second.y + second.h && first.y + first.h > second.y);
 };
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
+
+export function getAnimationEntityKeyV57(role, entity = {}, fallback = 'unknown') {
+  const identity = role === 'npc'
+    ? entity.crewId
+    : role === 'player' || role === 'coop'
+      ? entity.operatorId
+      : entity.id;
+  return `${role}:${String(identity || fallback)}`;
+}
+
+export function resolveIdentitySafePlayerAnimationV57(actor = {}, neuroActive = false) {
+  const request = resolvePlayerAnimation(actor, neuroActive);
+  return enforceHumanoidAnimationIdentity(actor, request, { role: 'player', neuroActive });
+}
+
+export function resolveIdentitySafeNpcAnimationV57(actor = {}) {
+  const request = resolveNpcAnimation(actor);
+  return enforceHumanoidAnimationIdentity(actor, request, { role: 'npc', neuroActive: false });
+}
+
 const V55_VEHICLE_SHEETS = new Set([
   'vehicle.m577-command-apc.action',
   'vehicle.m22a3-jackson-tank.action',
@@ -526,7 +547,6 @@ export function withV52MissionRuntime(BaseEngine) {
       const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
       const horizontal = targetEntity.x - enemy.x;
       const vertical = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
-      if (enemy.isBoss && !enemy.alert && target.x < 4200) return;
       if (Math.abs(horizontal) < 620 || enemy.revealed > 0) enemy.alert = true;
       if (!enemy.alert) {
         enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.row) > 0 ? 1 : -1;
@@ -994,12 +1014,13 @@ export function withV52MissionRuntime(BaseEngine) {
 
     updateSpriteAnimationEvents() {
       if (!this.spriteAnimation) return;
+      const playerNeuroActive = Boolean(this.neuro?.active);
       const samples = [
-        [this.player?.operatorId || 'player', this.player, this.player ? resolvePlayerAnimation(this.player, Boolean(this.neuro?.active)) : null],
-        ['coop', this.coopEnabled ? this.coop : null, this.coopEnabled && this.coop ? resolvePlayerAnimation(this.coop, false) : null],
-        ...this.activeSquadActors().map((member) => [member.crewId, member, resolveNpcAnimation(member)]),
-        ...asList(this.enemies).map((enemy) => [enemy.id, enemy, resolveEnemyAnimation(enemy)]),
-        [this.vehicle?.id || 'vehicle', this.vehicle?.active ? this.vehicle : null, this.vehicle?.active ? resolveVehicleAnimation(this.vehicle) : null]
+        [getAnimationEntityKeyV57('player', this.player, 'primary'), this.player, this.player ? resolveIdentitySafePlayerAnimationV57(this.player, playerNeuroActive) : null],
+        [getAnimationEntityKeyV57('coop', this.coop, 'secondary'), this.coopEnabled ? this.coop : null, this.coopEnabled && this.coop ? resolveIdentitySafePlayerAnimationV57(this.coop, false) : null],
+        ...this.activeSquadActors().map((member) => [getAnimationEntityKeyV57('npc', member, 'crew'), member, resolveIdentitySafeNpcAnimationV57(member)]),
+        ...asList(this.enemies).map((enemy) => [getAnimationEntityKeyV57('enemy', enemy, 'hostile'), enemy, resolveEnemyAnimation(enemy)]),
+        [getAnimationEntityKeyV57('vehicle', this.vehicle, 'mission'), this.vehicle?.active ? this.vehicle : null, this.vehicle?.active ? resolveVehicleAnimation(this.vehicle) : null]
       ];
       for (const [entityId, entity, request] of samples) {
         if (entity?.visualIdentityStatus && entity.visualIdentityStatus !== 'exact') {
@@ -1020,8 +1041,14 @@ export function withV52MissionRuntime(BaseEngine) {
     handleSpriteFrameEvent(payload) {
       this.animationTelemetry.events += 1;
       this.animationTelemetry.byEvent[payload.event] = (this.animationTelemetry.byEvent[payload.event] || 0) + 1;
-      const entity = [this.player, this.coop, ...this.activeSquadActors(), ...asList(this.enemies), this.vehicle]
-        .find((candidate) => candidate && [candidate.id, candidate.crewId, candidate.operatorId].includes(payload.entityId));
+      const entity = [
+        [this.player, 'player', 'primary'],
+        [this.coop, 'coop', 'secondary'],
+        ...this.activeSquadActors().map((candidate) => [candidate, 'npc', 'crew']),
+        ...asList(this.enemies).map((candidate) => [candidate, 'enemy', 'hostile']),
+        [this.vehicle, 'vehicle', 'mission']
+      ]
+        .find(([candidate, role, fallback]) => candidate && getAnimationEntityKeyV57(role, candidate, fallback) === payload.entityId)?.[0];
       if (entity) {
         entity.lastAnimationEvent = payload.event;
         if (payload.event === 'state:death-lock') entity.animationLocked = true;
@@ -1078,8 +1105,10 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawActor(ctx, actor) {
-      const request = resolvePlayerAnimation(actor, Boolean(this.neuro?.active && actor === this.player));
-      const sample = this.spriteAnimation?.sample(actor?.operatorId || (actor?.coop ? 'coop' : 'player'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const isCoop = actor === this.coop;
+      const request = resolveIdentitySafePlayerAnimationV57(actor, Boolean(this.neuro?.active && actor === this.player));
+      const entityId = getAnimationEntityKeyV57(isCoop ? 'coop' : 'player', actor, isCoop ? 'secondary' : 'primary');
+      const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       if (!this.drawSpriteSample(ctx, sample, actor)) return super.drawActor(ctx, actor);
       if (actor.inCover) {
         ctx.strokeStyle = '#79c895';
@@ -1101,7 +1130,7 @@ export function withV52MissionRuntime(BaseEngine) {
         this.animationTelemetry?.fallbackFamilies?.add(enemy.biology || 'unknown');
         return super.drawEnemy(ctx, enemy);
       }
-      const sample = this.spriteAnimation?.sample(enemy.id, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('enemy', enemy, 'hostile'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       ctx.save();
       if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
       if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
@@ -1118,7 +1147,7 @@ export function withV52MissionRuntime(BaseEngine) {
     drawVehicle(ctx) {
       if (!this.vehicle?.active) return super.drawVehicle(ctx);
       const request = resolveVehicleAnimation(this.vehicle);
-      const sample = this.spriteAnimation?.sample(this.vehicle.id || 'vehicle', request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('vehicle', this.vehicle, 'mission'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       if (!this.drawSpriteSample(ctx, sample, this.vehicle)) super.drawVehicle(ctx);
     }
 
@@ -1145,8 +1174,8 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     drawSquadActor(ctx, member) {
-      const request = resolveNpcAnimation(member);
-      const sample = this.spriteAnimation?.sample(member.crewId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const request = resolveIdentitySafeNpcAnimationV57(member);
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
       ctx.save();
       if (!member.alive) ctx.globalAlpha = member.downed ? 0.72 : 0.38;
       const drawn = this.drawSpriteSample(ctx, sample, member);

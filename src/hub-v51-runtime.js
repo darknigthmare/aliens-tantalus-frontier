@@ -1,7 +1,7 @@
 import {
   HubGame as HubGameV50,
   HUB_DECKS,
-  HUB_MODULAR_ASSETS,
+  HUB_MODULAR_ASSETS as HUB_MODULAR_ASSETS_V50,
   HUB_MODULAR_PROP_FILES,
   HUB_ROOM_PROFILES,
   HUB_ROOM_COUNT,
@@ -10,7 +10,19 @@ import {
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 
-export { HUB_DECKS, HUB_MODULAR_ASSETS, HUB_MODULAR_PROP_FILES, HUB_ROOM_PROFILES, HUB_ROOM_COUNT, HUB_WORLD, getHubDoorBounds };
+export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
+  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
+  drop: '/assets/openai/metroidvania/props/drop-platform.png',
+  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
+  vent: '/assets/openai/metroidvania/props/vent-entrance.png'
+});
+
+export const HUB_MODULAR_ASSETS = Object.freeze([...new Set([
+  ...HUB_MODULAR_ASSETS_V50,
+  ...Object.values(HUB_TRAVERSAL_ART_FILES)
+])]);
+
+export { HUB_DECKS, HUB_MODULAR_PROP_FILES, HUB_ROOM_PROFILES, HUB_ROOM_COUNT, HUB_WORLD, getHubDoorBounds };
 
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
@@ -108,7 +120,10 @@ export function compileShipProject(project) {
     tile: `${tile.col}:${tile.row}`
   });
   const floors = byType('floor').map((tile) => rect(tile));
-  const platforms = byType('platform').map((tile) => rect(tile, Math.max(14, cellHeight * 0.28)));
+  const platforms = byType('platform').map((tile, index) => ({
+    ...rect(tile, Math.max(14, cellHeight * 0.28)),
+    art: index % 2 ? 'drop' : 'catwalk'
+  }));
   const walls = byType('wall').map((tile) => rect(tile));
   const doors = byType('door').map((tile, index) => {
     const height = Math.max(116, cellHeight * 2.5);
@@ -198,19 +213,20 @@ function fallbackTraversal(deck) {
   const yShift = (deck % 2) * 14;
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
-    const lowerY = HUB_WORLD.floorY - 112 - ((room + deck) % 2) * 18;
-    const upperY = HUB_WORLD.floorY - 218 + ((room + deck) % 3) * 12 - yShift;
+    const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
+    const lowerY = HUB_WORLD.floorY - 118 - ((room + deck) % 2) * 16;
+    const upperY = HUB_WORLD.floorY - 242 + ((room + deck) % 3) * 10 - yShift;
     platforms.push(
-      { x: start + 176, y: lowerY, w: 330, h: 20, type: 'platform' },
-      { x: start + 602, y: upperY, w: 380, h: 20, type: 'platform' }
+      { x: start + 100, y: lowerY, w: 500, h: 20, type: 'platform', art: 'catwalk', roomId },
+      { x: start + 510, y: upperY, w: 540, h: 20, type: 'platform', art: 'drop', roomId }
     );
     ladders.push(
-      { x: start + 322, top: lowerY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder' },
-      { x: start + 694, top: upperY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder' }
+      { x: start + 220, top: lowerY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder', roomId },
+      { x: start + 560, top: upperY, bottom: lowerY, w: 52, type: 'ladder', roomId }
     );
     vents.push({
       id: `deck-${deck + 1}-vent-${room + 1}`,
-      x: start + 836, y: upperY - 58, w: 132, h: 58, type: 'vent'
+      x: start + 888, y: upperY - 58, w: 132, h: 58, type: 'vent', roomId
     });
   }
   return {
@@ -256,6 +272,7 @@ export class HubGame extends HubGameV50 {
     this.floorY = HUB_WORLD.floorY;
     this.spawnPoint = { x: 180, y: HUB_WORLD.floorY - PLAYER_HEIGHT };
     this.crisisSheets = new Map(Object.entries(CRISIS_SPRITES).map(([kind, source]) => [kind, createImage(source)]));
+    this.traversalImages = new Map(Object.entries(HUB_TRAVERSAL_ART_FILES).map(([kind, source]) => [kind, createImage(source)]));
     this.v51Initialized = false;
     globalThis.addEventListener?.('keydown', (event) => {
       if (!this.running || event.repeat) return;
@@ -313,29 +330,6 @@ export class HubGame extends HubGameV50 {
       return;
     }
     const traversal = fallbackTraversal(this.state.deck);
-    const deck = HUB_DECKS[this.state.deck];
-    if (deck.rooms.every((room) => room.profile?.authoredCollision)) {
-      this.v51Floors = [];
-      this.v51Platforms = [];
-      this.v51Ladders = [];
-      this.v51Vents = [];
-      this.v51Walls = [];
-      this.v51Doors = [];
-      this.route = {
-        id: `deck-${this.state.deck + 1}-room-profile`,
-        source: 'room-profile',
-        nodeCount: deck.rooms.length + this.obstacles.length,
-        verticalLinks: 0,
-        crawlLinks: 0,
-        doorCount: this.doorStates.length,
-        objectiveCount: 0,
-        hazardCount: 0
-      };
-      this.floorY = HUB_WORLD.floorY;
-      this.useGlobalFloor = true;
-      return;
-    }
-
     this.v51Floors = [];
     this.v51Platforms = traversal.platforms;
     this.v51Ladders = traversal.ladders;
@@ -705,8 +699,14 @@ export class HubGame extends HubGameV50 {
 
   getAssetReport() {
     const report = super.getAssetReport();
+    const traversalArtReady = [...this.traversalImages.values()].filter(imageReady).length;
     return {
       ...report,
+      modularAssetCount: HUB_MODULAR_ASSETS.length,
+      readyAssetCount: report.readyAssetCount + traversalArtReady,
+      totalReadyAssetCount: report.totalReadyAssetCount + traversalArtReady,
+      traversalArtReady,
+      traversalArtCount: this.traversalImages.size,
       crisisArtReady: [...this.crisisSheets.values()].filter(imageReady).length,
       crisisArtCount: this.crisisSheets.size
     };
@@ -714,6 +714,7 @@ export class HubGame extends HubGameV50 {
 
   getSnapshot() {
     const snapshot = super.getSnapshot();
+    const assetReport = this.getAssetReport();
     return {
       ...snapshot,
       health: Math.round(this.player?.health ?? 0),
@@ -725,6 +726,8 @@ export class HubGame extends HubGameV50 {
       platformCount: this.v51Platforms.length,
       ladderCount: this.v51Ladders.length,
       ventCount: this.v51Vents.length,
+      traversalArtReady: assetReport.traversalArtReady,
+      traversalArtCount: assetReport.traversalArtCount,
       wallCount: this.v51Walls.length,
       runtimeDoorCount: this.v51Doors.length,
       hazardCount: this.v51Hazards.length,
@@ -783,10 +786,7 @@ export class HubGame extends HubGameV50 {
       ctx.fillRect(floor.x, floor.y, floor.w, 4);
     }
     for (const platform of this.v51Platforms.filter((entry) => entry.type !== 'floor')) {
-      ctx.fillStyle = '#26372f';
-      ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
-      ctx.fillStyle = '#91aa96';
-      ctx.fillRect(platform.x, platform.y, platform.w, 3);
+      this.drawTraversalPlatform(ctx, platform);
     }
     for (const wall of this.v51Walls) {
       ctx.fillStyle = '#293630';
@@ -795,19 +795,10 @@ export class HubGame extends HubGameV50 {
       ctx.strokeRect(wall.x + 0.5, wall.y + 0.5, wall.w - 1, wall.h - 1);
     }
     for (const ladder of this.v51Ladders) {
-      ctx.strokeStyle = ladder.type === 'lift' ? '#9c82b1' : '#a98d67';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(ladder.x - ladder.w / 2, ladder.top, ladder.w, ladder.bottom - ladder.top);
-      for (let y = ladder.top + 12; y < ladder.bottom; y += 18) {
-        ctx.beginPath(); ctx.moveTo(ladder.x - ladder.w / 2, y); ctx.lineTo(ladder.x + ladder.w / 2, y); ctx.stroke();
-      }
+      this.drawTraversalLadder(ctx, ladder);
     }
     for (const vent of this.v51Vents) {
-      ctx.fillStyle = 'rgba(12, 23, 24, .9)';
-      ctx.fillRect(vent.x, vent.y, vent.w, vent.h);
-      ctx.strokeStyle = '#658b8b';
-      ctx.strokeRect(vent.x + 0.5, vent.y + 0.5, vent.w - 1, vent.h - 1);
-      for (let x = vent.x + 14; x < vent.x + vent.w; x += 22) ctx.fillRect(x, vent.y + 8, 3, vent.h - 16);
+      this.drawTraversalVent(ctx, vent);
     }
     for (const hazard of this.v51Hazards) {
       ctx.fillStyle = `rgba(151, 190, 71, ${0.62 + Math.sin(this.animationTime * 5) * 0.12})`;
@@ -822,6 +813,57 @@ export class HubGame extends HubGameV50 {
       ctx.lineWidth = 4;
       ctx.strokeRect(objective.x, objective.y, objective.w, objective.h);
     }
+  }
+
+  drawTraversalPlatform(ctx, platform) {
+    const art = platform.art === 'drop' ? 'drop' : 'catwalk';
+    const image = this.traversalImages.get(art);
+    if (!imageReady(image)) return;
+    const crop = art === 'catwalk'
+      ? { x: 0, y: 0, w: image.naturalWidth, h: Math.min(92, image.naturalHeight), renderHeight: 90, surfaceOffset: 55 }
+      : { x: 0, y: 0, w: image.naturalWidth, h: image.naturalHeight, renderHeight: 84, surfaceOffset: 18 };
+    const renderHeight = crop.renderHeight;
+    const surfaceOffset = crop.surfaceOffset;
+    const renderY = platform.y - surfaceOffset;
+    const unitWidth = crop.w * (renderHeight / crop.h);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(platform.x, renderY, platform.w, renderHeight);
+    ctx.clip();
+    for (let x = platform.x; x < platform.x + platform.w + unitWidth; x += Math.max(24, unitWidth - 8)) {
+      ctx.drawImage(
+        image,
+        crop.x, crop.y, crop.w, crop.h,
+        x, renderY, unitWidth, renderHeight
+      );
+    }
+    ctx.restore();
+  }
+
+  drawTraversalLadder(ctx, ladder) {
+    const image = this.traversalImages.get('ladder');
+    if (!imageReady(image)) return;
+    const width = Math.min(58, Math.max(42, ladder.w || 52));
+    const cropHeight = Math.min(180, image.naturalHeight);
+    const unitHeight = cropHeight * (width / image.naturalWidth);
+    const height = ladder.bottom - ladder.top;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(ladder.x - width / 2, ladder.top, width, height);
+    ctx.clip();
+    for (let y = ladder.top; y < ladder.bottom + unitHeight; y += Math.max(18, unitHeight - 8)) {
+      ctx.drawImage(
+        image, 0, 0, image.naturalWidth, cropHeight,
+        ladder.x - width / 2, y, width, unitHeight
+      );
+    }
+    ctx.restore();
+  }
+
+  drawTraversalVent(ctx, vent) {
+    const image = this.traversalImages.get('vent');
+    if (!imageReady(image)) return;
+    ctx.drawImage(image, vent.x, vent.y, vent.w, vent.h);
   }
 
   drawEnemy(ctx, enemy) {

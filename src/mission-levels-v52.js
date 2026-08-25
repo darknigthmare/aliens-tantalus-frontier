@@ -483,9 +483,26 @@ function compileGeometry(graph) {
       }
     }
     if (link.kind === 'ladder' || link.kind === 'lift') {
+      const connectorX = Math.round((from.x + to.x) / 2);
+      const approachPadding = 34;
+      for (const [side, endpoint] of [['from', from], ['to', to]]) {
+        if (Math.abs(endpoint.x - connectorX) <= endpoint.width / 2 - 24) continue;
+        const approachX = Math.min(endpoint.x, connectorX) - approachPadding;
+        const approachWidth = Math.abs(endpoint.x - connectorX) + approachPadding * 2;
+        platforms.push(Object.freeze({
+          id: `${link.id}-${side}-approach`,
+          x: Math.round(approachX),
+          y: Math.round(endpoint.y),
+          w: Math.round(approachWidth),
+          h: 20,
+          zoneId: endpoint.zoneId,
+          edgeId: link.id,
+          kind: link.kind === 'lift' ? 'lift-approach' : 'ladder-approach'
+        }));
+      }
       ladders.push(Object.freeze({
         id: link.id,
-        x: Math.round((from.x + to.x) / 2 - 18),
+        x: connectorX - 18,
         y: Math.round(Math.min(from.y, to.y)),
         w: 36,
         h: Math.round(Math.abs(from.y - to.y) + 22),
@@ -543,17 +560,31 @@ function compileBiomeZones(template, world) {
   })));
 }
 
-function compileHazards(template, levelSeed, world, random) {
+function compileHazards(template, levelSeed, world, random, geometry) {
   const dangerScale = 0.8 + clamp(Number(world?.danger) || 5, 0, 20) * 0.045;
   const primary = levelSeed.hazards[0] || 'acid';
   return Object.freeze(template.hazards.map((entry) => {
     const kind = entry.kind === '$seed-primary' ? primary : entry.kind;
     const contract = HAZARD_CONTRACTS[kind] || HAZARD_CONTRACTS.acid;
+    const x = Math.round(entry.x + (random() - 0.5) * 24);
+    const centerX = x + entry.w / 2;
+    const candidates = geometry.platforms.filter((platform) => platform.zoneId === entry.zoneId);
+    const surface = candidates.reduce((best, platform) => {
+      const horizontalGap = centerX < platform.x
+        ? platform.x - centerX
+        : centerX > platform.x + platform.w
+          ? centerX - (platform.x + platform.w)
+          : 0;
+      const score = horizontalGap * 5 + Math.abs(platform.y - (entry.y + entry.h));
+      return !best || score < best.score ? { platform, score } : best;
+    }, null)?.platform || null;
     return Object.freeze({
       ...entry,
       kind,
       ...contract,
-      x: Math.round(entry.x + (random() - 0.5) * 24),
+      x,
+      y: surface ? Math.round(surface.y - entry.h) : entry.y,
+      surfacePlatformId: surface?.id || null,
       damage: Math.round((Number(contract.damage) || 0) * dangerScale),
       active: !entry.eventId
     });
@@ -609,7 +640,7 @@ export function buildMissionLevelV52({
   const geometry = compileGeometry(graph);
   const routeNodes = compileRouteNodes(graph);
   const biomeZones = compileBiomeZones(template, world);
-  const hazards = compileHazards(template, selectedSeed, world, random);
+  const hazards = compileHazards(template, selectedSeed, world, random, geometry);
   const events = compileEvents(template, campaign);
   const spawns = compileSpawns(template, world, campaign);
   const anchors = Object.freeze(Object.fromEntries(nodes.filter((entry) => entry.anchor).map((entry) => [entry.anchor, Object.freeze({ nodeId: entry.id, x: entry.x, y: entry.y, zoneId: entry.zoneId })])));
@@ -658,9 +689,62 @@ export function buildMissionLevelV52({
     palette,
     routeRuntime
   };
-  const validation = validateMissionTopologyV52(plan);
+  const topologyValidation = validateMissionTopologyV52(plan);
+  const physicalValidation = validateMissionPhysicalTopologyV57(plan);
+  const validation = Object.freeze({
+    ...topologyValidation,
+    valid: topologyValidation.valid && physicalValidation.valid,
+    errors: Object.freeze([...topologyValidation.errors, ...physicalValidation.errors]),
+    physicalValid: physicalValidation.valid,
+    physicalLadderCount: physicalValidation.ladderCount,
+    physicalHazardCount: physicalValidation.hazardCount
+  });
   if (!validation.valid) throw new Error(`Invalid mission template ${selectedTemplateId}: ${validation.errors.join('; ')}`);
   return Object.freeze({ ...plan, validation });
+}
+
+export function validateMissionPhysicalTopologyV57(plan = {}) {
+  const errors = [];
+  const platforms = list(plan.geometry?.platforms);
+  const ladders = list(plan.geometry?.ladders);
+  const hazards = list(plan.hazards);
+  const platformById = new Map(platforms.map((entry) => [entry.id, entry]));
+  const supportsConnector = (x, y) => platforms.some((platform) => (
+    Math.abs(platform.y - y) <= 24
+      && x >= platform.x - 24
+      && x <= platform.x + platform.w + 24
+  ));
+
+  for (const ladder of ladders) {
+    const centerX = ladder.x + ladder.w / 2;
+    const topY = ladder.y;
+    const bottomY = ladder.y + ladder.h - 22;
+    if (!supportsConnector(centerX, topY)) errors.push(`connector ${ladder.id} has no reachable top approach`);
+    if (!supportsConnector(centerX, bottomY)) errors.push(`connector ${ladder.id} has no reachable bottom approach`);
+  }
+
+  for (const hazard of hazards) {
+    const surface = platformById.get(hazard.surfacePlatformId);
+    if (!surface) errors.push(`hazard ${hazard.id} has no supporting platform`);
+    else if (Math.abs(hazard.y + hazard.h - surface.y) > 1) errors.push(`hazard ${hazard.id} is detached from ${surface.id}`);
+  }
+
+  for (const [anchorId, anchor] of Object.entries(plan.anchors || {})) {
+    if (!supportsConnector(anchor.x, anchor.y)) errors.push(`anchor ${anchorId} has no physical surface`);
+  }
+
+  const width = Number(plan.dimensions?.width) || 0;
+  if (width <= 0) errors.push('physical world width missing');
+  for (const platform of platforms) {
+    if (platform.x + platform.w < 0 || platform.x > width) errors.push(`platform ${platform.id} is outside physical world bounds`);
+  }
+
+  return Object.freeze({
+    valid: errors.length === 0,
+    errors: Object.freeze(errors),
+    ladderCount: ladders.length,
+    hazardCount: hazards.length
+  });
 }
 
 export function validateMissionTopologyV52(plan = {}) {

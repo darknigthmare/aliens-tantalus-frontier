@@ -6,7 +6,8 @@ import {
   HUB_DOOR_PROFILES,
   HUB_ROOM_PROFILES,
   HUB_WORLD,
-  getHubDoorBounds
+  getHubDoorBounds,
+  getHubRoomLayerBounds
 } from '../src/hub-game.js';
 import { resolveHubRoomArtV56 } from '../src/hub-art-runtime-v56.js';
 import { HubGame, HUB_CRISIS_SOURCE_FACING } from '../src/hub-v51-runtime.js';
@@ -66,6 +67,18 @@ test('les seize salles gardent leurs profils mesurés et le briefing rend son ca
   assert.ok(new Set(rooms.map((room) => room.profile.floorRatio)).size >= 4);
   assert.ok(rooms.every((room) => room.collisionSource === 'room-profile'));
   assert.ok(rooms.every((room) => room.geometry.length === 1 && room.geometry[0].collisionOnly));
+  for (const room of rooms) {
+    const render = room.propRenderBounds;
+    const collision = room.propCollisionBounds;
+    const interaction = room.propInteractionBounds;
+    closeTo(render.x + render.w / 2, room.x);
+    closeTo(collision.x + collision.w / 2, room.x);
+    closeTo(render.y + render.h, HUB_WORLD.floorY);
+    closeTo(collision.y + collision.h, HUB_WORLD.floorY);
+    assert.deepEqual(room.geometry[0], { ...collision, role: 'interaction-prop', collisionOnly: true });
+    assert.ok(interaction.x <= render.x && interaction.x + interaction.w >= render.x + render.w, `${room.id}: zone interaction autour du bitmap`);
+    assert.ok(collision.w <= render.w && collision.h <= render.h, `${room.id}: collision contenue dans le volume visible`);
+  }
 
   const ctx = recordingContext();
   const canvas = { width: 1280, height: 720, getContext: () => ctx, addEventListener() {} };
@@ -82,11 +95,13 @@ test('les seize salles gardent leurs profils mesurés et le briefing rend son ca
   assert.ok(backgroundDraw, 'le plafond modulaire v56 doit remplacer le bitmap monolithique');
   const [image, sourceX, sourceY, sourceWidth, sourceHeight, x, y, width, height] = backgroundDraw;
   assert.deepEqual([sourceX, sourceY, sourceWidth, sourceHeight], [0, 0, image.naturalWidth, image.naturalHeight]);
-  const scaleX = room.profile.worldWidth / 1280;
-  closeTo(x, room.xStart + art.overhead.renderBounds.x * scaleX);
-  closeTo(y, art.overhead.renderBounds.y);
-  closeTo(width, art.overhead.renderBounds.w * scaleX);
-  closeTo(height, art.overhead.renderBounds.h);
+  const expected = getHubRoomLayerBounds(room, art.overhead.renderBounds);
+  closeTo(x, expected.x);
+  closeTo(y, expected.y);
+  closeTo(width, expected.w);
+  closeTo(height, expected.h);
+  assert.ok(width > room.profile.worldWidth, 'sceneScale rapproche correctement la salle de briefing');
+  assert.ok(y > 0, 'floorRatio recale la ligne de fuite sur le sol physique');
   assert.equal(ctx.drawCalls.some((call) => call[0]?.currentSrc === room.background), false, 'aucun ancien fond monolithique');
   assert.deepEqual(parallax?.viewport, room.viewport);
   assert.equal(parallax?.image, farImage);
