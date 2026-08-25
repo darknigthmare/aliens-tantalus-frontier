@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v58');
+  || path.resolve('.qa', 'browser-v59');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v58') && shell.release === '58.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v59') && shell.release === '59.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -313,7 +313,7 @@ try {
       && activeColonyLayers.every((asset) => asset.includes('/zones/colony-multiroute/')),
     `Mission coloniale V58 ou triplet zoné absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
-  requireThat(missionStart.animationRuntime?.sheets === 178 && missionStart.animationRuntime.runtimeReady === 178 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v56 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  requireThat(missionStart.animationRuntime?.sheets === 182 && missionStart.animationRuntime.runtimeReady === 182 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v59 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
   const neuroPlayerClip = Object.entries(missionStart.animationRuntime.activeClips).find(([key]) => key.startsWith('player:'));
   const neuroPlayerContract = missionStart.animationRuntime.neuroPlayerContract;
   requireThat(
@@ -327,6 +327,125 @@ try {
     `Identité joueur Neuro Facehugger divergente: ${JSON.stringify({ neuroPlayerContract, neuroPlayerClip })}`
   );
   report.neuroVisualIdentity = { contract: neuroPlayerContract, activeClip: neuroPlayerClip };
+  const vehicleAccessStart = await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    const player = game.player;
+    const vehicle = game.vehicle;
+    if (!player || !vehicle?.active || vehicle.destroyed) throw new Error('Véhicule V59 indisponible.');
+    game.__v59QaAccessIsolation = {
+      enemies: game.enemies,
+      hostileProjectiles: game.hostileProjectiles,
+      hazards: game.hazards.map((hazard) => ({ hazard, active: hazard.active })),
+      coopInVehicle: Boolean(game.coop?.inVehicle),
+      damageVehicle: game.damageVehicle,
+      blockedDamage: []
+    };
+    game.damageVehicle = (amount, source) => { game.__v59QaAccessIsolation.blockedDamage.push({ amount, source }); return 0; };
+    game.enemies = [];
+    game.hostileProjectiles = [];
+    for (const hazard of game.hazards) hazard.active = false;
+    Object.assign(player, {
+      inVehicle: false,
+      x: vehicle.x + vehicle.w / 2 - player.w / 2,
+      y: vehicle.y + vehicle.h - player.h,
+      vx: 0,
+      vy: 0,
+      alive: true,
+      downed: false,
+      health: player.maxHealth,
+      armor: player.maxArmor,
+      grounded: true
+    });
+    if (game.coop) game.coop.inVehicle = false;
+    vehicle.driver = null;
+    vehicle.passengers = [];
+    vehicle.occupied = false;
+    vehicle.hull = vehicle.maxHull;
+    vehicle.v52HurtClock = 0;
+    vehicle.v52TurretClock = 0;
+    vehicle.actionClock = 0;
+    vehicle.firing = false;
+    vehicle.attacking = false;
+    vehicle.launching = false;
+    vehicle.accessTransition = null;
+    game.camera.x = Math.max(0, vehicle.x - 500);
+    game.camera.y = Math.max(0, vehicle.y - 420);
+    const started = game.toggleVehicle(player);
+    const snapshot = game.getSnapshot();
+    const images = [...game.images.entries()]
+      .filter(([key]) => /AccessV59$/.test(key))
+      .map(([key, image]) => ({ key, src: image.currentSrc || image.src, ready: image.complete && image.naturalWidth === 1024 && image.naturalHeight === 1024 }));
+    return { started, vehicleId: vehicle.id, playerInVehicle: player.inVehicle, runtime: snapshot.vehicleAccessRuntime, images };
+  })()`);
+  requireThat(
+    vehicleAccessStart.started
+      && vehicleAccessStart.playerInVehicle === false
+      && vehicleAccessStart.runtime?.transition?.phase === 'entering'
+      && vehicleAccessStart.runtime.animation?.sheetId?.endsWith('.access-damage')
+      && vehicleAccessStart.runtime.animation?.clipId === 'access-open'
+      && vehicleAccessStart.images.length === 4
+      && vehicleAccessStart.images.every((entry) => entry.ready),
+    `Démarrage accès véhicule V59 invalide: ${JSON.stringify(vehicleAccessStart)}`
+  );
+  await wait(160);
+  const vehicleEntering = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().vehicleAccessRuntime`);
+  requireThat(vehicleEntering?.transition?.phase === 'entering' && vehicleEntering.animation?.clipId === 'access-open', `Animation entrée V59 interrompue: ${JSON.stringify(vehicleEntering)}`);
+  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-entering.png'));
+  await waitFor(`(() => { const game = globalThis.__ATF_GAME__; const state = game.getSnapshot().vehicleAccessRuntime; return game.player.inVehicle && state.occupied && !state.transition; })()`, 'Occupation véhicule V59 jamais finalisée');
+  const vehicleSecured = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().vehicleAccessRuntime`);
+  requireThat(vehicleSecured.occupied && vehicleSecured.secureClock > 0 && vehicleSecured.animation?.clipId === 'secure-occupied', `Sécurisation véhicule V59 invalide: ${JSON.stringify(vehicleSecured)}`);
+  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-secured.png'));
+  const vehicleReady = await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    const wasPaused = game.paused;
+    game.paused = true;
+    for (let step = 0; step < 20 && game.vehicle.accessSecureClock > 0; step += 1) game.update(0.034);
+    const snapshot = game.getSnapshot();
+    game.paused = wasPaused;
+    return {
+      access: snapshot.vehicleAccessRuntime,
+      vehicle: {
+        hull: game.vehicle.hull,
+        maxHull: game.vehicle.maxHull,
+        hurtClock: game.vehicle.v52HurtClock,
+        destroyed: game.vehicle.destroyed,
+        actionClock: game.vehicle.actionClock
+      },
+      blockedDamage: [...(game.__v59QaAccessIsolation?.blockedDamage || [])],
+      sealedEvents: snapshot.animationRuntime?.byEvent?.['vehicle:access-sealed'] || 0
+    };
+  })()`);
+  requireThat(
+    vehicleReady.access.occupied
+      && vehicleReady.access.secureClock === 0
+      && !vehicleReady.access.transition
+      && !vehicleReady.access.animation?.sheetId?.endsWith('.access-damage')
+      && ['command-idle', 'idle', 'hangar', 'damage'].includes(vehicleReady.access.animation?.clipId)
+      && !vehicleReady.vehicle.destroyed
+      && vehicleReady.sealedEvents > 0
+      && vehicleReady.blockedDamage.length === 0,
+    `Retour action véhicule V59 invalide: ${JSON.stringify(vehicleReady)}`
+  );
+  const vehicleExitStart = await evaluate(`(() => { const game = globalThis.__ATF_GAME__; return { started: game.toggleVehicle(game.player), runtime: game.getSnapshot().vehicleAccessRuntime, playerInVehicle: game.player.inVehicle }; })()`);
+  requireThat(vehicleExitStart.started && vehicleExitStart.playerInVehicle && vehicleExitStart.runtime?.transition?.phase === 'exiting' && vehicleExitStart.runtime.animation?.clipId === 'exit-close', `Sortie véhicule V59 invalide: ${JSON.stringify(vehicleExitStart)}`);
+  await wait(160);
+  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-exiting.png'));
+  await waitFor(`(() => { const game = globalThis.__ATF_GAME__; const state = game.getSnapshot().vehicleAccessRuntime; return !game.player.inVehicle && !state.occupied && !state.transition; })()`, 'Sortie véhicule V59 jamais finalisée');
+  const vehicleAccessEnd = await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    const state = game.getSnapshot().vehicleAccessRuntime;
+    const isolation = game.__v59QaAccessIsolation;
+    if (isolation?.enemies) game.enemies = isolation.enemies;
+    if (isolation?.hostileProjectiles) game.hostileProjectiles = isolation.hostileProjectiles;
+    if (game.coop && isolation) game.coop.inVehicle = isolation.coopInVehicle;
+    if (isolation?.damageVehicle) game.damageVehicle = isolation.damageVehicle;
+    for (const entry of isolation?.hazards || []) entry.hazard.active = entry.active;
+    delete game.__v59QaAccessIsolation;
+    return state;
+  })()`);
+  requireThat(!vehicleAccessEnd.occupied && !vehicleAccessEnd.transition, `État final accès véhicule V59 invalide: ${JSON.stringify(vehicleAccessEnd)}`);
+  report.vehicleAccessV59 = { start: vehicleAccessStart, entering: vehicleEntering, secured: vehicleSecured, ready: vehicleReady, exit: vehicleExitStart, end: vehicleAccessEnd };
+  report.checkpoints.push('vehicle-access-v59');
   const squadCombat = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const ally = game.activeSquadActors().find((member) => member.alive && !member.inVehicle);
@@ -891,7 +1010,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '58.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v58 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '59.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v59 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

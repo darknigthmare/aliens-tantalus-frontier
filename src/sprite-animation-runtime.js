@@ -8,6 +8,7 @@ import {
   EQUIPMENT_SHEET_GRID_V56,
   EQUIPMENT_VISUAL_PROFILES_V56
 } from './equipment-visual-runtime-v56.js';
+import { resolveVehicleAccessAnimationV59 } from './vehicle-access-runtime-v59.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -199,6 +200,12 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'action', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 10, type: 'vehicle:primary-action' }] },
     { id: 'damage', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'vehicle:wreck-lock' }] }
   ]),
+  'vehicle-access-damage-v59': freezeList([
+    { id: 'access-open', frames: [0, 1, 2, 3], fps: 7, loop: false, events: [{ frame: 1, type: 'vehicle:access-unlock' }, { frame: 3, type: 'vehicle:access-open' }] },
+    { id: 'secure-occupied', frames: [4, 5, 6, 7], fps: 7, loop: false, events: [{ frame: 5, type: 'vehicle:occupant-secure' }, { frame: 7, type: 'vehicle:access-sealed' }] },
+    { id: 'exit-close', frames: [8, 9, 10, 11], fps: 7, loop: false, events: [{ frame: 8, type: 'vehicle:access-release' }, { frame: 11, type: 'vehicle:access-closed' }] },
+    { id: 'critical-wreck', frames: [12, 13, 14, 15], fps: 5, loop: false, events: [{ frame: 12, type: 'vehicle:critical' }, { frame: 15, type: 'vehicle:wreck-lock' }] }
+  ]),
   'npc-mission-v55': freezeList([
     { id: 'ready', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 2, type: 'state:mission-ready' }] },
     { id: 'traversal', frames: [4, 5, 6, 7], fps: 9, loop: true, events: [{ frame: 4, type: 'audio:footstep-right' }, { frame: 6, type: 'audio:footstep-left' }] },
@@ -352,6 +359,10 @@ export const SPRITE_SHEETS = Object.freeze({
   'vehicle.m577-command-apc.action': sheet('vehicle.m577-command-apc.action', 'm577Command', '/assets/openai/sprites/normalized/vehicles/m577-command-apc-action-sheet.png', 'm577-command-action-v55', 'vehicle-ground', 'm577-command-hull', 250, 148, 'vehicle'),
   'vehicle.m22a3-jackson-tank.action': sheet('vehicle.m22a3-jackson-tank.action', 'm22a3Jackson', '/assets/openai/sprites/normalized/vehicles/m22a3-jackson-tank-action-sheet.png', 'm22a3-tank-action-v55', 'vehicle-ground', 'm22a3-tank-hull', 292, 150, 'vehicle'),
   'vehicle.p5000-powered-work-loader.action': sheet('vehicle.p5000-powered-work-loader.action', 'p5000Loader', '/assets/openai/sprites/normalized/vehicles/p-5000-powered-work-loader-action-sheet.png', 'p5000-loader-action-v55', 'vehicle-ground', 'p5000-loader-frame', 150, 192, 'vehicle'),
+  'vehicle.m577-apc.access-damage': sheet('vehicle.m577-apc.access-damage', 'm577AccessV59', '/assets/openai/sprites/normalized/vehicles/m577-apc-access-damage-sheet.png', 'vehicle-access-damage-v59', 'vehicle-ground', 'apc-hull', 250, 140, 'vehicle'),
+  'vehicle.m577-command-apc.access-damage': sheet('vehicle.m577-command-apc.access-damage', 'm577CommandAccessV59', '/assets/openai/sprites/normalized/vehicles/m577-command-apc-access-damage-sheet.png', 'vehicle-access-damage-v59', 'vehicle-ground', 'm577-command-hull', 250, 148, 'vehicle'),
+  'vehicle.p5000-powered-work-loader.access-damage': sheet('vehicle.p5000-powered-work-loader.access-damage', 'p5000AccessV59', '/assets/openai/sprites/normalized/vehicles/p-5000-powered-work-loader-access-damage-sheet.png', 'vehicle-access-damage-v59', 'vehicle-ground', 'p5000-loader-frame', 150, 192, 'vehicle'),
+  'vehicle.ud4l-cheyenne-dropship.access-damage': sheet('vehicle.ud4l-cheyenne-dropship.access-damage', 'ud4lAccessV59', '/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-access-damage-sheet.png', 'vehicle-access-damage-v59', 'vehicle-ground', 'ud4l-dropship-hull', 320, 154, 'vehicle'),
   'vehicle.ud4l-cheyenne-dropship.action': sheet('vehicle.ud4l-cheyenne-dropship.action', 'ud4lCheyenne', '/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png', 'ud4l-dropship-action-v55', 'vehicle-ground', 'ud4l-dropship-hull', 320, 154, 'vehicle'),
   'vehicle.m40-ridgeway-heavy-tank.action.v56': sheet('vehicle.m40-ridgeway-heavy-tank.action.v56', 'm40RidgewayV56', '/assets/openai/sprites/normalized/vehicles/m40-ridgeway-heavy-tank-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'm40-ridgeway-hull', 292, 150, 'vehicle'),
   'vehicle.ud4b-cheyenne-dropship.action.v56': sheet('vehicle.ud4b-cheyenne-dropship.action.v56', 'ud4bCheyenneV56', '/assets/openai/sprites/normalized/vehicles/ud-4b-cheyenne-dropship-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ud4b-dropship-hull', 300, 154, 'vehicle'),
@@ -593,6 +604,17 @@ const VEHICLE_STANDARD_M577_NAME = 'M577 Armored Personnel Carrier';
 const vehicleFitSlug = (value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-');
 const vehicleSpriteById = new Map([[VEHICLE_STANDARD_M577_ID, 'vehicle.m577-apc.action']]);
 const vehicleSpriteByName = new Map([[VEHICLE_STANDARD_M577_NAME, 'vehicle.m577-apc.action']]);
+VEHICLE_SPRITE_FITS_V55.slice(1).forEach((fit, index) => {
+  const fitIndex = index + 1;
+  const suffix = vehicleFitSlug(fit);
+  vehicleSpriteById.set(
+    `vehicle-${String(1 + fitIndex * 36).padStart(3, '0')}-m577-armored-personnel-carrier-${suffix}`,
+    'vehicle.m577-apc.action'
+  );
+  vehicleSpriteByName.set(`${VEHICLE_STANDARD_M577_NAME} — ${fit}`, 'vehicle.m577-apc.action');
+});
+
+
 
 for (const identity of VEHICLE_SPRITE_IDENTITIES_V55) {
   VEHICLE_SPRITE_FITS_V55.forEach((fit, fitIndex) => {
@@ -615,10 +637,12 @@ function resolveExactVehicleSpriteSheet(vehicle = {}) {
 
 export function resolveVehicleAnimation(vehicle = {}) {
   const v56 = resolveVehicleVisualAnimationV56(vehicle);
-  if (v56) return v56;
-  const sheetId = resolveExactVehicleSpriteSheet(vehicle);
+  const sheetId = v56?.sheetId || resolveExactVehicleSpriteSheet(vehicle);
   if (!sheetId) return null;
   const damaged = vehicle.destroyed || (vehicle.v52HurtClock || 0) > 0 || (vehicle.maxHull > 0 && vehicle.hull < vehicle.maxHull * 0.28);
+  const access = resolveVehicleAccessAnimationV59(vehicle, sheetId);
+  if (access) return access;
+  if (v56) return v56;
   const launching = vehicle.launching === true;
   const acting = (vehicle.v52TurretClock || 0) > 0
     || (vehicle.actionClock || 0) > 0

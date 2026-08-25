@@ -84,7 +84,7 @@ test('les vingt plaques v55 sont réellement résolubles et échantillonnables',
     assert.equal(request.sheetId, sheetId);
     assert.ok(controller.sample(id, request, 0.2), id);
   }
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 178);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 182);
 });
 
 test('la sélection catalogue des quatre véhicules atteint leur bitmap dans le vrai GameEngine', () => withBrowserRuntime(() => {

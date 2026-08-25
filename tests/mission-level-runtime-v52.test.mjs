@@ -409,3 +409,33 @@ test('surfaceOffset partage exactement la pose, la collision et le rendu des sol
   assert.equal(floorDraw[2], floorMetrics.surfaceY);
   assert.equal(floorDraw[4], floorMetrics.renderHeight);
 }));
+
+test('un occupant de véhicule ne subit pas une chute fantôme hors des limites de mission', () => withBrowserMocks(() => {
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-vehicle-bounds', worldId: WORLDS[0].id };
+  const plan = buildMissionLevelV52({
+    campaign,
+    world: WORLDS[0],
+    levelSeeds: LEVEL_SEEDS,
+    templateId: 'colony-multiroute',
+    variant: 2
+  });
+  const engine = createEngine();
+  engine.start(optionsFor(plan));
+  const actor = engine.player;
+  const before = {
+    x: actor.x,
+    y: engine.missionLevelBounds.voidY + 240,
+    health: actor.health
+  };
+  Object.assign(actor, { inVehicle: true, x: before.x, y: before.y });
+  let damageCalls = 0;
+  const damagePlayer = engine.damagePlayer.bind(engine);
+  engine.damagePlayer = (...args) => {
+    damageCalls += 1;
+    return damagePlayer(...args);
+  };
+
+  assert.equal(engine.enforceMissionLevelActorBounds(actor), false);
+  assert.deepEqual({ x: actor.x, y: actor.y, health: actor.health }, before);
+  assert.equal(damageCalls, 0);
+}));

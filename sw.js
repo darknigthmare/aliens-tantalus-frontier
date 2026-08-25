@@ -1,9 +1,11 @@
-const CACHE = 'atf-v58-runtime-2';
+const CACHE = 'atf-v59-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
   '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md', '/docs/V58_ROOM_COHERENCE_AUDIT.md',
+  '/docs/VERSION_HISTORY_V59.md', '/docs/ART_PROVENANCE_V59.md',
+  '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
   '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
@@ -12,6 +14,7 @@ const CORE = [
   '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/mission-levels-v52.js',
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
+  '/src/vehicle-access-runtime-v59.js',
   '/src/weapon-visual-runtime-v56.js', '/src/equipment-visual-runtime-v56.js',
   '/src/mission-interactive-art-v56.js', '/src/mission-door-art-v58.js', '/src/topology-coherence-v58.js',
   '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js', '/src/hub-art-runtime-v58.js',
@@ -233,7 +236,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV58() {
+async function precacheV59() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -246,7 +249,7 @@ async function precacheV58() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV58().then(() => self.skipWaiting())
+  precacheV59().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

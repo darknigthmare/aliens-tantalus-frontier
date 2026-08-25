@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v56",
+  "release": "v59",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -2677,6 +2677,96 @@
           }
         ],
         "row": 1
+      }
+    ],
+    "vehicle-access-damage-v59": [
+      {
+        "id": "access-open",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 1,
+            "type": "vehicle:access-unlock"
+          },
+          {
+            "frame": 3,
+            "type": "vehicle:access-open"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "secure-occupied",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 5,
+            "type": "vehicle:occupant-secure"
+          },
+          {
+            "frame": 7,
+            "type": "vehicle:access-sealed"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "exit-close",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 7,
+        "loop": false,
+        "events": [
+          {
+            "frame": 8,
+            "type": "vehicle:access-release"
+          },
+          {
+            "frame": 11,
+            "type": "vehicle:access-closed"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "critical-wreck",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 5,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "vehicle:critical"
+          },
+          {
+            "frame": 15,
+            "type": "vehicle:wreck-lock"
+          }
+        ],
+        "row": 3
       }
     ]
   },
@@ -6043,6 +6133,31 @@
       }
     },
     {
+      "id": "vehicle.m577-apc.access-damage",
+      "family": "vehicle",
+      "subject": "M577 Armored Personnel Carrier",
+      "wave": "v59",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m577-apc-access-damage-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m577-apc-access-damage-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-access-damage-v59",
+      "pivot": "vehicle-ground",
+      "hitbox": "apc-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/vehicle-access-runtime-v59.js",
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "vehicle.m577-apc.action",
       "family": "vehicle",
       "subject": "M577 APC",
@@ -6065,6 +6180,31 @@
       },
       "sourceFacing": "right",
       "identityVerified": true
+    },
+    {
+      "id": "vehicle.m577-command-apc.access-damage",
+      "family": "vehicle",
+      "subject": "M577 Command APC",
+      "wave": "v59",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/m577-command-apc-access-damage-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/m577-command-apc-access-damage-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-access-damage-v59",
+      "pivot": "vehicle-ground",
+      "hitbox": "m577-command-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/vehicle-access-runtime-v59.js",
+          "src/sprite-animation-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
     },
     {
       "id": "vehicle.m577-command-apc.action",
@@ -6237,6 +6377,31 @@
         "consumers": [
           "src/sprite-animation-runtime.js",
           "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.p5000-powered-work-loader.access-damage",
+      "family": "vehicle",
+      "subject": "P-5000 Powered Work Loader",
+      "wave": "v59",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/p-5000-powered-work-loader-access-damage-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/p-5000-powered-work-loader-access-damage-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-access-damage-v59",
+      "pivot": "vehicle-ground",
+      "hitbox": "p5000-loader-frame",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/vehicle-access-runtime-v59.js",
+          "src/sprite-animation-runtime.js",
           "src/game-v52-runtime.js"
         ]
       }
@@ -6437,6 +6602,31 @@
         "consumers": [
           "src/sprite-animation-runtime.js",
           "src/vehicle-visual-overrides-v56.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "vehicle.ud4l-cheyenne-dropship.access-damage",
+      "family": "vehicle",
+      "subject": "UD-4L Cheyenne Dropship",
+      "wave": "v59",
+      "files": {
+        "raw": "/assets/openai/sprites/vehicles/ud-4l-cheyenne-dropship-access-damage-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-access-damage-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "vehicle-access-damage-v59",
+      "pivot": "vehicle-ground",
+      "hitbox": "ud4l-dropship-hull",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/vehicle-access-runtime-v59.js",
+          "src/sprite-animation-runtime.js",
           "src/game-v52-runtime.js"
         ]
       }

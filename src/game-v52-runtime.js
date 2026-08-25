@@ -15,6 +15,13 @@ import {
   spriteRuntimeReport
 } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import {
+  VEHICLE_ACCESS_SECURE_DURATION_V59,
+  createVehicleAccessTransitionV59,
+  resolveVehicleAccessContractV59,
+  resolveVehicleAccessFallbackV59
+} from './vehicle-access-runtime-v59.js';
+
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -489,6 +496,8 @@ export function withV52MissionRuntime(BaseEngine) {
 
     setCoop(enabled) {
       const next = Boolean(enabled);
+      if (!next && this.vehicle?.accessTransition?.actorRole === 'coop') this.abortVehicleAccessV59('coop-disabled');
+      if (!next && this.coop?.inVehicle) this.commitVehicleAccessV59(this.coop, 'exiting');
       const crewId = this.coop?.operatorId;
       const counterpart = asList(this.squadActors).find((member) => member.crewId === crewId);
       if (counterpart && next !== Boolean(this.coopEnabled)) {
@@ -500,6 +509,138 @@ export function withV52MissionRuntime(BaseEngine) {
       }
       return super.setCoop(next);
     }
+    toggleVehicle(actor = this.player) {
+      if (!actor?.alive || !this.vehicle?.active || this.vehicle.destroyed) return false;
+      if (this.mission && this.mission.state !== 'active') return false;
+      if (this.vehicle.accessTransition || Number(this.vehicle.accessSecureClock) > 0) return false;
+      const actorRole = this.vehicleAccessActorRoleV59(actor);
+      if (!actorRole) return false;
+      const animation = resolveVehicleAnimation(this.vehicle);
+      const accessContract = resolveVehicleAccessContractV59(animation?.sheetId);
+      if (!accessContract) return super.toggleVehicle(actor);
+      if (!actor.inVehicle && distance(actor, this.vehicle) > 220) return false;
+      const phase = actor.inVehicle ? 'exiting' : 'entering';
+      this.vehicle.vx = 0;
+      this.vehicle.vy = 0;
+      this.vehicle.accessSecureClock = 0;
+      this.vehicle.accessTransition = createVehicleAccessTransitionV59(actorRole, phase);
+      this.setInteractionAnimation(actor, 'force-interact', this.vehicle.accessTransition.duration);
+      this.audio?.ui();
+      this.onEvent({
+        type: 'vehicle-access-start',
+        phase,
+        actorRole,
+        vehicleId: this.vehicle.id,
+        occupied: this.vehicle.occupied
+      });
+      return true;
+    }
+
+    vehicleAccessActorRoleV59(actor) {
+      return actor === this.player ? 'player' : actor === this.coop ? 'coop' : null;
+    }
+
+    vehicleAccessActorV59(actorRole) {
+      return actorRole === 'coop' ? this.coop : this.player;
+    }
+
+    isVehicleAccessLockedV59(actor, { includeSecure = true } = {}) {
+      const actorRole = this.vehicleAccessActorRoleV59(actor);
+      if (!actorRole || !this.vehicle) return false;
+      if (this.vehicle.accessTransition?.actorRole === actorRole) return true;
+      if (!includeSecure || Number(this.vehicle.accessSecureClock) <= 0 || !actor.inVehicle) return false;
+      return this.vehicle.driver === actor || asList(this.vehicle.passengers).includes(actor);
+    }
+
+    abortVehicleAccessV59(reason) {
+      if (!this.vehicle) return false;
+      const transition = this.vehicle.accessTransition;
+      this.vehicle.accessTransition = null;
+      this.vehicle.accessSecureClock = 0;
+      if (!transition) return false;
+      this.onEvent({
+        type: 'vehicle-access-abort',
+        phase: transition.phase,
+        actorRole: transition.actorRole,
+        vehicleId: this.vehicle.id,
+        reason
+      });
+      return true;
+    }
+
+    commitVehicleAccessV59(actor, phase) {
+      if (!actor || !this.vehicle || !['entering', 'exiting'].includes(phase)) return false;
+      if (phase === 'entering') {
+        if (actor.inVehicle || distance(actor, this.vehicle) > 220) return false;
+        actor.inVehicle = true;
+        if (!this.vehicle.driver) this.vehicle.driver = actor;
+        else if (!asList(this.vehicle.passengers).includes(actor)) this.vehicle.passengers.push(actor);
+      } else {
+        if (!actor.inVehicle) return false;
+        actor.inVehicle = false;
+        actor.x = clamp(this.vehicle.x + this.vehicle.w + 18, 0, WORLD_WIDTH - actor.w);
+        actor.y = this.vehicle.y + this.vehicle.h - actor.h;
+        if (this.vehicle.driver === actor) {
+          this.vehicle.driver = null;
+          const replacement = [this.player, this.coop].find((rider) => rider?.inVehicle);
+          if (replacement) this.vehicle.driver = replacement;
+        }
+        this.vehicle.passengers = asList(this.vehicle.passengers).filter((rider) => rider !== actor);
+      }
+      this.vehicle.occupied = Boolean(this.vehicle.driver);
+      this.onEvent({ type: 'vehicle', occupied: this.vehicle.occupied, coop: actor.coop });
+      return true;
+    }
+
+    updateVehicleAccessTransitionV59(delta) {
+      const transition = this.vehicle?.accessTransition;
+      if (!transition) return false;
+      if (this.mission && this.mission.state !== 'active') {
+        this.abortVehicleAccessV59('mission-inactive');
+        return false;
+      }
+      if (this.vehicle.destroyed) {
+        this.abortVehicleAccessV59('vehicle-destroyed');
+        return false;
+      }
+      const actor = this.vehicleAccessActorV59(transition.actorRole);
+      if (!actor?.alive) {
+        this.abortVehicleAccessV59('actor-unavailable');
+        return false;
+      }
+      transition.elapsed = Math.min(transition.duration, transition.elapsed + Math.max(0, Number(delta) || 0));
+      if (transition.elapsed < transition.duration) return false;
+
+      const expectedInVehicle = transition.phase === 'exiting';
+      if (Boolean(actor.inVehicle) !== expectedInVehicle) {
+        this.abortVehicleAccessV59('state-desynchronized');
+        return false;
+      }
+      const changed = this.commitVehicleAccessV59(actor, transition.phase);
+      this.vehicle.accessTransition = null;
+      if (!changed) {
+        this.onEvent({
+          type: 'vehicle-access-abort',
+          phase: transition.phase,
+          actorRole: transition.actorRole,
+          vehicleId: this.vehicle.id,
+          reason: 'commit-rejected'
+        });
+        return false;
+      }
+      this.vehicle.accessSecureClock = transition.phase === 'entering'
+        ? VEHICLE_ACCESS_SECURE_DURATION_V59
+        : 0;
+      this.onEvent({
+        type: 'vehicle-access-complete',
+        phase: transition.phase,
+        actorRole: transition.actorRole,
+        vehicleId: this.vehicle.id,
+        occupied: this.vehicle.occupied
+      });
+      return true;
+    }
+
 
     update(delta) {
       for (const actor of [this.player, this.coop, ...this.activeSquadActors()]) {
@@ -511,9 +652,11 @@ export function withV52MissionRuntime(BaseEngine) {
       if (this.vehicle) {
         this.vehicle.v52HurtClock = Math.max(0, (this.vehicle.v52HurtClock || 0) - delta);
         this.vehicle.v52TurretClock = Math.max(0, (this.vehicle.v52TurretClock || 0) - delta);
+        this.vehicle.accessSecureClock = Math.max(0, (this.vehicle.accessSecureClock || 0) - delta);
       }
       this.refreshSpriteCollisionProfiles();
       super.update(delta);
+      this.updateVehicleAccessTransitionV59(delta);
       if (this.mission?.state === 'active') this.updateMissionSquad(delta);
       this.updateSpriteAnimationEvents();
       this.refreshSpriteCollisionProfiles();
@@ -524,8 +667,24 @@ export function withV52MissionRuntime(BaseEngine) {
       return this.withEnemySpriteCollisionGeometry(() => super.updateBullets(delta));
     }
 
+    updatePlayer(player, delta, controls) {
+      if (this.vehicle?.accessTransition?.actorRole === this.vehicleAccessActorRoleV59(player)) {
+        player.vx = 0;
+        player.vy = 0;
+        player.jumpBuffer = 0;
+        return false;
+      }
+      return super.updatePlayer(player, delta, controls);
+    }
+
     updateVehicleDriver(player, delta, controls) {
       const beforeX = Number(this.vehicle?.x) || 0;
+      if (this.vehicle?.accessTransition || Number(this.vehicle?.accessSecureClock) > 0) {
+        this.vehicle.vx = 0;
+        this.vehicle.vy = 0;
+        return false;
+      }
+
       this.refreshSpriteCollisionProfiles();
       const result = this.withEnemySpriteCollisionGeometry(() => super.updateVehicleDriver(player, delta, controls));
       if (this.vehicle?.active && this.vehicle.driver === player) {
@@ -539,7 +698,38 @@ export function withV52MissionRuntime(BaseEngine) {
       return result;
     }
 
+    interact(actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.interact(actor);
+    }
+
+    reload(actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.reload(actor);
+    }
+
+    useMedkit(actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.useMedkit(actor);
+    }
+
+    activateTracker(actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.activateTracker(actor);
+    }
+
+    useEquipment(equipmentId, actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.useEquipment(equipmentId, actor);
+    }
+
+    activateNeuroCountermeasure(actor = this.player) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
+      return super.activateNeuroCountermeasure(actor);
+    }
+
     fire(actor) {
+      if (this.isVehicleAccessLockedV59(actor)) return false;
       const fired = super.fire(actor);
       if (fired && actor) {
         actor.v52FireClock = actor.inVehicle ? 0.48 : 0.34;
@@ -559,6 +749,7 @@ export function withV52MissionRuntime(BaseEngine) {
     damageVehicle(amount, source = 'enemy') {
       const result = super.damageVehicle(amount, source);
       if (this.vehicle && result > 0) this.vehicle.v52HurtClock = 0.6;
+      if (this.vehicle?.destroyed && this.vehicle.accessTransition) this.abortVehicleAccessV59('vehicle-destroyed');
       return result;
     }
 
@@ -1058,13 +1249,34 @@ export function withV52MissionRuntime(BaseEngine) {
       return true;
     }
 
+    failMission(reason) {
+      const result = super.failMission(reason);
+      if (this.mission?.state === 'failed') this.abortVehicleAccessV59('mission-failed');
+      return result;
+    }
+
+    restartFromCheckpoint() {
+      if (this.mission?.state !== 'failed') return super.restartFromCheckpoint();
+      this.abortVehicleAccessV59('mission-restarted');
+      const restarted = super.restartFromCheckpoint();
+      if (restarted && this.vehicle) this.vehicle.accessSecureClock = 0;
+      return restarted;
+    }
+
     completeMission(actor) {
       const squadKills = this.activeSquadActors().reduce((total, member) => total + (Number(member.kills) || 0), 0);
-      if (!this.player || squadKills <= 0) return super.completeMission(actor);
+      if (!this.player || squadKills <= 0) {
+        const completed = super.completeMission(actor);
+        if (completed) this.abortVehicleAccessV59('mission-complete');
+        return completed;
+      }
       this.player.kills += squadKills;
       try {
         const completed = super.completeMission(actor);
-        if (completed && this.mission) this.mission.squadKills = squadKills;
+        if (completed && this.mission) {
+          this.mission.squadKills = squadKills;
+          this.abortVehicleAccessV59('mission-complete');
+        }
         return completed;
       } finally {
         this.player.kills -= squadKills;
@@ -1215,8 +1427,15 @@ export function withV52MissionRuntime(BaseEngine) {
     drawVehicle(ctx) {
       if (!this.vehicle?.active) return super.drawVehicle(ctx);
       const request = resolveVehicleAnimation(this.vehicle);
-      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('vehicle', this.vehicle, 'mission'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
-      if (!this.drawSpriteSample(ctx, sample, this.vehicle)) super.drawVehicle(ctx);
+      const entityKey = getAnimationEntityKeyV57('vehicle', this.vehicle, 'mission');
+      const animationOptions = { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) };
+      const sample = this.spriteAnimation?.sample(entityKey, request, this.animationTime, animationOptions);
+      if (this.drawSpriteSample(ctx, sample, this.vehicle)) return;
+      const fallbackRequest = resolveVehicleAccessFallbackV59(this.vehicle, request?.sheetId);
+      const fallbackSample = fallbackRequest
+        ? this.spriteAnimation?.sample(`${entityKey}:fallback-v59`, fallbackRequest, this.animationTime, animationOptions)
+        : null;
+      if (!this.drawSpriteSample(ctx, fallbackSample, this.vehicle)) super.drawVehicle(ctx);
     }
 
     drawWeaponPickup(ctx) {
@@ -1406,6 +1625,14 @@ export function withV52MissionRuntime(BaseEngine) {
             consequences: this.squadTelemetry.consequences.map((entry) => ({ ...entry }))
           } : null
         },
+        vehicleAccessRuntime: this.vehicle ? {
+          schema: 59,
+          transition: this.vehicle.accessTransition ? { ...this.vehicle.accessTransition } : null,
+          secureClock: Number((this.vehicle.accessSecureClock || 0).toFixed(3)),
+          occupied: Boolean(this.vehicle.occupied),
+          animation: resolveVehicleAnimation(this.vehicle)
+        } : null,
+
         animationRuntime: this.animationTelemetry ? {
           ...this.spriteRuntime.report,
           samples: this.animationTelemetry.samples,

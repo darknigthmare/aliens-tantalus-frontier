@@ -29,7 +29,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v58 couvre la fermeture ESM, le hub physique et les décors zonés', async () => {
+test('le cache hors-ligne v59 couvre la fermeture ESM, le hub physique, les décors zonés et les accès véhicule', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -58,6 +58,7 @@ test('le cache hors-ligne v58 couvre la fermeture ESM, le hub physique et les d�
     '/src/enemy-visual-overrides-v56.js',
     '/src/npc-mission-runtime-v55.js',
     '/src/vehicle-visual-overrides-v56.js',
+    '/src/vehicle-access-runtime-v59.js',
     '/src/weapon-visual-runtime-v56.js',
     '/src/equipment-visual-runtime-v56.js',
     '/src/mission-interactive-art-v56.js',
@@ -66,10 +67,10 @@ test('le cache hors-ligne v58 couvre la fermeture ESM, le hub physique et les d�
     '/src/mission-door-art-v58.js',
     '/src/topology-coherence-v58.js'
   ]) {
-    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v58`);
+    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v59`);
   }
 
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 178);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 182);
   for (const sheet of Object.values(SPRITE_SHEETS)) await access(localPath(sheet.path));
   assert.match(worker, /const SPRITE_MANIFEST = ['"]\/assets\/openai\/sprites\/manifest\.json['"]/);
   assert.match(worker, /sheet\.files\?\.normalized/);
@@ -97,15 +98,18 @@ test('le cache hors-ligne v58 couvre la fermeture ESM, le hub physique et les d�
   ]);
   for (const assetPath of staticRuntimeAssets) {
     await access(localPath(assetPath));
-    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v58`);
+    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v59`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v58-runtime-2['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v59-runtime-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
-    '/docs/V58_ROOM_COHERENCE_AUDIT.md'
+    '/docs/V58_ROOM_COHERENCE_AUDIT.md',
+    '/docs/VERSION_HISTORY_V59.md',
+    '/docs/ART_PROVENANCE_V59.md',
+    '/docs/references/V59_ASSET_COMPLETION_MATRIX.md'
   ]) {
-    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v58`);
+    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v59`);
   }
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);

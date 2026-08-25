@@ -78,6 +78,9 @@ test('six vehicle families compile to distinct handling and move on their promis
     engine.start(options({ vehicle: source, enemyCatalog: ENEMIES.slice(0, 120) }));
     Object.assign(engine.player, { x: engine.vehicle.x, y: engine.vehicle.y });
     assert.equal(engine.toggleVehicle(engine.player), true, family);
+    engine.updateVehicleAccessTransitionV59(1);
+    engine.vehicle.accessSecureClock = 0;
+    assert.equal(engine.player.inVehicle, true, family);
     const before = { x: engine.vehicle.x, y: engine.vehicle.y, depth: engine.vehicle.depth };
     const key = family === 'maritime' ? 'KeyS' : family === 'air' || family === 'space' || family === 'exosuit' ? 'KeyW' : 'KeyD';
     engine.keys.add(key);

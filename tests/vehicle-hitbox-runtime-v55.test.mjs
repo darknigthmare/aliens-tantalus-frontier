@@ -67,7 +67,7 @@ function buildEngine(vehicle, templateId = 'ship-interior-vertical') {
 
 const near = (actual, expected, epsilon = 1e-7) => assert.ok(Math.abs(actual - expected) <= epsilon, `${actual} != ${expected}`);
 
-test('le resolver véhicule accepte seulement les 32 profils v55 et le vrai M577 Standard', () => {
+test('le resolver véhicule accepte les 32 profils v55 et les huit fits M577 validés en v59', () => {
   const covered = VEHICLES.filter((vehicle) => V55_VEHICLES.some(([name]) => vehicle.name === name || vehicle.name.startsWith(`${name} — `)));
   assert.equal(covered.length, 32);
   for (const vehicle of covered) {
@@ -76,10 +76,11 @@ test('le resolver véhicule accepte seulement les 32 profils v55 et le vrai M577
   }
 
   const standardM577 = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-001-m577-armored-personnel-carrier');
-  const reconM577 = VEHICLES.find((vehicle) => vehicle.name === 'M577 Armored Personnel Carrier — Recon');
+  const m577Fits = VEHICLES.filter((vehicle) => vehicle.name === 'M577 Armored Personnel Carrier' || vehicle.name.startsWith('M577 Armored Personnel Carrier — '));
   const m570 = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-003-m570-armored-personnel-carrier');
   assert.equal(resolveVehicleAnimation(standardM577)?.sheetId, 'vehicle.m577-apc.action');
-  assert.equal(resolveVehicleAnimation(reconM577), null);
+  assert.equal(m577Fits.length, 8);
+  for (const vehicle of m577Fits) assert.equal(resolveVehicleAnimation(vehicle)?.sheetId, 'vehicle.m577-apc.action', vehicle.id);
   assert.equal(resolveVehicleAnimation(m570), null);
   assert.equal(resolveVehicleAnimation({ id: 'vehicle-999-faux', name: 'M577 Command APC' }), null);
   assert.equal(resolveVehicleAnimation({ name: 'M577 Command APC transport' }), null);
@@ -88,7 +89,7 @@ test('le resolver véhicule accepte seulement les 32 profils v55 et le vrai M577
   assert.equal(resolveVehicleAnimation({ ...ud4l, firing: true }).clipId, 'flight');
   assert.equal(resolveVehicleAnimation({ ...ud4l, v52TurretClock: 0.4 }).clipId, 'flight');
   assert.equal(resolveVehicleAnimation({ ...ud4l, launching: true }).clipId, 'launch');
-  assert.equal(resolveVehicleAnimation({ ...ud4l, launching: true, destroyed: true }).clipId, 'damage');
+  assert.equal(resolveVehicleAnimation({ ...ud4l, launching: true, destroyed: true }).clipId, 'critical-wreck');
 });
 
 test('les bounds sprite sont proportionnels, centrés, orientés et suivent le corps mobile', () => {

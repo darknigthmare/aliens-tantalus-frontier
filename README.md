@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v58.0.0**. Cette release conserve toute la boucle v1→v57 et consolide le jeu en véritable réseau metroidvania : 16 salles de hub composées par couches indépendantes, portes et ascenseurs réciproques, destinations et verrous de mission explicites, décors coloniaux zonés, atlas de portes à empreinte stable et cadrage mobile jouable.
+Version web jouable **v59.0.0**. Cette release conserve toute la boucle v1→v58 et rend l’accès véhicule physique : quatre plaques OpenAI dédiées pilotent ouverture, sécurisation, sortie et épave; l’occupation ne change qu’après l’animation et les sept fits M577 conservent un vrai rendu bitmap.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -25,7 +25,7 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit d’atlas V58 recense **178 plaques et 2 500 cellules**. La vague V58 ajoute 51 livrables bitmap branchés au runtime : 16 FAR et 16 MID propres aux salles du hub, 18 couches coloniales et un atlas de portes à huit cellules. La complétude exacte des personnages, ennemis, véhicules et props reste suivie dans la matrice d’assets ; une entrée de catalogue pilotée par les données n’est pas présentée comme une plaque dédiée lorsqu’elle réemploie encore une famille visuelle.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit d’atlas V59 recense **182 plaques et 2 564 cellules**. La vague ajoute quatre plaques véhicule 4×4, soit 64 cellules d’accès/dégâts, en plus des 51 livrables bitmap V58. La complétude exacte des personnages, ennemis, véhicules et props reste suivie dans la matrice d’assets ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
 ## Contrôles
 Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
@@ -35,7 +35,7 @@ Mission joueur 1 :
 
 - `A/D` ou flèches : marcher ; `W/S` : grimper ou traverser un conduit ; `Espace` : sauter.
 - `F` : tirer ; `R` : recharger ; `Q` : tracker ; `E` : interagir/réanimer/neutraliser.
-- `V` : entrer ou sortir du véhicule ; `H` : medkit ; `X` : contre-impulsion Neuro-Xeno si disponible.
+- `V` : lancer l’ouverture ou la sortie physique du véhicule ; `H` : medkit ; `X` : contre-impulsion Neuro-Xeno si disponible.
 - `P` ou `Échap` : pause ; `Entrée` : reprendre au checkpoint après un échec.
 
 Coop locale : `J/L`, `I/K`, `U`, `O`, `Y`, `T`, `G`.
@@ -44,7 +44,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v58 |
+| Catalogue | Total v59 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -67,12 +67,15 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate V58 locale du 25 août 2026 : lint de **126 modules**, **236/236 tests Node** et build statique **58.0.0** de **3 443 entrées**.
+Gate V59 locale du 25 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **130 modules**, **248/248 tests Node** et build statique **59.0.0** de **3 443 entrées**.
 
-Le parcours `npm.cmd run qa:browser:v58` valide **16 checkpoints et 21 captures**, dont les **16/16 salles** du hub, la mission coloniale, le hangar, la baie M577, l’identité Facehugger puis le retour marine, le portrait mobile et la PWA hors ligne. Il ne relève aucune exception, erreur console ni requête échouée. Le même parcours est passé sur [la production](https://aliens-tantalus-frontier.vercel.app) après le déploiement Vercel `dpl_6aEDKDA4cNvCrV8rbGJ4xPsty1mw`, déclaré **READY**; l’alias public répond **HTTP 200**.
+Parcours navigateur V59 local réussi : **17 checkpoints**, **24 captures**, **16/16 salles** auditées, entrée/sécurisation/sortie véhicule confirmées, quatre atlas d’accès chargés, PWA contrôlée hors ligne, zéro exception, erreur console ou requête échouée. La répétition sur la production Vercel reste la dernière gate avant publication finale.
 
 ## Dossier de production
 
+- [Historique de release V59](docs/VERSION_HISTORY_V59.md)
+- [Provenance artistique V59](docs/ART_PROVENANCE_V59.md)
+- [Matrice de complétude et dette V59](docs/references/V59_ASSET_COMPLETION_MATRIX.md)
 - [Audit level design V57 : constats, corrections et dette artistique](docs/V57_LEVEL_DESIGN_AUDIT.md)
 - [Audit V58 : cohérence des salles, portes, tailles et parallaxes](docs/V58_ROOM_COHERENCE_AUDIT.md)
 - [Source consolidée des promesses v1→v51](docs/GAMEPLAY_PROMISE_SOURCE_V51.md)

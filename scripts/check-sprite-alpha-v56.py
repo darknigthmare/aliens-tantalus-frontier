@@ -12,6 +12,7 @@ from PIL import Image, ImageChops
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "assets" / "openai" / "sprites" / "manifest.json"
 EXPECTED_ATLASES = 178
+EXPECTED_RELEASE = "v56"
 EXPECTED_CELLS = 2500
 BLACK_XENO_IDS = {
     "enemy.xenomorph-drone.locomotion",
@@ -99,8 +100,8 @@ def assert_cell_guard(
 
 def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    if manifest.get("release") != "v56":
-        raise ValueError(f"expected sprite release v56, received {manifest.get('release')}")
+    if manifest.get("release") != EXPECTED_RELEASE:
+        raise ValueError(f"expected sprite release {EXPECTED_RELEASE}, received {manifest.get('release')}")
     if len(manifest.get("sheets", [])) != EXPECTED_ATLASES:
         raise ValueError(f"expected {EXPECTED_ATLASES} atlases, received {len(manifest.get('sheets', []))}")
 

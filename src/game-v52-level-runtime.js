@@ -712,6 +712,7 @@ export function withV52LevelRuntime(BaseEngine) {
 
     enforceMissionLevelActorBounds(actor) {
       if (!actor || !this.missionLevelBounds) return false;
+      if (actor.inVehicle) return false;
       actor.x = clamp(actor.x, 0, Math.max(0, this.missionLevelBounds.width - actor.w));
       if (actor.y <= this.missionLevelBounds.voidY) return false;
       this.damagePlayer(actor, 35, { bypassCover: true, source: 'fall' });
