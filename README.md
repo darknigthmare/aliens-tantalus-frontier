@@ -69,7 +69,7 @@ npm.cmd run qa
 
 Gate V59 locale du 25 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **130 modules**, **248/248 tests Node** et build statique **59.0.0** de **3 443 entrées**.
 
-Parcours navigateur V59 local réussi : **17 checkpoints**, **24 captures**, **16/16 salles** auditées, entrée/sécurisation/sortie véhicule confirmées, quatre atlas d’accès chargés, PWA contrôlée hors ligne, zéro exception, erreur console ou requête échouée. La répétition sur la production Vercel reste la dernière gate avant publication finale.
+Parcours navigateur V59 réussi localement puis reproduit sur la production : **17 checkpoints**, **24 captures**, **16/16 salles** auditées, entrée/sécurisation/sortie véhicule confirmées, quatre atlas d’accès chargés, PWA contrôlée hors ligne, zéro exception, erreur console ou requête échouée sur chaque passe. Le déploiement Vercel `dpl_8o4CKqdXwSq9mu2faHwbUSyaENkF` est `Ready` et l’alias public répond **HTTP 200**.
 
 ## Dossier de production
 
