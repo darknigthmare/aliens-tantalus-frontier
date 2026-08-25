@@ -206,6 +206,25 @@ export function compileShipProject(project) {
   };
 }
 
+const HUB_TRAVERSAL_PROFILES_V58 = Object.freeze({
+  bridge: Object.freeze({ lower: [92, 520], upper: [560, 500], floorLadderX: 180, tierLadderX: 590, ventX: 914 }),
+  briefing: Object.freeze({ lower: [250, 540], upper: [110, 470], floorLadderX: 330, tierLadderX: 520, ventX: 126 }),
+  'combat-information': Object.freeze({ lower: [650, 450], upper: [280, 520], floorLadderX: 1010, tierLadderX: 720, ventX: 298 }),
+  'cryo-bay': Object.freeze({ lower: [160, 520], upper: [620, 455], floorLadderX: 260, tierLadderX: 650, ventX: 944 }),
+  'crew-quarters': Object.freeze({ lower: [110, 520], upper: [580, 450], floorLadderX: 210, tierLadderX: 610, ventX: 888 }),
+  mess: Object.freeze({ lower: [390, 560], upper: [120, 430], floorLadderX: 820, tierLadderX: 430, ventX: 136 }),
+  medical: Object.freeze({ lower: [160, 540], upper: [650, 410], floorLadderX: 260, tierLadderX: 680, ventX: 936 }),
+  'science-lab': Object.freeze({ lower: [580, 520], upper: [190, 470], floorLadderX: 980, tierLadderX: 620, ventX: 206 }),
+  quarantine: Object.freeze({ lower: [120, 520], upper: [570, 500], floorLadderX: 220, tierLadderX: 600, ventX: 916 }),
+  armory: Object.freeze({ lower: [520, 570], upper: [160, 440], floorLadderX: 960, tierLadderX: 560, ventX: 176 }),
+  workshop: Object.freeze({ lower: [160, 530], upper: [650, 420], floorLadderX: 250, tierLadderX: 680, ventX: 932 }),
+  'vehicle-bay': Object.freeze({ lower: [690, 420], upper: [210, 500], floorLadderX: 980, tierLadderX: 700, ventX: 226 }),
+  'dropship-hangar': Object.freeze({ lower: [130, 620], upper: [690, 430], floorLadderX: 230, tierLadderX: 720, ventX: 966 }),
+  reactor: Object.freeze({ lower: [500, 570], upper: [130, 420], floorLadderX: 930, tierLadderX: 540, ventX: 146 }),
+  'life-support': Object.freeze({ lower: [150, 530], upper: [620, 470], floorLadderX: 250, tierLadderX: 650, ventX: 916 }),
+  'sensor-array': Object.freeze({ lower: [590, 510], upper: [160, 470], floorLadderX: 960, tierLadderX: 630, ventX: 176 })
+});
+
 function fallbackTraversal(deck) {
   const platforms = [];
   const ladders = [];
@@ -214,19 +233,20 @@ function fallbackTraversal(deck) {
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
+    const profile = HUB_TRAVERSAL_PROFILES_V58[roomId] || HUB_TRAVERSAL_PROFILES_V58.bridge;
     const lowerY = HUB_WORLD.floorY - 118 - ((room + deck) % 2) * 16;
     const upperY = HUB_WORLD.floorY - 242 + ((room + deck) % 3) * 10 - yShift;
     platforms.push(
-      { x: start + 100, y: lowerY, w: 500, h: 20, type: 'platform', art: 'catwalk', roomId },
-      { x: start + 510, y: upperY, w: 540, h: 20, type: 'platform', art: 'drop', roomId }
+      { x: start + profile.lower[0], y: lowerY, w: profile.lower[1], h: 20, type: 'platform', art: 'catwalk', roomId },
+      { x: start + profile.upper[0], y: upperY, w: profile.upper[1], h: 20, type: 'platform', art: 'drop', roomId }
     );
     ladders.push(
-      { x: start + 220, top: lowerY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder', roomId },
-      { x: start + 560, top: upperY, bottom: lowerY, w: 52, type: 'ladder', roomId }
+      { x: start + profile.floorLadderX, top: lowerY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder', roomId },
+      { x: start + profile.tierLadderX, top: upperY, bottom: lowerY, w: 52, type: 'ladder', roomId }
     );
     vents.push({
       id: `deck-${deck + 1}-vent-${room + 1}`,
-      x: start + 888, y: upperY - 58, w: 132, h: 58, type: 'vent', roomId
+      x: start + profile.ventX, y: upperY - 58, w: 132, h: 58, type: 'vent', roomId
     });
   }
   return {
@@ -513,6 +533,7 @@ export class HubGame extends HubGameV50 {
     const colliders = [];
     if (!this.editorPlaytest) {
       for (const door of this.doorStates) {
+        if (door.blocking === false || door.lift) continue;
         if (door.progress < 0.82) colliders.push(getHubDoorBounds(door));
       }
     }

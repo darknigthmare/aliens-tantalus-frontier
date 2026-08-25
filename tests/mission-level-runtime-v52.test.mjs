@@ -11,6 +11,7 @@ import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
 import {
   MISSION_LEVEL_LAYER_FILES_V52,
   MISSION_LEVEL_ZONE_LAYER_FILES_V56,
+  MISSION_LEVEL_ZONE_LAYER_FILES_V58,
   resolveMissionLevelLayerFilesV56,
   withV52LevelRuntime
 } from '../src/game-v52-level-runtime.js';
@@ -107,7 +108,7 @@ function optionsFor(plan) {
   };
 }
 
-test('les six zones de vaisseau dédiées ne créent aucun faux path pour les 12 autres zones', () => withBrowserMocks(() => {
+test('les six zones vaisseau V56 restent isolées tandis que V58 branche les 12 zones suivantes', () => withBrowserMocks(() => {
   const templateId = 'ship-interior-vertical';
   const zoneId = 'ship-docking';
   const dedicatedZoneIds = [
@@ -216,16 +217,18 @@ test('les six zones de vaisseau dédiées ne créent aucun faux path pour les 12
   });
   const fallbackEngine = createEngine();
   const fallbackSnapshot = fallbackEngine.start(optionsFor(fallbackPlan));
-  assert.equal(fallbackSnapshot.missionLevelRuntime.activeZoneId, fallbackPlan.biomeZones[0].id);
+  const colonyZoneId = fallbackPlan.biomeZones[0].id;
+  const colonyLayers = MISSION_LEVEL_ZONE_LAYER_FILES_V58[fallbackTemplateId][colonyZoneId];
+  assert.equal(fallbackSnapshot.missionLevelRuntime.activeZoneId, colonyZoneId);
   assert.deepEqual(
     fallbackSnapshot.missionLevelRuntime.activeArtLayers,
-    MISSION_LEVEL_LAYER_FILES_V52[fallbackTemplateId]
+    colonyLayers
   );
   const fallbackContext = recordingContext();
   fallbackEngine.drawBackdrop(fallbackContext);
   fallbackEngine.drawForeground(fallbackContext);
   for (const kind of ['far', 'mid', 'foreground']) {
-    const fallback = fallbackEngine.images.get(`level:${fallbackTemplateId}:${kind}`);
+    const fallback = fallbackEngine.images.get(`level:${fallbackTemplateId}:zone:${colonyZoneId}:${kind}`);
     assert.equal(fallbackEngine.missionLevelLayerImage(kind), fallback);
     assert.ok(fallbackContext.drawCalls.some((call) => call[0] === fallback));
   }
@@ -346,8 +349,8 @@ test('les bounds de collision d’un sas fermé égalent ses bounds bitmap', () 
   const plan = buildMissionLevelV52({ campaign, world: WORLDS[6], levelSeeds: LEVEL_SEEDS, templateId: 'ship-interior-vertical' });
   const engine = createEngine();
   engine.start(optionsFor(plan));
-  const locked = engine.images.get('lockedDoor');
-  Object.assign(locked, { naturalWidth: 185, naturalHeight: 176 });
+  const atlas = engine.images.get('missionDoorStatesV58');
+  Object.assign(atlas, { naturalWidth: 2048, naturalHeight: 2048 });
   const door = engine.doors[0];
   door.progress = 0;
   const bounds = engine.getDoorRenderState(door, { open: false });
@@ -356,9 +359,10 @@ test('les bounds de collision d’un sas fermé égalent ses bounds bitmap', () 
 
   const ctx = recordingContext();
   engine.drawDoor(ctx, door);
-  const draw = ctx.drawCalls.find((call) => call[0] === locked);
+  const draw = ctx.drawCalls.find((call) => call[0] === atlas);
   assert.ok(draw);
-  assert.deepEqual(draw.slice(1), [bounds.x, bounds.y, bounds.w, bounds.h]);
+  assert.deepEqual(draw.slice(1, 5), [bounds.source.x, bounds.source.y, bounds.source.w, bounds.source.h]);
+  assert.deepEqual(draw.slice(5), [bounds.x, bounds.y, bounds.w, bounds.h]);
 
   engine.walls = [];
   engine.covers = [];

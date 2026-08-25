@@ -1,8 +1,10 @@
-const CACHE = 'atf-v57-runtime-1';
+const CACHE = 'atf-v58-runtime-2';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
-  '/manifest.webmanifest', SPRITE_MANIFEST, '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/manifest.webmanifest', SPRITE_MANIFEST,
+  '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md', '/docs/V58_ROOM_COHERENCE_AUDIT.md',
+  '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
@@ -11,7 +13,8 @@ const CORE = [
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
   '/src/weapon-visual-runtime-v56.js', '/src/equipment-visual-runtime-v56.js',
-  '/src/mission-interactive-art-v56.js', '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js',
+  '/src/mission-interactive-art-v56.js', '/src/mission-door-art-v58.js', '/src/topology-coherence-v58.js',
+  '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js', '/src/hub-art-runtime-v58.js',
   '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
@@ -70,6 +73,13 @@ const CORE = [
   '/assets/openai/metroidvania/props/maintenance-pipe.png',
   '/assets/openai/metroidvania/props/ceiling-cables.png',
   '/assets/openai/metroidvania/props/foreground-pipes.png',
+  '/assets/openai/metroidvania/props/floor-segment.png',
+  '/assets/openai/metroidvania/props/short-ledge.png',
+  '/assets/openai/metroidvania/props/breakable-panel.png',
+  '/assets/openai/metroidvania/props/cargo-cover.png',
+  '/assets/openai/metroidvania/props/supply-crates.png',
+  '/assets/openai/metroidvania/props/warning-lamp.png',
+  '/assets/openai/metroidvania/props/acid-floor-hazard.png',
   '/assets/openai/hub/layers/engineering-hangar-overhead.png',
   '/assets/openai/metroidvania/props/overhead-catwalk.png',
   '/assets/openai/metroidvania/props/drop-platform.png',
@@ -169,10 +179,61 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-life-support-overhead.png',
   '/assets/openai/hub/layers/engineering-life-support-foreground.png',
   '/assets/openai/hub/layers/engineering-sensors-overhead.png',
-  '/assets/openai/hub/layers/engineering-sensors-foreground.png'
+  '/assets/openai/hub/layers/engineering-sensors-foreground.png',
+  '/assets/openai/metroidvania/props/mission-door-states-v58.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-foreground.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-foreground.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-foreground.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-foreground.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-foreground.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-mid.png',
+  '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-foreground.png',
+  '/assets/openai/hub/layers/command-bridge-far.png',
+  '/assets/openai/hub/layers/command-bridge-mid.png',
+  '/assets/openai/hub/layers/command-briefing-far.png',
+  '/assets/openai/hub/layers/command-briefing-mid.png',
+  '/assets/openai/hub/layers/command-cic-far.png',
+  '/assets/openai/hub/layers/command-cic-mid.png',
+  '/assets/openai/hub/layers/command-cryo-far.png',
+  '/assets/openai/hub/layers/command-cryo-mid.png',
+  '/assets/openai/hub/layers/habitat-quarters-far.png',
+  '/assets/openai/hub/layers/habitat-quarters-mid.png',
+  '/assets/openai/hub/layers/habitat-mess-far.png',
+  '/assets/openai/hub/layers/habitat-mess-mid.png',
+  '/assets/openai/hub/layers/habitat-medical-far.png',
+  '/assets/openai/hub/layers/habitat-medical-mid.png',
+  '/assets/openai/hub/layers/habitat-lab-far.png',
+  '/assets/openai/hub/layers/habitat-lab-mid.png',
+  '/assets/openai/hub/layers/industrial-quarantine-far.png',
+  '/assets/openai/hub/layers/industrial-quarantine-mid.png',
+  '/assets/openai/hub/layers/industrial-armory-far.png',
+  '/assets/openai/hub/layers/industrial-armory-mid.png',
+  '/assets/openai/hub/layers/industrial-workshop-far.png',
+  '/assets/openai/hub/layers/industrial-workshop-mid.png',
+  '/assets/openai/hub/layers/industrial-vehicle-bay-far.png',
+  '/assets/openai/hub/layers/industrial-vehicle-bay-mid.png',
+  '/assets/openai/hub/layers/engineering-hangar-far.png',
+  '/assets/openai/hub/layers/engineering-hangar-mid.png',
+  '/assets/openai/hub/layers/engineering-reactor-far.png',
+  '/assets/openai/hub/layers/engineering-reactor-mid.png',
+  '/assets/openai/hub/layers/engineering-life-support-far.png',
+  '/assets/openai/hub/layers/engineering-life-support-mid.png',
+  '/assets/openai/hub/layers/engineering-sensors-far.png',
+  '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV57() {
+async function precacheV58() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -185,7 +246,7 @@ async function precacheV57() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV57().then(() => self.skipWaiting())
+  precacheV58().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

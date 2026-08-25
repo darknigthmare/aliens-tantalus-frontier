@@ -1,3 +1,5 @@
+import { validateMissionTopologyV58 } from './topology-coherence-v58.js';
+
 const WORLD_WIDTH = 5200;
 const FLOOR_Y = 510;
 
@@ -134,12 +136,12 @@ const SHIP_TEMPLATE = Object.freeze({
   ]),
   edges: Object.freeze([
     edge('ship-e01', 'ship-spawn', 'ship-dock', 'walk', ['ship-spine', 'ship-service-route', 'ship-hull-route']),
-    edge('ship-e02', 'ship-dock', 'ship-cargo', 'walk', ['ship-spine']),
+    edge('ship-e02', 'ship-dock', 'ship-cargo', 'airlock', ['ship-spine'], { gateId: 'dock-bulkhead' }),
     edge('ship-e03', 'ship-cargo', 'ship-shaft-low', 'airlock', ['ship-spine'], { gateId: 'cargo-bulkhead' }),
     edge('ship-e04', 'ship-shaft-low', 'ship-reactor', 'walk', ['ship-spine']),
     edge('ship-e05', 'ship-reactor', 'ship-aft-low', 'walk', ['ship-spine']),
     edge('ship-e06', 'ship-aft-low', 'ship-airlock', 'airlock', ['ship-spine'], { gateId: 'aft-bulkhead' }),
-    edge('ship-e07', 'ship-airlock', 'ship-extraction', 'walk', ['ship-spine', 'ship-service-route', 'ship-hull-route']),
+    edge('ship-e07', 'ship-airlock', 'ship-extraction', 'airlock', ['ship-spine', 'ship-service-route', 'ship-hull-route'], { gateId: 'outer-airlock' }),
     edge('ship-e08', 'ship-dock', 'ship-dock-mid', 'ladder', ['ship-service-route']),
     edge('ship-e09', 'ship-dock-mid', 'ship-service', 'walk', ['ship-service-route']),
     edge('ship-e10', 'ship-service', 'ship-shaft-mid', 'vent', ['ship-service-route'], { ventId: 'service-duct' }),
@@ -512,14 +514,24 @@ function compileGeometry(graph) {
       }));
     }
     if (link.kind === 'airlock' || link.kind === 'gate') {
+      const doorId = link.gateId || link.id;
+      const visualRole = link.kind === 'gate'
+        ? (/security/i.test(doorId) ? 'security-shutter' : 'colony-gate')
+        : (/outer/i.test(doorId) ? 'pressure-airlock' : 'ship-bulkhead');
       doors.push(Object.freeze({
-        id: link.gateId || link.id,
+        id: doorId,
         x: Math.round((from.x + to.x) / 2 - 22),
         y: Math.round(Math.max(from.y, to.y) - 132),
         w: 44,
         h: 132,
         from: from.id,
         to: to.id,
+        fromZoneId: from.zoneId,
+        toZoneId: to.zoneId,
+        edgeId: link.id,
+        kind: link.kind,
+        visualRole,
+        bidirectional: !link.oneWay,
         open: false
       }));
     }
@@ -691,13 +703,18 @@ export function buildMissionLevelV52({
   };
   const topologyValidation = validateMissionTopologyV52(plan);
   const physicalValidation = validateMissionPhysicalTopologyV57(plan);
+  const coherenceValidation = validateMissionTopologyV58(plan);
   const validation = Object.freeze({
     ...topologyValidation,
-    valid: topologyValidation.valid && physicalValidation.valid,
-    errors: Object.freeze([...topologyValidation.errors, ...physicalValidation.errors]),
+    valid: topologyValidation.valid && physicalValidation.valid && coherenceValidation.valid,
+    errors: Object.freeze([...topologyValidation.errors, ...physicalValidation.errors, ...coherenceValidation.errors]),
     physicalValid: physicalValidation.valid,
     physicalLadderCount: physicalValidation.ladderCount,
-    physicalHazardCount: physicalValidation.hazardCount
+    physicalHazardCount: physicalValidation.hazardCount,
+    roomCoherenceValid: coherenceValidation.valid,
+    coherentDoorCount: coherenceValidation.doorCount,
+    physicallyReachableNodes: coherenceValidation.physicallyReachableNodes,
+    reciprocalConnectionCount: coherenceValidation.reciprocalConnectionCount
   });
   if (!validation.valid) throw new Error(`Invalid mission template ${selectedTemplateId}: ${validation.errors.join('; ')}`);
   return Object.freeze({ ...plan, validation });

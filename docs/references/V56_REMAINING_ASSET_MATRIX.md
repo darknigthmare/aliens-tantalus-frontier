@@ -1,5 +1,7 @@
 # V56 — matrice de réconciliation des assets hors ennemis et nouveaux véhicules
 
+> **Snapshot historique V56.** Cette matrice décrit l'état arrêté au 24 août 2026. Pour les couches FAR/MID du hub, les zones coloniales et l'atlas de portes, la vérité de production courante est désormais la [matrice de complétude V58](./V58_ASSET_COMPLETION_MATRIX.md). Le JSON compagnon V56 reste inchangé et normatif uniquement pour ce snapshot; les gates canoniques d'armes et de véhicules non résolues ici ne sont pas annulées par la V58.
+
 Audit initial du 22 août 2026, réconcilié avec les fichiers V56 présents le 24 août 2026. Le fichier compagnon [`V56_REMAINING_ASSET_MATRIX.json`](./V56_REMAINING_ASSET_MATRIX.json) est la source normative pour les identifiants, chemins, références, contrats, statuts de fidélité et interdits. Cette vue Markdown distingue désormais une cible historique, un asset accepté, un alias volontaire et une entrée bloquée sans fichier.
 
 ## Verdict quantifié

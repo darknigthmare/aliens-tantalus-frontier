@@ -514,7 +514,17 @@ export function resolveNpcAnimation(actor = {}) {
 export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { role = 'player', neuroActive = false } = {}) {
   const requestedSheet = resolveSpriteSheet(request?.sheetId);
   const explicitXenomorph = isExplicitXenomorphAnimationEntity(actor, neuroActive);
-  if (requestedSheet?.family === 'enemy' && explicitXenomorph && NEURO_XENOMORPH_SHEETS.has(requestedSheet.id)) return request;
+  const contractedSheetId = typeof actor.neuroVisualContract?.sheetId === 'string'
+    ? actor.neuroVisualContract.sheetId
+    : null;
+  if (requestedSheet?.family === 'enemy' && explicitXenomorph) {
+    if (contractedSheetId && requestedSheet.id === contractedSheetId) return request;
+    if (!contractedSheetId && NEURO_XENOMORPH_SHEETS.has(requestedSheet.id)) return request;
+  }
+  if (role === 'player' && explicitXenomorph && contractedSheetId) {
+    // A known Neuro identity must never silently borrow another enemy or marine sheet.
+    return null;
+  }
 
   if (role === 'npc') {
     const allowedSheetIds = new Set([

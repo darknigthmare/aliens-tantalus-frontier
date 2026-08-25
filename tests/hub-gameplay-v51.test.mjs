@@ -112,7 +112,8 @@ test('each profiled Tantalus deck keeps physical props and exposes a non-flat fa
     assert.equal(snapshot.platformCount, 8, `${deck.id}: two platforms per room`);
     assert.equal(snapshot.ladderCount, 8, `${deck.id}: two ladders per room`);
     assert.equal(snapshot.ventCount, 4, `${deck.id}: one vent per room`);
-    assert.equal(snapshot.obstacleCount, 4, `${deck.id}: authored prop collisions stay active`);
+    const expectedObstacles = deck.id === 'industrial' ? 5 : 4;
+    assert.equal(snapshot.obstacleCount, expectedObstacles, `${deck.id}: authored prop and vehicle collisions stay active`);
     assert.deepEqual(
       {
         source: snapshot.route.source,

@@ -14,6 +14,7 @@ import {
   shouldFlipSprite,
   spriteRuntimeReport
 } from './sprite-animation-runtime.js';
+import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -38,8 +39,57 @@ export function getAnimationEntityKeyV57(role, entity = {}, fallback = 'unknown'
   return `${role}:${String(identity || fallback)}`;
 }
 
+export function buildNeuroPlayerVisualContractV57(neuroProfile = null, enemyCatalog = []) {
+  if (!neuroProfile?.playerClassCompatible || !neuroProfile.enemyId) return null;
+  const sourceEnemy = asList(enemyCatalog).find((enemy) => enemy?.id === neuroProfile.enemyId);
+  if (!sourceEnemy) return null;
+  const visual = resolveEnemyVisualProfile(sourceEnemy);
+  const sheet = resolveSpriteSheet(visual?.sheetId);
+  if (!sheet || sheet.family !== 'enemy') return null;
+  return Object.freeze({
+    schema: 57,
+    profileId: String(neuroProfile.id || ''),
+    enemyId: String(sourceEnemy.id),
+    enemyName: String(sourceEnemy.name || visual.archetype || sourceEnemy.id),
+    biology: String(sourceEnemy.biology || 'xenomorph'),
+    caste: String(sourceEnemy.caste || ''),
+    spriteKey: String(visual.spriteKey || ''),
+    sheetId: sheet.id,
+    clipSet: sheet.clipSet,
+    identityStatus: String(visual.identityStatus || 'missing'),
+    exact: visual.identityStatus === 'exact',
+    sourceFacing: Number(visual.sourceFacing) < 0 ? -1 : 1,
+    source: 'neuro-profile-enemy-catalog'
+  });
+}
+
+export function resolveNeuroPlayerAnimationV57(actor = {}) {
+  const contract = actor.neuroVisualContract;
+  if (!contract?.sheetId || !contract.spriteKey) return null;
+  const attacking = Boolean(
+    actor.attacking
+    || (actor.v52FireClock || 0) > 0
+    || (actor.fireClock || 0) > 0
+    || (actor.actionClock || 0) > 0
+    || (actor.meleeClock || 0) > 0
+    || actor.grounded === false
+  );
+  return resolveEnemyAnimation({
+    alive: actor.alive,
+    v52HurtClock: actor.v52HurtClock,
+    attacking,
+    vx: actor.vx,
+    alert: actor.alert || Math.abs(actor.vx || 0) > 8,
+    spriteKey: contract.spriteKey,
+    visualSheetId: contract.sheetId,
+    biology: contract.biology
+  });
+}
+
 export function resolveIdentitySafePlayerAnimationV57(actor = {}, neuroActive = false) {
-  const request = resolvePlayerAnimation(actor, neuroActive);
+  const request = neuroActive && actor.neuroVisualContract?.sheetId
+    ? resolveNeuroPlayerAnimationV57(actor)
+    : resolvePlayerAnimation(actor, neuroActive);
   return enforceHumanoidAnimationIdentity(actor, request, { role: 'player', neuroActive });
 }
 
@@ -281,6 +331,7 @@ export function withV52MissionRuntime(BaseEngine) {
     start(options = {}) {
       this.pendingSquadResume = null;
       const snapshot = super.start(options);
+      this.configureNeuroPlayerVisualContract(options);
       this.configureSpriteRuntime();
       this.configureV55VehiclePhysicalBounds();
       this.configureMissionSquad();
@@ -295,6 +346,23 @@ export function withV52MissionRuntime(BaseEngine) {
         animationSheets: this.spriteRuntime?.report?.sheets || 0
       });
       return { ...snapshot, ...this.getV52Snapshot() };
+    }
+
+    configureNeuroPlayerVisualContract(options = {}) {
+      const contract = buildNeuroPlayerVisualContractV57(options.neuroProfile, options.enemyCatalog);
+      if (!this.player) return contract;
+      this.player.neuroVisualContract = contract;
+      this.player.neuroActive = Boolean(this.neuro?.active);
+      this.player.neuroEnemyId = contract?.enemyId || null;
+      if (contract) {
+        this.player.spriteKey = contract.spriteKey;
+        this.player.visualSheetId = contract.sheetId;
+        this.player.biology = contract.biology;
+      } else {
+        this.player.spriteKey = null;
+        this.player.visualSheetId = null;
+      }
+      return contract;
     }
 
     configureSpriteRuntime() {
@@ -1343,6 +1411,7 @@ export function withV52MissionRuntime(BaseEngine) {
           samples: this.animationTelemetry.samples,
           events: this.animationTelemetry.events,
           byEvent: { ...this.animationTelemetry.byEvent },
+          neuroPlayerContract: this.player?.neuroVisualContract ? { ...this.player.neuroVisualContract } : null,
           activeClips: { ...this.animationTelemetry.activeClips },
           fallbackFamilies: [...this.animationTelemetry.fallbackFamilies],
           frameEffects: this.animationTelemetry.frameEffects,

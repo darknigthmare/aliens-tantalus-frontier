@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '57.0.0',
-  subtitle: 'Runtime Art Truth & Dedicated Equipment Atlases',
+  version: '58.0.0',
+  subtitle: 'Room Coherence, Reciprocal Doors & Zoned Runtime Art',
   sourceVersion: '51.0.0'
 });

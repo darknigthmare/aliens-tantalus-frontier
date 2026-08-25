@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v55.0.0**. Cette release conserve toute la boucle v1→v54, ajoute 20 atlas dédiés issus d’OpenAI ImageGen — 8 ennemis, 4 véhicules et 8 PNJ mission —, transforme le hangar dropship en niveau modulaire à couches indépendantes et corrige orientation, identité d’animation, gabarits, hitboxes et danger électrique.
+Version web jouable **v58.0.0**. Cette release conserve toute la boucle v1→v57 et consolide le jeu en véritable réseau metroidvania : 16 salles de hub composées par couches indépendantes, portes et ascenseurs réciproques, destinations et verrous de mission explicites, décors coloniaux zonés, atlas de portes à empreinte stable et cadrage mobile jouable.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -19,15 +19,17 @@ Ouvrir `http://127.0.0.1:4173`.
 - Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, dropship, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique.
+- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, UD-4L, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique; son premier plan ne masque plus le dropship. La baie véhicules expose un M577 bitmap autonome, collisionnable et interactif, lié à `vehicle-001-m577-armored-personnel-carrier`.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le runtime audité en v55 monte à 51 atlas / 816 cellules, avec 20 atlas dédiés supplémentaires, 18 profils ennemis exacts, 396 réemplois de famille et 154 profils ennemis encore sans art dédié. Côté véhicules, 5 profils de base ont un bitmap exact, 28 fits réemploient honnêtement la plaque de leur châssis et 246 profils restent sans art de châssis, soit 274 profils sans bitmap exact. Cela signifie que chaque entrée influence le runtime par ses données ; cela ne signifie pas que des centaines de niveaux ont tous été fabriqués individuellement à la main.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit d’atlas V58 recense **178 plaques et 2 500 cellules**. La vague V58 ajoute 51 livrables bitmap branchés au runtime : 16 FAR et 16 MID propres aux salles du hub, 18 couches coloniales et un atlas de portes à huit cellules. La complétude exacte des personnages, ennemis, véhicules et props reste suivie dans la matrice d’assets ; une entrée de catalogue pilotée par les données n’est pas présentée comme une plaque dédiée lorsqu’elle réemploie encore une famille visuelle.
 
 ## Contrôles
+Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
+
 
 Mission joueur 1 :
 
@@ -42,7 +44,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v55 |
+| Catalogue | Total v58 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -65,14 +67,18 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate v55 locale du 22 août 2026 : lint de **97 modules**, **167/167 tests Node** et build statique **55.0.0** de **3 443 entrées**.
+Gate V58 locale du 25 août 2026 : lint de **126 modules**, **236/236 tests Node** et build statique **58.0.0** de **3 443 entrées**.
 
-`npm.cmd run qa:browser:v55` valide la release v55 sur **13/13 checkpoints** réels dans un contexte Chrome isolé : boot v55, stratégie, dotation, topologie/couches/animations, alliés IA et dégâts, commandes/captions, reprise native après rechargement, retraite persistée, crise physique du hub, interaction PNJ, hangar dropship modulaire et danger électrique, Forge mission/vaisseau, portrait mobile et fermeture PWA hors ligne. Le service worker `atf-v55-runtime-1` couvre toute la fermeture des imports ESM publics et ne renvoie le fallback HTML qu’aux navigations. Le passage du 22 août 2026 ne relève aucune exception, erreur console ni requête échouée.
+Le parcours local `npm.cmd run qa:browser:v58` valide **16 checkpoints et 21 captures**, dont les **16/16 salles** du hub, la mission coloniale, le hangar, la baie M577, l’identité Facehugger puis le retour marine, le portrait mobile et la PWA hors ligne. Il ne relève aucune exception, erreur console ni requête échouée. La production doit encore répéter ce même parcours après publication avant d’être déclarée vérifiée de bout en bout.
 
 ## Dossier de production
 
 - [Audit level design V57 : constats, corrections et dette artistique](docs/V57_LEVEL_DESIGN_AUDIT.md)
+- [Audit V58 : cohérence des salles, portes, tailles et parallaxes](docs/V58_ROOM_COHERENCE_AUDIT.md)
 - [Source consolidée des promesses v1→v51](docs/GAMEPLAY_PROMISE_SOURCE_V51.md)
+- [Matrice de complétude artistique V58](docs/references/V58_ASSET_COMPLETION_MATRIX.md)
+- [Provenance artistique V58](docs/ART_PROVENANCE_V58.md)
+- [Historique de release V58](docs/VERSION_HISTORY_V58.md)
 - [Matrice d'audit des promesses et preuves exécutables v55](docs/GAMEPLAY_PROMISE_AUDIT_V55.md)
 - [Inventaire exhaustif runtime v55 : personnages, ennemis, véhicules, props et couches](docs/ASSET_RUNTIME_INVENTORY_V55.md)
 - [Inventaire machine v55](docs/ASSET_RUNTIME_INVENTORY_V55.json)

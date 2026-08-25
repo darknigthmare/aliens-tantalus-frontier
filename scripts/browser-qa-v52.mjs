@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v52');
+  || path.resolve('.qa', 'browser-v58');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -169,7 +169,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v57') && shell.release === '57.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v58') && shell.release === '58.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -278,7 +278,9 @@ try {
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.player.costumeId === ${JSON.stringify(costumeId)}`, 'Costume non appliqué');
 
   await click('[data-view="operations"]');
-  const neuro = await selectFirstRealOption('#neuro-profile-select');
+  const neuroValue = await selectValue('#neuro-profile-select', 'neuro-002');
+  const neuro = { value: neuroValue, text: await evaluate(`document.querySelector('#neuro-profile-select').selectedOptions[0]?.textContent.trim()`) };
+  requireThat(neuro.value === 'neuro-002', `Profil Facehugger neuro-002 indisponible: ${JSON.stringify(neuro)}`);
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedNeuroProfileId === ${JSON.stringify(neuro.value)}`, 'Profil Neuro-Xeno non sélectionné');
   const apex = await selectFirstRealOption('#apex-dossier-select');
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedApexDossierId === ${JSON.stringify(apex.value)}`, 'Dossier Apex non sélectionné');
@@ -291,6 +293,7 @@ try {
   await click('#operation-launch');
   await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission non lancée', 20000);
   await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission manquants', 30000);
+  await waitFor(`Object.keys(globalThis.__ATF_GAME__.getSnapshot().animationRuntime?.activeClips || {}).some((key) => key.startsWith('player:'))`, 'Clip joueur Neuro non échantillonné');
   const missionStart = await evaluate(`globalThis.__ATF_GAME__.getSnapshot()`);
   requireThat(missionStart.routeRuntime && missionStart.encounterRuntime && missionStart.ballistics && missionStart.accessibility, `Runtime production absent: ${JSON.stringify(missionStart)}`);
   requireThat(missionStart.accessibility.reducedMotion && missionStart.accessibility.subtitles && missionStart.accessibility.aimAssist === 'high' && missionStart.accessibility.screenShake === 0, `Accessibilité UI non consommée par la mission: ${JSON.stringify(missionStart.accessibility)}`);
@@ -303,8 +306,27 @@ try {
   requireThat(missionStart.neuroCounterplay?.active && missionStart.neuroCounterplay.pulses > 0, `Contre-jeu Neuro absent: ${JSON.stringify(missionStart.neuroCounterplay)}`);
   requireThat(missionStart.missionLevelRuntime?.schemaVersion === 52 && missionStart.missionLevelRuntime.routes.length >= 2 && missionStart.missionLevelRuntime.zones.length >= 4, `Niveau multi-routes v52 absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.missionLevelRuntime.artLayers?.far && missionStart.missionLevelRuntime.artLayers?.mid && missionStart.missionLevelRuntime.artLayers?.foreground, `Couches v52 non branchées: ${JSON.stringify(missionStart.missionLevelRuntime?.artLayers)}`);
+  const activeColonyLayers = Object.values(missionStart.missionLevelRuntime.activeArtLayers || {});
+  requireThat(
+    missionStart.missionLevelRuntime.templateId === 'colony-multiroute'
+      && activeColonyLayers.length === 3
+      && activeColonyLayers.every((asset) => asset.includes('/zones/colony-multiroute/')),
+    `Mission coloniale V58 ou triplet zoné absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
   requireThat(missionStart.animationRuntime?.sheets === 178 && missionStart.animationRuntime.runtimeReady === 178 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v56 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  const neuroPlayerClip = Object.entries(missionStart.animationRuntime.activeClips).find(([key]) => key.startsWith('player:'));
+  const neuroPlayerContract = missionStart.animationRuntime.neuroPlayerContract;
+  requireThat(
+    neuroPlayerContract?.profileId === 'neuro-002'
+      && neuroPlayerContract.enemyId === 'enemy-002-facehugger'
+      && neuroPlayerContract.spriteKey === 'facehugger'
+      && neuroPlayerContract.sheetId === 'enemy.facehugger.locomotion'
+      && neuroPlayerContract.exact === true
+      && neuroPlayerClip?.[1]?.startsWith(`${neuroPlayerContract.sheetId}:`)
+      && !neuroPlayerClip[1].includes('xenomorph-drone'),
+    `Identité joueur Neuro Facehugger divergente: ${JSON.stringify({ neuroPlayerContract, neuroPlayerClip })}`
+  );
+  report.neuroVisualIdentity = { contract: neuroPlayerContract, activeClip: neuroPlayerClip };
   const squadCombat = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const ally = game.activeSquadActors().find((member) => member.alive && !member.inVehicle);
@@ -427,7 +449,7 @@ try {
   await click(`[data-use-equipment="${equipmentId}"]`);
   const equipmentAfter = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().equipmentRuntime.find((entry) => entry.id === ${JSON.stringify(equipmentId)})`);
   requireThat(equipmentAfter.remaining === equipmentBefore.remaining - 1 && equipmentAfter.uses === equipmentBefore.uses + 1, `Utilisation équipement sans effet: ${JSON.stringify({ equipmentBefore, equipmentAfter })}`);
-  report.screenshots.push(await capture('alien-tantalus-v52-mission-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v58-colony-mission-desktop.png'));
   report.mission = { campaignId, start: missionStart, afterNeuroCounter, afterMove, afterFire, captionAfterFire, fireBurst, equipmentBefore, equipmentAfter };
   report.checkpoints.push('production-mission-input');
 
@@ -476,11 +498,26 @@ try {
   report.checkpoints.push('retreat-persistence');
 
   await click('[data-view="operations"]');
+  await selectValue('#neuro-profile-select', '');
+  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedNeuroProfileId === null`, 'Retour Marine standard non persisté');
   await click('[data-plan-campaign="signature-01"]:not([disabled])');
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.plannedCampaignId === 'signature-01'`, 'Campagne holdout v55 non planifiée');
   await click('#operation-launch');
   await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission holdout v55 non lancée', 20000);
   await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission holdout v55 manquants', 30000);
+  await waitFor(`Object.entries(globalThis.__ATF_GAME__.getSnapshot().animationRuntime?.activeClips || {}).some(([key, clip]) => key.startsWith('player:') && clip.startsWith('player.'))`, 'Clip Marine standard non échantillonné');
+  const standardPlayerAnimation = await evaluate(`(() => {
+    const animation = globalThis.__ATF_GAME__.getSnapshot().animationRuntime;
+    return {
+      contract: animation.neuroPlayerContract,
+      activeClip: Object.entries(animation.activeClips).find(([key]) => key.startsWith('player:'))
+    };
+  })()`);
+  requireThat(
+    standardPlayerAnimation.contract === null && standardPlayerAnimation.activeClip?.[1]?.startsWith('player.echo9-marine.'),
+    `Marine standard contaminé par une famille ennemie: ${JSON.stringify(standardPlayerAnimation)}`
+  );
+  report.standardPlayerAnimation = standardPlayerAnimation;
   const extractionHoldout = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const playerOrigin = { x: game.player.x, y: game.player.y, vx: game.player.vx, vy: game.player.vy };
@@ -575,7 +612,7 @@ try {
     Object.assign(hub.player, { x: enemy.x - 155, y: enemy.y + enemy.h - hub.player.h, vx: 0, vy: 0, grounded: true, facing: 1 });
     return hub.getSnapshot();
   })()`);
-  report.screenshots.push(await capture('alien-tantalus-v52-hub-crisis-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v58-hub-crisis-desktop.png'));
   for (let shot = 0; shot < 4; shot += 1) {
     await key('KeyF', 'f');
     if (await evaluate(`globalThis.__ATF_HUB__.getSnapshot().threats === 0`)) break;
@@ -598,6 +635,16 @@ try {
   requireThat(hubNpc.roster === 16 && hubNpc.after === hubNpc.before + 1, `PNJ hub v52 sans interaction persistée: ${JSON.stringify(hubNpc)}`);
   report.hubNpc = hubNpc;
   report.checkpoints.push('hub-npc-interaction');
+
+  await evaluate(`(() => {
+    const api = globalThis.__ATF_V51__;
+    const hub = globalThis.__ATF_HUB__;
+    if (hub.running) return hub.getSnapshot();
+    api.showView('hub');
+    hub.start({ deck: 0, roomId: 'bridge', positionX: 180, playerHealth: 100, activeCrisis: null });
+    return hub.getSnapshot();
+  })()`);
+  await waitFor(`globalThis.__ATF_HUB__.getSnapshot().running`, 'Hub non relancé après l interaction PNJ');
 
   const hubTraversal = await evaluate(`(() => {
     const hub = globalThis.__ATF_HUB__;
@@ -628,12 +675,87 @@ try {
       && hubTraversal.snapshot.route.verticalLinks === 8
       && hubTraversal.snapshot.route.crawlLinks === 4
       && hubTraversal.assets.traversalArtReady === 4
+      && hubTraversal.snapshot.roomLayerAssetsReady === 62
       && hubTraversal.endY < hubTraversal.startY - 40,
     `Traversal verticale bitmap du hub invalide: ${JSON.stringify(hubTraversal)}`
   );
-  report.screenshots.push(await capture('alien-tantalus-v57-hub-traversal-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v58-hub-traversal-desktop.png'));
+
+  const hubCoherence = await evaluate(`(() => {
+    const hub = globalThis.__ATF_HUB__;
+    const before = hub.getSnapshot();
+    const lift = hub.doorStates.find((entry) => entry.lift && entry.destinations.some((destination) => destination.deckIndex === 1));
+    if (!lift) return { before, error: 'lift-missing' };
+    const target = lift.destinations.find((destination) => destination.deckIndex === 1);
+    Object.assign(hub.player, { x: lift.x - hub.player.w / 2, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
+    const shaftId = lift.shaftId;
+    hub.useLift(1);
+    const after = hub.getSnapshot();
+    return {
+      before,
+      after,
+      shaftId,
+      target,
+      doorIds: hub.doorStates.map((entry) => entry.id),
+      bulkheads: hub.doorStates.filter((entry) => !entry.lift).length,
+      lifts: hub.doorStates.filter((entry) => entry.lift).length
+    };
+  })()`);
+  requireThat(
+    !hubCoherence.error
+      && hubCoherence.before.running
+      && hubCoherence.before.doorNetworkCount === 5
+      && hubCoherence.after.doorNetworkCount === 5
+      && hubCoherence.bulkheads === 3
+      && hubCoherence.lifts === 2
+      && hubCoherence.after.deck === 1
+      && hubCoherence.after.roomId === hubCoherence.target.roomId
+      && Math.abs(hubCoherence.after.x - hubCoherence.target.destinationX) <= 2
+      && hubCoherence.after.activeLiftShaftId === hubCoherence.shaftId
+      && new Set(hubCoherence.doorIds).size === 5,
+    `Réseau salles/portes/ascenseurs V58 incohérent: ${JSON.stringify(hubCoherence)}`
+  );
+  report.hubCoherence = hubCoherence;
   report.hubTraversal = hubTraversal;
-  report.checkpoints.push('hub-v57-vertical-traversal');
+  report.checkpoints.push('hub-v58-room-coherence');
+
+  const hubRoomAudit = [];
+  const hubRoomIds = [
+    ['bridge', 'briefing', 'combat-information', 'cryo-bay'],
+    ['crew-quarters', 'mess', 'medical', 'science-lab'],
+    ['quarantine', 'armory', 'workshop', 'vehicle-bay'],
+    ['dropship-hangar', 'reactor', 'life-support', 'sensor-array']
+  ];
+  for (const [deckIndex, roomIds] of hubRoomIds.entries()) {
+    for (const [roomIndex, roomId] of roomIds.entries()) {
+      await evaluate(`(() => {
+        const api = globalThis.__ATF_V51__;
+        const hub = globalThis.__ATF_HUB__;
+        api.showView('hub');
+        hub.stop(false);
+        hub.start({
+          deck: ${deckIndex},
+          roomId: '${roomId}',
+          positionX: ${roomIndex * 1280 + 640},
+          playerHealth: 100,
+          activeCrisis: null
+        });
+        return hub.getSnapshot();
+      })()`);
+      const snapshot = await waitFor(
+        `(() => { const state = globalThis.__ATF_HUB__.getSnapshot(); return state.running && state.deck === ${deckIndex} && state.roomId === '${roomId}' && state.roomLayerAssetsReady === 62 && state.doorNetworkCount === 5 ? state : null; })()`,
+        `Salle V58 ${roomId} non prête`,
+        20000
+      );
+      await wait(120);
+      const screenshot = await capture(`alien-tantalus-v58-room-${deckIndex + 1}-${roomId}.png`);
+      report.screenshots.push(screenshot);
+      hubRoomAudit.push({ deck: deckIndex, roomId, composition: snapshot.roomComposition, screenshot });
+    }
+  }
+  requireThat(hubRoomAudit.length === 16, `Audit visuel incomplet des salles: ${JSON.stringify(hubRoomAudit)}`);
+  report.hubRoomAudit = hubRoomAudit;
+  report.checkpoints.push('hub-v58-16-room-visual-audit');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -664,7 +786,7 @@ try {
       && modularHangar.assets.npcMissionSpriteAssetsReady === 16,
     `Hangar v55 non physique/modulaire: ${JSON.stringify(modularHangar)}`
   );
-  report.screenshots.push(await capture('alien-tantalus-v55-hangar-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v58-hangar-desktop.png'));
   report.modularHangar = modularHangar;
   report.checkpoints.push('hub-modular-v55');
 
@@ -725,10 +847,17 @@ try {
     const save = globalThis.__ATF_V51__.saveSystem.data;
     const hub = globalThis.__ATF_HUB__.getSnapshot();
     const controls = document.querySelector('.hub-touch-controls');
+    const canvas = document.querySelector('#hub-canvas');
+    const canvasRect = canvas.getBoundingClientRect();
+    const controlsRect = controls.getBoundingClientRect();
     return {
       width: innerWidth,
       activePanel: document.querySelector('.view.active')?.dataset.panel,
-      canvasWidth: Math.round(document.querySelector('#hub-canvas').getBoundingClientRect().width),
+      canvasWidth: Math.round(canvasRect.width),
+      canvasTop: Math.round(canvasRect.top),
+      canvasBottom: Math.round(canvasRect.bottom),
+      controlsTop: Math.round(controlsRect.top),
+      viewportHeight: innerHeight,
       controlsDisplay: getComputedStyle(controls).display,
       controlCount: controls.querySelectorAll('button').length,
       hubRunning: hub.running,
@@ -745,12 +874,12 @@ try {
       }
     };
   })()`);
-  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16, `Runtime mobile v52 incomplet: ${JSON.stringify(mobile)}`);
+  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16, `Runtime mobile V58 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
   requireThat(JSON.stringify(mobile.persisted) === JSON.stringify(persistenceBeforeReload), `Persistance divergente après reload: ${JSON.stringify({ persistenceBeforeReload, mobile: mobile.persisted })}`);
-  report.screenshots.push(await capture('alien-tantalus-v52-hub-mobile.png'));
+  report.screenshots.push(await capture('alien-tantalus-v58-hub-mobile.png'));
   report.mobile = mobile;
   report.persistence = persistenceBeforeReload;
-  report.checkpoints.push('reload-mobile-persistence');
+  report.checkpoints.push('reload-mobile-v58-layout-persistence');
 
   await command('Network.setBypassServiceWorker', { bypass: false });
   await command('Network.setCacheDisabled', { cacheDisabled: false });
@@ -762,7 +891,7 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '57.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v57 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '58.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v58 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));

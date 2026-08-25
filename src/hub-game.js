@@ -8,6 +8,16 @@ import {
   HUB_ROOM_ART_ASSETS_V56,
   resolveHubRoomArtV56
 } from './hub-art-runtime-v56.js';
+import {
+  HUB_ROOM_FAR_ASSETS_V58,
+  HUB_ROOM_MID_ASSETS_V58,
+  HUB_VEHICLE_ART_ASSETS_V58,
+  resolveHubRoomFarArtV58,
+  resolveHubRoomLightingV58,
+  resolveHubRoomMidArtV58,
+  resolveHubVehicleArtV58
+} from './hub-art-runtime-v58.js';
+import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -205,6 +215,9 @@ export const HUB_MODULAR_ASSETS = Object.freeze([...new Set([
     room.id === DROPSHIP_HANGAR_ART_V55.roomId ? [] : [room.prop]
   ))]),
   ...HUB_ROOM_ART_ASSETS_V56,
+  ...HUB_ROOM_MID_ASSETS_V58,
+  ...HUB_ROOM_FAR_ASSETS_V58,
+  ...HUB_VEHICLE_ART_ASSETS_V58,
   ...HUB_MODULAR_PROP_FILES,
   ...HUB_ART_ASSETS_V55
 ])]);
@@ -225,10 +238,11 @@ export class HubGame {
     this.onPersist = onPersist;
     this.onStatus = onStatus;
     this.roomImages = new Map(HUB_DECKS.flatMap((deck) => deck.rooms).filter((room) => room.id !== DROPSHIP_HANGAR_ART_V55.roomId && !resolveHubRoomArtV56(room.id)).map((room) => [room.background, createImage(room.background)]));
-    this.roomLayerImages = new Map(HUB_ROOM_ART_ASSETS_V56.map((source) => [source, createImage(source)]));
+    this.roomLayerImages = new Map([...HUB_ROOM_ART_ASSETS_V56, ...HUB_ROOM_FAR_ASSETS_V58, ...HUB_ROOM_MID_ASSETS_V58].map((source) => [source, createImage(source)]));
     this.farLayers = new Map(HUB_DECKS.map((deck) => [deck.farBackground, createImage(deck.farBackground)]));
     this.propImages = new Map(HUB_MODULAR_PROP_FILES.map((source) => [source, createImage(source)]));
     this.hubArtImages = new Map(HUB_ART_ASSETS_V55.map((source) => [source, createImage(source)]));
+    this.vehicleArtImages = new Map(HUB_VEHICLE_ART_ASSETS_V58.map((source) => [source, createImage(source)]));
     this.playerSheet = createImage(PLAYER_SPRITE_FILE);
     this.npcSheets = NPC_SPRITE_FILES.map(createImage);
     this.crewSheet = this.npcSheets[0];
@@ -241,12 +255,7 @@ export class HubGame {
     this.jumpQueued = 0;
     this.coyoteTime = 0;
     this.roomChangePulse = 0;
-    this.doorStates = [
-      { x: ROOM_WIDTH, lift: false, progress: 0 },
-      { x: ROOM_WIDTH * 2, lift: true, progress: 0 },
-      { x: ROOM_WIDTH * 3, lift: false, progress: 0 },
-      { x: WORLD_WIDTH - 118, lift: true, progress: 0 }
-    ];
+    this.doorStates = [];
     this.bind();
   }
 
@@ -277,6 +286,7 @@ export class HubGame {
       positionX: clamp(Number(hubState.positionX) || defaultX, 40, WORLD_WIDTH - 90),
       visited: Array.isArray(hubState.visited) ? [...new Set(hubState.visited)] : []
     };
+    this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map((door) => ({ ...door }));
     this.player = { x: this.state.positionX, y: FLOOR_Y - 92, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: 1, health: 100, maxHealth: 100, shockClock: 0, shockHits: 0 };
     this.hangarHazardCooldown = 0;
     this.camera = { x: clamp(this.player.x - LOGICAL_WIDTH / 2, 0, WORLD_WIDTH - LOGICAL_WIDTH) };
@@ -432,11 +442,21 @@ export class HubGame {
         roomId: hangar.id, role: 'dropship-hull', collisionOnly: true
       });
     }
+    const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
+    if (vehicleBay) {
+      const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
+      const bounds = actor.collisionBounds;
+      geometry.push({
+        x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+        roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
+      });
+    }
     return geometry;
   }
 
   resolveHorizontal(previousX) {
     for (const door of this.doorStates) {
+      if (door.blocking === false || door.lift) continue;
       const collider = getHubDoorBounds(door);
       if (door.progress >= 0.82 || !overlap(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 8) {
@@ -490,12 +510,30 @@ export class HubGame {
   }
 
   nearestLift() {
+    const room = this.currentRoom();
     const playerCenter = this.player.x + this.player.w / 2;
-    return this.doorStates.filter((door) => door.lift).map((door) => door.x).find((x) => Math.abs(playerCenter - x) < 128);
+    return this.doorStates.find((door) => door.lift && door.roomId === room.id && Math.abs(playerCenter - door.x) < 128);
   }
 
   nearestInteraction() {
     const room = this.currentRoom();
+    const vehicleContract = resolveHubVehicleArtV58(room.id);
+    if (vehicleContract) {
+      const actor = vehicleContract.vehicle;
+      const bounds = actor.interactionBounds;
+      const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+      if (overlap(this.player, worldBounds)) {
+        return {
+          id: actor.id,
+          roomId: room.id,
+          kind: actor.kind,
+          vehicleId: actor.vehicleId,
+          action: actor.action,
+          description: actor.description,
+          interactionBounds: worldBounds
+        };
+      }
+    }
     const bounds = room.propInteractionBounds;
     const playerCenter = this.player.x + this.player.w / 2;
     return bounds && playerCenter >= bounds.x && playerCenter <= bounds.x + bounds.w ? room : null;
@@ -510,17 +548,22 @@ export class HubGame {
       this.persist();
       return;
     }
-    if (this.nearestLift() !== undefined) this.useLift(1, true);
+    if (this.nearestLift()) this.useLift(1, true);
   }
 
   useLift(direction, wrap = false) {
-    if (!this.running || this.nearestLift() === undefined) return;
+    const lift = this.nearestLift();
+    if (!this.running || !lift) return;
     let next = this.state.deck + direction;
     if (wrap) next = (this.state.deck + 1) % HUB_DECKS.length;
     if (next < 0 || next >= HUB_DECKS.length || next === this.state.deck) return;
-    const roomIndex = this.currentRoom().index;
+    const destination = lift.destinations.find((entry) => entry.deckIndex === next);
+    if (!destination?.roomId) return;
     this.state.deck = next;
-    this.state.roomId = HUB_DECKS[next].rooms[roomIndex]?.id || HUB_DECKS[next].rooms[0].id;
+    this.state.roomId = destination.roomId;
+    this.player.x = clamp(destination.destinationX, 40, WORLD_WIDTH - this.player.w - 40);
+    this.state.positionX = Math.round(this.player.x);
+    this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, next).map((door) => ({ ...door }));
     if (!this.state.visited.includes(this.state.roomId)) this.state.visited.push(this.state.roomId);
     this.npcs = this.createNpcs(next);
     this.obstacles = this.createObstacles(next);
@@ -548,8 +591,8 @@ export class HubGame {
       ? `SURCHARGE ÉLECTRIQUE · INTÉGRITÉ ${Math.ceil(this.player.health)}%`
       : interaction
       ? `E — ${interaction.description}`
-      : lift !== undefined
-        ? 'W / S — choisir un pont · E — pont suivant'
+      : lift
+        ? `${lift.shaftLabel} · W / S — choisir un pont · E — pont suivant`
         : 'A / D — marcher · MAJ — courir · ESPACE — franchir · E — utiliser';
     const payload = {
       deck: this.state.deck,
@@ -573,6 +616,7 @@ export class HubGame {
     const parallaxAssetsReady = [...this.farLayers.values()].filter(assetReady).length;
     const propAssetsReady = [...this.propImages.values()].filter(assetReady).length;
     const hubArtAssetsReady = [...this.hubArtImages.values()].filter(assetReady).length;
+    const vehicleArtAssetsReady = [...this.vehicleArtImages.values()].filter(assetReady).length;
     const runtimeArtReady = [this.playerSheet, ...this.npcSheets].filter(assetReady).length;
     return {
       roomAssetsReady,
@@ -585,11 +629,13 @@ export class HubGame {
       propAssetCount: this.propImages.size,
       hubArtAssetsReady,
       hubArtAssetCount: this.hubArtImages.size,
-      readyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady,
+      vehicleArtAssetsReady,
+      vehicleArtAssetCount: this.vehicleArtImages.size,
+      readyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady + vehicleArtAssetsReady,
       modularAssetCount: HUB_MODULAR_ASSETS.length,
       runtimeArtReady,
       runtimeArtCount: this.npcSheets.length + 1,
-      totalReadyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady + runtimeArtReady
+      totalReadyAssetCount: roomAssetsReady + roomLayerAssetsReady + parallaxAssetsReady + propAssetsReady + hubArtAssetsReady + vehicleArtAssetsReady + runtimeArtReady
     };
   }
 
@@ -597,7 +643,7 @@ export class HubGame {
     const room = this.player ? this.currentRoom() : HUB_DECKS[0].rooms[0];
     const assetReport = this.getAssetReport();
     const playerCenter = (this.player?.x || 0) + (this.player?.w || 0) / 2;
-    const activeDoor = this.doorStates.reduce((nearest, door) => Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, this.doorStates[0]);
+    const activeDoor = this.doorStates.reduce((nearest, door) => !nearest || Math.abs(playerCenter - door.x) < Math.abs(playerCenter - nearest.x) ? door : nearest, null);
     return {
       running: this.running,
       deck: this.state?.deck ?? 0,
@@ -615,12 +661,17 @@ export class HubGame {
       roomFloorRatio: room.profile?.floorRatio || 0.82,
       roomCollisionSource: room.collisionSource || 'fallback',
       activeDoorState: Number((activeDoor?.progress || 0).toFixed(2)),
+      activeDoorId: activeDoor?.id || null,
+      activeLiftShaftId: this.nearestLift()?.shaftId || null,
+      doorNetworkCount: this.doorStates.length,
       roomAssetsReady: assetReport.roomAssetsReady,
       roomLayerAssetsReady: assetReport.roomLayerAssetsReady,
       parallaxAssetsReady: assetReport.parallaxAssetsReady,
       propAssetsReady: assetReport.propAssetsReady,
       hubArtAssetsReady: assetReport.hubArtAssetsReady,
       hubArtAssetCount: assetReport.hubArtAssetCount,
+      vehicleArtAssetsReady: assetReport.vehicleArtAssetsReady,
+      vehicleArtAssetCount: assetReport.vehicleArtAssetCount,
       hubIntegrity: Math.ceil(this.player?.health || 0),
       shockHits: this.player?.shockHits || 0,
       modularAssetCount: assetReport.modularAssetCount,
@@ -710,11 +761,15 @@ export class HubGame {
     const modularRoom = resolveHubRoomArtV56(room.id);
     ctx.fillStyle = room.index % 2 ? '#0a1111' : '#080e0f';
     ctx.fillRect(room.xStart, 0, roomWidth, FLOOR_Y);
+    this.drawHubRoomFarV58(ctx, room);
     if (modularRoom) {
       this.drawViewportParallax(ctx, room.viewport, farImage);
       this.drawModularRoomV56(ctx, room, 'back');
+      this.drawHubRoomMidV58(ctx, room);
     } else {
-      if (modularHangar) this.drawModularHangar(ctx, room, 'back');
+      if (modularHangar) {
+        this.drawModularHangar(ctx, room, 'back');
+      }
       else if (assetReady(image)) {
         const width = roomWidth * (room.profile?.sceneScale || 1);
         const height = image.naturalHeight * (width / image.naturalWidth);
@@ -736,6 +791,56 @@ export class HubGame {
     edgeShade.addColorStop(1, 'rgba(0, 3, 4, .42)');
     ctx.fillStyle = edgeShade;
     ctx.fillRect(room.xStart, 160, roomWidth, FLOOR_Y - 160);
+    this.drawRoomLightingV58(ctx, room);
+    this.drawVehicleBayActorV58(ctx, room);
+  }
+
+  drawRoomLightingV58(ctx, room) {
+    const lighting = resolveHubRoomLightingV58(room.id);
+    if (!lighting) return;
+    const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(room.xStart, 0, roomWidth, FLOOR_Y);
+    ctx.clip();
+    ctx.fillStyle = lighting.tint;
+    ctx.fillRect(room.xStart, 150, roomWidth, FLOOR_Y - 150);
+    const vignette = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
+    vignette.addColorStop(0, lighting.vignette);
+    vignette.addColorStop(0.18, 'rgba(0, 0, 0, 0)');
+    vignette.addColorStop(0.82, 'rgba(0, 0, 0, 0)');
+    vignette.addColorStop(1, lighting.vignette);
+    ctx.fillStyle = vignette;
+    ctx.fillRect(room.xStart, 150, roomWidth, FLOOR_Y - 150);
+    ctx.restore();
+  }
+
+  drawVehicleBayActorV58(ctx, room) {
+    const contract = resolveHubVehicleArtV58(room.id);
+    if (!contract) return;
+    const actor = contract.vehicle;
+    const image = this.vehicleArtImages.get(actor.asset);
+    if (!assetReady(image)) return;
+    const source = actor.sourceOpaqueBounds;
+    const cellX = actor.sourceCell.column * actor.sheet.cellWidth;
+    const cellY = actor.sourceCell.row * actor.sheet.cellHeight;
+    const target = actor.renderBounds;
+    const targetX = room.xStart + target.x;
+    const active = this.nearestInteraction()?.id === actor.id;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(room.xStart, 0, room.profile?.worldWidth || ROOM_WIDTH, LOGICAL_HEIGHT);
+    ctx.clip();
+    if (active) {
+      ctx.shadowColor = 'rgba(126, 211, 153, .55)';
+      ctx.shadowBlur = this.reducedMotion ? 8 : 9 + Math.sin(this.animationTime * 4) * 3;
+    }
+    ctx.drawImage(
+      image,
+      cellX + source.x, cellY + source.y, source.w, source.h,
+      targetX, target.y, target.w, target.h
+    );
+    ctx.restore();
   }
 
   drawModularHangar(ctx, room, phase) {
@@ -743,8 +848,13 @@ export class HubGame {
     ctx.beginPath();
     ctx.rect(room.xStart, 0, room.profile?.worldWidth || ROOM_WIDTH, LOGICAL_HEIGHT);
     ctx.clip();
+    let midDrawn = false;
     for (const entry of DROPSHIP_HANGAR_ART_V55.renderStack) {
       if (entry.phase !== phase || !entry.asset) continue;
+      if (phase === 'back' && !midDrawn && entry.kind === 'vehicle-sprite') {
+        this.drawHubRoomMidV58(ctx, room);
+        midDrawn = true;
+      }
       const image = this.hubArtImages.get(entry.asset);
       if (!assetReady(image)) continue;
       const target = entry.renderBounds;
@@ -769,6 +879,7 @@ export class HubGame {
       }
       ctx.restore();
     }
+    if (phase === 'back' && !midDrawn) this.drawHubRoomMidV58(ctx, room);
     ctx.restore();
   }
 
@@ -780,6 +891,42 @@ export class HubGame {
     if (!entry || !assetReady(image)) return;
     const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
     const target = getHubRoomLayerBounds(room, entry.renderBounds);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
+    ctx.clip();
+    ctx.drawImage(
+      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      target.x, target.y, target.w, target.h
+    );
+    ctx.restore();
+  }
+
+  drawHubRoomFarV58(ctx, room) {
+    const layer = resolveHubRoomFarArtV58(room.id);
+    if (!layer) return;
+    const image = this.roomLayerImages.get(layer.asset);
+    if (!assetReady(image)) return;
+    const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
+    const target = getHubRoomLayerBounds(room, layer.renderBounds);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
+    ctx.clip();
+    ctx.drawImage(
+      image, 0, 0, image.naturalWidth, image.naturalHeight,
+      target.x, target.y, target.w, target.h
+    );
+    ctx.restore();
+  }
+
+  drawHubRoomMidV58(ctx, room) {
+    const layer = resolveHubRoomMidArtV58(room.id);
+    if (!layer) return;
+    const image = this.roomLayerImages.get(layer.asset);
+    if (!assetReady(image)) return;
+    const roomWidth = room.profile?.worldWidth || ROOM_WIDTH;
+    const target = getHubRoomLayerBounds(room, layer.renderBounds);
     ctx.save();
     ctx.beginPath();
     ctx.rect(room.xStart, 0, roomWidth, LOGICAL_HEIGHT);
@@ -879,6 +1026,12 @@ export class HubGame {
     const image = this.propImages.get(source);
     if (!assetReady(image)) return;
     const { x, y, w: width, h: height } = getHubDoorBounds(door);
+    if (door.lift) {
+      ctx.fillStyle = 'rgba(2, 7, 8, .98)';
+      ctx.fillRect(x - 16, y - 28, width + 32, height + 36);
+      ctx.strokeStyle = '#4b6658';
+      ctx.strokeRect(x - 15.5, y - 27.5, width + 31, height + 35);
+    }
     const halfSource = image.naturalWidth / 2;
     const halfTarget = width / 2;
     const slide = door.progress * halfTarget * 0.78;
@@ -889,6 +1042,20 @@ export class HubGame {
     ctx.restore();
     ctx.fillStyle = door.progress > 0.5 ? '#89d99f' : '#d15a4d';
     ctx.fillRect(door.x - 3, y + 14, 6, 9);
+    const playerCenter = this.player.x + this.player.w / 2;
+    if (Math.abs(playerCenter - door.x) < 520) {
+      const label = door.lift ? door.shaftLabel : door.destinationLabel;
+      ctx.font = '700 10px ui-monospace, monospace';
+      const labelWidth = Math.min(310, ctx.measureText(label).width + 18);
+      ctx.fillStyle = 'rgba(2, 8, 7, .88)';
+      ctx.fillRect(door.x - labelWidth / 2, y - 24, labelWidth, 18);
+      ctx.strokeStyle = door.lift ? '#76a692' : '#526b5d';
+      ctx.strokeRect(door.x - labelWidth / 2 + 0.5, y - 23.5, labelWidth - 1, 17);
+      ctx.fillStyle = '#b7d1be';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, door.x, y - 11);
+      ctx.textAlign = 'left';
+    }
   }
 
   drawPlayer(ctx) {
@@ -939,36 +1106,51 @@ export class HubGame {
     const interaction = this.nearestInteraction();
     const lift = this.nearestLift();
     ctx.fillStyle = 'rgba(2, 8, 7, .78)';
-    ctx.fillRect(18, 18, 420, 66);
+    ctx.fillRect(18, 18, 420, 82);
     ctx.strokeStyle = '#648270';
-    ctx.strokeRect(18.5, 18.5, 420, 66);
+    ctx.strokeRect(18.5, 18.5, 420, 82);
     ctx.fillStyle = '#9adbac';
-    ctx.font = '700 15px ui-monospace, monospace';
-    ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 46);
+    ctx.font = '700 13px ui-monospace, monospace';
+    ctx.fillText(`USS TANTALUS // ${deck.shortName}`, 36, 40);
     ctx.fillStyle = '#d3ddd5';
-    ctx.font = '700 17px ui-monospace, monospace';
-    ctx.fillText(room.name.toUpperCase(), 36, 70);
+    ctx.font = '700 15px ui-monospace, monospace';
+    ctx.fillText(room.name.toUpperCase(), 36, 62);
     ctx.fillStyle = '#8fa398';
     ctx.font = '11px ui-monospace, monospace';
-    ctx.fillText(`P${this.state.deck + 1}/4 · ${this.state.visited.length}/${HUB_ROOM_COUNT}`, 322, 70);
+    ctx.fillText(`P${this.state.deck + 1}/4 · ${this.state.visited.length}/${HUB_ROOM_COUNT}`, 322, 62);
+    const roomStripX = 36;
+    const mapY = 76;
+    const segmentWidth = 88;
+    for (const [index, deckRoom] of deck.rooms.entries()) {
+      const visited = this.state.visited.includes(deckRoom.id);
+      ctx.fillStyle = deckRoom.id === room.id ? '#9be1ad' : visited ? '#476c57' : '#1b2b24';
+      ctx.fillRect(roomStripX + index * 94, mapY, segmentWidth, 8);
+      ctx.strokeStyle = '#688574';
+      ctx.strokeRect(roomStripX + index * 94 + 0.5, mapY + 0.5, segmentWidth - 1, 7);
+    }
+    for (const shaft of this.doorStates.filter((door) => door.lift)) {
+      const markerX = roomStripX + shaft.roomIndex * 94 + segmentWidth - 7;
+      ctx.fillStyle = '#d8b769';
+      ctx.fillRect(markerX, mapY - 3, 4, 14);
+    }
 
-    if (this.player.shockClock > 0 || interaction || lift !== undefined) {
-      ctx.font = '700 14px ui-monospace, monospace';
+    if (this.player.shockClock > 0 || interaction || lift) {
+      ctx.font = '700 12px ui-monospace, monospace';
       const prompt = this.player.shockClock > 0
         ? `CHOC ÉLECTRIQUE · INTÉGRITÉ ${Math.ceil(this.player.health)}% · COMMANDES BLOQUÉES ${this.player.shockClock.toFixed(1)}s`
         : interaction
         ? `E  ${interaction.description.toUpperCase()}`
-        : lift !== undefined
-          ? 'W / S  CHANGER DE PONT     E  PONT SUIVANT'
+        : lift
+          ? `${lift.shaftLabel} · W / S  CHANGER DE PONT     E  PONT SUIVANT`
           : 'A / D  MARCHER     MAJ  COURIR     ESPACE  FRANCHIR     E  UTILISER';
-      const promptWidth = Math.min(900, ctx.measureText(prompt).width + 48);
+      const promptWidth = Math.min(860, ctx.measureText(prompt).width + 40);
       const promptX = (LOGICAL_WIDTH - promptWidth) / 2;
       ctx.fillStyle = 'rgba(2, 8, 7, .82)';
-      ctx.fillRect(promptX, 656, promptWidth, 46);
+      ctx.fillRect(promptX, 670, promptWidth, 34);
       ctx.strokeStyle = '#98d7a8';
-      ctx.strokeRect(promptX + 0.5, 656.5, promptWidth, 46);
+      ctx.strokeRect(promptX + 0.5, 670.5, promptWidth, 34);
       ctx.fillStyle = '#b4edc1';
-      ctx.fillText(prompt, promptX + 24, 685);
+      ctx.fillText(prompt, promptX + 20, 692);
     }
 
     if (this.player.shockHits > 0 || room.id === DROPSHIP_HANGAR_ART_V55.roomId) {

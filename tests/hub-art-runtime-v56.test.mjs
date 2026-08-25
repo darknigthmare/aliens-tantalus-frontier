@@ -97,8 +97,8 @@ test('le vrai HubGame dessine chaque plafond avant les acteurs et chaque premier
   const snapshot = hub.getSnapshot();
   assert.equal(snapshot.roomComposition, 'modular-v56');
   assert.equal(snapshot.roomBackground, null);
-  assert.equal(snapshot.roomLayerAssetsReady, 30);
-  assert.equal(hub.getAssetReport().roomLayerAssetCount, 30);
+  assert.equal(snapshot.roomLayerAssetsReady, 62);
+  assert.equal(hub.getAssetReport().roomLayerAssetCount, 62);
   assert.equal(hub.getAssetReport().roomAssetCount, 0);
 
   const player = draws.indexOf('/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png');

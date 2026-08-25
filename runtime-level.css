@@ -182,6 +182,12 @@ html.mission-mode body {
     background: radial-gradient(circle at 50% 28%, rgba(35, 65, 50, .24), transparent 48%), #010403;
   }
 
+  .mission-mode .play-view {
+    min-height: 100svh;
+    padding: max(58px, calc(env(safe-area-inset-top) + 48px)) 0 max(78px, calc(env(safe-area-inset-bottom) + 70px));
+    background: radial-gradient(circle at 50% 44%, rgba(27, 55, 43, .2), transparent 46%), #010403;
+  }
+
   .hub-mode .view[data-panel="hub"]::before {
     content: 'MODE PAYSAGE RECOMMANDÉ';
     position: fixed;
@@ -209,25 +215,39 @@ html.mission-mode body {
 @media (orientation: portrait) and (max-width: 720px) {
   .hub-mode .hub-level-shell,
   .mission-mode .game-frame {
-    position: static;
-    inset: auto;
+    position: fixed;
+    z-index: 4;
+    top: clamp(180px, calc(48svh - 28.125vw), 360px);
+    left: 0;
     width: 100vw;
     margin: 0;
     transform: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .hub-mode .hub-touch-controls,
   .mission-mode .mission-touch-controls {
-    position: static;
-    inset: auto;
+    position: fixed;
+    z-index: 32;
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: max(10px, env(safe-area-inset-left));
     display: grid;
-    width: 100%;
-    padding: 0 10px max(8px, env(safe-area-inset-bottom));
-    opacity: .78;
+    width: auto;
+    padding: 0;
+    gap: 6px;
+    opacity: .88;
+  }
+
+  .hub-mode .hub-level-readout {
+    position: fixed;
+    z-index: 28;
+    right: 0;
+    bottom: max(70px, calc(env(safe-area-inset-bottom) + 64px));
+    left: 0;
+    min-height: 58px;
+    padding: 8px 12px;
+    background: rgba(3, 11, 8, .92);
   }
 
   .hub-mode .hub-touch-controls {
@@ -236,6 +256,14 @@ html.mission-mode body {
 
   .mission-mode .mission-touch-controls {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .mission-mode .mission-log {
+    right: 10px;
+    bottom: max(72px, calc(env(safe-area-inset-bottom) + 66px));
+    left: 10px;
+    height: 44px;
+    padding: 7px 10px;
   }
 
   .hub-mode .hub-touch-controls button,

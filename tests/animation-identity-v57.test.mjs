@@ -16,6 +16,7 @@ import {
   ENEMIES,
   EQUIPMENT,
   LEVEL_SEEDS,
+  NEURO_XENO_PROFILES,
   VEHICLES,
   WEAPONS,
   WORLDS
@@ -47,7 +48,7 @@ function withBrowserMocks(run) {
   }
 }
 
-function missionOptions() {
+function missionOptions(overrides = {}) {
   const world = WORLDS[0];
   const campaign = { ...CAMPAIGNS[0], id: 'v57-animation-identity', worldId: world.id };
   const levelSeed = {
@@ -67,7 +68,8 @@ function missionOptions() {
     vehicle: VEHICLES.find((entry) => entry.family === 'ground') || VEHICLES[0],
     equipment: EQUIPMENT.slice(0, 8),
     crew: CREW,
-    difficulty: 'standard'
+    difficulty: 'standard',
+    ...overrides
   };
 }
 
@@ -120,9 +122,65 @@ test('le garde-fou rejette toute plaque ennemie injectée sur un marine ou un PN
   assert.deepEqual(
     enforceHumanoidAnimationIdentity(explicitNeuroXeno, enemyRequest, { role: 'player', neuroActive: true }),
     enemyRequest,
-    'seule la forme Neuro-Xéno explicite conserve la plaque xénomorphe'
+    'sans contrat catalogue, la forme Neuro-Xéno explicite conserve le fallback Drone'
+  );
+
+  const contractedFacehugger = {
+    ...explicitNeuroXeno,
+    neuroVisualContract: { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', sheetId: 'enemy.facehugger.locomotion' }
+  };
+  assert.equal(
+    enforceHumanoidAnimationIdentity(contractedFacehugger, enemyRequest, { role: 'player', neuroActive: true }),
+    null,
+    'un contrat Facehugger refuse explicitement la plaque Drone'
+  );
+  const facehuggerRequest = { sheetId: 'enemy.facehugger.locomotion', clipId: 'hurt-death' };
+  assert.deepEqual(
+    enforceHumanoidAnimationIdentity(contractedFacehugger, facehuggerRequest, { role: 'player', neuroActive: true }),
+    facehuggerRequest
   );
 });
+
+test('neuro-002 dérive le Facehugger exact et marine standard ne reçoit aucune famille ennemie', () => withBrowserMocks(() => {
+  const profile = NEURO_XENO_PROFILES.find((entry) => entry.id === 'neuro-002');
+  assert.ok(profile?.playerClassCompatible);
+  const canvas = { width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} };
+  const neuroEngine = new GameEngine(canvas, { onEvent: () => {} });
+  neuroEngine.start(missionOptions({ neuroProfile: profile }));
+  const contract = neuroEngine.player.neuroVisualContract;
+  assert.deepEqual(
+    { profileId: contract?.profileId, enemyId: contract?.enemyId, spriteKey: contract?.spriteKey, sheetId: contract?.sheetId, exact: contract?.exact },
+    { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', spriteKey: 'facehugger', sheetId: 'enemy.facehugger.locomotion', exact: true }
+  );
+
+  const baseState = { alive: true, grounded: true, vx: 0, fireClock: 0, actionClock: 0, v52FireClock: 0, v52HurtClock: 0 };
+  for (const [state, clipId] of [
+    [{}, 'idle'],
+    [{ vx: 60 }, 'scuttle'],
+    [{ fireClock: 0.4 }, 'leap-attach'],
+    [{ v52HurtClock: 0.4 }, 'hurt-death'],
+    [{ alive: false }, 'hurt-death']
+  ]) {
+    Object.assign(neuroEngine.player, baseState, state);
+    const request = resolveIdentitySafePlayerAnimationV57(neuroEngine.player, true);
+    assert.deepEqual({ sheetId: request?.sheetId, clipId: request?.clipId }, { sheetId: contract.sheetId, clipId });
+  }
+  Object.assign(neuroEngine.player, baseState, { v52HurtClock: 0.4 });
+  neuroEngine.updateSpriteAnimationEvents();
+  const neuroSnapshot = neuroEngine.getSnapshot();
+  const neuroKey = getAnimationEntityKeyV57('player', neuroEngine.player, 'primary');
+  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'enemy.facehugger.locomotion:hurt-death');
+  assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'enemy.facehugger.locomotion');
+
+  const marineEngine = new GameEngine(canvas, { onEvent: () => {} });
+  marineEngine.start(missionOptions({ neuroProfile: null }));
+  Object.assign(marineEngine.player, { alive: true, grounded: false, visualForm: 'marine', playerClass: 'marine' });
+  marineEngine.updateSpriteAnimationEvents();
+  const marineSnapshot = marineEngine.getSnapshot();
+  const marineKey = getAnimationEntityKeyV57('player', marineEngine.player, 'primary');
+  assert.equal(marineSnapshot.animationRuntime.neuroPlayerContract, null);
+  assert.match(marineSnapshot.animationRuntime.activeClips[marineKey], /^player[.]echo9-marine[.]/);
+}));
 
 test('la télémétrie sépare le rôle joueur du crewId et ne contamine jamais les slots NPC', () => withBrowserMocks(() => {
   const canvas = { width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} };

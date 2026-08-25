@@ -9,6 +9,7 @@ import {
 } from './mission-interactive-art-v56.js';
 import { WEAPON_VISUAL_ASSETS_V56, WEAPON_VISUAL_BASE_COUNT_V56, resolveWeaponVisualProfileV56 } from './weapon-visual-runtime-v56.js';
 import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
+import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door-art-v58.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -85,6 +86,21 @@ export function getMissionSurfaceMetrics(platform = {}) {
 }
 
 
+export const MISSION_WORLD_PROP_FILES_V58 = Object.freeze({
+  floor: '/assets/openai/metroidvania/props/floor-segment.png',
+  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
+  ledge: '/assets/openai/metroidvania/props/short-ledge.png',
+  drop: '/assets/openai/metroidvania/props/drop-platform.png',
+  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
+  vent: '/assets/openai/metroidvania/props/vent-entrance.png',
+  breakable: '/assets/openai/metroidvania/props/breakable-panel.png',
+  cover: '/assets/openai/metroidvania/props/cargo-cover.png',
+  crates: '/assets/openai/metroidvania/props/supply-crates.png',
+  lamp: '/assets/openai/metroidvania/props/warning-lamp.png',
+  acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png',
+  electricalArc: '/assets/openai/metroidvania/props/electrical-arc-hazard.png'
+});
+
 const ASSETS = Object.freeze({
   far: '/assets/openai/metroidvania/tantalus-mission-far.png',
   mid: '/assets/openai/metroidvania/tantalus-mission-mid.png',
@@ -111,20 +127,8 @@ const ASSETS = Object.freeze({
   pathogen: '/assets/openai/pathogen-fauna-animation-sheet.png',
   neuroXeno: '/assets/openai/neuro-xeno-animation-sheet.png',
   vfx: '/assets/openai/combat-vfx-animation-sheet.png',
-  floor: '/assets/openai/metroidvania/props/floor-segment.png',
-  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
-  ledge: '/assets/openai/metroidvania/props/short-ledge.png',
-  drop: '/assets/openai/metroidvania/props/drop-platform.png',
-  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
-  vent: '/assets/openai/metroidvania/props/vent-entrance.png',
-  breakable: '/assets/openai/metroidvania/props/breakable-panel.png',
-  lockedDoor: '/assets/openai/metroidvania/props/locked-bulkhead.png',
-  openDoor: '/assets/openai/metroidvania/props/open-bulkhead.png',
-  cover: '/assets/openai/metroidvania/props/cargo-cover.png',
-  crates: '/assets/openai/metroidvania/props/supply-crates.png',
-  lamp: '/assets/openai/metroidvania/props/warning-lamp.png',
-  acid: '/assets/openai/metroidvania/props/acid-floor-hazard.png',
-  electricalArc: '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
+  ...MISSION_WORLD_PROP_FILES_V58,
+  missionDoorStatesV58: MISSION_DOOR_ATLAS_V58,
   ...MISSION_INTERACTIVE_ART_FILES_V56,
   ...MISSION_STRUCTURAL_PROP_FILES
 });
@@ -859,14 +863,16 @@ export class GameEngine {
     return this.covers.find((cover) => !cover.destroyed && center > cover.x - 28 && center < cover.x + cover.w + 28 && entity.y + entity.h > cover.y + 12);
   }
   getDoorRenderState(door, { open = door?.progress >= 0.82 } = {}) {
-    const image = this.images.get(open ? 'openDoor' : 'lockedDoor');
+    const art = resolveMissionDoorArtV58({ ...door, open, progress: open ? 1 : 0 });
+    const image = this.images.get(art.imageKey);
     const height = Math.max(1, Number(door?.h || 0) + 28);
-    const fallbackRatio = open ? 160 / 232 : 185 / 176;
-    const ratio = ready(image) ? image.naturalWidth / image.naturalHeight : fallbackRatio;
+    const ratio = art.source.w / art.source.h;
     const width = Math.max(82, height * ratio);
     return {
       image,
       open,
+      visualRole: art.visualRole,
+      source: art.source,
       x: Number(door?.x || 0) + Number(door?.w || 0) / 2 - width / 2,
       y: Number(door?.y || 0) + Number(door?.h || 0) - height,
       w: width,
@@ -1674,9 +1680,9 @@ export class GameEngine {
   }
 
   drawDoor(ctx, door) {
-    const { image, open, x, y, w: width, h: height } = this.getDoorRenderState(door);
+    const { image, open, source, x, y, w: width, h: height } = this.getDoorRenderState(door);
     ctx.globalAlpha = open ? 0.82 : 1;
-    if (ready(image)) ctx.drawImage(image, x, y, width, height);
+    if (ready(image)) ctx.drawImage(image, source.x, source.y, source.w, source.h, x, y, width, height);
     else { ctx.fillStyle = '#353c38'; ctx.fillRect(x, y, width, height); }
     ctx.globalAlpha = 1;
     ctx.fillStyle = this.doorRequirement(door) ? '#d04f47' : door.open ? '#83d99e' : '#d6ac59';

@@ -1,3 +1,8 @@
+import {
+  compileMissionDoorTopologyV58,
+  describeMissionDoorRequirementV58
+} from './topology-coherence-v58.js';
+
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
 const LOGICAL_WIDTH = 1280;
@@ -119,6 +124,42 @@ export const MISSION_LEVEL_ZONE_LAYER_FILES_V57 = Object.freeze({
   })
 });
 
+export const MISSION_LEVEL_ZONE_LAYER_FILES_V58 = Object.freeze({
+  ...MISSION_LEVEL_ZONE_LAYER_FILES_V57,
+  'colony-multiroute': Object.freeze({
+    'colony-approach': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-approach-foreground.png'
+    }),
+    'colony-habitat': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-habitat-foreground.png'
+    }),
+    'colony-civic': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-civic-foreground.png'
+    }),
+    'colony-utility': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-utility-foreground.png'
+    }),
+    'colony-security': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-security-foreground.png'
+    }),
+    'colony-landing': Object.freeze({
+      far: '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-far.png',
+      mid: '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-mid.png',
+      foreground: '/assets/openai/metroidvania/zones/colony-multiroute/colony-landing-foreground.png'
+    })
+  })
+});
+
 export function resolveMissionLevelLayerFilesV56(templateId, zoneId) {
   const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
   if (!fallback) return null;
@@ -129,6 +170,12 @@ export function resolveMissionLevelLayerFilesV57(templateId, zoneId) {
   const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
   if (!fallback) return null;
   return MISSION_LEVEL_ZONE_LAYER_FILES_V57[templateId]?.[zoneId] || fallback;
+}
+
+export function resolveMissionLevelLayerFilesV58(templateId, zoneId) {
+  const fallback = MISSION_LEVEL_LAYER_FILES_V52[templateId] || null;
+  if (!fallback) return null;
+  return MISSION_LEVEL_ZONE_LAYER_FILES_V58[templateId]?.[zoneId] || fallback;
 }
 
 function zoneForPosition(plan, actor) {
@@ -226,7 +273,7 @@ export function withV52LevelRuntime(BaseEngine) {
         this.images.set(key, image);
       }
       const declaredZoneIds = new Set(asList(plan?.biomeZones).map((zone) => zone.id));
-      const zoneFiles = MISSION_LEVEL_ZONE_LAYER_FILES_V57[templateId] || {};
+      const zoneFiles = MISSION_LEVEL_ZONE_LAYER_FILES_V58[templateId] || {};
       for (const [zoneId, layers] of Object.entries(zoneFiles)) {
         if (!declaredZoneIds.has(zoneId)) continue;
         for (const [kind, path] of Object.entries(layers)) {
@@ -243,7 +290,7 @@ export function withV52LevelRuntime(BaseEngine) {
     missionLevelLayerImage(kind, requestedZoneId = this.missionLevelVisualState?.activeZoneId) {
       const templateId = this.missionLevelRuntime?.templateId;
       const zoneId = requestedZoneId;
-      const dedicated = MISSION_LEVEL_ZONE_LAYER_FILES_V57[templateId]?.[zoneId]?.[kind]
+      const dedicated = MISSION_LEVEL_ZONE_LAYER_FILES_V58[templateId]?.[zoneId]?.[kind]
         ? this.images?.get(zoneLayerKey(templateId, zoneId, kind))
         : null;
       if (imageReady(dedicated)) return dedicated;
@@ -293,10 +340,10 @@ export function withV52LevelRuntime(BaseEngine) {
         };
       });
       this.platforms.push(...this.lifts);
-      this.doors = asList(plan.geometry?.doors).map((door, index, list) => {
-        const lockedBy = /aft|security/i.test(door.id) ? 'boss' : index === 0 ? 'power' : index === list.length - 1 ? 'security' : null;
-        return { ...door, open: false, progress: 0, lockedBy, levelLocked: false };
-      });
+      this.doors = compileMissionDoorTopologyV58(plan).map((door) => ({
+        ...door,
+        open: false, progress: 0, levelLocked: false
+      }));
       this.vents = asList(plan.geometry?.vents).flatMap((vent) => [
         { id: vent.id, pairId: vent.id, direction: 'forward', from: vent.from, to: vent.to },
         { id: `${vent.id}-return`, pairId: vent.id, direction: 'return', from: vent.to, to: vent.from }
@@ -992,8 +1039,36 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     doorRequirement(door) {
-      if (door?.levelLocked) return 'ÉVÉNEMENT DE SECTEUR EN COURS';
-      return super.doorRequirement(door);
+      const inherited = door?.levelLocked ? 'ÉVÉNEMENT DE SECTEUR EN COURS' : super.doorRequirement(door);
+      return describeMissionDoorRequirementV58(door, inherited);
+    }
+
+    drawDoor(ctx, door) {
+      super.drawDoor(ctx, door);
+      if (!this.missionLevelRuntime) return;
+      const actorCenter = this.player.x + this.player.w / 2;
+      if (Math.abs(actorCenter - (door.x + door.w / 2)) > 520) return;
+      const zones = new Map(asList(this.missionLevelRuntime.biomeZones).map((zone) => [zone.id, zone.label]));
+      const from = zones.get(door.fromZoneId) || door.fromZoneId || '';
+      const to = zones.get(door.toZoneId) || door.toZoneId || '';
+      const role = door.visualRole === 'colony-gate' ? 'PORTAIL COLONIAL'
+        : door.visualRole === 'security-shutter' ? 'VOLET DE SÉCURITÉ'
+          : door.visualRole === 'pressure-airlock' ? 'SAS PRESSURISÉ' : 'CLOISON ÉTANCHE';
+      const label = `${role} · ${from} ↔ ${to}`;
+      ctx.save();
+      ctx.font = '700 10px monospace';
+      const width = Math.min(360, ctx.measureText(label).width + 18);
+      const centerX = door.x + door.w / 2;
+      const y = door.y - 24;
+      ctx.fillStyle = 'rgba(2, 8, 7, .9)';
+      ctx.fillRect(centerX - width / 2, y, width, 18);
+      ctx.strokeStyle = this.doorRequirement(door) ? '#b85f4f' : '#668b71';
+      ctx.strokeRect(centerX - width / 2 + 0.5, y + 0.5, width - 1, 17);
+      ctx.fillStyle = '#bdd5c3';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, centerX, y + 13);
+      ctx.textAlign = 'left';
+      ctx.restore();
     }
 
     drawBackdrop(ctx) {
@@ -1008,14 +1083,17 @@ export function withV52LevelRuntime(BaseEngine) {
       const far = this.missionLevelLayerImage('far');
       const mid = this.missionLevelLayerImage('mid');
       const blend = clamp(Number(this.missionLevelVisualState.zoneBlend) || 0, 0, 1);
+      const activeZoneId = this.missionLevelVisualState.activeZoneId;
       const previousZoneId = this.missionLevelVisualState.previousZoneId;
       const previousFar = blend < 1 && previousZoneId ? this.missionLevelLayerImage('far', previousZoneId) : null;
       const previousMid = blend < 1 && previousZoneId ? this.missionLevelLayerImage('mid', previousZoneId) : null;
+      const activeDedicated = Boolean(MISSION_LEVEL_ZONE_LAYER_FILES_V58[plan.templateId]?.[activeZoneId]);
+      const previousDedicated = Boolean(MISSION_LEVEL_ZONE_LAYER_FILES_V58[plan.templateId]?.[previousZoneId]);
       ctx.save();
-      if (imageReady(previousFar) && previousFar !== far) this.drawMissionLevelCover(ctx, previousFar, 0.075, 0.94 * (1 - blend), 1.08, 0);
-      if (imageReady(far)) this.drawMissionLevelCover(ctx, far, 0.075, previousFar && previousFar !== far ? 0.94 * blend : 0.94, 1.08, 0);
-      if (imageReady(previousMid) && previousMid !== mid) this.drawMissionLevelCover(ctx, previousMid, 0.32, 0.72 * (1 - blend), 1.08, 22);
-      if (imageReady(mid)) this.drawMissionLevelCover(ctx, mid, 0.32, previousMid && previousMid !== mid ? 0.72 * blend : 0.72, 1.08, 22);
+      if (imageReady(previousFar) && previousFar !== far) this.drawMissionLevelCover(ctx, previousFar, 0.075, 0.94 * (1 - blend), 1.08, 0, { repeat: !previousDedicated, zoneId: previousZoneId });
+      if (imageReady(far)) this.drawMissionLevelCover(ctx, far, 0.075, previousFar && previousFar !== far ? 0.94 * blend : 0.94, 1.08, 0, { repeat: !activeDedicated, zoneId: activeZoneId });
+      if (imageReady(previousMid) && previousMid !== mid) this.drawMissionLevelCover(ctx, previousMid, 0.32, 0.72 * (1 - blend), 1.08, 22, { repeat: !previousDedicated, zoneId: previousZoneId });
+      if (imageReady(mid)) this.drawMissionLevelCover(ctx, mid, 0.32, previousMid && previousMid !== mid ? 0.72 * blend : 0.72, 1.08, 22, { repeat: !activeDedicated, zoneId: activeZoneId });
       const zone = asList(plan.biomeZones).find((entry) => entry.id === this.missionLevelVisualState.activeZoneId);
       if (zone?.visual?.tint) {
         ctx.globalAlpha = this.missionLevelVisualState.blackout ? 0.5 : 0.2;
@@ -1036,13 +1114,21 @@ export function withV52LevelRuntime(BaseEngine) {
       ctx.restore();
     }
 
-    drawMissionLevelCover(ctx, image, factor, alpha, overscan, yOffset) {
+    drawMissionLevelCover(ctx, image, factor, alpha, overscan, yOffset, { repeat = true, zoneId = null } = {}) {
       const height = LOGICAL_HEIGHT * overscan;
       const width = (image.naturalWidth || image.width) * (height / (image.naturalHeight || image.height));
-      const offsetX = -((this.camera.x * factor) % Math.max(1, width));
       const offsetY = -this.camera.y * factor * 0.3 - (height - LOGICAL_HEIGHT) * 0.5 + yOffset;
       ctx.globalAlpha = alpha;
-      for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, offsetY, width, height);
+      if (!repeat) {
+        const zone = asList(this.missionLevelRuntime?.biomeZones).find((entry) => entry.id === zoneId);
+        const playerCenter = this.player.x + this.player.w / 2;
+        const progress = zone ? clamp((playerCenter - zone.x) / Math.max(1, zone.w), 0, 1) : 0.5;
+        const overflow = Math.max(0, width - LOGICAL_WIDTH);
+        ctx.drawImage(image, -overflow * progress, offsetY, width, height);
+      } else {
+        const offsetX = -((this.camera.x * factor) % Math.max(1, width));
+        for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, offsetY, width, height);
+      }
       ctx.globalAlpha = 1;
     }
 
@@ -1080,7 +1166,7 @@ export function withV52LevelRuntime(BaseEngine) {
         return;
       }
       const hasDedicatedZoneLayer = Boolean(
-        MISSION_LEVEL_ZONE_LAYER_FILES_V57[plan.templateId]?.[this.missionLevelVisualState?.activeZoneId]?.foreground
+        MISSION_LEVEL_ZONE_LAYER_FILES_V58[plan.templateId]?.[this.missionLevelVisualState?.activeZoneId]?.foreground
       );
       if (hasDedicatedZoneLayer) {
         const blend = clamp(Number(this.missionLevelVisualState.zoneBlend) || 0, 0, 1);
@@ -1089,8 +1175,8 @@ export function withV52LevelRuntime(BaseEngine) {
         ctx.save();
         const factor = this.accessibilityRuntime?.reducedMotion ? 1 : 1.12;
         const alpha = this.accessibilityRuntime?.reducedMotion ? 0.48 : 0.66;
-        if (imageReady(previousImage) && previousImage !== image) this.drawMissionLevelCover(ctx, previousImage, factor, alpha * (1 - blend), 1, 0);
-        this.drawMissionLevelCover(ctx, image, factor, previousImage && previousImage !== image ? alpha * blend : alpha, 1, 0);
+        if (imageReady(previousImage) && previousImage !== image) this.drawMissionLevelCover(ctx, previousImage, factor, alpha * (1 - blend), 1, 0, { repeat: false, zoneId: previousZoneId });
+        this.drawMissionLevelCover(ctx, image, factor, previousImage && previousImage !== image ? alpha * blend : alpha, 1, 0, { repeat: false, zoneId: this.missionLevelVisualState.activeZoneId });
         ctx.restore();
         this.drawHazardForegroundOverlays(ctx);
         this.drawForegroundPipes(ctx);
@@ -1118,6 +1204,49 @@ export function withV52LevelRuntime(BaseEngine) {
 
     drawHud(ctx) {
       super.drawHud(ctx);
+      const plan = this.missionLevelRuntime;
+      const nodes = asList(plan?.graph?.nodes);
+      if (nodes.length) {
+        const edges = asList(plan.graph?.edges);
+        const minX = Math.min(...nodes.map((node) => node.x));
+        const maxX = Math.max(...nodes.map((node) => node.x));
+        const minY = Math.min(...nodes.map((node) => node.y));
+        const maxY = Math.max(...nodes.map((node) => node.y));
+        const box = { x: 474, y: 18, w: 332, h: 66 };
+        const point = (node) => ({
+          x: box.x + 14 + ((node.x - minX) / Math.max(1, maxX - minX)) * (box.w - 28),
+          y: box.y + 14 + ((node.y - minY) / Math.max(1, maxY - minY)) * (box.h - 28)
+        });
+        const nodeMap = new Map(nodes.map((node) => [node.id, node]));
+        const nearest = nodes.reduce((best, node) => {
+          const score = Math.hypot(node.x - (this.player.x + this.player.w / 2), node.y - (this.player.y + this.player.h));
+          return !best || score < best.score ? { node, score } : best;
+        }, null)?.node;
+        ctx.save();
+        ctx.fillStyle = 'rgba(3, 10, 8, .9)';
+        ctx.fillRect(box.x, box.y, box.w, box.h);
+        ctx.strokeStyle = '#506d5b';
+        ctx.strokeRect(box.x + 0.5, box.y + 0.5, box.w, box.h);
+        ctx.lineWidth = 1;
+        for (const edge of edges) {
+          const from = nodeMap.get(edge.from);
+          const to = nodeMap.get(edge.to);
+          if (!from || !to) continue;
+          const a = point(from);
+          const b = point(to);
+          const gate = this.doors.find((door) => door.id === (edge.gateId || edge.id));
+          ctx.strokeStyle = gate && this.doorRequirement(gate) ? '#a95347' : edge.kind === 'vent' ? '#6b8e7e' : '#3f5f4d';
+          ctx.setLineDash(edge.kind === 'vent' ? [3, 3] : []);
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+        ctx.setLineDash([]);
+        for (const node of nodes) {
+          const marker = point(node);
+          ctx.fillStyle = node.id === nearest?.id ? '#a9e8b8' : '#698474';
+          ctx.fillRect(marker.x - 2, marker.y - 2, node.id === nearest?.id ? 6 : 4, node.id === nearest?.id ? 6 : 4);
+        }
+        ctx.restore();
+      }
       const timer = this.missionLevelTimers?.get('extraction');
       if (!timer || timer.state === 'complete') return;
       const x = 474;
@@ -1251,11 +1380,22 @@ export function withV52LevelRuntime(BaseEngine) {
         validation: plan.validation,
         routes: plan.graph.routes.map((route) => ({ id: route.id, role: route.role, nodes: route.nodeIds.length })),
         zones: plan.biomeZones.map((zone) => ({ id: zone.id, name: zone.label, biome: zone.biome, layers: { ...zone.layers } })),
+        doors: (this.doors || []).map((door) => ({
+          id: door.id,
+          kind: door.kind,
+          visualRole: door.visualRole,
+          from: door.from,
+          to: door.to,
+          fromZoneId: door.fromZoneId,
+          toZoneId: door.toZoneId,
+          lockedBy: door.lockedBy,
+          open: Boolean(door.open)
+        })),
         activeZoneId: this.missionLevelVisualState?.activeZoneId || null,
         events: this.missionLevelEvents ? [...this.missionLevelEvents.values()].map((event) => ({ id: event.id, triggered: event.triggered, triggerCount: event.triggerCount })) : [],
         spawns: this.missionLevelSpawns ? [...this.missionLevelSpawns.values()].map((spawn) => ({ id: spawn.id, active: spawn.active, count: spawn.count })) : [],
         artLayers: MISSION_LEVEL_LAYER_FILES_V52[plan.templateId] || null,
-        activeArtLayers: resolveMissionLevelLayerFilesV57(plan.templateId, this.missionLevelVisualState?.activeZoneId),
+        activeArtLayers: resolveMissionLevelLayerFilesV58(plan.templateId, this.missionLevelVisualState?.activeZoneId),
         telemetry: this.missionLevelTelemetry ? { ...this.missionLevelTelemetry } : null,
         timers: this.missionLevelTimers ? [...this.missionLevelTimers.values()].map(timerSnapshot) : []
       };
