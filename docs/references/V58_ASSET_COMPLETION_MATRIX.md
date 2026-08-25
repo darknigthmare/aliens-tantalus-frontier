@@ -14,7 +14,7 @@ Date d’arrêt de la matrice : 25 août 2026. Cette vue remplace le statut V56 
 | Atlas des familles de portes | 1 | 1 | 1 | 2048 × 2048 RGBA, 2 × 4 | `MISSION_DOOR_ART_V58` | `ACCEPTED_RUNTIME` |
 | **Total nouveaux bitmaps V58** | **51** | **51** | **51** | — | branchés | **51/51** |
 
-`ACCEPTED_RUNTIME` signifie ici : fichier réel, contrat déclaré, préchargement/registre actif et gate automatisée ciblée. Ce statut ne prétend pas qu’un déploiement distant particulier a déjà été vérifié; la publication conserve son propre gate.
+`ACCEPTED_RUNTIME` signifie ici : fichier réel, contrat déclaré, préchargement/registre actif et gate automatisée ciblée. Le gate de publication V58 est lui aussi passé le 25 août 2026 : déploiement Vercel `dpl_6aEDKDA4cNvCrV8rbGJ4xPsty1mw` **READY**, alias public en **HTTP 200**, puis QA distante complète sans échec.
 
 ### Réemplois physiques complémentaires
 

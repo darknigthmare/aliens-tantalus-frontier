@@ -89,7 +89,7 @@ Les fichiers de preuve automatisée principaux sont :
 
 La preuve locale du 25 août 2026 est verte : **126 modules**, **236/236 tests**, build **58.0.0 / 3 443 entrées**, puis **16 checkpoints et 21 captures** navigateur couvrant les **16/16 salles**, sans exception, erreur console ni requête échouée.
 
-Ce document décrit les gates et le contenu de release; il ne prétend pas qu’une URL de production les a passés tant que ce résultat n’a pas été consigné après déploiement.
+La preuve publique est également verte : déploiement Vercel `dpl_6aEDKDA4cNvCrV8rbGJ4xPsty1mw` ciblé production et **READY**, alias [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app) en **HTTP 200**, puis même parcours de **16 checkpoints, 21 captures et 16/16 salles**, sans exception, erreur console ni requête échouée.
 
 ## Dette explicitement non masquée
 

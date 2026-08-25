@@ -76,7 +76,7 @@ Statut local prouvé au 25 août 2026 :
 - `npm.cmd run qa` valide le lint de **126 modules**, **236/236 tests Node** et le build statique **58.0.0** de **3 443 entrées**;
 - `npm.cmd run qa:browser:v58` valide **16 checkpoints et 21 captures**, les **16/16 salles**, desktop/mobile, le contrôle hors ligne et l’absence d’exception, d’erreur console ou de requête échouée.
 
-Le déploiement de production et la répétition du parcours navigateur contre l’URL publique restent à compléter avant de déclarer la V58 publiée et vérifiée de bout en bout.
+Statut public prouvé au 25 août 2026 : le déploiement Vercel `dpl_6aEDKDA4cNvCrV8rbGJ4xPsty1mw` est **READY**, [l’alias public](https://aliens-tantalus-frontier.vercel.app) répond **HTTP 200**, et le même parcours distant valide **16 checkpoints, 21 captures et 16/16 salles** sans exception, erreur console ni requête échouée.
 
 ## Limite de ce verdict
 

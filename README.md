@@ -69,7 +69,7 @@ npm.cmd run qa
 
 Gate V58 locale du 25 août 2026 : lint de **126 modules**, **236/236 tests Node** et build statique **58.0.0** de **3 443 entrées**.
 
-Le parcours local `npm.cmd run qa:browser:v58` valide **16 checkpoints et 21 captures**, dont les **16/16 salles** du hub, la mission coloniale, le hangar, la baie M577, l’identité Facehugger puis le retour marine, le portrait mobile et la PWA hors ligne. Il ne relève aucune exception, erreur console ni requête échouée. La production doit encore répéter ce même parcours après publication avant d’être déclarée vérifiée de bout en bout.
+Le parcours `npm.cmd run qa:browser:v58` valide **16 checkpoints et 21 captures**, dont les **16/16 salles** du hub, la mission coloniale, le hangar, la baie M577, l’identité Facehugger puis le retour marine, le portrait mobile et la PWA hors ligne. Il ne relève aucune exception, erreur console ni requête échouée. Le même parcours est passé sur [la production](https://aliens-tantalus-frontier.vercel.app) après le déploiement Vercel `dpl_6aEDKDA4cNvCrV8rbGJ4xPsty1mw`, déclaré **READY**; l’alias public répond **HTTP 200**.
 
 ## Dossier de production
 
