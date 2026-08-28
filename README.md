@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v59.0.0**. Cette release conserve toute la boucle v1→v58 et rend l’accès véhicule physique : quatre plaques OpenAI dédiées pilotent ouverture, sécurisation, sortie et épave; l’occupation ne change qu’après l’animation et les sept fits M577 conservent un vrai rendu bitmap.
+Version web jouable **v60.0.0**. Le contrat consolidé **v1→v60** conserve la boucle publiée en V59, retire le substitut Canvas des véhicules non terrestres et ferme la traversée physique V60 : seize profils de salle, huit bitmaps de parcours, sockets issus du graphe réel, M577 ancré au sol auteur et embarquement/débarquement séquencé de l’escouade. Les 24 variantes des trois châssis sans plaque canonique exacte restent au catalogue mais ne peuvent plus devenir invisibles en mission.
 
 Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
@@ -25,7 +25,9 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit d’atlas V59 recense **182 plaques et 2 564 cellules**. La vague ajoute quatre plaques véhicule 4×4, soit 64 cellules d’accès/dégâts, en plus des 51 livrables bitmap V58. La complétude exacte des personnages, ennemis, véhicules et props reste suivie dans la matrice d’assets ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit V60 confirme **182 plaques, 2 564 cellules et 364 chemins raw/normalisés présents** ; aucun nouveau bitmap n’est revendiqué et le manifeste artistique reste donc étiqueté `v59`. La complétude exacte des personnages, ennemis, véhicules, objets et props est détaillée dans la matrice V60 ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+
+Les quatre MID à corriger pour Medical, Science Lab, Quarantine et Life Support sont `BLOCKED_EXPLICIT_TRANSFER_PERMISSION` : ils ne sont ni intégrés ni déclarés terminés. La topologie, les collisions, les occlusions, les priorités d’interaction et l’embarquement sont néanmoins `DONE_RUNTIME` après tests complets et parcours Edge local.
 
 ## Contrôles
 Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
@@ -44,7 +46,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v59 |
+| Catalogue | Total v60 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -67,12 +69,17 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate V59 locale du 25 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **130 modules**, **248/248 tests Node** et build statique **59.0.0** de **3 443 entrées**.
+Gate locale V60 du 28 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **134 modules**, **274/274 tests Node** et build statique **60.0.0** de **3 443 entrées**.
 
-Parcours navigateur V59 réussi localement puis reproduit sur la production : **17 checkpoints**, **24 captures**, **16/16 salles** auditées, entrée/sécurisation/sortie véhicule confirmées, quatre atlas d’accès chargés, PWA contrôlée hors ligne, zéro exception, erreur console ou requête échouée sur chaque passe. Le déploiement Vercel `dpl_8o4CKqdXwSq9mu2faHwbUSyaENkF` est `Ready` et l’alias public répond **HTTP 200**.
+Le parcours Edge V60 local a réussi : **22 checkpoints**, **30 captures**, **16/16 salles** auditées, entrée/sécurisation/file/sortie véhicule et escouade confirmées, huit bitmaps de traversée et quatre atlas d’accès chargés, desktop **1 440 × 980**, mobile **390 × 844**, reprise native et PWA hors ligne. Résultat : zéro exception, zéro erreur console et zéro requête critique échouée.
+
+La publication GitHub/Vercel V60 reste à consigner ; le dernier déploiement public confirmé dans l’historique demeure V59 jusqu’à cette étape.
 
 ## Dossier de production
 
+- [Historique de validation V60](docs/VERSION_HISTORY_V60.md)
+- [Audit level design V60](docs/V60_LEVEL_DESIGN_AUDIT.md)
+- [Matrice de complétude artistique V60](docs/references/V60_ASSET_COMPLETION_MATRIX.md)
 - [Historique de release V59](docs/VERSION_HISTORY_V59.md)
 - [Provenance artistique V59](docs/ART_PROVENANCE_V59.md)
 - [Matrice de complétude et dette V59](docs/references/V59_ASSET_COMPLETION_MATRIX.md)

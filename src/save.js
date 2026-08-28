@@ -1,4 +1,5 @@
-import { CREW, RELEASE, WORLDS } from './content.js';
+import { CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 
 export const SAVE_SCHEMA = 51;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -389,6 +390,10 @@ export function selectStrategicVehicle(save, vehicleId) {
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation) throw new Error('Vehicule verrouille pendant une operation.');
   if (!strategy.inventory.vehicleIds.includes(vehicleId)) throw new Error('Vehicule non acquis.');
+  const vehicle = VEHICLES.find((entry) => entry.id === vehicleId);
+  if (!vehicle) throw new Error('Vehicule inconnu.');
+  const gate = getVehicleDeploymentGateV60(vehicle);
+  if (!gate.ready) throw new Error(`Chassis indisponible : ${gate.reason}`);
   strategy.selectedVehicleId = vehicleId;
   addStrategyLog(save, { type: 'loadout', title: 'Vehicule affecte', risk: 0, incident: false, result: vehicleId + ' prepare pour la prochaine operation.' });
   return vehicleId;
@@ -437,16 +442,17 @@ export function applyCostume(save, costumeId) {
 
 export function getOperationBrief(save, campaign, world) {
   const strategy = ensureStrategy(save);
+  const deployableVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const selectedCrew = save.crew.filter((member) => strategy.selectedCrewIds.includes(member.id) && member.status === 'active');
   const state = save.galaxy.worldState[world.id] || world;
   const averageStress = selectedCrew.reduce((sum, member) => sum + member.stress, 0) / Math.max(1, selectedCrew.length);
   const averageFatigue = selectedCrew.reduce((sum, member) => sum + member.fatigue, 0) / Math.max(1, selectedCrew.length);
   let risk = 10 + world.danger * 4 + state.infestation * 0.28 + averageStress * 0.16 + averageFatigue * 0.12 - Math.max(0, campaign.routes - 1) * 1.5;
   if (hasResearch(save, 'motion-analysis')) risk -= 8;
-  if (strategy.selectedVehicleId && hasResearch(save, 'vehicle-doctrine')) risk -= 7;
+  if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) risk -= 7;
   risk = Math.round(clamp(risk, 5, 95));
   let fuel = 2 + Math.ceil(world.danger / 3);
-  if (strategy.selectedVehicleId && hasResearch(save, 'vehicle-doctrine')) fuel = Math.max(1, fuel - 1);
+  if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) fuel = Math.max(1, fuel - 1);
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const reward = { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
@@ -465,6 +471,7 @@ export function beginOperation(save, campaign, world) {
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation?.campaignId === campaign.id) {
     const operation = strategy.currentOperation;
+    operation.vehicleId = resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
     operation.costumeId ??= save.player.costumeId || null;
     operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
     operation.apexDossierId ??= strategy.selectedApexDossierId || null;
@@ -473,6 +480,7 @@ export function beginOperation(save, campaign, world) {
     return { ok: true, resumed: true, operation };
   }
   if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
+  strategy.selectedVehicleId = resolveReadyVehicleIdV60(strategy.selectedVehicleId, strategy.inventory.vehicleIds, VEHICLES);
   const brief = getOperationBrief(save, campaign, world);
   if (!brief.worldUnlocked) throw new Error('Route verrouillee : effectuez une reconnaissance.');
   if (!brief.crewIds.length) throw new Error('Aucun membre actif dans escouade.');
@@ -625,7 +633,8 @@ export function resolveOperationDeployment(save, {
   const crewIds = stringList(operation.crewIds);
   const weaponIds = stringList(operation.weaponIds);
   const equipmentIds = stringList(operation.equipmentIds);
-  const vehicleId = typeof operation.vehicleId === 'string' ? operation.vehicleId : null;
+  const requestedVehicleId = typeof operation.vehicleId === 'string' ? operation.vehicleId : null;
+  const vehicleId = resolveReadyVehicleIdV60(requestedVehicleId, ensureStrategy(save).inventory.vehicleIds, vehicleCatalog);
   const costumeId = typeof operation.costumeId === 'string' ? operation.costumeId : null;
   const neuroProfileId = typeof operation.neuroProfileId === 'string' ? operation.neuroProfileId : null;
   const apexDossierId = typeof operation.apexDossierId === 'string' ? operation.apexDossierId : null;
@@ -662,7 +671,7 @@ export function resolveOperationDeployment(save, {
       crewIds: crewIds.filter((id) => !crew.some((entry) => entry.id === id)),
       weaponIds: weaponIds.filter((id) => !weapons.some((entry) => entry.id === id)),
       equipmentIds: equipmentIds.filter((id) => !equipment.some((entry) => entry.id === id)),
-      vehicleId: vehicleId && !vehicle ? vehicleId : null,
+      vehicleId: requestedVehicleId && requestedVehicleId !== vehicleId ? requestedVehicleId : vehicleId && !vehicle ? vehicleId : null,
       costumeId: costumeId && !costume ? costumeId : null,
       neuroProfileId: neuroProfileId && !neuroProfile ? neuroProfileId : null,
       apexDossierId: apexDossierId && !apexDossier ? apexDossierId : null
@@ -846,7 +855,11 @@ export function migrateSave(input, profile = 1) {
       crewIds: stringList(candidate.crewIds).filter((id) => knownCrewIds.has(id)).slice(0, MAX_SQUAD_SIZE),
       weaponIds: stringList(candidate.weaponIds).slice(0, 8),
       equipmentIds: stringList(candidate.equipmentIds).slice(0, 8),
-      vehicleId: typeof candidate.vehicleId === 'string' ? candidate.vehicleId.slice(0, 120) : null,
+      vehicleId: resolveReadyVehicleIdV60(
+        typeof candidate.vehicleId === 'string' ? candidate.vehicleId.slice(0, 120) : null,
+        vehicleIds,
+        VEHICLES
+      ),
       costumeId: typeof candidate.costumeId === 'string' ? candidate.costumeId.slice(0, 120) : null,
       neuroProfileId: typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
       apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
@@ -859,8 +872,7 @@ export function migrateSave(input, profile = 1) {
     serial: Math.floor(numberBetween(strategy.serial, base.strategy.serial, 0, 999999999)),
     selectedCrewIds: selectedCrewIds.length ? selectedCrewIds : [...base.strategy.selectedCrewIds],
     inventory: { weaponIds, equipmentIds, vehicleIds },
-    selectedVehicleId: typeof strategy.selectedVehicleId === 'string' && vehicleIds.includes(strategy.selectedVehicleId)
-      ? strategy.selectedVehicleId : vehicleIds[0] || null,
+    selectedVehicleId: resolveReadyVehicleIdV60(strategy.selectedVehicleId, vehicleIds, VEHICLES),
     selectedNeuroProfileId: typeof strategy.selectedNeuroProfileId === 'string' ? strategy.selectedNeuroProfileId.slice(0, 120) : null,
     selectedApexDossierId: typeof strategy.selectedApexDossierId === 'string' ? strategy.selectedApexDossierId.slice(0, 120) : null,
     plannedCampaignId: typeof strategy.plannedCampaignId === 'string' ? strategy.plannedCampaignId.slice(0, 120) : null,

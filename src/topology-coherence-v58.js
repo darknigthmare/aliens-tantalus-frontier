@@ -354,6 +354,65 @@ export function buildHubDoorNetworkV58(decks = [], world = {}, deckIndex = 0) {
   return Object.freeze([...bulkheads, ...lifts]);
 }
 
+/**
+ * Projette le réseau physique des portes dans l'espace local de chaque salle.
+ * Ces sockets sont la seule source autorisée pour aligner l'art et les portes :
+ * un détail peint ne peut donc plus créer un passage intérieur inexistant.
+ */
+export function buildHubRoomDoorSocketsV60(decks = [], world = {}, deckIndex = 0) {
+  const roomWidth = Number(world.roomWidth) || 1280;
+  const deck = decks[deckIndex];
+  if (!deck) return Object.freeze({});
+  const network = buildHubDoorNetworkV58(decks, world, deckIndex);
+  return Object.freeze(Object.fromEntries(deck.rooms.map((room) => {
+    const sockets = network.flatMap((door) => {
+      const belongs = door.lift
+        ? door.roomId === room.id
+        : door.fromRoomId === room.id || door.toRoomId === room.id;
+      if (!belongs) return [];
+      const localX = Number(door.x) - Number(room.xStart);
+      const side = localX <= 2 ? 'west' : localX >= roomWidth - 2 ? 'east' : 'interior';
+      return [Object.freeze({
+        id: `${door.id}:${room.id}`,
+        doorId: door.id,
+        roomId: room.id,
+        kind: door.kind,
+        lift: Boolean(door.lift),
+        worldX: Number(door.x),
+        localX,
+        side,
+        interior: side === 'interior'
+      })];
+    });
+    return [room.id, Object.freeze(sockets)];
+  })));
+}
+
+export function validateHubRoomDoorSocketsV60({ decks = [], world = {}, deckIndex = 0, sockets = null } = {}) {
+  const errors = [];
+  const deck = decks[deckIndex];
+  if (!deck) return Object.freeze({ valid: false, errors: Object.freeze(['unknown hub deck']), socketCount: 0 });
+  const network = buildHubDoorNetworkV58(decks, world, deckIndex);
+  const resolved = sockets || buildHubRoomDoorSocketsV60(decks, world, deckIndex);
+  const flattened = deck.rooms.flatMap((room) => asList(resolved[room.id]));
+  for (const socket of flattened) {
+    const door = network.find((entry) => entry.id === socket.doorId);
+    if (!door) addUnique(errors, `socket ${socket.id} has no runtime door`);
+    if (door && Number(door.x) !== Number(socket.worldX)) addUnique(errors, `socket ${socket.id} disagrees with runtime door x`);
+  }
+  for (const door of network) {
+    const expected = door.lift ? 1 : 2;
+    const count = flattened.filter((socket) => socket.doorId === door.id).length;
+    if (count !== expected) addUnique(errors, `door ${door.id} exposes ${count}/${expected} room sockets`);
+  }
+  return Object.freeze({
+    valid: errors.length === 0,
+    errors: Object.freeze(errors),
+    socketCount: flattened.length,
+    interiorSocketCount: flattened.filter((socket) => socket.interior).length
+  });
+}
+
 export function validateHubTopologyV58({ decks = [], world = {}, topology = null } = {}) {
   const errors = [];
   const roomWidth = Number(world.roomWidth) || 1280;
@@ -423,16 +482,46 @@ export function validateHubRuntimeTopologyV58({ deck, world = {}, platforms = []
     const roomPlatforms = platforms.filter((entry) => entry.roomId === room.id);
     const roomLadders = ladders.filter((entry) => entry.roomId === room.id);
     const roomVents = vents.filter((entry) => entry.roomId === room.id);
-    if (roomPlatforms.length < 2) addUnique(errors, `room ${room.id} has no vertical platform chain`);
-    const ordered = [...roomPlatforms].sort((left, right) => right.y - left.y);
-    const lower = ordered[0];
-    const upper = ordered.at(-1);
-    if (!lower || !upper || lower === upper) continue;
-    const floorLink = roomLadders.some((ladder) => Math.abs(ladder.bottom - floorY) <= 2 && Math.abs(ladder.top - lower.y) <= 2);
-    const tierLink = roomLadders.some((ladder) => Math.abs(ladder.bottom - lower.y) <= 2 && Math.abs(ladder.top - upper.y) <= 2);
-    if (!floorLink) addUnique(errors, `room ${room.id} lower tier is inaccessible from the floor`);
-    if (!tierLink) addUnique(errors, `room ${room.id} upper tier is inaccessible`);
-    if (!roomVents.some((vent) => Math.abs(vent.y + vent.h - upper.y) <= 2)) addUnique(errors, `room ${room.id} vent is detached from the upper tier`);
+    if (!roomPlatforms.length) {
+      addUnique(errors, `room ${room.id} has no authored traversal surface`);
+      continue;
+    }
+    const supports = (x, y) => Math.abs(y - floorY) <= 2 || roomPlatforms.some((platform) => (
+      Math.abs(platform.y - y) <= 2 && x >= platform.x - 4 && x <= platform.x + platform.w + 4
+    ));
+    for (const ladder of roomLadders) {
+      if (!supports(ladder.x, ladder.top) || !supports(ladder.x, ladder.bottom)) {
+        addUnique(errors, `room ${room.id} ladder ${ladder.id || ladder.x} has a detached endpoint`);
+      }
+    }
+    const reachableHeights = new Set([floorY]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const ladder of roomLadders) {
+        const topReachable = [...reachableHeights].some((height) => Math.abs(height - ladder.top) <= 2);
+        const bottomReachable = [...reachableHeights].some((height) => Math.abs(height - ladder.bottom) <= 2);
+        if (bottomReachable && supports(ladder.x, ladder.top) && !topReachable) {
+          reachableHeights.add(ladder.top);
+          changed = true;
+        }
+        if (topReachable && supports(ladder.x, ladder.bottom) && !bottomReachable) {
+          reachableHeights.add(ladder.bottom);
+          changed = true;
+        }
+      }
+    }
+    for (const platform of roomPlatforms) {
+      if (![...reachableHeights].some((height) => Math.abs(height - platform.y) <= 2)) {
+        addUnique(errors, `room ${room.id} platform ${platform.id || platform.x} is inaccessible`);
+      }
+    }
+    for (const roomVent of roomVents) {
+      const bottom = roomVent.y + roomVent.h;
+      const attached = roomPlatforms.some((platform) => Math.abs(platform.y - bottom) <= 2
+        && roomVent.x + roomVent.w > platform.x && roomVent.x < platform.x + platform.w);
+      if (!attached) addUnique(errors, `room ${room.id} vent ${roomVent.id || roomVent.x} is detached from a reachable surface`);
+    }
   }
   for (const door of doors) {
     const x = Number(door.x);

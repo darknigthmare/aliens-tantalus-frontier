@@ -1,4 +1,5 @@
 import { GameEngine as MissionEngine } from './game-v51-runtime.js';
+import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -63,6 +64,7 @@ export function buildVehicleRuntime(vehicle = {}) {
     actions: list(seat.actions)
   }));
   const actions = [...new Set([...list(vehicle.actions), ...seats.flatMap((seat) => seat.actions)])];
+  const deploymentGate = getVehicleDeploymentGateV60(vehicle);
   return Object.freeze({
     id: String(vehicle.id || 'vehicle-runtime-m577'),
     name: String(vehicle.name || 'M577 Armored Personnel Carrier'),
@@ -76,9 +78,13 @@ export function buildVehicleRuntime(vehicle = {}) {
     cargo: Math.round(finite(vehicle.cargo, 20, 0, 500)),
     armor: finite(vehicle.armor, 35, 0, 100),
     provenance: String(vehicle.provenance || 'runtime-default'),
-    canDrive: actions.includes('drive'),
-    canBoost: actions.includes('boost'),
-    canFire: actions.includes('fire') || seats.some((seat) => seat.role === 'gunner')
+    visualStatus: String(vehicle.visualStatus || 'RUNTIME_DEFAULT'),
+    deploymentReady: deploymentGate.ready,
+    deploymentStatus: deploymentGate.status,
+    deploymentReason: deploymentGate.reason,
+    canDrive: deploymentGate.ready && actions.includes('drive'),
+    canBoost: deploymentGate.ready && actions.includes('boost'),
+    canFire: deploymentGate.ready && (actions.includes('fire') || seats.some((seat) => seat.role === 'gunner'))
   });
 }
 
@@ -218,6 +224,9 @@ export class GameEngine extends MissionEngine {
     vehicle.canBoost = runtime.canBoost;
     vehicle.canFire = runtime.canFire || runtime.actions.length === 0;
     vehicle.armor = runtime.armor;
+    vehicle.active = Boolean(runtime.deploymentReady);
+    vehicle.deploymentStatus = runtime.deploymentStatus;
+    vehicle.deploymentReason = runtime.deploymentReason;
     return vehicle;
   }
 
@@ -486,7 +495,7 @@ export class GameEngine extends MissionEngine {
       missionContract: this.mission?.contract ? { ...this.mission.contract } : null,
       environment: this.environmentRuntime ? { ...this.environmentRuntime, biomes: [...this.environmentRuntime.biomes], hazardTypes: [...this.environmentRuntime.hazardTypes] } : null,
       weaponRuntime: this.weaponRuntime ? { id: this.weaponRuntime.id, damage: this.weaponRuntime.damage, fireRate: this.weaponRuntime.fireRate, magazine: this.weaponRuntime.magazine, reload: this.weaponRuntime.reload, penetration: this.weaponRuntime.penetration } : null,
-      selectedVehicle: this.selectedVehicleRuntime ? { id: this.selectedVehicleRuntime.id, family: this.selectedVehicleRuntime.family, seats: this.selectedVehicleRuntime.seats.length, actions: [...this.selectedVehicleRuntime.actions], cargo: this.selectedVehicleRuntime.cargo } : null,
+      selectedVehicle: this.selectedVehicleRuntime ? { id: this.selectedVehicleRuntime.id, family: this.selectedVehicleRuntime.family, seats: this.selectedVehicleRuntime.seats.length, actions: [...this.selectedVehicleRuntime.actions], cargo: this.selectedVehicleRuntime.cargo, deploymentReady: this.selectedVehicleRuntime.deploymentReady, deploymentStatus: this.selectedVehicleRuntime.deploymentStatus } : null,
       neuro: this.neuro ? { active: this.neuro.active, compatible: this.neuro.compatible, profileId: this.neuro.id, harness: this.neuro.harness, signal: Math.round(this.neuro.signal), range: this.neuro.signalRange, controlDifficulty: this.neuro.controlDifficulty, failureMode: this.neuro.failureMode, state: this.neuro.state } : { active: false },
       catalogRuntime: this.missionPlan ? { equipment: this.missionPlan.equipment.length, crew: this.crewRuntime.length, apex: this.missionPlan.apex?.id || null, enemyProfiles: this.sourceEnemyRuntimes.size } : null
     };

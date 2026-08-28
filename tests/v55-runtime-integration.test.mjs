@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GameEngine } from '../src/game-production-runtime.js';
 import { HubGame } from '../src/hub-v52-runtime.js';
+import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { CREW } from '../src/content-core-v50.js';
 import { CAMPAIGNS, ENEMIES, LEVEL_SEEDS, VEHICLES, WEAPONS, WORLDS } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
@@ -136,7 +137,8 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   assert.ok(hub.obstacles.some((entry) => entry.role === 'dropship-hull'));
   assert.equal(hub.getAssetReport().npcMissionSpriteAssetsReady, 16);
 
-  Object.assign(hub.player, { x: 930, y: 624 - hub.player.h, vx: 80, vy: 0, grounded: true });
+  const hazard = ELECTRICAL_HAZARD_ART_V55.collisionBounds;
+  Object.assign(hub.player, { x: hazard.x + 8, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
   hub.update(0.016);
   snapshot = hub.getSnapshot();
   assert.equal(snapshot.hubIntegrity, 78);
@@ -150,19 +152,61 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   Object.assign(hub.npcs[0], { vx: 0, workClock: 1, alertClock: 0, alerted: false });
   hub.draw();
 
+  const far = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-far.png');
+  const parallax = draws.findIndex((source, index) => index > far && source === '/assets/openai/hub/parallax/engineering-far.png');
   const overhead = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-overhead.png');
+  const mid = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-mid.png');
   const dropship = draws.indexOf('/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png');
   const electrical = draws.indexOf('/assets/openai/metroidvania/props/electrical-arc-hazard.png');
   const missionNpc = draws.indexOf('/assets/openai/sprites/normalized/npcs/maksim-orlov-mission-sheet.png');
   const player = draws.indexOf('/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png');
   const foreground = draws.lastIndexOf('/assets/openai/hub/layers/engineering-hangar-foreground.png');
   const monolith = draws.indexOf('/assets/openai/hub/rooms/engineering-hangar.png');
-  assert.ok(overhead >= 0 && dropship > overhead && electrical > dropship);
+  assert.ok(far >= 0 && parallax > far && overhead > parallax, 'FAR puis parallaxe puis plafond');
+  assert.ok(mid > overhead && dropship > mid && electrical > dropship, 'plafond puis MID puis UD-4L puis danger');
   assert.ok(missionNpc > electrical);
   assert.ok(player > missionNpc);
   assert.ok(foreground > player);
   assert.equal(monolith, -1);
   assert.equal(interactionRooms.includes('dropship-hangar'), false);
+
+  let hangarParallaxPasses = 0;
+  hub.drawViewportParallax = () => { hangarParallaxPasses += 1; };
+  hub.drawRoomModule(context, hub.currentRoom(), hub.farLayers.get('/assets/openai/hub/parallax/engineering-far.png'));
+  assert.equal(hangarParallaxPasses, 1, 'le viewport hangar ne repasse jamais au-dessus du véhicule');
+}));
+
+test('l interaction physique UD-4L prime sur un NPC et sur un lift concurrent', () => withBrowserRuntime(() => {
+  const actions = [];
+  const context = mockContext([]);
+  const canvas = { width: 1280, height: 720, getContext: () => context, addEventListener() {} };
+  const hub = new HubGame(canvas, { onAction: (event) => actions.push(event) });
+  hub.start({ deck: 3, roomId: 'dropship-hangar', positionX: 520 });
+  const bounds = DROPSHIP_HANGAR_ART_V55.dropship.interactionBounds;
+  Object.assign(hub.player, {
+    x: bounds.x + bounds.w / 2 - hub.player.w / 2,
+    y: 624 - hub.player.h,
+    vx: 0,
+    vy: 0,
+    grounded: true
+  });
+  const npc = hub.npcs.find((entry) => entry.roomId === 'dropship-hangar');
+  Object.assign(npc, { x: hub.player.x, y: hub.player.y });
+  let liftUses = 0;
+  hub.nearestLift = () => ({ id: 'synthetic-overlap', x: hub.player.x + hub.player.w / 2 });
+  hub.useLift = () => { liftUses += 1; };
+
+  assert.equal(hub.nearestInteraction()?.id, DROPSHIP_HANGAR_ART_V55.dropship.id);
+  assert.match(hub.statusPrompt(), /Embarquer à bord de l’UD-4L/);
+  hub.interact();
+  assert.equal(liftUses, 0, 'la priorité 100 interdit au lift de voler l interaction');
+  assert.equal(actions.at(-1).id, DROPSHIP_HANGAR_ART_V55.dropship.id);
+  assert.equal(actions.at(-1).vehicleId, 'vehicle-009-ud-4l-cheyenne-dropship');
+  assert.equal(actions.at(-1).action, 'navigate:operations');
+  assert.equal(actions.some((event) => event.type === 'hub:npc-interaction'), false);
+
+  Object.assign(hub.player, { x: 760, y: 624 - hub.player.h });
+  assert.equal(hub.nearestInteraction(), null, 'aucune ancienne zone bouton invisible hors de l appareil');
 }));
 
 test('le template vaisseau compile le danger électrique avec son contrat gameplay', () => {

@@ -8,6 +8,7 @@ import {
   HUB_DECKS,
   HUB_MODULAR_ASSETS,
   HUB_TRAVERSAL_ART_FILES,
+  HUB_TRAVERSAL_PROFILES_V60,
   HUB_WORLD,
   compileShipProject
 } from '../src/hub-v51-runtime.js';
@@ -98,8 +99,10 @@ test('compileShipProject converts every Forge ship tile into runtime geometry', 
   assert.equal(compileShipProject({ kind: 'mission', tiles: [] }), null);
 });
 
-test('each profiled Tantalus deck keeps physical props and exposes a non-flat fallback route', () => withRuntime(() => {
+test('each Tantalus room uses its authored V60 traversal list instead of a repeated 2/2/1 kit', () => withRuntime(() => {
   let firstHub = null;
+  const allSignatures = new Set();
+  const allArchetypes = new Set();
   for (const [deckIndex, deck] of HUB_DECKS.entries()) {
     const canvas = { width: 1280, height: 720, getContext: () => mockContext(), addEventListener() {} };
     const hub = new HubGame(canvas);
@@ -109,10 +112,16 @@ test('each profiled Tantalus deck keeps physical props and exposes a non-flat fa
     assert.ok(deck.rooms.every((room) => room.profile?.authoredCollision), `${deck.id}: authored room collision remains enabled`);
 
     assert.equal(snapshot.editorPlaytest, false);
-    assert.equal(snapshot.platformCount, 8, `${deck.id}: two platforms per room`);
-    assert.equal(snapshot.ladderCount, 8, `${deck.id}: two ladders per room`);
-    assert.equal(snapshot.ventCount, 4, `${deck.id}: one vent per room`);
-    const expectedObstacles = deck.id === 'industrial' ? 5 : 4;
+    const profiles = deck.rooms.map((room) => HUB_TRAVERSAL_PROFILES_V60[room.id]);
+    const expectedPlatforms = profiles.reduce((sum, profile) => sum + profile.platforms.length, 0);
+    const expectedLadders = profiles.reduce((sum, profile) => sum + profile.ladders.length, 0);
+    const expectedVents = profiles.reduce((sum, profile) => sum + profile.vents.length, 0);
+    const expectedOccluders = profiles.reduce((sum, profile) => sum + profile.occluders.length, 0);
+    assert.equal(snapshot.platformCount, expectedPlatforms, `${deck.id}: authored platforms`);
+    assert.equal(snapshot.ladderCount, expectedLadders, `${deck.id}: authored ladders`);
+    assert.equal(snapshot.ventCount, expectedVents, `${deck.id}: authored vents`);
+    assert.equal(snapshot.occluderCount, expectedOccluders, `${deck.id}: authored bitmap occluders`);
+    const expectedObstacles = { command: 4, habitat: 4, industrial: 5, engineering: 7 }[deck.id];
     assert.equal(snapshot.obstacleCount, expectedObstacles, `${deck.id}: authored prop and vehicle collisions stay active`);
     assert.deepEqual(
       {
@@ -121,32 +130,36 @@ test('each profiled Tantalus deck keeps physical props and exposes a non-flat fa
         crawlLinks: snapshot.route.crawlLinks,
         nodeCount: snapshot.route.nodeCount
       },
-      { source: 'fallback', verticalLinks: 8, crawlLinks: 4, nodeCount: 12 },
-      `${deck.id}: the normal hub route must never collapse to a flat room-profile route`
+      { source: 'authored-v60', verticalLinks: expectedLadders, crawlLinks: expectedVents, nodeCount: expectedPlatforms + 4 },
+      `${deck.id}: the normal hub route must expose its authored physical lists`
     );
+    assert.equal(snapshot.route.doorCount, 5, `${deck.id}: three bulkheads and two physical lift doors`);
 
     for (const room of deck.rooms) {
+      const profile = HUB_TRAVERSAL_PROFILES_V60[room.id];
       const platforms = hub.v51Platforms.filter((entry) => entry.roomId === room.id);
       const ladders = hub.v51Ladders.filter((entry) => entry.roomId === room.id);
       const vents = hub.v51Vents.filter((entry) => entry.roomId === room.id);
-      assert.equal(platforms.length, 2, `${room.id}: platforms`);
-      assert.equal(ladders.length, 2, `${room.id}: ladders`);
-      assert.equal(vents.length, 1, `${room.id}: vent`);
-      assert.deepEqual(platforms.map((entry) => entry.art), ['catwalk', 'drop'], `${room.id}: two bitmap surface families`);
-      assert.equal(new Set(platforms.map((entry) => entry.y)).size, 2, `${room.id}: distinct vertical tiers`);
+      const occluders = hub.v51Occluders.filter((entry) => entry.roomId === room.id);
+      assert.equal(platforms.length, profile.platforms.length, `${room.id}: platforms`);
+      assert.equal(ladders.length, profile.ladders.length, `${room.id}: ladders`);
+      assert.equal(vents.length, profile.vents.length, `${room.id}: vents`);
+      assert.equal(occluders.length, profile.occluders.length, `${room.id}: occluders`);
+      assert.deepEqual(platforms.map((entry) => entry.art), profile.platforms.map((entry) => entry.art), `${room.id}: authored bitmap surface families`);
+      assert.equal(new Set(platforms.map((entry) => entry.y)).size, platforms.length, `${room.id}: distinct vertical tiers`);
       assert.ok(platforms.every((entry) => entry.y < HUB_WORLD.floorY), `${room.id}: elevated surfaces`);
-      const lower = platforms.reduce((candidate, platform) => platform.y > candidate.y ? platform : candidate);
-      const upper = platforms.reduce((candidate, platform) => platform.y < candidate.y ? platform : candidate);
-      const floorLadder = ladders.find((entry) => entry.top === lower.y && entry.bottom === HUB_WORLD.floorY);
-      const tierLadder = ladders.find((entry) => entry.top === upper.y && entry.bottom === lower.y);
-      assert.ok(floorLadder, `${room.id}: floor reaches lower tier`);
-      assert.ok(tierLadder, `${room.id}: lower tier reaches upper tier`);
-      assert.ok(floorLadder.x >= lower.x && floorLadder.x <= lower.x + lower.w, `${room.id}: lower landing aligned`);
-      assert.ok(tierLadder.x >= lower.x && tierLadder.x <= lower.x + lower.w, `${room.id}: tier departure aligned`);
-      assert.ok(tierLadder.x >= upper.x && tierLadder.x <= upper.x + upper.w, `${room.id}: upper landing aligned`);
-      assert.equal(vents[0].y + vents[0].h, platforms.find((entry) => entry.art === 'drop').y, `${room.id}: vent reaches upper tier`);
+      assert.ok(ladders.every((entry) => [entry.top, entry.bottom].every((height) => height === HUB_WORLD.floorY
+        || platforms.some((platform) => platform.y === height && entry.x >= platform.x && entry.x <= platform.x + platform.w))), `${room.id}: every ladder endpoint is physically supported`);
+      assert.ok(vents.every((entry) => platforms.some((platform) => entry.y + entry.h === platform.y
+        && entry.x + entry.w > platform.x && entry.x < platform.x + platform.w)), `${room.id}: every vent reaches a platform`);
+      assert.ok(occluders.every((entry) => entry.collidable === false && HUB_TRAVERSAL_ART_FILES[entry.art]), `${room.id}: bitmap-only occlusion`);
+      assert.deepEqual(new Set([...platforms, ...ladders, ...vents, ...occluders].map((entry) => entry.archetype)), new Set([profile.archetype]));
+      allSignatures.add(`${platforms.length}/${ladders.length}/${vents.length}/${occluders.length}`);
+      allArchetypes.add(profile.archetype);
     }
   }
+  assert.ok(allSignatures.size >= 4, 'V60 exposes several traversal quantities instead of one repeated count');
+  assert.equal(allArchetypes.size, 16, 'each room owns a named traversal archetype');
 
   const obstacle = firstHub.obstacles[0];
   const previousX = obstacle.x - firstHub.player.w - 2;
@@ -164,10 +177,10 @@ test('hub traversal bitmaps are preloaded, counted and replace rectangle route r
   const report = hub.getAssetReport();
   const snapshot = hub.getSnapshot();
 
-  assert.equal(report.traversalArtCount, 4);
-  assert.equal(report.traversalArtReady, 4);
-  assert.equal(snapshot.traversalArtCount, 4);
-  assert.equal(snapshot.traversalArtReady, 4);
+  assert.equal(report.traversalArtCount, 8);
+  assert.equal(report.traversalArtReady, 8);
+  assert.equal(snapshot.traversalArtCount, 8);
+  assert.equal(snapshot.traversalArtReady, 8);
   assert.equal(report.modularAssetCount, HUB_MODULAR_ASSETS.length);
   assert.ok(report.readyAssetCount >= report.traversalArtReady);
   for (const source of Object.values(HUB_TRAVERSAL_ART_FILES)) {
@@ -176,12 +189,20 @@ test('hub traversal bitmaps are preloaded, counted and replace rectangle route r
     assert.ok([...hub.traversalImages.values()].some((image) => image.currentSrc === source), `${source}: preloaded`);
   }
 
-  trace.drawCalls.length = 0;
-  trace.fillRects.length = 0;
-  hub.drawTraversal(context);
-  const drawnSources = new Set(trace.drawCalls.map((call) => call[0]?.currentSrc).filter(Boolean));
+  const drawnSources = new Set();
+  let prototypeRectCount = 0;
+  for (const [deckIndex, deck] of HUB_DECKS.entries()) {
+    const deckHub = new HubGame(canvas);
+    deckHub.start({ deck: deckIndex, roomId: deck.rooms[0].id, positionX: 180 });
+    trace.drawCalls.length = 0;
+    trace.fillRects.length = 0;
+    deckHub.drawTraversal(context);
+    deckHub.drawTraversalOcclusions(context, 'front');
+    for (const call of trace.drawCalls) if (call[0]?.currentSrc) drawnSources.add(call[0].currentSrc);
+    prototypeRectCount += trace.fillRects.length;
+  }
   assert.ok(Object.values(HUB_TRAVERSAL_ART_FILES).every((source) => drawnSources.has(source)), 'all traversal families render from bitmaps');
-  assert.equal(trace.fillRects.length, 0, 'normal hub traversal no longer renders prototype rectangles');
+  assert.equal(prototypeRectCount, 0, 'normal hub traversal no longer renders prototype rectangles');
 }));
 
 test('ship playtest runs editor enemies, hazards, objectives and a persistent crisis', () => withRuntime(() => {

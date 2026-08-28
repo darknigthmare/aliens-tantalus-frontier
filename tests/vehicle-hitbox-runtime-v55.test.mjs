@@ -134,7 +134,7 @@ test('le vrai GameEngine applique les quatre dimensions physiques v55 sans agran
   }
 }));
 
-test('le vrai GameEngine garde son fallback famille et met à jour le miroir selon le mouvement horizontal', () => withBrowserRuntime(() => {
+test('le vrai GameEngine ne dessine plus de silhouette Canvas pour un châssis sans plaque et met à jour le miroir selon le mouvement horizontal', () => withBrowserRuntime(() => {
   const uncoveredAir = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-011-ad-19cd-dropship');
   const fallbackEngine = buildEngine(uncoveredAir);
   assert.equal(resolveVehicleAnimation(fallbackEngine.vehicle), null);
@@ -147,7 +147,7 @@ test('le vrai GameEngine garde son fallback famille et met à jour le miroir sel
     set fillStyle(value) { this.fillStyleValue = value; }, set strokeStyle(value) { this.strokeStyleValue = value; }, set lineWidth(value) { this.width = value; }
   };
   fallbackEngine.drawVehicle(ctx);
-  assert.ok(familyPaths > 0, 'le rendu famille air de game-final-runtime reste actif');
+  assert.equal(familyPaths, 0, 'aucune silhouette Canvas ne remplace une référence canon manquante');
   assert.equal(spriteCells, 0, 'aucune fausse plaque M577');
 
   const command = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-002-m577-command-apc');

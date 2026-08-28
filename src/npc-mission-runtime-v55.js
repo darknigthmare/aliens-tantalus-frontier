@@ -284,6 +284,9 @@ export function resolveNpcMissionAnimationV55(actor = {}) {
   if (actor.hurt || Number(actor.hurtClock) > 0 || Number(actor.v52HurtClock) > 0) {
     return missionResult(identity, 'hurt', 'hurt');
   }
+  if (actor.vehicleAccessPhase === 'entering' || actor.vehicleAccessPhase === 'exiting') {
+    return missionResult(identity, 'traversal', 'vehicle-access');
+  }
   if (actor.climbing) return missionResult(identity, 'climb', 'climbing');
   if (actor.firing || actor.attacking || Number(actor.fireClock) > 0 || Number(actor.v52FireClock) > 0) {
     return missionResult(identity, 'fire', 'fire');

@@ -436,11 +436,20 @@ export class HubGame {
       .map((item) => ({ ...item, roomId: room.id })));
     const hangar = deck.rooms.find((room) => room.id === DROPSHIP_HANGAR_ART_V55.roomId);
     if (hangar) {
-      const bounds = DROPSHIP_HANGAR_ART_V55.dropship.collisionBounds;
-      geometry.push({
-        x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
-        roomId: hangar.id, role: 'dropship-hull', collisionOnly: true
-      });
+      const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
+      const segments = dropship.collisionSegments?.length
+        ? dropship.collisionSegments
+        : [dropship.collisionBounds];
+      for (const bounds of segments) {
+        geometry.push({
+          x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+          id: bounds.id || `${dropship.id}-collision`,
+          roomId: hangar.id,
+          role: bounds.role || 'dropship-hull',
+          actorId: dropship.id,
+          collisionOnly: true
+        });
+      }
     }
     const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
     if (vehicleBay) {
@@ -517,6 +526,22 @@ export class HubGame {
 
   nearestInteraction() {
     const room = this.currentRoom();
+    if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) {
+      const actor = DROPSHIP_HANGAR_ART_V55.dropship;
+      const bounds = actor.interactionBounds;
+      const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+      if (!overlap(this.player, worldBounds)) return null;
+      return {
+        id: actor.id,
+        roomId: room.id,
+        kind: actor.kind,
+        vehicleId: actor.vehicleId,
+        action: actor.action,
+        description: actor.description,
+        interactionPriority: actor.interactionPriority,
+        interactionBounds: worldBounds
+      };
+    }
     const vehicleContract = resolveHubVehicleArtV58(room.id);
     if (vehicleContract) {
       const actor = vehicleContract.vehicle;
@@ -530,25 +555,40 @@ export class HubGame {
           vehicleId: actor.vehicleId,
           action: actor.action,
           description: actor.description,
+          interactionPriority: 60,
           interactionBounds: worldBounds
         };
       }
     }
     const bounds = room.propInteractionBounds;
     const playerCenter = this.player.x + this.player.w / 2;
-    return bounds && playerCenter >= bounds.x && playerCenter <= bounds.x + bounds.w ? room : null;
+    return bounds && playerCenter >= bounds.x && playerCenter <= bounds.x + bounds.w
+      ? { ...room, interactionPriority: 10, interactionBounds: bounds }
+      : null;
   }
 
   interact() {
     if (!this.running) return;
     const interaction = this.nearestInteraction();
+    const lift = this.nearestLift();
+    const playerCenter = this.player.x + this.player.w / 2;
+    const interactionBounds = interaction?.interactionBounds || interaction?.propInteractionBounds;
+    const interactionCenter = interactionBounds ? interactionBounds.x + interactionBounds.w / 2 : Number.POSITIVE_INFINITY;
+    const interactionDistance = Math.abs(playerCenter - interactionCenter);
+    const liftDistance = lift ? Math.abs(playerCenter - lift.x) : Number.POSITIVE_INFINITY;
+    const useLiftFirst = Boolean(lift
+      && (!interaction || (Number(interaction.interactionPriority || 0) < 100 && liftDistance < interactionDistance)));
+    if (useLiftFirst) {
+      this.useLift(1, true);
+      return;
+    }
     if (interaction) {
       this.audio?.ui();
       this.onAction({ ...interaction, deck: this.state.deck });
       this.persist();
       return;
     }
-    if (this.nearestLift()) this.useLift(1, true);
+    if (lift) this.useLift(1, true);
   }
 
   useLift(direction, wrap = false) {
@@ -762,8 +802,8 @@ export class HubGame {
     ctx.fillStyle = room.index % 2 ? '#0a1111' : '#080e0f';
     ctx.fillRect(room.xStart, 0, roomWidth, FLOOR_Y);
     this.drawHubRoomFarV58(ctx, room);
+    if (modularRoom || modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage);
     if (modularRoom) {
-      this.drawViewportParallax(ctx, room.viewport, farImage);
       this.drawModularRoomV56(ctx, room, 'back');
       this.drawHubRoomMidV58(ctx, room);
     } else {
@@ -782,7 +822,7 @@ export class HubGame {
         ctx.drawImage(image, x, y, width, height);
         ctx.restore();
       }
-      this.drawViewportParallax(ctx, room.viewport, farImage);
+      if (!modularHangar) this.drawViewportParallax(ctx, room.viewport, farImage);
     }
     const edgeShade = ctx.createLinearGradient(room.xStart, 0, room.xEnd, 0);
     edgeShade.addColorStop(0, 'rgba(0, 3, 4, .42)');

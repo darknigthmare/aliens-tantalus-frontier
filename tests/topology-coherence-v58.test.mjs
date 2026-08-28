@@ -4,12 +4,15 @@ import assert from 'node:assert/strict';
 import { CAMPAIGNS, LEVEL_SEEDS, WORLDS } from '../src/content-core-v50.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import { HUB_DECKS, HUB_WORLD, HubGame } from '../src/hub-v52-runtime.js';
+import { HUB_TRAVERSAL_PROFILES_V60 } from '../src/hub-v51-runtime.js';
 import {
   buildHubDoorNetworkV58,
+  buildHubRoomDoorSocketsV60,
   buildHubTopologyV58,
   compileMissionDoorTopologyV58,
   describeMissionDoorRequirementV58,
   validateHubRuntimeTopologyV58,
+  validateHubRoomDoorSocketsV60,
   validateHubTopologyV58,
   validateMissionTopologyV58
 } from '../src/topology-coherence-v58.js';
@@ -147,7 +150,28 @@ test('le graphe V58 du Tantalus relie réciproquement les seize salles par porte
   }
 });
 
-test('chaque pont du hub conserve une chaîne sol, plateforme basse, plateforme haute et bouche de conduit', () => withBrowserMocks(() => {
+test('les sockets V60 sont dérivés des cinq portes runtime de chaque pont sans inventer de sas intérieur', () => {
+  const byRoom = {};
+  for (const deckIndex of HUB_DECKS.keys()) {
+    const sockets = buildHubRoomDoorSocketsV60(HUB_DECKS, HUB_WORLD, deckIndex);
+    const validation = validateHubRoomDoorSocketsV60({ decks: HUB_DECKS, world: HUB_WORLD, deckIndex, sockets });
+    assert.equal(validation.valid, true, `${HUB_DECKS[deckIndex].id}: ${validation.errors.join('; ')}`);
+    assert.equal(validation.socketCount, 8, 'trois cloisons exposent deux faces et deux ascenseurs une face');
+    Object.assign(byRoom, sockets);
+  }
+
+  for (const roomId of ['medical', 'quarantine', 'life-support']) {
+    assert.equal(byRoom[roomId].some((socket) => socket.interior), false, `${roomId}: aucun faux sas intérieur`);
+  }
+  const scienceInterior = byRoom['science-lab'].filter((socket) => socket.interior);
+  assert.equal(scienceInterior.length, 1, 'Science Lab possède un unique socket intérieur');
+  assert.equal(scienceInterior[0].lift, true);
+  assert.equal(scienceInterior[0].doorId, 'habitat:hub-aft-lift');
+  assert.equal(scienceInterior[0].localX, 1096);
+});
+
+test('chaque pont du hub valide ses listes de traversée V60 sans imposer le compte prototype 2/2/1', () => withBrowserMocks(() => {
+  const signatures = new Set();
   for (const [deckIndex, deck] of HUB_DECKS.entries()) {
     const canvas = { width: 1280, height: 720, getContext: mockContext, addEventListener() {} };
     const hub = new HubGame(canvas);
@@ -161,10 +185,33 @@ test('chaque pont du hub conserve une chaîne sol, plateforme basse, plateforme 
       doors: hub.doorStates
     });
     assert.equal(validation.valid, true, `${deck.id}: ${validation.errors.join('; ')}`);
+    const profiles = deck.rooms.map((room) => HUB_TRAVERSAL_PROFILES_V60[room.id]);
+    const expectedPlatforms = profiles.reduce((sum, profile) => sum + profile.platforms.length, 0);
+    const expectedLadders = profiles.reduce((sum, profile) => sum + profile.ladders.length, 0);
+    const expectedVents = profiles.reduce((sum, profile) => sum + profile.vents.length, 0);
     assert.deepEqual(
       [validation.roomCount, validation.platformCount, validation.ladderCount, validation.ventCount, validation.doorCount],
-      [4, 8, 8, 4, 5],
+      [4, expectedPlatforms, expectedLadders, expectedVents, 5],
       `${deck.id}: contrat physique complet`
     );
+    for (const profile of profiles) signatures.add(`${profile.platforms.length}/${profile.ladders.length}/${profile.vents.length}/${profile.occluders.length}`);
   }
+  assert.ok(signatures.size >= 4, 'la topologie couvre plusieurs quantités et archétypes de traversée');
+}));
+
+test('le validateur V60 rejette une plateforme auteur dont la liaison au sol a disparu', () => withBrowserMocks(() => {
+  const deck = HUB_DECKS[0];
+  const canvas = { width: 1280, height: 720, getContext: mockContext, addEventListener() {} };
+  const hub = new HubGame(canvas);
+  hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
+  const broken = validateHubRuntimeTopologyV58({
+    deck,
+    world: HUB_WORLD,
+    platforms: hub.v51Platforms,
+    ladders: hub.v51Ladders.filter((entry) => entry.roomId !== 'bridge'),
+    vents: hub.v51Vents,
+    doors: hub.doorStates
+  });
+  assert.equal(broken.valid, false);
+  assert.ok(broken.errors.some((error) => /bridge platform .* inaccessible/.test(error)), broken.errors.join('; '));
 }));

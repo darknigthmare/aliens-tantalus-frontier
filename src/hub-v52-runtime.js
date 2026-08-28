@@ -187,7 +187,8 @@ export class HubGame extends HubGameV51 {
       const member = PROFILE_BY_ROOM.get(room.id);
       const mobile = !['care', 'repair'].includes(member.interaction.kind);
       const patrolSpeed = mobile ? (member.sheetIndex % 2 ? -24 : 22) : 0;
-      const x = room.xStart + 420 + ((member.sheetIndex * 37 + roomIndex * 19) % 150);
+      const hangarFlightline = room.id === 'dropship-hangar';
+      const x = room.xStart + (hangarFlightline ? 92 : 420 + ((member.sheetIndex * 37 + roomIndex * 19) % 150));
       return {
         id: `hub-npc-${member.crewId}`,
         crewId: member.crewId,
@@ -206,8 +207,8 @@ export class HubGame extends HubGameV51 {
         patrolSpeed,
         resumeVx: patrolSpeed,
         mobile,
-        min: room.xStart + 390,
-        max: room.xEnd - 210,
+        min: room.xStart + (hangarFlightline ? 64 : 390),
+        max: hangarFlightline ? room.xStart + 172 : room.xEnd - 210,
         alive: true,
         workClock: 0,
         alertClock: 0,
@@ -303,6 +304,11 @@ export class HubGame extends HubGameV51 {
     const terminal = this.v51Terminals.find((entry) => Math.abs(center - (entry.x + entry.w / 2)) < 130 && Math.abs(this.player.y - entry.y) < 130);
     const threats = this.enemies.filter((enemy) => enemy.alive).length;
     if (!door && !terminal && !threats) {
+      const physicalInteraction = this.nearestInteraction();
+      if (Number(physicalInteraction?.interactionPriority || 0) >= 100) {
+        super.interact();
+        return;
+      }
       const npc = this.nearestHubNpc();
       if (npc) { this.interactWithNpc(npc); return; }
     }
@@ -341,6 +347,10 @@ export class HubGame extends HubGameV51 {
   statusPrompt() {
     const inherited = super.statusPrompt();
     if (!this.player?.alive || this.enemies.some((enemy) => enemy.alive)) return inherited;
+    const physicalInteraction = this.nearestInteraction();
+    if (Number(physicalInteraction?.interactionPriority || 0) >= 100) {
+      return inherited || `E — ${physicalInteraction.description}`;
+    }
     const npc = this.nearestHubNpc();
     return npc ? `E — ${npc.interaction.label} · ${npc.name}` : inherited;
   }

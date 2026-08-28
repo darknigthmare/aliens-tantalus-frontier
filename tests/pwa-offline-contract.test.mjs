@@ -29,7 +29,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v59 couvre la fermeture ESM, le hub physique, les décors zonés et les accès véhicule', async () => {
+test('le cache hors-ligne v60 couvre la fermeture ESM, le hub physique, les décors zonés et les accès véhicule', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -59,6 +59,7 @@ test('le cache hors-ligne v59 couvre la fermeture ESM, le hub physique, les déc
     '/src/npc-mission-runtime-v55.js',
     '/src/vehicle-visual-overrides-v56.js',
     '/src/vehicle-access-runtime-v59.js',
+    '/src/vehicle-deployment-gates-v60.js',
     '/src/weapon-visual-runtime-v56.js',
     '/src/equipment-visual-runtime-v56.js',
     '/src/mission-interactive-art-v56.js',
@@ -67,7 +68,7 @@ test('le cache hors-ligne v59 couvre la fermeture ESM, le hub physique, les déc
     '/src/mission-door-art-v58.js',
     '/src/topology-coherence-v58.js'
   ]) {
-    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v59`);
+    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v60`);
   }
 
   assert.equal(Object.keys(SPRITE_SHEETS).length, 182);
@@ -98,19 +99,23 @@ test('le cache hors-ligne v59 couvre la fermeture ESM, le hub physique, les déc
   ]);
   for (const assetPath of staticRuntimeAssets) {
     await access(localPath(assetPath));
-    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v59`);
+    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v60`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v59-runtime-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v60-runtime-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
     '/docs/VERSION_HISTORY_V59.md',
     '/docs/ART_PROVENANCE_V59.md',
-    '/docs/references/V59_ASSET_COMPLETION_MATRIX.md'
+    '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
+    '/docs/VERSION_HISTORY_V60.md',
+    '/docs/V60_LEVEL_DESIGN_AUDIT.md',
+    '/docs/references/V60_ASSET_COMPLETION_MATRIX.md'
   ]) {
-    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v59`);
+    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v60`);
   }
+  assert.match(worker, /async function precacheV60\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

@@ -13,8 +13,12 @@ import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
   drop: '/assets/openai/metroidvania/props/drop-platform.png',
+  ledge: '/assets/openai/metroidvania/props/short-ledge.png',
   ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
-  vent: '/assets/openai/metroidvania/props/vent-entrance.png'
+  vent: '/assets/openai/metroidvania/props/vent-entrance.png',
+  maintenancePipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
+  ceilingCables: '/assets/openai/metroidvania/props/ceiling-cables.png',
+  foregroundPipes: '/assets/openai/metroidvania/props/foreground-pipes.png'
 });
 
 export const HUB_MODULAR_ASSETS = Object.freeze([...new Set([
@@ -206,57 +210,127 @@ export function compileShipProject(project) {
   };
 }
 
-const HUB_TRAVERSAL_PROFILES_V58 = Object.freeze({
-  bridge: Object.freeze({ lower: [92, 520], upper: [560, 500], floorLadderX: 180, tierLadderX: 590, ventX: 914 }),
-  briefing: Object.freeze({ lower: [250, 540], upper: [110, 470], floorLadderX: 330, tierLadderX: 520, ventX: 126 }),
-  'combat-information': Object.freeze({ lower: [650, 450], upper: [280, 520], floorLadderX: 1010, tierLadderX: 720, ventX: 298 }),
-  'cryo-bay': Object.freeze({ lower: [160, 520], upper: [620, 455], floorLadderX: 260, tierLadderX: 650, ventX: 944 }),
-  'crew-quarters': Object.freeze({ lower: [110, 520], upper: [580, 450], floorLadderX: 210, tierLadderX: 610, ventX: 888 }),
-  mess: Object.freeze({ lower: [390, 560], upper: [120, 430], floorLadderX: 820, tierLadderX: 430, ventX: 136 }),
-  medical: Object.freeze({ lower: [160, 540], upper: [650, 410], floorLadderX: 260, tierLadderX: 680, ventX: 936 }),
-  'science-lab': Object.freeze({ lower: [580, 520], upper: [190, 470], floorLadderX: 980, tierLadderX: 620, ventX: 206 }),
-  quarantine: Object.freeze({ lower: [120, 520], upper: [570, 500], floorLadderX: 220, tierLadderX: 600, ventX: 916 }),
-  armory: Object.freeze({ lower: [520, 570], upper: [160, 440], floorLadderX: 960, tierLadderX: 560, ventX: 176 }),
-  workshop: Object.freeze({ lower: [160, 530], upper: [650, 420], floorLadderX: 250, tierLadderX: 680, ventX: 932 }),
-  'vehicle-bay': Object.freeze({ lower: [690, 420], upper: [210, 500], floorLadderX: 980, tierLadderX: 700, ventX: 226 }),
-  'dropship-hangar': Object.freeze({ lower: [130, 620], upper: [690, 430], floorLadderX: 230, tierLadderX: 720, ventX: 966 }),
-  reactor: Object.freeze({ lower: [500, 570], upper: [130, 420], floorLadderX: 930, tierLadderX: 540, ventX: 146 }),
-  'life-support': Object.freeze({ lower: [150, 530], upper: [620, 470], floorLadderX: 250, tierLadderX: 650, ventX: 916 }),
-  'sensor-array': Object.freeze({ lower: [590, 510], upper: [160, 470], floorLadderX: 960, tierLadderX: 630, ventX: 176 })
+const platform = (id, x, y, w, art) => Object.freeze({ id, x, y, w, h: 20, type: 'platform', art });
+const ladder = (id, x, top, bottom, w = 52) => Object.freeze({ id, x, top, bottom, w, type: 'ladder' });
+const vent = (id, x, y, w = 132, h = 58) => Object.freeze({ id, x, y, w, h, type: 'vent', art: 'vent' });
+const occluder = (id, art, x, y, w, h, alpha = 0.42, phase = 'front') => Object.freeze({
+  id, art, x, y, w, h, alpha, phase, collidable: false, type: 'occluder'
+});
+const traversalProfile = (archetype, platforms, ladders, vents, occluders = []) => Object.freeze({
+  archetype,
+  platforms: Object.freeze(platforms),
+  ladders: Object.freeze(ladders),
+  vents: Object.freeze(vents),
+  occluders: Object.freeze(occluders)
+});
+
+export const HUB_TRAVERSAL_PROFILES_V60 = Object.freeze({
+  bridge: traversalProfile('command-gantry',
+    [platform('bridge-low', 100, 506, 500, 'catwalk'), platform('bridge-high', 550, 382, 500, 'ledge')],
+    [ladder('bridge-floor', 180, 506, 624), ladder('bridge-tier', 590, 382, 506)],
+    [vent('bridge-vent', 914, 324)],
+    [occluder('bridge-cables', 'ceilingCables', 60, -12, 520, 126, 0.44)]),
+  briefing: traversalProfile('command-amphitheatre',
+    [platform('briefing-low', 250, 496, 510, 'ledge'), platform('briefing-high', 110, 378, 450, 'catwalk'), platform('briefing-side', 790, 430, 160, 'drop')],
+    [ladder('briefing-floor', 330, 496, 624), ladder('briefing-tier', 520, 378, 496), ladder('briefing-side-link', 850, 430, 624, 46)],
+    [vent('briefing-vent', 126, 320)],
+    [occluder('briefing-pipe', 'maintenancePipe', 810, 182, 184, 250, 0.5)]),
+  'combat-information': traversalProfile('command-data-spine',
+    [platform('cic-low', 650, 494, 450, 'catwalk'), platform('cic-high', 280, 374, 520, 'drop'), platform('cic-side', 120, 506, 170, 'ledge')],
+    [ladder('cic-floor', 1010, 494, 624), ladder('cic-tier', 720, 374, 494), ladder('cic-side-link', 200, 506, 624, 46)],
+    [vent('cic-upper-vent', 298, 316), vent('cic-service-vent', 850, 436, 120, 58)],
+    [occluder('cic-cables', 'ceilingCables', 650, -8, 420, 118, 0.4)]),
+  'cryo-bay': traversalProfile('command-cryo-service',
+    [platform('cryo-low', 160, 500, 480, 'ledge'), platform('cryo-high', 620, 386, 300, 'drop')],
+    [ladder('cryo-floor', 260, 500, 624), ladder('cryo-tier', 630, 386, 500)],
+    [vent('cryo-vent', 780, 328)],
+    [occluder('cryo-foreground', 'foregroundPipes', 10, 506, 260, 190, 0.28)]),
+  'crew-quarters': traversalProfile('habitat-bunk-stacks',
+    [platform('quarters-low', 110, 500, 520, 'ledge'), platform('quarters-high', 580, 390, 360, 'catwalk'), platform('quarters-side', 970, 470, 180, 'drop')],
+    [ladder('quarters-floor', 210, 500, 624), ladder('quarters-tier', 610, 390, 500), ladder('quarters-side-link', 1050, 470, 624, 46)],
+    [vent('quarters-vent', 888, 332)],
+    [occluder('quarters-pipes', 'maintenancePipe', 860, 188, 168, 230, 0.42)]),
+  mess: traversalProfile('habitat-galley-loop',
+    [platform('mess-low', 390, 492, 500, 'catwalk'), platform('mess-high', 120, 376, 430, 'ledge')],
+    [ladder('mess-floor', 820, 492, 624), ladder('mess-tier', 430, 376, 492)],
+    [vent('mess-vent', 136, 318)],
+    [occluder('mess-cables', 'ceilingCables', 120, -10, 380, 116, 0.34)]),
+  medical: traversalProfile('habitat-clinical-service',
+    [platform('medical-low', 160, 502, 500, 'ledge'), platform('medical-high', 650, 388, 300, 'drop')],
+    [ladder('medical-floor', 260, 502, 624), ladder('medical-tier', 655, 388, 502)],
+    [vent('medical-vent', 810, 330)],
+    [occluder('medical-pipe', 'maintenancePipe', 910, 190, 150, 220, 0.36)]),
+  'science-lab': traversalProfile('habitat-lab-bridge',
+    [platform('lab-low', 580, 498, 330, 'catwalk'), platform('lab-high', 190, 380, 470, 'ledge')],
+    [ladder('lab-floor', 850, 498, 624), ladder('lab-tier', 620, 380, 498)],
+    [vent('lab-vent', 206, 322)],
+    [occluder('lab-cables', 'ceilingCables', 560, -12, 350, 116, 0.36)]),
+  quarantine: traversalProfile('industrial-decon-frame',
+    [platform('quarantine-low', 120, 500, 520, 'ledge'), platform('quarantine-high', 570, 382, 480, 'drop')],
+    [ladder('quarantine-floor', 220, 500, 624), ladder('quarantine-tier', 600, 382, 500)],
+    [vent('quarantine-vent', 916, 324)],
+    [occluder('quarantine-pipes', 'foregroundPipes', 0, 512, 300, 184, 0.3)]),
+  armory: traversalProfile('industrial-secure-rack',
+    [platform('armory-low', 520, 490, 380, 'catwalk'), platform('armory-high', 160, 374, 440, 'ledge')],
+    [ladder('armory-floor', 800, 490, 624), ladder('armory-tier', 560, 374, 490)],
+    [vent('armory-vent', 176, 316)],
+    [occluder('armory-pipe', 'maintenancePipe', 720, 174, 180, 248, 0.46)]),
+  workshop: traversalProfile('industrial-fabrication',
+    [platform('workshop-low', 160, 500, 530, 'ledge'), platform('workshop-high', 650, 384, 440, 'catwalk')],
+    [ladder('workshop-floor', 250, 500, 624), ladder('workshop-tier', 680, 384, 500)],
+    [vent('workshop-vent', 932, 326)],
+    [occluder('workshop-cables', 'ceilingCables', 90, -10, 430, 124, 0.44), occluder('workshop-pipes', 'foregroundPipes', 920, 510, 280, 188, 0.26)]),
+  'vehicle-bay': traversalProfile('industrial-service-split',
+    [platform('vehicle-service', 700, 466, 250, 'drop'), platform('vehicle-observation', 90, 370, 230, 'ledge')],
+    [ladder('vehicle-service-link', 900, 466, 624), ladder('vehicle-observation-link', 180, 370, 624, 46)],
+    [vent('vehicle-vent', 110, 312)],
+    [occluder('vehicle-cables', 'ceilingCables', 710, -8, 390, 118, 0.38)]),
+  'dropship-hangar': traversalProfile('engineering-flightline',
+    [platform('hangar-observation', 70, 360, 260, 'catwalk')],
+    [ladder('hangar-observation-link', 160, 360, 624, 48)],
+    [vent('hangar-vent', 90, 302)],
+    [occluder('hangar-cables', 'ceilingCables', 40, -16, 420, 124, 0.38)]),
+  reactor: traversalProfile('engineering-reactor-ring',
+    [platform('reactor-low', 500, 492, 380, 'drop'), platform('reactor-high', 130, 372, 420, 'catwalk')],
+    [ladder('reactor-floor', 760, 492, 624), ladder('reactor-tier', 540, 372, 492)],
+    [vent('reactor-vent', 146, 314)],
+    [occluder('reactor-pipes', 'foregroundPipes', 0, 500, 270, 198, 0.32)]),
+  'life-support': traversalProfile('engineering-filtration-stack',
+    [platform('life-low', 150, 500, 500, 'ledge'), platform('life-high', 620, 386, 350, 'catwalk'), platform('life-side', 990, 470, 160, 'drop')],
+    [ladder('life-floor', 250, 500, 624), ladder('life-tier', 640, 386, 500), ladder('life-side-link', 1060, 470, 624, 46)],
+    [vent('life-upper-vent', 810, 328), vent('life-side-vent', 1010, 412, 120, 58)],
+    [occluder('life-pipes', 'foregroundPipes', 0, 506, 320, 192, 0.34)]),
+  'sensor-array': traversalProfile('engineering-sensor-spine',
+    [platform('sensor-low', 590, 494, 330, 'catwalk'), platform('sensor-high', 160, 376, 470, 'ledge')],
+    [ladder('sensor-floor', 850, 494, 624), ladder('sensor-tier', 620, 376, 494)],
+    [vent('sensor-vent', 176, 318)],
+    [occluder('sensor-cables', 'ceilingCables', 580, -10, 350, 118, 0.42)] )
 });
 
 function fallbackTraversal(deck) {
   const platforms = [];
   const ladders = [];
   const vents = [];
-  const yShift = (deck % 2) * 14;
+  const occluders = [];
+  const archetypes = [];
   for (let room = 0; room < 4; room += 1) {
     const start = room * HUB_WORLD.roomWidth;
     const roomId = HUB_DECKS[deck]?.rooms[room]?.id || `room-${room + 1}`;
-    const profile = HUB_TRAVERSAL_PROFILES_V58[roomId] || HUB_TRAVERSAL_PROFILES_V58.bridge;
-    const lowerY = HUB_WORLD.floorY - 118 - ((room + deck) % 2) * 16;
-    const upperY = HUB_WORLD.floorY - 242 + ((room + deck) % 3) * 10 - yShift;
-    platforms.push(
-      { x: start + profile.lower[0], y: lowerY, w: profile.lower[1], h: 20, type: 'platform', art: 'catwalk', roomId },
-      { x: start + profile.upper[0], y: upperY, w: profile.upper[1], h: 20, type: 'platform', art: 'drop', roomId }
-    );
-    ladders.push(
-      { x: start + profile.floorLadderX, top: lowerY, bottom: HUB_WORLD.floorY, w: 52, type: 'ladder', roomId },
-      { x: start + profile.tierLadderX, top: upperY, bottom: lowerY, w: 52, type: 'ladder', roomId }
-    );
-    vents.push({
-      id: `deck-${deck + 1}-vent-${room + 1}`,
-      x: start + profile.ventX, y: upperY - 58, w: 132, h: 58, type: 'vent', roomId
-    });
+    const profile = HUB_TRAVERSAL_PROFILES_V60[roomId] || HUB_TRAVERSAL_PROFILES_V60.bridge;
+    archetypes.push(profile.archetype);
+    platforms.push(...profile.platforms.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
+    ladders.push(...profile.ladders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
+    vents.push(...profile.vents.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
+    occluders.push(...profile.occluders.map((entry) => ({ ...entry, x: start + entry.x, roomId, archetype: profile.archetype })));
   }
   return {
-    platforms, ladders, vents,
+    platforms, ladders, vents, occluders, archetypes,
     route: {
-      id: `deck-${deck + 1}-vertical-route`, source: 'fallback',
+      id: `deck-${deck + 1}-vertical-route`, source: 'authored-v60',
       nodeCount: platforms.length + 4,
       verticalLinks: ladders.length,
       crawlLinks: vents.length,
-      doorCount: 4,
+      doorCount: 5,
       objectiveCount: 0,
       hazardCount: 0
     }
@@ -278,6 +352,8 @@ export class HubGame extends HubGameV50 {
     this.v51Platforms = [];
     this.v51Ladders = [];
     this.v51Vents = [];
+    this.v51Occluders = [];
+    this.traversalArchetypes = [];
     this.v51Walls = [];
     this.v51Doors = [];
     this.v51Floors = [];
@@ -340,6 +416,8 @@ export class HubGame extends HubGameV50 {
       this.v51Platforms = [...project.floors, ...project.platforms].map((entry) => ({ ...entry }));
       this.v51Ladders = [...project.ladders, ...project.lifts].map((entry) => ({ ...entry }));
       this.v51Vents = project.vents.map((entry) => ({ ...entry }));
+      this.v51Occluders = [];
+      this.traversalArchetypes = ['frontier-forge'];
       this.v51Walls = project.walls.map((entry) => ({ ...entry }));
       this.v51Doors = project.doors.map((entry) => ({ ...entry }));
       this.route = { ...project.route };
@@ -354,6 +432,8 @@ export class HubGame extends HubGameV50 {
     this.v51Platforms = traversal.platforms;
     this.v51Ladders = traversal.ladders;
     this.v51Vents = traversal.vents;
+    this.v51Occluders = traversal.occluders;
+    this.traversalArchetypes = [...new Set(traversal.archetypes)];
     this.v51Walls = [];
     this.v51Doors = [];
     this.route = traversal.route;
@@ -747,6 +827,8 @@ export class HubGame extends HubGameV50 {
       platformCount: this.v51Platforms.length,
       ladderCount: this.v51Ladders.length,
       ventCount: this.v51Vents.length,
+      occluderCount: this.v51Occluders.length,
+      traversalArchetypes: [...this.traversalArchetypes],
       traversalArtReady: assetReport.traversalArtReady,
       traversalArtCount: assetReport.traversalArtCount,
       wallCount: this.v51Walls.length,
@@ -791,6 +873,7 @@ export class HubGame extends HubGameV50 {
     }
     if (!this.editorPlaytest) for (const door of this.doorStates) this.drawDoor(ctx, door);
     for (const door of this.v51Doors) this.drawRuntimeDoor(ctx, door);
+    this.drawTraversalOcclusions(ctx, 'front');
     if (!this.editorPlaytest) {
       for (const room of deck.rooms) {
         if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) this.drawModularHangar(ctx, room, 'front');
@@ -837,12 +920,16 @@ export class HubGame extends HubGameV50 {
   }
 
   drawTraversalPlatform(ctx, platform) {
-    const art = platform.art === 'drop' ? 'drop' : 'catwalk';
+    const art = ['catwalk', 'drop', 'ledge'].includes(platform.art) ? platform.art : 'catwalk';
     const image = this.traversalImages.get(art);
     if (!imageReady(image)) return;
-    const crop = art === 'catwalk'
-      ? { x: 0, y: 0, w: image.naturalWidth, h: Math.min(92, image.naturalHeight), renderHeight: 90, surfaceOffset: 55 }
-      : { x: 0, y: 0, w: image.naturalWidth, h: image.naturalHeight, renderHeight: 84, surfaceOffset: 18 };
+    const profiles = {
+      catwalk: { cropHeight: 92, renderHeight: 90, surfaceOffset: 55 },
+      drop: { cropHeight: image.naturalHeight, renderHeight: 84, surfaceOffset: 18 },
+      ledge: { cropHeight: image.naturalHeight, renderHeight: 72, surfaceOffset: 18 }
+    };
+    const profile = profiles[art];
+    const crop = { x: 0, y: 0, w: image.naturalWidth, h: Math.min(profile.cropHeight, image.naturalHeight), ...profile };
     const renderHeight = crop.renderHeight;
     const surfaceOffset = crop.surfaceOffset;
     const renderY = platform.y - surfaceOffset;
@@ -885,6 +972,23 @@ export class HubGame extends HubGameV50 {
     const image = this.traversalImages.get('vent');
     if (!imageReady(image)) return;
     ctx.drawImage(image, vent.x, vent.y, vent.w, vent.h);
+  }
+
+  drawTraversalOcclusions(ctx, phase = 'front') {
+    for (const occlusion of this.v51Occluders.filter((entry) => entry.phase === phase)) {
+      const image = this.traversalImages.get(occlusion.art);
+      if (!imageReady(image)) continue;
+      const unitWidth = image.naturalWidth * (occlusion.h / image.naturalHeight);
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(occlusion.x, occlusion.y, occlusion.w, occlusion.h);
+      ctx.clip();
+      ctx.globalAlpha = clamp(occlusion.alpha, 0, 1);
+      for (let x = occlusion.x; x < occlusion.x + occlusion.w + unitWidth; x += Math.max(28, unitWidth - 8)) {
+        ctx.drawImage(image, x, occlusion.y, unitWidth, occlusion.h);
+      }
+      ctx.restore();
+    }
   }
 
   drawEnemy(ctx, enemy) {

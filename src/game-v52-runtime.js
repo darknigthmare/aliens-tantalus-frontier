@@ -16,10 +16,14 @@ import {
 } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import {
+  SQUAD_VEHICLE_ACCESS_V60,
   VEHICLE_ACCESS_SECURE_DURATION_V59,
+  createSquadVehicleAccessRuntimeV60,
   createVehicleAccessTransitionV59,
   resolveVehicleAccessContractV59,
-  resolveVehicleAccessFallbackV59
+  resolveVehicleAccessFallbackV59,
+  resolveSquadVehicleAccessSocketV60,
+  snapshotSquadVehicleAccessRuntimeV60
 } from './vehicle-access-runtime-v59.js';
 
 
@@ -306,6 +310,10 @@ function createSquadActor(member, index, leader) {
     crouching: false,
     inCover: false,
     inVehicle: false,
+    vehicleSeatId: null,
+    vehicleAccessPhase: null,
+    vehicleAccessElapsed: 0,
+    vehicleAccessApproachElapsed: 0,
     alive: true,
     downed: false,
     bleedOut: 0,
@@ -482,8 +490,15 @@ export function withV52MissionRuntime(BaseEngine) {
         rallies: 0,
         separations: 0,
         boarded: 0,
+        disembarked: 0,
+        accessSkipped: 0,
+        accessAborted: 0,
         consequences: []
       };
+      if (this.vehicle) {
+        this.vehicle.squadAccessRuntime = null;
+        this.vehicle.squadAccessBoardingComplete = false;
+      }
       this.squadCommandMultiplier = this.squadActors.some((member) => member.specialty === 'command') ? 1.12 : 1;
       this.squadCohesionMultiplier = this.squadActors.some((member) => member.specialty === 'diplomacy') ? 1.1 : 1;
       if (this.squadCommandMultiplier > 1 && this.player) this.player.maxArmor += 6;
@@ -496,23 +511,56 @@ export function withV52MissionRuntime(BaseEngine) {
 
     setCoop(enabled) {
       const next = Boolean(enabled);
-      if (!next && this.vehicle?.accessTransition?.actorRole === 'coop') this.abortVehicleAccessV59('coop-disabled');
-      if (!next && this.coop?.inVehicle) this.commitVehicleAccessV59(this.coop, 'exiting');
+      const switchingRole = next !== Boolean(this.coopEnabled);
       const crewId = this.coop?.operatorId;
       const counterpart = asList(this.squadActors).find((member) => member.crewId === crewId);
-      if (counterpart && next !== Boolean(this.coopEnabled)) {
+      const counterpartAccessPhase = counterpart?.vehicleAccessPhase;
+      const interruptedSocket = switchingRole && this.vehicle?.squadAccessRuntime?.socket
+        ? { ...this.vehicle.squadAccessRuntime.socket }
+        : null;
+      if (switchingRole && this.vehicle?.squadAccessRuntime) {
+        this.abortSquadVehicleAccessV60('coop-role-change');
+        this.vehicle.squadAccessBoardingComplete = false;
+      }
+      if (counterpart && interruptedSocket && ['entering', 'exiting'].includes(counterpartAccessPhase) && !counterpart.inVehicle) {
+        counterpart.x = clamp(
+          interruptedSocket.x + interruptedSocket.outward * (counterpart.w * 0.72 + 12) - counterpart.w / 2,
+          0,
+          WORLD_WIDTH - counterpart.w
+        );
+        counterpart.y = clamp(interruptedSocket.bottom - counterpart.h, 0, WORLD_HEIGHT - counterpart.h);
+        counterpart.vx = 0;
+        counterpart.vy = 0;
+        counterpart.grounded = true;
+      }
+      if (!next && this.vehicle?.accessTransition?.actorRole === 'coop') this.abortVehicleAccessV59('coop-disabled');
+      if (!next && this.coop?.inVehicle) this.commitVehicleAccessV59(this.coop, 'exiting');
+      if (counterpart && switchingRole) {
         const from = next ? counterpart : this.coop;
         const to = next ? this.coop : counterpart;
-        for (const key of ['x', 'y', 'health', 'armor', 'alive', 'downed', 'bleedOut', 'facing', 'kills']) if (from?.[key] !== undefined) to[key] = from[key];
+        for (const key of ['x', 'y', 'health', 'armor', 'alive', 'downed', 'bleedOut', 'facing', 'kills', 'inVehicle', 'vehicleSeatId']) {
+          if (from?.[key] !== undefined) to[key] = from[key];
+        }
         to.vx = 0;
         to.vy = 0;
+        if (this.vehicle) {
+          if (this.vehicle.driver === from) this.vehicle.driver = to.inVehicle ? to : null;
+          const remapped = asList(this.vehicle.passengers)
+            .map((passenger) => passenger === from ? to : passenger)
+            .filter((passenger) => passenger && passenger !== this.vehicle.driver && (passenger !== to || to.inVehicle));
+          this.vehicle.passengers = [...new Set(remapped)];
+          this.vehicle.occupied = Boolean(this.vehicle.driver);
+          this.vehicle.squadAccessBoardingComplete = false;
+        }
+        from.inVehicle = false;
+        from.vehicleSeatId = null;
       }
       return super.setCoop(next);
     }
     toggleVehicle(actor = this.player) {
       if (!actor?.alive || !this.vehicle?.active || this.vehicle.destroyed) return false;
       if (this.mission && this.mission.state !== 'active') return false;
-      if (this.vehicle.accessTransition || Number(this.vehicle.accessSecureClock) > 0) return false;
+      if (this.vehicle.accessTransition || this.vehicle.squadAccessRuntime || Number(this.vehicle.accessSecureClock) > 0) return false;
       const actorRole = this.vehicleAccessActorRoleV59(actor);
       if (!actorRole) return false;
       const animation = resolveVehicleAnimation(this.vehicle);
@@ -548,6 +596,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const actorRole = this.vehicleAccessActorRoleV59(actor);
       if (!actorRole || !this.vehicle) return false;
       if (this.vehicle.accessTransition?.actorRole === actorRole) return true;
+      if (this.vehicle.squadAccessRuntime && (this.vehicle.driver === actor || actor.inVehicle)) return true;
       if (!includeSecure || Number(this.vehicle.accessSecureClock) <= 0 || !actor.inVehicle) return false;
       return this.vehicle.driver === actor || asList(this.vehicle.passengers).includes(actor);
     }
@@ -573,11 +622,13 @@ export function withV52MissionRuntime(BaseEngine) {
       if (phase === 'entering') {
         if (actor.inVehicle || distance(actor, this.vehicle) > 220) return false;
         actor.inVehicle = true;
+        actor.vehicleSeatId = null;
         if (!this.vehicle.driver) this.vehicle.driver = actor;
         else if (!asList(this.vehicle.passengers).includes(actor)) this.vehicle.passengers.push(actor);
       } else {
         if (!actor.inVehicle) return false;
         actor.inVehicle = false;
+        actor.vehicleSeatId = null;
         actor.x = clamp(this.vehicle.x + this.vehicle.w + 18, 0, WORLD_WIDTH - actor.w);
         actor.y = this.vehicle.y + this.vehicle.h - actor.h;
         if (this.vehicle.driver === actor) {
@@ -679,7 +730,7 @@ export function withV52MissionRuntime(BaseEngine) {
 
     updateVehicleDriver(player, delta, controls) {
       const beforeX = Number(this.vehicle?.x) || 0;
-      if (this.vehicle?.accessTransition || Number(this.vehicle?.accessSecureClock) > 0) {
+      if (this.vehicle?.accessTransition || this.vehicle?.squadAccessRuntime || Number(this.vehicle?.accessSecureClock) > 0) {
         this.vehicle.vx = 0;
         this.vehicle.vy = 0;
         return false;
@@ -747,9 +798,23 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     damageVehicle(amount, source = 'enemy') {
+      const boardedBeforeImpact = this.activeSquadActors().filter((member) => member.inVehicle);
       const result = super.damageVehicle(amount, source);
       if (this.vehicle && result > 0) this.vehicle.v52HurtClock = 0.6;
-      if (this.vehicle?.destroyed && this.vehicle.accessTransition) this.abortVehicleAccessV59('vehicle-destroyed');
+      if (this.vehicle?.destroyed) {
+        if (this.vehicle.accessTransition) this.abortVehicleAccessV59('vehicle-destroyed');
+        if (this.vehicle.squadAccessRuntime) this.abortSquadVehicleAccessV60('vehicle-destroyed', { eject: true });
+        else if (boardedBeforeImpact.length) {
+          const socket = resolveSquadVehicleAccessSocketV60(this.vehicle, resolveVehicleAnimation(this.vehicle)?.sheetId);
+          for (const [index, member] of boardedBeforeImpact.entries()) {
+            member.inVehicle = false;
+            member.vehicleSeatId = null;
+            member.vehicleAccessPhase = null;
+            this.placeSquadMemberOutsideVehicleV60(member, { socket, index, impulse: true });
+          }
+          this.vehicle.passengers = asList(this.vehicle.passengers).filter((passenger) => !passenger?.squadMember);
+        }
+      }
       return result;
     }
 
@@ -853,10 +918,399 @@ export function withV52MissionRuntime(BaseEngine) {
       this.hostileProjectiles = asList(this.hostileProjectiles).filter((projectile) => !projectile.hit && projectile.life > 0);
     }
 
+    squadVehiclePassengerCapacityV60() {
+      if (!this.vehicle?.active || this.vehicle.destroyed) return 0;
+      const seatCount = Number(this.vehicle.seatCount);
+      const handlingCapacity = Number(this.vehicleHandling?.passengerCapacity);
+      return Math.max(0, Number.isFinite(seatCount) ? seatCount - 1 : Number.isFinite(handlingCapacity) ? handlingCapacity : 0);
+    }
+
+    squadVehicleSeatIdV60(member) {
+      const seats = asList(this.vehicle?.seatAssignments).filter((seat) => seat?.role !== 'driver');
+      const used = new Set(asList(this.vehicle?.passengers)
+        .filter((actor) => actor !== member && actor?.inVehicle && actor.vehicleSeatId)
+        .map((actor) => actor.vehicleSeatId));
+      const preferred = seats.find((seat) => seat.operatorId === member.crewId && !used.has(seat.seatId));
+      return (preferred || seats.find((seat) => !used.has(seat.seatId)))?.seatId || `passenger-${member.formationIndex + 1}`;
+    }
+
+    squadVehicleAccessContractV60(vehicle = this.vehicle) {
+      const request = vehicle?.active ? resolveVehicleAnimation(vehicle) : null;
+      return resolveVehicleAccessContractV59(request?.sheetId);
+    }
+
+    placeSquadMemberOutsideVehicleV60(member, { socket = null, index = 0, impulse = false } = {}) {
+      if (!member || !this.vehicle) return false;
+      const vehicleBounds = getEntitySpriteCollisionBounds(this.vehicle) || this.vehicle;
+      const memberLocal = member.spriteHitbox?.local;
+      const local = memberLocal && [memberLocal.x, memberLocal.y, memberLocal.w, memberLocal.h].every((value) => Number.isFinite(Number(value)))
+        ? memberLocal
+        : { x: 0, y: 0, w: member.w, h: member.h };
+      const accessSocket = socket || resolveSquadVehicleAccessSocketV60(
+        this.vehicle,
+        resolveVehicleAnimation(this.vehicle)?.sheetId
+      );
+      const outward = Number(accessSocket?.outward) < 0 ? -1 : 1;
+      const clearance = 16 + Math.max(0, Number(index) || 0) * SQUAD_VEHICLE_ACCESS_V60.queueSpacing;
+      const maximumX = Math.max(0, WORLD_WIDTH - member.w);
+      const leftX = vehicleBounds.x - clearance - local.x - local.w;
+      const rightX = vehicleBounds.x + vehicleBounds.w + clearance - local.x;
+      const preferredX = outward < 0 ? leftX : rightX;
+      const alternateX = outward < 0 ? rightX : leftX;
+      const chosenX = preferredX >= 0 && preferredX <= maximumX ? preferredX : alternateX;
+      member.x = clamp(chosenX, 0, maximumX);
+      const anchorBottom = Number.isFinite(Number(accessSocket?.bottom))
+        ? Number(accessSocket.bottom)
+        : vehicleBounds.y + vehicleBounds.h;
+      member.y = clamp(anchorBottom - member.h, 0, WORLD_HEIGHT - member.h);
+      if (overlaps(member, this.vehicle)) {
+        const aboveY = vehicleBounds.y - local.y - local.h - 12;
+        const belowY = vehicleBounds.y + vehicleBounds.h + 12 - local.y;
+        member.y = clamp(aboveY >= 0 ? aboveY : belowY, 0, WORLD_HEIGHT - member.h);
+      }
+      member.vx = impulse ? outward * 80 : 0;
+      member.vy = impulse ? -120 : 0;
+      member.facing = outward;
+      member.grounded = !impulse;
+      return !overlaps(member, this.vehicle);
+    }
+
+    beginSquadVehicleAccessV60(mode, members, leader) {
+      const vehicle = this.vehicle;
+      const candidates = asList(members).filter((member) => member?.alive && !member.downed);
+      if (!vehicle?.active || vehicle.destroyed || vehicle.squadAccessRuntime || !candidates.length) return false;
+      const accessContract = this.squadVehicleAccessContractV60(vehicle);
+      if (!accessContract) return false;
+      const socket = resolveSquadVehicleAccessSocketV60(vehicle, accessContract.baseSheetId);
+      if (!socket.supported || socket.source !== accessContract.vehicleId) return false;
+      const ordered = [...candidates].sort((left, right) => Math.abs((left.x + left.w / 2) - socket.x) - Math.abs((right.x + right.w / 2) - socket.x));
+      const runtime = createSquadVehicleAccessRuntimeV60({ mode, crewIds: ordered.map((member) => member.crewId), socket });
+      if (!runtime) return false;
+      vehicle.squadAccessRuntime = runtime;
+      if (mode === 'boarding') vehicle.squadAccessBoardingComplete = true;
+      for (const member of ordered) {
+        member.vehicleAccessPhase = mode === 'boarding' ? 'queued' : 'seated';
+        member.vehicleAccessElapsed = 0;
+        member.vehicleAccessApproachElapsed = 0;
+      }
+      this.onEvent({
+        type: 'squad-vehicle-access-start',
+        mode,
+        vehicleId: vehicle.id,
+        crewIds: [...runtime.queue],
+        socket: { ...runtime.socket }
+      });
+      return true;
+    }
+
+    ensureSquadVehicleAccessV60(active, leader) {
+      const vehicle = this.vehicle;
+      if (!vehicle?.active || vehicle.destroyed || vehicle.squadAccessRuntime || vehicle.accessTransition || Number(vehicle.accessSecureClock) > 0) return false;
+      if (!this.squadVehicleAccessContractV60(vehicle)) {
+        vehicle.squadAccessBoardingComplete = true;
+        return false;
+      }
+      const boarded = asList(active).filter((member) => member.alive && member.inVehicle);
+      if (!vehicle.occupied) {
+        vehicle.squadAccessBoardingComplete = false;
+        return boarded.length ? this.beginSquadVehicleAccessV60('disembarking', boarded, leader) : false;
+      }
+      if (vehicle.squadAccessBoardingComplete) return false;
+      const capacity = this.squadVehiclePassengerCapacityV60();
+      const nonSquadPassengers = new Set(asList(vehicle.passengers)
+        .filter((passenger) => passenger?.inVehicle && passenger !== vehicle.driver && !passenger.squadMember)).size;
+      const available = Math.max(0, capacity - nonSquadPassengers - boarded.length);
+      if (!available) {
+        vehicle.squadAccessBoardingComplete = true;
+        return false;
+      }
+      const candidates = asList(active).filter((member) => member.alive && !member.downed && !member.inVehicle).slice(0, available);
+      if (!candidates.length) {
+        vehicle.squadAccessBoardingComplete = true;
+        return false;
+      }
+      return this.beginSquadVehicleAccessV60('boarding', candidates, leader);
+    }
+
+    updateSquadAccessApproachV60(member, targetCenterX, targetBottom, delta) {
+      member.vehicleAccessPhase = member.vehicleAccessPhase === 'queued' ? 'approaching' : member.vehicleAccessPhase;
+      member.vehicleAccessApproachElapsed += delta;
+      const targetX = targetCenterX - member.w / 2;
+      const gapX = targetX - member.x;
+      const gapY = targetBottom - (member.y + member.h);
+      const ladder = this.findSquadLadder(member, targetX, targetBottom);
+      if (ladder && Math.abs(gapY) > 80) {
+        const ladderGap = ladder.x - (member.x + member.w / 2);
+        if (Math.abs(ladderGap) < 34) {
+          member.climbing = true;
+          member.x += ladderGap * Math.min(1, delta * 10);
+          member.vy = Math.sign(gapY) * 170;
+          member.y = clamp(member.y + member.vy * delta, ladder.top - member.h + 8, ladder.bottom - member.h);
+          member.vx = 0;
+          member.grounded = false;
+          return false;
+        }
+      }
+      member.climbing = false;
+      const desiredVelocity = Math.abs(gapX) > SQUAD_VEHICLE_ACCESS_V60.contactRadius
+        ? Math.sign(gapX) * SQUAD_VEHICLE_ACCESS_V60.approachSpeed
+        : 0;
+      member.vx += (desiredVelocity - member.vx) * Math.min(1, delta * (member.grounded ? 12 : 7));
+      if (Math.abs(member.vx) > 4) member.facing = Math.sign(member.vx);
+      const previousX = member.x;
+      member.x = clamp(member.x + member.vx * delta, 0, WORLD_WIDTH - member.w);
+      this.resolveHorizontal(member, previousX);
+      const blocked = Math.abs(member.x - previousX) < Math.max(0.4, Math.abs(member.vx * delta) * 0.2) && Math.abs(gapX) > 70;
+      member.stuckClock = blocked ? member.stuckClock + delta : Math.max(0, member.stuckClock - delta * 2);
+      if (member.grounded && (member.stuckClock > 0.22 || gapY < -95)) {
+        member.vy = -540;
+        member.grounded = false;
+        member.stuckClock = 0;
+      }
+      const previousBottom = member.y + member.h;
+      member.vy += GRAVITY * delta;
+      member.y += member.vy * delta;
+      member.grounded = false;
+      this.resolveVertical(member, previousBottom);
+      if (member.y > WORLD_HEIGHT + 80) return false;
+      return Math.abs((member.x + member.w / 2) - targetCenterX) <= SQUAD_VEHICLE_ACCESS_V60.contactRadius
+        && Math.abs((member.y + member.h) - targetBottom) <= SQUAD_VEHICLE_ACCESS_V60.verticalTolerance;
+    }
+
+    startSquadAccessTraversalV60(member, runtime) {
+      const socket = runtime.socket;
+      member.vehicleAccessPhase = runtime.mode === 'boarding' ? 'entering' : 'exiting';
+      member.vehicleAccessElapsed = 0;
+      member.vehicleAccessStartX = runtime.mode === 'boarding'
+        ? member.x
+        : socket.x + socket.inward * member.w * 0.72 - member.w / 2;
+      member.vehicleAccessStartY = socket.bottom - member.h;
+      member.vehicleAccessEndX = runtime.mode === 'boarding'
+        ? socket.x + socket.inward * member.w * 0.72 - member.w / 2
+        : socket.x + socket.outward * (member.w * 0.72 + 12) - member.w / 2;
+      member.vehicleAccessEndY = socket.bottom - member.h;
+      member.x = member.vehicleAccessStartX;
+      member.y = member.vehicleAccessStartY;
+      member.vx = 0;
+      member.vy = 0;
+      member.grounded = false;
+      if (runtime.mode === 'disembarking') {
+        member.inVehicle = false;
+        this.vehicle.passengers = asList(this.vehicle.passengers).filter((passenger) => passenger !== member);
+      }
+      this.onEvent({
+        type: 'squad-vehicle-access-member-start',
+        mode: runtime.mode,
+        crewId: member.crewId,
+        vehicleId: this.vehicle.id
+      });
+    }
+
+    completeSquadAccessTraversalV60(member, runtime) {
+      const boarding = runtime.mode === 'boarding';
+      member.x = member.vehicleAccessEndX;
+      member.y = member.vehicleAccessEndY;
+      member.vx = 0;
+      member.vy = 0;
+      member.grounded = !boarding;
+      member.vehicleAccessPhase = boarding ? null : 'cleared';
+      member.vehicleAccessElapsed = 0;
+      if (boarding) {
+        member.inVehicle = true;
+        member.vehicleSeatId = this.squadVehicleSeatIdV60(member);
+        if (!asList(this.vehicle.passengers).includes(member)) this.vehicle.passengers.push(member);
+        this.squadTelemetry.boarded += 1;
+        this.recordSquadConsequence(member, 'boarded', { vehicleId: this.vehicle.id, seatId: member.vehicleSeatId, physical: true });
+      } else {
+        member.inVehicle = false;
+        member.vehicleSeatId = null;
+        this.squadTelemetry.disembarked += 1;
+        this.recordSquadConsequence(member, 'disembarked', { vehicleId: this.vehicle.id, physical: true });
+      }
+      runtime.completed.push(member.crewId);
+      runtime.queue = runtime.queue.filter((crewId) => crewId !== member.crewId);
+      runtime.currentCrewId = null;
+      this.onEvent({
+        type: 'squad-vehicle-access-member-complete',
+        mode: runtime.mode,
+        crewId: member.crewId,
+        vehicleId: this.vehicle.id
+      });
+    }
+
+    skipSquadAccessMemberV60(member, runtime, reason) {
+      member.vehicleAccessPhase = 'skipped';
+      member.vehicleAccessElapsed = 0;
+      member.vx = 0;
+      member.vy = 0;
+      member.rallyClock = Math.max(Number(member.rallyClock) || 0, 4);
+      runtime.skipped.push(member.crewId);
+      runtime.queue = runtime.queue.filter((crewId) => crewId !== member.crewId);
+      runtime.currentCrewId = null;
+      this.squadTelemetry.accessSkipped += 1;
+      this.onEvent({ type: 'squad-vehicle-access-skip', mode: runtime.mode, crewId: member.crewId, vehicleId: this.vehicle.id, reason });
+    }
+
+    updateSquadVehicleAccessRuntimeV60(active, leader, delta) {
+      this.ensureSquadVehicleAccessV60(active, leader);
+      const runtime = this.vehicle?.squadAccessRuntime;
+      if (!runtime) return new Set();
+      if (!this.vehicle.active || this.vehicle.destroyed || this.mission?.state !== 'active') {
+        this.abortSquadVehicleAccessV60(this.vehicle.destroyed ? 'vehicle-destroyed' : 'mission-inactive', { eject: this.vehicle.destroyed });
+        return new Set();
+      }
+      const byId = new Map(asList(active).map((member) => [member.crewId, member]));
+      const controlled = new Set(runtime.queue);
+      const safeDelta = Math.max(0, Number(delta) || 0);
+
+      if (runtime.mode === 'boarding') {
+        runtime.queue.forEach((crewId, index) => {
+          const member = byId.get(crewId);
+          if (!member?.alive || member.downed || member.inVehicle) return;
+          const offset = index === 0 ? 0 : index * SQUAD_VEHICLE_ACCESS_V60.queueSpacing;
+          this.updateSquadAccessApproachV60(member, runtime.socket.x + runtime.socket.outward * offset, runtime.socket.bottom, safeDelta);
+        });
+      }
+
+      if (runtime.phase === 'opening') {
+        runtime.elapsed += safeDelta;
+        if (runtime.elapsed >= SQUAD_VEHICLE_ACCESS_V60.openingDuration) {
+          runtime.phase = 'sequencing';
+          runtime.elapsed = 0;
+        }
+        return controlled;
+      }
+
+      if (runtime.phase === 'closing') {
+        runtime.elapsed += safeDelta;
+        if (runtime.elapsed >= SQUAD_VEHICLE_ACCESS_V60.closingDuration) {
+          const result = snapshotSquadVehicleAccessRuntimeV60(runtime);
+          for (const member of asList(active)) if (['cleared', 'skipped'].includes(member.vehicleAccessPhase)) member.vehicleAccessPhase = null;
+          this.vehicle.squadAccessRuntime = null;
+          this.onEvent({ type: 'squad-vehicle-access-complete', vehicleId: this.vehicle.id, ...result });
+        }
+        return controlled;
+      }
+
+      if (!runtime.queue.length) {
+        runtime.phase = 'closing';
+        runtime.elapsed = 0;
+        return controlled;
+      }
+
+      runtime.currentCrewId ||= runtime.queue[0];
+      const member = byId.get(runtime.currentCrewId);
+      if (!member?.alive || member.downed || runtime.mode === 'boarding' && member.inVehicle || runtime.mode === 'disembarking' && !member.inVehicle && member.vehicleAccessPhase !== 'exiting') {
+        if (member) this.skipSquadAccessMemberV60(member, runtime, 'actor-unavailable');
+        else {
+          runtime.skipped.push(runtime.currentCrewId);
+          runtime.queue = runtime.queue.filter((crewId) => crewId !== runtime.currentCrewId);
+          runtime.currentCrewId = null;
+          this.squadTelemetry.accessSkipped += 1;
+        }
+        return controlled;
+      }
+
+      if (runtime.mode === 'boarding' && !['entering'].includes(member.vehicleAccessPhase)) {
+        const verticalDelta = runtime.socket.bottom - (member.y + member.h);
+        const ladder = Math.abs(verticalDelta) > SQUAD_VEHICLE_ACCESS_V60.verticalTolerance
+          ? this.findSquadLadder(member, runtime.socket.x, runtime.socket.bottom)
+          : null;
+        const inaccessible = !ladder && (
+          verticalDelta < -SQUAD_VEHICLE_ACCESS_V60.maxJumpRise
+          || verticalDelta > SQUAD_VEHICLE_ACCESS_V60.maxSafeDrop
+        );
+        if (inaccessible) {
+          this.skipSquadAccessMemberV60(member, runtime, 'socket-inaccessible');
+          return controlled;
+        }
+        const ready = Math.abs((member.x + member.w / 2) - runtime.socket.x) <= SQUAD_VEHICLE_ACCESS_V60.contactRadius
+          && Math.abs((member.y + member.h) - runtime.socket.bottom) <= SQUAD_VEHICLE_ACCESS_V60.verticalTolerance;
+        if (!ready) {
+          if (member.vehicleAccessApproachElapsed >= SQUAD_VEHICLE_ACCESS_V60.approachTimeout || member.y > WORLD_HEIGHT + 80) {
+            this.skipSquadAccessMemberV60(member, runtime, 'approach-timeout');
+          }
+          return controlled;
+        }
+        this.startSquadAccessTraversalV60(member, runtime);
+      } else if (runtime.mode === 'disembarking' && member.vehicleAccessPhase !== 'exiting') {
+        this.startSquadAccessTraversalV60(member, runtime);
+      }
+
+      if (['entering', 'exiting'].includes(member.vehicleAccessPhase)) {
+        member.vehicleAccessElapsed = Math.min(SQUAD_VEHICLE_ACCESS_V60.traversalDuration, member.vehicleAccessElapsed + safeDelta);
+        const progress = clamp(member.vehicleAccessElapsed / SQUAD_VEHICLE_ACCESS_V60.traversalDuration, 0, 1);
+        const eased = progress * progress * (3 - 2 * progress);
+        member.x = member.vehicleAccessStartX + (member.vehicleAccessEndX - member.vehicleAccessStartX) * eased;
+        member.y = member.vehicleAccessStartY + (member.vehicleAccessEndY - member.vehicleAccessStartY) * eased - Math.sin(progress * Math.PI) * 8;
+        member.facing = Math.sign(member.vehicleAccessEndX - member.vehicleAccessStartX) || member.facing || 1;
+        member.grounded = false;
+        if (progress >= 1) this.completeSquadAccessTraversalV60(member, runtime);
+      }
+      return controlled;
+    }
+
+    abortSquadVehicleAccessV60(reason, { eject = false } = {}) {
+      const runtime = this.vehicle?.squadAccessRuntime;
+      if (!runtime) return false;
+      const socket = runtime.socket || resolveSquadVehicleAccessSocketV60(this.vehicle, resolveVehicleAnimation(this.vehicle)?.sheetId);
+      let ejected = 0;
+      for (const [index, member] of this.activeSquadActors().entries()) {
+        const affected = runtime.queue.includes(member.crewId) || runtime.completed.includes(member.crewId) || member.inVehicle;
+        if (!affected) continue;
+        const wasTraversing = ['entering', 'exiting'].includes(member.vehicleAccessPhase);
+        member.vehicleAccessPhase = null;
+        member.vehicleAccessElapsed = 0;
+        member.vehicleAccessApproachElapsed = 0;
+        if (eject && (member.inVehicle || wasTraversing)) {
+          member.inVehicle = false;
+          member.vehicleSeatId = null;
+          this.placeSquadMemberOutsideVehicleV60(member, { socket, index, impulse: true });
+          ejected += 1;
+        }
+      }
+      if (eject) this.vehicle.passengers = asList(this.vehicle.passengers).filter((passenger) => !passenger?.squadMember);
+      const snapshot = snapshotSquadVehicleAccessRuntimeV60(runtime);
+      this.vehicle.squadAccessRuntime = null;
+      this.squadTelemetry.accessAborted += 1;
+      this.onEvent({ type: 'squad-vehicle-access-abort', vehicleId: this.vehicle.id, reason, ejected, runtime: snapshot });
+      return true;
+    }
+
+    clearSquadVehicleOccupancyV60({ placement = 'vehicle', includeAll = false } = {}) {
+      if (!this.vehicle) return 0;
+      const socket = resolveSquadVehicleAccessSocketV60(this.vehicle, resolveVehicleAnimation(this.vehicle)?.sheetId);
+      const leader = this.player?.alive ? this.player : this.coopEnabled && this.coop?.alive ? this.coop : this.player;
+      let cleared = 0;
+      for (const [index, member] of asList(this.squadActors).entries()) {
+        const attached = Boolean(member.inVehicle || member.vehicleAccessPhase);
+        if (!includeAll && !attached) continue;
+        member.inVehicle = false;
+        member.vehicleSeatId = null;
+        member.vehicleAccessPhase = null;
+        member.vehicleAccessElapsed = 0;
+        member.vehicleAccessApproachElapsed = 0;
+        member.climbing = false;
+        if (placement === 'checkpoint' && leader) {
+          member.x = getSquadFormationX(leader, member, member.formationIndex ?? index);
+          member.y = clamp((Number(this.checkpoint?.y) || leader.y) + leader.h - member.h, 0, WORLD_HEIGHT - member.h);
+          member.vx = 0;
+          member.vy = 0;
+          member.grounded = false;
+        } else this.placeSquadMemberOutsideVehicleV60(member, { socket, index });
+        cleared += 1;
+      }
+      this.vehicle.passengers = asList(this.vehicle.passengers).filter((passenger) => !passenger?.squadMember);
+      this.vehicle.squadAccessRuntime = null;
+      this.vehicle.squadAccessBoardingComplete = false;
+      return cleared;
+    }
+
     updateMissionSquad(delta) {
       const leader = this.player?.alive ? this.player : this.coopEnabled && this.coop?.alive ? this.coop : this.player;
       if (!leader) return;
       const active = this.activeSquadActors();
+      const vehicleAccessControlled = this.updateSquadVehicleAccessRuntimeV60(active, leader, delta);
       const fixedActors = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive && !actor.inVehicle);
       for (const [index, member] of active.entries()) {
         member.fireClock = Math.max(0, member.fireClock - delta);
@@ -872,6 +1326,7 @@ export function withV52MissionRuntime(BaseEngine) {
           }
           continue;
         }
+        if (vehicleAccessControlled.has(member.crewId) || member.vehicleAccessPhase) continue;
         if (member.hazardKind === 'electrical' && member.hazardClock > 0) {
           member.vx = 0;
           member.climbing = false;
@@ -907,7 +1362,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     separateSquadFormation(members = this.activeSquadActors(), fixedActors = null) {
-      const mobile = asList(members).filter((member) => member?.alive && !member.inVehicle && !member.climbing
+      const mobile = asList(members).filter((member) => member?.alive && !member.inVehicle && !member.climbing && !member.vehicleAccessPhase
         && !(member.hazardKind === 'electrical' && member.hazardClock > 0));
       const anchors = asList(fixedActors || [this.player, this.coopEnabled ? this.coop : null])
         .filter((actor) => actor?.alive && !actor.inVehicle && !actor.climbing);
@@ -953,22 +1408,15 @@ export function withV52MissionRuntime(BaseEngine) {
 
     updateSquadVehicleSeat(member, index, leader, delta) {
       const vehicle = this.vehicle;
-      if (!vehicle?.active || vehicle.destroyed || !vehicle.occupied) {
+      if (!vehicle?.active || vehicle.destroyed) {
         if (member.inVehicle) {
           member.inVehicle = false;
+          member.vehicleSeatId = null;
           member.x = getSquadFormationX(leader, member, member.formationIndex ?? index);
           member.y = clamp((vehicle?.y || leader.y) + (vehicle?.h || 0) - member.h, 0, WORLD_HEIGHT - member.h);
           this.separateSquadFormation([member], [leader]);
         }
         return false;
-      }
-      const capacity = Math.max(0, Number(vehicle.seatCount || this.vehicleHandling?.passengerCapacity + 1 || 1) - 1);
-      const boarded = this.activeSquadActors().filter((actor) => actor.inVehicle).length;
-      if (!member.inVehicle && boarded < capacity && (distance(member, vehicle) < 260 || distance(member, leader) > 720)) {
-        member.inVehicle = true;
-        if (!vehicle.passengers.includes(member)) vehicle.passengers.push(member);
-        this.squadTelemetry.boarded += 1;
-        this.recordSquadConsequence(member, 'boarded', { vehicleId: vehicle.id });
       }
       if (!member.inVehicle) return false;
       member.x = vehicle.x + 42 + index * 26;
@@ -1176,6 +1624,10 @@ export function withV52MissionRuntime(BaseEngine) {
 
     damageSquadMember(member, amount, { source = 'enemy' } = {}) {
       if (!member?.alive || !Number.isFinite(Number(amount)) || Number(amount) <= 0) return 0;
+      const wasTraversing = ['entering', 'exiting'].includes(member.vehicleAccessPhase);
+      const interruptedSocket = wasTraversing
+        ? this.vehicle?.squadAccessRuntime?.socket || resolveSquadVehicleAccessSocketV60(this.vehicle, resolveVehicleAnimation(this.vehicle)?.sheetId)
+        : null;
       const adjusted = Math.max(1, Number(amount) || 0) * (member.specialty === 'survival' ? 0.86 : 1) / this.squadCohesionMultiplier;
       const absorbed = Math.min(member.armor, adjusted * 0.5);
       member.armor -= absorbed;
@@ -1191,7 +1643,17 @@ export function withV52MissionRuntime(BaseEngine) {
         member.downed = true;
         member.bleedOut = 18;
         member.inVehicle = false;
+        member.vehicleSeatId = null;
+        member.vehicleAccessPhase = null;
+        member.vehicleAccessElapsed = 0;
+        member.vehicleAccessApproachElapsed = 0;
         if (this.vehicle?.passengers) this.vehicle.passengers = this.vehicle.passengers.filter((passenger) => passenger !== member);
+        if (wasTraversing && interruptedSocket) {
+          this.placeSquadMemberOutsideVehicleV60(member, {
+            socket: interruptedSocket,
+            index: member.formationIndex || 0
+          });
+        }
         this.onEvent({ type: 'squad-down', crewId: member.crewId, source, revivable: this.activeSquadActors().some((ally) => ally.alive && ally.specialty === 'medical') });
       }
       return damage;
@@ -1251,15 +1713,23 @@ export function withV52MissionRuntime(BaseEngine) {
 
     failMission(reason) {
       const result = super.failMission(reason);
-      if (this.mission?.state === 'failed') this.abortVehicleAccessV59('mission-failed');
+      if (this.mission?.state === 'failed') {
+        this.abortVehicleAccessV59('mission-failed');
+        this.abortSquadVehicleAccessV60('mission-failed', { eject: true });
+        this.clearSquadVehicleOccupancyV60();
+      }
       return result;
     }
 
     restartFromCheckpoint() {
       if (this.mission?.state !== 'failed') return super.restartFromCheckpoint();
       this.abortVehicleAccessV59('mission-restarted');
+      this.abortSquadVehicleAccessV60('mission-restarted', { eject: true });
       const restarted = super.restartFromCheckpoint();
-      if (restarted && this.vehicle) this.vehicle.accessSecureClock = 0;
+      if (restarted && this.vehicle) {
+        this.vehicle.accessSecureClock = 0;
+        this.clearSquadVehicleOccupancyV60({ placement: 'checkpoint', includeAll: true });
+      }
       return restarted;
     }
 
@@ -1267,7 +1737,10 @@ export function withV52MissionRuntime(BaseEngine) {
       const squadKills = this.activeSquadActors().reduce((total, member) => total + (Number(member.kills) || 0), 0);
       if (!this.player || squadKills <= 0) {
         const completed = super.completeMission(actor);
-        if (completed) this.abortVehicleAccessV59('mission-complete');
+        if (completed) {
+          this.abortVehicleAccessV59('mission-complete');
+          this.abortSquadVehicleAccessV60('mission-complete');
+        }
         return completed;
       }
       this.player.kills += squadKills;
@@ -1276,6 +1749,7 @@ export function withV52MissionRuntime(BaseEngine) {
         if (completed && this.mission) {
           this.mission.squadKills = squadKills;
           this.abortVehicleAccessV59('mission-complete');
+          this.abortSquadVehicleAccessV60('mission-complete');
         }
         return completed;
       } finally {
@@ -1426,6 +1900,9 @@ export function withV52MissionRuntime(BaseEngine) {
 
     drawVehicle(ctx) {
       if (!this.vehicle?.active) return super.drawVehicle(ctx);
+      for (const member of this.activeSquadActors()) {
+        if (['entering', 'exiting'].includes(member.vehicleAccessPhase)) this.drawSquadActor(ctx, member);
+      }
       const request = resolveVehicleAnimation(this.vehicle);
       const entityKey = getAnimationEntityKeyV57('vehicle', this.vehicle, 'mission');
       const animationOptions = { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) };
@@ -1457,7 +1934,9 @@ export function withV52MissionRuntime(BaseEngine) {
       this.drawAllies(ctx);
     }
     drawAllies(ctx) {
-      for (const member of this.activeSquadActors()) if (!member.inVehicle) this.drawSquadActor(ctx, member);
+      for (const member of this.activeSquadActors()) {
+        if (!member.inVehicle && !['entering', 'exiting'].includes(member.vehicleAccessPhase)) this.drawSquadActor(ctx, member);
+      }
     }
 
     drawSquadActor(ctx, member) {
@@ -1522,8 +2001,10 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     captureSquadState() {
+      const boarded = asList(this.squadActors).some((member) => member.inVehicle);
       return {
         schema: 1,
+        vehicleId: boarded && this.vehicle?.active ? String(this.vehicle.id || '') : null,
         members: asList(this.squadActors).map((member) => ({
           crewId: member.crewId,
           x: clamp(member.x, 0, WORLD_WIDTH),
@@ -1536,6 +2017,7 @@ export function withV52MissionRuntime(BaseEngine) {
           bleedOut: clamp(member.bleedOut, 0, 120),
           facing: member.facing < 0 ? -1 : 1,
           inVehicle: Boolean(member.inVehicle),
+          vehicleSeatId: member.inVehicle && typeof member.vehicleSeatId === 'string' ? member.vehicleSeatId : null,
           supportCharges: clamp(Math.round(member.supportCharges), 0, member.profile.supportCharges),
           kills: clamp(Math.round(member.kills), 0, 99999),
           shots: clamp(Math.round(member.shots), 0, 999999),
@@ -1551,8 +2033,19 @@ export function withV52MissionRuntime(BaseEngine) {
         return 0;
       }
       const byId = new Map(this.squadActors.map((member) => [member.crewId, member]));
+      const sourceVehicleId = typeof rawSquad?.vehicleId === 'string' ? rawSquad.vehicleId : '';
+      const currentVehicleId = String(this.vehicle?.id || '');
+      const canRestoreVehicleOccupancy = Boolean(
+        sourceVehicleId
+        && sourceVehicleId === currentVehicleId
+        && this.vehicle?.active
+        && this.vehicle.occupied
+        && !this.vehicle.destroyed
+        && this.squadVehicleAccessContractV60(this.vehicle)
+      );
+      if (this.vehicle) this.vehicle.passengers = asList(this.vehicle.passengers).filter((passenger) => !passenger?.squadMember);
       let restored = 0;
-      for (const source of sources) {
+      for (const [sourceIndex, source] of sources.entries()) {
         const member = byId.get(source?.crewId);
         if (!member) continue;
         const savedX = Number(source.x);
@@ -1569,7 +2062,11 @@ export function withV52MissionRuntime(BaseEngine) {
         member.alive = source.alive !== false && !member.downed && !member.lost && member.health > 0;
         member.bleedOut = member.downed ? clamp(Number.isFinite(savedBleedOut) ? savedBleedOut : 18, 0, 120) : 0;
         member.facing = Number(source.facing) < 0 ? -1 : 1;
-        member.inVehicle = Boolean(source.inVehicle && this.vehicle?.active && this.vehicle.occupied);
+        member.inVehicle = Boolean(source.inVehicle && canRestoreVehicleOccupancy);
+        member.vehicleSeatId = member.inVehicle && typeof source.vehicleSeatId === 'string' ? source.vehicleSeatId.slice(0, 96) : null;
+        member.vehicleAccessPhase = null;
+        member.vehicleAccessElapsed = 0;
+        member.vehicleAccessApproachElapsed = 0;
         member.supportCharges = clamp(Math.round(Number(source.supportCharges) || 0), 0, member.profile.supportCharges);
         member.kills = clamp(Math.round(Number(source.kills) || 0), 0, 99999);
         member.shots = clamp(Math.round(Number(source.shots) || 0), 0, 999999);
@@ -1577,6 +2074,11 @@ export function withV52MissionRuntime(BaseEngine) {
         member.vx = 0;
         member.vy = 0;
         if (member.inVehicle && this.vehicle && !this.vehicle.passengers.includes(member)) this.vehicle.passengers.push(member);
+        else if (source.inVehicle && !canRestoreVehicleOccupancy && this.player) {
+          member.x = getSquadFormationX(this.player, member, member.formationIndex ?? sourceIndex);
+          member.y = clamp(this.player.y + this.player.h - member.h, 0, WORLD_HEIGHT - member.h);
+          member.grounded = false;
+        }
         restored += 1;
       }
       return restored;
@@ -1616,6 +2118,8 @@ export function withV52MissionRuntime(BaseEngine) {
             shots: member.shots,
             actions: member.actions,
             inVehicle: member.inVehicle,
+            vehicleSeatId: member.vehicleSeatId,
+            vehicleAccessPhase: member.vehicleAccessPhase,
             x: Math.round(member.x),
             y: Math.round(member.y),
             animation: member.v52Animation || null
@@ -1628,6 +2132,7 @@ export function withV52MissionRuntime(BaseEngine) {
         vehicleAccessRuntime: this.vehicle ? {
           schema: 59,
           transition: this.vehicle.accessTransition ? { ...this.vehicle.accessTransition } : null,
+          squad: snapshotSquadVehicleAccessRuntimeV60(this.vehicle.squadAccessRuntime),
           secureClock: Number((this.vehicle.accessSecureClock || 0).toFixed(3)),
           occupied: Boolean(this.vehicle.occupied),
           animation: resolveVehicleAnimation(this.vehicle)

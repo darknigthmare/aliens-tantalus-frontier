@@ -415,6 +415,7 @@ export function withV52LevelRuntime(BaseEngine) {
         if (vehicleNode) {
           this.vehicle.x = vehicleNode.x - this.vehicle.w / 2;
           this.vehicle.y = vehicleNode.y - this.vehicle.h;
+          this.vehicle.groundY = this.vehicle.y;
         }
       }
       const objectiveAnchor = plan.anchors['objective-primary'];

@@ -14,6 +14,8 @@ import {
 } from '../src/hub-art-runtime-v55.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
+const overlaps = (left, right) => left.x < right.x + right.w && left.x + left.w > right.x
+  && left.y < right.y + right.h && left.y + left.h > right.y;
 
 test('le hangar v55 consomme quatre bitmaps dédiés et physiquement présents', () => {
   assert.equal(HUB_ART_ASSETS_V55.length, 4);
@@ -62,6 +64,27 @@ test('ancres visuelles et collisions physiques restent dans le niveau du hangar'
   assert.ok(ELECTRICAL_HAZARD_ART_V55.damage > 0);
   assert.ok(ELECTRICAL_HAZARD_ART_V55.stunSeconds > 0);
   assert.ok(ELECTRICAL_HAZARD_ART_V55.damageIntervalSeconds > 0);
+});
+
+test('l UD-4L V60 est agrandi a 1,56x, garde une voie centrale et ne chevauche plus le danger', () => {
+  const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
+  const hazard = DROPSHIP_HANGAR_ART_V55.electricalHazard;
+  const scaleX = dropship.renderBounds.w / 520;
+  const scaleY = dropship.renderBounds.h / 212;
+  assert.ok(scaleX >= 1.55 && scaleX <= 1.6, `scale x ${scaleX}`);
+  assert.ok(scaleY >= 1.55 && scaleY <= 1.6, `scale y ${scaleY}`);
+  assert.ok(Math.abs(scaleX - scaleY) < 0.01, 'le véhicule conserve ses proportions');
+  assert.equal(dropship.collisionSegments.length, 4);
+  assert.equal(overlaps(dropship.renderBounds, hazard.renderBounds), false, 'les bitmaps ne se superposent pas');
+  for (const segment of dropship.collisionSegments) {
+    assert.ok(isInsideHubArtLevelV55(segment), `${segment.id}: collision dans la salle`);
+    assert.ok(segment.x >= dropship.collisionBounds.x && segment.x + segment.w <= dropship.collisionBounds.x + dropship.collisionBounds.w);
+    assert.ok(segment.y >= dropship.collisionBounds.y && segment.y + segment.h <= dropship.collisionBounds.y + dropship.collisionBounds.h);
+    assert.equal(overlaps(segment, hazard.collisionBounds), false, `${segment.id}: aucun chevauchement du danger`);
+  }
+  const hull = dropship.collisionSegments.filter((entry) => entry.role === 'dropship-hull').sort((a, b) => a.x - b.x);
+  assert.ok(hull[1].x - (hull[0].x + hull[0].w) >= 150, 'la rampe centrale reste franchissable');
+  assert.ok(dropship.interactionBounds.x >= hull[0].x && dropship.interactionBounds.x + dropship.interactionBounds.w <= hull[1].x + hull[1].w);
 });
 
 test('le contrat refuse toute scène monolithique et tout fallback implicite', () => {

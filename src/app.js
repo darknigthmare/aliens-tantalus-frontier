@@ -25,6 +25,7 @@ import { resolveWeaponVisualProfileV56 } from './weapon-visual-runtime-v56.js';
 import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import { resolveSpriteSheet, resolveVehicleAnimation } from './sprite-animation-runtime.js';
+import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -365,6 +366,10 @@ function procurementAction(kind, item) {
   const equipped = kind === 'vehicle'
     ? saveSystem.data.strategy.selectedVehicleId === item.id
     : saveSystem.data.player[inventoryKey]?.includes(item.id);
+  const vehicleGate = kind === 'vehicle' ? getVehicleDeploymentGateV60(item) : null;
+  if (vehicleGate && !vehicleGate.ready) {
+    return `<button class="button compact" disabled title="${escapeHtml(vehicleGate.reason)}">PLAQUE EXACTE REQUISE</button>`;
+  }
   if (!owned) {
     const quote = getProcurementQuote(saveSystem.data, kind, item);
     return `<button class="button compact" data-procure-kind="${kind}" data-procure-id="${item.id}" ${loadoutLocked || !canAfford(saveSystem.data, quote) ? 'disabled' : ''}${operationLockTitle}>${loadoutLocked ? 'OPÉRATION ACTIVE' : `ACQUÉRIR · ${formatCost(quote)}`}</button>`;
@@ -411,7 +416,12 @@ function renderEnemies() {
 function renderVehicles() {
   const term = byId('vehicle-search').value.trim().toLowerCase();
   const items = VEHICLES.filter((vehicle) => JSON.stringify(vehicle).toLowerCase().includes(term));
-  byId('vehicle-list').innerHTML = items.map((vehicle) => `<article class="catalog-card"><span class="eyebrow">${escapeHtml(vehicle.family)} · ${escapeHtml(vehicle.fit)}</span><h3>${escapeHtml(vehicle.name)}</h3><p>Coque ${vehicle.hull} · vitesse ${vehicle.speed} · cargo ${vehicle.cargo} · ${vehicle.seats.length} sièges</p><div class="mini-tags">${vehicle.seats.map((seat) => `<span>${escapeHtml(seat.role)}</span>`).join('')}${vehicle.actions.map((action) => `<span>${escapeHtml(action)}</span>`).join('')}</div><footer><span>${vehicle.id}</span>${procurementAction('vehicle', vehicle)}</footer></article>`).join('');
+  byId('vehicle-list').innerHTML = items.map((vehicle) => {
+    const gate = getVehicleDeploymentGateV60(vehicle);
+    const status = gate.ready ? '' : `<span>CANON BLOQUÉ · ${escapeHtml(vehicle.visualStatus)}</span>`;
+    const note = gate.ready ? '' : `<p>${escapeHtml(gate.reason)} ${escapeHtml(vehicle.referenceNote || '')}</p>`;
+    return `<article class="catalog-card${gate.ready ? '' : ' canon-blocked'}" data-deployment-status="${escapeHtml(gate.status)}"><span class="eyebrow">${escapeHtml(vehicle.family)} · ${escapeHtml(vehicle.fit)}</span><h3>${escapeHtml(vehicle.name)}</h3><p>Coque ${vehicle.hull} · vitesse ${vehicle.speed} · cargo ${vehicle.cargo} · ${vehicle.seats.length} sièges</p>${note}<div class="mini-tags">${status}${vehicle.seats.map((seat) => `<span>${escapeHtml(seat.role)}</span>`).join('')}${vehicle.actions.map((action) => `<span>${escapeHtml(action)}</span>`).join('')}</div><footer><span>${vehicle.id}</span>${procurementAction('vehicle', vehicle)}</footer></article>`;
+  }).join('');
   all('.catalog-card', byId('vehicle-list')).forEach((card, index) => {
     const request = resolveVehicleAnimation(items[index]);
     const sheet = request ? resolveSpriteSheet(request.sheetId) : null;
@@ -999,7 +1009,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v59-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v60-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],

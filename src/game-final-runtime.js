@@ -59,9 +59,10 @@ export function buildVehicleHandlingProfile(vehicle = {}) {
   const actions = new Set(list(vehicle.actions));
   const seats = list(vehicle.seats);
   const roles = seats.map((seat) => String(seat.role || 'passenger'));
-  const canDrive = actions.has('drive') || roles.includes('driver') || actions.size === 0;
-  const canBoost = actions.has('boost');
-  const canFire = actions.has('fire') || roles.includes('gunner');
+  const deploymentReady = vehicle.deploymentReady !== false;
+  const canDrive = deploymentReady && (actions.has('drive') || roles.includes('driver') || actions.size === 0);
+  const canBoost = deploymentReady && actions.has('boost');
+  const canFire = deploymentReady && (actions.has('fire') || roles.includes('gunner'));
   const baseSpeed = clamp(Number(vehicle.runtimeSpeed) || 150 + (Number(vehicle.speed) || 105) * 1.85, 170, 620);
   return Object.freeze({
     family,
@@ -335,7 +336,9 @@ export class GameEngine extends CompleteGameEngine {
       dimensions: [this.routeRuntime.widthCells, this.routeRuntime.heightCells],
       hazards: [...this.routeRuntime.declaredHazards]
     });
-    this.onEvent({ type: 'vehicle-mode-ready', vehicleId: this.selectedVehicleRuntime.id, family: this.vehicleHandling.family, locomotion: this.vehicleHandling.locomotion, seats: this.vehicle?.seatAssignments || [] });
+    this.onEvent(this.selectedVehicleRuntime.deploymentReady
+      ? { type: 'vehicle-mode-ready', vehicleId: this.selectedVehicleRuntime.id, family: this.vehicleHandling.family, locomotion: this.vehicleHandling.locomotion, seats: this.vehicle?.seatAssignments || [] }
+      : { type: 'vehicle-mode-blocked', vehicleId: this.selectedVehicleRuntime.id, status: this.selectedVehicleRuntime.deploymentStatus, reason: this.selectedVehicleRuntime.deploymentReason });
     this.onEvent({ type: 'costume-runtime-ready', costumeId: this.costumeRuntime.id, active: this.costumeRuntime.active, faction: this.costumeRuntime.faction });
     return options;
   }
@@ -777,40 +780,6 @@ export class GameEngine extends CompleteGameEngine {
     ctx.fillRect(actor.x + actor.w * 0.18, actor.y + actor.h * 0.42, actor.w * 0.64, 8);
     ctx.fillStyle = this.costumeRuntime.visual.accent;
     ctx.fillRect(actor.x + (actor.facing > 0 ? actor.w * 0.68 : actor.w * 0.18), actor.y + actor.h * 0.22, 6, 14);
-    ctx.restore();
-  }
-
-  drawVehicle(ctx) {
-    if (!this.vehicle?.active || this.vehicleHandling?.family === 'ground') return super.drawVehicle(ctx);
-    const vehicle = this.vehicle;
-    const profile = this.vehicleHandling;
-    ctx.save();
-    ctx.translate(vehicle.x, vehicle.y);
-    ctx.fillStyle = vehicle.destroyed ? '#342b29' : '#536d68';
-    ctx.strokeStyle = '#a7c5b7';
-    ctx.lineWidth = 3;
-    if (profile.family === 'air' || profile.family === 'space') {
-      ctx.beginPath();
-      ctx.moveTo(8, vehicle.h * 0.58); ctx.lineTo(vehicle.w * 0.28, 12); ctx.lineTo(vehicle.w * 0.78, 18); ctx.lineTo(vehicle.w - 5, vehicle.h * 0.58); ctx.lineTo(vehicle.w * 0.67, vehicle.h - 12); ctx.lineTo(vehicle.w * 0.2, vehicle.h - 8); ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillStyle = profile.family === 'space' ? '#7398d1' : '#d58250';
-      ctx.fillRect(vehicle.w * 0.32, 28, vehicle.w * 0.36, 12);
-    } else if (profile.family === 'maritime') {
-      ctx.beginPath(); ctx.moveTo(2, 42); ctx.lineTo(vehicle.w - 4, 34); ctx.lineTo(vehicle.w * 0.8, vehicle.h - 12); ctx.lineTo(vehicle.w * 0.18, vehicle.h - 6); ctx.closePath(); ctx.fill(); ctx.stroke();
-      ctx.fillStyle = '#418a9d'; ctx.fillRect(vehicle.w * 0.34, 15, vehicle.w * 0.32, 24);
-    } else if (profile.family === 'rail') {
-      ctx.fillRect(2, 14, vehicle.w - 4, vehicle.h - 30); ctx.strokeRect(2, 14, vehicle.w - 4, vehicle.h - 30);
-      ctx.fillStyle = '#9dbbb4'; for (let x = 18; x < vehicle.w - 26; x += 42) ctx.fillRect(x, 28, 25, 22);
-      ctx.fillStyle = '#202a29'; ctx.fillRect(0, vehicle.h - 18, vehicle.w, 12);
-    } else {
-      ctx.fillRect(vehicle.w * 0.32, 10, vehicle.w * 0.36, 50); ctx.strokeRect(vehicle.w * 0.32, 10, vehicle.w * 0.36, 50);
-      ctx.fillRect(25, 53, 46, 16); ctx.fillRect(vehicle.w - 71, 53, 46, 16);
-      ctx.fillRect(42, 66, 25, vehicle.h - 66); ctx.fillRect(vehicle.w - 67, 66, 25, vehicle.h - 66);
-    }
-    if (vehicle.occupied && vehicle.fuel > 0) {
-      ctx.fillStyle = '#d88c55';
-      ctx.fillRect(profile.family === 'space' || profile.family === 'air' ? 2 : vehicle.w * 0.45, vehicle.h - 10, profile.family === 'space' || profile.family === 'air' ? 18 : 24, 7);
-    }
     ctx.restore();
   }
 

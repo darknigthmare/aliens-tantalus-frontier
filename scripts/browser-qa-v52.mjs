@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v59');
+  || path.resolve('.qa', 'browser-v60');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -79,6 +79,87 @@ async function waitFor(expression, label, timeout = 12000) {
   throw new Error(`${label} (délai ${timeout} ms, dernière valeur ${JSON.stringify(lastValue)}, diagnostics ${JSON.stringify({ exceptions, consoleErrors, failedRequests })})`);
 }
 
+async function advanceSquadVehicleAccessV60(target, maxSteps) {
+  const expected = JSON.stringify(target);
+  const limit = Math.max(1, Math.floor(maxSteps));
+  return evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    const qa = game.__v60QaAccessIsolation;
+    if (!qa) throw new Error('Isolation accès véhicule V60 absente.');
+    const describe = () => {
+      const snapshot = game.getSnapshot();
+      const members = snapshot.squadRuntime.members;
+      const access = snapshot.vehicleAccessRuntime;
+      return {
+        access,
+        members,
+        inVehicleCount: members.filter((member) => member.inVehicle).length,
+        concurrentEntering: members.filter((member) => member.vehicleAccessPhase === 'entering').length,
+        concurrentExiting: members.filter((member) => member.vehicleAccessPhase === 'exiting').length,
+        passengerCrewIds: game.vehicle.passengers.filter((passenger) => passenger?.squadMember).map((passenger) => passenger.crewId),
+        socket: access.squad?.socket || null,
+        playerInVehicle: Boolean(game.player.inVehicle),
+        driverIsPlayer: game.vehicle.driver === game.player,
+        vehicle: {
+          id: game.vehicle.id,
+          x: game.vehicle.x,
+          y: game.vehicle.y,
+          w: game.vehicle.w,
+          h: game.vehicle.h,
+          facing: game.vehicle.facing,
+          hull: game.vehicle.hull,
+          maxHull: game.vehicle.maxHull,
+          destroyed: game.vehicle.destroyed
+        },
+        blockedDamage: [...qa.blockedDamage],
+        sealedEvents: snapshot.animationRuntime?.byEvent?.['vehicle:access-sealed'] || 0,
+        telemetry: snapshot.squadRuntime.telemetry,
+        metrics: { ...qa.metrics, boardedCounts: [...qa.metrics.boardedCounts], disembarkedCounts: [...qa.metrics.disembarkedCounts] },
+        events: [...qa.accessEvents]
+      };
+    };
+    const matches = (state) => {
+      const mode = state.access.squad?.mode;
+      const phase = state.access.squad?.phase;
+      if (${expected} === 'boarding-opening') return state.access.occupied && !state.access.transition && state.access.secureClock === 0 && mode === 'boarding' && phase === 'opening';
+      if (${expected} === 'boarding-entering') return mode === 'boarding' && phase === 'sequencing' && state.concurrentEntering === 1;
+      if (${expected} === 'boarding-complete') return !state.access.squad && state.members.every((member) => member.inVehicle);
+      if (${expected} === 'disembarking-opening') return !state.playerInVehicle && !state.access.transition && mode === 'disembarking' && phase === 'opening';
+      if (${expected} === 'disembarking-exiting') return mode === 'disembarking' && phase === 'sequencing' && state.concurrentExiting === 1;
+      if (${expected} === 'disembarking-complete') return !state.access.squad && state.members.every((member) => !member.inVehicle);
+      return false;
+    };
+    const observe = () => {
+      const members = game.activeSquadActors();
+      qa.metrics.maximumConcurrentEntering = Math.max(qa.metrics.maximumConcurrentEntering, members.filter((member) => member.vehicleAccessPhase === 'entering').length);
+      qa.metrics.maximumConcurrentExiting = Math.max(qa.metrics.maximumConcurrentExiting, members.filter((member) => member.vehicleAccessPhase === 'exiting').length);
+      const boarded = members.filter((member) => member.inVehicle).length;
+      if (boarded !== qa.metrics.lastBoarded) {
+        qa.metrics.boardedCounts.push(boarded);
+        qa.metrics.lastBoarded = boarded;
+      }
+      const disembarked = game.squadTelemetry.disembarked;
+      if (disembarked !== qa.metrics.lastDisembarked) {
+        qa.metrics.disembarkedCounts.push(disembarked);
+        qa.metrics.lastDisembarked = disembarked;
+      }
+    };
+    let state = describe();
+    let steps = 0;
+    observe();
+    state = describe();
+    while (steps < ${limit} && !matches(state)) {
+      game.update(0.034);
+      observe();
+      state = describe();
+      steps += 1;
+    }
+    qa.drawClean();
+    state = describe();
+    return { ...state, reached: matches(state), steps };
+  })()`);
+}
+
 async function click(selector) {
   return evaluate(`(() => {
     const element = document.querySelector(${JSON.stringify(selector)});
@@ -134,6 +215,30 @@ async function capture(name) {
   return destination;
 }
 
+async function captureMissionGame(name) {
+  const state = await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    if (!game) return { available: false, paused: false };
+    const paused = Boolean(game.paused);
+    game.paused = false;
+    game.draw();
+    return { available: true, paused };
+  })()`);
+  try {
+    return await capture(name);
+  } finally {
+    if (state.available && state.paused) {
+      await evaluate(`(() => {
+        const game = globalThis.__ATF_GAME__;
+        if (!game) return false;
+        game.paused = true;
+        game.draw();
+        return true;
+      })()`);
+    }
+  }
+}
+
 async function paintEditorTile(tool, column, row) {
   await click(`[data-editor-tool="${tool}"]`);
   return evaluate(`(() => {
@@ -155,7 +260,7 @@ try {
   await command('Network.setCacheDisabled', { cacheDisabled: true });
   await command('Network.setBypassServiceWorker', { bypass: true });
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 980, deviceScaleFactor: 1, mobile: false });
-  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v52-${Date.now()}` });
+  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v60-${Date.now()}` });
 
   await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && !document.querySelector('#app').hidden)`, 'Le boot v51 ne se termine pas', 20000);
   const shell = await evaluate(`(() => ({
@@ -169,7 +274,7 @@ try {
     appVisible: !document.querySelector('#app').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v59') && shell.release === '59.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v60') && shell.release === '60.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('boot-v52');
@@ -257,10 +362,13 @@ try {
 
   await click('[data-view="vehicles"]');
   const vehicleProcurement = await click('[data-procure-kind="vehicle"]:not([disabled])');
-  const vehicleId = vehicleProcurement.dataset.procureId;
-  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.inventory.vehicleIds.includes(${JSON.stringify(vehicleId)})`, 'Acquisition véhicule non persistée');
+  const procuredVehicleId = vehicleProcurement.dataset.procureId;
+  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.inventory.vehicleIds.includes(${JSON.stringify(procuredVehicleId)})`, 'Acquisition véhicule non persistée');
+  await click(`[data-select-vehicle="${procuredVehicleId}"]`);
+  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedVehicleId === ${JSON.stringify(procuredVehicleId)}`, 'Véhicule acquis non affecté');
+  const vehicleId = 'vehicle-001-m577-armored-personnel-carrier';
   await click(`[data-select-vehicle="${vehicleId}"]`);
-  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedVehicleId === ${JSON.stringify(vehicleId)}`, 'Véhicule non affecté');
+  await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedVehicleId === ${JSON.stringify(vehicleId)}`, 'M577 non réaffecté pour la QA physique V60');
 
   await click('[data-view="crew"]');
   const removedCrew = await click('[data-crew-assign]:not([disabled])');
@@ -284,7 +392,7 @@ try {
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedNeuroProfileId === ${JSON.stringify(neuro.value)}`, 'Profil Neuro-Xeno non sélectionné');
   const apex = await selectFirstRealOption('#apex-dossier-select');
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.selectedApexDossierId === ${JSON.stringify(apex.value)}`, 'Dossier Apex non sélectionné');
-  report.loadout = { equipmentId, vehicleId, removedCrewId, assignedCrewId, costumeId, neuroId: neuro.value, apexId: apex.value };
+  report.loadout = { equipmentId, vehicleId, procuredVehicleId, removedCrewId, assignedCrewId, costumeId, neuroId: neuro.value, apexId: apex.value };
   report.checkpoints.push('loadout-ui');
 
   const campaignChoice = await click('[data-plan-campaign]:not([disabled])');
@@ -332,18 +440,53 @@ try {
     const player = game.player;
     const vehicle = game.vehicle;
     if (!player || !vehicle?.active || vehicle.destroyed) throw new Error('Véhicule V59 indisponible.');
-    game.__v59QaAccessIsolation = {
+    if (vehicle.id !== 'vehicle-001-m577-armored-personnel-carrier') throw new Error('Le scénario V60 exige le M577.');
+    const squad = game.activeSquadActors();
+    if (squad.length < 2) throw new Error('Escouade V60 insuffisante pour prouver une file physique.');
+    game.__v60QaAccessIsolation = {
       enemies: game.enemies,
       hostileProjectiles: game.hostileProjectiles,
       hazards: game.hazards.map((hazard) => ({ hazard, active: hazard.active })),
       coopInVehicle: Boolean(game.coop?.inVehicle),
       damageVehicle: game.damageVehicle,
-      blockedDamage: []
+      onEvent: game.onEvent,
+      paused: game.paused,
+      neuroRelayX: Number.isFinite(Number(game.neuro?.relayX)) ? Number(game.neuro.relayX) : null,
+      blockedDamage: [],
+      accessEvents: [],
+      metrics: {
+        maximumConcurrentEntering: 0,
+        maximumConcurrentExiting: 0,
+        lastBoarded: 0,
+        lastDisembarked: 0,
+        boardedCounts: [],
+        disembarkedCounts: []
+      }
     };
-    game.damageVehicle = (amount, source) => { game.__v59QaAccessIsolation.blockedDamage.push({ amount, source }); return 0; };
+    game.__v60QaAccessIsolation.drawClean = () => {
+      const paused = game.paused;
+      game.paused = false;
+      game.draw();
+      game.paused = paused;
+    };
+    game.onEvent = (event) => {
+      const result = game.__v60QaAccessIsolation.onEvent.call(game, event);
+      if (String(event?.type || '').startsWith('squad-vehicle-access-')) {
+        game.__v60QaAccessIsolation.accessEvents.push({
+          type: event.type,
+          mode: event.mode || null,
+          crewId: event.crewId || null,
+          reason: event.reason || null
+        });
+      }
+      return result;
+    };
+    game.damageVehicle = (amount, source) => { game.__v60QaAccessIsolation.blockedDamage.push({ amount, source }); return 0; };
     game.enemies = [];
     game.hostileProjectiles = [];
     for (const hazard of game.hazards) hazard.active = false;
+    game.paused = false;
+    if (game.neuro?.active) game.neuro.relayX = vehicle.x + vehicle.w / 2;
     Object.assign(player, {
       inVehicle: false,
       x: vehicle.x + vehicle.w / 2 - player.w / 2,
@@ -367,7 +510,37 @@ try {
     vehicle.firing = false;
     vehicle.attacking = false;
     vehicle.launching = false;
+    vehicle.facing = 1;
     vehicle.accessTransition = null;
+    vehicle.accessSecureClock = 0;
+    vehicle.squadAccessRuntime = null;
+    vehicle.squadAccessBoardingComplete = false;
+    // Mise en scène déterministe avant l’entrée du joueur ; après toggleVehicle,
+    // seules les mises à jour naturelles du runtime sont autorisées à déplacer l’escouade.
+    const accessX = vehicle.x + vehicle.w * 0.1;
+    const accessBottom = vehicle.y + vehicle.h;
+    squad.forEach((member, index) => Object.assign(member, {
+      alive: true,
+      downed: false,
+      inVehicle: false,
+      vehicleSeatId: null,
+      vehicleAccessPhase: null,
+      vehicleAccessElapsed: 0,
+      vehicleAccessApproachElapsed: 0,
+      x: accessX - index * 58 - member.w / 2,
+      y: accessBottom - member.h,
+      vx: 0,
+      vy: 0,
+      grounded: true,
+      climbing: false,
+      rallyClock: 0
+    }));
+    Object.assign(game.squadTelemetry, {
+      boarded: 0,
+      disembarked: 0,
+      accessSkipped: 0,
+      accessAborted: 0
+    });
     game.camera.x = Math.max(0, vehicle.x - 500);
     game.camera.y = Math.max(0, vehicle.y - 420);
     const started = game.toggleVehicle(player);
@@ -375,77 +548,205 @@ try {
     const images = [...game.images.entries()]
       .filter(([key]) => /AccessV59$/.test(key))
       .map(([key, image]) => ({ key, src: image.currentSrc || image.src, ready: image.complete && image.naturalWidth === 1024 && image.naturalHeight === 1024 }));
-    return { started, vehicleId: vehicle.id, playerInVehicle: player.inVehicle, runtime: snapshot.vehicleAccessRuntime, images };
+    return {
+      started,
+      vehicleId: vehicle.id,
+      playerInVehicle: player.inVehicle,
+      runtime: snapshot.vehicleAccessRuntime,
+      images,
+      squadBefore: snapshot.squadRuntime.members.map((member) => ({
+        crewId: member.crewId,
+        x: member.x,
+        y: member.y,
+        inVehicle: member.inVehicle,
+        phase: member.vehicleAccessPhase
+      }))
+    };
   })()`);
   requireThat(
     vehicleAccessStart.started
+      && vehicleAccessStart.vehicleId === 'vehicle-001-m577-armored-personnel-carrier'
       && vehicleAccessStart.playerInVehicle === false
       && vehicleAccessStart.runtime?.transition?.phase === 'entering'
       && vehicleAccessStart.runtime.animation?.sheetId?.endsWith('.access-damage')
       && vehicleAccessStart.runtime.animation?.clipId === 'access-open'
       && vehicleAccessStart.images.length === 4
-      && vehicleAccessStart.images.every((entry) => entry.ready),
+      && vehicleAccessStart.images.every((entry) => entry.ready)
+      && vehicleAccessStart.squadBefore.length >= 2
+      && vehicleAccessStart.squadBefore.every((member) => !member.inVehicle && member.phase === null),
     `Démarrage accès véhicule V59 invalide: ${JSON.stringify(vehicleAccessStart)}`
   );
   await wait(160);
   const vehicleEntering = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().vehicleAccessRuntime`);
   requireThat(vehicleEntering?.transition?.phase === 'entering' && vehicleEntering.animation?.clipId === 'access-open', `Animation entrée V59 interrompue: ${JSON.stringify(vehicleEntering)}`);
-  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-entering.png'));
-  await waitFor(`(() => { const game = globalThis.__ATF_GAME__; const state = game.getSnapshot().vehicleAccessRuntime; return game.player.inVehicle && state.occupied && !state.transition; })()`, 'Occupation véhicule V59 jamais finalisée');
-  const vehicleSecured = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().vehicleAccessRuntime`);
-  requireThat(vehicleSecured.occupied && vehicleSecured.secureClock > 0 && vehicleSecured.animation?.clipId === 'secure-occupied', `Sécurisation véhicule V59 invalide: ${JSON.stringify(vehicleSecured)}`);
-  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-secured.png'));
-  const vehicleReady = await evaluate(`(() => {
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v59-vehicle-entering.png'));
+  await waitFor(`(() => {
     const game = globalThis.__ATF_GAME__;
-    const wasPaused = game.paused;
+    const state = game.getSnapshot().vehicleAccessRuntime;
+    if (!game.player.inVehicle || !state.occupied || state.transition) return false;
     game.paused = true;
-    for (let step = 0; step < 20 && game.vehicle.accessSecureClock > 0; step += 1) game.update(0.034);
-    const snapshot = game.getSnapshot();
-    game.paused = wasPaused;
-    return {
-      access: snapshot.vehicleAccessRuntime,
-      vehicle: {
-        hull: game.vehicle.hull,
-        maxHull: game.vehicle.maxHull,
-        hurtClock: game.vehicle.v52HurtClock,
-        destroyed: game.vehicle.destroyed,
-        actionClock: game.vehicle.actionClock
-      },
-      blockedDamage: [...(game.__v59QaAccessIsolation?.blockedDamage || [])],
-      sealedEvents: snapshot.animationRuntime?.byEvent?.['vehicle:access-sealed'] || 0
-    };
+    game.__v60QaAccessIsolation.drawClean();
+    return true;
+  })()`, 'Occupation joueur V59 jamais finalisée');
+  const vehicleSecured = await evaluate(`(() => {
+    const snapshot = globalThis.__ATF_GAME__.getSnapshot();
+    return { access: snapshot.vehicleAccessRuntime, squad: snapshot.squadRuntime };
   })()`);
   requireThat(
-    vehicleReady.access.occupied
+    vehicleSecured.access.occupied
+      && vehicleSecured.access.secureClock > 0
+      && vehicleSecured.access.squad === null
+      && vehicleSecured.squad.members.every((member) => !member.inVehicle)
+      && vehicleSecured.access.animation?.clipId === 'secure-occupied',
+    `Sécurisation joueur V59 invalide: ${JSON.stringify(vehicleSecured)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v59-vehicle-secured.png'));
+
+  const squadBoardingOpening = await advanceSquadVehicleAccessV60('boarding-opening', 80);
+  const vehicleReady = squadBoardingOpening;
+  requireThat(
+    vehicleReady.reached
+      && vehicleReady.access.occupied
       && vehicleReady.access.secureClock === 0
       && !vehicleReady.access.transition
-      && !vehicleReady.access.animation?.sheetId?.endsWith('.access-damage')
-      && ['command-idle', 'idle', 'hangar', 'damage'].includes(vehicleReady.access.animation?.clipId)
+      && vehicleReady.playerInVehicle
+      && vehicleReady.driverIsPlayer
       && !vehicleReady.vehicle.destroyed
       && vehicleReady.sealedEvents > 0
       && vehicleReady.blockedDamage.length === 0,
-    `Retour action véhicule V59 invalide: ${JSON.stringify(vehicleReady)}`
+    `Retour action véhicule V59 invalide avant embarquement IA: ${JSON.stringify(vehicleReady)}`
   );
+  requireThat(
+    squadBoardingOpening.access.occupied
+      && !squadBoardingOpening.access.transition
+      && squadBoardingOpening.access.squad?.mode === 'boarding'
+      && squadBoardingOpening.access.squad?.phase === 'opening'
+      && squadBoardingOpening.inVehicleCount === 0
+      && squadBoardingOpening.members.every((member) => ['queued', 'approaching'].includes(member.vehicleAccessPhase))
+      && squadBoardingOpening.members.some((member) => member.vehicleAccessPhase === 'approaching')
+      && squadBoardingOpening.socket?.source === 'vehicle-001-m577-armored-personnel-carrier'
+      && Number.isFinite(squadBoardingOpening.socket?.x)
+      && Number.isFinite(squadBoardingOpening.socket?.bottom)
+      && squadBoardingOpening.access.animation?.clipId === 'access-open',
+    `Ouverture de file IA V60 invalide: ${JSON.stringify(squadBoardingOpening)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-boarding-opening.png'));
+
+  const squadBoardingEntering = await advanceSquadVehicleAccessV60('boarding-entering', 240);
+  requireThat(
+    squadBoardingEntering.reached
+      && squadBoardingEntering.access.squad?.mode === 'boarding'
+      && squadBoardingEntering.access.squad?.phase === 'sequencing'
+      && squadBoardingEntering.concurrentEntering === 1
+      && squadBoardingEntering.metrics.maximumConcurrentEntering === 1
+      && squadBoardingEntering.inVehicleCount === 0
+      && squadBoardingEntering.access.animation?.clipId === 'access-open',
+    `Premier embarquement IA V60 non physique ou concurrent: ${JSON.stringify(squadBoardingEntering)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-boarding-entering.png'));
+
+  const squadBoardingComplete = await advanceSquadVehicleAccessV60('boarding-complete', 480);
+  const boardingEvents = squadBoardingComplete.events.filter((event) => event.mode === 'boarding');
+  requireThat(
+    squadBoardingComplete.reached
+      && squadBoardingComplete.access.squad === null
+      && squadBoardingComplete.access.occupied
+      && !squadBoardingComplete.access.animation?.sheetId?.endsWith('.access-damage')
+      && ['command-idle', 'idle'].includes(squadBoardingComplete.access.animation?.clipId)
+      && squadBoardingComplete.metrics.maximumConcurrentEntering === 1
+      && squadBoardingComplete.members.every((member) => member.inVehicle && member.vehicleSeatId)
+      && new Set(squadBoardingComplete.members.map((member) => member.vehicleSeatId)).size === squadBoardingComplete.members.length
+      && new Set(squadBoardingComplete.passengerCrewIds).size === squadBoardingComplete.members.length
+      && squadBoardingComplete.metrics.boardedCounts.length === squadBoardingComplete.members.length
+      && squadBoardingComplete.metrics.boardedCounts.every((count, index) => count === index + 1)
+      && squadBoardingComplete.telemetry.boarded === squadBoardingComplete.members.length
+      && squadBoardingComplete.telemetry.accessSkipped === 0
+      && boardingEvents[0]?.type === 'squad-vehicle-access-start'
+      && boardingEvents.filter((event) => event.type === 'squad-vehicle-access-member-start').length === squadBoardingComplete.members.length
+      && boardingEvents.filter((event) => event.type === 'squad-vehicle-access-member-complete').length === squadBoardingComplete.members.length
+      && boardingEvents.at(-1)?.type === 'squad-vehicle-access-complete',
+    `File d’embarquement IA V60 incomplète: ${JSON.stringify(squadBoardingComplete)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-boarded.png'));
+
   const vehicleExitStart = await evaluate(`(() => { const game = globalThis.__ATF_GAME__; return { started: game.toggleVehicle(game.player), runtime: game.getSnapshot().vehicleAccessRuntime, playerInVehicle: game.player.inVehicle }; })()`);
   requireThat(vehicleExitStart.started && vehicleExitStart.playerInVehicle && vehicleExitStart.runtime?.transition?.phase === 'exiting' && vehicleExitStart.runtime.animation?.clipId === 'exit-close', `Sortie véhicule V59 invalide: ${JSON.stringify(vehicleExitStart)}`);
-  await wait(160);
-  report.screenshots.push(await capture('alien-tantalus-v59-vehicle-exiting.png'));
-  await waitFor(`(() => { const game = globalThis.__ATF_GAME__; const state = game.getSnapshot().vehicleAccessRuntime; return !game.player.inVehicle && !state.occupied && !state.transition; })()`, 'Sortie véhicule V59 jamais finalisée');
+  await evaluate(`globalThis.__ATF_GAME__.__v60QaAccessIsolation.drawClean()`);
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v59-vehicle-exiting.png'));
+
+  const squadDisembarkOpening = await advanceSquadVehicleAccessV60('disembarking-opening', 180);
+  requireThat(
+    squadDisembarkOpening.reached
+      && !squadDisembarkOpening.access.occupied
+      && !squadDisembarkOpening.access.transition
+      && squadDisembarkOpening.access.squad?.mode === 'disembarking'
+      && squadDisembarkOpening.access.squad?.phase === 'opening'
+      && squadDisembarkOpening.inVehicleCount === squadDisembarkOpening.members.length,
+    `Ouverture de sortie IA V60 non séquencée: ${JSON.stringify(squadDisembarkOpening)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-disembarking-opening.png'));
+
+  const squadDisembarking = await advanceSquadVehicleAccessV60('disembarking-exiting', 240);
+  requireThat(
+    squadDisembarking.reached
+      && squadDisembarking.access.squad?.mode === 'disembarking'
+      && squadDisembarking.access.squad?.phase === 'sequencing'
+      && squadDisembarking.concurrentExiting === 1
+      && squadDisembarking.metrics.maximumConcurrentExiting === 1
+      && squadDisembarking.inVehicleCount === squadDisembarking.members.length - 1,
+    `Sortie IA V60 groupée ou invisible: ${JSON.stringify(squadDisembarking)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-disembarking-exiting.png'));
+
+  const squadDisembarkComplete = await advanceSquadVehicleAccessV60('disembarking-complete', 480);
+  const disembarkEvents = squadDisembarkComplete.events.filter((event) => event.mode === 'disembarking');
+  requireThat(
+    squadDisembarkComplete.reached
+      && squadDisembarkComplete.access.squad === null
+      && !squadDisembarkComplete.access.occupied
+      && !squadDisembarkComplete.access.animation?.sheetId?.endsWith('.access-damage')
+      && ['command-idle', 'idle'].includes(squadDisembarkComplete.access.animation?.clipId)
+      && squadDisembarkComplete.metrics.maximumConcurrentExiting === 1
+      && squadDisembarkComplete.members.every((member) => !member.inVehicle && member.vehicleSeatId === null)
+      && squadDisembarkComplete.passengerCrewIds.length === 0
+      && squadDisembarkComplete.metrics.disembarkedCounts.length === squadDisembarkComplete.members.length
+      && squadDisembarkComplete.metrics.disembarkedCounts.every((count, index) => count === index + 1)
+      && squadDisembarkComplete.telemetry.disembarked === squadDisembarkComplete.members.length
+      && disembarkEvents[0]?.type === 'squad-vehicle-access-start'
+      && disembarkEvents.filter((event) => event.type === 'squad-vehicle-access-member-start').length === squadDisembarkComplete.members.length
+      && disembarkEvents.filter((event) => event.type === 'squad-vehicle-access-member-complete').length === squadDisembarkComplete.members.length
+      && disembarkEvents.at(-1)?.type === 'squad-vehicle-access-complete',
+    `File de sortie IA V60 incomplète: ${JSON.stringify(squadDisembarkComplete)}`
+  );
+  report.screenshots.push(await captureMissionGame('alien-tantalus-v60-squad-disembarked.png'));
+
   const vehicleAccessEnd = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const state = game.getSnapshot().vehicleAccessRuntime;
-    const isolation = game.__v59QaAccessIsolation;
+    const isolation = game.__v60QaAccessIsolation;
     if (isolation?.enemies) game.enemies = isolation.enemies;
     if (isolation?.hostileProjectiles) game.hostileProjectiles = isolation.hostileProjectiles;
     if (game.coop && isolation) game.coop.inVehicle = isolation.coopInVehicle;
     if (isolation?.damageVehicle) game.damageVehicle = isolation.damageVehicle;
+    if (isolation?.onEvent) game.onEvent = isolation.onEvent;
+    if (game.neuro?.active && Number.isFinite(isolation?.neuroRelayX)) game.neuro.relayX = isolation.neuroRelayX;
     for (const entry of isolation?.hazards || []) entry.hazard.active = entry.active;
-    delete game.__v59QaAccessIsolation;
+    game.paused = Boolean(isolation?.paused);
+    delete game.__v60QaAccessIsolation;
     return state;
   })()`);
-  requireThat(!vehicleAccessEnd.occupied && !vehicleAccessEnd.transition, `État final accès véhicule V59 invalide: ${JSON.stringify(vehicleAccessEnd)}`);
+  requireThat(!vehicleAccessEnd.occupied && !vehicleAccessEnd.transition && vehicleAccessEnd.squad === null, `État final accès véhicule V59/V60 invalide: ${JSON.stringify(vehicleAccessEnd)}`);
   report.vehicleAccessV59 = { start: vehicleAccessStart, entering: vehicleEntering, secured: vehicleSecured, ready: vehicleReady, exit: vehicleExitStart, end: vehicleAccessEnd };
   report.checkpoints.push('vehicle-access-v59');
+  report.squadVehicleAccessV60 = {
+    boardingOpening: squadBoardingOpening,
+    boardingEntering: squadBoardingEntering,
+    boarded: squadBoardingComplete,
+    disembarkOpening: squadDisembarkOpening,
+    disembarking: squadDisembarking,
+    disembarked: squadDisembarkComplete
+  };
+  report.checkpoints.push('squad-vehicle-access-v60');
   const squadCombat = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     const ally = game.activeSquadActors().find((member) => member.alive && !member.inVehicle);
@@ -550,6 +851,15 @@ try {
   const afterMove = await evaluate(`globalThis.__ATF_GAME__.getSnapshot()`);
   requireThat(afterMove.player.x > beforeInput.player.x, `Déplacement mission sans effet: ${JSON.stringify({ before: beforeInput.player, after: afterMove.player })}`);
   await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    globalThis.__qaInputIsolation = {
+      enemies: game.enemies,
+      hostileProjectiles: game.hostileProjectiles,
+      hazards: game.hazards.map((hazard) => ({ hazard, active: hazard.active }))
+    };
+    game.enemies = [];
+    game.hostileProjectiles = [];
+    for (const hazard of game.hazards) hazard.active = false;
     globalThis.__qaSaveEvents = 0;
     globalThis.addEventListener('atf:saved', () => { globalThis.__qaSaveEvents += 1; });
     return true;
@@ -568,6 +878,15 @@ try {
   await click(`[data-use-equipment="${equipmentId}"]`);
   const equipmentAfter = await evaluate(`globalThis.__ATF_GAME__.getSnapshot().equipmentRuntime.find((entry) => entry.id === ${JSON.stringify(equipmentId)})`);
   requireThat(equipmentAfter.remaining === equipmentBefore.remaining - 1 && equipmentAfter.uses === equipmentBefore.uses + 1, `Utilisation équipement sans effet: ${JSON.stringify({ equipmentBefore, equipmentAfter })}`);
+  await evaluate(`(() => {
+    const game = globalThis.__ATF_GAME__;
+    const isolation = globalThis.__qaInputIsolation;
+    if (isolation?.enemies) game.enemies = isolation.enemies;
+    if (isolation?.hostileProjectiles) game.hostileProjectiles = isolation.hostileProjectiles;
+    for (const entry of isolation?.hazards || []) entry.hazard.active = entry.active;
+    delete globalThis.__qaInputIsolation;
+    return true;
+  })()`);
   report.screenshots.push(await capture('alien-tantalus-v58-colony-mission-desktop.png'));
   report.mission = { campaignId, start: missionStart, afterNeuroCounter, afterMove, afterFire, captionAfterFire, fireBurst, equipmentBefore, equipmentAfter };
   report.checkpoints.push('production-mission-input');
@@ -592,8 +911,14 @@ try {
   await wait(900);
   await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && globalThis.__ATF_V51__.saveSystem.data.strategy.currentOperation?.resumeState?.schema === 1)`, 'Snapshot opération absent après reload', 20000);
   const persistedResume = await evaluate(`structuredClone(globalThis.__ATF_V51__.saveSystem.data.strategy.currentOperation.resumeState)`);
-  await click('#continue-operation');
-  await waitFor(`Boolean(globalThis.__ATF_GAME__?.running && globalThis.__ATF_GAME__.lastResumeResult?.applied)`, 'Reprise native non appliquée', 20000);
+  await evaluate(`(() => {
+    const button = document.querySelector('#continue-operation');
+    if (!button || button.disabled) throw new Error('Reprise opération indisponible.');
+    button.click();
+    if (globalThis.__ATF_GAME__) globalThis.__ATF_GAME__.paused = true;
+    return true;
+  })()`);
+  await waitFor(`Boolean(globalThis.__ATF_GAME__?.running && globalThis.__ATF_GAME__.paused && globalThis.__ATF_GAME__.lastResumeResult?.applied)`, 'Reprise native non appliquée ou non figée avant vérification', 20000);
   const resumeAfter = await evaluate(`(() => {
     const game = globalThis.__ATF_GAME__;
     return { result: { ...game.lastResumeResult }, state: game.captureResumeState(), snapshot: game.getSnapshot() };
@@ -784,21 +1109,36 @@ try {
       startY,
       endY: hub.player.y,
       snapshot: hub.getSnapshot(),
-      assets: hub.getAssetReport()
+      assets: hub.getAssetReport(),
+      traversalAssets: [...hub.traversalImages.entries()].map(([key, image]) => ({
+        key,
+        source: image.currentSrc || image.src,
+        ready: image.complete && image.naturalWidth > 0 && image.naturalHeight > 0
+      }))
     };
   })()`);
+  const traversalAssetKeys = ['catwalk', 'drop', 'ledge', 'ladder', 'vent', 'maintenancePipe', 'ceilingCables', 'foregroundPipes'];
   requireThat(
-    hubTraversal.snapshot.platformCount === 8
-      && hubTraversal.snapshot.ladderCount === 8
-      && hubTraversal.snapshot.ventCount === 4
-      && hubTraversal.snapshot.route.verticalLinks === 8
-      && hubTraversal.snapshot.route.crawlLinks === 4
-      && hubTraversal.assets.traversalArtReady === 4
-      && hubTraversal.snapshot.roomLayerAssetsReady === 62
+    hubTraversal.snapshot.platformCount >= 8
+      && hubTraversal.snapshot.ladderCount >= 8
+      && hubTraversal.snapshot.ventCount >= 4
+      && hubTraversal.snapshot.occluderCount >= 4
+      && hubTraversal.snapshot.route.source === 'authored-v60'
+      && hubTraversal.snapshot.route.nodeCount === hubTraversal.snapshot.platformCount + 4
+      && hubTraversal.snapshot.route.verticalLinks === hubTraversal.snapshot.ladderCount
+      && hubTraversal.snapshot.route.crawlLinks === hubTraversal.snapshot.ventCount
+      && hubTraversal.snapshot.traversalArchetypes.length === 4
+      && new Set(hubTraversal.snapshot.traversalArchetypes).size === 4
+      && hubTraversal.assets.traversalArtReady === 8
+      && hubTraversal.assets.traversalArtCount === 8
+      && hubTraversal.traversalAssets.length === 8
+      && hubTraversal.traversalAssets.every((entry) => entry.ready && entry.source.includes('/assets/openai/metroidvania/props/'))
+      && JSON.stringify(hubTraversal.traversalAssets.map((entry) => entry.key).sort()) === JSON.stringify([...traversalAssetKeys].sort())
+      && hubTraversal.snapshot.roomLayerAssetsReady === hubTraversal.assets.roomLayerAssetCount
       && hubTraversal.endY < hubTraversal.startY - 40,
     `Traversal verticale bitmap du hub invalide: ${JSON.stringify(hubTraversal)}`
   );
-  report.screenshots.push(await capture('alien-tantalus-v58-hub-traversal-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v60-hub-traversal-desktop.png'));
 
   const hubCoherence = await evaluate(`(() => {
     const hub = globalThis.__ATF_HUB__;
@@ -837,6 +1177,43 @@ try {
   report.hubCoherence = hubCoherence;
   report.hubTraversal = hubTraversal;
   report.checkpoints.push('hub-v58-room-coherence');
+  report.checkpoints.push('hub-v60-authored-traversal');
+
+  const hubDoorSocketAudit = await evaluate(`(async () => {
+    const [{ HUB_DECKS, HUB_WORLD }, topology] = await Promise.all([
+      import('/src/hub-v51-runtime.js'),
+      import('/src/topology-coherence-v58.js')
+    ]);
+    return HUB_DECKS.map((deck, deckIndex) => {
+      const sockets = topology.buildHubRoomDoorSocketsV60(HUB_DECKS, HUB_WORLD, deckIndex);
+      const validation = topology.validateHubRoomDoorSocketsV60({ decks: HUB_DECKS, world: HUB_WORLD, deckIndex, sockets });
+      return {
+        deckId: deck.id,
+        validation,
+        rooms: Object.fromEntries(Object.entries(sockets).map(([roomId, entries]) => [roomId, entries.map((entry) => ({
+          doorId: entry.doorId,
+          kind: entry.kind,
+          lift: entry.lift,
+          localX: entry.localX,
+          side: entry.side,
+          interior: entry.interior
+        }))]))
+      };
+    });
+  })()`);
+  const socketRoom = (roomId) => hubDoorSocketAudit.flatMap((deck) => Object.entries(deck.rooms)).find(([id]) => id === roomId)?.[1] || [];
+  const scienceInterior = socketRoom('science-lab').filter((socket) => socket.interior);
+  requireThat(
+    hubDoorSocketAudit.length === 4
+      && hubDoorSocketAudit.every((deck) => deck.validation.valid && deck.validation.socketCount === 8)
+      && ['medical', 'quarantine', 'life-support'].every((roomId) => socketRoom(roomId).every((socket) => !socket.interior))
+      && scienceInterior.length === 1
+      && scienceInterior[0].lift
+      && Math.abs(scienceInterior[0].localX - 1096) <= 2,
+    `Sockets physiques des salles V60 incohérents: ${JSON.stringify(hubDoorSocketAudit)}`
+  );
+  report.hubDoorSocketAudit = hubDoorSocketAudit;
+  report.checkpoints.push('hub-v60-door-socket-coherence');
 
   const hubRoomAudit = [];
   const hubRoomIds = [
@@ -862,19 +1239,51 @@ try {
         return hub.getSnapshot();
       })()`);
       const snapshot = await waitFor(
-        `(() => { const state = globalThis.__ATF_HUB__.getSnapshot(); return state.running && state.deck === ${deckIndex} && state.roomId === '${roomId}' && state.roomLayerAssetsReady === 62 && state.doorNetworkCount === 5 ? state : null; })()`,
-        `Salle V58 ${roomId} non prête`,
+        `(() => {
+          const hub = globalThis.__ATF_HUB__;
+          const state = hub.getSnapshot();
+          const assets = hub.getAssetReport();
+          return state.running
+            && state.deck === ${deckIndex}
+            && state.roomId === '${roomId}'
+            && state.roomLayerAssetsReady === assets.roomLayerAssetCount
+            && state.traversalArtReady === 8
+            && state.doorNetworkCount === 5
+            ? state
+            : null;
+        })()`,
+        `Salle V60 ${roomId} non prête`,
         20000
       );
       await wait(120);
-      const screenshot = await capture(`alien-tantalus-v58-room-${deckIndex + 1}-${roomId}.png`);
+      const screenshot = await capture(`alien-tantalus-v60-room-${deckIndex + 1}-${roomId}.png`);
       report.screenshots.push(screenshot);
-      hubRoomAudit.push({ deck: deckIndex, roomId, composition: snapshot.roomComposition, screenshot });
+      hubRoomAudit.push({
+        deck: deckIndex,
+        roomId,
+        composition: snapshot.roomComposition,
+        platformCount: snapshot.platformCount,
+        ladderCount: snapshot.ladderCount,
+        ventCount: snapshot.ventCount,
+        occluderCount: snapshot.occluderCount,
+        traversalArchetypes: snapshot.traversalArchetypes,
+        screenshot
+      });
     }
   }
-  requireThat(hubRoomAudit.length === 16, `Audit visuel incomplet des salles: ${JSON.stringify(hubRoomAudit)}`);
+  const hubTraversalSignatures = new Set(hubRoomAudit.map((entry) => `${entry.platformCount}/${entry.ladderCount}/${entry.ventCount}/${entry.occluderCount}`));
+  const hubTraversalArchetypes = new Set(hubRoomAudit.flatMap((entry) => entry.traversalArchetypes));
+  requireThat(
+    hubRoomAudit.length === 16
+      && hubTraversalSignatures.size >= 4
+      && hubTraversalArchetypes.size === 16
+      && hubRoomAudit.every((entry) => entry.occluderCount >= 4)
+      && hubRoomAudit.every((entry) => entry.composition === (entry.roomId === 'dropship-hangar' ? 'modular-v55' : 'modular-v56')),
+    `Audit visuel/traversal incomplet des 16 salles V60: ${JSON.stringify({ hubRoomAudit, signatures: [...hubTraversalSignatures], archetypes: [...hubTraversalArchetypes] })}`
+  );
   report.hubRoomAudit = hubRoomAudit;
   report.checkpoints.push('hub-v58-16-room-visual-audit');
+  report.checkpoints.push('hub-v60-16-room-visual-audit');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -891,23 +1300,100 @@ try {
   const modularHangar = await evaluate(`(() => {
     const hub = globalThis.__ATF_HUB__;
     const before = hub.getSnapshot();
-    Object.assign(hub.player, { x: 930, y: 624 - hub.player.h, vx: 80, vy: 0, grounded: true });
+    const room = hub.currentRoom();
+    const segments = hub.obstacles
+      .filter((entry) => entry.actorId === 'dropship-hangar-ud4l')
+      .map((entry) => ({ id: entry.id, role: entry.role, x: entry.x, y: entry.y, w: entry.w, h: entry.h, collisionOnly: entry.collisionOnly }));
+
+    Object.assign(hub.player, { x: room.xStart + 550 - hub.player.w / 2, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
+    const interaction = hub.nearestInteraction();
+    const originalOnAction = hub.onAction;
+    let interactionAction = null;
+    hub.onAction = (payload) => { interactionAction = { ...payload }; };
+    try {
+      hub.interact();
+    } finally {
+      hub.onAction = originalOnAction;
+    }
+
+    const relevantDraws = [];
+    const contextPrototype = Object.getPrototypeOf(hub.ctx);
+    const originalDrawImage = contextPrototype.drawImage;
+    const expectedAssets = [
+      ['/assets/openai/hub/parallax/engineering-far.png', 'parallax'],
+      ['/assets/openai/hub/layers/engineering-hangar-overhead.png', 'overhead'],
+      ['/assets/openai/hub/layers/engineering-hangar-mid.png', 'mid'],
+      ['/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png', 'ud4l'],
+      ['/assets/openai/metroidvania/props/electrical-arc-hazard.png', 'danger'],
+      ['/assets/openai/hub/layers/engineering-hangar-foreground.png', 'front']
+    ];
+    contextPrototype.drawImage = function(image, ...args) {
+      const source = String(image?.currentSrc || image?.src || '');
+      const match = expectedAssets.find(([asset]) => source.includes(asset));
+      if (match) {
+        const destination = args.length >= 8 ? args.slice(-4).map((value) => Math.round(Number(value))) : null;
+        relevantDraws.push({ label: match[1], source, destination });
+      }
+      return originalDrawImage.call(this, image, ...args);
+    };
+    try {
+      hub.draw();
+    } finally {
+      contextPrototype.drawImage = originalDrawImage;
+    }
+    const renderOrder = expectedAssets.map(([, label]) => label);
+    const renderIndices = Object.fromEntries(renderOrder.map((label) => [label, relevantDraws.findIndex((entry) => entry.label === label)]));
+    const ud4lDraw = relevantDraws.find((entry) => entry.label === 'ud4l');
+
+    Object.assign(hub.player, { x: 1060, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
     hub.hangarHazardCooldown = 0;
     hub.update(0.016);
     const after = hub.getSnapshot();
-    return { before, after, assets: hub.getAssetReport() };
+    return {
+      before,
+      after,
+      assets: hub.getAssetReport(),
+      interaction,
+      interactionAction,
+      collisionSegments: segments,
+      renderOrder,
+      renderIndices,
+      relevantDraws,
+      ud4lDraw
+    };
   })()`);
+  const modularRenderIndices = modularHangar.renderOrder.map((label) => modularHangar.renderIndices[label]);
   requireThat(
     modularHangar.before.roomBackground === null
       && modularHangar.before.roomComposition === 'modular-v55'
       && modularHangar.after.hubIntegrity < modularHangar.before.hubIntegrity
       && modularHangar.after.shockHits === modularHangar.before.shockHits + 1
-      && modularHangar.assets.npcMissionSpriteAssetsReady === 16,
-    `Hangar v55 non physique/modulaire: ${JSON.stringify(modularHangar)}`
+      && modularHangar.assets.npcMissionSpriteAssetsReady === 16
+      && modularHangar.interaction?.id === 'dropship-hangar-ud4l'
+      && modularHangar.interaction?.vehicleId === 'vehicle-009-ud-4l-cheyenne-dropship'
+      && modularHangar.interaction?.action === 'navigate:operations'
+      && modularHangar.interaction?.interactionPriority === 100
+      && modularHangar.interaction?.interactionBounds?.x === 451
+      && modularHangar.interaction?.interactionBounds?.y === 454
+      && modularHangar.interaction?.interactionBounds?.w === 240
+      && modularHangar.interaction?.interactionBounds?.h === 170
+      && modularHangar.interactionAction?.id === modularHangar.interaction.id
+      && modularHangar.collisionSegments.length === 4
+      && new Set(modularHangar.collisionSegments.map((entry) => entry.id)).size === 4
+      && modularHangar.collisionSegments.every((entry) => entry.collisionOnly && ['dropship-hull', 'dropship-gear'].includes(entry.role))
+      && modularHangar.collisionSegments.every((entry) => entry.x >= 160 && entry.y >= 293 && entry.x + entry.w <= 971 && entry.y + entry.h <= 624)
+      && modularHangar.collisionSegments.every((entry) => entry.x + entry.w < 1040)
+      && modularRenderIndices.every((index) => index >= 0)
+      && modularRenderIndices.every((index, position) => position === 0 || index > modularRenderIndices[position - 1])
+      && modularHangar.ud4lDraw?.destination?.[2] === 811
+      && modularHangar.ud4lDraw?.destination?.[3] === 331
+      && Math.abs(811 / 331 - 213 / 87) < 0.02,
+    `Hangar V60 non physique, interactif ou mal composé: ${JSON.stringify(modularHangar)}`
   );
-  report.screenshots.push(await capture('alien-tantalus-v58-hangar-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v60-hangar-ud4l-desktop.png'));
   report.modularHangar = modularHangar;
   report.checkpoints.push('hub-modular-v55');
+  report.checkpoints.push('hub-ud4l-production-v60');
 
   await click('[data-view="editor"]');
   await click('#editor-clear');
@@ -961,7 +1447,7 @@ try {
   await command('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true, screenWidth: 390, screenHeight: 844 });
   await command('Page.reload', { ignoreCache: true });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && !document.querySelector('#app').hidden)`, 'Reload mobile v52 incomplet', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && !document.querySelector('#app').hidden)`, 'Reload mobile V60 incomplet', 20000);
   const mobile = await evaluate(`(() => {
     const save = globalThis.__ATF_V51__.saveSystem.data;
     const hub = globalThis.__ATF_HUB__.getSnapshot();
@@ -993,12 +1479,12 @@ try {
       }
     };
   })()`);
-  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16, `Runtime mobile V58 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
+  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '60.0.0', `Runtime mobile V60 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
   requireThat(JSON.stringify(mobile.persisted) === JSON.stringify(persistenceBeforeReload), `Persistance divergente après reload: ${JSON.stringify({ persistenceBeforeReload, mobile: mobile.persisted })}`);
-  report.screenshots.push(await capture('alien-tantalus-v58-hub-mobile.png'));
+  report.screenshots.push(await capture('alien-tantalus-v60-hub-mobile.png'));
   report.mobile = mobile;
   report.persistence = persistenceBeforeReload;
-  report.checkpoints.push('reload-mobile-v58-layout-persistence');
+  report.checkpoints.push('reload-mobile-v60-layout-persistence');
 
   await command('Network.setBypassServiceWorker', { bypass: false });
   await command('Network.setCacheDisabled', { cacheDisabled: false });
@@ -1010,16 +1496,17 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '59.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v59 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '60.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v60 impossible', 20000);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));
-  requireThat(offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
+  requireThat(offline.release === '60.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V60 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
   report.offline = { ...offline, criticalFailures: criticalOfflineFailures };
   report.checkpoints.push('offline-pwa');
 
   const meaningfulConsoleErrors = consoleErrors.filter((entry) => !/favicon\.ico/i.test(entry));
-  requireThat(exceptions.length === 0 && meaningfulConsoleErrors.length === 0, `Erreurs navigateur: ${JSON.stringify({ exceptions, consoleErrors: meaningfulConsoleErrors })}`);
+  const onlineRequestFailures = failedRequests.slice(0, offlineFailureStart);
+  requireThat(exceptions.length === 0 && meaningfulConsoleErrors.length === 0 && onlineRequestFailures.length === 0, `Erreurs navigateur: ${JSON.stringify({ exceptions, consoleErrors: meaningfulConsoleErrors, onlineRequestFailures })}`);
   report.ok = true;
   report.exceptions = exceptions;
   report.consoleErrors = meaningfulConsoleErrors;

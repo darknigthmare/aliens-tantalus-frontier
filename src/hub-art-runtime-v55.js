@@ -26,13 +26,23 @@ const UD4L_DROPSHIP_V55 = Object.freeze({
   kind: 'vehicle-sprite',
   phase: 'back',
   asset: '/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png',
+  vehicleId: 'vehicle-009-ud-4l-cheyenne-dropship',
+  action: 'navigate:operations',
+  description: 'Embarquer à bord de l’UD-4L avec Echo-9.',
+  interactionPriority: 100,
   sheet: Object.freeze({ columns: 4, rows: 4, cellWidth: 256, cellHeight: 256 }),
   sourceCell: Object.freeze({ column: 0, row: 0 }),
   sourceOpaqueBounds: rect(21, 153, 213, 87),
-  renderBounds: rect(380, 412, 520, 212),
-  anchor: point(640, 624, 'bottom-center'),
-  collisionBounds: rect(420, 526, 440, 98),
-  interactionBounds: rect(536, 486, 208, 138)
+  renderBounds: rect(160, 293, 811, 331),
+  anchor: point(566, 624, 'bottom-center'),
+  collisionBounds: rect(223, 469, 696, 155),
+  collisionSegments: Object.freeze([
+    Object.freeze({ ...rect(223, 500, 260, 48), id: 'ud4l-hull-port', role: 'dropship-hull' }),
+    Object.freeze({ ...rect(659, 500, 260, 48), id: 'ud4l-hull-starboard', role: 'dropship-hull' }),
+    Object.freeze({ ...rect(261, 548, 108, 76), id: 'ud4l-gear-port', role: 'dropship-gear' }),
+    Object.freeze({ ...rect(773, 548, 108, 76), id: 'ud4l-gear-starboard', role: 'dropship-gear' })
+  ]),
+  interactionBounds: rect(451, 454, 240, 170)
 });
 
 export const ELECTRICAL_HAZARD_ART_V55 = Object.freeze({
@@ -42,9 +52,9 @@ export const ELECTRICAL_HAZARD_ART_V55 = Object.freeze({
   asset: '/assets/openai/metroidvania/props/electrical-arc-hazard.png',
   sourceSize: Object.freeze({ width: 1774, height: 887 }),
   sourceCrop: rect(120, 377, 1536, 364),
-  renderBounds: rect(864, 548, 320, 76),
-  anchor: point(1024, 624, 'bottom-center'),
-  collisionBounds: rect(906, 550, 236, 74),
+  renderBounds: rect(980, 553, 300, 71),
+  anchor: point(1130, 624, 'bottom-center'),
+  collisionBounds: rect(1040, 550, 236, 74),
   damage: 22,
   stunSeconds: 1.25,
   damageIntervalSeconds: 0.75,
