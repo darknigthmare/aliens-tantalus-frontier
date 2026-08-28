@@ -1,8 +1,8 @@
 # ALIENS: TANTALUS FRONTIER — V60
 
-Version applicative : 60.0.0. Date de validation locale : 28 août 2026.
+Version applicative : 60.0.0. Date de validation locale et production : 28 août 2026.
 
-État de publication : `READY_FOR_PUBLICATION`. La gate complète et le parcours navigateur local sont réussis. Le commit, le push et le déploiement Vercel V60 restent à consigner avant de passer cet état à `PUBLISHED`.
+État de publication : `PUBLISHED`. La gate complète, le push GitHub, le déploiement Vercel et le parcours navigateur sur l’alias public sont réussis. Le commit runtime V60 est `27a6fca` ; le premier déploiement production validé est `dpl_6XHWZYztnUjVzeB8hETc2zs1CPPk`.
 
 ## Livrables V60 validés
 
@@ -38,7 +38,7 @@ Le détail des réemplois et blocages se trouve dans `docs/references/V60_ASSET_
 
 Les quatre MID concernés sont Medical, Science Lab, Quarantine et Life Support. Les fichiers actuels restent présents ; seules leurs versions nettoyées sont bloquées.
 
-## Validation locale du 28 août 2026
+## Validation locale et production du 28 août 2026
 
 - manifeste : 182 atlas / 2 564 cellules ;
 - contrôle alpha/pixels : 182 atlas RGBA, 80 cellules xénomorphes noires, 32 cellules chroma et quatre atlas d’accès de 16 cellules validés ;
@@ -46,7 +46,9 @@ Les quatre MID concernés sont Medical, Science Lab, Quarantine et Life Support.
 - tests Node : 274/274 ;
 - build : `60.0.0`, 3 443 entrées ;
 - Edge local : 22 checkpoints, 30 captures, 16/16 salles, desktop 1 440 × 980, mobile 390 × 844 et PWA hors ligne ;
-- résultat navigateur : zéro exception, zéro erreur console et zéro requête critique échouée.
+- Edge production : les mêmes 22 checkpoints, 30 captures et 16/16 salles ont été rejoués directement sur `https://aliens-tantalus-frontier.vercel.app` ;
+- résultat navigateur local et public : zéro exception, zéro erreur console et zéro requête critique échouée ;
+- Vercel : déploiement production `Ready`, alias public en HTTP 200 et marqueurs `v60` / `60.0.0` présents dans le HTML servi.
 
 La comparaison visuelle au même cadrage des salles Medical, Science Lab, Quarantine, Life Support et Dropship Hangar confirme l’ajout des traversées et occlusions V60. Elle ne transforme pas les quatre MID bloqués en livrables.
 
@@ -59,9 +61,9 @@ La comparaison visuelle au même cadrage des salles Medical, Science Lab, Quaran
 - La feuille de combat du joueur conserve une arme générique intégrée.
 - Quatre overlays de fits sont prêts à être briefés mais non générés ; celui du M22A3 reste bloqué par sa trappe de référence.
 
-## Publication restante
+## Publication réalisée
 
-1. commit et push de la V60 ;
-2. déploiement Vercel production ;
-3. contrôle HTTP et parcours navigateur sur l’alias public ;
-4. inscription du commit et du déploiement final dans ce document.
+1. commit runtime `27a6fca` poussé sur `origin/codex/v52-physical-worlds` ;
+2. déploiement Vercel production `dpl_6XHWZYztnUjVzeB8hETc2zs1CPPk` passé à l’état `Ready` ;
+3. alias `https://aliens-tantalus-frontier.vercel.app` contrôlé en HTTP 200 ;
+4. parcours Edge public complet réussi avec 22 checkpoints, 30 captures, 16/16 salles et PWA hors ligne.

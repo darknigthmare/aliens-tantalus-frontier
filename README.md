@@ -71,9 +71,9 @@ npm.cmd run qa
 
 Gate locale V60 du 28 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **134 modules**, **274/274 tests Node** et build statique **60.0.0** de **3 443 entrées**.
 
-Le parcours Edge V60 local a réussi : **22 checkpoints**, **30 captures**, **16/16 salles** auditées, entrée/sécurisation/file/sortie véhicule et escouade confirmées, huit bitmaps de traversée et quatre atlas d’accès chargés, desktop **1 440 × 980**, mobile **390 × 844**, reprise native et PWA hors ligne. Résultat : zéro exception, zéro erreur console et zéro requête critique échouée.
+Le parcours Edge V60 local et le même parcours sur la production ont réussi : **22 checkpoints**, **30 captures**, **16/16 salles** auditées, entrée/sécurisation/file/sortie véhicule et escouade confirmées, huit bitmaps de traversée et quatre atlas d’accès chargés, desktop **1 440 × 980**, mobile **390 × 844**, reprise native et PWA hors ligne. Résultat : zéro exception, zéro erreur console et zéro requête critique échouée.
 
-La publication GitHub/Vercel V60 reste à consigner ; le dernier déploiement public confirmé dans l’historique demeure V59 jusqu’à cette étape.
+La V60 est publiée : runtime `27a6fca` poussé sur `origin/codex/v52-physical-worlds`, déploiement Vercel production `Ready`, alias public en HTTP 200 et marqueurs `v60` / `60.0.0` confirmés dans le HTML servi.
 
 ## Dossier de production
 
