@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '60.0.0',
-  subtitle: 'Asset Completion Audit, Bitmap Vehicles & Validation Gates',
+  version: '61.0.0',
+  subtitle: 'Cinematic Title, Physical Hub Stations & OpenAI Art Pass',
   sourceVersion: '51.0.0'
 });

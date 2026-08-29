@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v59",
+  "release": "v61",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -6732,6 +6732,37 @@
       }
     },
     {
+      "id": "weapon.ak-4047-pulse-rifle.action",
+      "family": "weapon",
+      "subject": "AK-4047 Pulse Rifle",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/ak-4047-pulse-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/ak-4047-pulse-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "excelIds": [
+        "ARM-0156"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.bolt-gun.action",
       "family": "weapon",
       "subject": "weapon.bolt-gun.action",
@@ -6857,6 +6888,38 @@
       }
     },
     {
+      "id": "weapon.f44aa-pulse-rifle.action",
+      "family": "weapon",
+      "subject": "F44AA Pulse Rifle",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/f44aa-pulse-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/f44aa-pulse-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "excelIds": [
+        "ARM-0072",
+        "ARM-0073"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.fire-axe.action",
       "family": "weapon",
       "subject": "weapon.fire-axe.action",
@@ -6957,6 +7020,37 @@
       }
     },
     {
+      "id": "weapon.m39-submachine-gun.action",
+      "family": "weapon",
+      "subject": "M39 Submachine Gun",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m39-submachine-gun-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m39-submachine-gun-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "excelIds": [
+        "ARM-0027"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.m40-hedp-grenade.action",
       "family": "weapon",
       "subject": "weapon.m40-hedp-grenade.action",
@@ -7031,6 +7125,37 @@
       }
     },
     {
+      "id": "weapon.m42a-scope-rifle.action",
+      "family": "weapon",
+      "subject": "M42A Scope Rifle",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m42a-scope-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m42a-scope-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_RECONSTRUCTION",
+      "excelIds": [
+        "ARM-0039"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.m4a3-service-pistol.action",
       "family": "weapon",
       "subject": "weapon.m4a3-service-pistol.action",
@@ -7056,6 +7181,37 @@
       }
     },
     {
+      "id": "weapon.m5-rpg.action",
+      "family": "weapon",
+      "subject": "M5 RPG",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m5-rpg-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m5-rpg-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_RECONSTRUCTION",
+      "excelIds": [
+        "ARM-0025"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
       "id": "weapon.m56-smartgun.action",
       "family": "weapon",
       "subject": "weapon.m56-smartgun.action",
@@ -7077,6 +7233,99 @@
           "src/sprite-animation-runtime.js",
           "src/game-v51-runtime.js",
           "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m6b-rocket-launcher.action",
+      "family": "weapon",
+      "subject": "M6B Rocket Launcher",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m6b-rocket-launcher-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m6b-rocket-launcher-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_RECONSTRUCTION",
+      "excelIds": [
+        "ARM-0026"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m83-sadar.action",
+      "family": "weapon",
+      "subject": "M83 SADAR",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m83-sadar-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m83-sadar-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_RECONSTRUCTION",
+      "excelIds": [
+        "ARM-0022"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.m94-impact-grenade.action",
+      "family": "weapon",
+      "subject": "M94 Impact Grenade",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/m94-impact-grenade-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/m94-impact-grenade-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "excelIds": [
+        "ARM-0031"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
         ]
       }
     },
@@ -7302,6 +7551,37 @@
           "src/sprite-animation-runtime.js",
           "src/game-v51-runtime.js",
           "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.type-88-heavy-assault-rifle.action",
+      "family": "weapon",
+      "subject": "Type 88 Heavy Assault Rifle",
+      "wave": "v61",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/type-88-heavy-assault-rifle-action-sheet.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/type-88-heavy-assault-rifle-action-sheet.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_ADAPTATION",
+      "excelIds": [
+        "ARM-0104"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v61.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/app.js"
         ]
       }
     },

@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v60');
+  || path.resolve('.qa', 'browser-v61');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -260,24 +260,33 @@ try {
   await command('Network.setCacheDisabled', { cacheDisabled: true });
   await command('Network.setBypassServiceWorker', { bypass: true });
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 980, deviceScaleFactor: 1, mobile: false });
-  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v60-${Date.now()}` });
+  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v61-${Date.now()}` });
 
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && !document.querySelector('#app').hidden)`, 'Le boot v51 ne se termine pas', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden && document.querySelector('#app').hidden)`, 'L écran titre V61 ne se charge pas', 20000);
+  report.screenshots.push(await capture('alien-tantalus-v61-title-idle-desktop.png'));
   const shell = await evaluate(`(() => ({
     title: document.title,
     release: globalThis.__ATF_V51__.saveSystem.data.release,
     schema: globalThis.__ATF_V51__.saveSystem.data.schema,
+    titleSnapshot: globalThis.__ATF_V61__.snapshot(),
     activePanel: document.querySelector('.view.active')?.dataset.panel,
     worlds: document.querySelectorAll('.world-node').length,
     campaigns: document.querySelectorAll('#campaign-list [data-plan-campaign]').length,
     editorTools: document.querySelectorAll('[data-editor-tool]').length,
     appVisible: !document.querySelector('#app').hidden,
+    titleVisible: !document.querySelector('#title-screen').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v60') && shell.release === '60.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
-  requireThat(shell.appVisible && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell v52 incomplet: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v61') && shell.release === '61.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.titleVisible && !shell.appVisible && shell.titleSnapshot.state === 'idle' && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell V61 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
-  report.checkpoints.push('boot-v52');
+  report.checkpoints.push('title-v61-idle');
+  await evaluate(`globalThis.__ATF_V61__.titleScreen.openMenu()`);
+  await waitFor(`globalThis.__ATF_V61__.snapshot().state === 'menu' && !document.querySelector('#title-menu').hidden`, 'Menu titre V61 inaccessible');
+  report.screenshots.push(await capture('alien-tantalus-v61-title-menu-desktop.png'));
+  await click('#title-continue');
+  await waitFor(`Boolean(document.querySelector('#title-screen').hidden && !document.querySelector('#app').hidden)`, 'Continuation V61 sans ouverture du jeu');
+  report.checkpoints.push('title-v61-menu-continue');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -421,7 +430,7 @@ try {
       && activeColonyLayers.every((asset) => asset.includes('/zones/colony-multiroute/')),
     `Mission coloniale V58 ou triplet zoné absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
-  requireThat(missionStart.animationRuntime?.sheets === 182 && missionStart.animationRuntime.runtimeReady === 182 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime v59 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  requireThat(missionStart.animationRuntime?.sheets === 191 && missionStart.animationRuntime.runtimeReady === 191 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime V61 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
   const neuroPlayerClip = Object.entries(missionStart.animationRuntime.activeClips).find(([key]) => key.startsWith('player:'));
   const neuroPlayerContract = missionStart.animationRuntime.neuroPlayerContract;
   requireThat(
@@ -1295,8 +1304,8 @@ try {
   })()`);
   await waitFor(`(() => {
     const snapshot = globalThis.__ATF_HUB__.getSnapshot();
-    return snapshot.running && snapshot.roomComposition === 'modular-v55' && snapshot.hubArtAssetsReady === 4;
-  })()`, 'Hangar modulaire v55 ou ses quatre bitmaps indisponibles', 30000);
+    return snapshot.running && snapshot.roomComposition === 'modular-v55' && snapshot.hubArtAssetsReady === 5;
+  })()`, 'Hangar modulaire V61 ou ses cinq bitmaps indisponibles', 30000);
   const modularHangar = await evaluate(`(() => {
     const hub = globalThis.__ATF_HUB__;
     const before = hub.getSnapshot();
@@ -1322,6 +1331,7 @@ try {
     const expectedAssets = [
       ['/assets/openai/hub/parallax/engineering-far.png', 'parallax'],
       ['/assets/openai/hub/layers/engineering-hangar-overhead.png', 'overhead'],
+      ['/assets/openai/hub/props/hangar-control-booth-v61.png', 'booth'],
       ['/assets/openai/hub/layers/engineering-hangar-mid.png', 'mid'],
       ['/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png', 'ud4l'],
       ['/assets/openai/metroidvania/props/electrical-arc-hazard.png', 'danger'],
@@ -1345,6 +1355,9 @@ try {
     const renderIndices = Object.fromEntries(renderOrder.map((label) => [label, relevantDraws.findIndex((entry) => entry.label === label)]));
     const ud4lDraw = relevantDraws.find((entry) => entry.label === 'ud4l');
 
+    Object.assign(hub.player, { x: room.xStart + 1060 - hub.player.w / 2, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
+    const boothInteraction = hub.nearestInteraction();
+
     Object.assign(hub.player, { x: 1060, y: 624 - hub.player.h, vx: 0, vy: 0, grounded: true });
     hub.hangarHazardCooldown = 0;
     hub.update(0.016);
@@ -1355,6 +1368,7 @@ try {
       assets: hub.getAssetReport(),
       interaction,
       interactionAction,
+      boothInteraction,
       collisionSegments: segments,
       renderOrder,
       renderIndices,
@@ -1378,6 +1392,10 @@ try {
       && modularHangar.interaction?.interactionBounds?.w === 240
       && modularHangar.interaction?.interactionBounds?.h === 170
       && modularHangar.interactionAction?.id === modularHangar.interaction.id
+      && modularHangar.boothInteraction?.id === 'dropship-hangar-control-booth'
+      && modularHangar.boothInteraction?.kind === 'station-prop'
+      && modularHangar.boothInteraction?.action === 'navigate:operations'
+      && modularHangar.boothInteraction?.interactionPriority === 110
       && modularHangar.collisionSegments.length === 4
       && new Set(modularHangar.collisionSegments.map((entry) => entry.id)).size === 4
       && modularHangar.collisionSegments.every((entry) => entry.collisionOnly && ['dropship-hull', 'dropship-gear'].includes(entry.role))
@@ -1388,9 +1406,9 @@ try {
       && modularHangar.ud4lDraw?.destination?.[2] === 811
       && modularHangar.ud4lDraw?.destination?.[3] === 331
       && Math.abs(811 / 331 - 213 / 87) < 0.02,
-    `Hangar V60 non physique, interactif ou mal composé: ${JSON.stringify(modularHangar)}`
+    `Hangar V61 non physique, interactif ou mal composé: ${JSON.stringify(modularHangar)}`
   );
-  report.screenshots.push(await capture('alien-tantalus-v60-hangar-ud4l-desktop.png'));
+  report.screenshots.push(await capture('alien-tantalus-v61-hangar-ud4l-desktop.png'));
   report.modularHangar = modularHangar;
   report.checkpoints.push('hub-modular-v55');
   report.checkpoints.push('hub-ud4l-production-v60');
@@ -1447,7 +1465,9 @@ try {
   await command('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true, screenWidth: 390, screenHeight: 844 });
   await command('Page.reload', { ignoreCache: true });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && !document.querySelector('#boot') && !document.querySelector('#app').hidden)`, 'Reload mobile V60 incomplet', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden)`, 'Reload mobile V61 incomplet', 20000);
+  await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
+  await waitFor(`!document.querySelector('#app').hidden`, 'Continuation mobile V61 impossible');
   const mobile = await evaluate(`(() => {
     const save = globalThis.__ATF_V51__.saveSystem.data;
     const hub = globalThis.__ATF_HUB__.getSnapshot();
@@ -1479,28 +1499,30 @@ try {
       }
     };
   })()`);
-  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '60.0.0', `Runtime mobile V60 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
+  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '61.0.0', `Runtime mobile V61 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
   requireThat(JSON.stringify(mobile.persisted) === JSON.stringify(persistenceBeforeReload), `Persistance divergente après reload: ${JSON.stringify({ persistenceBeforeReload, mobile: mobile.persisted })}`);
-  report.screenshots.push(await capture('alien-tantalus-v60-hub-mobile.png'));
+  report.screenshots.push(await capture('alien-tantalus-v61-hub-mobile.png'));
   report.mobile = mobile;
   report.persistence = persistenceBeforeReload;
-  report.checkpoints.push('reload-mobile-v60-layout-persistence');
+  report.checkpoints.push('reload-mobile-v61-layout-persistence');
 
   await command('Network.setBypassServiceWorker', { bypass: false });
   await command('Network.setCacheDisabled', { cacheDisabled: false });
   await evaluate(`navigator.serviceWorker.ready.then(() => true)`);
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && navigator.serviceWorker.controller && !document.querySelector('#boot'))`, 'Service worker non contrôleur', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && navigator.serviceWorker.controller && !document.querySelector('#boot'))`, 'Service worker non contrôleur', 20000);
+  await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
   const offlineFailureStart = failedRequests.length;
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V51__.saveSystem.data.release === '60.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne v60 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V51__.saveSystem.data.release === '61.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne V61 impossible', 20000);
+  await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));
-  requireThat(offline.release === '60.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V60 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
+  requireThat(offline.release === '61.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V61 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
   report.offline = { ...offline, criticalFailures: criticalOfflineFailures };
   report.checkpoints.push('offline-pwa');
 

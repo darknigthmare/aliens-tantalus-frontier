@@ -21,11 +21,13 @@ import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { HubGame, HUB_DECKS } from './hub-v52-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
-import { resolveWeaponVisualProfileV56 } from './weapon-visual-runtime-v56.js';
+import { resolveWeaponVisualProfileV61 } from './weapon-visual-runtime-v61.js';
 import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import { resolveSpriteSheet, resolveVehicleAnimation } from './sprite-animation-runtime.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
+import { TitleScreenController } from './title-screen-v61.js';
+import { getExcelWeaponBridgeV61 } from './excel-content-bridge-v61.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -65,6 +67,8 @@ let activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) |
 let deferredInstall = null;
 let sessionStart = Date.now();
 let lastHubStatus = null;
+let activeHubStation = null;
+let pendingHubInteraction = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -87,6 +91,27 @@ const VIEW_META = Object.freeze({
   codex: ['ARCHIVE // v1-v51', 'Contrat de gameplay'],
   settings: ['SYSTEM // CONFIGURATION', 'Système'],
   play: ['OPS // LIVE', 'Opération en cours']
+});
+
+const HUB_STATION_DIALOGUES_V61 = Object.freeze({
+  briefing: Object.freeze({
+    view: 'operations',
+    speaker: 'LT. MARA VEGA',
+    portrait: '/assets/openai/ui/dialogue/mara-vega-operations-v61.png',
+    text: 'La table tactique est synchronisée avec MU/TH/UR. Choisissez une zone d’insertion, verrouillez Echo-9 et confirmez le manifeste avant l’embarquement.'
+  }),
+  'dropship-hangar': Object.freeze({
+    view: 'operations',
+    speaker: 'LT. MARA VEGA',
+    portrait: '/assets/openai/ui/dialogue/mara-vega-operations-v61.png',
+    text: 'L’UD-4L est alimenté et l’équipe attend dans la voie d’embarquement. Ouvrez le manifeste opérationnel avant de donner l’ordre de départ.'
+  }),
+  armory: Object.freeze({
+    view: 'armory',
+    speaker: 'S. DOYLE // ARMURIÈRE',
+    portrait: '/assets/openai/ui/dialogue/sanaa-doyle-armory-v61.png',
+    text: 'Les armes sont contrôlées par famille et par plaque visuelle. Les références encore ambiguës ou sans silhouette exacte restent verrouillées, sans substitut invisible.'
+  })
 });
 
 const COST_LABELS = Object.freeze({
@@ -198,8 +223,58 @@ function currentEditorProject(kind = null) {
   return clone(project);
 }
 
+function closeHubDialogue({ resume = true } = {}) {
+  const dialogue = byId('hub-dialogue');
+  if (!dialogue || dialogue.hidden) return;
+  dialogue.hidden = true;
+  document.documentElement.classList.remove('hub-dialogue-mode');
+  pendingHubInteraction = null;
+  if (resume && activeView === 'hub' && !activeHubStation) hubEngine.resume();
+}
+
+function closeHubStation({ resume = true } = {}) {
+  if (!activeHubStation) return;
+  const station = document.querySelector(`.view[data-panel="${activeHubStation}"]`);
+  station?.classList.remove('active', 'station-overlay');
+  activeHubStation = null;
+  document.documentElement.classList.remove('station-mode');
+  delete document.documentElement.dataset.hubStation;
+  if (resume && activeView === 'hub') hubEngine.resume();
+}
+
+function openHubStation(view) {
+  const station = document.querySelector(`.view[data-panel="${view}"]`);
+  if (!station || !['operations', 'armory', 'crew'].includes(view)) return false;
+  closeHubStation({ resume: false });
+  hubEngine.pause();
+  activeHubStation = view;
+  station.classList.add('active', 'station-overlay');
+  document.documentElement.classList.add('station-mode');
+  document.documentElement.dataset.hubStation = view;
+  station.querySelector('[data-close-hub-station]')?.focus({ preventScroll: true });
+  return true;
+}
+
+function openHubDialogue(interaction) {
+  const contract = HUB_STATION_DIALOGUES_V61[interaction?.roomId];
+  if (!contract) return false;
+  pendingHubInteraction = { interaction, contract };
+  hubEngine.pause();
+  byId('hub-dialogue-speaker').textContent = contract.speaker;
+  byId('hub-dialogue-text').textContent = contract.text;
+  const portrait = byId('hub-dialogue-image');
+  portrait.src = contract.portrait;
+  portrait.alt = `Portrait de ${contract.speaker}`;
+  byId('hub-dialogue').hidden = false;
+  document.documentElement.classList.add('hub-dialogue-mode');
+  byId('hub-dialogue-continue').focus({ preventScroll: true });
+  return true;
+}
+
 function showView(name) {
   if (!VIEW_META[name]) return;
+  closeHubDialogue({ resume: false });
+  closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
   activeView = name;
@@ -215,6 +290,31 @@ function showView(name) {
     hubEngine.start(saveSystem.data.hub, { editorProject: currentEditorProject('ship') });
   }
   globalThis.scrollTo?.({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+}
+
+const titleScreen = new TitleScreenController({
+  root: byId('title-screen'),
+  app: byId('app'),
+  getSave: () => saveSystem.data,
+  onUnlock: () => { audio.unlock(); audio.ui(); },
+  onContinue: (view) => showView(view),
+  onNewTimeline: () => {
+    hubEngine.stop(false);
+    engine.stop();
+    saveSystem.newGame(saveSystem.profile);
+    ensureAdvancedState(saveSystem.data);
+    activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
+    applyRuntimeSettings();
+    renderAll();
+  },
+  onOptions: () => showView('settings')
+});
+
+function showTitleScreen() {
+  hubEngine.stop(false);
+  engine.stop();
+  document.documentElement.classList.remove('hub-mode', 'mission-mode');
+  titleScreen.show();
 }
 
 function renderClock() {
@@ -363,6 +463,11 @@ function procurementAction(kind, item) {
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
   const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
+  if (kind === 'weapon' && !resolveWeaponVisualProfileV61(item)) {
+    const bridge = getExcelWeaponBridgeV61(item.id);
+    const source = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
+    return `<button class="button compact" disabled title="Plaquette d’animation dédiée requise${source}">PLAQUETTE DÉDIÉE REQUISE</button>`;
+  }
   const equipped = kind === 'vehicle'
     ? saveSystem.data.strategy.selectedVehicleId === item.id
     : saveSystem.data.player[inventoryKey]?.includes(item.id);
@@ -395,7 +500,7 @@ function renderArmory() {
   all('.catalog-card', byId('armory-list')).forEach((card, index) => {
     const item = items[index];
     const visual = kind === 'weapon'
-      ? resolveWeaponVisualProfileV56(item)
+      ? resolveWeaponVisualProfileV61(item)
       : resolveEquipmentVisualProfileV56(item);
     const heading = card.querySelector('h3');
     if (visual?.displayName && heading) heading.textContent = visual.displayName;
@@ -429,6 +534,18 @@ function renderVehicles() {
   });
 }
 
+function ensureCostumeFilterOptions(id, field) {
+  const select = byId(id);
+  if (!select || select.options.length > 1) return;
+  const values = [...new Set(COSTUMES.map((costume) => costume[field]))].sort((a, b) => a.localeCompare(b, 'fr'));
+  for (const value of values) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = value;
+    select.append(option);
+  }
+}
+
 function renderCrew() {
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
   const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
@@ -438,11 +555,31 @@ function renderCrew() {
     const selected = saveSystem.data.strategy.selectedCrewIds.includes(member.id);
     return `<article class="crew-card ${selected ? 'selected' : ''}"><span class="eyebrow">${escapeHtml(definition.role)} · ${escapeHtml(member.status)}</span><h3>${escapeHtml(definition.name)}</h3>${meter('SANTÉ', member.health)}${meter('STRESS', member.stress, true)}${meter('FATIGUE', member.fatigue, true)}<div class="button-row"><button class="button compact" data-crew-assign="${member.id}" ${loadoutLocked || member.status !== 'active' && !selected ? 'disabled' : ''}${operationLockTitle}>${selected ? 'RETIRER' : 'AFFECTER'}</button><button class="button compact" data-crew-treat="${member.id}" ${loadoutLocked || member.status === 'deceased' || saveSystem.data.galaxy.resources.medical < 1 ? 'disabled' : ''}${operationLockTitle}>SOIGNER</button></div></article>`;
   }).join('');
+  ensureCostumeFilterOptions('costume-part-filter', 'part');
+  ensureCostumeFilterOptions('costume-body-filter', 'body');
+  ensureCostumeFilterOptions('costume-palette-filter', 'palette');
+  ensureCostumeFilterOptions('costume-wear-filter', 'wear');
+  const filters = {
+    part: byId('costume-part-filter').value,
+    body: byId('costume-body-filter').value,
+    palette: byId('costume-palette-filter').value,
+    wear: byId('costume-wear-filter').value
+  };
+  const activeCostume = COSTUMES.find((costume) => costume.id === saveSystem.data.player.costumeId) || COSTUMES[0];
+  byId('costume-preview-name').textContent = activeCostume.name;
+  byId('costume-preview-meta').textContent = `${activeCostume.body} · ${activeCostume.palette} · ${activeCostume.wear}`.toUpperCase();
   const term = byId('costume-search').value.trim().toLowerCase();
-  byId('costume-list').innerHTML = COSTUMES.filter((costume) => JSON.stringify(costume).toLowerCase().includes(term)).map((costume) => {
+  const costumes = COSTUMES.filter((costume) => (
+    (!filters.part || costume.part === filters.part)
+    && (!filters.body || costume.body === filters.body)
+    && (!filters.palette || costume.palette === filters.palette)
+    && (!filters.wear || costume.wear === filters.wear)
+    && JSON.stringify(costume).toLowerCase().includes(term)
+  ));
+  byId('costume-list').innerHTML = costumes.map((costume) => {
     const selected = saveSystem.data.player.costumeId === costume.id;
     return `<article class="catalog-card ${selected ? 'selected' : ''}"><span class="eyebrow">${escapeHtml(costume.body)} · ${escapeHtml(costume.wear)}</span><h3>${escapeHtml(costume.name)}</h3><p>${escapeHtml(costume.part)} · palette ${escapeHtml(costume.palette)}</p><footer><span>${costume.id}</span><button class="button compact" data-costume-id="${costume.id}" ${selected || loadoutLocked ? 'disabled' : ''}${operationLockTitle}>${selected ? 'PORTÉE' : loadoutLocked ? 'OPÉRATION ACTIVE' : 'APPLIQUER'}</button></footer></article>`;
-  }).join('');
+  }).join('') || '<article class="panel"><p>Aucune combinaison ne correspond à ces filtres.</p></article>';
 }
 
 function renderHubStatus(status = lastHubStatus) {
@@ -841,7 +978,7 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.action.startsWith('navigate:')) {
-    showView(interaction.action.split(':')[1]);
+    if (!openHubDialogue(interaction)) showView(interaction.action.split(':')[1]);
     return;
   }
   try {
@@ -982,6 +1119,30 @@ function bind() {
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
     sessionStart = Date.now(); persistMissionResumeState(); saveSystem.commit(); renderClock(); toast('Sauvegarde locale confirmée.');
   };
+  byId('return-title').onclick = () => {
+    persistMissionResumeState();
+    saveSystem.commit();
+    showTitleScreen();
+  };
+  byId('hub-dialogue-cancel').onclick = () => closeHubDialogue();
+  byId('hub-dialogue-continue').onclick = () => {
+    const view = pendingHubInteraction?.contract?.view;
+    closeHubDialogue({ resume: false });
+    if (!openHubStation(view)) hubEngine.resume();
+  };
+  all('[data-close-hub-station]').forEach((button) => {
+    button.onclick = () => closeHubStation();
+  });
+  globalThis.addEventListener('keydown', (event) => {
+    if (event.code !== 'Escape') return;
+    if (!byId('hub-dialogue').hidden) {
+      event.preventDefault();
+      closeHubDialogue();
+    } else if (activeHubStation) {
+      event.preventDefault();
+      closeHubStation();
+    }
+  });
   byId('continue-operation').onclick = () => launchCampaign();
   byId('new-timeline').onclick = () => { hubEngine.stop(false); engine.stop(); saveSystem.newGame(saveSystem.profile); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); showView('hub'); };
   ['world-search', 'campaign-search', 'armory-search', 'enemy-search', 'vehicle-search', 'costume-search', 'module-search'].forEach((id) => byId(id).addEventListener('input', () => ({
@@ -990,6 +1151,9 @@ function bind() {
   })[id]()));
   byId('campaign-mode').onchange = renderCampaigns;
   byId('armory-kind').onchange = renderArmory;
+  ['costume-part-filter', 'costume-body-filter', 'costume-palette-filter', 'costume-wear-filter'].forEach((id) => {
+    byId(id).onchange = renderCrew;
+  });
   byId('biology-filter').onchange = renderEnemies;
   byId('neuro-profile-select').onchange = (event) => runTimedMutation(() => {
     assertOperationMutable();
@@ -1009,7 +1173,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v60-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v61-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],
@@ -1048,7 +1212,15 @@ async function boot() {
     simulateGalaxy: (hours = 6) => { const result = advanceGalaxy(saveSystem.data, { hours }); commit(); return result; },
     snapshot: () => ({ save: clone(saveSystem.data), mission: engine.getSnapshot?.(), hub: hubEngine.getSnapshot?.(), editor: editor.getSnapshot() })
   };
-  setTimeout(() => { byId('boot').remove(); byId('app').hidden = false; showView(saveSystem.data.strategy.currentOperation ? 'operations' : 'hub'); }, 500);
+  globalThis.__ATF_V61__ = {
+    titleScreen,
+    showTitleScreen,
+    snapshot: () => titleScreen.getSnapshot()
+  };
+  setTimeout(() => {
+    byId('boot').remove();
+    showTitleScreen();
+  }, 500);
 }
 
 boot().catch((error) => {
@@ -1056,4 +1228,4 @@ boot().catch((error) => {
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { saveSystem, engine, hubEngine, launchCampaign, retreatMission, renderAll, showView };
+export { saveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen };

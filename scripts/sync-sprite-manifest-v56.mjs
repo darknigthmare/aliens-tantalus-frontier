@@ -231,7 +231,7 @@ export function assertSpriteManifestV56(manifest) {
 export function buildSpriteManifestV56(sourceManifest) {
   if (!sourceManifest || typeof sourceManifest !== 'object') throw new TypeError('A source sprite manifest is required.');
   const cleanSource = clone(sourceManifest);
-  cleanSource.sheets = (cleanSource.sheets || []).filter((sheet) => sheet.wave !== 'v59' && !V56_NEW_SHEET_IDS.includes(sheet.id));
+  cleanSource.sheets = (cleanSource.sheets || []).filter((sheet) => !['v59', 'v61'].includes(sheet.wave) && !V56_NEW_SHEET_IDS.includes(sheet.id));
 
   const manifest = buildSpriteManifestV55(cleanSource);
   manifest.contracts ||= {};

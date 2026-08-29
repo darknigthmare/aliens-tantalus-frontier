@@ -61,6 +61,8 @@ export function getHubRoomLayerBounds(room, renderBounds) {
 const HUB_PROP_SOURCE_SIZES = Object.freeze({
   'bridge-terminal': Object.freeze({ width: 239, height: 157 }),
   'briefing-table': Object.freeze({ width: 219, height: 147 }),
+  'operations-table-v61': Object.freeze({ width: 1024, height: 512 }),
+  'armory-counter-v61': Object.freeze({ width: 1024, height: 512 }),
   'sensor-console': Object.freeze({ width: 215, height: 188 }),
   cryopod: Object.freeze({ width: 241, height: 131 }),
   'bunk-module': Object.freeze({ width: 228, height: 170 }),
@@ -86,7 +88,7 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
   const xStart = index * ROOM_WIDTH;
   const profile = HUB_ROOM_PROFILES[id];
   const worldWidth = profile?.worldWidth || ROOM_WIDTH;
-  const propX = xStart + worldWidth * 0.7;
+  const propX = xStart + worldWidth * (id === 'briefing' ? 0.5 : id === 'armory' ? 0.54 : 0.7);
   const sourceSize = HUB_PROP_SOURCE_SIZES[prop] || { width: 1, height: 1 };
   const renderWidth = sourceSize.width * (propHeight / sourceSize.height);
   const propRenderBounds = Object.freeze({
@@ -143,14 +145,14 @@ export const HUB_MODULAR_PROP_FILES = Object.freeze([
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
-  '/assets/openai/hub/props/briefing-table.png',
+  '/assets/openai/hub/props/operations-table-v61.png',
+  '/assets/openai/hub/props/armory-counter-v61.png',
   '/assets/openai/hub/props/cryopod.png',
   '/assets/openai/hub/props/bunk-module.png',
   '/assets/openai/hub/props/mess-table.png',
   '/assets/openai/hub/props/medical-bed.png',
   '/assets/openai/hub/props/lab-console.png',
   '/assets/openai/hub/props/quarantine-unit.png',
-  '/assets/openai/hub/props/armory-rack.png',
   '/assets/openai/hub/props/workbench.png',
   '/assets/openai/hub/props/vehicle-lift.png',
   '/assets/openai/hub/props/reactor-column.png',
@@ -166,7 +168,7 @@ export const HUB_DECKS = Object.freeze([
     farBackground: '/assets/openai/hub/parallax/command-far.png',
     rooms: Object.freeze([
       makeRoom('bridge', 'Passerelle', 'navigate:galaxy', 'Tracer une route sur la Frontière.', 0, 0, 'command-bridge', 'bridge-terminal', 0, { x: 334, y: 248, w: 294, h: 118 }, 142),
-      makeRoom('briefing', 'Salle de briefing', 'navigate:operations', 'Préparer une opération avec Echo-9.', 1, 0, 'command-briefing', 'briefing-table', 1, { x: 108, y: 234, w: 240, h: 104 }, 126),
+      makeRoom('briefing', 'Salle de briefing', 'navigate:operations', 'Préparer une opération avec Echo-9.', 1, 0, 'command-briefing', 'operations-table-v61', 1, { x: 108, y: 234, w: 240, h: 104 }, 260),
       makeRoom('combat-information', 'Centre d’information tactique', 'navigate:command', 'Consulter l’état du théâtre et les alertes.', 2, 0, 'command-cic', 'sensor-console', 2, { x: 354, y: 226, w: 254, h: 110 }, 136),
       makeRoom('cryo-bay', 'Baie cryogénique', 'navigate:crew', 'Réveiller, relever et inspecter l’équipage.', 3, 3, 'command-cryo', 'cryopod', 3, { x: 116, y: 244, w: 220, h: 96 }, 112)
     ])
@@ -190,7 +192,7 @@ export const HUB_DECKS = Object.freeze([
     farBackground: '/assets/openai/hub/parallax/industrial-far.png',
     rooms: Object.freeze([
       makeRoom('quarantine', 'Quarantaine', 'service:quarantine', 'Renforcer le confinement biologique.', 0, 3, 'industrial-quarantine', 'quarantine-unit', 2, { x: 338, y: 220, w: 266, h: 118 }, 140),
-      makeRoom('armory', 'Armurerie', 'navigate:armory', 'Modifier armes, munitions et équipements.', 1, 0, 'industrial-armory', 'armory-rack', 3, { x: 116, y: 240, w: 224, h: 98 }, 138),
+      makeRoom('armory', 'Armurerie', 'navigate:armory', 'Modifier armes, munitions et équipements.', 1, 0, 'industrial-armory', 'armory-counter-v61', 3, { x: 116, y: 240, w: 224, h: 98 }, 290),
       makeRoom('workshop', 'Atelier', 'navigate:editor', 'Ouvrir Frontier Forge et les plans du vaisseau.', 2, 1, 'industrial-workshop', 'workbench', 0, { x: 354, y: 232, w: 238, h: 106 }, 128),
       makeRoom('vehicle-bay', 'Baie véhicules', 'navigate:vehicles', 'Inspecter les châssis et rôles par siège.', 3, 1, 'industrial-vehicle-bay', 'vehicle-lift', 1, { x: 112, y: 220, w: 248, h: 118 }, 110)
     ])
@@ -311,6 +313,26 @@ export class HubGame {
     this.running = false;
     this.loopToken = (this.loopToken || 0) + 1;
     this.keys.clear();
+  }
+
+  pause() {
+    if (!this.running) return false;
+    this.persist();
+    this.running = false;
+    this.loopToken = (this.loopToken || 0) + 1;
+    this.keys.clear();
+    return true;
+  }
+
+  resume() {
+    if (this.running || !this.state || !this.player) return false;
+    this.loopToken = (this.loopToken || 0) + 1;
+    const token = this.loopToken;
+    this.running = true;
+    this.last = performance.now();
+    requestAnimationFrame((time) => this.loop(time, token));
+    this.canvas.focus({ preventScroll: true });
+    return true;
   }
 
   setReducedMotion(enabled) { this.reducedMotion = Boolean(enabled); }
@@ -527,20 +549,22 @@ export class HubGame {
   nearestInteraction() {
     const room = this.currentRoom();
     if (room.id === DROPSHIP_HANGAR_ART_V55.roomId) {
-      const actor = DROPSHIP_HANGAR_ART_V55.dropship;
-      const bounds = actor.interactionBounds;
-      const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
-      if (!overlap(this.player, worldBounds)) return null;
-      return {
-        id: actor.id,
-        roomId: room.id,
-        kind: actor.kind,
-        vehicleId: actor.vehicleId,
-        action: actor.action,
-        description: actor.description,
-        interactionPriority: actor.interactionPriority,
-        interactionBounds: worldBounds
-      };
+      for (const actor of [DROPSHIP_HANGAR_ART_V55.controlBooth, DROPSHIP_HANGAR_ART_V55.dropship]) {
+        const bounds = actor.interactionBounds;
+        const worldBounds = { x: room.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h };
+        if (!overlap(this.player, worldBounds)) continue;
+        return {
+          id: actor.id,
+          roomId: room.id,
+          kind: actor.kind,
+          vehicleId: actor.vehicleId,
+          action: actor.action,
+          description: actor.description,
+          interactionPriority: actor.interactionPriority,
+          interactionBounds: worldBounds
+        };
+      }
+      return null;
     }
     const vehicleContract = resolveHubVehicleArtV58(room.id);
     if (vehicleContract) {
@@ -781,8 +805,8 @@ export class HubGame {
     for (const npc of this.npcs) {
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
-      const renderWidth = 92;
-      const renderHeight = 140;
+      const renderWidth = 82;
+      const renderHeight = 126;
       const renderY = npc.y + npc.h - renderHeight * (240 / 256);
       this.drawSheetCell(ctx, image, frame, 1, npc.x + npc.w / 2 - renderWidth / 2, renderY, renderWidth, renderHeight, npc.vx < 0, 4, 4);
     }
@@ -900,6 +924,10 @@ export class HubGame {
       const target = entry.renderBounds;
       const targetX = room.xStart + target.x;
       ctx.save();
+      if (entry.kind === 'station-prop' && this.nearestInteraction()?.id === entry.id) {
+        ctx.shadowColor = 'rgba(226, 203, 121, .62)';
+        ctx.shadowBlur = this.reducedMotion ? 8 : 9 + Math.sin(this.animationTime * 4) * 3;
+      }
       if (entry.kind === 'electrical') {
         const pulse = this.reducedMotion ? 0.78 : 0.64 + Math.sin(this.animationTime * 13) * 0.22;
         ctx.globalAlpha = clamp(pulse, 0.38, 0.94);
@@ -1104,8 +1132,8 @@ export class HubGame {
     const row = airborne ? 2 : moving ? 1 : 0;
     const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * (airborne ? 8 : Math.abs(this.player.vx) > 300 ? 12 : moving ? 9 : 4)) % 4;
     if (assetReady(this.playerSheet)) {
-      const width = 110;
-      const height = 148;
+      const width = 92;
+      const height = 128;
       const x = this.player.x + this.player.w / 2 - width / 2;
       const y = this.player.y + this.player.h - height * (240 / 256);
       this.drawSheetCell(ctx, this.playerSheet, frame, row, x, y, width, height, this.player.facing < 0, 4, 4);
@@ -1145,6 +1173,20 @@ export class HubGame {
     const room = this.currentRoom();
     const interaction = this.nearestInteraction();
     const lift = this.nearestLift();
+    if (globalThis.matchMedia?.('(max-width: 600px)').matches) {
+      ctx.fillStyle = 'rgba(2, 8, 7, .88)';
+      ctx.fillRect(18, 18, 790, 92);
+      ctx.strokeStyle = '#648270';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(19, 19, 788, 90);
+      ctx.fillStyle = '#9adbac';
+      ctx.font = '700 30px ui-monospace, monospace';
+      ctx.fillText('P' + (this.state.deck + 1) + ' · ' + room.name.toUpperCase(), 42, 56);
+      ctx.fillStyle = interaction || lift ? '#e2cb79' : '#a9bbb1';
+      ctx.font = '700 24px ui-monospace, monospace';
+      ctx.fillText(interaction ? 'E · UTILISER' : lift ? 'E · CHANGER DE PONT' : 'A/D · DÉPLACEMENT', 42, 91);
+      return;
+    }
     ctx.fillStyle = 'rgba(2, 8, 7, .78)';
     ctx.fillRect(18, 18, 420, 82);
     ctx.strokeStyle = '#648270';

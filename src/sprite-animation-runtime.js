@@ -3,7 +3,7 @@ import {
   NPC_MISSION_CLIP_SETS_V56,
   resolveNpcMissionAnimationV55
 } from './npc-mission-runtime-v55.js';
-import { WEAPON_VISUAL_PROFILES_V56 } from './weapon-visual-runtime-v56.js';
+import { WEAPON_VISUAL_PROFILES_ALL_V61 } from './weapon-visual-runtime-v61.js';
 import {
   EQUIPMENT_SHEET_GRID_V56,
   EQUIPMENT_VISUAL_PROFILES_V56
@@ -386,7 +386,7 @@ export const SPRITE_SHEETS = Object.freeze({
   'vehicle.maglev-personnel-car.action.v56': sheet('vehicle.maglev-personnel-car.action.v56', 'maglevPersonnelCarV56', '/assets/openai/sprites/normalized/vehicles/maglev-personnel-car-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'maglev-car-hull', 288, 108, 'vehicle'),
   'vehicle.ripper-siege-loader.action.v56': sheet('vehicle.ripper-siege-loader.action.v56', 'ripperSiegeLoaderV56', '/assets/openai/sprites/normalized/vehicles/ripper-siege-loader-action-sheet.png', 'vehicle-action-v56', 'vehicle-ground', 'ripper-siege-loader-frame', 170, 200, 'vehicle'),
   'weapon.m41a-pulse-rifle.action': sheet('weapon.m41a-pulse-rifle.action', 'rifle', '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png', 'rifle-action', 'weapon-grip', 'weapon-pickup', 126, 72, 'weapon'),
-  ...Object.fromEntries(WEAPON_VISUAL_PROFILES_V56
+  ...Object.fromEntries(WEAPON_VISUAL_PROFILES_ALL_V61
     .filter((entry) => entry.sheetId !== 'weapon.m41a-pulse-rifle.action')
     .map((entry) => [entry.sheetId, sheet(
       entry.sheetId, entry.imageKey, entry.path, entry.clipSet, entry.pivot, entry.hitbox, entry.width, entry.height, 'weapon'

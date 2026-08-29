@@ -1,8 +1,8 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version web jouable **v60.0.0**. Le contrat consolidé **v1→v60** conserve la boucle publiée en V59, retire le substitut Canvas des véhicules non terrestres et ferme la traversée physique V60 : seize profils de salle, huit bitmaps de parcours, sockets issus du graphe réel, M577 ancré au sol auteur et embarquement/débarquement séquencé de l’escouade. Les 24 variantes des trois châssis sans plaque canonique exacte restent au catalogue mais ne peuvent plus devenir invisibles en mission.
+Version de travail web jouable **v61.0.0**. Le contrat consolidé **v1→v61** ajoute un vrai écran titre, des stations de briefing et d’armurerie ouvertes depuis le niveau, un booth de contrôle indépendant dans le hangar, quatre MID corrigés et une personnalisation bitmap filtrable. Les M39, M42A, M6B, M83 SADAR, M5 RPG, M94, F44AA, Type 88 et AK-4047 disposent maintenant de leurs propres plaques 4 × 4 reliées au classeur Excel privé ; les contenus sans visuel exact restent bloqués plutôt que rendus invisibles.
 
-Jouer en ligne : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
+Dernier déploiement public vérifié (V60 au moment du jalon V61) : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
 
 ## Lancer localement
 
@@ -19,15 +19,15 @@ Ouvrir `http://127.0.0.1:4173`.
 - Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, UD-4L, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique; son premier plan ne masque plus le dropship. La baie véhicules expose un M577 bitmap autonome, collisionnable et interactif, lié à `vehicle-001-m577-armored-personnel-carrier`.
+- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, booth de contrôle, UD-4L, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique. La table d’opérations et le comptoir d’armurerie sont des landmarks bitmap collisionnables ; leur dialogue puis leur interface se superposent au hub mis en pause, qui reprend au même endroit.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit V60 confirme **182 plaques, 2 564 cellules et 364 chemins raw/normalisés présents** ; aucun nouveau bitmap n’est revendiqué et le manifeste artistique reste donc étiqueté `v59`. La complétude exacte des personnages, ennemis, véhicules, objets et props est détaillée dans la matrice V60 ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit V61 confirme **191 plaques, 2 708 cellules et 382 chemins raw/normalisés présents**. La complétude exacte des personnages, ennemis, véhicules, objets et props est détaillée dans la matrice V61 ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
-Les quatre MID à corriger pour Medical, Science Lab, Quarantine et Life Support sont `BLOCKED_EXPLICIT_TRANSFER_PERMISSION` : ils ne sont ni intégrés ni déclarés terminés. La topologie, les collisions, les occlusions, les priorités d’interaction et l’embarquement sont néanmoins `DONE_RUNTIME` après tests complets et parcours Edge local.
+Les MID Medical, Science Lab, Quarantine et Life Support sont désormais quatre bitmaps RGBA 1 774 × 887 corrigés. La dette restante porte notamment sur la Harpoon Gun, seule arme Excel encore reliée sans ambiguïté mais sans plaque dédiée, quatre identités ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie.
 
 ## Contrôles
 Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
@@ -46,7 +46,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v60 |
+| Catalogue | Total v61 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -69,14 +69,15 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Gate locale V60 du 28 août 2026 : manifeste synchronisé à **182 atlas / 2 564 cellules**, contrôle pixel intégral, lint de **134 modules**, **274/274 tests Node** et build statique **60.0.0** de **3 443 entrées**.
-
-Le parcours Edge V60 local et le même parcours sur la production ont réussi : **22 checkpoints**, **30 captures**, **16/16 salles** auditées, entrée/sécurisation/file/sortie véhicule et escouade confirmées, huit bitmaps de traversée et quatre atlas d’accès chargés, desktop **1 440 × 980**, mobile **390 × 844**, reprise native et PWA hors ligne. Résultat : zéro exception, zéro erreur console et zéro requête critique échouée.
-
-La V60 est publiée : runtime `27a6fca` poussé sur `origin/codex/v52-physical-worlds`, déploiement Vercel production `Ready`, alias public en HTTP 200 et marqueurs `v60` / `60.0.0` confirmés dans le HTML servi.
+La gate hors navigateur valide **286 tests**, **143 modules lintés**, **191 plaques / 2 708 cellules** et un build de **3 443 entrées catalogue**. Le parcours navigateur et la publication sont consignés dans l’historique de version après leur exécution finale. Les résultats V60 restent archivés dans docs/VERSION_HISTORY_V60.md.
 
 ## Dossier de production
 
+- [Historique de validation V61](docs/VERSION_HISTORY_V61.md)
+- [Audit level design V61](docs/V61_LEVEL_DESIGN_AUDIT.md)
+- [Matrice de complétude artistique V61](docs/references/V61_ASSET_COMPLETION_MATRIX.md)
+- [Audit Excel vers runtime V61](docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md)
+- [Provenance artistique V61](docs/ART_PROVENANCE_V61.md)
 - [Historique de validation V60](docs/VERSION_HISTORY_V60.md)
 - [Audit level design V60](docs/V60_LEVEL_DESIGN_AUDIT.md)
 - [Matrice de complétude artistique V60](docs/references/V60_ASSET_COMPLETION_MATRIX.md)

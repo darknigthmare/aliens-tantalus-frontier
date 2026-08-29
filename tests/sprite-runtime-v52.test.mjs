@@ -21,7 +21,7 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   const report = spriteRuntimeReport();
   assert.equal(report.invalid.length, 0);
   assert.equal(report.runtimeReady, report.sheets);
-  assert.equal(report.sheets, 182);
+  assert.equal(report.sheets, 191);
 
   const crewIds = new Set(CREW.map((member) => member.id));
   assert.deepEqual(new Set(Object.keys(CREW_SPRITE_IDS)), crewIds);

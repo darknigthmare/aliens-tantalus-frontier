@@ -16,7 +16,7 @@ const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight
  */
 export const HUB_ROOM_PROFILES = Object.freeze({
   bridge: defineRoomProfile(1.01, 0.820, 184, 76),
-  briefing: defineRoomProfile(1.05, 0.815, 176, 48),
+  briefing: defineRoomProfile(1.05, 0.815, 480, 142),
   'combat-information': defineRoomProfile(1.03, 0.820, 168, 70),
   'cryo-bay': defineRoomProfile(1.06, 0.825, 188, 54),
   'crew-quarters': defineRoomProfile(1.06, 0.820, 174, 82),
@@ -24,7 +24,7 @@ export const HUB_ROOM_PROFILES = Object.freeze({
   medical: defineRoomProfile(1.04, 0.825, 184, 44),
   'science-lab': defineRoomProfile(1.03, 0.820, 174, 68),
   quarantine: defineRoomProfile(1.02, 0.830, 150, 104),
-  armory: defineRoomProfile(1.05, 0.820, 174, 82),
+  armory: defineRoomProfile(1.05, 0.820, 520, 136),
   workshop: defineRoomProfile(1.04, 0.820, 184, 64),
   'vehicle-bay': defineRoomProfile(1.00, 0.825, 204, 42),
   'dropship-hangar': defineRoomProfile(1.00, 0.825, 204, 42),

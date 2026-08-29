@@ -1,14 +1,17 @@
-const CACHE = 'atf-v60-runtime-1';
+const CACHE = 'atf-v61-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
-  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css',
+  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
   '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md', '/docs/V58_ROOM_COHERENCE_AUDIT.md',
   '/docs/VERSION_HISTORY_V59.md', '/docs/ART_PROVENANCE_V59.md',
   '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
   '/docs/VERSION_HISTORY_V60.md', '/docs/V60_LEVEL_DESIGN_AUDIT.md',
   '/docs/references/V60_ASSET_COMPLETION_MATRIX.md',
-  '/src/app.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/docs/VERSION_HISTORY_V61.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md',
+  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md',
+  '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/src/excel-content-bridge-v61.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
@@ -17,10 +20,31 @@ const CORE = [
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
   '/src/vehicle-access-runtime-v59.js', '/src/vehicle-deployment-gates-v60.js',
-  '/src/weapon-visual-runtime-v56.js', '/src/equipment-visual-runtime-v56.js',
+  '/src/weapon-visual-runtime-v56.js', '/src/weapon-visual-runtime-v61.js', '/src/equipment-visual-runtime-v56.js',
   '/src/mission-interactive-art-v56.js', '/src/mission-door-art-v58.js', '/src/topology-coherence-v58.js',
   '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js', '/src/hub-art-runtime-v58.js',
   '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
+  '/assets/openai/ui/title/tantalus-frontier-title-background-v61.png',
+  '/assets/openai/ui/dialogue/mara-vega-operations-v61.png',
+  '/assets/openai/ui/dialogue/sanaa-doyle-armory-v61.png',
+  '/assets/openai/ui/customization/echo9-customization-mannequin-v61.png',
+  '/assets/openai/hub/props/operations-table-v61.png',
+  '/assets/openai/hub/props/armory-counter-v61.png',
+  '/assets/openai/hub/props/hangar-control-booth-v61.png',
+  '/assets/openai/hub/props/bulkhead-door.png',
+  '/assets/openai/hub/props/lift-door.png',
+  '/assets/openai/hub/props/bridge-terminal.png',
+  '/assets/openai/hub/props/cryopod.png',
+  '/assets/openai/hub/props/bunk-module.png',
+  '/assets/openai/hub/props/mess-table.png',
+  '/assets/openai/hub/props/medical-bed.png',
+  '/assets/openai/hub/props/lab-console.png',
+  '/assets/openai/hub/props/quarantine-unit.png',
+  '/assets/openai/hub/props/workbench.png',
+  '/assets/openai/hub/props/vehicle-lift.png',
+  '/assets/openai/hub/props/reactor-column.png',
+  '/assets/openai/hub/props/life-support-scrubber.png',
+  '/assets/openai/hub/props/sensor-console.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
@@ -238,7 +262,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV60() {
+async function precacheV61() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -251,7 +275,7 @@ async function precacheV60() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV60().then(() => self.skipWaiting())
+  precacheV61().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

@@ -85,7 +85,7 @@ test('les vingt plaques v55 sont réellement résolubles et échantillonnables',
     assert.equal(request.sheetId, sheetId);
     assert.ok(controller.sample(id, request, 0.2), id);
   }
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 182);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 191);
 });
 
 test('la sélection catalogue des quatre véhicules atteint leur bitmap dans le vrai GameEngine', () => withBrowserRuntime(() => {
@@ -133,7 +133,7 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   let snapshot = hub.getSnapshot();
   assert.equal(snapshot.roomComposition, 'modular-v55');
   assert.equal(snapshot.roomBackground, null);
-  assert.equal(snapshot.hubArtAssetsReady, 4);
+  assert.equal(snapshot.hubArtAssetsReady, 5);
   assert.ok(hub.obstacles.some((entry) => entry.role === 'dropship-hull'));
   assert.equal(hub.getAssetReport().npcMissionSpriteAssetsReady, 16);
 
@@ -155,6 +155,7 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   const far = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-far.png');
   const parallax = draws.findIndex((source, index) => index > far && source === '/assets/openai/hub/parallax/engineering-far.png');
   const overhead = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-overhead.png');
+  const booth = draws.indexOf('/assets/openai/hub/props/hangar-control-booth-v61.png');
   const mid = draws.indexOf('/assets/openai/hub/layers/engineering-hangar-mid.png');
   const dropship = draws.indexOf('/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png');
   const electrical = draws.indexOf('/assets/openai/metroidvania/props/electrical-arc-hazard.png');
@@ -163,7 +164,7 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   const foreground = draws.lastIndexOf('/assets/openai/hub/layers/engineering-hangar-foreground.png');
   const monolith = draws.indexOf('/assets/openai/hub/rooms/engineering-hangar.png');
   assert.ok(far >= 0 && parallax > far && overhead > parallax, 'FAR puis parallaxe puis plafond');
-  assert.ok(mid > overhead && dropship > mid && electrical > dropship, 'plafond puis MID puis UD-4L puis danger');
+  assert.ok(booth > overhead && mid > booth && dropship > mid && electrical > dropship, 'plafond puis booth puis MID puis UD-4L puis danger');
   assert.ok(missionNpc > electrical);
   assert.ok(player > missionNpc);
   assert.ok(foreground > player);

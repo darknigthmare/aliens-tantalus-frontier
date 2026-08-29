@@ -57,7 +57,8 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
     'retreat-mission', 'mission-equipment-controls', 'mission-interact', 'mission-tracker',
     'mission-vehicle', 'mission-reload', 'mission-medkit', 'mission-neuro-counter', 'setting-difficulty',
     'setting-coop', 'setting-motion', 'setting-subtitles', 'setting-quality',
-    'setting-contrast', 'setting-effects', 'promise-matrix'
+    'setting-contrast', 'setting-effects', 'promise-matrix', 'title-screen', 'title-start',
+    'hub-dialogue', 'hub-dialogue-continue', 'costume-part-filter', 'costume-palette-filter'
   ];
   for (const id of requiredIds) assert.match(html, new RegExp(`id=["']${id}["']`), `#${id} manque`);
 
@@ -67,10 +68,10 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
-  assert.match(html, /v60\.0\.0/);
-  assert.match(html, /Contrat v1–v60/);
-  assert.match(html, /href=["']\/docs\/VERSION_HISTORY_V60\.md["']/);
-  assert.match(app, /atf-v60-/);
+  assert.match(html, /v61\.0\.0/);
+  assert.match(html, /Contrat v1–v61/);
+  assert.match(html, /href=["']\/docs\/VERSION_HISTORY_V61\.md["']/);
+  assert.match(app, /atf-v61-/);
 });
 
 test('la couche visuelle v52 reste modulaire, tactile et accessible', () => {

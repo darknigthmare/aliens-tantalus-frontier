@@ -21,6 +21,22 @@ const HANGAR_OVERHEAD_V55 = Object.freeze({
   collidable: false
 });
 
+const HANGAR_CONTROL_BOOTH_V61 = Object.freeze({
+  id: 'dropship-hangar-control-booth',
+  kind: 'station-prop',
+  phase: 'back',
+  asset: '/assets/openai/hub/props/hangar-control-booth-v61.png',
+  sourceSize: Object.freeze({ width: 1024, height: 512 }),
+  sourceCrop: rect(0, 0, 1024, 512),
+  renderBounds: rect(908, 176, 340, 170),
+  anchor: point(1078, 346, 'bottom-center'),
+  collidable: false,
+  action: 'navigate:operations',
+  description: 'Ouvrir le contrôle de vol et la table tactique du hangar.',
+  interactionPriority: 110,
+  interactionBounds: rect(930, 326, 286, 298)
+});
+
 const UD4L_DROPSHIP_V55 = Object.freeze({
   id: 'dropship-hangar-ud4l',
   kind: 'vehicle-sprite',
@@ -93,12 +109,14 @@ export const DROPSHIP_HANGAR_ART_V55 = Object.freeze({
   level: HUB_ART_LEVEL_V55,
   renderPhases: HUB_ART_RENDER_PHASES_V55,
   overhead: HANGAR_OVERHEAD_V55,
+  controlBooth: HANGAR_CONTROL_BOOTH_V61,
   dropship: UD4L_DROPSHIP_V55,
   electricalHazard: ELECTRICAL_HAZARD_ART_V55,
   actors: HANGAR_ACTORS_V55,
   foreground: HANGAR_FOREGROUND_V55,
   renderStack: Object.freeze([
     HANGAR_OVERHEAD_V55,
+    HANGAR_CONTROL_BOOTH_V61,
     UD4L_DROPSHIP_V55,
     ELECTRICAL_HAZARD_ART_V55,
     HANGAR_ACTORS_V55,
@@ -108,6 +126,7 @@ export const DROPSHIP_HANGAR_ART_V55 = Object.freeze({
 
 export const HUB_ART_ASSETS_V55 = Object.freeze([
   HANGAR_OVERHEAD_V55.asset,
+  HANGAR_CONTROL_BOOTH_V61.asset,
   UD4L_DROPSHIP_V55.asset,
   ELECTRICAL_HAZARD_ART_V55.asset,
   HANGAR_FOREGROUND_V55.asset

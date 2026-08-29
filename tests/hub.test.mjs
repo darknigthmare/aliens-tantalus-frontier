@@ -54,8 +54,8 @@ test('each room owns a measured render profile and an authored prop collider', (
   assert.equal(new Set(HUB_MODULAR_PROP_FILES).size, 16);
   assert.equal(HUB_ROOM_ART_ASSETS_V56.length, 30);
   assert.equal(new Set(HUB_ROOM_ART_ASSETS_V56).size, 30);
-  assert.equal(HUB_MODULAR_ASSETS.length, 87);
-  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 87);
+  assert.equal(HUB_MODULAR_ASSETS.length, 88);
+  assert.equal(new Set(HUB_MODULAR_ASSETS).size, 88);
   assert.ok(HUB_ROOM_ART_ASSETS_V56.every((source) => HUB_MODULAR_ASSETS.includes(source)));
   assert.ok(rooms.every((room) => !HUB_MODULAR_ASSETS.includes(room.background)), 'les bitmaps monolithiques ne sont plus préchargés');
 
