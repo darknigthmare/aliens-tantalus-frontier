@@ -35,6 +35,18 @@ export class AudioDirector {
 
   shot() { this.tone(92, 0.06, 'sawtooth', 0.18, -35); }
   tracker() { this.tone(880, 0.055, 'sine', 0.12, 120); }
+  vent(payload = {}) {
+    const occluded = Boolean(payload.occluded);
+    const distance = Math.max(0, Number(payload.distance) || 0);
+    const volume = Math.max(0.025, 0.09 - Math.min(0.06, distance / 18000));
+    const cue = String(payload.cue || '');
+    if (cue.includes('hatch')) {
+      this.tone(118, 0.14, 'square', volume, -42);
+      return;
+    }
+    this.tone(occluded ? 72 : 96, 0.08, 'triangle', volume, -18);
+    this.tone(occluded ? 54 : 68, 0.11, 'square', volume * 0.55, -8);
+  }
   hit() { this.tone(55, 0.12, 'square', 0.12, -20); }
   ui() { this.tone(420, 0.035, 'square', 0.05, 40); }
   alarm() {

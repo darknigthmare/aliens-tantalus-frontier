@@ -64,6 +64,16 @@ html.hub-dialogue-mode::after {
   object-position: center 20%;
 }
 
+.hub-dialogue-portrait img.is-sprite-cell-v62 {
+  width: auto;
+  max-width: none;
+  height: 400%;
+  object-fit: fill;
+  object-position: left top;
+  image-rendering: pixelated;
+  transform: translate3d(0, 0, 0);
+}
+
 .hub-dialogue-copy {
   display: flex;
   flex-direction: column;
@@ -83,6 +93,39 @@ html.hub-dialogue-mode::after {
   color: #e0e7e4;
   font-size: clamp(1rem, 1.6vw, 1.25rem);
   line-height: 1.6;
+}
+
+.hub-dialogue-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.hub-dialogue-choices:empty {
+  display: none;
+}
+
+.hub-dialogue-choice {
+  min-height: 46px;
+  border: 1px solid rgba(223, 180, 81, .42);
+  background: rgba(223, 180, 81, .065);
+  color: #e0e7e4;
+  font: inherit;
+  text-align: left;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.hub-dialogue-choice:hover,
+.hub-dialogue-choice:focus-visible {
+  border-color: #f0c96a;
+  background: rgba(223, 180, 81, .14);
+}
+
+.hub-dialogue-choice:disabled {
+  opacity: .42;
+  cursor: not-allowed;
 }
 
 .customization-layout {
@@ -161,6 +204,10 @@ html.hub-dialogue-mode::after {
     max-height: 34vh;
     border-right: 0;
     border-bottom: 1px solid rgba(223, 180, 81, .42);
+  }
+
+  .hub-dialogue-choices {
+    grid-template-columns: 1fr;
   }
 
   .customization-layout {

@@ -2,6 +2,22 @@ import {
   compileMissionDoorTopologyV58,
   describeMissionDoorRequirementV58
 } from './topology-coherence-v58.js';
+import {
+  MISSION_VENT_NETWORKS_V62,
+  advancePlannedVentTraversalV62,
+  advanceVentTransitionV62,
+  createVentContactOutputV62,
+  enterVentNetworkV62,
+  exitVentNetworkV62,
+  getVentBranchesV62,
+  getVentExitsAtActorV62,
+  getVentTransitPositionV62,
+  moveVentTransitV62,
+  planAllyVentTraversalV62,
+  planEnemyVentTraversalV62,
+  selectVentBranchV62,
+  selectVentExitV62
+} from './vent-network-v62.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -11,6 +27,83 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const asList = (value) => Array.isArray(value) ? value : [];
 const entityDistance = (a, b) => Math.hypot((a.x + (a.w || 0) / 2) - (b.x + (b.w || 0) / 2), (a.y + (a.h || 0) / 2) - (b.y + (b.h || 0) / 2));
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
+const MISSION_VENT_RUNTIME_SCHEMA_V62 = 62;
+const MISSION_VENT_PLAYER_SPEED_V62 = 620;
+const MISSION_VENT_AI_SPEED_V62 = Object.freeze({ ally: 590, enemy: 720 });
+const MISSION_VENT_DIRECTIONS_V62 = Object.freeze(['left', 'right', 'up', 'down', 'depth']);
+const cloneV62 = (value) => value == null ? value : JSON.parse(JSON.stringify(value));
+
+function missionVentEntityIdV62(engine, actor) {
+  if (!actor) return '';
+  if (actor === engine.player) return 'mission-player-v62';
+  if (actor === engine.coop) return 'mission-coop-v62';
+  if (actor.squadMember) return `mission-ally-${actor.crewId || actor.id || 'unknown'}`;
+  return String(actor.id || actor.crewId || actor.operatorId || '').trim();
+}
+
+function missionVentActorKindV62(engine, actor) {
+  if (actor?.isEnemy || engine.enemies?.includes(actor)) return 'enemy';
+  if (actor?.squadMember || actor?.isAlly) return 'ally';
+  return 'player';
+}
+
+function missionVentWorldPositionV62(actor) {
+  return {
+    x: (Number(actor?.x) || 0) + (Number(actor?.w) || 0) / 2,
+    y: (Number(actor?.y) || 0) + (Number(actor?.h) || 0),
+    depth: Number(actor?.depth) || 0
+  };
+}
+
+function missionVentPortalBoundsV62(portal, role) {
+  return {
+    id: portal.id,
+    pairId: portal.id,
+    portalId: portal.id,
+    portalRole: role,
+    nodeId: portal.nodeId,
+    portalType: portal.type,
+    destination: portal.destination || null,
+    x: portal.worldPosition.x - 42,
+    y: portal.worldPosition.y - 64,
+    w: 84,
+    h: 64,
+    open: false,
+    requiresTool: role === 'entrance' && portal.requiresTool !== false,
+    authoredNetworkV62: true
+  };
+}
+
+function missionVentDistanceV62(actor, portal) {
+  const point = missionVentWorldPositionV62(actor);
+  return Math.hypot(
+    point.x - (Number(portal?.worldPosition?.x) || 0),
+    point.y - (Number(portal?.worldPosition?.y) || 0),
+    point.depth - (Number(portal?.worldPosition?.depth) || 0)
+  );
+}
+
+function missionVentDirectionFromKeysV62(keys, actor) {
+  const coop = Boolean(actor?.coop);
+  if (keys.has(coop ? 'KeyL' : 'KeyD') || (!coop && keys.has('ArrowRight'))) return 'right';
+  if (keys.has(coop ? 'KeyJ' : 'KeyA') || (!coop && keys.has('ArrowLeft'))) return 'left';
+  if (keys.has(coop ? 'KeyI' : 'KeyW') || (!coop && keys.has('ArrowUp'))) return 'up';
+  if (keys.has(coop ? 'KeyK' : 'KeyS') || (!coop && keys.has('ArrowDown'))) return 'down';
+  if (!coop && keys.has('KeyQ')) return 'depth';
+  return null;
+}
+
+function missionVentBranchDirectionV62(network, branch) {
+  const nodes = new Map(asList(network?.nodes).map((node) => [node.id, node]));
+  const from = nodes.get(branch?.fromNodeId)?.position || {};
+  const to = nodes.get(branch?.toNodeId)?.position || {};
+  const dx = (Number(to.x) || 0) - (Number(from.x) || 0);
+  const dy = (Number(to.y) || 0) - (Number(from.y) || 0);
+  const dz = (Number(to.depth) || 0) - (Number(from.depth) || 0);
+  if (Math.abs(dz) * 220 > Math.max(Math.abs(dx), Math.abs(dy))) return 'depth';
+  if (Math.abs(dx) >= Math.abs(dy)) return dx < 0 ? 'left' : 'right';
+  return dy < 0 ? 'up' : 'down';
+}
 
 export const MISSION_LEVEL_TIMER_PROFILES = Object.freeze({
   extraction: Object.freeze({
@@ -52,6 +145,43 @@ export const MISSION_LEVEL_LAYER_FILES_V52 = Object.freeze({
     foreground: '/assets/openai/metroidvania/planet-exterior-foreground.png'
   })
 });
+
+const TANTALUS_MISSION_COVER_CONTRACT_V62 = Object.freeze({
+  id: 'tantalus-mission-runtime-cover-v62',
+  targetAspect: 2
+});
+
+export const MISSION_LAYER_COVER_CONTRACTS_V62 = Object.freeze({
+  '/assets/openai/metroidvania/tantalus-mission-far.png': TANTALUS_MISSION_COVER_CONTRACT_V62,
+  '/assets/openai/metroidvania/tantalus-mission-mid.png': TANTALUS_MISSION_COVER_CONTRACT_V62,
+  '/assets/openai/metroidvania/tantalus-mission-foreground.png': TANTALUS_MISSION_COVER_CONTRACT_V62
+});
+
+export function computeMissionLayerCoverCropV62(image, targetAspect) {
+  const sourceWidth = Number(image?.naturalWidth || image?.width) || 0;
+  const sourceHeight = Number(image?.naturalHeight || image?.height) || 0;
+  const aspect = Number(targetAspect);
+  if (!(sourceWidth > 0) || !(sourceHeight > 0) || !(aspect > 0)) return null;
+  const sourceAspect = sourceWidth / sourceHeight;
+  if (sourceAspect > aspect) {
+    const cropWidth = sourceHeight * aspect;
+    return {
+      sourceX: (sourceWidth - cropWidth) / 2,
+      sourceY: 0,
+      sourceWidth: cropWidth,
+      sourceHeight,
+      targetAspect: aspect
+    };
+  }
+  const cropHeight = sourceWidth / aspect;
+  return {
+    sourceX: 0,
+    sourceY: (sourceHeight - cropHeight) / 2,
+    sourceWidth,
+    sourceHeight: cropHeight,
+    targetAspect: aspect
+  };
+}
 
 export const MISSION_LEVEL_ZONE_LAYER_FILES_V56 = Object.freeze({
   'ship-interior-vertical': Object.freeze({
@@ -243,6 +373,7 @@ export function withV52LevelRuntime(BaseEngine) {
       this.missionLevelTimers = new Map();
       this.missionLevelExtractionTimer = null;
       this.missionLevelExtractionUnlocked = false;
+      this.initializeMissionVentRuntimeV62(plan);
       this.loadMissionLevelArt(plan);
       this.compileMissionLevelGeometry(plan);
       this.compileMissionLevelActors(plan);
@@ -260,15 +391,40 @@ export function withV52LevelRuntime(BaseEngine) {
       return this.getMissionLevelSnapshot();
     }
 
+    initializeMissionVentRuntimeV62(plan) {
+      this.missionVentNetworkV62 = MISSION_VENT_NETWORKS_V62[plan?.templateId] || null;
+      this.missionVentActorsV62 = new Map();
+      this.missionVentPendingActorsV62 = [];
+      this.missionVentPlayerDirectionV62 = new Map();
+      this.missionVentContactKeysV62 = new Map();
+      this.missionVentAiCooldownV62 = 0;
+      this.missionVentTelemetryV62 = {
+        entered: 0,
+        nodes: 0,
+        exited: 0,
+        allyPlans: 0,
+        enemyPlans: 0,
+        trackerContacts: 0,
+        audioContacts: 0
+      };
+      return this.missionVentNetworkV62;
+    }
+
     loadMissionLevelArt(plan) {
       const templateId = plan?.templateId;
       const files = MISSION_LEVEL_LAYER_FILES_V52[templateId];
       if (!files || !this.images || typeof globalThis.Image !== 'function') return;
       for (const [kind, path] of Object.entries(files)) {
         const key = layerKey(templateId, kind);
-        if (this.images.has(key)) continue;
+        const contract = MISSION_LAYER_COVER_CONTRACTS_V62[path] || null;
+        if (this.images.has(key)) {
+          const existing = this.images.get(key);
+          if (existing && contract) existing.missionCoverContractV62 = contract;
+          continue;
+        }
         const image = new globalThis.Image();
         image.decoding = 'async';
+        if (contract) image.missionCoverContractV62 = contract;
         image.src = path;
         this.images.set(key, image);
       }
@@ -344,26 +500,13 @@ export function withV52LevelRuntime(BaseEngine) {
         ...door,
         open: false, progress: 0, levelLocked: false
       }));
-      this.vents = asList(plan.geometry?.vents).flatMap((vent) => [
-        { id: vent.id, pairId: vent.id, direction: 'forward', from: vent.from, to: vent.to },
-        { id: `${vent.id}-return`, pairId: vent.id, direction: 'return', from: vent.to, to: vent.from }
-      ].map((entry) => ({
-        id: entry.id,
-        pairId: entry.pairId,
-        direction: entry.direction,
-        x: entry.from.x - 42,
-        y: entry.from.y - 64,
-        w: 84,
-        h: 64,
-        open: false,
-        requiresTool: true,
-        targetX: entry.to.x - this.player.w / 2,
-        targetY: entry.to.y - this.player.h,
-        targetAnchorX: entry.to.x,
-        targetAnchorY: entry.to.y,
-        fromNodeId: entry.from.nodeId,
-        toNodeId: entry.to.nodeId
-      })));
+      this.missionLegacyVentGeometryV52 = cloneV62(asList(plan.geometry?.vents));
+      this.vents = this.missionVentNetworkV62
+        ? [
+            ...this.missionVentNetworkV62.entrances.map((portal) => missionVentPortalBoundsV62(portal, 'entrance')),
+            ...this.missionVentNetworkV62.exits.map((portal) => missionVentPortalBoundsV62(portal, 'exit'))
+          ]
+        : [];
       this.ventShortcut = this.vents[0] || { id: 'none', x: -1000, y: -1000, w: 0, h: 0, open: false };
       this.hazards = asList(plan.hazards).map((hazard) => ({ ...hazard }));
       const spawn = plan.anchors.spawn;
@@ -549,7 +692,7 @@ export function withV52LevelRuntime(BaseEngine) {
 
     missionLevelEnemyTarget(enemy) {
       return [this.player, this.coopEnabled ? this.coop : null]
-        .filter((actor) => actor?.alive)
+        .filter((actor) => actor?.alive && !actor.ventTransit)
         .sort((left, right) => Math.abs(left.x - enemy.x) - Math.abs(right.x - enemy.x))[0] || null;
     }
 
@@ -727,7 +870,31 @@ export function withV52LevelRuntime(BaseEngine) {
       return true;
     }
 
+    draw() {
+      const concealed = this.missionVentActorsListV62()
+        .filter((actor) => actor.ventTransit?.actorKind !== 'enemy')
+        .map((actor) => ({ actor, inVehicle: Boolean(actor.inVehicle) }));
+      for (const entry of concealed) entry.actor.inVehicle = true;
+      try {
+        return super.draw();
+      } finally {
+        for (const entry of concealed) entry.actor.inVehicle = entry.inVehicle;
+      }
+    }
+
+    damagePlayer(actor, amount, options = {}) {
+      if (actor?.ventTransit?.networkId === this.missionVentNetworkV62?.id) return 0;
+      return super.damagePlayer(actor, amount, options);
+    }
+
     updatePlayer(actor, delta, controls) {
+      if (actor?.ventTransit && this.missionVentNetworkV62
+        && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
+        actor.vx = 0;
+        actor.vy = 0;
+        actor.jumpBuffer = 0;
+        return false;
+      }
       const previous = { x: actor?.x, y: actor?.y, climbing: Boolean(actor?.climbing) };
       const result = super.updatePlayer(actor, delta, controls);
       const blockedDoor = this.missionLevelRuntime && actor?.climbing
@@ -767,9 +934,311 @@ export function withV52LevelRuntime(BaseEngine) {
       return result;
     }
 
+    missionVentActorsListV62() {
+      return [...(this.missionVentActorsV62?.values() || [])].filter((actor) => actor?.ventTransit);
+    }
+
+    missionVentEntityByIdV62(actorId) {
+      const candidates = [this.player, this.coop, ...asList(this.squadActors), ...asList(this.enemies)];
+      return candidates.find((actor) => missionVentEntityIdV62(this, actor) === actorId) || null;
+    }
+
+    concealMissionVentActorV62(actor, actorKind) {
+      if (!actor || actor.ventRuntimePreviousV62) return;
+      actor.ventRuntimePreviousV62 = {
+        alive: actor.alive !== false,
+        dormant: Boolean(actor.dormant),
+        inVehicle: Boolean(actor.inVehicle),
+        vehicleAccessPhase: actor.vehicleAccessPhase || null
+      };
+      actor.vx = 0;
+      actor.vy = 0;
+      actor.climbing = false;
+      actor.ventConcealedV62 = true;
+      if (actorKind === 'enemy') {
+        actor.alive = false;
+        actor.dormant = true;
+      } else if (actorKind === 'ally') actor.vehicleAccessPhase = 'vent-transit';
+    }
+
+    revealMissionVentActorV62(actor, exit) {
+      if (!actor) return;
+      const previous = actor.ventRuntimePreviousV62 || {};
+      const destination = exit?.worldPosition || missionVentWorldPositionV62(actor);
+      actor.x = clamp(destination.x - (actor.w || 0) / 2, 0, Math.max(0, this.missionLevelBounds.width - (actor.w || 0)));
+      actor.y = clamp(destination.y - (actor.h || 0), 0, Math.max(0, this.missionLevelBounds.height - (actor.h || 0)));
+      actor.depth = Number(destination.depth) || 0;
+      actor.vx = 0;
+      actor.vy = 0;
+      actor.grounded = false;
+      actor.alive = previous.alive !== false;
+      actor.dormant = Boolean(previous.dormant);
+      actor.inVehicle = Boolean(previous.inVehicle);
+      if (actor.squadMember) {
+        actor.ventEgressPreviousPhaseV62 = previous.vehicleAccessPhase || null;
+        actor.ventEgressClockV62 = 0.35;
+        actor.vehicleAccessPhase = 'vent-egress';
+      }
+      delete actor.ventConcealedV62;
+      delete actor.ventRuntimePreviousV62;
+      delete actor.ventPlanV62;
+      delete actor.ventActorKind;
+      actor.ventTransit = null;
+      if (actor.isEnemy || this.enemies?.includes(actor)) {
+        actor.spawnX = actor.x;
+        actor.spawnY = actor.y;
+        this.initializeEnemyMissionNavigation(actor);
+      }
+    }
+
+    beginMissionVentTraversalV62(actor, {
+      entranceId,
+      exitId,
+      candidateExitIds,
+      targetPosition,
+      actorKind = missionVentActorKindV62(this, actor),
+      maximumDistance = 190,
+      automatic = false
+    } = {}) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor || actor.ventTransit || actor.inVehicle || actor.alive === false || actor.squadMember && actor.vehicleAccessPhase) return null;
+      const entrance = network.entrances.find((entry) => entry.id === entranceId);
+      if (!entrance || missionVentDistanceV62(actor, entrance) > maximumDistance) return null;
+      const actorId = missionVentEntityIdV62(this, actor);
+      if (!actorId) return null;
+      const plan = actorKind === 'enemy'
+        ? planEnemyVentTraversalV62({ network, actor: { id: actorId, isEnemy: true }, entranceId, exitId, candidateExitIds, targetPosition })
+        : actorKind === 'ally'
+          ? planAllyVentTraversalV62({ network, actor: { id: actorId, isAlly: true }, entranceId, exitId, candidateExitIds, targetPosition })
+          : null;
+      if (automatic && !plan) return null;
+      const source = {
+        id: actorId,
+        ventActorKind: actorKind,
+        position: missionVentWorldPositionV62(actor)
+      };
+      const entered = enterVentNetworkV62(network, source, entranceId, { actorKind, maximumDistance });
+      actor.ventRuntimeIdV62 = actorId;
+      actor.ventActorKind = actorKind;
+      actor.ventTransit = cloneV62(entered.ventTransit);
+      actor.ventPlanV62 = plan ? cloneV62(plan) : null;
+      this.concealMissionVentActorV62(actor, actorKind);
+      this.missionVentActorsV62.set(actorId, actor);
+      this.missionVentTelemetryV62.entered += 1;
+      if (actorKind === 'ally') this.missionVentTelemetryV62.allyPlans += 1;
+      if (actorKind === 'enemy') this.missionVentTelemetryV62.enemyPlans += 1;
+      const portal = this.vents.find((entry) => entry.portalId === entranceId);
+      if (portal) portal.open = true;
+      this.onEvent({
+        type: 'mission-vent-enter',
+        networkId: network.id,
+        actorId,
+        actorKind,
+        entranceId,
+        plannedExitId: plan?.exitId || null,
+        automatic
+      });
+      return actor.ventTransit;
+    }
+
+    enterMissionVentV62(actor = this.player) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor || actor.ventTransit || actor.inVehicle || actor.alive === false) return null;
+      const entrance = [...network.entrances]
+        .sort((left, right) => missionVentDistanceV62(actor, left) - missionVentDistanceV62(actor, right))
+        .find((candidate) => missionVentDistanceV62(actor, candidate) <= 135);
+      if (!entrance) return null;
+      const portal = this.vents.find((entry) => entry.portalId === entrance.id);
+      if (portal?.requiresTool && !this.inventory?.cutter) return this.locked('CHALUMEAU DE MAINTENANCE REQUIS');
+      this.setToolAnimation?.(actor, 'cutting-torch', 0.95);
+      const transit = this.beginMissionVentTraversalV62(actor, {
+        entranceId: entrance.id,
+        actorKind: 'player',
+        maximumDistance: 135
+      });
+      if (transit && this.mission?.objectives) this.mission.objectives.route = true;
+      this.audio?.ui?.();
+      return transit;
+    }
+
+    selectMissionVentDirectionV62(actor, direction) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.ventTransit || actor.ventTransit.phase !== 'at-node' || !MISSION_VENT_DIRECTIONS_V62.includes(direction)) return null;
+      const branch = getVentBranchesV62(network, actor)
+        .filter((candidate) => missionVentBranchDirectionV62(network, candidate) === direction)
+        .sort((left, right) => left.length - right.length || left.edgeId.localeCompare(right.edgeId))[0];
+      if (!branch) return null;
+      const next = selectVentBranchV62(network, actor, branch.edgeId, branch.toNodeId);
+      actor.ventTransit = cloneV62(next.ventTransit);
+      this.missionVentPlayerDirectionV62.set(missionVentEntityIdV62(this, actor), direction);
+      this.onEvent({ type: 'mission-vent-segment', actorId: missionVentEntityIdV62(this, actor), edgeId: branch.edgeId, toNodeId: branch.toNodeId });
+      return actor.ventTransit;
+    }
+
+    beginMissionVentExitV62(actor) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.ventTransit || actor.ventTransit.phase !== 'at-node') return null;
+      const exit = getVentExitsAtActorV62(network, actor)[0];
+      if (!exit) return null;
+      let next = selectVentExitV62(network, actor, exit.id);
+      next = exitVentNetworkV62(network, next);
+      actor.ventTransit = cloneV62(next.ventTransit);
+      this.onEvent({ type: 'mission-vent-exit-start', actorId: missionVentEntityIdV62(this, actor), exitId: exit.id });
+      return actor.ventTransit;
+    }
+
+    completeMissionVentExitV62(actor, exitId) {
+      const network = this.missionVentNetworkV62;
+      const actorId = missionVentEntityIdV62(this, actor);
+      const exit = network?.exits.find((entry) => entry.id === exitId);
+      this.revealMissionVentActorV62(actor, exit);
+      this.missionVentActorsV62.delete(actorId);
+      this.missionVentPlayerDirectionV62.delete(actorId);
+      this.missionVentContactKeysV62.delete(actorId);
+      this.missionVentTelemetryV62.exited += 1;
+      if (actor === this.player || actor === this.coop) {
+        this.setCheckpoint?.('vent', actor.x, actor.y);
+        if (this.mission?.objectives) this.mission.objectives.route = true;
+      }
+      this.onEvent({ type: 'mission-vent-exit-complete', networkId: network?.id, actorId, exitId, x: actor.x, y: actor.y });
+    }
+
+    updateMissionVentPlayerV62(actor, delta) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !actor?.ventTransit || actor.ventPlanV62) return;
+      const before = actor.ventTransit;
+      const exitId = before.selectedExitId;
+      if (before.phase === 'entering' || before.phase === 'exiting') {
+        const next = advanceVentTransitionV62(network, actor, Math.max(0, delta) * 1000);
+        actor.ventTransit = cloneV62(next.ventTransit);
+        if (!actor.ventTransit) return this.completeMissionVentExitV62(actor, exitId);
+      } else if (before.phase === 'at-node') {
+        const direction = missionVentDirectionFromKeysV62(this.keys, actor);
+        if (direction) this.selectMissionVentDirectionV62(actor, direction);
+      } else if (before.phase === 'moving') {
+        const actorId = missionVentEntityIdV62(this, actor);
+        const expected = this.missionVentPlayerDirectionV62.get(actorId) || missionVentBranchDirectionV62(network, before);
+        if (missionVentDirectionFromKeysV62(this.keys, actor) === expected) {
+          const next = moveVentTransitV62(network, actor, MISSION_VENT_PLAYER_SPEED_V62 * Math.max(0, delta));
+          actor.ventTransit = cloneV62(next.ventTransit);
+          if (actor.ventTransit.phase === 'at-node') {
+            this.missionVentPlayerDirectionV62.delete(actorId);
+            this.missionVentTelemetryV62.nodes += 1;
+            this.onEvent({ type: 'mission-vent-node', actorId, nodeId: actor.ventTransit.currentNodeId, routeNodeIds: cloneV62(actor.ventTransit.routeNodeIds) });
+          }
+        }
+      }
+      const position = getVentTransitPositionV62(network, actor);
+      if (actor === this.player && position && this.camera) {
+        this.camera.x = clamp(position.x - 430, 0, Math.max(0, this.missionLevelBounds.width - LOGICAL_WIDTH));
+        this.camera.y = clamp(position.y - 420, 0, Math.max(0, this.missionLevelBounds.height - LOGICAL_HEIGHT));
+      }
+    }
+
+    updateMissionVentAiActorV62(actor, delta) {
+      const network = this.missionVentNetworkV62;
+      const plan = actor?.ventPlanV62;
+      if (!network || !actor?.ventTransit || !plan) return;
+      const exitId = plan.exitId;
+      const beforeNode = actor.ventTransit.currentNodeId;
+      const result = advancePlannedVentTraversalV62({
+        network,
+        actor,
+        plan,
+        deltaMs: Math.max(0, delta) * 1000,
+        distancePerSecond: MISSION_VENT_AI_SPEED_V62[actor.ventTransit.actorKind] || 560
+      });
+      actor.ventTransit = cloneV62(result.actor.ventTransit);
+      if (result.completed) return this.completeMissionVentExitV62(actor, exitId);
+      if (result.reachedNode && result.nodeId !== beforeNode) {
+        this.missionVentTelemetryV62.nodes += 1;
+        this.onEvent({ type: 'mission-vent-ai-node', actorId: missionVentEntityIdV62(this, actor), actorKind: actor.ventTransit.actorKind, nodeId: result.nodeId });
+      }
+    }
+
+    scheduleMissionVentAiV62(delta) {
+      const network = this.missionVentNetworkV62;
+      if (!network || this.mission?.state !== 'active') return;
+      this.missionVentAiCooldownV62 = Math.max(0, (Number(this.missionVentAiCooldownV62) || 0) - Math.max(0, delta));
+      if (this.missionVentAiCooldownV62 > 0) return;
+      this.missionVentAiCooldownV62 = 0.45;
+      const visiblePlayers = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive && !actor.ventTransit);
+      const target = visiblePlayers[0] || this.player;
+      if (target) {
+        for (const enemy of asList(this.enemies)) {
+          if (!enemy?.alive || enemy.isBoss || enemy.ventTransit || !enemy.alert || entityDistance(enemy, target) < 900) continue;
+          const entrance = [...network.entrances].sort((left, right) => missionVentDistanceV62(enemy, left) - missionVentDistanceV62(enemy, right))[0];
+          if (!entrance || missionVentDistanceV62(enemy, entrance) > 180) continue;
+          if (this.beginMissionVentTraversalV62(enemy, {
+            entranceId: entrance.id,
+            actorKind: 'enemy',
+            targetPosition: missionVentWorldPositionV62(target),
+            maximumDistance: 180,
+            automatic: true
+          })) break;
+        }
+      }
+      const leader = this.player?.alive ? this.player : this.coopEnabled ? this.coop : null;
+      if (!leader) return;
+      for (const ally of asList(this.squadActors)) {
+        if (!ally?.alive || ally.ventTransit || ally.inVehicle || ally.vehicleAccessPhase || entityDistance(ally, leader) < 960) continue;
+        const entrance = [...network.entrances].sort((left, right) => missionVentDistanceV62(ally, left) - missionVentDistanceV62(ally, right))[0];
+        if (!entrance || missionVentDistanceV62(ally, entrance) > 180) continue;
+        if (this.beginMissionVentTraversalV62(ally, {
+          entranceId: entrance.id,
+          actorKind: 'ally',
+          targetPosition: missionVentWorldPositionV62(leader),
+          maximumDistance: 180,
+          automatic: true
+        })) break;
+      }
+    }
+
+    createMissionVentContactOutputsV62(observer = this.player) {
+      const network = this.missionVentNetworkV62;
+      if (!network || !observer) return [];
+      const observerId = missionVentEntityIdV62(this, observer);
+      const observerPosition = observer.ventTransit
+        ? getVentTransitPositionV62(network, observer)
+        : missionVentWorldPositionV62(observer);
+      return this.missionVentActorsListV62()
+        .filter((actor) => missionVentEntityIdV62(this, actor) !== observerId)
+        .map((actor) => createVentContactOutputV62({ network, actor, observerPosition, trackerRange: 1800, hearingRadius: 1100 }))
+        .filter(Boolean);
+    }
+
+    emitMissionVentContactsV62(observer = this.player) {
+      for (const output of this.createMissionVentContactOutputsV62(observer)) {
+        if (!output.audio.audible) continue;
+        const bucket = Math.floor((Number(output.audio.transitProgress) || 0) * 4);
+        const key = `${output.audio.cue}:${output.audio.nodeId || ''}:${output.audio.edgeId || ''}:${bucket}`;
+        if (this.missionVentContactKeysV62.get(output.audio.actorId) === key) continue;
+        this.missionVentContactKeysV62.set(output.audio.actorId, key);
+        this.audio?.vent?.(output.audio);
+        this.missionVentTelemetryV62.audioContacts += 1;
+        this.onEvent({ type: 'mission-vent-contact', networkId: this.missionVentNetworkV62.id, tracker: cloneV62(output.tracker), audio: cloneV62(output.audio) });
+      }
+    }
+
     update(delta) {
+      for (const actor of asList(this.squadActors)) {
+        if (!(Number(actor?.ventEgressClockV62) > 0) || actor.ventTransit) continue;
+        actor.ventEgressClockV62 = Math.max(0, actor.ventEgressClockV62 - Math.max(0, Number(delta) || 0));
+        if (actor.ventEgressClockV62 <= 0) {
+          actor.vehicleAccessPhase = actor.ventEgressPreviousPhaseV62 || null;
+          delete actor.ventEgressClockV62;
+          delete actor.ventEgressPreviousPhaseV62;
+        }
+      }
+      this.restorePendingMissionVentActorsV62();
+      if (this.missionLevelRuntime && this.mission?.state === 'active') this.scheduleMissionVentAiV62(delta);
       super.update(delta);
       if (!this.missionLevelRuntime || this.mission?.state !== 'active') return;
+      for (const actor of this.missionVentActorsListV62()) {
+        if (actor.ventPlanV62) this.updateMissionVentAiActorV62(actor, delta);
+        else this.updateMissionVentPlayerV62(actor, delta);
+      }
+      this.emitMissionVentContactsV62(this.player);
       this.camera.x = clamp(this.camera.x, 0, Math.max(0, this.missionLevelBounds.width - LOGICAL_WIDTH));
       this.camera.y = clamp(this.camera.y, 0, Math.max(0, this.missionLevelBounds.height - LOGICAL_HEIGHT));
       if (this.vehicle?.active) this.vehicle.x = clamp(this.vehicle.x, 0, Math.max(0, this.missionLevelBounds.width - this.vehicle.w));
@@ -787,13 +1256,32 @@ export function withV52LevelRuntime(BaseEngine) {
     updateEnemy(enemy, delta) {
       if (enemy?.dormant) return;
       if (!this.missionLevelRuntime || !enemy) return super.updateEnemy(enemy, delta);
+      if (enemy.ventTransit?.networkId === this.missionVentNetworkV62?.id) return;
       const navigation = enemy.levelNavigation || (this.initializeEnemyMissionNavigation(enemy), enemy.levelNavigation);
       const previous = { x: enemy.x, y: enemy.y };
       const previousSurface = this.missionLevelSurfaceFor(enemy, { tolerance: 42, preferId: navigation.surfaceId })
         || this.missionLevelSurfaceNear(enemy, { verticalRange: 52 });
       const initialTarget = this.missionLevelEnemyTarget(enemy);
       if (enemy.isBoss && initialTarget && entityDistance(enemy, initialTarget) <= 640) enemy.alert = true;
-      const result = super.updateEnemy(enemy, delta);
+      if (!initialTarget) {
+        enemy.attackClock -= delta;
+        enemy.rangedClock -= delta;
+        enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
+        enemy.attacking = false;
+        enemy.searchClock = (Number(enemy.searchClock) || 0) + delta;
+        if (enemy.searchClock >= 2.4) enemy.alert = false;
+        enemy.facing = Math.sin(this.animationTime * 0.6 + (enemy.animationPhase || enemy.row || 0)) > 0 ? 1 : -1;
+        enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
+        return;
+      }
+      const originalPlayer = this.player;
+      if (originalPlayer?.ventTransit && initialTarget !== originalPlayer) this.player = initialTarget;
+      let result;
+      try {
+        result = super.updateEnemy(enemy, delta);
+      } finally {
+        this.player = originalPlayer;
+      }
       if (!enemy.alive) return result;
       enemy.x = clamp(enemy.x, 0, Math.max(0, this.missionLevelBounds.width - enemy.w));
       const target = this.missionLevelEnemyTarget(enemy);
@@ -1015,29 +1503,54 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     interact(actor = this.player) {
+      if (actor?.ventTransit && this.missionVentNetworkV62
+        && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
+        return Boolean(this.beginMissionVentExitV62(actor));
+      }
       const anchors = this.missionLevelRuntime?.anchors || {};
       const nearAnchor = Object.entries(anchors).find(([, anchor]) => entityDistance(actor, { x: anchor.x - 20, y: anchor.y - 60, w: 40, h: 60 }) < 150);
-      const missionVent = (this.vents || []).find((vent) => entityDistance(actor, vent) < 125);
-      if (missionVent && Number.isFinite(missionVent.targetAnchorX) && Number.isFinite(missionVent.targetAnchorY)) {
-        if (missionVent.requiresTool && !this.inventory.cutter) return this.locked('CHALUMEAU DE MAINTENANCE REQUIS');
-        this.setToolAnimation(actor, 'cutting-torch', 0.95);
-        missionVent.open = true;
-        actor.x = missionVent.targetAnchorX - actor.w / 2;
-        actor.y = missionVent.targetAnchorY - actor.h;
-        actor.vx = 0;
-        actor.vy = 0;
-        this.mission.objectives.route = true;
-        this.setCheckpoint('vent', actor.x, actor.y);
-        this.onEvent({ type: 'shortcut', ventId: missionVent.id, pairId: missionVent.pairId, direction: missionVent.direction });
-        this.audio?.ui();
-        return true;
+      const ventTransit = this.enterMissionVentV62(actor);
+      if (ventTransit) return true;
+      // The inherited V51 interaction treats every entry in this.vents as an
+      // instant shortcut. V62 portals are already handled above and must stay
+      // out of that legacy branch so nearby relays, doors and terminals remain
+      // interactable without reintroducing teleportation.
+      const authoredVents = this.vents;
+      if (this.missionVentNetworkV62) this.vents = [];
+      let result;
+      try {
+        result = super.interact(actor);
+      } finally {
+        this.vents = authoredVents;
       }
-      const result = super.interact(actor);
       if (nearAnchor) {
         const [anchorId] = nearAnchor;
         for (const event of this.missionLevelEvents?.values() || []) if (event.trigger?.type === 'interact-anchor' && event.trigger.anchorId === anchorId) this.triggerMissionLevelEvent(event.id, 'interact-anchor');
       }
       return result;
+    }
+
+    activateTracker(actor = this.player) {
+      const activated = super.activateTracker(actor);
+      if (!activated || !this.missionVentNetworkV62) return activated;
+      const contacts = this.createMissionVentContactOutputsV62(actor)
+        .filter((output) => output.tracker.actorKind === 'enemy' && output.tracker.strength > 0)
+        .map((output) => ({
+          id: output.tracker.actorId,
+          x: Math.round(output.position.x),
+          y: Math.round(output.position.y),
+          distance: Math.round(output.tracker.distance),
+          threat: 'vent',
+          source: output.tracker.source,
+          strength: output.tracker.strength,
+          concealed: true
+        }));
+      const byId = new Map(asList(this.tracker?.contacts).map((contact) => [contact.id, contact]));
+      for (const contact of contacts) byId.set(contact.id, contact);
+      this.tracker.contacts = [...byId.values()];
+      this.missionVentTelemetryV62.trackerContacts += contacts.length;
+      if (contacts.length) this.onEvent({ type: 'tracker-vent-contacts', networkId: this.missionVentNetworkV62.id, contacts: contacts.length });
+      return true;
     }
 
     doorRequirement(door) {
@@ -1118,18 +1631,39 @@ export function withV52LevelRuntime(BaseEngine) {
 
     drawMissionLevelCover(ctx, image, factor, alpha, overscan, yOffset, { repeat = true, zoneId = null } = {}) {
       const height = LOGICAL_HEIGHT * overscan;
-      const width = (image.naturalWidth || image.width) * (height / (image.naturalHeight || image.height));
+      const contract = image?.missionCoverContractV62 || null;
+      const crop = contract ? computeMissionLayerCoverCropV62(image, contract.targetAspect) : null;
+      const width = crop
+        ? crop.targetAspect * height
+        : (image.naturalWidth || image.width) * (height / (image.naturalHeight || image.height));
       const offsetY = -this.camera.y * factor * 0.3 - (height - LOGICAL_HEIGHT) * 0.5 + yOffset;
+      const drawLayer = (x) => {
+        if (crop) {
+          ctx.drawImage(
+            image,
+            crop.sourceX,
+            crop.sourceY,
+            crop.sourceWidth,
+            crop.sourceHeight,
+            x,
+            offsetY,
+            width,
+            height
+          );
+          return;
+        }
+        ctx.drawImage(image, x, offsetY, width, height);
+      };
       ctx.globalAlpha = alpha;
       if (!repeat) {
         const zone = asList(this.missionLevelRuntime?.biomeZones).find((entry) => entry.id === zoneId);
         const playerCenter = this.player.x + this.player.w / 2;
         const progress = zone ? clamp((playerCenter - zone.x) / Math.max(1, zone.w), 0, 1) : 0.5;
         const overflow = Math.max(0, width - LOGICAL_WIDTH);
-        ctx.drawImage(image, -overflow * progress, offsetY, width, height);
+        drawLayer(-overflow * progress);
       } else {
         const offsetX = -((this.camera.x * factor) % Math.max(1, width));
-        for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) ctx.drawImage(image, x, offsetY, width, height);
+        for (let x = offsetX - width; x < LOGICAL_WIDTH + width; x += width) drawLayer(x);
       }
       ctx.globalAlpha = 1;
     }
@@ -1266,6 +1800,93 @@ export function withV52LevelRuntime(BaseEngine) {
       ctx.restore();
     }
 
+    captureMissionVentRuntimeV62() {
+      if (!this.missionVentNetworkV62) return null;
+      const actors = this.missionVentActorsListV62().map((actor) => ({
+        actorId: missionVentEntityIdV62(this, actor),
+        actorKind: actor.ventTransit.actorKind,
+        ventTransit: cloneV62(actor.ventTransit),
+        plan: cloneV62(actor.ventPlanV62),
+        previous: cloneV62(actor.ventRuntimePreviousV62),
+        heldDirection: this.missionVentPlayerDirectionV62.get(missionVentEntityIdV62(this, actor)) || null
+      }));
+      const actorIds = new Set(actors.map((source) => source.actorId));
+      return {
+        schema: MISSION_VENT_RUNTIME_SCHEMA_V62,
+        networkId: this.missionVentNetworkV62.id,
+        actors: [
+          ...actors,
+          ...asList(this.missionVentPendingActorsV62)
+            .filter((source) => source?.actorId && !actorIds.has(source.actorId))
+            .map((source) => cloneV62(source))
+        ],
+        telemetry: { ...this.missionVentTelemetryV62 }
+      };
+    }
+
+    restoreMissionVentActorV62(source) {
+      const network = this.missionVentNetworkV62;
+      const actor = this.missionVentEntityByIdV62(source?.actorId);
+      const transit = source?.ventTransit;
+      if (!actor || !transit || transit.networkId !== network?.id || transit.schema !== MISSION_VENT_RUNTIME_SCHEMA_V62) return false;
+      actor.ventRuntimeIdV62 = source.actorId;
+      actor.ventActorKind = transit.actorKind;
+      actor.ventTransit = cloneV62(transit);
+      actor.ventPlanV62 = cloneV62(source.plan);
+      actor.ventRuntimePreviousV62 = cloneV62(source.previous) || {
+        alive: actor.alive !== false,
+        dormant: Boolean(actor.dormant),
+        inVehicle: Boolean(actor.inVehicle),
+        vehicleAccessPhase: actor.vehicleAccessPhase || null
+      };
+      actor.vx = 0;
+      actor.vy = 0;
+      actor.climbing = false;
+      actor.ventConcealedV62 = true;
+      if (transit.actorKind === 'enemy') {
+        actor.alive = false;
+        actor.dormant = true;
+      } else if (transit.actorKind === 'ally') actor.vehicleAccessPhase = 'vent-transit';
+      this.missionVentActorsV62.set(source.actorId, actor);
+      if (source.heldDirection) this.missionVentPlayerDirectionV62.set(source.actorId, source.heldDirection);
+      return true;
+    }
+
+    restorePendingMissionVentActorsV62() {
+      if (!this.missionVentNetworkV62 || !asList(this.missionVentPendingActorsV62).length) return 0;
+      const unresolved = [];
+      let restored = 0;
+      for (const source of this.missionVentPendingActorsV62) {
+        if (this.restoreMissionVentActorV62(source)) restored += 1;
+        else unresolved.push(source);
+      }
+      this.missionVentPendingActorsV62 = unresolved;
+      if (restored && this.lastResumeResult) {
+        this.lastResumeResult = {
+          ...this.lastResumeResult,
+          missionVentRestoredV62: (Number(this.lastResumeResult.missionVentRestoredV62) || 0) + restored
+        };
+      }
+      return restored;
+    }
+
+    restoreMissionVentRuntimeV62(rawRuntime) {
+      const network = this.missionVentNetworkV62;
+      if (!network || rawRuntime?.schema !== MISSION_VENT_RUNTIME_SCHEMA_V62 || rawRuntime.networkId !== network.id) return 0;
+      this.missionVentActorsV62.clear();
+      this.missionVentPlayerDirectionV62.clear();
+      this.missionVentPendingActorsV62 = [];
+      let restored = 0;
+      for (const source of asList(rawRuntime.actors)) {
+        const transit = source?.ventTransit;
+        if (!transit || transit.networkId !== network.id || transit.schema !== MISSION_VENT_RUNTIME_SCHEMA_V62) continue;
+        if (this.restoreMissionVentActorV62(source)) restored += 1;
+        else this.missionVentPendingActorsV62.push(cloneV62(source));
+      }
+      if (rawRuntime.telemetry && typeof rawRuntime.telemetry === 'object') Object.assign(this.missionVentTelemetryV62, rawRuntime.telemetry);
+      return restored;
+    }
+
     captureResumeState() {
       const state = super.captureResumeState();
       if (!this.missionLevelRuntime) return state;
@@ -1281,7 +1902,8 @@ export function withV52LevelRuntime(BaseEngine) {
           hazards: (this.hazards || []).map((hazard) => ({ id: hazard.id, active: Boolean(hazard.active) })),
           visualState: { ...this.missionLevelVisualState },
           telemetry: { ...this.missionLevelTelemetry },
-          timers: [...this.missionLevelTimers.values()].map(timerSnapshot)
+          timers: [...this.missionLevelTimers.values()].map(timerSnapshot),
+          ventRuntimeV62: this.captureMissionVentRuntimeV62()
         }
       };
     }
@@ -1366,7 +1988,8 @@ export function withV52LevelRuntime(BaseEngine) {
           this.missionLevelExtractionUnlocked = true;
         }
       }
-      return { ...result, missionLevelRestored: true };
+      const missionVentRestoredV62 = this.restoreMissionVentRuntimeV62(source.ventRuntimeV62);
+      return { ...result, missionLevelRestored: true, missionVentRestoredV62 };
     }
 
     getMissionLevelSnapshot() {
@@ -1399,7 +2022,25 @@ export function withV52LevelRuntime(BaseEngine) {
         artLayers: MISSION_LEVEL_LAYER_FILES_V52[plan.templateId] || null,
         activeArtLayers: resolveMissionLevelLayerFilesV58(plan.templateId, this.missionLevelVisualState?.activeZoneId),
         telemetry: this.missionLevelTelemetry ? { ...this.missionLevelTelemetry } : null,
-        timers: this.missionLevelTimers ? [...this.missionLevelTimers.values()].map(timerSnapshot) : []
+        timers: this.missionLevelTimers ? [...this.missionLevelTimers.values()].map(timerSnapshot) : [],
+        ventRuntimeV62: this.missionVentNetworkV62 ? {
+          schema: MISSION_VENT_RUNTIME_SCHEMA_V62,
+          networkId: this.missionVentNetworkV62.id,
+          nodes: this.missionVentNetworkV62.nodes.length,
+          edges: this.missionVentNetworkV62.edges.length,
+          entrances: this.missionVentNetworkV62.entrances.length,
+          exits: this.missionVentNetworkV62.exits.length,
+          activeActors: this.missionVentActorsListV62().map((actor) => ({
+            actorId: missionVentEntityIdV62(this, actor),
+            actorKind: actor.ventTransit.actorKind,
+            phase: actor.ventTransit.phase,
+            nodeId: actor.ventTransit.currentNodeId,
+            edgeId: actor.ventTransit.edgeId,
+            position: cloneV62(getVentTransitPositionV62(this.missionVentNetworkV62, actor))
+          })),
+          contacts: this.createMissionVentContactOutputsV62(this.player).map((output) => cloneV62(output.tracker)),
+          telemetry: { ...this.missionVentTelemetryV62 }
+        } : null
       };
     }
 

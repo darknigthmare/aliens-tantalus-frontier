@@ -14,9 +14,10 @@ import {
   selectApexDossier, selectNeuroProfile
 } from '../src/advanced-systems.js';
 import { applyCampaignConsequence } from '../src/campaign-consequences.js';
+import { normalizeInfestationChainV62 } from '../src/infestation-chain-v62.js';
 import { createHubCrisis, resolveHubCrisisEvent, simulateGalaxy } from '../src/world-crisis.js';
 
-test('la boucle v1-v51 complète produit des conséquences jouables et survit à la sauvegarde', () => {
+test('la boucle v1-v62 complète produit des conséquences jouables et survit à la sauvegarde', () => {
   const save = createDefaultSave(1);
   ensureAdvancedState(save);
   Object.assign(save.galaxy.resources, { credits: 999999, alloy: 9999, fuel: 9999, medical: 9999, research: 9999, pathogen: 9999 });
@@ -76,7 +77,29 @@ test('la boucle v1-v51 complète produit des conséquences jouables et survit à
   const simulated = simulateGalaxy(save, { hours: 6, advanceClock: false, generateCrisis: false });
   assert.ok(simulated.worldChanges.length > 0);
   Object.assign(save, simulated.save);
-  const crisis = createHubCrisis(save, { force: true, kind: 'pathogen' });
+  save.hub.infestationChain = normalizeInfestationChainV62({
+    id: 'strategic-loop-pathogen',
+    kind: 'pathogen',
+    stage: 'infestation',
+    source: {
+      type: 'pathogen-sample',
+      eventId: `operation-return:${mire.id}`,
+      campaignId: mire.id,
+      worldId: world.id,
+      label: 'Échantillon pathogène ramené de mission'
+    },
+    severity: 82,
+    certainty: 100,
+    estimatedThreats: 2,
+    startedAtHours: 0,
+    updatedAtHours: 18,
+    containment: { score: 0, attempts: [], resolved: false, failed: true },
+    history: [
+      { stage: 'exposure', atHours: 0, reason: 'Retour physique enregistré' },
+      { stage: 'infestation', atHours: 18, reason: 'Rupture physique du confinement' }
+    ]
+  });
+  const crisis = createHubCrisis(save);
   assert.equal(crisis.kind, 'pathogen');
   const crisisResult = resolveHubCrisisEvent(save, { action: 'crisis:resolved', crisisId: crisis.id, kind: crisis.kind });
   assert.equal(crisisResult.handled, true);
@@ -84,7 +107,7 @@ test('la boucle v1-v51 complète produit des conséquences jouables et survit à
 
   const persisted = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
   ensureAdvancedState(persisted);
-  assert.equal(persisted.schema, 51);
+  assert.equal(persisted.schema, 52);
   assert.equal(persisted.player.costumeId, COSTUMES[7].id);
   assert.ok(persisted.hub.moduleIds.includes(module.id));
   assert.equal(persisted.strategy.selectedVehicleId, vehicle.id);

@@ -5,6 +5,7 @@ import { getMissionSurfaceMetrics } from '../src/game-v51-runtime.js';
 import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
 import { withV52LevelRuntime } from '../src/game-v52-level-runtime.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
+import { MISSION_VENT_NETWORKS_V62, getVentTransitPositionV62 } from '../src/vent-network-v62.js';
 import {
   CAMPAIGNS,
   CREW,
@@ -230,28 +231,26 @@ test('un lien lift devient une plateforme mobile dans lifts, jamais une fausse �
   assert.ok(liftCount > 0, 'au moins un template v57 doit exercer le contrat lift');
 }));
 
-test('chaque conduit permet un trajet aller-retour physique entre ses deux bouches', () => withBrowserMocks(() => {
+test('chaque réseau de conduit remplace le raccourci instantané par une entrée physique progressive', () => withBrowserMocks(() => {
   let ventCount = 0;
   for (const entry of PLAN_CASES) {
     const { plan, engine } = startCase(entry);
-    for (const source of plan.geometry.vents) {
-      ventCount += 1;
-      engine.inventory.cutter = true;
-      engine.weaponPickup.taken = true;
-      engine.toolPickup.taken = true;
-      if (engine.powerNode) engine.powerNode.active = true;
-      if (engine.archiveTerminal) engine.archiveTerminal.recovered = true;
-      for (const supply of engine.supplies) supply.used = true;
-
-      actorAtAnchor(engine.player, source.from);
-      assert.equal(engine.interact(engine.player), true, `${entry.templateId}:${source.id}: emprunter l’aller`);
-      assert.ok(Math.abs(engine.player.x + engine.player.w / 2 - source.to.x) <= 2, `${source.id}: arrivée X sur la seconde bouche`);
-      assert.ok(Math.abs(engine.player.y + engine.player.h - source.to.y) <= 2, `${source.id}: arrivée Y sur la seconde bouche`);
-
-      assert.equal(engine.interact(engine.player), true, `${entry.templateId}:${source.id}: emprunter le retour`);
-      assert.ok(Math.abs(engine.player.x + engine.player.w / 2 - source.from.x) <= 2, `${source.id}: retour X sur la première bouche`);
-      assert.ok(Math.abs(engine.player.y + engine.player.h - source.from.y) <= 2, `${source.id}: retour Y sur la première bouche`);
-    }
+    const network = MISSION_VENT_NETWORKS_V62[entry.templateId];
+    const entrance = network.entrances[0];
+    ventCount += network.entrances.length;
+    assert.ok(plan.geometry.vents.every((legacy) => !engine.vents.some((portal) => portal.id === legacy.id)), `${entry.templateId}: aucun téléporteur V52 compilé`);
+    assert.equal(engine.vents.length, network.entrances.length + network.exits.length);
+    engine.inventory.cutter = true;
+    actorAtAnchor(engine.player, entrance.worldPosition);
+    engine.player.depth = entrance.worldPosition.depth;
+    const pose = { x: engine.player.x, y: engine.player.y };
+    assert.equal(engine.interact(engine.player), true, `${entry.templateId}:${entrance.id}: commencer l entrée physique`);
+    assert.equal(engine.player.ventTransit.phase, 'entering');
+    assert.deepEqual({ x: engine.player.x, y: engine.player.y }, pose, 'aucun saut de position à l interaction');
+    engine.update(0.18);
+    const transitPosition = getVentTransitPositionV62(network, engine.player);
+    assert.ok(transitPosition && engine.player.ventTransit.progress > 0 && engine.player.ventTransit.progress < 1);
+    assert.deepEqual({ x: engine.player.x, y: engine.player.y }, pose, 'le corps ne rejoint une bouche de sortie qu après le trajet complet');
   }
   assert.ok(ventCount > 0, 'au moins un template v57 doit exercer le contrat conduit');
 }));

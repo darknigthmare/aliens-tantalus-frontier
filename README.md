@@ -1,8 +1,8 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version de travail web jouable **v61.0.0**. Le contrat consolidé **v1→v61** ajoute un vrai écran titre, des stations de briefing et d’armurerie ouvertes depuis le niveau, un booth de contrôle indépendant dans le hangar, quatre MID corrigés et une personnalisation bitmap filtrable. Les M39, M42A, M6B, M83 SADAR, M5 RPG, M94, F44AA, Type 88 et AK-4047 disposent maintenant de leurs propres plaques 4 × 4 reliées au classeur Excel privé ; les contenus sans visuel exact restent bloqués plutôt que rendus invisibles.
+Version de travail web jouable **v62.0.0**. Le contrat consolidé **v1→v62** transforme le Tantalus en niveau physique persistant : collisions, portes, échelles, profondeur, réseau de conduits sauvegardé, routines de seize PNJ et dialogues à mémoire. Les opérations passent désormais par une insertion jouable et reprenable (briefing, préparation, approche, incident causal, déploiement), tandis que les catalogues hiérarchiques montrent les vraies cellules des plaques et séparent clairement canon, gameplay et liens biologiques. Frontier Forge possède sa propre sauvegarde et ne peut plus modifier la campagne.
 
-Dernier déploiement public vérifié (V60 au moment du jalon V61) : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app)
+Dernier déploiement public prévu pour la V62 : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). L'historique V62 consigne la gate locale et sera mis à jour avec le commit et l'URL Vercel après publication.
 
 ## Lancer localement
 
@@ -25,7 +25,7 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L’audit V61 confirme **191 plaques, 2 708 cellules et 382 chemins raw/normalisés présents**. La complétude exacte des personnages, ennemis, véhicules, objets et props est détaillée dans la matrice V61 ; une entrée catalogue n’est jamais présentée comme une plaque dédiée lorsqu’elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L'audit V62 confirme **191 plaques, 2 708 cellules**, **401 PNG runtime audités sans erreur bloquante** et 13 candidats halo à revue visuelle. La complétude exacte des personnages, ennemis, véhicules, objets et props reste détaillée dans les matrices V61/V62 ; une entrée catalogue n'est jamais présentée comme une plaque dédiée lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
 Les MID Medical, Science Lab, Quarantine et Life Support sont désormais quatre bitmaps RGBA 1 774 × 887 corrigés. La dette restante porte notamment sur la Harpoon Gun, seule arme Excel encore reliée sans ambiguïté mais sans plaque dédiée, quatre identités ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie.
 
@@ -46,7 +46,7 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v61 |
+| Catalogue | Total v62 |
 | --- | ---: |
 | Campagnes | 436 |
 | Mondes | 64 |
@@ -69,10 +69,14 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-La gate hors navigateur valide **286 tests**, **143 modules lintés**, **191 plaques / 2 708 cellules** et un build de **3 443 entrées catalogue**. Le parcours navigateur et la publication sont consignés dans l’historique de version après leur exécution finale. Les résultats V60 restent archivés dans docs/VERSION_HISTORY_V60.md.
+La gate hors navigateur V62 valide **366 tests**, **165 modules lintés**, **191 plaques / 2 708 cellules**, **401 PNG runtime sans erreur bloquante** et un build de **3 443 entrées catalogue**. La QA navigateur reste une gate distincte : elle n'est pas déclarée exécutée tant qu'une session visuelle jouable n'a pas été lancée.
 
 ## Dossier de production
 
+- [Audit d’implémentation V62](docs/V62_IMPLEMENTATION_AUDIT.md)
+- [Historique de validation V62](docs/VERSION_HISTORY_V62.md)
+- [Audit PNG, alpha, halo, grilles et normalisation parallaxe V62](docs/references/V62_PNG_ALPHA_AUDIT.md)
+- [Provenance artistique V62](docs/ART_PROVENANCE_V62.md)
 - [Historique de validation V61](docs/VERSION_HISTORY_V61.md)
 - [Audit level design V61](docs/V61_LEVEL_DESIGN_AUDIT.md)
 - [Matrice de complétude artistique V61](docs/references/V61_ASSET_COMPLETION_MATRIX.md)

@@ -11,11 +11,12 @@ const [app, html, styles] = await Promise.all([
   readFile(stylesPath, 'utf8')
 ]);
 
-test('le point d’entrée v52 branche niveaux, escouade, hub et conséquences de production', () => {
+test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et conséquences de production', () => {
   for (const contract of [
     "from './game-production-runtime.js'",
     "from './mission-levels-v52.js'",
-    "from './hub-v52-runtime.js'",
+    "from './hub-v62-runtime.js'",
+    "from './mission-insertion-ui-v62.js'",
     "from './world-crisis.js'",
     "from './campaign-consequences.js'",
     "from './advanced-systems.js'",
@@ -38,8 +39,11 @@ test('le point d’entrée v52 branche niveaux, escouade, hub et conséquences d
   assert.match(app, /editor\.validate\(\)/);
   assert.match(app, /editor\.undo\(\)/);
   assert.match(app, /editor\.redo\(\)/);
-  assert.match(app, /editorProject: currentEditorProject\('mission'\)/);
-  assert.match(app, /hubEngine\.start\(saveSystem\.data\.hub, \{ editorProject: project \}\)/);
+  assert.match(app, /editorProject: null,/);
+  assert.match(app, /hubEngine\.start\(forgePlaytest\.hubState,[\s\S]*routineContextV62:/);
+  assert.match(app, /startMissionInsertionV62/);
+  assert.match(app, /function launchForgeMissionPlaytest\(project\)/);
+  assert.match(app, /new ForgeSaveSystemV62/);
   assert.match(app, /engine\.useEquipment\(id\)/);
   assert.match(app, /engine\.activateNeuroCountermeasure\(engine\.player\)/);
   assert.match(app, /function retreatMission\(\)/);
@@ -57,21 +61,26 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
     'retreat-mission', 'mission-equipment-controls', 'mission-interact', 'mission-tracker',
     'mission-vehicle', 'mission-reload', 'mission-medkit', 'mission-neuro-counter', 'setting-difficulty',
     'setting-coop', 'setting-motion', 'setting-subtitles', 'setting-quality',
-    'setting-contrast', 'setting-effects', 'promise-matrix', 'title-screen', 'title-start',
-    'hub-dialogue', 'hub-dialogue-continue', 'costume-part-filter', 'costume-palette-filter'
+    'setting-contrast', 'setting-effects', 'title-screen', 'title-start', 'title-forge',
+    'hub-dialogue', 'hub-dialogue-continue', 'hub-dialogue-choices',
+    'mission-insertion-v62', 'mission-runtime-v62',
+    'armory-catalog-v62', 'enemy-catalog-v62', 'vehicle-catalog-v62',
+    'costume-part-filter', 'costume-palette-filter'
   ];
   for (const id of requiredIds) assert.match(html, new RegExp(`id=["']${id}["']`), `#${id} manque`);
 
-  for (const control of ['left', 'right', 'jump', 'crouch', 'fire', 'interact']) {
+  for (const control of ['left', 'right', 'jump', 'crouch', 'depth', 'fire', 'interact']) {
     assert.match(html, new RegExp(`data-hub-control=["']${control}["']`));
   }
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
-  assert.match(html, /v61\.0\.0/);
-  assert.match(html, /Contrat v1–v61/);
-  assert.match(html, /href=["']\/docs\/VERSION_HISTORY_V61\.md["']/);
-  assert.match(app, /atf-v61-/);
+  assert.match(html, /v62\.0\.0/);
+  assert.doesNotMatch(html, /class="nav-button"[^>]+data-view="(?:editor|codex)"/);
+  assert.doesNotMatch(html, /Contrat v1[–-]v61/);
+  assert.match(app, /onForge:\s*\(\)\s*=>\s*openForgeContext\(\)/);
+  assert.match(app, /standaloneContext\s*===\s*'forge'[\s\S]*showTitleScreen\(\)/);
+  assert.match(app, /atf-v62-forge-/);
 });
 
 test('la couche visuelle v52 reste modulaire, tactile et accessible', () => {

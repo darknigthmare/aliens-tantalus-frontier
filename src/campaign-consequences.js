@@ -1,4 +1,5 @@
 import { CAMPAIGNS } from './content.js';
+import { createInfestationExposureV62 } from './infestation-chain-v62.js';
 
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, Number(value) || 0));
 const add = (target, key, amount, maximum = 100) => {
@@ -28,6 +29,26 @@ const OBJECTIVE_EFFECTS = Object.freeze({
 function pairedCampaign(campaign) {
   if (!campaign?.pairId) return null;
   return CAMPAIGNS.find((entry) => entry.pairId === campaign.pairId && entry.id !== campaign.id) || null;
+}
+
+function causalExposureFor(consequence, worldState = {}) {
+  const infestation = clamp(worldState.infestation);
+  const common = {
+    id: `operation-return:${consequence.id}`,
+    campaignId: consequence.campaignId,
+    worldId: consequence.worldId,
+    label: `${consequence.action} · retour opérationnel`,
+    estimatedThreats: Math.max(1, Math.min(6, Math.ceil(infestation / 24)))
+  };
+  if (consequence.action === 'live-capture') return { ...common, type: 'live-specimen', severity: 82 + infestation * 0.12 };
+  if (consequence.action === 'boarding' && (infestation >= 28 || !consequence.success)) return { ...common, type: 'wreck-salvage', severity: 38 + infestation * 0.38 };
+  if (consequence.action === 'evacuation' && infestation >= 42) return { ...common, type: 'survivor-evacuation', severity: 30 + infestation * 0.34 };
+  if (consequence.action === 'vehicle-recovery' && infestation >= 48) return { ...common, type: 'contaminated-equipment', severity: 34 + infestation * 0.4 };
+  if (consequence.action === 'apex-trace' && consequence.success) return { ...common, type: 'pathogen-sample', kind: 'pathogen', severity: 44 + infestation * 0.22 };
+  if (consequence.action === 'synthetic-recovery' && !consequence.success) return { ...common, type: 'synthetic-intrusion', kind: 'synthetic', severity: 64 };
+  if (consequence.action === 'quarantine-escape' && !consequence.success) return { ...common, type: 'airlock-breach', severity: 76 + infestation * 0.16 };
+  if (consequence.action === 'route-mapping' && !consequence.success) return { ...common, type: 'vent-breach', severity: 68 + infestation * 0.18 };
+  return null;
 }
 
 export function buildCampaignConsequence(campaign = {}, world = {}, { success = true, completedCampaignIds = [] } = {}) {
@@ -105,7 +126,9 @@ export function applyCampaignConsequence(save, campaign, world, result = {}) {
     hour: save.clock.hour
   };
   save.galaxy.alerts = [alert, ...save.galaxy.alerts.filter((entry) => entry?.id !== alert.id)].slice(0, 256);
-  return { consequence, alert };
+  const exposureEvent = causalExposureFor(consequence, worldState);
+  const exposure = exposureEvent ? createInfestationExposureV62(save, exposureEvent) : null;
+  return { consequence, alert, exposure };
 }
 
 export { OBJECTIVE_EFFECTS };

@@ -18,16 +18,18 @@ import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { GameEngine } from './game-production-runtime.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { HubGame, HUB_DECKS } from './hub-v52-runtime.js';
+import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v62-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV61 } from './weapon-visual-runtime-v61.js';
-import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
-import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
-import { resolveSpriteSheet, resolveVehicleAnimation } from './sprite-animation-runtime.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
 import { getExcelWeaponBridgeV61 } from './excel-content-bridge-v61.js';
+import { ForgeSaveSystemV62 } from './forge-save-v62.js';
+import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
+import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
+import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
+import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -37,21 +39,6 @@ const number = (value) => new Intl.NumberFormat('fr-FR').format(Math.round(Numbe
 const absoluteHours = (clock) => (Math.max(1, Number(clock?.day) || 1) - 1) * 24 + (Number(clock?.hour) || 0);
 const title = (value = '') => String(value).replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
-function appendCatalogSprite(card, visual, label) {
-  if (!card || !visual?.path) return;
-  const frame = document.createElement('figure');
-  frame.className = 'catalog-sprite-frame';
-  frame.dataset.identityStatus = visual.identityStatus || 'exact';
-  frame.setAttribute('aria-label', `${label} - première cellule de la plaquette dédiée`);
-  const image = document.createElement('img');
-  image.src = visual.path;
-  image.alt = '';
-  image.loading = 'lazy';
-  image.style.width = `${112 * (Number(visual.columns) || 4)}px`;
-  image.style.height = `${112 * (Number(visual.rows) || 4)}px`;
-  frame.append(image);
-  card.insertBefore(frame, card.querySelector('p'));
-}
 const memoryStorage = (() => {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: (key) => values.delete(key) };
@@ -60,15 +47,25 @@ const memoryStorage = (() => {
 const saveSystem = new SaveSystem(globalThis.localStorage || memoryStorage);
 saveSystem.load(1);
 ensureAdvancedState(saveSystem.data);
+const forgeSaveSystem = new ForgeSaveSystemV62(globalThis.localStorage || memoryStorage);
+forgeSaveSystem.load();
 const audio = new AudioDirector();
 let editor = null;
 let activeView = 'command';
+let standaloneContext = null;
+let forgePlaytest = null;
 let activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
 let deferredInstall = null;
 let sessionStart = Date.now();
 let lastHubStatus = null;
 let activeHubStation = null;
 let pendingHubInteraction = null;
+let pendingNpcConversationV62 = null;
+let armoryCatalogV62 = null;
+let enemyCatalogV62 = null;
+let vehicleCatalogV62 = null;
+let missionInsertionUiV62 = null;
+let pendingMissionLaunchV62 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -88,7 +85,6 @@ const VIEW_META = Object.freeze({
   vehicles: ['LOGISTICS // MOTOR POOL', 'Véhicules'],
   crew: ['PERSONNEL // ECHO-9', 'Echo-9'],
   editor: ['FORGE // WORLD AUTHORING', 'Frontier Forge'],
-  codex: ['ARCHIVE // v1-v51', 'Contrat de gameplay'],
   settings: ['SYSTEM // CONFIGURATION', 'Système'],
   play: ['OPS // LIVE', 'Opération en cours']
 });
@@ -160,6 +156,13 @@ function strategyLog(titleText, result, type = 'system', risk = 0, incident = fa
   saveSystem.data.strategy.log = saveSystem.data.strategy.log.slice(0, 40);
 }
 
+function refreshActiveHubNpcRoutinesV62() {
+  if (!hubEngine?.state || !hubEngine?.player) return null;
+  const resolutions = hubEngine.setNpcRoutineContextV62(getHubRoutineContextV62(), { persist: false, rebuild: true });
+  saveSystem.data.hub.npcRoutineState = clone(hubEngine.npcRoutineStateV62);
+  return resolutions;
+}
+
 function simulateElapsed(previousHours, { generateCrisis = true, minimumCrisisScore } = {}) {
   const elapsed = Math.max(0, absoluteHours(saveSystem.data.clock) - previousHours);
   if (!elapsed) return null;
@@ -173,6 +176,7 @@ function simulateElapsed(previousHours, { generateCrisis = true, minimumCrisisSc
   if (simulation.crisis && simulation.crisis.id !== previousCrisis) {
     strategyLog('ALERTE TANTALUS', `Incident ${simulation.crisis.kind} sur le pont ${simulation.crisis.deck + 1}. Neutralisation physique requise.`, 'crisis', 100, true);
   }
+  refreshActiveHubNpcRoutinesV62();
   return simulation;
 }
 
@@ -216,9 +220,9 @@ function applyRuntimeSettings() {
 function currentEditorProject(kind = null) {
   const snapshot = editor?.serialize?.();
   if (snapshot && (!kind || snapshot.kind === kind) && snapshot.validation?.ok) return snapshot;
-  const activeId = saveSystem.data.editor.activeProjectId;
-  const project = saveSystem.data.editor.projects.find((entry) => entry.id === activeId)
-    || saveSystem.data.editor.projects.find((entry) => !kind || entry.kind === kind);
+  const activeId = forgeSaveSystem.data.activeProjectId;
+  const project = forgeSaveSystem.data.projects.find((entry) => entry.id === activeId)
+    || forgeSaveSystem.data.projects.find((entry) => !kind || entry.kind === kind);
   if (!project || (kind && project.kind !== kind) || !project.validation?.ok) return null;
   return clone(project);
 }
@@ -229,6 +233,10 @@ function closeHubDialogue({ resume = true } = {}) {
   dialogue.hidden = true;
   document.documentElement.classList.remove('hub-dialogue-mode');
   pendingHubInteraction = null;
+  pendingNpcConversationV62 = null;
+  byId('hub-dialogue-choices').replaceChildren();
+  byId('hub-dialogue-continue').hidden = false;
+  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
   if (resume && activeView === 'hub' && !activeHubStation) hubEngine.resume();
 }
 
@@ -263,10 +271,63 @@ function openHubDialogue(interaction) {
   byId('hub-dialogue-speaker').textContent = contract.speaker;
   byId('hub-dialogue-text').textContent = contract.text;
   const portrait = byId('hub-dialogue-image');
+  portrait.classList.remove('is-sprite-cell-v62');
   portrait.src = contract.portrait;
   portrait.alt = `Portrait de ${contract.speaker}`;
+  byId('hub-dialogue-choices').replaceChildren();
+  byId('hub-dialogue-continue').hidden = false;
+  byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
   byId('hub-dialogue').hidden = false;
   document.documentElement.classList.add('hub-dialogue-mode');
+  byId('hub-dialogue-continue').focus({ preventScroll: true });
+  return true;
+}
+
+function openNpcDialogueV62(interaction) {
+  const conversation = beginNpcConversationV62(interaction?.crewId, {
+    save: saveSystem.data,
+    hub: saveSystem.data.hub,
+    clock: saveSystem.data.clock,
+    crew: saveSystem.data.crew,
+    operation: saveSystem.data.strategy.currentOperation,
+    interaction
+  });
+  if (!conversation) return false;
+  pendingNpcConversationV62 = conversation;
+  pendingHubInteraction = { interaction, conversation, npc: true };
+  hubEngine.pause();
+  byId('hub-dialogue-speaker').textContent = `${conversation.identity.name} · ${conversation.identity.role}`;
+  byId('hub-dialogue-text').textContent = conversation.lines.map((line) => line.text).join(' ');
+  const portrait = byId('hub-dialogue-image');
+  const profile = HUB_NPC_ROSTER.find((entry) => entry.crewId === conversation.crewId);
+  portrait.classList.add('is-sprite-cell-v62');
+  portrait.src = profile?.spritePath || '/assets/openai/tantalus-hub-crew-animation-sheet.png';
+  portrait.alt = `Cellule d’animation de ${conversation.identity.name}`;
+  const choices = byId('hub-dialogue-choices');
+  choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
+  byId('hub-dialogue-continue').hidden = true;
+  byId('hub-dialogue').hidden = false;
+  document.documentElement.classList.add('hub-dialogue-mode');
+  choices.querySelector('button:not(:disabled)')?.focus({ preventScroll: true });
+  return true;
+}
+
+function chooseNpcDialogueV62(choiceId) {
+  if (!pendingNpcConversationV62) return false;
+  const result = applyNpcDialogueChoiceV62(saveSystem.data.hub, pendingNpcConversationV62, choiceId);
+  if (!result.applied) {
+    toast(result.blockedReason || 'Cette réponse n’est plus disponible.');
+    return false;
+  }
+  saveSystem.data.hub.dialogueMemory = clone(result.persistence.dialogueMemory);
+  saveSystem.data.hub.npcRoutineState = clone(result.persistence.npcRoutineState);
+  hubEngine.npcRoutineStateV62 = clone(result.persistence.npcRoutineState);
+  hubEngine.setNpcRoutineContextV62(getHubRoutineContextV62(), { persist: false, rebuild: true });
+  saveSystem.commit();
+  byId('hub-dialogue-text').textContent = result.response;
+  byId('hub-dialogue-choices').replaceChildren();
+  byId('hub-dialogue-continue').hidden = false;
+  byId('hub-dialogue-continue').textContent = 'TERMINER L’ÉCHANGE';
   byId('hub-dialogue-continue').focus({ preventScroll: true });
   return true;
 }
@@ -287,9 +348,20 @@ function showView(name) {
   document.querySelector('.rail').classList.remove('open');
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
-    hubEngine.start(saveSystem.data.hub, { editorProject: currentEditorProject('ship') });
+    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62() });
   }
   globalThis.scrollTo?.({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
+}
+
+function getHubRoutineContextV62(source = saveSystem.data) {
+  return {
+    save: source,
+    crew: source.crew,
+    clock: source.clock,
+    operation: source.strategy?.currentOperation || null,
+    crisis: source.hub?.activeCrisis || null,
+    infestation: source.hub?.infestationChain || null
+  };
 }
 
 const titleScreen = new TitleScreenController({
@@ -307,13 +379,32 @@ const titleScreen = new TitleScreenController({
     applyRuntimeSettings();
     renderAll();
   },
+  onForge: () => openForgeContext(),
   onOptions: () => showView('settings')
 });
+
+function openForgeContext() {
+  hubEngine.stop(false);
+  engine.stop();
+  forgePlaytest = null;
+  if (!titleScreen.root.hidden) titleScreen.hide();
+  standaloneContext = 'forge';
+  document.documentElement.classList.add('forge-mode');
+  showView('editor');
+  byId('breadcrumb').textContent = 'DEVELOPER // FRONTIER FORGE';
+  byId('view-title').textContent = 'Frontier Forge';
+  byId('return-title').textContent = 'FERMER FRONTIER FORGE';
+}
 
 function showTitleScreen() {
   hubEngine.stop(false);
   engine.stop();
-  document.documentElement.classList.remove('hub-mode', 'mission-mode');
+  destroyMissionInsertionUiV62();
+  forgePlaytest = null;
+  standaloneContext = null;
+  document.documentElement.classList.remove('hub-mode', 'mission-mode', 'forge-mode');
+  byId('return-title').textContent = 'MENU PRINCIPAL';
+  byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   titleScreen.show();
 }
 
@@ -458,80 +549,117 @@ function renderOperationPlan() {
   byId('operation-launch').onclick = () => launchCampaign(campaign);
 }
 
-function procurementAction(kind, item) {
+function procurementActionsV62(record) {
+  const kind = record.catalog === 'weapons' ? 'weapon'
+    : record.catalog === 'equipment' ? 'equipment'
+      : record.catalog === 'vehicles' ? 'vehicle'
+        : null;
+  if (!kind) return [];
+  const source = kind === 'weapon' ? WEAPONS : kind === 'equipment' ? EQUIPMENT : VEHICLES;
+  const item = source.find((entry) => entry.id === record.id);
+  if (!item) return [];
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
   if (kind === 'weapon' && !resolveWeaponVisualProfileV61(item)) {
     const bridge = getExcelWeaponBridgeV61(item.id);
-    const source = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
-    return `<button class="button compact" disabled title="Plaquette d’animation dédiée requise${source}">PLAQUETTE DÉDIÉE REQUISE</button>`;
+    const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
+    return [{
+      id: 'visual-required',
+      label: 'PLAQUETTE DÉDIÉE REQUISE',
+      disabled: true,
+      title: `Plaquette d’animation dédiée requise${sourceLabel}`
+    }];
+  }
+  const vehicleGate = kind === 'vehicle' ? getVehicleDeploymentGateV60(item) : null;
+  if (vehicleGate && !vehicleGate.ready) {
+    return [{
+      id: 'visual-required',
+      label: 'CANON BLOQUÉ · PLAQUE EXACTE REQUISE',
+      disabled: true,
+      title: vehicleGate.reason,
+      className: 'is-blocked',
+      variant: 'danger',
+      dataset: { deploymentStatus: vehicleGate.status }
+    }];
+  }
+  if (!owned) {
+    const quote = getProcurementQuote(saveSystem.data, kind, item);
+    return [{
+      id: 'procure',
+      label: loadoutLocked ? 'OPÉRATION ACTIVE' : `ACQUÉRIR · ${formatCost(quote)}`,
+      disabled: loadoutLocked || !canAfford(saveSystem.data, quote),
+      title: loadoutLocked ? 'Opération active : manifeste verrouillé' : '',
+      dataset: { procureKind: kind, procureId: item.id }
+    }];
   }
   const equipped = kind === 'vehicle'
     ? saveSystem.data.strategy.selectedVehicleId === item.id
     : saveSystem.data.player[inventoryKey]?.includes(item.id);
-  const vehicleGate = kind === 'vehicle' ? getVehicleDeploymentGateV60(item) : null;
-  if (vehicleGate && !vehicleGate.ready) {
-    return `<button class="button compact" disabled title="${escapeHtml(vehicleGate.reason)}">PLAQUE EXACTE REQUISE</button>`;
-  }
-  if (!owned) {
-    const quote = getProcurementQuote(saveSystem.data, kind, item);
-    return `<button class="button compact" data-procure-kind="${kind}" data-procure-id="${item.id}" ${loadoutLocked || !canAfford(saveSystem.data, quote) ? 'disabled' : ''}${operationLockTitle}>${loadoutLocked ? 'OPÉRATION ACTIVE' : `ACQUÉRIR · ${formatCost(quote)}`}</button>`;
-  }
-  const actionAttributes = kind === 'vehicle'
-    ? `data-select-vehicle="${item.id}"`
-    : `data-equip-id="${item.id}" data-equip-kind="${kind}"`;
-  const actionLabel = kind === 'vehicle' ? 'AFFECTER' : 'ÉQUIPER';
-  return `<button class="button compact" ${actionAttributes} ${equipped || loadoutLocked ? 'disabled' : ''}${operationLockTitle}>${equipped ? 'AFFECTÉ' : loadoutLocked ? 'OPÉRATION ACTIVE' : actionLabel}</button>`;
+  return [{
+    id: kind === 'vehicle' ? 'select-vehicle' : 'equip',
+    label: equipped ? 'AFFECTÉ' : loadoutLocked ? 'OPÉRATION ACTIVE' : kind === 'vehicle' ? 'AFFECTER' : 'ÉQUIPER',
+    disabled: equipped || loadoutLocked,
+    title: loadoutLocked ? 'Opération active : manifeste verrouillé' : '',
+    dataset: kind === 'vehicle'
+      ? { selectVehicle: item.id }
+      : { equipId: item.id, equipKind: kind }
+  }];
 }
 
-function renderArmory() {
-  const kind = byId('armory-kind').value === 'equipment' ? 'equipment' : 'weapon';
-  const source = kind === 'weapon' ? WEAPONS : EQUIPMENT;
-  const term = byId('armory-search').value.trim().toLowerCase();
-  const items = source.filter((item) => JSON.stringify(item).toLowerCase().includes(term));
-  byId('armory-list').innerHTML = items.map((item) => {
-    const description = kind === 'weapon'
-      ? `Dégâts ${item.damage} · cadence ${item.fireRate}/s · chargeur ${item.magazine} · pénétration ${item.penetration}`
-      : `${item.description} · ${item.charges} charges · ${item.mass} kg`;
-    return `<article class="catalog-card"><span class="eyebrow">${kind.toUpperCase()} · ${escapeHtml(item.rarity)}</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(description)}</p><div class="mini-tags"><span>${escapeHtml(item.family || item.utility)}</span><span>${escapeHtml(item.mark || item.grade)}</span></div><footer><span>${item.id}</span>${procurementAction(kind, item)}</footer></article>`;
-  }).join('');
-  all('.catalog-card', byId('armory-list')).forEach((card, index) => {
-    const item = items[index];
-    const visual = kind === 'weapon'
-      ? resolveWeaponVisualProfileV61(item)
-      : resolveEquipmentVisualProfileV56(item);
-    const heading = card.querySelector('h3');
-    if (visual?.displayName && heading) heading.textContent = visual.displayName;
-    appendCatalogSprite(card, visual, visual?.displayName || item.name);
+function setupCatalogsV62() {
+  armoryCatalogV62 = new CatalogWorkbenchV62({
+    root: byId('armory-catalog-v62'),
+    tree: byId('armory-catalog-tree'),
+    list: byId('armory-list'),
+    detail: byId('armory-catalog-detail'),
+    search: byId('armory-search'),
+    catalogs: ['weapons'],
+    getActions: procurementActionsV62,
+    limit: 250
+  });
+  enemyCatalogV62 = new CatalogWorkbenchV62({
+    root: byId('enemy-catalog-v62'),
+    tree: byId('enemy-catalog-tree'),
+    list: byId('enemy-list'),
+    detail: byId('enemy-catalog-detail'),
+    search: byId('enemy-search'),
+    catalogs: ['enemies'],
+    predicate: (record) => {
+      const biology = byId('biology-filter').value;
+      return biology === 'all' || ENEMIES.find((entry) => entry.id === record.id)?.biology === biology;
+    },
+    limit: 500
+  });
+  vehicleCatalogV62 = new CatalogWorkbenchV62({
+    root: byId('vehicle-catalog-v62'),
+    tree: byId('vehicle-catalog-tree'),
+    list: byId('vehicle-list'),
+    detail: byId('vehicle-catalog-detail'),
+    search: byId('vehicle-search'),
+    catalogs: ['vehicles'],
+    getActions: procurementActionsV62,
+    limit: 300
   });
 }
 
+function renderArmory() {
+  if (!armoryCatalogV62) return;
+  const catalog = byId('armory-kind').value === 'equipment' ? 'equipment' : 'weapons';
+  if (armoryCatalogV62.getSnapshot().catalogs[0] !== catalog) armoryCatalogV62.setCatalogs([catalog]);
+  else armoryCatalogV62.refresh();
+}
+
 function renderEnemies() {
-  const biology = byId('biology-filter').value;
-  const term = byId('enemy-search').value.trim().toLowerCase();
-  const items = ENEMIES.filter((enemy) => (biology === 'all' || enemy.biology === biology) && JSON.stringify(enemy).toLowerCase().includes(term));
-  byId('enemy-list').innerHTML = items.map((enemy) => `<article class="catalog-card"><span class="eyebrow">${escapeHtml(enemy.biology)} · ${escapeHtml(enemy.frequency)}</span><h3>${escapeHtml(enemy.name)}</h3><p>PV ${enemy.health} · dégâts ${enemy.damage} · vitesse ${enemy.speed} · armure ${enemy.armor}</p><div class="mini-tags"><span>${escapeHtml(enemy.caste)}</span>${[enemy.behavior].filter(Boolean).map((behavior) => `<span>${escapeHtml(behavior)}</span>`).join('')}</div><footer><span>${enemy.id}</span><span>${escapeHtml(enemy.habitats.slice(0, 2).join(' · '))}</span></footer></article>`).join('');
-  all('.catalog-card', byId('enemy-list')).forEach((card, index) => {
-    appendCatalogSprite(card, resolveEnemyVisualProfile(items[index]), items[index].name);
+  if (!enemyCatalogV62) return;
+  enemyCatalogV62.setPredicate((record) => {
+    const biology = byId('biology-filter').value;
+    return biology === 'all' || ENEMIES.find((entry) => entry.id === record.id)?.biology === biology;
   });
 }
 
 function renderVehicles() {
-  const term = byId('vehicle-search').value.trim().toLowerCase();
-  const items = VEHICLES.filter((vehicle) => JSON.stringify(vehicle).toLowerCase().includes(term));
-  byId('vehicle-list').innerHTML = items.map((vehicle) => {
-    const gate = getVehicleDeploymentGateV60(vehicle);
-    const status = gate.ready ? '' : `<span>CANON BLOQUÉ · ${escapeHtml(vehicle.visualStatus)}</span>`;
-    const note = gate.ready ? '' : `<p>${escapeHtml(gate.reason)} ${escapeHtml(vehicle.referenceNote || '')}</p>`;
-    return `<article class="catalog-card${gate.ready ? '' : ' canon-blocked'}" data-deployment-status="${escapeHtml(gate.status)}"><span class="eyebrow">${escapeHtml(vehicle.family)} · ${escapeHtml(vehicle.fit)}</span><h3>${escapeHtml(vehicle.name)}</h3><p>Coque ${vehicle.hull} · vitesse ${vehicle.speed} · cargo ${vehicle.cargo} · ${vehicle.seats.length} sièges</p>${note}<div class="mini-tags">${status}${vehicle.seats.map((seat) => `<span>${escapeHtml(seat.role)}</span>`).join('')}${vehicle.actions.map((action) => `<span>${escapeHtml(action)}</span>`).join('')}</div><footer><span>${vehicle.id}</span>${procurementAction('vehicle', vehicle)}</footer></article>`;
-  }).join('');
-  all('.catalog-card', byId('vehicle-list')).forEach((card, index) => {
-    const request = resolveVehicleAnimation(items[index]);
-    const sheet = request ? resolveSpriteSheet(request.sheetId) : null;
-    appendCatalogSprite(card, sheet, items[index].name);
-  });
+  vehicleCatalogV62?.refresh();
 }
 
 function ensureCostumeFilterOptions(id, field) {
@@ -597,7 +725,7 @@ function renderEditorStatus() {
   const snapshot = editor.getSnapshot();
   const validation = snapshot.validation;
   byId('editor-validation').innerHTML = validation.ok
-    ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest.</p>`
+    ? `<span class="chip success">PLAN VALIDE</span><p>${snapshot.tiles.length} blocs · ${snapshot.kind} · prêt pour playtest isolé · ${forgeSaveSystem.data.projects.length} projet(s) Forge.</p>`
     : `<span class="chip danger">PLAN INCOMPLET</span><p>${validation.errors.map(escapeHtml).join(' ')}</p>`;
   byId('editor-undo').disabled = !snapshot.canUndo;
   byId('editor-redo').disabled = !snapshot.canRedo;
@@ -615,20 +743,6 @@ function renderProfiles() {
   byId('setting-aim-assist').value = saveSystem.data.settings.aimAssist || 'standard';
   byId('setting-screen-shake').value = saveSystem.data.settings.screenShake ?? 0.7;
   byId('setting-effects').value = saveSystem.data.settings.effects ?? 0.7;
-}
-
-function renderCodex() {
-  const promises = [
-    ['STRATÉGIE', 'actions, recherche, économie, temps et simulation des 64 mondes'],
-    ['ESCOUADE', 'affectation, stress, fatigue, blessures, soins et mémorial persistants'],
-    ['ARSENAL', `${WEAPONS.length} armes et ${EQUIPMENT.length} équipements acquérables et utilisables`],
-    ['VÉHICULES', `${VEHICLES.length} châssis pilotables, familles et rôles par siège`],
-    ['MISSIONS', `${CAMPAIGNS.length} campagnes, 16 objectifs physiques, checkpoints, retraite et conséquences`],
-    ['TANTALUS', '4 ponts, 16 salles, verticalité, services, modules et crises combattues dans le niveau'],
-    ['FORGE', 'validation, undo/redo, import/export et playtest mission ou vaisseau'],
-    ['NEURO / APEX', `${NEURO_XENO_PROFILES.length} profils contrôlables et ${APEX_DOSSIERS.length} dossiers à conditions réelles`]
-  ];
-  byId('promise-matrix').innerHTML = promises.map(([name, proof]) => `<article class="promise-card"><span class="chip success">EXÉCUTABLE</span><h3>${name}</h3><p>${escapeHtml(proof)}</p></article>`).join('');
 }
 
 function renderMissionEquipment() {
@@ -651,7 +765,6 @@ function renderAll() {
   renderHubStatus();
   renderEditorStatus();
   renderProfiles();
-  renderCodex();
 }
 
 function captureMissionResumeState() {
@@ -720,6 +833,178 @@ function applyMissionResumeState(state) {
   return true;
 }
 
+const MISSION_INSERTION_MEDIA_V62 = Object.freeze({
+  briefing: Object.freeze({
+    id: 'tantalus-command-briefing-room-v61',
+    path: '/assets/openai/hub/rooms/command-briefing.png',
+    alt: 'Salle de briefing physique du Tantalus avant le départ',
+    provenance: 'OpenAI project bitmap'
+  }),
+  preparation: Object.freeze({
+    id: 'tantalus-engineering-hangar-v61',
+    path: '/assets/openai/hub/rooms/engineering-hangar.png',
+    alt: 'Hangar physique du Tantalus pendant la préparation',
+    provenance: 'OpenAI project bitmap'
+  }),
+  'dropship:approach': Object.freeze({
+    id: 'tantalus-mission-approach-dropship-v62',
+    path: '/assets/openai/mission/insertion/tantalus-dropship-approach-v62.png',
+    alt: 'Dropship en approche latérale d’une colonie frontière sous la pluie',
+    provenance: 'OpenAI project bitmap'
+  }),
+  'apc:approach': Object.freeze({
+    id: 'tantalus-mission-approach-apc-v62',
+    path: '/assets/openai/mission/insertion/tantalus-apc-approach-v62.png',
+    alt: 'APC en approche terrestre latérale vers une colonie frontière',
+    provenance: 'OpenAI project bitmap'
+  }),
+  'foot:approach': Object.freeze({
+    id: 'tantalus-mission-approach-foot-v62',
+    path: '/assets/openai/mission/insertion/tantalus-foot-approach-v62.png',
+    alt: 'Escouade de quatre opérateurs en marche d’approche latérale',
+    provenance: 'OpenAI project bitmap'
+  }),
+  deployment: Object.freeze({
+    id: 'tantalus-mission-deployment-v62',
+    path: '/assets/openai/metroidvania/tantalus-mission-mid.png',
+    alt: 'Couche intermédiaire de la zone au point de déploiement',
+    provenance: 'OpenAI project bitmap'
+  }),
+  'player-control': Object.freeze({
+    id: 'tantalus-mission-control-transfer-v62',
+    path: '/assets/openai/metroidvania/tantalus-mission-foreground.png',
+    alt: 'Premier plan jouable au transfert de contrôle tactique',
+    provenance: 'OpenAI project bitmap'
+  })
+});
+
+function destroyMissionInsertionUiV62() {
+  missionInsertionUiV62?.destroy();
+  missionInsertionUiV62 = null;
+  const root = byId('mission-insertion-v62');
+  root.hidden = true;
+  root.replaceChildren();
+  byId('mission-runtime-v62').hidden = false;
+}
+
+function startMissionRuntimeV62(context) {
+  destroyMissionInsertionUiV62();
+  pendingMissionLaunchV62 = null;
+  const {
+    campaign, world, worldState, levelSeed, missionLevel,
+    weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
+  } = context;
+  engine.setCoop(saveSystem.data.settings.coop);
+  engine.start({
+    seed: levelSeed.seed,
+    world: { ...world, ...worldState },
+    campaign,
+    enemyCatalog: ENEMIES,
+    weapon,
+    equipment,
+    crew,
+    vehicle,
+    costume,
+    levelSeed,
+    missionLevel,
+    apexDossier: operationLoadout.apexDossier,
+    neuroProfile: operationLoadout.neuroProfile,
+    difficulty: operationLoadout.difficulty,
+    accessibility: {
+      reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
+      subtitles: Boolean(saveSystem.data.settings.subtitles),
+      aimAssist: saveSystem.data.settings.aimAssist,
+      screenShake: saveSystem.data.settings.screenShake
+    },
+    editorProject: null,
+    strategicBriefing: deployment.operation,
+    resumeState: operationLoadout.resumeState
+  });
+  if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
+  renderMissionEquipment();
+}
+
+function handleMissionInsertionHooksV62(hooks) {
+  const operation = saveSystem.data.strategy.currentOperation;
+  if (!operation) return;
+  for (const hook of hooks) {
+    const phase = String(hook.phase || hook.approach || 'active').slice(0, 40);
+    recordOperationFlag(saveSystem.data, `insertion-${hook.channel}-${phase}`);
+    if (hook.channel === 'audio') audio.ui();
+    if (hook.channel === 'camera') byId('mission-insertion-v62').dataset.cameraHook = String(hook.event || phase);
+    if (hook.channel === 'objective') byId('mission-log').textContent = `INSERTION · ${phase.toUpperCase()} · ${campaignObjectiveLabel(operation.campaignId)}`;
+  }
+  saveSystem.commit();
+}
+
+function campaignObjectiveLabel(campaignId) {
+  return CAMPAIGNS.find((entry) => entry.id === campaignId)?.objective || campaignId;
+}
+
+function startMissionInsertionV62(context) {
+  const operation = saveSystem.data.strategy.currentOperation;
+  if (!operation) {
+    startMissionRuntimeV62(context);
+    return;
+  }
+  let state = null;
+  if (operation.insertionState) {
+    try {
+      state = restoreMissionInsertionV62(operation.insertionState);
+      if (state.operationId !== operation.id) state = null;
+    } catch {
+      state = null;
+    }
+  }
+  state ||= createMissionInsertionV62({
+    operation,
+    campaign: context.campaign,
+    world: context.world,
+    mission: context.missionLevel,
+    vehicle: context.vehicle,
+    crew: context.crew,
+    readReceipts: saveSystem.data.strategy.insertionReadReceipts,
+    now: Date.now()
+  });
+  operation.insertionState = clone(state);
+  saveSystem.commit();
+  if (state.status === 'completed') {
+    startMissionRuntimeV62(context);
+    return;
+  }
+  pendingMissionLaunchV62 = context;
+  missionInsertionUiV62?.destroy();
+  const root = byId('mission-insertion-v62');
+  root.hidden = false;
+  byId('mission-runtime-v62').hidden = true;
+  missionInsertionUiV62 = new MissionInsertionUiV62({
+    root,
+    state,
+    mediaRegistry: MISSION_INSERTION_MEDIA_V62,
+    returnContext: 'operations',
+    onPersist: (serialized, metadata) => {
+      const current = saveSystem.data.strategy.currentOperation;
+      if (!current || current.id !== operation.id) return;
+      current.insertionState = clone(serialized);
+      saveSystem.commit();
+      if (metadata.reason === 'pause') queueMicrotask(() => showView('operations'));
+    },
+    onHooks: handleMissionInsertionHooksV62,
+    onComplete: ({ state: completedState, readReceipt }) => {
+      const current = saveSystem.data.strategy.currentOperation;
+      if (!current || current.id !== operation.id) return;
+      current.insertionState = clone(completedState);
+      if (readReceipt) {
+        const receipts = saveSystem.data.strategy.insertionReadReceipts;
+        const withoutDuplicate = receipts.filter((entry) => entry.key !== readReceipt.key);
+        saveSystem.data.strategy.insertionReadReceipts = [...withoutDuplicate, clone(readReceipt)].slice(-128);
+      }
+      saveSystem.commit();
+      startMissionRuntimeV62(pendingMissionLaunchV62 || context);
+    }
+  });
+}
+
 function launchCampaign(campaign = null) {
   const activeOperation = saveSystem.data.strategy.currentOperation;
   const resumedCampaign = activeOperation
@@ -769,36 +1054,13 @@ function launchCampaign(campaign = null) {
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
   saveSystem.commit();
   byId('mission-title').textContent = campaign.name;
+  byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   byId('mission-log').textContent = `MU/TH/UR · ${campaign.objective.toUpperCase()} · ${world.name} · ${missionLevel.templateLabel.toUpperCase()} · RISQUE ${deployment.operation.risk}%`;
   showView('play');
-  engine.setCoop(saveSystem.data.settings.coop);
-  engine.start({
-    seed: levelSeed.seed,
-    world: { ...world, ...worldState },
-    campaign,
-    enemyCatalog: ENEMIES,
-    weapon,
-    equipment,
-    crew,
-    vehicle,
-    costume,
-    levelSeed,
-    missionLevel,
-    apexDossier: operationLoadout.apexDossier,
-    neuroProfile: operationLoadout.neuroProfile,
-    difficulty: operationLoadout.difficulty,
-    accessibility: {
-      reducedMotion: Boolean(saveSystem.data.settings.reducedMotion),
-      subtitles: Boolean(saveSystem.data.settings.subtitles),
-      aimAssist: saveSystem.data.settings.aimAssist,
-      screenShake: saveSystem.data.settings.screenShake
-    },
-    editorProject: currentEditorProject('mission'),
-    strategicBriefing: deployment.operation,
-    resumeState: operationLoadout.resumeState
+  startMissionInsertionV62({
+    campaign, world, worldState, levelSeed, missionLevel,
+    weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
   });
-  if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
-  renderMissionEquipment();
   return true;
 }
 
@@ -816,7 +1078,29 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   return outcome;
 }
 
+function handleForgePlaytestEvent(event) {
+  const log = byId('mission-log');
+  if (!event?.type) return;
+  const labels = {
+    'mission-level-ready': 'NIVEAU FORGE COMPILÉ',
+    'mission-level-event': 'ÉVÉNEMENT FORGE',
+    'mission-zone': 'ZONE FORGE',
+    'squad-ready': 'ESCOUADE PLAYTEST DÉPLOYÉE',
+    'objective-action': 'OBJECTIF PLAYTEST',
+    'mission-complete': 'PLAYTEST TERMINÉ — CAMPAGNE INCHANGÉE',
+    'mission-failed': 'PLAYTEST ÉCHOUÉ — CAMPAGNE INCHANGÉE',
+    'player-down': 'JOUEUR À TERRE — CAMPAGNE INCHANGÉE'
+  };
+  const label = labels[event.type];
+  if (label) log.textContent = `${label}${event.eventId ? ` · ${event.eventId}` : ''}`;
+  if (event.type === 'mission-complete') toast('Playtest validé dans le bac à sable Forge. Aucune progression de campagne modifiée.');
+}
+
 function handleGameEvent(event) {
+  if (standaloneContext === 'forge-playtest') {
+    handleForgePlaytestEvent(event);
+    return;
+  }
   const log = byId('mission-log');
   if (!event?.type) return;
   if (event.type === 'caption') {
@@ -921,6 +1205,10 @@ function handleGameEvent(event) {
 }
 
 function persistHub(patch) {
+  if (standaloneContext === 'forge-playtest' && forgePlaytest) {
+    forgePlaytest.hubState = { ...(forgePlaytest.hubState || {}), ...clone(patch) };
+    return;
+  }
   Object.assign(saveSystem.data.hub, patch);
   saveSystem.commit();
 }
@@ -961,6 +1249,19 @@ function applyHubService(action) {
 
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
+  if (standaloneContext === 'forge-playtest') {
+    const status = byId('hub-status');
+    if (status) status.textContent = `PLAYTEST FORGE · ${interaction.action} · CAMPAGNE INCHANGÉE`;
+    return;
+  }
+  if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.action.startsWith('hub:vent-')) {
+    const status = byId('hub-status');
+    if (status) status.textContent = interaction.action === 'hub:vent-contact'
+      ? `CONDUIT · ${interaction.tracker?.nodeId || interaction.tracker?.edgeId || 'CONTACT'} · ${interaction.audio?.cue || 'ÉCHO MÉTALLIQUE'}`
+      : `CONDUIT · ${interaction.action.replace('hub:vent-', '').toUpperCase()}`;
+    return;
+  }
   if (interaction.action.startsWith('crisis:')) {
     const result = resolveHubCrisisEvent(saveSystem.data, interaction);
     if (result.handled) {
@@ -993,38 +1294,118 @@ function handleHubAction(interaction) {
 }
 
 function retreatMission() {
+  if (standaloneContext === 'forge-playtest') {
+    returnToForgeContext();
+    return;
+  }
   if (!saveSystem.data.strategy.currentOperation) { engine.stop(); showView('hub'); return; }
+  destroyMissionInsertionUiV62();
   const outcome = finalizeOperation(false, {}, 'retreat');
   engine.stop();
   toast(outcome?.result || 'Retraite enregistrée.');
   showView('hub');
 }
 
+function returnToForgeContext() {
+  engine.stop();
+  hubEngine.stop(false);
+  forgePlaytest = null;
+  standaloneContext = 'forge';
+  document.documentElement.classList.add('forge-mode');
+  showView('editor');
+  byId('breadcrumb').textContent = 'DEVELOPER // FRONTIER FORGE';
+  byId('view-title').textContent = 'Frontier Forge';
+  byId('return-title').textContent = 'FERMER FRONTIER FORGE';
+  byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
+}
+
+function launchForgeMissionPlaytest(project) {
+  const sandbox = clone(saveSystem.data);
+  sandbox.strategy.currentOperation = null;
+  sandbox.strategy.lastOperation = null;
+  const campaign = CAMPAIGNS.find((entry) => entry.id === sandbox.strategy.plannedCampaignId)
+    || CAMPAIGNS.find((entry) => sandbox.galaxy.unlockedWorldIds.includes(entry.worldId));
+  if (!campaign) throw new Error('Aucune campagne de référence disponible pour le playtest.');
+  const world = WORLDS.find((entry) => entry.id === campaign.worldId) || WORLDS[0];
+  const worldState = sandbox.galaxy.worldState[world.id];
+  const deployment = beginOperation(sandbox, campaign, world);
+  const operationLoadout = resolveOperationDeployment(sandbox, {
+    crewCatalog: CREW,
+    weaponCatalog: WEAPONS,
+    equipmentCatalog: EQUIPMENT,
+    vehicleCatalog: VEHICLES,
+    costumeCatalog: COSTUMES,
+    neuroProfileCatalog: NEURO_XENO_PROFILES,
+    apexDossierCatalog: APEX_DOSSIERS
+  });
+  const missionLevel = buildMissionLevelV52({ campaign, world: { ...world, ...worldState }, levelSeeds: LEVEL_SEEDS, variant: 0 });
+  Object.assign(deployment.operation, {
+    levelSeedId: missionLevel.levelSeed.id,
+    missionTemplateId: missionLevel.templateId,
+    missionLevelSignature: missionLevel.signature,
+    context: 'forge-playtest'
+  });
+  forgePlaytest = { kind: 'mission', project: clone(project), sandbox, campaignId: campaign.id };
+  standaloneContext = 'forge-playtest';
+  showView('play');
+  byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
+  byId('retreat-mission').textContent = 'TERMINER LE PLAYTEST';
+  byId('mission-title').textContent = `${campaign.name} · PLAYTEST FORGE`;
+  byId('mission-log').textContent = 'BAC À SABLE FORGE · progression, journal et sauvegarde campagne verrouillés.';
+  engine.setCoop(Boolean(sandbox.settings.coop));
+  engine.start({
+    seed: missionLevel.levelSeed.seed,
+    world: { ...world, ...worldState },
+    campaign,
+    enemyCatalog: ENEMIES,
+    weapon: operationLoadout.weapon || WEAPONS[0],
+    equipment: operationLoadout.equipment,
+    crew: operationLoadout.crew,
+    vehicle: operationLoadout.vehicle,
+    costume: operationLoadout.costume,
+    levelSeed: missionLevel.levelSeed,
+    missionLevel,
+    apexDossier: operationLoadout.apexDossier,
+    neuroProfile: operationLoadout.neuroProfile,
+    difficulty: operationLoadout.difficulty,
+    accessibility: clone(sandbox.settings),
+    editorProject: project,
+    strategicBriefing: deployment.operation,
+    resumeState: null
+  });
+  renderMissionEquipment();
+}
+
 function playtestEditor() {
   const project = editor.serialize();
   if (!project.validation.ok) { toast(project.validation.errors.join(' ')); return; }
+  forgeSaveSystem.upsert({ ...project, id: forgeSaveSystem.data.activeProjectId || `local-forge-${project.kind}`, name: `Frontier Forge ${title(project.kind)}` });
   if (project.kind === 'ship') {
+    const sandbox = clone(saveSystem.data);
+    forgePlaytest = { kind: 'ship', project: clone(project), sandbox, hubState: clone(sandbox.hub) };
+    standaloneContext = 'forge-playtest';
     showView('hub');
     hubEngine.stop(false);
-    hubEngine.start(saveSystem.data.hub, { editorProject: project });
+    hubEngine.start(forgePlaytest.hubState, {
+      editorProject: project,
+      routineContextV62: getHubRoutineContextV62(sandbox)
+    });
+    byId('return-title').textContent = 'RETOUR FRONTIER FORGE';
     return;
   }
-  const campaign = CAMPAIGNS.find((entry) => entry.id === saveSystem.data.strategy.plannedCampaignId)
-    || CAMPAIGNS.find((entry) => saveSystem.data.galaxy.unlockedWorldIds.includes(entry.worldId));
-  launchCampaign(campaign);
+  try { launchForgeMissionPlaytest(project); } catch (error) { toast(error.message); returnToForgeContext(); }
 }
 
 function setupEditor() {
   editor = new LevelEditor(byId('editor-canvas'), (project) => {
-    const id = `local-forge-${project.kind}`;
+    const active = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
+    const id = active?.kind === project.kind ? active.id : `local-forge-${project.kind}`;
     const record = { ...project, id, name: `Frontier Forge ${title(project.kind)}`, updatedAt: Date.now() };
-    const existing = saveSystem.data.editor.projects.find((entry) => entry.id === id);
-    if (existing) Object.assign(existing, record); else saveSystem.data.editor.projects.push(record);
-    saveSystem.data.editor.activeProjectId = id;
+    forgeSaveSystem.upsert(record);
     renderEditorStatus();
   });
   byId('editor-tools').innerHTML = TILE_TYPES.map((tool, index) => `<button class="tool-button ${index ? '' : 'active'}" data-editor-tool="${tool}">${title(tool)}</button>`).join('');
-  const saved = saveSystem.data.editor.projects.find((entry) => entry.id === saveSystem.data.editor.activeProjectId);
+  const saved = forgeSaveSystem.data.projects.find((entry) => entry.id === forgeSaveSystem.data.activeProjectId);
   if (saved) editor.load(saved);
   renderEditorStatus();
 }
@@ -1116,19 +1497,36 @@ function bind() {
   };
   byId('menu-toggle').onclick = () => document.querySelector('.rail').classList.toggle('open');
   byId('quick-save').onclick = () => {
+    if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return; }
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
     sessionStart = Date.now(); persistMissionResumeState(); saveSystem.commit(); renderClock(); toast('Sauvegarde locale confirmée.');
   };
   byId('return-title').onclick = () => {
+    if (standaloneContext === 'forge-playtest') {
+      returnToForgeContext();
+      return;
+    }
+    if (standaloneContext === 'forge') {
+      showTitleScreen();
+      return;
+    }
     persistMissionResumeState();
     saveSystem.commit();
     showTitleScreen();
   };
   byId('hub-dialogue-cancel').onclick = () => closeHubDialogue();
   byId('hub-dialogue-continue').onclick = () => {
+    if (pendingNpcConversationV62) {
+      closeHubDialogue();
+      return;
+    }
     const view = pendingHubInteraction?.contract?.view;
     closeHubDialogue({ resume: false });
     if (!openHubStation(view)) hubEngine.resume();
+  };
+  byId('hub-dialogue-choices').onclick = (event) => {
+    const choiceId = event.target.closest('[data-npc-dialogue-choice]')?.dataset.npcDialogueChoice;
+    if (choiceId) chooseNpcDialogueV62(choiceId);
   };
   all('[data-close-hub-station]').forEach((button) => {
     button.onclick = () => closeHubStation();
@@ -1141,13 +1539,18 @@ function bind() {
     } else if (activeHubStation) {
       event.preventDefault();
       closeHubStation();
+    } else if (standaloneContext === 'forge-playtest') {
+      event.preventDefault();
+      returnToForgeContext();
+    } else if (standaloneContext === 'forge') {
+      event.preventDefault();
+      showTitleScreen();
     }
   });
   byId('continue-operation').onclick = () => launchCampaign();
   byId('new-timeline').onclick = () => { hubEngine.stop(false); engine.stop(); saveSystem.newGame(saveSystem.profile); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); showView('hub'); };
-  ['world-search', 'campaign-search', 'armory-search', 'enemy-search', 'vehicle-search', 'costume-search', 'module-search'].forEach((id) => byId(id).addEventListener('input', () => ({
-    'world-search': renderGalaxy, 'campaign-search': renderCampaigns, 'armory-search': renderArmory,
-    'enemy-search': renderEnemies, 'vehicle-search': renderVehicles, 'costume-search': renderCrew, 'module-search': renderModules
+  ['world-search', 'campaign-search', 'costume-search', 'module-search'].forEach((id) => byId(id).addEventListener('input', () => ({
+    'world-search': renderGalaxy, 'campaign-search': renderCampaigns, 'costume-search': renderCrew, 'module-search': renderModules
   })[id]()));
   byId('campaign-mode').onchange = renderCampaigns;
   byId('armory-kind').onchange = renderArmory;
@@ -1165,7 +1568,10 @@ function bind() {
     saveSystem.data.strategy.selectedApexDossierId = null;
     return null;
   }, 'Cible Apex actualisée.');
-  byId('exit-hub').onclick = () => { hubEngine.stop(); saveSystem.commit(); showView('command'); };
+  byId('exit-hub').onclick = () => {
+    if (standaloneContext === 'forge-playtest') { returnToForgeContext(); return; }
+    hubEngine.stop(); saveSystem.commit(); showView('command');
+  };
   byId('retreat-mission').onclick = retreatMission;
   byId('editor-mode').onchange = (event) => { editor.setShipMode(event.target.value === 'ship'); renderEditorStatus(); };
   byId('editor-clear').onclick = () => editor.clear();
@@ -1173,7 +1579,7 @@ function bind() {
   byId('editor-redo').onclick = () => editor.redo();
   byId('editor-validate').onclick = () => { renderEditorStatus(); toast(editor.validate().ok ? 'Plan valide.' : editor.validate().errors.join(' ')); };
   byId('editor-play').onclick = playtestEditor;
-  byId('editor-export').onclick = () => download(`atf-v61-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
+  byId('editor-export').onclick = () => download(`atf-v62-forge-${editor.serialize().kind}-${Date.now()}.json`, JSON.stringify(editor.serialize(), null, 2));
   byId('editor-import').onchange = async (event) => { try { editor.load(JSON.parse(await event.target.files[0].text())); renderEditorStatus(); toast('Plan importé.'); } catch (error) { toast(error.message); } };
   const settingBindings = {
     'setting-difficulty': ['difficulty', (element) => element.value],
@@ -1191,7 +1597,14 @@ function bind() {
   byId('save-import').onchange = async (event) => { try { hubEngine.stop(false); engine.stop(); saveSystem.import(await event.target.files[0].text()); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); toast('Sauvegarde importée et migrée vers le schéma v51.'); } catch (error) { toast(error.message); } };
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
-  globalThis.addEventListener('beforeunload', () => { hubEngine.stop(); persistMissionResumeState(); engine.stop(); saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000); saveSystem.commit(); });
+  globalThis.addEventListener('beforeunload', () => {
+    hubEngine.stop();
+    engine.stop();
+    if (standaloneContext) return;
+    persistMissionResumeState();
+    saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
+    saveSystem.commit();
+  });
   bindDelegatedActions();
 }
 
@@ -1200,6 +1613,7 @@ async function boot() {
   if (!validation.ok) throw new Error(`Contrat de contenu invalide : ${validation.failures.join(', ')}`);
   setupEditor();
   setupRuntimeControls();
+  setupCatalogsV62();
   bind();
   applyRuntimeSettings();
   renderAll();
@@ -1215,7 +1629,20 @@ async function boot() {
   globalThis.__ATF_V61__ = {
     titleScreen,
     showTitleScreen,
+    openForge: openForgeContext,
+    get standaloneContext() { return standaloneContext; },
     snapshot: () => titleScreen.getSnapshot()
+  };
+  globalThis.__ATF_V62__ = {
+    forgeSaveSystem,
+    openForge: openForgeContext,
+    returnToForge: returnToForgeContext,
+    get playtest() { return forgePlaytest ? clone(forgePlaytest) : null; },
+    snapshot: () => ({
+      campaign: clone(saveSystem.data),
+      forge: clone(forgeSaveSystem.data),
+      context: standaloneContext
+    })
   };
   setTimeout(() => {
     byId('boot').remove();
@@ -1228,4 +1655,4 @@ boot().catch((error) => {
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { saveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen };
+export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen, openForgeContext };

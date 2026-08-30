@@ -9,9 +9,11 @@ import {
 } from '../src/game-v51-runtime.js';
 import { withV52MissionRuntime } from '../src/game-v52-runtime.js';
 import {
+  MISSION_LAYER_COVER_CONTRACTS_V62,
   MISSION_LEVEL_LAYER_FILES_V52,
   MISSION_LEVEL_ZONE_LAYER_FILES_V56,
   MISSION_LEVEL_ZONE_LAYER_FILES_V58,
+  computeMissionLayerCoverCropV62,
   resolveMissionLevelLayerFilesV56,
   withV52LevelRuntime
 } from '../src/game-v52-level-runtime.js';
@@ -107,6 +109,49 @@ function optionsFor(plan) {
     difficulty: 'standard'
   };
 }
+
+test('V62 normalise uniquement les trois fallbacks Tantalus sur une toile 2:1 sans déformer les sources', () => {
+  const farPath = MISSION_LEVEL_LAYER_FILES_V52['ship-interior-vertical'].far;
+  const midPath = MISSION_LEVEL_LAYER_FILES_V52['ship-interior-vertical'].mid;
+  const contract = MISSION_LAYER_COVER_CONTRACTS_V62[farPath];
+  assert.equal(contract.targetAspect, 2);
+  assert.equal(MISSION_LAYER_COVER_CONTRACTS_V62[midPath], contract);
+  assert.equal(MISSION_LAYER_COVER_CONTRACTS_V62['/assets/openai/metroidvania/zones/ship-docking-far.png'], undefined);
+
+  const farCrop = computeMissionLayerCoverCropV62({ naturalWidth: 1717, naturalHeight: 916 }, contract.targetAspect);
+  const midCrop = computeMissionLayerCoverCropV62({ naturalWidth: 1774, naturalHeight: 887 }, contract.targetAspect);
+  assert.deepEqual(
+    { x: farCrop.sourceX, width: farCrop.sourceWidth, height: farCrop.sourceHeight },
+    { x: 0, width: 1717, height: 858.5 }
+  );
+  assert.equal(farCrop.sourceY, 28.75);
+  assert.deepEqual(midCrop, {
+    sourceX: 0,
+    sourceY: 0,
+    sourceWidth: 1774,
+    sourceHeight: 887,
+    targetAspect: 2
+  });
+
+  withBrowserMocks(() => {
+    const engine = createEngine();
+    engine.camera = { x: 0, y: 0 };
+    const context = recordingContext();
+    const far = {
+      complete: true,
+      naturalWidth: 1717,
+      naturalHeight: 916,
+      missionCoverContractV62: contract
+    };
+    engine.drawMissionLevelCover(context, far, 0.075, 0.94, 1.08, 0);
+    assert.ok(context.drawCalls.length >= 2);
+    assert.ok(context.drawCalls.every((call) => call.length === 9));
+    const first = context.drawCalls[0];
+    assert.deepEqual(first.slice(1, 5), [0, 28.75, 1717, 858.5]);
+    assert.equal(first[7], 1555.2);
+    assert.equal(first[8], 777.6);
+  });
+});
 
 test('les six zones vaisseau V56 restent isolées tandis que V58 branche les 12 zones suivantes', () => withBrowserMocks(() => {
   const templateId = 'ship-interior-vertical';

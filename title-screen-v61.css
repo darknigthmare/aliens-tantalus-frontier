@@ -125,6 +125,28 @@
   color: #ffd5d1;
 }
 
+html.forge-mode .rail {
+  display: none;
+}
+
+html.forge-mode .shell {
+  margin-left: 0;
+}
+
+html.forge-mode #menu-toggle,
+html.forge-mode #quick-save,
+html.forge-mode .top-metrics > span {
+  display: none;
+}
+
+html.forge-mode main {
+  max-width: none;
+}
+
+html.forge-mode .topbar {
+  border-bottom-color: rgba(240, 195, 109, .45);
+}
+
 .title-profile-status,
 .title-build {
   position: absolute;

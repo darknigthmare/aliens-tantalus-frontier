@@ -29,7 +29,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v61 couvre la fermeture ESM, le hub physique, les stations et les accès véhicule', async () => {
+test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les conduits et l’insertion', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -69,7 +69,7 @@ test('le cache hors-ligne v61 couvre la fermeture ESM, le hub physique, les stat
     '/src/mission-door-art-v58.js',
     '/src/topology-coherence-v58.js'
   ]) {
-    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v61`);
+    assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v62`);
   }
 
   assert.equal(Object.keys(SPRITE_SHEETS).length, 191);
@@ -100,10 +100,23 @@ test('le cache hors-ligne v61 couvre la fermeture ESM, le hub physique, les stat
   ]);
   for (const assetPath of staticRuntimeAssets) {
     await access(localPath(assetPath));
-    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v61`);
+    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v61-runtime-1['"]/);
+  for (const stylesheetPath of ['/catalog-v62.css', '/mission-insertion-v62.css']) {
+    assert.ok(workerContains(worker, stylesheetPath), `${stylesheetPath} manque dans CORE v62`);
+  }
+  for (const bitmapPath of [
+    '/assets/openai/hub/vents/tantalus-duct-interior-v62.png',
+    '/assets/openai/mission/insertion/tantalus-dropship-approach-v62.png',
+    '/assets/openai/mission/insertion/tantalus-apc-approach-v62.png',
+    '/assets/openai/mission/insertion/tantalus-foot-approach-v62.png'
+  ]) {
+    await access(localPath(bitmapPath));
+    assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
+  }
+
+  assert.match(worker, /const CACHE = ['"]atf-v62-runtime-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -116,20 +129,25 @@ test('le cache hors-ligne v61 couvre la fermeture ESM, le hub physique, les stat
     '/docs/VERSION_HISTORY_V61.md',
     '/docs/V61_LEVEL_DESIGN_AUDIT.md',
     '/docs/ART_PROVENANCE_V61.md',
+    '/docs/ART_PROVENANCE_V62.md',
+    '/docs/V62_IMPLEMENTATION_AUDIT.md',
+    '/docs/references/V62_PNG_ALPHA_AUDIT.md',
+    '/docs/references/V62_PNG_ALPHA_AUDIT.json',
     '/docs/references/V61_ASSET_COMPLETION_MATRIX.md',
     '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md'
   ]) {
-    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v61`);
+    assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v62`);
   }
-  assert.match(worker, /async function precacheV61\(\)/);
+  assert.match(worker, /async function precacheV62\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });
 
 test('le build et le déploiement excluent les masters QA raw sans supprimer les sources', async () => {
-  const [build, vercelIgnore] = await Promise.all([
+  const [build, vercelIgnore, vercelConfig] = await Promise.all([
     readFile('scripts/build.mjs', 'utf8'),
-    readFile('.vercelignore', 'utf8')
+    readFile('.vercelignore', 'utf8'),
+    readFile('vercel.json', 'utf8').then(JSON.parse)
   ]);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'raw'\), \{ recursive: true, force: true \}\)/);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'\), \{ recursive: true, force: true \}\)/);
@@ -140,4 +158,8 @@ test('le build et le déploiement excluent les masters QA raw sans supprimer les
   assert.match(vercelIgnore, /^\.tmp\/\*\*$/m);
   assert.match(vercelIgnore, /^node_modules$/m);
   assert.match(vercelIgnore, /^dist$/m);
+  assert.ok(
+    vercelConfig.rewrites.some((rewrite) => rewrite.source.includes('.*\\.css$')),
+    'les feuilles V62 doivent échapper au fallback SPA Vercel'
+  );
 });

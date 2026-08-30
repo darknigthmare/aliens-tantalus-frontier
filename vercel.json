@@ -20,6 +20,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/((?!assets/|src/|docs/|styles\\.css$|manifest\\.webmanifest$|sw\\.js$|build-info\\.json$|LICENSE_NOTICE\\.md$).*)", "destination": "/index.html" }
+    { "source": "/((?!assets/|src/|docs/|.*\\.css$|manifest\\.webmanifest$|sw\\.js$|build-info\\.json$|LICENSE_NOTICE\\.md$).*)", "destination": "/index.html" }
   ]
 }

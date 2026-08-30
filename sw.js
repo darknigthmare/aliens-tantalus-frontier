@@ -1,17 +1,20 @@
-const CACHE = 'atf-v61-runtime-1';
+const CACHE = 'atf-v62-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
-  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css',
+  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
   '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md', '/docs/V58_ROOM_COHERENCE_AUDIT.md',
   '/docs/VERSION_HISTORY_V59.md', '/docs/ART_PROVENANCE_V59.md',
   '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
   '/docs/VERSION_HISTORY_V60.md', '/docs/V60_LEVEL_DESIGN_AUDIT.md',
   '/docs/references/V60_ASSET_COMPLETION_MATRIX.md',
-  '/docs/VERSION_HISTORY_V61.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md',
+  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md',
+  '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
   '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md',
   '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
-  '/src/excel-content-bridge-v61.js',
+  '/src/excel-content-bridge-v61.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
+  '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
+  '/src/npc-dialogue-v62.js', '/src/vent-network-v62.js', '/src/hub-v62-runtime.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
@@ -31,6 +34,10 @@ const CORE = [
   '/assets/openai/hub/props/operations-table-v61.png',
   '/assets/openai/hub/props/armory-counter-v61.png',
   '/assets/openai/hub/props/hangar-control-booth-v61.png',
+  '/assets/openai/hub/vents/tantalus-duct-interior-v62.png',
+  '/assets/openai/mission/insertion/tantalus-dropship-approach-v62.png',
+  '/assets/openai/mission/insertion/tantalus-apc-approach-v62.png',
+  '/assets/openai/mission/insertion/tantalus-foot-approach-v62.png',
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
@@ -262,7 +269,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV61() {
+async function precacheV62() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -275,7 +282,7 @@ async function precacheV61() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV61().then(() => self.skipWaiting())
+  precacheV62().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

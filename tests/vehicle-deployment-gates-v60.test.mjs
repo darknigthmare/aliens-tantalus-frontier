@@ -126,8 +126,13 @@ test('le runtime conserve l’identité demandée mais ne crée aucun véhicule 
 }));
 
 test('l’UI annonce honnêtement le blocage et ne propose aucun bouton d’affectation', async () => {
-  const source = await readFile(new URL('../src/app.js', import.meta.url), 'utf8');
+  const [source, catalogUi] = await Promise.all([
+    readFile(new URL('../src/app.js', import.meta.url), 'utf8'),
+    readFile(new URL('../src/catalog-ui-v62.js', import.meta.url), 'utf8')
+  ]);
   assert.match(source, /PLAQUE EXACTE REQUISE/);
   assert.match(source, /CANON BLOQUÉ/);
-  assert.match(source, /data-deployment-status/);
+  assert.match(source, /dataset: \{ deploymentStatus: vehicleGate\.status \}/);
+  assert.match(catalogUi, /button\.dataset\[key\] = value/);
+  assert.doesNotMatch(source.slice(source.indexOf('if \(vehicleGate && !vehicleGate\.ready\)'), source.indexOf('if \(!owned\)')), /selectVehicle/);
 });

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { WORLDS } from '../src/content.js';
+import { normalizeInfestationChainV62 } from '../src/infestation-chain-v62.js';
 import { createDefaultSave, migrateSave } from '../src/save.js';
 import {
   CRISIS_KINDS,
@@ -25,29 +26,44 @@ function neutralizeWorlds(save, infestation = 0, quarantine = 80) {
   }
 }
 
-function prepareAutomaticCrisis(kind) {
-  const save = createDefaultSave(2);
+const CRISIS_SOURCE_TYPES = Object.freeze({
+  xenomorph: 'live-specimen',
+  synthetic: 'synthetic-intrusion',
+  pathogen: 'pathogen-sample'
+});
+
+function prepareCausalCrisis(kind, profile = 2) {
+  const save = createDefaultSave(profile);
   neutralizeWorlds(save);
   Object.assign(save.hub.systems, { hull: 100, power: 100, oxygen: 100, security: 100, quarantine: 100, morale: 100 });
-  if (kind === 'xenomorph') {
-    save.galaxy.worldState[save.galaxy.unlockedWorldIds[0]].infestation = 100;
-    save.hub.systems.hull = 18;
-  }
-  if (kind === 'synthetic') {
-    save.hub.systems.security = 0;
-    save.hub.systems.power = 0;
-  }
-  if (kind === 'pathogen') {
-    neutralizeWorlds(save, 42, 0);
-    save.hub.systems.quarantine = 0;
-    save.hub.systems.oxygen = 0;
-  }
+  const sourceType = CRISIS_SOURCE_TYPES[kind];
+  save.hub.infestationChain = normalizeInfestationChainV62({
+    id: `test-chain-${kind}`,
+    kind,
+    stage: 'infestation',
+    source: {
+      type: sourceType,
+      eventId: `test-causal-event-${kind}`,
+      worldId: save.galaxy.unlockedWorldIds[0],
+      label: `Événement causal ${kind}`
+    },
+    severity: 84,
+    certainty: 100,
+    estimatedThreats: 3,
+    startedAtHours: 0,
+    updatedAtHours: 18,
+    containment: { score: 0, attempts: [], resolved: false, failed: true },
+    history: [
+      { stage: 'exposure', atHours: 0, reason: 'Retour physique enregistré' },
+      { stage: 'infestation', atHours: 18, reason: 'Rupture physique du confinement' }
+    ]
+  });
   return save;
 }
 
-test('la pression produit de façon déterministe les trois types de crise jouable', () => {
+test('un événement causal rompu produit de façon déterministe les trois types de crise jouable', () => {
   for (const kind of CRISIS_KINDS) {
-    const save = prepareAutomaticCrisis(kind);
+    const save = prepareCausalCrisis(kind);
     const before = structuredClone(save);
     const first = deriveHubCrisis(save);
     const second = deriveHubCrisis(save);
@@ -62,13 +78,14 @@ test('la pression produit de façon déterministe les trois types de crise jouab
 });
 
 test('création mutable et variante immuable écrivent exactement activeCrisis', () => {
-  const save = createDefaultSave(1);
-  const immutable = withHubCrisis(save, { force: true, kind: 'pathogen', deck: 2, roomId: 'quarantine' });
-  assert.equal(save.hub.activeCrisis, null);
+  const pathogenSave = prepareCausalCrisis('pathogen', 1);
+  const immutable = withHubCrisis(pathogenSave);
+  assert.equal(pathogenSave.hub.activeCrisis, null);
   assert.deepEqual(immutable.save.hub.activeCrisis, immutable.crisis);
   assert.deepEqual(Object.keys(immutable.crisis).sort(), crisisKeys);
 
-  const crisis = createHubCrisis(save, { force: true, kind: 'synthetic' });
+  const save = prepareCausalCrisis('synthetic', 1);
+  const crisis = createHubCrisis(save);
   assert.deepEqual(save.hub.activeCrisis, crisis);
   assert.deepEqual(Object.keys(save.hub.activeCrisis).sort(), crisisKeys);
   const persisted = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
@@ -77,11 +94,11 @@ test('création mutable et variante immuable écrivent exactement activeCrisis',
 
 test('une résolution réussie applique systèmes, ressources, stress et dégâts module pour chaque type', () => {
   for (const kind of CRISIS_KINDS) {
-    const save = createDefaultSave(1);
+    const save = prepareCausalCrisis(kind, 1);
     Object.assign(save.hub.systems, { hull: 60, power: 60, oxygen: 60, security: 60, quarantine: 60, morale: 60 });
     Object.assign(save.galaxy.resources, { credits: 1000, alloy: 100, fuel: 100, medical: 100, research: 100, pathogen: 10 });
     save.hub.moduleIntegrity = Object.fromEntries(save.hub.moduleIds.map((id) => [id, 100]));
-    const crisis = createHubCrisis(save, { force: true, kind });
+    const crisis = createHubCrisis(save);
     const before = structuredClone(save);
     const planned = planHubCrisisResolution(save, {
       action: HUB_CRISIS_ACTIONS.resolved,
@@ -102,11 +119,11 @@ test('une résolution réussie applique systèmes, ressources, stress et dégât
 });
 
 test('player-down fonctionne même si le runtime a déjà effacé activeCrisis', () => {
-  const save = createDefaultSave(3);
+  const save = prepareCausalCrisis('pathogen', 3);
   Object.assign(save.hub.systems, { hull: 70, power: 70, oxygen: 70, security: 70, quarantine: 70, morale: 70 });
   Object.assign(save.galaxy.resources, { credits: 1200, alloy: 120, fuel: 80, medical: 30, research: 30, pathogen: 0 });
   save.hub.moduleIntegrity = Object.fromEntries(save.hub.moduleIds.map((id) => [id, 100]));
-  const crisis = createHubCrisis(save, { force: true, kind: 'pathogen' });
+  const crisis = createHubCrisis(save);
   save.hub.activeCrisis = null;
   const beforeStress = save.crew.map((member) => member.stress);
   const result = resolveHubCrisisEvent(save, {
@@ -132,7 +149,7 @@ test('player-down fonctionne même si le runtime a déjà effacé activeCrisis',
 });
 
 test('la simulation galactique avance les quatre états, crée alertes, routes et crise sans muter la source', () => {
-  const save = createDefaultSave(1);
+  const save = prepareCausalCrisis('xenomorph', 1);
   save.clock = { day: 7, hour: 3 };
   const threatenedId = save.galaxy.unlockedWorldIds[0];
   Object.assign(save.galaxy.worldState[threatenedId], {
@@ -143,7 +160,7 @@ test('la simulation galactique avance les quatre états, crée alertes, routes e
   });
   save.hub.systems.quarantine = 22;
   const before = structuredClone(save);
-  const result = simulateGalaxy(save, { hours: 12, forceCrisis: true, crisisKind: 'xenomorph' });
+  const result = simulateGalaxy(save, { hours: 12 });
   const afterThreat = result.save.galaxy.worldState[threatenedId];
   assert.deepEqual(save, before);
   assert.deepEqual(result.clock, { day: 7, hour: 15 });
@@ -158,11 +175,11 @@ test('la simulation galactique avance les quatre états, crée alertes, routes e
 });
 
 test('advanceGalaxy persiste mondes, alertes, déblocages et crise après sérialisation', () => {
-  const save = createDefaultSave(2);
+  const save = prepareCausalCrisis('synthetic', 2);
   save.clock = { day: 10, hour: 0 };
   const initialUnlocked = save.galaxy.unlockedWorldIds.length;
   const pressureBefore = getHubCrisisPressure(save);
-  const result = advanceGalaxy(save, { hours: 6, forceCrisis: true, crisisKind: 'synthetic' });
+  const result = advanceGalaxy(save, { hours: 6 });
   assert.equal(result.save, save);
   assert.ok(save.galaxy.unlockedWorldIds.length > initialUnlocked);
   assert.ok(save.galaxy.alerts.length > 0);

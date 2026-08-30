@@ -155,8 +155,8 @@ test('app branche accessibilité, captions sans commit et cooldown diplomatique'
   assert.match(app, /diplomacyDisabled/);
   assert.match(app, /neuro-profile-select'[\s\S]*assertOperationMutable\(\)/);
   assert.match(app, /apex-dossier-select'[\s\S]*assertOperationMutable\(\)/);
-  assert.match(app, /data-procure-kind=[\s\S]*loadoutLocked \|\| !canAfford/);
-  assert.match(app, /data-select-vehicle=[\s\S]*equipped \|\| loadoutLocked/);
+  assert.match(app, /disabled: loadoutLocked \|\| !canAfford\(saveSystem\.data, quote\)[\s\S]*dataset: \{ procureKind: kind, procureId: item\.id \}/);
+  assert.match(app, /disabled: equipped \|\| loadoutLocked[\s\S]*\? \{ selectVehicle: item\.id \}/);
   assert.match(app, /data-crew-assign=[\s\S]*loadoutLocked \|\| member\.status/);
   assert.match(app, /data-crew-treat=[\s\S]*loadoutLocked \|\| member\.status/);
   assert.match(app, /data-costume-id=[\s\S]*selected \|\| loadoutLocked/);

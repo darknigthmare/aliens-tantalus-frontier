@@ -9,7 +9,7 @@ export function resolveTitleContinueTarget(save) {
 const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 
 export class TitleScreenController {
-  constructor({ root, app, getSave, onUnlock, onContinue, onNewTimeline, onOptions }) {
+  constructor({ root, app, getSave, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
@@ -17,6 +17,7 @@ export class TitleScreenController {
     this.onUnlock = onUnlock;
     this.onContinue = onContinue;
     this.onNewTimeline = onNewTimeline;
+    this.onForge = onForge;
     this.onOptions = onOptions;
     this.state = 'idle';
     this.gamepadFrame = 0;
@@ -26,6 +27,7 @@ export class TitleScreenController {
     this.menu = root.querySelector('#title-menu');
     this.continueButton = root.querySelector('#title-continue');
     this.newButton = root.querySelector('#title-new');
+    this.forgeButton = root.querySelector('#title-forge');
     this.optionsButton = root.querySelector('#title-options');
     this.profileStatus = root.querySelector('#title-profile-status');
     this.liveStatus = root.querySelector('#title-live-status');
@@ -37,6 +39,7 @@ export class TitleScreenController {
     this.continueButton.addEventListener('click', () => this.continueGame());
     this.optionsButton.addEventListener('click', () => this.openOptions());
     this.newButton.addEventListener('click', () => this.requestNewTimeline());
+    this.forgeButton.addEventListener('click', () => this.openForge());
     globalThis.addEventListener('keydown', (event) => this.handleKeydown(event));
   }
 
@@ -102,11 +105,16 @@ export class TitleScreenController {
     this.onOptions?.();
   }
 
+  openForge() {
+    this.hide();
+    this.onForge?.();
+  }
+
   requestNewTimeline() {
     if (this.newButton.dataset.confirm !== 'true') {
       this.newButton.dataset.confirm = 'true';
-      this.newButton.textContent = 'CONFIRMER LA NOUVELLE CHRONOLOGIE';
-      this.liveStatus.textContent = 'Confirmez pour remplacer la chronologie du profil actif.';
+      this.newButton.textContent = 'CONFIRMER LA NOUVELLE PARTIE';
+      this.liveStatus.textContent = 'Confirmez pour remplacer la partie du profil actif.';
       clearTimeout(this.confirmTimer);
       this.confirmTimer = setTimeout(() => this.cancelNewTimelineConfirmation(), 5000);
       return;
@@ -122,7 +130,7 @@ export class TitleScreenController {
     this.confirmTimer = 0;
     if (!this.newButton) return;
     this.newButton.dataset.confirm = 'false';
-    this.newButton.textContent = 'NOUVELLE CHRONOLOGIE';
+    this.newButton.textContent = 'NOUVELLE PARTIE';
   }
 
   handleKeydown(event) {
@@ -167,6 +175,7 @@ export class TitleScreenController {
       visible: !this.root.hidden,
       state: this.state,
       menuVisible: !this.menu.hidden,
+      forgeAvailable: Boolean(this.forgeButton),
       continueTarget: resolveTitleContinueTarget(this.getSave())
     };
   }

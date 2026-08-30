@@ -3,13 +3,20 @@ import {
   CRISIS_KINDS,
   deriveHubCrisis as deriveCoreCrisis,
   planHubCrisisResolution,
-  resolveHubCrisisEvent,
+  resolveHubCrisisEvent as resolveCoreHubCrisisEvent,
   HUB_CRISIS_ACTIONS
 } from './world-crisis-core.js';
 import { simulateGalaxy as simulateCoreGalaxy } from './world-crisis-core.js';
+import {
+  advanceInfestationChainV62,
+  createInfestationExposureV62,
+  deriveCausalHubCrisisV62,
+  getInfestationHudStateV62,
+  normalizeInfestationChainV62,
+  planInfestationAdvanceV62
+} from './infestation-chain-v62.js';
 
-export { CRISIS_KINDS, HUB_CRISIS_ACTIONS, planHubCrisisResolution, resolveHubCrisisEvent };
-export const resolveHubCrisis = resolveHubCrisisEvent;
+export { CRISIS_KINDS, HUB_CRISIS_ACTIONS, planHubCrisisResolution, getInfestationHudStateV62 };
 
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, Number(value) || 0));
 const round = (value) => Math.round(value * 100) / 100;
@@ -66,15 +73,15 @@ export function getHubCrisisPressure(save) {
 export function deriveHubCrisis(save, options = {}) {
   const current = save?.hub?.activeCrisis;
   if (current && !current.resolved) return deriveCoreCrisis(save, options);
-  const pressure = getHubCrisisPressure(save);
-  const requested = CRISIS_KINDS.includes(options.kind) ? options.kind : null;
-  const kind = requested || [...CRISIS_KINDS].sort((left, right) => pressure.scores[right] - pressure.scores[left] || left.localeCompare(right))[0];
-  const minimumScore = Math.max(0, Number(options.minimumScore ?? 68) || 0);
-  if (!options.force && !requested && pressure.scores[kind] < minimumScore) return null;
-  return deriveCoreCrisis(save, { ...options, force: true, kind });
+  return deriveCausalHubCrisisV62(save);
 }
 
 export function createHubCrisis(save, options = {}) {
+  if (options.sourceEvent) createInfestationExposureV62(save, {
+    ...options.sourceEvent,
+    kind: options.kind || options.sourceEvent.kind
+  });
+  if (options.advanceInfestation) advanceInfestationChainV62(save, options.advanceInfestation === true ? {} : options.advanceInfestation);
   const crisis = deriveHubCrisis(save, options);
   if (crisis) save.hub.activeCrisis = structuredClone(crisis);
   return crisis;
@@ -85,6 +92,27 @@ export function withHubCrisis(save, options = {}) {
   const crisis = createHubCrisis(nextSave, options);
   return { save: nextSave, crisis };
 }
+
+export function resolveHubCrisisEvent(save, event = {}) {
+  const result = resolveCoreHubCrisisEvent(save, event);
+  if (!result.handled) return result;
+  const chain = normalizeInfestationChainV62(save?.hub?.infestationChain);
+  if (chain && chain.stage === 'infestation') {
+    chain.resolved = true;
+    chain.updatedAtHours = absoluteHours(save.clock);
+    chain.containment.resolved = result.outcome === 'resolved';
+    chain.containment.failed = result.outcome !== 'resolved';
+    chain.history.push({
+      stage: 'infestation',
+      atHours: chain.updatedAtHours,
+      reason: result.outcome === 'resolved' ? 'Infestation neutralisée dans le niveau physique' : 'Intervention échouée, secteur condamné'
+    });
+    save.hub.infestationChain = chain;
+  }
+  return { ...result, save };
+}
+
+export const resolveHubCrisis = resolveHubCrisisEvent;
 
 function unlockEmergencyRoutes(result, sourceSave, hours) {
   if (hours < 12 || result.unlocks.length >= 2) return result;
@@ -112,20 +140,28 @@ export function simulateGalaxy(save, options = {}) {
   const hours = Math.max(0, Number(options.hours ?? 6) || 0);
   const result = simulateCoreGalaxy(save, { ...options, generateCrisis: false });
   unlockEmergencyRoutes(result, save, hours);
-  const active = result.save.hub.activeCrisis && !result.save.hub.activeCrisis.resolved ? result.save.hub.activeCrisis : null;
-  const crisis = options.generateCrisis === false ? active : active || deriveHubCrisis(result.save, {
-    force: Boolean(options.forceCrisis),
-    kind: options.crisisKind,
-    minimumScore: options.minimumCrisisScore
+  if (options.sourceEvent) createInfestationExposureV62(result.save, {
+    ...options.sourceEvent,
+    kind: options.crisisKind || options.sourceEvent.kind
   });
+  const active = result.save.hub.activeCrisis && !result.save.hub.activeCrisis.resolved ? result.save.hub.activeCrisis : null;
+  let crisis = active;
+  if (options.generateCrisis !== false && !active) {
+    const infestation = planInfestationAdvanceV62(result.save);
+    result.save = infestation.save;
+    crisis = infestation.crisis;
+  }
   if (crisis && !active) {
     result.save.hub.activeCrisis = structuredClone(crisis);
+    const hud = getInfestationHudStateV62(result.save);
     const alert = {
       id: `alert-${crisis.id}`,
-      worldId: getHubCrisisPressure(result.save).sourceWorldId,
+      worldId: result.save.hub.infestationChain?.source?.worldId || null,
       type: 'hub-crisis',
       severity: 'critical',
-      message: `Incident ${crisis.kind} actif sur le pont ${crisis.deck + 1} du Tantalus.`,
+      message: hud.locationKnown
+        ? `Rupture de confinement confirmée sur le pont ${crisis.deck + 1} du Tantalus.`
+        : 'MU/TH/UR confirme une rupture de confinement dont la localisation reste incertaine.',
       day: result.clock.day,
       hour: result.clock.hour
     };

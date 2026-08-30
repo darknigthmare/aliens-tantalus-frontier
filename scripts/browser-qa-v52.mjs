@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v61');
+  || path.resolve('.qa', 'browser-v62');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -201,6 +201,37 @@ async function key(code, keyValue = code) {
   await wait(120);
 }
 
+async function completeMissionInsertionV62(label) {
+  const initial = await waitFor(`(() => {
+    const root = document.querySelector('#mission-insertion-v62');
+    return root && !root.hidden && root.dataset.insertionStatus === 'active'
+      ? { phase: root.dataset.insertionPhase, approach: root.dataset.insertionApproach }
+      : null;
+  })()`, `${label} : insertion V62 non présentée`, 12000);
+  const phases = [initial.phase];
+  for (let step = 0; step < 8; step += 1) {
+    const state = await evaluate(`(() => {
+      const root = document.querySelector('#mission-insertion-v62');
+      return {
+        hidden: !root || root.hidden,
+        status: root?.dataset.insertionStatus || null,
+        phase: root?.dataset.insertionPhase || null,
+        paused: Boolean(root?.querySelector('[data-insertion-action="resume"]'))
+      };
+    })()`);
+    if (state.hidden || state.status === 'completed') break;
+    await key(state.paused ? 'KeyP' : 'Enter', state.paused ? 'p' : 'Enter');
+    const nextPhase = await evaluate(`document.querySelector('#mission-insertion-v62')?.dataset.insertionPhase || null`);
+    if (nextPhase && phases.at(-1) !== nextPhase) phases.push(nextPhase);
+  }
+  await waitFor(
+    `document.querySelector('#mission-insertion-v62').hidden && Boolean(globalThis.__ATF_GAME__?.getSnapshot().running)`,
+    `${label} : transfert de contrôle après insertion V62 absent`,
+    20000
+  );
+  return { ...initial, phases };
+}
+
 async function hold(code, keyValue, milliseconds) {
   await command('Input.dispatchKeyEvent', { type: 'keyDown', code, key: keyValue });
   await wait(milliseconds);
@@ -260,10 +291,10 @@ try {
   await command('Network.setCacheDisabled', { cacheDisabled: true });
   await command('Network.setBypassServiceWorker', { bypass: true });
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 980, deviceScaleFactor: 1, mobile: false });
-  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v61-${Date.now()}` });
+  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v62-${Date.now()}` });
 
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden && document.querySelector('#app').hidden)`, 'L écran titre V61 ne se charge pas', 20000);
-  report.screenshots.push(await capture('alien-tantalus-v61-title-idle-desktop.png'));
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden && document.querySelector('#app').hidden)`, 'L écran titre V62 ne se charge pas', 20000);
+  report.screenshots.push(await capture('alien-tantalus-v62-title-idle-desktop.png'));
   const shell = await evaluate(`(() => ({
     title: document.title,
     release: globalThis.__ATF_V51__.saveSystem.data.release,
@@ -277,16 +308,16 @@ try {
     titleVisible: !document.querySelector('#title-screen').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v61') && shell.release === '61.0.0' && shell.schema === 51, `Version publique incorrecte: ${JSON.stringify(shell)}`);
-  requireThat(shell.titleVisible && !shell.appVisible && shell.titleSnapshot.state === 'idle' && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell V61 incomplet: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v62') && shell.release === '62.0.0' && shell.schema === 52, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.titleVisible && !shell.appVisible && shell.titleSnapshot.state === 'idle' && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell V62 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
-  report.checkpoints.push('title-v61-idle');
+  report.checkpoints.push('title-v62-idle');
   await evaluate(`globalThis.__ATF_V61__.titleScreen.openMenu()`);
-  await waitFor(`globalThis.__ATF_V61__.snapshot().state === 'menu' && !document.querySelector('#title-menu').hidden`, 'Menu titre V61 inaccessible');
-  report.screenshots.push(await capture('alien-tantalus-v61-title-menu-desktop.png'));
+  await waitFor(`globalThis.__ATF_V61__.snapshot().state === 'menu' && !document.querySelector('#title-menu').hidden`, 'Menu titre V62 inaccessible');
+  report.screenshots.push(await capture('alien-tantalus-v62-title-menu-desktop.png'));
   await click('#title-continue');
-  await waitFor(`Boolean(document.querySelector('#title-screen').hidden && !document.querySelector('#app').hidden)`, 'Continuation V61 sans ouverture du jeu');
-  report.checkpoints.push('title-v61-menu-continue');
+  await waitFor(`Boolean(document.querySelector('#title-screen').hidden && !document.querySelector('#app').hidden)`, 'Continuation V62 sans ouverture du jeu');
+  report.checkpoints.push('title-v62-menu-continue');
 
   await evaluate(`(() => {
     const api = globalThis.__ATF_V51__;
@@ -408,6 +439,9 @@ try {
   const campaignId = campaignChoice.dataset.planCampaign;
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.plannedCampaignId === ${JSON.stringify(campaignId)}`, 'Campagne non planifiée');
   await click('#operation-launch');
+  const firstInsertion = await completeMissionInsertionV62('Mission principale');
+  report.insertion = { first: firstInsertion };
+  report.checkpoints.push('mission-insertion-v62-keyboard');
   await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission non lancée', 20000);
   await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission manquants', 30000);
   await waitFor(`Object.keys(globalThis.__ATF_GAME__.getSnapshot().animationRuntime?.activeClips || {}).some((key) => key.startsWith('player:'))`, 'Clip joueur Neuro non échantillonné');
@@ -956,6 +990,7 @@ try {
   await click('[data-plan-campaign="signature-01"]:not([disabled])');
   await waitFor(`globalThis.__ATF_V51__.saveSystem.data.strategy.plannedCampaignId === 'signature-01'`, 'Campagne holdout v55 non planifiée');
   await click('#operation-launch');
+  report.insertion.holdout = await completeMissionInsertionV62('Mission holdout');
   await waitFor(`Boolean(globalThis.__ATF_GAME__?.getSnapshot().running && document.querySelector('[data-panel="play"]').classList.contains('active'))`, 'Mission holdout v55 non lancée', 20000);
   await waitFor(`globalThis.__ATF_GAME__.getAssetReport().missing.length === 0`, 'Assets de mission holdout v55 manquants', 30000);
   await waitFor(`Object.entries(globalThis.__ATF_GAME__.getSnapshot().animationRuntime?.activeClips || {}).some(([key, clip]) => key.startsWith('player:') && clip.startsWith('player.'))`, 'Clip Marine standard non échantillonné');
@@ -1413,7 +1448,35 @@ try {
   report.checkpoints.push('hub-modular-v55');
   report.checkpoints.push('hub-ud4l-production-v60');
 
-  await click('[data-view="editor"]');
+  const campaignBeforeForge = await evaluate(`JSON.stringify(globalThis.__ATF_V51__.saveSystem.data)`);
+  await click('#return-title');
+  await waitFor(`!document.querySelector('#title-screen').hidden && document.querySelector('#app').hidden`, 'Retour écran titre avant Forge impossible');
+  await evaluate(`globalThis.__ATF_V61__.titleScreen.openMenu()`);
+  await click('#title-forge');
+  const forgeStandalone = await waitFor(`(() => {
+    const snapshot = globalThis.__ATF_V62__?.snapshot();
+    const editorPanel = document.querySelector('[data-panel="editor"]');
+    return snapshot?.context === 'forge'
+      && editorPanel?.classList.contains('active')
+      && document.documentElement.classList.contains('forge-mode')
+      && !document.querySelector('#app').hidden
+      && document.querySelector('#title-screen').hidden
+      && document.querySelector('#editor-canvas')
+      && document.querySelector('#editor-tools')
+      ? {
+          context: snapshot.context,
+          projectCount: snapshot.forge.projects.length,
+          breadcrumb: document.querySelector('#breadcrumb').textContent.trim(),
+          surface: editorPanel.dataset.panel
+        }
+      : null;
+  })()`, 'Frontier Forge autonome inaccessible', 12000);
+  requireThat(
+    forgeStandalone.context === 'forge'
+      && forgeStandalone.surface === 'editor'
+      && forgeStandalone.breadcrumb.includes('FRONTIER FORGE'),
+    `Surface Forge autonome invalide: ${JSON.stringify(forgeStandalone)}`
+  );
   await click('#editor-clear');
   await selectValue('#editor-mode', 'mission');
   await paintEditorTile('floor', 3, 15);
@@ -1433,9 +1496,8 @@ try {
   const forgeMission = await evaluate(`globalThis.__ATF_GAME__.getSnapshot()`);
   requireThat(forgeMission.editorTileCount === 3 && forgeMission.editorTileCounts.spawn === 1 && forgeMission.editorTileCounts.objective === 1, `Blocs Forge absents du runtime mission: ${JSON.stringify(forgeMission)}`);
   await click('#retreat-mission');
-  await waitFor(`document.querySelector('[data-panel="hub"]').classList.contains('active')`, 'Retour du playtest mission impossible');
+  await waitFor(`globalThis.__ATF_V62__.snapshot().context === 'forge' && document.querySelector('[data-panel="editor"]').classList.contains('active')`, 'Retour du playtest mission vers Forge impossible');
 
-  await click('[data-view="editor"]');
   await selectValue('#editor-mode', 'ship');
   await click('#editor-validate');
   await click('#editor-play');
@@ -1443,7 +1505,11 @@ try {
   const forgeShip = await evaluate(`globalThis.__ATF_HUB__.getSnapshot()`);
   requireThat(forgeShip.editorPlaytest && forgeShip.objectiveCount === 1 && forgeShip.platformCount >= 1, `Blocs Forge absents du runtime vaisseau: ${JSON.stringify(forgeShip)}`);
   await click('#quick-save');
-  report.forge = { editor: forge, undo: forgeUndo, mission: forgeMission, ship: forgeShip };
+  await click('#return-title');
+  await waitFor(`globalThis.__ATF_V62__.snapshot().context === 'forge' && document.querySelector('[data-panel="editor"]').classList.contains('active')`, 'Retour du playtest vaisseau vers Forge impossible');
+  const campaignAfterForge = await evaluate(`JSON.stringify(globalThis.__ATF_V51__.saveSystem.data)`);
+  requireThat(campaignAfterForge === campaignBeforeForge, 'Frontier Forge a modifié la sauvegarde campagne.');
+  report.forge = { standalone: forgeStandalone, editor: forge, undo: forgeUndo, mission: forgeMission, ship: forgeShip, campaignIsolated: true };
   report.checkpoints.push('forge-mission-ship');
 
   const persistenceBeforeReload = await evaluate(`(() => {
@@ -1465,9 +1531,9 @@ try {
   await command('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true, screenWidth: 390, screenHeight: 844 });
   await command('Page.reload', { ignoreCache: true });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden)`, 'Reload mobile V61 incomplet', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden)`, 'Reload mobile V62 incomplet', 20000);
   await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
-  await waitFor(`!document.querySelector('#app').hidden`, 'Continuation mobile V61 impossible');
+  await waitFor(`!document.querySelector('#app').hidden`, 'Continuation mobile V62 impossible');
   const mobile = await evaluate(`(() => {
     const save = globalThis.__ATF_V51__.saveSystem.data;
     const hub = globalThis.__ATF_HUB__.getSnapshot();
@@ -1499,30 +1565,30 @@ try {
       }
     };
   })()`);
-  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '61.0.0', `Runtime mobile V61 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
+  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '62.0.0', `Runtime mobile V62 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
   requireThat(JSON.stringify(mobile.persisted) === JSON.stringify(persistenceBeforeReload), `Persistance divergente après reload: ${JSON.stringify({ persistenceBeforeReload, mobile: mobile.persisted })}`);
-  report.screenshots.push(await capture('alien-tantalus-v61-hub-mobile.png'));
+  report.screenshots.push(await capture('alien-tantalus-v62-hub-mobile.png'));
   report.mobile = mobile;
   report.persistence = persistenceBeforeReload;
-  report.checkpoints.push('reload-mobile-v61-layout-persistence');
+  report.checkpoints.push('reload-mobile-v62-layout-persistence');
 
   await command('Network.setBypassServiceWorker', { bypass: false });
   await command('Network.setCacheDisabled', { cacheDisabled: false });
   await evaluate(`navigator.serviceWorker.ready.then(() => true)`);
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && navigator.serviceWorker.controller && !document.querySelector('#boot'))`, 'Service worker non contrôleur', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && navigator.serviceWorker.controller && !document.querySelector('#boot'))`, 'Service worker non contrôleur', 20000);
   await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
   const offlineFailureStart = failedRequests.length;
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V51__.saveSystem.data.release === '61.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne V61 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && globalThis.__ATF_V51__.saveSystem.data.release === '62.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne V62 impossible', 20000);
   await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));
-  requireThat(offline.release === '61.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V61 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
+  requireThat(offline.release === '62.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V62 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
   report.offline = { ...offline, criticalFailures: criticalOfflineFailures };
   report.checkpoints.push('offline-pwa');
 

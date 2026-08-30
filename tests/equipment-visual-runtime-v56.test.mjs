@@ -166,17 +166,19 @@ test('aucune base bloquée ou ID étranger ne reçoit un chemin de remplacement'
 });
 
 test('armurerie et pickup consomment les bitmaps réels sans placeholder CSS', async () => {
-  const [app, game] = await Promise.all([
-    readFile(new URL('../src/app.js', import.meta.url), 'utf8'),
+  const [catalogRuntime, catalogUi, game] = await Promise.all([
+    readFile(new URL('../src/catalog-runtime-v62.js', import.meta.url), 'utf8'),
+    readFile(new URL('../src/catalog-ui-v62.js', import.meta.url), 'utf8'),
     readFile(new URL('../src/game-v51-runtime.js', import.meta.url), 'utf8')
   ]);
-  assert.match(app, /from '\.\/equipment-visual-runtime-v56\.js'/);
-  assert.match(app, /resolveEquipmentVisualProfileV56\(item\)/);
-  assert.match(app, /112 \* \(Number\(visual\.columns\) \|\| 4\)/);
-  assert.match(app, /112 \* \(Number\(visual\.rows\) \|\| 4\)/);
-  assert.match(app, /première cellule de la plaquette dédiée/);
-  assert.match(app, /heading\.textContent = visual\.displayName/);
-  assert.doesNotMatch(app, /equipment-placeholder|placeholder-equipment/);
+  assert.match(catalogRuntime, /from '\.\/equipment-visual-runtime-v56\.js'/);
+  assert.match(catalogRuntime, /resolveEquipmentVisualProfileV56\(entry\)/);
+  assert.match(catalogRuntime, /resolveEquipmentVisualStateV56\(entry\)/);
+  assert.match(catalogUi, /getCatalogSpriteFrameV62\(visual, 0\)/);
+  assert.match(catalogUi, /animation idle issue de la plaquette dédiée/);
+  assert.match(catalogUi, /image\.style\.width = `\$\{frame\.widthPercent\}%`/);
+  assert.match(catalogUi, /image\.style\.height = `\$\{frame\.heightPercent\}%`/);
+  assert.doesNotMatch(catalogRuntime + catalogUi, /equipment-placeholder|placeholder-equipment/);
 
   const method = game.slice(game.lastIndexOf('  drawToolPickup(ctx) {'), game.indexOf('  drawVehicle(ctx) {'));
   assert.match(method, /MISSION_TOOL_PICKUP_VISUAL_V56/);

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v61 — écran titre cinématique, stations physiques du Tantalus, dialogues et décors OpenAI corrigés.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v62 — hub physique, conduits jouables, insertion opérationnelle, dialogues à mémoire et catalogues hiérarchiques.">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/sprite-gallery.css">
@@ -12,13 +12,15 @@
   <link rel="stylesheet" href="/runtime-level.css">
   <link rel="stylesheet" href="/title-screen-v61.css">
   <link rel="stylesheet" href="/hub-stations-v61.css">
-  <title>ALIENS: TANTALUS FRONTIER v61</title>
+  <link rel="stylesheet" href="/catalog-v62.css">
+  <link rel="stylesheet" href="/mission-insertion-v62.css">
+  <title>ALIENS: TANTALUS FRONTIER v62</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v61</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v62</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -31,12 +33,13 @@
       <button id="title-start" class="title-start" type="button">APPUYER POUR COMMENCER</button>
       <nav id="title-menu" class="title-menu" aria-label="Menu principal" hidden>
         <button id="title-continue" type="button">CONTINUER</button>
-        <button id="title-new" type="button" data-confirm="false">NOUVELLE CHRONOLOGIE</button>
-        <button id="title-options" type="button">OPTIONS & ACCESSIBILITÉ</button>
+        <button id="title-new" type="button" data-confirm="false">NOUVELLE PARTIE</button>
+        <button id="title-forge" type="button">FRONTIER FORGE</button>
+        <button id="title-options" type="button">SYSTÈME</button>
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 61.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 62.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -52,9 +55,7 @@
         <button class="nav-button" data-view="bestiary"><span>06</span> Xénobiologie</button>
         <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
         <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
-        <button class="nav-button" data-view="editor"><span>09</span> Frontier Forge</button>
-        <button class="nav-button" data-view="codex"><span>10</span> Contrat v1–v61</button>
-        <button class="nav-button" data-view="settings"><span>11</span> Système</button>
+        <button class="nav-button" data-view="settings"><span>09</span> Système</button>
       </nav>
       <div class="rail-footer"><span class="status-dot"></span> Liaison MU/TH/UR active<small id="save-state">Chargement du profil</small></div>
     </aside>
@@ -63,7 +64,7 @@
       <header class="topbar">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v61.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v62.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -113,7 +114,7 @@
           <div class="hub-level-shell">
             <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
             <div class="hub-touch-controls runtime-touch" aria-label="Contrôles tactiles du hub">
-              <button type="button" data-hub-control="left">←</button><button type="button" data-hub-control="right">→</button><button type="button" data-hub-control="jump">↑</button><button type="button" data-hub-control="crouch">C</button><button type="button" data-hub-control="fire">F</button><button type="button" data-hub-control="interact">E</button>
+              <button type="button" data-hub-control="left">←</button><button type="button" data-hub-control="right">→</button><button type="button" data-hub-control="jump">↑</button><button type="button" data-hub-control="crouch">C</button><button type="button" data-hub-control="depth">Q</button><button type="button" data-hub-control="fire">F</button><button type="button" data-hub-control="interact">E</button>
             </div>
             <section id="hub-dialogue" class="hub-dialogue" role="dialog" aria-modal="true" aria-labelledby="hub-dialogue-speaker" hidden>
               <div class="hub-dialogue-portrait">
@@ -123,6 +124,7 @@
                 <p class="eyebrow">TRANSMISSION LOCALE // USS TANTALUS</p>
                 <h3 id="hub-dialogue-speaker">LT. MARA VEGA</h3>
                 <p id="hub-dialogue-text"></p>
+                <div id="hub-dialogue-choices" class="hub-dialogue-choices" aria-label="Réponses disponibles"></div>
                 <div class="button-row">
                   <button id="hub-dialogue-cancel" class="button" type="button">REPRENDRE LE CONTRÔLE</button>
                   <button id="hub-dialogue-continue" class="button primary" type="button">OUVRIR LA STATION</button>
@@ -130,23 +132,35 @@
               </div>
             </section>
           </div>
-          <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · F tirer · E utiliser</span></div>
+          <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · Q profondeur · F tirer · E utiliser</span></div>
         </section>
 
         <section class="view" data-panel="armory">
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
           <div class="section-intro"><div><p class="eyebrow">146 ARMES // 106 ÉQUIPEMENTS // INVENTAIRE RÉEL</p><h2>Armurerie & dotations</h2></div><div class="filter-row"><select id="armory-kind"><option value="weapon">Armes</option><option value="equipment">Équipements</option></select><input id="armory-search" type="search" placeholder="M41A, tracker, Ripper…"></div></div>
-          <div id="armory-list" class="catalog-grid"></div>
+          <div id="armory-catalog-v62" aria-label="Catalogue hiérarchique de l’armurerie">
+            <aside id="armory-catalog-tree" aria-label="Familles de matériel"></aside>
+            <div id="armory-list" aria-live="polite"></div>
+            <aside id="armory-catalog-detail" aria-label="Dossier du matériel sélectionné"></aside>
+          </div>
         </section>
 
         <section class="view" data-panel="bestiary">
           <div class="section-intro"><div><p class="eyebrow">568 MENACES // COMPORTEMENTS & HABITATS</p><h2>Xénobiologie tactique</h2></div><div class="filter-row"><select id="biology-filter"><option value="all">Toutes biologies</option><option>xenomorph</option><option>pathogen</option><option>synthetic</option><option>human</option><option>fauna</option></select><input id="enemy-search" type="search" placeholder="Drone, Reine, ATARAX…"></div></div>
-          <div id="enemy-list" class="catalog-grid"></div>
+          <div id="enemy-catalog-v62" aria-label="Catalogue hiérarchique xénobiologique">
+            <aside id="enemy-catalog-tree" aria-label="Taxonomie des menaces"></aside>
+            <div id="enemy-list" aria-live="polite"></div>
+            <aside id="enemy-catalog-detail" aria-label="Dossier biologique sélectionné"></aside>
+          </div>
         </section>
 
         <section class="view" data-panel="vehicles">
           <div class="section-intro"><div><p class="eyebrow">279 CHÂSSIS // 6 FAMILLES // RÔLES PAR SIÈGE</p><h2>Parc de véhicules</h2></div><input id="vehicle-search" type="search" placeholder="APC, Cheyenne, P-5000…"></div>
-          <div id="vehicle-list" class="catalog-grid"></div>
+          <div id="vehicle-catalog-v62" aria-label="Catalogue hiérarchique des véhicules">
+            <aside id="vehicle-catalog-tree" aria-label="Familles de véhicules"></aside>
+            <div id="vehicle-list" aria-live="polite"></div>
+            <aside id="vehicle-catalog-detail" aria-label="Dossier du véhicule sélectionné"></aside>
+          </div>
         </section>
 
         <section class="view" data-panel="crew">
@@ -177,11 +191,6 @@
           <div class="editor-layout"><aside class="panel tool-panel"><label>MODE<select id="editor-mode"><option value="mission">Mission</option><option value="ship">Intérieur USS Tantalus</option></select></label><div id="editor-tools" class="tool-grid"></div><button id="editor-clear" class="button danger-outline">EFFACER LE PLAN</button><p class="hint">Le playtest compile chaque bloc en collision, objectif, menace, terminal, véhicule ou route.</p></aside><div class="editor-stage"><canvas id="editor-canvas" width="1280" height="720" aria-label="Grille Frontier Forge"></canvas></div></div>
         </section>
 
-        <section class="view" data-panel="codex">
-          <div class="section-intro"><div><p class="eyebrow">AUDIT v1 → v61 // PREUVE = ACTION + EFFET + TEST</p><h2>Matrice des promesses de gameplay</h2></div><div class="button-row"><a class="button" href="/docs/GAMEPLAY_PROMISE_SOURCE_V51.md" target="_blank">SOURCE</a><a class="button" href="/docs/GAMEPLAY_PROMISE_AUDIT_V55.md" target="_blank">AUDIT GLOBAL V55</a><a class="button primary" href="/docs/VERSION_HISTORY_V61.md" target="_blank">RELEASE V61</a></div></div>
-          <div id="promise-matrix" class="promise-grid"></div>
-        </section>
-
         <section class="view" data-panel="settings">
           <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE // ACCESSIBILITÉ // RUNTIME</p><h2>Système</h2></div></div>
           <div class="settings-grid">
@@ -193,7 +202,8 @@
 
         <section class="view play-view" data-panel="play">
           <div class="game-toolbar"><div><span class="eyebrow">RUNTIME PRODUCTION // OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · E · F · Q · V · R · H · X</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
-          <div class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable"></canvas>
+          <section id="mission-insertion-v62" aria-label="Séquence d’insertion opérationnelle" hidden></section>
+          <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable"></canvas>
             <div class="mission-touch-controls runtime-touch" aria-label="Contrôles tactiles de mission"><button data-mission-key="KeyA">←</button><button data-mission-key="KeyD">→</button><button data-mission-key="Space">↑</button><button data-mission-key="KeyF">F</button><button id="mission-interact">E</button><button id="mission-tracker">Q</button><button id="mission-vehicle">V</button><button id="mission-reload">R</button><button id="mission-medkit">H</button><button id="mission-neuro-counter" title="Contre-impulsion Neuro">X</button></div>
           </div>
           <div id="mission-equipment-controls" class="button-row equipment-controls"></div>

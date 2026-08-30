@@ -617,6 +617,36 @@ function compileEvents(template, campaign) {
   return Object.freeze(events);
 }
 
+/**
+ * Build an insertion incident only from a mission-start event that is already
+ * part of the compiled mission plan. This keeps campaign insertion causal and
+ * deterministic: no clock, random roll or synthetic incident record is used.
+ */
+function compileInsertionContractV62(events, template, campaign) {
+  const causalEvent = events.find((entry) => (
+    entry?.trigger?.type === 'mission-start'
+      && typeof entry.id === 'string'
+      && entry.id.length > 0
+      && Array.isArray(entry.actions)
+      && entry.actions.length > 0
+  ));
+  if (!causalEvent) return null;
+  const incidentId = `${causalEvent.id}-insertion`;
+  return Object.freeze({
+    readKey: `${template.id}:${slug(campaign.id || campaign.objective || 'campaign')}:v62`,
+    incident: Object.freeze({
+      id: incidentId,
+      cause: Object.freeze({ kind: 'event', id: causalEvent.id }),
+      resolutionActionId: `acknowledge-${incidentId}`,
+      data: Object.freeze({
+        triggerType: causalEvent.trigger.type,
+        zoneId: causalEvent.trigger.zoneId || null,
+        actions: Object.freeze([...causalEvent.actions])
+      })
+    })
+  });
+}
+
 function compileSpawns(template, world, campaign) {
   const danger = clamp(Number(world?.danger) || 5, 1, 20);
   const modeBonus = campaign.mode === 'SURVIVAL' ? 2 : campaign.mode === 'CRUCIBLE' ? 1 : 0;
@@ -654,6 +684,7 @@ export function buildMissionLevelV52({
   const biomeZones = compileBiomeZones(template, world);
   const hazards = compileHazards(template, selectedSeed, world, random, geometry);
   const events = compileEvents(template, campaign);
+  const insertion = compileInsertionContractV62(events, template, campaign);
   const spawns = compileSpawns(template, world, campaign);
   const anchors = Object.freeze(Object.fromEntries(nodes.filter((entry) => entry.anchor).map((entry) => [entry.anchor, Object.freeze({ nodeId: entry.id, x: entry.x, y: entry.y, zoneId: entry.zoneId })])));
   const palette = TEMPLATE_PALETTES[selectedTemplateId];
@@ -695,6 +726,7 @@ export function buildMissionLevelV52({
     anchors,
     hazards,
     events,
+    insertion,
     spawns,
     biomeZones,
     artLayers: template.artLayers,

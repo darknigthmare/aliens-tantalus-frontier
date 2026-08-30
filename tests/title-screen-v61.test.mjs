@@ -31,11 +31,19 @@ test('the title shell uses a real OpenAI bitmap and accessible live controls', a
 
   assert.match(html, /<section id="title-screen"[^>]+aria-label="Écran titre"[^>]+hidden>/);
   assert.match(html, /class="title-background" src="\/assets\/openai\/ui\/title\/tantalus-frontier-title-background-v61\.png"/);
-  for (const id of ['title-start', 'title-continue', 'title-new', 'title-options']) {
+  for (const id of ['title-start', 'title-continue', 'title-new', 'title-forge', 'title-options']) {
     assert.match(html, new RegExp('<button id="' + id + '"[^>]+type="button"'));
   }
+  assert.match(html, /id="title-continue"[^>]*>CONTINUER<\/button>/);
+  assert.match(html, /id="title-new"[^>]*>NOUVELLE PARTIE<\/button>/);
+  assert.match(html, /id="title-forge"[^>]*>FRONTIER FORGE<\/button>/);
+  assert.match(html, /id="title-options"[^>]*>SYSTÈME<\/button>/);
+  assert.doesNotMatch(html, /class="nav-button"[^>]+data-view="(?:editor|codex)"/);
+  assert.doesNotMatch(html, /Contrat v1[–-]v61/);
   assert.match(html, /id="title-live-status"[^>]+aria-live="polite"/);
   assert.match(css, /\.title-background\s*\{[^}]*object-fit:\s*cover/s);
+  assert.match(css, /html\.forge-mode \.rail\s*\{[^}]*display:\s*none/s);
+  assert.match(css, /html\.forge-mode \.shell\s*\{[^}]*margin-left:\s*0/s);
   assert.ok(details.size > 500_000, 'le fond titre ne doit pas être un placeholder minuscule');
   assert.ok(width >= 1600 && height >= 900 && Math.abs(width / height - 16 / 9) < 0.02, width + 'x' + height);
   assert.match(build, /title-screen-v61\.css/);

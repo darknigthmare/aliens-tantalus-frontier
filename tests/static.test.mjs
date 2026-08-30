@@ -4,7 +4,13 @@ import { access, readFile } from 'node:fs/promises';
 
 test('application shell exposes all required production surfaces', async () => {
   const html = await readFile('index.html', 'utf8');
-  for (const marker of ['data-panel="galaxy"', 'data-panel="operations"', 'data-panel="hub"', 'data-panel="armory"', 'data-panel="bestiary"', 'data-panel="vehicles"', 'data-panel="crew"', 'data-panel="editor"', 'data-panel="codex"', 'id="game-canvas"', 'id="hub-canvas"']) assert.ok(html.includes(marker), marker);
+  for (const marker of [
+    'id="title-screen"', 'data-panel="command"', 'data-panel="galaxy"', 'data-panel="operations"',
+    'data-panel="hub"', 'data-panel="armory"', 'data-panel="bestiary"', 'data-panel="vehicles"',
+    'data-panel="crew"', 'data-panel="editor"', 'data-panel="settings"', 'data-panel="play"',
+    'id="armory-catalog-v62"', 'id="enemy-catalog-v62"', 'id="vehicle-catalog-v62"',
+    'id="mission-insertion-v62"', 'id="game-canvas"', 'id="hub-canvas"'
+  ]) assert.ok(html.includes(marker), marker);
 });
 
 test('OpenAI production masters are physically integrated', async () => {

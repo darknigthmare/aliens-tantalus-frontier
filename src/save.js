@@ -1,7 +1,15 @@
 import { CREW, RELEASE, VEHICLES, WORLDS } from './content.js';
+import { normalizeInfestationChainV62 } from './infestation-chain-v62.js';
+import {
+  migrateNpcDialogueHubStateV62,
+  normalizeDialogueMemoryV62,
+  normalizeNpcRoutineStateV62
+} from './npc-dialogue-v62.js';
+import { restoreMissionInsertionV62, serializeMissionInsertionV62 } from './mission-insertion-v62.js';
+import { normalizeHubVentStateV62 } from './hub-v62-runtime.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 
-export const SAVE_SCHEMA = 51;
+export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
 export const LEGACY_KEYS = [
   'ALIENS_INFESTATION_BLACKOUT_SAVE',
@@ -90,6 +98,7 @@ function createStrategyState() {
     unlockedResearchIds: [],
     currentOperation: null,
     lastOperation: null,
+    insertionReadReceipts: [],
     log: []
   };
 }
@@ -137,7 +146,12 @@ export function createDefaultSave(profile = 1) {
       systems: { hull: 100, power: 92, oxygen: 100, security: 76, quarantine: 64, morale: 72, supplies: 78, research: 0 },
       services: {},
       moduleIds: ['module-001', 'module-002', 'module-003'],
-      activeCrisis: null
+      activeCrisis: null,
+      infestationChain: null,
+      ventTransitV62: null,
+      npcInteractions: {},
+      dialogueMemory: normalizeDialogueMemoryV62(),
+      npcRoutineState: normalizeNpcRoutineStateV62()
     },
     galaxy: {
       unlockedWorldIds: WORLDS.slice(0, 8).map((world) => world.id),
@@ -190,6 +204,33 @@ const mergeNumbers = (base, candidate, min = 0, max = Number.MAX_SAFE_INTEGER) =
 
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
 const rarityFactor = (rarity) => ({ common: 1, uncommon: 1.22, rare: 1.58, epic: 2, legendary: 2.6 }[rarity] || 1.15);
+
+const sanitizeMissionInsertionStateV62 = (candidate) => {
+  if (!isRecord(candidate)) return null;
+  try {
+    return serializeMissionInsertionV62(restoreMissionInsertionV62(candidate));
+  } catch {
+    return null;
+  }
+};
+
+const sanitizeMissionInsertionReadReceiptsV62 = (candidate) => Array.isArray(candidate)
+  ? candidate.filter(isRecord).flatMap((entry) => {
+    const key = typeof entry.key === 'string' ? entry.key.slice(0, 320) : '';
+    const operationId = typeof entry.operationId === 'string' ? entry.operationId.slice(0, 180) : '';
+    const campaignId = typeof entry.campaignId === 'string' ? entry.campaignId.slice(0, 120) : '';
+    const worldId = typeof entry.worldId === 'string' ? entry.worldId.slice(0, 120) : '';
+    if (!key || !operationId || !campaignId || !worldId) return [];
+    return [{
+      schema: 62,
+      key,
+      operationId,
+      campaignId,
+      worldId,
+      completedAt: Math.max(0, Number(entry.completedAt) || 0)
+    }];
+  }).filter((entry, index, entries) => entries.findIndex((candidateEntry) => candidateEntry.key === entry.key) === index).slice(-128)
+  : [];
 
 function ensureStrategy(save) {
   if (!isRecord(save.strategy)) save.strategy = createStrategyState();
@@ -477,6 +518,7 @@ export function beginOperation(save, campaign, world) {
     operation.apexDossierId ??= strategy.selectedApexDossierId || null;
     operation.difficulty ??= save.settings?.difficulty || save.difficulty || 'standard';
     operation.resumeState ??= null;
+    operation.insertionState ??= null;
     return { ok: true, resumed: true, operation };
   }
   if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
@@ -510,6 +552,7 @@ export function beginOperation(save, campaign, world) {
     apexDossierId: strategy.selectedApexDossierId || null,
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
     resumeState: null,
+    insertionState: null,
     flags: {}
   };
   strategy.plannedCampaignId = campaign.id;
@@ -778,6 +821,11 @@ export function migrateSave(input, profile = 1) {
     .map(([key, value]) => [key, Math.max(0, Math.floor(Number(value)))]));
   migrated.hub.visited = stringList(hub.visited, base.hub.visited).filter((id) => /^[a-z0-9-]{1,40}$/.test(id));
   migrated.hub.moduleIds = stringList(hub.moduleIds, base.hub.moduleIds);
+  migrated.hub.infestationChain = normalizeInfestationChainV62(hub.infestationChain);
+  migrated.hub.ventTransitV62 = normalizeHubVentStateV62(hub.ventTransitV62);
+  const dialogueHub = migrateNpcDialogueHubStateV62(migrated.hub);
+  migrated.hub.dialogueMemory = dialogueHub.dialogueMemory;
+  migrated.hub.npcRoutineState = dialogueHub.npcRoutineState;
 
   const galaxy = isRecord(source.galaxy) ? source.galaxy : {};
   Object.assign(migrated.galaxy, galaxy);
@@ -865,6 +913,7 @@ export function migrateSave(input, profile = 1) {
       apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
       difficulty: ['story', 'standard', 'nightmare'].includes(candidate.difficulty) ? candidate.difficulty : 'standard',
       resumeState: sanitizeOperationResumeState(candidate.resumeState),
+      insertionState: sanitizeMissionInsertionStateV62(candidate.insertionState),
       flags: isRecord(candidate.flags) ? Object.fromEntries(Object.entries(candidate.flags).slice(0, 32).map(([key, value]) => [key.slice(0, 60), Boolean(value)])) : {}
     };
   };
@@ -878,6 +927,7 @@ export function migrateSave(input, profile = 1) {
     plannedCampaignId: typeof strategy.plannedCampaignId === 'string' ? strategy.plannedCampaignId.slice(0, 120) : null,
     unlockedResearchIds: stringList(strategy.unlockedResearchIds).filter((id) => RESEARCH_PROJECTS.some((project) => project.id === id)),
     currentOperation: sanitizeOperation(strategy.currentOperation),
+    insertionReadReceipts: sanitizeMissionInsertionReadReceiptsV62(strategy.insertionReadReceipts),
     lastOperation: isRecord(strategy.lastOperation) ? {
       ...sanitizeOperation(strategy.lastOperation),
       success: Boolean(strategy.lastOperation.success),
