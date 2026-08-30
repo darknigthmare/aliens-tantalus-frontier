@@ -41,6 +41,6 @@ Date : 30 aout 2026
 ## Publication
 
 - Commit GitHub principal : `87cedca` (`Implement V62 physical runtime systems`) pousse sur `codex/v52-physical-worlds`.
-- Deploiement Vercel production : `dpl_HRnF4cGPHcDpB7TM3GP3YhePfc7N`, etat READY.
+- Deploiement Vercel production : etat READY.
 - URL publique verifiee : `https://aliens-tantalus-frontier.vercel.app`.
 - HTTP 200 verifies : `/`, `/build-info.json`, `/catalog-v62.css`, `/mission-insertion-v62.css`, `/sw.js`, `/docs/VERSION_HISTORY_V62.md`, le conduit V62 et les trois PNG d'insertion.

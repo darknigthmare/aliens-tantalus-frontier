@@ -145,7 +145,7 @@ Le placement auteur et la jouabilité sont vérifiés, mais la finition d’ameu
 - cache PWA `atf-v62-runtime-1` et fermeture ESM / assets V62 couverts par le contrat hors-ligne ciblé ;
 - le build exclut contractuellement les masters `raw` de production sans supprimer leurs sources de travail.
 - commit GitHub V62 : `87cedca` sur `codex/v52-physical-worlds` ;
-- déploiement Vercel production : `dpl_HRnF4cGPHcDpB7TM3GP3YhePfc7N`, état **READY** ;
+- déploiement Vercel production : état **READY** ;
 - alias public : `https://aliens-tantalus-frontier.vercel.app` ;
 - vérification HTTP 200 : `/`, `/build-info.json`, `/catalog-v62.css`, `/mission-insertion-v62.css`, `/sw.js`, `/docs/VERSION_HISTORY_V62.md`, conduit V62 et trois PNG d'insertion.
 
