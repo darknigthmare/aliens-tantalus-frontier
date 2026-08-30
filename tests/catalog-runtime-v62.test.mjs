@@ -80,9 +80,13 @@ test('la taxonomie utilise uniquement les champs existants et signale les faits 
   assert.equal(ovomorphPath.find((node) => node.kind === 'species').label, CATALOG_UNKNOWN_V62);
 
   const harpoon = getCatalogEntryV62(idStartingWith(WEAPONS, 'weapon-024-'));
-  assert.equal(harpoon.visual, null);
-  assert.equal(harpoon.taxonomy.category, CATALOG_UNKNOWN_V62);
+  assert.equal(harpoon.visual.sheetId, 'weapon.asso-400-harpoon-gun.action.v63');
+  assert.equal(harpoon.visual.path, '/assets/openai/sprites/normalized/weapons/asso-400-harpoon-gun-action-sheet-v63.png');
+  assert.equal(harpoon.taxonomy.category, 'grappling');
   assert.equal(harpoon.dimensions, null);
+
+  const heavyPulse = getCatalogEntryV62(idStartingWith(WEAPONS, 'weapon-016-'));
+  assert.equal(heavyPulse.visual, null);
 });
 
 test('les faits de référence et les statistiques de gameplay ne partagent pas leurs champs', () => {

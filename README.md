@@ -1,8 +1,8 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version de travail web jouable **v62.0.0**. Le contrat consolidé **v1→v62** transforme le Tantalus en niveau physique persistant : collisions, portes, échelles, profondeur, réseau de conduits sauvegardé, routines de seize PNJ et dialogues à mémoire. Les opérations passent désormais par une insertion jouable et reprenable (briefing, préparation, approche, incident causal, déploiement), tandis que les catalogues hiérarchiques montrent les vraies cellules des plaques et séparent clairement canon, gameplay et liens biologiques. Frontier Forge possède sa propre sauvegarde et ne peut plus modifier la campagne.
+Version de travail web jouable **v63.0.0**. Le contrat consolidé **v1→v63** transforme le Tantalus en niveau physique persistant : collisions, portes, échelles, profondeur, réseau de conduits sauvegardé, routines de seize PNJ et dialogues à mémoire. Les opérations passent désormais par une insertion jouable et reprenable (briefing, préparation, approche, incident causal, déploiement), tandis que les catalogues hiérarchiques montrent les vraies cellules des plaques et séparent clairement canon, gameplay et liens biologiques. Frontier Forge possède sa propre sauvegarde et ne peut plus modifier la campagne. La Harpoon Gun Excel possède maintenant sa plaque ASSO-400 4 × 4 dédiée.
 
-Dernier déploiement public vérifié V62 : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app).
+Dernier déploiement public vérifié avant publication de cette branche : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app).
 
 ## Lancer localement
 
@@ -25,9 +25,9 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L'audit V62 confirme **191 plaques, 2 708 cellules**, **401 PNG runtime audités sans erreur bloquante** et 13 candidats halo à revue visuelle. La complétude exacte des personnages, ennemis, véhicules, objets et props reste détaillée dans les matrices V61/V62 ; une entrée catalogue n'est jamais présentée comme une plaque dédiée lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. L'audit V63 confirme **192 plaques, 2 724 cellules**, **402 PNG runtime audités sans erreur bloquante** et 13 candidats halo à revue visuelle. La complétude exacte des personnages, ennemis, véhicules, objets et props reste détaillée dans les matrices V61/V63 ; une entrée catalogue n'est jamais présentée comme une plaque dédiée lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
-Les MID Medical, Science Lab, Quarantine et Life Support sont désormais quatre bitmaps RGBA 1 774 × 887 corrigés. La dette restante porte notamment sur la Harpoon Gun, seule arme Excel encore reliée sans ambiguïté mais sans plaque dédiée, quatre identités ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie.
+Les MID Medical, Science Lab, Quarantine et Life Support sont désormais quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d'arme Excel relié sans ambiguïté. La dette restante porte sur quatre identités ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables, la source UD-4L agrandie, les petits props finaux par salle et la revue des candidats halo.
 
 ## Contrôles
 Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
@@ -69,10 +69,14 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-La gate hors navigateur V62 valide **366 tests**, **165 modules lintés**, **191 plaques / 2 708 cellules**, **401 PNG runtime sans erreur bloquante** et un build de **3 443 entrées catalogue**. La QA navigateur reste une gate distincte : elle n'est pas déclarée exécutée tant qu'une session visuelle jouable n'a pas été lancée.
+La gate hors navigateur V63 valide **370 tests**, **171 modules lintés**, **192 plaques / 2 724 cellules**, **402 PNG runtime sans erreur bloquante** et un build de **3 443 entrées catalogue**. La QA navigateur reste une gate distincte : elle n'est pas déclarée exécutée tant qu'une session visuelle jouable n'a pas été lancée dans le navigateur choisi par l'utilisateur.
 
 ## Dossier de production
 
+- [Historique de validation V63](docs/VERSION_HISTORY_V63.md)
+- [Provenance artistique ASSO-400 V63](docs/ART_PROVENANCE_V63.md)
+- [Matrice de complétude artistique V63](docs/references/V63_ASSET_COMPLETION_MATRIX.md)
+- [Audit PNG, alpha, halo et grilles V63](docs/references/V63_PNG_ALPHA_AUDIT.md)
 - [Audit d’implémentation V62](docs/V62_IMPLEMENTATION_AUDIT.md)
 - [Historique de validation V62](docs/VERSION_HISTORY_V62.md)
 - [Audit PNG, alpha, halo, grilles et normalisation parallaxe V62](docs/references/V62_PNG_ALPHA_AUDIT.md)

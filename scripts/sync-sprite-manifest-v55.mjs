@@ -203,7 +203,10 @@ export function assertSpriteManifestV55(manifest) {
 export function buildSpriteManifestV55(sourceManifest) {
   if (!sourceManifest || typeof sourceManifest !== 'object') throw new TypeError('A source sprite manifest is required.');
   const manifest = clone(sourceManifest);
-  manifest.sheets = (manifest.sheets || []).filter((sheet) => !['v56', 'v59', 'v61'].includes(sheet.wave));
+  manifest.sheets = (manifest.sheets || []).filter((sheet) => {
+    const match = String(sheet.wave || '').match(/^v(\d+)$/);
+    return !match || Number(match[1]) <= 55;
+  });
   manifest.release = 'v55';
   manifest.contracts ||= {};
   manifest.contracts.hitboxes ||= {};

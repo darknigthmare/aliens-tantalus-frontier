@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '62.0.0',
-  subtitle: 'Physical Hub, Vent Traversal, Mission Insertion & Causal Campaign',
+  version: '63.0.0',
+  subtitle: 'ASSO-400 Harpoon Art Completion & Production Asset QA',
   sourceVersion: '51.0.0'
 });

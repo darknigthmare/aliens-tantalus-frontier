@@ -8,10 +8,10 @@ import {
   resolveMissionHazardArtV56
 } from './mission-interactive-art-v56.js';
 import {
-  WEAPON_VISUAL_ASSETS_ALL_V61,
-  WEAPON_VISUAL_BASE_COUNT_V61,
-  resolveWeaponVisualProfileV61
-} from './weapon-visual-runtime-v61.js';
+  WEAPON_VISUAL_ASSETS_ALL_V63,
+  WEAPON_VISUAL_BASE_COUNT_V63,
+  resolveWeaponVisualProfileV63
+} from './weapon-visual-runtime-v63.js';
 import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
 import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door-art-v58.js';
 
@@ -123,7 +123,7 @@ const ASSETS = Object.freeze({
   paleCrucibleHunter: '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
   pathogenMimic: '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
   ...PROJECT_ORIGINAL_ENEMY_ASSETS,
-  ...WEAPON_VISUAL_ASSETS_ALL_V61,
+  ...WEAPON_VISUAL_ASSETS_ALL_V63,
   rifle: '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
   apc: '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
   human: '/assets/openai/human-factions-animation-sheet.png',
@@ -300,7 +300,7 @@ export class GameEngine {
     this.world = world;
     this.campaign = campaign;
     this.weapon = weapon || { name: 'M41A', damage: 26 };
-    this.weaponVisual = resolveWeaponVisualProfileV61(this.weapon);
+    this.weaponVisual = resolveWeaponVisualProfileV63(this.weapon);
     this.room = 0;
     this.camera = { x: 0, y: 250 };
     this.player = this.createPlayer(160, FLOOR_Y - 92, '#92d6a6', false);
@@ -1695,7 +1695,7 @@ export class GameEngine {
 
   drawWeaponPickup(ctx) {
     if (this.weaponPickup.taken) return;
-    const visual = this.weaponVisual || resolveWeaponVisualProfileV61(this.weapon);
+    const visual = this.weaponVisual || resolveWeaponVisualProfileV63(this.weapon);
     const image = this.images.get(visual?.imageKey || 'rifle');
     if (!ready(image)) return;
     const frame = Math.floor(this.animationTime * 4) % 4;
@@ -1956,8 +1956,8 @@ export class GameEngine {
   }
   getWeaponAssetReport() {
     return {
-      weaponVisualCount: WEAPON_VISUAL_BASE_COUNT_V61,
-      weaponVisualReady: Object.keys(WEAPON_VISUAL_ASSETS_ALL_V61).filter((key) => ready(this.images.get(key))).length,
+      weaponVisualCount: WEAPON_VISUAL_BASE_COUNT_V63,
+      weaponVisualReady: Object.keys(WEAPON_VISUAL_ASSETS_ALL_V63).filter((key) => ready(this.images.get(key))).length,
     };
   }
 

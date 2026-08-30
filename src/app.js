@@ -21,10 +21,10 @@ import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v62-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
-import { resolveWeaponVisualProfileV61 } from './weapon-visual-runtime-v61.js';
+import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
-import { getExcelWeaponBridgeV61 } from './excel-content-bridge-v61.js';
+import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
@@ -561,8 +561,8 @@ function procurementActionsV62(record) {
   const inventoryKey = `${kind}Ids`;
   const owned = saveSystem.data.strategy.inventory[inventoryKey]?.includes(item.id);
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
-  if (kind === 'weapon' && !resolveWeaponVisualProfileV61(item)) {
-    const bridge = getExcelWeaponBridgeV61(item.id);
+  if (kind === 'weapon' && !resolveWeaponVisualProfileV63(item)) {
+    const bridge = getExcelWeaponBridgeV63(item.id);
     const sourceLabel = bridge?.excelIds?.length ? ` · Excel ${bridge.excelIds.join(', ')}` : '';
     return [{
       id: 'visual-required',

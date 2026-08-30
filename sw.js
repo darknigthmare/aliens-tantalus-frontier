@@ -1,4 +1,4 @@
-const CACHE = 'atf-v62-runtime-1';
+const CACHE = 'atf-v63-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css',
@@ -8,11 +8,11 @@ const CORE = [
   '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
   '/docs/VERSION_HISTORY_V60.md', '/docs/V60_LEVEL_DESIGN_AUDIT.md',
   '/docs/references/V60_ASSET_COMPLETION_MATRIX.md',
-  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md',
+  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md',
   '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
-  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md',
+  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json',
   '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
-  '/src/excel-content-bridge-v61.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
+  '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
   '/src/npc-dialogue-v62.js', '/src/vent-network-v62.js', '/src/hub-v62-runtime.js',
   '/src/save.js', '/src/advanced-systems.js', '/src/advanced-systems-core.js', '/src/world-crisis.js',
@@ -23,7 +23,7 @@ const CORE = [
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
   '/src/vehicle-access-runtime-v59.js', '/src/vehicle-deployment-gates-v60.js',
-  '/src/weapon-visual-runtime-v56.js', '/src/weapon-visual-runtime-v61.js', '/src/equipment-visual-runtime-v56.js',
+  '/src/weapon-visual-runtime-v56.js', '/src/weapon-visual-runtime-v61.js', '/src/weapon-visual-runtime-v63.js', '/src/equipment-visual-runtime-v56.js',
   '/src/mission-interactive-art-v56.js', '/src/mission-door-art-v58.js', '/src/topology-coherence-v58.js',
   '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js', '/src/hub-art-runtime-v58.js',
   '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
@@ -269,7 +269,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV62() {
+async function precacheV63() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -282,7 +282,7 @@ async function precacheV62() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV62().then(() => self.skipWaiting())
+  precacheV63().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

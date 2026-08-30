@@ -23,9 +23,9 @@ import {
   resolveVehicleVisualProfileV56
 } from './vehicle-visual-overrides-v56.js';
 import {
-  resolveWeaponVisualAnimationV61,
-  resolveWeaponVisualProfileV61
-} from './weapon-visual-runtime-v61.js';
+  resolveWeaponVisualAnimationV63,
+  resolveWeaponVisualProfileV63
+} from './weapon-visual-runtime-v63.js';
 
 export const CATALOG_UNKNOWN_V62 = 'unknown';
 
@@ -159,9 +159,9 @@ const selectVisualFields = (profile, idle, extra = {}) => {
 };
 
 function weaponVisual(entry) {
-  const profile = resolveWeaponVisualProfileV61(entry);
+  const profile = resolveWeaponVisualProfileV63(entry);
   if (!profile) return null;
-  const idle = clipDescriptor(resolveWeaponVisualAnimationV61(entry));
+  const idle = clipDescriptor(resolveWeaponVisualAnimationV63(entry));
   return selectVisualFields(profile, idle, {
     category: knownString(profile.category),
     renderWidth: Number.isFinite(profile.width) ? profile.width : null,
@@ -324,7 +324,7 @@ const taxonomyFor = (kind, entry, visual) => {
     subspecies: CATALOG_UNKNOWN_V62,
     caste: CATALOG_UNKNOWN_V62,
     stage: CATALOG_UNKNOWN_V62,
-    type: knownString(resolveWeaponVisualProfileV61(entry)?.name || baseIdentityName(entry))
+    type: knownString(resolveWeaponVisualProfileV63(entry)?.name || baseIdentityName(entry))
   });
   if (kind === 'equipment') return freezeObject({
     family: 'equipment',

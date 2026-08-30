@@ -4,7 +4,7 @@ import path from 'node:path';
 const endpoint = process.env.CDP_ENDPOINT || 'http://127.0.0.1:9225';
 const appUrl = process.env.APP_URL || 'http://127.0.0.1:4173/';
 const screenshotDir = process.env.QA_SCREENSHOT_DIR
-  || path.resolve('.qa', 'browser-v62');
+  || path.resolve('.qa', 'browser-v63');
 const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const requireThat = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -291,7 +291,7 @@ try {
   await command('Network.setCacheDisabled', { cacheDisabled: true });
   await command('Network.setBypassServiceWorker', { bypass: true });
   await command('Emulation.setDeviceMetricsOverride', { width: 1440, height: 980, deviceScaleFactor: 1, mobile: false });
-  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v62-${Date.now()}` });
+  await command('Page.navigate', { url: `${appUrl}${appUrl.includes('?') ? '&' : '?'}qa=v63-${Date.now()}` });
 
   await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && !document.querySelector('#boot') && !document.querySelector('#title-screen').hidden && document.querySelector('#app').hidden)`, 'L écran titre V62 ne se charge pas', 20000);
   report.screenshots.push(await capture('alien-tantalus-v62-title-idle-desktop.png'));
@@ -308,7 +308,7 @@ try {
     titleVisible: !document.querySelector('#title-screen').hidden,
     overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay'))
   }))()`);
-  requireThat(shell.title.includes('v62') && shell.release === '62.0.0' && shell.schema === 52, `Version publique incorrecte: ${JSON.stringify(shell)}`);
+  requireThat(shell.title.includes('v63') && shell.release === '63.0.0' && shell.schema === 52, `Version publique incorrecte: ${JSON.stringify(shell)}`);
   requireThat(shell.titleVisible && !shell.appVisible && shell.titleSnapshot.state === 'idle' && !shell.overlay && shell.worlds === 64 && shell.campaigns === 436 && shell.editorTools === 13, `Shell V62 incomplet: ${JSON.stringify(shell)}`);
   report.shell = shell;
   report.checkpoints.push('title-v62-idle');
@@ -464,7 +464,7 @@ try {
       && activeColonyLayers.every((asset) => asset.includes('/zones/colony-multiroute/')),
     `Mission coloniale V58 ou triplet zoné absent: ${JSON.stringify(missionStart.missionLevelRuntime)}`);
   requireThat(missionStart.squadRuntime?.configured >= 2 && missionStart.squadRuntime.members.every((member) => member.spriteId && Number.isFinite(member.x) && Number.isFinite(member.y)), `Escouade IA physique absente: ${JSON.stringify(missionStart.squadRuntime)}`);
-  requireThat(missionStart.animationRuntime?.sheets === 191 && missionStart.animationRuntime.runtimeReady === 191 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime V61 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
+  requireThat(missionStart.animationRuntime?.sheets === 192 && missionStart.animationRuntime.runtimeReady === 192 && missionStart.animationRuntime.invalid.length === 0, `Contrat animation runtime V63 incomplet: ${JSON.stringify(missionStart.animationRuntime)}`);
   const neuroPlayerClip = Object.entries(missionStart.animationRuntime.activeClips).find(([key]) => key.startsWith('player:'));
   const neuroPlayerContract = missionStart.animationRuntime.neuroPlayerContract;
   requireThat(
@@ -1565,7 +1565,7 @@ try {
       }
     };
   })()`);
-  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '62.0.0', `Runtime mobile V62 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
+  requireThat(mobile.width === 390 && mobile.activePanel === 'hub' && mobile.canvasWidth <= 390 && mobile.canvasWidth >= 300 && mobile.canvasTop >= 180 && mobile.canvasTop < mobile.viewportHeight * 0.55 && mobile.canvasBottom < mobile.controlsTop && mobile.controlsDisplay !== 'none' && mobile.controlCount === 6 && mobile.hubRunning && mobile.npcRosterCount === 16 && mobile.persisted.release === '63.0.0', `Runtime mobile V63 mal cadré ou incomplet: ${JSON.stringify(mobile)}`);
   requireThat(JSON.stringify(mobile.persisted) === JSON.stringify(persistenceBeforeReload), `Persistance divergente après reload: ${JSON.stringify({ persistenceBeforeReload, mobile: mobile.persisted })}`);
   report.screenshots.push(await capture('alien-tantalus-v62-hub-mobile.png'));
   report.mobile = mobile;
@@ -1583,12 +1583,12 @@ try {
   await command('Network.emulateNetworkConditions', { offline: true, latency: 0, downloadThroughput: 0, uploadThroughput: 0, connectionType: 'none' });
   await command('Page.reload', { ignoreCache: false });
   await wait(900);
-  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && globalThis.__ATF_V51__.saveSystem.data.release === '62.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne V62 impossible', 20000);
+  await waitFor(`Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_V62__ && globalThis.__ATF_V51__.saveSystem.data.release === '63.0.0' && !document.querySelector('#boot'))`, 'Boot hors-ligne V63 impossible', 20000);
   await evaluate(`(() => { globalThis.__ATF_V61__.titleScreen.openMenu(); globalThis.__ATF_V61__.titleScreen.continueGame(); return true; })()`);
   const offline = await evaluate(`({ release: globalThis.__ATF_V51__.saveSystem.data.release, controlled: Boolean(navigator.serviceWorker.controller), appVisible: !document.querySelector('#app').hidden, overlay: Boolean(document.querySelector('[data-nextjs-dialog], .vite-error-overlay, #webpack-dev-server-client-overlay')) })`);
   await command('Network.emulateNetworkConditions', { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1, connectionType: 'wifi' });
   const criticalOfflineFailures = failedRequests.slice(offlineFailureStart).filter((entry) => /^(Document|Script|Stylesheet):/.test(entry));
-  requireThat(offline.release === '62.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V62 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
+  requireThat(offline.release === '63.0.0' && offline.controlled && offline.appVisible && !offline.overlay && criticalOfflineFailures.length === 0, `PWA hors-ligne V63 incomplète: ${JSON.stringify({ offline, criticalOfflineFailures })}`);
   report.offline = { ...offline, criticalFailures: criticalOfflineFailures };
   report.checkpoints.push('offline-pwa');
 

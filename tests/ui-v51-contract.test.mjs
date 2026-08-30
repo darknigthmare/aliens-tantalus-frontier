@@ -75,7 +75,7 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
-  assert.match(html, /v62\.0\.0/);
+  assert.match(html, /v63\.0\.0/);
   assert.doesNotMatch(html, /class="nav-button"[^>]+data-view="(?:editor|codex)"/);
   assert.doesNotMatch(html, /Contrat v1[–-]v61/);
   assert.match(app, /onForge:\s*\(\)\s*=>\s*openForgeContext\(\)/);

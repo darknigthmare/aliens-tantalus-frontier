@@ -73,11 +73,11 @@ function repoPathFromAbsolute(file) {
   return relative(repoRoot, file).split(sep).join('/');
 }
 
-test('the shared sprite manifest covers every deployed raw and normalized sheet through V61', async () => {
-  assert.equal(manifest.release, 'v61');
+test('the shared sprite manifest covers every deployed raw and normalized sheet through V63', async () => {
+  assert.equal(manifest.release, 'v63');
   assert.equal(manifest.normalization.status, 'ready');
   assert.equal(manifest.normalization.rawMastersPreserved, true);
-  assert.equal(manifest.sheets.length, 191);
+  assert.equal(manifest.sheets.length, 192);
   assert.equal(new Set(manifest.sheets.map((sheet) => sheet.id)).size, manifest.sheets.length);
 
   const v52NpcSheets = manifest.sheets.filter((sheet) => sheet.wave === 'v52');
@@ -216,9 +216,9 @@ test('all sprite sheets expose a truthful runtime registry and declared consumer
   assert.ok(referenced.some((sheet) => sheet.family === 'player'), 'player sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.id.startsWith('enemy.xenomorph-drone.')), 'xenomorph sheet must be referenced');
   assert.ok(referenced.some((sheet) => sheet.family === 'npc'), 'runtime NPC sheet must be referenced');
-  assert.equal(referenced.length, 191, 'all normalized sheets are connected to the animation registry');
+  assert.equal(referenced.length, 192, 'all normalized sheets are connected to the animation registry');
   assert.equal(galleryOnly.length, 0, 'no runtime NPC is mislabeled gallery-only');
-  assert.equal(notReferenced.length, 0, 'all 191 normalized sheets must have an honest consumer');
+  assert.equal(notReferenced.length, 0, 'all 192 normalized sheets must have an honest consumer');
 
   for (const sheet of manifest.sheets) {
     assert.equal(SPRITE_SHEETS[sheet.id]?.path, sheet.files.normalized, `${sheet.id}: normalized bitmap registered in runtime`);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "release": "v61",
+  "release": "v63",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
@@ -6758,6 +6758,37 @@
           "src/weapon-visual-runtime-v61.js",
           "src/game-v51-runtime.js",
           "src/game-v52-runtime.js",
+          "src/app.js"
+        ]
+      }
+    },
+    {
+      "id": "weapon.asso-400-harpoon-gun.action.v63",
+      "family": "weapon",
+      "subject": "ASSO-400 Harpoon Grappling Gun",
+      "wave": "v63",
+      "files": {
+        "raw": "/assets/openai/sprites/weapons/asso-400-harpoon-gun-action-sheet-v63.png",
+        "normalized": "/assets/openai/sprites/normalized/weapons/asso-400-harpoon-gun-action-sheet-v63.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "weapon-action-v56",
+      "pivot": "weapon-grip",
+      "hitbox": "weapon-pickup",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE_RECONSTRUCTION",
+      "excelIds": [
+        "ARM-0053"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/weapon-visual-runtime-v63.js",
+          "src/game-v51-runtime.js",
+          "src/catalog-runtime-v62.js",
           "src/app.js"
         ]
       }

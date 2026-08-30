@@ -29,7 +29,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les conduits et l’insertion', async () => {
+test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les conduits et l’arsenal complété', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -62,6 +62,8 @@ test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les cond
     '/src/vehicle-deployment-gates-v60.js',
     '/src/weapon-visual-runtime-v56.js',
     '/src/weapon-visual-runtime-v61.js',
+    '/src/weapon-visual-runtime-v63.js',
+    '/src/excel-content-bridge-v63.js',
     '/src/equipment-visual-runtime-v56.js',
     '/src/mission-interactive-art-v56.js',
     '/src/hub-art-runtime-v56.js',
@@ -72,7 +74,7 @@ test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les cond
     assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v62`);
   }
 
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 191);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 192);
   for (const sheet of Object.values(SPRITE_SHEETS)) await access(localPath(sheet.path));
   assert.match(worker, /const SPRITE_MANIFEST = ['"]\/assets\/openai\/sprites\/manifest\.json['"]/);
   assert.match(worker, /sheet\.files\?\.normalized/);
@@ -116,7 +118,7 @@ test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les cond
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v62-runtime-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v63-runtime-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -130,15 +132,20 @@ test('le cache hors-ligne v62 couvre la fermeture ESM, le hub physique, les cond
     '/docs/V61_LEVEL_DESIGN_AUDIT.md',
     '/docs/ART_PROVENANCE_V61.md',
     '/docs/ART_PROVENANCE_V62.md',
+    '/docs/ART_PROVENANCE_V63.md',
     '/docs/V62_IMPLEMENTATION_AUDIT.md',
+    '/docs/VERSION_HISTORY_V63.md',
     '/docs/references/V62_PNG_ALPHA_AUDIT.md',
     '/docs/references/V62_PNG_ALPHA_AUDIT.json',
+    '/docs/references/V63_ASSET_COMPLETION_MATRIX.md',
+    '/docs/references/V63_PNG_ALPHA_AUDIT.md',
+    '/docs/references/V63_PNG_ALPHA_AUDIT.json',
     '/docs/references/V61_ASSET_COMPLETION_MATRIX.md',
     '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md'
   ]) {
     assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v62`);
   }
-  assert.match(worker, /async function precacheV62\(\)/);
+  assert.match(worker, /async function precacheV63\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });
