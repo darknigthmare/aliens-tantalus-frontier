@@ -1271,7 +1271,8 @@ export function withV52LevelRuntime(BaseEngine) {
         enemy.searchClock = (Number(enemy.searchClock) || 0) + delta;
         if (enemy.searchClock >= 2.4) enemy.alert = false;
         enemy.facing = Math.sin(this.animationTime * 0.6 + (enemy.animationPhase || enemy.row || 0)) > 0 ? 1 : -1;
-        enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
+        const patrolX = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
+        this.moveEnemyOnMissionSurface(enemy, patrolX, delta);
         return;
       }
       const originalPlayer = this.player;

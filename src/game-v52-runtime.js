@@ -16,6 +16,13 @@ import {
 } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import {
+  advanceEnemyMeleeAttackV64,
+  armEnemyMeleeAttackV64,
+  finishEnemyMeleeAttackV64,
+  isEnemyMeleeTargetValidV64,
+  resolveEnemyMeleeTargetIdV64
+} from './enemy-combat-runtime-v64.js';
+import {
   SQUAD_VEHICLE_ACCESS_V60,
   VEHICLE_ACCESS_SECURE_DURATION_V59,
   createSquadVehicleAccessRuntimeV60,
@@ -825,10 +832,21 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateEnemy(enemy, delta) {
-      const allies = this.activeSquadActors().filter((member) => member.alive && !member.inVehicle);
-      const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter((actor) => actor?.alive);
-      if (!candidates.length) return super.updateEnemy(enemy, delta);
-      const nearest = candidates.reduce((best, actor) => Math.abs(actor.x - enemy.x) < Math.abs(best.x - enemy.x) ? actor : best, candidates[0]);
+      const squadPool = asList(this.squadActors);
+      const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean);
+      let nearest = null;
+      if (enemy?.pendingMelee) {
+        nearest = targetPool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
+        if (!isEnemyMeleeTargetValidV64(nearest)) {
+          this.cancelPendingEnemyMeleeV64(enemy, 'target-invalid');
+          return;
+        }
+      } else {
+        const allies = this.activeSquadActors().filter((member) => isEnemyMeleeTargetValidV64(member) && !member.inVehicle);
+        const candidates = [this.player, this.coopEnabled ? this.coop : null, ...allies].filter(isEnemyMeleeTargetValidV64);
+        if (!candidates.length) return super.updateEnemy(enemy, delta);
+        nearest = candidates.reduce((best, actor) => Math.abs(actor.x - enemy.x) < Math.abs(best.x - enemy.x) ? actor : best, candidates[0]);
+      }
       if (!nearest.squadMember) return super.updateEnemy(enemy, delta);
       if (!this.stealthRuntime) return this.updateEnemyAgainstSquad(enemy, nearest, delta);
 
@@ -864,29 +882,54 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateEnemyAgainstSquad(enemy, target, delta) {
-      if (!enemy?.alive || !target?.alive) return;
+      if (!enemy?.alive) return;
+      if (enemy.pendingMelee && resolveEnemyMeleeTargetIdV64(target) !== enemy.pendingMeleeTargetId) {
+        target = asList(this.squadActors).find((member) => resolveEnemyMeleeTargetIdV64(member) === enemy.pendingMeleeTargetId) || null;
+      }
+      if (!isEnemyMeleeTargetValidV64(target)) {
+        this.cancelPendingEnemyMeleeV64(enemy, 'target-invalid');
+        return;
+      }
       enemy.attackClock -= delta;
       enemy.rangedClock -= delta;
       enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
+      enemy.hurtClock = Math.max(0, (enemy.hurtClock || 0) - delta);
+      const v64MeleeState = advanceEnemyMeleeAttackV64(enemy, delta);
+      const v64Melee = v64MeleeState.contract;
       const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
       const horizontal = targetEntity.x - enemy.x;
       const vertical = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
       if (Math.abs(horizontal) < 620 || enemy.revealed > 0) enemy.alert = true;
       if (!enemy.alert) {
+        if (v64Melee && enemy.pendingMelee) {
+          this.cancelPendingEnemyMeleeV64(enemy, 'lost-target');
+        }
         enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.row) > 0 ? 1 : -1;
         enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
         return;
       }
       enemy.facing = Math.sign(horizontal) || enemy.facing || 1;
-      const ranged = enemy.behavior === 'spitter' || enemy.behavior === 'shooter' || enemy.isBoss;
+      const ranged = !v64Melee && (enemy.behavior === 'spitter'
+        || enemy.behavior === 'shooter'
+        || enemy.isBoss);
       if (ranged && Math.abs(horizontal) < (enemy.isBoss ? 640 : 500) && Math.abs(horizontal) > 115 && vertical < 180 && enemy.rangedClock <= 0) {
         this.spawnEnemyProjectile(enemy, targetEntity);
         enemy.rangedClock = enemy.isBoss ? 1.2 : enemy.behavior === 'spitter' ? 1.55 : 1.15;
         enemy.attacking = true;
-      } else enemy.attacking = enemy.attackClock < 0.25 && Math.abs(horizontal) < 115;
-      const stopRange = enemy.isBoss ? 94 : enemy.behavior === 'pouncer' ? 42 : 58;
+      } else if (!v64Melee) enemy.attacking = enemy.attackClock < 0.25 && Math.abs(horizontal) < 115;
+      const stopRange = v64Melee?.stopRange ?? (enemy.isBoss
+              ? 94
+              : enemy.behavior === 'pouncer'
+                ? 42
+                : 58);
       if (enemy.staggerClock <= 0 && Math.abs(horizontal) > stopRange && vertical < 160) {
-        const speedMultiplier = enemy.behavior === 'hunter' ? 1.28 : enemy.behavior === 'pouncer' ? 1.38 : enemy.isBoss ? 0.75 : 1;
+        const speedMultiplier = v64Melee?.speedMultiplier ?? (enemy.behavior === 'hunter'
+          ? 1.28
+          : enemy.behavior === 'pouncer'
+            ? 1.38
+            : enemy.isBoss
+                ? 0.75
+                : 1);
         const previousX = enemy.x;
         enemy.x += enemy.facing * enemy.speed * speedMultiplier * delta;
         this.resolveEnemyHorizontal(enemy, previousX);
@@ -896,11 +939,57 @@ export function withV52MissionRuntime(BaseEngine) {
         enemy.attackClock = 1.3;
         enemy.attacking = true;
       }
-      if ((overlaps(enemy, targetEntity) || (Math.abs(horizontal) < stopRange + 28 && vertical < 95)) && enemy.attackClock <= 0) {
+      const meleeRange = v64Melee?.meleeRange ?? stopRange + 28;
+      const rawMeleeContact = () => {
+        const currentHorizontal = targetEntity.x - enemy.x;
+        const currentVertical = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
+        return overlaps(enemy, targetEntity) || (Math.abs(currentHorizontal) < meleeRange && currentVertical < 110);
+      };
+      const meleePathClear = () => this.enemyMeleePathClearV64(enemy, targetEntity);
+      const meleeContact = () => rawMeleeContact() && meleePathClear();
+      if (v64Melee && v64MeleeState.impactReady) {
+        const hit = meleeContact();
+        const targetId = enemy.pendingMeleeTargetId;
+        const reason = hit ? null : rawMeleeContact() ? 'path-blocked' : 'target-out-of-range';
+        if (hit) {
+          if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
+          else {
+            this.damageSquadMember(target, enemy.damage, { source: enemy.name });
+            if (enemy.behavior === 'grappler') target.grappledClock = Math.max(target.grappledClock || 0, 0.8);
+          }
+        }
+        finishEnemyMeleeAttackV64(enemy);
+        this.onEvent({ type: 'enemy-attack-impact', enemyId: enemy.id, behavior: enemy.behavior, targetId, hit, reason });
+      }
+      if (v64Melee && !enemy.pendingMelee && enemy.attackClock <= 0 && meleeContact()) {
+        if (v64Melee.lungeDistance > 0) {
+          const currentHorizontal = targetEntity.x - enemy.x;
+          const previousX = enemy.x;
+          enemy.x += Math.sign(currentHorizontal) * Math.min(v64Melee.lungeDistance, Math.max(0, Math.abs(currentHorizontal) - v64Melee.lungeStop));
+          this.resolveEnemyHorizontal(enemy, previousX);
+        }
+        if (meleeContact() && armEnemyMeleeAttackV64(enemy, target)) {
+          this.onEvent({
+            type: 'enemy-attack-telegraph',
+            enemyId: enemy.id,
+            behavior: enemy.behavior,
+            targetId: enemy.pendingMeleeTargetId,
+            windup: v64Melee.windup
+          });
+        }
+      }
+      if (!v64Melee && meleeContact() && enemy.attackClock <= 0) {
         if (enemy.behavior === 'exploder') return void this.detonateEnemy(enemy, target);
         if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
-        else this.damageSquadMember(target, enemy.damage, { source: enemy.name });
-        enemy.attackClock = enemy.isBoss ? 0.65 : enemy.behavior === 'pouncer' ? 1.1 : 0.82;
+        else {
+          this.damageSquadMember(target, enemy.damage, { source: enemy.name });
+          if (enemy.behavior === 'grappler') target.grappledClock = Math.max(target.grappledClock || 0, 0.8);
+        }
+        enemy.attackClock = enemy.isBoss
+            ? 0.65
+            : enemy.behavior === 'pouncer'
+              ? 1.1
+                : 0.82;
         enemy.attacking = true;
       }
     }
@@ -1319,6 +1408,7 @@ export function withV52MissionRuntime(BaseEngine) {
         member.alertClock = Math.max(0, member.alertClock - delta);
         member.hazardClock = Math.max(0, member.hazardClock - delta);
         member.rallyClock = Math.max(0, member.rallyClock - delta);
+        member.grappledClock = Math.max(0, (Number(member.grappledClock) || 0) - delta);
         if (!member.alive) {
           if (member.downed) {
             member.bleedOut = Math.max(0, member.bleedOut - delta);
@@ -1472,7 +1562,8 @@ export function withV52MissionRuntime(BaseEngine) {
         }
       }
       member.climbing = false;
-      const desiredVelocity = Math.abs(gapX) > 34 ? Math.sign(gapX) * (targetEnemy ? 165 : 215) : 0;
+      const grappleScale = member.grappledClock > 0 ? 0.42 : 1;
+      const desiredVelocity = Math.abs(gapX) > 34 ? Math.sign(gapX) * (targetEnemy ? 165 : 215) * grappleScale : 0;
       member.vx += (desiredVelocity - member.vx) * Math.min(1, delta * (member.grounded ? 12 : 7));
       if (Math.abs(member.vx) > 4) member.facing = Math.sign(member.vx);
       const previousX = member.x;

@@ -29,7 +29,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les conduits et l’arsenal complété', async () => {
+test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bestiaire hybride complété', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -56,6 +56,7 @@ test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les cond
     '/src/sprite-animation-runtime.js',
     '/src/mission-levels-v52.js',
     '/src/enemy-visual-overrides-v56.js',
+    '/src/enemy-visual-overrides-v64.js',
     '/src/npc-mission-runtime-v55.js',
     '/src/vehicle-visual-overrides-v56.js',
     '/src/vehicle-access-runtime-v59.js',
@@ -74,7 +75,7 @@ test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les cond
     assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v62`);
   }
 
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 192);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 195);
   for (const sheet of Object.values(SPRITE_SHEETS)) await access(localPath(sheet.path));
   assert.match(worker, /const SPRITE_MANIFEST = ['"]\/assets\/openai\/sprites\/manifest\.json['"]/);
   assert.match(worker, /sheet\.files\?\.normalized/);
@@ -118,7 +119,7 @@ test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les cond
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v63-runtime-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v64-runtime-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -133,19 +134,36 @@ test('le cache hors-ligne v63 couvre la fermeture ESM, le hub physique, les cond
     '/docs/ART_PROVENANCE_V61.md',
     '/docs/ART_PROVENANCE_V62.md',
     '/docs/ART_PROVENANCE_V63.md',
+    '/docs/ART_PROVENANCE_V64.md',
     '/docs/V62_IMPLEMENTATION_AUDIT.md',
     '/docs/VERSION_HISTORY_V63.md',
+    '/docs/VERSION_HISTORY_V64.md',
     '/docs/references/V62_PNG_ALPHA_AUDIT.md',
     '/docs/references/V62_PNG_ALPHA_AUDIT.json',
     '/docs/references/V63_ASSET_COMPLETION_MATRIX.md',
     '/docs/references/V63_PNG_ALPHA_AUDIT.md',
     '/docs/references/V63_PNG_ALPHA_AUDIT.json',
+    '/docs/references/V64_ASSET_COMPLETION_MATRIX.md',
+    '/docs/references/V64_ENEMY_SOURCES.json',
+    '/docs/references/V64_IMAGEGEN_PROMPTS.md',
+    '/docs/references/V64_PNG_ALPHA_AUDIT.json',
     '/docs/references/V61_ASSET_COMPLETION_MATRIX.md',
     '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md'
   ]) {
     assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v62`);
   }
-  assert.match(worker, /async function precacheV63\(\)/);
+  const pngAudit = JSON.parse(await readFile(localPath('/docs/references/V64_PNG_ALPHA_AUDIT.json'), 'utf8'));
+  assert.equal(pngAudit.release, 'v64');
+  assert.equal(pngAudit.summary.assetsAudited, 405);
+  assert.equal(pngAudit.summary.findings.error, 0);
+  const enemySources = JSON.parse(await readFile(localPath('/docs/references/V64_ENEMY_SOURCES.json'), 'utf8'));
+  for (const entry of enemySources.entries) {
+    assert.equal(entry.assets.repositoryOnly.published, false);
+    assert.ok(Object.values(entry.assets.repositoryOnly).filter((value) => typeof value === 'string').every((value) => !value.startsWith('/')));
+    assert.ok(entry.assets.runtime.rawAtlas.startsWith('/assets/'));
+    assert.ok(entry.assets.runtime.normalizedAtlas.startsWith('/assets/'));
+  }
+  assert.match(worker, /async function precacheV64\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });
@@ -158,10 +176,22 @@ test('le build et le déploiement excluent les masters QA raw sans supprimer les
   ]);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'raw'\), \{ recursive: true, force: true \}\)/);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'\), \{ recursive: true, force: true \}\)/);
+  assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'frames', 'v64'\), \{ recursive: true, force: true \}\)/);
+  assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'reference-masters', 'v64'\), \{ recursive: true, force: true \}\)/);
+  assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'previews', 'v64'\), \{ recursive: true, force: true \}\)/);
+  assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'metadata', 'v64'\), \{ recursive: true, force: true \}\)/);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/raw$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/raw\/\*\*$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/normalized\/equipment$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/normalized\/equipment\/\*\*$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/frames\/v64$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/frames\/v64\/\*\*$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/reference-masters\/v64$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/reference-masters\/v64\/\*\*$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/previews\/v64$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/previews\/v64\/\*\*$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/metadata\/v64$/m);
+  assert.match(vercelIgnore, /^assets\/openai\/sprites\/metadata\/v64\/\*\*$/m);
   assert.match(vercelIgnore, /^\.tmp\/\*\*$/m);
   assert.match(vercelIgnore, /^node_modules$/m);
   assert.match(vercelIgnore, /^dist$/m);

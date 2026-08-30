@@ -9,6 +9,14 @@ assets/openai/sprites/raw/**
 assets/openai/v56-art-normalization-report.json
 assets/openai/sprites/normalized/equipment
 assets/openai/sprites/normalized/equipment/**
+assets/openai/sprites/frames/v64
+assets/openai/sprites/frames/v64/**
+assets/openai/sprites/reference-masters/v64
+assets/openai/sprites/reference-masters/v64/**
+assets/openai/sprites/previews/v64
+assets/openai/sprites/previews/v64/**
+assets/openai/sprites/metadata/v64
+assets/openai/sprites/metadata/v64/**
 scripts/__pycache__
 scripts/__pycache__/**
 .qa

@@ -1,0 +1,1627 @@
+{
+  "schema": 1,
+  "release": "v64",
+  "generatedBy": "scripts/process-v64-enemy-art.py",
+  "pipeline": [
+    "tolerant-magenta-chroma-key",
+    "connected-component-pose-isolation",
+    "canonical-scale-normalization",
+    "ground-pivot-alignment",
+    "guarded-4x4-atlas-pack",
+    "animated-preview"
+  ],
+  "creatures": [
+    {
+      "subject": "Newborn",
+      "sheetId": "enemy.newborn.action.v64",
+      "strips": [
+        {
+          "clip": "idle",
+          "path": "assets/openai/sprites/frames/v64/newborn/idle-keyframes-v64.png",
+          "sourceSize": [
+            1681,
+            935
+          ],
+          "sourceMode": "RGBA",
+          "sourceSha256": "88a0f11695db0673749aa82718b4a286af326208fb63d242816788416fdf10eb",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                68,
+                59,
+                302,
+                892
+              ],
+              "sourceSize": [
+                234,
+                833
+              ],
+              "foregroundPixels": 79206,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                458,
+                53,
+                695,
+                892
+              ],
+              "sourceSize": [
+                237,
+                839
+              ],
+              "foregroundPixels": 83308,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                859,
+                48,
+                1093,
+                892
+              ],
+              "sourceSize": [
+                234,
+                844
+              ],
+              "foregroundPixels": 84643,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1239,
+                65,
+                1486,
+                892
+              ],
+              "sourceSize": [
+                247,
+                827
+              ],
+              "foregroundPixels": 82217,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "chase",
+          "path": "assets/openai/sprites/frames/v64/newborn/chase-keyframes-v64.png",
+          "sourceSize": [
+            1681,
+            935
+          ],
+          "sourceMode": "RGBA",
+          "sourceSha256": "7e8b545058b5eeccc85db4d96a93cba2dbb00c11c68955e7bcd0e6331a18a764",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                13,
+                118,
+                470,
+                821
+              ],
+              "sourceSize": [
+                457,
+                703
+              ],
+              "foregroundPixels": 81827,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                490,
+                135,
+                754,
+                824
+              ],
+              "sourceSize": [
+                264,
+                689
+              ],
+              "foregroundPixels": 72721,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                823,
+                122,
+                1288,
+                822
+              ],
+              "sourceSize": [
+                465,
+                700
+              ],
+              "foregroundPixels": 81153,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1311,
+                136,
+                1582,
+                824
+              ],
+              "sourceSize": [
+                271,
+                688
+              ],
+              "foregroundPixels": 71759,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "attack",
+          "path": "assets/openai/sprites/frames/v64/newborn/attack-keyframes-v64.png",
+          "sourceSize": [
+            1681,
+            935
+          ],
+          "sourceMode": "RGBA",
+          "sourceSha256": "2634210c75895ee896469a657d8474fe15627a6f4cd77a9a7a7dad220dc0c135",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                40,
+                213,
+                384,
+                818
+              ],
+              "sourceSize": [
+                344,
+                605
+              ],
+              "foregroundPixels": 69617,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                425,
+                199,
+                938,
+                816
+              ],
+              "sourceSize": [
+                513,
+                617
+              ],
+              "foregroundPixels": 73196,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                831,
+                176,
+                1381,
+                813
+              ],
+              "sourceSize": [
+                550,
+                637
+              ],
+              "foregroundPixels": 68144,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1323,
+                188,
+                1603,
+                813
+              ],
+              "sourceSize": [
+                280,
+                625
+              ],
+              "foregroundPixels": 70024,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "death",
+          "path": "assets/openai/sprites/frames/v64/newborn/death-keyframes-v64.png",
+          "sourceSize": [
+            1681,
+            935
+          ],
+          "sourceMode": "RGBA",
+          "sourceSha256": "716bf85b409337278299d3ee5c1054dd4dd89ee679defdbff69898ac67cb824c",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                23,
+                193,
+                449,
+                753
+              ],
+              "sourceSize": [
+                426,
+                560
+              ],
+              "foregroundPixels": 61460,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                433,
+                377,
+                852,
+                744
+              ],
+              "sourceSize": [
+                419,
+                367
+              ],
+              "foregroundPixels": 54471,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                840,
+                482,
+                1294,
+                747
+              ],
+              "sourceSize": [
+                454,
+                265
+              ],
+              "foregroundPixels": 49671,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1274,
+                606,
+                1669,
+                744
+              ],
+              "sourceSize": [
+                395,
+                138
+              ],
+              "foregroundPixels": 34053,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        }
+      ],
+      "canonicalScale": 0.322534,
+      "normalized": "assets/openai/sprites/normalized/enemies/newborn-action-sheet-v64.png",
+      "normalizedSha256": "a4ca70d8d2f5c9541c64c4a1dd4bce74d594eeb171e39b2dbea9f3ffe95c40a3",
+      "raw": "assets/openai/sprites/enemies/newborn-action-sheet-v64.png",
+      "rawSha256": "fd5e9b450c122d0956c77c66b28c55efbb93647194916f97f5b4c97823733f32",
+      "preview": "assets/openai/sprites/previews/v64/newborn-animation-preview-v64.gif",
+      "metadata": "assets/openai/sprites/metadata/v64/newborn-animation-v64.json",
+      "validation": {
+        "cells": [
+          {
+            "index": 0,
+            "alphaBounds": [
+              97,
+              17,
+              158,
+              239
+            ],
+            "foregroundPixels": 6093,
+            "width": 61,
+            "height": 222,
+            "relativeToRowMedian": 0.963549
+          },
+          {
+            "index": 1,
+            "alphaBounds": [
+              97,
+              17,
+              158,
+              239
+            ],
+            "foregroundPixels": 6307,
+            "width": 61,
+            "height": 222,
+            "relativeToRowMedian": 0.997391
+          },
+          {
+            "index": 2,
+            "alphaBounds": [
+              98,
+              17,
+              158,
+              239
+            ],
+            "foregroundPixels": 6340,
+            "width": 60,
+            "height": 222,
+            "relativeToRowMedian": 1.002609
+          },
+          {
+            "index": 3,
+            "alphaBounds": [
+              95,
+              17,
+              160,
+              239
+            ],
+            "foregroundPixels": 6443,
+            "width": 65,
+            "height": 222,
+            "relativeToRowMedian": 1.018898
+          },
+          {
+            "index": 4,
+            "alphaBounds": [
+              56,
+              17,
+              200,
+              239
+            ],
+            "foregroundPixels": 8993,
+            "width": 144,
+            "height": 222,
+            "relativeToRowMedian": 1.05397
+          },
+          {
+            "index": 5,
+            "alphaBounds": [
+              86,
+              20,
+              168,
+              239
+            ],
+            "foregroundPixels": 8076,
+            "width": 82,
+            "height": 219,
+            "relativeToRowMedian": 0.946499
+          },
+          {
+            "index": 6,
+            "alphaBounds": [
+              54,
+              17,
+              201,
+              239
+            ],
+            "foregroundPixels": 8989,
+            "width": 147,
+            "height": 222,
+            "relativeToRowMedian": 1.053501
+          },
+          {
+            "index": 7,
+            "alphaBounds": [
+              85,
+              20,
+              170,
+              239
+            ],
+            "foregroundPixels": 7948,
+            "width": 85,
+            "height": 219,
+            "relativeToRowMedian": 0.931497
+          },
+          {
+            "index": 8,
+            "alphaBounds": [
+              73,
+              46,
+              182,
+              239
+            ],
+            "foregroundPixels": 7827,
+            "width": 109,
+            "height": 193,
+            "relativeToRowMedian": 0.998151
+          },
+          {
+            "index": 9,
+            "alphaBounds": [
+              46,
+              42,
+              208,
+              239
+            ],
+            "foregroundPixels": 8262,
+            "width": 162,
+            "height": 197,
+            "relativeToRowMedian": 1.053625
+          },
+          {
+            "index": 10,
+            "alphaBounds": [
+              40,
+              36,
+              215,
+              239
+            ],
+            "foregroundPixels": 7635,
+            "width": 175,
+            "height": 203,
+            "relativeToRowMedian": 0.973666
+          },
+          {
+            "index": 11,
+            "alphaBounds": [
+              84,
+              39,
+              171,
+              239
+            ],
+            "foregroundPixels": 7856,
+            "width": 87,
+            "height": 200,
+            "relativeToRowMedian": 1.001849
+          },
+          {
+            "index": 12,
+            "alphaBounds": [
+              60,
+              61,
+              195,
+              239
+            ],
+            "foregroundPixels": 6947,
+            "width": 135,
+            "height": 178,
+            "relativeToRowMedian": 1.208279
+          },
+          {
+            "index": 13,
+            "alphaBounds": [
+              61,
+              123,
+              193,
+              239
+            ],
+            "foregroundPixels": 6056,
+            "width": 132,
+            "height": 116,
+            "relativeToRowMedian": 1.053309
+          },
+          {
+            "index": 14,
+            "alphaBounds": [
+              56,
+              156,
+              199,
+              239
+            ],
+            "foregroundPixels": 5443,
+            "width": 143,
+            "height": 83,
+            "relativeToRowMedian": 0.946691
+          },
+          {
+            "index": 15,
+            "alphaBounds": [
+              66,
+              196,
+              189,
+              239
+            ],
+            "foregroundPixels": 3730,
+            "width": 123,
+            "height": 43,
+            "relativeToRowMedian": 0.648752
+          }
+        ],
+        "rowMedianForegroundPixels": [
+          6323.5,
+          8532.5,
+          7841.5,
+          5749.5
+        ],
+        "findings": []
+      }
+    },
+    {
+      "subject": "Offspring",
+      "sheetId": "enemy.offspring.action.v64",
+      "strips": [
+        {
+          "clip": "idle",
+          "path": "assets/openai/sprites/frames/v64/offspring/idle-keyframes-v64.png",
+          "sourceSize": [
+            1881,
+            836
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "87c40b823fc564af9c9ca54fde877dc240550bbf24fd3a9bf2c625e3a0240e38",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                168,
+                30,
+                326,
+                795
+              ],
+              "sourceSize": [
+                158,
+                765
+              ],
+              "foregroundPixels": 46090,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                622,
+                30,
+                779,
+                794
+              ],
+              "sourceSize": [
+                157,
+                764
+              ],
+              "foregroundPixels": 47169,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                1072,
+                30,
+                1231,
+                794
+              ],
+              "sourceSize": [
+                159,
+                764
+              ],
+              "foregroundPixels": 48148,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1530,
+                30,
+                1687,
+                794
+              ],
+              "sourceSize": [
+                157,
+                764
+              ],
+              "foregroundPixels": 48008,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "chase",
+          "path": "assets/openai/sprites/frames/v64/offspring/chase-keyframes-v64.png",
+          "sourceSize": [
+            1536,
+            1024
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "0a92cf70a22b899aa9c8b6fb1ce7af5a01f1b43434e522322c0b7db059a14bac",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                27,
+                72,
+                430,
+                947
+              ],
+              "sourceSize": [
+                403,
+                875
+              ],
+              "foregroundPixels": 70838,
+              "componentCount": 1,
+              "isolationStrategy": "eroded-seed-geodesic-split",
+              "erosionKernel": 9
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                390,
+                60,
+                832,
+                945
+              ],
+              "sourceSize": [
+                442,
+                885
+              ],
+              "foregroundPixels": 72697,
+              "componentCount": 1,
+              "isolationStrategy": "eroded-seed-geodesic-split",
+              "erosionKernel": 9
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                804,
+                72,
+                1208,
+                947
+              ],
+              "sourceSize": [
+                404,
+                875
+              ],
+              "foregroundPixels": 73776,
+              "componentCount": 4,
+              "isolationStrategy": "eroded-seed-geodesic-split",
+              "erosionKernel": 9
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1194,
+                75,
+                1453,
+                946
+              ],
+              "sourceSize": [
+                259,
+                871
+              ],
+              "foregroundPixels": 66955,
+              "componentCount": 1,
+              "isolationStrategy": "eroded-seed-geodesic-split",
+              "erosionKernel": 9
+            }
+          ]
+        },
+        {
+          "clip": "attack",
+          "path": "assets/openai/sprites/frames/v64/offspring/attack-keyframes-v64.png",
+          "sourceSize": [
+            1983,
+            793
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "601d25898facbc0db68f15be87be0dd5992c83f32f4e93abfe0c9129507e9862",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                69,
+                62,
+                404,
+                745
+              ],
+              "sourceSize": [
+                335,
+                683
+              ],
+              "foregroundPixels": 56769,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                390,
+                96,
+                981,
+                745
+              ],
+              "sourceSize": [
+                591,
+                649
+              ],
+              "foregroundPixels": 61696,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                921,
+                97,
+                1614,
+                745
+              ],
+              "sourceSize": [
+                693,
+                648
+              ],
+              "foregroundPixels": 66124,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1595,
+                62,
+                1902,
+                750
+              ],
+              "sourceSize": [
+                307,
+                688
+              ],
+              "foregroundPixels": 53284,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "death",
+          "path": "assets/openai/sprites/frames/v64/offspring/death-keyframes-v64.png",
+          "sourceSize": [
+            1881,
+            836
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "613d693e3730c59bfa72b2438d7cba866b03442b41b46167a8379565b73e90a9",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                64,
+                110,
+                460,
+                771
+              ],
+              "sourceSize": [
+                396,
+                661
+              ],
+              "foregroundPixels": 59170,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                460,
+                347,
+                840,
+                772
+              ],
+              "sourceSize": [
+                380,
+                425
+              ],
+              "foregroundPixels": 52560,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                839,
+                503,
+                1296,
+                773
+              ],
+              "sourceSize": [
+                457,
+                270
+              ],
+              "foregroundPixels": 40187,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1286,
+                632,
+                1826,
+                774
+              ],
+              "sourceSize": [
+                540,
+                142
+              ],
+              "foregroundPixels": 32657,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        }
+      ],
+      "canonicalScale": 0.293194,
+      "normalized": "assets/openai/sprites/normalized/enemies/offspring-action-sheet-v64.png",
+      "normalizedSha256": "5dadd8dd9f50e05139fa54fdfcdaf712a3b308f9336a68dbde48919e4703a18d",
+      "raw": "assets/openai/sprites/enemies/offspring-action-sheet-v64.png",
+      "rawSha256": "ea62a52b721a228fc2da901388953a3a5d71dd95510b1ba81df1b663209f7286",
+      "preview": "assets/openai/sprites/previews/v64/offspring-animation-preview-v64.gif",
+      "metadata": "assets/openai/sprites/metadata/v64/offspring-animation-v64.json",
+      "validation": {
+        "cells": [
+          {
+            "index": 0,
+            "alphaBounds": [
+              106,
+              17,
+              150,
+              239
+            ],
+            "foregroundPixels": 4211,
+            "width": 44,
+            "height": 222,
+            "relativeToRowMedian": 0.962074
+          },
+          {
+            "index": 1,
+            "alphaBounds": [
+              106,
+              17,
+              150,
+              239
+            ],
+            "foregroundPixels": 4334,
+            "width": 44,
+            "height": 222,
+            "relativeToRowMedian": 0.990176
+          },
+          {
+            "index": 2,
+            "alphaBounds": [
+              105,
+              17,
+              150,
+              239
+            ],
+            "foregroundPixels": 4467,
+            "width": 45,
+            "height": 222,
+            "relativeToRowMedian": 1.020562
+          },
+          {
+            "index": 3,
+            "alphaBounds": [
+              106,
+              17,
+              150,
+              239
+            ],
+            "foregroundPixels": 4420,
+            "width": 44,
+            "height": 222,
+            "relativeToRowMedian": 1.009824
+          },
+          {
+            "index": 4,
+            "alphaBounds": [
+              77,
+              17,
+              178,
+              239
+            ],
+            "foregroundPixels": 5102,
+            "width": 101,
+            "height": 222,
+            "relativeToRowMedian": 0.993864
+          },
+          {
+            "index": 5,
+            "alphaBounds": [
+              73,
+              17,
+              183,
+              239
+            ],
+            "foregroundPixels": 5165,
+            "width": 110,
+            "height": 222,
+            "relativeToRowMedian": 1.006136
+          },
+          {
+            "index": 6,
+            "alphaBounds": [
+              77,
+              17,
+              178,
+              239
+            ],
+            "foregroundPixels": 5336,
+            "width": 101,
+            "height": 222,
+            "relativeToRowMedian": 1.039447
+          },
+          {
+            "index": 7,
+            "alphaBounds": [
+              95,
+              17,
+              160,
+              239
+            ],
+            "foregroundPixels": 4856,
+            "width": 65,
+            "height": 222,
+            "relativeToRowMedian": 0.945943
+          },
+          {
+            "index": 8,
+            "alphaBounds": [
+              80,
+              41,
+              176,
+              239
+            ],
+            "foregroundPixels": 5367,
+            "width": 96,
+            "height": 198,
+            "relativeToRowMedian": 0.955152
+          },
+          {
+            "index": 9,
+            "alphaBounds": [
+              42,
+              51,
+              213,
+              239
+            ],
+            "foregroundPixels": 5871,
+            "width": 171,
+            "height": 188,
+            "relativeToRowMedian": 1.044848
+          },
+          {
+            "index": 10,
+            "alphaBounds": [
+              27,
+              51,
+              228,
+              239
+            ],
+            "foregroundPixels": 6292,
+            "width": 201,
+            "height": 188,
+            "relativeToRowMedian": 1.119772
+          },
+          {
+            "index": 11,
+            "alphaBounds": [
+              84,
+              39,
+              172,
+              239
+            ],
+            "foregroundPixels": 5063,
+            "width": 88,
+            "height": 200,
+            "relativeToRowMedian": 0.90105
+          },
+          {
+            "index": 12,
+            "alphaBounds": [
+              71,
+              47,
+              185,
+              239
+            ],
+            "foregroundPixels": 5629,
+            "width": 114,
+            "height": 192,
+            "relativeToRowMedian": 1.291203
+          },
+          {
+            "index": 13,
+            "alphaBounds": [
+              73,
+              116,
+              182,
+              239
+            ],
+            "foregroundPixels": 4973,
+            "width": 109,
+            "height": 123,
+            "relativeToRowMedian": 1.140727
+          },
+          {
+            "index": 14,
+            "alphaBounds": [
+              62,
+              162,
+              194,
+              239
+            ],
+            "foregroundPixels": 3746,
+            "width": 132,
+            "height": 77,
+            "relativeToRowMedian": 0.859273
+          },
+          {
+            "index": 15,
+            "alphaBounds": [
+              50,
+              199,
+              206,
+              239
+            ],
+            "foregroundPixels": 3017,
+            "width": 156,
+            "height": 40,
+            "relativeToRowMedian": 0.692052
+          }
+        ],
+        "rowMedianForegroundPixels": [
+          4377.0,
+          5133.5,
+          5619.0,
+          4359.5
+        ],
+        "findings": []
+      }
+    },
+    {
+      "subject": "Predalien",
+      "sheetId": "enemy.predalien.action.v64",
+      "strips": [
+        {
+          "clip": "idle",
+          "path": "assets/openai/sprites/frames/v64/predalien/idle-keyframes-v64.png",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "f3c74127f78e9839e193fa284943b31f567ba2e2a47bec317a0a3ea527789507",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                117,
+                112,
+                349,
+                759
+              ],
+              "sourceSize": [
+                232,
+                647
+              ],
+              "foregroundPixels": 71811,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                525,
+                112,
+                764,
+                759
+              ],
+              "sourceSize": [
+                239,
+                647
+              ],
+              "foregroundPixels": 71773,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                941,
+                111,
+                1218,
+                759
+              ],
+              "sourceSize": [
+                277,
+                648
+              ],
+              "foregroundPixels": 72658,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1430,
+                112,
+                1659,
+                759
+              ],
+              "sourceSize": [
+                229,
+                647
+              ],
+              "foregroundPixels": 71469,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "chase",
+          "path": "assets/openai/sprites/frames/v64/predalien/chase-keyframes-v64.png",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "6fecb5ce407a7cce953a8197c76504951391047247304fc2a4883d86c3c969ff",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                23,
+                234,
+                415,
+                668
+              ],
+              "sourceSize": [
+                392,
+                434
+              ],
+              "foregroundPixels": 55514,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                453,
+                272,
+                831,
+                665
+              ],
+              "sourceSize": [
+                378,
+                393
+              ],
+              "foregroundPixels": 50380,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                890,
+                214,
+                1286,
+                668
+              ],
+              "sourceSize": [
+                396,
+                454
+              ],
+              "foregroundPixels": 57924,
+              "componentCount": 2,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1315,
+                261,
+                1772,
+                666
+              ],
+              "sourceSize": [
+                457,
+                405
+              ],
+              "foregroundPixels": 53516,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "attack",
+          "path": "assets/openai/sprites/frames/v64/predalien/attack-keyframes-v64.png",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "5ad994a986c504c6ca460c1700782d32fedd7a52a61e45cdc4c49d6bebfa3832",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                31,
+                304,
+                358,
+                655
+              ],
+              "sourceSize": [
+                327,
+                351
+              ],
+              "foregroundPixels": 47268,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                436,
+                314,
+                890,
+                656
+              ],
+              "sourceSize": [
+                454,
+                342
+              ],
+              "foregroundPixels": 49721,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                887,
+                294,
+                1307,
+                656
+              ],
+              "sourceSize": [
+                420,
+                362
+              ],
+              "foregroundPixels": 44380,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1364,
+                264,
+                1730,
+                651
+              ],
+              "sourceSize": [
+                366,
+                387
+              ],
+              "foregroundPixels": 49001,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        },
+        {
+          "clip": "death",
+          "path": "assets/openai/sprites/frames/v64/predalien/death-keyframes-v64.png",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "sourceMode": "RGB",
+          "sourceSha256": "f316937e0bfdf5ac8bc2d2a3f6773a3fa93c1afdbb7086c82a8c1281d08626cb",
+          "frames": [
+            {
+              "index": 0,
+              "sourceBounds": [
+                38,
+                273,
+                424,
+                679
+              ],
+              "sourceSize": [
+                386,
+                406
+              ],
+              "foregroundPixels": 52708,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 1,
+              "sourceBounds": [
+                440,
+                399,
+                793,
+                679
+              ],
+              "sourceSize": [
+                353,
+                280
+              ],
+              "foregroundPixels": 42962,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 2,
+              "sourceBounds": [
+                850,
+                495,
+                1254,
+                687
+              ],
+              "sourceSize": [
+                404,
+                192
+              ],
+              "foregroundPixels": 34669,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            },
+            {
+              "index": 3,
+              "sourceBounds": [
+                1312,
+                564,
+                1720,
+                692
+              ],
+              "sourceSize": [
+                408,
+                128
+              ],
+              "foregroundPixels": 28184,
+              "componentCount": 1,
+              "isolationStrategy": "connected-components"
+            }
+          ]
+        }
+      ],
+      "canonicalScale": 0.533969,
+      "normalized": "assets/openai/sprites/normalized/enemies/predalien-action-sheet-v64.png",
+      "normalizedSha256": "5dcb10b5584b437d16a51a731667f51c8bd41a1f37c8683048931d10c4e67af9",
+      "raw": "assets/openai/sprites/enemies/predalien-action-sheet-v64.png",
+      "rawSha256": "f437de17cd7f53c55aab8661cff2a1e673ff1ff3a1cc9f99f7db4e284ef5da25",
+      "preview": "assets/openai/sprites/previews/v64/predalien-animation-preview-v64.gif",
+      "metadata": "assets/openai/sprites/metadata/v64/predalien-animation-v64.json",
+      "validation": {
+        "cells": [
+          {
+            "index": 0,
+            "alphaBounds": [
+              90,
+              18,
+              166,
+              238
+            ],
+            "foregroundPixels": 9081,
+            "width": 76,
+            "height": 220,
+            "relativeToRowMedian": 0.996762
+          },
+          {
+            "index": 1,
+            "alphaBounds": [
+              88,
+              18,
+              167,
+              238
+            ],
+            "foregroundPixels": 9140,
+            "width": 79,
+            "height": 220,
+            "relativeToRowMedian": 1.003238
+          },
+          {
+            "index": 2,
+            "alphaBounds": [
+              82,
+              18,
+              174,
+              238
+            ],
+            "foregroundPixels": 9226,
+            "width": 92,
+            "height": 220,
+            "relativeToRowMedian": 1.012678
+          },
+          {
+            "index": 3,
+            "alphaBounds": [
+              90,
+              18,
+              165,
+              238
+            ],
+            "foregroundPixels": 9028,
+            "width": 75,
+            "height": 220,
+            "relativeToRowMedian": 0.990945
+          },
+          {
+            "index": 4,
+            "alphaBounds": [
+              30,
+              19,
+              226,
+              237
+            ],
+            "foregroundPixels": 15603,
+            "width": 196,
+            "height": 218,
+            "relativeToRowMedian": 1.042319
+          },
+          {
+            "index": 5,
+            "alphaBounds": [
+              30,
+              33,
+              226,
+              237
+            ],
+            "foregroundPixels": 15097,
+            "width": 196,
+            "height": 204,
+            "relativeToRowMedian": 1.008517
+          },
+          {
+            "index": 6,
+            "alphaBounds": [
+              32,
+              19,
+              223,
+              237
+            ],
+            "foregroundPixels": 14842,
+            "width": 191,
+            "height": 218,
+            "relativeToRowMedian": 0.991483
+          },
+          {
+            "index": 7,
+            "alphaBounds": [
+              18,
+              44,
+              237,
+              238
+            ],
+            "foregroundPixels": 13681,
+            "width": 219,
+            "height": 194,
+            "relativeToRowMedian": 0.913925
+          },
+          {
+            "index": 8,
+            "alphaBounds": [
+              43,
+              56,
+              212,
+              237
+            ],
+            "foregroundPixels": 14298,
+            "width": 169,
+            "height": 181,
+            "relativeToRowMedian": 1.034139
+          },
+          {
+            "index": 9,
+            "alphaBounds": [
+              18,
+              73,
+              237,
+              237
+            ],
+            "foregroundPixels": 12991,
+            "width": 219,
+            "height": 164,
+            "relativeToRowMedian": 0.939607
+          },
+          {
+            "index": 10,
+            "alphaBounds": [
+              19,
+              50,
+              237,
+              237
+            ],
+            "foregroundPixels": 13354,
+            "width": 218,
+            "height": 187,
+            "relativeToRowMedian": 0.965861
+          },
+          {
+            "index": 11,
+            "alphaBounds": [
+              33,
+              36,
+              222,
+              237
+            ],
+            "foregroundPixels": 14803,
+            "width": 189,
+            "height": 201,
+            "relativeToRowMedian": 1.070664
+          },
+          {
+            "index": 12,
+            "alphaBounds": [
+              28,
+              26,
+              228,
+              237
+            ],
+            "foregroundPixels": 15942,
+            "width": 200,
+            "height": 211,
+            "relativeToRowMedian": 1.355728
+          },
+          {
+            "index": 13,
+            "alphaBounds": [
+              37,
+              93,
+              219,
+              237
+            ],
+            "foregroundPixels": 12956,
+            "width": 182,
+            "height": 144,
+            "relativeToRowMedian": 1.101794
+          },
+          {
+            "index": 14,
+            "alphaBounds": [
+              23,
+              140,
+              233,
+              237
+            ],
+            "foregroundPixels": 10562,
+            "width": 210,
+            "height": 97,
+            "relativeToRowMedian": 0.898206
+          },
+          {
+            "index": 15,
+            "alphaBounds": [
+              22,
+              175,
+              234,
+              237
+            ],
+            "foregroundPixels": 8353,
+            "width": 212,
+            "height": 62,
+            "relativeToRowMedian": 0.71035
+          }
+        ],
+        "rowMedianForegroundPixels": [
+          9110.5,
+          14969.5,
+          13826.0,
+          11759.0
+        ],
+        "findings": []
+      }
+    }
+  ]
+}

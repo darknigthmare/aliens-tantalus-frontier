@@ -1,5 +1,13 @@
-import { resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
+import { SPRITE_SHEETS, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
+import {
+  advanceEnemyMeleeAttackV64,
+  armEnemyMeleeAttackV64,
+  cancelEnemyMeleeAttackV64,
+  finishEnemyMeleeAttackV64,
+  isEnemyMeleeTargetValidV64,
+  resolveEnemyMeleeTargetIdV64
+} from './enemy-combat-runtime-v64.js';
 import {
   MISSION_INTERACTIVE_ART_ASSET_COUNT_V56,
   MISSION_INTERACTIVE_ART_FILES_V56,
@@ -31,20 +39,17 @@ const MAGAZINE_SIZE = 30;
 const TRACKER_COST = 24;
 const REVIVE_RANGE = 86;
 const EDITOR_TILE_TYPES = new Set(['floor', 'platform', 'wall', 'door', 'vent', 'ladder', 'lift', 'spawn', 'objective', 'enemy', 'vehicle', 'terminal', 'hazard']);
-const PROJECT_ORIGINAL_ENEMY_SHEET_IDS = Object.freeze([
-  'enemy.neuro-xeno-drone.action.v56',
-  'enemy.atarax-ripper.action.v56',
-  'enemy.colonial-raider.action.v56',
-  'enemy.atarax-controller.action.v56',
-  'enemy.korari-stalker.action.v56',
-  'enemy.ceto-reef-predator.action.v56',
-  'enemy.tantalus-tunnel-vermin.action.v56'
+const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
+  'enemy-action-v54',
+  'enemy-action-v56',
+  'ovomorph-cycle-v55',
+  'newborn-action-v64',
+  'offspring-action-v64',
+  'predalien-action-v64'
 ]);
-const PROJECT_ORIGINAL_ENEMY_SHEET_ID_SET = new Set(PROJECT_ORIGINAL_ENEMY_SHEET_IDS);
-const PROJECT_ORIGINAL_ENEMY_ASSETS = Object.freeze(Object.fromEntries(
-  PROJECT_ORIGINAL_ENEMY_SHEET_IDS
-    .map((sheetId) => resolveSpriteSheet(sheetId))
-    .filter(Boolean)
+const ENEMY_SPRITE_ASSETS = Object.freeze(Object.fromEntries(
+  Object.values(SPRITE_SHEETS)
+    .filter((sheet) => sheet.family === 'enemy')
     .map((sheet) => [sheet.imageKey, sheet.path])
 ));
 
@@ -122,7 +127,7 @@ const ASSETS = Object.freeze({
   ripperQueen: '/assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png',
   paleCrucibleHunter: '/assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png',
   pathogenMimic: '/assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png',
-  ...PROJECT_ORIGINAL_ENEMY_ASSETS,
+  ...ENEMY_SPRITE_ASSETS,
   ...WEAPON_VISUAL_ASSETS_ALL_V63,
   rifle: '/assets/openai/sprites/normalized/weapons/m41a-pulse-rifle-action-sheet.png',
   apc: '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png',
@@ -203,6 +208,9 @@ function createImage(source) {
 
 
 function enemyBehavior(spriteKey, biology) {
+  if (spriteKey === 'newbornV64') return 'grappler';
+  if (spriteKey === 'offspringV64') return 'reach-hunter';
+  if (spriteKey === 'predalienV64') return 'hybrid-boss';
   if (spriteKey === 'facehugger') return 'pouncer';
   if (spriteKey === 'xenoRunner') return 'pouncer';
   if (spriteKey === 'korariStalkerV56' || spriteKey === 'tantalusTunnelVerminV56') return 'pouncer';
@@ -228,6 +236,11 @@ function enemyBehavior(spriteKey, biology) {
 }
 
 const isRoyalEnemyProfile = (source = {}) => source.caste === 'royal' || /queen|reine|royal/i.test(source.name || '');
+const V64_ENEMY_PHYSICS = Object.freeze({
+  newbornV64: Object.freeze({ width: 58, height: 118 }),
+  offspringV64: Object.freeze({ width: 52, height: 124 }),
+  predalienV64: Object.freeze({ width: 96, height: 126 })
+});
 
 function bossProfileScore(source = {}, index = 0) {
   const frequencyScore = { common: 0, uncommon: 24, rare: 52, apex: 88, scripted: 76 }[String(source.frequency || 'common').toLowerCase()] || 0;
@@ -413,9 +426,18 @@ export class GameEngine {
     const royal = isRoyalEnemyProfile(source) || spriteKey === 'xenoQueen';
     const isBoss = Boolean(boss);
     const biology = source.biology || 'xenomorph';
-    const height = royal ? 112 : biology === 'xenomorph' ? 74 : 88;
+    const physical = V64_ENEMY_PHYSICS[spriteKey];
+    const height = physical?.height ?? (royal ? 112 : biology === 'xenomorph' ? 74 : 88);
+    const width = physical?.width ?? (royal ? 82 : biology === 'xenomorph' ? 52 : 42);
     const baseHealth = Number(source.health) || 80;
-    const maxHealth = isBoss ? Math.max(280, Math.round(baseHealth * 1.65)) : royal ? Math.max(260, baseHealth) : Math.min(240, baseHealth);
+    const apex = source.caste === 'apex';
+    const maxHealth = isBoss
+      ? Math.max(320, Math.round(baseHealth * 1.65))
+      : royal
+        ? Math.max(280, baseHealth)
+        : apex
+          ? Math.max(260, Math.round(baseHealth * 0.82))
+          : Math.min(240, baseHealth);
     const baseDamage = Number(source.damage) || (royal ? 24 : 12);
     return {
       id: `${source.id || 'enemy'}:${index}`,
@@ -433,23 +455,45 @@ export class GameEngine {
       animationPhase: index % 4,
       row: visual.row ?? 0,
       x, spawnX: x, y: groundY - height, groundY,
-      w: royal ? 82 : biology === 'xenomorph' ? 52 : 42, h: height,
-      health: maxHealth, maxHealth, armor: Math.max(0, Math.min(22, Number(source.armor) || (royal ? 14 : 0))),
-      damage: Math.min(isBoss ? 45 : 30, isBoss ? Math.max(18, baseDamage * 1.25) : baseDamage),
+      w: width, h: height,
+      health: maxHealth, maxHealth, armor: Math.max(0, Math.min(isBoss ? 35 : 26, Number(source.armor) || (royal ? 14 : 0))),
+      damage: Math.min(isBoss ? 52 : apex ? 38 : 30, isBoss ? Math.max(18, baseDamage * 1.25) : baseDamage),
       speed: 55 + (Number(source.speed) || 1.2) * 35,
       facing: -1, alert: false, attacking: false, alive: true, attackClock: this.random(),
-      rangedClock: this.random() * 0.7, staggerClock: 0, pounceClock: 0, revealed: 0, deathClock: 0,
+      attackWindupClock: 0, attackAnimationClock: 0, pendingMelee: false, pendingMeleeTargetId: null,
+      rangedClock: this.random() * 0.7, staggerClock: 0, hurtClock: 0, pounceClock: 0, revealed: 0, deathClock: 0,
       isBoss, isRoyal: royal, keyCarrier, reward: isBoss ? 36 : royal ? 18 : 4 + (index % 4)
     };
   }
 
   buildDefaultEnemies(enemyCatalog) {
     const catalog = enemyCatalog.length ? enemyCatalog : [{ id: 'warrior', name: 'Xenomorph Warrior', health: 80, damage: 12, speed: 1.2, biology: 'xenomorph' }];
-    const bossSource = selectBossEnemyProfile(catalog) || catalog[0];
-    const standardCatalog = catalog.filter((source) => source !== bossSource);
-    const encounterPool = standardCatalog.length ? standardCatalog : catalog;
+    const worldId = String(this.world?.id || '').trim();
+    const contextSafeCatalog = catalog.filter((source) => !source.defaultEncounter
+      || (worldId && Array.isArray(source.encounterWorldIds) && source.encounterWorldIds.includes(worldId)));
+    const contextual = worldId
+      ? contextSafeCatalog.filter((source) => Array.isArray(source.encounterWorldIds) && source.encounterWorldIds.includes(worldId))
+      : [];
+    const encounterCatalog = contextual.length
+      ? contextual
+      : contextSafeCatalog.length
+        ? contextSafeCatalog
+        : [{ id: 'warrior', name: 'Xenomorph Warrior', health: 80, damage: 12, speed: 1.2, biology: 'xenomorph' }];
+    const featuredBySlot = new Map(worldId
+      ? encounterCatalog
+        .filter((source) => Number.isInteger(source.defaultEncounter?.slot))
+        .map((source) => [source.defaultEncounter.slot, source])
+      : []);
+    const forcedBoss = [...featuredBySlot.values()].find((source) => source.defaultEncounter?.boss) || null;
+    const featuredSources = new Set(featuredBySlot.values());
+    const bossPool = encounterCatalog.filter((source) => !featuredSources.has(source) || source.defaultEncounter?.boss);
+    const bossSource = forcedBoss || selectBossEnemyProfile(bossPool) || bossPool[0] || encounterCatalog[0];
+    const standardCatalog = encounterCatalog.filter((source) => source !== bossSource && !featuredSources.has(source));
+    const encounterPool = standardCatalog.length ? standardCatalog : encounterCatalog;
     return Array.from({ length: 16 }, (_, index) => {
-      const source = index === 15 ? bossSource : encounterPool[(index * 11 + 426) % encounterPool.length];
+      const source = index === 15
+        ? bossSource
+        : featuredBySlot.get(index) || encounterPool[(index * 11 + 426) % encounterPool.length];
       const platform = index % 4 === 2 ? PLATFORM_LAYOUT[(index * 3) % PLATFORM_LAYOUT.length] : null;
       let x = 660 + index * 325 + this.random() * 90;
       let groundY = platform?.y ?? FLOOR_Y;
@@ -600,6 +644,7 @@ export class GameEngine {
     player.meleeClock = Math.max(0, Number(player.meleeClock) - delta || 0);
     player.toolUseClock = Math.max(0, Number(player.toolUseClock) - delta || 0);
     player.interactionClock = Math.max(0, Number(player.interactionClock) - delta || 0);
+    player.grappledClock = Math.max(0, Number(player.grappledClock) - delta || 0);
     if (player.reloading) {
       player.reloadClock -= delta;
       if (player.reloadClock <= 0) this.finishReload(player);
@@ -620,7 +665,8 @@ export class GameEngine {
     if (ladder && (up || down)) player.climbing = true;
     if (player.climbing && !ladder) player.climbing = false;
     player.crouching = down && !player.climbing && player.grounded;
-    const speed = player.crouching ? 105 : 245;
+    const grappleScale = player.grappledClock > 0 ? 0.42 : 1;
+    const speed = (player.crouching ? 105 : 245) * grappleScale;
     const targetVelocity = (Number(right) - Number(left)) * speed;
     player.vx += (targetVelocity - player.vx) * Math.min(1, delta * (player.grounded ? 16 : 8));
     if (!left && !right && Math.abs(player.vx) < 0.5) player.vx = 0;
@@ -753,28 +799,55 @@ export class GameEngine {
     enemy.attackClock -= delta;
     enemy.rangedClock -= delta;
     enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
-    const candidates = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive);
-    if (!candidates.length) return;
-    const target = candidates.sort((a, b) => Math.abs(a.x - enemy.x) - Math.abs(b.x - enemy.x))[0];
+    enemy.hurtClock = Math.max(0, (enemy.hurtClock || 0) - delta);
+    const v64MeleeState = advanceEnemyMeleeAttackV64(enemy, delta);
+    const v64Melee = v64MeleeState.contract;
+    const candidatePool = [this.player, this.coopEnabled ? this.coop : null].filter(Boolean);
+    const candidates = candidatePool.filter(isEnemyMeleeTargetValidV64);
+    let target = null;
+    if (v64Melee && enemy.pendingMelee) {
+      target = candidatePool.find((actor) => resolveEnemyMeleeTargetIdV64(actor) === enemy.pendingMeleeTargetId) || null;
+      if (!isEnemyMeleeTargetValidV64(target)) {
+        this.cancelPendingEnemyMeleeV64(enemy, 'target-invalid');
+        return;
+      }
+    }
+    if (!target) target = candidates.sort((a, b) => Math.abs(a.x - enemy.x) - Math.abs(b.x - enemy.x))[0] || null;
+    if (!target) return;
     const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
     const distance = targetEntity.x - enemy.x;
     const verticalDistance = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
     if (Math.abs(distance) < 620 || enemy.revealed > 0) enemy.alert = true;
     if (!enemy.alert) {
+      if (v64Melee && enemy.pendingMelee) {
+        this.cancelPendingEnemyMeleeV64(enemy, 'lost-target');
+      }
       enemy.facing = Math.sin(this.animationTime * 0.6 + enemy.animationPhase) > 0 ? 1 : -1;
       enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
       return;
     }
     enemy.facing = Math.sign(distance) || enemy.facing || 1;
-    const ranged = enemy.behavior === 'spitter' || enemy.behavior === 'shooter' || enemy.isBoss;
+    const ranged = !v64Melee && (enemy.behavior === 'spitter'
+      || enemy.behavior === 'shooter'
+      || enemy.isBoss);
     if (ranged && Math.abs(distance) < (enemy.isBoss ? 640 : 500) && Math.abs(distance) > 115 && verticalDistance < 180 && enemy.rangedClock <= 0) {
       this.spawnEnemyProjectile(enemy, targetEntity);
       enemy.rangedClock = enemy.isBoss ? 1.2 : enemy.behavior === 'spitter' ? 1.55 : 1.15;
       enemy.attacking = true;
-    } else enemy.attacking = enemy.attackClock < 0.25 && Math.abs(distance) < 115;
-    const stopRange = enemy.isBoss ? 94 : enemy.behavior === 'pouncer' ? 42 : 58;
+    } else if (!v64Melee) enemy.attacking = enemy.attackClock < 0.25 && Math.abs(distance) < 115;
+    const stopRange = v64Melee?.stopRange ?? (enemy.isBoss
+            ? 94
+            : enemy.behavior === 'pouncer'
+              ? 42
+              : 58);
     if (enemy.staggerClock <= 0 && Math.abs(distance) > stopRange && verticalDistance < 160) {
-      const speedMultiplier = enemy.behavior === 'hunter' ? 1.28 : enemy.behavior === 'pouncer' ? 1.38 : enemy.isBoss ? 0.75 : 1;
+      const speedMultiplier = v64Melee?.speedMultiplier ?? (enemy.behavior === 'hunter'
+        ? 1.28
+        : enemy.behavior === 'pouncer'
+          ? 1.38
+          : enemy.isBoss
+              ? 0.75
+              : 1);
       const previousX = enemy.x;
       enemy.x += enemy.facing * enemy.speed * speedMultiplier * delta;
       this.resolveEnemyHorizontal(enemy, previousX);
@@ -784,11 +857,57 @@ export class GameEngine {
       enemy.attackClock = 1.3;
       enemy.attacking = true;
     }
-    if ((combatOverlap(enemy, targetEntity) || (Math.abs(distance) < stopRange + 28 && verticalDistance < 95)) && enemy.attackClock <= 0) {
+    const meleeRange = v64Melee?.meleeRange ?? stopRange + 28;
+    const rawMeleeContact = () => {
+      const currentDistance = targetEntity.x - enemy.x;
+      const currentVertical = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
+      return combatOverlap(enemy, targetEntity) || (Math.abs(currentDistance) < meleeRange && currentVertical < 110);
+    };
+    const meleePathClear = () => this.enemyMeleePathClearV64(enemy, targetEntity);
+    const meleeContact = () => rawMeleeContact() && meleePathClear();
+    if (v64Melee && v64MeleeState.impactReady) {
+      const hit = meleeContact();
+      const targetId = enemy.pendingMeleeTargetId;
+      const reason = hit ? null : rawMeleeContact() ? 'path-blocked' : 'target-out-of-range';
+      if (hit) {
+        if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
+        else {
+          this.damagePlayer(target, enemy.damage, { source: enemy.name });
+          if (enemy.behavior === 'grappler') target.grappledClock = Math.max(target.grappledClock || 0, 0.8);
+        }
+      }
+      finishEnemyMeleeAttackV64(enemy);
+      this.onEvent({ type: 'enemy-attack-impact', enemyId: enemy.id, behavior: enemy.behavior, targetId, hit, reason });
+    }
+    if (v64Melee && !enemy.pendingMelee && enemy.attackClock <= 0 && meleeContact()) {
+      if (v64Melee.lungeDistance > 0) {
+        const currentDistance = targetEntity.x - enemy.x;
+        const previousX = enemy.x;
+        enemy.x += Math.sign(currentDistance) * Math.min(v64Melee.lungeDistance, Math.max(0, Math.abs(currentDistance) - v64Melee.lungeStop));
+        this.resolveEnemyHorizontal(enemy, previousX);
+      }
+      if (meleeContact() && armEnemyMeleeAttackV64(enemy, target)) {
+        this.onEvent({
+          type: 'enemy-attack-telegraph',
+          enemyId: enemy.id,
+          behavior: enemy.behavior,
+          targetId: enemy.pendingMeleeTargetId,
+          windup: v64Melee.windup
+        });
+      }
+    }
+    if (!v64Melee && meleeContact() && enemy.attackClock <= 0) {
       if (enemy.behavior === 'exploder') return void this.detonateEnemy(enemy, target);
       if (target.inVehicle) this.damageVehicle(enemy.damage, enemy.name);
-      else this.damagePlayer(target, enemy.damage, { source: enemy.name });
-      enemy.attackClock = enemy.isBoss ? 0.65 : enemy.behavior === 'pouncer' ? 1.1 : 0.82;
+      else {
+        this.damagePlayer(target, enemy.damage, { source: enemy.name });
+        if (enemy.behavior === 'grappler') target.grappledClock = Math.max(target.grappledClock || 0, 0.8);
+      }
+      enemy.attackClock = enemy.isBoss
+          ? 0.65
+          : enemy.behavior === 'pouncer'
+            ? 1.1
+              : 0.82;
       enemy.attacking = true;
     }
   }
@@ -888,6 +1007,46 @@ export class GameEngine {
     return this.doors
       .filter((door) => door.progress < 0.82)
       .map((door) => this.getDoorRenderState(door, { open: false }));
+  }
+
+  cancelPendingEnemyMeleeV64(enemy, reason = 'target-invalid') {
+    if (!enemy?.pendingMelee) return false;
+    const targetId = enemy.pendingMeleeTargetId || null;
+    const contract = cancelEnemyMeleeAttackV64(enemy);
+    if (!contract) return false;
+    this.onEvent({
+      type: 'enemy-attack-cancelled',
+      enemyId: enemy.id,
+      behavior: enemy.behavior,
+      targetId,
+      reason
+    });
+    return true;
+  }
+
+  enemyMeleePathClearV64(enemy, target) {
+    const source = getEntityCollisionBounds(enemy);
+    const destination = getEntityCollisionBounds(target);
+    if (!source || !destination) return false;
+    const sourceCenterX = source.x + source.w / 2;
+    const destinationCenterX = destination.x + destination.w / 2;
+    const movingRight = destinationCenterX >= sourceCenterX;
+    const gapStart = movingRight ? source.x + source.w : destination.x + destination.w;
+    const gapEnd = movingRight ? destination.x : source.x;
+    if (gapEnd <= gapStart) return true;
+    const sharedTop = Math.max(source.y, destination.y);
+    const sharedBottom = Math.min(source.y + source.h, destination.y + destination.h);
+    const strikeY = sharedBottom > sharedTop
+      ? (sharedTop + sharedBottom) / 2
+      : ((source.y + source.h / 2) + (destination.y + destination.h / 2)) / 2;
+    return ![...this.closedDoorColliders(), ...this.walls].some((obstacle) => {
+      const bounds = getEntityCollisionBounds(obstacle);
+      return bounds
+        && bounds.x < gapEnd
+        && bounds.x + bounds.w > gapStart
+        && strikeY > bounds.y
+        && strikeY < bounds.y + bounds.h;
+    });
   }
 
 
@@ -1057,6 +1216,7 @@ export class GameEngine {
     enemy.alert = true;
     enemy.revealed = Math.max(enemy.revealed, 0.45);
     enemy.staggerClock = source.kind === 'ram' ? 0.7 : 0.12;
+    enemy.hurtClock = Math.max(enemy.hurtClock || 0, 0.24);
     this.spawnImpact(source.x || enemy.x, source.y || enemy.y + enemy.h * 0.45, enemy.biology === 'xenomorph' ? '#a7c742' : '#dc8a62');
     this.audio?.hit();
     if (enemy.health <= 0) this.defeatEnemy(enemy, source.owner);
@@ -1759,22 +1919,24 @@ export class GameEngine {
   drawEnemy(ctx, enemy) {
     let image;
     let sheetId = null;
-    const projectOriginalSheet = PROJECT_ORIGINAL_ENEMY_SHEET_ID_SET.has(enemy.visualSheetId)
-      ? resolveSpriteSheet(enemy.visualSheetId)
+    const requestedEnemySheet = resolveSpriteSheet(enemy.visualSheetId);
+    const dedicatedEnemySheet = requestedEnemySheet?.family === 'enemy'
+      && DEDICATED_ENEMY_ACTION_CLIP_SETS.has(requestedEnemySheet.clipSet)
+      ? requestedEnemySheet
       : null;
     const legacyCell = resolveLegacyEnemyCell(enemy, this.animationTime);
     let row = legacyCell.row;
     let frame = legacyCell.frame;
     let renderWidth = 84;
     let renderHeight = 112;
-    if (projectOriginalSheet) {
-      image = this.images.get(projectOriginalSheet.imageKey);
-      sheetId = projectOriginalSheet.id;
-      row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3;
+    if (dedicatedEnemySheet) {
+      image = this.images.get(dedicatedEnemySheet.imageKey);
+      sheetId = dedicatedEnemySheet.id;
+      row = enemy.alive ? enemy.hurtClock > 0 ? 0 : enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3;
       const fps = row === 0 ? 4 : row === 3 ? 7 : 10;
       frame = Math.floor(this.animationTime * fps) % 4;
-      renderWidth = projectOriginalSheet.renderWidth;
-      renderHeight = projectOriginalSheet.renderHeight;
+      renderWidth = dedicatedEnemySheet.renderWidth;
+      renderHeight = dedicatedEnemySheet.renderHeight;
     }
     else if (enemy.spriteKey === 'ripperQueen') { image = this.images.get('ripperQueen'); sheetId = 'enemy.ripper-queen.action'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }
     else if (enemy.spriteKey === 'xenoQueen') { image = this.images.get('xenoQueen'); sheetId = 'enemy.xenomorph-queen.combat'; row = enemy.alive ? enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3; renderWidth = 224; renderHeight = 170; }

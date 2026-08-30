@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "release": "v63",
+  "release": "v64",
   "provider": "OpenAI ImageGen",
   "normalization": {
     "status": "ready",
-    "report": "/assets/openai/v50-art-normalization-report.json",
+    "report": "/docs/references/V64_PNG_ALPHA_AUDIT.json",
     "rawMastersPreserved": true,
-    "sourceOfTruth": "Only normalized files listed in the report are runtime-ready."
+    "sourceOfTruth": "Normalized files listed by the V64 manifest are runtime-ready; the V64 PNG audit certifies their alpha and grid contracts."
   },
   "contracts": {
     "grids": {
@@ -464,6 +464,27 @@
         "y": 34,
         "width": 188,
         "height": 188,
+        "unit": "cell-pixel"
+      },
+      "newborn-tall": {
+        "x": 72,
+        "y": 24,
+        "width": 112,
+        "height": 216,
+        "unit": "cell-pixel"
+      },
+      "offspring-tall": {
+        "x": 78,
+        "y": 16,
+        "width": 100,
+        "height": 224,
+        "unit": "cell-pixel"
+      },
+      "predalien-large": {
+        "x": 38,
+        "y": 40,
+        "width": 180,
+        "height": 200,
         "unit": "cell-pixel"
       }
     }
@@ -2768,6 +2789,256 @@
         ],
         "row": 3
       }
+    ],
+    "newborn-action-v64": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "newborn:breath"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "chase",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:step-left"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "attack",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 9,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:grapple-hit"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "death",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "offspring-action-v64": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "offspring:tremor"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "chase",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 10,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:step-left"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "attack",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 10,
+        "loop": false,
+        "events": [
+          {
+            "frame": 10,
+            "type": "combat:reach-hit"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "death",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ],
+        "row": 3
+      }
+    ],
+    "predalien-action-v64": [
+      {
+        "id": "idle",
+        "frames": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "fps": 4,
+        "loop": true,
+        "events": [
+          {
+            "frame": 2,
+            "type": "predalien:mandible-threat"
+          }
+        ],
+        "row": 0
+      },
+      {
+        "id": "chase",
+        "frames": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "fps": 9,
+        "loop": true,
+        "events": [
+          {
+            "frame": 4,
+            "type": "audio:heavy-step-right"
+          },
+          {
+            "frame": 6,
+            "type": "audio:heavy-step-left"
+          }
+        ],
+        "row": 1
+      },
+      {
+        "id": "attack",
+        "frames": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "fps": 10,
+        "loop": false,
+        "events": [
+          {
+            "frame": 9,
+            "type": "combat:mandible-window"
+          },
+          {
+            "frame": 10,
+            "type": "combat:tail-hit"
+          }
+        ],
+        "row": 2
+      },
+      {
+        "id": "death",
+        "frames": [
+          12,
+          13,
+          14,
+          15
+        ],
+        "fps": 6,
+        "loop": false,
+        "events": [
+          {
+            "frame": 12,
+            "type": "state:hurt"
+          },
+          {
+            "frame": 15,
+            "type": "state:death-lock"
+          }
+        ],
+        "row": 3
+      }
     ]
   },
   "sheets": [
@@ -3223,6 +3494,80 @@
       }
     },
     {
+      "id": "enemy.newborn.action.v64",
+      "family": "enemy",
+      "subject": "Newborn",
+      "wave": "v64",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/newborn-action-sheet-v64.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/newborn-action-sheet-v64.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "newborn-action-v64",
+      "pivot": "creature-ground",
+      "hitbox": "newborn-tall",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "continuity": "Alien Resurrection (1997)",
+      "excelIds": [
+        "CAS-0037",
+        "RAC-0040"
+      ],
+      "referenceUrls": [
+        "https://necaonline.com/2019/02/alien-resurrection-7-scale-action-figure-deluxe-newborn/"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v64.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/catalog-runtime-v62.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.offspring.action.v64",
+      "family": "enemy",
+      "subject": "Offspring",
+      "wave": "v64",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/offspring-action-sheet-v64.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/offspring-action-sheet-v64.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "offspring-action-v64",
+      "pivot": "creature-ground",
+      "hitbox": "offspring-tall",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "continuity": "Alien: Romulus (2024)",
+      "excelIds": [
+        "CAS-0038",
+        "RAC-0041"
+      ],
+      "referenceUrls": [
+        "https://www.legacyefx.com/alien-romulus"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v64.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/catalog-runtime-v62.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.ovomorph.cycle",
       "family": "enemy",
       "subject": "Ovomorph",
@@ -3295,6 +3640,43 @@
           "src/game-v52-runtime.js",
           "src/enemy-visual-runtime-v53.js",
           "src/game.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.predalien.action.v64",
+      "family": "enemy",
+      "subject": "Predalien",
+      "wave": "v64",
+      "files": {
+        "raw": "/assets/openai/sprites/enemies/predalien-action-sheet-v64.png",
+        "normalized": "/assets/openai/sprites/normalized/enemies/predalien-action-sheet-v64.png",
+        "normalizedStatus": "ready"
+      },
+      "grid": "v50-4x4",
+      "clips": "predalien-action-v64",
+      "pivot": "creature-ground",
+      "hitbox": "predalien-large",
+      "sourceFacing": "right",
+      "identityVerified": true,
+      "referenceStatus": "CANON_REFERENCE",
+      "continuity": "Aliens vs. Predator: Requiem (2007)",
+      "excelIds": [
+        "CAS-0036"
+      ],
+      "referenceUrls": [
+        "https://necaonline.com/2011/03/just-in-time-for-halloween-the-hybrid/",
+        "https://designstudiopress.com/products/avp-requiem"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "consumers": [
+          "src/sprite-animation-runtime.js",
+          "src/enemy-visual-overrides-v64.js",
+          "src/enemy-visual-runtime-v53.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js",
+          "src/catalog-runtime-v62.js"
         ]
       }
     },

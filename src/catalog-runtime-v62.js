@@ -436,7 +436,9 @@ const mutableRecords = Object.entries(CATALOGS).flatMap(([kind, entries]) =>
 
 const recordById = new Map(mutableRecords.map((record) => [record.id, record]));
 
-const enemyIdByName = new Map(ENEMIES.slice(0, 52).map((entry) => [entry.name, entry.id]));
+const enemyIdByName = new Map(ENEMIES
+  .filter((entry) => entry.provenance !== 'systemic-variant' && (!entry.modifier || entry.modifier === 'Standard'))
+  .map((entry) => [entry.name, entry.id]));
 const biologicalRelationSeeds = Object.freeze([
   Object.freeze({ fromName: 'Queen', toName: 'Ovomorph', type: 'produces' }),
   Object.freeze({ fromName: 'Ovomorph', toName: 'Facehugger', type: 'contains' }),

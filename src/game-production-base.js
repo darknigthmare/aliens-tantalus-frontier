@@ -32,6 +32,7 @@ function seeded(seed) {
 const FREQUENCY_WEIGHTS = Object.freeze({ common: 100, uncommon: 62, rare: 28, apex: 9, scripted: 5 });
 
 const isRoyalEnemy = (enemy = {}) => enemy.caste === 'royal' || /queen|reine/i.test(enemy.name || '');
+const isWorldBoundDefaultEncounter = (enemy = {}) => Boolean(enemy.defaultEncounter && list(enemy.encounterWorldIds).length);
 
 function campaignRequiresRoyal({ campaign = {}, levelSeed = {} } = {}) {
   const campaignContract = [campaign.id, campaign.name, campaign.objective, levelSeed.objective]
@@ -59,7 +60,8 @@ export function buildEnemyEncounterEligibility(enemy = {}, { world = {}, levelSe
   const frequency = String(enemy.frequency || 'common').toLowerCase();
   const baseWeight = FREQUENCY_WEIGHTS[frequency] || 35;
   const weight = Math.max(0.01, baseWeight * (worldMatch ? 1 : 0.13) * (habitatMatch ? 1 : 0.28) * (modifierMatch ? 1 : 0.15) * (scriptedMatch ? 1 : 0.08));
-  const eligible = (worldMatch || habitatMatch) && modifierMatch && scriptedMatch;
+  const encounterMatch = isWorldBoundDefaultEncounter(enemy) ? worldMatch : (worldMatch || habitatMatch);
+  const eligible = encounterMatch && modifierMatch && scriptedMatch;
   const reasons = [];
   if (!worldMatch) reasons.push('world-mismatch');
   if (!habitatMatch) reasons.push('habitat-mismatch');
@@ -71,18 +73,33 @@ export function buildEnemyEncounterEligibility(enemy = {}, { world = {}, levelSe
 export function selectEnemyEncounterCatalog(catalog = [], context = {}, targetCount = 32) {
   const entries = list(catalog).map((enemy) => ({ enemy, eligibility: buildEnemyEncounterEligibility(enemy, context) }));
   const eligible = entries.filter((entry) => entry.eligibility.eligible);
+  const worldId = String(context.world?.id || '');
+  const contextualDefaults = entries
+    .filter((entry) => Number.isInteger(entry.enemy?.defaultEncounter?.slot))
+    .filter((entry) => worldId && list(entry.enemy?.encounterWorldIds).map(String).includes(worldId))
+    .sort((left, right) => left.enemy.defaultEncounter.slot - right.enemy.defaultEncounter.slot);
+  const contextualDefaultEntries = new Set(contextualDefaults);
+  const contextualDefaultIds = new Set(contextualDefaults.map((entry) => String(entry.enemy?.id || '')));
   const royalRequired = campaignRequiresRoyal(context);
-  const royalEntries = entries.filter((entry) => isRoyalEnemy(entry.enemy));
+  const royalEntries = entries.filter((entry) => (
+    isRoyalEnemy(entry.enemy)
+    && (!isWorldBoundDefaultEncounter(entry.enemy) || entry.eligibility.worldMatch)
+  ));
   const requiredRoyal = royalRequired
     ? [...royalEntries].sort((a, b) => Number(b.eligibility.eligible) - Number(a.eligibility.eligible) || b.eligibility.weight - a.eligibility.weight)[0] || null
     : null;
-  const allowed = entries.filter((entry) => entry.eligibility.eligible || entry === requiredRoyal);
-  const fallback = entries.filter((entry) => !isRoyalEnemy(entry.enemy) || entry === requiredRoyal);
+  const allowed = entries.filter((entry) => entry.eligibility.eligible || contextualDefaultEntries.has(entry) || entry === requiredRoyal);
+  const fallback = entries.filter((entry) => (
+    (!isWorldBoundDefaultEncounter(entry.enemy) || entry.eligibility.worldMatch)
+    && (!isRoyalEnemy(entry.enemy) || entry === requiredRoyal)
+  ));
   const pool = allowed.length ? allowed : fallback;
-  const available = [...pool];
+  const available = pool.filter((entry) => !contextualDefaultEntries.has(entry));
   const random = seeded((Number(context.levelSeed?.seed) || 1) ^ hash(`${context.world?.id}:${context.campaign?.id}`));
-  const selected = [];
-  const limit = clamp(Math.round(Number(targetCount) || 32), 1, Math.max(1, available.length));
+  const selected = [...contextualDefaults];
+  const requiredRoyalId = String(requiredRoyal?.enemy?.id || '');
+  const minimumRequiredCount = contextualDefaults.length + Number(Boolean(requiredRoyal && !contextualDefaultIds.has(requiredRoyalId)));
+  const limit = clamp(Math.max(Math.round(Number(targetCount) || 32), minimumRequiredCount), 1, Math.max(1, pool.length));
   while (available.length && selected.length < limit) {
     const total = available.reduce((sum, entry) => sum + entry.eligibility.weight, 0);
     let cursor = random() * total;
@@ -94,7 +111,12 @@ export function selectEnemyEncounterCatalog(catalog = [], context = {}, targetCo
     selected.push(available.splice(selectedIndex, 1)[0]);
   }
   if (requiredRoyal && !selected.some((entry) => entry.enemy.id === requiredRoyal.enemy.id)) {
-    if (selected.length >= limit && selected.length) selected[selected.length - 1] = requiredRoyal;
+    if (selected.length >= limit && selected.length) {
+      let replaceIndex = selected.length - 1;
+      while (replaceIndex >= 0 && contextualDefaultEntries.has(selected[replaceIndex])) replaceIndex -= 1;
+      if (replaceIndex >= 0) selected[replaceIndex] = requiredRoyal;
+      else selected.push(requiredRoyal);
+    }
     else selected.push(requiredRoyal);
   }
   return Object.freeze({

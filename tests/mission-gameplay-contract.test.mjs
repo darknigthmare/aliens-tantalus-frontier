@@ -116,7 +116,7 @@ test('every catalog entry compiles into an executable runtime contract', () => {
   }
   assert.equal(CAMPAIGNS.length, 436);
   assert.equal(WEAPONS.length, 146);
-  assert.equal(ENEMIES.length, 568);
+  assert.equal(ENEMIES.length, 571);
   assert.equal(VEHICLES.length, 279);
   assert.equal(LEVEL_SEEDS.length, 800);
 });

@@ -1,3 +1,8 @@
+import {
+  ENEMY_VISUAL_OVERRIDE_ARCHETYPES_V64,
+  ENEMY_VISUAL_OVERRIDE_BASE_PROFILE_IDS_V64,
+  resolveEnemyVisualOverrideV64
+} from './enemy-visual-overrides-v64.js';
 import { resolveEnemyVisualOverrideV56 } from './enemy-visual-overrides-v56.js';
 import { resolveEnemyVisualOverrideV55 } from './enemy-visual-overrides-v55.js';
 
@@ -147,7 +152,10 @@ const REGISTRY = Object.freeze({
   'Tantalus Tunnel Vermin': legacy('pathogen', 3, ENEMY_VISUAL_IDENTITY.family, 'Tantalus Tunnel Vermin', familyReason('Tantalus Tunnel Vermin', 'faune de frontière'))
 });
 
-export const ENEMY_VISUAL_ARCHETYPES = Object.freeze(Object.keys(REGISTRY));
+export const ENEMY_VISUAL_ARCHETYPES = Object.freeze([
+  ...Object.keys(REGISTRY),
+  ...ENEMY_VISUAL_OVERRIDE_ARCHETYPES_V64
+]);
 export const ENEMY_VISUAL_PROFILE_COUNT = ENEMY_VISUAL_ARCHETYPES.length;
 export const ENEMY_VISUAL_PROFILES = REGISTRY;
 
@@ -209,7 +217,9 @@ const sourceName = (source) => typeof source === 'string'
 const isBaseEnemyIdentity = (source, archetype) => {
   const id = typeof source === 'object' && source !== null ? String(source.id ?? '') : '';
   const ordinal = Number(id.match(/^enemy-(\d+)-/)?.[1]);
-  if (Number.isFinite(ordinal) && ordinal > 0) return ordinal <= 52;
+  if (Number.isFinite(ordinal) && ordinal > 0) {
+    return ordinal <= 52 || ENEMY_VISUAL_OVERRIDE_BASE_PROFILE_IDS_V64.includes(id);
+  }
   if (source?.provenance === 'systemic-variant') return false;
   const rawName = sourceName(source);
   if (rawName && rawName !== archetype) return false;
@@ -229,6 +239,14 @@ const asAuthoredFamilyVariant = (source, archetype, baseProfile) => {
 };
 
 export function resolveEnemyVisualProfile(source = {}) {
+  const dedicatedV64 = resolveEnemyVisualOverrideV64(source);
+  if (dedicatedV64) return Object.freeze({
+    ...dedicatedV64,
+    imageKey: null,
+    row: null,
+    artSubject: dedicatedV64.archetype,
+    legacy: false
+  });
   const dedicatedV56 = resolveEnemyVisualOverrideV56(source);
   if (dedicatedV56) return Object.freeze({
     ...dedicatedV56,

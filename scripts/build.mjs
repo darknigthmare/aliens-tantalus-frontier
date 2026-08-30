@@ -1,4 +1,4 @@
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { RELEASE, validateContent } from '../src/content.js';
 
@@ -17,9 +17,26 @@ for (const directory of ['src', 'assets', 'docs']) {
     if (directory !== 'docs') throw error;
   }
 }
-// QA masters and superseded duplicate atlases remain local, never deployed.
+// QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });
 await rm(join(output, 'assets', 'openai', 'sprites', 'normalized', 'equipment'), { recursive: true, force: true });
+await rm(join(output, 'assets', 'openai', 'sprites', 'frames', 'v64'), { recursive: true, force: true });
+await rm(join(output, 'assets', 'openai', 'sprites', 'reference-masters', 'v64'), { recursive: true, force: true });
+await rm(join(output, 'assets', 'openai', 'sprites', 'previews', 'v64'), { recursive: true, force: true });
+await rm(join(output, 'assets', 'openai', 'sprites', 'metadata', 'v64'), { recursive: true, force: true });
+const assertBuildExclusion = async (...segments) => {
+  const excludedPath = join(output, ...segments);
+  try {
+    await access(excludedPath);
+  } catch (error) {
+    if (error?.code === 'ENOENT') return;
+    throw error;
+  }
+  throw new Error(`Excluded build artifact is still present: ${excludedPath}`);
+};
+for (const segments of [['frames', 'v64'], ['reference-masters', 'v64'], ['previews', 'v64'], ['metadata', 'v64']]) {
+  await assertBuildExclusion('assets', 'openai', 'sprites', ...segments);
+}
 const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({

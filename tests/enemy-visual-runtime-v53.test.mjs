@@ -37,20 +37,23 @@ const EXPECTED = new Map([
   ['Seegson Security', ['seegsonSecurityV56', null, null]], ['Colonial Raider', ['colonialRaiderV56', null, null]],
   ['ATARAX Controller', ['ataraxControllerV56', null, null]], ['Cult Host', ['cultHostV56', null, null]],
   ['Wild Boar Host', ['wildBoarHostV56', null, null]], ['Korari Stalker', ['korariStalkerV56', null, null]],
-  ['Ceto Reef Predator', ['cetoReefPredatorV56', null, null]], ['Tantalus Tunnel Vermin', ['tantalusTunnelVerminV56', null, null]]
+  ['Ceto Reef Predator', ['cetoReefPredatorV56', null, null]], ['Tantalus Tunnel Vermin', ['tantalusTunnelVerminV56', null, null]],
+  ['Newborn', ['newbornV64', null, null]], ['Offspring', ['offspringV64', null, null]],
+  ['Predalien', ['predalienV64', null, null]]
 ]);
 
 const signature = (profile) => JSON.stringify([
   profile.spriteKey, profile.imageKey, profile.row, profile.artSubject
 ]);
 
-test('le registre v53 couvre exactement les 52 archétypes du catalogue', () => {
-  const baseArchetypes = ENEMIES.slice(0, 52).map((enemy) => enemy.name);
-  assert.equal(ENEMY_VISUAL_PROFILE_COUNT, 52);
-  assert.equal(EXPECTED.size, 52);
+test('le registre visuel couvre exactement les 55 archétypes du catalogue V64', () => {
+  const baseEnemies = ENEMIES.filter((enemy) => enemy.modifier === 'Standard');
+  const baseArchetypes = baseEnemies.map((enemy) => enemy.name);
+  assert.equal(ENEMY_VISUAL_PROFILE_COUNT, 55);
+  assert.equal(EXPECTED.size, 55);
   assert.deepEqual(ENEMY_VISUAL_ARCHETYPES, baseArchetypes);
   assert.deepEqual([...EXPECTED.keys()], baseArchetypes);
-  for (const enemy of ENEMIES.slice(0, 52)) {
+  for (const enemy of baseEnemies) {
     const resolved = resolveEnemyVisualProfile(enemy);
     const [spriteKey, imageKey, row] = EXPECTED.get(enemy.name);
     assert.equal(resolved.archetype, enemy.name);
@@ -60,8 +63,8 @@ test('le registre v53 couvre exactement les 52 archétypes du catalogue', () => 
   }
 });
 
-test('les 568 profils gardent une identité visuelle stable quelle que soit leur variante', () => {
-  assert.equal(ENEMIES.length, 568);
+test('les 571 profils gardent une identité visuelle stable quelle que soit leur variante', () => {
+  assert.equal(ENEMIES.length, 571);
   const signaturesByArchetype = new Map();
   for (const enemy of ENEMIES) {
     const archetype = resolveEnemyArchetype(enemy);
@@ -70,15 +73,15 @@ test('les 568 profils gardent une identité visuelle stable quelle que soit leur
     if (!signaturesByArchetype.has(archetype)) signaturesByArchetype.set(archetype, new Set());
     signaturesByArchetype.get(archetype).add(signature(resolved));
   }
-  assert.equal(signaturesByArchetype.size, 52);
+  assert.equal(signaturesByArchetype.size, 55);
   for (const [archetype, signatures] of signaturesByArchetype) assert.equal(signatures.size, 1, `${archetype}: mapping instable`);
 });
 
 test('la couverture v53 conserve les comptes auditables du catalogue complet', () => {
   const report = enemyVisualCoverageReport(ENEMIES);
-  assert.equal(report.total, 568);
-  assert.equal(report.uniqueArchetypes, 52);
-  assert.equal(report.modern, 535);
+  assert.equal(report.total, 571);
+  assert.equal(report.uniqueArchetypes, 55);
+  assert.equal(report.modern, 538);
   assert.equal(report.legacy, 33);
   assert.deepEqual(report.bySpriteKey, {
     ovomorph: 11, facehugger: 11, chestburster: 11, xenoBigChapV56: 11, xenoWarriorV56: 11,
@@ -93,11 +96,12 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
     pathogenAbominationV56: 11, pathogenMimic: 11, workingJoe: 11, weylandYutaniCommandoV56: 11,
     uppVanguardV56: 11, seegsonSecurityV56: 11, colonialRaiderV56: 11,
     ataraxControllerV56: 11, cultHostV56: 11, wildBoarHostV56: 10,
-    korariStalkerV56: 10, cetoReefPredatorV56: 10, tantalusTunnelVerminV56: 10
+    korariStalkerV56: 10, cetoReefPredatorV56: 10, tantalusTunnelVerminV56: 10,
+    newbornV64: 1, offspringV64: 1, predalienV64: 1
   });
   assert.deepEqual(report.byImageKey, { neuroXeno: 22, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
-    exact: 27,
+    exact: 30,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 516

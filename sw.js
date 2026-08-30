@@ -1,4 +1,4 @@
-const CACHE = 'atf-v63-runtime-1';
+const CACHE = 'atf-v64-runtime-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css',
@@ -8,9 +8,9 @@ const CORE = [
   '/docs/references/V59_ASSET_COMPLETION_MATRIX.md',
   '/docs/VERSION_HISTORY_V60.md', '/docs/V60_LEVEL_DESIGN_AUDIT.md',
   '/docs/references/V60_ASSET_COMPLETION_MATRIX.md',
-  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md',
+  '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/VERSION_HISTORY_V64.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md', '/docs/ART_PROVENANCE_V64.md',
   '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
-  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json',
+  '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json', '/docs/references/V64_ASSET_COMPLETION_MATRIX.md', '/docs/references/V64_ENEMY_SOURCES.json', '/docs/references/V64_IMAGEGEN_PROMPTS.md', '/docs/references/V64_PNG_ALPHA_AUDIT.json',
   '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
@@ -19,8 +19,8 @@ const CORE = [
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
-  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/mission-levels-v52.js',
-  '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/npc-mission-runtime-v55.js',
+  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
+  '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/enemy-visual-overrides-v64.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
   '/src/vehicle-access-runtime-v59.js', '/src/vehicle-deployment-gates-v60.js',
   '/src/weapon-visual-runtime-v56.js', '/src/weapon-visual-runtime-v61.js', '/src/weapon-visual-runtime-v63.js', '/src/equipment-visual-runtime-v56.js',
@@ -269,7 +269,7 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV63() {
+async function precacheV64() {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
   const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
@@ -282,7 +282,7 @@ async function precacheV63() {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV63().then(() => self.skipWaiting())
+  precacheV64().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

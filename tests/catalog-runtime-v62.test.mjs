@@ -30,7 +30,7 @@ test('le runtime V62 indexe les quatre catalogues sans perdre ni dupliquer une e
     total: WEAPONS.length + EQUIPMENT.length + ENEMIES.length + VEHICLES.length,
     weapons: 146,
     equipment: 106,
-    enemies: 568,
+    enemies: 571,
     vehicles: 279
   });
   assert.equal(CATALOG_RECORDS_V62.length, CATALOG_COUNTS_V62.total);

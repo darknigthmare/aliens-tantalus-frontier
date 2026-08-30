@@ -12,6 +12,7 @@ audit-v*-captures/
 assets/openai/sprites/raw/
 assets/openai/sprites/normalized/equipment/
 assets/openai/v*-art-normalization-report.json
+!assets/openai/v64-art-normalization-report.json
 .alpha-output/
 scripts/__pycache__/
 *.pyc

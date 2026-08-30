@@ -249,7 +249,7 @@ const enemyModifiers = [
   'Standard', 'Albino', 'Armored', 'Acid-Blooded', 'Cryo-Adapted', 'Vacuum-Adapted',
   'Hive Guard', 'Apex', 'Juvenile', 'Elder', 'Neuro-Linked'
 ];
-export const ENEMIES = Object.freeze(Array.from({ length: 568 }, (_, index) => {
+const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
   const seed = enemySeeds[index % enemySeeds.length];
   const cycle = Math.floor(index / enemySeeds.length);
   const modifier = enemyModifiers[cycle % enemyModifiers.length];
@@ -269,7 +269,84 @@ export const ENEMIES = Object.freeze(Array.from({ length: 568 }, (_, index) => {
     behavior: pick(['stalk', 'rush', 'flank', 'ambush', 'guard', 'control', 'siege', 'swarm'], index),
     provenance: seed[2].startsWith('concept-') ? 'licensed-concept-adaptation' : index < enemySeeds.length ? 'licensed-reference' : 'systemic-variant'
   };
-}));
+});
+
+const licensedEnemyV64 = (entry) => Object.freeze({
+  ...entry,
+  modifier: 'Standard',
+  frequency: 'scripted',
+  provenance: 'licensed-reference',
+  referenceStatus: 'CANON_REFERENCE',
+  canonExact: true,
+  defaultEncounter: entry.defaultEncounter ? Object.freeze({ ...entry.defaultEncounter }) : null,
+  encounterWorldIds: Object.freeze(entry.encounterWorldIds),
+  habitats: Object.freeze(entry.habitats),
+  excelIds: Object.freeze(entry.excelIds),
+  referenceUrls: Object.freeze(entry.referenceUrls)
+});
+
+export const ENEMY_HYBRIDS_V64 = Object.freeze([
+  licensedEnemyV64({
+    id: 'enemy-569-newborn',
+    name: 'Newborn',
+    biology: 'hybrid',
+    caste: 'apex',
+    health: 420,
+    damage: 38,
+    speed: 0.94,
+    armor: 18,
+    acid: 0,
+    encounterWorldIds: [WORLDS[13].id],
+    habitats: ['laboratory', 'ship'],
+    behavior: 'grappler',
+    defaultEncounter: { slot: 5, boss: false },
+    continuity: 'Alien Resurrection (1997)',
+    excelIds: ['CAS-0037', 'RAC-0040'],
+    referenceUrls: ['https://necaonline.com/2019/02/alien-resurrection-7-scale-action-figure-deluxe-newborn/']
+  }),
+  licensedEnemyV64({
+    id: 'enemy-570-offspring',
+    name: 'Offspring',
+    biology: 'pathogen',
+    caste: 'apex',
+    health: 390,
+    damage: 36,
+    speed: 1.15,
+    armor: 12,
+    acid: 0,
+    encounterWorldIds: [WORLDS[12].id],
+    habitats: ['laboratory', 'ship'],
+    behavior: 'reach-hunter',
+    defaultEncounter: { slot: 10, boss: false },
+    continuity: 'Alien: Romulus (2024)',
+    excelIds: ['CAS-0038', 'RAC-0041'],
+    referenceUrls: ['https://www.legacyefx.com/alien-romulus']
+  }),
+  licensedEnemyV64({
+    id: 'enemy-571-predalien',
+    name: 'Predalien',
+    biology: 'xenomorph',
+    caste: 'royal',
+    health: 480,
+    damage: 42,
+    speed: 1.05,
+    armor: 26,
+    acid: 38,
+    encounterWorldIds: [WORLDS[27].id],
+    habitats: ['archive-simulation', 'hive'],
+    behavior: 'hybrid-boss',
+    defaultEncounter: { slot: 15, boss: true },
+    continuity: 'Aliens vs. Predator: Requiem (2007)',
+    encounterContext: 'Palimpste licensed-biosimulation',
+    excelIds: ['CAS-0036'],
+    referenceUrls: [
+      'https://necaonline.com/2011/03/just-in-time-for-halloween-the-hybrid/',
+      'https://designstudiopress.com/products/avp-requiem'
+    ]
+  })
+]);
+
+export const ENEMIES = Object.freeze([...GENERATED_ENEMIES_V50, ...ENEMY_HYBRIDS_V64]);
 
 const vehicleSeeds = [
   ['M577 Armored Personnel Carrier', 'ground', 8], ['M577 Command APC', 'ground', 7],
@@ -431,7 +508,7 @@ export const CONTENT_TARGETS = Object.freeze({
   campaigns: 436,
   weapons: 146,
   equipment: 106,
-  enemies: 568,
+  enemies: 571,
   vehicles: 279,
   apexDossiers: 244,
   neuroXenoProfiles: 234,

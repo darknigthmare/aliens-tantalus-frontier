@@ -34,6 +34,9 @@ export const SPRITE_HITBOXES = Object.freeze({
   'pathogen-mimic-large': Object.freeze({ x: 24, y: 52, width: 208, height: 188 }),
   'pale-crucible-hunter-large': Object.freeze({ x: 32, y: 42, width: 192, height: 198 }),
   'queen-standing': Object.freeze({ x: 32, y: 38, width: 192, height: 202 }),
+  'newborn-tall': Object.freeze({ x: 72, y: 24, width: 112, height: 216 }),
+  'offspring-tall': Object.freeze({ x: 78, y: 16, width: 100, height: 224 }),
+  'predalien-large': Object.freeze({ x: 38, y: 40, width: 180, height: 200 }),
   'facehugger-ground': Object.freeze({ x: 38, y: 142, width: 180, height: 98 }),
   'apc-hull': Object.freeze({ x: 18, y: 106, width: 220, height: 134 }),
   'weapon-pickup': Object.freeze({ x: 18, y: 94, width: 220, height: 96 }),
@@ -127,6 +130,24 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'chase', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
     { id: 'attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:attack-hit' }] },
     { id: 'death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'newborn-action-v64': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'newborn:breath' }] },
+    { id: 'chase', frames: [4, 5, 6, 7], fps: 9, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
+    { id: 'attack', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 10, type: 'combat:grapple-hit' }] },
+    { id: 'death', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'offspring-action-v64': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'offspring:tremor' }] },
+    { id: 'chase', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
+    { id: 'attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:reach-hit' }] },
+    { id: 'death', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'predalien-action-v64': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'predalien:mandible-threat' }] },
+    { id: 'chase', frames: [4, 5, 6, 7], fps: 9, loop: true, events: [{ frame: 4, type: 'audio:heavy-step-right' }, { frame: 6, type: 'audio:heavy-step-left' }] },
+    { id: 'attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 9, type: 'combat:mandible-window' }, { frame: 10, type: 'combat:tail-hit' }] },
+    { id: 'death', frames: [12, 13, 14, 15], fps: 6, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
   ]),
   'npc-locomotion': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'body:breath' }] },
@@ -336,6 +357,9 @@ export const SPRITE_SHEETS = Object.freeze({
   'enemy.korari-stalker.action.v56': sheet('enemy.korari-stalker.action.v56', 'korariStalkerV56', '/assets/openai/sprites/normalized/enemies/korari-stalker-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'korari-stalker-ground', 176, 88, 'enemy'),
   'enemy.ceto-reef-predator.action.v56': sheet('enemy.ceto-reef-predator.action.v56', 'cetoReefPredatorV56', '/assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'ceto-reef-predator-water', 186, 82, 'enemy'),
   'enemy.tantalus-tunnel-vermin.action.v56': sheet('enemy.tantalus-tunnel-vermin.action.v56', 'tantalusTunnelVerminV56', '/assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png', 'enemy-action-v56', 'creature-ground', 'tantalus-tunnel-vermin-ground', 180, 76, 'enemy'),
+  'enemy.newborn.action.v64': sheet('enemy.newborn.action.v64', 'newbornV64', '/assets/openai/sprites/normalized/enemies/newborn-action-sheet-v64.png', 'newborn-action-v64', 'creature-ground', 'newborn-tall', 150, 184, 'enemy'),
+  'enemy.offspring.action.v64': sheet('enemy.offspring.action.v64', 'offspringV64', '/assets/openai/sprites/normalized/enemies/offspring-action-sheet-v64.png', 'offspring-action-v64', 'creature-ground', 'offspring-tall', 144, 190, 'enemy'),
+  'enemy.predalien.action.v64': sheet('enemy.predalien.action.v64', 'predalienV64', '/assets/openai/sprites/normalized/enemies/predalien-action-sheet-v64.png', 'predalien-action-v64', 'creature-ground', 'predalien-large', 205, 165, 'enemy'),
   'enemy.xenomorph-drone.locomotion': sheet('enemy.xenomorph-drone.locomotion', 'xenoLocomotion', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png', 'xenomorph-locomotion', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy'),
   'enemy.xenomorph-drone.combat': sheet('enemy.xenomorph-drone.combat', 'xenoCombat', '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 142, 106, 'enemy', -1),
   'enemy.xenomorph-warrior.combat': sheet('enemy.xenomorph-warrior.combat', 'xenoWarrior', '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png', 'xenomorph-combat', 'creature-ground', 'xenomorph-standing', 158, 120, 'enemy'),
@@ -551,17 +575,36 @@ export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { r
   return { ...resolvePlayerAnimation(actor, false), degraded: 'player-animation-identity-rejected' };
 }
 
+const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
+  'enemy-action-v56',
+  'newborn-action-v64',
+  'offspring-action-v64',
+  'predalien-action-v64'
+]);
+const V64_HYBRID_ACTION_CLIP_SETS = new Set([
+  'newborn-action-v64',
+  'offspring-action-v64',
+  'predalien-action-v64'
+]);
+
 export function resolveEnemyAnimation(enemy = {}) {
-  const hurt = (enemy.v52HurtClock || 0) > 0;
+  const hurt = (enemy.hurtClock || 0) > 0 || (enemy.v52HurtClock || 0) > 0;
   const dead = !enemy.alive;
   const attacking = Boolean(enemy.attacking);
   const moving = Math.abs(enemy.vx || 0) > 8 || Boolean(enemy.alert);
   const v54ActionClip = dead || hurt ? 'death' : attacking ? 'attack' : moving ? 'chase' : 'idle';
-  const dedicatedV56 = typeof enemy.visualSheetId === 'string'
-    && SPRITE_SHEETS[enemy.visualSheetId]?.clipSet === 'enemy-action-v56'
+  const dedicatedClipSet = typeof enemy.visualSheetId === 'string'
+    ? SPRITE_SHEETS[enemy.visualSheetId]?.clipSet
+    : null;
+  const dedicatedActionSheet = DEDICATED_ENEMY_ACTION_CLIP_SETS.has(dedicatedClipSet)
     ? enemy.visualSheetId
     : null;
-  if (dedicatedV56) return { sheetId: dedicatedV56, clipId: v54ActionClip };
+  if (dedicatedActionSheet) {
+    if (V64_HYBRID_ACTION_CLIP_SETS.has(dedicatedClipSet) && hurt && !dead) {
+      return { sheetId: dedicatedActionSheet, clipId: 'idle', reaction: 'hurt' };
+    }
+    return { sheetId: dedicatedActionSheet, clipId: v54ActionClip };
+  }
   if (enemy.spriteKey === 'ovomorph') return { sheetId: 'enemy.ovomorph.cycle', clipId: dead || hurt ? 'destroyed' : attacking ? 'hatch' : moving ? 'opening' : 'sealed' };
   const v55Enemies = {
     xenoPraetorian: 'enemy.xenomorph-praetorian.action',
