@@ -2,7 +2,7 @@
 
 Version de travail web jouable **v62.0.0**. Le contrat consolidé **v1→v62** transforme le Tantalus en niveau physique persistant : collisions, portes, échelles, profondeur, réseau de conduits sauvegardé, routines de seize PNJ et dialogues à mémoire. Les opérations passent désormais par une insertion jouable et reprenable (briefing, préparation, approche, incident causal, déploiement), tandis que les catalogues hiérarchiques montrent les vraies cellules des plaques et séparent clairement canon, gameplay et liens biologiques. Frontier Forge possède sa propre sauvegarde et ne peut plus modifier la campagne.
 
-Dernier déploiement public prévu pour la V62 : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). L'historique V62 consigne la gate locale et sera mis à jour avec le commit et l'URL Vercel après publication.
+Dernier déploiement public vérifié V62 : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app), alias de production Vercel `dpl_HRnF4cGPHcDpB7TM3GP3YhePfc7N`.
 
 ## Lancer localement
 

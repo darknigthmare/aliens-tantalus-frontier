@@ -21,7 +21,7 @@ Date du constat : 30 août 2026. Cet audit compare le brief V62 au dépôt local
 | 7 | Séquences d’insertion de mission | **VERIFIED** | Briefing, préparation, approche, incident causal, déploiement et prise de contrôle sont interactifs et reprenables. |
 | 8 | Ameublement déterministe et cohérent | **PARTIAL** | Le placement auteur est stable et fonctionnel, mais le kit de petits props annoncé P1 empêche encore un verdict commercial final. |
 | 9 | Infestation strictement causale | **VERIFIED** | Sans événement d’exposition persistant, aucune crise du Tantalus n’est créée ; la progression et le confinement sont déterministes. |
-| 10 | Gates release, navigateur et publication | **PARTIAL** | La QA locale complète passe : 366 tests, 165 modules lintés, audits sprites/PNG et build. La QA navigateur et la publication Vercel restent à attester séparément. |
+| 10 | Gates release, navigateur et publication | **PARTIAL** | La QA locale complète passe et la V62 est publiée sur GitHub/Vercel avec HTTP 200. La QA navigateur reste à attester séparément. |
 
 ## 1. Catalogues hiérarchiques — PARTIAL
 
@@ -144,14 +144,16 @@ Le placement auteur et la jouabilité sont vérifiés, mais la finition d’ameu
 - version produit déclarée `62.0.0` ;
 - cache PWA `atf-v62-runtime-1` et fermeture ESM / assets V62 couverts par le contrat hors-ligne ciblé ;
 - le build exclut contractuellement les masters `raw` de production sans supprimer leurs sources de travail.
+- commit GitHub V62 : `87cedca` sur `codex/v52-physical-worlds` ;
+- déploiement Vercel production : `dpl_HRnF4cGPHcDpB7TM3GP3YhePfc7N`, état **READY** ;
+- alias public : `https://aliens-tantalus-frontier.vercel.app` ;
+- vérification HTTP 200 : `/`, `/build-info.json`, `/catalog-v62.css`, `/mission-insertion-v62.css`, `/sw.js`, `/docs/VERSION_HISTORY_V62.md`, conduit V62 et trois PNG d'insertion.
 
 ### Non attesté dans ce document
 
 - **QA navigateur `npm run qa:browser:v62` : BLOCKED / non exécutée ici.** Les tests DOM synthétiques ne remplacent pas une session visuelle et jouable à 1280 × 720, mobile et manette.
-- **Déploiement Vercel, URL publique et HTTP 200 : BLOCKED / aucune preuve collectée ici.**
-- **Commit et push GitHub de la V62 : BLOCKED / aucune preuve collectée ici.**
 
-La V62 dispose donc d’un socle automatisé substantiel, mais ne doit pas être déclarée « release commerciale vérifiée » avant réussite de la QA navigateur, publication GitHub/Vercel, vérification HTTP publique et revue des écarts PNG / ameublement.
+La V62 dispose donc d’un socle automatisé substantiel et d'une publication publique vérifiée, mais ne doit pas être déclarée « release commerciale vérifiée » avant réussite de la QA navigateur et revue des écarts PNG / ameublement.
 
 ## Commandes de reproduction
 
