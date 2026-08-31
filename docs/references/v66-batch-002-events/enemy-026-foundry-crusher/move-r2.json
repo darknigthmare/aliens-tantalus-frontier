@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-a7102e0e-02c5-4953-a440-8c249c950311",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "746f5384a92558e9b2453a77720ac18e9c0b376cd0901b97fd053e24e464579b",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/rejected/move-pre-r3.png",
+  "note": "Revision2: targeted ImageGen material-color correction of unwanted pink spill on neck and joint chitin; background and eight walking poses requested unchanged. Original preserved at rejected/move-pre-r2.png. Candidate requires renewed visual/root and matte review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/move-r2.txt"
+}

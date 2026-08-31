@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "charge",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-631358e4-18d6-4c02-abc6-b4013d5bfa0d",
+  "actor": "Codex source_qa",
+  "sourceSha256": "4b7af6b7bc27fc63036ed5cba415103bc2c26d2dd5f51e7df8015c8d4f8365d7",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/rejected/charge-pre-r3.png",
+  "note": "Revision2 candidate: grounded acceleration, armored impact, compression and braking action instead of airborne gallop. Original preserved under rejected/charge-pre-r2.png. Visual and physical-anchor acceptance remain pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/charge-r2.txt"
+}

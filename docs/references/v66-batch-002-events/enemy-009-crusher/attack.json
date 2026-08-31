@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-009-crusher",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-e908f0e0-9e6f-4846-b8e0-711c716e0cba",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. Reference right-side Hiya ACM Crusher; quadruped silhouette, 2:1 layout and margins pending review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-009-crusher/attack.txt"
+}

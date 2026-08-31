@@ -1,0 +1,670 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Physical registration of manually inspected Foundry Crusher source poses only; candidate art, no runtime acceptance or fidelity 1:1 certification.",
+  "profiles": {
+    "enemy-026-foundry-crusher": {
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-08-31",
+      "reviewedPoseCount": 40,
+      "evidencePaths": [
+        "docs/references/v66-batch-002-anchor-review/enemy-026-foundry-crusher/idle.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-026-foundry-crusher/move.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-026-foundry-crusher/attack.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-026-foundry-crusher/death.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-026-foundry-crusher/charge.jpg"
+      ],
+      "visualReview": "All forty original poses and all five annotated source overlays inspected individually. Marks lie on ribcage behind front shoulder and project to grounded limbs or resting body, not tail or shield extrema. Idle revision2 has no parasite dorsal appendage. Charge revision3 shows supported acceleration, compression poses5/6, braking recovery7/8. Physical registration only; attack/charge volume variation and final animation timing still require acceptance review. Approximate manual registration, not pixel-perfect canon certification. Move and death palette revisions2 were then inspected anew in all sixteen poses, with their updated marked source overlays; physical roots reconfirmed against the new source SHA256 values. Final move palette revision3 also re-inspected in its eight source poses and annotated overlays.",
+      "method": "Manually observed ribcage center immediately behind the front shoulder, projected vertically to its support floor. Coordinates measured on a 1400x700 diagnostic rendering and converted to original 1774x887 source-cell coordinates. Floor is measured complete pose padded bottom (three-pixel extraction guard), visually checked against planted limbs or terminal resting body; no airborne charge poses. Source bounds are not used for root x.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "090ef2c0c17d6ff878cf280e9ba7e3bf1ea944f4458856ab07fbafe03dd37a7b",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                238,
+                429
+              ],
+              "landmark": [
+                238,
+                313
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (238,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                232,
+                429
+              ],
+              "landmark": [
+                232,
+                313
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (232,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                226,
+                429
+              ],
+              "landmark": [
+                226,
+                313
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (226,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                313
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (220,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                237,
+                339
+              ],
+              "landmark": [
+                237,
+                227
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (237,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                231,
+                339
+              ],
+              "landmark": [
+                231,
+                227
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (231,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                224,
+                339
+              ],
+              "landmark": [
+                224,
+                227
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (224,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                219,
+                339
+              ],
+              "landmark": [
+                219,
+                227
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (219,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "d2c2298d564cf34a3634cc87bc4f5281f232a98d893daab0222e33c0f95ac110",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                238,
+                420
+              ],
+              "landmark": [
+                238,
+                304
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (238,304), padded support floor y=420; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                220,
+                419
+              ],
+              "landmark": [
+                220,
+                300
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (220,300), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                209,
+                419
+              ],
+              "landmark": [
+                209,
+                302
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (209,302), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                210,
+                419
+              ],
+              "landmark": [
+                210,
+                303
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (210,303), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                234,
+                337
+              ],
+              "landmark": [
+                234,
+                217
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (234,217), padded support floor y=337; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                223,
+                336
+              ],
+              "landmark": [
+                223,
+                218
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (223,218), padded support floor y=336; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                218,
+                334
+              ],
+              "landmark": [
+                218,
+                220
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (218,220), padded support floor y=334; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                213,
+                336
+              ],
+              "landmark": [
+                213,
+                219
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision3 source: ribcage at (213,219), padded support floor y=336; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "143a8cb3a0dfa6c71b92b8b525460db1197a51f712c078993afb70e1dfcdc77f",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                232,
+                399
+              ],
+              "landmark": [
+                232,
+                285
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (232,285); grounded limb support floor y=399 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                234,
+                398
+              ],
+              "landmark": [
+                234,
+                293
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (234,293); grounded limb support floor y=398 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                224,
+                399
+              ],
+              "landmark": [
+                224,
+                291
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (224,291); grounded limb support floor y=399 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                226,
+                396
+              ],
+              "landmark": [
+                226,
+                314
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (226,314); grounded limb support floor y=396 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                226,
+                276
+              ],
+              "landmark": [
+                226,
+                181
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (226,181); grounded limb support floor y=276 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                233,
+                285
+              ],
+              "landmark": [
+                233,
+                185
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (233,185); grounded limb support floor y=285 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                218,
+                286
+              ],
+              "landmark": [
+                218,
+                188
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (218,188); grounded limb support floor y=286 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                212,
+                285
+              ],
+              "landmark": [
+                212,
+                181
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (212,181); grounded limb support floor y=285 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "5ac18d2a917b208ba42181583051be803b01718b676b683a8130559d4cdc08d8",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                238,
+                425
+              ],
+              "landmark": [
+                238,
+                307
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (238,307), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                246,
+                425
+              ],
+              "landmark": [
+                246,
+                332
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (246,332), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                223,
+                427
+              ],
+              "landmark": [
+                223,
+                356
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (223,356), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                226,
+                427
+              ],
+              "landmark": [
+                226,
+                367
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (226,367), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                251,
+                307
+              ],
+              "landmark": [
+                251,
+                250
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (251,250), padded support floor y=307; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                252,
+                309
+              ],
+              "landmark": [
+                252,
+                257
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (252,257), padded support floor y=309; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                227,
+                310
+              ],
+              "landmark": [
+                227,
+                257
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (227,257), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                223,
+                310
+              ],
+              "landmark": [
+                223,
+                266
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ImageGen palette revision2 source: ribcage at (223,266), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit."
+            }
+          ]
+        },
+        "charge": {
+          "sourceSha256": "0e6230984f6012ec6a440cba6842ed71f0a52cb5f4c313c6d85d397d3f26b313",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                204,
+                395
+              ],
+              "landmark": [
+                204,
+                288
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (204,288); grounded limb support floor y=395 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                207,
+                393
+              ],
+              "landmark": [
+                207,
+                291
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (207,291); grounded limb support floor y=393 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                214,
+                395
+              ],
+              "landmark": [
+                214,
+                295
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (214,295); grounded limb support floor y=395 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                210,
+                394
+              ],
+              "landmark": [
+                210,
+                298
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (210,298); grounded limb support floor y=394 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                239,
+                291
+              ],
+              "landmark": [
+                239,
+                217
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (239,217); grounded limb support floor y=291 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                248,
+                293
+              ],
+              "landmark": [
+                248,
+                223
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (248,223); grounded limb support floor y=293 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                220,
+                297
+              ],
+              "landmark": [
+                220,
+                199
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (220,199); grounded limb support floor y=297 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                293
+              ],
+              "landmark": [
+                222,
+                175
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Manual ribcage center behind front shoulder at (222,175); grounded limb support floor y=293 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

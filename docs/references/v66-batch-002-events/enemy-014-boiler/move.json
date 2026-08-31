@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-014-boiler",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-a54cccd8-5707-4fca-89fc-a29e3b8d12e5",
+  "actor": "Codex complete_variants",
+  "note": "Candidate source only, visual and motion continuity review pending. Identity conditioned on corrected idle.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-014-boiler/move-identity-r3.txt",
+  "sourceSha256": "e0441981c2fee108346ce84ac9a89c06c9bbbfc719cc0cfc9f56a96b6e4f1909",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-014-boiler/move.png"
+}

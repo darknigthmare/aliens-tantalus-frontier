@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-007-praetorian",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-2c62ff02-4cd9-42d7-9143-c3f1e4b63e87",
+  "actor": "Codex complete_royal",
+  "note": "Candidate revision2; compact attack correction to avoid arm stretch and erroneous tail spear; prior source preserved; pending QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-007-praetorian/attack-r2.txt",
+  "sourceSha256": "d6a4df1bb31e83656be257ef76524710615897597eea1a60935e7c0e4d2d6548",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/attack.png"
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-008-queen",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-adb74826-cb87-4247-b9ba-ec03f697068f",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. NECA Aliens1986 reference inspected; four-arm anatomy and cell margins require per-pose QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-008-queen/idle.txt"
+}

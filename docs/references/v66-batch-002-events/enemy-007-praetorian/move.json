@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-007-praetorian",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-780b1e55-c638-44b3-8234-f7edfcc698ac",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. Reference-conditioned source pending geometric, identity and animation review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-007-praetorian/move.txt"
+}

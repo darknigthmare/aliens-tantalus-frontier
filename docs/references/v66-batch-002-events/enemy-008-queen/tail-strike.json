@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-008-queen",
+  "clipId": "tail-strike",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-d7e496a1-59b2-4d2b-a26f-c2711b955b67",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. NECA Aliens1986 reference inspected; four-arm anatomy and cell margins require per-pose QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-008-queen/tail-strike.txt"
+}

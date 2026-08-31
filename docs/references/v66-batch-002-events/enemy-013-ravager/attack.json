@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-013-ravager",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-3ed556e3-d4e8-4034-b810-18ab347f37f6",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, Extinction bestiary reference conditioned; pending source/animation QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-013-ravager/attack.txt",
+  "sourceSha256": "dcd2533f4d597925618e6497733e7fd5ace5f478c99b0197ffc376bc2bd5b0d3",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-013-ravager/attack.png"
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-011-lurker",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5e3c1c82-3f08-45c2-93a2-bce763503e4a",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "33f6091cee6dcec3d53fd61bf639b5f3264996c74ff65b6ac213b872cc25f6af",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png",
+  "note": "Revision2: ImageGen geometry-only repack requesting uniform smaller complete quadruped pounce poses and >=18% cell margins, preserving full tails. Original archived under rejected/attack-pre-r2.png. Candidate requires extraction and later inter-clip scale/physical-root review; not accepted.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-011-lurker/attack-r2.txt"
+}

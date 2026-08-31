@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-021-neuro-xeno-drone",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-8a0c6aaf-2fb1-49b7-8192-50f7a28f3b34",
+  "actor": "Codex root",
+  "note": "Generated from visually inspected project identity reference; source is candidate pending normalization and visual acceptance.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-021-neuro-xeno-drone/move.txt"
+}

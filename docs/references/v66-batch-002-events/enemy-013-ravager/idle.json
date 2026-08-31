@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-013-ravager",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-a1d649cc-636e-4a2f-9223-05af45b875e3",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, Extinction bestiary reference conditioned; pending source/animation QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-013-ravager/idle.txt",
+  "sourceSha256": "e82721560c4bf8e638c873c6938e8565d05ae5b13e20be7c548f8498d1c3b697",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-013-ravager/idle.png"
+}

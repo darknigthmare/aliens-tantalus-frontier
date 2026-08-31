@@ -1,0 +1,7 @@
+Use case: identity-preserve.
+Asset type: production game animation source, ONE sprite sheet, precisely 4 columns by 2 rows, eight sequential frames.
+Input image 1: the existing Tantalus Frontier Neuro-Xeno Drone identity reference only. Preserve its design but draw eight NEW chronological MOVE poses, not the 4x4 layout.
+Identity lock: lean black biomechanical Drone with smooth elongated eyeless dome, four dorsal pipes, long articulated spear-tail, intact rib cage, two clawed arms and two digitigrade legs. Compact gunmetal neural helmet fits OVER the long skull, temple clamps, insulated spinal cable, restrained tiny AMBER indicator. No ivory armor, no giant blue eye, no laser weapons, no robot redesign. Same skull shape and proportions as reference.
+
+Animation:One continuous BIPEDAL grounded walk cycle:1rightfootcontact2weightdown3passing4leftheelapproach5leftfootcontact6weightdown7passing8rightheelapproach. Feet alternate, pelvis gentlyrises/falls, clawsbalance, tailcounterbalances. No quadruped pounce.
+Exactly8 distinct authored chronological poses, 4 columns x2 rows in a2:1 landscape, rowmajor order. RIGHT-FACING strict orthographic side view, identical physical scale and skull length to reference in every cell. Same pixel-game rendering and neurolink helmet/cables/amber indicator. Whole body and tail in eachcell with generous12%gutters. Only background is perfectly flat pure #FF00FF magenta including enclosed limb gaps. No checkerboard, shadows, scenery, text, visiblegrid or labels. No pose duplicates, no clipping, no extra limbs or equipment.

@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-015-prowler",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-f435f65a-0a26-43b7-a4ca-bec0b281b20e",
+  "actor": "Codex variant_sheets",
+  "note": "Candidate background replacement from previous OpenAI Prowler sheet; pending source, continuity, anchor and fidelity QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-015-prowler/death.txt"
+}

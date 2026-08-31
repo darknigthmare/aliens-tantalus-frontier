@@ -2,7 +2,8 @@
 
 Le roster contient **571 profils / 55 archetypes**. Le Facehugger standard V65
 est une base deja integree, pas une nouvelle production V66. Les **570 autres
-profils sont repartis en 114 lots de 5**. Les contrats actuels demandent
+profils sont repartis en 30 lots : le pilote historique de 5 profils, puis
+28 lots de 20 et un dernier reliquat de 5**. Les contrats actuels demandent
 **2 457 planches sources**, et non 500 images deja terminees : une planche est
 un clip de huit poses, plusieurs planches forment un atlas de profil.
 
@@ -10,14 +11,38 @@ Le premier lot contient Ovomorph, Chestburster, Drone / Big Chap, Warrior et
 Runner. Il demande 20 planches sources / 160 poses. Les variantes ne recoivent
 jamais automatiquement l'image du profil standard.
 
+La taille de production vaut desormais **20 ennemis par lot**, pas 20
+planches. `batch-001` reste definitivement le pilote de cinq profils, avec
+ses IDs, ordinaux, chemins sources, verrous, prompts et preuves inchanges.
+`batch-002` couvre exactement `enemy-007-praetorian` a
+`enemy-026-foundry-crusher` : **87 planches / 696 poses**. `batch-003` reprend
+aux profils027..046, et ainsi de suite. `batch-030` contient les profils567..571
+et demande22planches. Aucun profil n'est duplique ou omis; le Facehugger V65
+ne redevient jamais un travail V66 a generer.
+
+## Migration des anciens lots de cinq
+
+`init` migre la partition historique de114lots vers30lots sans reserialiser
+le fichier d'etat existant, sans toucher aux references ni aux pixels.
+Les evenements et leurs empreintes restent identiques octet pour octet.
+La migration est deterministe et une seconde execution est idempotente.
+
+Avant toute ecriture, elle refuse de deplacer un profil ayant deja un
+evenement de production, une source, un atlas ou des metadonnees a son ancien
+chemin. Ce refus protege aussi les sources reelles pas encore enregistrees.
+Il faut alors conserver/traiter explicitement l'ancien emplacement; ne pas
+effacer l'historique ni copier les preuves pour contourner le controle.
+Les cinq profils integres du pilote restent donc proteges, tout comme un
+travail partiel du lot002 dont les chemins restent inchanges.
+
 ## Commandes
 
 ```powershell
 node scripts/enemy-batch-production.mjs init
-node scripts/enemy-batch-production.mjs status --batch batch-001
-node scripts/enemy-batch-production.mjs dry-run --batch batch-001
+node scripts/enemy-batch-production.mjs status --batch batch-002
+node scripts/enemy-batch-production.mjs dry-run --batch batch-002
 node scripts/enemy-batch-production.mjs check
-py scripts/process-v66-enemy-batch.py --batch batch-001 --dry-run
+py scripts/process-v66-enemy-batch.py --batch batch-002 --dry-run
 py scripts/process-v66-enemy-batch.py --profile enemy-001-ovomorph
 py scripts/process-v66-enemy-batch.py --profile enemy-001-ovomorph --check
 ```
@@ -103,6 +128,14 @@ Les familles futures ont leurs actions propres : reine et coup de queue,
 tireur et recharge, synthetique et blessure non lethale, nage, tentacules,
 charge ou liberation de parasites. Elles restent du travail en attente tant
 que leurs vrais clips n'ont pas ete produits et branches.
+
+Des exceptions d'archetype priment sur la famille generique : l'attaque du
+Praetorian garde exactement deux bras principaux et sa couronne verrouillee,
+sans petits bras de reine. Le Xenoborg vise/tire avec ses canons laser greffes
+aux avant-bras; son clip `reload` garde cet ID mais anime une recharge des
+condensateurs et l'evacuation thermique, jamais un changement de chargeur ou
+une arme tenue en main. Ces exceptions s'appliquent aussi a leurs variantes,
+sans modifier les contrats des cinq profils du pilote deja integres.
 
 Sources : `assets/openai/sprites/frames/v66/batch-NNN/<profileId>/<clip>.png`.
 Chaque source est exactement 2:1, 4 colonnes x 2 lignes, huit poses. Une

@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-008-queen",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-09c28657-2c71-4c94-a76b-bc61271e4bf9",
+  "actor": "Codex complete_royal",
+  "note": "Candidate revision3; reference corrected Queen idle, preserve visible long shoulder arms plus separate small chest arms; previous source preserved; pending QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-008-queen/move-r3.txt",
+  "sourceSha256": "ba0757f864da929743d0df744caaac8d104d9a59614fe081e2b27c5e918a6555",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-008-queen/move.png"
+}

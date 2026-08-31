@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-007-praetorian",
+  "clipId": "tail-strike",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-0f46505a-62f1-49f7-be27-158d07678b6c",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. Reference-conditioned source pending geometric, identity and animation review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-007-praetorian/tail-strike.txt"
+}

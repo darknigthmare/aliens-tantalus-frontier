@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-025-foundry-drone",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-cedadd40-fcba-4db9-b43f-4d8648d4b41e",
+  "actor": "Codex root",
+  "note": "Candidate referenced from V56 Foundry Drone; no runtime acceptance, exact roots and clip scale remain pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-025-foundry-drone/idle.txt"
+}

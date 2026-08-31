@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-010-spitter",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-fa6b5760-decb-48b7-a42e-afe0be194d0a",
+  "actor": "Codex root",
+  "note": "Revision2 improves full-pose cell margins and separates top-row feet from next row. Same authored death sequence; scale calibration remains pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-010-spitter/death-r2.txt"
+}

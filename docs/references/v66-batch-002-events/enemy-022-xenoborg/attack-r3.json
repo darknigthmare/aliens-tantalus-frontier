@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-022-xenoborg",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-4545d3fa-f45b-428c-9b06-024472615061",
+  "actor": "Codex root",
+  "note": "Revision3 targeted pose4 translation to keep its tail tip inside the cell; no shape redesign requested. Candidate pending re-audit.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-022-xenoborg/attack-r3.txt"
+}

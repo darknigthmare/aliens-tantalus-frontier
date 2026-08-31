@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-012-carrier",
+  "clipId": "release",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-096a243f-3825-4b7a-a102-07ae288c7277",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, Extinction bestiary reference conditioned; pending source/animation QA, facehugger should release from carrying spine.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-012-carrier/release.txt",
+  "sourceSha256": "738b37ab8e6c9f06ed31db7eaaea596559634232fab845278df5939156cdde40",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-012-carrier/release.png"
+}

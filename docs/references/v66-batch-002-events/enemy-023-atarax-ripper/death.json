@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-023-atarax-ripper",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5d84d0d8-790d-4a30-8c98-5a6068b7306e",
+  "actor": "Codex root",
+  "note": "Candidate from project identity reference; idle/move semantics require refinement; not accepted or runtime integrated.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-023-atarax-ripper/death.txt"
+}

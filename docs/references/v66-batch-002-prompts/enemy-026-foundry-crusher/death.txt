@@ -1,0 +1,7 @@
+Use case: stylized-concept
+Asset type: Foundry Crusher animation sprite sheet for enemy-026.
+Input images: Image1 is the approved-for-identity idle reference ONLY. Copy its exact creature identity, shape of the large fan head shield, charcoal-black soot chitin and subtle bronze wear, four legs, heavy body, long spear tail. This is a low quadrupedal Crusher, never a biped.
+Composition: EXACT 2:1 landscape canvas requested2048x1024,4columns2rows of equal square cells. Eight distinct complete full-body sequential poses, all strictly facingRIGHT in orthographic side view. Equal scale, stable anatomical proportions, same lighting/style as reference. Every pose centered in its own cell with generous12%empty margins. Keep entire tail/head/claws within each cell. Fixed root and floor; no camera changes.
+Background: solid flat pureMAGENTA #FF00FF, no checkerboard, no labels, no lines, no props, no groundshadow, no particles acrosscells. Crisp modern2Dmetroidvania biomechanical bitmap rendering, not toy/photo.
+
+Animation: ONE controlled eight-pose DEATH COLLAPSE.1hurtlowstance,2forelegsshake,3forekneesbend,4frontbodydescends,5chesttouchesground,6hindquartersfold,7headshieldsettles,8motionlesssidecorpse. Preserve complete rigidheadshieldandbodyvolume, allfourlegsattachedandlongtailfullyvisible. No goreexplosion, no shrinking, no turningtoleft, no resurrection.

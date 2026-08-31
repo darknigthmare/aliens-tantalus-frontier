@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-025-foundry-drone",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-e39b9ea2-93cf-4656-a3ea-4c4e02bd5849",
+  "actor": "Codex root",
+  "note": "Revision2 reduces pose extent, preserves full tail and anatomy; candidate pending bounds/scale/anchors and continuity review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-025-foundry-drone/attack-r2.txt"
+}

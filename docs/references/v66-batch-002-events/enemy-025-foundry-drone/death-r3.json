@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-025-foundry-drone",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-83402378-6c51-4cb5-90ee-fc575df5224b",
+  "actor": "Codex root",
+  "note": "Revision3 layout-only uniform pose reduction and top-row foot margin correction. Physical clip scale calibration remains pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-025-foundry-drone/death-r3.txt"
+}

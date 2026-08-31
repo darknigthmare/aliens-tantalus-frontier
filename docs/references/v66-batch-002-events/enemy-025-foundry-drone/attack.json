@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-025-foundry-drone",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-9ae936ba-bc35-4430-850b-c91947d01412",
+  "actor": "Codex root",
+  "note": "Candidate referenced from V56 Foundry Drone; no runtime acceptance, exact roots and clip scale remain pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-025-foundry-drone/attack.txt"
+}

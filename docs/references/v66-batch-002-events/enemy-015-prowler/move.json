@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-015-prowler",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-256df2d1-4da7-4d79-a7fe-30ef78136609",
+  "actor": "Codex variant_sheets",
+  "note": "Candidate background replacement from previous OpenAI Prowler sheet; pending source, continuity, anchor and fidelity QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-015-prowler/move.txt"
+}

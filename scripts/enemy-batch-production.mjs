@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ENEMIES } from '../src/content-core-v50.js';
-import { ANIMATION_CONTRACTS, BASELINE_PROFILE_ID, BATCH_SIZE, FIRST_BATCH_IDS, SOURCE_GRID, contentHash, makeGenerationPrompt, normalizeEnemyIdentity, reviewedReference } from './enemy-batch-contracts.mjs';
+import { BASELINE_PROFILE_ID, BATCH_SIZE, FIRST_BATCH_IDS, SOURCE_GRID, animationContractFor, contentHash, makeGenerationPrompt, normalizeEnemyIdentity, reviewedReference } from './enemy-batch-contracts.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const QUEUE_PATH = 'docs/references/V66_ENEMY_BATCH_QUEUE.json';
@@ -38,11 +38,13 @@ export function buildEnemyBatchQueue({ catalog = ENEMIES, references = { profile
   const priority = new Map(FIRST_BATCH_IDS.map((id, index) => [id, index]));
   const pending = profiles.filter((profile) => profile.profileId !== BASELINE_PROFILE_ID).sort((a, b) => (priority.get(a.profileId) ?? 999) - (priority.get(b.profileId) ?? 999) || a.profileId.localeCompare(b.profileId, 'en'));
   const jobs = pending.map((profile, index) => {
-    const batchId = `batch-${pad(Math.floor(index / BATCH_SIZE) + 1)}`;
+    // The accepted five-profile pilot is never repartitioned or renumbered.
+    const batchId = `batch-${pad(index < FIRST_BATCH_IDS.length ? 1 : 2 + Math.floor((index - FIRST_BATCH_IDS.length) / BATCH_SIZE))}`;
     const reference = reviewedReference(references.profiles?.[profile.profileId]);
-    if (reference && Object.keys(reference.sourceScaleByClip).some((id) => !ANIMATION_CONTRACTS[profile.animationFamily].some((clip) => clip.id === id))) throw new Error(`Unknown calibrated clip for ${profile.profileId}.`);
+    const contract = animationContractFor(profile);
+    if (reference && Object.keys(reference.sourceScaleByClip).some((id) => !contract.some((clip) => clip.id === id))) throw new Error(`Unknown calibrated clip for ${profile.profileId}.`);
     const base = `assets/openai/sprites/frames/v66/${batchId}/${profile.profileId}`;
-    const clips = ANIMATION_CONTRACTS[profile.animationFamily].map((spec, ordinal) => ({
+    const clips = contract.map((spec, ordinal) => ({
       ...spec, frames: Array.from({ length: 8 }, (_, offset) => ordinal * 8 + offset),
       sourcePath: `${base}/${spec.id}.png`,
       normalizedPath: `assets/openai/sprites/normalized/enemy-clips-v66/${profile.profileId}/${spec.id}.webp`,
@@ -60,9 +62,11 @@ export function buildEnemyBatchQueue({ catalog = ENEMIES, references = { profile
     };
   });
   const batches = [];
-  for (let offset = 0; offset < jobs.length; offset += BATCH_SIZE) {
-    const entries = jobs.slice(offset, offset + BATCH_SIZE);
-    batches.push({ id: entries[0].batchId, profileIds: entries.map((job) => job.profileId), requiredBoards: entries.reduce((total, job) => total + job.clips.length, 0) });
+  for (const job of jobs) {
+    if (batches.at(-1)?.id !== job.batchId) batches.push({ id: job.batchId, profileIds: [], requiredBoards: 0 });
+    const batch = batches.at(-1);
+    batch.profileIds.push(job.profileId);
+    batch.requiredBoards += job.clips.length;
   }
   return { schema: 1, release: 'v66', generatedBy: 'scripts/enemy-batch-production.mjs', rosterSha256: contentHash(profiles),
     totalProfiles: profiles.length, archetypeCount: new Set(profiles.map((profile) => profile.archetype)).size,
@@ -75,6 +79,48 @@ export function buildEnemyBatchQueue({ catalog = ENEMIES, references = { profile
 }
 
 export function emptyState() { return { schema: 1, release: 'v66', events: [] }; }
+
+function productionLocations(job) {
+  return { batchId: job.batchId, ordinal: job.ordinal, normalizedPath: job.normalizedPath,
+    metadataPath: job.metadataPath, previewPath: job.previewPath,
+    clips: job.clips.map(({ id, sourcePath, normalizedPath, previewPath }) => ({ id, sourcePath, normalizedPath, previewPath })) };
+}
+
+async function assertSafeBatchMigration(previous, queue, state, root) {
+  if (state.schema !== 1 || !Array.isArray(state.events)) throw new Error('Invalid production state; queue migration refused.');
+  if (!previous && state.events.length) throw new Error('Existing production state has no previous queue; restore its manifest before migration.');
+  const nextById = new Map(queue.jobs.map((job) => [job.profileId, job]));
+  const previousById = new Map((previous?.jobs || []).map((job) => [job.profileId, job]));
+  const recorded = new Set(state.events.map((event) => event.profileId));
+  for (const profileId of recorded) {
+    if (!nextById.has(profileId) || !previousById.has(profileId)) throw new Error(`Unknown profile in existing production state: ${profileId}`);
+  }
+  for (const job of previousById.values()) {
+    const next = nextById.get(job.profileId);
+    if (next && JSON.stringify(productionLocations(job)) === JSON.stringify(productionLocations(next))) continue;
+    if (recorded.has(job.profileId)) throw new Error(`Refusing to relocate existing production evidence for ${job.profileId}; preserve its original batch and source paths.`);
+    // Even an as-yet unrecorded source must not become orphaned by a regrouping.
+    for (const path of [job.normalizedPath, job.metadataPath, ...job.clips.map((clip) => clip.sourcePath)]) {
+      if (await fileExists(scopedPath(root, path))) throw new Error(`Refusing to relocate existing production files for ${job.profileId}: ${path}`);
+    }
+  }
+}
+
+export async function initializeEnemyBatchQueue({ root = ROOT, catalog = ENEMIES, manifestPath = QUEUE_PATH, statePath = STATE_PATH, referencesPath = REFERENCES_PATH } = {}) {
+  const manifest = scopedPath(root, manifestPath);
+  const stateFile = scopedPath(root, statePath);
+  const references = await loadJson(scopedPath(root, referencesPath), { schema: 1, profiles: {} });
+  const previous = await loadJson(manifest, null);
+  const stateExisted = await fileExists(stateFile);
+  const state = await loadJson(stateFile, emptyState());
+  const queue = buildEnemyBatchQueue({ catalog, references });
+  await assertSafeBatchMigration(previous, queue, state, root);
+  await saveJson(manifest, queue);
+  // Existing history is not serialized again: preserve its bytes and every proof.
+  if (!stateExisted) await saveJson(stateFile, state);
+  return queue;
+}
+
 function eventsFor(state, profileId) { return state.events.filter((event) => event.profileId === profileId); }
 function requireActor(event) {
   if (!String(event.actor || '').trim() || !String(event.note || '').trim()) throw new Error('Every production decision requires an actor and a meaningful note.');
@@ -147,8 +193,12 @@ export async function appendProductionEvent(queue, state, source, root = ROOT) {
   if (event.kind === 'generated') {
     const spec = job.clips.find((clip) => clip.id === event.clipId);
     if (!spec) throw new Error('Unknown animation clip.');
+    const sourceSha256 = await fileHash(scopedPath(root, spec.sourcePath));
+    // A saved generation receipt must not be rebound to replacement pixels.
+    // Older receipts without an explicit hash retain the original import path.
+    if (event.sourceSha256 !== undefined && event.sourceSha256 !== sourceSha256) throw new Error('Supplied source SHA-256 does not match the current clip source.');
     event.sourcePath = spec.sourcePath;
-    event.sourceSha256 = await fileHash(scopedPath(root, spec.sourcePath));
+    event.sourceSha256 = sourceSha256;
     event.contractPromptSha256 = spec.promptSha256;
     if (event.actualPromptPath) event.actualPromptText = await readFile(scopedPath(root, event.actualPromptPath), 'utf8');
     if (!event.actualPromptText && event.usedQueuePrompt === true) event.actualPromptText = spec.prompt;
@@ -188,10 +238,7 @@ export async function main(args = process.argv.slice(2)) {
   const statePath = scopedPath(ROOT, argument(args, '--state', STATE_PATH));
   const referencesPath = scopedPath(ROOT, argument(args, '--references', REFERENCES_PATH));
   if (command === 'init') {
-    const references = await loadJson(referencesPath, { schema: 1, profiles: {} });
-    const queue = buildEnemyBatchQueue({ references });
-    await saveJson(manifestPath, queue);
-    if (!await fileExists(statePath)) await saveJson(statePath, emptyState());
+    const queue = await initializeEnemyBatchQueue({ manifestPath: argument(args, '--manifest', QUEUE_PATH), statePath: argument(args, '--state', STATE_PATH), referencesPath: argument(args, '--references', REFERENCES_PATH) });
     console.log(JSON.stringify({ jobs: queue.productionJobCount, batches: queue.batchCount, requiredBoards: queue.requiredBoards, preservedExistingState: true }));
     return;
   }

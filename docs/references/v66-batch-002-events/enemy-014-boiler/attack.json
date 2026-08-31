@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-014-boiler",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-80da3f0b-c918-4058-b7be-5e5c18c2fc21",
+  "actor": "Codex complete_variants",
+  "note": "Candidate contact-warning and biological-pressure source; detonation VFX separate. Not integrated.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-014-boiler/attack-identity-r3.txt",
+  "sourceSha256": "7f8fe66833b6b8e5c21ca17dbde75c793b3cd98c368a66e21d30a516bff3800e",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-014-boiler/attack.png"
+}

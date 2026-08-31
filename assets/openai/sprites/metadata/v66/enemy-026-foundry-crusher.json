@@ -1,0 +1,3672 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-026-foundry-crusher",
+  "subject": "Foundry Crusher",
+  "batchId": "batch-002",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207",
+    "https://www.toyark.com/wp-content/uploads/2018/09/Aliens-Colonial-Marines-Hiya-024.jpg",
+    "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+  ],
+  "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+  "animationFamily": "siege",
+  "grid": {
+    "columns": 4,
+    "rows": 10,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-026-foundry-crusher.webp",
+  "normalizedSha256": "1907ae2541aa92fb5a10feb2a1cd9db1a360f3613f1ebcb0cf3babcbf2d51329",
+  "preview": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/all.gif",
+  "previewSha256": "badaa4584f365207d413597268db9d3c43299cc1152ad12237e09bf3ebe39e5d",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.470338983,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1.0,
+    "move": 1.0,
+    "attack": 1.0,
+    "death": 1.0,
+    "charge": 1.0
+  },
+  "scaleCalibrationReview": null,
+  "scaleCalibrationEvidence": [],
+  "physicalAnchorReview": {
+    "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+    "sha256": "614982015ac098a490273b2f4055429f179bf0e5696c7a676fa247a7bc8b332d",
+    "status": "reviewed",
+    "reviewer": "Codex finish_source_review",
+    "reviewedAt": "2026-08-31",
+    "method": "Manually observed ribcage center immediately behind the front shoulder, projected vertically to its support floor. Coordinates measured on a 1400x700 diagnostic rendering and converted to original 1774x887 source-cell coordinates. Floor is measured complete pose padded bottom (three-pixel extraction guard), visually checked against planted limbs or terminal resting body; no airborne charge poses. Source bounds are not used for root x.",
+    "reviewedPoseCount": 40,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": true,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 4247,
+    "aaFringePixelCount": 3875,
+    "removedPixelCount": 8122,
+    "sourceProofSha256": "a855259f522ef08506d3c144da652f1bf5bb901dd2faa5ed98803d0414baabf5"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 40,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/idle.png",
+      "sha256": "090ef2c0c17d6ff878cf280e9ba7e3bf1ea944f4458856ab07fbafe03dd37a7b",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "575338b565629f57415edc2114f09f3a5efe384139ba6dc01949588e50bf80e4",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 765,
+        "aaFringePixelCount": 1003,
+        "strictCoreMaskSha256": "972c9ac176caecb9825e8d15747fec01e5d1245462c095b1b51aa44ce1e55e02",
+        "aaFringeMaskSha256": "a42a8b069ad0d9f894d73b2a4b5626fbde09fbbe755b058aac980d6f77630819",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          243,
+          9,
+          238
+        ],
+        "removedPixelCount": 1768,
+        "removedCoordinatesSha256": "8bb3ddd994036176f211a63739a7c221eb5bc0af779026e2f100d10e3f0597fd",
+        "removedRgbaSha256": "459718c9843e5170611dc6127dd6df7a20657fecac5c758657dc22182e0031d0",
+        "sourceRgbaSha256": "f288400406175a71c76605eb54a8940bb54a003b17e4ee80c98c10b74b61f4a0",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/move.png",
+      "sha256": "d2c2298d564cf34a3634cc87bc4f5281f232a98d893daab0222e33c0f95ac110",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "57071037cf1e8805c06f8fea1ee6c6a242a7e13d056d468642e40c3273e03912",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 521,
+        "aaFringePixelCount": 571,
+        "strictCoreMaskSha256": "8d477dccbca062918368c32878d8f9dc3991c5ad9789691407db8445941b498f",
+        "aaFringeMaskSha256": "6b2d26152e8c5f268ef0af0fad138bf0586733dd70105f09ef4f90117f326b45",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          236,
+          14,
+          223
+        ],
+        "removedPixelCount": 1092,
+        "removedCoordinatesSha256": "1ab8bbc644263cdf2988d50f929c8a49cd1efaeedf20842a8398e956b7ca994a",
+        "removedRgbaSha256": "c5eb5f4b7b570890363be8e20d60c7bac4550221fb4fa7c0b3ef32edf6968edc",
+        "sourceRgbaSha256": "eeb1ef08b0f0082d0832e6ee0e0cb69c7856b4129e383751bf87241ee3fb169f",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/attack.png",
+      "sha256": "143a8cb3a0dfa6c71b92b8b525460db1197a51f712c078993afb70e1dfcdc77f",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "7534314eea87f648cee92141f7a0118c819aaff6336ce5b9fa42129f31de0020",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 1306,
+        "aaFringePixelCount": 948,
+        "strictCoreMaskSha256": "4dbf62fe7bcdc7d54aca567b8fd01e8c8f494c8eaf55270d1f8f98f3b8864f34",
+        "aaFringeMaskSha256": "670137aace6df403fb56b25ae94ef3a03b291ed82627d13944e3a26de3c7c5ce",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          245,
+          15,
+          235
+        ],
+        "removedPixelCount": 2254,
+        "removedCoordinatesSha256": "3627ff35a2a22bba55290bf1c3171cf02c78857459f7271d92dc2ead954ce480",
+        "removedRgbaSha256": "8a101fe285f4994ad276b0d3836c429ad0fb1dbcc6e4c6464ab10114b57a33c9",
+        "sourceRgbaSha256": "1e1724a2cc1f8b4a31770b48692bbfded5595de5449dd10dec80ac17e7e4ede4",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+      "sha256": "5ac18d2a917b208ba42181583051be803b01718b676b683a8130559d4cdc08d8",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "0950e0c6e8a9cb61d73e3fc1b48fbf7db4a5e17bd5da7c1026aeb66435625e8d",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 814,
+        "aaFringePixelCount": 531,
+        "strictCoreMaskSha256": "4570ca8aed25517cd69bce124ffc07050a50b00554c9f4fc495e59a7fab88bed",
+        "aaFringeMaskSha256": "ade48d84472ffbe92095b3d148121a3da365401a39633c6daa825de20e2d69e4",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          237,
+          17,
+          231
+        ],
+        "removedPixelCount": 1345,
+        "removedCoordinatesSha256": "e9633212a395b724417f8b2fca42aae1abd231733fecf291b5d966817dfb5848",
+        "removedRgbaSha256": "706b03100a79bf8edd89c567e8eb22c67c13d71050f57e4e9faeff3d82190e5e",
+        "sourceRgbaSha256": "853589d537536b66f10bf58b1e2ace269a914f7d5534320673eaca78270ebe6e",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "charge",
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/charge.png",
+      "sha256": "0e6230984f6012ec6a440cba6842ed71f0a52cb5f4c313c6d85d397d3f26b313",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "6361ab4e2d0931c01bc89104e3c0cb824a16b3c9e6a99d4a8456899ea381a652",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 841,
+        "aaFringePixelCount": 822,
+        "strictCoreMaskSha256": "76254730439183385c874f73b09f9cb58bb369be3115028f213ed63deec4a78c",
+        "aaFringeMaskSha256": "d266cc7797f4f4020b4c92193635397b312d7d2ebf2e4a17ccd8da0c7ad28ed5",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          228,
+          11,
+          217
+        ],
+        "removedPixelCount": 1663,
+        "removedCoordinatesSha256": "6db7fdb941ee11e456423f0080f21db35ef71b3f7d2926c207d6f2cdba8c757b",
+        "removedRgbaSha256": "a1ee4bc4fce433d2b64b52ff2402d00f5a363086de7631e9cd5c9aa607094aaf",
+        "sourceRgbaSha256": "90a6b4f0ef4cee0d06d2d04b11f17fac196367c29e8e5642fd44f14285b506d9",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/idle.webp",
+      "sha256": "f6c7eb736c1aa9a14de1b679f01b63514234e9a7159ac515ddfd14794b1d55d1",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/idle.gif",
+      "previewSha256": "40df7723d8302e1c575e6bcb7dcf90e887138662ce735b6096c08a5b77315607"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/move.webp",
+      "sha256": "d75d541b63ebc56680812a7e3dcfae263db380a078df76490357a3a15526b143",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/move.gif",
+      "previewSha256": "33c45d200756ccb56ae46869b6228d299d9fa1fa8928a724d156188d93d2d316"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/attack.webp",
+      "sha256": "8962c4a4245a40a68fee9b0d63493074a106c24fdf9bcb682762c39c3416f6e0",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/attack.gif",
+      "previewSha256": "606b2e9e4d4d4a34b5ede08680c9d70f17926bd46ca09e6a467b026f55a00c01"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/death.webp",
+      "sha256": "a02fcc8e4ccf0b52e91c47d2b928287e314f71833c2563366314a469421fdd8e",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/death.gif",
+      "previewSha256": "06dde6a44925a91cdd0a61aba5e02382884148d06b512c7f90b4c76f29f1a71f"
+    },
+    {
+      "id": "charge",
+      "frames": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/charge.webp",
+      "sha256": "fc3334572132461fc3b669575bc72433affdf45091df2b7b391972b7b844dcdc",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/charge.gif",
+      "previewSha256": "3cb35d855dcb295c7fe8adbdcebf4cbf47fc102d6baddafffdc45f83464cb2d9"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        21,
+        220,
+        413,
+        429
+      ],
+      "sourceGlobalBounds": [
+        21,
+        220,
+        413,
+        429
+      ],
+      "sourceSize": [
+        392,
+        209
+      ],
+      "foregroundPixels": 31888,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d9f68516b89658d30747d0f732196b5ae0e3805de507593e62b9c1d0786a122d",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        429
+      ],
+      "sourceLandmark": [
+        238,
+        313
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (238,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        209.0
+      ],
+      "renderedAnchor": [
+        127.85714285714286,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        142,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        16,
+        220,
+        410,
+        429
+      ],
+      "sourceGlobalBounds": [
+        460,
+        220,
+        854,
+        429
+      ],
+      "sourceSize": [
+        394,
+        209
+      ],
+      "foregroundPixels": 32000,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f7da1334243f2f4e8cb7a7070978defd61df9f7eee223aacaed023c16b1a767c",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        429
+      ],
+      "sourceLandmark": [
+        232,
+        313
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (232,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        216.0,
+        209.0
+      ],
+      "renderedAnchor": [
+        128.42131979695432,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        142,
+        212,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        10,
+        218,
+        401,
+        429
+      ],
+      "sourceGlobalBounds": [
+        897,
+        218,
+        1288,
+        429
+      ],
+      "sourceSize": [
+        391,
+        211
+      ],
+      "foregroundPixels": 32570,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d54ec6450973aeff5998f6a51be37f724a6594aee753ec889af3672d7791a359",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        429
+      ],
+      "sourceLandmark": [
+        226,
+        313
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (226,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        216.0,
+        211.0
+      ],
+      "renderedAnchor": [
+        127.6470588235294,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        141,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        6,
+        219,
+        394,
+        429
+      ],
+      "sourceGlobalBounds": [
+        1336,
+        219,
+        1724,
+        429
+      ],
+      "sourceSize": [
+        388,
+        210
+      ],
+      "foregroundPixels": 32344,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0668993439cc6c637b3ed6722681b0e45102bc2e822e02662afbc29c27985d21",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        429
+      ],
+      "sourceLandmark": [
+        220,
+        313
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (220,313); grounded limb support floor y=429 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        210.0
+      ],
+      "renderedAnchor": [
+        128.3814432989691,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        141,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        21,
+        129,
+        411,
+        339
+      ],
+      "sourceGlobalBounds": [
+        21,
+        573,
+        411,
+        783
+      ],
+      "sourceSize": [
+        390,
+        210
+      ],
+      "foregroundPixels": 32322,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bd4e27e95daaf3e9d3e5b11e6e79a6e62771a303ddab0e0b0cb13eb64e82241b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        237,
+        339
+      ],
+      "sourceLandmark": [
+        237,
+        227
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (237,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        216.0,
+        210.0
+      ],
+      "renderedAnchor": [
+        128.35384615384615,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        141,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        17,
+        129,
+        407,
+        339
+      ],
+      "sourceGlobalBounds": [
+        461,
+        573,
+        851,
+        783
+      ],
+      "sourceSize": [
+        390,
+        210
+      ],
+      "foregroundPixels": 32389,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "81d01b747d4bca920854f625920fd7d6867fd0e77e515895513b0acf608eb567",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        339
+      ],
+      "sourceLandmark": [
+        231,
+        227
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (231,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        210.0
+      ],
+      "renderedAnchor": [
+        128.4153846153846,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        141,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        10,
+        130,
+        401,
+        339
+      ],
+      "sourceGlobalBounds": [
+        897,
+        574,
+        1288,
+        783
+      ],
+      "sourceSize": [
+        391,
+        209
+      ],
+      "foregroundPixels": 32263,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "58620a1b11e961ff67e32067c78a3be2ac0ed617b3c3a5fc90046e0bf291da0e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        224,
+        339
+      ],
+      "sourceLandmark": [
+        224,
+        227
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (224,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        209.0
+      ],
+      "renderedAnchor": [
+        127.70588235294117,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        142,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        6,
+        130,
+        397,
+        339
+      ],
+      "sourceGlobalBounds": [
+        1336,
+        574,
+        1727,
+        783
+      ],
+      "sourceSize": [
+        391,
+        209
+      ],
+      "foregroundPixels": 32015,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f072dc342669d9447ebfa883bcd8c0a7c471497a40665fb2dbede205c061d976",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        219,
+        339
+      ],
+      "sourceLandmark": [
+        219,
+        227
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (219,227); grounded limb support floor y=339 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        213.0,
+        209.0
+      ],
+      "renderedAnchor": [
+        128.23529411764707,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        142,
+        212,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        21,
+        205,
+        415,
+        420
+      ],
+      "sourceGlobalBounds": [
+        21,
+        205,
+        415,
+        420
+      ],
+      "sourceSize": [
+        394,
+        215
+      ],
+      "foregroundPixels": 32459,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bd99c0536b098a1d0279eb47b66181fe74e9d890474fec79e2386f82b1b912db",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        420
+      ],
+      "sourceLandmark": [
+        238,
+        304
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (238,304), padded support floor y=420; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        127.89086294416244,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        139,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        7,
+        204,
+        402,
+        419
+      ],
+      "sourceGlobalBounds": [
+        451,
+        204,
+        846,
+        419
+      ],
+      "sourceSize": [
+        395,
+        215
+      ],
+      "foregroundPixels": 31775,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c5d871a8a924e22e1b8485bf9bf67353474d5621b9e4e8e627c7cbf056668a89",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        419
+      ],
+      "sourceLandmark": [
+        220,
+        300
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (220,300), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        213.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        128.29873417721518,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        139,
+        214,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        -8,
+        204,
+        388,
+        419
+      ],
+      "sourceGlobalBounds": [
+        879,
+        204,
+        1275,
+        419
+      ],
+      "sourceSize": [
+        396,
+        215
+      ],
+      "foregroundPixels": 31801,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "82d0e263de6d13211a805d939046f2e1fad0755b9f84fa3c39a89dc9dc9b504c",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 2,
+          "fromCells": [
+            1
+          ],
+          "pixels": 11,
+          "componentPixels": 31801,
+          "ownerShare": 0.999654,
+          "sourceBoundsGlobal": [
+            882,
+            207,
+            1272,
+            416
+          ],
+          "rgbaSha256": "8a64f795bd3b09a68cf49f5fc4134f996a7afae94e5bf9137c8fde17d3a47426",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        209,
+        419
+      ],
+      "sourceLandmark": [
+        209,
+        302
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (209,302), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        127.92424242424242,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        139,
+        212,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -10,
+        203,
+        382,
+        419
+      ],
+      "sourceGlobalBounds": [
+        1320,
+        203,
+        1712,
+        419
+      ],
+      "sourceSize": [
+        392,
+        216
+      ],
+      "foregroundPixels": 32654,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9a93b5675cf7b1a2b6a81e0bbf3659918c1fc2b49666325e6fefdfb387f9a758",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 21,
+          "componentPixels": 32654,
+          "ownerShare": 0.999357,
+          "sourceBoundsGlobal": [
+            1323,
+            206,
+            1709,
+            416
+          ],
+          "rgbaSha256": "f157f703265162a937f95241ff0072c6e2d57135bc6f5efbfc099af2747c257d",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        419
+      ],
+      "sourceLandmark": [
+        210,
+        303
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (210,303), padded support floor y=419; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        220.0,
+        216.0
+      ],
+      "renderedAnchor": [
+        128.26530612244898,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        25,
+        138,
+        209,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        20,
+        124,
+        414,
+        337
+      ],
+      "sourceGlobalBounds": [
+        20,
+        568,
+        414,
+        781
+      ],
+      "sourceSize": [
+        394,
+        213
+      ],
+      "foregroundPixels": 32586,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4e585df3927a9df59fe0ef73064a20b0790b3d82f023eb7f6badb8fce0eb46dc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        337
+      ],
+      "sourceLandmark": [
+        234,
+        217
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (234,217), padded support floor y=337; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        213.0
+      ],
+      "renderedAnchor": [
+        128.48223350253807,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        140,
+        213,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        5,
+        126,
+        396,
+        336
+      ],
+      "sourceGlobalBounds": [
+        449,
+        570,
+        840,
+        780
+      ],
+      "sourceSize": [
+        391,
+        210
+      ],
+      "foregroundPixels": 31862,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "170283c06f51c02dbfe3fae7051386e3e9b6241fb54232a0ef2263456285eb48",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        223,
+        336
+      ],
+      "sourceLandmark": [
+        223,
+        218
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (223,218), padded support floor y=336; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        210.0
+      ],
+      "renderedAnchor": [
+        127.58823529411765,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        25,
+        141,
+        209,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -3,
+        128,
+        395,
+        334
+      ],
+      "sourceGlobalBounds": [
+        884,
+        572,
+        1282,
+        778
+      ],
+      "sourceSize": [
+        398,
+        206
+      ],
+      "foregroundPixels": 30965,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1c813eb613edcd2898bcb711dbcd098e65b32702668dcc8d4069399eb4d0b11a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        218,
+        334
+      ],
+      "sourceLandmark": [
+        218,
+        220
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (218,220), padded support floor y=334; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        206.0
+      ],
+      "renderedAnchor": [
+        127.83668341708542,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        143,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -9,
+        128,
+        380,
+        336
+      ],
+      "sourceGlobalBounds": [
+        1321,
+        572,
+        1710,
+        780
+      ],
+      "sourceSize": [
+        389,
+        208
+      ],
+      "foregroundPixels": 31527,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7561e940112045c1a19e4288a7432a256650f280052627af8f9a41f55ed8d0cf",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 18,
+          "componentPixels": 31527,
+          "ownerShare": 0.999429,
+          "sourceBoundsGlobal": [
+            1324,
+            575,
+            1707,
+            777
+          ],
+          "rgbaSha256": "7b9a3db908b133323fc3b81d0e7b76ffaac410368ee7deee41228f2e63c36312",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        213,
+        336
+      ],
+      "sourceLandmark": [
+        213,
+        219
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision3 source: ribcage at (213,219), padded support floor y=336; gait identity and eight poses visually compared with prior revision. Updated marked overlay individually re-inspected; ribcage registration and support floor confirmed against revision3 source.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        222.0,
+        208.0
+      ],
+      "renderedAnchor": [
+        128.4370179948586,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        142,
+        207,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        17,
+        198,
+        410,
+        399
+      ],
+      "sourceGlobalBounds": [
+        17,
+        198,
+        410,
+        399
+      ],
+      "sourceSize": [
+        393,
+        201
+      ],
+      "foregroundPixels": 30285,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "438f2f82ebcbb4a08cb92b5dbe0a1037364642f5fc35f353ed7102660b3dc7f2",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        399
+      ],
+      "sourceLandmark": [
+        232,
+        285
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (232,285); grounded limb support floor y=399 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        215.0,
+        201.0
+      ],
+      "renderedAnchor": [
+        128.2086513994911,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        145,
+        212,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        19,
+        228,
+        385,
+        398
+      ],
+      "sourceGlobalBounds": [
+        463,
+        228,
+        829,
+        398
+      ],
+      "sourceSize": [
+        366,
+        170
+      ],
+      "foregroundPixels": 27146,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "092f675a842ad47ec6ba6fa8831d0f55300e19630a96e14a9c06733ba53ecc66",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        398
+      ],
+      "sourceLandmark": [
+        234,
+        293
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (234,293); grounded limb support floor y=398 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        215.0,
+        170.0
+      ],
+      "renderedAnchor": [
+        128.03825136612022,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        160,
+        199,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        7,
+        208,
+        399,
+        399
+      ],
+      "sourceGlobalBounds": [
+        894,
+        208,
+        1286,
+        399
+      ],
+      "sourceSize": [
+        392,
+        191
+      ],
+      "foregroundPixels": 29343,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "90322f2d014d38b0d1aa2d4357a7493693c4799ccbf1c4881be4c00eb34ac93e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        224,
+        399
+      ],
+      "sourceLandmark": [
+        224,
+        291
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (224,291); grounded limb support floor y=399 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        191.0
+      ],
+      "renderedAnchor": [
+        127.85714285714286,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        150,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -7,
+        254,
+        422,
+        396
+      ],
+      "sourceGlobalBounds": [
+        1323,
+        254,
+        1752,
+        396
+      ],
+      "sourceSize": [
+        429,
+        142
+      ],
+      "foregroundPixels": 25839,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "55e718f919434d67650efc37b5606f543787e6fc5d4e2950abda5d1e7fd8afa8",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 8,
+          "componentPixels": 25839,
+          "ownerShare": 0.99969,
+          "sourceBoundsGlobal": [
+            1326,
+            257,
+            1749,
+            393
+          ],
+          "rgbaSha256": "52b6048f137b176dee7400cbe88dfa7865ce8e07ed8de974d1fc5199e22dd455",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        396
+      ],
+      "sourceLandmark": [
+        226,
+        314
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (226,314); grounded limb support floor y=396 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        233.0,
+        142.0
+      ],
+      "renderedAnchor": [
+        127.71095571095572,
+        240.0
+      ],
+      "index": 19,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        18,
+        173,
+        220,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        16,
+        143,
+        406,
+        276
+      ],
+      "sourceGlobalBounds": [
+        16,
+        587,
+        406,
+        720
+      ],
+      "sourceSize": [
+        390,
+        133
+      ],
+      "foregroundPixels": 26185,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "65d6ea011ba90b11ebfba0d08c59b2e4f3738bbdb3935a2d13f08733ff2690b0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        276
+      ],
+      "sourceLandmark": [
+        226,
+        181
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (226,181); grounded limb support floor y=276 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        210.0,
+        133.0
+      ],
+      "renderedAnchor": [
+        127.53846153846153,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        29,
+        177,
+        212,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        19,
+        104,
+        386,
+        285
+      ],
+      "sourceGlobalBounds": [
+        463,
+        548,
+        830,
+        729
+      ],
+      "sourceSize": [
+        367,
+        181
+      ],
+      "foregroundPixels": 26875,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7df9b801778440206db6cbd8355cd240c14a8449db4bdb2c3bcaaf83c1cfcda7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        233,
+        285
+      ],
+      "sourceLandmark": [
+        233,
+        185
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (233,185); grounded limb support floor y=285 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        181.0
+      ],
+      "renderedAnchor": [
+        127.87738419618529,
+        240.0
+      ],
+      "index": 21,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        155,
+        200,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        6,
+        108,
+        375,
+        286
+      ],
+      "sourceGlobalBounds": [
+        893,
+        552,
+        1262,
+        730
+      ],
+      "sourceSize": [
+        369,
+        178
+      ],
+      "foregroundPixels": 27141,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2782fadaee7c4f461e4ae81f1bfdb01059a9691bf8407aad5fffcb75452eb737",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        218,
+        286
+      ],
+      "sourceLandmark": [
+        218,
+        188
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (218,188); grounded limb support floor y=286 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        212.0,
+        178.0
+      ],
+      "renderedAnchor": [
+        127.96747967479675,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        156,
+        202,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -1,
+        101,
+        376,
+        285
+      ],
+      "sourceGlobalBounds": [
+        1329,
+        545,
+        1706,
+        729
+      ],
+      "sourceSize": [
+        377,
+        184
+      ],
+      "foregroundPixels": 27449,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "055510832901a83b3813d811208a5d98dbf49d3e29a7139c09fabf90c5f1206e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        212,
+        285
+      ],
+      "sourceLandmark": [
+        212,
+        181
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (212,181); grounded limb support floor y=285 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        213.0,
+        184.0
+      ],
+      "renderedAnchor": [
+        128.0026525198939,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        153,
+        205,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        22,
+        216,
+        411,
+        425
+      ],
+      "sourceGlobalBounds": [
+        22,
+        216,
+        411,
+        425
+      ],
+      "sourceSize": [
+        389,
+        209
+      ],
+      "foregroundPixels": 30977,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0580b5251066ad5f5672b770eb4b09621f54c63ccd50a5a07fe16f829c116fbf",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        425
+      ],
+      "sourceLandmark": [
+        238,
+        307
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (238,307), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        216.0,
+        209.0
+      ],
+      "renderedAnchor": [
+        127.61439588688945,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        142,
+        209,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        19,
+        255,
+        416,
+        425
+      ],
+      "sourceGlobalBounds": [
+        463,
+        255,
+        860,
+        425
+      ],
+      "sourceSize": [
+        397,
+        170
+      ],
+      "foregroundPixels": 29894,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "dbd497cb9be00b2161e36d50f2af07dd42119ef52d60c7c8343595c0d925f63f",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        246,
+        425
+      ],
+      "sourceLandmark": [
+        246,
+        332
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (246,332), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        227.0,
+        170.0
+      ],
+      "renderedAnchor": [
+        127.92443324937028,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        21,
+        160,
+        208,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        8,
+        287,
+        399,
+        427
+      ],
+      "sourceGlobalBounds": [
+        895,
+        287,
+        1286,
+        427
+      ],
+      "sourceSize": [
+        391,
+        140
+      ],
+      "foregroundPixels": 27934,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "38c6241be0cbfaf6b1cb52b1a8150fe21fad54f15993803c006ce877b3a62521",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        223,
+        427
+      ],
+      "sourceLandmark": [
+        223,
+        356
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (223,356), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        215.0,
+        140.0
+      ],
+      "renderedAnchor": [
+        128.1764705882353,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        174,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        5,
+        313,
+        403,
+        427
+      ],
+      "sourceGlobalBounds": [
+        1335,
+        313,
+        1733,
+        427
+      ],
+      "sourceSize": [
+        398,
+        114
+      ],
+      "foregroundPixels": 22574,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b3d2f4ec122b60205c497de866f93f37ac1b348123cbd0cdf0ca04af5c93e46f",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        427
+      ],
+      "sourceLandmark": [
+        226,
+        367
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (226,367), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        114.0
+      ],
+      "renderedAnchor": [
+        127.83668341708542,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        186,
+        211,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        190,
+        438,
+        307
+      ],
+      "sourceGlobalBounds": [
+        37,
+        634,
+        438,
+        751
+      ],
+      "sourceSize": [
+        401,
+        117
+      ],
+      "foregroundPixels": 23119,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9ed7fc05d7250570c77bd5249f15c90212f05895da7d8e29ca0904696018714b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        251,
+        307
+      ],
+      "sourceLandmark": [
+        251,
+        250
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (251,250), padded support floor y=307; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        117.0
+      ],
+      "renderedAnchor": [
+        127.86284289276809,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        27,
+        185,
+        216,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        30,
+        203,
+        432,
+        309
+      ],
+      "sourceGlobalBounds": [
+        474,
+        647,
+        876,
+        753
+      ],
+      "sourceSize": [
+        402,
+        106
+      ],
+      "foregroundPixels": 21905,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d37158824fa20ef3205c8fa7245d5c61e0fe1d3ff275325b9e266160cf8876fd",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        252,
+        309
+      ],
+      "sourceLandmark": [
+        252,
+        257
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (252,257), padded support floor y=309; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        222.0,
+        106.0
+      ],
+      "renderedAnchor": [
+        128.37313432835822,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        190,
+        213,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        10,
+        214,
+        409,
+        310
+      ],
+      "sourceGlobalBounds": [
+        897,
+        658,
+        1296,
+        754
+      ],
+      "sourceSize": [
+        399,
+        96
+      ],
+      "foregroundPixels": 19773,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "86a90ebeafa4e5fd58715729ec1f5363e831c2588072cb96662ad7a11a3ab94d",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        227,
+        310
+      ],
+      "sourceLandmark": [
+        227,
+        257
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (227,257), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        96.0
+      ],
+      "renderedAnchor": [
+        128.24561403508773,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        26,
+        195,
+        214,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -12,
+        221,
+        405,
+        310
+      ],
+      "sourceGlobalBounds": [
+        1318,
+        665,
+        1735,
+        754
+      ],
+      "sourceSize": [
+        417,
+        89
+      ],
+      "foregroundPixels": 18796,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5b03da9ee58a10a435f445ea3742497543dbb78464dc88c447d9cb8355227f78",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 27,
+          "componentPixels": 18796,
+          "ownerShare": 0.998564,
+          "sourceBoundsGlobal": [
+            1321,
+            668,
+            1732,
+            751
+          ],
+          "rgbaSha256": "794937bfffa3f0e78bf9bf76e5f0bdd49072fd299a0e6817ee5539ddbab981b3",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        223,
+        310
+      ],
+      "sourceLandmark": [
+        223,
+        266
+      ],
+      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (223,266), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        235.0,
+        89.0
+      ],
+      "renderedAnchor": [
+        128.4556354916067,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        18,
+        198,
+        214,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        5,
+        204,
+        436,
+        395
+      ],
+      "sourceGlobalBounds": [
+        5,
+        204,
+        436,
+        395
+      ],
+      "sourceSize": [
+        431,
+        191
+      ],
+      "foregroundPixels": 27160,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8c4d2fd72c29823e017337d5a63d2698264c67181af1fc059c8e06f7e2a7b807",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        204,
+        395
+      ],
+      "sourceLandmark": [
+        204,
+        288
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (204,288); grounded limb support floor y=395 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        199.0,
+        191.0
+      ],
+      "renderedAnchor": [
+        127.72853828306265,
+        240.0
+      ],
+      "index": 32,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        34,
+        150,
+        237,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        -29,
+        213,
+        365,
+        393
+      ],
+      "sourceGlobalBounds": [
+        415,
+        213,
+        809,
+        393
+      ],
+      "sourceSize": [
+        394,
+        180
+      ],
+      "foregroundPixels": 27775,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ac721a2b029c52884ace44de07de76d7717efc4661e71b0bbc9dcf7ac823812e",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 1,
+          "fromCells": [
+            0
+          ],
+          "pixels": 215,
+          "componentPixels": 27772,
+          "ownerShare": 0.992258,
+          "sourceBoundsGlobal": [
+            418,
+            216,
+            806,
+            390
+          ],
+          "rgbaSha256": "62f02e8be2a3fa6b13ff85899b6f81d793dd26d94209cb9d24fb58361b10c430",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        207,
+        393
+      ],
+      "sourceLandmark": [
+        207,
+        291
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (207,291); grounded limb support floor y=393 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        236.0,
+        180.0
+      ],
+      "renderedAnchor": [
+        127.81218274111676,
+        240.0
+      ],
+      "index": 33,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        17,
+        155,
+        202,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        -20,
+        219,
+        382,
+        395
+      ],
+      "sourceGlobalBounds": [
+        867,
+        219,
+        1269,
+        395
+      ],
+      "sourceSize": [
+        402,
+        176
+      ],
+      "foregroundPixels": 27204,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8126a7eaadeb2d22e699bb40bb8fdde01a28e878652f66ade4051ebd8e1a66a1",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 2,
+          "fromCells": [
+            1
+          ],
+          "pixels": 85,
+          "componentPixels": 27201,
+          "ownerShare": 0.996875,
+          "sourceBoundsGlobal": [
+            870,
+            222,
+            1266,
+            392
+          ],
+          "rgbaSha256": "04e2c6431bb863f23e9d60c1df6946d0060b010802fc0ba693247e906d03dbe3",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        214,
+        395
+      ],
+      "sourceLandmark": [
+        214,
+        295
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (214,295); grounded limb support floor y=395 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        234.0,
+        176.0
+      ],
+      "renderedAnchor": [
+        128.01492537313433,
+        240.0
+      ],
+      "index": 34,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        18,
+        157,
+        207,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -19,
+        214,
+        385,
+        394
+      ],
+      "sourceGlobalBounds": [
+        1311,
+        214,
+        1715,
+        394
+      ],
+      "sourceSize": [
+        404,
+        180
+      ],
+      "foregroundPixels": 26902,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ed48a81959cc9b6ab4858b3c3c57191a682c197912a1e10bb55106f1edcb565b",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 82,
+          "componentPixels": 26901,
+          "ownerShare": 0.996952,
+          "sourceBoundsGlobal": [
+            1314,
+            217,
+            1712,
+            391
+          ],
+          "rgbaSha256": "7917738de88c73275aaf235c207004c00939c5ad79f2ffcb016103731f620e23",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        394
+      ],
+      "sourceLandmark": [
+        210,
+        298
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (210,298); grounded limb support floor y=394 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        229.0,
+        180.0
+      ],
+      "renderedAnchor": [
+        127.6980198019802,
+        240.0
+      ],
+      "index": 35,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        20,
+        155,
+        210,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        18,
+        160,
+        451,
+        291
+      ],
+      "sourceGlobalBounds": [
+        18,
+        604,
+        451,
+        735
+      ],
+      "sourceSize": [
+        433,
+        131
+      ],
+      "foregroundPixels": 26399,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "92a3cf24c85196b6789b4da09d83777516a59f9b0f0ab2a6b656a457a5aecc60",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 4,
+          "fromCells": [
+            5
+          ],
+          "pixels": 20,
+          "componentPixels": 26395,
+          "ownerShare": 0.999242,
+          "sourceBoundsGlobal": [
+            21,
+            609,
+            448,
+            732
+          ],
+          "rgbaSha256": "b2129152bc9b0913aff0f3c31ae934de9d5b69347ad6966a9d2e025ee17f22c8",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        239,
+        291
+      ],
+      "sourceLandmark": [
+        239,
+        217
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (239,217); grounded limb support floor y=291 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        131.0
+      ],
+      "renderedAnchor": [
+        128.12009237875287,
+        240.0
+      ],
+      "index": 36,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        178,
+        228,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        25,
+        160,
+        438,
+        293
+      ],
+      "sourceGlobalBounds": [
+        469,
+        604,
+        882,
+        737
+      ],
+      "sourceSize": [
+        413,
+        133
+      ],
+      "foregroundPixels": 25243,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9c72e6452d2dae06d0e885d98ee518d00a60ac0e01af0a57fe74f6da16b6503a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        248,
+        293
+      ],
+      "sourceLandmark": [
+        248,
+        223
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (248,223); grounded limb support floor y=293 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        223.0,
+        133.0
+      ],
+      "renderedAnchor": [
+        127.75060532687651,
+        240.0
+      ],
+      "index": 37,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        23,
+        177,
+        217,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        8,
+        114,
+        385,
+        297
+      ],
+      "sourceGlobalBounds": [
+        895,
+        558,
+        1272,
+        741
+      ],
+      "sourceSize": [
+        377,
+        183
+      ],
+      "foregroundPixels": 27918,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "820971f7c368901b929e2fe829a9a56dad8ba80700242900bf096a5064dda84c",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        297
+      ],
+      "sourceLandmark": [
+        220,
+        199
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (220,199); grounded limb support floor y=297 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        212.0,
+        183.0
+      ],
+      "renderedAnchor": [
+        127.53315649867373,
+        240.0
+      ],
+      "index": 38,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        28,
+        154,
+        205,
+        240
+      ]
+    },
+    {
+      "clip": "charge",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        1,
+        86,
+        386,
+        293
+      ],
+      "sourceGlobalBounds": [
+        1331,
+        530,
+        1716,
+        737
+      ],
+      "sourceSize": [
+        385,
+        207
+      ],
+      "foregroundPixels": 31288,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4bddff6556e03a179a8eb2f50130a5e01c96ec3328db899c4f840d1ec52d98b6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        293
+      ],
+      "sourceLandmark": [
+        222,
+        175
+      ],
+      "sourceAnchorEvidence": "Manual ribcage center behind front shoulder at (222,175); grounded limb support floor y=293 including three-pixel extraction guard. Source view and marked overlay individually inspected; root confirmed under ribcage, with full-source anatomy and tail preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        207.0
+      ],
+      "renderedAnchor": [
+        127.8987012987013,
+        240.0
+      ],
+      "index": 39,
+      "scale": 0.470338983,
+      "sourceScale": 1.0,
+      "appliedScale": 0.470338983,
+      "renderedBounds": [
+        24,
+        143,
+        205,
+        240
+      ]
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          27,
+          143,
+          209,
+          239
+        ],
+        "foregroundPixels": 7505,
+        "width": 182,
+        "height": 96,
+        "relativeToRowMedian": 0.988931
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          28,
+          143,
+          211,
+          239
+        ],
+        "foregroundPixels": 7533,
+        "width": 183,
+        "height": 96,
+        "relativeToRowMedian": 0.992621
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          27,
+          142,
+          209,
+          239
+        ],
+        "foregroundPixels": 7671,
+        "width": 182,
+        "height": 97,
+        "relativeToRowMedian": 1.010805
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          29,
+          142,
+          209,
+          239
+        ],
+        "foregroundPixels": 7645,
+        "width": 180,
+        "height": 97,
+        "relativeToRowMedian": 1.007379
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          28,
+          142,
+          209,
+          239
+        ],
+        "foregroundPixels": 7634,
+        "width": 181,
+        "height": 97,
+        "relativeToRowMedian": 1.002495
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          29,
+          142,
+          210,
+          239
+        ],
+        "foregroundPixels": 7644,
+        "width": 181,
+        "height": 97,
+        "relativeToRowMedian": 1.003808
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          28,
+          143,
+          210,
+          239
+        ],
+        "foregroundPixels": 7596,
+        "width": 182,
+        "height": 96,
+        "relativeToRowMedian": 0.997505
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          29,
+          143,
+          211,
+          239
+        ],
+        "foregroundPixels": 7540,
+        "width": 182,
+        "height": 96,
+        "relativeToRowMedian": 0.990151
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          27,
+          140,
+          210,
+          239
+        ],
+        "foregroundPixels": 7625,
+        "width": 183,
+        "height": 99,
+        "relativeToRowMedian": 1.010804
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          29,
+          140,
+          213,
+          239
+        ],
+        "foregroundPixels": 7462,
+        "width": 184,
+        "height": 99,
+        "relativeToRowMedian": 0.989196
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          27,
+          140,
+          211,
+          239
+        ],
+        "foregroundPixels": 7460,
+        "width": 184,
+        "height": 99,
+        "relativeToRowMedian": 0.988931
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          26,
+          139,
+          208,
+          239
+        ],
+        "foregroundPixels": 7703,
+        "width": 182,
+        "height": 100,
+        "relativeToRowMedian": 1.021144
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          29,
+          141,
+          212,
+          239
+        ],
+        "foregroundPixels": 7656,
+        "width": 183,
+        "height": 98,
+        "relativeToRowMedian": 1.024214
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          26,
+          142,
+          208,
+          239
+        ],
+        "foregroundPixels": 7512,
+        "width": 182,
+        "height": 97,
+        "relativeToRowMedian": 1.00495
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          25,
+          144,
+          210,
+          239
+        ],
+        "foregroundPixels": 7274,
+        "width": 185,
+        "height": 95,
+        "relativeToRowMedian": 0.97311
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          25,
+          143,
+          206,
+          239
+        ],
+        "foregroundPixels": 7438,
+        "width": 181,
+        "height": 96,
+        "relativeToRowMedian": 0.99505
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          28,
+          146,
+          211,
+          239
+        ],
+        "foregroundPixels": 7219,
+        "width": 183,
+        "height": 93,
+        "relativeToRowMedian": 1.077704
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          28,
+          161,
+          198,
+          239
+        ],
+        "foregroundPixels": 6427,
+        "width": 170,
+        "height": 78,
+        "relativeToRowMedian": 0.959469
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          27,
+          151,
+          209,
+          239
+        ],
+        "foregroundPixels": 6970,
+        "width": 182,
+        "height": 88,
+        "relativeToRowMedian": 1.040531
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          19,
+          174,
+          219,
+          239
+        ],
+        "foregroundPixels": 6135,
+        "width": 200,
+        "height": 65,
+        "relativeToRowMedian": 0.915877
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          30,
+          178,
+          211,
+          239
+        ],
+        "foregroundPixels": 6223,
+        "width": 181,
+        "height": 61,
+        "relativeToRowMedian": 0.969995
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          28,
+          156,
+          199,
+          239
+        ],
+        "foregroundPixels": 6375,
+        "width": 171,
+        "height": 83,
+        "relativeToRowMedian": 0.993687
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          29,
+          157,
+          201,
+          239
+        ],
+        "foregroundPixels": 6456,
+        "width": 172,
+        "height": 82,
+        "relativeToRowMedian": 1.006313
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          29,
+          154,
+          204,
+          239
+        ],
+        "foregroundPixels": 6545,
+        "width": 175,
+        "height": 85,
+        "relativeToRowMedian": 1.020185
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          27,
+          143,
+          208,
+          239
+        ],
+        "foregroundPixels": 7319,
+        "width": 181,
+        "height": 96,
+        "relativeToRowMedian": 1.080136
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          22,
+          161,
+          207,
+          239
+        ],
+        "foregroundPixels": 7050,
+        "width": 185,
+        "height": 78,
+        "relativeToRowMedian": 1.040437
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          28,
+          175,
+          210,
+          239
+        ],
+        "foregroundPixels": 6502,
+        "width": 182,
+        "height": 64,
+        "relativeToRowMedian": 0.959563
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          25,
+          187,
+          210,
+          239
+        ],
+        "foregroundPixels": 5299,
+        "width": 185,
+        "height": 52,
+        "relativeToRowMedian": 0.782025
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          28,
+          186,
+          215,
+          239
+        ],
+        "foregroundPixels": 5394,
+        "width": 187,
+        "height": 53,
+        "relativeToRowMedian": 1.109306
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          25,
+          191,
+          212,
+          239
+        ],
+        "foregroundPixels": 5119,
+        "width": 187,
+        "height": 48,
+        "relativeToRowMedian": 1.052751
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          27,
+          196,
+          213,
+          239
+        ],
+        "foregroundPixels": 4606,
+        "width": 186,
+        "height": 43,
+        "relativeToRowMedian": 0.947249
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          19,
+          199,
+          213,
+          239
+        ],
+        "foregroundPixels": 4412,
+        "width": 194,
+        "height": 40,
+        "relativeToRowMedian": 0.907352
+      },
+      {
+        "index": 32,
+        "alphaBounds": [
+          35,
+          151,
+          236,
+          239
+        ],
+        "foregroundPixels": 6487,
+        "width": 201,
+        "height": 88,
+        "relativeToRowMedian": 1.00224
+      },
+      {
+        "index": 33,
+        "alphaBounds": [
+          18,
+          156,
+          201,
+          239
+        ],
+        "foregroundPixels": 6586,
+        "width": 183,
+        "height": 83,
+        "relativeToRowMedian": 1.017536
+      },
+      {
+        "index": 34,
+        "alphaBounds": [
+          19,
+          158,
+          206,
+          239
+        ],
+        "foregroundPixels": 6458,
+        "width": 187,
+        "height": 81,
+        "relativeToRowMedian": 0.99776
+      },
+      {
+        "index": 35,
+        "alphaBounds": [
+          21,
+          156,
+          209,
+          239
+        ],
+        "foregroundPixels": 6382,
+        "width": 188,
+        "height": 83,
+        "relativeToRowMedian": 0.986018
+      },
+      {
+        "index": 36,
+        "alphaBounds": [
+          25,
+          179,
+          227,
+          239
+        ],
+        "foregroundPixels": 6211,
+        "width": 202,
+        "height": 60,
+        "relativeToRowMedian": 0.969408
+      },
+      {
+        "index": 37,
+        "alphaBounds": [
+          24,
+          178,
+          216,
+          239
+        ],
+        "foregroundPixels": 5938,
+        "width": 192,
+        "height": 61,
+        "relativeToRowMedian": 0.926799
+      },
+      {
+        "index": 38,
+        "alphaBounds": [
+          29,
+          155,
+          204,
+          239
+        ],
+        "foregroundPixels": 6603,
+        "width": 175,
+        "height": 84,
+        "relativeToRowMedian": 1.030592
+      },
+      {
+        "index": 39,
+        "alphaBounds": [
+          25,
+          144,
+          204,
+          239
+        ],
+        "foregroundPixels": 7378,
+        "width": 179,
+        "height": 95,
+        "relativeToRowMedian": 1.151553
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      7589.0,
+      7615.0,
+      7543.5,
+      7475.0,
+      6698.5,
+      6415.5,
+      6776.0,
+      4862.5,
+      6472.5,
+      6407.0
+    ],
+    "findings": [],
+    "uniqueFrameCount": 40,
+    "cellRgbaSha256": [
+      "d30f0b2a45c6d62c03129aea2e067a6f866a019877d6920c27e6a8cadc33910b",
+      "56ba317a3df2aaa00c907ba6256d0ba10666f466bee02258351a524f11883622",
+      "7fc30c02fa6b2273955d0824bc85a79880639be4dd219f4129a3b6b94b511b72",
+      "8b89aa2900189e1eb53d6da4deb4619e9dd6ce235b14297f809fca1b826e67a4",
+      "27bb1f90ce9c8b4ba35688b2dec6c242e85681329771ffd406d8dcdc1bde164e",
+      "ce81d0bb09347f3d77cdef282a756a9dbc1ca0516edea0a0669f629eab2ab352",
+      "da883dfe46f9f2505297207bca3db1fccf2d6ef20eee1bc10ff25073abd5d136",
+      "e978c18fac77f7d4422d077774a0f0c5000278effa5d30f2714a431e78593e47",
+      "f54d92a549224f4e7d0cf90bacae95efcecd6d5aa19ff66a5e9e9ea4db2e6bf3",
+      "14493ff9991f26bc6cfd1603ee6bba52a48d75021f4b42822a86900240eb0492",
+      "fa80c66260772144fec494f950e73e1f2848ba9679ce0073ce023eed7b7815b0",
+      "5d9b45d71d933bddc2e27d4688868b6846a74405d8d54f8adb1c8fe088313711",
+      "da5e6f6398c8e702c84d14e2337ec605f1e3d94f9d05f01dc5d9029908f7d76f",
+      "f637c8e2a7693bcad55bc042db4408bc37e36bbae788652a621a2c4a980ba11a",
+      "7cf13ab84bef3881ae876ff656b8789feae9bbcf17d121d0857d863d83e5be14",
+      "e39bb54636ed82c4b2d2306eb9af3366f3f3931340f4815559d2e1b3c546d777",
+      "346d63a2b1d3ea002cd64f1ae75ea8df15776daf3e96c85af7b47f3a503a02a2",
+      "560026aefebfc00be5a5c0a61723c2e4c88e4326b0bb017e7f4d0831216573ca",
+      "6f94708aebd793d88cab6092a74b44b2cfeb824a932d231e58bca60113a30071",
+      "c9e9b99011c96377591b021a7619073030064a3b9e0c7cbe90e2d426eeb28c6a",
+      "bafcc5c5763cbf265c696927339ce2df5a7ac5ed37ffeaa7833959e89ffc3b88",
+      "f955f0a3316f6e5faca221c22db481a7a748d5791d1fe37e075cfe934d35dfa7",
+      "c566c926161e9eeeb19ce1519f74c53842170fa10d7aa14bb31ed667bbb16075",
+      "1ac1457149b099675d6a23485d77a2e7658699ff6c7280d7ace61e99c0502de4",
+      "6837ed9106da757680a4879e18c7dec4f555159858f35e92e6967d2c4b5d903c",
+      "15b49b05f6a57f3301ec8b7c35be617fd229c4c9adb1eba14e300e35b718a904",
+      "3b7c15fb72a3506ab58e7310001de83f2d7a7fef31f49f5cc50e0efbfae9f297",
+      "0db69ea36c0778b9ee692c765771fe5f5b141f5a4ae837af7d0de48b91b8dc81",
+      "281f3aa37b6dddb9586f805e5cf9aaef270fae5b7c5fe309748d033391ba3c9a",
+      "b4209e3f2ef1a010c299849220f282cf39f4af420cf067a51e302aadd98928e7",
+      "c1010649d2d44e13d1ead01b9ddb5b6b466dada293c40969ef2a0224fd7cda17",
+      "541fa68d6a02da4eb877c5d3ea650d176106aaddd4615a7d198a0c85f11ab9e8",
+      "1a83a20a0dfacac40123de3a1ef255283a095386e0bb49807e3a012a1a97c525",
+      "4d43cada263a2ec1dfe7094d40b8836bd99256be91a669a161eafd730ec6f437",
+      "96093435b23158f7e5244803a686f60452eab61ce7733a51a79102b1c4d302aa",
+      "cccac70bee83d28993db6637f7163749e45b063715ceb4a30a4e7fc4f6afbe08",
+      "8d4d186cc91d9216b9d9992a28b05bb51177cc3103838399ac3f25997446f8f7",
+      "e9a28d4fe2ad059f6bc2cb855237d23e853995dab03d98da148f0d2c48277974",
+      "08d73c94aa4888ea579b9cf7643dd91fd0425cffaf011b5ee97980dd890437f7",
+      "728e94546decb30b94321c52eca01c13f7a659ce1a2141d5eac1af0a10189510"
+    ],
+    "visualFidelityCertified": false
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-6ce25948-7823-4676-9024-6900d1ac1794",
+  "actor": "Codex complete_variants",
+  "note": "Targeted single-cell repair of bottom-left pose5 forearm spill after r2 only corrected top row. Previous source preserved. Candidate still requires QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-020-k-series-yellow-xenomorph/attack-r3.txt",
+  "sourceSha256": "f4a426b9cf87a701b802e94c98a8f2a87330c434226d13c8047b567814034acf",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png"
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-014-boiler",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-fad9b960-bcd1-4cbd-a2cf-ae0c639fb34c",
+  "actor": "Codex complete_variants",
+  "note": "Targeted skull repair. Previous r2 preserved in rejected/idle-malformed-head-r2.png. Still candidate only.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-014-boiler/idle-r3.txt",
+  "sourceSha256": "a7396efcbe79f6519c796c2856ac30a3042b6e0820d1fc56390805e9bc55ac79",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-014-boiler/idle.png"
+}

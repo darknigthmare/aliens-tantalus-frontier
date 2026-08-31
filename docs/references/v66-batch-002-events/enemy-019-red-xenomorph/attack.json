@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-019-red-xenomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-d8974445-969e-4b83-ae82-c5b3a8473106",
+  "actor": "Codex root",
+  "note": "Dedicated Red Warrior animation conditioned on its own generated Genocide identity; candidate pending review and normalization.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-019-red-xenomorph/attack.txt"
+}

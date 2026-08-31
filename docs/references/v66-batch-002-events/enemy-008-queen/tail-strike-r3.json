@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-008-queen",
+  "clipId": "tail-strike",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-3c55785b-2bd5-4728-8f8a-bb506d4a421b",
+  "actor": "Codex complete_royal",
+  "note": "Candidate revision3; correct wrong Praetorian identity by conditioning corrected Queen reference. Continuous pelvic tail attachment, four arms required; previous source preserved; pending QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-008-queen/tail-strike-r3.txt",
+  "sourceSha256": "480bcb0a03c890f05fbad741a26bf0380ceb9ae769f60fdc4ce73247e41ec7c6",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-008-queen/tail-strike.png"
+}

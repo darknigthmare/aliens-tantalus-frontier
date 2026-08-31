@@ -1,0 +1,7 @@
+Use case: identity-preserve.
+Asset type: Red Xenomorph Warrior Genocide enemy019 animation sprite sheet.
+Input image1 is the same Red Warrior identity reference. Preserve EXACTLY its elongated ridged eyeless skull, vermilion/rust-red chitin on black biomechanical recesses, ribbed lean torso, two long arms, two digitigrade legs, four dorsal tubes, and one long articulated tail. Same headlength/limbproportions/redblackpalette and crisp pixel-game art, no color swaps, equipment, Queen or Prowler traits.
+Exact2:1 landscape2048x1024,4columns2rowsequalsquarecells,8complete independent fullbody poses strictlySIDEVIEWfacingRIGHT. Entirecreatureincludingtail/claws mustfitONLY60%cellwidth and70%cellheight, centered. Keep15%orlarger empty margins onALLsides; especiallytoprowfeetmustnotcrossrowboundary. Identicalphysicalscale andonefloorlineforeachrow, consistentneutralillumination.
+PerfectlyflatpureMAGENTA#FF00FFbackgroundincludinggaps, no checkerboard, grid, text, ground, castshadow, FX, motionblur, or extraobjects.
+
+Complete8phase BIPEDAL WALK LOOP in place:1leftfootforwardrightback,2leftsupportcompression,3rightlegpassesunderpelvis,4rightlegswings,5rightfootforwardleftback,6rightsupportcompression,7leftlegpasses,8leftlegswingsbacktoward1. Alternatefeetclearly, counter-swingarms, slighttailcounterbalance, uprighttorso, no crouchtodeath, nojump, no slithering. First/lastpose loop naturally.

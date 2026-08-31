@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-018-specimen-six-line",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-a2c9372b-cf99-4b64-bfcd-990635af0ace",
+  "actor": "Codex complete_variants",
+  "note": "Candidate source only, visual and motion continuity review pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-018-specimen-six-line/death.txt",
+  "sourceSha256": "0c5e96ebd60441af7906e6e80ca17f4f7cc88433381a82aa9f69d59a712447bc",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-018-specimen-six-line/death.png"
+}

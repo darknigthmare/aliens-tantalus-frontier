@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-007-praetorian",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-ca77fafc-2748-4810-be91-c9162d4dc96e",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. Reference-conditioned source pending geometric, identity and animation review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-007-praetorian/idle.txt"
+}

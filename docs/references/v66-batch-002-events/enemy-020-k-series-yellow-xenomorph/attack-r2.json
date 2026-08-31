@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-3438eb05-de49-4d35-b216-efcc138ae0af",
+  "actor": "Codex complete_variants",
+  "note": "Targeted repair of pose4/5 stretched forearms and cell overflow. Previous candidate archived in rejected/attack-stretched-arm.png. Review still pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-020-k-series-yellow-xenomorph/attack-r2.txt",
+  "sourceSha256": "d2e0323aed7b9eb37eb1f0f856a3257d3003afb70c166f1ee876db3ac36f33f2",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png"
+}

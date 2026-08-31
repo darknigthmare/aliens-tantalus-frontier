@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-016-burster",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-4616adf4-165d-4ed0-930f-4723f61c21b3",
+  "actor": "Codex variant_sheets",
+  "note": "Candidate conditioned on this profile's NECA-derived idle sheet; pending source, continuity, anchor and fidelity QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-016-burster/move.txt"
+}

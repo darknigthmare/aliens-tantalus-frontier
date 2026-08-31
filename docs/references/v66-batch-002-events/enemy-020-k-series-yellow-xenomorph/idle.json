@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-7d8da2de-bab7-48e3-8879-b6d05bc216fb",
+  "actor": "Codex complete_variants",
+  "note": "Candidate source; game cinematic identity reference inspected, not certified 1:1 nor integrated.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-020-k-series-yellow-xenomorph/idle.txt",
+  "sourceSha256": "83eef5901c0be909927f46243ff2458ae35b74c76731a5f7de4414fd933438ab",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/idle.png"
+}

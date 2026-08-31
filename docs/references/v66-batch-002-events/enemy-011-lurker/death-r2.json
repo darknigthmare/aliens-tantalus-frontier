@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-011-lurker",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-63b8a68e-6deb-4ae1-bda0-04e5ffa97850",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "4abb55a2ba39aead122340e683235807f5bfe7a8e4fd514aabcc07ed5bbf9a1f",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/death.png",
+  "note": "Revision2: ImageGen geometry-only repack requesting smaller complete quadruped death poses centered by full silhouette with >=18% margins; complete tails requested unchanged. Original archived at rejected/death-pre-r2.png. Candidate requires bounds, source-tail continuity, inter-clip scale and roots review; not accepted.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-011-lurker/death-r2.txt"
+}

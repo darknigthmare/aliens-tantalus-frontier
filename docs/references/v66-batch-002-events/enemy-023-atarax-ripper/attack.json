@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-023-atarax-ripper",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-d092814c-37d9-4ac4-b02e-a2ced9c5abfb",
+  "actor": "Codex root",
+  "note": "Candidate from project identity reference; idle/move semantics require refinement; not accepted or runtime integrated.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-023-atarax-ripper/attack.txt"
+}

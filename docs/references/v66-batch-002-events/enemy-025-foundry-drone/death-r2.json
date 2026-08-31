@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-025-foundry-drone",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-9f867b8c-9505-42fc-b765-963507c854d4",
+  "actor": "Codex root",
+  "note": "Revision2 reduces pose extent, preserves full tail and anatomy; candidate pending bounds/scale/anchors and continuity review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-025-foundry-drone/death-r2.txt"
+}

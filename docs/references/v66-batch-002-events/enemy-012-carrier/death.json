@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-012-carrier",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-ff75f145-e4de-4c91-9fd3-8ec05bb7b72e",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, Extinction bestiary reference conditioned; pending source/animation QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-012-carrier/death.txt",
+  "sourceSha256": "730021e374568c6f7bba800b097934e21223313be2f0d9a2c108dd908177d869",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-012-carrier/death.png"
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-afa7edd9-ba8f-4152-9408-4aae2552b484",
+  "actor": "Codex root",
+  "note": "Conditioned on saved Foundry Crusher idle identity; candidate pending source bounds, anatomy, scale and root review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/death.txt"
+}

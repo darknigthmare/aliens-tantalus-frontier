@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "profileId": "enemy-011-lurker",
+  "reviewedAt": "2026-08-31",
+  "reviewer": "Codex finish_source_review",
+  "method": "Read-only audit_image calls from scripts/audit-v66-batch-sources.py; source SHA checked before/after; no global audit report overwritten.",
+  "sourcePixelsProgrammaticallyModified": 0,
+  "generatedEdits": 2,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "limitations": [
+    "Passing direct extraction is not visual acceptance or runtime integration.",
+    "Requested >=15 percent margins are not all achieved; measured minimum margins are explicitly retained.",
+    "Uniform smaller source art requires a later measured inter-clip scale calibration before normalization acceptance.",
+    "Full tail silhouettes are visible within each new cell; physical tail arclength and franchise fidelity1:1 are not certified."
+  ],
+  "sources": [
+    {
+      "clip": "attack",
+      "sourceSha256": "33f6091cee6dcec3d53fd61bf639b5f3264996c74ff65b6ac213b872cc25f6af",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "borderContactFrames": [],
+      "findings": [],
+      "minimumCellMargins": [
+        {
+          "frame": 0,
+          "minimumMarginFraction": 0.1396
+        },
+        {
+          "frame": 1,
+          "minimumMarginFraction": 0.1757
+        },
+        {
+          "frame": 2,
+          "minimumMarginFraction": 0.1219
+        },
+        {
+          "frame": 3,
+          "minimumMarginFraction": 0.045
+        },
+        {
+          "frame": 4,
+          "minimumMarginFraction": 0.0698
+        },
+        {
+          "frame": 5,
+          "minimumMarginFraction": 0.2348
+        },
+        {
+          "frame": 6,
+          "minimumMarginFraction": 0.1558
+        },
+        {
+          "frame": 7,
+          "minimumMarginFraction": 0.0968
+        }
+      ],
+      "subjectCountVisuallyInspected": 8,
+      "acceptance": false,
+      "runtimeIntegrated": false
+    },
+    {
+      "clip": "death",
+      "sourceSha256": "4abb55a2ba39aead122340e683235807f5bfe7a8e4fd514aabcc07ed5bbf9a1f",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/death.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "borderContactFrames": [],
+      "findings": [],
+      "minimumCellMargins": [
+        {
+          "frame": 0,
+          "minimumMarginFraction": 0.1824
+        },
+        {
+          "frame": 1,
+          "minimumMarginFraction": 0.2005
+        },
+        {
+          "frame": 2,
+          "minimumMarginFraction": 0.1761
+        },
+        {
+          "frame": 3,
+          "minimumMarginFraction": 0.1014
+        },
+        {
+          "frame": 4,
+          "minimumMarginFraction": 0.1419
+        },
+        {
+          "frame": 5,
+          "minimumMarginFraction": 0.2257
+        },
+        {
+          "frame": 6,
+          "minimumMarginFraction": 0.1264
+        },
+        {
+          "frame": 7,
+          "minimumMarginFraction": 0.0856
+        }
+      ],
+      "subjectCountVisuallyInspected": 8,
+      "acceptance": false,
+      "runtimeIntegrated": false
+    }
+  ]
+}

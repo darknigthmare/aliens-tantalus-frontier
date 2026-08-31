@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-022-xenoborg",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5836d86b-663d-47f6-8633-597b4c9d78ec",
+  "actor": "Codex root",
+  "note": "Revision2 rigid cannon geometry and larger cell margins; reload is capacitor action without extraneous steam. Candidate pending visual/scale/anchor review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-022-xenoborg/attack-r2.txt"
+}

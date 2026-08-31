@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-009-crusher",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-95d8d2ba-95ac-45c3-9f11-13381584478d",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. Reference right-side Hiya ACM Crusher; quadruped silhouette, 2:1 layout and margins pending review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-009-crusher/idle.txt"
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-023-atarax-ripper",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-fb5638b5-c366-4586-bb69-671e78f7571a",
+  "actor": "Codex root",
+  "note": "Revision2 fixes unwanted crouching and requests wider cell margins; reference first pose from original generated identity. Candidate, no runtime acceptance.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-023-atarax-ripper/move-r2.txt"
+}

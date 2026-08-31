@@ -1,6 +1,283 @@
 {
   "schema": 1,
   "profiles": {
+    "enemy-007-praetorian": {
+      "status": "reviewed",
+      "urls": [
+        "https://models.spriters-resource.com/pc_computer/aliensvspredator/asset/285335/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "AvP2010 extracted game model preview, not full Queen. Dark gunmetal brown exoskeleton, ribbed chest, narrow waist, swept-back broad cranial shield, oval dome before shield, exactly two long main arms and two digitigrade legs, segmented spear tail; no smaller chest arms. Preserve reference proportions in strict right-facing side view.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-008-queen": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/48662/products/toys/action-figures/aliens-xenomorph-queen-ultra-deluxe-boxed-action-figure/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-008-queen/references/neca-queen-1986.jpg"
+      ],
+      "designLock": "Aliens1986 Queen licensed NECA sculpture. Huge swept-back layered fan crown with paired lobes, narrow neck, midnight blueblack chitin and bronze rib channels. Exactly four arms: two large outer arms and two small chest arms; two powerful digitigrade legs; long attached spear tail. Mobile Queen without ovipositor. Not a two-arm Praetorian.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-009-crusher": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines Hiya licensed Crusher sculpture is RIGHT creature in photo024; LEFT is Raven, not Crusher. Huge low quadruped, broad flared armored head shield, massive forequarters, shorter hindquarters, four weightbearing limbs, long segmented tail. Dark grayblack chitin with subtle blue, do not copy red/yellow scene lighting. No Queen small arms or humanoid biped.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-010-spitter": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.square-enix-shop.com/uk/play_arts.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/references/square-enix-spitter-official.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines SquareEnix PlayArtsKai licensed Spitter: glossy blueblack, smooth broad rearflared dome, yellowgreen acid reservoirs along rear cranium NOT eyes, four long curved barbed dorsal spines, narrow ribbed torso, two clawed arms, two digitigrade legs, segmented tail. Not orange Fireteam caste or Queen.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-011-lurker": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.square-enix-shop.com/uk/play_arts.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/references/square-enix-lurker-official.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines SquareEnix PlayArtsKai licensed Lurker. Lean glossy black long smooth domed eyeless head with ribbed underside, four dorsal tubes with restrained bronze worn tips, ribbed narrow torso, two elongated clawed arms and two digitigrade hind legs, vertebral ridged long spear tail. Low four-limbed stalking and pounce stance. No acid sacs, no crown or extra limbs; preserve classic intact Alien anatomy.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-012-carrier": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-012-carrier/references/extinction-carrier-bestiary.jpg"
+      ],
+      "designLock": "AvP Extinction2003 Carrier from game bestiary render. Olive charcoal bronze biomechanical biped, long compressed domed head, ribbed torso, two clawed arms, two strong digitigrade legs, long segmented tail; unmistakable multiple long upward/outward dorsal carrying spines with flared pale hooked tips that carry facehuggers. Not a bloated egg sack or tentacled insect. Preserve load-bearing spine silhouette. Facehugger release is from back carrying spines, not mouth.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-013-ravager": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-013-ravager/references/extinction-ravager-bestiary.jpg"
+      ],
+      "designLock": "AvP Extinction2003 Ravager game bestiary render. Tall heavily armored cobalt navy blue and dark green biped, raised backward curved cranial crest and lateral backward head spikes, narrow ribbed torso, two long powerful arms ending in enormous integral pale gray crescent hull-blades, digitigrade strong hindlegs and segmented tail. Blades are anatomical forearm/hand structures, not swords held by hands. No Queen secondary arms; preserve dark bluegreen/pale blade contrast, no equipment.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-018-specimen-six-line": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/10680/Aliens_vs_Predator/",
+        "https://avp.fandom.com/wiki/Specimen_6"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png"
+      ],
+      "designLock": "Project lineage adapted from AVP2010 Warrior stage, preserving inspected V56 identity: dark bronze-black athletic thin biped, long horizontally elongated ridged eyeless skull, rib cage, two clawed arms, digitigrade legs, four slender dorsal tubes, long segmented tail. Fixed Warrior stage only; no Praetorian or Queen crown, no equipment. Do not duplicate the original individual's number6 brand onto the lineage. Strict right-facing full-body side view. External sources document derivation, project sheet is visual identity anchor.",
+      "reviewer": "Codex variant_sheets; V56 identity sheet visually inspected, derivation sources consulted",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-017-monica-line": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpcentral.com/monica-xenomorph",
+        "https://www.avpcentral.com/images/monica-xenomorph/monica-xenomorph-hero.webp",
+        "https://www.penguinrandomhouse.com/books/635223/aliens-infiltrator-by-weston-ochse/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-017-monica-line/monica-game-hero.webp"
+      ],
+      "designLock": "Project-adapted Monica Line, not replicated unique Monica/Three: heavy resilient dark smooth-domed Drone, long clawed arms, digitigrade legs, four dorsal tubes, full segmented tail. Retain V56 project profile anatomy and controlled charcoal-gray irregular pathogen stripe treatment; do not clone an individual mark. Inspected Fireteam Elite screenshot anchors dome, ribbing and dark surface, not its front camera or colored illumination. No human face, clothes, machine, Queen crown or Crusher proportions.",
+      "reviewer": "Codex variant_sheets; V56 identity sheet and game screenshot visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-015-prowler": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/products/aliens-fireteam-elite-7-scale-action-figure-prowler-alien"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-015-prowler/neca-prowler.png"
+      ],
+      "designLock": "Fireteam Elite Prowler matching visually inspected licensed NECA sculpt: low powerful quadruped, broad short swept cranial shield with rust-red raised rims and black recesses, pointed hip armor, muscular forelegs, digitigrade hindlegs, ribbed slim abdomen, no tall dorsal tubes, long segmented thick tail and broad flattened spear blade. Organic body, no toy joints or hinge seams. Strict right-facing view, rust-red/brown on black recessed biomechanical surfaces. Not a Crusher or Runner recolor.",
+      "reviewer": "Codex variant_sheets; licensed NECA reference visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-016-burster": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/products/aliens-fireteam-elite-burster-alien-7-inch-scale-action-figure",
+        "https://www.focus-entmt.com/en/games/aliens-fireteam-elite"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-016-burster/neca-burster.jpg"
+      ],
+      "designLock": "Fireteam Elite Burster matching visually inspected licensed NECA sculpt: lean low quadruped dark olive-brown ribbed body, eyeless short cranial plate covered with large yellow-green acid blister membranes, same yellow-green membrane accents on forelimbs and thighs, no tall dorsal tubes, long segmented tail and broad flattened dark blade. Maintain organic anatomy, not toy articulation hinges. Not the red-black Prowler, not the pale hunchback bipedal Boiler. Strict right-facing game side view, stable proportions. Local V56 matrix tan/beige descriptor is subordinate to the directly inspected model palette.",
+      "reviewer": "Codex variant_sheets; licensed NECA reference visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-020-k-series-yellow-xenomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp",
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/",
+        "https://www.avpcentral.com/aliens-vs-predator-extinction"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-020-k-series-yellow-xenomorph/k-series-game.webp"
+      ],
+      "designLock": "K-Series common adult Warrior from AVP: Extinction (2003), based on visually inspected game cinematic still: ochre/golden yellow organic exoskeleton with muted pale cream-gray highlights and deep dark olive recesses; elongated eyeless ridged cranial shell with raised central ridge and exposed rib lines; long narrow rib cage and slim waist, two lean clawed arms, two strong digitigrade legs, four dorsal tubes, long segmented blade-tipped tail. Select the normal warrior at FRONT LEFT of the reference, NOT the Queen behind it and NOT the black foreground alien. No metallic robotic gear or silver armor; no crown, tusks, cysts or new markings. Common warrior proportions inferred from visible game anatomy for side-view adaptation; not a certified one-to-one reproduction of the original mesh.",
+      "reviewer": "Codex complete_variants; game cinematic reference visually inspected, game guide confirms yellow faction; missing dedicated entry in V56 reference matrix identified.",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-014-boiler": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://www.avpcentral.com/xenomorph-types-and-subspecies",
+        "https://www.avpcentral.com/images/xenomorph-types/boiler-xenomorph.webp"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-014-boiler/boiler-game.webp",
+        "assets/openai/sprites/normalized/enemies/xenomorph-boiler-action-sheet-v56.png"
+      ],
+      "designLock": "Aliens: Colonial Marines Boiler matching the inspected game screenshot: gaunt hunched BIPEDAL biomechanical alien, drooping damaged elongated ridged eyeless head; pale gray/chalk-bone exoskeleton, dirty dark olive recesses, numerous large irregular pale yellow-green cystic boils packed across shoulders upper back ribcage and hips; two long bent skeletal clawed arms and two bowed legs; deformed short dorsal tubes and a complete segmented tail. It is blind and shuffles with a lopsided hunch. Keep actual body anatomy under the pustules. No equipment. NOT the low quadruped Burster from Fireteam Elite, not a white recolor of a healthy Drone. Neutral lighting, no intense white flashlight glare.",
+      "reviewer": "Codex complete_variants; ACM screenshot visually inspected; V56 matrix anatomy checked. Local V56 sheet secondary and not inspected this pass.",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-019-red-xenomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/blogs/news/new-aliens-genocide-action-figure-2-pack-coming-in-june",
+        "https://www.avpcentral.com/images/xenomorph-types/red-xenomorph.webp"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/enemy-019-red-xenomorph/genocide-comic.webp"
+      ],
+      "designLock": "Aliens Genocide Red Xenomorph Warrior, red caste rather than a Red King or Fireteam Prowler. Visually inspected comic artwork: vermilion/rust-red chitin with deep black biomechanical recesses, long ridged eyeless skull, ribbed slender torso, two long clawed arms, two digitigrade legs, multiple four dorsal tubes, full long articulated spear tail. Preserve Warrior anatomy and red/black balance; no Queen crown, no quadrupedal Prowler, no equipment or yellow acid sacs. Right-facing orthographic adaptation; do not copy the comic battle composition or green rival subjects.",
+      "reviewer": "Codex root; Genocide comic image visually inspected, primary NECA Genocide Warrior identification consulted",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-021-neuro-xeno-drone": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/neuro-xeno-drone-action-sheet-v56.png"
+      ],
+      "designLock": "Project-original Neuro-Xeno Drone: lean black biomechanical eyeless Drone, smooth long dome, rib cage, two arms/two digitigrade legs, dorsal pipes and segmented spear tail. Compact gunmetal neural helmet over the intact skull, temple clamps and insulated spinal cable with tiny amber indicators. No ivory Ripper plates, no blue eye, no cannon. Preserve the visually inspected V56 project identity in right-facing side view.",
+      "reviewer": "Codex root; existing V56 identity sheet and project invariants visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-022-xenoborg": {
+      "status": "reviewed",
+      "urls": [
+        "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3730/manuals/Aliens%20Versus%20Predator%20Classic%202000%20Manual.pdf?t=1579791217",
+        "https://www.avpcentral.com/xenoborg",
+        "https://www.avpcentral.com/images/xenoborg/xenoborg.webp"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-002/xenoborg-avp1999.webp"
+      ],
+      "designLock": "Aliens versus Predator 1999 / Classic 2000 Xenoborg, game screenshot model: upright slow heavy biped, bronze-dark organic rib cage and curved alien skull, silver/gunmetal skeletal reinforcements, cranial targeting hardware, two integral forearm laser cannon blocks and long cylindrical barrels, restrained yellow-black hazard stripes, rectangular dorsal power module with vertical cylinders. Organic chest/skull and long segmented tail remain visible. No handheld gun or magazine: reload means capacitor recharge/venting. Side view right; not the amber Neuro-Xeno nor a fully mechanical humanoid.",
+      "reviewer": "Codex root; 1999 game screenshot visually inspected and official manual consulted",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-023-atarax-ripper": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png"
+      ],
+      "designLock": "Project-original ATARAX Ripper: heavy black wet biomechanical xenomorph, long eyeless skull and segmented ivory cranial/dorsal plates, massive forearms, digitigrade hindlegs and long free articulated tail. Practical gunmetal restraints and tendoncables, subtle darkred neural scars, one tiny blue sensor beside skull. Preserve inspected V56 armor layout. No Queen crown, no laser cannon, no all-white robot armor. Right-facing side view.",
+      "reviewer": "Codex root; existing V56 sheet and project design invariants visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-024-ripper-queen": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/prompts/V54_IMAGEGEN_WAVE.md"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png"
+      ],
+      "designLock": "Project-original Ripper Queen as existing V54 sheet: broad backwards swept segmented ivory crown, pale jagged dorsal carapace and tendrils, black wet biomechanical inner flesh, restrained darkred neural fissures, reinforced forelimbs, massive digitigrade hindlegs and long segmented hooked tail. Preserve crown silhouette, leg placement and ivory/black balance. No standard blue Queen recolor or firearm. Side view right. Tail strike remains attached to pelvis, never a held spear.",
+      "reviewer": "Codex root; V54 source sheet and exact prompt visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-026-foundry-crusher": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207",
+        "https://www.toyark.com/wp-content/uploads/2018/09/Aliens-Colonial-Marines-Hiya-024.jpg",
+        "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg",
+        "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png"
+      ],
+      "designLock": "Project-adapted Foundry Crusher, not an official separate caste. Preserve the low heavy four-legged Aliens Colonial Marines Crusher on the right of the visually inspected licensed Hiya model photograph: large broad backwards swept head shield, small jaw, powerful front limbs and lower hindquarters, heavy articulated spear tail. Soot-black/gunmetal chitin with restrained brown heat tarnish and non-glowing mineral abrasions. No upright Warrior/Queen anatomy, horns, lava, equipment, image watermark or red photo lighting. Strict side view right. Same identity across idle, walk, crest bash, death and charge.",
+      "reviewer": "Codex root; Crusher photograph and existing V56 foundry identity visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-025-foundry-drone": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier/blob/codex/v52-physical-worlds/docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/foundry-drone-action-sheet-v56.png"
+      ],
+      "designLock": "Project-adapted Foundry Drone, not an externally attested official caste: slender smooth long domed eyeless xenomorph with intact XX121 anatomy, four dorsal pipes, two clawed arms, digitigrade legs, long pointed segmented tail. Gunmetal-black chitin with matte soot, heat-browned areas and non-glowing mineral scars only. No equipment, lava, luminous cracks, horns, riveted foundry armor or ribbed Warrior head. Preserve inspected V56 identity and right-facing side view.",
+      "reviewer": "Codex root; existing V56 sheet and matrix visually inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
     "enemy-001-ovomorph": {
       "status": "reviewed",
       "urls": [

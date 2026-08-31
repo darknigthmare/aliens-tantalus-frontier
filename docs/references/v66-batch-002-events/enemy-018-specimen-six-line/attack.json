@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-018-specimen-six-line",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-a503874f-2143-4128-b27c-d993a208cca6",
+  "actor": "Codex complete_variants",
+  "note": "Candidate source only, visual and motion continuity review pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-018-specimen-six-line/attack.txt",
+  "sourceSha256": "9ccd69b02ad97a69be4887f64eed08d09bed3a894dd0acce9918aadf67441b11",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-018-specimen-six-line/attack.png"
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-017-monica-line",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-3d3270bc-7074-4661-99af-fe786056e63e",
+  "actor": "Codex variant_sheets",
+  "note": "Candidate project lineage conditioned on its own idle identity; pending source, continuity, anchor and fidelity QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-017-monica-line/move.txt"
+}

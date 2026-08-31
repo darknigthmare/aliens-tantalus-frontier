@@ -1,0 +1,4 @@
+Use case: precise-object-edit.
+Image1 is the edit target, an eight-pose Xenoborg attack sheet.
+Change ONLY the TOP-RIGHT pose (pose4): move the ENTIRE creature, including its complete tail and cannon muzzle blink, slightly RIGHT within its own cell, by about 10 percent of one cell width. Its leftmost tail tip currently crosses the left border of its own top-right cell. Ensure that tip is now clearly INSIDE the TOP-RIGHT cell with at least8percentcellwidth empty margin on the left. Preserve the tail's exact articulated shape and connect its complete tip to the tail; no detached floating tail pieces.
+Do not alter anatomy, proportions, equipment, cannon lengths, colors or the action. Do not scale any creature. Keep the OTHER SEVEN POSES EXACTLY UNCHANGED. Same 4columns2rows layout, exact2:1landscape canvas, pureMAGENTA#FF00FFbackground, no checkerboard, no text, no grid, no new objects.

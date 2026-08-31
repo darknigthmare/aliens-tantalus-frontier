@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-0e63e772-265e-4067-87f6-865548083457",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "5ac18d2a917b208ba42181583051be803b01718b676b683a8130559d4cdc08d8",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+  "note": "Revision2: targeted ImageGen removal of pink surface contamination on hip/neck/limb chitin, preserving requested eight death poses. Previous source retained at rejected/death-pre-r2.png. Candidate still needs renewed root and palette review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/death-r2.txt"
+}

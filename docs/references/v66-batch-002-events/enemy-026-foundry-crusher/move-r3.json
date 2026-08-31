@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-09eb7174-0c13-4772-b175-366fe7e1f3c5",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "d2c2298d564cf34a3634cc87bc4f5281f232a98d893daab0222e33c0f95ac110",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/move.png",
+  "note": "Revision3: narrower ImageGen correction of remaining hot-pink neck seam artifacts, using high-quality full-resolution target reference; poses/layout requested unchanged. Previous revision preserved at rejected/move-pre-r3.png. Still a candidate requiring visual/root and chroma checks.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/move-r3.txt"
+}

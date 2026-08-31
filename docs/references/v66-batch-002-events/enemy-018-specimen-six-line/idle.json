@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-018-specimen-six-line",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5db47bcd-56f1-46d8-81e6-2d203e623dab",
+  "actor": "Codex complete_variants",
+  "note": "Recovered after interruption by exact SHA256 equality with preserved generated_images master. Existing full prompt was saved before the earlier generation. Candidate only, production review pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-018-specimen-six-line/idle.txt",
+  "sourceSha256": "69710cc886f1902b0b238493bc577005bedcadace20045065f05b506e3f4ede9",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-018-specimen-six-line/idle.png"
+}

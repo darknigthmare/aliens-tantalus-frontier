@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-024-ripper-queen",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-39d3e590-28dd-483e-9adc-dd2b88b6f150",
+  "actor": "Codex root",
+  "note": "Candidate from visually inspected project Ripper Queen identity; no 1:1 certification or runtime acceptance.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-024-ripper-queen/death.txt"
+}

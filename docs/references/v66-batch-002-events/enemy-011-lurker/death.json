@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-011-lurker",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-80370344-ff42-4a5a-8448-d7b4161f5d3d",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, reference conditioned; pending source/animation QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-011-lurker/death.txt",
+  "sourceSha256": "e4756b35aa1f01082e82fa7ebf3ca103f6a636563966bcd954cc37cef5bf75a1",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/death.png"
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-011-lurker",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5825af9b-911c-4274-8a19-6fb91e318d0d",
+  "actor": "Codex complete_royal",
+  "note": "Candidate only, reference conditioned; pending source/animation QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-011-lurker/attack.txt",
+  "sourceSha256": "b72e50d398d7270b8c0ebea90c3e2aa84d86b04e230b86e0e9788324d07efd26",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png"
+}

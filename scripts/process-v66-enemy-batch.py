@@ -11,6 +11,7 @@ import hashlib
 import importlib.util
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -21,7 +22,7 @@ from v64_sprite_cell_quality import analyze_v64_cells
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "docs/references/V66_ENEMY_BATCH_QUEUE.json"
-ANCHOR_REVIEW_PATH = "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json"
+ANCHOR_REVIEW_PATH = "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json"  # Legacy pilot path; retained for callers/tests.
 ENCLOSED_MATTE_METHOD = "strict-exterior-matched-magenta-v1"
 ENCLOSED_MATTE_THRESHOLDS = {"minimumRedBlue": 190, "maximumGreen": 60, "minimumChroma": 150, "maximumRedBlueDifference": 32, "maximumReferenceChannelDistance": 24}
 ENCLOSED_AA_THRESHOLDS = {"minimumRedBlue": 35, "minimumChroma": 20, "maximumRedBlueDifference": 32, "maximumSourceRadius": 2}
@@ -263,6 +264,15 @@ def finite_pair(value: object, label: str) -> tuple[float, float]:
     return float(value[0]), float(value[1])
 
 
+def batch_anchor_review_path(job: dict) -> str:
+    """Keep physical review evidence isolated to its exact production batch."""
+    batch_id = job.get("batchId")
+    match = re.fullmatch(r"batch-([0-9]{3})", batch_id) if isinstance(batch_id, str) else None
+    if match is None or int(match.group(1)) == 0:
+        raise ValueError("Physical anchor review requires a valid batch-NNN identifier.")
+    return f"docs/references/V66_BATCH_{match.group(1)}_ANCHOR_REVIEW.json"
+
+
 def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict], root: Path = ROOT) -> tuple[list[dict] | None, dict]:
     """Load only complete, individually reviewed physical roots; never guess them.
 
@@ -270,11 +280,12 @@ def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict],
     Thus a short, proven component spill keeps exactly the same physical root.
     Unmeasured profiles remain explicit pending work, not automatic approvals.
     """
-    path = scoped_path(root, ANCHOR_REVIEW_PATH)
+    review_path = batch_anchor_review_path(job)
+    path = scoped_path(root, review_path)
     if not path.is_file():
         return None, {"status": "pending", "reason": "No source-anchor review file."}
     document = json.loads(path.read_text(encoding="utf-8"))
-    proof = {"path": ANCHOR_REVIEW_PATH, "sha256": hash_file(path), "status": "pending"}
+    proof = {"path": review_path, "sha256": hash_file(path), "status": "pending"}
     if document.get("schema") != 1 or document.get("coordinates") != "nominal-source-cell":
         raise ValueError("Unsupported source-anchor review schema or coordinate system.")
     entry = document.get("profiles", {}).get(job["profileId"])

@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 
-export const BATCH_SIZE = 5;
+// Future batches contain twenty profiles; FIRST_BATCH_IDS remains the immutable pilot.
+export const BATCH_SIZE = 20;
 export const SOURCE_GRID = Object.freeze({ columns: 4, rows: 2, frameCount: 8 });
 export const BASELINE_PROFILE_ID = 'enemy-002-facehugger';
 export const FIRST_BATCH_IDS = Object.freeze(['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner']);
@@ -31,6 +32,24 @@ const contracts = {
   fauna: [idle, { ...move, motion: 'Locomotion matches the species and reference limb count; no xenomorph anatomy added.' }, attack('Species-specific bite, tusk or claw action with anticipation and recovery.'), death],
 };
 export const ANIMATION_CONTRACTS = Object.freeze(Object.fromEntries(Object.entries(contracts).map(([id, clips]) => [id, Object.freeze(clips.map(Object.freeze))])));
+
+// An animation family is not permission to invent anatomy or weapon mechanisms.
+const ARCHETYPE_CLIP_OVERRIDES = Object.freeze({
+  Praetorian: Object.freeze({
+    attack: attack('Heavy Praetorian forelimb strike using exactly two main arms; retain the locked crown silhouette and full tail. Do not add small inner arms or a second arm pair.'),
+  }),
+  Xenoborg: Object.freeze({
+    attack: attack('Brace the body and aim its permanently grafted forearm laser cannons, discharge, recoil and recover. Cannons remain fused to the arms in every pose; no handheld gun, shoulder-fired rifle or detachable magazine.'),
+    reload: clip('reload', 'One complete capacitor recharge and heat-venting cycle in the grafted forearm laser cannons: cooling vents open, charge builds, vents close, return to ready. No magazine removal, ammunition insertion or handheld gun.', 10),
+  }),
+});
+
+export function animationContractFor(profile) {
+  const contract = ANIMATION_CONTRACTS[profile.animationFamily];
+  if (!contract) throw new Error(`Unknown animation family: ${profile.animationFamily}`);
+  const overrides = ARCHETYPE_CLIP_OVERRIDES[profile.archetype];
+  return overrides ? Object.freeze(contract.map((spec) => overrides[spec.id] || spec)) : contract;
+}
 
 // Canonical archetype names, never the content table's cyclic behavior field.
 const FAMILY_BY_ARCHETYPE = Object.freeze({

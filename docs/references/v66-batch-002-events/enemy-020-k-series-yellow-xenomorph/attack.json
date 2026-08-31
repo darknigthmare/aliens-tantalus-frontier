@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-51e8debd-7155-4f9c-90a1-bba66c72ef01",
+  "actor": "Codex complete_variants",
+  "note": "Candidate source only, anatomy and frame-spacing review pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-020-k-series-yellow-xenomorph/attack-idle-anchor.txt",
+  "sourceSha256": "f18334f11ddaf562a02538f786ba6da9f73b7aadbcabae35e8d38d5f8abc11dc",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png"
+}

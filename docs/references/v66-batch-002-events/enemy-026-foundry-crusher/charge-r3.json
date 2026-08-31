@@ -1,0 +1,12 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "charge",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-40233b1b-41ca-4e80-8347-88adca1febdc",
+  "actor": "Codex source_qa",
+  "sourceSha256": "0e6230984f6012ec6a440cba6842ed71f0a52cb5f4c313c6d85d397d3f26b313",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/charge.png",
+  "note": "Revision3 candidate: targeted intermediate compression recovery pose6 and grounded braking pose7; same character as idle-r2. Previous charge revision2 retained at rejected/charge-pre-r3.png. Physical-anchor review and normalization acceptance remain pending.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/charge-r3.txt"
+}

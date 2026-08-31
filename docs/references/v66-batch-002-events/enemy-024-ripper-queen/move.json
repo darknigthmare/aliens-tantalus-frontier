@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-024-ripper-queen",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-085c930b-67a9-4eb9-916d-6e6a5f728ebc",
+  "actor": "Codex root",
+  "note": "Candidate from visually inspected project Ripper Queen identity; no 1:1 certification or runtime acceptance.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-024-ripper-queen/move.txt"
+}

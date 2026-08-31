@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-2b19548f-986c-4eb6-aa28-736e2e80a9e0",
+  "actor": "Codex root",
+  "note": "Conditioned on saved Foundry Crusher idle identity; candidate pending source bounds, anatomy, scale and root review.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/attack.txt"
+}

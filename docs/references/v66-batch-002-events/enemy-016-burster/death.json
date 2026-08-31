@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-016-burster",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5660e568-7783-495a-9e4a-91ce225cbd5f",
+  "actor": "Codex variant_sheets",
+  "note": "Candidate conditioned on this profile's NECA-derived attack sheet; pending source, continuity, anchor and fidelity QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-016-burster/death.txt"
+}

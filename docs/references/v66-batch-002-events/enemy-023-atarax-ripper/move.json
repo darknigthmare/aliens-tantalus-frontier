@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-023-atarax-ripper",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-c7fd25d6-c245-41b9-9047-02addeef219f",
+  "actor": "Codex root",
+  "note": "Candidate from project identity reference; idle/move semantics require refinement; not accepted or runtime integrated.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-023-atarax-ripper/move.txt"
+}

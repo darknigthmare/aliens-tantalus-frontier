@@ -1,0 +1,10 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-010-spitter",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-b0f21e16-c8a8-4c81-b2a1-8f19d027c59a",
+  "actor": "Codex royal_sheets",
+  "note": "Candidate only. SquareEnix ACM reference inspected. Poison sacs, spine count, gait, margins and side view pending per-pose QA.",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-010-spitter/death.txt"
+}

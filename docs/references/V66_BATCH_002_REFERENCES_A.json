@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "profiles": {
+    "enemy-007-praetorian": {
+      "status": "reviewed",
+      "urls": [
+        "https://models.spriters-resource.com/pc_computer/aliensvspredator/asset/285335/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "AvP2010 extracted game model preview, not full Queen. Dark gunmetal brown exoskeleton, ribbed chest, narrow waist, swept-back broad cranial shield, oval dome before shield, exactly two long main arms and two digitigrade legs, segmented spear tail; no smaller chest arms. Preserve reference proportions in strict right-facing side view.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-008-queen": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/48662/products/toys/action-figures/aliens-xenomorph-queen-ultra-deluxe-boxed-action-figure/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-008-queen/references/neca-queen-1986.jpg"
+      ],
+      "designLock": "Aliens1986 Queen licensed NECA sculpture. Huge swept-back layered fan crown with paired lobes, narrow neck, midnight blueblack chitin and bronze rib channels. Exactly four arms: two large outer arms and two small chest arms; two powerful digitigrade legs; long attached spear tail. Mobile Queen without ovipositor. Not a two-arm Praetorian.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-009-crusher": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines Hiya licensed Crusher sculpture is RIGHT creature in photo024; LEFT is Raven, not Crusher. Huge low quadruped, broad flared armored head shield, massive forequarters, shorter hindquarters, four weightbearing limbs, long segmented tail. Dark grayblack chitin with subtle blue, do not copy red/yellow scene lighting. No Queen small arms or humanoid biped.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-010-spitter": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.square-enix-shop.com/uk/play_arts.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/references/square-enix-spitter-official.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines SquareEnix PlayArtsKai licensed Spitter: glossy blueblack, smooth broad rearflared dome, yellowgreen acid reservoirs along rear cranium NOT eyes, four long curved barbed dorsal spines, narrow ribbed torso, two clawed arms, two digitigrade legs, segmented tail. Not orange Fireteam caste or Queen.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-011-lurker": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.square-enix-shop.com/uk/play_arts.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/references/square-enix-lurker-official.jpg"
+      ],
+      "designLock": "Aliens Colonial Marines SquareEnix PlayArtsKai licensed Lurker. Lean glossy black long smooth domed eyeless head with ribbed underside, four dorsal tubes with restrained bronze worn tips, ribbed narrow torso, two elongated clawed arms and two digitigrade hind legs, vertebral ridged long spear tail. Low four-limbed stalking and pounce stance. No acid sacs, no crown or extra limbs; preserve classic intact Alien anatomy.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-012-carrier": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-012-carrier/references/extinction-carrier-bestiary.jpg"
+      ],
+      "designLock": "AvP Extinction2003 Carrier from game bestiary render. Olive charcoal bronze biomechanical biped, long compressed domed head, ribbed torso, two clawed arms, two strong digitigrade legs, long segmented tail; unmistakable multiple long upward/outward dorsal carrying spines with flared pale hooked tips that carry facehuggers. Not a bloated egg sack or tentacled insect. Preserve load-bearing spine silhouette. Facehugger release is from back carrying spines, not mouth.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-013-ravager": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-013-ravager/references/extinction-ravager-bestiary.jpg"
+      ],
+      "designLock": "AvP Extinction2003 Ravager game bestiary render. Tall heavily armored cobalt navy blue and dark green biped, raised backward curved cranial crest and lateral backward head spikes, narrow ribbed torso, two long powerful arms ending in enormous integral pale gray crescent hull-blades, digitigrade strong hindlegs and segmented tail. Blades are anatomical forearm/hand structures, not swords held by hands. No Queen secondary arms; preserve dark bluegreen/pale blade contrast, no equipment.",
+      "reviewer": "Codex complete_royal; local reference visually inspected; source page consulted where available",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    }
+  }
+}
