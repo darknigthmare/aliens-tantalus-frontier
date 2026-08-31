@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '64.0.0',
-  subtitle: 'Newborn, Offspring & Predalien — Exact Enemy Animation Completion',
+  version: '65.0.0',
+  subtitle: 'Facehugger 32 poses — sprite streaming & progression fixes',
   sourceVersion: '51.0.0'
 });

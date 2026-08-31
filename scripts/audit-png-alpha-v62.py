@@ -467,14 +467,15 @@ def add_v62_scene_findings(assets: list[dict[str, Any]]) -> None:
             )
 
 
-def build_report(asset_root: Path = ASSET_ROOT, manifest_path: Path = MANIFEST) -> dict[str, Any]:
+def build_report(asset_root: Path = ASSET_ROOT, manifest_path: Path = MANIFEST, *, ignored_production_prefixes: tuple[str, ...] = ()) -> dict[str, Any]:
     manifest = load_manifest(manifest_path)
     normalized = normalized_contracts(manifest)
     assets: list[dict[str, Any]] = []
     excluded = 0
     unclassified = 0
 
-    for path in sorted(asset_root.rglob("*.png"), key=lambda item: item.as_posix().lower()):
+    png_paths = [path for path in asset_root.rglob("*.png") if not path.relative_to(asset_root).as_posix().startswith(ignored_production_prefixes)]
+    for path in sorted(png_paths, key=lambda item: item.as_posix().lower()):
         rel = canonical_asset_path(path, asset_root)
         classification = classify_asset(rel, normalized)
         if classification is None:
@@ -512,7 +513,7 @@ def build_report(asset_root: Path = ASSET_ROOT, manifest_path: Path = MANIFEST) 
         },
         "rules": list(RULES),
         "summary": {
-            "pngFilesDiscovered": len(list(asset_root.rglob("*.png"))),
+            "pngFilesDiscovered": len(png_paths),
             "assetsAudited": len(assets),
             "rawMastersExcluded": excluded,
             "unclassifiedNotAsserted": unclassified,

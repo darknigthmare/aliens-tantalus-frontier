@@ -141,7 +141,7 @@ test('le garde-fou rejette toute plaque ennemie injectée sur un marine ou un PN
   );
 });
 
-test('neuro-002 dérive le Facehugger exact et marine standard ne reçoit aucune famille ennemie', () => withBrowserMocks(() => {
+test('neuro-002 dérive le Facehugger V65 sans prétendre au pixel exact et le marine reste humain', () => withBrowserMocks(() => {
   const profile = NEURO_XENO_PROFILES.find((entry) => entry.id === 'neuro-002');
   assert.ok(profile?.playerClassCompatible);
   const canvas = { width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} };
@@ -150,16 +150,16 @@ test('neuro-002 dérive le Facehugger exact et marine standard ne reçoit aucune
   const contract = neuroEngine.player.neuroVisualContract;
   assert.deepEqual(
     { profileId: contract?.profileId, enemyId: contract?.enemyId, spriteKey: contract?.spriteKey, sheetId: contract?.sheetId, exact: contract?.exact },
-    { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', spriteKey: 'facehugger', sheetId: 'enemy.facehugger.locomotion', exact: true }
+    { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', spriteKey: 'facehugger', sheetId: 'enemy.profile.enemy-002-facehugger.v65', exact: false }
   );
 
   const baseState = { alive: true, grounded: true, vx: 0, fireClock: 0, actionClock: 0, v52FireClock: 0, v52HurtClock: 0 };
   for (const [state, clipId] of [
     [{}, 'idle'],
-    [{ vx: 60 }, 'scuttle'],
-    [{ fireClock: 0.4 }, 'leap-attach'],
-    [{ v52HurtClock: 0.4 }, 'hurt-death'],
-    [{ alive: false }, 'hurt-death']
+    [{ vx: 60 }, 'chase'],
+    [{ fireClock: 0.4 }, 'attack'],
+    [{ v52HurtClock: 0.4 }, 'idle'],
+    [{ alive: false }, 'death']
   ]) {
     Object.assign(neuroEngine.player, baseState, state);
     const request = resolveIdentitySafePlayerAnimationV57(neuroEngine.player, true);
@@ -169,8 +169,8 @@ test('neuro-002 dérive le Facehugger exact et marine standard ne reçoit aucune
   neuroEngine.updateSpriteAnimationEvents();
   const neuroSnapshot = neuroEngine.getSnapshot();
   const neuroKey = getAnimationEntityKeyV57('player', neuroEngine.player, 'primary');
-  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'enemy.facehugger.locomotion:hurt-death');
-  assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'enemy.facehugger.locomotion');
+  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'enemy.profile.enemy-002-facehugger.v65:idle');
+  assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'enemy.profile.enemy-002-facehugger.v65');
 
   const marineEngine = new GameEngine(canvas, { onEvent: () => {} });
   marineEngine.start(missionOptions({ neuroProfile: null }));

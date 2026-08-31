@@ -109,6 +109,7 @@ class MockImage {
 
   set src(value) {
     this.currentSrc = value;
+    queueMicrotask(() => this.onload?.());
   }
 }
 
@@ -187,7 +188,7 @@ test('les variantes réemploient seulement leur famille dédiée et restent expl
   }
 });
 
-test('le GameEngine charge, dessine et spécialise les sept identités PROJECT_ORIGINAL', () => {
+test('le GameEngine charge, dessine et spécialise les sept identités PROJECT_ORIGINAL', async () => {
   const previousImage = globalThis.Image;
   const previousAddEventListener = globalThis.addEventListener;
   globalThis.Image = MockImage;
@@ -210,6 +211,7 @@ test('le GameEngine charge, dessine et spécialise les sept identités PROJECT_O
       assert.equal(enemy.visualSheetId, expected.sheetId, expected.name);
       assert.equal(enemy.visualIdentityStatus, 'project-original', expected.name);
       assert.equal(enemy.behavior, expected.behavior, expected.name);
+      await engine.ensureEnemyAtlas(SPRITE_SHEETS[enemy.visualSheetId]);
       assert.equal(engine.images.get(expected.spriteKey)?.currentSrc, expected.path, expected.name);
 
       const drawCalls = [];

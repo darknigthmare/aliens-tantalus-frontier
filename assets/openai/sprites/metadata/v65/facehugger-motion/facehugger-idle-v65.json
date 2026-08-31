@@ -1,0 +1,442 @@
+{
+  "schema": 1,
+  "release": "v65",
+  "subject": "Facehugger",
+  "clip": "idle",
+  "generationProvider": "OpenAI ImageGen",
+  "raw": "/assets/openai/sprites/frames/v65/facehugger-idle-reference-v65.png",
+  "rawSha256": "fb4e4b4b7256d852f477551bcc67cfcc5c12f6a8734673121dcda859f12ef6e3",
+  "normalized": "/assets/openai/sprites/normalized/facehugger-motion-v65/facehugger-idle-v65.webp",
+  "normalizedSha256": "58767ddd7e7060e4b871d2a0d35ab8faf458ced52a43afa2906337e62bc4ac19",
+  "preview": "/assets/openai/sprites/previews/v65/facehugger-motion/facehugger-idle-v65.gif",
+  "previewSha256": "bf02b56a78d3dc26230bb2d97938cfaa2da08f3e5789fa918081c8833e375f2c",
+  "sourceFacing": "right",
+  "encoding": "lossless-rgba",
+  "scaleScope": "all-four-clips",
+  "scale": 0.507937,
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "fps": 6,
+  "loop": true,
+  "canonExact": false,
+  "referenceUrls": [
+    "https://necaonline.com/2016/05/aliens-foam-prop-replica-life-size-facehugger/"
+  ],
+  "frameCount": 8,
+  "combinedAtlas": "/assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+  "placements": [
+    {
+      "index": 0,
+      "clip": "idle",
+      "sourceRow": 0,
+      "removedEnclosedMattePixels": 32,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        19,
+        187,
+        426,
+        295
+      ],
+      "sourceSize": [
+        407,
+        108
+      ],
+      "foregroundPixels": 16501,
+      "renderedBounds": [
+        24,
+        185,
+        231,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 1,
+      "clip": "idle",
+      "sourceRow": 0,
+      "removedEnclosedMattePixels": 11,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        15,
+        186,
+        414,
+        302
+      ],
+      "sourceSize": [
+        399,
+        116
+      ],
+      "foregroundPixels": 17016,
+      "renderedBounds": [
+        26,
+        181,
+        229,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 2,
+      "clip": "idle",
+      "sourceRow": 0,
+      "removedEnclosedMattePixels": 0,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        11,
+        193,
+        410,
+        302
+      ],
+      "sourceSize": [
+        399,
+        109
+      ],
+      "foregroundPixels": 16526,
+      "renderedBounds": [
+        26,
+        185,
+        229,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 3,
+      "clip": "idle",
+      "sourceRow": 0,
+      "removedEnclosedMattePixels": 14,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        9,
+        202,
+        408,
+        304
+      ],
+      "sourceSize": [
+        399,
+        102
+      ],
+      "foregroundPixels": 16139,
+      "renderedBounds": [
+        26,
+        188,
+        229,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 4,
+      "clip": "idle",
+      "sourceRow": 1,
+      "removedEnclosedMattePixels": 37,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        18,
+        140,
+        418,
+        251
+      ],
+      "sourceSize": [
+        400,
+        111
+      ],
+      "foregroundPixels": 16286,
+      "renderedBounds": [
+        26,
+        184,
+        229,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 5,
+      "clip": "idle",
+      "sourceRow": 1,
+      "removedEnclosedMattePixels": 41,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        16,
+        141,
+        418,
+        251
+      ],
+      "sourceSize": [
+        402,
+        110
+      ],
+      "foregroundPixels": 16539,
+      "renderedBounds": [
+        26,
+        184,
+        230,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 6,
+      "clip": "idle",
+      "sourceRow": 1,
+      "removedEnclosedMattePixels": 0,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        11,
+        142,
+        410,
+        252
+      ],
+      "sourceSize": [
+        399,
+        110
+      ],
+      "foregroundPixels": 16234,
+      "renderedBounds": [
+        26,
+        184,
+        229,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    },
+    {
+      "index": 7,
+      "clip": "idle",
+      "sourceRow": 1,
+      "removedEnclosedMattePixels": 0,
+      "removedBorderFragmentPixels": 0,
+      "reassignedBorderFragmentPixels": 0,
+      "sourceFragmentTransfers": [],
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        9,
+        140,
+        418,
+        246
+      ],
+      "sourceSize": [
+        409,
+        106
+      ],
+      "foregroundPixels": 16191,
+      "renderedBounds": [
+        24,
+        186,
+        232,
+        240
+      ],
+      "scale": 0.507937,
+      "sourceLift": 0,
+      "renderedLift": 0
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          25,
+          186,
+          230,
+          239
+        ],
+        "foregroundPixels": 4656,
+        "width": 205,
+        "height": 53,
+        "relativeToRowMedian": 1.006159
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          27,
+          182,
+          228,
+          239
+        ],
+        "foregroundPixels": 4775,
+        "width": 201,
+        "height": 57,
+        "relativeToRowMedian": 1.031875
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          27,
+          186,
+          228,
+          239
+        ],
+        "foregroundPixels": 4599,
+        "width": 201,
+        "height": 53,
+        "relativeToRowMedian": 0.993841
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          27,
+          189,
+          228,
+          239
+        ],
+        "foregroundPixels": 4523,
+        "width": 201,
+        "height": 50,
+        "relativeToRowMedian": 0.977418
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          27,
+          185,
+          228,
+          239
+        ],
+        "foregroundPixels": 4518,
+        "width": 201,
+        "height": 54,
+        "relativeToRowMedian": 0.989813
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          27,
+          185,
+          229,
+          239
+        ],
+        "foregroundPixels": 4646,
+        "width": 202,
+        "height": 54,
+        "relativeToRowMedian": 1.017855
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          27,
+          185,
+          228,
+          239
+        ],
+        "foregroundPixels": 4566,
+        "width": 201,
+        "height": 54,
+        "relativeToRowMedian": 1.000329
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          25,
+          187,
+          231,
+          239
+        ],
+        "foregroundPixels": 4563,
+        "width": 206,
+        "height": 52,
+        "relativeToRowMedian": 0.999671
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      4627.5,
+      4564.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 8,
+    "cellRgbaSha256": [
+      "1603a9fe0b71c90180826841e02913ebccfa1cbb95dc3b8039e931a50df0b5e7",
+      "9cc94ead37d7d70e91a9a6348f387f80423eafcaea71a31d3302d63a79536089",
+      "c545e842cdb9cebe308b1c66c1644b0e26c702fe7720038111c76fdde55c85c4",
+      "84d5e738ee85d5f09e75e8f8b6dd580f809a22506811eb82f9f89c9edd603b05",
+      "45a765eae8ece6b8c1b01ebd4fc9d9949415a38c6decfce26db51402168fb1d9",
+      "c7ef87e0cb128bd005593522b5ef854f45923904c5469f0ebd921eface55a1d1",
+      "3e54a15bccdbc9a32e2c10c3b9479b4cc9f634ce979615eec72eb09a280dce03",
+      "dbc933ee7c7e609b70fed5029774a4709c954cb101c8f4a3c06519295eafc45c"
+    ]
+  }
+}

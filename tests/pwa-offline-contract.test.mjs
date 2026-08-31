@@ -14,6 +14,7 @@ import { HUB_ROOM_ART_ASSETS_V56 } from '../src/hub-art-runtime-v56.js';
 import { MISSION_INTERACTIVE_ART_FILES_V56 } from '../src/mission-interactive-art-v56.js';
 import { HUB_ROOM_FAR_ASSETS_V58, HUB_ROOM_MID_ASSETS_V58 } from '../src/hub-art-runtime-v58.js';
 import { MISSION_DOOR_ATLAS_V58 } from '../src/mission-door-art-v58.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
 
 const relativeImports = (source) => {
   const imports = [];
@@ -29,7 +30,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bestiaire hybride complété', async () => {
+test('le cache hors-ligne v65 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -54,6 +55,9 @@ test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bes
     '/src/game-v52-runtime.js',
     '/src/game-v52-level-runtime.js',
     '/src/sprite-animation-runtime.js',
+    '/src/enemy-profile-assets-v65.js',
+    '/src/enemy-profile-registry-v65.js',
+    '/src/enemy-atlas-loader-v65.js',
     '/src/mission-levels-v52.js',
     '/src/enemy-visual-overrides-v56.js',
     '/src/enemy-visual-overrides-v64.js',
@@ -75,12 +79,19 @@ test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bes
     assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v62`);
   }
 
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 195);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length);
   for (const sheet of Object.values(SPRITE_SHEETS)) await access(localPath(sheet.path));
   assert.match(worker, /const SPRITE_MANIFEST = ['"]\/assets\/openai\/sprites\/manifest\.json['"]/);
-  assert.match(worker, /sheet\.files\?\.normalized/);
-  assert.match(worker, /path\.includes\(['"]\/sprites\/normalized\/['"]\)/);
-  assert.match(worker, /cache\.addAll\(normalizedSprites\)/);
+  assert.match(worker, /const SHELL = Object\.freeze\(CORE\.filter/);
+  assert.match(worker, /cache\.addAll\(SHELL\)/);
+  assert.doesNotMatch(worker, /fetch\(SPRITE_MANIFEST/);
+  assert.doesNotMatch(worker, /sheet\.files\?\.normalized/);
+  assert.doesNotMatch(worker, /cache\.addAll\(normalizedSprites\)/);
+  assert.match(worker, /const MAX_ENEMY_ATLAS_BATCH_V65 = 12/);
+  assert.match(worker, /CACHE_ENEMY_ATLASES_V65/);
+  assert.match(worker, /slice\(0, MAX_ENEMY_ATLAS_BATCH_V65\)/);
+  assert.match(worker, /normalized\/enemy-profiles-v65\//);
+  assert.match(worker, /endsWith\(['"]\.webp['"]\)/);
 
   const zoneAssets = Object.values(MISSION_LEVEL_ZONE_LAYER_FILES_V58)
     .flatMap((zones) => Object.values(zones))
@@ -119,7 +130,7 @@ test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bes
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v64-runtime-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v65-shell-2['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -163,7 +174,7 @@ test('le cache hors-ligne v64 couvre la fermeture ESM, le hub physique et le bes
     assert.ok(entry.assets.runtime.rawAtlas.startsWith('/assets/'));
     assert.ok(entry.assets.runtime.normalizedAtlas.startsWith('/assets/'));
   }
-  assert.match(worker, /async function precacheV64\(\)/);
+  assert.match(worker, /async function precacheV65Shell\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

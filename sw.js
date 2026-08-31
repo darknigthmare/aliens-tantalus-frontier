@@ -1,5 +1,6 @@
-const CACHE = 'atf-v64-runtime-1';
+const CACHE = 'atf-v65-shell-2';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
+const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
@@ -19,7 +20,9 @@ const CORE = [
   '/src/world-crisis-core.js', '/src/campaign-consequences.js', '/src/game-production-runtime.js', '/src/game-production-core.js',
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
-  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
+  '/src/enemy-facehugger-combat-v65.js',
+  '/docs/VERSION_HISTORY_V65.md', '/docs/ART_PROVENANCE_V65.md',
+  '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-profile-assets-v65.js', '/src/enemy-profile-registry-v65.js', '/src/enemy-atlas-loader-v65.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/enemy-visual-overrides-v64.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
   '/src/vehicle-access-runtime-v59.js', '/src/vehicle-deployment-gates-v60.js',
@@ -269,20 +272,42 @@ const CORE = [
   '/assets/openai/hub/layers/engineering-sensors-mid.png'
 ];
 
-async function precacheV64() {
+const SHELL = Object.freeze(CORE.filter((path) => !path.startsWith('/assets/') && !path.startsWith('/docs/')));
+
+async function precacheV65Shell() {
   const cache = await caches.open(CACHE);
-  await cache.addAll(CORE);
-  const response = await fetch(SPRITE_MANIFEST, { cache: 'no-store' });
-  if (!response.ok) throw new Error(`Sprite manifest unavailable: ${response.status}`);
-  const manifest = await response.json();
-  const normalizedSprites = [...new Set((manifest.sheets || [])
-    .map((sheet) => sheet.files?.normalized)
-    .filter((path) => typeof path === 'string' && path.includes('/sprites/normalized/')))];
-  await cache.addAll(normalizedSprites);
+  await cache.addAll(SHELL);
+}
+
+const isCacheableResponse = (response) => Boolean(response?.ok && response.type !== 'opaque');
+const isEnemyAtlasPathV65 = (value) => {
+  try {
+    const url = new URL(String(value), self.location.origin);
+    if (url.origin !== self.location.origin) return false;
+    const legacyPng = url.pathname.startsWith('/assets/openai/sprites/normalized/enemies/')
+      && url.pathname.endsWith('.png');
+    const dedicatedV65Webp = url.pathname.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v65/')
+      && url.pathname.endsWith('.webp');
+    return legacyPng || dedicatedV65Webp;
+  } catch {
+    return false;
+  }
+};
+
+async function cacheEnemyAtlasesV65(paths = []) {
+  const requested = [...new Set(Array.isArray(paths) ? paths : [])]
+    .filter(isEnemyAtlasPathV65)
+    .slice(0, MAX_ENEMY_ATLAS_BATCH_V65);
+  const cache = await caches.open(CACHE);
+  await Promise.all(requested.map(async (path) => {
+    const response = await fetch(path);
+    if (isCacheableResponse(response)) await cache.put(path, response.clone());
+  }));
+  return requested.length;
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV64().then(() => self.skipWaiting())
+  precacheV65Shell().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(
@@ -294,8 +319,10 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
     fetch(event.request).then((response) => {
-      const clone = response.clone();
-      caches.open(CACHE).then((cache) => cache.put(event.request, clone));
+      if (isCacheableResponse(response)) {
+        const clone = response.clone();
+        caches.open(CACHE).then((cache) => cache.put(event.request, clone));
+      }
       return response;
     }).catch(() => caches.match(event.request).then((cached) => {
       if (cached) return cached;
@@ -303,4 +330,9 @@ self.addEventListener('fetch', (event) => {
       return Response.error();
     }))
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type !== 'CACHE_ENEMY_ATLASES_V65') return;
+  event.waitUntil(cacheEnemyAtlasesV65(event.data.paths));
 });

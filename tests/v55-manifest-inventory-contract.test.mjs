@@ -85,12 +85,13 @@ test('inventory v55 preserves its release batch and reports the current v56 visu
   assert.equal(inventory.enemies.coverage.modern, 538);
   assert.equal(inventory.enemies.coverage.legacy, 33);
   assert.deepEqual(inventory.enemies.coverage.byIdentityStatus, {
-    exact: 30,
+    exact: 29,
+    'source-locked-adaptation': 1,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 516
   });
-  assert.equal(inventory.enemies.exactProfileCount, 30);
+  assert.equal(inventory.enemies.exactProfileCount, 29);
   assert.equal(inventory.enemies.familyReuseProfileCount, 516);
   assert.equal(inventory.enemies.missingDedicatedProfileCount, 0);
   assert.equal(inventory.vehicles.v55DedicatedChassisCount, 4);

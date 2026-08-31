@@ -9,6 +9,7 @@ import {
   EQUIPMENT_VISUAL_PROFILES_V56
 } from './equipment-visual-runtime-v56.js';
 import { resolveVehicleAccessAnimationV59 } from './vehicle-access-runtime-v59.js';
+import { V65_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v65.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -130,6 +131,12 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'chase', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:step-right' }, { frame: 6, type: 'audio:step-left' }] },
     { id: 'attack', frames: [8, 9, 10, 11], fps: 10, loop: false, events: [{ frame: 10, type: 'combat:attack-hit' }] },
     { id: 'death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+  ]),
+  'facehugger-action-v65': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3, 4, 5, 6, 7], fps: 6, loop: true, events: [{ frame: 3, type: 'creature:twitch' }] },
+    { id: 'chase', frames: [8, 9, 10, 11, 12, 13, 14, 15], fps: 12, loop: true, events: [{ frame: 9, type: 'audio:scuttle' }, { frame: 13, type: 'audio:scuttle' }] },
+    { id: 'attack', frames: [16, 17, 18, 19, 20, 21, 22, 23], fps: 12, loop: false, events: [{ frame: 18, type: 'movement:takeoff' }, { frame: 21, type: 'combat:attach-window' }] },
+    { id: 'death', frames: [24, 25, 26, 27, 28, 29, 30, 31], fps: 10, loop: false, events: [{ frame: 31, type: 'state:death-lock' }] }
   ]),
   'newborn-action-v64': freezeList([
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'newborn:breath' }] },
@@ -379,6 +386,7 @@ export const SPRITE_SHEETS = Object.freeze({
   'enemy.facehugger.locomotion': sheet('enemy.facehugger.locomotion', 'facehugger', '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png', 'facehugger-locomotion', 'creature-ground', 'facehugger-ground', 112, 72, 'enemy'),
   'enemy.neomorph.locomotion': sheet('enemy.neomorph.locomotion', 'neomorph', '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png', 'neomorph-locomotion', 'creature-ground', 'xenomorph-standing', 146, 112, 'enemy'),
   'enemy.working-joe.combat': sheet('enemy.working-joe.combat', 'workingJoe', '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png', 'working-joe-combat', 'humanoid-feet', 'npc-standing', 88, 116, 'enemy'),
+  ...V65_ENEMY_PROFILE_SPRITE_SHEETS,
   'vehicle.m577-apc.action': sheet('vehicle.m577-apc.action', 'apc', '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png', 'apc-action', 'vehicle-ground', 'apc-hull', 250, 140, 'vehicle'),
   'vehicle.m577-command-apc.action': sheet('vehicle.m577-command-apc.action', 'm577Command', '/assets/openai/sprites/normalized/vehicles/m577-command-apc-action-sheet.png', 'm577-command-action-v55', 'vehicle-ground', 'm577-command-hull', 250, 148, 'vehicle'),
   'vehicle.m22a3-jackson-tank.action': sheet('vehicle.m22a3-jackson-tank.action', 'm22a3Jackson', '/assets/openai/sprites/normalized/vehicles/m22a3-jackson-tank-action-sheet.png', 'm22a3-tank-action-v55', 'vehicle-ground', 'm22a3-tank-hull', 292, 150, 'vehicle'),
@@ -576,12 +584,9 @@ export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { r
 }
 
 const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
+  'enemy-action-v54',
   'enemy-action-v56',
-  'newborn-action-v64',
-  'offspring-action-v64',
-  'predalien-action-v64'
-]);
-const V64_HYBRID_ACTION_CLIP_SETS = new Set([
+  'facehugger-action-v65',
   'newborn-action-v64',
   'offspring-action-v64',
   'predalien-action-v64'
@@ -592,7 +597,7 @@ export function resolveEnemyAnimation(enemy = {}) {
   const dead = !enemy.alive;
   const attacking = Boolean(enemy.attacking);
   const moving = Math.abs(enemy.vx || 0) > 8 || Boolean(enemy.alert);
-  const v54ActionClip = dead || hurt ? 'death' : attacking ? 'attack' : moving ? 'chase' : 'idle';
+  const v54ActionClip = dead ? 'death' : hurt ? 'idle' : attacking ? 'attack' : moving ? 'chase' : 'idle';
   const dedicatedClipSet = typeof enemy.visualSheetId === 'string'
     ? SPRITE_SHEETS[enemy.visualSheetId]?.clipSet
     : null;
@@ -600,12 +605,13 @@ export function resolveEnemyAnimation(enemy = {}) {
     ? enemy.visualSheetId
     : null;
   if (dedicatedActionSheet) {
-    if (V64_HYBRID_ACTION_CLIP_SETS.has(dedicatedClipSet) && hurt && !dead) {
+    // No injury row exists on these atlases: keep the actor alive visually.
+    if (hurt && !dead) {
       return { sheetId: dedicatedActionSheet, clipId: 'idle', reaction: 'hurt' };
     }
     return { sheetId: dedicatedActionSheet, clipId: v54ActionClip };
   }
-  if (enemy.spriteKey === 'ovomorph') return { sheetId: 'enemy.ovomorph.cycle', clipId: dead || hurt ? 'destroyed' : attacking ? 'hatch' : moving ? 'opening' : 'sealed' };
+  if (enemy.spriteKey === 'ovomorph') return { sheetId: 'enemy.ovomorph.cycle', clipId: dead ? 'destroyed' : attacking ? 'hatch' : moving ? 'opening' : 'sealed' };
   const v55Enemies = {
     xenoPraetorian: 'enemy.xenomorph-praetorian.action',
     xenoSpitter: 'enemy.xenomorph-spitter.action',

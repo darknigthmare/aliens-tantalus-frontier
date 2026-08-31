@@ -7,6 +7,7 @@ const port = Number(process.env.PORT || 4173);
 const mime = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png',
+  '.webp': 'image/webp', '.gif': 'image/gif',
   '.webmanifest': 'application/manifest+json; charset=utf-8', '.md': 'text/markdown; charset=utf-8'
 };
 
@@ -31,6 +32,11 @@ createServer(async (request, response) => {
     });
     response.end(body);
   } catch {
+    // Missing sprite/module requests must not look like successful HTML pages.
+    if (extname(file) || request.url?.startsWith('/assets/')) {
+      response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('Not found');
+      return;
+    }
     try {
       const body = await readFile(join(root, 'index.html'));
       response.writeHead(200, { 'content-type': mime['.html'], 'cache-control': 'no-store' });

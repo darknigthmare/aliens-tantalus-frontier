@@ -1,4 +1,4 @@
-import { SPRITE_SHEETS, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
+import { SPRITE_SHEETS, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
 import {
   advanceEnemyMeleeAttackV64,
@@ -22,6 +22,8 @@ import {
 } from './weapon-visual-runtime-v63.js';
 import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56.js';
 import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door-art-v58.js';
+import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
+import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -42,6 +44,7 @@ const EDITOR_TILE_TYPES = new Set(['floor', 'platform', 'wall', 'door', 'vent', 
 const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
   'enemy-action-v54',
   'enemy-action-v56',
+  'facehugger-action-v65',
   'ovomorph-cycle-v55',
   'newborn-action-v64',
   'offspring-action-v64',
@@ -141,6 +144,12 @@ const ASSETS = Object.freeze({
   ...MISSION_INTERACTIVE_ART_FILES_V56,
   ...MISSION_STRUCTURAL_PROP_FILES
 });
+const ENEMY_SPRITE_PATHS = new Set(Object.values(SPRITE_SHEETS)
+  .filter((entry) => entry.family === 'enemy')
+  .map((entry) => entry.path));
+const EAGER_ASSETS = Object.freeze(Object.fromEntries(
+  Object.entries(ASSETS).filter(([, source]) => !ENEMY_SPRITE_PATHS.has(source))
+));
 
 const PLATFORM_LAYOUT = Object.freeze([
   { x: 340, y: 816, w: 290, h: 24, art: 'catwalk' },
@@ -274,14 +283,22 @@ export class GameEngine {
     this.keys = new Set();
     this.running = false;
     this.paused = false;
+    this.enemyAtlasLoadingPausedV65 = false;
     this.last = 0;
     this.animationTime = 0;
     this.room = 0;
     this.trackerPulse = 0;
     this.coopEnabled = false;
-    this.images = new Map(Object.entries(ASSETS).map(([name, source]) => [name, createImage(source)]));
+    this.images = new Map(Object.entries(EAGER_ASSETS).map(([name, source]) => [name, createImage(source)]));
+    this.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: this.images });
     this.fallbackBackground = createImage('/assets/openai/tantalus-base-environment.png');
     this.bind();
+  }
+
+  ensureEnemyAtlas(sheetOrId) {
+    const sheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
+    if (!sheet || sheet.family !== 'enemy') return Promise.resolve(null);
+    return this.enemyAtlasLRUV65.ensure(sheet);
   }
 
   bind() {
@@ -395,6 +412,7 @@ export class GameEngine {
     };
     this.running = true;
     this.paused = false;
+    this.enemyAtlasLoadingPausedV65 = false;
     this.last = performance.now();
     this.animationTime = 0;
     requestAnimationFrame((time) => this.loop(time));
@@ -566,7 +584,11 @@ export class GameEngine {
     this.toolPickup.taken = this.vents.every((vent) => !vent.requiresTool);
   }
 
-  stop() { this.running = false; }
+  stop() {
+    this.running = false;
+    this.enemyAtlasLoadingPausedV65 = false;
+    this.enemyAtlasLRUV65?.setWorkingSet([]);
+  }
   togglePause() { if (this.running) this.paused = !this.paused; }
   setCoop(enabled) { this.coopEnabled = Boolean(enabled); }
 
@@ -574,7 +596,8 @@ export class GameEngine {
     if (!this.running) return;
     const delta = Math.min(0.034, (time - this.last) / 1000 || 0);
     this.last = time;
-    if (!this.paused) this.update(delta);
+    this.refreshEnemyAtlasAvailabilityV65();
+    if (!this.paused && !this.enemyAtlasLoadingPausedV65) this.update(delta);
     this.draw();
     requestAnimationFrame((next) => this.loop(next));
   }
@@ -795,6 +818,7 @@ export class GameEngine {
   }
 
   updateEnemy(enemy, delta) {
+    if (updateFacehuggerCombatV65(this, enemy, delta)) return;
     if (!enemy.alive) return;
     enemy.attackClock -= delta;
     enemy.rangedClock -= delta;
@@ -1552,7 +1576,7 @@ export class GameEngine {
     ctx.restore();
     this.drawForeground(ctx);
     this.drawHud(ctx);
-    if (this.paused || this.mission?.state === 'failed' || this.mission?.state === 'complete') this.drawStateOverlay(ctx);
+    if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state === 'failed' || this.mission?.state === 'complete') this.drawStateOverlay(ctx);
     ctx.restore();
   }
 
@@ -1643,7 +1667,48 @@ export class GameEngine {
     ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
   }
 
+  getVisibleEnemiesV65() {
+    return this.enemies.filter((enemy) => {
+      if (enemy.dormant || (!enemy.alive && !(enemy.deathClock > 0))) return false;
+      if (!this.camera) return true;
+      const request = resolveEnemyAnimation(enemy);
+      const sheet = resolveSpriteSheet(request?.sheetId || enemy.visualSheetId);
+      const width = Math.max(Number(enemy.w) || 0, sheet?.renderWidth || 224);
+      const height = Math.max(Number(enemy.h) || 0, sheet?.renderHeight || 170);
+      const left = enemy.x + enemy.w / 2 - width / 2;
+      const top = enemy.y + enemy.h - height;
+      return left + width >= this.camera.x - 64 && left <= this.camera.x + LOGICAL_WIDTH + 64
+        && top + height >= this.camera.y - 64 && top <= this.camera.y + LOGICAL_HEIGHT + 64;
+    });
+  }
+
+  getVisibleEnemyAtlasSheetsV65(visibleEnemies = this.getVisibleEnemiesV65()) {
+    return [
+      ...visibleEnemies.map((enemy) => resolveSpriteSheet(resolveEnemyAnimation(enemy)?.sheetId || enemy.visualSheetId)),
+      ...[this.player, this.coopEnabled ? this.coop : null]
+        .filter((actor) => actor?.neuroVisualContract?.sheetId)
+        .map((actor) => resolveSpriteSheet(actor.neuroVisualContract.sheetId))
+    ].filter((sheet) => sheet?.family === 'enemy');
+  }
+
+  refreshEnemyAtlasAvailabilityV65() {
+    const loader = this.enemyAtlasLRUV65;
+    if (!loader) return;
+    const sheets = this.getVisibleEnemyAtlasSheetsV65();
+    loader.setWorkingSet(sheets);
+    const unavailable = sheets.filter((sheet) => {
+      const record = loader.recordStatus(sheet);
+      return record && record.status !== 'ready' && record.consecutiveFailures > 0;
+    });
+    // Continuer les essais pendant la pause réseau, indépendamment de P/Échap.
+    // La simulation ne redémarre qu'après chargement, sans retirer la pause utilisateur.
+    for (const sheet of unavailable) void this.ensureEnemyAtlas(sheet);
+    this.enemyAtlasLoadingPausedV65 = unavailable.length > 0;
+  }
+
   drawWorld(ctx) {
+    const visibleEnemies = this.getVisibleEnemiesV65();
+    this.enemyAtlasLRUV65?.setWorkingSet(this.getVisibleEnemyAtlasSheetsV65(visibleEnemies));
     this.drawFloors(ctx);
     this.drawMaintenancePipes(ctx);
     for (const platform of this.platforms.filter((item) => !item.floor)) this.drawPlatform(ctx, platform);
@@ -1662,7 +1727,7 @@ export class GameEngine {
     this.drawToolPickup(ctx);
     if (!this.player.inVehicle) this.drawActor(ctx, this.player);
     if (this.coopEnabled && !this.coop.inVehicle) this.drawActor(ctx, this.coop);
-    for (const enemy of this.enemies) if (enemy.alive || enemy.deathClock > 0) this.drawEnemy(ctx, enemy);
+    for (const enemy of visibleEnemies) this.drawEnemy(ctx, enemy);
     for (const bullet of this.bullets) this.drawBullet(ctx, bullet);
     for (const projectile of this.hostileProjectiles) this.drawHostileProjectile(ctx, projectile);
     for (const particle of this.particles) {
@@ -1935,6 +2000,14 @@ export class GameEngine {
       row = enemy.alive ? enemy.hurtClock > 0 ? 0 : enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3;
       const fps = row === 0 ? 4 : row === 3 ? 7 : 10;
       frame = Math.floor(this.animationTime * fps) % 4;
+      if (dedicatedEnemySheet.clipSet === 'facehugger-action-v65') {
+        this.enemyFallbackAnimationV65 ||= new SpriteAnimationController();
+        const sample = this.enemyFallbackAnimationV65.sample(
+          enemy.id, resolveEnemyAnimation(enemy), this.animationTime, { emit: false }
+        );
+        frame = sample.column;
+        row = sample.row;
+      }
       renderWidth = dedicatedEnemySheet.renderWidth;
       renderHeight = dedicatedEnemySheet.renderHeight;
     }
@@ -1956,12 +2029,20 @@ export class GameEngine {
     else if (enemy.biology === 'human') image = this.images.get('human');
     else if (enemy.biology === 'synthetic') image = this.images.get('synthetic');
     else { image = this.images.get('pathogen'); renderWidth = 132; renderHeight = 96; }
+    if (sheetId && this.enemyAtlasLRUV65) image = this.enemyAtlasLRUV65.get(resolveSpriteSheet(sheetId)) || image;
+    if (!ready(image) && sheetId) {
+      const enemySheet = resolveSpriteSheet(sheetId);
+      if (enemySheet?.family === 'enemy') {
+        void this.ensureEnemyAtlas(enemySheet);
+        return;
+      }
+    }
     const x = enemy.x + enemy.w / 2 - renderWidth / 2;
     const y = enemy.y + enemy.h - renderHeight * (240 / CELL_SIZE);
     ctx.save();
     if (!enemy.alive) ctx.globalAlpha = clamp(enemy.deathClock / 1.2, 0.25, 1);
     if (enemy.revealed > 0) { ctx.shadowColor = '#8fe7a8'; ctx.shadowBlur = 16; }
-    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, shouldFlipSprite(sheetId, enemy.facing));
+    this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, shouldFlipSprite(sheetId, enemy.facing), dedicatedEnemySheet);
     ctx.restore();
     if (enemy.alive && (enemy.alert || enemy.isBoss)) {
       ctx.fillStyle = '#2b1616'; ctx.fillRect(enemy.x, enemy.y - 10, enemy.w, 4);
@@ -1999,10 +2080,10 @@ export class GameEngine {
     ctx.beginPath(); ctx.arc(this.objective.x, this.objective.y - 14, 5 + Math.sin(this.animationTime * 4) * 2, 0, Math.PI * 2); ctx.fill();
   }
 
-  drawSheetCell(ctx, image, column, row, x, y, width, height, flip) {
+  drawSheetCell(ctx, image, column, row, x, y, width, height, flip, grid = null) {
     if (!ready(image)) return;
-    const cellWidth = image.naturalWidth / 4;
-    const cellHeight = image.naturalHeight / 4;
+    const cellWidth = image.naturalWidth / (grid?.columns || 4);
+    const cellHeight = image.naturalHeight / (grid?.rows || 4);
     ctx.save();
     if (flip) {
       ctx.translate(x + width, y); ctx.scale(-1, 1);
@@ -2098,10 +2179,13 @@ export class GameEngine {
     ctx.fillStyle = 'rgba(2, 7, 6, .8)'; ctx.fillRect(0, 0, LOGICAL_WIDTH, LOGICAL_HEIGHT);
     ctx.fillStyle = this.mission?.state === 'failed' ? '#d66b60' : '#d8e6d8';
     ctx.font = '700 38px sans-serif'; ctx.textAlign = 'center';
-    const title = this.paused ? 'OPÉRATION EN PAUSE' : this.mission?.state === 'failed' ? 'ESCOUADE HORS COMBAT' : 'EXTRACTION CONFIRMÉE';
+    const title = this.enemyAtlasLoadingPausedV65 ? 'Sprite indisponible — nouvelle tentative…'
+      : this.paused ? 'OPÉRATION EN PAUSE' : this.mission?.state === 'failed' ? 'ESCOUADE HORS COMBAT' : 'EXTRACTION CONFIRMÉE';
     ctx.fillText(title, LOGICAL_WIDTH / 2, 318);
     ctx.font = '18px monospace'; ctx.fillStyle = '#83d5a1';
-    const subtitle = this.paused ? 'P / ÉCHAP pour reprendre' : this.mission?.state === 'failed' ? `ENTRÉE · reprendre au checkpoint ${this.checkpoint.id}` : `${this.mission.rewards?.credits || 0} CR · ${this.mission.rewards?.salvage || 0} récupération · ${this.mission.rewards?.intel || 0} données`;
+    const subtitle = this.enemyAtlasLoadingPausedV65
+      ? this.paused ? 'PAUSE UTILISATEUR ACTIVE · chargement en cours' : 'Simulation suspendue · reprise après chargement du sprite'
+      : this.paused ? 'P / ÉCHAP pour reprendre' : this.mission?.state === 'failed' ? `ENTRÉE · reprendre au checkpoint ${this.checkpoint.id}` : `${this.mission.rewards?.credits || 0} CR · ${this.mission.rewards?.salvage || 0} récupération · ${this.mission.rewards?.intel || 0} données`;
     ctx.fillText(subtitle, LOGICAL_WIDTH / 2, 365); ctx.textAlign = 'left';
   }
 

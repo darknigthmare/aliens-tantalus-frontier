@@ -1,4 +1,5 @@
 import { GameEngine as ProductionBaseEngine } from './game-production-base.js';
+import { FACEHUGGER_COMBAT_V65, isFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 
 export * from './game-production-base.js';
 
@@ -194,7 +195,11 @@ export class GameEngine extends ProductionBaseEngine {
         alert: Boolean(enemy.alert),
         revealed: bounded(enemy.revealed, 0, 0, 120),
         captured: Boolean(enemy.captured),
-        deathClock: bounded(enemy.deathClock, 0, 0, 30)
+        deathClock: bounded(enemy.deathClock, 0, 0, 30),
+        ...(isFacehuggerCombatV65(enemy) ? {
+          attackClock: bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown),
+          facehuggerAttackActiveV65: Boolean(enemy.facehuggerAttackV65)
+        } : {})
       })),
       drops: asList(this.drops).map((drop) => ({
         id: safeId(drop.id), type: safeId(drop.type), amount: bounded(drop.amount, 0, 0, 999999),
@@ -284,6 +289,18 @@ export class GameEngine extends ProductionBaseEngine {
       enemy.alive = source.alive !== false && !enemy.captured;
       enemy.health = enemy.alive ? bounded(source.health, enemy.health, 1, enemy.maxHealth) : 0;
       enemy.deathClock = enemy.alive ? 0 : bounded(source.deathClock, enemy.deathClock || 0, 0, 30);
+      if (isFacehuggerCombatV65(enemy)) {
+        // A saved leap resumes at rest: never replay its target lock or impact.
+        const existingCooldown = bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown);
+        enemy.attackClock = Math.max(
+          bounded(source.attackClock, existingCooldown, 0, FACEHUGGER_COMBAT_V65.cooldown),
+          source.facehuggerAttackActiveV65 === true ? FACEHUGGER_COMBAT_V65.duration : 0
+        );
+        enemy.facehuggerAttackV65 = null;
+        enemy.attacking = false;
+        enemy.attackAnimationClock = 0;
+        enemy.attackWindupClock = 0;
+      }
       restored += 1;
     }
 

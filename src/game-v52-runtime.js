@@ -15,6 +15,8 @@ import {
   spriteRuntimeReport
 } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
+import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
+import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import {
   advanceEnemyMeleeAttackV64,
   armEnemyMeleeAttackV64,
@@ -401,8 +403,11 @@ export function withV52MissionRuntime(BaseEngine) {
       };
       this.spriteAnimation = new SpriteAnimationController({ onEvent: (payload) => this.handleSpriteFrameEvent(payload) });
       this.spriteRuntime = { report: spriteRuntimeReport() };
-      if (!this.images || typeof globalThis.Image !== 'function') return;
+      if (!this.images) return;
+      if (!this.enemyAtlasLRUV65) this.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: this.images });
+      if (typeof globalThis.Image !== 'function') return;
       for (const entry of Object.values(SPRITE_SHEETS)) {
+        if (entry.family === 'enemy') continue;
         if (this.images.has(entry.imageKey)) continue;
         const image = new globalThis.Image();
         image.decoding = 'async';
@@ -882,6 +887,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateEnemyAgainstSquad(enemy, target, delta) {
+      if (updateFacehuggerCombatV65(this, enemy, delta)) return;
       if (!enemy?.alive) return;
       if (enemy.pendingMelee && resolveEnemyMeleeTargetIdV64(target) !== enemy.pendingMeleeTargetId) {
         target = asList(this.squadActors).find((member) => resolveEnemyMeleeTargetIdV64(member) === enemy.pendingMeleeTargetId) || null;
@@ -2030,6 +2036,13 @@ export function withV52MissionRuntime(BaseEngine) {
       }
     }
 
+    ensureEnemyAtlas(sheetOrId) {
+      const sheet = typeof sheetOrId === 'string' ? resolveSpriteSheet(sheetOrId) : sheetOrId;
+      if (!sheet || sheet.family !== 'enemy' || !this.images) return Promise.resolve(null);
+      if (!this.enemyAtlasLRUV65) this.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: this.images });
+      return this.enemyAtlasLRUV65.ensure(sheet);
+    }
+
     drawSquadActor(ctx, member) {
       const request = resolveIdentitySafeNpcAnimationV57(member);
       const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
@@ -2052,13 +2065,18 @@ export function withV52MissionRuntime(BaseEngine) {
     drawSpriteSample(ctx, sample, entity) {
       if (!ctx || !sample || !entity) return false;
       const entry = sample.sheet;
-      const image = this.images?.get(entry.imageKey);
-      if (!imageReady(image)) return false;
+      const image = entry.family === 'enemy' && this.enemyAtlasLRUV65
+        ? this.enemyAtlasLRUV65.get(entry)
+        : this.images?.get(entry.imageKey);
+      if (!imageReady(image)) {
+        if (entry.family === 'enemy') void this.ensureEnemyAtlas(entry);
+        return false;
+      }
       const runtime = buildSpriteHitboxRuntime(entity, entry);
       if (!runtime) return false;
       const { flip, sprite } = runtime;
-      const sourceWidth = (image.naturalWidth || image.width) / SPRITE_GRID.columns;
-      const sourceHeight = (image.naturalHeight || image.height) / SPRITE_GRID.rows;
+      const sourceWidth = (image.naturalWidth || image.width) / entry.columns;
+      const sourceHeight = (image.naturalHeight || image.height) / entry.rows;
       ctx.save();
       if (flip) {
         ctx.translate(sprite.x + sprite.width, sprite.y);
@@ -2239,7 +2257,8 @@ export function withV52MissionRuntime(BaseEngine) {
           fallbackFamilies: [...this.animationTelemetry.fallbackFamilies],
           frameEffects: this.animationTelemetry.frameEffects,
           approximatedEnemyVisuals: [...this.animationTelemetry.approximatedEnemyVisuals],
-          controller: this.spriteAnimation?.snapshot() || []
+          controller: this.spriteAnimation?.snapshot() || [],
+          enemyAtlasCacheV65: this.enemyAtlasLRUV65?.snapshot() || null
         } : null
       };
     }

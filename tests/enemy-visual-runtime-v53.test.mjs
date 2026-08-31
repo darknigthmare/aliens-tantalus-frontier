@@ -101,7 +101,8 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   });
   assert.deepEqual(report.byImageKey, { neuroXeno: 22, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
-    exact: 30,
+    exact: 29,
+    'source-locked-adaptation': 1,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 516

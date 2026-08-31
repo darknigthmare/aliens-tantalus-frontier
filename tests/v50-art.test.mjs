@@ -4,18 +4,13 @@ import { access, readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
+import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
-const v64QaOnlySpriteRoots = Object.freeze([
-  'assets/openai/sprites/frames/v64/',
-  'assets/openai/sprites/reference-masters/v64/',
-  'assets/openai/sprites/previews/v64/',
-  'assets/openai/sprites/metadata/v64/'
-]);
-const isV64QaOnlySpritePath = (file) => v64QaOnlySpriteRoots.some((root) => file.startsWith(root));
+const includeBuildAsset = createBuildAssetFilter(repoRoot);
 
 const [
   manifest,
@@ -120,11 +115,11 @@ test('the shared sprite manifest covers every deployed raw and normalized sheet 
   const allPngs = await listPngFiles(spriteRoot);
   const rawFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => !file.includes('/normalized/') && !file.includes('/sprites/raw/') && !isV64QaOnlySpritePath(file))
+    .filter((file) => !file.includes('/normalized/') && includeBuildAsset(resolve(repoRoot, file)))
     .sort();
   const normalizedFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => file.includes('/normalized/') && !file.includes('/normalized/equipment/'))
+    .filter((file) => file.includes('/normalized/') && includeBuildAsset(resolve(repoRoot, file)))
     .sort();
 
   assert.deepEqual(

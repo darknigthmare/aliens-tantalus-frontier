@@ -1,0 +1,304 @@
+{
+  "schema": 65,
+  "auditedOn": "2026-08-31",
+  "scope": "Static runtime asset inventory; filesystem existence and SHA-256 byte uniqueness. No image-level fidelity or animation smoothness certification.",
+  "sources": [
+    "src/sprite-animation-runtime.js",
+    "src/catalog-runtime-v62.js",
+    "src/enemy-profile-registry-v65.js",
+    "src/enemy-profile-assets-v65.js",
+    "src/npc-mission-runtime-v55.js",
+    "src/content-core-v50.js",
+    "src/weapon-visual-runtime-v63.js",
+    "src/vehicle-deployment-gates-v60.js"
+  ],
+  "registeredAtlases": {
+    "sheets": 196,
+    "baselineManifestSheets": 195,
+    "addedAcceptedV65Sheets": 1,
+    "uniquePhysicalPaths": 196,
+    "uniqueSha256Contents": 196,
+    "totalBytes": 105597574,
+    "declaredCells": 2804,
+    "missingPaths": [],
+    "duplicateFileContents": []
+  },
+  "registeredByFamily": {
+    "player": {
+      "sheets": 5,
+      "uniquePhysicalFiles": 5,
+      "declaredCells": 80
+    },
+    "enemy": {
+      "sheets": 57,
+      "uniquePhysicalFiles": 57,
+      "declaredCells": 928
+    },
+    "vehicle": {
+      "sheets": 37,
+      "uniquePhysicalFiles": 37,
+      "declaredCells": 592
+    },
+    "weapon": {
+      "sheets": 36,
+      "uniquePhysicalFiles": 36,
+      "declaredCells": 576
+    },
+    "equipment": {
+      "sheets": 29,
+      "uniquePhysicalFiles": 29,
+      "declaredCells": 116
+    },
+    "npc": {
+      "sheets": 32,
+      "uniquePhysicalFiles": 32,
+      "declaredCells": 512
+    }
+  },
+  "enemyCoverage": {
+    "catalogProfiles": 571,
+    "baseArchetypes": 55,
+    "systemicModifierProfilesReusingBaseArt": 516,
+    "baseIdentityMetadata": {
+      "exact": 29,
+      "source-locked-adaptation": 1,
+      "project-adaptation": 18,
+      "project-original": 7
+    },
+    "modernResolvedCatalogProfiles": 538,
+    "modernUniqueResolvedFiles": 53,
+    "legacyResolvedProfiles": 33,
+    "legacySharedFiles": [
+      {
+        "path": "/assets/openai/neuro-xeno-animation-sheet.png",
+        "bytes": 931296,
+        "subjects": [
+          "Red Xenomorph",
+          "K-Series Yellow Xenomorph"
+        ]
+      },
+      {
+        "path": "/assets/openai/synthetic-android-animation-sheet.png",
+        "bytes": 788648,
+        "subjects": [
+          "Combat Synthetic"
+        ]
+      }
+    ],
+    "physicalLegacyFilesMissing": [],
+    "v65AcceptedProfiles": 1,
+    "acceptedFacehugger": {
+      "profileId": "enemy-002-facehugger",
+      "productionSourceBoards": 4,
+      "runtimeAtlases": 1,
+      "previewClipWebpFiles": 4,
+      "previewClipFilesCountedAsRuntime": false,
+      "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+      "sha256": "6c945329f8e03e3473bba35367a99773cc8fecb115df508bfc06ebe4a67eab27",
+      "bytes": 394226,
+      "size": [1024, 2048],
+      "grid": { "columns": 4, "rows": 8, "cellWidth": 256, "cellHeight": 256, "guard": 16 },
+      "clipSet": "facehugger-action-v65",
+      "clipFrames": { "idle": [0, 7], "scuttle": [8, 15], "attack": [16, 23], "death": [24, 31] },
+      "uniqueRgbaCellHashes": 32,
+      "sharedScale": 0.507937,
+      "pivot": [128, 240],
+      "interpolatedFrames": 0,
+      "duplicatedFrames": 0,
+      "sourceMastersPreserved": true,
+      "cellQualityFindings": [],
+      "sourceFragmentReassignment": {
+        "fromCombinedCell": 21,
+        "toCombinedCell": 20,
+        "sourceBoundsGlobal": [444, 630, 458, 645],
+        "pixels": 170,
+        "pixelValuesPreserved": true,
+        "reason": "Source inspection and cross-boundary connectivity identify the fingertip as part of pose20; no anatomy was discarded."
+      },
+      "metadata": "/assets/openai/sprites/metadata/v65/facehugger-motion/enemy-002-facehugger.json",
+      "referenceStatus": "CANON_REFERENCE_ADAPTATION",
+      "canonExact": false,
+      "fullCharacterComplete": false,
+      "acceptanceScope": "Four core motion clips for one standard enemy profile; not 500 sheets or all Facehugger variants."
+    },
+    "v65PendingPhysicalWebpFiles": 10,
+    "v65PendingUniqueSha256Contents": 10,
+    "v65PendingBytes": 2038104,
+    "v65PendingProfiles": [
+      "enemy-053-albino-ovomorph",
+      "enemy-105-armored-ovomorph",
+      "enemy-157-acid-blooded-ovomorph",
+      "enemy-209-cryo-adapted-ovomorph",
+      "enemy-261-vacuum-adapted-ovomorph",
+      "enemy-313-hive-guard-ovomorph",
+      "enemy-365-apex-ovomorph",
+      "enemy-417-juvenile-ovomorph",
+      "enemy-469-elder-ovomorph",
+      "enemy-521-neuro-linked-ovomorph"
+    ],
+    "pendingReason": "The ten Ovomorph variant files exist on disk but are absent from V65_READY_ENEMY_PROFILE_ASSETS; only the standard Facehugger profile is accepted and runtime-registered.",
+    "concreteArtPriorities": [
+      "Dedicated modern Red Xenomorph action atlas",
+      "Dedicated modern K-Series Yellow Xenomorph action atlas",
+      "Dedicated modern Combat Synthetic action atlas",
+      "Accept or reject the ten pending Ovomorph variants after grid/identity/animation review",
+      "Dedicated modifier artwork for the remaining 516 systemic profiles; catalog records are not new physical art"
+    ]
+  },
+  "weaponCoverage": {
+    "catalogProfiles": 146,
+    "baseIdentities": 40,
+    "resolvedProfiles": 130,
+    "uniquePhysicalFiles": 36,
+    "profilesWithoutDedicatedVisual": 16,
+    "missingBases": [
+      {
+        "id": "weapon-016-heavy-pulse-rifle",
+        "name": "Heavy Pulse Rifle"
+      },
+      {
+        "id": "weapon-020-es-4-electroshock-pistol",
+        "name": "ES-4 Electroshock Pistol"
+      },
+      {
+        "id": "weapon-023-compound-bow",
+        "name": "Compound Bow"
+      },
+      {
+        "id": "weapon-025-plasma-rifle",
+        "name": "Plasma Rifle"
+      }
+    ],
+    "referenceStatusOf36BaseAtlases": {
+      "CANON_REFERENCE": 23,
+      "PROJECT_ORIGINAL": 7,
+      "CANON_REFERENCE_RECONSTRUCTION": 5,
+      "CANON_REFERENCE_ADAPTATION": 1
+    },
+    "qualifiedNotExactReferenceClaims": [
+      {
+        "name": "M42A Scope Rifle",
+        "status": "CANON_REFERENCE_RECONSTRUCTION"
+      },
+      {
+        "name": "M6B Rocket Launcher",
+        "status": "CANON_REFERENCE_RECONSTRUCTION"
+      },
+      {
+        "name": "M83 SADAR",
+        "status": "CANON_REFERENCE_RECONSTRUCTION"
+      },
+      {
+        "name": "M5 RPG",
+        "status": "CANON_REFERENCE_RECONSTRUCTION"
+      },
+      {
+        "name": "Harpoon Gun / ASSO-400",
+        "status": "CANON_REFERENCE_RECONSTRUCTION"
+      },
+      {
+        "name": "Type 88 Heavy Assault Rifle",
+        "status": "CANON_REFERENCE_ADAPTATION"
+      }
+    ],
+    "variantNote": "130 resolved catalog entries share 36 base atlas files; a distinct catalog mark does not establish distinct artwork."
+  },
+  "vehicleCoverage": {
+    "catalogProfiles": 279,
+    "baseChassis": 36,
+    "runtimeResolvedProfiles": 255,
+    "runtimeBaseChassisFiles": 33,
+    "additionalAccessDamageAtlases": 4,
+    "registeredPhysicalFiles": 37,
+    "referenceBlockedProfiles": 24,
+    "referenceBlockedBases": [
+      {
+        "id": "vehicle-003-m570-armored-personnel-carrier",
+        "name": "M570 Series APC",
+        "status": "BLOCKED_NO_PUBLISHED_SILHOUETTE"
+      },
+      {
+        "id": "vehicle-006-m292-combat-buggy",
+        "name": "M292 Self-Propelled Artillery",
+        "status": "BLOCKED_SINGLE_LEFT_PROFILE"
+      },
+      {
+        "id": "vehicle-011-ad-19cd-dropship",
+        "name": "AD-19D Bearcat VTOL Strikeship",
+        "status": "BLOCKED_VARIANT_AND_REAR_GEOMETRY_UNRESOLVED"
+      }
+    ],
+    "catalogResolvedProfiles": 255,
+    "catalogUniqueFiles": 33,
+    "catalogOnlyWiringFix": {
+      "baseId": "vehicle-001-m577-armored-personnel-carrier",
+      "name": "M577 Armored Personnel Carrier",
+      "affectedProfiles": 8,
+      "status": "fixed-and-verified",
+      "path": "/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png",
+      "note": "All eight M577 catalog profiles now resolve the existing runtime atlas; no extra physical art is counted for this wiring correction."
+    },
+    "variantNote": "The same chassis atlas is reused across fits; fit-specific equipment and markings are not separately drawn."
+  },
+  "npcCoverage": {
+    "crewIdentities": 16,
+    "missionIdentityRecords": 16,
+    "uniqueMissionFiles": 16,
+    "uniqueLocomotionFiles": 16,
+    "missingRegisteredPaths": [],
+    "limitation": "The complete current sixteen-person roster has files. This does not certify unnamed civilians, future roster additions, costumes, or visual fidelity."
+  },
+  "equipmentCoverage": {
+    "catalogProfiles": 106,
+    "baseIdentities": 30,
+    "resolvedProfiles": 106,
+    "uniqueResolvedFiles": 30,
+    "dedicatedEquipmentFamilyAtlases": 29,
+    "note": "One resolved file is shared with the weapon family; grades reuse base art. Registered families must not be summed again as catalog identity counts."
+  },
+  "animationDensity": {
+    "countMethod": "Unique cell indices per declared clip, not unique visual poses; no image-level equivalence inference.",
+    "enemy": {
+      "clips": 228,
+      "uniqueCellCounts": {
+        "4": 224,
+        "8": 4
+      }
+    },
+    "weapon": {
+      "clips": 144,
+      "uniqueCellCounts": {
+        "4": 144
+      }
+    },
+    "vehicle": {
+      "clips": 148,
+      "uniqueCellCounts": {
+        "4": 148
+      }
+    },
+    "npc": {
+      "clips": 224,
+      "uniqueCellCounts": {
+        "1": 84,
+        "2": 28,
+        "3": 26,
+        "4": 86
+      }
+    },
+    "player": {
+      "clips": 21,
+      "uniqueCellCounts": {
+        "2": 2,
+        "4": 19
+      }
+    },
+    "limitation": "The accepted Facehugger adds four eight-cell cycles. Other enemy, weapon and vehicle cycles still use four cells; more coherent original in-between poses and transitions remain a production task."
+  },
+  "conclusions": [
+    "196 registered physical atlases are present and byte-distinct:195 baseline plus1 accepted V65 Facehugger atlas assembled from4 production boards.500 newly completed spritesheets cannot be claimed.",
+    "571 enemy profiles are generated catalog coverage, not 571 dedicated original animated identities.",
+    "No registered path is missing, but unresolved catalog entries, legacy art, shared variants, reference gates and animation density remain real gaps.",
+    "Metadata exact/identityVerified/releaseReady is a code claim only; this filesystem audit does not verify 1:1 appearance or commercial readiness."
+  ]
+}

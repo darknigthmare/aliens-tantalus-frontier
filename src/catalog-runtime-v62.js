@@ -12,7 +12,8 @@ import {
 import {
   resolveSpriteClip,
   resolveSpriteSheet,
-  resolveEnemyAnimation
+  resolveEnemyAnimation,
+  resolveVehicleAnimation
 } from './sprite-animation-runtime.js';
 import {
   resolveVehicleVisualAnimation,
@@ -215,11 +216,28 @@ function enemyVisual(entry) {
 
 function vehicleVisual(entry) {
   const v56Profile = resolveVehicleVisualProfileV56(entry);
-  const profile = v56Profile || resolveVehicleVisualProfile(entry);
-  if (!profile) return null;
+  let profile = v56Profile || resolveVehicleVisualProfile(entry);
   const animation = v56Profile
     ? resolveVehicleVisualAnimationV56(entry)
-    : resolveVehicleVisualAnimation(entry);
+    : profile ? resolveVehicleVisualAnimation(entry) : resolveVehicleAnimation(entry);
+  if (!profile) {
+    // Le M577 de base est enregistré dans le resolver de jeu antérieur à V55.
+    // Réutiliser cette identité exacte, jamais un APC générique pour un autre châssis.
+    const sheet = resolveSpriteSheet(animation?.sheetId);
+    if (sheet?.id !== 'vehicle.m577-apc.action') return null;
+    const standard = entry.fit === 'Standard';
+    profile = {
+      ...sheet,
+      sheetId: sheet.id,
+      family: entry.family,
+      identityStatus: standard ? 'exact' : 'authored-family',
+      identityVerified: standard && sheet.identityVerified === true,
+      referenceStatus: entry.referenceStatus,
+      approximate: !standard,
+      fallbackReason: standard ? null
+        : `Le fit ${entry.fit} réutilise la plaque du châssis M577 ; ses équipements et marquages ne sont pas dessinés séparément.`
+    };
+  }
   const idle = clipDescriptor(animation);
   return selectVisualFields(profile, idle, {
     category: knownString(profile.family || entry.family),

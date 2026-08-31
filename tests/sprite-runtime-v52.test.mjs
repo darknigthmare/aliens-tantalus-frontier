@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { CREW } from '../src/content.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
+import { spriteImageDimensions } from './helpers/sprite-image-dimensions.mjs';
 import {
   CREW_MISSION_SPRITE_IDS,
   CREW_SPRITE_IDS,
@@ -21,7 +23,7 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   const report = spriteRuntimeReport();
   assert.equal(report.invalid.length, 0);
   assert.equal(report.runtimeReady, report.sheets);
-  assert.equal(report.sheets, 195);
+  assert.equal(report.sheets, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length);
 
   const crewIds = new Set(CREW.map((member) => member.id));
   assert.deepEqual(new Set(Object.keys(CREW_SPRITE_IDS)), crewIds);
@@ -38,9 +40,10 @@ test('le registre v52 relie chaque membre d’équipage à une feuille normalis�
   }
 
   for (const sheet of Object.values(SPRITE_SHEETS)) {
-    const png = await readFile(localPath(sheet.path));
-    assert.equal(png.readUInt32BE(16), sheet.columns * sheet.cellWidth, sheet.path);
-    assert.equal(png.readUInt32BE(20), sheet.rows * sheet.cellHeight, sheet.path);
+    const bytes = await readFile(localPath(sheet.path));
+    const dimensions = spriteImageDimensions(bytes);
+    assert.equal(dimensions.width, sheet.columns * sheet.cellWidth, sheet.path);
+    assert.equal(dimensions.height, sheet.rows * sheet.cellHeight, sheet.path);
   }
 });
 

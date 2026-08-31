@@ -313,6 +313,72 @@ test('la mort du boss libère le sas aft verrouillé par ship-bridge-ambush', ()
   assert.equal(engine.doorRequirement(aft), '', 'le sas redevient actionnable');
 }));
 
+test('tuer le boss depuis l’habitation avant l’embuscade ne reverrouille pas le sas arrière', () => withBrowserMocks(() => {
+  const entry = PLAN_CASES.find((candidate) => candidate.templateId === 'ship-interior-vertical');
+  const plan = buildPlan(entry);
+  const engine = createEngine();
+  engine.start(optionsFor(plan, { equipment: [], crew: [], vehicle: null }));
+  const boss = engine.enemies.find((enemy) => enemy.isBoss && enemy.alive);
+  const aft = engine.doors.find((door) => door.id === 'aft-bulkhead');
+  assert.ok(boss && aft);
+  Object.assign(engine.player, { x: 2650, y: 330 - engine.player.h, facing: 1 });
+  engine.refreshMissionLevelZone(false);
+  assert.equal(engine.missionLevelVisualState.activeZoneId, 'ship-habitation');
+  assert.equal(engine.missionLevelEvents.get('ship-bridge-ambush').triggered, false);
+  const initialReserve = engine.player.ammoReserve;
+
+  // Isoler la balistique du déplacement IA : projectiles et réserve réels,
+  // sans retirer de santé au boss ni inventer des munitions pour le scénario.
+  for (let attempt = 0; attempt < 100 && boss.alive; attempt += 1) {
+    engine.player.fireClock = 0;
+    if (engine.player.reloading) engine.finishReload(engine.player);
+    engine.fire(engine.player);
+    for (let frame = 0; frame < 80; frame += 1) engine.updateBullets(1 / 60);
+  }
+  assert.equal(boss.alive, false, 'les tirs atteignent et tuent le boss depuis la salle adjacente');
+  assert.ok(engine.player.ammoReserve < initialReserve && engine.player.ammoReserve >= 0);
+  assert.equal(engine.mission.objectives.boss, true);
+  assert.equal(engine.missionLevelEvents.get('ship-bridge-ambush').triggered, false);
+
+  engine.player.x = 2850;
+  engine.refreshMissionLevelZone(false);
+  assert.equal(engine.missionLevelVisualState.activeZoneId, 'ship-command');
+  assert.equal(engine.missionLevelEvents.get('ship-bridge-ambush').triggerCount, 1);
+  assert.equal(engine.missionLevelSpawns.get('ship-command-wave').active, true, 'l’embuscade reste jouée');
+  assert.equal(aft.levelLocked, false, 'un boss déjà vaincu ne peut plus condamner le sas');
+  assert.equal(engine.doorRequirement(aft), '');
+}));
+
+test('la reprise répare le verrou de boss obsolète sans ouvrir les portes ni rejouer l’embuscade', () => withBrowserMocks(() => {
+  const entry = PLAN_CASES.find((candidate) => candidate.templateId === 'ship-interior-vertical');
+  const { plan, engine } = startCase(entry);
+  const boss = engine.enemies.find((enemy) => enemy.isBoss && enemy.alive);
+  engine.triggerMissionLevelEvent('ship-bridge-ambush', 'resume-regression');
+  engine.defeatEnemy(boss, engine.player);
+  const resumeState = JSON.parse(JSON.stringify(engine.captureResumeState()));
+  // État écrit par l’ancien ordre mort du boss -> entrée en passerelle.
+  const savedAft = resumeState.missionLevel.doors.find((door) => door.id === 'aft-bulkhead');
+  Object.assign(savedAft, { open: false, progress: 0, levelLocked: true });
+  const savedCargo = resumeState.missionLevel.doors.find((door) => door.id === 'cargo-bulkhead');
+  const resumed = createEngine();
+  resumed.start(optionsFor(plan, { resumeState }));
+  const aft = resumed.doors.find((door) => door.id === savedAft.id);
+  const cargo = resumed.doors.find((door) => door.id === savedCargo.id);
+  assert.equal(resumed.lastResumeResult.applied, true);
+  assert.equal(resumed.enemies.find((enemy) => enemy.id === boss.id).alive, false);
+  assert.equal(resumed.mission.objectives.boss, true);
+  assert.equal(aft.levelLocked, false, 'le verrou ancien ne peut pas survivre à son boss');
+  assert.equal(aft.open, false, 'le joueur conserve le contrôle physique de la porte');
+  assert.equal(aft.progress, 0);
+  assert.equal(resumed.doorRequirement(aft), '');
+  assert.deepEqual([cargo.open, cargo.progress, cargo.levelLocked], [savedCargo.open, savedCargo.progress, savedCargo.levelLocked]);
+  assert.ok(resumed.doorRequirement(cargo), 'le besoin de courant reste effectif');
+  assert.equal(resumed.missionLevelEvents.get('ship-bridge-ambush').triggerCount, 1);
+  assert.equal(resumed.player.ammoReserve, resumeState.player.ammoReserve);
+  assert.equal(resumed.player.kills, resumeState.player.kills);
+  assert.equal(resumed.drops.length, resumeState.drops.length, 'aucune récompense de boss supplémentaire');
+}));
+
 test('la sauvegarde restaure les verrous événementiels et l’état actif des dangers', () => withBrowserMocks(() => {
   const entry = PLAN_CASES.find((candidate) => candidate.templateId === 'ship-interior-vertical');
   const { plan, engine } = startCase(entry);

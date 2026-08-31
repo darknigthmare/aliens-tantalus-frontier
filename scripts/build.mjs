@@ -1,8 +1,10 @@
 import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { RELEASE, validateContent } from '../src/content.js';
+import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 
 const root = process.cwd();
+const assetFilter = createBuildAssetFilter(root);
 const output = join(root, 'dist');
 const validation = validateContent();
 if (!validation.ok) throw new Error(`Content contract failed: ${validation.failures.join(', ')}`);
@@ -13,7 +15,7 @@ for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-galler
   await cp(join(root, path), join(output, path));
 }
 for (const directory of ['src', 'assets', 'docs']) {
-  try { await cp(join(root, directory), join(output, directory), { recursive: true }); } catch (error) {
+  try { await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter }); } catch (error) {
     if (directory !== 'docs') throw error;
   }
 }
@@ -34,8 +36,8 @@ const assertBuildExclusion = async (...segments) => {
   }
   throw new Error(`Excluded build artifact is still present: ${excludedPath}`);
 };
-for (const segments of [['frames', 'v64'], ['reference-masters', 'v64'], ['previews', 'v64'], ['metadata', 'v64']]) {
-  await assertBuildExclusion('assets', 'openai', 'sprites', ...segments);
+for (const excludedPath of EXCLUDED_BUILD_ASSET_PATHS) {
+  await assertBuildExclusion(...excludedPath.split('/'));
 }
 const index = await readFile(join(output, 'index.html'), 'utf8');
 if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas')) throw new Error('Built shell is incomplete.');

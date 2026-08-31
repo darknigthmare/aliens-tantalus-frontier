@@ -93,7 +93,12 @@ def add_v64_cell_quality(report: dict) -> None:
 def main() -> None:
     args = parse_args()
     audit = load_base_audit()
-    report = audit.build_report(audit.ASSET_ROOT, audit.MANIFEST)
+    # Future production candidates are not V64 runtime PNGs. The separate
+    # V65 gate verifies accepted WebP pixels, alpha, cell geometry and sources.
+    report = audit.build_report(audit.ASSET_ROOT, audit.MANIFEST, ignored_production_prefixes=(
+        "sprites/frames/v65/", "sprites/reference-masters/v65/",
+        "sprites/previews/v65/", "sprites/metadata/v65/",
+    ))
     add_v64_cell_quality(report)
     report["release"] = "v64"
     report["generatedBy"] = "scripts/audit-png-alpha-v64.py"

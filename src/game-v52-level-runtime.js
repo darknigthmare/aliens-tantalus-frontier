@@ -18,6 +18,7 @@ import {
   selectVentBranchV62,
   selectVentExitV62
 } from './vent-network-v62.js';
+import { cancelFacehuggerAttackV65 } from './enemy-facehugger-combat-v65.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -1254,9 +1255,15 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     updateEnemy(enemy, delta) {
-      if (enemy?.dormant) return;
+      if (enemy?.dormant) {
+        cancelFacehuggerAttackV65(this, enemy, 'enemy-dormant');
+        return;
+      }
       if (!this.missionLevelRuntime || !enemy) return super.updateEnemy(enemy, delta);
-      if (enemy.ventTransit?.networkId === this.missionVentNetworkV62?.id) return;
+      if (enemy.ventTransit?.networkId === this.missionVentNetworkV62?.id) {
+        cancelFacehuggerAttackV65(this, enemy, 'enemy-in-vent');
+        return;
+      }
       const navigation = enemy.levelNavigation || (this.initializeEnemyMissionNavigation(enemy), enemy.levelNavigation);
       const previous = { x: enemy.x, y: enemy.y };
       const previousSurface = this.missionLevelSurfaceFor(enemy, { tolerance: 42, preferId: navigation.surfaceId })
@@ -1264,6 +1271,7 @@ export function withV52LevelRuntime(BaseEngine) {
       const initialTarget = this.missionLevelEnemyTarget(enemy);
       if (enemy.isBoss && initialTarget && entityDistance(enemy, initialTarget) <= 640) enemy.alert = true;
       if (!initialTarget) {
+        cancelFacehuggerAttackV65(this, enemy, 'target-invalid');
         enemy.attackClock -= delta;
         enemy.rangedClock -= delta;
         enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
@@ -1323,6 +1331,12 @@ export function withV52LevelRuntime(BaseEngine) {
         enemy.y = navigation.lastSafeY;
       }
       return result;
+    }
+
+    isMissionBossDoorCleared(door) {
+      return door?.lockedBy === 'boss'
+        && this.mission?.objectives?.boss === true
+        && !asList(this.enemies).some((enemy) => enemy.isBoss && (enemy.alive || enemy.dormant));
     }
 
     defeatEnemy(enemy, owner = this.player) {
@@ -1472,7 +1486,12 @@ export function withV52LevelRuntime(BaseEngine) {
         if (door) {
           if (kind === 'open') { door.open = true; door.levelLocked = false; }
           if (kind === 'close') door.open = false;
-          if (kind === 'lock') { door.open = false; door.levelLocked = true; }
+          if (kind === 'lock') {
+            // Un tir depuis une salle voisine peut vaincre le boss avant
+            // l'embuscade : sa mort reste acquise quel que soit cet ordre.
+            door.levelLocked = !this.isMissionBossDoorCleared(door);
+            if (door.levelLocked) door.open = false;
+          }
           this.missionLevelTelemetry.doorChanges += 1;
           return { action, changed: door.open, locked: door.levelLocked };
         }
@@ -1938,7 +1957,9 @@ export function withV52LevelRuntime(BaseEngine) {
         if (!saved) continue;
         door.open = Boolean(saved.open);
         door.progress = clamp(Number(saved.progress) || 0, 0, 1);
-        door.levelLocked = Boolean(saved.levelLocked);
+        // Réparer les sauvegardes où l'embuscade avait reverrouillé un sas
+        // après la mort du boss, sans ouvrir la porte ni consommer de ressource.
+        door.levelLocked = Boolean(saved.levelLocked) && !this.isMissionBossDoorCleared(door);
       }
       const savedHazards = new Map(asList(source.hazards).map((hazard) => [hazard.id, hazard]));
       for (const hazard of this.hazards || []) {

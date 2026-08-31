@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { existsSync } from 'node:fs';
+import { resolveSpriteSheet, resolveVehicleAnimation } from '../src/sprite-animation-runtime.js';
 
 import {
   BIOLOGICAL_RELATIONS_V62,
@@ -212,6 +214,49 @@ test('les vignettes utilisent les résolveurs existants et exposent leur cellule
       cellHeight: 256
     }, id);
     assert.match(visual.path, /^\/assets\/openai\/sprites\/normalized\//, id);
+  }
+});
+
+test('le catalogue M577 Standard et ses huit fits au total utilisent la vraie plaque du runtime', () => {
+  const fits = VEHICLES.filter((entry) => entry.id.includes('-m577-armored-personnel-carrier'));
+  assert.deepEqual(fits.map((entry) => entry.fit), ['Standard', 'Recon', 'Assault', 'Rescue', 'Colonial', 'Frontier', 'Prototype', 'Apex']);
+  const expectedPath = '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png';
+  assert.equal(existsSync(new URL(`..${expectedPath}`, import.meta.url)), true);
+  for (const entry of fits) {
+    const visual = getCatalogEntryV62(entry.id).visual;
+    const runtime = resolveVehicleAnimation(entry);
+    const sheet = resolveSpriteSheet(runtime.sheetId);
+    assert.ok(visual, entry.id);
+    assert.equal(visual.sheetId, 'vehicle.m577-apc.action', entry.id);
+    assert.equal(visual.sheetId, runtime.sheetId);
+    assert.equal(visual.path, expectedPath);
+    assert.equal(visual.path, sheet.path);
+    assert.equal(visual.imageKey, 'apc');
+    assert.deepEqual([visual.renderWidth, visual.renderHeight], [250, 140]);
+    assert.deepEqual(visual.grid, { columns: 4, rows: 4, cellWidth: 256, cellHeight: 256 });
+    assert.equal(visual.idleClip.clip.id, 'idle');
+    assert.deepEqual(visual.idleClip.clip.frames, [0, 1, 2, 3]);
+    assert.equal(visual.idleClip.firstCell.index, 0);
+    const standard = entry.fit === 'Standard';
+    assert.equal(visual.identity.status, standard ? 'exact' : 'authored-family');
+    assert.equal(visual.identity.exact, standard, 'un fit ne devient pas une nouvelle plaque exacte');
+    assert.equal(visual.identity.approximate, !standard);
+    assert.equal(visual.identity.referenceStatus, entry.referenceStatus);
+    if (!standard) assert.ok(visual.identity.fallbackReason.includes(entry.fit));
+  }
+});
+
+test('le raccordement catalogue M577 ne masque pas les trois châssis bloqués faute de références', () => {
+  const blocked = VEHICLES.filter((entry) => String(entry.visualStatus).startsWith('BLOCKED_'));
+  assert.deepEqual(blocked.filter((entry) => entry.fit === 'Standard').map((entry) => entry.id), [
+    'vehicle-003-m570-armored-personnel-carrier',
+    'vehicle-006-m292-combat-buggy',
+    'vehicle-011-ad-19cd-dropship'
+  ]);
+  assert.equal(blocked.length, 24, 'trois châssis et leurs huit fits restent explicitement bloqués');
+  for (const entry of blocked) {
+    assert.equal(getCatalogEntryV62(entry.id).visual, null, entry.id);
+    assert.equal(resolveVehicleAnimation(entry), null, entry.id);
   }
 });
 
