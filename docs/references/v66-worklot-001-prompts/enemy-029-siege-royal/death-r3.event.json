@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-029-siege-royal",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:d4c431b653bb0970c48865019eaf89d9e1e4bfac389203670bc7333b3dbe77d9",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "d4c431b653bb0970c48865019eaf89d9e1e4bfac389203670bc7333b3dbe77d9",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/death.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-029-siege-royal/death-r3.txt",
+  "candidateSelected": true,
+  "note": "Rigid fourth-cell translation retained the complete non-gory collapse. Visual chronology plus readonly audit_image: 8 distinct poses, opaque-magenta, no border contacts, default extraction pass. Candidate only."
+}

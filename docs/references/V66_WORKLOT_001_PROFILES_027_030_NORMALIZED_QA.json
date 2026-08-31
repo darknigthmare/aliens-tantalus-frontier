@@ -1,0 +1,269 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "auditedAt": "2026-09-01",
+  "scope": {
+    "profileIds": [
+      "enemy-027-reef-stalker",
+      "enemy-028-reef-spitter",
+      "enemy-029-siege-royal",
+      "enemy-030-pale-crucible-hunter"
+    ],
+    "selectedSourceBoards": 17,
+    "authoredPoses": 136,
+    "strictSourceBoards": 15,
+    "safeReassignmentSourceBoards": 2,
+    "normalizedAtlases": 4,
+    "standaloneClips": 17,
+    "gifPreviews": 17
+  },
+  "summary": {
+    "sourceShaMatches": 17,
+    "sourceShaMismatches": 0,
+    "uniqueNormalizedPoses": 136,
+    "normalizerCheckPassProfiles": 4,
+    "normalizerFindings": 0,
+    "gifTimingAndLoopPassClips": 17,
+    "gifTimingAndLoopFailClips": 0,
+    "enclosedMatteAndFringePixelsRemoved": 30109,
+    "strictMagentaSpillPixelsNeutralized": 381,
+    "strictMagentaSpillPixelsRemaining": 0,
+    "acceptedAutomatically": 0,
+    "acceptedArtistically": 0,
+    "runtimeIntegrated": 0,
+    "physicalAnchorReviewCompleteProfiles": 0,
+    "physicalAnchorReviewPendingProfiles": 4
+  },
+  "productionState": {
+    "previousEventCount": 156,
+    "currentEventCount": 173,
+    "addedEventCount": 17,
+    "previousEventPrefixPreserved": true,
+    "previousEventPrefixSha256": "f031879880bc371b3139bc71946e2274a555410d4d8758200724c85fefe2b106",
+    "globalVerifiedGeneratedBoards": 133,
+    "globalGeneratedProfiles": 26,
+    "statePath": "docs/references/V66_ENEMY_BATCH_STATE.json",
+    "stateSha256": "c037df9fa6b320fd4bb3adf455ab9f27bc2d66b01f21a458685c3dfb26596a4f",
+    "queuePath": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+    "queueSha256": "be442e3f36975c4fd877818d4cd322c1dc3b7979824041c9bf968f8af83e8aa4",
+    "referenceRegistryPath": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+    "referenceRegistrySha256": "5262f911a474f23fb8f9ceb774aaee1a6a5e0cbf9c156222360ca1ca971d8941"
+  },
+  "worklotProgress": {
+    "requiredBoards": 872,
+    "verifiedGeneratedBoards": 113,
+    "remainingBoards": 759,
+    "generatedProfiles": 26,
+    "acceptedProfiles": 0,
+    "integratedProfiles": 0,
+    "manifestPath": "docs/references/V66_ENEMY_WORKLOTS_202.json",
+    "manifestSha256": "b6d1281a24f044c0a2bd2c09b730fba5b39cd780300cf71e4b4ee49997962542",
+    "countingRule": "Latest verified production events only; rejected revisions, V65 files and directory scans are excluded."
+  },
+  "normalizer": {
+    "path": "scripts/process-v66-enemy-batch.py",
+    "sha256": "9041d62b5a41c7a5f47ef6c7c47b96eb226ddc6bbcf3deb7d0d85231ab303fa5",
+    "testPath": "tests/test_enemy_batch_normalizer_v66.py",
+    "testSha256": "b6dce2dd65df10f2a816fea950c9de9afe4106904fa06968be0bbe9075c10a24",
+    "targetedTestResult": "36 passed",
+    "magentaSpillMethod": "v64-strict-post-resize-green-plus-eight-v1",
+    "magentaSpillPolicy": "Opt-in only; applied after resize to opaque-matte frames. Native-alpha frames bypass the clamp completely.",
+    "gifTimingToleranceMs": 5
+  },
+  "profiles": {
+    "enemy-027-reef-stalker": {
+      "sourceBoards": {
+        "idle": "78c70bf2e32c388477babfc8d4920e02d8015b30f68a52371527d3988828233c",
+        "move": "bdd994b84ea2d3e5f4f7b833bf5a7a3c81df0f6b9e26ad4aa8e898abd05a8874",
+        "attack": "cff954b47b01ce6089b331c6a99115551b43243c93dc9a39ba51bfda7cc7c8cc",
+        "death": "4ea46b408add7438131fbb27649af90122e816ea3f8530261298ac4a1de701ee"
+      },
+      "sourceExtraction": {
+        "strictPassClips": ["idle", "move", "death"],
+        "safeReassignmentClips": ["attack"],
+        "safeReassignmentProof": {
+          "clip": "attack",
+          "ownerCell": 4,
+          "fromCells": [5],
+          "pixels": 27,
+          "componentPixels": 22648,
+          "ownerShare": 0.998808,
+          "pixelValuesPreserved": true
+        }
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.092275,
+        "attack": 0.991027,
+        "death": 1.015502
+      },
+      "normalized": {
+        "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-027-reef-stalker.webp",
+        "atlasSha256": "470db96b1187a520741d4f32881bb80e8ef9d61dca9baea7ace9786ff202fcf5",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-027-reef-stalker.json",
+        "metadataSha256": "a67907c05558422b9e1d595c02aa7ea5ae42e002f263b0f00618378fce3c68d5",
+        "previewSha256": "df22f9c668d21b757429b35de803889d3cac31528f16320ed7100f40445c581f",
+        "uniquePoses": 32,
+        "packScale": 0.496553415,
+        "mattePixelsRemoved": 3645,
+        "strictMagentaPixelsNeutralized": 33,
+        "strictMagentaPixelsRemaining": 0
+      },
+      "visualReview": {
+        "direction": "pass-right-facing-32-of-32",
+        "identity": "pass-project-reef-stalker-lock",
+        "chronology": "pass-macro",
+        "scale": "pass-after-reviewed-interclip-calibration",
+        "contactAndRoot": "pending-physical-anchor-review",
+        "acceptance": false,
+        "runtimeIntegrated": false
+      }
+    },
+    "enemy-028-reef-spitter": {
+      "sourceBoards": {
+        "idle": "1da968475341c5ea46f21885eb6aa06dd6222e7fe70bfdfa878346da2854e742",
+        "move": "97a211a87bef9602dfdd7174733e0ce3b29cea6447ca9b13edef47432c510d6f",
+        "attack": "9d04e15f531976a29963e38bda30aa27b0bcb8a4f136a2c65e76c3c612f251b4",
+        "death": "04e8247acb16750a7d246e5a95014b63030358aa39629748a9b705ffe4df3395"
+      },
+      "sourceExtraction": {
+        "strictPassClips": ["idle", "move", "attack"],
+        "safeReassignmentClips": ["death"],
+        "safeReassignmentProof": {
+          "clip": "death",
+          "ownerCell": 3,
+          "fromCells": [2],
+          "pixels": 243,
+          "componentPixels": 23711,
+          "ownerShare": 0.989752,
+          "pixelValuesPreserved": true
+        }
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1,
+        "attack": 1,
+        "death": 1
+      },
+      "normalized": {
+        "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-028-reef-spitter.webp",
+        "atlasSha256": "e422096474fb2b6c035c927e8511843ce15fbb728f8a623fa563bbfb875e6135",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-028-reef-spitter.json",
+        "metadataSha256": "8e4219773c181e1155ee957dca1cf32ecff98d4fe155433959ee860cd7b600af",
+        "previewSha256": "ef2ae8c0f35a40e4c505655d59887475c38c5af1c4abd9d3a5abad92468eccbb",
+        "uniquePoses": 32,
+        "packScale": 0.583333333,
+        "mattePixelsRemoved": 11989,
+        "strictMagentaPixelsNeutralized": 78,
+        "strictMagentaPixelsRemaining": 0
+      },
+      "visualReview": {
+        "direction": "pass-right-facing-32-of-32",
+        "identity": "pass-project-reef-spitter-lock",
+        "chronology": "pass-with-attack-gland-continuity-reserve",
+        "scale": "pass-no-change-band",
+        "contactAndRoot": "pending-physical-anchor-review",
+        "acceptance": false,
+        "runtimeIntegrated": false
+      }
+    },
+    "enemy-029-siege-royal": {
+      "sourceBoards": {
+        "idle": "a12e669ecfbd74c2de48dd489fad48f13c6e42f2a45264a4cdf3b58cb7bb7ed7",
+        "move": "0037f1b3c4122167c34b0b0ca007af965ca7233ef364b80c3c6ee5f74c097428",
+        "attack": "36bc0974fe0ca4fd71095aacd769f918e8c5341571f9ae3e94f759cbe5ff3db7",
+        "death": "d4c431b653bb0970c48865019eaf89d9e1e4bfac389203670bc7333b3dbe77d9",
+        "tail-strike": "077720bedb662b154c7979f8360f2416e4858b6c00c10bf9c9c6f0646fd7002f"
+      },
+      "sourceExtraction": {
+        "strictPassClips": ["idle", "move", "attack", "death", "tail-strike"],
+        "safeReassignmentClips": []
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.824526,
+        "attack": 0.913235,
+        "death": 0.912082,
+        "tail-strike": 1
+      },
+      "normalized": {
+        "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-029-siege-royal.webp",
+        "atlasSha256": "8d9d37804ec26e1791c90fe7958da4f1a940ddb85f84d2c252a3832fb16414ab",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-029-siege-royal.json",
+        "metadataSha256": "949775cbd599d79415874a1f99cc8e0ed91ef2cbf7452ad61814c3a1b86f5d85",
+        "previewSha256": "33797223dc59d5dc05a8ea75dd86c48898f109d03b710a719ab6861b23f98729",
+        "uniquePoses": 40,
+        "packScale": 0.817606275,
+        "mattePixelsRemoved": 3612,
+        "strictMagentaPixelsNeutralized": 20,
+        "strictMagentaPixelsRemaining": 0
+      },
+      "visualReview": {
+        "direction": "pass-right-facing-40-of-40",
+        "identity": "pass-project-siege-royal-lock",
+        "chronology": "pass-macro-including-tail-strike",
+        "scale": "pass-after-reviewed-cranial-plate-calibration",
+        "contactAndRoot": "pending-physical-anchor-review",
+        "acceptance": false,
+        "runtimeIntegrated": false
+      }
+    },
+    "enemy-030-pale-crucible-hunter": {
+      "sourceBoards": {
+        "idle": "794883780864c17f1e0ded08eeff4cc36c2791bd8400aec3e7ecbdb47a467f14",
+        "move": "6a1f39d987b4fc2f8ff29e1d9e47e988c3ea3aaa93bc9144a16f9220a069353a",
+        "attack": "35e58dc2f4a67081e5a28e4e3b40e4ee818ada73fc60d5a82a7eb77a9221b4e1",
+        "death": "37c0918dc93848d35a4464e8a1456f21fd2ca270612cd159131a40d4efd43270"
+      },
+      "sourceExtraction": {
+        "strictPassClips": ["idle", "move", "attack", "death"],
+        "safeReassignmentClips": []
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.79028,
+        "attack": 1.806842,
+        "death": 1.786232
+      },
+      "normalized": {
+        "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-030-pale-crucible-hunter.webp",
+        "atlasSha256": "446ffbcb9eee699b3a70a734f11c03a101ff9f0d1d4ec9e95f6396aabdf320cd",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-030-pale-crucible-hunter.json",
+        "metadataSha256": "aab21575fb5c4ac3962f7e041540d4827975996a94b6f787bc19f16bde303d6a",
+        "previewSha256": "7ec0c18d1a7f088af5b053961e441c6a5182061819c724fe87223deebe3d93c7",
+        "uniquePoses": 32,
+        "packScale": 0.491957177,
+        "mattePixelsRemoved": 10863,
+        "strictMagentaPixelsNeutralized": 250,
+        "strictMagentaPixelsRemaining": 0
+      },
+      "visualReview": {
+        "direction": "pass-right-facing-32-of-32",
+        "identity": "pass-project-v54-pale-crucible-hunter-lock",
+        "chronology": "pass-macro",
+        "scale": "pass-after-reviewed-cranial-calibration",
+        "contactAndRoot": "pending-physical-anchor-review",
+        "acceptance": false,
+        "runtimeIntegrated": false
+      }
+    }
+  },
+  "evidence": {
+    "sourceAuditPath": "docs/references/V66_BATCH_003_SOURCE_AUDIT.json",
+    "sourceAuditSha256": "256b296a39726d276d93f2ebb75c014e4c8808562cf64ffcd1a0b1b5444e6fe9",
+    "scaleReviewPaths": [
+      "docs/references/V66_WORKLOT_001_REEF_STALKER_SCALE_REVIEW.md",
+      "docs/references/V66_WORKLOT_001_REEF_SPITTER_POST_REMEDIATION_QA.json",
+      "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md",
+      "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SCALE_REVIEW.md"
+    ]
+  },
+  "decision": {
+    "technicalCandidateNormalization": "pass",
+    "automaticAcceptance": false,
+    "runtimeIntegration": false,
+    "reason": "All source provenance, extraction, scale, chroma, atlas and GIF checks pass. Explicit per-pose physical body-root reviews and final artistic acceptance remain required before runtime promotion."
+  }
+}

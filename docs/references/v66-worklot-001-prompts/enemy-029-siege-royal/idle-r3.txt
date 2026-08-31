@@ -1,0 +1,5 @@
+EDIT ONLY THE ATTACHED SELECTED SIEGE ROYAL IDLE SHEET. Preserve the exact eight idle poses, frame order, right-facing identity, black/gunmetal and dark-brown palette, crest, scars, four dorsal tubes, exactly two arms, exactly two legs, full connected single tail, ground baselines, lighting and uniform opaque #FF00FF background. Do not redesign or retime anything.
+
+Inter-clip scale correction only: uniformly reduce every complete creature to exactly 80 percent of its current size, identical across all eight frames, and keep each pose centered within its current invisible 4-by-2 cell. This aligns the idle's standing height with the selected move/death sources. Keep full tails, crests, claws and feet wholly inside their own cells with no divider contacts. Exact 1774 x 887 2:1 canvas, eight distinct poses, no visible grid.
+
+Fill all exposed space with perfectly uniform opaque #FF00FF. No floor, shadow, gradient, texture, halo, glow, reflected pink, transparency, checkerboard, text, UI, scenery or props. Scale correction only.

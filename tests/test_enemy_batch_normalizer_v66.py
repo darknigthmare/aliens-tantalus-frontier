@@ -49,6 +49,40 @@ class EnemyBatchNormalization(unittest.TestCase):
         self.assertTrue(any(np.array_equal(pixel, [210, 30, 210, 128]) for pixel in np.array(frames[0]).reshape(-1, 4)))
         self.assertTrue(all(report["discardedForegroundPixels"] == 0 for report in reports))
 
+    def test_opt_in_v64_magenta_spill_clamp_is_opaque_only(self):
+        pixels = np.array([[
+            [220, 10, 210, 255],
+            [160, 0, 255, 255],
+            [220, 190, 210, 255],
+        ]], dtype=np.uint8)
+        cleaned, proof = pipeline.apply_magenta_spill_removal(pixels, "v65-border-connected-magenta-key")
+        self.assertEqual(cleaned[0, 0].tolist(), [18, 10, 18, 255])
+        self.assertEqual(cleaned[0, 1].tolist(), pixels[0, 1].tolist())
+        self.assertEqual(cleaned[0, 2].tolist(), pixels[0, 2].tolist())
+        self.assertEqual(proof["neutralizedPixelCount"], 1)
+        self.assertEqual(proof["remainingStrictPixelCount"], 0)
+        native, native_proof = pipeline.apply_magenta_spill_removal(pixels, "native-alpha-preserved")
+        self.assertTrue(np.array_equal(native, pixels))
+        self.assertFalse(native_proof["applied"])
+        self.assertTrue(native_proof["nativeAlphaPreserved"])
+
+    def test_normalization_binds_magenta_spill_proof_to_every_opaque_pose(self):
+        source = source_board(False)
+        draw = ImageDraw.Draw(source)
+        for index in range(8):
+            x, y = (index % 4) * 256 + 82, (index // 4) * 256 + 92
+            draw.rectangle((x, y, x + 3, y + 3), fill=(220, 10, 210))
+        frames, reports = pipeline.split_source(source, "idle", GRID)
+        grid = {"columns": 4, "rows": 2, "cellWidth": 256, "cellHeight": 256, "guard": 16}
+        atlas, placements = pipeline.normalize_frames(frames, reports, grid, {"x": 128, "y": 240}, remove_magenta_spill=True)
+        summary = pipeline.magenta_spill_proof_summary(placements)
+        self.assertEqual(summary["frameCount"], 8)
+        self.assertEqual(summary["opaqueMatteFrameCount"], 8)
+        self.assertEqual(summary["nativeAlphaBypassedFrameCount"], 0)
+        self.assertGreater(summary["neutralizedPixelCount"], 0)
+        self.assertEqual(summary["remainingStrictPixelCount"], 0)
+        self.assertFalse(pipeline.strict_magenta_spill_mask(np.asarray(atlas.convert("RGBA"))).any())
+
     def test_magenta_key_reuses_v65_border_connected_method(self):
         frames, reports = pipeline.split_source(source_board(False), "move", GRID)
         self.assertTrue(all(report["alphaProcessing"] == "v65-border-connected-magenta-key" for report in reports))

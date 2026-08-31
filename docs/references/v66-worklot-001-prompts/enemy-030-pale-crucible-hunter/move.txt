@@ -1,0 +1,11 @@
+Use case: identity-preserve
+Input images: Image 1 is the newly generated Pale Crucible Hunter idle sheet and is the exact visual identity anchor.
+Asset type: production 2D side-view metroidvania enemy animation sprite sheet
+Primary request: Create ONE dedicated locomotion sprite sheet for exactly the same Pale Crucible Hunter shown in Image 1. Do not redesign it.
+Identity lock: preserve the identical elongated bone-pale eyeless cranium, exact dorsal-spine arrangement, ivory exoskeletal plates, wet charcoal muscle seams, gaunt ribbed torso, long forearms and black claws, digitigrade legs, tail thickness/root, palette, materials and rendering. No costume or equipment.
+Animation: eight individually authored chronological poses forming one complete seamless 12 fps predatory run cycle, strict row-major order: right-foot contact, compression, passing, left-foot extension, left-foot contact, compression, passing, right-foot extension. Clear alternating legs and arms; hips and rib cage drive the stride; head stays predatory and stable; tail makes one smooth counterbalancing wave. Each pose remains centered in its own cell with no translation across cells. No repeated idle poses.
+Layout: exact 4 columns by 2 rows, exactly eight full-body poses, one per equal cell, landscape exact 2:1 canvas. Same physical size in every frame and same size as Image 1: standing body about 62 percent of cell height, shared ground-contact line at 80 percent cell height, generous safe gutters, entire tail/claws visible, no cross-cell overlap.
+Camera: strict orthographic gameplay side view facing RIGHT for all poses; no front view, no mirrored frame, no camera or perspective changes.
+Style: same dark hand-painted biomechanical sprite art as Image 1, crisp silhouette, consistent texture and lighting.
+Background: perfectly flat uniform pure chroma magenta #FF00FF on every background pixel, no variation, gradient, floor, cast shadow, glow or checkerboard.
+Constraints: no scenery, no grid/border, no text, no UI, no watermark, no duplicate pose, no extra limb, no detached fragment, no clipping, no magenta bounce on the creature.

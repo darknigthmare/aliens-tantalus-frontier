@@ -2,7 +2,8 @@
 
 Every clip is an eight-pose 4x2 source. All clips of a profile share one physical
 scale and one pivot. Native alpha is retained; opaque magenta masters use the
-V65 border-connected matte key. Acceptance remains a separate visual decision.
+V65 border-connected matte key and may opt into a bounded V64-compatible
+magenta despill. Acceptance remains a separate visual decision.
 """
 from __future__ import annotations
 
@@ -28,6 +29,8 @@ ANCHOR_REVIEW_PATH = "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json"  # Legac
 ENCLOSED_MATTE_METHOD = "strict-exterior-matched-magenta-v1"
 ENCLOSED_MATTE_THRESHOLDS = {"minimumRedBlue": 190, "maximumGreen": 60, "minimumChroma": 150, "maximumRedBlueDifference": 32, "maximumReferenceChannelDistance": 24}
 ENCLOSED_AA_THRESHOLDS = {"minimumRedBlue": 35, "minimumChroma": 20, "maximumRedBlueDifference": 32, "maximumSourceRadius": 2}
+MAGENTA_SPILL_METHOD = "v64-strict-post-resize-green-plus-eight-v1"
+MAGENTA_SPILL_THRESHOLDS = {"minimumAlphaInclusive": 16, "minimumRedExclusive": 160, "minimumBlueExclusive": 160, "minimumRedBlueOverGreenExclusive": 35, "replacementRedBlueOverGreen": 8}
 _spec = importlib.util.spec_from_file_location("v65_enemy_batch_base", Path(__file__).with_name("process-v65-enemy-profile-art.py"))
 if _spec is None or _spec.loader is None:
     raise ImportError("V65 normalization primitives are unavailable.")
@@ -451,7 +454,52 @@ def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict],
     }
 
 
-def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict, pivot: dict, source_scale_by_clip: dict | None = None, source_anchors: list[dict] | None = None) -> tuple[Image.Image, list[dict]]:
+def strict_magenta_spill_mask(rgba: np.ndarray) -> np.ndarray:
+    if rgba.ndim != 3 or rgba.shape[2] != 4:
+        raise ValueError("Magenta spill detection requires an RGBA pixel array.")
+    working = rgba.astype(np.int16)
+    red, green, blue, alpha = (working[..., index] for index in range(4))
+    return ((alpha >= MAGENTA_SPILL_THRESHOLDS["minimumAlphaInclusive"])
+            & (red > MAGENTA_SPILL_THRESHOLDS["minimumRedExclusive"])
+            & (blue > MAGENTA_SPILL_THRESHOLDS["minimumBlueExclusive"])
+            & (green + MAGENTA_SPILL_THRESHOLDS["minimumRedBlueOverGreenExclusive"] < np.minimum(red, blue)))
+
+
+def apply_magenta_spill_removal(rgba: np.ndarray, alpha_processing: str) -> tuple[np.ndarray, dict]:
+    """Apply the opt-in V64 strict clamp to an already-resized opaque-matte frame."""
+    native_alpha = alpha_processing == "native-alpha-preserved"
+    if not native_alpha and alpha_processing != "v65-border-connected-magenta-key":
+        raise ValueError(f"Unknown alpha processing mode for magenta spill removal: {alpha_processing}")
+    result = rgba.copy()
+    mask = np.zeros(result.shape[:2], dtype=bool) if native_alpha else strict_magenta_spill_mask(result)
+    neutralized = int(mask.sum())
+    if neutralized:
+        green = result[..., 1].astype(np.int16)
+        ceiling = np.clip(green + MAGENTA_SPILL_THRESHOLDS["replacementRedBlueOverGreen"], 0, 255).astype(np.uint8)
+        result[..., 0] = np.where(mask, np.minimum(result[..., 0], ceiling), result[..., 0])
+        result[..., 2] = np.where(mask, np.minimum(result[..., 2], ceiling), result[..., 2])
+    remaining = 0 if native_alpha else int(strict_magenta_spill_mask(result).sum())
+    if remaining:
+        raise ValueError("Strict magenta spill remains after deterministic channel clamping.")
+    proof = {"method": MAGENTA_SPILL_METHOD, "thresholds": dict(MAGENTA_SPILL_THRESHOLDS), "applied": not native_alpha,
+             "nativeAlphaPreserved": native_alpha, "neutralizedPixelCount": neutralized, "remainingStrictPixelCount": remaining}
+    return result, proof
+
+
+def magenta_spill_proof_summary(placements: list[dict]) -> dict:
+    proofs = [placement.get("magentaSpill") for placement in placements]
+    if not proofs or any(not isinstance(proof, dict) for proof in proofs):
+        raise ValueError("Opt-in magenta spill proof must cover every normalized frame.")
+    if any(proof.get("method") != MAGENTA_SPILL_METHOD or proof.get("thresholds") != MAGENTA_SPILL_THRESHOLDS for proof in proofs):
+        raise ValueError("Magenta spill proof method or thresholds changed.")
+    return {"method": MAGENTA_SPILL_METHOD, "thresholds": dict(MAGENTA_SPILL_THRESHOLDS), "frameCount": len(proofs),
+            "opaqueMatteFrameCount": sum(proof["applied"] for proof in proofs),
+            "nativeAlphaBypassedFrameCount": sum(proof["nativeAlphaPreserved"] for proof in proofs),
+            "neutralizedPixelCount": sum(proof["neutralizedPixelCount"] for proof in proofs),
+            "remainingStrictPixelCount": sum(proof["remainingStrictPixelCount"] for proof in proofs)}
+
+
+def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict, pivot: dict, source_scale_by_clip: dict | None = None, source_anchors: list[dict] | None = None, remove_magenta_spill: bool = False) -> tuple[Image.Image, list[dict]]:
     width, height, columns, rows, guard = (grid[key] for key in ("cellWidth", "cellHeight", "columns", "rows", "guard"))
     if not all(isinstance(value, int) and value > 0 for value in (width, height, columns, rows, guard)):
         raise ValueError("Grid dimensions must be positive integers.")
@@ -497,6 +545,9 @@ def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict,
         # Native alpha anatomy/colors are not subjected to the magenta despill.
         if report["alphaProcessing"] != "native-alpha-preserved":
             pixels = _pipeline.remove_edge_spill(pixels)
+        spill_proof = None
+        if remove_magenta_spill:
+            pixels, spill_proof = apply_magenta_spill_removal(pixels, report["alphaProcessing"])
         pixels[pixels[..., 3] == 0, :3] = 0
         resized = Image.fromarray(pixels, "RGBA")
         if offsets is None:
@@ -515,7 +566,10 @@ def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict,
         if x < guard or y < guard or x + target_width > width - guard or y + target_height > height - guard:
             raise ValueError("Rounded physical-root placement violates atlas guard; no authored pixels were clipped.")
         atlas.alpha_composite(resized, ((index % columns) * width + x, (index // columns) * height + y))
-        placements.append({**report, **anchor_fields, "index": index, "scale": round(scale, 9), "sourceScale": source_scale, "appliedScale": round(applied_scale, 9), "renderedBounds": [x, y, x + target_width, y + target_height]})
+        placement = {**report, **anchor_fields, "index": index, "scale": round(scale, 9), "sourceScale": source_scale, "appliedScale": round(applied_scale, 9), "renderedBounds": [x, y, x + target_width, y + target_height]}
+        if spill_proof is not None:
+            placement["magentaSpill"] = spill_proof
+        placements.append(placement)
     pixels = np.array(atlas, dtype=np.uint8)
     pixels[pixels[..., 3] == 0, :3] = 0
     return Image.fromarray(pixels, "RGBA"), placements
@@ -560,7 +614,7 @@ def save_preview(atlas: Image.Image, path: Path, grid: dict, fps: int, loop: boo
             raise ValueError("Preview lost authored frames.")
 
 
-def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool = False, remove_enclosed_magenta_matte: bool = False, remove_enclosed_magenta_aa_fringe: bool = False) -> dict:
+def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool = False, remove_enclosed_magenta_matte: bool = False, remove_enclosed_magenta_aa_fringe: bool = False, remove_magenta_spill: bool = False) -> dict:
     if not job.get("reference") or job["reference"].get("status") != "reviewed":
         raise ValueError(f'{job["profileId"]}: reviewed design references are required before normalization.')
     frames, reports, sources = [], [], []
@@ -587,7 +641,7 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
     if post_generation_review is not None:
         source_scale_by_clip = post_generation_review["sourceScaleByClip"]
     source_anchors, anchor_review = reviewed_source_anchors(job, reports, sources, root)
-    atlas, placements = normalize_frames(frames, reports, job["grid"], job["pivot"], source_scale_by_clip, source_anchors)
+    atlas, placements = normalize_frames(frames, reports, job["grid"], job["pivot"], source_scale_by_clip, source_anchors, remove_magenta_spill)
     validation = validate_atlas(atlas, job["grid"])
     atlas_path = scoped_path(root, job["normalizedPath"])
     save_lossless(atlas, atlas_path)
@@ -618,7 +672,7 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         "sourceScaleByClip": {clip["id"]: source_scale_by_clip.get(clip["id"], 1.0) for clip in job["clips"]},
         "scaleCalibrationReview": calibration_review, "scaleCalibrationEvidence": calibration_evidence,
         "physicalAnchorReview": anchor_review,
-        "normalizationOptions": {"safeReassignCellFragments": allow_cell_reassignment, "removeEnclosedMagentaMatte": remove_enclosed_magenta_matte, "removeEnclosedMagentaAaFringe": remove_enclosed_magenta_aa_fringe},
+        "normalizationOptions": {"safeReassignCellFragments": allow_cell_reassignment, "removeEnclosedMagentaMatte": remove_enclosed_magenta_matte, "removeEnclosedMagentaAaFringe": remove_enclosed_magenta_aa_fringe, "removeMagentaSpill": remove_magenta_spill},
         "enclosedMagentaMatte": matte_proof_summary(sources, remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe),
         "rawPreserved": True, "interpolatedFrames": 0, "duplicatedFrames": 0,
         "frameCount": len(frames), "sources": sources, "clips": clips, "placements": placements, "validation": validation}
@@ -626,18 +680,23 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         if reviewed_source_scale(job, sources, root) != post_generation_review:
             raise ValueError("Post-generation scale evidence changed during normalization.")
         metadata["postGenerationScaleReview"] = post_generation_review
+    if remove_magenta_spill:
+        metadata["magentaSpill"] = magenta_spill_proof_summary(placements)
     json_write(scoped_path(root, job["metadataPath"]), metadata)
     return metadata
 
 
-def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: bool | None = None, remove_enclosed_magenta_aa_fringe: bool | None = None) -> dict:
+def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: bool | None = None, remove_enclosed_magenta_aa_fringe: bool | None = None, remove_magenta_spill: bool | None = None) -> dict:
     metadata = json.loads(scoped_path(root, job["metadataPath"]).read_text(encoding="utf-8"))
     recorded_matte_option = metadata.get("normalizationOptions", {}).get("removeEnclosedMagentaMatte")
     recorded_aa_option = metadata.get("normalizationOptions", {}).get("removeEnclosedMagentaAaFringe")
+    recorded_spill_option = metadata.get("normalizationOptions", {}).get("removeMagentaSpill", False)
     if not isinstance(recorded_matte_option, bool) or (remove_enclosed_magenta_matte is not None and recorded_matte_option != remove_enclosed_magenta_matte):
         raise ValueError("Explicit enclosed-magenta normalization option is missing or changed.")
     if not isinstance(recorded_aa_option, bool) or (remove_enclosed_magenta_aa_fringe is not None and recorded_aa_option != remove_enclosed_magenta_aa_fringe):
         raise ValueError("Explicit enclosed-magenta AA option is missing or changed.")
+    if not isinstance(recorded_spill_option, bool) or (remove_magenta_spill is not None and recorded_spill_option != remove_magenta_spill):
+        raise ValueError("Explicit post-resize magenta spill option changed.")
     if metadata["profileId"] != job["profileId"] or metadata["referenceLockSha256"] != job["referenceLockSha256"]:
         raise ValueError("Identity or reviewed reference changed since normalization.")
     if metadata["grid"] != job["grid"] or metadata["pivot"] != job["pivot"] or metadata["frameCount"] != len(job["clips"]) * 8:
@@ -665,7 +724,7 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
             raise ValueError(f'Source or prompt provenance changed for {clip["id"]}.')
         with Image.open(scoped_path(root, source["path"])) as original:
             expected_matte = source_matte_proof(original, recorded_matte_option, recorded_aa_option)
-            if expected_post_review is not None:
+            if expected_post_review is not None or recorded_spill_option:
                 reassignment = metadata.get("normalizationOptions", {}).get("safeReassignCellFragments")
                 if not isinstance(reassignment, bool):
                     raise ValueError("Post-generation scale check requires the recorded cell ownership option.")
@@ -680,13 +739,17 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
         if hash_file(scoped_path(root, job[path_key])) != metadata[key]:
             raise ValueError(f"Published normalization checksum differs: {path_key}")
     expected_atlas = None
-    if expected_post_review is not None:
+    if expected_post_review is not None or recorded_spill_option:
         # Reapply the measured factors in memory only: metadata cannot claim a
         # new calibration while retaining pixels produced at an older scale.
         anchors, _ = reviewed_source_anchors(job, reviewed_reports, metadata["sources"], root)
-        expected_atlas, expected_placements = normalize_frames(reviewed_frames, reviewed_reports, job["grid"], job["pivot"], scale_by_clip, anchors)
+        expected_atlas, expected_placements = normalize_frames(reviewed_frames, reviewed_reports, job["grid"], job["pivot"], scale_by_clip, anchors, recorded_spill_option)
         if json.dumps(metadata["placements"], sort_keys=True) != json.dumps(expected_placements, sort_keys=True) or type(metadata.get("scale")) not in (int, float) or metadata["scale"] != expected_placements[0]["scale"]:
-            raise ValueError("Post-generation scale placements do not match the measured single-pack-scale normalization.")
+            raise ValueError("Recorded placements do not match the measured normalization options.")
+        if recorded_spill_option and metadata.get("magentaSpill") != magenta_spill_proof_summary(expected_placements):
+            raise ValueError("Recorded magenta spill summary does not match the frame proofs.")
+    if not recorded_spill_option and ("magentaSpill" in metadata or any("magentaSpill" in placement for placement in metadata["placements"])):
+        raise ValueError("Magenta spill proof exists while its explicit option is disabled.")
     with Image.open(scoped_path(root, job["normalizedPath"])) as atlas:
         if expected_atlas is not None and atlas.convert("RGBA").tobytes() != expected_atlas.tobytes():
             raise ValueError("Atlas pixels do not apply the current post-generation scale review.")
@@ -714,6 +777,7 @@ def main() -> None:
     parser.add_argument("--safe-reassign-cell-fragments", action="store_true", help="Preserve short connected spill with recorded source ownership proof; ambiguous overlap still fails")
     parser.add_argument("--remove-enclosed-magenta-matte", action="store_true", help="Opt in to strict exterior-color-matched removal of enclosed RGB magenta matte; native alpha and nonmatching colors stay untouched")
     parser.add_argument("--remove-enclosed-magenta-aa-fringe", action="store_true", help="Separately opt in to at most two source pixels of magenta AA fringe adjacent to a proven enclosed core; requires --remove-enclosed-magenta-matte")
+    parser.add_argument("--remove-magenta-spill", action="store_true", help="Opt in to the strict V64 post-resize magenta channel clamp for opaque-matte frames; native-alpha frames are preserved")
     parser.add_argument("--dry-run", action="store_true", help="List required inputs without writing anything")
     args = parser.parse_args()
     queue = json.loads(args.manifest.read_text(encoding="utf-8"))
@@ -729,7 +793,7 @@ def main() -> None:
         for clip in job["clips"]:
             if not scoped_path(ROOT, clip["sourcePath"]).is_file():
                 raise FileNotFoundError(clip["sourcePath"])
-    results = [check_profile(job, remove_enclosed_magenta_matte=True if args.remove_enclosed_magenta_matte else None, remove_enclosed_magenta_aa_fringe=True if args.remove_enclosed_magenta_aa_fringe else None) if args.check else process_profile(job, allow_cell_reassignment=args.safe_reassign_cell_fragments, remove_enclosed_magenta_matte=args.remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe=args.remove_enclosed_magenta_aa_fringe) for job in jobs]
+    results = [check_profile(job, remove_enclosed_magenta_matte=True if args.remove_enclosed_magenta_matte else None, remove_enclosed_magenta_aa_fringe=True if args.remove_enclosed_magenta_aa_fringe else None, remove_magenta_spill=True if args.remove_magenta_spill else None) if args.check else process_profile(job, allow_cell_reassignment=args.safe_reassign_cell_fragments, remove_enclosed_magenta_matte=args.remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe=args.remove_enclosed_magenta_aa_fringe, remove_magenta_spill=args.remove_magenta_spill) for job in jobs]
     print(json.dumps({"profiles": len(results), "poses": sum(result["frameCount"] for result in results), "acceptedAutomatically": 0,
                       "results": [{"profileId": result["profileId"], "path": result["normalized"], "findings": result["validation"]["findings"]} for result in results]}, indent=2))
 

@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "profileId": "enemy-030-pale-crucible-hunter",
+  "batchId": "batch-003",
+  "status": "project-master-reviewed-source-candidates-not-accepted",
+  "reviewer": "Codex /root",
+  "reviewedAt": "2026-08-31",
+  "canonExact": false,
+  "runtimeIntegrated": false,
+  "classification": "PROJECT_ADAPTATION",
+  "primaryProjectReference": {
+    "path": "assets/openai/sprites/enemies/pale-crucible-hunter-action-sheet.png",
+    "sha256": "4dd828a036e58ac17ee5dc819853cd29a101f2d9411e4c87afb2c8013d6af423",
+    "provenancePath": "docs/ART_PROVENANCE_V54.md",
+    "promptPath": "docs/prompts/V54_IMAGEGEN_WAVE.md",
+    "note": "The V54 bitmap is the already integrated project identity master. It is exact only for the project subject, not evidence of a published external canon model. The master was not uploaded during this V66 generation session; the textual V54 lock created the idle candidate, then each newly generated candidate anchored the next clip."
+  },
+  "designLock": "One gaunt forge-born bipedal xeno hunter: eyeless elongated bone-pale cranium, sick ivory exoskeletal plates over wet charcoal muscle seams, crucible-forged dorsal spines, narrow ribbed torso, very long sinewy forearms with black claws, digitigrade legs and a long segmented tail. No eyes, clothing, equipment, armor, weapon or generic marine-xeno redesign. Strict right-facing side view and the V54 project palette/material grammar are invariant.",
+  "sourceContract": {
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "aspectRatio": "2:1",
+    "facing": "right",
+    "matte": "solid #ff00ff, no floor, cast shadow or pink spill",
+    "standingHeightCellRatio": 0.62,
+    "groundCellRatio": 0.8
+  },
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.79028,
+    "attack": 1.806842,
+    "death": 1.786232
+  },
+  "scaleCalibrationReview": {
+    "note": "Manual cranial-length invariant across two poses per clip: idle median 102.0672 source px versus move 57.0119, attack 56.4893 and death 57.1411. Factors scale the three compact corrections back to the idle identity; bounding boxes were not used as the invariant.",
+    "reviewer": "Codex complete_royal",
+    "reviewedAt": "2026-09-01",
+    "evidencePaths": [
+      "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SOURCE_QA.json",
+      "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SCALE_REVIEW.md"
+    ]
+  },
+  "plannedClips": ["idle", "move", "attack", "death"],
+  "limitations": [
+    "The dedicated V66 boards are generated candidates until extraction, anatomy, palette, animation continuity, physical-root, interclip-scale and loop review pass.",
+    "No claim of pixel-exact or canon 1:1 reconstruction is made; this subject remains a project adaptation with an internal V54 identity master.",
+    "This fragment must be merged deliberately into the shared batch reference registry before importing generation events."
+  ]
+}

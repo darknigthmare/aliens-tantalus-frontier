@@ -1,0 +1,3124 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-029-siege-royal",
+  "subject": "Siege Royal",
+  "batchId": "batch-003",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+    "https://icon-ninja.artstation.com/projects/oOoGew",
+    "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+    "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+  ],
+  "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+  "animationFamily": "royal",
+  "grid": {
+    "columns": 4,
+    "rows": 10,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-029-siege-royal.webp",
+  "normalizedSha256": "8d9d37804ec26e1791c90fe7958da4f1a940ddb85f84d2c252a3832fb16414ab",
+  "preview": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/all.gif",
+  "previewSha256": "33797223dc59d5dc05a8ea75dd86c48898f109d03b710a719ab6861b23f98729",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.817606275,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 0.824526,
+    "attack": 0.913235,
+    "death": 0.912082,
+    "tail-strike": 1
+  },
+  "scaleCalibrationReview": {
+    "note": "Manual main cranial-plate measurements on two comparable poses per clip calibrate move, attack and death to the idle physical identity; tail-strike's raw 1.000160 ratio is intentionally rounded to 1 within measurement uncertainty.",
+    "reviewer": "Codex finish_source_review",
+    "reviewedAt": "2026-09-01",
+    "evidencePaths": [
+      "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md"
+    ]
+  },
+  "scaleCalibrationEvidence": [
+    {
+      "path": "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md",
+      "sha256": "9f38d5af6d8d073e58f19ce97759d9754586544a120bbbd4a58852bb94d6314b"
+    }
+  ],
+  "physicalAnchorReview": {
+    "status": "pending",
+    "reason": "No source-anchor review file."
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": false,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 2523,
+    "aaFringePixelCount": 1089,
+    "removedPixelCount": 3612,
+    "sourceProofSha256": "635681f15d32e44ab17b266a14223ca2c96943905e12a06c8a4210f793792ebd"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 40,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/idle.png",
+      "sha256": "a12e669ecfbd74c2de48dd489fad48f13c6e42f2a45264a4cdf3b58cb7bb7ed7",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "3ac6f06f692b0ea1aeec9998a6fddf30a4c73096a061ced591a461edea68d53f",
+      "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          235,
+          23,
+          226
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "9e336c8a2e71a7660adada0010794472355f9d9b951afdf165d03d5f4290071e",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/move.png",
+      "sha256": "0037f1b3c4122167c34b0b0ca007af965ca7233ef364b80c3c6ee5f74c097428",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "3e44f9c12064cc3d9294a0bf9331853631cb252c3e2b3391c4209b4a72f8ccaf",
+      "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 101,
+        "aaFringePixelCount": 168,
+        "strictCoreMaskSha256": "f2f51f5fa275be8075a128428f652e4e568cad63e9acde9d0ac23da9a28b26cc",
+        "aaFringeMaskSha256": "064e688574d4b9d81282cfb689c893e06f04644bb30d9d7fc412dabf2fb84cc4",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          236,
+          13,
+          222
+        ],
+        "removedPixelCount": 269,
+        "removedCoordinatesSha256": "7b78727a1801c7c7e3d3c282d79208538b8307777f41b5e106623692e23c5c67",
+        "removedRgbaSha256": "f2c033bea6fc939a9f7f28eb2a47bac043141d379c1c14aa4cad5d2d63a274a5",
+        "sourceRgbaSha256": "351fb38434658f29930c966d67c65c665a34e2d54b2323fe243084664d4e78f8",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/attack.png",
+      "sha256": "36bc0974fe0ca4fd71095aacd769f918e8c5341571f9ae3e94f759cbe5ff3db7",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "969e406ea89b1f43eae21c5911e4f70eb43de19cfe58279cf3b3f1be8b076445",
+      "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 446,
+        "aaFringePixelCount": 301,
+        "strictCoreMaskSha256": "7f42212bf783dc734007a183889034d599b3d23c00efa9710413af21ea3b362f",
+        "aaFringeMaskSha256": "547e838bc542d908ad7a673149bdd3bab2d256bf1dfd9600a1f621cf3856dec8",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          231,
+          24,
+          216
+        ],
+        "removedPixelCount": 747,
+        "removedCoordinatesSha256": "13bc26f30a0165e7a42a83c42cfa26bd5ea15cb73491d6c947f8a6bb1ed00ba7",
+        "removedRgbaSha256": "f1c3597beb0453fb2e23d9dcb74e8660f1fde384c9ac44175077a91dcaa47267",
+        "sourceRgbaSha256": "138f96a23f80cce8c20fb70c5754cacfd0b5cc31bb39a196d55070e8d9b8a1cf",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/death.png",
+      "sha256": "d4c431b653bb0970c48865019eaf89d9e1e4bfac389203670bc7333b3dbe77d9",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "5d6759a7b50939ba5ab9a04e243e744db48e4d40d42280e1dfb1e947eae77acd",
+      "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 58,
+        "aaFringePixelCount": 179,
+        "strictCoreMaskSha256": "ebd3cf02cabfe7e4e0d80cbdffd4fda4848b9e8e0615721b4ec1cd2d5552bc06",
+        "aaFringeMaskSha256": "d13c55bb0da4cf58e876020a7bd0f53b0257476918eb6d80cf266724ec5f210a",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          225,
+          27,
+          206
+        ],
+        "removedPixelCount": 237,
+        "removedCoordinatesSha256": "2987ee00af6d85c29e78033ec068be92f595ccad0094cbd87be41456e580e377",
+        "removedRgbaSha256": "c7c3410fb4e6db8ab3dee8e05f6246569fc4c8f5f71b7ecf4f734d12bae4f2d7",
+        "sourceRgbaSha256": "c9b5b692389f7c02f5299dd6d247a1ef0455b0d684652cfacdaacd87500ac5ac",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/tail-strike.png",
+      "sha256": "077720bedb662b154c7979f8360f2416e4858b6c00c10bf9c9c6f0646fd7002f",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "707e1776a0fba1e92926373b9ae095da006e3667a681a47612ad2b5181a843cf",
+      "referenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 1918,
+        "aaFringePixelCount": 441,
+        "strictCoreMaskSha256": "3f84504aca382b599c8644e501a09ebe55ba8f34fc3c993020438a29f23d5e56",
+        "aaFringeMaskSha256": "411593ec4dc4454bc527661d9d5cee8741736409bca9fdf18e0bbd14b2723ef7",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          238,
+          14,
+          227
+        ],
+        "removedPixelCount": 2359,
+        "removedCoordinatesSha256": "ce27e4a13d5a3ad1e3049ce8dbb0a001a680a2924184990969e6602d3df5a300",
+        "removedRgbaSha256": "15d45b4aebb2f32b4e06671c4bd92310684283cbbb07869738704e4581e30ceb",
+        "sourceRgbaSha256": "f6c78ab11c9855cb62100f461e4afc499a64017de460b8c5452ca8d06fc0bef7",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-029-siege-royal/idle.webp",
+      "sha256": "5989b4a13a5ff4b0c1f022158eeb5d94b4e1e5f27220867ef6f4772184a0a774",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/idle.gif",
+      "previewSha256": "0149cdba68d024068b881fa70434d68eb810ea92b4aef45bd2e1d0cd3a8e441f"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-029-siege-royal/move.webp",
+      "sha256": "17a9316a9a51430ed4b204f7d41254612cfd515903526889d32492ac0861875b",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/move.gif",
+      "previewSha256": "197535aec910c37fdcd425f22636c914b8defb18182bd929fd54738a282ee87d"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-029-siege-royal/attack.webp",
+      "sha256": "62125b42daed6a915fd578ba1bf3ab49d268e9a1b4d5c57f83ad301cf48fca8c",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/attack.gif",
+      "previewSha256": "d4a6a1e494c19a8728c132315a69ef75c1afe4de2206d44d6d37df28b383d646"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-029-siege-royal/death.webp",
+      "sha256": "1718883ef294361ae7d9e383e3f1af3972c1f671ec14fe033d2af5b09cd4568c",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/death.gif",
+      "previewSha256": "79dfc07dc1b58e0fc1b1ca88b81cdad2f25874cb1ebba6755dffa6daf50e3dc8"
+    },
+    {
+      "id": "tail-strike",
+      "frames": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-029-siege-royal/tail-strike.webp",
+      "sha256": "c56d876788caa1caee841609e809664ee95c063bb43c10fa25af8e834ad29927",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-029-siege-royal/tail-strike.gif",
+      "previewSha256": "addb707dd3835fd72ea06bc2ff7aff77a88c5a12d1804147fcbfbf5904d7e41b"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        228,
+        217,
+        385,
+        357
+      ],
+      "sourceSize": [
+        157,
+        140
+      ],
+      "foregroundPixels": 7882,
+      "mattePixels": 189254,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c09d1723c2ead870ebdbe977dc95f456be828cec7e4ebca4f5dc5f9310709902",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 0,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        64,
+        126,
+        192,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        168,
+        214,
+        320,
+        357
+      ],
+      "sourceSize": [
+        152,
+        143
+      ],
+      "foregroundPixels": 7889,
+      "mattePixels": 188803,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0c0f6d2b4b359fc8f7337fb7eeab639d996836beb24e9477c123847cacf8f41c",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 1,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        66,
+        123,
+        190,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        115,
+        215,
+        269,
+        357
+      ],
+      "sourceSize": [
+        154,
+        142
+      ],
+      "foregroundPixels": 8059,
+      "mattePixels": 188633,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1b346bae2cf172acdb7d3f806ce29c9a9b18f25b16ab7fc4f2791e507fcaf0b4",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 2,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        65,
+        124,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        43,
+        217,
+        196,
+        357
+      ],
+      "sourceSize": [
+        153,
+        140
+      ],
+      "foregroundPixels": 7881,
+      "mattePixels": 189255,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "979bf90ee9d4dd2d58526b10e621b55aea6bfcd4c172c251b5f0d303eae44be0",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 3,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        66,
+        126,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        227,
+        90,
+        380,
+        230
+      ],
+      "sourceSize": [
+        153,
+        140
+      ],
+      "foregroundPixels": 7766,
+      "mattePixels": 188926,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e35e2092172b4c316bd41b7cada7e41bcf3b34e9ad17d051fae0f6bad0103863",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 4,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        66,
+        126,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        158,
+        102,
+        317,
+        230
+      ],
+      "sourceSize": [
+        159,
+        128
+      ],
+      "foregroundPixels": 7509,
+      "mattePixels": 188740,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2aa78407ebe9e3329d187eac8d6331789d65aea4f5816a3a710d1a7e2146d4e4",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 5,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        63,
+        135,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        113,
+        95,
+        267,
+        230
+      ],
+      "sourceSize": [
+        154,
+        135
+      ],
+      "foregroundPixels": 7549,
+      "mattePixels": 188700,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "73760e2539f4a4dbcb05306eced633ba067786cf7bedaa4f219a85a25a58afce",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 6,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        65,
+        130,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        42,
+        93,
+        195,
+        230
+      ],
+      "sourceSize": [
+        153,
+        137
+      ],
+      "foregroundPixels": 7715,
+      "mattePixels": 188977,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "608dbdcdddcd46f7a3841c5fefd4541a5afa9c986ce503a1c12987cfbcc8f73e",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 7,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        66,
+        128,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        153,
+        161,
+        379,
+        335
+      ],
+      "sourceSize": [
+        226,
+        174
+      ],
+      "foregroundPixels": 12744,
+      "mattePixels": 184392,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "34abc44a76df80e5e4253ac6f3e442d761ee99d288cde44b362d443e3ab2b50f",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 8,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        52,
+        123,
+        204,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        134,
+        175,
+        327,
+        336
+      ],
+      "sourceSize": [
+        193,
+        161
+      ],
+      "foregroundPixels": 12048,
+      "mattePixels": 184644,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b59384e3644567dda0ee45551b565f3e0d4ab51c8a41d3d249b9e71524134ea9",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 9,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        63,
+        131,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        70,
+        157,
+        271,
+        335
+      ],
+      "sourceSize": [
+        201,
+        178
+      ],
+      "foregroundPixels": 12064,
+      "mattePixels": 184628,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "68ac825d5b10e0245bdb798a6401b058547e8fbca664857e117c10ace862caac",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 10,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        60,
+        120,
+        196,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        1,
+        162,
+        238,
+        336
+      ],
+      "sourceSize": [
+        237,
+        174
+      ],
+      "foregroundPixels": 13016,
+      "mattePixels": 184120,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "daad7b98e362ca0901b9bd7c4ffbcc6ad5ff1872f14d18d138c959f6f0409d64",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 11,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        48,
+        123,
+        208,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        144,
+        89,
+        363,
+        271
+      ],
+      "sourceSize": [
+        219,
+        182
+      ],
+      "foregroundPixels": 12970,
+      "mattePixels": 183722,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "200c9e7a680dabfe16f95bf2bd064c485ac7a98ab6be74e3e31c41157cc99e6a",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 12,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        54,
+        117,
+        202,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        103,
+        102,
+        310,
+        271
+      ],
+      "sourceSize": [
+        207,
+        169
+      ],
+      "foregroundPixels": 12409,
+      "mattePixels": 183840,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f30afdc2dd53152299557ef63d659c31fd5ee387316017517434c6d3eef9a7e9",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 13,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        58,
+        126,
+        198,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        71,
+        101,
+        272,
+        271
+      ],
+      "sourceSize": [
+        201,
+        170
+      ],
+      "foregroundPixels": 12486,
+      "mattePixels": 183763,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "963ef8de9645e1c3116733b26413fba1e7c04b4521133ec20ab77c9215c0a5b9",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 14,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        60,
+        125,
+        196,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        27,
+        97,
+        223,
+        272
+      ],
+      "sourceSize": [
+        196,
+        175
+      ],
+      "foregroundPixels": 12380,
+      "mattePixels": 184312,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e6015729f04eebccdb5b98852c0167e38493187dd626a359ed17d26a517db41c",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 15,
+      "scale": 0.817606275,
+      "sourceScale": 0.824526,
+      "appliedScale": 0.674137632,
+      "renderedBounds": [
+        62,
+        122,
+        194,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        141,
+        209,
+        329,
+        359
+      ],
+      "sourceSize": [
+        188,
+        150
+      ],
+      "foregroundPixels": 9531,
+      "mattePixels": 187605,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "977de7409f029b2ef9ba471c8864b263015681ab6435ccfdf2b18b8198e214e6",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 16,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        58,
+        128,
+        198,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        110,
+        253,
+        299,
+        360
+      ],
+      "sourceSize": [
+        189,
+        107
+      ],
+      "foregroundPixels": 7669,
+      "mattePixels": 189023,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b674de8f96ee5ba72feb0bddd2f98c61627e7088e2d5aea8d1cae73a80e5e69e",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 17,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        58,
+        160,
+        199,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        102,
+        211,
+        312,
+        359
+      ],
+      "sourceSize": [
+        210,
+        148
+      ],
+      "foregroundPixels": 10981,
+      "mattePixels": 185711,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2ba651a5e54a67bc797ba26bc34eed44bb8b0d6ea1ef9693ac08fbd23b2e9170",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 18,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        50,
+        129,
+        207,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        59,
+        238,
+        349,
+        357
+      ],
+      "sourceSize": [
+        290,
+        119
+      ],
+      "foregroundPixels": 10605,
+      "mattePixels": 186531,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "19463a6158fc35eab18a8d8525f91c4b32243960073aa658c49ba23a52fbc8f5",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 19,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        20,
+        151,
+        237,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        128,
+        126,
+        428,
+        248
+      ],
+      "sourceSize": [
+        300,
+        122
+      ],
+      "foregroundPixels": 10634,
+      "mattePixels": 186058,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9402d9bc2734c5e8849cde87be80c17b6a2e881ca9e09aa0efc4aeeb2b72c10b",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 20,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        16,
+        149,
+        240,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        133,
+        148,
+        350,
+        248
+      ],
+      "sourceSize": [
+        217,
+        100
+      ],
+      "foregroundPixels": 8363,
+      "mattePixels": 187886,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0a9da927482cf8e5d5892645f96340e663db5e5dbf17ea9e963a8829efa058b6",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 21,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        47,
+        165,
+        209,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        117,
+        108,
+        297,
+        249
+      ],
+      "sourceSize": [
+        180,
+        141
+      ],
+      "foregroundPixels": 8696,
+      "mattePixels": 187553,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c7e17c709b03405737bc6d7cd14564bbc6adccba631b97153ebf92ffd794e2f9",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 22,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        61,
+        135,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        77,
+        101,
+        257,
+        249
+      ],
+      "sourceSize": [
+        180,
+        148
+      ],
+      "foregroundPixels": 9060,
+      "mattePixels": 187632,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "523911becddf8d26b0c54cb513f389b0e263422de6ccba5e816cb89bc547422a",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 23,
+      "scale": 0.817606275,
+      "sourceScale": 0.913235,
+      "appliedScale": 0.746666667,
+      "renderedBounds": [
+        61,
+        129,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        182,
+        219,
+        370,
+        380
+      ],
+      "sourceSize": [
+        188,
+        161
+      ],
+      "foregroundPixels": 9709,
+      "mattePixels": 187427,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f93ee218536c5cbad64f67aa31c3143cab9f620436972ef0c018831b65beb5f6",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 24,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        58,
+        120,
+        198,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        93,
+        238,
+        282,
+        380
+      ],
+      "sourceSize": [
+        189,
+        142
+      ],
+      "foregroundPixels": 8907,
+      "mattePixels": 187785,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "80cc80e8736d1f9eb886aae8c3c13327509f43efb23023e04690670f4ab09f41",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 25,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        58,
+        134,
+        199,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        18,
+        266,
+        211,
+        384
+      ],
+      "sourceSize": [
+        193,
+        118
+      ],
+      "foregroundPixels": 8035,
+      "mattePixels": 188657,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b428d202aec43f7d44bacd3e521e0b63710fe127bb6f994344dd46020ff11eb2",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 26,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        56,
+        152,
+        200,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        35,
+        294,
+        241,
+        386
+      ],
+      "sourceSize": [
+        206,
+        92
+      ],
+      "foregroundPixels": 6631,
+      "mattePixels": 190505,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "08856c7a133ccd304e7647e621437b4dab1c86fd879fb675bd87ae3698509fd5",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 27,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        51,
+        171,
+        205,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        173,
+        133,
+        380,
+        227
+      ],
+      "sourceSize": [
+        207,
+        94
+      ],
+      "foregroundPixels": 6996,
+      "mattePixels": 189696,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1e39c71b28d85cfdecdf4d4b377599ff88ba465924d0312f7c7a9ac7d019c488",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 28,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        51,
+        170,
+        205,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        108,
+        169,
+        328,
+        227
+      ],
+      "sourceSize": [
+        220,
+        58
+      ],
+      "foregroundPixels": 6938,
+      "mattePixels": 189311,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "85a47c6c6d11078b81a42e12b43fed6171959cc6ccca2455d3a257ef4695fe02",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 29,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        46,
+        197,
+        210,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        48,
+        176,
+        269,
+        231
+      ],
+      "sourceSize": [
+        221,
+        55
+      ],
+      "foregroundPixels": 6540,
+      "mattePixels": 189709,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "993dc322ffa670e60967cd2fd86c7bdb0fc19d491ace9a5365a9c0eaba691c5a",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 30,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        46,
+        199,
+        211,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        0,
+        182,
+        219,
+        232
+      ],
+      "sourceSize": [
+        219,
+        50
+      ],
+      "foregroundPixels": 5967,
+      "mattePixels": 190725,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f25df6966b1d36776ab9c0e08f423688f638934e998ef493bf0a51cfe4e759b0",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 31,
+      "scale": 0.817606275,
+      "sourceScale": 0.912082,
+      "appliedScale": 0.745723967,
+      "renderedBounds": [
+        46,
+        203,
+        209,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        111,
+        208,
+        331,
+        350
+      ],
+      "sourceSize": [
+        220,
+        142
+      ],
+      "foregroundPixels": 8546,
+      "mattePixels": 188590,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "708dc8fbc62ea31af2b753c537286512c5a76e48a63bf6ced7e20670ad0cba22",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 32,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        38,
+        124,
+        218,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        123,
+        207,
+        295,
+        352
+      ],
+      "sourceSize": [
+        172,
+        145
+      ],
+      "foregroundPixels": 9013,
+      "mattePixels": 187679,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3cd2b065426cc61a468b4490a39f02412272f6b4aaa4b88ed1730d05fdc6d758",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 33,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        58,
+        121,
+        199,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        39,
+        215,
+        253,
+        345
+      ],
+      "sourceSize": [
+        214,
+        130
+      ],
+      "foregroundPixels": 8936,
+      "mattePixels": 187756,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "01cbfedd616d1a16d54fb9aa46e24de2083600666429aa1eff07c7145874ca47",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 34,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        40,
+        134,
+        215,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        20,
+        226,
+        292,
+        349
+      ],
+      "sourceSize": [
+        272,
+        123
+      ],
+      "foregroundPixels": 10318,
+      "mattePixels": 186818,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "26b5a068e4cdb58df95e5a034c85fb4d94a56b5b8b835cea54faf9d449128d83",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 35,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        17,
+        139,
+        239,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        116,
+        95,
+        376,
+        222
+      ],
+      "sourceSize": [
+        260,
+        127
+      ],
+      "foregroundPixels": 8066,
+      "mattePixels": 188626,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "548bc9afca992975e8b725283e0793d2cd8df92525f469e4fba5523c14535ee7",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 36,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        22,
+        136,
+        235,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        143,
+        93,
+        310,
+        222
+      ],
+      "sourceSize": [
+        167,
+        129
+      ],
+      "foregroundPixels": 8297,
+      "mattePixels": 187952,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "245e2742b172a1089c67fd6bd7843709fca2ed08c61e5297a869c2f3e27c00f0",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 37,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        60,
+        135,
+        197,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        70,
+        86,
+        250,
+        222
+      ],
+      "sourceSize": [
+        180,
+        136
+      ],
+      "foregroundPixels": 7911,
+      "mattePixels": 188338,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "22658aa0fc0d66f3cdbc11928149f0cc15e8c346450383d8e2145470dac6597a",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 38,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        54,
+        129,
+        201,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "tail-strike",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        17,
+        88,
+        208,
+        224
+      ],
+      "sourceSize": [
+        191,
+        136
+      ],
+      "foregroundPixels": 8051,
+      "mattePixels": 188641,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cd1a4327467dd6967d6447a0d92886ee9deb2436e6e5c008167450c2fae5b722",
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 39,
+      "scale": 0.817606275,
+      "sourceScale": 1,
+      "appliedScale": 0.817606275,
+      "renderedBounds": [
+        50,
+        129,
+        206,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          66,
+          128,
+          190,
+          238
+        ],
+        "foregroundPixels": 5586,
+        "width": 124,
+        "height": 110,
+        "relativeToRowMedian": 0.996344
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          68,
+          125,
+          188,
+          238
+        ],
+        "foregroundPixels": 5612,
+        "width": 120,
+        "height": 113,
+        "relativeToRowMedian": 1.000981
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          67,
+          126,
+          189,
+          238
+        ],
+        "foregroundPixels": 5741,
+        "width": 122,
+        "height": 112,
+        "relativeToRowMedian": 1.02399
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          68,
+          128,
+          189,
+          238
+        ],
+        "foregroundPixels": 5601,
+        "width": 121,
+        "height": 110,
+        "relativeToRowMedian": 0.999019
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          68,
+          128,
+          189,
+          238
+        ],
+        "foregroundPixels": 5535,
+        "width": 121,
+        "height": 110,
+        "relativeToRowMedian": 1.020088
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          65,
+          137,
+          191,
+          238
+        ],
+        "foregroundPixels": 5362,
+        "width": 126,
+        "height": 101,
+        "relativeToRowMedian": 0.988205
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          67,
+          132,
+          189,
+          238
+        ],
+        "foregroundPixels": 5362,
+        "width": 122,
+        "height": 106,
+        "relativeToRowMedian": 0.988205
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          68,
+          130,
+          189,
+          238
+        ],
+        "foregroundPixels": 5490,
+        "width": 121,
+        "height": 108,
+        "relativeToRowMedian": 1.011795
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          54,
+          125,
+          202,
+          238
+        ],
+        "foregroundPixels": 6166,
+        "width": 148,
+        "height": 113,
+        "relativeToRowMedian": 1.022893
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          65,
+          133,
+          191,
+          238
+        ],
+        "foregroundPixels": 5847,
+        "width": 126,
+        "height": 105,
+        "relativeToRowMedian": 0.969973
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          62,
+          122,
+          194,
+          238
+        ],
+        "foregroundPixels": 5890,
+        "width": 132,
+        "height": 116,
+        "relativeToRowMedian": 0.977107
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          50,
+          124,
+          206,
+          238
+        ],
+        "foregroundPixels": 6323,
+        "width": 156,
+        "height": 114,
+        "relativeToRowMedian": 1.048938
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          56,
+          119,
+          200,
+          238
+        ],
+        "foregroundPixels": 6330,
+        "width": 144,
+        "height": 119,
+        "relativeToRowMedian": 1.04129
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          60,
+          128,
+          196,
+          238
+        ],
+        "foregroundPixels": 6052,
+        "width": 136,
+        "height": 110,
+        "relativeToRowMedian": 0.995558
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          62,
+          127,
+          195,
+          238
+        ],
+        "foregroundPixels": 6106,
+        "width": 133,
+        "height": 111,
+        "relativeToRowMedian": 1.004442
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          64,
+          124,
+          193,
+          238
+        ],
+        "foregroundPixels": 6016,
+        "width": 129,
+        "height": 114,
+        "relativeToRowMedian": 0.989636
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          60,
+          130,
+          196,
+          238
+        ],
+        "foregroundPixels": 5648,
+        "width": 136,
+        "height": 108,
+        "relativeToRowMedian": 0.93844
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          60,
+          162,
+          197,
+          238
+        ],
+        "foregroundPixels": 4574,
+        "width": 137,
+        "height": 76,
+        "relativeToRowMedian": 0.75999
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          52,
+          131,
+          205,
+          238
+        ],
+        "foregroundPixels": 6619,
+        "width": 153,
+        "height": 107,
+        "relativeToRowMedian": 1.099776
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          22,
+          153,
+          235,
+          238
+        ],
+        "foregroundPixels": 6389,
+        "width": 213,
+        "height": 85,
+        "relativeToRowMedian": 1.06156
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          18,
+          151,
+          238,
+          238
+        ],
+        "foregroundPixels": 6380,
+        "width": 220,
+        "height": 87,
+        "relativeToRowMedian": 1.209823
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          49,
+          167,
+          207,
+          238
+        ],
+        "foregroundPixels": 5032,
+        "width": 158,
+        "height": 71,
+        "relativeToRowMedian": 0.954205
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          63,
+          137,
+          193,
+          238
+        ],
+        "foregroundPixels": 5165,
+        "width": 130,
+        "height": 101,
+        "relativeToRowMedian": 0.979425
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          63,
+          131,
+          193,
+          238
+        ],
+        "foregroundPixels": 5382,
+        "width": 130,
+        "height": 107,
+        "relativeToRowMedian": 1.020575
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          60,
+          122,
+          196,
+          238
+        ],
+        "foregroundPixels": 5811,
+        "width": 136,
+        "height": 116,
+        "relativeToRowMedian": 1.146946
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          60,
+          136,
+          197,
+          238
+        ],
+        "foregroundPixels": 5331,
+        "width": 137,
+        "height": 102,
+        "relativeToRowMedian": 1.052206
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          58,
+          154,
+          198,
+          238
+        ],
+        "foregroundPixels": 4802,
+        "width": 140,
+        "height": 84,
+        "relativeToRowMedian": 0.947794
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          53,
+          173,
+          203,
+          238
+        ],
+        "foregroundPixels": 4010,
+        "width": 150,
+        "height": 65,
+        "relativeToRowMedian": 0.791473
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          53,
+          172,
+          203,
+          238
+        ],
+        "foregroundPixels": 4161,
+        "width": 150,
+        "height": 66,
+        "relativeToRowMedian": 1.059318
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          48,
+          199,
+          208,
+          238
+        ],
+        "foregroundPixels": 4025,
+        "width": 160,
+        "height": 39,
+        "relativeToRowMedian": 1.024695
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          48,
+          201,
+          209,
+          238
+        ],
+        "foregroundPixels": 3831,
+        "width": 161,
+        "height": 37,
+        "relativeToRowMedian": 0.975305
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          47,
+          205,
+          207,
+          238
+        ],
+        "foregroundPixels": 3499,
+        "width": 160,
+        "height": 33,
+        "relativeToRowMedian": 0.890784
+      },
+      {
+        "index": 32,
+        "alphaBounds": [
+          40,
+          126,
+          216,
+          238
+        ],
+        "foregroundPixels": 6097,
+        "width": 176,
+        "height": 112,
+        "relativeToRowMedian": 0.946886
+      },
+      {
+        "index": 33,
+        "alphaBounds": [
+          60,
+          123,
+          197,
+          238
+        ],
+        "foregroundPixels": 6500,
+        "width": 137,
+        "height": 115,
+        "relativeToRowMedian": 1.009474
+      },
+      {
+        "index": 34,
+        "alphaBounds": [
+          42,
+          136,
+          213,
+          238
+        ],
+        "foregroundPixels": 6378,
+        "width": 171,
+        "height": 102,
+        "relativeToRowMedian": 0.990526
+      },
+      {
+        "index": 35,
+        "alphaBounds": [
+          19,
+          141,
+          237,
+          238
+        ],
+        "foregroundPixels": 7418,
+        "width": 218,
+        "height": 97,
+        "relativeToRowMedian": 1.152042
+      },
+      {
+        "index": 36,
+        "alphaBounds": [
+          24,
+          138,
+          233,
+          238
+        ],
+        "foregroundPixels": 5817,
+        "width": 209,
+        "height": 100,
+        "relativeToRowMedian": 1.005966
+      },
+      {
+        "index": 37,
+        "alphaBounds": [
+          62,
+          137,
+          195,
+          238
+        ],
+        "foregroundPixels": 5933,
+        "width": 133,
+        "height": 101,
+        "relativeToRowMedian": 1.026027
+      },
+      {
+        "index": 38,
+        "alphaBounds": [
+          56,
+          131,
+          199,
+          238
+        ],
+        "foregroundPixels": 5656,
+        "width": 143,
+        "height": 107,
+        "relativeToRowMedian": 0.978124
+      },
+      {
+        "index": 39,
+        "alphaBounds": [
+          52,
+          131,
+          204,
+          238
+        ],
+        "foregroundPixels": 5748,
+        "width": 152,
+        "height": 107,
+        "relativeToRowMedian": 0.994034
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      5606.5,
+      5426.0,
+      6028.0,
+      6079.0,
+      6018.5,
+      5273.5,
+      5066.5,
+      3928.0,
+      6439.0,
+      5782.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 40,
+    "cellRgbaSha256": [
+      "cca35f82009802de0d0984e5a3005bcd75c2adc73735d69ee7a81961e5b23fa7",
+      "dea6353f8cc14746b8107527ff9cd17e050ddb0327e9d5aa4204bb45634fdffd",
+      "0433b48137250b828f932c0fcf8b8ad929b398fb96c9add2f78b6d0b04bcd8bc",
+      "552deacbe0d93caabd191bd52b04a20b51fbb49788b540f4f3b88d2f43f8f00e",
+      "956dfc5b4016633d8ef4492ad17308fa89e43bc02eb2a8971462de4330bc89a3",
+      "fe454e9c9b91a790be7f34b23df9a2871629335fc87079e2fcf45de53e61b19e",
+      "2c9b746e3ba9616aa3b478e07b497424e0f4884449a4ce97bb60c62142bbd7df",
+      "63bea3727978820ec889caa7108b1c29094a2a18bb92eb3b509170d7770c2a29",
+      "b885e707d796b2f0ff948e3ad3a7398db8140da3e6f904a763fb7674e3c07f6a",
+      "1b20a9303052a2bf3c797a65f818f31aab1d7983b9a2ab2a894ce8caceedfdd8",
+      "5c774a193828a148a4451258bfc1b064317ec612bb77d44866351bfc0576e451",
+      "1a01b663b5fd31303b8607f9b785fdfbfcd7384bdb6ebe8b5c4fc061c64d3b15",
+      "818bd287f60a4f084ceeab631d0c92bf9525ea9e350b0f2bdd9043c14f41ffee",
+      "9c805d75f26d438fd5c5df62389b2bb81d6959db1ceed782f7abbfac043a90f5",
+      "a5967400447ad3d5e253b7dc4d3608f858d163187a8d720d8c24c73f4d61b673",
+      "988c1cfa826d2d936e0b23ed3f110d98ce5595122fdfccd7ef29f31fc3e09dc8",
+      "7fcd2e37410226e4d50b94e27f691f8a272a577b6260940f3676c239430011f8",
+      "d3a6de5b1bb7c4016cc9aa86d2916ae5f92416383306b0a06ad96dbb59f5e1c4",
+      "f55282ac3833fbf738a7a7071c81fc42894b0239ce9c6d13e8b2bab75e28ee15",
+      "86ff8b47e31aa8527cd781a769968efb1d8ee24c755a4be64d377d4d4dd9e543",
+      "77215cea93b7c1591f930a0abda80b4a22360b207def5748c01ce112327ee682",
+      "52fb9eb7886ccea98f508a091a4db0cf3ba0889b00f050d11f3973c8b4bf6bba",
+      "6747502b7457f2e32dcf0425149a88047a26eae415a6ba2e32ea77fe8d2f8b23",
+      "437dee40715597cabc9e3eb17ea4610c0b0d651d0aa38ec30934259f775cb050",
+      "5fa47532e692332fb602f34e5ba20cce6dcaec6d8e041f16a4bec2c12c098d0f",
+      "a532df3f94fd015759419cfb8bb075b44cde2adcb7d78f7f89d6679f50fcf7e2",
+      "315ccc5e1f52a6bddcc706e3401817f8f68bf37bcc3382b509960218f1c59ce9",
+      "a5c25bcfdec29dfb3864ff48435a861175db40f4fbef4b6495dd94e1c948a57c",
+      "527c4e631c298d7f40bf480143ce293d94b71da0c1f473ac9e0bec36f8bebca2",
+      "dce5c46961c0d19fd0639efda328ad0705fdeb568ea12cd94dca1148c34025cb",
+      "661b7ec905427e9f858566d2c9112113fb7d3325ad6d19f5b38d6d87a940dd9c",
+      "14addeac8ca4b9da05c0e54e200a0a45ec935bf32cb7f4356782fa72067d2510",
+      "e42abdc15b3ed9c5d46de41c9bb0d96da5b6cf9a557386811ae7d72b1d576e03",
+      "5f946890960e8944a58702f70c58499cf4bf7858067a1fd1eb67028c3c04213a",
+      "ecd23da023c946b6c065e27704aa26e3220481ce959c4584b1b0ee1f62fc6827",
+      "76e82fa27e1a92df1baee7d2bc3daf6abc8057606bd9613010dba692f124afa9",
+      "8269ead2c50988f2aff4b1b481b15e46bb3995b3cf38a560de24ab0125760864",
+      "8d0365d66ff5f275972e042a916f443012a9b410e20b6fb41b77b92d439165f7",
+      "b8c9a210cf44052cfae867450ceb647dfb56ac8a71e4148cf7f9d16acaf35f43",
+      "b250be7c1590769a42ea013d8f3281c0879ae233348ffeca7692dd4b6d4e44b3"
+    ],
+    "visualFidelityCertified": false
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 40,
+    "opaqueMatteFrameCount": 40,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 20,
+    "remainingStrictPixelCount": 0
+  }
+}

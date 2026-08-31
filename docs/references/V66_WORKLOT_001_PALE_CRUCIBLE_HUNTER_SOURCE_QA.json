@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "profileId": "enemy-030-pale-crucible-hunter",
+  "batchId": "batch-003",
+  "generatedAt": "2026-09-01",
+  "status": "read-only-source-qa-candidates-not-accepted",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "normalized": false,
+  "canonExact": false,
+  "classification": "PROJECT_ADAPTATION",
+  "auditMethod": {
+    "technical": "scripts/audit-v66-batch-sources.py::audit_image invoked directly in memory with the current strict extractor; no report, source or atlas was written by the audit call",
+    "visual": "Manual full-board review in row-major order with in-memory contact sheets and source-cell coordinate grids",
+    "scale": "Manual Euclidean measurements of a rigid visible cranial landmark on two comparable right-facing poses per active clip",
+    "automaticAcceptance": false
+  },
+  "contractAuthority": "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_REFERENCE.json",
+  "activeSources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/idle.png",
+      "bytes": 1788753,
+      "sha256": "794883780864c17f1e0ded08eeff4cc36c2791bd8400aec3e7ecbdb47a467f14",
+      "generationId": "exec-47ed3ad2-e0b7-4b80-a31e-67b4dec4e224",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "aspectExact2To1": true,
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctNominalCellHashes": 8
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "strictMagentaRatio": 0.794987,
+        "edgeMagentaRatio": 1.0
+      },
+      "borderContactFrames": [3, 5],
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review"
+      ],
+      "lowestForegroundClueYLocalPx": [401, 401, 401, 401, 400, 401, 401, 401]
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/move.png",
+      "bytes": 1342672,
+      "sha256": "6a1f39d987b4fc2f8ff29e1d9e47e988c3ea3aaa93bc9144a16f9220a069353a",
+      "generationId": "exec-0df8b49b-0639-4505-a9de-a8715f5c1a17",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "aspectExact2To1": true,
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctNominalCellHashes": 8
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "strictMagentaRatio": 0.913637,
+        "edgeMagentaRatio": 1.0
+      },
+      "borderContactFrames": [],
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8
+      },
+      "findings": [],
+      "lowestForegroundClueYLocalPx": [407, 408, 407, 411, 286, 285, 285, 285]
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/attack.png",
+      "bytes": 1170818,
+      "sha256": "35e58dc2f4a67081e5a28e4e3b40e4ee818ada73fc60d5a82a7eb77a9221b4e1",
+      "generationId": "exec-ab1e33ef-118c-4635-8eb5-11db48d8f62a",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "aspectExact2To1": true,
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctNominalCellHashes": 8
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "strictMagentaRatio": 0.951117,
+        "edgeMagentaRatio": 1.0
+      },
+      "borderContactFrames": [],
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8
+      },
+      "findings": [],
+      "lowestForegroundClueYLocalPx": [368, 371, 370, 370, 221, 221, 221, 221]
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/death.png",
+      "bytes": 1175319,
+      "sha256": "37c0918dc93848d35a4464e8a1456f21fd2ca270612cd159131a40d4efd43270",
+      "generationId": "exec-da1d5385-2925-4615-9ed3-e89836a53bf1",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "aspectExact2To1": true,
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctNominalCellHashes": 8
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "strictMagentaRatio": 0.943375,
+        "edgeMagentaRatio": 1.0
+      },
+      "borderContactFrames": [],
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8
+      },
+      "findings": [],
+      "lowestForegroundClueYLocalPx": [380, 374, 386, 395, 296, 295, 296, 296]
+    }
+  ],
+  "rejectedSources": [
+    {
+      "name": "attack-r1",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/rejected/attack-r1.png",
+      "bytes": 1481846,
+      "sha256": "3a31264904fc881311eea563022389d0eaf08201f9ddf6048d6ba54b2771913b",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matteKind": "opaque-magenta",
+      "strictMagentaRatio": 0.870069,
+      "distinctNominalCellHashes": 8,
+      "borderContactFrames": [1, 2, 3, 4, 5, 6, 7],
+      "strictExtraction": "blocked",
+      "safeReassignmentProbe": "blocked-ambiguous-cross-cell-ownership",
+      "visualNote": "Scale is substantially closer to idle than the selected attack, but the long reaching poses spill across nominal cells and cannot be reassigned safely by the current ownership rules."
+    },
+    {
+      "name": "attack-r2",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/rejected/attack-r2.png",
+      "bytes": 1317481,
+      "sha256": "278a5e08bbde83414691c94dfa4832150f9324c4d131b9b29c93e89f81d6c1d2",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matteKind": "opaque-magenta",
+      "strictMagentaRatio": 0.916965,
+      "distinctNominalCellHashes": 8,
+      "borderContactFrames": [4, 5],
+      "strictExtraction": "blocked",
+      "safeReassignmentProbe": "proven-short-spill-extraction-pass",
+      "visualNote": "Already compacted toward the small selected-clip scale; two lower-row poses still cross nominal boundaries."
+    },
+    {
+      "name": "death-r1",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/rejected/death-r1.png",
+      "bytes": 1321786,
+      "sha256": "0e94b6bfe1451be0409d0471f63d1511cc6950b44e2db3d701b890f4e2a6c0af",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matteKind": "opaque-magenta",
+      "strictMagentaRatio": 0.900056,
+      "distinctNominalCellHashes": 8,
+      "borderContactFrames": [1, 2, 3, 4, 5, 6, 7],
+      "strictExtraction": "blocked",
+      "safeReassignmentProbe": "proven-short-spill-extraction-pass",
+      "visualNote": "Scale is closer to idle and collapse chronology is readable, but seven poses touch nominal boundaries."
+    },
+    {
+      "name": "move-r1",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/rejected/move-r1.png",
+      "bytes": 1564387,
+      "sha256": "88d80120fc0b690da125fd64dc97d0bcf720aee028cb957d514d0846a746a6b3",
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matteKind": "opaque-magenta",
+      "strictMagentaRatio": 0.850729,
+      "distinctNominalCellHashes": 8,
+      "borderContactFrames": [1, 2, 3, 5, 6, 7],
+      "strictExtraction": "blocked",
+      "safeReassignmentProbe": "blocked-ambiguous-cross-cell-ownership",
+      "visualNote": "Scale and elongated anatomy are closer to idle, but six poses cross cell boundaries and ownership is ambiguous."
+    }
+  ],
+  "visualReview": {
+    "facing": {
+      "status": "pass-candidate",
+      "note": "All active and rejected poses keep the head and intended action facing right; no left-facing identity swap was observed."
+    },
+    "anatomy": {
+      "status": "reserve",
+      "note": "The pale eyeless cranium, charcoal seams, dorsal spines, long forearms, digitigrade legs and segmented tail remain recognizable. Idle is much taller, more upright and more elongated; move, attack and death are compact and hunched, with reduced fine rib and limb readability. Identity is compatible at macro level but not proven invariant enough for artistic acceptance."
+    },
+    "chronology": {
+      "idle": "Subtle head, torso and arm breathing changes form a plausible loop.",
+      "move": "Alternating hind-leg extension and compression read as a run, but the frame-3 to frame-4 row transition contains a large vertical placement jump.",
+      "attack": "Anticipation, forward extension and recovery are readable, but the frame-3 to frame-4 row transition contains a large vertical placement jump.",
+      "death": "Standing, stagger, kneel, prone transition and final settling are irreversible. Frame 5 rolls the torso and raises a limb but does not return to standing; the row transition still jumps vertically."
+    },
+    "supportsAndGround": {
+      "measurementMeaning": "Lowest conservative foreground clue in each nominal source cell; it is useful evidence of source placement but is not a validated physical foot root.",
+      "idle": {
+        "row0MedianY": 401.0,
+        "row1MedianY": 401.0,
+        "rowTransitionDeltaY": 0.0,
+        "note": "Stable source ground placement."
+      },
+      "move": {
+        "row0MedianY": 407.5,
+        "row1MedianY": 285.0,
+        "rowTransitionDeltaY": -122.5,
+        "note": "Large upward source-placement discontinuity at frame 4 despite readable alternating hind-leg support."
+      },
+      "attack": {
+        "row0MedianY": 370.0,
+        "row1MedianY": 221.0,
+        "rowTransitionDeltaY": -149.0,
+        "note": "Largest row transition; physical-root anchoring is mandatory before playback review."
+      },
+      "death": {
+        "row0MedianY": 383.0,
+        "row1MedianY": 296.0,
+        "rowTransitionDeltaY": -87.0,
+        "note": "Collapse remains chronological, but the second row is authored substantially higher in its cells."
+      }
+    }
+  },
+  "scaleReview": {
+    "status": "calibrated-source-scale-required-before-normalization",
+    "coordinateSystem": "nominal-source-cell-pixels",
+    "baselineClip": "idle",
+    "landmark": "visible ivory cranial-cap longitudinal chord from the posterior dorsal cap rim immediately after the black nuchal seam to the rostral tip",
+    "manualEndpointUncertaintyPx": 3,
+    "measurements": [
+      {
+        "clip": "idle",
+        "frame": 0,
+        "endpoints": [[264, 133], [349, 199]],
+        "lengthPx": 107.6151
+      },
+      {
+        "clip": "idle",
+        "frame": 2,
+        "endpoints": [[269, 97], [349, 151]],
+        "lengthPx": 96.5194
+      },
+      {
+        "clip": "move",
+        "frame": 0,
+        "endpoints": [[293, 235], [335, 273]],
+        "lengthPx": 56.6392
+      },
+      {
+        "clip": "move",
+        "frame": 2,
+        "endpoints": [[248, 222], [291, 260]],
+        "lengthPx": 57.3847
+      },
+      {
+        "clip": "attack",
+        "frame": 0,
+        "endpoints": [[270, 238], [317, 273]],
+        "lengthPx": 58.6003
+      },
+      {
+        "clip": "attack",
+        "frame": 2,
+        "endpoints": [[237, 260], [283, 289]],
+        "lengthPx": 54.3783
+      },
+      {
+        "clip": "death",
+        "frame": 0,
+        "endpoints": [[294, 220], [338, 260]],
+        "lengthPx": 59.4643
+      },
+      {
+        "clip": "death",
+        "frame": 2,
+        "endpoints": [[261, 302], [304, 336]],
+        "lengthPx": 54.8179
+      }
+    ],
+    "medianCranialLengthPxByClip": {
+      "idle": 102.0672,
+      "move": 57.0119,
+      "attack": 56.4893,
+      "death": 57.1411
+    },
+    "clipMedianOverIdleMedian": {
+      "idle": 1.0,
+      "move": 0.558572,
+      "attack": 0.553452,
+      "death": 0.559838
+    },
+    "proposedSourceScaleByClip": {
+      "idle": 1.0,
+      "move": 1.79028,
+      "attack": 1.806842,
+      "death": 1.786232
+    },
+    "decision": "A per-clip source scale is necessary before normalization. The three small active clips agree within roughly one percent of one another while idle is about 1.8 times larger on the measured rigid cranial landmark. This pattern also matches the rejected large move/attack/death boards, showing that boundary-compaction iterations introduced the scale discontinuity.",
+    "applicationStatus": "not-applied",
+    "acceptanceStatus": "not-accepted",
+    "requiredFollowUp": [
+      "Apply the proposed factors only through the explicitly reviewed scale-calibration path; do not resize or overwrite source PNGs.",
+      "Normalize with physical-root anchors and re-render contact sheets/GIFs.",
+      "Re-measure the cranial landmark in atlas coordinates and confirm inter-clip agreement within the project tolerance.",
+      "Review frame-3 to frame-4 support continuity, limb topology, silhouette readability and loop seams before any acceptance or runtime integration."
+    ]
+  },
+  "summary": {
+    "activeBoards": 4,
+    "activePoses": 32,
+    "activeStrictExtractionPass": 4,
+    "activeBoardsWithConservativeBorderClues": 1,
+    "rejectedBoards": 4,
+    "rejectedStrictExtractionBlocked": 4,
+    "sourceScaleCalibrationRequired": true,
+    "sourcePixelsModified": 0,
+    "promptsEventsReferencesModified": 0,
+    "globalStateModified": 0,
+    "acceptedAutomatically": 0
+  },
+  "limitations": [
+    "Distinct cell hashes and extraction success do not prove eight anatomically correct poses or commercial animation quality.",
+    "Cranial endpoints were manually inspected and carry a plus-or-minus three pixel endpoint uncertainty; proposed scale factors are calibrated candidates, not artistic acceptance.",
+    "Lowest foreground clues are not substitutes for authored physical-root landmarks.",
+    "No source, prompt, event, reference, queue, registry, STATE, manifest or runtime file was modified by this audit."
+  ]
+}

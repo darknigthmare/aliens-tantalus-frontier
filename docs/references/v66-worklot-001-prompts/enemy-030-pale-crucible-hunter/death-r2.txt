@@ -1,0 +1,10 @@
+Use case: identity-preserve
+Input images: Image 1 is the selected cell-safe Pale Crucible Hunter ATTACK sheet. Preserve its exact character identity, compact scale, palette and rendering.
+Asset type: corrected production 2D side-view metroidvania death sprite sheet candidate
+Primary request: exactly eight distinct chronological non-looping 10 fps poses of an irreversible death:1 upright lethal hit,2 recoil,3 knees buckle,4 one hand catches fall,5 compact torso roll,6 limbs/tail lose tension,7 final settle,8 fully prone motionless corpse. Continuous fall, no teleport and no recovery.
+Absolute packing: exact4columns by2rows on exact2:1 canvas, exactly one full creature per equal cell. Every complete silhouette including curled tail, dorsal spines, claws, toes and prone corpse occupies at most58 percent cell width and42 percent cell height. Center each pose with a broad empty pure-magenta moat at least90 source pixels from every nominal cell boundary. Curl/fold the tail beside or above the body; never stretch it horizontally. Prone bodies must remain compact with bent limbs. Shared ground line near72 percent cell height. Small characters and huge gutters required.
+Camera: strict orthographic gameplay side view facingRIGHT in readable poses; no front view, mirror or perspective.
+Identity: identical bone-ivory long eyeless skull, dorsal spines, ivory plates over charcoal sinew, gaunt arms, black claws, digitigrade legs and segmented tail; no redesign, gore spray, equipment, eyes or extra limbs.
+Style: same dark hand-painted biomechanical production sprite.
+Background: perfectly flat uniform pure #FF00FF outside subjects, no floor, cast shadow, blood pool, glow, checkerboard, texture or magenta bounce.
+Constraints: no boundary contact, overlap, crop, fragments, grid, border, text, UI, logo, watermark, duplicate or revived final pose.

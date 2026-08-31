@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-030-pale-crucible-hunter",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-20578a4a-a25c-4c29-a3cd-3d7ea58f15ff",
+  "actor": "Codex /root",
+  "sourceSha256": "0e94b6bfe1451be0409d0471f63d1511cc6950b44e2db3d701b890f4e2a6c0af",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/rejected/death-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-030-pale-crucible-hunter/death.txt",
+  "candidateSelected": false,
+  "note": "Rejected r1: readable impact-to-corpse chronology, but default extraction blocked and only safe reassignment passed. Preserved unchanged; replaced by a strictly cell-safe r2."
+}

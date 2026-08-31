@@ -1,0 +1,11 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-028-reef-spitter",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5cfcab2b-2b55-4c70-a083-713e67bb7eb1",
+  "actor": "Codex complete_variants",
+  "sourceSha256": "1da968475341c5ea46f21885eb6aa06dd6222e7fe70bfdfa878346da2854e742",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-028-reef-spitter/idle.txt",
+  "note": "Selected strict-pass idle candidate. The reference fragment retains the exact CRLF transport text; STATE records the reviewed LF prompt document. Candidate only, not accepted or runtime-integrated."
+}

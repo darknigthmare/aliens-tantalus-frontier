@@ -1,0 +1,6 @@
+Use case: precise-object-edit
+Asset type: cell-padding repair of the current Reef Stalker ATTACK sprite sheet.
+Input image1: edit target, the current eight-pose4x2 attack sheet.
+Change ONLY geometry packing: uniformly scale down EACH of the eight complete creatures to82% of its current size around its own center, then recenter every creature inside its SAME original square cell. Preserve every pose, limb, tail curve, mouth state, anatomy, texture, palette, right-facing direction, chronological row-major order and identity exactly. Do not redraw or reorder the attack.
+Exact canvas stays1774x887 and exact2:1. Invisible4columns2rows. After repair, every pose must have at least8% pure magenta clearance from all four edges of its own cell; especially separate top-row poses3/4 and bottom-row poses5/6. Entire nose, tail blade, feet and dorsal plates wholly inside own cell. No spill, contact, clipping or overlap. Same uniform scale for all8; no pose becomes larger/smaller than another.
+Keep uniform opaque #FF00FF background; no shadows, floor, text, grid, numbering, UI, effects or extra subject. Change nothing except uniform scale and per-cell centering.

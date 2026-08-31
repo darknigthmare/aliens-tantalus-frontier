@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-029-siege-royal",
+  "clipId": "tail-strike",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:90998b9ee29b1ddfb05b6cda7daffec5aa657846c8d8eb8666c656a1016b9cf4",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "90998b9ee29b1ddfb05b6cda7daffec5aa657846c8d8eb8666c656a1016b9cf4",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/rejected/tail-strike-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-029-siege-royal/tail-strike.txt",
+  "candidateSelected": false,
+  "rejectionReason": "Seven wide tail-whip poses touched or crossed nominal cell dividers; default extraction blocked.",
+  "note": "Real builtin OpenAI ImageGen result, content-addressed because no provider UUID was exposed. Preserved unchanged; never runtime-accepted."
+}

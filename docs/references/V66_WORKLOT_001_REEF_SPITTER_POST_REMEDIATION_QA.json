@@ -1,0 +1,1038 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-028-reef-spitter",
+  "reportKind": "post-remediation-read-only-qa",
+  "auditedAt": "2026-08-31T22:27:55.117Z",
+  "status": "incomplete-strict-death",
+  "scope": {
+    "sourceClips": [
+      "idle",
+      "move",
+      "attack",
+      "death"
+    ],
+    "sourceCount": 4,
+    "authoredPoseCount": 32,
+    "readOnly": true,
+    "sourcePixelsModified": false,
+    "promptsModified": false,
+    "eventsModified": false,
+    "referencesModified": false,
+    "globalRegistriesModified": false,
+    "queueModified": false,
+    "stateModified": false,
+    "manifestsModified": false,
+    "runtimeModified": false
+  },
+  "summary": {
+    "dimensionsAndGridPassClips": [
+      "idle",
+      "move",
+      "attack",
+      "death"
+    ],
+    "opaqueMagentaMattePassClips": [
+      "idle",
+      "move",
+      "attack",
+      "death"
+    ],
+    "eightDistinctPosePassClips": [
+      "idle",
+      "move",
+      "attack",
+      "death"
+    ],
+    "strictExtractionPassClips": [
+      "idle",
+      "move",
+      "attack"
+    ],
+    "safeOnlyClip": "death",
+    "strictExtractionBlockedClips": [
+      "death"
+    ],
+    "profileStrictComplete": false,
+    "acceptanceGranted": false,
+    "runtimeIntegrationGranted": false,
+    "blocker": "death frames 2 and 3 touch the nominal cell boundary; safe ownership can recover all eight poses but the strict path remains blocked"
+  },
+  "sources": {
+    "idle": {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/idle.png",
+      "sha256": "1da968475341c5ea46f21885eb6aa06dd6222e7fe70bfdfa878346da2854e742",
+      "bytes": 1567919,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.840045,
+        "edgeMagentaRatio": 1
+      },
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "borderContactFrames": [],
+        "findings": [],
+        "error": null
+      },
+      "safeReassignment": {
+        "status": "not-probed",
+        "extractedFrames": 0,
+        "distinctExtractedPoseHashes": 0,
+        "accepted": false
+      },
+      "cellProofs": [
+        {
+          "frame": 0,
+          "rgbaSha256": "240440ae7dba587ad1d2b7b7cc6bb37f0c97ec383bb25335cab85e7abffbf0d1",
+          "foregroundBoundsHeuristic": [
+            19,
+            142,
+            386,
+            393
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "rgbaSha256": "49d9e3cdd35776d9eb2d394c4607bd90b38a21f8ea34b9c72500b47e68bcf579",
+          "foregroundBoundsHeuristic": [
+            12,
+            129,
+            382,
+            393
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "rgbaSha256": "45e8a5ec99a42434b9f89fb8b94527c2116d6a6d43d9c20bb802d7f4e0dc1ad7",
+          "foregroundBoundsHeuristic": [
+            14,
+            108,
+            375,
+            393
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "rgbaSha256": "ee0e25e7f883623496a924b57e2fa7e018892c8aedd143e6cc1ae2aeb54d6e06",
+          "foregroundBoundsHeuristic": [
+            7,
+            103,
+            356,
+            393
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "rgbaSha256": "764ef0c263ae00a87b947515d61135ba138863b370c2f9705333267ffa5d4c60",
+          "foregroundBoundsHeuristic": [
+            21,
+            72,
+            368,
+            370
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "rgbaSha256": "27db941ca8fd63a011ce4895fa0a5d4e144c6db4d2f00f0bf37e2a3fdac2372c",
+          "foregroundBoundsHeuristic": [
+            17,
+            99,
+            374,
+            370
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "rgbaSha256": "fb927e7cd4b334764f96fa97646b483e9e872470a1370eb2551c40892c22a072",
+          "foregroundBoundsHeuristic": [
+            12,
+            111,
+            370,
+            370
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "rgbaSha256": "f1ddc682996fa2f116e320a0c942e0bc4f95b25feba804347fa179e699c22111",
+          "foregroundBoundsHeuristic": [
+            4,
+            112,
+            360,
+            370
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false
+    },
+    "move": {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/move.png",
+      "sha256": "97a211a87bef9602dfdd7174733e0ce3b29cea6447ca9b13edef47432c510d6f",
+      "bytes": 1711034,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.799946,
+        "edgeMagentaRatio": 1
+      },
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "borderContactFrames": [],
+        "findings": [],
+        "error": null
+      },
+      "safeReassignment": {
+        "status": "not-probed",
+        "extractedFrames": 0,
+        "distinctExtractedPoseHashes": 0,
+        "accepted": false
+      },
+      "cellProofs": [
+        {
+          "frame": 0,
+          "rgbaSha256": "5faeceb25f8173bf58035228a797408dd8221cf1be0c07a8c51a24e8f0156a7a",
+          "foregroundBoundsHeuristic": [
+            56,
+            71,
+            422,
+            373
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "rgbaSha256": "39afa3eefec1ce567021855e206f076f1e7e35a9a640b0e015181df4a766cc87",
+          "foregroundBoundsHeuristic": [
+            35,
+            74,
+            397,
+            373
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "rgbaSha256": "4d7fcb0d08d4d00e03f9e19c1ea8c874ca361d890b89dc1bc93621598cf876fa",
+          "foregroundBoundsHeuristic": [
+            46,
+            90,
+            399,
+            373
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "rgbaSha256": "8e9d482512764c4c7d31f9a740ee5152d773a7cb4d6ccf1898bd1a3c89a1ed6b",
+          "foregroundBoundsHeuristic": [
+            29,
+            90,
+            370,
+            373
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "rgbaSha256": "ab35d5b73abd9e6c86e229ba5e277e6878388cc975c9bb940f7aa2d7fc2c491c",
+          "foregroundBoundsHeuristic": [
+            57,
+            78,
+            409,
+            374
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "rgbaSha256": "d56648c17fadfe5cf20cb0227aee10753bb795de5415b867f062181416720dec",
+          "foregroundBoundsHeuristic": [
+            37,
+            84,
+            386,
+            374
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "rgbaSha256": "2bdfd1c8644e2cb4c406f45475d67a27da3848c92a687ad7647003ac15da0ac7",
+          "foregroundBoundsHeuristic": [
+            30,
+            84,
+            397,
+            374
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "rgbaSha256": "f1f736454c6eeb1c2d269d031d3d909191a921cde7e3e0845ca11e6637761679",
+          "foregroundBoundsHeuristic": [
+            22,
+            80,
+            379,
+            374
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false
+    },
+    "attack": {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/attack.png",
+      "sha256": "9d04e15f531976a29963e38bda30aa27b0bcb8a4f136a2c65e76c3c612f251b4",
+      "bytes": 1422546,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.874522,
+        "edgeMagentaRatio": 1
+      },
+      "strictExtraction": {
+        "status": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "borderContactFrames": [],
+        "findings": [],
+        "error": null
+      },
+      "safeReassignment": {
+        "status": "not-probed",
+        "extractedFrames": 0,
+        "distinctExtractedPoseHashes": 0,
+        "accepted": false
+      },
+      "cellProofs": [
+        {
+          "frame": 0,
+          "rgbaSha256": "93174cbbefa535259e085c68b2ddc636e7dbcd0594087f8f094d104503d8df67",
+          "foregroundBoundsHeuristic": [
+            104,
+            110,
+            317,
+            392
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "rgbaSha256": "f1773ea421cd235c94f6b86d0ef70737d66a1496ba26e1fe4f43ab12060af8e1",
+          "foregroundBoundsHeuristic": [
+            80,
+            165,
+            312,
+            392
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "rgbaSha256": "385dcf2fc92281e90743a6612ab7498fdffaf05105c214a9ee950459e87277bb",
+          "foregroundBoundsHeuristic": [
+            91,
+            163,
+            319,
+            392
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "rgbaSha256": "9d755f7ec8281d6b5b9545613e87e295a7af71015e644e851f90d8a7768b8537",
+          "foregroundBoundsHeuristic": [
+            83,
+            120,
+            305,
+            393
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "rgbaSha256": "947ee432ccdd851339afe31bfbf7d6bd80ae8ed9b780ea1d6bea70b2205a0189",
+          "foregroundBoundsHeuristic": [
+            103,
+            79,
+            330,
+            361
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "rgbaSha256": "15ac08f69a45d68a428a1285e469729df6a09504615f1ad2f3434b92b4f0b578",
+          "foregroundBoundsHeuristic": [
+            82,
+            99,
+            307,
+            361
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "rgbaSha256": "9e6cf7e077d5da8c84327d41edeb990bf7e05268c393da21bda2aac44fcbb127",
+          "foregroundBoundsHeuristic": [
+            81,
+            136,
+            309,
+            360
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "rgbaSha256": "2a9b0b1ecaadf40226f618e1a2aebe1192f232a50fe5b2bf6b5472d80c65d477",
+          "foregroundBoundsHeuristic": [
+            90,
+            80,
+            299,
+            361
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false
+    },
+    "death": {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/death.png",
+      "sha256": "04e8247acb16750a7d246e5a95014b63030358aa39629748a9b705ffe4df3395",
+      "bytes": 1398324,
+      "dimensions": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.867596,
+        "edgeMagentaRatio": 1
+      },
+      "strictExtraction": {
+        "status": "blocked",
+        "extractedFrames": 0,
+        "distinctExtractedPoseHashes": 0,
+        "borderContactFrames": [
+          2,
+          3
+        ],
+        "findings": [
+          "nominal-cell-border-contact-needs-ownership-review",
+          "default-normalizer-extraction-blocked"
+        ],
+        "error": "Authored pose touches cell border at (887, 0, 1330, 444); ownership/cropping needs visual review or regeneration."
+      },
+      "safeReassignment": {
+        "status": "proven-short-spill-extraction-pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "accepted": false,
+        "transferProofs": [
+          {
+            "ownerCell": 3,
+            "fromCells": [
+              2
+            ],
+            "pixels": 243,
+            "componentPixels": 23733,
+            "ownerShare": 0.989761,
+            "sourceBoundsGlobal": [
+              1306,
+              241,
+              1655,
+              438
+            ],
+            "pixelValuesPreserved": true,
+            "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+          }
+        ]
+      },
+      "cellProofs": [
+        {
+          "frame": 0,
+          "rgbaSha256": "a401c5db9be4f14b80f3edf4fc92dbede1e86aa2284c00939b0a93ee71b390a7",
+          "foregroundBoundsHeuristic": [
+            103,
+            133,
+            389,
+            434
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "rgbaSha256": "ffa1e8bac0e82570b3b629859575daecff0cafaa87a51c85e8436987cba89064",
+          "foregroundBoundsHeuristic": [
+            44,
+            148,
+            360,
+            433
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "rgbaSha256": "979c3ce1445f2c4f8bb1d894b3cd1dd5d1fac4abbb6aad385d8a1ec0b7a1d507",
+          "foregroundBoundsHeuristic": [
+            43,
+            196,
+            443,
+            436
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 21
+          }
+        },
+        {
+          "frame": 3,
+          "rgbaSha256": "dda107627bafc44cbf89bc260dd46bac546bf33fc6ee7875ef9a2ea10d1b8dcd",
+          "foregroundBoundsHeuristic": [
+            0,
+            241,
+            325,
+            440
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 22,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "rgbaSha256": "eab647d6687d7d74d0d0a4a0680ec23856d6bb575acadebe7889085be35ab951",
+          "foregroundBoundsHeuristic": [
+            111,
+            146,
+            342,
+            336
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "rgbaSha256": "26f3fc0fe948e3484e0de8884f1c45a32ae5e45a8f1da6a237f8e3200009d3e2",
+          "foregroundBoundsHeuristic": [
+            96,
+            162,
+            348,
+            336
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "rgbaSha256": "6fbbca938c8ad98f725d41527ec8e495d3888e6d1ec03fc699407f4be6abd903",
+          "foregroundBoundsHeuristic": [
+            48,
+            178,
+            318,
+            336
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "rgbaSha256": "50386cc9dcd3ec0add64873e3efbd1deb13e79536df84a7b2f9d22f6d7c394ef",
+          "foregroundBoundsHeuristic": [
+            42,
+            197,
+            316,
+            336
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false
+    }
+  },
+  "visualReview": {
+    "reviewedAgainstCurrentSourceSha": {
+      "idle": "1da968475341c5ea46f21885eb6aa06dd6222e7fe70bfdfa878346da2854e742",
+      "move": "97a211a87bef9602dfdd7174733e0ce3b29cea6447ca9b13edef47432c510d6f",
+      "attack": "9d04e15f531976a29963e38bda30aa27b0bcb8a4f136a2c65e76c3c612f251b4",
+      "death": "04e8247acb16750a7d246e5a95014b63030358aa39629748a9b705ffe4df3395"
+    },
+    "subjectCount": "one complete authored creature per nominal cell visually observed",
+    "direction": {
+      "status": "pass",
+      "observation": "All 32 poses present the head toward gameplay right; tails remain posterior/left or curl upward without a left-facing identity flip."
+    },
+    "identityAndAnatomy": {
+      "status": "pass-with-reserve",
+      "observation": "All clips retain the same project-original Reef Spitter grammar: eyeless elongated dome, blue-black/blue-green chitin, aquatic dorsal plates, yellow sub-throat acid gland, two arms, two digitigrade legs and one tail. No visible identity swap, weapon, biological cannon or extra creature.",
+      "reserve": "Tail posture and apparent whole-body occupancy vary strongly by action, but the rigid cranial invariant remains within 4.45% of idle; these bbox differences are therefore not used as scale evidence."
+    },
+    "chronologyByClip": {
+      "idle": {
+        "status": "pass",
+        "observation": "Eight right-facing breathing/throat-gland states expand and recover without projectile release."
+      },
+      "move": {
+        "status": "pass-with-reserve",
+        "observation": "Eight distinct grounded locomotion poses preserve direction and alternating limb placement; the gait change is visually subtle but not a duplicate-state sheet."
+      },
+      "attack": {
+        "status": "pass-with-reserve",
+        "observation": "Crouch, gland inflation, mouth release cue, recoil and recovery are legible. Gland volume briefly changes non-monotonically around the middle anticipation/release transition, so artistic continuity still needs explicit human acceptance even though strict extraction passes."
+      },
+      "death": {
+        "status": "visual-pass-technical-strict-block",
+        "observation": "Standing recoil progresses through loss of support, curl/fall and three terminal prone settling poses. The sequence is terminal rather than a reusable hurt loop; its frame-2/frame-3 tail overlap remains the strict technical blocker."
+      }
+    }
+  },
+  "scaleReview": {
+    "status": "reviewed-no-post-generation-scale-change-recommended",
+    "appliedToSource": false,
+    "appliedToNormalizer": false,
+    "appliedToAtlas": false,
+    "baselineClip": "idle",
+    "landmark": "dorsal cranial capsule, posterior dome rim to anterior snout tip",
+    "reasonForLandmark": "Rigid anatomy remains comparable across breathing, gait, attack crouch and collapse; whole-body and tail bounding boxes do not.",
+    "coordinates": "zero-based nominal-source-cell pixels; frame indices zero-based; frame-2 x values corrected to the actual x=887 third-cell origin",
+    "measurementMethod": "manual endpoint placement on an in-memory pixel contact overlay; Euclidean length; three early comparable poses per clip",
+    "estimatedEndpointUncertaintyPx": 3,
+    "noChangeRelativeBand": 0.05,
+    "measurementsByClip": {
+      "idle": {
+        "measurements": [
+          {
+            "frame": 0,
+            "endpoints": [
+              [
+                249,
+                145
+              ],
+              [
+                386,
+                205
+              ]
+            ],
+            "lengthPx": 149.5627
+          },
+          {
+            "frame": 1,
+            "endpoints": [
+              [
+                246,
+                131
+              ],
+              [
+                382,
+                190
+              ]
+            ],
+            "lengthPx": 148.2464
+          },
+          {
+            "frame": 2,
+            "endpoints": [
+              [
+                225,
+                109
+              ],
+              [
+                361,
+                171
+              ]
+            ],
+            "lengthPx": 149.4657
+          }
+        ],
+        "medianLengthPx": 149.4657
+      },
+      "move": {
+        "measurements": [
+          {
+            "frame": 0,
+            "endpoints": [
+              [
+                285,
+                73
+              ],
+              [
+                408,
+                151
+              ]
+            ],
+            "lengthPx": 145.6468
+          },
+          {
+            "frame": 1,
+            "endpoints": [
+              [
+                274,
+                76
+              ],
+              [
+                399,
+                153
+              ]
+            ],
+            "lengthPx": 146.8128
+          },
+          {
+            "frame": 2,
+            "endpoints": [
+              [
+                273,
+                92
+              ],
+              [
+                400,
+                159
+              ]
+            ],
+            "lengthPx": 143.5897
+          }
+        ],
+        "medianLengthPx": 145.6468
+      },
+      "attack": {
+        "measurements": [
+          {
+            "frame": 0,
+            "endpoints": [
+              [
+                191,
+                173
+              ],
+              [
+                319,
+                237
+              ]
+            ],
+            "lengthPx": 143.1084
+          },
+          {
+            "frame": 1,
+            "endpoints": [
+              [
+                188,
+                225
+              ],
+              [
+                311,
+                279
+              ]
+            ],
+            "lengthPx": 134.3317
+          },
+          {
+            "frame": 2,
+            "endpoints": [
+              [
+                188,
+                219
+              ],
+              [
+                321,
+                277
+              ]
+            ],
+            "lengthPx": 145.0965
+          }
+        ],
+        "medianLengthPx": 143.1084
+      },
+      "death": {
+        "measurements": [
+          {
+            "frame": 0,
+            "endpoints": [
+              [
+                183,
+                168
+              ],
+              [
+                311,
+                260
+              ]
+            ],
+            "lengthPx": 157.6325
+          },
+          {
+            "frame": 1,
+            "endpoints": [
+              [
+                99,
+                195
+              ],
+              [
+                230,
+                258
+              ]
+            ],
+            "lengthPx": 145.3616
+          },
+          {
+            "frame": 2,
+            "endpoints": [
+              [
+                135,
+                246
+              ],
+              [
+                267,
+                308
+              ]
+            ],
+            "lengthPx": 145.8355
+          }
+        ],
+        "medianLengthPx": 145.8355
+      }
+    },
+    "idleMedianBaselinePx": 149.4657,
+    "mathematicalScaleToIdle": {
+      "idle": 1,
+      "move": 1.02622,
+      "attack": 1.044423,
+      "death": 1.024892
+    },
+    "recommendedSourceScaleByClip": {
+      "idle": 1,
+      "move": 1,
+      "attack": 1,
+      "death": 1
+    },
+    "recommendationRationale": "Raw median ratios imply only +2.62% move, +4.44% attack and +2.49% death relative to idle. All remain inside the 5% no-change band and are comparable to pose foreshortening plus manual endpoint uncertainty; scaling would amplify measurement noise.",
+    "evidencePersistence": "No overlay image was persisted because this QA was constrained to the report artifact; endpoints and source SHA proofs are embedded here."
+  },
+  "decision": {
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "automaticPromotionAllowed": false,
+    "normalizeNow": false,
+    "reason": "Attack remediation now passes strict extraction, but death remains safe-only rather than strict. Scale factors should remain 1.0 for every clip pending a future source-level death fix and explicit artistic acceptance."
+  }
+
+}

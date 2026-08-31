@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-029-siege-royal",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:5ef970d830a7a6c401d679f3708347df8f825c33ba6adee034a34d4b4fc3ca56",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "5ef970d830a7a6c401d679f3708347df8f825c33ba6adee034a34d4b4fc3ca56",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/rejected/idle-r2.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-029-siege-royal/idle-r2.txt",
+  "candidateSelected": false,
+  "rejectionReason": "Technically cell-safe, but its standing silhouette was materially larger than the selected move/death/tail-strike source scale; replaced by idle-r3 inter-clip scale correction.",
+  "note": "Real builtin OpenAI ImageGen correction, content-addressed by exact PNG SHA-256. Preserved unchanged; never runtime-accepted."
+}

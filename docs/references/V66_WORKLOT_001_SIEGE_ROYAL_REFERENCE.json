@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "profiles": {
+    "enemy-029-siege-royal": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+        "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "Original project Siege Royal adaptation derived from the project's Praetorian and licensed Aliens: Colonial Marines caste grammar; Siege Royal is not an attested canon caste name and must never be described as an exact canon reconstruction. Heavy biped at Praetorian scale, with a substantially thicker ribbed torso, pelvis, thighs and forearms, powerful shoulders, and a broad low layered royal crest swept backward. The crest remains clearly smaller and less elaborate than a Queen crown and is not a Crusher head shield. Black/gunmetal wet organic chitin, dark-brown ridge edges, restrained battle scarring, ivory teeth; no heraldic colors. Eyeless narrow anterior dome and toothed maw with inner jaw; exactly TWO main arms and TWO digitigrade legs, with no Queen-like small chest-arm pair. Exactly four short reduced dorsal tubes remain below the crest. A single long segmented siege tail grows visibly from a thick sacral root and tapers to a sharp spear tip. No Queen ovipositor, no carried weapon, armor, shield, jewellery, cannon or mechanical implant. Strict right-facing side profile in every pose; never frontal or three-quarter. Preserve crest contour, heavy siege mass, tail root, limb count, palette, contact line and scale across all clips. The existing Praetorian render is a proportion and biological-grammar anchor only, not a request to copy it pixel-for-pixel.",
+      "reviewer": "Codex finish_source_review; V56 Siege Royal matrix, V56 runtime override and local Praetorian model anchor inspected",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.824526,
+        "attack": 0.913235,
+        "death": 0.912082,
+        "tail-strike": 1
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual main cranial-plate measurements on two comparable poses per clip calibrate move, attack and death to idle; tail-strike remains 1 within uncertainty.",
+        "reviewer": "Codex finish_source_review",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md"
+        ]
+      }
+    }
+  },
+  "evidence": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png",
+      "url": "https://models.spriters-resource.com/pc_computer/aliensvspredator/asset/285335/",
+      "sha256": "783ed2dc52558d96bf47404deac959e6874a79e2b8a194f1ad96e596560e4c1c",
+      "role": "Reviewed local Praetorian proportion and biological-grammar anchor; the Siege Royal remains a distinct original heavy project adaptation."
+    }
+  ],
+  "reviewStatus": "Reference and project design lock reviewed only; generated sheets require independent geometry, anatomy, chronology and continuity review and are not accepted or runtime-integrated."
+}

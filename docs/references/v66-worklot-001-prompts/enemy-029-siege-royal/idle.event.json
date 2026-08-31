@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-029-siege-royal",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:0220adadd0f89dce6d4eb7ceafc61d997a20eab0759972a413c714b4870abae6",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "0220adadd0f89dce6d4eb7ceafc61d997a20eab0759972a413c714b4870abae6",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/rejected/idle-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-029-siege-royal/idle.txt",
+  "candidateSelected": false,
+  "rejectionReason": "Six nominal cells touched vertical dividers; default extraction blocked although the safe reassignment probe passed.",
+  "note": "Real builtin OpenAI ImageGen result; wrapper exposed a PNG data URL but no provider UUID, so generationId is the exact result SHA-256. Preserved unchanged as a rejected master. Never runtime-accepted."
+}

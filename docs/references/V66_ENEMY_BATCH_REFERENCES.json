@@ -387,6 +387,128 @@
         ]
       }
     },
+    "enemy-027-reef-stalker": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+        "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png"
+      ],
+      "designLock": "Low streamlined amphibious XX121-derived quadruped; smooth eyeless dome, biomechanical ribs, exactly two forelimbs and two hind limbs, low flattened dorsal fin-plates, complete long propulsive segmented tail ending in one contained vertical swimming blade. Wet black blue-green shell with restrained cold teal iridescence and minute salt/algae deposits. Project adaptation only: no fish face, eyes, giant gills, shark mouth, tentacles, extra limbs, weapon or claim of an official published Reef Stalker caste.",
+      "reviewer": "Codex complete_royal; V56 identity, external derivation context and post-generation cranial scale audit reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.092275,
+        "attack": 0.991027,
+        "death": 1.015502
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual smooth-dome chord measurements on two comparable poses per clip give a material +9.2% move correction; attack and death remain within roughly 2% of idle and are retained as measured candidates for atlas recheck. Physical roots remain separately pending.",
+        "reviewer": "Codex complete_royal",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_REEF_STALKER_SCALE_REVIEW.md",
+          "docs/references/V66_WORKLOT_001_REEF_STALKER_POST_QA.json"
+        ]
+      }
+    },
+    "enemy-028-reef-spitter": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://avp.fandom.com/wiki/Spitter_%28Ranger%29",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/reef-spitter-action-sheet-v56.png"
+      ],
+      "designLock": "Original marine ecophenotype derived only from the licensed Spitter/Ranger combat function and xenomorph grammar: lean medium ranged caste, higher front, eyeless raised narrow cranium, wet blue-black/blue-green amphibious chitin, one modest yellow-acid inflatable gland beneath the throat connected to the mouth, fine restrained aquatic dorsal plates, exactly two arms, two digitigrade legs and one long laterally compressed swimming tail. No cannon, tube, fish mouth, giant torso sacs or terrestrial recolor.",
+      "reviewer": "Codex complete_variants and root; project lock, remediation sources and post-generation scale audit reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1,
+        "attack": 1,
+        "death": 1
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual cranial-capsule measurements across three poses per clip place move, attack and death within the 5% no-change band once pose foreshortening and endpoint uncertainty are considered; all factors remain 1.",
+        "reviewer": "Codex complete_variants",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_REEF_SPITTER_POST_REMEDIATION_QA.json"
+        ]
+      }
+    },
+    "enemy-029-siege-royal": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+        "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "Original project Siege Royal adaptation derived from the project's Praetorian and licensed Aliens: Colonial Marines caste grammar; Siege Royal is not an attested canon caste name and is not an exact canon reconstruction. Heavy biped with a substantially thicker ribbed torso, pelvis, thighs, forearms and shoulders, plus a broad low layered royal crest swept backward, smaller than a Queen crown and unlike a Crusher head shield. Black/gunmetal wet organic chitin, dark-brown ridge edges, restrained battle scarring and ivory teeth. Eyeless narrow anterior dome, exactly two main arms and two digitigrade legs, four short reduced dorsal tubes, and one long segmented siege tail visibly rooted at the sacrum. No Queen secondary arms, ovipositor, carried weapon, armor, shield, jewellery, cannon or mechanical implant. Strict right-facing side profile with fixed identity and scale.",
+      "reviewer": "Codex finish_source_review; project/Praetorian anchors and post-generation cranial-plate scale audit reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.824526,
+        "attack": 0.913235,
+        "death": 0.912082,
+        "tail-strike": 1
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual main cranial-plate measurements on two comparable poses per clip calibrate move, attack and death to the idle physical identity; tail-strike's raw 1.000160 ratio is intentionally rounded to 1 within measurement uncertainty.",
+        "reviewer": "Codex finish_source_review",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-030-pale-crucible-hunter": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/pale-crucible-hunter-action-sheet.png"
+      ],
+      "designLock": "One gaunt forge-born bipedal project xeno hunter: eyeless elongated bone-pale cranium, sick ivory exoskeletal plates over wet charcoal muscle seams, crucible-forged dorsal spines, narrow ribbed torso, very long sinewy forearms with black claws, digitigrade legs and a long segmented tail. No eyes, clothing, equipment, armor, weapon or generic marine-xeno redesign. Strict right-facing side view and the V54 project palette/material grammar are invariant. It is a project adaptation, not an attested exact external model.",
+      "reviewer": "Codex root and complete_royal; V54 project master and post-generation cranial scale audit reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.79028,
+        "attack": 1.806842,
+        "death": 1.786232
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual cranial-length invariant across two comparable poses per clip calibrates the compact move, attack and death corrections back to the idle identity; whole-body bounding boxes were not used.",
+        "reviewer": "Codex complete_royal",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SOURCE_QA.json",
+          "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SCALE_REVIEW.md"
+        ]
+      }
+    },
     "enemy-037-neomorph": {
       "status": "reviewed",
       "urls": [

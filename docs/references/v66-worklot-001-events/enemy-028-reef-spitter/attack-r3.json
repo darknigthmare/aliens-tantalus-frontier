@@ -1,0 +1,11 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-028-reef-spitter",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-7e210dbd-4a8c-40d5-a399-cb764684d094",
+  "actor": "Codex /root",
+  "sourceSha256": "9d04e15f531976a29963e38bda30aa27b0bcb8a4f136a2c65e76c3c612f251b4",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-028-reef-spitter/attack-r3.txt",
+  "note": "Selected root remediation: removes the atlas acid spray because the projectile is a separate gameplay effect. RGB 1774x887, opaque magenta, eight distinct cells, no border contacts, strict extraction 8/8. Candidate only."
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-029-siege-royal",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:a2b6c4ea14174f580576cd10b911ee16f5e72c8e3afd85be86d21ac351a5be32",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "a2b6c4ea14174f580576cd10b911ee16f5e72c8e3afd85be86d21ac351a5be32",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/rejected/attack-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-029-siege-royal/attack.txt",
+  "candidateSelected": false,
+  "rejectionReason": "Four extended attack poses crossed nominal cell dividers; default extraction blocked.",
+  "note": "Real builtin OpenAI ImageGen result, content-addressed because no provider UUID was exposed. Preserved unchanged; never runtime-accepted."
+}

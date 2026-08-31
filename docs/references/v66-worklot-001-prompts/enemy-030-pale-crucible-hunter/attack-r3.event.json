@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-030-pale-crucible-hunter",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-ab1e33ef-118c-4635-8eb5-11db48d8f62a",
+  "actor": "Codex /root",
+  "sourceSha256": "35e58dc2f4a67081e5a28e4e3b40e4ee818ada73fc60d5a82a7eb77a9221b4e1",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/attack.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-030-pale-crucible-hunter/attack-r3.txt",
+  "candidateSelected": true,
+  "note": "Selected second packing correction after r1 and r2 failed strict extraction. RGB 1774x887, eight distinct cells, no border clues and default extraction passes 8/8. Small source scale requires explicit normalized interclip review; not accepted or integrated."
+}

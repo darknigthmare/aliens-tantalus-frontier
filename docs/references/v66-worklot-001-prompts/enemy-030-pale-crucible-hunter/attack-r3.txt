@@ -1,0 +1,10 @@
+Use case: identity-preserve
+Input images: Image 1 is the previous compact Pale Crucible Hunter ATTACK candidate. Preserve only its exact character identity, palette and rendering; correct the packing.
+Asset type: final cell-safe production melee attack sprite sheet candidate
+Primary request: eight chronological side-view poses of the same compact claw strike: ready, crouched anticipation, short wind-up, short forward extension, compact contact, follow-through, recoil, recovery. The attack must read through torso/arms while staying tightly packed; do NOT perform a long horizontal leap.
+Absolute packing lock: exact4columns by2rows on exact2:1 canvas, exactly one creature per equal cell. Each entire silhouette including curled tail, dorsal spines, toes and fully extended claws occupies at most58 percent of cell width and42 percent of cell height. Center every pose both horizontally and vertically. Leave a broad empty pure-magenta moat of at least90 source pixels around every vertical and horizontal nominal cell boundary. All claws must bend slightly downward/upward inside the compact body envelope. Tail forms a tight C above the pelvis and never points toward a cell boundary. Shared ground line near72 percent of cell height. Small characters with large empty gutters are REQUIRED.
+Camera: strict orthographic profile facingRIGHT, no mirror, front view or perspective.
+Identity: identical bone-ivory eyeless long skull, same dorsal spines, ivory plates, charcoal sinew, long arms, black claws, digitigrade legs and segmented tail; no redesign, equipment or extra anatomy.
+Style: dark hand-painted biomechanical production sprite.
+Background: perfectly flat uniform pure #FF00FF outside the subject; no shadow, floor, texture, glow, checkerboard or magenta bounce.
+Constraints: no boundary contact, overlap, crop, fragments, grid, border, text, UI, logo, watermark, duplicated or unrelated pose.

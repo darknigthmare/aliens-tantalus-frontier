@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "profileId": "enemy-027-reef-stalker",
+  "batchId": "batch-003",
+  "generatedAt": "2026-08-31",
+  "status": "candidate-source-qa-only",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "normalized": false,
+  "canonExact": false,
+  "identityClass": "PROJECT_ADAPTATION",
+  "provider": "OpenAI built-in ImageGen",
+  "generationCallCount": 7,
+  "activeBoardCount": 4,
+  "activePoseCount": 32,
+  "contract": {
+    "sourceAspect": "2:1",
+    "grid": "4x2",
+    "posesPerBoard": 8,
+    "facing": "right",
+    "matte": "opaque-magenta",
+    "requestedMatteColor": "#FF00FF",
+    "textDecorShadow": "forbidden"
+  },
+  "authorities": [
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.md",
+    "src/enemy-visual-overrides-v56.js",
+    "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+    "docs/references/V66_WORKLOT_001_REEF_STALKER_REFERENCE.json"
+  ],
+  "authoritySourceSha256": "a23097c5933b2ddd7b5e97b5c5985cf0901da2ec2f075ca20e28be113cefb10a",
+  "activeBoards": [
+    {
+      "clip": "idle",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/idle.png",
+      "bytes": 1336365,
+      "sha256": "78c70bf2e32c388477babfc8d4920e02d8015b30f68a52371527d3988828233c",
+      "generationId": "exec-d9e74bfa-f7cc-4997-9486-1dc8c54ab6c4",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/idle-r2.json",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-027-reef-stalker/idle-r2.txt",
+      "promptExact": false,
+      "promptMatchesIgnoringFinalLf": true,
+      "actualPromptSha256": "7c4b7abe507292c71d90d6ef5c6459e3ca9452e37bada7dc606eef8044245cdf",
+      "audit": {
+        "size": [1774, 887],
+        "mode": "RGB",
+        "aspectExact2To1": true,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "matteKind": "opaque-magenta",
+        "strictMagentaRatio": 0.883066,
+        "edgeMagentaRatio": 1.0,
+        "borderContactFrames": [],
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "findings": []
+      },
+      "visualReview": "Eight low breathing/readiness poses retain the project Reef Stalker identity. The r2 edit replaces over-tall dorsal spikes and the arrow-like tail tip with lower fin plates and a contained organic blade. Candidate only."
+    },
+    {
+      "clip": "move",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/move.png",
+      "bytes": 1342334,
+      "sha256": "bdd994b84ea2d3e5f4f7b833bf5a7a3c81df0f6b9e26ad4aa8e898abd05a8874",
+      "generationId": "exec-ff0a1af4-e49d-479c-afe6-2e3d816988a8",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/move.json",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-027-reef-stalker/move-r1.txt",
+      "promptExact": true,
+      "promptMatchesIgnoringFinalLf": true,
+      "actualPromptSha256": "1c78eb9e289ffed7583a809c76bfbfede8c09e4452f5f8b87149b5c5b397d3bf",
+      "audit": {
+        "size": [1774, 887],
+        "mode": "RGB",
+        "aspectExact2To1": true,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "matteKind": "opaque-magenta",
+        "strictMagentaRatio": 0.895117,
+        "edgeMagentaRatio": 1.0,
+        "borderContactFrames": [],
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "findings": []
+      },
+      "visualReview": "Readable low quadrupedal run cycle with alternating diagonal contacts, compression and extension. Identity and right-facing direction are stable. Candidate only."
+    },
+    {
+      "clip": "attack",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/attack.png",
+      "bytes": 1438057,
+      "sha256": "cff954b47b01ce6089b331c6a99115551b43243c93dc9a39ba51bfda7cc7c8cc",
+      "generationId": "exec-0ebd7ab8-13b1-4291-bc36-b02a93305f87",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/attack-r3.json",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-027-reef-stalker/attack-r3.txt",
+      "promptExact": false,
+      "promptMatchesIgnoringFinalLf": true,
+      "actualPromptSha256": "e454b720ceac80a63f922a9cd52e49c8712d5b8d54a083550c81654be7c04902",
+      "audit": {
+        "size": [1774, 887],
+        "mode": "RGB",
+        "aspectExact2To1": true,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "matteKind": "opaque-magenta",
+        "strictMagentaRatio": 0.870777,
+        "edgeMagentaRatio": 1.0,
+        "borderContactFrames": [2, 3, 4, 5],
+        "defaultExtraction": "blocked",
+        "extractedFrames": 0,
+        "defaultExtractionError": "Authored pose touches a nominal cell border; ownership/cropping needs visual review or regeneration.",
+        "safeReassignmentProbe": {
+          "status": "proven-short-spill-extraction-pass",
+          "extractedFrames": 8,
+          "distinctExtractedPoseHashes": 8,
+          "discardedForegroundPixels": 0,
+          "sourcesModified": 0,
+          "outputsNormalized": 0,
+          "accepted": false
+        },
+        "findings": [
+          "nominal-cell-border-contact-needs-ownership-review",
+          "default-normalizer-extraction-blocked"
+        ]
+      },
+      "visualReview": "The r3 scale is again close to idle and the strike sequence reads, but frames 2-5 touch nominal cell borders. Safe reassignment proves a recoverable short spill without discarded foreground pixels; physical-root and ground-line review remain mandatory. Not accepted and not normalized."
+    },
+    {
+      "clip": "death",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/death.png",
+      "bytes": 1312038,
+      "sha256": "4ea46b408add7438131fbb27649af90122e816ea3f8530261298ac4a1de701ee",
+      "generationId": "exec-c9e71caf-6cfd-4eb5-bbdd-909107579dac",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/death.json",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-027-reef-stalker/death-r1.txt",
+      "promptExact": true,
+      "promptMatchesIgnoringFinalLf": true,
+      "actualPromptSha256": "09cc1aec2f56bb4ce089efdb8a9036d503d2fcc29ab7c5c3a19b3d568f816ae4",
+      "audit": {
+        "size": [1774, 887],
+        "mode": "RGB",
+        "aspectExact2To1": true,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "matteKind": "opaque-magenta",
+        "strictMagentaRatio": 0.896848,
+        "edgeMagentaRatio": 1.0,
+        "borderContactFrames": [],
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "findings": []
+      },
+      "visualReview": "Eight distinct irreversible collapse poses remain fully contained, with no return to standing and no gore. Candidate only; playback timing and physical-root alignment remain pending."
+    }
+  ],
+  "generationHistory": [
+    {
+      "clip": "idle",
+      "revision": 1,
+      "generationId": "exec-5bd3ab6b-c763-46a7-acbb-a25580394543",
+      "sourceSha256": "a9c6ec8de35eb1859f8f7aeeef840cc23320c434705b7ec23ae072090a3f6db9",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/idle.json",
+      "archivedPath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/rejected/idle-pre-r2.png",
+      "reason": "Over-tall dorsal spikes and arrow-like tail tip."
+    },
+    {
+      "clip": "idle",
+      "revision": 2,
+      "generationId": "exec-d9e74bfa-f7cc-4997-9486-1dc8c54ab6c4",
+      "sourceSha256": "78c70bf2e32c388477babfc8d4920e02d8015b30f68a52371527d3988828233c",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/idle-r2.json",
+      "active": true
+    },
+    {
+      "clip": "move",
+      "revision": 1,
+      "generationId": "exec-ff0a1af4-e49d-479c-afe6-2e3d816988a8",
+      "sourceSha256": "bdd994b84ea2d3e5f4f7b833bf5a7a3c81df0f6b9e26ad4aa8e898abd05a8874",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/move.json",
+      "active": true
+    },
+    {
+      "clip": "attack",
+      "revision": 1,
+      "generationId": "exec-ae98b6b4-f6c2-4f51-a754-9af88d7a44d7",
+      "sourceSha256": "bcaa853f4d528250a298fae18cfe13e9c2ada61a32c147fc5fc4748d577e2a74",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/attack.json",
+      "archivedPath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/rejected/attack-pre-r2.png",
+      "reason": "Nominal cell border contacts."
+    },
+    {
+      "clip": "attack",
+      "revision": 2,
+      "generationId": "exec-c8e317ac-274e-4564-96b2-2bf15d2f6000",
+      "sourceSha256": "a84119ad90d5b66e434dc799eec57384a30419bf19c8a8ede6d77e55db82fd03",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/attack-r2.json",
+      "archivedPath": "assets/openai/sprites/frames/v66/batch-003/enemy-027-reef-stalker/rejected/attack-pre-r3.png",
+      "reason": "Uniform repack over-shrank the creature relative to idle."
+    },
+    {
+      "clip": "attack",
+      "revision": 3,
+      "generationId": "exec-0ebd7ab8-13b1-4291-bc36-b02a93305f87",
+      "sourceSha256": "cff954b47b01ce6089b331c6a99115551b43243c93dc9a39ba51bfda7cc7c8cc",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/attack-r3.json",
+      "active": true,
+      "qaBlocked": true
+    },
+    {
+      "clip": "death",
+      "revision": 1,
+      "generationId": "exec-c9e71caf-6cfd-4eb5-bbdd-909107579dac",
+      "sourceSha256": "4ea46b408add7438131fbb27649af90122e816ea3f8530261298ac4a1de701ee",
+      "eventPath": "docs/references/v66-worklot-001-events/enemy-027-reef-stalker/death.json",
+      "active": true
+    }
+  ],
+  "qaSummary": {
+    "defaultExtractionPassBoards": 3,
+    "defaultExtractionBlockedBoards": 1,
+    "safeReassignmentPassBoards": 1,
+    "activeSourceHashesMatchEvents": 4,
+    "activePromptDocumentsExact": 2,
+    "activePromptDocumentsMatchIgnoringFinalLf": 4,
+    "visualAcceptancePerformed": false,
+    "automaticAcceptancePerformed": false
+  },
+  "provenanceNotes": [
+    "Every active source SHA-256 matches its recorded generation event.",
+    "For idle-r2 and attack-r3, the event actualPromptText is authoritative; the prompt document differs only by its terminal LF.",
+    "Move, attack revisions and death returned complete built-in ImageGen PNG data without an output_hint while the default generated file remained zero bytes. The exact returned PNG payload was persisted once through a local PTY; no external API fallback was used.",
+    "The source audits are technical candidate checks. They do not establish artistic acceptance, canon fidelity, physical-root alignment, gameplay scale, timing or runtime behavior.",
+    "No queue, global batch registry, STATE, runtime source or global manifest was modified by this profile task."
+  ]
+}

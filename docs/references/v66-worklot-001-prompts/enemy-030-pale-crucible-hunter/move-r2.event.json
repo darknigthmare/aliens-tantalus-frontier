@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-030-pale-crucible-hunter",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-0df8b49b-0639-4505-a9de-a8715f5c1a17",
+  "actor": "Codex /root",
+  "sourceSha256": "6a1f39d987b4fc2f8ff29e1d9e47e988c3ea3aaa93bc9144a16f9220a069353a",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-030-pale-crucible-hunter/move-r2.txt",
+  "candidateSelected": true,
+  "note": "Selected compact correction: RGB 1774x887, opaque magenta, eight distinct nominal cells, no border clues, default extraction passes 8/8. Animation roots, loop seam and interclip scale remain candidate review items; not accepted or integrated."
+}

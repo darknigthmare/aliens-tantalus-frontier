@@ -1,0 +1,11 @@
+Use case: identity-preserve
+Input images: Image 1 is the current Pale Crucible Hunter attack sheet and fixes the exact character identity and rendering.
+Asset type: production 2D side-view metroidvania enemy death animation sprite sheet
+Primary request: Create ONE dedicated non-looping death animation sheet for exactly the same Pale Crucible Hunter. Preserve identity; do not redesign.
+Identity lock: identical long bone-pale eyeless cranium, exact dorsal spine arrangement, ivory exoskeletal plates, wet charcoal muscle seams, gaunt ribbed torso, long forearms/black claws, digitigrade legs, long segmented tail with the same root and thickness, same palette, scale and painterly material. No eyes, costume, armor, weapons or new anatomy.
+Animation: eight individually authored chronological poses at 10 fps depicting a lethal impact and irreversible collapse, strict row-major order: 1 upright hit reaction, 2 chest recoil, 3 knees buckle, 4 one hand catches the fall, 5 torso rolls onto the ground, 6 limbs and tail lose tension, 7 final settling motion, 8 terminal completely motionless corpse. Continuous believable fall with no teleportation. The final frame must be clearly prone, dead and lower than all preceding frames; it must not stand back up and must never be reused as a nonlethal hurt.
+Layout: exact 4 columns by 2 rows, exactly eight full-body poses, one in each equal cell, landscape exact 2:1 canvas. Same physical scale throughout and consistent with Image 1; shared ground line at 80 percent cell height, generous safe gutters, complete skull/tail/claws visible, no cross-cell overlap. Lower poses may use more horizontal width but must remain within their own cell.
+Camera: strict orthographic gameplay side view facing RIGHT in all readable poses; no front-facing body, mirror, camera rotation or perspective change.
+Style: same dark hand-painted biomechanical sprite art, silhouette and controlled highlights as Image 1.
+Background: perfectly flat uniform pure chroma magenta #FF00FF over every background pixel, no gradient, floor, cast shadow, glow, blood pool or checkerboard.
+Constraints: no gore spray, scenery, grid, borders, text, UI, logo, watermark, duplicates, extra/severed limbs, disconnected fragments, clipping, revived final pose or magenta bounce.

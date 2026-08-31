@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: targeted identity repair of the current Reef Stalker idle sprite sheet.
+Input image1: edit target, the current8-pose4x2 Reef Stalker idle sheet.
+Change ONLY these two anatomy details consistently in ALL EIGHT poses:
+1) Replace the tall sharp dorsal spikes with exactly THREE or FOUR LOW FLATTENED fin-plates swept backward very close to the spine, hydrodynamic and broad at base. Their tips must never rise more than about one-sixth of the creature's ribcage height above the back. Keep identical fin count and shape in every pose.
+2) Replace the arrowhead/harpoon/spade at tail tip with ONE contained vertical swimming blade integrated organically into the final tail segments: a short narrow leaf/keel silhouette with rounded biological transitions, no spear point, no metal weapon look, no forked fish tail. During idle, the complete tail stays low behind the body and its tip never rises above the skull; use only a gentle shallow vertical wave.
+Preserve EVERYTHING ELSE unchanged: same eyeless long dome, inner jaw, biomechanical ribs, exactly two forelimbs and two hind limbs, black-blue-green wet palette, identity, rendering, physical size, right-facing side view, eight distinct subtle idle poses, 4x2 cell assignment, ground line, complete silhouettes, gutters and pure magenta background.
+Exact2:1 landscape, invisible4columns2rows, one creature per cell. No grid, text, shadow, floor, glow, scenery, extra limbs, eyes, fish face, giant gills, tall tubes or tentacles. Background must remain uniform opaque #FF00FF and must not tint the creature. Candidate project adaptation only.
