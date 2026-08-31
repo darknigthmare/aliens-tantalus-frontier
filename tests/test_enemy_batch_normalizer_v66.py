@@ -333,5 +333,380 @@ class EnemyBatchNormalization(unittest.TestCase):
             pipeline.json_write(path, pending)
             self.assertEqual(pipeline.reviewed_source_anchors(job, reports, sources, root)[1]["status"], "pending")
 
+class EnemyBatchPostGenerationScaleCalibration(unittest.TestCase):
+    """All assets below are disposable synthetic fixtures, never production art."""
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.job = {"profileId": "fixture", "name": "Synthetic fixture", "batchId": "batch-002",
+                    "reference": {"status": "reviewed", "urls": []}, "referenceLockSha256": "a" * 64,
+                    "animationFamily": "test", "sourceFacing": "right", "sourceGrid": copy.deepcopy(GRID),
+                    "grid": {"columns": 4, "rows": 6, "cellWidth": 256, "cellHeight": 256, "guard": 16},
+                    "pivot": {"x": 128, "y": 240}, "normalizedPath": "out/all.webp", "previewPath": "out/all.gif",
+                    "metadataPath": "out/metadata.json", "clips": []}
+        self.sources = []
+        for index, clip in enumerate(("idle", "attack", "move")):
+            source_path = f"sources/{clip}.png"
+            path = self.root / source_path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            source_board(offset=index * 20).save(path)
+            self.job["clips"].append({"id": clip, "sourcePath": source_path, "promptSha256": str(index) * 64,
+                                     "frames": list(range(index * 8, (index + 1) * 8)), "fps": 10, "loop": True,
+                                     "normalizedPath": f"out/{clip}.webp", "previewPath": f"out/{clip}.gif"})
+            self.sources.append({"clip": clip, "path": source_path, "size": [1024, 512], "sha256": pipeline.hash_file(path)})
+        self.evidence_path = "proof/manual-measurements.txt"
+        evidence = self.root / self.evidence_path
+        evidence.parent.mkdir(parents=True)
+        evidence.write_text("Synthetic endpoint comparison, explicitly reviewed.\n", encoding="utf-8")
+        measurements = [{"clip": clip, "frame": frame, "endpoints": [[70, 100], [70 + length, 100]],
+                         "lengthPx": length, "landmark": "rigid-synthetic-segment", "note": "Synthetic comparable endpoint fixture."}
+                        for clip, length in (("idle", 40), ("attack", 20)) for frame in (0, 1)]
+        self.entry = {"status": "reviewed", "reviewer": "synthetic-test", "reviewedAt": "2026-08-31", "note": "Manually compared rigid synthetic segments.",
+                      "baselineClip": "idle", "sourceScaleByClip": {"idle": 1, "attack": 2, "move": 1},
+                      "sourceSha256ByClip": {source["clip"]: source["sha256"] for source in self.sources},
+                      "measurements": measurements, "evidencePaths": [self.evidence_path]}
+        self.document = {"schema": 1, "batchId": "batch-002", "coordinates": "nominal-source-cell", "profiles": {"fixture": self.entry}}
+        self.review_path = self.root / pipeline.batch_scale_review_path(self.job)
+
+    def write_review(self, document=None):
+        pipeline.json_write(self.review_path, self.document if document is None else document)
+
+    def resolve(self):
+        return pipeline.reviewed_source_scale(self.job, self.sources, self.root)
+
+    def check(self):
+        return pipeline.check_profile(self.job, self.root)
+
+    def test_absent_or_other_profile_review_preserves_legacy_metadata_exactly(self):
+        self.job["batchId"] = "batch-001"
+        self.review_path = self.root / pipeline.batch_scale_review_path(self.job)
+        self.job["reference"]["sourceScaleByClip"] = {"attack": 0.5}
+        self.job["reference"]["scaleCalibrationReview"] = {"note": "Legacy pilot invariant.", "reviewer": "fixture", "reviewedAt": "2026-08-31", "evidencePaths": [self.evidence_path]}
+        original_job = copy.deepcopy(self.job)
+        before = pipeline.process_profile(self.job, self.root)
+        metadata_bytes = (self.root / self.job["metadataPath"]).read_bytes()
+        atlas_hash = pipeline.hash_file(self.root / self.job["normalizedPath"])
+        self.assertNotIn("postGenerationScaleReview", before)
+        self.assertEqual(before["sourceScaleByClip"], {"idle": 1, "attack": 0.5, "move": 1})
+        self.assertEqual(before["scaleCalibrationEvidence"], [{"path": self.evidence_path, "sha256": pipeline.hash_file(self.root / self.evidence_path)}])
+        self.check()
+        other = {**self.document, "batchId": "batch-001", "profiles": {"another-profile": self.entry}}
+        self.write_review(other)
+        self.assertIsNone(self.resolve())
+        self.check()
+        after = pipeline.process_profile(self.job, self.root)
+        self.assertEqual(before, after)
+        self.assertEqual(metadata_bytes, (self.root / self.job["metadataPath"]).read_bytes())
+        self.assertEqual(atlas_hash, pipeline.hash_file(self.root / self.job["normalizedPath"]))
+        self.assertEqual(original_job, self.job)
+
+    def test_measured_two_times_correction_has_exact_proof_one_scale_and_no_mutation(self):
+        self.write_review()
+        original_job, original_sources = copy.deepcopy(self.job), copy.deepcopy(self.sources)
+        proof = self.resolve()
+        self.assertEqual(set(proof), {"path", "sha256", "status", "profileId", "reviewer", "reviewedAt", "coordinates", "baselineClip", "sourceScaleByClip", "sourceSha256ByClip", "measurementCount", "evidence"})
+        self.assertEqual(proof["measurementCount"], 4)
+        self.assertEqual(proof["sha256"], pipeline.hash_file(self.review_path))
+        self.assertEqual(proof["evidence"], [{"path": self.evidence_path, "sha256": pipeline.hash_file(self.root / self.evidence_path)}])
+        metadata = pipeline.process_profile(self.job, self.root)
+        self.assertEqual(self.check(), metadata)
+        self.assertEqual(metadata["postGenerationScaleReview"], proof)
+        self.assertIsNone(metadata["scaleCalibrationReview"])
+        self.assertEqual(metadata["scaleCalibrationEvidence"], [])
+        self.assertEqual(len({placement["scale"] for placement in metadata["placements"]}), 1)
+        for placement in metadata["placements"]:
+            factor = 2 if placement["clip"] == "attack" else 1
+            self.assertEqual(placement["sourceScale"], factor)
+            self.assertAlmostEqual(placement["appliedScale"], placement["scale"] * factor, places=8)
+            self.assertGreaterEqual(min(placement["renderedBounds"][:2]), 16)
+            self.assertLessEqual(max(placement["renderedBounds"][2:]), 240)
+        self.assertEqual(metadata["acceptanceStatus"], "pending-visual-review")
+        self.assertFalse(metadata["runtimeIntegrated"])
+        self.assertEqual(metadata["interpolatedFrames"], 0)
+        self.assertEqual(self.job, original_job)
+        self.assertEqual(self.sources, original_sources)
+        for source in self.sources:
+            self.assertEqual(source["sha256"], pipeline.hash_file(self.root / source["path"]))
+
+    def test_check_rejects_changed_or_missing_review_and_evidence(self):
+        self.write_review()
+        pipeline.process_profile(self.job, self.root)
+        for defect in ("missing-review", "review-note", "review-factor", "review-source-sha", "missing-evidence", "empty-evidence", "stale-evidence"):
+            with self.subTest(defect=defect):
+                self.write_review()
+                evidence = self.root / self.evidence_path
+                evidence.write_text("Synthetic endpoint comparison, explicitly reviewed.\n", encoding="utf-8")
+                if defect == "missing-review":
+                    self.review_path.unlink()
+                elif defect.startswith("review-"):
+                    document = copy.deepcopy(self.document)
+                    entry = document["profiles"]["fixture"]
+                    if defect == "review-note":
+                        entry["note"] += " Changed."
+                    elif defect == "review-factor":
+                        entry["sourceScaleByClip"]["attack"] = 2.01
+                    else:
+                        entry["sourceSha256ByClip"]["attack"] = "f" * 64
+                    self.write_review(document)
+                elif defect == "missing-evidence":
+                    evidence.unlink()
+                else:
+                    evidence.write_text("" if defect == "empty-evidence" else "Changed proof.", encoding="utf-8")
+                with self.assertRaises((ValueError, FileNotFoundError)):
+                    self.check()
+
+    def test_check_rejects_forged_metadata_factors_proof_or_pose_placements(self):
+        self.write_review()
+        original = pipeline.process_profile(self.job, self.root)
+        for defect in ("missing-proof", "proof-path", "proof-hash", "proof-extra-field", "proof-factor", "metadata-factor", "bool-factor", "bool-pose-factor", "legacy-evidence", "per-pose-factor", "pack-scale", "applied-scale", "clip-id", "clip-frame", "frame-index"):
+            with self.subTest(defect=defect):
+                damaged = copy.deepcopy(original)
+                if defect == "missing-proof":
+                    damaged.pop("postGenerationScaleReview")
+                elif defect == "metadata-factor":
+                    damaged["sourceScaleByClip"]["attack"] = 1
+                elif defect == "bool-factor":
+                    damaged["sourceScaleByClip"]["idle"] = True
+                elif defect == "bool-pose-factor":
+                    damaged["placements"][0]["sourceScale"] = True
+                elif defect == "legacy-evidence":
+                    damaged["scaleCalibrationEvidence"] = damaged["postGenerationScaleReview"]["evidence"]
+                elif defect == "per-pose-factor":
+                    damaged["placements"][8]["sourceScale"] = 1
+                elif defect == "pack-scale":
+                    damaged["scale"] = 0.3
+                elif defect == "applied-scale":
+                    damaged["placements"][8]["appliedScale"] = 0.3
+                elif defect in ("clip-id", "clip-frame", "frame-index"):
+                    key, value = {"clip-id": ("clip", "jump"), "clip-frame": ("clipFrame", 7), "frame-index": ("index", 99)}[defect]
+                    damaged["placements"][0][key] = value
+                else:
+                    key, value = {"proof-path": ("path", "proof/wrong.json"), "proof-hash": ("sha256", "f" * 64),
+                                  "proof-extra-field": ("automaticallyAccepted", True), "proof-factor": ("sourceScaleByClip", {"idle": 1, "attack": 1, "move": 1})}[defect]
+                    damaged["postGenerationScaleReview"][key] = value
+                pipeline.json_write(self.root / self.job["metadataPath"], damaged)
+                with self.assertRaises(ValueError):
+                    self.check()
+        pipeline.json_write(self.root / self.job["metadataPath"], original)
+        self.check()
+
+    def test_resolver_rejects_invalid_factors_and_arbitrary_measured_ratios(self):
+        for bad in (0, -1, 0.2499, 4.0001, float("nan"), float("inf"), -float("inf"), True, "2", [2] * 8, {"frame0": 2}, 1.5):
+            with self.subTest(factor=bad):
+                document = copy.deepcopy(self.document)
+                document["profiles"]["fixture"]["sourceScaleByClip"]["attack"] = bad
+                self.write_review(document)
+                with self.assertRaises(ValueError):
+                    self.resolve()
+        for field in ("sourceScaleByClip", "sourceSha256ByClip"):
+            for defect in ("missing", "extra"):
+                with self.subTest(field=field, defect=defect):
+                    document = copy.deepcopy(self.document)
+                    values = document["profiles"]["fixture"][field]
+                    if defect == "missing":
+                        values.pop("move")
+                    else:
+                        values["jump"] = 1 if field == "sourceScaleByClip" else "a" * 64
+                    self.write_review(document)
+                    with self.assertRaises(ValueError):
+                        self.resolve()
+
+    def test_measurements_require_distinct_comparable_poses_and_bounded_endpoints(self):
+        defects = ("missing-baseline", "one-baseline", "one-corrected", "duplicate", "unknown-clip", "bad-frame", "bool-frame", "fractional-frame",
+                   "unmeasured-correction", "unpaired-unchanged", "different-landmark", "missing-note", "missing-endpoint", "outside", "nan-coordinate",
+                   "bool-coordinate", "wrong-length", "zero-length", "bool-length", "nan-length", "inf-length", "missing-measurements")
+        for defect in defects:
+            with self.subTest(defect=defect):
+                document = copy.deepcopy(self.document)
+                entry = document["profiles"]["fixture"]
+                values = entry["measurements"]
+                if defect == "missing-baseline":
+                    entry["measurements"] = values[2:]
+                elif defect == "one-baseline":
+                    values.pop(0)
+                elif defect == "one-corrected":
+                    values.pop()
+                elif defect == "duplicate":
+                    values[1]["frame"] = 0
+                elif defect == "unknown-clip":
+                    values[0]["clip"] = "jump"
+                elif defect in ("bad-frame", "bool-frame", "fractional-frame"):
+                    values[0]["frame"] = {"bad-frame": 8, "bool-frame": True, "fractional-frame": 0.5}[defect]
+                elif defect == "unmeasured-correction":
+                    entry["sourceScaleByClip"]["move"] = 2
+                elif defect == "unpaired-unchanged":
+                    values.append({**values[0], "clip": "move"})
+                elif defect == "different-landmark":
+                    values[2]["landmark"] = "bounding-box-tail"
+                elif defect == "missing-note":
+                    values[0]["note"] = " "
+                elif defect == "missing-endpoint":
+                    values[0]["endpoints"] = [[70, 100]]
+                elif defect == "outside":
+                    values[0]["endpoints"] = [[-50, 100], [-10, 100]]
+                elif defect in ("nan-coordinate", "bool-coordinate"):
+                    values[0]["endpoints"][0][0] = float("nan") if defect == "nan-coordinate" else True
+                elif defect == "missing-measurements":
+                    entry.pop("measurements")
+                else:
+                    values[0]["lengthPx"] = {"wrong-length": 42, "zero-length": 0, "bool-length": True, "nan-length": float("nan"), "inf-length": float("inf")}[defect]
+                self.write_review(document)
+                with self.assertRaises(ValueError):
+                    self.resolve()
+
+    def test_factor_limits_median_ratio_and_one_pixel_measurement_tolerance(self):
+        for factor in (0.25, 4):
+            document = copy.deepcopy(self.document)
+            entry = document["profiles"]["fixture"]
+            entry["sourceScaleByClip"]["attack"] = factor
+            for measurement in entry["measurements"]:
+                if measurement["clip"] == "attack":
+                    length = 40 / factor
+                    measurement["endpoints"] = [[70, 100], [70 + length, 100]]
+                    measurement["lengthPx"] = length
+            self.write_review(document)
+            self.assertEqual(self.resolve()["sourceScaleByClip"]["attack"], factor)
+        for factor, accepted in ((2.05, True), (2.07, False)):
+            document = copy.deepcopy(self.document)
+            document["profiles"]["fixture"]["sourceScaleByClip"]["attack"] = factor
+            self.write_review(document)
+            if accepted:
+                self.resolve()
+            else:
+                with self.assertRaisesRegex(ValueError, "median ratio"):
+                    self.resolve()
+        # Declared measurements, not rounded crop bounds, drive the median.
+        document = copy.deepcopy(self.document)
+        for measurement in document["profiles"]["fixture"]["measurements"]:
+            if measurement["clip"] == "idle":
+                measurement["lengthPx"] = 41  # exactly +1px accepted
+        document["profiles"]["fixture"]["sourceScaleByClip"]["attack"] = 2.05
+        self.write_review(document)
+        self.resolve()
+
+    def test_sources_must_match_actual_bytes_paths_size_and_complete_order(self):
+        self.write_review()
+        originals = copy.deepcopy(self.sources)
+        for defect in ("source-sha", "source-path", "source-size", "source-clip", "missing-source", "duplicate-source", "reordered"):
+            with self.subTest(defect=defect):
+                self.sources = copy.deepcopy(originals)
+                if defect == "missing-source":
+                    self.sources.pop()
+                elif defect == "duplicate-source":
+                    self.sources[1] = copy.deepcopy(self.sources[0])
+                elif defect == "reordered":
+                    self.sources.reverse()
+                else:
+                    key, value = {"source-sha": ("sha256", "f" * 64), "source-path": ("path", "sources/move.png"),
+                                  "source-size": ("size", [2048, 1024]), "source-clip": ("clip", "jump")}[defect]
+                    self.sources[0][key] = value
+                with self.assertRaises(ValueError):
+                    self.resolve()
+        self.sources = originals
+        path = self.root / self.sources[0]["path"]
+        with Image.open(path) as source:
+            changed = source.copy()
+        changed.putpixel((80, 100), (90, 140, 80, 190))
+        changed.save(path)
+        with self.assertRaisesRegex(ValueError, "source evidence changed"):
+            self.resolve()
+        # Updating only claimed metadata hashes cannot bypass the reviewed SHA.
+        self.sources[0]["sha256"] = pipeline.hash_file(path)
+        with self.assertRaisesRegex(ValueError, "source evidence changed"):
+            self.resolve()
+
+    def test_odd_source_dimensions_use_python_ties_even_nominal_cells(self):
+        for source in self.sources:
+            path = self.root / source["path"]
+            with Image.open(path) as original:
+                resized = original.resize((1774, 887))
+            resized.save(path)
+            source["sha256"], source["size"] = pipeline.hash_file(path), [1774, 887]
+            self.entry["sourceSha256ByClip"][source["clip"]] = source["sha256"]
+        for index, measurement in enumerate(self.entry["measurements"]):
+            measurement["frame"] = index % 2 + 1  # both columns have width443
+            length = measurement["lengthPx"]
+            measurement["endpoints"] = [[443 * 1.15 - length, 100], [443 * 1.15, 100]]
+        self.write_review()
+        self.resolve()
+        self.entry["measurements"][0]["endpoints"][1][0] += 0.01
+        self.write_review()
+        with self.assertRaisesRegex(ValueError, "short-spill envelope"):
+            self.resolve()
+
+    def test_evidence_paths_are_portable_nonempty_unique_files(self):
+        for value in ([], [self.evidence_path, self.evidence_path], [""], [None], ["../outside.txt"], ["proof/../manual.txt"],
+                      ["/absolute.txt"], ["C:/outside.txt"], ["proof\\manual-measurements.txt"], ["proof/missing.txt"], ["proof"]):
+            with self.subTest(paths=value):
+                document = copy.deepcopy(self.document)
+                document["profiles"]["fixture"]["evidencePaths"] = value
+                self.write_review(document)
+                with self.assertRaises(ValueError):
+                    self.resolve()
+        (self.root / self.evidence_path).write_bytes(b"")
+        self.write_review()
+        with self.assertRaisesRegex(ValueError, "missing or empty"):
+            self.resolve()
+
+    def test_present_malformed_review_never_silently_falls_back(self):
+        for document in ([], {**self.document, "schema": True}, {**self.document, "schema": 2}, {**self.document, "batchId": "batch-003"},
+                         {**self.document, "coordinates": "crop"}, {**self.document, "profiles": []}, {**self.document, "profiles": {"fixture": None}},
+                         {"schema": 2, "profiles": {}}):
+            with self.subTest(document=document):
+                self.write_review(document)
+                with self.assertRaises(ValueError):
+                    self.resolve()
+        self.review_path.write_text("{invalid-json", encoding="utf-8")
+        with self.assertRaises(ValueError):
+            self.resolve()
+        self.review_path.unlink()
+        self.review_path.mkdir()
+        with self.assertRaises(ValueError):
+            self.resolve()
+
+    def test_legacy_and_post_generation_calibrations_never_have_silent_priority(self):
+        self.write_review()
+        for field, value in (("sourceScaleByClip", {"attack": 0.5}), ("scaleCalibrationReview", {"note": "legacy"}),
+                             ("scaleCalibrationReview", {}), ("scaleCalibrationReview", False), ("scaleCalibrationReview", "")):
+            self.job["reference"] = {"status": "reviewed", "urls": [], field: value}
+            with self.assertRaisesRegex(ValueError, "conflict"):
+                self.resolve()
+
+    def test_old_pixels_cannot_claim_a_new_measured_calibration(self):
+        baseline = pipeline.process_profile(self.job, self.root)
+        old_atlas = (self.root / self.job["normalizedPath"]).read_bytes()
+        self.write_review()
+        calibrated = pipeline.process_profile(self.job, self.root)
+        self.assertNotEqual(baseline["normalizedSha256"], calibrated["normalizedSha256"])
+        (self.root / self.job["normalizedPath"]).write_bytes(old_atlas)
+        calibrated["normalizedSha256"] = baseline["normalizedSha256"]
+        calibrated["validation"] = baseline["validation"]
+        pipeline.json_write(self.root / self.job["metadataPath"], calibrated)
+        with self.assertRaisesRegex(ValueError, "Atlas pixels do not apply"):
+            self.check()
+
+    def test_review_requires_explicit_identity_valid_date_and_idle_baseline(self):
+        defects = {"status": "pending", "profileId": "someone-else", "reviewer": " ", "reviewedAt": "2026-02-30", "note": "", "baselineClip": "attack"}
+        for key, value in defects.items():
+            with self.subTest(key=key):
+                document = copy.deepcopy(self.document)
+                document["profiles"]["fixture"][key] = value
+                self.write_review(document)
+                with self.assertRaises(ValueError):
+                    self.resolve()
+        for bad in ("20260831", "2026-8-31", "2026-08-31T00:00:00Z", None, 20260831):
+            document = copy.deepcopy(self.document)
+            document["profiles"]["fixture"]["reviewedAt"] = bad
+            self.write_review(document)
+            with self.assertRaises(ValueError):
+                self.resolve()
+        self.entry["sourceScaleByClip"]["idle"] = 1.01
+        self.write_review()
+        with self.assertRaisesRegex(ValueError, "idle baseline"):
+            self.resolve()
+
+
 if __name__ == "__main__":
     unittest.main()

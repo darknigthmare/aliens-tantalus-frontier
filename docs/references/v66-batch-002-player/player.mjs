@@ -1,4 +1,5 @@
 import { playbackFrame, frameRectangle } from './timeline.mjs';
+import { clipScaleSummary } from './calibration.mjs';
 
 const element = (id) => document.getElementById(id);
 const controls = Object.fromEntries(['profile','clip','speed','facing','play','restart','previous','next','status','details','stage','poses','source','metadata'].map((id) => [id, element(id)]));
@@ -35,7 +36,7 @@ function render() {
   controls.stage.dataset.clip = selectedClip.id;
   controls.stage.dataset.profile = job.profileId;
   tiles.forEach((tile, index) => { paint(tile, selectedClip.frames[index], true); tile.classList.toggle('active', index === frame); });
-  controls.details.textContent = `${job.name}\n${selectedClip.id} · pose ${frame + 1}/${selectedClip.frames.length} · ${selectedClip.fps} fps · ${selectedClip.loop ? 'boucle' : 'fin maintenue'}\nAncrages : ${metadata.physicalAnchorReview?.status || 'pending'}\nÉchelle commune : ${metadata.scale}\nStatut : ${metadata.acceptanceStatus} — non intégré par cette page`;
+  controls.details.textContent = `${job.name}\n${selectedClip.id} · pose ${frame + 1}/${selectedClip.frames.length} · ${selectedClip.fps} fps · ${selectedClip.loop ? 'boucle' : 'fin maintenue'}\nAncrages : ${metadata.physicalAnchorReview?.status || 'pending'}\nÉchelle commune : ${metadata.scale}\n${clipScaleSummary(metadata, selectedClip.id)}\nStatut : ${metadata.acceptanceStatus} — non intégré par cette page`;
 }
 function selectClip() {
   if (!metadata) return;

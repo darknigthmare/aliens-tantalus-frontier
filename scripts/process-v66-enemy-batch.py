@@ -13,7 +13,9 @@ import json
 import math
 import re
 import sys
+from datetime import date
 from pathlib import Path
+from statistics import median
 
 import numpy as np
 from PIL import Image
@@ -273,6 +275,129 @@ def batch_anchor_review_path(job: dict) -> str:
     return f"docs/references/V66_BATCH_{match.group(1)}_ANCHOR_REVIEW.json"
 
 
+def batch_scale_review_path(job: dict) -> str:
+    return batch_anchor_review_path(job).replace("_ANCHOR_REVIEW.json", "_SCALE_REVIEW.json")
+
+
+def scale_evidence_path(root: Path, value: object) -> Path:
+    """Post-generation evidence must be portable, local and independently readable."""
+    if not isinstance(value, str) or not value.strip() or ":" in value or ".." in value.split("/"):
+        raise ValueError("Scale evidence requires a safe repository-relative path.")
+    path = scoped_path(root, value)
+    if not path.is_file() or path.stat().st_size == 0:
+        raise ValueError(f"Scale evidence file is missing or empty: {value}")
+    return path
+
+
+def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT) -> dict | None:
+    """Resolve a measured, clip-wide correction without changing generation locks.
+
+    An absent entry leaves legacy behavior and metadata untouched. A present
+    entry must prove every source, every correction and its rigid landmarks;
+    it never supplies a factor per pose or relaxes the atlas safety guard.
+    """
+    review_path = batch_scale_review_path(job)
+    path = scoped_path(root, review_path)
+    if not path.exists():
+        return None
+    if not path.is_file():
+        raise ValueError("Post-generation scale review must be a JSON file.")
+    raw = path.read_bytes()
+    document = json.loads(raw)
+    if not isinstance(document, dict) or type(document.get("schema")) is not int or document["schema"] != 1 or document.get("batchId") != job["batchId"] or document.get("coordinates") != "nominal-source-cell" or not isinstance(document.get("profiles"), dict):
+        raise ValueError("Unsupported post-generation scale review schema, batch or coordinates.")
+    if job["profileId"] not in document["profiles"]:
+        return None
+    entry = document["profiles"][job["profileId"]]
+    if not isinstance(entry, dict) or entry.get("status") != "reviewed" or entry.get("profileId", job["profileId"]) != job["profileId"]:
+        raise ValueError("Post-generation scale review identity or reviewed status is invalid.")
+    if job["reference"].get("sourceScaleByClip") or job["reference"].get("scaleCalibrationReview") is not None:
+        raise ValueError("Legacy and post-generation scale calibrations conflict; neither takes silent priority.")
+    for field in ("reviewer", "reviewedAt", "note"):
+        if not isinstance(entry.get(field), str) or not entry[field].strip():
+            raise ValueError("Scale review requires an explicit reviewer, date and manual measurement note.")
+    if not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", entry["reviewedAt"]):
+        raise ValueError("Scale review date must be YYYY-MM-DD.")
+    date.fromisoformat(entry["reviewedAt"])
+    if entry.get("baselineClip") != "idle":
+        raise ValueError("The post-generation scale baseline must be idle.")
+    clip_ids = [clip["id"] for clip in job["clips"]]
+    if not clip_ids or any(not isinstance(clip, str) or not clip for clip in clip_ids) or len(set(clip_ids)) != len(clip_ids) or "idle" not in clip_ids:
+        raise ValueError("Scale review requires unique authored clips including idle.")
+    factors, source_hashes = entry.get("sourceScaleByClip"), entry.get("sourceSha256ByClip")
+    if not isinstance(factors, dict) or not isinstance(source_hashes, dict) or set(factors) != set(clip_ids) or set(source_hashes) != set(clip_ids):
+        raise ValueError("Scale factors and SHA evidence must cover every source clip exactly once.")
+    for value in factors.values():
+        if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value) or not 0.25 <= value <= 4:
+            raise ValueError("Post-generation scale factors must be finite numbers in [0.25, 4].")
+    if factors["idle"] != 1:
+        raise ValueError("The idle baseline factor must be exactly 1.")
+    if any(not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value) for value in source_hashes.values()):
+        raise ValueError("Scale source SHA-256 values must be lowercase 64-digit hashes.")
+    if not isinstance(sources, list) or len(sources) != len(clip_ids) or any(not isinstance(source, dict) for source in sources) or [source.get("clip") for source in sources] != clip_ids:
+        raise ValueError("Scale source provenance must cover ordered authored clips exactly once.")
+    if job.get("sourceGrid") != {"columns": 4, "rows": 2, "frameCount": 8}:
+        raise ValueError("Measured scale review requires the authored eight-pose 4x2 source grid.")
+    sizes = {}
+    for clip, source in zip(job["clips"], sources):
+        source_path = scale_evidence_path(root, clip["sourcePath"])
+        actual_hash = hash_file(source_path)
+        with Image.open(source_path) as original:
+            size = list(original.size)
+            if original.format != "PNG" or size[0] != 2 * size[1] or size[0] < 256:
+                raise ValueError("Scale evidence requires the original 2:1 PNG source board.")
+        if source.get("path") != clip["sourcePath"] or source.get("sha256") != actual_hash or source_hashes[clip["id"]] != actual_hash or source.get("size") != size:
+            raise ValueError(f"Scale source evidence changed for {clip['id']}.")
+        sizes[clip["id"]] = size
+    if len({tuple(size) for size in sizes.values()}) != 1:
+        raise ValueError("Scale sources must share their nominal source resolution.")
+    measurements = entry.get("measurements")
+    if not isinstance(measurements, list) or not measurements:
+        raise ValueError("Post-generation scale review requires rigid landmark measurements.")
+    lengths, observed, landmark = {}, set(), None
+    for measurement in measurements:
+        if not isinstance(measurement, dict):
+            raise ValueError("Each scale measurement must be an object.")
+        clip, frame = measurement.get("clip"), measurement.get("frame")
+        if not isinstance(clip, str) or clip not in sizes or type(frame) is not int or not 0 <= frame < 8 or (clip, frame) in observed:
+            raise ValueError("Scale measurements need distinct authored clip/frame indices in [0, 7].")
+        observed.add((clip, frame))
+        for field in ("landmark", "note"):
+            if not isinstance(measurement.get(field), str) or not measurement[field].strip():
+                raise ValueError("Each scale measurement needs a rigid landmark and manual comparison note.")
+        if landmark is not None and landmark != measurement["landmark"]:
+            raise ValueError("Scale measurements must compare the same rigid landmark across clips.")
+        landmark = measurement["landmark"]
+        endpoints = measurement.get("endpoints")
+        if not isinstance(endpoints, list) or len(endpoints) != 2:
+            raise ValueError("A scale measurement requires two source endpoints.")
+        points = [finite_pair(point, "Scale endpoint") for point in endpoints]
+        width, height = sizes[clip]
+        column, row = frame % 4, frame // 4
+        cell_width = round((column + 1) * width / 4) - round(column * width / 4)
+        cell_height = round((row + 1) * height / 2) - round(row * height / 2)
+        if any(not (-0.15 * cell_width <= x <= 1.15 * cell_width and -0.15 * cell_height <= y <= 1.15 * cell_height) for x, y in points):
+            raise ValueError("Scale endpoint is outside the nominal source cell/short-spill envelope.")
+        length = measurement.get("lengthPx")
+        if not isinstance(length, (int, float)) or isinstance(length, bool) or not math.isfinite(length) or length <= 1 or abs(length - math.dist(*points)) > 1:
+            raise ValueError("Scale length must agree with its Euclidean endpoints within one pixel.")
+        lengths.setdefault(clip, []).append(length)
+    if len(lengths.get("idle", [])) < 2 or any(len(values) < 2 for values in lengths.values()) or any(factor != 1 and clip not in lengths for clip, factor in factors.items()):
+        raise ValueError("Scale review needs at least two distinct comparable poses for baseline and every measured or corrected clip.")
+    baseline_length = median(lengths["idle"])
+    for clip, values in lengths.items():
+        expected_factor = baseline_length / median(values)
+        if abs(factors[clip] / expected_factor - 1) > 0.03:
+            raise ValueError(f"Scale factor for {clip} differs from the measured median ratio by more than 3%.")
+    evidence_paths = entry.get("evidencePaths")
+    if not isinstance(evidence_paths, list) or not evidence_paths or any(not isinstance(value, str) for value in evidence_paths) or len(set(evidence_paths)) != len(evidence_paths):
+        raise ValueError("Scale review requires unique nonempty evidence paths.")
+    evidence = [{"path": value, "sha256": hash_file(scale_evidence_path(root, value))} for value in evidence_paths]
+    return {"path": review_path, "sha256": hashlib.sha256(raw).hexdigest(), "status": "reviewed", "profileId": job["profileId"],
+            "reviewer": entry["reviewer"], "reviewedAt": entry["reviewedAt"], "coordinates": "nominal-source-cell", "baselineClip": "idle",
+            "sourceScaleByClip": factors, "sourceSha256ByClip": source_hashes, "measurementCount": len(measurements), "evidence": evidence}
+
+
 def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict], root: Path = ROOT) -> tuple[list[dict] | None, dict]:
     """Load only complete, individually reviewed physical roots; never guess them.
 
@@ -451,6 +576,7 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         reports.extend(clip_reports)
     if len({tuple(source["size"]) for source in sources}) != 1:
         raise ValueError("All clips of a profile must share source resolution; mixed physical scales need visual review.")
+    post_generation_review = reviewed_source_scale(job, sources, root)
     source_scale_by_clip = job["reference"].get("sourceScaleByClip", {})
     calibration_review = job["reference"].get("scaleCalibrationReview")
     calibration_evidence = []
@@ -458,6 +584,8 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         if not calibration_review or not calibration_review.get("note") or not calibration_review.get("reviewer") or not calibration_review.get("reviewedAt") or not calibration_review.get("evidencePaths"):
             raise ValueError("Manual source scale changes require an explicit measurement review and evidence.")
         calibration_evidence = [{"path": path, "sha256": hash_file(scoped_path(root, path))} for path in calibration_review["evidencePaths"]]
+    if post_generation_review is not None:
+        source_scale_by_clip = post_generation_review["sourceScaleByClip"]
     source_anchors, anchor_review = reviewed_source_anchors(job, reports, sources, root)
     atlas, placements = normalize_frames(frames, reports, job["grid"], job["pivot"], source_scale_by_clip, source_anchors)
     validation = validate_atlas(atlas, job["grid"])
@@ -494,6 +622,10 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         "enclosedMagentaMatte": matte_proof_summary(sources, remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe),
         "rawPreserved": True, "interpolatedFrames": 0, "duplicatedFrames": 0,
         "frameCount": len(frames), "sources": sources, "clips": clips, "placements": placements, "validation": validation}
+    if post_generation_review is not None:
+        if reviewed_source_scale(job, sources, root) != post_generation_review:
+            raise ValueError("Post-generation scale evidence changed during normalization.")
+        metadata["postGenerationScaleReview"] = post_generation_review
     json_write(scoped_path(root, job["metadataPath"]), metadata)
     return metadata
 
@@ -510,9 +642,15 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
         raise ValueError("Identity or reviewed reference changed since normalization.")
     if metadata["grid"] != job["grid"] or metadata["pivot"] != job["pivot"] or metadata["frameCount"] != len(job["clips"]) * 8:
         raise ValueError("Animation contract changed since normalization.")
-    expected_calibration = {clip["id"]: job["reference"].get("sourceScaleByClip", {}).get(clip["id"], 1.0) for clip in job["clips"]}
+    expected_post_review = reviewed_source_scale(job, metadata["sources"], root)
+    if (expected_post_review is None and "postGenerationScaleReview" in metadata) or json.dumps(metadata.get("postGenerationScaleReview"), sort_keys=True) != json.dumps(expected_post_review, sort_keys=True):
+        raise ValueError("Post-generation scale review or its evidence changed since normalization.")
+    scale_by_clip = expected_post_review["sourceScaleByClip"] if expected_post_review is not None else job["reference"].get("sourceScaleByClip", {})
+    expected_calibration = {clip["id"]: scale_by_clip.get(clip["id"], 1.0) for clip in job["clips"]}
     if metadata.get("sourceScaleByClip") != expected_calibration or metadata.get("scaleCalibrationReview") != job["reference"].get("scaleCalibrationReview"):
         raise ValueError("Reviewed inter-clip scale calibration changed.")
+    if expected_post_review is not None and (json.dumps(metadata.get("sourceScaleByClip"), sort_keys=True) != json.dumps(expected_calibration, sort_keys=True) or metadata.get("scaleCalibrationEvidence") != []):
+        raise ValueError("Post-generation scale factors or legacy evidence fields are inconsistent.")
     _, expected_anchor_review = reviewed_source_anchors(job, metadata["placements"], metadata["sources"], root)
     if metadata.get("physicalAnchorReview") != expected_anchor_review:
         raise ValueError("Physical source-anchor review changed since normalization.")
@@ -521,11 +659,19 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
             raise ValueError("Scale measurement evidence changed after normalization.")
     if len(metadata["sources"]) != len(job["clips"]) or len(metadata["clips"]) != len(job["clips"]):
         raise ValueError("Recorded clip provenance is incomplete.")
+    reviewed_frames, reviewed_reports = [], []
     for clip, source in zip(job["clips"], metadata["sources"]):
         if source["clip"] != clip["id"] or source["path"] != clip["sourcePath"] or source["promptSha256"] != clip["promptSha256"] or hash_file(scoped_path(root, source["path"])) != source["sha256"]:
             raise ValueError(f'Source or prompt provenance changed for {clip["id"]}.')
         with Image.open(scoped_path(root, source["path"])) as original:
             expected_matte = source_matte_proof(original, recorded_matte_option, recorded_aa_option)
+            if expected_post_review is not None:
+                reassignment = metadata.get("normalizationOptions", {}).get("safeReassignCellFragments")
+                if not isinstance(reassignment, bool):
+                    raise ValueError("Post-generation scale check requires the recorded cell ownership option.")
+                local_frames, local_reports = split_source(original, clip["id"], job["sourceGrid"], reassignment, recorded_matte_option, recorded_aa_option)
+                reviewed_frames.extend(local_frames)
+                reviewed_reports.extend(local_reports)
         if source.get("enclosedMagentaMatte") != expected_matte:
             raise ValueError(f'Enclosed magenta pixel evidence changed for {clip["id"]}.')
     if metadata.get("enclosedMagentaMatte") != matte_proof_summary(metadata["sources"], recorded_matte_option, recorded_aa_option):
@@ -533,7 +679,17 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
     for key, path_key in (("normalizedSha256", "normalizedPath"), ("previewSha256", "previewPath")):
         if hash_file(scoped_path(root, job[path_key])) != metadata[key]:
             raise ValueError(f"Published normalization checksum differs: {path_key}")
+    expected_atlas = None
+    if expected_post_review is not None:
+        # Reapply the measured factors in memory only: metadata cannot claim a
+        # new calibration while retaining pixels produced at an older scale.
+        anchors, _ = reviewed_source_anchors(job, reviewed_reports, metadata["sources"], root)
+        expected_atlas, expected_placements = normalize_frames(reviewed_frames, reviewed_reports, job["grid"], job["pivot"], scale_by_clip, anchors)
+        if json.dumps(metadata["placements"], sort_keys=True) != json.dumps(expected_placements, sort_keys=True) or type(metadata.get("scale")) not in (int, float) or metadata["scale"] != expected_placements[0]["scale"]:
+            raise ValueError("Post-generation scale placements do not match the measured single-pack-scale normalization.")
     with Image.open(scoped_path(root, job["normalizedPath"])) as atlas:
+        if expected_atlas is not None and atlas.convert("RGBA").tobytes() != expected_atlas.tobytes():
+            raise ValueError("Atlas pixels do not apply the current post-generation scale review.")
         if validate_atlas(atlas, job["grid"]) != metadata["validation"]:
             raise ValueError("Stored cell validation differs from current pixels.")
         for ordinal, (clip, recorded) in enumerate(zip(job["clips"], metadata["clips"])):

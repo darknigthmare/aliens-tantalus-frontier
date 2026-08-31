@@ -29,19 +29,19 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-011-lurker.webp",
-  "normalizedSha256": "04e47a0bcfff8e2135b6f21909189e68df86f4e7accb26b6ac9e4e714aed7f6c",
+  "normalizedSha256": "3377ebb3c84617a44d0d9b91c2990ece2d200ae70d8671d22ef6ff5591858a39",
   "preview": "assets/openai/sprites/previews/v66/enemy-011-lurker/all.gif",
-  "previewSha256": "032fb8a545911fffa3169edcea909d563d11d121e8cab4885a6d9251839516d8",
+  "previewSha256": "80c12a4a65b8518fb28296e6fd56dbce1e4bdeea74e210c921f90f94d9189c15",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.458677686,
+  "scale": 0.333702348,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1.062929,
+    "attack": 1.858278,
+    "death": 1.822337
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
@@ -299,9 +299,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/idle.webp",
-      "sha256": "f75d0791638e3d06308be641ba1ed1d64d98515cb15953e22d32058fe3e37ca7",
+      "sha256": "41a969c788ef282fbb7510326c8b9132ad97062f0c3e1b2520dd5b2710d7ad83",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-011-lurker/idle.gif",
-      "previewSha256": "c6c52e4bf9d814064a9ac48942af96d9315fb07317fba05aaebce303f8a140ff"
+      "previewSha256": "1d4ad6e367a5c3c2e20d0286b25e1f6403b789a75dae48b824da8d72143f6548"
     },
     {
       "id": "move",
@@ -318,9 +318,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/move.webp",
-      "sha256": "b5709e572cdacd0b569893bb52f5f8b8dc47a076dcd173428991acb70c016f6c",
+      "sha256": "1d61298a76be50faf86eaabc0bffaf4ba889c2a9377b875760e6a4aec12fea9f",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-011-lurker/move.gif",
-      "previewSha256": "80231229c4ea526c05cb28e7a421628689c64885d5a7e6f76b239bb4d7687afb"
+      "previewSha256": "2cc2501a2e7898333a22f23e268e6f4798462fcab49cddfba7ab1183b8e7d6fa"
     },
     {
       "id": "attack",
@@ -337,9 +337,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/attack.webp",
-      "sha256": "f9ce7b97bb02d06de201db0f712db61a160447891c20bc734a838e6908828720",
+      "sha256": "8a2e55e50901cfae3320557d62d0f327f4e80f0991f008258f0bd8a0e738687b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-011-lurker/attack.gif",
-      "previewSha256": "68338b132cd33f674502134593edb621635f7e715cc3dc8130b9a10a43f37b15"
+      "previewSha256": "4df8ad7b140bb5e40abeb2a4e43d254a84462953d82aa1fe7e18904754c5a094"
     },
     {
       "id": "death",
@@ -356,9 +356,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/death.webp",
-      "sha256": "8ca8e1216514a4fc4649f5056334c2fa393aef4ecea6cd1fa95ac16141322398",
+      "sha256": "9861fa16f17807b4cc86c2be3cde5a32bf618837d683c9c08ac6ca5c28b9eb55",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-011-lurker/death.gif",
-      "previewSha256": "1a60e6639cdbecd696043f5f0705f588c982dc2c820eeede098603c62d924fa6"
+      "previewSha256": "901759235254f76044edcf439d8c8a37e128cb30c657ce8952ec97b4bf456f63"
     }
   ],
   "placements": [
@@ -410,17 +410,17 @@
         311.0
       ],
       "renderedAnchor": [
-        127.68,
+        127.81714285714285,
         240.0
       ],
       "index": 0,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        55,
-        97,
-        216,
+        75,
+        136,
+        192,
         240
       ]
     },
@@ -472,17 +472,17 @@
         317.0
       ],
       "renderedAnchor": [
-        127.5125348189415,
+        127.82729805013928,
         240.0
       ],
       "index": 1,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        48,
-        95,
-        213,
+        70,
+        134,
+        190,
         240
       ]
     },
@@ -534,17 +534,17 @@
         317.0
       ],
       "renderedAnchor": [
-        127.66666666666667,
+        127.66666666666666,
         240.0
       ],
       "index": 2,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        47,
-        95,
-        212,
+        69,
+        134,
+        189,
         240
       ]
     },
@@ -596,17 +596,17 @@
         316.0
       ],
       "renderedAnchor": [
-        127.97855227882037,
+        128.171581769437,
         240.0
       ],
       "index": 3,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        45,
-        95,
-        216,
+        68,
+        135,
+        192,
         240
       ]
     },
@@ -658,17 +658,17 @@
         314.0
       ],
       "renderedAnchor": [
-        127.91208791208791,
+        128.17582417582418,
         240.0
       ],
       "index": 4,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        49,
-        96,
-        216,
+        71,
+        135,
+        192,
         240
       ]
     },
@@ -720,17 +720,17 @@
         311.0
       ],
       "renderedAnchor": [
-        128.0275482093664,
+        128.33333333333334,
         240.0
       ],
       "index": 5,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        48,
-        97,
-        214,
+        70,
+        136,
+        191,
         240
       ]
     },
@@ -782,17 +782,17 @@
         307.0
       ],
       "renderedAnchor": [
-        127.66666666666667,
+        127.66666666666666,
         240.0
       ],
       "index": 6,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        47,
-        99,
-        212,
+        69,
+        138,
+        189,
         240
       ]
     },
@@ -844,17 +844,17 @@
         307.0
       ],
       "renderedAnchor": [
-        127.87292817679558,
+        128.49171270718233,
         240.0
       ],
       "index": 7,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1,
+      "appliedScale": 0.333702348,
       "renderedBounds": [
-        49,
-        99,
-        215,
+        71,
+        138,
+        192,
         240
       ]
     },
@@ -906,17 +906,17 @@
         270.0
       ],
       "renderedAnchor": [
-        127.62606232294617,
+        127.63739376770539,
         240.0
       ],
       "index": 8,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        62,
-        116,
-        224,
+        77,
+        144,
+        202,
         240
       ]
     },
@@ -968,17 +968,17 @@
         263.0
       ],
       "renderedAnchor": [
-        128.41489361702128,
+        127.58244680851064,
         240.0
       ],
       "index": 9,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        63,
-        119,
-        235,
+        77,
+        147,
+        210,
         240
       ]
     },
@@ -1030,17 +1030,17 @@
         255.0
       ],
       "renderedAnchor": [
-        128.05938242280286,
+        128.35154394299286,
         240.0
       ],
       "index": 10,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        46,
-        123,
-        239,
+        65,
+        150,
+        214,
         240
       ]
     },
@@ -1111,17 +1111,17 @@
         266.0
       ],
       "renderedAnchor": [
-        127.77835051546391,
+        127.9742268041237,
         240.0
       ],
       "index": 11,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        53,
-        118,
-        231,
+        70,
+        146,
+        208,
         240
       ]
     },
@@ -1173,17 +1173,17 @@
         280.0
       ],
       "renderedAnchor": [
-        127.70588235294117,
+        128.23529411764707,
         240.0
       ],
       "index": 12,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        54,
-        112,
-        233,
+        71,
+        141,
+        210,
         240
       ]
     },
@@ -1235,17 +1235,17 @@
         256.0
       ],
       "renderedAnchor": [
-        127.58288770053476,
+        127.89839572192514,
         240.0
       ],
       "index": 13,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        54,
-        123,
-        226,
+        71,
+        149,
+        204,
         240
       ]
     },
@@ -1316,17 +1316,17 @@
         255.0
       ],
       "renderedAnchor": [
-        128.31116389548694,
+        127.72209026128266,
         240.0
       ],
       "index": 14,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        38,
-        123,
-        231,
+        58,
+        150,
+        207,
         240
       ]
     },
@@ -1378,17 +1378,17 @@
         265.0
       ],
       "renderedAnchor": [
-        127.53367875647669,
+        128.3678756476684,
         240.0
       ],
       "index": 15,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.354701903,
       "renderedBounds": [
-        56,
-        118,
-        233,
+        73,
+        146,
+        210,
         240
       ]
     },
@@ -1440,17 +1440,17 @@
         167.0
       ],
       "renderedAnchor": [
-        127.54166666666666,
+        127.97916666666666,
         240.0
       ],
       "index": 16,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        84,
-        163,
-        194,
+        69,
+        136,
+        218,
         240
       ]
     },
@@ -1502,17 +1502,17 @@
         162.0
       ],
       "renderedAnchor": [
-        128.49689440993788,
+        127.50931677018633,
         240.0
       ],
       "index": 17,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        100,
-        166,
-        174,
+        89,
+        140,
+        189,
         240
       ]
     },
@@ -1564,17 +1564,17 @@
         166.0
       ],
       "renderedAnchor": [
-        128.400826446281,
+        128.48760330578511,
         240.0
       ],
       "index": 18,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        94,
-        164,
-        205,
+        82,
+        137,
+        232,
         240
       ]
     },
@@ -1626,17 +1626,17 @@
         162.0
       ],
       "renderedAnchor": [
-        127.98545454545454,
+        127.69454545454545,
         240.0
       ],
       "index": 19,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        84,
-        166,
-        210,
+        68,
+        140,
+        239,
         240
       ]
     },
@@ -1688,17 +1688,17 @@
         159.0
       ],
       "renderedAnchor": [
-        127.70114942528735,
+        127.89655172413794,
         240.0
       ],
       "index": 20,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        90,
-        167,
-        210,
+        77,
+        141,
+        239,
         240
       ]
     },
@@ -1750,17 +1750,17 @@
         156.0
       ],
       "renderedAnchor": [
-        127.68152866242039,
+        127.59872611464968,
         240.0
       ],
       "index": 21,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        102,
-        168,
-        174,
+        93,
+        143,
+        190,
         240
       ]
     },
@@ -1812,17 +1812,17 @@
         161.0
       ],
       "renderedAnchor": [
-        127.64192139737992,
+        127.66812227074236,
         240.0
       ],
       "index": 22,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        85,
-        166,
-        190,
+        70,
+        140,
+        212,
         240
       ]
     },
@@ -1874,17 +1874,17 @@
         158.0
       ],
       "renderedAnchor": [
-        128.35135135135135,
+        127.94594594594594,
         240.0
       ],
       "index": 23,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.858278,
+      "appliedScale": 0.620111732,
       "renderedBounds": [
-        87,
-        168,
-        189,
+        72,
+        142,
+        210,
         240
       ]
     },
@@ -1936,17 +1936,17 @@
         151.0
       ],
       "renderedAnchor": [
-        127.5680751173709,
+        128.4882629107981,
         240.0
       ],
       "index": 24,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        88,
-        171,
-        186,
+        76,
+        148,
+        206,
         240
       ]
     },
@@ -1998,17 +1998,17 @@
         141.0
       ],
       "renderedAnchor": [
-        128.078431372549,
+        127.64705882352942,
         240.0
       ],
       "index": 25,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        102,
-        175,
-        172,
+        93,
+        154,
+        186,
         240
       ]
     },
@@ -2060,17 +2060,17 @@
         130.0
       ],
       "renderedAnchor": [
-        127.81865284974093,
+        127.82901554404145,
         240.0
       ],
       "index": 26,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        96,
-        180,
-        185,
+        86,
+        161,
+        203,
         240
       ]
     },
@@ -2122,17 +2122,17 @@
         129.0
       ],
       "renderedAnchor": [
-        127.63934426229508,
+        127.73770491803279,
         240.0
       ],
       "index": 27,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        90,
-        181,
-        202,
+        78,
+        162,
+        226,
         240
       ]
     },
@@ -2184,17 +2184,17 @@
         141.0
       ],
       "renderedAnchor": [
-        127.5679012345679,
+        128.4238683127572,
         240.0
       ],
       "index": 28,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        86,
-        175,
-        197,
+        73,
+        154,
+        221,
         240
       ]
     },
@@ -2246,17 +2246,17 @@
         132.0
       ],
       "renderedAnchor": [
-        127.8411214953271,
+        127.85046728971963,
         240.0
       ],
       "index": 29,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        88,
-        179,
-        186,
+        75,
+        160,
+        205,
         240
       ]
     },
@@ -2308,17 +2308,17 @@
         91.0
       ],
       "renderedAnchor": [
-        127.84188034188034,
+        128.14529914529913,
         240.0
       ],
       "index": 30,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        78,
-        198,
+        62,
         185,
+        204,
         240
       ]
     },
@@ -2370,17 +2370,17 @@
         47.0
       ],
       "renderedAnchor": [
-        127.56692913385827,
+        127.66929133858268,
         240.0
       ],
       "index": 31,
-      "scale": 0.458677686,
-      "sourceScale": 1.0,
-      "appliedScale": 0.458677686,
+      "scale": 0.333702348,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.608118136,
       "renderedBounds": [
-        64,
-        218,
-        181,
+        44,
+        211,
+        198,
         240
       ]
     }
@@ -2390,466 +2390,507 @@
       {
         "index": 0,
         "alphaBounds": [
-          56,
-          98,
-          215,
+          76,
+          136,
+          191,
           239
         ],
-        "foregroundPixels": 7378,
-        "width": 159,
-        "height": 141,
-        "relativeToRowMedian": 0.979099
+        "foregroundPixels": 3995,
+        "width": 115,
+        "height": 103,
+        "relativeToRowMedian": 0.97072
       },
       {
         "index": 1,
         "alphaBounds": [
-          49,
-          96,
-          212,
-          239
+          71,
+          134,
+          190,
+          240
         ],
-        "foregroundPixels": 7526,
-        "width": 163,
-        "height": 143,
-        "relativeToRowMedian": 0.998739
+        "foregroundPixels": 4117,
+        "width": 119,
+        "height": 106,
+        "relativeToRowMedian": 1.000364
       },
       {
         "index": 2,
         "alphaBounds": [
-          48,
-          96,
-          211,
+          70,
+          135,
+          189,
           239
         ],
-        "foregroundPixels": 7545,
-        "width": 163,
-        "height": 143,
-        "relativeToRowMedian": 1.001261
+        "foregroundPixels": 4124,
+        "width": 119,
+        "height": 104,
+        "relativeToRowMedian": 1.002065
       },
       {
         "index": 3,
         "alphaBounds": [
-          46,
-          96,
-          215,
+          69,
+          136,
+          192,
           239
         ],
-        "foregroundPixels": 7596,
-        "width": 169,
-        "height": 143,
-        "relativeToRowMedian": 1.008029
+        "foregroundPixels": 4114,
+        "width": 123,
+        "height": 103,
+        "relativeToRowMedian": 0.999636
       },
       {
         "index": 4,
         "alphaBounds": [
-          50,
-          97,
-          215,
+          72,
+          136,
+          192,
           239
         ],
-        "foregroundPixels": 7495,
-        "width": 165,
-        "height": 142,
-        "relativeToRowMedian": 1.011471
+        "foregroundPixels": 4088,
+        "width": 120,
+        "height": 103,
+        "relativeToRowMedian": 1.008511
       },
       {
         "index": 5,
         "alphaBounds": [
-          49,
-          98,
-          213,
+          71,
+          137,
+          190,
           239
         ],
-        "foregroundPixels": 7403,
-        "width": 164,
-        "height": 141,
-        "relativeToRowMedian": 0.999055
+        "foregroundPixels": 4065,
+        "width": 119,
+        "height": 102,
+        "relativeToRowMedian": 1.002837
       },
       {
         "index": 6,
         "alphaBounds": [
-          48,
-          100,
-          211,
+          70,
+          139,
+          189,
           239
         ],
-        "foregroundPixels": 7399,
-        "width": 163,
-        "height": 139,
-        "relativeToRowMedian": 0.998516
+        "foregroundPixels": 4004,
+        "width": 119,
+        "height": 100,
+        "relativeToRowMedian": 0.987788
       },
       {
         "index": 7,
         "alphaBounds": [
-          50,
-          100,
-          214,
+          72,
+          138,
+          192,
           239
         ],
-        "foregroundPixels": 7417,
-        "width": 164,
-        "height": 139,
-        "relativeToRowMedian": 1.000945
+        "foregroundPixels": 4042,
+        "width": 120,
+        "height": 101,
+        "relativeToRowMedian": 0.997163
       },
       {
         "index": 8,
         "alphaBounds": [
-          63,
-          117,
-          223,
+          78,
+          145,
+          201,
           239
         ],
-        "foregroundPixels": 6276,
-        "width": 160,
-        "height": 122,
-        "relativeToRowMedian": 1.015616
+        "foregroundPixels": 3826,
+        "width": 123,
+        "height": 94,
+        "relativeToRowMedian": 1.016067
       },
       {
         "index": 9,
         "alphaBounds": [
-          64,
-          120,
-          234,
+          78,
+          148,
+          209,
           239
         ],
-        "foregroundPixels": 6083,
-        "width": 170,
-        "height": 119,
-        "relativeToRowMedian": 0.984384
+        "foregroundPixels": 3705,
+        "width": 131,
+        "height": 91,
+        "relativeToRowMedian": 0.983933
       },
       {
         "index": 10,
         "alphaBounds": [
-          47,
-          124,
-          238,
+          66,
+          151,
+          213,
           239
         ],
-        "foregroundPixels": 6316,
-        "width": 191,
-        "height": 115,
-        "relativeToRowMedian": 1.022089
+        "foregroundPixels": 3846,
+        "width": 147,
+        "height": 88,
+        "relativeToRowMedian": 1.021378
       },
       {
         "index": 11,
         "alphaBounds": [
-          54,
-          119,
-          230,
+          71,
+          147,
+          208,
           239
         ],
-        "foregroundPixels": 6017,
-        "width": 176,
-        "height": 120,
-        "relativeToRowMedian": 0.973703
+        "foregroundPixels": 3685,
+        "width": 137,
+        "height": 92,
+        "relativeToRowMedian": 0.978622
       },
       {
         "index": 12,
         "alphaBounds": [
-          55,
-          113,
-          232,
+          72,
+          141,
+          209,
           239
         ],
-        "foregroundPixels": 5824,
-        "width": 177,
-        "height": 126,
-        "relativeToRowMedian": 0.935357
+        "foregroundPixels": 3578,
+        "width": 137,
+        "height": 98,
+        "relativeToRowMedian": 0.941207
       },
       {
         "index": 13,
         "alphaBounds": [
-          55,
-          124,
-          225,
+          72,
+          150,
+          203,
           239
         ],
-        "foregroundPixels": 6247,
-        "width": 170,
-        "height": 115,
-        "relativeToRowMedian": 1.003292
+        "foregroundPixels": 3838,
+        "width": 131,
+        "height": 89,
+        "relativeToRowMedian": 1.009601
       },
       {
         "index": 14,
         "alphaBounds": [
-          39,
-          124,
-          230,
+          59,
+          151,
+          206,
           239
         ],
-        "foregroundPixels": 6343,
-        "width": 191,
-        "height": 115,
-        "relativeToRowMedian": 1.01871
+        "foregroundPixels": 3880,
+        "width": 147,
+        "height": 88,
+        "relativeToRowMedian": 1.02065
       },
       {
         "index": 15,
         "alphaBounds": [
-          57,
-          119,
-          232,
+          74,
+          147,
+          210,
           239
         ],
-        "foregroundPixels": 6206,
-        "width": 175,
-        "height": 120,
-        "relativeToRowMedian": 0.996708
+        "foregroundPixels": 3765,
+        "width": 136,
+        "height": 92,
+        "relativeToRowMedian": 0.990399
       },
       {
         "index": 16,
         "alphaBounds": [
-          85,
-          164,
-          193,
+          70,
+          137,
+          217,
           239
         ],
-        "foregroundPixels": 2423,
-        "width": 108,
-        "height": 75,
-        "relativeToRowMedian": 1.098617
+        "foregroundPixels": 4276,
+        "width": 147,
+        "height": 102,
+        "relativeToRowMedian": 1.098946
       },
       {
         "index": 17,
         "alphaBounds": [
-          101,
-          167,
-          173,
+          90,
+          141,
+          188,
           239
         ],
-        "foregroundPixels": 1891,
-        "width": 72,
-        "height": 72,
-        "relativeToRowMedian": 0.857402
+        "foregroundPixels": 3340,
+        "width": 98,
+        "height": 98,
+        "relativeToRowMedian": 0.858391
       },
       {
         "index": 18,
         "alphaBounds": [
-          95,
-          165,
-          204,
+          83,
+          138,
+          231,
           239
         ],
-        "foregroundPixels": 2354,
-        "width": 109,
-        "height": 74,
-        "relativeToRowMedian": 1.067332
+        "foregroundPixels": 4156,
+        "width": 148,
+        "height": 101,
+        "relativeToRowMedian": 1.068106
       },
       {
         "index": 19,
         "alphaBounds": [
-          85,
-          167,
-          209,
+          69,
+          141,
+          238,
           239
         ],
-        "foregroundPixels": 2057,
-        "width": 124,
-        "height": 72,
-        "relativeToRowMedian": 0.932668
+        "foregroundPixels": 3626,
+        "width": 169,
+        "height": 98,
+        "relativeToRowMedian": 0.931894
       },
       {
         "index": 20,
         "alphaBounds": [
-          91,
-          168,
-          209,
+          78,
+          143,
+          238,
           239
         ],
-        "foregroundPixels": 1939,
-        "width": 118,
-        "height": 71,
-        "relativeToRowMedian": 0.957294
+        "foregroundPixels": 3428,
+        "width": 160,
+        "height": 96,
+        "relativeToRowMedian": 0.958479
       },
       {
         "index": 21,
         "alphaBounds": [
-          103,
-          169,
-          173,
+          94,
+          144,
+          189,
           239
         ],
-        "foregroundPixels": 1867,
-        "width": 70,
-        "height": 70,
-        "relativeToRowMedian": 0.921748
+        "foregroundPixels": 3266,
+        "width": 95,
+        "height": 95,
+        "relativeToRowMedian": 0.913183
       },
       {
         "index": 22,
         "alphaBounds": [
-          86,
-          167,
-          189,
+          71,
+          141,
+          211,
           239
         ],
-        "foregroundPixels": 2112,
-        "width": 103,
-        "height": 72,
-        "relativeToRowMedian": 1.042706
+        "foregroundPixels": 3725,
+        "width": 140,
+        "height": 98,
+        "relativeToRowMedian": 1.041521
       },
       {
         "index": 23,
         "alphaBounds": [
-          88,
-          169,
-          188,
+          73,
+          143,
+          209,
           239
         ],
-        "foregroundPixels": 2173,
-        "width": 100,
-        "height": 70,
-        "relativeToRowMedian": 1.072822
+        "foregroundPixels": 3823,
+        "width": 136,
+        "height": 96,
+        "relativeToRowMedian": 1.068922
       },
       {
         "index": 24,
         "alphaBounds": [
-          89,
-          172,
-          185,
+          77,
+          149,
+          205,
           239
         ],
-        "foregroundPixels": 1953,
-        "width": 96,
-        "height": 67,
-        "relativeToRowMedian": 1.113455
+        "foregroundPixels": 3328,
+        "width": 128,
+        "height": 90,
+        "relativeToRowMedian": 1.133901
       },
       {
         "index": 25,
         "alphaBounds": [
-          103,
-          176,
-          171,
+          94,
+          155,
+          185,
           239
         ],
-        "foregroundPixels": 1718,
-        "width": 68,
-        "height": 63,
-        "relativeToRowMedian": 0.979475
+        "foregroundPixels": 2903,
+        "width": 91,
+        "height": 84,
+        "relativeToRowMedian": 0.989097
       },
       {
         "index": 26,
         "alphaBounds": [
-          97,
-          181,
-          184,
+          87,
+          162,
+          202,
           239
         ],
-        "foregroundPixels": 1790,
-        "width": 87,
-        "height": 58,
-        "relativeToRowMedian": 1.020525
+        "foregroundPixels": 2967,
+        "width": 115,
+        "height": 77,
+        "relativeToRowMedian": 1.010903
       },
       {
         "index": 27,
         "alphaBounds": [
-          91,
-          182,
-          201,
+          79,
+          163,
+          225,
           239
         ],
-        "foregroundPixels": 1525,
-        "width": 110,
-        "height": 57,
-        "relativeToRowMedian": 0.869441
+        "foregroundPixels": 2570,
+        "width": 146,
+        "height": 76,
+        "relativeToRowMedian": 0.875639
       },
       {
         "index": 28,
         "alphaBounds": [
-          87,
-          176,
-          196,
+          74,
+          156,
+          220,
           239
         ],
-        "foregroundPixels": 1525,
-        "width": 109,
-        "height": 63,
-        "relativeToRowMedian": 1.241857
+        "foregroundPixels": 2577,
+        "width": 146,
+        "height": 83,
+        "relativeToRowMedian": 1.260763
       },
       {
         "index": 29,
         "alphaBounds": [
-          89,
-          180,
-          185,
+          76,
+          161,
+          204,
           239
         ],
-        "foregroundPixels": 1308,
-        "width": 96,
-        "height": 59,
-        "relativeToRowMedian": 1.065147
+        "foregroundPixels": 2176,
+        "width": 128,
+        "height": 78,
+        "relativeToRowMedian": 1.064579
       },
       {
         "index": 30,
         "alphaBounds": [
-          79,
-          199,
-          184,
+          63,
+          186,
+          203,
           239
         ],
-        "foregroundPixels": 1148,
-        "width": 105,
-        "height": 40,
-        "relativeToRowMedian": 0.934853
+        "foregroundPixels": 1912,
+        "width": 140,
+        "height": 53,
+        "relativeToRowMedian": 0.935421
       },
       {
         "index": 31,
         "alphaBounds": [
-          65,
-          219,
-          180,
+          45,
+          213,
+          197,
           239
         ],
-        "foregroundPixels": 1023,
-        "width": 115,
-        "height": 20,
-        "relativeToRowMedian": 0.833062
+        "foregroundPixels": 1717,
+        "width": 152,
+        "height": 26,
+        "relativeToRowMedian": 0.84002
       }
     ],
     "rowMedianForegroundPixels": [
-      7535.5,
-      7410.0,
-      6179.5,
-      6226.5,
-      2205.5,
-      2025.5,
-      1754.0,
-      1228.0
+      4115.5,
+      4053.5,
+      3765.5,
+      3801.5,
+      3891.0,
+      3576.5,
+      2935.0,
+      2044.0
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "a8c9e0f3c85a01b5ab9ef5ef263ecb6ee2d50810a283cdf49e69d6274e1a8e1a",
-      "d6c6aee6265dff58d5e93026c8c4ececed2898d82b932b2edbc61ded1742ce66",
-      "746e0fec0345bb784e549d0909cc42d82f12081930821da408015ece14f1b71b",
-      "f08b6ed30b7d93621e43d5ea17858aa4dd9a7f4b402caeda288b007e71a1c7af",
-      "55f2792368fcc3f10f0768279ab30085a3a1ad59ab93601594160d247fd37053",
-      "efa518cb0df0b3c9ba9ad83341270b442f1ccd8fca413871f249d284a97c33d1",
-      "0010cee0a4cb4fce0fefd06a5846a14f03b934459eaa48919ebc2349b61f806b",
-      "4fde52dcbf8708af31a2a3b6940704883fe65b1b7812a942b0594e89b0a4c596",
-      "ec59620557936c112e7cd2df7f299f969b08b21255423806e50cd2c9162ecd0e",
-      "50a4a1d29cc2d4fa2ab19cef7b260b56eeb3707f5e5eb8bd7c8a92190be189ce",
-      "cc41556f29df822852e64e6e5a9e04571e47327355237c993d2f2d8780179316",
-      "f46c5ae66af01bbf719a70885cfd38529777f601c9ef736f9d2e0ff91853d08a",
-      "15e223a6bbd4df2a2636e830a9abf2dc0117972426cdb0b3c1d021ba591f1209",
-      "6e9988507ef640a50b3e3b5054a5df430f6e0bfcce3b9db16bfdb738b1339571",
-      "0810484adae042a855c234012ae256b9b70ba5e6e118620ef5e355d590ea1abf",
-      "6e6266c3bef2bbc6c9306f42dfc889d1d302dbf414fb91bab151b95e5e099b92",
-      "3f0bd43531ae111002a7756a9f0831b2fd1694c5f557fe2dd35e9737bf813fa8",
-      "eacff3d24a8d148ce268975a27be1eca8d196ca6bead114c819927afb7ddd4c2",
-      "60d07b85260ddd41d37dda6eada6c0fd1a38ae4b21466008ed11b73e312b149d",
-      "e85177d13aa337482d058fe59267bf07fc3f29af5bbdf1f1a56f93e11e0ff6be",
-      "e0a07bf1cd9463d0201175d1de8c100f63ac1a8a4f9082feda5bfed1357af5af",
-      "5e3a5eeb806832ad9696db2a2b9ea150c3d2d0b887c91e435f0a6be5a2e2d04c",
-      "4efa83ba0b3c0eae82204fbb9d7998e69808c1c6323369fa5e31d7c28f81b1e6",
-      "11daefc0f5cccaaf2dae3cfe5d59ba357d3234fb1ad39b06f5dfc774b33d6443",
-      "9e953fe84388f08577e44207447380cbaab98bb8f4937d1ed16c7af3c7dc631f",
-      "8e11394963f5e1f4ebbf0255565e0d1b5a404fd5cecaef64cff9925a9a9fecac",
-      "3920339bdbcc7a7e30255010b7ba051938626968bba7d267fb4c9d55f6ee4883",
-      "70b2951a41528507e42bc11a60b7892eb4bd68c75dc1978def4308adc5b86a93",
-      "cc00287948fcdcb407c9881b28f3b49f0997677a23a9b490b72ebb80003c97cf",
-      "a80a5eda6698e71cc6f750f12b1f1b1422b1596c91afd6a4011ec3d897b569dc",
-      "85b422cb8535ec85101fd00ec0e8b75eb9ba3190fc276b717a6a96e7aff0476c",
-      "014eb11a4d0710fd493b2b794d182680c84cd3341061983cc83fba5dd3758f14"
+      "7f09ba2dd3c0d206197c36e2aae36b9e61d4d43de12297b0306ec52a0355b258",
+      "df68c75f9da8469388a81da7783811ad4f186b1e78ad6087d5a5246d6b76593e",
+      "d13b415db298198d1c00602d82d84062854e1bd2cb1b95f51c0894cac782a945",
+      "89e19598a5cb6644ad68e9ea83ba3e38767e20ef69c9f6010bf28a1f170da433",
+      "e3fc6cc8a3aced1326695380260c77d984dc1df16441256e5189b0ec317ee8df",
+      "a9d4e321ad07843e0a5c0f369fb915589f17ce31cce318527758037fd7b7d8f2",
+      "e116af499743dccd367aa039b7db98f0037b072b40db7ca71a5b1784524cfa78",
+      "f4dba4194b132ee29c7e8b54e207602cbecffed80a1f1fcb511a7793c6988468",
+      "eccb85fde463ff86cfad32594a629a4b0627ff9d369230ad5d85a33557188c4d",
+      "c6aa7c7d3f965cb83e06533f9ab30fd24171aff52aa49f2141e5ab277fed9b30",
+      "d5ac530c92116406f4b32e156c2d5ad38d757e432a80850f04c2cf18bc80bfe4",
+      "5af0b5779fe912e3063838ba9aa29d6e62a5a1017a5653e2d640598bfebb097f",
+      "a882ddc43db4764ed9f609a47401b189dd39f0b24cd3e63fe4eaaf5f15c743b3",
+      "3296eca094dd28644046d3bddbd49de70718457d50bc2f739014decde920c551",
+      "c8cfb7411b564c7c372a6c6a88a0b9cbed1ceca10e75b80754f072691eb2a2a7",
+      "c0891ad9559c15947f6026be7738a1f3e663bef7dbf12f82d58e863078919d3c",
+      "d4e11da59426032be9e9c43893d734ce40549bcfb4ea61f79c786a1b3ca8613c",
+      "fc6b9456bbd2c66ec9446a68b3cc4eef2df3ec944fe16754d3b568dd44d5512c",
+      "cf8f42113880697b4853bb55d70c2251f6a3646cc69a8a40fb415c48226e478a",
+      "64743b544a318b172c39058af0cec53210f8942f2c0631514be717ab8a770d79",
+      "c0cd9dbc192d8e668e5d1618cede1fb44c302e2c58fb0895542cb1ae7ff5f802",
+      "2f7448515ebe750280fca090f679ba6a4fa6efacb6b2c4449745a45b02bf05cc",
+      "39260b382301ba6d73c16d7f0f33a6f46faa81e014530b15967b630bea6717cb",
+      "9c931e1167d70a999753a341c9b30acd6adb563ee0336a6c0a9a4462ecf4cafc",
+      "c72f0d9f76cf995fda3895e76104362795b34378d9f50f0b87ad9691ef8f4a83",
+      "27cbca9e3b7e232ac22e77eed6db5ade63303c98bace91600e005a2a51397bef",
+      "3481cb47407ee1614a22da1bac5edcc3db895efdac0c574ef010bdc5219d4f72",
+      "2eda3e920cb85e79127b36718c93f87d96bce45aea442600c4eac48d1b73c1e1",
+      "6f89a52f0450d12a097dee02bbe132d592ceae3428603d89db83291914d5bb6b",
+      "454804cc29020e1c8d2aa1e2c6099ec50f6b32394f84d72bec0a4493d4380d53",
+      "b67c3615f52c5901ccb376728c6ef79edacecad1fdd975f88b3a4242bb23f904",
+      "183b67cc7dbd9edc7f9be68b664536f94b53c91a3fb7907d60b930e1d0e82517"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+    "sha256": "dcab1772242b00106219b5a5d12f595e1452d74f524f3cab95b9bd9db235e115",
+    "status": "reviewed",
+    "profileId": "enemy-011-lurker",
+    "reviewer": "Codex complete_royal",
+    "reviewedAt": "2026-08-31",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.062929,
+      "attack": 1.858278,
+      "death": 1.822337
+    },
+    "sourceSha256ByClip": {
+      "idle": "e0b18f023b7d8fb3be363cfcdfa4e5510f918f5139efcc5c7600c3a097b1e0c6",
+      "move": "6c0163d50d9e4b84ca603583da80cdf77ddb5193e6619d664ab987ad065fc2f9",
+      "attack": "33f6091cee6dcec3d53fd61bf639b5f3264996c74ff65b6ac213b872cc25f6af",
+      "death": "4abb55a2ba39aead122340e683235807f5bfe7a8e4fd514aabcc07ed5bbf9a1f"
+    },
+    "measurementCount": 12,
+    "evidence": [
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-011-lurker/scale-idle.jpg",
+        "sha256": "0f345c3702408cede739ec6ae7d9c62516e603d002bc4e7ba2be2248379a36c2"
+      },
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-011-lurker/scale-move.jpg",
+        "sha256": "4b996667bb8e2cecd84f9957159c2ae2a4a44232bee11cc9d43195ed62fbf584"
+      },
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-011-lurker/scale-attack.jpg",
+        "sha256": "68a903291e83f3396145bca1ee655880eb70cd596f23c54d336dc8a90152facf"
+      },
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-011-lurker/scale-death.jpg",
+        "sha256": "f7926211c4c15977ba1db03a82a2520ec2ed36a5e50974c6d3ef412258584bb1"
+      }
+    ]
   }
 }

@@ -29,19 +29,19 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-010-spitter.webp",
-  "normalizedSha256": "a629524b32ed80eba71c55939accd78bd36fb3266a021d38b6c13f33673891fc",
+  "normalizedSha256": "d199e6cc8d4e69636d022e957f2d87ff246b1e754eb365bde9bd5d5ba264a938",
   "preview": "assets/openai/sprites/previews/v66/enemy-010-spitter/all.gif",
-  "previewSha256": "f91a729bb951de79d32fc2cdd16a9a5589b8e31541734f48d6abfaafe0e06f95",
+  "previewSha256": "1b44814007683d0fdf13c39bac02bd01ae2b77100262e4941fa63a4cc5e07750",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
   "scale": 0.513761468,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1,
+    "attack": 1,
+    "death": 1.615297
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
@@ -352,9 +352,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-010-spitter/death.webp",
-      "sha256": "3c9d565ba4c5462b5de37327b338baf8dd80c5199897f985536c54830f14e26b",
+      "sha256": "7b60e17ba29e7bc16f7206b11ff728250cd63b28e396caec513892c4e815b080",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-010-spitter/death.gif",
-      "previewSha256": "2bc64d7d9007037860372fbe532b4ad91c5b417773bb78f6427bd12a5da0b2b4"
+      "previewSha256": "b43ae2d78f5b004fbc931c7d99d0344610b79362a72ba41658704e0f047065c8"
     }
   ],
   "placements": [
@@ -393,7 +393,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 0,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         48,
@@ -437,7 +437,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 1,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         44,
@@ -481,7 +481,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 2,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         20,
@@ -544,7 +544,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 3,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         38,
@@ -588,7 +588,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 4,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         39,
@@ -632,7 +632,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 5,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         34,
@@ -676,7 +676,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 6,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         38,
@@ -739,7 +739,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 7,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         38,
@@ -783,7 +783,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 8,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         44,
@@ -827,7 +827,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 9,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         50,
@@ -871,7 +871,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 10,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         44,
@@ -915,7 +915,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 11,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         45,
@@ -959,7 +959,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 12,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         46,
@@ -1003,7 +1003,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 13,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         46,
@@ -1047,7 +1047,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 14,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         50,
@@ -1091,7 +1091,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 15,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         45,
@@ -1135,7 +1135,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 16,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         46,
@@ -1179,7 +1179,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 17,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         44,
@@ -1223,7 +1223,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 18,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         16,
@@ -1286,7 +1286,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 19,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         42,
@@ -1330,7 +1330,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 20,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         40,
@@ -1374,7 +1374,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 21,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         44,
@@ -1418,7 +1418,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 22,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         46,
@@ -1462,7 +1462,7 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 23,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
+      "sourceScale": 1,
       "appliedScale": 0.513761468,
       "renderedBounds": [
         46,
@@ -1506,12 +1506,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 24,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        63,
-        139,
-        193,
+        23,
+        77,
+        233,
         240
       ]
     },
@@ -1550,12 +1550,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 25,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        79,
-        148,
-        177,
+        48,
+        91,
+        207,
         240
       ]
     },
@@ -1594,12 +1594,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 26,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        80,
-        156,
-        176,
+        51,
+        105,
+        205,
         240
       ]
     },
@@ -1638,12 +1638,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 27,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        75,
-        169,
-        181,
+        42,
+        125,
+        214,
         240
       ]
     },
@@ -1682,12 +1682,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 28,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        68,
-        188,
-        189,
+        30,
+        156,
+        225,
         240
       ]
     },
@@ -1726,12 +1726,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 29,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        66,
-        200,
-        189,
+        28,
+        176,
+        227,
         240
       ]
     },
@@ -1770,12 +1770,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 30,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        68,
-        206,
-        188,
+        31,
+        185,
+        225,
         240
       ]
     },
@@ -1814,12 +1814,12 @@
       "anchorMethod": "legacy-bounds-center-bottom",
       "index": 31,
       "scale": 0.513761468,
-      "sourceScale": 1.0,
-      "appliedScale": 0.513761468,
+      "sourceScale": 1.615297,
+      "appliedScale": 0.829877358,
       "renderedBounds": [
-        67,
-        212,
-        189,
+        29,
+        194,
+        227,
         240
       ]
     }
@@ -2141,106 +2141,106 @@
       {
         "index": 24,
         "alphaBounds": [
-          64,
-          140,
-          192,
-          239
+          25,
+          79,
+          231,
+          238
         ],
-        "foregroundPixels": 2788,
-        "width": 128,
-        "height": 99,
-        "relativeToRowMedian": 1.031828
+        "foregroundPixels": 6794,
+        "width": 206,
+        "height": 159,
+        "relativeToRowMedian": 1.027137
       },
       {
         "index": 25,
         "alphaBounds": [
-          80,
-          149,
-          176,
-          239
+          50,
+          93,
+          205,
+          238
         ],
-        "foregroundPixels": 2716,
-        "width": 96,
-        "height": 90,
-        "relativeToRowMedian": 1.005181
+        "foregroundPixels": 6714,
+        "width": 155,
+        "height": 145,
+        "relativeToRowMedian": 1.015043
       },
       {
         "index": 26,
         "alphaBounds": [
-          81,
-          157,
-          175,
-          239
+          53,
+          107,
+          203,
+          238
         ],
-        "foregroundPixels": 2688,
-        "width": 94,
-        "height": 82,
-        "relativeToRowMedian": 0.994819
+        "foregroundPixels": 6515,
+        "width": 150,
+        "height": 131,
+        "relativeToRowMedian": 0.984957
       },
       {
         "index": 27,
         "alphaBounds": [
-          76,
-          170,
-          180,
-          239
+          44,
+          127,
+          212,
+          238
         ],
-        "foregroundPixels": 2335,
-        "width": 104,
-        "height": 69,
-        "relativeToRowMedian": 0.864175
+        "foregroundPixels": 5776,
+        "width": 168,
+        "height": 111,
+        "relativeToRowMedian": 0.873233
       },
       {
         "index": 28,
         "alphaBounds": [
-          69,
-          189,
-          188,
-          239
+          32,
+          158,
+          223,
+          238
         ],
-        "foregroundPixels": 2318,
-        "width": 119,
-        "height": 50,
-        "relativeToRowMedian": 1.072155
+        "foregroundPixels": 5729,
+        "width": 191,
+        "height": 80,
+        "relativeToRowMedian": 1.074355
       },
       {
         "index": 29,
         "alphaBounds": [
-          67,
-          201,
-          188,
-          239
+          30,
+          178,
+          225,
+          238
         ],
-        "foregroundPixels": 2214,
-        "width": 121,
-        "height": 38,
-        "relativeToRowMedian": 1.024052
+        "foregroundPixels": 5425,
+        "width": 195,
+        "height": 60,
+        "relativeToRowMedian": 1.017346
       },
       {
         "index": 30,
         "alphaBounds": [
-          69,
-          207,
+          33,
           187,
-          239
+          223,
+          238
         ],
-        "foregroundPixels": 2110,
-        "width": 118,
-        "height": 32,
-        "relativeToRowMedian": 0.975948
+        "foregroundPixels": 5240,
+        "width": 190,
+        "height": 51,
+        "relativeToRowMedian": 0.982654
       },
       {
         "index": 31,
         "alphaBounds": [
-          68,
-          213,
-          188,
-          239
+          31,
+          196,
+          225,
+          238
         ],
-        "foregroundPixels": 1873,
-        "width": 120,
-        "height": 26,
-        "relativeToRowMedian": 0.866327
+        "foregroundPixels": 4802,
+        "width": 194,
+        "height": 42,
+        "relativeToRowMedian": 0.900516
       }
     ],
     "rowMedianForegroundPixels": [
@@ -2250,8 +2250,8 @@
       7468.5,
       7730.5,
       7746.0,
-      2702.0,
-      2162.0
+      6614.5,
+      5332.5
     ],
     "findings": [],
     "uniqueFrameCount": 32,
@@ -2280,15 +2280,48 @@
       "84d5e5d159dc7036c7f02994316eae75d59f4bce2125dffe232ad3ffb44179a4",
       "d535fddb9aa64858f9d1ae6732ead949f9694b6046aeb0508573dea7e763bb70",
       "26c50da5e4d9c96f70fe04f516316b6f5ea42532f7a38ffbcd4dd033006159ae",
-      "c07e182eeca9632d32e2a5685a2fc4cc5798b69880364ff8d520908135e59f7f",
-      "18511c0d6370b04991aa97f0adf6409893f3e7014c11eb48b51b855723a05c58",
-      "fe9ebbd3b3dc59262cf1fc6836e26314f0a737523ba85b6e658fc7ae446ce508",
-      "d711586b1b50656fde3718b689c21e086dbcbdb5f1854e351602f93b039ecd40",
-      "e25658a10fbfb18e2b30986e7fbd06e09164ef5defb0d6538ccf5f357bc5d0a4",
-      "64343dfd96378783c6dff25ef6ed33092e0ce390684d677c3aac2e74590d3736",
-      "610cdab2b0b0ff7ab9835395e41abdb754f88a9da101e7be8bb39ff32ed934a2",
-      "0ad50198e0febbcaec13d419f60b54dfa64504d0f66fe973d878331e424b5306"
+      "f9cbf84a76045e33ae8d61c88dbcb6ff98578a4965d695374d75403c4653b997",
+      "98c4e13a54fd8754782cfa6efc736925b15ce76ba6dd479cc1e56126811a73dc",
+      "953a76093d34aa813f175cae6915fe41c488d41bf2cb58d3651b51ac31425341",
+      "86cc8950a4eef8dfeb62a0165692e37a3604d3ab36acfb8c331d26a8b5c80a7a",
+      "1cba00120bdef2daa5439ef96b1aae0f6f2339c5781d19faa6f51e2b5c6d35b3",
+      "87c30bcc42d807fc77a73927cd7ae11058d14d383db9dbde7cb3f8383348325d",
+      "a34793039b200138b41f5f7547277c137c9a9ba715b4e76da95d4cb66d0b0bcb",
+      "5412e96c8aa0dae8f2d5c3e01f18444c766ef010fbf05ad80101d6fa09e21ef5"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+    "sha256": "dcab1772242b00106219b5a5d12f595e1452d74f524f3cab95b9bd9db235e115",
+    "status": "reviewed",
+    "profileId": "enemy-010-spitter",
+    "reviewer": "Codex complete_royal",
+    "reviewedAt": "2026-08-31",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1,
+      "attack": 1,
+      "death": 1.615297
+    },
+    "sourceSha256ByClip": {
+      "idle": "2bd3ac8fd02539ff39db3eb0f0c0f2a157b2b209f0300dc011b07bfda0cb8521",
+      "move": "2aa70bc08f3178397053eef92d3cbdd9a8b4f890a687bb57dca9b123f6de4815",
+      "attack": "d490c27134831a5444d97613263181b7dd45bd05e68160c6f84fcdfbc02750c7",
+      "death": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5"
+    },
+    "measurementCount": 5,
+    "evidence": [
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-idle.jpg",
+        "sha256": "439dbe8fbb117e062598c2dbac2fee6520413915834a534d03895a0c6a987599"
+      },
+      {
+        "path": "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-death.jpg",
+        "sha256": "63a6da8ec2acdd30e780cc6068f7fbd984587b19cae4e01990efd65a22d37662"
+      }
+    ]
   }
 }

@@ -6,10 +6,10 @@
     {
       "profileId": "enemy-011-lurker",
       "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-011-lurker.webp",
-      "atlasSha256": "04e47a0bcfff8e2135b6f21909189e68df86f4e7accb26b6ac9e4e714aed7f6c",
-      "metadataSha256": "07956e6a84ecaf3c7cdd4685619b2c375cd69f741edd54b1c867a6d97f2cb752",
+      "atlasSha256": "3377ebb3c84617a44d0d9b91c2990ece2d200ae70d8671d22ef6ff5591858a39",
+      "metadataSha256": "9791ed7d6d047a956ba8179a5ed8fd9c59651fa2e9e0ea5c96f242c03c8e1d32",
       "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-011-lurker.jpg",
-      "contactSha256": "60d93431c375c512852b3f4cc6715769df13d5a6deb4acbbde46250f2537c449",
+      "contactSha256": "f9eb9e94be1778b367a47c6d8715da32f25e1931328bccf815d0c09a2df5968a",
       "frameCount": 32,
       "anchorStatus": "reviewed",
       "visualReviewStatus": "pending-inspection",

@@ -1,5 +1,7 @@
 # V66 lot 002 — 20 atlas candidats, 87 animations
 
+Suite après autorisation : [calibrage du Spitter et du Lurker appliqué et vérifié](V66_BATCH_002_SCALE_IMPLEMENTATION.md). Les mentions « non appliqué » de ce rapport décrivent son état historique avant cette correction.
+
 État du 31 août 2026, après la livraison des 87 sources décrite dans `V66_BATCH_002_DELIVERY.md`. Ce rapport décrit la continuation : 19 atlas auparavant absents produits, le candidat 026 actualisé, puis les 20 reconstruits et vérifiés ensemble.
 
 ## Réalisé

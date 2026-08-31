@@ -6,10 +6,10 @@
     {
       "profileId": "enemy-010-spitter",
       "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-010-spitter.webp",
-      "atlasSha256": "a629524b32ed80eba71c55939accd78bd36fb3266a021d38b6c13f33673891fc",
-      "metadataSha256": "c701e6db21624b69b43842797f41a94b10cbc4e38e1fe7f398718960985dfc80",
+      "atlasSha256": "d199e6cc8d4e69636d022e957f2d87ff246b1e754eb365bde9bd5d5ba264a938",
+      "metadataSha256": "6d459e33710c4dc8caee06ddf5339b8e2161d135db17adcd9aaa03b9e6273f6a",
       "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-010-spitter.jpg",
-      "contactSha256": "920110d3804dc98999381244289d300b32f82ffca7f09a0bcd75e57888e67c4d",
+      "contactSha256": "e6a594fc204e53521f748c332a80ebda322094ee9ed0aebfe40db7a7f3945ede",
       "frameCount": 32,
       "anchorStatus": "pending",
       "visualReviewStatus": "pending-inspection",

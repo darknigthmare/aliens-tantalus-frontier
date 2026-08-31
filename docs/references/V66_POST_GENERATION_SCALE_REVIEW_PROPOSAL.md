@@ -1,5 +1,7 @@
 # V66 — proposition non appliquée de calibrage interclips
 
+Mise à jour : autorisation explicite reçue, implémentation et calibrage 010/011 effectués. Voir [le résultat vérifié](V66_BATCH_002_SCALE_IMPLEMENTATION.md). Le texte ci-dessous conserve la proposition historique précédant cette autorisation.
+
 Date : 2026-08-31. Statut : changement de code non appliqué. L'autorisation automatique a refusé la modification du normaliseur partagé, susceptible d'affecter tous les profils et les portes de validation. Aucun changement n'a été appliqué à `process-v66-enemy-batch.py`, `enemy-batch-production.mjs` ou leurs tests par cette proposition. Il faut une autorisation explicite de ce changement global avant sa mise en œuvre.
 
 Les mesures de `V66_BATCH_002_SCALE_A.json` restent des preuves indépendantes ; elles ne changent ni les sources ni les références ni les atlas. Ne pas les injecter dans le verrou de génération pour contourner l'absence de prise en charge.

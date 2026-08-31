@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ENEMIES } from '../src/content-core-v50.js';
+import { validatePostGenerationScaleReview } from './enemy-batch-scale-review.mjs';
 import { BASELINE_PROFILE_ID, BATCH_SIZE, FIRST_BATCH_IDS, SOURCE_GRID, animationContractFor, contentHash, makeGenerationPrompt, normalizeEnemyIdentity, reviewedReference } from './enemy-batch-contracts.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -140,6 +141,7 @@ async function acceptedEvidence(job, event, root) {
   const metadata = await loadJson(metadataPath);
   if (event.metadataSha256 !== await fileHash(metadataPath) || event.atlasSha256 !== await fileHash(scopedPath(root, job.normalizedPath))) throw new Error('Accepted atlas or normalization metadata changed.');
   if (metadata.profileId !== job.profileId || metadata.normalizationStatus !== 'validated' || metadata.normalizedSha256 !== event.atlasSha256 || metadata.validation?.findings?.length || !Array.isArray(metadata.sources) || metadata.sources.length !== job.clips.length) throw new Error('Atlas provenance or normalization is incomplete.');
+  await validatePostGenerationScaleReview(job, metadata, root, scopedPath);
   const anchors = metadata.physicalAnchorReview;
   const frameCount = job.clips.length * 8;
   if (anchors?.status !== 'reviewed' || anchors.reviewedPoseCount !== frameCount

@@ -1,5 +1,5 @@
 // Local, isolated candidate review. No game saves, production state or acceptance writes.
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
 const endpoint = 'http://127.0.0.1:9236';
@@ -37,7 +37,9 @@ async function waitFor(expression) {
   }
   throw new Error('Player did not become ready: ' + expression);
 }
-const results = [];
+const results = [], calibratedProfiles = new Set();
+const queue = JSON.parse(await readFile('docs/references/V66_ENEMY_BATCH_QUEUE.json', 'utf8'));
+const jobs = new Map(queue.jobs.filter((job) => job.batchId === 'batch-002').map((job) => [job.profileId, job]));
 try {
   ({browserContextId:contextId} = await command('Target.createBrowserContext', {}, true));
   const {targetId} = await command('Target.createTarget', {url:'about:blank', browserContextId:contextId}, true);
@@ -50,11 +52,19 @@ try {
   const profiles = await evaluate("Array.from(document.querySelector('#profile').options, option=>option.value)");
   requireThat(profiles.length === 20, 'Expected exactly twenty candidate profiles');
   for (const profile of profiles) {
+    const metadataBytes = await readFile(jobs.get(profile).metadataPath);
+    const metadata = JSON.parse(metadataBytes);
+    const metadataSha256 = createHash('sha256').update(metadataBytes).digest('hex');
+    const calibrated = metadata.postGenerationScaleReview?.status === 'reviewed';
+    if (calibrated) calibratedProfiles.add(profile);
     await evaluate(`document.querySelector('#profile').value=${JSON.stringify(profile)}; document.querySelector('#profile').dispatchEvent(new Event('change'))`);
     await waitFor(`!document.querySelector('#play').disabled && document.querySelector('#stage').dataset.profile===${JSON.stringify(profile)}`);
     const clips = await evaluate("Array.from(document.querySelector('#clip').options, option=>option.value)");
     for (const clip of clips) {
       await evaluate(`document.querySelector('#clip').value=${JSON.stringify(clip)}; document.querySelector('#clip').dispatchEvent(new Event('change'))`);
+      const detail = await evaluate("document.querySelector('#details').textContent");
+      requireThat(detail.includes(`Facteur interclips : ×${metadata.sourceScaleByClip[clip]}`), `Wrong displayed baked scale: ${profile}/${clip}`);
+      requireThat(detail.includes('revue post-génération du profil') === calibrated, `Wrong calibration provenance: ${profile}/${clip}`);
       const frames = [];
       for (let i=0;i<8;i++) {
         const frame = await evaluate("({index:Number(document.querySelector('#stage').dataset.frame), pixels:document.querySelector('#stage').toDataURL()})");
@@ -63,9 +73,20 @@ try {
         await evaluate("document.querySelector('#next').click()");
       }
       requireThat(new Set(frames).size === 8, `Repeated canvas poses: ${profile}/${clip}`);
-      results.push({profileId:profile,clipId:clip,loaded:true,uniqueRenderedPoses:8});
+      results.push({profileId:profile,clipId:clip,loaded:true,uniqueRenderedPoses:8,atlasSha256:metadata.normalizedSha256,metadataSha256,sourceScaleFactor:metadata.sourceScaleByClip[clip],postGenerationScaleReview:calibrated});
     }
   }
+  await mkdir('.qa/v66-batch-002', {recursive:true});
+  // Include the measured factor/provenance text below the512px stage in review captures.
+  await command('Emulation.setDeviceMetricsOverride', {width:1280,height:1100,deviceScaleFactor:1,mobile:false});
+  for (const profile of calibratedProfiles) {
+    await evaluate(`document.querySelector('#profile').value=${JSON.stringify(profile)}; document.querySelector('#profile').dispatchEvent(new Event('change'))`);
+    await waitFor(`!document.querySelector('#play').disabled && document.querySelector('#stage').dataset.profile===${JSON.stringify(profile)}`);
+    await evaluate("document.querySelector('#clip').value='death'; document.querySelector('#clip').dispatchEvent(new Event('change')); document.querySelector('#next').click(); document.querySelector('#next').click()");
+    const scaleCapture = await command('Page.captureScreenshot', {format:'png'});
+    await writeFile(`.qa/v66-batch-002/${profile}-calibrated.png`, Buffer.from(scaleCapture.data, 'base64'));
+  }
+  await command('Emulation.setDeviceMetricsOverride', {width:1280,height:900,deviceScaleFactor:1,mobile:false});
   // Test actual RAF progression and non-looping death, not only manual stepping.
   await evaluate("document.querySelector('#clip').value='move'; document.querySelector('#clip').dispatchEvent(new Event('change')); document.querySelector('#play').click()");
   await waitFor("Number(document.querySelector('#stage').dataset.frame)>0");
@@ -81,6 +102,7 @@ try {
   requireThat(await evaluate('document.documentElement.scrollWidth<=window.innerWidth'), 'Review player overflows mobile viewport');
   requireThat(exceptions.length === 0 && consoleErrors.length === 0, JSON.stringify({exceptions,consoleErrors}));
   const report = {schema:1,checkedAt:new Date().toISOString(),url,result:'pass',profiles:20,clips:results.length,poses:results.length*8,
+    scaleFactorDisplayChecked:true,postGenerationCalibratedProfiles:[...calibratedProfiles],
     actualPlaybackChecked:true,nonLoopDeathHeld:true,facingToggleChecked:true,mobileOverflow:false,exceptions,consoleErrors,
     productionStateWrites:0,acceptedAutomatically:0,scope:'Local atlas-review player only, not gameplay integration or artistic acceptance',results};
   await writeFile('docs/references/V66_BATCH_002_PLAYER_QA.json', JSON.stringify(report,null,2)+'\n');
