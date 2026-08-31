@@ -386,6 +386,35 @@
           "docs/references/V66_BATCH_001_SCALE_REVIEW.md"
         ]
       }
+    },
+    "enemy-037-neomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2017/05/massive-photo-gallery-alien-covenant-products-revealed/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/references/neca-neomorph-1.jpg",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/references/neca-neomorph-6.jpg"
+      ],
+      "designLock": "Alien Covenant (2017) adult Neomorph, based on the licensed NECA51659 photographic sculpture references, visually inspected. Pale ivory/cool-gray organic skin, not black biomechanical chitin; very lean biped with visible ribcage, narrow abdomen and pelvis, elongated forearms and large clawed hands. Smooth eyeless bulbous anterior skull extending rearward into a narrow swept point, recessed toothy facial opening, no visible human or animal eyes. Long thin solid dorsal spines, with prominent upper rods and smaller lower vertebral projections; no tubular Xenomorph exhausts or Queen crest. Exactly two arms and two long lean legs; slender articulated feet, no hooves. Long supple thin skin-covered segmented tail tapered to a small point, not a broad spear blade. Preserve its adult proportions in strict right-facing side view. Use grounded hunched biped locomotion and forearm/claw strike; no separate Xenomorph inner-jaw piston, no juvenile in the same sheet, no toy joints, no clothing, no armor, no pink/magenta material or reflected chroma light. The photographs are licensed sculpture references, not evidence of pixel-exact film reconstruction.",
+      "reviewer": "Codex finish_source_review; two licensed NECA photos inspected directly",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-041-working-joe": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.godisageek.com/2017/03/10-videogame-horrors-more-terrifying-than-the-baker-family/",
+        "https://www.dreadcentral.com/editorials/515017/alien-isolation-and-the-terror-of-its-working-joes/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/references/alien-isolation-working-joe-gameplay-godisageek.jpg",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/references/alien-isolation-working-joe-grapple-dreadcentral.png"
+      ],
+      "designLock": "Standard Seegson Working Joe from Alien Isolation, not hazard suit/Fireteam synthetic/Samuels/Bishop. Bald smooth pallid manufactured face, blank facial expression, red hostile optical points, two arms and two legs. Dark grey-brown/olive-grey maintenance uniform with muted ochre-brown shoulder reinforcements, narrow brown cuff/hem trim, front zip, fold-down collar and utility pockets; pale bare hands; matching dark work trousers and practical dark work boots. No weapon, gloves, gas mask, hair, armor, robot plating or exposed skeleton. Boots and side silhouette are a gameplay adaptation from incomplete camera coverage, not asserted exact 1:1 reconstruction.",
+      "reviewer": "Codex complete_royal",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
     }
   }
 }

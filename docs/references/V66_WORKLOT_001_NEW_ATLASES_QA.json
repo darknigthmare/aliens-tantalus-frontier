@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "worklotId": "worklot-001",
+  "checkedAt": "2026-08-31T20:48:00.955609+00:00",
+  "scope": "Two new candidate atlas exports only; no runtime or artistic acceptance. Existing check_profile plus independent GIF count/timing/loop decoding.",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-037-neomorph",
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-037-neomorph.webp",
+      "atlasSha256": "4a57feb12be969e23408854cc72219591b43d02821cbe3a1fa881afdfebc5cf1",
+      "metadataSha256": "2fb756cc47206b5ef83cb736be35e025b2e7da6549491a74f7a20bb3e989fb84",
+      "frameCount": 32,
+      "sourceCount": 4,
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "status": "pending",
+        "reason": "No source-anchor review file."
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1,
+        "attack": 1,
+        "death": 1
+      },
+      "findings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 8,
+          "fps": 6,
+          "durationMs": 170,
+          "loop": true,
+          "gif": "assets/openai/sprites/previews/v66/enemy-037-neomorph/idle.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/idle.webp"
+        },
+        {
+          "id": "move",
+          "frames": 8,
+          "fps": 12,
+          "durationMs": 80,
+          "loop": true,
+          "gif": "assets/openai/sprites/previews/v66/enemy-037-neomorph/move.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/move.webp"
+        },
+        {
+          "id": "attack",
+          "frames": 8,
+          "fps": 12,
+          "durationMs": 80,
+          "loop": false,
+          "gif": "assets/openai/sprites/previews/v66/enemy-037-neomorph/attack.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/attack.webp"
+        },
+        {
+          "id": "death",
+          "frames": 8,
+          "fps": 10,
+          "durationMs": 100,
+          "loop": false,
+          "gif": "assets/openai/sprites/previews/v66/enemy-037-neomorph/death.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/death.webp"
+        }
+      ]
+    },
+    {
+      "profileId": "enemy-041-working-joe",
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-041-working-joe.webp",
+      "atlasSha256": "cece641977c3d04d9de80a5bce7748060ca8d467458022a8a2b9aad052cc7836",
+      "metadataSha256": "abef9f4752d8ee757db9cd1fc300b634edd78606ea5389abbe4e6479bd53b257",
+      "frameCount": 40,
+      "sourceCount": 5,
+      "normalizationOptions": {
+        "safeReassignCellFragments": false,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "status": "pending",
+        "reason": "No source-anchor review file."
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1,
+        "attack": 1,
+        "death": 1,
+        "hurt": 1
+      },
+      "findings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "frames": 8,
+          "fps": 6,
+          "durationMs": 170,
+          "loop": true,
+          "gif": "assets/openai/sprites/previews/v66/enemy-041-working-joe/idle.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/idle.webp"
+        },
+        {
+          "id": "move",
+          "frames": 8,
+          "fps": 12,
+          "durationMs": 80,
+          "loop": true,
+          "gif": "assets/openai/sprites/previews/v66/enemy-041-working-joe/move.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/move.webp"
+        },
+        {
+          "id": "attack",
+          "frames": 8,
+          "fps": 12,
+          "durationMs": 80,
+          "loop": false,
+          "gif": "assets/openai/sprites/previews/v66/enemy-041-working-joe/attack.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/attack.webp"
+        },
+        {
+          "id": "death",
+          "frames": 8,
+          "fps": 10,
+          "durationMs": 100,
+          "loop": false,
+          "gif": "assets/openai/sprites/previews/v66/enemy-041-working-joe/death.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/death.webp"
+        },
+        {
+          "id": "hurt",
+          "frames": 8,
+          "fps": 10,
+          "durationMs": 100,
+          "loop": false,
+          "gif": "assets/openai/sprites/previews/v66/enemy-041-working-joe/hurt.gif",
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/hurt.webp"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "atlases": 2,
+    "clips": 9,
+    "poses": 72,
+    "webps": 11,
+    "gifs": 11,
+    "metadata": 2
+  }
+}

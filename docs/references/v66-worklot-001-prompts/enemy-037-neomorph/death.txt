@@ -1,0 +1,13 @@
+Use case: stylized-concept
+Asset type: detailed shaded 2D modern metroidvania character animation source for Aliens Tantalus Frontier.
+Input image: the last image is the corrected IDLE sheet of enemy-037-neomorph, adult Alien Covenant Neomorph. Treat it as the ONLY identity, anatomical proportions, color and SCALE reference. Generate new action poses, not copies of idle.
+Identity: same paleivory andcoolgray organic eyeless adult, long skull with bulbousforeheadandsweptrearpoint, thin solidbackspines, thinribbedchest,narrowabdomen,longarms/clawedhands,two leanlegs andentirethinsegmentedtaperingtail. Exactly2arms and2legs; no eyes, no blackchitin, no armor, no extra horns, no innerjawpiston,no babies,no toyjoints.
+Output: single PNG EXACT1774x887,2:1, EXACTLY8fullbodyposes in4equalcolumnsx2equalrows, invisiblegrid, onerightfacingcreaturepercell, rowmajororder. Strictsideprofile orthographiccamera, no perspective rotations.
+Scale: samecellrelativeandphysicalbodyscaleastheIDLEreference, skullabout60pixelslong, standingheightabout210pixels inthe1774x887output. NEVERenlargeapose tofillthecell. Preservebonelengthsandbodyvolumes. Armscanmove,bodycanbendbutheadcannotgrow. Wholecreaturetailandfingertips withinmiddle70%cellwidth; atleast15%cleanmargin; nointercelloverlap. Groundcontactlineat80%cellheight, fixedforbothrows.
+Background: perfectlyFLAT puremagenta#ff00ff only. No gradients,checkerboard,floor,shadow,texture,decorations. Neutralivorygrayskinillumination, NO pinkrim, pinkglow ormagentaonbody. Allmagentaisbackground.
+Rendering: richlyshadeddetailedcrisp2Dbitmap exactlymatchingtheinput, no motionblur, no labels,numbers,text,borders,logos.
+Animationclip: DEATH, onenon-gorylethalcollapse, exactly8chronologicalposeswithobviousprogressiontoafinaldeadbody:
+1 uprightstartles,hunchdeepens;2 kneessoftenandheadlowers;3 rightkneecontactsground,leftlegfolds,onehandreachesdown;4 bothkneescollapse,theforearmcontactsgroundandtorsoanglesforward;5 torsofallsontoitsSIDE towardright withoutcameraorbodyyawrotation;6 fullyside-lyingontheground,longskullhorizontalfacingright,armsrelaxed,legsandfulltailfoldedclosetofit;7 verysmallsettlingofleftarmandtail;8 terminalmotionlessside-lyingcorpse.
+Keepidentical60pixelskullandallbonelengths. HorizontaldeadposemustNOTgrowtofillcell; preserveits210pixelstandingequivalentbodydimensions. Curvefulltailnaturallybehindandaroundfoldedlegs tofit; nevercutshort,removeorhideitsroot. Remainstrictsideviewandrightfacing, nofront/backviews,nospinning,noorgans,bloodpool,dismemberment or floor.
+Eightdistinctauthoredtransitionalposes; onlyfinal7/8arenearlystill. Nogrowingextraarmwhenfalling,noextracorpse,norecoverybacktoliving.
+Candidate requires visualreview, notguaranteed1:1.

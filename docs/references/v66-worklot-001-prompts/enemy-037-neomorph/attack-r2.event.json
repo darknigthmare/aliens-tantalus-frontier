@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-037-neomorph",
+  "provider": "OpenAI ImageGen",
+  "actor": "Codex finish_source_review",
+  "clipId": "attack",
+  "generationId": "exec-8d0fa2ad-73b1-4946-92c6-98c8d7742bbc",
+  "sourceSha256": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/attack.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/attack-r2.txt",
+  "candidateSelected": true,
+  "note": "Packing improvement with8distinct1774x887 poses and visible windup/strike/recovery. Default extraction remains blocked; existing short-spill probe extracts8unique poses without pixel changes. Smaller apparent scale requires measurement against idle. Physical roots, continuity and final acceptance pending. Original attack-r1 archived."
+}

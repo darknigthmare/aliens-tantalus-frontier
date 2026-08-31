@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-037-neomorph",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-1c39595b-64d8-49e9-ba35-189d6e83050a",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/idle.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/idle-r2.txt",
+  "candidateSelected": true,
+  "note": "Selected cell-safe packing correction. RGB1774x887,8distinct cells,default extraction8pass,no border contacts or audit findings. Adult morphology and8right-facing full poses inspected. Reduction exceeded requested80percent; this selected source is the scale reference for remaining clips. Physical anchors, normalized animation review and runtime acceptance remain pending. Prior source preserved as rejected/idle-r1.png SHA dd8807c2156cd0e0f090e7ea892bab1089966482de10469f379ebb8128145222."
+}

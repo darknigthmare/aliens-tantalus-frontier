@@ -1,0 +1,1297 @@
+{
+  "schema": 1,
+  "worklotId": "worklot-001",
+  "createdAt": "2026-08-31T20:28:23.895Z",
+  "scope": "Four actual built-in OpenAI ImageGen calls: three replacement candidates and one rejected opaque-checkerboard version. No existing active source, atlas, source-scale review, physical-root review, production history or runtime registration is replaced by these candidates.",
+  "provider": "OpenAI ImageGen",
+  "inputTransport": "In-memory JPEG conversation preview, 1200x600; original local reference reads failed in the ImageGen Windows helper even after explicit read permission. Full-resolution input fidelity is not claimed.",
+  "accepted": 0,
+  "runtimeIntegrated": 0,
+  "canonExact": false,
+  "records": [
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "attack",
+      "path": "assets/openai/sprites/frames/v66/worklot-001-candidates/enemy-011-lurker/attack-r3-opaque-checkerboard.png",
+      "sha256": "e68a2e391563764fb66494386eafa97a54fcc0e65ce3e6316c8dbb48501f4b39",
+      "originalPath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png",
+      "originalSha256": "33f6091cee6dcec3d53fd61bf639b5f3264996c74ff65b6ac213b872cc25f6af",
+      "audit": {
+        "status": "candidate-technical-audit-only",
+        "accepted": false,
+        "runtimeIntegrated": false,
+        "canonExact": false,
+        "size": [
+          1774,
+          887
+        ],
+        "mode": "RGB",
+        "grid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8,
+          "nominalCellsInspected": 8,
+          "distinctCellHashes": 8,
+          "aspectExact2To1": true,
+          "subjectCountVisuallyVerified": false,
+          "animationContinuityVerified": false
+        },
+        "matte": {
+          "kind": "opaque-unproven-background",
+          "nativeAlpha": false,
+          "alphaMin": 255,
+          "alphaMax": 255,
+          "transparentPixelCount": 0,
+          "partialAlphaPixelCount": 0,
+          "strictMagentaRatio": 0,
+          "edgeMagentaRatio": 0,
+          "edgeNeutralRatio": 1,
+          "edgeNeutralLumaBins": [
+            {
+              "lumaBin8": 31,
+              "count": 3043
+            },
+            {
+              "lumaBin8": 30,
+              "count": 2279
+            }
+          ],
+          "checkerboardStatus": "not-established",
+          "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+        },
+        "borderContactFrames": [],
+        "normalizer": {
+          "defaultExtraction": "blocked",
+          "extractedFrames": 0,
+          "error": "Opaque source has no proven magenta matte. Supply true alpha or regenerate; no guessed background removal."
+        },
+        "safeReassignmentProbe": {
+          "status": "blocked",
+          "sourcesModified": 0,
+          "outputsNormalized": 0,
+          "accepted": false,
+          "error": "Opaque source has no proven magenta matte."
+        },
+        "findings": [
+          "opaque-background-not-proven-magenta-or-native-alpha",
+          "default-normalizer-extraction-blocked"
+        ],
+        "cells": [
+          {
+            "frame": 0,
+            "cell": [
+              0,
+              0,
+              444,
+              444
+            ],
+            "rgbaSha256": "161230dde48526d6cc19ef4ffb747015823a48cd06d998f95db2dccd29eedb3d",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 1,
+            "cell": [
+              444,
+              0,
+              887,
+              444
+            ],
+            "rgbaSha256": "841b656fe08e9299fb5b4289b02efd38cfa349d840132db8ccdbd10306763e2c",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 2,
+            "cell": [
+              887,
+              0,
+              1330,
+              444
+            ],
+            "rgbaSha256": "3be4f6ec8d627ef6fe2ea70b53e06534ea672c4e430593256f2aab6fa2b8a0fe",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 3,
+            "cell": [
+              1330,
+              0,
+              1774,
+              444
+            ],
+            "rgbaSha256": "5b0e12b1bcd73ce35d4f732c680c9dbf1b4b9cbc96a5da809eff8a673961a49e",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 4,
+            "cell": [
+              0,
+              444,
+              444,
+              887
+            ],
+            "rgbaSha256": "4b869793f986050a5f35e70fae92b1ae36a874e3608ffb53fbcb3dbdaba1bd5c",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 5,
+            "cell": [
+              444,
+              444,
+              887,
+              887
+            ],
+            "rgbaSha256": "c9724eeb1e78eeb79f05a4365af60c5cd69a3a266bfb2a516d9319f0877e13a5",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 6,
+            "cell": [
+              887,
+              444,
+              1330,
+              887
+            ],
+            "rgbaSha256": "cd5574ade77b0571ceb496745c99d0f8068d3e4c580f9a243e1a74e5e4c0e23c",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          },
+          {
+            "frame": 7,
+            "cell": [
+              1330,
+              444,
+              1774,
+              887
+            ],
+            "rgbaSha256": "fac68a9072b20d7ed4da59adc26d54c7391abaab90a23442616b91fba4c8e489",
+            "foregroundPixelsHeuristic": null,
+            "foregroundBoundsHeuristic": null,
+            "borderContactPixelClues": null
+          }
+        ]
+      },
+      "generationId": "exec-de1e335b-722a-4801-8228-2ad980fe234b",
+      "actualPromptText": "Use case: identity-preserve. Asset type: production 2D side-scroller enemy sprite animation sheet for Aliens: Tantalus Frontier.\nImage 1 is the exact edit target and identity reference: existing Lurker attack sprite sheet displayed as an in-memory 1200x600 JPEG preview; use the preview as visual identity reference, and create a new higher-resolution candidate on a strict 2:1 canvas. Do not pretend to edit the original full-resolution PNG pixel-for-pixel. Preserve its smooth elongated domed head, biomechanical dark olive-black carapace, four main limbs (two arms and two legs), small dorsal structures and long articulated tail. Do not redesign the creature.\nChange only the attack choreography so this is a genuine quadrupedal pounce rather than sliding on the floor. Eight individually authored chronological poses in exactly four columns and two rows, read left to right then top to bottom: 1 low ready stance with grounded contacts; 2 deeper hindleg compression and anticipation; 3 hindlegs pushing off while forelimbs leave ground; 4 clearly airborne body with all four limbs above the consistent ground baseline and foreclaws forward; 5 forward bite/claw apex still airborne; 6 forelimbs touch down while rear legs follow; 7 weight-absorbing four-limb crouch; 8 recover close to the first ready stance. Preserve identical rigid skull length and body proportions in all eight poses, and the physical scale of the edit target. Root stays within its own cell; no horizontal translation across cells. Entire tail and all claws inside each cell with generous gutters. No copied/repeated poses, no extra limbs, no turning towards camera, all face RIGHT in strict orthographic gameplay side view. Keep exactly 2:1 canvas, 4x2 equal square cells. True transparent RGBA background, no opaque checkerboard, no magenta/pink fringe or reflections, no floor shadow, grid, numbers, text, logo or scene. This is a candidate requiring anatomical and animation review, not a guaranteed exact replica.",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/lurker-attack-r3.txt",
+      "referencePreviewSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png",
+      "reviewStatus": "rejected-background",
+      "visualReview": {
+        "reviewer": "Codex root",
+        "reviewedAt": "2026-08-31",
+        "note": "Rejected: requested native transparency was rendered as an opaque checkerboard. Never replace the calibrated attack source with this file.",
+        "identityCertified": false,
+        "continuityCertified": false,
+        "geometryMatchesPreviousSource": false
+      }
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "attack",
+      "path": "assets/openai/sprites/frames/v66/worklot-001-candidates/enemy-011-lurker/attack-r4.png",
+      "sha256": "52e6787a3fd19c3ad03756e88e451543c5c564d09fc71724cc1b28fb6aeec586",
+      "originalPath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/attack.png",
+      "originalSha256": "33f6091cee6dcec3d53fd61bf639b5f3264996c74ff65b6ac213b872cc25f6af",
+      "audit": {
+        "status": "candidate-technical-audit-only",
+        "accepted": false,
+        "runtimeIntegrated": false,
+        "canonExact": false,
+        "size": [
+          1774,
+          887
+        ],
+        "mode": "RGB",
+        "grid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8,
+          "nominalCellsInspected": 8,
+          "distinctCellHashes": 8,
+          "aspectExact2To1": true,
+          "subjectCountVisuallyVerified": false,
+          "animationContinuityVerified": false
+        },
+        "matte": {
+          "kind": "opaque-magenta",
+          "nativeAlpha": false,
+          "alphaMin": 255,
+          "alphaMax": 255,
+          "transparentPixelCount": 0,
+          "partialAlphaPixelCount": 0,
+          "strictMagentaRatio": 0.932371,
+          "edgeMagentaRatio": 1,
+          "edgeNeutralRatio": 0,
+          "edgeNeutralLumaBins": [],
+          "checkerboardStatus": "not-established",
+          "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+        },
+        "borderContactFrames": [],
+        "normalizer": {
+          "defaultExtraction": "pass",
+          "extractedFrames": 8,
+          "distinctExtractedPoseHashes": 8,
+          "error": null
+        },
+        "safeReassignmentProbe": {
+          "status": "not-probed",
+          "sourcesModified": 0,
+          "outputsNormalized": 0,
+          "accepted": false
+        },
+        "findings": [],
+        "cells": [
+          {
+            "frame": 0,
+            "cell": [
+              0,
+              0,
+              444,
+              444
+            ],
+            "rgbaSha256": "c774b43b95cdccd6eb8d4334f78909b8766a99f6c4f34d76afc7f5eeb45ffe53",
+            "foregroundPixelsHeuristic": 15302,
+            "foregroundBoundsHeuristic": [
+              105,
+              176,
+              365,
+              375
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 1,
+            "cell": [
+              444,
+              0,
+              887,
+              444
+            ],
+            "rgbaSha256": "f7028ed63a3d76380b715f3d48908b5e903ec2118857ba823ff12686397f3487",
+            "foregroundPixelsHeuristic": 12374,
+            "foregroundBoundsHeuristic": [
+              117,
+              190,
+              290,
+              368
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 2,
+            "cell": [
+              887,
+              0,
+              1330,
+              444
+            ],
+            "rgbaSha256": "8ffe0b7b81a1e68cdd28b1a5a45f65ed41093abc3e9385c038d77d17fa8a8efb",
+            "foregroundPixelsHeuristic": 14367,
+            "foregroundBoundsHeuristic": [
+              49,
+              175,
+              319,
+              359
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 3,
+            "cell": [
+              1330,
+              0,
+              1774,
+              444
+            ],
+            "rgbaSha256": "23000e9d2e546c4818f09091b6ae94400ca6be0b7e61822d247f9b8b55651d8d",
+            "foregroundPixelsHeuristic": 11865,
+            "foregroundBoundsHeuristic": [
+              44,
+              176,
+              361,
+              323
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 4,
+            "cell": [
+              0,
+              444,
+              444,
+              887
+            ],
+            "rgbaSha256": "3e8c19da5aa34841803d766d49369e65e0223eeeb7a8138358751115ae7e81ff",
+            "foregroundPixelsHeuristic": 13565,
+            "foregroundBoundsHeuristic": [
+              87,
+              109,
+              399,
+              261
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 5,
+            "cell": [
+              444,
+              444,
+              887,
+              887
+            ],
+            "rgbaSha256": "602f4bd6e98ccbdc6339a8e8c33cb5b56a3711f74355732474bf8ef3fc35113f",
+            "foregroundPixelsHeuristic": 14033,
+            "foregroundBoundsHeuristic": [
+              111,
+              91,
+              366,
+              268
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 6,
+            "cell": [
+              887,
+              444,
+              1330,
+              887
+            ],
+            "rgbaSha256": "4a24c57bc537fb3cb33d394196c347c37fc9eae39a8c7bd301c4c0a538b0a4de",
+            "foregroundPixelsHeuristic": 11636,
+            "foregroundBoundsHeuristic": [
+              77,
+              104,
+              264,
+              268
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 7,
+            "cell": [
+              1330,
+              444,
+              1774,
+              887
+            ],
+            "rgbaSha256": "d8a5e19ff0f8f1374e2cbf4d457a9a74788857c1505890d7520139e8158880f2",
+            "foregroundPixelsHeuristic": 13275,
+            "foregroundBoundsHeuristic": [
+              62,
+              85,
+              305,
+              269
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          }
+        ]
+      },
+      "generationId": "exec-ef7afa8f-c853-4fb9-a18e-b6d999446886",
+      "actualPromptText": "Use case: precise-object-edit. Image 1 is the in-memory 1200x600 JPEG preview of the Lurker pounce sprite-sheet candidate, the edit target. Make one change only: replace the visible opaque white/gray checkerboard with a perfectly uniform pure magenta #FF00FF background. This is chroma-key source art, do not draw a transparency checkerboard. Preserve all eight complete creature poses, their exact proportions, right-facing orthographic view, airborne middle pounce poses, pixel-detail aesthetic, locations, scale and 4-column 2-row square-cell layout. Keep the black/olive/gray carapace exactly, no pink/magenta reflections or edge contamination. No new limbs, shadows, text, floor, grid, numbers, cropped tails or extra objects. Keep 2:1 output canvas. Generate a new high-resolution candidate without claiming pixel-for-pixel preservation of the inaccessible full-resolution PNG.",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/lurker-attack-r4.txt",
+      "referencePreviewSourcePath": "assets/openai/sprites/frames/v66/worklot-001-candidates/enemy-011-lurker/attack-r3-opaque-checkerboard.png",
+      "reviewStatus": "candidate-needs-scale-anchors-and-art-review",
+      "visualReview": {
+        "reviewer": "Codex root",
+        "reviewedAt": "2026-08-31",
+        "note": "Airborne pose 4 now visually separates the full body from the grounded ready baseline; pose 5 settles lower. Full jump trajectory and contact timing still require runtime review. Extraction passes, but new cranial measurements and physical roots are required before any replacement.",
+        "identityCertified": false,
+        "continuityCertified": false,
+        "geometryMatchesPreviousSource": false
+      }
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "move",
+      "path": "assets/openai/sprites/frames/v66/worklot-001-candidates/enemy-011-lurker/move-r2.png",
+      "sha256": "654e75dec95a41dbc25565a8be2b69064018badf965b939cc884c4abb3fe9762",
+      "originalPath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/move.png",
+      "originalSha256": "6c0163d50d9e4b84ca603583da80cdf77ddb5193e6619d664ab987ad065fc2f9",
+      "audit": {
+        "status": "candidate-technical-audit-only",
+        "accepted": false,
+        "runtimeIntegrated": false,
+        "canonExact": false,
+        "size": [
+          1774,
+          887
+        ],
+        "mode": "RGB",
+        "grid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8,
+          "nominalCellsInspected": 8,
+          "distinctCellHashes": 8,
+          "aspectExact2To1": true,
+          "subjectCountVisuallyVerified": false,
+          "animationContinuityVerified": false
+        },
+        "matte": {
+          "kind": "opaque-magenta",
+          "nativeAlpha": false,
+          "alphaMin": 255,
+          "alphaMax": 255,
+          "transparentPixelCount": 0,
+          "partialAlphaPixelCount": 0,
+          "strictMagentaRatio": 0.849025,
+          "edgeMagentaRatio": 1,
+          "edgeNeutralRatio": 0,
+          "edgeNeutralLumaBins": [],
+          "checkerboardStatus": "not-established",
+          "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+        },
+        "borderContactFrames": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ],
+        "normalizer": {
+          "defaultExtraction": "blocked",
+          "extractedFrames": 0,
+          "error": "Authored pose touches cell border at (444, 0, 887, 444); ownership/cropping needs visual review or regeneration."
+        },
+        "safeReassignmentProbe": {
+          "status": "proven-short-spill-extraction-pass",
+          "sourcesModified": 0,
+          "outputsNormalized": 0,
+          "accepted": false,
+          "extractedFrames": 8,
+          "distinctExtractedPoseHashes": 8,
+          "sourceOwnershipReports": [
+            {
+              "clip": "move",
+              "clipFrame": 0,
+              "sourceRow": 0,
+              "sourceCell": [
+                0,
+                0,
+                444,
+                444
+              ],
+              "sourceBounds": [
+                42,
+                107,
+                391,
+                376
+              ],
+              "sourceGlobalBounds": [
+                42,
+                107,
+                391,
+                376
+              ],
+              "sourceSize": [
+                349,
+                269
+              ],
+              "foregroundPixels": 26267,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "4b067614d6f4962897e2379ade539cdb764e0cda5e41fb2a389b25f662723c18",
+              "sourceOwnershipTransfers": []
+            },
+            {
+              "clip": "move",
+              "clipFrame": 1,
+              "sourceRow": 0,
+              "sourceCell": [
+                444,
+                0,
+                887,
+                444
+              ],
+              "sourceBounds": [
+                30,
+                112,
+                405,
+                375
+              ],
+              "sourceGlobalBounds": [
+                474,
+                112,
+                849,
+                375
+              ],
+              "sourceSize": [
+                375,
+                263
+              ],
+              "foregroundPixels": 26306,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "48ffdc63a500b325a99f124e03c2a2f2f7eb43a77b5fe32037764a2b866fa063",
+              "sourceOwnershipTransfers": []
+            },
+            {
+              "clip": "move",
+              "clipFrame": 2,
+              "sourceRow": 0,
+              "sourceCell": [
+                887,
+                0,
+                1330,
+                444
+              ],
+              "sourceBounds": [
+                -4,
+                124,
+                417,
+                378
+              ],
+              "sourceGlobalBounds": [
+                883,
+                124,
+                1304,
+                378
+              ],
+              "sourceSize": [
+                421,
+                254
+              ],
+              "foregroundPixels": 26395,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "8831f19457207d47b713052a2888b8848c6423fa05007af93a2acd0886da6276",
+              "sourceOwnershipTransfers": [
+                {
+                  "ownerCell": 2,
+                  "fromCells": [
+                    1
+                  ],
+                  "pixels": 3,
+                  "componentPixels": 26360,
+                  "ownerShare": 0.999886,
+                  "sourceBoundsGlobal": [
+                    886,
+                    127,
+                    1296,
+                    372
+                  ],
+                  "rgbaSha256": "78216f577d9103af3204ac14c9331866075a193324fd9b54bc0c55d499d26a78",
+                  "pixelValuesPreserved": true,
+                  "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+                }
+              ]
+            },
+            {
+              "clip": "move",
+              "clipFrame": 3,
+              "sourceRow": 0,
+              "sourceCell": [
+                1330,
+                0,
+                1774,
+                444
+              ],
+              "sourceBounds": [
+                -5,
+                108,
+                383,
+                373
+              ],
+              "sourceGlobalBounds": [
+                1325,
+                108,
+                1713,
+                373
+              ],
+              "sourceSize": [
+                388,
+                265
+              ],
+              "foregroundPixels": 25046,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "09b071d4a10827508eff575dcd2298beebcafa52792bcdce00ae7e8d2c9a3301",
+              "sourceOwnershipTransfers": [
+                {
+                  "ownerCell": 3,
+                  "fromCells": [
+                    2
+                  ],
+                  "pixels": 26,
+                  "componentPixels": 24985,
+                  "ownerShare": 0.998959,
+                  "sourceBoundsGlobal": [
+                    1328,
+                    111,
+                    1705,
+                    370
+                  ],
+                  "rgbaSha256": "ccf0f48cab7e30be280b28b8820eaf73f6e907743f5db0f4a5ab996abd559bbc",
+                  "pixelValuesPreserved": true,
+                  "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+                }
+              ]
+            },
+            {
+              "clip": "move",
+              "clipFrame": 4,
+              "sourceRow": 1,
+              "sourceCell": [
+                0,
+                444,
+                444,
+                887
+              ],
+              "sourceBounds": [
+                37,
+                51,
+                427,
+                330
+              ],
+              "sourceGlobalBounds": [
+                37,
+                495,
+                427,
+                774
+              ],
+              "sourceSize": [
+                390,
+                279
+              ],
+              "foregroundPixels": 24329,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "696a0ae20130dff40685aceb09feac766cc37711a8c682f7ee39ffac8e78f215",
+              "sourceOwnershipTransfers": []
+            },
+            {
+              "clip": "move",
+              "clipFrame": 5,
+              "sourceRow": 1,
+              "sourceCell": [
+                444,
+                444,
+                887,
+                887
+              ],
+              "sourceBounds": [
+                22,
+                75,
+                394,
+                330
+              ],
+              "sourceGlobalBounds": [
+                466,
+                519,
+                838,
+                774
+              ],
+              "sourceSize": [
+                372,
+                255
+              ],
+              "foregroundPixels": 27196,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "2d2502b40eaa123b4d9ebe1223e515072e83ffae2939ae8eae74af70fc38828b",
+              "sourceOwnershipTransfers": []
+            },
+            {
+              "clip": "move",
+              "clipFrame": 6,
+              "sourceRow": 1,
+              "sourceCell": [
+                887,
+                444,
+                1330,
+                887
+              ],
+              "sourceBounds": [
+                -6,
+                83,
+                413,
+                335
+              ],
+              "sourceGlobalBounds": [
+                881,
+                527,
+                1300,
+                779
+              ],
+              "sourceSize": [
+                419,
+                252
+              ],
+              "foregroundPixels": 26684,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "df1788bf0dbfbcb444052ef5e4b857163f6c5003265b45e55bee49a4af0594c5",
+              "sourceOwnershipTransfers": [
+                {
+                  "ownerCell": 6,
+                  "fromCells": [
+                    5
+                  ],
+                  "pixels": 71,
+                  "componentPixels": 26656,
+                  "ownerShare": 0.997336,
+                  "sourceBoundsGlobal": [
+                    884,
+                    530,
+                    1292,
+                    774
+                  ],
+                  "rgbaSha256": "5d2c36f17d32267c4373890bb03ef1e83c3d750fa1b6d7389b457d39b55eebd2",
+                  "pixelValuesPreserved": true,
+                  "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+                }
+              ]
+            },
+            {
+              "clip": "move",
+              "clipFrame": 7,
+              "sourceRow": 1,
+              "sourceCell": [
+                1330,
+                444,
+                1774,
+                887
+              ],
+              "sourceBounds": [
+                -2,
+                66,
+                383,
+                331
+              ],
+              "sourceGlobalBounds": [
+                1328,
+                510,
+                1713,
+                775
+              ],
+              "sourceSize": [
+                385,
+                265
+              ],
+              "foregroundPixels": 26547,
+              "alphaProcessing": "v65-border-connected-magenta-key",
+              "discardedForegroundPixels": 0,
+              "sourcePoseRgbaSha256": "6d741d32897014b3d75a8ce1f0cbb32090c7dc6d395d85c315938de8c1a7dbc9",
+              "sourceOwnershipTransfers": []
+            }
+          ],
+          "error": null,
+          "meaning": "Existing 90-percent component ownership and 15-percent spill rules passed in memory; visual continuity/roots/acceptance remain pending."
+        },
+        "findings": [
+          "nominal-cell-border-contact-needs-ownership-review",
+          "default-normalizer-extraction-blocked"
+        ],
+        "cells": [
+          {
+            "frame": 0,
+            "cell": [
+              0,
+              0,
+              444,
+              444
+            ],
+            "rgbaSha256": "a2cc12a8f30c7d848e7b59dd50049f0964dad4dc8e81b1b7342c340897f37654",
+            "foregroundPixelsHeuristic": 30183,
+            "foregroundBoundsHeuristic": [
+              43,
+              109,
+              393,
+              374
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 1,
+            "cell": [
+              444,
+              0,
+              887,
+              444
+            ],
+            "rgbaSha256": "17bd3d3ca37dd99a0108a336ac72a2ec88fe1d0c55f365d779a33ff05add6972",
+            "foregroundPixelsHeuristic": 29417,
+            "foregroundBoundsHeuristic": [
+              32,
+              114,
+              443,
+              373
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 28
+            }
+          },
+          {
+            "frame": 2,
+            "cell": [
+              887,
+              0,
+              1330,
+              444
+            ],
+            "rgbaSha256": "fec986f4f3537bbd9ed8f91c4551d31976d18693dbcd4beb6c338a798528fcfc",
+            "foregroundPixelsHeuristic": 30448,
+            "foregroundBoundsHeuristic": [
+              0,
+              126,
+              443,
+              376
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 42,
+              "right": 45
+            }
+          },
+          {
+            "frame": 3,
+            "cell": [
+              1330,
+              0,
+              1774,
+              444
+            ],
+            "rgbaSha256": "1f591faa1d2b2bceb710587e8f5a03db075e32cc17854102de771677e058bf6e",
+            "foregroundPixelsHeuristic": 29007,
+            "foregroundBoundsHeuristic": [
+              0,
+              110,
+              381,
+              371
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 55,
+              "right": 0
+            }
+          },
+          {
+            "frame": 4,
+            "cell": [
+              0,
+              444,
+              444,
+              887
+            ],
+            "rgbaSha256": "93e553f2655478032adfc92bd1eb7b45992b0fe5d3f01f4a2102096a1a5d9dd3",
+            "foregroundPixelsHeuristic": 28269,
+            "foregroundBoundsHeuristic": [
+              39,
+              53,
+              425,
+              328
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 5,
+            "cell": [
+              444,
+              444,
+              887,
+              887
+            ],
+            "rgbaSha256": "3df99724ddbd4463f88f1107db7eb7148084753c88d9534ce951f30a83cb162c",
+            "foregroundPixelsHeuristic": 30217,
+            "foregroundBoundsHeuristic": [
+              24,
+              76,
+              443,
+              328
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 55
+            }
+          },
+          {
+            "frame": 6,
+            "cell": [
+              887,
+              444,
+              1330,
+              887
+            ],
+            "rgbaSha256": "39ff5f3e8ea454de75a84a8027547f0c7b23da7842116e5298ff9b825421c4ce",
+            "foregroundPixelsHeuristic": 30483,
+            "foregroundBoundsHeuristic": [
+              0,
+              85,
+              411,
+              333
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 65,
+              "right": 0
+            }
+          },
+          {
+            "frame": 7,
+            "cell": [
+              1330,
+              444,
+              1774,
+              887
+            ],
+            "rgbaSha256": "4c3b5ed8052c1e281ad33cf13981d494bc4020638db2aa4e9f8ffc3591e968c2",
+            "foregroundPixelsHeuristic": 29541,
+            "foregroundBoundsHeuristic": [
+              0,
+              68,
+              381,
+              329
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 8,
+              "right": 0
+            }
+          }
+        ]
+      },
+      "generationId": "exec-5121ab61-eb08-4554-82e5-a363f8ac91a9",
+      "actualPromptText": "Use case: precise-object-edit. The supplied in-memory 1200x600 JPEG preview of the existing Lurker locomotion sheet is the edit target. Change ONLY the incorrectly pink/fuchsia/magenta colored body patches, especially the large bright patch inside the hind hip in pose 1 (top-left) and smaller pink highlights on joints. Replace these body patches with anatomically continuous black/olive gunmetal biomechanical chitin and gray worn metal highlights matching adjacent anatomy. Preserve the dark eyeless smooth elongated skull, its shape/length in every frame, 4 main limbs, four dorsal tubes, long segmented tail, all eight distinct original run poses and their exact relative placement, scale, limb trajectories and ground contacts. Preserve the perfectly flat magenta #FF00FF BACKGROUND and true empty gaps BETWEEN limbs; do not paint empty background inside a gap as body. No magenta light reflections on actual anatomy. 4 columns by 2 rows, eight right-facing orthographic full-body poses on strict 2:1 canvas, no crop/cell-overlap, text, grid, floor shadows or new object. No checkerboard. Output a new high-resolution candidate; do not claim pixel-identical geometry relative to inaccessible full-resolution PNG.",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/lurker-move-r2.txt",
+      "referencePreviewSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/move.png",
+      "reviewStatus": "candidate-needs-scale-anchors-and-art-review",
+      "visualReview": {
+        "reviewer": "Codex root",
+        "reviewedAt": "2026-08-31",
+        "note": "The prominent fuchsia hip patch in pose 1 is reduced. Small dark pink joint accents may remain; no claim of complete decontamination. Nominal-cell spill requires the existing bounded ownership proof. Geometry is not assumed identical to the original.",
+        "identityCertified": false,
+        "continuityCertified": false,
+        "geometryMatchesPreviousSource": false
+      }
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "clipId": "death",
+      "path": "assets/openai/sprites/frames/v66/worklot-001-candidates/enemy-010-spitter/death-r2.png",
+      "sha256": "8ad2a5427c96791f13ec3a76d9cee8279e46de33737ea4edbea27b3208f1ca2e",
+      "originalPath": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/death.png",
+      "originalSha256": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5",
+      "audit": {
+        "status": "candidate-technical-audit-only",
+        "accepted": false,
+        "runtimeIntegrated": false,
+        "canonExact": false,
+        "size": [
+          1774,
+          887
+        ],
+        "mode": "RGB",
+        "grid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8,
+          "nominalCellsInspected": 8,
+          "distinctCellHashes": 8,
+          "aspectExact2To1": true,
+          "subjectCountVisuallyVerified": false,
+          "animationContinuityVerified": false
+        },
+        "matte": {
+          "kind": "opaque-magenta",
+          "nativeAlpha": false,
+          "alphaMin": 255,
+          "alphaMax": 255,
+          "transparentPixelCount": 0,
+          "partialAlphaPixelCount": 0,
+          "strictMagentaRatio": 0.950739,
+          "edgeMagentaRatio": 1,
+          "edgeNeutralRatio": 0,
+          "edgeNeutralLumaBins": [],
+          "checkerboardStatus": "not-established",
+          "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+        },
+        "borderContactFrames": [],
+        "normalizer": {
+          "defaultExtraction": "pass",
+          "extractedFrames": 8,
+          "distinctExtractedPoseHashes": 8,
+          "error": null
+        },
+        "safeReassignmentProbe": {
+          "status": "not-probed",
+          "sourcesModified": 0,
+          "outputsNormalized": 0,
+          "accepted": false
+        },
+        "findings": [],
+        "cells": [
+          {
+            "frame": 0,
+            "cell": [
+              0,
+              0,
+              444,
+              444
+            ],
+            "rgbaSha256": "4b2b07326792f505a1287365e8a0339eb52ad2e19e7c86263abae8f357cd9111",
+            "foregroundPixelsHeuristic": 11616,
+            "foregroundBoundsHeuristic": [
+              106,
+              164,
+              356,
+              358
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 1,
+            "cell": [
+              444,
+              0,
+              887,
+              444
+            ],
+            "rgbaSha256": "6ab36c821426792738074c4c1f40ec1e0053a29ca1122cd49cf93c27d4e755ce",
+            "foregroundPixelsHeuristic": 11199,
+            "foregroundBoundsHeuristic": [
+              124,
+              179,
+              312,
+              354
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 2,
+            "cell": [
+              887,
+              0,
+              1330,
+              444
+            ],
+            "rgbaSha256": "f86d0067d48f9b732c74fc85f7d9c03597b4a48f6bd502e2398e3447c137477e",
+            "foregroundPixelsHeuristic": 10836,
+            "foregroundBoundsHeuristic": [
+              95,
+              192,
+              278,
+              352
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 3,
+            "cell": [
+              1330,
+              0,
+              1774,
+              444
+            ],
+            "rgbaSha256": "e20bc04104c299bf9dc293d84f381264cbc094a1c40baa702d92d1626a602328",
+            "foregroundPixelsHeuristic": 9561,
+            "foregroundBoundsHeuristic": [
+              51,
+              210,
+              254,
+              348
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 4,
+            "cell": [
+              0,
+              444,
+              444,
+              887
+            ],
+            "rgbaSha256": "50473951d873ce40e8cf7fdfc067294189485343b308165afc9b26e892b504da",
+            "foregroundPixelsHeuristic": 9377,
+            "foregroundBoundsHeuristic": [
+              128,
+              167,
+              359,
+              273
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 5,
+            "cell": [
+              444,
+              444,
+              887,
+              887
+            ],
+            "rgbaSha256": "5de9f5e6f7666cc1704b97c2c697c1d4af4f469b8d73796d6497d1f412a3aa4f",
+            "foregroundPixelsHeuristic": 8837,
+            "foregroundBoundsHeuristic": [
+              106,
+              198,
+              342,
+              273
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 6,
+            "cell": [
+              887,
+              444,
+              1330,
+              887
+            ],
+            "rgbaSha256": "f1bd052bee05d4a95ddeaa6af8e56a31be9f2d412cb8538c29ec7d306981e03c",
+            "foregroundPixelsHeuristic": 8539,
+            "foregroundBoundsHeuristic": [
+              75,
+              213,
+              304,
+              276
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          },
+          {
+            "frame": 7,
+            "cell": [
+              1330,
+              444,
+              1774,
+              887
+            ],
+            "rgbaSha256": "cb5677a4637a41e23edefc446b32d2e4c51fc7e5b16ead42d355278a57320974",
+            "foregroundPixelsHeuristic": 7549,
+            "foregroundBoundsHeuristic": [
+              39,
+              221,
+              273,
+              273
+            ],
+            "borderContactPixelClues": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0
+            }
+          }
+        ]
+      },
+      "generationId": "exec-7765788c-0765-40b9-b383-37f7ccb1afe5",
+      "actualPromptText": "Use case: precise-object-edit. Image 1 is the edit target, an in-memory 1200x600 JPEG preview of the existing Spitter death sprite sheet. Change ONLY the erroneous fuchsia/magenta paint patches inside the creature's torso/hip/joints, most prominent in bottom-row collapsed poses 5,6,7,8. Replace these actual-body patches with continuous dark blueblack biomechanical chitin and gray/olive highlights matching the adjacent surface. Preserve the canonical yellow-green acid sacs in the rear cranium (NOT eyes), long curved dorsal spines, exact broad smooth head shape, two arms, two digitigrade legs and long fully attached segmented tail. Keep all eight existing chronological collapse poses, silhouette proportions, locations, scale and final dead prone body. Do not alter empty background gaps BETWEEN limbs/tail; these stay perfectly flat pure magenta #FF00FF. Do not reflect pink background on anatomy. Strictly 4 columns x2 rows eight poses, all facing RIGHT orthographic side view, consistent rigid skull scale, strict2:1canvas, same safe gutters/fulltailcoverage. No added limbs, regeneration, bloodsplatter, scene,floorshadow,text,grid,checkerboard. Preserve sheet identity and choreography without claiming exact pixel-geometry preservation from the inaccessible full-resolution original.",
+      "promptDocumentPath": "docs/references/v66-worklot-001-prompts/spitter-death-r2.txt",
+      "referencePreviewSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/death.png",
+      "reviewStatus": "candidate-needs-scale-anchors-and-art-review",
+      "visualReview": {
+        "reviewer": "Codex root",
+        "reviewedAt": "2026-08-31",
+        "note": "Collapsed lower-row bodies have fewer obvious pink body patches, but subtle dark magenta remains possible around joints. Yellow-green cranial reservoirs remain visible. Complete artistic acceptance and fresh cranial measurements are pending.",
+        "identityCertified": false,
+        "continuityCertified": false,
+        "geometryMatchesPreviousSource": false
+      }
+    }
+  ]
+}

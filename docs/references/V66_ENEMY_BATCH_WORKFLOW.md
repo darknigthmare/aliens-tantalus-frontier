@@ -1,5 +1,25 @@
 # V66 — Production ennemie par lots reprenables
 
+## Lots de travail de 202 — demande du 31 août 2026
+
+La coordination utilise maintenant des groupes figés de **202 profils**, et
+non 202 images. `V66_ENEMY_WORKLOTS_202.json` superpose les groupes
+202 / 202 / 161 aux lots techniques ci-dessous. Les cinq profils du pilote
+déjà intégrés et le Facehugger V65 restent exclus. Les `batchId`, chemins,
+ordinaux, verrous et preuves existants ne sont ni déplacés ni renumérotés.
+
+Le premier groupe couvre les profils 007 à 208 : **872 planches requises**.
+Ses membres ne glissent pas vers les groupes suivants lorsqu'un profil est
+intégré. `npm run batch:v66:worklots` relit les preuves actuelles et distingue
+références, générations, acceptations et intégrations ; cette commande est
+en lecture seule et ne génère aucune image. Une régénération n'est pas une
+planche supplémentaire. Les nouvelles retouches non sélectionnées restent
+séparées de ces comptes et ne remplacent pas les sources calibrées.
+
+La partition de stockage historique de 20 décrite ci-dessous reste en place.
+Les 202 profils sont une unité de coordination, pas une promesse de 202
+ennemis automatiquement terminés ni une certification de fidélité 1:1.
+
 Le roster contient **571 profils / 55 archetypes**. Le Facehugger standard V65
 est une base deja integree, pas une nouvelle production V66. Les **570 autres
 profils sont repartis en 30 lots : le pilote historique de 5 profils, puis

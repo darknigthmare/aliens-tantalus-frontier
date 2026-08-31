@@ -378,3 +378,34 @@ test('inter-clip scale calibration requires measured review and only known clips
   assert.equal(reviewed.sourceScaleByClip.sealed, 1.2);
   assert.throws(() => buildEnemyBatchQueue({ references: { profiles: { [FIRST_BATCH_IDS[0]]: { ...reviewed, sourceScaleByClip: { nonexistent: 2 } } } } }), /Unknown calibrated clip/);
 });
+
+test('supplied actual prompt text cannot be silently replaced by a different prompt file', async () => {
+  const fix = await fixture();
+  const path = 'synthetic-actual-prompt.txt', savedText = 'Exact synthetic instructions.\n';
+  await writeFile(scopedPath(fix.root, path), savedText);
+  const state = emptyState(), before = structuredClone(state);
+  const base = { kind: 'generated', profileId: fix.job.profileId, clipId: fix.job.clips[0].id, provider: 'OpenAI ImageGen', generationId: 'synthetic-prompt-mismatch', actor: 'test', note: 'Synthetic prompt integrity fixture.', actualPromptPath: path };
+  for (const actualPromptText of ['Different synthetic instructions.\n', savedText.trimEnd(), '', null]) {
+    const receipt = { ...base, actualPromptText }, originalReceipt = structuredClone(receipt);
+    await assert.rejects(appendProductionEvent(fix.queue, state, receipt, fix.root), /Supplied actual prompt text does not match/);
+    assert.deepEqual(receipt, originalReceipt);
+    assert.deepEqual(state, before);
+    assert.equal(await readFile(scopedPath(fix.root, path), 'utf8'), savedText);
+  }
+});
+
+test('path-only legacy prompts and exactly matching dual prompt inputs retain their exact text', async () => {
+  const fix = await fixture();
+  const path = 'synthetic-exact-prompt.txt', text = 'Exact synthetic instructions, accents pr\u00e9serv\u00e9s.\n';
+  await writeFile(scopedPath(fix.root, path), text);
+  const base = { kind: 'generated', profileId: fix.job.profileId, clipId: fix.job.clips[0].id, provider: 'OpenAI ImageGen', generationId: 'synthetic-prompt-exact', actor: 'test', note: 'Synthetic exact prompt fixture.', actualPromptPath: path };
+  for (const receipt of [base, { ...base, actualPromptText: text }]) {
+    const originalReceipt = structuredClone(receipt);
+    const state = await appendProductionEvent(fix.queue, emptyState(), receipt, fix.root);
+    assert.equal(state.events[0].actualPromptText, text);
+    assert.equal(state.events[0].actualPromptPath, path);
+    assert.equal(state.events[0].promptSha256, hash(JSON.stringify(text)));
+    assert.equal((await getJobStatus(fix.job, state, fix.root)).generatedClips, 1);
+    assert.deepEqual(receipt, originalReceipt);
+  }
+});

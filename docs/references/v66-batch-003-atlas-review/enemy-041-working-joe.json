@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-041-working-joe",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-041-working-joe.webp",
+      "atlasSha256": "cece641977c3d04d9de80a5bce7748060ca8d467458022a8a2b9aad052cc7836",
+      "metadataSha256": "abef9f4752d8ee757db9cd1fc300b634edd78606ea5389abbe4e6479bd53b257",
+      "contactPath": "docs/references/v66-batch-003-atlas-review/enemy-041-working-joe.jpg",
+      "contactSha256": "32e77d099bf8393477e1474366dd7d2c727bd6cb808e18e62bb834f002cab9af",
+      "frameCount": 40,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

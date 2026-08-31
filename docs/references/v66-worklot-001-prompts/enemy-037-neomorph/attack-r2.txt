@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Input image: current adult pale Neomorph ATTACK sheet is edit target.
+Change ONLY the packing and common scale of the existing eight attack poses. Preserve ALL8 chronological action poses, full anatomy, bone proportions, exact headshape, forearmgesture, backspines, wholelongtail,colorandshading. NOnewposesandNOredesign.
+The4x2gridon1774x887 has cells roughly444x444. Previous extended poses crossboundaries. Correct this by uniformly scaling the WHOLE of EVERY creature to80%of its current size, then center each complete creature including fulltail and extendedclaw within its own cell. ScaleALL8identically. Never slice atoldcellbounds: preserve every crossingtailandfinger.
+Canvas staysEXACT1774x887 and4columnsby2rows. OutputEXACT8poses, onecompleteposepercell. EverycellgetsATLEAST15%clearmarginleft/right/top/bottom. Horizontalextendedposes mustfit withoutshorteningarmsortail. Spine, fingertiporfeet cannotcrossroworcolumnseparator. Poseheightmayvaryonlybecausearmraisesorcrouch,neverchangedbonelength.
+Targetcommonheadlengthabout60pixels asintheprofileIDLEsource. Do notenlargebodytofillemptyspace.
+KeepstrictRIGHTfacing2Dsideview,ivorycoolgrayskin,2arms2legs,fullthintaperedtail,sharpbitmapdetail. FlatPURE#ff00ffbackgroundonly. Reclaimedmarginsmagenta. Nopinklighting onskin, noextrashadows, no gradients,notext, no lines, noborders.

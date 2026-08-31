@@ -35,6 +35,7 @@
     "art:v65:check": "py scripts/process-v65-facehugger-motion.py --all --check",
     "art:v66:check": "py scripts/process-v66-enemy-batch.py --batch batch-001 --check",
     "batch:v66:status": "node scripts/enemy-batch-production.mjs status",
+    "batch:v66:worklots": "node scripts/enemy-production-worklots-v66.mjs status",
     "batch:v66:check": "node scripts/enemy-batch-production.mjs check",
     "sprites:v66:check": "node scripts/sync-sprite-manifest-v66.mjs --check",
     "art:v62:check": "py scripts/audit-png-alpha-v62.py --fail-on error",

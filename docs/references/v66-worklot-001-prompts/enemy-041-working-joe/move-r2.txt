@@ -1,0 +1,16 @@
+Use case: precise-object-edit
+Asset type: Working Joe walk sprite sheet, targeted animation repair.
+Input image1: edit target, the current eight-frame Working Joe MOVE sheet. Keep its actor, head/face, uniform, palette, body proportions, style, overall physical scale, eight-cell4x2 layout, all-right-facing camera and pure #FF00FF matte. Change ONLY the locomotion posing of legs and corresponding arm swing.
+Problem to repair: the current near-side leg with the visible orange outer seam is forward in nearly every wide-step pose. That is NOT a full walk cycle. Draw a true eight-phase cycle with near and far legs trading front/back. Do NOT just clone frame1 into the lower row. Never mirror the entire character or turn him left.
+Exactly8 chronological positions, four columns two rows:
+1 NEAR leg forward, heel down; FAR leg behind, toe touching. Near arm back.
+2 NEAR foot supports and begins moving under hip; FAR knee bends and advances. Near arm easing forward.
+3 NEAR leg nearly vertical supporting below hip; FAR bent knee passes ahead, foot off ground.
+4 NEAR leg extends BACK with only TOE touching, far foot reaches FORWARD.
+5 NEAR leg now fully BACK, FAR leg FORWARD heel contact. This is the opposite-leg stance from frame1; the visible seam on the NEAR leg must be at the LEFT/back side of the body, not the right/front. Near arm forward.
+6 FAR leg supports under hip, NEAR foot rises BEHIND and swings toward hip.
+7 FAR leg nearly vertical supports, NEAR knee passes ahead with lifted foot. Near arm returns back.
+8 NEAR foot swings forward nearly to heel contact, FAR toe behind; recover into frame1 smoothly.
+Slow stiff android walking, not running. Only slight torso and head motion. Preserve blank pale bald synthetic head and same jacket and boots. Keep both legs attached, exactly two arms/two legs. Make the difference between near/far readable with natural occlusion, not color changes.
+Composition: one2:1 landscape bitmap, invisible4columns2rows, eight fullbody poses equally spaced. Constant head size and ground level, full fingertips and boot soles inside every own cell. No body translation to next cell, overlap, extra frame, clipped parts or resize.
+Pure perfectly flat magenta #FF00FF background and limb gaps, no shadows, pink spill, labels, drawn grid, UI, weapons, opponent, props, checkerboard or scenery. Keep all non-locomotion design details unchanged.

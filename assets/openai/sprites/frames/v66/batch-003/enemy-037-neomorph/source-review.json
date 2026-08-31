@@ -1,0 +1,369 @@
+{
+  "schema": 1,
+  "profileId": "enemy-037-neomorph",
+  "batchId": "batch-003",
+  "worklotId": "worklot-001",
+  "reviewer": "Codex finish_source_review",
+  "reviewedAt": "2026-08-31",
+  "scope": "Read-only source audit; no normalization or runtime changes",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "generationCallCount": 6,
+  "currentSourceCount": 4,
+  "currentPoseCount": 32,
+  "archivedRejectedSourceCount": 2,
+  "activeEventPaths": [
+    "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/idle-r2.event.json",
+    "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/move.event.json",
+    "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/attack-r2.event.json",
+    "docs/references/v66-worklot-001-prompts/enemy-037-neomorph/death.event.json"
+  ],
+  "referenceFragmentPath": "docs/references/V66_WORKLOT_001_NEOMORPH_REFERENCE.json",
+  "visualReview": {
+    "sheetSubjectsChecked": 32,
+    "direction": "All observed main heads face right in side-oriented poses.",
+    "identity": "Pale adult with swept-back eyeless skull, long arms, thin solid back spines,2arms/2legs,connectedthinsegmentedtail; no separate juvenile.",
+    "frameRootsReviewed": false,
+    "interClipScaleReviewed": false,
+    "animationContinuityVerified": false,
+    "remaining": [
+      "Attack still requires existing short-spill extraction and ownership review; default extraction is blocked.",
+      "Attack appears smaller after packing correction; death head/body appears larger than corrected idle. No scalar has been invented; measure rigid landmarks before calibration.",
+      "Move changes pose but a fully alternating contact/passing stride has not been verified in an aligned animation.",
+      "Death transition from frame3(kneeling) toframe4(lying), zero-based, is a large change and needs motion review.",
+      "Some matte border-contact clues occur despite visually clear surroundings; do not widen chroma thresholds or cut anatomy to silence them.",
+      "RGBmagenta boards are sources, not transparent ready-to-runtime atlases. Physical body roots and independent final visual acceptance remain pending."
+    ]
+  },
+  "clips": {
+    "idle": {
+      "status": "candidate-technical-audit-only",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.952395,
+        "edgeMagentaRatio": 1,
+        "edgeNeutralRatio": 0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/idle.png",
+      "sha256": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222"
+    },
+    "move": {
+      "status": "candidate-technical-audit-only",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.945163,
+        "edgeMagentaRatio": 0.998873,
+        "edgeNeutralRatio": 0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [
+        3,
+        4,
+        7
+      ],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review"
+      ],
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/move.png",
+      "sha256": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb"
+    },
+    "attack": {
+      "status": "candidate-technical-audit-only",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.961798,
+        "edgeMagentaRatio": 0.999624,
+        "edgeNeutralRatio": 0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "normalizer": {
+        "defaultExtraction": "blocked",
+        "extractedFrames": 0,
+        "error": "Authored pose touches cell border at (444, 0, 887, 444); ownership/cropping needs visual review or regeneration."
+      },
+      "safeReassignmentProbe": {
+        "status": "proven-short-spill-extraction-pass",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false,
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "sourceOwnershipReports": [
+          {
+            "clipFrame": 0,
+            "sourceBounds": [
+              115,
+              211,
+              300,
+              379
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 1,
+            "sourceBounds": [
+              54,
+              225,
+              238,
+              379
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 2,
+            "sourceBounds": [
+              -5,
+              166,
+              201,
+              379
+            ],
+            "sourceOwnershipTransfers": [
+              {
+                "ownerCell": 2,
+                "fromCells": [
+                  1
+                ],
+                "pixels": 2,
+                "componentPixels": 84,
+                "ownerShare": 0.97619,
+                "sourceBoundsGlobal": [
+                  885,
+                  365,
+                  931,
+                  374
+                ],
+                "rgbaSha256": "aaec2ea48b4105404fec9af070d73f39c07820b6832018eff5cb83c881af68e4",
+                "pixelValuesPreserved": true,
+                "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+              }
+            ]
+          },
+          {
+            "clipFrame": 3,
+            "sourceBounds": [
+              -1,
+              245,
+              281,
+              380
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 4,
+            "sourceBounds": [
+              110,
+              132,
+              388,
+              263
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 5,
+            "sourceBounds": [
+              79,
+              114,
+              279,
+              263
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 6,
+            "sourceBounds": [
+              51,
+              102,
+              225,
+              264
+            ],
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clipFrame": 7,
+            "sourceBounds": [
+              38,
+              102,
+              203,
+              263
+            ],
+            "sourceOwnershipTransfers": []
+          }
+        ],
+        "error": null,
+        "meaning": "Existing 90-percent component ownership and 15-percent spill rules passed in memory; visual continuity/roots/acceptance remain pending."
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review",
+        "default-normalizer-extraction-blocked"
+      ],
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/attack.png",
+      "sha256": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe"
+    },
+    "death": {
+      "status": "candidate-technical-audit-only",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.932266,
+        "edgeMagentaRatio": 0.999248,
+        "edgeNeutralRatio": 0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [
+        3,
+        4,
+        7
+      ],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review"
+      ],
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/death.png",
+      "sha256": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0"
+    }
+  }
+}

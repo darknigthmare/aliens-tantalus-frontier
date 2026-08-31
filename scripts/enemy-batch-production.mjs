@@ -202,7 +202,11 @@ export async function appendProductionEvent(queue, state, source, root = ROOT) {
     event.sourcePath = spec.sourcePath;
     event.sourceSha256 = sourceSha256;
     event.contractPromptSha256 = spec.promptSha256;
-    if (event.actualPromptPath) event.actualPromptText = await readFile(scopedPath(root, event.actualPromptPath), 'utf8');
+    if (event.actualPromptPath) {
+      const promptText = await readFile(scopedPath(root, event.actualPromptPath), 'utf8');
+      if (event.actualPromptText !== undefined && event.actualPromptText !== promptText) throw new Error('Supplied actual prompt text does not match the prompt file.');
+      event.actualPromptText = promptText;
+    }
     if (!event.actualPromptText && event.usedQueuePrompt === true) event.actualPromptText = spec.prompt;
     if (!String(event.actualPromptText || '').trim()) throw new Error('Record the actual ImageGen prompt, or explicitly attest usedQueuePrompt: true.');
     event.promptSha256 = contentHash(event.actualPromptText);

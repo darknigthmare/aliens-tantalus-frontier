@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Input image: the last image is the current eight-pose adult Neomorph IDLE sheet. This is the EDIT TARGET. Preserve exactly this pale adult anatomy, all eight distinct poses, head and limb proportions, dorsal spines, complete tail lengths, materials and color.
+ONLY change sheet packing: within EACH of the exact4x2 equal cells, uniformly reduce the complete original creature including its tail to80% of current size and recenter the entire pose. Do NOT crop any body part and do NOT shorten tails. Apply the SAME scale reduction to all8poses.
+Keep PNG canvas exactly1774x887, exact2:1aspect, four equal columns by two equal rows. Every entire creature must fit inside the middle70% of its OWN cell: at least15%clean puremagenta gap to allfour boundaries. Firstrow feet nevercrossy443.5. Tail tips must not touchneighborcells. No extra blankcells or extra characters.
+All8original poses and their subtle breathing differences remain unchanged. Same rightfacing strictside camera. Do not rotate, redraw species, add details, change heads, add eyes or toy joints, move limbs into new poses, alter anatomical ratios or make any pose bigger than another.
+Keep flatpure#ff00ff magenta background, including reclaimed margin. No shadows, no pinkrimlight, no gradient, no checkerboard, no gridline,text,labels,numbers,logo.
+This edit is only uniform reduction and registration for cell-safe packing.

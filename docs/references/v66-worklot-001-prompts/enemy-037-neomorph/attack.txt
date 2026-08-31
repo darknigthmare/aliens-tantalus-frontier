@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: detailed shaded 2D modern metroidvania character animation source for Aliens Tantalus Frontier.
+Input image: the last image is the corrected IDLE sheet of enemy-037-neomorph, adult Alien Covenant Neomorph. Treat it as the ONLY identity, anatomical proportions, color and SCALE reference. Generate new action poses, not copies of idle.
+Identity: same paleivory andcoolgray organic eyeless adult, long skull with bulbousforeheadandsweptrearpoint, thin solidbackspines, thinribbedchest,narrowabdomen,longarms/clawedhands,two leanlegs andentirethinsegmentedtaperingtail. Exactly2arms and2legs; no eyes, no blackchitin, no armor, no extra horns, no innerjawpiston,no babies,no toyjoints.
+Output: single PNG EXACT1774x887,2:1, EXACTLY8fullbodyposes in4equalcolumnsx2equalrows, invisiblegrid, onerightfacingcreaturepercell, rowmajororder. Strictsideprofile orthographiccamera, no perspective rotations.
+Scale: samecellrelativeandphysicalbodyscaleastheIDLEreference, skullabout60pixelslong, standingheightabout210pixels inthe1774x887output. NEVERenlargeapose tofillthecell. Preservebonelengthsandbodyvolumes. Armscanmove,bodycanbendbutheadcannotgrow. Wholecreaturetailandfingertips withinmiddle70%cellwidth; atleast15%cleanmargin; nointercelloverlap. Groundcontactlineat80%cellheight, fixedforbothrows.
+Background: perfectlyFLAT puremagenta#ff00ff only. No gradients,checkerboard,floor,shadow,texture,decorations. Neutralivorygrayskinillumination, NO pinkrim, pinkglow ormagentaonbody. Allmagentaisbackground.
+Rendering: richlyshadeddetailedcrisp2Dbitmap exactlymatchingtheinput, no motionblur, no labels,numbers,text,borders,logos.
+Animationclip: ATTACK, eightorderedposes formingoneclearforearm/clawstrike, withSTRONG readablesilhouettechanges andsmoothintermediates.
+1 readyhunchedstance armslowered;2 kneescompressandrightstrikingelbowpullsbehindchest;3 windupforearmraised/clawopenwithsameheadsize;4 sharpforwardclawstrike armextendsaheadatshoulderheight,feetremainbraced;5 followthroughforearmreachesdownandforward,torsooverfrontfoot;6 elbowretracts andweightbeginsreturning;7 torsoandarmsrecover;8 settlesbacktoreadynearpose1.
+Leftarmprovidesnaturalcounterbalance. Thisisoneattackcycle not8idleposes. No detachingclaws,no duplicatedarm,no projectile,no target,no gore. Tailcounterbalanceswithoutshortening.
+Candidate requires visualreview, notguaranteed1:1.
