@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-019-red-xenomorph.webp",
+      "atlasSha256": "dc6978589be6b6ff213a2fa5de1933d96c4e12a1090e8ca2a57e02168eeef32d",
+      "metadataSha256": "ffecc97093edcd4a1a2f7a6457d895f39fd41b079123790b833de0231cfe6eaa",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-019-red-xenomorph.jpg",
+      "contactSha256": "8189f5a1aba193cb58a93fa15168d5d545e0f3b752e16352e4924b01e803382f",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

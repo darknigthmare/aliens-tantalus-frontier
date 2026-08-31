@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "reviewedAt": "2026-08-31",
+  "reviewer": "Codex complete_variants",
+  "mode": "read-only-mathematical-and-source-sha-check",
+  "source": "docs/references/V66_BATCH_002_SCALE_A.json",
+  "appliedToNormalizer": false,
+  "appliedToAtlas": false,
+  "pixelsChanged": 0,
+  "report": [
+    {
+      "profile": "enemy-011-lurker",
+      "measurements": 12,
+      "ratios": {
+        "idle": {
+          "factor": 1,
+          "expected": 1,
+          "relativeError": 0,
+          "measures": 3
+        },
+        "move": {
+          "factor": 1.062929,
+          "expected": 1.062929090301856,
+          "relativeError": 8.49556727882451e-8,
+          "measures": 3
+        },
+        "attack": {
+          "factor": 1.858278,
+          "expected": 1.8582782545257166,
+          "relativeError": 1.3696857070964192e-7,
+          "measures": 3
+        },
+        "death": {
+          "factor": 1.822337,
+          "expected": 1.8223371200791127,
+          "relativeError": 6.589291922451883e-8,
+          "measures": 3
+        }
+      },
+      "evidencePaths": 4,
+      "issues": []
+    },
+    {
+      "profile": "enemy-010-spitter",
+      "measurements": 5,
+      "ratios": {
+        "idle": {
+          "factor": 1,
+          "expected": 1,
+          "relativeError": 0,
+          "measures": 3
+        },
+        "death": {
+          "factor": 1.615297,
+          "expected": 1.6152965279261042,
+          "relativeError": 2.9225215778683704e-7,
+          "measures": 2
+        }
+      },
+      "evidencePaths": 2,
+      "issues": []
+    }
+  ]
+}

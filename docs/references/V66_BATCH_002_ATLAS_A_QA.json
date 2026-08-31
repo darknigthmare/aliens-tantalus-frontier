@@ -1,0 +1,526 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "scope": "Candidate exports only, not visual acceptance or runtime verification.",
+  "profiles": [
+    {
+      "profileId": "enemy-007-praetorian",
+      "poses": 40,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-007-praetorian.webp",
+      "atlasSha256": "f4162bb519b32b9e1bfb87d4a2d0d868c496620aa5faa5bd608a33e0dec7f5fe",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-007-praetorian.json",
+      "metadataSha256": "a7282d7beaac3dd77b8ba1aa8c7fd50c11394c170ee61319e070fb9cbba8ed9e",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "pending",
+        "reason": "Profile anchors have not all been physically reviewed."
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0,
+        "tail-strike": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-007-praetorian/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-007-praetorian/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-007-praetorian/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-007-praetorian/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-007-praetorian/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-007-praetorian/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-007-praetorian/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-007-praetorian/death.gif"
+        },
+        {
+          "id": "tail-strike",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-007-praetorian/tail-strike.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-007-praetorian/tail-strike.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 5
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "poses": 40,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-008-queen.webp",
+      "atlasSha256": "b76b978d1b03af0a8a7b7787eadc2f73d429190aec749fb2d1e46f36f7c1f9e2",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-008-queen.json",
+      "metadataSha256": "7c87d02028f760d510b30b27b6046358fddd0391a6b1b74a31ea29310b5c4853",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "pending",
+        "reason": "Profile anchors have not all been physically reviewed."
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0,
+        "tail-strike": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-008-queen/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-008-queen/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-008-queen/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-008-queen/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-008-queen/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-008-queen/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-008-queen/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-008-queen/death.gif"
+        },
+        {
+          "id": "tail-strike",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-008-queen/tail-strike.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-008-queen/tail-strike.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 5
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "poses": 40,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-009-crusher.webp",
+      "atlasSha256": "15db78d87c9c4b95aa6aad60e1f01631541563f0c309f9e7683ea731610c9f0e",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-009-crusher.json",
+      "metadataSha256": "a9491dc6007b7ec73f93926a0ff5df247783630e21383ee4294fbab3a5c85fbe",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "reviewed",
+        "reviewer": "Codex complete_royal",
+        "reviewedAt": "2026-08-31",
+        "method": "Manually observed ribcage center behind the front shoulder, projected vertically to the support floor. Death 6/7 use visible posterior thorax behind the partly occluding shield; uncertainty is explicitly wider. Support floor is complete recovered pose padded bottom, visually checked against planted limbs or terminal resting body; three source pixels of extraction guard included. No airborne pose established in these sources. Never uses tail or shield extents for root x.",
+        "reviewedPoseCount": 40,
+        "coordinates": "nominal-source-cell"
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0,
+        "charge": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-009-crusher/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-009-crusher/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-009-crusher/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-009-crusher/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-009-crusher/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-009-crusher/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-009-crusher/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-009-crusher/death.gif"
+        },
+        {
+          "id": "charge",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-009-crusher/charge.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-009-crusher/charge.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 5
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "poses": 32,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-010-spitter.webp",
+      "atlasSha256": "a629524b32ed80eba71c55939accd78bd36fb3266a021d38b6c13f33673891fc",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-010-spitter.json",
+      "metadataSha256": "91c3a024eb8aae804540c7f8d7ad3260c1e7a4881cf3dba87bf0200c371bebdc",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "pending",
+        "reason": "Profile anchors have not all been physically reviewed."
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-010-spitter/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-010-spitter/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-010-spitter/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-010-spitter/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-010-spitter/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-010-spitter/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-010-spitter/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-010-spitter/death.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 4
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "poses": 32,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-011-lurker.webp",
+      "atlasSha256": "04e47a0bcfff8e2135b6f21909189e68df86f4e7accb26b6ac9e4e714aed7f6c",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-011-lurker.json",
+      "metadataSha256": "07956e6a84ecaf3c7cdd4685619b2c375cd69f741edd54b1c867a6d97f2cb752",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "reviewed",
+        "reviewer": "Codex complete_royal",
+        "reviewedAt": "2026-08-31",
+        "method": "Manually observed pelvis center immediately ahead of tail base, at the proximal rear-leg joint; the same body landmark is followed through biped idle, low stalking, crouch and collapse. Its vertical projection is the physical root, never the tail or skull center. Support floor is complete recovered pose padded bottom, visually checked against supporting legs/hands or terminal resting body; three source pixels of extraction guard included. Attack 3/4 are low forward reaches with supporting limbs, not a verified airborne pounce. This registration does not certify interclip scale or anatomical fidelity.",
+        "reviewedPoseCount": 32,
+        "coordinates": "nominal-source-cell"
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-011-lurker/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-011-lurker/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-011-lurker/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-011-lurker/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-011-lurker/death.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 4
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "poses": 40,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-012-carrier.webp",
+      "atlasSha256": "77449b7cee8eb04cc838324c5cf434fb9f2076e5ad2e82e622d5a7be02dd0bde",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-012-carrier.json",
+      "metadataSha256": "d5a3551b2e86d67d5fbc0b98284fae2aba3440d539301dd10206a3a189aeb15e",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "pending",
+        "reason": "Profile anchors have not all been physically reviewed."
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0,
+        "release": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-012-carrier/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-012-carrier/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-012-carrier/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-012-carrier/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-012-carrier/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-012-carrier/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-012-carrier/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-012-carrier/death.gif"
+        },
+        {
+          "id": "release",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-012-carrier/release.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-012-carrier/release.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 5
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "poses": 32,
+      "atlas": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-013-ravager.webp",
+      "atlasSha256": "b60b88d184accf512bd297fc0226dae19e8ce758609d74be6e061260f9d26d79",
+      "metadata": "assets/openai/sprites/metadata/v66/enemy-013-ravager.json",
+      "metadataSha256": "0def8457ce717fa84322404ad92c60f01d43e018edf8844d1d7c0bbb869fac17",
+      "normalizationOptions": {
+        "safeReassignCellFragments": true,
+        "removeEnclosedMagentaMatte": true,
+        "removeEnclosedMagentaAaFringe": true
+      },
+      "physicalAnchorReview": {
+        "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+        "status": "pending",
+        "reason": "Profile anchors have not all been physically reviewed."
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0
+      },
+      "strictCellFindings": [],
+      "clips": [
+        {
+          "id": "idle",
+          "poses": 8,
+          "fpsContract": 6,
+          "gifFrameDurationMs": 170,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-013-ravager/idle.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-013-ravager/idle.gif"
+        },
+        {
+          "id": "move",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": true,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-013-ravager/move.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-013-ravager/move.gif"
+        },
+        {
+          "id": "attack",
+          "poses": 8,
+          "fpsContract": 12,
+          "gifFrameDurationMs": 80,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-013-ravager/attack.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-013-ravager/attack.gif"
+        },
+        {
+          "id": "death",
+          "poses": 8,
+          "fpsContract": 10,
+          "gifFrameDurationMs": 100,
+          "loop": false,
+          "webp": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-013-ravager/death.webp",
+          "gif": "assets/openai/sprites/previews/v66/enemy-013-ravager/death.gif"
+        }
+      ],
+      "acceptanceStatus": "pending-visual-review",
+      "sourceHashesVerified": 4
+    }
+  ],
+  "acceptedAutomatically": 0,
+  "totals": {
+    "atlasCount": 7,
+    "clipCount": 32,
+    "poseCount": 256,
+    "gifCount": 39,
+    "webpCount": 39,
+    "metadataCount": 7
+  }
+}

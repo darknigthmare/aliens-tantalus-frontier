@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-011-lurker",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-011-lurker.webp",
+      "atlasSha256": "04e47a0bcfff8e2135b6f21909189e68df86f4e7accb26b6ac9e4e714aed7f6c",
+      "metadataSha256": "07956e6a84ecaf3c7cdd4685619b2c375cd69f741edd54b1c867a6d97f2cb752",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-011-lurker.jpg",
+      "contactSha256": "60d93431c375c512852b3f4cc6715769df13d5a6deb4acbbde46250f2537c449",
+      "frameCount": 32,
+      "anchorStatus": "reviewed",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

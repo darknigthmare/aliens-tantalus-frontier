@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V66 · Revue du lot 002</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1016;color:#dce4ed;font:15px system-ui,sans-serif}main{max-width:1440px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}.notice{color:#ffc879}header{margin-bottom:22px}label{display:flex;flex-direction:column;gap:6px}select,button{font:inherit;color:inherit;background:#1a2632;border:1px solid #435365;border-radius:5px;padding:9px}button:disabled{opacity:.45}button:focus-visible,select:focus-visible{outline:2px solid #62e0c4;outline-offset:3px}.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:end;margin-bottom:18px}.workspace{display:grid;grid-template-columns:minmax(280px,512px) 1fr;gap:22px}.stage{width:100%;aspect-ratio:1;border:1px solid #445263;background:#111921;image-rendering:pixelated}.poses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.poses figure{margin:0}.poses canvas{width:100%;height:auto;background:#111921;border:1px solid #324251;image-rendering:pixelated}.poses .active{border:2px solid #62e0c4}.poses figcaption{font-size:12px;color:#acbdcc}.details{white-space:pre-wrap;color:#b9cad6;line-height:1.65}a{color:#7cdcc9}#status{min-height:24px}#status[data-error=true]{color:#ff9b95}@media(max-width:900px){main{padding:14px}.workspace{grid-template-columns:1fr}.stage{max-width:512px}.poses{grid-template-columns:repeat(4,1fr)}}
+</style></head><body><main>
+<header><h1>Lot 002 · Contrôle des animations</h1><div class="notice">ATLAS CANDIDATS — cette page locale n’accepte ni ne publie aucun ennemi.</div></header>
+<div class="controls">
+<label>Profil<select id="profile" aria-label="Profil ennemi"></select></label>
+<label>Animation<select id="clip" aria-label="Animation"></select></label>
+<label>Vitesse<select id="speed"><option value="0.25">25 %</option><option value="0.5">50 %</option><option value="1" selected>100 %</option><option value="2">200 %</option></select></label>
+<label>Sens<select id="facing"><option value="1">Droite</option><option value="-1">Gauche · miroir</option></select></label>
+<button id="play" disabled>Lire</button><button id="restart" disabled>Recommencer</button><button id="previous" disabled>Pose précédente</button><button id="next" disabled>Pose suivante</button>
+</div><p id="status" role="status" aria-live="polite">Chargement du lot…</p>
+<section class="workspace"><div><canvas id="stage" class="stage" width="512" height="512" aria-label="Animation du sprite sélectionné"></canvas><p id="details" class="details"></p></div><div><div id="poses" class="poses"></div><p>Les croix vertes montrent le pivot de cellule. Les repères physiques ne sont valides que lorsque les métadonnées indiquent une revue manuelle complète.</p><a id="source" target="_blank" rel="noopener">Ouvrir la plaquette source</a> · <a id="metadata" target="_blank" rel="noopener">Métadonnées de contrôle</a></div></section>
+</main><script type="module" src="./player.mjs"></script></body></html>

@@ -1,5 +1,7 @@
 # V66 — lot 002 : 20 ennemis, 87 plaquettes sources
 
+Suite de cette livraison : voir [les 20 atlas reconstruits et vérifiés](V66_BATCH_002_ATLAS_DELIVERY.md). Le présent document conserve l'état historique de la livraison des sources ; les nombres de variantes, d'ancrages et les réserves ci-dessous ont ensuite évolué.
+
 État arrêté le 31 août 2026. **Production des sources terminée ; acceptation artistique et intégration du lot non terminées.**
 
 ## Livré et vérifié

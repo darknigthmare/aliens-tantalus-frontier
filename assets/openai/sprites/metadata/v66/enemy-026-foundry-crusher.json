@@ -31,12 +31,12 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-026-foundry-crusher.webp",
-  "normalizedSha256": "1907ae2541aa92fb5a10feb2a1cd9db1a360f3613f1ebcb0cf3babcbf2d51329",
+  "normalizedSha256": "d821691aebac6c6282e9287404a6b370b8abbf8a4881866d1323862d25219951",
   "preview": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/all.gif",
-  "previewSha256": "badaa4584f365207d413597268db9d3c43299cc1152ad12237e09bf3ebe39e5d",
+  "previewSha256": "852571b1c224b3a38367c3f0629cc7611e45e075e42fabee7e4bfee40f461ba3",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.470338983,
+  "scale": 0.464435146,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
@@ -50,11 +50,11 @@
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
     "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
-    "sha256": "614982015ac098a490273b2f4055429f179bf0e5696c7a676fa247a7bc8b332d",
+    "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
     "status": "reviewed",
     "reviewer": "Codex finish_source_review",
     "reviewedAt": "2026-08-31",
-    "method": "Manually observed ribcage center immediately behind the front shoulder, projected vertically to its support floor. Coordinates measured on a 1400x700 diagnostic rendering and converted to original 1774x887 source-cell coordinates. Floor is measured complete pose padded bottom (three-pixel extraction guard), visually checked against planted limbs or terminal resting body; no airborne charge poses. Source bounds are not used for root x.",
+    "method": "Manual visual inspection of every source pose, source overlay and ribcage point behind the front shoulder. Unchanged idle/move/attack/charge keep their previously measured coordinates; death-r4 is individually remeasured against the full footprint/resting body plus the existing3px extraction guard. Original1774x887 nominal-cell coordinates,6sourcepx manual uncertainty. No source anatomy reconstructed.",
     "reviewedPoseCount": 40,
     "coordinates": "nominal-source-cell"
   },
@@ -67,10 +67,10 @@
     "enabled": true,
     "aaFringeEnabled": true,
     "method": "strict-exterior-matched-magenta-v1",
-    "strictCorePixelCount": 4247,
-    "aaFringePixelCount": 3875,
-    "removedPixelCount": 8122,
-    "sourceProofSha256": "a855259f522ef08506d3c144da652f1bf5bb901dd2faa5ed98803d0414baabf5"
+    "strictCorePixelCount": 4151,
+    "aaFringePixelCount": 3793,
+    "removedPixelCount": 7944,
+    "sourceProofSha256": "b8f7da0e2d4d8d147376d879903f50f539616c8c0602e20496654dbaef479ac0"
   },
   "rawPreserved": true,
   "interpolatedFrames": 0,
@@ -236,7 +236,7 @@
     {
       "clip": "death",
       "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
-      "sha256": "5ac18d2a917b208ba42181583051be803b01718b676b683a8130559d4cdc08d8",
+      "sha256": "b07698a3c6d9003f9c7ef17c5b1d315f65f812edc79cf2091dd486a2b6cd7b31",
       "size": [
         1774,
         887
@@ -255,10 +255,10 @@
           "maximumRedBlueDifference": 32,
           "maximumSourceRadius": 2
         },
-        "strictCorePixelCount": 814,
-        "aaFringePixelCount": 531,
-        "strictCoreMaskSha256": "4570ca8aed25517cd69bce124ffc07050a50b00554c9f4fc495e59a7fab88bed",
-        "aaFringeMaskSha256": "ade48d84472ffbe92095b3d148121a3da365401a39633c6daa825de20e2d69e4",
+        "strictCorePixelCount": 718,
+        "aaFringePixelCount": 449,
+        "strictCoreMaskSha256": "6b62a192eadccbeb0a951302b4bea83ffc1fad0b7124a70db17242e44561c658",
+        "aaFringeMaskSha256": "2ca1e0dd2255cfa785e0ba80b3a343e955d7eb755746174e99d585a26de0fa02",
         "method": "strict-exterior-matched-magenta-v1",
         "nativeAlphaPreserved": false,
         "sourceSize": [
@@ -273,14 +273,14 @@
           "maximumReferenceChannelDistance": 24
         },
         "referenceRgb": [
-          237,
-          17,
-          231
+          241,
+          28,
+          232
         ],
-        "removedPixelCount": 1345,
-        "removedCoordinatesSha256": "e9633212a395b724417f8b2fca42aae1abd231733fecf291b5d966817dfb5848",
-        "removedRgbaSha256": "706b03100a79bf8edd89c567e8eb22c67c13d71050f57e4e9faeff3d82190e5e",
-        "sourceRgbaSha256": "853589d537536b66f10bf58b1e2ace269a914f7d5534320673eaca78270ebe6e",
+        "removedPixelCount": 1167,
+        "removedCoordinatesSha256": "d26886b6e0dd6648c854b9d8902272055430fb361a737081224448a17021d5ca",
+        "removedRgbaSha256": "83fc3386ac2350d367b59c2c76adc26f3b2f481259725646645167cf8cadcb56",
+        "sourceRgbaSha256": "3649f46b2c70c15794c4c3a9bcf9a728616cd976d406f042e5fa7326dbdd5752",
         "recoloredPixels": 0,
         "inpaintedPixels": 0
       }
@@ -354,9 +354,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/idle.webp",
-      "sha256": "f6c7eb736c1aa9a14de1b679f01b63514234e9a7159ac515ddfd14794b1d55d1",
+      "sha256": "dfad8e6ed7dfb315f1a98bfccbe4d558e22a7d07cfff32e096db6479ce50214c",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/idle.gif",
-      "previewSha256": "40df7723d8302e1c575e6bcb7dcf90e887138662ce735b6096c08a5b77315607"
+      "previewSha256": "d0d92ca7d2064c6aec2ca7f1470265fbc0a1cd623bd36c693895c7c0ffe04560"
     },
     {
       "id": "move",
@@ -373,9 +373,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/move.webp",
-      "sha256": "d75d541b63ebc56680812a7e3dcfae263db380a078df76490357a3a15526b143",
+      "sha256": "99e3980a1843eafcace491a26398d7d51ad2c4f9d8ac50ef226abb06d154181b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/move.gif",
-      "previewSha256": "33c45d200756ccb56ae46869b6228d299d9fa1fa8928a724d156188d93d2d316"
+      "previewSha256": "1558521fc4004297e3e8ec668eb551bbbc4c75ef7f560347c7028a7d91ab88f9"
     },
     {
       "id": "attack",
@@ -392,9 +392,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/attack.webp",
-      "sha256": "8962c4a4245a40a68fee9b0d63493074a106c24fdf9bcb682762c39c3416f6e0",
+      "sha256": "15ae01452df2da87e4b0c50fd9cefa8352df868c46589ad736bf9bbd91b66a2b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/attack.gif",
-      "previewSha256": "606b2e9e4d4d4a34b5ede08680c9d70f17926bd46ca09e6a467b026f55a00c01"
+      "previewSha256": "06c40cc94e32a567a0f76eb6e72e12bf3b879826c632deded584e47548c0e3fd"
     },
     {
       "id": "death",
@@ -411,9 +411,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/death.webp",
-      "sha256": "a02fcc8e4ccf0b52e91c47d2b928287e314f71833c2563366314a469421fdd8e",
+      "sha256": "58b67061a4e7e632c857484ca41551460ae2c9071d734cdd75301379dfa21a95",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/death.gif",
-      "previewSha256": "06dde6a44925a91cdd0a61aba5e02382884148d06b512c7f90b4c76f29f1a71f"
+      "previewSha256": "cd2fc1f343a9db8e4c4dc4b8210d1271edcd0f9a243e8806d938445321a8cfa3"
     },
     {
       "id": "charge",
@@ -430,9 +430,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-026-foundry-crusher/charge.webp",
-      "sha256": "fc3334572132461fc3b669575bc72433affdf45091df2b7b391972b7b844dcdc",
+      "sha256": "dab206240a7904bbd102f32f92f5b91d4e956ff103755c81f223dcc11b2cb6a1",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-026-foundry-crusher/charge.gif",
-      "previewSha256": "3cb35d855dcb295c7fe8adbdcebf4cbf47fc102d6baddafffdc45f83464cb2d9"
+      "previewSha256": "7fc8fd51bdbc73589dd1e545ca1fff0fd9521f62e9484ac4d2f72add71159962"
     }
   ],
   "placements": [
@@ -484,17 +484,17 @@
         209.0
       ],
       "renderedAnchor": [
-        127.85714285714286,
+        127.75,
         240.0
       ],
       "index": 0,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        142,
-        210,
+        27,
+        143,
+        209,
         240
       ]
     },
@@ -546,17 +546,17 @@
         209.0
       ],
       "renderedAnchor": [
-        128.42131979695432,
+        128.3248730964467,
         240.0
       ],
       "index": 1,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        142,
-        212,
+        28,
+        143,
+        211,
         240
       ]
     },
@@ -608,17 +608,17 @@
         211.0
       ],
       "renderedAnchor": [
-        127.6470588235294,
+        127.54219948849105,
         240.0
       ],
       "index": 2,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        141,
-        210,
+        27,
+        142,
+        209,
         240
       ]
     },
@@ -670,17 +670,17 @@
         210.0
       ],
       "renderedAnchor": [
-        128.3814432989691,
+        128.2783505154639,
         240.0
       ],
       "index": 3,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        141,
-        210,
+        29,
+        142,
+        209,
         240
       ]
     },
@@ -732,17 +732,17 @@
         210.0
       ],
       "renderedAnchor": [
-        128.35384615384615,
+        128.24615384615385,
         240.0
       ],
       "index": 4,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        141,
-        210,
+        28,
+        142,
+        209,
         240
       ]
     },
@@ -794,17 +794,17 @@
         210.0
       ],
       "renderedAnchor": [
-        128.4153846153846,
+        128.31794871794872,
         240.0
       ],
       "index": 5,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        141,
-        211,
+        29,
+        142,
+        210,
         240
       ]
     },
@@ -856,17 +856,17 @@
         209.0
       ],
       "renderedAnchor": [
-        127.70588235294117,
+        127.61125319693095,
         240.0
       ],
       "index": 6,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        142,
-        211,
+        28,
+        143,
+        210,
         240
       ]
     },
@@ -918,17 +918,17 @@
         209.0
       ],
       "renderedAnchor": [
-        128.23529411764707,
+        128.1457800511509,
         240.0
       ],
       "index": 7,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        142,
-        212,
+        29,
+        143,
+        211,
         240
       ]
     },
@@ -980,17 +980,17 @@
         215.0
       ],
       "renderedAnchor": [
-        127.89086294416244,
+        127.78934010152284,
         240.0
       ],
       "index": 8,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        139,
-        211,
+        27,
+        140,
+        210,
         240
       ]
     },
@@ -1042,17 +1042,17 @@
         215.0
       ],
       "renderedAnchor": [
-        128.29873417721518,
+        127.68101265822784,
         240.0
       ],
       "index": 9,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        139,
-        214,
+        29,
+        140,
+        212,
         240
       ]
     },
@@ -1123,17 +1123,17 @@
         215.0
       ],
       "renderedAnchor": [
-        127.92424242424242,
+        127.82828282828282,
         240.0
       ],
       "index": 10,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        139,
-        212,
+        27,
+        140,
+        211,
         240
       ]
     },
@@ -1204,17 +1204,17 @@
         216.0
       ],
       "renderedAnchor": [
-        128.26530612244898,
+        128.14285714285714,
         240.0
       ],
       "index": 11,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        25,
-        138,
-        209,
+        26,
+        140,
+        208,
         240
       ]
     },
@@ -1266,17 +1266,17 @@
         213.0
       ],
       "renderedAnchor": [
-        128.48223350253807,
+        128.39593908629442,
         240.0
       ],
       "index": 12,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        140,
-        213,
+        29,
+        141,
+        212,
         240
       ]
     },
@@ -1328,16 +1328,16 @@
         210.0
       ],
       "renderedAnchor": [
-        127.58823529411765,
+        128.47314578005114,
         240.0
       ],
       "index": 13,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        25,
-        141,
+        27,
+        142,
         209,
         240
       ]
@@ -1390,17 +1390,17 @@
         206.0
       ],
       "renderedAnchor": [
-        127.83668341708542,
+        127.72613065326634,
         240.0
       ],
       "index": 14,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        24,
-        143,
-        211,
+        25,
+        144,
+        210,
         240
       ]
     },
@@ -1471,17 +1471,17 @@
         208.0
       ],
       "renderedAnchor": [
-        128.4370179948586,
+        128.29562982005143,
         240.0
       ],
       "index": 15,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        24,
-        142,
-        207,
+        25,
+        143,
+        206,
         240
       ]
     },
@@ -1533,17 +1533,17 @@
         201.0
       ],
       "renderedAnchor": [
-        128.2086513994911,
+        128.1145038167939,
         240.0
       ],
       "index": 16,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        145,
-        212,
+        28,
+        147,
+        211,
         240
       ]
     },
@@ -1595,17 +1595,17 @@
         170.0
       ],
       "renderedAnchor": [
-        128.03825136612022,
+        127.86338797814207,
         240.0
       ],
       "index": 17,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        160,
-        199,
+        28,
+        161,
+        198,
         240
       ]
     },
@@ -1657,17 +1657,17 @@
         191.0
       ],
       "renderedAnchor": [
-        127.85714285714286,
+        127.75,
         240.0
       ],
       "index": 18,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        150,
-        210,
+        27,
+        151,
+        209,
         240
       ]
     },
@@ -1738,17 +1738,17 @@
         142.0
       ],
       "renderedAnchor": [
-        127.71095571095572,
+        128.08158508158508,
         240.0
       ],
       "index": 19,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        18,
-        173,
-        220,
+        20,
+        174,
+        219,
         240
       ]
     },
@@ -1800,16 +1800,16 @@
         133.0
       ],
       "renderedAnchor": [
-        127.53846153846153,
+        128.46153846153845,
         240.0
       ],
       "index": 20,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        29,
-        177,
+        31,
+        178,
         212,
         240
       ]
@@ -1862,17 +1862,17 @@
         181.0
       ],
       "renderedAnchor": [
-        127.87738419618529,
+        128.12806539509535,
         240.0
       ],
       "index": 21,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
-        155,
-        200,
+        29,
+        156,
+        199,
         240
       ]
     },
@@ -1924,17 +1924,17 @@
         178.0
       ],
       "renderedAnchor": [
-        127.96747967479675,
+        128.2439024390244,
         240.0
       ],
       "index": 22,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        156,
-        202,
+        30,
+        157,
+        201,
         240
       ]
     },
@@ -1986,17 +1986,17 @@
         184.0
       ],
       "renderedAnchor": [
-        128.0026525198939,
+        127.87267904509284,
         240.0
       ],
       "index": 23,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        153,
-        205,
+        29,
+        155,
+        204,
         240
       ]
     },
@@ -2011,54 +2011,54 @@
         444
       ],
       "sourceBounds": [
-        22,
+        21,
         216,
-        411,
-        425
+        409,
+        424
       ],
       "sourceGlobalBounds": [
-        22,
+        21,
         216,
-        411,
-        425
+        409,
+        424
       ],
       "sourceSize": [
-        389,
-        209
+        388,
+        208
       ],
-      "foregroundPixels": 30977,
+      "foregroundPixels": 31575,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "0580b5251066ad5f5672b770eb4b09621f54c63ccd50a5a07fe16f829c116fbf",
+      "sourcePoseRgbaSha256": "314372a5aef96b5467e5314aad5aa00ced76b7f38b15599a45dd285e5869ed4b",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         238,
-        425
+        424
       ],
       "sourceLandmark": [
         238,
         307
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (238,307), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose1 ribcage landmark (238,307) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=424 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        216.0,
-        209.0
+        217.0,
+        208.0
       ],
       "renderedAnchor": [
-        127.61439588688945,
+        127.6701030927835,
         240.0
       ],
       "index": 24,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
-        142,
-        209,
+        27,
+        143,
+        207,
         240
       ]
     },
@@ -2073,25 +2073,25 @@
         444
       ],
       "sourceBounds": [
-        19,
-        255,
-        416,
+        15,
+        254,
+        414,
         425
       ],
       "sourceGlobalBounds": [
-        463,
-        255,
-        860,
+        459,
+        254,
+        858,
         425
       ],
       "sourceSize": [
-        397,
-        170
+        399,
+        171
       ],
-      "foregroundPixels": 29894,
+      "foregroundPixels": 30514,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "dbd497cb9be00b2161e36d50f2af07dd42119ef52d60c7c8343595c0d925f63f",
+      "sourcePoseRgbaSha256": "e8602d802ad73e185fdf4a6d435925e4339f3aed370ee5ed2ac6905e4b8b9fcd",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
@@ -2103,24 +2103,24 @@
         246,
         332
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (246,332), padded support floor y=425; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose2 ribcage landmark (246,332) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=425 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        227.0,
-        170.0
+        231.0,
+        171.0
       ],
       "renderedAnchor": [
-        127.92443324937028,
+        128.10526315789474,
         240.0
       ],
       "index": 25,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
         21,
-        160,
-        208,
+        161,
+        206,
         240
       ]
     },
@@ -2135,54 +2135,54 @@
         444
       ],
       "sourceBounds": [
-        8,
-        287,
-        399,
-        427
+        5,
+        286,
+        397,
+        426
       ],
       "sourceGlobalBounds": [
-        895,
-        287,
-        1286,
-        427
+        892,
+        286,
+        1284,
+        426
       ],
       "sourceSize": [
-        391,
+        392,
         140
       ],
-      "foregroundPixels": 27934,
+      "foregroundPixels": 28370,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "38c6241be0cbfaf6b1cb52b1a8150fe21fad54f15993803c006ce877b3a62521",
+      "sourcePoseRgbaSha256": "41fb0a388e798afc8300440e89ee33a521dec09c72d973cd132debb88890d675",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         223,
-        427
+        426
       ],
       "sourceLandmark": [
         223,
         356
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (223,356), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose3 ribcage landmark (223,356) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=426 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        215.0,
+        218.0,
         140.0
       ],
       "renderedAnchor": [
-        128.1764705882353,
+        128.21428571428572,
         240.0
       ],
       "index": 26,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
         27,
-        174,
-        211,
+        175,
+        209,
         240
       ]
     },
@@ -2197,25 +2197,25 @@
         444
       ],
       "sourceBounds": [
-        5,
-        313,
-        403,
+        2,
+        312,
+        401,
         427
       ],
       "sourceGlobalBounds": [
-        1335,
-        313,
-        1733,
+        1332,
+        312,
+        1731,
         427
       ],
       "sourceSize": [
-        398,
-        114
+        399,
+        115
       ],
-      "foregroundPixels": 22574,
+      "foregroundPixels": 23025,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "b3d2f4ec122b60205c497de866f93f37ac1b348123cbd0cdf0ca04af5c93e46f",
+      "sourcePoseRgbaSha256": "e2e6778fe5fb3eb4afc266406631d5de810874f3ae8495802ee0890347b7a01d",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
@@ -2227,24 +2227,24 @@
         226,
         367
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (226,367), padded support floor y=427; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose4 ribcage landmark (226,367) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=427 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        221.0,
-        114.0
+        224.0,
+        115.0
       ],
       "renderedAnchor": [
-        127.83668341708542,
+        127.85964912280701,
         240.0
       ],
       "index": 27,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
         24,
-        186,
-        211,
+        187,
+        209,
         240
       ]
     },
@@ -2259,25 +2259,25 @@
         887
       ],
       "sourceBounds": [
-        37,
-        190,
-        438,
+        36,
+        189,
+        436,
         307
       ],
       "sourceGlobalBounds": [
-        37,
-        634,
-        438,
+        36,
+        633,
+        436,
         751
       ],
       "sourceSize": [
-        401,
-        117
+        400,
+        118
       ],
-      "foregroundPixels": 23119,
+      "foregroundPixels": 23503,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "9ed7fc05d7250570c77bd5249f15c90212f05895da7d8e29ca0904696018714b",
+      "sourcePoseRgbaSha256": "aba6eb0aa3275ef1b59b948dc05c451126ba3d9ea860a77b5678b3c08c3ee1c1",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
@@ -2289,24 +2289,24 @@
         251,
         250
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (251,250), padded support floor y=307; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose5 ribcage landmark (251,250) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=307 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        214.0,
-        117.0
+        215.0,
+        118.0
       ],
       "renderedAnchor": [
-        127.86284289276809,
+        127.975,
         240.0
       ],
       "index": 28,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        27,
+        28,
         185,
-        216,
+        214,
         240
       ]
     },
@@ -2321,25 +2321,25 @@
         887
       ],
       "sourceBounds": [
-        30,
-        203,
-        432,
+        28,
+        202,
+        430,
         309
       ],
       "sourceGlobalBounds": [
-        474,
-        647,
-        876,
+        472,
+        646,
+        874,
         753
       ],
       "sourceSize": [
         402,
-        106
+        107
       ],
-      "foregroundPixels": 21905,
+      "foregroundPixels": 22306,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "d37158824fa20ef3205c8fa7245d5c61e0fe1d3ff275325b9e266160cf8876fd",
+      "sourcePoseRgbaSha256": "69152b123de050299e44a14030e59b1eee05c38d1c9f924fc9df5d96322cc94f",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
@@ -2351,24 +2351,24 @@
         252,
         257
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (252,257), padded support floor y=309; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose6 ribcage landmark (252,257) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=309 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        222.0,
-        106.0
+        224.0,
+        107.0
       ],
       "renderedAnchor": [
-        128.37313432835822,
+        128.19900497512438,
         240.0
       ],
       "index": 29,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
         24,
         190,
-        213,
+        211,
         240
       ]
     },
@@ -2383,25 +2383,25 @@
         887
       ],
       "sourceBounds": [
-        10,
-        214,
-        409,
+        5,
+        213,
+        406,
         310
       ],
       "sourceGlobalBounds": [
-        897,
-        658,
-        1296,
+        892,
+        657,
+        1293,
         754
       ],
       "sourceSize": [
-        399,
-        96
+        401,
+        97
       ],
-      "foregroundPixels": 19773,
+      "foregroundPixels": 20179,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "86a90ebeafa4e5fd58715729ec1f5363e831c2588072cb96662ad7a11a3ab94d",
+      "sourcePoseRgbaSha256": "ff0895225db3ab72572d447abcb91811b4a54b4f1be732192c5bf279473e3cc5",
       "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
@@ -2413,24 +2413,24 @@
         227,
         257
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (227,257), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose7 ribcage landmark (227,257) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=310 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        217.0,
-        96.0
+        222.0,
+        97.0
       ],
       "renderedAnchor": [
-        128.24561403508773,
+        127.97256857855362,
         240.0
       ],
       "index": 30,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        26,
+        25,
         195,
-        214,
+        211,
         240
       ]
     },
@@ -2445,41 +2445,41 @@
         887
       ],
       "sourceBounds": [
-        -12,
+        -16,
         221,
-        405,
-        310
+        403,
+        311
       ],
       "sourceGlobalBounds": [
-        1318,
+        1314,
         665,
-        1735,
-        754
+        1733,
+        755
       ],
       "sourceSize": [
-        417,
-        89
+        419,
+        90
       ],
-      "foregroundPixels": 18796,
+      "foregroundPixels": 19228,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "5b03da9ee58a10a435f445ea3742497543dbb78464dc88c447d9cb8355227f78",
+      "sourcePoseRgbaSha256": "44bead1b782c788db936d92b8441f437ae83e3b3d71dde362502086048aa59a6",
       "sourceOwnershipTransfers": [
         {
           "ownerCell": 7,
           "fromCells": [
             6
           ],
-          "pixels": 27,
-          "componentPixels": 18796,
-          "ownerShare": 0.998564,
+          "pixels": 57,
+          "componentPixels": 19228,
+          "ownerShare": 0.997036,
           "sourceBoundsGlobal": [
-            1321,
+            1317,
             668,
-            1732,
-            751
+            1730,
+            752
           ],
-          "rgbaSha256": "794937bfffa3f0e78bf9bf76e5f0bdd49072fd299a0e6817ee5539ddbab981b3",
+          "rgbaSha256": "7456fc894bbcedb32e8e60a2c40ceeb7ef9cf6fda11a4ea6c9edf9432bd5a6b0",
           "pixelValuesPreserved": true,
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
@@ -2488,30 +2488,30 @@
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         223,
-        310
+        311
       ],
       "sourceLandmark": [
         223,
         266
       ],
-      "sourceAnchorEvidence": "ImageGen palette revision2 source: ribcage at (223,266), padded support floor y=310; same eight poses visually compared to prior source. Updated source overlay individually re-inspected: ribcage registration and support floor confirmed after palette edit.",
+      "sourceAnchorEvidence": "Review C: pose8 ribcage landmark (223,266) individually reconfirmed on the death source overlay; vertical projection to visually checked support/resting floor y=311 including3px extraction guard. Full tail and anatomy retained. Physical registration only, not artistic or runtime acceptance.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        235.0,
-        89.0
+        239.0,
+        90.0
       ],
       "renderedAnchor": [
-        128.4556354916067,
+        128.2291169451074,
         240.0
       ],
       "index": 31,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        18,
+        17,
         198,
-        214,
+        212,
         240
       ]
     },
@@ -2563,17 +2563,17 @@
         191.0
       ],
       "renderedAnchor": [
-        127.72853828306265,
+        128.3433874709977,
         240.0
       ],
       "index": 32,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        34,
-        150,
-        237,
+        36,
+        151,
+        236,
         240
       ]
     },
@@ -2644,17 +2644,17 @@
         180.0
       ],
       "renderedAnchor": [
-        127.81218274111676,
+        127.61421319796955,
         240.0
       ],
       "index": 33,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        17,
-        155,
-        202,
+        18,
+        156,
+        201,
         240
       ]
     },
@@ -2725,17 +2725,17 @@
         176.0
       ],
       "renderedAnchor": [
-        128.01492537313433,
+        127.85074626865672,
         240.0
       ],
       "index": 34,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        18,
-        157,
-        207,
+        19,
+        158,
+        206,
         240
       ]
     },
@@ -2806,17 +2806,17 @@
         180.0
       ],
       "renderedAnchor": [
-        127.6980198019802,
+        127.56435643564356,
         240.0
       ],
       "index": 35,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        20,
-        155,
-        210,
+        21,
+        156,
+        209,
         240
       ]
     },
@@ -2887,17 +2887,17 @@
         131.0
       ],
       "renderedAnchor": [
-        128.12009237875287,
+        127.58891454965358,
         240.0
       ],
       "index": 36,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        24,
-        178,
-        228,
+        25,
+        179,
+        226,
         240
       ]
     },
@@ -2949,17 +2949,17 @@
         133.0
       ],
       "renderedAnchor": [
-        127.75060532687651,
+        127.67070217917676,
         240.0
       ],
       "index": 37,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        23,
-        177,
-        217,
+        24,
+        178,
+        216,
         240
       ]
     },
@@ -3011,16 +3011,16 @@
         183.0
       ],
       "renderedAnchor": [
-        127.53315649867373,
+        128.40848806366046,
         240.0
       ],
       "index": 38,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        28,
-        154,
+        30,
+        155,
         205,
         240
       ]
@@ -3073,17 +3073,17 @@
         207.0
       ],
       "renderedAnchor": [
-        127.8987012987013,
+        127.75064935064935,
         240.0
       ],
       "index": 39,
-      "scale": 0.470338983,
+      "scale": 0.464435146,
       "sourceScale": 1.0,
-      "appliedScale": 0.470338983,
+      "appliedScale": 0.464435146,
       "renderedBounds": [
-        24,
-        143,
-        205,
+        25,
+        144,
+        204,
         240
       ]
     }
@@ -3093,579 +3093,579 @@
       {
         "index": 0,
         "alphaBounds": [
-          27,
-          143,
-          209,
+          28,
+          144,
+          208,
           239
         ],
-        "foregroundPixels": 7505,
-        "width": 182,
-        "height": 96,
-        "relativeToRowMedian": 0.988931
+        "foregroundPixels": 7342,
+        "width": 180,
+        "height": 95,
+        "relativeToRowMedian": 0.990489
       },
       {
         "index": 1,
         "alphaBounds": [
-          28,
-          143,
-          211,
-          239
-        ],
-        "foregroundPixels": 7533,
-        "width": 183,
-        "height": 96,
-        "relativeToRowMedian": 0.992621
-      },
-      {
-        "index": 2,
-        "alphaBounds": [
-          27,
-          142,
-          209,
-          239
-        ],
-        "foregroundPixels": 7671,
-        "width": 182,
-        "height": 97,
-        "relativeToRowMedian": 1.010805
-      },
-      {
-        "index": 3,
-        "alphaBounds": [
           29,
-          142,
-          209,
-          239
-        ],
-        "foregroundPixels": 7645,
-        "width": 180,
-        "height": 97,
-        "relativeToRowMedian": 1.007379
-      },
-      {
-        "index": 4,
-        "alphaBounds": [
-          28,
-          142,
-          209,
-          239
-        ],
-        "foregroundPixels": 7634,
-        "width": 181,
-        "height": 97,
-        "relativeToRowMedian": 1.002495
-      },
-      {
-        "index": 5,
-        "alphaBounds": [
-          29,
-          142,
-          210,
-          239
-        ],
-        "foregroundPixels": 7644,
-        "width": 181,
-        "height": 97,
-        "relativeToRowMedian": 1.003808
-      },
-      {
-        "index": 6,
-        "alphaBounds": [
-          28,
-          143,
-          210,
-          239
-        ],
-        "foregroundPixels": 7596,
-        "width": 182,
-        "height": 96,
-        "relativeToRowMedian": 0.997505
-      },
-      {
-        "index": 7,
-        "alphaBounds": [
-          29,
-          143,
-          211,
-          239
-        ],
-        "foregroundPixels": 7540,
-        "width": 182,
-        "height": 96,
-        "relativeToRowMedian": 0.990151
-      },
-      {
-        "index": 8,
-        "alphaBounds": [
-          27,
-          140,
-          210,
-          239
-        ],
-        "foregroundPixels": 7625,
-        "width": 183,
-        "height": 99,
-        "relativeToRowMedian": 1.010804
-      },
-      {
-        "index": 9,
-        "alphaBounds": [
-          29,
-          140,
-          213,
-          239
-        ],
-        "foregroundPixels": 7462,
-        "width": 184,
-        "height": 99,
-        "relativeToRowMedian": 0.989196
-      },
-      {
-        "index": 10,
-        "alphaBounds": [
-          27,
-          140,
-          211,
-          239
-        ],
-        "foregroundPixels": 7460,
-        "width": 184,
-        "height": 99,
-        "relativeToRowMedian": 0.988931
-      },
-      {
-        "index": 11,
-        "alphaBounds": [
-          26,
-          139,
-          208,
-          239
-        ],
-        "foregroundPixels": 7703,
-        "width": 182,
-        "height": 100,
-        "relativeToRowMedian": 1.021144
-      },
-      {
-        "index": 12,
-        "alphaBounds": [
-          29,
-          141,
-          212,
-          239
-        ],
-        "foregroundPixels": 7656,
-        "width": 183,
-        "height": 98,
-        "relativeToRowMedian": 1.024214
-      },
-      {
-        "index": 13,
-        "alphaBounds": [
-          26,
-          142,
-          208,
-          239
-        ],
-        "foregroundPixels": 7512,
-        "width": 182,
-        "height": 97,
-        "relativeToRowMedian": 1.00495
-      },
-      {
-        "index": 14,
-        "alphaBounds": [
-          25,
           144,
           210,
           239
         ],
-        "foregroundPixels": 7274,
-        "width": 185,
+        "foregroundPixels": 7365,
+        "width": 181,
         "height": 95,
-        "relativeToRowMedian": 0.97311
+        "relativeToRowMedian": 0.993592
       },
       {
-        "index": 15,
-        "alphaBounds": [
-          25,
-          143,
-          206,
-          239
-        ],
-        "foregroundPixels": 7438,
-        "width": 181,
-        "height": 96,
-        "relativeToRowMedian": 0.99505
-      },
-      {
-        "index": 16,
+        "index": 2,
         "alphaBounds": [
           28,
-          146,
-          211,
-          239
-        ],
-        "foregroundPixels": 7219,
-        "width": 183,
-        "height": 93,
-        "relativeToRowMedian": 1.077704
-      },
-      {
-        "index": 17,
-        "alphaBounds": [
-          28,
-          161,
-          198,
-          239
-        ],
-        "foregroundPixels": 6427,
-        "width": 170,
-        "height": 78,
-        "relativeToRowMedian": 0.959469
-      },
-      {
-        "index": 18,
-        "alphaBounds": [
-          27,
-          151,
-          209,
-          239
-        ],
-        "foregroundPixels": 6970,
-        "width": 182,
-        "height": 88,
-        "relativeToRowMedian": 1.040531
-      },
-      {
-        "index": 19,
-        "alphaBounds": [
-          19,
-          174,
-          219,
-          239
-        ],
-        "foregroundPixels": 6135,
-        "width": 200,
-        "height": 65,
-        "relativeToRowMedian": 0.915877
-      },
-      {
-        "index": 20,
-        "alphaBounds": [
-          30,
-          178,
-          211,
-          239
-        ],
-        "foregroundPixels": 6223,
-        "width": 181,
-        "height": 61,
-        "relativeToRowMedian": 0.969995
-      },
-      {
-        "index": 21,
-        "alphaBounds": [
-          28,
-          156,
-          199,
-          239
-        ],
-        "foregroundPixels": 6375,
-        "width": 171,
-        "height": 83,
-        "relativeToRowMedian": 0.993687
-      },
-      {
-        "index": 22,
-        "alphaBounds": [
-          29,
-          157,
-          201,
-          239
-        ],
-        "foregroundPixels": 6456,
-        "width": 172,
-        "height": 82,
-        "relativeToRowMedian": 1.006313
-      },
-      {
-        "index": 23,
-        "alphaBounds": [
-          29,
-          154,
-          204,
-          239
-        ],
-        "foregroundPixels": 6545,
-        "width": 175,
-        "height": 85,
-        "relativeToRowMedian": 1.020185
-      },
-      {
-        "index": 24,
-        "alphaBounds": [
-          27,
           143,
           208,
           239
         ],
-        "foregroundPixels": 7319,
-        "width": 181,
+        "foregroundPixels": 7507,
+        "width": 180,
         "height": 96,
-        "relativeToRowMedian": 1.080136
+        "relativeToRowMedian": 1.012749
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          30,
+          143,
+          208,
+          239
+        ],
+        "foregroundPixels": 7460,
+        "width": 178,
+        "height": 96,
+        "relativeToRowMedian": 1.006408
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          29,
+          143,
+          208,
+          239
+        ],
+        "foregroundPixels": 7474,
+        "width": 179,
+        "height": 96,
+        "relativeToRowMedian": 1.002414
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          30,
+          143,
+          209,
+          239
+        ],
+        "foregroundPixels": 7489,
+        "width": 179,
+        "height": 96,
+        "relativeToRowMedian": 1.004426
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          29,
+          144,
+          209,
+          239
+        ],
+        "foregroundPixels": 7438,
+        "width": 180,
+        "height": 95,
+        "relativeToRowMedian": 0.997586
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          30,
+          144,
+          210,
+          239
+        ],
+        "foregroundPixels": 7372,
+        "width": 180,
+        "height": 95,
+        "relativeToRowMedian": 0.988734
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          28,
+          141,
+          209,
+          239
+        ],
+        "foregroundPixels": 7468,
+        "width": 181,
+        "height": 98,
+        "relativeToRowMedian": 1.01035
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          30,
+          141,
+          211,
+          239
+        ],
+        "foregroundPixels": 7263,
+        "width": 181,
+        "height": 98,
+        "relativeToRowMedian": 0.982615
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          28,
+          141,
+          210,
+          239
+        ],
+        "foregroundPixels": 7315,
+        "width": 182,
+        "height": 98,
+        "relativeToRowMedian": 0.98965
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          27,
+          141,
+          207,
+          239
+        ],
+        "foregroundPixels": 7474,
+        "width": 180,
+        "height": 98,
+        "relativeToRowMedian": 1.011161
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          30,
+          142,
+          211,
+          239
+        ],
+        "foregroundPixels": 7501,
+        "width": 181,
+        "height": 97,
+        "relativeToRowMedian": 1.021795
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          28,
+          143,
+          208,
+          239
+        ],
+        "foregroundPixels": 7378,
+        "width": 180,
+        "height": 96,
+        "relativeToRowMedian": 1.00504
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          26,
+          145,
+          209,
+          239
+        ],
+        "foregroundPixels": 7119,
+        "width": 183,
+        "height": 94,
+        "relativeToRowMedian": 0.969759
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          26,
+          144,
+          205,
+          239
+        ],
+        "foregroundPixels": 7304,
+        "width": 179,
+        "height": 95,
+        "relativeToRowMedian": 0.99496
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          29,
+          148,
+          210,
+          239
+        ],
+        "foregroundPixels": 6998,
+        "width": 181,
+        "height": 91,
+        "relativeToRowMedian": 1.069867
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          29,
+          162,
+          197,
+          239
+        ],
+        "foregroundPixels": 6280,
+        "width": 168,
+        "height": 77,
+        "relativeToRowMedian": 0.960098
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          28,
+          152,
+          208,
+          239
+        ],
+        "foregroundPixels": 6802,
+        "width": 180,
+        "height": 87,
+        "relativeToRowMedian": 1.039902
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          21,
+          175,
+          218,
+          239
+        ],
+        "foregroundPixels": 5943,
+        "width": 197,
+        "height": 64,
+        "relativeToRowMedian": 0.908577
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          32,
+          179,
+          211,
+          239
+        ],
+        "foregroundPixels": 6041,
+        "width": 179,
+        "height": 60,
+        "relativeToRowMedian": 0.967721
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          30,
+          157,
+          198,
+          239
+        ],
+        "foregroundPixels": 6197,
+        "width": 168,
+        "height": 82,
+        "relativeToRowMedian": 0.992711
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          31,
+          158,
+          200,
+          239
+        ],
+        "foregroundPixels": 6288,
+        "width": 169,
+        "height": 81,
+        "relativeToRowMedian": 1.007289
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          30,
+          156,
+          203,
+          239
+        ],
+        "foregroundPixels": 6324,
+        "width": 173,
+        "height": 83,
+        "relativeToRowMedian": 1.013056
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          28,
+          144,
+          206,
+          239
+        ],
+        "foregroundPixels": 7273,
+        "width": 178,
+        "height": 95,
+        "relativeToRowMedian": 1.089996
       },
       {
         "index": 25,
         "alphaBounds": [
           22,
-          161,
-          207,
+          162,
+          205,
           239
         ],
-        "foregroundPixels": 7050,
-        "width": 185,
-        "height": 78,
-        "relativeToRowMedian": 1.040437
+        "foregroundPixels": 6944,
+        "width": 183,
+        "height": 77,
+        "relativeToRowMedian": 1.040689
       },
       {
         "index": 26,
         "alphaBounds": [
           28,
-          175,
-          210,
+          176,
+          208,
           239
         ],
-        "foregroundPixels": 6502,
-        "width": 182,
-        "height": 64,
-        "relativeToRowMedian": 0.959563
+        "foregroundPixels": 6401,
+        "width": 180,
+        "height": 63,
+        "relativeToRowMedian": 0.959311
       },
       {
         "index": 27,
         "alphaBounds": [
           25,
-          187,
-          210,
+          188,
+          208,
           239
         ],
-        "foregroundPixels": 5299,
-        "width": 185,
-        "height": 52,
-        "relativeToRowMedian": 0.782025
+        "foregroundPixels": 5205,
+        "width": 183,
+        "height": 51,
+        "relativeToRowMedian": 0.780067
       },
       {
         "index": 28,
         "alphaBounds": [
-          28,
+          29,
           186,
-          215,
+          213,
           239
         ],
-        "foregroundPixels": 5394,
-        "width": 187,
+        "foregroundPixels": 5346,
+        "width": 184,
         "height": 53,
-        "relativeToRowMedian": 1.109306
+        "relativeToRowMedian": 1.10752
       },
       {
         "index": 29,
         "alphaBounds": [
           25,
           191,
-          212,
+          210,
           239
         ],
-        "foregroundPixels": 5119,
-        "width": 187,
+        "foregroundPixels": 5099,
+        "width": 185,
         "height": 48,
-        "relativeToRowMedian": 1.052751
+        "relativeToRowMedian": 1.05635
       },
       {
         "index": 30,
         "alphaBounds": [
-          27,
+          26,
           196,
-          213,
+          210,
           239
         ],
-        "foregroundPixels": 4606,
-        "width": 186,
+        "foregroundPixels": 4555,
+        "width": 184,
         "height": 43,
-        "relativeToRowMedian": 0.947249
+        "relativeToRowMedian": 0.94365
       },
       {
         "index": 31,
         "alphaBounds": [
-          19,
+          18,
           199,
-          213,
+          211,
           239
         ],
-        "foregroundPixels": 4412,
-        "width": 194,
+        "foregroundPixels": 4391,
+        "width": 193,
         "height": 40,
-        "relativeToRowMedian": 0.907352
+        "relativeToRowMedian": 0.909675
       },
       {
         "index": 32,
         "alphaBounds": [
-          35,
-          151,
-          236,
+          37,
+          152,
+          235,
           239
         ],
-        "foregroundPixels": 6487,
-        "width": 201,
-        "height": 88,
-        "relativeToRowMedian": 1.00224
+        "foregroundPixels": 6326,
+        "width": 198,
+        "height": 87,
+        "relativeToRowMedian": 1.001583
       },
       {
         "index": 33,
         "alphaBounds": [
-          18,
-          156,
-          201,
+          19,
+          157,
+          200,
           239
         ],
-        "foregroundPixels": 6586,
-        "width": 183,
-        "height": 83,
-        "relativeToRowMedian": 1.017536
+        "foregroundPixels": 6425,
+        "width": 181,
+        "height": 82,
+        "relativeToRowMedian": 1.017258
       },
       {
         "index": 34,
         "alphaBounds": [
-          19,
-          158,
-          206,
+          20,
+          159,
+          205,
           239
         ],
-        "foregroundPixels": 6458,
-        "width": 187,
-        "height": 81,
-        "relativeToRowMedian": 0.99776
+        "foregroundPixels": 6306,
+        "width": 185,
+        "height": 80,
+        "relativeToRowMedian": 0.998417
       },
       {
         "index": 35,
         "alphaBounds": [
-          21,
-          156,
-          209,
+          22,
+          157,
+          208,
           239
         ],
-        "foregroundPixels": 6382,
-        "width": 188,
-        "height": 83,
-        "relativeToRowMedian": 0.986018
+        "foregroundPixels": 6235,
+        "width": 186,
+        "height": 82,
+        "relativeToRowMedian": 0.987175
       },
       {
         "index": 36,
         "alphaBounds": [
-          25,
-          179,
-          227,
+          26,
+          180,
+          225,
           239
         ],
-        "foregroundPixels": 6211,
-        "width": 202,
-        "height": 60,
-        "relativeToRowMedian": 0.969408
+        "foregroundPixels": 6014,
+        "width": 199,
+        "height": 59,
+        "relativeToRowMedian": 0.965329
       },
       {
         "index": 37,
         "alphaBounds": [
-          24,
-          178,
-          216,
+          25,
+          179,
+          215,
           239
         ],
-        "foregroundPixels": 5938,
-        "width": 192,
-        "height": 61,
-        "relativeToRowMedian": 0.926799
+        "foregroundPixels": 5786,
+        "width": 190,
+        "height": 60,
+        "relativeToRowMedian": 0.928732
       },
       {
         "index": 38,
         "alphaBounds": [
-          29,
-          155,
+          31,
+          156,
           204,
           239
         ],
-        "foregroundPixels": 6603,
-        "width": 175,
-        "height": 84,
-        "relativeToRowMedian": 1.030592
+        "foregroundPixels": 6446,
+        "width": 173,
+        "height": 83,
+        "relativeToRowMedian": 1.034671
       },
       {
         "index": 39,
         "alphaBounds": [
-          25,
-          144,
-          204,
+          26,
+          145,
+          203,
           239
         ],
-        "foregroundPixels": 7378,
-        "width": 179,
-        "height": 95,
-        "relativeToRowMedian": 1.151553
+        "foregroundPixels": 7218,
+        "width": 177,
+        "height": 94,
+        "relativeToRowMedian": 1.158587
       }
     ],
     "rowMedianForegroundPixels": [
-      7589.0,
-      7615.0,
-      7543.5,
-      7475.0,
-      6698.5,
-      6415.5,
-      6776.0,
-      4862.5,
-      6472.5,
-      6407.0
+      7412.5,
+      7456.0,
+      7391.5,
+      7341.0,
+      6541.0,
+      6242.5,
+      6672.5,
+      4827.0,
+      6316.0,
+      6230.0
     ],
     "findings": [],
     "uniqueFrameCount": 40,
     "cellRgbaSha256": [
-      "d30f0b2a45c6d62c03129aea2e067a6f866a019877d6920c27e6a8cadc33910b",
-      "56ba317a3df2aaa00c907ba6256d0ba10666f466bee02258351a524f11883622",
-      "7fc30c02fa6b2273955d0824bc85a79880639be4dd219f4129a3b6b94b511b72",
-      "8b89aa2900189e1eb53d6da4deb4619e9dd6ce235b14297f809fca1b826e67a4",
-      "27bb1f90ce9c8b4ba35688b2dec6c242e85681329771ffd406d8dcdc1bde164e",
-      "ce81d0bb09347f3d77cdef282a756a9dbc1ca0516edea0a0669f629eab2ab352",
-      "da883dfe46f9f2505297207bca3db1fccf2d6ef20eee1bc10ff25073abd5d136",
-      "e978c18fac77f7d4422d077774a0f0c5000278effa5d30f2714a431e78593e47",
-      "f54d92a549224f4e7d0cf90bacae95efcecd6d5aa19ff66a5e9e9ea4db2e6bf3",
-      "14493ff9991f26bc6cfd1603ee6bba52a48d75021f4b42822a86900240eb0492",
-      "fa80c66260772144fec494f950e73e1f2848ba9679ce0073ce023eed7b7815b0",
-      "5d9b45d71d933bddc2e27d4688868b6846a74405d8d54f8adb1c8fe088313711",
-      "da5e6f6398c8e702c84d14e2337ec605f1e3d94f9d05f01dc5d9029908f7d76f",
-      "f637c8e2a7693bcad55bc042db4408bc37e36bbae788652a621a2c4a980ba11a",
-      "7cf13ab84bef3881ae876ff656b8789feae9bbcf17d121d0857d863d83e5be14",
-      "e39bb54636ed82c4b2d2306eb9af3366f3f3931340f4815559d2e1b3c546d777",
-      "346d63a2b1d3ea002cd64f1ae75ea8df15776daf3e96c85af7b47f3a503a02a2",
-      "560026aefebfc00be5a5c0a61723c2e4c88e4326b0bb017e7f4d0831216573ca",
-      "6f94708aebd793d88cab6092a74b44b2cfeb824a932d231e58bca60113a30071",
-      "c9e9b99011c96377591b021a7619073030064a3b9e0c7cbe90e2d426eeb28c6a",
-      "bafcc5c5763cbf265c696927339ce2df5a7ac5ed37ffeaa7833959e89ffc3b88",
-      "f955f0a3316f6e5faca221c22db481a7a748d5791d1fe37e075cfe934d35dfa7",
-      "c566c926161e9eeeb19ce1519f74c53842170fa10d7aa14bb31ed667bbb16075",
-      "1ac1457149b099675d6a23485d77a2e7658699ff6c7280d7ace61e99c0502de4",
-      "6837ed9106da757680a4879e18c7dec4f555159858f35e92e6967d2c4b5d903c",
-      "15b49b05f6a57f3301ec8b7c35be617fd229c4c9adb1eba14e300e35b718a904",
-      "3b7c15fb72a3506ab58e7310001de83f2d7a7fef31f49f5cc50e0efbfae9f297",
-      "0db69ea36c0778b9ee692c765771fe5f5b141f5a4ae837af7d0de48b91b8dc81",
-      "281f3aa37b6dddb9586f805e5cf9aaef270fae5b7c5fe309748d033391ba3c9a",
-      "b4209e3f2ef1a010c299849220f282cf39f4af420cf067a51e302aadd98928e7",
-      "c1010649d2d44e13d1ead01b9ddb5b6b466dada293c40969ef2a0224fd7cda17",
-      "541fa68d6a02da4eb877c5d3ea650d176106aaddd4615a7d198a0c85f11ab9e8",
-      "1a83a20a0dfacac40123de3a1ef255283a095386e0bb49807e3a012a1a97c525",
-      "4d43cada263a2ec1dfe7094d40b8836bd99256be91a669a161eafd730ec6f437",
-      "96093435b23158f7e5244803a686f60452eab61ce7733a51a79102b1c4d302aa",
-      "cccac70bee83d28993db6637f7163749e45b063715ceb4a30a4e7fc4f6afbe08",
-      "8d4d186cc91d9216b9d9992a28b05bb51177cc3103838399ac3f25997446f8f7",
-      "e9a28d4fe2ad059f6bc2cb855237d23e853995dab03d98da148f0d2c48277974",
-      "08d73c94aa4888ea579b9cf7643dd91fd0425cffaf011b5ee97980dd890437f7",
-      "728e94546decb30b94321c52eca01c13f7a659ce1a2141d5eac1af0a10189510"
+      "37dd61817d1d06f23bff54994744884f22086a7c78f3b5d8a3241a0e881710f1",
+      "fd8b859a5cc5e9936f6099ddbfe86e1418cae82b6639aeec6433360d0d9f5492",
+      "56f08a51712cadf75febbe8fec51c884a2f0182ee28d24711bef0b6a25bc995e",
+      "e967f6378b8c9f3a23d890efa96f214c628bb70db1f01c3faccf67ce741dca28",
+      "aa16d6c1987f3da31f9d83cc41170b16db5afcea8eeaa1e0a0d40b29187ebda7",
+      "cf27c0b652e63ddb1cb3cc5c2992a58d8ba9c588687d1f0407feac9113148f66",
+      "6223d01e28769785f18f3b8f5c0c9b4af98a058d3059fbe8c9cf2009ade38737",
+      "0393af9f124dbcf5b755d444000b40fc87f1c880cd66d12db6bfc0273acc0b91",
+      "3e27c1aebc3361a5d096effa3987c84d375b8386a0fbfe00f61855462d1bb60d",
+      "acb2ee0740a985859c68f79a51b5d3e7594297bec50da6760244cab834b46641",
+      "46c75e13a37611d0c21dfdaa65d2df81c9980b3e6e365cee37bf43867df50b7d",
+      "df27ae03a9858ba19a9bd2c212de63df9e40dc6a9457465f1da7dfa9d6b95fb2",
+      "cc864aef632b9f1118fb958f3dc5704c4bf52d85194739fb8b77ad2e6f367e1c",
+      "706a00c62065f19b8a8db743f5142a2eaeb58a2cd278b9f6e38ec7f23d38121f",
+      "5e62b710df6669f97d490d43b0482ea7d8385c237a2670ae1f5efffb94c17a1c",
+      "153f5616c81a141c2e3702f207ac7019ddccacd9fc3962c1fad07926dd7fa914",
+      "594e3b9bd7d79876a1da33ef70d1a5f81648ffc8a210b08c6adedaa1f95cf3a8",
+      "8e1e4ebb0ff2e2dc05aa77c3d6b994751c9b2603b7de47c1a8fff5cdf3de2ee8",
+      "bc0f79ad336332faae65ac3d8766741e5f71b518ed4c7ad9c178f253b079c6d1",
+      "83cd9db6578b7a866d9441504450b7a8e40cf6f2a57376a767c857aa56ba722d",
+      "d1310000f3073be8902179c385b10a365485dee6b588b8adb446d4fade205a8a",
+      "87525d0eab465855087a3f4cb80a0ec1e088835e3c7e8c66ff9ac1cd3ed299ed",
+      "4892d4a61437f5a9b5eb87a21286816dbb1567b8aa8afcc837c7a0ecadd8347a",
+      "cb861df682f7d1ee9b2e856aabf58f803aef92904c8a4ea6bcca7d1633b2097a",
+      "c6601c5b3b88b269fe50f3de10481ca8cdc160ac42f15dfa42e1d190c94b286a",
+      "8fe95fb1fa35eb1c992685540731801304cf01659e0420d0f943f80a8778e949",
+      "074f152db6769999249247605c11b4a7b861d76221772344db1bd4ddf0802929",
+      "ce9b3c193e1f8a35be3eb7c617f0c13b20af1ca9a6e60cbe4dddb0232df074c6",
+      "41e1fde910fe3e3648d1fda82f37a1e5a597d1f3ce3f0a92cd21e7ce29765f57",
+      "61086c10366d09ae402ca91e68ebadad0d602e955807ebd143ef6a5f3b92b0bd",
+      "075670580f69cb825eaed96b20ce0e58fb0cc964699f13e40c82b5fe85dda928",
+      "bf296da3fd0f204197dacaea8552b1a44adbd5eabc7b67ef725640a77c324909",
+      "406bc95a70e593addeacfe994603c152e09a1710d00274eae0d956a07ebb2cb8",
+      "5762762b8fb8b3439f548a38af24a5d949341f568b9b76f97a2f538711ca064d",
+      "5a3ba924cbee63b9ad2bd0fada0ee5c865135bba46e0f2bd207fa5eabbbb1f71",
+      "925824aaf34ac6a5d4cfe53d59cbb213aa37e5d63301a4192a1a2a63b4954bfc",
+      "1dae253f32348aca5cb6c9f150b33ac92244c2e800157c2a1871af14091a7a12",
+      "95857627aad39047273cb1b59ca254bd7948430d7cc89e0a4eaadf817cfd5e47",
+      "cafb4f62b1eddcc90fe4ab4f25e238af2f6af129498fd27bd86802f575985c86",
+      "4ed3c6d439abfe51b2d4386efc55934642dad9800895ca006f5acdbcaee6cf86"
     ],
     "visualFidelityCertified": false
   }

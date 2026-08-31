@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-018-specimen-six-line.webp",
+      "atlasSha256": "2638326e839fca58b37ab017d57ff993b4f46859aaa6e82e4f0af6b8122bf2a0",
+      "metadataSha256": "f743c56b3bde189b8394b6c0f212c34aa6da46e49430d9073399c2a26cd982a9",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-018-specimen-six-line.jpg",
+      "contactSha256": "80dfdcf7c0fada59eb512fcca326c44806eb084b1d88347c4ef5604c7f92994a",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

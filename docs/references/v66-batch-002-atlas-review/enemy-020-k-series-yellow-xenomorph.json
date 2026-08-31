@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+      "atlasSha256": "c1cbe9ca1df5de1fd535c1fae1d0d4d6f847d6a1ee54e43529d1f09e8451e817",
+      "metadataSha256": "7e4fab907877e9494284034d3783631ee7a70d48f3343012941506d7383c4356",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-020-k-series-yellow-xenomorph.jpg",
+      "contactSha256": "13c4faa62e67bc63c903a9163e0472961dea81055b8b18d54eef322363ba9009",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-014-boiler",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-014-boiler.webp",
+      "atlasSha256": "44c45cdfa8ca34f0f4d9111becd97c70e48205f158f53f06dd4d6e36b009514b",
+      "metadataSha256": "f3f1601740efd2987982aec4a3132e5b3640047925fef64c4efd4578e334a7af",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-014-boiler.jpg",
+      "contactSha256": "a0c26b43c7ed21699d2a164904706d9cc192903af733a45a7019aa94806ad378",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

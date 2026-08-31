@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-021-neuro-xeno-drone.webp",
+      "atlasSha256": "bfd1cdd4630e3884cf55077beb8654433311c80328b92ccaacb6f29e25bd31dd",
+      "metadataSha256": "5522bfb0e228b61ec6bff2691bcf83fe6bb5d889ccfd98fa9e2f368226995284",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-021-neuro-xeno-drone.jpg",
+      "contactSha256": "3cb4c2b5cac8c34e0f0df96401e465350396f24e81989aa578f51e5e2e0bbb0d",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

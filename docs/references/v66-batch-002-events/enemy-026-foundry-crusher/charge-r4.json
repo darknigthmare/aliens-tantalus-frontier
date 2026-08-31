@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "charge",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-3c3df2b2-d8ed-42cc-aeb4-0e2532ed2d1f",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "af155e719006e94123f9841aefeaca48cdf4c338b9b4723f4752c7b3aa6a704c",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/rejected/charge-r4-candidate.png",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/charge-r4.txt",
+  "candidateSelected": false,
+  "note": "REJECTED after isolated normalization: charge opaque pink clues28versus25in prior atlas; no measured cleanup gain. Original charge-r3 master retained. Source and prompt preserved as honest generation evidence, not imported against current master. No acceptance or runtime integration."
+}

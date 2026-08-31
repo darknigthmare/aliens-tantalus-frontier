@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-8151d5b5-4066-4e1d-bc1d-321e887f8023",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "ff0ca97a90c4ca654e8c47fba2640453f91ea6535727d3bf8fdfd3514361c74d",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/rejected/death-r3-candidate.png",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/death-r3.txt",
+  "candidateSelected": false,
+  "note": "ImageGen requested real transparency and neutral chitin. Output is RGB with an opaque checkerboard (all alpha255), so this variant is rejected and must not be imported against the active master. Eight death poses and long tails remain recognizable; follow-up can preserve this improved neutral material but requires a proven magenta matte. No runtime acceptance."
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-025-foundry-drone.webp",
+      "atlasSha256": "c7009cef8e44281d9ee05ad43a486406655048e94b69229962ba0141939c189c",
+      "metadataSha256": "7e88ff273ef13f6dc20fda4e19028c6027843c8dff79076ac993d60ba73babae",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-025-foundry-drone.jpg",
+      "contactSha256": "0c2ec235915c75c2ae12125a127427be3d55e0b0ce27061649106f85011ef858",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-015-prowler",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp",
+      "atlasSha256": "3c830342368cf91ec020e6233d1d18b255392fc5f62e05a753358f3841516c60",
+      "metadataSha256": "de61b6639f5ef12aedaced43df0c14bc4afa6d9670a21c6d9faa7ef1455ddc17",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-015-prowler.jpg",
+      "contactSha256": "a40b27b634e304413806edf23efc0414cdac32e8c330c68d2321edef0f365cd9",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

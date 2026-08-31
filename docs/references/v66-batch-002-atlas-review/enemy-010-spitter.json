@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-010-spitter",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-010-spitter.webp",
+      "atlasSha256": "a629524b32ed80eba71c55939accd78bd36fb3266a021d38b6c13f33673891fc",
+      "metadataSha256": "c701e6db21624b69b43842797f41a94b10cbc4e38e1fe7f398718960985dfc80",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-010-spitter.jpg",
+      "contactSha256": "920110d3804dc98999381244289d300b32f82ffca7f09a0bcd75e57888e67c4d",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

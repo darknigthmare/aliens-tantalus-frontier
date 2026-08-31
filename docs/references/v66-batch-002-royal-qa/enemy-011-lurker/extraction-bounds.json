@@ -1,0 +1,1072 @@
+{
+  "idle": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        55,
+        86,
+        405,
+        397
+      ],
+      "sourceGlobalBounds": [
+        55,
+        86,
+        405,
+        397
+      ],
+      "sourceSize": [
+        350,
+        311
+      ],
+      "foregroundPixels": 31436,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e71b5a6de20a7fc60429404b3e4c75b9b2d1b74458b71673690677168b5a598e",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        32,
+        79,
+        391,
+        396
+      ],
+      "sourceGlobalBounds": [
+        476,
+        79,
+        835,
+        396
+      ],
+      "sourceSize": [
+        359,
+        317
+      ],
+      "foregroundPixels": 32285,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "edc0f825d02c853c3ad6cb4dc4583fd280ee211ffe01d14f1d42a5b243202b74",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        29,
+        79,
+        389,
+        396
+      ],
+      "sourceGlobalBounds": [
+        916,
+        79,
+        1276,
+        396
+      ],
+      "sourceSize": [
+        360,
+        317
+      ],
+      "foregroundPixels": 32434,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c0894c86c9ab538738ca8ab33a6f9670c3eb4afa03bf98baf660ee257f0e2801",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        10,
+        81,
+        383,
+        397
+      ],
+      "sourceGlobalBounds": [
+        1340,
+        81,
+        1713,
+        397
+      ],
+      "sourceSize": [
+        373,
+        316
+      ],
+      "foregroundPixels": 32514,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9a34c7a116a3e8f492727eb909f5d245c059dc5a1c6a82b15dd3956247021ec3",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        38,
+        71,
+        402,
+        385
+      ],
+      "sourceGlobalBounds": [
+        38,
+        515,
+        402,
+        829
+      ],
+      "sourceSize": [
+        364,
+        314
+      ],
+      "foregroundPixels": 32068,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1d16a4d61e9fbbbd37ccff57d3a13f565c8b6c5d3148f1e41f671d67933329a1",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        28,
+        74,
+        391,
+        385
+      ],
+      "sourceGlobalBounds": [
+        472,
+        518,
+        835,
+        829
+      ],
+      "sourceSize": [
+        363,
+        311
+      ],
+      "foregroundPixels": 31805,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4955e45d22871c85e3a5496b060b1319cec760308ac01ae94631e617cfb6561e",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        29,
+        78,
+        389,
+        385
+      ],
+      "sourceGlobalBounds": [
+        916,
+        522,
+        1276,
+        829
+      ],
+      "sourceSize": [
+        360,
+        307
+      ],
+      "foregroundPixels": 31668,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d3a939ef7141a2cc9bfe4db0f39f49d926f33ff8987823802d99308c7df4b833",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        19,
+        77,
+        381,
+        384
+      ],
+      "sourceGlobalBounds": [
+        1349,
+        521,
+        1711,
+        828
+      ],
+      "sourceSize": [
+        362,
+        307
+      ],
+      "foregroundPixels": 31677,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "89f26e841924134bc720a4884046542ed75b3388b54f9e5b6e24f1e4fedc1e25",
+      "sourceOwnershipTransfers": []
+    }
+  ],
+  "move": [
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        43,
+        107,
+        396,
+        377
+      ],
+      "sourceGlobalBounds": [
+        43,
+        107,
+        396,
+        377
+      ],
+      "sourceSize": [
+        353,
+        270
+      ],
+      "foregroundPixels": 26712,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a93bc0f2ece88ec4167d6f9033dd3224eebd7428bff79ff5f1e0f8ecc4854b42",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        112,
+        406,
+        375
+      ],
+      "sourceGlobalBounds": [
+        474,
+        112,
+        850,
+        375
+      ],
+      "sourceSize": [
+        376,
+        263
+      ],
+      "foregroundPixels": 25949,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0d162d1f1a27f641487f5d4871a8aaae66416cc849fabe47868d236ecc5824f7",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        -3,
+        123,
+        418,
+        378
+      ],
+      "sourceGlobalBounds": [
+        884,
+        123,
+        1305,
+        378
+      ],
+      "sourceSize": [
+        421,
+        255
+      ],
+      "foregroundPixels": 26844,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a4b5a43a55b23251edc5585db3d7b3121564dc5450062854cbddb58e28f23a69",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -5,
+        108,
+        383,
+        374
+      ],
+      "sourceGlobalBounds": [
+        1325,
+        108,
+        1713,
+        374
+      ],
+      "sourceSize": [
+        388,
+        266
+      ],
+      "foregroundPixels": 25428,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "62be966104369259fe099ad30c67d12b5e0ee770de79b08fb31f1e91e2af96ad",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 19,
+          "componentPixels": 25375,
+          "ownerShare": 0.999251,
+          "sourceBoundsGlobal": [
+            1328,
+            111,
+            1706,
+            371
+          ],
+          "rgbaSha256": "27d1e63511a88bec796690d892c36d1a3439560a825b403bcc0b8d6f519afc9c",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        51,
+        428,
+        331
+      ],
+      "sourceGlobalBounds": [
+        37,
+        495,
+        428,
+        775
+      ],
+      "sourceSize": [
+        391,
+        280
+      ],
+      "foregroundPixels": 24870,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d442bb541c574a292a480657ae194d432eb4947a6feb8f923d2ea33653a9e43e",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        21,
+        75,
+        395,
+        331
+      ],
+      "sourceGlobalBounds": [
+        465,
+        519,
+        839,
+        775
+      ],
+      "sourceSize": [
+        374,
+        256
+      ],
+      "foregroundPixels": 26542,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cfd166c82e11b24e25a313e05878e9775712d0018eb41ca8fce6ba803ac61136",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -7,
+        82,
+        414,
+        337
+      ],
+      "sourceGlobalBounds": [
+        880,
+        526,
+        1301,
+        781
+      ],
+      "sourceSize": [
+        421,
+        255
+      ],
+      "foregroundPixels": 27101,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9a4ec66a3aa798c714c2ab097689f592a5206d93522794a62c2954b40c2a7151",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 63,
+          "componentPixels": 27057,
+          "ownerShare": 0.997672,
+          "sourceBoundsGlobal": [
+            883,
+            529,
+            1292,
+            772
+          ],
+          "rgbaSha256": "5210aee172be47987df5e1bb4eed42a7587461bdf5179ef70069f038df13058c",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -2,
+        66,
+        384,
+        331
+      ],
+      "sourceGlobalBounds": [
+        1328,
+        510,
+        1714,
+        775
+      ],
+      "sourceSize": [
+        386,
+        265
+      ],
+      "foregroundPixels": 26133,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b878a4cf4ddfb75af6829d1dda50067e41f406d671e6a71850dbe09f1ec31811",
+      "sourceOwnershipTransfers": []
+    }
+  ],
+  "attack": [
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        144,
+        201,
+        384,
+        368
+      ],
+      "sourceGlobalBounds": [
+        144,
+        201,
+        384,
+        368
+      ],
+      "sourceSize": [
+        240,
+        167
+      ],
+      "foregroundPixels": 9741,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ebb84f8a14122e1d95550626476d777dbae8300f9abbe20ca5778b926b6e08d0",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        116,
+        206,
+        277,
+        368
+      ],
+      "sourceGlobalBounds": [
+        560,
+        206,
+        721,
+        368
+      ],
+      "sourceSize": [
+        161,
+        162
+      ],
+      "foregroundPixels": 7823,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0934fceb94a573a6062486dadd753c0e19f87910823b53318c5d93364f62f15f",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        52,
+        202,
+        294,
+        368
+      ],
+      "sourceGlobalBounds": [
+        939,
+        202,
+        1181,
+        368
+      ],
+      "sourceSize": [
+        242,
+        166
+      ],
+      "foregroundPixels": 9542,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "682dc52354bf55abaf47e6f788c812164066b9cd82028198437ed24d8909e3e3",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        19,
+        204,
+        294,
+        366
+      ],
+      "sourceGlobalBounds": [
+        1349,
+        204,
+        1624,
+        366
+      ],
+      "sourceSize": [
+        275,
+        162
+      ],
+      "foregroundPixels": 8425,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1531c1fef296060339444d3e3b0f4e9a6cd0a994a296e9ae8120730d542ec735",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        152,
+        98,
+        413,
+        257
+      ],
+      "sourceGlobalBounds": [
+        152,
+        542,
+        413,
+        701
+      ],
+      "sourceSize": [
+        261,
+        159
+      ],
+      "foregroundPixels": 7909,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5222980b9773955921ce5d7b1e977f4215963adf408b2318f9c43da600369654",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        125,
+        102,
+        282,
+        258
+      ],
+      "sourceGlobalBounds": [
+        569,
+        546,
+        726,
+        702
+      ],
+      "sourceSize": [
+        157,
+        156
+      ],
+      "foregroundPixels": 7605,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9fd72e71cfe064a330f1af1c852ab7b19f0599c542940500aa5e5f58e2f09a23",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        67,
+        97,
+        296,
+        258
+      ],
+      "sourceGlobalBounds": [
+        954,
+        541,
+        1183,
+        702
+      ],
+      "sourceSize": [
+        229,
+        161
+      ],
+      "foregroundPixels": 8440,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "41e2291291ed84cf6e3a5f57ccce0992e7caa493670374d658c4939c844a47e0",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        41,
+        101,
+        263,
+        259
+      ],
+      "sourceGlobalBounds": [
+        1371,
+        545,
+        1593,
+        703
+      ],
+      "sourceSize": [
+        222,
+        158
+      ],
+      "foregroundPixels": 8694,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d798966bdf0dd9e768e37b5919baf26782389368efabdcc059977e6b6bd97831",
+      "sourceOwnershipTransfers": []
+    }
+  ],
+  "death": [
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        152,
+        206,
+        365,
+        357
+      ],
+      "sourceGlobalBounds": [
+        152,
+        206,
+        365,
+        357
+      ],
+      "sourceSize": [
+        213,
+        151
+      ],
+      "foregroundPixels": 7771,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "db920f3aa16475a5050e9ad8cd30532ba95d99ce4e374afae726800085ee3cab",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        134,
+        216,
+        287,
+        357
+      ],
+      "sourceGlobalBounds": [
+        578,
+        216,
+        731,
+        357
+      ],
+      "sourceSize": [
+        153,
+        141
+      ],
+      "foregroundPixels": 7014,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ce57a6310d86a5831d63834d193a7a938b83be19dfbb63a0fe1b91e858959a57",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        76,
+        228,
+        269,
+        358
+      ],
+      "sourceGlobalBounds": [
+        963,
+        228,
+        1156,
+        358
+      ],
+      "sourceSize": [
+        193,
+        130
+      ],
+      "foregroundPixels": 7102,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "edb3e71b90bb22057dc10c2b35c8275a036c7e619b504ed0a5a916eb2c769667",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        43,
+        233,
+        287,
+        362
+      ],
+      "sourceGlobalBounds": [
+        1373,
+        233,
+        1617,
+        362
+      ],
+      "sourceSize": [
+        244,
+        129
+      ],
+      "foregroundPixels": 6214,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4133a97ffc813cc1243cee24cbdbd803ca877bbb66d6f8527d982e17ca9ea796",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        135,
+        88,
+        378,
+        229
+      ],
+      "sourceGlobalBounds": [
+        135,
+        532,
+        378,
+        673
+      ],
+      "sourceSize": [
+        243,
+        141
+      ],
+      "foregroundPixels": 6072,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8b199493b5b5615977e6a0b41249627c61ee99ba97800748ac6f41998096900b",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        106,
+        98,
+        320,
+        230
+      ],
+      "sourceGlobalBounds": [
+        550,
+        542,
+        764,
+        674
+      ],
+      "sourceSize": [
+        214,
+        132
+      ],
+      "foregroundPixels": 5264,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4e21a214c766445fba71b28713fdb072d87ac1dbbe8c600b455150ca871bebdf",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        54,
+        141,
+        288,
+        232
+      ],
+      "sourceGlobalBounds": [
+        941,
+        585,
+        1175,
+        676
+      ],
+      "sourceSize": [
+        234,
+        91
+      ],
+      "foregroundPixels": 4620,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "63c2b667081a674904f4bdea3888f89255a8649a00906babf3c982a0da2612e4",
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        43,
+        185,
+        297,
+        232
+      ],
+      "sourceGlobalBounds": [
+        1373,
+        629,
+        1627,
+        676
+      ],
+      "sourceSize": [
+        254,
+        47
+      ],
+      "foregroundPixels": 4102,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "36b6cbf671ca481aadee157eed7d0548f1a29fbbce41a1882d1bafe06690779a",
+      "sourceOwnershipTransfers": []
+    }
+  ]
+}

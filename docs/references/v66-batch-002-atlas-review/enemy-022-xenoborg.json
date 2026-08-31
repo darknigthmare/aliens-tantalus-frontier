@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-022-xenoborg",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-022-xenoborg.webp",
+      "atlasSha256": "1b4683a1e4d2d7b8d4997742ff634936615c493b0e5bf975bda3f06c0e3ce122",
+      "metadataSha256": "a97a3ad08571fc9b1a206d49761fe7d281e2b6e2e86fb03e7bc9ab652817b1c9",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-022-xenoborg.jpg",
+      "contactSha256": "e15b1913eadd54b008aeb988aa51793379babda739a13607a463ef735b290125",
+      "frameCount": 40,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

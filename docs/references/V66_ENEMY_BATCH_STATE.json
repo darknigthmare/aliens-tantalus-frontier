@@ -2531,6 +2531,43 @@
       "actualPromptText": "Use case: precise-object-edit. EDIT ONLY THE BOTTOM-LEFT CREATURE'S FORWARD ARM. Image1 is an eight-frame yellow Xenomorph attack sheet. Bottom-left means FIRST CREATURE IN SECOND ROW, fifthpose. Its long straight forward arm reaches outside its square cell into the neighboring cell. This is wrong. Replace THAT ONE ARM ONLY with a short bent-elbow downward claw rake: elbow close to right side of chest, forearm pointing diagonally down-right, hand just in front of the front knee. Hand must end BELOW the mouth, NOT far to its right. Maximum fingertip x = 85percent of FIRST COLUMN width, roughly x380 on a1774wide image. Remove all pixels of the old outstretched arm beyond this point and restore their background to flatMAGENTA. Preserve shoulder connection and normal arm-bone lengths identical to pose4 top-right. Do not change ANY OTHER creature or pose. Do not edit top row. Keep all8frames, eachhead, fulltail, legs, bodyposition, goldcolors, pixelart texture and 4x2 grid exactly. Do not resizeortranslate canvas. FlatpureMAGENTA#FF00FF, no gridlines,text,shadowsorVFX.\n",
       "promptSha256": "b2623346b2500c5ba85c24ca3124006af3656c764fd04a18e18c80bae4e22ea8",
       "referenceLockSha256": "bfe4dd64ba85bd5e61d2d789df2852f395e1aaea494cd8a3861b74ec510d52c9"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-15e080e0-75c2-4d01-b3ff-37f453070551",
+      "actor": "Codex complete_variants",
+      "note": "Candidate revision r4: stronger compact body wind-up and claw contact requested after actual atlas review. Prior r3 retained under rejected/attack-understated-r3.png. Requires renewed visual/continuity review; not accepted or runtime integrated.",
+      "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-020-k-series-yellow-xenomorph/attack-r4.txt",
+      "sourceSha256": "d6e5a210f54637b7f26c43d451ad4788552655daa03268e561adebd627a57e98",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png",
+      "at": "2026-08-31T18:57:18.816Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png",
+      "contractPromptSha256": "a5183536c02250d1e74815d8356673333f62e2420f8e6ca3f330f47a8d6ac943",
+      "actualPromptText": "Use case: identity-preserve\nAsset type: revised authored enemy attack sprite sheet, candidate only.\nInput image 1 is the edit target: the current eight-pose K-Series yellow Warrior attack sheet. Preserve this exact character identity, golden yellow ribbed skull and armor, two arms with claw hands, two digitigrade legs, four dorsal tubes and one segmented tail with the same blade. No queen crest, extra limbs, props, letters or numbers.\nPrimary request: replace the barely visible attack motion with one clearly readable, compact, right-facing claw attack across the same eight cells. Change poses, not character design or source scale. Keep one equal-scale complete character in each of the existing 4 columns x 2 rows. Entire sheet remains exactly 2:1. Each cell has generous empty magenta gutters; the WHOLE BODY INCLUDING TAIL AND CLAW REACH must fit inside 70 percent of its cell width. All eight poses face right. No cell borders or labels.\nEight chronological poses, left to right then bottom row: 1 alert stance; 2 visible wind-up with bent knees, shoulders lowered and striking elbow pulled back; 3 compact deepest anticipation, claws near chest, same natural arm length; 4 release with torso lunging diagonally forward and striking elbow half extended; 5 strongest contact pose with clearly forward-leaning torso and one claw in front of the head, elbow still naturally bent, opposite arm kept near body; 6 arm retracts and torso recoils; 7 rises from the lunge with claws returning; 8 recovers near pose 1. Show one continuous action with anatomy retained between frames, NOT eight idle variations. The effect must come from torso lean and knee compression, never from a stretched forearm or telescoping limb. Do not extend hands into neighboring cells. Keep the long tail fully visible, bent naturally behind the body and never shortened into a stub.\nRendering invariants: same detailed 2D side-view pixel-art shading, material and gold palette as the target, consistent skull length across all poses, no 3D camera rotation, no motion blur, no duplicate poses, no extra character. Empty negative space, including enclosed spaces between arms, torso and legs, is perfectly uniform pure chroma magenta #FF00FF. No dark-purple fill, no magenta markings on the creature, no shadow, no checkerboard. Do not crop any extremity.\n",
+      "promptSha256": "86968ff6769b1d0a9b066e018b2aca236dcefdf49da95958f75cb90d40d508d6",
+      "referenceLockSha256": "bfe4dd64ba85bd5e61d2d789df2852f395e1aaea494cd8a3861b74ec510d52c9"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-c75ddba7-35cc-4d48-a6ae-953b177b9f88",
+      "actor": "Codex finish_source_review",
+      "sourceSha256": "b07698a3c6d9003f9c7ef17c5b1d315f65f812edc79cf2091dd486a2b6cd7b31",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+      "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/death-r4.txt",
+      "candidateSelected": true,
+      "note": "Selected candidate after isolated normalization and individual8pose physical-root inspection. Death opaque pink clues decrease31to21, but residuals remain and the shared pack scale changes0.470338983to0.464435146. Old master preserved at rejected/death-pre-r4.png (SHA5ac18d2a917b208ba42181583051be803b01718b676b683a8130559d4cdc08d8). Physical-root fragment V66_BATCH_002_ANCHORS_C.json awaits root merge; no acceptance or runtime integration.",
+      "at": "2026-08-31T18:57:19.010Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+      "contractPromptSha256": "0950e0c6e8a9cb61d73e3fc1b48fbf7db4a5e17bd5da7c1026aeb66435625e8d",
+      "actualPromptText": "Use case: precise-object-edit\nAsset type: Foundry Crusher death animation sprite sheet, eight poses on a 4-column by 2-row grid.\nInput image 1: EDIT TARGET, the latest eight-pose sheet with a mistakenly opaque white/light-gray checkerboard.\nPrimary request: replace ONLY the entire white/light-gray checkerboard background, including background holes between limbs and tail/body, with one perfectly flat solid RGB magenta #FF00FF matte. Do not render checkerboard or transparency. The subject is already clean neutral black/gunmetal/brown chitin; preserve those exact subject colors and shapes without adding any reflected pink light, pink outlines, magenta rim highlights or tinted anatomy. The pink exists only in the empty backdrop.\nInvariants: keep the same eight authored death poses, same detailed creature identity and rightward facing, same black/bronze palette, exact proportions, head/crest volume, long entire tails, body positions, claws and margins, same canvas 2:1 and four-by-two layout. Every subject pixel should remain visually unchanged except eliminating any remaining unintended pink contamination to match its adjacent neutral chitin. Preserve sharp detailed sprite rendering; do not redraw, stretch, shrink, soften or re-pose the creature.\nOutput: solid perfectly uniform #FF00FF background only; no floor shadows, text, grid lines, labels, border, watermark or extra elements.\n",
+      "promptSha256": "bff7c979543635410ee72c09a7537e5cf9de7b4744a00fbf185e76130ffd541f",
+      "referenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78"
     }
   ]
 }

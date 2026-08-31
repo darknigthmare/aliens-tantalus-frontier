@@ -23,12 +23,14 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def render_profile(batch: str, profile: str) -> list[str]:
+def render_profile(batch: str, profile: str, review_path: str | None = None) -> list[str]:
     if not re.fullmatch(r"batch-[0-9]{3}", batch):
         raise ValueError("Expected batch-NNN")
     if not re.fullmatch(r"enemy-[0-9]{3}-[a-z0-9-]+", profile):
         raise ValueError("Expected a stable enemy profile identifier")
-    review = json.loads(safe_path(f"docs/references/V66_BATCH_{batch[-3:]}_ANCHOR_REVIEW.json").read_text(encoding="utf-8"))
+    review = json.loads(safe_path(review_path or f"docs/references/V66_BATCH_{batch[-3:]}_ANCHOR_REVIEW.json").read_text(encoding="utf-8"))
+    if review.get("batchId") != batch or review.get("coordinates") != "nominal-source-cell":
+        raise ValueError("Review fragment belongs to another batch or coordinate system")
     entry = review["profiles"][profile]
     paths = []
     for clip, record in entry["clips"].items():
@@ -75,5 +77,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch", required=True)
     parser.add_argument("--profile", required=True)
+    parser.add_argument("--review", help="Repository-relative fragment for parallel review; never modifies the shared review")
     args = parser.parse_args()
-    print(json.dumps({"diagnosticContacts": render_profile(args.batch, args.profile), "sourcePixelsModified": 0, "reviewStatesChanged": 0}, indent=2))
+    print(json.dumps({"diagnosticContacts": render_profile(args.batch, args.profile, args.review), "sourcePixelsModified": 0, "reviewStatesChanged": 0}, indent=2))

@@ -1,0 +1,542 @@
+{
+  "schema": 1,
+  "checkedAt": "2026-08-31T19:09:10.331Z",
+  "url": "http://127.0.0.1:4177/docs/references/v66-batch-002-player/index.html",
+  "result": "pass",
+  "profiles": 20,
+  "clips": 87,
+  "poses": 696,
+  "actualPlaybackChecked": true,
+  "nonLoopDeathHeld": true,
+  "facingToggleChecked": true,
+  "mobileOverflow": false,
+  "exceptions": [],
+  "consoleErrors": [],
+  "productionStateWrites": 0,
+  "acceptedAutomatically": 0,
+  "scope": "Local atlas-review player only, not gameplay integration or artistic acceptance",
+  "results": [
+    {
+      "profileId": "enemy-007-praetorian",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-007-praetorian",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-007-praetorian",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-007-praetorian",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-007-praetorian",
+      "clipId": "tail-strike",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "clipId": "tail-strike",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "clipId": "charge",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "clipId": "release",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-014-boiler",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-014-boiler",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-014-boiler",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-014-boiler",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-015-prowler",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-015-prowler",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-015-prowler",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-015-prowler",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-016-burster",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-016-burster",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-016-burster",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-016-burster",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-017-monica-line",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-017-monica-line",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-017-monica-line",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-017-monica-line",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "clipId": "reload",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-023-atarax-ripper",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-023-atarax-ripper",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-023-atarax-ripper",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-023-atarax-ripper",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "clipId": "tail-strike",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "idle",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "move",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "attack",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "death",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "clipId": "charge",
+      "loaded": true,
+      "uniqueRenderedPoses": 8
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-012-carrier",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-012-carrier.webp",
+      "atlasSha256": "77449b7cee8eb04cc838324c5cf434fb9f2076e5ad2e82e622d5a7be02dd0bde",
+      "metadataSha256": "f8aabdf1570aeb947a5cbfffc31d98ab0478721c5b82e04e8ad5320c7bdcfc69",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-012-carrier.jpg",
+      "contactSha256": "ea07f3d93469fec5e92efae0e50613355ec4d5dbce26aa5ccc269ec1f91d0756",
+      "frameCount": 40,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-026-foundry-crusher",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-78dda241-899c-4865-bc22-ff3e48d74db8",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "dc3f53e7fed415b9d6bfa1dbb76c88397fec69c31bcf8bea73f9f20c6d2d10b8",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/rejected/attack-r2-candidate.png",
+  "actualPromptPath": "docs/references/v66-batch-002-prompts/enemy-026-foundry-crusher/attack-r2.txt",
+  "candidateSelected": false,
+  "note": "REJECTED after isolated normalization: attack opaque pink clues34versus32in prior atlas; no measured cleanup gain. Original attack master retained. Source and prompt preserved as honest generation evidence, not imported against current master. No acceptance or runtime integration."
+}

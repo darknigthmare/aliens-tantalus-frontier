@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-016-burster",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
+      "atlasSha256": "117084469086fd567b668fbc46f20b175a55472cd709de98325d71ccb3eaa045",
+      "metadataSha256": "dc714b7756071ed0c06000a84f29d2e0b385f5af7a5ea06f8d542508949e8d0d",
+      "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-016-burster.jpg",
+      "contactSha256": "a5ab573eb683db46d17f44ff3b0883dbe4733eec30777e0cafbd6663ec543b67",
+      "frameCount": 32,
+      "anchorStatus": "pending",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}
