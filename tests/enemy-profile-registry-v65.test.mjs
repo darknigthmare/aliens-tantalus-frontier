@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { ENEMIES } from '../src/content-core-v50.js';
 import { V65_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v65.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
 import {
   ENEMY_PROFILE_REGISTRY_V65,
   READY_ENEMY_PROFILE_REGISTRY_V65,
@@ -159,7 +160,7 @@ test('SPRITE_SHEETS et resolveEnemyVisualProfile exposent automatiquement chaque
     const source = ENEMIES.find((enemy) => enemy.id === profile.profileId);
     assert.equal(resolveEnemyVisualProfile(source).sheetId, profile.asset.sheetId);
   }
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length + READY_ENEMY_PROFILE_REGISTRY_V66.length);
 });
 
 test('le gate de registre rejette les profils inconnus, doublons, plaques partagées et provenance non OpenAI', () => {

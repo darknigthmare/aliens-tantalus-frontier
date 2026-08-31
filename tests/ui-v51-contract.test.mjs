@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { RELEASE } from '../src/content.js';
 
 const appPath = new URL('../src/app.js', import.meta.url);
 const indexPath = new URL('../index.html', import.meta.url);
@@ -75,7 +76,7 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);
   assert.match(html, /href=["']\/styles\.css["']/);
-  assert.match(html, /v65\.0\.0/);
+  assert.ok(html.includes(`v${RELEASE.version}`), 'la version publique doit correspondre à la release');
   assert.doesNotMatch(html, /class="nav-button"[^>]+data-view="(?:editor|codex)"/);
   assert.doesNotMatch(html, /Contrat v1[–-]v61/);
   assert.match(app, /onForge:\s*\(\)\s*=>\s*openForgeContext\(\)/);

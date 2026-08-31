@@ -1,0 +1,2894 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-005-warrior",
+  "subject": "Warrior",
+  "batchId": "batch-001",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://necaonline.com/2017/06/aliens-7-scale-action-figures-ultimate-alien-warrior-1986-assortment/",
+    "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2017/06/51644-Blue3.jpg"
+  ],
+  "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4",
+  "animationFamily": "biped",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-005-warrior.webp",
+  "normalizedSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29",
+  "preview": "assets/openai/sprites/previews/v66/enemy-005-warrior/all.gif",
+  "previewSha256": "095015259483c0af7a45a99967aca80e75ac273f88c2b1a89c1ae1fc9e7460c0",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.445783133,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1.0,
+    "move": 1.0,
+    "attack": 1.0,
+    "death": 1.0
+  },
+  "scaleCalibrationReview": null,
+  "scaleCalibrationEvidence": [],
+  "physicalAnchorReview": {
+    "path": "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json",
+    "sha256": "aaadf6ae692cb48952b3e1453cf57fc9a9e8fc3103e97c80f7253181b060a635",
+    "status": "reviewed",
+    "reviewer": "Codex drone_warrior_art",
+    "reviewedAt": "2026-08-31",
+    "method": "Manually observed posterior hip articulation; root x is its vertical projection. Ground y is complete recovered pose padded bottom (three-pixel extraction guard), except explicitly identified suspended poses using inspected grounded peers in the same source row. Tail, head and claw extrema never determine root x. Cropped offsets include negative source spill bounds.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": true,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 9495,
+    "aaFringePixelCount": 5160,
+    "removedPixelCount": 14655,
+    "sourceProofSha256": "4a00dca000a9be4b617b1be5b58e0da4a6207702cf99b27acdd04394c4db33b7"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/idle.png",
+      "sha256": "d0a230ad54a25e8f3c1b239929e0278aacd84dbebc438ee9a479c3f710d0744d",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "40559e427e544f38cfae305cbaa2f4116c924bd31c1c74b0c86d6de1d60c5305",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 195,
+        "aaFringePixelCount": 478,
+        "strictCoreMaskSha256": "bd5b1efde32f1db7d4bf5bd36359a0d49a2d897de2c08d3b99082eb23bce67e1",
+        "aaFringeMaskSha256": "f2ef6730d43f6768f6884d5f37f6b4ad0fc49d6159ba29fcf9de7e1ef0ce49cd",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          246,
+          3,
+          248
+        ],
+        "removedPixelCount": 673,
+        "removedCoordinatesSha256": "45b8b805b1df2ba7abbaefd0ca59f3bc64b2a3dbe28cb1a1f7d1a9a2543334b2",
+        "removedRgbaSha256": "71c7d65f05bcba1bfee7e1ac368e346986ccddafbc28d80126634d2267817c3a",
+        "sourceRgbaSha256": "4708903189b9ccaef69121f18a9a6269cb47cb2f947ed2e4084037cd986d874b",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/move.png",
+      "sha256": "cc4a12d15f4090a418976e9f35f3dfa137710f7d37ea8b12fcb10efc812ec75a",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "a28d940fa0fc7ff260d86582faebca5baade9f4c4a193ab251fbfe9e4c77ce31",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 2445,
+        "aaFringePixelCount": 1438,
+        "strictCoreMaskSha256": "66da818a192cc03d79ffc97c229dd21a66d496ae322f932f49b4103bab4d6178",
+        "aaFringeMaskSha256": "3e5bbe85b5fba8dd54bf749093d64fd3b677e86e0bb6317cbcb00e22d76ea9f2",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          239,
+          7,
+          241
+        ],
+        "removedPixelCount": 3883,
+        "removedCoordinatesSha256": "27f945f876f778e6ddcd7c4d6109650e8063c406e8dcc1a5579fde9d4bced478",
+        "removedRgbaSha256": "6556ee9ac4669eb78c291fa7bca89bdb2e0644ece07b615e9d45c065f68f27dc",
+        "sourceRgbaSha256": "b42da77016d660125bf82b33483537e8af99059d23f3be0b6f51ff8c9ecb9053",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/attack.png",
+      "sha256": "811b6a7ec66c9dd9f457bd70c2b2d05afb4f4ab9000b507c06b9cccbdebca7fa",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "374379577afe81e79089e0ac8939e4ac0b3506368bd3dba23265fd691648958e",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 467,
+        "aaFringePixelCount": 996,
+        "strictCoreMaskSha256": "9883802de558505b7daf3604464f9a606059e540b65277f0c689030047bc9bf0",
+        "aaFringeMaskSha256": "67c90eb559f591d61a6b220905fc98125bfce4a4a2ac999507e3ed6950e38379",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          235,
+          8,
+          232
+        ],
+        "removedPixelCount": 1463,
+        "removedCoordinatesSha256": "0437803b3256fe97c38d687dc6468623cd3da3f4ce61ac5f4500ae7a98780b4e",
+        "removedRgbaSha256": "ad31eba4d4b4a6c20ce3b96e97096c38e0f2a3f1bedd44c337daab8890943c38",
+        "sourceRgbaSha256": "369d5b66521ed2d1a0872b35b17b146aa95051a8d8d659921ba2d1e2c328192d",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/death.png",
+      "sha256": "c1520aed413cd3dff7dfb54643ca3ed8d5754410d835123a90f410d1ba58be1c",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "19304b4b81056a12622a64ee9ee0e5d075143f32f0c14cca44ce46e1afdc985e",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 6388,
+        "aaFringePixelCount": 2248,
+        "strictCoreMaskSha256": "aa060a7d2315331e7d918e1318159801dca5d8fc5917c9fc0824dc33139af0fb",
+        "aaFringeMaskSha256": "043ad8bf3f717780f01d171c30ebb03b605ceb5adca0555fc9fb17b9aab81c99",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          242,
+          6,
+          239
+        ],
+        "removedPixelCount": 8636,
+        "removedCoordinatesSha256": "6e5e57bd17fa112b4c9698210633375378f9afb00dfa441cc1bcde371c7faf3d",
+        "removedRgbaSha256": "b2e93dac592bcee072f7eb717586292ce2ca24441cf942f5aaddf268052217a8",
+        "sourceRgbaSha256": "bd0e310724d6960615b3b8c1b6c26661e359144aae3e5a4f8a7225e87ecb8dbf",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-005-warrior/idle.webp",
+      "sha256": "40ee6a4b7d68768032b83938c5a7d5835f39a163d8d1b6be9d290b241b9960de",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-005-warrior/idle.gif",
+      "previewSha256": "f6d4648be5df3b9777412894d1c2eeb299949ff7ac92ef90554526cc3a7cb0f1"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-005-warrior/move.webp",
+      "sha256": "97089a7f231a47e666eab7a413fc1da772af071997cf016bb526a7e7c6211650",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-005-warrior/move.gif",
+      "previewSha256": "36296301ce72c4b29a3e66d55a6f3833b3ddc34a31d884d6615b84a951b4cc7f"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-005-warrior/attack.webp",
+      "sha256": "a16187d1565e455756a1d02b9f01653a89747de91e230303a0ad0790e56d1eac",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-005-warrior/attack.gif",
+      "previewSha256": "b54e97280969eb9bac369801ff7a6631a4b28ba046fa8f5925e0bd420dafb697"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-005-warrior/death.webp",
+      "sha256": "cb894fcea7fc9809247e1cc546f2efaa4f5ecd1dd1ae856e34fbd5bb00e771a0",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-005-warrior/death.gif",
+      "previewSha256": "2b4d5c3b71e09d4cc3ae9bb125a57950df1f6beb23068361bb8899dbe584bb80"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        61,
+        37,
+        399,
+        397
+      ],
+      "sourceGlobalBounds": [
+        61,
+        37,
+        399,
+        397
+      ],
+      "sourceSize": [
+        338,
+        360
+      ],
+      "foregroundPixels": 34133,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "11068fe37ca25aed111d5ac8c76c3ee113719d4f9cc8bc4e8b853ac783886bfc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        269,
+        397
+      ],
+      "sourceLandmark": [
+        269,
+        217
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (269,217) on idle pose 0; confirmed on marked source overlay. Padded source floor y=397.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        208.0,
+        360.0
+      ],
+      "renderedAnchor": [
+        127.92307692307692,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        35,
+        80,
+        186,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        40,
+        38,
+        363,
+        398
+      ],
+      "sourceGlobalBounds": [
+        484,
+        38,
+        807,
+        398
+      ],
+      "sourceSize": [
+        323,
+        360
+      ],
+      "foregroundPixels": 33469,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "239bb18cbe9bacca5670b506aebd95eb49599fa1c4357e4080172ef483ceef43",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        250,
+        398
+      ],
+      "sourceLandmark": [
+        250,
+        219
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (250,219) on idle pose 1; confirmed on marked source overlay. Padded source floor y=398.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        210.0,
+        360.0
+      ],
+      "renderedAnchor": [
+        127.62229102167183,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        34,
+        80,
+        178,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        24,
+        38,
+        344,
+        398
+      ],
+      "sourceGlobalBounds": [
+        911,
+        38,
+        1231,
+        398
+      ],
+      "sourceSize": [
+        320,
+        360
+      ],
+      "foregroundPixels": 33858,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "50bea8284fb767634751a7d50adc6a9142c6fa1148dfebd02555c3d0a1ceace0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        228,
+        398
+      ],
+      "sourceLandmark": [
+        228,
+        216
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (228,216) on idle pose 2; confirmed on marked source overlay. Padded source floor y=398.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        204.0,
+        360.0
+      ],
+      "renderedAnchor": [
+        128.1625,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        37,
+        80,
+        180,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        9,
+        38,
+        346,
+        398
+      ],
+      "sourceGlobalBounds": [
+        1339,
+        38,
+        1676,
+        398
+      ],
+      "sourceSize": [
+        337,
+        360
+      ],
+      "foregroundPixels": 34038,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "479e04fe2324790e410e73a62a6c4b0606cfd2deced828ceb614da498009ddca",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        208,
+        398
+      ],
+      "sourceLandmark": [
+        208,
+        220
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (208,220) on idle pose 3; confirmed on marked source overlay. Padded source floor y=398.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        199.0,
+        360.0
+      ],
+      "renderedAnchor": [
+        127.57566765578635,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        39,
+        80,
+        189,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        51,
+        14,
+        373,
+        382
+      ],
+      "sourceGlobalBounds": [
+        51,
+        458,
+        373,
+        826
+      ],
+      "sourceSize": [
+        322,
+        368
+      ],
+      "foregroundPixels": 34240,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6b1386c0600f6a8e9177852b4511915de0931094bdc653d0b6903ec0072a3996",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        255,
+        382
+      ],
+      "sourceLandmark": [
+        255,
+        185
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (255,185) on idle pose 4; confirmed on marked source overlay. Padded source floor y=382.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        204.0,
+        368.0
+      ],
+      "renderedAnchor": [
+        128.2298136645963,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        37,
+        76,
+        181,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        28,
+        19,
+        353,
+        382
+      ],
+      "sourceGlobalBounds": [
+        472,
+        463,
+        797,
+        826
+      ],
+      "sourceSize": [
+        325,
+        363
+      ],
+      "foregroundPixels": 34504,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5123b30c5a860e02a2b80560ced2c4314617882b6b565e0395f0aca1ac6d5958",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        229,
+        382
+      ],
+      "sourceLandmark": [
+        229,
+        192
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (229,192) on idle pose 5; confirmed on marked source overlay. Padded source floor y=382.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        201.0,
+        363.0
+      ],
+      "renderedAnchor": [
+        127.67692307692307,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        38,
+        78,
+        183,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        13,
+        24,
+        345,
+        382
+      ],
+      "sourceGlobalBounds": [
+        900,
+        468,
+        1232,
+        826
+      ],
+      "sourceSize": [
+        332,
+        358
+      ],
+      "foregroundPixels": 33874,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "684897741fea5eca280b4ae4cc11e04ee7cf64bbf5c6f2b5484f063ae31f9c04",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        382
+      ],
+      "sourceLandmark": [
+        231,
+        198
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (231,198) on idle pose 6; confirmed on marked source overlay. Padded source floor y=382.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        358.0
+      ],
+      "renderedAnchor": [
+        128.18072289156626,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        31,
+        80,
+        179,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        0,
+        32,
+        327,
+        382
+      ],
+      "sourceGlobalBounds": [
+        1330,
+        476,
+        1657,
+        826
+      ],
+      "sourceSize": [
+        327,
+        350
+      ],
+      "foregroundPixels": 33318,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a71d6f71e1ea5ac0018ac18449e188ef4d621412bae90c9c6353a00c05c5b86f",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        213,
+        382
+      ],
+      "sourceLandmark": [
+        213,
+        220
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (213,220) on idle pose 7; confirmed on marked source overlay. Padded source floor y=382.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        213.0,
+        350.0
+      ],
+      "renderedAnchor": [
+        128.10091743119267,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        33,
+        84,
+        179,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        34,
+        94,
+        417,
+        403
+      ],
+      "sourceGlobalBounds": [
+        34,
+        94,
+        417,
+        403
+      ],
+      "sourceSize": [
+        383,
+        309
+      ],
+      "foregroundPixels": 28538,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c780ae9e146c58eaddf12c11dbf688a5660e7051b6b58076fd1d60c6051fb7a6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        276,
+        403
+      ],
+      "sourceLandmark": [
+        276,
+        258
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (276,258) on move pose 0; confirmed on marked source overlay. Padded source floor y=403.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        242.0,
+        309.0
+      ],
+      "renderedAnchor": [
+        128.04699738903395,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        20,
+        102,
+        191,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        33,
+        94,
+        375,
+        402
+      ],
+      "sourceGlobalBounds": [
+        477,
+        94,
+        819,
+        402
+      ],
+      "sourceSize": [
+        342,
+        308
+      ],
+      "foregroundPixels": 27195,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8172bac57d84ab364e81629602137b5298700651bc3ece6efdc3e3552d72b4d6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        250,
+        402
+      ],
+      "sourceLandmark": [
+        250,
+        256
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (250,256) on move pose 1; confirmed on marked source overlay. Padded source floor y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        217.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.44444444444446,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        32,
+        103,
+        184,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        35,
+        94,
+        382,
+        402
+      ],
+      "sourceGlobalBounds": [
+        922,
+        94,
+        1269,
+        402
+      ],
+      "sourceSize": [
+        347,
+        308
+      ],
+      "foregroundPixels": 26751,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f02a16dfee7ef7ad9e78e4c853c5d19f1b04b5b14918bed8d309f6c02088aa47",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        239,
+        402
+      ],
+      "sourceLandmark": [
+        239,
+        257
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (239,257) on move pose 2; confirmed on marked source overlay. Padded source floor y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        204.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.12391930835736,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        37,
+        103,
+        192,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        65,
+        94,
+        367,
+        402
+      ],
+      "sourceGlobalBounds": [
+        1395,
+        94,
+        1697,
+        402
+      ],
+      "sourceSize": [
+        302,
+        308
+      ],
+      "foregroundPixels": 25841,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "71780ec83e4f5c4a61a0b563588e41b12235d7db393010c08e79f6530024e2d0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        244,
+        402
+      ],
+      "sourceLandmark": [
+        244,
+        251
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (244,251) on move pose 3; confirmed on marked source overlay. Padded source floor y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        179.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.0165562913907,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        48,
+        103,
+        183,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        60,
+        35,
+        428,
+        325
+      ],
+      "sourceGlobalBounds": [
+        60,
+        479,
+        428,
+        769
+      ],
+      "sourceSize": [
+        368,
+        290
+      ],
+      "foregroundPixels": 26278,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "35322440787897ec81ec2ab0f935c36941c497d275d4e21a6bf1d0d2f8ebcf9e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        278,
+        344
+      ],
+      "sourceLandmark": [
+        278,
+        199
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (278,199) on move pose 4; confirmed on marked source overlay. Padded source floor y=344. Flight phase: source ground copied from same-row contact poses 5/7; 19px gap below padded sprite retained.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        309.0
+      ],
+      "renderedAnchor": [
+        128.1521739130435,
+        240.45172413793102
+      ],
+      "index": 12,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        31,
+        103,
+        195,
+        232
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        61,
+        40,
+        381,
+        344
+      ],
+      "sourceGlobalBounds": [
+        505,
+        484,
+        825,
+        788
+      ],
+      "sourceSize": [
+        320,
+        304
+      ],
+      "foregroundPixels": 25868,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5d26f72102d7b25371b9a1e8922cdb29fb8bfa36aaf5f24ddf2059fbcb45c6b8",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        262,
+        344
+      ],
+      "sourceLandmark": [
+        262,
+        209
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (262,209) on move pose 5; confirmed on marked source overlay. Padded source floor y=344.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        201.0,
+        304.0
+      ],
+      "renderedAnchor": [
+        127.821875,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        38,
+        104,
+        181,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -4,
+        39,
+        382,
+        343
+      ],
+      "sourceGlobalBounds": [
+        883,
+        483,
+        1269,
+        787
+      ],
+      "sourceSize": [
+        386,
+        304
+      ],
+      "foregroundPixels": 27824,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cca5d2c3928a28faa28523cfdcb4a9e055b4038128d2977903575a08f4887286",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 7,
+          "componentPixels": 27746,
+          "ownerShare": 0.999748,
+          "sourceBoundsGlobal": [
+            886,
+            486,
+            1264,
+            784
+          ],
+          "rgbaSha256": "159a2e98929fbcae85f5f462fdb2ba36b15234131b05147510cd35ed5d0f2cc5",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        245,
+        343
+      ],
+      "sourceLandmark": [
+        245,
+        203
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (245,203) on move pose 6; confirmed on marked source overlay. Padded source floor y=343.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        249.0,
+        304.0
+      ],
+      "renderedAnchor": [
+        127.95336787564767,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        17,
+        104,
+        189,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        10,
+        45,
+        356,
+        344
+      ],
+      "sourceGlobalBounds": [
+        1340,
+        489,
+        1686,
+        788
+      ],
+      "sourceSize": [
+        346,
+        299
+      ],
+      "foregroundPixels": 26676,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "378e164c3d07cc2c476b530e527ba93731d63186acc012636e6f502f8184a236",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        233,
+        344
+      ],
+      "sourceLandmark": [
+        233,
+        209
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (233,209) on move pose 7; confirmed on marked source overlay. Padded source floor y=344.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        223.0,
+        299.0
+      ],
+      "renderedAnchor": [
+        128.25433526011562,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        29,
+        107,
+        183,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        49,
+        131,
+        375,
+        410
+      ],
+      "sourceGlobalBounds": [
+        49,
+        131,
+        375,
+        410
+      ],
+      "sourceSize": [
+        326,
+        279
+      ],
+      "foregroundPixels": 28841,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f4337254333537510bf616b8526d1d46a070f1ea41d3755886113654c8b26efc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        410
+      ],
+      "sourceLandmark": [
+        226,
+        279
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (226,279) on attack pose 0; confirmed on marked source overlay. Padded source floor y=410.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        177.0,
+        279.0
+      ],
+      "renderedAnchor": [
+        127.72699386503068,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        49,
+        116,
+        194,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        27,
+        89,
+        370,
+        410
+      ],
+      "sourceGlobalBounds": [
+        471,
+        89,
+        814,
+        410
+      ],
+      "sourceSize": [
+        343,
+        321
+      ],
+      "foregroundPixels": 32588,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3fbffdf98fddc2ceeef9833471c831b17cc6979a3ba28f665e1982313ca63bb0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        197,
+        410
+      ],
+      "sourceLandmark": [
+        197,
+        277
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (197,277) on attack pose 1; confirmed on marked source overlay. Padded source floor y=410.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        170.0,
+        321.0
+      ],
+      "renderedAnchor": [
+        127.83090379008746,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        52,
+        97,
+        205,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        29,
+        93,
+        445,
+        411
+      ],
+      "sourceGlobalBounds": [
+        916,
+        93,
+        1332,
+        411
+      ],
+      "sourceSize": [
+        416,
+        318
+      ],
+      "foregroundPixels": 29090,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2d94602588a8b8438c009ff728e5af6a10b7c77af174368cb685fa7ff74b8a24",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        201,
+        411
+      ],
+      "sourceLandmark": [
+        201,
+        279
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (201,279) on attack pose 2; confirmed on marked source overlay. Padded source floor y=411.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        172.0,
+        318.0
+      ],
+      "renderedAnchor": [
+        128.4903846153846,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        52,
+        98,
+        237,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -22,
+        152,
+        392,
+        412
+      ],
+      "sourceGlobalBounds": [
+        1308,
+        152,
+        1722,
+        412
+      ],
+      "sourceSize": [
+        414,
+        260
+      ],
+      "foregroundPixels": 28273,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6b500c0c05bc3e2fda3e38e3e9aa2ed0c08d7410c7640ccf04eb174a63c3c22d",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 934,
+          "componentPixels": 28235,
+          "ownerShare": 0.96692,
+          "sourceBoundsGlobal": [
+            1311,
+            155,
+            1716,
+            409
+          ],
+          "rgbaSha256": "4f2651a96d7d49b7d798c05bcb42ad598c56517bda44f881112782d735167257",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        170,
+        412
+      ],
+      "sourceLandmark": [
+        170,
+        291
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (170,291) on attack pose 3; confirmed on marked source overlay. Padded source floor y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        192.0,
+        260.0
+      ],
+      "renderedAnchor": [
+        127.79710144927536,
+        240.0
+      ],
+      "index": 19,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        42,
+        124,
+        227,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        59,
+        78,
+        428,
+        345
+      ],
+      "sourceGlobalBounds": [
+        59,
+        522,
+        428,
+        789
+      ],
+      "sourceSize": [
+        369,
+        267
+      ],
+      "foregroundPixels": 29681,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5b6dd1f82ec1d858df1b5883cd577b2870a8d68bbd388d723422b4b21f4bc153",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        236,
+        345
+      ],
+      "sourceLandmark": [
+        236,
+        223
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (236,223) on attack pose 4; confirmed on marked source overlay. Padded source floor y=345.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        177.0,
+        267.0
+      ],
+      "renderedAnchor": [
+        127.66666666666667,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        49,
+        121,
+        213,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        27,
+        54,
+        352,
+        351
+      ],
+      "sourceGlobalBounds": [
+        471,
+        498,
+        796,
+        795
+      ],
+      "sourceSize": [
+        325,
+        297
+      ],
+      "foregroundPixels": 30186,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3b26031001796169cfb1924ac56b97b630011a811e53c2c4818d812441cf71b5",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        215,
+        351
+      ],
+      "sourceLandmark": [
+        215,
+        212
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (215,212) on attack pose 5; confirmed on marked source overlay. Padded source floor y=351.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        188.0,
+        297.0
+      ],
+      "renderedAnchor": [
+        127.87692307692308,
+        240.0
+      ],
+      "index": 21,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        44,
+        108,
+        189,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        5,
+        49,
+        327,
+        353
+      ],
+      "sourceGlobalBounds": [
+        892,
+        493,
+        1214,
+        797
+      ],
+      "sourceSize": [
+        322,
+        304
+      ],
+      "foregroundPixels": 30530,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "797b6e4dbde5a73f1260f24a9b6986b5d94f6cd4275e9e06b0dd1ec5dd97dd40",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        186,
+        353
+      ],
+      "sourceLandmark": [
+        186,
+        215
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (186,215) on attack pose 6; confirmed on marked source overlay. Padded source floor y=353.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        181.0,
+        304.0
+      ],
+      "renderedAnchor": [
+        127.94409937888199,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        47,
+        104,
+        191,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -16,
+        61,
+        302,
+        353
+      ],
+      "sourceGlobalBounds": [
+        1314,
+        505,
+        1632,
+        797
+      ],
+      "sourceSize": [
+        318,
+        292
+      ],
+      "foregroundPixels": 28992,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bee0c5f45b402ce0e159e9d40136fcfc3050c6e1ac757b7b7b2ef6e1d4f62c3f",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 600,
+          "componentPixels": 28938,
+          "ownerShare": 0.979266,
+          "sourceBoundsGlobal": [
+            1317,
+            508,
+            1629,
+            794
+          ],
+          "rgbaSha256": "1251901b7d31597f96348c9302e14d541766bad03e5103ac6467a6909a212582",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        168,
+        353
+      ],
+      "sourceLandmark": [
+        168,
+        219
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (168,219) on attack pose 7; confirmed on marked source overlay. Padded source floor y=353.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        184.0,
+        292.0
+      ],
+      "renderedAnchor": [
+        128.1635220125786,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        46,
+        110,
+        188,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        69,
+        76,
+        370,
+        439
+      ],
+      "sourceGlobalBounds": [
+        69,
+        76,
+        370,
+        439
+      ],
+      "sourceSize": [
+        301,
+        363
+      ],
+      "foregroundPixels": 34160,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d5a9f3abb74c4e4f050566baa1ee7565612ebdf44a9d8b792c5fbb5e744555d4",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        254,
+        439
+      ],
+      "sourceLandmark": [
+        254,
+        254
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (254,254) on death pose 0; confirmed on marked source overlay. Padded source floor y=439.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        185.0,
+        363.0
+      ],
+      "renderedAnchor": [
+        128.35880398671097,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        46,
+        78,
+        180,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        12,
+        164,
+        339,
+        438
+      ],
+      "sourceGlobalBounds": [
+        456,
+        164,
+        783,
+        438
+      ],
+      "sourceSize": [
+        327,
+        274
+      ],
+      "foregroundPixels": 31631,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a00ed130af2e5ccb75666241ac17dfccaa27faf9cddead923ffba67bf5f119f6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        188,
+        438
+      ],
+      "sourceLandmark": [
+        188,
+        325
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (188,325) on death pose 1; confirmed on marked source overlay. Padded source floor y=438.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        176.0,
+        274.0
+      ],
+      "renderedAnchor": [
+        127.58103975535168,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        49,
+        118,
+        195,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        18,
+        222,
+        356,
+        438
+      ],
+      "sourceGlobalBounds": [
+        905,
+        222,
+        1243,
+        438
+      ],
+      "sourceSize": [
+        338,
+        216
+      ],
+      "foregroundPixels": 28393,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "400a1731d79096a1f03d2474c5952861dad070932d6327847650f6e98ed1f9f5",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        184,
+        438
+      ],
+      "sourceLandmark": [
+        184,
+        374
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (184,374) on death pose 2; confirmed on marked source overlay. Padded source floor y=438.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        166.0,
+        216.0
+      ],
+      "renderedAnchor": [
+        128.15976331360946,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        54,
+        144,
+        205,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        18,
+        268,
+        375,
+        465
+      ],
+      "sourceGlobalBounds": [
+        1348,
+        268,
+        1705,
+        465
+      ],
+      "sourceSize": [
+        357,
+        197
+      ],
+      "foregroundPixels": 26929,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "502d6a4df88934d58054761672b5023e69e5101625e6f66d681a3b8329e77dd6",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            7
+          ],
+          "pixels": 790,
+          "componentPixels": 26892,
+          "ownerShare": 0.970623,
+          "sourceBoundsGlobal": [
+            1351,
+            271,
+            1702,
+            462
+          ],
+          "rgbaSha256": "318a78bf93811afa5c635b8eaa3c2a3efbe6f24d2b357ab151f63616abc2e7cd",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        164,
+        465
+      ],
+      "sourceLandmark": [
+        164,
+        385
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (164,385) on death pose 3; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=465.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        146.0,
+        197.0
+      ],
+      "renderedAnchor": [
+        128.02521008403363,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        63,
+        152,
+        222,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        49,
+        182,
+        428,
+        363
+      ],
+      "sourceGlobalBounds": [
+        49,
+        626,
+        428,
+        807
+      ],
+      "sourceSize": [
+        379,
+        181
+      ],
+      "foregroundPixels": 29202,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bc21be7ee67a9e079e081288bba5ce8087c8674092a00c1630b8ce673986d3d7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        193,
+        363
+      ],
+      "sourceLandmark": [
+        193,
+        285
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (193,285) on death pose 4; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=363.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        144.0,
+        181.0
+      ],
+      "renderedAnchor": [
+        128.21108179419525,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        64,
+        159,
+        233,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        32,
+        202,
+        381,
+        361
+      ],
+      "sourceGlobalBounds": [
+        476,
+        646,
+        825,
+        805
+      ],
+      "sourceSize": [
+        349,
+        159
+      ],
+      "foregroundPixels": 27019,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cde67b7fe2d245265949bc03f23ce83741bf0c49295621ebe1f960b41771a91a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        154,
+        361
+      ],
+      "sourceLandmark": [
+        154,
+        284
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (154,284) on death pose 5; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        122.0,
+        159.0
+      ],
+      "renderedAnchor": [
+        127.53295128939828,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        73,
+        169,
+        229,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        32,
+        240,
+        389,
+        361
+      ],
+      "sourceGlobalBounds": [
+        919,
+        684,
+        1276,
+        805
+      ],
+      "sourceSize": [
+        357,
+        121
+      ],
+      "foregroundPixels": 25601,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "90a0f3a9e355a201aed8e6e0a07fde14d9cae116d74d2b06ddb700d7e187930f",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        163,
+        361
+      ],
+      "sourceLandmark": [
+        163,
+        291
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (163,291) on death pose 6; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        131.0,
+        121.0
+      ],
+      "renderedAnchor": [
+        128.34453781512605,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        70,
+        186,
+        229,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        31,
+        13,
+        384,
+        361
+      ],
+      "sourceGlobalBounds": [
+        1361,
+        457,
+        1714,
+        805
+      ],
+      "sourceSize": [
+        353,
+        348
+      ],
+      "foregroundPixels": 24716,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "32a1f6d6e5e10bdbd19e7f0aeccacb528bd69991c07287109ec3b26b7c0d581b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        169,
+        361
+      ],
+      "sourceLandmark": [
+        169,
+        295
+      ],
+      "sourceAnchorEvidence": "posterior hip articulation observed at (169,295) on death pose 7; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        138.0,
+        348.0
+      ],
+      "renderedAnchor": [
+        128.37677053824362,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.445783133,
+      "sourceScale": 1.0,
+      "appliedScale": 0.445783133,
+      "renderedBounds": [
+        67,
+        85,
+        224,
+        240
+      ]
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          36,
+          81,
+          185,
+          239
+        ],
+        "foregroundPixels": 7565,
+        "width": 149,
+        "height": 158,
+        "relativeToRowMedian": 1.008465
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          35,
+          81,
+          177,
+          239
+        ],
+        "foregroundPixels": 7392,
+        "width": 142,
+        "height": 158,
+        "relativeToRowMedian": 0.985403
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          38,
+          81,
+          179,
+          239
+        ],
+        "foregroundPixels": 7463,
+        "width": 141,
+        "height": 158,
+        "relativeToRowMedian": 0.994868
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          40,
+          81,
+          188,
+          239
+        ],
+        "foregroundPixels": 7540,
+        "width": 148,
+        "height": 158,
+        "relativeToRowMedian": 1.005132
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          38,
+          77,
+          180,
+          239
+        ],
+        "foregroundPixels": 7608,
+        "width": 142,
+        "height": 162,
+        "relativeToRowMedian": 1.003694
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          39,
+          79,
+          182,
+          239
+        ],
+        "foregroundPixels": 7674,
+        "width": 143,
+        "height": 160,
+        "relativeToRowMedian": 1.012401
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          32,
+          81,
+          178,
+          239
+        ],
+        "foregroundPixels": 7552,
+        "width": 146,
+        "height": 158,
+        "relativeToRowMedian": 0.996306
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          34,
+          85,
+          178,
+          239
+        ],
+        "foregroundPixels": 7412,
+        "width": 144,
+        "height": 154,
+        "relativeToRowMedian": 0.977836
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          21,
+          103,
+          190,
+          239
+        ],
+        "foregroundPixels": 6390,
+        "width": 169,
+        "height": 136,
+        "relativeToRowMedian": 1.068026
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          33,
+          104,
+          183,
+          239
+        ],
+        "foregroundPixels": 6006,
+        "width": 150,
+        "height": 135,
+        "relativeToRowMedian": 1.003844
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          38,
+          104,
+          191,
+          239
+        ],
+        "foregroundPixels": 5960,
+        "width": 153,
+        "height": 135,
+        "relativeToRowMedian": 0.996156
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          49,
+          104,
+          182,
+          239
+        ],
+        "foregroundPixels": 5712,
+        "width": 133,
+        "height": 135,
+        "relativeToRowMedian": 0.954705
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          32,
+          104,
+          194,
+          231
+        ],
+        "foregroundPixels": 5809,
+        "width": 162,
+        "height": 127,
+        "relativeToRowMedian": 0.992313
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          39,
+          105,
+          180,
+          239
+        ],
+        "foregroundPixels": 5758,
+        "width": 141,
+        "height": 134,
+        "relativeToRowMedian": 0.983601
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          18,
+          105,
+          188,
+          239
+        ],
+        "foregroundPixels": 6204,
+        "width": 170,
+        "height": 134,
+        "relativeToRowMedian": 1.059788
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          30,
+          108,
+          182,
+          239
+        ],
+        "foregroundPixels": 5899,
+        "width": 152,
+        "height": 131,
+        "relativeToRowMedian": 1.007687
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          50,
+          117,
+          193,
+          239
+        ],
+        "foregroundPixels": 6388,
+        "width": 143,
+        "height": 122,
+        "relativeToRowMedian": 0.988243
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          53,
+          98,
+          204,
+          239
+        ],
+        "foregroundPixels": 7267,
+        "width": 151,
+        "height": 141,
+        "relativeToRowMedian": 1.124226
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          53,
+          99,
+          236,
+          239
+        ],
+        "foregroundPixels": 6540,
+        "width": 183,
+        "height": 140,
+        "relativeToRowMedian": 1.011757
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          43,
+          125,
+          226,
+          239
+        ],
+        "foregroundPixels": 6347,
+        "width": 183,
+        "height": 114,
+        "relativeToRowMedian": 0.9819
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          50,
+          122,
+          212,
+          239
+        ],
+        "foregroundPixels": 6622,
+        "width": 162,
+        "height": 117,
+        "relativeToRowMedian": 0.993697
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          45,
+          109,
+          188,
+          239
+        ],
+        "foregroundPixels": 6706,
+        "width": 143,
+        "height": 130,
+        "relativeToRowMedian": 1.006303
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          48,
+          105,
+          190,
+          239
+        ],
+        "foregroundPixels": 6838,
+        "width": 142,
+        "height": 134,
+        "relativeToRowMedian": 1.02611
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          47,
+          111,
+          187,
+          239
+        ],
+        "foregroundPixels": 6458,
+        "width": 140,
+        "height": 128,
+        "relativeToRowMedian": 0.969088
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          47,
+          79,
+          179,
+          239
+        ],
+        "foregroundPixels": 7552,
+        "width": 132,
+        "height": 160,
+        "relativeToRowMedian": 1.153241
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          50,
+          119,
+          194,
+          239
+        ],
+        "foregroundPixels": 6917,
+        "width": 144,
+        "height": 120,
+        "relativeToRowMedian": 1.056272
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          55,
+          145,
+          204,
+          239
+        ],
+        "foregroundPixels": 6180,
+        "width": 149,
+        "height": 94,
+        "relativeToRowMedian": 0.943728
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          64,
+          153,
+          221,
+          239
+        ],
+        "foregroundPixels": 5867,
+        "width": 157,
+        "height": 86,
+        "relativeToRowMedian": 0.89593
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          65,
+          160,
+          232,
+          239
+        ],
+        "foregroundPixels": 6346,
+        "width": 167,
+        "height": 79,
+        "relativeToRowMedian": 1.128981
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          74,
+          170,
+          228,
+          239
+        ],
+        "foregroundPixels": 5795,
+        "width": 154,
+        "height": 69,
+        "relativeToRowMedian": 1.030955
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          71,
+          187,
+          228,
+          239
+        ],
+        "foregroundPixels": 5447,
+        "width": 157,
+        "height": 52,
+        "relativeToRowMedian": 0.969045
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          68,
+          86,
+          223,
+          239
+        ],
+        "foregroundPixels": 5232,
+        "width": 155,
+        "height": 153,
+        "relativeToRowMedian": 0.930795
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      7501.5,
+      7580.0,
+      5983.0,
+      5854.0,
+      6464.0,
+      6664.0,
+      6548.5,
+      5621.0
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "ce3577eaac60e47ded226d6b460222422abf73b8b5e11e0c8bd1a740b86f762c",
+      "e21ddc45c804a7e4aac37a57eab87bacc1ea572ae7fcb28545b7463ee94e7c5f",
+      "ef11607e64fd87197297987540594234fd68c533aa8ce29f24b5d17b8d76ccda",
+      "d069213dc0ba6ddbac9def4805b3161e28a6c1011599cc7513a3f15fb6132458",
+      "d21eade528e613bb4a82d865929b6f78ac79b14b14faab9ab7c823f959522113",
+      "abd97cd6620ec3174589e1fcf35716812b9582b5a18854f86fdab205b373a90b",
+      "a9c48f06a401a76e6585b9470d25cc15d44d149bbd9d4bfe582893a88aa0e91c",
+      "27c1d3f0823df0794f53f48283ea8b71fb5bf67c58f7d2dcd74526d9ec137e06",
+      "4d7b310f18350783c51640d3f8e92c6b1e70cd989b6a2e13aa313250c88c17b9",
+      "59107b329280ff697a81c1836ec34b53e7fcaddd7078f1fce5590ab704628b03",
+      "ad4a6afd9d01dc7e674b52af7fa31131754d15a28c43c0a825daf9d59c794b61",
+      "b620b7e69e2b9c2b8951784fcab0b57949e14f8d947a6b7cbf18ab539d5308c8",
+      "b32cdcf24bdad6631ea7069e67d957a5deb76b6b2b171b4ac27e237306c79fa3",
+      "d2930f76149f5126604a3744b0560f26d39729dd22c510e53d5ba9f391a23cae",
+      "ac814c8976ecd39a863f8809dd72e7494225b661b90693a261d7006593e28eb0",
+      "9e4e8a0b93fb9b4ce6b328085add7690cf11084b36b382e361c5e8c5ce982610",
+      "32b6c7fe67853e89aee66572b65c0fe03f3d7c4773e8df6d2b39f46c7d760397",
+      "c9fb2a59aa6a40b4a3cc7cf38a5e70629246bef4e8553e24d76989e8257606b0",
+      "d6bb49f40305042a49a9433ba88daa0bb7f070b9b1cb54c9af0a65d7f7af8a8d",
+      "da574f53b30fcd2ab57894b8abec9010067a063f680ed36aaf0b8085261808fe",
+      "c0f72b0bfc539ca6aaa64a7724050e9f15384c3c5f2343b294b850964bbcf4d0",
+      "601fad7ce6a1ac25f00146122ccb32b7208c023533ce785b57571c946b4d2335",
+      "71b95a722d1e91d9b4b5f265ba34da63c4db722048cdd7f64e84de6031a27ed0",
+      "9b928b9e8f82f400ab49ea9ada31ef217a63c7576fa4bb45677687014b03c057",
+      "27017044d6a5b82afe2b86fc94b9469754d1592220feb04461f52d22b8fb04b1",
+      "b8873d8dde55aeeb3e8d0af68f0ad6f82ad955d4f2bfc69fe46cf8361f4343a3",
+      "3c7df15de9c5b1438909a86da42af040ce965b22efdf9debb7bbc16d40d51051",
+      "85e6ab80b090c9a9e94521f15a44022eda50e2370e4153d6740135973b3d244a",
+      "183e5f68923ed4a75e7bf4cfc376742c0594e781bc0be6193ddc0b9b004da3a6",
+      "d7b3c55cd92e162e8cf7bceaead09759b008e288e519d33c5e932741f09e0053",
+      "77fc1ed57c3a519e53c7696e5f2a30648857fd46bf4759319832235b64ef9690",
+      "ff3d90adf13975930ab86c8850095a50c46fb285573668d411ebc2b108b0a2c6"
+    ],
+    "visualFidelityCertified": false
+  }
+}

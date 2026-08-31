@@ -193,10 +193,11 @@ test('le comparateur humain refuse toute hauteur absente, non vérifiée ou sans
 });
 
 test('les vignettes utilisent les résolveurs existants et exposent leur cellule idle réelle', () => {
+  const dedicatedDrone = resolveSpriteSheet('enemy.profile.enemy-004-drone-big-chap.v66');
   const cases = [
     [idStartingWith(WEAPONS, 'weapon-008-'), 'weapon.m39-submachine-gun.action', 'idle', [0, 1, 2, 3]],
     [idStartingWith(EQUIPMENT, 'equipment-001-'), 'equipment.m314-motion-tracker.use', 'packed', [0]],
-    [idStartingWith(ENEMIES, 'enemy-004-'), 'enemy.xenomorph-big-chap.action.v56', 'idle', [0, 1, 2, 3]],
+    [idStartingWith(ENEMIES, 'enemy-004-'), dedicatedDrone?.id || 'enemy.xenomorph-big-chap.action.v56', 'idle', dedicatedDrone ? [0, 1, 2, 3, 4, 5, 6, 7] : [0, 1, 2, 3]],
     [idStartingWith(VEHICLES, 'vehicle-005-'), 'vehicle.m40-ridgeway-heavy-tank.action.v56', 'idle', [0, 1, 2, 3]]
   ];
   for (const [id, sheetId, clipId, frames] of cases) {

@@ -1,4 +1,4 @@
-import { SPRITE_SHEETS, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
+import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
 import {
   advanceEnemyMeleeAttackV64,
@@ -24,6 +24,8 @@ import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56
 import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door-art-v58.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
+import { updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
+import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -45,6 +47,8 @@ const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
   'enemy-action-v54',
   'enemy-action-v56',
   'facehugger-action-v65',
+  'enemy-action-v66',
+  'ovomorph-cycle-v66',
   'ovomorph-cycle-v55',
   'newborn-action-v64',
   'offspring-action-v64',
@@ -444,7 +448,13 @@ export class GameEngine {
     const royal = isRoyalEnemyProfile(source) || spriteKey === 'xenoQueen';
     const isBoss = Boolean(boss);
     const biology = source.biology || 'xenomorph';
-    const physical = V64_ENEMY_PHYSICS[spriteKey];
+    const profileSheet = visual.wave === 'v66' || visual.sheetId === 'enemy.profile.enemy-002-facehugger.v65'
+      ? resolveSpriteSheet(visual.sheetId) : null;
+    const profileBody = profileSheet && SPRITE_HITBOXES[profileSheet.hitbox];
+    const physical = profileBody ? {
+      width: profileBody.width * profileSheet.renderWidth / profileSheet.cellWidth,
+      height: profileBody.height * profileSheet.renderHeight / profileSheet.cellHeight
+    } : V64_ENEMY_PHYSICS[spriteKey];
     const height = physical?.height ?? (royal ? 112 : biology === 'xenomorph' ? 74 : 88);
     const width = physical?.width ?? (royal ? 82 : biology === 'xenomorph' ? 52 : 42);
     const baseHealth = Number(source.health) || 80;
@@ -818,6 +828,8 @@ export class GameEngine {
   }
 
   updateEnemy(enemy, delta) {
+    if (updateOvomorphCycleV66(this, enemy, delta)) return;
+    if (updateEnemyBatchCombatV66(this, enemy, delta)) return;
     if (updateFacehuggerCombatV65(this, enemy, delta)) return;
     if (!enemy.alive) return;
     enemy.attackClock -= delta;
@@ -2000,7 +2012,7 @@ export class GameEngine {
       row = enemy.alive ? enemy.hurtClock > 0 ? 0 : enemy.attacking ? 2 : enemy.alert ? 1 : 0 : 3;
       const fps = row === 0 ? 4 : row === 3 ? 7 : 10;
       frame = Math.floor(this.animationTime * fps) % 4;
-      if (dedicatedEnemySheet.clipSet === 'facehugger-action-v65') {
+      if (['facehugger-action-v65', 'enemy-action-v66', 'ovomorph-cycle-v66'].includes(dedicatedEnemySheet.clipSet)) {
         this.enemyFallbackAnimationV65 ||= new SpriteAnimationController();
         const sample = this.enemyFallbackAnimationV65.sample(
           enemy.id, resolveEnemyAnimation(enemy), this.animationTime, { emit: false }

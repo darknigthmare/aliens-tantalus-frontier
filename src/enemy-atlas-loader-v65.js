@@ -1,8 +1,21 @@
+import { ENEMY_PROFILE_REGISTRY_V65, buildEnemyProfileSpriteSheetsV65 } from './enemy-profile-registry-v65.js';
+import { ENEMY_PROFILE_REGISTRY_V66, buildEnemyProfileSpriteSheetsV66 } from './enemy-profile-registry-v66.js';
+
 export const DEFAULT_ENEMY_ATLAS_CACHE_LIMIT_V65 = 12;
 export const ENEMY_ATLAS_RETRY_BASE_MS_V65 = 1000;
 export const ENEMY_ATLAS_RETRY_MAX_MS_V65 = 30000;
 
 const imageReady = (image) => Boolean(image?.complete && (image.naturalWidth || image.width) > 0);
+
+export function getEnemyAtlasSheetsForWorldV66(worldId, {
+  registryV65 = ENEMY_PROFILE_REGISTRY_V65, registryV66 = ENEMY_PROFILE_REGISTRY_V66
+} = {}) {
+  const id = String(worldId || '').trim();
+  if (!id) return Object.freeze([]);
+  const select = (registry) => registry.filter((profile) => profile.ready && profile.asset && profile.encounterWorldIds.includes(id));
+  const sheets = [...Object.values(buildEnemyProfileSpriteSheetsV65(select(registryV65))), ...Object.values(buildEnemyProfileSpriteSheetsV66(select(registryV66)))];
+  return Object.freeze([...new Map(sheets.map((sheet) => [sheet.imageKey, sheet])).values()]);
+}
 
 export class EnemyAtlasLRUV65 {
   constructor({ imageStore = new Map(), maxEntries = DEFAULT_ENEMY_ATLAS_CACHE_LIMIT_V65, ImageCtor = globalThis.Image, now = () => Date.now() } = {}) {
@@ -135,6 +148,14 @@ export class EnemyAtlasLRUV65 {
     });
     await Promise.all(workers);
     return this.snapshot();
+  }
+
+  async preloadWorld(worldId, options = {}) {
+    // An explicit world request warms only reviewed profiles assigned there;
+    // mission visibility still drives the LRU's normal on-demand loading.
+    const sheets = getEnemyAtlasSheetsForWorldV66(worldId, options);
+    await this.preload(sheets, { concurrency: options.concurrency || 4 });
+    return Object.freeze({ worldId: String(worldId || ''), selectedSheets: Object.freeze(sheets.map((sheet) => sheet.id)), ...this.snapshot() });
   }
 
   snapshot() {

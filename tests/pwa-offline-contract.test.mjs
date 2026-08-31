@@ -15,6 +15,7 @@ import { MISSION_INTERACTIVE_ART_FILES_V56 } from '../src/mission-interactive-ar
 import { HUB_ROOM_FAR_ASSETS_V58, HUB_ROOM_MID_ASSETS_V58 } from '../src/hub-art-runtime-v58.js';
 import { MISSION_DOOR_ATLAS_V58 } from '../src/mission-door-art-v58.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
 
 const relativeImports = (source) => {
   const imports = [];
@@ -30,7 +31,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v65 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
+test('le cache hors-ligne v66 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -79,7 +80,7 @@ test('le cache hors-ligne v65 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, modulePath), `${modulePath} manque dans CORE v62`);
   }
 
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length + READY_ENEMY_PROFILE_REGISTRY_V66.length);
   for (const sheet of Object.values(SPRITE_SHEETS)) await access(localPath(sheet.path));
   assert.match(worker, /const SPRITE_MANIFEST = ['"]\/assets\/openai\/sprites\/manifest\.json['"]/);
   assert.match(worker, /const SHELL = Object\.freeze\(CORE\.filter/);
@@ -130,7 +131,7 @@ test('le cache hors-ligne v65 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v65-shell-2['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v66-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',

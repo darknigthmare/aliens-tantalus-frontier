@@ -1,5 +1,7 @@
 import { GameEngine as ProductionBaseEngine } from './game-production-base.js';
 import { FACEHUGGER_COMBAT_V65, isFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
+import { captureEnemyBatchCombatResumeV66, restoreEnemyBatchCombatResumeV66 } from './enemy-batch-combat-v66.js';
+import { captureOvomorphCycleResumeV66, prepareOvomorphResumeChildrenV66, restoreOvomorphCycleResumeV66 } from './enemy-ovomorph-cycle-v66.js';
 
 export * from './game-production-base.js';
 
@@ -196,6 +198,8 @@ export class GameEngine extends ProductionBaseEngine {
         revealed: bounded(enemy.revealed, 0, 0, 120),
         captured: Boolean(enemy.captured),
         deathClock: bounded(enemy.deathClock, 0, 0, 30),
+        ...captureEnemyBatchCombatResumeV66(enemy),
+        ...captureOvomorphCycleResumeV66(enemy),
         ...(isFacehuggerCombatV65(enemy) ? {
           attackClock: bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown),
           facehuggerAttackActiveV65: Boolean(enemy.facehuggerAttackV65)
@@ -276,6 +280,7 @@ export class GameEngine extends ProductionBaseEngine {
       restored += 1;
     }
 
+    prepareOvomorphResumeChildrenV66(this, asList(rawState.enemies));
     const enemiesById = new Map(asList(this.enemies).map((enemy) => [enemy.id, enemy]));
     for (const source of asList(rawState.enemies)) {
       const enemy = enemiesById.get(source?.id);
@@ -289,6 +294,8 @@ export class GameEngine extends ProductionBaseEngine {
       enemy.alive = source.alive !== false && !enemy.captured;
       enemy.health = enemy.alive ? bounded(source.health, enemy.health, 1, enemy.maxHealth) : 0;
       enemy.deathClock = enemy.alive ? 0 : bounded(source.deathClock, enemy.deathClock || 0, 0, 30);
+      restoreEnemyBatchCombatResumeV66(enemy, source);
+      restoreOvomorphCycleResumeV66(enemy, source);
       if (isFacehuggerCombatV65(enemy)) {
         // A saved leap resumes at rest: never replay its target lock or impact.
         const existingCooldown = bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown);

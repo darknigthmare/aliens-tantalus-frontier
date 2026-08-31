@@ -19,6 +19,8 @@ import {
   selectVentExitV62
 } from './vent-network-v62.js';
 import { cancelFacehuggerAttackV65 } from './enemy-facehugger-combat-v65.js';
+import { cancelEnemyBatchAttackV66, isEnemyBatchCombatV66, selectEnemyBatchTargetV66 } from './enemy-batch-combat-v66.js';
+import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -692,6 +694,10 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     missionLevelEnemyTarget(enemy) {
+      if (isEnemyBatchCombatV66(enemy)) {
+        const target = selectEnemyBatchTargetV66(this, enemy);
+        return target?.inVehicle && this.vehicle?.active ? this.vehicle : target;
+      }
       return [this.player, this.coopEnabled ? this.coop : null]
         .filter((actor) => actor?.alive && !actor.ventTransit)
         .sort((left, right) => Math.abs(left.x - enemy.x) - Math.abs(right.x - enemy.x))[0] || null;
@@ -1255,13 +1261,37 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     updateEnemy(enemy, delta) {
+      const previousX = enemy?.x;
+      try {
+        return this.updateEnemyOnMissionLevelV66(enemy, delta);
+      } finally {
+        // Navigation can cancel or clamp the combat step afterwards. Sample
+        // the final motion, never an alert flag or a pre-collision velocity.
+        if (isEnemyBatchCombatV66(enemy)) {
+          enemy.vx = delta > 0 && enemy.alive && !enemy.dormant && !enemy.ventTransit
+            ? (enemy.x - previousX) / delta : 0;
+        }
+      }
+    }
+
+    updateEnemyOnMissionLevelV66(enemy, delta) {
       if (enemy?.dormant) {
         cancelFacehuggerAttackV65(this, enemy, 'enemy-dormant');
+        cancelEnemyBatchAttackV66(this, enemy, 'enemy-dormant');
         return;
       }
       if (!this.missionLevelRuntime || !enemy) return super.updateEnemy(enemy, delta);
       if (enemy.ventTransit?.networkId === this.missionVentNetworkV62?.id) {
         cancelFacehuggerAttackV65(this, enemy, 'enemy-in-vent');
+        cancelEnemyBatchAttackV66(this, enemy, 'enemy-in-vent');
+        return;
+      }
+      // Eggs stay anchored even with no visible target: never route them
+      // through the generic patrol, ladder or melee branches.
+      if (updateOvomorphCycleV66(this, enemy, delta)) return;
+      if (!enemy.alive && isEnemyBatchCombatV66(enemy)) {
+        cancelEnemyBatchAttackV66(this, enemy, 'enemy-dead');
+        enemy.vx = 0;
         return;
       }
       const navigation = enemy.levelNavigation || (this.initializeEnemyMissionNavigation(enemy), enemy.levelNavigation);
@@ -1272,6 +1302,7 @@ export function withV52LevelRuntime(BaseEngine) {
       if (enemy.isBoss && initialTarget && entityDistance(enemy, initialTarget) <= 640) enemy.alert = true;
       if (!initialTarget) {
         cancelFacehuggerAttackV65(this, enemy, 'target-invalid');
+        cancelEnemyBatchAttackV66(this, enemy, 'target-invalid');
         enemy.attackClock -= delta;
         enemy.rangedClock -= delta;
         enemy.staggerClock = Math.max(0, enemy.staggerClock - delta);
@@ -1281,6 +1312,18 @@ export function withV52LevelRuntime(BaseEngine) {
         enemy.facing = Math.sin(this.animationTime * 0.6 + (enemy.animationPhase || enemy.row || 0)) > 0 ? 1 : -1;
         const patrolX = clamp(enemy.x + enemy.facing * enemy.speed * 0.18 * delta, enemy.spawnX - 70, enemy.spawnX + 70);
         this.moveEnemyOnMissionSurface(enemy, patrolX, delta);
+        return;
+      }
+      const initialTargetSurface = this.missionLevelSurfaceFor(initialTarget, { tolerance: 52 })
+        || this.missionLevelSurfaceNear(initialTarget, { verticalRange: 150 });
+      if (isEnemyBatchCombatV66(enemy) && (navigation.mode !== 'surface'
+        || (enemy.alert && previousSurface && initialTargetSurface
+          && Math.abs(previousSurface.y - initialTargetSurface.y) > 42))) {
+        // Cancel BEFORE advancing the combat clock: a ladder/height change
+        // must not deliver an impact on the frame it starts navigation.
+        cancelEnemyBatchAttackV66(this, enemy, 'navigation-transition');
+        this.advanceEnemyMissionNavigation(enemy, initialTarget, previousSurface, initialTargetSurface, delta);
+        enemy.x = clamp(enemy.x, 0, Math.max(0, this.missionLevelBounds.width - enemy.w));
         return;
       }
       const originalPlayer = this.player;
@@ -1298,12 +1341,14 @@ export function withV52LevelRuntime(BaseEngine) {
         || this.missionLevelSurfaceNear(target, { verticalRange: 150 });
 
       if (navigation.mode !== 'surface') {
+        cancelEnemyBatchAttackV66(this, enemy, 'navigation-transition');
         this.advanceEnemyMissionNavigation(enemy, target, previousSurface, targetSurface, delta);
         enemy.x = clamp(enemy.x, 0, Math.max(0, this.missionLevelBounds.width - enemy.w));
         return result;
       }
 
       if (enemy.alert && previousSurface && targetSurface && Math.abs(previousSurface.y - targetSurface.y) > 42) {
+        cancelEnemyBatchAttackV66(this, enemy, 'navigation-transition');
         enemy.x = previous.x;
         enemy.y = previousSurface.y - enemy.h;
         enemy.groundY = previousSurface.y;

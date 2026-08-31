@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   CatalogWorkbenchV62,
+  CatalogSpriteAnimatorV62,
   formatCatalogValueV62,
   getCatalogSpriteFrameV62,
   normalizeCatalogActionsV62,
@@ -160,9 +161,9 @@ test('le cadrage de sprite emploie les vraies cellules du clip idle', () => {
     column: 0,
     row: 0,
     columns: 4,
-    rows: 4,
+    rows: record.visual.grid.rows,
     widthPercent: 400,
-    heightPercent: 400,
+    heightPercent: record.visual.grid.rows * 100,
     translateXPercent: -0,
     translateYPercent: -0
   });
@@ -188,6 +189,47 @@ test('les actions conservent leurs datasets de gameplay sans perdre les valeurs 
     selected: ''
   });
   assert.equal(Object.isFrozen(actions), true);
+});
+
+test('le laboratoire V66 sélectionne les quatre clips, parcourt huit poses et fige la mort', () => {
+  const documentRef = new FakeDocument();
+  const target = documentRef.createElement('section');
+  const previewClips = ['sealed', 'opening', 'hatch', 'destroyed'].map((id, ordinal) => ({ sheetId: 'fixture.ovomorph.v66', clip: { id, frames: Array.from({ length: 8 }, (_, index) => ordinal * 8 + index), fps: ordinal ? 10 : 6, loop: ordinal === 0 } }));
+  const visual = { sheetId: 'fixture.ovomorph.v66', path: '/fixture-v66.webp', grid: { columns: 4, rows: 8 }, idleClip: previewClips[0], previewClips };
+  assert.equal(getCatalogSpriteFrameV62(visual, 99, 'destroyed').frame, 31);
+  assert.equal(getCatalogSpriteFrameV62(visual, 9, 'sealed').frame, 1);
+  assert.equal(getCatalogSpriteFrameV62(visual, 0, 'unknown'), null);
+  const previousSetInterval = globalThis.setInterval;
+  const previousClearInterval = globalThis.clearInterval;
+  const callbacks = new Map();
+  let nextTimer = 0;
+  globalThis.setInterval = (callback) => { const id = ++nextTimer; callbacks.set(id, callback); return id; };
+  globalThis.clearInterval = (id) => callbacks.delete(id);
+  const animator = new CatalogSpriteAnimatorV62({ documentRef, reducedMotion: false });
+  try {
+    const viewport = animator.mount(target, visual, 'Ovomorph', { detail: true });
+    const select = target.querySelector('[data-animation-clip-select]');
+    assert.ok(select);
+    assert.equal(select.children.length, 4);
+    assert.equal(viewport.dataset.frame, '0');
+    select.value = 'destroyed';
+    select.listeners.get('change')();
+    assert.equal(viewport.dataset.clipId, 'destroyed');
+    assert.equal(viewport.dataset.frame, '24');
+    const tick = [...callbacks.values()][0];
+    const poses = [Number(viewport.dataset.frame)];
+    for (let index = 0; index < 7; index += 1) { tick(); poses.push(Number(viewport.dataset.frame)); }
+    assert.deepEqual(poses, [24, 25, 26, 27, 28, 29, 30, 31]);
+    assert.equal(callbacks.size, 0, 'un clip terminal ne reboucle pas sur un oeuf vivant');
+    target.querySelector('[data-animation-replay]').listeners.get('click')();
+    assert.equal(viewport.dataset.frame, '24');
+    assert.equal(callbacks.size, 1);
+  } finally {
+    animator.clear();
+    assert.equal(callbacks.size, 0);
+    globalThis.setInterval = previousSetInterval;
+    globalThis.clearInterval = previousClearInterval;
+  }
 });
 
 test('les valeurs inconnues sont signalées sans inventer de donnée', () => {

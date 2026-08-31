@@ -176,10 +176,13 @@ test('le vrai GameEngine ne dessine plus de silhouette Canvas pour un châssis s
 test('les projectiles du vrai GameEngine consomment la hitbox visible puis restaurent le corps de navigation', () => withBrowserRuntime(() => {
   const command = VEHICLES.find((vehicle) => vehicle.id === 'vehicle-002-m577-command-apc');
   const engine = buildEngine(command);
-  const enemy = engine.enemies[0];
+  // Resolve the intended identity through the actual factory. Changing only
+  // spriteKey on an arbitrary spawn would retain another species' sheet ID.
+  const praetorian = ENEMIES.find((entry) => entry.id === 'enemy-007-praetorian');
+  assert.ok(praetorian);
+  const enemy = engine.createEnemy(praetorian, 0, 1000, 574);
   Object.assign(enemy, {
     id: 'praetorian-visible-hitbox',
-    spriteKey: 'xenoPraetorian',
     x: 1000,
     y: 500,
     w: 52,

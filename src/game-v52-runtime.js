@@ -17,6 +17,8 @@ import {
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
+import { isEnemyBatchCombatV66, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
+import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import {
   advanceEnemyMeleeAttackV64,
   armEnemyMeleeAttackV64,
@@ -837,6 +839,15 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateEnemy(enemy, delta) {
+      // The stationary egg owns its lifecycle and temporary-status clocks.
+      // Run it before either legacy branch can tick the same jam timer (or
+      // bypass that timer completely through Level's stationary-egg gate).
+      if (updateOvomorphCycleV66(this, enemy, delta)) return;
+      // Production composes Mission(Level(Core)). The V66 combat module owns
+      // its complete locked player/coop/squad pool, so it must pass through
+      // Level's navigation/collision gates before Core advances its timeline.
+      // The legacy nearest-squad shortcut below skips that inner level layer.
+      if (isEnemyBatchCombatV66(enemy)) return super.updateEnemy(enemy, delta);
       const squadPool = asList(this.squadActors);
       const targetPool = [this.player, this.coopEnabled ? this.coop : null, ...squadPool].filter(Boolean);
       let nearest = null;
@@ -887,6 +898,8 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateEnemyAgainstSquad(enemy, target, delta) {
+      if (updateOvomorphCycleV66(this, enemy, delta)) return;
+      if (updateEnemyBatchCombatV66(this, enemy, delta)) return;
       if (updateFacehuggerCombatV65(this, enemy, delta)) return;
       if (!enemy?.alive) return;
       if (enemy.pendingMelee && resolveEnemyMeleeTargetIdV64(target) !== enemy.pendingMeleeTargetId) {

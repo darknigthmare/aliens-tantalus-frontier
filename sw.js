@@ -1,4 +1,4 @@
-const CACHE = 'atf-v65-shell-2';
+const CACHE = 'atf-v66-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
@@ -21,6 +21,9 @@ const CORE = [
   '/src/game-production-resume.js', '/src/game-production-base.js', '/src/game-final-runtime.js',
   '/src/game-complete.js', '/src/game-complete-core.js', '/src/game-runtime.js', '/src/game-v51-runtime.js',
   '/src/enemy-facehugger-combat-v65.js',
+  '/src/enemy-batch-combat-v66.js', '/src/enemy-ovomorph-cycle-v66.js',
+  '/src/enemy-profile-assets-v66.js', '/src/enemy-profile-registry-v66.js',
+  '/src/enemy-profile-geometry-v66.js',
   '/docs/VERSION_HISTORY_V65.md', '/docs/ART_PROVENANCE_V65.md',
   '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-profile-assets-v65.js', '/src/enemy-profile-registry-v65.js', '/src/enemy-atlas-loader-v65.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/enemy-visual-overrides-v64.js', '/src/npc-mission-runtime-v55.js',
@@ -288,7 +291,9 @@ const isEnemyAtlasPathV65 = (value) => {
       && url.pathname.endsWith('.png');
     const dedicatedV65Webp = url.pathname.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v65/')
       && url.pathname.endsWith('.webp');
-    return legacyPng || dedicatedV65Webp;
+    const dedicatedV66Webp = url.pathname.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v66/')
+      && url.pathname.endsWith('.webp');
+    return legacyPng || dedicatedV65Webp || dedicatedV66Webp;
   } catch {
     return false;
   }

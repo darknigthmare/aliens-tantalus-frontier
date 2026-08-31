@@ -1,0 +1,2864 @@
+{
+  "schema": 1,
+  "batchId": "batch-001",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "First five-profile V66 batch only; manually reviewed anatomical roots. Technical review does not certify franchise fidelity 1:1.",
+  "profiles": {
+    "enemy-001-ovomorph": {
+      "status": "reviewed",
+      "reviewer": "Codex root",
+      "reviewedAt": "2026-08-31",
+      "evidencePaths": [
+        "docs/references/v66-ovomorph-anchor-source-review.jpg"
+      ],
+      "visualReview": "Root inspected all 32 annotated poses: roots remain under the lower shell, excluding petals and retaining the collapse. No exact-pixel canon certification.",
+      "method": "Median of lower-shell scanline centers in bottom quarter, excluding bottom 7px matte guard; root at shell base. Candidate measurements reviewed against the 32-source overlay before activation.",
+      "clips": {
+        "sealed": {
+          "sourceSha256": "d36ff97ddc309883a07c719a26f96d62e5d51a8b5449c5634d1bd690e92a1218",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                219.5,
+                414
+              ],
+              "landmark": [
+                219.5,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.5; bottom padded bound y=414; source overlay reviewed separately."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                219.5,
+                414
+              ],
+              "landmark": [
+                219.5,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.5; bottom padded bound y=414; source overlay reviewed separately."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                219,
+                414
+              ],
+              "landmark": [
+                219,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.0; bottom padded bound y=414; source overlay reviewed separately."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                219,
+                414
+              ],
+              "landmark": [
+                219,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.0; bottom padded bound y=414; source overlay reviewed separately."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                219.5,
+                413
+              ],
+              "landmark": [
+                219.5,
+                362
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 319..405, median x=219.5; bottom padded bound y=413; source overlay reviewed separately."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                219.5,
+                413
+              ],
+              "landmark": [
+                219.5,
+                362
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 319..405, median x=219.5; bottom padded bound y=413; source overlay reviewed separately."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                219.5,
+                414
+              ],
+              "landmark": [
+                219.5,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.5; bottom padded bound y=414; source overlay reviewed separately."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                219,
+                414
+              ],
+              "landmark": [
+                219,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..406, median x=219.0; bottom padded bound y=414; source overlay reviewed separately."
+            }
+          ]
+        },
+        "opening": {
+          "sourceSha256": "7d9f32eecee32b5b4c5e48eba4d7858e8ad45a517a9bb977918c540b3e9985f4",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                201,
+                376
+              ],
+              "landmark": [
+                201,
+                332
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 296..368, median x=201.0; bottom padded bound y=376; source overlay reviewed separately."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                171,
+                376
+              ],
+              "landmark": [
+                171,
+                332
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 295..368, median x=171.0; bottom padded bound y=376; source overlay reviewed separately."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                164.5,
+                377
+              ],
+              "landmark": [
+                164.5,
+                334
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 298..369, median x=164.5; bottom padded bound y=377; source overlay reviewed separately."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                179,
+                377
+              ],
+              "landmark": [
+                179,
+                336
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 301..369, median x=179.0; bottom padded bound y=377; source overlay reviewed separately."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                193,
+                375
+              ],
+              "landmark": [
+                193,
+                333
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 298..367, median x=193.0; bottom padded bound y=375; source overlay reviewed separately."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                158,
+                375
+              ],
+              "landmark": [
+                158,
+                333
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 298..367, median x=158.0; bottom padded bound y=375; source overlay reviewed separately."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                157.5,
+                379
+              ],
+              "landmark": [
+                157.5,
+                338
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 304..371, median x=157.5; bottom padded bound y=379; source overlay reviewed separately."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                181.5,
+                379
+              ],
+              "landmark": [
+                181.5,
+                339
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 306..371, median x=181.5; bottom padded bound y=379; source overlay reviewed separately."
+            }
+          ]
+        },
+        "hatch": {
+          "sourceSha256": "16089e03962dd8ebf24b0e1dff0024ea27459a5c3251ead21712ba7710303054",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                188.5,
+                396
+              ],
+              "landmark": [
+                188.5,
+                354
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 319..388, median x=188.5; bottom padded bound y=396; source overlay reviewed separately."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                161.5,
+                395
+              ],
+              "landmark": [
+                161.5,
+                353
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 318..387, median x=161.5; bottom padded bound y=395; source overlay reviewed separately."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                159,
+                396
+              ],
+              "landmark": [
+                159,
+                354
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..388, median x=159.0; bottom padded bound y=396; source overlay reviewed separately."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                175,
+                394
+              ],
+              "landmark": [
+                175,
+                354
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 320..386, median x=175.0; bottom padded bound y=394; source overlay reviewed separately."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                196,
+                382
+              ],
+              "landmark": [
+                196,
+                338
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 302..374, median x=196.0; bottom padded bound y=382; source overlay reviewed separately."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                170.5,
+                382
+              ],
+              "landmark": [
+                170.5,
+                341
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 307..374, median x=170.5; bottom padded bound y=382; source overlay reviewed separately."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                162,
+                382
+              ],
+              "landmark": [
+                162,
+                340
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 306..374, median x=162.0; bottom padded bound y=382; source overlay reviewed separately."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                174.5,
+                381
+              ],
+              "landmark": [
+                174.5,
+                342
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 310..373, median x=174.5; bottom padded bound y=381; source overlay reviewed separately."
+            }
+          ]
+        },
+        "destroyed": {
+          "sourceSha256": "679adcc740b1473d915833ff8730cb1766f3d3ec27bd5b99df2c08c10a088729",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                186.5,
+                398
+              ],
+              "landmark": [
+                186.5,
+                356
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 322..390, median x=186.5; bottom padded bound y=398; source overlay reviewed separately."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                171.5,
+                398
+              ],
+              "landmark": [
+                171.5,
+                358
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 326..390, median x=171.5; bottom padded bound y=398; source overlay reviewed separately."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                164,
+                398
+              ],
+              "landmark": [
+                164,
+                364
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 338..390, median x=164.0; bottom padded bound y=398; source overlay reviewed separately."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                161,
+                398
+              ],
+              "landmark": [
+                161,
+                368
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 346..390, median x=161.0; bottom padded bound y=398; source overlay reviewed separately."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                193.5,
+                338
+              ],
+              "landmark": [
+                193.5,
+                311
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 291..330, median x=193.5; bottom padded bound y=338; source overlay reviewed separately."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                179.5,
+                338
+              ],
+              "landmark": [
+                179.5,
+                316
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 302..330, median x=179.5; bottom padded bound y=338; source overlay reviewed separately."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                173,
+                338
+              ],
+              "landmark": [
+                173,
+                320
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 310..330, median x=173.0; bottom padded bound y=338; source overlay reviewed separately."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                178.5,
+                338
+              ],
+              "landmark": [
+                178.5,
+                324
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Lower shell scanline centers, rows 318..330, median x=178.5; bottom padded bound y=338; source overlay reviewed separately."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-004-drone-big-chap": {
+      "status": "reviewed",
+      "reviewer": "Codex drone_warrior_art",
+      "reviewedAt": "2026-08-31",
+      "reviewedPoseCount": 32,
+      "evidencePaths": [
+        "docs/references/v66-drone-anchor-source-review.jpg"
+      ],
+      "visualReview": "All 32 source poses inspected with coordinate grids, then individually marked overlays. Corrections re-inspected. Manual approximate anatomical registration, not pixel-perfect or canonical certification.",
+      "method": "Manually observed posterior hip articulation; root x is its vertical projection. Ground y is complete recovered pose padded bottom (three-pixel extraction guard), except explicitly identified suspended poses using inspected grounded peers in the same source row. Tail, head and claw extrema never determine root x. Cropped offsets include negative source spill bounds.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "03d270343e12236cb33e4b0173e67f429a1c4f26b338bf0c6acdf51a501ec5f7",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                286,
+                393
+              ],
+              "landmark": [
+                286,
+                233
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (286,233) on idle pose 0; confirmed on marked source overlay. Padded source floor y=393."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                242,
+                392
+              ],
+              "landmark": [
+                242,
+                233
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (242,233) on idle pose 1; confirmed on marked source overlay. Padded source floor y=392."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                242,
+                392
+              ],
+              "landmark": [
+                242,
+                234
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (242,234) on idle pose 2; confirmed on marked source overlay. Padded source floor y=392."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                211,
+                392
+              ],
+              "landmark": [
+                211,
+                234
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (211,234) on idle pose 3; confirmed on marked source overlay. Padded source floor y=392."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                284,
+                353
+              ],
+              "landmark": [
+                284,
+                190
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (284,190) on idle pose 4; confirmed on marked source overlay. Padded source floor y=353."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                239,
+                352
+              ],
+              "landmark": [
+                239,
+                190
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (239,190) on idle pose 5; confirmed on marked source overlay. Padded source floor y=352."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                239,
+                352
+              ],
+              "landmark": [
+                239,
+                190
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (239,190) on idle pose 6; confirmed on marked source overlay. Padded source floor y=352."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                209,
+                353
+              ],
+              "landmark": [
+                209,
+                190
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (209,190) on idle pose 7; confirmed on marked source overlay. Padded source floor y=353."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "0065c633761508315c1e0bbe41305a560841dc973254417238a38e87df6de659",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                285,
+                399
+              ],
+              "landmark": [
+                285,
+                239
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (285,239) on move pose 0; confirmed on marked source overlay. Padded source floor y=399."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                249,
+                400
+              ],
+              "landmark": [
+                249,
+                239
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (249,239) on move pose 1; confirmed on marked source overlay. Padded source floor y=400."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                207,
+                399
+              ],
+              "landmark": [
+                207,
+                241
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (207,241) on move pose 2; confirmed on marked source overlay. Padded source floor y=399."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                167,
+                399
+              ],
+              "landmark": [
+                167,
+                247
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (167,247) on move pose 3; confirmed on marked source overlay. Padded source floor y=399."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                266,
+                354
+              ],
+              "landmark": [
+                266,
+                190
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (266,190) on move pose 4; confirmed on marked source overlay. Padded source floor y=354."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                239,
+                354
+              ],
+              "landmark": [
+                239,
+                199
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (239,199) on move pose 5; confirmed on marked source overlay. Padded source floor y=354."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                207,
+                354
+              ],
+              "landmark": [
+                207,
+                191
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (207,191) on move pose 6; confirmed on marked source overlay. Padded source floor y=354."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                179,
+                353
+              ],
+              "landmark": [
+                179,
+                200
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (179,200) on move pose 7; confirmed on marked source overlay. Padded source floor y=353."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "2a57c289a9ad79ea9dd8725cfa6a70b034974131e74a32a6004f6a7ddf03f914",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                268,
+                391
+              ],
+              "landmark": [
+                268,
+                238
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (268,238) on attack pose 0; confirmed on marked source overlay. Padded source floor y=391."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                223,
+                390
+              ],
+              "landmark": [
+                223,
+                242
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (223,242) on attack pose 1; confirmed on marked source overlay. Padded source floor y=390."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                213,
+                391
+              ],
+              "landmark": [
+                213,
+                242
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (213,242) on attack pose 2; confirmed on marked source overlay. Padded source floor y=391."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                185,
+                392
+              ],
+              "landmark": [
+                185,
+                270
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (185,270) on attack pose 3; confirmed on marked source overlay. Padded source floor y=392."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                272,
+                338
+              ],
+              "landmark": [
+                272,
+                185
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (272,185) on attack pose 4; confirmed on marked source overlay. Padded source floor y=338."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                273,
+                341
+              ],
+              "landmark": [
+                273,
+                189
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (273,189) on attack pose 5; confirmed on marked source overlay. Padded source floor y=341."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                241,
+                348
+              ],
+              "landmark": [
+                241,
+                209
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (241,209) on attack pose 6; confirmed on marked source overlay. Padded source floor y=348."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                199,
+                352
+              ],
+              "landmark": [
+                199,
+                208
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (199,208) on attack pose 7; confirmed on marked source overlay. Padded source floor y=352."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "bd3efd4437929b821dcb138e4929501ebcb006fbdcc3acbede5c264c7d06b494",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                312,
+                436
+              ],
+              "landmark": [
+                312,
+                258
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (312,258) on death pose 0; confirmed on marked source overlay. Padded source floor y=436."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                268,
+                437
+              ],
+              "landmark": [
+                268,
+                295
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (268,295) on death pose 1; confirmed on marked source overlay. Padded source floor y=437."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                230,
+                436
+              ],
+              "landmark": [
+                230,
+                365
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (230,365) on death pose 2; confirmed on marked source overlay. Padded source floor y=436."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                180,
+                436
+              ],
+              "landmark": [
+                180,
+                348
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (180,348) on death pose 3; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=436."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                235,
+                336
+              ],
+              "landmark": [
+                235,
+                232
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (235,232) on death pose 4; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=336."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                206,
+                336
+              ],
+              "landmark": [
+                206,
+                266
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (206,266) on death pose 5; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=336."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                168,
+                336
+              ],
+              "landmark": [
+                168,
+                274
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (168,274) on death pose 6; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=336."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                138,
+                336
+              ],
+              "landmark": [
+                138,
+                274
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (138,274) on death pose 7; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=336."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-005-warrior": {
+      "status": "reviewed",
+      "reviewer": "Codex drone_warrior_art",
+      "reviewedAt": "2026-08-31",
+      "reviewedPoseCount": 32,
+      "evidencePaths": [
+        "docs/references/v66-warrior-anchor-source-review.jpg"
+      ],
+      "visualReview": "All 32 source poses inspected with coordinate grids, then individually marked overlays. Corrections re-inspected. Manual approximate anatomical registration, not pixel-perfect or canonical certification.",
+      "method": "Manually observed posterior hip articulation; root x is its vertical projection. Ground y is complete recovered pose padded bottom (three-pixel extraction guard), except explicitly identified suspended poses using inspected grounded peers in the same source row. Tail, head and claw extrema never determine root x. Cropped offsets include negative source spill bounds.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "d0a230ad54a25e8f3c1b239929e0278aacd84dbebc438ee9a479c3f710d0744d",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                269,
+                397
+              ],
+              "landmark": [
+                269,
+                217
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (269,217) on idle pose 0; confirmed on marked source overlay. Padded source floor y=397."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                250,
+                398
+              ],
+              "landmark": [
+                250,
+                219
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (250,219) on idle pose 1; confirmed on marked source overlay. Padded source floor y=398."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                228,
+                398
+              ],
+              "landmark": [
+                228,
+                216
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (228,216) on idle pose 2; confirmed on marked source overlay. Padded source floor y=398."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                208,
+                398
+              ],
+              "landmark": [
+                208,
+                220
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (208,220) on idle pose 3; confirmed on marked source overlay. Padded source floor y=398."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                255,
+                382
+              ],
+              "landmark": [
+                255,
+                185
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (255,185) on idle pose 4; confirmed on marked source overlay. Padded source floor y=382."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                229,
+                382
+              ],
+              "landmark": [
+                229,
+                192
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (229,192) on idle pose 5; confirmed on marked source overlay. Padded source floor y=382."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                231,
+                382
+              ],
+              "landmark": [
+                231,
+                198
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (231,198) on idle pose 6; confirmed on marked source overlay. Padded source floor y=382."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                213,
+                382
+              ],
+              "landmark": [
+                213,
+                220
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (213,220) on idle pose 7; confirmed on marked source overlay. Padded source floor y=382."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "cc4a12d15f4090a418976e9f35f3dfa137710f7d37ea8b12fcb10efc812ec75a",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                276,
+                403
+              ],
+              "landmark": [
+                276,
+                258
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (276,258) on move pose 0; confirmed on marked source overlay. Padded source floor y=403."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                250,
+                402
+              ],
+              "landmark": [
+                250,
+                256
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (250,256) on move pose 1; confirmed on marked source overlay. Padded source floor y=402."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                239,
+                402
+              ],
+              "landmark": [
+                239,
+                257
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (239,257) on move pose 2; confirmed on marked source overlay. Padded source floor y=402."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                244,
+                402
+              ],
+              "landmark": [
+                244,
+                251
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (244,251) on move pose 3; confirmed on marked source overlay. Padded source floor y=402."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                278,
+                344
+              ],
+              "landmark": [
+                278,
+                199
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (278,199) on move pose 4; confirmed on marked source overlay. Padded source floor y=344. Flight phase: source ground copied from same-row contact poses 5/7; 19px gap below padded sprite retained."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                262,
+                344
+              ],
+              "landmark": [
+                262,
+                209
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (262,209) on move pose 5; confirmed on marked source overlay. Padded source floor y=344."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                245,
+                343
+              ],
+              "landmark": [
+                245,
+                203
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (245,203) on move pose 6; confirmed on marked source overlay. Padded source floor y=343."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                233,
+                344
+              ],
+              "landmark": [
+                233,
+                209
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (233,209) on move pose 7; confirmed on marked source overlay. Padded source floor y=344."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "811b6a7ec66c9dd9f457bd70c2b2d05afb4f4ab9000b507c06b9cccbdebca7fa",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                226,
+                410
+              ],
+              "landmark": [
+                226,
+                279
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (226,279) on attack pose 0; confirmed on marked source overlay. Padded source floor y=410."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                197,
+                410
+              ],
+              "landmark": [
+                197,
+                277
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (197,277) on attack pose 1; confirmed on marked source overlay. Padded source floor y=410."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                201,
+                411
+              ],
+              "landmark": [
+                201,
+                279
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (201,279) on attack pose 2; confirmed on marked source overlay. Padded source floor y=411."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                170,
+                412
+              ],
+              "landmark": [
+                170,
+                291
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (170,291) on attack pose 3; confirmed on marked source overlay. Padded source floor y=412."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                236,
+                345
+              ],
+              "landmark": [
+                236,
+                223
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (236,223) on attack pose 4; confirmed on marked source overlay. Padded source floor y=345."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                215,
+                351
+              ],
+              "landmark": [
+                215,
+                212
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (215,212) on attack pose 5; confirmed on marked source overlay. Padded source floor y=351."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                186,
+                353
+              ],
+              "landmark": [
+                186,
+                215
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (186,215) on attack pose 6; confirmed on marked source overlay. Padded source floor y=353."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                168,
+                353
+              ],
+              "landmark": [
+                168,
+                219
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (168,219) on attack pose 7; confirmed on marked source overlay. Padded source floor y=353."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "c1520aed413cd3dff7dfb54643ca3ed8d5754410d835123a90f410d1ba58be1c",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                254,
+                439
+              ],
+              "landmark": [
+                254,
+                254
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (254,254) on death pose 0; confirmed on marked source overlay. Padded source floor y=439."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                188,
+                438
+              ],
+              "landmark": [
+                188,
+                325
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (188,325) on death pose 1; confirmed on marked source overlay. Padded source floor y=438."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                184,
+                438
+              ],
+              "landmark": [
+                184,
+                374
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "posterior hip articulation observed at (184,374) on death pose 2; confirmed on marked source overlay. Padded source floor y=438."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                164,
+                465
+              ],
+              "landmark": [
+                164,
+                385
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (164,385) on death pose 3; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=465."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                193,
+                363
+              ],
+              "landmark": [
+                193,
+                285
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (193,285) on death pose 4; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=363."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                154,
+                361
+              ],
+              "landmark": [
+                154,
+                284
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (154,284) on death pose 5; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                163,
+                361
+              ],
+              "landmark": [
+                163,
+                291
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (163,291) on death pose 6; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                169,
+                361
+              ],
+              "landmark": [
+                169,
+                295
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "posterior hip articulation observed at (169,295) on death pose 7; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=361."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-006-runner": {
+      "status": "reviewed",
+      "reviewer": "Codex drone_warrior_art",
+      "reviewedAt": "2026-08-31",
+      "reviewedPoseCount": 32,
+      "evidencePaths": [
+        "docs/references/v66-runner-anchor-source-review.jpg"
+      ],
+      "visualReview": "All 32 source poses inspected with coordinate grids, then individually marked overlays. Corrections re-inspected. Manual approximate anatomical registration, not pixel-perfect or canonical certification.",
+      "method": "Manually observed ribcage center immediately behind the front shoulder; root x is its vertical projection. Ground y is complete recovered pose padded bottom (three-pixel extraction guard), except explicitly identified suspended poses using inspected grounded peers in the same source row. Tail, head and claw extrema never determine root x. Cropped offsets include negative source spill bounds.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "4f1124c192226d7703fcbbd07ddb5777ff1d9f12d885a56bc78bf3f0a8d3d235",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                253,
+                387
+              ],
+              "landmark": [
+                253,
+                258
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (253,258) on idle pose 0; confirmed on marked source overlay. Padded source floor y=387."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                245,
+                387
+              ],
+              "landmark": [
+                245,
+                259
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (245,259) on idle pose 1; confirmed on marked source overlay. Padded source floor y=387."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                269,
+                387
+              ],
+              "landmark": [
+                269,
+                250
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (269,250) on idle pose 2; confirmed on marked source overlay. Padded source floor y=387."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                263,
+                387
+              ],
+              "landmark": [
+                263,
+                249
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (263,249) on idle pose 3; confirmed on marked source overlay. Padded source floor y=387."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                250,
+                351
+              ],
+              "landmark": [
+                250,
+                225
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (250,225) on idle pose 4; confirmed on marked source overlay. Padded source floor y=351."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                253,
+                352
+              ],
+              "landmark": [
+                253,
+                222
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (253,222) on idle pose 5; confirmed on marked source overlay. Padded source floor y=352."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                258,
+                349
+              ],
+              "landmark": [
+                258,
+                225
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (258,225) on idle pose 6; confirmed on marked source overlay. Padded source floor y=349."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                267,
+                351
+              ],
+              "landmark": [
+                267,
+                222
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (267,222) on idle pose 7; confirmed on marked source overlay. Padded source floor y=351."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "d1acc004e5496b9ab3eb998594fe0f5a8473027060461057d3bfff69fccf0009",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                245,
+                382
+              ],
+              "landmark": [
+                245,
+                271
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (245,271) on move pose 0; confirmed on marked source overlay. Padded source floor y=382. Suspended stride: source ground copied from same-row contact poses 1/2; 4px gap below padded sprite retained."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                240,
+                382
+              ],
+              "landmark": [
+                240,
+                270
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (240,270) on move pose 1; confirmed on marked source overlay. Padded source floor y=382."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                249,
+                382
+              ],
+              "landmark": [
+                249,
+                267
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (249,267) on move pose 2; confirmed on marked source overlay. Padded source floor y=382."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                237,
+                382
+              ],
+              "landmark": [
+                237,
+                267
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (237,267) on move pose 3; confirmed on marked source overlay. Padded source floor y=382. Suspended stride: source ground copied from same-row contact poses 1/2; 29px gap below padded sprite retained."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                247,
+                335
+              ],
+              "landmark": [
+                247,
+                219
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (247,219) on move pose 4; confirmed on marked source overlay. Padded source floor y=335."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                250,
+                335
+              ],
+              "landmark": [
+                250,
+                226
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (250,226) on move pose 5; confirmed on marked source overlay. Padded source floor y=335. Suspended stride: source ground copied from same-row contact poses 4/6/7; 7px gap below padded sprite retained."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                247,
+                335
+              ],
+              "landmark": [
+                247,
+                230
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (247,230) on move pose 6; confirmed on marked source overlay. Padded source floor y=335."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                246,
+                335
+              ],
+              "landmark": [
+                246,
+                226
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (246,226) on move pose 7; confirmed on marked source overlay. Padded source floor y=335."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "df6c5687bdce5c08dfd68d9df8fecb7557a9ad482bc579a0589020729c587b90",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                395
+              ],
+              "landmark": [
+                222,
+                322
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (222,322) on attack pose 0; confirmed on marked source overlay. Padded source floor y=395."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                219,
+                395
+              ],
+              "landmark": [
+                219,
+                302
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (219,302) on attack pose 1; confirmed on marked source overlay. Padded source floor y=395."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                235,
+                395
+              ],
+              "landmark": [
+                235,
+                259
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (235,259) on attack pose 2; confirmed on marked source overlay. Padded source floor y=395. Pounce trajectory: source ground copied from same-row contact poses 0/1; 1px gap below padded sprite retained."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                230,
+                395
+              ],
+              "landmark": [
+                230,
+                250
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (230,250) on attack pose 3; confirmed on marked source overlay. Padded source floor y=395. Pounce trajectory: source ground copied from same-row contact poses 0/1; 50px gap below padded sprite retained."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                240,
+                325
+              ],
+              "landmark": [
+                240,
+                194
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (240,194) on attack pose 4; confirmed on marked source overlay. Padded source floor y=325. Pounce trajectory: source ground copied from same-row contact poses 5/6/7; 44px gap below padded sprite retained."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                253,
+                325
+              ],
+              "landmark": [
+                253,
+                222
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (253,222) on attack pose 5; confirmed on marked source overlay. Padded source floor y=325."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                219,
+                325
+              ],
+              "landmark": [
+                219,
+                249
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (219,249) on attack pose 6; confirmed on marked source overlay. Padded source floor y=325."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                211,
+                325
+              ],
+              "landmark": [
+                211,
+                252
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (211,252) on attack pose 7; confirmed on marked source overlay. Padded source floor y=325."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "91a3a38c5dbc191503bf73564a0dcd924792e76c2318e44265fba1e43b3ddcaa",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                245,
+                436
+              ],
+              "landmark": [
+                245,
+                287
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (245,287) on death pose 0; confirmed on marked source overlay. Padded source floor y=436."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                245,
+                436
+              ],
+              "landmark": [
+                245,
+                330
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (245,330) on death pose 1; confirmed on marked source overlay. Padded source floor y=436."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                246,
+                436
+              ],
+              "landmark": [
+                246,
+                378
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (246,378) on death pose 2; confirmed on marked source overlay. Padded source floor y=436."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                226,
+                436
+              ],
+              "landmark": [
+                226,
+                390
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (226,390) on death pose 3; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=436."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                262,
+                313
+              ],
+              "landmark": [
+                262,
+                261
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (262,261) on death pose 4; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=313."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                249,
+                313
+              ],
+              "landmark": [
+                249,
+                278
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (249,278) on death pose 5; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=313."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                241,
+                316
+              ],
+              "landmark": [
+                241,
+                282
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (241,282) on death pose 6; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=316."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                249,
+                316
+              ],
+              "landmark": [
+                249,
+                279
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "ribcage center immediately behind the front shoulder observed at (249,279) on death pose 7; confirmed on marked source overlay. Collapsed anatomy partly occluded; landmark follows visible proximal joint/rib remnants. Padded source floor y=316."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-003-chestburster": {
+      "profileId": "enemy-003-chestburster",
+      "status": "reviewed",
+      "reviewer": "codex:/root/enemy_batch_pipeline",
+      "reviewedAt": "2026-08-31",
+      "coordinates": "nominal-source-cell",
+      "method": "Manual per-pose visual measurement of the ventral cervical/anterior-trunk root, projected vertically onto the complete source lower bound including extraction guard. Source images inspected at original dimensions with a 50px cell-relative QA grid, then each proposed landmark and floor projection inspected again with temporary cyan markers. No source image edits, no inferred root from tail bounding-box center.",
+      "measurementLimit": "Manual source-pixel measurements with declared uncertainty; hashes bind provenance only and do not certify canon fidelity or motion quality.",
+      "nominalGrid": {
+        "columns": 4,
+        "rows": 2,
+        "xEdges": [
+          0,
+          444,
+          887,
+          1330,
+          1774
+        ],
+        "yEdges": [
+          0,
+          444,
+          887
+        ]
+      },
+      "baselinePolicy": "anchor.y equals each complete extraction sourceBounds[3], which already preserves the bottom transparent guard; no per-frame image scaling and no skeleton or new frame synthesis.",
+      "provenanceDocument": "docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/idle.png",
+          "sourceSha256": "ae3881a0b98eec299f33d81d6facdbdbe5f64f54a0d8d08d8fe9daa1b5066ba6",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                310,
+                354
+              ],
+              "landmark": [
+                310,
+                329
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Prone pose: ventral cervical junction directly behind the skull, not the long tail midpoint. Floor is the complete preserved pose lower bound.",
+              "sourceBounds": [
+                53,
+                284,
+                402,
+                354
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                327,
+                354
+              ],
+              "landmark": [
+                327,
+                323
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Neck rising: root at the lower forebody bend where the horizontal trunk turns upward; head rise remains above the root.",
+              "sourceBounds": [
+                62,
+                242,
+                427,
+                354
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                315,
+                354
+              ],
+              "landmark": [
+                315,
+                325
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Higher neck: lower ventral bend under the raised cervical column, preserving the upward head movement.",
+              "sourceBounds": [
+                46,
+                220,
+                412,
+                354
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                292,
+                354
+              ],
+              "landmark": [
+                292,
+                326
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Neck fully raised: lower forebody turn at ground contact, not the skull center.",
+              "sourceBounds": [
+                29,
+                203,
+                365,
+                354
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                292,
+                260
+              ],
+              "landmark": [
+                292,
+                234
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Second-row raised pose: lower upright forebody bend; coordinates subtract the nominal row origin y=444.",
+              "sourceBounds": [
+                46,
+                113,
+                367,
+                260
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                234,
+                260
+              ],
+              "landmark": [
+                234,
+                235
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Neck lowering: ventral cervical base where the rising neck joins the horizontal trunk; tail spill remains irrelevant to root placement.",
+              "sourceBounds": [
+                -8,
+                151,
+                321,
+                260
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                222,
+                260
+              ],
+              "landmark": [
+                222,
+                232
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Low neck: ventral cervical junction behind the skull, preserving the short head lift.",
+              "sourceBounds": [
+                -13,
+                177,
+                318,
+                260
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                247,
+                260
+              ],
+              "landmark": [
+                247,
+                234
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Return to prone: ventral neck/forebody junction, consistent with idle frame0 rather than whole-silhouette centering.",
+              "sourceBounds": [
+                9,
+                194,
+                337,
+                260
+              ]
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/move.png",
+          "sourceSha256": "691000516002638b24b6dfbca6bb9c5f48336d6c165c51b9135fa608dd34bbc1",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                313,
+                358
+              ],
+              "landmark": [
+                313,
+                332
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Prone forward body: cervical ring immediately behind the skull, above the ventral contact line.",
+              "sourceBounds": [
+                56,
+                302,
+                404,
+                358
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                310,
+                360
+              ],
+              "landmark": [
+                310,
+                335
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Rear travelling wave rises while the anterior cervical junction remains the body root; not the crest of the tail wave.",
+              "sourceBounds": [
+                48,
+                295,
+                396,
+                360
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                312,
+                359
+              ],
+              "landmark": [
+                312,
+                335
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "High rear wave: low ventral cervical junction under the skull; raised tail is excluded from root measurement.",
+              "sourceBounds": [
+                40,
+                289,
+                397,
+                359
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                284,
+                360
+              ],
+              "landmark": [
+                284,
+                336
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Tail tip lifts: anterior neck junction anchors the body, not the lifted tail or its changing silhouette extent.",
+              "sourceBounds": [
+                22,
+                302,
+                368,
+                360
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                297,
+                264
+              ],
+              "landmark": [
+                297,
+                242
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Second-row prone pose: posterior skull/ventral cervical junction, same anatomical rule as move frame0.",
+              "sourceBounds": [
+                40,
+                209,
+                386,
+                264
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                303,
+                269
+              ],
+              "landmark": [
+                303,
+                244
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Large rear wave: the cervical junction in front of the wave anchors the low forward body.",
+              "sourceBounds": [
+                31,
+                198,
+                384,
+                269
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                269,
+                267
+              ],
+              "landmark": [
+                269,
+                244
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Small rear wave: anterior cervical junction remains the root, independent of tail flexion.",
+              "sourceBounds": [
+                20,
+                211,
+                356,
+                267
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                259,
+                267
+              ],
+              "landmark": [
+                259,
+                244
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Wave returns to prone: ventral cervical junction behind the skull; tail crosses nominal cell edge but does not determine root.",
+              "sourceBounds": [
+                -8,
+                209,
+                345,
+                267
+              ]
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/attack.png",
+          "sourceSha256": "f160eed8c058008a7587a1160b90e4074c690c8293b0ef5ca0c959a330ec5c56",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                264,
+                378
+              ],
+              "landmark": [
+                264,
+                350
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Anticipation coil: lower anterior trunk loop supports the retracted head; track this load-bearing body section rather than the folded skull.",
+              "sourceBounds": [
+                54,
+                291,
+                383,
+                378
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                282,
+                376
+              ],
+              "landmark": [
+                282,
+                346
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Neck rises: root at the lower upright forebody bend, above the ventral ground contact.",
+              "sourceBounds": [
+                47,
+                201,
+                341,
+                376
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                222,
+                376
+              ],
+              "landmark": [
+                222,
+                348
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Jaw opens: lower cervical column base; open mandible and raised skull remain free to move above this root.",
+              "sourceBounds": [
+                28,
+                191,
+                291,
+                376
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                188,
+                376
+              ],
+              "landmark": [
+                188,
+                347
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Forward strike: lower ventral S-bend is the supporting anterior trunk root. Do not lock the extended head; its rightward displacement is intentionally preserved.",
+              "sourceBounds": [
+                7,
+                220,
+                367,
+                376
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                232,
+                265
+              ],
+              "landmark": [
+                232,
+                242
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Maximum extension: lower S-bend supports the outstretched forebody; the head and its proven right-cell spill remain uncut and offset to the right of this root.",
+              "sourceBounds": [
+                50,
+                136,
+                449,
+                265
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                269,
+                265
+              ],
+              "landmark": [
+                269,
+                236
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Recoil S: lower anterior trunk coil remains grounded while the upper neck retracts; partly curved anatomy gives medium landmark confidence.",
+              "sourceBounds": [
+                74,
+                101,
+                310,
+                265
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                278,
+                265
+              ],
+              "landmark": [
+                278,
+                241
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Return to low pose: visible ventral cervical junction behind the skull restores the same landmark used by locomotion.",
+              "sourceBounds": [
+                21,
+                209,
+                368,
+                265
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                257,
+                265
+              ],
+              "landmark": [
+                257,
+                239
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Final low recovery: anterior cervical junction anchors the body independently of the extended tail.",
+              "sourceBounds": [
+                -5,
+                209,
+                341,
+                265
+              ]
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/death.png",
+          "sourceSha256": "ddf09f6811fb33d10a0e5dd3f415203650c26af9b338df4968533df48596e52c",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                316,
+                344
+              ],
+              "landmark": [
+                316,
+                315
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Initial raised body: lower upright cervical/trunk bend at ventral ground contact, allowing the head to fall relative to the root.",
+              "sourceBounds": [
+                54,
+                171,
+                367,
+                344
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                247,
+                344
+              ],
+              "landmark": [
+                247,
+                322
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Folded collapse: lower supporting anterior trunk loop is visible below the folded neck; track that body section despite partly occluded cervical anatomy.",
+              "sourceBounds": [
+                33,
+                230,
+                339,
+                344
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                239,
+                344
+              ],
+              "landmark": [
+                239,
+                318
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Unfolding collapse: lower forebody bend immediately behind the descending neck; head remains free to rotate downward.",
+              "sourceBounds": [
+                18,
+                258,
+                361,
+                344
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                280,
+                346
+              ],
+              "landmark": [
+                280,
+                325
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Prone collapse: ventral cervical junction behind the grounded skull; no tail-bounds recentering.",
+              "sourceBounds": [
+                13,
+                292,
+                367,
+                346
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                305,
+                220
+              ],
+              "landmark": [
+                305,
+                196
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Settled prone pose: posterior skull/neck junction on the forward body, ignoring the flattened tail midpoint.",
+              "sourceBounds": [
+                49,
+                164,
+                390,
+                220
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                304,
+                220
+              ],
+              "landmark": [
+                304,
+                195
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Small settling wave: same posterior skull/ventral neck junction; rear body settling must not drag the root.",
+              "sourceBounds": [
+                35,
+                164,
+                385,
+                220
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                299,
+                220
+              ],
+              "landmark": [
+                299,
+                196
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Final settling wave: ventral cervical junction behind the skull maintains the forward-body root.",
+              "sourceBounds": [
+                30,
+                164,
+                381,
+                220
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                295,
+                223
+              ],
+              "landmark": [
+                295,
+                201
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Final corpse: ventral cervical junction under the rear skull, preserved as a physical body marker without redrawing occluded anatomy.",
+              "sourceBounds": [
+                13,
+                174,
+                373,
+                223
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

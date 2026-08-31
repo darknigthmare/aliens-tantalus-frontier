@@ -1,0 +1,741 @@
+{
+  "profileId": "enemy-003-chestburster",
+  "status": "reviewed",
+  "reviewer": "codex:/root/enemy_batch_pipeline",
+  "reviewedAt": "2026-08-31",
+  "coordinates": "nominal-source-cell",
+  "method": "Manual per-pose visual measurement of the ventral cervical/anterior-trunk root, projected vertically onto the complete source lower bound including extraction guard. Source images inspected at original dimensions with a 50px cell-relative QA grid, then each proposed landmark and floor projection inspected again with temporary cyan markers. No source image edits, no inferred root from tail bounding-box center.",
+  "measurementLimit": "Manual source-pixel measurements with declared uncertainty; hashes bind provenance only and do not certify canon fidelity or motion quality.",
+  "nominalGrid": {
+    "columns": 4,
+    "rows": 2,
+    "xEdges": [
+      0,
+      444,
+      887,
+      1330,
+      1774
+    ],
+    "yEdges": [
+      0,
+      444,
+      887
+    ]
+  },
+  "baselinePolicy": "anchor.y equals each complete extraction sourceBounds[3], which already preserves the bottom transparent guard; no per-frame image scaling and no skeleton or new frame synthesis.",
+  "provenanceDocument": "docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+  "clips": {
+    "idle": {
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/idle.png",
+      "sourceSha256": "ae3881a0b98eec299f33d81d6facdbdbe5f64f54a0d8d08d8fe9daa1b5066ba6",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "anchor": [
+            310,
+            354
+          ],
+          "landmark": [
+            310,
+            329
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Prone pose: ventral cervical junction directly behind the skull, not the long tail midpoint. Floor is the complete preserved pose lower bound.",
+          "sourceBounds": [
+            53,
+            284,
+            402,
+            354
+          ]
+        },
+        {
+          "frame": 1,
+          "anchor": [
+            327,
+            354
+          ],
+          "landmark": [
+            327,
+            323
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Neck rising: root at the lower forebody bend where the horizontal trunk turns upward; head rise remains above the root.",
+          "sourceBounds": [
+            62,
+            242,
+            427,
+            354
+          ]
+        },
+        {
+          "frame": 2,
+          "anchor": [
+            315,
+            354
+          ],
+          "landmark": [
+            315,
+            325
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Higher neck: lower ventral bend under the raised cervical column, preserving the upward head movement.",
+          "sourceBounds": [
+            46,
+            220,
+            412,
+            354
+          ]
+        },
+        {
+          "frame": 3,
+          "anchor": [
+            292,
+            354
+          ],
+          "landmark": [
+            292,
+            326
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Neck fully raised: lower forebody turn at ground contact, not the skull center.",
+          "sourceBounds": [
+            29,
+            203,
+            365,
+            354
+          ]
+        },
+        {
+          "frame": 4,
+          "anchor": [
+            292,
+            260
+          ],
+          "landmark": [
+            292,
+            234
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Second-row raised pose: lower upright forebody bend; coordinates subtract the nominal row origin y=444.",
+          "sourceBounds": [
+            46,
+            113,
+            367,
+            260
+          ]
+        },
+        {
+          "frame": 5,
+          "anchor": [
+            234,
+            260
+          ],
+          "landmark": [
+            234,
+            235
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Neck lowering: ventral cervical base where the rising neck joins the horizontal trunk; tail spill remains irrelevant to root placement.",
+          "sourceBounds": [
+            -8,
+            151,
+            321,
+            260
+          ]
+        },
+        {
+          "frame": 6,
+          "anchor": [
+            222,
+            260
+          ],
+          "landmark": [
+            222,
+            232
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Low neck: ventral cervical junction behind the skull, preserving the short head lift.",
+          "sourceBounds": [
+            -13,
+            177,
+            318,
+            260
+          ]
+        },
+        {
+          "frame": 7,
+          "anchor": [
+            247,
+            260
+          ],
+          "landmark": [
+            247,
+            234
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Return to prone: ventral neck/forebody junction, consistent with idle frame0 rather than whole-silhouette centering.",
+          "sourceBounds": [
+            9,
+            194,
+            337,
+            260
+          ]
+        }
+      ]
+    },
+    "move": {
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/move.png",
+      "sourceSha256": "691000516002638b24b6dfbca6bb9c5f48336d6c165c51b9135fa608dd34bbc1",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "anchor": [
+            313,
+            358
+          ],
+          "landmark": [
+            313,
+            332
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Prone forward body: cervical ring immediately behind the skull, above the ventral contact line.",
+          "sourceBounds": [
+            56,
+            302,
+            404,
+            358
+          ]
+        },
+        {
+          "frame": 1,
+          "anchor": [
+            310,
+            360
+          ],
+          "landmark": [
+            310,
+            335
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Rear travelling wave rises while the anterior cervical junction remains the body root; not the crest of the tail wave.",
+          "sourceBounds": [
+            48,
+            295,
+            396,
+            360
+          ]
+        },
+        {
+          "frame": 2,
+          "anchor": [
+            312,
+            359
+          ],
+          "landmark": [
+            312,
+            335
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "High rear wave: low ventral cervical junction under the skull; raised tail is excluded from root measurement.",
+          "sourceBounds": [
+            40,
+            289,
+            397,
+            359
+          ]
+        },
+        {
+          "frame": 3,
+          "anchor": [
+            284,
+            360
+          ],
+          "landmark": [
+            284,
+            336
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Tail tip lifts: anterior neck junction anchors the body, not the lifted tail or its changing silhouette extent.",
+          "sourceBounds": [
+            22,
+            302,
+            368,
+            360
+          ]
+        },
+        {
+          "frame": 4,
+          "anchor": [
+            297,
+            264
+          ],
+          "landmark": [
+            297,
+            242
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Second-row prone pose: posterior skull/ventral cervical junction, same anatomical rule as move frame0.",
+          "sourceBounds": [
+            40,
+            209,
+            386,
+            264
+          ]
+        },
+        {
+          "frame": 5,
+          "anchor": [
+            303,
+            269
+          ],
+          "landmark": [
+            303,
+            244
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Large rear wave: the cervical junction in front of the wave anchors the low forward body.",
+          "sourceBounds": [
+            31,
+            198,
+            384,
+            269
+          ]
+        },
+        {
+          "frame": 6,
+          "anchor": [
+            269,
+            267
+          ],
+          "landmark": [
+            269,
+            244
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Small rear wave: anterior cervical junction remains the root, independent of tail flexion.",
+          "sourceBounds": [
+            20,
+            211,
+            356,
+            267
+          ]
+        },
+        {
+          "frame": 7,
+          "anchor": [
+            259,
+            267
+          ],
+          "landmark": [
+            259,
+            244
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Wave returns to prone: ventral cervical junction behind the skull; tail crosses nominal cell edge but does not determine root.",
+          "sourceBounds": [
+            -8,
+            209,
+            345,
+            267
+          ]
+        }
+      ]
+    },
+    "attack": {
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/attack.png",
+      "sourceSha256": "f160eed8c058008a7587a1160b90e4074c690c8293b0ef5ca0c959a330ec5c56",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "anchor": [
+            264,
+            378
+          ],
+          "landmark": [
+            264,
+            350
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Anticipation coil: lower anterior trunk loop supports the retracted head; track this load-bearing body section rather than the folded skull.",
+          "sourceBounds": [
+            54,
+            291,
+            383,
+            378
+          ]
+        },
+        {
+          "frame": 1,
+          "anchor": [
+            282,
+            376
+          ],
+          "landmark": [
+            282,
+            346
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Neck rises: root at the lower upright forebody bend, above the ventral ground contact.",
+          "sourceBounds": [
+            47,
+            201,
+            341,
+            376
+          ]
+        },
+        {
+          "frame": 2,
+          "anchor": [
+            222,
+            376
+          ],
+          "landmark": [
+            222,
+            348
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Jaw opens: lower cervical column base; open mandible and raised skull remain free to move above this root.",
+          "sourceBounds": [
+            28,
+            191,
+            291,
+            376
+          ]
+        },
+        {
+          "frame": 3,
+          "anchor": [
+            188,
+            376
+          ],
+          "landmark": [
+            188,
+            347
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Forward strike: lower ventral S-bend is the supporting anterior trunk root. Do not lock the extended head; its rightward displacement is intentionally preserved.",
+          "sourceBounds": [
+            7,
+            220,
+            367,
+            376
+          ]
+        },
+        {
+          "frame": 4,
+          "anchor": [
+            232,
+            265
+          ],
+          "landmark": [
+            232,
+            242
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Maximum extension: lower S-bend supports the outstretched forebody; the head and its proven right-cell spill remain uncut and offset to the right of this root.",
+          "sourceBounds": [
+            50,
+            136,
+            449,
+            265
+          ]
+        },
+        {
+          "frame": 5,
+          "anchor": [
+            269,
+            265
+          ],
+          "landmark": [
+            269,
+            236
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Recoil S: lower anterior trunk coil remains grounded while the upper neck retracts; partly curved anatomy gives medium landmark confidence.",
+          "sourceBounds": [
+            74,
+            101,
+            310,
+            265
+          ]
+        },
+        {
+          "frame": 6,
+          "anchor": [
+            278,
+            265
+          ],
+          "landmark": [
+            278,
+            241
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Return to low pose: visible ventral cervical junction behind the skull restores the same landmark used by locomotion.",
+          "sourceBounds": [
+            21,
+            209,
+            368,
+            265
+          ]
+        },
+        {
+          "frame": 7,
+          "anchor": [
+            257,
+            265
+          ],
+          "landmark": [
+            257,
+            239
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Final low recovery: anterior cervical junction anchors the body independently of the extended tail.",
+          "sourceBounds": [
+            -5,
+            209,
+            341,
+            265
+          ]
+        }
+      ]
+    },
+    "death": {
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/death.png",
+      "sourceSha256": "ddf09f6811fb33d10a0e5dd3f415203650c26af9b338df4968533df48596e52c",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "anchor": [
+            316,
+            344
+          ],
+          "landmark": [
+            316,
+            315
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Initial raised body: lower upright cervical/trunk bend at ventral ground contact, allowing the head to fall relative to the root.",
+          "sourceBounds": [
+            54,
+            171,
+            367,
+            344
+          ]
+        },
+        {
+          "frame": 1,
+          "anchor": [
+            247,
+            344
+          ],
+          "landmark": [
+            247,
+            322
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Folded collapse: lower supporting anterior trunk loop is visible below the folded neck; track that body section despite partly occluded cervical anatomy.",
+          "sourceBounds": [
+            33,
+            230,
+            339,
+            344
+          ]
+        },
+        {
+          "frame": 2,
+          "anchor": [
+            239,
+            344
+          ],
+          "landmark": [
+            239,
+            318
+          ],
+          "reviewed": true,
+          "confidence": "medium",
+          "uncertaintyPx": 8,
+          "evidence": "Unfolding collapse: lower forebody bend immediately behind the descending neck; head remains free to rotate downward.",
+          "sourceBounds": [
+            18,
+            258,
+            361,
+            344
+          ]
+        },
+        {
+          "frame": 3,
+          "anchor": [
+            280,
+            346
+          ],
+          "landmark": [
+            280,
+            325
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Prone collapse: ventral cervical junction behind the grounded skull; no tail-bounds recentering.",
+          "sourceBounds": [
+            13,
+            292,
+            367,
+            346
+          ]
+        },
+        {
+          "frame": 4,
+          "anchor": [
+            305,
+            220
+          ],
+          "landmark": [
+            305,
+            196
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Settled prone pose: posterior skull/neck junction on the forward body, ignoring the flattened tail midpoint.",
+          "sourceBounds": [
+            49,
+            164,
+            390,
+            220
+          ]
+        },
+        {
+          "frame": 5,
+          "anchor": [
+            304,
+            220
+          ],
+          "landmark": [
+            304,
+            195
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Small settling wave: same posterior skull/ventral neck junction; rear body settling must not drag the root.",
+          "sourceBounds": [
+            35,
+            164,
+            385,
+            220
+          ]
+        },
+        {
+          "frame": 6,
+          "anchor": [
+            299,
+            220
+          ],
+          "landmark": [
+            299,
+            196
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Final settling wave: ventral cervical junction behind the skull maintains the forward-body root.",
+          "sourceBounds": [
+            30,
+            164,
+            381,
+            220
+          ]
+        },
+        {
+          "frame": 7,
+          "anchor": [
+            295,
+            223
+          ],
+          "landmark": [
+            295,
+            201
+          ],
+          "reviewed": true,
+          "confidence": "high",
+          "uncertaintyPx": 4,
+          "evidence": "Final corpse: ventral cervical junction under the rear skull, preserved as a physical body marker without redrawing occluded anatomy.",
+          "sourceBounds": [
+            13,
+            174,
+            373,
+            223
+          ]
+        }
+      ]
+    }
+  }
+}

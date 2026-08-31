@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "batchId": "batch-001",
+  "reviewer": "Codex root - visual source and normalized contact review",
+  "reviewedAt": "2026-08-31",
+  "status": "accepted-for-runtime-verification",
+  "canonExact": false,
+  "sourceBoards": 20,
+  "authoredPoses": 160,
+  "method": "All 32 normalized poses of each profile inspected after enclosed-matte and bounded 2-source-pixel AA cleanup; reviewed body-root overlay evidence; final actual-runtime-scale marine comparison.",
+  "checks": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  },
+  "limits": [
+    "Generated adaptations, not certified 1:1 pixel copies.",
+    "Small anatomical/reflection differences remain between drawn poses; no optical interpolation or duplicate poses.",
+    "Runner reference conditioning limit is recorded in its ImageGen provenance document.",
+    "Browser control failed before connection (Windows helper apply deny-read ACLs); no in-game browser visual QA or production promotion claimed."
+  ],
+  "profiles": [
+    {
+      "profileId": "enemy-001-ovomorph",
+      "reviewedPoses": 32,
+      "normalizedSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4",
+      "canvasSize": [
+        78,
+        78
+      ],
+      "sourceFacing": 1,
+      "contact": "docs/references/v66-atlas-review/enemy-001-ovomorph.jpg",
+      "review": "All four ordered clips reviewed; body roots fixed; full silhouette stays within its cell; enclosed bright magenta blocks removed."
+    },
+    {
+      "profileId": "enemy-003-chestburster",
+      "reviewedPoses": 32,
+      "normalizedSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259",
+      "canvasSize": [
+        188,
+        188
+      ],
+      "sourceFacing": 1,
+      "contact": "docs/references/v66-atlas-review/enemy-003-chestburster.jpg",
+      "review": "All four ordered clips reviewed; body roots fixed; full silhouette stays within its cell; enclosed bright magenta blocks removed."
+    },
+    {
+      "profileId": "enemy-004-drone-big-chap",
+      "reviewedPoses": 32,
+      "normalizedSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb",
+      "canvasSize": [
+        282,
+        282
+      ],
+      "sourceFacing": 1,
+      "contact": "docs/references/v66-atlas-review/enemy-004-drone-big-chap.jpg",
+      "review": "All four ordered clips reviewed; body roots fixed; full silhouette stays within its cell; enclosed bright magenta blocks removed."
+    },
+    {
+      "profileId": "enemy-005-warrior",
+      "reviewedPoses": 32,
+      "normalizedSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29",
+      "canvasSize": [
+        218,
+        218
+      ],
+      "sourceFacing": 1,
+      "contact": "docs/references/v66-atlas-review/enemy-005-warrior.jpg",
+      "review": "All four ordered clips reviewed; body roots fixed; full silhouette stays within its cell; enclosed bright magenta blocks removed."
+    },
+    {
+      "profileId": "enemy-006-runner",
+      "reviewedPoses": 32,
+      "normalizedSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+      "canvasSize": [
+        256,
+        256
+      ],
+      "sourceFacing": 1,
+      "contact": "docs/references/v66-atlas-review/enemy-006-runner.jpg",
+      "review": "All four ordered clips reviewed; body roots fixed; full silhouette stays within its cell; enclosed bright magenta blocks removed."
+    }
+  ],
+  "evidencePaths": [
+    "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json",
+    "docs/references/V66_BATCH_001_SCALE_REVIEW.md",
+    "docs/references/V66_ENCLOSED_MATTE_REVIEW.md",
+    "docs/references/v66-world-scale-review/lineup.jpg",
+    "docs/references/v66-world-scale-review/measurements.json"
+  ]
+}

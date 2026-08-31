@@ -1,0 +1,541 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "events": [
+    {
+      "kind": "generated",
+      "profileId": "enemy-001-ovomorph",
+      "clipId": "sealed",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-84b7708f-93bc-4cc9-86c6-d9e53f670798",
+      "actualPromptText": "Use case: stylized-concept. Asset type: production Ovomorph SEALED-IDLE sprite animation for Aliens Tantalus Frontier. Image1 is the official NECA Aliens1986 egg reference. Faithfully reproduce the FOREGROUND CLOSED EGG only: tall rounded leathery olive-black/brown ovoid, densely pebbled wrinkled veined surface, broaderlowerbody, narrower roundedcap with FOUR closedpetals andcross-shapeddarkrustseams. No1979root-tentaclebase, nolegs, no mouth, no creatureemerging. Removephotographicsceneryandbluecastinglight; neutralmutedolivebrownpalette withsubtleslimyspecularpixels. Crisp detailed arcadePIXELART, side-onorthographicgameview, wholeegg centeredandstandingonuprightbase. New preciseFOURCOLUMNTWOROWsheet,EIGHTequalcells,landscape1774x887. Eight genuinelydistinct consecutive verysubtleclosedeggpulsationposes: gentle1–3percent inflation thenrelaxation,capstaysfirmlyclosedinALL8frames,sameheightandanchoredground, noopening. This is abreathingloop, notdifferenteggdesigns. Same texturelayout,seamidentity,scale,cameraandlightingallframes. Entireeggwithincentral70%ofeverycell,generous15%margins. UseperfectlysolidopaqueMAGENTA #FF00FFbackgroundforkeyedproduction; includingallgaps. NOcheckerboard,noUI,nolabels,nogrid,noshadow,nofacehugger,noblood,noscene,noextraobjects.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.058Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/sealed.png",
+      "sourceSha256": "d36ff97ddc309883a07c719a26f96d62e5d51a8b5449c5634d1bd690e92a1218",
+      "contractPromptSha256": "a2e6ad29186c847d58d30571be3b13e50f2809321df3bd1aefb79fb7f5c32bc1",
+      "promptSha256": "7fb34063750a64d22425d0be41224c51dee93cc717c7207aaa829f009eff936d",
+      "referenceLockSha256": "98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-001-ovomorph",
+      "clipId": "opening",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-00674e08-81e8-4a34-8f76-203031b5d273",
+      "actualPromptText": "Use case: precise-object-edit. Fix ANATOMY ONLY in Image1 eight-frame Ovomorph opening sheet. Image2 official NECA photograph demonstrates correct FOUR-petal anatomy. Image1 wrongly has five petalsinfullyopenposes. Make exactlyFOURlobes arrangedlike4compassdirections: oneLEFT,oneRIGHT,oneBACK,oneFRONT. The FRONTlip must beONEBROADCONTINUOUS fleshytriangularflap, NEVER twoflapsseparatedbyanotch. Noextralobesbetween4cardinaldirections. The opening is a FOUR-corneredcross/square, NOTafive-pointedflowerorstar. Preserve Image1'sdarkolivebrownleatherytexture,pixelartscaleandbaseposition,1774x8874columns2rows,8sequentialopeningposesfromsealedtocompletelyopen. Onlytopfourlipshingeoutwards; lowerbodyintact,NOfacehugger,nodestruction. Maintainmatchingheight/camera/lightingforeachpose,fullpetalsvisiblewithclearcellseparation. SolidopaqueuniformMAGENTA #FF00FFbackgroundunchanged, no textorotherobjects.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.064Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/opening.png",
+      "sourceSha256": "7d9f32eecee32b5b4c5e48eba4d7858e8ad45a517a9bb977918c540b3e9985f4",
+      "contractPromptSha256": "ece4ef6924a7fd09d4219732deccabf77e259f0c8322a9b5b5aeed520ecb4080",
+      "promptSha256": "35176070649b2064675d988df29c7abfb63a26c4fe40d764a71705f414ed3042",
+      "referenceLockSha256": "98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-001-ovomorph",
+      "clipId": "hatch",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-9b150fef-14f5-4576-96b5-d6b7a62f5884",
+      "actualPromptText": "Use case: stylized-concept. Production animation: Ovomorph HATCH/RELEASE shell clip. Image1 is approved four-lipped opening sprite sheet. Image2 is officialNECAeggdesign. Keep Image1's SAMEbodytexture/palette/scaleandgroundbase, preciseFOURmouthlips, onephysicaleggwithintactlowerbody. All8posesstartFULLYOPENandstayopen. Eightdistinctconsecutive muscularreleaseposes:1fourlipsheldopenwithdarkcavity,2innerliningcontracts,3frontlipdrawsslightlyin,4fourlipsflexoutandbodytightens,5strongreleasespasmwidenscavity,6bodyrelaxeswithlimpsidemembranes,7lipssettle,8emptyspenteggopenandstill. This is NOTopeningfromsealedandNOTdestruction. DoNOTdrawaFacehuggeranywhere: thegamewillspawnitsseparateanimatedspriteatthereleaseframe. DoNOTdrawextra petals: exactlyFOUR,nofive-lobedflower. Same olive-brownpebbledeggwall,mutedpinkbeigeflesh,no blood,noburstshell,no roots. Same sideviewcamerainallframes, crisp detailedpixelart. FOURcolumnsTWOROWS,1774x887,8equalcells, bodydimensionsmatchingImage1,noscaleshift,fullpetalswithinboundaries. FlatuniformopaqueMAGENTA #FF00FFbackgroundonly,no checkerboard,no shadows,noscenery,notext,noguides.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.069Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/hatch.png",
+      "sourceSha256": "16089e03962dd8ebf24b0e1dff0024ea27459a5c3251ead21712ba7710303054",
+      "contractPromptSha256": "971749051798ab7da5c691ea38ba41d38d880ee603613d78714fa6697505fb11",
+      "promptSha256": "86d3c759c08e0618d53eeb0b14f6e7cf2432a18a810ef5c1718ee0f436ab4f24",
+      "referenceLockSha256": "98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-001-ovomorph",
+      "clipId": "destroyed",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-5d658161-dda5-4e8f-8d84-e7cb7cf68423",
+      "actualPromptText": "Use case: stylized-concept. NEW Ovomorph DESTROYED animation, eight consecutiveposes. Image1 is approvedOvomorphidentity,Image2canonicalNECAegg. Keep SAMEdarkolivebrownpebbledleatherybody and four-lipdesign, neutralpixelartpalette, fixedbasepositionandscale. Show DEFINITIVE DEATH OF THE EGG, NOTopeningandNOhatching: 1eggbodybucklesinward,2upperwallsbeginwrinklingandsagging,3onewallfoldsin,4capcollapsesontoitself,5entireeggfoldsdownintolowrupturedemptyhusk,6husksettles,7lastsmallsettlingmotion,8lifelesscollapsedhusklyingonbase. No risingbackintoanintactopenegg. No creatureemerges. No looseflyingdebris, gore, blood, splatter, fireorFX; drynon-graphiccollapsedbiologicalhusk. Eachposeclearlydifferentandprogressivelylower, finalposeunderhalfinitialheight. Samecameraorthographicsideview, samewalltexelsstyle. Fourcolumnstworowsequalcells,1774x887canvas, consistentanatomy/allpartswithinmargins, nocharacterscutbycells. FlatopaqueMAGENTA #FF00FFbackgroundonly, no checkerboard,no shadows,noscene,notext,no labels,noguides.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.074Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/destroyed.png",
+      "sourceSha256": "679adcc740b1473d915833ff8730cb1766f3d3ec27bd5b99df2c08c10a088729",
+      "contractPromptSha256": "46cf2315d51298af6d53aee0f5ab66c751890936f49a7f21005690df8673a9b8",
+      "promptSha256": "0098c5c7f229822d133a6e1273fddeb11216e11ba1a6e71121d993b31dd0580c",
+      "referenceLockSha256": "98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-003-chestburster",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-89188495-f262-467c-9931-09702a1d6bc4",
+      "actualPromptText": "Use case: background-extraction. Image1 is the eight-frame Chestburster pixel-art sheet to correct. Image2 is only the canonical NECA anatomy reference; do not include the photo scenery or blood. Preserve Image1's EXACT eight sprite poses, four columns two rows, canvas2:1, side-view right, limbless beige serpent identity, face, segmented tail, pixel style, scale and locations. Change ONLY the background: completely remove its painted checkerboard and replace ALL backdrop pixels with perfectly solid opaque flat RGB(255,0,255) MAGENTA #FF00FF, including holes between curves. Absolutely NO white squares, NO grey squares, NO checkerboard, NO gradient, NO ground shadows. Do not delete any part of tail or body, do not add arms or legs, do not add labels or guides. This is a keyed production source, use uniform magenta across the entire unused canvas.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.078Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/idle.png",
+      "sourceSha256": "ae3881a0b98eec299f33d81d6facdbdbe5f64f54a0d8d08d8fe9daa1b5066ba6",
+      "contractPromptSha256": "3726342e2f79ccdbe44ed58d6cad2ed2e3ce095147dbbcee688c9faf6f5f36fd",
+      "promptSha256": "7f37f0c5c2e06fcb8b7e516ef263c52918ba4d6f6ae74c71844fc4c79054de15",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-003-chestburster",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-460cc43f-47da-445f-be59-a65e645a3125",
+      "actualPromptText": "Use case: identity-preserve. Correct ONLY THE ACTION POSES of Image1, a Chestburster sprite sheet. Keep exact beige segmented limbless anatomy, headshape, silver teeth, pixelart texture, right-facing sideview, MAGENTA background. Image2 is canonical anatomy reference only. Image1 currently shows standing/head-bobbing; this is WRONG for this sheet. It must show a FAST LOW CATERPILLAR/INCHWORM SLITHER CYCLE. All eight heads must be low and at the SAME HEIGHT just above ground, neck almost horizontal, never standing upright. The main motion is a travelling wave of body compression and extension: frame1 stretched flat,2 middle abdomen arched,3 arch advancesrearward,4 front advanceswhiletailgathers,5 longlowextension,6 tailarches,7 wavepassesforward throughlowbody,8returnsstretchedposewithchangedtailtip. Clear strong curvature changes IN THE BODY, not a head bob. Keep the creature horizontal in allframes, no feet or limbs, no eyes. Eight unique authoredframes,4columns2rows,1774x887canvas; allspritesinsidecells with18% horizontalguards, same skullsize betweenframes andasImage1. No white/greycheckerboard, no text, no scenery, no casting shadow.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.081Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/move.png",
+      "sourceSha256": "691000516002638b24b6dfbca6bb9c5f48336d6c165c51b9135fa608dd34bbc1",
+      "contractPromptSha256": "9ed6da3350ee834359deeabd9ab4fc8f49601231ac12078d690e23d135097d5f",
+      "promptSha256": "17969318c1928b3b8d4cf1e296e224b4aca5d82cf18d7c80b30ca39da9408fa0",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-003-chestburster",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-d7986dd4-a14e-476f-ab00-47e6d99e210b",
+      "actualPromptText": "Use case: stylized-concept. Production chestburster ATTACK animation. Image1 provides approved pixelart identity, exact headsize, beige palette, long segmented limbless body, side-right orthographic camera. Image2 is official1979anatomy only, no blood/scenery. Draw a NEW eight-frame consecutive QUICK BITE STRIKE with anticipation and recovery, not a locomotion/head-bob loop: 1neckcoilsbacklow withjawclosed,2neckraisespartwaystillcoiled,3headpullsbackwhilejawopenswide,4headthrustsRIGHT jawopen,5maximumforwardstrike jawSNAPSshut showingmetallicteeth,6headrecoilsleft,7necklowersandstraightens,8returns to lowreadypose. A single creature, torso/tailretainsgroundcontact, no newlimbs/wings/eyes; no extra longtongue. Keep same head dimensionsasImage1acrossframes andclip. Tail compactlycurveswithin cell duringreach, nevercuttinganatomy. Detailedarcadepixelart; accuratepaleribbedbody, smoothbeigeroundedhead. Precisely4columns2rowsequalcells,1774x887canvas. Same scaleandview everyframe. Keepallpixels insideeachcellwith15%margin. SolidopaqueMAGENTA #FF00FFwholebackgroundincludingholes. Nocheckerboard, text, guides, scene, shadows, blood, humans or othercreatures.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.084Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/attack.png",
+      "sourceSha256": "f160eed8c058008a7587a1160b90e4074c690c8293b0ef5ca0c959a330ec5c56",
+      "contractPromptSha256": "a27f1d7223e12a4adc1768ae9896e6a3175468095f6ca176ffed252fcf4a7a64",
+      "promptSha256": "d8c1343f0eb5174302fd2941723a02f1ecd53d1671be71adc76ca15805e8a85a",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-003-chestburster",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-823b4855-4cf3-42bd-a352-c47ba3903da5",
+      "actualPromptText": "Use case: stylized-concept. New DEATH animation sheet for the SAME1979Chestburster as Image1. Image1 is approved pixelartidentity/scale, Image2officialanatomyreference. Preserve the smoothbeigehead,tinymetallicteeth,limbless pale ribbed serpentine body,longtaperingtail,right-facingorthographicsideview. NOARMS NOLEGS NOEYES NOADULTXENO. Eight successive clearly DIFFERENT poses of a non-graphic collapse:1smallrecoilneckraised,2bodycurlsinwards,3neckweakensjawslack,4headlowersontoground,5bodyuncurlsontoground,6tailtiprelaxesdown,7verylastsmallbodycontraction,8completelystilllimpdeadcreaturelyinglow. The corpse mustnotstandbackupinfinalframe. Noredwounds,noblood,nogore, no humans. Keep same skullsizeandpixeldetail asImage1, consistentlightingpaletteacross8frames. Wholebodyandtailinsideeverycell,15%garde. FOURCOLUMNS TWOROWS equalcells landscape1774x887. PerfectlyflatopaqueMAGENTA #FF00FF backdropincludingholes; no checkerboard,no groundshadow,no labels,no guides,no borders.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_OVOMORPH_CHESTBURSTER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.088Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/death.png",
+      "sourceSha256": "ddf09f6811fb33d10a0e5dd3f415203650c26af9b338df4968533df48596e52c",
+      "contractPromptSha256": "6517fa2221290ecc8f65553af55c98d5f6fb5ce0fd4ff5a5b41d14eda0f6fd09",
+      "promptSha256": "f267694a0ddbe5aaa0530239ddcd2283076f9b1e7faa2ecef533518f831d1f93",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-004-drone-big-chap",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-599cffe4-89c4-4731-910f-466ca878d8ae",
+      "actualPromptText": "Use case: precise-object-edit. Input 1 (sprite sheet): edit target, eight right-facing 1979 Big Chap idle sprites. Input 2 (NECA photo): identity reference only, NOT output pose or background.\nKeep the excellent right-facing sprite design of Input 1 exactly: smooth long charcoal-grey dome, slender 1979 humanoid biomechanics, two arms, two legs, one segmented tail, dorsal tubes. Do NOT change to a Warrior ridged skull.\nChange ONLY technical sheet preparation: replace every checkerboard pixel and every backdrop pixel with perfectly flat solid #FF00FF magenta, NOT transparent and NOT a checkerboard. No magenta on the creature, no magenta fringe, no floor shadow. Every empty pixel must be uniform magenta for chroma key.\nPreserve eight distinct consecutive subtle idle breathing poses, same style/identity and right-facing camera. Retain EXACTLY four equal columns and two equal rows, 2:1 canvas, no labels or grid lines. Reduce all creatures uniformly enough to leave at least 15% empty padding in every square cell on all four sides including full tail and claws; common floor baseline at 82%. Do not crop anatomy or bridge adjacent cells. Crisp detailed pixel-art bitmap, identical creature scale and lighting all frames. Output only the corrected game sprite sheet.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.094Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-004-drone-big-chap/idle.png",
+      "sourceSha256": "03d270343e12236cb33e4b0173e67f429a1c4f26b338bf0c6acdf51a501ec5f7",
+      "contractPromptSha256": "deb490ed0c3069dcb6d362efae58a4dbc48a878a42c0096514cde9d4feef49c6",
+      "promptSha256": "56cf3c9775fd1ed473a932af0def3b58f89d2e42286c739a20665611edfd7cfc",
+      "referenceLockSha256": "d88147e49d112b29330632a3d672ad62394d1bea4b7b8b8bf87a711878d754bd"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-004-drone-big-chap",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-1ea1ff66-9d07-4d6d-a145-2d47a3a4e40f",
+      "actualPromptText": "Use case: identity-preserve. Input 1 (magenta sprite sheet): strict character, camera, palette, pixel-art detail and scale anchor. Input 2 (NECA 1979 Big Chap photo): supporting canonical anatomy reference only. Output is NOT the photograph.\nProduce the next separate animation sheet: exactly EIGHT consecutive poses of a complete looping RIGHT-facing bipedal stalking WALK of that SAME 1979 Big Chap. Keep smooth elongated smoky dome, no Warrior skull ridges, slim biomechanical torso, four dorsal tubes, two arms, two legs, one segmented tail. Preserve the sprite anchor character exactly, with the same low-key charcoal/steel-grey material.\n2:1 landscape, FOUR equal square columns and TWO equal square rows, row-major sequence. Pure uniformly flat #FF00FF magenta background for chroma key, no checkerboard, gradient, shadow, lines, labels or text.\nWalk cycle exact phase progression: 1 near heel plants forward / far foot trailing; 2 near foot supports weight and far foot lifts; 3 far knee passes supporting leg; 4 far foot extends forward and near heel lifts; 5 far heel plants forward / near foot trailing; 6 far leg supports and near foot lifts; 7 near knee passes supporting leg; 8 near foot extends forward returning toward frame1. Both arms counter-swing naturally; tail makes a continuous small counterbalancing wave. The eight poses must visibly articulate different leg states, not eight breathing poses or duplicated stills.\nFixed orthographic RIGHT-facing profile, no camera turn, no size drift, pelvis anchored consistently within each cell; common ground line at 82% cell height. Entire head, both hands, all toes and full tail entirely inside own cell, 15% empty safety padding all four sides. All sprites uniformly scaled to respect maximum extended pose. Sharp detailed pixel clusters, no blur, no floor, no scene, no accessory, no extra limbs.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.098Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-004-drone-big-chap/move.png",
+      "sourceSha256": "0065c633761508315c1e0bbe41305a560841dc973254417238a38e87df6de659",
+      "contractPromptSha256": "8c7349b35ec8686dd9f5c63374bc08708febef7ca5f6a4f9b9d58153767bd34a",
+      "promptSha256": "7f45017efd3b2cee6602364a95b2076be85fad9d908292eca47b4f05606f2e47",
+      "referenceLockSha256": "d88147e49d112b29330632a3d672ad62394d1bea4b7b8b8bf87a711878d754bd"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-004-drone-big-chap",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-46c8659f-e8e2-46d6-a07d-779ae595e13e",
+      "actualPromptText": "Use case: identity-preserve. Image1 magenta idle sprite sheet is the strict character/style/camera anchor. Image2 NECA 1979 photograph is a supporting canonical anatomy reference, not the output pose.\nGenerate a separate eight-frame RIGHT-facing claw-grab / inner-jaw attack animation for the SAME smooth-domed 1979 Big Chap. Preserve identity exactly: smooth translucent charcoal dome NO Warrior ridges, two arms, two long legs, single segmented tail and dorsal tubes, slim black biomechanical torso, steel-grey sparse highlights. Crisp detailed pixel-art as the anchor.\nLayout EXACTLY 4 equal square columns x 2 equal square rows, 2:1 landscape, eight chronological poses. Uniform solid #FF00FF magenta background; no checkerboard, labels, grid, text, shadow or scenery. Whole body and entire tail within own square, 15% empty margin on all edges at the MOST extended pose, same anatomical scale and pelvis anchor across all cells.\nDistinct poses row-major: 1 alert bent-knee windup; 2 torso coils slightly back, both claws prepare; 3 head drives forward as both arms begin reaching; 4 full forward claw reach with two hands separated clearly; 5 maximum rightward reach, outer jaws open with short inner jaw visibly projecting toward right; 6 inner jaw retracts, elbows bend; 7 torso and arms recover; 8 near-idle poised stance. Do not duplicate idle pictures; draw genuine anticipation, extension, impact and recovery.\nFixed orthographic right-facing SIDE PROFILE in every pose, no front-facing or three-quarter head, no camera movement. Feet remain tied to a shared ground line, no jumping. Preserve equal head/body dimensions. Do NOT add extra limbs, split tails, wings, teeth outside the mouth or motion trails. No dismemberment, victim or gore.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.101Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-004-drone-big-chap/attack.png",
+      "sourceSha256": "2a57c289a9ad79ea9dd8725cfa6a70b034974131e74a32a6004f6a7ddf03f914",
+      "contractPromptSha256": "5756831d1c77dd227df34e45867df0dae20a1eed896b98d37da5ef95238749d6",
+      "promptSha256": "ca10a8ee99655fdc78678ff0ab752c81a34b37d1c7c25a2fef5894e8e2cd3d79",
+      "referenceLockSha256": "d88147e49d112b29330632a3d672ad62394d1bea4b7b8b8bf87a711878d754bd"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-004-drone-big-chap",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-6dac5a62-f6a7-4578-bda8-208ede302df1",
+      "actualPromptText": "Use case: identity-preserve. Image1 magenta idle sprite sheet is the strict identity, rendering, camera and anatomical-size anchor. Image2 official NECA photograph supports the exact 1979 Big Chap anatomy.\nCreate an EIGHT FRAME non-looping DEATH / collapse sequence of this SAME creature, right-facing side view. Do not attack or respawn. Preserve the SMOOTH elongated dome, black biomechanical slim body, two arms, two legs, single segmented tail, dorsal tubes. Maintain the exact HEAD LENGTH and TORSO LENGTH of the idle anchor in every pose, including lying down. NEVER shrink the body as it collapses.\nOne 2:1 landscape sheet, exactly FOUR equal square columns x TWO equal square rows, 8 chronological drawings. Pure perfectly flat #FF00FF magenta backdrop for chroma key, not checkerboard or shadow. No text/grid/labels.\nFrames: 1 hit recoil with head leaning backward slightly; 2 knees lose strength; 3 drops onto one knee head still to right; 4 both knees buckle torso pitches forward; 5 one forearm contacts floor; 6 torso settles onto side; 7 head rests sideways low on floor, legs folded, tail curls; 8 inert completed corpse with relaxed arms and tail, no renewed rise. Keep the body intact, no blood, dismemberment, attacker or impact FX.\nIMPORTANT fit: because the prone creature is long, bend knees and curl the full tail in a compact C around its hindquarters without shortening anatomy. Keep both hands and all toes connected correctly. At least 12% clear cell margin on every edge, no tail/claw crossing a cell border. Same anatomy scale all eight frames; all poses rest on a shared floor baseline at 84% of cell height. Same crisp charcoal/steel pixel-art shading, orthographic right-facing profile with no camera rotation or three-quarter turn. Only body articulation changes.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.105Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-004-drone-big-chap/death.png",
+      "sourceSha256": "bd3efd4437929b821dcb138e4929501ebcb006fbdcc3acbede5c264c7d06b494",
+      "contractPromptSha256": "773a68914709f712487d06896f1b9da7212f4c4894be8c343b947d9e16c11191",
+      "promptSha256": "e3bd79473b25798edafd1259c327634c8499033460e943a4430289f351005fcd",
+      "referenceLockSha256": "d88147e49d112b29330632a3d672ad62394d1bea4b7b8b8bf87a711878d754bd"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-005-warrior",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-0c85d913-97e8-4e9e-97cf-a45f825ae11a",
+      "actualPromptText": "Use case: stylized-concept.\nAsset type: production 2D metroidvania enemy sprite animation sheet.\nInput images 1 and 2 are official NECA 1986 ALIENS Warrior identity references, not the intended camera, environment or figure-joint appearance. Adapt THIS ridged-headed 1986 Warrior faithfully, not the smooth-domed 1979 Big Chap.\nGenerate exactly eight consecutive RIGHT-facing SIDE-PROFILE breathing idle poses, same individual and scale throughout. Biomechanical glossy black exoskeleton with restrained blue-steel highlights matching film lighting; elongated ridged/nervured cranium with exposed patterned bony rib structure and central crest, NEVER a smooth transparent dome; angular rib cage, long two-legged humanoid stance with claws, two arms with elbow spurs, four dorsal tubes, one long vertebral segmented tail ending pointed. Keep the NECA reference proportions, no toy hinge joints, no armor/accessories added.\nMedium: detailed sharp pixel-art bitmap suitable for 256px game cells, strong silhouette and coherent economical pixel clusters, not painterly concept art or a 3D render.\nLayout: 2:1 landscape, exactly FOUR EQUAL square columns and TWO EQUAL square rows. Eight frames in chronological row-major order. Background perfectly uniform flat #FF00FF magenta for chroma key. No checkerboard, alpha imitation, floor shadow, grid lines, captions, numbers, text, UI or scenery.\nEight distinct subtle inhale/exhale poses: same planted foot positions at 82% cell height, chest slowly expands then settles, claws tense then relax, tail tip undulates softly. No duplicated stills and no attack or walk. Camera perfectly orthographic side profile facing RIGHT, no front or three-quarter view.\nFit: entire tail and all toes/claws visible inside each square, 15% empty safety margin ALL sides. Keep the tail curved compactly behind the body if necessary, never shorten or crop it. Identical anatomical scale, head length and lighting all eight poses. Only this ONE adult Warrior, exactly eight complete bodies, no extra limbs or tails.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.109Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/idle.png",
+      "sourceSha256": "d0a230ad54a25e8f3c1b239929e0278aacd84dbebc438ee9a479c3f710d0744d",
+      "contractPromptSha256": "40559e427e544f38cfae305cbaa2f4116c924bd31c1c74b0c86d6de1d60c5305",
+      "promptSha256": "d9ad27804f45d23af8b07c3155e70404dca7af03bf383a03020cdbc964362950",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-005-warrior",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-85ce674b-e668-4e4b-8cbc-68f65e22968e",
+      "actualPromptText": "Use case: identity-preserve.\nImage1 (magenta 8-frame Warrior idle sheet) is the strict sprite identity, anatomical-size, camera and pixel-art style anchor. Image2 official NECA 1986 Warrior photo is supporting canonical reference. Preserve Image1's clearly RIDGED cranium, NOT a smooth Big Chap dome.\nGenerate the same Warrior in eight genuinely consecutive poses of a RIGHT-facing aggressive biped RUN loop. Keep same head length, torso length, arm and leg proportions, black/slate-blue exoskeleton, dorsal tubes, elbow spurs and segmented pointed tail. No anatomy morphing or scale drift.\n4 equal square columns x 2 equal square rows, exactly 8 frames row-major, 2:1 landscape. Perfectly uniform flat #FF00FF magenta background, no checkerboard, shadow, labels or grid.\nRun phases:1 near foot forward contact, opposite leg bent behind;2 near leg absorbs weight, opposite knee advances;3 passing pose with far knee lifted;4 short airborne stride far foot forward near foot backward;5 far foot forward contact;6 far leg absorbs weight and near knee advances;7 near knee passing;8 short airborne stride near foot extends forward before frame1. Counter-swing both arms and phase the tail smoothly. Eight clearly DIFFERENT articulated drawings, not idle poses repeated or just translated.\nFixed orthographic RIGHT-facing profile. No camera rotation, no front views. Root position centered consistently in each cell, common ground baseline at 84%. Keep whole body and full tail within own square with at least12% empty margins; curve tail compactly so it never crosses cell boundaries. Same anatomical SCALE as idle even if crouching makes total pose lower. Crisp pixel clusters and full detail retained, no blur, trails, extra limbs or added objects.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.114Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/move.png",
+      "sourceSha256": "cc4a12d15f4090a418976e9f35f3dfa137710f7d37ea8b12fcb10efc812ec75a",
+      "contractPromptSha256": "a28d940fa0fc7ff260d86582faebca5baade9f4c4a193ab251fbfe9e4c77ce31",
+      "promptSha256": "763a72981787dde440c3ac2ff61a7cb0b0a0b5d263f13a6febfb30e1de22322b",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-005-warrior",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-e080f21c-7047-487e-ac1c-658034e9d09d",
+      "actualPromptText": "Use case: precise-object-edit.\nImage1 is the eight-frame Warrior ATTACK sheet with raised/sweeping arm; this is the EDIT TARGET.\nImage2 is the Warrior IDLE sprite sheet; use it as the strict reference for HAND ANATOMY and claw LENGTH.\nImage3 is the official NECA 1986 Warrior photograph supporting the anatomy.\nCorrect ONLY the attacking hand's fingers in frames2,3,4,5: the current fingers have incorrectly stretched into long Wolverine-like blades. Restore normal articulated, curved, multi-jointed alien fingers at the EXACT same physical length/scale as the idle sheet's hands. Fingers can spread and bend but CANNOT grow. Keep the short sharp nails, no long swordlike spikes from the wrists. Correct the hand anatomy consistently across the whole attack.\nPreserve EVERYTHING else: all eight distinct anticipation, arm-rise, slash, full extension, down-sweep and recovery poses; exact character and ridged cranium; body and head sizes; tail shape; right-facing side profile; scale; 4x2 even-grid/2:1 layout; solid uniform #FF00FF background; pixel-art rendering. No text or grid, no floor shadow, no extra limbs or FX. Every complete hand remains inside its cell. Do not replace the attack with idle poses.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.118Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/attack.png",
+      "sourceSha256": "811b6a7ec66c9dd9f457bd70c2b2d05afb4f4ab9000b507c06b9cccbdebca7fa",
+      "contractPromptSha256": "374379577afe81e79089e0ac8939e4ac0b3506368bd3dba23265fd691648958e",
+      "promptSha256": "eab050bbdb69a51b0327cd169e66b3379c13649b5d9befe3cb0eed2ce84a88e7",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-005-warrior",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-89587a61-428f-464e-91bb-9d003088c548",
+      "actualPromptText": "Use case: identity-preserve. Image1 is the 8-frame magenta idle sheet, strict Warrior identity, camera, anatomical-size and sprite rendering anchor. Image2 official NECA 1986 photograph is supporting anatomy reference.\nCreate a separate eight-frame NON-LOOPING death / collapse animation of the SAME ridged-headed ALIENS 1986 Warrior. Preserve the cranium's exact ridged/nervured rib pattern and length, slim black/slate-blue torso and full limbs, dorsal tubes and elbow spurs, two arms, two legs and one segmented pointed tail. NEVER change to Big Chap smooth dome or shrink the creature while it falls.\nExactly 4 equal square columns x2 equal square rows, 2:1 landscape, eight chronological poses. Entire background perfectly flat #FF00FF magenta, not checkerboard, gradient or shadow. No text, captions, grids or effects.\nFrame1 hit recoil chest back while still standing;2 knees give way and head droops;3 one knee contacts floor;4 both knees buckle and one hand reaches down;5 upper body tips toward right with forearms catching ground;6 body settles onto its side, legs folded;7 ridged head rests low on floor, arms slack, tail curls;8 completed inert corpse, no standing or attacking again. No dismemberment or gore.\nIMPORTANT: keep the exact head length and torso length of idle even when prone. Fold both legs and bend the full tail into a compact C behind the body, to fit all toes, fingers, head and tail inside each OWN square. Do not shorten anatomy to fit. Fixed common floor baseline at84%, 12% clear safety margin on every cell edge, identical anatomical scale across all frames. Orthographic RIGHT-facing side profile, no front view, no camera turn, no lighting changes. Crisp detailed pixel-art bitmap; natural progressive collapse with distinct contact poses.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.123Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/death.png",
+      "sourceSha256": "c1520aed413cd3dff7dfb54643ca3ed8d5754410d835123a90f410d1ba58be1c",
+      "contractPromptSha256": "19304b4b81056a12622a64ee9ee0e5d075143f32f0c14cca44ce46e1afdc985e",
+      "promptSha256": "85d472b1f53374997034480d652b3f1c8e13e5c8d8204782a656cad7a486a549",
+      "referenceLockSha256": "802d1a7b85401c6d834d59aec48096a19370f6b722d22f3c939f6e0f8ae307a4"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-006-runner",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-58f07dce-1bc2-48ae-b737-ca2bbe619c3c",
+      "actualPromptText": "Use case: stylized-concept.\nAsset type: production sprite-sheet source for a modern side-view pixel-art metroidvania, Runner / Dog Alien from Alien 3 (1992), profile enemy-006-runner.\nReference design: official NECA Ultimate Dog Alien from https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/ ; quadrupedal side photo https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5159712.jpg ; anatomy detail https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/515973.jpg . These URLs identify the requested exact creature; no local reference file is attached. Faithfully preserve the anatomical specification below.\nSubject invariants: one lean quadrupedal copper-brown Alien 3 Runner repeated through eight sequential poses; very long smooth glossy dark brown banana-shaped cranial dome; eye-free biomechanical face with metallic teeth; slender exposed ribcage and narrow waist; four long clawed limbs with raised digitigrade hind hocks; long segmented tapering tail with pointed tip; low small spinal vertebrae but absolutely NO tall dorsal exhaust tubes. No queen crest, no human proportions, no armor plates, no fur.\nStyle/medium: tightly controlled detailed hand-authored pixel-art look, crisp pixel clusters, restrained black/umber/copper highlights, readable game silhouette. Not a 3D toy render. Neutral consistent upper-left lighting.\nCamera: exact orthographic side view facing RIGHT in every cell, head at right, tail behind to left; fixed camera and unchanged subject scale, no perspective rotations or foreshortening.\nComposition: a wide 2:1 image with exactly FOUR equal columns and TWO equal rows, EIGHT poses in reading order. Invisible equal square cells. Same local root position and common baseline in every cell; keep 15 percent empty margin on ALL four sides of EACH cell, including full tail and fingers. No tail or claw may cross cell boundaries. Full body and tail visible, no cropped poses. IMPORTANT: draw each entire creature including its tail SMALLER: it must occupy only the central 65 percent of its own square cell horizontally. Leave a very obvious magenta gap between every pair of creatures. Tail may curve compactly up behind the body, but never extend beyond the central 65 percent. Subject spine length and head length constant. Maintain the same scale for all eight poses. One creature per cell, no extraneous objects.\nBackground: absolutely uniform flat chroma key MAGENTA #FF00FF across the entire canvas, including all gaps between limbs and around every tail. The magenta is a production matte to be removed later. No transparency checkerboard, no gradients, no ground shadows, no labels or numbers, no grid or cell borders, no text, no watermark.\nAnimation: IDLE alert-breathing loop, eight distinct sequential drawings rather than duplicate frames. Pose1 low neutral four-foot stance;2 ribcage gently expands;3 head rises a little while front feet remain planted;4 neck reaches alert apex and tail tip lifts;5 chest eases down;6 head lowers slightly and tail tip sweeps back;7 ribcage at exhale and near forepaw flexes;8 smoothly approaches pose1 without copying it. All eight remain quadrupedal and keep the canonical proportions. Do not substitute a walking cycle. Produce only this eight-frame IDLE sheet. Exactly eight complete distinct frames, four across and two down, no close-ups.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_RUNNER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.127Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-006-runner/idle.png",
+      "sourceSha256": "4f1124c192226d7703fcbbd07ddb5777ff1d9f12d885a56bc78bf3f0a8d3d235",
+      "contractPromptSha256": "b9c1e452fcaf4e59f9174800b64528b6546e86cb7390379fdc602f61ee709516",
+      "promptSha256": "7795e704274b63957c3a7a221f0a385a2decfb2e3b7ac207861dc3350f833d96",
+      "referenceLockSha256": "29ecca932096a0e5d51d15d2e160852aeb6e227b16982198a2ab59eceda3a67e"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-006-runner",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-47ed8a71-1972-4d89-9c06-b7c894b0035e",
+      "actualPromptText": "Use case: stylized-concept.\nAsset type: production sprite-sheet source for a modern side-view pixel-art metroidvania, Runner / Dog Alien from Alien 3 (1992), profile enemy-006-runner.\nReference design: official NECA Ultimate Dog Alien from https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/ ; quadrupedal side photo https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5159712.jpg ; anatomy detail https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/515973.jpg . These URLs identify the requested exact creature; no local reference file is attached. Faithfully preserve the anatomical specification below.\nSubject invariants: one lean quadrupedal copper-brown Alien 3 Runner repeated through eight sequential poses; very long smooth glossy dark brown banana-shaped cranial dome; eye-free biomechanical face with metallic teeth; slender exposed ribcage and narrow waist; four long clawed limbs with raised digitigrade hind hocks; long segmented tapering tail with pointed tip; low small spinal vertebrae but absolutely NO tall dorsal exhaust tubes. No queen crest, no human proportions, no armor plates, no fur.\nStyle/medium: tightly controlled detailed hand-authored pixel-art look, crisp pixel clusters, restrained black/umber/copper highlights, readable game silhouette. Not a 3D toy render. Neutral consistent upper-left lighting.\nCamera: exact orthographic side view facing RIGHT in every cell, head at right, tail behind to left; fixed camera and unchanged subject scale, no perspective rotations or foreshortening.\nComposition: a wide 2:1 image with exactly FOUR equal columns and TWO equal rows, EIGHT poses in reading order. Invisible equal square cells. Same local root position and common baseline in every cell; keep 15 percent empty margin on ALL four sides of EACH cell, including full tail and fingers. No tail or claw may cross cell boundaries. Full body and tail visible, no cropped poses. IMPORTANT: draw each entire creature including its tail SMALLER: it must occupy only the central 65 percent of its own square cell horizontally. Leave a very obvious magenta gap between every pair of creatures. Tail may curve compactly up behind the body, but never extend beyond the central 65 percent. Subject spine length and head length constant. Maintain the same scale for all eight poses. One creature per cell, no extraneous objects.\nBackground: absolutely uniform flat chroma key MAGENTA #FF00FF across the entire canvas, including all gaps between limbs and around every tail. The magenta is a production matte to be removed later. No transparency checkerboard, no gradients, no ground shadows, no labels or numbers, no grid or cell borders, no text, no watermark.\nIdentity anchor description: retain the immediately established Alien3 Runner design: thin copper-brown skeletal quadruped, copper edge pixels and dark umber cavities, smooth dark brown long horizontally-curved cranial dome, small exposed metallic teeth, narrow horizontal ribcage, thin forearms, very bent high hind hocks, compact upcurved segmented tail, no dorsal pipes. Fixed strict right-side orthographic camera. Generate NEW movement poses using precisely this design. No local reference file is attached due to a tooling failure.\nAnimation: RUN / MOVEMENT, exactly EIGHT consecutive hand-drawn poses of a fast quadruped gallop, looping smoothly. Pose1 hind legs compressed forward under narrow abdomen, leading forefoot reaches right. Pose2 near forefoot plants while far forefoot lifts. Pose3 forelegs push backward and hindquarters rise. Pose4 long airborne extension with forelegs reaching right and hind legs stretched left, body still inside cell. Pose5 leading forefoot lands and spine starts compressing. Pose6 both rear hocks swing underneath belly as forelegs tuck. Pose7 rear feet plant and push, forelegs begin next forward swing. Pose8 late takeoff approaching pose1 but visibly distinct. Root motion stays fixed in each cell; believable advancing contacts and tail counterbalance. Never stand upright; never show five limbs; claws and long tapered segmented tail complete in every cell. No motion blur, no smear trails, no duplicate pasted pose. Exactly four columns and two rows, magenta background and generous safe cell spacing. Output only this movement sheet.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_RUNNER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.131Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-006-runner/move.png",
+      "sourceSha256": "d1acc004e5496b9ab3eb998594fe0f5a8473027060461057d3bfff69fccf0009",
+      "contractPromptSha256": "894dcfed605fc57b9864b7dd7c736276d7292bc90c2dab17cae2a5e7b5d50909",
+      "promptSha256": "11ab0a744645ee1e17a9c54757f017590695ce95773ab5fc80962a42d6235da6",
+      "referenceLockSha256": "29ecca932096a0e5d51d15d2e160852aeb6e227b16982198a2ab59eceda3a67e"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-006-runner",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-0b8b6a8a-845e-4679-9259-796426d63276",
+      "actualPromptText": "Use case: stylized-concept.\nAsset type: production sprite-sheet source for a modern side-view pixel-art metroidvania, Runner / Dog Alien from Alien 3 (1992), profile enemy-006-runner.\nReference design: official NECA Ultimate Dog Alien from https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/ ; quadrupedal side photo https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5159712.jpg ; anatomy detail https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/515973.jpg . These URLs identify the requested exact creature; no local reference file is attached. Faithfully preserve the anatomical specification below.\nSubject invariants: one lean quadrupedal copper-brown Alien 3 Runner repeated through eight sequential poses; very long smooth glossy dark brown banana-shaped cranial dome; eye-free biomechanical face with metallic teeth; slender exposed ribcage and narrow waist; four long clawed limbs with raised digitigrade hind hocks; long segmented tapering tail with pointed tip; low small spinal vertebrae but absolutely NO tall dorsal exhaust tubes. No queen crest, no human proportions, no armor plates, no fur.\nStyle/medium: tightly controlled detailed hand-authored pixel-art look, crisp pixel clusters, restrained black/umber/copper highlights, readable game silhouette. Not a 3D toy render. Neutral consistent upper-left lighting.\nCamera: exact orthographic side view facing RIGHT in every cell, head at right, tail behind to left; fixed camera and unchanged subject scale, no perspective rotations or foreshortening.\nComposition: a wide 2:1 image with exactly FOUR equal columns and TWO equal rows, EIGHT poses in reading order. Invisible equal square cells. Same local root position and common baseline in every cell; keep 15 percent empty margin on ALL four sides of EACH cell, including full tail and fingers. No tail or claw may cross cell boundaries. Full body and tail visible, no cropped poses. IMPORTANT: draw each entire creature including its tail SMALLER: it must occupy only the central 65 percent of its own square cell horizontally. Leave a very obvious magenta gap between every pair of creatures. Tail may curve compactly up behind the body, but never extend beyond the central 65 percent. Subject spine length and head length constant. Maintain the same scale for all eight poses. One creature per cell, no extraneous objects.\nBackground: absolutely uniform flat chroma key MAGENTA #FF00FF across the entire canvas, including all gaps between limbs and around every tail. The magenta is a production matte to be removed later. No transparency checkerboard, no gradients, no ground shadows, no labels or numbers, no grid or cell borders, no text, no watermark.\nIdentity anchor description: preserve the previously established lean copper-brown skeletal Alien3 Runner, long low smooth dark chocolate dome with a narrow copper rim highlight, thin exposed ribs, high bent rear hocks, copper pixel clusters and dark umber cavities. No local reference file is attached due to a tooling failure.\nAnimation: POUNCE-AND-BITE ATTACK, eight sequential genuinely different poses, one attack sequence in reading order. Pose1 very low four-foot anticipation crouch, jaws closed. Pose2 compress hind legs farther and pull forepaws back. Pose3 launch diagonally forward and slightly upward, forelimbs starting reach, jaw begins open. Pose4 airborne extension with both foreclaws reaching right and hindlegs pushing back, jaw open. Pose5 the apex of bite strike, smooth long dome still recognizable, small inner jaw briefly projects right and foreclaws splay. Pose6 forefeet landing, head retracts, rear legs collect. Pose7 all feet accept weight in low crouch, jaw closes. Pose8 recovered low quadrupedal neutral stance ready to return to idle. Preserve full anatomy and tail in each cell, no victim, no projectile, no mouth effect, no gore, no trail, no extra limbs. Flight arc is only a small vertical shift inside own square cell; same drawing scale and root alignment; no change of perspective. Four columns, two rows, eight poses, uniform MAGENTA #FF00FF matte, generous margin, no grid or text.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_RUNNER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.135Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-006-runner/attack.png",
+      "sourceSha256": "df6c5687bdce5c08dfd68d9df8fecb7557a9ad482bc579a0589020729c587b90",
+      "contractPromptSha256": "27fb8a9c12292efd5e6026257348ee2437affe09542b9169a46259825de5c20f",
+      "promptSha256": "96b0490389c0eefe248407ff8a86d5292cf575e25e6ce15377748537236d4c2f",
+      "referenceLockSha256": "29ecca932096a0e5d51d15d2e160852aeb6e227b16982198a2ab59eceda3a67e"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-006-runner",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "exec-e6197a20-07e9-4357-8e3b-a2e9ca70df59",
+      "actualPromptText": "Use case: stylized-concept.\nAsset type: production sprite-sheet source for a modern side-view pixel-art metroidvania, Runner / Dog Alien from Alien 3 (1992), profile enemy-006-runner.\nReference design: official NECA Ultimate Dog Alien from https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/ ; quadrupedal side photo https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5159712.jpg ; anatomy detail https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/515973.jpg . These URLs identify the requested exact creature; no local reference file is attached. Faithfully preserve the anatomical specification below.\nSubject invariants: one lean quadrupedal copper-brown Alien 3 Runner repeated through eight sequential poses; very long smooth glossy dark brown banana-shaped cranial dome; eye-free biomechanical face with metallic teeth; slender exposed ribcage and narrow waist; four long clawed limbs with raised digitigrade hind hocks; long segmented tapering tail with pointed tip; low small spinal vertebrae but absolutely NO tall dorsal exhaust tubes. No queen crest, no human proportions, no armor plates, no fur.\nStyle/medium: tightly controlled detailed hand-authored pixel-art look, crisp pixel clusters, restrained black/umber/copper highlights, readable game silhouette. Not a 3D toy render. Neutral consistent upper-left lighting.\nCamera: exact orthographic side view facing RIGHT in every cell, head at right, tail behind to left; fixed camera and unchanged subject scale, no perspective rotations or foreshortening.\nComposition: a wide 2:1 image with exactly FOUR equal columns and TWO equal rows, EIGHT poses in reading order. Invisible equal square cells. Same local root position and common baseline in every cell; keep 15 percent empty margin on ALL four sides of EACH cell, including full tail and fingers. No tail or claw may cross cell boundaries. Full body and tail visible, no cropped poses. IMPORTANT: draw each entire creature including its tail SMALLER: it must occupy only the central 65 percent of its own square cell horizontally. Leave a very obvious magenta gap between every pair of creatures. Tail may curve compactly up behind the body, but never extend beyond the central 65 percent. Subject spine length and head length constant. Maintain the same scale for all eight poses. One creature per cell, no extraneous objects.\nBackground: absolutely uniform flat chroma key MAGENTA #FF00FF across the entire canvas, including all gaps between limbs and around every tail. The magenta is a production matte to be removed later. No transparency checkerboard, no gradients, no ground shadows, no labels or numbers, no grid or cell borders, no text, no watermark.\nIdentity anchor description: preserve the previously established lean copper-brown skeletal Alien3 Runner, long low smooth dark chocolate dome with a narrow copper rim highlight, thin exposed ribs, high bent rear hocks, copper pixel clusters and dark umber cavities. No local reference file is attached due to a tooling failure.\nAnimation: DEATH / COLLAPSE, eight distinct progressive side-view drawings from alive to entirely dead, NOT an attack cycle, NOT a recovery loop. Pose1 flinches with lowered shoulder and splayed foreclaws, still on four feet. Pose2 leading elbow buckles, head starts dropping. Pose3 front chest approaches ground while rear hocks fold. Pose4 ribcage falls onto side, limbs give way beneath body. Pose5 body settles sideways, dome and jaw nearly touch ground, legs fold inertly. Pose6 whole body lying flat and tail relaxes, all four limbs bent, mouth slack. Pose7 small final tail-tip uncurl and last settling of head. Pose8 fully lifeless side-lying carcass, dome and ribcage rest on ground, all limbs collapsed and relaxed tail with pointed tip; no restanding. Keep exact same side camera and rightward head orientation. Fully preserve head and tail in every cell, no detached pieces, no blood spray, no puddle, no smoke. Same size throughout; posture height naturally decreases but do not shrink the creature. Four columns, two rows, eight poses, uniform MAGENTA #FF00FF matte, generous margin, no grid or text.",
+      "actor": "Codex batch-001 source import",
+      "note": "Actual completed built-in ImageGen call; selected source and prompt documented in docs/references/V66_RUNNER_IMAGEGEN.md",
+      "at": "2026-08-31T10:46:51.138Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-001/enemy-006-runner/death.png",
+      "sourceSha256": "91a3a38c5dbc191503bf73564a0dcd924792e76c2318e44265fba1e43b3ddcaa",
+      "contractPromptSha256": "7982f6d935c0237f3b0643eab3d4e2ee8ba9bce615d4a68627d943623a755633",
+      "promptSha256": "83f547e383305fe621f8a47f0f1861a8e4f965f6c66d580b1747a1fea9f33009",
+      "referenceLockSha256": "29ecca932096a0e5d51d15d2e160852aeb6e227b16982198a2ab59eceda3a67e"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex root",
+      "note": "32 poses visually reviewed after source-anchored normalization and matte+AA correction. See docs/references/V66_BATCH_001_VISUAL_REVIEW.json. Actual-runtime marine scale checked. Browser gameplay validation remains unavailable; no pixel 1:1 certification.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-08-31T11:32:06.165Z",
+      "metadataSha256": "3e3ce83deee2559570e2c1f5383032fad69b07dd13b8a474067d714e9832f2dd",
+      "atlasSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex root",
+      "note": "32 poses visually reviewed after source-anchored normalization and matte+AA correction. See docs/references/V66_BATCH_001_VISUAL_REVIEW.json. Actual-runtime marine scale checked. Browser gameplay validation remains unavailable; no pixel 1:1 certification.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-08-31T11:32:15.687Z",
+      "metadataSha256": "bbccd2738d3686aa2e4fbb0d277b9ef4edcb295a63dc2f487fbb9e37cd07cdca",
+      "atlasSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex root",
+      "note": "32 poses visually reviewed after source-anchored normalization and matte+AA correction. See docs/references/V66_BATCH_001_VISUAL_REVIEW.json. Actual-runtime marine scale checked. Browser gameplay validation remains unavailable; no pixel 1:1 certification.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-08-31T11:32:26.183Z",
+      "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+      "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex root",
+      "note": "32 poses visually reviewed after source-anchored normalization and matte+AA correction. See docs/references/V66_BATCH_001_VISUAL_REVIEW.json. Actual-runtime marine scale checked. Browser gameplay validation remains unavailable; no pixel 1:1 certification.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-08-31T11:32:36.226Z",
+      "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+      "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex root",
+      "note": "32 poses visually reviewed after source-anchored normalization and matte+AA correction. See docs/references/V66_BATCH_001_VISUAL_REVIEW.json. Actual-runtime marine scale checked. Browser gameplay validation remains unavailable; no pixel 1:1 certification.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-08-31T11:32:51.038Z",
+      "metadataSha256": "254a421e7cabcaa0fae3402a2beb9952f7fbe5648ea77994475388a7f9afa1d0",
+      "atlasSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex root",
+      "note": "Accepted32pose atlas wired to actual renderer/catalogue; captured70 passing engine/asset/production-navigation and egg tests. Browser visual QA remains unavailable, no production promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-level-regression-v66.test.mjs tests/enemy-ovomorph-status-production-v66.test.mjs tests/enemy-v66-production-access.test.mjs tests/enemy-facehugger-child-physics-v66.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "1fe04b0cb507adbd7f99a1c3d0b455c3f557e0303c0a500dfc6f381b9795c7c5"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "9c2e29fd01c9be0165ff713bcdc2c4f0b5d37f12b4ef604a7a40ca2b4ab347d8"
+        },
+        "log": {
+          "path": "docs/references/V66_BATCH_001_RUNTIME_TEST_OUTPUT.md",
+          "sha256": "c25e41e39648f13593cc3cada1363db1ce8715158e313904dab29f6ae4ea0e9d"
+        }
+      },
+      "at": "2026-08-31T11:35:07.237Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex root",
+      "note": "Accepted32pose atlas wired to actual renderer/catalogue; captured70 passing engine/asset/production-navigation and egg tests. Browser visual QA remains unavailable, no production promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-level-regression-v66.test.mjs tests/enemy-ovomorph-status-production-v66.test.mjs tests/enemy-v66-production-access.test.mjs tests/enemy-facehugger-child-physics-v66.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "1fe04b0cb507adbd7f99a1c3d0b455c3f557e0303c0a500dfc6f381b9795c7c5"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "9c2e29fd01c9be0165ff713bcdc2c4f0b5d37f12b4ef604a7a40ca2b4ab347d8"
+        },
+        "log": {
+          "path": "docs/references/V66_BATCH_001_RUNTIME_TEST_OUTPUT.md",
+          "sha256": "c25e41e39648f13593cc3cada1363db1ce8715158e313904dab29f6ae4ea0e9d"
+        }
+      },
+      "at": "2026-08-31T11:35:07.371Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex root",
+      "note": "Accepted32pose atlas wired to actual renderer/catalogue; captured70 passing engine/asset/production-navigation and egg tests. Browser visual QA remains unavailable, no production promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-level-regression-v66.test.mjs tests/enemy-ovomorph-status-production-v66.test.mjs tests/enemy-v66-production-access.test.mjs tests/enemy-facehugger-child-physics-v66.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "1fe04b0cb507adbd7f99a1c3d0b455c3f557e0303c0a500dfc6f381b9795c7c5"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "9c2e29fd01c9be0165ff713bcdc2c4f0b5d37f12b4ef604a7a40ca2b4ab347d8"
+        },
+        "log": {
+          "path": "docs/references/V66_BATCH_001_RUNTIME_TEST_OUTPUT.md",
+          "sha256": "c25e41e39648f13593cc3cada1363db1ce8715158e313904dab29f6ae4ea0e9d"
+        }
+      },
+      "at": "2026-08-31T11:35:07.488Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex root",
+      "note": "Accepted32pose atlas wired to actual renderer/catalogue; captured70 passing engine/asset/production-navigation and egg tests. Browser visual QA remains unavailable, no production promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-level-regression-v66.test.mjs tests/enemy-ovomorph-status-production-v66.test.mjs tests/enemy-v66-production-access.test.mjs tests/enemy-facehugger-child-physics-v66.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "1fe04b0cb507adbd7f99a1c3d0b455c3f557e0303c0a500dfc6f381b9795c7c5"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "9c2e29fd01c9be0165ff713bcdc2c4f0b5d37f12b4ef604a7a40ca2b4ab347d8"
+        },
+        "log": {
+          "path": "docs/references/V66_BATCH_001_RUNTIME_TEST_OUTPUT.md",
+          "sha256": "c25e41e39648f13593cc3cada1363db1ce8715158e313904dab29f6ae4ea0e9d"
+        }
+      },
+      "at": "2026-08-31T11:35:07.607Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex root",
+      "note": "Accepted32pose atlas wired to actual renderer/catalogue; captured70 passing engine/asset/production-navigation and egg tests. Browser visual QA remains unavailable, no production promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-level-regression-v66.test.mjs tests/enemy-ovomorph-status-production-v66.test.mjs tests/enemy-v66-production-access.test.mjs tests/enemy-facehugger-child-physics-v66.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "1fe04b0cb507adbd7f99a1c3d0b455c3f557e0303c0a500dfc6f381b9795c7c5"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "9c2e29fd01c9be0165ff713bcdc2c4f0b5d37f12b4ef604a7a40ca2b4ab347d8"
+        },
+        "log": {
+          "path": "docs/references/V66_BATCH_001_RUNTIME_TEST_OUTPUT.md",
+          "sha256": "c25e41e39648f13593cc3cada1363db1ce8715158e313904dab29f6ae4ea0e9d"
+        }
+      },
+      "at": "2026-08-31T11:35:07.717Z"
+    }
+  ]
+}

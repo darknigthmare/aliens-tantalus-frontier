@@ -114,14 +114,21 @@ export function formatCatalogValueV62(value) {
   return isRenderableValue(value) ? String(value) : null;
 }
 
-export function getCatalogSpriteFrameV62(visual, frameIndex = 0) {
+export function getCatalogPreviewClipV66(visual, clipId = null) {
+  const clips = Array.isArray(visual?.previewClips) ? visual.previewClips : [];
+  return clipId ? clips.find((entry) => entry.clip?.id === clipId) || (visual?.idleClip?.clip?.id === clipId ? visual.idleClip : null) : visual?.idleClip || clips[0] || null;
+}
+
+export function getCatalogSpriteFrameV62(visual, frameIndex = 0, clipId = null) {
   const grid = visual?.grid;
-  const frames = visual?.idleClip?.clip?.frames;
+  const clip = getCatalogPreviewClipV66(visual, clipId)?.clip;
+  const frames = clip?.frames;
   if (!visual?.path || !grid || !Array.isArray(frames) || !frames.length) return null;
   const columns = Math.max(1, Math.trunc(Number(grid.columns) || 1));
   const rows = Math.max(1, Math.trunc(Number(grid.rows) || 1));
   const cellCount = columns * rows;
-  const requestedFrame = Number(frames[Math.abs(Math.trunc(frameIndex)) % frames.length]);
+  const ordinal = Math.max(0, Math.trunc(Number(frameIndex) || 0));
+  const requestedFrame = Number(frames[clip.loop ? ordinal % frames.length : Math.min(ordinal, frames.length - 1)]);
   if (!Number.isInteger(requestedFrame) || requestedFrame < 0 || requestedFrame >= cellCount) return null;
   return Object.freeze({
     path: visual.path,
@@ -256,12 +263,12 @@ export class CatalogSpriteAnimatorV62 {
     return rootReduced || mediaReduced;
   }
 
-  mount(target, visual, label, { detail = false } = {}) {
+  mount(target, visual, label, { detail = false, controlsTarget = target } = {}) {
     const firstFrame = getCatalogSpriteFrameV62(visual, 0);
     if (!isElementLike(target) || !firstFrame) return null;
     const documentRef = target.ownerDocument || this.document;
     const viewport = createElement(documentRef, 'figure', `catalog-v62__sprite${detail ? ' catalog-v62__sprite--detail' : ''}`);
-    viewport.setAttribute('aria-label', `${label} — animation idle issue de la plaquette dédiée`);
+    viewport.setAttribute('aria-label', `${label} — animation ${visual.idleClip?.clip?.id || ''} issue de la plaquette dédiée`);
     viewport.dataset.sheetId = visual.sheetId || '';
     viewport.dataset.clipId = visual.idleClip?.clip?.id || '';
     const image = createElement(documentRef, 'img', 'catalog-v62__sheet');
@@ -272,23 +279,61 @@ export class CatalogSpriteAnimatorV62 {
     viewport.append(image);
     target.append(viewport);
 
-    const frames = visual.idleClip.clip.frames;
-    const fps = Math.max(1, Math.min(24, Number(visual.idleClip.clip.fps) || 1));
-    const state = { image, visual, index: 0, timer: null };
+    const state = { image, visual, index: 0, timer: null, clipId: visual.idleClip.clip.id };
     const applyFrame = () => {
-      const frame = getCatalogSpriteFrameV62(state.visual, state.index);
+      const frame = getCatalogSpriteFrameV62(state.visual, state.index, state.clipId);
       if (!frame) return;
       image.style.width = `${frame.widthPercent}%`;
       image.style.height = `${frame.heightPercent}%`;
       image.style.transform = `translate(${frame.translateXPercent}%, ${frame.translateYPercent}%)`;
       viewport.dataset.frame = String(frame.frame);
+      viewport.dataset.clipId = state.clipId;
     };
-    applyFrame();
-    if (!this.isReducedMotion() && frames.length > 1) {
+    const play = () => {
+      if (state.timer !== null) globalThis.clearInterval(state.timer);
+      state.timer = null;
+      const clip = getCatalogPreviewClipV66(state.visual, state.clipId)?.clip;
+      applyFrame();
+      if (!clip || this.isReducedMotion() || clip.frames.length < 2) return;
+      const fps = Math.max(1, Math.min(24, Number(clip.fps) || 1));
       state.timer = globalThis.setInterval(() => {
-        state.index = (state.index + 1) % frames.length;
+        state.index = clip.loop ? (state.index + 1) % clip.frames.length : Math.min(state.index + 1, clip.frames.length - 1);
         applyFrame();
+        if (!clip.loop && state.index === clip.frames.length - 1) {
+          globalThis.clearInterval(state.timer);
+          state.timer = null;
+        }
       }, Math.round(1000 / fps));
+    };
+    play();
+    if (detail && visual.previewClips?.length > 1) {
+      const controls = createElement(documentRef, 'div', 'catalog-v62__detail-actions');
+      controls.dataset.animationControls = visual.sheetId;
+      const selector = createElement(documentRef, 'select');
+      selector.style.maxWidth = '100%';
+      selector.setAttribute('aria-label', `Animation de ${label}`);
+      selector.dataset.animationClipSelect = visual.sheetId;
+      for (const descriptor of visual.previewClips) {
+        const clip = descriptor.clip;
+        const option = createElement(documentRef, 'option', '', `${clip.id} · ${clip.frames.length} poses · ${clip.fps} fps`);
+        option.value = clip.id;
+        option.selected = clip.id === state.clipId;
+        selector.append(option);
+      }
+      selector.value = state.clipId;
+      selector.addEventListener('change', () => {
+        if (!getCatalogPreviewClipV66(visual, selector.value)) return;
+        state.clipId = selector.value;
+        state.index = 0;
+        viewport.setAttribute('aria-label', `${label} — animation ${state.clipId} issue de la plaquette dédiée`);
+        play();
+      });
+      const replay = createElement(documentRef, 'button', 'button compact', 'REJOUER');
+      replay.type = 'button';
+      replay.dataset.animationReplay = visual.sheetId;
+      replay.addEventListener('click', () => { state.index = 0; play(); });
+      controls.append(selector, replay);
+      (isElementLike(controlsTarget) ? controlsTarget : target).append(controls);
     }
     this.animations.add(state);
     return viewport;
@@ -563,7 +608,8 @@ export class CatalogWorkbenchV62 {
       return;
     }
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
-    if (record.visual) this.animator.mount(header, record.visual, record.name, { detail: true });
+    const animationControls = createElement(this.document, 'div');
+    if (record.visual) this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls });
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
@@ -571,7 +617,9 @@ export class CatalogWorkbenchV62 {
       createElement(this.document, 'code', '', record.id)
     );
     header.append(heading);
-    this.detail.append(header, renderTaxonomyPath(this.document, record));
+    this.detail.append(header);
+    if (animationControls.children.length) this.detail.append(animationControls);
+    this.detail.append(renderTaxonomyPath(this.document, record));
 
     const canonSection = this.renderSection('FAITS DE RÉFÉRENCE', 'canon');
     const canonData = createElement(this.document, 'dl', 'catalog-v62__data-list');

@@ -175,7 +175,8 @@ test('armurerie et pickup consomment les bitmaps réels sans placeholder CSS', a
   assert.match(catalogRuntime, /resolveEquipmentVisualProfileV56\(entry\)/);
   assert.match(catalogRuntime, /resolveEquipmentVisualStateV56\(entry\)/);
   assert.match(catalogUi, /getCatalogSpriteFrameV62\(visual, 0\)/);
-  assert.match(catalogUi, /animation idle issue de la plaquette dédiée/);
+  assert.match(catalogUi, /animation \$\{visual\.idleClip\?\.clip\?\.id \|\| ''\} issue de la plaquette dédiée/);
+  assert.match(catalogUi, /animation \$\{state\.clipId\} issue de la plaquette dédiée/);
   assert.match(catalogUi, /image\.style\.width = `\$\{frame\.widthPercent\}%`/);
   assert.match(catalogUi, /image\.style\.height = `\$\{frame\.heightPercent\}%`/);
   assert.doesNotMatch(catalogRuntime + catalogUi, /equipment-placeholder|placeholder-equipment/);

@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "profiles": {
+    "enemy-001-ovomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/products/aliens-40th-anniversary-carton-of-alien-eggs-6-pack-accessory-pack",
+        "https://cdn.shopify.com/s/files/1/1227/0654/files/51798_UNP__5.jpg?v=1777214175",
+        "https://cdn.shopify.com/s/files/1/1227/0654/files/51798_UNP__3.jpg?v=1777214173"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/reference-masters/v66/batch-001/neca-ovomorph-eggs.jpg"
+      ],
+      "designLock": "Aliens 1986 Ovomorph: upright olive-brown pebbled leathery egg, four fleshy apical lips, rust-pink veined lining. No 1979 tentacle-root base; sealed/opening/release/collapsed death are distinct. Hatching Facehugger is a separate runtime actor, not baked into the egg sprites.",
+      "reviewer": "root, official photographs visually reviewed",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "sealed": 1,
+        "opening": 1.217,
+        "hatch": 1.29,
+        "destroyed": 1.24
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual invariant measurements: lower egg shell width, or cranial length cross-checked against torso; no per-frame bounding-box rescaling. See measured evidence and uncertainty.",
+        "reviewer": "Codex root and drone_warrior_art",
+        "reviewedAt": "2026-08-31",
+        "evidencePaths": [
+          "docs/references/V66_BATCH_001_SCALE_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-003-chestburster": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5164612.jpg"
+      ],
+      "localPaths": [],
+      "designLock": "Alien 1979 Chestburster: pale ochre/beige limbless ribbed serpentine body, smooth rounded elongated head, chrome teeth, long ring-segmented tapering tail. No arms, legs, eyes, adult dorsal tubes or Bambi anatomy. Right-facing side view. Clean neutral palette without the reference toy's blood paint.",
+      "reviewer": "root, official photograph visually reviewed",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.15,
+        "attack": 1.2,
+        "death": 1.2
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual invariant measurements: lower egg shell width, or cranial length cross-checked against torso; no per-frame bounding-box rescaling. See measured evidence and uncertainty.",
+        "reviewer": "Codex root and drone_warrior_art",
+        "reviewedAt": "2026-08-31",
+        "evidencePaths": [
+          "docs/references/V66_BATCH_001_SCALE_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-004-drone-big-chap": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/516462.jpg"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-001/enemy-004-drone-big-chap/references/neca-official-reference.jpg"
+      ],
+      "designLock": "Alien 1979 Big Chap: smooth elongated dark translucent dome, slender black biomechanical ribbed biped, dorsal pipes, silver teeth/inner jaw and segmented spear-tail. No 1986 exposed ridge crest or royal crown. Right-facing gameplay side view.",
+      "reviewer": "drone_warrior_art agent, official photographs visually reviewed",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-005-warrior": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2017/06/aliens-7-scale-action-figures-ultimate-alien-warrior-1986-assortment/",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2017/06/51644-Blue3.jpg"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/references/neca-official-reference.jpg"
+      ],
+      "designLock": "Aliens 1986 Warrior: exposed ridged elongated skull, blue-black biomechanical body, biped with correct hands and feet, dorsal pipes and long segmented tail. No smooth Big Chap dome or royal crown. Right-facing side view, same skull/torso size across actions.",
+      "reviewer": "drone_warrior_art agent, official photographs visually reviewed",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-006-runner": {
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+        "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5159712.jpg"
+      ],
+      "localPaths": [],
+      "designLock": "Alien 3 Dog Alien/Runner: lean copper-brown quadruped, smooth long dome, digitigrade hind legs, long pointed tail and no dorsal pipes. Four-legged low gait and pounce, never bipedal adult drone anatomy. Right-facing orthographic gameplay view.",
+      "reviewer": "batch_scope_audit agent, official photographs visually reviewed",
+      "reviewedAt": "2026-08-31",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.15,
+        "attack": 1.15,
+        "death": 1.07
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual invariant measurements: lower egg shell width, or cranial length cross-checked against torso; no per-frame bounding-box rescaling. See measured evidence and uncertainty.",
+        "reviewer": "Codex root and drone_warrior_art",
+        "reviewedAt": "2026-08-31",
+        "evidencePaths": [
+          "docs/references/V66_BATCH_001_SCALE_REVIEW.md"
+        ]
+      }
+    }
+  }
+}

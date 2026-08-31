@@ -1,0 +1,10 @@
+# V66 provenance hashes describe exact bytes on Windows and Linux.
+# Keep reviewed text, normalization metadata and runtime test evidence in LF.
+docs/references/V66_* text eol=lf
+assets/openai/sprites/metadata/v66/*.json text eol=lf
+assets/openai/sprites/manifest-v66.json text eol=lf
+src/*v66.js text eol=lf
+scripts/*v66* text eol=lf
+scripts/enemy-batch-*.mjs text eol=lf
+tests/*v66*.mjs text eol=lf
+tests/test_enemy_batch_normalizer_v66.py text eol=lf

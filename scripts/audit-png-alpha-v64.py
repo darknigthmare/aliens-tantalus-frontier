@@ -27,6 +27,15 @@ V64_SHEET_IDS = {
     "enemy.offspring.action.v64",
     "enemy.predalien.action.v64",
 }
+IGNORED_PRODUCTION_PREFIXES = tuple(
+    f"sprites/{directory}/{version}/"
+    for version in ("v65", "v66")
+    for directory in ("frames", "reference-masters", "previews", "metadata")
+) + (
+    "sprites/normalized/enemy-clips-v66/",
+    "sprites/normalized/enemy-motion-v66/",
+    "sprites/normalized/enemy-profiles-v66/",
+)
 
 
 def load_base_audit():
@@ -94,11 +103,9 @@ def main() -> None:
     args = parse_args()
     audit = load_base_audit()
     # Future production candidates are not V64 runtime PNGs. The separate
-    # V65 gate verifies accepted WebP pixels, alpha, cell geometry and sources.
-    report = audit.build_report(audit.ASSET_ROOT, audit.MANIFEST, ignored_production_prefixes=(
-        "sprites/frames/v65/", "sprites/reference-masters/v65/",
-        "sprites/previews/v65/", "sprites/metadata/v65/",
-    ))
+    # V65/V66 gates verify accepted WebP pixels, alpha, cell geometry and sources.
+    # Ignore production candidates before even the historical excluded count.
+    report = audit.build_report(audit.ASSET_ROOT, audit.MANIFEST, ignored_production_prefixes=IGNORED_PRODUCTION_PREFIXES)
     add_v64_cell_quality(report)
     report["release"] = "v64"
     report["generatedBy"] = "scripts/audit-png-alpha-v64.py"

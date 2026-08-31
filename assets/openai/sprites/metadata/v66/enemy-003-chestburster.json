@@ -1,0 +1,2925 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-003-chestburster",
+  "subject": "Chestburster",
+  "batchId": "batch-001",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/",
+    "https://eadn-wc04-13179453.nxedge.io/wp-content/uploads/2019/07/5164612.jpg"
+  ],
+  "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82",
+  "animationFamily": "juvenile",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-003-chestburster.webp",
+  "normalizedSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259",
+  "preview": "assets/openai/sprites/previews/v66/enemy-003-chestburster/all.gif",
+  "previewSha256": "817a7782b65a6aae4f77fe2a0b5a2defb17a581377c087178cc8b8d4984faeda",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.328014184,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.15,
+    "attack": 1.2,
+    "death": 1.2
+  },
+  "scaleCalibrationReview": {
+    "note": "Manual invariant measurements: lower egg shell width, or cranial length cross-checked against torso; no per-frame bounding-box rescaling. See measured evidence and uncertainty.",
+    "reviewer": "Codex root and drone_warrior_art",
+    "reviewedAt": "2026-08-31",
+    "evidencePaths": [
+      "docs/references/V66_BATCH_001_SCALE_REVIEW.md"
+    ]
+  },
+  "scaleCalibrationEvidence": [
+    {
+      "path": "docs/references/V66_BATCH_001_SCALE_REVIEW.md",
+      "sha256": "fdf6feb2051e76fb72abfc788c99902d87a2d39fe19278e4852e3d89ee658c30"
+    }
+  ],
+  "physicalAnchorReview": {
+    "path": "docs/references/V66_BATCH_001_ANCHOR_REVIEW.json",
+    "sha256": "aaadf6ae692cb48952b3e1453cf57fc9a9e8fc3103e97c80f7253181b060a635",
+    "status": "reviewed",
+    "reviewer": "codex:/root/enemy_batch_pipeline",
+    "reviewedAt": "2026-08-31",
+    "method": "Manual per-pose visual measurement of the ventral cervical/anterior-trunk root, projected vertically onto the complete source lower bound including extraction guard. Source images inspected at original dimensions with a 50px cell-relative QA grid, then each proposed landmark and floor projection inspected again with temporary cyan markers. No source image edits, no inferred root from tail bounding-box center.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": true,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 310,
+    "aaFringePixelCount": 103,
+    "removedPixelCount": 413,
+    "sourceProofSha256": "7708b7067e447e544a2495a9fa657de1c62b24c3df7964a182ee630a9cecb29e"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/idle.png",
+      "sha256": "ae3881a0b98eec299f33d81d6facdbdbe5f64f54a0d8d08d8fe9daa1b5066ba6",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "3726342e2f79ccdbe44ed58d6cad2ed2e3ce095147dbbcee688c9faf6f5f36fd",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          243,
+          19,
+          236
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "5dc4c3e64246d6f3caa8361ff80221fddda13e16a3ddb4f7f076a8fe0e4f7b00",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/move.png",
+      "sha256": "691000516002638b24b6dfbca6bb9c5f48336d6c165c51b9135fa608dd34bbc1",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "9ed6da3350ee834359deeabd9ab4fc8f49601231ac12078d690e23d135097d5f",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          236,
+          15,
+          222
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "52561852ba6338377dd6991ef0be7a140abe9be9696458beda2e9b843dade2ec",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/attack.png",
+      "sha256": "f160eed8c058008a7587a1160b90e4074c690c8293b0ef5ca0c959a330ec5c56",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "a27f1d7223e12a4adc1768ae9896e6a3175468095f6ca176ffed252fcf4a7a64",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          237,
+          15,
+          215
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "caf28a4861eda93ed8f1662fa7311d8d212a81b2ce1f4240ef344529950d1f63",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-001/enemy-003-chestburster/death.png",
+      "sha256": "ddf09f6811fb33d10a0e5dd3f415203650c26af9b338df4968533df48596e52c",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "6517fa2221290ecc8f65553af55c98d5f6fb5ce0fd4ff5a5b41d14eda0f6fd09",
+      "referenceLockSha256": "6444a1e382c9d3846e4f0487a461c672663b472c6642d12553eb7fa5cf3bde82",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 310,
+        "aaFringePixelCount": 103,
+        "strictCoreMaskSha256": "b6cfff3bf5c06f8600b78401b363e0e662c1f1560cc041a9e9bc7aa3658bafd5",
+        "aaFringeMaskSha256": "d7d77d1642cdb27c81350d6d9464b23bbb09492fdc6e61e304bd77e5102c3516",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          238,
+          14,
+          217
+        ],
+        "removedPixelCount": 413,
+        "removedCoordinatesSha256": "d4af9cbadf49ba8eeb24aa2b375abfce8d7389994c742eaaee7193f50a557aec",
+        "removedRgbaSha256": "7cfafb183a84e90e695717fe016bcb5f0544a23eb7f9485f00b8d7f4d39a48a9",
+        "sourceRgbaSha256": "7d17a582003986c2c3e99ceda2fc2499a63fc744943b6bb5404521e1aefc5f18",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-003-chestburster/idle.webp",
+      "sha256": "3b13facafa412daeee6d9375081e8116b77150a17a55eaf0b6e2917f96583586",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-003-chestburster/idle.gif",
+      "previewSha256": "1a778259e7f79f41189bd5977d95c7d5044ee64377cca73369fc3150792ff167"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-003-chestburster/move.webp",
+      "sha256": "de7252ecee1433bdb071abb356bfaa9a4d1c63718b5b0fe9dba42111676208c5",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-003-chestburster/move.gif",
+      "previewSha256": "fa4080436674ab92459c65263c697c0b96976238bd42e2e8b7f195d2f46a38db"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-003-chestburster/attack.webp",
+      "sha256": "df84f1e33e4349c3dd02e0f7f89db8b0a78d442ae433263da1afe83156414393",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-003-chestburster/attack.gif",
+      "previewSha256": "2f5373b4d1b264bdea95dde26f7e17cfc93ee45b8974a8b91ef1c5b0756b5bd4"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-003-chestburster/death.webp",
+      "sha256": "8050a2c8979391cb2ba19dae335a11ab2d2a21cb40f823a7d40991645e88016e",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-003-chestburster/death.gif",
+      "previewSha256": "98e399c1df2968182f16b7b78f96cc4c327e6e1e980cd297a534be5cac963f14"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        53,
+        284,
+        402,
+        354
+      ],
+      "sourceGlobalBounds": [
+        53,
+        284,
+        402,
+        354
+      ],
+      "sourceSize": [
+        349,
+        70
+      ],
+      "foregroundPixels": 10441,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "99408db45cea8bb52e4b7a60a37b95f2607e5fe2f89f51b6102f3f7dac26ed52",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        310,
+        354
+      ],
+      "sourceLandmark": [
+        310,
+        329
+      ],
+      "sourceAnchorEvidence": "Prone pose: ventral cervical junction directly behind the skull, not the long tail midpoint. Floor is the complete preserved pose lower bound.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        257.0,
+        70.0
+      ],
+      "renderedAnchor": [
+        127.9484240687679,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        44,
+        217,
+        158,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        62,
+        242,
+        427,
+        354
+      ],
+      "sourceGlobalBounds": [
+        506,
+        242,
+        871,
+        354
+      ],
+      "sourceSize": [
+        365,
+        112
+      ],
+      "foregroundPixels": 12160,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e3fab97082b5028433f3557913cd5b2c0f31325fc2298c5e804fd81fe16df639",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        327,
+        354
+      ],
+      "sourceLandmark": [
+        327,
+        323
+      ],
+      "sourceAnchorEvidence": "Neck rising: root at the lower forebody bend where the horizontal trunk turns upward; head rise remains above the root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        265.0,
+        112.0
+      ],
+      "renderedAnchor": [
+        128.12328767123287,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        41,
+        203,
+        161,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        46,
+        220,
+        412,
+        354
+      ],
+      "sourceGlobalBounds": [
+        933,
+        220,
+        1299,
+        354
+      ],
+      "sourceSize": [
+        366,
+        134
+      ],
+      "foregroundPixels": 12923,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7f56fa191e6fb14b1bb145d171bd354b0e3d0fede511df28b06d211b75d568b5",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        315,
+        354
+      ],
+      "sourceLandmark": [
+        315,
+        325
+      ],
+      "sourceAnchorEvidence": "Higher neck: lower ventral bend under the raised cervical column, preserving the upward head movement.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        269.0,
+        134.0
+      ],
+      "renderedAnchor": [
+        128.19672131147541,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        40,
+        196,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        29,
+        203,
+        365,
+        354
+      ],
+      "sourceGlobalBounds": [
+        1359,
+        203,
+        1695,
+        354
+      ],
+      "sourceSize": [
+        336,
+        151
+      ],
+      "foregroundPixels": 13475,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e47842ff341ba299b23357579f2dc97f2ce1c06183dc28f52f4c0237c084e7e3",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        292,
+        354
+      ],
+      "sourceLandmark": [
+        292,
+        326
+      ],
+      "sourceAnchorEvidence": "Neck fully raised: lower forebody turn at ground contact, not the skull center.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        263.0,
+        151.0
+      ],
+      "renderedAnchor": [
+        128.10119047619048,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        42,
+        190,
+        152,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        46,
+        113,
+        367,
+        260
+      ],
+      "sourceGlobalBounds": [
+        46,
+        557,
+        367,
+        704
+      ],
+      "sourceSize": [
+        321,
+        147
+      ],
+      "foregroundPixels": 12844,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "79e893a22a31a9488335b2832c1323945ff9d5f1a8c2e795ce3fa42fd75a31dc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        292,
+        260
+      ],
+      "sourceLandmark": [
+        292,
+        234
+      ],
+      "sourceAnchorEvidence": "Second-row raised pose: lower upright forebody bend; coordinates subtract the nominal row origin y=444.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        246.0,
+        147.0
+      ],
+      "renderedAnchor": [
+        128.46728971962617,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        48,
+        192,
+        153,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        -8,
+        151,
+        321,
+        260
+      ],
+      "sourceGlobalBounds": [
+        436,
+        595,
+        765,
+        704
+      ],
+      "sourceSize": [
+        329,
+        109
+      ],
+      "foregroundPixels": 11245,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e11088c5b4beaf9f47cc47f7b4f2573adeb6226486fbcce4f4998a6e4686f9cb",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 5,
+          "fromCells": [
+            4
+          ],
+          "pixels": 17,
+          "componentPixels": 11245,
+          "ownerShare": 0.998488,
+          "sourceBoundsGlobal": [
+            439,
+            598,
+            762,
+            701
+          ],
+          "rgbaSha256": "3143db9d2c642b736243e00124f6b58480611b695a15a4a5bb8e05f8c4e44feb",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        260
+      ],
+      "sourceLandmark": [
+        234,
+        235
+      ],
+      "sourceAnchorEvidence": "Neck lowering: ventral cervical base where the rising neck joins the horizontal trunk; tail spill remains irrelevant to root placement.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        242.0,
+        109.0
+      ],
+      "renderedAnchor": [
+        128.44072948328267,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        49,
+        204,
+        157,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -13,
+        177,
+        318,
+        260
+      ],
+      "sourceGlobalBounds": [
+        874,
+        621,
+        1205,
+        704
+      ],
+      "sourceSize": [
+        331,
+        83
+      ],
+      "foregroundPixels": 10330,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9e4d8929daa3429001be8c6a91d2ca18dafe7efb3b1ed7d0a21b69eef7cd9a75",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 50,
+          "componentPixels": 10330,
+          "ownerShare": 0.99516,
+          "sourceBoundsGlobal": [
+            877,
+            624,
+            1202,
+            701
+          ],
+          "rgbaSha256": "4fc6ae671bb24909507746193c3f1458e09645519ce35c7b898809fa04861213",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        260
+      ],
+      "sourceLandmark": [
+        222,
+        232
+      ],
+      "sourceAnchorEvidence": "Low neck: ventral cervical junction behind the skull, preserving the short head lift.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        235.0,
+        83.0
+      ],
+      "renderedAnchor": [
+        128.3867069486405,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        51,
+        213,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        9,
+        194,
+        337,
+        260
+      ],
+      "sourceGlobalBounds": [
+        1339,
+        638,
+        1667,
+        704
+      ],
+      "sourceSize": [
+        328,
+        66
+      ],
+      "foregroundPixels": 9689,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "59ff4de95ba79f861a57bb38a14729b5bd3ab7051e28998ccd2b23145ada7956",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        247,
+        260
+      ],
+      "sourceLandmark": [
+        247,
+        234
+      ],
+      "sourceAnchorEvidence": "Return to prone: ventral neck/forebody junction, consistent with idle frame0 rather than whole-silhouette centering.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        238.0,
+        66.0
+      ],
+      "renderedAnchor": [
+        128.3658536585366,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.328014184,
+      "sourceScale": 1,
+      "appliedScale": 0.328014184,
+      "renderedBounds": [
+        50,
+        218,
+        158,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        56,
+        302,
+        404,
+        358
+      ],
+      "sourceGlobalBounds": [
+        56,
+        302,
+        404,
+        358
+      ],
+      "sourceSize": [
+        348,
+        56
+      ],
+      "foregroundPixels": 8977,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "addc317dcb595686a94e3a905346091a23fce26c9fde37a26d9f33e2d2c67f69",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        313,
+        358
+      ],
+      "sourceLandmark": [
+        313,
+        332
+      ],
+      "sourceAnchorEvidence": "Prone forward body: cervical ring immediately behind the skull, above the ventral contact line.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        257.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        127.74425287356321,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        31,
+        219,
+        162,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        48,
+        295,
+        396,
+        360
+      ],
+      "sourceGlobalBounds": [
+        492,
+        295,
+        840,
+        360
+      ],
+      "sourceSize": [
+        348,
+        65
+      ],
+      "foregroundPixels": 9641,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ae1287bf29299bb983fc2a3b192a7d392c155e859051f3b9cb35ac9374dcfbbe",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        310,
+        360
+      ],
+      "sourceLandmark": [
+        310,
+        335
+      ],
+      "sourceAnchorEvidence": "Rear travelling wave rises while the anterior cervical junction remains the body root; not the crest of the tail wave.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        262.0,
+        65.0
+      ],
+      "renderedAnchor": [
+        127.6264367816092,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        29,
+        215,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        40,
+        289,
+        397,
+        359
+      ],
+      "sourceGlobalBounds": [
+        927,
+        289,
+        1284,
+        359
+      ],
+      "sourceSize": [
+        357,
+        70
+      ],
+      "foregroundPixels": 10107,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d3b7a7b81105f875b76f2687169a148f1b6edb790e5e20fa972f36bae31c4bcd",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        312,
+        359
+      ],
+      "sourceLandmark": [
+        312,
+        335
+      ],
+      "sourceAnchorEvidence": "High rear wave: low ventral cervical junction under the skull; raised tail is excluded from root measurement.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        272.0,
+        70.0
+      ],
+      "renderedAnchor": [
+        127.85714285714286,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        25,
+        214,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        22,
+        302,
+        368,
+        360
+      ],
+      "sourceGlobalBounds": [
+        1352,
+        302,
+        1698,
+        360
+      ],
+      "sourceSize": [
+        346,
+        58
+      ],
+      "foregroundPixels": 9499,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "708352038ee0269e316bc42775a163c796d07990000136ecadd736dbbbc6f8fe",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        284,
+        360
+      ],
+      "sourceLandmark": [
+        284,
+        336
+      ],
+      "sourceAnchorEvidence": "Tail tip lifts: anterior neck junction anchors the body, not the lifted tail or its changing silhouette extent.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        262.0,
+        58.0
+      ],
+      "renderedAnchor": [
+        128.19653179190752,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        29,
+        218,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        40,
+        209,
+        386,
+        264
+      ],
+      "sourceGlobalBounds": [
+        40,
+        653,
+        386,
+        708
+      ],
+      "sourceSize": [
+        346,
+        55
+      ],
+      "foregroundPixels": 8740,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "496b69bceba578d4527fa60a953fd5e295f20ec9825173aac24676e686589ada",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        297,
+        264
+      ],
+      "sourceLandmark": [
+        297,
+        242
+      ],
+      "sourceAnchorEvidence": "Second-row prone pose: posterior skull/ventral cervical junction, same anatomical rule as move frame0.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        257.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        128.30346820809248,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        31,
+        219,
+        162,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        31,
+        198,
+        384,
+        269
+      ],
+      "sourceGlobalBounds": [
+        475,
+        642,
+        828,
+        713
+      ],
+      "sourceSize": [
+        353,
+        71
+      ],
+      "foregroundPixels": 9930,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7bb185cb70a3fa745753fa977bfb16704f9a71b6f673f57d430487b8707d3fc9",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        303,
+        269
+      ],
+      "sourceLandmark": [
+        303,
+        244
+      ],
+      "sourceAnchorEvidence": "Large rear wave: the cervical junction in front of the wave anchors the low forward body.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        272.0,
+        71.0
+      ],
+      "renderedAnchor": [
+        128.4815864022663,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        26,
+        213,
+        159,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        20,
+        211,
+        356,
+        267
+      ],
+      "sourceGlobalBounds": [
+        907,
+        655,
+        1243,
+        711
+      ],
+      "sourceSize": [
+        336,
+        56
+      ],
+      "foregroundPixels": 9119,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5d5a56c63da0838d19b10ec038212b29b30af75a53d20a3e2751182b774a5f4d",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        269,
+        267
+      ],
+      "sourceLandmark": [
+        269,
+        244
+      ],
+      "sourceAnchorEvidence": "Small rear wave: anterior cervical junction remains the root, independent of tail flexion.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        249.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        128.11607142857144,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        34,
+        219,
+        161,
+        240
+      ]
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -8,
+        209,
+        345,
+        267
+      ],
+      "sourceGlobalBounds": [
+        1322,
+        653,
+        1675,
+        711
+      ],
+      "sourceSize": [
+        353,
+        58
+      ],
+      "foregroundPixels": 9001,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "04fda716b50fad0b20c78ee10405158141594d778f22ee7b443f69e8d5b9de09",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 19,
+          "componentPixels": 8999,
+          "ownerShare": 0.997889,
+          "sourceBoundsGlobal": [
+            1325,
+            656,
+            1672,
+            708
+          ],
+          "rgbaSha256": "bd4b9736848a61c81c07a6f899940b9506cca6c6955b08ebb9f5aa7fedd5d094",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        259,
+        267
+      ],
+      "sourceLandmark": [
+        259,
+        244
+      ],
+      "sourceAnchorEvidence": "Wave returns to prone: ventral cervical junction behind the skull; tail crosses nominal cell edge but does not determine root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        267.0,
+        58.0
+      ],
+      "renderedAnchor": [
+        127.59773371104816,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.328014184,
+      "sourceScale": 1.15,
+      "appliedScale": 0.377216312,
+      "renderedBounds": [
+        27,
+        218,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        54,
+        291,
+        383,
+        378
+      ],
+      "sourceGlobalBounds": [
+        54,
+        291,
+        383,
+        378
+      ],
+      "sourceSize": [
+        329,
+        87
+      ],
+      "foregroundPixels": 12347,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4c9d2c3a2f2eaa433b101c8150731ae609ac9e8b9bff1b33fd01a8d902d807bc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        264,
+        378
+      ],
+      "sourceLandmark": [
+        264,
+        350
+      ],
+      "sourceAnchorEvidence": "Anticipation coil: lower anterior trunk loop supports the retracted head; track this load-bearing body section rather than the folded skull.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        210.0,
+        87.0
+      ],
+      "renderedAnchor": [
+        127.97872340425532,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        45,
+        206,
+        175,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        47,
+        201,
+        341,
+        376
+      ],
+      "sourceGlobalBounds": [
+        491,
+        201,
+        785,
+        376
+      ],
+      "sourceSize": [
+        294,
+        175
+      ],
+      "foregroundPixels": 14324,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "03c06edd289187514505abdb949e0790379d5b55965da1edb4c8ebc2eb83c7b6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        282,
+        376
+      ],
+      "sourceLandmark": [
+        282,
+        346
+      ],
+      "sourceAnchorEvidence": "Neck rises: root at the lower upright forebody bend, above the ventral ground contact.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        235.0,
+        175.0
+      ],
+      "renderedAnchor": [
+        127.72108843537416,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        35,
+        171,
+        151,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        28,
+        191,
+        291,
+        376
+      ],
+      "sourceGlobalBounds": [
+        915,
+        191,
+        1178,
+        376
+      ],
+      "sourceSize": [
+        263,
+        185
+      ],
+      "foregroundPixels": 12778,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "39c6949e63cbf06a46acf8840b96f3a35a06e68410a1fece86bbd04f9c9c869b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        376
+      ],
+      "sourceLandmark": [
+        222,
+        348
+      ],
+      "sourceAnchorEvidence": "Jaw opens: lower cervical column base; open mandible and raised skull remain free to move above this root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        194.0,
+        185.0
+      ],
+      "renderedAnchor": [
+        127.7148288973384,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        51,
+        167,
+        155,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        7,
+        220,
+        367,
+        376
+      ],
+      "sourceGlobalBounds": [
+        1337,
+        220,
+        1697,
+        376
+      ],
+      "sourceSize": [
+        360,
+        156
+      ],
+      "foregroundPixels": 16594,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8c2db73a151fdeeffccfa9c718893fd40b20e6f4f0a77f91686e6a481660323c",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        188,
+        376
+      ],
+      "sourceLandmark": [
+        188,
+        347
+      ],
+      "sourceAnchorEvidence": "Forward strike: lower ventral S-bend is the supporting anterior trunk root. Do not lock the extended head; its rightward displacement is intentionally preserved.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        181.0,
+        156.0
+      ],
+      "renderedAnchor": [
+        128.39444444444445,
+        240.0
+      ],
+      "index": 19,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        57,
+        179,
+        199,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        50,
+        136,
+        449,
+        265
+      ],
+      "sourceGlobalBounds": [
+        50,
+        580,
+        449,
+        709
+      ],
+      "sourceSize": [
+        399,
+        129
+      ],
+      "foregroundPixels": 15464,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2aa37a8dcf0e27a58e840e9c8d54d3d48c0a0449b2a6b09f1f8512fdae325863",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 4,
+          "fromCells": [
+            5
+          ],
+          "pixels": 14,
+          "componentPixels": 15464,
+          "ownerShare": 0.999095,
+          "sourceBoundsGlobal": [
+            53,
+            583,
+            446,
+            706
+          ],
+          "rgbaSha256": "3b196d805e61cbf8e7a1af6b34de117ffaf21a7d0a63fb8342c3c3485d841cb6",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        265
+      ],
+      "sourceLandmark": [
+        232,
+        242
+      ],
+      "sourceAnchorEvidence": "Maximum extension: lower S-bend supports the outstretched forebody; the head and its proven right-cell spill remain uncut and offset to the right of this root.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        182.0,
+        129.0
+      ],
+      "renderedAnchor": [
+        127.6140350877193,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        56,
+        189,
+        213,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        74,
+        101,
+        310,
+        265
+      ],
+      "sourceGlobalBounds": [
+        518,
+        545,
+        754,
+        709
+      ],
+      "sourceSize": [
+        236,
+        164
+      ],
+      "foregroundPixels": 14459,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "16f66945d7f2654f2d9ff41a64b6518c195a9d069a729caea591c14cb50f96b7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        269,
+        265
+      ],
+      "sourceLandmark": [
+        269,
+        236
+      ],
+      "sourceAnchorEvidence": "Recoil S: lower anterior trunk coil remains grounded while the upper neck retracts; partly curved anatomy gives medium landmark confidence.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        195.0,
+        164.0
+      ],
+      "renderedAnchor": [
+        127.84322033898304,
+        240.0
+      ],
+      "index": 21,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        51,
+        175,
+        144,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        21,
+        209,
+        368,
+        265
+      ],
+      "sourceGlobalBounds": [
+        908,
+        653,
+        1255,
+        709
+      ],
+      "sourceSize": [
+        347,
+        56
+      ],
+      "foregroundPixels": 9505,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d8daeca1f0962d245365bf1148f1b94fd41993a3a79dbdb00c4c7977d49daa8a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        278,
+        265
+      ],
+      "sourceLandmark": [
+        278,
+        241
+      ],
+      "sourceAnchorEvidence": "Return to low pose: visible ventral cervical junction behind the skull restores the same landmark used by locomotion.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        257.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        128.46685878962535,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        27,
+        218,
+        164,
+        240
+      ]
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -5,
+        209,
+        341,
+        265
+      ],
+      "sourceGlobalBounds": [
+        1325,
+        653,
+        1671,
+        709
+      ],
+      "sourceSize": [
+        346,
+        56
+      ],
+      "foregroundPixels": 8945,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "15a758fbff5dbd25eff05ec76cb1a20de291451bab013f687dd17aa601ddb071",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 10,
+          "componentPixels": 8944,
+          "ownerShare": 0.998882,
+          "sourceBoundsGlobal": [
+            1328,
+            656,
+            1668,
+            706
+          ],
+          "rgbaSha256": "cee3d833fdfc43fcfdc218fabd853c5eca7e27c97e177a3335c1d9d8f52c3fac",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        257,
+        265
+      ],
+      "sourceLandmark": [
+        257,
+        239
+      ],
+      "sourceAnchorEvidence": "Final low recovery: anterior cervical junction anchors the body independently of the extended tail.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        262.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        127.98265895953757,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        25,
+        218,
+        161,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        54,
+        171,
+        367,
+        344
+      ],
+      "sourceGlobalBounds": [
+        54,
+        171,
+        367,
+        344
+      ],
+      "sourceSize": [
+        313,
+        173
+      ],
+      "foregroundPixels": 14162,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "93b91c80fd625256934273aff6f9e530e4322d289f9330c7241eaec4947f2fb0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        316,
+        344
+      ],
+      "sourceLandmark": [
+        316,
+        315
+      ],
+      "sourceAnchorEvidence": "Initial raised body: lower upright cervical/trunk bend at ventral ground contact, allowing the head to fall relative to the root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        262.0,
+        173.0
+      ],
+      "renderedAnchor": [
+        127.95846645367412,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        25,
+        172,
+        148,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        33,
+        230,
+        339,
+        344
+      ],
+      "sourceGlobalBounds": [
+        477,
+        230,
+        783,
+        344
+      ],
+      "sourceSize": [
+        306,
+        114
+      ],
+      "foregroundPixels": 16363,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "831c18075c2bd8188bec19c82d1ab9bd371b04f5fc2899e43be1b94f2206adf7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        247,
+        344
+      ],
+      "sourceLandmark": [
+        247,
+        322
+      ],
+      "sourceAnchorEvidence": "Folded collapse: lower supporting anterior trunk loop is visible below the folded neck; track that body section despite partly occluded cervical anatomy.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        214.0,
+        114.0
+      ],
+      "renderedAnchor": [
+        127.92156862745098,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        44,
+        195,
+        164,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        18,
+        258,
+        361,
+        344
+      ],
+      "sourceGlobalBounds": [
+        905,
+        258,
+        1248,
+        344
+      ],
+      "sourceSize": [
+        343,
+        86
+      ],
+      "foregroundPixels": 12099,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "899c303a77ea9dbc999be98349a223dfcef75224483d3f8e8dea72c0512159ab",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        239,
+        344
+      ],
+      "sourceLandmark": [
+        239,
+        318
+      ],
+      "sourceAnchorEvidence": "Unfolding collapse: lower forebody bend immediately behind the descending neck; head remains free to rotate downward.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        86.0
+      ],
+      "renderedAnchor": [
+        127.98250728862973,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        41,
+        206,
+        176,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        13,
+        292,
+        367,
+        346
+      ],
+      "sourceGlobalBounds": [
+        1343,
+        292,
+        1697,
+        346
+      ],
+      "sourceSize": [
+        354,
+        54
+      ],
+      "foregroundPixels": 9914,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fe6178d821dc2bd356508f93944c63accdaefd08960b2376767c0105b21a8223",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        280,
+        346
+      ],
+      "sourceLandmark": [
+        280,
+        325
+      ],
+      "sourceAnchorEvidence": "Prone collapse: ventral cervical junction behind the grounded skull; no tail-bounds recentering.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        267.0,
+        54.0
+      ],
+      "renderedAnchor": [
+        127.83898305084746,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        23,
+        219,
+        162,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        49,
+        164,
+        390,
+        220
+      ],
+      "sourceGlobalBounds": [
+        49,
+        608,
+        390,
+        664
+      ],
+      "sourceSize": [
+        341,
+        56
+      ],
+      "foregroundPixels": 9495,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4b1ba90e855e332343f37515c1e77c3c691cb009266cef65ccd3ed7519474ea1",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        305,
+        220
+      ],
+      "sourceLandmark": [
+        305,
+        196
+      ],
+      "sourceAnchorEvidence": "Settled prone pose: posterior skull/neck junction on the forward body, ignoring the flattened tail midpoint.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        256.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        127.5982404692082,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        27,
+        218,
+        161,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        35,
+        164,
+        385,
+        220
+      ],
+      "sourceGlobalBounds": [
+        479,
+        608,
+        829,
+        664
+      ],
+      "sourceSize": [
+        350,
+        56
+      ],
+      "foregroundPixels": 9785,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c8cc64f5fa8cb78ca5a02ff18263e85424a617986b555573507f035a86f85fa6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        304,
+        220
+      ],
+      "sourceLandmark": [
+        304,
+        195
+      ],
+      "sourceAnchorEvidence": "Small settling wave: same posterior skull/ventral neck junction; rear body settling must not drag the root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        269.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        128.06285714285713,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        22,
+        218,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        30,
+        164,
+        381,
+        220
+      ],
+      "sourceGlobalBounds": [
+        917,
+        608,
+        1268,
+        664
+      ],
+      "sourceSize": [
+        351,
+        56
+      ],
+      "foregroundPixels": 10074,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3d096821a3ac0b603b99958d6d36f045d4b44ba393f9de9a0f62dc7f0384e401",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        299,
+        220
+      ],
+      "sourceLandmark": [
+        299,
+        196
+      ],
+      "sourceAnchorEvidence": "Final settling wave: ventral cervical junction behind the skull maintains the forward-body root.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        269.0,
+        56.0
+      ],
+      "renderedAnchor": [
+        127.76068376068376,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        22,
+        218,
+        160,
+        240
+      ]
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        13,
+        174,
+        373,
+        223
+      ],
+      "sourceGlobalBounds": [
+        1343,
+        618,
+        1703,
+        667
+      ],
+      "sourceSize": [
+        360,
+        49
+      ],
+      "foregroundPixels": 9355,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2d11abeeab7af819fcc56ad5cf3aef7cfdf95848aa3b5aad4818842409127417",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        295,
+        223
+      ],
+      "sourceLandmark": [
+        295,
+        201
+      ],
+      "sourceAnchorEvidence": "Final corpse: ventral cervical junction under the rear skull, preserved as a physical body marker without redrawing occluded anatomy.",
+      "sourceAnchorConfidence": "high",
+      "anchorOffsetInCroppedSource": [
+        282.0,
+        49.0
+      ],
+      "renderedAnchor": [
+        128.23333333333335,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.328014184,
+      "sourceScale": 1.2,
+      "appliedScale": 0.393617021,
+      "renderedBounds": [
+        17,
+        221,
+        159,
+        240
+      ]
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          44,
+          217,
+          158,
+          240
+        ],
+        "foregroundPixels": 1280,
+        "width": 114,
+        "height": 23,
+        "relativeToRowMedian": 0.83442
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          42,
+          204,
+          161,
+          240
+        ],
+        "foregroundPixels": 1489,
+        "width": 119,
+        "height": 36,
+        "relativeToRowMedian": 0.970665
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          41,
+          196,
+          160,
+          240
+        ],
+        "foregroundPixels": 1579,
+        "width": 119,
+        "height": 44,
+        "relativeToRowMedian": 1.029335
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          42,
+          191,
+          152,
+          240
+        ],
+        "foregroundPixels": 1642,
+        "width": 110,
+        "height": 49,
+        "relativeToRowMedian": 1.070404
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          48,
+          192,
+          152,
+          240
+        ],
+        "foregroundPixels": 1537,
+        "width": 104,
+        "height": 48,
+        "relativeToRowMedian": 1.177778
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          50,
+          204,
+          157,
+          240
+        ],
+        "foregroundPixels": 1365,
+        "width": 107,
+        "height": 36,
+        "relativeToRowMedian": 1.045977
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          52,
+          213,
+          159,
+          240
+        ],
+        "foregroundPixels": 1245,
+        "width": 107,
+        "height": 27,
+        "relativeToRowMedian": 0.954023
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          50,
+          218,
+          158,
+          240
+        ],
+        "foregroundPixels": 1202,
+        "width": 108,
+        "height": 22,
+        "relativeToRowMedian": 0.921073
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          32,
+          220,
+          161,
+          239
+        ],
+        "foregroundPixels": 1403,
+        "width": 129,
+        "height": 19,
+        "relativeToRowMedian": 0.922116
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          30,
+          216,
+          159,
+          239
+        ],
+        "foregroundPixels": 1533,
+        "width": 129,
+        "height": 23,
+        "relativeToRowMedian": 1.007558
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          26,
+          215,
+          159,
+          239
+        ],
+        "foregroundPixels": 1578,
+        "width": 133,
+        "height": 24,
+        "relativeToRowMedian": 1.037134
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          30,
+          219,
+          159,
+          239
+        ],
+        "foregroundPixels": 1510,
+        "width": 129,
+        "height": 20,
+        "relativeToRowMedian": 0.992442
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          32,
+          220,
+          161,
+          239
+        ],
+        "foregroundPixels": 1387,
+        "width": 129,
+        "height": 19,
+        "relativeToRowMedian": 0.967225
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          27,
+          214,
+          158,
+          239
+        ],
+        "foregroundPixels": 1556,
+        "width": 131,
+        "height": 25,
+        "relativeToRowMedian": 1.085077
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          35,
+          220,
+          160,
+          239
+        ],
+        "foregroundPixels": 1436,
+        "width": 125,
+        "height": 19,
+        "relativeToRowMedian": 1.001395
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          28,
+          219,
+          159,
+          239
+        ],
+        "foregroundPixels": 1432,
+        "width": 131,
+        "height": 20,
+        "relativeToRowMedian": 0.998605
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          46,
+          207,
+          174,
+          239
+        ],
+        "foregroundPixels": 2077,
+        "width": 128,
+        "height": 32,
+        "relativeToRowMedian": 0.908574
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          36,
+          172,
+          150,
+          239
+        ],
+        "foregroundPixels": 2413,
+        "width": 114,
+        "height": 67,
+        "relativeToRowMedian": 1.055556
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          52,
+          168,
+          154,
+          239
+        ],
+        "foregroundPixels": 2159,
+        "width": 102,
+        "height": 71,
+        "relativeToRowMedian": 0.944444
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          58,
+          180,
+          198,
+          239
+        ],
+        "foregroundPixels": 2761,
+        "width": 140,
+        "height": 59,
+        "relativeToRowMedian": 1.207787
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          57,
+          190,
+          212,
+          239
+        ],
+        "foregroundPixels": 2610,
+        "width": 155,
+        "height": 49,
+        "relativeToRowMedian": 1.27722
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          52,
+          176,
+          143,
+          239
+        ],
+        "foregroundPixels": 2456,
+        "width": 91,
+        "height": 63,
+        "relativeToRowMedian": 1.20186
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          28,
+          219,
+          163,
+          239
+        ],
+        "foregroundPixels": 1631,
+        "width": 135,
+        "height": 20,
+        "relativeToRowMedian": 0.79814
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          26,
+          219,
+          160,
+          239
+        ],
+        "foregroundPixels": 1543,
+        "width": 134,
+        "height": 20,
+        "relativeToRowMedian": 0.755077
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          26,
+          173,
+          147,
+          239
+        ],
+        "foregroundPixels": 2403,
+        "width": 121,
+        "height": 66,
+        "relativeToRowMedian": 1.075649
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          45,
+          196,
+          163,
+          239
+        ],
+        "foregroundPixels": 2717,
+        "width": 118,
+        "height": 43,
+        "relativeToRowMedian": 1.216204
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          42,
+          207,
+          175,
+          239
+        ],
+        "foregroundPixels": 2065,
+        "width": 133,
+        "height": 32,
+        "relativeToRowMedian": 0.924351
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          24,
+          220,
+          161,
+          239
+        ],
+        "foregroundPixels": 1672,
+        "width": 137,
+        "height": 19,
+        "relativeToRowMedian": 0.748433
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          28,
+          219,
+          160,
+          239
+        ],
+        "foregroundPixels": 1618,
+        "width": 132,
+        "height": 20,
+        "relativeToRowMedian": 0.990208
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          23,
+          219,
+          159,
+          239
+        ],
+        "foregroundPixels": 1650,
+        "width": 136,
+        "height": 20,
+        "relativeToRowMedian": 1.009792
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          23,
+          219,
+          159,
+          239
+        ],
+        "foregroundPixels": 1707,
+        "width": 136,
+        "height": 20,
+        "relativeToRowMedian": 1.044676
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          18,
+          222,
+          158,
+          239
+        ],
+        "foregroundPixels": 1564,
+        "width": 140,
+        "height": 17,
+        "relativeToRowMedian": 0.95716
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      1534.0,
+      1305.0,
+      1521.5,
+      1434.0,
+      2286.0,
+      2043.5,
+      2234.0,
+      1634.0
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "c1ee46a081ea1fc891dec5c1fa8d237a9311b76a1503b048ae2bc5412c710c75",
+      "fcfae993ec8acf00e2b0430737a0b1263a688c95241ef7fc0e239e69e0dfadcc",
+      "de1fd2e4bb8b3d18c53754ec7a4324b5ff7afa70082dcff0b6d6a4fdc134e600",
+      "b996d50949899f21a0054a4e8d4f54bea9ed0c634ff832a196f9870a483eeed0",
+      "ed8c4130cb868d0a4471205c0c4975d37a9d4d4eb450ac0581c3bbfbfc2550ac",
+      "d248edbe7e41c4b37b47f226d38da920db211b1b4f9b69703832747e0ae375f2",
+      "074096dd8a322a7b84803ff5d5e3138a6e2c037065af23126d1752d6af8ac478",
+      "f1545f50d2ddf2afc21c8159efaf2d2d5547523b618009d06f513664a4607571",
+      "024080b9c0f8ce031219c8c45ad3d5019b2140b41dc443961585e5e176d54bcd",
+      "7716debeef4d1b4fa754b160b93bacd56e74810eb1afd4f197031d70ab06c904",
+      "a5d2126495116b0a70d16ba37fa478922c30cb04ca42114d9f72bb7e139cafb3",
+      "ee4c97aa62215719e28cc75e53d51d1d452d50bfd72bc60a0ff37f6a218ace1b",
+      "9bbebb546450e21ec906eb50f49b577bd5a85053bc7aa8bdda004e3c554b94b6",
+      "0b2870feee17dea15df14be1513b64409b368b2d355a3ac787fef9469b548626",
+      "8c5fa632332e9f410feaaca4f3028ed799ef8262cdf476908503fe80b1e0e35c",
+      "9b92ca822c383ef55032e152eb32cff8771fb5832647933f3947773d049dc0a4",
+      "11a5241cad6f363dc54903d8d309501c4215f8003d99597a69d4e0a57c94217e",
+      "0ba251d94494cb7a86c75721db8e6b5bb2e458aadba5596ae7fa2cb330dabbf0",
+      "886bf0ee9a9132ab85ac470f8d1b8d817e5e284ef3355f3912124a2c64f0bab5",
+      "b4c944a2820350832d6cd59bda828e863a8cc023b3713f4bead7f1cae52c7aec",
+      "ed8aef32aba61f4b844eff37318c650820600679677c8f2d24be539401bdb834",
+      "8d89f6f39ed33a547a3f15bd021327aad8b4dcb5db7817211a9ea3d260566c6a",
+      "c89312b88f0485b5f2e2ffb99aee2066434f0b1207761ed4174f6acef6fe7188",
+      "6f283871f79ecb87cb73b1afb0954576e8d06183b6aa0a52051bca8beab5b9ae",
+      "e128bae41b5f915cfe8794bc5178c616502ab1fd96bf36f9095e5c49fb5ed50d",
+      "7bbe35a47b9817217ad9bed23910d59c789aaf982ae4c3fee7c1777a1e9e2a82",
+      "3734cb77bf5e969bc5a4adbeea6e3d657491df5b7dd2d81cfaca6dccf6bef6c2",
+      "9bfe4da2265cfb2d9e3898931ea4b90540b5c53224a7a6054aefe9a16f7f54f8",
+      "dec9e3e6812de0e2788eb42c8bc3c29ac75e5f5c98051922b983d8f741b50d23",
+      "7b2fe6ca98edc1b413ee13212a822922eaf0e7d9d1b960dd8f763ad34741699b",
+      "798e98a945e7a5cb4df3babee1d50ce8bcf818455e0e327b0378bde8ef1681ce",
+      "00724f0fc9a4d6639446f099bd9cb5b510d72df25d3d4c87032439c09ee9c35a"
+    ],
+    "visualFidelityCertified": false
+  }
+}

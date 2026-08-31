@@ -5,6 +5,7 @@ import { HubGame } from '../src/hub-v52-runtime.js';
 import { DROPSHIP_HANGAR_ART_V55, ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 import { CREW } from '../src/content-core-v50.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
 import { CAMPAIGNS, ENEMIES, LEVEL_SEEDS, VEHICLES, WEAPONS, WORLDS } from '../src/content.js';
 import { buildMissionLevelV52 } from '../src/mission-levels-v52.js';
 import {
@@ -86,7 +87,7 @@ test('les vingt plaques v55 sont réellement résolubles et échantillonnables',
     assert.equal(request.sheetId, sheetId);
     assert.ok(controller.sample(id, request, 0.2), id);
   }
-  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length);
+  assert.equal(Object.keys(SPRITE_SHEETS).length, 195 + READY_ENEMY_PROFILE_REGISTRY_V65.length + READY_ENEMY_PROFILE_REGISTRY_V66.length);
 });
 
 test('la sélection catalogue des quatre véhicules atteint leur bitmap dans le vrai GameEngine', () => withBrowserRuntime(() => {

@@ -161,7 +161,11 @@ test('dynamic stealth makes crouching and cover delay detection and emits spotte
   const stealthCostume = [...COSTUMES].sort((a, b) => buildCostumeRuntime(b).stealth - buildCostumeRuntime(a).stealth)[0];
   const engine = createEngine(events);
   engine.start(options({ costume: stealthCostume, enemyCatalog: ENEMIES.slice(0, 160) }));
-  const enemy = engine.enemies.find((entry) => !entry.isBoss);
+  // Stealth patrol alerts belong to a mobile combatant. The first encounter
+  // is now an Ovomorph with proximity-driven opening, not a patrol alert.
+  const enemy = engine.enemies.find((entry) => !entry.isBoss && entry.behavior === 'spitter');
+  assert.ok(enemy, 'a real production spitter patrol is available for stealth detection');
+  assert.notEqual(enemy.visualSheetId, 'enemy.profile.enemy-001-ovomorph.v66');
   Object.assign(engine.player, { vx: 0, crouching: false, inCover: false, actionClock: 0, y: 830 });
   const standing = engine.refreshStealth(engine.player).detectionRadius;
   Object.assign(engine.player, { crouching: true, inCover: true });

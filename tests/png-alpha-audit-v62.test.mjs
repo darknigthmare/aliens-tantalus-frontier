@@ -134,3 +134,33 @@ test('V62 PNG audit separates opaque scenes and catches alpha/grid failures', as
     await rm(fixture, { recursive: true, force: true });
   }
 });
+
+test('V64 historical PNG audit ignores V66 production before counting audited and excluded masters', async () => {
+  const fixture = await mkdtemp(join(tmpdir(), 'atf-v66-png-isolation-'));
+  try {
+    const png = encodePng(32, 32, 4, (x, y) => x >= 8 && x < 24 && y >= 8 && y < 24 ? [32, 48, 56, 255] : [0, 0, 0, 0]);
+    const ignored = ['frames', 'reference-masters', 'previews', 'metadata'].map((directory) => `sprites/${directory}/v66/fixture.png`);
+    ignored.push('sprites/frames/v66/batch-001/enemy-001-ovomorph/rejected/failed.png', 'sprites/normalized/enemy-clips-v66/fixture.png', 'sprites/normalized/enemy-motion-v66/fixture.png', 'sprites/normalized/enemy-profiles-v66/unaccepted.png');
+    for (const path of [...ignored, 'sprites/normalized/player/runtime.png']) await put(fixture, path, png);
+    const manifestPath = join(fixture, 'manifest.json');
+    await writeFile(manifestPath, JSON.stringify({ contracts: { grids: { fixture: { columns: 1, rows: 1, cellWidth: 32, cellHeight: 32, guard: 1 } } }, sheets: [{ id: 'fixture.runtime', grid: 'fixture', files: { normalized: '/assets/openai/sprites/normalized/player/runtime.png' } }] }));
+    const program = [
+      'import importlib.util,json,sys',
+      'from pathlib import Path',
+      "sys.path.insert(0,'scripts')",
+      "spec=importlib.util.spec_from_file_location('v64_fixture','scripts/audit-png-alpha-v64.py')",
+      'module=importlib.util.module_from_spec(spec)',
+      'spec.loader.exec_module(module)',
+      'audit=module.load_base_audit()',
+      `report=audit.build_report(Path(${JSON.stringify(fixture)}),Path(${JSON.stringify(manifestPath)}),ignored_production_prefixes=module.IGNORED_PRODUCTION_PREFIXES)`,
+      "print(json.dumps({'summary':report['summary'],'paths':[asset['path'] for asset in report['assets']]}))",
+    ].join('\n');
+    const result = spawnSync(process.platform === 'win32' ? 'py' : 'python3', ['-c', program], { encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.summary.assetsAudited, 1);
+    assert.equal(report.summary.rawMastersExcluded, 0);
+    assert.equal(report.paths.length, 1);
+    assert.match(report.paths[0], /sprites\/normalized\/player\/runtime\.png$/);
+  } finally { await rm(fixture, { recursive: true, force: true }); }
+});

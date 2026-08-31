@@ -10,6 +10,7 @@ import {
   resolveEquipmentVisualStateV56
 } from './equipment-visual-runtime-v56.js';
 import {
+  SPRITE_CLIP_SETS,
   resolveSpriteClip,
   resolveSpriteSheet,
   resolveEnemyAnimation,
@@ -204,7 +205,11 @@ function enemyVisual(entry) {
     vy: 0
   });
   const idle = clipDescriptor(animation);
+  const sheet = resolveSpriteSheet(profile.sheetId || animation?.sheetId);
+  const previewClips = sheet?.family === 'enemy' ? (SPRITE_CLIP_SETS[sheet.clipSet] || [])
+    .map((clip) => clipDescriptor({ sheetId: sheet.id, clipId: clip.id })).filter(Boolean) : [];
   return selectVisualFields(profile, idle, {
+    previewClips: freezeArray(previewClips),
     archetype: knownString(profile.archetype),
     spriteKey: optionalString(profile.spriteKey),
     legacyImageKey: profile.legacy ? optionalString(profile.imageKey) : null,

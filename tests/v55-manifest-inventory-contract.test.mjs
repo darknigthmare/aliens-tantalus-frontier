@@ -5,6 +5,7 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
+import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
 import {
   V55_EXPECTED_ATLASES,
   V55_EXPECTED_CELLS,
@@ -65,7 +66,7 @@ test('sync v55 builds an idempotent 51-atlas / 816-cell manifest without writing
   assert.equal(assets.checked, 40);
 });
 
-test('inventory v55 preserves its release batch and reports the current v56 visual coverage', async () => {
+test('inventory v55 preserves its release batch and reports the current shared visual coverage', async () => {
   const manifest = await loadBuiltManifest();
   const simulatedRuntime = simulatedRuntimeFromManifest(manifest);
   const wiring = assertRuntimeWiredV55(simulatedRuntime);
@@ -84,14 +85,20 @@ test('inventory v55 preserves its release batch and reports the current v56 visu
   assert.equal(inventory.enemies.coverage.total, 571);
   assert.equal(inventory.enemies.coverage.modern, 538);
   assert.equal(inventory.enemies.coverage.legacy, 33);
-  assert.deepEqual(inventory.enemies.coverage.byIdentityStatus, {
-    exact: 29,
-    'source-locked-adaptation': 1,
+  // Keep the V55 batch/snapshot fixed. The shared resolver relabels accepted
+  // standard V66 replacements as source-locked adaptations, never pixel exact.
+  const v66Replacements = READY_ENEMY_PROFILE_REGISTRY_V66.length;
+  assert.ok(READY_ENEMY_PROFILE_REGISTRY_V66.every((profile) => profile.modifier === 'Standard'
+    && profile.asset.identityStatus === 'source-locked-adaptation'));
+  const expectedIdentityCounts = {
+    exact: 29 - v66Replacements,
+    'source-locked-adaptation': 1 + v66Replacements,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 516
-  });
-  assert.equal(inventory.enemies.exactProfileCount, 29);
+  };
+  assert.deepEqual(inventory.enemies.coverage.byIdentityStatus, expectedIdentityCounts);
+  assert.equal(inventory.enemies.exactProfileCount, expectedIdentityCounts.exact);
   assert.equal(inventory.enemies.familyReuseProfileCount, 516);
   assert.equal(inventory.enemies.missingDedicatedProfileCount, 0);
   assert.equal(inventory.vehicles.v55DedicatedChassisCount, 4);

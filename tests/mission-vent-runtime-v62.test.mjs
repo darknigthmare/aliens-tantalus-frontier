@@ -16,6 +16,7 @@ import {
   MISSION_VENT_NETWORKS_V62,
   getVentTransitPositionV62
 } from '../src/vent-network-v62.js';
+import { isOvomorphCycleV66 } from '../src/enemy-ovomorph-cycle-v66.js';
 
 class MockImage {
   constructor() {
@@ -134,8 +135,11 @@ test('le GameEngine de production consomme les trois réseaux mission V62 sans c
     assert.equal(engine.player.ventTransit.phase, 'entering');
     assert.deepEqual({ x: engine.player.x, y: engine.player.y }, physicalPose, 'aucune téléportation à l interaction');
 
-    const inheritedEnemy = engine.enemies.find((enemy) => !enemy.isBoss) || engine.enemies[0];
-    assert.ok(inheritedEnemy, `${entry.templateId}: ennemi de production présent`);
+    // This gate observes legacy patrol combat clocks, not the stationary
+    // Ovomorph lifecycle now present in the first colony encounter slot.
+    const inheritedEnemy = engine.enemies.find((enemy) => !enemy.isBoss && enemy.behavior === 'spitter');
+    assert.ok(inheritedEnemy, `${entry.templateId}: patrouilleur spitter de production présent`);
+    assert.equal(isOvomorphCycleV66(inheritedEnemy), false);
     inheritedEnemy.alive = true;
     inheritedEnemy.dormant = false;
     inheritedEnemy.attackClock = 5;
@@ -153,6 +157,27 @@ test('le GameEngine de production consomme les trois réseaux mission V62 sans c
     assert.deepEqual({ x: engine.player.x, y: engine.player.y }, physicalPose, 'le corps reste à la bouche tant que la sortie physique n est pas atteinte');
     assert.ok(events.some((event) => event.type === 'mission-vent-enter' && event.networkId === network.id));
   }
+}));
+
+test('le cycle de l oeuf de colonie continue pendant le transit du joueur sans demander un cooldown de melee', () => withBrowserMocks(() => {
+  const plan = buildPlan(CASES.find((entry) => entry.templateId === 'colony-multiroute'));
+  const engine = createEngine(plan);
+  engine.audio = noOpAudio();
+  const egg = engine.enemies.find((enemy) => enemy.alive && !enemy.dormant && isOvomorphCycleV66(enemy));
+  assert.ok(egg, 'le vrai Ovomorph V66 de la mission colonie est present');
+  Object.assign(egg, { jammedClock: 0, staggerClock: 0, hurtClock: 0,
+    ovomorphCycleV66: { phase: 'opening', elapsed: 0.25, spawned: false } });
+  const position = { x: egg.x, y: egg.y };
+  placeAtPortal(engine.player, engine.missionVentNetworkV62.entrances[0]);
+  engine.inventory.cutter = true;
+  assert.equal(engine.interact(engine.player), true);
+  assert.equal(engine.player.ventTransit.phase, 'entering');
+  engine.update(0.1);
+  assert.equal(egg.ovomorphCycleV66.phase, 'opening');
+  assert.ok(Math.abs(egg.ovomorphCycleV66.elapsed - 0.35) < 1e-9, 'l horloge du lifecycle reste active pendant le transit');
+  assert.deepEqual({ x: egg.x, y: egg.y }, position, 'l oeuf reste ancre et ne patrouille pas');
+  assert.equal(egg.ovomorphCycleV66.spawned, false);
+  engine.stop();
 }));
 
 test('allié et ennemi réels planifient puis parcourent le graphe, tandis que tracker et audio excluent le joueur', () => withBrowserMocks(() => {

@@ -4,7 +4,7 @@ export * from './content-core-v50.js';
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '65.0.0',
-  subtitle: 'Facehugger 32 poses — sprite streaming & progression fixes',
+  version: '66.0.0',
+  subtitle: 'Lot ennemi 001 — cinq profils, animations et éclosion physique',
   sourceVersion: '51.0.0'
 });

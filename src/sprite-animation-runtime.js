@@ -10,6 +10,10 @@ import {
 } from './equipment-visual-runtime-v56.js';
 import { resolveVehicleAccessAnimationV59 } from './vehicle-access-runtime-v59.js';
 import { V65_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v65.js';
+import { V66_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v66.js';
+import { getEnemyBatchAttackFrameV66 } from './enemy-batch-combat-v66.js';
+import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
+import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -28,6 +32,7 @@ export const SPRITE_PIVOTS = Object.freeze({
 });
 
 export const SPRITE_HITBOXES = Object.freeze({
+  ...buildEnemyBodyHitboxesV66(),
   'player-standing': Object.freeze({ x: 84, y: 34, width: 88, height: 206 }),
   'npc-standing': Object.freeze({ x: 88, y: 34, width: 80, height: 206 }),
   'xenomorph-standing': Object.freeze({ x: 50, y: 56, width: 156, height: 184 }),
@@ -92,6 +97,18 @@ export const SPRITE_HITBOXES = Object.freeze({
 });
 
 export const SPRITE_CLIP_SETS = Object.freeze({
+  'enemy-action-v66': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3, 4, 5, 6, 7], fps: 6, loop: true },
+    { id: 'move', frames: [8, 9, 10, 11, 12, 13, 14, 15], fps: 12, loop: true },
+    { id: 'attack', frames: [16, 17, 18, 19, 20, 21, 22, 23], fps: 12, loop: false },
+    { id: 'death', frames: [24, 25, 26, 27, 28, 29, 30, 31], fps: 10, loop: false }
+  ]),
+  'ovomorph-cycle-v66': freezeList([
+    { id: 'sealed', frames: [0, 1, 2, 3, 4, 5, 6, 7], fps: 6, loop: true },
+    { id: 'opening', frames: [8, 9, 10, 11, 12, 13, 14, 15], fps: 8, loop: false },
+    { id: 'hatch', frames: [16, 17, 18, 19, 20, 21, 22, 23], fps: 10, loop: false },
+    { id: 'destroyed', frames: [24, 25, 26, 27, 28, 29, 30, 31], fps: 10, loop: false }
+  ]),
   ...Object.fromEntries(Object.entries(NPC_MISSION_CLIP_SETS_V56).map(([id, clips]) => [
     id, freezeList(Object.values(clips))
   ])),
@@ -387,6 +404,7 @@ export const SPRITE_SHEETS = Object.freeze({
   'enemy.neomorph.locomotion': sheet('enemy.neomorph.locomotion', 'neomorph', '/assets/openai/sprites/normalized/enemies/neomorph-locomotion-sheet.png', 'neomorph-locomotion', 'creature-ground', 'xenomorph-standing', 146, 112, 'enemy'),
   'enemy.working-joe.combat': sheet('enemy.working-joe.combat', 'workingJoe', '/assets/openai/sprites/normalized/enemies/working-joe-combat-sheet.png', 'working-joe-combat', 'humanoid-feet', 'npc-standing', 88, 116, 'enemy'),
   ...V65_ENEMY_PROFILE_SPRITE_SHEETS,
+  ...V66_ENEMY_PROFILE_SPRITE_SHEETS,
   'vehicle.m577-apc.action': sheet('vehicle.m577-apc.action', 'apc', '/assets/openai/sprites/normalized/vehicles/m577-apc-action-sheet.png', 'apc-action', 'vehicle-ground', 'apc-hull', 250, 140, 'vehicle'),
   'vehicle.m577-command-apc.action': sheet('vehicle.m577-command-apc.action', 'm577Command', '/assets/openai/sprites/normalized/vehicles/m577-command-apc-action-sheet.png', 'm577-command-action-v55', 'vehicle-ground', 'm577-command-hull', 250, 148, 'vehicle'),
   'vehicle.m22a3-jackson-tank.action': sheet('vehicle.m22a3-jackson-tank.action', 'm22a3Jackson', '/assets/openai/sprites/normalized/vehicles/m22a3-jackson-tank-action-sheet.png', 'm22a3-tank-action-v55', 'vehicle-ground', 'm22a3-tank-hull', 292, 150, 'vehicle'),
@@ -601,6 +619,16 @@ export function resolveEnemyAnimation(enemy = {}) {
   const dedicatedClipSet = typeof enemy.visualSheetId === 'string'
     ? SPRITE_SHEETS[enemy.visualSheetId]?.clipSet
     : null;
+  if (dedicatedClipSet === 'ovomorph-cycle-v66') {
+    return { sheetId: enemy.visualSheetId, ...getOvomorphAnimationV66(enemy) };
+  }
+  if (dedicatedClipSet === 'enemy-action-v66') {
+    const clipId = dead ? 'death' : hurt ? 'idle' : attacking ? 'attack' : Math.abs(enemy.vx || 0) > 8 ? 'move' : 'idle';
+    const localAttackFrame = clipId === 'attack' ? getEnemyBatchAttackFrameV66(enemy) : null;
+    return { sheetId: enemy.visualSheetId, clipId,
+      ...(localAttackFrame === null ? {} : { frame: 16 + localAttackFrame }),
+      ...(hurt && !dead ? { reaction: 'hurt' } : {}) };
+  }
   const dedicatedActionSheet = DEDICATED_ENEMY_ACTION_CLIP_SETS.has(dedicatedClipSet)
     ? enemy.visualSheetId
     : null;
@@ -747,7 +775,10 @@ export class SpriteAnimationController {
     }
     const elapsed = Math.max(0, now - state.startedAt);
     const effectiveFps = reducedMotion && clip.loop ? Math.min(1, clip.fps) : clip.fps;
-    const rawStep = Math.floor(elapsed * effectiveFps);
+    // A combat/lifecycle clock can own a reviewed frame. Reject requests
+    // outside the selected clip so an actor can never sample another action.
+    const explicitFrameIndex = Number.isInteger(request?.frame) ? clip.frames.indexOf(request.frame) : -1;
+    const rawStep = explicitFrameIndex >= 0 ? explicitFrameIndex : Math.floor(elapsed * effectiveFps);
     const lastIndex = clip.frames.length - 1;
     const step = clip.loop ? rawStep : Math.min(rawStep, lastIndex);
     const localIndex = clip.loop ? step % clip.frames.length : step;

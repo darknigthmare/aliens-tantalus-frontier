@@ -150,12 +150,19 @@ for (const kind of ['wall', 'door']) {
   test(`${kind}: aucune attaque ni traversée contre un obstacle mince fermé`, () => withBrowserMocks(() => {
     const { engine, enemy, events } = createEngine();
     try {
-      const obstacle = { id: 'blocking-obstacle', x: kind === 'door' ? 760 : 670, y: 790, w: 6, h: 160, open: false, progress: 0 };
-      // Doors use their full rendered collision bounds; keep both actors
-      // outside that hull instead of accidentally spawning inside its art.
-      if (kind === 'door') engine.player.x = 900;
+      const obstacle = { id: 'blocking-obstacle', x: enemy.x + enemy.w + 18, y: 790, w: 6, h: 160, open: false, progress: 0 };
       engine.walls = kind === 'wall' ? [obstacle] : [];
       engine.doors = kind === 'door' ? [obstacle] : [];
+      // Keep the historical 18px approach gap using the real V65 body.
+      // A door's rendered hull is wider than its logical level marker.
+      if (kind === 'door') {
+        obstacle.x += enemy.x + enemy.w + 18 - engine.closedDoorColliders()[0].x;
+        const doorHull = engine.closedDoorColliders()[0];
+        engine.player.x = doorHull.x + doorHull.w + 18;
+      }
+      const initialCollider = kind === 'wall' ? obstacle : engine.closedDoorColliders()[0];
+      assert.ok(enemy.x + enemy.w < initialCollider.x, 'la fixture démarre hors du collider');
+      assert.ok(engine.player.x > initialCollider.x + initialCollider.w, 'la cible est de l’autre côté');
       assert.equal(engine.enemyMeleePathClearV64(enemy, engine.player), false);
       step(engine, enemy, 0.5);
       const collider = kind === 'wall' ? obstacle : engine.closedDoorColliders()[0];
@@ -186,8 +193,9 @@ test('un saut à grand delta est balayé en sous-pas et arrêté par une couvert
   const { engine, enemy, events } = createEngine();
   try {
     step(engine, enemy, 0);
-    const cover = { id: 'thin-cover', x: 666, y: 900, w: 2, h: 30, destroyed: false };
+    const cover = { id: 'thin-cover', x: enemy.x + enemy.w + 14, y: 900, w: 2, h: 30, destroyed: false };
     engine.covers = [cover];
+    assert.ok(enemy.x + enemy.w < cover.x, 'les 14px libres précèdent la couverture, sans chevauchement initial');
     const steps = [];
     const resolve = engine.resolveEnemyHorizontal.bind(engine);
     engine.resolveEnemyHorizontal = (actor, previousX) => { steps.push(actor.x - previousX); resolve(actor, previousX); };

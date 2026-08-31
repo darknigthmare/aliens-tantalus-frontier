@@ -6,6 +6,7 @@ import {
 import { resolveEnemyVisualOverrideV56 } from './enemy-visual-overrides-v56.js';
 import { resolveEnemyVisualOverrideV55 } from './enemy-visual-overrides-v55.js';
 import { resolveEnemyProfileVisualV65 } from './enemy-profile-registry-v65.js';
+import { resolveEnemyProfileVisualV66 } from './enemy-profile-registry-v66.js';
 
 const MODIFIER_PREFIXES = Object.freeze([
   'Acid-Blooded', 'Cryo-Adapted', 'Vacuum-Adapted', 'Neuro-Linked',
@@ -240,6 +241,8 @@ const asAuthoredFamilyVariant = (source, archetype, baseProfile) => {
 };
 
 export function resolveEnemyVisualProfile(source = {}) {
+  const dedicatedV66 = resolveEnemyProfileVisualV66(source);
+  if (dedicatedV66) return dedicatedV66;
   const dedicatedV65 = resolveEnemyProfileVisualV65(source);
   if (dedicatedV65) return dedicatedV65;
   const dedicatedV64 = resolveEnemyVisualOverrideV64(source);
