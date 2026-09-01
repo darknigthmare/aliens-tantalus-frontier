@@ -318,6 +318,17 @@ test('Caravan Stalker keeps quadruped locomotion and only rears during its dedic
   assert.doesNotMatch(job.clips.find((clip) => clip.id === 'attack').motion, /Bipedal claw/);
 });
 
+test('Albino Salvage Hive Brute keeps an organic protected head and low biped gait', () => {
+  const job = buildEnemyBatchQueue().jobs.find((entry) => entry.profileId === 'enemy-084-albino-salvage-hive-brute');
+  assert.deepEqual(job.clips.map((clip) => clip.id), ['idle', 'move', 'attack', 'death', 'charge']);
+  assert.match(job.clips.find((clip) => clip.id === 'move').motion, /low biped gait/);
+  assert.match(job.clips.find((clip) => clip.id === 'move').motion, /never form permanent quadrupedal locomotion/);
+  assert.match(job.clips.find((clip) => clip.id === 'attack').motion, /organic protected-head butt/);
+  assert.match(job.clips.find((clip) => clip.id === 'charge').motion, /organic protected-head or body impact/);
+  assert.doesNotMatch(job.clips.find((clip) => clip.id === 'attack').motion, /armored head/);
+  assert.doesNotMatch(job.clips.find((clip) => clip.id === 'charge').motion, /armored impact posture/);
+});
+
 test('Praetorian, Albino Siege Royal and Xenoborg overrides preserve their own anatomy, armament and clip identities', () => {
   const queue = buildEnemyBatchQueue();
   for (const job of queue.jobs.filter((entry) => entry.archetype === 'Praetorian')) {

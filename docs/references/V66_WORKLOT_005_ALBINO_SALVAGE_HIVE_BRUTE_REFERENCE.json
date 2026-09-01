@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-005",
+  "batchId": "batch-005",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-084-albino-salvage-hive-brute": {
+      "status": "reviewed",
+      "profileId": "enemy-084-albino-salvage-hive-brute",
+      "name": "Albino Salvage Hive Brute",
+      "archetype": "Salvage Hive Brute",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-crucible",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "siege",
+      "batchId": "batch-005",
+      "ordinal": 83,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-032-salvage-hive-brute",
+      "baseReferenceLockSha256": "c209b4c6d21520fbe7a1b5ca806ba44cf1c6577ef0b076c37265ef0c08704528",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_REFERENCE.json",
+        "sha256": "645cfe75c8c7103bfe27c4c2315997aa1ac9833a879df70f49fd833d0fd9ce6a"
+      },
+      "reviewer": "Codex /root/refs_083_084",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+      ],
+      "urlsPolicy": "The HTTPS pages establish the historical Aliens: Crucible project context only. Salvage Hive Brute and Albino Salvage Hive Brute are unattested project caste names; positive identity authority is the reviewed enemy-032 lock and SHA-256-pinned local project evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_REFERENCE.json",
+        "assets/openai/sprites/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
+        "assets/openai/sprites/metadata/v66/enemy-032-salvage-hive-brute.json",
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_ANCHOR_REVIEW.json",
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-032 Salvage Hive Brute. Preserve one very stocky low hive xenomorph with huge shoulders, massive forearms and knuckles, a protected low elongated eyeless organic head, thick ribbed torso, broad pelvis, powerful digitigrade legs, exactly two arms and two legs, and one complete segmented tail visibly rooted at the sacrum. It remains a low biped that may brace on one or both knuckles, never a permanent quadruped. Preserve the same few asymmetrical oxidized salvage pieces and dead charcoal cable loops permanently trapped under matte amber hive resin on upper back, outer shoulder and flank; they remain passive, unpowered and identical across poses and never replace anatomy. Albino changes newly authored organic pigment/material response only: warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe flexion membranes and chalk-ivory teeth. Amber resin, sparse rust-brown salvage and dead charcoal cables retain their non-organic material identity. Heavy mass, skull shield, limb count, salvage placement, cable loops, tail root, scale and right-facing profile remain invariant. No clean or powered hardware, articulated armor, backpack, weapon, exoskeleton, mech, cyborg, permanent quadruped, glow, ice, flat white, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Very stocky low biped with protected elongated eyeless head, huge shoulders, massive forearms and knuckles, broad ribbed torso and pelvis, two powerful digitigrade legs and one complete sacral tail.",
+        "palette": "Warm pearl/parchment organic chitin, cool ash-gray wet recesses, restrained rose-taupe membranes and chalk-ivory teeth; matte amber resin, sparse rust-brown salvage and dead charcoal cable remain unchanged. Never flat white, icy, luminous or clean metallic.",
+        "anatomy": "One protected eyeless head with inner jaw, exactly two arms and two legs, and one segmented tail. Knuckle bracing is a low-biped posture, not permanent four-legged anatomy.",
+        "separation": "Heavier and broader than the Albino Dust Runner; a low biped with huge forearms rather than an elongated sprint quadruped. Passive salvage remains trapped decoration and never becomes armor, machinery or a weapon.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Head shield, hands, both feet, fixed salvage silhouette and complete tail remain inside every cell with generous gutters.",
+        "root": "New art requires 40 independent pelvis/proximal-leg-to-support-foot or terminal-body-plane anchors. Knuckles may document support in braced phases but cannot replace the pelvic body root; head shield, tail tip, bounds center and inherited enemy-032 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using the protected cranial plate plus shoulder-to-pelvis and proximal-limb landmarks. Do not inherit enemy-032 numeric factors or measure salvage, cables, tail or action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no hive, salvage yard, floor, cast shadow, scenery, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight heavy grounded breathing/alert phases with restrained head, rib, shoulder, resin-bound debris and tail-base motion; both feet retain support.",
+        "move": "Eight complete low biped locomotion phases with contact, passing, weight transfer and recovery; forearms may knuckle-brace briefly but never create permanent quadrupedal gait.",
+        "attack": "Eight chronological heavy forelimb shove, body check or organic head-butt phases: planted anticipation, weight transfer, empty-space contact, follow-through and recovery. The protected head is organic, never armored hardware.",
+        "death": "Lethal reaction, loss of low-biped support, irreversible heavy collapse and terminal motionless body; limbs, sacral tail, resin, salvage and cables remain attached.",
+        "charge": "Eight grounded phases from low-biped acceleration and brief knuckle brace through one organic protected-head/body impact posture, braking and stable recovery; no teleport, airborne sprint, armored machine or permanent quadruped."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Salvage Hive Brute, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Very stocky low hive xenomorph: protected low elongated eyeless organic head, huge shoulders, massive forearms and knuckles, thick ribbed torso, broad pelvis, exactly TWO arms, TWO digitigrade legs and one complete segmented tail rooted at the sacrum. Low biped that may knuckle-brace, never permanent quadruped. Keep identical small asymmetrical oxidized salvage pieces and dead charcoal cable loops trapped under matte amber resin on upper back, outer shoulder and flank; passive and unpowered, never anatomy, armor or machinery. Albino organic material only: warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe membranes and chalk-ivory teeth; retain amber resin, sparse rust-brown salvage and dead charcoal cable. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show extra/missing limbs, clean/powered hardware, articulated armor, backpack, weapon, exoskeleton, mech, glow, ice, flat white or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight heavy grounded breathing/alert phases with subtle head, rib, shoulder and tail-base motion; resin-bound debris and cable placement remain identical.",
+          "move": "MOVE: eight complete low biped gait phases with contact, passing, weight transfer and recovery; forearms may knuckle-brace briefly but never form permanent quadrupedal locomotion.",
+          "attack": "ATTACK: eight chronological planted phases for a heavy forelimb shove, body check or organic protected-head butt into empty space, then follow-through and balanced recovery; no armored hardware.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through support loss and heavy collapse to terminal stillness; limbs, tail, resin, salvage and cables remain attached.",
+          "charge": "CHARGE: eight grounded phases from low-biped acceleration and brief knuckle brace through one organic protected-head/body impact posture, braking and stable recovery; no teleport, airborne sprint or permanent quadruped."
+        },
+        "promptSha256": {
+          "idle": "eaa20ac744ba3e2f4506dcc7eb982c1942bc26665c9b31b03587c5c9ff29dfc6",
+          "move": "66131db56209b8b81965acbe4ade85867a1d26b3f621e9bc807760f814a9efec",
+          "attack": "48fbb983d7d2566fff13b253cc9d2539cf08c7f4abe9921717576bfd4130fcc1",
+          "death": "3cf9b4ab5adfbe06f1a1017e36ea08a314abdda3567a6f0378dd4eb34366a77a",
+          "charge": "42f71dca0134db019e222fa587c1685d06dd2b61fa18ed4590e171d25d4f59d3"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "ed7374ff42ce8cc1f868037dd8f047f490496b081e39452eb8bd9ad084cbc324",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "requiredClipCount": 5,
+        "queuePromptSha256": {
+          "idle": "54fc63703af1977a67c4ba6a47ecb2fbba7458fd573935c89568a9dfe2923eda",
+          "move": "12de7c8bb322a6e205a398f494ebacd7426590e5f8beecc1765f52ad52b7ee71",
+          "attack": "356a739b47523b1716f1968c5309aed17ec4d15a62aaa246da8ead0e52a3cb46",
+          "death": "249f51611f04d9158db53d52565b65f5bd4b03800658e150770bd6c64dd3caab",
+          "charge": "0a259939e93dfaf4446aaabfcc82f1b59ba57e351a592416d3aa1dba6b91d884"
+        },
+        "queuePromptAudit": "All five current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)). The attack and charge placeholders use armored-head wording that is retained as provenance only; the strict replacements above preserve the reviewed organic protected head and prohibit hardware."
+      },
+      "acceptanceGates": [
+        "five 1774x887 exact 4x2 sheets and 40 distinct chronological right-facing poses",
+        "identity invariant: stocky low biped, protected organic head, exactly two arms/two legs, one complete tail and invariant passive salvage placement",
+        "Albino material changes organic pigment only; resin, rusted salvage and dead cables retain their material identities",
+        "new 40-pose physical anchors and rigid cranial/body inter-clip scale review retained",
+        "no permanent quadruped, powered hardware, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs establish canceled Aliens: Crucible context, not an official Salvage Hive Brute or Albino model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, salvage pixels, numeric roots or scale."
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "ed7374ff42ce8cc1f868037dd8f047f490496b081e39452eb8bd9ad084cbc324",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "f87d9fb3aff4408e862eeb41e717476fd1d92291ae1aec67f9b8421187213c93",
+    "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_REFERENCE.json": "645cfe75c8c7103bfe27c4c2315997aa1ac9833a879df70f49fd833d0fd9ce6a",
+    "assets/openai/sprites/enemies/salvage-hive-brute-action-sheet-v56.png": "48f8df1a741bcd922e4fa5213bfe7d3cdc2988073b0b41bf4a1867b533d77921",
+    "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png": "0446bd58418c9a4ab6ac7d4061cbb82484fbc1c37960a5eef22f7ecf89dc3bfe",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png": "5bc911b4b201925ed6586f696a6dd2d1bdfb53c22294164f5738ed17460adaaf",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png": "114083e565c5ecffeadc0215b242654a51c6947307e65c2f05a8fc5a4654a9c9",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png": "da09427947eb0b1faa6f970c6cb46950b6ca9085c0bc1a0d09802d36a8efa4dd",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png": "4919be02e9f0e9b2462c674ddcc0a1ea06ecd6d953e8e4e1b97d09f027b03698",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png": "62a7d760edbadeb305356c04c9d9a193db883a0dedf2c94c2266acf864c64fc4",
+    "assets/openai/sprites/metadata/v66/enemy-032-salvage-hive-brute.json": "24aa76ed5b028af4a99eb3edcf8e7048bf600d0d25eacd582da54ee860485073",
+    "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_ANCHOR_REVIEW.json": "7a4ca6367536c46204f0e2ea4b1d84f361cce3f3c16d3a3b3e609957ae5d9d8e",
+    "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md": "f2d50957fd828feb2b0376f4e6f807e95e1c86305054576d8e02cf799670c506"
+  },
+  "mergeSimulation": {
+    "assembler": "scripts/merge-v66-reference-fragments.mjs#assembleReferenceRegistry",
+    "baseSha256AtSimulation": "f87d9fb3aff4408e862eeb41e717476fd1d92291ae1aec67f9b8421187213c93",
+    "baseProfileCount": 81,
+    "incoming": [
+      "enemy-083-albino-dust-runner",
+      "enemy-084-albino-salvage-hive-brute"
+    ],
+    "simulatedProfileCount": 83,
+    "simulatedOutputSha256": "ee86a6d31bb3ec6e60efbee766489f217dd30425c2e2142ef21254fec136f352",
+    "identityAndClipContractsExact": true,
+    "queuePromptContentHashesVerified": 9,
+    "localPathsExist": true,
+    "httpsUrlsValid": true,
+    "globalWritten": false
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}

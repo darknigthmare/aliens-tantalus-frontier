@@ -51,6 +51,11 @@ const PROFILE_CLIP_OVERRIDES = Object.freeze({
   'enemy-081-albino-siege-royal': Object.freeze({
     attack: attack('Heavy Siege Royal forelimb strike using exactly two main arms; retain the broad low layered crest, four short dorsal tubes and full spear tail. Do not add small inner or chest arms, or a secondary arm pair.'),
   }),
+  'enemy-084-albino-salvage-hive-brute': Object.freeze({
+    move: clip('move', 'Eight complete low biped gait phases with contact, passing, weight transfer and recovery; massive forearms may knuckle-brace briefly but never form permanent quadrupedal locomotion. Keep all passive resin-bound salvage and cable loops fixed to the body.', 12, true),
+    attack: attack('Heavy forelimb shove, body check or organic protected-head butt into empty space; keep exactly two arms and two legs, passive resin-bound salvage and the complete sacral tail. No armored hardware or permanent quadruped posture.'),
+    charge: clip('charge', 'Grounded low-biped acceleration and brief knuckle brace into one organic protected-head or body impact posture, then braking and stable recovery. No armored machine, powered hardware, teleport, airborne sprint or permanent quadruped.', 12),
+  }),
 });
 
 export function animationContractFor(profile) {

@@ -9826,6 +9826,227 @@
         "External URLs establish canceled Aliens: Crucible context, not an official Pale Crucible Hunter or Albino model.",
         "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
       ]
+    },
+    "enemy-083-albino-dust-runner": {
+      "status": "reviewed",
+      "profileId": "enemy-083-albino-dust-runner",
+      "name": "Albino Dust Runner",
+      "archetype": "Dust Runner",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-crucible",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "quadruped",
+      "batchId": "batch-005",
+      "ordinal": 82,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-031-dust-runner",
+      "baseReferenceLockSha256": "830af744a780be1cf9aeb89bdafe34e1cbe8cb4903a507574978364b9b09cd5a",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_DUST_RUNNER_REFERENCE.json",
+        "sha256": "453f78ff565b0e6e29d4b31c2b5c6792362096e0a083362c83a3bb58d20af281"
+      },
+      "reviewer": "Codex /root/refs_083_084",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-3",
+        "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+      ],
+      "urlsPolicy": "The HTTPS pages establish the licensed Alien 3 quadrupedal adult context and broad Dog Alien anatomy only. Dust Runner and Albino Dust Runner are unattested project caste names; positive identity authority is the reviewed enemy-031 lock and SHA-256-pinned local project evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_DUST_RUNNER_REFERENCE.json",
+        "assets/openai/sprites/enemies/dust-runner-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/death.png",
+        "assets/openai/sprites/metadata/v66/enemy-031-dust-runner.json",
+        "docs/references/V66_WORKLOT_001_DUST_RUNNER_QA.json",
+        "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.json",
+        "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.md"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-031 Dust Runner. Preserve one extremely low and long adult quadrupedal project xenomorph with a smooth eyeless elongated skull, compact barrel ribcage, long forelimbs, powerful digitigrade hind legs, exactly four readable supports, toothed maw and inner jaw, no dorsal tubes, and one complete long segmented blade-tipped tail rooted at the sacrum. Albino changes newly authored organic pigment/material response only: warm pearl and pale parchment shell, cool ash-gray wet recesses, restrained translucent rose-taupe flexion membranes, chalk-ivory teeth and sparse neutral beige-gray dust deposits. Low runner proportions, skull length, limb count, support pattern, absence of dorsal tubes, tail, strict right-facing profile and project scale remain invariant. No bipedal drift, eyes, armor, equipment, wings, rider horns, metal plates, glow, ice, flat white, uniform yellow recolor, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Extremely low and long quadruped with smooth elongated eyeless skull, compact barrel ribcage, long sprinting forelimbs, powerful digitigrade hind legs, four supports and one complete blade-tipped segmented tail.",
+        "palette": "Warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe flexion membranes, chalk-ivory teeth and sparse neutral beige-gray dust. Never flat white, icy blue, luminous or uniformly yellow.",
+        "anatomy": "One eyeless elongated head with inner jaw, exactly two forelimbs and two hind legs, no dorsal tubes and one sacral segmented tail. No equipment or added anatomy.",
+        "separation": "Longer, lower and more sprint-built than a standard bipedal Warrior; no dorsal tubes; visually distinct from a Runner only through the locked Dust Runner proportions and the systemic Albino material response, never through new anatomy.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Skull, all four support feet and complete tail remain inside every cell with generous gutters.",
+        "root": "New art requires 32 independent pelvis/proximal-limb-to-support-foot or terminal-body-plane anchors. Skull tip, tail tip, bounds center and inherited enemy-031 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using rigid dorsal cranial-dome chords plus shoulder-to-pelvis landmarks. Do not inherit enemy-031 numeric factors or measure jaws, tail or action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no floor, cast shadow, dust storm, scenery, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight low grounded breathing/alert phases with restrained rib, skull-base and tail-base motion; all four supports stay readable.",
+        "move": "Eight complete low quadrupedal running phases with diagonal contacts, compression, extension and recovery; never become bipedal or translate across cells.",
+        "attack": "Eight chronological quadrupedal crouch, pounce or bite phases: four-foot anticipation, compression, extension into empty space, one contact posture, follow-through and four-foot recovery.",
+        "death": "Lethal reaction, loss of four-point support, irreversible collapse and terminal motionless body; skull, limbs and sacral tail remain attached."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Dust Runner, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Extremely low long adult quadruped: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs, powerful digitigrade hind legs, exactly four readable supports, inner jaw, no dorsal tubes and one complete blade-tipped segmented tail rooted at the sacrum. Albino material only: warm pearl/parchment shell, cool ash-gray wet recesses, restrained rose-taupe flexion membranes, chalk-ivory teeth and sparse neutral beige-gray dust. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show bipedal posture, eyes, dorsal tubes, extra/missing limb or tail, armor, equipment, wings, metal plates, glow, ice, flat white, uniform yellow or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight low grounded breathing/alert phases with subtle rib, skull-base and tail-base motion; all four supports remain readable in a seamless loop.",
+          "move": "MOVE: eight complete low quadrupedal running phases with diagonal contacts, compression, extension and recovery; never become bipedal or translate across cells.",
+          "attack": "ATTACK: eight chronological quadrupedal crouch, pounce or bite phases from four-foot anticipation and compression through empty-space contact, follow-through and four-foot recovery.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through loss of four-point support and collapse to terminal stillness; skull, limbs and sacral tail remain attached."
+        },
+        "promptSha256": {
+          "idle": "2ea73ef83c21e95cfefb6c720beb6955d045904d9c1746efef144e0b2f3f042b",
+          "move": "799de316fa093b6de497ad1386a531847a0b74d05c61dcc4d262f36a787c4de3",
+          "attack": "6fe5fd43f4557a14f7b4f1b9d260314fb0bd704b77fa9c03255c98036904d537",
+          "death": "3b4363acbc5b6f322cd5fda4a4d479c010df5a66cc3dc6bf185b2b3a3d3bda42"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "ed7374ff42ce8cc1f868037dd8f047f490496b081e39452eb8bd9ad084cbc324",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "requiredClipCount": 4,
+        "queuePromptSha256": {
+          "idle": "775096eb89780dc74ed7a766dd3a53fd5ef6be0b3973f0505eadaaf9c4b7dcbb",
+          "move": "e735a020cee78eac07de079020182811e1987ec8c985c66788196f5bad46718d",
+          "attack": "3669aad347ab344e41d22872a657eb244b9fda4ca1a7fcb7875f5c46ddd98d80",
+          "death": "4232daf6fe512493cddc607f38ce620b17c4a0e93ae0c43be01265f25f96fa90"
+        },
+        "queuePromptAudit": "All four current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)); these snapshots are provenance only and intentionally differ from the strict proposed prompts above."
+      },
+      "acceptanceGates": [
+        "four 1774x887 exact 4x2 sheets and 32 distinct chronological right-facing poses",
+        "identity invariant: extremely low long quadruped, elongated eyeless skull, exactly four supports, no dorsal tubes and one complete blade tail",
+        "Albino material changes no anatomy, silhouette, ground-contact pattern or project scale",
+        "new 32-pose physical anchors and rigid cranial/body inter-clip scale review retained",
+        "no bipedal drift, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs establish licensed Alien 3 quadrupedal context, not an official Dust Runner or Albino model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
+      ]
+    },
+    "enemy-084-albino-salvage-hive-brute": {
+      "status": "reviewed",
+      "profileId": "enemy-084-albino-salvage-hive-brute",
+      "name": "Albino Salvage Hive Brute",
+      "archetype": "Salvage Hive Brute",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-crucible",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "siege",
+      "batchId": "batch-005",
+      "ordinal": 83,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-032-salvage-hive-brute",
+      "baseReferenceLockSha256": "c209b4c6d21520fbe7a1b5ca806ba44cf1c6577ef0b076c37265ef0c08704528",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_REFERENCE.json",
+        "sha256": "645cfe75c8c7103bfe27c4c2315997aa1ac9833a879df70f49fd833d0fd9ce6a"
+      },
+      "reviewer": "Codex /root/refs_083_084",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+      ],
+      "urlsPolicy": "The HTTPS pages establish the historical Aliens: Crucible project context only. Salvage Hive Brute and Albino Salvage Hive Brute are unattested project caste names; positive identity authority is the reviewed enemy-032 lock and SHA-256-pinned local project evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_REFERENCE.json",
+        "assets/openai/sprites/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
+        "assets/openai/sprites/metadata/v66/enemy-032-salvage-hive-brute.json",
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_ANCHOR_REVIEW.json",
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-032 Salvage Hive Brute. Preserve one very stocky low hive xenomorph with huge shoulders, massive forearms and knuckles, a protected low elongated eyeless organic head, thick ribbed torso, broad pelvis, powerful digitigrade legs, exactly two arms and two legs, and one complete segmented tail visibly rooted at the sacrum. It remains a low biped that may brace on one or both knuckles, never a permanent quadruped. Preserve the same few asymmetrical oxidized salvage pieces and dead charcoal cable loops permanently trapped under matte amber hive resin on upper back, outer shoulder and flank; they remain passive, unpowered and identical across poses and never replace anatomy. Albino changes newly authored organic pigment/material response only: warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe flexion membranes and chalk-ivory teeth. Amber resin, sparse rust-brown salvage and dead charcoal cables retain their non-organic material identity. Heavy mass, skull shield, limb count, salvage placement, cable loops, tail root, scale and right-facing profile remain invariant. No clean or powered hardware, articulated armor, backpack, weapon, exoskeleton, mech, cyborg, permanent quadruped, glow, ice, flat white, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Very stocky low biped with protected elongated eyeless head, huge shoulders, massive forearms and knuckles, broad ribbed torso and pelvis, two powerful digitigrade legs and one complete sacral tail.",
+        "palette": "Warm pearl/parchment organic chitin, cool ash-gray wet recesses, restrained rose-taupe membranes and chalk-ivory teeth; matte amber resin, sparse rust-brown salvage and dead charcoal cable remain unchanged. Never flat white, icy, luminous or clean metallic.",
+        "anatomy": "One protected eyeless head with inner jaw, exactly two arms and two legs, and one segmented tail. Knuckle bracing is a low-biped posture, not permanent four-legged anatomy.",
+        "separation": "Heavier and broader than the Albino Dust Runner; a low biped with huge forearms rather than an elongated sprint quadruped. Passive salvage remains trapped decoration and never becomes armor, machinery or a weapon.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Head shield, hands, both feet, fixed salvage silhouette and complete tail remain inside every cell with generous gutters.",
+        "root": "New art requires 40 independent pelvis/proximal-leg-to-support-foot or terminal-body-plane anchors. Knuckles may document support in braced phases but cannot replace the pelvic body root; head shield, tail tip, bounds center and inherited enemy-032 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using the protected cranial plate plus shoulder-to-pelvis and proximal-limb landmarks. Do not inherit enemy-032 numeric factors or measure salvage, cables, tail or action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no hive, salvage yard, floor, cast shadow, scenery, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight heavy grounded breathing/alert phases with restrained head, rib, shoulder, resin-bound debris and tail-base motion; both feet retain support.",
+        "move": "Eight complete low biped locomotion phases with contact, passing, weight transfer and recovery; forearms may knuckle-brace briefly but never create permanent quadrupedal gait.",
+        "attack": "Eight chronological heavy forelimb shove, body check or organic head-butt phases: planted anticipation, weight transfer, empty-space contact, follow-through and recovery. The protected head is organic, never armored hardware.",
+        "death": "Lethal reaction, loss of low-biped support, irreversible heavy collapse and terminal motionless body; limbs, sacral tail, resin, salvage and cables remain attached.",
+        "charge": "Eight grounded phases from low-biped acceleration and brief knuckle brace through one organic protected-head/body impact posture, braking and stable recovery; no teleport, airborne sprint, armored machine or permanent quadruped."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Salvage Hive Brute, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Very stocky low hive xenomorph: protected low elongated eyeless organic head, huge shoulders, massive forearms and knuckles, thick ribbed torso, broad pelvis, exactly TWO arms, TWO digitigrade legs and one complete segmented tail rooted at the sacrum. Low biped that may knuckle-brace, never permanent quadruped. Keep identical small asymmetrical oxidized salvage pieces and dead charcoal cable loops trapped under matte amber resin on upper back, outer shoulder and flank; passive and unpowered, never anatomy, armor or machinery. Albino organic material only: warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe membranes and chalk-ivory teeth; retain amber resin, sparse rust-brown salvage and dead charcoal cable. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show extra/missing limbs, clean/powered hardware, articulated armor, backpack, weapon, exoskeleton, mech, glow, ice, flat white or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight heavy grounded breathing/alert phases with subtle head, rib, shoulder and tail-base motion; resin-bound debris and cable placement remain identical.",
+          "move": "MOVE: eight complete low biped gait phases with contact, passing, weight transfer and recovery; forearms may knuckle-brace briefly but never form permanent quadrupedal locomotion.",
+          "attack": "ATTACK: eight chronological planted phases for a heavy forelimb shove, body check or organic protected-head butt into empty space, then follow-through and balanced recovery; no armored hardware.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through support loss and heavy collapse to terminal stillness; limbs, tail, resin, salvage and cables remain attached.",
+          "charge": "CHARGE: eight grounded phases from low-biped acceleration and brief knuckle brace through one organic protected-head/body impact posture, braking and stable recovery; no teleport, airborne sprint or permanent quadruped."
+        },
+        "promptSha256": {
+          "idle": "eaa20ac744ba3e2f4506dcc7eb982c1942bc26665c9b31b03587c5c9ff29dfc6",
+          "move": "66131db56209b8b81965acbe4ade85867a1d26b3f621e9bc807760f814a9efec",
+          "attack": "48fbb983d7d2566fff13b253cc9d2539cf08c7f4abe9921717576bfd4130fcc1",
+          "death": "3cf9b4ab5adfbe06f1a1017e36ea08a314abdda3567a6f0378dd4eb34366a77a",
+          "charge": "42f71dca0134db019e222fa587c1685d06dd2b61fa18ed4590e171d25d4f59d3"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "ed7374ff42ce8cc1f868037dd8f047f490496b081e39452eb8bd9ad084cbc324",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "requiredClipCount": 5,
+        "queuePromptSha256": {
+          "idle": "54fc63703af1977a67c4ba6a47ecb2fbba7458fd573935c89568a9dfe2923eda",
+          "move": "12de7c8bb322a6e205a398f494ebacd7426590e5f8beecc1765f52ad52b7ee71",
+          "attack": "356a739b47523b1716f1968c5309aed17ec4d15a62aaa246da8ead0e52a3cb46",
+          "death": "249f51611f04d9158db53d52565b65f5bd4b03800658e150770bd6c64dd3caab",
+          "charge": "0a259939e93dfaf4446aaabfcc82f1b59ba57e351a592416d3aa1dba6b91d884"
+        },
+        "queuePromptAudit": "All five current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)). The attack and charge placeholders use armored-head wording that is retained as provenance only; the strict replacements above preserve the reviewed organic protected head and prohibit hardware."
+      },
+      "acceptanceGates": [
+        "five 1774x887 exact 4x2 sheets and 40 distinct chronological right-facing poses",
+        "identity invariant: stocky low biped, protected organic head, exactly two arms/two legs, one complete tail and invariant passive salvage placement",
+        "Albino material changes organic pigment only; resin, rusted salvage and dead cables retain their material identities",
+        "new 40-pose physical anchors and rigid cranial/body inter-clip scale review retained",
+        "no permanent quadruped, powered hardware, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs establish canceled Aliens: Crucible context, not an official Salvage Hive Brute or Albino model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, salvage pixels, numeric roots or scale."
+      ]
     }
   }
 }
