@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "profileId": "enemy-048-cult-host",
+  "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+  "sourceSha256": "e98c379494f40f3d210243f867344dcd900e66a1e3c4c254cf2909affb817609",
+  "capturedAtReviewDate": "2026-09-01",
+  "readOnly": true,
+  "referenceLockSha256": "70da7732aae83c2e0c205c3e615cce85b59fb59e06831ac50ce796860547d385",
+  "clips": {
+    "idle": {
+      "promptPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/idle-queue-current.txt",
+      "promptFileBytesSha256": "15be6af622fa2ad727240b93088e9a822e20c07c45e97d696c723625d5392bbb",
+      "promptSha256": "f900d359419bbdcc0e19ab11fbeb5b38fef0b5695c2eda3de879d8f6fb148d3d",
+      "computedJsonStringifyPromptSha256": "f900d359419bbdcc0e19ab11fbeb5b38fef0b5695c2eda3de879d8f6fb148d3d",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+      "fps": 6,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/idle.png"
+    },
+    "move": {
+      "promptPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/move-queue-current.txt",
+      "promptFileBytesSha256": "cdf909e38d6d6e5c8c0b3099baf002888bdf6288437c6278b7a25bf71578e141",
+      "promptSha256": "bc76a4236762d183c5c8356b8792fdb22f798680eb3a20dfce3831f2cd0e424c",
+      "computedJsonStringifyPromptSha256": "bc76a4236762d183c5c8356b8792fdb22f798680eb3a20dfce3831f2cd0e424c",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+      "fps": 12,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/move.png"
+    },
+    "attack": {
+      "promptPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/attack-queue-current.txt",
+      "promptFileBytesSha256": "c756d9278eee6df2cc83b811b209ac8dcbe77acda82f4dc775820c11601ec8ab",
+      "promptSha256": "f70de1bc26122fbd8e02ad2bed6d5464e6ddc12f1492d1e998aa3a4a130c4966",
+      "computedJsonStringifyPromptSha256": "f70de1bc26122fbd8e02ad2bed6d5464e6ddc12f1492d1e998aa3a4a130c4966",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+      "fps": 12,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/attack.png"
+    },
+    "death": {
+      "promptPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/death-queue-current.txt",
+      "promptFileBytesSha256": "051772ea7d3d828c0ac50c98a73b7b2b9f54367effc711c429b07954d953d2b3",
+      "promptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+      "computedJsonStringifyPromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+      "fps": 10,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/death.png"
+    }
+  },
+  "attackContractConflict": "The exact current queue prompt says claw or inner-jaw strike. This snapshot preserves that text verbatim but does not treat it as the human Cult Host art lock.",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "kind": "generated-recovered-and-source-repaired",
+  "profileId": "enemy-048-cult-host",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:fbcadfa70539c8334e1ddf49f7c96d8ba867fb0010d98a16a0024a09674f14c4",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+  "actor": "Codex /root/process_profile_048",
+  "actualGenerationPromptAvailable": false,
+  "actualPromptPath": null,
+  "actualPromptSha256": null,
+  "actualPromptUnavailableReason": "The exact historical ImageGen prompt was not retained in the prior generation receipt and is not embedded in the immutable raw capture.",
+  "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/death-queue-current.txt",
+  "currentQueuePromptFileBytesSha256": "051772ea7d3d828c0ac50c98a73b7b2b9f54367effc711c429b07954d953d2b3",
+  "promptSha256": null,
+  "contractPromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+  "queuePromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+  "computedJsonStringifyPromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+  "queueContractHashMatches": true,
+  "promptProvenanceNote": "The exact current queue prompt is preserved for contract provenance only; it is not asserted to be the unavailable historical provider prompt.",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/death.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/death.png",
+  "sourceSha256": "714a6e5da41c5a0af24d9acc1fe69a3b60111e05b7cadded3f2afb7893df0d79",
+  "sourceBytes": 452098,
+  "referenceLockSha256": "70da7732aae83c2e0c205c3e615cce85b59fb59e06831ac50ce796860547d385",
+  "referenceEvidencePath": "docs/references/V66_WORKLOT_003_CULT_HOST_REFERENCE.json",
+  "referenceEvidenceSha256": "1d63e7edd4734d8387b22187163dea80f16f12cf53d7e565a5e7ddf9ef482956",
+  "rawCapture": {
+    "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/death-r1-imagegen.png",
+    "sha256": "fbcadfa70539c8334e1ddf49f7c96d8ba867fb0010d98a16a0024a09674f14c4",
+    "bytes": 1667138,
+    "pixelEdits": 0,
+    "embeddedPromptMetadata": false
+  },
+  "sourceRepairs": [
+    {
+      "kind": "proven-magenta-component-extraction-and-shared-uniform-scale-recomposition",
+      "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with the one profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+      "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/death-r1-imagegen.png",
+      "inputSha256": "fbcadfa70539c8334e1ddf49f7c96d8ba867fb0010d98a16a0024a09674f14c4",
+      "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/death-r1-shared-scale-recomposed.png",
+      "outputSha256": "714a6e5da41c5a0af24d9acc1fe69a3b60111e05b7cadded3f2afb7893df0d79",
+      "sharedPhysicalScale": 0.863207547,
+      "nonUniformAnatomyStretch": false,
+      "receiptPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/source-qa.json",
+      "receiptSha256": "0520263994ac837bdc3208fbd34d704de9bacf0b19b9859a655a20c02887416a",
+      "derivedProvenancePath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/derived-provenance.json",
+      "derivedProvenanceSha256": "d17699c1c1187f5fcec561ba623cb93ada64ddfb8e61ace179f367fdecafdde2"
+    },
+    {
+      "kind": "deterministic-foreground-edge-magenta-despill",
+      "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+      "spillThreshold": {
+        "topology": "union of a soft magenta-dominance tier within Chebyshev distance <= 8 px and a strong magenta-dominance tier within Chebyshev distance <= 48 px of exact opaque #FF00FF background; both tiers are foreground-only",
+        "softColourThresholdInclusive": {
+          "redMin": 40,
+          "blueMin": 40,
+          "greenMax": 200,
+          "redMinusGreenMin": 12,
+          "blueMinusGreenMin": 12,
+          "absoluteRedMinusBlueMax": 180
+        },
+        "strongColourThresholdInclusive": {
+          "redMin": 110,
+          "blueMin": 95,
+          "greenMax": 165,
+          "redMinusGreenMin": 40,
+          "blueMinusGreenMin": 35,
+          "absoluteRedMinusBlueMax": 135
+        },
+        "referenceSelection": "nearest original foreground pixel that fails the soft magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+        "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+        "softForegroundBorderDepthPx": 8,
+        "strongForegroundBorderDepthPx": 48,
+        "maximumLocalReferenceRadiusPx": 12,
+        "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+        "invariants": [
+          "only pre-existing declared spill foreground pixels may change RGB",
+          "foreground/background membership must remain byte-identical",
+          "all exact #FF00FF background pixels must remain byte-identical",
+          "declared spill pixels after correction must equal zero"
+        ]
+      },
+      "spillPixelsBefore": 18472,
+      "modifiedPixels": 18472,
+      "spillPixelsAfter": 0,
+      "foregroundMasksUnchanged": true,
+      "changedBackgroundPixels": 0,
+      "perPoseModifiedPixels": [
+        {
+          "frame": 0,
+          "modifiedPixels": 3064,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 1,
+          "modifiedPixels": 2962,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 2,
+          "modifiedPixels": 2642,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 3,
+          "modifiedPixels": 2119,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 4,
+          "modifiedPixels": 2483,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 5,
+          "modifiedPixels": 1946,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 6,
+          "modifiedPixels": 1706,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 7,
+          "modifiedPixels": 1550,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        }
+      ]
+    }
+  ],
+  "generationAttempts": null,
+  "generationTimestamp": null,
+  "reviewedAt": "2026-09-01",
+  "qa": {
+    "size": [
+      1774,
+      887
+    ],
+    "grid": [
+      4,
+      2
+    ],
+    "poseCount": 8,
+    "facing": "right-manually-reviewed",
+    "cellBoundaryContacts": 0,
+    "minimumClearancePx": 38,
+    "uniformOpaqueExactMagenta": true,
+    "sharedPhysicalScale": 0.863207547,
+    "despillModifiedPixels": 18472,
+    "despillResidualPixels": 0,
+    "despillForegroundMasksUnchanged": true,
+    "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+    "attackQualification": null
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write."
+}

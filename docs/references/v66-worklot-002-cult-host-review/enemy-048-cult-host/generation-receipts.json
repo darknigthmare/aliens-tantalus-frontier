@@ -1,0 +1,543 @@
+{
+  "schema": 1,
+  "profileId": "enemy-048-cult-host",
+  "provider": "OpenAI ImageGen",
+  "referenceLockSha256": "70da7732aae83c2e0c205c3e615cce85b59fb59e06831ac50ce796860547d385",
+  "actualGenerationPromptsAvailable": false,
+  "promptProvenance": "Exact current queue snapshots are retained; they are not asserted to be the unavailable historical provider prompts.",
+  "receipts": [
+    {
+      "clipId": "idle",
+      "queuePromptSnapshotPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/idle-queue-current.txt",
+      "actualPromptSha256": null,
+      "promptSha256": null,
+      "queuePromptSha256": "f900d359419bbdcc0e19ab11fbeb5b38fef0b5695c2eda3de879d8f6fb148d3d",
+      "contractPromptSha256": "f900d359419bbdcc0e19ab11fbeb5b38fef0b5695c2eda3de879d8f6fb148d3d",
+      "computedJsonStringifyPromptSha256": "f900d359419bbdcc0e19ab11fbeb5b38fef0b5695c2eda3de879d8f6fb148d3d",
+      "promptFileBytesSha256": "15be6af622fa2ad727240b93088e9a822e20c07c45e97d696c723625d5392bbb",
+      "contractHashMatches": true,
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/idle-r1-imagegen.png",
+        "sha256": "d3ac6c85d05ba45aaa61713a50e5f6dde0fc8cbc070bab38e2e788028d6217b9",
+        "bytes": 1707134
+      },
+      "keyedSource": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/idle-r1-proven-magenta-keyed-source.png",
+        "sha256": "f0b3e60c37ca0d5254ddb5633d669fc2aea74a14d700aef4d50e06dd622d2ce3",
+        "bytes": 622829
+      },
+      "completeExtractedPoses": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-01-raw-keyed.png",
+          "sha256": "af9dc03fc6a9fd7f10b979eaddf53d414e6fa218e04bcaec93f96bc5da6065cb",
+          "bytes": 100968
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-02-raw-keyed.png",
+          "sha256": "4c275c21a597c4bcaed5ca168cf8ccb9e8e7412c6759df43b3f744ac0b2a487c",
+          "bytes": 103017
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-03-raw-keyed.png",
+          "sha256": "e4703764717c2df56c9d23247559c3093e576bdd67a2a9b1a3ae33779116a7a2",
+          "bytes": 109146
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-04-raw-keyed.png",
+          "sha256": "976a85e7954a0aa5cf515749bf8a89f771d3d79323d21552f8ee377c086f26d6",
+          "bytes": 107282
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-05-raw-keyed.png",
+          "sha256": "c1aaa56775c9b2261b59c4746d7aa385ac198e9aa339696abf6621fad2af5226",
+          "bytes": 112870
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-06-raw-keyed.png",
+          "sha256": "a2da77af3df14ea06bf474a7e2b87958315c59237b32d635490d5623f090fa07",
+          "bytes": 101313
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-07-raw-keyed.png",
+          "sha256": "f8461dff1a11a8330fe06d31c2c8b9543f1dd6d67564cd86ee47e5525cbfc2a0",
+          "bytes": 100293
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/idle/frame-08-raw-keyed.png",
+          "sha256": "2568595bf04478e2e256f00b609eba6f6f9afc73acf2422781b1175412995a3d",
+          "bytes": 99117
+        }
+      ],
+      "sharedScaleDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/idle-r1-shared-scale-recomposed.png",
+        "sha256": "de2678769359d59dde06f7693262d338d12675b16874195f4a4eb2b2bbdeb9dd",
+        "bytes": 492669
+      },
+      "sharedPhysicalScale": 0.863207547,
+      "despill": {
+        "spillPixelsBefore": 18461,
+        "modifiedPixels": 18461,
+        "spillPixelsAfter": 0,
+        "foregroundMasksUnchanged": true,
+        "perPose": [
+          {
+            "frame": 0,
+            "modifiedPixels": 2279,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 1,
+            "modifiedPixels": 2367,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 2,
+            "modifiedPixels": 2264,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 3,
+            "modifiedPixels": 2322,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 4,
+            "modifiedPixels": 2499,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 5,
+            "modifiedPixels": 2191,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 6,
+            "modifiedPixels": 2261,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 7,
+            "modifiedPixels": 2278,
+            "spillPixelsAfter": 0
+          }
+        ]
+      },
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/idle.png",
+      "sourceSha256": "de2678769359d59dde06f7693262d338d12675b16874195f4a4eb2b2bbdeb9dd",
+      "sourceBytes": 492669,
+      "eventPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/events/idle.production-event.json",
+      "eventSha256": "947c236beaa364403c80de812e68768d487690897e40b3c24dcbbf406838fd98"
+    },
+    {
+      "clipId": "move",
+      "queuePromptSnapshotPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/move-queue-current.txt",
+      "actualPromptSha256": null,
+      "promptSha256": null,
+      "queuePromptSha256": "bc76a4236762d183c5c8356b8792fdb22f798680eb3a20dfce3831f2cd0e424c",
+      "contractPromptSha256": "bc76a4236762d183c5c8356b8792fdb22f798680eb3a20dfce3831f2cd0e424c",
+      "computedJsonStringifyPromptSha256": "bc76a4236762d183c5c8356b8792fdb22f798680eb3a20dfce3831f2cd0e424c",
+      "promptFileBytesSha256": "cdf909e38d6d6e5c8c0b3099baf002888bdf6288437c6278b7a25bf71578e141",
+      "contractHashMatches": true,
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/move-r1-imagegen.png",
+        "sha256": "d9351c570ecc71ada6144d276b7e2b8c4ff7d516d695c84820ae5f6fd4422bc1",
+        "bytes": 1689848
+      },
+      "keyedSource": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/move-r1-proven-magenta-keyed-source.png",
+        "sha256": "02b6c46617d0b0bccdafc3af241e226d3abcfda94868ca60eac11442a4074775",
+        "bytes": 610874
+      },
+      "completeExtractedPoses": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-01-raw-keyed.png",
+          "sha256": "b7276dcfa63fd3cf01129eaddb227d4a2f7bed131e5849c73c6e87a1abf029ef",
+          "bytes": 141591
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-02-raw-keyed.png",
+          "sha256": "5a80800f220beca3f93062adc595504e17a536e7c06798dbb167754ef2d6bf7a",
+          "bytes": 113537
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-03-raw-keyed.png",
+          "sha256": "fc02643c868e92ce6e77430238e6c3bb34987f41758fdc7a8a8eccab3b8b98a8",
+          "bytes": 119301
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-04-raw-keyed.png",
+          "sha256": "07fd4b3ef25d8524efc738765288e031e849ecec42d4c71ffa2d8a918c84737b",
+          "bytes": 135590
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-05-raw-keyed.png",
+          "sha256": "7da3ce54fe7960db0b24b03ddd729c625947164dc319004f77754403fdc64891",
+          "bytes": 143323
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-06-raw-keyed.png",
+          "sha256": "b456dc4d6b56d8375986c2bdb76d01d8c37e58ded9fff8596d7e54ef28deef97",
+          "bytes": 106173
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-07-raw-keyed.png",
+          "sha256": "a33ddebc9457be651553f65f597fc461f7eaf03dd6f73db462c0778540bf4992",
+          "bytes": 114756
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/move/frame-08-raw-keyed.png",
+          "sha256": "35520c817fdbd7ef285d058b55fcae42f0872137bc748464a1ab5539ad77e04b",
+          "bytes": 120727
+        }
+      ],
+      "sharedScaleDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/move-r1-shared-scale-recomposed.png",
+        "sha256": "cba655a1e89e8cbe2d6d62155181ca9951b7bb70c565c9c567b3625c731fb1d9",
+        "bytes": 493181
+      },
+      "sharedPhysicalScale": 0.863207547,
+      "despill": {
+        "spillPixelsBefore": 22065,
+        "modifiedPixels": 22065,
+        "spillPixelsAfter": 0,
+        "foregroundMasksUnchanged": true,
+        "perPose": [
+          {
+            "frame": 0,
+            "modifiedPixels": 3027,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 1,
+            "modifiedPixels": 2745,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 2,
+            "modifiedPixels": 2614,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 3,
+            "modifiedPixels": 2992,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 4,
+            "modifiedPixels": 3062,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 5,
+            "modifiedPixels": 2413,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 6,
+            "modifiedPixels": 2544,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 7,
+            "modifiedPixels": 2668,
+            "spillPixelsAfter": 0
+          }
+        ]
+      },
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/move.png",
+      "sourceSha256": "cba655a1e89e8cbe2d6d62155181ca9951b7bb70c565c9c567b3625c731fb1d9",
+      "sourceBytes": 493181,
+      "eventPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/events/move.production-event.json",
+      "eventSha256": "033a8515c521251b226db25ed99b1473cdd420515d20a8c32d51c6db3ec94815"
+    },
+    {
+      "clipId": "attack",
+      "queuePromptSnapshotPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/attack-queue-current.txt",
+      "actualPromptSha256": null,
+      "promptSha256": null,
+      "queuePromptSha256": "f70de1bc26122fbd8e02ad2bed6d5464e6ddc12f1492d1e998aa3a4a130c4966",
+      "contractPromptSha256": "f70de1bc26122fbd8e02ad2bed6d5464e6ddc12f1492d1e998aa3a4a130c4966",
+      "computedJsonStringifyPromptSha256": "f70de1bc26122fbd8e02ad2bed6d5464e6ddc12f1492d1e998aa3a4a130c4966",
+      "promptFileBytesSha256": "c756d9278eee6df2cc83b811b209ac8dcbe77acda82f4dc775820c11601ec8ab",
+      "contractHashMatches": true,
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/attack-r1-imagegen.png",
+        "sha256": "7ad18fda5738698d1a2e1ca727bf5be6383ae810171f82489e939fa51b31fd1c",
+        "bytes": 1724101
+      },
+      "keyedSource": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/attack-r1-proven-magenta-keyed-source.png",
+        "sha256": "1ea2e2d2a09b8e91fa833bfa8d5748c26d3e42509e28be3fe58d8d3792f002e0",
+        "bytes": 641767
+      },
+      "completeExtractedPoses": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-01-raw-keyed.png",
+          "sha256": "8290ad6b53e7ffa734ab228b0db973e7d12d77d77ac3bb55ad58b3f74b0c6dca",
+          "bytes": 100388
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-02-raw-keyed.png",
+          "sha256": "f4111df382caaf7c1181127a20282b66f9ed2be093fb8faf6bb3c1603e2f9e0e",
+          "bytes": 121639
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-03-raw-keyed.png",
+          "sha256": "39b8fb02d4ebe5c27bcede424e88adc03186a47acbbad1b06b6d7a8298e36533",
+          "bytes": 152464
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-04-raw-keyed.png",
+          "sha256": "1edfa4dd27d0169aca0ea9120a5ad6428739f34d343d9ea12414967d022ca104",
+          "bytes": 170874
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-05-raw-keyed.png",
+          "sha256": "bcce8e57b077f9ea6dcefaa728fcfc410be80c4b3b15641561f4c279c484f587",
+          "bytes": 166873
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-06-raw-keyed.png",
+          "sha256": "47815c781c090b08d1c2a266e8b8d72eb2e20d5e67c58ddd6d33b7c8d97421ee",
+          "bytes": 164530
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-07-raw-keyed.png",
+          "sha256": "7bd8eb9ee3e365bceb36452e0f80829fe2e1aa1119ba488c67471b0d6aa01285",
+          "bytes": 103500
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/attack/frame-08-raw-keyed.png",
+          "sha256": "34bad09154bf4b9513cbf45e7b7b87079d4db5bb590d0f0ab3011878d226aef5",
+          "bytes": 100076
+        }
+      ],
+      "sharedScaleDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/attack-r1-shared-scale-recomposed.png",
+        "sha256": "7eefb1b2b2b04bb1cc58d81e14b9751e48e115109f694c000a1b2ca9c623096f",
+        "bytes": 515796
+      },
+      "sharedPhysicalScale": 0.863207547,
+      "despill": {
+        "spillPixelsBefore": 23540,
+        "modifiedPixels": 23540,
+        "spillPixelsAfter": 0,
+        "foregroundMasksUnchanged": true,
+        "perPose": [
+          {
+            "frame": 0,
+            "modifiedPixels": 2182,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 1,
+            "modifiedPixels": 3030,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 2,
+            "modifiedPixels": 3260,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 3,
+            "modifiedPixels": 3600,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 4,
+            "modifiedPixels": 3585,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 5,
+            "modifiedPixels": 3394,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 6,
+            "modifiedPixels": 2319,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 7,
+            "modifiedPixels": 2170,
+            "spillPixelsAfter": 0
+          }
+        ]
+      },
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/attack.png",
+      "sourceSha256": "7eefb1b2b2b04bb1cc58d81e14b9751e48e115109f694c000a1b2ca9c623096f",
+      "sourceBytes": 515796,
+      "eventPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/events/attack.production-event.json",
+      "eventSha256": "5ab02570d8b14a19950ed842f9f5a0860625dabe7d290c839f8ba1b5dfbc6b88"
+    },
+    {
+      "clipId": "death",
+      "queuePromptSnapshotPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/prompts/death-queue-current.txt",
+      "actualPromptSha256": null,
+      "promptSha256": null,
+      "queuePromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+      "contractPromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+      "computedJsonStringifyPromptSha256": "67dce35e7fdb1fce3d09cd202ac2ca17fb9ed36014f22e3ef33d4e394ee99d6e",
+      "promptFileBytesSha256": "051772ea7d3d828c0ac50c98a73b7b2b9f54367effc711c429b07954d953d2b3",
+      "contractHashMatches": true,
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/raw/death-r1-imagegen.png",
+        "sha256": "fbcadfa70539c8334e1ddf49f7c96d8ba867fb0010d98a16a0024a09674f14c4",
+        "bytes": 1667138
+      },
+      "keyedSource": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/death-r1-proven-magenta-keyed-source.png",
+        "sha256": "14a7bd6358b35734e4fb16e6adaf864f2d46427a323daff3b8b73f841a328386",
+        "bytes": 566590
+      },
+      "completeExtractedPoses": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-01-raw-keyed.png",
+          "sha256": "6b925c63e104dc4bb5eb6cbca2182e3c438a54dc45d5ef4fd37c1a842f6ba0cb",
+          "bytes": 140276
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-02-raw-keyed.png",
+          "sha256": "ff24e1598014a4cb7661a6a51740484b81b91b8f769f22915c2ab898c401419a",
+          "bytes": 132163
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-03-raw-keyed.png",
+          "sha256": "d8abc06ea82ef60ee1ec2dcac1aef13128739034c6a58fc0fd157aead5db539f",
+          "bytes": 111643
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-04-raw-keyed.png",
+          "sha256": "5ba9b8e173ba250d62beec4497e0aadb56cd9d95162942c79b35a924cbc0e7dd",
+          "bytes": 107073
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-05-raw-keyed.png",
+          "sha256": "9bdc7dd2d436a010a63b375c3afaea42e2e56c27d821ae69f9a3bd84f224b4fe",
+          "bytes": 104408
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-06-raw-keyed.png",
+          "sha256": "63771f7f5aa7e70ad9c83835dc312598bc8ba941bd0f0f6ab69a6800d1b67dae",
+          "bytes": 90805
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-07-raw-keyed.png",
+          "sha256": "528c89d30dbf6a721df82610178bccf7954965ee667ca5c6e3be809954bb62e7",
+          "bytes": 79800
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/extracted/death/frame-08-raw-keyed.png",
+          "sha256": "94b3d93b9e2504450e9ce8c4f9c04a37a2d78e9864a7efd759f8c545090b8583",
+          "bytes": 68336
+        }
+      ],
+      "sharedScaleDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/derived/death-r1-shared-scale-recomposed.png",
+        "sha256": "714a6e5da41c5a0af24d9acc1fe69a3b60111e05b7cadded3f2afb7893df0d79",
+        "bytes": 452098
+      },
+      "sharedPhysicalScale": 0.863207547,
+      "despill": {
+        "spillPixelsBefore": 18472,
+        "modifiedPixels": 18472,
+        "spillPixelsAfter": 0,
+        "foregroundMasksUnchanged": true,
+        "perPose": [
+          {
+            "frame": 0,
+            "modifiedPixels": 3064,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 1,
+            "modifiedPixels": 2962,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 2,
+            "modifiedPixels": 2642,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 3,
+            "modifiedPixels": 2119,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 4,
+            "modifiedPixels": 2483,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 5,
+            "modifiedPixels": 1946,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 6,
+            "modifiedPixels": 1706,
+            "spillPixelsAfter": 0
+          },
+          {
+            "frame": 7,
+            "modifiedPixels": 1550,
+            "spillPixelsAfter": 0
+          }
+        ]
+      },
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/death.png",
+      "sourceSha256": "714a6e5da41c5a0af24d9acc1fe69a3b60111e05b7cadded3f2afb7893df0d79",
+      "sourceBytes": 452098,
+      "eventPath": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/events/death.production-event.json",
+      "eventSha256": "f658234019433fccacfaaa1b71f6b7900420ec3de947086754d2c27d6af93d38"
+    }
+  ],
+  "sourceQa": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/source-qa.json",
+    "sha256": "0520263994ac837bdc3208fbd34d704de9bacf0b19b9859a655a20c02887416a",
+    "bytes": 359646
+  },
+  "derivedProvenance": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/derived-provenance.json",
+    "sha256": "d17699c1c1187f5fcec561ba623cb93ada64ddfb8e61ace179f367fdecafdde2",
+    "bytes": 143561
+  },
+  "visualReview": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/visual-review.json",
+    "sha256": "b1063f0c680a09fcacde98e69003897446ec75de4264abc2a3fd8c78de4364d1",
+    "bytes": 5744
+  },
+  "queueContractSnapshot": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/queue-contract-snapshot.json",
+    "sha256": "5af6a61ea632fe58f2a8adb1c4169179e6635889da1572df07117cfc809c54e4",
+    "bytes": 3835
+  },
+  "anchorFragment": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/anchor-review.fragment.json",
+    "sha256": "97e28ae99defc19b173fa2f5f49008a5a471dc7d705722a974a2fb406f7dc934",
+    "bytes": 27222
+  },
+  "scaleFragment": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/scale-review.fragment.json",
+    "sha256": "2738d2bfb341ac2e5891ac8ea1a9c2c335476c59c1471fdc5ba00bfdb187fa1d",
+    "bytes": 6168
+  },
+  "processor": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/process_cult_host_profile.py",
+    "sha256": "9e0e6d9b72a30ee539fc7970d61f5480342fcfd62a43811857e4463d9d665e58",
+    "bytes": 100865
+  },
+  "eventValidation": {
+    "path": "docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/production-event-validation.json",
+    "sha256": "84014476fd38555a082260de24cf95df75b6284a4a3008d5e1c6f3e7d79226cb",
+    "bytes": 4446
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "stateWrites": 0,
+  "normalizationRuns": 0
+}

@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "raw-extracted-pose and target-cell pixels",
+  "profiles": {
+    "enemy-048-cult-host": {
+      "status": "measured-shared-scale-evidence-art-not-accepted",
+      "reviewer": "Codex /root/process_profile_048",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "method": "One uniform requested factor is derived from the idle eight-pose median and clamped by root-relative fit constraints across all 32 complete extracted poses. No per-clip factor or deliberate non-uniform anatomy scaling is used. Width and height integer rounding error is measured per pose. Silhouette height is pose-sensitive and is not claimed as a rigid anatomical ruler.",
+      "scaleDerivation": {
+        "desiredIdleMedianHeightPx": 350.0,
+        "rawIdleHeightsPx": [
+          393,
+          402,
+          369,
+          379,
+          386,
+          386,
+          390,
+          390
+        ],
+        "rawIdleMedianHeightPx": 388.0,
+        "idleDerivedFactor": 0.902061856,
+        "fitLimitFactor": 0.863207547,
+        "fitLimitingPose": {
+          "clipId": "death",
+          "frame": 6,
+          "side": "left",
+          "factor": 0.8632075471698113,
+          "limits": {
+            "left": 0.863207547,
+            "right": 1.260273973,
+            "top": 3.276785714
+          }
+        },
+        "sharedPhysicalScale": 0.863207547,
+        "designMarginPx": 38,
+        "requiredClearancePx": 32,
+        "selection": "minimum of idle-derived target factor, all-pose root-relative fit limit, and 1.0"
+      },
+      "measurements": {
+        "idle": {
+          "rawHeightsPx": [
+            393,
+            402,
+            369,
+            379,
+            386,
+            386,
+            390,
+            390
+          ],
+          "rawMedianPx": 388.0,
+          "activeHeightsPx": [
+            339,
+            347,
+            319,
+            327,
+            333,
+            333,
+            337,
+            337
+          ],
+          "activeMedianPx": 335.0,
+          "comparisonHeightPx": 335.0,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": 0.0,
+          "appliedSharedSourceScale": 0.863207547,
+          "roundingAspectErrorPercentByFrame": [
+            0.342084,
+            0.273654,
+            0.063975,
+            0.0554,
+            0.251603,
+            0.104983,
+            0.16707,
+            0.035206
+          ]
+        },
+        "move": {
+          "rawHeightsPx": [
+            385,
+            392,
+            389,
+            383,
+            383,
+            385,
+            383,
+            380
+          ],
+          "rawMedianPx": 384.0,
+          "activeHeightsPx": [
+            332,
+            338,
+            336,
+            331,
+            331,
+            332,
+            331,
+            328
+          ],
+          "activeMedianPx": 331.5,
+          "comparisonHeightPx": 331.5,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": -1.045,
+          "appliedSharedSourceScale": 0.863207547,
+          "roundingAspectErrorPercentByFrame": [
+            0.306288,
+            0.463574,
+            0.075666,
+            0.360859,
+            0.181528,
+            0.047248,
+            0.34228,
+            0.28193
+          ]
+        },
+        "attack": {
+          "rawHeightsPx": [
+            387,
+            357,
+            331,
+            338,
+            354,
+            344,
+            336,
+            376
+          ],
+          "rawMedianPx": 349.0,
+          "activeHeightsPx": [
+            334,
+            308,
+            286,
+            292,
+            306,
+            297,
+            290,
+            325
+          ],
+          "activeMedianPx": 301.5,
+          "comparisonHeightPx": 301.5,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": -10.0,
+          "appliedSharedSourceScale": 0.863207547,
+          "roundingAspectErrorPercentByFrame": [
+            0.11018,
+            0.206612,
+            0.041484,
+            0.107832,
+            0.320631,
+            0.078326,
+            0.265252,
+            0.450805
+          ]
+        },
+        "death": {
+          "rawHeightsPx": [
+            381,
+            354,
+            338,
+            268,
+            218,
+            159,
+            112,
+            89
+          ],
+          "rawMedianPx": 243.0,
+          "activeHeightsPx": [
+            329,
+            306,
+            292,
+            231,
+            188,
+            137,
+            97,
+            77
+          ],
+          "activeMedianPx": 209.5,
+          "comparisonHeightPx": 329.0,
+          "comparisonMethod": "death onset frame 1 only; later height loss is intended collapse",
+          "vsIdlePercent": -1.791,
+          "appliedSharedSourceScale": 0.863207547,
+          "roundingAspectErrorPercentByFrame": [
+            0.263231,
+            0.03789,
+            0.2847,
+            0.368469,
+            0.134607,
+            0.090629,
+            0.339803,
+            0.147908
+          ]
+        }
+      },
+      "maximumIntegerRoundingAspectErrorPercent": 0.463574,
+      "decisions": {
+        "idle": "retain one shared physical scale; no per-clip factor",
+        "move": "retain one shared physical scale; no per-clip factor",
+        "attack": "retain one shared physical scale; no per-clip factor",
+        "death": "retain one shared physical scale; no per-clip factor"
+      },
+      "factorsAppliedToActive": {
+        "idle": 0.863207547,
+        "move": 0.863207547,
+        "attack": 0.863207547,
+        "death": 0.863207547
+      },
+      "materialTechnicalScaleDefectsOpen": [],
+      "normalizationRun": false,
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Create ONE production sprite sheet of Cult Host for Aliens: Tantalus Frontier, animation idle.
+Identity lock: One original Tantalus human colonist cult adherent derived only from Aliens: Dark Descent's Lethe cult/medical-horror context: gaunt but recognizably human adult, visible feverish human face, worn gray-beige-brown colony work clothes, restrained dried blood, and a limited salvaged medical containment harness around abdomen and lower chest with matte braces, straps, tubing and injectors. The person remains human and voluntary/feverish in posture; no full xenomorph transformation. This is not the Guardian, not an exact Embryostatis copy, and not a canonical class named Cult Host. Strict right-facing orthographic profile. Future bitmap art must be original and may not trace any official game frame or model.
+Archetype Cult Host; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.
+Animation: Subtle breathing and alert motion; all eight poses stay grounded.
+Exactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.
+Strict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.
+Use one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.
+True transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.
+Preserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.
