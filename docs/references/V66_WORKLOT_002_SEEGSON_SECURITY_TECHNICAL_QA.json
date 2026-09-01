@@ -1,0 +1,718 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-045-seegson-security",
+  "status": "selected-sources-reviewed-40-of-40-not-accepted-not-integrated",
+  "reviewedPoseCount": 40,
+  "requiredPoseCount": 40,
+  "strictRightReviewedPoseCount": 40,
+  "commonSupportLineLocalInclusive": 428,
+  "clips": {
+    "idle": {
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/idle.png",
+      "activeSha256": "9cf3b2b61ba44b042ac2732ee248db65195347e0b6cf7ee57251789730de88cf",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "posesReviewed": 8,
+      "strictRightReviewed": 8,
+      "uniformExactMagentaBorder": true,
+      "cellBoundsPass": true,
+      "cells": [
+        {
+          "frame": 0,
+          "boundsLocal": [
+            107,
+            29,
+            336,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 1,
+          "boundsLocal": [
+            106,
+            24,
+            337,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 2,
+          "boundsLocal": [
+            108,
+            30,
+            334,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 3,
+          "boundsLocal": [
+            109,
+            27,
+            335,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 4,
+          "boundsLocal": [
+            108,
+            31,
+            336,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 5,
+          "boundsLocal": [
+            112,
+            36,
+            331,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 6,
+          "boundsLocal": [
+            108,
+            30,
+            335,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 7,
+          "boundsLocal": [
+            111,
+            28,
+            333,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        }
+      ],
+      "raw": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-imagegen-raw-candidate.png",
+        "sha256": "d0d705536f15d4e25fb6125ac9fbdd57f08659049287996c540776959d1700c3",
+        "bytes": 1511177
+      },
+      "derived": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-flat.png",
+          "sha256": "48c01f79b6dc299c4557984940e3c7ce14093348cd70615db38d2f66d419e208",
+          "repair": "conservative-magenta-flatten",
+          "foregroundPixelsChanged": 0
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-flat-recomposed.png",
+          "sha256": "9cf3b2b61ba44b042ac2732ee248db65195347e0b6cf7ee57251789730de88cf",
+          "repair": "lossless-recomposition-common-baseline-428",
+          "scaleChanged": false
+        }
+      ]
+    },
+    "move": {
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/move.png",
+      "activeSha256": "2edecfb5ad19230b0e9ce5b7dcdb47f3676a0bc9a8bec1337c2564a53441bf7a",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "posesReviewed": 8,
+      "strictRightReviewed": 8,
+      "uniformExactMagentaBorder": true,
+      "cellBoundsPass": true,
+      "cells": [
+        {
+          "frame": 0,
+          "boundsLocal": [
+            87,
+            35,
+            356,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 1,
+          "boundsLocal": [
+            93,
+            34,
+            349,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 2,
+          "boundsLocal": [
+            93,
+            37,
+            350,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 3,
+          "boundsLocal": [
+            104,
+            33,
+            340,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 4,
+          "boundsLocal": [
+            95,
+            37,
+            349,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 5,
+          "boundsLocal": [
+            85,
+            36,
+            357,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 6,
+          "boundsLocal": [
+            94,
+            38,
+            349,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 7,
+          "boundsLocal": [
+            96,
+            35,
+            347,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        }
+      ],
+      "raw": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/move-r1-imagegen-raw-candidate.png",
+        "sha256": "ea356fbb517417e0fb1ae3d553ae238564184fda3a4b2aa14a98533b5c9f209b",
+        "bytes": 1529521
+      },
+      "derived": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/move-r1-flat.png",
+          "sha256": "0796dd6507f860dd816d951f27beb445be9df474464a32198ac540a19afc71c5",
+          "repair": "conservative-magenta-flatten",
+          "foregroundPixelsChanged": 0
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/move-r1-flat-recomposed.png",
+          "sha256": "2edecfb5ad19230b0e9ce5b7dcdb47f3676a0bc9a8bec1337c2564a53441bf7a",
+          "repair": "lossless-recomposition-common-baseline-428",
+          "scaleChanged": false
+        }
+      ]
+    },
+    "attack": {
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/attack.png",
+      "activeSha256": "8ff775a14159cb30d886e03281d960269a0f622d4f8d930ac78f8d2c2ea1dd07",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "posesReviewed": 8,
+      "strictRightReviewed": 8,
+      "uniformExactMagentaBorder": true,
+      "cellBoundsPass": true,
+      "cells": [
+        {
+          "frame": 0,
+          "boundsLocal": [
+            111,
+            32,
+            332,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 1,
+          "boundsLocal": [
+            85,
+            34,
+            358,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 2,
+          "boundsLocal": [
+            82,
+            38,
+            360,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 3,
+          "boundsLocal": [
+            79,
+            38,
+            365,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 4,
+          "boundsLocal": [
+            63,
+            43,
+            380,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 5,
+          "boundsLocal": [
+            90,
+            41,
+            353,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 6,
+          "boundsLocal": [
+            100,
+            42,
+            342,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 7,
+          "boundsLocal": [
+            114,
+            35,
+            329,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        }
+      ],
+      "raw": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-imagegen-raw-candidate.png",
+        "sha256": "43db0649b443fe4c0dd896449e2d0b1e9617cfe0d7846b9520f01c7d4604821e",
+        "bytes": 1537694
+      },
+      "derived": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-flat.png",
+          "sha256": "47d4d448eddbafef03c531fb1bd9d4ca18d7a0956bcd3de308fa2414f169bf7c",
+          "repair": "conservative-magenta-flatten",
+          "foregroundPixelsChanged": 0
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-flat-recomposed.png",
+          "sha256": "8ff775a14159cb30d886e03281d960269a0f622d4f8d930ac78f8d2c2ea1dd07",
+          "repair": "lossless-recomposition-common-baseline-428",
+          "scaleChanged": false
+        }
+      ]
+    },
+    "death": {
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/death.png",
+      "activeSha256": "1bf724cc6eb4f24917fbc368e07ca158b9e8516016fb0fb8d29bf6f46556aa03",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "posesReviewed": 8,
+      "strictRightReviewed": 8,
+      "uniformExactMagentaBorder": true,
+      "cellBoundsPass": true,
+      "cells": [
+        {
+          "frame": 0,
+          "boundsLocal": [
+            107,
+            29,
+            337,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 1,
+          "boundsLocal": [
+            80,
+            49,
+            363,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 2,
+          "boundsLocal": [
+            85,
+            80,
+            357,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 3,
+          "boundsLocal": [
+            92,
+            163,
+            352,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 4,
+          "boundsLocal": [
+            76,
+            195,
+            367,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 5,
+          "boundsLocal": [
+            55,
+            269,
+            388,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 6,
+          "boundsLocal": [
+            35,
+            290,
+            408,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        },
+        {
+          "frame": 7,
+          "boundsLocal": [
+            30,
+            293,
+            413,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-pump-shotgun-reviewed"
+        }
+      ],
+      "raw": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/death-r1-imagegen-raw-candidate.png",
+        "sha256": "6e50d79d3d55257e6d17c15546cc58dbbff5f6dd5075fd36bc7792accf38c9e6",
+        "bytes": 1480871
+      },
+      "derived": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/death-r1-flat.png",
+          "sha256": "a80603469c66a2ac14a2bc58ab67504ef38fb1ba436ac607e6030430cc74fd4a",
+          "repair": "conservative-magenta-flatten",
+          "foregroundPixelsChanged": 0
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/death-r1-flat-recomposed.png",
+          "sha256": "1bf724cc6eb4f24917fbc368e07ca158b9e8516016fb0fb8d29bf6f46556aa03",
+          "repair": "lossless-recomposition-common-baseline-428",
+          "scaleChanged": false
+        }
+      ]
+    },
+    "reload": {
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/reload.png",
+      "activeSha256": "610eabb24ac0b764f973e446fe5fa45e644868e4336fdd7857fb844524342e59",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "posesReviewed": 8,
+      "strictRightReviewed": 8,
+      "uniformExactMagentaBorder": true,
+      "cellBoundsPass": true,
+      "tubeFedReloadReviewed": true,
+      "detachableMagazinePresent": false,
+      "cells": [
+        {
+          "frame": 0,
+          "boundsLocal": [
+            106,
+            33,
+            337,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 1,
+          "boundsLocal": [
+            105,
+            30,
+            338,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 2,
+          "boundsLocal": [
+            104,
+            36,
+            338,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 3,
+          "boundsLocal": [
+            103,
+            30,
+            341,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 4,
+          "boundsLocal": [
+            103,
+            35,
+            340,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 5,
+          "boundsLocal": [
+            103,
+            34,
+            339,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 6,
+          "boundsLocal": [
+            96,
+            33,
+            347,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        },
+        {
+          "frame": 7,
+          "boundsLocal": [
+            109,
+            33,
+            335,
+            429
+          ],
+          "supportYInclusive": 428,
+          "touchesCellBoundary": false,
+          "orientation": "right-reviewed",
+          "identity": "same-human-face-raised-visor-chest-plate-tube-fed-pump-shotgun-reviewed",
+          "reloadMechanics": "individual-shell-to-underside-port-reviewed-no-detachable-magazine"
+        }
+      ],
+      "raw": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/reload-r1-imagegen-raw-candidate.png",
+        "sha256": "4d27df17519ef8dc0edbabc14ec4a3ae2d4a428ca079517b206d157963ac914a",
+        "bytes": 1541125
+      },
+      "derived": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/reload-r1-flat.png",
+          "sha256": "0daa2751a6b8857e7241f5ab0ff9599a08c158aaaaeae3fcc8e1124086e1fe50",
+          "repair": "conservative-magenta-flatten",
+          "foregroundPixelsChanged": 0
+        },
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/reload-r1-flat-recomposed.png",
+          "sha256": "610eabb24ac0b764f973e446fe5fa45e644868e4336fdd7857fb844524342e59",
+          "repair": "lossless-recomposition-common-baseline-428",
+          "scaleChanged": false
+        }
+      ]
+    }
+  },
+  "flags": {
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false,
+    "normalized": false
+  }
+}

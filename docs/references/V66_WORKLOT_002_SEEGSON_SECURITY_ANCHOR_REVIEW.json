@@ -1,0 +1,456 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-045-seegson-security",
+  "status": "reviewed-40-of-40",
+  "reviewedPoseCount": 40,
+  "requiredPoseCount": 40,
+  "pivotCandidate": [
+    128,
+    240
+  ],
+  "commonSupportLineLocalInclusive": 428,
+  "poses": [
+    {
+      "clip": "idle",
+      "frame": 0,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 1,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 2,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 3,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 4,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 5,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 6,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "idle",
+      "frame": 7,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 0,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 1,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 2,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 3,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 4,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 5,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 6,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "move",
+      "frame": 7,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 0,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 1,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 2,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 3,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 4,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 5,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 6,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "attack",
+      "frame": 7,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 0,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 1,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 2,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 3,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 4,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 5,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 6,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "death",
+      "frame": 7,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 0,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 1,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 2,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 3,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 4,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 5,
+      "bodyRoot": {
+        "xLocal": 220,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 6,
+      "bodyRoot": {
+        "xLocal": 221,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    },
+    {
+      "clip": "reload",
+      "frame": 7,
+      "bodyRoot": {
+        "xLocal": 222,
+        "yLocal": 428
+      },
+      "supportYInclusive": 428,
+      "status": "reviewed-physical-root",
+      "note": "Pelvis projection to common support plane; shotgun and shell excluded from root."
+    }
+  ],
+  "accepted": false
+}

@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "kind": "generated-candidate-selected",
+  "profileId": "enemy-045-seegson-security",
+  "clipId": "attack",
+  "actor": "OpenAI Codex visual and technical QA",
+  "iteration": 1,
+  "selectionStatus": "selected-after-visual-and-technical-qa-not-accepted",
+  "provider": "OpenAI ImageGen",
+  "generationId": "builtin-imagegen-no-provider-id-enemy-045-seegson-security-attack-r1",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Built-in ImageGen returned a persisted image data URL and no provider generation identifier.",
+  "contractPromptSha256": "5efc22016461fbb2b9c55065851c1500e68a0214111b76923dbab3d1308ef96a",
+  "queuePromptSha256": "5efc22016461fbb2b9c55065851c1500e68a0214111b76923dbab3d1308ef96a",
+  "referenceLockSha256": "e823484ef8ce010df7467819f3c4932ed866606b0369e27ffd3dcbd13c4d9aba",
+  "promptDocumentPath": "docs/references/v66-worklot-002-prompts/enemy-045-seegson-security/attack-r1.txt",
+  "promptDocumentSha256": "dbd27c843db6599d8455d2e20b321dbebec8fd509e726f2c238349be4bc86bef",
+  "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-045-seegson-security/attack-r1.txt",
+  "actualPromptText": "Use the immediately preceding Seegson Security sheet as authoritative exact face, helmet with raised clear visor, chest protector, workwear, tube-fed pump shotgun, palette and scale. Create a NEW production sprite sheet for animation ATTACK. Exact 1774x887 2:1 canvas, 4 equal columns by 2 equal rows, exactly 8 chronological full-body poses row-major. Same visibly human guard, pale blue-gray shirt, charcoal trousers, dirty off-white light riot helmet/chest plate, black boots/gloves, radio/lamp, and exactly one identical worn pump-action shotgun in both hands. TRUE strict orthographic side profile facing RIGHT throughout; muzzle right. Sequence: low ready; stock seats; muzzle acquires; aim lock; single shot; rearward recoil; fore-end pump cycles backward then forward; return to ready. Preserve fixed stock, receiver, tubular magazine, barrel and butt-to-muzzle length; no weapon morph. Tiny attached muzzle flash only in frame 5, no smoke/particles. Stable face/body scale. One complete guard and shotgun per cell, generous gutters, zero boundary contact. Flat opaque pure #FF00FF chroma only. No floor, shadow, scenery, text, logo, grid, UI, loose shell, detachable magazine. No Working Joe, synthetic, military armor, SWAT, closed visor, automatic rifle or optic. Original painted 2D game sprite, no official pixel copying.\n",
+  "promptSha256": "dbd27c843db6599d8455d2e20b321dbebec8fd509e726f2c238349be4bc86bef",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/attack.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/attack.png",
+  "sourceSha256": "8ff775a14159cb30d886e03281d960269a0f622d4f8d930ac78f8d2c2ea1dd07",
+  "sourceBytes": 697858,
+  "persistence": "ImageGen data URL decoded in 60000-character chunks; raw retained; chroma flattened conservatively; cells recomposed losslessly; selected derivative copied active.",
+  "rawCandidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-imagegen-raw-candidate.png",
+  "rawCandidateSha256": "43db0649b443fe4c0dd896449e2d0b1e9617cfe0d7846b9520f01c7d4604821e",
+  "derivedFiles": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-flat.png",
+      "sha256": "47d4d448eddbafef03c531fb1bd9d4ca18d7a0956bcd3de308fa2414f169bf7c",
+      "repair": "conservative-magenta-flatten",
+      "foregroundPixelsChanged": 0
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/attack-r1-flat-recomposed.png",
+      "sha256": "8ff775a14159cb30d886e03281d960269a0f622d4f8d930ac78f8d2c2ea1dd07",
+      "repair": "lossless-recomposition-common-baseline-428",
+      "scaleChanged": false
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

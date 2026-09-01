@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-045-seegson-security",
+  "status": "reviewed-5-of-5-clips",
+  "reviewedPoseCount": 40,
+  "requiredPoseCount": 40,
+  "method": "Common authored scale retained; no per-pose or per-clip rescale. Helmet/body/shotgun identity visually cross-checked; bbox ranges are pose-envelope evidence only.",
+  "clips": {
+    "idle": {
+      "bboxHeightRangePx": [
+        393,
+        405
+      ],
+      "bboxWidthRangePx": [
+        219,
+        231
+      ],
+      "sourceScaleFactor": 1.0,
+      "status": "reviewed-pose-envelope-with-common-identity",
+      "warning": "Bounding boxes document pose envelope only; they are not used to rescale anatomy."
+    },
+    "move": {
+      "bboxHeightRangePx": [
+        391,
+        396
+      ],
+      "bboxWidthRangePx": [
+        236,
+        272
+      ],
+      "sourceScaleFactor": 1.0,
+      "status": "reviewed-pose-envelope-with-common-identity",
+      "warning": "Bounding boxes document pose envelope only; they are not used to rescale anatomy."
+    },
+    "attack": {
+      "bboxHeightRangePx": [
+        386,
+        397
+      ],
+      "bboxWidthRangePx": [
+        215,
+        317
+      ],
+      "sourceScaleFactor": 1.0,
+      "status": "reviewed-pose-envelope-with-common-identity",
+      "warning": "Bounding boxes document pose envelope only; they are not used to rescale anatomy."
+    },
+    "death": {
+      "bboxHeightRangePx": [
+        136,
+        400
+      ],
+      "bboxWidthRangePx": [
+        230,
+        383
+      ],
+      "sourceScaleFactor": 1.0,
+      "status": "reviewed-pose-envelope-with-common-identity",
+      "warning": "Bounding boxes document pose envelope only; they are not used to rescale anatomy."
+    },
+    "reload": {
+      "bboxHeightRangePx": [
+        393,
+        399
+      ],
+      "bboxWidthRangePx": [
+        226,
+        251
+      ],
+      "sourceScaleFactor": 1.0,
+      "status": "reviewed-pose-envelope-with-common-identity",
+      "rigidCrosscheck": "helmet/body height and fixed shotgun geometry visually stable; tube-fed individual-shell mechanics reviewed",
+      "warning": "Bounding boxes document pose envelope only; not used to rescale anatomy."
+    }
+  },
+  "accepted": false,
+  "canonExact": false
+}

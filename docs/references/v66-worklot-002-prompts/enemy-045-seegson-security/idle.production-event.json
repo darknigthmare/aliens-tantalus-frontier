@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "kind": "generated-candidate-selected",
+  "profileId": "enemy-045-seegson-security",
+  "clipId": "idle",
+  "actor": "OpenAI Codex visual and technical QA",
+  "iteration": 1,
+  "selectionStatus": "selected-after-visual-and-technical-qa-not-accepted",
+  "provider": "OpenAI ImageGen",
+  "generationId": "builtin-imagegen-no-provider-id-enemy-045-seegson-security-idle-r1",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Built-in ImageGen returned a persisted image data URL and no provider generation identifier.",
+  "contractPromptSha256": "d64fe9847b47f92aabd58dc80163c183911e4ead95690ab03751fdb6f2b27e1f",
+  "queuePromptSha256": "d64fe9847b47f92aabd58dc80163c183911e4ead95690ab03751fdb6f2b27e1f",
+  "referenceLockSha256": "e823484ef8ce010df7467819f3c4932ed866606b0369e27ffd3dcbd13c4d9aba",
+  "promptDocumentPath": "docs/references/v66-worklot-002-prompts/enemy-045-seegson-security/idle-r1.txt",
+  "promptDocumentSha256": "ac608adeeb041481bcf7e9825cabad6cc855ae1b7a4c515ce887ef85feb700a8",
+  "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-045-seegson-security/idle-r1.txt",
+  "actualPromptText": "Create a production sprite sheet for the original fan-made game adaptation enemy Seegson Security, animation IDLE. One ordinary adult human station guard, visibly human original non-celebrity face, normal proportions, nervous alert posture. Worn lo-fi 1970s retrofuture workwear: pale blue-gray woven work shirt, charcoal work trousers, utility belt, black work boots and gloves, small radio and lamp. Light protection only: compact dirty off-white/yellowed plastic chest protector and matching open-faced riot helmet with the clear visor RAISED; face always visible. Exactly one worn tube-fed pump-action station-security shotgun held in both hands: coherent fixed dark stock, charcoal receiver, tubular magazine below short barrel, fore-end pump, no optic. Exact 1774x887 2:1 canvas, 4 equal columns by 2 equal rows, exactly 8 chronological full-body poses row-major. TRUE strict orthographic side profile facing RIGHT in every cell, muzzle right, never frontal or three-quarter. Same face, helmet, raised visor, chest plate, radio, lamp, shotgun length and scale in every pose. Idle sequence: low-ready neutral; breath rise; nervous head check; weapon settles; weight shifts forward; shoulders tense; breath falls; near-neutral closure. No walking, firing or reload. One complete guard and complete shotgun per cell, generous gutters, zero boundary contact. Flat fully opaque pure #FF00FF chroma only. No floor, shadow, scenery, text, logo, grid, UI, watermark, shell, muzzle flash. No Working Joe, synthetic traits, Colonial Marine, APEsuit, SWAT kit, gas mask, closed visor, automatic rifle or detachable magazine. Crisp original painted 2D game sprite; do not copy official/licensed pixels or NPC face.\n",
+  "promptSha256": "ac608adeeb041481bcf7e9825cabad6cc855ae1b7a4c515ce887ef85feb700a8",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/idle.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/idle.png",
+  "sourceSha256": "9cf3b2b61ba44b042ac2732ee248db65195347e0b6cf7ee57251789730de88cf",
+  "sourceBytes": 691602,
+  "persistence": "ImageGen data URL decoded in 60000-character chunks; raw retained; chroma flattened conservatively; cells recomposed losslessly; selected derivative copied active.",
+  "rawCandidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-imagegen-raw-candidate.png",
+  "rawCandidateSha256": "d0d705536f15d4e25fb6125ac9fbdd57f08659049287996c540776959d1700c3",
+  "derivedFiles": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-flat.png",
+      "sha256": "48c01f79b6dc299c4557984940e3c7ce14093348cd70615db38d2f66d419e208",
+      "repair": "conservative-magenta-flatten",
+      "foregroundPixelsChanged": 0
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-045-seegson-security/rejected/derived/idle-r1-flat-recomposed.png",
+      "sha256": "9cf3b2b61ba44b042ac2732ee248db65195347e0b6cf7ee57251789730de88cf",
+      "repair": "lossless-recomposition-common-baseline-428",
+      "scaleChanged": false
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}
