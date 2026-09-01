@@ -6089,6 +6089,351 @@
           "reason": "reload-r1 pose 5 duplicated the magazine"
         }
       ]
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-047-atarax-controller",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:8e915539cefcccd7a82d0f969fc51dea9c51489cfa3f5204e4c686a051d73c4d",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; the immutable raw-capture SHA-256 identifies this generation candidate.",
+      "actor": "Codex /root/process_profile_047",
+      "actualPromptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/idle.txt",
+      "actualPromptFileSha256": "0ca4321c1f3e8765162bb90042b5e7c2574fbf842f2cbb3538dc71d7aa2423b3",
+      "promptSha256": "0ca4321c1f3e8765162bb90042b5e7c2574fbf842f2cbb3538dc71d7aa2423b3",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/idle.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/idle.png",
+      "sourceSha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "sourceBytes": 528807,
+      "contractPromptSha256": "dad150be641ed2b1638c8a61bea8272b70c00f93aa0a93995ea020e791c0300c",
+      "queuePromptSha256": "dad150be641ed2b1638c8a61bea8272b70c00f93aa0a93995ea020e791c0300c",
+      "promptContentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+      "promptContentHashSha256": "dad150be641ed2b1638c8a61bea8272b70c00f93aa0a93995ea020e791c0300c",
+      "contractPromptHashVerified": true,
+      "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/idle-r1-imagegen.png",
+        "sha256": "8e915539cefcccd7a82d0f969fc51dea9c51489cfa3f5204e4c686a051d73c4d",
+        "bytes": 1725934,
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "border-connected-chroma-extraction-and-shared-uniform-scale-recomposition",
+          "result": "Eight complete poses extracted, uniformly scaled with the single profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/idle-r1-imagegen.png",
+          "inputSha256": "8e915539cefcccd7a82d0f969fc51dea9c51489cfa3f5204e4c686a051d73c4d",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-shared-scale-recomposed.png",
+          "outputSha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+          "sharedPhysicalScale": 0.847457627,
+          "receiptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+          "receiptSha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 24,
+        "uniformOpaqueExactMagenta": true,
+        "sharedPhysicalScale": 0.847457627,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local idle candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T00:00:00.000Z",
+      "actualPromptText": "Create ONE production sprite sheet of ATARAX Controller for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.\nArchetype ATARAX Controller; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica."
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-047-atarax-controller",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:a8e0e790048e5665865ded74acf9c0ff9e83eee9d68bf01f3945692a473502fa",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; the immutable raw-capture SHA-256 identifies this generation candidate.",
+      "actor": "Codex /root/process_profile_047",
+      "actualPromptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/move.txt",
+      "actualPromptFileSha256": "95102f9eefc2462df14c1c0d7018ec20f85243879dbd2dc8d67ce1290c0d5f45",
+      "promptSha256": "95102f9eefc2462df14c1c0d7018ec20f85243879dbd2dc8d67ce1290c0d5f45",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/move.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/move.png",
+      "sourceSha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "sourceBytes": 553115,
+      "contractPromptSha256": "65b1ab5a210cca7a5a2a37208704449355be7d244208cb3cd55161719c99405c",
+      "queuePromptSha256": "65b1ab5a210cca7a5a2a37208704449355be7d244208cb3cd55161719c99405c",
+      "promptContentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+      "promptContentHashSha256": "65b1ab5a210cca7a5a2a37208704449355be7d244208cb3cd55161719c99405c",
+      "contractPromptHashVerified": true,
+      "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/move-r1-imagegen.png",
+        "sha256": "a8e0e790048e5665865ded74acf9c0ff9e83eee9d68bf01f3945692a473502fa",
+        "bytes": 1789477,
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "border-connected-chroma-extraction-and-shared-uniform-scale-recomposition",
+          "result": "Eight complete poses extracted, uniformly scaled with the single profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/move-r1-imagegen.png",
+          "inputSha256": "a8e0e790048e5665865ded74acf9c0ff9e83eee9d68bf01f3945692a473502fa",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-shared-scale-recomposed.png",
+          "outputSha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+          "sharedPhysicalScale": 0.847457627,
+          "receiptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+          "receiptSha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 24,
+        "uniformOpaqueExactMagenta": true,
+        "sharedPhysicalScale": 0.847457627,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local move candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T00:00:00.000Z",
+      "actualPromptText": "Create ONE production sprite sheet of ATARAX Controller for Aliens: Tantalus Frontier, animation move.\nIdentity lock: One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.\nArchetype ATARAX Controller; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica."
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-047-atarax-controller",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:c08234f42d8cac2f3588a951d5363dbf47c30df7daea4848a8b97f4eb385ce91",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; the immutable raw-capture SHA-256 identifies this generation candidate.",
+      "actor": "Codex /root/process_profile_047",
+      "actualPromptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/attack.txt",
+      "actualPromptFileSha256": "7c7d8209d95b575b2f55b967e06a39ed5494853f1126caeff88804cb727d723c",
+      "promptSha256": "7c7d8209d95b575b2f55b967e06a39ed5494853f1126caeff88804cb727d723c",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/attack.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/attack.png",
+      "sourceSha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "sourceBytes": 561861,
+      "contractPromptSha256": "de95aca662e870b0acfc755073d1f79a5c4bb862c290e8b1cec5a9d110a6bb42",
+      "queuePromptSha256": "de95aca662e870b0acfc755073d1f79a5c4bb862c290e8b1cec5a9d110a6bb42",
+      "promptContentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+      "promptContentHashSha256": "de95aca662e870b0acfc755073d1f79a5c4bb862c290e8b1cec5a9d110a6bb42",
+      "contractPromptHashVerified": true,
+      "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r2-imagegen.png",
+        "sha256": "c08234f42d8cac2f3588a951d5363dbf47c30df7daea4848a8b97f4eb385ce91",
+        "bytes": 1768577,
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "border-connected-chroma-extraction-and-shared-uniform-scale-recomposition",
+          "result": "Eight complete poses extracted, uniformly scaled with the single profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r2-imagegen.png",
+          "inputSha256": "c08234f42d8cac2f3588a951d5363dbf47c30df7daea4848a8b97f4eb385ce91",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-shared-scale-recomposed.png",
+          "outputSha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+          "sharedPhysicalScale": 0.847457627,
+          "receiptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+          "receiptSha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8"
+        }
+      ],
+      "generationAttempts": 2,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 24,
+        "uniformOpaqueExactMagenta": true,
+        "sharedPhysicalScale": 0.847457627,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted",
+        "singlePistolContinuity": "8/8 manual best-effort review",
+        "heldPoseHolsterState": "appears empty"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local attack candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T00:00:00.000Z",
+      "actualPromptText": "Create ONE production sprite sheet of ATARAX Controller for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.\nArchetype ATARAX Controller; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Use the exact controller device and brace; do not substitute claws or alien anatomy. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+      "rejectedCandidates": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/rejected/attack-r1-duplicated-holstered-and-held-pistol.png",
+          "sha256": "b7ab47811d85a3af717383878c9999956c242a26b4bee0554ed9283cc872a616",
+          "bytes": 1774174,
+          "reason": "attack-r1 duplicated the sidearm by showing held and holstered pistols simultaneously"
+        }
+      ]
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-047-atarax-controller",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:a9e9dcac76939c30d2eda075e6f9c04913b71e12754ce9462bdba4c3eb755809",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; the immutable raw-capture SHA-256 identifies this generation candidate.",
+      "actor": "Codex /root/process_profile_047",
+      "actualPromptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/death.txt",
+      "actualPromptFileSha256": "1e17998a885cbbb06ec60d91be655d9cc03fd983fde13b2ea3f33f58023323b3",
+      "promptSha256": "1e17998a885cbbb06ec60d91be655d9cc03fd983fde13b2ea3f33f58023323b3",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/death.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/death.png",
+      "sourceSha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "sourceBytes": 465961,
+      "contractPromptSha256": "2470648c7fe8aaf3c81fae0efddbc0600aad03cbcdce2a04726306040d987096",
+      "queuePromptSha256": "2470648c7fe8aaf3c81fae0efddbc0600aad03cbcdce2a04726306040d987096",
+      "promptContentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+      "promptContentHashSha256": "2470648c7fe8aaf3c81fae0efddbc0600aad03cbcdce2a04726306040d987096",
+      "contractPromptHashVerified": true,
+      "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/death-r1-imagegen.png",
+        "sha256": "a9e9dcac76939c30d2eda075e6f9c04913b71e12754ce9462bdba4c3eb755809",
+        "bytes": 1700239,
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "border-connected-chroma-extraction-and-shared-uniform-scale-recomposition",
+          "result": "Eight complete poses extracted, uniformly scaled with the single profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/death-r1-imagegen.png",
+          "inputSha256": "a9e9dcac76939c30d2eda075e6f9c04913b71e12754ce9462bdba4c3eb755809",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-shared-scale-recomposed.png",
+          "outputSha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+          "sharedPhysicalScale": 0.847457627,
+          "receiptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+          "receiptSha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 24,
+        "uniformOpaqueExactMagenta": true,
+        "sharedPhysicalScale": 0.847457627,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local death candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T00:00:00.000Z",
+      "actualPromptText": "Create ONE production sprite sheet of ATARAX Controller for Aliens: Tantalus Frontier, animation death.\nIdentity lock: One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.\nArchetype ATARAX Controller; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica."
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-047-atarax-controller",
+      "clipId": "command",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:98ee60f7547e145976802cc36c8a8fa6961c6c59dd0348ee3521f0260ab51559",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; the immutable raw-capture SHA-256 identifies this generation candidate.",
+      "actor": "Codex /root/process_profile_047",
+      "actualPromptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/command.txt",
+      "actualPromptFileSha256": "f6fd6fb8d485f6f3e773f33afdb2d5b7b728534ba50c401872190da8e580034a",
+      "promptSha256": "f6fd6fb8d485f6f3e773f33afdb2d5b7b728534ba50c401872190da8e580034a",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/command.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/command.png",
+      "sourceSha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "sourceBytes": 591925,
+      "contractPromptSha256": "c07077f2ef4bfc4acf89cc3a860874693dd569fe848dfa873315523599eedc53",
+      "queuePromptSha256": "c07077f2ef4bfc4acf89cc3a860874693dd569fe848dfa873315523599eedc53",
+      "promptContentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+      "promptContentHashSha256": "c07077f2ef4bfc4acf89cc3a860874693dd569fe848dfa873315523599eedc53",
+      "contractPromptHashVerified": true,
+      "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/command-r1-imagegen.png",
+        "sha256": "98ee60f7547e145976802cc36c8a8fa6961c6c59dd0348ee3521f0260ab51559",
+        "bytes": 1795430,
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "border-connected-chroma-extraction-and-shared-uniform-scale-recomposition",
+          "result": "Eight complete poses extracted, uniformly scaled with the single profile factor, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/command-r1-imagegen.png",
+          "inputSha256": "98ee60f7547e145976802cc36c8a8fa6961c6c59dd0348ee3521f0260ab51559",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-shared-scale-recomposed.png",
+          "outputSha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+          "sharedPhysicalScale": 0.847457627,
+          "receiptPath": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+          "receiptSha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 24,
+        "uniformOpaqueExactMagenta": true,
+        "sharedPhysicalScale": 0.847457627,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local command candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T00:00:00.000Z",
+      "actualPromptText": "Create ONE production sprite sheet of ATARAX Controller for Aliens: Tantalus Frontier, animation command.\nIdentity lock: One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.\nArchetype ATARAX Controller; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Deliberate command gesture and device operation, then recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica."
     }
   ]
 }

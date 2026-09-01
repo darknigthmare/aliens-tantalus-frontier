@@ -1,0 +1,4836 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-002",
+  "batchId": "batch-004",
+  "profileId": "enemy-047-atarax-controller",
+  "generatedAt": "2026-09-01",
+  "status": "technical-source-qa-complete-art-not-accepted",
+  "method": {
+    "chroma": "Strict magenta candidates use r>=185, b>=170, g<=110, r-g>=120, b-g>=110 and abs(r-b)<=100. Exterior background must be four-neighbour connected to the raw board border. Large dense enclosed strict-magenta regions are treated as backdrop holes; small or elongated enclosed regions are preserved as potential authored details.",
+    "poseExtraction": "Eight largest complete connected foreground components are grouped 4+4 by row and sorted by centroid x. Nearby auxiliary components are attached to the nearest primary pose. This preserves complete death poses that cross raw nominal cell divisions; naive 384x512 cropping is not used.",
+    "recomposition": "Each complete RGBA pose is uniformly resized by one profile-wide factor and placed into an exact 1774x887 4x2 opaque-magenta board. Torso/body-mass landmarks share the target cell centre root; the lower-exclusive physical support is fixed DESIGN_MARGIN_PX above the cell bottom.",
+    "scale": "One shared factor is derived from the idle median target height and clamped by root-relative left/right/top fit constraints for all 40 poses. No per-clip factor or non-uniform anatomy stretch is used.",
+    "visual": "Manual identity/direction/weapon review plus deterministic overlays, root-registered playback GIFs, a 40-pose contact sheet and a dedicated attack pistol-state sheet.",
+    "noNormalization": true
+  },
+  "queueContract": {
+    "path": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+    "referenceLockSha256": "cafa38c513455f40ee0cbf28316f9667598e1da2931ea61f21e7651c52b723ab",
+    "contentHashAlgorithm": "SHA256(JSON.stringify(prompt))",
+    "contractPromptSha256ByClip": {
+      "idle": "dad150be641ed2b1638c8a61bea8272b70c00f93aa0a93995ea020e791c0300c",
+      "move": "65b1ab5a210cca7a5a2a37208704449355be7d244208cb3cd55161719c99405c",
+      "attack": "de95aca662e870b0acfc755073d1f79a5c4bb862c290e8b1cec5a9d110a6bb42",
+      "death": "2470648c7fe8aaf3c81fae0efddbc0600aad03cbcdce2a04726306040d987096",
+      "command": "c07077f2ef4bfc4acf89cc3a860874693dd569fe848dfa873315523599eedc53"
+    },
+    "rawUtf8PromptFileSha256ByClip": {
+      "idle": "0ca4321c1f3e8765162bb90042b5e7c2574fbf842f2cbb3538dc71d7aa2423b3",
+      "move": "95102f9eefc2462df14c1c0d7018ec20f85243879dbd2dc8d67ce1290c0d5f45",
+      "attack": "7c7d8209d95b575b2f55b967e06a39ed5494853f1126caeff88804cb727d723c",
+      "death": "1e17998a885cbbb06ec60d91be655d9cc03fd983fde13b2ea3f33f58023323b3",
+      "command": "f6fd6fb8d485f6f3e773f33afdb2d5b7b728534ba50c401872190da8e580034a"
+    },
+    "contractContentHashesVerified": {
+      "idle": true,
+      "move": true,
+      "attack": true,
+      "death": true,
+      "command": true
+    },
+    "readOnly": true
+  },
+  "sharedScale": {
+    "desiredIdleMedianHeightPx": 375.0,
+    "rawIdleHeightsPx": [
+      442,
+      442,
+      439,
+      435,
+      444,
+      443,
+      444,
+      444
+    ],
+    "rawIdleMedianHeightPx": 442.5,
+    "idleDerivedFactor": 0.847457627,
+    "fitLimitFactor": 0.88963964,
+    "fitLimitingPose": {
+      "clipId": "idle",
+      "frame": 4,
+      "side": "top",
+      "factor": 0.8896396396396397,
+      "limits": {
+        "left": 2.955223881,
+        "right": 3.142857143,
+        "top": 0.88963964
+      }
+    },
+    "sharedPhysicalScale": 0.847457627,
+    "designMarginPx": 24,
+    "requiredClearancePx": 20,
+    "selection": "minimum of idle-derived target factor, all-pose root-relative fit limit, and 1.0"
+  },
+  "selectedSources": [
+    {
+      "clipId": "idle",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/idle-r1-imagegen.png",
+      "rawSha256": "8e915539cefcccd7a82d0f969fc51dea9c51489cfa3f5204e4c686a051d73c4d",
+      "rawBytes": 1725934,
+      "rawSize": [
+        1536,
+        1024
+      ],
+      "keyedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-border-keyed-source.png",
+      "keyedSourceSha256": "fbbc54ff531bc8ae4ab2ee421e809db6e892a2f9b0818db1f411a3a6f74af89c",
+      "sharedScaleRecompositionPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-shared-scale-recomposed.png",
+      "sharedScaleRecompositionSha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "activePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/idle.png",
+      "activeSha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "activeBytes": 528807,
+      "activeSize": [
+        1774,
+        887
+      ],
+      "activeByteIdenticalToRecomposition": true,
+      "completeExtractedPoseCount": 8,
+      "completeExtractedPosePaths": [
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-01-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-02-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-03-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-04-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-05-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-06-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-07-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-08-raw-keyed.png"
+      ],
+      "combinedExtractedForegroundSha256": "05bfc691eca95fee661e12bb3a6c7a2eab0eba913fd5fbafd1e22ef6ef7aebc4",
+      "rawPosesCrossingNominalSourceCells": [],
+      "chromaDiagnostics": {
+        "strictMagentaPixels": 1279303,
+        "borderConnectedBackgroundPixels": 1277713,
+        "enclosedStrictMagentaPixels": 1590,
+        "enclosedBackdropComponents": 0,
+        "preservedEnclosedDetailComponents": 40,
+        "assignedForegroundPixels": 295151,
+        "componentCount": 8,
+        "ignoredComponents": [],
+        "ignoredForegroundPixels": 0,
+        "completePrimaryPoses": 8
+      },
+      "sharedPhysicalScale": 0.847457627,
+      "poseQa": [
+        {
+          "frame": 0,
+          "row": 0,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            137,
+            51,
+            264,
+            493
+          ],
+          "rawNominalCellBounds": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            66,
+            208
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            56,
+            176
+          ],
+          "targetLandmark": [
+            222,
+            221
+          ],
+          "targetPlacement": [
+            166,
+            45
+          ],
+          "sourceForegroundSha256": "094a3b5a75e44f58846d119f33db13cddde7504c807db5abf10d8e451fea0661",
+          "sourceComponentLabels": [
+            1
+          ],
+          "primaryComponentArea": 36157,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-01-raw-keyed.png",
+          "extractedSha256": "87a9b5e9c62ba88cc3d1e5b3caa7cd630877f979607aab46767516537fc5d7f6",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              127,
+              442
+            ],
+            "scaledSize": [
+              108,
+              375
+            ],
+            "effectiveScaleX": 0.850393701,
+            "effectiveScaleY": 0.84841629,
+            "roundingAspectErrorPercent": 0.233071
+          },
+          "targetBounds": [
+            166,
+            45,
+            274,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 166,
+            "top": 45,
+            "right": 170,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27316,
+          "silhouetteWidthPx": 108,
+          "silhouetteHeightPx": 375,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "fc54a47666cbdf000b38b03fc0b5dc300a890caf8a7f1967117338f9a8098a40"
+        },
+        {
+          "frame": 1,
+          "row": 0,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            503,
+            51,
+            633,
+            493
+          ],
+          "rawNominalCellBounds": [
+            384,
+            0,
+            768,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            68,
+            208
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            58,
+            176
+          ],
+          "targetLandmark": [
+            221,
+            221
+          ],
+          "targetPlacement": [
+            163,
+            45
+          ],
+          "sourceForegroundSha256": "1ae14f02619ea4802125deb86f95beddfdfaf0ee7709effde77947875915f683",
+          "sourceComponentLabels": [
+            2
+          ],
+          "primaryComponentArea": 36899,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-02-raw-keyed.png",
+          "extractedSha256": "2cbf3c0ea20e5fa72e7959b883638d9034cdbd93cd8991aea80e40a7990f0aa6",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              130,
+              442
+            ],
+            "scaledSize": [
+              110,
+              375
+            ],
+            "effectiveScaleX": 0.846153846,
+            "effectiveScaleY": 0.84841629,
+            "roundingAspectErrorPercent": 0.266667
+          },
+          "targetBounds": [
+            163,
+            45,
+            273,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 163,
+            "top": 45,
+            "right": 170,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27817,
+          "silhouetteWidthPx": 110,
+          "silhouetteHeightPx": 375,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "9a461943475235232776038f19835fcba8be7dbd2f621214f3173352ebd90f7c"
+        },
+        {
+          "frame": 2,
+          "row": 0,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            872,
+            54,
+            1003,
+            493
+          ],
+          "rawNominalCellBounds": [
+            768,
+            0,
+            1152,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            69,
+            206
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            58,
+            175
+          ],
+          "targetLandmark": [
+            221,
+            223
+          ],
+          "targetPlacement": [
+            163,
+            48
+          ],
+          "sourceForegroundSha256": "7d431fde64740aeac10a647c84edaef7cce80dccbc400f571b5e71f14dadca28",
+          "sourceComponentLabels": [
+            3
+          ],
+          "primaryComponentArea": 36962,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-03-raw-keyed.png",
+          "extractedSha256": "6e5ec3478893c9aa8c4413f2276d61447b3ff74a4e026a50b395a6d82c230f41",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              131,
+              439
+            ],
+            "scaledSize": [
+              111,
+              372
+            ],
+            "effectiveScaleX": 0.847328244,
+            "effectiveScaleY": 0.84738041,
+            "roundingAspectErrorPercent": 0.006156
+          },
+          "targetBounds": [
+            163,
+            48,
+            274,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 163,
+            "top": 48,
+            "right": 169,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27868,
+          "silhouetteWidthPx": 111,
+          "silhouetteHeightPx": 372,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "91e08dc6783612c69660cb39e746ceaf276d41e31e5d1c22d923993bcf9e9f0d"
+        },
+        {
+          "frame": 3,
+          "row": 0,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1232,
+            59,
+            1407,
+            494
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            0,
+            1536,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            73,
+            192
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            62,
+            163
+          ],
+          "targetLandmark": [
+            222,
+            214
+          ],
+          "targetPlacement": [
+            160,
+            51
+          ],
+          "sourceForegroundSha256": "da3ba2bdb7220b6f27d870bc753481199effae1556abb497b0f49265d394e735",
+          "sourceComponentLabels": [
+            4
+          ],
+          "primaryComponentArea": 38726,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-04-raw-keyed.png",
+          "extractedSha256": "e46b249b9163b0b194487ae4f9634405cc674a10b00e68960ca04e52864b9b5d",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              175,
+              435
+            ],
+            "scaledSize": [
+              148,
+              369
+            ],
+            "effectiveScaleX": 0.845714286,
+            "effectiveScaleY": 0.848275862,
+            "roundingAspectErrorPercent": 0.301974
+          },
+          "targetBounds": [
+            160,
+            51,
+            308,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 160,
+            "top": 51,
+            "right": 136,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29174,
+          "silhouetteWidthPx": 148,
+          "silhouetteHeightPx": 369,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "0cb5b1ec4025689736e687b04d0dba9adec63bb5e2a5be600e854c84d731ec82"
+        },
+        {
+          "frame": 4,
+          "row": 1,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            131,
+            528,
+            261,
+            972
+          ],
+          "rawNominalCellBounds": [
+            0,
+            512,
+            384,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            67,
+            209
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            57,
+            177
+          ],
+          "targetLandmark": [
+            222,
+            220
+          ],
+          "targetPlacement": [
+            165,
+            43
+          ],
+          "sourceForegroundSha256": "498379fb61dd9f3639ca2b107e91233d1306f907d33f282ae27b79cd72da37ce",
+          "sourceComponentLabels": [
+            5
+          ],
+          "primaryComponentArea": 36814,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-05-raw-keyed.png",
+          "extractedSha256": "022d562c653bd0bb71aa9877cd424fcebceb5325754110d897ed6cd1abb28339",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              130,
+              444
+            ],
+            "scaledSize": [
+              110,
+              376
+            ],
+            "effectiveScaleX": 0.846153846,
+            "effectiveScaleY": 0.846846847,
+            "roundingAspectErrorPercent": 0.081833
+          },
+          "targetBounds": [
+            165,
+            43,
+            275,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 165,
+            "top": 43,
+            "right": 169,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27774,
+          "silhouetteWidthPx": 110,
+          "silhouetteHeightPx": 376,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "a60ad1c798cace97676bf55013d00056eb61567de1f0c6ad2ddecf2c3e495e09"
+        },
+        {
+          "frame": 5,
+          "row": 1,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            500,
+            529,
+            632,
+            972
+          ],
+          "rawNominalCellBounds": [
+            384,
+            512,
+            768,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            67,
+            209
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            57,
+            177
+          ],
+          "targetLandmark": [
+            221,
+            221
+          ],
+          "targetPlacement": [
+            164,
+            44
+          ],
+          "sourceForegroundSha256": "5152763e5cc1951c7250bde36f77ae6a283372316511c09daa68def268e260af",
+          "sourceComponentLabels": [
+            8
+          ],
+          "primaryComponentArea": 36560,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-06-raw-keyed.png",
+          "extractedSha256": "74305cd095f9e306fa2960f0502c30117487e34cffff4c57098ba28fa81912f7",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              132,
+              443
+            ],
+            "scaledSize": [
+              112,
+              375
+            ],
+            "effectiveScaleX": 0.848484848,
+            "effectiveScaleY": 0.846501129,
+            "roundingAspectErrorPercent": 0.234343
+          },
+          "targetBounds": [
+            164,
+            44,
+            276,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 164,
+            "top": 44,
+            "right": 167,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27579,
+          "silhouetteWidthPx": 112,
+          "silhouetteHeightPx": 375,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "adb1c708d35ffcf4ddc4579644ca305aff7c70035a3525cb1fd440495f8bec27"
+        },
+        {
+          "frame": 6,
+          "row": 1,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            875,
+            528,
+            1002,
+            972
+          ],
+          "rawNominalCellBounds": [
+            768,
+            512,
+            1152,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            66,
+            209
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            56,
+            177
+          ],
+          "targetLandmark": [
+            221,
+            220
+          ],
+          "targetPlacement": [
+            165,
+            43
+          ],
+          "sourceForegroundSha256": "507cd44afdf74de2eef70d219d14d85709df638fc6800bbbda22492105ac1706",
+          "sourceComponentLabels": [
+            6
+          ],
+          "primaryComponentArea": 36540,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-07-raw-keyed.png",
+          "extractedSha256": "467a38f24c59895420475e77e85227a1518aacbe2e9757bc424a69096bdfa0b4",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              127,
+              444
+            ],
+            "scaledSize": [
+              108,
+              376
+            ],
+            "effectiveScaleX": 0.850393701,
+            "effectiveScaleY": 0.846846847,
+            "roundingAspectErrorPercent": 0.418831
+          },
+          "targetBounds": [
+            165,
+            43,
+            273,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 165,
+            "top": 43,
+            "right": 170,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27573,
+          "silhouetteWidthPx": 108,
+          "silhouetteHeightPx": 376,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "9e18c344b921f81ec89ef31e23adcc9b54910d67c843c5b69a48cfd3e1a5e0ef"
+        },
+        {
+          "frame": 7,
+          "row": 1,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1240,
+            528,
+            1369,
+            972
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            512,
+            1536,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            67,
+            209
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            57,
+            177
+          ],
+          "targetLandmark": [
+            222,
+            220
+          ],
+          "targetPlacement": [
+            165,
+            43
+          ],
+          "sourceForegroundSha256": "8ed4beda4b5f39e8ce0a9e8fdf6ea1f5d36dba60c8dd1411ee81c898848ecd22",
+          "sourceComponentLabels": [
+            7
+          ],
+          "primaryComponentArea": 36493,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-08-raw-keyed.png",
+          "extractedSha256": "7b605289919352e8c7cbf14620b670b85e980963b833d05a38eb3ab434033d63",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              129,
+              444
+            ],
+            "scaledSize": [
+              109,
+              376
+            ],
+            "effectiveScaleX": 0.84496124,
+            "effectiveScaleY": 0.846846847,
+            "roundingAspectErrorPercent": 0.222662
+          },
+          "targetBounds": [
+            165,
+            43,
+            274,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 165,
+            "top": 43,
+            "right": 170,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27482,
+          "silhouetteWidthPx": 109,
+          "silhouetteHeightPx": 376,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "4d561a2612aa2added1bec06b2e130cd67ff331eda8e3358d3db842e2a3d3b45"
+        }
+      ]
+    },
+    {
+      "clipId": "move",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/move-r1-imagegen.png",
+      "rawSha256": "a8e0e790048e5665865ded74acf9c0ff9e83eee9d68bf01f3945692a473502fa",
+      "rawBytes": 1789477,
+      "rawSize": [
+        1536,
+        1024
+      ],
+      "keyedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-border-keyed-source.png",
+      "keyedSourceSha256": "f1ad248a480c6c8fd64176837084a94a71cf587f046ed56f8947c39f74f9720b",
+      "sharedScaleRecompositionPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-shared-scale-recomposed.png",
+      "sharedScaleRecompositionSha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "activePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/move.png",
+      "activeSha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "activeBytes": 553115,
+      "activeSize": [
+        1774,
+        887
+      ],
+      "activeByteIdenticalToRecomposition": true,
+      "completeExtractedPoseCount": 8,
+      "completeExtractedPosePaths": [
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-01-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-02-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-03-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-04-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-05-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-06-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-07-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-08-raw-keyed.png"
+      ],
+      "combinedExtractedForegroundSha256": "ed097ea4dbafdac9966cd2c19e3d65ebaaf579565080892b7a5a6b897330f1d9",
+      "rawPosesCrossingNominalSourceCells": [],
+      "chromaDiagnostics": {
+        "strictMagentaPixels": 1293029,
+        "borderConnectedBackgroundPixels": 1290377,
+        "enclosedStrictMagentaPixels": 2652,
+        "enclosedBackdropComponents": 8,
+        "preservedEnclosedDetailComponents": 30,
+        "assignedForegroundPixels": 281115,
+        "componentCount": 8,
+        "ignoredComponents": [],
+        "ignoredForegroundPixels": 0,
+        "completePrimaryPoses": 8
+      },
+      "sharedPhysicalScale": 0.847457627,
+      "poseQa": [
+        {
+          "frame": 0,
+          "row": 0,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            48,
+            74,
+            313,
+            468
+          ],
+          "rawNominalCellBounds": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            150,
+            191
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            127,
+            162
+          ],
+          "targetLandmark": [
+            222,
+            248
+          ],
+          "targetPlacement": [
+            95,
+            86
+          ],
+          "sourceForegroundSha256": "78a024608dffc143059d1d570b3fb4ca8ebf54b92fa86c57b7705b2e4614d793",
+          "sourceComponentLabels": [
+            1
+          ],
+          "primaryComponentArea": 36116,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-01-raw-keyed.png",
+          "extractedSha256": "5d8ac51cc69f0521906b903a70c620d2bce6983505791dd8ded380a1ae93dec5",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              265,
+              394
+            ],
+            "scaledSize": [
+              225,
+              334
+            ],
+            "effectiveScaleX": 0.849056604,
+            "effectiveScaleY": 0.847715736,
+            "roundingAspectErrorPercent": 0.158174
+          },
+          "targetBounds": [
+            95,
+            86,
+            320,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 95,
+            "top": 86,
+            "right": 124,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27824,
+          "silhouetteWidthPx": 225,
+          "silhouetteHeightPx": 334,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "a8467d99d8e92fb9207d99ad986594047ecc66865241850124054e856aa2a95a"
+        },
+        {
+          "frame": 1,
+          "row": 0,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            487,
+            105,
+            658,
+            468
+          ],
+          "rawNominalCellBounds": [
+            384,
+            0,
+            768,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            83,
+            175
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            70,
+            148
+          ],
+          "targetLandmark": [
+            221,
+            260
+          ],
+          "targetPlacement": [
+            151,
+            112
+          ],
+          "sourceForegroundSha256": "be77e9ffb17b5d7285fc72a2e67ef60d3597571da5c552facf19a3da1d9acba8",
+          "sourceComponentLabels": [
+            4
+          ],
+          "primaryComponentArea": 32650,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-02-raw-keyed.png",
+          "extractedSha256": "b30a25f4cb4cf3b4dbdf57703fe05ec2e07ca85f8d7f416028a43050c30b4c01",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              171,
+              363
+            ],
+            "scaledSize": [
+              145,
+              308
+            ],
+            "effectiveScaleX": 0.847953216,
+            "effectiveScaleY": 0.848484848,
+            "roundingAspectErrorPercent": 0.062657
+          },
+          "targetBounds": [
+            151,
+            112,
+            296,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 151,
+            "top": 112,
+            "right": 147,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 25043,
+          "silhouetteWidthPx": 145,
+          "silhouetteHeightPx": 308,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "9b24897047f21758c1d1cc214672d02e7dd6a19fd0aae97235802603d633276a"
+        },
+        {
+          "frame": 2,
+          "row": 0,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            804,
+            76,
+            1066,
+            468
+          ],
+          "rawNominalCellBounds": [
+            768,
+            0,
+            1152,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            149,
+            186
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            126,
+            158
+          ],
+          "targetLandmark": [
+            221,
+            246
+          ],
+          "targetPlacement": [
+            95,
+            88
+          ],
+          "sourceForegroundSha256": "26e9e12d8afdbb952fd02131bac43a81d65a027d7a1f61678c4e25e75951a37d",
+          "sourceComponentLabels": [
+            2
+          ],
+          "primaryComponentArea": 36740,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-03-raw-keyed.png",
+          "extractedSha256": "ce1ede3e268cb34a220ea914fe524e5e2a0d3ed1c9b39c21a281e17fce3c5a44",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              262,
+              392
+            ],
+            "scaledSize": [
+              222,
+              332
+            ],
+            "effectiveScaleX": 0.847328244,
+            "effectiveScaleY": 0.846938776,
+            "roundingAspectErrorPercent": 0.045985
+          },
+          "targetBounds": [
+            95,
+            88,
+            317,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 95,
+            "top": 88,
+            "right": 126,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28276,
+          "silhouetteWidthPx": 222,
+          "silhouetteHeightPx": 332,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "dfb78c36283fa6aa03b49dc3055822608b6d39a940e16b319cc9fdb691f59949"
+        },
+        {
+          "frame": 3,
+          "row": 0,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1192,
+            81,
+            1446,
+            469
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            0,
+            1536,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            142,
+            194
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            120,
+            164
+          ],
+          "targetLandmark": [
+            222,
+            255
+          ],
+          "targetPlacement": [
+            102,
+            91
+          ],
+          "sourceForegroundSha256": "53d43d3a9a0f5f016f4de4dcf497c4bc0e4ff5ab93bab84e5cebefd998515ca7",
+          "sourceComponentLabels": [
+            3
+          ],
+          "primaryComponentArea": 35567,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-04-raw-keyed.png",
+          "extractedSha256": "10f6d4347ed151a0c4e65c09b3a1647610e24720b300b059f243e3fd1562ba06",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              254,
+              388
+            ],
+            "scaledSize": [
+              215,
+              329
+            ],
+            "effectiveScaleX": 0.846456693,
+            "effectiveScaleY": 0.847938144,
+            "roundingAspectErrorPercent": 0.174712
+          },
+          "targetBounds": [
+            102,
+            91,
+            317,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 102,
+            "top": 91,
+            "right": 127,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27356,
+          "silhouetteWidthPx": 215,
+          "silhouetteHeightPx": 329,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "fd46602b5916f82623f3b906caf46bed0b2394ff69537a676b75296f8388a9f3"
+        },
+        {
+          "frame": 4,
+          "row": 1,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            63,
+            569,
+            269,
+            955
+          ],
+          "rawNominalCellBounds": [
+            0,
+            512,
+            384,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            123,
+            192
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            104,
+            163
+          ],
+          "targetLandmark": [
+            222,
+            255
+          ],
+          "targetPlacement": [
+            118,
+            92
+          ],
+          "sourceForegroundSha256": "b4174348b5aee23ee13ff70ac30e7f95804b9364edcc4c884cd6ab62ca5a046f",
+          "sourceComponentLabels": [
+            5
+          ],
+          "primaryComponentArea": 36638,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-05-raw-keyed.png",
+          "extractedSha256": "ea14121598bddb155f2237b7db73d88d765c0fcdfa1380f06b1c5c8a6243d3b2",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              206,
+              386
+            ],
+            "scaledSize": [
+              175,
+              327
+            ],
+            "effectiveScaleX": 0.849514563,
+            "effectiveScaleY": 0.847150259,
+            "roundingAspectErrorPercent": 0.279089
+          },
+          "targetBounds": [
+            118,
+            92,
+            293,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 118,
+            "top": 92,
+            "right": 151,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28195,
+          "silhouetteWidthPx": 175,
+          "silhouetteHeightPx": 327,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "e90e473b6e2fe7470376f39685ed78c9f717ca5637b333613f00b033b70ef6d9"
+        },
+        {
+          "frame": 5,
+          "row": 1,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            480,
+            596,
+            653,
+            955
+          ],
+          "rawNominalCellBounds": [
+            384,
+            512,
+            768,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            88,
+            182
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            75,
+            154
+          ],
+          "targetLandmark": [
+            221,
+            269
+          ],
+          "targetPlacement": [
+            146,
+            115
+          ],
+          "sourceForegroundSha256": "4a2b4f09205b0e7ac9ea9e07e88e6b8521db5629f2e45a51f75faad3ebe1047a",
+          "sourceComponentLabels": [
+            8
+          ],
+          "primaryComponentArea": 32112,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-06-raw-keyed.png",
+          "extractedSha256": "f38244cfb694470ef2f2dc4b7eb61cbd121eb004645d542f242be74918360fe1",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              173,
+              359
+            ],
+            "scaledSize": [
+              147,
+              304
+            ],
+            "effectiveScaleX": 0.849710983,
+            "effectiveScaleY": 0.846796657,
+            "roundingAspectErrorPercent": 0.344159
+          },
+          "targetBounds": [
+            146,
+            115,
+            293,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 146,
+            "top": 115,
+            "right": 150,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 24432,
+          "silhouetteWidthPx": 147,
+          "silhouetteHeightPx": 304,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "5f66f68a09115e040c689ab5f9e65f03e51d0d83cd0ca0c8d87a01dacb889737"
+        },
+        {
+          "frame": 6,
+          "row": 1,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            785,
+            570,
+            1077,
+            951
+          ],
+          "rawNominalCellBounds": [
+            768,
+            512,
+            1152,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            149,
+            194
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            126,
+            164
+          ],
+          "targetLandmark": [
+            221,
+            260
+          ],
+          "targetPlacement": [
+            95,
+            96
+          ],
+          "sourceForegroundSha256": "320e5b1834cdaec6c3661d3a0093d7f5927d441b903a5aef24611951bcde0b9c",
+          "sourceComponentLabels": [
+            6
+          ],
+          "primaryComponentArea": 36486,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-07-raw-keyed.png",
+          "extractedSha256": "9d5ca65da374cdf36f84384df0341fa7b532e8e8bea57fa95fa4f6dff664cfbf",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              292,
+              381
+            ],
+            "scaledSize": [
+              247,
+              323
+            ],
+            "effectiveScaleX": 0.845890411,
+            "effectiveScaleY": 0.847769029,
+            "roundingAspectErrorPercent": 0.221595
+          },
+          "targetBounds": [
+            95,
+            96,
+            342,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 95,
+            "top": 96,
+            "right": 101,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27964,
+          "silhouetteWidthPx": 247,
+          "silhouetteHeightPx": 323,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "e0090e27495a107ff8de3841f0d13108bfabf39e6ea2e7a5176ee78e9a904dc9"
+        },
+        {
+          "frame": 7,
+          "row": 1,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1184,
+            580,
+            1452,
+            956
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            512,
+            1536,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            138,
+            201
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            117,
+            170
+          ],
+          "targetLandmark": [
+            222,
+            270
+          ],
+          "targetPlacement": [
+            105,
+            100
+          ],
+          "sourceForegroundSha256": "ccd4a4262defe49895c895d3e22aa673de6b00c38ef58723efebc6545683eb09",
+          "sourceComponentLabels": [
+            7
+          ],
+          "primaryComponentArea": 34806,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-08-raw-keyed.png",
+          "extractedSha256": "4ef091be9dad24995a0320c584c403a0e8719d615e955b1aedd323150f32705c",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              268,
+              376
+            ],
+            "scaledSize": [
+              227,
+              319
+            ],
+            "effectiveScaleX": 0.847014925,
+            "effectiveScaleY": 0.848404255,
+            "roundingAspectErrorPercent": 0.163758
+          },
+          "targetBounds": [
+            105,
+            100,
+            332,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 105,
+            "top": 100,
+            "right": 112,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 26739,
+          "silhouetteWidthPx": 227,
+          "silhouetteHeightPx": 319,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "7a1fffb1e238962446de416e2a977bc822add8f78efd7ae0843995ac62e31b27"
+        }
+      ]
+    },
+    {
+      "clipId": "attack",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r2-imagegen.png",
+      "rawSha256": "c08234f42d8cac2f3588a951d5363dbf47c30df7daea4848a8b97f4eb385ce91",
+      "rawBytes": 1768577,
+      "rawSize": [
+        1536,
+        1024
+      ],
+      "keyedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-border-keyed-source.png",
+      "keyedSourceSha256": "9ad477e47915a35eed38d6c87dc0b06a04703b02f4c9e04f47e1d281575549a8",
+      "sharedScaleRecompositionPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-shared-scale-recomposed.png",
+      "sharedScaleRecompositionSha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "activePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/attack.png",
+      "activeSha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "activeBytes": 561861,
+      "activeSize": [
+        1774,
+        887
+      ],
+      "activeByteIdenticalToRecomposition": true,
+      "completeExtractedPoseCount": 8,
+      "completeExtractedPosePaths": [
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-01-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-02-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-03-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-04-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-05-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-06-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-07-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-08-raw-keyed.png"
+      ],
+      "combinedExtractedForegroundSha256": "27669a8adf6feb32bc0ed271d12d066150800fe7326c1d3d01ee1226d421dc23",
+      "rawPosesCrossingNominalSourceCells": [],
+      "chromaDiagnostics": {
+        "strictMagentaPixels": 1270884,
+        "borderConnectedBackgroundPixels": 1268769,
+        "enclosedStrictMagentaPixels": 2115,
+        "enclosedBackdropComponents": 6,
+        "preservedEnclosedDetailComponents": 30,
+        "assignedForegroundPixels": 303194,
+        "componentCount": 8,
+        "ignoredComponents": [],
+        "ignoredForegroundPixels": 0,
+        "completePrimaryPoses": 8
+      },
+      "sharedPhysicalScale": 0.847457627,
+      "poseQa": [
+        {
+          "frame": 0,
+          "row": 0,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            97,
+            70,
+            278,
+            477
+          ],
+          "rawNominalCellBounds": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            81,
+            195
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            69,
+            165
+          ],
+          "targetLandmark": [
+            222,
+            240
+          ],
+          "targetPlacement": [
+            153,
+            75
+          ],
+          "sourceForegroundSha256": "a3721be205f8974e4db262c2f55339e65d28a4ac8ba44215813dca02d69a2bd3",
+          "sourceComponentLabels": [
+            1
+          ],
+          "primaryComponentArea": 37340,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-01-raw-keyed.png",
+          "extractedSha256": "047acfc4084b0a791aa4eec647bc1bb9003aa2afc480dedd80a2c8d0f7d8fafe",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              181,
+              407
+            ],
+            "scaledSize": [
+              153,
+              345
+            ],
+            "effectiveScaleX": 0.845303867,
+            "effectiveScaleY": 0.847665848,
+            "roundingAspectErrorPercent": 0.278645
+          },
+          "targetBounds": [
+            153,
+            75,
+            306,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 153,
+            "top": 75,
+            "right": 138,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28452,
+          "silhouetteWidthPx": 153,
+          "silhouetteHeightPx": 345,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "59a3122adb7fbfcccaab158a288262e55b931330f0e3bb2980020ae9f0a0c6f6"
+        },
+        {
+          "frame": 1,
+          "row": 0,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            458,
+            85,
+            634,
+            479
+          ],
+          "rawNominalCellBounds": [
+            384,
+            0,
+            768,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            194
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            64,
+            164
+          ],
+          "targetLandmark": [
+            221,
+            250
+          ],
+          "targetPlacement": [
+            157,
+            86
+          ],
+          "sourceForegroundSha256": "37458503c6a19c936269dbe8c7ba62d71a40e0d5cb086fb6b9099f7845d651e5",
+          "sourceComponentLabels": [
+            2
+          ],
+          "primaryComponentArea": 36427,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-02-raw-keyed.png",
+          "extractedSha256": "43ddad47c5ae439ffb5e29b0d11fbc61f4955154802d3924e6e04ed747fe57f7",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              176,
+              394
+            ],
+            "scaledSize": [
+              149,
+              334
+            ],
+            "effectiveScaleX": 0.846590909,
+            "effectiveScaleY": 0.847715736,
+            "roundingAspectErrorPercent": 0.132689
+          },
+          "targetBounds": [
+            157,
+            86,
+            306,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 157,
+            "top": 86,
+            "right": 137,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27896,
+          "silhouetteWidthPx": 149,
+          "silhouetteHeightPx": 334,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "a5d36e6c86f8ce8ebe426619a5f2e818918745499dd3524eaeab65b4aa58cdc7"
+        },
+        {
+          "frame": 2,
+          "row": 0,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            847,
+            87,
+            1081,
+            482
+          ],
+          "rawNominalCellBounds": [
+            768,
+            0,
+            1152,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            77,
+            186
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            65,
+            158
+          ],
+          "targetLandmark": [
+            221,
+            243
+          ],
+          "targetPlacement": [
+            156,
+            85
+          ],
+          "sourceForegroundSha256": "9adffd354ec2793eef78bfa274718e70a924ca543104c8def1d6217160d834df",
+          "sourceComponentLabels": [
+            4
+          ],
+          "primaryComponentArea": 38777,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-03-raw-keyed.png",
+          "extractedSha256": "d981dcd9da999bbb1a2ea0b173d7b657d951b2e394076d80cff42734e0e74628",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              234,
+              395
+            ],
+            "scaledSize": [
+              198,
+              335
+            ],
+            "effectiveScaleX": 0.846153846,
+            "effectiveScaleY": 0.848101266,
+            "roundingAspectErrorPercent": 0.229621
+          },
+          "targetBounds": [
+            156,
+            85,
+            354,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 156,
+            "top": 85,
+            "right": 89,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29758,
+          "silhouetteWidthPx": 198,
+          "silhouetteHeightPx": 335,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "d86a98fada4149a98afacfa76ffdb0b5cf5748c4206e5409829b445c0a66a586"
+        },
+        {
+          "frame": 3,
+          "row": 0,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1196,
+            86,
+            1446,
+            481
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            0,
+            1536,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            77,
+            190
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            65,
+            161
+          ],
+          "targetLandmark": [
+            222,
+            246
+          ],
+          "targetPlacement": [
+            157,
+            85
+          ],
+          "sourceForegroundSha256": "d081b008211b74ddf628cb89aa9d4523259226e8b5a5048adc8253d21425ea3b",
+          "sourceComponentLabels": [
+            3
+          ],
+          "primaryComponentArea": 38898,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-04-raw-keyed.png",
+          "extractedSha256": "141093fddd1eeddc18f6c0915e3759dc36e5aad68537067529a20ac79e9c0180",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              250,
+              395
+            ],
+            "scaledSize": [
+              212,
+              335
+            ],
+            "effectiveScaleX": 0.848,
+            "effectiveScaleY": 0.848101266,
+            "roundingAspectErrorPercent": 0.01194
+          },
+          "targetBounds": [
+            157,
+            85,
+            369,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 157,
+            "top": 85,
+            "right": 75,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29953,
+          "silhouetteWidthPx": 212,
+          "silhouetteHeightPx": 335,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "a710694ebfc26925ee07e934bbb6f698b8bfc4161256d17fb82c23399f654cf5"
+        },
+        {
+          "frame": 4,
+          "row": 1,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            101,
+            550,
+            381,
+            946
+          ],
+          "rawNominalCellBounds": [
+            0,
+            512,
+            384,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            193
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            164
+          ],
+          "targetLandmark": [
+            222,
+            247
+          ],
+          "targetPlacement": [
+            158,
+            83
+          ],
+          "sourceForegroundSha256": "68389ed2708486ecf4e26f3f16848ef418e2a877b84e1a132fbf52955f948c44",
+          "sourceComponentLabels": [
+            6
+          ],
+          "primaryComponentArea": 39877,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-05-raw-keyed.png",
+          "extractedSha256": "9f2cb7b5b8d29d79df5b42a169fba1c0b13ae06c9a6c16c0007960580e81856d",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              280,
+              396
+            ],
+            "scaledSize": [
+              237,
+              336
+            ],
+            "effectiveScaleX": 0.846428571,
+            "effectiveScaleY": 0.848484848,
+            "roundingAspectErrorPercent": 0.242347
+          },
+          "targetBounds": [
+            158,
+            83,
+            395,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 158,
+            "top": 83,
+            "right": 49,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 30735,
+          "silhouetteWidthPx": 237,
+          "silhouetteHeightPx": 336,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "2a1543055378824909049c890e9b6beb1a90ea58e0f5053b9425f798019cd3ed"
+        },
+        {
+          "frame": 5,
+          "row": 1,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            479,
+            552,
+            720,
+            946
+          ],
+          "rawNominalCellBounds": [
+            384,
+            512,
+            768,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            75,
+            193
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            164
+          ],
+          "targetLandmark": [
+            221,
+            249
+          ],
+          "targetPlacement": [
+            157,
+            85
+          ],
+          "sourceForegroundSha256": "777b84e2284c412b29d8daba6c5ff382e90306cdd95f73e8657a5360558d743c",
+          "sourceComponentLabels": [
+            7
+          ],
+          "primaryComponentArea": 38870,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-06-raw-keyed.png",
+          "extractedSha256": "f8d8d141824824095c0d26ee3c358c17009ca6dc40efc6864f2f522f844356d8",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              241,
+              394
+            ],
+            "scaledSize": [
+              204,
+              334
+            ],
+            "effectiveScaleX": 0.846473029,
+            "effectiveScaleY": 0.847715736,
+            "roundingAspectErrorPercent": 0.146595
+          },
+          "targetBounds": [
+            157,
+            85,
+            361,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 157,
+            "top": 85,
+            "right": 82,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29819,
+          "silhouetteWidthPx": 204,
+          "silhouetteHeightPx": 334,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "df565529eb0ffaaf1d65bff0a09ec98c9045e4f8b488ddb3f60c7c15bb883195"
+        },
+        {
+          "frame": 6,
+          "row": 1,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            848,
+            556,
+            1028,
+            948
+          ],
+          "rawNominalCellBounds": [
+            768,
+            512,
+            1152,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            186
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            158
+          ],
+          "targetLandmark": [
+            221,
+            245
+          ],
+          "targetPlacement": [
+            157,
+            87
+          ],
+          "sourceForegroundSha256": "b586e7d21096af838f3de006e1037db6c096c28cea2fa74c543e9bad5735c4ff",
+          "sourceComponentLabels": [
+            8
+          ],
+          "primaryComponentArea": 36233,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-07-raw-keyed.png",
+          "extractedSha256": "e7c7288dbb61d3e4701104ca00869bfcdfc8c7f970d19fc9d34a6de64a7c1a2b",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              180,
+              392
+            ],
+            "scaledSize": [
+              153,
+              332
+            ],
+            "effectiveScaleX": 0.85,
+            "effectiveScaleY": 0.846938776,
+            "roundingAspectErrorPercent": 0.361446
+          },
+          "targetBounds": [
+            157,
+            87,
+            310,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 157,
+            "top": 87,
+            "right": 133,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27787,
+          "silhouetteWidthPx": 153,
+          "silhouetteHeightPx": 332,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "5b5e90dcea026b8c3216cdb7896c017114bfbd1d8744bdb8d6f14638f12577c9"
+        },
+        {
+          "frame": 7,
+          "row": 1,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1190,
+            543,
+            1367,
+            948
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            512,
+            1536,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            82,
+            194
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            69,
+            164
+          ],
+          "targetLandmark": [
+            222,
+            240
+          ],
+          "targetPlacement": [
+            153,
+            76
+          ],
+          "sourceForegroundSha256": "c1ab64ea36e495b7c425f44ec4012a8d348fb7fee2d99db9b421e709fe571418",
+          "sourceComponentLabels": [
+            5
+          ],
+          "primaryComponentArea": 36772,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-08-raw-keyed.png",
+          "extractedSha256": "dec55dd4c4867dbfc09cd929ef5cfe91008110b9ec3aa252a5c327628626464d",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              177,
+              405
+            ],
+            "scaledSize": [
+              150,
+              343
+            ],
+            "effectiveScaleX": 0.847457627,
+            "effectiveScaleY": 0.84691358,
+            "roundingAspectErrorPercent": 0.064239
+          },
+          "targetBounds": [
+            153,
+            76,
+            303,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 153,
+            "top": 76,
+            "right": 141,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28037,
+          "silhouetteWidthPx": 150,
+          "silhouetteHeightPx": 343,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "5bdada34e999d485abcd873e7a2a0f86ecb22f5fe7d79f2ad8b862199388d8cf"
+        }
+      ]
+    },
+    {
+      "clipId": "death",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/death-r1-imagegen.png",
+      "rawSha256": "a9e9dcac76939c30d2eda075e6f9c04913b71e12754ce9462bdba4c3eb755809",
+      "rawBytes": 1700239,
+      "rawSize": [
+        1536,
+        1024
+      ],
+      "keyedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-border-keyed-source.png",
+      "keyedSourceSha256": "adde02bad5548d314d92d9676e7542bb17e04b60058afa34e69030a90cf141d0",
+      "sharedScaleRecompositionPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-shared-scale-recomposed.png",
+      "sharedScaleRecompositionSha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "activePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/death.png",
+      "activeSha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "activeBytes": 465961,
+      "activeSize": [
+        1774,
+        887
+      ],
+      "activeByteIdenticalToRecomposition": true,
+      "completeExtractedPoseCount": 8,
+      "completeExtractedPosePaths": [
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-01-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-02-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-03-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-04-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-05-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-06-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-07-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-08-raw-keyed.png"
+      ],
+      "combinedExtractedForegroundSha256": "b71815adefd69c08e3f0be3579871f295e02dbcd90847def22e0fc8dc5919998",
+      "rawPosesCrossingNominalSourceCells": [
+        6,
+        7,
+        8
+      ],
+      "chromaDiagnostics": {
+        "strictMagentaPixels": 1331748,
+        "borderConnectedBackgroundPixels": 1329720,
+        "enclosedStrictMagentaPixels": 2028,
+        "enclosedBackdropComponents": 7,
+        "preservedEnclosedDetailComponents": 23,
+        "assignedForegroundPixels": 242167,
+        "componentCount": 8,
+        "ignoredComponents": [],
+        "ignoredForegroundPixels": 0,
+        "completePrimaryPoses": 8
+      },
+      "sharedPhysicalScale": 0.847457627,
+      "poseQa": [
+        {
+          "frame": 0,
+          "row": 0,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            90,
+            104,
+            291,
+            479
+          ],
+          "rawNominalCellBounds": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            100,
+            175
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            85,
+            148
+          ],
+          "targetLandmark": [
+            222,
+            250
+          ],
+          "targetPlacement": [
+            137,
+            102
+          ],
+          "sourceForegroundSha256": "7e0dcf3371fa43f640bf3363e45251fe788a9f927ef9483c3b74820131f5548a",
+          "sourceComponentLabels": [
+            1
+          ],
+          "primaryComponentArea": 35931,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-01-raw-keyed.png",
+          "extractedSha256": "970c07ec63ecec779ce3550d88f984f204ec0a347625ca03896c7b8e99ad3d23",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              201,
+              375
+            ],
+            "scaledSize": [
+              170,
+              318
+            ],
+            "effectiveScaleX": 0.845771144,
+            "effectiveScaleY": 0.848,
+            "roundingAspectErrorPercent": 0.262837
+          },
+          "targetBounds": [
+            137,
+            102,
+            307,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 137,
+            "top": 102,
+            "right": 137,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27503,
+          "silhouetteWidthPx": 170,
+          "silhouetteHeightPx": 318,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "96f4dfd9b5456a7404f9486fba4b55373be6fd9c278844a1ead98dd654678775"
+        },
+        {
+          "frame": 1,
+          "row": 0,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            454,
+            139,
+            677,
+            479
+          ],
+          "rawNominalCellBounds": [
+            384,
+            0,
+            768,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            122,
+            162
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            103,
+            137
+          ],
+          "targetLandmark": [
+            221,
+            269
+          ],
+          "targetPlacement": [
+            118,
+            132
+          ],
+          "sourceForegroundSha256": "894cf1c1625e5e8e787d323c59d716073bfbe11be3468b1af4d7f6f09154b1f3",
+          "sourceComponentLabels": [
+            2
+          ],
+          "primaryComponentArea": 36269,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-02-raw-keyed.png",
+          "extractedSha256": "8bad75f8b0bc540e52e426fb00917ed9e23fce7b7ac87bb9e4b23c87e5044afa",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              223,
+              340
+            ],
+            "scaledSize": [
+              189,
+              288
+            ],
+            "effectiveScaleX": 0.847533632,
+            "effectiveScaleY": 0.847058824,
+            "roundingAspectErrorPercent": 0.056054
+          },
+          "targetBounds": [
+            118,
+            132,
+            307,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 118,
+            "top": 132,
+            "right": 136,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 27688,
+          "silhouetteWidthPx": 189,
+          "silhouetteHeightPx": 288,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "0964d09caa7fc7f6237ac1715b92339ce8a8eedbd0be2118be20e52f5a528099"
+        },
+        {
+          "frame": 2,
+          "row": 0,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            837,
+            195,
+            1042,
+            484
+          ],
+          "rawNominalCellBounds": [
+            768,
+            0,
+            1152,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            87,
+            151
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            74,
+            128
+          ],
+          "targetLandmark": [
+            221,
+            303
+          ],
+          "targetPlacement": [
+            147,
+            175
+          ],
+          "sourceForegroundSha256": "a49d31516444c702fd7dce46262180fa6403ca6d7c591b837f2a55999fa5e4fb",
+          "sourceComponentLabels": [
+            3
+          ],
+          "primaryComponentArea": 32158,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-03-raw-keyed.png",
+          "extractedSha256": "8c78c01ecd9ad7802d43be683d91ef0084861d10c79daf62ecd1b7f06fba4cb4",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              205,
+              289
+            ],
+            "scaledSize": [
+              174,
+              245
+            ],
+            "effectiveScaleX": 0.848780488,
+            "effectiveScaleY": 0.847750865,
+            "roundingAspectErrorPercent": 0.121453
+          },
+          "targetBounds": [
+            147,
+            175,
+            321,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 147,
+            "top": 175,
+            "right": 122,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 24500,
+          "silhouetteWidthPx": 174,
+          "silhouetteHeightPx": 245,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "d2d10890cd43580b4048a93fd4d9e59fedea291137d700c38475f1c3a6594839"
+        },
+        {
+          "frame": 3,
+          "row": 0,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1189,
+            253,
+            1436,
+            484
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            0,
+            1536,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            136,
+            117
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            115,
+            99
+          ],
+          "targetLandmark": [
+            222,
+            323
+          ],
+          "targetPlacement": [
+            107,
+            224
+          ],
+          "sourceForegroundSha256": "0303e606d570805263b995e076c36076e1358c6d37c7f256e63aa328e36a7f1c",
+          "sourceComponentLabels": [
+            4
+          ],
+          "primaryComponentArea": 32041,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-04-raw-keyed.png",
+          "extractedSha256": "520c81f6fd0b5ae97e38f467d2b3f7ca494ac218fa67e18d20191750a02e121b",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              247,
+              231
+            ],
+            "scaledSize": [
+              209,
+              196
+            ],
+            "effectiveScaleX": 0.846153846,
+            "effectiveScaleY": 0.848484848,
+            "roundingAspectErrorPercent": 0.274725
+          },
+          "targetBounds": [
+            107,
+            224,
+            316,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 107,
+            "top": 224,
+            "right": 128,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 24426,
+          "silhouetteWidthPx": 209,
+          "silhouetteHeightPx": 196,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "c35f796924d38bd1f26adb09207843851d9caeb251818f1e846bf4730f54ab84"
+        },
+        {
+          "frame": 4,
+          "row": 1,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            28,
+            675,
+            308,
+            871
+          ],
+          "rawNominalCellBounds": [
+            0,
+            512,
+            384,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            173,
+            100
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            147,
+            85
+          ],
+          "targetLandmark": [
+            222,
+            338
+          ],
+          "targetPlacement": [
+            75,
+            253
+          ],
+          "sourceForegroundSha256": "b67d53f0e8bbdad266ac66c893314007895b703c0099494354dac05e7ceb1694",
+          "sourceComponentLabels": [
+            5
+          ],
+          "primaryComponentArea": 29051,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-05-raw-keyed.png",
+          "extractedSha256": "787b300ccabfa6fbfd1299b97ed65294e2879fca4582ca6d3294ba08bbe8ebd6",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              280,
+              196
+            ],
+            "scaledSize": [
+              237,
+              166
+            ],
+            "effectiveScaleX": 0.846428571,
+            "effectiveScaleY": 0.846938776,
+            "roundingAspectErrorPercent": 0.060241
+          },
+          "targetBounds": [
+            75,
+            253,
+            312,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 75,
+            "top": 253,
+            "right": 132,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 22053,
+          "silhouetteWidthPx": 237,
+          "silhouetteHeightPx": 166,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "62884fb3d7a238a701fa4b7391054c15920bf45f67c55b4108eebbac94f765fa"
+        },
+        {
+          "frame": 5,
+          "row": 1,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            369,
+            715,
+            689,
+            873
+          ],
+          "rawNominalCellBounds": [
+            384,
+            512,
+            768,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": true,
+          "rawLandmark": [
+            194,
+            83
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            164,
+            70
+          ],
+          "targetLandmark": [
+            221,
+            355
+          ],
+          "targetPlacement": [
+            57,
+            285
+          ],
+          "sourceForegroundSha256": "1d3183f696936e4f7dde45c016f06d464b5ff83a7aee69cb897e34cd94726ed0",
+          "sourceComponentLabels": [
+            6
+          ],
+          "primaryComponentArea": 29502,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-06-raw-keyed.png",
+          "extractedSha256": "4405d1c94255e25a13a48766bc0a6101ace655b966006a007737a95020238790",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              320,
+              158
+            ],
+            "scaledSize": [
+              271,
+              134
+            ],
+            "effectiveScaleX": 0.846875,
+            "effectiveScaleY": 0.848101266,
+            "roundingAspectErrorPercent": 0.14459
+          },
+          "targetBounds": [
+            57,
+            285,
+            328,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 57,
+            "top": 285,
+            "right": 115,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 22364,
+          "silhouetteWidthPx": 271,
+          "silhouetteHeightPx": 134,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "8f6ba0f5a2c5451e5762a35cdb98e9ed9e6dffc5a646823fa6e4925a8ecbe84e"
+        },
+        {
+          "frame": 6,
+          "row": 1,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            736,
+            768,
+            1097,
+            879
+          ],
+          "rawNominalCellBounds": [
+            768,
+            512,
+            1152,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": true,
+          "rawLandmark": [
+            190,
+            59
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            161,
+            50
+          ],
+          "targetLandmark": [
+            221,
+            375
+          ],
+          "targetPlacement": [
+            60,
+            325
+          ],
+          "sourceForegroundSha256": "87da616f8ba7c83e07ddf45307d8b0987c90333c465ee7fb95e1ecdd6de12cba",
+          "sourceComponentLabels": [
+            7
+          ],
+          "primaryComponentArea": 24659,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-07-raw-keyed.png",
+          "extractedSha256": "7fc1e7a805ae9018df25a807d60e1c649c130fa1ca9d4de6e780b4793dd8683c",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              361,
+              111
+            ],
+            "scaledSize": [
+              306,
+              94
+            ],
+            "effectiveScaleX": 0.847645429,
+            "effectiveScaleY": 0.846846847,
+            "roundingAspectErrorPercent": 0.094301
+          },
+          "targetBounds": [
+            60,
+            325,
+            366,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 60,
+            "top": 325,
+            "right": 77,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 18720,
+          "silhouetteWidthPx": 306,
+          "silhouetteHeightPx": 94,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "64f45d6b2f391844eea8163175e5eb7cbed08917838b29c8d0eb9e55b9019104"
+        },
+        {
+          "frame": 7,
+          "row": 1,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1143,
+            779,
+            1516,
+            876
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            512,
+            1536,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": true,
+          "rawLandmark": [
+            187,
+            51
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            158,
+            43
+          ],
+          "targetLandmark": [
+            222,
+            380
+          ],
+          "targetPlacement": [
+            64,
+            337
+          ],
+          "sourceForegroundSha256": "6625bd6497172a9099f9a871a490db68160e3bc8edf8455d9e8f1897918efa5f",
+          "sourceComponentLabels": [
+            8
+          ],
+          "primaryComponentArea": 22556,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-08-raw-keyed.png",
+          "extractedSha256": "b89847ba7ef8e04214968a6e22b747f383a3379f42ead02a5c2668f1de24f4d5",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              373,
+              97
+            ],
+            "scaledSize": [
+              316,
+              82
+            ],
+            "effectiveScaleX": 0.847184987,
+            "effectiveScaleY": 0.845360825,
+            "roundingAspectErrorPercent": 0.215785
+          },
+          "targetBounds": [
+            64,
+            337,
+            380,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 64,
+            "top": 337,
+            "right": 64,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 17147,
+          "silhouetteWidthPx": 316,
+          "silhouetteHeightPx": 82,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "97a3e7de32a26a3c7195c9f98c232b8ef0e33ccdf31a6bc86b762aa997eb7431"
+        }
+      ]
+    },
+    {
+      "clipId": "command",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/command-r1-imagegen.png",
+      "rawSha256": "98ee60f7547e145976802cc36c8a8fa6961c6c59dd0348ee3521f0260ab51559",
+      "rawBytes": 1795430,
+      "rawSize": [
+        1536,
+        1024
+      ],
+      "keyedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-border-keyed-source.png",
+      "keyedSourceSha256": "9b6afcdbb2bc5478bfbcd7f07b702b5ab81a35d29aceda5926391db2e195efa0",
+      "sharedScaleRecompositionPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-shared-scale-recomposed.png",
+      "sharedScaleRecompositionSha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "activePath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/command.png",
+      "activeSha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "activeBytes": 591925,
+      "activeSize": [
+        1774,
+        887
+      ],
+      "activeByteIdenticalToRecomposition": true,
+      "completeExtractedPoseCount": 8,
+      "completeExtractedPosePaths": [
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-01-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-02-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-03-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-04-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-05-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-06-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-07-raw-keyed.png",
+        "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-08-raw-keyed.png"
+      ],
+      "combinedExtractedForegroundSha256": "2a9c6060d17c6471c69c03f226e512fa118331cb8161bd843272507d7faf52d4",
+      "rawPosesCrossingNominalSourceCells": [],
+      "chromaDiagnostics": {
+        "strictMagentaPixels": 1255575,
+        "borderConnectedBackgroundPixels": 1248989,
+        "enclosedStrictMagentaPixels": 6586,
+        "enclosedBackdropComponents": 15,
+        "preservedEnclosedDetailComponents": 31,
+        "assignedForegroundPixels": 318667,
+        "componentCount": 8,
+        "ignoredComponents": [],
+        "ignoredForegroundPixels": 0,
+        "completePrimaryPoses": 8
+      },
+      "sharedPhysicalScale": 0.847457627,
+      "poseQa": [
+        {
+          "frame": 0,
+          "row": 0,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            120,
+            48,
+            268,
+            478
+          ],
+          "rawNominalCellBounds": [
+            0,
+            0,
+            384,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            206
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            64,
+            175
+          ],
+          "targetLandmark": [
+            222,
+            231
+          ],
+          "targetPlacement": [
+            158,
+            56
+          ],
+          "sourceForegroundSha256": "e1336b3a9315b7137fe73ae4a17f1f55f7341c897b41760b9e184aec93fa5f42",
+          "sourceComponentLabels": [
+            3
+          ],
+          "primaryComponentArea": 37788,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-01-raw-keyed.png",
+          "extractedSha256": "3896ccc64dc3887dda524d92769ef7372015ed4d7e09ae9e788788895709f9a1",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              148,
+              430
+            ],
+            "scaledSize": [
+              125,
+              364
+            ],
+            "effectiveScaleX": 0.844594595,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.226463
+          },
+          "targetBounds": [
+            158,
+            56,
+            283,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 158,
+            "top": 56,
+            "right": 161,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28479,
+          "silhouetteWidthPx": 125,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "932b3badb065a9aa4ae9f6b39e0ef76470289396ad9f5065fe0657655a49360b"
+        },
+        {
+          "frame": 1,
+          "row": 0,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            478,
+            48,
+            642,
+            478
+          ],
+          "rawNominalCellBounds": [
+            384,
+            0,
+            768,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            74,
+            203
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            63,
+            172
+          ],
+          "targetLandmark": [
+            221,
+            228
+          ],
+          "targetPlacement": [
+            158,
+            56
+          ],
+          "sourceForegroundSha256": "ba2f5a98d917e189ea19638f50dea26729e7e5ad875880cd56e059840e4daba6",
+          "sourceComponentLabels": [
+            4
+          ],
+          "primaryComponentArea": 39225,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-02-raw-keyed.png",
+          "extractedSha256": "031e3a1cadc432eb5940cd2654ecc44fecbd3d4162b72d935d4e7a880ea85bff",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              164,
+              430
+            ],
+            "scaledSize": [
+              139,
+              364
+            ],
+            "effectiveScaleX": 0.847560976,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.123961
+          },
+          "targetBounds": [
+            158,
+            56,
+            297,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 158,
+            "top": 56,
+            "right": 146,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29799,
+          "silhouetteWidthPx": 139,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "7998d6e6559c7821152e57a2a6ab014b0d88c57986b1c059b8be9b3f7af130ec"
+        },
+        {
+          "frame": 2,
+          "row": 0,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            848,
+            44,
+            1066,
+            478
+          ],
+          "rawNominalCellBounds": [
+            768,
+            0,
+            1152,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            82,
+            194
+          ],
+          "targetRoot": [
+            221,
+            420
+          ],
+          "targetScaledLandmark": [
+            69,
+            164
+          ],
+          "targetLandmark": [
+            221,
+            216
+          ],
+          "targetPlacement": [
+            152,
+            52
+          ],
+          "sourceForegroundSha256": "e8ac7e5bb441440c88b6e555f67b8f1ebb9a445a718d9ae692b053c326794f04",
+          "sourceComponentLabels": [
+            1
+          ],
+          "primaryComponentArea": 40832,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-03-raw-keyed.png",
+          "extractedSha256": "f6972f56df6e76d01add59ececb49f06aa3666f356edd24ca369cbfd810c2aa5",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              218,
+              434
+            ],
+            "scaledSize": [
+              185,
+              368
+            ],
+            "effectiveScaleX": 0.848623853,
+            "effectiveScaleY": 0.847926267,
+            "roundingAspectErrorPercent": 0.08227
+          },
+          "targetBounds": [
+            152,
+            52,
+            337,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 152,
+            "top": 52,
+            "right": 106,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 31179,
+          "silhouetteWidthPx": 185,
+          "silhouetteHeightPx": 368,
+          "anchor": [
+            221,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "5be8949b6fdf2749958faeafc17bd1875abf8906e5e56b310fef0e79f02a30e8"
+        },
+        {
+          "frame": 3,
+          "row": 0,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1208,
+            47,
+            1375,
+            478
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            0,
+            1536,
+            512
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            78,
+            198
+          ],
+          "targetRoot": [
+            222,
+            420
+          ],
+          "targetScaledLandmark": [
+            66,
+            168
+          ],
+          "targetLandmark": [
+            222,
+            223
+          ],
+          "targetPlacement": [
+            156,
+            55
+          ],
+          "sourceForegroundSha256": "5b4e732edeba7c003855b837bdc83f1ed051aa3728988a0cddb6e1bf16fb9172",
+          "sourceComponentLabels": [
+            2
+          ],
+          "primaryComponentArea": 39422,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-04-raw-keyed.png",
+          "extractedSha256": "501430e45e6194175b2b46c4077d4a8aab71783a1b0a9772cf526461c457efd2",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              167,
+              431
+            ],
+            "scaledSize": [
+              142,
+              365
+            ],
+            "effectiveScaleX": 0.850299401,
+            "effectiveScaleY": 0.846867749,
+            "roundingAspectErrorPercent": 0.405217
+          },
+          "targetBounds": [
+            156,
+            55,
+            298,
+            420
+          ],
+          "targetMarginsPx": {
+            "left": 156,
+            "top": 55,
+            "right": 146,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29976,
+          "silhouetteWidthPx": 142,
+          "silhouetteHeightPx": 365,
+          "anchor": [
+            222,
+            420
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "ae3188bc32444f941edf9f7a326ae7000cb4bfacb7ad31f7221737b500a79db3"
+        },
+        {
+          "frame": 4,
+          "row": 1,
+          "column": 0,
+          "rawSourceBoundsGlobal": [
+            111,
+            535,
+            356,
+            965
+          ],
+          "rawNominalCellBounds": [
+            0,
+            512,
+            384,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            202
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            171
+          ],
+          "targetLandmark": [
+            222,
+            226
+          ],
+          "targetPlacement": [
+            158,
+            55
+          ],
+          "sourceForegroundSha256": "698a5e84a6f629fc91053974954be9495006287677a0af2a2fdcc37a9ab2a4fa",
+          "sourceComponentLabels": [
+            5
+          ],
+          "primaryComponentArea": 42569,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-05-raw-keyed.png",
+          "extractedSha256": "dfb3ae1c96c8afd0235fdf46f9522bc66aac606365de471f82cfee77ff9aabb5",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              245,
+              430
+            ],
+            "scaledSize": [
+              208,
+              364
+            ],
+            "effectiveScaleX": 0.848979592,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.291545
+          },
+          "targetBounds": [
+            158,
+            55,
+            366,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 158,
+            "top": 55,
+            "right": 78,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 32344,
+          "silhouetteWidthPx": 208,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "96b01d8bdb3355d94f27dc122fcbfc2bc8a7a10afbbf02f0c55600b34e069532"
+        },
+        {
+          "frame": 5,
+          "row": 1,
+          "column": 1,
+          "rawSourceBoundsGlobal": [
+            471,
+            535,
+            714,
+            965
+          ],
+          "rawNominalCellBounds": [
+            384,
+            512,
+            768,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            203
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            172
+          ],
+          "targetLandmark": [
+            221,
+            227
+          ],
+          "targetPlacement": [
+            157,
+            55
+          ],
+          "sourceForegroundSha256": "98d23dcfd2c0832f6b36ebac282ed768f4ac0ecc9f9a17df2e7921ba5633bef5",
+          "sourceComponentLabels": [
+            6
+          ],
+          "primaryComponentArea": 42174,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-06-raw-keyed.png",
+          "extractedSha256": "578d7ab809b85cd37c2287cbd1a9c3d1af0373d64a90a88235c18b84f23def86",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              243,
+              430
+            ],
+            "scaledSize": [
+              206,
+              364
+            ],
+            "effectiveScaleX": 0.847736626,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.144711
+          },
+          "targetBounds": [
+            157,
+            55,
+            363,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 157,
+            "top": 55,
+            "right": 80,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 32052,
+          "silhouetteWidthPx": 206,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "1ae1f4428af049557c5280e567111dc0c7946a945ea8c0e5ea7f07f8ebe9d2ad"
+        },
+        {
+          "frame": 6,
+          "row": 1,
+          "column": 2,
+          "rawSourceBoundsGlobal": [
+            855,
+            535,
+            1022,
+            965
+          ],
+          "rawNominalCellBounds": [
+            768,
+            512,
+            1152,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            77,
+            198
+          ],
+          "targetRoot": [
+            221,
+            419
+          ],
+          "targetScaledLandmark": [
+            65,
+            168
+          ],
+          "targetLandmark": [
+            221,
+            223
+          ],
+          "targetPlacement": [
+            156,
+            55
+          ],
+          "sourceForegroundSha256": "dcb71e79e246bd69f45dc13a9c1c3465bc7528e5460be14b72d445189b4e65e7",
+          "sourceComponentLabels": [
+            7
+          ],
+          "primaryComponentArea": 38704,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-07-raw-keyed.png",
+          "extractedSha256": "bc93105ed28b8afe9be46b01ec9c883f3cbed563eddbe517b27ae9f9ad8d3dd8",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              167,
+              430
+            ],
+            "scaledSize": [
+              142,
+              364
+            ],
+            "effectiveScaleX": 0.850299401,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.447457
+          },
+          "targetBounds": [
+            156,
+            55,
+            298,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 156,
+            "top": 55,
+            "right": 145,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 29478,
+          "silhouetteWidthPx": 142,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            221,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "646a733e9788e60497f1061dc28d554338df7821e46d228dda281c284c950d84"
+        },
+        {
+          "frame": 7,
+          "row": 1,
+          "column": 3,
+          "rawSourceBoundsGlobal": [
+            1224,
+            535,
+            1371,
+            965
+          ],
+          "rawNominalCellBounds": [
+            1152,
+            512,
+            1536,
+            1024
+          ],
+          "rawCrossesNominalCellBoundary": false,
+          "rawLandmark": [
+            76,
+            206
+          ],
+          "targetRoot": [
+            222,
+            419
+          ],
+          "targetScaledLandmark": [
+            64,
+            175
+          ],
+          "targetLandmark": [
+            222,
+            230
+          ],
+          "targetPlacement": [
+            158,
+            55
+          ],
+          "sourceForegroundSha256": "bc54236ddb82269364914b8d72c0e29921a0c9bd1e1ec139d3144ba5ea55d4b8",
+          "sourceComponentLabels": [
+            8
+          ],
+          "primaryComponentArea": 37953,
+          "auxiliaryComponentCount": 0,
+          "extractedPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-08-raw-keyed.png",
+          "extractedSha256": "c307266aad8562aa4de75b059d8add6488c59ec27a852258a931dd4c0ede077d",
+          "transform": {
+            "requestedUniformScale": 0.847457627,
+            "sourceSize": [
+              147,
+              430
+            ],
+            "scaledSize": [
+              125,
+              364
+            ],
+            "effectiveScaleX": 0.850340136,
+            "effectiveScaleY": 0.846511628,
+            "roundingAspectErrorPercent": 0.452269
+          },
+          "targetBounds": [
+            158,
+            55,
+            283,
+            419
+          ],
+          "targetMarginsPx": {
+            "left": 158,
+            "top": 55,
+            "right": 161,
+            "bottom": 24
+          },
+          "minimumBoundaryClearancePx": 24,
+          "touchesTargetCellBoundary": false,
+          "meetsRequiredClearance": true,
+          "foregroundPixels": 28880,
+          "silhouetteWidthPx": 125,
+          "silhouetteHeightPx": 364,
+          "anchor": [
+            222,
+            419
+          ],
+          "landmarkInsideForeground": true,
+          "anchorAtPhysicalSupportBottom": true,
+          "cellPixelSha256": "43bb89608aab8c0eb15dec6cd272b1254e5848de54851d220c4bb73e3b8f0d59"
+        }
+      ]
+    }
+  ],
+  "clipChecks": [
+    {
+      "clipId": "idle",
+      "fps": 6,
+      "loop": true,
+      "posesReviewed": 8,
+      "populatedCells": 8,
+      "cellBoundaryContacts": 0,
+      "minimumClearancePx": 24,
+      "facingRight": "8/8 manually reviewed",
+      "identityContinuity": "8/8 manually reviewed",
+      "scaleComparisonHeightPx": 375.0,
+      "scaleComparisonMethod": "eight-pose median",
+      "cellPixelHashesDistinct": true,
+      "chronology": "restrained breathing/alert loop closes coherently"
+    },
+    {
+      "clipId": "move",
+      "fps": 12,
+      "loop": true,
+      "posesReviewed": 8,
+      "populatedCells": 8,
+      "cellBoundaryContacts": 0,
+      "minimumClearancePx": 24,
+      "facingRight": "8/8 manually reviewed",
+      "identityContinuity": "8/8 manually reviewed",
+      "scaleComparisonHeightPx": 325.0,
+      "scaleComparisonMethod": "eight-pose median",
+      "cellPixelHashesDistinct": true,
+      "chronology": "eight distinct running phases form a coherent cycle"
+    },
+    {
+      "clipId": "attack",
+      "fps": 12,
+      "loop": false,
+      "posesReviewed": 8,
+      "populatedCells": 8,
+      "cellBoundaryContacts": 0,
+      "minimumClearancePx": 24,
+      "facingRight": "8/8 manually reviewed",
+      "identityContinuity": "8/8 manually reviewed",
+      "scaleComparisonHeightPx": 335.0,
+      "scaleComparisonMethod": "eight-pose median",
+      "cellPixelHashesDistinct": true,
+      "chronology": "draw, aim, fire, recoil, lower and reholster chronology",
+      "singlePistolContinuity": "8/8 manual best-effort review",
+      "heldPoseHolsterState": "frames 3-7 held pistol with thigh holster appearing empty; frames 1-2 draw transition; frame 8 reholstered",
+      "weaponDuplicationDetected": 0
+    },
+    {
+      "clipId": "death",
+      "fps": 10,
+      "loop": false,
+      "posesReviewed": 8,
+      "populatedCells": 8,
+      "cellBoundaryContacts": 0,
+      "minimumClearancePx": 24,
+      "facingRight": "8/8 manually reviewed",
+      "identityContinuity": "8/8 manually reviewed",
+      "scaleComparisonHeightPx": 318.0,
+      "scaleComparisonMethod": "death onset frame 1 only; later frames are intentional collapse",
+      "cellPixelHashesDistinct": true,
+      "chronology": "irreversible hit-to-terminal-prone chronology"
+    },
+    {
+      "clipId": "command",
+      "fps": 8,
+      "loop": false,
+      "posesReviewed": 8,
+      "populatedCells": 8,
+      "cellBoundaryContacts": 0,
+      "minimumClearancePx": 24,
+      "facingRight": "8/8 manually reviewed",
+      "identityContinuity": "8/8 manually reviewed",
+      "scaleComparisonHeightPx": 364.0,
+      "scaleComparisonMethod": "eight-pose median",
+      "cellPixelHashesDistinct": true,
+      "chronology": "hardware gesture/device operation then recovery"
+    }
+  ],
+  "manualIdentityReview": {
+    "reviewBasis": "manual review of all six generated boards, high-resolution attack r1/r2 comparison, root-registered playbacks and the 40-pose contact sheet",
+    "sameRightFacingAdultMale": "40/40 selected poses pass manual review",
+    "headsetAndAntenna": "40/40 selected poses retain the compact headset and antenna",
+    "darkQuiltedSuit": "40/40 selected poses retain the dark quilted industrial suit",
+    "compactBackpackAndCableLoop": "40/40 selected poses retain the compact backpack and protected cable loop",
+    "chestAndForearmController": "controller hardware remains readable across the selected profile; command emphasizes chest/forearm operation",
+    "commandHardwareGestures": "8/8 command poses use deliberate human hand/controller hardware gestures",
+    "deathTerminalProne": "death frame 8 is a fully prone motionless terminal body",
+    "attackR2SinglePistol": "best-effort 8/8 manual pass; held poses show one pistol and an empty thigh holster",
+    "attackR1Rejected": "held firing poses retain an additional holstered pistol, creating duplicated weapon state",
+    "automaticAcceptance": false
+  },
+  "rejectedCandidates": [
+    {
+      "clipId": "attack",
+      "reason": "attack-r1 firing poses duplicate the sidearm: a pistol is held while a second pistol remains visibly holstered",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r1-imagegen.png",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/rejected/attack-r1-duplicated-holstered-and-held-pistol.png",
+      "sha256": "b7ab47811d85a3af717383878c9999956c242a26b4bee0554ed9283cc872a616",
+      "bytes": 1774174,
+      "byteIdenticalToRaw": true
+    }
+  ],
+  "visualEvidence": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-anchor-playback.gif",
+      "sha256": "87f5af46cff2af32f44908638568db2478152e91df1c5e317b05420f9031bb15",
+      "bytes": 273293,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-single-pistol-review.png",
+      "sha256": "5fa7199d52570ac87718d161f0ff58b817fc49e2d9e898e64684e96220adfc4a",
+      "bytes": 531476,
+      "size": [
+        1680,
+        860
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-technical-overlay.png",
+      "sha256": "7d6632760a5d5e0596fc8cb6df06b332881127f7728ac6b051cbfe01d2ee688e",
+      "bytes": 563901,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-anchor-playback.gif",
+      "sha256": "a9d877f0589e5ff813090eb83d7fba240ca5f948f24e42141020a842950aa0ec",
+      "bytes": 286099,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-technical-overlay.png",
+      "sha256": "3cbe3bf9aecccad47acade223062cbc3def15675772a0b5265c588c4cbb86ce6",
+      "bytes": 591335,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-anchor-playback.gif",
+      "sha256": "891a02b8d185c815b828a30e5f6d12b1738bf89c8c333e5d67e19e077899afd1",
+      "bytes": 241029,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-technical-overlay.png",
+      "sha256": "93107f430191c47af8c436ce2ac7c20756b60c6e85d60a80c57ba7affe75875f",
+      "bytes": 467188,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/identity-orientation-anchor-contact.png",
+      "sha256": "89e6712b9849353e15a05ff5d7ec72d70437130874dd72ff724187331f5ce097",
+      "bytes": 431244,
+      "size": [
+        1465,
+        875
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-anchor-playback.gif",
+      "sha256": "644b1a31d30844318e5bf41a60579bcdd778297e82b849f7ce6b926e4a6adce2",
+      "bytes": 263643,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-technical-overlay.png",
+      "sha256": "876ea229c001da99629a2fdd3dd94f3d96cff94cf0543926aa1f12747dc8c4a9",
+      "bytes": 526999,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-anchor-playback.gif",
+      "sha256": "c61cd0628953e18f08d42f73d4b12ff0ccf5759dfa657ed35f5e4ef087430308",
+      "bytes": 267749,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-technical-overlay.png",
+      "sha256": "533c5d8da6f966cde2994ddca76ad62ea8741e8f0fe8e6b19a825ba8910dcd94",
+      "bytes": 555153,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    }
+  ],
+  "outputValidation": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/attack.png",
+      "sha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "bytes": 561861,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/command.png",
+      "sha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "bytes": 591925,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/death.png",
+      "sha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "bytes": 465961,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-border-keyed-source.png",
+      "sha256": "9ad477e47915a35eed38d6c87dc0b06a04703b02f4c9e04f47e1d281575549a8",
+      "bytes": 707834,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-shared-scale-recomposed.png",
+      "sha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "bytes": 561861,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-border-keyed-source.png",
+      "sha256": "9b6afcdbb2bc5478bfbcd7f07b702b5ab81a35d29aceda5926391db2e195efa0",
+      "bytes": 754992,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-shared-scale-recomposed.png",
+      "sha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "bytes": 591925,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-border-keyed-source.png",
+      "sha256": "adde02bad5548d314d92d9676e7542bb17e04b60058afa34e69030a90cf141d0",
+      "bytes": 589719,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-shared-scale-recomposed.png",
+      "sha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "bytes": 465961,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-01-raw-keyed.png",
+      "sha256": "047acfc4084b0a791aa4eec647bc1bb9003aa2afc480dedd80a2c8d0f7d8fafe",
+      "bytes": 130363,
+      "size": [
+        181,
+        407
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-02-raw-keyed.png",
+      "sha256": "43ddad47c5ae439ffb5e29b0d11fbc61f4955154802d3924e6e04ed747fe57f7",
+      "bytes": 126693,
+      "size": [
+        176,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-03-raw-keyed.png",
+      "sha256": "d981dcd9da999bbb1a2ea0b173d7b657d951b2e394076d80cff42734e0e74628",
+      "bytes": 150702,
+      "size": [
+        234,
+        395
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-04-raw-keyed.png",
+      "sha256": "141093fddd1eeddc18f6c0915e3759dc36e5aad68537067529a20ac79e9c0180",
+      "bytes": 155761,
+      "size": [
+        250,
+        395
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-05-raw-keyed.png",
+      "sha256": "9f2cb7b5b8d29d79df5b42a169fba1c0b13ae06c9a6c16c0007960580e81856d",
+      "bytes": 167245,
+      "size": [
+        280,
+        396
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-06-raw-keyed.png",
+      "sha256": "f8d8d141824824095c0d26ee3c358c17009ca6dc40efc6864f2f522f844356d8",
+      "bytes": 151994,
+      "size": [
+        241,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-07-raw-keyed.png",
+      "sha256": "e7c7288dbb61d3e4701104ca00869bfcdfc8c7f970d19fc9d34a6de64a7c1a2b",
+      "bytes": 128788,
+      "size": [
+        180,
+        392
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-08-raw-keyed.png",
+      "sha256": "dec55dd4c4867dbfc09cd929ef5cfe91008110b9ec3aa252a5c327628626464d",
+      "bytes": 127952,
+      "size": [
+        177,
+        405
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-01-raw-keyed.png",
+      "sha256": "3896ccc64dc3887dda524d92769ef7372015ed4d7e09ae9e788788895709f9a1",
+      "bytes": 123742,
+      "size": [
+        148,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-02-raw-keyed.png",
+      "sha256": "031e3a1cadc432eb5940cd2654ecc44fecbd3d4162b72d935d4e7a880ea85bff",
+      "bytes": 133019,
+      "size": [
+        164,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-03-raw-keyed.png",
+      "sha256": "f6972f56df6e76d01add59ececb49f06aa3666f356edd24ca369cbfd810c2aa5",
+      "bytes": 156193,
+      "size": [
+        218,
+        434
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-04-raw-keyed.png",
+      "sha256": "501430e45e6194175b2b46c4077d4a8aab71783a1b0a9772cf526461c457efd2",
+      "bytes": 133788,
+      "size": [
+        167,
+        431
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-05-raw-keyed.png",
+      "sha256": "dfb3ae1c96c8afd0235fdf46f9522bc66aac606365de471f82cfee77ff9aabb5",
+      "bytes": 166367,
+      "size": [
+        245,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-06-raw-keyed.png",
+      "sha256": "578d7ab809b85cd37c2287cbd1a9c3d1af0373d64a90a88235c18b84f23def86",
+      "bytes": 165345,
+      "size": [
+        243,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-07-raw-keyed.png",
+      "sha256": "bc93105ed28b8afe9be46b01ec9c883f3cbed563eddbe517b27ae9f9ad8d3dd8",
+      "bytes": 131788,
+      "size": [
+        167,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-08-raw-keyed.png",
+      "sha256": "c307266aad8562aa4de75b059d8add6488c59ec27a852258a931dd4c0ede077d",
+      "bytes": 122952,
+      "size": [
+        147,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-01-raw-keyed.png",
+      "sha256": "970c07ec63ecec779ce3550d88f984f204ec0a347625ca03896c7b8e99ad3d23",
+      "bytes": 132987,
+      "size": [
+        201,
+        375
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-02-raw-keyed.png",
+      "sha256": "8bad75f8b0bc540e52e426fb00917ed9e23fce7b7ac87bb9e4b23c87e5044afa",
+      "bytes": 135476,
+      "size": [
+        223,
+        340
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-03-raw-keyed.png",
+      "sha256": "8c78c01ecd9ad7802d43be683d91ef0084861d10c79daf62ecd1b7f06fba4cb4",
+      "bytes": 113113,
+      "size": [
+        205,
+        289
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-04-raw-keyed.png",
+      "sha256": "520c81f6fd0b5ae97e38f467d2b3f7ca494ac218fa67e18d20191750a02e121b",
+      "bytes": 111524,
+      "size": [
+        247,
+        231
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-05-raw-keyed.png",
+      "sha256": "787b300ccabfa6fbfd1299b97ed65294e2879fca4582ca6d3294ba08bbe8ebd6",
+      "bytes": 103669,
+      "size": [
+        280,
+        196
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-06-raw-keyed.png",
+      "sha256": "4405d1c94255e25a13a48766bc0a6101ace655b966006a007737a95020238790",
+      "bytes": 98657,
+      "size": [
+        320,
+        158
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-07-raw-keyed.png",
+      "sha256": "7fc1e7a805ae9018df25a807d60e1c649c130fa1ca9d4de6e780b4793dd8683c",
+      "bytes": 80950,
+      "size": [
+        361,
+        111
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-08-raw-keyed.png",
+      "sha256": "b89847ba7ef8e04214968a6e22b747f383a3379f42ead02a5c2668f1de24f4d5",
+      "bytes": 73466,
+      "size": [
+        373,
+        97
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-01-raw-keyed.png",
+      "sha256": "87a9b5e9c62ba88cc3d1e5b3caa7cd630877f979607aab46767516537fc5d7f6",
+      "bytes": 109745,
+      "size": [
+        127,
+        442
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-02-raw-keyed.png",
+      "sha256": "2cbf3c0ea20e5fa72e7959b883638d9034cdbd93cd8991aea80e40a7990f0aa6",
+      "bytes": 112146,
+      "size": [
+        130,
+        442
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-03-raw-keyed.png",
+      "sha256": "6e5ec3478893c9aa8c4413f2276d61447b3ff74a4e026a50b395a6d82c230f41",
+      "bytes": 112478,
+      "size": [
+        131,
+        439
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-04-raw-keyed.png",
+      "sha256": "e46b249b9163b0b194487ae4f9634405cc674a10b00e68960ca04e52864b9b5d",
+      "bytes": 132627,
+      "size": [
+        175,
+        435
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-05-raw-keyed.png",
+      "sha256": "022d562c653bd0bb71aa9877cd424fcebceb5325754110d897ed6cd1abb28339",
+      "bytes": 111784,
+      "size": [
+        130,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-06-raw-keyed.png",
+      "sha256": "74305cd095f9e306fa2960f0502c30117487e34cffff4c57098ba28fa81912f7",
+      "bytes": 112115,
+      "size": [
+        132,
+        443
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-07-raw-keyed.png",
+      "sha256": "467a38f24c59895420475e77e85227a1518aacbe2e9757bc424a69096bdfa0b4",
+      "bytes": 110100,
+      "size": [
+        127,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-08-raw-keyed.png",
+      "sha256": "7b605289919352e8c7cbf14620b670b85e980963b833d05a38eb3ab434033d63",
+      "bytes": 110897,
+      "size": [
+        129,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-01-raw-keyed.png",
+      "sha256": "5d8ac51cc69f0521906b903a70c620d2bce6983505791dd8ded380a1ae93dec5",
+      "bytes": 161575,
+      "size": [
+        265,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-02-raw-keyed.png",
+      "sha256": "b30a25f4cb4cf3b4dbdf57703fe05ec2e07ca85f8d7f416028a43050c30b4c01",
+      "bytes": 118547,
+      "size": [
+        171,
+        363
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-03-raw-keyed.png",
+      "sha256": "ce1ede3e268cb34a220ea914fe524e5e2a0d3ed1c9b39c21a281e17fce3c5a44",
+      "bytes": 161500,
+      "size": [
+        262,
+        392
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-04-raw-keyed.png",
+      "sha256": "10f6d4347ed151a0c4e65c09b3a1647610e24720b300b059f243e3fd1562ba06",
+      "bytes": 154762,
+      "size": [
+        254,
+        388
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-05-raw-keyed.png",
+      "sha256": "ea14121598bddb155f2237b7db73d88d765c0fcdfa1380f06b1c5c8a6243d3b2",
+      "bytes": 141755,
+      "size": [
+        206,
+        386
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-06-raw-keyed.png",
+      "sha256": "f38244cfb694470ef2f2dc4b7eb61cbd121eb004645d542f242be74918360fe1",
+      "bytes": 115990,
+      "size": [
+        173,
+        359
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-07-raw-keyed.png",
+      "sha256": "9d5ca65da374cdf36f84384df0341fa7b532e8e8bea57fa95fa4f6dff664cfbf",
+      "bytes": 166851,
+      "size": [
+        292,
+        381
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-08-raw-keyed.png",
+      "sha256": "4ef091be9dad24995a0320c584c403a0e8719d615e955b1aedd323150f32705c",
+      "bytes": 154716,
+      "size": [
+        268,
+        376
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-border-keyed-source.png",
+      "sha256": "fbbc54ff531bc8ae4ab2ee421e809db6e892a2f9b0818db1f411a3a6f74af89c",
+      "bytes": 679860,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-shared-scale-recomposed.png",
+      "sha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "bytes": 528807,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-border-keyed-source.png",
+      "sha256": "f1ad248a480c6c8fd64176837084a94a71cf587f046ed56f8947c39f74f9720b",
+      "bytes": 699414,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-shared-scale-recomposed.png",
+      "sha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "bytes": 553115,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/idle.png",
+      "sha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "bytes": 528807,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/move.png",
+      "sha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "bytes": 553115,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-anchor-playback.gif",
+      "sha256": "87f5af46cff2af32f44908638568db2478152e91df1c5e317b05420f9031bb15",
+      "bytes": 273293,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-single-pistol-review.png",
+      "sha256": "5fa7199d52570ac87718d161f0ff58b817fc49e2d9e898e64684e96220adfc4a",
+      "bytes": 531476,
+      "size": [
+        1680,
+        860
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-technical-overlay.png",
+      "sha256": "7d6632760a5d5e0596fc8cb6df06b332881127f7728ac6b051cbfe01d2ee688e",
+      "bytes": 563901,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-anchor-playback.gif",
+      "sha256": "a9d877f0589e5ff813090eb83d7fba240ca5f948f24e42141020a842950aa0ec",
+      "bytes": 286099,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-technical-overlay.png",
+      "sha256": "3cbe3bf9aecccad47acade223062cbc3def15675772a0b5265c588c4cbb86ce6",
+      "bytes": 591335,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-anchor-playback.gif",
+      "sha256": "891a02b8d185c815b828a30e5f6d12b1738bf89c8c333e5d67e19e077899afd1",
+      "bytes": 241029,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-technical-overlay.png",
+      "sha256": "93107f430191c47af8c436ce2ac7c20756b60c6e85d60a80c57ba7affe75875f",
+      "bytes": 467188,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/identity-orientation-anchor-contact.png",
+      "sha256": "89e6712b9849353e15a05ff5d7ec72d70437130874dd72ff724187331f5ce097",
+      "bytes": 431244,
+      "size": [
+        1465,
+        875
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-anchor-playback.gif",
+      "sha256": "644b1a31d30844318e5bf41a60579bcdd778297e82b849f7ce6b926e4a6adce2",
+      "bytes": 263643,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-technical-overlay.png",
+      "sha256": "876ea229c001da99629a2fdd3dd94f3d96cff94cf0543926aa1f12747dc8c4a9",
+      "bytes": 526999,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-anchor-playback.gif",
+      "sha256": "c61cd0628953e18f08d42f73d4b12ff0ccf5759dfa657ed35f5e4ef087430308",
+      "bytes": 267749,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-technical-overlay.png",
+      "sha256": "533c5d8da6f966cde2994ddca76ad62ea8741e8f0fe8e6b19a825ba8910dcd94",
+      "bytes": 555153,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/rejected/attack-r1-duplicated-holstered-and-held-pistol.png",
+      "sha256": "b7ab47811d85a3af717383878c9999956c242a26b4bee0554ed9283cc872a616",
+      "bytes": 1774174,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    }
+  ],
+  "summary": {
+    "boards": 5,
+    "expectedPoses": 40,
+    "populatedPoses": 40,
+    "clearTargetCellPoses": 40,
+    "supportBottomChecks": 40,
+    "landmarksInsideForeground": 40,
+    "distinctCellPixelHashes": 40,
+    "exactDuplicateCellHashes": [],
+    "rightFacingPoses": 40,
+    "identityReviewedPoses": 40,
+    "attackSinglePistolPoses": 8,
+    "uniformOpaqueExactMagentaBoards": 5,
+    "technicalSourceDefectsOpen": 0,
+    "artAccepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false
+  },
+  "processor": {
+    "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/process_atarax_controller_profile.py",
+    "sha256": "417a9f520ba2db499fe8036a118250554fbdd92d008d25f2ee9896435c16a1c5",
+    "bytes": 65181
+  },
+  "scope": {
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false,
+    "normalizationRun": false,
+    "globalQueueEdited": false,
+    "globalStateEdited": false,
+    "globalReferenceEdited": false,
+    "globalScaleEdited": false,
+    "globalAnchorEdited": false,
+    "metadataEdited": false,
+    "runtimeManifestEdited": false,
+    "gitTouched": false
+  }
+}

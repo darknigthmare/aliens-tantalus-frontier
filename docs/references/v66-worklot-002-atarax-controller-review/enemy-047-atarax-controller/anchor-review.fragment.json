@@ -1,0 +1,1356 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "target-nominal-cell-local",
+  "profiles": {
+    "enemy-047-atarax-controller": {
+      "status": "reviewed-technical-candidate-art-not-accepted",
+      "reviewer": "Codex /root/process_profile_047",
+      "reviewedAt": "2026-09-01",
+      "method": "Body-mass landmark in the middle-height band, snapped to actual foreground, then projected to the lower-exclusive physical support bound. One shared scale and cell-centred root are used for all 40 poses.",
+      "sharedPhysicalScale": 0.847457627,
+      "clips": {
+        "idle": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              166,
+              45,
+              274,
+              420
+            ],
+            "landmark": [
+              222,
+              221
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 166,
+              "top": 45,
+              "right": 170,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              137,
+              51,
+              264,
+              493
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              163,
+              45,
+              273,
+              420
+            ],
+            "landmark": [
+              221,
+              221
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 163,
+              "top": 45,
+              "right": 170,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              503,
+              51,
+              633,
+              493
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              163,
+              48,
+              274,
+              420
+            ],
+            "landmark": [
+              221,
+              223
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 163,
+              "top": 48,
+              "right": 169,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              872,
+              54,
+              1003,
+              493
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              160,
+              51,
+              308,
+              420
+            ],
+            "landmark": [
+              222,
+              214
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 160,
+              "top": 51,
+              "right": 136,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1232,
+              59,
+              1407,
+              494
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              165,
+              43,
+              275,
+              419
+            ],
+            "landmark": [
+              222,
+              220
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 165,
+              "top": 43,
+              "right": 169,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              131,
+              528,
+              261,
+              972
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              164,
+              44,
+              276,
+              419
+            ],
+            "landmark": [
+              221,
+              221
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 164,
+              "top": 44,
+              "right": 167,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              500,
+              529,
+              632,
+              972
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              165,
+              43,
+              273,
+              419
+            ],
+            "landmark": [
+              221,
+              220
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 165,
+              "top": 43,
+              "right": 170,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              875,
+              528,
+              1002,
+              972
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              165,
+              43,
+              274,
+              419
+            ],
+            "landmark": [
+              222,
+              220
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 165,
+              "top": 43,
+              "right": 170,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1240,
+              528,
+              1369,
+              972
+            ],
+            "rawCrossesNominalCellBoundary": false
+          }
+        ],
+        "move": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              95,
+              86,
+              320,
+              420
+            ],
+            "landmark": [
+              222,
+              248
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 95,
+              "top": 86,
+              "right": 124,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              48,
+              74,
+              313,
+              468
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              151,
+              112,
+              296,
+              420
+            ],
+            "landmark": [
+              221,
+              260
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 151,
+              "top": 112,
+              "right": 147,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              487,
+              105,
+              658,
+              468
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              95,
+              88,
+              317,
+              420
+            ],
+            "landmark": [
+              221,
+              246
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 95,
+              "top": 88,
+              "right": 126,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              804,
+              76,
+              1066,
+              468
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              102,
+              91,
+              317,
+              420
+            ],
+            "landmark": [
+              222,
+              255
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 102,
+              "top": 91,
+              "right": 127,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1192,
+              81,
+              1446,
+              469
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              118,
+              92,
+              293,
+              419
+            ],
+            "landmark": [
+              222,
+              255
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 118,
+              "top": 92,
+              "right": 151,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              63,
+              569,
+              269,
+              955
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              146,
+              115,
+              293,
+              419
+            ],
+            "landmark": [
+              221,
+              269
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 146,
+              "top": 115,
+              "right": 150,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              480,
+              596,
+              653,
+              955
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              95,
+              96,
+              342,
+              419
+            ],
+            "landmark": [
+              221,
+              260
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 95,
+              "top": 96,
+              "right": 101,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              785,
+              570,
+              1077,
+              951
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              105,
+              100,
+              332,
+              419
+            ],
+            "landmark": [
+              222,
+              270
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 105,
+              "top": 100,
+              "right": 112,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1184,
+              580,
+              1452,
+              956
+            ],
+            "rawCrossesNominalCellBoundary": false
+          }
+        ],
+        "attack": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              153,
+              75,
+              306,
+              420
+            ],
+            "landmark": [
+              222,
+              240
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 153,
+              "top": 75,
+              "right": 138,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              97,
+              70,
+              278,
+              477
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              157,
+              86,
+              306,
+              420
+            ],
+            "landmark": [
+              221,
+              250
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 157,
+              "top": 86,
+              "right": 137,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              458,
+              85,
+              634,
+              479
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              156,
+              85,
+              354,
+              420
+            ],
+            "landmark": [
+              221,
+              243
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 156,
+              "top": 85,
+              "right": 89,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              847,
+              87,
+              1081,
+              482
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              157,
+              85,
+              369,
+              420
+            ],
+            "landmark": [
+              222,
+              246
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 157,
+              "top": 85,
+              "right": 75,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1196,
+              86,
+              1446,
+              481
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              158,
+              83,
+              395,
+              419
+            ],
+            "landmark": [
+              222,
+              247
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 158,
+              "top": 83,
+              "right": 49,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              101,
+              550,
+              381,
+              946
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              157,
+              85,
+              361,
+              419
+            ],
+            "landmark": [
+              221,
+              249
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 157,
+              "top": 85,
+              "right": 82,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              479,
+              552,
+              720,
+              946
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              157,
+              87,
+              310,
+              419
+            ],
+            "landmark": [
+              221,
+              245
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 157,
+              "top": 87,
+              "right": 133,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              848,
+              556,
+              1028,
+              948
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              153,
+              76,
+              303,
+              419
+            ],
+            "landmark": [
+              222,
+              240
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 153,
+              "top": 76,
+              "right": 141,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1190,
+              543,
+              1367,
+              948
+            ],
+            "rawCrossesNominalCellBoundary": false
+          }
+        ],
+        "death": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              137,
+              102,
+              307,
+              420
+            ],
+            "landmark": [
+              222,
+              250
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 9,
+            "marginsPx": {
+              "left": 137,
+              "top": 102,
+              "right": 137,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              90,
+              104,
+              291,
+              479
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              118,
+              132,
+              307,
+              420
+            ],
+            "landmark": [
+              221,
+              269
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 10,
+            "marginsPx": {
+              "left": 118,
+              "top": 132,
+              "right": 136,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              454,
+              139,
+              677,
+              479
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              147,
+              175,
+              321,
+              420
+            ],
+            "landmark": [
+              221,
+              303
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 11,
+            "marginsPx": {
+              "left": 147,
+              "top": 175,
+              "right": 122,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              837,
+              195,
+              1042,
+              484
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              107,
+              224,
+              316,
+              420
+            ],
+            "landmark": [
+              222,
+              323
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 12,
+            "marginsPx": {
+              "left": 107,
+              "top": 224,
+              "right": 128,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1189,
+              253,
+              1436,
+              484
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              75,
+              253,
+              312,
+              419
+            ],
+            "landmark": [
+              222,
+              338
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 13,
+            "marginsPx": {
+              "left": 75,
+              "top": 253,
+              "right": 132,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              28,
+              675,
+              308,
+              871
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              57,
+              285,
+              328,
+              419
+            ],
+            "landmark": [
+              221,
+              355
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 57,
+              "top": 285,
+              "right": 115,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              369,
+              715,
+              689,
+              873
+            ],
+            "rawCrossesNominalCellBoundary": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              60,
+              325,
+              366,
+              419
+            ],
+            "landmark": [
+              221,
+              375
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 60,
+              "top": 325,
+              "right": 77,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              736,
+              768,
+              1097,
+              879
+            ],
+            "rawCrossesNominalCellBoundary": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              64,
+              337,
+              380,
+              419
+            ],
+            "landmark": [
+              222,
+              380
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 64,
+              "top": 337,
+              "right": 64,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1143,
+              779,
+              1516,
+              876
+            ],
+            "rawCrossesNominalCellBoundary": true
+          }
+        ],
+        "command": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              158,
+              56,
+              283,
+              420
+            ],
+            "landmark": [
+              222,
+              231
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 158,
+              "top": 56,
+              "right": 161,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              120,
+              48,
+              268,
+              478
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              158,
+              56,
+              297,
+              420
+            ],
+            "landmark": [
+              221,
+              228
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 158,
+              "top": 56,
+              "right": 146,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              478,
+              48,
+              642,
+              478
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              152,
+              52,
+              337,
+              420
+            ],
+            "landmark": [
+              221,
+              216
+            ],
+            "anchor": [
+              221,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 152,
+              "top": 52,
+              "right": 106,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              848,
+              44,
+              1066,
+              478
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              156,
+              55,
+              298,
+              420
+            ],
+            "landmark": [
+              222,
+              223
+            ],
+            "anchor": [
+              222,
+              420
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 156,
+              "top": 55,
+              "right": 146,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1208,
+              47,
+              1375,
+              478
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              158,
+              55,
+              366,
+              419
+            ],
+            "landmark": [
+              222,
+              226
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 158,
+              "top": 55,
+              "right": 78,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              111,
+              535,
+              356,
+              965
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              157,
+              55,
+              363,
+              419
+            ],
+            "landmark": [
+              221,
+              227
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 157,
+              "top": 55,
+              "right": 80,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              471,
+              535,
+              714,
+              965
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              156,
+              55,
+              298,
+              419
+            ],
+            "landmark": [
+              221,
+              223
+            ],
+            "anchor": [
+              221,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 156,
+              "top": 55,
+              "right": 145,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              855,
+              535,
+              1022,
+              965
+            ],
+            "rawCrossesNominalCellBoundary": false
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              158,
+              55,
+              283,
+              419
+            ],
+            "landmark": [
+              222,
+              230
+            ],
+            "anchor": [
+              222,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 158,
+              "top": 55,
+              "right": 161,
+              "bottom": 24
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true,
+            "rawSourceBoundsGlobal": [
+              1224,
+              535,
+              1371,
+              965
+            ],
+            "rawCrossesNominalCellBoundary": false
+          }
+        ]
+      },
+      "validation": {
+        "requiredAnchors": 40,
+        "reviewedAnchors": 40,
+        "landmarksInsideForeground": 40,
+        "supportBottomChecks": 40,
+        "clearNominalCellPoses": 40
+      },
+      "accepted": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

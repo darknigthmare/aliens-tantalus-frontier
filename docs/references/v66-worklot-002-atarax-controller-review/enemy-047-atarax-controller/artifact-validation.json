@@ -1,0 +1,985 @@
+{
+  "schema": 1,
+  "profileId": "enemy-047-atarax-controller",
+  "validatedFiles": 91,
+  "files": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/attack.png",
+      "sha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "bytes": 561861,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/command.png",
+      "sha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "bytes": 591925,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/death.png",
+      "sha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "bytes": 465961,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-border-keyed-source.png",
+      "sha256": "9ad477e47915a35eed38d6c87dc0b06a04703b02f4c9e04f47e1d281575549a8",
+      "bytes": 707834,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/attack-r2-shared-scale-recomposed.png",
+      "sha256": "80c9e8dba0f82fdd856937cefb693f921ee7841f7cd64460a5abf229b7fd335f",
+      "bytes": 561861,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-border-keyed-source.png",
+      "sha256": "9b6afcdbb2bc5478bfbcd7f07b702b5ab81a35d29aceda5926391db2e195efa0",
+      "bytes": 754992,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/command-r1-shared-scale-recomposed.png",
+      "sha256": "bf904c11689faa9740c3ef0016c09059a753e3cf8e39d4baeb2bf7041f1858e5",
+      "bytes": 591925,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-border-keyed-source.png",
+      "sha256": "adde02bad5548d314d92d9676e7542bb17e04b60058afa34e69030a90cf141d0",
+      "bytes": 589719,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/death-r1-shared-scale-recomposed.png",
+      "sha256": "197e622418bf493933d878072b285c3db4a9c46dd360f9a7c612e7c981a2aaec",
+      "bytes": 465961,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-01-raw-keyed.png",
+      "sha256": "047acfc4084b0a791aa4eec647bc1bb9003aa2afc480dedd80a2c8d0f7d8fafe",
+      "bytes": 130363,
+      "size": [
+        181,
+        407
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-02-raw-keyed.png",
+      "sha256": "43ddad47c5ae439ffb5e29b0d11fbc61f4955154802d3924e6e04ed747fe57f7",
+      "bytes": 126693,
+      "size": [
+        176,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-03-raw-keyed.png",
+      "sha256": "d981dcd9da999bbb1a2ea0b173d7b657d951b2e394076d80cff42734e0e74628",
+      "bytes": 150702,
+      "size": [
+        234,
+        395
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-04-raw-keyed.png",
+      "sha256": "141093fddd1eeddc18f6c0915e3759dc36e5aad68537067529a20ac79e9c0180",
+      "bytes": 155761,
+      "size": [
+        250,
+        395
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-05-raw-keyed.png",
+      "sha256": "9f2cb7b5b8d29d79df5b42a169fba1c0b13ae06c9a6c16c0007960580e81856d",
+      "bytes": 167245,
+      "size": [
+        280,
+        396
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-06-raw-keyed.png",
+      "sha256": "f8d8d141824824095c0d26ee3c358c17009ca6dc40efc6864f2f522f844356d8",
+      "bytes": 151994,
+      "size": [
+        241,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-07-raw-keyed.png",
+      "sha256": "e7c7288dbb61d3e4701104ca00869bfcdfc8c7f970d19fc9d34a6de64a7c1a2b",
+      "bytes": 128788,
+      "size": [
+        180,
+        392
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/attack/frame-08-raw-keyed.png",
+      "sha256": "dec55dd4c4867dbfc09cd929ef5cfe91008110b9ec3aa252a5c327628626464d",
+      "bytes": 127952,
+      "size": [
+        177,
+        405
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-01-raw-keyed.png",
+      "sha256": "3896ccc64dc3887dda524d92769ef7372015ed4d7e09ae9e788788895709f9a1",
+      "bytes": 123742,
+      "size": [
+        148,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-02-raw-keyed.png",
+      "sha256": "031e3a1cadc432eb5940cd2654ecc44fecbd3d4162b72d935d4e7a880ea85bff",
+      "bytes": 133019,
+      "size": [
+        164,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-03-raw-keyed.png",
+      "sha256": "f6972f56df6e76d01add59ececb49f06aa3666f356edd24ca369cbfd810c2aa5",
+      "bytes": 156193,
+      "size": [
+        218,
+        434
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-04-raw-keyed.png",
+      "sha256": "501430e45e6194175b2b46c4077d4a8aab71783a1b0a9772cf526461c457efd2",
+      "bytes": 133788,
+      "size": [
+        167,
+        431
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-05-raw-keyed.png",
+      "sha256": "dfb3ae1c96c8afd0235fdf46f9522bc66aac606365de471f82cfee77ff9aabb5",
+      "bytes": 166367,
+      "size": [
+        245,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-06-raw-keyed.png",
+      "sha256": "578d7ab809b85cd37c2287cbd1a9c3d1af0373d64a90a88235c18b84f23def86",
+      "bytes": 165345,
+      "size": [
+        243,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-07-raw-keyed.png",
+      "sha256": "bc93105ed28b8afe9be46b01ec9c883f3cbed563eddbe517b27ae9f9ad8d3dd8",
+      "bytes": 131788,
+      "size": [
+        167,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/command/frame-08-raw-keyed.png",
+      "sha256": "c307266aad8562aa4de75b059d8add6488c59ec27a852258a931dd4c0ede077d",
+      "bytes": 122952,
+      "size": [
+        147,
+        430
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-01-raw-keyed.png",
+      "sha256": "970c07ec63ecec779ce3550d88f984f204ec0a347625ca03896c7b8e99ad3d23",
+      "bytes": 132987,
+      "size": [
+        201,
+        375
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-02-raw-keyed.png",
+      "sha256": "8bad75f8b0bc540e52e426fb00917ed9e23fce7b7ac87bb9e4b23c87e5044afa",
+      "bytes": 135476,
+      "size": [
+        223,
+        340
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-03-raw-keyed.png",
+      "sha256": "8c78c01ecd9ad7802d43be683d91ef0084861d10c79daf62ecd1b7f06fba4cb4",
+      "bytes": 113113,
+      "size": [
+        205,
+        289
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-04-raw-keyed.png",
+      "sha256": "520c81f6fd0b5ae97e38f467d2b3f7ca494ac218fa67e18d20191750a02e121b",
+      "bytes": 111524,
+      "size": [
+        247,
+        231
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-05-raw-keyed.png",
+      "sha256": "787b300ccabfa6fbfd1299b97ed65294e2879fca4582ca6d3294ba08bbe8ebd6",
+      "bytes": 103669,
+      "size": [
+        280,
+        196
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-06-raw-keyed.png",
+      "sha256": "4405d1c94255e25a13a48766bc0a6101ace655b966006a007737a95020238790",
+      "bytes": 98657,
+      "size": [
+        320,
+        158
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-07-raw-keyed.png",
+      "sha256": "7fc1e7a805ae9018df25a807d60e1c649c130fa1ca9d4de6e780b4793dd8683c",
+      "bytes": 80950,
+      "size": [
+        361,
+        111
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/death/frame-08-raw-keyed.png",
+      "sha256": "b89847ba7ef8e04214968a6e22b747f383a3379f42ead02a5c2668f1de24f4d5",
+      "bytes": 73466,
+      "size": [
+        373,
+        97
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-01-raw-keyed.png",
+      "sha256": "87a9b5e9c62ba88cc3d1e5b3caa7cd630877f979607aab46767516537fc5d7f6",
+      "bytes": 109745,
+      "size": [
+        127,
+        442
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-02-raw-keyed.png",
+      "sha256": "2cbf3c0ea20e5fa72e7959b883638d9034cdbd93cd8991aea80e40a7990f0aa6",
+      "bytes": 112146,
+      "size": [
+        130,
+        442
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-03-raw-keyed.png",
+      "sha256": "6e5ec3478893c9aa8c4413f2276d61447b3ff74a4e026a50b395a6d82c230f41",
+      "bytes": 112478,
+      "size": [
+        131,
+        439
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-04-raw-keyed.png",
+      "sha256": "e46b249b9163b0b194487ae4f9634405cc674a10b00e68960ca04e52864b9b5d",
+      "bytes": 132627,
+      "size": [
+        175,
+        435
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-05-raw-keyed.png",
+      "sha256": "022d562c653bd0bb71aa9877cd424fcebceb5325754110d897ed6cd1abb28339",
+      "bytes": 111784,
+      "size": [
+        130,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-06-raw-keyed.png",
+      "sha256": "74305cd095f9e306fa2960f0502c30117487e34cffff4c57098ba28fa81912f7",
+      "bytes": 112115,
+      "size": [
+        132,
+        443
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-07-raw-keyed.png",
+      "sha256": "467a38f24c59895420475e77e85227a1518aacbe2e9757bc424a69096bdfa0b4",
+      "bytes": 110100,
+      "size": [
+        127,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/idle/frame-08-raw-keyed.png",
+      "sha256": "7b605289919352e8c7cbf14620b670b85e980963b833d05a38eb3ab434033d63",
+      "bytes": 110897,
+      "size": [
+        129,
+        444
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-01-raw-keyed.png",
+      "sha256": "5d8ac51cc69f0521906b903a70c620d2bce6983505791dd8ded380a1ae93dec5",
+      "bytes": 161575,
+      "size": [
+        265,
+        394
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-02-raw-keyed.png",
+      "sha256": "b30a25f4cb4cf3b4dbdf57703fe05ec2e07ca85f8d7f416028a43050c30b4c01",
+      "bytes": 118547,
+      "size": [
+        171,
+        363
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-03-raw-keyed.png",
+      "sha256": "ce1ede3e268cb34a220ea914fe524e5e2a0d3ed1c9b39c21a281e17fce3c5a44",
+      "bytes": 161500,
+      "size": [
+        262,
+        392
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-04-raw-keyed.png",
+      "sha256": "10f6d4347ed151a0c4e65c09b3a1647610e24720b300b059f243e3fd1562ba06",
+      "bytes": 154762,
+      "size": [
+        254,
+        388
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-05-raw-keyed.png",
+      "sha256": "ea14121598bddb155f2237b7db73d88d765c0fcdfa1380f06b1c5c8a6243d3b2",
+      "bytes": 141755,
+      "size": [
+        206,
+        386
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-06-raw-keyed.png",
+      "sha256": "f38244cfb694470ef2f2dc4b7eb61cbd121eb004645d542f242be74918360fe1",
+      "bytes": 115990,
+      "size": [
+        173,
+        359
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-07-raw-keyed.png",
+      "sha256": "9d5ca65da374cdf36f84384df0341fa7b532e8e8bea57fa95fa4f6dff664cfbf",
+      "bytes": 166851,
+      "size": [
+        292,
+        381
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/extracted/move/frame-08-raw-keyed.png",
+      "sha256": "4ef091be9dad24995a0320c584c403a0e8719d615e955b1aedd323150f32705c",
+      "bytes": 154716,
+      "size": [
+        268,
+        376
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-border-keyed-source.png",
+      "sha256": "fbbc54ff531bc8ae4ab2ee421e809db6e892a2f9b0818db1f411a3a6f74af89c",
+      "bytes": 679860,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/idle-r1-shared-scale-recomposed.png",
+      "sha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "bytes": 528807,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-border-keyed-source.png",
+      "sha256": "f1ad248a480c6c8fd64176837084a94a71cf587f046ed56f8947c39f74f9720b",
+      "bytes": 699414,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/derived/move-r1-shared-scale-recomposed.png",
+      "sha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "bytes": 553115,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/idle.png",
+      "sha256": "a64529306ec336c8db5dac18f13190906e0e95cbe5cde1b450365cc8b4c1cd54",
+      "bytes": 528807,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/move.png",
+      "sha256": "73c54ee535a86751fd2fbee2723f7d9b44146aff4970252fd4e953cd8222d67b",
+      "bytes": 553115,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-anchor-playback.gif",
+      "sha256": "87f5af46cff2af32f44908638568db2478152e91df1c5e317b05420f9031bb15",
+      "bytes": 273293,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-single-pistol-review.png",
+      "sha256": "5fa7199d52570ac87718d161f0ff58b817fc49e2d9e898e64684e96220adfc4a",
+      "bytes": 531476,
+      "size": [
+        1680,
+        860
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/attack-technical-overlay.png",
+      "sha256": "7d6632760a5d5e0596fc8cb6df06b332881127f7728ac6b051cbfe01d2ee688e",
+      "bytes": 563901,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-anchor-playback.gif",
+      "sha256": "a9d877f0589e5ff813090eb83d7fba240ca5f948f24e42141020a842950aa0ec",
+      "bytes": 286099,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/command-technical-overlay.png",
+      "sha256": "3cbe3bf9aecccad47acade223062cbc3def15675772a0b5265c588c4cbb86ce6",
+      "bytes": 591335,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-anchor-playback.gif",
+      "sha256": "891a02b8d185c815b828a30e5f6d12b1738bf89c8c333e5d67e19e077899afd1",
+      "bytes": 241029,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/death-technical-overlay.png",
+      "sha256": "93107f430191c47af8c436ce2ac7c20756b60c6e85d60a80c57ba7affe75875f",
+      "bytes": 467188,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/identity-orientation-anchor-contact.png",
+      "sha256": "89e6712b9849353e15a05ff5d7ec72d70437130874dd72ff724187331f5ce097",
+      "bytes": 431244,
+      "size": [
+        1465,
+        875
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-anchor-playback.gif",
+      "sha256": "644b1a31d30844318e5bf41a60579bcdd778297e82b849f7ce6b926e4a6adce2",
+      "bytes": 263643,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/idle-technical-overlay.png",
+      "sha256": "876ea229c001da99629a2fdd3dd94f3d96cff94cf0543926aa1f12747dc8c4a9",
+      "bytes": 526999,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-anchor-playback.gif",
+      "sha256": "c61cd0628953e18f08d42f73d4b12ff0ccf5759dfa657ed35f5e4ef087430308",
+      "bytes": 267749,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/qa/move-technical-overlay.png",
+      "sha256": "533c5d8da6f966cde2994ddca76ad62ea8741e8f0fe8e6b19a825ba8910dcd94",
+      "bytes": 555153,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r1-imagegen.png",
+      "sha256": "b7ab47811d85a3af717383878c9999956c242a26b4bee0554ed9283cc872a616",
+      "bytes": 1774174,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/attack-r2-imagegen.png",
+      "sha256": "c08234f42d8cac2f3588a951d5363dbf47c30df7daea4848a8b97f4eb385ce91",
+      "bytes": 1768577,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/command-r1-imagegen.png",
+      "sha256": "98ee60f7547e145976802cc36c8a8fa6961c6c59dd0348ee3521f0260ab51559",
+      "bytes": 1795430,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/death-r1-imagegen.png",
+      "sha256": "a9e9dcac76939c30d2eda075e6f9c04913b71e12754ce9462bdba4c3eb755809",
+      "bytes": 1700239,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/idle-r1-imagegen.png",
+      "sha256": "8e915539cefcccd7a82d0f969fc51dea9c51489cfa3f5204e4c686a051d73c4d",
+      "bytes": 1725934,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/raw/move-r1-imagegen.png",
+      "sha256": "a8e0e790048e5665865ded74acf9c0ff9e83eee9d68bf01f3945692a473502fa",
+      "bytes": 1789477,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-047-atarax-controller/rejected/attack-r1-duplicated-holstered-and-held-pistol.png",
+      "sha256": "b7ab47811d85a3af717383878c9999956c242a26b4bee0554ed9283cc872a616",
+      "bytes": 1774174,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+      "sha256": "9b95a470e411104ac2fd7688687cda4613fd70eadcd9b25d69549f5413495ee5",
+      "bytes": 6521301
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/anchor-review.fragment.json",
+      "sha256": "4a10e8fbdc80dba29068c3b476a3f49e70624b4e3c00e0fb7658283da321e2bf",
+      "bytes": 33639
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/events/attack.production-event.json",
+      "sha256": "cc24ab980e010876c5f0f1e6dc38942e91b2855249f745999ac257bcdcefec28",
+      "bytes": 6259
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/events/command.production-event.json",
+      "sha256": "4a74b8f798254d88692d9e96700a8d1287316321103fe78f69b7f64fab180010",
+      "bytes": 5627
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/events/death.production-event.json",
+      "sha256": "2e3440dc01a2c3e487b57f1f42d00de9c046cb111d140213123427038057f47c",
+      "bytes": 5649
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/events/idle.production-event.json",
+      "sha256": "c4d197a0c5e19f9be735c811956395100a56e5d3255ae798a63561d2e7bb2c01",
+      "bytes": 5602
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/events/move.production-event.json",
+      "sha256": "cc00c89bec751b6e9e823ca154192b90cbfefcd3aa53e8553a6307d0424c7dea",
+      "bytes": 5637
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/generation-receipts.json",
+      "sha256": "ba2c3ee1e3dbe003ea82af87e49e344335e9955797d70325ba84dca32d752982",
+      "bytes": 22873
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/process_atarax_controller_profile.py",
+      "sha256": "417a9f520ba2db499fe8036a118250554fbdd92d008d25f2ee9896435c16a1c5",
+      "bytes": 65181
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/production-event-validation.json",
+      "sha256": "a9fc7e9e031c7df1ab723ed2b10f8b70ca8f513f601e8e24361e9a2a4a966d61",
+      "bytes": 4166
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/attack.txt",
+      "sha256": "7c7d8209d95b575b2f55b967e06a39ed5494853f1126caeff88804cb727d723c",
+      "bytes": 2096
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/command.txt",
+      "sha256": "f6fd6fb8d485f6f3e773f33afdb2d5b7b728534ba50c401872190da8e580034a",
+      "bytes": 1977
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/death.txt",
+      "sha256": "1e17998a885cbbb06ec60d91be655d9cc03fd983fde13b2ea3f33f58023323b3",
+      "bytes": 2015
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/idle.txt",
+      "sha256": "0ca4321c1f3e8765162bb90042b5e7c2574fbf842f2cbb3538dc71d7aa2423b3",
+      "bytes": 1976
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/prompts/move.txt",
+      "sha256": "95102f9eefc2462df14c1c0d7018ec20f85243879dbd2dc8d67ce1290c0d5f45",
+      "bytes": 2011
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/scale-review.fragment.json",
+      "sha256": "cd54f5374578573ac13ed7e37e40be1f567d77abcd4e9b2e8d8163392d6de155",
+      "bytes": 5902
+    },
+    {
+      "path": "docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json",
+      "sha256": "544fc8b11c5e49ead7ac2c29bb1c279af3b3ab1f50272bd4229fc925fcb57cd8",
+      "bytes": 152956
+    }
+  ],
+  "allPathsExist": true,
+  "manifestSelfExcluded": "Self-hash is excluded to avoid an impossible recursive digest; hash this file externally for final verification.",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}
