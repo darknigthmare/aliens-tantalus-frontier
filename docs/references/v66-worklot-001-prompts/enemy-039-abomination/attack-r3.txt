@@ -1,0 +1,17 @@
+Create a NEW corrected replacement sprite-sheet for the original fan-made enemy "Abomination".
+
+REFERENCE ROLES:
+- Image 1 is the authoritative identity, whole-body scale, silhouette mass, and especially cranial-size anchor. Preserve its small recessed skull's chord, depth, and volume in EVERY frame.
+- Image 2 is choreography reference only for the attack sequence. Do not inherit its shrinking head or any visual-effects lines.
+
+OUTPUT CONTRACT:
+- Exact 2:1 sprite-sheet, four equal columns by two equal rows, exactly eight chronological full-body poses read left-to-right on the top row then left-to-right on the bottom row.
+- Strict orthographic side view facing RIGHT in all eight poses. No mirroring, no perspective turn, no camera zoom, no foreshortening of the head.
+- Same creature and constant body scale in every cell: same small recessed skull size as Image 1, same huge shoulder mass, torso volume, limb thickness, and same diameter of both terminal fist growths.
+- Exactly two arms, two terminal fist growths, two legs, and no tail. Maintain readable separated anatomy.
+- Attack sequence: braced stance; rear weight shift; both growths draw up; peak double-arm windup; acceleration; two-growth impact; compressed follow-through; recovery toward the starting stance.
+- No speed lines, shockwave, impact flash, particles, VFX, text, logo, watermark, floor, cast shadow, grid, or cell labels.
+- Flat fully opaque pure #FF00FF chroma background only, including every gutter. Generous empty gutters around every pose; nothing touches a cell boundary.
+- Crisp high-detail painted sci-fi game sprite rendering, stable lighting and palette, original fan-made project design. Do not copy or reproduce an official bitmap.
+
+The final image itself must contain only the eight poses on the chroma background.

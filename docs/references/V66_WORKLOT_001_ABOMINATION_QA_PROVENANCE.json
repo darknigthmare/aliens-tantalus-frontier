@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "batchId": "batch-003",
+  "profileId": "enemy-039-abomination",
+  "reviewedAt": "2026-09-01",
+  "actor": "Codex /root/generate_profile_039",
+  "kind": "profile-local-technical-review-provenance",
+  "generator": {
+    "path": "scripts/audit-v66-enemy039-abomination.py",
+    "sha256": "8450d620aacf7cee16e9f4dadd611fe722de2aa697a3c7cfc6e15e4b7393a22e"
+  },
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+      "sha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png",
+      "sha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+      "sha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+      "sha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44",
+      "size": [
+        1774,
+        887
+      ]
+    }
+  ],
+  "upstreamProductionReceipts": [
+    {
+      "path": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/idle.production-event.json",
+      "sha256": "5f04a0d2e03f4c9fd773110842191e75ff5aea4a54c339c01a1b8425d188f4d4"
+    },
+    {
+      "path": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/move.production-event.json",
+      "sha256": "22aed4ba52d6d6f20c3bae10ce5212d6579f2de4ced6cecba862efd55635807e"
+    },
+    {
+      "path": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack.production-event.json",
+      "sha256": "6490451850b81ef9dfea2a9ee94b4719fbe794073fb3f9e47fb60d4156c876c8"
+    },
+    {
+      "path": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/death.production-event.json",
+      "sha256": "3d9dd9306b28afea178530b48af0b90ce3d1ecd1d1ad73ad2f6857be8770fc72"
+    }
+  ],
+  "derivedDocuments": [
+    {
+      "path": "docs/references/V66_WORKLOT_001_ABOMINATION_ANCHOR_REVIEW.json",
+      "sha256": "9872e77d5f6454288e711b4d4a9794cbfe291e6817fa5164d9f4a278d8c0b9b7",
+      "bytes": 26992
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_001_ABOMINATION_SCALE_REVIEW.json",
+      "sha256": "1d833e80b5e915c97eb85fa5f721bfa7c6a73f2920b90a139321d1eabde264c9",
+      "bytes": 13473
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_001_ABOMINATION_TECHNICAL_QA.json",
+      "sha256": "84d8be5f3a5d67513c1f36c8ecef32c75c6f135443cd4a2adeed0be84f28edd9",
+      "bytes": 51505
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_001_ABOMINATION_TECHNICAL_AUDIT.md",
+      "sha256": "8faf12ba8297720ae152d1e1c97865d40b7b6571b82314d8a836e4b0fb29de8d",
+      "bytes": 4330
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_001_ABOMINATION_FRAGMENT_VALIDATION.json",
+      "sha256": "8f138803da1bda60d327a063c29f251d22c3b4c14e1c043b9613c3300e012fac",
+      "bytes": 3962
+    }
+  ],
+  "diagnosticEvidence": [
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+      "sha256": "1d4aa0b6e47db1c80c57c7662e949323ffa175db8b808c34849359d2b8a4b895",
+      "bytes": 556274
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+      "sha256": "d9c0d5a61a25a690ec869ce91756ec5e672a1ae13d8d1fc1531f8e6e60a2e431",
+      "bytes": 616448
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+      "sha256": "a042c149ae9cb9b681f5930f33fcc5b1572113ca53870b3bf1dd2c0f4625c744",
+      "bytes": 538921
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+      "sha256": "825e17acb203e22367c920c36a7dcf87c36930d0ea9b2b14eb9bd257cf22eb4a",
+      "bytes": 461436
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/fist-growth-scale.jpg",
+      "sha256": "c79b1cdbf0cdd935aa8588f8321f2e1b2a09064cd673a14db804f38652cb5989",
+      "bytes": 386358
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/cranial-crosscheck.jpg",
+      "sha256": "d3d4166fee64d1f6175e4cef00c38c47cc4957d64d41c3074bb3f15599148027",
+      "bytes": 263870
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/orientation-bounds.jpg",
+      "sha256": "d70fad8018c8959158edacb6840565d8de80c0c6770a5f324ceca21af304acfd",
+      "bytes": 670080
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/loop-review-idle.gif",
+      "sha256": "7349f43673971301cba18772acd3a86a3cb665a6eca60b3a190505b5b37ba322",
+      "bytes": 450836
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/loop-review-move.gif",
+      "sha256": "3325c97cf64f2f97bf631019b90b38d573c0d737a1868e915fdfb7d7424cb1b4",
+      "bytes": 523524
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/sequence-review-attack.gif",
+      "sha256": "e5046c8a986fc99804e1bd3c9d9012085b46760d10ab75c447f748b7dc7fa481",
+      "bytes": 417419
+    },
+    {
+      "path": "docs/references/v66-worklot-001-abomination-qa/sequence-review-death.gif",
+      "sha256": "5bc0d70f5c0f84dd82d516b95932947ae3ce24ddd7ff15b12bdf1f9c2513e997",
+      "bytes": 340732
+    }
+  ],
+  "derivation": {
+    "sourcePixelsModified": 0,
+    "globalDocumentsModified": 0,
+    "normalizationRun": false,
+    "artAccepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false,
+    "note": "This provenance intentionally excludes its own hash. All listed derived evidence is diagnostic and profile-local."
+  }
+}

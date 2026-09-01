@@ -1,0 +1,27 @@
+# enemy-039-abomination V66 profile-local artifact inventory
+# Format: sha256  bytes  repository-relative path
+# This inventory intentionally excludes itself.
+6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf  1002555  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png
+ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44  805162  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png
+0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e  1083105  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png
+cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1  1256879  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png
+71ba751d906735022edd7d19c88ba0248bfcce909ad9658b3001fec00839d5ad  1761598  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/attack-r1-speed-lines.png
+6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf  1002555  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-flat-recomposed.png
+7e7666c729cdf2385572faf050272ec61fa24fa68b0599e3acaa1df41a81c92e  1745296  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-imagegen-raw-selected.png
+ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44  805162  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/death-r1-flat-recomposed.png
+8f5e40527be6944c1bd934af0d2f10c935edc762698fa950fdb04cbfd728650b  1583026  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/death-r1-imagegen-raw-candidate.png
+0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e  1083105  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-flat-recomposed.png
+ebe65479d2411ed6f3799d61d191ae782166d38d1a5cc58bf7ff3fd9843196d3  1804698  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-imagegen-raw-selected.png
+cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1  1256879  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/move-r1-flat-recomposed.png
+94e5dd4e0de5c6ec978a4c4ada72bd85273f55132dcbc2d1849dd55f8d513fa9  2026786  assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/move-r1-imagegen-raw-candidate.png
+60f29e0428f97e3b1ed4a94c14c617bd9884b8a28d9103baaed74858744b44cc  1304  docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack-r2.txt
+6490451850b81ef9dfea2a9ee94b4719fbe794073fb3f9e47fb60d4156c876c8  3227  docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack.production-event.json
+796712b36f616757809f64a39d05ae0e5397a7d80bb67dae127b5bf5a7ad0c09  2500  docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack.txt
+3d9dd9306b28afea178530b48af0b90ce3d1ecd1d1ad73ad2f6857be8770fc72  2735  docs/references/v66-worklot-001-prompts/enemy-039-abomination/death.production-event.json
+046fb0c96f3ad3b6c6cb17cdc65bd4d5ee4285e73c353c287ea652a60f7db940  2581  docs/references/v66-worklot-001-prompts/enemy-039-abomination/death.txt
+b63cab297d762a0bf389b629e904c73bf4f144c39d6f7763b8fd724acb22a8a2  5665  docs/references/v66-worklot-001-prompts/enemy-039-abomination/FULL_PRODUCTION_REVIEW.md
+b40ae11ec3310d47ada81879118ef7da8182cece9b66ef4d1cf31884971b95f0  2071  docs/references/v66-worklot-001-prompts/enemy-039-abomination/IDLE_PRODUCTION_REVIEW.md
+5f04a0d2e03f4c9fd773110842191e75ff5aea4a54c339c01a1b8425d188f4d4  3330  docs/references/v66-worklot-001-prompts/enemy-039-abomination/idle.production-event.json
+5091c11af1e93fdd6d5ffd113230c6879e628f42f84d70a7d9c16c55a035d2f5  2677  docs/references/v66-worklot-001-prompts/enemy-039-abomination/idle.txt
+22aed4ba52d6d6f20c3bae10ce5212d6579f2de4ced6cecba862efd55635807e  2756  docs/references/v66-worklot-001-prompts/enemy-039-abomination/move.production-event.json
+0e2655777b2d87cbef77ca2f7ee94e8e728030008e8403e2edaaa033c2ad792e  2588  docs/references/v66-worklot-001-prompts/enemy-039-abomination/move.txt

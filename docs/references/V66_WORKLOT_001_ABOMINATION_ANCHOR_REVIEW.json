@@ -1,0 +1,804 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Physical body-root registration only. No source edit, normalization, artistic acceptance or runtime integration.",
+  "profiles": {
+    "enemy-039-abomination": {
+      "profileId": "enemy-039-abomination",
+      "status": "reviewed",
+      "reviewer": "Codex /root/generate_profile_039",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual 32-pose review on the unchanged 1774x887 4x2 source masters. The anatomical landmark is the pelvis/central body mass, including a visually estimated centre when the huge near growth occludes it. Anchor x is that landmark's vertical projection. Anchor y is the exclusive lower bound of the complete foreground (local y=429, last authored support pixel y=428). Planted fist growths are secondary contacts, never the body root. Death uses the collapsed torso mass, never the farthest growth tip. Medium confidence and per-clip uncertainty are retained because the arm masses obscure the pelvis.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+        "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+        "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+        "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+          "sourceSha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                113,
+                123,
+                330,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                115,
+                123,
+                328,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                215,
+                429
+              ],
+              "landmark": [
+                215,
+                333
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                116,
+                124,
+                327,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                110,
+                123,
+                333,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                113,
+                122,
+                330,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                218,
+                429
+              ],
+              "landmark": [
+                218,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                109,
+                122,
+                334,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                216,
+                429
+              ],
+              "landmark": [
+                216,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                109,
+                123,
+                333,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                110,
+                122,
+                334,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png",
+          "sourceSha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                79,
+                121,
+                365,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                185,
+                429
+              ],
+              "landmark": [
+                185,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                58,
+                123,
+                384,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                180,
+                429
+              ],
+              "landmark": [
+                180,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                39,
+                134,
+                404,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                69,
+                120,
+                375,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                165,
+                429
+              ],
+              "landmark": [
+                165,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                23,
+                136,
+                420,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                170,
+                429
+              ],
+              "landmark": [
+                170,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                39,
+                126,
+                404,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                200,
+                429
+              ],
+              "landmark": [
+                200,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                71,
+                126,
+                371,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                218,
+                429
+              ],
+              "landmark": [
+                218,
+                332
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                113,
+                125,
+                331,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+          "sourceSha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                195,
+                429
+              ],
+              "landmark": [
+                195,
+                335
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                54,
+                168,
+                390,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                337
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                74,
+                164,
+                368,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                225,
+                429
+              ],
+              "landmark": [
+                225,
+                335
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                85,
+                142,
+                357,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                250,
+                429
+              ],
+              "landmark": [
+                250,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                75,
+                103,
+                369,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                210,
+                429
+              ],
+              "landmark": [
+                210,
+                360
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                29,
+                181,
+                415,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                195,
+                429
+              ],
+              "landmark": [
+                195,
+                370
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                55,
+                224,
+                387,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                198,
+                429
+              ],
+              "landmark": [
+                198,
+                368
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                57,
+                225,
+                386,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                200,
+                429
+              ],
+              "landmark": [
+                200,
+                345
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                62,
+                161,
+                381,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+              "facing": "right",
+              "note": "Pelvis/central body mass projected to the common authored support plane. A planted terminal growth is load-bearing contact but not the body root."
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+          "sourceSha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                220,
+                429
+              ],
+              "landmark": [
+                220,
+                340
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                80,
+                154,
+                364,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                205,
+                429
+              ],
+              "landmark": [
+                205,
+                350
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                45,
+                167,
+                398,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                195,
+                429
+              ],
+              "landmark": [
+                195,
+                360
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                41,
+                225,
+                401,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                370
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                38,
+                268,
+                405,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                375
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                37,
+                272,
+                407,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                188,
+                429
+              ],
+              "landmark": [
+                188,
+                380
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                45,
+                299,
+                398,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                382
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                46,
+                305,
+                396,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                190,
+                429
+              ],
+              "landmark": [
+                190,
+                385
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                48,
+                323,
+                395,
+                429
+              ],
+              "evidence": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+              "facing": "right",
+              "note": "Pelvis/collapsed torso mass projected to the corpse contact plane; the farthest terminal growth tip is excluded from root x."
+            }
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    }
+  }
+}

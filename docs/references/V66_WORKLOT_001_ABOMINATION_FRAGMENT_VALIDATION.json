@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "batchId": "batch-003",
+  "profileId": "enemy-039-abomination",
+  "validatedAt": "2026-09-01",
+  "actor": "Codex /root/generate_profile_039",
+  "status": "profile-local-fragments-validated-not-merged",
+  "scale": {
+    "fragmentPath": "docs/references/V66_WORKLOT_001_ABOMINATION_SCALE_REVIEW.json",
+    "fragmentSha256": "1d833e80b5e915c97eb85fa5f721bfa7c6a73f2920b90a139321d1eabde264c9",
+    "mergeTarget": "docs/references/V66_BATCH_003_SCALE_REVIEW.json",
+    "validator": "scripts/enemy-batch-scale-review.mjs#resolvePostGenerationScaleReviewCandidate",
+    "method": "The fragment was assembled in memory over the unchanged batch-003 base review and resolved with the project's official post-generation scale candidate validator. No merged document was written.",
+    "passed": true,
+    "candidateMergedDocumentSha256": "4f915052894466abae5a647d1b08005af7731f5449c63d6219d5779a67d60e6f",
+    "measurementCount": 12,
+    "sourceScaleByClip": {
+      "idle": 1.0,
+      "move": 0.975622,
+      "attack": 1.025316,
+      "death": 1.025316
+    },
+    "evidence": [
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/fist-growth-scale.jpg",
+        "sha256": "c79b1cdbf0cdd935aa8588f8321f2e1b2a09064cd673a14db804f38652cb5989"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/cranial-crosscheck.jpg",
+        "sha256": "d3d4166fee64d1f6175e4cef00c38c47cc4957d64d41c3074bb3f15599148027"
+      }
+    ],
+    "confidence": "low",
+    "acceptanceEffect": "none"
+  },
+  "anchors": {
+    "fragmentPath": "docs/references/V66_WORKLOT_001_ABOMINATION_ANCHOR_REVIEW.json",
+    "fragmentSha256": "9872e77d5f6454288e711b4d4a9794cbfe291e6817fa5164d9f4a278d8c0b9b7",
+    "mergeTarget": "docs/references/V66_BATCH_003_ANCHOR_REVIEW.json",
+    "validator": "read-only mirror of scripts/merge-v66-anchor-reviews.mjs plus body-root invariants",
+    "method": "The fragment was checked in memory against the batch-003 queue, all four current source SHA-256 values, exact clip coverage, unique frame indices 0-7, reviewed=true, facing=right, anchor.x=landmark.x and anchor.y=sourceBounds.bottom. The merge CLI itself was not called because it writes the global review.",
+    "passed": true,
+    "reviewedPoseCount": 32,
+    "sourceSha256ByClip": {
+      "idle": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "move": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+      "attack": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "death": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44"
+    },
+    "evidence": [
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+        "sha256": "1d4aa0b6e47db1c80c57c7662e949323ffa175db8b808c34849359d2b8a4b895"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+        "sha256": "d9c0d5a61a25a690ec869ce91756ec5e672a1ae13d8d1fc1531f8e6e60a2e431"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+        "sha256": "a042c149ae9cb9b681f5930f33fcc5b1572113ca53870b3bf1dd2c0f4625c744"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+        "sha256": "825e17acb203e22367c920c36a7dcf87c36930d0ea9b2b14eb9bd257cf22eb4a"
+      }
+    ],
+    "acceptanceEffect": "none"
+  },
+  "cranialScaleReservation": {
+    "primaryVsCranialDisagreementPercent": {
+      "move": 4.081,
+      "attack": 24.858,
+      "death": 33.315
+    },
+    "decision": "The fragments are structurally merge-compatible, but artistic acceptance and runtime normalization must remain on hold until the attack/death cranial-scale discrepancy is retouched or explicitly waived after visual review."
+  },
+  "globalWrites": 0,
+  "acceptedAutomatically": 0,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

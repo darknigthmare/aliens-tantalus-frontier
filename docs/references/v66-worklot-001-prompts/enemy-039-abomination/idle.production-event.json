@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-039-abomination",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:ebe65479d2411ed6f3799d61d191ae782166d38d1a5cc58bf7ff3fd9843196d3",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the immutable selected raw ImageGen PNG SHA-256 identifies this capture.",
+  "actor": "Codex /root/generate_profile_039",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/idle.txt",
+  "actualPromptFileSha256": "5091c11af1e93fdd6d5ffd113230c6879e628f42f84d70a7d9c16c55a035d2f5",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+  "sourceSha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+  "generationAttempts": 3,
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-raw-capture",
+      "result": "The selected C2PA-bearing ImageGen RGB output is preserved before deterministic background repair.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-imagegen-raw-selected.png",
+      "sha256": "ebe65479d2411ed6f3799d61d191ae782166d38d1a5cc58bf7ff3fd9843196d3",
+      "bytes": 1804698
+    },
+    {
+      "kind": "documented-deterministic-repair-chain",
+      "result": "1,186,866 conservative magenta-matte pixels were normalized to opaque #FF00FF, then all eight globally connected subjects were translated losslessly to common local support y=428. No ownership transfer was required and no authored foreground pixel was recolored, scaled, redrawn or discarded.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-flat-recomposed.png",
+      "sha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "bytes": 1083105
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose idle source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+      "sha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "bytes": 1083105
+    }
+  ],
+  "unpersistedRejectedAttempts": [
+    {
+      "attempt": 1,
+      "reason": "Three-quarter/front camera presentation violated the strict right-facing side-profile lock. The built-in output data was visually reviewed but its zero-byte local bridge stub did not retain the returned pixels."
+    },
+    {
+      "attempt": 2,
+      "reason": "The first side-profile correction could not be persisted because the initial non-TTY save bridge closed stdin before the returned pixels were written. It was not promoted."
+    }
+  ],
+  "qa": {
+    "size": [1774, 887],
+    "exactTwoToOne": true,
+    "grid": [4, 2],
+    "poseCount": 8,
+    "outerBorderUniformExactMagenta": true,
+    "cellBoundaryContacts": 0,
+    "foregroundPixelsPreserved": 374028,
+    "facing": "right"
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local idle source candidate only. No global queue/state/reference/scale/anchor manifest was edited."
+}

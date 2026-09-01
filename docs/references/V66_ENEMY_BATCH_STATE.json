@@ -4600,6 +4600,340 @@
       "note": "Profile-local generated candidate with raw capture and lossless safe-ownership proof; no state write, acceptance or runtime integration.",
       "at": "2026-09-01T03:50:53.621Z",
       "actualPromptText": "Use case: stylized-concept\nAsset type: production 2D game animation sprite sheet, DEATH clip\nInput image: the visible selected ATTACK sheet is the immutable identity anchor. Preserve exactly the same Pathogen Mimic individual, human-derived head, rib landmarks, compact sacs, claw asymmetry, palette, two-arm/two-leg topology, physical scale and hand-painted rendering; change only the animation to an irreversible death.\nPrimary request: Create one original fan-made Pathogen Mimic DEATH animation sheet for Aliens: Tantalus Frontier, not an official sprite replica.\nImmutable subject: same low forward-pitched half-upright human-derived infected pursuer with exactly TWO arms and TWO clawed hands, exactly TWO legs and TWO feet, and NO tail. One small distorted human-derived head with one anatomical mouth. Fixed ruptured rib growths, wet sinew and compact pathogen sacs at the same thoracic/flank landmarks. No extra or detached creature.\nAnimation chronology, exactly eight distinct consecutive poses in strict row-major order: 1 lethal impact while supported, 2 stagger, 3 ONE compact sac ruptures locally but remains attached with only a tiny contained tear, 4 thorax folds, 5 pelvis loses support, 6 controlled ground impact, 7 limbs settle, 8 terminal motionless collapsed body. Irreversible readable collapse; final body is clearly dead. No full-body explosion, dissolve, detached gore cloud, regrowth or living final pose. Curl arms and legs beside the torso during collapse so the complete corpse remains compact.\nComposition: exact 2:1 landscape canvas; invisible equal 4 columns x 2 rows; exactly one complete creature per cell; strict orthographic gameplay side profile FACING RIGHT in all eight poses, including the head during the fall; no front/back/three-quarter view or mirroring. Preserve one physical body scale: do not enlarge the corpse. Every pose wholly inside its own cell with generous empty gutters. In each approximately 443 x 443 cell keep the complete silhouette no wider than 325 pixels; compact the fallen body and keep all fingers, feet and the tiny attached sac tear at least 55 pixels away from vertical cell boundaries and 40 pixels away from the row boundary. No anatomy, antialias fringe, fluid droplet or fragment touches/crosses a cell boundary. Terminal anchor is under collapsed pelvis/torso contact, not a claw or sac.\nStyle/medium: crisp high-detail modern hand-painted 2D game sprite art, controlled consistent lighting, compact readable silhouette; not pixel art, not 3D, not collage.\nBackground: perfectly flat uniform opaque pure #FF00FF over the entire exact-2:1 canvas including all edges and gutters; no gradient, texture, checkerboard, halo, spill, floor, shadow or scenery.\nConstraints: no detached blood, floating fragment, gore cloud, explosion, dissolve, tail, elongated dome, dorsal tubes, Queen crest, Brute fist, extra limb/head, weapon, clothing, armor, neon glow, magenta anatomy, text, labels, numbers, arrows, grid lines, UI, logo or watermark. Output only the sheet.\n"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-039-abomination",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:ebe65479d2411ed6f3799d61d191ae782166d38d1a5cc58bf7ff3fd9843196d3",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider exposed no durable generation ID; the immutable selected raw ImageGen PNG SHA-256 identifies this capture.",
+      "actor": "Codex /root/generate_profile_039",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/idle.txt",
+      "actualPromptFileSha256": "5091c11af1e93fdd6d5ffd113230c6879e628f42f84d70a7d9c16c55a035d2f5",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+      "sourceSha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "generationAttempts": 3,
+      "sourceRepairs": [
+        {
+          "kind": "openai-imagegen-raw-capture",
+          "result": "The selected C2PA-bearing ImageGen RGB output is preserved before deterministic background repair.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-imagegen-raw-selected.png",
+          "sha256": "ebe65479d2411ed6f3799d61d191ae782166d38d1a5cc58bf7ff3fd9843196d3",
+          "bytes": 1804698
+        },
+        {
+          "kind": "documented-deterministic-repair-chain",
+          "result": "1,186,866 conservative magenta-matte pixels were normalized to opaque #FF00FF, then all eight globally connected subjects were translated losslessly to common local support y=428. No ownership transfer was required and no authored foreground pixel was recolored, scaled, redrawn or discarded.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/idle-r3-flat-recomposed.png",
+          "sha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+          "bytes": 1083105
+        },
+        {
+          "kind": "active-master-output",
+          "result": "The repaired 1774x887 4x2 eight-pose idle source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+          "sha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+          "bytes": 1083105
+        }
+      ],
+      "unpersistedRejectedAttempts": [
+        {
+          "attempt": 1,
+          "reason": "Three-quarter/front camera presentation violated the strict right-facing side-profile lock. The built-in output data was visually reviewed but its zero-byte local bridge stub did not retain the returned pixels."
+        },
+        {
+          "attempt": 2,
+          "reason": "The first side-profile correction could not be persisted because the initial non-TTY save bridge closed stdin before the returned pixels were written. It was not promoted."
+        }
+      ],
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "exactTwoToOne": true,
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "outerBorderUniformExactMagenta": true,
+        "cellBoundaryContacts": 0,
+        "foregroundPixelsPreserved": 374028,
+        "facing": "right"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local idle source candidate only. No global queue/state/reference/scale/anchor manifest was edited.",
+      "at": "2026-09-01T03:55:53.955Z",
+      "contractPromptSha256": "9ed4e361e4d1b75f50a7adbaaf01a614c16534befc60a5146b79a3cab4803895",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production 2D game sprite animation source board\nPrimary request: create the IDLE source board for one original fan-made Tantalus Abomination, a project adaptation inspired by the broad gameplay function of a pale pathogen brute without copying any official sprite, screenshot, model render, texture, or exact licensed design.\nSubject identity locked in every pose: one very broad, low, powerful pathogen-mutated alien with a compact central torso, small recessed eyeless head between massive shoulders, exactly two legs and exactly two continuous hypertrophied arms, each ending in exactly one huge anatomical fist-like organic growth. Exactly two fist growths total. No tail. Pale gray-ivory infected flesh with restrained bruised beige, cool pink undertones, dark crusted seams, and stable asymmetry. The masses are flesh, never carried weapons or gauntlets.\nAnimation: exactly eight consecutive subtle idle poses in strict row-major order: heavy neutral rest; torso inhale; shoulders rise slightly; one growth tightens near the ground; peak alert without turning; weight shifts to the opposite leg; shoulders settle; near-neutral loop closure. Feet stay credibly planted on one support plane; body root remains stable. No walking, attack, collapse, sliding, or scale breathing.\nComposition/framing: exact 2:1 landscape canvas, invisible 4 columns by 2 rows, exactly one complete creature per equal cell, top row poses 1-4 and bottom row poses 5-8. Strict orthographic gameplay side profile facing RIGHT in all eight poses: head points right, chest and knees read rightward. Same anatomy and source scale throughout. Keep every silhouette centered with generous empty gutters; no body, fist growth, antialias fringe, or fragment may touch or cross a cell boundary. Same foot-contact baseline in both rows.\nStyle/medium: crisp high-detail modern hand-painted 2D metroidvania sprite art, clean readable silhouette, restrained organic shading; not pixel art, not a 3D presentation, not concept-sheet collage.\nScene/backdrop: perfectly flat uniform opaque pure #FF00FF across the entire canvas, edges, cells, and gutters; no gradient or texture.\nConstraints: output only the sheet. No grid lines, separators, labels, numbers, text, UI, logo, watermark, floor, cast shadow, scenery, shockwave, loose debris, or checkerboard. No AVP Predalien cues, dreadlocks, mandibles, trophy gear, Predator technology, Queen crest, long Drone dome, dorsal tubes, dorsal cannon, biomechanical armor, carried weapon, extra or missing limb, fused arm, detached growth, crop, left-facing pose, camera turn, perspective view, copied official/licensed bitmap.\n",
+      "promptSha256": "66f333f5c01919d7be1ba7410e18beb07da689c25f8ffa408d50c5aa6ff5f6be",
+      "referenceLockSha256": "32541c1c7b6d2dd949883aafeee325afce10b7d156febb79f5989cf845ec02f7"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-039-abomination",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:94e5dd4e0de5c6ec978a4c4ada72bd85273f55132dcbc2d1849dd55f8d513fa9",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider exposed no durable generation ID; the immutable raw ImageGen PNG SHA-256 identifies this capture.",
+      "actor": "Codex /root/generate_profile_039",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/move.txt",
+      "actualPromptFileSha256": "0e2655777b2d87cbef77ca2f7ee94e8e728030008e8403e2edaaa033c2ad792e",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png",
+      "sourceSha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+      "sourceRepairs": [
+        {
+          "kind": "openai-imagegen-raw-capture",
+          "result": "The C2PA-bearing ImageGen RGB output is preserved before deterministic source repair.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/move-r1-imagegen-raw-candidate.png",
+          "sha256": "94e5dd4e0de5c6ec978a4c4ada72bd85273f55132dcbc2d1849dd55f8d513fa9"
+        },
+        {
+          "kind": "documented-deterministic-repair-chain",
+          "result": "1,091,918 conservative magenta-matte pixels were normalized to opaque #FF00FF, then the eight globally connected subjects were translated losslessly to a common local support y=428. Six pixels from frame 2 and 428 pixels from frame 4 were safely reassigned by >=99.31% component ownership evidence. No authored foreground pixel was recolored, scaled, redrawn or discarded.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/move-r1-flat-recomposed.png",
+          "sha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1"
+        },
+        {
+          "kind": "active-master-output",
+          "result": "The repaired 1774x887 4x2 eight-pose source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png",
+          "sha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1"
+        }
+      ],
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "exactTwoToOne": true,
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "outerBorderUniformExactMagenta": true,
+        "cellBoundaryContacts": 0,
+        "foregroundPixelsPreserved": 465327,
+        "facing": "right"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local source candidate only. No global queue/state/reference/scale/anchor manifest was edited.",
+      "at": "2026-09-01T03:55:57.835Z",
+      "contractPromptSha256": "5a8189d0f31a9e37bec69e24f975b2f6c0ca43c3c2788533285e0c265baa4d35",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production 2D game sprite animation source board\nInput image: the accepted local idle board is an identity and scale reference only; create new chronological movement poses and do not copy its poses.\nPrimary request: create the MOVE source board for the exact same original fan-made Tantalus Abomination identity as the idle reference.\nSubject identity locked in every pose: one very broad, low, powerful pathogen-mutated alien with compact torso, small recessed eyeless head, exactly two legs, exactly two continuous hypertrophied arms, and exactly two huge anatomical fist-like terminal growths. No tail. Preserve the idle board's head size, shoulder masses, growth diameters, limb thickness, stable asymmetry, gray-ivory/bruised-beige/cool-pink flesh, dark crusted seams, and common source scale.\nAnimation: exactly eight consecutive heavy grounded trudge poses in strict row-major order: rear-foot contact; opposite growth reaches for support; growth plants without sliding; body mass passes over support; rear foot recovers; opposite foot contacts; growth unloads; cycle returns to alignment. Optional knuckle support shares load but the creature remains a heavy biped, never a four-legged gallop. Animate in place with pelvis/root staying in the same cell location; no cell-to-cell translation, sprint, teleport, or foot skate.\nComposition/framing: exact 2:1 landscape canvas, invisible 4 columns by 2 rows, exactly one complete creature per equal cell, top row poses 1-4 and bottom row poses 5-8. Strict orthographic gameplay side profile facing RIGHT in every pose. Same anatomy and scale in all cells. Keep generous empty gutters and a common support baseline; no body, fist growth, antialias fringe, or fragment may touch or cross any cell boundary.\nStyle/medium: crisp high-detail modern hand-painted 2D metroidvania sprite art matching the identity reference; clean readable silhouette; not pixel art, not a 3D presentation, not a collage.\nScene/backdrop: perfectly flat uniform opaque pure #FF00FF over the entire canvas, including all gutters and edges; no gradient or texture.\nConstraints: output only the sheet. No grid lines, separators, labels, numbers, text, UI, logo, watermark, floor, cast shadow, scenery, shockwave, dust, loose debris, or checkerboard. No tail, Predalien traits, dreadlocks, mandibles, Queen crest, long Drone dome, dorsal tubes/cannon, armor, clothing, held weapon, extra/missing/fused limb, detached or split fist growth, crop, left-facing pose, front view, perspective turn, official/licensed bitmap copy.\n",
+      "promptSha256": "c27fde8deadcb6c128722e8e782ab69e23946001d8b73a827717333ea01e12d6",
+      "referenceLockSha256": "32541c1c7b6d2dd949883aafeee325afce10b7d156febb79f5989cf845ec02f7"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-039-abomination",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:7e7666c729cdf2385572faf050272ec61fa24fa68b0599e3acaa1df41a81c92e",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider exposed no durable generation ID; the immutable selected raw ImageGen PNG SHA-256 identifies the accepted-for-repair capture.",
+      "actor": "Codex /root/generate_profile_039",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack-r2.txt",
+      "actualPromptFileSha256": "60f29e0428f97e3b1ed4a94c14c617bd9884b8a28d9103baaed74858744b44cc",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+      "sourceSha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "sourceRepairs": [
+        {
+          "kind": "openai-imagegen-raw-capture",
+          "result": "The selected r2 C2PA-bearing ImageGen RGB output is preserved before deterministic source repair.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-imagegen-raw-selected.png",
+          "sha256": "7e7666c729cdf2385572faf050272ec61fa24fa68b0599e3acaa1df41a81c92e"
+        },
+        {
+          "kind": "documented-deterministic-repair-chain",
+          "result": "1,197,466 conservative magenta-matte pixels were normalized to opaque #FF00FF, then all eight globally connected subjects were translated losslessly to common local support y=428. Frame 3 recovered 1,293 pixels from the neighbouring nominal cell at 97.10% owner share; frame 4 recovered 80 pixels at 99.85% owner share. No authored foreground pixel was recolored, scaled, redrawn or discarded.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-flat-recomposed.png",
+          "sha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf"
+        },
+        {
+          "kind": "active-master-output",
+          "result": "The repaired 1774x887 4x2 eight-pose attack source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+          "sha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf"
+        }
+      ],
+      "rejectedCandidates": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/attack-r1-speed-lines.png",
+          "sha256": "71ba751d906735022edd7d19c88ba0248bfcce909ad9658b3001fec00839d5ad",
+          "reason": "Painted diagonal motion streaks behind the lower-left impact pose violated the no-effect source lock."
+        }
+      ],
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "exactTwoToOne": true,
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "outerBorderUniformExactMagenta": true,
+        "cellBoundaryContacts": 0,
+        "foregroundPixelsPreserved": 362337,
+        "facing": "right",
+        "paintedEffects": 0
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local source candidate only. No global queue/state/reference/scale/anchor manifest was edited.",
+      "at": "2026-09-01T03:56:01.210Z",
+      "contractPromptSha256": "fe86a73b550d0774a3ded936c1434bbfeac2895c25dab8ea70b25f79be1419b9",
+      "actualPromptText": "Use case: precise-object-edit\nAsset type: production 2D game sprite animation source board\nInput image: the immediately preceding eight-pose Abomination attack sheet is the edit target.\nPrimary request: remove every painted motion streak, speed line, impact line, glow and detached effect from the entire sheet, especially the diagonal purple streaks behind pose 5 at the lower-left. Replace only those effect pixels with the same perfectly flat opaque pure #FF00FF background.\nPreserve exactly: the same original fan-made Abomination identity, anatomy, materials, strict right-facing side camera, 1774×887-style exact 2:1 canvas, invisible 4×2 row-major layout, eight chronological double-ground-slam poses, pose sizes, support line, generous gutters, and every attached body pixel. Exactly two legs, exactly two arms, exactly two attached terminal fist growths, no tail.\nConstraints: change only the forbidden detached effect pixels. Do not redesign, move, scale, crop, mirror or redraw the creature; do not add or remove anatomy. No floor, cast shadow, shockwave, dust, debris, motion streak, impact burst, grid, separator, text, logo, UI, watermark, or official/licensed bitmap. Keep all eight complete silhouettes isolated inside their own cells and facing right. Output only the corrected sheet.\n",
+      "promptSha256": "45550f89ccf1a5d8c081b67f423c09c41ecac2a472a9dc72bcb5e6d643c719d7",
+      "referenceLockSha256": "32541c1c7b6d2dd949883aafeee325afce10b7d156febb79f5989cf845ec02f7"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-039-abomination",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:8f5e40527be6944c1bd934af0d2f10c935edc762698fa950fdb04cbfd728650b",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider exposed no durable generation ID; the immutable raw ImageGen PNG SHA-256 identifies this capture.",
+      "actor": "Codex /root/generate_profile_039",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/death.txt",
+      "actualPromptFileSha256": "046fb0c96f3ad3b6c6cb17cdc65bd4d5ee4285e73c353c287ea652a60f7db940",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+      "sourceSha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44",
+      "sourceRepairs": [
+        {
+          "kind": "openai-imagegen-raw-capture",
+          "result": "The C2PA-bearing ImageGen RGB output is preserved before deterministic source repair.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/death-r1-imagegen-raw-candidate.png",
+          "sha256": "8f5e40527be6944c1bd934af0d2f10c935edc762698fa950fdb04cbfd728650b"
+        },
+        {
+          "kind": "documented-deterministic-repair-chain",
+          "result": "1,264,859 conservative magenta-matte pixels were normalized to opaque #FF00FF, then all eight globally connected subjects were translated losslessly to common local support y=428. No cross-cell ownership transfer was required and no authored foreground pixel was recolored, scaled, redrawn or discarded.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/death-r1-flat-recomposed.png",
+          "sha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44"
+        },
+        {
+          "kind": "active-master-output",
+          "result": "The repaired 1774x887 4x2 eight-pose death source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+          "sha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44"
+        }
+      ],
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "exactTwoToOne": true,
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "outerBorderUniformExactMagenta": true,
+        "cellBoundaryContacts": 0,
+        "foregroundPixelsPreserved": 296056,
+        "facing": "right",
+        "terminalPoseMotionless": true
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local source candidate only. No global queue/state/reference/scale/anchor manifest was edited.",
+      "at": "2026-09-01T03:56:05.189Z",
+      "contractPromptSha256": "746d83f2ad065c3d2f999a2034e02a192090dbee49647ca942393fc0e28b8999",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production 2D game sprite animation source board\nInput image: the accepted local idle board is an identity and scale reference only; create a new irreversible death chronology and do not copy its poses.\nPrimary request: create the DEATH source board for the exact same original fan-made Tantalus Abomination identity as the idle reference.\nSubject identity locked through collapse: one very broad, low, powerful pathogen-mutated alien with compact torso, small recessed eyeless head, exactly two legs, exactly two continuous hypertrophied arms, and exactly two huge attached anatomical fist-like terminal growths. No tail. Preserve head, shoulder masses, growth diameters, limb thickness, pale gray-ivory/bruised-beige/cool-pink flesh, dark crusted seams, stable asymmetry, and common scale. Complete body remains present in all poses.\nAnimation: exactly eight consecutive irreversible collapse poses in strict row-major order: lethal hit; upper-body recoil; one arm-growth support buckles; knees lose load; torso descends; side impact; both growths settle while remaining attached; terminal motionless body. The final root lies under the collapsed torso mass, not the farthest fist tip. No recovery or return to standing.\nComposition/framing: exact 2:1 landscape canvas, invisible 4 columns by 2 rows, exactly one complete creature per equal cell, top row poses 1-4 and bottom row poses 5-8. Strict orthographic gameplay side profile facing RIGHT throughout, including the corpse: head/original front remains to the right. Same anatomy and scale in every cell. Keep the widened collapsed silhouette compact and wholly inside its cell with generous gutters; no fragment, limb, growth, or antialias fringe touches or crosses a boundary. Common support plane.\nStyle/medium: crisp high-detail modern hand-painted 2D metroidvania sprite art matching the identity reference; clean readable silhouette; not pixel art, not a 3D presentation, not collage.\nScene/backdrop: perfectly flat uniform opaque pure #FF00FF across the whole canvas including edges and gutters; no gradient or texture.\nConstraints: output only the sheet. No explosion, dissolution, gore spray, severed limb, detached growth, loose fragment, projectile, effect, cast shadow, floor, scenery, grid, separator, label, number, text, UI, logo, watermark, or checkerboard. No tail, Predalien/Yautja traits, Queen crest, Drone dome, dorsal tubes/cannon, armor, held weapon, extra/missing/fused limb, crop, left-facing pose, front view, perspective turn, official/licensed bitmap copy.\n",
+      "promptSha256": "426fc3c63f3695e3eee56edbf9f94292f8afd4e03e07c727e3db99bb19f0c48a",
+      "referenceLockSha256": "32541c1c7b6d2dd949883aafeee325afce10b7d156febb79f5989cf845ec02f7"
+    },
+    {
+      "schema": 1,
+      "release": "v66",
+      "kind": "review-rejected",
+      "profileId": "enemy-039-abomination",
+      "clipId": "attack",
+      "actor": "OpenAI Codex visual QA",
+      "at": "2026-09-01T00:00:00+02:00",
+      "note": "Candidate rejected: all eight cells are populated and isolated, but the creature remains frontal or three-quarter instead of strict orthographic right; active source deliberately preserved.",
+      "provider": "OpenAI ImageGen",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The built-in ImageGen result exposed an image data URL but no provider generation identifier.",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack-r5.txt",
+      "actualPromptFileSha256": "ee142c77dbd76d6e4228ac5022c202abbb646f3e75916f898db85b540c8a0e48",
+      "rawCandidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r5-imagegen-raw-candidate.png",
+      "rawCandidateSha256": "5a2cb554acefa4c17350fca4f8381004eb52aead5e9c09fbb93017993f23430b",
+      "rawCandidateBytes": 1653885,
+      "derivedCandidatePath": null,
+      "derivedCandidateSha256": null,
+      "derivedStatus": "not-created-because-artistic-gate-failed-before-source-repair",
+      "activeSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+      "activeSourceSha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "review": {
+        "dimensions1774x887": true,
+        "grid4x2": true,
+        "nonemptyCells": 8,
+        "cellBoundsPass": true,
+        "strictRight": false,
+        "exactChroma": false,
+        "cranialComparisonEligible": false
+      }
+    },
+    {
+      "schema": 1,
+      "release": "v66",
+      "kind": "review-rejected",
+      "profileId": "enemy-039-abomination",
+      "clipId": "death",
+      "actor": "OpenAI Codex visual QA",
+      "at": "2026-09-01T00:00:00+02:00",
+      "note": "Candidate rejected: strict-right and clean-effect gates fail, and cells 7-8 touch their cell boundary; active source deliberately preserved.",
+      "provider": "OpenAI ImageGen",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The built-in ImageGen result exposed an image data URL but no provider generation identifier.",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/death-r2-actual.txt",
+      "actualPromptFileSha256": "561eb484a5cda3714de6d50dae1e3a5d893d6a8426a82649046125c3bb5b2a3b",
+      "rawCandidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/death-r2-imagegen-raw-candidate.png",
+      "rawCandidateSha256": "9738edc7b08da2831fc2916162b480e428a05e88be475280034b63c059588578",
+      "rawCandidateBytes": 1502909,
+      "derivedCandidatePath": null,
+      "derivedCandidateSha256": null,
+      "derivedStatus": "not-created-because-artistic-and-cell-bounds-gates-failed-before-source-repair",
+      "activeSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+      "activeSourceSha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "review": {
+        "dimensions1774x887": true,
+        "grid4x2": true,
+        "nonemptyCells": 8,
+        "cellBoundsPass": false,
+        "strictRight": false,
+        "exactChroma": false,
+        "hasForbiddenEffect": true,
+        "cranialComparisonEligible": false
+      }
     }
   ]
 }

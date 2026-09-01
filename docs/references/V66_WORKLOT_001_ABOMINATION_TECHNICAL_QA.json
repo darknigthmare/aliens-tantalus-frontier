@@ -1,0 +1,1887 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "batchId": "batch-003",
+  "profileId": "enemy-039-abomination",
+  "reviewer": "Codex /root/generate_profile_039",
+  "reviewedAt": "2026-09-01",
+  "status": "standalone-technical-review-not-merged-not-accepted",
+  "coordinates": "nominal-source-cell",
+  "reviewedPoseCount": 32,
+  "orientation": {
+    "required": "right",
+    "reviewedPoseCount": 32,
+    "rightFacingPoseCount": 32,
+    "leftFacingPoseCount": 0,
+    "perspectiveTurnCount": 0,
+    "result": "pass-with-recorded-occlusion-reservations"
+  },
+  "sourceContract": {
+    "dimensions": [
+      1774,
+      887
+    ],
+    "exactTwoToOne": true,
+    "mode": "RGBA",
+    "alphaExtrema": [
+      255,
+      255
+    ],
+    "background": "uniform opaque #FF00FF",
+    "poseCount": 32,
+    "cellBoundaryContacts": 0,
+    "commonSupportLineYInclusive": 428
+  },
+  "scaleReview": {
+    "profileId": "enemy-039-abomination",
+    "status": "reviewed",
+    "reviewer": "Codex /root/generate_profile_039",
+    "reviewedAt": "2026-09-01",
+    "note": "Manual post-generation calibration on the four unchanged source masters. The primary rigid metric is the same internal seam-to-seam diameter on the least-occluded forward terminal fist growth in three comparable poses per clip. Whole arm reach, global pose bounds and corpse width are excluded. A secondary skull-root-to-jaw-tip chord was reviewed in two poses per clip; occlusion/rotation makes it less stable, so it is retained as a confidence cross-check rather than mixed into the merge factor. Factors remain standalone technical candidates and grant no artistic or runtime acceptance.",
+    "baselineClip": "idle",
+    "sourceSha256ByClip": {
+      "idle": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "move": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+      "attack": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "death": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44"
+    },
+    "sourceScaleByClip": {
+      "idle": 1.0,
+      "move": 0.975622,
+      "attack": 1.025316,
+      "death": 1.025316
+    },
+    "medianLengthPxByClip": {
+      "idle": 81.0,
+      "move": 83.024,
+      "attack": 79.0,
+      "death": 79.0
+    },
+    "endpointUncertaintyPx": 7,
+    "measurements": [
+      {
+        "clip": "idle",
+        "frame": 0,
+        "endpoints": [
+          [
+            286,
+            313
+          ],
+          [
+            286,
+            394
+          ]
+        ],
+        "lengthPx": 81.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "idle",
+        "frame": 2,
+        "endpoints": [
+          [
+            281,
+            319
+          ],
+          [
+            281,
+            401
+          ]
+        ],
+        "lengthPx": 82.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "idle",
+        "frame": 4,
+        "endpoints": [
+          [
+            283,
+            318
+          ],
+          [
+            283,
+            399
+          ]
+        ],
+        "lengthPx": 81.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "move",
+        "frame": 0,
+        "endpoints": [
+          [
+            320,
+            316
+          ],
+          [
+            320,
+            398
+          ]
+        ],
+        "lengthPx": 82.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "move",
+        "frame": 1,
+        "endpoints": [
+          [
+            337,
+            315
+          ],
+          [
+            337,
+            399
+          ]
+        ],
+        "lengthPx": 84.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "move",
+        "frame": 3,
+        "endpoints": [
+          [
+            326,
+            330
+          ],
+          [
+            328,
+            413
+          ]
+        ],
+        "lengthPx": 83.024,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "attack",
+        "frame": 0,
+        "endpoints": [
+          [
+            350,
+            320
+          ],
+          [
+            350,
+            399
+          ]
+        ],
+        "lengthPx": 79.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "attack",
+        "frame": 1,
+        "endpoints": [
+          [
+            330,
+            316
+          ],
+          [
+            330,
+            396
+          ]
+        ],
+        "lengthPx": 80.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "attack",
+        "frame": 7,
+        "endpoints": [
+          [
+            350,
+            350
+          ],
+          [
+            350,
+            410
+          ]
+        ],
+        "lengthPx": 60.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "death",
+        "frame": 1,
+        "endpoints": [
+          [
+            361,
+            332
+          ],
+          [
+            361,
+            411
+          ]
+        ],
+        "lengthPx": 79.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "death",
+        "frame": 2,
+        "endpoints": [
+          [
+            361,
+            337
+          ],
+          [
+            361,
+            411
+          ]
+        ],
+        "lengthPx": 74.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      },
+      {
+        "clip": "death",
+        "frame": 3,
+        "endpoints": [
+          [
+            385,
+            334
+          ],
+          [
+            385,
+            414
+          ]
+        ],
+        "lengthPx": 80.0,
+        "landmark": "terminal-fist-growth-seam-diameter",
+        "uncertaintyPx": 7,
+        "note": "Same internal seam-to-seam diameter on the least-occluded forward terminal fist growth; whole arm reach, global pose bounds and corpse width excluded."
+      }
+    ],
+    "cranialCrossCheck": {
+      "landmark": "posterior-skull-root-to-jaw-tip-chord",
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "endpoints": [
+            [
+              247,
+              164
+            ],
+            [
+              298,
+              190
+            ]
+          ],
+          "lengthPx": 57.245,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "idle",
+          "frame": 4,
+          "endpoints": [
+            [
+              247,
+              160
+            ],
+            [
+              299,
+              187
+            ]
+          ],
+          "lengthPx": 58.592,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "endpoints": [
+            [
+              244,
+              161
+            ],
+            [
+              299,
+              190
+            ]
+          ],
+          "lengthPx": 62.177,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "move",
+          "frame": 7,
+          "endpoints": [
+            [
+              247,
+              158
+            ],
+            [
+              300,
+              189
+            ]
+          ],
+          "lengthPx": 61.4,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "endpoints": [
+            [
+              218,
+              191
+            ],
+            [
+              254,
+              224
+            ]
+          ],
+          "lengthPx": 48.836,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "attack",
+          "frame": 7,
+          "endpoints": [
+            [
+              235,
+              205
+            ],
+            [
+              265,
+              225
+            ]
+          ],
+          "lengthPx": 36.056,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "endpoints": [
+            [
+              245,
+              185
+            ],
+            [
+              273,
+              210
+            ]
+          ],
+          "lengthPx": 37.537,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "endpoints": [
+            [
+              232,
+              242
+            ],
+            [
+              262,
+              265
+            ]
+          ],
+          "lengthPx": 37.802,
+          "landmark": "posterior-skull-root-to-jaw-tip-chord",
+          "uncertaintyPx": 8,
+          "note": "Posterior skull root to jaw-tip chord; secondary occlusion/rotation cross-check only."
+        }
+      ],
+      "medianLengthPxByClip": {
+        "idle": 57.918,
+        "move": 61.788,
+        "attack": 42.446,
+        "death": 37.669
+      },
+      "impliedScaleByClip": {
+        "idle": 1.0,
+        "move": 0.937366,
+        "attack": 1.36451,
+        "death": 1.537551
+      },
+      "primaryVsCranialDisagreementPercent": {
+        "move": 4.081,
+        "attack": 24.858,
+        "death": 33.315
+      },
+      "interpretation": "All disagreements stay documented. Attack and death chords contract sharply under occlusion/rotation and cannot certify common head scale. The primary fist-derived factors remain low-confidence calibration candidates; no automatic acceptance follows."
+    },
+    "scaleConfidence": "low",
+    "mergeRecommendation": "Structurally merge-compatible evidence, but hold artistic acceptance and runtime normalization until the cranial-scale discrepancy is retouched or explicitly waived after visual review.",
+    "evidencePaths": [
+      "docs/references/v66-worklot-001-abomination-qa/fist-growth-scale.jpg",
+      "docs/references/v66-worklot-001-abomination-qa/cranial-crosscheck.jpg"
+    ],
+    "integrationStatus": "standalone-reviewed-candidate-not-merged",
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false
+  },
+  "clips": {
+    "idle": {
+      "fps": 6,
+      "runtimeLoop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/idle.png",
+      "sourceSha256": "0cea773831438d31343e338f5341b0293b0908b65a190bd02dc94326ff3c423e",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "poseCount": 8,
+      "rightFacingPoseCount": 8,
+      "cellBoundaryContacts": 0,
+      "frames": [
+        {
+          "frame": 0,
+          "chronology": "heavy neutral rest",
+          "sourceBounds": [
+            113,
+            123,
+            330,
+            429
+          ],
+          "foregroundPixels": 47114,
+          "foregroundSize": [
+            217,
+            306
+          ],
+          "centroid": [
+            206.576,
+            279.066
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            220,
+            330
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 1,
+          "chronology": "torso inhale",
+          "sourceBounds": [
+            115,
+            123,
+            328,
+            429
+          ],
+          "foregroundPixels": 46593,
+          "foregroundSize": [
+            213,
+            306
+          ],
+          "centroid": [
+            206.925,
+            278.985
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            220,
+            330
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 2,
+          "chronology": "shoulders rise slightly",
+          "sourceBounds": [
+            116,
+            124,
+            327,
+            429
+          ],
+          "foregroundPixels": 45363,
+          "foregroundSize": [
+            211,
+            305
+          ],
+          "centroid": [
+            210.015,
+            278.58
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            215,
+            333
+          ],
+          "anchor": [
+            215,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 3,
+          "chronology": "one growth tightens near the ground",
+          "sourceBounds": [
+            110,
+            123,
+            333,
+            429
+          ],
+          "foregroundPixels": 45855,
+          "foregroundSize": [
+            223,
+            306
+          ],
+          "centroid": [
+            207.215,
+            278.567
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            220,
+            330
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 4,
+          "chronology": "peak alert without turning",
+          "sourceBounds": [
+            113,
+            122,
+            330,
+            429
+          ],
+          "foregroundPixels": 46823,
+          "foregroundSize": [
+            217,
+            307
+          ],
+          "centroid": [
+            207.14,
+            278.807
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            220,
+            330
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 5,
+          "chronology": "weight shifts to the opposite leg",
+          "sourceBounds": [
+            109,
+            122,
+            334,
+            429
+          ],
+          "foregroundPixels": 47927,
+          "foregroundSize": [
+            225,
+            307
+          ],
+          "centroid": [
+            206.491,
+            280.957
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            218,
+            330
+          ],
+          "anchor": [
+            218,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 6,
+          "chronology": "shoulders settle",
+          "sourceBounds": [
+            109,
+            123,
+            333,
+            429
+          ],
+          "foregroundPixels": 47370,
+          "foregroundSize": [
+            224,
+            306
+          ],
+          "centroid": [
+            206.477,
+            281.275
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            216,
+            330
+          ],
+          "anchor": [
+            216,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 7,
+          "chronology": "near-neutral loop closure",
+          "sourceBounds": [
+            110,
+            122,
+            334,
+            429
+          ],
+          "foregroundPixels": 46983,
+          "foregroundSize": [
+            224,
+            307
+          ],
+          "centroid": [
+            206.919,
+            280.736
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            220,
+            330
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 7,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        }
+      ],
+      "transitionMetrics": [
+        {
+          "from": 0,
+          "to": 1,
+          "maskIoU": 0.978235,
+          "areaRatio": 0.988942
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "maskIoU": 0.894281,
+          "areaRatio": 0.973601
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "maskIoU": 0.886618,
+          "areaRatio": 1.010846
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "maskIoU": 0.879154,
+          "areaRatio": 1.02111
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "maskIoU": 0.913755,
+          "areaRatio": 1.023578
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "maskIoU": 0.970738,
+          "areaRatio": 0.988378
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "maskIoU": 0.960704,
+          "areaRatio": 0.99183
+        },
+        {
+          "from": 7,
+          "to": 0,
+          "maskIoU": 0.937348,
+          "areaRatio": 1.002788
+        }
+      ],
+      "closingTransition": {
+        "from": 7,
+        "to": 0,
+        "maskIoU": 0.937348,
+        "areaRatio": 1.002788
+      },
+      "reading": "Subtle grounded breathing closes near neutral; motion amplitude is deliberately low."
+    },
+    "move": {
+      "fps": 12,
+      "runtimeLoop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/move.png",
+      "sourceSha256": "cc85915ba81c5a1346f7710e4eeafe9df8023c37765ba7464219bae359b3a8b1",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "poseCount": 8,
+      "rightFacingPoseCount": 8,
+      "cellBoundaryContacts": 0,
+      "frames": [
+        {
+          "frame": 0,
+          "chronology": "rear-foot contact",
+          "sourceBounds": [
+            79,
+            121,
+            365,
+            429
+          ],
+          "foregroundPixels": 54354,
+          "foregroundSize": [
+            286,
+            308
+          ],
+          "centroid": [
+            213.039,
+            285.079
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            190,
+            330
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 1,
+          "chronology": "opposite growth reaches for support",
+          "sourceBounds": [
+            58,
+            123,
+            384,
+            429
+          ],
+          "foregroundPixels": 62060,
+          "foregroundSize": [
+            326,
+            306
+          ],
+          "centroid": [
+            192.124,
+            292.145
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            185,
+            325
+          ],
+          "anchor": [
+            185,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 2,
+          "chronology": "growth plants without sliding",
+          "sourceBounds": [
+            39,
+            134,
+            404,
+            429
+          ],
+          "foregroundPixels": 64155,
+          "foregroundSize": [
+            365,
+            295
+          ],
+          "centroid": [
+            192.324,
+            295.975
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            180,
+            325
+          ],
+          "anchor": [
+            180,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 3,
+          "chronology": "body mass passes over support",
+          "sourceBounds": [
+            69,
+            120,
+            375,
+            429
+          ],
+          "foregroundPixels": 55879,
+          "foregroundSize": [
+            306,
+            309
+          ],
+          "centroid": [
+            205.732,
+            286.848
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            190,
+            330
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 4,
+          "chronology": "rear foot recovers",
+          "sourceBounds": [
+            23,
+            136,
+            420,
+            429
+          ],
+          "foregroundPixels": 62439,
+          "foregroundSize": [
+            397,
+            293
+          ],
+          "centroid": [
+            198.477,
+            290.66
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            165,
+            325
+          ],
+          "anchor": [
+            165,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 5,
+          "chronology": "opposite foot contacts",
+          "sourceBounds": [
+            39,
+            126,
+            404,
+            429
+          ],
+          "foregroundPixels": 61397,
+          "foregroundSize": [
+            365,
+            303
+          ],
+          "centroid": [
+            187.083,
+            287.092
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            170,
+            325
+          ],
+          "anchor": [
+            170,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 6,
+          "chronology": "growth unloads",
+          "sourceBounds": [
+            71,
+            126,
+            371,
+            429
+          ],
+          "foregroundPixels": 56195,
+          "foregroundSize": [
+            300,
+            303
+          ],
+          "centroid": [
+            210.895,
+            289.927
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            200,
+            330
+          ],
+          "anchor": [
+            200,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 7,
+          "chronology": "return to cycle alignment",
+          "sourceBounds": [
+            113,
+            125,
+            331,
+            429
+          ],
+          "foregroundPixels": 48442,
+          "foregroundSize": [
+            218,
+            304
+          ],
+          "centroid": [
+            205.564,
+            285.419
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "high",
+          "landmark": [
+            218,
+            332
+          ],
+          "anchor": [
+            218,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 8,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        }
+      ],
+      "transitionMetrics": [
+        {
+          "from": 0,
+          "to": 1,
+          "maskIoU": 0.640211,
+          "areaRatio": 1.141774
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "maskIoU": 0.784386,
+          "areaRatio": 1.033758
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "maskIoU": 0.621796,
+          "areaRatio": 0.871
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "maskIoU": 0.563522,
+          "areaRatio": 1.117397
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "maskIoU": 0.822967,
+          "areaRatio": 0.983312
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "maskIoU": 0.547589,
+          "areaRatio": 0.915273
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "maskIoU": 0.716345,
+          "areaRatio": 0.862034
+        },
+        {
+          "from": 7,
+          "to": 0,
+          "maskIoU": 0.779432,
+          "areaRatio": 1.122043
+        }
+      ],
+      "closingTransition": {
+        "from": 7,
+        "to": 0,
+        "maskIoU": 0.779432,
+        "areaRatio": 1.122043
+      },
+      "reading": "Heavy knuckle-supported trudge reads in order; frames 4-5 create the largest horizontal extension and require cadence review after normalization."
+    },
+    "attack": {
+      "fps": 12,
+      "runtimeLoop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+      "sourceSha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "poseCount": 8,
+      "rightFacingPoseCount": 8,
+      "cellBoundaryContacts": 0,
+      "frames": [
+        {
+          "frame": 0,
+          "chronology": "braced neutral",
+          "sourceBounds": [
+            54,
+            168,
+            390,
+            429
+          ],
+          "foregroundPixels": 48807,
+          "foregroundSize": [
+            336,
+            261
+          ],
+          "centroid": [
+            209.024,
+            311.747
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            195,
+            335
+          ],
+          "anchor": [
+            195,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 1,
+          "chronology": "weight shifts rearward",
+          "sourceBounds": [
+            74,
+            164,
+            368,
+            429
+          ],
+          "foregroundPixels": 45535,
+          "foregroundSize": [
+            294,
+            265
+          ],
+          "centroid": [
+            196.699,
+            305.586
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            190,
+            337
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 2,
+          "chronology": "both growths draw up",
+          "sourceBounds": [
+            85,
+            142,
+            357,
+            429
+          ],
+          "foregroundPixels": 40449,
+          "foregroundSize": [
+            272,
+            287
+          ],
+          "centroid": [
+            223.579,
+            264.185
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            225,
+            335
+          ],
+          "anchor": [
+            225,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 3,
+          "chronology": "peak double-arm wind-up",
+          "sourceBounds": [
+            75,
+            103,
+            369,
+            429
+          ],
+          "foregroundPixels": 44588,
+          "foregroundSize": [
+            294,
+            326
+          ],
+          "centroid": [
+            228.76,
+            242.04
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            250,
+            325
+          ],
+          "anchor": [
+            250,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 4,
+          "chronology": "downward acceleration",
+          "sourceBounds": [
+            29,
+            181,
+            415,
+            429
+          ],
+          "foregroundPixels": 53837,
+          "foregroundSize": [
+            386,
+            248
+          ],
+          "centroid": [
+            233.47,
+            314.812
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            210,
+            360
+          ],
+          "anchor": [
+            210,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 5,
+          "chronology": "two-growth ground impact",
+          "sourceBounds": [
+            55,
+            224,
+            387,
+            429
+          ],
+          "foregroundPixels": 41118,
+          "foregroundSize": [
+            332,
+            205
+          ],
+          "centroid": [
+            231.776,
+            338.143
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            195,
+            370
+          ],
+          "anchor": [
+            195,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 6,
+          "chronology": "compressed follow-through",
+          "sourceBounds": [
+            57,
+            225,
+            386,
+            429
+          ],
+          "foregroundPixels": 39480,
+          "foregroundSize": [
+            329,
+            204
+          ],
+          "centroid": [
+            229.032,
+            339.467
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            198,
+            368
+          ],
+          "anchor": [
+            198,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 7,
+          "chronology": "controlled recovery",
+          "sourceBounds": [
+            62,
+            161,
+            381,
+            429
+          ],
+          "foregroundPixels": 48040,
+          "foregroundSize": [
+            319,
+            268
+          ],
+          "centroid": [
+            208.973,
+            309.207
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            200,
+            345
+          ],
+          "anchor": [
+            200,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 9,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        }
+      ],
+      "transitionMetrics": [
+        {
+          "from": 0,
+          "to": 1,
+          "maskIoU": 0.799836,
+          "areaRatio": 0.93296
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "maskIoU": 0.384115,
+          "areaRatio": 0.888306
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "maskIoU": 0.613789,
+          "areaRatio": 1.102326
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "maskIoU": 0.295884,
+          "areaRatio": 1.207432
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "maskIoU": 0.606031,
+          "areaRatio": 0.76375
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "maskIoU": 0.940484,
+          "areaRatio": 0.960163
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "maskIoU": 0.588414,
+          "areaRatio": 1.216819
+        }
+      ],
+      "closingTransition": null,
+      "reading": "Braced anticipation, overhead double-growth wind-up, slam, compression and recovery read chronologically; source carries no painted shockwave."
+    },
+    "death": {
+      "fps": 10,
+      "runtimeLoop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/death.png",
+      "sourceSha256": "ec99381b0a967b6bc7099e95476d8b6529e01418d1eeb58073b7e2d02c204d44",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "grid": [
+        4,
+        2
+      ],
+      "poseCount": 8,
+      "rightFacingPoseCount": 8,
+      "cellBoundaryContacts": 0,
+      "frames": [
+        {
+          "frame": 0,
+          "chronology": "lethal hit",
+          "sourceBounds": [
+            80,
+            154,
+            364,
+            429
+          ],
+          "foregroundPixels": 41365,
+          "foregroundSize": [
+            284,
+            275
+          ],
+          "centroid": [
+            221.275,
+            273.096
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            220,
+            340
+          ],
+          "anchor": [
+            220,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 1,
+          "chronology": "upper-body recoil",
+          "sourceBounds": [
+            45,
+            167,
+            398,
+            429
+          ],
+          "foregroundPixels": 51287,
+          "foregroundSize": [
+            353,
+            262
+          ],
+          "centroid": [
+            215.666,
+            312.602
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            205,
+            350
+          ],
+          "anchor": [
+            205,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 2,
+          "chronology": "one arm-growth support buckles",
+          "sourceBounds": [
+            41,
+            225,
+            401,
+            429
+          ],
+          "foregroundPixels": 43519,
+          "foregroundSize": [
+            360,
+            204
+          ],
+          "centroid": [
+            210.367,
+            342.536
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            195,
+            360
+          ],
+          "anchor": [
+            195,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 3,
+          "chronology": "knees lose load",
+          "sourceBounds": [
+            38,
+            268,
+            405,
+            429
+          ],
+          "foregroundPixels": 37127,
+          "foregroundSize": [
+            367,
+            161
+          ],
+          "centroid": [
+            222.508,
+            356.994
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            190,
+            370
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 4,
+          "chronology": "torso descends",
+          "sourceBounds": [
+            37,
+            272,
+            407,
+            429
+          ],
+          "foregroundPixels": 37273,
+          "foregroundSize": [
+            370,
+            157
+          ],
+          "centroid": [
+            223.081,
+            356.83
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            190,
+            375
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 5,
+          "chronology": "side impact",
+          "sourceBounds": [
+            45,
+            299,
+            398,
+            429
+          ],
+          "foregroundPixels": 31422,
+          "foregroundSize": [
+            353,
+            130
+          ],
+          "centroid": [
+            227.816,
+            366.63
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            188,
+            380
+          ],
+          "anchor": [
+            188,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 6,
+          "chronology": "growths settle",
+          "sourceBounds": [
+            46,
+            305,
+            396,
+            429
+          ],
+          "foregroundPixels": 28778,
+          "foregroundSize": [
+            350,
+            124
+          ],
+          "centroid": [
+            220.333,
+            371.214
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            190,
+            382
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        },
+        {
+          "frame": 7,
+          "chronology": "terminal motionless body",
+          "sourceBounds": [
+            48,
+            323,
+            395,
+            429
+          ],
+          "foregroundPixels": 25274,
+          "foregroundSize": [
+            347,
+            106
+          ],
+          "centroid": [
+            219.255,
+            379.833
+          ],
+          "supportLineYInclusive": 428,
+          "cellBoundaryContact": false,
+          "facing": "right",
+          "orientationReviewed": true,
+          "orientationConfidence": "medium",
+          "landmark": [
+            190,
+            385
+          ],
+          "anchor": [
+            190,
+            429
+          ],
+          "anchorConfidence": "medium",
+          "anchorUncertaintyPx": 10,
+          "bodyRootRule": "pelvis/central-body-mass vertical projection; terminal fist growth excluded as body root"
+        }
+      ],
+      "transitionMetrics": [
+        {
+          "from": 0,
+          "to": 1,
+          "maskIoU": 0.443987,
+          "areaRatio": 1.239865
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "maskIoU": 0.674101,
+          "areaRatio": 0.848539
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "maskIoU": 0.765262,
+          "areaRatio": 0.853122
+        },
+        {
+          "from": 3,
+          "to": 4,
+          "maskIoU": 0.920347,
+          "areaRatio": 1.003932
+        },
+        {
+          "from": 4,
+          "to": 5,
+          "maskIoU": 0.789631,
+          "areaRatio": 0.843023
+        },
+        {
+          "from": 5,
+          "to": 6,
+          "maskIoU": 0.849406,
+          "areaRatio": 0.915855
+        },
+        {
+          "from": 6,
+          "to": 7,
+          "maskIoU": 0.815531,
+          "areaRatio": 0.87824
+        }
+      ],
+      "closingTransition": null,
+      "reading": "Irreversible recoil-to-collapse progression ends in a stable corpse; frame 0 already reads post-impact and is retained as a reservation."
+    }
+  },
+  "evidencePaths": [
+    "docs/references/v66-worklot-001-abomination-qa/anchors-idle.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/anchors-move.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/anchors-attack.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/anchors-death.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/fist-growth-scale.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/cranial-crosscheck.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/orientation-bounds.jpg",
+    "docs/references/v66-worklot-001-abomination-qa/loop-review-idle.gif",
+    "docs/references/v66-worklot-001-abomination-qa/loop-review-move.gif",
+    "docs/references/v66-worklot-001-abomination-qa/sequence-review-attack.gif",
+    "docs/references/v66-worklot-001-abomination-qa/sequence-review-death.gif"
+  ],
+  "reservations": [
+    "Idle far-arm shoulder-to-elbow-to-growth continuity is strongly occluded in several poses even though the second terminal mass remains visible.",
+    "Move frames 4-5 carry a much longer horizontal silhouette; the rigid fist and cranial checks indicate pose extension rather than a whole-actor scale change, but the transition into frame 4 deserves runtime cadence review.",
+    "Attack frames 2-3 hide most of the far arm behind the overhead growth. The double-growth wind-up remains readable as an action sequence, but full two-arm topology is not equally legible in every silhouette.",
+    "Death frame 0 reads as an already reared post-impact pose, and the cranial chord becomes rotation-sensitive during collapse.",
+    "The secondary cranial chord contracts sharply in late attack and early death compared with idle. Occlusion and rotation contribute, but the available pixels do not certify fully stable head scale; this blocks automatic artistic acceptance and makes the fist-derived factors low-confidence calibration candidates.",
+    "All merge factors and roots are physical-registration candidates only. They do not grant artistic acceptance, normalization approval, or runtime integration."
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "globalDocumentsModified": 0,
+  "sourcePixelsModified": 0
+}

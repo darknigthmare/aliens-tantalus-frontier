@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-039-abomination",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:7e7666c729cdf2385572faf050272ec61fa24fa68b0599e3acaa1df41a81c92e",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the immutable selected raw ImageGen PNG SHA-256 identifies the accepted-for-repair capture.",
+  "actor": "Codex /root/generate_profile_039",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-039-abomination/attack-r2.txt",
+  "actualPromptFileSha256": "60f29e0428f97e3b1ed4a94c14c617bd9884b8a28d9103baaed74858744b44cc",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+  "sourceSha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf",
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-raw-capture",
+      "result": "The selected r2 C2PA-bearing ImageGen RGB output is preserved before deterministic source repair.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-imagegen-raw-selected.png",
+      "sha256": "7e7666c729cdf2385572faf050272ec61fa24fa68b0599e3acaa1df41a81c92e"
+    },
+    {
+      "kind": "documented-deterministic-repair-chain",
+      "result": "1,197,466 conservative magenta-matte pixels were normalized to opaque #FF00FF, then all eight globally connected subjects were translated losslessly to common local support y=428. Frame 3 recovered 1,293 pixels from the neighbouring nominal cell at 97.10% owner share; frame 4 recovered 80 pixels at 99.85% owner share. No authored foreground pixel was recolored, scaled, redrawn or discarded.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/derived/attack-r2-flat-recomposed.png",
+      "sha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf"
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose attack source candidate is the active profile-local source; this does not grant artistic acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/attack.png",
+      "sha256": "6866ee637342b1d0ed0f8184cfc4e7433254228ac5f0d9010cc9de7a3cc94caf"
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-039-abomination/rejected/attack-r1-speed-lines.png",
+      "sha256": "71ba751d906735022edd7d19c88ba0248bfcce909ad9658b3001fec00839d5ad",
+      "reason": "Painted diagonal motion streaks behind the lower-left impact pose violated the no-effect source lock."
+    }
+  ],
+  "qa": {
+    "size": [1774, 887],
+    "exactTwoToOne": true,
+    "grid": [4, 2],
+    "poseCount": 8,
+    "outerBorderUniformExactMagenta": true,
+    "cellBoundaryContacts": 0,
+    "foregroundPixelsPreserved": 362337,
+    "facing": "right",
+    "paintedEffects": 0
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local source candidate only. No global queue/state/reference/scale/anchor manifest was edited."
+}
