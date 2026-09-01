@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-057-albino-warrior": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/aliens",
+        "https://necaonline.com/2017/06/aliens-7-scale-action-figures-ultimate-alien-warrior-1986-assortment/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/xenomorph-warrior-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/xenomorph-warrior-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/idle.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/move.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/attack.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/death.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/references/neca-official-reference.jpg",
+        "assets/openai/sprites/metadata/v66/enemy-005-warrior.json",
+        "docs/references/V66_DRONE_WARRIOR_IMAGEGEN.md"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of V66 enemy-005-warrior only: preserve the reviewed Aliens (1986) Warrior identity as one tall lean eyeless biped with a long exposed ridged elongated cranial carapace, narrow biomechanical waist, ribbed torso, two long arms, two digitigrade legs, four dorsal tubes, metallic teeth with telescoping inner jaw and exactly one long articulated segmented tail. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale gray-beige carapace, cool blue-gray recesses, restrained translucent rose-taupe subsurface structures and moist highlights; never pure flat white, glow, ice or an automatic recolor. Preserve strict right-facing orthographic profile, base physical scale, pelvis/support-foot root and all idle/move/attack/death topology. No smooth Big Chap dome, Runner quadruped, royal crown, armor, clothing, weapon, eyes, missing tubes or official albino-model claim. Every future pixel must be original project art; canonExact=false.",
+      "reviewer": "Codex /root/prepare_refs_057_058",
+      "reviewedAt": "2026-09-01",
+      "name": "Albino Warrior",
+      "archetype": "Warrior",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "assault",
+      "provenance": "systemic-variant",
+      "animationFamily": "biped",
+      "batchId": "batch-004",
+      "ordinal": 56,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-005-warrior",
+      "baseReferenceLockSha256": "eb78dbdfa2e753099f77052b7c54e7d729cf2f3062e2c8e5aa4da602ff4b5b37",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Aliens (1986), the 20th Century Studios title page and NECA's licensed Warrior model control the base Warrior identity only. No reviewed primary or licensed source establishes this queue's Albino Warrior as a distinct official model; its pigment and material treatment is an original Tantalus Frontier systemic adaptation.",
+      "sourcePolicy": {
+        "positiveAnatomyAuthority": "REVIEWED_V66_BASE_LOCK",
+        "externalSourcesAre": "base-anatomy-and-continuity-anchors-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "Inherit the V66 Aliens Warrior: long exposed ridged cranium, lean upright biped, narrow waist, ribbed torso, long arms and digitigrade legs, four readable dorsal tubes and one full segmented tail.",
+        "palette": "Warm pearl-ivory and pale gray-beige carapace, cool blue-gray recesses, restrained translucent rose-taupe internal structures, moist highlights and metallic silver/ivory teeth.",
+        "surface": "Pale organic-biomechanical ribs, tubing and cranial ridges remain readable through value and subsurface contrast. The albino surface is newly authored material, never a white-filtered base bitmap.",
+        "anatomy": "One eyeless ridged head with double jaw, one ribbed torso, two arms, two digitigrade legs, four dorsal tubes and exactly one continuous articulated tail. No equipment.",
+        "orientation": "Strict orthographic gameplay profile facing RIGHT in all 32 poses; skull, jaws, hands, feet, dorsal tubes and complete tail stay inside their cell without camera rotation.",
+        "scale": "Inherit the reviewed V66 enemy-005 physical scale and rigid cranial/thoracic proportions. Never scale from the changing tail arc, hand reach or crouch height.",
+        "root": "Inherit the base pelvis/proximal-leg registration and supporting-foot floor. Skull, tubes and tail must never redefine the physical root.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no shadow, scene, hive resin, text, logo or grid.",
+        "prohibitions": [
+          "smooth translucent Big Chap dome, Runner quadruped, royal crown or Queen anatomy",
+          "eyes, armor, clothing, firearm, cybernetics or brute proportions",
+          "flat pure-white silhouette, glow, crystal, ice, snow, fur or automatic recolor",
+          "missing or changing dorsal-tube count, severed tail, extra limb or anatomy drift",
+          "left-facing, frontal turn, crop, cell contact, duplicate pose or cross-cell tail",
+          "canon-exact, official albino model or 1:1 reproduction claim"
+        ]
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "7d8c18ec445ca389e752aed40140d62a089f8ed5e91e2fc053cb443498d1e5e7",
+        "profileId": "enemy-057-albino-warrior",
+        "name": "Albino Warrior",
+        "archetype": "Warrior",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "assault",
+        "provenance": "systemic-variant",
+        "animationFamily": "biped",
+        "batchId": "batch-004",
+        "ordinal": 56,
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [0, 1, 2, 3, 4, 5, 6, 7],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-057-albino-warrior/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-057-albino-warrior/idle.gif",
+            "promptSha256": "079da550663fedc6abd42e19df6ca3cd5e7edb2688b4b4e72ef0c731df5669b1",
+            "decodedPromptSha256": "992145adb0d2c3fa1369275efb9f571a46d0663031c8d484494cb62fbde50e03"
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [8, 9, 10, 11, 12, 13, 14, 15],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-057-albino-warrior/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-057-albino-warrior/move.gif",
+            "promptSha256": "009d32e65d245ccc2856ac4037e6c49f4d014379b936c0decfbc3eadeb5119bb",
+            "decodedPromptSha256": "31eee687237773259cdc7ef7c77bd13f6e1884e3f9a9cb2c4c1326a2aab99579"
+          },
+          {
+            "id": "attack",
+            "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [16, 17, 18, 19, 20, 21, 22, 23],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-057-albino-warrior/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-057-albino-warrior/attack.gif",
+            "promptSha256": "47508f5c9707bb7643c6b05b69a14ac6ebe37d14a4e10e8be352a84cc10521ab",
+            "decodedPromptSha256": "54623ba84e64f8c9a83d989d3777cebb2b13baf723f326c14d78ddc742c8962c"
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [24, 25, 26, 27, 28, 29, 30, 31],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-057-albino-warrior/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-057-albino-warrior/death.gif",
+            "promptSha256": "99a353d80077ce7d7e4342b1f86e2df89e17c2aa3619c68607e38d215d13a979",
+            "decodedPromptSha256": "5f1fbbc855657d6e1233c8277b42b890a5fee59b76c76a91f30fd469138ffeea"
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-057-albino-warrior.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-057-albino-warrior.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-057-albino-warrior/all.gif",
+        "promptHashAudit": "All four exact queue promptSha256 values are preserved, but all four differ from independent SHA-256 of the decoded UTF-8 placeholder text. The placeholders remain provenance only and must be rebuilt from this merged design lock before generation."
+      },
+      "predecessorEvidence": {
+        "v56ProjectAssets": [
+          {
+            "path": "assets/openai/sprites/enemies/xenomorph-warrior-action-sheet-v56.png",
+            "dimensions": [1254, 1254],
+            "bytes": 977762,
+            "sha256": "8c84ff36213c8d18bfc04a74c102517b3ac5e93068abe1ad769415d00a50787a",
+            "role": "Project-authored V56 identity predecessor; guidance only, not a V66 clip source."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/xenomorph-warrior-action-sheet-v56.png",
+            "dimensions": [1024, 1024],
+            "bytes": 509040,
+            "sha256": "c1d3c5aa04148f058646522bff3a118cc39e38300323bde34f972c5b2da34f56",
+            "role": "Normalized V56 predecessor; preserve the identity only and never copy or recolor frames."
+          }
+        ],
+        "v65Inventory": {
+          "exactProfileFound": false,
+          "finding": "The local V65 enemy-profiles frame and metadata directories contain ten Ovomorph-family systemic candidates only (053, 105, 157, 209, 261, 313, 365, 417, 469, 521); neither profile 057 nor an Albino Warrior predecessor exists there."
+        },
+        "v66BaseSources": [
+          {"path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/idle.png", "dimensions": [1774, 887], "bytes": 1775933, "sha256": "d0a230ad54a25e8f3c1b239929e0278aacd84dbebc438ee9a479c3f710d0744d"},
+          {"path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/move.png", "dimensions": [1774, 887], "bytes": 1609369, "sha256": "cc4a12d15f4090a418976e9f35f3dfa137710f7d37ea8b12fcb10efc812ec75a"},
+          {"path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/attack.png", "dimensions": [1774, 887], "bytes": 1702473, "sha256": "811b6a7ec66c9dd9f457bd70c2b2d05afb4f4ab9000b507c06b9cccbdebca7fa"},
+          {"path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/death.png", "dimensions": [1774, 887], "bytes": 1545780, "sha256": "c1520aed413cd3dff7dfb54643ca3ed8d5754410d835123a90f410d1ba58be1c"},
+          {"path": "assets/openai/sprites/frames/v66/batch-001/enemy-005-warrior/references/neca-official-reference.jpg", "bytes": 281149, "sha256": "c71640e38e4e02ea37cae2d5a2c240e514aef08f9d040e71863324f267d4191c", "role": "Locally retained licensed base-model study reference; never embed or copy into generated sheets."}
+        ]
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, each 4x2 with eight individually authored row-major poses",
+        "32/32 cells contain exactly one complete right-facing Warrior derivative with no crop, contact or cross-cell tail",
+        "ridged skull, lean biped proportions, four dorsal tubes, double jaw, full tail and base physical root remain invariant",
+        "albino material stays readable and organic-biomechanical without pure-white silhouette loss or automatic recolor artifacts",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms original systemic adaptation and rejects Big Chap, Runner, royal and canon-exact readings"
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "7d8c18ec445ca389e752aed40140d62a089f8ed5e91e2fc053cb443498d1e5e7",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "5d99470cd5fb1ec93a8e38b1b4e08485661a44a5a197e7cb7ab8f0c5b6f74672",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb"
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}
