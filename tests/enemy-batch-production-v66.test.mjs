@@ -47,6 +47,34 @@ async function repairedReceipt(fix, clip = fix.job.clips[0]) {
     }
   };
 }
+async function recoveredRepairedReceipt(fix, clip = fix.job.clips[0]) {
+  const queuePromptSnapshotPath = `synthetic-${clip.id}-queue-current.txt`;
+  const rawCapturePath = `synthetic-${clip.id}-raw-capture.bin`;
+  const rawCaptureBytes = Buffer.from(`Immutable recovered ImageGen payload for ${clip.id}.`);
+  await writeFile(scopedPath(fix.root, queuePromptSnapshotPath), clip.prompt);
+  await writeFile(scopedPath(fix.root, rawCapturePath), rawCaptureBytes);
+  const rawCaptureSha256 = hash(rawCaptureBytes);
+  return {
+    schema: 1, kind: 'generated-recovered-and-source-repaired', profileId: fix.job.profileId, clipId: clip.id,
+    provider: 'OpenAI ImageGen', generationId: `sha256:${rawCaptureSha256}`,
+    providerGenerationIdReturned: false,
+    generationIdProvenance: 'Synthetic test fixture: provider ID was not retained; immutable raw SHA-256 is the local identifier.',
+    actor: 'test', note: 'Synthetic recovered candidate only; prompt gap remains and acceptance is forbidden.',
+    actualGenerationPromptAvailable: false, actualPromptPath: null, actualPromptSha256: null, promptSha256: null,
+    actualPromptUnavailableReason: 'Synthetic historical fixture has no retained provider prompt or embedded prompt metadata.',
+    promptProvenanceNote: 'Current queue prompt is retained only as contract evidence and is not asserted to be the historical provider prompt.',
+    currentQueuePromptSnapshotPath: queuePromptSnapshotPath,
+    currentQueuePromptFileBytesSha256: hash(clip.prompt),
+    computedJsonStringifyPromptSha256: hash(JSON.stringify(clip.prompt)),
+    contractPromptSha256: clip.promptSha256, queuePromptSha256: clip.promptSha256,
+    referenceLockSha256: fix.job.referenceLockSha256,
+    sourcePath: clip.sourcePath, savedSourcePath: clip.sourcePath,
+    sourceSha256: hash(await readFile(scopedPath(fix.root, clip.sourcePath))),
+    rawCapture: { path: rawCapturePath, sha256: rawCaptureSha256, bytes: rawCaptureBytes.byteLength, pixelEdits: 0, embeddedPromptMetadata: false },
+    sourceRepairs: [{ kind: 'synthetic-deterministic-recomposition', result: 'Synthetic source repaired without rewriting the immutable raw capture.', inputPath: rawCapturePath, inputSha256: rawCaptureSha256 }],
+    accepted: false, runtimeIntegrated: false, canonExact: false
+  };
+}
 async function selectedCandidateReceipt(fix, clip = fix.job.clips[0]) {
   const promptDocumentPath = `synthetic-${clip.id}-selected-candidate-prompt.txt`;
   const actualPromptText = `Synthetic selected candidate ImageGen prompt for ${clip.id}.\n`;
@@ -213,7 +241,7 @@ test('migration refuses to orphan recorded work outside the pilot before writing
   const legacy = legacyFiveProfileQueue(fix.queue);
   const moved = legacy.jobs.find((job) => job.profileId === 'enemy-012-carrier');
   assert.equal(moved.batchId, 'batch-003');
-  for (const kind of ['generated', 'generated-and-source-repaired', 'generated-candidate-selected', 'review-rejected', 'accepted', 'integrated']) {
+  for (const kind of ['generated', 'generated-and-source-repaired', 'generated-recovered-and-source-repaired', 'generated-candidate-selected', 'review-rejected', 'accepted', 'integrated']) {
     const state = { ...emptyState(), events: [{ profileId: moved.profileId, kind, actor: 'test', note: 'Existing recorded work must not be relocated.' }] };
     await persistQueueFixture(fix.root, legacy, state);
     const beforeQueue = await readFile(scopedPath(fix.root, QUEUE_PATH));
@@ -420,6 +448,72 @@ test('repaired generation rejects incomplete, stale or rewritten repair provenan
     await assert.rejects(appendProductionEvent(fix.queue, emptyState(), candidate, fix.root), message);
     assert.deepEqual(candidate, before);
   }
+});
+
+test('recovered repaired generation preserves the prompt gap without substituting queue text', async () => {
+  const fix = await fixture();
+  const receipt = await recoveredRepairedReceipt(fix);
+  const originalReceipt = structuredClone(receipt);
+  const state = await appendProductionEvent(fix.queue, emptyState(), receipt, fix.root);
+  assert.deepEqual(receipt, originalReceipt);
+  const recorded = state.events[0];
+  assert.equal(recorded.kind, 'generated-recovered-and-source-repaired');
+  assert.equal(recorded.actualGenerationPromptAvailable, false);
+  assert.equal(recorded.actualPromptText, undefined);
+  assert.equal(recorded.actualPromptPath, null);
+  assert.equal(recorded.actualPromptSha256, null);
+  assert.equal(recorded.promptSha256, null);
+  assert.equal(recorded.queuePromptSha256, fix.job.clips[0].promptSha256);
+  assert.equal(recorded.rawCapture.sha256, receipt.rawCapture.sha256);
+  const status = await getJobStatus(fix.job, state, fix.root);
+  assert.equal(status.status, 'generated');
+  assert.equal(status.generatedClips, 1);
+  assert.equal(status.recoveredPromptGaps, 1);
+  assert.deepEqual(status.issues, []);
+  const summary = await summarizeQueue(fix.queue, state, fix.root);
+  assert.equal(summary.verifiedGeneratedBoards, 1);
+  assert.equal(summary.recoveredPromptGapBoards, 1);
+});
+
+test('recovered repaired generation rejects guessed prompts and stale recovery evidence', async () => {
+  const fix = await fixture();
+  const receipt = await recoveredRepairedReceipt(fix);
+  const invalid = [
+    [{ ...receipt, actualGenerationPromptAvailable: true }, /explicitly declare.*unavailable/],
+    [{ ...receipt, actualPromptText: fix.job.clips[0].prompt }, /cannot substitute queue text/],
+    [{ ...receipt, actualPromptPath: receipt.currentQueuePromptSnapshotPath }, /cannot substitute queue text/],
+    [{ ...receipt, promptSha256: receipt.queuePromptSha256 }, /keep promptSha256 null|cannot substitute/],
+    [{ ...receipt, usedQueuePrompt: true }, /cannot substitute queue text/],
+    [{ ...receipt, actualPromptUnavailableReason: '' }, /prompt-unavailability reason/],
+    [{ ...receipt, currentQueuePromptFileBytesSha256: '0'.repeat(64) }, /Current queue prompt snapshot file changed/],
+    [{ ...receipt, computedJsonStringifyPromptSha256: '0'.repeat(64) }, /queue snapshot differs/],
+    [{ ...receipt, generationId: 'synthetic-guessed-id' }, /immutable raw SHA-256/],
+    [{ ...receipt, rawCapture: { ...receipt.rawCapture, sha256: '0'.repeat(64) } }, /Recovered raw capture file changed/],
+    [{ ...receipt, rawCapture: { ...receipt.rawCapture, bytes: receipt.rawCapture.bytes + 1 } }, /byte count/],
+    [{ ...receipt, rawCapture: { ...receipt.rawCapture, pixelEdits: 1 } }, /zero-edit/],
+    [{ ...receipt, sourceRepairs: undefined }, /bind the immutable raw capture/],
+    [{ ...receipt, sourceRepairs: [{ ...receipt.sourceRepairs[0], inputSha256: '0'.repeat(64) }] }, /bind the immutable raw capture/],
+    [{ ...receipt, accepted: true }, /remain unaccepted/]
+  ];
+  for (const [candidate, message] of invalid) {
+    const before = structuredClone(candidate);
+    await assert.rejects(appendProductionEvent(fix.queue, emptyState(), candidate, fix.root), message);
+    assert.deepEqual(candidate, before);
+  }
+});
+
+test('recovered prompt gaps can be counted as generated evidence but cannot be accepted', async () => {
+  const fix = await fixture();
+  let state = emptyState();
+  for (const clip of fix.job.clips) state = await appendProductionEvent(fix.queue, state, await recoveredRepairedReceipt(fix, clip), fix.root);
+  const status = await getJobStatus(fix.job, state, fix.root);
+  assert.equal(status.generatedClips, fix.job.clips.length);
+  assert.equal(status.recoveredPromptGaps, fix.job.clips.length);
+  await normalized(fix);
+  await assert.rejects(appendProductionEvent(fix.queue, state, acceptance(fix.job), fix.root), /Cannot accept recovered generation/);
+  const summary = await summarizeQueue(fix.queue, state, fix.root);
+  assert.equal(summary.verifiedGeneratedBoards, fix.job.clips.length);
+  assert.equal(summary.recoveredPromptGapBoards, fix.job.clips.length);
 });
 
 test('repaired generation verifies every documented sourceRepair path and SHA-256 pair', async () => {
