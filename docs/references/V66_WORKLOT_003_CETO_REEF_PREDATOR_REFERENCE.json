@@ -1,0 +1,185 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-051-ceto-reef-predator": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/ceto-reef-predator-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png"
+      ],
+      "designLock": "Original Tantalus Frontier aquatic fauna with no external model: one streamlined amphibious quadruped predator in strict right-facing orthographic profile, with one flat wedge head, lateral natural eye, visible gill slits, short neck, long tapered trunk, exactly four articulated weight-capable paddle limbs, one low dorsal crest and one deep non-bladed caudal swimming fin. Preserve the V56 identity, 186x82 logical runtime envelope, stable aquatic center/root, body length, head size, crest height and caudal depth across all 32 future poses. Materials are organic blue-black/deep-green wet hide with fine dark plates, subtle reef abrasion and only restrained cyan flank bioluminescence. Never add xenomorph anatomy, biomechanical metal, walking legs during swim, extra fins, leviathan scale or full-body neon. All future pixels must be original project art, canonExact=false.",
+      "reviewer": "Codex /root/generate_profile_039; V56 matrix, project-owned predecessors and batch-004 queue audited",
+      "reviewedAt": "2026-09-01",
+      "name": "Ceto Reef Predator",
+      "archetype": "Ceto Reef Predator",
+      "modifier": "Standard",
+      "biology": "fauna",
+      "caste": "aquatic",
+      "animationFamily": "aquatic",
+      "classification": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "canonExact": false,
+      "externalModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Original aquatic fauna from Tantalus Frontier. The V56 matrix found no credible Ceto creature in Alien, Weyland-Yutani, Colonial Marines or Alien RPG sources. Any licensed-continuity label attached to the world is not a visual model for this animal.",
+      "sourcePolicy": {
+        "positiveDesignAuthority": "LOCAL_PROJECT_LOCK_ONLY",
+        "externalSources": [],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false
+      },
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "v56Predecessors": [
+        {
+          "path": "assets/openai/sprites/enemies/ceto-reef-predator-action-sheet-v56.png",
+          "bytes": 1260125,
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "sha256": "17ac6c51776959f0e79f185fb8ca6b6d89c8c56de1468055ecf914403c514400",
+          "role": "project-owned identity predecessor; sole positive visual authority"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png",
+          "bytes": 396787,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "1c1ea87f59e201f005ce62b3463f3948ff014d5e41e69ce0d4d87d761e9a7ee7",
+          "role": "project-owned normalized predecessor; preserve identity, do not copy frames"
+        }
+      ],
+      "queueContractSnapshot": {
+        "name": "Ceto Reef Predator",
+        "biology": "fauna",
+        "caste": "aquatic",
+        "animationFamily": "aquatic",
+        "ordinal": 50,
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "normalizedGrid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "sourceSheetDimensions": [
+          1774,
+          887
+        ],
+        "clips": [
+          {
+            "id": "idle",
+            "fps": 6,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/idle.png",
+            "placeholderPromptSha256": "08a47b3af02e3fda5df0f162324f50888bf10cba0a640dd20fb6b07744ba5bb0",
+            "lockedMotion": "Eight near-stationary phases: gill pulse, restrained trunk breath, paddle trim, gentle caudal counterwave and seamless return without root drift."
+          },
+          {
+            "id": "move",
+            "fps": 12,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/move.png",
+            "placeholderPromptSha256": "516372a95dbde76263ea8e20abde9b779e8d20f399cbb8eb2a427e411e339689",
+            "lockedMotion": "Eight chronological swim phases driven by alternating body/caudal wave and four paddle-limb trims; seamless cycle, no walking gait."
+          },
+          {
+            "id": "attack",
+            "fps": 12,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+            "placeholderPromptSha256": "a96e3c8cd52e36ea1be721ce2ab99a259e86b2ec984284c3f9b1842d2f50f68d",
+            "lockedMotion": "Eight phases: compress wave, fix target right, tail thrust, forward lunge, single-jaw contact, follow-through, paddle brake and recovery."
+          },
+          {
+            "id": "death",
+            "fps": 10,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/death.png",
+            "placeholderPromptSha256": "b56a0d99443ff64a8cbd7cee03fdcd324b1fa3815f463be20e1aac546ac728b2",
+            "lockedMotion": "Eight irreversible aquatic phases: lethal impact, propulsion loss, body curl, uncontrolled sink/roll kept in profile, paddle slack, tail sag and motionless terminal pose."
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-051-ceto-reef-predator.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/all.gif"
+      },
+      "placeholderAudit": {
+        "observedInitialStatus": "pending-reference",
+        "observedReference": null,
+        "observedReferenceLockSha256": null,
+        "placeholderPromptsBlockedByMissingDesignLock": true,
+        "placeholderHashesVerifiedAgainstQueue": true,
+        "queueWasModified": false,
+        "generationAllowedAfterMergeOnly": true,
+        "decodedPromptHashResult": "DECLARED_HASHES_DO_NOT_MATCH_DECODED_PROMPT_TEXT",
+        "decodedPromptSha256ByClip": {
+          "idle": "6e1b0a61d45289d4b164bbd975d3ba100e8358686ee90efdf8c77e65cbf628e7",
+          "move": "7fe8422e6cc1f90e7c612c45c562f19dc7f368a1aa1115892219880ca11ed37a",
+          "attack": "4ed836161febc6d1313a9f97914bfe6a9165ebfe4274d97793c70c5430e86813",
+          "death": "ae3375d1ecd2fd0b9b78999b0ac6543b442b56d802856c69901a0f2bf56a0450"
+        }
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, 4x2, eight authored row-major poses each",
+        "32/32 strict right-facing whole-body cells with zero crop/contact/spill",
+        "one head, one jaw, four paddle limbs, lateral eye/gills and one caudal tail remain invariant",
+        "rigid inter-clip scale and aquatic root remain stable",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms original project fauna and no borrowed franchise creature"
+      ],
+      "designDetails": {
+        "silhouette": "Streamlined amphibious quadruped predator: flat wedge head, short neck, long tapered trunk, four articulated paddle-limbs, deep swimming tail fin and low dorsal crest.",
+        "palette": "Blue-black and deep green wet skin with fine dark plates; very restrained cyan flank bioluminescence.",
+        "surface": "Organic wet hide and fine plates, subtle reef abrasion and salt/mineral wear; never biomechanical or metallic.",
+        "anatomy": "One flat head, lateral natural eye, visible gill slits, one jaw, four weight-capable paddle limbs, one deep non-bladed swimming tail. No xenomorph organs.",
+        "equipment": "none",
+        "orientation": "strict orthographic gameplay profile facing RIGHT in all 32 poses; eye, gills, four limbs and caudal fin remain readable",
+        "scale": "V56 runtime envelope 186x82 logical pixels with ceto-reef-predator-water hitbox. Lock body length, head size, dorsal crest height and caudal depth across clips.",
+        "root": "Use a stable aquatic center/root and constant vertical waterline; grounded idle wording means no uncontrolled drift. Preserve full tail and paddles inside each cell.",
+        "background": "true transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no water scene, bubbles, shadow, reflection or gradient",
+        "cellBounds": "one complete animal per cell, generous equal gutter, no crop, overlap, boundary contact or cross-cell glow",
+        "prohibitions": [
+          "aquatic xenomorph, blind dome, inner jaw, dorsal tubes or acid",
+          "land shark, mermaid or oversized leviathan boss",
+          "full-body neon or saturated tropical palette",
+          "walking legs added during swim, extra fins or topology drift",
+          "left/front facing pose, perspective rotation or duplicated pose"
+        ]
+      }
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb",
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "24a8650afb244a38830f1f461704c1108bb8067ef115d9c0cabf546628187e32"
+  }
+}

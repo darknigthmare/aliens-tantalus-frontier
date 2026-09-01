@@ -1223,6 +1223,342 @@
       },
       "reviewer": "Codex V66 reference audit",
       "reviewedAt": "2026-09-01"
+    },
+    "enemy-051-ceto-reef-predator": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/ceto-reef-predator-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png"
+      ],
+      "designLock": "Original Tantalus Frontier aquatic fauna with no external model: one streamlined amphibious quadruped predator in strict right-facing orthographic profile, with one flat wedge head, lateral natural eye, visible gill slits, short neck, long tapered trunk, exactly four articulated weight-capable paddle limbs, one low dorsal crest and one deep non-bladed caudal swimming fin. Preserve the V56 identity, 186x82 logical runtime envelope, stable aquatic center/root, body length, head size, crest height and caudal depth across all 32 future poses. Materials are organic blue-black/deep-green wet hide with fine dark plates, subtle reef abrasion and only restrained cyan flank bioluminescence. Never add xenomorph anatomy, biomechanical metal, walking legs during swim, extra fins, leviathan scale or full-body neon. All future pixels must be original project art, canonExact=false.",
+      "reviewer": "Codex /root/generate_profile_039; V56 matrix, project-owned predecessors and batch-004 queue audited",
+      "reviewedAt": "2026-09-01",
+      "name": "Ceto Reef Predator",
+      "archetype": "Ceto Reef Predator",
+      "modifier": "Standard",
+      "biology": "fauna",
+      "caste": "aquatic",
+      "animationFamily": "aquatic",
+      "classification": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "canonExact": false,
+      "externalModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Original aquatic fauna from Tantalus Frontier. The V56 matrix found no credible Ceto creature in Alien, Weyland-Yutani, Colonial Marines or Alien RPG sources. Any licensed-continuity label attached to the world is not a visual model for this animal.",
+      "sourcePolicy": {
+        "positiveDesignAuthority": "LOCAL_PROJECT_LOCK_ONLY",
+        "externalSources": [],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false
+      },
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "v56Predecessors": [
+        {
+          "path": "assets/openai/sprites/enemies/ceto-reef-predator-action-sheet-v56.png",
+          "bytes": 1260125,
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "sha256": "17ac6c51776959f0e79f185fb8ca6b6d89c8c56de1468055ecf914403c514400",
+          "role": "project-owned identity predecessor; sole positive visual authority"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/enemies/ceto-reef-predator-action-sheet-v56.png",
+          "bytes": 396787,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "1c1ea87f59e201f005ce62b3463f3948ff014d5e41e69ce0d4d87d761e9a7ee7",
+          "role": "project-owned normalized predecessor; preserve identity, do not copy frames"
+        }
+      ],
+      "queueContractSnapshot": {
+        "name": "Ceto Reef Predator",
+        "biology": "fauna",
+        "caste": "aquatic",
+        "animationFamily": "aquatic",
+        "ordinal": 50,
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "normalizedGrid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "sourceSheetDimensions": [
+          1774,
+          887
+        ],
+        "clips": [
+          {
+            "id": "idle",
+            "fps": 6,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/idle.png",
+            "placeholderPromptSha256": "08a47b3af02e3fda5df0f162324f50888bf10cba0a640dd20fb6b07744ba5bb0",
+            "lockedMotion": "Eight near-stationary phases: gill pulse, restrained trunk breath, paddle trim, gentle caudal counterwave and seamless return without root drift."
+          },
+          {
+            "id": "move",
+            "fps": 12,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/move.png",
+            "placeholderPromptSha256": "516372a95dbde76263ea8e20abde9b779e8d20f399cbb8eb2a427e411e339689",
+            "lockedMotion": "Eight chronological swim phases driven by alternating body/caudal wave and four paddle-limb trims; seamless cycle, no walking gait."
+          },
+          {
+            "id": "attack",
+            "fps": 12,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+            "placeholderPromptSha256": "a96e3c8cd52e36ea1be721ce2ab99a259e86b2ec984284c3f9b1842d2f50f68d",
+            "lockedMotion": "Eight phases: compress wave, fix target right, tail thrust, forward lunge, single-jaw contact, follow-through, paddle brake and recovery."
+          },
+          {
+            "id": "death",
+            "fps": 10,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/death.png",
+            "placeholderPromptSha256": "b56a0d99443ff64a8cbd7cee03fdcd324b1fa3815f463be20e1aac546ac728b2",
+            "lockedMotion": "Eight irreversible aquatic phases: lethal impact, propulsion loss, body curl, uncontrolled sink/roll kept in profile, paddle slack, tail sag and motionless terminal pose."
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-051-ceto-reef-predator.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/all.gif"
+      },
+      "placeholderAudit": {
+        "observedInitialStatus": "pending-reference",
+        "observedReference": null,
+        "observedReferenceLockSha256": null,
+        "placeholderPromptsBlockedByMissingDesignLock": true,
+        "placeholderHashesVerifiedAgainstQueue": true,
+        "queueWasModified": false,
+        "generationAllowedAfterMergeOnly": true,
+        "decodedPromptHashResult": "DECLARED_HASHES_DO_NOT_MATCH_DECODED_PROMPT_TEXT",
+        "decodedPromptSha256ByClip": {
+          "idle": "6e1b0a61d45289d4b164bbd975d3ba100e8358686ee90efdf8c77e65cbf628e7",
+          "move": "7fe8422e6cc1f90e7c612c45c562f19dc7f368a1aa1115892219880ca11ed37a",
+          "attack": "4ed836161febc6d1313a9f97914bfe6a9165ebfe4274d97793c70c5430e86813",
+          "death": "ae3375d1ecd2fd0b9b78999b0ac6543b442b56d802856c69901a0f2bf56a0450"
+        }
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, 4x2, eight authored row-major poses each",
+        "32/32 strict right-facing whole-body cells with zero crop/contact/spill",
+        "one head, one jaw, four paddle limbs, lateral eye/gills and one caudal tail remain invariant",
+        "rigid inter-clip scale and aquatic root remain stable",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms original project fauna and no borrowed franchise creature"
+      ],
+      "designDetails": {
+        "silhouette": "Streamlined amphibious quadruped predator: flat wedge head, short neck, long tapered trunk, four articulated paddle-limbs, deep swimming tail fin and low dorsal crest.",
+        "palette": "Blue-black and deep green wet skin with fine dark plates; very restrained cyan flank bioluminescence.",
+        "surface": "Organic wet hide and fine plates, subtle reef abrasion and salt/mineral wear; never biomechanical or metallic.",
+        "anatomy": "One flat head, lateral natural eye, visible gill slits, one jaw, four weight-capable paddle limbs, one deep non-bladed swimming tail. No xenomorph organs.",
+        "equipment": "none",
+        "orientation": "strict orthographic gameplay profile facing RIGHT in all 32 poses; eye, gills, four limbs and caudal fin remain readable",
+        "scale": "V56 runtime envelope 186x82 logical pixels with ceto-reef-predator-water hitbox. Lock body length, head size, dorsal crest height and caudal depth across clips.",
+        "root": "Use a stable aquatic center/root and constant vertical waterline; grounded idle wording means no uncontrolled drift. Preserve full tail and paddles inside each cell.",
+        "background": "true transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no water scene, bubbles, shadow, reflection or gradient",
+        "cellBounds": "one complete animal per cell, generous equal gutter, no crop, overlap, boundary contact or cross-cell glow",
+        "prohibitions": [
+          "aquatic xenomorph, blind dome, inner jaw, dorsal tubes or acid",
+          "land shark, mermaid or oversized leviathan boss",
+          "full-body neon or saturated tropical palette",
+          "walking legs added during swim, extra fins or topology drift",
+          "left/front facing pose, perspective rotation or duplicated pose"
+        ]
+      }
+    },
+    "enemy-052-tantalus-tunnel-vermin": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png"
+      ],
+      "designLock": "Original Tantalus Reach cave fauna with no external model: one small extremely low ground arthropod in strict right-facing orthographic profile, with one protected burrowing head, reduced simple eye/sensors, one mandibular mouth, short tactile appendages, a stable segmented abdomen and exactly eight individually readable locomotor limbs. Preserve the V56 identity, 180x76 logical runtime envelope, fixed segment count, attachment points, body length and supporting-foot baseline across all 32 future poses. Materials are pale gray-ivory matte organic chitin, translucent cool-gray joints, dusty mineral abrasion and only sparse cold photophore pinpoints. Despite swarm caste, every cell contains exactly one animal. Never resemble a Facehugger, Chestburster, mini-xenomorph, metallic shell, giant boss or multi-subject swarm. All future pixels must be original project art, canonExact=false.",
+      "reviewer": "Codex /root/generate_profile_039; V56 matrix, project-owned predecessors and batch-004 queue audited",
+      "reviewedAt": "2026-09-01",
+      "name": "Tantalus Tunnel Vermin",
+      "archetype": "Tantalus Tunnel Vermin",
+      "modifier": "Standard",
+      "biology": "fauna",
+      "caste": "swarm",
+      "animationFamily": "fauna",
+      "classification": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "canonExact": false,
+      "externalModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Original pack vermin from the internal Tantalus Reach continuity. No external exact model exists. The name collision with Tantalus Base on Lethe in Aliens: Dark Descent creates no biological or visual relationship.",
+      "sourcePolicy": {
+        "positiveDesignAuthority": "LOCAL_PROJECT_LOCK_ONLY",
+        "externalSources": [],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false
+      },
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "v56Predecessors": [
+        {
+          "path": "assets/openai/sprites/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+          "bytes": 1278206,
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "sha256": "98aa4dd198f8c8db0d263353842ace48ef80ebf4821dcae032d89d7a3aeeb838",
+          "role": "project-owned identity predecessor; sole positive visual authority"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+          "bytes": 377877,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "6a824553bf7b6355b32e5ea5933998e7de51c5ea7a8b6c1233cc3bf8c76aa104",
+          "role": "project-owned normalized predecessor; preserve identity, do not copy frames"
+        }
+      ],
+      "queueContractSnapshot": {
+        "name": "Tantalus Tunnel Vermin",
+        "biology": "fauna",
+        "caste": "swarm",
+        "animationFamily": "fauna",
+        "ordinal": 51,
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "normalizedGrid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "sourceSheetDimensions": [
+          1774,
+          887
+        ],
+        "clips": [
+          {
+            "id": "idle",
+            "fps": 6,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/idle.png",
+            "placeholderPromptSha256": "3140cc6033b464dafd0987bf1cf79d50775494d59c3f1c50d90737eb2083cb38",
+            "lockedMotion": "Eight grounded phases: minute segment breath, tactile appendage sweep, mandibular test, weight shift and seamless return without translation."
+          },
+          {
+            "id": "move",
+            "fps": 12,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/move.png",
+            "placeholderPromptSha256": "a460446f5f880ae0d29c81c501557e3537aa0912bc78fb0ab8083a8136f37480",
+            "lockedMotion": "Eight chronological scuttle phases with eight fixed legs in coherent metachronal contact waves; low trunk and seamless root cycle."
+          },
+          {
+            "id": "attack",
+            "fps": 12,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/attack.png",
+            "placeholderPromptSha256": "293841fcc06e864159a57d71844b4175ea1106b0d0e1e288c36cc27da06f7f65",
+            "lockedMotion": "Eight phases: tactile aim, forebody compress, short rightward dart, mandibular contact, clamp, recoil, feet replant and guarded recovery."
+          },
+          {
+            "id": "death",
+            "fps": 10,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/death.png",
+            "placeholderPromptSha256": "aa5ecd662a3615f39a0872d64be96ea676563502e77d4cf14c17826cb30752c9",
+            "lockedMotion": "Eight irreversible phases: lethal impact, contact wave breaks, legs buckle inward, segment curl, lateral collapse, appendage slack and terminal stillness."
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-052-tantalus-tunnel-vermin.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-052-tantalus-tunnel-vermin.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-052-tantalus-tunnel-vermin/all.gif"
+      },
+      "placeholderAudit": {
+        "observedInitialStatus": "pending-reference",
+        "observedReference": null,
+        "observedReferenceLockSha256": null,
+        "placeholderPromptsBlockedByMissingDesignLock": true,
+        "placeholderHashesVerifiedAgainstQueue": true,
+        "queueWasModified": false,
+        "generationAllowedAfterMergeOnly": true,
+        "decodedPromptHashResult": "DECLARED_HASHES_DO_NOT_MATCH_DECODED_PROMPT_TEXT",
+        "decodedPromptSha256ByClip": {
+          "idle": "057d92c5d6b6c77e2d5c723c257da29534558c3179c36b1632ec9a1cecb3c8b5",
+          "move": "8eb55fe7026a63e24358328d8d54f7b2a6fc8eedd827b7596bbbf48735d470fc",
+          "attack": "31c5b786bebe5db8679c98a4e4b8b17cbb5c042650624dca57d09ddfa2bc55b2",
+          "death": "04cf15c17cc391347105bf73bdbb4f47b2fd8fa7934a919a0135dec963bbd93c"
+        }
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, 4x2, eight authored row-major poses each",
+        "32/32 strict right-facing cells with exactly one whole vermin and zero crop/contact/spill",
+        "one head, one mandibular mouth, fixed eight limbs, short sensors and stable segmentation",
+        "rigid scale and foot-root baseline across clips",
+        "true alpha or uniform #FF00FF only",
+        "reviewer rejects all facehugger/chestburster/xenomorph or borrowed-franchise readings"
+      ],
+      "designDetails": {
+        "silhouette": "Small extremely low cave arthropod with segmented trunk, protected burrowing head, short tactile appendages and exactly eight slender locomotor limbs for this V66 identity lock.",
+        "palette": "Pale gray-ivory matte chitin, translucent cool-gray joints, mineral dirt and only sparse cold photophore pinpoints.",
+        "surface": "Organic chipped matte chitin with dusty mineral abrasion; no metal, polished armor or resin biomechanics.",
+        "anatomy": "One protected burrowing head, reduced simple eye/sensors, one mandibular mouth, eight individually readable limbs, short tactile appendages, segmented abdomen; no xenomorph lifecycle anatomy.",
+        "equipment": "none",
+        "orientation": "strict orthographic ground-level profile facing RIGHT in all 32 poses; head and mandibles point right, no dorsal/front view",
+        "scale": "V56 runtime envelope 180x76 logical pixels with tantalus-tunnel-vermin-ground hitbox. Preserve small low stature, segment count, body length and limb attachment points across clips.",
+        "root": "Ground root follows the supporting feet at a stable baseline; body never floats. Antennae and rear abdomen remain fully inside each cell.",
+        "background": "true transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no tunnel, dust cloud, shadow or gradient",
+        "cellBounds": "exactly one vermin per cell despite swarm caste; generous equal gutter, zero crop, overlap, boundary contact or cross-cell appendage",
+        "prohibitions": [
+          "facehugger, chestburster, mini-xenomorph or xenomorph lifecycle cues",
+          "boss scale, giant tentacles or metallic shell",
+          "multiple swarm subjects within one cell",
+          "changing between six and eight limbs, extra mandibles or segmentation drift",
+          "left/front-facing pose, dorsal camera, perspective rotation or duplicate pose"
+        ]
+      }
     }
   }
 }
