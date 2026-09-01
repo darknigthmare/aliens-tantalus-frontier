@@ -1,0 +1,503 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json#profiles.enemy-042-combat-synthetic",
+  "profiles": {
+    "enemy-042-combat-synthetic": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.aliensfireteamelite.com/en/",
+        "https://www.aliensfireteamelite.com/en/releasenotes/",
+        "https://www.marvel.com/comics/issue/103779/alien_2022_2",
+        "https://www.marvel.com/comics/issue/103780/alien_2022_3",
+        "https://freeleaguepublishing.com/wp-content/uploads/2023/09/ALIEN_CHARIOT_OF_THE_GODS_AGENDAS_PRINT.pdf",
+        "https://www.aliensfireteamelite.com/en/community/meet-the-crew-esther/"
+      ],
+      "localPaths": [
+        "assets/openai/synthetic-android-animation-sheet.png",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/references/V66_PROFILES_039_042_READINESS.md"
+      ],
+      "designLock": "Combat Synthetic is an original Aliens: Tantalus Frontier PROJECT_ADAPTATION, not a published model name and not a canon-exact reconstruction. Official and licensed sources establish only the wider archetype: hostile Weyland-Yutani synthetic foes exist, synthetic special-operations units exist, synthetic models serve different roles, and a damaged android may bleed white rather than red. Preserve the project-owned V47.1 identity: one human-scale armored biped with exactly two arms and two legs; a compact armored head with one small cold-white optic; dark charcoal and gunmetal segmented ceramic plates; restrained exposed mechanical joints; and one wholly original compact carbine with a short blunt barrel, rectangular receiver, fixed shoulder stock and detachable straight box magazine. The same individual, plate geometry, optic, joints, carbine and magazine design persist across every clip. Strict right-facing orthographic gameplay profile. Idle and move use a stable two-hand ready carry; attack is shoulder, aim, fire, recoil and recovery; reload visibly removes the old magazine, retrieves and seats one replacement, operates the action and returns to ready; death is an irreversible supported collapse with the weapon retained in the composition and optional restrained white synthetic fluid, never red blood. No Working Joe skin or work uniform, human Marine face, giant mecha, powered exoskeleton, superhero armor, official logo, iconic pulse-rifle copy, weapon redesign, extra limb, disappearing weapon, left-facing pose, copied official bitmap or 1:1 claim.",
+      "reviewer": "Codex /root/prepare_profile_042; official Cold Iron/20th Century game pages, official Marvel licensed publication metadata, official ALIEN RPG material and project-owned V47.1 predecessor/provenance reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "classification": "PROJECT_ADAPTATION",
+  "externalCorrespondence": "ARCHETYPE_ONLY_NO_DIRECT_PUBLISHED_MODEL",
+  "identityBoundary": {
+    "projectName": "Combat Synthetic",
+    "documentedFranchiseArchetype": "Hostile or military-purpose synthetic people exist in licensed Alien stories and games, including Weyland-Yutani synthetic foes and a Synthetic Special Operations team.",
+    "negativeFindingScope": "The inspected official Cold Iron pages and release notes use Weyland-Yutani Synthetic foes, Maintenance Synths, Synth Wardens and Elite Synthetics, but do not define one exact model named Combat Synthetic. The inspected official Marvel pages call Steel Team a Synthetic Special Operations team, not Combat Synthetic. This scoped finding is not an exhaustive claim about every Alien publication.",
+    "tantalusAuthoredElements": [
+      "The Combat Synthetic profile name and its role in the Tantalus roster.",
+      "The exact dark segmented ceramic armor silhouette and exposed-joint layout.",
+      "The single cold-white optic and non-human armored head geometry.",
+      "The exact compact carbine, detachable box magazine, pouches and reload choreography.",
+      "The exact proportions, palette, gameplay scale, hitbox choice and five V66 animation sequences."
+    ],
+    "canonPosition": "The result may be canon-compatible at the broad synthetic combat archetype level, but it remains an original Tantalus design and canonExact stays false after any future art review."
+  },
+  "externalEvidence": [
+    {
+      "tier": "PRIMARY_LICENSED_GAME",
+      "authority": "Cold Iron Studios / 20th Century Studios — Aliens: Fireteam Elite",
+      "url": "https://www.aliensfireteamelite.com/en/",
+      "finding": "The official game page explicitly places Weyland-Yutani Synthetic foes among the enemies fought by Colonial Marines.",
+      "allowedUse": "Confirms the hostile corporate-synthetic archetype only. It does not identify one exact Combat Synthetic body, armor set, optic or weapon."
+    },
+    {
+      "tier": "PRIMARY_LICENSED_GAME",
+      "authority": "Cold Iron Studios / 20th Century Studios — release notes",
+      "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+      "finding": "The official notes use distinct labels including Maintenance Synths, Synth Wardens and Elite Synthetics, and discuss armed-combat behavior for synthetic companions Alpha and Beta.",
+      "allowedUse": "Confirms that synth is a family with multiple roles and combat-capable members. These labels must not be collapsed into a supposed single model named Combat Synthetic."
+    },
+    {
+      "tier": "OFFICIAL_LICENSED_PUBLICATION",
+      "authority": "Marvel — Alien (2022) #2",
+      "url": "https://www.marvel.com/comics/issue/103779/alien_2022_2",
+      "finding": "Marvel's official issue description calls Steel Team a Synthetic Special Operations team and sends it into a hostile Weyland-Yutani outpost.",
+      "allowedUse": "Confirms a synthetic special-operations archetype. Promotional language such as unkillable is not translated into literal invulnerability, and cover art is not copied."
+    },
+    {
+      "tier": "OFFICIAL_LICENSED_PUBLICATION",
+      "authority": "Marvel — Alien (2022) #3",
+      "url": "https://www.marvel.com/comics/issue/103780/alien_2022_3",
+      "finding": "Marvel's official issue description identifies Steel Team as Synthetic Special Operations and assigns it the clearance of a subterranean Xenomorph nest.",
+      "allowedUse": "Supports the broad armed field-combat role only; no Steel Team likeness, armor, insignia, weapon or composition may be reproduced."
+    },
+    {
+      "tier": "OFFICIAL_LICENSED_RPG",
+      "authority": "Free League Publishing / 20th Century Studios — ALIEN RPG, Chariot of the Gods",
+      "url": "https://freeleaguepublishing.com/wp-content/uploads/2023/09/ALIEN_CHARIOT_OF_THE_GODS_AGENDAS_PRINT.pdf",
+      "finding": "The official scenario states that an exposed android bleeds white rather than red and reveals enhanced synthetic physical capability after critical injury.",
+      "allowedUse": "Authorizes restrained white synthetic fluid in a damaged or death pose and a mechanically strong physical read. RPG statistics are not literal sprite measurements."
+    },
+    {
+      "tier": "PRIMARY_LICENSED_GAME_LORE",
+      "authority": "Cold Iron Studios / 20th Century Studios — Esther 1089-12/A7",
+      "url": "https://www.aliensfireteamelite.com/en/community/meet-the-crew-esther/",
+      "finding": "The official lore page documents a Weyland-Yutani-manufactured synthetic model serving a Colonial Marine battalion and distinguishes model history and assigned functions.",
+      "allowedUse": "Supports model and role diversity among synthetics. Esther's identity, face, clothing and equipment are expressly excluded from the Combat Synthetic design."
+    }
+  ],
+  "urlValidation": {
+    "checkedAt": "2026-09-01",
+    "checks": [
+      {
+        "url": "https://www.aliensfireteamelite.com/en/",
+        "result": "retrieved",
+        "contentType": "text/html",
+        "evidence": "Official copyright footer and Weyland-Yutani Synthetic foes text were present."
+      },
+      {
+        "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+        "result": "retrieved",
+        "contentType": "text/html",
+        "evidence": "Maintenance Synths, Synth Wardens and Elite Synthetics were present in the official notes."
+      },
+      {
+        "url": "https://www.marvel.com/comics/issue/103779/alien_2022_2",
+        "result": "official-search-indexed-direct-automated-fetch-403",
+        "contentType": "text/html",
+        "evidence": "Official indexed metadata exposed the issue title, publication details and Synthetic Special Operations description; no image was downloaded."
+      },
+      {
+        "url": "https://www.marvel.com/comics/issue/103780/alien_2022_3",
+        "result": "official-search-indexed-direct-automated-fetch-403",
+        "contentType": "text/html",
+        "evidence": "Official indexed metadata exposed the issue title, publication details and nest-clearance description; no image was downloaded."
+      },
+      {
+        "url": "https://freeleaguepublishing.com/wp-content/uploads/2023/09/ALIEN_CHARIOT_OF_THE_GODS_AGENDAS_PRINT.pdf",
+        "result": "retrieved",
+        "contentType": "application/pdf",
+        "evidence": "Four-page official PDF retrieved; the white-not-red android injury rule appears on printed page 3."
+      },
+      {
+        "url": "https://www.aliensfireteamelite.com/en/community/meet-the-crew-esther/",
+        "result": "retrieved",
+        "contentType": "text/html",
+        "evidence": "Official model history, Weyland-Yutani manufacture and Colonial Marine battalion role were present."
+      }
+    ]
+  },
+  "sourceUsePolicy": {
+    "onlineImagesDownloaded": false,
+    "officialOrLicensedBitmapEmbedded": false,
+    "officialAssetsCopied": false,
+    "officialAssetsTraced": false,
+    "policy": "External pages, official screenshots, trailers, comic covers and RPG artwork are study-only context. The positive visual identity comes from project-owned OpenAI ImageGen evidence and a new Tantalus lock. No official frame, cover, model render, texture, logo, insignia or weapon design may be copied, traced, embedded or used as an image-to-image source."
+  },
+  "queueContractSnapshot": {
+    "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+    "profileId": "enemy-042-combat-synthetic",
+    "name": "Combat Synthetic",
+    "archetype": "Combat Synthetic",
+    "modifier": "Standard",
+    "biology": "synthetic",
+    "caste": "assault",
+    "provenance": "licensed-reference",
+    "animationFamily": "armed",
+    "batchId": "batch-003",
+    "ordinal": 41,
+    "initialStatus": "pending-reference",
+    "reference": null,
+    "referenceLockSha256": null,
+    "generationProvider": "OpenAI ImageGen",
+    "canonExact": false,
+    "sourceGrid": {
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "aspectRatio": "2:1",
+      "chronology": "strict row-major"
+    },
+    "normalizedGrid": {
+      "columns": 4,
+      "rows": 10,
+      "cellWidth": 256,
+      "cellHeight": 256,
+      "guard": 16
+    },
+    "pivotCandidate": [128, 240],
+    "sourceFacing": "right",
+    "clips": [
+      {
+        "id": "idle",
+        "fps": 6,
+        "loop": true,
+        "frameCount": 8,
+        "frames": [0, 1, 2, 3, 4, 5, 6, 7],
+        "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+        "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/idle.png",
+        "blockedPromptSha256": "74c157b81cbb1a68de0139135b7806bf81cf8f1afe52d64fe2d213c349f1b8bf"
+      },
+      {
+        "id": "move",
+        "fps": 12,
+        "loop": true,
+        "frameCount": 8,
+        "frames": [8, 9, 10, 11, 12, 13, 14, 15],
+        "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+        "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/move.png",
+        "blockedPromptSha256": "0bcfc517212dd79c771d61623f4756fcf155ac554cf90da9bdaf80b45d4727eb"
+      },
+      {
+        "id": "attack",
+        "fps": 12,
+        "loop": false,
+        "frameCount": 8,
+        "frames": [16, 17, 18, 19, 20, 21, 22, 23],
+        "motion": "Shoulder and aim the exact locked weapon, fire and recoil, then return to ready; no weapon redesign. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+        "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/attack.png",
+        "blockedPromptSha256": "0be0ffdb04719d616efee5432420bc6ec19f570a0df7c19388b51668de2a0229"
+      },
+      {
+        "id": "death",
+        "fps": 10,
+        "loop": false,
+        "frameCount": 8,
+        "frames": [24, 25, 26, 27, 28, 29, 30, 31],
+        "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+        "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/death.png",
+        "blockedPromptSha256": "b36b539b2ea264ad2d1a03940759836ef9484c9a63cf6ccd6025518ac0e84266"
+      },
+      {
+        "id": "reload",
+        "fps": 10,
+        "loop": false,
+        "frameCount": 8,
+        "frames": [32, 33, 34, 35, 36, 37, 38, 39],
+        "motion": "One complete weapon-specific reload: remove magazine, insert replacement, operate action and resume ready.",
+        "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/reload.png",
+        "blockedPromptSha256": "6a1432461a2caaa8a2d7a900064bdb81e9360ad2393a529bad7c598891f87ab8"
+      }
+    ],
+    "snapshotInterpretation": "The queue still contains a BLOCKED identity placeholder in each prompt. The prompt hashes above describe those blocked queue strings, not approved generation prompts. This fragment does not replace them or edit the queue."
+  },
+  "projectEvidence": [
+    {
+      "path": "docs/references/V66_PROFILES_039_042_READINESS.md",
+      "sha256": "e237aaf1466c98859bc5abe0762886ed1e6947d49a4e88b855d727d6dc2394bc",
+      "role": "Current absence/readiness audit, five-clip count, original-adaptation boundary, design constraints and recommended humanoid collision class."
+    },
+    {
+      "path": "docs/ART_PROVENANCE_V47_1.md",
+      "sha256": "3b6377493075babd45602ebbbaf94cd5092fe31bdd3ea689203ed8f84e495376",
+      "role": "Project-owned OpenAI ImageGen provenance and exact prompt for the original heavy combat synthetic row."
+    },
+    {
+      "path": "assets/openai/synthetic-android-animation-sheet.png",
+      "sha256": "8b8da47dd0d58a54ae624d3ff6997d1fd20fb93d1a66cb9d6c5ac73101f486a4",
+      "size": [1024, 1024],
+      "mode": "RGBA",
+      "role": "Project-owned 4 by 4 V47.1 predecessor. Zero-based row 2 provides four right-facing combat-synthetic walk poses; identity, palette and broad equipment grammar only."
+    },
+    {
+      "path": "src/enemy-visual-runtime-v53.js",
+      "sha256": "7aa597a29e9e5f632d81ca85f52538918e655081ea7592e806bd771344add87d",
+      "role": "Current explicit Combat Synthetic mapping to legacy synthetic row 2 and safeguard against silent Working Joe substitution."
+    },
+    {
+      "path": "src/game-v51-runtime.js",
+      "sha256": "edfc10980c02815e5a61b4087e1a0776f692b66ccece708bf9ea3d5932fc22ca",
+      "role": "Legacy fallback render envelope of 84 by 112 pixels and synthetic atlas loading path."
+    },
+    {
+      "path": "src/sprite-animation-runtime.js",
+      "sha256": "2e9194f8b607c5d58f78a2c4f48d9ca8110ed3134ac8534a313c0653bc4b8870",
+      "role": "Current humanoid-feet precedent and npc-standing hitbox of x 88, y 34, width 80, height 206."
+    }
+  ],
+  "legacyReview": {
+    "sourceLayout": {
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "cellSize": [256, 256],
+      "combatSyntheticRowZeroBased": 2,
+      "combatSyntheticFrameCount": 4,
+      "rowSemantic": "armed walk cycle"
+    },
+    "legacyRuntime": {
+      "resolver": "synthetic:row2",
+      "renderEnvelopePx": [84, 112],
+      "recommendedV66Collision": {
+        "id": "npc-standing",
+        "x": 88,
+        "y": 34,
+        "width": 80,
+        "height": 206
+      }
+    },
+    "row2AlphaMeasurements": [
+      {
+        "frameZeroBased": 0,
+        "alphaBboxExclusive": [62, 8, 204, 249],
+        "widthPx": 142,
+        "heightPx": 241,
+        "bottomInclusivePx": 248,
+        "nonTransparentPixelCount": 14641
+      },
+      {
+        "frameZeroBased": 1,
+        "alphaBboxExclusive": [64, 8, 203, 230],
+        "widthPx": 139,
+        "heightPx": 222,
+        "bottomInclusivePx": 229,
+        "nonTransparentPixelCount": 14547
+      },
+      {
+        "frameZeroBased": 2,
+        "alphaBboxExclusive": [45, 8, 190, 230],
+        "widthPx": 145,
+        "heightPx": 222,
+        "bottomInclusivePx": 229,
+        "nonTransparentPixelCount": 14312
+      },
+      {
+        "frameZeroBased": 3,
+        "alphaBboxExclusive": [44, 8, 185, 230],
+        "widthPx": 141,
+        "heightPx": 222,
+        "bottomInclusivePx": 229,
+        "nonTransparentPixelCount": 14077
+      }
+    ],
+    "strengths": [
+      "The project already owns a distinct non-Working-Joe combat-synthetic identity with dark plates, exposed joints, cold optics and a compact carbine.",
+      "All four legacy poses face right and preserve a broadly consistent armed humanoid silhouette.",
+      "The source and exact ImageGen prompt have documented OpenAI provenance and explicitly prohibit copied official assets."
+    ],
+    "blockingGaps": [
+      "The predecessor supplies only four walk poses and shares one atlas with three other synthetic identities; V66 requires five dedicated eight-pose boards.",
+      "Legacy frame 0 reaches bottom y 248 while frames 1 to 3 end at y 229, so the old row is not evidence of a stable V66 root or baseline.",
+      "The old row has no idle, aimed-fire, death or complete magazine-reload chronology.",
+      "The previous prompt establishes an original Tantalus concept, not a canon-exact licensed Combat Synthetic model."
+    ]
+  },
+  "referenceLock": {
+    "identity": "One human-scale purpose-built Tantalus combat synthetic: a compact armored humanoid machine, heavier and wider than a standard Working Joe but not taller than a large human, carrying one fixed original carbine.",
+    "topology": {
+      "armCount": 2,
+      "legCount": 2,
+      "headCount": 1,
+      "weaponCount": 1,
+      "rule": "Exactly two shoulders connect to two continuous mechanical arms and five-finger-equivalent armored manipulators; exactly two hips connect to two continuous mechanical legs and practical planted feet. Cables, pistons, magazine, sling and plate gaps never become extra limbs or detached anatomy."
+    },
+    "silhouette": {
+      "body": "Human-scale broad-shouldered armored biped with a compact torso, narrow articulated waist, sturdy but not oversized limbs and practical feet. Armor adds width without turning the body into a giant robot, power loader or human-worn exoskeleton.",
+      "head": "Small compact armored synthetic head with no visible human face, hair, mouth, skin or helmeted Marine inside. One small cold-white optical sensor is the only bright facial point.",
+      "profile": "Strict right-facing orthographic gameplay side view. Preserve the same near-side and far-side plate shapes, optic placement and limb lengths in all forty future poses."
+    },
+    "materialsAndPalette": {
+      "armor": "Matte charcoal and dark gunmetal segmented ceramic plates with restrained edge wear; no glossy superhero shell, camouflage, bright faction paint or human tactical fabric dominance.",
+      "mechanics": "Exposed joint rings, compact pistons and braided dark cable only at neck, shoulder, elbow, waist, knee and ankle gaps; machinery remains integrated and never turns into loose tentacles.",
+      "lights": "One cold-white optic plus at most two tiny non-emissive pale status marks on the torso; no red Working Joe eyes, neon strips or colored team lights.",
+      "damageFluid": "Optional restrained white synthetic fluid appears only after lethal damage and stays attached to a damaged seam or the body. No red blood, green acid, gore spray or detached fluid cloud."
+    },
+    "weapon": {
+      "identity": "One wholly original compact synthetic carbine, identical in every clip: short blunt barrel without an iconic muzzle device, rectangular charcoal receiver, fixed compact shoulder stock, simple top sight block, forward support grip and one straight detachable box magazine ahead of the trigger housing.",
+      "continuity": "Receiver, barrel, stock, sight, grip, magazine dimensions and side-facing orientation never change. Idle and move retain a two-hand low-ready grip; attack shoulders the same weapon; reload changes only hand placement and magazine state; death carries the same weapon through the fall and keeps it connected to or resting against the body.",
+      "magazineLogic": "One old magazine is removed and stowed or dropped inside the owner's cell before one replacement from a fixed hip pouch is inserted. Never show two loaded magazines in the receiver, a magically changing magazine shape, an extra weapon, a detached floating gun or a weapon crossing a cell boundary.",
+      "copyrightBoundary": "No M41A pulse-rifle silhouette, no official Weyland-Yutani firearm, no recognizable real-world rifle copy, no faction logo, lettering, serial number or insignia."
+    },
+    "scale": {
+      "gameplayRole": "Armored assault humanoid using the npc-standing collision class; close to Working Joe stature with greater visual shoulder and forearm width from armor.",
+      "legacyRenderEnvelopePx": [84, 112],
+      "workingJoeLegacyComparisonPx": [88, 116],
+      "hitboxCandidate": {
+        "id": "npc-standing",
+        "x": 88,
+        "y": 34,
+        "width": 80,
+        "height": 206
+      },
+      "rigidLandmarks": "Measure armored crown-to-neck-ring height and the seam-to-seam shoulder-plate width on at least two comparable upright poses per clip. Cross-check hip-joint-to-shoulder-joint distance.",
+      "forbiddenMetric": "Never derive inter-clip scale from muzzle reach, stock angle, recoil, detached magazine, total pose bounding box, white-fluid mark or corpse width.",
+      "sourceScaleByClipStatus": "pending-generated-source-measurement"
+    },
+    "rootAndGround": {
+      "pivotCandidate": [128, 240],
+      "pivotStatus": "queue precedent only; requires manual physical-root review after generation",
+      "bodyRoot": "Project the pelvis joint onto the support plane under the loaded foot pair. The weapon, magazine, optic and farthest armor plate never define the root.",
+      "idle": "Both feet remain credibly planted; small servo settling and sensor motion do not translate the pelvis.",
+      "move": "A complete heel/contact, load, passing and recovery cycle exchanges support between the two feet while the carbine stays registered to the hands.",
+      "attack": "The rear foot and pelvis brace the shot; shoulder recoil and muzzle reach do not move the root or enlarge the hitbox.",
+      "reload": "The body remains supported while hand contacts change. Lowering the carbine or manipulating the magazine never creates foot slide.",
+      "death": "Support fails irreversibly. The terminal anchor lies under the collapsed pelvis/torso mass, not under the muzzle, magazine or farthest limb."
+    },
+    "sourceContract": {
+      "canvasAspectRatio": "2:1",
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "chronology": "strict row-major",
+      "background": "true transparent RGBA or perfectly uniform opaque #FF00FF",
+      "cellIsolation": "Exactly one complete synthetic and its one complete carbine per nominal cell. No body, plate, foot, muzzle, stock, magazine, cable, white-fluid mark or effect touches or crosses a cell boundary.",
+      "facing": "right",
+      "identityScale": "One common body, armor, weapon and anatomical scale across idle, move, attack, death and reload; no automatic per-pose correction.",
+      "clearance": "Keep generous equal gutters. If the source is 1774 by 887, target at least 55 pixels of clean matte at every nominal cell boundary.",
+      "forbiddenSurfaceElements": "No floor, cast shadow, scenery, grid line, label, text, logo, UI, watermark, projectile trail or detached muzzle-flash sprite."
+    },
+    "animation": {
+      "idle": {
+        "fps": 6,
+        "loop": true,
+        "poses": [
+          "two-hand low-ready neutral",
+          "small shoulder servo settle",
+          "optic scans slightly upward without turning camera",
+          "weight shifts minimally to rear foot",
+          "peak alert with carbine raised a few degrees",
+          "optic and shoulders return",
+          "weight recenters",
+          "near-neutral loop closure"
+        ],
+        "rule": "Eight restrained but distinct grounded poses; no human breathing exaggeration, patrol translation, weapon disappearance or aim-and-fire event."
+      },
+      "move": {
+        "fps": 12,
+        "loop": true,
+        "poses": [
+          "near-foot heel contact with two-hand ready grip",
+          "near leg accepts load",
+          "far leg passes beneath pelvis",
+          "far foot reaches forward",
+          "far-foot contact",
+          "far leg accepts load",
+          "near leg passes beneath pelvis",
+          "near foot recovers to cycle alignment"
+        ],
+        "rule": "Purposeful armored walk, not a sprint or goose-step. The same carbine stays registered to both hands and does not bob independently or translate within the cell."
+      },
+      "attack": {
+        "fps": 12,
+        "loop": false,
+        "poses": [
+          "low-ready anticipation",
+          "stock rises toward shoulder",
+          "optic and sight align right",
+          "braced aimed pre-fire",
+          "shot impulse with contained mechanical recoil",
+          "peak shoulder and barrel recoil",
+          "weapon settles while aim is retained",
+          "controlled return to low ready"
+        ],
+        "rule": "One coherent aimed shot from the exact locked carbine. No weapon morph, projectile, tracer, detached flash, hip-fire spray, melee strike or human facial expression."
+      },
+      "death": {
+        "fps": 10,
+        "loop": false,
+        "poses": [
+          "lethal impact with optional tiny white seam leak",
+          "upper-body recoil",
+          "one knee loses load",
+          "pelvis descends while weapon remains accounted for",
+          "remaining support fails",
+          "side or knee-to-torso ground impact",
+          "limbs and carbine settle against the body",
+          "terminal motionless synthetic"
+        ],
+        "rule": "One irreversible collapse, visually distinct from a nonlethal hurt. No red blood, explosion, dismemberment, detached head, disappearing carbine, dissolve or recovery."
+      },
+      "reload": {
+        "fps": 10,
+        "loop": false,
+        "poses": [
+          "stable low ready",
+          "muzzle dips and support hand reaches magazine",
+          "magazine release and old magazine caught",
+          "old magazine fully removed",
+          "replacement magazine drawn from the fixed hip pouch",
+          "replacement aligned and seated",
+          "action operated with weapon still pointed safely right",
+          "two-hand ready grip restored"
+        ],
+        "rule": "One mechanically complete weapon-specific reload. Old and replacement magazine continuity must be legible without extra hands, duplicate loaded magazines, teleporting parts, new weapon geometry or foot slide."
+      }
+    },
+    "prohibitions": [
+      "No claim that Combat Synthetic is one published canon model or that the Tantalus armor and carbine are official designs.",
+      "No Working Joe pallid molded face, red eyes, maintenance uniform, hazard suit or unarmed grapple identity.",
+      "No visible organic human face, skin, hair, Marine inside the shell or Colonial Marine silhouette with merely robotic eyes.",
+      "No giant mecha, powered loader, human-worn exoskeleton, superhero proportions, oversized shoulder tower or tank-like body.",
+      "No extra or missing arm, leg, hand, foot, optic, head, weapon or magazine and no cable misread as a limb.",
+      "No iconic M41A pulse-rifle copy, real-world rifle copy, official logo, lettering, serial, insignia or weapon redesign between clips.",
+      "No red blood, green acid, detached gore, bright energy core, muzzle-tracer line, explosion or free-floating VFX.",
+      "No left-facing pose, front or three-quarter turn, perspective drift, crop, cell contact, cross-cell fragment, floor, shadow, scenery, text, UI, watermark or copied official/licensed bitmap."
+    ]
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "mergeCompatibleProfileFragmentPresent": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "sourceBoardsCreated": false,
+    "requiredFutureBoardCount": 5,
+    "requiredFuturePoseCount": 40,
+    "normalizationRun": false,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false,
+    "metadataUpdated": false,
+    "gitTouched": false,
+    "nextGates": [
+      "Parent review and optional merge of profiles.enemy-042-combat-synthetic into the global reference registry.",
+      "Write and persist five exact prompts from this lock before any ImageGen call; do not reuse the queue's BLOCKED prompt strings.",
+      "Generate idle first as the identity and scale master, then condition move, attack, death and reload against the accepted idle identity.",
+      "Independently review 4 by 2 separation, forty distinct poses, strict right-facing view, body and weapon continuity, reload causality, inter-clip rigid-landmark scale and physical roots.",
+      "Explicit acceptance, normalization, metadata creation and runtime integration remain separate operations."
+    ],
+    "note": "This standalone fragment does not edit V66_ENEMY_BATCH_QUEUE.json, V66_ENEMY_BATCH_STATE.json, V66_ENEMY_BATCH_REFERENCES.json, metadata, normalized assets, runtime files, any other profile or Git."
+  }
+}

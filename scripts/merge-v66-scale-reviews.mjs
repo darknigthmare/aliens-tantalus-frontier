@@ -1,13 +1,15 @@
 // Deterministic assembly of independently reviewed post-generation scale fragments.
-// Every incoming profile is validated against its current PNGs, metadata sources,
-// measurements and evidence before the shared review is written. Never accepts art.
+// Every incoming profile is validated against its current PNGs, ordered normalized
+// source contract, measurements and evidence before the shared review is written.
+// A same-path/same-size active replacement leaves old metadata untouched and is
+// reported as requiring renormalization. This merge never accepts art.
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import { ROOT, scopedPath } from './enemy-batch-production.mjs';
-import { resolvePostGenerationScaleReviewCandidate } from './enemy-batch-scale-review.mjs';
+import { resolvePostGenerationScaleReviewMergeCandidate } from './enemy-batch-scale-review.mjs';
 
 const record = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -71,7 +73,7 @@ export async function mergeScaleReviewFragments({
   for (const profileId of incoming) {
     const job = jobs.get(profileId);
     const metadata = await readJson(scopedPath(root, job.metadataPath));
-    const proof = await resolvePostGenerationScaleReviewCandidate(job, metadata.sources, document, root, scopedPath);
+    const proof = await resolvePostGenerationScaleReviewMergeCandidate(job, metadata.sources, document, root, scopedPath);
     if (!proof || proof.profileId !== profileId) throw new Error('Scale-review candidate did not resolve for ' + profileId);
     proofs.push(proof);
   }
@@ -82,12 +84,17 @@ export async function mergeScaleReviewFragments({
   }
   const bytes = canonicalBytes(document);
   await writeFile(target, bytes);
+  const staleNormalizationSources = proofs
+    .filter((proof) => proof.staleNormalizedSourceClips?.length)
+    .map((proof) => ({ profileId: proof.profileId, clips: proof.staleNormalizedSourceClips }));
   return {
     path: targetPath,
     sha256: hash(bytes),
     mergedProfiles: incoming,
     preservedProfiles: Object.keys(beforeProfiles).filter((profileId) => !incoming.includes(profileId)).sort(),
     measurementCount: proofs.reduce((count, proof) => count + proof.measurementCount, 0),
+    staleNormalizationSources,
+    renormalizationRequiredProfiles: staleNormalizationSources.map(({ profileId }) => profileId),
     acceptedAutomatically: 0,
   };
 }

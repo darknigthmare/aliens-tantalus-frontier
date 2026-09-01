@@ -1,0 +1,263 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json#profiles.enemy-039-abomination",
+  "profiles": {
+    "enemy-039-abomination": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+        "https://www.aliensfireteamelite.com/en/releasenotes/",
+        "https://news.xbox.com/en-us/2022/08/30/the-aliens-fireteam-elite-pathogen-expansion-is-available-now/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/abomination-pathogen-brute-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/abomination-pathogen-brute-action-sheet-v56.png"
+      ],
+      "designLock": "Abomination is the retained Tantalus profile name for a PROJECT_ADAPTATION derived from the Aliens: Fireteam Elite Pathogen Brute, never the AVP Predalien homonym and never a promise of a pixel-exact licensed reconstruction. One very broad, low, heavy pathogen-mutated xenomorph with a small recessed head, exactly two legs and exactly two hypertrophied arms ending in two huge anatomical fist-like growths. Pale gray-ivory infected flesh, restrained dark crusting and stable organic asymmetry; strong rather than sickly, with no carried weapon, armor, clothing, tail, Yautja mandibles or dreadlocks. Strict right-facing orthographic gameplay profile. Locomotion is a grounded heavy bipedal/knuckle-supported trudge; attack is a committed two-growth ground slam with anticipation, impact, follow-through and recovery, never the queue's generic claw or inner-jaw strike. The shockwave is a gameplay event and is not painted as scenery or a detached effect on the source board. Preserve the same head, shoulder masses, growth diameters, limb count, asymmetry and scale across all clips. Use the V56 project sheet only for Tantalus palette, broad silhouette, grounding and motion continuity; do not copy it frame-for-frame. No extra limb, merged arm, xenomorph dome, dorsal cannon, biomechanical shell, projectile, crop, cell contact or official bitmap reuse.",
+      "reviewer": "Codex /root/prepare_profiles_039_040; official Cold Iron enemy description, release notes, first-hand Pathogen art-direction account and V56 project predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "classification": "PROJECT_ADAPTATION",
+  "externalCorrespondence": "DERIVED_FROM_EXTERNAL_MODEL",
+  "identityBoundary": {
+    "projectName": "Abomination",
+    "externalAnchor": "Pathogen Brute from Aliens: Fireteam Elite — Pathogen",
+    "nameConflict": "The project name must not be read as, or visually blended with, the AVP Predalien homonym.",
+    "canonPosition": "The external Pathogen Brute is canon/licensed reference material. This Tantalus profile, its exact proportions, full animation set and generated pixels remain an adaptation; canonExact stays false."
+  },
+  "externalEvidence": [
+    {
+      "tier": "PRIMARY_DEVELOPER",
+      "authority": "Cold Iron Studios / Aliens: Fireteam Elite",
+      "url": "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+      "finding": "The developer names the Pathogen Brute, calls it an unidentified mutated Xenomorph, identifies two huge fist-like growths at the ends of its arms, and describes both direct slams and a ground pound that creates damaging shockwaves.",
+      "allowedUse": "Positive identity and attack-function anchor for the Tantalus adaptation."
+    },
+    {
+      "tier": "PRIMARY_DEVELOPER",
+      "authority": "Cold Iron Studios / Aliens: Fireteam Elite release notes",
+      "url": "https://www.aliensfireteamelite.com/en/releasenotes/",
+      "finding": "The official notes retain the Pathogen Brute name and record a fix for sliding while stunned.",
+      "allowedUse": "Terminology and grounded-motion QA precedent only; it does not define a sprite pose sheet."
+    },
+    {
+      "tier": "FIRSTHAND_PRODUCTION",
+      "authority": "Cold Iron Studios Senior Character Artist Ashley Stegon via Xbox Wire",
+      "url": "https://news.xbox.com/en-us/2022/08/30/the-aliens-fireteam-elite-pathogen-expansion-is-available-now/",
+      "finding": "For the Pathogen Queen, the artist explains the family-level design goal: infected but not sickly, visibly strong, asymmetrical, and pale-skinned with subtle color variation.",
+      "allowedUse": "Pathogen material and infection-language anchor only. Queen anatomy, crown, proportions and encounter staging are not transferred to this Brute adaptation."
+    }
+  ],
+  "sourceUsePolicy": {
+    "onlineImagesDownloaded": false,
+    "officialOrLicensedBitmapEmbedded": false,
+    "officialAssetsCopied": false,
+    "policy": "External pages and their images are study-only references. No game screenshot, texture, model render, logo, film frame or licensed bitmap may be copied, traced or embedded in a future board."
+  },
+  "projectEvidence": [
+    {
+      "path": "docs/references/V66_PROFILES_039_042_READINESS.md",
+      "role": "Current absence/readiness audit and explicit canonExact=false boundary."
+    },
+    {
+      "path": "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+      "role": "Existing PROJECT_ADAPTATION classification, Pathogen Brute derivation and AVP Predalien exclusion."
+    },
+    {
+      "path": "src/enemy-visual-overrides-v56.js",
+      "role": "Existing enemy-039-abomination mapping, crusher-large hitbox and 190 by 132 legacy render envelope."
+    },
+    {
+      "path": "src/sprite-animation-runtime.js",
+      "role": "Legacy creature-ground pivot and crusher-large hitbox contract."
+    },
+    {
+      "path": "assets/openai/sprites/enemies/abomination-pathogen-brute-action-sheet-v56.png",
+      "size": [1536, 1024],
+      "mode": "RGBA",
+      "sha256": "d62dcb4f3b37374ba91ee316152ebaa00bdf6b00a4dcee9ee55c323f91188ae5",
+      "role": "Project-owned raw V56 predecessor; identity and broad motion reference only, never a V66 source board."
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemies/abomination-pathogen-brute-action-sheet-v56.png",
+      "size": [1024, 1024],
+      "mode": "RGBA",
+      "sha256": "0a85ccaa6f18c8e72eef25a0feb208be5c94b291934ffc621b524b6c86cfab58",
+      "role": "Project-owned normalized 4 by 4 predecessor used for cell-scale and grounding measurements."
+    }
+  ],
+  "legacyReview": {
+    "layout": {
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "cellSize": [256, 256],
+      "rowSemantics": ["idle", "move", "attack", "death"]
+    },
+    "runtimeVisualSize": [190, 132],
+    "runtimeHitbox": {
+      "id": "crusher-large",
+      "x": 24,
+      "y": 100,
+      "width": 216,
+      "height": 140
+    },
+    "normalizedAlphaMeasurements": {
+      "idle": {
+        "widthRangePx": [156, 164],
+        "heightRangePx": [150, 153]
+      },
+      "move": {
+        "widthRangePx": [166, 191],
+        "heightRangePx": [127, 143]
+      },
+      "attack": {
+        "widthRangePx": [145, 224],
+        "heightRangePx": [117, 164]
+      },
+      "death": {
+        "widthRangePx": [157, 204],
+        "heightRangePx": [36, 124]
+      },
+      "supportLineYInclusive": 239,
+      "interpretation": "All sixteen old cells stop at normalized y=239, matching the 16-pixel lower guard. Action bounding-box growth comes from arm reach and collapse and must not drive anatomical rescaling."
+    },
+    "strengths": [
+      "The low, broad brute silhouette and paired fist-growth identity are already readable.",
+      "The project palette and heavy grounded motion distinguish this profile from a standard Drone.",
+      "Four broad motion phases exist as continuity evidence."
+    ],
+    "blockingGaps": [
+      "Each old row supplies four poses, while V66 requires eight independently authored chronological poses per clip.",
+      "The old sheet cannot certify stable growth diameter, skull scale or complete limb topology across four new boards.",
+      "The generic queue attack text conflicts with the reviewed ground-slam identity and must not be used unchanged."
+    ]
+  },
+  "referenceLock": {
+    "topology": {
+      "armCount": 2,
+      "legCount": 2,
+      "fistGrowthCount": 2,
+      "tailCount": 0,
+      "rule": "Each hypertrophied arm remains continuously traceable from shoulder to elbow to one terminal fist-like growth. Growths may compress on impact but never split, detach, swap sides, become held weapons or spawn extra digits/limbs."
+    },
+    "silhouette": "Very broad and low, with a small head recessed between massive shoulders, compact central torso, powerful legs and two oversized forward arm-growth masses.",
+    "material": "Pale gray-ivory organic pathogen flesh with restrained bruised beige, cool pink and dark crusted seams. Asymmetry is stable and anatomical; the creature reads powerful, not emaciated or decomposed.",
+    "facing": "Strict right-facing orthographic gameplay side view in all 32 future poses.",
+    "scale": {
+      "gameplayRole": "Large low brute using the existing crusher-large gameplay class.",
+      "legacyRenderEnvelopePx": [190, 132],
+      "rigidLandmark": "Measure the same anatomical seam-to-seam diameter on the less-occluded fist growth and cross-check the cranial chord from jaw tip to rear skull root on at least two comparable poses per clip.",
+      "forbiddenMetric": "Never derive inter-clip scale from total arm reach, shockwave/VFX extent, pose bounding box or corpse width.",
+      "sourceScaleByClipStatus": "pending-generated-source-measurement"
+    },
+    "rootAndGround": {
+      "pivotCandidate": [128, 240],
+      "pivotStatus": "queue precedent only; requires manual physical-root review after generation",
+      "bodyRoot": "Project the pelvis/central body mass to the support plane; a planted fist is a contact point, not the body root.",
+      "livePoses": "At least one foot and the loaded rear support remain physically credible. Knuckle support may share load during the trudge without turning the creature into a four-legged animal.",
+      "attack": "The rearward body support stays braced through the double-growth slam; impact does not move or enlarge the hitbox.",
+      "death": "The terminal anchor lies beneath the collapsed torso mass, never beneath the farthest growth tip."
+    },
+    "sourceContract": {
+      "canvasAspectRatio": "2:1",
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "chronology": "strict row-major",
+      "background": "true transparent RGBA or perfectly uniform opaque #FF00FF",
+      "cellIsolation": "Exactly one complete creature per nominal cell; no body, growth, effect or fragment touches or crosses a cell boundary.",
+      "facing": "right",
+      "identityScale": "One common anatomy and source scale across idle, move, attack and death; no automatic per-pose correction."
+    },
+    "animation": {
+      "idle": {
+        "fps": 6,
+        "loop": true,
+        "poses": [
+          "heavy neutral rest",
+          "torso inhale",
+          "shoulders rise slightly",
+          "one growth tightens near the ground",
+          "peak alert without turning",
+          "weight shifts to the opposite leg",
+          "shoulders settle",
+          "near-neutral loop closure"
+        ]
+      },
+      "move": {
+        "fps": 12,
+        "loop": true,
+        "poses": [
+          "rear-foot contact",
+          "opposite growth reaches for support",
+          "growth plants without sliding",
+          "body mass passes over support",
+          "rear foot recovers",
+          "opposite foot contacts",
+          "growth unloads",
+          "return to cycle alignment"
+        ],
+        "rule": "Heavy grounded trudge with optional knuckle support; no agile Drone sprint, full quadrupedal gallop or cell-to-cell translation."
+      },
+      "attack": {
+        "fps": 12,
+        "loop": false,
+        "poses": [
+          "braced neutral",
+          "weight shifts rearward",
+          "both growths draw up",
+          "peak double-arm wind-up",
+          "downward acceleration",
+          "two-growth ground impact",
+          "compressed follow-through",
+          "controlled recovery"
+        ],
+        "rule": "Body mechanics communicate the damaging ground pound. No painted floor, shockwave ring, projectile, claw combo, tail strike or inner-jaw piston."
+      },
+      "death": {
+        "fps": 10,
+        "loop": false,
+        "poses": [
+          "lethal hit",
+          "upper-body recoil",
+          "one arm-growth support buckles",
+          "knees lose load",
+          "torso descends",
+          "side impact",
+          "growths settle",
+          "terminal motionless body"
+        ],
+        "rule": "One irreversible collapse with the complete body retained; no explosion, dissolution, detached growth or recovery."
+      }
+    },
+    "prohibitions": [
+      "No AVP Predalien identity, Yautja dreadlocks, mandibles, trophy gear or Predator technology.",
+      "No tail, Queen crest, long Drone dome, dorsal cannon, biomechanical armor or carried weapon.",
+      "No extra, missing, fused, branched or detached limb and no mismatch between the two fist-growth identities.",
+      "No generic inner-jaw/claw attack replacing the two-growth ground slam.",
+      "No painted shockwave, floor, cast shadow, scenery, text, logo, UI, watermark or checkerboard.",
+      "No left-facing pose, perspective turn, crop, cell contact, cross-cell fragment or copied official/licensed bitmap."
+    ]
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "sourceBoardsCreated": false,
+    "normalizationRun": false,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false,
+    "note": "This fragment is merge-compatible reference evidence only. It does not edit the global registry, queue, state, metadata, normalized assets, runtime files or Git."
+  }
+}

@@ -6,6 +6,7 @@ import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { deflateSync } from 'node:zlib';
 import { scopedPath } from '../scripts/enemy-batch-production.mjs';
+import { resolvePostGenerationScaleReviewCandidate } from '../scripts/enemy-batch-scale-review.mjs';
 import { mergeScaleReviewFragments } from '../scripts/merge-v66-scale-reviews.mjs';
 
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -66,7 +67,8 @@ async function fixture() {
     await writeFile(path, bytes);
     sources.push({ clip: clip.id, path: clip.sourcePath, sha256: hash(bytes), size: [400, 200] });
   }
-  await writeJson(scopedPath(root, job.metadataPath), { schema: 1, profileId, sources });
+  const metadataPath = scopedPath(root, job.metadataPath);
+  await writeJson(metadataPath, { schema: 1, profileId, sources });
   const evidencePath = 'docs/references/test-scale-evidence.txt';
   await writeFile(scopedPath(root, evidencePath), 'Reviewed synthetic scale evidence.');
   const measurement = (clip, frame, lengthPx) => ({
@@ -105,7 +107,7 @@ async function fixture() {
     coordinates: 'nominal-source-cell',
     profiles: { 'enemy-preserved': preserved },
   });
-  return { root, profileId, batchId, fragmentPath, fragment, targetPath, preserved };
+  return { root, profileId, batchId, fragmentPath, fragment, targetPath, preserved, job, sources, metadataPath };
 }
 
 test('scale merge preserves unrelated profiles and emits deterministic canonical output', async () => {
@@ -123,6 +125,8 @@ test('scale merge preserves unrelated profiles and emits deterministic canonical
   assert.deepEqual(first.mergedProfiles, [fix.profileId]);
   assert.deepEqual(first.preservedProfiles, ['enemy-preserved']);
   assert.equal(first.measurementCount, 4);
+  assert.deepEqual(first.staleNormalizationSources, []);
+  assert.deepEqual(first.renormalizationRequiredProfiles, []);
   assert.equal(first.acceptedAutomatically, 0);
   assert.equal(first.sha256, hash(firstBytes));
 
@@ -134,6 +138,53 @@ test('scale merge preserves unrelated profiles and emits deterministic canonical
   const secondBytes = await readFile(scopedPath(fix.root, fix.targetPath));
   assert.deepEqual(secondBytes, firstBytes);
   assert.equal(second.sha256, first.sha256);
+});
+
+test('scale merge accepts a same-contract active source replacement and leaves normalized metadata stale', async () => {
+  const fix = await fixture();
+  const normalizedMetadataBefore = await readFile(fix.metadataPath);
+  const replacement = syntheticPng(400, 200, 99);
+  const replacedClip = fix.job.clips[1];
+  await writeFile(scopedPath(fix.root, replacedClip.sourcePath), replacement);
+  fix.fragment.profiles[fix.profileId].sourceSha256ByClip[replacedClip.id] = hash(replacement);
+  await writeJson(scopedPath(fix.root, fix.fragmentPath), fix.fragment);
+
+  const result = await mergeScaleReviewFragments({
+    batch: fix.batchId,
+    fragmentPaths: [fix.fragmentPath],
+    root: fix.root,
+  });
+  assert.deepEqual(result.staleNormalizationSources, [{ profileId: fix.profileId, clips: [replacedClip.id] }]);
+  assert.deepEqual(result.renormalizationRequiredProfiles, [fix.profileId]);
+  assert.equal(result.acceptedAutomatically, 0);
+  assert.deepEqual(await readFile(fix.metadataPath), normalizedMetadataBefore);
+
+  const merged = JSON.parse(await readFile(scopedPath(fix.root, fix.targetPath), 'utf8'));
+  await assert.rejects(
+    resolvePostGenerationScaleReviewCandidate(fix.job, fix.sources, merged, fix.root, scopedPath),
+    /stale source SHA-256/,
+  );
+});
+
+test('active source replacement still rejects metadata path, size, order and fragment hash drift', async (t) => {
+  for (const mode of ['path', 'size', 'order', 'fragment-hash']) await t.test(mode, async () => {
+    const fix = await fixture();
+    const metadata = JSON.parse(await readFile(fix.metadataPath, 'utf8'));
+    const replacedClip = fix.job.clips[1];
+    const replacement = mode === 'size' ? syntheticPng(600, 300, 99) : syntheticPng(400, 200, 99);
+    await writeFile(scopedPath(fix.root, replacedClip.sourcePath), replacement);
+    if (mode !== 'fragment-hash') fix.fragment.profiles[fix.profileId].sourceSha256ByClip[replacedClip.id] = hash(replacement);
+    if (mode === 'path') metadata.sources[1].path = fix.job.clips[0].sourcePath;
+    if (mode === 'order') metadata.sources.reverse();
+    await writeJson(fix.metadataPath, metadata);
+    await writeJson(scopedPath(fix.root, fix.fragmentPath), fix.fragment);
+    const before = await readFile(scopedPath(fix.root, fix.targetPath));
+    await assert.rejects(
+      mergeScaleReviewFragments({ batch: fix.batchId, fragmentPaths: [fix.fragmentPath], root: fix.root }),
+      /Post-generation scale review/,
+    );
+    assert.deepEqual(await readFile(scopedPath(fix.root, fix.targetPath)), before);
+  });
 });
 
 test('scale merge rejects invalid batch, profile, SHA, clip coverage and factor without writing', async (t) => {

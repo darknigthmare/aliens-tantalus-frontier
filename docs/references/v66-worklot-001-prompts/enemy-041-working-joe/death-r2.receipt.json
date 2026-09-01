@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "profileId": "enemy-041-working-joe",
+  "clipId": "death",
+  "iteration": 2,
+  "kind": "generated-candidate-rejected",
+  "provider": "OpenAI ImageGen",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The ImageGen tool returned image pixels but no provider generation identifier.",
+  "generatedAt": "2026-09-01",
+  "promptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/death-r2.txt",
+  "promptSha256": "b8209ccc0578b0d56ba2eb2721bdf10a2959c55b761ab564e4a05c20ea1ea9f9",
+  "candidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/death-r2-imagegen-right-profile-candidate.png",
+  "candidateSha256": "b152d83e296aa77359d58808367052d3f4afb2fcc2718462b46a39c24107b6d3",
+  "candidateBytes": 1272154,
+  "selectionStatus": "rejected-visual-review",
+  "review": {
+    "gridReadable": true,
+    "identityPreserved": true,
+    "terminalChronology": true,
+    "strictRightFacingAllPoses": false,
+    "finding": "Late collapse poses still rotate the face upward and toward camera instead of retaining a strict lateral right-facing head."
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "profileId": "enemy-041-working-joe",
+  "clipId": "move",
+  "iteration": 3,
+  "kind": "generated-candidate-rejected",
+  "provider": "OpenAI ImageGen",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The ImageGen tool returned image pixels but no provider generation identifier.",
+  "generatedAt": "2026-09-01",
+  "promptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/move-r3.txt",
+  "promptSha256": "b7aaa0d8cf23fc86674f3167db989b6258374ecce7db47b867b6e1145e532723",
+  "candidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/move-r3-imagegen-full-cycle-candidate.png",
+  "candidateSha256": "24d100a352158166f5d7a6817a4f0c2bec2e906346df4ce5952bbad28d438fa6",
+  "candidateBytes": 1352568,
+  "selectionStatus": "rejected-visual-review",
+  "review": {
+    "rightFacing": true,
+    "gridReadable": true,
+    "identityPreserved": true,
+    "completeAlternatingGaitDemonstrated": false,
+    "finding": "Pose 5 still reads as the near-side striped leg forward and remains too close to pose 1; the opposite support contact is not visually proven."
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

@@ -5028,6 +5028,910 @@
           ]
         }
       }
+    },
+    "enemy-041-working-joe": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/audit_profile_041",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 40,
+      "method": "Manual per-pose pelvis center at the proximal leg junction, projected vertically to the physical planted-boot support or collapsed body/limb contact. Anchor y equals the complete current extraction lower guard sourceBounds[3], so sourceBounds[3]-anchorY=0 for all 40 poses. Hands, skull, reach, corpse width and whole-body extrema never choose anchor x.",
+      "visualReview": "All 40 current source poses and five marked overlays were inspected. Idle, move, attack and hurt remain boot-supported; active death-r3 poses 1-4 retain boot/knee support and poses 5-8 use the collapsed body/limb contact plane. Death poses 6-8 are lateral/prone and the former index-6 border signal is absent, with 48 matte columns between pose-6 and pose-7 foreground. Physical registration only; no artistic acceptance, factor application, normalization or runtime integration.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/idle-anchor-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/move-anchor-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/attack-anchor-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/death-anchor-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/hurt-anchor-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/death-frame6-ownership-overlay.png"
+      ],
+      "clips": {
+        "idle": {
+          "sourceSha256": "c0fa426d411febc2006b7199ca50b7f4dc27c7fa71a1f261e8366a89f564869b",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                224,
+                420
+              ],
+              "landmark": [
+                224,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                190,
+                30,
+                294,
+                420
+              ],
+              "evidence": "Idle pose 1: pelvis (224,260) to planted boots and complete guard y=420."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                216,
+                420
+              ],
+              "landmark": [
+                216,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                179,
+                30,
+                288,
+                420
+              ],
+              "evidence": "Idle pose 2: pelvis (216,260) to planted boots and complete guard y=420."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                221,
+                420
+              ],
+              "landmark": [
+                221,
+                263
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                173,
+                30,
+                299,
+                420
+              ],
+              "evidence": "Idle pose 3: pelvis (221,263) to planted boots and complete guard y=420."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                207,
+                420
+              ],
+              "landmark": [
+                207,
+                263
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                167,
+                34,
+                279,
+                420
+              ],
+              "evidence": "Idle pose 4: pelvis (207,263) to planted boots and complete guard y=420."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                219,
+                412
+              ],
+              "landmark": [
+                219,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                185,
+                29,
+                291,
+                412
+              ],
+              "evidence": "Idle pose 5: pelvis (219,255) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                204,
+                412
+              ],
+              "landmark": [
+                204,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                170,
+                31,
+                276,
+                412
+              ],
+              "evidence": "Idle pose 6: pelvis (204,255) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                210,
+                412
+              ],
+              "landmark": [
+                210,
+                258
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                173,
+                30,
+                288,
+                412
+              ],
+              "evidence": "Idle pose 7: pelvis (210,258) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                202,
+                412
+              ],
+              "landmark": [
+                202,
+                256
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                170,
+                29,
+                274,
+                412
+              ],
+              "evidence": "Idle pose 8: pelvis (202,256) to planted boots and complete guard y=412."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "ce25ef5e0896dc36f98ccbaed3667c91246574352cb23ed6989c79e0e8409e70",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                220,
+                412
+              ],
+              "landmark": [
+                220,
+                258
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                157,
+                33,
+                350,
+                412
+              ],
+              "evidence": "Move pose 1: pelvis (220,258) to planted boot and complete guard y=412."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                199,
+                410
+              ],
+              "landmark": [
+                199,
+                257
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                145,
+                33,
+                277,
+                410
+              ],
+              "evidence": "Move pose 2: pelvis (199,257) to planted boot and complete guard y=410."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                187,
+                414
+              ],
+              "landmark": [
+                187,
+                258
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                121,
+                33,
+                305,
+                414
+              ],
+              "evidence": "Move pose 3: pelvis (187,258) to planted boot and complete guard y=414."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                153,
+                411
+              ],
+              "landmark": [
+                153,
+                258
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                54,
+                33,
+                284,
+                411
+              ],
+              "evidence": "Move pose 4: pelvis (153,258) to planted boot and complete guard y=411."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                232,
+                402
+              ],
+              "landmark": [
+                232,
+                251
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                145,
+                24,
+                368,
+                402
+              ],
+              "evidence": "Move pose 5: pelvis (232,251) to planted boot and complete guard y=402."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                202,
+                403
+              ],
+              "landmark": [
+                202,
+                252
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                120,
+                25,
+                266,
+                403
+              ],
+              "evidence": "Move pose 6: pelvis (202,252) to planted boot and complete guard y=403."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                189,
+                402
+              ],
+              "landmark": [
+                189,
+                252
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                136,
+                24,
+                274,
+                402
+              ],
+              "evidence": "Move pose 7: pelvis (189,252) to planted boot and complete guard y=402."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                151,
+                402
+              ],
+              "landmark": [
+                151,
+                252
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                74,
+                24,
+                266,
+                402
+              ],
+              "evidence": "Move pose 8: pelvis (151,252) to planted boot and complete guard y=402."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "732c1570fe03663b49734f3db862f167f3d9a6ad470ef12b4fdbd68ce768d288",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                211,
+                421
+              ],
+              "landmark": [
+                211,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                171,
+                32,
+                272,
+                421
+              ],
+              "evidence": "Attack pose 1: pelvis (211,260) to planted boots and complete guard y=421."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                185,
+                422
+              ],
+              "landmark": [
+                185,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                71,
+                33,
+                245,
+                422
+              ],
+              "evidence": "Attack pose 2: pelvis (185,260) to planted boots and complete guard y=422."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                140,
+                422
+              ],
+              "landmark": [
+                140,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                87,
+                33,
+                278,
+                422
+              ],
+              "evidence": "Attack pose 3: pelvis (140,260) to planted boots and complete guard y=422."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                99,
+                422
+              ],
+              "landmark": [
+                99,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                47,
+                33,
+                263,
+                422
+              ],
+              "evidence": "Attack pose 4: pelvis (99,260) to planted boots and complete guard y=422."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                207,
+                412
+              ],
+              "landmark": [
+                207,
+                266
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                128,
+                43,
+                403,
+                412
+              ],
+              "evidence": "Attack pose 5: pelvis (207,266) to braced boots and complete guard y=412."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                158,
+                413
+              ],
+              "landmark": [
+                158,
+                264
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                88,
+                33,
+                312,
+                413
+              ],
+              "evidence": "Attack pose 6: pelvis (158,264) to braced boots and complete guard y=413."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                128,
+                414
+              ],
+              "landmark": [
+                128,
+                262
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                85,
+                33,
+                247,
+                414
+              ],
+              "evidence": "Attack pose 7: pelvis (128,262) to planted boots and complete guard y=414."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                77,
+                414
+              ],
+              "landmark": [
+                77,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                38,
+                32,
+                140,
+                414
+              ],
+              "evidence": "Attack pose 8: pelvis (77,260) to planted boots and complete guard y=414."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                230,
+                421
+              ],
+              "landmark": [
+                230,
+                280
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                120,
+                46,
+                363,
+                421
+              ],
+              "evidence": "Death-r3 pose 1: pelvis (230,280) to final planted-boot support and complete production-splitter guard y=421."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                220,
+                420
+              ],
+              "landmark": [
+                220,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                126,
+                103,
+                318,
+                420
+              ],
+              "evidence": "Death-r3 pose 2: lowering pelvis (220,290) to losing planted-boot support and complete production-splitter guard y=420."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                204,
+                421
+              ],
+              "landmark": [
+                204,
+                319
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                94,
+                168,
+                288,
+                421
+              ],
+              "evidence": "Death-r3 pose 3: kneeling pelvis (204,319) to boot/body support and complete production-splitter guard y=421."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                185,
+                421
+              ],
+              "landmark": [
+                185,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                63,
+                198,
+                276,
+                421
+              ],
+              "evidence": "Death-r3 pose 4: kneeling pelvis (185,325) to boot/body support and complete production-splitter guard y=421."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                190,
+                354
+              ],
+              "landmark": [
+                190,
+                274
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                67,
+                170,
+                371,
+                354
+              ],
+              "evidence": "Death-r3 pose 5: collapsing pelvis (190,274) to knee/hand/body contact and complete production-splitter guard y=354."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                163,
+                367
+              ],
+              "landmark": [
+                163,
+                310
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                0,
+                241,
+                408,
+                367
+              ],
+              "evidence": "Death-r3 pose 6: lateral-prone pelvis (163,310) to body/hand contact and complete production-splitter guard y=367."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                166,
+                369
+              ],
+              "landmark": [
+                166,
+                323
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                7,
+                281,
+                381,
+                369
+              ],
+              "evidence": "Death-r3 pose 7: right-profile prone pelvis (166,323) to body/forearm contact and complete production-splitter guard y=369; no border signal."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                170,
+                362
+              ],
+              "landmark": [
+                170,
+                326
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                4,
+                291,
+                376,
+                362
+              ],
+              "evidence": "Death-r3 pose 8: terminal right-profile prone pelvis (170,326) to body contact and complete production-splitter guard y=362."
+            }
+          ]
+        },
+        "hurt": {
+          "sourceSha256": "0f95a22d23dc82eb96b086e9822b44e095edc351035d39e926568430466a8d2e",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                214,
+                419
+              ],
+              "landmark": [
+                214,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                176,
+                30,
+                286,
+                419
+              ],
+              "evidence": "Hurt pose 1: pelvis (214,260) to planted boots and complete guard y=419."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                189,
+                419
+              ],
+              "landmark": [
+                189,
+                269
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                124,
+                34,
+                262,
+                419
+              ],
+              "evidence": "Hurt pose 2: recoiling pelvis (189,269) to planted boots and complete guard y=419."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                164,
+                419
+              ],
+              "landmark": [
+                164,
+                279
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                98,
+                61,
+                276,
+                419
+              ],
+              "evidence": "Hurt pose 3: deepest recoil pelvis (164,279) to planted boots and complete guard y=419."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                140,
+                419
+              ],
+              "landmark": [
+                140,
+                268
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                88,
+                35,
+                219,
+                419
+              ],
+              "evidence": "Hurt pose 4: damping pelvis (140,268) to planted boots and complete guard y=419."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                218,
+                412
+              ],
+              "landmark": [
+                218,
+                256
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                172,
+                29,
+                288,
+                412
+              ],
+              "evidence": "Hurt pose 5: recovery pelvis (218,256) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                195,
+                412
+              ],
+              "landmark": [
+                195,
+                256
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                156,
+                29,
+                266,
+                412
+              ],
+              "evidence": "Hurt pose 6: recovery pelvis (195,256) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                152,
+                412
+              ],
+              "landmark": [
+                152,
+                257
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                113,
+                29,
+                220,
+                412
+              ],
+              "evidence": "Hurt pose 7: near-neutral pelvis (152,257) to planted boots and complete guard y=412."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                123,
+                412
+              ],
+              "landmark": [
+                123,
+                257
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                84,
+                29,
+                191,
+                412
+              ],
+              "evidence": "Hurt pose 8: recovered pelvis (123,257) to planted boots and complete guard y=412."
+            }
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
     }
   }
 }

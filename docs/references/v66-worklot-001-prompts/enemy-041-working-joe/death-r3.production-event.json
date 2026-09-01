@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-041-working-joe",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:0c195b1563ac363fadf2f7ad6e16e510f3723586e0a0b76ea679d33883634671",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the raw selected ImageGen PNG SHA-256 identifies this capture.",
+  "actor": "Codex /root",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/death-r3.txt",
+  "actualPromptFileSha256": "7ebf6d4001ebcf758ee1375f9a95bf530175c2829c65365a09484561ee4ae01a",
+  "repairPromptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/death-r3.txt",
+  "repairPromptFileSha256": "7ebf6d4001ebcf758ee1375f9a95bf530175c2829c65365a09484561ee4ae01a",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
+  "sourceSha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-repair-capture",
+      "result": "The third death candidate preserves a right-facing prone terminal collapse and is the selected raw ImageGen revision.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/death-r3-imagegen-prone-right-profile-candidate.png",
+      "sha256": "0c195b1563ac363fadf2f7ad6e16e510f3723586e0a0b76ea679d33883634671"
+    },
+    {
+      "kind": "deterministic-magenta-flatten",
+      "result": "The broad magenta matte was flattened to exact #FF00FF. 1,370,918 matte pixels changed and zero foreground pixels changed.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/derived/death-r3-flat-before-cell-recompose.png",
+      "sha256": "9200221f30348a7bf733424f35b97968b62eb2112ffef1158d0cbb18b71dc621"
+    },
+    {
+      "kind": "safe-cell-component-recompose",
+      "result": "Each cell retained its largest connected subject. Top-row subjects moved upward by 26 pixels without crop; 126 disconnected row-boundary matte pixels were discarded. All eight cells then had zero boundary contact.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/derived/death-r3-flat-safe-recomposed.png",
+      "sha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157"
+    },
+    {
+      "kind": "previous-active-master-preserved",
+      "result": "The replaced source remains preserved because its late poses turned the face toward camera.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/death-r1-late-camera-turn-25ca0956.png",
+      "sha256": "25ca095618ffe5c41de854ab09fab4622c8abd48cf29c23b662c99d37cf50215"
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose source is active. Selection does not grant artistic acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
+      "sha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157"
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Source candidate only. Raw generation, deterministic repairs and prior active master are preserved and hash-locked; no acceptance or runtime status is implied."
+}

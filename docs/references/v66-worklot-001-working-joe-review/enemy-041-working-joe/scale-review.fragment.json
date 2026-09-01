@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-041-working-joe": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/audit_profile_041",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.003802,
+        "attack": 0.996,
+        "death": 1.02218,
+        "hurt": 0.98873
+      },
+      "sourceSha256ByClip": {
+        "idle": "c0fa426d411febc2006b7199ca50b7f4dc27c7fa71a1f261e8366a89f564869b",
+        "move": "ce25ef5e0896dc36f98ccbaed3667c91246574352cb23ed6989c79e0e8409e70",
+        "attack": "732c1570fe03663b49734f3db862f167f3d9a6ad470ef12b4fdbd68ce768d288",
+        "death": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+        "hurt": "0f95a22d23dc82eb96b086e9822b44e095edc351035d39e926568430466a8d2e"
+      },
+      "measurements": [
+        {"clip":"idle","frame":0,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[252,32],[268,96]],"lengthPx":65.96969,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"idle","frame":3,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[244,36],[260,98]],"lengthPx":64.031242,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"idle","frame":7,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[234,31],[249,93]],"lengthPx":63.788714,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"move","frame":0,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[255,35],[271,96]],"lengthPx":63.06346,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"move","frame":3,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[170,35],[186,98]],"lengthPx":65.0,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"move","frame":6,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[204,26],[219,88]],"lengthPx":63.788714,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"attack","frame":0,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[231,34],[247,97]],"lengthPx":65.0,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"attack","frame":4,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[247,45],[264,107]],"lengthPx":64.288413,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"attack","frame":7,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[101,35],[117,97]],"lengthPx":64.031242,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"death","frame":0,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[134,53],[178,99]],"lengthPx":63.655322,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Recalculated on active death-r3 and verified on the marked source overlay."},
+        {"clip":"death","frame":1,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[280,105],[262,165]],"lengthPx":62.641839,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Recalculated on active death-r3 and verified on the marked source overlay."},
+        {"clip":"death","frame":2,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[260,170],[257,231]],"lengthPx":61.073726,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Recalculated on active death-r3 and verified on the marked source overlay."},
+        {"clip":"hurt","frame":0,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[244,32],[260,96]],"lengthPx":65.96969,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"hurt","frame":3,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[178,37],[195,99]],"lengthPx":64.288413,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."},
+        {"clip":"hurt","frame":7,"landmark":"synthetic skull crown-to-chin chord","endpoints":[[150,31],[165,94]],"lengthPx":64.761099,"note":"Manual rigid cranial chord follows head rotation; bald crown to mental eminence, excluding neck, collar, optic and hands. Verified on the marked source overlay."}
+      ],
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/idle-scale-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/move-scale-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/attack-scale-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/death-scale-overlay.png",
+        "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/hurt-scale-overlay.png"
+      ],
+      "note": "Fifteen manually marked rigid skull chords, three distinct poses per clip. Idle median 64.031242px is the baseline; active death-r3 median is 62.641839px and the maximum proposed correction is 2.218 percent. Physical source-scale evidence only: factors are not applied here, no normalization, artistic acceptance or runtime integration."
+    }
+  }
+}

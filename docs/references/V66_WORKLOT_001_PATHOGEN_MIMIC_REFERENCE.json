@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json#profiles.enemy-040-pathogen-mimic",
+  "profiles": {
+    "enemy-040-pathogen-mimic": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+        "https://news.xbox.com/en-us/2022/08/30/the-aliens-fireteam-elite-pathogen-expansion-is-available-now/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/pathogen-mimic-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+        "docs/prompts/V54_IMAGEGEN_WAVE.md",
+        "docs/ART_PROVENANCE_V54.md"
+      ],
+      "designLock": "Pathogen Mimic is an original Aliens: Tantalus Frontier PROJECT_ADAPTATION, not a published Cold Iron enemy name and not a pixel-exact canon model. The inspected official Pathogen presentation names Runner, Blight, Brute and Queen but no Pathogen Mimic; it supplies pathogen-family context only. Preserve the project-owned V54 identity: one low, forward-pitched, half-upright human-derived pursuer with a stretched torso, exactly two arms and exactly two legs, asymmetrical claws, ruptured rib growths, compact pathogen sacs and wet exposed sinew. Pallid fungal gray-ivory flesh with restrained bruised beige/cool pink variation; stable asymmetry, recognizable head and thoracic landmarks, no carried weapon, armor or clothing. Strict right-facing orthographic gameplay profile. Move is a dragging but fast grounded pursuit, not a standard upright biped walk and not a four-legged xenomorph gallop. Attack is a committed wind-up, claw slash and short anatomical bite/impact with follow-through and recovery; no separate xenomorph inner-jaw piston. Death is a contained pathogen-sac rupture followed by irreversible collapse and a terminal body, never an explosion or dissolve. No tail, elongated biomechanical dome, dorsal tubes, fist-growths, extra limbs or ribs/tendons misread as appendages. Use the V54 sheet only for Tantalus identity, palette, low scale and broad motion continuity; do not copy frames. Preserve the same individual, sac placement, claw asymmetry, limb topology and anatomical scale across all clips; no crop, cell contact, official bitmap reuse or canonExact claim.",
+      "reviewer": "Codex /root/prepare_profiles_039_040; official Cold Iron Pathogen roster/context, first-hand Pathogen art-direction account and project-owned V54 predecessor/provenance reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "classification": "PROJECT_ADAPTATION",
+  "externalCorrespondence": "NO_DIRECT_PUBLISHED_MODEL",
+  "identityBoundary": {
+    "projectName": "Pathogen Mimic",
+    "externalAnchor": "Aliens: Fireteam Elite Pathogen material and infection language only",
+    "negativeFindingScope": "The inspected official Pathogen Deep Dive names Runner, Blight, Brute and Queen and does not name a Pathogen Mimic. This scoped absence is not claimed as an exhaustive proof about every Alien publication.",
+    "canonPosition": "The Mimic identity, human-derived anatomy, sacs, animation and exact proportions are authored for Tantalus. canonExact remains false even after a future visual review."
+  },
+  "externalEvidence": [
+    {
+      "tier": "PRIMARY_DEVELOPER",
+      "authority": "Cold Iron Studios / Aliens: Fireteam Elite",
+      "url": "https://www.aliensfireteamelite.com/en/community/pathogen-deep-dive-an-exhilarating-new-story/",
+      "finding": "The inspected developer presentation names and describes Pathogen Runner, Pathogen Blight and Pathogen Brute, then identifies the Pathogen Queen; it contains no enemy named Pathogen Mimic.",
+      "allowedUse": "Negative naming boundary and broad pathogen-family context only. It does not supply a Mimic anatomy."
+    },
+    {
+      "tier": "FIRSTHAND_PRODUCTION",
+      "authority": "Cold Iron Studios Senior Character Artist Ashley Stegon via Xbox Wire",
+      "url": "https://news.xbox.com/en-us/2022/08/30/the-aliens-fireteam-elite-pathogen-expansion-is-available-now/",
+      "finding": "For the Pathogen Queen, the artist describes an infected-but-strong read, narrative asymmetry, pale skin and subtle color variation.",
+      "allowedUse": "Family-level material doctrine only. Queen anatomy, crown, scale and attacks are expressly excluded from the Mimic design lock."
+    }
+  ],
+  "sourceUsePolicy": {
+    "onlineImagesDownloaded": false,
+    "officialOrLicensedBitmapEmbedded": false,
+    "officialAssetsCopied": false,
+    "policy": "External pages and images are study-only context. The positive Mimic identity comes from project-owned Tantalus evidence. No official screenshot, texture, model render, film frame or licensed bitmap may be copied, traced or embedded."
+  },
+  "projectEvidence": [
+    {
+      "path": "docs/references/V66_PROFILES_039_042_READINESS.md",
+      "role": "Current absence/readiness audit, Tantalus-adaptation boundary and queue-motion conflict."
+    },
+    {
+      "path": "docs/prompts/V54_IMAGEGEN_WAVE.md",
+      "role": "Positive project identity: pallid fungal flesh, stretched human-derived torso, asymmetrical claws, ruptured ribs, sacs, wet sinew and rapid half-upright pursuit."
+    },
+    {
+      "path": "docs/ART_PROVENANCE_V54.md",
+      "role": "Project-owned OpenAI ImageGen provenance and explicit record of rejected cross-cell variants."
+    },
+    {
+      "path": "src/enemy-visual-runtime-v53.js",
+      "role": "Existing dedicated Pathogen Mimic runtime identity."
+    },
+    {
+      "path": "src/sprite-animation-runtime.js",
+      "role": "Legacy creature-ground pivot, pathogen-mimic-large hitbox and 132 by 96 render envelope."
+    },
+    {
+      "path": "assets/openai/sprites/enemies/pathogen-mimic-action-sheet.png",
+      "size": [1254, 1254],
+      "mode": "RGB",
+      "sha256": "d544f4e79cb922d4a3f695d640d19ef50f2cf47b2e0d437fb0b077370420ec9f",
+      "role": "Project-owned raw V54 predecessor; identity and broad motion reference only, never a V66 source board."
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+      "size": [1024, 1024],
+      "mode": "RGBA",
+      "sha256": "f5b8525e9c0f4d03c30e6c671d129b0e7147878de4ce9647ac78e5800ec631c2",
+      "role": "Project-owned normalized 4 by 4 predecessor used for cell-scale and grounding measurements."
+    }
+  ],
+  "legacyReview": {
+    "layout": {
+      "columns": 4,
+      "rows": 4,
+      "frameCount": 16,
+      "cellSize": [256, 256],
+      "rowSemantics": ["idle", "move", "attack", "death"]
+    },
+    "runtimeVisualSize": [132, 96],
+    "runtimeHitbox": {
+      "id": "pathogen-mimic-large",
+      "x": 24,
+      "y": 52,
+      "width": 208,
+      "height": 188
+    },
+    "normalizedAlphaMeasurements": {
+      "idle": {
+        "widthRangePx": [176, 194],
+        "heightRangePx": [95, 151]
+      },
+      "move": {
+        "widthRangePx": [199, 207],
+        "heightRangePx": [85, 96]
+      },
+      "attack": {
+        "widthRangePx": [134, 224],
+        "heightRangePx": [87, 115]
+      },
+      "death": {
+        "widthRangePx": [148, 195],
+        "heightRangePx": [41, 101]
+      },
+      "supportLineYInclusive": 239,
+      "interpretation": "All sixteen old cells stop at normalized y=239. Width and height changes reflect rise, pursuit, reach and collapse; they are not inter-clip scale evidence."
+    },
+    "strengths": [
+      "A dedicated Tantalus identity, provenance record and right-facing runtime sheet already exist.",
+      "The low half-upright silhouette, fungal pallor, asymmetrical claws and rapid dragging pursuit separate the Mimic from a Drone.",
+      "The old four phases provide useful action intent and a stable ground-line precedent."
+    ],
+    "blockingGaps": [
+      "Each old row supplies four poses, while V66 requires eight independently authored chronological poses per clip.",
+      "The V54 provenance records rejected variants with bodies crossing cell boundaries; V66 cell isolation must be verified before normalization.",
+      "The generic queue attack text permits an inner-jaw strike and generic biped motion, both inconsistent with the reviewed project lock.",
+      "No external published model can certify the Mimic; identity review must test the Tantalus contract, not canon likeness."
+    ]
+  },
+  "referenceLock": {
+    "topology": {
+      "armCount": 2,
+      "legCount": 2,
+      "tailCount": 0,
+      "rule": "Exactly two shoulders connect to two continuous arms and two asymmetric clawed hands; exactly two hips connect to two continuous legs and feet. Ruptured ribs, tendons, sacs and fungal protrusions are surface anatomy, never extra locomotive limbs, fingers, tails or detached creatures."
+    },
+    "silhouette": "Low, forward-pitched and half-upright with a stretched human-derived thorax, narrow damaged waist, long dragging limbs, asymmetric claws and compact sacs clustered on stable thoracic/flank landmarks.",
+    "material": "Pallid fungal gray-ivory flesh with restrained cool pink, bruised beige and translucent wet-sinew accents. Infection creates stable asymmetry without random recoloring, neon glow or decomposed-zombie clothing.",
+    "headAndMouth": "A small recognizable human-derived head integrated into the stretched torso, with one distorted anatomical mouth suitable for a short bite. No smooth xenomorph dome, visible helmet, Predator mandibles or separate inner-jaw piston.",
+    "facing": "Strict right-facing orthographic gameplay side view in all 32 future poses.",
+    "scale": {
+      "gameplayRole": "Fast low adaptive pursuer retaining the pathogen-mimic-large gameplay class.",
+      "legacyRenderEnvelopePx": [132, 96],
+      "rigidLandmark": "Measure a repeatable thoracic chord from the posterior scapular/rib-root landmark to the anterior sternum notch and cross-check the hip-to-shoulder socket distance on at least two comparable poses per clip.",
+      "forbiddenMetric": "Never derive inter-clip scale from claw reach, rib protrusions, sac swelling, global bounding box or corpse width.",
+      "sourceScaleByClipStatus": "pending-generated-source-measurement"
+    },
+    "rootAndGround": {
+      "pivotCandidate": [128, 240],
+      "pivotStatus": "queue precedent only; requires manual physical-root review after generation",
+      "bodyRoot": "Project the pelvis to the support plane beneath the currently loaded foot/leg pair; never anchor to a claw, rib spur, tendon or sac.",
+      "idle": "The low half-upright stance remains supported and loopable; twitching does not move the root.",
+      "move": "Feet exchange load in a fast dragging pursuit. A hand may swing or brush near the ground but cannot become an added leg or redefine the root.",
+      "attack": "Pelvis and rear foot remain the body anchor through the slash-and-bite sequence; reach does not enlarge the hitbox.",
+      "death": "The terminal anchor lies under the collapsed pelvis/torso contact, never under a ruptured sac or far claw."
+    },
+    "sourceContract": {
+      "canvasAspectRatio": "2:1",
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "chronology": "strict row-major",
+      "background": "true transparent RGBA or perfectly uniform opaque #FF00FF",
+      "cellIsolation": "Exactly one complete creature per nominal cell; no body, claw, rib growth, sac, tendon or fragment touches or crosses a cell boundary.",
+      "facing": "right",
+      "identityScale": "One common anatomy and source scale across idle, move, attack and death; no automatic per-pose correction."
+    },
+    "animation": {
+      "idle": {
+        "fps": 6,
+        "loop": true,
+        "poses": [
+          "low dormant neutral",
+          "small shoulder twitch",
+          "thorax inhale",
+          "head lifts slightly",
+          "peak alert without standing upright",
+          "sac tension releases",
+          "weight settles",
+          "near-neutral loop closure"
+        ],
+        "rule": "Eight distinct but restrained supported poses; no locomotion, topology change or full human upright stance."
+      },
+      "move": {
+        "fps": 12,
+        "loop": true,
+        "poses": [
+          "front-foot contact",
+          "body lowers into drag",
+          "rear leg passes",
+          "rear foot plants",
+          "pelvis drives forward",
+          "opposite leg passes",
+          "opposite foot plants",
+          "return to cycle alignment"
+        ],
+        "rule": "Fast desperate half-upright pursuit with grounded foot exchange; no standard military walk, quadrupedal xenomorph gallop or translation across cells."
+      },
+      "attack": {
+        "fps": 12,
+        "loop": false,
+        "poses": [
+          "guarded neutral",
+          "torso coils",
+          "lead claw draws back",
+          "slash extension",
+          "claw contact",
+          "short anatomical bite/impact",
+          "recoil follow-through",
+          "supported recovery"
+        ],
+        "rule": "One coherent slash-and-bite attack. No separate xenomorph inner jaw, projectile, detached acid, tail strike or extra attacking limb."
+      },
+      "death": {
+        "fps": 10,
+        "loop": false,
+        "poses": [
+          "lethal hit",
+          "stagger",
+          "one compact sac ruptures without detaching",
+          "thorax folds",
+          "pelvis loses support",
+          "ground impact",
+          "limbs settle",
+          "terminal motionless body"
+        ],
+        "rule": "Contained rupture and irreversible collapse; no full-body explosion, dissolve, detached gore cloud, regrowth or living final pose."
+      }
+    },
+    "prohibitions": [
+      "No claim that Pathogen Mimic is a published Cold Iron caste or a canon-exact model.",
+      "No tail, elongated xenomorph dome, dorsal tubes, Queen crest, Brute fist-growths or black biomechanical shell.",
+      "No extra arm, leg, claw, head or creature; ribs, tendons and sacs never become appendages.",
+      "No generic inner-jaw attack, upright human walk, quadrupedal Drone sprint, weapon, armor, clothing or equipment.",
+      "No neon infection glow, magenta anatomy, painted pathogen cloud, floor, shadow, scenery, text, logo, UI, watermark or checkerboard.",
+      "No left-facing pose, perspective turn, crop, cell contact, cross-cell fragment or copied official/licensed bitmap."
+    ]
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "sourceBoardsCreated": false,
+    "normalizationRun": false,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false,
+    "note": "This fragment is merge-compatible reference evidence only. It does not edit the global registry, queue, state, metadata, normalized assets, runtime files or Git."
+  }
+}

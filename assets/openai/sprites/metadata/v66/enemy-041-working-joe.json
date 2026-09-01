@@ -30,40 +30,47 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-041-working-joe.webp",
-  "normalizedSha256": "cece641977c3d04d9de80a5bce7748060ca8d467458022a8a2b9aad052cc7836",
+  "normalizedSha256": "ea6ff8e9042c6d348545b8d00f189a9f65250a3528e19114f624de6a29d93010",
   "preview": "assets/openai/sprites/previews/v66/enemy-041-working-joe/all.gif",
-  "previewSha256": "3a993f4a4827868de02156a5e4f715ac6c25203a17e8d208fc0de4f2d1481dee",
+  "previewSha256": "fd6a320abf2e5db17e8c2edf8ef2be0aad157e228b934c92f216327ee6921c6e",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.574358974,
+  "scale": 0.443230375,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0,
-    "hurt": 1.0
+    "idle": 1,
+    "move": 1.003802,
+    "attack": 0.996,
+    "death": 1.02218,
+    "hurt": 0.98873
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "status": "pending",
-    "reason": "No source-anchor review file."
+    "path": "docs/references/V66_BATCH_003_ANCHOR_REVIEW.json",
+    "sha256": "2dcb74c17bed7cdfd11d1a226069b6d3c5a63bec8f5bcea5235a770a84a235e8",
+    "status": "reviewed",
+    "reviewer": "Codex /root/audit_profile_041",
+    "reviewedAt": "2026-09-01",
+    "method": "Manual per-pose pelvis center at the proximal leg junction, projected vertically to the physical planted-boot support or collapsed body/limb contact. Anchor y equals the complete current extraction lower guard sourceBounds[3], so sourceBounds[3]-anchorY=0 for all 40 poses. Hands, skull, reach, corpse width and whole-body extrema never choose anchor x.",
+    "reviewedPoseCount": 40,
+    "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": false,
-    "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaMatte": false,
+    "removeEnclosedMagentaAaFringe": false,
+    "removeMagentaSpill": false
   },
   "enclosedMagentaMatte": {
-    "enabled": true,
-    "aaFringeEnabled": true,
+    "enabled": false,
+    "aaFringeEnabled": false,
     "method": "strict-exterior-matched-magenta-v1",
-    "strictCorePixelCount": 1557,
-    "aaFringePixelCount": 652,
-    "removedPixelCount": 2209,
-    "sourceProofSha256": "7028412899f14e3852a37b09bb156bf76c62715177848ba0b7735c4cbf3711ed"
+    "strictCorePixelCount": 0,
+    "aaFringePixelCount": 0,
+    "removedPixelCount": 0,
+    "sourceProofSha256": "c7d3cc970d193d3168b50ab25ac58ec336b7b74d8dcd0ba981a715fabade32a1"
   },
   "rawPreserved": true,
   "interpolatedFrames": 0,
@@ -82,10 +89,10 @@
       "promptSha256": "814d784e71ac05f0113deccc29948b1377fed7fa00e6b40fef9aadb84913b4aa",
       "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
       "enclosedMagentaMatte": {
-        "requested": true,
-        "applied": true,
-        "aaFringeRequested": true,
-        "aaFringeApplied": true,
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
         "aaThresholds": {
           "minimumRedBlue": 35,
           "minimumChroma": 20,
@@ -109,11 +116,7 @@
           "maximumRedBlueDifference": 32,
           "maximumReferenceChannelDistance": 24
         },
-        "referenceRgb": [
-          248,
-          3,
-          245
-        ],
+        "referenceRgb": null,
         "removedPixelCount": 0,
         "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -134,10 +137,10 @@
       "promptSha256": "22d58a702b560d3eaac28e004055e30d49a5442abe0aea1771236afdb265518f",
       "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
       "enclosedMagentaMatte": {
-        "requested": true,
-        "applied": true,
-        "aaFringeRequested": true,
-        "aaFringeApplied": true,
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
         "aaThresholds": {
           "minimumRedBlue": 35,
           "minimumChroma": 20,
@@ -161,11 +164,7 @@
           "maximumRedBlueDifference": 32,
           "maximumReferenceChannelDistance": 24
         },
-        "referenceRgb": [
-          233,
-          11,
-          229
-        ],
+        "referenceRgb": null,
         "removedPixelCount": 0,
         "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -186,62 +185,10 @@
       "promptSha256": "734e5a99ee522ea6f2eb5be55a499ff7b8a5d6d553d9885324ebb86e7677f0d7",
       "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
       "enclosedMagentaMatte": {
-        "requested": true,
-        "applied": true,
-        "aaFringeRequested": true,
-        "aaFringeApplied": true,
-        "aaThresholds": {
-          "minimumRedBlue": 35,
-          "minimumChroma": 20,
-          "maximumRedBlueDifference": 32,
-          "maximumSourceRadius": 2
-        },
-        "strictCorePixelCount": 1557,
-        "aaFringePixelCount": 652,
-        "strictCoreMaskSha256": "74b5da025b43afd12ee6e89ee3cbfc776e3b8f64f0d2ff1dcfdc70a79cf70f42",
-        "aaFringeMaskSha256": "21ff6d7cbb6b4fb8f3f7b7780bddcd6765ca2d20990a881f8f4b81b39dbae287",
-        "method": "strict-exterior-matched-magenta-v1",
-        "nativeAlphaPreserved": false,
-        "sourceSize": [
-          1774,
-          887
-        ],
-        "thresholds": {
-          "minimumRedBlue": 190,
-          "maximumGreen": 60,
-          "minimumChroma": 150,
-          "maximumRedBlueDifference": 32,
-          "maximumReferenceChannelDistance": 24
-        },
-        "referenceRgb": [
-          240,
-          6,
-          239
-        ],
-        "removedPixelCount": 2209,
-        "removedCoordinatesSha256": "0e3559c7f5eb4084628c338fd6276be21591b327289cf6f119cbb3e4cea20686",
-        "removedRgbaSha256": "d9069a8e011fdf5207d08b12166de72e9c8e6cda8011a42049fb24d1f7271ce7",
-        "sourceRgbaSha256": "edba683a206c785e4d4a7630a9a5fe9ed48fe3227e5a18479e27232b65eca935",
-        "recoloredPixels": 0,
-        "inpaintedPixels": 0
-      }
-    },
-    {
-      "clip": "death",
-      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
-      "sha256": "25ca095618ffe5c41de854ab09fab4622c8abd48cf29c23b662c99d37cf50215",
-      "size": [
-        1774,
-        887
-      ],
-      "mode": "RGB",
-      "promptSha256": "f18d6cc25b8883663548d0541b42ab022ffff08fad822ac6febd7a0222e0e033",
-      "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
-      "enclosedMagentaMatte": {
-        "requested": true,
-        "applied": true,
-        "aaFringeRequested": true,
-        "aaFringeApplied": true,
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
         "aaThresholds": {
           "minimumRedBlue": 35,
           "minimumChroma": 20,
@@ -265,15 +212,59 @@
           "maximumRedBlueDifference": 32,
           "maximumReferenceChannelDistance": 24
         },
-        "referenceRgb": [
-          242,
-          8,
-          236
-        ],
+        "referenceRgb": null,
         "removedPixelCount": 0,
         "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "sourceRgbaSha256": "73d730d0e383ca4bb3a9b4fcee9f5241bf870d5bc0abb3cfdec7d6df52ff1e3d",
+        "sourceRgbaSha256": "edba683a206c785e4d4a7630a9a5fe9ed48fe3227e5a18479e27232b65eca935",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
+      "sha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "promptSha256": "f18d6cc25b8883663548d0541b42ab022ffff08fad822ac6febd7a0222e0e033",
+      "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
+      "enclosedMagentaMatte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "aee7a6409bce1174fa9a086e63ac63787ec20f876c97bd7ebd763cbea4fb8317",
         "recoloredPixels": 0,
         "inpaintedPixels": 0
       }
@@ -290,10 +281,10 @@
       "promptSha256": "70e5c560754bebb2f198af0601a4e42761cf5aae854085964ee8b6e4b9230658",
       "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6",
       "enclosedMagentaMatte": {
-        "requested": true,
-        "applied": true,
-        "aaFringeRequested": true,
-        "aaFringeApplied": true,
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
         "aaThresholds": {
           "minimumRedBlue": 35,
           "minimumChroma": 20,
@@ -317,11 +308,7 @@
           "maximumRedBlueDifference": 32,
           "maximumReferenceChannelDistance": 24
         },
-        "referenceRgb": [
-          242,
-          7,
-          244
-        ],
+        "referenceRgb": null,
         "removedPixelCount": 0,
         "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -347,9 +334,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/idle.webp",
-      "sha256": "ee4df6eaf6022103b5e6ec64275aeda336ef4b8a013ea20c24f1c53bf9103186",
+      "sha256": "e5dda2e4b90dbb67d26f9fb56c436762ac0e95e38f21182a10cb0a72041e6a94",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-041-working-joe/idle.gif",
-      "previewSha256": "21a0c880eb2b63c28d6b23f179744c6f62979dbc431f7e206742ec392fbfc8ac"
+      "previewSha256": "e959ce04ffdc2cabf333f6628eb257159ed850ad9e6876f5bfbc6a8bae2ddc8b"
     },
     {
       "id": "move",
@@ -366,9 +353,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/move.webp",
-      "sha256": "5165a116eff98723d58d03dd157fb91028fa657ed2f5cacbc01ac885e03fb692",
+      "sha256": "7cbae9fcb65080a2e48ea5de4ff3fe859efc7a68cb7f575cba8e55ab0f69c719",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-041-working-joe/move.gif",
-      "previewSha256": "5be1a7aa7107cd40a20586642b991c941d0686b31f1da5075c66f70f0d88bd34"
+      "previewSha256": "2d96021305d23c688ff307bf8c2027c9cba0d47e5aae4040258e78e25bf18fae"
     },
     {
       "id": "attack",
@@ -385,9 +372,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/attack.webp",
-      "sha256": "8cb0bd60c3094c8933761408cff812f6d821f83bdaf9c95802b41ecf8f42ac81",
+      "sha256": "b24168ddca9de64383eec172fe9352764bb918caba246c099ca891821958e72b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-041-working-joe/attack.gif",
-      "previewSha256": "58a5d97b5c5eeba7845a6830ece50e25b3d5bbae32624fc12ce5d03bfd6e62c8"
+      "previewSha256": "024082b4273fa94649cc69f7b6f14a0f628d1d97b82c2a2228660c103ca428a6"
     },
     {
       "id": "death",
@@ -404,9 +391,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/death.webp",
-      "sha256": "a539c24ceeb3cdda5cb0e59c8dcf848cee7c92dca2bcf0a19ce74287a99b473f",
+      "sha256": "63a87744527f1d068c4d08d27fe06e8c228931e413d1e1d9202b4c735a1fc2d4",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-041-working-joe/death.gif",
-      "previewSha256": "17286f821a973e412374de4dec26e144b9b455010439a8ee8f570f0fa988864d"
+      "previewSha256": "03b0c8ad61287792419b3724f51d29c3a136face7b3f5b8104cc6db0753ede05"
     },
     {
       "id": "hurt",
@@ -423,9 +410,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-041-working-joe/hurt.webp",
-      "sha256": "d7fd519c3c983c73521b6938b3a880b561e023033ae669f95423f4a714bdbf0a",
+      "sha256": "523a7421ca725176b64c28257e940c7f2bdfa7a352f0c7f2cc968e8f6ebd0e7d",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-041-working-joe/hurt.gif",
-      "previewSha256": "6e7d9788fc46ce931581799e8141e69f7b74b85ac2a8e115bf50fc970364cced"
+      "previewSha256": "fcb40b773d18d310bc6fa40b147fb1bfa2a65d802d02c3cbe05455ec3c2bb0f5"
     }
   ],
   "placements": [
@@ -454,16 +441,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "7fba208b48e47298222197872b228d1345c85c5a5248e865e405bf77d04bc796",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        224,
+        420
+      ],
+      "sourceLandmark": [
+        224,
+        260
+      ],
+      "sourceAnchorEvidence": "Idle pose 1: pelvis (224,260) to planted boots and complete guard y=420.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        34.0,
+        390.0
+      ],
+      "renderedAnchor": [
+        128.03846153846155,
+        240.0
+      ],
       "index": 0,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        98,
-        16,
-        158,
+        113,
+        67,
+        159,
         240
       ]
     },
@@ -492,16 +497,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e08b4bc278b763963f2f33b90461ab3432a9842b85280c455627024481f97b8a",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        216,
+        420
+      ],
+      "sourceLandmark": [
+        216,
+        260
+      ],
+      "sourceAnchorEvidence": "Idle pose 2: pelvis (216,260) to planted boots and complete guard y=420.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        37.0,
+        390.0
+      ],
+      "renderedAnchor": [
+        128.29357798165137,
+        240.0
+      ],
       "index": 1,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        96,
-        16,
-        159,
+        112,
+        67,
+        160,
         240
       ]
     },
@@ -530,16 +553,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8ce1c5554b64a9b3957978c635c1e894c1f4cb56c5efe80ca81427e054e4b7cf",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        420
+      ],
+      "sourceLandmark": [
+        221,
+        263
+      ],
+      "sourceAnchorEvidence": "Idle pose 3: pelvis (221,263) to planted boots and complete guard y=420.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        48.0,
+        390.0
+      ],
+      "renderedAnchor": [
+        128.33333333333334,
+        240.0
+      ],
       "index": 2,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        92,
-        16,
-        164,
+        107,
+        67,
+        163,
         240
       ]
     },
@@ -568,15 +609,33 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3286ecde55de7946baca1b49755d7ce8a1bf1a8410cd7b3c4946fa4b098602b8",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        207,
+        420
+      ],
+      "sourceLandmark": [
+        207,
+        263
+      ],
+      "sourceAnchorEvidence": "Idle pose 4: pelvis (207,263) to planted boots and complete guard y=420.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        40.0,
+        386.0
+      ],
+      "renderedAnchor": [
+        127.85714285714286,
+        240.0
+      ],
       "index": 3,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        96,
-        18,
+        110,
+        69,
         160,
         240
       ]
@@ -606,16 +665,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "bc960071059202a29551d1074a6aaf187c9db44ade13a578f587143036afbdf3",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        219,
+        412
+      ],
+      "sourceLandmark": [
+        219,
+        255
+      ],
+      "sourceAnchorEvidence": "Idle pose 5: pelvis (219,255) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        34.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.0754716981132,
+        240.0
+      ],
       "index": 4,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        98,
-        20,
-        159,
+        113,
+        70,
+        160,
         240
       ]
     },
@@ -644,16 +721,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "0d7a5cf59a37fc6ecf9081b934742527e44e2bfa31162f581c2623c418ee5319",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        204,
+        412
+      ],
+      "sourceLandmark": [
+        204,
+        255
+      ],
+      "sourceAnchorEvidence": "Idle pose 6: pelvis (204,255) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        34.0,
+        381.0
+      ],
+      "renderedAnchor": [
+        128.0754716981132,
+        240.0
+      ],
       "index": 5,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        98,
-        21,
-        159,
+        113,
+        71,
+        160,
         240
       ]
     },
@@ -682,16 +777,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b89a89483d6375533eb7bb6ff13c00c1e96fe4366656d0210db9e7ea1fb01b75",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        412
+      ],
+      "sourceLandmark": [
+        210,
+        258
+      ],
+      "sourceAnchorEvidence": "Idle pose 7: pelvis (210,258) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        37.0,
+        382.0
+      ],
+      "renderedAnchor": [
+        128.40869565217392,
+        240.0
+      ],
       "index": 6,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        95,
-        21,
-        161,
+        112,
+        71,
+        163,
         240
       ]
     },
@@ -720,16 +833,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "1de03d52c4972ab467cbdb37d7ee59bee1c9a5f66295aad81492c0faf03c9549",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        202,
+        412
+      ],
+      "sourceLandmark": [
+        202,
+        256
+      ],
+      "sourceAnchorEvidence": "Idle pose 8: pelvis (202,256) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        32.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.15384615384616,
+        240.0
+      ],
       "index": 7,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1,
+      "appliedScale": 0.443230375,
       "renderedBounds": [
-        98,
-        20,
-        158,
+        114,
+        70,
+        160,
         240
       ]
     },
@@ -758,16 +889,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b3558245614f55f52885ee45aa81c47217d8950aaccb653467b62b9be0431d28",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        412
+      ],
+      "sourceLandmark": [
+        220,
+        258
+      ],
+      "sourceAnchorEvidence": "Move pose 1: pelvis (220,258) to planted boot and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        63.0,
+        379.0
+      ],
+      "renderedAnchor": [
+        128.07253886010363,
+        240.0
+      ],
       "index": 8,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        72,
-        22,
-        183,
+        100,
+        71,
+        186,
         240
       ]
     },
@@ -796,16 +945,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "40f507acbb50a475875e263865e18e10bf5ebed47a259096a2c73e5b3c654c13",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        199,
+        410
+      ],
+      "sourceLandmark": [
+        199,
+        257
+      ],
+      "sourceAnchorEvidence": "Move pose 2: pelvis (199,257) to planted boot and complete guard y=410.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        54.0,
+        377.0
+      ],
+      "renderedAnchor": [
+        128.13636363636363,
+        240.0
+      ],
       "index": 9,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        90,
-        23,
-        166,
+        104,
+        72,
+        163,
         240
       ]
     },
@@ -834,15 +1001,33 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "18d5676941177b39956936e8326071abb700767e9d2ea8138a511b3a564a90de",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        187,
+        414
+      ],
+      "sourceLandmark": [
+        187,
+        258
+      ],
+      "sourceAnchorEvidence": "Move pose 3: pelvis (187,258) to planted boot and complete guard y=414.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        66.0,
+        381.0
+      ],
+      "renderedAnchor": [
+        128.41304347826087,
+        240.0
+      ],
       "index": 10,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        75,
-        21,
+        99,
+        70,
         181,
         240
       ]
@@ -872,16 +1057,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "158314f8286c9004885e671f66583682effc00bc0f155ce0e67c7fa1ba28e527",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        153,
+        411
+      ],
+      "sourceLandmark": [
+        153,
+        258
+      ],
+      "sourceAnchorEvidence": "Move pose 4: pelvis (153,258) to planted boot and complete guard y=411.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        99.0,
+        378.0
+      ],
+      "renderedAnchor": [
+        127.90434782608696,
+        240.0
+      ],
       "index": 11,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        62,
-        23,
-        194,
+        84,
+        72,
+        186,
         240
       ]
     },
@@ -910,16 +1113,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "706ba9dc3f835c44a8d13bbe3c1970d4ad247efa757ac8984e7b4b4b510b3863",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        402
+      ],
+      "sourceLandmark": [
+        232,
+        251
+      ],
+      "sourceAnchorEvidence": "Move pose 5: pelvis (232,251) to planted boot and complete guard y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        87.0,
+        378.0
+      ],
+      "renderedAnchor": [
+        127.62331838565022,
+        240.0
+      ],
       "index": 12,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        64,
-        23,
-        192,
+        89,
+        72,
+        188,
         240
       ]
     },
@@ -948,16 +1169,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3114666f60e149f760291acedda4cdc80b6e041b2d5a3a7a0fdd53b205a32536",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        202,
+        403
+      ],
+      "sourceLandmark": [
+        202,
+        252
+      ],
+      "sourceAnchorEvidence": "Move pose 6: pelvis (202,252) to planted boot and complete guard y=403.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        82.0,
+        378.0
+      ],
+      "renderedAnchor": [
+        127.5068493150685,
+        240.0
+      ],
       "index": 13,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        86,
-        23,
-        170,
+        91,
+        72,
+        156,
         240
       ]
     },
@@ -986,16 +1225,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b13d00a2aba7c54dc2e6110ae4e4d5a7715bd6ed8e74748f04bc2ce1e27aa305",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        189,
+        402
+      ],
+      "sourceLandmark": [
+        189,
+        252
+      ],
+      "sourceAnchorEvidence": "Move pose 7: pelvis (189,252) to planted boot and complete guard y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        53.0,
+        378.0
+      ],
+      "renderedAnchor": [
+        128.42753623188406,
+        240.0
+      ],
       "index": 14,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        88,
-        23,
-        167,
+        105,
+        72,
+        166,
         240
       ]
     },
@@ -1024,16 +1281,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "82d5555ce3a25f333303a4007279deaf9448fe1b4d2703fd3e3a4f6194da9f97",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        151,
+        402
+      ],
+      "sourceLandmark": [
+        151,
+        252
+      ],
+      "sourceAnchorEvidence": "Move pose 8: pelvis (151,252) to planted boot and complete guard y=402.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        77.0,
+        378.0
+      ],
+      "renderedAnchor": [
+        128.08854166666666,
+        240.0
+      ],
       "index": 15,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.003802,
+      "appliedScale": 0.444915537,
       "renderedBounds": [
-        73,
-        23,
-        183,
+        94,
+        72,
+        179,
         240
       ]
     },
@@ -1062,16 +1337,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "51f4c8a43fd83ca2f6630bb1d6e429adda0ed7e78be34974de14977da5188546",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        211,
+        421
+      ],
+      "sourceLandmark": [
+        211,
+        260
+      ],
+      "sourceAnchorEvidence": "Attack pose 1: pelvis (211,260) to planted boots and complete guard y=421.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        40.0,
+        389.0
+      ],
+      "renderedAnchor": [
+        127.82178217821783,
+        240.0
+      ],
       "index": 16,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        99,
-        17,
-        157,
+        110,
+        68,
+        155,
         240
       ]
     },
@@ -1095,21 +1388,39 @@
         174,
         389
       ],
-      "foregroundPixels": 28454,
-      "mattePixels": 168238,
+      "foregroundPixels": 28569,
+      "mattePixels": 168123,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "7fceedf4b299c9f0e625aebe0564c002634d6adb3726e3827150bfa0564134a7",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "cc6aca1285feeed281274eacd8e083ae71f7c121aa1a9678a50741fce332acc3",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        185,
+        422
+      ],
+      "sourceLandmark": [
+        185,
+        260
+      ],
+      "sourceAnchorEvidence": "Attack pose 2: pelvis (185,260) to planted boots and complete guard y=422.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        114.0,
+        389.0
+      ],
+      "renderedAnchor": [
+        128.44827586206895,
+        240.0
+      ],
       "index": 17,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
         78,
-        17,
-        178,
+        68,
+        155,
         240
       ]
     },
@@ -1133,21 +1444,39 @@
         191,
         389
       ],
-      "foregroundPixels": 29380,
-      "mattePixels": 167312,
+      "foregroundPixels": 30015,
+      "mattePixels": 166677,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "0cf45fe95aa39844d418f1e0926f61ed9ab5bf89095131aac08a01c3935df812",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "27923dd5ee04d6421b6ee7667ec7e6d68afc271004e2cd25de3d7906666d7d3a",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        140,
+        422
+      ],
+      "sourceLandmark": [
+        140,
+        260
+      ],
+      "sourceAnchorEvidence": "Attack pose 3: pelvis (140,260) to planted boots and complete guard y=422.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        53.0,
+        389.0
+      ],
+      "renderedAnchor": [
+        128.3089005235602,
+        240.0
+      ],
       "index": 18,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        73,
-        17,
-        183,
+        105,
+        68,
+        189,
         240
       ]
     },
@@ -1171,21 +1500,39 @@
         216,
         389
       ],
-      "foregroundPixels": 30015,
-      "mattePixels": 167121,
+      "foregroundPixels": 30687,
+      "mattePixels": 166449,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "36e6b274c37b007d1d0623677ba5da52d8dcf8c12a13c736f5a754ead685c0e4",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "b27de59e7eacc378135ed45590c03f0bc3d8ad5af5c5c1cdd6663f6e734932b2",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        99,
+        422
+      ],
+      "sourceLandmark": [
+        99,
+        260
+      ],
+      "sourceAnchorEvidence": "Attack pose 4: pelvis (99,260) to planted boots and complete guard y=422.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        52.0,
+        389.0
+      ],
+      "renderedAnchor": [
+        127.87037037037037,
+        240.0
+      ],
       "index": 19,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        66,
-        17,
-        190,
+        105,
+        68,
+        200,
         240
       ]
     },
@@ -1214,16 +1561,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "5c860e4f44b519a87a8e7c349fda1c454a1d5b01996bfca95d84174474e9fd4e",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 20,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
-      "renderedBounds": [
-        49,
-        28,
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
         207,
+        412
+      ],
+      "sourceLandmark": [
+        207,
+        266
+      ],
+      "sourceAnchorEvidence": "Attack pose 5: pelvis (207,266) to braced boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        79.0,
+        369.0
+      ],
+      "renderedAnchor": [
+        127.75999999999999,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
+      "renderedBounds": [
+        93,
+        77,
+        214,
         240
       ]
     },
@@ -1252,16 +1617,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "ee7058bc536a1def3528e1eb94182d076cd75301c773355c2f4ad817ab29fa90",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        158,
+        413
+      ],
+      "sourceLandmark": [
+        158,
+        264
+      ],
+      "sourceAnchorEvidence": "Attack pose 6: pelvis (158,264) to braced boots and complete guard y=413.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        70.0,
+        380.0
+      ],
+      "renderedAnchor": [
+        127.9375,
+        240.0
+      ],
       "index": 21,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        64,
-        22,
-        193,
+        97,
+        72,
+        196,
         240
       ]
     },
@@ -1285,21 +1668,39 @@
         162,
         381
       ],
-      "foregroundPixels": 28153,
-      "mattePixels": 168096,
+      "foregroundPixels": 28940,
+      "mattePixels": 167309,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "d0b117aeb1dadb445ffc3da26dd88005506730855746f3028cd14e0b29377987",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "f69fcece437dfa0cfa9e91fc68fcafe757e5ed617248453156be33231c41e259",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        128,
+        414
+      ],
+      "sourceLandmark": [
+        128,
+        262
+      ],
+      "sourceAnchorEvidence": "Attack pose 7: pelvis (128,262) to planted boots and complete guard y=414.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        43.0,
+        381.0
+      ],
+      "renderedAnchor": [
+        128.11111111111111,
+        240.0
+      ],
       "index": 22,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        82,
-        21,
-        175,
+        109,
+        72,
+        181,
         240
       ]
     },
@@ -1328,16 +1729,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "44dc2894f0e632216cc01332485d512c96b4d3fc00d42e4ffafd370307d0c2e1",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        77,
+        414
+      ],
+      "sourceLandmark": [
+        77,
+        260
+      ],
+      "sourceAnchorEvidence": "Attack pose 8: pelvis (77,260) to planted boots and complete guard y=414.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        39.0,
+        382.0
+      ],
+      "renderedAnchor": [
+        128.2058823529412,
+        240.0
+      ],
       "index": 23,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.996,
+      "appliedScale": 0.441457453,
       "renderedBounds": [
-        98,
-        21,
-        157,
+        111,
+        71,
+        156,
         240
       ]
     },
@@ -1352,30 +1771,48 @@
         444
       ],
       "sourceBounds": [
-        151,
-        39,
-        275,
-        419
+        120,
+        46,
+        363,
+        421
       ],
       "sourceSize": [
-        124,
-        380
+        243,
+        375
       ],
-      "foregroundPixels": 26385,
-      "mattePixels": 170751,
+      "foregroundPixels": 30850,
+      "mattePixels": 166286,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "2c58f74767108100514bcf12718cc0751b52b6c386223447abedf8f221c31cc0",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "90041c993b4e199d3bb1ba1cc0b02ad2f904d09fda177f4519d009cd7b1eb1ea",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        230,
+        421
+      ],
+      "sourceLandmark": [
+        230,
+        280
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 1: pelvis (230,280) to final planted-boot support and complete production-splitter guard y=421.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        110.0,
+        375.0
+      ],
+      "renderedAnchor": [
+        127.79423868312757,
+        240.0
+      ],
       "index": 24,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        92,
-        22,
-        163,
+        78,
+        70,
+        188,
         240
       ]
     },
@@ -1390,30 +1827,48 @@
         444
       ],
       "sourceBounds": [
-        112,
-        61,
-        272,
-        419
+        126,
+        103,
+        318,
+        420
       ],
       "sourceSize": [
-        160,
-        358
+        192,
+        317
       ],
-      "foregroundPixels": 24880,
-      "mattePixels": 171812,
+      "foregroundPixels": 27984,
+      "mattePixels": 168708,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "2a0b9e041e965f7116c24fb45e52f32c8acd542fb58578d002803b5432f8dad3",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "e19e32a117821bbf7ea7b57eb42c92d6c696bfc834b25382fdadcfe7d612603e",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        420
+      ],
+      "sourceLandmark": [
+        220,
+        290
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 2: lowering pelvis (220,290) to losing planted-boot support and complete production-splitter guard y=420.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        94.0,
+        317.0
+      ],
+      "renderedAnchor": [
+        127.59375,
+        240.0
+      ],
       "index": 25,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        82,
-        34,
-        174,
+        85,
+        96,
+        172,
         240
       ]
     },
@@ -1428,30 +1883,48 @@
         444
       ],
       "sourceBounds": [
-        63,
-        112,
-        222,
-        418
+        94,
+        168,
+        288,
+        421
       ],
       "sourceSize": [
-        159,
-        306
+        194,
+        253
       ],
-      "foregroundPixels": 24497,
-      "mattePixels": 172195,
+      "foregroundPixels": 24087,
+      "mattePixels": 172605,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "905dd68ec450e76806cefb0d414995ffc74b5331a0b29b8db69b9c372fa36f31",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "48457524f53600ad8ec1504520344eea34451031d2712fa8c4f3e622f961d78d",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        204,
+        421
+      ],
+      "sourceLandmark": [
+        204,
+        319
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 3: kneeling pelvis (204,319) to boot/body support and complete production-splitter guard y=421.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        110.0,
+        253.0
+      ],
+      "renderedAnchor": [
+        127.89690721649484,
+        240.0
+      ],
       "index": 26,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        82,
-        64,
-        173,
+        78,
+        125,
+        166,
         240
       ]
     },
@@ -1466,30 +1939,48 @@
         444
       ],
       "sourceBounds": [
-        49,
-        156,
-        214,
-        417
+        63,
+        198,
+        276,
+        421
       ],
       "sourceSize": [
-        165,
-        261
+        213,
+        223
       ],
-      "foregroundPixels": 22303,
-      "mattePixels": 174833,
+      "foregroundPixels": 23177,
+      "mattePixels": 173959,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "9554d857b55baf7d944cd9692f6213161de956a0a6d0c041af77193a409198a5",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "5eab1ad43028a81d2afd499d135cc005d111417f9e3c5b61179a07228fd68036",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        185,
+        421
+      ],
+      "sourceLandmark": [
+        185,
+        325
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 4: kneeling pelvis (185,325) to boot/body support and complete production-splitter guard y=421.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        122.0,
+        223.0
+      ],
+      "renderedAnchor": [
+        127.55868544600939,
+        240.0
+      ],
       "index": 27,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        80,
-        90,
-        175,
+        72,
+        139,
+        169,
         240
       ]
     },
@@ -1504,30 +1995,48 @@
         887
       ],
       "sourceBounds": [
-        89,
-        202,
-        361,
-        363
+        67,
+        170,
+        371,
+        354
       ],
       "sourceSize": [
-        272,
-        161
+        304,
+        184
       ],
-      "foregroundPixels": 22196,
-      "mattePixels": 174496,
+      "foregroundPixels": 27258,
+      "mattePixels": 169434,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "16171b6db16c5772f48fc7b4f3a592054b87146d16dddb95af29fc22efa017e0",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "2cd1a6b54baaf59ec6d2a49d917906c329424e60604daccdbd6aa70b7cc4ec4e",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        190,
+        354
+      ],
+      "sourceLandmark": [
+        190,
+        274
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 5: collapsing pelvis (190,274) to knee/hand/body contact and complete production-splitter guard y=354.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        123.0,
+        184.0
+      ],
+      "renderedAnchor": [
+        127.83552631578948,
+        240.0
+      ],
       "index": 28,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        50,
-        148,
-        206,
+        72,
+        157,
+        210,
         240
       ]
     },
@@ -1542,30 +2051,48 @@
         887
       ],
       "sourceBounds": [
-        6,
-        259,
-        367,
+        0,
+        241,
+        408,
         367
       ],
       "sourceSize": [
-        361,
-        108
+        408,
+        126
       ],
-      "foregroundPixels": 21364,
-      "mattePixels": 174885,
+      "foregroundPixels": 24369,
+      "mattePixels": 171880,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "b9694a4f1aa7aa20abcad0198820776593f58b605a214c317d2d893b4eeaa63f",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "587117359cf3de75e7fc1b6475f9b7b946b68a27d9679ec8607012e200b9abeb",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        163,
+        367
+      ],
+      "sourceLandmark": [
+        163,
+        310
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 6: lateral-prone pelvis (163,310) to body/hand contact and complete production-splitter guard y=367.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        163.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.9093137254902,
+        240.0
+      ],
       "index": 29,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        24,
-        178,
-        231,
+        54,
+        183,
+        239,
         240
       ]
     },
@@ -1580,30 +2107,48 @@
         887
       ],
       "sourceBounds": [
-        0,
-        266,
-        356,
-        368
+        7,
+        281,
+        381,
+        369
       ],
       "sourceSize": [
-        356,
-        102
+        374,
+        88
       ],
-      "foregroundPixels": 21002,
-      "mattePixels": 175247,
+      "foregroundPixels": 18100,
+      "mattePixels": 178149,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "e30e4f46f61e355061169e2ed7f1646cf36430106445b710e3d8441bda0849a5",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "a78a46a76e700f15481956fa2d7026be20a8388bebc4f3c2a800f2438f3683c6",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        166,
+        369
+      ],
+      "sourceLandmark": [
+        166,
+        323
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 7: right-profile prone pelvis (166,323) to body/forearm contact and complete production-splitter guard y=369; no border signal.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        159.0,
+        88.0
+      ],
+      "renderedAnchor": [
+        127.8475935828877,
+        240.0
+      ],
       "index": 30,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        26,
-        181,
-        230,
+        56,
+        200,
+        225,
         240
       ]
     },
@@ -1619,29 +2164,47 @@
       ],
       "sourceBounds": [
         4,
-        286,
-        383,
-        367
+        291,
+        376,
+        362
       ],
       "sourceSize": [
-        379,
-        81
+        372,
+        71
       ],
-      "foregroundPixels": 18945,
-      "mattePixels": 177747,
+      "foregroundPixels": 16544,
+      "mattePixels": 180148,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
-      "sourcePoseRgbaSha256": "fc8f61789f82c9ea443bcdd22ef987d2adfcad9e8c140a3b8483d88ec36cdaed",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "sourcePoseRgbaSha256": "9234eec6d8212c434b49d948fa052e5da9890faeef997fe2b3d9c97f81421fcb",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        170,
+        362
+      ],
+      "sourceLandmark": [
+        170,
+        326
+      ],
+      "sourceAnchorEvidence": "Death-r3 pose 8: terminal right-profile prone pelvis (170,326) to body contact and complete production-splitter guard y=362.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        166.0,
+        71.0
+      ],
+      "renderedAnchor": [
+        128.41397849462365,
+        240.0
+      ],
       "index": 31,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 1.02218,
+      "appliedScale": 0.453061224,
       "renderedBounds": [
-        19,
-        193,
-        237,
+        53,
+        208,
+        222,
         240
       ]
     },
@@ -1670,15 +2233,33 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2ddb8f2e9749fb35cda7e1ec5affcdec856d4076ba65d534a347f1fedec83eab",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        214,
+        419
+      ],
+      "sourceLandmark": [
+        214,
+        260
+      ],
+      "sourceAnchorEvidence": "Hurt pose 1: pelvis (214,260) to planted boots and complete guard y=419.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        38.0,
+        389.0
+      ],
+      "renderedAnchor": [
+        127.58181818181818,
+        240.0
+      ],
       "index": 32,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        96,
-        17,
+        111,
+        70,
         159,
         240
       ]
@@ -1708,16 +2289,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "13fb10a30c953004d182ac69129b7f98800e423190a308d7aaac41f1707ad5ed",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        189,
+        419
+      ],
+      "sourceLandmark": [
+        189,
+        269
+      ],
+      "sourceAnchorEvidence": "Hurt pose 2: recoiling pelvis (189,269) to planted boots and complete guard y=419.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        65.0,
+        385.0
+      ],
+      "renderedAnchor": [
+        128.26086956521738,
+        240.0
+      ],
       "index": 33,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        88,
-        19,
-        167,
+        100,
+        71,
+        160,
         240
       ]
     },
@@ -1746,16 +2345,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d7377c915b3c3b92f16a8cedea4da303c1c9dd89b6300abff1e9b3265823d013",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        164,
+        419
+      ],
+      "sourceLandmark": [
+        164,
+        279
+      ],
+      "sourceAnchorEvidence": "Hurt pose 3: deepest recoil pelvis (164,279) to planted boots and complete guard y=419.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        66.0,
+        358.0
+      ],
+      "renderedAnchor": [
+        127.92134831460675,
+        240.0
+      ],
       "index": 34,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        77,
-        34,
-        179,
+        99,
+        83,
+        177,
         240
       ]
     },
@@ -1784,16 +2401,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9e3eb939a4e9d5787972770d4aa9510c7bb1d72be952b2430b8da14f8d91a651",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        140,
+        419
+      ],
+      "sourceLandmark": [
+        140,
+        268
+      ],
+      "sourceAnchorEvidence": "Hurt pose 4: damping pelvis (140,268) to planted boots and complete guard y=419.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        52.0,
+        384.0
+      ],
+      "renderedAnchor": [
+        127.62595419847328,
+        240.0
+      ],
       "index": 35,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        90,
-        19,
-        165,
+        105,
+        72,
+        162,
         240
       ]
     },
@@ -1822,16 +2457,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "dacc9f0a58616e7f46fbd447c70d7fb4413dc6024eac177445eb0eb7f4c33b16",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        218,
+        412
+      ],
+      "sourceLandmark": [
+        218,
+        256
+      ],
+      "sourceAnchorEvidence": "Hurt pose 5: recovery pelvis (218,256) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        46.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.22413793103448,
+        240.0
+      ],
       "index": 36,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        94,
-        20,
-        161,
+        108,
+        72,
+        159,
         240
       ]
     },
@@ -1860,15 +2513,33 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f23db8ed89a56b2c3fd8d6995bc536030c73d1580dc71fee2ab1e1f608d7f0b8",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        195,
+        412
+      ],
+      "sourceLandmark": [
+        195,
+        256
+      ],
+      "sourceAnchorEvidence": "Hurt pose 6: recovery pelvis (195,256) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        39.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.01818181818183,
+        240.0
+      ],
       "index": 37,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        96,
-        20,
+        111,
+        72,
         159,
         240
       ]
@@ -1898,16 +2569,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "aa8b13ef623218b2d22a71a4821e7b80a50f360dc1d6df5a1a7e992c85af6306",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        152,
+        412
+      ],
+      "sourceLandmark": [
+        152,
+        257
+      ],
+      "sourceAnchorEvidence": "Hurt pose 7: near-neutral pelvis (152,257) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        39.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.13084112149534,
+        240.0
+      ],
       "index": 38,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        98,
-        20,
-        159,
+        111,
+        72,
+        158,
         240
       ]
     },
@@ -1936,16 +2625,34 @@
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d5701f5355e6867aa612f4cd47de8685a95f964157953b90332e9f721eeb17ef",
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        123,
+        412
+      ],
+      "sourceLandmark": [
+        123,
+        257
+      ],
+      "sourceAnchorEvidence": "Hurt pose 8: recovered pelvis (123,257) to planted boots and complete guard y=412.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        39.0,
+        383.0
+      ],
+      "renderedAnchor": [
+        128.13084112149534,
+        240.0
+      ],
       "index": 39,
-      "scale": 0.574358974,
-      "sourceScale": 1.0,
-      "appliedScale": 0.574358974,
+      "scale": 0.443230375,
+      "sourceScale": 0.98873,
+      "appliedScale": 0.438235168,
       "renderedBounds": [
-        98,
-        20,
-        159,
+        111,
+        72,
+        158,
         240
       ]
     }
@@ -1955,580 +2662,627 @@
       {
         "index": 0,
         "alphaBounds": [
-          99,
-          17,
-          157,
+          114,
+          68,
+          158,
           239
         ],
-        "foregroundPixels": 8775,
-        "width": 58,
-        "height": 222,
-        "relativeToRowMedian": 0.976193
+        "foregroundPixels": 5244,
+        "width": 44,
+        "height": 171,
+        "relativeToRowMedian": 0.970033
       },
       {
         "index": 1,
         "alphaBounds": [
-          97,
-          17,
-          158,
+          113,
+          68,
+          159,
           239
         ],
-        "foregroundPixels": 9013,
-        "width": 61,
-        "height": 222,
-        "relativeToRowMedian": 1.00267
+        "foregroundPixels": 5354,
+        "width": 46,
+        "height": 171,
+        "relativeToRowMedian": 0.990381
       },
       {
         "index": 2,
         "alphaBounds": [
-          93,
-          17,
-          163,
+          108,
+          68,
+          162,
           239
         ],
-        "foregroundPixels": 9106,
-        "width": 70,
-        "height": 222,
-        "relativeToRowMedian": 1.013016
+        "foregroundPixels": 5514,
+        "width": 54,
+        "height": 171,
+        "relativeToRowMedian": 1.019978
       },
       {
         "index": 3,
         "alphaBounds": [
-          97,
-          19,
+          111,
+          70,
           159,
           239
         ],
-        "foregroundPixels": 8965,
-        "width": 62,
-        "height": 220,
-        "relativeToRowMedian": 0.99733
+        "foregroundPixels": 5458,
+        "width": 48,
+        "height": 169,
+        "relativeToRowMedian": 1.009619
       },
       {
         "index": 4,
         "alphaBounds": [
-          99,
-          21,
-          158,
+          114,
+          71,
+          159,
           239
         ],
-        "foregroundPixels": 8500,
-        "width": 59,
-        "height": 218,
-        "relativeToRowMedian": 1.007766
+        "foregroundPixels": 5105,
+        "width": 45,
+        "height": 168,
+        "relativeToRowMedian": 1.005515
       },
       {
         "index": 5,
         "alphaBounds": [
-          99,
-          22,
-          158,
+          114,
+          72,
+          159,
           239
         ],
-        "foregroundPixels": 8418,
-        "width": 59,
-        "height": 217,
-        "relativeToRowMedian": 0.998044
+        "foregroundPixels": 5064,
+        "width": 45,
+        "height": 167,
+        "relativeToRowMedian": 0.997439
       },
       {
         "index": 6,
         "alphaBounds": [
-          96,
-          22,
-          160,
+          113,
+          72,
+          162,
           239
         ],
-        "foregroundPixels": 8426,
-        "width": 64,
-        "height": 217,
-        "relativeToRowMedian": 0.998992
+        "foregroundPixels": 5090,
+        "width": 49,
+        "height": 167,
+        "relativeToRowMedian": 1.002561
       },
       {
         "index": 7,
         "alphaBounds": [
-          99,
-          21,
-          157,
+          115,
+          71,
+          159,
           239
         ],
-        "foregroundPixels": 8443,
-        "width": 58,
-        "height": 218,
-        "relativeToRowMedian": 1.001008
+        "foregroundPixels": 5045,
+        "width": 44,
+        "height": 168,
+        "relativeToRowMedian": 0.993697
       },
       {
         "index": 8,
         "alphaBounds": [
-          73,
-          23,
-          182,
+          101,
+          72,
+          185,
           239
         ],
-        "foregroundPixels": 9992,
-        "width": 109,
-        "height": 216,
-        "relativeToRowMedian": 1.019592
+        "foregroundPixels": 6086,
+        "width": 84,
+        "height": 167,
+        "relativeToRowMedian": 1.020627
       },
       {
         "index": 9,
         "alphaBounds": [
-          91,
-          24,
-          165,
+          105,
+          73,
+          162,
           239
         ],
-        "foregroundPixels": 8969,
-        "width": 74,
-        "height": 215,
-        "relativeToRowMedian": 0.915204
+        "foregroundPixels": 5448,
+        "width": 57,
+        "height": 166,
+        "relativeToRowMedian": 0.913634
       },
       {
         "index": 10,
         "alphaBounds": [
-          76,
-          22,
+          100,
+          71,
           180,
           239
         ],
-        "foregroundPixels": 9608,
-        "width": 104,
-        "height": 217,
-        "relativeToRowMedian": 0.980408
+        "foregroundPixels": 5840,
+        "width": 80,
+        "height": 168,
+        "relativeToRowMedian": 0.979373
       },
       {
         "index": 11,
         "alphaBounds": [
-          63,
-          24,
-          193,
+          85,
+          73,
+          185,
           239
         ],
-        "foregroundPixels": 10051,
-        "width": 130,
-        "height": 215,
-        "relativeToRowMedian": 1.025612
+        "foregroundPixels": 6098,
+        "width": 100,
+        "height": 166,
+        "relativeToRowMedian": 1.02264
       },
       {
         "index": 12,
         "alphaBounds": [
-          65,
-          24,
-          191,
+          90,
+          73,
+          187,
           239
         ],
-        "foregroundPixels": 9894,
-        "width": 126,
-        "height": 215,
-        "relativeToRowMedian": 1.089528
+        "foregroundPixels": 5979,
+        "width": 97,
+        "height": 166,
+        "relativeToRowMedian": 1.08719
       },
       {
         "index": 13,
         "alphaBounds": [
-          87,
-          24,
-          169,
+          92,
+          73,
+          155,
           239
         ],
-        "foregroundPixels": 8377,
-        "width": 82,
-        "height": 215,
-        "relativeToRowMedian": 0.922475
+        "foregroundPixels": 5071,
+        "width": 63,
+        "height": 166,
+        "relativeToRowMedian": 0.922084
       },
       {
         "index": 14,
         "alphaBounds": [
-          89,
-          24,
-          166,
+          106,
+          73,
+          165,
           239
         ],
-        "foregroundPixels": 8171,
-        "width": 77,
-        "height": 215,
-        "relativeToRowMedian": 0.899791
+        "foregroundPixels": 4932,
+        "width": 59,
+        "height": 166,
+        "relativeToRowMedian": 0.896809
       },
       {
         "index": 15,
         "alphaBounds": [
-          74,
-          24,
-          182,
+          95,
+          73,
+          178,
           239
         ],
-        "foregroundPixels": 9785,
-        "width": 108,
-        "height": 215,
-        "relativeToRowMedian": 1.077525
+        "foregroundPixels": 5928,
+        "width": 83,
+        "height": 166,
+        "relativeToRowMedian": 1.077916
       },
       {
         "index": 16,
         "alphaBounds": [
-          100,
-          18,
-          156,
+          111,
+          69,
+          154,
           239
         ],
-        "foregroundPixels": 8468,
-        "width": 56,
-        "height": 221,
-        "relativeToRowMedian": 0.849135
+        "foregroundPixels": 5107,
+        "width": 43,
+        "height": 170,
+        "relativeToRowMedian": 0.847494
       },
       {
         "index": 17,
         "alphaBounds": [
           79,
-          18,
-          177,
+          69,
+          154,
           239
         ],
-        "foregroundPixels": 9787,
-        "width": 98,
-        "height": 221,
-        "relativeToRowMedian": 0.981399
+        "foregroundPixels": 5886,
+        "width": 75,
+        "height": 170,
+        "relativeToRowMedian": 0.976767
       },
       {
         "index": 18,
         "alphaBounds": [
-          74,
-          18,
-          182,
+          106,
+          69,
+          188,
           239
         ],
-        "foregroundPixels": 10158,
-        "width": 108,
-        "height": 221,
-        "relativeToRowMedian": 1.018601
+        "foregroundPixels": 6166,
+        "width": 82,
+        "height": 170,
+        "relativeToRowMedian": 1.023233
       },
       {
         "index": 19,
         "alphaBounds": [
-          67,
-          18,
-          189,
+          106,
+          69,
+          199,
           239
         ],
-        "foregroundPixels": 10303,
-        "width": 122,
-        "height": 221,
-        "relativeToRowMedian": 1.033141
+        "foregroundPixels": 6283,
+        "width": 93,
+        "height": 170,
+        "relativeToRowMedian": 1.042649
       },
       {
         "index": 20,
         "alphaBounds": [
-          50,
-          29,
-          206,
+          94,
+          78,
+          213,
           239
         ],
-        "foregroundPixels": 10995,
-        "width": 156,
-        "height": 210,
-        "relativeToRowMedian": 1.071481
+        "foregroundPixels": 6575,
+        "width": 119,
+        "height": 161,
+        "relativeToRowMedian": 1.05614
       },
       {
         "index": 21,
         "alphaBounds": [
-          65,
-          23,
-          192,
+          98,
+          73,
+          195,
           239
         ],
-        "foregroundPixels": 10812,
-        "width": 127,
-        "height": 216,
-        "relativeToRowMedian": 1.053647
+        "foregroundPixels": 6516,
+        "width": 97,
+        "height": 166,
+        "relativeToRowMedian": 1.046663
       },
       {
         "index": 22,
         "alphaBounds": [
-          83,
-          22,
-          174,
+          110,
+          73,
+          180,
           239
         ],
-        "foregroundPixels": 9711,
-        "width": 91,
-        "height": 217,
-        "relativeToRowMedian": 0.946353
+        "foregroundPixels": 5935,
+        "width": 70,
+        "height": 166,
+        "relativeToRowMedian": 0.953337
       },
       {
         "index": 23,
         "alphaBounds": [
-          99,
-          22,
-          156,
+          112,
+          72,
+          155,
           239
         ],
-        "foregroundPixels": 8285,
-        "width": 57,
-        "height": 217,
-        "relativeToRowMedian": 0.807387
+        "foregroundPixels": 4929,
+        "width": 43,
+        "height": 167,
+        "relativeToRowMedian": 0.791744
       },
       {
         "index": 24,
         "alphaBounds": [
-          93,
-          23,
-          162,
+          79,
+          71,
+          187,
           239
         ],
-        "foregroundPixels": 9021,
-        "width": 69,
-        "height": 216,
-        "relativeToRowMedian": 1.063797
+        "foregroundPixels": 6650,
+        "width": 108,
+        "height": 168,
+        "relativeToRowMedian": 1.185806
       },
       {
         "index": 25,
         "alphaBounds": [
-          83,
-          35,
-          173,
-          238
+          86,
+          97,
+          171,
+          239
         ],
-        "foregroundPixels": 8567,
-        "width": 90,
-        "height": 203,
-        "relativeToRowMedian": 1.010259
+        "foregroundPixels": 6057,
+        "width": 85,
+        "height": 142,
+        "relativeToRowMedian": 1.080064
       },
       {
         "index": 26,
         "alphaBounds": [
-          83,
-          65,
-          172,
+          79,
+          126,
+          165,
           239
         ],
-        "foregroundPixels": 8393,
-        "width": 89,
-        "height": 174,
-        "relativeToRowMedian": 0.989741
+        "foregroundPixels": 5159,
+        "width": 86,
+        "height": 113,
+        "relativeToRowMedian": 0.919936
       },
       {
         "index": 27,
         "alphaBounds": [
-          81,
-          91,
-          174,
+          73,
+          140,
+          168,
           239
         ],
-        "foregroundPixels": 7626,
-        "width": 93,
-        "height": 148,
-        "relativeToRowMedian": 0.899292
+        "foregroundPixels": 4971,
+        "width": 95,
+        "height": 99,
+        "relativeToRowMedian": 0.886412
       },
       {
         "index": 28,
         "alphaBounds": [
-          51,
-          149,
-          205,
+          73,
+          158,
+          209,
           239
         ],
-        "foregroundPixels": 7564,
-        "width": 154,
-        "height": 90,
-        "relativeToRowMedian": 1.042089
+        "foregroundPixels": 5844,
+        "width": 136,
+        "height": 81,
+        "relativeToRowMedian": 1.278075
       },
       {
         "index": 29,
         "alphaBounds": [
-          25,
-          179,
-          230,
+          54,
+          184,
+          238,
           239
         ],
-        "foregroundPixels": 7308,
-        "width": 205,
-        "height": 60,
-        "relativeToRowMedian": 1.00682
+        "foregroundPixels": 5237,
+        "width": 184,
+        "height": 55,
+        "relativeToRowMedian": 1.145325
       },
       {
         "index": 30,
         "alphaBounds": [
-          26,
-          182,
-          229,
+          57,
+          201,
+          224,
           239
         ],
-        "foregroundPixels": 7209,
-        "width": 203,
-        "height": 57,
-        "relativeToRowMedian": 0.99318
+        "foregroundPixels": 3908,
+        "width": 167,
+        "height": 38,
+        "relativeToRowMedian": 0.854675
       },
       {
         "index": 31,
         "alphaBounds": [
-          20,
-          194,
-          236,
+          54,
+          209,
+          221,
           239
         ],
-        "foregroundPixels": 6563,
-        "width": 216,
-        "height": 45,
-        "relativeToRowMedian": 0.904181
+        "foregroundPixels": 3548,
+        "width": 167,
+        "height": 30,
+        "relativeToRowMedian": 0.775943
       },
       {
         "index": 32,
         "alphaBounds": [
-          97,
-          18,
+          112,
+          71,
           158,
           239
         ],
-        "foregroundPixels": 8960,
-        "width": 61,
-        "height": 221,
-        "relativeToRowMedian": 0.993348
+        "foregroundPixels": 5258,
+        "width": 46,
+        "height": 168,
+        "relativeToRowMedian": 0.996116
       },
       {
         "index": 33,
         "alphaBounds": [
-          89,
-          20,
-          166,
+          101,
+          72,
+          159,
           239
         ],
-        "foregroundPixels": 8819,
-        "width": 77,
-        "height": 219,
-        "relativeToRowMedian": 0.977716
+        "foregroundPixels": 5165,
+        "width": 58,
+        "height": 167,
+        "relativeToRowMedian": 0.978498
       },
       {
         "index": 34,
         "alphaBounds": [
-          78,
-          35,
-          178,
+          100,
+          84,
+          176,
           239
         ],
-        "foregroundPixels": 9313,
-        "width": 100,
-        "height": 204,
-        "relativeToRowMedian": 1.032483
+        "foregroundPixels": 5481,
+        "width": 76,
+        "height": 155,
+        "relativeToRowMedian": 1.038363
       },
       {
         "index": 35,
         "alphaBounds": [
-          91,
-          20,
-          164,
+          106,
+          73,
+          161,
           239
         ],
-        "foregroundPixels": 9080,
-        "width": 73,
-        "height": 219,
-        "relativeToRowMedian": 1.006652
+        "foregroundPixels": 5299,
+        "width": 55,
+        "height": 166,
+        "relativeToRowMedian": 1.003884
       },
       {
         "index": 36,
         "alphaBounds": [
-          95,
-          21,
-          160,
+          109,
+          73,
+          158,
           239
         ],
-        "foregroundPixels": 8659,
-        "width": 65,
-        "height": 218,
-        "relativeToRowMedian": 1.022676
+        "foregroundPixels": 5092,
+        "width": 49,
+        "height": 166,
+        "relativeToRowMedian": 1.012527
       },
       {
         "index": 37,
         "alphaBounds": [
-          97,
-          21,
+          112,
+          73,
           158,
           239
         ],
-        "foregroundPixels": 8274,
-        "width": 61,
-        "height": 218,
-        "relativeToRowMedian": 0.977206
+        "foregroundPixels": 4867,
+        "width": 46,
+        "height": 166,
+        "relativeToRowMedian": 0.967787
       },
       {
         "index": 38,
         "alphaBounds": [
-          99,
-          21,
-          158,
+          112,
+          73,
+          157,
           239
         ],
-        "foregroundPixels": 8462,
-        "width": 59,
-        "height": 218,
-        "relativeToRowMedian": 0.999409
+        "foregroundPixels": 5032,
+        "width": 45,
+        "height": 166,
+        "relativeToRowMedian": 1.000597
       },
       {
         "index": 39,
         "alphaBounds": [
-          99,
-          21,
-          158,
+          112,
+          73,
+          157,
           239
         ],
-        "foregroundPixels": 8472,
-        "width": 59,
-        "height": 218,
-        "relativeToRowMedian": 1.000591
+        "foregroundPixels": 5026,
+        "width": 45,
+        "height": 166,
+        "relativeToRowMedian": 0.999403
       }
     ],
     "rowMedianForegroundPixels": [
-      8989.0,
-      8434.5,
-      9800.0,
-      9081.0,
-      9972.5,
-      10261.5,
-      8480.0,
-      7258.5,
-      9020.0,
-      8467.0
+      5406.0,
+      5077.0,
+      5963.0,
+      5499.5,
+      6026.0,
+      6225.5,
+      5608.0,
+      4572.5,
+      5278.5,
+      5029.0
     ],
     "findings": [],
     "uniqueFrameCount": 40,
     "cellRgbaSha256": [
-      "068501711e33f01538351762c92dcb325a5899e634940bad0b178ab94d398ad5",
-      "4ddbe89b56c45fc32fab4937099c2de016fe143fef84c2e0c72208da575f828c",
-      "3cd636b8409ce2e0b8af3ad583ba0069ffd43a7125fae7ebebcdf0371180fdd5",
-      "224d15f8cf73d3b1d3f1f72965d9f5596af15202ca43a54eb62ad6896fb70997",
-      "5e683708b2fb0cfa7a1a6172be0479520abc886658059338e7b2d8c538efaf46",
-      "0437658896434fee24e2d7fde5e12efa943dd7cf27f2ae7cdd0a809a1c12ad20",
-      "34eb2ada14dec02cd61cdea16608c3e5bc0a6cce1e25edb85ac408a777b29c96",
-      "a83f31edc37f458a747b8aeb6dd368231845af9a94ada78c7fde27b4b171480d",
-      "adc13ef026745d6221065c1230c63a2208df288db69d704276e02c38736a2b7e",
-      "d0239e6e0b5faafd1fbfd99670a2a6dd73b2fb9d441fbb15c0824ab418325db9",
-      "b7bf81017736af9def5a2cd2dfe385e6e2ef5472640fd148f20a319068a98988",
-      "6aaacb5c1789155dbe630407e27b1e44666027d3b069b1dc2bd063dabc1295dc",
-      "553906af8364a759f1a79944155fee0dc6de6329a07eb1aaef70b5b5d8a5384c",
-      "b9469bc906bc574bdb6656ffdbac79cffe227a242ac25863b9d3c1dbd3c73750",
-      "f2f399227e0c6fac2741880fd3856a609c9e32cc963ce01f6dba1bb46a426315",
-      "503c4bb6ef2223a04be51643d02f79f92a53276b57a9680eb24bf8c4b36b472f",
-      "993bd667be815df6c230735040af1df4f79907f93e553c9abfb99c2acf8e12d2",
-      "d75f613b5d59c8a44305a50071595cb49486da834bd3fdc464a879868bdf7739",
-      "cc8fe030241baaa0e71eb07d534ca992bbc5966299898ebee170c07c65bcff06",
-      "204f21947ac92c573255ffbc0e630cbb742c5416f7cf90d7d1db99033401bce5",
-      "3d6cf30f8813149c33d44ff9954dc8fcd20d4cc0ee12aebf962cc13946c955ca",
-      "cee1df06513241180d08ffa43e4ef79bc01ef0adf03431329212c3733bfab1b2",
-      "eb5839e1c529e13a4ed1adcc94150df90bde5984f80cf89e7f4be66b1d985a42",
-      "02ab6bde6e1044d1a1fcc42bd61c32c330426b4210cf6c7c61a875b5eff30296",
-      "68dbc2016f09c964e645094163ccb4e4146b7cb8cf5f42b564c4d814a39ec09a",
-      "7a6d21aa9a860e3fec11943e2b6630113acaa09aceb803627fea4dfa97b699b2",
-      "ba3dd45410b55c2b9d09e20b55ff40c402294c0f56460a32f03ff3569ba8a6c5",
-      "6a04a3b13b46c58b8a99ee003d7adb940ff88cf0c721b36600254c6409ae3137",
-      "ba5ae40c6684fc69443cfd633c90b909f6b3a062153dff36b63c5a47b29aea8d",
-      "a040b315806651c995c04ec9197749a3bc969f850e29b4726dc6f1c5f8c07f90",
-      "7cdd630c295bbfbba7b13ccb2cbe85d4a1efa4ee6fdd32de2585b01b68a724db",
-      "c52a4b67fd3332d622559e27031b5eb76b6dc8c23b0de459381217ab01966177",
-      "de5193d6de34ec3ce88b289b7c8e60bb8c359a46d702b5d1e207cad8e9a6595b",
-      "a2f42965dcb9f147c6481d3f49300a7b79b05434d3b0202a220cb86398630c74",
-      "514c70594514b2d6c74e7f6842069a9369e5e11b5f007847506a86d472e94f81",
-      "86788e81ffedb06cabba335d90afce4ad946ae394f8561e8671116a5fe7b8a99",
-      "adc25cf353226f3402a252637dc6ee730cff521a01d6756010513e86be8c5622",
-      "934aab30b409b101b415f229cc1fc8a02363a36ac0b01bda6b4a44db155ad3d7",
-      "2dbb5f908ef216fe6ae61febeb9988f3c551a80ac9e1d6f85c467b74a6d7015a",
-      "b75c2c848951b6b29a9d54812cc40d0ea181ed44fd8a18d449becd0edba523ed"
+      "b5a3a1217c09bb0a700925bf452d653096ec7aebbf6768cfc7d6238ac95f2a3e",
+      "7ad3a0f4fca1c97a40c96b2c8836872839bb16be5060f9ff0fc94d20bda6ec80",
+      "2ffe8e52812a8dfd5a7bee4fe1d06178d0411a4125f727c67fa857d00d3425a7",
+      "430e9b53c2936f8cf0177324cd6ef54d8dd3fec8ec9e79f57881b5e3b91ad293",
+      "8ea8f98ac0e6d57d3a642ee1eda8baea54a1ddc3ca63354cde152b34b592d3d3",
+      "4313e40b991be85419235f28d9351924add368b1595d0d1449d0f6df4e4cde3f",
+      "359b60a6f6ab2a509212da488b3fc364920c5660ebbe32567a6d28f6b9b5e278",
+      "cc7dd574d0671f2a457522d1d65b962bfb75e0fbb5dd8e84e467b37b45893668",
+      "8f7e9f3f11be0447dd3de5f79f44fe3e94576a2b137632ed01aaa40f6abe013f",
+      "11f0da967afb08d08985e6bd002a323fc99b1ae8b98aac2de7bada2f61ffc0d9",
+      "63d12bfd856626d0ee52902f9a0cbfa647e88cf9dcad829eba221873b383f781",
+      "8520971effb6fff37261bbd14f3963c3d52b7c19c5d711d5fb6c241b2cc65863",
+      "980c9c3ab91760a02fbdd3c9fcfea39d1cc6d97c75b72d31fcd2b7c2efb33a14",
+      "8487f814c4298b7aa9c3d52995a059d35302290235d3da3bdbddaf023fcd0b3f",
+      "e935ed197b830ba874ee2d4ce7585ef0006dd881e6c12dbdffa434a0365bcff7",
+      "4a53d304397f7a12a9c3a81280fa0803d642b6a262dcf236937f2830be6be113",
+      "3f439f17ae5245e1cd805d5840349f76d4a5d5224fe9bc203edf66fbc32e5c85",
+      "6f4a7b8c1f0c509e61c7ac5c362fa47531e6ac812c07cd8dfbd58a4ef6423f8c",
+      "7fbaa6af6915e8531c9b6be55c79ef53f24371b4e54235afa588b20770b2eedb",
+      "f234c5203013cd33a34c78c581f4d48224c6476bc4971996aaa564b66872b12d",
+      "0299b300844a1a359dacd59a90c84be288e1686d46afd44cfbc0bde0fd1622df",
+      "2257c7dfa6574269ae02ffa0f3be7b3497813ce2e9b6228329c7a878b4bf9ead",
+      "87eb46f65d0bf214d95ff18eae803fdf2cd274e6a70d49e5848ded120a4236bc",
+      "2bf1570b12870eb608ea40073891730f119ce5f6031cf9575aca1a8f6e02ce50",
+      "fefbffa8da4fa8325416a1ccc3bf6db9dd231d28492da8c74c66f0f3cc8df415",
+      "5e37dc1efddcd14fcfbb4abb2a8866aff05ca1d611f735db5a6d10064e1c1b20",
+      "fe2c1e675a091c044d46c348826c94e9d6d5947ba1f4edf08c76460a2175b7a8",
+      "08585065c974318dea06568ba1ba2d253c92c8b489193821f7a7d824a810ba83",
+      "d71f94ba87972f0c894fadd10ab7648e30a0ce2306132c0d8896b5b91fcb8370",
+      "32ea6f7424728807bc4e49d1fc5dfe276981efba8e7ebe26107ebdb3315816d7",
+      "054f98e8be45141a0cce32e159d9509af1f39565cb4beab5941b0f08dc36f4f0",
+      "f382aa99cc7c84d41bae317bb8f953078f07b9d9f0f2951652b5d33be67a30c8",
+      "cbcef3fa6de1585bc6664c87d849f2ec2008452a224b45a1fd51dd52eda4cf55",
+      "621024a04f1e3ea9793e17f9db257252b1d8a83153ddee4252d6a5b8509094b8",
+      "2de74506f5aa3486caf89359b6eb112c166c27ebe709b360d998026715dc5a91",
+      "09ae32d8d77e79e20d9395a684760b338104c575ea185b0eb878e310d0aae0bb",
+      "687f1d2b2a511f565b4affec0465130fe6ad6ce45759f74846411d8f897cef4f",
+      "333a3cb02c1efe5b46b3851b941fd468f34b51f90120c71758c9063035d0ebe8",
+      "c101f0b3fc995b2431fac4bae49f71ef5249d8ef37c6942e0e437b618c40b08a",
+      "459b72ff3ae1ef7897884abb7e3849be6b0a18ed68d02a1f0948b16e6372d7bf"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/V66_BATCH_003_SCALE_REVIEW.json",
+    "sha256": "6ad3c0e2fb43f19bb2c0217bdf304d5ced11331f2211ce2c4e84096758646ac5",
+    "status": "reviewed",
+    "profileId": "enemy-041-working-joe",
+    "reviewer": "Codex /root/audit_profile_041",
+    "reviewedAt": "2026-09-01",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.003802,
+      "attack": 0.996,
+      "death": 1.02218,
+      "hurt": 0.98873
+    },
+    "sourceSha256ByClip": {
+      "idle": "c0fa426d411febc2006b7199ca50b7f4dc27c7fa71a1f261e8366a89f564869b",
+      "move": "ce25ef5e0896dc36f98ccbaed3667c91246574352cb23ed6989c79e0e8409e70",
+      "attack": "732c1570fe03663b49734f3db862f167f3d9a6ad470ef12b4fdbd68ce768d288",
+      "death": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+      "hurt": "0f95a22d23dc82eb96b086e9822b44e095edc351035d39e926568430466a8d2e"
+    },
+    "measurementCount": 15,
+    "evidence": [
+      {
+        "path": "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/idle-scale-overlay.png",
+        "sha256": "679eef44e804dc259571219211640d4ae737b933cd146bb3086fe625f30c2c72"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/move-scale-overlay.png",
+        "sha256": "8c5066d6c66315f8110030eec1648cdacd6d066d40537ab78632ba2014faffeb"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/attack-scale-overlay.png",
+        "sha256": "3e8bc434460b4a2b70bcbea755b3d201bb7bbefa0831ee9ca23ef5f69ebd2b4e"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/death-scale-overlay.png",
+        "sha256": "c99ba3b9a5261cef761701343bd66bdfb1d802782afa8ca1b1808b6a3c43a5e8"
+      },
+      {
+        "path": "docs/references/v66-worklot-001-working-joe-review/enemy-041-working-joe/hurt-scale-overlay.png",
+        "sha256": "937486f40de1afff366c016fbbf4c930c7183e0205054a3322beb3ea8b1dfeb4"
+      }
+    ]
   }
 }

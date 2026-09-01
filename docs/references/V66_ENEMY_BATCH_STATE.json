@@ -4117,6 +4117,64 @@
       "actualPromptText": "Edit only the supplied Deacon Line death sprite sheet cell placement and the reach of the outermost limbs. Preserve the same Deacon identity, midnight/navy-blue organic skin, pronounced bishop-mitre skull, exactly two arms and two legs, no tail, no dorsal tubes, strict right-facing profile, anatomical body scale, lighting, and the same eight chronological death stages in the same row-major order. Keep the exact 1774-by-887, 2:1, four-column by two-row square-cell layout. Do not shrink the anatomical scale. For the poses that currently touch a left or right cell edge, bend or tuck only the farthest hand, foot, forearm or shin slightly inward and recenter the whole pose so every pose has at least 20 pixels of pure-magenta clearance on all four cell edges. Preserve standing impact, backward fall, ground impact, collapse and terminal corpse chronology. Remove all blood, debris, splatter, dust, shadow and ground smear. Use a perfectly uniform flat opaque RGB #FF00FF background with no gradient, noise, floor, scenery, labels, grid lines, logo, UI or watermark. Do not add, remove, mirror, recolor or redesign any body part.\n",
       "promptSha256": "845325372141c855c36aa4d2ea3b287bab853d4ba4d2f13a4538ac8f4a775c38",
       "referenceLockSha256": "56c4bdcddae8a57affec5974f67aa25849359f99254ef74d8cf5fdded4bbeeff"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-041-working-joe",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:0c195b1563ac363fadf2f7ad6e16e510f3723586e0a0b76ea679d33883634671",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider exposed no durable generation ID; the raw selected ImageGen PNG SHA-256 identifies this capture.",
+      "actor": "Codex /root",
+      "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/death-r3.txt",
+      "actualPromptFileSha256": "7ebf6d4001ebcf758ee1375f9a95bf530175c2829c65365a09484561ee4ae01a",
+      "repairPromptPath": "docs/references/v66-worklot-001-prompts/enemy-041-working-joe/death-r3.txt",
+      "repairPromptFileSha256": "7ebf6d4001ebcf758ee1375f9a95bf530175c2829c65365a09484561ee4ae01a",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
+      "sourceSha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157",
+      "sourceRepairs": [
+        {
+          "kind": "openai-imagegen-repair-capture",
+          "result": "The third death candidate preserves a right-facing prone terminal collapse and is the selected raw ImageGen revision.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/death-r3-imagegen-prone-right-profile-candidate.png",
+          "sha256": "0c195b1563ac363fadf2f7ad6e16e510f3723586e0a0b76ea679d33883634671"
+        },
+        {
+          "kind": "deterministic-magenta-flatten",
+          "result": "The broad magenta matte was flattened to exact #FF00FF. 1,370,918 matte pixels changed and zero foreground pixels changed.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/derived/death-r3-flat-before-cell-recompose.png",
+          "sha256": "9200221f30348a7bf733424f35b97968b62eb2112ffef1158d0cbb18b71dc621"
+        },
+        {
+          "kind": "safe-cell-component-recompose",
+          "result": "Each cell retained its largest connected subject. Top-row subjects moved upward by 26 pixels without crop; 126 disconnected row-boundary matte pixels were discarded. All eight cells then had zero boundary contact.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/derived/death-r3-flat-safe-recomposed.png",
+          "sha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157"
+        },
+        {
+          "kind": "previous-active-master-preserved",
+          "result": "The replaced source remains preserved because its late poses turned the face toward camera.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/rejected/death-r1-late-camera-turn-25ca0956.png",
+          "sha256": "25ca095618ffe5c41de854ab09fab4622c8abd48cf29c23b662c99d37cf50215"
+        },
+        {
+          "kind": "active-master-output",
+          "result": "The repaired 1774x887 4x2 eight-pose source is active. Selection does not grant artistic acceptance or runtime integration.",
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-041-working-joe/death.png",
+          "sha256": "3bbdb986cd4892c0dd3a0b14704adbaee07da3bc87566408db0e47d81838f157"
+        }
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Source candidate only. Raw generation, deterministic repairs and prior active master are preserved and hash-locked; no acceptance or runtime status is implied.",
+      "at": "2026-09-01T03:03:04.456Z",
+      "contractPromptSha256": "f18d6cc25b8883663548d0541b42ab022ffff08fad822ac6febd7a0222e0e033",
+      "actualPromptText": "Edit the supplied Working Joe death sprite sheet while preserving the exact same character, clothing, palette, lighting, 2:1 canvas, invisible 4-by-2 layout and eight-pose chronology. Keep poses 1 through 5 essentially unchanged. Correct poses 6, 7 and 8 only so the collapse becomes PRONE and never face-up: pose 6 falls forward and to the right from hands and knees; pose 7 lands chest-down with the skull on its RIGHT cheek, nose physically pointing to the RIGHT edge of the canvas, showing mainly the back/crown of the bald head and at most one ear; pose 8 is a fully motionless chest-down prone body, head still on the right cheek, nose pointing right, one lateral red optic at most. The camera must never see two eyes, a frontal face, an upward-looking face, the chest front, or a face turned left in those late poses. All eight figures remain strict right-facing gameplay side profiles, exactly two arms and two legs, same pale Working Joe and same olive-grey Seegson uniform. No recovery, gore, blood, weapon, dismemberment or missing limbs. Full body inside each cell, consistent physical scale, generous gutters. Perfectly flat uniform pure magenta background with no shadow, floor, grid, text, logo, UI or checkerboard.\n",
+      "promptSha256": "e6e253262e971cf5dc45f14df8beeba5696754e903dfee84ddd1361765f3014d",
+      "referenceLockSha256": "ec909188a577c220cf152ffc84c1f2467ee4527b2b01398fa24c04ea638243e6"
     }
   ]
 }

@@ -133,6 +133,36 @@ export async function resolvePostGenerationScaleReviewCandidate(job, sources, do
   return resolvePostGenerationScaleReviewBytes(job, sources, root, scopedPath, bytes, path);
 }
 
+// Merge-only reconciliation for an active source that replaced the bitmap used
+// by the last normalization. The normalized metadata contract remains immutable:
+// clip order, paths and dimensions must still match the current boards. Only its
+// old SHA may be stale. The canonical fragment is then resolved through the
+// ordinary strict candidate path using evidence rebuilt in memory from current
+// files. Acceptance and normalized metadata validation never call this function.
+export async function resolvePostGenerationScaleReviewMergeCandidate(job, normalizedSources, document, root, scopedPath) {
+  const clips = job.clips?.map((clip) => clip.id) || [];
+  if (!clips.length || !Array.isArray(normalizedSources) || normalizedSources.length !== clips.length
+    || normalizedSources.some((source, index) => !record(source) || source.clip !== clips[index])) {
+    fail('normalized metadata source coverage or ordered clips are incomplete');
+  }
+  const activeSources = [];
+  const staleNormalizedSourceClips = [];
+  for (const [index, clip] of job.clips.entries()) {
+    const source = normalizedSources[index];
+    if (source.path !== clip.sourcePath) fail('normalized metadata source path disagrees for ' + clip.id);
+    if (typeof source.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(source.sha256)) fail('normalized metadata source SHA-256 is invalid for ' + clip.id);
+    const sourceBytes = await readFile(await existingPath(root, clip.sourcePath, scopedPath));
+    const currentSha = hash(sourceBytes);
+    const size = pngSize(sourceBytes);
+    if (!isDeepStrictEqual(source.size, size)) fail('normalized metadata source dimensions changed for ' + clip.id);
+    activeSources.push({ clip: clip.id, path: clip.sourcePath, sha256: currentSha, size });
+    if (currentSha !== source.sha256) staleNormalizedSourceClips.push(clip.id);
+  }
+  const proof = await resolvePostGenerationScaleReviewCandidate(job, activeSources, document, root, scopedPath);
+  if (!proof || !staleNormalizedSourceClips.length) return proof;
+  return { ...proof, staleNormalizedSourceClips };
+}
+
 export async function resolvePostGenerationScaleReview(job, sources, root, scopedPath) {
   const path = `docs/references/V66_BATCH_${job.batchId.slice(-3)}_SCALE_REVIEW.json`;
   let bytes;
