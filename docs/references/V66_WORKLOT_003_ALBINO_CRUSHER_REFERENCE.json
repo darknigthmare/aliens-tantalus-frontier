@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-061-albino-crusher": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.gearboxsoftware.com/2013/01/aliens-colonial-marines-trailer/",
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/?l=english"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/xenomorph-crusher-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/xenomorph-crusher-action-sheet.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/charge.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg",
+        "assets/openai/sprites/metadata/v66/enemy-009-crusher.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-009-crusher identity lock only. Preserve one huge, low, eyeless quadruped with a broad flared armored head shield, massive shoulders and forequarters, visibly shorter hindquarters, exactly four weight-bearing limbs and one long continuous segmented tail; the head shield, not a horn or carried object, leads every charge. Albino changes newly authored pigment and material response only: warm bone-ivory, pearl gray and pale beige chitin, cool gray recesses, restrained translucent blush at thin joint membranes, a dark mouth cavity and moist highlights; never pure flat white, icy, glowing or an automatic recolor. Preserve the base strict right-facing profile, low support polygon, physical scale, thorax/support-foot root and five-clip siege topology. No Queen or Praetorian crown, small chest arms, humanoid biped, armor plates, eyes, clothing or official albino-model claim. Every future pixel must be original project art; canonExact=false.",
+      "reviewer": "Codex /root/prepare_refs_061_062",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-061-albino-crusher",
+      "name": "Albino Crusher",
+      "archetype": "Crusher",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "siege",
+      "provenance": "systemic-variant",
+      "animationFamily": "siege",
+      "batchId": "batch-004",
+      "ordinal": 60,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-009-crusher",
+      "baseReferenceLockSha256": "24bf78b7884afb2be608505e95431551fef44d37a7e566a337a699746548c157",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "The reviewed V66 enemy-009 Crusher identity lock controls anatomy. Gearbox's official Aliens: Colonial Marines page and the licensed Steam product listing anchor the source-game continuity only. No reviewed primary or licensed source establishes an Albino Crusher. The albino pigment and material treatment is an original Tantalus Frontier adaptation.",
+      "sourcePolicy": {
+        "positiveAnatomyAuthority": "REVIEWED_V66_BASE_LOCK",
+        "externalSourcesAre": "primary-developer-and-licensed-product-continuity-anchors-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "Inherit the V66 Crusher: extremely low quadrupedal mass, broad flared head shield, oversized shoulders and forequarters, shorter hindquarters, four planted limbs and one complete segmented tail. The front-heavy wedge must remain distinct from a bipedal royal.",
+        "palette": "Warm bone-ivory, pearl gray and pale beige chitin; cool gray recesses, restrained rose-taupe translucency at thin membranes, dark mouth cavity, ivory teeth and moist specular breakup.",
+        "surface": "Keep the armored head shield, ribbed thorax, tendon channels, limb joints and segmented tail readable through value and material contrast. The albino surface is newly authored, never a white filter over base frames.",
+        "anatomy": "One eyeless shielded head, one massive low thorax, exactly four weight-bearing limbs and one continuous tail. No Queen chest arms, carried equipment or clothing.",
+        "orientation": "Strict orthographic gameplay profile facing RIGHT in all 40 poses; shield, four limbs and full tail remain inside each cell without camera rotation.",
+        "scale": "Inherit enemy-009's single all-profile scale and front-heavy shield/thorax proportions. Base art remains pending final visual acceptance, so future generation must independently re-certify all five sheets.",
+        "root": "Inherit the base thorax center projected to the support floor, using planted limbs or terminal body contact. Shield and tail extents never redefine root x.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no shadow, scenery, hive resin, text or grid.",
+        "prohibitions": [
+          "humanoid biped, Queen or Praetorian crown, small chest arms or altered limb count",
+          "rhinoceros horn, carried shield, industrial armor, firearm, eyes or clothing",
+          "flat white silhouette, glow, crystal, ice, snow or automatic recolor",
+          "missing head shield, severed tail, extra limb or anatomy drift between clips",
+          "left-facing, frontal turn, crop, cell contact, duplicate pose or cross-cell tail",
+          "canon-exact, official albino model or 1:1 reproduction claim"
+        ]
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "98a084cb9dcb335160de95118c69dacf87801bd301a4a2a80620c95ff0491235",
+        "profileId": "enemy-061-albino-crusher",
+        "name": "Albino Crusher",
+        "archetype": "Crusher",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "siege",
+        "provenance": "systemic-variant",
+        "animationFamily": "siege",
+        "batchId": "batch-004",
+        "ordinal": 60,
+        "sourceFacing": "right",
+        "requiredClipCount": 5,
+        "clips": [
+          {
+            "id": "idle",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-061-albino-crusher/idle.png",
+            "promptSha256": "e8d5c3a36ae5889bea606e17029362a504f2a2bd577e8c65f12684012f4c0aca",
+            "fps": 6,
+            "loop": true
+          },
+          {
+            "id": "move",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-061-albino-crusher/move.png",
+            "promptSha256": "7990b3322395aa49aa7f6e4a95aeb45d8802be2224c95d21ac4a825cb37e4115",
+            "fps": 12,
+            "loop": true
+          },
+          {
+            "id": "attack",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-061-albino-crusher/attack.png",
+            "promptSha256": "a6534c754487e01cb39e8b3d6754398d572f058edf5076586cebd6e9b28f5a0d",
+            "fps": 12,
+            "loop": false
+          },
+          {
+            "id": "death",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-061-albino-crusher/death.png",
+            "promptSha256": "a58462800ba42e46513e4dfa085a70e5762aee549c70c55c772c6768a0c551e3",
+            "fps": 10,
+            "loop": false
+          },
+          {
+            "id": "charge",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-061-albino-crusher/charge.png",
+            "promptSha256": "da9100bd1bec28d7426bd908c813487f90a629b37302e1cb2a76c0595de8f4c8",
+            "fps": 12,
+            "loop": false
+          }
+        ],
+        "contractAudit": "The siege-family queue contains five required clips, not four. All five exact id/sourcePath/promptSha256/fps/loop contracts are preserved, including charge. Generation must rebuild prompts after this reference lock is merged."
+      },
+      "predecessorEvidence": {
+        "projectAssets": [
+          {
+            "path": "assets/openai/sprites/enemies/xenomorph-crusher-action-sheet.png",
+            "dimensions": [1254, 1254],
+            "bytes": 1255888,
+            "sha256": "6a0ec3905681365c61209f6af5cb92f45838c8d60daf695b38d89c08b66a55d8",
+            "role": "Project-authored identity predecessor; guidance only, never a V66 clip source."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/xenomorph-crusher-action-sheet.png",
+            "dimensions": [1024, 1024],
+            "bytes": 572320,
+            "sha256": "1c14adfd9ad0691e157d0cdf10cf80721568d77b7da365f1d2802223cad8a0ef",
+            "role": "Normalized project predecessor; preserve identity without copying or recoloring frames."
+          }
+        ],
+        "v66BaseSources": [
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/idle.png", "dimensions": [1774, 887], "bytes": 1671134, "sha256": "6c8cb194f4840e619addeba71b1ca90ddc3d34a22b364f55ff02c835bb33e19a"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/move.png", "dimensions": [1774, 887], "bytes": 1608733, "sha256": "e784172d3caaee046e6fd0ad96f66b85bb883cb34179aede4539ed3dc5f469aa"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/attack.png", "dimensions": [1774, 887], "bytes": 1558106, "sha256": "eb6cfd32247635265c89415e1afbd430458e7ab19ff76f364c81fec34a92e471"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/death.png", "dimensions": [1774, 887], "bytes": 1535271, "sha256": "f232a3c3637c6098f8af0bcfb15c181d13b8ce1165ffe606df339520e387b03b"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/charge.png", "dimensions": [1774, 887], "bytes": 1616748, "sha256": "fbc93c7aa29757c3b443238b62450dfbf0cc27c6dd9ba5089c5c5d43a7266d69"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg", "bytes": 911463, "sha256": "052ebc27b4c7ec16bd01931b8b6f01589ea4483e94c40a4963e41e4ac4c26d4e", "role": "Locally retained licensed-product study image already governed by the reviewed base lock; never embed or copy into generated sheets."},
+          {"path": "assets/openai/sprites/metadata/v66/enemy-009-crusher.json", "bytes": 90435, "sha256": "a9491dc6007b7ec73f93926a0ff5df247783630e21383ee4294fbab3a5c85fbe", "role": "Validated normalization and physical-registration evidence; base art acceptance remains pending visual review."}
+        ]
+      },
+      "acceptanceGates": [
+        "five 1774x887 PNG sheets, each 4x2 with eight individually authored row-major poses",
+        "40/40 cells contain exactly one complete right-facing Albino Crusher with no crop, contact or cross-cell tail",
+        "broad head shield, four weight-bearing limbs, front-heavy mass, full tail and inherited physical root remain invariant",
+        "albino material stays readable and organic-biomechanical without pure-white silhouette loss or automatic recolor artifacts",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms Crusher identity and rejects bipedal royal, armored, glowing and canon-exact readings"
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "98a084cb9dcb335160de95118c69dacf87801bd301a4a2a80620c95ff0491235",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "d7c452bd0c21acdcd2203ca3b25a5bfa10c13d679036d6f9370073c7c5a15ddb",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb"
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}

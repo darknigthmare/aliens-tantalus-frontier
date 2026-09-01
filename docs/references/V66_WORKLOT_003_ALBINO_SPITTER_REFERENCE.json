@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-062-albino-spitter": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.gearboxsoftware.com/2013/01/aliens-colonial-marines-trailer/",
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/?l=english"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/xenomorph-spitter-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/xenomorph-spitter-action-sheet.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/references/square-enix-spitter-official.jpg",
+        "assets/openai/sprites/metadata/v66/enemy-010-spitter.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-010-spitter identity lock only. Preserve one eyeless ranged xenomorph with a smooth broad rear-flared dome, four long curved barbed dorsal spines, restrained yellow-green acid reservoirs along the rear cranium that are glands and never eyes, a narrow ribbed torso, exactly two clawed arms, two digitigrade legs and one continuous segmented tail. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale gray-beige chitin, cool gray recesses, restrained translucent blush at thin membranes, dark mouth cavity and moist highlights; the acid reservoirs retain a muted yellow-green functional contrast without neon glow. Preserve the base strict right-facing profile, physical scale, pelvis/support-foot root and four-clip ranged topology; the acid projectile remains a separate runtime effect. No orange Fireteam caste, Queen crown, extra arms, firearm, eyes, clothing or official albino-model claim. Every future pixel must be original project art; canonExact=false.",
+      "reviewer": "Codex /root/prepare_refs_061_062",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-062-albino-spitter",
+      "name": "Albino Spitter",
+      "archetype": "Spitter",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "ranged",
+      "provenance": "systemic-variant",
+      "animationFamily": "ranged",
+      "batchId": "batch-004",
+      "ordinal": 61,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-010-spitter",
+      "baseReferenceLockSha256": "e1a7c246962840d26d846a157670722972d365262acbcfeb8c9c103962bcce98",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "The reviewed V66 enemy-010 Spitter identity lock controls anatomy. Gearbox's official Aliens: Colonial Marines page and the licensed Steam product listing anchor the source-game continuity only. No reviewed primary or licensed source establishes an Albino Spitter. The albino pigment and material treatment is an original Tantalus Frontier adaptation.",
+      "sourcePolicy": {
+        "positiveAnatomyAuthority": "REVIEWED_V66_BASE_LOCK",
+        "externalSourcesAre": "primary-developer-and-licensed-product-continuity-anchors-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "Inherit the V66 Spitter: smooth rear-flared dome, four distinct curved dorsal spines, narrow ribbed bipedal torso, exactly two long arms, two digitigrade legs and one complete segmented tail.",
+        "palette": "Warm pearl-ivory and pale gray-beige chitin, cool gray recesses, restrained rose-taupe translucency at thin membranes, dark mouth cavity and muted yellow-green acid glands; no orange or neon wash.",
+        "surface": "Keep the smooth dome, four spines, ribbed torso, tendon channels and tail segmentation readable through value and material contrast. The albino surface is newly authored, never a white filter over base frames.",
+        "anatomy": "One eyeless head, four dorsal spines, one narrow torso, exactly two clawed arms, two digitigrade legs and one continuous tail. Rear-cranium reservoirs are biological acid glands, not eyes or equipment.",
+        "orientation": "Strict orthographic gameplay profile facing RIGHT in all 32 poses; dome, all four spines, hands, feet and full tail remain inside each cell without camera rotation.",
+        "scale": "Inherit enemy-010's single all-profile scale and dome/torso proportions. Base art remains pending final visual acceptance and its anchor review is incomplete, so future generation must independently certify scale and anchors.",
+        "root": "Use a stable pelvis/proximal-leg projection to the planted support-foot floor. Dome, spines, acid-gland contour, tail and attack recoil never redefine the root.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no projectile, shadow, scenery, hive resin, text or grid.",
+        "prohibitions": [
+          "eyes, Queen crown, extra arm pair, altered spine count or missing tail",
+          "orange Fireteam caste, weapon, cannon, armor, clothing or oversized neon acid sacs",
+          "flat white silhouette, glow, crystal, ice, snow or automatic recolor",
+          "embedded projectile or acid splash crossing cell boundaries; projectile is a separate runtime effect",
+          "left-facing, frontal turn, crop, cell contact, duplicate pose or cross-cell tail",
+          "canon-exact, official albino model or 1:1 reproduction claim"
+        ]
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "98a084cb9dcb335160de95118c69dacf87801bd301a4a2a80620c95ff0491235",
+        "profileId": "enemy-062-albino-spitter",
+        "name": "Albino Spitter",
+        "archetype": "Spitter",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "ranged",
+        "provenance": "systemic-variant",
+        "animationFamily": "ranged",
+        "batchId": "batch-004",
+        "ordinal": 61,
+        "sourceFacing": "right",
+        "requiredClipCount": 4,
+        "clips": [
+          {
+            "id": "idle",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-062-albino-spitter/idle.png",
+            "promptSha256": "81b4b0aba8a064ebaf9715c03f27f792c8ea874c26872aa9e8135cd8ec380901",
+            "fps": 6,
+            "loop": true
+          },
+          {
+            "id": "move",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-062-albino-spitter/move.png",
+            "promptSha256": "7361c352b323aa735e5f968bfef4f446f1384732af4e79f93e9d59af78cc1db8",
+            "fps": 12,
+            "loop": true
+          },
+          {
+            "id": "attack",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-062-albino-spitter/attack.png",
+            "promptSha256": "1df117ba9366a068dc60814c57aefaaa9affdfda6ba5189265e2f24ca451ed86",
+            "fps": 12,
+            "loop": false
+          },
+          {
+            "id": "death",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-062-albino-spitter/death.png",
+            "promptSha256": "7c377372811d59a6614a4a89c9e72b50e6925cb7e7b0429005eb9629e08299e1",
+            "fps": 10,
+            "loop": false
+          }
+        ],
+        "contractAudit": "The ranged-family queue contains exactly four required clips. All four exact id/sourcePath/promptSha256/fps/loop contracts are preserved. Generation must rebuild prompts after this reference lock is merged."
+      },
+      "predecessorEvidence": {
+        "projectAssets": [
+          {
+            "path": "assets/openai/sprites/enemies/xenomorph-spitter-action-sheet.png",
+            "dimensions": [1254, 1254],
+            "bytes": 1346012,
+            "sha256": "22a057beb1b4db5bd4213ceca252a6935c0acc37f39e44b5bad7a27512eb8d60",
+            "role": "Project-authored identity predecessor; guidance only, never a V66 clip source."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/xenomorph-spitter-action-sheet.png",
+            "dimensions": [1024, 1024],
+            "bytes": 534491,
+            "sha256": "054f02cb0b91d57de3cc7c90c6b127ad274675f420b1c0e0ec38ee8ab4377da0",
+            "role": "Normalized project predecessor; preserve identity without copying or recoloring frames."
+          }
+        ],
+        "v66BaseSources": [
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/idle.png", "dimensions": [1774, 887], "bytes": 1695857, "sha256": "2bd3ac8fd02539ff39db3eb0f0c0f2a157b2b209f0300dc011b07bfda0cb8521"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/move.png", "dimensions": [1774, 887], "bytes": 1583633, "sha256": "2aa70bc08f3178397053eef92d3cbdd9a8b4f890a687bb57dca9b123f6de4815"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/attack.png", "dimensions": [1774, 887], "bytes": 1611490, "sha256": "d490c27134831a5444d97613263181b7dd45bd05e68160c6f84fcdfbc02750c7"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/death.png", "dimensions": [1774, 887], "bytes": 1152289, "sha256": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-010-spitter/references/square-enix-spitter-official.jpg", "bytes": 43732, "sha256": "f95f4f1d54573ba82802837836ddd1c77db8c264af950d3f258a25a1729cfcc7", "role": "Locally retained licensed-product study image already governed by the reviewed base lock; never embed or copy into generated sheets."},
+          {"path": "assets/openai/sprites/metadata/v66/enemy-010-spitter.json", "bytes": 56456, "sha256": "6d459e33710c4dc8caee06ddf5339b8e2161d135db17adcd9aaa03b9e6273f6a", "role": "Validated normalization and later scale-review evidence; base art acceptance and complete physical-anchor review remain pending."}
+        ]
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, each 4x2 with eight individually authored row-major poses",
+        "32/32 cells contain exactly one complete right-facing Albino Spitter with no crop, contact or cross-cell tail",
+        "rear-flared dome, four dorsal spines, two arms, two legs, full tail and stable physical root remain invariant",
+        "albino material and muted yellow-green acid glands remain readable without pure-white silhouette loss, neon glow or automatic recolor artifacts",
+        "background is true alpha or uniform #FF00FF only; acid projectile remains a separate runtime effect",
+        "reviewer confirms Spitter identity and rejects orange Fireteam, armored, extra-limbed and canon-exact readings"
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "98a084cb9dcb335160de95118c69dacf87801bd301a4a2a80620c95ff0491235",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "d7c452bd0c21acdcd2203ca3b25a5bfa10c13d679036d6f9370073c7c5a15ddb",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb"
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}
