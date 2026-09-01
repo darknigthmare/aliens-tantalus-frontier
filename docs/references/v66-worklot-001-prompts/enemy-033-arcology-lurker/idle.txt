@@ -1,0 +1,11 @@
+Use case: stylized-concept
+Asset type: production 2D sprite sheet
+Primary request: Arcology Lurker IDLE, EXACT 2:1 LANDSCAPE CANVAS, exactly 4 columns x 2 rows of EIGHT EQUAL SQUARE CELLS.
+Backdrop pure flat #FF00FF, no grid or shadows.
+Identity: very slender graphite-black dusty-gray eyeless duct xenomorph, narrow skull, long forearms and hooked fingers, folded digitigrade legs, complete prehensile tail; natural camouflage only, no technology.
+CRITICAL SCALE AND GUTTER LOCK: draw every creature deliberately SMALL, occupying at most 62 percent of its square cell width and at most 58 percent of cell height. Leave at least 18 percent pure-magenta clearance on BOTH left and right sides of every cell, and 15 percent clearance above and below. Coil the tail compactly behind the body inside the same cell. No pixel of any pose or tail may approach or cross an implied cell boundary.
+Layout: eight isolated right-facing strict side-profile low quadrupedal crouches, frames 1-4 top then 5-8 bottom, identical small scale and baseline.
+Motion: subtle breathing, skull lift, rib expansion, finger flex, compact tail curl, exhale, compress, return; eight distinct poses.
+Style: polished hand-painted 2D side-scroller sprite art, consistent anatomy.
+Constraints: whole canvas width exactly 2x height; 4x2 square cells; exactly 8 creatures; full body, fingers and tail visible; huge gutters; no touching, cropping, labels, borders, logo, UI or watermark.
+Avoid: large poses, stretched tail toward adjacent cells, wrong ratio, bipedal stance, extra limbs, eyes, equipment, Predator/cloaking, transparency, motion blur.

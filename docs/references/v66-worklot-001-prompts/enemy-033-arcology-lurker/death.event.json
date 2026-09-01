@@ -1,0 +1,16 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-033-arcology-lurker",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:335d7baa3e7eaab684030c355564be78f388a18fd75849bb56fa0930041d9d4b",
+  "providerGenerationIdReturned": false,
+  "generationIdStatus": "not-exposed-by-built-in-response",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "sourceSha256": "335d7baa3e7eaab684030c355564be78f388a18fd75849bb56fa0930041d9d4b",
+  "promptSha256": "67bea2543f511868266d9385b7e378ba0c4ba839c493b3226a3faf7662a70df1",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/death.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-033-arcology-lurker/death.txt",
+  "candidateSelected": true,
+  "note": "Candidate only; strict extraction pass, not accepted or runtime-integrated."
+}

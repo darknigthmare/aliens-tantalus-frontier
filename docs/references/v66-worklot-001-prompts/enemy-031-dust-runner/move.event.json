@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-031-dust-runner",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-74a335b5-3279-4fc6-a514-ac7f0fbbf612",
+  "actor": "Codex /root/complete_variants",
+  "sourceSha256": "dfc12e86a240561864352bfb492c72902afa535d8767578688a059fd43d7aae8",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/move-r1-cross-cell.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-031-dust-runner/move.txt",
+  "candidateSelected": false,
+  "note": "Rejected after read-only source QA: frames 4 and 6 (row-major indices 3 and 5) cross nominal vertical cell boundaries. Safe reassignment passed in memory, but the board does not meet the requested independent-cell gutter contract; preserved only as provenance."
+}

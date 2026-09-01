@@ -2,7 +2,7 @@
   "schema": 1,
   "release": "v66",
   "generatedBy": "scripts/enemy-batch-production.mjs",
-  "rosterSha256": "47033ed280041ac96df72ebd0c1a44190f554797efcb98bef2b7c1bfef3871f5",
+  "rosterSha256": "d34b53589e1766ad071c76f8229d0704388289f99d51ecc4483b8355ee4ad43e",
   "totalProfiles": 571,
   "archetypeCount": 55,
   "batchSize": 20,
@@ -5165,9 +5165,37 @@
       "animationFamily": "quadruped",
       "batchId": "batch-003",
       "ordinal": 30,
-      "initialStatus": "pending-reference",
-      "reference": null,
-      "referenceLockSha256": null,
+      "initialStatus": "ready-generation",
+      "reference": {
+        "status": "reviewed",
+        "urls": [
+          "https://www.20thcenturystudios.com/movies/alien-3",
+          "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+        ],
+        "localPaths": [
+          "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png"
+        ],
+        "designLock": "One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.",
+        "reviewer": "Codex /root/complete_variants; V56 project master, licensed Alien 3 anchors, twelve cranial measurements and all 32 roots reviewed",
+        "reviewedAt": "2026-09-01",
+        "canonExact": false,
+        "sourceScaleByClip": {
+          "idle": 1,
+          "move": 1.506596,
+          "attack": 1.684201,
+          "death": 1.051879
+        },
+        "scaleCalibrationReview": {
+          "note": "Three comparable rigid dorsal cranial-dome chords per clip calibrate move, attack and death to idle; jaws, tails and whole-body bounding boxes are excluded. Two idle border clues were verified as isolated outer-canvas matte pixels, not anatomical cross-cell contact.",
+          "reviewer": "Codex /root/complete_variants",
+          "reviewedAt": "2026-09-01",
+          "evidencePaths": [
+            "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.json",
+            "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.md"
+          ]
+        }
+      },
+      "referenceLockSha256": "830af744a780be1cf9aeb89bdafe34e1cbe8cb4903a507574978364b9b09cd5a",
       "generationProvider": "OpenAI ImageGen",
       "canonExact": false,
       "sourceGrid": {
@@ -5207,8 +5235,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/idle.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-031-dust-runner/idle.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-031-dust-runner/idle.gif",
-          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "3497d99fbb057f91b53767545fcd63f6c07dda2f6d7798f8d7707a413f2f3cb4"
+          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "7f65207c9e2f9dd607001cc2f36fc9c14047c8d9318701c486071c1357d735dc"
         },
         {
           "id": "move",
@@ -5229,8 +5257,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-031-dust-runner/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-031-dust-runner/move.gif",
-          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "0d31c7d321edcb77b7758f85d01b871e2d82012ac215706c7944d929e5987720"
+          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation move.\nIdentity lock: One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "91a9fc2f8538d529515a23c77598d165cc49b1b24c4ccac3c218d32b01fe5d06"
         },
         {
           "id": "attack",
@@ -5251,8 +5279,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-031-dust-runner/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-031-dust-runner/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped crouch, pounce or bite, then four-foot recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "e22572ef6816ddc52ee187f53dbff158d2c66e6016dd1276dc30eda1d9cee97d"
+          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped crouch, pounce or bite, then four-foot recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "f68351d04dae8900d74476879b2a47ec41bf06324d0436b67188318d566750fa"
         },
         {
           "id": "death",
@@ -5273,8 +5301,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/death.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-031-dust-runner/death.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-031-dust-runner/death.gif",
-          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation death.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "1a2cd9fcdc539027dc06c48289a88199c543433619c406aa3508f58fa7472037"
+          "prompt": "Create ONE production sprite sheet of Dust Runner for Aliens: Tantalus Frontier, animation death.\nIdentity lock: One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.\nArchetype Dust Runner; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "61047cdff3ab85af53c750b50d06aa19ee70e32a77e7354996f0cc5f30006570"
         }
       ],
       "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-031-dust-runner.webp",
@@ -5292,9 +5320,38 @@
       "animationFamily": "siege",
       "batchId": "batch-003",
       "ordinal": 31,
-      "initialStatus": "pending-reference",
-      "reference": null,
-      "referenceLockSha256": null,
+      "initialStatus": "ready-generation",
+      "reference": {
+        "status": "reviewed",
+        "urls": [
+          "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "https://www.avpgalaxy.net/games/aliens-crucible/",
+          "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+        ],
+        "localPaths": [
+          "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png"
+        ],
+        "designLock": "Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.",
+        "reviewer": "Codex finish_source_review; V56 project contract, Crucible context, protected cranial scale and all 40 physical roots reviewed",
+        "reviewedAt": "2026-09-01",
+        "canonExact": false,
+        "sourceScaleByClip": {
+          "idle": 1,
+          "move": 0.872336,
+          "attack": 0.927315,
+          "death": 1.300751,
+          "charge": 1
+        },
+        "scaleCalibrationReview": {
+          "note": "Manual protected cranial-plate measurements on two comparable right-profile poses per clip calibrate move, attack and death to idle; charge remains 1 within the five-pixel landmark uncertainty.",
+          "reviewer": "Codex finish_source_review",
+          "reviewedAt": "2026-09-01",
+          "evidencePaths": [
+            "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md"
+          ]
+        }
+      },
+      "referenceLockSha256": "c209b4c6d21520fbe7a1b5ca806ba44cf1c6577ef0b076c37265ef0c08704528",
       "generationProvider": "OpenAI ImageGen",
       "canonExact": false,
       "sourceGrid": {
@@ -5334,8 +5391,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-032-salvage-hive-brute/idle.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-032-salvage-hive-brute/idle.gif",
-          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "bb539641ae260a03d5bee41e1fe3f8b66f3f9215ce651edf625417ab1659d855"
+          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "90adbf493425c251f40c43d590ed4e36c8fd48663ed53f48217231b2fb51c3ba"
         },
         {
           "id": "move",
@@ -5356,8 +5413,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-032-salvage-hive-brute/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-032-salvage-hive-brute/move.gif",
-          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "af1dcbe44ca87ed6323420863e9ba234a36cdaffa9f20e565215a08512b813cd"
+          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation move.\nIdentity lock: Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "310d7e8a18951cdbc05e980ff9b1dc2dadeb39ce9f89e32240f028a9267164bd"
         },
         {
           "id": "attack",
@@ -5378,8 +5435,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-032-salvage-hive-brute/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-032-salvage-hive-brute/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Heavy body charge with lowered armored head; weight transfer, contact and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "fad93095b558d6672ec971f247bb8eb8fab2cc56b5e4439f71c67a2f0d0d086c"
+          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Heavy body charge with lowered armored head; weight transfer, contact and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "2b59f50be472fddbb0a8312b70ea236c88847f8c1b21da786158072edac99d51"
         },
         {
           "id": "death",
@@ -5400,8 +5457,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-032-salvage-hive-brute/death.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-032-salvage-hive-brute/death.gif",
-          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation death.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "aaf07fda0c69a1909ed04d3ad02514d260bfb313b27a061ed4be44c5be6acf9c"
+          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation death.\nIdentity lock: Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "6b5359e2c4df60b7b93861433b49a9d511232fd8c48acb27166b6e2097cfc6bb"
         },
         {
           "id": "charge",
@@ -5422,8 +5479,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-032-salvage-hive-brute/charge.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-032-salvage-hive-brute/charge.gif",
-          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation charge.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Grounded acceleration and braking, armored impact posture; no teleport or airborne sprint.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "4af6b6e077a5d908025cb43a9e0b0e2aa8e589a287a1f4693c849df805c30076"
+          "prompt": "Create ONE production sprite sheet of Salvage Hive Brute for Aliens: Tantalus Frontier, animation charge.\nIdentity lock: Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.\nArchetype Salvage Hive Brute; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Grounded acceleration and braking, armored impact posture; no teleport or airborne sprint.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "d2a0bcf667de564ca4a003a102a8c9fe1066bcc12c44f8bfe8ce88f8f8a63043"
         }
       ],
       "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-032-salvage-hive-brute.webp",
@@ -5441,9 +5498,39 @@
       "animationFamily": "quadruped",
       "batchId": "batch-003",
       "ordinal": 32,
-      "initialStatus": "pending-reference",
-      "reference": null,
-      "referenceLockSha256": null,
+      "initialStatus": "ready-generation",
+      "reference": {
+        "status": "reviewed",
+        "urls": [
+          "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+          "https://www.avpgalaxy.net/games/aliens-crucible/gallery/",
+          "https://www.avpgalaxy.net/2010/01/10/first-aliens-crucible-footage/",
+          "https://www.avpgalaxy.net/2009/02/28/rpg-gets-name-and-concept-art/"
+        ],
+        "localPaths": [
+          "assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png"
+        ],
+        "designLock": "One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.",
+        "reviewer": "Codex /root/produce_arcology_lurker; cancelled Crucible context, rigid cranial scale, exact attack ownership and all 32 physical roots reviewed",
+        "reviewedAt": "2026-09-01",
+        "canonExact": false,
+        "sourceScaleByClip": {
+          "idle": 1,
+          "move": 0.959464,
+          "attack": 0.912495,
+          "death": 0.947625
+        },
+        "scaleCalibrationReview": {
+          "note": "Manual rigid cranial-dome chords calibrate move, attack and death to idle. The attack short-spill path reconstructs every foreground pixel exactly; no geometry retouch was used because it would downscale and then re-upscale fine hooked digits.",
+          "reviewer": "Codex /root/produce_arcology_lurker",
+          "reviewedAt": "2026-09-01",
+          "evidencePaths": [
+            "docs/references/V66_WORKLOT_001_ARCOLOGY_LURKER_SCALE_REVIEW.json",
+            "docs/references/V66_WORKLOT_001_ARCOLOGY_LURKER_SCALE_REVIEW.md"
+          ]
+        }
+      },
+      "referenceLockSha256": "af10efc0b9c770b81518e9f291f88b1cc154107bc03bf5792953a7ce6b262131",
       "generationProvider": "OpenAI ImageGen",
       "canonExact": false,
       "sourceGrid": {
@@ -5483,8 +5570,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/idle.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-033-arcology-lurker/idle.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-033-arcology-lurker/idle.gif",
-          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "bb1091e42f9ff41dff4b5069ee37e5ed320c0f7af878356b9c8f1a652a7f5e06"
+          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "3ffca1c04ffbef9e916de3390fa51253690af88f7b7043f3cbb5634185e3d292"
         },
         {
           "id": "move",
@@ -5505,8 +5592,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-033-arcology-lurker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-033-arcology-lurker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "f59fbd548fa9e80794d99d0c51d4596beac9188a85969e183659fc5ee2220cd4"
+          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "d175070c7c8f6a1d851a36665160bc69e7f2e495048e706d59780d4702afca35"
         },
         {
           "id": "attack",
@@ -5527,8 +5614,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-033-arcology-lurker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-033-arcology-lurker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped crouch, pounce or bite, then four-foot recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "dd3c4aeff7dd1967882c79516df3335e48d619b00109f1ebacd81640f343f52f"
+          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped crouch, pounce or bite, then four-foot recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "a7ae43af57fd840295962057053ad9518d2726fcedf5df9c0b08559a80525566"
         },
         {
           "id": "death",
@@ -5549,8 +5636,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/death.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-033-arcology-lurker/death.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-033-arcology-lurker/death.gif",
-          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation death.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "eb1bd895bfb8dc573f89f7c73048cf3bd277f1fe352f6c879ca0f43da55ac0c1"
+          "prompt": "Create ONE production sprite sheet of Arcology Lurker for Aliens: Tantalus Frontier, animation death.\nIdentity lock: One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.\nArchetype Arcology Lurker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "0245ba5750d240f337d870579e6767e21bf5a030ce1fe507896e5474cc35d88c"
         }
       ],
       "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-033-arcology-lurker.webp",
@@ -5565,12 +5652,40 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-003",
       "ordinal": 33,
-      "initialStatus": "pending-reference",
-      "reference": null,
-      "referenceLockSha256": null,
+      "initialStatus": "ready-generation",
+      "reference": {
+        "status": "reviewed",
+        "urls": [
+          "https://www.20thcenturystudios.com/movies/alien-3",
+          "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+        ],
+        "localPaths": [
+          "assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png"
+        ],
+        "designLock": "Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.",
+        "reviewer": "Codex /root; V56 project identity, generation continuity, cranial scale and all 32 physical roots reviewed",
+        "reviewedAt": "2026-09-01",
+        "canonExact": false,
+        "sourceScaleByClip": {
+          "idle": 1,
+          "move": 0.741314,
+          "attack": 1.00771,
+          "death": 0.754297
+        },
+        "scaleCalibrationReview": {
+          "note": "Manual rigid cranial-cap chord on one comparable right-facing pose per clip aligns move, attack and death to the corrected all-quadrupedal idle; action-dependent body bounding boxes are excluded.",
+          "reviewer": "Codex /root",
+          "reviewedAt": "2026-09-01",
+          "evidencePaths": [
+            "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SOURCE_QA.json",
+            "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SCALE_REVIEW.md"
+          ]
+        }
+      },
+      "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
       "generationProvider": "OpenAI ImageGen",
       "canonExact": false,
       "sourceGrid": {
@@ -5610,12 +5725,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/idle.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/idle.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/idle.gif",
-          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "6f960ac695cc3b80dbbf182cccfe8d548a5fa1fdd811010e2758277ca825dd0b"
+          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "9d9ea95d53e3a492f7a6dd0d44bc0ad5edb5ac82d083cf3d9e8904012342d6d9"
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -5632,12 +5747,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "9dbd479bd314bff001116e357964674c37d369ab6fe5a885563222240f9a05b0"
+          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "9aad4b1911dbe41f5ceb8d73be96c4be621845b46be8639a4371324ebcd04e82"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -5654,8 +5769,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "01a9ceb69ef629077a2a540ace3caef638b4fdadc2655857aed092e8804e6787"
+          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "2ac2e255b00e6a9c825e1a71e2824a353b8c4ce1f49ac220ff7ca8225901e9b2"
         },
         {
           "id": "death",
@@ -5676,8 +5791,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/death.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/death.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/death.gif",
-          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation death.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "774a9e0abd1380b74d8ad088cda0df51825925ee1abe2331b17f274962030ddb"
+          "prompt": "Create ONE production sprite sheet of Caravan Stalker for Aliens: Tantalus Frontier, animation death.\nIdentity lock: Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.\nArchetype Caravan Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "8d9e887e00e3186de6a838de837d253960bc7c5304a4cb03b268d4085b17bb17"
         }
       ],
       "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-034-caravan-stalker.webp",
@@ -12552,7 +12667,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-005",
       "ordinal": 85,
       "initialStatus": "pending-reference",
@@ -12602,7 +12717,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -12619,12 +12734,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-086-albino-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-086-albino-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-086-albino-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Albino Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Albino. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "e59dece5c44244ec833b8aa34d474bb553d1c54e3a9111aa62831b786015f3a9"
+          "prompt": "Create ONE production sprite sheet of Albino Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Albino. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "3107e2e3c941e71455474d3b5d107e45e91e12d494d9ce920057ec4ee84751da"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -12641,8 +12756,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-086-albino-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-086-albino-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-086-albino-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Albino Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Albino. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "a3ab07df5b82fa97226b6e13b03bda62a6b770952e8ef95f6b440fd795adff83"
+          "prompt": "Create ONE production sprite sheet of Albino Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Albino. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "adc6f9ba441c2362d71db971dc6dc544e4ae61b52a806536375ce375d52d3b64"
         },
         {
           "id": "death",
@@ -19508,7 +19623,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-008",
       "ordinal": 137,
       "initialStatus": "pending-reference",
@@ -19558,7 +19673,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -19575,12 +19690,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-008/enemy-138-armored-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-138-armored-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-138-armored-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Armored Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Armored. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "169c6656df09400d1505dd8abd526c2640214aabcfeda0718c7bfef328ed53d3"
+          "prompt": "Create ONE production sprite sheet of Armored Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Armored. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "5f4f66b3c9a8ff3a7570805222c31d52030c98d383b89cb9e6cb7a95b4e68fa9"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -19597,8 +19712,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-008/enemy-138-armored-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-138-armored-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-138-armored-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Armored Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Armored. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "fe626a15f529330f79e5170964bfe4685d8669527ce4588cfae4da371749a268"
+          "prompt": "Create ONE production sprite sheet of Armored Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Armored. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "ed053db2a18362c1de00882ac01f0224b2bd8039fce1573d15572870e4575e99"
         },
         {
           "id": "death",
@@ -26464,7 +26579,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-011",
       "ordinal": 189,
       "initialStatus": "pending-reference",
@@ -26514,7 +26629,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -26531,12 +26646,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-011/enemy-190-acid-blooded-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-190-acid-blooded-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-190-acid-blooded-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Acid-Blooded Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Acid-Blooded. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "a845f74c464bb44166f630a58403a07d12dc9b1401a1ce06cc9d8f501519f8d5"
+          "prompt": "Create ONE production sprite sheet of Acid-Blooded Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Acid-Blooded. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "221c6e44bae1ecf8de08c3ebec38c65300fbdd88852e14ef92b71ddcb7aa1c65"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -26553,8 +26668,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-011/enemy-190-acid-blooded-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-190-acid-blooded-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-190-acid-blooded-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Acid-Blooded Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Acid-Blooded. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "7954c9fc6205be73b345a2298389faeca4401751daf323760efd2bd68f2baa4f"
+          "prompt": "Create ONE production sprite sheet of Acid-Blooded Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Acid-Blooded. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "d76cb0e9a092d8f641c0a554276acb4b40ff2f6a25e34c7a61b5e6854e3d007d"
         },
         {
           "id": "death",
@@ -33420,7 +33535,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-013",
       "ordinal": 241,
       "initialStatus": "pending-reference",
@@ -33470,7 +33585,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -33487,12 +33602,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-013/enemy-242-cryo-adapted-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-242-cryo-adapted-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-242-cryo-adapted-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Cryo-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Cryo-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "f931ad7f1b0cd758b91666b9594c61068a544716e4b2e2600d17e3c19d2af164"
+          "prompt": "Create ONE production sprite sheet of Cryo-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Cryo-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "12e7798b3db09cdff68d97463ce33bbacdb3c81c0ab162e17cac0f0cb95c52dd"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -33509,8 +33624,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-013/enemy-242-cryo-adapted-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-242-cryo-adapted-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-242-cryo-adapted-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Cryo-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Cryo-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "df9089cf794749650e0acb983e13b2ee1666e83d24b57c906a8a791266205a50"
+          "prompt": "Create ONE production sprite sheet of Cryo-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Cryo-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "28529f07504841eca8b7eaf6c5c70b673313daf31273830d5d05a26cb815e9fd"
         },
         {
           "id": "death",
@@ -40376,7 +40491,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-016",
       "ordinal": 293,
       "initialStatus": "pending-reference",
@@ -40426,7 +40541,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -40443,12 +40558,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-016/enemy-294-vacuum-adapted-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-294-vacuum-adapted-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-294-vacuum-adapted-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Vacuum-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Vacuum-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "d67b8c39e3ced2598939552a1263368f3e81bd90d018a545d26a850ae23090aa"
+          "prompt": "Create ONE production sprite sheet of Vacuum-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Vacuum-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "1c91621a435755eaa48cdee9e25252b7666a86f13bb6f9861b810e63a04b02b3"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -40465,8 +40580,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-016/enemy-294-vacuum-adapted-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-294-vacuum-adapted-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-294-vacuum-adapted-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Vacuum-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Vacuum-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "767db9d011e30a37a8d4957115044ca1333cf6ce19616b58a9e6998b9d004021"
+          "prompt": "Create ONE production sprite sheet of Vacuum-Adapted Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Vacuum-Adapted. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "c0d7780f34d71cd3cd7397683a30401b94e9c36d5f23775c2e33462e2b911f6c"
         },
         {
           "id": "death",
@@ -47332,7 +47447,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-018",
       "ordinal": 345,
       "initialStatus": "pending-reference",
@@ -47382,7 +47497,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -47399,12 +47514,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-018/enemy-346-hive-guard-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-346-hive-guard-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-346-hive-guard-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Hive Guard Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Hive Guard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "8065f96d94c963686371711347ebc4d7b0d39f67046a9f663ae008259612eaa1"
+          "prompt": "Create ONE production sprite sheet of Hive Guard Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Hive Guard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "1c8fa9392e1df6a155226648facd225ed78458abcbc11dcbc1976bca21ea6b47"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -47421,8 +47536,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-018/enemy-346-hive-guard-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-346-hive-guard-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-346-hive-guard-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Hive Guard Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Hive Guard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "b3dc555e2532e23d43c294755477d4af2b49a6947ce75369290544dce8a3b4bc"
+          "prompt": "Create ONE production sprite sheet of Hive Guard Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Hive Guard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "1f4514af19980d3de06655657fe8f60a79a68211fe3c016e5a6aee3caa0559c0"
         },
         {
           "id": "death",
@@ -54288,7 +54403,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-021",
       "ordinal": 397,
       "initialStatus": "pending-reference",
@@ -54338,7 +54453,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -54355,12 +54470,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-021/enemy-398-apex-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-398-apex-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-398-apex-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Apex Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Apex. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "5e125dfd579929220f508669c8e8c0aee1e21df2c4fb5f05cf3d32f986494431"
+          "prompt": "Create ONE production sprite sheet of Apex Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Apex. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "0fd2459812027f7d226a4ffb8c6a4b9bc023f10a677503f3f25b8e686e295804"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -54377,8 +54492,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-021/enemy-398-apex-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-398-apex-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-398-apex-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Apex Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Apex. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "58f61cd39659a1a2d2c7c8f3769310ffe0d741050b591dd152c9503b1f420438"
+          "prompt": "Create ONE production sprite sheet of Apex Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Apex. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "79998216a5450975d59b981a147b056568a3ebaca2c334e9eb7fe42147d8c4d1"
         },
         {
           "id": "death",
@@ -61244,7 +61359,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-024",
       "ordinal": 449,
       "initialStatus": "pending-reference",
@@ -61294,7 +61409,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -61311,12 +61426,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-024/enemy-450-juvenile-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-450-juvenile-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-450-juvenile-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Juvenile Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Juvenile. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "1d7320f143fe694dd845dfc5365b62a06298c37f8cea97fc20db8d70c0a26ca4"
+          "prompt": "Create ONE production sprite sheet of Juvenile Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Juvenile. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "bfa5535b82f437ecfe0a1d34f0317b868bcccfb12601c0946c58041656f4281c"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -61333,8 +61448,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-024/enemy-450-juvenile-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-450-juvenile-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-450-juvenile-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Juvenile Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Juvenile. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "1b647f39281a6c46dcf34fc4aa8f56d897a19d6bd08263071d868e9dd8dde23e"
+          "prompt": "Create ONE production sprite sheet of Juvenile Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Juvenile. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "d8ee5fd87705e78bb29828e0672b52ce4477345c7bf20080b1e74ad6e7d02668"
         },
         {
           "id": "death",
@@ -68200,7 +68315,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-026",
       "ordinal": 501,
       "initialStatus": "pending-reference",
@@ -68250,7 +68365,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -68267,12 +68382,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-026/enemy-502-elder-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-502-elder-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-502-elder-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Elder Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Elder. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "64f7bd8b938ca10f53a72e562592ba5b44e82a883bcb61c5f3e3fe7a42c06fb2"
+          "prompt": "Create ONE production sprite sheet of Elder Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Elder. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "7159509c7e872d282526b2ee099ebc9a7835c9859acb56edec71bfd83a255a9f"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -68289,8 +68404,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-026/enemy-502-elder-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-502-elder-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-502-elder-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Elder Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Elder. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "abdfcf5005c77e6f7502fb00eb54c44b3d55f9fa5352d94f5a21f6078ca5bade"
+          "prompt": "Create ONE production sprite sheet of Elder Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Elder. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "46ef5ecf0ab2acb007b36387a29959f8d66b8e39eb7a2581d278e0770d690acd"
         },
         {
           "id": "death",
@@ -75156,7 +75271,7 @@
       "biology": "xenomorph",
       "caste": "concept-crucible",
       "provenance": "licensed-concept-adaptation",
-      "animationFamily": "biped",
+      "animationFamily": "quadruped",
       "batchId": "batch-029",
       "ordinal": 553,
       "initialStatus": "pending-reference",
@@ -75206,7 +75321,7 @@
         },
         {
           "id": "move",
-          "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+          "motion": "Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.",
           "fps": 12,
           "loop": true,
           "frameCount": 8,
@@ -75223,12 +75338,12 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-029/enemy-554-neuro-linked-caravan-stalker/move.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-554-neuro-linked-caravan-stalker/move.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-554-neuro-linked-caravan-stalker/move.gif",
-          "prompt": "Create ONE production sprite sheet of Neuro-Linked Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Neuro-Linked. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "dcddd892a95ed5fdcff4fa0ed9729fbe2516cf2091ea9a8b6f5eade1fe8bc010"
+          "prompt": "Create ONE production sprite sheet of Neuro-Linked Caravan Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Neuro-Linked. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Low four-legged running cycle with diagonal contacts, compression and extension; do not become bipedal.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "f418eface897c394869f8bbe63d593103faeeb4020edee1e03269fbd1b7d8d5b"
         },
         {
           "id": "attack",
-          "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+          "motion": "Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
           "fps": 12,
           "loop": false,
           "frameCount": 8,
@@ -75245,8 +75360,8 @@
           "sourcePath": "assets/openai/sprites/frames/v66/batch-029/enemy-554-neuro-linked-caravan-stalker/attack.png",
           "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-554-neuro-linked-caravan-stalker/attack.webp",
           "previewPath": "assets/openai/sprites/previews/v66/enemy-554-neuro-linked-caravan-stalker/attack.gif",
-          "prompt": "Create ONE production sprite sheet of Neuro-Linked Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Neuro-Linked. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
-          "promptSha256": "4042f7958548f0b86d95a3e5ee3fc328f8f50db2991a9f169b543832f1a0f68a"
+          "prompt": "Create ONE production sprite sheet of Neuro-Linked Caravan Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: BLOCKED: exact subject references and a reviewed design lock must be supplied before generation.\nArchetype Caravan Stalker; modifier Neuro-Linked. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.",
+          "promptSha256": "a267d34a093b91ad012dc32c882e57dacf99da3e179d9f97a8e3b01fb0be57bd"
         },
         {
           "id": "death",

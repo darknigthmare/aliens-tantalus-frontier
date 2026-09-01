@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "charge",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:47e8dae3644f6947ecf7e01b7c06288f411a857f71ac85e76681a81e0d82e9d7",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "47e8dae3644f6947ecf7e01b7c06288f411a857f71ac85e76681a81e0d82e9d7",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/rejected/charge-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/charge.txt",
+  "actualPromptSha256": "ea823ed4cfb29b8e476c44c174b853049aa3ce95d6ca80d1360f1a664fdf76d1",
+  "candidateSelected": false,
+  "note": "Original grounded acceleration/braking sequence archived: eight distinct poses and identity retained, but straight high-speed tails crossed several nominal cells and blocked default extraction. Safe-reassignment probe passed only; not selected."
+}

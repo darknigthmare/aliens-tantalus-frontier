@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:da09427947eb0b1faa6f970c6cb46950b6ca9085c0bc1a0d09802d36a8efa4dd",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "da09427947eb0b1faa6f970c6cb46950b6ca9085c0bc1a0d09802d36a8efa4dd",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/attack-r2.txt",
+  "actualPromptSha256": "378ded4300d8c4feb1427b59662374d479e6d5ed94037f8d4817bc35493dab02",
+  "candidateSelected": true,
+  "note": "Selected after targeted frame-4 rigid placement correction: RGB 1774x887, opaque-magenta, eight distinct chronological slam poses, no border contacts, default extraction 8/8. Candidate only; not accepted or runtime-integrated."
+}

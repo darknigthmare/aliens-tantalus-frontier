@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "profileId": "enemy-031-dust-runner",
+  "batchId": "batch-003",
+  "status": "reference-reviewed-source-candidates-selected-not-accepted",
+  "reviewer": "Codex /root/complete_variants",
+  "reviewedAt": "2026-09-01",
+  "canonExact": false,
+  "runtimeIntegrated": false,
+  "classification": "PROJECT_ADAPTATION",
+  "externalAnchors": [
+    {
+      "tier": "PRIMARY",
+      "url": "https://www.20thcenturystudios.com/movies/alien-3",
+      "use": "Official film page for the 1992 screen continuity and quadrupedal adult xenomorph anchor."
+    },
+    {
+      "tier": "LICENSED",
+      "url": "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+      "use": "Licensed articulated Dog Alien sculpt; the product page confirms a long body, extendable inner mouth and bendable tail."
+    }
+  ],
+  "projectIdentityReference": {
+    "path": "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+    "sha256": "0a327424631fbf0b11f547be8408fdf999e89dd29b9f51be93c71a1240cca5d7",
+    "role": "project-owned visual identity reference only",
+    "note": "The V56 board controls the low, long runner proportions and black-russet project palette. It is not proof of a published external Dust Runner model."
+  },
+  "designLock": "One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates.",
+  "sourceContract": {
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "aspectRatio": "2:1",
+    "facing": "right",
+    "matte": "perfectly flat solid #FF00FF, no shadow, scenery, gradient, texture or checkerboard",
+    "subjectWidthCellRatioMaximum": 0.72,
+    "subjectHeightCellRatioMaximum": 0.52,
+    "cellIsolation": "one complete subject per cell with blank gutters; no anatomy crosses a cell boundary"
+  },
+  "plannedClips": ["idle", "move", "attack", "death"],
+  "selectedSources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/idle.png",
+      "sha256": "1f4bf952f5babf39d6201fe2d51053afbc062de343eb6b530c2a2f879b206875",
+      "generationId": "exec-af8bb477-1d39-4b66-96c8-1c9446005b58"
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
+      "sha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+      "generationId": "exec-35d47338-8aff-4003-b01e-bd733449a935"
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/attack.png",
+      "sha256": "7d71c3cfa883a7efbe03770c2754d2343db09817eca4762e7d04c8ca89e69ad5",
+      "generationId": null,
+      "generationIdStatus": "built-in-result-exposed-image-url-only-no-stable-exec-stub"
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/death.png",
+      "sha256": "490d141acdf1e2a3e4fd04134c996d6292befd9ff1be16988abba1053dc168ce",
+      "generationId": "exec-c7639573-4f93-454f-a507-16c606f9cda9"
+    }
+  ],
+  "rejectedSources": [
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/move-r1-cross-cell.png",
+      "sha256": "dfc12e86a240561864352bfb492c72902afa535d8767578688a059fd43d7aae8",
+      "reason": "default extraction blocked on vertical cell junctions; safe reassignment was not used to waive the authored-gutter contract"
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/attack-r1-cross-cell.png",
+      "sha256": "9e7f4f1b912b396087c8064fa61b6aebec25223dfe665441001a07a86b4cf9ae",
+      "reason": "default extraction blocked on the pounce/contact cell junctions; safe reassignment was not used to waive the authored-gutter contract"
+    }
+  ],
+  "qaPath": "docs/references/V66_WORKLOT_001_DUST_RUNNER_QA.json",
+  "generationSummary": {
+    "builtInImageGenCallsCompleted": 7,
+    "selectedSources": 4,
+    "preservedRejectedSources": 2,
+    "unpersistedInlineDrafts": 1,
+    "acceptedAutomatically": 0
+  },
+  "limitations": [
+    "Dust Runner is not an attested Alien 3 or Aliens: Crucible model name; no 1:1 canon claim is allowed.",
+    "External pages were studied as design anchors only. No official bitmap, texture, sculpt photograph or unpublished Crucible concept is copied into the deliverable.",
+    "Generated boards remain source candidates until extraction, pose chronology, identity, scale, root and loop review pass; no automatic runtime acceptance or integration."
+    ,"The selected opaque backgrounds are normalizer-compatible magenta but are not pixel-uniform #FF00FF; exact matte replacement/removal belongs to a separately authorized normalization step."
+  ]
+}

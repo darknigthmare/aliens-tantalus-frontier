@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: production 2D game animation sprite sheet
+Input images: Image 1 is the Caravan Stalker attack sheet with correct identity, chronology and 4-by-2 layout, but poses 3 and 4 touch their nominal cell borders.
+Primary request: change ONLY uniform scale and centering. Preserve the exact eight attack poses, their order, anatomy, colors, right-facing side view, 2:1 canvas and pure magenta background.
+Correction: uniformly reduce all eight creatures to 86 percent of current size, preserving aspect ratio, then center each inside its own square cell. Keep the same physical scale across all frames.
+Hard bounds: four equal columns and two equal rows. Every tail tip, skull, claw and limb must remain at least 24 pixels inside its own cell on all four sides. No creature pixel may touch or cross a cell boundary.
+Constraints: exact 2:1 wide landscape, exactly 4 columns by 2 rows, exactly eight poses, no redesign, no pose change, no added or removed anatomy, no grid lines, no text, no shadow, no scenery, flat #FF00FF only, no watermark.

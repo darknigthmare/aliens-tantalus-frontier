@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-031-dust-runner",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-35d47338-8aff-4003-b01e-bd733449a935",
+  "actor": "Codex /root/complete_variants",
+  "sourceSha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-031-dust-runner/move-r2.txt",
+  "candidateSelected": true,
+  "note": "Targeted compact replacement for cross-cell r1. Eight right-facing low gallop phases with increased pure-magenta gutters; candidate only pending refreshed strict extraction, anatomy, scale and loop review; not accepted or runtime-integrated."
+}

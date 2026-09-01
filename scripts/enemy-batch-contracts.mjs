@@ -38,6 +38,9 @@ const ARCHETYPE_CLIP_OVERRIDES = Object.freeze({
   Praetorian: Object.freeze({
     attack: attack('Heavy Praetorian forelimb strike using exactly two main arms; retain the locked crown silhouette and full tail. Do not add small inner arms or a second arm pair.'),
   }),
+  'Caravan Stalker': Object.freeze({
+    attack: attack('Quadruped frontier stalker crouches, briefly rears on its hind legs for a claw or inner-jaw strike, then returns to four-foot recovery. Do not make its base locomotion bipedal.'),
+  }),
   Xenoborg: Object.freeze({
     attack: attack('Brace the body and aim its permanently grafted forearm laser cannons, discharge, recoil and recover. Cannons remain fused to the arms in every pose; no handheld gun, shoulder-fired rifle or detachable magazine.'),
     reload: clip('reload', 'One complete capacitor recharge and heat-venting cycle in the grafted forearm laser cannons: cooling vents open, charge builds, vents close, return to ready. No magazine removal, ammunition insertion or handheld gun.', 10),
@@ -62,7 +65,7 @@ const FAMILY_BY_ARCHETYPE = Object.freeze({
   'Xenoborg': 'armed', 'ATARAX Ripper': 'biped', 'Ripper Queen': 'royal', 'Foundry Drone': 'biped',
   'Foundry Crusher': 'siege', 'Reef Stalker': 'quadruped', 'Reef Spitter': 'ranged',
   'Siege Royal': 'royal', 'Pale Crucible Hunter': 'biped', 'Dust Runner': 'quadruped',
-  'Salvage Hive Brute': 'siege', 'Arcology Lurker': 'quadruped', 'Caravan Stalker': 'biped',
+  'Salvage Hive Brute': 'siege', 'Arcology Lurker': 'quadruped', 'Caravan Stalker': 'quadruped',
   'Trilobite Echo': 'tentacle', 'Deacon Line': 'biped', 'Neomorph': 'biped', 'Protomorph': 'biped',
   'Abomination': 'biped', 'Pathogen Mimic': 'biped', 'Working Joe': 'synthetic',
   'Combat Synthetic': 'armed', 'Weyland-Yutani Commando': 'armed', 'UPP Vanguard': 'armed',

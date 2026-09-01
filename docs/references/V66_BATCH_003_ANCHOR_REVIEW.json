@@ -1,0 +1,2453 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Physical registration only. Reviewed entries have individually inspected roots; pending entries remain unused by normalization. No artistic acceptance or runtime integration.",
+  "acceptedAutomatically": 0,
+  "profiles": {
+    "enemy-031-dust-runner": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual per-pose visual inspection of the pelvis center immediately ahead of the tail base at the proximal hind-leg joint, projected vertically to observed paw/body support. The support coordinate includes the complete extracted source lower bound and guard pixel, so sourceBounds[3] - anchorY must be <= 0 for every pose. Airborne pounce poses use an explicit ground plane inferred from adjacent grounded poses so flight height is preserved. Whole-body bounding boxes and tail extrema are never used as the landmark.",
+      "reviewedPoseCount": 32,
+      "visualReview": "All 32 source poses and four marked root contacts were inspected. Idle border clues at frames 4 and 7 are single bright-magenta corner pixels, not anatomy; default extraction passes without safe reassignment. Registration only, not scale application, loop approval or runtime acceptance.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "1f4bf952f5babf39d6201fe2d51053afbc062de343eb6b530c2a2f879b206875",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                190,
+                359
+              ],
+              "landmark": [
+                190,
+                286
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 1 source and marked overlay inspected: pelvis (190,286) projects to planted-paw support y=359; anatomy remains complete."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                188,
+                359
+              ],
+              "landmark": [
+                188,
+                286
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 2 source and marked overlay inspected: pelvis (188,286) projects to planted-paw support y=359; anatomy remains complete."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                182,
+                360
+              ],
+              "landmark": [
+                182,
+                291
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 3 source and marked overlay inspected: pelvis (182,291) projects to planted-paw support y=360; anatomy remains complete."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                218,
+                358
+              ],
+              "landmark": [
+                218,
+                286
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 4 source and marked overlay inspected: pelvis (218,286) projects to planted-paw support y=358; anatomy remains complete."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                190,
+                257
+              ],
+              "landmark": [
+                190,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 5 source and marked overlay inspected: pelvis (190,190) projects to planted-paw support y=257. The lone bottom-left clue is RGB(223,61,212) matte, while extracted anatomy starts 39px from the nearest border."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                220,
+                257
+              ],
+              "landmark": [
+                220,
+                180
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 6 source and marked overlay inspected: pelvis (220,180) projects to planted-paw support y=257; anatomy remains complete."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                180,
+                256
+              ],
+              "landmark": [
+                180,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 7 source and marked overlay inspected: pelvis (180,190) projects to planted-paw support y=256; anatomy remains complete."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                196,
+                255
+              ],
+              "landmark": [
+                196,
+                194
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Idle pose 8 source and corrected marked overlay inspected: pelvis (196,194) projects to complete planted-paw support plus source guard at y=255, equal to sourceBounds[3]. The lone bottom-right clue is RGB(228,61,216) matte, while extracted anatomy starts 47px from the nearest border."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                190,
+                290
+              ],
+              "landmark": [
+                190,
+                230
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 1 source and marked overlay inspected: pelvis (190,230) projects to grounded support y=290."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                190,
+                290
+              ],
+              "landmark": [
+                190,
+                230
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 2 source and marked overlay inspected: pelvis (190,230) projects to grounded support y=290."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                180,
+                291
+              ],
+              "landmark": [
+                180,
+                231
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 3 source and marked overlay inspected: pelvis (180,231) projects to grounded support y=291."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                187,
+                291
+              ],
+              "landmark": [
+                187,
+                235
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 4 source and marked overlay inspected: pelvis (187,235) projects to grounded support y=291."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                205,
+                288
+              ],
+              "landmark": [
+                205,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 5 source and marked overlay inspected: pelvis (205,215) projects to neighboring grounded plane y=288, preserving the visible airborne gap."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                205,
+                288
+              ],
+              "landmark": [
+                205,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 6 source and marked overlay inspected: pelvis (205,215) projects to neighboring grounded plane y=288, preserving the visible airborne gap."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                200,
+                279
+              ],
+              "landmark": [
+                200,
+                225
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 7 source and marked overlay inspected: pelvis (200,225) projects to grounded recovery support y=279."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                190,
+                279
+              ],
+              "landmark": [
+                190,
+                223
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Move pose 8 source and marked overlay inspected: pelvis (190,223) projects to grounded recovery support y=279."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "7d71c3cfa883a7efbe03770c2754d2343db09817eca4762e7d04c8ca89e69ad5",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                185,
+                330
+              ],
+              "landmark": [
+                185,
+                265
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Attack pose 1 source and marked overlay inspected: pelvis (185,265) projects to grounded anticipation support y=330."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                185,
+                330
+              ],
+              "landmark": [
+                185,
+                262
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Attack pose 2 source and marked overlay inspected: pelvis (185,262) projects to grounded wind-up support y=330."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                180,
+                329
+              ],
+              "landmark": [
+                180,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Attack pose 3 source and marked overlay inspected: pelvis (180,260) projects to grounded coil support y=329."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                195,
+                330
+              ],
+              "landmark": [
+                195,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 4 source and marked overlay inspected: pelvis (195,270) projects to the poses 1-3 ground plane y=330, preserving launch separation."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                200,
+                280
+              ],
+              "landmark": [
+                200,
+                200
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 5 source and marked overlay inspected: pelvis (200,200) projects to lower-row plane y=280, preserving the pounce apex."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                205,
+                268
+              ],
+              "landmark": [
+                205,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 6 source and marked overlay inspected: pelvis (205,205) projects to descending plane y=268 toward grounded recovery."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                190,
+                266
+              ],
+              "landmark": [
+                190,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Attack pose 7 source and marked overlay inspected: pelvis (190,205) projects to grounded landing support y=266."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                180,
+                267
+              ],
+              "landmark": [
+                180,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Attack pose 8 source and marked overlay inspected: pelvis (180,205) projects to grounded recovery support y=267."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "490d141acdf1e2a3e4fd04134c996d6292befd9ff1be16988abba1053dc168ce",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                205,
+                388
+              ],
+              "landmark": [
+                205,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Death pose 1 source and marked overlay inspected: pelvis (205,300) projects to grounded support y=388."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                200,
+                388
+              ],
+              "landmark": [
+                200,
+                315
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 4,
+              "evidence": "Death pose 2 source and marked overlay inspected: pelvis (200,315) projects to grounded recoil support y=388."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                190,
+                388
+              ],
+              "landmark": [
+                190,
+                338
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 3 source and marked overlay inspected: pelvis (190,338) projects to collapse contact y=388."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                180,
+                389
+              ],
+              "landmark": [
+                180,
+                350
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 4 source and marked overlay inspected: pelvis (180,350) projects to first resting-body contact y=389."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                205,
+                282
+              ],
+              "landmark": [
+                205,
+                235
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 5 source and marked overlay inspected: pelvis (205,235) projects to side-rest body contact y=282."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                200,
+                284
+              ],
+              "landmark": [
+                200,
+                238
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 6 source and marked overlay inspected: pelvis (200,238) projects to rolled-body contact y=284."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                195,
+                285
+              ],
+              "landmark": [
+                195,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 7 source and marked overlay inspected: pelvis (195,255) projects to prone-body contact y=285."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                190,
+                285
+              ],
+              "landmark": [
+                190,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 8 source and marked overlay inspected: pelvis (190,255) projects to terminal-body contact y=285."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-032-salvage-hive-brute": {
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 40,
+      "evidencePaths": [
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
+        "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md"
+      ],
+      "visualReview": "All 40 nominal source cells were inspected directly. Every root uses the ribcage center behind the front shoulder and the visible supporting foot, knuckle, forearm, knee, thorax or flank. Tail and crest extrema never determine a root. Charge remains complete, identity-consistent and strictly right-facing in all eight cells.",
+      "method": "Manual per-frame review in original 1774x887 4x2 source coordinates. Anchor x equals the inspected ribcage landmark x; anchor y is the verified physical support floor including the three-pixel extraction guard. Medium confidence, eight source-pixel uncertainty; ten pixels for collapsed death poses. Source bounds and support types are enumerated in the linked scale review.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "5bc911b4b201925ed6586f696a6dd2d1bdfb53c22294164f5738ed17460adaaf",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                230,
+                351
+              ],
+              "landmark": [
+                230,
+                240
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 1: ribcage (230,240), support floor y=351 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                210,
+                351
+              ],
+              "landmark": [
+                210,
+                245
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 2: ribcage (210,245), support floor y=351 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                220,
+                351
+              ],
+              "landmark": [
+                220,
+                245
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 3: ribcage (220,245), support floor y=351 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                205,
+                351
+              ],
+              "landmark": [
+                205,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 4: ribcage (205,255), support floor y=351 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                225,
+                284
+              ],
+              "landmark": [
+                225,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 5: ribcage (225,190), support floor y=284 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                205,
+                283
+              ],
+              "landmark": [
+                205,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 6: ribcage (205,190), support floor y=283 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                200,
+                283
+              ],
+              "landmark": [
+                200,
+                200
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 7: ribcage (200,200), support floor y=283 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                195,
+                284
+              ],
+              "landmark": [
+                195,
+                195
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 8: ribcage (195,195), support floor y=284 on feet/knuckle; tail excluded."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "114083e565c5ecffeadc0215b242654a51c6947307e65c2f05a8fc5a4654a9c9",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                210,
+                364
+              ],
+              "landmark": [
+                210,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 1: ribcage (210,270), support floor y=364 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                190,
+                364
+              ],
+              "landmark": [
+                190,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 2: ribcage (190,270), support floor y=364 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                175,
+                364
+              ],
+              "landmark": [
+                175,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 3: ribcage (175,270), support floor y=364 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                175,
+                364
+              ],
+              "landmark": [
+                175,
+                275
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 4: ribcage (175,275), support floor y=364 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                225,
+                268
+              ],
+              "landmark": [
+                225,
+                185
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 5: ribcage (225,185), support floor y=268 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                195,
+                270
+              ],
+              "landmark": [
+                195,
+                185
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 6: ribcage (195,185), support floor y=270 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                180,
+                270
+              ],
+              "landmark": [
+                180,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 7: ribcage (180,190), support floor y=270 on carrying foot/knuckle; tail excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                180,
+                270
+              ],
+              "landmark": [
+                180,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 8: ribcage (180,190), support floor y=270 on carrying foot/knuckle; tail excluded."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "da09427947eb0b1faa6f970c6cb46950b6ca9085c0bc1a0d09802d36a8efa4dd",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                230,
+                362
+              ],
+              "landmark": [
+                230,
+                240
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 1: ribcage (230,240), support floor y=362 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                220,
+                364
+              ],
+              "landmark": [
+                220,
+                265
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 2: ribcage (220,265), support floor y=364 on feet/forearm; tail excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                235,
+                367
+              ],
+              "landmark": [
+                235,
+                275
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 3: ribcage (235,275), support floor y=367 on knee/forearm; tail excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                225,
+                366
+              ],
+              "landmark": [
+                225,
+                280
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 4: ribcage (225,280), support floor y=366 on thorax/forearm; tail excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                230,
+                307
+              ],
+              "landmark": [
+                230,
+                210
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 5: ribcage (230,210), support floor y=307 on flank/forearm; tail excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                210,
+                307
+              ],
+              "landmark": [
+                210,
+                230
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 6: ribcage (210,230), support floor y=307 on thorax/forearm; tail excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                195,
+                306
+              ],
+              "landmark": [
+                195,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 7: ribcage (195,215), support floor y=306 on feet/knuckle; tail excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                195,
+                306
+              ],
+              "landmark": [
+                195,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 8: ribcage (195,205), support floor y=306 on feet/knuckle; tail excluded."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "4919be02e9f0e9b2462c674ddcc0a1ea06ecd6d953e8e4e1b97d09f027b03698",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                270,
+                387
+              ],
+              "landmark": [
+                270,
+                285
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 1: ribcage (270,285), support floor y=387 on feet; tail excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                220,
+                387
+              ],
+              "landmark": [
+                220,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 2: ribcage (220,290), support floor y=387 on foot/main; tail excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                205,
+                388
+              ],
+              "landmark": [
+                205,
+                315
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 3: ribcage (205,315), support floor y=388 on knee/main; tail excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                185,
+                390
+              ],
+              "landmark": [
+                185,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 4: ribcage (185,325), support floor y=390 on thorax/forearm; tail excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                250,
+                243
+              ],
+              "landmark": [
+                250,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 5: ribcage (250,205), support floor y=243 on flank/thorax; tail excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                215,
+                244
+              ],
+              "landmark": [
+                215,
+                210
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 6: ribcage (215,210), support floor y=244 on flank/thorax; tail excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                210,
+                245
+              ],
+              "landmark": [
+                210,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 7: ribcage (210,215), support floor y=245 on flank/thorax; tail excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                225,
+                246
+              ],
+              "landmark": [
+                225,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Manual frame 8: ribcage (225,220), terminal support floor y=246 on flank/thorax; tail excluded."
+            }
+          ]
+        },
+        "charge": {
+          "sourceSha256": "62a7d760edbadeb305356c04c9d9a193db883a0dedf2c94c2266acf864c64fc4",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                245,
+                378
+              ],
+              "landmark": [
+                245,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 1: ribcage (245,290), support floor y=378 on feet/knuckle; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                215,
+                378
+              ],
+              "landmark": [
+                215,
+                285
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 2: ribcage (215,285), support floor y=378 on rear foot/knuckle; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                215,
+                378
+              ],
+              "landmark": [
+                215,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 3: ribcage (215,290), support floor y=378 on rear foot/forearm; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                225,
+                378
+              ],
+              "landmark": [
+                225,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 4: ribcage (225,300), support floor y=378 on feet/forearms; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                255,
+                284
+              ],
+              "landmark": [
+                255,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 5: ribcage (255,215), support floor y=284 on low thorax/feet; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                215,
+                284
+              ],
+              "landmark": [
+                215,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 6: ribcage (215,215), support floor y=284 on feet/knuckle; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                210,
+                284
+              ],
+              "landmark": [
+                210,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 7: ribcage (210,215), support floor y=284 on feet/knuckle; tail excluded; right-facing complete subject."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                200,
+                284
+              ],
+              "landmark": [
+                200,
+                210
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual frame 8: ribcage (200,210), support floor y=284 on feet/knuckle; tail excluded; right-facing complete subject."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-033-arcology-lurker": {
+      "profileId": "enemy-033-arcology-lurker",
+      "status": "reviewed",
+      "reviewer": "Codex /root/produce_arcology_lurker",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual whole-board review on a 25 px nominal-cell grid. The anatomical landmark is the visually stable ventral ribcage center and is unchanged by this correction. The physical root shares its x coordinate and projects vertically to the observed load-bearing paw/digit support line, then adds the complete four-pixel extraction margin so anchorY equals sourceBounds[3] in every pose. Tail-tip extrema are excluded. Death uses the corpse contact plane. Attack frame 2 uses the authored action plane at the lowest distal limb because the torso is airborne. This is standalone physical-registration evidence, not runtime acceptance.",
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/idle.png",
+          "sourceSha256": "c2e2e5dc0915c6d7b82b5036c319669b2afdfc2443abe91ed370cc2158ba2646",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                225,
+                383
+              ],
+              "landmark": [
+                225,
+                294
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                112,
+                221,
+                370,
+                383
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                215,
+                382
+              ],
+              "landmark": [
+                215,
+                258
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                83,
+                171,
+                344,
+                382
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                210,
+                382
+              ],
+              "landmark": [
+                210,
+                293
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                66,
+                204,
+                346,
+                382
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                192,
+                381
+              ],
+              "landmark": [
+                192,
+                300
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                63,
+                223,
+                312,
+                381
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                210,
+                325
+              ],
+              "landmark": [
+                210,
+                220
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                106,
+                93,
+                356,
+                325
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                198,
+                325
+              ],
+              "landmark": [
+                198,
+                252
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                88,
+                166,
+                319,
+                325
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                185,
+                325
+              ],
+              "landmark": [
+                185,
+                252
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                88,
+                175,
+                287,
+                325
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                195,
+                327
+              ],
+              "landmark": [
+                195,
+                255
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/idle.jpg",
+              "sourceBounds": [
+                65,
+                167,
+                322,
+                327
+              ]
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/move.png",
+          "sourceSha256": "aefcec532650a44fda1e2b8e8f5b3867b72198bb5b6e5905999702a69dd20292",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                209,
+                403
+              ],
+              "landmark": [
+                209,
+                286
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                23,
+                126,
+                440,
+                403
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                210,
+                418
+              ],
+              "landmark": [
+                210,
+                293
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                23,
+                143,
+                412,
+                418
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                199,
+                398
+              ],
+              "landmark": [
+                199,
+                302
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                22,
+                171,
+                368,
+                398
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                206,
+                406
+              ],
+              "landmark": [
+                206,
+                286
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                18,
+                138,
+                436,
+                406
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                210,
+                349
+              ],
+              "landmark": [
+                210,
+                232
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                32,
+                71,
+                438,
+                349
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                205,
+                351
+              ],
+              "landmark": [
+                205,
+                243
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                26,
+                88,
+                382,
+                351
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                207,
+                339
+              ],
+              "landmark": [
+                207,
+                235
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                26,
+                89,
+                418,
+                339
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                204,
+                349
+              ],
+              "landmark": [
+                204,
+                225
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/move.jpg",
+              "sourceBounds": [
+                12,
+                72,
+                431,
+                349
+              ]
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/attack.png",
+          "sourceSha256": "00e075014f89a8f8b4fc45b030df560e2a6a4b459301b7cdeea06b64aaca923c",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                216,
+                422
+              ],
+              "landmark": [
+                216,
+                306
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                32,
+                208,
+                369,
+                422
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                222,
+                436
+              ],
+              "landmark": [
+                222,
+                290
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                44,
+                154,
+                405,
+                436
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                218,
+                421
+              ],
+              "landmark": [
+                218,
+                239
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                -62,
+                180,
+                446,
+                421
+              ],
+              "note": "Torso airborne; root is the vertical projection to the authored action plane defined by the lowest distal limb, not a claimed current foot contact."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                204,
+                420
+              ],
+              "landmark": [
+                204,
+                283
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                -36,
+                187,
+                413,
+                420
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                214,
+                333
+              ],
+              "landmark": [
+                214,
+                240
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                30,
+                80,
+                439,
+                333
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                220,
+                340
+              ],
+              "landmark": [
+                220,
+                244
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                57,
+                78,
+                417,
+                340
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                218,
+                340
+              ],
+              "landmark": [
+                218,
+                236
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                40,
+                91,
+                388,
+                340
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                214,
+                340
+              ],
+              "landmark": [
+                214,
+                255
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/attack.jpg",
+              "sourceBounds": [
+                12,
+                126,
+                352,
+                340
+              ]
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/death.png",
+          "sourceSha256": "335d7baa3e7eaab684030c355564be78f388a18fd75849bb56fa0930041d9d4b",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                218,
+                378
+              ],
+              "landmark": [
+                218,
+                258
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                81,
+                156,
+                388,
+                378
+              ]
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                216,
+                384
+              ],
+              "landmark": [
+                216,
+                276
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                63,
+                206,
+                376,
+                384
+              ]
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                213,
+                384
+              ],
+              "landmark": [
+                213,
+                293
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                43,
+                229,
+                370,
+                384
+              ]
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                205,
+                384
+              ],
+              "landmark": [
+                205,
+                318
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                38,
+                273,
+                351,
+                384
+              ]
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                212,
+                312
+              ],
+              "landmark": [
+                212,
+                266
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                69,
+                186,
+                387,
+                312
+              ]
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                210,
+                313
+              ],
+              "landmark": [
+                210,
+                279
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                39,
+                209,
+                384,
+                313
+              ]
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                200,
+                315
+              ],
+              "landmark": [
+                200,
+                291
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                22,
+                235,
+                377,
+                315
+              ]
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                205,
+                316
+              ],
+              "landmark": [
+                205,
+                296
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "docs/references/v66-batch-003-anchor-review/enemy-033-arcology-lurker/death.jpg",
+              "sourceBounds": [
+                15,
+                246,
+                368,
+                316
+              ]
+            }
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    },
+    "enemy-034-caravan-stalker": {
+      "status": "reviewed",
+      "reviewer": "Codex /root",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual per-pose inspection of the posterior pelvis immediately ahead of the tail root. Anchor x is the pelvis projection; anchor y preserves that physical support plane while including the one- or two-pixel extraction guard beneath it so every complete source pixel remains inside the normalized cell. Tail, skull and claw extrema never determine the root. Every proposal is rechecked on the rendered source overlay before merge.",
+      "reviewedPoseCount": 32,
+      "diagnosticContacts": [
+        "docs/references/v66-batch-003-anchor-review/enemy-034-caravan-stalker/idle.jpg",
+        "docs/references/v66-batch-003-anchor-review/enemy-034-caravan-stalker/move.jpg",
+        "docs/references/v66-batch-003-anchor-review/enemy-034-caravan-stalker/attack.jpg",
+        "docs/references/v66-batch-003-anchor-review/enemy-034-caravan-stalker/death.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourceSha256": "f5c433b58c5c91bc3495358a8fb8fcbaf8c76ebe667fa8f7276382ddbb45a9dd",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                234,
+                346
+              ],
+              "landmark": [
+                234,
+                291
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 0 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                232,
+                346
+              ],
+              "landmark": [
+                232,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 1 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                231,
+                346
+              ],
+              "landmark": [
+                231,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 2 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                229,
+                346
+              ],
+              "landmark": [
+                229,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 3 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                237,
+                195
+              ],
+              "landmark": [
+                237,
+                145
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 4 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                233,
+                195
+              ],
+              "landmark": [
+                233,
+                145
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 5 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                231,
+                195
+              ],
+              "landmark": [
+                231,
+                146
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 6 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                229,
+                195
+              ],
+              "landmark": [
+                229,
+                146
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle frame 7 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "835a98fe4418ffc99c88cd1336d778df7849c266fb61eb4ebbe91c1e617b1deb",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                259,
+                341
+              ],
+              "landmark": [
+                259,
+                274
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 0 pelvis and active diagonal support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                231,
+                342
+              ],
+              "landmark": [
+                231,
+                274
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 1 pelvis and compressed support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                241,
+                342
+              ],
+              "landmark": [
+                241,
+                278
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 2 pelvis and passing support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                214,
+                342
+              ],
+              "landmark": [
+                214,
+                274
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 3 pelvis and extended support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                259,
+                247
+              ],
+              "landmark": [
+                259,
+                183
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 4 pelvis and opposite diagonal support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                240,
+                255
+              ],
+              "landmark": [
+                240,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 5 pelvis and compression support inspected on source overlay."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                227,
+                256
+              ],
+              "landmark": [
+                227,
+                187
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 6 pelvis and passing support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                211,
+                255
+              ],
+              "landmark": [
+                211,
+                188
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move frame 7 pelvis and recovery support inspected on source overlay; anchor includes the complete-source extraction guard."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "1bc3f0bffe5bfa929d075c11b5b39734d1396a093673ce04d7f21f740b3aa820",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                240,
+                313
+              ],
+              "landmark": [
+                240,
+                264
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 0 low anticipation pelvis and paw plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                226,
+                318
+              ],
+              "landmark": [
+                226,
+                280
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 1 compression pelvis and paw plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                212,
+                324
+              ],
+              "landmark": [
+                212,
+                262
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 2 rising pelvis and hind-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                205,
+                324
+              ],
+              "landmark": [
+                205,
+                252
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 3 brief rear pelvis and hind-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                258,
+                244
+              ],
+              "landmark": [
+                258,
+                172
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 4 strike extension pelvis and grounded hind support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                250,
+                242
+              ],
+              "landmark": [
+                250,
+                181
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 5 descending pelvis and support plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                210,
+                240
+              ],
+              "landmark": [
+                210,
+                193
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 6 four-foot recovery pelvis inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                205,
+                242
+              ],
+              "landmark": [
+                205,
+                198
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Attack frame 7 settled four-foot recovery pelvis inspected on source overlay; anchor includes the complete-source extraction guard."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "6af6176aaf5f7f2e4cd8a930e0c963b539b829d65d3b6dd948ebfe318a56ac9d",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                260,
+                363
+              ],
+              "landmark": [
+                260,
+                310
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 0 pelvis and last four-paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                235,
+                367
+              ],
+              "landmark": [
+                235,
+                328
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 1 staggering pelvis and remaining paw support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                210,
+                370
+              ],
+              "landmark": [
+                210,
+                340
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 2 collapsing pelvis and body support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                190,
+                371
+              ],
+              "landmark": [
+                190,
+                346
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 3 prone transition pelvis and body support inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                245,
+                241
+              ],
+              "landmark": [
+                245,
+                214
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 4 prone pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                225,
+                242
+              ],
+              "landmark": [
+                225,
+                216
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 5 settling pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                210,
+                244
+              ],
+              "landmark": [
+                210,
+                221
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 6 settled pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                195,
+                244
+              ],
+              "landmark": [
+                195,
+                223
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death frame 7 final pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

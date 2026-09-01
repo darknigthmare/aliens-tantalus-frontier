@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:114083e565c5ecffeadc0215b242654a51c6947307e65c2f05a8fc5a4654a9c9",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "114083e565c5ecffeadc0215b242654a51c6947307e65c2f05a8fc5a4654a9c9",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/move-r2.txt",
+  "actualPromptSha256": "6d8588a2326a423e21c31639acc005b26e52368007aeef7140b9fb9ed849accf",
+  "candidateSelected": true,
+  "note": "Selected cell-safe low biped/knuckle-walk cycle after uniform scale and packing correction: RGB 1774x887, opaque-magenta, eight distinct poses, no border contacts, default extraction 8/8. Candidate only; not accepted or runtime-integrated."
+}

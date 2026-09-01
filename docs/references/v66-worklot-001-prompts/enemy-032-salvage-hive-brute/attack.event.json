@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:6cbcff9b95dbf835c20d99c25d768f2d8c9ccd7953f36fd4d3b7ff6f379efef3",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "6cbcff9b95dbf835c20d99c25d768f2d8c9ccd7953f36fd4d3b7ff6f379efef3",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/rejected/attack-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/attack.txt",
+  "actualPromptSha256": "8863c10e7b7cbe035e5d1a7c8ad51f5baed251aea803aea9630f5eefd1f12e62",
+  "candidateSelected": false,
+  "note": "Original biological head/shoulder slam archived: default extraction produced eight poses, but frame 4 tail touched its nominal left divider. Strict no-contact gate failed, so this source is not selected, accepted or runtime-integrated."
+}

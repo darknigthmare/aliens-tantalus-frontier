@@ -1,0 +1,10 @@
+Use case: stylized-concept
+Asset type: corrected production 2D game animation sprite sheet source
+Primary request: Regenerate the same Dust Runner ATTACK sprite sheet as a compact corrected variant: exactly eight chronological crouch-pounce-bite-recovery poses in a strict 4 columns by 2 rows arrangement, row-major order.
+Input images: preserve the established Dust Runner identity, materials and attack arc; correct only cell isolation and margins. Do not copy pixels.
+Identity invariants: extremely low and long quadruped; smooth eyeless elongated skull; barrel ribcage; visible double jaw; long forelimbs; powerful digitigrade hind legs; four readable limbs; full blade-tipped segmented tail; no dorsal tubes; wet black and dark russet shell with irregular matte ochre sand abrasion.
+Chronology: 1 low anticipation; 2 jaw opening; 3 hindquarter coil; 4 forward pounce; 5 peak bite with inner jaw and no victim; 6 follow-through; 7 four-foot landing; 8 low recovery.
+Correction: uniformly reduce every complete silhouette to at most 64% of its cell width and 46% of its cell height. Center each pose independently inside its nominal cell. Leave at least 8% of cell width as uninterrupted pure-magenta space at BOTH left and right edges, and generous space above/below. Compact the tail into a controlled S curve when needed. Frames 3-6 must not touch their neighbors. No body pixel, tail tip, claw or antialias halo may touch or cross the invisible 25%, 50% or 75% vertical divisions or the 50% horizontal division.
+Composition: exact 2:1 canvas; strict orthographic side view facing RIGHT; stable physical scale; one complete subject in every cell.
+Backdrop: perfectly flat uniform pure #FF00FF in every empty pixel.
+Constraints: exactly 4x2 and eight distinct poses; no target, victim, blood, projectile, visible grid lines, panels, floor, shadow, scenery, text, logo, cropped anatomy, extra limbs, bipedal pose, dorsal tubes, wings, horns or metal plates. PROJECT_ADAPTATION only; source candidate, not runtime acceptance.

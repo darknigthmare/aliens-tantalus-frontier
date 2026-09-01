@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-034-caravan-stalker",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:1bc3f0bffe5bfa929d075c11b5b39734d1396a093673ce04d7f21f740b3aa820",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root",
+  "sourceSha256": "1bc3f0bffe5bfa929d075c11b5b39734d1396a093673ce04d7f21f740b3aa820",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/attack.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-034-caravan-stalker/attack.txt",
+  "candidateSelected": true,
+  "note": "Content-addressed local receipt because this ImageGen response exposed image_url but no provider generation identifier. Corrected candidate keeps a low approach, brief hind-leg rear for the strike and four-foot recovery without cell contact."
+}

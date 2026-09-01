@@ -1,0 +1,10 @@
+Use case: stylized-concept
+Asset type: production 2D game animation sprite sheet source
+Primary request: Create exactly ONE 2:1 sprite sheet for the same project-original Dust Runner, ATTACK animation, with exactly eight individually authored chronological poses in a strict 4 columns by 2 rows arrangement, row-major order.
+Input image: preserve the supplied Dust Runner identity and proportions; generate new poses, never copy pixels.
+Subject identity: the identical extremely low, long adult quadrupedal xenomorph: smooth eyeless elongated skull, compact barrel ribcage, visible double jaw, long forelimbs, powerful digitigrade hind legs, four readable limbs, long segmented blade-tipped tail, no dorsal tubes. Wet black and dark russet biomechanical shell with irregular matte ochre sand abrasion, not yellow.
+Animation chronology: unarmed quadruped bite/pounce in place: 1 low anticipation; 2 jaw begins opening; 3 hindquarters coil; 4 forward pounce extension; 5 peak bite/contact pose with inner jaw readable but no victim; 6 follow-through; 7 four-foot landing; 8 low recovery. Preserve all four limbs and the full tail throughout.
+Composition: strict orthographic gameplay side view facing RIGHT in every cell. Same physical scale, skull length, torso length and anatomy in all poses. One complete body and entire tail per cell; total silhouette no more than 72% of cell width and 52% of cell height; generous blank magenta gutter on every side. No anatomy crosses any cell boundary.
+Style/medium: polished commercial 2D sci-fi horror game sprite render, crisp silhouette, detailed organic-biomechanical materials, consistent neutral lighting.
+Scene/backdrop: perfectly flat, uniform pure #FF00FF magenta in every empty pixel.
+Constraints: exactly eight poses and exactly 4x2; no target, victim, blood, projectile, grid lines, panels, separators, floor, cast shadow, scenery, particles, text, labels, numbers, logo or watermark. No front view, three-quarter view, bipedal pose, dorsal tubes, wings, horns, metal plates, duplicate poses, extra limbs, cropped claws, cropped skull or cropped tail. PROJECT_ADAPTATION only.

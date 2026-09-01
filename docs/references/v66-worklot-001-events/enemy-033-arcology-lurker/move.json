@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-033-arcology-lurker",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": null,
+  "generationIdStatus": "not-exposed-by-built-in-response",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "sourceSha256": "aefcec532650a44fda1e2b8e8f5b3867b72198bb5b6e5905999702a69dd20292",
+  "promptSha256": "1d4e32aacefc4d07d1ab8fc847312cce1cf4cdb641ef5caaee8b16f87f6c7458",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-033-arcology-lurker/move.txt",
+  "candidateSelected": true,
+  "note": "Built-in ImageGen response was persisted from its returned PNG data URL. Strict 4x2 extraction yields eight unique candidate poses. Candidate only; not accepted or runtime-integrated."
+}

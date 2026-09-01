@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:41cf6db7790eeba13fd01ae27cf4bbfd341a4e2acfc8e8d159da7744154a70b5",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "41cf6db7790eeba13fd01ae27cf4bbfd341a4e2acfc8e8d159da7744154a70b5",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/rejected/idle-r3.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/idle-r3.txt",
+  "actualPromptSha256": "b94d3356f5291cec731d8ed66da873e92177138a3a47dbbe07db2810fa5500c1",
+  "candidateSelected": false,
+  "note": "Larger scale experiment archived. It technically passed eight-cell extraction with no border contact, but the compact r2 source was restored as the safer shared scale and gutter anchor for all clips. Not selected, accepted or runtime-integrated."
+}

@@ -509,6 +509,125 @@
         ]
       }
     },
+    "enemy-031-dust-runner": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-3",
+        "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png"
+      ],
+      "designLock": "One extremely low and long adult quadrupedal xenomorph adapted for dusty terrain: smooth eyeless elongated skull, compact barrel ribcage, long forelimbs for sprinting, powerful digitigrade hind legs, four readable supports, double jaw and one long blade-tipped segmented tail. No dorsal tubes. Worn wet black and dark russet biomechanical shell with irregular matte ochre sand deposits, never a uniform yellow recolor. No equipment, armor, wings, rider horns or metal plates. Strict right-facing side view.",
+      "reviewer": "Codex /root/complete_variants; V56 project master, licensed Alien 3 anchors, twelve cranial measurements and all 32 roots reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.506596,
+        "attack": 1.684201,
+        "death": 1.051879
+      },
+      "scaleCalibrationReview": {
+        "note": "Three comparable rigid dorsal cranial-dome chords per clip calibrate move, attack and death to idle; jaws, tails and whole-body bounding boxes are excluded. Two idle border clues were verified as isolated outer-canvas matte pixels, not anatomical cross-cell contact.",
+        "reviewer": "Codex /root/complete_variants",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.json",
+          "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-032-salvage-hive-brute": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png"
+      ],
+      "designLock": "Original project Salvage Hive Brute adaptation: very stocky low hive Xenomorph with huge shoulders, massive forearms and knuckles, protected low elongated eyeless head, thick ribbed black-brown torso, broad pelvis, powerful digitigrade legs and one sacral segmented tail. Exactly two arms and two legs; low biped that may brace on its knuckles, never a permanent quadruped. Small oxidized salvage pieces and dead charcoal cable loops remain passively trapped under matte amber hive resin, identical across frames and never powered armor, machinery, a weapon or an exoskeleton. Strict right-facing orthographic side profile.",
+      "reviewer": "Codex finish_source_review; V56 project contract, Crucible context, protected cranial scale and all 40 physical roots reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.872336,
+        "attack": 0.927315,
+        "death": 1.300751,
+        "charge": 1
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual protected cranial-plate measurements on two comparable right-profile poses per clip calibrate move, attack and death to idle; charge remains 1 within the five-pixel landmark uncertainty.",
+        "reviewer": "Codex finish_source_review",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_SALVAGE_HIVE_BRUTE_SCALE_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-033-arcology-lurker": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/",
+        "https://www.avpgalaxy.net/2010/01/10/first-aliens-crucible-footage/",
+        "https://www.avpgalaxy.net/2009/02/28/rpg-gets-name-and-concept-art/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png"
+      ],
+      "designLock": "One extremely slender wall-and-duct xenomorph with a narrow elongated eyeless skull, biomechanical rib cage, very long forearms and hooked adhesive digits, tightly folding digitigrade rear legs and a complete prehensile segmented tail. Graphite-black and industrial-gray low-gloss carapace carries dusty matte deposits. Its camouflage is natural value matching only: no invisibility, Predator technology, equipment, clothing or armor. Strict right-facing low crouched/quadrupedal profile.",
+      "reviewer": "Codex /root/produce_arcology_lurker; cancelled Crucible context, rigid cranial scale, exact attack ownership and all 32 physical roots reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.959464,
+        "attack": 0.912495,
+        "death": 0.947625
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual rigid cranial-dome chords calibrate move, attack and death to idle. The attack short-spill path reconstructs every foreground pixel exactly; no geometry retouch was used because it would downscale and then re-upscale fine hooked digits.",
+        "reviewer": "Codex /root/produce_arcology_lurker",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_ARCOLOGY_LURKER_SCALE_REVIEW.json",
+          "docs/references/V66_WORKLOT_001_ARCOLOGY_LURKER_SCALE_REVIEW.md"
+        ]
+      }
+    },
+    "enemy-034-caravan-stalker": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-3",
+        "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png"
+      ],
+      "designLock": "Medium low endurance frontier quadruped with one smooth elongated eyeless skull, exactly two forelimbs and two powerful digitigrade hind limbs, reduced dorsal spines, a narrow ribbed Runner-like torso and one complete long segmented balancing tail. Black-brown biomechanical carapace carries restrained ochre sand abrasion. No tack, saddle, rider, cargo, weapon, clothing, machine parts, extra limbs or bipedal base locomotion. Strict right-facing orthographic side view. Attack may briefly rear on the hind legs, then must recover to four-foot support.",
+      "reviewer": "Codex /root; V56 project identity, generation continuity, cranial scale and all 32 physical roots reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.741314,
+        "attack": 1.00771,
+        "death": 0.754297
+      },
+      "scaleCalibrationReview": {
+        "note": "Manual rigid cranial-cap chord on one comparable right-facing pose per clip aligns move, attack and death to the corrected all-quadrupedal idle; action-dependent body bounding boxes are excluded.",
+        "reviewer": "Codex /root",
+        "reviewedAt": "2026-09-01",
+        "evidencePaths": [
+          "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SOURCE_QA.json",
+          "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SCALE_REVIEW.md"
+        ]
+      }
+    },
     "enemy-037-neomorph": {
       "status": "reviewed",
       "urls": [

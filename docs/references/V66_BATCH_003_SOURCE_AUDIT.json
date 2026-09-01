@@ -3,7 +3,7 @@
   "release": "v66",
   "batchId": "batch-003",
   "generatedBy": "scripts/audit-v66-batch-sources.py",
-  "generatedAt": "2026-08-31T22:20:59.455674+00:00",
+  "generatedAt": "2026-09-01T00:01:07.475960+00:00",
   "auditOnly": true,
   "sourcePixelsModified": 0,
   "acceptedAutomatically": 0,
@@ -17,15 +17,15 @@
   "summary": {
     "profiles": 20,
     "requiredBoards": 88,
-    "presentBoards": 26,
-    "missingBoards": 62,
-    "defaultExtractionPass": 23,
-    "defaultExtractionBlocked": 3,
-    "boardsWithBorderClues": 7,
-    "safeReassignmentProbePass": 3,
+    "presentBoards": 43,
+    "missingBoards": 45,
+    "defaultExtractionPass": 39,
+    "defaultExtractionBlocked": 4,
+    "boardsWithBorderClues": 9,
+    "safeReassignmentProbePass": 4,
     "safeReassignmentProbeBlocked": 0,
     "matteKinds": {
-      "opaque-magenta": 26
+      "opaque-magenta": 43
     }
   },
   "sources": [
@@ -4709,137 +4709,4409 @@
       "profileId": "enemy-031-dust-runner",
       "clipId": "idle",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/idle.png",
-      "status": "missing-source",
+      "sourceSha256": "1f4bf952f5babf39d6201fe2d51053afbc062de343eb6b530c2a2f879b206875",
+      "bytes": 1300812,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.903903,
+        "edgeMagentaRatio": 0.999248,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [
+        4,
+        7
+      ],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review"
+      ],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "c1f01059d776efbfca315e2e3a5f39ae6550e951ffbabf7ddde26162d473510e",
+          "foregroundPixelsHeuristic": 21048,
+          "foregroundBoundsHeuristic": [
+            45,
+            210,
+            408,
+            356
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "221aee8b8ab505a65938ca0f47d754489080c735380c7ea82c2f83a1d7d713e4",
+          "foregroundPixelsHeuristic": 20076,
+          "foregroundBoundsHeuristic": [
+            47,
+            213,
+            391,
+            356
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "bbdaa139fe4fdd3b7bcffa40974433cc8dfb3573606432be184cd625c0e83991",
+          "foregroundPixelsHeuristic": 20888,
+          "foregroundBoundsHeuristic": [
+            23,
+            213,
+            381,
+            357
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "eb45e59e8ea0caa107c3c846909ba89f53db550939d307baabbc0f9273d74af6",
+          "foregroundPixelsHeuristic": 16421,
+          "foregroundBoundsHeuristic": [
+            26,
+            227,
+            385,
+            355
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "02081579cf5013485f69e67682117691b6ba7112c88426d65209a48f1c040e76",
+          "foregroundPixelsHeuristic": 19242,
+          "foregroundBoundsHeuristic": [
+            0,
+            104,
+            396,
+            443
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 1,
+            "left": 1,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "09b4d2dd354c2c7baec489469a576709a480812fcc639a6e99f4d3a92bee8f38",
+          "foregroundPixelsHeuristic": 16365,
+          "foregroundBoundsHeuristic": [
+            23,
+            124,
+            387,
+            254
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "f42e77bcfbeb47f18889ce616f65eaa6d07f4cbb6cd33fac692f55cabfae0ced",
+          "foregroundPixelsHeuristic": 18537,
+          "foregroundBoundsHeuristic": [
+            27,
+            120,
+            380,
+            253
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "c6e189bfcebb104f9ce65e39a71674c84be6cbfb2f8fb642b55c4a38561e0583",
+          "foregroundPixelsHeuristic": 18635,
+          "foregroundBoundsHeuristic": [
+            48,
+            111,
+            444,
+            443
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 1,
+            "left": 0,
+            "right": 1
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-031-dust-runner/idle.jpg"
     },
     {
       "profileId": "enemy-031-dust-runner",
       "clipId": "move",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
-      "status": "missing-source",
+      "sourceSha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+      "bytes": 1170418,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.952961,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "2c7fe9f635e2d2d39636fca47ef66151e21ea027ea3d3e7b3ff9fded8cf6a9b4",
+          "foregroundPixelsHeuristic": 10240,
+          "foregroundBoundsHeuristic": [
+            91,
+            163,
+            330,
+            287
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "1f65d922fa301cb434bbf6a7e07bc39f76ffc6e30342f03a15acc2717b0d01b5",
+          "foregroundPixelsHeuristic": 9963,
+          "foregroundBoundsHeuristic": [
+            89,
+            177,
+            361,
+            287
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "5ab095e17eae2d0668d3bfa90391e676bac1134fac7b8026a4bbfd2e6060d085",
+          "foregroundPixelsHeuristic": 9325,
+          "foregroundBoundsHeuristic": [
+            70,
+            203,
+            341,
+            288
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "3dbff642fe3609f488fe7c585a03b0587ba12cf3a3f655d899f20157ad3536b3",
+          "foregroundPixelsHeuristic": 8610,
+          "foregroundBoundsHeuristic": [
+            50,
+            208,
+            320,
+            288
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "d25cf0408d3443aa430d0712521311ed611655e56415a03625e9a6b37de10000",
+          "foregroundPixelsHeuristic": 9051,
+          "foregroundBoundsHeuristic": [
+            71,
+            170,
+            375,
+            274
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "a7fd29923bfa53fc589e4e0fffe3df0c23b90cd904da573030f99292bec39a43",
+          "foregroundPixelsHeuristic": 8737,
+          "foregroundBoundsHeuristic": [
+            60,
+            180,
+            370,
+            270
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "5859d8ed3930265902538a7c24042dfd23c259eaf3c34e7f01b3644725bffee8",
+          "foregroundPixelsHeuristic": 8652,
+          "foregroundBoundsHeuristic": [
+            68,
+            189,
+            336,
+            276
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "60881973608cca63beef2f34817b42b942f4afbefcb9758bdf905936e002c88d",
+          "foregroundPixelsHeuristic": 9439,
+          "foregroundBoundsHeuristic": [
+            76,
+            162,
+            314,
+            276
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-031-dust-runner/move.jpg"
     },
     {
       "profileId": "enemy-031-dust-runner",
       "clipId": "attack",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/attack.png",
-      "status": "missing-source",
+      "sourceSha256": "7d71c3cfa883a7efbe03770c2754d2343db09817eca4762e7d04c8ca89e69ad5",
+      "bytes": 1236317,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.945299,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "5647468831871f87d2a830706a48ad9db2b27af206efd2e6fc798f1d7f69df04",
+          "foregroundPixelsHeuristic": 11570,
+          "foregroundBoundsHeuristic": [
+            77,
+            192,
+            323,
+            327
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "5f8f7f134eb20f32327a577ade71c6d27fe92ad9973f00066e54b6bbe10c4a34",
+          "foregroundPixelsHeuristic": 11715,
+          "foregroundBoundsHeuristic": [
+            69,
+            192,
+            311,
+            327
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "8b94d8c5709b2aecb9403fbce67d21680a6046f510503a7972d098553663bf04",
+          "foregroundPixelsHeuristic": 11325,
+          "foregroundBoundsHeuristic": [
+            73,
+            172,
+            301,
+            326
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "e8c4ed52a94cc0985149cf7fe631fb774856461b67c72c53dac175e56fd9d89f",
+          "foregroundPixelsHeuristic": 10163,
+          "foregroundBoundsHeuristic": [
+            30,
+            227,
+            359,
+            318
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "56d1218e68ba683804f075d5a33368fb55e8c12bf0be776182b3042dd38579b5",
+          "foregroundPixelsHeuristic": 10740,
+          "foregroundBoundsHeuristic": [
+            45,
+            151,
+            376,
+            256
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "68136de57ff9083966e3a00bf3db433c45e20dbd52b4a3c67095ee888a2cf790",
+          "foregroundPixelsHeuristic": 9858,
+          "foregroundBoundsHeuristic": [
+            67,
+            147,
+            341,
+            261
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "2f6fcda4d9d616c4fe8c9ccc85bf43026867793a9027c9be0c91b32e18104203",
+          "foregroundPixelsHeuristic": 9885,
+          "foregroundBoundsHeuristic": [
+            32,
+            172,
+            317,
+            263
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "c5e0085290612c41c0dac069a360e2086aeb2f3ea6b9dc8439c918d4bdabe833",
+          "foregroundPixelsHeuristic": 10818,
+          "foregroundBoundsHeuristic": [
+            57,
+            134,
+            302,
+            264
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-031-dust-runner/attack.jpg"
     },
     {
       "profileId": "enemy-031-dust-runner",
       "clipId": "death",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/death.png",
-      "status": "missing-source",
+      "sourceSha256": "490d141acdf1e2a3e4fd04134c996d6292befd9ff1be16988abba1053dc168ce",
+      "bytes": 1265322,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.921905,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "408a72f0554719969b3113a47f7545bd53ca03d2888bb7324279fa839679c15f",
+          "foregroundPixelsHeuristic": 19034,
+          "foregroundBoundsHeuristic": [
+            68,
+            168,
+            365,
+            385
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "48a08b4ae3890a5e534da201a8bb97a372006c8139cdb2cbedaa4a954b2f5e8b",
+          "foregroundPixelsHeuristic": 19211,
+          "foregroundBoundsHeuristic": [
+            48,
+            176,
+            361,
+            385
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "59bef8804d45ccba8ca496a83b20846c0885d0195035617f9d7cfaffc159f72c",
+          "foregroundPixelsHeuristic": 17259,
+          "foregroundBoundsHeuristic": [
+            53,
+            230,
+            386,
+            385
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "934d3c8865f726276cf63eb742619b3c894484ae59e090c47205ff7cd216a546",
+          "foregroundPixelsHeuristic": 14887,
+          "foregroundBoundsHeuristic": [
+            35,
+            250,
+            366,
+            386
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "ed2d5fd910310a110d461d756eebd0c7e0d7e19a3e3e6c09ba0526368968f098",
+          "foregroundPixelsHeuristic": 14592,
+          "foregroundBoundsHeuristic": [
+            32,
+            195,
+            398,
+            279
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "e5921f567c3eb779347a969c2308be0728a2dba895568aa1fdfc36ded5e57b24",
+          "foregroundPixelsHeuristic": 15736,
+          "foregroundBoundsHeuristic": [
+            54,
+            69,
+            391,
+            281
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "ffcbc90fb34037549cd7e3eafea9dc9d451ff94b56f2d6419643d7b64a3d6ea2",
+          "foregroundPixelsHeuristic": 11376,
+          "foregroundBoundsHeuristic": [
+            20,
+            212,
+            407,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "4259bfd7c608025e614744572c79d6da4f501e8b5653358e69709dc64282e221",
+          "foregroundPixelsHeuristic": 10791,
+          "foregroundBoundsHeuristic": [
+            6,
+            231,
+            404,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-031-dust-runner/death.jpg"
     },
     {
       "profileId": "enemy-032-salvage-hive-brute",
       "clipId": "idle",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/idle.png",
-      "status": "missing-source",
+      "sourceSha256": "5bc911b4b201925ed6586f696a6dd2d1bdfb53c22294164f5738ed17460adaaf",
+      "bytes": 1296592,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.900191,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "271ee513694d1aa2413754414bb59741b411545849c9a43c2a11df500f68e319",
+          "foregroundPixelsHeuristic": 21064,
+          "foregroundBoundsHeuristic": [
+            102,
+            178,
+            330,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "0594c7cbec32cefffdf034b1155dd1c2764a59cccce94b43847ac388a96fc059",
+          "foregroundPixelsHeuristic": 20577,
+          "foregroundBoundsHeuristic": [
+            83,
+            179,
+            305,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "642217f103c9d8551de5caa4af59c3f5bf70997d81e2d722b11e32d9c6c01200",
+          "foregroundPixelsHeuristic": 20846,
+          "foregroundBoundsHeuristic": [
+            83,
+            180,
+            311,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "4ceb7369838a98e9ff3cceaf6393645bcb06b8c9022dbfc097bef39271ec11d8",
+          "foregroundPixelsHeuristic": 19258,
+          "foregroundBoundsHeuristic": [
+            65,
+            192,
+            292,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "d28f77654fb9735c6cb9fa7fefc7eca754d9403789cab609708b5a4979fcabd9",
+          "foregroundPixelsHeuristic": 19744,
+          "foregroundBoundsHeuristic": [
+            98,
+            119,
+            322,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "9544e6823c766c61948b957fadf1852b4152af70b09d10cc5f5ce43c9394aa06",
+          "foregroundPixelsHeuristic": 19652,
+          "foregroundBoundsHeuristic": [
+            77,
+            118,
+            298,
+            281
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "643a267bf6fa59e64bab0c72de0ab7580c8d75df1610c2d14852fb1d75353410",
+          "foregroundPixelsHeuristic": 17594,
+          "foregroundBoundsHeuristic": [
+            71,
+            132,
+            293,
+            281
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "55391c197ea3092e6cefa58ae78fead2934d6a4d0249302ef0bb6940d9aca402",
+          "foregroundPixelsHeuristic": 18319,
+          "foregroundBoundsHeuristic": [
+            57,
+            128,
+            284,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-032-salvage-hive-brute/idle.jpg"
     },
     {
       "profileId": "enemy-032-salvage-hive-brute",
       "clipId": "move",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/move.png",
-      "status": "missing-source",
+      "sourceSha256": "114083e565c5ecffeadc0215b242654a51c6947307e65c2f05a8fc5a4654a9c9",
+      "bytes": 1268511,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.907845,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "89e00e912b25de9bc22777afe60410871233f6fc31b6affbe52e51f8772dcfa5",
+          "foregroundPixelsHeuristic": 18449,
+          "foregroundBoundsHeuristic": [
+            86,
+            210,
+            321,
+            362
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "e32227571a7a4be80cec4f279e011fbb89de828fccbf7098cbcd09561ea01e52",
+          "foregroundPixelsHeuristic": 19083,
+          "foregroundBoundsHeuristic": [
+            35,
+            212,
+            282,
+            362
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "e8ce7a4e9daeaa329dbae04aa76f0898aebe4a86335d9a36ae747b949d56ba62",
+          "foregroundPixelsHeuristic": 18121,
+          "foregroundBoundsHeuristic": [
+            5,
+            212,
+            251,
+            362
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "b612842b55e1adc17e7abaf59f150197ea062026a664ade32139b4c8fc0e01ba",
+          "foregroundPixelsHeuristic": 18508,
+          "foregroundBoundsHeuristic": [
+            2,
+            212,
+            254,
+            362
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "26212fc1405302153c8b1776cd2f0f478476249449a312c99f8324fa07ba1e17",
+          "foregroundPixelsHeuristic": 18385,
+          "foregroundBoundsHeuristic": [
+            100,
+            118,
+            346,
+            266
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "7e2dd37e5ec610978a7f10e055da4beb4b08eb13777f585dae8b4d31bdf10eec",
+          "foregroundPixelsHeuristic": 18214,
+          "foregroundBoundsHeuristic": [
+            40,
+            119,
+            281,
+            268
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "0899721bfb56e7ca24eaba74a049d87095209b6e979cf7c17e9224241638fa6a",
+          "foregroundPixelsHeuristic": 17025,
+          "foregroundBoundsHeuristic": [
+            18,
+            125,
+            253,
+            268
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "3da70ccdeff6a80444da515eaa67295768952c03a8b263d81d02c08f6badcb20",
+          "foregroundPixelsHeuristic": 17225,
+          "foregroundBoundsHeuristic": [
+            12,
+            123,
+            244,
+            268
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-032-salvage-hive-brute/move.jpg"
     },
     {
       "profileId": "enemy-032-salvage-hive-brute",
       "clipId": "attack",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/attack.png",
-      "status": "missing-source",
+      "sourceSha256": "da09427947eb0b1faa6f970c6cb46950b6ca9085c0bc1a0d09802d36a8efa4dd",
+      "bytes": 1311038,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.884926,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "cf05ba7cbb13665712f18ed83c2849a2013001dbab22e2cb03fc402bc943d737",
+          "foregroundPixelsHeuristic": 25239,
+          "foregroundBoundsHeuristic": [
+            87,
+            174,
+            340,
+            360
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "7c80d6099bce529224e308c5e8ae0cf2e3bdbbadffeae99f73a18b94c22edcbc",
+          "foregroundPixelsHeuristic": 23499,
+          "foregroundBoundsHeuristic": [
+            56,
+            207,
+            356,
+            362
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "0511012029e97ac2c0fed6ea611db98a38766002c842c0a8d7ba0d3f446c07cb",
+          "foregroundPixelsHeuristic": 21429,
+          "foregroundBoundsHeuristic": [
+            95,
+            215,
+            391,
+            365
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "9fd9f1a3198bc790b98f330ab7e4f3f3182180783b120b6bd5792890eac2c3ee",
+          "foregroundPixelsHeuristic": 21852,
+          "foregroundBoundsHeuristic": [
+            36,
+            226,
+            382,
+            364
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "c12d1b5d795c3cad4943408ac0c7572b8d2c663bedd11b1fc0c3bb5d6dc86f05",
+          "foregroundPixelsHeuristic": 20159,
+          "foregroundBoundsHeuristic": [
+            66,
+            131,
+            375,
+            305
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "1cf038ded768e4a0f19037789c7aa6ad4da54778b69aa9f6f63b42a51d5af780",
+          "foregroundPixelsHeuristic": 24268,
+          "foregroundBoundsHeuristic": [
+            25,
+            169,
+            360,
+            305
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "5883b9fb762b9861bd4b5fcdbec08ea0ccc94e0d0d70a8c22aa476ead6dfe7b4",
+          "foregroundPixelsHeuristic": 22121,
+          "foregroundBoundsHeuristic": [
+            38,
+            145,
+            308,
+            303
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "cfab7e335fa785edfa45c92abc77823ce7000adf5870fb5698a5d2581014834c",
+          "foregroundPixelsHeuristic": 22507,
+          "foregroundBoundsHeuristic": [
+            46,
+            134,
+            298,
+            304
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-032-salvage-hive-brute/attack.jpg"
     },
     {
       "profileId": "enemy-032-salvage-hive-brute",
       "clipId": "death",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/death.png",
-      "status": "missing-source",
+      "sourceSha256": "4919be02e9f0e9b2462c674ddcc0a1ea06ecd6d953e8e4e1b97d09f027b03698",
+      "bytes": 1156096,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.939126,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "00b913af74ff4165c30382c735a53c39b3837bca552cb0bb9445835f590c30fe",
+          "foregroundPixelsHeuristic": 14194,
+          "foregroundBoundsHeuristic": [
+            148,
+            227,
+            353,
+            385
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "01f5f0c2352686e0c440fbcc80c006b1b8cf40543ed86cdce46386da87b5df25",
+          "foregroundPixelsHeuristic": 14102,
+          "foregroundBoundsHeuristic": [
+            86,
+            239,
+            310,
+            385
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "9e87e7dea06cfdf74d0c756d3ade643a133f09855659c8392eb9483ed8811bf7",
+          "foregroundPixelsHeuristic": 13723,
+          "foregroundBoundsHeuristic": [
+            53,
+            266,
+            294,
+            386
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "1efb6118782020c46ce1d2ab3d53ad7012a1c56c91372d23847e5c3e398872dc",
+          "foregroundPixelsHeuristic": 11683,
+          "foregroundBoundsHeuristic": [
+            13,
+            279,
+            267,
+            388
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "66e7b2aadf4c9b975c6106051cfffa0af784d9e79e1c72571b84700ad870556f",
+          "foregroundPixelsHeuristic": 11696,
+          "foregroundBoundsHeuristic": [
+            134,
+            142,
+            385,
+            241
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "b927b3945b17f772574f6196abadc5d62abd642b6100e988a0a39b3d76b4b3a4",
+          "foregroundPixelsHeuristic": 10561,
+          "foregroundBoundsHeuristic": [
+            70,
+            161,
+            326,
+            242
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "4403a6f302c41f03258aafbecdf9edc9a0f580220a99dc81116d82b72bda972c",
+          "foregroundPixelsHeuristic": 9918,
+          "foregroundBoundsHeuristic": [
+            41,
+            174,
+            324,
+            243
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "de05df9abf7b343184c36956555b408d86d0e93a6c4c40b9bc889e8d96ebdd51",
+          "foregroundPixelsHeuristic": 9911,
+          "foregroundBoundsHeuristic": [
+            59,
+            184,
+            356,
+            244
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-032-salvage-hive-brute/death.jpg"
     },
     {
       "profileId": "enemy-032-salvage-hive-brute",
       "clipId": "charge",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
-      "status": "missing-source",
+      "sourceSha256": "62a7d760edbadeb305356c04c9d9a193db883a0dedf2c94c2266acf864c64fc4",
+      "bytes": 1479698,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.876454,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "ee9746bba1032749f2397d6baaddd0b68810d6cef8475537f9f4d4968fe16540",
+          "foregroundPixelsHeuristic": 21939,
+          "foregroundBoundsHeuristic": [
+            81,
+            228,
+            358,
+            376
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "dd70666ceb3b4bc01b638559a2d214289e0619c1865f25ef33a6545a580dabf3",
+          "foregroundPixelsHeuristic": 24145,
+          "foregroundBoundsHeuristic": [
+            36,
+            216,
+            330,
+            376
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "c80ee7e33100edec19455ce5774c35c60f16c622218e3f1ced680a55f33efa2f",
+          "foregroundPixelsHeuristic": 25809,
+          "foregroundBoundsHeuristic": [
+            6,
+            215,
+            344,
+            375
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "0879ec98b961d7bf3fb2b9239b10b485aa3526a2a1674e321e9a5c1261f46266",
+          "foregroundPixelsHeuristic": 26742,
+          "foregroundBoundsHeuristic": [
+            33,
+            231,
+            380,
+            376
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "1b403774e4da6f69d4113d48e803d38fa62ab0eb0e09e2d0e94cb6442e6e9cce",
+          "foregroundPixelsHeuristic": 27945,
+          "foregroundBoundsHeuristic": [
+            49,
+            135,
+            439,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "ca1548dfed1c4809904b0e5869e010b3c97ae923f0c771f473f32fd22cd6102e",
+          "foregroundPixelsHeuristic": 23748,
+          "foregroundBoundsHeuristic": [
+            65,
+            135,
+            374,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "ca09e2c4ce68b5fb096e72e6d470f92803d959a27d23df37ef2b7893b5e6b0f9",
+          "foregroundPixelsHeuristic": 23435,
+          "foregroundBoundsHeuristic": [
+            40,
+            134,
+            345,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "73ccac375f5fa4c9dc5c92c71fbc64df61ff83c97ad7a95267cacbcf4e378ed0",
+          "foregroundPixelsHeuristic": 20641,
+          "foregroundBoundsHeuristic": [
+            51,
+            134,
+            312,
+            282
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-032-salvage-hive-brute/charge.jpg"
     },
     {
       "profileId": "enemy-033-arcology-lurker",
       "clipId": "idle",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/idle.png",
-      "status": "missing-source",
+      "sourceSha256": "c2e2e5dc0915c6d7b82b5036c319669b2afdfc2443abe91ed370cc2158ba2646",
+      "bytes": 1370990,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.881196,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "bd549b30ded7a44d11605b43bcb874879066c92af48f4ddb26f944134e265b0a",
+          "foregroundPixelsHeuristic": 22633,
+          "foregroundBoundsHeuristic": [
+            114,
+            223,
+            368,
+            381
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "a8f13bbd44a090288ab54ef5c3608660b93fa93e49094539f00980ce02d00803",
+          "foregroundPixelsHeuristic": 24747,
+          "foregroundBoundsHeuristic": [
+            85,
+            173,
+            342,
+            381
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "2b7f6067d3c040d3b580085a038303870cf1ec95e780cd41856a38a423c7391c",
+          "foregroundPixelsHeuristic": 25785,
+          "foregroundBoundsHeuristic": [
+            68,
+            206,
+            345,
+            380
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "7547071cee6166bd9ce950eef07cf48b5d53d802b78e596080e7e69152d54b6b",
+          "foregroundPixelsHeuristic": 23504,
+          "foregroundBoundsHeuristic": [
+            66,
+            225,
+            310,
+            379
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "84ea8251ace290a23db18197ff3b9dce30f2ec4ed36ed6ca8d2c93d639548a69",
+          "foregroundPixelsHeuristic": 25374,
+          "foregroundBoundsHeuristic": [
+            109,
+            95,
+            354,
+            325
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "c40cc3e39960b2790dbf0d78c6096afbea136d919857e2b393c2154140b0373e",
+          "foregroundPixelsHeuristic": 22632,
+          "foregroundBoundsHeuristic": [
+            90,
+            168,
+            317,
+            323
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "eee0512b9f1a9285029f047733784bbf8b1faa795f2fd7b633d0b4d9d9f67655",
+          "foregroundPixelsHeuristic": 20059,
+          "foregroundBoundsHeuristic": [
+            90,
+            177,
+            285,
+            323
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "cd305b5ae493325d20a3cafcfec0acee30ed72e6aff987d1ddbc8c29345e9434",
+          "foregroundPixelsHeuristic": 22209,
+          "foregroundBoundsHeuristic": [
+            67,
+            169,
+            320,
+            325
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-033-arcology-lurker/idle.jpg"
     },
     {
       "profileId": "enemy-033-arcology-lurker",
       "clipId": "move",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/move.png",
-      "status": "missing-source",
+      "sourceSha256": "aefcec532650a44fda1e2b8e8f5b3867b72198bb5b6e5905999702a69dd20292",
+      "bytes": 1500997,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.867591,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "08009d10db080573f156833d40f246c0657b7f50487c99eab180894c714fb273",
+          "foregroundPixelsHeuristic": 25097,
+          "foregroundBoundsHeuristic": [
+            25,
+            128,
+            438,
+            400
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "c0893c3b8b27094a06120e3f318401647ebe1c2e5382fb243e6fa3d984728c06",
+          "foregroundPixelsHeuristic": 28228,
+          "foregroundBoundsHeuristic": [
+            25,
+            145,
+            411,
+            416
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "eefeffb7171c3d8fa86b8ec02c9679eef4cd858e48673f88ce5fb6d3f8b16a7d",
+          "foregroundPixelsHeuristic": 25306,
+          "foregroundBoundsHeuristic": [
+            24,
+            174,
+            366,
+            396
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "20b1251a428b37aee02b3564942988108085263ad3f412b0d2b4ed123357e9c4",
+          "foregroundPixelsHeuristic": 26178,
+          "foregroundBoundsHeuristic": [
+            19,
+            140,
+            434,
+            404
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "89e279752ccc25f61aea533b071f8d1403c1bb7bd6bc55b3e7d5fc7e0d042b98",
+          "foregroundPixelsHeuristic": 27251,
+          "foregroundBoundsHeuristic": [
+            34,
+            73,
+            436,
+            348
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "f78ad641ebb81b8c7c6967dd0b9e50452d59067606dc25627ae65d1faa0d8273",
+          "foregroundPixelsHeuristic": 25343,
+          "foregroundBoundsHeuristic": [
+            28,
+            90,
+            380,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "21f35d85d50b7f0f6ddab823276199ad83fc667469372f778ea1be9cb7a2a7ae",
+          "foregroundPixelsHeuristic": 25425,
+          "foregroundBoundsHeuristic": [
+            28,
+            90,
+            416,
+            337
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "8b66ef8e69460f644ca0ee3b07739cd4d775f4583ee16b590eea3f31599a1ff5",
+          "foregroundPixelsHeuristic": 25522,
+          "foregroundBoundsHeuristic": [
+            14,
+            74,
+            429,
+            349
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-033-arcology-lurker/move.jpg"
     },
     {
       "profileId": "enemy-033-arcology-lurker",
       "clipId": "attack",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/attack.png",
-      "status": "missing-source",
+      "sourceSha256": "00e075014f89a8f8b4fc45b030df560e2a6a4b459301b7cdeea06b64aaca923c",
+      "bytes": 1500426,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.864807,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [
+        1,
+        2,
+        3
+      ],
+      "normalizer": {
+        "defaultExtraction": "blocked",
+        "extractedFrames": 0,
+        "error": "Authored pose touches cell border at (444, 0, 887, 444); ownership/cropping needs visual review or regeneration."
+      },
+      "safeReassignmentProbe": {
+        "status": "proven-short-spill-extraction-pass",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false,
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "sourceOwnershipReports": [
+          {
+            "clip": "attack",
+            "clipFrame": 0,
+            "sourceRow": 0,
+            "sourceCell": [
+              0,
+              0,
+              444,
+              444
+            ],
+            "sourceBounds": [
+              32,
+              208,
+              369,
+              422
+            ],
+            "sourceGlobalBounds": [
+              32,
+              208,
+              369,
+              422
+            ],
+            "sourceSize": [
+              337,
+              214
+            ],
+            "foregroundPixels": 23970,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "5150bb3ecbf472630563d107f3c37c659cbbc2a92633ee3b94558b0029fb0994",
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 1,
+            "sourceRow": 0,
+            "sourceCell": [
+              444,
+              0,
+              887,
+              444
+            ],
+            "sourceBounds": [
+              44,
+              154,
+              405,
+              436
+            ],
+            "sourceGlobalBounds": [
+              488,
+              154,
+              849,
+              436
+            ],
+            "sourceSize": [
+              361,
+              282
+            ],
+            "foregroundPixels": 25642,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "c74d326577feaf449dad8e13bc8de9eae086e2b7daf79ffc9f9eecad37941561",
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 2,
+            "sourceRow": 0,
+            "sourceCell": [
+              887,
+              0,
+              1330,
+              444
+            ],
+            "sourceBounds": [
+              -62,
+              180,
+              446,
+              421
+            ],
+            "sourceGlobalBounds": [
+              825,
+              180,
+              1333,
+              421
+            ],
+            "sourceSize": [
+              508,
+              241
+            ],
+            "foregroundPixels": 20522,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "7dae09563422794d7b1261d51444c415150b9094c4c9be617f0624b2be7db7ea",
+            "sourceOwnershipTransfers": [
+              {
+                "ownerCell": 2,
+                "fromCells": [
+                  1
+                ],
+                "pixels": 730,
+                "componentPixels": 20459,
+                "ownerShare": 0.964319,
+                "sourceBoundsGlobal": [
+                  828,
+                  183,
+                  1315,
+                  381
+                ],
+                "rgbaSha256": "047d908fd0da6f2ea3ac408cab4d19fa41759d36fab8586f57e869e03a30b4fd",
+                "pixelValuesPreserved": true,
+                "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+              }
+            ]
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 3,
+            "sourceRow": 0,
+            "sourceCell": [
+              1330,
+              0,
+              1774,
+              444
+            ],
+            "sourceBounds": [
+              -36,
+              187,
+              413,
+              420
+            ],
+            "sourceGlobalBounds": [
+              1294,
+              187,
+              1743,
+              420
+            ],
+            "sourceSize": [
+              449,
+              233
+            ],
+            "foregroundPixels": 23398,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "e8223d18aa97accc806d0941b17631354abd675761ba243bbf5f87ac7a61ff81",
+            "sourceOwnershipTransfers": [
+              {
+                "ownerCell": 3,
+                "fromCells": [
+                  2
+                ],
+                "pixels": 824,
+                "componentPixels": 23368,
+                "ownerShare": 0.964738,
+                "sourceBoundsGlobal": [
+                  1297,
+                  190,
+                  1740,
+                  417
+                ],
+                "rgbaSha256": "27a1b71467c926bcb25374a84ae7f646b5aa2cfcc3b59e27ddf0bde0fbaa39fe",
+                "pixelValuesPreserved": true,
+                "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+              }
+            ]
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 4,
+            "sourceRow": 1,
+            "sourceCell": [
+              0,
+              444,
+              444,
+              887
+            ],
+            "sourceBounds": [
+              30,
+              80,
+              439,
+              333
+            ],
+            "sourceGlobalBounds": [
+              30,
+              524,
+              439,
+              777
+            ],
+            "sourceSize": [
+              409,
+              253
+            ],
+            "foregroundPixels": 23363,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "4e585a3d88dc0f7e54046a1db7e0506d16b46aa08f50537ea66e72215991f3c9",
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 5,
+            "sourceRow": 1,
+            "sourceCell": [
+              444,
+              444,
+              887,
+              887
+            ],
+            "sourceBounds": [
+              57,
+              78,
+              417,
+              340
+            ],
+            "sourceGlobalBounds": [
+              501,
+              522,
+              861,
+              784
+            ],
+            "sourceSize": [
+              360,
+              262
+            ],
+            "foregroundPixels": 25664,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "12dfec34983cf201c03108c016580a42fa0d4aa9c1473ec2c8977ff18e7edd74",
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 6,
+            "sourceRow": 1,
+            "sourceCell": [
+              887,
+              444,
+              1330,
+              887
+            ],
+            "sourceBounds": [
+              40,
+              91,
+              388,
+              340
+            ],
+            "sourceGlobalBounds": [
+              927,
+              535,
+              1275,
+              784
+            ],
+            "sourceSize": [
+              348,
+              249
+            ],
+            "foregroundPixels": 26116,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "27d69bca982cee4272b7bf92e03ce15426f08f0e4e33693e2ced1b8e36cfc7fe",
+            "sourceOwnershipTransfers": []
+          },
+          {
+            "clip": "attack",
+            "clipFrame": 7,
+            "sourceRow": 1,
+            "sourceCell": [
+              1330,
+              444,
+              1774,
+              887
+            ],
+            "sourceBounds": [
+              12,
+              126,
+              352,
+              340
+            ],
+            "sourceGlobalBounds": [
+              1342,
+              570,
+              1682,
+              784
+            ],
+            "sourceSize": [
+              340,
+              214
+            ],
+            "foregroundPixels": 23778,
+            "alphaProcessing": "v65-border-connected-magenta-key",
+            "discardedForegroundPixels": 0,
+            "sourcePoseRgbaSha256": "47ea930a34bd0d6cf6325cf1b7c21137c8c48c49ae73a895a26bfcc527524d87",
+            "sourceOwnershipTransfers": []
+          }
+        ],
+        "error": null,
+        "meaning": "Existing 90-percent component ownership and 15-percent spill rules passed in memory; visual continuity/roots/acceptance remain pending."
+      },
+      "findings": [
+        "nominal-cell-border-contact-needs-ownership-review",
+        "default-normalizer-extraction-blocked"
+      ],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "f163205f263a53d19984e2d2df35c0f6846c2cee380edbe972d01834a580d7ba",
+          "foregroundPixelsHeuristic": 26691,
+          "foregroundBoundsHeuristic": [
+            34,
+            209,
+            367,
+            420
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "c12e7f72f9478a2a1a0f1b56d9eae07d3b5091fa25a99e99a28028c26afb6f18",
+          "foregroundPixelsHeuristic": 28838,
+          "foregroundBoundsHeuristic": [
+            46,
+            156,
+            443,
+            434
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 30
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "bc7f6d19955597b9ef0e3381dfc8a34a9cb9ffb54c22eda45218366e3ff28a61",
+          "foregroundPixelsHeuristic": 23943,
+          "foregroundBoundsHeuristic": [
+            0,
+            181,
+            443,
+            419
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 30,
+            "right": 39
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "7e1b6a82e89333b572e74dc84ddf96b0150ba4f392affa653b9eceec97a9f78d",
+          "foregroundPixelsHeuristic": 26207,
+          "foregroundBoundsHeuristic": [
+            0,
+            188,
+            419,
+            419
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 41,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "b9878cb7d54b88563eda4cf6892b0f6c4cb2edac4093471506725fb5ee6b79e2",
+          "foregroundPixelsHeuristic": 26893,
+          "foregroundBoundsHeuristic": [
+            32,
+            81,
+            437,
+            331
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "f1f44db0e85c4e8ffaff69b0765a0f4e4a0ddaa8800ffb0af638b175785446a2",
+          "foregroundPixelsHeuristic": 26464,
+          "foregroundBoundsHeuristic": [
+            58,
+            79,
+            415,
+            339
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "0c0c3ba059c33aa656d55c3da56f36522d0a8585cd8063b82d3de588e5c78f77",
+          "foregroundPixelsHeuristic": 27322,
+          "foregroundBoundsHeuristic": [
+            41,
+            92,
+            386,
+            338
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "286acdfb184e93b663754c2c31519807626407dec5a6f18a8205dbdf9b6e2f4b",
+          "foregroundPixelsHeuristic": 26374,
+          "foregroundBoundsHeuristic": [
+            14,
+            127,
+            350,
+            338
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-033-arcology-lurker/attack.jpg"
     },
     {
       "profileId": "enemy-033-arcology-lurker",
       "clipId": "death",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-033-arcology-lurker/death.png",
-      "status": "missing-source",
+      "sourceSha256": "335d7baa3e7eaab684030c355564be78f388a18fd75849bb56fa0930041d9d4b",
+      "bytes": 1297113,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.893183,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "3a1307a982e1948069be36ff67bac197bcfaabd23fc85b84d2f0a810f0907c90",
+          "foregroundPixelsHeuristic": 26271,
+          "foregroundBoundsHeuristic": [
+            83,
+            158,
+            386,
+            376
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "10f7d7faef0e0a9141dc316616e0005a9d551da358685edc7335b23a69564db4",
+          "foregroundPixelsHeuristic": 24598,
+          "foregroundBoundsHeuristic": [
+            65,
+            208,
+            374,
+            382
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "1a446c0a8bd5663fcc695508148d2055bc8bcadd5810b5aede97edaf459cdceb",
+          "foregroundPixelsHeuristic": 23500,
+          "foregroundBoundsHeuristic": [
+            45,
+            230,
+            368,
+            382
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "442f83b8684cedb7bccd6beacc900620c23da97e191fdbcbaf14e24f679f933c",
+          "foregroundPixelsHeuristic": 19642,
+          "foregroundBoundsHeuristic": [
+            40,
+            275,
+            349,
+            382
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "5afbd91690c71e0a8d35b6c6b2adc7b865f1e3fbfbf9df8d58b4f8e7e437c0d6",
+          "foregroundPixelsHeuristic": 21115,
+          "foregroundBoundsHeuristic": [
+            71,
+            188,
+            385,
+            310
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "c354b6e4a6a669d74e20434ad4ccbd1aa1243a56df47d32083ed96c94ed068d5",
+          "foregroundPixelsHeuristic": 20330,
+          "foregroundBoundsHeuristic": [
+            41,
+            211,
+            382,
+            311
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "56a953d277e2683868977b8b2a8403d3cc37395b9ec963d3d3596b7bd9ee463e",
+          "foregroundPixelsHeuristic": 17173,
+          "foregroundBoundsHeuristic": [
+            24,
+            237,
+            375,
+            313
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "afa05d57546defd833dc23e3441d12b21e43ad059762c66e1aa908237fba2ca5",
+          "foregroundPixelsHeuristic": 15451,
+          "foregroundBoundsHeuristic": [
+            17,
+            248,
+            366,
+            314
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-033-arcology-lurker/death.jpg"
     },
     {
       "profileId": "enemy-034-caravan-stalker",
       "clipId": "idle",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/idle.png",
-      "status": "missing-source",
+      "sourceSha256": "f5c433b58c5c91bc3495358a8fb8fcbaf8c76ebe667fa8f7276382ddbb45a9dd",
+      "bytes": 1081534,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.965316,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "91ecbde0a33f9f0871f7e5838c9c6c46e7724020eb500d4b863aaffa05fbd9b2",
+          "foregroundPixelsHeuristic": 6858,
+          "foregroundBoundsHeuristic": [
+            89,
+            253,
+            328,
+            345
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "88dddcab615c231f17dc173d841f90af333032bb23346b3e33776c32070508c5",
+          "foregroundPixelsHeuristic": 6890,
+          "foregroundBoundsHeuristic": [
+            85,
+            253,
+            323,
+            344
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "457fbb1969279be19445b98d5cc8fb7dae0901f9ec47d16fc7f75439f1796cab",
+          "foregroundPixelsHeuristic": 6892,
+          "foregroundBoundsHeuristic": [
+            83,
+            253,
+            321,
+            345
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "5d339df25861998659b77dd4932f9a8ce81c06174f2b2223254a95a63c91b3a8",
+          "foregroundPixelsHeuristic": 6848,
+          "foregroundBoundsHeuristic": [
+            81,
+            253,
+            319,
+            345
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "61c94d385d5059e87fba6cccd6d4fb0911b48fe9d8a52f23bf12c8eac4cc26de",
+          "foregroundPixelsHeuristic": 6814,
+          "foregroundBoundsHeuristic": [
+            89,
+            104,
+            327,
+            193
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "333ce44beec7b0f2c8d176e8fb603c8f4d984052d9f2a1f3824913d48bdbedf4",
+          "foregroundPixelsHeuristic": 6764,
+          "foregroundBoundsHeuristic": [
+            85,
+            104,
+            323,
+            193
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "a31ce7f338e40c51198d985857458acde3d885c207a2a87d72021e5354774543",
+          "foregroundPixelsHeuristic": 6772,
+          "foregroundBoundsHeuristic": [
+            82,
+            105,
+            321,
+            193
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "8cc84a5011393ae9c8d5b4bd9b37e8a20ac6d4ef884919a795e337ef641ae5f2",
+          "foregroundPixelsHeuristic": 6738,
+          "foregroundBoundsHeuristic": [
+            81,
+            105,
+            319,
+            193
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-034-caravan-stalker/idle.jpg"
     },
     {
       "profileId": "enemy-034-caravan-stalker",
       "clipId": "move",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/move.png",
-      "status": "missing-source",
+      "sourceSha256": "835a98fe4418ffc99c88cd1336d778df7849c266fb61eb4ebbe91c1e617b1deb",
+      "bytes": 1187035,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.929149,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "d06440f1c7e64e852d77326039ebed6adce51cc01e2bf5c2ffb13ed81009756b",
+          "foregroundPixelsHeuristic": 13832,
+          "foregroundBoundsHeuristic": [
+            54,
+            213,
+            396,
+            340
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "61b7fe0ad341bc53906d7b75a12377337a13cacbf301c67e158d488a3752d4c8",
+          "foregroundPixelsHeuristic": 13879,
+          "foregroundBoundsHeuristic": [
+            31,
+            212,
+            365,
+            340
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "444074d309e9c5befe29170341b4ab07cc7e491102ddaaf2b7deb2a8976533b1",
+          "foregroundPixelsHeuristic": 14396,
+          "foregroundBoundsHeuristic": [
+            23,
+            218,
+            386,
+            340
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "130ddbffdefff90e317ede2632493487cf4ef2261c61a0208c0b71cd948eaa4d",
+          "foregroundPixelsHeuristic": 14299,
+          "foregroundBoundsHeuristic": [
+            6,
+            212,
+            352,
+            340
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "08be0ff9f6ee217477d177378135d5f69c5df624a98e42404a5c48074be2e162",
+          "foregroundPixelsHeuristic": 14237,
+          "foregroundBoundsHeuristic": [
+            53,
+            124,
+            396,
+            246
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "e261722360ce6def9c63c049c4803dbbd48c8fb3d82a2a52fa5492ded875af81",
+          "foregroundPixelsHeuristic": 13802,
+          "foregroundBoundsHeuristic": [
+            29,
+            129,
+            380,
+            255
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "a219a2545a561379e18481366f5dbe2114dce527959ed717a9b41dc561209064",
+          "foregroundPixelsHeuristic": 13613,
+          "foregroundBoundsHeuristic": [
+            22,
+            123,
+            364,
+            255
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "e17452aaad7a30ac8f1398a9cee3729eb80211c612ca39cd080235207563f79d",
+          "foregroundPixelsHeuristic": 13428,
+          "foregroundBoundsHeuristic": [
+            5,
+            128,
+            338,
+            254
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-034-caravan-stalker/move.jpg"
     },
     {
       "profileId": "enemy-034-caravan-stalker",
       "clipId": "attack",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/attack.png",
-      "status": "missing-source",
+      "sourceSha256": "1bc3f0bffe5bfa929d075c11b5b39734d1396a093673ce04d7f21f740b3aa820",
+      "bytes": 1100734,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.961655,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "af301d1dcb1b7ddb0334f5683690a9621269c5aeb981a13d2b1fe7fd881b2933",
+          "foregroundPixelsHeuristic": 7587,
+          "foregroundBoundsHeuristic": [
+            94,
+            220,
+            354,
+            312
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "0b7a45a89e0501f4e12ecde85bfe2d30ae01da7caf124ebb7b231d8cf7083fcb",
+          "foregroundPixelsHeuristic": 7385,
+          "foregroundBoundsHeuristic": [
+            70,
+            241,
+            332,
+            316
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "ed3e095cef5c78d80277729660b3a5b63f77cd95ca37e9f252416f380f337246",
+          "foregroundPixelsHeuristic": 8129,
+          "foregroundBoundsHeuristic": [
+            57,
+            199,
+            316,
+            322
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "1f1f49e2263f2d8652830e7e3c941aff0111370c035569cc16d7de3f3c1d92bd",
+          "foregroundPixelsHeuristic": 7743,
+          "foregroundBoundsHeuristic": [
+            39,
+            186,
+            305,
+            322
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "c36789bc35254c80b07813110a8656c8b1af89bb240b932b79f873eb098c2589",
+          "foregroundPixelsHeuristic": 7772,
+          "foregroundBoundsHeuristic": [
+            89,
+            99,
+            370,
+            242
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "5cbc0a4206c0bf6c3c9aacd09c1d9caa76dc37d59763eab836c75f50bb65b6e5",
+          "foregroundPixelsHeuristic": 7876,
+          "foregroundBoundsHeuristic": [
+            66,
+            122,
+            368,
+            241
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "d7abfe864bafb1483e09bccee238815215e22f2b93ba462e5a2353234ac51cab",
+          "foregroundPixelsHeuristic": 7132,
+          "foregroundBoundsHeuristic": [
+            54,
+            150,
+            307,
+            239
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "6f8c88abb5347a77eb08d99f4eb5a41de0625d6b554afba5fe61597a68fd7616",
+          "foregroundPixelsHeuristic": 6713,
+          "foregroundBoundsHeuristic": [
+            53,
+            156,
+            298,
+            240
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-034-caravan-stalker/attack.jpg"
     },
     {
       "profileId": "enemy-034-caravan-stalker",
       "clipId": "death",
       "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/death.png",
-      "status": "missing-source",
+      "sourceSha256": "6af6176aaf5f7f2e4cd8a930e0c963b539b829d65d3b6dd948ebfe318a56ac9d",
+      "bytes": 1094201,
+      "status": "candidate-technical-audit-only",
       "accepted": false,
-      "runtimeIntegrated": false
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "grid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8,
+        "nominalCellsInspected": 8,
+        "distinctCellHashes": 8,
+        "aspectExact2To1": true,
+        "subjectCountVisuallyVerified": false,
+        "animationContinuityVerified": false
+      },
+      "matte": {
+        "kind": "opaque-magenta",
+        "nativeAlpha": false,
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixelCount": 0,
+        "partialAlphaPixelCount": 0,
+        "strictMagentaRatio": 0.957166,
+        "edgeMagentaRatio": 1.0,
+        "edgeNeutralRatio": 0.0,
+        "edgeNeutralLumaBins": [],
+        "checkerboardStatus": "not-established",
+        "foregroundMaskPurpose": "border-contact-clues-only-not-anatomy-segmentation"
+      },
+      "borderContactFrames": [],
+      "normalizer": {
+        "defaultExtraction": "pass",
+        "extractedFrames": 8,
+        "distinctExtractedPoseHashes": 8,
+        "error": null
+      },
+      "safeReassignmentProbe": {
+        "status": "not-probed",
+        "sourcesModified": 0,
+        "outputsNormalized": 0,
+        "accepted": false
+      },
+      "findings": [],
+      "cells": [
+        {
+          "frame": 0,
+          "cell": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "rgbaSha256": "9853ce7116513b660218f5d1860be41aa152c2eb099409bcd25039200b1fbd6a",
+          "foregroundPixelsHeuristic": 10126,
+          "foregroundBoundsHeuristic": [
+            87,
+            257,
+            396,
+            361
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 1,
+          "cell": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "rgbaSha256": "db28b698f84cd5424d99a50e1084bae31344af6f79115edfa2b0593d3531eda2",
+          "foregroundPixelsHeuristic": 9684,
+          "foregroundBoundsHeuristic": [
+            54,
+            284,
+            355,
+            365
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 2,
+          "cell": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "rgbaSha256": "233d70699fc2a2fc2fd04671abacf214e58b1de32d89bd553c9a473a457889a9",
+          "foregroundPixelsHeuristic": 9485,
+          "foregroundBoundsHeuristic": [
+            26,
+            298,
+            329,
+            368
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 3,
+          "cell": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "rgbaSha256": "3ee4ee4abae198407baba0ad5bfed888501e0866efff5e6be16c91562924d525",
+          "foregroundPixelsHeuristic": 7797,
+          "foregroundBoundsHeuristic": [
+            5,
+            314,
+            310,
+            369
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 4,
+          "cell": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "rgbaSha256": "c5a1dd2ae7b3a34c8dc7d96c4a35f5b69450a1cd842673edda92facee66725c1",
+          "foregroundPixelsHeuristic": 8021,
+          "foregroundBoundsHeuristic": [
+            87,
+            181,
+            392,
+            239
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 5,
+          "cell": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "rgbaSha256": "2140315e36ca56cb2b47994102724fd92142bf21ac2f655f94e9a8fee194ad7d",
+          "foregroundPixelsHeuristic": 7964,
+          "foregroundBoundsHeuristic": [
+            55,
+            186,
+            361,
+            240
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 6,
+          "cell": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "rgbaSha256": "66e52261515a2787c0d66435c3cd2054653effeabe9fca671dc8217878c4b522",
+          "foregroundPixelsHeuristic": 7281,
+          "foregroundBoundsHeuristic": [
+            25,
+            194,
+            334,
+            242
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        },
+        {
+          "frame": 7,
+          "cell": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "rgbaSha256": "59ae774360605503852ac3573d6d7f59d6437f1a91fe746edc2f0d50f0fb4a7f",
+          "foregroundPixelsHeuristic": 7043,
+          "foregroundBoundsHeuristic": [
+            6,
+            197,
+            320,
+            242
+          ],
+          "borderContactPixelClues": {
+            "top": 0,
+            "bottom": 0,
+            "left": 0,
+            "right": 0
+          }
+        }
+      ],
+      "contactPath": "assets/openai/sprites/previews/v66/batch-003/source-audit/enemy-034-caravan-stalker/death.jpg"
     },
     {
       "profileId": "enemy-035-trilobite-echo",

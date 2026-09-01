@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "charge",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:62a7d760edbadeb305356c04c9d9a193db883a0dedf2c94c2266acf864c64fc4",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "62a7d760edbadeb305356c04c9d9a193db883a0dedf2c94c2266acf864c64fc4",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/charge.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/charge-r3.txt",
+  "actualPromptSha256": "7545e11be9c8026d959e8f7b613d383148c4101490f5a46aec774db5f1a6afc8",
+  "candidateSelected": true,
+  "note": "Selected after targeted frame-5 rigid placement correction: RGB 1774x887, opaque-magenta, eight distinct grounded acceleration and braking poses, no border contacts, default extraction 8/8. Candidate only; not accepted or runtime-integrated."
+}

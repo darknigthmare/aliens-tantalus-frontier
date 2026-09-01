@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Physical registration candidates for enemy-031-dust-runner only. No merge, art acceptance, normalization or runtime integration is performed by this fragment.",
+  "profiles": {
+    "enemy-031-dust-runner": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual per-pose visual inspection of the pelvis center immediately ahead of the tail base at the proximal hind-leg joint, projected vertically to observed paw/body support. The support coordinate includes the complete extracted source lower bound and guard pixel, so sourceBounds[3] - anchorY must be <= 0 for every pose. Airborne pounce poses use an explicit ground plane inferred from adjacent grounded poses so flight height is preserved. Whole-body bounding boxes and tail extrema are never used as the landmark.",
+      "reviewedPoseCount": 32,
+      "visualReview": "All 32 source poses and four marked root contacts were inspected. Idle border clues at frames 4 and 7 are single bright-magenta corner pixels, not anatomy; default extraction passes without safe reassignment. Registration only, not scale application, loop approval or runtime acceptance.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "1f4bf952f5babf39d6201fe2d51053afbc062de343eb6b530c2a2f879b206875",
+          "sourceSize": [1774,887],
+          "frames": [
+            {"frame":0,"reviewed":true,"anchor":[190,359],"landmark":[190,286],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 1 source and marked overlay inspected: pelvis (190,286) projects to planted-paw support y=359; anatomy remains complete."},
+            {"frame":1,"reviewed":true,"anchor":[188,359],"landmark":[188,286],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 2 source and marked overlay inspected: pelvis (188,286) projects to planted-paw support y=359; anatomy remains complete."},
+            {"frame":2,"reviewed":true,"anchor":[182,360],"landmark":[182,291],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 3 source and marked overlay inspected: pelvis (182,291) projects to planted-paw support y=360; anatomy remains complete."},
+            {"frame":3,"reviewed":true,"anchor":[218,358],"landmark":[218,286],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 4 source and marked overlay inspected: pelvis (218,286) projects to planted-paw support y=358; anatomy remains complete."},
+            {"frame":4,"reviewed":true,"anchor":[190,257],"landmark":[190,190],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 5 source and marked overlay inspected: pelvis (190,190) projects to planted-paw support y=257. The lone bottom-left clue is RGB(223,61,212) matte, while extracted anatomy starts 39px from the nearest border."},
+            {"frame":5,"reviewed":true,"anchor":[220,257],"landmark":[220,180],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 6 source and marked overlay inspected: pelvis (220,180) projects to planted-paw support y=257; anatomy remains complete."},
+            {"frame":6,"reviewed":true,"anchor":[180,256],"landmark":[180,190],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 7 source and marked overlay inspected: pelvis (180,190) projects to planted-paw support y=256; anatomy remains complete."},
+            {"frame":7,"reviewed":true,"anchor":[196,255],"landmark":[196,194],"confidence":"medium","uncertaintyPx":4,"evidence":"Idle pose 8 source and corrected marked overlay inspected: pelvis (196,194) projects to complete planted-paw support plus source guard at y=255, equal to sourceBounds[3]. The lone bottom-right clue is RGB(228,61,216) matte, while extracted anatomy starts 47px from the nearest border."}
+          ]
+        },
+        "move": {
+          "sourceSha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+          "sourceSize": [1774,887],
+          "frames": [
+            {"frame":0,"reviewed":true,"anchor":[190,290],"landmark":[190,230],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 1 source and marked overlay inspected: pelvis (190,230) projects to grounded support y=290."},
+            {"frame":1,"reviewed":true,"anchor":[190,290],"landmark":[190,230],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 2 source and marked overlay inspected: pelvis (190,230) projects to grounded support y=290."},
+            {"frame":2,"reviewed":true,"anchor":[180,291],"landmark":[180,231],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 3 source and marked overlay inspected: pelvis (180,231) projects to grounded support y=291."},
+            {"frame":3,"reviewed":true,"anchor":[187,291],"landmark":[187,235],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 4 source and marked overlay inspected: pelvis (187,235) projects to grounded support y=291."},
+            {"frame":4,"reviewed":true,"anchor":[205,288],"landmark":[205,215],"confidence":"medium","uncertaintyPx":6,"evidence":"Move pose 5 source and marked overlay inspected: pelvis (205,215) projects to neighboring grounded plane y=288, preserving the visible airborne gap."},
+            {"frame":5,"reviewed":true,"anchor":[205,288],"landmark":[205,215],"confidence":"medium","uncertaintyPx":6,"evidence":"Move pose 6 source and marked overlay inspected: pelvis (205,215) projects to neighboring grounded plane y=288, preserving the visible airborne gap."},
+            {"frame":6,"reviewed":true,"anchor":[200,279],"landmark":[200,225],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 7 source and marked overlay inspected: pelvis (200,225) projects to grounded recovery support y=279."},
+            {"frame":7,"reviewed":true,"anchor":[190,279],"landmark":[190,223],"confidence":"medium","uncertaintyPx":4,"evidence":"Move pose 8 source and marked overlay inspected: pelvis (190,223) projects to grounded recovery support y=279."}
+          ]
+        },
+        "attack": {
+          "sourceSha256": "7d71c3cfa883a7efbe03770c2754d2343db09817eca4762e7d04c8ca89e69ad5",
+          "sourceSize": [1774,887],
+          "frames": [
+            {"frame":0,"reviewed":true,"anchor":[185,330],"landmark":[185,265],"confidence":"medium","uncertaintyPx":4,"evidence":"Attack pose 1 source and marked overlay inspected: pelvis (185,265) projects to grounded anticipation support y=330."},
+            {"frame":1,"reviewed":true,"anchor":[185,330],"landmark":[185,262],"confidence":"medium","uncertaintyPx":4,"evidence":"Attack pose 2 source and marked overlay inspected: pelvis (185,262) projects to grounded wind-up support y=330."},
+            {"frame":2,"reviewed":true,"anchor":[180,329],"landmark":[180,260],"confidence":"medium","uncertaintyPx":4,"evidence":"Attack pose 3 source and marked overlay inspected: pelvis (180,260) projects to grounded coil support y=329."},
+            {"frame":3,"reviewed":true,"anchor":[195,330],"landmark":[195,270],"confidence":"medium","uncertaintyPx":6,"evidence":"Attack pose 4 source and marked overlay inspected: pelvis (195,270) projects to the poses 1-3 ground plane y=330, preserving launch separation."},
+            {"frame":4,"reviewed":true,"anchor":[200,280],"landmark":[200,200],"confidence":"medium","uncertaintyPx":6,"evidence":"Attack pose 5 source and marked overlay inspected: pelvis (200,200) projects to lower-row plane y=280, preserving the pounce apex."},
+            {"frame":5,"reviewed":true,"anchor":[205,268],"landmark":[205,205],"confidence":"medium","uncertaintyPx":6,"evidence":"Attack pose 6 source and marked overlay inspected: pelvis (205,205) projects to descending plane y=268 toward grounded recovery."},
+            {"frame":6,"reviewed":true,"anchor":[190,266],"landmark":[190,205],"confidence":"medium","uncertaintyPx":4,"evidence":"Attack pose 7 source and marked overlay inspected: pelvis (190,205) projects to grounded landing support y=266."},
+            {"frame":7,"reviewed":true,"anchor":[180,267],"landmark":[180,205],"confidence":"medium","uncertaintyPx":4,"evidence":"Attack pose 8 source and marked overlay inspected: pelvis (180,205) projects to grounded recovery support y=267."}
+          ]
+        },
+        "death": {
+          "sourceSha256": "490d141acdf1e2a3e4fd04134c996d6292befd9ff1be16988abba1053dc168ce",
+          "sourceSize": [1774,887],
+          "frames": [
+            {"frame":0,"reviewed":true,"anchor":[205,388],"landmark":[205,300],"confidence":"medium","uncertaintyPx":4,"evidence":"Death pose 1 source and marked overlay inspected: pelvis (205,300) projects to grounded support y=388."},
+            {"frame":1,"reviewed":true,"anchor":[200,388],"landmark":[200,315],"confidence":"medium","uncertaintyPx":4,"evidence":"Death pose 2 source and marked overlay inspected: pelvis (200,315) projects to grounded recoil support y=388."},
+            {"frame":2,"reviewed":true,"anchor":[190,388],"landmark":[190,338],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 3 source and marked overlay inspected: pelvis (190,338) projects to collapse contact y=388."},
+            {"frame":3,"reviewed":true,"anchor":[180,389],"landmark":[180,350],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 4 source and marked overlay inspected: pelvis (180,350) projects to first resting-body contact y=389."},
+            {"frame":4,"reviewed":true,"anchor":[205,282],"landmark":[205,235],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 5 source and marked overlay inspected: pelvis (205,235) projects to side-rest body contact y=282."},
+            {"frame":5,"reviewed":true,"anchor":[200,284],"landmark":[200,238],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 6 source and marked overlay inspected: pelvis (200,238) projects to rolled-body contact y=284."},
+            {"frame":6,"reviewed":true,"anchor":[195,285],"landmark":[195,255],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 7 source and marked overlay inspected: pelvis (195,255) projects to prone-body contact y=285."},
+            {"frame":7,"reviewed":true,"anchor":[190,285],"landmark":[190,255],"confidence":"medium","uncertaintyPx":5,"evidence":"Death pose 8 source and marked overlay inspected: pelvis (190,255) projects to terminal-body contact y=285."}
+          ]
+        }
+      }
+    }
+  }
+}

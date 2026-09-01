@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-032-salvage-hive-brute",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-sha256:a1ffc818c041ffa4ee74d26b4e136e1d8e88f9b19c67e98cc48dfde1720f07b0",
+  "generationIdKind": "content-addressed-builtin-result",
+  "actor": "Codex finish_source_review",
+  "sourceSha256": "a1ffc818c041ffa4ee74d26b4e136e1d8e88f9b19c67e98cc48dfde1720f07b0",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-032-salvage-hive-brute/rejected/idle-r1.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-032-salvage-hive-brute/idle.txt",
+  "actualPromptSha256": "2711526f204a259576fb2d7099ebc6afbf803590b970a1870ea54ea27a4b2604",
+  "candidateSelected": false,
+  "note": "Original identity candidate archived: RGB 1774x887, eight distinct poses and strong design lock, but nominal cell contact between frames 7 and 8 blocked default extraction. Safe-reassignment probe passed only; not selected, accepted or runtime-integrated."
+}

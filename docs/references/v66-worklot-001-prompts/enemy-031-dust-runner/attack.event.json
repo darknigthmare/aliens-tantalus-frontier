@@ -1,0 +1,13 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-031-dust-runner",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-c3e2d155-e35f-4bd6-af8f-d21e7decc9e9",
+  "actor": "Codex /root/complete_variants",
+  "sourceSha256": "9e7f4f1b912b396087c8064fa61b6aebec25223dfe665441001a07a86b4cf9ae",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/attack-r1-cross-cell.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-031-dust-runner/attack.txt",
+  "candidateSelected": false,
+  "note": "Rejected after read-only source QA: the pounce/contact transition crosses nominal vertical cell boundaries around frames 4-6. Safe reassignment passed in memory, but the board does not meet the requested independent-cell gutter contract; preserved only as provenance."
+}

@@ -1,0 +1,3107 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-034-caravan-stalker",
+  "subject": "Caravan Stalker",
+  "batchId": "batch-003",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://www.20thcenturystudios.com/movies/alien-3",
+    "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+  ],
+  "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
+  "animationFamily": "quadruped",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-034-caravan-stalker.webp",
+  "normalizedSha256": "c3bc45cbc9bae92de296699aca518f8e124a0d6008b1cbe829530f07c44c2b7b",
+  "preview": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/all.gif",
+  "previewSha256": "59c33eaab906a33b86b6c84378a85a06a88ee8e9399fd92a283c32cfb7346059",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.633050217,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 0.741314,
+    "attack": 1.00771,
+    "death": 0.754297
+  },
+  "scaleCalibrationReview": {
+    "note": "Manual rigid cranial-cap chord on one comparable right-facing pose per clip aligns move, attack and death to the corrected all-quadrupedal idle; action-dependent body bounding boxes are excluded.",
+    "reviewer": "Codex /root",
+    "reviewedAt": "2026-09-01",
+    "evidencePaths": [
+      "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SOURCE_QA.json",
+      "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SCALE_REVIEW.md"
+    ]
+  },
+  "scaleCalibrationEvidence": [
+    {
+      "path": "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SOURCE_QA.json",
+      "sha256": "72ee345a1e55b6a1697f46057896e3c208613b242a5a24ce7ec998b217f40053"
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_001_CARAVAN_STALKER_SCALE_REVIEW.md",
+      "sha256": "9997972f372e87db5fd87c452a5229f2e37bef6a2620db4c548088d4939a59ba"
+    }
+  ],
+  "physicalAnchorReview": {
+    "path": "docs/references/V66_BATCH_003_ANCHOR_REVIEW.json",
+    "sha256": "8a897926b2d97206ca0b3c441024df1faf74913fd1184c7ae0b6c400b4782769",
+    "status": "reviewed",
+    "reviewer": "Codex /root",
+    "reviewedAt": "2026-09-01",
+    "method": "Manual per-pose inspection of the posterior pelvis immediately ahead of the tail root. Anchor x is the pelvis projection; anchor y preserves that physical support plane while including the one- or two-pixel extraction guard beneath it so every complete source pixel remains inside the normalized cell. Tail, skull and claw extrema never determine the root. Every proposal is rechecked on the rendered source overlay before merge.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": false,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 1502,
+    "aaFringePixelCount": 932,
+    "removedPixelCount": 2434,
+    "sourceProofSha256": "b83a2e579928850d80dda64f658aec18c7a792c9667421351e3d877adbd1f7c9"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/idle.png",
+      "sha256": "f5c433b58c5c91bc3495358a8fb8fcbaf8c76ebe667fa8f7276382ddbb45a9dd",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "9d9ea95d53e3a492f7a6dd0d44bc0ad5edb5ac82d083cf3d9e8904012342d6d9",
+      "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 112,
+        "aaFringePixelCount": 67,
+        "strictCoreMaskSha256": "6e4419a638bb969548365d40e49f5b3bc533ebaddb0f845b91383d6438fe5d99",
+        "aaFringeMaskSha256": "6cecd06458394c45e32981bd3673fb1534d8878f6bad3ea4cbcb14a6682136a7",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          242,
+          17,
+          220
+        ],
+        "removedPixelCount": 179,
+        "removedCoordinatesSha256": "a8e8e6beafd84e4c8eb719891da177a18755f032a2b0087f95ae9b4a55b6f6a5",
+        "removedRgbaSha256": "9e500e16fe39c6ca7cf8cd0603aa9288a0f407d2d56c33da1f9c1f983d0ff6f5",
+        "sourceRgbaSha256": "7ac4763df6d65d1e7f33f36fe9292a74e1f38b6692c0461de9a230bab2fa071b",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/move.png",
+      "sha256": "835a98fe4418ffc99c88cd1336d778df7849c266fb61eb4ebbe91c1e617b1deb",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "9aad4b1911dbe41f5ceb8d73be96c4be621845b46be8639a4371324ebcd04e82",
+      "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 470,
+        "aaFringePixelCount": 302,
+        "strictCoreMaskSha256": "fe20af0529fc508da64e526ca9e5ba03744da402120e59f259ab28cc4e683c21",
+        "aaFringeMaskSha256": "1c06ce27ba5f196a4b5990c8fe9e5301df162a143310861b47ded4e045e8c035",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          235,
+          29,
+          208
+        ],
+        "removedPixelCount": 772,
+        "removedCoordinatesSha256": "f46e683d78c1f03924bed95acaa255726fc2c26dc10b3c6110a619afd3f0d55d",
+        "removedRgbaSha256": "ec53ded8a9bfb0d8fb4f722b60af53ac4a8fb739de1e8e641a77b5112d437b74",
+        "sourceRgbaSha256": "d2cf586a51d53f0b44b3e786000e58b9ab8ece8a0813cc92439aedf77075c977",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/attack.png",
+      "sha256": "1bc3f0bffe5bfa929d075c11b5b39734d1396a093673ce04d7f21f740b3aa820",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "2ac2e255b00e6a9c825e1a71e2824a353b8c4ce1f49ac220ff7ca8225901e9b2",
+      "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 308,
+        "aaFringePixelCount": 248,
+        "strictCoreMaskSha256": "a4aed95c2cd1bf04a7c987e6adb7fc10c2746318265e9a434fe81dba8417f54a",
+        "aaFringeMaskSha256": "fcf343ca15e5a4cdfbc4df70ff2f939f9b42fbcdad9d786e2b602fc2e711f16a",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          230,
+          24,
+          207
+        ],
+        "removedPixelCount": 556,
+        "removedCoordinatesSha256": "16f1900a839b2724f3aa0dec58471313e5f2f8244f29fa1c3e8f4ab481be5a80",
+        "removedRgbaSha256": "6b0a5b271a768582cad94bf125be97f22af65baeda4db691a1e2ad6977d10f17",
+        "sourceRgbaSha256": "3da0573831ec29c0500acb72ed912558c02a2ae21c2547c875dadce3cba81e5d",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-034-caravan-stalker/death.png",
+      "sha256": "6af6176aaf5f7f2e4cd8a930e0c963b539b829d65d3b6dd948ebfe318a56ac9d",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "8d9e887e00e3186de6a838de837d253960bc7c5304a4cb03b268d4085b17bb17",
+      "referenceLockSha256": "6996a4c8e870e9e691f1ea93475dbf4c386694e75d047bde597cfb1e38348840",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 612,
+        "aaFringePixelCount": 315,
+        "strictCoreMaskSha256": "7d34a345e5ba4da2c4f0562a0c0bd8f719c00b3fe31a9aacbab8995e20cf6d30",
+        "aaFringeMaskSha256": "9001cf78f8c3ed0bfa8d2623aa6740af8259e249b389011fd28ce94659025cbe",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          243,
+          14,
+          227
+        ],
+        "removedPixelCount": 927,
+        "removedCoordinatesSha256": "a52b89a12b0e97550a45acb876af362de11b4743861249a6c1e6ce34a1ca66ec",
+        "removedRgbaSha256": "e995f5e49ca9e04af27544eca06f9e2cda6c3937183988203cd5be3095eb94d8",
+        "sourceRgbaSha256": "5eaf070f48e1418c4bebf3f1ba94cae0eac0fc0cb6aa861dbe4b6fbf0e69a467",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/idle.webp",
+      "sha256": "9f25b28952a461417a384f36e3a61cb508e279ebe300ebf1a008f838969818dd",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/idle.gif",
+      "previewSha256": "357de8e8f061a4e531aac271e6f4fb5e445afb3502785420d97e2fea8e04bd3a"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/move.webp",
+      "sha256": "c96de4f08cf4b4a692e2ea912879902e5fd13eeb8186726776ecefbd37d277ac",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/move.gif",
+      "previewSha256": "f6ae2e065b76c6773fa7d76f014dcb2714a91c744503ff5c3b0b546c2ba62261"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/attack.webp",
+      "sha256": "992f0d8cbb2c6efae683d1467071d2f7fa5fc842ef1f128f74651c6baef9ec22",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/attack.gif",
+      "previewSha256": "f78bedcb07a3aae0dd2215f57c52e482cea0c1a1ecf723b3dd43077818da6c08"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-034-caravan-stalker/death.webp",
+      "sha256": "a27b119e3a45679da423c1f9c28b8ff8faf8923d10ffe32196413683604031e6",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-034-caravan-stalker/death.gif",
+      "previewSha256": "5410aaef5089f0fd004d202222acac7c8411cb03b9ad5268f1307b7cb4f24a95"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        100,
+        252,
+        329,
+        346
+      ],
+      "sourceSize": [
+        229,
+        94
+      ],
+      "foregroundPixels": 5584,
+      "mattePixels": 191552,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3b6df93c2acaf2f83456a71117ed0b740595bcbc4a40b669fb03fff7853a2138",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        346
+      ],
+      "sourceLandmark": [
+        234,
+        291
+      ],
+      "sourceAnchorEvidence": "Idle frame 0 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        134.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.8471615720524,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        43,
+        180,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        96,
+        252,
+        325,
+        346
+      ],
+      "sourceSize": [
+        229,
+        94
+      ],
+      "foregroundPixels": 5585,
+      "mattePixels": 191107,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a6db91395ba43d4d3db03e2f9e60abd67e662fc4d9b4d161f1b073cab849c561",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        346
+      ],
+      "sourceLandmark": [
+        232,
+        290
+      ],
+      "sourceAnchorEvidence": "Idle frame 1 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        136.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        128.11353711790395,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        42,
+        180,
+        187,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        94,
+        252,
+        323,
+        346
+      ],
+      "sourceSize": [
+        229,
+        94
+      ],
+      "foregroundPixels": 5623,
+      "mattePixels": 191069,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c0cdeabbf500291bcb5e6149dffa6c6601e83c0c8a1dfe12a89aa8c1160f9e8f",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        346
+      ],
+      "sourceLandmark": [
+        231,
+        290
+      ],
+      "sourceAnchorEvidence": "Idle frame 2 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.7467248908297,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        41,
+        180,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        92,
+        252,
+        321,
+        346
+      ],
+      "sourceSize": [
+        229,
+        94
+      ],
+      "foregroundPixels": 5555,
+      "mattePixels": 191581,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fccf980fd6682fef4b1db57811c407fef62024e4010139a5ce9f5b293dd6c9d7",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        229,
+        346
+      ],
+      "sourceLandmark": [
+        229,
+        290
+      ],
+      "sourceAnchorEvidence": "Idle frame 3 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.7467248908297,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        41,
+        180,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        100,
+        103,
+        329,
+        195
+      ],
+      "sourceSize": [
+        229,
+        92
+      ],
+      "foregroundPixels": 5574,
+      "mattePixels": 191118,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cf54ba058c3a987876e680c63cfe4809ec1f8aae275b4023bf84e37ad1b19441",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        237,
+        195
+      ],
+      "sourceLandmark": [
+        237,
+        145
+      ],
+      "sourceAnchorEvidence": "Idle frame 4 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        92.0
+      ],
+      "renderedAnchor": [
+        127.7467248908297,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        41,
+        182,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        93,
+        104,
+        325,
+        195
+      ],
+      "sourceSize": [
+        232,
+        91
+      ],
+      "foregroundPixels": 5543,
+      "mattePixels": 190706,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3d37e7669e743f0c9665ce0666bcbdc6740685acbaf9e22ffdc87df4ae803cd6",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        233,
+        195
+      ],
+      "sourceLandmark": [
+        233,
+        145
+      ],
+      "sourceAnchorEvidence": "Idle frame 5 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        140.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        127.70689655172414,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        39,
+        182,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        93,
+        104,
+        323,
+        195
+      ],
+      "sourceSize": [
+        230,
+        91
+      ],
+      "foregroundPixels": 5566,
+      "mattePixels": 190683,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c0e8f6a589317993fee9adde9eecf4c9e7bb06628f67c87a42aeb2714c668d05",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        195
+      ],
+      "sourceLandmark": [
+        231,
+        146
+      ],
+      "sourceAnchorEvidence": "Idle frame 6 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        138.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        127.6,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        40,
+        182,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        88,
+        104,
+        321,
+        195
+      ],
+      "sourceSize": [
+        233,
+        91
+      ],
+      "foregroundPixels": 5508,
+      "mattePixels": 191184,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ddb3e22404762dbe5804ec5b4787d2f51cba2bd660344424a5c25bb3e2c6ed76",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        229,
+        195
+      ],
+      "sourceLandmark": [
+        229,
+        146
+      ],
+      "sourceAnchorEvidence": "Idle frame 7 pelvis and four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        141.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        127.56223175965665,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.633050217,
+      "sourceScale": 1,
+      "appliedScale": 0.633050217,
+      "renderedBounds": [
+        38,
+        182,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        67,
+        217,
+        397,
+        341
+      ],
+      "sourceSize": [
+        330,
+        124
+      ],
+      "foregroundPixels": 11230,
+      "mattePixels": 185906,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6d9af68579ee92922f45c842c7dcbe43a83a23314b18eb514a4c78aa4432bf10",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        259,
+        341
+      ],
+      "sourceLandmark": [
+        259,
+        274
+      ],
+      "sourceAnchorEvidence": "Move frame 0 pelvis and active diagonal support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        192.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        128.1818181818182,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        38,
+        182,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        36,
+        213,
+        366,
+        342
+      ],
+      "sourceSize": [
+        330,
+        129
+      ],
+      "foregroundPixels": 11221,
+      "mattePixels": 185471,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1757d7a1fe647d3e5074900e75d9e7993de7a699cd09f12229bdbf98728eeb54",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        342
+      ],
+      "sourceLandmark": [
+        231,
+        274
+      ],
+      "sourceAnchorEvidence": "Move frame 1 pelvis and compressed support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        195.0,
+        129.0
+      ],
+      "renderedAnchor": [
+        127.5909090909091,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        36,
+        179,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        34,
+        217,
+        387,
+        342
+      ],
+      "sourceSize": [
+        353,
+        125
+      ],
+      "foregroundPixels": 11647,
+      "mattePixels": 185045,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5d0b224a12ac7cf8eda9366a2ef16922ad4996f1df182a6907900c3ab422ed8c",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        241,
+        342
+      ],
+      "sourceLandmark": [
+        241,
+        278
+      ],
+      "sourceAnchorEvidence": "Move frame 2 pelvis and passing support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        207.0,
+        125.0
+      ],
+      "renderedAnchor": [
+        128.34277620396603,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        31,
+        181,
+        197,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        10,
+        216,
+        353,
+        342
+      ],
+      "sourceSize": [
+        343,
+        126
+      ],
+      "foregroundPixels": 11549,
+      "mattePixels": 185587,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "734cb362ce0d23f7b182cee6d6dd6f5f827bba1146b70de2c0e10c3ede8f8289",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        214,
+        342
+      ],
+      "sourceLandmark": [
+        214,
+        274
+      ],
+      "sourceAnchorEvidence": "Move frame 3 pelvis and extended support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        204.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.75510204081633,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        32,
+        181,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        56,
+        124,
+        395,
+        247
+      ],
+      "sourceSize": [
+        339,
+        123
+      ],
+      "foregroundPixels": 11333,
+      "mattePixels": 185359,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ba3bd32907b979091c35f7ca434e412e5dba10a136a6683941fd9087b00f8970",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        259,
+        247
+      ],
+      "sourceLandmark": [
+        259,
+        183
+      ],
+      "sourceAnchorEvidence": "Move frame 4 pelvis and opposite diagonal support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        203.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        128.21238938053096,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        33,
+        182,
+        192,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        31,
+        132,
+        379,
+        255
+      ],
+      "sourceSize": [
+        348,
+        123
+      ],
+      "foregroundPixels": 11111,
+      "mattePixels": 185138,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "086d3243771eab0ed553aca42f679f373a45cf51683e2105ad2f7016a64279f8",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        240,
+        255
+      ],
+      "sourceLandmark": [
+        240,
+        190
+      ],
+      "sourceAnchorEvidence": "Move frame 5 pelvis and compression support inspected on source overlay.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        209.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        127.89367816091954,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        30,
+        182,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        25,
+        129,
+        362,
+        256
+      ],
+      "sourceSize": [
+        337,
+        127
+      ],
+      "foregroundPixels": 10805,
+      "mattePixels": 185444,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1923db5ce9a62dcb18e07107aa0a029273c404a61f794844190c0da358d9a6c2",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        227,
+        256
+      ],
+      "sourceLandmark": [
+        227,
+        187
+      ],
+      "sourceAnchorEvidence": "Move frame 6 pelvis and passing support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        202.0,
+        127.0
+      ],
+      "renderedAnchor": [
+        127.70623145400593,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        33,
+        180,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        13,
+        130,
+        338,
+        255
+      ],
+      "sourceSize": [
+        325,
+        125
+      ],
+      "foregroundPixels": 10739,
+      "mattePixels": 185953,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ed8fce707c22aad620dfb71aec031c0c1fe2abe414427a88607924bc0a0b9715",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        211,
+        255
+      ],
+      "sourceLandmark": [
+        211,
+        188
+      ],
+      "sourceAnchorEvidence": "Move frame 7 pelvis and recovery support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        125.0
+      ],
+      "renderedAnchor": [
+        128.2123076923077,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.633050217,
+      "sourceScale": 0.741314,
+      "appliedScale": 0.469288989,
+      "renderedBounds": [
+        35,
+        181,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        103,
+        219,
+        356,
+        313
+      ],
+      "sourceSize": [
+        253,
+        94
+      ],
+      "foregroundPixels": 6177,
+      "mattePixels": 190959,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f04ef3db1e75fe1b9d3847d4aea6bc5524279abf442f2bba6f691487ea5add26",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        240,
+        313
+      ],
+      "sourceLandmark": [
+        240,
+        264
+      ],
+      "sourceAnchorEvidence": "Attack frame 0 low anticipation pelvis and paw plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        128.1818181818182,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        41,
+        180,
+        202,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        80,
+        242,
+        334,
+        318
+      ],
+      "sourceSize": [
+        254,
+        76
+      ],
+      "foregroundPixels": 6045,
+      "mattePixels": 190647,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0a5a9f17f387418bdb6365323b50e5d39b9753bacca9db2a00ffcab776d12590",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        318
+      ],
+      "sourceLandmark": [
+        226,
+        280
+      ],
+      "sourceAnchorEvidence": "Attack frame 1 compression pelvis and paw plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        146.0,
+        76.0
+      ],
+      "renderedAnchor": [
+        128.11811023622047,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        35,
+        192,
+        197,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        71,
+        198,
+        318,
+        324
+      ],
+      "sourceSize": [
+        247,
+        126
+      ],
+      "foregroundPixels": 6654,
+      "mattePixels": 190038,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "83c99f13e98af89ca7e484502b727b82b820cce0789b6445bd0b1a486e2b135b",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        212,
+        324
+      ],
+      "sourceLandmark": [
+        212,
+        262
+      ],
+      "sourceAnchorEvidence": "Attack frame 2 rising pelvis and hind-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        141.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        128.19433198380568,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        38,
+        160,
+        196,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 14,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        52,
+        184,
+        307,
+        324
+      ],
+      "sourceSize": [
+        255,
+        140
+      ],
+      "foregroundPixels": 6128,
+      "mattePixels": 191008,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "896b62345ce7609e5f388026e9d9202e614eae9d22656ba6fc8369ddb3bc535e",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        324
+      ],
+      "sourceLandmark": [
+        205,
+        252
+      ],
+      "sourceAnchorEvidence": "Attack frame 3 brief rear pelvis and hind-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        153.0,
+        140.0
+      ],
+      "renderedAnchor": [
+        127.8,
+        240.0
+      ],
+      "index": 19,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        30,
+        151,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        99,
+        97,
+        363,
+        244
+      ],
+      "sourceSize": [
+        264,
+        147
+      ],
+      "foregroundPixels": 6205,
+      "mattePixels": 190487,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "254f5eb5098ff404efaae70e0760aac3c43b78a9982ee82c4db337cd88641b4f",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        258,
+        244
+      ],
+      "sourceLandmark": [
+        258,
+        172
+      ],
+      "sourceAnchorEvidence": "Attack frame 4 strike extension pelvis and grounded hind support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        159.0,
+        147.0
+      ],
+      "renderedAnchor": [
+        128.1818181818182,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        27,
+        146,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        76,
+        120,
+        365,
+        242
+      ],
+      "sourceSize": [
+        289,
+        122
+      ],
+      "foregroundPixels": 6272,
+      "mattePixels": 189977,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6a9e3d1770b6e78a6a2beb077267318628b20ca767fdff47ad8c00c73d5074d1",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        250,
+        242
+      ],
+      "sourceLandmark": [
+        250,
+        181
+      ],
+      "sourceAnchorEvidence": "Attack frame 5 descending pelvis and support plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        174.0,
+        122.0
+      ],
+      "renderedAnchor": [
+        127.78200692041523,
+        240.0
+      ],
+      "index": 21,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        17,
+        162,
+        201,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        64,
+        152,
+        309,
+        240
+      ],
+      "sourceSize": [
+        245,
+        88
+      ],
+      "foregroundPixels": 5781,
+      "mattePixels": 190468,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "894e03b05f4ec150c5334b7e054fea591efba9d2a58cd448a240e2d51c54ba45",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        240
+      ],
+      "sourceLandmark": [
+        210,
+        193
+      ],
+      "sourceAnchorEvidence": "Attack frame 6 four-foot recovery pelvis inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        146.0,
+        88.0
+      ],
+      "renderedAnchor": [
+        127.96326530612245,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        35,
+        184,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        61,
+        159,
+        301,
+        242
+      ],
+      "sourceSize": [
+        240,
+        83
+      ],
+      "foregroundPixels": 5398,
+      "mattePixels": 191294,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d66ba556b115f29e47a49a54a19dffa4b24d0931d537592b8e2fc9c93b4175c5",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        242
+      ],
+      "sourceLandmark": [
+        205,
+        198
+      ],
+      "sourceAnchorEvidence": "Attack frame 7 settled four-foot recovery pelvis inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        144.0,
+        83.0
+      ],
+      "renderedAnchor": [
+        127.8,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.633050217,
+      "sourceScale": 1.00771,
+      "appliedScale": 0.637931034,
+      "renderedBounds": [
+        36,
+        187,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        101,
+        259,
+        398,
+        363
+      ],
+      "sourceSize": [
+        297,
+        104
+      ],
+      "foregroundPixels": 8609,
+      "mattePixels": 188527,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f9ba8e889ca5f9d34032f3553b40bd7596df9067bd3a41186408c8a3020564ef",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        260,
+        363
+      ],
+      "sourceLandmark": [
+        260,
+        310
+      ],
+      "sourceAnchorEvidence": "Death frame 0 pelvis and last four-paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        159.0,
+        104.0
+      ],
+      "renderedAnchor": [
+        128.02020202020202,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        52,
+        190,
+        194,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        68,
+        282,
+        357,
+        367
+      ],
+      "sourceSize": [
+        289,
+        85
+      ],
+      "foregroundPixels": 8275,
+      "mattePixels": 188417,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3d99594c8125b504404f085cdc440624b2ecab42ef82af769e69acc9cd4a9362",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        367
+      ],
+      "sourceLandmark": [
+        235,
+        328
+      ],
+      "sourceAnchorEvidence": "Death frame 1 staggering pelvis and remaining paw support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        167.0,
+        85.0
+      ],
+      "renderedAnchor": [
+        127.7439446366782,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        48,
+        199,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        32,
+        297,
+        329,
+        370
+      ],
+      "sourceSize": [
+        297,
+        73
+      ],
+      "foregroundPixels": 8243,
+      "mattePixels": 188449,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "158bb634db6e76cb7c12ddd1ec807977df5dd72e4554d689f31ff4632d7c3d44",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        370
+      ],
+      "sourceLandmark": [
+        210,
+        340
+      ],
+      "sourceAnchorEvidence": "Death frame 2 collapsing pelvis and body support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        178.0,
+        73.0
+      ],
+      "renderedAnchor": [
+        128.1043771043771,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        43,
+        205,
+        185,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        16,
+        312,
+        312,
+        371
+      ],
+      "sourceSize": [
+        296,
+        59
+      ],
+      "foregroundPixels": 6734,
+      "mattePixels": 190402,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "489a1a7640a84a39c706e5c576fdf91e9e215a7fec83ec0cc27f52aad319ca3e",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        190,
+        371
+      ],
+      "sourceLandmark": [
+        190,
+        346
+      ],
+      "sourceAnchorEvidence": "Death frame 3 prone transition pelvis and body support inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        174.0,
+        59.0
+      ],
+      "renderedAnchor": [
+        127.88513513513513,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        45,
+        212,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        97,
+        179,
+        394,
+        241
+      ],
+      "sourceSize": [
+        297,
+        62
+      ],
+      "foregroundPixels": 6929,
+      "mattePixels": 189763,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1fe86e63f2e1f3d34134c6bd7b24fe6582dbbcea494383732560ad0e7563a18f",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        245,
+        241
+      ],
+      "sourceLandmark": [
+        245,
+        214
+      ],
+      "sourceAnchorEvidence": "Death frame 4 prone pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        148.0,
+        62.0
+      ],
+      "renderedAnchor": [
+        127.76094276094275,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        57,
+        210,
+        199,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        67,
+        184,
+        363,
+        242
+      ],
+      "sourceSize": [
+        296,
+        58
+      ],
+      "foregroundPixels": 6932,
+      "mattePixels": 189317,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "028016b5558e99a20e45c0a2f68cc13bfb8362c5bdf0279d8f0ad1a2c236cb67",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        225,
+        242
+      ],
+      "sourceLandmark": [
+        225,
+        216
+      ],
+      "sourceAnchorEvidence": "Death frame 5 settling pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        158.0,
+        58.0
+      ],
+      "renderedAnchor": [
+        128.26351351351352,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        53,
+        212,
+        194,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        23,
+        193,
+        335,
+        244
+      ],
+      "sourceSize": [
+        312,
+        51
+      ],
+      "foregroundPixels": 6349,
+      "mattePixels": 189900,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "617c240946921a99ca23b9a09a198b4f4adf94d66e48f68f161b0fea2f087086",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        244
+      ],
+      "sourceLandmark": [
+        210,
+        221
+      ],
+      "sourceAnchorEvidence": "Death frame 6 settled pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        187.0,
+        51.0
+      ],
+      "renderedAnchor": [
+        128.30448717948718,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        39,
+        216,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        13,
+        197,
+        322,
+        244
+      ],
+      "sourceSize": [
+        309,
+        47
+      ],
+      "foregroundPixels": 6113,
+      "mattePixels": 190579,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bd6b9982897452fadc888fcf62f9b34a219cd1bddcc651f9cde1e904357f151d",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        195,
+        244
+      ],
+      "sourceLandmark": [
+        195,
+        223
+      ],
+      "sourceAnchorEvidence": "Death frame 7 final pelvis and body contact plane inspected on source overlay; anchor includes the complete-source extraction guard.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        182.0,
+        47.0
+      ],
+      "renderedAnchor": [
+        128.1715210355987,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.633050217,
+      "sourceScale": 0.754297,
+      "appliedScale": 0.47750788,
+      "renderedBounds": [
+        41,
+        218,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          44,
+          181,
+          187,
+          239
+        ],
+        "foregroundPixels": 2564,
+        "width": 143,
+        "height": 58,
+        "relativeToRowMedian": 0.996115
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          43,
+          181,
+          186,
+          239
+        ],
+        "foregroundPixels": 2570,
+        "width": 143,
+        "height": 58,
+        "relativeToRowMedian": 0.998446
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          42,
+          181,
+          185,
+          239
+        ],
+        "foregroundPixels": 2611,
+        "width": 143,
+        "height": 58,
+        "relativeToRowMedian": 1.014375
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          42,
+          181,
+          185,
+          239
+        ],
+        "foregroundPixels": 2578,
+        "width": 143,
+        "height": 58,
+        "relativeToRowMedian": 1.001554
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          42,
+          183,
+          185,
+          239
+        ],
+        "foregroundPixels": 2527,
+        "width": 143,
+        "height": 56,
+        "relativeToRowMedian": 0.987302
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          40,
+          183,
+          185,
+          239
+        ],
+        "foregroundPixels": 2570,
+        "width": 145,
+        "height": 56,
+        "relativeToRowMedian": 1.004102
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          42,
+          183,
+          185,
+          239
+        ],
+        "foregroundPixels": 2570,
+        "width": 143,
+        "height": 56,
+        "relativeToRowMedian": 1.004102
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          39,
+          183,
+          185,
+          239
+        ],
+        "foregroundPixels": 2549,
+        "width": 146,
+        "height": 56,
+        "relativeToRowMedian": 0.995898
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          39,
+          183,
+          192,
+          239
+        ],
+        "foregroundPixels": 2817,
+        "width": 153,
+        "height": 56,
+        "relativeToRowMedian": 0.98256
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          37,
+          180,
+          190,
+          239
+        ],
+        "foregroundPixels": 2824,
+        "width": 153,
+        "height": 59,
+        "relativeToRowMedian": 0.985002
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          32,
+          182,
+          196,
+          239
+        ],
+        "foregroundPixels": 2955,
+        "width": 164,
+        "height": 57,
+        "relativeToRowMedian": 1.030694
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          33,
+          182,
+          192,
+          239
+        ],
+        "foregroundPixels": 2910,
+        "width": 159,
+        "height": 57,
+        "relativeToRowMedian": 1.014998
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          34,
+          183,
+          191,
+          239
+        ],
+        "foregroundPixels": 2852,
+        "width": 157,
+        "height": 56,
+        "relativeToRowMedian": 1.027933
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          31,
+          183,
+          192,
+          239
+        ],
+        "foregroundPixels": 2809,
+        "width": 161,
+        "height": 56,
+        "relativeToRowMedian": 1.012435
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          34,
+          181,
+          190,
+          239
+        ],
+        "foregroundPixels": 2740,
+        "width": 156,
+        "height": 58,
+        "relativeToRowMedian": 0.987565
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          36,
+          182,
+          187,
+          239
+        ],
+        "foregroundPixels": 2715,
+        "width": 151,
+        "height": 57,
+        "relativeToRowMedian": 0.978555
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          42,
+          181,
+          201,
+          239
+        ],
+        "foregroundPixels": 2862,
+        "width": 159,
+        "height": 58,
+        "relativeToRowMedian": 1.0
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          36,
+          193,
+          196,
+          238
+        ],
+        "foregroundPixels": 2742,
+        "width": 160,
+        "height": 45,
+        "relativeToRowMedian": 0.958071
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          39,
+          161,
+          195,
+          239
+        ],
+        "foregroundPixels": 3062,
+        "width": 156,
+        "height": 78,
+        "relativeToRowMedian": 1.069881
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          31,
+          152,
+          192,
+          239
+        ],
+        "foregroundPixels": 2862,
+        "width": 161,
+        "height": 87,
+        "relativeToRowMedian": 1.0
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          28,
+          147,
+          194,
+          239
+        ],
+        "foregroundPixels": 2894,
+        "width": 166,
+        "height": 92,
+        "relativeToRowMedian": 1.03802
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          18,
+          163,
+          200,
+          239
+        ],
+        "foregroundPixels": 2915,
+        "width": 182,
+        "height": 76,
+        "relativeToRowMedian": 1.045552
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          36,
+          185,
+          190,
+          239
+        ],
+        "foregroundPixels": 2682,
+        "width": 154,
+        "height": 54,
+        "relativeToRowMedian": 0.96198
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          38,
+          188,
+          188,
+          239
+        ],
+        "foregroundPixels": 2525,
+        "width": 150,
+        "height": 51,
+        "relativeToRowMedian": 0.905667
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          53,
+          191,
+          193,
+          239
+        ],
+        "foregroundPixels": 2273,
+        "width": 140,
+        "height": 48,
+        "relativeToRowMedian": 1.042661
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          49,
+          200,
+          185,
+          239
+        ],
+        "foregroundPixels": 2200,
+        "width": 136,
+        "height": 39,
+        "relativeToRowMedian": 1.009174
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          44,
+          206,
+          184,
+          239
+        ],
+        "foregroundPixels": 2160,
+        "width": 140,
+        "height": 33,
+        "relativeToRowMedian": 0.990826
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          46,
+          213,
+          185,
+          239
+        ],
+        "foregroundPixels": 1750,
+        "width": 139,
+        "height": 26,
+        "relativeToRowMedian": 0.802752
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          58,
+          211,
+          198,
+          239
+        ],
+        "foregroundPixels": 1830,
+        "width": 140,
+        "height": 28,
+        "relativeToRowMedian": 1.069863
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          54,
+          213,
+          193,
+          239
+        ],
+        "foregroundPixels": 1811,
+        "width": 139,
+        "height": 26,
+        "relativeToRowMedian": 1.058755
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          40,
+          217,
+          187,
+          239
+        ],
+        "foregroundPixels": 1610,
+        "width": 147,
+        "height": 22,
+        "relativeToRowMedian": 0.941245
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          42,
+          219,
+          188,
+          239
+        ],
+        "foregroundPixels": 1560,
+        "width": 146,
+        "height": 20,
+        "relativeToRowMedian": 0.912014
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      2574.0,
+      2559.5,
+      2867.0,
+      2774.5,
+      2862.0,
+      2788.0,
+      2180.0,
+      1710.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "e8e7c6838b468a9cf6795e847eee46cbe7084fb2c34e45daab17a91cd3c257ee",
+      "cbdc8da03a5b9e4f64353c261b2ce9dbd93e9bd7a5c0b77a926b9adb01058ad6",
+      "47bd30313f3a675bf1bfb68d82bac910f0a6029f0d72d498ef379882df5bee5c",
+      "6ba49526a37745a41c8e525b3550fbae09c9d959f387744b7d1bacc33baee5af",
+      "be63ab139e666e34eb171adc232e150a3f418ba0782ddbda7ee2e745886fb3bc",
+      "ceb3cbe16ca40699d36c7497ce515d3025b3b8e031a4dda95458f7754332176b",
+      "33c6fd4e249e2cfb5f34fd9959ea4df96f1d880c38ea763143c01fa51806c829",
+      "cada406ce5860fbc20e8976fa3dd4f1d049a5ecc6ee80837e877d4b074b074a9",
+      "934a620d296c0df8fa004b58e9f42102277e83916987d4a031f397d2bd66f48d",
+      "19b894d9d44c246010ef65288ecb993cc486d46e6130136bc0a93827cab99f49",
+      "06ca39c0418ec3fe17116194035f6f68748eb6e329e03deffc5e7b479e989ee4",
+      "4b56de3698f993013844fc2be664897eeb9c15a3a32a2904f8bd46a1ec1e83d1",
+      "063e6d37c0e5d8ed479887369ea80c7bba7416f8be13d8509272d3b71967f9bc",
+      "06e1a0b02d0b2a392efd55cb579b25c6990ce93ca89bbb0fd53baad3cbc730a7",
+      "dc4d53f81a9b48b03ae8c14516552193cfdb521860f6f0f23d1f96c009a7f26e",
+      "da20d1919495b41a2d620edddb66c667b1e877c0e053e30c088770de0de24ee1",
+      "3f46a5c49e33ee7b9cecfc8009626fa5d030b890fd211dcc5dd5d562f052a793",
+      "dc8a4ce1bbab558bf5cc6307bbafd6943e2d36fb79c87fb1d8d02da26b35d5be",
+      "aa10d36a8234959a155f380cf8d77a2dd265998a1c19719701c1c21085a52962",
+      "116c1765bfd824d900d160c8d0203dc8b195bac2bcefae3e4819b145d93b40e0",
+      "f9f215e6f3afd6962e293464348d4470197df710a83bd097a9e7f1d5b1e80eef",
+      "ec80fb5877e5587ab706f1e957afee22204d3ad2b740e21654e012b7429cc17e",
+      "a45a5d2257bf9262904ed5c82945a25c8fa12cc59a74d2c58b8a81f279931598",
+      "9cc25e581890db0aeaf49ab111a554b9d0066c33947afd32c1e7a62af642099b",
+      "2138bff9900953c617c14a68d31729bc0bc997c7e0bf0e0be0f5ee9fcbc1fa52",
+      "8d5bb0a88958df6e55a65a593896013fd403778604672baa3264c8c043e979f6",
+      "790f59d2462327d1bcff115f81c5365dbe5eb1058016b90068426688b368942f",
+      "19b3055fb24b0b64afe5cbfb5c150b8d45f32d77ad33acf3c67199a3b35a5b81",
+      "40fbb01dfa269d84754d2cd23824b63ef9c44faba909fdea7e4aadb1655a6fb3",
+      "37699fc4806347da0cd42f637e559182962c95f61f8ac5df2aa5dffbc29cef75",
+      "91124b15627cb610b6603c75054333a994fb4959a456befa286f526b07aeabbf",
+      "462baf43aea048283f7bad9055e6c89ccbb01c0102fe840e09550273d4fe1e80"
+    ],
+    "visualFidelityCertified": false
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 85,
+    "remainingStrictPixelCount": 0
+  }
+}

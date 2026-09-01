@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "profileId": "enemy-031-dust-runner",
+  "batchId": "batch-003",
+  "reviewedAt": "2026-09-01",
+  "reviewer": "Codex /root/complete_variants",
+  "auditOnly": true,
+  "sourcePixelsModifiedByAudit": 0,
+  "acceptedAutomatically": 0,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "classification": "PROJECT_ADAPTATION",
+  "summary": {
+    "selectedBoards": 4,
+    "selectedPoses": 32,
+    "exactAspect2To1": 4,
+    "opaqueMagentaBoards": 4,
+    "strictExtractionPassBoards": 4,
+    "strictExtractedFrames": 32,
+    "distinctExtractedPoseHashes": 32,
+    "currentClipsRequiringRegeneration": [],
+    "preservedRejectedBoards": 2
+  },
+  "sources": [
+    {
+      "clip": "idle",
+      "revision": "selected saved generation",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/idle.png",
+      "sha256": "1f4bf952f5babf39d6201fe2d51053afbc062de343eb6b530c2a2f879b206875",
+      "bytes": 1300812,
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matte": {"kind": "opaque-magenta", "strictMagentaRatio": 0.903903, "edgeMagentaRatio": 0.999248, "exactPureFF00FFPixelCount": 0},
+      "nominalCellHashesDistinct": 8,
+      "defaultExtraction": {"status": "pass", "frames": 8, "distinctPoseHashes": 8},
+      "cellForegroundBoundsHeuristic": [[45,210,408,356],[47,213,391,356],[23,213,381,357],[26,227,385,355],[0,104,396,443],[23,124,387,254],[27,120,380,253],[48,111,444,443]],
+      "heuristicBorderClueFrames": [4,7],
+      "borderClueInterpretation": "edge-color heuristic only; the authoritative border-connected normalizer extracted 8/8 without safe reassignment",
+      "visualReview": {"rightFacing": true, "quadrupedal": true, "smoothSkull": true, "dorsalTubesAbsent": true, "fullTailVisible": true, "chronology": "subtle grounded breathing/alert candidate arc", "identityStatus": "pass-candidate-review"},
+      "regenerationRequired": false
+    },
+    {
+      "clip": "move",
+      "revision": "r2 selected; r1 preserved rejected",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/move.png",
+      "sha256": "6561378231f7fa89372221922135544be5eec8728d90508c4b1b7a4c4206a664",
+      "bytes": 1170418,
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matte": {"kind": "opaque-magenta", "strictMagentaRatio": 0.952961, "edgeMagentaRatio": 1.0, "exactPureFF00FFPixelCount": 0},
+      "nominalCellHashesDistinct": 8,
+      "defaultExtraction": {"status": "pass", "frames": 8, "distinctPoseHashes": 8},
+      "cellForegroundBoundsHeuristic": [[91,163,330,287],[89,177,361,287],[70,203,341,288],[50,208,320,288],[71,170,375,274],[60,180,370,270],[68,189,336,276],[76,162,314,276]],
+      "heuristicBorderClueFrames": [],
+      "visualReview": {"rightFacing": true, "quadrupedal": true, "smoothSkull": true, "dorsalTubesAbsent": true, "fullTailVisible": true, "chronology": "eight gathered/reach/impact/compression/propulsion/airborne/impact/recovery phases", "identityStatus": "pass-candidate-review"},
+      "regenerationRequired": false
+    },
+    {
+      "clip": "attack",
+      "revision": "r2 selected; r1 preserved rejected",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/attack.png",
+      "sha256": "7d71c3cfa883a7efbe03770c2754d2343db09817eca4762e7d04c8ca89e69ad5",
+      "bytes": 1236317,
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matte": {"kind": "opaque-magenta", "strictMagentaRatio": 0.945299, "edgeMagentaRatio": 1.0, "exactPureFF00FFPixelCount": 0},
+      "nominalCellHashesDistinct": 8,
+      "defaultExtraction": {"status": "pass", "frames": 8, "distinctPoseHashes": 8},
+      "cellForegroundBoundsHeuristic": [[77,192,323,327],[69,192,311,327],[73,172,301,326],[30,227,359,318],[45,151,376,256],[67,147,341,261],[32,172,317,263],[57,134,302,264]],
+      "heuristicBorderClueFrames": [],
+      "visualReview": {"rightFacing": true, "quadrupedal": true, "smoothSkull": true, "dorsalTubesAbsent": true, "fullTailVisible": true, "chronology": "eight anticipation/open/coil/pounce/bite/follow-through/landing/recovery phases", "identityStatus": "pass-candidate-review"},
+      "regenerationRequired": false
+    },
+    {
+      "clip": "death",
+      "revision": "selected saved generation",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/death.png",
+      "sha256": "490d141acdf1e2a3e4fd04134c996d6292befd9ff1be16988abba1053dc168ce",
+      "bytes": 1265322,
+      "size": [1774, 887],
+      "mode": "RGB",
+      "matte": {"kind": "opaque-magenta", "strictMagentaRatio": 0.921905, "edgeMagentaRatio": 1.0, "exactPureFF00FFPixelCount": 1},
+      "nominalCellHashesDistinct": 8,
+      "defaultExtraction": {"status": "pass", "frames": 8, "distinctPoseHashes": 8},
+      "cellForegroundBoundsHeuristic": [[68,168,365,385],[48,176,361,385],[53,230,386,385],[35,250,366,386],[32,195,398,279],[54,69,391,281],[20,212,407,282],[6,231,404,282]],
+      "heuristicBorderClueFrames": [],
+      "visualReview": {"rightFacing": true, "quadrupedal": true, "smoothSkull": true, "dorsalTubesAbsent": true, "fullTailVisible": true, "chronology": "irreversible standing/stumble/buckle/fall/roll/tail-settle/prone/terminal progression", "identityStatus": "pass-candidate-review"},
+      "regenerationRequired": false
+    }
+  ],
+  "rejected": [
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/move-r1-cross-cell.png",
+      "sha256": "dfc12e86a240561864352bfb492c72902afa535d8767578688a059fd43d7aae8",
+      "reason": "strict extraction blocked at nominal vertical boundaries; safe reassignment passed but did not satisfy the authored-gutter contract"
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-031-dust-runner/rejected/attack-r1-cross-cell.png",
+      "sha256": "9e7f4f1b912b396087c8064fa61b6aebec25223dfe665441001a07a86b4cf9ae",
+      "reason": "strict extraction blocked across pounce/contact cell boundaries; safe reassignment passed but did not satisfy the authored-gutter contract"
+    }
+  ],
+  "scaleAndRootStatus": {
+    "status": "reviewed-candidates-not-applied",
+    "reviewPath": "docs/references/V66_WORKLOT_001_DUST_RUNNER_SCALE_ROOT_REVIEW.json",
+    "reviewSha256": "35865981ac7d3a85c03e39af6d75df911fb3db6891b167884ef282892ce2316e",
+    "measurementInvariant": "rigid dorsal cranial-dome chord, never a whole-body bounding box",
+    "medianLengthPxByClip": {
+      "idle": 102.4597,
+      "move": 68.0074,
+      "attack": 60.8358,
+      "death": 97.4064
+    },
+    "sourceScaleByClipRecommended": {
+      "idle": 1.0,
+      "move": 1.506596,
+      "attack": 1.684201,
+      "death": 1.051879
+    },
+    "physicalAnchorReview": "32 of 32 poses manually measured from the pelvis landmark to observed or explicitly projected support planes; every anchor covers the complete extracted source lower bound and guard pixel",
+    "supportCoverageValidation": {
+      "rule": "sourceBounds[3] - anchorY <= 0",
+      "status": "pass-32-of-32",
+      "maximumDifferencePx": 0,
+      "minimumDifferencePx": -23,
+      "correctedPose": "idle frame 7: sourceBounds[3]=255, anchorY=255"
+    },
+    "mergeCompatibleAnchorFragment": {
+      "path": "docs/references/V66_WORKLOT_001_DUST_RUNNER_ANCHORS.json",
+      "sha256": "6f42ca1cf8d00587aa497772f63cca138e7e6698119d2a46b42fc741cf0ee6d0",
+      "status": "validated-locally-not-merged"
+    },
+    "borderOwnershipReview": {
+      "idleFrames": [4,7],
+      "status": "reviewed-background-clues-not-anatomy",
+      "findingRetained": "nominal-cell-border-contact-needs-ownership-review",
+      "defaultExtraction": "pass-8-of-8-without-safe-reassignment",
+      "evidencePath": "docs/references/v66-worklot-001-dust-runner-scale-root-review/idle-border-ownership.jpg",
+      "note": "Each flagged corner contains one bright magenta matte pixel with G=61, just outside the conservative G<=60 heuristic. Actual extracted anatomy remains at least 39 px from frame 4 borders and 47 px from frame 7 borders."
+    },
+    "regenerationRequired": false,
+    "appliedToNormalizer": false,
+    "appliedToAtlas": false,
+    "appliedToRuntime": false
+  },
+  "limitations": [
+    "The selected boards are mechanically extractable candidates, not accepted atlases and not runtime assets.",
+    "All four backgrounds are strongly magenta and normalizer-compatible, but none is a pixel-uniform #FF00FF matte. No source pixels were recolored in this task.",
+    "Rigid-landmark scale and physical-root measurements now exist as reviewed candidates, but neither has been applied; loop seams and normalized atlas playback remain separate review gates.",
+    "No official Alien 3 or NECA bitmap was copied; those sources only informed the adaptation lock."
+  ]
+}

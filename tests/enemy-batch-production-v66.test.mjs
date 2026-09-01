@@ -237,6 +237,15 @@ test('explicit family contracts ignore cyclic behavior and preserve creature-spe
   assert.throws(() => normalizeEnemyIdentity({ id: 'enemy-999-unknown', name: 'Unknown' }), /explicit review/);
 });
 
+test('Caravan Stalker keeps quadruped locomotion and only rears during its dedicated strike', () => {
+  const job = buildEnemyBatchQueue().jobs.find((entry) => entry.profileId === 'enemy-034-caravan-stalker');
+  assert.equal(job.animationFamily, 'quadruped');
+  assert.match(job.clips.find((clip) => clip.id === 'move').motion, /Low four-legged running cycle/);
+  assert.match(job.clips.find((clip) => clip.id === 'attack').motion, /briefly rears on its hind legs/);
+  assert.match(job.clips.find((clip) => clip.id === 'attack').motion, /returns to four-foot recovery/);
+  assert.doesNotMatch(job.clips.find((clip) => clip.id === 'attack').motion, /Bipedal claw/);
+});
+
 test('Praetorian and Xenoborg overrides preserve their own anatomy, armament and clip identities', () => {
   const queue = buildEnemyBatchQueue();
   for (const job of queue.jobs.filter((entry) => entry.archetype === 'Praetorian')) {
