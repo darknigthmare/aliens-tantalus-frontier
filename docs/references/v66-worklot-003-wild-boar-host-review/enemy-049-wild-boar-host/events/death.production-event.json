@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-049-wild-boar-host",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+  "actor": "Codex /root/complete_variants",
+  "actualGenerationPromptAvailable": true,
+  "actualPromptText": "Use case: stylized-concept\nAsset type: raw production game sprite-sheet capture for Aliens: Tantalus Frontier\nPrimary request: Regenerate from scratch ONE entirely new original fan-made/project bitmap sprite sheet for enemy-049-wild-boar-host, animation DEATH. PROJECT_ADAPTATION, canonExact=false, no licensed model sheet and no 1:1 claim.\nReference policy: no image input. Invent fresh pixels and poses; never trace, extract, reproduce or copy any existing sprite, licensed frame, toy, model sheet or official artwork.\nBackdrop: one flat solid pure chroma magenta RGB(255,0,255), #FF00FF, across the entire canvas and every gap; no transparency, gradient, tonal variation, texture, floor, horizon, scenery or shadow.\nIdentity: the same living natural adult wild boar in all eight poses: compact low body, heavy forequarters, short neck, elongated wedge snout, one natural head/jaw, one lateral eye, exactly two dirty-ivory tusks, two small ears, exactly four short powerful mammalian legs, cloven hooves, short non-weapon tail and continuous coarse dorsal bristles. Earthy near-black/umber organic fur, gray-brown bristles, restrained warm snout/ear flesh, minor mud/scar wear, no equipment. Original project art only.\nExact sheet: exactly 4 columns by 2 rows and exactly eight individually authored chronological poses in strict row-major order, one boar per conceptual cell, no ninth pose, no borders or grid lines. IMPORTANT CORRECTION: render every boar at only about 65 percent of its cell width and height so every fall and terminal pose stays enclosed. Reserve at least 12 percent of every cell as empty magenta padding on its LEFT and RIGHT and at least 10 percent on TOP and BOTTOM. No tail, hoof, bristle or snout may touch or cross any vertical quarter division, the horizontal half division or the canvas edge. Large obvious gutters must separate all eight silhouettes.\nView and consistency: complete whole body visible; strict fixed orthographic gameplay side camera with the boar oriented RIGHT throughout, snout remains right during the fall, no camera rotation, no three-quarter camera and no perspective change. Identical body length, anatomy, palette and detail; only pose envelope changes. Animate in place. No attacker, projectile, FX, blood or gore.\nMotion: eight irreversible non-looping phases: 1 lethal impact reaction; 2 front support buckles; 3 forward/down momentum; 4 shoulder fall; 5 controlled flank roll while head remains right; 6 four limbs settle naturally; 7 residual motion fades; 8 anatomically intact terminal motionless body on its flank. Do not roll belly-up toward the camera. No recovery, duplicate or interpolation.\nContinuity: Alien 3 animal-host continuity and the similarly named Kenner toy are exclusion/context guardrails only. This is a living natural boar host, not offspring or a canonical published creature design.\nAvoid: xenomorph/biomechanical cues, dome, inner jaw, dorsal tubes, acid, slime, blade tail, armor, harness, saddle, fantasy anatomy, olive bony Kenner phenotype, pink domestic pig, humanoid pose, left/front-facing head, belly-up camera-facing body, extra/missing limbs or tusks, resurrection, duplicate, silhouette drift, cell-boundary contact, text, symbols, motion marks, UI, logo, watermark, checkerboard or scenery.\n",
+  "actualPromptPath": "docs/references/v66-worklot-003-prompts/enemy-049-wild-boar-host/death-r2.txt",
+  "actualPromptFileSha256": "2d8e0bf800fad18b977f912fe6140b67f216ef6ae3d043cec62b565dbee49ead",
+  "actualPromptSha256": "dadcfdc98c3f1305daa6ea4c39b2a8db7437f3cbd25bb7f2847e9211d3b73a3b",
+  "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/death-queue-current.txt",
+  "currentQueuePromptFileBytesSha256": "ed1dd44f6443772771c89e4be82a57ae3a24db052d7da481bcfda626f4088b22",
+  "promptSha256": "dadcfdc98c3f1305daa6ea4c39b2a8db7437f3cbd25bb7f2847e9211d3b73a3b",
+  "contractPromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+  "queuePromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+  "computedJsonStringifyPromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+  "queueContractHashMatches": true,
+  "actualPromptMatchesQueueContract": false,
+  "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-003 prompt directory. The current queue snapshot remains separate contract provenance.",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+  "sourceSha256": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27",
+  "sourceBytes": 515101,
+  "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+  "referenceEvidencePath": "docs/references/V66_WORKLOT_003_WILD_BOAR_HOST_REFERENCE.json",
+  "referenceEvidenceSha256": "1ae26c878c4ddd1bd6448552c56803ad577fb4daafc649a605575da3e2c7cea3",
+  "rawCapture": {
+    "path": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/death-r2-imagegen.png",
+    "sha256": "6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+    "bytes": 1580744,
+    "pixelEdits": 0,
+    "embeddedPromptMetadata": false
+  },
+  "sourceRepairs": [
+    {
+      "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+      "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+      "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/death-r2-imagegen.png",
+      "inputSha256": "6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+      "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/derived/death-r2-rigid-calibrated-recomposed.png",
+      "outputSha256": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27",
+      "uniformClipScale": 1.023303548,
+      "nonUniformAnatomyStretch": false,
+      "receiptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json",
+      "receiptSha256": "e00425b5d36b590c7409c0f3d7096b3eddaed22b63631b4a8f2dd5dfca803af1",
+      "derivedProvenancePath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/derived-provenance.json",
+      "derivedProvenanceSha256": "68466b1778d5290e864421940d820f40e5fc3a8867601593f805aed8eebde5e6"
+    },
+    {
+      "kind": "deterministic-foreground-edge-magenta-despill",
+      "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+      "spillThreshold": {
+        "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+        "strictColourThreshold": {
+          "redExclusiveMin": 160,
+          "blueExclusiveMin": 160,
+          "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+        },
+        "residualMatteHueThreshold": {
+          "foregroundBorderDepthPx": 3,
+          "redAndBlueInclusiveMin": 70,
+          "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+          "absoluteRedMinusBlueInclusiveMax": 45,
+          "purpose": "remove only edge pixels retaining matte-like R/B parity; russet/brown with low blue is excluded"
+        },
+        "deliveryVioletMatteThreshold": {
+          "scope": "all pre-existing foreground pixels in one nominal target cell",
+          "redExclusiveMin": 90,
+          "blueExclusiveMin": 70,
+          "redMinusGreenExclusiveMin": 35,
+          "blueMinusGreenExclusiveMin": 25,
+          "absoluteRedMinusBlueExclusiveMax": 80,
+          "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+        },
+        "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+        "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+        "foregroundBorderDepthPx": 8,
+        "maximumLocalReferenceRadiusPx": 12,
+        "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+        "invariants": [
+          "only pre-existing declared spill foreground pixels may change RGB",
+          "foreground/background membership must remain byte-identical",
+          "all exact #FF00FF background pixels must remain byte-identical",
+          "declared spill pixels after correction must equal zero"
+        ]
+      },
+      "spillPixelsBefore": 19787,
+      "modifiedPixels": 19787,
+      "spillPixelsAfter": 0,
+      "foregroundMasksUnchanged": true,
+      "changedBackgroundPixels": 0,
+      "perPoseModifiedPixels": [
+        {
+          "frame": 0,
+          "modifiedPixels": 3568,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 1,
+          "modifiedPixels": 3168,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 2,
+          "modifiedPixels": 2997,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 3,
+          "modifiedPixels": 2425,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 4,
+          "modifiedPixels": 2223,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 5,
+          "modifiedPixels": 2019,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 6,
+          "modifiedPixels": 1730,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        },
+        {
+          "frame": 7,
+          "modifiedPixels": 1657,
+          "spillPixelsAfter": 0,
+          "foregroundMaskUnchanged": true
+        }
+      ]
+    }
+  ],
+  "generationAttempts": null,
+  "generationTimestamp": null,
+  "reviewedAt": "2026-09-01",
+  "qa": {
+    "size": [
+      1774,
+      887
+    ],
+    "grid": [
+      4,
+      2
+    ],
+    "poseCount": 8,
+    "facing": "right-manually-reviewed",
+    "cellBoundaryContacts": 0,
+    "minimumClearancePx": 38,
+    "uniformOpaqueExactMagenta": true,
+    "uniformClipScale": 1.023303548,
+    "despillModifiedPixels": 19787,
+    "despillResidualPixels": 0,
+    "despillForegroundMasksUnchanged": true,
+    "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+    "attackQualification": null
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write."
+}

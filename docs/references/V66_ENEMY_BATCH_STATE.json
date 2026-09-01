@@ -7122,6 +7122,718 @@
       "canonExact": false,
       "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
       "at": "2026-09-01T07:36:47.899Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-049-wild-boar-host",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:f11eca6f158621e82efe2e06da818c55d0afb366baf5a47f6d14287eb20969c6",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/complete_variants",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production game sprite-sheet capture for Aliens: Tantalus Frontier\nPrimary request: Regenerate from scratch ONE entirely new original fan-made/project bitmap sprite sheet for enemy-049-wild-boar-host, animation IDLE. PROJECT_ADAPTATION, canonExact=false, no licensed model sheet and no 1:1 claim.\nReference policy: no image input. Invent fresh pixels and poses; never trace, extract, reproduce or copy any existing sprite, licensed frame, toy, model sheet or official artwork.\nBackdrop: one flat solid pure chroma magenta RGB(255,0,255), #FF00FF, across the entire canvas and every gap; no transparency, gradient, tonal variation, texture, floor, horizon, scenery or shadow.\nIdentity: the same living natural adult wild boar in all eight poses: compact low body, heavy forequarters, short neck, elongated wedge snout, one natural head/jaw, one lateral eye, exactly two dirty-ivory tusks, two small ears, exactly four short powerful mammalian legs, cloven hooves, short non-weapon tail and continuous coarse dorsal bristles. Earthy near-black/umber organic fur, gray-brown bristles, restrained warm snout/ear flesh, minor mud/scar wear, no equipment. Original project art only.\nExact sheet: exactly 4 columns by 2 rows and exactly eight individually authored chronological poses in strict row-major order, one boar per conceptual cell, no ninth pose, no borders or grid lines. Render every boar at about 70 percent of its cell width and keep that exact physical scale in all eight poses. Reserve at least 12 percent of every cell as empty magenta padding on LEFT and RIGHT and at least 10 percent on TOP and BOTTOM. No tail, hoof, bristle or snout may touch or cross any vertical quarter division, the horizontal half division or the canvas edge. Large obvious gutters separate all silhouettes.\nView and consistency: complete whole body visible; strict orthographic gameplay side view facing RIGHT in all cells, snout/tusks right, no camera rotation or perspective change. Identical body length, shoulder height, anatomy, palette, detail and hoof ground line. Animate in place with no translation.\nMotion: eight distinct grounded phases: 1 low alert settle; 2 gentle inhale; 3 subtle ear flick expressed only by the ear changing position, with absolutely no drawn motion line; 4 guarded sniff without stepping; 5 alert hold; 6 exhale; 7 ease toward start; 8 seamless near-neutral recovery. No duplicate or interpolation.\nContinuity: Alien 3 animal-host continuity and the similarly named Kenner toy are exclusion/context guardrails only. This is a living natural boar host, not offspring or a canonical published creature design.\nAvoid: xenomorph/biomechanical cues, dome, inner jaw, dorsal tubes, acid, slime, blade tail, armor, harness, saddle, fantasy anatomy, olive bony Kenner phenotype, pink domestic pig, humanoid pose, left/front-facing head, extra/missing limbs or tusks, duplicate, silhouette drift, cell-boundary contact, any text, symbol, action line, motion mark, accent stroke, UI, logo, watermark, checkerboard or scenery.\n",
+      "actualPromptPath": "docs/references/v66-worklot-003-prompts/enemy-049-wild-boar-host/idle-r3.txt",
+      "actualPromptFileSha256": "917b3f46ce5088ee17563268ce8c8f141af1625aa5711a176028a2a22db78f85",
+      "actualPromptSha256": "9ba7b8c0f70853b887ac1972b88ce52da9c0670e4ab8e54bed32ddb4711f4138",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/idle-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "a7b20e8d380cb31e676f5348ae5757fd7f26d3752f9ae65f9a292e2e627f97f5",
+      "promptSha256": "9ba7b8c0f70853b887ac1972b88ce52da9c0670e4ab8e54bed32ddb4711f4138",
+      "contractPromptSha256": "8af8ac9d3ab2406e1ea5106958e00318012f1b5ce9e686173b2df9097d982280",
+      "queuePromptSha256": "8af8ac9d3ab2406e1ea5106958e00318012f1b5ce9e686173b2df9097d982280",
+      "computedJsonStringifyPromptSha256": "8af8ac9d3ab2406e1ea5106958e00318012f1b5ce9e686173b2df9097d982280",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-003 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/idle.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/idle.png",
+      "sourceSha256": "40af647b8f28afb8f872cff0235da56afb7eca453d88f7cfb59b0abf1aae6270",
+      "sourceBytes": 776222,
+      "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_WILD_BOAR_HOST_REFERENCE.json",
+      "referenceEvidenceSha256": "1ae26c878c4ddd1bd6448552c56803ad577fb4daafc649a605575da3e2c7cea3",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/idle-r3-imagegen.png",
+        "sha256": "f11eca6f158621e82efe2e06da818c55d0afb366baf5a47f6d14287eb20969c6",
+        "bytes": 1871149,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/idle-r3-imagegen.png",
+          "inputSha256": "f11eca6f158621e82efe2e06da818c55d0afb366baf5a47f6d14287eb20969c6",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/derived/idle-r3-rigid-calibrated-recomposed.png",
+          "outputSha256": "40af647b8f28afb8f872cff0235da56afb7eca453d88f7cfb59b0abf1aae6270",
+          "uniformClipScale": 0.953367876,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json",
+          "receiptSha256": "e00425b5d36b590c7409c0f3d7096b3eddaed22b63631b4a8f2dd5dfca803af1",
+          "derivedProvenancePath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/derived-provenance.json",
+          "derivedProvenanceSha256": "68466b1778d5290e864421940d820f40e5fc3a8867601593f805aed8eebde5e6"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; russet/brown with low blue is excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 32833,
+          "modifiedPixels": 32833,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 4224,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 4026,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 4007,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 4021,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 4286,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 4110,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 4123,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 4036,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.953367876,
+        "despillModifiedPixels": 32833,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local idle candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:03:37.077Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-049-wild-boar-host",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:87b5652d237290adb6e207b9839246633d38207c9aa94e16d9d834d6bcc2f8d9",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/complete_variants",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production game sprite-sheet capture for Aliens: Tantalus Frontier\nPrimary request: Regenerate from scratch ONE entirely new original fan-made/project bitmap sprite sheet for enemy-049-wild-boar-host, animation MOVE. PROJECT_ADAPTATION, canonExact=false, no licensed model sheet and no 1:1 claim.\nReference policy: no image input. Invent fresh pixels and poses; never trace, extract, reproduce or copy any existing sprite, licensed frame, toy, model sheet or official artwork.\nBackdrop: one flat solid pure chroma magenta RGB(255,0,255), #FF00FF, across the entire canvas and every gap; no transparency, gradient, tonal variation, texture, floor, horizon, scenery or shadow.\nIdentity: the same living natural adult wild boar in all eight poses: compact low body, heavy forequarters, short neck, elongated wedge snout, one natural head/jaw, one lateral eye, exactly two dirty-ivory tusks, two small ears, exactly four short powerful mammalian legs, cloven hooves, short non-weapon tail and continuous coarse dorsal bristles. Earthy near-black/umber organic fur, gray-brown bristles, restrained warm snout/ear flesh, minor mud/scar wear, no equipment. Original project art only.\nExact sheet: exactly 4 columns by 2 rows and exactly eight individually authored chronological poses in strict row-major order, one boar per conceptual cell, no ninth pose, no borders or grid lines. IMPORTANT CORRECTION: render every boar at only about 70 percent of its cell width and height. Reserve at least 12 percent of every cell as empty magenta padding on its LEFT and RIGHT and at least 10 percent on TOP and BOTTOM. No tail, hoof, bristle or snout may touch or cross any vertical quarter division, the horizontal half division or the canvas edge. Large obvious gutters must separate all eight silhouettes.\nView and consistency: complete whole body visible; strict orthographic gameplay side view facing RIGHT in all cells, snout/tusks right, no camera rotation or perspective change. Identical body length, shoulder height, anatomy, palette and detail across poses. Animate in place with one common root/hoof line and no translation between cells.\nMotion: eight natural wild-boar trot/run phases: 1 first diagonal contact; 2 compression; 3 first passing pose; 4 extension/push-off; 5 opposing diagonal contact; 6 opposing compression; 7 opposing passing pose; 8 seamless recovery. Four distinct natural legs with believable alternating supports and cloven-hoof articulation; no duplicate or interpolation.\nContinuity: Alien 3 animal-host continuity and the similarly named Kenner toy are exclusion/context guardrails only. This is a living natural boar host, not offspring or a canonical published creature design.\nAvoid: xenomorph/biomechanical cues, dome, inner jaw, dorsal tubes, acid, slime, blade tail, armor, harness, saddle, fantasy anatomy, olive bony Kenner phenotype, pink domestic pig, humanoid pose, left/front-facing head, extra/missing limbs or tusks, duplicate, silhouette drift, cell-boundary contact, text, symbols, motion marks, UI, logo, watermark, checkerboard or scenery.\n",
+      "actualPromptPath": "docs/references/v66-worklot-003-prompts/enemy-049-wild-boar-host/move-r2.txt",
+      "actualPromptFileSha256": "c0e32037c3e8fb523ac33f8919bcf0e62bf625b7285036c06941e1cd7c4e79a7",
+      "actualPromptSha256": "bb4a983c8e75a49b545e6b63d7e192aa756c0aac804883e3f5d8252361aa35e1",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/move-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "ded7b4e1adebfa88c98a9410ac167e4653d6fed9663f702a6f20e7e6bed10b1d",
+      "promptSha256": "bb4a983c8e75a49b545e6b63d7e192aa756c0aac804883e3f5d8252361aa35e1",
+      "contractPromptSha256": "bfcc1bdd110956abb46ef700e7901ba61b939fed2d93f979df918219f018064e",
+      "queuePromptSha256": "bfcc1bdd110956abb46ef700e7901ba61b939fed2d93f979df918219f018064e",
+      "computedJsonStringifyPromptSha256": "bfcc1bdd110956abb46ef700e7901ba61b939fed2d93f979df918219f018064e",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-003 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/move.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/move.png",
+      "sourceSha256": "77e62563dac70cffd955fcb8a871c8cdd1593af4ed4c56e4f34f9445a7bf669b",
+      "sourceBytes": 543763,
+      "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_WILD_BOAR_HOST_REFERENCE.json",
+      "referenceEvidenceSha256": "1ae26c878c4ddd1bd6448552c56803ad577fb4daafc649a605575da3e2c7cea3",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/move-r2-imagegen.png",
+        "sha256": "87b5652d237290adb6e207b9839246633d38207c9aa94e16d9d834d6bcc2f8d9",
+        "bytes": 1660651,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/move-r2-imagegen.png",
+          "inputSha256": "87b5652d237290adb6e207b9839246633d38207c9aa94e16d9d834d6bcc2f8d9",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/derived/move-r2-rigid-calibrated-recomposed.png",
+          "outputSha256": "77e62563dac70cffd955fcb8a871c8cdd1593af4ed4c56e4f34f9445a7bf669b",
+          "uniformClipScale": 0.967343672,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json",
+          "receiptSha256": "e00425b5d36b590c7409c0f3d7096b3eddaed22b63631b4a8f2dd5dfca803af1",
+          "derivedProvenancePath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/derived-provenance.json",
+          "derivedProvenanceSha256": "68466b1778d5290e864421940d820f40e5fc3a8867601593f805aed8eebde5e6"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; russet/brown with low blue is excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 22431,
+          "modifiedPixels": 22431,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 3059,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 2599,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2776,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 2877,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2812,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 2414,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 2804,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 3090,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.967343672,
+        "despillModifiedPixels": 22431,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local move candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:03:42.216Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-049-wild-boar-host",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:61d2e63559c55833ad9978afebacc379184552c89d2253bbc470b04dd46f14f4",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/complete_variants",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production game sprite-sheet capture for Aliens: Tantalus Frontier\nPrimary request: Regenerate from scratch ONE entirely new original fan-made/project bitmap sprite sheet for enemy-049-wild-boar-host, animation ATTACK. PROJECT_ADAPTATION, canonExact=false, no licensed model sheet and no 1:1 claim.\nReference policy: no image input. Invent fresh pixels and poses; never trace, extract, reproduce or copy any existing sprite, licensed frame, toy, model sheet or official artwork.\nBackdrop: one flat solid pure chroma magenta RGB(255,0,255), #FF00FF, across the entire canvas and every gap; no transparency, gradient, tonal variation, texture, floor, horizon, scenery or shadow.\nIdentity: the same living natural adult wild boar in all eight poses: compact low body, heavy forequarters, short neck, elongated wedge snout, one natural head/jaw, one lateral eye, exactly two dirty-ivory tusks, two small ears, exactly four short powerful mammalian legs, cloven hooves, short non-weapon tail and continuous coarse dorsal bristles. Earthy near-black/umber organic fur, gray-brown bristles, restrained warm snout/ear flesh, minor mud/scar wear, no equipment. Original project art only.\nExact sheet: exactly 4 columns by 2 rows and exactly eight individually authored chronological poses in strict row-major order, one boar per conceptual cell, no ninth pose, no borders or grid lines. IMPORTANT CORRECTION: render every boar at only about 65 percent of its cell width and height so even the drive and upward shove stay enclosed. Reserve at least 12 percent of every cell as empty magenta padding on its LEFT and RIGHT and at least 10 percent on TOP and BOTTOM. No tail, hoof, bristle or snout may touch or cross any vertical quarter division, the horizontal half division or the canvas edge. Large obvious gutters must separate all eight silhouettes.\nView and consistency: complete whole body visible; strict orthographic gameplay side view facing RIGHT in all cells, snout/tusks right, no camera rotation or perspective change. Identical body length, anatomy, palette and detail across poses. Animate in place on one common root/hoof line. Attack empty space only: no victim, prop, projectile, FX or blood.\nMotion: 1 guarded anticipation; 2 lower head; 3 four-leg brace/load; 4 short rightward tusk drive; 5 tusk contact against empty space; 6 controlled upward shove without vertical rearing or body-scale change; 7 follow-through/recoil; 8 guarded recovery. Keep all four legs anatomically readable; no duplicate or interpolation.\nContinuity: Alien 3 animal-host continuity and the similarly named Kenner toy are exclusion/context guardrails only. This is a living natural boar host, not offspring or a canonical published creature design.\nAvoid: xenomorph/biomechanical cues, dome, inner jaw, dorsal tubes, acid, slime, blade tail, armor, harness, saddle, fantasy anatomy, olive bony Kenner phenotype, pink domestic pig, humanoid or upright/rearing pose, left/front-facing head, extra/missing limbs or tusks, duplicate, silhouette drift, cell-boundary contact, text, symbols, motion marks, UI, logo, watermark, checkerboard or scenery.\n",
+      "actualPromptPath": "docs/references/v66-worklot-003-prompts/enemy-049-wild-boar-host/attack-r2.txt",
+      "actualPromptFileSha256": "c89277a577acb256d54d92d6c35bb71456ecd7a5188ece65624b7ac37359cebf",
+      "actualPromptSha256": "22c79f136146aea8cc4793bbbe0f2f290355396c265169f2943536c07a15bb01",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/attack-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "832adb2b62f21838c476884bbc438d1cd60454f5f9248e72be8993c8e88dfecf",
+      "promptSha256": "22c79f136146aea8cc4793bbbe0f2f290355396c265169f2943536c07a15bb01",
+      "contractPromptSha256": "773cc2df04c191e3ba149850bbd7f31f5b4b7c168ef6f8d21abaa1a9bda22521",
+      "queuePromptSha256": "773cc2df04c191e3ba149850bbd7f31f5b4b7c168ef6f8d21abaa1a9bda22521",
+      "computedJsonStringifyPromptSha256": "773cc2df04c191e3ba149850bbd7f31f5b4b7c168ef6f8d21abaa1a9bda22521",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-003 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/attack.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/attack.png",
+      "sourceSha256": "68e70c5b8837e89e673c4cb65f9b2b65c81875ffef987c7b371d35fb2614e960",
+      "sourceBytes": 705658,
+      "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_WILD_BOAR_HOST_REFERENCE.json",
+      "referenceEvidenceSha256": "1ae26c878c4ddd1bd6448552c56803ad577fb4daafc649a605575da3e2c7cea3",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/attack-r2-imagegen.png",
+        "sha256": "61d2e63559c55833ad9978afebacc379184552c89d2253bbc470b04dd46f14f4",
+        "bytes": 1679152,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/attack-r2-imagegen.png",
+          "inputSha256": "61d2e63559c55833ad9978afebacc379184552c89d2253bbc470b04dd46f14f4",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/derived/attack-r2-rigid-calibrated-recomposed.png",
+          "outputSha256": "68e70c5b8837e89e673c4cb65f9b2b65c81875ffef987c7b371d35fb2614e960",
+          "uniformClipScale": 1.108433735,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json",
+          "receiptSha256": "e00425b5d36b590c7409c0f3d7096b3eddaed22b63631b4a8f2dd5dfca803af1",
+          "derivedProvenancePath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/derived-provenance.json",
+          "derivedProvenanceSha256": "68466b1778d5290e864421940d820f40e5fc3a8867601593f805aed8eebde5e6"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; russet/brown with low blue is excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 29960,
+          "modifiedPixels": 29960,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 3843,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 3795,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 3510,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 3379,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 3953,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 3971,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 3782,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 3727,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 1.108433735,
+        "despillModifiedPixels": 29960,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": "Natural right-facing boar head/tusk drive with grounded foreleg brace, contact, follow-through and recovery; no alien mutation or fantasy weapon."
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local attack candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:03:46.344Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-049-wild-boar-host",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/complete_variants",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production game sprite-sheet capture for Aliens: Tantalus Frontier\nPrimary request: Regenerate from scratch ONE entirely new original fan-made/project bitmap sprite sheet for enemy-049-wild-boar-host, animation DEATH. PROJECT_ADAPTATION, canonExact=false, no licensed model sheet and no 1:1 claim.\nReference policy: no image input. Invent fresh pixels and poses; never trace, extract, reproduce or copy any existing sprite, licensed frame, toy, model sheet or official artwork.\nBackdrop: one flat solid pure chroma magenta RGB(255,0,255), #FF00FF, across the entire canvas and every gap; no transparency, gradient, tonal variation, texture, floor, horizon, scenery or shadow.\nIdentity: the same living natural adult wild boar in all eight poses: compact low body, heavy forequarters, short neck, elongated wedge snout, one natural head/jaw, one lateral eye, exactly two dirty-ivory tusks, two small ears, exactly four short powerful mammalian legs, cloven hooves, short non-weapon tail and continuous coarse dorsal bristles. Earthy near-black/umber organic fur, gray-brown bristles, restrained warm snout/ear flesh, minor mud/scar wear, no equipment. Original project art only.\nExact sheet: exactly 4 columns by 2 rows and exactly eight individually authored chronological poses in strict row-major order, one boar per conceptual cell, no ninth pose, no borders or grid lines. IMPORTANT CORRECTION: render every boar at only about 65 percent of its cell width and height so every fall and terminal pose stays enclosed. Reserve at least 12 percent of every cell as empty magenta padding on its LEFT and RIGHT and at least 10 percent on TOP and BOTTOM. No tail, hoof, bristle or snout may touch or cross any vertical quarter division, the horizontal half division or the canvas edge. Large obvious gutters must separate all eight silhouettes.\nView and consistency: complete whole body visible; strict fixed orthographic gameplay side camera with the boar oriented RIGHT throughout, snout remains right during the fall, no camera rotation, no three-quarter camera and no perspective change. Identical body length, anatomy, palette and detail; only pose envelope changes. Animate in place. No attacker, projectile, FX, blood or gore.\nMotion: eight irreversible non-looping phases: 1 lethal impact reaction; 2 front support buckles; 3 forward/down momentum; 4 shoulder fall; 5 controlled flank roll while head remains right; 6 four limbs settle naturally; 7 residual motion fades; 8 anatomically intact terminal motionless body on its flank. Do not roll belly-up toward the camera. No recovery, duplicate or interpolation.\nContinuity: Alien 3 animal-host continuity and the similarly named Kenner toy are exclusion/context guardrails only. This is a living natural boar host, not offspring or a canonical published creature design.\nAvoid: xenomorph/biomechanical cues, dome, inner jaw, dorsal tubes, acid, slime, blade tail, armor, harness, saddle, fantasy anatomy, olive bony Kenner phenotype, pink domestic pig, humanoid pose, left/front-facing head, belly-up camera-facing body, extra/missing limbs or tusks, resurrection, duplicate, silhouette drift, cell-boundary contact, text, symbols, motion marks, UI, logo, watermark, checkerboard or scenery.\n",
+      "actualPromptPath": "docs/references/v66-worklot-003-prompts/enemy-049-wild-boar-host/death-r2.txt",
+      "actualPromptFileSha256": "2d8e0bf800fad18b977f912fe6140b67f216ef6ae3d043cec62b565dbee49ead",
+      "actualPromptSha256": "dadcfdc98c3f1305daa6ea4c39b2a8db7437f3cbd25bb7f2847e9211d3b73a3b",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/death-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "ed1dd44f6443772771c89e4be82a57ae3a24db052d7da481bcfda626f4088b22",
+      "promptSha256": "dadcfdc98c3f1305daa6ea4c39b2a8db7437f3cbd25bb7f2847e9211d3b73a3b",
+      "contractPromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+      "queuePromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+      "computedJsonStringifyPromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-003 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+      "sourceSha256": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27",
+      "sourceBytes": 515101,
+      "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_WILD_BOAR_HOST_REFERENCE.json",
+      "referenceEvidenceSha256": "1ae26c878c4ddd1bd6448552c56803ad577fb4daafc649a605575da3e2c7cea3",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/death-r2-imagegen.png",
+        "sha256": "6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+        "bytes": 1580744,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/raw/death-r2-imagegen.png",
+          "inputSha256": "6f18d3e7e7a4342969793d9c068ab59807f56294b33470011ad6d8d6c77e0a95",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/derived/death-r2-rigid-calibrated-recomposed.png",
+          "outputSha256": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27",
+          "uniformClipScale": 1.023303548,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json",
+          "receiptSha256": "e00425b5d36b590c7409c0f3d7096b3eddaed22b63631b4a8f2dd5dfca803af1",
+          "derivedProvenancePath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/derived-provenance.json",
+          "derivedProvenanceSha256": "68466b1778d5290e864421940d820f40e5fc3a8867601593f805aed8eebde5e6"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; residual count is zero.",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; russet/brown with low blue is excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 19787,
+          "modifiedPixels": 19787,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 3568,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 3168,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2997,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 2425,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2223,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 2019,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 1730,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 1657,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 1.023303548,
+        "despillModifiedPixels": 19787,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:03:50.421Z"
     }
   ]
 }

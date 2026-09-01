@@ -1,0 +1,9 @@
+Create ONE production sprite sheet of Wild Boar Host for Aliens: Tantalus Frontier, animation move.
+Identity lock: PROJECT_ADAPTATION: original living natural wild-boar host for Tantalus Frontier, compact low right-facing profile, heavy forequarters, elongated snout, two tusks, four legs, cloven hooves, short tail and bristle ridge; earthy black-umber organic hide only. Alien 3 dog/ox animal-host continuity and the Kenner name are guardrails, never a 1:1 model. Exclude every xenomorph, biomechanical, armored, domestic-pig or fantasy-monster cue.
+Archetype Wild Boar Host; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.
+Animation: Locomotion matches the species and reference limb count; no xenomorph anatomy added.
+Exactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.
+Strict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.
+Use one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.
+True transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.
+Preserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.

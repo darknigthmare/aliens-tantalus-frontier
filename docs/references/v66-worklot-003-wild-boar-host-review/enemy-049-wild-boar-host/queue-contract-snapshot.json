@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "profileId": "enemy-049-wild-boar-host",
+  "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+  "sourceSha256": "c3708a90367ac7e15eabe94a65d25623ebc2383b8da599e8e289be29c2f76c2e",
+  "capturedAtReviewDate": "2026-09-01",
+  "readOnly": true,
+  "referenceLockSha256": "2bd35fa9125625b2f7cfc44a12e0117d2686b0c3c39c908c853da437bf03e196",
+  "clips": {
+    "idle": {
+      "promptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/idle-queue-current.txt",
+      "promptFileBytesSha256": "a7b20e8d380cb31e676f5348ae5757fd7f26d3752f9ae65f9a292e2e627f97f5",
+      "promptSha256": "8af8ac9d3ab2406e1ea5106958e00318012f1b5ce9e686173b2df9097d982280",
+      "computedJsonStringifyPromptSha256": "8af8ac9d3ab2406e1ea5106958e00318012f1b5ce9e686173b2df9097d982280",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+      "fps": 6,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/idle.png"
+    },
+    "move": {
+      "promptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/move-queue-current.txt",
+      "promptFileBytesSha256": "ded7b4e1adebfa88c98a9410ac167e4653d6fed9663f702a6f20e7e6bed10b1d",
+      "promptSha256": "bfcc1bdd110956abb46ef700e7901ba61b939fed2d93f979df918219f018064e",
+      "computedJsonStringifyPromptSha256": "bfcc1bdd110956abb46ef700e7901ba61b939fed2d93f979df918219f018064e",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Locomotion matches the species and reference limb count; no xenomorph anatomy added.",
+      "fps": 12,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/move.png"
+    },
+    "attack": {
+      "promptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/attack-queue-current.txt",
+      "promptFileBytesSha256": "832adb2b62f21838c476884bbc438d1cd60454f5f9248e72be8993c8e88dfecf",
+      "promptSha256": "773cc2df04c191e3ba149850bbd7f31f5b4b7c168ef6f8d21abaa1a9bda22521",
+      "computedJsonStringifyPromptSha256": "773cc2df04c191e3ba149850bbd7f31f5b4b7c168ef6f8d21abaa1a9bda22521",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Species-specific bite, tusk or claw action with anticipation and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+      "fps": 12,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/attack.png"
+    },
+    "death": {
+      "promptPath": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/prompts/death-queue-current.txt",
+      "promptFileBytesSha256": "ed1dd44f6443772771c89e4be82a57ae3a24db052d7da481bcfda626f4088b22",
+      "promptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+      "computedJsonStringifyPromptSha256": "79d4d0fa94d17eb67fa87ae2df7ff95e1c49704299dbea319737919b7483b502",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+      "fps": 10,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png"
+    }
+  },
+  "attackContractConflict": null,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

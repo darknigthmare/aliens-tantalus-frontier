@@ -1,0 +1,440 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "raw-extracted-pose and target-cell pixels",
+  "profiles": {
+    "enemy-049-wild-boar-host": {
+      "status": "measured-per-clip-uniform-scale-evidence-art-not-accepted",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "method": "Two manual measurements per clip use the same rigid anatomical axis from the posterior croup/tail-base contour to the anterior shoulder/neck junction. The idle median is the baseline. One uniform x/y factor is applied to each whole clip; no per-pose or non-uniform stretch is permitted. Silhouette height remains pose-sensitive (leg flexion, head drop and collapse) and is reported only as a composition diagnostic, never as physical body size.",
+      "scaleDerivation": {
+        "desiredIdleMedianHeightPx": 350.0,
+        "rawIdleHeightsPx": [
+          230,
+          245,
+          233,
+          208,
+          260,
+          230,
+          229,
+          228
+        ],
+        "rawIdleMedianHeightPx": 230.0,
+        "idleDerivedFactor": 1.52173913,
+        "fitLimitFactorByClip": {
+          "idle": 0.953367876,
+          "move": 1.095238095,
+          "attack": 1.108433735,
+          "death": 1.082840237
+        },
+        "fitLimitingPoseByClip": {
+          "idle": {
+            "clipId": "idle",
+            "frame": 4,
+            "side": "right",
+            "factor": 0.9533678756476683,
+            "limits": {
+              "left": 1.202614379,
+              "right": 0.953367876,
+              "top": 1.411538462
+            }
+          },
+          "move": {
+            "clipId": "move",
+            "frame": 3,
+            "side": "left",
+            "factor": 1.0952380952380953,
+            "limits": {
+              "left": 1.095238095,
+              "right": 1.210526316,
+              "top": 2.033149171
+            }
+          },
+          "attack": {
+            "clipId": "attack",
+            "frame": 4,
+            "side": "right",
+            "factor": 1.108433734939759,
+            "limits": {
+              "left": 1.295774648,
+              "right": 1.108433735,
+              "top": 1.931578947
+            }
+          },
+          "death": {
+            "clipId": "death",
+            "frame": 6,
+            "side": "left",
+            "factor": 1.0828402366863905,
+            "limits": {
+              "left": 1.082840237,
+              "right": 1.157232704,
+              "top": 3.598039216
+            }
+          }
+        },
+        "rigidLandmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+        "rigidMeasurements": {
+          "idle": [
+            {
+              "clip": "idle",
+              "frame": 0,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  55,
+                  80
+                ],
+                [
+                  235,
+                  75
+                ]
+              ],
+              "lengthPx": 180.069431,
+              "coordinates": "raw-extracted-pose-local"
+            },
+            {
+              "clip": "idle",
+              "frame": 1,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  45,
+                  80
+                ],
+                [
+                  225,
+                  70
+                ]
+              ],
+              "lengthPx": 180.277564,
+              "coordinates": "raw-extracted-pose-local"
+            }
+          ],
+          "move": [
+            {
+              "clip": "move",
+              "frame": 0,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  40,
+                  70
+                ],
+                [
+                  220,
+                  65
+                ]
+              ],
+              "lengthPx": 180.069431,
+              "coordinates": "raw-extracted-pose-local"
+            },
+            {
+              "clip": "move",
+              "frame": 1,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  45,
+                  75
+                ],
+                [
+                  220,
+                  70
+                ]
+              ],
+              "lengthPx": 175.071414,
+              "coordinates": "raw-extracted-pose-local"
+            }
+          ],
+          "attack": [
+            {
+              "clip": "attack",
+              "frame": 0,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  40,
+                  85
+                ],
+                [
+                  190,
+                  75
+                ]
+              ],
+              "lengthPx": 150.332964,
+              "coordinates": "raw-extracted-pose-local"
+            },
+            {
+              "clip": "attack",
+              "frame": 1,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  35,
+                  80
+                ],
+                [
+                  180,
+                  70
+                ]
+              ],
+              "lengthPx": 145.344419,
+              "coordinates": "raw-extracted-pose-local"
+            }
+          ],
+          "death": [
+            {
+              "clip": "death",
+              "frame": 0,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  45,
+                  90
+                ],
+                [
+                  220,
+                  75
+                ]
+              ],
+              "lengthPx": 175.641681,
+              "coordinates": "raw-extracted-pose-local"
+            },
+            {
+              "clip": "death",
+              "frame": 1,
+              "landmark": "posterior croup at tail-base contour to anterior shoulder/neck junction",
+              "endpoints": [
+                [
+                  50,
+                  85
+                ],
+                [
+                  210,
+                  80
+                ]
+              ],
+              "lengthPx": 160.078106,
+              "coordinates": "raw-extracted-pose-local"
+            }
+          ]
+        },
+        "rawRigidMedianPxByClip": {
+          "idle": 180.173497,
+          "move": 177.570423,
+          "attack": 147.838691,
+          "death": 167.859893
+        },
+        "requestedUniformScaleByClip": {
+          "idle": 0.953367876,
+          "move": 0.967343672,
+          "attack": 1.16188545,
+          "death": 1.023303548
+        },
+        "sourceScaleByClip": {
+          "idle": 0.953367876,
+          "move": 0.967343672,
+          "attack": 1.108433735,
+          "death": 1.023303548
+        },
+        "calibratedRigidMedianPxByClip": {
+          "idle": 171.771625,
+          "move": 171.771625,
+          "attack": 163.869393,
+          "death": 171.771625
+        },
+        "calibratedRigidVsIdlePercentByClip": {
+          "idle": 0.0,
+          "move": 0.0,
+          "attack": -4.6,
+          "death": 0.0
+        },
+        "designMarginPx": 38,
+        "requiredClearancePx": 32,
+        "selection": "idle baseline is fit-clamped; each other clip uses idle rigid-median / clip rigid-median and is independently fit-clamped; one uniform factor per complete clip, never per pose"
+      },
+      "measurements": {
+        "idle": {
+          "rawHeightsPx": [
+            230,
+            245,
+            233,
+            208,
+            260,
+            230,
+            229,
+            228
+          ],
+          "rawMedianPx": 230.0,
+          "activeHeightsPx": [
+            219,
+            234,
+            222,
+            198,
+            248,
+            219,
+            218,
+            217
+          ],
+          "activeMedianPx": 219.0,
+          "comparisonHeightPx": 219.0,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": 0.0,
+          "appliedUniformClipScale": 0.953367876,
+          "roundingAspectErrorPercentByFrame": [
+            0.152207,
+            0.029606,
+            0.169775,
+            0.231675,
+            0.009323,
+            0.263488,
+            0.285485,
+            0.234656
+          ]
+        },
+        "move": {
+          "rawHeightsPx": [
+            184,
+            172,
+            184,
+            181,
+            188,
+            173,
+            187,
+            183
+          ],
+          "rawMedianPx": 183.5,
+          "activeHeightsPx": [
+            178,
+            166,
+            178,
+            175,
+            182,
+            167,
+            181,
+            177
+          ],
+          "activeMedianPx": 177.5,
+          "comparisonHeightPx": 177.5,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": -18.95,
+          "appliedUniformClipScale": 0.967343672,
+          "roundingAspectErrorPercentByFrame": [
+            0.00366,
+            0.137463,
+            0.068205,
+            0.196429,
+            0.079006,
+            0.104841,
+            0.035078,
+            0.107614
+          ]
+        },
+        "attack": {
+          "rawHeightsPx": [
+            192,
+            182,
+            164,
+            164,
+            190,
+            226,
+            191,
+            180
+          ],
+          "rawMedianPx": 186.0,
+          "activeHeightsPx": [
+            213,
+            202,
+            182,
+            182,
+            211,
+            251,
+            212,
+            200
+          ],
+          "activeMedianPx": 206.5,
+          "comparisonHeightPx": 206.5,
+          "comparisonMethod": "eight-pose silhouette-height median",
+          "vsIdlePercent": -5.708,
+          "appliedUniformClipScale": 1.108433735,
+          "roundingAspectErrorPercentByFrame": [
+            0.201207,
+            0.223689,
+            0.130916,
+            0.043665,
+            0.304672,
+            0.347365,
+            0.300014,
+            0.145985
+          ]
+        },
+        "death": {
+          "rawHeightsPx": [
+            199,
+            176,
+            151,
+            134,
+            134,
+            117,
+            102,
+            99
+          ],
+          "rawMedianPx": 134.0,
+          "activeHeightsPx": [
+            204,
+            180,
+            155,
+            137,
+            137,
+            120,
+            104,
+            101
+          ],
+          "activeMedianPx": 137.0,
+          "comparisonHeightPx": 204.0,
+          "comparisonMethod": "death onset frame 1 only; later height loss is intended collapse",
+          "vsIdlePercent": -6.849,
+          "appliedUniformClipScale": 1.023303548,
+          "roundingAspectErrorPercentByFrame": [
+            0.290084,
+            0.10582,
+            0.330033,
+            0.047708,
+            0.077343,
+            0.319489,
+            0.469043,
+            0.432597
+          ]
+        }
+      },
+      "maximumIntegerRoundingAspectErrorPercent": 0.469043,
+      "decisions": {
+        "idle": "apply one reviewed uniform clip factor from the rigid body-axis median",
+        "move": "apply one reviewed uniform clip factor from the rigid body-axis median",
+        "attack": "apply one reviewed uniform clip factor from the rigid body-axis median",
+        "death": "apply one reviewed uniform clip factor from the rigid body-axis median"
+      },
+      "sourceScaleByClip": {
+        "idle": 0.953367876,
+        "move": 0.967343672,
+        "attack": 1.108433735,
+        "death": 1.023303548
+      },
+      "factorsAppliedToActive": {
+        "idle": 0.953367876,
+        "move": 0.967343672,
+        "attack": 1.108433735,
+        "death": 1.023303548
+      },
+      "materialTechnicalScaleDefectsOpen": [],
+      "normalizationRun": false,
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}
