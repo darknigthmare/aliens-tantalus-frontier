@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-046-colonial-raider",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+  "actor": "Codex /root/prepare_profile_042",
+  "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/idle-r1.txt",
+  "actualPromptFileSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+  "promptSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+  "sourceSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+  "sourceBytes": 927170,
+  "contractPromptSha256": "39dd9152ca443d396604c8b1043162f8123d40c364275f6fd6590763978fff7a",
+  "queuePromptSha256": "39dd9152ca443d396604c8b1043162f8123d40c364275f6fd6590763978fff7a",
+  "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+  "rawCapture": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+    "sha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+    "bytes": 1723872,
+    "bridge": "approved PTY base64 decoder",
+    "pixelEdits": 0
+  },
+  "sourceRepairs": [
+    {
+      "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+      "result": "Detected foreground retained pixel-for-pixel; exterior generated chroma made exact opaque #FF00FF; nominal 4x2 crop/paste was pixel-equal.",
+      "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+      "inputSha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+      "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/idle-r1-chroma-flat-recomposed.png",
+      "outputSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+      "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+      "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+    }
+  ],
+  "generationAttempts": 1,
+  "qa": {
+    "size": [
+      1774,
+      887
+    ],
+    "grid": [
+      4,
+      2
+    ],
+    "poseCount": 8,
+    "facing": "right",
+    "cellBoundaryContacts": 0,
+    "minimumClearancePx": 25,
+    "uniformOpaqueExactMagenta": true,
+    "scaleComparisonHeightPx": 375,
+    "scaleVsIdlePercent": 0,
+    "technicalReview": "technical-source-gates-pass-art-not-accepted"
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local idle candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+  "at": "2026-09-01T12:00:00.000Z",
+  "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, IDLE animation\nPrimary request: create one entirely original fan-made 4 columns by 2 rows sprite sheet containing exactly eight chronological idle poses of the same Colonial Raider project character. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine in every pose, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and exactly one straight detachable box magazine. Same butt-to-muzzle length and geometry in all eight poses. Complete carbine points RIGHT. It is not an M41A, NSG23, AK, real-world branded rifle, UPP gun, USCMC gun or energy weapon.\nStyle: polished modern 2D metroidvania game sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nComposition: precise implied 4x2 grid with exactly one complete full-body raider per cell in strict row-major order. Every pose stays centered inside its own implied cell with generous equal gutters. Hood crown to boot sole fills about 68 percent of cell height in comparable live poses. Identical physical scale, anatomy, handedness, outfit, respirator, shoulder asymmetry, pack and carbine across all cells. No limb, hood, coat tail, backpack, muzzle or loose object touches or crosses a cell boundary.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest, knees, toes and muzzle point right. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: dusty gray, sand canvas, brown synthetic leather/composite, charcoal cloth, scratched dull metal and one tiny muted ochre accent. Matte worn surfaces; no neon, glossy power armor or bright faction colors.\nConstraints: exactly one human and one carbine per cell; stable face, eyes, respirator, hood, anatomy, clothing and weapon; no duplicated pose; no text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; USCMC, UPP, Weyland-Yutani, Seegson or Colonial Marshal branding; M3 armor; Space Marine or ODST armor; cowboy hat or duster; spikes, skulls, tire armor, fantasy bandit, Mad Max styling; ATARAX suit; cyber limbs; sealed helmet; full gas-mask lenses; glowing technology; second firearm; weapon morphing.\nChronology, strict row-major: 1 low-ready neutral crouch; 2 restrained inhale; 3 shoulders rise slightly; 4 eyes scan forward without turning the body; 5 weight shifts subtly to rear boot; 6 carbine settles while muzzle stays right; 7 exhale and shoulders lower; 8 near-neutral closure matching pose 1 for a clean loop. Eight distinct restrained poses, both feet grounded, no stepping, firing or reload.\n"
+}

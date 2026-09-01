@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-002",
+  "batchId": "batch-003",
+  "profileId": "enemy-046-colonial-raider",
+  "generatedAt": "2026-09-01",
+  "status": "technical-source-qa-complete-art-not-accepted",
+  "method": {
+    "chroma": "Pixels satisfying r>190, b>170, g<110 and abs(r-b)<100 are treated as generated chroma background and replaced with exact opaque RGB #FF00FF. Every non-matching raw pixel is retained byte-for-byte in the lossless flat/recomposed derivative.",
+    "recomposition": "Exact nominal 4x2 crop/paste over a 1774x887 canvas; flat and recomposed arrays are required to be pixel-identical.",
+    "reloadCalibration": "The lossless reload-r2 derivative is retained. The active reload applies one documented sourceScaleByClip factor with RGBA Lanczos resampling per nominal cell around the body landmark while preserving each lower-exclusive physical support y.",
+    "visual": "Built-in ImageGen return review plus deterministic technical overlays, root-registered playback GIFs and per-cell pixel measurements.",
+    "noNormalization": true
+  },
+  "selectedSources": [
+    {
+      "clipId": "idle",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+      "rawSha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+      "rawBytes": 1723872,
+      "rawSize": [1774, 887],
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+      "activeSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+      "activeBytes": 927170,
+      "activeSize": [1774, 887],
+      "losslessRecompositionPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/idle-r1-chroma-flat-recomposed.png",
+      "rawForegroundSha256": "16823ec4416fe829d931211266b18d76f2474314e818dbfd6a34064e476dc5c5",
+      "derivedForegroundSha256": "16823ec4416fe829d931211266b18d76f2474314e818dbfd6a34064e476dc5c5",
+      "foregroundPixelsPreserved": true,
+      "recompositionPixelEqual": true,
+      "activeByteIdenticalToRecomposition": true
+    },
+    {
+      "clipId": "move",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/move-r1-imagegen.png",
+      "rawSha256": "099fe15de215e5ed35f6b4b3e53fcedbb57e8d2fc2ee0dbb59e7f1173193a471",
+      "rawBytes": 1726873,
+      "rawSize": [1774, 887],
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/move.png",
+      "activeSha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+      "activeBytes": 877467,
+      "activeSize": [1774, 887],
+      "losslessRecompositionPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/move-r1-chroma-flat-recomposed.png",
+      "rawForegroundSha256": "5991ac9e33c215eb11d114955e76017ad13cf53c780da364d275d648e6d22a6f",
+      "derivedForegroundSha256": "5991ac9e33c215eb11d114955e76017ad13cf53c780da364d275d648e6d22a6f",
+      "foregroundPixelsPreserved": true,
+      "recompositionPixelEqual": true,
+      "activeByteIdenticalToRecomposition": true
+    },
+    {
+      "clipId": "attack",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/attack-r1-imagegen.png",
+      "rawSha256": "b9b9cf3e8250eedaf681b6a300d40fe5146a3ac8b4b22effbd74cddb64738e6c",
+      "rawBytes": 1667689,
+      "rawSize": [1774, 887],
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/attack.png",
+      "activeSha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+      "activeBytes": 839121,
+      "activeSize": [1774, 887],
+      "losslessRecompositionPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/attack-r1-chroma-flat-recomposed.png",
+      "rawForegroundSha256": "873e9a88e8b0d72e6661e3095fe559f7c6dd27c6bc0383e25613cabe88e2a508",
+      "derivedForegroundSha256": "873e9a88e8b0d72e6661e3095fe559f7c6dd27c6bc0383e25613cabe88e2a508",
+      "foregroundPixelsPreserved": true,
+      "recompositionPixelEqual": true,
+      "activeByteIdenticalToRecomposition": true
+    },
+    {
+      "clipId": "death",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/death-r2-imagegen.png",
+      "rawSha256": "e7010da694a9d60acf78017bd99a7eaf5a12d6ea168ca4c9d5625f1b7125e19e",
+      "rawBytes": 1365691,
+      "rawSize": [1774, 887],
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/death.png",
+      "activeSha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+      "activeBytes": 510363,
+      "activeSize": [1774, 887],
+      "losslessRecompositionPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/death-r2-chroma-flat-recomposed.png",
+      "rawForegroundSha256": "53a4aa691b45c5964fab46e6eff031decc400594e16c6c5d3ad82978f8de1320",
+      "derivedForegroundSha256": "53a4aa691b45c5964fab46e6eff031decc400594e16c6c5d3ad82978f8de1320",
+      "foregroundPixelsPreserved": true,
+      "recompositionPixelEqual": true,
+      "activeByteIdenticalToRecomposition": true
+    },
+    {
+      "clipId": "reload",
+      "rawPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/reload-r2-imagegen.png",
+      "rawSha256": "ba5234a89876b51a335bec6866ded55b333435bc745c51b56793057ba9302bde",
+      "rawBytes": 1875424,
+      "rawSize": [1773, 887],
+      "activePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/reload.png",
+      "activeSha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+      "activeBytes": 923296,
+      "activeSize": [1774, 887],
+      "losslessRecompositionPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-chroma-flat-recomposed.png",
+      "calibratedPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-scale-calibrated-375px.png",
+      "rawForegroundSha256": "db89af9ca97702319e2adcc2c625fbf9a954f18be2f5f2dc2549973f6779db1b",
+      "derivedForegroundSha256": "db89af9ca97702319e2adcc2c625fbf9a954f18be2f5f2dc2549973f6779db1b",
+      "foregroundPixelsPreservedInLosslessDerivative": true,
+      "providerCanvasRepair": {"kind": "append-right-chroma-column", "pixels": 887, "resultSize": [1774, 887]},
+      "recompositionPixelEqual": true,
+      "activeByteIdenticalToRecomposition": false,
+      "sourceScaleByClip": 0.915750916,
+      "sourceMedianHeightPx": 409.5,
+      "activeMedianHeightPx": 375.0,
+      "physicalSupportBottomPreserved": "8/8"
+    }
+  ],
+  "clipChecks": [
+    {"clipId": "idle", "fps": 6, "loop": true, "posesReviewed": 8, "cellBoundaryContacts": 0, "minimumClearancePx": 25, "facingRight": "8/8", "singleCarbineContinuity": "8/8", "chronology": "restrained idle closes coherently", "scaleComparisonHeightPx": 375.0, "scaleVsIdlePercent": 0.0},
+    {"clipId": "move", "fps": 12, "loop": true, "posesReviewed": 8, "cellBoundaryContacts": 0, "minimumClearancePx": 18, "facingRight": "8/8", "singleCarbineContinuity": "8/8", "chronology": "eight distinct locomotion phases close coherently", "scaleComparisonHeightPx": 374.5, "scaleVsIdlePercent": -0.133},
+    {"clipId": "attack", "fps": 12, "loop": false, "posesReviewed": 8, "cellBoundaryContacts": 0, "minimumClearancePx": 8, "facingRight": "8/8", "singleCarbineContinuity": "8/8", "chronology": "raise, fire, recoil and recovery read as one shot", "scaleComparisonHeightPx": 361.0, "scaleVsIdlePercent": -3.733, "scaleInterpretation": "aiming compression; no source-scale correction applied"},
+    {"clipId": "death", "fps": 10, "loop": false, "posesReviewed": 8, "cellBoundaryContacts": 0, "minimumClearancePx": 15, "facingRight": "8/8", "singleCarbineContinuity": "8/8", "chronology": "irreversible hit-to-prone sequence with motionless terminal pose", "scaleComparisonHeightPx": 321.0, "scaleVsIdlePercent": -14.4, "scaleInterpretation": "intentional targeted reduction requested to clear terminal prone poses; later height loss is posture, not scale drift"},
+    {"clipId": "reload", "fps": 10, "loop": false, "posesReviewed": 8, "cellBoundaryContacts": 0, "minimumClearancePx": 12, "facingRight": "8/8", "singleCarbineContinuity": "8/8", "chronology": "one complete magazine exchange and return to ready", "magazineDuplication": 0, "magazineStateReview": "poses 1-3 inserted/occluded at well with no loose duplicate; poses 4-5 one loose magazine and empty well; poses 6-8 one seated magazine and no loose duplicate", "scaleComparisonHeightPx": 375.0, "scaleVsIdlePercent": 0.0}
+  ],
+  "rejectedCandidates": [
+    {
+      "clipId": "death",
+      "reason": "death-r1 terminal poses 7-8 contacted nominal cell boundaries",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/death-r1-terminal-boundary-contact.png",
+      "sha256": "6dac9563267b26ad1df8a30818baa0520695700f385aa8b95e0fde5cfcca5258",
+      "bytes": 1553077
+    },
+    {
+      "clipId": "reload",
+      "reason": "reload-r1 pose 5 showed inserted and loose magazines simultaneously",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/reload-r1-magazine-duplication.png",
+      "sha256": "3e7a920c3451e8099a7bd9a0aaab9f0eb2ab1372523b98dc3a9c4fc13d4218c4",
+      "bytes": 1716030
+    }
+  ],
+  "visualEvidence": [
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/idle-technical-overlay.png", "sha256": "905bb6190b28b77f1b1f37e3dd941e48f5b2557fe666f33040234a0fa2d5e9fb", "bytes": 924338},
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/move-technical-overlay.png", "sha256": "8c392f8736fb5af77c00e9586c1ad4bd0a312e5fe7dfeb9c813bc5077ac0613c", "bytes": 871970},
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/attack-technical-overlay.png", "sha256": "f3d6b5c29ac52a66511732aa24c9ab28651fa065adde085c6992b5c306ce450b", "bytes": 834252},
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/death-technical-overlay.png", "sha256": "ca7e66f2ad130c1866e7a678eb537e302c73159f465832bc9cf8e66f1bbe2a63", "bytes": 511327},
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/reload-technical-overlay.png", "sha256": "3e2c289083abcf7e7c73c077aacf4aa312d6b11dbf623aa243c9e0477920f70e", "bytes": 920124},
+    {"path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/orientation-weapon-anchor-contact.png", "sha256": "245a8112cc574ca553425bfb3171fe61030a936946f5993c0588cd0081105998", "bytes": 577855}
+  ],
+  "summary": {
+    "boards": 5,
+    "expectedPoses": 40,
+    "reviewedPoses": 40,
+    "populatedPoses": 40,
+    "rightFacingPoses": 40,
+    "singleCarbineContinuityPoses": 40,
+    "clearNominalCellPoses": 40,
+    "physicalAnchorsReviewed": 40,
+    "exactDuplicateCells": 0,
+    "uniformOpaqueExactMagentaBoards": 5,
+    "technicalSourceDefectsOpen": 0,
+    "artAccepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false
+  },
+  "processor": {
+    "path": "docs/references/v66-worklot-002-colonial-raider-review/enemy-046-colonial-raider/process_colonial_raider_profile.py",
+    "sha256": "5ff3b10ff80466c9ec32a54e1f13b8779f144eeb788c9cb87df5d19f5d4263c6",
+    "bytes": 29350
+  },
+  "scope": {
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false,
+    "normalizationRun": false,
+    "globalQueueEdited": false,
+    "globalStateEdited": false,
+    "globalReferenceEdited": false,
+    "globalScaleEdited": false,
+    "globalAnchorEdited": false,
+    "gitTouched": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "validation": "appendProductionEvent-in-memory-only",
+  "wroteGlobalState": false,
+  "jobStatus": "generated",
+  "generatedClips": 5,
+  "requiredClips": 5,
+  "issues": [],
+  "events": [
+    {
+      "clipId": "idle",
+      "kind": "generated-and-source-repaired",
+      "sourceSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+      "promptSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+      "contractPromptSha256": "39dd9152ca443d396604c8b1043162f8123d40c364275f6fd6590763978fff7a",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "move",
+      "kind": "generated-and-source-repaired",
+      "sourceSha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+      "promptSha256": "60b72394c0b0347c8c34ac052ab57f84eb8088121482e3d20f359639285d0881",
+      "contractPromptSha256": "d5469670811a5df4607a06eee9d5d03aa89708a979f177d219c471c3ea8303b2",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "attack",
+      "kind": "generated-and-source-repaired",
+      "sourceSha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+      "promptSha256": "702ba2f089ca1c5b5e7803ee5a41ee48de469932b172b212e85db7f888d6f269",
+      "contractPromptSha256": "ef6c6dab750234f54ada996b085824b3b85645763fabf44519e365e496df627f",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "death",
+      "kind": "generated-and-source-repaired",
+      "sourceSha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+      "promptSha256": "ede0d83e9e46bf21996dcd55060325bdc23f998d7eade50e0336fe882d347a81",
+      "contractPromptSha256": "df747f0c8fdc52e7a9a9610dccb0e57f8f3d3f580acda56c29f0a191009c5c1c",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "reload",
+      "kind": "generated-and-source-repaired",
+      "sourceSha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+      "promptSha256": "0c85c251a904b42cb984e0f3118af9fc57c347bddd3b07d2a8b900937e7cadf3",
+      "contractPromptSha256": "0f0e61b12070fd26b3f757990f2d1e269ba1e44d1704bbd43cb7b78617728256",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    }
+  ]
+}

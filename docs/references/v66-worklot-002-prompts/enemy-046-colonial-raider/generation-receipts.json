@@ -1,0 +1,154 @@
+{
+  "schema": 1,
+  "profileId": "enemy-046-colonial-raider",
+  "provider": "OpenAI ImageGen",
+  "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+  "receipts": [
+    {
+      "clipId": "idle",
+      "promptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/idle-r1.txt",
+      "promptSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+        "sha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+        "bytes": 1723872
+      },
+      "losslessDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/idle-r1-chroma-flat-recomposed.png",
+        "sha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+        "bytes": 927170
+      },
+      "calibratedDerivative": null,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+      "sourceSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+      "sourceBytes": 927170,
+      "eventPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/idle.production-event.json",
+      "eventSha256": "21b5ee9b96569550e0c3c7d12a180920497fd1b2b4e427fffaf45447256c9a5f"
+    },
+    {
+      "clipId": "move",
+      "promptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/move-r1.txt",
+      "promptSha256": "60b72394c0b0347c8c34ac052ab57f84eb8088121482e3d20f359639285d0881",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/move-r1-imagegen.png",
+        "sha256": "099fe15de215e5ed35f6b4b3e53fcedbb57e8d2fc2ee0dbb59e7f1173193a471",
+        "bytes": 1726873
+      },
+      "losslessDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/move-r1-chroma-flat-recomposed.png",
+        "sha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+        "bytes": 877467
+      },
+      "calibratedDerivative": null,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/move.png",
+      "sourceSha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+      "sourceBytes": 877467,
+      "eventPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/move.production-event.json",
+      "eventSha256": "225af1dd4f243cd9f66c8ef5f86ffa881227996c944eef27d14925c586e52732"
+    },
+    {
+      "clipId": "attack",
+      "promptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/attack-r1.txt",
+      "promptSha256": "702ba2f089ca1c5b5e7803ee5a41ee48de469932b172b212e85db7f888d6f269",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/attack-r1-imagegen.png",
+        "sha256": "b9b9cf3e8250eedaf681b6a300d40fe5146a3ac8b4b22effbd74cddb64738e6c",
+        "bytes": 1667689
+      },
+      "losslessDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/attack-r1-chroma-flat-recomposed.png",
+        "sha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+        "bytes": 839121
+      },
+      "calibratedDerivative": null,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/attack.png",
+      "sourceSha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+      "sourceBytes": 839121,
+      "eventPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/attack.production-event.json",
+      "eventSha256": "84deb8701dd50ef64f7bb7f2e7acdf981e3703d3aa07c62161671c25db2167c3"
+    },
+    {
+      "clipId": "death",
+      "promptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/death-r2.txt",
+      "promptSha256": "ede0d83e9e46bf21996dcd55060325bdc23f998d7eade50e0336fe882d347a81",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/death-r2-imagegen.png",
+        "sha256": "e7010da694a9d60acf78017bd99a7eaf5a12d6ea168ca4c9d5625f1b7125e19e",
+        "bytes": 1365691
+      },
+      "losslessDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/death-r2-chroma-flat-recomposed.png",
+        "sha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+        "bytes": 510363
+      },
+      "calibratedDerivative": null,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/death.png",
+      "sourceSha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+      "sourceBytes": 510363,
+      "eventPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/death.production-event.json",
+      "eventSha256": "04490b1bf4094e58f9297f8054ac14679cbc0d7247c0513ce659b837bfd4bbc9"
+    },
+    {
+      "clipId": "reload",
+      "promptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/reload-r2-standalone.txt",
+      "promptSha256": "0c85c251a904b42cb984e0f3118af9fc57c347bddd3b07d2a8b900937e7cadf3",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/reload-r2-imagegen.png",
+        "sha256": "ba5234a89876b51a335bec6866ded55b333435bc745c51b56793057ba9302bde",
+        "bytes": 1875424
+      },
+      "losslessDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-chroma-flat-recomposed.png",
+        "sha256": "e5a012c44da18c3aa3abfd5f8229644b6269d769f989976914ec132860e4f20b",
+        "bytes": 1083595
+      },
+      "calibratedDerivative": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-scale-calibrated-375px.png",
+        "sha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+        "bytes": 923296
+      },
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/reload.png",
+      "sourceSha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+      "sourceBytes": 923296,
+      "eventPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/reload.production-event.json",
+      "eventSha256": "b8bb302f3a0593014c2614376ceb3e13be186e4373ff619827001230c155db32"
+    }
+  ],
+  "sourceQa": {
+    "path": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+    "sha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a",
+    "bytes": 11778
+  },
+  "anchorFragment": {
+    "path": "docs/references/v66-worklot-002-colonial-raider-review/enemy-046-colonial-raider/anchor-review.fragment.json",
+    "sha256": "339a8da456e0b9c5d67d3c797a13754b65a6a9d6afa2eba6c8043499142f7358",
+    "bytes": 25819
+  },
+  "scaleFragment": {
+    "path": "docs/references/v66-worklot-002-colonial-raider-review/enemy-046-colonial-raider/scale-review.fragment.json",
+    "sha256": "541d3eb431956f4511d94ed2525c536d91df065426e4fd29474cde04af0a330a",
+    "bytes": 4431
+  },
+  "processor": {
+    "path": "docs/references/v66-worklot-002-colonial-raider-review/enemy-046-colonial-raider/process_colonial_raider_profile.py",
+    "sha256": "5ff3b10ff80466c9ec32a54e1f13b8779f144eeb788c9cb87df5d19f5d4263c6",
+    "bytes": 29350
+  },
+  "rejectedCandidates": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/death-r1-terminal-boundary-contact.png",
+      "sha256": "6dac9563267b26ad1df8a30818baa0520695700f385aa8b95e0fde5cfcca5258",
+      "bytes": 1553077
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/reload-r1-magazine-duplication.png",
+      "sha256": "3e7a920c3451e8099a7bd9a0aaab9f0eb2ab1372523b98dc3a9c4fc13d4218c4",
+      "bytes": 1716030
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "stateWrites": 0,
+  "normalizationRuns": 0
+}

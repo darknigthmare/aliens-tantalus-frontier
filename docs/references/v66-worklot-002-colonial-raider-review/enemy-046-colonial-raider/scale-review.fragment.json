@@ -1,0 +1,128 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-046-colonial-raider": {
+      "status": "reviewed-technical-candidate-art-not-accepted",
+      "reviewer": "Codex /root/prepare_profile_042",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "method": "Opaque non-#FF00FF silhouette height in nominal source-cell coordinates. Eight-pose medians are used for standing/aiming clips; death compares onset frame 1 only because later height loss is intended collapse. This is a pose-sensitive envelope check, not a rigid anatomical ruler.",
+      "measurements": {
+        "idle": {
+          "heightsPx": [
+            375,
+            375,
+            377,
+            375,
+            380,
+            381,
+            374,
+            365
+          ],
+          "medianPx": 375,
+          "comparisonHeightPx": 375,
+          "vsIdlePercent": 0,
+          "sourceScaleByClip": 1,
+          "interpretation": "baseline"
+        },
+        "move": {
+          "heightsPx": [
+            375,
+            375,
+            375,
+            374,
+            373,
+            376,
+            372,
+            371
+          ],
+          "medianPx": 374.5,
+          "comparisonHeightPx": 374.5,
+          "vsIdlePercent": -0.133,
+          "sourceScaleByClip": 1.001335,
+          "interpretation": "matched to idle; no factor applied"
+        },
+        "attack": {
+          "heightsPx": [
+            366,
+            364,
+            357,
+            357,
+            361,
+            365,
+            351,
+            361
+          ],
+          "medianPx": 361,
+          "comparisonHeightPx": 361,
+          "vsIdlePercent": -3.733,
+          "sourceScaleByClip": 1.038781,
+          "interpretation": "aiming compression inside pose/measurement tolerance; no factor applied"
+        },
+        "death": {
+          "heightsPx": [
+            321,
+            297,
+            279,
+            236,
+            181,
+            137,
+            108,
+            91
+          ],
+          "medianPx": 208.5,
+          "comparisonHeightPx": 321,
+          "comparisonMethod": "onset frame 1 only",
+          "vsIdlePercent": -14.4,
+          "sourceScaleByClip": 1.168224,
+          "interpretation": "intentional 12-15 percent smaller replacement requested to clear wide terminal prone silhouettes; later reductions are chronology, not scale drift; no further factor applied"
+        },
+        "reload": {
+          "preCalibrationMedianPx": 409.5,
+          "preCalibrationVsIdlePercent": 9.2,
+          "appliedSourceScaleByClip": 0.915750916,
+          "heightsPx": [
+            373,
+            375,
+            375,
+            373,
+            375,
+            375,
+            375,
+            376
+          ],
+          "medianPx": 375,
+          "comparisonHeightPx": 375,
+          "vsIdlePercent": 0,
+          "sourceScaleByClip": 1,
+          "interpretation": "profile-local per-cell calibration applied once; all eight support bottoms preserved and all cells revalidated"
+        }
+      },
+      "decisions": {
+        "idle": "retain unchanged",
+        "move": "retain unchanged",
+        "attack": "retain unchanged; posture explains small envelope reduction",
+        "death": "retain intentional smaller death-only envelope; do not normalize to standing height",
+        "reload": "retain calibrated active; raw and unscaled lossless derivatives remain preserved"
+      },
+      "evidencePaths": [
+        "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/orientation-weapon-anchor-contact.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/death-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/reload-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/death-anchor-playback.gif",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/reload-anchor-playback.gif"
+      ],
+      "materialTechnicalScaleDefectsOpen": [],
+      "factorsAppliedToActive": {
+        "reload": 0.915750916
+      },
+      "normalizationRun": false,
+      "accepted": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

@@ -1,0 +1,1085 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-046-colonial-raider": {
+      "status": "reviewed-technical-candidate-art-not-accepted",
+      "reviewer": "Codex /root/prepare_profile_042",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 40,
+      "method": "Per-pose body-mass landmark from the middle-height foreground band, snapped to an actual foreground pixel, then projected vertically to the lower-exclusive physical support bound. Terminal death anchors follow torso/pelvis mass and exclude muzzle reach. Values are profile-local review candidates and are not normalized or merged.",
+      "evidencePaths": [
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/idle-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/move-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/attack-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/death-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/reload-technical-overlay.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/qa/orientation-weapon-anchor-contact.png"
+      ],
+      "clips": {
+        "idle": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              89,
+              40,
+              405,
+              415
+            ],
+            "landmark": [
+              212,
+              234
+            ],
+            "anchor": [
+              212,
+              415
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 89,
+              "top": 40,
+              "right": 39,
+              "bottom": 29
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              87,
+              40,
+              395,
+              415
+            ],
+            "landmark": [
+              203,
+              235
+            ],
+            "anchor": [
+              203,
+              415
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 87,
+              "top": 40,
+              "right": 48,
+              "bottom": 29
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              76,
+              38,
+              377,
+              415
+            ],
+            "landmark": [
+              190,
+              234
+            ],
+            "anchor": [
+              190,
+              415
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 76,
+              "top": 38,
+              "right": 66,
+              "bottom": 29
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              64,
+              42,
+              356,
+              417
+            ],
+            "landmark": [
+              173,
+              237
+            ],
+            "anchor": [
+              173,
+              417
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 64,
+              "top": 42,
+              "right": 88,
+              "bottom": 27
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              103,
+              26,
+              390,
+              406
+            ],
+            "landmark": [
+              216,
+              221
+            ],
+            "anchor": [
+              216,
+              406
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 103,
+              "top": 26,
+              "right": 54,
+              "bottom": 37
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              76,
+              25,
+              370,
+              406
+            ],
+            "landmark": [
+              190,
+              222
+            ],
+            "anchor": [
+              190,
+              406
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 76,
+              "top": 25,
+              "right": 73,
+              "bottom": 37
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              64,
+              32,
+              357,
+              406
+            ],
+            "landmark": [
+              177,
+              226
+            ],
+            "anchor": [
+              177,
+              406
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 64,
+              "top": 32,
+              "right": 86,
+              "bottom": 37
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              61,
+              41,
+              366,
+              406
+            ],
+            "landmark": [
+              181,
+              230
+            ],
+            "anchor": [
+              181,
+              406
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 61,
+              "top": 41,
+              "right": 78,
+              "bottom": 37
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          }
+        ],
+        "move": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              85,
+              42,
+              407,
+              417
+            ],
+            "landmark": [
+              223,
+              231
+            ],
+            "anchor": [
+              223,
+              417
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 85,
+              "top": 42,
+              "right": 37,
+              "bottom": 27
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              63,
+              42,
+              370,
+              417
+            ],
+            "landmark": [
+              189,
+              231
+            ],
+            "anchor": [
+              189,
+              417
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 63,
+              "top": 42,
+              "right": 73,
+              "bottom": 27
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              48,
+              42,
+              363,
+              417
+            ],
+            "landmark": [
+              183,
+              233
+            ],
+            "anchor": [
+              183,
+              417
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 48,
+              "top": 42,
+              "right": 80,
+              "bottom": 27
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              22,
+              45,
+              336,
+              419
+            ],
+            "landmark": [
+              163,
+              237
+            ],
+            "anchor": [
+              163,
+              419
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 22,
+              "top": 45,
+              "right": 108,
+              "bottom": 25
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              85,
+              20,
+              401,
+              393
+            ],
+            "landmark": [
+              229,
+              211
+            ],
+            "anchor": [
+              229,
+              393
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 85,
+              "top": 20,
+              "right": 43,
+              "bottom": 50
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              62,
+              18,
+              367,
+              394
+            ],
+            "landmark": [
+              186,
+              207
+            ],
+            "anchor": [
+              186,
+              394
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 62,
+              "top": 18,
+              "right": 76,
+              "bottom": 49
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              35,
+              21,
+              359,
+              393
+            ],
+            "landmark": [
+              187,
+              212
+            ],
+            "anchor": [
+              187,
+              393
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 35,
+              "top": 21,
+              "right": 84,
+              "bottom": 50
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              26,
+              24,
+              347,
+              395
+            ],
+            "landmark": [
+              174,
+              214
+            ],
+            "anchor": [
+              174,
+              395
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 26,
+              "top": 24,
+              "right": 97,
+              "bottom": 48
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          }
+        ],
+        "attack": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              75,
+              62,
+              374,
+              428
+            ],
+            "landmark": [
+              203,
+              245
+            ],
+            "anchor": [
+              203,
+              428
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 75,
+              "top": 62,
+              "right": 70,
+              "bottom": 16
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              50,
+              64,
+              381,
+              428
+            ],
+            "landmark": [
+              168,
+              239
+            ],
+            "anchor": [
+              168,
+              428
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 50,
+              "top": 64,
+              "right": 62,
+              "bottom": 16
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              35,
+              71,
+              370,
+              428
+            ],
+            "landmark": [
+              148,
+              249
+            ],
+            "anchor": [
+              148,
+              428
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 35,
+              "top": 71,
+              "right": 73,
+              "bottom": 16
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              8,
+              71,
+              330,
+              428
+            ],
+            "landmark": [
+              119,
+              251
+            ],
+            "anchor": [
+              119,
+              428
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 8,
+              "top": 71,
+              "right": 114,
+              "bottom": 16
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              73,
+              29,
+              428,
+              390
+            ],
+            "landmark": [
+              182,
+              214
+            ],
+            "anchor": [
+              182,
+              390
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 73,
+              "top": 29,
+              "right": 16,
+              "bottom": 53
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              71,
+              25,
+              337,
+              390
+            ],
+            "landmark": [
+              183,
+              208
+            ],
+            "anchor": [
+              183,
+              390
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 71,
+              "top": 25,
+              "right": 106,
+              "bottom": 53
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              19,
+              38,
+              348,
+              389
+            ],
+            "landmark": [
+              129,
+              217
+            ],
+            "anchor": [
+              129,
+              389
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 19,
+              "top": 38,
+              "right": 95,
+              "bottom": 54
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              8,
+              29,
+              309,
+              390
+            ],
+            "landmark": [
+              138,
+              211
+            ],
+            "anchor": [
+              138,
+              390
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 8,
+              "top": 29,
+              "right": 135,
+              "bottom": 53
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          }
+        ],
+        "death": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              130,
+              93,
+              340,
+              414
+            ],
+            "landmark": [
+              212,
+              246
+            ],
+            "anchor": [
+              212,
+              414
+            ],
+            "uncertaintyPx": 9,
+            "marginsPx": {
+              "left": 130,
+              "top": 93,
+              "right": 104,
+              "bottom": 30
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              96,
+              117,
+              303,
+              414
+            ],
+            "landmark": [
+              199,
+              263
+            ],
+            "anchor": [
+              199,
+              414
+            ],
+            "uncertaintyPx": 10,
+            "marginsPx": {
+              "left": 96,
+              "top": 117,
+              "right": 140,
+              "bottom": 30
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              76,
+              135,
+              286,
+              414
+            ],
+            "landmark": [
+              178,
+              275
+            ],
+            "anchor": [
+              178,
+              414
+            ],
+            "uncertaintyPx": 11,
+            "marginsPx": {
+              "left": 76,
+              "top": 135,
+              "right": 157,
+              "bottom": 30
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              49,
+              178,
+              292,
+              414
+            ],
+            "landmark": [
+              167,
+              306
+            ],
+            "anchor": [
+              167,
+              414
+            ],
+            "uncertaintyPx": 12,
+            "marginsPx": {
+              "left": 49,
+              "top": 178,
+              "right": 152,
+              "bottom": 30
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              58,
+              154,
+              353,
+              335
+            ],
+            "landmark": [
+              226,
+              256
+            ],
+            "anchor": [
+              226,
+              335
+            ],
+            "uncertaintyPx": 13,
+            "marginsPx": {
+              "left": 58,
+              "top": 154,
+              "right": 91,
+              "bottom": 108
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              31,
+              197,
+              376,
+              334
+            ],
+            "landmark": [
+              227,
+              274
+            ],
+            "anchor": [
+              227,
+              334
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 31,
+              "top": 197,
+              "right": 67,
+              "bottom": 109
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              18,
+              226,
+              377,
+              334
+            ],
+            "landmark": [
+              218,
+              286
+            ],
+            "anchor": [
+              218,
+              334
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 18,
+              "top": 226,
+              "right": 66,
+              "bottom": 109
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              15,
+              241,
+              375,
+              332
+            ],
+            "landmark": [
+              211,
+              292
+            ],
+            "anchor": [
+              211,
+              332
+            ],
+            "uncertaintyPx": 14,
+            "marginsPx": {
+              "left": 15,
+              "top": 241,
+              "right": 69,
+              "bottom": 111
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          }
+        ],
+        "reload": [
+          {
+            "frame": 0,
+            "sourceBounds": [
+              78,
+              59,
+              366,
+              432
+            ],
+            "landmark": [
+              188,
+              248
+            ],
+            "anchor": [
+              188,
+              432
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 78,
+              "top": 59,
+              "right": 78,
+              "bottom": 12
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 1,
+            "sourceBounds": [
+              66,
+              57,
+              355,
+              432
+            ],
+            "landmark": [
+              175,
+              236
+            ],
+            "anchor": [
+              175,
+              432
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 66,
+              "top": 57,
+              "right": 88,
+              "bottom": 12
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 2,
+            "sourceBounds": [
+              58,
+              57,
+              327,
+              432
+            ],
+            "landmark": [
+              161,
+              240
+            ],
+            "anchor": [
+              161,
+              432
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 58,
+              "top": 57,
+              "right": 116,
+              "bottom": 12
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 3,
+            "sourceBounds": [
+              50,
+              59,
+              334,
+              432
+            ],
+            "landmark": [
+              163,
+              247
+            ],
+            "anchor": [
+              163,
+              432
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 50,
+              "top": 59,
+              "right": 110,
+              "bottom": 12
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 4,
+            "sourceBounds": [
+              75,
+              54,
+              359,
+              429
+            ],
+            "landmark": [
+              188,
+              242
+            ],
+            "anchor": [
+              188,
+              429
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 75,
+              "top": 54,
+              "right": 85,
+              "bottom": 14
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 5,
+            "sourceBounds": [
+              60,
+              54,
+              350,
+              429
+            ],
+            "landmark": [
+              172,
+              237
+            ],
+            "anchor": [
+              172,
+              429
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 60,
+              "top": 54,
+              "right": 93,
+              "bottom": 14
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 6,
+            "sourceBounds": [
+              59,
+              54,
+              357,
+              429
+            ],
+            "landmark": [
+              167,
+              232
+            ],
+            "anchor": [
+              167,
+              429
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 59,
+              "top": 54,
+              "right": 86,
+              "bottom": 14
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          },
+          {
+            "frame": 7,
+            "sourceBounds": [
+              52,
+              53,
+              341,
+              429
+            ],
+            "landmark": [
+              161,
+              242
+            ],
+            "anchor": [
+              161,
+              429
+            ],
+            "uncertaintyPx": 8,
+            "marginsPx": {
+              "left": 52,
+              "top": 53,
+              "right": 103,
+              "bottom": 14
+            },
+            "landmarkInsideForeground": true,
+            "anchorAtPhysicalSupportBottom": true
+          }
+        ]
+      },
+      "validation": {
+        "requiredAnchors": 40,
+        "reviewedAnchors": 40,
+        "landmarksInsideForeground": 40,
+        "supportBottomChecks": 40,
+        "clearNominalCellPoses": 40,
+        "reloadCalibrationSupportBottomPreserved": "8/8"
+      },
+      "accepted": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

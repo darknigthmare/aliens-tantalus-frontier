@@ -5737,6 +5737,358 @@
       "note": "Profile-local OpenAI ImageGen candidate only; no global state write, normalization, acceptance or runtime integration.",
       "at": "2026-09-01T04:25:09.933Z",
       "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-044-upp-vanguard, RELOAD animation\nPrimary request: one original fan-made 4x2 sprite sheet with exactly eight chronological mechanically coherent rifle reload poses of the same UPP Vanguard.\nBackdrop: perfectly flat uniform pure #FF00FF magenta only; no floor, shadow, scenery or grid.\nIdentity: compact adult human assault elite in strict orthographic side view facing RIGHT. Low shallow rounded helmet with short brow, protected ears, narrow smoked visor, readable jaw, compact left communications block and short antenna. Light-to-medium segmented gray-olive field armor, modest guards, charcoal webbing, compact radio pack, restrained pouches and tiny dull-red functional tab.\nWeapon: identical original UPP-pattern pulse/assault rifle in every pose: long straight angular upper receiver, short vented shroud, fixed skeletal stock, curved detachable magazine, compact low optic and short muzzle; complete rifle points RIGHT. Not an M41A or real-world branded rifle.\nStyle: polished modern 2D metroidvania sprite art, detailed painted pixel-art feel, crisp readable silhouette, original project design.\nComposition: exact 2:1 landscape, precise implied 4 columns x 2 rows, exactly eight complete full-body soldiers, generous gutters, identical physical scale and ground line; all equipment fully contained.\nPalette: desaturated gray-olive/green-gray, muted sage, charcoal, dark oxidized gunmetal, tiny dull red.\nConstraints: stable person, helmet, armor, pouches, rifle geometry, handedness and scale; all right-facing; no text, logo, UI, watermark, crop, overlap or cell contact.\nAvoid: USCM/M3/M41A, blue camouflage, AK replica, historical propaganda uniform, glossy armor, exoskeleton, railgun, neon, left-facing, three-quarter camera, weapon morphing or duplicate frames.\nChronology: ready and indexed; support hand reaches curved magazine; magazine release; empty magazine controlled; one fresh curved magazine aligned; magazine seated; charging control operated; two-hand ready restored. Same magazine well and charging control; exactly one loose magazine maximum; no floating duplicate."
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-046-colonial-raider",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+      "actor": "Codex /root/prepare_profile_042",
+      "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/idle-r1.txt",
+      "actualPromptFileSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+      "promptSha256": "3ea6e865e7ca2fa02e686d29bc19a4730b43d3179fdbd6923f646b796a3c08be",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/idle.png",
+      "sourceSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+      "sourceBytes": 927170,
+      "contractPromptSha256": "39dd9152ca443d396604c8b1043162f8123d40c364275f6fd6590763978fff7a",
+      "queuePromptSha256": "39dd9152ca443d396604c8b1043162f8123d40c364275f6fd6590763978fff7a",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+        "sha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+        "bytes": 1723872,
+        "bridge": "approved PTY base64 decoder",
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+          "result": "Detected foreground retained pixel-for-pixel; exterior generated chroma made exact opaque #FF00FF; nominal 4x2 crop/paste was pixel-equal.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/idle-r1-imagegen.png",
+          "inputSha256": "2a1dd9d6b04a5eb324ae79e4a9fcf38c55a336ddae9e6bf02de3953131e33e93",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/idle-r1-chroma-flat-recomposed.png",
+          "outputSha256": "4726519d7ab733dada5fd68fd38f9d1a768863577823e8033e80200ce1c22791",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 25,
+        "uniformOpaqueExactMagenta": true,
+        "scaleComparisonHeightPx": 375,
+        "scaleVsIdlePercent": 0,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local idle candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T12:00:00.000Z",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, IDLE animation\nPrimary request: create one entirely original fan-made 4 columns by 2 rows sprite sheet containing exactly eight chronological idle poses of the same Colonial Raider project character. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine in every pose, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and exactly one straight detachable box magazine. Same butt-to-muzzle length and geometry in all eight poses. Complete carbine points RIGHT. It is not an M41A, NSG23, AK, real-world branded rifle, UPP gun, USCMC gun or energy weapon.\nStyle: polished modern 2D metroidvania game sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nComposition: precise implied 4x2 grid with exactly one complete full-body raider per cell in strict row-major order. Every pose stays centered inside its own implied cell with generous equal gutters. Hood crown to boot sole fills about 68 percent of cell height in comparable live poses. Identical physical scale, anatomy, handedness, outfit, respirator, shoulder asymmetry, pack and carbine across all cells. No limb, hood, coat tail, backpack, muzzle or loose object touches or crosses a cell boundary.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest, knees, toes and muzzle point right. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: dusty gray, sand canvas, brown synthetic leather/composite, charcoal cloth, scratched dull metal and one tiny muted ochre accent. Matte worn surfaces; no neon, glossy power armor or bright faction colors.\nConstraints: exactly one human and one carbine per cell; stable face, eyes, respirator, hood, anatomy, clothing and weapon; no duplicated pose; no text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; USCMC, UPP, Weyland-Yutani, Seegson or Colonial Marshal branding; M3 armor; Space Marine or ODST armor; cowboy hat or duster; spikes, skulls, tire armor, fantasy bandit, Mad Max styling; ATARAX suit; cyber limbs; sealed helmet; full gas-mask lenses; glowing technology; second firearm; weapon morphing.\nChronology, strict row-major: 1 low-ready neutral crouch; 2 restrained inhale; 3 shoulders rise slightly; 4 eyes scan forward without turning the body; 5 weight shifts subtly to rear boot; 6 carbine settles while muzzle stays right; 7 exhale and shoulders lower; 8 near-neutral closure matching pose 1 for a clean loop. Eight distinct restrained poses, both feet grounded, no stepping, firing or reload.\n"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-046-colonial-raider",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:099fe15de215e5ed35f6b4b3e53fcedbb57e8d2fc2ee0dbb59e7f1173193a471",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+      "actor": "Codex /root/prepare_profile_042",
+      "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/move-r1.txt",
+      "actualPromptFileSha256": "60b72394c0b0347c8c34ac052ab57f84eb8088121482e3d20f359639285d0881",
+      "promptSha256": "60b72394c0b0347c8c34ac052ab57f84eb8088121482e3d20f359639285d0881",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/move.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/move.png",
+      "sourceSha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+      "sourceBytes": 877467,
+      "contractPromptSha256": "d5469670811a5df4607a06eee9d5d03aa89708a979f177d219c471c3ea8303b2",
+      "queuePromptSha256": "d5469670811a5df4607a06eee9d5d03aa89708a979f177d219c471c3ea8303b2",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/move-r1-imagegen.png",
+        "sha256": "099fe15de215e5ed35f6b4b3e53fcedbb57e8d2fc2ee0dbb59e7f1173193a471",
+        "bytes": 1726873,
+        "bridge": "approved PTY base64 decoder",
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+          "result": "Detected foreground retained pixel-for-pixel; exterior generated chroma made exact opaque #FF00FF; nominal 4x2 crop/paste was pixel-equal.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/move-r1-imagegen.png",
+          "inputSha256": "099fe15de215e5ed35f6b4b3e53fcedbb57e8d2fc2ee0dbb59e7f1173193a471",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/move-r1-chroma-flat-recomposed.png",
+          "outputSha256": "822db1d59a97ae9573e2dde5a983e1f15ad4e82aa0121b495d9058ab88cec615",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 18,
+        "uniformOpaqueExactMagenta": true,
+        "scaleComparisonHeightPx": 374.5,
+        "scaleVsIdlePercent": -0.133,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local move candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T12:00:00.000Z",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, MOVE animation\nPrimary request: create one entirely original fan-made 4 columns by 2 rows sprite sheet containing exactly eight chronological locomotion poses of the same Colonial Raider project character. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nInput image: Image 1 is the approved IDLE board and serves only as identity, outfit, palette, carbine-geometry and physical-scale reference. Create eight new locomotion poses; do not copy or collage its pose pixels.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine in every pose, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and exactly one straight detachable box magazine. Match Image 1 butt-to-muzzle length and geometry exactly. Complete carbine points RIGHT and remains controlled in both hands. It is not an M41A, NSG23, AK, real-world branded rifle, UPP gun, USCMC gun or energy weapon.\nStyle: match Image 1 polished modern 2D metroidvania sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nComposition: precise implied 4x2 grid with exactly one complete full-body raider per cell in strict row-major order. Every pose stays centered inside its own implied cell with generous equal gutters; the character animates in place and does not translate across cells. Match Image 1 live-pose hood-crown-to-boot height, body mass and carbine length. No limb, hood, coat tail, backpack, muzzle or loose object touches or crosses a cell boundary.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest, knees, toes and muzzle point right. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: match Image 1 dusty gray, sand canvas, brown composite, charcoal cloth, scratched dull metal and tiny muted ochre accent; matte worn surfaces only.\nConstraints: exactly one human and one carbine per cell; stable face, eyes, respirator, hood, anatomy, clothing, handedness, shoulder asymmetry, pack and weapon; no duplicate frames; no text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; USCMC, UPP, Weyland-Yutani, Seegson or Colonial Marshal branding; Space Marine, cowboy or spiked wasteland styling; cyber limbs; sealed helmet; second firearm; weapon morphing; sprinting; parade gait; floating feet.\nChronology, strict row-major: 1 rear boot contact in a low cautious advance; 2 load acceptance with pelvis grounded; 3 first passing position; 4 front boot plants; 5 opposite toe-off; 6 opposite passing position; 7 opposite boot contact; 8 cycle closure flowing back to pose 1. One complete quiet predatory walk cycle, clear alternating feet, compact steps, stable pelvis height, carbine controlled and muzzle right; no firing or reload.\n"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-046-colonial-raider",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:b9b9cf3e8250eedaf681b6a300d40fe5146a3ac8b4b22effbd74cddb64738e6c",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+      "actor": "Codex /root/prepare_profile_042",
+      "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/attack-r1.txt",
+      "actualPromptFileSha256": "702ba2f089ca1c5b5e7803ee5a41ee48de469932b172b212e85db7f888d6f269",
+      "promptSha256": "702ba2f089ca1c5b5e7803ee5a41ee48de469932b172b212e85db7f888d6f269",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/attack.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/attack.png",
+      "sourceSha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+      "sourceBytes": 839121,
+      "contractPromptSha256": "ef6c6dab750234f54ada996b085824b3b85645763fabf44519e365e496df627f",
+      "queuePromptSha256": "ef6c6dab750234f54ada996b085824b3b85645763fabf44519e365e496df627f",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/attack-r1-imagegen.png",
+        "sha256": "b9b9cf3e8250eedaf681b6a300d40fe5146a3ac8b4b22effbd74cddb64738e6c",
+        "bytes": 1667689,
+        "bridge": "approved PTY base64 decoder",
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+          "result": "Detected foreground retained pixel-for-pixel; exterior generated chroma made exact opaque #FF00FF; nominal 4x2 crop/paste was pixel-equal.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/attack-r1-imagegen.png",
+          "inputSha256": "b9b9cf3e8250eedaf681b6a300d40fe5146a3ac8b4b22effbd74cddb64738e6c",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/attack-r1-chroma-flat-recomposed.png",
+          "outputSha256": "1870c9920890ad7a47022a9d2c32fb15362da70823975c8057d7925baaf068d4",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        }
+      ],
+      "generationAttempts": 1,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 8,
+        "uniformOpaqueExactMagenta": true,
+        "scaleComparisonHeightPx": 361,
+        "scaleVsIdlePercent": -3.733,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local attack candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T12:00:00.000Z",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, ATTACK animation\nPrimary request: create one entirely original fan-made 4 columns by 2 rows sprite sheet containing exactly eight chronological firearm-attack poses of the same Colonial Raider project character. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nInput images, if supplied: prior reviewed 046 boards serve only as identity, outfit, palette, carbine-geometry and physical-scale references. Create eight new firing poses; do not copy, collage or interpolate their pose pixels.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine in every pose, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and exactly one straight detachable box magazine. Match Image 1 butt-to-muzzle length and geometry exactly. Complete carbine points RIGHT and stays in the same two hands. It is not an M41A, NSG23, AK, real-world branded rifle, UPP gun, USCMC gun or energy weapon.\nStyle: match Image 1 polished modern 2D metroidvania sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nComposition: precise implied 4x2 grid with exactly one complete full-body raider per cell in strict row-major order. Every pose stays centered inside its own implied cell with generous equal gutters. Match Image 1 body height, body mass and carbine length. Leave extra empty margin in front of the muzzle. No limb, hood, coat tail, backpack, muzzle, flash or casing touches or crosses a cell boundary.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest, knees, toes and muzzle point right. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: match Image 1 dusty gray, sand canvas, brown composite, charcoal cloth, scratched dull metal and tiny muted ochre accent; matte worn surfaces only.\nConstraints: exactly one human and one carbine per cell; stable face, eyes, respirator, hood, anatomy, clothing, handedness, shoulder asymmetry, pack and weapon; no duplicate frames; no ejected casing; no text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; official faction equipment; Space Marine, cowboy or spiked wasteland styling; cyber limbs; sealed helmet; second firearm; weapon morphing; automatic burst; giant muzzle flash; aiming toward camera.\nChronology, strict row-major: 1 low ready; 2 stock begins seating into shoulder; 3 muzzle acquires target; 4 stable aim lock; 5 one single semi-automatic shot with only a tiny attached dull-yellow muzzle spark; 6 compact rearward recoil; 7 sights recover and muzzle returns to line; 8 controlled return toward low ready. One shot only, no reload, coherent shoulder and hand mechanics.\n"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-046-colonial-raider",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:e7010da694a9d60acf78017bd99a7eaf5a12d6ea168ca4c9d5625f1b7125e19e",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+      "actor": "Codex /root/prepare_profile_042",
+      "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/death-r2.txt",
+      "actualPromptFileSha256": "ede0d83e9e46bf21996dcd55060325bdc23f998d7eade50e0336fe882d347a81",
+      "promptSha256": "ede0d83e9e46bf21996dcd55060325bdc23f998d7eade50e0336fe882d347a81",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/death.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/death.png",
+      "sourceSha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+      "sourceBytes": 510363,
+      "contractPromptSha256": "df747f0c8fdc52e7a9a9610dccb0e57f8f3d3f580acda56c29f0a191009c5c1c",
+      "queuePromptSha256": "df747f0c8fdc52e7a9a9610dccb0e57f8f3d3f580acda56c29f0a191009c5c1c",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/death-r2-imagegen.png",
+        "sha256": "e7010da694a9d60acf78017bd99a7eaf5a12d6ea168ca4c9d5625f1b7125e19e",
+        "bytes": 1365691,
+        "bridge": "approved PTY base64 decoder",
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+          "result": "Detected foreground retained pixel-for-pixel; exterior generated chroma made exact opaque #FF00FF; nominal 4x2 crop/paste was pixel-equal.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/death-r2-imagegen.png",
+          "inputSha256": "e7010da694a9d60acf78017bd99a7eaf5a12d6ea168ca4c9d5625f1b7125e19e",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/death-r2-chroma-flat-recomposed.png",
+          "outputSha256": "9aca8b86a2d802a5de5a488c457aa12ce99c8c9337f336855cba1e0a5412abd9",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        }
+      ],
+      "generationAttempts": 2,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 15,
+        "uniformOpaqueExactMagenta": true,
+        "scaleComparisonHeightPx": 321,
+        "scaleVsIdlePercent": -14.4,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted"
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local death candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T12:00:00.000Z",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, DEATH animation, targeted replacement candidate r2\nPrimary request: generate one entirely new 4 columns by 2 rows sprite sheet with exactly eight chronological death poses of the same project-original Colonial Raider design. This replacement specifically corrects the rejected death-r1 boundary contact: render the complete character and carbine approximately 12 to 15 percent smaller, with generous empty chroma margin on every side of every implied cell. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nInput images: none. Reconstruct the character only from the complete project-original design lock below; do not imitate, copy or collage any licensed or official bitmap.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and one fixed straight detachable box magazine. Same butt-to-muzzle length and geometry in every pose. No second firearm, no loose magazine and no weapon morphing.\nStyle: polished modern 2D metroidvania sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nScale lock: intentionally 12 to 15 percent smaller than a near-full-cell standing sprite. Standing onset silhouette target about 320 to 330 pixels high inside a roughly 443-pixel-tall cell. Even the widest prone poses must remain no more than about 365 pixels wide inside a roughly 443-pixel-wide cell.\nComposition: precise implied 4x2 grid with exactly one complete raider per cell in strict row-major order. At least 30 pixels of visibly empty pure-magenta clearance on left, right, top and bottom of every pose, including frames 7 and 8. No limb, hood, coat tail, backpack, boot, stock, muzzle or carbine touches or crosses any cell boundary. No crop and no pose fragment in a neighboring cell.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest and carbine muzzle remain rightward even during collapse. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: dusty gray, sand canvas, brown composite, charcoal cloth, scratched dull metal and tiny muted ochre accent; matte worn surfaces only.\nConstraints: stable face, eyes, respirator, hood, anatomy, clothing, handedness, shoulder asymmetry, pack and carbine; complete body and complete weapon in all eight cells; no gore, dismemberment, firing, muzzle flash, text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; official faction equipment; Space Marine, cowboy or spiked wasteland styling; cyber limbs; sealed helmet; M41A, AK or real-world rifle; dropped duplicate weapon; oversized corpse; boundary contact; terminal motion loop.\nChronology, strict row-major: 1 upright right-facing hit reaction; 2 shoulders recoil and knees soften; 3 stagger begins while retaining the one carbine; 4 drops toward one knee; 5 controlled lateral fall; 6 body reaches the ground; 7 final small settling motion into a compact right-facing prone silhouette; 8 fully motionless terminal prone corpse, visually settled with no rebound and generous clearance. Irreversible one-shot sequence.\n",
+      "rejectedCandidates": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/death-r1-terminal-boundary-contact.png",
+          "sha256": "6dac9563267b26ad1df8a30818baa0520695700f385aa8b95e0fde5cfcca5258",
+          "bytes": 1553077,
+          "reason": "death-r1 terminal poses 7-8 contacted nominal cell boundaries"
+        }
+      ]
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-046-colonial-raider",
+      "clipId": "reload",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:ba5234a89876b51a335bec6866ded55b333435bc745c51b56793057ba9302bde",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "The provider returned an in-memory PNG without a durable generation ID; the immutable raw-capture SHA-256 identifies the generation.",
+      "actor": "Codex /root/prepare_profile_042",
+      "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-046-colonial-raider/reload-r2-standalone.txt",
+      "actualPromptFileSha256": "0c85c251a904b42cb984e0f3118af9fc57c347bddd3b07d2a8b900937e7cadf3",
+      "promptSha256": "0c85c251a904b42cb984e0f3118af9fc57c347bddd3b07d2a8b900937e7cadf3",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/reload.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/reload.png",
+      "sourceSha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+      "sourceBytes": 923296,
+      "contractPromptSha256": "0f0e61b12070fd26b3f757990f2d1e269ba1e44d1704bbd43cb7b78617728256",
+      "queuePromptSha256": "0f0e61b12070fd26b3f757990f2d1e269ba1e44d1704bbd43cb7b78617728256",
+      "referenceLockSha256": "29daee94983f2445764e50fc880345ae61dfcee7df1014d18df5ad90a6e8de87",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/reload-r2-imagegen.png",
+        "sha256": "ba5234a89876b51a335bec6866ded55b333435bc745c51b56793057ba9302bde",
+        "bytes": 1875424,
+        "bridge": "approved PTY base64 decoder",
+        "pixelEdits": 0
+      },
+      "sourceRepairs": [
+        {
+          "kind": "opaque-chroma-flatten-and-lossless-grid-recomposition",
+          "result": "Provider 1773x887 canvas padded by one pure-#FF00FF right column; detected foreground retained pixel-for-pixel in the preserved lossless derivative; nominal 4x2 crop/paste was pixel-equal.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/raw/reload-r2-imagegen.png",
+          "inputSha256": "ba5234a89876b51a335bec6866ded55b333435bc745c51b56793057ba9302bde",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-chroma-flat-recomposed.png",
+          "outputSha256": "e5a012c44da18c3aa3abfd5f8229644b6269d769f989976914ec132860e4f20b",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        },
+        {
+          "kind": "profile-local-source-scale-calibration",
+          "result": "Applied sourceScaleByClip 0.915750916 per cell, preserving physical support bottom 8/8 and producing a 375 px median silhouette with positive clearance in all cells.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/derived/reload-r2-chroma-flat-recomposed.png",
+          "inputSha256": "e5a012c44da18c3aa3abfd5f8229644b6269d769f989976914ec132860e4f20b",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/reload.png",
+          "outputSha256": "610e19af4ef6c0598254dab61133b13123ff37f54c504c0a3137a9d297e6db4b",
+          "receiptPath": "docs/references/V66_WORKLOT_002_COLONIAL_RAIDER_SOURCE_QA.json",
+          "receiptSha256": "68b6ef2abc7c764da8766a38f2dfe2ef28b207ae4a9a32931023f72e9d8c010a"
+        }
+      ],
+      "generationAttempts": 2,
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 12,
+        "uniformOpaqueExactMagenta": true,
+        "scaleComparisonHeightPx": 375,
+        "scaleVsIdlePercent": 0,
+        "technicalReview": "technical-source-gates-pass-art-not-accepted",
+        "magazineDuplication": 0
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local reload candidate only; technical source QA passes, but no art acceptance, normalization, runtime integration or global state write is implied.",
+      "at": "2026-09-01T12:00:00.000Z",
+      "actualPromptText": "Use case: stylized-concept\nAsset type: production game sprite sheet, enemy-046-colonial-raider, RELOAD animation, targeted replacement candidate r2\nPrimary request: generate an entirely new corrected 4 columns by 2 rows sprite sheet with exactly eight chronological reload poses of the same original Colonial Raider design lock. The prior reload candidate was rejected only because one pose duplicated the magazine; this new board must preserve the locked character identity, costume, palette, physical scale and carbine geometry while correcting magazine state logic. Colonial Raider is a Tantalus project label, not an official Alien faction or canonical uniform; canonExact=false.\nInput images: none. Reconstruct the character only from the complete project-original design lock below; do not imitate, copy or collage any licensed or official bitmap.\nCanvas and backdrop: final raster exactly 1774 pixels wide by 887 pixels high, exact 2:1 landscape. Perfectly flat, perfectly uniform pure RGB #FF00FF chroma-magenta across every background pixel; no floor, shadow, gradient, texture, scenery, border or visible grid.\nIdentity lock: one unnamed ordinary adult human ambusher with lean realistic proportions. Dusty gray short hooded utility coat; visible eyes and brow above one fixed gray-brown half-face dust respirator with two small filters; sand canvas chest harness; exactly one scratched brown composite shoulder plate on the camera-facing near shoulder; charcoal work trousers; battered dark boots; fingered gloves; compact filter-and-salvage backpack; one muted ochre blank identification tape with no lettering.\nWeapon lock: exactly one original compact semi-automatic frontier scavenger carbine, scratched charcoal steel and muted brown composite furniture, short fixed stock, coherent receiver, simple iron sights, narrow barrel and one fixed straight detachable box-magazine well. Same butt-to-muzzle length and geometry in every pose. Complete carbine points RIGHT. No second firearm and no weapon morphing.\nMagazine-state invariant: never show an inserted magazine and a loose magazine simultaneously. Poses 1-3 have exactly one inserted straight magazine and zero loose magazines. Poses 4-5 have a clearly EMPTY magazine well and exactly one loose straight magazine in the support hand. Poses 6-8 have exactly one inserted magazine and zero loose magazines. No spare magazine shape on the harness or ground, no double magazine, no floating magazine and no extra hand.\nStyle: polished modern 2D metroidvania sprite art, detailed painted pixel-art feel, crisp readable silhouettes, restrained industrial frontier realism, entirely original project design.\nComposition: precise implied 4x2 grid with exactly one complete full-body raider per cell in strict row-major order. Every pose centered inside its own implied cell with generous equal gutters. Stable body height, mass and carbine length across all eight poses. The one loose magazine stays close to the empty receiver and wholly inside the cell. No limb, hood, coat tail, backpack, muzzle or magazine touches or crosses a cell boundary.\nOrientation: strict orthographic gameplay side profile facing RIGHT in all eight poses; nose, chest, knees, toes and muzzle point right. Never left-facing, front-facing, rear-facing or three-quarter. No camera rotation or perspective drift.\nPalette and materials: dusty gray, sand canvas, brown composite, charcoal cloth, scratched dull metal and tiny muted ochre accent; matte worn surfaces only.\nConstraints: stable face, eyes, respirator, hood, anatomy, clothing, handedness, shoulder asymmetry, pack and carbine; mechanically readable empty well; no firing, duplicated pose, text, letters, numbers, logos, insignia, UI, watermark, panel lines, crop, overlap or official/licensed bitmap reuse.\nAvoid: canonical-faction claims; official faction equipment; Space Marine, cowboy or spiked wasteland styling; cyber limbs; sealed helmet; M41A, AK or real-world rifle; shell-by-shell shotgun reload; multiple magazines; magazine duplication; aiming toward camera.\nChronology, strict row-major: 1 low ready with one magazine inserted; 2 carbine cants inward, magazine still inserted; 3 support hand reaches the inserted magazine; 4 old magazine fully clears, well visibly empty, exactly one loose magazine in hand; 5 replacement aligns below the still-empty well, exactly one loose magazine; 6 replacement fully seats, no loose magazine; 7 support hand operates the same action, one inserted magazine; 8 identical ready silhouette restored, one inserted magazine. One complete reload and no shot.\n",
+      "rejectedCandidates": [
+        {
+          "path": "assets/openai/sprites/frames/v66/batch-003/enemy-046-colonial-raider/rejected/reload-r1-magazine-duplication.png",
+          "sha256": "3e7a920c3451e8099a7bd9a0aaab9f0eb2ab1372523b98dc3a9c4fc13d4218c4",
+          "bytes": 1716030,
+          "reason": "reload-r1 pose 5 duplicated the magazine"
+        }
+      ]
     }
   ]
 }
