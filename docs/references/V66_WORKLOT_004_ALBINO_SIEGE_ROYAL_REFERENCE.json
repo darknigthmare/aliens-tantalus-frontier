@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-004",
+  "batchId": "batch-005",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-081-albino-siege-royal": {
+      "status": "reviewed",
+      "profileId": "enemy-081-albino-siege-royal",
+      "name": "Albino Siege Royal",
+      "archetype": "Siege Royal",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-acm",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "royal",
+      "batchId": "batch-005",
+      "ordinal": 80,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-029-siege-royal",
+      "baseReferenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_REFERENCE.json",
+        "sha256": "cbda8a7fea78ddb352cf5560d7f308fd0aa76c06244fdf62db8973b38c07ce4f"
+      },
+      "reviewer": "Codex /root/refs_081_082",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+        "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+      ],
+      "urlsPolicy": "The HTTPS pages verify licensed Aliens: Colonial Marines context and broad creature-design grammar only. Siege Royal and Albino Siege Royal are unattested project caste names; positive identity authority is the reviewed enemy-029 lock and hashed local project evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_REFERENCE.json",
+        "assets/openai/sprites/enemies/siege-royal-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/death.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/tail-strike.png",
+        "assets/openai/sprites/metadata/v66/enemy-029-siege-royal.json",
+        "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-029 Siege Royal. Preserve one heavy upright biped at Praetorian scale with a substantially thick ribbed torso, pelvis, thighs, forearms and shoulders; one broad low layered royal crest swept backward, clearly smaller and less ornate than a Queen crown and never a Crusher head shield; one narrow eyeless anterior dome and toothed maw with inner jaw; exactly TWO main arms, TWO digitigrade legs and exactly four short reduced dorsal tubes below the crest; and one complete long segmented siege tail visibly rooted at a thick sacrum and ending in one sharp spear tip. Albino changes newly authored organic pigment/material response only: warm pearl and pale parchment carapace, cool ash-gray wet recesses, restrained translucent rose-taupe joints, chalk-ivory crest edges and teeth, with sparse neutral gray-brown battle wear. Heavy siege mass, crest contour, limb count, dorsal-tube count, sacral tail root, scale and right-facing profile remain invariant. No Queen secondary chest arms or ovipositor, Crusher shield/quadruped posture, armor, weapon, jewellery, cannon, cybernetics, pure white, glow, ice, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Heavy upright biped with thick shoulders, forearms, ribcage, pelvis and thighs; broad low layered swept-back crest, four short reduced dorsal tubes and one complete spear tail rooted at the sacrum.",
+        "palette": "Warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe joints, chalk-ivory crest edges and teeth, and sparse neutral gray-brown wear. Never flat white, icy blue or luminous.",
+        "anatomy": "One eyeless crested head and inner jaw, exactly two main arms, two digitigrade legs, four short dorsal tubes and one segmented spear tail. There are no small inner/chest arms.",
+        "separation": "Thicker and more siege-built than an Albino Praetorian; smaller and simpler crown than a Queen; upright and two-legged rather than a Crusher quadruped with a head shield.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Crest, both feet, both hands and the entire tail remain inside every cell with generous gutters.",
+        "root": "New art requires 40 independent pelvis/proximal-leg-to-support-foot or terminal-body-plane anchors. Crest edge, tail tip, bounds center and inherited enemy-029 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using the rigid main cranial-plate base, shoulder-to-pelvis and proximal-limb landmarks. Do not inherit enemy-029 numeric factors or measure crest/tail/action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no floor, cast shadow, hive, scenery, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight heavy grounded breathing/alert phases with restrained rib, crest-base and tail-base motion; both feet keep readable support.",
+        "move": "Eight-phase deliberate heavy biped gait with contact, passing, weight transfer and recovery; no quadrupedal drift, skating or translation across cells.",
+        "attack": "Eight chronological main-forelimb strike phases: planted anticipation, wind-up, extension into empty space, one readable contact posture, follow-through and balanced recovery. Exactly two arms remain visible; no invented chest arms.",
+        "death": "Lethal impact, loss of biped support, heavy collapse and terminal motionless body; crest, four dorsal tubes, limbs and sacral tail remain attached.",
+        "tail-strike": "Eight chronological phases from planted anticipation through hip/torso rotation, one spear-tail sweep through empty space, follow-through and stable recovery. Tail stays attached at the sacrum and never becomes a detached effect."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Siege Royal, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Heavy upright biped at Praetorian scale: thick ribbed torso, pelvis, thighs, forearms and shoulders; broad low layered swept-back royal crest smaller than a Queen crown; narrow eyeless dome and inner jaw; exactly TWO main arms, TWO digitigrade legs, four short reduced dorsal tubes and one complete segmented spear tail rooted at the sacrum. Albino material only: warm pearl/parchment shell, ash-gray wet recesses, restrained rose-taupe joints, chalk-ivory crest edges/teeth and sparse gray-brown wear. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show Queen secondary arms/ovipositor, Crusher shield/quadruped body, extra/missing limb or tube, armor, weapon, glow, ice, flat white or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight heavy grounded breathing/alert phases with subtle rib, crest-base and tail-base motion; seamless supported loop.",
+          "move": "MOVE: eight deliberate heavy biped gait phases with contact, passing, weight transfer and recovery; no quadrupedal drift, skating or in-cell translation.",
+          "attack": "ATTACK: eight chronological main-forelimb strike phases from planted anticipation and wind-up through empty-space contact, follow-through and balanced recovery; exactly two arms, no small chest arms.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through support loss and heavy collapse to terminal stillness; crest, tubes, limbs and tail remain attached.",
+          "tail-strike": "TAIL-STRIKE: eight chronological planted phases from anticipation through hip rotation, one attached spear-tail sweep into empty space, follow-through and stable recovery; no detached effect."
+        },
+        "promptSha256": {
+          "idle": "c2d4d3e344afcd423339b6b105b0d474a5f8bdfdc27ed81bed766f9f361722b9",
+          "move": "fdf0c45ec4860f87ba867ccec386d52111186cc6ac776f09f069acc6d4f6c2d1",
+          "attack": "3475e603513a40058e1bb15385ad6d57b2949be4c126a391e3234088aaf9a4b7",
+          "death": "d7f12ea8f287e045510da3cbf86cbfdc144f21a0fe435b153b0dd9cf30119695",
+          "tail-strike": "0937a59b08ad5328827b98b7a347a440794a3ba69668c25f3b37fc6a4a64d2bc"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {"columns": 4, "rows": 2, "frameCount": 8},
+        "requiredClipCount": 5,
+        "queuePromptSha256": {"idle": "f88d82111ccac6226dc414a6a268f33e15daca69e1cd347093573ddd4e08a781", "move": "c7fbb6c663eb4a36d1a69fd5001c2808a1508a599eadaf6e1a0e911731f185e1", "attack": "4474205098490e4bc14b7ca23113cdd4073ec4b184770b103f6d7ef9c1c75189", "death": "4f95289c892d71e8f5fa8aefb54d3a48b9b03d8cb6c2596fc0ba708dd6b5ca6d", "tail-strike": "49b7fb53c4858bd0999c509e9d69765dbae8220200298d248e3a2052d47fd277"},
+        "queuePromptAudit": "All five current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)). The attack placeholder incorrectly requests small inner arms, conflicting with the reviewed base lock; it is provenance only and must be replaced by the strict two-arm prompt above before generation."
+      },
+      "acceptanceGates": [
+        "five 1774x887 exact 4x2 sheets and 40 distinct chronological right-facing poses",
+        "identity invariant: heavy biped, low layered crest, exactly two arms/two legs/four short tubes and one sacral spear tail",
+        "Albino material separation remains organic and does not change Siege Royal anatomy or heavy mass",
+        "new 40-pose anchors and rigid cranial/body inter-clip scale review retained",
+        "no small chest arms, Queen/Crusher drift, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs provide licensed ACM context, not an official Siege Royal or Albino Siege Royal model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "8e53964ebc7eb94c94d027ca9157bffbfe892d25b14382d3d6e4010bf7115500",
+    "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_REFERENCE.json": "cbda8a7fea78ddb352cf5560d7f308fd0aa76c06244fdf62db8973b38c07ce4f",
+    "assets/openai/sprites/enemies/siege-royal-action-sheet-v56.png": "0261161b4b96dd7cb7ffabd59af57558669e816096ad9a0eeba4048c5c67cb0f",
+    "assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png": "44fb95c87bca817f17a0539109364c7eda306459eeaafc790bc0a61f77aa2a26",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/idle.png": "a12e669ecfbd74c2de48dd489fad48f13c6e42f2a45264a4cdf3b58cb7bb7ed7",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/move.png": "0037f1b3c4122167c34b0b0ca007af965ca7233ef364b80c3c6ee5f74c097428",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/attack.png": "36bc0974fe0ca4fd71095aacd769f918e8c5341571f9ae3e94f759cbe5ff3db7",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/death.png": "d4c431b653bb0970c48865019eaf89d9e1e4bfac389203670bc7333b3dbe77d9",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/tail-strike.png": "077720bedb662b154c7979f8360f2416e4858b6c00c10bf9c9c6f0646fd7002f",
+    "assets/openai/sprites/metadata/v66/enemy-029-siege-royal.json": "949775cbd599d79415874a1f99cc8e0ed91ef2cbf7452ad61814c3a1b86f5d85",
+    "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md": "66ce35008cd1007b6d0909cdd716e857cf91faf0deb2843b2fa8959b2b6c2c6c",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png": "783ed2dc52558d96bf47404deac959e6874a79e2b8a194f1ad96e596560e4c1c"
+  },
+  "mergeSimulation": {
+    "assembler": "scripts/merge-v66-reference-fragments.mjs#assembleReferenceRegistry",
+    "baseSha256AtSimulation": "8e53964ebc7eb94c94d027ca9157bffbfe892d25b14382d3d6e4010bf7115500",
+    "baseProfileCount": 79,
+    "incoming": [
+      "enemy-081-albino-siege-royal",
+      "enemy-082-albino-pale-crucible-hunter"
+    ],
+    "simulatedProfileCount": 81,
+    "simulatedOutputSha256": "f87d9fb3aff4408e862eeb41e717476fd1d92291ae1aec67f9b8421187213c93",
+    "identityAndClipContractsExact": true,
+    "queuePromptContentHashesVerified": 9,
+    "localPathsExist": true,
+    "httpsUrlsValid": true,
+    "globalWritten": false
+  },
+  "reviewStatus": {"referencePhaseCompleteLocal": true, "imageGenCalls": 0, "accepted": false, "runtimeIntegrated": false, "globalReferenceMerged": false, "queueUpdated": false, "stateUpdated": false}
+}

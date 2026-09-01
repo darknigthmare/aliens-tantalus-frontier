@@ -47,10 +47,16 @@ const ARCHETYPE_CLIP_OVERRIDES = Object.freeze({
   }),
 });
 
+const PROFILE_CLIP_OVERRIDES = Object.freeze({
+  'enemy-081-albino-siege-royal': Object.freeze({
+    attack: attack('Heavy Siege Royal forelimb strike using exactly two main arms; retain the broad low layered crest, four short dorsal tubes and full spear tail. Do not add small inner or chest arms, or a secondary arm pair.'),
+  }),
+});
+
 export function animationContractFor(profile) {
   const contract = ANIMATION_CONTRACTS[profile.animationFamily];
   if (!contract) throw new Error(`Unknown animation family: ${profile.animationFamily}`);
-  const overrides = ARCHETYPE_CLIP_OVERRIDES[profile.archetype];
+  const overrides = PROFILE_CLIP_OVERRIDES[profile.profileId] || ARCHETYPE_CLIP_OVERRIDES[profile.archetype];
   return overrides ? Object.freeze(contract.map((spec) => overrides[spec.id] || spec)) : contract;
 }
 

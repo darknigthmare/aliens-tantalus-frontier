@@ -318,7 +318,7 @@ test('Caravan Stalker keeps quadruped locomotion and only rears during its dedic
   assert.doesNotMatch(job.clips.find((clip) => clip.id === 'attack').motion, /Bipedal claw/);
 });
 
-test('Praetorian and Xenoborg overrides preserve their own anatomy, armament and clip identities', () => {
+test('Praetorian, Albino Siege Royal and Xenoborg overrides preserve their own anatomy, armament and clip identities', () => {
   const queue = buildEnemyBatchQueue();
   for (const job of queue.jobs.filter((entry) => entry.archetype === 'Praetorian')) {
     assert.equal(job.clips.length, 5);
@@ -328,6 +328,13 @@ test('Praetorian and Xenoborg overrides preserve their own anatomy, armament and
     assert.doesNotMatch(attack.motion, /with the locked crown, small inner arms/);
     assert.match(attack.prompt, /Do not add small inner arms/);
   }
+  const albinoSiegeRoyal = queue.jobs.find((entry) => entry.profileId === 'enemy-081-albino-siege-royal');
+  assert.equal(albinoSiegeRoyal.clips.length, 5);
+  const siegeAttack = albinoSiegeRoyal.clips.find((clip) => clip.id === 'attack');
+  assert.match(siegeAttack.motion, /exactly two main arms/);
+  assert.match(siegeAttack.motion, /four short dorsal tubes/);
+  assert.doesNotMatch(siegeAttack.motion, /with the locked crown, small inner arms/);
+  assert.match(siegeAttack.prompt, /Do not add small inner or chest arms/);
   for (const job of queue.jobs.filter((entry) => entry.archetype === 'Xenoborg')) {
     assert.deepEqual(job.clips.map((clip) => clip.id), ['idle', 'move', 'attack', 'death', 'reload']);
     assert.match(job.clips[2].motion, /permanently grafted forearm laser cannons/);

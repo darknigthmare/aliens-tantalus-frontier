@@ -9604,6 +9604,228 @@
         "External URLs provide licensed Spitter/Ranger context, not an official Albino Reef Spitter model.",
         "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
       ]
+    },
+    "enemy-081-albino-siege-royal": {
+      "status": "reviewed",
+      "profileId": "enemy-081-albino-siege-royal",
+      "name": "Albino Siege Royal",
+      "archetype": "Siege Royal",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-acm",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "royal",
+      "batchId": "batch-005",
+      "ordinal": 80,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-029-siege-royal",
+      "baseReferenceLockSha256": "81b28e48b80691b1e5f9e91f7dc7f54e1a651fc5795364d85f7704af3f5e07c8",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_REFERENCE.json",
+        "sha256": "cbda8a7fea78ddb352cf5560d7f308fd0aa76c06244fdf62db8973b38c07ce4f"
+      },
+      "reviewer": "Codex /root/refs_081_082",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/",
+        "https://www.avpgalaxy.net/2013/02/14/more-aliens-colonial-marines-art/"
+      ],
+      "urlsPolicy": "The HTTPS pages verify licensed Aliens: Colonial Marines context and broad creature-design grammar only. Siege Royal and Albino Siege Royal are unattested project caste names; positive identity authority is the reviewed enemy-029 lock and hashed local project evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_REFERENCE.json",
+        "assets/openai/sprites/enemies/siege-royal-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/death.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-029-siege-royal/tail-strike.png",
+        "assets/openai/sprites/metadata/v66/enemy-029-siege-royal.json",
+        "docs/references/V66_WORKLOT_001_SIEGE_ROYAL_SCALE_REVIEW.md",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-029 Siege Royal. Preserve one heavy upright biped at Praetorian scale with a substantially thick ribbed torso, pelvis, thighs, forearms and shoulders; one broad low layered royal crest swept backward, clearly smaller and less ornate than a Queen crown and never a Crusher head shield; one narrow eyeless anterior dome and toothed maw with inner jaw; exactly TWO main arms, TWO digitigrade legs and exactly four short reduced dorsal tubes below the crest; and one complete long segmented siege tail visibly rooted at a thick sacrum and ending in one sharp spear tip. Albino changes newly authored organic pigment/material response only: warm pearl and pale parchment carapace, cool ash-gray wet recesses, restrained translucent rose-taupe joints, chalk-ivory crest edges and teeth, with sparse neutral gray-brown battle wear. Heavy siege mass, crest contour, limb count, dorsal-tube count, sacral tail root, scale and right-facing profile remain invariant. No Queen secondary chest arms or ovipositor, Crusher shield/quadruped posture, armor, weapon, jewellery, cannon, cybernetics, pure white, glow, ice, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Heavy upright biped with thick shoulders, forearms, ribcage, pelvis and thighs; broad low layered swept-back crest, four short reduced dorsal tubes and one complete spear tail rooted at the sacrum.",
+        "palette": "Warm pearl/parchment chitin, cool ash-gray wet recesses, restrained rose-taupe joints, chalk-ivory crest edges and teeth, and sparse neutral gray-brown wear. Never flat white, icy blue or luminous.",
+        "anatomy": "One eyeless crested head and inner jaw, exactly two main arms, two digitigrade legs, four short dorsal tubes and one segmented spear tail. There are no small inner/chest arms.",
+        "separation": "Thicker and more siege-built than an Albino Praetorian; smaller and simpler crown than a Queen; upright and two-legged rather than a Crusher quadruped with a head shield.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Crest, both feet, both hands and the entire tail remain inside every cell with generous gutters.",
+        "root": "New art requires 40 independent pelvis/proximal-leg-to-support-foot or terminal-body-plane anchors. Crest edge, tail tip, bounds center and inherited enemy-029 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using the rigid main cranial-plate base, shoulder-to-pelvis and proximal-limb landmarks. Do not inherit enemy-029 numeric factors or measure crest/tail/action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no floor, cast shadow, hive, scenery, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight heavy grounded breathing/alert phases with restrained rib, crest-base and tail-base motion; both feet keep readable support.",
+        "move": "Eight-phase deliberate heavy biped gait with contact, passing, weight transfer and recovery; no quadrupedal drift, skating or translation across cells.",
+        "attack": "Eight chronological main-forelimb strike phases: planted anticipation, wind-up, extension into empty space, one readable contact posture, follow-through and balanced recovery. Exactly two arms remain visible; no invented chest arms.",
+        "death": "Lethal impact, loss of biped support, heavy collapse and terminal motionless body; crest, four dorsal tubes, limbs and sacral tail remain attached.",
+        "tail-strike": "Eight chronological phases from planted anticipation through hip/torso rotation, one spear-tail sweep through empty space, follow-through and stable recovery. Tail stays attached at the sacrum and never becomes a detached effect."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Siege Royal, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Heavy upright biped at Praetorian scale: thick ribbed torso, pelvis, thighs, forearms and shoulders; broad low layered swept-back royal crest smaller than a Queen crown; narrow eyeless dome and inner jaw; exactly TWO main arms, TWO digitigrade legs, four short reduced dorsal tubes and one complete segmented spear tail rooted at the sacrum. Albino material only: warm pearl/parchment shell, ash-gray wet recesses, restrained rose-taupe joints, chalk-ivory crest edges/teeth and sparse gray-brown wear. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show Queen secondary arms/ovipositor, Crusher shield/quadruped body, extra/missing limb or tube, armor, weapon, glow, ice, flat white or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight heavy grounded breathing/alert phases with subtle rib, crest-base and tail-base motion; seamless supported loop.",
+          "move": "MOVE: eight deliberate heavy biped gait phases with contact, passing, weight transfer and recovery; no quadrupedal drift, skating or in-cell translation.",
+          "attack": "ATTACK: eight chronological main-forelimb strike phases from planted anticipation and wind-up through empty-space contact, follow-through and balanced recovery; exactly two arms, no small chest arms.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through support loss and heavy collapse to terminal stillness; crest, tubes, limbs and tail remain attached.",
+          "tail-strike": "TAIL-STRIKE: eight chronological planted phases from anticipation through hip rotation, one attached spear-tail sweep into empty space, follow-through and stable recovery; no detached effect."
+        },
+        "promptSha256": {
+          "idle": "c2d4d3e344afcd423339b6b105b0d474a5f8bdfdc27ed81bed766f9f361722b9",
+          "move": "fdf0c45ec4860f87ba867ccec386d52111186cc6ac776f09f069acc6d4f6c2d1",
+          "attack": "3475e603513a40058e1bb15385ad6d57b2949be4c126a391e3234088aaf9a4b7",
+          "death": "d7f12ea8f287e045510da3cbf86cbfdc144f21a0fe435b153b0dd9cf30119695",
+          "tail-strike": "0937a59b08ad5328827b98b7a347a440794a3ba69668c25f3b37fc6a4a64d2bc"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "requiredClipCount": 5,
+        "queuePromptSha256": {
+          "idle": "f88d82111ccac6226dc414a6a268f33e15daca69e1cd347093573ddd4e08a781",
+          "move": "c7fbb6c663eb4a36d1a69fd5001c2808a1508a599eadaf6e1a0e911731f185e1",
+          "attack": "4474205098490e4bc14b7ca23113cdd4073ec4b184770b103f6d7ef9c1c75189",
+          "death": "4f95289c892d71e8f5fa8aefb54d3a48b9b03d8cb6c2596fc0ba708dd6b5ca6d",
+          "tail-strike": "49b7fb53c4858bd0999c509e9d69765dbae8220200298d248e3a2052d47fd277"
+        },
+        "queuePromptAudit": "All five current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)). The attack placeholder incorrectly requests small inner arms, conflicting with the reviewed base lock; it is provenance only and must be replaced by the strict two-arm prompt above before generation."
+      },
+      "acceptanceGates": [
+        "five 1774x887 exact 4x2 sheets and 40 distinct chronological right-facing poses",
+        "identity invariant: heavy biped, low layered crest, exactly two arms/two legs/four short tubes and one sacral spear tail",
+        "Albino material separation remains organic and does not change Siege Royal anatomy or heavy mass",
+        "new 40-pose anchors and rigid cranial/body inter-clip scale review retained",
+        "no small chest arms, Queen/Crusher drift, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs provide licensed ACM context, not an official Siege Royal or Albino Siege Royal model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
+      ]
+    },
+    "enemy-082-albino-pale-crucible-hunter": {
+      "status": "reviewed",
+      "profileId": "enemy-082-albino-pale-crucible-hunter",
+      "name": "Albino Pale Crucible Hunter",
+      "archetype": "Pale Crucible Hunter",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-crucible",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "biped",
+      "batchId": "batch-005",
+      "ordinal": 81,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-030-pale-crucible-hunter",
+      "baseReferenceLockSha256": "a62c39b089fa4cb9b4ac91179cbef70a353dbebb803df8c1b6a707089e5e1222",
+      "baseReferenceSource": {
+        "path": "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_REFERENCE.json",
+        "sha256": "235ec2b4666d51cac4690f6b29ababc320a9e9a941d926b8f8a61f64a5cf696f"
+      },
+      "reviewer": "Codex /root/refs_081_082",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://www.gamespot.com/articles/fallout-dev-reveals-new-information-on-segas-canceled-aliens-crucible-game/1100-6513294/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/",
+        "https://www.avpgalaxy.net/games/aliens-crucible/gallery/"
+      ],
+      "urlsPolicy": "The HTTPS pages verify historical Aliens: Crucible project context only. They do not establish an official Pale Crucible Hunter or Albino Pale Crucible Hunter model; positive identity authority is the reviewed project enemy-030 lock, its V54 master and hashed V66 evidence.",
+      "localPaths": [
+        "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_REFERENCE.json",
+        "assets/openai/sprites/enemies/pale-crucible-hunter-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-030-pale-crucible-hunter/death.png",
+        "assets/openai/sprites/metadata/v66/enemy-030-pale-crucible-hunter.json",
+        "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SOURCE_QA.json",
+        "docs/references/V66_WORKLOT_001_PALE_CRUCIBLE_HUNTER_SCALE_REVIEW.md"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed enemy-030 Pale Crucible Hunter. Preserve one gaunt forge-born bipedal project xeno hunter with one eyeless elongated cranium, sick ivory exoskeletal plates over wet charcoal muscle seams, crucible-forged dorsal spines, narrow ribbed torso, exactly two very long sinewy forearms with dark claws, exactly two digitigrade legs and one complete long segmented tail. Albino changes newly authored pigment/material response only: increase the warm pearl/parchment translucency of the existing pale plates, shift wet seams toward cool ash-gray with restrained rose-taupe subsurface joints, retain dark smoked claws and deep recess contrast, and avoid a flat-white silhouette. The already-pale base anatomy, cranial length, dorsal-spine topology, gaunt proportions, limb count, tail, strict right-facing side view and project scale remain invariant. No eyes, clothing, equipment, armor, weapon, generic Warrior redesign, four Warrior dorsal tubes, royal crest, quadruped body, glow, snow/ice, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Gaunt narrow biped with elongated eyeless cranium, narrow ribbed torso, crucible dorsal spines, two exceptionally long forearms, two digitigrade legs and one complete segmented tail.",
+        "palette": "Warm translucent pearl/parchment and bleached ivory plates over cool ash-gray wet seams, restrained rose-taupe joints, dark smoked claws and deep non-glowing recess contrast. Never flat white or icy blue.",
+        "anatomy": "One elongated eyeless head, narrow ribbed torso, crucible-forged dorsal spines, exactly two arms, two legs and one tail. No equipment and no generic Warrior tube array.",
+        "separation": "The Albino modifier is intentionally subtle because enemy-030 is already pale. Separation must come from material response and value/subsurface contrast only, never new anatomy, silhouette, glow or an ice theme.",
+        "orientation": "Strict right-facing orthographic gameplay profile. Cranium, claws, both feet, dorsal spines and complete tail remain inside every cell with generous gutters.",
+        "root": "New art requires 32 independent pelvis/proximal-leg-to-support-foot or terminal-body-plane anchors. Cranium tip, spine/tail extrema, bounds center and inherited enemy-030 coordinates are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using rigid cranial length plus shoulder-to-pelvis landmarks. Do not inherit enemy-030 numeric factors or measure forearm/tail/action extrema.",
+        "background": "True alpha or perfectly uniform #FF00FF only; no Crucible room, forge, floor, cast shadow, checkerboard, grid, text, logo or UI."
+      },
+      "actionLocks": {
+        "idle": "Eight grounded gaunt breathing/alert phases with restrained cranium, rib, spine-base and tail-base motion; both feet retain support.",
+        "move": "Eight complete bipedal digitigrade gait phases with contact, passing, extension and recovery; long forearms counterbalance without becoming extra legs.",
+        "attack": "Eight chronological claw or inner-jaw strike phases: anticipation, wind-up, extension into empty space, one contact posture, follow-through and recovery; no weapon or detached effect.",
+        "death": "Lethal reaction, biped support loss, gaunt collapse and terminal motionless body; cranium, dorsal spines, limbs and tail remain attached."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Pale Crucible Hunter, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Gaunt forge-born biped: elongated eyeless cranium, sick ivory exoskeletal plates over wet charcoal/ash muscle seams, crucible dorsal spines, narrow ribbed torso, exactly two very long sinewy forearms with dark claws, two digitigrade legs and one complete long segmented tail. Albino material only: warm translucent pearl/parchment plates, cool ash-gray recesses, restrained rose-taupe joints, dark smoked claws and deep non-glowing contrast. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show eyes, armor, clothing, weapon, generic Warrior four-tube anatomy, royal crest, quadruped body, extra/missing limb or tail, glow, ice, flat white or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight grounded breathing/alert phases with subtle cranium, rib, spine-base and tail-base motion; seamless supported loop.",
+          "move": "MOVE: eight complete digitigrade biped gait phases with contact, passing, extension and recovery; long forearms counterbalance but never become legs.",
+          "attack": "ATTACK: eight chronological claw or inner-jaw strike phases from anticipation and wind-up through empty-space contact, follow-through and recovery; no weapon or detached effect.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through biped support loss and gaunt collapse to terminal stillness; all anatomy remains attached."
+        },
+        "promptSha256": {
+          "idle": "1b3df9390e3c8aa4eaa0cbbed55367972b1a062c75853e04ac4229b5fb6f582a",
+          "move": "9c34437a223b3fd38a19144b4aef17679538cf96c61fa35e507440f21ff35ffa",
+          "attack": "8c216e030a807f015b33159490961f96b24f4b9738f01885f2d54f23960219a3",
+          "death": "01308023056ad9937e6387a50f18913fa92ed971bb19850cf85ee3241a95051b"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "requiredClipCount": 4,
+        "queuePromptSha256": {
+          "idle": "a956b52e9e30b6644b0b7fbe848511b0ebc247b0ea97bf3b9023846312d23654",
+          "move": "a0f51fcf5a685b1b8b404895ccc947660913d848266bc041dd44274b3b6c2d4d",
+          "attack": "27c5d72d7273996b4636062ddee28d803ede9f99e35b5b1b4d72935f8c52533a",
+          "death": "391f19a49ed0c3c28a06b259fa02af8f582007dedc9d902f20e7792eeff913db"
+        },
+        "queuePromptAudit": "All four current BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)); these snapshots are provenance only and intentionally differ from the strict proposed prompts above."
+      },
+      "acceptanceGates": [
+        "four 1774x887 exact 4x2 sheets and 32 distinct chronological right-facing poses",
+        "identity invariant: elongated cranium, Crucible spines, exactly two long arms/two legs and one complete tail",
+        "Albino material remains readable despite the already-pale base and changes no anatomy or silhouette",
+        "new 32-pose anchors and rigid cranial/body inter-clip scale review retained",
+        "no generic Warrior drift, cell contact, matte spill, scenery, duplicate pose, copied pixels or canon-exact claim"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs establish canceled Aliens: Crucible context, not an official Pale Crucible Hunter or Albino model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
+      ]
     }
   }
 }
