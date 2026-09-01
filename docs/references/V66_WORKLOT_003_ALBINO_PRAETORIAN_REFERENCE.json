@@ -1,0 +1,178 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-059-albino-praetorian": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/10680/Aliens_vs_Predator/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/xenomorph-praetorian-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/xenomorph-praetorian-action-sheet.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/tail-strike.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png",
+        "assets/openai/sprites/metadata/v66/enemy-007-praetorian.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of reviewed V66 enemy-007-praetorian only. Preserve the locked Praetorian as one massive eyeless royal guardian with a broad swept-back cranial shield, oval dome before the shield, ribbed narrow-waisted torso, exactly two long main arms, two digitigrade legs and one continuous segmented spear-tail; never add Queen chest arms. Albino changes authored pigment and material response only: warm bone-ivory and pearl-gray chitin, restrained translucent blush in thin membranes and dome margins, cool gray recesses and moist specular breakup; never pure flat white, icy, glowing or an automatic recolor. Preserve the base strict right-facing profile, physical scale, pelvis/support-foot root and five-clip royal animation topology. No Queen fan crown, small inner arms, ovipositor, armor, eyes, clothing or official albino-model claim. Every future pixel must be original project art; canonExact=false.",
+      "reviewer": "Codex /root/prepare_refs_059_060",
+      "reviewedAt": "2026-09-01",
+      "name": "Albino Praetorian",
+      "archetype": "Praetorian",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "guardian",
+      "animationFamily": "royal",
+      "ordinal": 58,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-007-praetorian",
+      "baseReferenceLockSha256": "513825bc24f846cfe5fd82936e60d445b823ce0f78503f6105b2e2a409f49375",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "The reviewed V66 enemy-007 Praetorian lock controls anatomy and scale. The licensed Aliens vs. Predator product page establishes franchise/game provenance but is not treated as an anatomical turntable. No reviewed primary or licensed source establishes an Albino Praetorian; the albino pigment/material treatment is original to Tantalus Frontier.",
+      "sourcePolicy": {
+        "positiveAnatomyAuthority": "REVIEWED_V66_BASE_LOCK",
+        "externalSourcesAre": "licensed-continuity-anchor-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "Inherit the V66 Praetorian: broad swept-back shield and forward oval dome, heavy guardian chest, narrow waist, exactly two long main arms, two digitigrade legs and one complete spear-tail. It must remain distinct from the four-armed Queen.",
+        "palette": "Warm bone-ivory, pearl gray and pale beige chitin; restrained translucent blush/taupe at thin membranes and dome margins; cool gray recesses, dark mouth cavity, ivory teeth and moist highlights.",
+        "surface": "Keep biomechanical ribs, tendon channels, segmented shield and tail readable through value and material contrast. The albino surface is newly authored, never a white filter over base frames.",
+        "anatomy": "One eyeless shielded head, one ribbed torso, exactly two main arms, two digitigrade legs and one continuous articulated tail. No small chest arms, equipment or clothing.",
+        "orientation": "Strict orthographic gameplay profile facing RIGHT in all 40 poses; shield, dome, hands, feet and full tail remain inside each cell without camera rotation.",
+        "scale": "Inherit the reviewed enemy-007 physical scale and rigid shield/thorax proportions. Never infer size from tail arc, crouch height or a single extreme pose.",
+        "root": "Inherit the base reviewed pelvis/proximal-leg registration and supporting-foot floor. Shield, tail and changing limb reach never redefine the root.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no shadow, scenery, hive resin, text or grid.",
+        "prohibitions": [
+          "Queen fan crown, small chest arms, second arm pair or ovipositor",
+          "eyes, armor, clothing, firearm, cybernetics or altered limb count",
+          "flat white silhouette, glow, crystal, ice, snow or automatic recolor",
+          "missing shield, severed tail, extra limb or anatomy drift between clips",
+          "left-facing, frontal turn, crop, cell contact, duplicate pose or cross-cell tail",
+          "canon-exact, official albino model or 1:1 reproduction claim"
+        ]
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "84fdae3be3e4c8c20b27b85b2d10e4bf96d413cb2a9b93009d516221751e9ed6",
+        "profileId": "enemy-059-albino-praetorian",
+        "name": "Albino Praetorian",
+        "archetype": "Praetorian",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "guardian",
+        "animationFamily": "royal",
+        "batchId": "batch-004",
+        "ordinal": 58,
+        "sourceFacing": "right",
+        "requiredClipCount": 5,
+        "clips": [
+          {
+            "id": "idle",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-059-albino-praetorian/idle.png",
+            "promptSha256": "534784429e293484ffd2a823960a4cea6d6644c9589fa48fb8685025d1dd869e",
+            "fps": 6,
+            "loop": true
+          },
+          {
+            "id": "move",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-059-albino-praetorian/move.png",
+            "promptSha256": "950178aed936079c773421b9efb07ce374abd45628106a2a157308eebc9dfbff",
+            "fps": 12,
+            "loop": true
+          },
+          {
+            "id": "attack",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-059-albino-praetorian/attack.png",
+            "promptSha256": "636698a6f36bfa6fccead660c6a812a2d013f801cf2caac8f165919178c282fa",
+            "fps": 12,
+            "loop": false
+          },
+          {
+            "id": "death",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-059-albino-praetorian/death.png",
+            "promptSha256": "d320ae1b6ce175f9ff9e8d3826a04203ae185c1ed33dc67cb452716546aadfdc",
+            "fps": 10,
+            "loop": false
+          },
+          {
+            "id": "tail-strike",
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-059-albino-praetorian/tail-strike.png",
+            "promptSha256": "06da09b4991456fceda13555196342e2b4dae4bba11d09ca1327ace5c715efef",
+            "fps": 12,
+            "loop": false
+          }
+        ],
+        "contractAudit": "The royal-family queue contains five required clips, not four. All five exact id/sourcePath/promptSha256/fps/loop contracts are preserved. Their queue hashes match contentHash(decoded placeholder prompt) at review time; generation must rebuild prompts after this reference lock is merged."
+      },
+      "predecessorEvidence": {
+        "projectAssets": [
+          {
+            "path": "assets/openai/sprites/enemies/xenomorph-praetorian-action-sheet.png",
+            "dimensions": [1254, 1254],
+            "bytes": 1259248,
+            "sha256": "6d5d40ef6d6963ed62ef7665e75cb66abec8a20371592d533f219b59308c3c43",
+            "role": "Project-authored identity predecessor; guidance only, never a V66 clip source."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/xenomorph-praetorian-action-sheet.png",
+            "dimensions": [1024, 1024],
+            "bytes": 540822,
+            "sha256": "f4c778139b8018952bbd5c27c2fbd57449310b6ef973803750173e8ba769ecda",
+            "role": "Normalized project predecessor; preserve identity without copying or recoloring frames."
+          }
+        ],
+        "v66BaseSources": [
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/idle.png", "dimensions": [1774, 887], "bytes": 1506408, "sha256": "154e327f53e65399d612d7a0868065718ec9069cf520e2897cfb31fef644c828"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/move.png", "dimensions": [1774, 887], "bytes": 1480836, "sha256": "706797ee75d3ab3192277eeca9e308bff3f5fc7a30d9a63be28cc3ec2da2600c"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/attack.png", "dimensions": [1774, 887], "bytes": 1352845, "sha256": "16f3470b373be2f4bb54c025b0adca38ae70664592900642a38468873e1c2ffb"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/death.png", "dimensions": [1774, 887], "bytes": 1264072, "sha256": "9c65df5ff4fca8a5522476bc58e1cd5449db7842605debbf9e69bced84030aad"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/tail-strike.png", "dimensions": [1774, 887], "bytes": 1347687, "sha256": "ea8ccd24e8f6254f7d8eb57ecd798455acec60ea7244d2d3e9c099b5731df2bf"},
+          {"path": "assets/openai/sprites/frames/v66/batch-002/enemy-007-praetorian/references/avp2010-model-preview.png", "dimensions": [750, 650], "bytes": 428646, "sha256": "783ed2dc52558d96bf47404deac959e6874a79e2b8a194f1ad96e596560e4c1c", "role": "Locally retained study image behind the reviewed base lock; never embed or copy into generated sheets."},
+          {"path": "assets/openai/sprites/metadata/v66/enemy-007-praetorian.json", "bytes": 74245, "sha256": "a7282d7beaac3dd77b8ba1aa8c7fd50c11394c170ee61319e070fb9cbba8ed9e", "role": "Accepted base metadata and physical registration evidence."}
+        ]
+      },
+      "acceptanceGates": [
+        "five 1774x887 PNG sheets, each 4x2 with eight individually authored row-major poses",
+        "40/40 cells contain exactly one complete right-facing Albino Praetorian with no crop, contact or cross-cell tail",
+        "broad Praetorian shield, exactly two main arms, two legs, full tail and base physical root remain invariant",
+        "albino material stays readable and organic-biomechanical without pure-white silhouette loss or automatic recolor artifacts",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms the Praetorian silhouette and rejects Queen, armored, glowing and canon-exact readings"
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "84fdae3be3e4c8c20b27b85b2d10e4bf96d413cb2a9b93009d516221751e9ed6",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "2d4dc100183e5689161a9d67b728ec79810c3b604a819aec5b53fa66baf118b3",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb"
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}
