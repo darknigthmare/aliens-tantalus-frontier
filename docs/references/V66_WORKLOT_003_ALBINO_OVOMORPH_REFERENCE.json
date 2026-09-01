@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "classification": "SYSTEMIC_VARIANT",
+  "variantPolicy": "PROJECT_ADAPTATION_AUTHORED_PIGMENT_MATERIAL",
+  "baseProfileId": "enemy-001-ovomorph",
+  "canonExact": false,
+  "profiles": {
+    "enemy-053-albino-ovomorph": {
+      "profileId": "enemy-053-albino-ovomorph",
+      "name": "Albino Ovomorph",
+      "archetype": "Ovomorph",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "egg",
+      "provenance": "systemic-variant",
+      "animationFamily": "egg",
+      "batchId": "batch-004",
+      "ordinal": 52,
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/products/aliens-40th-anniversary-carton-of-alien-eggs-6-pack-accessory-pack",
+        "https://store.necaonline.com/products/aliens-life-size-xenomorph-egg-replica-with-led-light"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/sealed.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/opening.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/hatch.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/destroyed.png"
+      ],
+      "designLock": "Exact systemic derivative of the locked V66 Ovomorph anatomy: same upright leathery ovoid, broad stable lower shell, narrower cap, exactly four apical lips, no root tentacles, no legs, no parasite baked into the egg, and identical sealed/opening/release/destroyed logic. Albino changes only authored pigmentation and material response: warm bone-ivory and pale gray-beige outer membrane with restrained translucent pink-beige veins and interior, subtle wet highlights and enough value separation to preserve pebbled relief. It is not pure white, glowing, crystalline or a flat automatic recolor. No new caste or official-model claim. Strict right-facing contract, unchanged scale, root and silhouette. Future pixels must be an original hand-authored adaptation of the base lock.",
+      "designDetails": {
+        "variantType": "Original hand-authored pigment and material adaptation of the project-owned V66 base; never an automatic recolor or copied official bitmap.",
+        "baseProfileId": "enemy-001-ovomorph",
+        "topology": "One stationary upright egg with an intact broad lower shell and exactly four apical lips; no limbs, roots or embedded Facehugger.",
+        "material": "Warm bone-ivory and pale gray-beige leathery membrane, pale translucent pink-beige veining and interior, preserved pebbled relief and restrained moist highlights.",
+        "orientation": "Strict right-facing gameplay contract inherited from the base; stable center-bottom shell root and unchanged physical scale.",
+        "officialModelClaim": "None. Albino Ovomorph is an original Tantalus systemic adaptation, not an official Alien variant."
+      },
+      "sourceGrid": { "columns": 4, "rows": 2, "frameCount": 8 },
+      "sourceFacing": "right",
+      "clips": [
+        {
+          "id": "sealed",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/sealed.png",
+          "promptSha256": "07611aaba92ad1243bb63a9a0834ef3d200360ac5fc96c68aa7129ca244f59d0",
+          "fps": 6,
+          "loop": true
+        },
+        {
+          "id": "opening",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/opening.png",
+          "promptSha256": "f6a3fc337d3a58f83344005d3582aca39f275fe5109681d5f21436b59d2649f8",
+          "fps": 8,
+          "loop": false
+        },
+        {
+          "id": "hatch",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/hatch.png",
+          "promptSha256": "1c3f4dd922e9a652a8d2677d99b41ca4ea5ccb0d9fd7de71b51d52342c5c7e14",
+          "fps": 10,
+          "loop": false
+        },
+        {
+          "id": "destroyed",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/destroyed.png",
+          "promptSha256": "ee287fb6418f9758097531d124c1fba40845a5a9636228122a6685758a48f9d3",
+          "fps": 10,
+          "loop": false
+        }
+      ],
+      "reviewer": "Codex /root/prepare_refs_053_054; V66 base lock and licensed NECA egg references reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "identityBoundary": {
+    "baseContinuity": "V66 enemy-001-ovomorph lock, referenceLockSha256 98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8.",
+    "allowedDelta": "Pigment, local material hue, vein visibility and restrained specular response only.",
+    "forbiddenDelta": "No anatomical, animation, scale, root, facing, lip-count, lifecycle or caste change.",
+    "canonPosition": "Albino Ovomorph is an original systemic Tantalus adaptation, not an official Alien model.",
+    "canonExact": false
+  },
+  "queueContractSnapshot": {
+    "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+    "sourceSha256AtReview": "b94737b2bccb01fd0c669433462ad7aaa9600d429c991e89c448cd75fc8c73d7",
+    "profileId": "enemy-053-albino-ovomorph",
+    "archetype": "Ovomorph",
+    "modifier": "Albino",
+    "biology": "xenomorph",
+    "caste": "egg",
+    "provenance": "systemic-variant",
+    "animationFamily": "egg",
+    "ordinal": 52,
+    "facing": "right",
+    "sourceGrid": { "columns": 4, "rows": 2, "frameCount": 8 },
+    "clips": {
+      "sealed": { "fps": 6, "loop": true, "frames": [0,1,2,3,4,5,6,7], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/sealed.png", "declaredPromptSha256": "07611aaba92ad1243bb63a9a0834ef3d200360ac5fc96c68aa7129ca244f59d0", "decodedPromptSha256": "b1ffb1feeb177b6e7dc68d26aec14de9ba60491f7618e3dfeba9911998a67d53" },
+      "opening": { "fps": 8, "loop": false, "frames": [8,9,10,11,12,13,14,15], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/opening.png", "declaredPromptSha256": "f6a3fc337d3a58f83344005d3582aca39f275fe5109681d5f21436b59d2649f8", "decodedPromptSha256": "79bd3edfada8f7f5bc5c37cf118ec6d016079164d0a90605346e92badf73f052" },
+      "hatch": { "fps": 10, "loop": false, "frames": [16,17,18,19,20,21,22,23], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/hatch.png", "declaredPromptSha256": "1c3f4dd922e9a652a8d2677d99b41ca4ea5ccb0d9fd7de71b51d52342c5c7e14", "decodedPromptSha256": "1bbe9640885cfbe41084173d0cc7881e35200f9da6c5c54bc660dd0709e12785" },
+      "destroyed": { "fps": 10, "loop": false, "frames": [24,25,26,27,28,29,30,31], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/destroyed.png", "declaredPromptSha256": "ee287fb6418f9758097531d124c1fba40845a5a9636228122a6685758a48f9d3", "decodedPromptSha256": "005207fcb6939f3f56d8e9959bfaa7f1b75a462e1503ae168b9f3bcd55e378fc" }
+    },
+    "promptHashAudit": "All four queue prompts are BLOCKED placeholders and all four declared hashes differ from SHA-256 of the decoded UTF-8 text."
+  },
+  "baseEvidence": [
+    { "path": "docs/references/V66_ENEMY_BATCH_QUEUE.json#enemy-001-ovomorph", "referenceLockSha256": "98e55fa3ebe4a3f8a69be3319ddda233d8f8030df63f7d04e95221a8918ca5e8", "role": "Authoritative V66 base identity and clip contract." },
+    { "path": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/sealed.png", "size": [1774,887], "mode": "RGB", "bytes": 1922582, "sha256": "d36ff97ddc309883a07c719a26f96d62e5d51a8b5449c5634d1bd690e92a1218" },
+    { "path": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/opening.png", "size": [1774,887], "mode": "RGB", "bytes": 1759701, "sha256": "7d9f32eecee32b5b4c5e48eba4d7858e8ad45a517a9bb977918c540b3e9985f4" },
+    { "path": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/hatch.png", "size": [1774,887], "mode": "RGB", "bytes": 1875506, "sha256": "16089e03962dd8ebf24b0e1dff0024ea27459a5c3251ead21712ba7710303054" },
+    { "path": "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/destroyed.png", "size": [1774,887], "mode": "RGB", "bytes": 1500350, "sha256": "679adcc740b1473d915833ff8730cb1766f3d3ec27bd5b99df2c08c10a088729" }
+  ],
+  "referenceLock": {
+    "topology": "One stationary egg, intact lower body, exactly four apical lips; never five; no limbs, roots or embedded Facehugger.",
+    "scale": "Inherit the base Ovomorph physical shell dimensions and its reviewed per-clip source calibration; do not size from open lips or collapsed pose bounds.",
+    "root": "Inherit the base center-bottom shell contact. Opening lips, membrane flex and destruction must never redefine the root.",
+    "facing": "Retain the base strict-right gameplay contract even though the egg is nearly radial; the selected side and texture landmarks must not mirror between poses.",
+    "material": "Authored bone-ivory/gray-beige leathery membrane, pale pink-beige veining and interior, preserved pebbled relief and restrained moist highlights; no global hue-shift filter.",
+    "animations": {
+      "sealed": "Same eight-pose subtle pulse, closed in all frames.",
+      "opening": "Same eight-pose progressive separation of exactly four lips; intact stationary shell.",
+      "hatch": "Same eight-pose open membrane release/settle; no Facehugger drawn.",
+      "destroyed": "Same irreversible collapse into a low dead husk; never an opened living egg."
+    },
+    "prohibitions": ["No new albino caste anatomy", "No fifth lip, root tentacles, legs or walking", "No parasite baked into any egg board", "No pure-white silhouette loss, glow, crystal, snow, fur or automatic recolor", "No official-model or canon-exact claim", "No mirror, crop, cell contact, text, logo, scenery or copied bitmap"]
+  },
+  "reviewStatus": { "referencePhaseCompleteLocal": true, "generationAuthorizedByThisFragment": false, "imageGenCalls": 0, "accepted": false, "runtimeIntegrated": false, "globalReferenceMerged": false, "queueUpdated": false, "stateUpdated": false }
+}

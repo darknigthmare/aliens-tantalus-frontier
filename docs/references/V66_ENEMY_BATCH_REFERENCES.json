@@ -1559,6 +1559,145 @@
           "left/front-facing pose, dorsal camera, perspective rotation or duplicate pose"
         ]
       }
+    },
+    "enemy-053-albino-ovomorph": {
+      "profileId": "enemy-053-albino-ovomorph",
+      "name": "Albino Ovomorph",
+      "archetype": "Ovomorph",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "egg",
+      "provenance": "systemic-variant",
+      "animationFamily": "egg",
+      "batchId": "batch-004",
+      "ordinal": 52,
+      "status": "reviewed",
+      "urls": [
+        "https://store.necaonline.com/products/aliens-40th-anniversary-carton-of-alien-eggs-6-pack-accessory-pack",
+        "https://store.necaonline.com/products/aliens-life-size-xenomorph-egg-replica-with-led-light"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/sealed.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/opening.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/hatch.png",
+        "assets/openai/sprites/frames/v66/batch-001/enemy-001-ovomorph/destroyed.png"
+      ],
+      "designLock": "Exact systemic derivative of the locked V66 Ovomorph anatomy: same upright leathery ovoid, broad stable lower shell, narrower cap, exactly four apical lips, no root tentacles, no legs, no parasite baked into the egg, and identical sealed/opening/release/destroyed logic. Albino changes only authored pigmentation and material response: warm bone-ivory and pale gray-beige outer membrane with restrained translucent pink-beige veins and interior, subtle wet highlights and enough value separation to preserve pebbled relief. It is not pure white, glowing, crystalline or a flat automatic recolor. No new caste or official-model claim. Strict right-facing contract, unchanged scale, root and silhouette. Future pixels must be an original hand-authored adaptation of the base lock.",
+      "designDetails": {
+        "variantType": "Original hand-authored pigment and material adaptation of the project-owned V66 base; never an automatic recolor or copied official bitmap.",
+        "baseProfileId": "enemy-001-ovomorph",
+        "topology": "One stationary upright egg with an intact broad lower shell and exactly four apical lips; no limbs, roots or embedded Facehugger.",
+        "material": "Warm bone-ivory and pale gray-beige leathery membrane, pale translucent pink-beige veining and interior, preserved pebbled relief and restrained moist highlights.",
+        "orientation": "Strict right-facing gameplay contract inherited from the base; stable center-bottom shell root and unchanged physical scale.",
+        "officialModelClaim": "None. Albino Ovomorph is an original Tantalus systemic adaptation, not an official Alien variant."
+      },
+      "sourceGrid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8
+      },
+      "sourceFacing": "right",
+      "clips": [
+        {
+          "id": "sealed",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/sealed.png",
+          "promptSha256": "07611aaba92ad1243bb63a9a0834ef3d200360ac5fc96c68aa7129ca244f59d0",
+          "fps": 6,
+          "loop": true
+        },
+        {
+          "id": "opening",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/opening.png",
+          "promptSha256": "f6a3fc337d3a58f83344005d3582aca39f275fe5109681d5f21436b59d2649f8",
+          "fps": 8,
+          "loop": false
+        },
+        {
+          "id": "hatch",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/hatch.png",
+          "promptSha256": "1c3f4dd922e9a652a8d2677d99b41ca4ea5ccb0d9fd7de71b51d52342c5c7e14",
+          "fps": 10,
+          "loop": false
+        },
+        {
+          "id": "destroyed",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-053-albino-ovomorph/destroyed.png",
+          "promptSha256": "ee287fb6418f9758097531d124c1fba40845a5a9636228122a6685758a48f9d3",
+          "fps": 10,
+          "loop": false
+        }
+      ],
+      "reviewer": "Codex /root/prepare_refs_053_054; V66 base lock and licensed NECA egg references reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
+    "enemy-054-albino-facehugger": {
+      "profileId": "enemy-054-albino-facehugger",
+      "name": "Albino Facehugger",
+      "archetype": "Facehugger",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "parasite",
+      "provenance": "systemic-variant",
+      "animationFamily": "parasite",
+      "batchId": "batch-004",
+      "ordinal": 53,
+      "status": "reviewed",
+      "urls": [
+        "https://necaonline.com/2016/05/aliens-foam-prop-replica-life-size-facehugger/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+        "assets/openai/sprites/metadata/v65/facehugger-motion/enemy-002-facehugger.json"
+      ],
+      "designLock": "Exact systemic derivative of the validated V65 Facehugger: same low flattened central body, eight long articulated finger-like walking limbs in four bilateral pairs, paired ventral lobes/proboscis structure and one long flexible trailing tail; same realistic dimensions, motion, attack arc, scale, ground pivot and strict right-facing orientation. Albino changes only authored pigment/material response: pale warm ivory-beige flesh, translucent blush-pink joints and ventral tissue, faint cool gray folds and restrained wet highlights. Preserve readable segmentation and depth; never bleach to flat white or apply an automatic recolor. No extra limbs, new armor, eyes, mandibles, caste or official albino-model claim. All future pixels are original project adaptation art.",
+      "designDetails": {
+        "variantType": "Original hand-authored pigment and material adaptation of the validated V65 project base; never an automatic recolor or copied official bitmap.",
+        "baseProfileId": "enemy-002-facehugger",
+        "topology": "One low Facehugger with eight articulated finger legs in four bilateral pairs, paired ventral tissue and one complete flexible trailing tail; no eyes, armor or extra appendages.",
+        "material": "Warm ivory-beige flesh, translucent blush-pink joints and ventral tissue, faint cool-gray folds and restrained wet highlights with readable segmentation.",
+        "orientation": "Strict right-facing gameplay profile inherited from V65; tail trails left, pivot remains creature-ground at [128,240], physical scale remains 0.507937.",
+        "officialModelClaim": "None. Albino Facehugger is an original Tantalus systemic adaptation, not an official Alien variant."
+      },
+      "sourceGrid": {
+        "columns": 4,
+        "rows": 2,
+        "frameCount": 8
+      },
+      "sourceFacing": "right",
+      "clips": [
+        {
+          "id": "idle",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/idle.png",
+          "promptSha256": "233aa3241e76b045954c300c848b9f20ccd06122e5fbd25d1efe84cc128e6460",
+          "fps": 6,
+          "loop": true
+        },
+        {
+          "id": "move",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/move.png",
+          "promptSha256": "a7bd4a8479c008e173ebd58260227b4ecbb7368ac9d10fa710204f96998fafd3",
+          "fps": 12,
+          "loop": true
+        },
+        {
+          "id": "attack",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/attack.png",
+          "promptSha256": "4695c389ba7b63cc17a9904abf6f611f16dbf41b2ac611e0438f2eb89c14ec30",
+          "fps": 12,
+          "loop": false
+        },
+        {
+          "id": "death",
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/death.png",
+          "promptSha256": "6e8238f5901380088065fc144f2f780691bd83b666c01fcd46b0221c6bb26a8e",
+          "fps": 10,
+          "loop": false
+        }
+      ],
+      "reviewer": "Codex /root/prepare_refs_053_054; V65 base lock and licensed NECA Facehugger reference reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
     }
   }
 }
