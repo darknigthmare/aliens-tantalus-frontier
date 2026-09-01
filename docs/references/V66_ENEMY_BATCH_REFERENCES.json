@@ -7754,6 +7754,807 @@
         "The local licensed screenshot and project sheets remain study evidence with unresolved orientation, artifact, animation and extraction defects; no pixel or pose may be copied or automatically recolored.",
         "No numeric scale or physical-anchor coordinate is inherited until new 074 measurements and retained evidence exist."
       ]
+    },
+    "enemy-075-albino-atarax-ripper": {
+      "status": "reviewed",
+      "urls": [],
+      "localPaths": [
+        "assets/openai/sprites/enemies/atarax-ripper-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/death.png",
+        "assets/openai/sprites/metadata/v66/enemy-023-atarax-ripper.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "docs/references/V66_BATCH_002_REFERENCES_C.json",
+        "docs/references/V66_BATCH_002_SOURCE_AUDIT.json",
+        "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md",
+        "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+        "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/idle.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/move.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/attack.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/death.jpg"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed project-original V66 enemy-023-atarax-ripper. Preserve one heavy melee Xenomorph with a long eyeless skull, layered segmented cranial and dorsal armor, massive strike forearms, two digitigrade hindlegs, integrated tendons/cables and exactly one long free articulated tail. The Albino modifier changes organic pigment and material response only: black wet tissue becomes warm pearl, pale parchment and cool ash-gray with restrained translucent rose-taupe recesses; existing armored plates remain distinct brighter chalk-ivory/aged bone. Practical restraints and tendon cables stay gunmetal, neural scars stay restrained dark burgundy and exactly one compact blue skull sensor remains. Do not flatten the creature into a pure-white silhouette or bleach hardware. Keep strict right-facing orthographic gameplay profile across four clips. Attack is a heavy claw or inner-jaw melee sequence, never artillery. Do not inherit the predecessor's numeric scale, exact root coordinates, border contacts, near-duplicate timing, magenta residue or weak strike semantics. No Queen crown, royal proportions, laser cannon, firearm, robot armor, extra sensor, second tail, copied predecessor pixels or official/canon-exact claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.",
+      "reviewer": "Codex /root/generate_profile_049",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-075-albino-atarax-ripper",
+      "name": "Albino ATARAX Ripper",
+      "archetype": "ATARAX Ripper",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "armored",
+      "provenance": "systemic-variant",
+      "animationFamily": "biped",
+      "batchId": "batch-005",
+      "ordinal": 74,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-023-atarax-ripper",
+      "baseReferenceLockSha256": "12cae9976d65c362d0b10978cb474229ba4f8a731bc93a030ce831a474718c9d",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "ATARAX Ripper is explicitly PROJECT_ORIGINAL / NO_EXTERNAL_MODEL in the V56 project matrix. The reviewed base lock and hashed local project sheets define the identity; no official or licensed Albino ATARAX Ripper model exists. The albino is therefore an original systemic project adaptation, not franchise canon, not an official model and not a copy or recolor of predecessor pixels.",
+      "sourcePolicy": {
+        "positiveConceptAuthority": "REVIEWED_BASE_LOCK_AND_HASHED_LOCAL_PROJECT_SOURCES",
+        "urlsReason": "No official or licensed external ATARAX Ripper or Albino ATARAX Ripper model exists; urls is intentionally empty and every positive source is a safe relative local path with a retained SHA-256 proof.",
+        "localEvidenceLimits": "Project sheets and V66 predecessor boards establish internal silhouette, anatomy, materials and action vocabulary only. They are not licensed canon and are never pixel donors.",
+        "excludedWebSourceClasses": [
+          "fan-wikis",
+          "fan-reference-sites",
+          "unlicensed-image-aggregators",
+          "AI-gallery reposts",
+          "third-party pages presented as official ATARAX authority"
+        ],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "copiedPredecessorPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "One low-heavy assault biped: long eyeless armored skull, layered dorsal plates, broad ribbed shoulders, massive forearms and hands, compact pelvis, two digitigrade hindlegs and exactly one long free segmented tail. It remains a melee Xenomorph rather than a royal, cyborg or humanoid robot.",
+        "palette": "Warm pearl and pale parchment biomechanical tissue, cool ash-gray recesses and restrained rose-taupe translucency; brighter chalk-ivory/aged-bone cranial and dorsal plates remain readable as a separate layer. Gunmetal restraints/cables, restrained dark-burgundy neural scars and exactly one tiny blue sensor remain localized accents. No flat white filter or neon wash.",
+        "surface": "Wet ribbed organic tissue, tendons and jaws remain distinct from dry bone plates and practical gunmetal restraint parts. Re-author all micro-detail; never lift pixels, checkerboard, matte residue, lighting or poses from V56/V66 sources.",
+        "anatomy": "One long eyeless skull with double jaw, one ribbed torso, two massive strike arms, two digitigrade legs and exactly one articulated tail. Plate count may simplify for animation readability but the layered cranial-to-dorsal rhythm, forearm mass and tail attachment must not drift.",
+        "equipment": "Practical gunmetal restraints and integrated tendon cables plus exactly one tiny blue cranial sensor. No cannon, rifle, magazine, shoulder weapon, royal crown, full robot shell or extra light.",
+        "orientation": "Strict orthographic gameplay side profile facing RIGHT in all 32 poses. Skull, hands, both feet and the complete tail stay inside every cell with safe gutters; no frontal or three-quarter torso reveal.",
+        "scale": "Use predecessor skull-to-ribcage, shoulder-to-pelvis and proximal-limb relationships as qualitative guidance only. Historical pack scale 0.399280576 and nominal all-one sourceScaleByClip values are not measured calibration and are not inherited. New 075 art requires an independent all-clip, 32-pose scale review.",
+        "root": "Measure a stable ribcage/pelvis body landmark on every newly authored pose and project it to the actual planted support foot or terminal resting-body plane. Tail tip, skull/plate extrema, forward claws, magenta fragments and bounds center never define the physical root.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no checkerboard baked into pixels, floor, shadow, scenery, text, logo, UI or grid.",
+        "prohibitions": [
+          "Queen crown, royal scale, small inner Queen arms, standard blue Queen recolor or Ripper Queen silhouette",
+          "Xenoborg laser cannon, firearm, artillery pose, humanoid robot armor or full mechanical conversion",
+          "flat pure-white silhouette, gunmetal bleached into bone, broad glow, crystal, ice, snow or automatic recolor",
+          "missing single blue sensor, multiple sensors, missing massive forearms, shortened tail, second tail, extra limb or anatomy drift",
+          "left-facing, frontal or three-quarter turn, crop, cell contact, cross-cell anatomy, duplicate pose or perspective drift",
+          "copied project pixels, canon-exact, official Albino ATARAX model or 1:1 reproduction claim"
+        ]
+      },
+      "actionLocks": {
+        "idle": "Eight grounded heavy alert/breathing poses with restrained ribcage, shoulder, finger and tail-base motion; armor, restraints and the single blue sensor remain invariant.",
+        "move": "One complete weighted biped locomotion cycle with contact, passing and recovery; massive forearms and tail follow with secondary inertia, without skating or translating the subject across cells.",
+        "attack": "One clearly readable heavy claw or inner-jaw melee strike: anticipation, weight transfer, wind-up, extension/contact, follow-through and recovery. No predecessor near-idle amplitude, cannon, projectile or detached body part.",
+        "death": "Lethal impact, support loss, collapse and terminal motionless body; armor, cables, sensor and tail remain attached, and the final root follows the resting body plane."
+      },
+      "scaleCalibrationDecision": {
+        "inheritSourceScaleByClip": false,
+        "baseHistoricalFinalPackScale": 0.399280576,
+        "baseNominalSourceScaleByClip": {
+          "idle": 1,
+          "move": 1,
+          "attack": 1,
+          "death": 1
+        },
+        "baseScaleRegistryEntryPresent": false,
+        "baseScaleCalibrationReview": null,
+        "baseScaleCalibrationEvidenceCount": 0,
+        "reason": "The predecessor metadata records a historical final pack scale and nominal all-one values, but no completed measured scale review or retained scale evidence. The completed physical-root review is a separate contract.",
+        "requiredBeforeAcceptance": "Complete and retain a new all-clip, 32-pose scale calibration review for enemy-075 using stable skull, ribcage, pelvis and proximal-limb landmarks; do not calibrate from tail, plate or claw extrema."
+      },
+      "physicalAnchorDecision": {
+        "baseStatus": "reviewed",
+        "baseAnchorRegistryEntryPresent": true,
+        "baseReviewedPoseCount": 32,
+        "basePlacementAnchorMethod": "measured-source-body-landmark",
+        "basePlacementAnchorMethodAcceptedForBase": true,
+        "baseRootMethodAcceptedAsMethodOnly": true,
+        "baseConfidence": "medium",
+        "baseUncertaintyPx": 14,
+        "evidencePath": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "baseEvidencePaths": [
+          "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/idle.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/move.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/attack.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/death.jpg"
+        ],
+        "inheritCoordinates": false,
+        "reason": "The 32 predecessor coordinates are reviewed evidence for the exact 023 pixels only. Newly authored 075 anatomy, pose extents and support contacts require independent measurements even when the same ribcage-to-support-floor method is reused.",
+        "baseSourceBorderContacts": {
+          "idle": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "move": [
+            3
+          ],
+          "attack": [
+            3
+          ],
+          "death": [
+            2,
+            3,
+            6,
+            7
+          ]
+        },
+        "crossCellDecision": "Predecessor nominal-cell contacts and ownership reconstruction are extraction clues only, never physical-root evidence and never a layout pattern 075 may reproduce.",
+        "requiredBeforeAcceptance": "Review all 32 newly authored 075 physical roots on source pixels and retain annotated evidence for idle support, locomotion, strike bracing and collapse; reject every cross-cell contact or bounds-derived horizontal root."
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "e98c379494f40f3d210243f867344dcd900e66a1e3c4c254cf2909affb817609",
+        "profileId": "enemy-075-albino-atarax-ripper",
+        "name": "Albino ATARAX Ripper",
+        "archetype": "ATARAX Ripper",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "armored",
+        "provenance": "systemic-variant",
+        "animationFamily": "biped",
+        "batchId": "batch-005",
+        "ordinal": 74,
+        "initialStatus": "pending-reference",
+        "reference": null,
+        "referenceLockSha256": null,
+        "generationProvider": "OpenAI ImageGen",
+        "canonExact": false,
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "requiredClipCount": 4,
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-075-albino-atarax-ripper/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-075-albino-atarax-ripper/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-075-albino-atarax-ripper/idle.gif",
+            "promptSha256": "d6a201b52800a11c08a1c7221816228e2eb34d2a41e9c5f8fb73d47e8d8e407c",
+            "contentHashRecomputedSha256": "d6a201b52800a11c08a1c7221816228e2eb34d2a41e9c5f8fb73d47e8d8e407c",
+            "contentHashMatches": true
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-075-albino-atarax-ripper/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-075-albino-atarax-ripper/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-075-albino-atarax-ripper/move.gif",
+            "promptSha256": "9f50bce68c371752b010706e4b7534da4244fa7b7fd6a7a3f47e242a49d9292c",
+            "contentHashRecomputedSha256": "9f50bce68c371752b010706e4b7534da4244fa7b7fd6a7a3f47e242a49d9292c",
+            "contentHashMatches": true
+          },
+          {
+            "id": "attack",
+            "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-075-albino-atarax-ripper/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-075-albino-atarax-ripper/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-075-albino-atarax-ripper/attack.gif",
+            "promptSha256": "04e5118d02dc0256fb3f68b84adfb3a3caa4c720208a7df26b4e6e9d7b9a3787",
+            "contentHashRecomputedSha256": "04e5118d02dc0256fb3f68b84adfb3a3caa4c720208a7df26b4e6e9d7b9a3787",
+            "contentHashMatches": true
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-075-albino-atarax-ripper/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-075-albino-atarax-ripper/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-075-albino-atarax-ripper/death.gif",
+            "promptSha256": "8a4c4fa828fb0f1ce61e22214ed5d8928bd813652d9b76fd2a2ac073822d0c53",
+            "contentHashRecomputedSha256": "8a4c4fa828fb0f1ce61e22214ed5d8928bd813652d9b76fd2a2ac073822d0c53",
+            "contentHashMatches": true
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-075-albino-atarax-ripper.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-075-albino-atarax-ripper.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-075-albino-atarax-ripper/all.gif",
+        "promptHashAlgorithm": "SHA-256(JSON.stringify(prompt))",
+        "promptHashAudit": "All four queue promptSha256 values equal a fresh SHA-256(JSON.stringify(prompt)) recomputation. Raw UTF-8 prompt text hashing is not the queue algorithm. The BLOCKED queue texts remain snapshots and must be rebuilt from this reference lock before any generation."
+      },
+      "predecessorEvidence": {
+        "localVisualReview": "The V56 raw/normalized project sheets and all four active V66 predecessor boards were decoded and visually inspected in memory; no source bytes were written or modified.",
+        "v56ProjectActionSheets": [
+          {
+            "path": "assets/openai/sprites/enemies/atarax-ripper-action-sheet-v56.png",
+            "dimensions": [
+              1254,
+              1254
+            ],
+            "bytes": 1668191,
+            "sha256": "1d4f18dd956f5d6f464cac84fe8f465d8ddc4763ddbd7465454f53a2ce499b6c",
+            "role": "Original project identity sheet; silhouette/material study only, never a pixel donor."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "bytes": 477528,
+            "sha256": "321b78c95da7374bd3cac8b2ae5d18fb26c146aaddae47b536132b16b8f261ae",
+            "role": "Normalized V56 identity sheet retained by the reviewed base lock; anatomy study only."
+          }
+        ],
+        "v66BaseSources": [
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/idle.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1495448,
+            "sha256": "ce72dfd572f7cc0f6af150e293b3141c185f3370ff32ab8ac171e8d3bffc82e4"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/move.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1580939,
+            "sha256": "a65cbf185220e89eba507db1db21753bd44f25847cad2d358d798e5511f2fd2e"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/attack.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1471182,
+            "sha256": "f4324058328ce38ceb9a220d13188c7fe8f10e63e47a873a648fe5324929e086"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/death.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1425714,
+            "sha256": "cf6ca1cfc67a1aa032bc453d64d7920ba1a4049ffea2f2bce7171842312e59a2"
+          },
+          {
+            "path": "assets/openai/sprites/metadata/v66/enemy-023-atarax-ripper.json",
+            "bytes": 75199,
+            "sha256": "b9af38c7e66169f2ed097d35d55fe1c1e45b5d36aaef3bd98cec6f1038f75402",
+            "role": "Technical normalization record; acceptance pending, runtimeIntegrated=false, no measured scale review, 32 predecessor roots reviewed."
+          }
+        ],
+        "basePhysicalAnchorEvidence": {
+          "registrySha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+          "reviewedPoseCount": 32,
+          "confidence": "medium",
+          "uncertaintyPx": 14,
+          "overlays": [
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/idle.jpg",
+              "bytes": 345702,
+              "sha256": "1743b99a36433c6716df45ae8d6135f2d6134484f727c7b1a6d6a3e66de97793"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/move.jpg",
+              "bytes": 399142,
+              "sha256": "a61277ccac0e658ddf2ffdeae4b0cad1525389c85ebf58847dcf09f3073de013"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/attack.jpg",
+              "bytes": 342819,
+              "sha256": "7350a5f7afcb766d5158d0d36c63c5497096768bab4e6d8242d7908c87b61ae2"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-023-atarax-ripper/death.jpg",
+              "bytes": 343487,
+              "sha256": "076b7f545a7e29b96a746cff44f19ce2269f297f549075e8807ff8ce6ff00b75"
+            }
+          ]
+        },
+        "baseTechnicalLimitations": [
+          "ATARAX Ripper is project-original and has no official/licensed external model or canon-exact turnaround.",
+          "The inspected V66 boards retain visible magenta residue around some neck, shoulder and limb edges, subtle near-duplicate timing and weak attack semantics; none may be reproduced.",
+          "The source audit records nominal-cell contacts in idle 2/3/6/7, move 3, attack 3 and death 2/3/6/7; ownership handling does not authorize new border contact.",
+          "The predecessor root registry is complete for 32 exact 023 poses, but registration-only review is separate from 075 art, scale, animation and gameplay acceptance.",
+          "The predecessor metadata remains pending-visual-review and runtimeIntegrated=false, with no measured scale calibration."
+        ]
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, each exactly 4x2 with eight individually authored chronological row-major poses",
+        "32/32 cells contain exactly one complete right-facing Albino ATARAX Ripper with safe gutters, no crop, cell contact, cross-cell anatomy or duplicate pose",
+        "long eyeless skull, layered cranial/dorsal plates, massive forearms, two digitigrade legs, practical restraints, exactly one blue sensor and one complete tail remain invariant",
+        "organic albino tissue remains materially distinct from chalk-ivory armor and gunmetal restraint hardware without pure-white silhouette loss or automatic recolor",
+        "new independent all-clip scale review is retained; historical pack scale and nominal predecessor sourceScaleByClip values are not inherited",
+        "all 32 physical roots are newly reviewed on 075 pixels; the reviewed 023 ribcage/support-floor method may guide review but no coordinate transfers",
+        "attack clearly shows anticipation, contact, follow-through and recovery with a heavy melee read, not near-idle motion or artillery",
+        "background is true alpha or uniform #FF00FF only with no residual matte, checkerboard, shadow, grid, text or UI",
+        "reviewer confirms original project adaptation and rejects Queen, Xenoborg, robot and canon-exact readings"
+      ],
+      "limitations": [
+        "This fragment is a reference lock only; it authorizes no ImageGen call, source replacement, acceptance or runtime integration.",
+        "No official/licensed external ATARAX or Albino ATARAX model exists; urls is intentionally empty and identity remains project-original.",
+        "V56/V66 predecessor sheets are technical/design evidence with unresolved artifacts and motion limits; no pixel or pose may be copied or automatically recolored.",
+        "The predecessor's measured root coordinates are valid only for its exact pixels; no numeric scale or coordinate is inherited by 075."
+      ]
+    },
+    "enemy-076-albino-ripper-queen": {
+      "status": "reviewed",
+      "urls": [],
+      "localPaths": [
+        "assets/openai/sprites/enemies/ripper-queen-action-sheet.png",
+        "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/tail-strike.png",
+        "assets/openai/sprites/metadata/v66/enemy-024-ripper-queen.json",
+        "docs/prompts/V54_IMAGEGEN_WAVE.md",
+        "src/content-core-v50.js",
+        "docs/references/V66_BATCH_002_REFERENCES_C.json",
+        "docs/references/V66_BATCH_002_SOURCE_AUDIT.json",
+        "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md",
+        "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "docs/references/V66_BATCH_002_SCALE_REVIEW.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed project-original V66 enemy-024-ripper-queen royal identity. Preserve one massive royal Xenomorph with a broad backward-swept segmented crown, pale jagged dorsal carapace and tendrils, black-derived wet biomechanical inner tissue, restrained neural fissures, two reinforced primary forelimbs plus the small inner royal arms, two massive digitigrade hindlegs and exactly one long segmented hooked tail permanently attached to the pelvis. The Albino modifier changes organic pigment and material response only: dark inner tissue becomes warm pearl, pale parchment and cool ash-gray with restrained rose-taupe recesses; crown and dorsal armor remain distinct brighter chalk-ivory/aged bone, with restrained dark burgundy fissures. Never apply a flat whole-body white filter. Keep strict right-facing orthographic gameplay profile and the queue's royal family of five clips, including tail-strike. Tail-strike must anticipate, sweep the single attached tail through a readable hit phase and recover without changing body proportions; the tail is never a held spear, detached weapon or second limb. Do not inherit the predecessor's numeric scale, legacy bounds roots, attack border contacts, magenta residue or subtle near-duplicate timing. No standard blue Queen recolor, ATARAX Ripper downsizing, firearm, second tail, copied predecessor pixels or official/canon-exact claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.",
+      "reviewer": "Codex /root/generate_profile_049",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-076-albino-ripper-queen",
+      "name": "Albino Ripper Queen",
+      "archetype": "Ripper Queen",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "royal",
+      "provenance": "systemic-variant",
+      "animationFamily": "royal",
+      "batchId": "batch-005",
+      "ordinal": 75,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-024-ripper-queen",
+      "baseReferenceLockSha256": "2f8973c3b854b080e444860ba63da814c9353e5183d417f0f53ff18c05fd54ed",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Ripper Queen is a project-original V54/V66 boss identity rather than an official or licensed external Alien model. The reviewed base lock, exact V54 project prompt and hashed local project sheets define the internal target. No official/licensed Albino Ripper Queen model exists, so this albino remains an original systemic project adaptation, never franchise canon, an official model or a copy/recolor of source pixels.",
+      "sourcePolicy": {
+        "positiveConceptAuthority": "REVIEWED_BASE_LOCK_AND_HASHED_LOCAL_PROJECT_SOURCES",
+        "urlsReason": "No official or licensed external Ripper Queen or Albino Ripper Queen model exists; urls is intentionally empty and every positive source is a safe relative local path with a retained SHA-256 proof.",
+        "localEvidenceLimits": "The V54 prompt, project roster, V54 sheets and V66 predecessor boards establish internal crown, anatomy, palette and royal action vocabulary only. They are not licensed canon and are never pixel donors.",
+        "excludedWebSourceClasses": [
+          "fan-wikis",
+          "fan-reference-sites",
+          "unlicensed-image-aggregators",
+          "AI-gallery reposts",
+          "third-party pages presented as official Ripper Queen authority"
+        ],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "copiedPredecessorPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "One massive low-forward royal biped dominated by a broad backward-swept segmented crown, jagged dorsal carapace/tendrils, reinforced primary forelimbs, small inner royal arms, huge digitigrade hindlegs and exactly one long hooked segmented tail. Royal mass must remain visibly larger and broader than the ordinary ATARAX Ripper.",
+        "palette": "Warm pearl and pale parchment inner biomechanical tissue with cool ash-gray recesses and restrained rose-taupe translucency; crown and dorsal carapace remain distinct brighter chalk-ivory/aged bone with restrained dark-burgundy neural fissures. No standard blue Queen recolor, flat pure white or neon wash.",
+        "surface": "Wet ribbed inner tissue, tendons and jaws remain distinct from layered dry bone crown/carapace. Re-author every crown plate, fissure and tail segment; never lift pixels, checkerboard, blood/dust effects, magenta residue, lighting or poses from V54/V66 sheets.",
+        "anatomy": "One crowned eyeless royal head and jaw, one ribbed torso, two reinforced primary forelimbs, the small inner royal arms, two massive digitigrade hindlegs and exactly one tail rooted at the pelvis. Crown breadth, leg mass and tail attachment remain invariant in all clips.",
+        "equipment": "No equipment or firearm. Crown, carapace, tendrils and hooked tail are anatomy, not detachable armor or weapons; the tail is never held like a spear.",
+        "orientation": "Strict orthographic gameplay side profile facing RIGHT in all 40 poses. Crown tip, jaws, every hand/foot and the complete tail stay inside every cell with safe gutters; no frontal or three-quarter royal torso reveal.",
+        "scale": "Use predecessor crown-to-ribcage, shoulder-to-pelvis and proximal-limb relationships as qualitative guidance only. Historical pack scale 0.466666667 and nominal all-one sourceScaleByClip values are not measured calibration and are not inherited. New 076 art requires an independent all-clip, 40-pose scale review.",
+        "root": "Measure a stable lower-ribcage/pelvis landmark on every new pose and project it to the actual planted support foot or terminal resting-body plane. Crown, tail arc/tip, forward claws, matte fragments and bounds center never define the physical root; tail-strike bracing may shift support but not anatomy.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no checkerboard baked into pixels, floor, shadow, blood/dust splash, scenery, text, logo, UI or grid.",
+        "prohibitions": [
+          "standard blue Alien Queen recolor, generic Queen crown, ordinary ATARAX Ripper scale or loss of royal mass",
+          "missing small inner royal arms, missing crown breadth, shortened tail, second tail, held spear, detached tail, firearm or extra limb",
+          "flat pure-white silhouette, dark recesses erased, broad glow, crystal, ice, snow or automatic recolor",
+          "crown/leg/tail proportion drift, tail detached from pelvis, tail-strike body shrinking or entire body rotating with the tail",
+          "left-facing, frontal or three-quarter turn, crop, cell contact, cross-cell anatomy, duplicate pose or perspective drift",
+          "copied project pixels, canon-exact, official Albino Ripper Queen model or 1:1 reproduction claim"
+        ]
+      },
+      "actionLocks": {
+        "idle": "Eight grounded royal threat/breathing poses with restrained crown, ribcage, jaw and tail-base motion; crown plates, inner arms and proportions remain invariant.",
+        "move": "One complete heavy royal advance with contact, passing and recovery; huge hindlegs carry the mass while crown, forelimbs and tail follow with controlled inertia, without skating or cross-cell translation.",
+        "attack": "One heavy primary-forelimb royal strike with anticipation, weight transfer, extension/contact, follow-through and recovery; retain the crown, small inner arms and attached tail. No predecessor border transfer or near-idle amplitude.",
+        "death": "Lethal impact, support loss, massive collapse and terminal motionless body; crown, carapace, inner arms and tail remain attached, and the final root follows the resting body plane.",
+        "tail-strike": "Eight chronological poses: grounded anticipation, tail-base load, accelerating sweep, clear hit phase, follow-through and recovery. Exactly one tail stays continuously attached to the pelvis, remains wholly inside each cell and never becomes a held spear or detached projectile; crown/body proportions do not change."
+      },
+      "scaleCalibrationDecision": {
+        "inheritSourceScaleByClip": false,
+        "baseHistoricalFinalPackScale": 0.466666667,
+        "baseNominalSourceScaleByClip": {
+          "idle": 1,
+          "move": 1,
+          "attack": 1,
+          "death": 1,
+          "tail-strike": 1
+        },
+        "baseScaleRegistryEntryPresent": false,
+        "baseScaleCalibrationReview": null,
+        "baseScaleCalibrationEvidenceCount": 0,
+        "reason": "The predecessor metadata records a historical final pack scale and nominal all-one values, but no completed measured scale review or retained scale evidence. Large crown and tail bounds are not anatomical calibration.",
+        "requiredBeforeAcceptance": "Complete and retain a new all-clip, 40-pose scale calibration review for enemy-076 using stable crown base, ribcage, pelvis and proximal-limb landmarks; never calibrate from crown tip, tail arc or strike extrema."
+      },
+      "physicalAnchorDecision": {
+        "baseStatus": "pending-body-root-review",
+        "baseAnchorRegistryEntryPresent": false,
+        "baseReviewedPoseCount": 0,
+        "basePlacementAnchorMethod": "legacy-bounds-center-bottom",
+        "basePlacementAnchorMethodAccepted": false,
+        "evidencePath": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "inheritCoordinates": false,
+        "reason": "The anchor registry has no enemy-024 entry and predecessor metadata explicitly marks physicalAnchorReview pending. No bounds-derived root or coordinate transfers to newly authored 076 pixels.",
+        "baseSourceBorderContacts": {
+          "idle": [],
+          "move": [],
+          "attack": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "death": [],
+          "tail-strike": []
+        },
+        "crossCellDecision": "The predecessor attack's nominal-cell contacts and ownership reconstruction are extraction clues only, never physical-root evidence; the other four clean technical probes do not substitute for a physical-root review.",
+        "requiredBeforeAcceptance": "Review all 40 newly authored 076 physical roots on source pixels and retain annotated evidence for royal support changes, forelimb strike, tail bracing and collapse; reject every cross-cell contact or bounds-derived horizontal root."
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "e98c379494f40f3d210243f867344dcd900e66a1e3c4c254cf2909affb817609",
+        "profileId": "enemy-076-albino-ripper-queen",
+        "name": "Albino Ripper Queen",
+        "archetype": "Ripper Queen",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "royal",
+        "provenance": "systemic-variant",
+        "animationFamily": "royal",
+        "batchId": "batch-005",
+        "ordinal": 75,
+        "initialStatus": "pending-reference",
+        "reference": null,
+        "referenceLockSha256": null,
+        "generationProvider": "OpenAI ImageGen",
+        "canonExact": false,
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 10,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "requiredClipCount": 5,
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-076-albino-ripper-queen/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-076-albino-ripper-queen/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/idle.gif",
+            "promptSha256": "61d03d2d9aa439666c54a80bfc9338bf3a02c5bb56be828a8ca1051b919c1fbc",
+            "contentHashRecomputedSha256": "61d03d2d9aa439666c54a80bfc9338bf3a02c5bb56be828a8ca1051b919c1fbc",
+            "contentHashMatches": true
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-076-albino-ripper-queen/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-076-albino-ripper-queen/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/move.gif",
+            "promptSha256": "1aa2db6a1bab61d2323f6defc592dbee338cbdb153383776589bf25a969eaa69",
+            "contentHashRecomputedSha256": "1aa2db6a1bab61d2323f6defc592dbee338cbdb153383776589bf25a969eaa69",
+            "contentHashMatches": true
+          },
+          {
+            "id": "attack",
+            "motion": "Heavy royal forelimb strike with the locked crown, small inner arms and tail retained. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-076-albino-ripper-queen/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-076-albino-ripper-queen/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/attack.gif",
+            "promptSha256": "30430a0b597df65fade2b7eb2e65f5dd10ce279c9732ace1585fdb7175e68bcb",
+            "contentHashRecomputedSha256": "30430a0b597df65fade2b7eb2e65f5dd10ce279c9732ace1585fdb7175e68bcb",
+            "contentHashMatches": true
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-076-albino-ripper-queen/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-076-albino-ripper-queen/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/death.gif",
+            "promptSha256": "d1dc9caa23afbca4a39fc648f079b1c58272558a10f3aa0b0edb8b0d270105a9",
+            "contentHashRecomputedSha256": "d1dc9caa23afbca4a39fc648f079b1c58272558a10f3aa0b0edb8b0d270105a9",
+            "contentHashMatches": true
+          },
+          {
+            "id": "tail-strike",
+            "motion": "Anticipate, sweep the long tail through the hit phase, then recover without changing body proportions.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-076-albino-ripper-queen/tail-strike.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-076-albino-ripper-queen/tail-strike.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/tail-strike.gif",
+            "promptSha256": "a841124a95e61c54acde3a299207e8bea3fbcdcd52ec2ec0adcd40fcf0d22488",
+            "contentHashRecomputedSha256": "a841124a95e61c54acde3a299207e8bea3fbcdcd52ec2ec0adcd40fcf0d22488",
+            "contentHashMatches": true
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-076-albino-ripper-queen.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-076-albino-ripper-queen.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-076-albino-ripper-queen/all.gif",
+        "promptHashAlgorithm": "SHA-256(JSON.stringify(prompt))",
+        "promptHashAudit": "All five queue promptSha256 values equal a fresh SHA-256(JSON.stringify(prompt)) recomputation, including tail-strike. Raw UTF-8 prompt text hashing is not the queue algorithm. The BLOCKED queue texts remain snapshots and must be rebuilt from this reference lock before any generation."
+      },
+      "predecessorEvidence": {
+        "localVisualReview": "The V54 raw/normalized project sheets and all five active V66 predecessor boards, including tail-strike, were decoded and visually inspected in memory; no source bytes were written or modified.",
+        "v54ProjectActionSheets": [
+          {
+            "path": "assets/openai/sprites/enemies/ripper-queen-action-sheet.png",
+            "dimensions": [
+              1254,
+              1254
+            ],
+            "bytes": 1908057,
+            "sha256": "388fe8175ae1302bfa47bc37c794297df2944c96a57adb0e4567a1095cb5c9cf",
+            "role": "Original project identity sheet; crown/material/royal silhouette study only, never a pixel donor."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "bytes": 794142,
+            "sha256": "20878480f2538db0a9972743f1f5012845bdd898ea4188ab566c6efdbc1f7af8",
+            "role": "Normalized V54 identity sheet retained by the reviewed base lock; anatomy study only."
+          }
+        ],
+        "v66BaseSources": [
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/idle.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1818007,
+            "sha256": "fc30ed62d686b648c667798a284390a7e5b3747666ebcd0b65fd63112c62f3e7"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/move.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1867808,
+            "sha256": "f60c98099cdcb6461fffcc86b8a75aa07d22f0f87c48d4c74d2e8e42a6cd91b7"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/attack.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1757354,
+            "sha256": "f139bde900f38e24db3b281bf7f456c7da30d3a3ea7a9ad7431a43ed648db45c"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/death.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1590027,
+            "sha256": "afac2b9c38948effb53c189ac4180e8468550cda31b888c618ea7676e9128695"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-024-ripper-queen/tail-strike.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1558981,
+            "sha256": "60bb1e6b20bb59a0c3e00df2415d8b8af323985aed124e59179bb57f059e8871"
+          },
+          {
+            "path": "assets/openai/sprites/metadata/v66/enemy-024-ripper-queen.json",
+            "bytes": 68814,
+            "sha256": "d395d0165a3d01eda37e45b23e89bf3a6bc402bc4079a187a96f2a0268854a9a",
+            "role": "Technical normalization record; acceptance pending, runtimeIntegrated=false, no measured scale review and no completed predecessor physical-root review."
+          }
+        ],
+        "projectTextEvidence": [
+          {
+            "path": "docs/prompts/V54_IMAGEGEN_WAVE.md",
+            "bytes": 8839,
+            "sha256": "8cafdd020a89882cf123a3aebb694eb65326fd44da7dc9276b8b6ac88af261bb",
+            "role": "Exact local V54 project prompt defining the distinct Ripper Queen."
+          },
+          {
+            "path": "src/content-core-v50.js",
+            "bytes": 30523,
+            "sha256": "ec71c318b3870f86964755ea8f30f1c23af81ba2c9da5eef16e0697c9b79e634",
+            "role": "Project roster evidence for the xenomorph/royal identity; not external canon authority."
+          }
+        ],
+        "baseTechnicalLimitations": [
+          "Ripper Queen is project-original and has no official/licensed external model or canon-exact turnaround.",
+          "The V54 sheet contains a baked checkerboard presentation and effect-heavy poses; it is identity study only and cannot supply pixels or layout.",
+          "The inspected V66 boards retain magenta edge residue and subtle timing; the attack contacts nominal cells 2/3/4/5/6/7 and default extraction is blocked, while the other four technical probes pass.",
+          "The predecessor has no completed physical-anchor registry entry; crown/tail bounds and legacy center-bottom placement are not acceptable roots.",
+          "The predecessor metadata remains pending-visual-review and runtimeIntegrated=false, with no measured scale calibration."
+        ]
+      },
+      "acceptanceGates": [
+        "five 1774x887 PNG sheets, each exactly 4x2 with eight individually authored chronological row-major poses, including tail-strike",
+        "40/40 cells contain exactly one complete right-facing Albino Ripper Queen with safe gutters, no crop, cell contact, cross-cell anatomy or duplicate pose",
+        "broad swept segmented crown, dorsal carapace/tendrils, reinforced primary forelimbs, small inner royal arms, huge hindlegs and exactly one complete pelvis-attached tail remain invariant",
+        "organic albino tissue remains materially distinct from brighter crown/carapace armor without pure-white silhouette loss, standard blue recolor or automatic recolor",
+        "new independent all-clip scale review is retained; historical pack scale and nominal predecessor sourceScaleByClip values are not inherited",
+        "all 40 physical roots are newly reviewed on 076 pixels; no legacy bounds root or predecessor coordinate transfers",
+        "forelimb attack has clear anticipation/contact/recovery; tail-strike has one continuously attached tail, a clear hit phase and stable royal body proportions",
+        "background is true alpha or uniform #FF00FF only with no residual matte, checkerboard, blood/dust effect, shadow, grid, text or UI",
+        "reviewer confirms original project adaptation and rejects generic Queen, ordinary Ripper, second-tail, held-spear and canon-exact readings"
+      ],
+      "limitations": [
+        "This fragment is a reference lock only; it authorizes no ImageGen call, source replacement, acceptance or runtime integration.",
+        "No official/licensed external Ripper Queen or Albino Ripper Queen model exists; urls is intentionally empty and identity remains project-original.",
+        "V54/V66 predecessor sheets are technical/design evidence with unresolved artifacts and motion limits; no pixel or pose may be copied or automatically recolored.",
+        "No predecessor root is accepted and no measured scale exists; all 40 roots and every clip scale require new 076 evidence."
+      ]
     }
   }
 }
