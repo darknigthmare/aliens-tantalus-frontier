@@ -1,0 +1,533 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-005",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-078-albino-foundry-crusher": {
+      "status": "reviewed",
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/foundry-crusher-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/charge.png",
+        "assets/openai/sprites/metadata/v66/enemy-026-foundry-crusher.json",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "docs/references/V66_BATCH_002_REFERENCES_D.json",
+        "docs/references/V66_BATCH_002_SOURCE_AUDIT.json",
+        "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md",
+        "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+        "docs/references/V66_BATCH_002_FOUNDRY_CRUSHER_REVIEW.md",
+        "docs/references/v66-batch-002-atlas-review/enemy-026-foundry-crusher.jpg",
+        "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/idle.jpg",
+        "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/move.jpg",
+        "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/attack.jpg",
+        "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/death.jpg",
+        "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/charge.jpg",
+        "src/content-core-v50.js",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of reviewed enemy-026-foundry-crusher, bounded by the broad anatomy visible in licensed Hiya Aliens: Colonial Marines Crusher product photography. Preserve one low, heavy four-legged siege Xenomorph with a large broad backward-swept head shield, small jaw beneath it, massively developed front limbs, lower smaller hindquarters and exactly one heavy articulated spear tail. The Albino modifier changes newly authored organic pigment/material response only: warm pearl, pale parchment and cool ash-gray chitin with restrained translucent rose-taupe recesses; shield edges remain chalk-ivory/aged bone while localized soot, brown heat tarnish and non-glowing mineral abrasions carry the project Foundry history. Never copy licensed or predecessor pixels and never reproduce red photo lighting or watermark. Strict RIGHT-facing orthographic gameplay profile across idle, move, discrete crest-bash attack, terminal death and a separate grounded acceleration/braking charge. No upright Warrior/Queen anatomy, horns, lava, machinery, copied pixels, official Albino model, canonExact or 1:1 claim.",
+      "reviewer": "Codex /root/process_profile_048",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-078-albino-foundry-crusher",
+      "name": "Albino Foundry Crusher",
+      "archetype": "Foundry Crusher",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-acm",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "siege",
+      "batchId": "batch-005",
+      "ordinal": 77,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK_WITH_BOUNDED_LICENSED_CRUSHER_ANATOMY",
+      "baseProfileId": "enemy-026-foundry-crusher",
+      "baseReferenceLockSha256": "38e0e00ef3a6e1a59dffd318097199531ad1c5ec5193f7234b73d6dc30bf7f78",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "The licensed source supports only the broad Aliens: Colonial Marines Crusher anatomy. Foundry material history and the Albino modifier are original project adaptations, and no official/licensed Albino Foundry Crusher model exists. 078 must therefore be newly authored fan-made/project art, not a product-photo copy, predecessor recolor or canon-exact reconstruction.",
+      "sourcePolicy": {
+        "positiveConceptAuthority": "LICENSED_CRUSHER_ANATOMY_PLUS_REVIEWED_BASE_LOCK_AND_HASHED_LOCAL_PROJECT_SOURCES",
+        "urlsReason": "Steam is retained only as official/licensed Aliens: Colonial Marines context. Toyark is retained because the page identifies manufacturer-supplied Hiya review figures and shows a licensed Crusher model; it is anatomy evidence only, not authority for a Foundry caste or albino palette. The direct image URL is omitted because the local cached photograph is safer, existing and SHA-256 pinned.",
+        "localEvidenceLimits": "Use only the Crusher on the right of the cached licensed photograph for broad shield/body proportions. Exclude the left Alien figure, red set lighting, scene, pose, watermark and every pixel. Project sheets define Foundry surface continuity and known defects, not canon.",
+        "excludedWebSourceClasses": [
+          "fan-wikis",
+          "unlicensed image aggregators",
+          "AI-gallery reposts",
+          "product photographs treated as pixel donors"
+        ],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "copiedPredecessorPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "Low heavy quadruped with huge backward-swept head shield, small recessed jaw, enormous front limbs, lower compact hindquarters and one complete thick articulated spear tail. Never stand upright or acquire a Queen crown.",
+        "palette": "Warm pearl, pale parchment and cool ash-gray chitin with restrained translucent rose-taupe recesses; brighter chalk-ivory/aged-bone shield edges. Localized matte soot, brown heat tarnish and non-glowing mineral abrasions remain visible as Foundry history.",
+        "surface": "Shield, wet ribbed tissue, tendons, soot and mineral wear remain materially distinct. Re-author all detail; no licensed photo pixel, red lighting, watermark, predecessor matte or magenta edge.",
+        "anatomy": "One shielded small-jawed head, four load-bearing limbs with dominant forequarters, low hindquarters and exactly one heavy spear tail. No dorsal machinery, weapon, horns or extra limb.",
+        "equipment": "None. Foundry is superficial environmental wear, not industrial armor or a mounted furnace.",
+        "orientation": "Strict orthographic gameplay side view facing RIGHT in all 40 poses. Head shield, all planted limbs and complete tail remain inside every cell with safe gutters.",
+        "scale": "Use shield-to-ribcage, shoulder-to-pelvis and proximal-limb mass only as qualitative guidance. Historical final pack scale 0.464435146 and nominal all-one sourceScaleByClip values are not measured calibration and are not inherited.",
+        "root": "The 026 manual ribcage landmark behind the front shoulder, projected to the actual support/resting plane, is reusable only as a review method. All 40 new 078 coordinates must be independently measured; no source coordinate, bounds center, shield/tail extreme or magenta fragment transfers.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no floor, shadow, checkerboard, scenery, text, logo, UI or grid.",
+        "prohibitions": [
+          "automatic white recolor, licensed-product pixel copy or predecessor pixel reuse",
+          "upright Warrior/Queen anatomy, royal crown, horns, extra limb or missing tail",
+          "lava, glowing cracks, riveted armor, furnace, machinery or equipment",
+          "left-facing, frontal, three-quarter, crop, border contact, duplicate pose or cross-cell anatomy",
+          "red product-photo lighting, set, watermark, official Albino Foundry model, canonExact or 1:1 claim"
+        ]
+      },
+      "actionLocks": {
+        "idle": "Eight low planted breathing/alert poses with restrained shield, ribcage, jaw and tail-base motion; heavy forequarters stay load-bearing.",
+        "move": "One complete slow heavy quadruped gait with readable contacts, compression, transfer and recovery; no bipedal drift or skating.",
+        "attack": "A discrete crest-bash/body-impact action from a planted short wind-up through one readable contact and recovery. It is not the full travel cycle of charge.",
+        "death": "Lethal impact, loss of four-point support, heavy collapse and terminal motionless low body with shield and tail attached.",
+        "charge": "A separate eight-pose grounded acceleration-to-impact-posture-to-braking sequence. Show increasing/decreasing stride and weight transfer; no teleport, airborne sprint, attack-loop duplication or in-cell subject translation."
+      },
+      "scaleCalibrationDecision": {
+        "inheritSourceScaleByClip": false,
+        "baseHistoricalFinalPackScale": 0.464435146,
+        "baseNominalSourceScaleByClip": {
+          "idle": 1,
+          "move": 1,
+          "attack": 1,
+          "death": 1,
+          "charge": 1
+        },
+        "baseScaleRegistryEntryPresent": false,
+        "baseScaleCalibrationReview": null,
+        "baseScaleCalibrationEvidenceCount": 0,
+        "reason": "026 has a completed physical-root review but no completed measured scale registry entry or retained scale evidence. Root evidence cannot substitute for inter-clip anatomical scale calibration.",
+        "requiredBeforeAcceptance": "Complete and retain a new all-clip 40-pose 078 scale review using shield base, ribcage, shoulder, pelvis and proximal-limb landmarks; do not calibrate from shield tip, tail tip or contact extremes."
+      },
+      "physicalAnchorDecision": {
+        "baseStatus": "reviewed",
+        "baseAnchorRegistryEntryPresent": true,
+        "baseReviewedPoseCount": 40,
+        "basePlacementAnchorMethod": "manual-ribcage-landmark-behind-front-shoulder-projected-to-actual-support-or-resting-plane",
+        "basePlacementAnchorMethodAcceptedForBase": true,
+        "baseRootMethodAcceptedAsMethodOnly": true,
+        "baseConfidence": "medium",
+        "baseUncertaintyPx": 6,
+        "evidencePath": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "baseEvidencePaths": [
+          "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/idle.jpg",
+          "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/move.jpg",
+          "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/attack.jpg",
+          "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/death.jpg",
+          "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/charge.jpg"
+        ],
+        "inheritCoordinates": false,
+        "reason": "The reviewed 40-coordinate set is valid only for exact 026 pixels. New albino anatomy, pose extents and contact geometry require independent measurement even when the same body-landmark projection method is reused.",
+        "baseSourceBorderContactsZeroBased": {
+          "idle": [],
+          "move": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "attack": [
+            2,
+            3
+          ],
+          "death": [
+            6,
+            7
+          ],
+          "charge": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "crossCellDecision": "Predecessor cell contacts and ownership reconstruction are extraction diagnostics only; they are not physical-root evidence and are not a layout pattern 078 may repeat.",
+        "requiredBeforeAcceptance": "Review and retain annotated evidence for all 40 new roots, including four-point idle/gait support, short crest-bash bracing, terminal resting plane and acceleration/braking charge support."
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "c3708a90367ac7e15eabe94a65d25623ebc2383b8da599e8e289be29c2f76c2e",
+        "profileId": "enemy-078-albino-foundry-crusher",
+        "name": "Albino Foundry Crusher",
+        "archetype": "Foundry Crusher",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "concept-acm",
+        "provenance": "licensed-concept-adaptation",
+        "animationFamily": "siege",
+        "batchId": "batch-005",
+        "ordinal": 77,
+        "initialStatus": "pending-reference",
+        "reference": null,
+        "referenceLockSha256": null,
+        "generationProvider": "OpenAI ImageGen",
+        "canonExact": false,
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 10,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-078-albino-foundry-crusher/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-078-albino-foundry-crusher/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/idle.gif",
+            "promptSha256": "78a4323ce7473977448523f84e772b079e9760776753933dd05c4d060621debf",
+            "contentHashRecomputedSha256": "78a4323ce7473977448523f84e772b079e9760776753933dd05c4d060621debf",
+            "contentHashMatches": true,
+            "blockedPromptTextConfirmed": true
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-078-albino-foundry-crusher/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-078-albino-foundry-crusher/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/move.gif",
+            "promptSha256": "d54047e04e99e78027ad86c487ec20ee0b00c9ae45812918173074cc0683da5d",
+            "contentHashRecomputedSha256": "d54047e04e99e78027ad86c487ec20ee0b00c9ae45812918173074cc0683da5d",
+            "contentHashMatches": true,
+            "blockedPromptTextConfirmed": true
+          },
+          {
+            "id": "attack",
+            "motion": "Heavy body charge with lowered armored head; weight transfer, contact and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-078-albino-foundry-crusher/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-078-albino-foundry-crusher/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/attack.gif",
+            "promptSha256": "6d0a4ae5ed4aa8807059d594da63aecc01b3a01aa41b458cc8dfead610810b01",
+            "contentHashRecomputedSha256": "6d0a4ae5ed4aa8807059d594da63aecc01b3a01aa41b458cc8dfead610810b01",
+            "contentHashMatches": true,
+            "blockedPromptTextConfirmed": true
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-078-albino-foundry-crusher/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-078-albino-foundry-crusher/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/death.gif",
+            "promptSha256": "da2afd51a111051a7ba03fb6db8521a5d53a05e220ceb6f2f3c47ecae8e42803",
+            "contentHashRecomputedSha256": "da2afd51a111051a7ba03fb6db8521a5d53a05e220ceb6f2f3c47ecae8e42803",
+            "contentHashMatches": true,
+            "blockedPromptTextConfirmed": true
+          },
+          {
+            "id": "charge",
+            "motion": "Grounded acceleration and braking, armored impact posture; no teleport or airborne sprint.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-078-albino-foundry-crusher/charge.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-078-albino-foundry-crusher/charge.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/charge.gif",
+            "promptSha256": "ddddd6b89147bba78ac813f9af774322fa12f2edc718f54946cf45a9e685727c",
+            "contentHashRecomputedSha256": "ddddd6b89147bba78ac813f9af774322fa12f2edc718f54946cf45a9e685727c",
+            "contentHashMatches": true,
+            "blockedPromptTextConfirmed": true
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-078-albino-foundry-crusher.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-078-albino-foundry-crusher.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-078-albino-foundry-crusher/all.gif",
+        "requiredClipCount": 5,
+        "promptHashAlgorithm": "SHA-256(JSON.stringify(prompt))",
+        "promptHashAudit": "All 5 current BLOCKED queue promptSha256 values equal a fresh SHA-256(JSON.stringify(prompt)) recomputation. Raw UTF-8 prompt hashing is not the queue algorithm. These exact queue texts remain blocked snapshots and must be rebuilt from this reviewed reference lock before generation."
+      },
+      "predecessorEvidence": {
+        "localVisualReview": "The licensed cached photograph, V56 raw/normalized project sheets, all five active V66 026 boards, atlas contact and five root overlays were decoded and visually inspected without source mutation.",
+        "licensedCrusherEvidence": {
+          "path": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg",
+          "bytes": 911463,
+          "sha256": "052ebc27b4c7ec16bd01931b8b6f01589ea4483e94c40a4963e41e4ac4c26d4e",
+          "role": "Manufacturer-supplied licensed product-photo evidence for broad Crusher anatomy only; use the right Crusher and exclude every pixel, pose, lighting, scene and watermark."
+        },
+        "v56ProjectActionSheets": [
+          {
+            "path": "assets/openai/sprites/enemies/foundry-crusher-action-sheet-v56.png",
+            "bytes": 996004,
+            "sha256": "39ad117ffe10d23cd483c07f803080abf2c1c111b958991b51c68df3de2934a7",
+            "dimensions": [
+              1254,
+              1254
+            ],
+            "role": "Original project Foundry adaptation sheet; surface/silhouette study only."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+            "bytes": 566032,
+            "sha256": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "role": "Normalized V56 project identity sheet retained by the reviewed base lock."
+          }
+        ],
+        "v66BaseSources": [
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/idle.png",
+            "bytes": 1544421,
+            "sha256": "090ef2c0c17d6ff878cf280e9ba7e3bf1ea944f4458856ab07fbafe03dd37a7b",
+            "dimensions": [
+              1774,
+              887
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/move.png",
+            "bytes": 1517140,
+            "sha256": "d2c2298d564cf34a3634cc87bc4f5281f232a98d893daab0222e33c0f95ac110",
+            "dimensions": [
+              1774,
+              887
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/attack.png",
+            "bytes": 1449154,
+            "sha256": "143a8cb3a0dfa6c71b92b8b525460db1197a51f712c078993afb70e1dfcdc77f",
+            "dimensions": [
+              1774,
+              887
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png",
+            "bytes": 1331930,
+            "sha256": "b07698a3c6d9003f9c7ef17c5b1d315f65f812edc79cf2091dd486a2b6cd7b31",
+            "dimensions": [
+              1774,
+              887
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/charge.png",
+            "bytes": 1478100,
+            "sha256": "0e6230984f6012ec6a440cba6842ed71f0a52cb5f4c313c6d85d397d3f26b313",
+            "dimensions": [
+              1774,
+              887
+            ]
+          },
+          {
+            "path": "assets/openai/sprites/metadata/v66/enemy-026-foundry-crusher.json",
+            "bytes": 97002,
+            "sha256": "71127684531455b9365cd0eb0bf679874a362283aa52aecc03862a6394d45ee5",
+            "role": "Technical normalization record; 40 roots reviewed, but visual acceptance and measured scale calibration remain pending."
+          }
+        ],
+        "basePhysicalAnchorEvidence": {
+          "registrySha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+          "reviewedPoseCount": 40,
+          "confidence": "medium",
+          "uncertaintyPx": 6,
+          "overlays": [
+            {
+              "path": "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/idle.jpg",
+              "bytes": 390261,
+              "sha256": "aa9c9773980308ea474efbcb318baa1cfee0558afed84987c2a175762c0edd4f"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/move.jpg",
+              "bytes": 380550,
+              "sha256": "a3feff5f62f561748ed93a98979fb5548e29cf1ea87be46f20cead63e386ab37"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/attack.jpg",
+              "bytes": 353577,
+              "sha256": "94715bf0a1a3860d91f92470e81a759a1b4d5bcd1b41c21ea349c135689dbad2"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/death.jpg",
+              "bytes": 309737,
+              "sha256": "da2615770effec0bc0721d23ee29493dada89a49e01ffde41958aa1341b3c72f"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/charge.jpg",
+              "bytes": 356796,
+              "sha256": "7e09da725cc45ad76e09e85cc92b2f35439a2161a1293ee7eb0dd71bfa54af71"
+            }
+          ]
+        },
+        "baseTechnicalLimitations": [
+          "The licensed photograph establishes broad Crusher anatomy only; Foundry and Albino readings remain original project adaptations.",
+          "The dedicated Foundry Crusher review records residual pink/magenta around neck and joint regions plus unresolved apparent-volume and animation-fluidity questions across revisions; none may be reproduced.",
+          "The source audit records predecessor ownership contacts in move, attack, death and charge; extraction repair does not authorize new border contact or prove art quality.",
+          "The 026 root method is reviewed for 40 exact predecessor poses, but all coordinates are non-transferable to 078.",
+          "026 has no measured scale registry entry and remains pending visual acceptance with runtimeIntegrated=false."
+        ]
+      },
+      "acceptanceGates": [
+        "five 1774x887 PNG sheets, each exactly 4x2 with eight individually authored chronological row-major poses",
+        "40/40 cells contain exactly one complete right-facing Albino Foundry Crusher with safe gutters, no crop, border contact, cross-cell anatomy or duplicate pose",
+        "large shield, small jaw, low four-legged mass, dominant forequarters, compact hindquarters and one complete spear tail remain invariant",
+        "albino tissue, aged-bone shield and soot/heat/mineral Foundry wear stay materially distinct without flat-white filter or glow",
+        "new independent all-clip scale review is retained; the predecessor scalar and all-one values are not inherited",
+        "all 40 physical roots are newly measured; only the reviewed body-landmark projection method may guide review",
+        "attack is a short discrete crest bash while charge uniquely shows grounded acceleration, impact posture and braking",
+        "death ends low and motionless with shield and tail attached",
+        "background is true alpha or uniform #FF00FF only, with no residual matte, checkerboard, red scene, watermark, grid, text or UI",
+        "reviewer confirms original fan-made/project adaptation and rejects canonExact, official Albino model and 1:1 readings"
+      ],
+      "limitations": [
+        "Reference-only fragment: no generation, source replacement, acceptance or runtime integration is authorized.",
+        "Licensed sources establish general ACM/Crusher context and broad anatomy only; they do not establish a Foundry caste or albino palette.",
+        "Every future pixel must be newly authored; the cached product photograph and predecessor sheets are evidence, never pixel donors.",
+        "Only the 026 root method may be reused; all coordinates and every numeric scale are non-transferable."
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "c3708a90367ac7e15eabe94a65d25623ebc2383b8da599e8e289be29c2f76c2e",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "491d56ac1ce13fbe7ee8c510bb758cd9056c2fc4ce912e6b394c627a53ce860c",
+    "assets/openai/sprites/enemies/foundry-crusher-action-sheet-v56.png": "39ad117ffe10d23cd483c07f803080abf2c1c111b958991b51c68df3de2934a7",
+    "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/idle.png": "090ef2c0c17d6ff878cf280e9ba7e3bf1ea944f4458856ab07fbafe03dd37a7b",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/move.png": "d2c2298d564cf34a3634cc87bc4f5281f232a98d893daab0222e33c0f95ac110",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/attack.png": "143a8cb3a0dfa6c71b92b8b525460db1197a51f712c078993afb70e1dfcdc77f",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/death.png": "b07698a3c6d9003f9c7ef17c5b1d315f65f812edc79cf2091dd486a2b6cd7b31",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-026-foundry-crusher/charge.png": "0e6230984f6012ec6a440cba6842ed71f0a52cb5f4c313c6d85d397d3f26b313",
+    "assets/openai/sprites/metadata/v66/enemy-026-foundry-crusher.json": "71127684531455b9365cd0eb0bf679874a362283aa52aecc03862a6394d45ee5",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/references/hiya-crusher-review-024.jpg": "052ebc27b4c7ec16bd01931b8b6f01589ea4483e94c40a4963e41e4ac4c26d4e",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb",
+    "docs/references/V66_BATCH_002_REFERENCES_D.json": "9feec4f8e3f8ade8e5dc8b01782ea893e9d8c282d742e10a2ec92a29b695c633",
+    "docs/references/V66_BATCH_002_SOURCE_AUDIT.json": "27e126ac9665deea0b2728164727205ffe1202fd982d8311dd88a421da899d5c",
+    "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md": "45ef0adf4a03e313d3fcfb492ab418b271ae5bc88dc3a0e774120a9283cc1e96",
+    "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+    "docs/references/V66_BATCH_002_SCALE_REVIEW.json": "dcab1772242b00106219b5a5d12f595e1452d74f524f3cab95b9bd9db235e115",
+    "docs/references/V66_BATCH_002_FOUNDRY_CRUSHER_REVIEW.md": "dd83252723a7b4a324dbfd4cb4749b5475cfc6e589e84eb081c520a8f24152ee",
+    "docs/references/v66-batch-002-atlas-review/enemy-026-foundry-crusher.jpg": "32079c64968733e0273b418e0b44953acae44e3cacdbc32314415933b5f97017",
+    "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/idle.jpg": "aa9c9773980308ea474efbcb318baa1cfee0558afed84987c2a175762c0edd4f",
+    "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/move.jpg": "a3feff5f62f561748ed93a98979fb5548e29cf1ea87be46f20cead63e386ab37",
+    "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/attack.jpg": "94715bf0a1a3860d91f92470e81a759a1b4d5bcd1b41c21ea349c135689dbad2",
+    "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/death.jpg": "da2615770effec0bc0721d23ee29493dada89a49e01ffde41958aa1341b3c72f",
+    "docs/references/v66-batch-002-anchor-review-c/enemy-026-foundry-crusher/charge.jpg": "7e09da725cc45ad76e09e85cc92b2f35439a2161a1293ee7eb0dd71bfa54af71",
+    "src/content-core-v50.js": "ec71c318b3870f86964755ea8f30f1c23af81ba2c9da5eef16e0697c9b79e634",
+    "docs/ASSET_RUNTIME_INVENTORY_V55.json": "f24c7e2fc7b27bdbf236e5fcdfbaf7a3f23bc9fe9ae476e0cc9f345388430772"
+  },
+  "mergeSimulation": {
+    "assembler": "scripts/merge-v66-reference-fragments.mjs#assembleReferenceRegistry",
+    "baseSha256AtSimulation": "491d56ac1ce13fbe7ee8c510bb758cd9056c2fc4ce912e6b394c627a53ce860c",
+    "baseProfileCount": 75,
+    "incoming": [
+      "enemy-077-albino-foundry-drone",
+      "enemy-078-albino-foundry-crusher"
+    ],
+    "simulatedProfileCount": 77,
+    "simulatedOutputSha256": "fcd01ab3bf0672892659bc84432bdafed3f5a19c8ff0205eb99c942d648289d0",
+    "identityAndClipContractsExact": true,
+    "queuePromptContentHashesVerified": 9,
+    "localPathsExist": true,
+    "httpsUrlsValid": true,
+    "globalWritten": false
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false
+  }
+}
