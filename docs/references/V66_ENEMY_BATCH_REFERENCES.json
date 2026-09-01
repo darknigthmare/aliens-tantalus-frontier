@@ -866,6 +866,363 @@
       "reviewer": "Codex /root/generate_profile_039; official Focus/Tindalos material and V56 project predecessors reviewed",
       "reviewedAt": "2026-09-01",
       "canonExact": false
+    },
+    "enemy-049-wild-boar-host": {
+      "name": "Wild Boar Host",
+      "archetype": "Wild Boar Host",
+      "modifier": "Standard",
+      "biology": "fauna",
+      "caste": "host",
+      "animationFamily": "fauna",
+      "classification": "PROJECT_ADAPTATION",
+      "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+      "canonExact": false,
+      "externalModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "A living wild-boar host designed for this project. Alien 3 establishes animal-host continuity through a dog in the theatrical version and an ox in the released Assembly Cut; neither work establishes a specific living wild-boar host design. The similarly named Kenner Wild Boar Alien is a xenomorph toy phenotype and is excluded from this host design.",
+      "sourcePolicy": {
+        "positiveDesignAuthority": "LOCAL_PROJECT_LOCK",
+        "externalSourcesAre": "continuity-and-exclusion-guardrails-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false
+      },
+      "sources": [
+        {
+          "id": "alien3-official-work",
+          "kind": "PRIMARY_LICENSED_WORK_LANDING",
+          "publisher": "20th Century Studios",
+          "url": "https://www.20thcenturystudios.com/movies/alien-3",
+          "use": "Confirms Alien 3 as the licensed work; inspect the theatrical and released Assembly Cut themselves for the dog-versus-ox host distinction. The landing page is not treated as a creature model sheet."
+        },
+        {
+          "id": "neca-ultimate-dog-alien",
+          "kind": "LICENSED_PRODUCT_PRIMARY",
+          "publisher": "NECA",
+          "url": "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+          "use": "Corroborates the licensed Dog Alien/canine-xenomorph identity only; it is not a reference for the living boar's anatomy or surface."
+        },
+        {
+          "id": "kenner-1994-catalog-scan",
+          "kind": "PRIMARY_ARCHIVE_NAME_GUARDRAIL",
+          "publisher": "Kenner catalog scan",
+          "url": "https://wheeljackslab.com/files/uploads/16Kenner-1994-Toy-Fair-Employee-Dealer-Vendor-Rep-Catalog-Page-22719616-fcda-4dc7-a45f-7810254d4e86.pdf",
+          "use": "Name-conflict guardrail only. Never reproduce the Kenner Wild Boar Alien's olive biomechanical/bony xenomorph design."
+        }
+      ],
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "v56Predecessors": [
+        {
+          "path": "assets/openai/sprites/enemies/wild-boar-host-action-sheet-v56.png",
+          "bytes": 1149310,
+          "dimensions": [
+            1402,
+            1122
+          ],
+          "sha256": "f9e3c391675052826229890b82e9909e2550aba7504b49380cfe6ab87e2ce655",
+          "role": "project-owned identity predecessor; guidance only, not a V66 source contract"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png",
+          "bytes": 616901,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "a79046e9a54e9eabd4fa89593e75e228bd0b03eeda18032dfe7a7c966ca2af0c",
+          "role": "project-owned normalized predecessor; preserve readable identity, do not upscale/copy frames"
+        }
+      ],
+      "designLock": "PROJECT_ADAPTATION: original living natural wild-boar host for Tantalus Frontier, compact low right-facing profile, heavy forequarters, elongated snout, two tusks, four legs, cloven hooves, short tail and bristle ridge; earthy black-umber organic hide only. Alien 3 dog/ox animal-host continuity and the Kenner name are guardrails, never a 1:1 model. Exclude every xenomorph, biomechanical, armored, domestic-pig or fantasy-monster cue.",
+      "queueContractSnapshot": {
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "normalizedGrid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "sourceSheetDimensions": [
+          1774,
+          887
+        ],
+        "clips": [
+          {
+            "id": "idle",
+            "fps": 6,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/idle.png",
+            "placeholderPromptSha256": "28fef3125c6df78e35a4d47dbcf09dd9b562be60d80cf92b0da8b246fcc34cd0",
+            "lockedMotion": "Eight grounded phases: settle, inhale, slight ear flick, guarded sniff, exhale and seamless return; no translation."
+          },
+          {
+            "id": "move",
+            "fps": 12,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/move.png",
+            "placeholderPromptSha256": "ea194846d69333c335642fe30201d74fed0adc8bb6ea5c03041530bc45a4425a",
+            "lockedMotion": "Eight chronological natural boar run/trot phases with four distinct legs, alternating supports, spine compression/extension and seamless contact cycle."
+          },
+          {
+            "id": "attack",
+            "fps": 12,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/attack.png",
+            "placeholderPromptSha256": "fb0252392025f429fafe98f87971b552fc9834c4b3efef1a855aac4f3bd5d811",
+            "lockedMotion": "Eight chronological phases: lower head, brace, short rightward drive, tusk contact, upward shove, follow-through, recoil and guarded recovery."
+          },
+          {
+            "id": "death",
+            "fps": 10,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+            "placeholderPromptSha256": "3de9c862f60266250ceaa06fc86d5b3cb21239e9c7e7ea8a2dcc99d0b41fd6be",
+            "lockedMotion": "Eight irreversible phases: lethal impact, front support buckles, momentum carry, shoulder fall, flank roll, limb settle and terminal motionless body; never loops."
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-049-wild-boar-host.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-049-wild-boar-host.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-049-wild-boar-host/all.gif"
+      },
+      "placeholderAudit": {
+        "observedInitialStatus": "pending-reference",
+        "observedReference": null,
+        "observedReferenceLockSha256": null,
+        "placeholderPromptsBlockedByMissingDesignLock": true,
+        "placeholderHashesVerifiedAgainstQueue": true,
+        "queueWasModified": false,
+        "generationAllowedAfterMergeOnly": true
+      },
+      "acceptanceGates": [
+        "4 sheets, each exactly 1774x887 PNG, 4x2 and eight individually authored row-major poses",
+        "32/32 cells face right and contain one whole boar without crop, overlap or boundary contact",
+        "identity, tusk count, limb count, rigid body scale and hoof ground line remain stable across clips",
+        "transparent RGBA or uniform pure #FF00FF chroma only; no scene, shadow, text, grid or watermark",
+        "visual reviewer confirms living natural boar host and rejects any Kenner/xenomorph phenotype"
+      ],
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-3",
+        "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/",
+        "https://wheeljackslab.com/files/uploads/16Kenner-1994-Toy-Fair-Employee-Dealer-Vendor-Rep-Catalog-Page-22719616-fcda-4dc7-a45f-7810254d4e86.pdf"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/wild-boar-host-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/wild-boar-host-action-sheet-v56.png",
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designDetails": {
+        "silhouette": "Natural compact low wild boar: heavy forequarters, short neck, elongated wedge snout, small ears, two readable tusks, four short powerful legs, cloven hooves, short tail and continuous dorsal bristle ridge.",
+        "palette": "Earthy near-black and umber hide/fur; desaturated gray-brown bristles; dirty ivory tusks and hooves; restrained warm flesh only at snout/ears.",
+        "surface": "Organic coarse bristles, hide folds, mud and scar wear. No glossy biomechanical carapace, tubing, resin or acid slime.",
+        "anatomy": "One natural boar head, lateral natural eyes, one jaw, two tusks, four mammalian legs, cloven hooves, short non-weapon tail. Living animal host, not xenomorph offspring.",
+        "equipment": "none",
+        "orientation": "strict orthographic gameplay profile facing RIGHT in every pose; snout and tusks point right, lateral eye visible, camera never rotates",
+        "scale": "Runtime envelope inherited from V56 override: 158 x 88 logical pixels, low quadruped. Hold one rigid body length and shoulder height across all clips; root at the supporting hoof line.",
+        "grounding": "All supporting hooves share one ground line. Airborne phases are allowed only during natural locomotion/attack and must return to that root without drift.",
+        "prohibitions": [
+          "Kenner Wild Boar Alien olive/bony xenomorph phenotype",
+          "xenomorph dome, inner jaw, dorsal tubes, acid, blade tail or biomechanical ribs",
+          "pink domestic pig treatment",
+          "harness, saddle, armor, fantasy tusk monster or mount",
+          "front-facing or left-facing head, perspective turn, duplicate pose or silhouette drift"
+        ]
+      },
+      "reviewer": "Codex V66 reference audit",
+      "reviewedAt": "2026-09-01"
+    },
+    "enemy-050-korari-stalker": {
+      "name": "Korari Stalker",
+      "archetype": "Korari Stalker",
+      "modifier": "Standard",
+      "biology": "fauna",
+      "caste": "predator",
+      "animationFamily": "fauna",
+      "classification": "PROJECT_ORIGINAL",
+      "referenceMatch": "NO_EXTERNAL_MODEL",
+      "canonExact": false,
+      "externalModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Original Tantalus Frontier fauna. Korari is retained only as a location name from the licensed Aliens versus Predator 2 continuity; no published creature named or modeled as the Korari Stalker was found. The project design must not import a creature from another franchise.",
+      "sourcePolicy": {
+        "positiveDesignAuthority": "LOCAL_PROJECT_LOCK_ONLY",
+        "externalSourcesAre": "setting-only",
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false
+      },
+      "sources": [
+        {
+          "id": "avp2-prima-guide-archive",
+          "kind": "LICENSED_PUBLICATION_ARCHIVE_SETTING_ONLY",
+          "publisher": "Prima Games",
+          "url": "https://oldgamesdownload.com/wp-content/uploads/Aliens_versus_Predator_2_Prima_Guide.pdf",
+          "use": "Setting/name continuity only. It grants no visual authority for the Stalker and must not be used as a creature model sheet."
+        }
+      ],
+      "researchNegativeFinding": {
+        "queryScope": "licensed or primary Aliens versus Predator 2 material relevant to Korari",
+        "result": "Korari is documented as a location in AVP2 continuity; no licensed external Korari Stalker character/model was identified.",
+        "designConsequence": "Keep PROJECT_ORIGINAL / NO_EXTERNAL_MODEL and do not invent an external franchise attribution."
+      },
+      "projectEvidence": [
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "v56Predecessors": [
+        {
+          "path": "assets/openai/sprites/enemies/korari-stalker-action-sheet-v56.png",
+          "bytes": 1349902,
+          "dimensions": [
+            1254,
+            1254
+          ],
+          "sha256": "8bdc72b5cef6e12ca0e1c058c30a2680e7de2fcb2038409a2a5a877b857f7397",
+          "role": "project-owned identity predecessor; sole positive visual authority"
+        },
+        {
+          "path": "assets/openai/sprites/normalized/enemies/korari-stalker-action-sheet-v56.png",
+          "bytes": 434096,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "353df5622d4c470a3a07fe3a654eb2ec490c169ebaf6c3f9b1ea4dd56d5fa405",
+          "role": "project-owned normalized predecessor; preserve identity, do not copy frames"
+        }
+      ],
+      "designLock": "PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.",
+      "queueContractSnapshot": {
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "normalizedGrid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "sourceFacing": "right",
+        "sourceSheetDimensions": [
+          1774,
+          887
+        ],
+        "clips": [
+          {
+            "id": "idle",
+            "fps": 6,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png",
+            "placeholderPromptSha256": "3efa6145f0aeadc1ae1a85d701d0507b3e1f132cf79b94a5222021fde3d4a870",
+            "lockedMotion": "Eight grounded phases: low alert breath, lateral sensor focus, restrained tail counterbalance, subtle photophore pulse and seamless return; no translation."
+          },
+          {
+            "id": "move",
+            "fps": 12,
+            "loop": true,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png",
+            "placeholderPromptSha256": "3a222c41f2875d12aa186b1b23f2e3746536c1a7c62c42d768f648582d535442",
+            "lockedMotion": "Eight chronological low stalk/run phases with four distinct limbs, alternating contacts, supple spine and tail counterbalance; seamless root cycle."
+          },
+          {
+            "id": "attack",
+            "fps": 12,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png",
+            "placeholderPromptSha256": "fa9e9bacde5dd7f4d2bc01287a67f4c6bd5fe9b642454922a8fe5c28ff7d5f4f",
+            "lockedMotion": "Eight chronological phases: compress, fix target right, coil hindquarters, short pounce, single-jaw bite/foreclaw contact, follow-through, land and guarded recovery."
+          },
+          {
+            "id": "death",
+            "fps": 10,
+            "loop": false,
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png",
+            "placeholderPromptSha256": "4ebd0c7890dcd77bb02ac6b799d10bf7d5c07020db1fb2e0df64c4a333222932",
+            "lockedMotion": "Eight irreversible phases: lethal impact, sensory recoil, forelimb failure, torso fall, tail loses tension, flank contact, final settle and motionless terminal pose."
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-050-korari-stalker.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/all.gif"
+      },
+      "placeholderAudit": {
+        "observedInitialStatus": "pending-reference",
+        "observedReference": null,
+        "observedReferenceLockSha256": null,
+        "placeholderPromptsBlockedByMissingDesignLock": true,
+        "placeholderHashesVerifiedAgainstQueue": true,
+        "queueWasModified": false,
+        "generationAllowedAfterMergeOnly": true
+      },
+      "acceptanceGates": [
+        "4 sheets, each exactly 1774x887 PNG, 4x2 and eight individually authored row-major poses",
+        "32/32 cells face right and contain one whole Stalker without crop, overlap or boundary contact",
+        "one head, one natural jaw, four limbs, one flexible tail, natural eye/sensors and sparse flank photophores remain invariant",
+        "rigid torso scale, shoulder height and root line remain coherent across clips",
+        "transparent RGBA or uniform pure #FF00FF chroma only; no scene, shadow, text, grid or watermark",
+        "reviewer confirms original project fauna and rejects xenomorph, Yautja or external-franchise borrowing"
+      ],
+      "status": "reviewed",
+      "urls": [
+        "https://oldgamesdownload.com/wp-content/uploads/Aliens_versus_Predator_2_Prima_Guide.pdf",
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/korari-stalker-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/korari-stalker-action-sheet-v56.png",
+        "src/content-core-v50.js",
+        "src/enemy-visual-overrides-v56.js",
+        "docs/ART_PROVENANCE_V47_1.md",
+        "docs/ASSET_RUNTIME_INVENTORY_V55.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designDetails": {
+        "silhouette": "Low forest quadruped predator with a project-original feline/reptilian synthesis: supple separated limbs, wedge head, visible natural lateral eye/sensory organs, long flexible non-bladed balance tail and low stalking spine.",
+        "palette": "Charcoal and moss-green scaly/velvety surface with bark-like broken patterning; sparse dim cyan photophores confined beneath the flank, never a full neon glow.",
+        "surface": "Organic hide blending fine scales and short velvet texture, subtle bark camouflage, natural scars and dirt. No biomechanical ribs, resin carapace or technological cloak effect.",
+        "anatomy": "One wedge head, visible natural eye/sensors, one jaw, four distinct limbs, animal respiration and one flexible balance tail. No XX121 or Yautja anatomy.",
+        "equipment": "none",
+        "orientation": "strict orthographic gameplay profile facing RIGHT in every pose; muzzle, eye, gait and tail flow read laterally, head never addresses the viewer",
+        "scale": "Runtime envelope inherited from V56 override: 176 x 88 logical pixels, long low quadruped. Preserve one rigid torso length and shoulder height across all clips.",
+        "grounding": "Supporting paws share one root line. Tail can counterbalance but cannot become a fifth support or cross cell boundaries.",
+        "prohibitions": [
+          "xenomorph dome, inner jaw, acid, dorsal tubes, blade tail or biomechanical anatomy",
+          "Predator/Yautja armor, dreadlocks, mask, plasma technology or active camouflage",
+          "recolored Earth panther or recognizable creature from another franchise",
+          "extra limbs, missing natural eye, weaponized tail or equipment",
+          "front-facing or left-facing head, perspective turn, duplicate pose or silhouette drift"
+        ]
+      },
+      "reviewer": "Codex V66 reference audit",
+      "reviewedAt": "2026-09-01"
     }
   }
 }
