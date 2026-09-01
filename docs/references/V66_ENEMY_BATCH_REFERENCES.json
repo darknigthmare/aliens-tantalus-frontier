@@ -836,6 +836,36 @@
       "reviewer": "Codex /root/prepare_profile_042; official licensed ALIEN RPG frontier material, official Marvel criminal-colony metadata, Alien: Isolation human-survivor context and project V56 predecessor reviewed",
       "reviewedAt": "2026-09-01",
       "canonExact": false
+    },
+    "enemy-047-atarax-controller": {
+      "status": "reviewed",
+      "urls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/atarax-controller-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/tools/atarax-control-rig-use-sheet.png"
+      ],
+      "designLock": "One original Tantalus Frontier ATARAX human network operator: realistic adult human proportions, readable human face, compact technical headset or low-profile open control helmet, dark industrial control suit, protected short cables, compact back module, chest-mounted neural console, forearm brace and one small secondary defensive sidearm only. Anthracite, gunmetal, black insulation, restrained amber status lamps and at most one small blue feedback light. The silhouette is technical and lightly protected, never heavy infantry, scientist recolor, cyber-mage, Xenoborg or controlled xenomorph. Strict right-facing orthographic gameplay profile. All future pixels are original project art; no external model exists and no licensed character may be used as a visual substitute.",
+      "reviewer": "Codex /root/generate_profile_039; V56 project registry and project-owned predecessors reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
+    "enemy-048-cult-host": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.focus-entmt.com/en/games/aliens-dark-descent",
+        "https://www.focus-entmt.com/en/news/tindalos-and-focus-reveal-story-trailer-for-aliens-dark-descent"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/cult-host-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png"
+      ],
+      "designLock": "One original Tantalus human colonist cult adherent derived only from Aliens: Dark Descent's Lethe cult/medical-horror context: gaunt but recognizably human adult, visible feverish human face, worn gray-beige-brown colony work clothes, restrained dried blood, and a limited salvaged medical containment harness around abdomen and lower chest with matte braces, straps, tubing and injectors. The person remains human and voluntary/feverish in posture; no full xenomorph transformation. This is not the Guardian, not an exact Embryostatis copy, and not a canonical class named Cult Host. Strict right-facing orthographic profile. Future bitmap art must be original and may not trace any official game frame or model.",
+      "reviewer": "Codex /root/generate_profile_039; official Focus/Tindalos material and V56 project predecessors reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
     }
   }
 }

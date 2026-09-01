@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-004",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json#profiles.enemy-048-cult-host",
+  "classification": "PROJECT_ADAPTATION",
+  "externalCorrespondence": "DERIVED_FROM_EXTERNAL_MODEL",
+  "canonExact": false,
+  "profiles": {
+    "enemy-048-cult-host": {
+      "status": "reviewed",
+      "urls": ["https://www.focus-entmt.com/en/games/aliens-dark-descent", "https://www.focus-entmt.com/en/news/tindalos-and-focus-reveal-story-trailer-for-aliens-dark-descent"],
+      "localPaths": ["assets/openai/sprites/enemies/cult-host-action-sheet-v56.png", "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png"],
+      "designLock": "One original Tantalus human colonist cult adherent derived only from Aliens: Dark Descent's Lethe cult/medical-horror context: gaunt but recognizably human adult, visible feverish human face, worn gray-beige-brown colony work clothes, restrained dried blood, and a limited salvaged medical containment harness around abdomen and lower chest with matte braces, straps, tubing and injectors. The person remains human and voluntary/feverish in posture; no full xenomorph transformation. This is not the Guardian, not an exact Embryostatis copy, and not a canonical class named Cult Host. Strict right-facing orthographic profile. Future bitmap art must be original and may not trace any official game frame or model.",
+      "reviewer": "Codex /root/generate_profile_039; official Focus/Tindalos material and V56 project predecessors reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "identityBoundary": {
+    "target": "Original Tantalus human cult host adaptation grounded in Lethe's licensed cult and medical-horror context.",
+    "canonPosition": "Aliens: Dark Descent, Lethe and its cult are licensed anchors. Guardian is a specific individual/role, not proof of a universal canonical Cult Host class.",
+    "adaptationRule": "Preserve humanity and restrained salvaged medical apparatus. Do not copy Guardian anatomy, costume, apparatus layout or silhouette.",
+    "canonExact": false
+  },
+  "externalEvidence": [
+    { "tier": "PRIMARY_RIGHTSHOLDER_PRODUCT", "authority": "Focus Entertainment / Tindalos Interactive / 20th Century Studios", "url": "https://www.focus-entmt.com/en/games/aliens-dark-descent", "accessVerified": true, "finding": "Official product page identifies the 2023 game, Tindalos development, Focus publication and 20th Century Studios rights context.", "allowedUse": "Continuity and authority anchor only; no bitmap reuse." },
+    { "tier": "PRIMARY_STORY", "authority": "Focus Entertainment / Tindalos Interactive / 20th Century Games", "url": "https://www.focus-entmt.com/en/news/tindalos-and-focus-reveal-story-trailer-for-aliens-dark-descent", "accessVerified": true, "finding": "Official story material places the original campaign on Lethe and explicitly distinguishes iconic xenomorphs, rogue human commandos and a brand-new threat.", "allowedUse": "Lethe story and human-threat context only; it does not define a canonical class named Cult Host." }
+  ],
+  "queueContractSnapshot": {
+    "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+    "sourceSha256AtReview": "24a8650afb244a38830f1f461704c1108bb8067ef115d9c0cabf546628187e32",
+    "profileId": "enemy-048-cult-host",
+    "name": "Cult Host",
+    "biology": "human",
+    "caste": "cult",
+    "provenance": "licensed-reference",
+    "resolvedReferenceStatus": "PROJECT_ADAPTATION",
+    "resolvedReferenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+    "animationFamily": "biped",
+    "ordinal": 47,
+    "facing": "right",
+    "sourceGrid": { "columns": 4, "rows": 2, "frameCount": 8 },
+    "clips": {
+      "idle": { "fps": 6, "loop": true, "frames": [0,1,2,3,4,5,6,7], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/idle.png", "declaredPromptSha256": "498b3d281bd80bb0160c73fcf9ea3ce3a7e2cfe51b92a2916600674631a0714f", "decodedPromptSha256": "e009eba88f431850eca74b52768fbc13ae63b0bcf80291b104cfa627e7962a26" },
+      "move": { "fps": 12, "loop": true, "frames": [8,9,10,11,12,13,14,15], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/move.png", "declaredPromptSha256": "899c20f3fe5bd5a8bafa88e3dc014cc2677331dbba7eec2c34ac0603c08ef069", "decodedPromptSha256": "1f6e454c5088a66266be7514c36604581372738d7dd460045b8d7df0aa162635" },
+      "attack": { "fps": 12, "loop": false, "frames": [16,17,18,19,20,21,22,23], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/attack.png", "declaredPromptSha256": "9796424afe6250b19a264d132e4ca1df78eb92ae94bad7ca40d9ab162f84649e", "decodedPromptSha256": "afa47771fbb241dd9a0a464f44eaed858010f7544fb39b8510b58fcdb9aa7bd0" },
+      "death": { "fps": 10, "loop": false, "frames": [24,25,26,27,28,29,30,31], "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-048-cult-host/death.png", "declaredPromptSha256": "1aa0fe63c4339499162a9dbbe607291f71bbff57d74f607bde68c5baff44e1cc", "decodedPromptSha256": "082635f90465f93629eaf96519fb800b6756e6af6a3a348dc28bec33fb57b7e7" }
+    },
+    "promptHashAudit": "All four declared hashes differ from SHA-256 of the decoded UTF-8 placeholder text. All prompts remain BLOCKED placeholders and are provenance only."
+  },
+  "projectEvidence": [
+    { "path": "docs/references/V56_ENEMY_REFERENCE_MATRIX.json", "role": "Exact V56 PROJECT_ADAPTATION / DERIVED_FROM_EXTERNAL_MODEL entry and Guardian boundary." },
+    { "path": "src/content-core-v50.js", "role": "Internal Cult Host roster identity." },
+    { "path": "assets/openai/sprites/enemies/cult-host-action-sheet-v56.png", "size": [1254,1254], "mode": "RGBA", "bytes": 796957, "sha256": "5d115611ced831517a666f3000897e96bed3dd35d48edcb0b323f21e1a7081df", "role": "Raw V56 project-owned predecessor; adaptation identity study only." },
+    { "path": "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png", "size": [1024,1024], "mode": "RGBA", "bytes": 507216, "sha256": "ea3ba3c83c55ee1d6b57d2f525135dc0a447de1493b5f4fa4caaa39ea85f0e2c", "role": "Normalized V56 4x4 right-facing predecessor; scale and grounding evidence." }
+  ],
+  "referenceLock": {
+    "silhouette": "Gaunt but fully human colonist in worn workwear, feverish voluntary posture, visible human head and limited abdomen/chest medical harness.",
+    "palette": "Gray, beige and brown colony textiles, unhealthy skin, restrained dried blood, matte dull medical metal; no fantasy color coding.",
+    "apparatus": "Simplified original containment harness with straps, modest braces, short tubing and injectors; not an exact Guardian/Embryostatis copy.",
+    "anatomy": "Two human arms, two human legs, human skull and face, no tail, inner jaw, carapace or exposed permanent chestburster.",
+    "facing": "Strict right-facing orthographic side view across 32 poses.",
+    "animation": {
+      "idle": "Eight grounded feverish breathing and harness-guarding poses.",
+      "move": "Eight-pose unsteady but intentional human locomotion cycle.",
+      "attack": "Eight chronological human improvised-tool or grappling strikes; no alien claw or inner-jaw action despite the generic queue placeholder.",
+      "death": "Eight-pose irreversible human collapse with apparatus remaining attached."
+    },
+    "prohibitions": [
+      "No exact Guardian reproduction and no claim that Cult Host is a canonical Aliens: Dark Descent class.",
+      "No zombie, demon, fantasy priest, xenomorph humanoid, alien claws, inner jaw or full transformation.",
+      "No permanent exposed chestburster, magic relic, real religious symbol, text or logo.",
+      "No left-facing, frontal, crop, cell contact, scenery or copied official bitmap."
+    ]
+  },
+  "sourceUsePolicy": { "onlineImagesDownloaded": false, "officialOrLicensedBitmapEmbedded": false, "officialAssetsCopied": false, "policy": "External sources are study-only continuity anchors; future art must be an original fan-made adaptation." },
+  "reviewStatus": { "referencePhaseCompleteLocal": true, "generationAuthorizedByThisFragment": false, "imageGenCalls": 0, "accepted": false, "runtimeIntegrated": false, "globalReferenceMerged": false, "queueUpdated": false, "stateUpdated": false }
+}
