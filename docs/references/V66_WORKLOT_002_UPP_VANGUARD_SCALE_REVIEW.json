@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-044-upp-vanguard": {
+      "profileId": "enemy-044-upp-vanguard",
+      "status": "pending-manual-rigid-landmark-review",
+      "reviewer": null,
+      "reviewedAt": null,
+      "baselineClip": "idle",
+      "sourceSha256ByClip": {
+        "idle": "ec0f7221abaf39d306b2320bd64fcbacc934ecc2e54d15db45948ce3555b18c3",
+        "move": "e9024628ff116b6217eb12420d4865797ce2f0ba89cba97470214ade62c4228a",
+        "attack": "c5ecf9759cb5b2c6e6efe8981945b890d5ba5948fe522b0d65ab903d8e79aee8",
+        "death": "19100368999fc1177f0906e98ffe4a7c97676e022183ca28d1c6c7bed76d257f",
+        "reload": "d7c13e81b154e7b90e7f3dcf23d46e64618c2fe9c2c1be8d7697f0ea31bc3e97"
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.0,
+        "attack": 1.0,
+        "death": 1.0,
+        "reload": 1.0
+      },
+      "measurements": [],
+      "note": "Source hashes updated for death r3. Neutral 1.0 placeholders are not reviewed factors and must not be merged or consumed."
+    }
+  }
+}

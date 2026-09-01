@@ -1,0 +1,317 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-002",
+  "profileId": "enemy-044-upp-vanguard",
+  "generatedAt": "2026-09-01",
+  "method": "Unchanged-source inspection with process-v66-enemy-batch.py; safe reassignment only proves connected pixel ownership and does not alter active masters.",
+  "sources": [
+    {
+      "clipId": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-044-upp-vanguard/idle.png",
+      "sha256": "ec0f7221abaf39d306b2320bd64fcbacc934ecc2e54d15db45948ce3555b18c3",
+      "bytes": 1732393,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "exactTwoToOne": true,
+      "poseCount": 8,
+      "defaultExtraction": {
+        "pass": true,
+        "error": null
+      },
+      "safeOwnershipExtraction": {
+        "pass": true,
+        "error": null,
+        "transfers": [],
+        "discardedForegroundPixels": 0
+      },
+      "matte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "342b635f1f514d190ba3ebbf03cefc1936868f844cbcaf87cd1df487a66d0f24",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clipId": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-044-upp-vanguard/move.png",
+      "sha256": "e9024628ff116b6217eb12420d4865797ce2f0ba89cba97470214ade62c4228a",
+      "bytes": 1338529,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "exactTwoToOne": true,
+      "poseCount": 8,
+      "defaultExtraction": {
+        "pass": true,
+        "error": null
+      },
+      "safeOwnershipExtraction": {
+        "pass": true,
+        "error": null,
+        "transfers": [],
+        "discardedForegroundPixels": 0
+      },
+      "matte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "230bba572fa9a413106fcb13a12430d150f49d5e71bcd8843a4512057d4eff79",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clipId": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-044-upp-vanguard/attack.png",
+      "sha256": "c5ecf9759cb5b2c6e6efe8981945b890d5ba5948fe522b0d65ab903d8e79aee8",
+      "bytes": 1570052,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "exactTwoToOne": true,
+      "poseCount": 8,
+      "defaultExtraction": {
+        "pass": true,
+        "error": null
+      },
+      "safeOwnershipExtraction": {
+        "pass": true,
+        "error": null,
+        "transfers": [],
+        "discardedForegroundPixels": 0
+      },
+      "matte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "54ecc74b4610589b881db2d1b5d707ecc03d09345380a304b2f2a84f91debcdd",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clipId": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-044-upp-vanguard/death.png",
+      "sha256": "19100368999fc1177f0906e98ffe4a7c97676e022183ca28d1c6c7bed76d257f",
+      "bytes": 1406485,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "exactTwoToOne": true,
+      "poseCount": 8,
+      "defaultExtraction": {
+        "pass": true,
+        "error": null
+      },
+      "safeOwnershipExtraction": {
+        "pass": true,
+        "error": null,
+        "transfers": [],
+        "discardedForegroundPixels": 0
+      },
+      "matte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "686e0f2a283dac61203eacc0ec1dcc91a7bd431a6fb174f0d1efabe5e4ab24d8",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clipId": "reload",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-044-upp-vanguard/reload.png",
+      "sha256": "d7c13e81b154e7b90e7f3dcf23d46e64618c2fe9c2c1be8d7697f0ea31bc3e97",
+      "bytes": 1707855,
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "exactTwoToOne": true,
+      "poseCount": 8,
+      "defaultExtraction": {
+        "pass": true,
+        "error": null
+      },
+      "safeOwnershipExtraction": {
+        "pass": true,
+        "error": null,
+        "transfers": [],
+        "discardedForegroundPixels": 0
+      },
+      "matte": {
+        "requested": false,
+        "applied": false,
+        "aaFringeRequested": false,
+        "aaFringeApplied": false,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": null,
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "18ae51a3f3f300a5981c50bf6b7852def675b93fb09212d24a7ae1a35462f284",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "summary": {
+    "boards": 5,
+    "expectedPoses": 40,
+    "safeExtractedPoses": 40,
+    "safePassBoards": 5,
+    "defaultPassBoards": 5,
+    "sourcePixelsChanged": false,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "canonExact": false,
+    "visualReview": "Built-in ImageGen outputs were reviewed on return; workspace view_image remained unavailable due Windows ACL helper failure."
+  }
+}
