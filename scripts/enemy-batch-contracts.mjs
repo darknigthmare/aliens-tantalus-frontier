@@ -86,13 +86,21 @@ export function normalizeEnemyIdentity(source) {
 
 export function reviewedReference(source) {
   if (!source || source.status !== 'reviewed' || !String(source.designLock || '').trim() || !String(source.reviewer || '').trim() || !String(source.reviewedAt || '').trim()) return null;
-  if (!Array.isArray(source.urls) || !source.urls.length || source.urls.some((url) => !/^https:\/\/[^\s]+$/.test(url))) return null;
+  const urls = source.urls;
+  const localPaths = source.localPaths || [];
+  if (!Array.isArray(urls) || urls.some((url) => !/^https:\/\/[^\s]+$/.test(url))) return null;
+  if (!Array.isArray(localPaths) || localPaths.some((entry) => {
+    if (typeof entry !== 'string' || !entry.trim()) return true;
+    const normalized = entry.replaceAll('\\', '/');
+    return normalized.startsWith('/') || /^[a-z]:\//i.test(normalized) || normalized.split('/').includes('..');
+  })) return null;
+  if (!urls.length && !localPaths.length) return null;
   if (source.canonExact === true) throw new Error('Reference review is not a certification of pixel-exact generation.');
   const sourceScaleByClip = source.sourceScaleByClip || {};
   if (!sourceScaleByClip || typeof sourceScaleByClip !== 'object' || Array.isArray(sourceScaleByClip) || Object.entries(sourceScaleByClip).some(([key, value]) => !/^[a-z][a-z-]+$/.test(key) || typeof value !== 'number' || !Number.isFinite(value) || value <= 0)) throw new Error('Reviewed source clip scales must be explicit finite positive numbers.');
   const scaleCalibrationReview = source.scaleCalibrationReview || null;
   if (Object.keys(sourceScaleByClip).length && (!String(scaleCalibrationReview?.note || '').trim() || !String(scaleCalibrationReview?.reviewer || '').trim() || !String(scaleCalibrationReview?.reviewedAt || '').trim() || !Array.isArray(scaleCalibrationReview?.evidencePaths) || !scaleCalibrationReview.evidencePaths.length)) throw new Error('Manual inter-clip scale calibration requires a reviewed measurement note and evidence paths.');
-  return { status: 'reviewed', urls: [...source.urls], localPaths: [...(source.localPaths || [])], designLock: source.designLock, reviewer: source.reviewer, reviewedAt: source.reviewedAt, canonExact: false, sourceScaleByClip: { ...sourceScaleByClip }, scaleCalibrationReview };
+  return { status: 'reviewed', urls: [...urls], localPaths: [...localPaths], designLock: source.designLock, reviewer: source.reviewer, reviewedAt: source.reviewedAt, canonExact: false, sourceScaleByClip: { ...sourceScaleByClip }, scaleCalibrationReview };
 }
 
 export function makeGenerationPrompt(profile, clipSpec, reference) {

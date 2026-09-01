@@ -33,7 +33,8 @@ export function assembleReferenceRegistry(baseDocument, fragments) {
     for (const [profileId, entry] of entries) {
       if (incoming.has(profileId)) throw new Error('Duplicate incoming reference profile: ' + profileId);
       if (!record(entry) || entry.status !== 'reviewed' || !String(entry.designLock || '').trim()
-        || !Array.isArray(entry.urls) || !Array.isArray(entry.localPaths) || entry.canonExact !== false) {
+        || !Array.isArray(entry.urls) || !Array.isArray(entry.localPaths)
+        || (!entry.urls.length && !entry.localPaths.length) || entry.canonExact !== false) {
         throw new Error('Incomplete reviewed reference lock: ' + profileId);
       }
       if (entry.urls.some((url) => !String(url).startsWith('https://'))) {

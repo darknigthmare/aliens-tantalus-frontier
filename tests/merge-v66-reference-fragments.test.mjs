@@ -52,4 +52,19 @@ test('canon-exact claims and incomplete locks are rejected', () => {
     ),
     /Incomplete reviewed reference lock/,
   );
+  assert.throws(
+    () => assembleReferenceRegistry(
+      { schema: 1, profiles: {} },
+      [{ schema: 1, profiles: { 'enemy-001-alpha': { ...lock('alpha'), urls: [], localPaths: [] } } }],
+    ),
+    /Incomplete reviewed reference lock/,
+  );
+  const localOnly = { ...lock('alpha'), urls: [], localPaths: ['docs/alpha.md'] };
+  assert.deepEqual(
+    assembleReferenceRegistry(
+      { schema: 1, profiles: {} },
+      [{ schema: 1, profiles: { 'enemy-001-alpha': localOnly } }],
+    ).document.profiles['enemy-001-alpha'],
+    localOnly,
+  );
 });

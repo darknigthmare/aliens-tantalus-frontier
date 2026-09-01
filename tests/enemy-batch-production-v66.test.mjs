@@ -323,7 +323,15 @@ test('reviewed references gate generation and are never a1:1certification', () =
   assert.ok(queue.jobs.slice(0, 5).every((job) => job.clips.length === 4 && job.grid.rows === 8));
   assert.match(queue.jobs[0].clips[0].sourcePath, /frames\/v66\/batch-001\/enemy-001-ovomorph\/sealed\.png$/);
   assert.equal(reviewedReference({ ...reference, reviewer: '' }), null);
-  assert.equal(reviewedReference({ ...reference, urls: [] }), null);
+  const localOnly = reviewedReference({ ...reference, urls: [], localPaths: ['assets/project-original/reference.png'] });
+  assert.deepEqual(localOnly.urls, []);
+  assert.deepEqual(localOnly.localPaths, ['assets/project-original/reference.png']);
+  assert.equal(reviewedReference({ ...reference, urls: [], localPaths: [] }), null);
+  assert.equal(reviewedReference({ ...reference, urls: [], localPaths: ['../outside.png'] }), null);
+  const localOnlyRefs = { profiles: { ...refs.profiles, [FIRST_BATCH_IDS[0]]: { ...reference, urls: [], localPaths: ['assets/project-original/reference.png'] } } };
+  const localOnlyJob = buildEnemyBatchQueue({ references: localOnlyRefs }).jobs.find((job) => job.profileId === FIRST_BATCH_IDS[0]);
+  assert.equal(localOnlyJob.initialStatus, 'ready-generation');
+  assert.ok(localOnlyJob.referenceLockSha256);
   assert.throws(() => reviewedReference({ ...reference, canonExact: true }), /not a certification/);
   assert.ok(queue.jobs[0].clips.every((clip) => clip.prompt.includes(reference.designLock)));
 });
