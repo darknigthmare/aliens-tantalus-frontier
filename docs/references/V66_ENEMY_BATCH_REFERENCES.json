@@ -764,6 +764,43 @@
       "reviewer": "Codex /root/prepare_profile_042; official Cold Iron/20th Century game pages, official Marvel licensed publication metadata, official ALIEN RPG material and project-owned V47.1 predecessor/provenance reviewed",
       "reviewedAt": "2026-09-01",
       "canonExact": false
+    },
+    "enemy-043-weyland-yutani-commando": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-3",
+        "https://propstore.com/product/alien-1992/27-terry-english-made-weyland-yutani-commando-helmet-replica/",
+        "https://freeleaguepublishing.com/wp-content/uploads/2023/09/ALIEN-Evolved-Edition-Miniatures-Set-Rapture-Protocol-rules-booklet.pdf",
+        "https://www.nintendo.com/en-gb/Games/Nintendo-DS/Aliens-Infestation-270000.html",
+        "https://figurefanzero.com/2016/10/11/alien-3-weyland-yutani-commando-by-neca/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/weyland-yutani-commando-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/weyland-yutani-commando-action-sheet-v56.png"
+      ],
+      "designLock": "Weyland-Yutani Commando directly targets the helmeted Alien 3 corporate commando in a sealed white APEsuit. Preserve a bulky but recognizably human silhouette: layered off-white pressure garment, tan reinforced padding, compact life-support backpack, gray metal/fiberglass helmet dome, asymmetric aluminum lower face cage and plate, hinged green-tinted welding goggles lowered over the eyes, black chin strap, covered face and heavy boots/gloves. This assault profile carries exactly one dark charcoal/black M41A Pulse Rifle in both hands, selected from the documented black-or-white film/licensed variants for maximum silhouette readability; it is not an NSG23, smartgun, energy rifle or generic assault rifle. The catch pole and knife are documented equipment but are not carried in this firearm/reload profile. Keep the rifle stock, upper shroud, barrel, foregrip and underslung launcher mass readable as one continuous weapon; never invent optics, suppressor, energy cells or floating attachments. Palette stays dirty off-white/cream, restrained tan padding, gray-silver hardware, dark joints and weapon, small desaturated green lenses; no olive Colonial Marine armor and no modern black tactical/ODST redesign. Strict right-facing orthographic gameplay profile, face hidden, backpack and rifle separated from the torso silhouette. Future pixels must be an original fan-made interpretation based on studied shape language, never a trace or copy of a film still, licensed miniature, product photo or official sprite.",
+      "reviewer": "Codex /root/generate_profile_039; official film page, Terry English helmet archive, licensed Free League rules and project V56 predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
+    "enemy-044-upp-vanguard": {
+      "status": "reviewed",
+      "urls": [
+        "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+        "https://www.mynewsdesk.com/us/free-league/pressreleases/lock-and-load-your-pulse-rifle-colonial-marines-operations-manual-announced-for-the-alien-rpg-3049911",
+        "https://www.nintendo.com/es-es/Juegos/Nintendo-DS/Aliens-Infestation-270000.html",
+        "https://avp.fandom.com/wiki/Union_of_Progressive_Peoples"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/upp-vanguard-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "src/enemy-visual-overrides-v56.js"
+      ],
+      "designLock": "UPP Vanguard is an original Aliens: Tantalus Frontier PROJECT_ADAPTATION grounded in the published Union of Progressive Peoples military context, not a published UPP class, rank, named uniform or exact character model. Preserve the project V56 identity: a compact, mobile human assault trooper in practical layered field protection, a low close-fitting combat helmet, restrained communications and ammunition equipment, and one stable UPP-pattern pulse/assault rifle whose angular stamped-metal silhouette is clearly distinct from the USCM M41A. Use desaturated gray-olive and green-gray fabric, charcoal webbing, dark oxidized metal and limited dull red identification accents. Armor remains light-to-medium and utilitarian: a short segmented chest carrier with small shoulder and forearm protection, never a bulky powered suit. The helmet has a shallow rounded shell, short front brow, protected ears, narrow dark visor/goggle slit and a compact left-side communications module; the face remains partly readable below it. The rifle has a long straight upper receiver, short vented shroud, conventional stock, curved detachable magazine and compact optic, with no M41A carry-handle/grenade-launcher silhouette. Strict right-facing orthographic gameplay profile. Preserve one identical individual, weapon, helmet, armor segmentation, pouch layout, palette, anatomical scale and handedness across idle, move, attack, death and reload. This is a fan-made project interpretation; no official bitmap, sprite, illustration or uniform may be copied or traced, and canonExact remains false.",
+      "reviewer": "Codex /root/generate_profile_040; official Free League/20th Century ALIEN RPG product material, licensed Nintendo/SEGA Aliens: Infestation page, secondary indexed UPP corpus and project-owned V56 evidence reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
     }
   }
 }

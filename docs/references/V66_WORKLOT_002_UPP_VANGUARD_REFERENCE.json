@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-002",
+  "batchId": "batch-003",
+  "phase": "reference-only",
+  "status": "reference-reviewed-local-lock-not-merged",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json#profiles.enemy-044-upp-vanguard",
+  "profiles": {
+    "enemy-044-upp-vanguard": {
+      "status": "reviewed",
+      "urls": [
+        "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+        "https://www.mynewsdesk.com/us/free-league/pressreleases/lock-and-load-your-pulse-rifle-colonial-marines-operations-manual-announced-for-the-alien-rpg-3049911",
+        "https://www.nintendo.com/es-es/Juegos/Nintendo-DS/Aliens-Infestation-270000.html",
+        "https://avp.fandom.com/wiki/Union_of_Progressive_Peoples"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/upp-vanguard-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "src/enemy-visual-overrides-v56.js"
+      ],
+      "designLock": "UPP Vanguard is an original Aliens: Tantalus Frontier PROJECT_ADAPTATION grounded in the published Union of Progressive Peoples military context, not a published UPP class, rank, named uniform or exact character model. Preserve the project V56 identity: a compact, mobile human assault trooper in practical layered field protection, a low close-fitting combat helmet, restrained communications and ammunition equipment, and one stable UPP-pattern pulse/assault rifle whose angular stamped-metal silhouette is clearly distinct from the USCM M41A. Use desaturated gray-olive and green-gray fabric, charcoal webbing, dark oxidized metal and limited dull red identification accents. Armor remains light-to-medium and utilitarian: a short segmented chest carrier with small shoulder and forearm protection, never a bulky powered suit. The helmet has a shallow rounded shell, short front brow, protected ears, narrow dark visor/goggle slit and a compact left-side communications module; the face remains partly readable below it. The rifle has a long straight upper receiver, short vented shroud, conventional stock, curved detachable magazine and compact optic, with no M41A carry-handle/grenade-launcher silhouette. Strict right-facing orthographic gameplay profile. Preserve one identical individual, weapon, helmet, armor segmentation, pouch layout, palette, anatomical scale and handedness across idle, move, attack, death and reload. This is a fan-made project interpretation; no official bitmap, sprite, illustration or uniform may be copied or traced, and canonExact remains false.",
+      "reviewer": "Codex /root/generate_profile_040; official Free League/20th Century ALIEN RPG product material, licensed Nintendo/SEGA Aliens: Infestation page, secondary indexed UPP corpus and project-owned V56 evidence reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "classification": "PROJECT_ADAPTATION",
+  "externalCorrespondence": "DERIVED_FROM_PUBLISHED_FACTION_NO_DIRECT_VANGUARD_MODEL",
+  "identityBoundary": {
+    "published": "The Union of Progressive Peoples and a wider frontier-war/faction/equipment context are present in licensed ALIEN material. Aliens: Infestation is a licensed side-scrolling ALIENS title with enemy-soldier combat and expanded-universe framing.",
+    "projectAuthored": "The Vanguard role name, exact armor assembly, helmet geometry, rifle silhouette, palette allocation, pouch layout and all animation poses are Tantalus-authored.",
+    "negativeFindingScope": "No inspected primary or licensed public page establishes a standardized named UPP Vanguard class or one definitive Vanguard uniform/model. This scoped finding is not an exhaustive claim about every paid publication page or unseen illustration.",
+    "canonPosition": "Faction correspondence does not make the generated character canon-exact; canonExact is permanently false for this adaptation."
+  },
+  "externalEvidence": [
+    {
+      "tier": "LICENSED_PRIMARY",
+      "authority": "Free League Publishing / 20th Century Studios",
+      "url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/",
+      "verifiedAt": "2026-09-01",
+      "finding": "The official ALIEN RPG campaign book publicly describes Frontier War, frontier factions, and illustrated weapons and vehicles; the page identifies the product as © 2026 20th Century Studios.",
+      "allowedUse": "Military, faction and retro-industrial equipment context only; the page does not certify a Vanguard model or exact uniform."
+    },
+    {
+      "tier": "LICENSED_PRESS_RELEASE",
+      "authority": "Free League Publishing and 20th Century Studios",
+      "url": "https://www.mynewsdesk.com/us/free-league/pressreleases/lock-and-load-your-pulse-rifle-colonial-marines-operations-manual-announced-for-the-alien-rpg-3049911",
+      "verifiedAt": "2026-09-01",
+      "finding": "The 2020 announcement explicitly calls Colonial Marines Operations Manual a module for the official ALIEN roleplaying game and frames chemical, biological and frontier warfare.",
+      "allowedUse": "Authority and setting-tone confirmation, not direct UPP costume evidence."
+    },
+    {
+      "tier": "LICENSED_GAME",
+      "authority": "Nintendo listing; SEGA publisher; WayForward/Gearbox developer",
+      "url": "https://www.nintendo.com/es-es/Juegos/Nintendo-DS/Aliens-Infestation-270000.html",
+      "verifiedAt": "2026-09-01",
+      "finding": "The licensed 2011 Nintendo DS listing confirms a classic 2D side-scrolling ALIENS action game, an expanded-universe framing, firefights and licensed publisher/developer credits.",
+      "allowedUse": "Gameplay-angle and 2D readability precedent only. No sprite or bitmap may be extracted, copied or traced."
+    },
+    {
+      "tier": "SECONDARY_INDEX",
+      "authority": "Xenopedia community index citing ALIEN RPG publications",
+      "url": "https://avp.fandom.com/wiki/Union_of_Progressive_Peoples",
+      "verifiedAt": "2026-09-01",
+      "finding": "The indexed summary identifies the UPP as a resource-constrained interstellar power in cold-war competition and describes reverse-engineering as part of its technology context.",
+      "allowedUse": "Discovery and cross-check only. It cannot override licensed publications or establish exact visual canon."
+    }
+  ],
+  "projectEvidence": [
+    {
+      "path": "assets/openai/sprites/enemies/upp-vanguard-action-sheet-v56.png",
+      "size": [1254, 1254],
+      "mode": "RGBA",
+      "sha256": "2794cea9f4af39ca7f8ebe91384ff209120b9f5afb0bc3d1088457a547467075",
+      "role": "Project-owned raw V56 identity and broad motion reference only; never a V66 source board."
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+      "size": [1024, 1024],
+      "mode": "RGBA",
+      "sha256": "09d44286a91aaf143a6b638c6a4e500f290ef14ecfed5e6dd28cdc13b52ccf61",
+      "role": "Project-owned normalized predecessor for identity, scale envelope and grounding continuity only."
+    },
+    {
+      "path": "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+      "role": "Existing PROJECT_ADAPTATION decision, palette, silhouette and redesign prohibitions."
+    },
+    {
+      "path": "src/enemy-visual-overrides-v56.js",
+      "role": "Runtime identity: dedicated profile, npc-standing hitbox and 98 by 134 render envelope."
+    }
+  ],
+  "referenceLock": {
+    "topology": {
+      "species": "human",
+      "armCount": 2,
+      "legCount": 2,
+      "rule": "Realistic adult human anatomy; helmet, rifle sling, pouches and antenna never become limbs. Both hands retain stable readable contact with the same rifle except during the authored reload steps."
+    },
+    "silhouette": "Compact elite infantry profile, slightly forward tactical posture, low helmet, short layered torso armor, narrow practical backpack/radio contour and one shoulder-length rifle. Mobile rather than tank-like; no powered exoskeleton.",
+    "palette": {
+      "primary": "desaturated gray-olive and green-gray fabric",
+      "secondary": "charcoal webbing, gloves, boots and dark oxidized gunmetal",
+      "armor": "matte muted sage/olive plates with worn edges",
+      "accent": "small dull red identification tab or cable only",
+      "forbidden": "bright parade red, giant stars, glossy black sci-fi armor, neon, blue USCM camouflage or randomized clip recolors"
+    },
+    "armor": "Light-to-medium modular field protection: short segmented chest carrier, modest shoulder caps, forearm guards, knee pads and compact rear radio/utility pack. Fabric remains visible at abdomen, upper arms and thighs. No Colonial Marine M3 armor copy and no full sealed spacesuit.",
+    "helmet": "Low shallow rounded ballistic shell with short brow, protected ears, narrow smoked visor/goggle slit, chin strap and compact left communications block/short antenna. Lower nose, jaw or respirator edge remains readable. No USCM lobster-tail helmet, Soviet steel helmet, gas-mask caricature or full opaque astronaut dome.",
+    "equipment": "Compact left-side radio/comms, four restrained rifle magazines, one utility pouch, canteen/medical pouch and simple sling. Gear remains identical and attached across all clips; no floating loose accessories.",
+    "weapon": {
+      "identity": "Tantalus UPP-pattern pulse/assault rifle, original project design",
+      "silhouette": "Long straight angular upper receiver, short vented forward shroud, conventional fixed skeletal stock, curved detachable magazine, compact low optic and short muzzle device.",
+      "handling": "Right-facing muzzle; stock seated at the shoulder for fire, muzzle safely low-ready for locomotion, same magazine and charging control during reload.",
+      "prohibitions": "No M41A carry handle, under-barrel grenade launcher or counter block; no AK-47 replica, modern real-world branded rifle, smartgun, railgun, plasma beam, bayonet or weapon morphing."
+    },
+    "facing": "Strict orthographic gameplay side view facing right in every future pose; face, visor, armor layers, hands, magazine and complete muzzle remain readable.",
+    "scale": {
+      "gameplayRole": "Mobile human assault elite, taller than low creatures but not larger than other standing human combatants.",
+      "legacyRenderEnvelopePx": [98, 134],
+      "rigidLandmark": "Measure helmet crown-to-boot-sole standing height on comparable upright idle/reload poses and cross-check shoulder-to-hip armor seam distance; never use rifle length, recoil reach or corpse width.",
+      "sourceScaleByClipStatus": "pending-generated-source-measurement"
+    },
+    "rootAndGround": {
+      "pivotCandidate": [128, 240],
+      "pivotStatus": "queue precedent only; manual physical-root review required after generation",
+      "bodyRoot": "Project the pelvis center to the active boot support/contact plane; never anchor to rifle, backpack, antenna, kneepad or detached magazine."
+    },
+    "sourceContract": {
+      "canvasAspectRatio": "2:1",
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "chronology": "strict row-major",
+      "background": "true transparent RGBA or perfectly uniform opaque #FF00FF",
+      "cellIsolation": "Exactly one complete soldier and all attached equipment per cell; helmet antenna, stock, muzzle, boots and every reload object remain inside generous gutters.",
+      "identityScale": "One common individual, weapon and physical scale across all five clips; no automatic per-pose correction."
+    },
+    "animation": {
+      "idle": {"fps": 6, "loop": true, "poses": ["low ready neutral", "breath in", "shoulders rise", "small rightward scan without turning", "peak alert", "breath out", "weight settles", "near-neutral closure"], "rule": "Muzzle remains low-ready to the right; no aim/fire, patrol step or perspective turn."},
+      "move": {"fps": 12, "loop": true, "poses": ["left boot contact", "weight acceptance", "right boot passes", "right boot contact", "mid-stance", "left boot passes", "left boot approaches contact", "cycle closure"], "rule": "Controlled armed jog with the same two-hand low-ready grip and stable kit; no translation across cells."},
+      "attack": {"fps": 12, "loop": false, "poses": ["low ready", "stock rises", "sight alignment", "aim settled", "single muzzle discharge", "shoulder recoil", "reacquire target", "return to ready"], "rule": "One short controlled rifle shot/burst; no weapon redesign, projectile beam, giant flash or left-facing recoil."},
+      "death": {"fps": 10, "loop": false, "poses": ["lethal impact", "torso recoil", "grip fails", "knees buckle", "fall begins", "body contacts ground", "limbs and rifle settle", "terminal motionless body"], "rule": "Irreversible human fall. Rifle may remain slung or land adjacent but cannot vanish, fire independently or become a second prop actor."},
+      "reload": {"fps": 10, "loop": false, "poses": ["ready and indexed", "support hand reaches magazine", "magazine released", "empty magazine controlled", "fresh curved magazine aligned", "magazine seated", "charging control operated", "two-hand ready restored"], "rule": "One mechanically coherent detachable-magazine reload using the same rifle, magazine well, curved magazine and support hand. Exactly one controlled magazine object; no duplicated floating magazine."}
+    },
+    "prohibitions": [
+      "No claim that UPP Vanguard is a published class, uniform or canon-exact model.",
+      "No USCM marine recolor, M3 armor copy, M41A, colonial helmet or blue camouflage.",
+      "No historical Soviet/Chinese uniform cosplay, giant star, hammer-and-sickle, propaganda poster styling or ethnic caricature.",
+      "No powered exoskeleton, glossy superhero armor, full astronaut suit, oversized backpack, cape or railgun.",
+      "No weapon, helmet, armor, pouch, palette, handedness or body-scale drift between clips.",
+      "No left-facing pose, three-quarter camera, crop, cell contact, scenery, floor, shadow, text, logo, UI or copied official/licensed bitmap."
+    ]
+  },
+  "sourceUsePolicy": {
+    "onlineImagesDownloaded": false,
+    "officialOrLicensedBitmapEmbedded": false,
+    "officialAssetsCopied": false,
+    "policy": "External sources are study-only. Positive pixel identity comes from project-owned V56 evidence and this original design lock; no official sprite, screenshot, model, illustration, texture or insignia is copied or traced."
+  },
+  "reviewStatus": {
+    "referencePhaseCompleteLocal": true,
+    "generationAuthorizedByThisFragment": false,
+    "imageGenCalls": 0,
+    "sourceBoardsCreated": false,
+    "normalizationRun": false,
+    "accepted": false,
+    "runtimeIntegrated": false,
+    "globalReferenceMerged": false,
+    "queueUpdated": false,
+    "stateUpdated": false,
+    "note": "Standalone merge candidate only; no global registry, queue, state, runtime, normalized asset or Git change."
+  }
+}

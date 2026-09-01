@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-002",
+  "profileId": "enemy-044-upp-vanguard",
+  "createdAt": "2026-09-01",
+  "createdBy": "Codex /root/generate_profile_040",
+  "classification": "PROJECT_ADAPTATION",
+  "canonExact": false,
+  "research": {
+    "method": "Live web research with licensed and official sources prioritized, then secondary indexing used only for discovery/cross-checking.",
+    "urls": [
+      {"url": "https://freeleaguepublishing.com/shop/alien-rpg-2/colonial-marines-operations-manual/", "authority": "licensed-primary", "httpStatusAtReview": 200},
+      {"url": "https://www.mynewsdesk.com/us/free-league/pressreleases/lock-and-load-your-pulse-rifle-colonial-marines-operations-manual-announced-for-the-alien-rpg-3049911", "authority": "licensed-press-release", "httpStatusAtReview": 200},
+      {"url": "https://www.nintendo.com/es-es/Juegos/Nintendo-DS/Aliens-Infestation-270000.html", "authority": "licensed-game-listing", "httpStatusAtReview": 200},
+      {"url": "https://avp.fandom.com/wiki/Union_of_Progressive_Peoples", "authority": "secondary-index", "httpStatusAtReview": 403, "note": "Cloudflare rejected direct HEAD, while search indexing returned the page; retained only as a non-authoritative discovery source."}
+    ],
+    "onlineImagesDownloaded": false,
+    "officialBitmapsEmbedded": false,
+    "officialAssetsCopied": false
+  },
+  "localInputs": [
+    {"path": "assets/openai/sprites/enemies/upp-vanguard-action-sheet-v56.png", "bytes": 895955, "size": [1254, 1254], "mode": "RGBA", "sha256": "2794cea9f4af39ca7f8ebe91384ff209120b9f5afb0bc3d1088457a547467075"},
+    {"path": "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png", "bytes": 477498, "size": [1024, 1024], "mode": "RGBA", "sha256": "09d44286a91aaf143a6b638c6a4e500f290ef14ecfed5e6dd28cdc13b52ccf61"}
+  ],
+  "outputs": [
+    {"path": "docs/references/V66_WORKLOT_002_UPP_VANGUARD_REFERENCE.json", "bytes": 14995, "sha256": "b79593d05b9b40b73041e33946e48a5a7f95a4d9e3d52506e8ab805c668e6e0d"},
+    {"path": "docs/references/V66_WORKLOT_002_UPP_VANGUARD_REFERENCE_AUDIT.md", "bytes": 2887, "sha256": "08f9b48d77832de0d1e06d09b5264cdf4cbb0232e14f749c4f38b2baf02f2726"}
+  ],
+  "sideEffects": {
+    "imageGenerationCalls": 0,
+    "globalReferenceWrites": 0,
+    "queueWrites": 0,
+    "stateWrites": 0,
+    "otherProfileWrites": 0,
+    "gitOperations": 0
+  }
+}
