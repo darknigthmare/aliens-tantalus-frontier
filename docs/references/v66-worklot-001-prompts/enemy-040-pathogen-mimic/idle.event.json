@@ -1,0 +1,20 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:7684e8c77b853415f41db6d50212df3def2efb7528a5fb4b6a7ccfb2715c7b3b",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root/generate_profile_040",
+  "sourceSha256": "7684e8c77b853415f41db6d50212df3def2efb7528a5fb4b6a7ccfb2715c7b3b",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/idle.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-040-pathogen-mimic/idle.txt",
+  "actualPromptFileSha256": "b33b2aa82fa130246eed1e6fac1fc3713478bcbc504714d321c3c175da3a64ce",
+  "referenceLockPath": "docs/references/V66_WORKLOT_001_PATHOGEN_MIMIC_REFERENCE.json",
+  "referenceLockSha256": "efdab45052da1d2a7847a3104c80fadf68da9a00b1d2fae42466d04a9c143b86",
+  "candidateSelected": true,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Content-addressed local receipt because ImageGen returned a data URL but no provider generation identifier. Exact 2:1 RGB source with eight distinct poses; default extraction passes. Artistic acceptance, physical roots, scale calibration and runtime integration remain pending."
+}

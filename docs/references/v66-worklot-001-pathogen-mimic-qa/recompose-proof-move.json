@@ -1,0 +1,178 @@
+{
+  "schema": 1,
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "move",
+  "source": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/move.png",
+    "sha256": "542b68e5a6eb56db8930b496d085581d548c2faffbaf374d7e22cb9306fe5b1e",
+    "bytes": 1450001,
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGB"
+  },
+  "method": "process-v66-enemy-batch.py --safe-reassign-cell-fragments (in-memory audit only)",
+  "poseCount": 8,
+  "discardedForegroundPixels": 0,
+  "ownershipTransfers": [
+    {
+      "ownerCell": 3,
+      "fromCells": [
+        2
+      ],
+      "pixels": 237,
+      "componentPixels": 21619,
+      "ownerShare": 0.989037,
+      "sourceBoundsGlobal": [
+        1317,
+        194,
+        1694,
+        391
+      ],
+      "rgbaSha256": "2d9bddde41d02c6f88391dc6bd3263c5a81b3976bd9f0243989de738b79ccf45",
+      "pixelValuesPreserved": true,
+      "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+    }
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "sourceBounds": [
+        113,
+        132,
+        393,
+        386
+      ],
+      "sourceGlobalBounds": [
+        113,
+        132,
+        393,
+        386
+      ],
+      "foregroundPixels": 22417,
+      "sourcePoseRgbaSha256": "c6b9351e81922fbd5002b110bf09fbf513eb173c658c2e18d3491a1572459a2d"
+    },
+    {
+      "frame": 1,
+      "sourceBounds": [
+        38,
+        190,
+        399,
+        393
+      ],
+      "sourceGlobalBounds": [
+        482,
+        190,
+        843,
+        393
+      ],
+      "foregroundPixels": 21259,
+      "sourcePoseRgbaSha256": "fca02de5e7d073da62719011d67a8be9a62f21a2d97ab5571428e6522971eb56"
+    },
+    {
+      "frame": 2,
+      "sourceBounds": [
+        8,
+        191,
+        384,
+        393
+      ],
+      "sourceGlobalBounds": [
+        895,
+        191,
+        1271,
+        393
+      ],
+      "foregroundPixels": 22092,
+      "sourcePoseRgbaSha256": "41622f1c075febc0f236ce857bd131890c967060cfa8654d3c2d4fa60b4589d3"
+    },
+    {
+      "frame": 3,
+      "sourceBounds": [
+        -16,
+        191,
+        367,
+        394
+      ],
+      "sourceGlobalBounds": [
+        1314,
+        191,
+        1697,
+        394
+      ],
+      "foregroundPixels": 21694,
+      "sourcePoseRgbaSha256": "cfe4340f40009a6250159383b6f5b7a22a097a9a939df9fc4f0dc0efb1130278"
+    },
+    {
+      "frame": 4,
+      "sourceBounds": [
+        58,
+        123,
+        440,
+        332
+      ],
+      "sourceGlobalBounds": [
+        58,
+        567,
+        440,
+        776
+      ],
+      "foregroundPixels": 23160,
+      "sourcePoseRgbaSha256": "6d87051e0db6d58004ebb811a81a920d00d8c1964872996e9f29f23f82f92a67"
+    },
+    {
+      "frame": 5,
+      "sourceBounds": [
+        49,
+        130,
+        412,
+        332
+      ],
+      "sourceGlobalBounds": [
+        493,
+        574,
+        856,
+        776
+      ],
+      "foregroundPixels": 21981,
+      "sourcePoseRgbaSha256": "aad565ce51a69e37ffacf8cb577c314383cff1ca5e5ad114fc61c9a37d911074"
+    },
+    {
+      "frame": 6,
+      "sourceBounds": [
+        52,
+        132,
+        386,
+        332
+      ],
+      "sourceGlobalBounds": [
+        939,
+        576,
+        1273,
+        776
+      ],
+      "foregroundPixels": 20241,
+      "sourcePoseRgbaSha256": "8a7f4d44ed6e52c33229a945e8f678d83c29e6cf447bc81ea580e6acabdaefec"
+    },
+    {
+      "frame": 7,
+      "sourceBounds": [
+        43,
+        104,
+        333,
+        330
+      ],
+      "sourceGlobalBounds": [
+        1373,
+        548,
+        1663,
+        774
+      ],
+      "foregroundPixels": 22207,
+      "sourcePoseRgbaSha256": "ef2c67a5134b9471542033c5ff9e510aaaa83b3e1bbe27328fead70cde60d2ca"
+    }
+  ],
+  "sourcePixelsChanged": false,
+  "activeMasterChanged": false
+}

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "kind": "generated",
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the immutable active OpenAI ImageGen PNG SHA-256 identifies the persisted capture.",
+  "actor": "Codex /root/generate_profile_040",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-040-pathogen-mimic/death.txt",
+  "actualPromptFileSha256": "9affd3b193431fcc414e04409cf89bf84a74ce0b8e96b7ce910d7a5100b8d2b3",
+  "promptSha256": "9affd3b193431fcc414e04409cf89bf84a74ce0b8e96b7ce910d7a5100b8d2b3",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/death.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/death.png",
+  "sourceSha256": "a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+  "sourceBytes": 1325649,
+  "contractPromptSha256": "67fb7479de62fd6472aacb0bf9e42e74817a42feebb46296bbf58dc031e51b96",
+  "queuePromptSha256": "67fb7479de62fd6472aacb0bf9e42e74817a42feebb46296bbf58dc031e51b96",
+  "referenceLockSha256": "5386c4a94ff3f94ea90b3125a4f6cd9e127566d56f0d636daf2b4b9d149bc680",
+  "rawCapture": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/death.png",
+    "sha256": "a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+    "bytes": 1325649,
+    "pixelEdits": 0
+  },
+  "safeRecomposeProof": {
+    "path": "docs/references/v66-worklot-001-pathogen-mimic-qa/recompose-proof-death.json",
+    "sha256": "01a64eba3c70d1464a61fa9168b7bdc4a964380690d45c04e3ea9540d57264da",
+    "bytes": 3293,
+    "activeMasterChanged": false
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Profile-local generated candidate with raw capture and lossless safe-ownership proof; no state write, acceptance or runtime integration.",
+  "at": "2026-09-01T03:50:53.621Z",
+  "actualPromptText": "Use case: stylized-concept\nAsset type: production 2D game animation sprite sheet, DEATH clip\nInput image: the visible selected ATTACK sheet is the immutable identity anchor. Preserve exactly the same Pathogen Mimic individual, human-derived head, rib landmarks, compact sacs, claw asymmetry, palette, two-arm/two-leg topology, physical scale and hand-painted rendering; change only the animation to an irreversible death.\nPrimary request: Create one original fan-made Pathogen Mimic DEATH animation sheet for Aliens: Tantalus Frontier, not an official sprite replica.\nImmutable subject: same low forward-pitched half-upright human-derived infected pursuer with exactly TWO arms and TWO clawed hands, exactly TWO legs and TWO feet, and NO tail. One small distorted human-derived head with one anatomical mouth. Fixed ruptured rib growths, wet sinew and compact pathogen sacs at the same thoracic/flank landmarks. No extra or detached creature.\nAnimation chronology, exactly eight distinct consecutive poses in strict row-major order: 1 lethal impact while supported, 2 stagger, 3 ONE compact sac ruptures locally but remains attached with only a tiny contained tear, 4 thorax folds, 5 pelvis loses support, 6 controlled ground impact, 7 limbs settle, 8 terminal motionless collapsed body. Irreversible readable collapse; final body is clearly dead. No full-body explosion, dissolve, detached gore cloud, regrowth or living final pose. Curl arms and legs beside the torso during collapse so the complete corpse remains compact.\nComposition: exact 2:1 landscape canvas; invisible equal 4 columns x 2 rows; exactly one complete creature per cell; strict orthographic gameplay side profile FACING RIGHT in all eight poses, including the head during the fall; no front/back/three-quarter view or mirroring. Preserve one physical body scale: do not enlarge the corpse. Every pose wholly inside its own cell with generous empty gutters. In each approximately 443 x 443 cell keep the complete silhouette no wider than 325 pixels; compact the fallen body and keep all fingers, feet and the tiny attached sac tear at least 55 pixels away from vertical cell boundaries and 40 pixels away from the row boundary. No anatomy, antialias fringe, fluid droplet or fragment touches/crosses a cell boundary. Terminal anchor is under collapsed pelvis/torso contact, not a claw or sac.\nStyle/medium: crisp high-detail modern hand-painted 2D game sprite art, controlled consistent lighting, compact readable silhouette; not pixel art, not 3D, not collage.\nBackground: perfectly flat uniform opaque pure #FF00FF over the entire exact-2:1 canvas including all edges and gutters; no gradient, texture, checkerboard, halo, spill, floor, shadow or scenery.\nConstraints: no detached blood, floating fragment, gore cloud, explosion, dissolve, tail, elongated dome, dorsal tubes, Queen crest, Brute fist, extra limb/head, weapon, clothing, armor, neon glow, magenta anatomy, text, labels, numbers, arrows, grid lines, UI, logo or watermark. Output only the sheet.\n"
+}

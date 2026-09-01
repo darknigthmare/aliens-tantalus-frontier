@@ -1,0 +1,20 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root/generate_profile_040",
+  "sourceSha256": "a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/death.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-040-pathogen-mimic/death.txt",
+  "actualPromptFileSha256": "9affd3b193431fcc414e04409cf89bf84a74ce0b8e96b7ce910d7a5100b8d2b3",
+  "referenceLockPath": "docs/references/V66_WORKLOT_001_PATHOGEN_MIMIC_REFERENCE.json",
+  "referenceLockSha256": "efdab45052da1d2a7847a3104c80fadf68da9a00b1d2fae42466d04a9c143b86",
+  "candidateSelected": true,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Content-addressed local receipt because ImageGen returned a data URL but no provider generation identifier. Exact 2:1 RGB source with eight distinct poses; default extraction passes. Artistic acceptance, physical roots, scale calibration and runtime integration remain pending."
+}

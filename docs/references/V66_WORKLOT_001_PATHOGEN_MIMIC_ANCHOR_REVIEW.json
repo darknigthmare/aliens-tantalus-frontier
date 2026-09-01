@@ -1,0 +1,746 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-040-pathogen-mimic": {
+      "profileId": "enemy-040-pathogen-mimic",
+      "status": "reviewed",
+      "reviewer": "Codex /root/generate_profile_040",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual 32-pose pelvis/proximal-leg root review after complete safe ownership recovery; vertical projection to complete lower support/contact guard.",
+      "visualReview": "All 32 source poses and marked overlays inspected. Physical registration only; no artistic acceptance or runtime integration.",
+      "reviewedPoseCount": 32,
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/idle.png",
+          "sourceSha256": "7684e8c77b853415f41db6d50212df3def2efb7528a5fb4b6a7ccfb2715c7b3b",
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                180,
+                391
+              ],
+              "landmark": [
+                180,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                115,
+                160,
+                408,
+                391
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                135,
+                391
+              ],
+              "landmark": [
+                135,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                69,
+                162,
+                363,
+                391
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                112,
+                390
+              ],
+              "landmark": [
+                112,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                45,
+                150,
+                341,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                80,
+                390
+              ],
+              "landmark": [
+                80,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                16,
+                161,
+                304,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                172,
+                330
+              ],
+              "landmark": [
+                172,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                108,
+                104,
+                398,
+                330
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                131,
+                329
+              ],
+              "landmark": [
+                131,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                68,
+                105,
+                365,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                106,
+                330
+              ],
+              "landmark": [
+                106,
+                203
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                43,
+                104,
+                335,
+                330
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                77,
+                329
+              ],
+              "landmark": [
+                77,
+                202
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                11,
+                105,
+                303,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-idle.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/move.png",
+          "sourceSha256": "542b68e5a6eb56db8930b496d085581d548c2faffbaf374d7e22cb9306fe5b1e",
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                171,
+                386
+              ],
+              "landmark": [
+                171,
+                245
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                113,
+                132,
+                393,
+                386
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                126,
+                393
+              ],
+              "landmark": [
+                126,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                38,
+                190,
+                399,
+                393
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                92,
+                393
+              ],
+              "landmark": [
+                92,
+                270
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                8,
+                191,
+                384,
+                393
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                80,
+                394
+              ],
+              "landmark": [
+                80,
+                268
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                -16,
+                191,
+                367,
+                394
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                141,
+                332
+              ],
+              "landmark": [
+                141,
+                217
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                58,
+                123,
+                440,
+                332
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                129,
+                332
+              ],
+              "landmark": [
+                129,
+                218
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                49,
+                130,
+                412,
+                332
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                137,
+                332
+              ],
+              "landmark": [
+                137,
+                218
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                52,
+                132,
+                386,
+                332
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                121,
+                330
+              ],
+              "landmark": [
+                121,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                43,
+                104,
+                333,
+                330
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-move.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/attack.png",
+          "sourceSha256": "6d075da44869957bd0722b0a987fafe8cb4e5ee6786b33038333a502a39e63b5",
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                150,
+                392
+              ],
+              "landmark": [
+                150,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                87,
+                135,
+                364,
+                392
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                120,
+                391
+              ],
+              "landmark": [
+                120,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                36,
+                148,
+                367,
+                391
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                105,
+                391
+              ],
+              "landmark": [
+                105,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                21,
+                130,
+                351,
+                391
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                58,
+                392
+              ],
+              "landmark": [
+                58,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                -16,
+                186,
+                394,
+                392
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                132,
+                334
+              ],
+              "landmark": [
+                132,
+                200
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                65,
+                103,
+                446,
+                334
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                128,
+                334
+              ],
+              "landmark": [
+                128,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                38,
+                114,
+                439,
+                334
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                117,
+                334
+              ],
+              "landmark": [
+                117,
+                213
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                47,
+                97,
+                352,
+                334
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                92,
+                334
+              ],
+              "landmark": [
+                92,
+                200
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                17,
+                100,
+                301,
+                334
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-attack.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/death.png",
+          "sourceSha256": "a8589cb3cf50648c35180ab32730cae27d210de936ca7b4461b0e90563529fcd",
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                120,
+                392
+              ],
+              "landmark": [
+                120,
+                280
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                49,
+                174,
+                388,
+                392
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                105,
+                393
+              ],
+              "landmark": [
+                105,
+                280
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                36,
+                185,
+                336,
+                393
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                100,
+                392
+              ],
+              "landmark": [
+                100,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                21,
+                206,
+                271,
+                392
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                100,
+                392
+              ],
+              "landmark": [
+                100,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                53,
+                223,
+                244,
+                392
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                130,
+                300
+              ],
+              "landmark": [
+                130,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                60,
+                138,
+                388,
+                300
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                125,
+                297
+              ],
+              "landmark": [
+                125,
+                225
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                45,
+                169,
+                376,
+                297
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                130,
+                298
+              ],
+              "landmark": [
+                130,
+                230
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                51,
+                189,
+                322,
+                298
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                135,
+                298
+              ],
+              "landmark": [
+                135,
+                240
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                70,
+                205,
+                323,
+                298
+              ],
+              "evidence": "docs/references/v66-worklot-001-pathogen-mimic-qa/anchors-death.jpg",
+              "note": "Pelvis/proximal leg junction projected to complete support/contact lower guard; distal claw and silhouette extrema excluded."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

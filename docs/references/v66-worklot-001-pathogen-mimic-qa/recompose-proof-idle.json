@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "idle",
+  "source": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/idle.png",
+    "sha256": "7684e8c77b853415f41db6d50212df3def2efb7528a5fb4b6a7ccfb2715c7b3b",
+    "bytes": 1455102,
+    "size": [
+      1774,
+      887
+    ],
+    "mode": "RGB"
+  },
+  "method": "process-v66-enemy-batch.py --safe-reassign-cell-fragments (in-memory audit only)",
+  "poseCount": 8,
+  "discardedForegroundPixels": 0,
+  "ownershipTransfers": [],
+  "frames": [
+    {
+      "frame": 0,
+      "sourceBounds": [
+        115,
+        160,
+        408,
+        391
+      ],
+      "sourceGlobalBounds": [
+        115,
+        160,
+        408,
+        391
+      ],
+      "foregroundPixels": 22159,
+      "sourcePoseRgbaSha256": "cc36ec282ee329d20b7800619480429c1f21eb5580eed6b4216aac4a70b633fe"
+    },
+    {
+      "frame": 1,
+      "sourceBounds": [
+        69,
+        162,
+        363,
+        391
+      ],
+      "sourceGlobalBounds": [
+        513,
+        162,
+        807,
+        391
+      ],
+      "foregroundPixels": 22422,
+      "sourcePoseRgbaSha256": "76dcafb29386f810154057380a7c8e79795c951fb751d4086604f1b023a61201"
+    },
+    {
+      "frame": 2,
+      "sourceBounds": [
+        45,
+        150,
+        341,
+        390
+      ],
+      "sourceGlobalBounds": [
+        932,
+        150,
+        1228,
+        390
+      ],
+      "foregroundPixels": 24629,
+      "sourcePoseRgbaSha256": "b4e95f58c8b83fc5def0501eb209bf655da4ac796790ab0ed1e618d19b1a75ce"
+    },
+    {
+      "frame": 3,
+      "sourceBounds": [
+        16,
+        161,
+        304,
+        390
+      ],
+      "sourceGlobalBounds": [
+        1346,
+        161,
+        1634,
+        390
+      ],
+      "foregroundPixels": 23411,
+      "sourcePoseRgbaSha256": "0232ad1e71ec625eb1eda6261e597c9803965daef68ea9f69ae0d35138e9faa2"
+    },
+    {
+      "frame": 4,
+      "sourceBounds": [
+        108,
+        104,
+        398,
+        330
+      ],
+      "sourceGlobalBounds": [
+        108,
+        548,
+        398,
+        774
+      ],
+      "foregroundPixels": 23263,
+      "sourcePoseRgbaSha256": "412a0edd813901a39caf7ea6d0431faa519f956f4a798da62dd024ce1a71bbe4"
+    },
+    {
+      "frame": 5,
+      "sourceBounds": [
+        68,
+        105,
+        365,
+        329
+      ],
+      "sourceGlobalBounds": [
+        512,
+        549,
+        809,
+        773
+      ],
+      "foregroundPixels": 22087,
+      "sourcePoseRgbaSha256": "aac70e562a0f29dc3560111049c110282b2a34738852a035d4cb02dc8bb10a8e"
+    },
+    {
+      "frame": 6,
+      "sourceBounds": [
+        43,
+        104,
+        335,
+        330
+      ],
+      "sourceGlobalBounds": [
+        930,
+        548,
+        1222,
+        774
+      ],
+      "foregroundPixels": 21814,
+      "sourcePoseRgbaSha256": "a865aac38997c2b3f9af27ca744d7c73910b450acbd53c9dd379a11ecac1f36c"
+    },
+    {
+      "frame": 7,
+      "sourceBounds": [
+        11,
+        105,
+        303,
+        329
+      ],
+      "sourceGlobalBounds": [
+        1341,
+        549,
+        1633,
+        773
+      ],
+      "foregroundPixels": 23300,
+      "sourcePoseRgbaSha256": "ceee2d77b0d88935b32f87c04d7517bde74944efe35a894f0ae5a793aef9c9de"
+    }
+  ],
+  "sourcePixelsChanged": false,
+  "activeMasterChanged": false
+}

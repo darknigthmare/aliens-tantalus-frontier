@@ -1,0 +1,20 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-040-pathogen-mimic",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:542b68e5a6eb56db8930b496d085581d548c2faffbaf374d7e22cb9306fe5b1e",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root/generate_profile_040",
+  "sourceSha256": "542b68e5a6eb56db8930b496d085581d548c2faffbaf374d7e22cb9306fe5b1e",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-040-pathogen-mimic/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-040-pathogen-mimic/move.txt",
+  "actualPromptFileSha256": "d9244139484338922f1a2a375fbe07bf1815100aa3c21c729fe99b3137b4f667",
+  "referenceLockPath": "docs/references/V66_WORKLOT_001_PATHOGEN_MIMIC_REFERENCE.json",
+  "referenceLockSha256": "efdab45052da1d2a7847a3104c80fadf68da9a00b1d2fae42466d04a9c143b86",
+  "candidateSelected": true,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Content-addressed local receipt because ImageGen returned a data URL but no provider generation identifier. Eight distinct poses and safe ownership extraction pass, but the fourth top-row subject spills 237 pixels into the preceding nominal cell; regeneration or explicit source repair remains required before acceptance."
+}
