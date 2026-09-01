@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-003",
+  "batchId": "batch-005",
+  "phase": "reference-only",
+  "status": "reviewed-local-fragment-not-merged",
+  "generatedAt": "2026-09-01T00:00:00+02:00",
+  "mergeTarget": "docs/references/V66_ENEMY_BATCH_REFERENCES.json",
+  "globalMutationPerformed": false,
+  "profiles": {
+    "enemy-080-albino-reef-spitter": {
+      "status": "reviewed",
+      "profileId": "enemy-080-albino-reef-spitter",
+      "name": "Albino Reef Spitter",
+      "archetype": "Reef Spitter",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "concept-acm",
+      "provenance": "licensed-concept-adaptation",
+      "animationFamily": "ranged",
+      "batchId": "batch-005",
+      "ordinal": 79,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-028-reef-spitter",
+      "baseReferenceLockSha256": "75f5f57ba3edbea1a333c5bd346059fbf33c0e813c21a8734c956e17fff10aed",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false,
+      "oneToOneClaimAllowed": false,
+      "urls": [
+        "https://store.steampowered.com/app/49540/Aliens_Colonial_Marines_Collection/",
+        "https://icon-ninja.artstation.com/projects/oOoGew",
+        "https://www.avpgalaxy.net/games/aliens-colonial-marines-sega/gallery/concept-art/"
+      ],
+      "urlsPolicy": "URLs establish licensed Spitter/Ranger combat-function and ACM creature-design context only. No official Reef Spitter or Albino Reef Spitter model exists; positive identity authority remains the reviewed project lock and hashed local evidence.",
+      "localPaths": [
+        "assets/openai/sprites/enemies/reef-spitter-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/reef-spitter-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/idle.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/move.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/attack.png",
+        "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/death.png",
+        "assets/openai/sprites/metadata/v66/enemy-028-reef-spitter.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION albino ranged marine ecophenotype derived from the reviewed project Reef Spitter. Preserve one lean medium bipedal/digitigrade ranged caste with a higher front, eyeless raised narrow cranium, biomechanical ribcage, exactly two arms, two digitigrade legs, fine restrained aquatic dorsal plates, exactly one long laterally compressed swimming tail and one modest inflatable throat gland connected to the mouth. Albino changes pigment/material response only: warm pearl/parchment shell, cool ash-gray wet recesses, restrained translucent rose-taupe joints, brighter pale lemon-chartreuse acid visible only inside the throat gland/mouth and minute cyan sea-glass pinpoints. It must remain distinct from Albino Reef Stalker: taller ranged stance, raised cranium and readable throat gland; never a low four-legged pursuit body or tail-blade quadruped. Attack shows gland inflation, mouth release into empty space and recoil; the projectile remains a separate runtime effect. Strict orthographic gameplay profile facing RIGHT. No cannon, hose, giant torso sac, fish mouth, giant gills, extra limb/tail, weapon, flat white, snow/ice theme, copied predecessor pixels, official-model claim or 1:1 claim. Every future pixel is newly authored project art; canonExact=false.",
+      "designDetails": {
+        "silhouette": "Lean medium ranged caste with raised narrow eyeless cranium, higher forebody, two small arms, two digitigrade legs, modest sub-throat gland, fine dorsal plates and one long laterally compressed tail.",
+        "palette": "Warm pearl/parchment shell and ash-gray wet recesses; restrained rose-taupe joints, localized pale lemon-chartreuse gland contents and minute cyan accents. Acid color never floods the torso.",
+        "reefEcology": "A reef-corridor ranged ambusher using a compact pressure gland and hydrodynamic tail. The marine adaptation adds subtle fin texture and salt-wet material, not fish anatomy.",
+        "orientation": "Strict right-facing orthographic side profile. The throat-to-mouth connection, both feet and complete tail remain inside every cell.",
+        "root": "New art requires 32 independent pelvis/lower-ribcage-to-planted-foot or terminal body-plane anchors. Gland, tail tip and bounds center are forbidden root proxies.",
+        "scale": "New art requires independent inter-clip calibration using rigid cranial-capsule or shoulder-to-pelvis landmarks. Gland inflation, spit extension and tail extrema are pose effects, not body scale.",
+        "background": "True alpha or perfectly uniform #FF00FF only; projectile, reef scenery, water caustics, floor, shadow, grid, text, UI and checkerboard are prohibited."
+      },
+      "actionLocks": {
+        "idle": "Eight grounded alert/breathing poses with closed relaxed gland and restrained cranium, rib and tail-base motion.",
+        "move": "Eight complete digitigrade locomotion phases with contact, passing and recovery; gland remains compact and identity does not become quadrupedal.",
+        "attack": "Eight chronological ranged phases: anticipation, throat inflation, pressure peak, forward mouth release into empty space, recoil, gland deflation and recovery. No painted projectile or detached acid blob.",
+        "death": "Lethal impact, leg support loss, collapse and terminal motionless body; gland, limbs, dorsal plates and single tail remain attached."
+      },
+      "promptContract": {
+        "common": "Create ONE original production sprite sheet for Aliens: Tantalus Frontier. Subject: Albino Reef Spitter, a PROJECT_ADAPTATION, canonExact=false, no 1:1 claim and no copied pixels. Exactly 1774x887, exact 2:1 canvas, exactly 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order. One complete right-facing orthographic side-profile creature per cell, identical identity and physical scale, generous gutters, no crop/contact/overlap. Lean medium ranged caste with raised narrow eyeless cranium, exactly two arms, two digitigrade legs, fine dorsal plates, one modest connected throat gland and one complete laterally compressed tail. Warm pearl/parchment shell, ash-gray wet recesses, restrained rose-taupe joints, pale lemon-chartreuse only inside gland/mouth, minute cyan accents. True alpha or uniform #FF00FF; no scenery, shadow, grid, text, logo or UI. Never show quadruped Stalker body, cannon/hose, giant torso sac, fish eyes/gills, extra limb/tail, flat white, ice or copied predecessor art.",
+        "clips": {
+          "idle": "IDLE: eight grounded breathing/alert phases, relaxed compact throat gland, subtle rib and tail-base motion, seamless loop.",
+          "move": "MOVE: eight digitigrade contact, passing and recovery phases with compact gland and stable raised-cranium identity, seamless loop.",
+          "attack": "ATTACK: eight chronological acid-spit body phases: anticipation, throat inflation, pressure peak, mouth release into empty space, recoil, deflation and recovery. Projectile is absent and supplied separately at runtime.",
+          "death": "DEATH: eight irreversible phases from lethal reaction through leg support loss and collapse to terminal stillness; gland and all anatomy remain attached."
+        },
+        "promptSha256": {
+          "idle": "d01b07384ab6f497bf2987bee83833969cf8c63181250ce1c062353995877318",
+          "move": "d743b4b6fdc4732d320fb0ac5c1ebd10bb50d8b3b2f4ec5e9d79c739f1ecd55d",
+          "attack": "1900382a4c69311a9238419aa01f16dfc3d27c934e258db5e930d0ec51f1433b",
+          "death": "6668724be5393b5a134ddcce7a373b92ae107246c3509332e3dfc16172d1f198"
+        },
+        "hashAlgorithm": "SHA-256(JSON.stringify(common + '\\n' + clips[id]))"
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "b081a5ca8a68097e3b06b1e28aab8746619883149c929e4bcc10ccff57f0035a",
+        "initialStatus": "pending-reference",
+        "sourceFacing": "right",
+        "sourceGrid": {"columns": 4, "rows": 2, "frameCount": 8},
+        "requiredClipCount": 4,
+        "queuePromptSha256": {"idle": "1c2e5ec042d94e7bf84a6056aa0e9b797afd6f906e7c17bfc4d079277088eb41", "move": "122906a4a61d66c86a98b590af98c69bdc2f2d5f0e18161ef2143d95cfc12394", "attack": "71f5b7f81b9c8aa5e6727aeac49847a79a33b1941d6484b24dde679e63b95d02", "death": "4d74e4b6f6659015d836399c3e3a0a5d42c94df86f89d9a1b8ca1e4e93125c09"},
+        "queuePromptAudit": "All four existing BLOCKED queue hashes were freshly verified with SHA-256(JSON.stringify(prompt)); these snapshots are not generation-ready and differ intentionally from the strict proposed prompts above."
+      },
+      "acceptanceGates": [
+        "four 1774x887 exact 4x2 sheets and 32 distinct chronological right-facing poses",
+        "identity invariant: raised cranium, two arms, two legs, modest connected gland and exactly one complete tail",
+        "Albino material and localized acid gland remain distinct from Albino Reef Stalker",
+        "new 32-pose anchors and rigid cranial/body inter-clip scale review retained",
+        "attack contains body release/recoil only, with no baked projectile, cell contact, matte spill or copied pixels"
+      ],
+      "limitations": [
+        "Reference-only fragment: no ImageGen call, source, acceptance or runtime integration.",
+        "External URLs provide licensed Spitter/Ranger context, not an official Albino Reef Spitter model.",
+        "Base images are qualitative evidence only and may not donate pixels, poses, numeric roots or scale."
+      ]
+    }
+  },
+  "localSourceHashes": {
+    "docs/references/V66_ENEMY_BATCH_QUEUE.json": "b081a5ca8a68097e3b06b1e28aab8746619883149c929e4bcc10ccff57f0035a",
+    "docs/references/V66_ENEMY_BATCH_REFERENCES.json": "fcd01ab3bf0672892659bc84432bdafed3f5a19c8ff0205eb99c942d648289d0",
+    "assets/openai/sprites/enemies/reef-spitter-action-sheet-v56.png": "d702569ad6bc0fc48c0ed0b17feb4440398c68ae56e457c9ba7de9fc875a08a7",
+    "assets/openai/sprites/normalized/enemies/reef-spitter-action-sheet-v56.png": "facc87a65d5182b50283fee937bf6e38d7c07a229b15ece159f3116662f073f9",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/idle.png": "1da968475341c5ea46f21885eb6aa06dd6222e7fe70bfdfa878346da2854e742",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/move.png": "97a211a87bef9602dfdd7174733e0ce3b29cea6447ca9b13edef47432c510d6f",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/attack.png": "9d04e15f531976a29963e38bda30aa27b0bcb8a4f136a2c65e76c3c612f251b4",
+    "assets/openai/sprites/frames/v66/batch-003/enemy-028-reef-spitter/death.png": "04e8247acb16750a7d246e5a95014b63030358aa39629748a9b705ffe4df3395",
+    "assets/openai/sprites/metadata/v66/enemy-028-reef-spitter.json": "8e4219773c181e1155ee957dca1cf32ecff98d4fe155433959ee860cd7b600af",
+    "docs/references/V56_ENEMY_REFERENCE_MATRIX.json": "a29c7106e322acddda9543e6a243299c5d27817cee1b27c1649e375448db73eb"
+  },
+  "mergeSimulation": {
+    "assembler": "scripts/merge-v66-reference-fragments.mjs#assembleReferenceRegistry",
+    "baseSha256AtSimulation": "fcd01ab3bf0672892659bc84432bdafed3f5a19c8ff0205eb99c942d648289d0",
+    "baseProfileCount": 77,
+    "incoming": [
+      "enemy-079-albino-reef-stalker",
+      "enemy-080-albino-reef-spitter"
+    ],
+    "simulatedProfileCount": 79,
+    "simulatedOutputSha256": "8e53964ebc7eb94c94d027ca9157bffbfe892d25b14382d3d6e4010bf7115500",
+    "identityAndClipContractsExact": true,
+    "queuePromptContentHashesVerified": 8,
+    "localPathsExist": true,
+    "httpsUrlsValid": true,
+    "globalWritten": false
+  },
+  "reviewStatus": {"referencePhaseCompleteLocal": true, "imageGenCalls": 0, "accepted": false, "runtimeIntegrated": false, "globalReferenceMerged": false, "queueUpdated": false, "stateUpdated": false}
+}
