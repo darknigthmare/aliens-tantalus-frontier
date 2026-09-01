@@ -801,6 +801,41 @@
       "reviewer": "Codex /root/generate_profile_040; official Free League/20th Century ALIEN RPG product material, licensed Nintendo/SEGA Aliens: Infestation page, secondary indexed UPP corpus and project-owned V56 evidence reviewed",
       "reviewedAt": "2026-09-01",
       "canonExact": false
+    },
+    "enemy-045-seegson-security": {
+      "status": "reviewed",
+      "urls": [
+        "https://alienisolation.sega.jp/special_conceptart.html",
+        "https://alienisolation.sega.jp/battle.html",
+        "https://blog.playstation.com/2014/06/10/new-alien-isolation-details-revealed/",
+        "https://titanbooks.com/7252-the-art-of-alien-isolation/",
+        "https://alienisolation.sega.jp/summary.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/seegson-security-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png"
+      ],
+      "designLock": "Seegson Security directly targets the shipped Alien: Isolation light industrial station-security identity, but depicts one new unnamed human guard rather than a copied NPC. Preserve ordinary adult human proportions, a visible face under one open-faced off-white riot helmet with raised clear visor, pale blue-gray station work shirt, compact dirty off-white chest protector, dark gray work trousers, black utility boots and gloves, small radio and lamp, and one worn utilitarian pump-action security shotgun. The guard is civil/private station security, not a Colonial Marine, Working Joe, sealed corporate commando or modern police operator. Palette stays off-white, pale blue, gray, black and restrained worn-metal brown in the game's 1970s lo-fi retrofuturist material language. The shotgun remains one coherent tube-fed weapon across all clips; reload must show individual shells entering the loading port and must not reuse the queue placeholder's detachable-magazine wording. Strict right-facing orthographic gameplay profile, complete body and shotgun isolated per cell. Future pixels must be an original fan-made interpretation based on studied shape language, never a trace or copy of a game frame, concept sheet, artbook image, logo or official sprite.",
+      "reviewer": "Codex /root/prepare_profile_042; official SEGA and Creative Assembly material, licensed Titan artbook listing, PlayStation developer article and project V56 predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
+    "enemy-046-colonial-raider": {
+      "status": "reviewed",
+      "urls": [
+        "https://freeleaguepublishing.com/games/alien/",
+        "https://freeleaguepublishing.com/shop/alien-rpg-2/building-better-worlds/",
+        "https://www.marvel.com/comics/collection/123117/alien_paradiso_trade_paperback",
+        "https://alienisolation.sega.jp/battle.html"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/colonial-raider-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/colonial-raider-action-sheet-v56.png"
+      ],
+      "designLock": "Colonial Raider is an original Tantalus frontier/scavenger combat archetype, not a published Alien faction or exact external uniform. Lock one unnamed ordinary adult human ambusher with visible eyes above a fixed half-face dust respirator, dusty gray short hooded utility coat, sand canvas chest harness, one scratched brown composite shoulder plate on the near shoulder only, charcoal work trousers, battered dark boots, fingered gloves, compact filter-and-salvage pack, muted ochre identification tape without lettering, and exactly one original compact semi-automatic scavenger carbine with a straight detachable magazine. The silhouette is mobile, asymmetrical and practical: layered colonial workwear repaired from local materials, never a Space Marine, cowboy, spiked wasteland raider or branded USCMC/UPP/Weyland-Yutani soldier. Palette stays sand, dusty gray, brown synthetic leather, scratched dull metal, charcoal and one restrained ochre accent. Strict right-facing orthographic gameplay profile with one coherent carbine across all five clips. Future pixels must be entirely original fan-made project art; licensed sources establish only the broad Alien frontier, scarcity and criminal-colony context and may never be traced, copied or presented as an official Colonial Raider design.",
+      "reviewer": "Codex /root/prepare_profile_042; official licensed ALIEN RPG frontier material, official Marvel criminal-colony metadata, Alien: Isolation human-survivor context and project V56 predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
     }
   }
 }
