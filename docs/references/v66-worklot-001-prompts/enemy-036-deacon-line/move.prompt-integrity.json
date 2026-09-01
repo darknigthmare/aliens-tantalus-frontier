@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "profileId": "enemy-036-deacon-line",
+  "clip": "move",
+  "exactPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/move.txt",
+  "queueDeclaredSha256": "1e30e5d04399946fb81d0e6186ae709b3c7c2120bb7e26f75953b912a0b13ee0",
+  "recomputedQueueTextSha256": "ebcfbf59f317d24dd85f44ef6f67b7d6427c7c2b85dc710618f30405cfc8f84b",
+  "matchesQueueDeclaration": false,
+  "discrepancyDisposition": "Recorded locally only; the global queue is intentionally not modified by this profile-scoped task."
+}

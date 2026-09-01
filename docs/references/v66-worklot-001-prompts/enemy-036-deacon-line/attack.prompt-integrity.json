@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "profileId": "enemy-036-deacon-line",
+  "clip": "attack",
+  "exactPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/attack.txt",
+  "queueDeclaredSha256": "f6e3184128431bfbeeac4139370290c5a0df05ccd78a27df2e5f518f14a45047",
+  "recomputedQueueTextSha256": "b55ad9f8169d422279e351f6e253b4774fca18c29231b7c6dda59d6aec1f10aa",
+  "matchesQueueDeclaration": false,
+  "discrepancyDisposition": "Recorded locally only; the global queue is intentionally not modified by this profile-scoped task."
+}

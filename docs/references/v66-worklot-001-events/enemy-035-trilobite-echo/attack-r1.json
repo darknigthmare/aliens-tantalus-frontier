@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "kind": "generated-candidate-rejected",
+  "profileId": "enemy-035-trilobite-echo",
+  "clipId": "attack",
+  "iteration": 1,
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-59bcd84a-6862-45f5-8e6d-d4f561ae47b7",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Local receipt UUID; the built-in result returned image_url and no stable provider generation identifier.",
+  "actor": "Codex /root/complete_variants",
+  "recordedAt": "2026-09-01T01:27:50.8538477Z",
+  "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-035-trilobite-echo/attack-r1.txt",
+  "promptDocumentSha256": "d4fb24b3acef85d5e0f1ee13407a420ce6a3f4393dc981a7f91a3a636eab7275",
+  "promptSha256": "d4fb24b3acef85d5e0f1ee13407a420ce6a3f4393dc981a7f91a3a636eab7275",
+  "contractPromptSha256": "410b757ff02beacbfe150ee0bb3cf3563e7f38f18e3d3ada0c3e57613ba5d747",
+  "referenceLockSha256": "6f091cafccecdf13fa89f96fc3ada725388d1a81c627d4587ec01a9254904029",
+  "selectionStatus": "rejected-extra-lower-limbs-shadows-and-cell-spill",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/attack-r1-topology-shadow-fail.png",
+  "sourceSha256": "a00cee6c029f013cde7d660d2922578e05345aeab7b57337746e01b7987e2d58",
+  "sourceBytes": 1540181,
+  "sourceSize": [1774, 887],
+  "matteKind": "opaque-magenta-with-authored-purple-shadows",
+  "persistence": "Exact built-in image_url payload decoded from base64 without image re-encoding.",
+  "technicalAudit": {
+    "aspectExact2To1": true,
+    "defaultExtraction": "blocked",
+    "safeReassignmentProbe": "pass-but-not-selected",
+    "distinctExtractedPoseHashesUnderSafeProbe": 8,
+    "borderContactFrames": [1, 2, 3, 4, 5],
+    "findings": [
+      "nominal-cell-border-contact-needs-ownership-review",
+      "default-normalizer-extraction-blocked"
+    ],
+    "strictMagentaRatio": 0.812179,
+    "edgeMagentaRatio": 1.0
+  },
+  "visualFailure": {
+    "extraLowerSupportFrames": [2, 4, 5],
+    "shadowFrames": [2, 4, 5],
+    "topologyStatus": "The attack changes the locked two-lower-limb topology by adding extra lower supports; some reach poses also spill across nominal cells.",
+    "decision": "Rejected and retained as provenance only. Safe reassignment cannot repair incorrect anatomy or authored shadows."
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

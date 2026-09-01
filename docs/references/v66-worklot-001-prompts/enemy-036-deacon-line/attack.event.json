@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "batchId": "batch-003",
+  "profileId": "enemy-036-deacon-line",
+  "clip": "attack",
+  "status": "candidate-not-accepted",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "normalized": false,
+  "provider": "OpenAI ImageGen",
+  "providerGenerationIdExposed": false,
+  "generationId": "sha256:073ac081f1bae561ec6d18cff3db539be7b8044714f6c901b08f6382905d5a7a",
+  "exactPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/attack.txt",
+  "queueDeclaredPromptSha256": "f6e3184128431bfbeeac4139370290c5a0df05ccd78a27df2e5f518f14a45047",
+  "recomputedPromptSha256": "b55ad9f8169d422279e351f6e253b4774fca18c29231b7c6dda59d6aec1f10aa",
+  "referenceTransport": {
+    "mode": "recent-conversation-images",
+    "numLastImagesToInclude": 2,
+    "reason": "Local repository image attachment was blocked by the Windows sandbox ACL helper; the visually reviewed idle and prior clip boards were supplied through the ImageGen conversation image context."
+  },
+  "imageGenRaw": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/attack-r1-imagegen-raw-before-flatten.png",
+    "bytes": 1398206,
+    "sha256": "073ac081f1bae561ec6d18cff3db539be7b8044714f6c901b08f6382905d5a7a"
+  },
+  "selectedMaster": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/attack.png",
+    "bytes": 491989,
+    "sha256": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e"
+  },
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "facing": "right",
+    "background": "#FF00FF opaque"
+  },
+  "transforms": [
+    {
+      "operation": "flat-magenta cleanup",
+      "outputSha256": "406374a376cf2f3bae66a4cfc596a791a348ef89536844e3f6fcdf7387aa101d",
+      "foregroundPixelsPreserved": 162787
+    },
+    {
+      "operation": "safe connected-component ownership reassignment plus translation",
+      "outputSha256": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e",
+      "pixelValuesPreserved": true,
+      "scaleChanged": false,
+      "safeReassignmentEvidence": {
+        "ownerFrame": 4,
+        "globalBounds": [
+          144,
+          506,
+          473,
+          810
+        ],
+        "pixels": 20234,
+        "ownerPixels": 19824,
+        "ownerShare": 0.9797370762083621,
+        "spillByNominalCell": {
+          "4": 19824,
+          "5": 410
+        },
+        "rationale": "The single connected body belongs overwhelmingly to frame 4; 410 fingertip pixels entered nominal cell 5. The complete component was reassigned to frame 4, translated left 33px, and every source foreground pixel and RGBA value was retained exactly once."
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/attack-r2-imagegen-repair-raw-scale-drift.png",
+      "sha256": "841e25aae76676c9c470ac77cddc7dd0bdab63b2904076bd1c03b514be09a4b5",
+      "reason": "Repair improved gutters but shrank standing anatomy by roughly one quarter, violating cross-clip rigid scale."
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/attack-r2-flat-scale-drift.png",
+      "sha256": "0c9016d8281e99ed2468a62616f48b631b6a111d18bc8965298aa64a2fd8e1f1",
+      "reason": "Derived flattened form of the scale-drift repair; retained as evidence only."
+    }
+  ],
+  "identityReview": "Visually reviewed: midnight/navy-blue organic Deacon, pronounced bishop-mitre cranium, exactly two arms and two legs, no tail, no dorsal tubes, strict right-facing side profile; no Ultramorph drift.",
+  "promotionNote": "Promoted only as a profile-local source candidate after 8/8 extraction, anatomy and physical-contact review. No artistic acceptance, normalization or runtime status is granted."
+}

@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-037-neomorph": {
+      "profileId": "enemy-037-neomorph",
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-09-01",
+      "note": "Manual rigid cranial-dome chord review on the four unchanged 1774x887 masters. The chord runs from the posterior shoulder of the solid smooth cranial dome to the anterior hard-dome tip; dorsal spines, jaw, neck, limbs, tail and global pose bounds are excluded. Three readable side-profile poses were inspected per clip. Factors are post-generation calibration candidates only and imply neither source modification nor visual/runtime acceptance.",
+      "baselineClip": "idle",
+      "sourceSha256ByClip": {
+        "idle": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+        "move": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb",
+        "attack": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+        "death": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0"
+      },
+      "sourceScaleByClip": {
+        "idle": 1.0,
+        "move": 1.050117,
+        "attack": 1.278109,
+        "death": 0.931649
+      },
+      "medianLengthPxByClip": {
+        "idle": 65.521,
+        "move": 62.394,
+        "attack": 51.264,
+        "death": 70.328
+      },
+      "endpointUncertaintyPx": 5,
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "endpoints": [[244, 153], [300, 168]],
+          "lengthPx": 57.974,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior solid-dome shoulder to anterior hard-dome tip; dorsal rods and jaw excluded; overlay inspected."
+        },
+        {
+          "clip": "idle",
+          "frame": 2,
+          "endpoints": [[236, 151], [299, 169]],
+          "lengthPx": 65.521,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior solid-dome shoulder to anterior hard-dome tip; dorsal rods and jaw excluded; overlay inspected."
+        },
+        {
+          "clip": "idle",
+          "frame": 5,
+          "endpoints": [[228, 118], [291, 136]],
+          "lengthPx": 65.521,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Second-row readable profile; same solid-dome chord, excluding the rear dorsal rods."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "endpoints": [[242, 152], [302, 168]],
+          "lengthPx": 62.097,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Readable contact pose; same solid-dome chord; jaw and action reach excluded."
+        },
+        {
+          "clip": "move",
+          "frame": 2,
+          "endpoints": [[225, 158], [283, 181]],
+          "lengthPx": 62.394,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Readable contact pose; same solid-dome chord; jaw and action reach excluded."
+        },
+        {
+          "clip": "move",
+          "frame": 3,
+          "endpoints": [[220, 154], [278, 177]],
+          "lengthPx": 62.394,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Readable contact pose; same solid-dome chord; jaw and action reach excluded."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "endpoints": [[240, 211], [288, 229]],
+          "lengthPx": 51.264,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Anticipation profile; same solid-dome chord. The clip is visibly under-scaled relative to idle."
+        },
+        {
+          "clip": "attack",
+          "frame": 6,
+          "endpoints": [[211, 101], [262, 117]],
+          "lengthPx": 53.451,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Recovery profile; same solid-dome chord; extended limbs and tail excluded."
+        },
+        {
+          "clip": "attack",
+          "frame": 7,
+          "endpoints": [[210, 103], [259, 118]],
+          "lengthPx": 51.245,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Terminal recovery profile; same solid-dome chord; extended limbs and tail excluded."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "endpoints": [[221, 153], [279, 174]],
+          "lengthPx": 61.685,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Pre-collapse profile; same solid-dome chord; arms and dorsal rods excluded."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "endpoints": [[228, 184], [289, 219]],
+          "lengthPx": 70.328,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Early collapse with readable dome; same chord despite downward head rotation."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "endpoints": [[232, 231], [291, 272]],
+          "lengthPx": 71.847,
+          "landmark": "rigid-cranial-dome-chord",
+          "uncertaintyPx": 5,
+          "note": "Kneeling early-collapse pose; same chord; later horizontal corpse poses intentionally excluded."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-neomorph-qa/cranial-chords.jpg"
+      ],
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

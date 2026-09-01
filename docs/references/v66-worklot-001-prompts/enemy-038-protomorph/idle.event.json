@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-038-protomorph",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:7ba01627ec6c4a914fa22d945d90d89c3f1ab04fd7aa9a67b1326cd536022a67",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root",
+  "sourceSha256": "7ba01627ec6c4a914fa22d945d90d89c3f1ab04fd7aa9a67b1326cd536022a67",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/idle.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-038-protomorph/idle.txt",
+  "candidateSelected": true,
+  "note": "Content-addressed local receipt because this ImageGen response exposed image_url but no provider generation identifier. Regenerated after the first technically valid candidate lacked verbatim prompt provenance. Exact 2:1 source, eight distinct right-profile idle poses; safe tail-fragment ownership and downstream review remain required."
+}

@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "idle",
+  "candidate": "idle-r1",
+  "provider": "OpenAI ImageGen built-in",
+  "artifactPersisted": false,
+  "generatedImagesStubBytes": 0,
+  "reason": "Visual anatomy rejection: hypertrophied blade/cowling head and overly carapaced thorax drifted toward the forbidden Ultramorph/Big Chap branch.",
+  "note": "The built-in response was rendered for review before durable result storage was enabled. Its generated_images placeholder remained zero bytes, so no false or reconstructed bitmap is claimed."
+}

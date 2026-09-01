@@ -1,0 +1,16 @@
+Use case: bounded correction of a rejected production attack sprite sheet.
+Input images: Image 1 is the selected idle model sheet; Image 2 is the selected move model sheet; Image 3 is a REJECTED attack draft. Preserve Images 1 and 2 as the identity/topology truth. Use Image 3 only for the idea of anticipation, two-arm extension and recovery. Correct all of Image 3's extra lower limbs, shadows and cell spill.
+
+Create ONE exact 2:1 landscape sprite sheet for Aliens: Tantalus Frontier, animation attack, invisible 4 columns by 2 rows, exactly eight distinct chronological poses in strict row-major order.
+
+Same original Tantalus PROJECT_ADAPTATION Trilobite Echo as Images 1 and 2: low pale milky-ivory/rose-gray wet mantle, subtle veins, one compact anterior apparatus on the RIGHT, arcade sprite rendering, strict orthographic right-facing side profile. Identical mantle dimensions and physical scale. No head, eyes, mouth, shell, xenomorph traits or identity drift.
+
+COUNT LOCK, CHECK EACH CELL: exactly SEVEN primary tentacles total = exactly FIVE upper tentacles + exactly TWO lower tentacles. Never three or four lower supports. The two lower tentacles are the ONLY limbs beneath the mantle and remain separately traceable through natural occlusion toward the same hub. The five upper tentacles keep five distinct accountable root paths in the same order. Exactly two of those existing five upper tentacles extend during the grapple; the other three upper tentacles remain curled and visible. Extension replaces their earlier bend—it never creates a new strand. No branch, fusion, fork, spur, filament, hidden duplicate, detached limb or eighth tentacle.
+
+The compact anterior implantation apparatus is separate from all seven primaries. It remains closed in poses 1–5 and 7–8. Only pose 6 may show ONE short thick implantation nub emerging directly from the apparatus, no longer than one quarter of a primary tentacle; it retracts fully by pose 7. No long tendril, teeth, projectile or extra arm.
+
+Chronology: 1 closed alert matching idle; 2 mantle compression with all five upper plus two lower visible; 3 rearward brace using the same two lower limbs; 4 exactly two existing upper primaries begin extending right while the other three remain curled; 5 those same two reach grapple contact; 6 contact held and short central nub presents; 7 the same two primaries retract and nub disappears; 8 closed recovery matching idle. Continuous anticipation, extension, contact and recovery; no locomotion, turn, leap or camera change.
+
+Contain every complete silhouette safely inside its own nominal cell. During maximum extension, keep every tip at least 24 pixels inside the local cell boundary and never cross a gutter. No shadows of any color, floor, ground line, glow, effects, detached pixels or scenery. Flat opaque magenta #FF00FF or equivalently clean opaque magenta matte with fully magenta edges. No grid lines, text, labels, UI, logo or watermark.
+
+Final mandatory audit before output, separately for poses 1–8: count five upper paths; count two and only two lower paths; verify all seven attached/non-branching; verify one separate apparatus; verify no shadow; verify no cell contact; verify strict right-facing identity and eight chronological attack phases.

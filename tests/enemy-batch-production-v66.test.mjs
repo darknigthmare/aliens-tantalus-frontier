@@ -26,6 +26,50 @@ async function generated(fix, state = emptyState()) {
   for (const clip of fix.job.clips) state = await appendProductionEvent(fix.queue, state, { kind: 'generated', profileId: fix.job.profileId, clipId: clip.id, provider: 'OpenAI ImageGen', generationId: `test-only-${clip.id}`, actualPromptText: `Synthetic test prompt for ${clip.id}`, actor: 'test', note: 'Synthetic fixture, never production art.' }, fix.root);
   return state;
 }
+async function repairedReceipt(fix, clip = fix.job.clips[0]) {
+  const actualPromptPath = `synthetic-${clip.id}-actual-prompt.txt`;
+  const repairPromptPath = `synthetic-${clip.id}-repair-prompt.txt`;
+  const actualPromptText = `Synthetic ImageGen instructions for repaired ${clip.id}.\n`;
+  const repairPromptText = `Synthetic ImageGen canvas repair instructions for ${clip.id}.\n`;
+  await writeFile(scopedPath(fix.root, actualPromptPath), actualPromptText);
+  await writeFile(scopedPath(fix.root, repairPromptPath), repairPromptText);
+  return {
+    actualPromptText,
+    receipt: {
+      schema: 1, kind: 'generated-and-source-repaired', profileId: fix.job.profileId, clipId: clip.id,
+      provider: 'OpenAI ImageGen', generationId: `synthetic-repaired-${clip.id}`, actor: 'test',
+      note: 'Synthetic repaired source candidate only; never accepted or integrated.',
+      referenceLockSha256: fix.job.referenceLockSha256, queuePromptSha256: clip.promptSha256,
+      actualPromptPath, actualPromptFileSha256: hash(actualPromptText), repairPromptPath, repairPromptFileSha256: hash(repairPromptText),
+      sourceSha256: hash(await readFile(scopedPath(fix.root, clip.sourcePath))), savedSourcePath: clip.sourcePath,
+      candidateSelected: true, accepted: false, runtimeIntegrated: false,
+      sourceRepairs: [{ kind: 'imagegen-canvas-repair', inputRetained: 'synthetic-rejected-input.png', outputRetained: 'synthetic-repaired-output.png', result: 'Synthetic exact canvas repair.', pixelPreserving: false }]
+    }
+  };
+}
+async function selectedCandidateReceipt(fix, clip = fix.job.clips[0]) {
+  const promptDocumentPath = `synthetic-${clip.id}-selected-candidate-prompt.txt`;
+  const actualPromptText = `Synthetic selected candidate ImageGen prompt for ${clip.id}.\n`;
+  await writeFile(scopedPath(fix.root, promptDocumentPath), actualPromptText);
+  const source = await readFile(scopedPath(fix.root, clip.sourcePath));
+  const input = fix.job.clips.find((candidate) => candidate.id !== clip.id);
+  return {
+    actualPromptText,
+    receipt: {
+      schema: 1, kind: 'generated-candidate-selected', profileId: fix.job.profileId, clipId: clip.id,
+      iteration: 2, provider: 'OpenAI ImageGen', generationId: `synthetic-selected-${clip.id}`,
+      providerGenerationIdReturned: false, generationIdProvenance: 'Synthetic local receipt because no stable provider ID was returned.',
+      actor: 'test', recordedAt: '2026-09-01T00:00:00.000Z', promptDocumentPath,
+      promptDocumentSha256: hash(actualPromptText), promptSha256: hash(actualPromptText),
+      contractPromptSha256: clip.promptSha256, referenceLockSha256: fix.job.referenceLockSha256,
+      selectionStatus: 'selected-synthetic-candidate-not-accepted', sourcePath: clip.sourcePath,
+      sourceSha256: hash(source), sourceBytes: source.byteLength, sourceSize: [1774, 887],
+      persistence: 'Synthetic exact payload persisted without re-encoding.',
+      inputImages: [{ role: 'synthetic identity anchor', path: input.sourcePath, sha256: hash(await readFile(scopedPath(fix.root, input.sourcePath))), delivery: 'Synthetic test attachment.' }],
+      technicalAudit: { defaultExtraction: 'pass', findings: [] }, accepted: false, runtimeIntegrated: false, canonExact: false
+    }
+  };
+}
 async function normalized(fix) {
   const atlas = scopedPath(fix.root, fix.job.normalizedPath);
   await mkdir(dirname(atlas), { recursive: true });
@@ -169,7 +213,7 @@ test('migration refuses to orphan recorded work outside the pilot before writing
   const legacy = legacyFiveProfileQueue(fix.queue);
   const moved = legacy.jobs.find((job) => job.profileId === 'enemy-012-carrier');
   assert.equal(moved.batchId, 'batch-003');
-  for (const kind of ['generated', 'review-rejected', 'accepted', 'integrated']) {
+  for (const kind of ['generated', 'generated-and-source-repaired', 'generated-candidate-selected', 'review-rejected', 'accepted', 'integrated']) {
     const state = { ...emptyState(), events: [{ profileId: moved.profileId, kind, actor: 'test', note: 'Existing recorded work must not be relocated.' }] };
     await persistQueueFixture(fix.root, legacy, state);
     const beforeQueue = await readFile(scopedPath(fix.root, QUEUE_PATH));
@@ -307,6 +351,163 @@ test('generated receipts accept exact source hashes and preserve legacy receipts
   assert.equal(Object.hasOwn(receipt, 'sourceSha256'), false);
 });
 
+test('repaired generation preserves every receipt proof and remains a generated candidate only', async () => {
+  const fix = await fixture();
+  const { receipt, actualPromptText } = await repairedReceipt(fix);
+  const originalReceipt = structuredClone(receipt);
+  let state = await appendProductionEvent(fix.queue, emptyState(), receipt, fix.root);
+  const recorded = state.events[0];
+  assert.deepEqual(receipt, originalReceipt);
+  assert.equal(recorded.kind, 'generated-and-source-repaired');
+  assert.equal(recorded.sourcePath, fix.job.clips[0].sourcePath);
+  assert.equal(recorded.savedSourcePath, receipt.savedSourcePath);
+  assert.equal(recorded.sourceSha256, receipt.sourceSha256);
+  assert.equal(recorded.actualPromptText, actualPromptText);
+  assert.equal(recorded.actualPromptFileSha256, receipt.actualPromptFileSha256);
+  assert.equal(recorded.repairPromptPath, receipt.repairPromptPath);
+  assert.equal(recorded.repairPromptFileSha256, receipt.repairPromptFileSha256);
+  assert.deepEqual(recorded.sourceRepairs, receipt.sourceRepairs);
+  assert.equal(recorded.accepted, false);
+  assert.equal(recorded.runtimeIntegrated, false);
+  let status = await getJobStatus(fix.job, state, fix.root);
+  assert.equal(status.status, 'generated');
+  assert.equal(status.generatedClips, 1);
+
+  for (const clip of fix.job.clips.slice(1)) state = await appendProductionEvent(fix.queue, state, { kind: 'generated', profileId: fix.job.profileId, clipId: clip.id, provider: 'OpenAI ImageGen', generationId: `synthetic-${clip.id}`, actualPromptText: `Synthetic ${clip.id} prompt.`, actor: 'test', note: 'Synthetic candidate only.' }, fix.root);
+  await normalized(fix);
+  state = await appendProductionEvent(fix.queue, state, acceptance(fix.job), fix.root);
+  assert.equal((await getJobStatus(fix.job, state, fix.root)).status, 'accepted');
+  const acceptedEvent = structuredClone(state.events.at(-1));
+
+  state = await appendProductionEvent(fix.queue, state, { ...receipt, generationId: 'synthetic-repaired-after-review' }, fix.root);
+  status = await getJobStatus(fix.job, state, fix.root);
+  assert.equal(status.status, 'generated');
+  assert.equal(status.generatedClips, fix.job.clips.length);
+  assert.deepEqual(status.issues, []);
+  assert.deepEqual(state.events.at(-2), acceptedEvent);
+  const summary = await summarizeQueue(fix.queue, state, fix.root);
+  assert.equal(summary.counts.generated, 1);
+  assert.equal(summary.counts.accepted, 0);
+  assert.equal(summary.verifiedGeneratedBoards, fix.job.clips.length);
+});
+
+test('repaired generation rejects incomplete, stale or rewritten repair provenance', async () => {
+  const fix = await fixture();
+  const { receipt } = await repairedReceipt(fix);
+  const invalid = [
+    [{ ...receipt, provider: 'Other provider' }, /actual OpenAI provider/],
+    [{ ...receipt, actualPromptPath: undefined, actualPromptFileSha256: undefined }, /actualPromptText or actualPromptPath/],
+    [{ ...receipt, savedSourcePath: 'assets/openai/sprites/frames/v66/wrong.png' }, /saved source path/],
+    [{ ...receipt, sourceSha256: '0'.repeat(64) }, /source SHA-256/],
+    [{ ...receipt, sourceRepairs: [] }, /non-empty sourceRepairs/],
+    [{ ...receipt, sourceRepairs: [{}] }, /documented kind and result/],
+    [{ ...receipt, actualPromptFileSha256: '0'.repeat(64) }, /Actual prompt file changed/],
+    [{ ...receipt, repairPromptFileSha256: '0'.repeat(64) }, /Repair prompt file changed/],
+    [{ ...receipt, repairPromptFileSha256: undefined }, /both path and SHA-256/],
+    [{ ...receipt, queuePromptSha256: '0'.repeat(64) }, /queue prompt SHA-256 is stale/],
+    [{ ...receipt, referenceLockSha256: '0'.repeat(64) }, /reference lock SHA-256 is stale/]
+  ];
+  for (const [candidate, message] of invalid) {
+    const before = structuredClone(candidate);
+    await assert.rejects(appendProductionEvent(fix.queue, emptyState(), candidate, fix.root), message);
+    assert.deepEqual(candidate, before);
+  }
+});
+
+test('repaired generation verifies every documented sourceRepair path and SHA-256 pair', async () => {
+  const fix = await fixture();
+  const { receipt } = await repairedReceipt(fix);
+  const evidence = {
+    inputPath: 'synthetic-repair-input.bin', outputPath: 'synthetic-repair-output.bin',
+    receiptPath: 'synthetic-repair-receipt.json', path: 'synthetic-repair-generic-proof.txt'
+  };
+  for (const [key, path] of Object.entries(evidence)) await writeFile(scopedPath(fix.root, path), `Synthetic ${key} evidence.`);
+  const repair = {
+    kind: 'documented-file-repair', result: 'Synthetic repaired source with every recognized evidence pair.',
+    inputPath: evidence.inputPath, inputSha256: hash(await readFile(scopedPath(fix.root, evidence.inputPath))),
+    outputPath: evidence.outputPath, outputSha256: hash(await readFile(scopedPath(fix.root, evidence.outputPath))),
+    receiptPath: evidence.receiptPath, receiptSha256: hash(await readFile(scopedPath(fix.root, evidence.receiptPath))),
+    path: evidence.path, sha256: hash(await readFile(scopedPath(fix.root, evidence.path)))
+  };
+  const complete = { ...receipt, sourceRepairs: [repair] };
+  const original = structuredClone(complete);
+  const state = await appendProductionEvent(fix.queue, emptyState(), complete, fix.root);
+  assert.deepEqual(complete, original);
+  assert.deepEqual(state.events[0].sourceRepairs, [repair]);
+  assert.equal((await getJobStatus(fix.job, state, fix.root)).generatedClips, 1);
+
+  const invalidRepairs = [
+    [{ ...repair, inputSha256: undefined }, /both inputPath and inputSha256/],
+    [{ ...repair, outputPath: undefined }, /both outputPath and outputSha256/],
+    [{ ...repair, receiptSha256: '0'.repeat(64) }, /Repair receipt.*file changed/],
+    [{ ...repair, sha256: undefined }, /both path and sha256/],
+    [{ ...repair, path: '../outside-proof.txt' }, /escapes repository/],
+    [{ ...repair, path: 'missing-proof.txt' }, /ENOENT/],
+    [{ ...repair, sha256: '0'.repeat(64) }, /Repair file.*file changed/]
+  ];
+  for (const [sourceRepair, message] of invalidRepairs) {
+    const candidate = { ...receipt, sourceRepairs: [sourceRepair] };
+    const before = structuredClone(candidate);
+    await assert.rejects(appendProductionEvent(fix.queue, emptyState(), candidate, fix.root), message);
+    assert.deepEqual(candidate, before);
+  }
+});
+
+test('selected candidate is the latest generation while preserving prior rejection and raw receipt provenance', async () => {
+  const fix = await fixture();
+  const clip = fix.job.clips[0];
+  let state = await appendProductionEvent(fix.queue, emptyState(), { kind: 'generated', profileId: fix.job.profileId, clipId: clip.id, provider: 'OpenAI ImageGen', generationId: 'synthetic-rejected-generation', actualPromptText: 'Synthetic rejected candidate prompt.', actor: 'test', note: 'Synthetic candidate before explicit rejection.' }, fix.root);
+  state = await appendProductionEvent(fix.queue, state, { kind: 'review-rejected', profileId: fix.job.profileId, actor: 'reviewer', note: 'Synthetic first candidate rejected and retained.' }, fix.root);
+  assert.equal((await getJobStatus(fix.job, state, fix.root)).status, 'review-rejected');
+
+  const { receipt, actualPromptText } = await selectedCandidateReceipt(fix, clip);
+  const originalReceipt = structuredClone(receipt);
+  state = await appendProductionEvent(fix.queue, state, receipt, fix.root);
+  assert.deepEqual(receipt, originalReceipt);
+  assert.deepEqual(state.events.slice(0, 2).map((event) => event.kind), ['generated', 'review-rejected']);
+  const recorded = state.events.at(-1);
+  assert.equal(recorded.kind, 'generated-candidate-selected');
+  assert.equal(recorded.actualPromptText, actualPromptText);
+  assert.equal(recorded.promptSha256, receipt.promptDocumentSha256, 'the receipt raw file hash is retained, not rewritten as a content hash');
+  assert.equal(recorded.selectionStatus, receipt.selectionStatus);
+  assert.deepEqual(recorded.inputImages, receipt.inputImages);
+  assert.deepEqual(recorded.technicalAudit, receipt.technicalAudit);
+  assert.equal(recorded.accepted, false);
+  assert.equal(recorded.runtimeIntegrated, false);
+  const status = await getJobStatus(fix.job, state, fix.root);
+  assert.equal(status.status, 'generated');
+  assert.equal(status.generatedClips, 1);
+  assert.deepEqual(status.issues, []);
+});
+
+test('selected candidate validates prompt, active source, input anchors and non-acceptance selection provenance', async () => {
+  const fix = await fixture();
+  const { receipt } = await selectedCandidateReceipt(fix);
+  const invalid = [
+    [{ ...receipt, provider: 'Other provider' }, /actual OpenAI provider/],
+    [{ ...receipt, promptDocumentPath: undefined }, /promptDocumentPath/],
+    [{ ...receipt, promptDocumentSha256: '0'.repeat(64), promptSha256: '0'.repeat(64) }, /prompt document file changed/],
+    [{ ...receipt, promptSha256: '0'.repeat(64) }, /must retain its documented file hash/],
+    [{ ...receipt, sourcePath: 'assets/openai/sprites/frames/v66/wrong.png' }, /source path/],
+    [{ ...receipt, sourceSha256: '0'.repeat(64) }, /source SHA-256/],
+    [{ ...receipt, sourceBytes: receipt.sourceBytes + 1 }, /byte count/],
+    [{ ...receipt, iteration: 0 }, /positive iteration/],
+    [{ ...receipt, selectionStatus: 'candidate-only' }, /selectionStatus provenance/],
+    [{ ...receipt, generationIdProvenance: '' }, /generation ID provenance/],
+    [{ ...receipt, persistence: '' }, /persistence provenance/],
+    [{ ...receipt, accepted: true }, /explicitly remain unaccepted/],
+    [{ ...receipt, runtimeIntegrated: true }, /explicitly remain unaccepted/],
+    [{ ...receipt, canonExact: true }, /explicitly remain unaccepted/],
+    [{ ...receipt, inputImages: [] }, /non-empty array/],
+    [{ ...receipt, inputImages: [{ ...receipt.inputImages[0], sha256: '0'.repeat(64) }] }, /input image file changed/]
+  ];
+  for (const [candidate, message] of invalid) {
+    const before = structuredClone(candidate);
+    await assert.rejects(appendProductionEvent(fix.queue, emptyState(), candidate, fix.root), message);
+    assert.deepEqual(candidate, before);
+  }
+});
+
 test('clip provenance is resumable but rejects replaying an old hash after source replacement', async () => {
   const fix = await fixture();
   const state = await generated(fix);
@@ -408,12 +609,12 @@ test('path-only legacy prompts and exactly matching dual prompt inputs retain th
   const path = 'synthetic-exact-prompt.txt', text = 'Exact synthetic instructions, accents pr\u00e9serv\u00e9s.\n';
   await writeFile(scopedPath(fix.root, path), text);
   const base = { kind: 'generated', profileId: fix.job.profileId, clipId: fix.job.clips[0].id, provider: 'OpenAI ImageGen', generationId: 'synthetic-prompt-exact', actor: 'test', note: 'Synthetic exact prompt fixture.', actualPromptPath: path };
-  for (const receipt of [base, { ...base, actualPromptText: text }]) {
+  for (const receipt of [base, { ...base, actualPromptText: text }, { ...base, promptSha256: hash(text) }]) {
     const originalReceipt = structuredClone(receipt);
     const state = await appendProductionEvent(fix.queue, emptyState(), receipt, fix.root);
     assert.equal(state.events[0].actualPromptText, text);
     assert.equal(state.events[0].actualPromptPath, path);
-    assert.equal(state.events[0].promptSha256, hash(JSON.stringify(text)));
+    assert.equal(state.events[0].promptSha256, receipt.promptSha256 ?? hash(JSON.stringify(text)));
     assert.equal((await getJobStatus(fix.job, state, fix.root)).generatedClips, 1);
     assert.deepEqual(receipt, originalReceipt);
   }

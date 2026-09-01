@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:073ac081f1bae561ec6d18cff3db539be7b8044714f6c901b08f6382905d5a7a",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the immutable raw ImageGen PNG SHA-256 identifies this capture.",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/attack.txt",
+  "actualPromptFileSha256": "0cf783086962be24af7b21699a9dbe3fb04834a9a5ab31bdbe2a0007ce6d7d04",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/attack.png",
+  "sourceSha256": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e",
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-raw-capture",
+      "result": "The unflattened ImageGen output is preserved before any deterministic source repair.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/attack-r1-imagegen-raw-before-flatten.png",
+      "sha256": "073ac081f1bae561ec6d18cff3db539be7b8044714f6c901b08f6382905d5a7a"
+    },
+    {
+      "kind": "documented-deterministic-repair-chain",
+      "result": "Flat-magenta cleanup preserved 162787 foreground pixels; safe connected-component ownership retained all 20234 pixels of frame 4, including its 410-pixel spill at ownerShare 0.9797370762, then translated the pose without scaling or pixel-value changes.",
+      "path": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/attack.event.json",
+      "sha256": "fe196ee9c88f2b1c8ad21393342f1cd4bfc833bea841a96e1e3e84ae78e42601"
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose source candidate is the active queue source; this does not grant acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/attack.png",
+      "sha256": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e"
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Source candidate only. Exact ImageGen capture and deterministic ownership/placement repairs are hash-locked; the rejected scale-drift repair remains preserved in the linked receipt."
+}

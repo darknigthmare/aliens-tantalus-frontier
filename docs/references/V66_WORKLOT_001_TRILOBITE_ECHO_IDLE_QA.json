@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-035-trilobite-echo",
+  "clipId": "idle",
+  "status": "candidate-selected-not-accepted-not-runtime",
+  "reviewer": "Codex /root/complete_variants",
+  "reviewedAt": "2026-09-01",
+  "provider": "OpenAI ImageGen",
+  "actualCompletedImageGenCalls": 5,
+  "preflightFailures": [
+    {
+      "stage": "reference-path-loading-before-provider-generation",
+      "providerCallCompleted": false,
+      "reason": "Windows sandbox ACL helper rejected referenced_image_paths for the local V56 PNG. The already-inspected visible V56 board was then supplied through conversation image context."
+    },
+    {
+      "stage": "r5-reference-attachment-after-task-resumption",
+      "providerCallCompleted": false,
+      "reason": "The resumed task had no prior conversation image available and the local r4 PNG remained inaccessible to the ImageGen attachment bridge. R5 was therefore generated from the persisted textual project lock; this limitation is explicit in its prompt and receipt."
+    }
+  ],
+  "contract": {
+    "grid": {"columns": 4, "rows": 2, "frameCount": 8},
+    "facing": "right",
+    "primaryTentacleCount": 7,
+    "primaryTentacleArrangement": "exactly five upper plus exactly two lower",
+    "primaryTentacleAttachment": "seven independent, visibly traceable base-to-tip paths from seven distinct sockets on one central radial basal ring",
+    "apparatus": "one separate compact closed ventral implantation apparatus",
+    "technicalGate": "exact 2:1, eight distinct cells, complete lossless extraction, no anatomical crop/contact",
+    "matteGate": "opaque-magenta or native alpha with safe clean extraction",
+    "deferredCorrections": ["physical ground anchors", "inter-clip anatomical scale calibration", "raw matte cleanup where lossless"]
+  },
+  "attempts": [
+    {
+      "iteration": 1,
+      "receiptPath": "docs/references/v66-worklot-001-events/enemy-035-trilobite-echo/idle-r1.json",
+      "result": "rejected-unmaterialized",
+      "technicalExtraction": "not-run",
+      "reason": "Visible geometry failed lower-margin and relative-ground review; the original in-memory result was not recoverable from its zero-byte built-in stub."
+    },
+    {
+      "iteration": 2,
+      "receiptPath": "docs/references/v66-worklot-001-events/enemy-035-trilobite-echo/idle-r2.json",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/idle-r2-groundline.png",
+      "result": "rejected",
+      "technicalExtraction": "pass-8-distinct",
+      "pipelineGateReaudit": {
+        "aspectExact2To1": true,
+        "borderContactFrames": [],
+        "findings": [],
+        "edgeMagentaRatio": 1.0
+      },
+      "reason": "Raw ground and margin variation are not eliminatory under the production pipeline gate. R2 remains rejected because overlapping roots and secondary spur-like forms prevent proof of seven independent base-to-tip paths on one ring in all eight poses."
+    },
+    {
+      "iteration": 3,
+      "receiptPath": "docs/references/v66-worklot-001-events/enemy-035-trilobite-echo/idle-r3.json",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/idle-r3-border-matte.png",
+      "result": "rejected",
+      "technicalExtraction": "pass-8-distinct-with-border-clue-frame-4",
+      "reason": "Frame 4 touches nominal boundaries; margins, matte uniformity and row-relative ground line fail."
+    },
+    {
+      "iteration": 4,
+      "receiptPath": "docs/references/v66-worklot-001-events/enemy-035-trilobite-echo/idle-r4.json",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/idle-r4-contract-fail.png",
+      "result": "rejected",
+      "technicalExtraction": "pass-8-distinct",
+      "reason": "Raw margin, root height and exact #FF00FF coverage are deferred corrections under the true production gate. R4 remains rejected because seven independent single-ring base-to-tip paths are not visually provable in all eight poses."
+    },
+    {
+      "iteration": 5,
+      "receiptPath": "docs/references/v66-worklot-001-events/enemy-035-trilobite-echo/idle-r5.json",
+      "result": "selected-candidate",
+      "technicalExtraction": "pass-8-distinct-no-border-contact",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/idle.png",
+      "reason": "Every pose contains five upper plus two lower independent, non-fused and non-branching tentacles plus a separate compact apparatus. The five upper sockets are exposed; each lower shaft remains traceable to a distinct natural occlusion point under the mantle, converging toward the same basal-hub zone. Controlled overlap is permitted by the lock, so internal roots need not be visible through opaque tissue."
+    }
+  ],
+  "finalDecision": {
+    "masterPath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/idle.png",
+    "masterExists": true,
+    "promotedIteration": 5,
+    "acceptedAutomatically": false,
+    "runtimeIntegrated": false,
+    "queueOrStateModified": false,
+    "decision": "R5 is promoted as the local idle source candidate because all eight cells preserve seven independently accountable primary paths: five exposed upper sockets and two distinct lower paths entering natural mantle occlusion toward the same basal hub. This selection is not acceptance, normalization or runtime integration."
+  },
+  "scopeIntegrity": {
+    "globalQueueModified": false,
+    "globalStateModified": false,
+    "globalReferenceRegistryModified": false,
+    "normalizerModifiedOrRun": false,
+    "runtimeModified": false,
+    "gitOperationPerformed": false,
+    "otherProfileModified": false
+  }
+}

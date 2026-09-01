@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-035-trilobite-echo",
+  "clipId": "death",
+  "status": "candidate-selected-not-accepted-not-runtime",
+  "reviewer": "Codex /root/complete_variants",
+  "reviewedAt": "2026-09-01",
+  "actualCompletedImageGenCalls": 2,
+  "selected": {
+    "iteration": 2,
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/death.png",
+    "sha256": "bad472215467c9666c3959c82bcf85b056c59bf6df8b37736ed5fc7f1eadb917",
+    "size": [1774, 887],
+    "accepted": false,
+    "runtimeIntegrated": false
+  },
+  "rejections": [
+    {
+      "iteration": 1,
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/death-r1-impact-lines.png",
+      "sha256": "505a6ec6b1852f5d90818923bed3bc1665d6f72affc4a9b812411bcde40194fe",
+      "reason": "Anatomy and extraction passed, but detached impact/action strokes in frames 0 and 1 would become false sprite fragments."
+    }
+  ],
+  "selectedTechnicalGate": {
+    "aspectExact2To1": true,
+    "grid": {"columns": 4, "rows": 2, "frameCount": 8},
+    "defaultExtraction": "pass",
+    "extractedFrames": 8,
+    "distinctExtractedPoseHashes": 8,
+    "borderContactFrames": [],
+    "findings": [],
+    "matteKind": "opaque-magenta",
+    "edgeMagentaRatio": 1.0
+  },
+  "topologyGate": {
+    "primaryCountPerFrame": [7, 7, 7, 7, 7, 7, 7, 7],
+    "upperCountPerFrame": [5, 5, 5, 5, 5, 5, 5, 5],
+    "lowerCountPerFrame": [2, 2, 2, 2, 2, 2, 2, 2],
+    "detachedPrimaryFrames": [],
+    "branchingFrames": [],
+    "fusionFrames": [],
+    "effectFragmentFrames": [],
+    "terminalIntact": true
+  },
+  "animationGate": {
+    "irreversible": true,
+    "supportLossReadable": true,
+    "mantleDropReadable": true,
+    "groundImpactReadable": true,
+    "terminalMotionlessHeapReadable": true,
+    "recoveryFrames": []
+  },
+  "pendingReviews": [
+    "Manual physical root/contact anchor for all eight poses.",
+    "Central-mantle anatomical landmark comparison against idle before authorizing sourceScaleByClip.",
+    "Normalized timing review remains separate."
+  ],
+  "decision": "R2 is the local death source candidate. No normalization, automatic acceptance or runtime integration is performed.",
+  "scopeIntegrity": {
+    "globalQueueModified": false,
+    "globalStateModified": false,
+    "globalReferenceRegistryModified": false,
+    "normalizerModifiedOrRun": false,
+    "runtimeModified": false,
+    "gitOperationPerformed": false
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-035-trilobite-echo",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-035-trilobite-echo.webp",
+      "atlasSha256": "30fd783390ed840fa6a5938ed9c3669d433c10cde978b7d8b9264b707423c9d6",
+      "metadataSha256": "84ca7fae5cea696032279eeb1275751d8a386d0e89a33008b876ba40d4bc84b7",
+      "contactPath": "docs/references/v66-batch-003-atlas-review/enemy-035-trilobite-echo.jpg",
+      "contactSha256": "ee996305c4ebbb09120da4a49e5d2003be867371bd7d2b75dd654ab0d8ffa98b",
+      "frameCount": 32,
+      "anchorStatus": "reviewed",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

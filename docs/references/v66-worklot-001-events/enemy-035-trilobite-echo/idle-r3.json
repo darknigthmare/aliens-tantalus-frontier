@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "kind": "generated-candidate-rejected",
+  "profileId": "enemy-035-trilobite-echo",
+  "clipId": "idle",
+  "iteration": 3,
+  "iterationOfGenerationId": "exec-5635b4c6-471a-4016-aca3-dfdb1b745690",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-09186611-c3d0-4d12-b239-69a1cf283d33",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Local receipt UUID; the built-in result returned image_url and no stable provider generation identifier.",
+  "actor": "Codex /root/complete_variants",
+  "recordedAt": "2026-09-01T01:01:45.035Z",
+  "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-035-trilobite-echo/idle-r3.txt",
+  "promptDocumentSha256": "ee8af35429f89fdb079a0f4abcfb75542b1d94422ea79f6d0b83cea4e064b1ed",
+  "promptSha256": "d997589f9b62a5222bedb72d20361e14342a68c1fb882a8d8f4469940295153f",
+  "contractPromptSha256": "466f0357dc7941de5414de22a5a73729e95c1298521c2f429226f0a5f8365c93",
+  "referenceLockSha256": "6f091cafccecdf13fa89f96fc3ada725388d1a81c627d4587ec01a9254904029",
+  "selectionStatus": "rejected-border-matte-margin-and-groundline",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/idle-r3-border-matte.png",
+  "sourceSha256": "bc0ff2896eb9e2b2cba1e89bc9bea7f60c30653642a65133e686ec3bca5d8b51",
+  "sourceBytes": 1582590,
+  "sourceSize": [1774, 887],
+  "matteKind": "opaque-magenta-nonuniform",
+  "persistence": "Exact built-in image_url payload decoded from base64 without image re-encoding.",
+  "technicalAudit": {
+    "defaultExtraction": "pass",
+    "extractedFrames": 8,
+    "distinctExtractedPoseHashes": 8,
+    "borderContactFrames": [4],
+    "findings": ["nominal-cell-border-contact-needs-ownership-review"]
+  },
+  "contractFailures": {
+    "minimumHorizontalMarginPx": 0,
+    "minimumVerticalMarginPx": 0,
+    "topRowLocalGroundYRange": [388, 388],
+    "bottomRowOrdinaryLocalGroundYRange": [322, 323],
+    "pureFF00FFBackgroundProven": false
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

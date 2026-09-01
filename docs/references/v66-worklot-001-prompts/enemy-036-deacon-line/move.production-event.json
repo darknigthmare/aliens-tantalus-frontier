@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:3fa6bed8dc7f986d43fb78798c34acda04258b494412e7945f8583ffc49086f3",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the immutable raw ImageGen PNG SHA-256 identifies this capture.",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/move.txt",
+  "actualPromptFileSha256": "bef1f831c51ac9de52b0ac9bf05e19f2064f15163167f435637cdefc67fcfe6c",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/move.png",
+  "sourceSha256": "8404dcdfe7380fcee63819dd280304c36b533b7ad23c3ed3edce2181d10b196a",
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-raw-capture",
+      "result": "The unflattened ImageGen output is preserved before any deterministic source repair.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/move-r1-imagegen-raw-before-flatten.png",
+      "sha256": "3fa6bed8dc7f986d43fb78798c34acda04258b494412e7945f8583ffc49086f3"
+    },
+    {
+      "kind": "documented-deterministic-repair-chain",
+      "result": "Flat-magenta cleanup preserved 157522 foreground pixels; lossless per-cell vertical translation aligned the common support to y=428 without scaling or changing retained pixel values.",
+      "path": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/move.event.json",
+      "sha256": "297936b7a8e58aae72a9e6184f2fefbebe9270887090460d37ff16aa9e558707"
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose source candidate is the active queue source; this does not grant acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/move.png",
+      "sha256": "8404dcdfe7380fcee63819dd280304c36b533b7ad23c3ed3edce2181d10b196a"
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Source candidate only. Exact ImageGen capture and deterministic repair chain are hash-locked; no acceptance, normalization or runtime status is implied by this event."
+}

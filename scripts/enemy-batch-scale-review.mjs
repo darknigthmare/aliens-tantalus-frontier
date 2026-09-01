@@ -45,12 +45,8 @@ function pngSize(bytes) {
   return size;
 }
 
-export async function resolvePostGenerationScaleReview(job, sources, root, scopedPath) {
+async function resolvePostGenerationScaleReviewBytes(job, sources, root, scopedPath, bytes, path) {
   if (!/^batch-[0-9]{3}$/.test(job.batchId || '') || job.batchId === 'batch-000') fail('invalid batch identifier');
-  const path = `docs/references/V66_BATCH_${job.batchId.slice(-3)}_SCALE_REVIEW.json`;
-  let bytes;
-  try { bytes = await readFile(await existingPath(root, path, scopedPath)); }
-  catch (error) { if (error.code === 'ENOENT') return null; throw error; }
   let document;
   try { document = JSON.parse(bytes.toString('utf8')); } catch { fail('invalid review JSON'); }
   if (!record(document) || document.schema !== 1 || document.batchId !== job.batchId || document.coordinates !== 'nominal-source-cell' || !record(document.profiles)) fail('wrong review schema or scope');
@@ -126,6 +122,23 @@ export async function resolvePostGenerationScaleReview(job, sources, root, scope
     baselineClip: entry.baselineClip, sourceScaleByClip: entry.sourceScaleByClip,
     sourceSha256ByClip: entry.sourceSha256ByClip, measurementCount: entry.measurements.length, evidence
   };
+}
+
+// Validate the exact canonical bytes a merge CLI is about to persist. This keeps
+// fragment application on the same source/evidence/measurement contract as the
+// production resolver, without writing an unvalidated review first.
+export async function resolvePostGenerationScaleReviewCandidate(job, sources, document, root, scopedPath) {
+  const path = `docs/references/V66_BATCH_${job.batchId.slice(-3)}_SCALE_REVIEW.json`;
+  const bytes = Buffer.from(JSON.stringify(document, null, 2) + '\n', 'utf8');
+  return resolvePostGenerationScaleReviewBytes(job, sources, root, scopedPath, bytes, path);
+}
+
+export async function resolvePostGenerationScaleReview(job, sources, root, scopedPath) {
+  const path = `docs/references/V66_BATCH_${job.batchId.slice(-3)}_SCALE_REVIEW.json`;
+  let bytes;
+  try { bytes = await readFile(await existingPath(root, path, scopedPath)); }
+  catch (error) { if (error.code === 'ENOENT') return null; throw error; }
+  return resolvePostGenerationScaleReviewBytes(job, sources, root, scopedPath, bytes, path);
 }
 
 export async function validatePostGenerationScaleReview(job, metadata, root, scopedPath) {

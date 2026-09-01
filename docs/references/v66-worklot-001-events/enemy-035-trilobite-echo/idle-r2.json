@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "kind": "generated-candidate-rejected",
+  "profileId": "enemy-035-trilobite-echo",
+  "clipId": "idle",
+  "iteration": 2,
+  "iterationOfGenerationId": "exec-299d4e96-9a15-4485-904e-214623891c49",
+  "provider": "OpenAI ImageGen",
+  "generationId": "exec-5635b4c6-471a-4016-aca3-dfdb1b745690",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Local receipt UUID; the built-in result returned image_url and no stable provider generation identifier.",
+  "actor": "Codex /root/complete_variants",
+  "recordedAt": "2026-09-01T01:01:45.035Z",
+  "promptDocumentPath": "docs/references/v66-worklot-001-prompts/enemy-035-trilobite-echo/idle-r2.txt",
+  "promptDocumentSha256": "8b0a2f941ea30185213baf0bdd573e32a9214dc9bdc36b3b04266b686d4108d7",
+  "promptSha256": "1611425a28cbeca931f3480c91ec00c2923f10b2b1730b42811362f79968d522",
+  "contractPromptSha256": "466f0357dc7941de5414de22a5a73729e95c1298521c2f429226f0a5f8365c93",
+  "referenceLockSha256": "6f091cafccecdf13fa89f96fc3ada725388d1a81c627d4587ec01a9254904029",
+  "selectionStatus": "rejected-margin-and-relative-groundline",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-035-trilobite-echo/rejected/idle-r2-groundline.png",
+  "sourceSha256": "10f27b1dd215f97aa2c404ba0de65ab53edd7eb979c62295e1f15b5c176712f6",
+  "sourceBytes": 1461163,
+  "sourceSize": [1774, 887],
+  "matteKind": "opaque-magenta-heuristic",
+  "persistence": "Exact built-in image_url payload decoded from base64 without image re-encoding.",
+  "technicalAudit": {
+    "defaultExtraction": "pass",
+    "extractedFrames": 8,
+    "distinctExtractedPoseHashes": 8,
+    "borderContactFrames": [],
+    "findings": []
+  },
+  "contractFailures": {
+    "horizontalMarginBelow12PercentFrames": [0, 2, 4, 5, 6, 7],
+    "minimumHorizontalMarginPx": 10,
+    "topRowLocalGroundYRange": [390, 392],
+    "bottomRowLocalGroundYRange": [323, 326]
+  },
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

@@ -2448,6 +2448,2586 @@
           ]
         }
       }
+    },
+    "enemy-037-neomorph": {
+      "profileId": "enemy-037-neomorph",
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual per-frame review in original 1774x887 4x2 source coordinates. The landmark is the visible pelvis/posterior hip articulation at the sacral tail root, never the tail tip, skull, hand or global bounding-box centre. Anchor x is the landmark's vertical projection. Anchor y equals the complete recovered sourceBounds bottom, including the full three-pixel extraction guard below the load-bearing feet, knees, hands, forearms or corpse flank. The attack frame-2 negative x bound is retained exactly after the separately proven safe ownership transfer; it does not alter pelvis or ground placement.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/idle.png",
+          "sourceSha256": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                226,
+                365
+              ],
+              "landmark": [
+                226,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                112,
+                150,
+                314,
+                365
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                205,
+                365
+              ],
+              "landmark": [
+                205,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                82,
+                150,
+                287,
+                365
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                190,
+                365
+              ],
+              "landmark": [
+                190,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                68,
+                149,
+                275,
+                365
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                185,
+                365
+              ],
+              "landmark": [
+                185,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                63,
+                150,
+                272,
+                365
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                222,
+                329
+              ],
+              "landmark": [
+                222,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                108,
+                114,
+                315,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                198,
+                329
+              ],
+              "landmark": [
+                198,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                80,
+                116,
+                281,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                184,
+                329
+              ],
+              "landmark": [
+                184,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                67,
+                114,
+                273,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                180,
+                329
+              ],
+              "landmark": [
+                180,
+                215
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                64,
+                115,
+                266,
+                329
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+              "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/move.png",
+          "sourceSha256": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                225,
+                363
+              ],
+              "landmark": [
+                225,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                94,
+                150,
+                327,
+                363
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                203,
+                364
+              ],
+              "landmark": [
+                203,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                80,
+                161,
+                307,
+                364
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                183,
+                363
+              ],
+              "landmark": [
+                183,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                53,
+                156,
+                282,
+                363
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                180,
+                363
+              ],
+              "landmark": [
+                180,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                43,
+                155,
+                275,
+                363
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                221,
+                296
+              ],
+              "landmark": [
+                221,
+                193
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                96,
+                92,
+                328,
+                296
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                202,
+                297
+              ],
+              "landmark": [
+                202,
+                195
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                76,
+                95,
+                305,
+                297
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                186,
+                296
+              ],
+              "landmark": [
+                186,
+                195
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                56,
+                94,
+                289,
+                296
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                181,
+                296
+              ],
+              "landmark": [
+                181,
+                195
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "sourceBounds": [
+                46,
+                93,
+                280,
+                296
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+              "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/attack.png",
+          "sourceSha256": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                226,
+                379
+              ],
+              "landmark": [
+                226,
+                295
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                115,
+                211,
+                300,
+                379
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Pelvis projection to supporting feet; full padded floor retained."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                192,
+                379
+              ],
+              "landmark": [
+                192,
+                295
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                54,
+                225,
+                238,
+                379
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Compressed attack pose; pelvis projection to supporting feet; full padded floor retained."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                166,
+                379
+              ],
+              "landmark": [
+                166,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                -5,
+                166,
+                201,
+                379
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Pelvis and supporting feet inspected after the exact safe-reassignment recovery. Negative x spill belongs to the same pose and does not determine the root."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                171,
+                380
+              ],
+              "landmark": [
+                171,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                -1,
+                245,
+                281,
+                380
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Maximum reach; pelvis projection to supporting feet, never the extended claw; full padded floor retained."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                220,
+                263
+              ],
+              "landmark": [
+                220,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                110,
+                132,
+                388,
+                263
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Low extended recovery; pelvis projection to supporting feet; reaching hand and tail excluded."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                194,
+                263
+              ],
+              "landmark": [
+                194,
+                180
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                79,
+                114,
+                279,
+                263
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Recovery; pelvis projection to supporting feet; full padded floor retained."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                169,
+                264
+              ],
+              "landmark": [
+                169,
+                170
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                51,
+                102,
+                225,
+                264
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Recovery; pelvis projection to supporting feet; full padded floor retained."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                165,
+                263
+              ],
+              "landmark": [
+                165,
+                170
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                38,
+                102,
+                203,
+                263
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+              "note": "Terminal recovery; pelvis projection to supporting feet; full padded floor retained."
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/death.png",
+          "sourceSha256": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                228,
+                382
+              ],
+              "landmark": [
+                228,
+                285
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                86,
+                149,
+                329,
+                382
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Pre-collapse pelvis projection to load-bearing feet; full padded floor retained."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                195,
+                382
+              ],
+              "landmark": [
+                195,
+                295
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                43,
+                180,
+                294,
+                382
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Buckling pelvis projection to load-bearing feet; full padded floor retained."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                170,
+                380
+              ],
+              "landmark": [
+                170,
+                320
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                18,
+                235,
+                293,
+                380
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Kneeling collapse; pelvis projection to knee/foot/hand support plane; tail excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                155,
+                380
+              ],
+              "landmark": [
+                155,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                3,
+                279,
+                323,
+                380
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Grounded collapse; pelvis projection to limb/torso support plane; extended forelimb and tail excluded."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                200,
+                278
+              ],
+              "landmark": [
+                200,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                86,
+                193,
+                378,
+                278
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                180,
+                278
+              ],
+              "landmark": [
+                180,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                61,
+                193,
+                345,
+                278
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                175,
+                277
+              ],
+              "landmark": [
+                175,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                26,
+                194,
+                319,
+                277
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                172,
+                277
+              ],
+              "landmark": [
+                172,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                24,
+                194,
+                312,
+                277
+              ],
+              "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+              "note": "Terminal corpse; pelvis landmark follows visible sacral/hip mass and projects to final flank/limb contact plane."
+            }
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    },
+    "enemy-036-deacon-line": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/produce_arcology_lurker",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual per-pose pelvis-center landmark at the proximal leg junction, vertically projected to the complete extracted support/contact guard required by runtime pivot y=240. Idle/move grounded anchors use y=431; attack uses y=430 except frame 2 at y=429; grounded/contact death uses y=429. Airborne death frames 1-2 intentionally remain on the adjacent y=427 ground plane to preserve fall height. Every non-airborne anchor is therefore >= sourceBounds[3]. Whole-body extrema and the cranial mitre are never used as roots.",
+      "visualReview": "All 32 source poses and four regenerated marked overlays inspected after the runtime pivot guard audit. Exactly two legs, pelvis placement, planted/contact support, complete extraction guard and inferred airborne ground plane were reviewed. All 30 non-airborne poses satisfy anchorY >= sourceBounds[3]; death frames 1-2 retain y=427 and remain below their source bounds at 421/415. Physical registration only; no artistic acceptance, scale merge, normalization or runtime integration.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/idle-anchor-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/move-anchor-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/attack-anchor-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/death-anchor-overlay.png"
+      ],
+      "clips": {
+        "idle": {
+          "sourceSha256": "69f8cc60fe0b2f60eceb5cfd422543f9d4564f8105896f4021e59104bf9c95ce",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                221,
+                431
+              ],
+              "landmark": [
+                221,
+                316
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 1 source and regenerated marked overlay inspected: pelvis (221,316) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                194,
+                431
+              ],
+              "landmark": [
+                194,
+                316
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 2 source and regenerated marked overlay inspected: pelvis (194,316) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                222,
+                431
+              ],
+              "landmark": [
+                222,
+                318
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 3 source and regenerated marked overlay inspected: pelvis (222,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                206,
+                431
+              ],
+              "landmark": [
+                206,
+                318
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 4 source and regenerated marked overlay inspected: pelvis (206,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                206,
+                431
+              ],
+              "landmark": [
+                206,
+                326
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 5 source and regenerated marked overlay inspected: pelvis (206,326) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                189,
+                431
+              ],
+              "landmark": [
+                189,
+                324
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 6 source and regenerated marked overlay inspected: pelvis (189,324) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                213,
+                431
+              ],
+              "landmark": [
+                213,
+                330
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 7 source and regenerated marked overlay inspected: pelvis (213,330) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                205,
+                431
+              ],
+              "landmark": [
+                205,
+                318
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Idle pose 8 source and regenerated marked overlay inspected: pelvis (205,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "8404dcdfe7380fcee63819dd280304c36b533b7ad23c3ed3edce2181d10b196a",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                201,
+                431
+              ],
+              "landmark": [
+                201,
+                321
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 1 source and regenerated marked overlay inspected: pelvis (201,321) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                184,
+                431
+              ],
+              "landmark": [
+                184,
+                294
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 2 source and regenerated marked overlay inspected: pelvis (184,294) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                184,
+                431
+              ],
+              "landmark": [
+                184,
+                292
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 3 source and regenerated marked overlay inspected: pelvis (184,292) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                178,
+                431
+              ],
+              "landmark": [
+                178,
+                293
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 4 source and regenerated marked overlay inspected: pelvis (178,293) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                190,
+                431
+              ],
+              "landmark": [
+                190,
+                310
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 5 source and regenerated marked overlay inspected: pelvis (190,310) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                182,
+                431
+              ],
+              "landmark": [
+                182,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 6 source and regenerated marked overlay inspected: pelvis (182,300) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                183,
+                431
+              ],
+              "landmark": [
+                183,
+                325
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 7 source and regenerated marked overlay inspected: pelvis (183,325) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                171,
+                431
+              ],
+              "landmark": [
+                171,
+                315
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Move pose 8 source and regenerated marked overlay inspected: pelvis (171,315) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                202,
+                430
+              ],
+              "landmark": [
+                202,
+                318
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 1 source and regenerated marked overlay inspected: pelvis (202,318) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                176,
+                430
+              ],
+              "landmark": [
+                176,
+                299
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 2 source and regenerated marked overlay inspected: pelvis (176,299) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                144,
+                429
+              ],
+              "landmark": [
+                144,
+                287
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 3 source and regenerated marked overlay inspected: pelvis (144,287) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                148,
+                430
+              ],
+              "landmark": [
+                148,
+                286
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 4 source and regenerated marked overlay inspected: pelvis (148,286) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                152,
+                430
+              ],
+              "landmark": [
+                152,
+                290
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 5 source and regenerated marked overlay inspected: pelvis (152,290) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                170,
+                430
+              ],
+              "landmark": [
+                170,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 6 source and regenerated marked overlay inspected: pelvis (170,300) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                190,
+                430
+              ],
+              "landmark": [
+                190,
+                321
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 7 source and regenerated marked overlay inspected: pelvis (190,321) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                135,
+                430
+              ],
+              "landmark": [
+                135,
+                320
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 8 source and regenerated marked overlay inspected: pelvis (135,320) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                204,
+                429
+              ],
+              "landmark": [
+                204,
+                314
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 1 source and regenerated marked overlay inspected: pelvis (204,314) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                183,
+                427
+              ],
+              "landmark": [
+                183,
+                285
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Death pose 2 source and regenerated marked overlay inspected: pelvis (183,285) projects to the adjacent grounded contact plane y=427, below airborne sourceBounds[3]=421 and preserving the visible fall gap."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                207,
+                427
+              ],
+              "landmark": [
+                207,
+                288
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Death pose 3 source and regenerated marked overlay inspected: pelvis (207,288) projects to the adjacent grounded contact plane y=427, below airborne sourceBounds[3]=415 and preserving the visible fall gap."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                183,
+                429
+              ],
+              "landmark": [
+                183,
+                305
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 4 source and regenerated marked overlay inspected: pelvis (183,305) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                235,
+                429
+              ],
+              "landmark": [
+                235,
+                361
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 5 source and regenerated marked overlay inspected: pelvis (235,361) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                213,
+                429
+              ],
+              "landmark": [
+                213,
+                372
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 6 source and regenerated marked overlay inspected: pelvis (213,372) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                225,
+                429
+              ],
+              "landmark": [
+                225,
+                390
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 7 source and regenerated marked overlay inspected: pelvis (225,390) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                225,
+                429
+              ],
+              "landmark": [
+                225,
+                397
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 8 source and regenerated marked overlay inspected: pelvis (225,397) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0."
+            }
+          ]
+        }
+      }
+    },
+    "enemy-038-protomorph": {
+      "profileId": "enemy-038-protomorph",
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual per-frame review in the unchanged 1774x887 4x2 source boards after complete-source ownership recovery. The landmark is the visible pelvis/posterior hip at the sacral tail root, never the tail tip, skull, reaching claw or global bounding-box centre. Anchor x is that landmark's vertical projection. Anchor y equals the complete recovered sourceBounds bottom, including the full three-pixel extraction guard below the lowest load-bearing foot, knee, hand, forearm, flank or airborne extremity. All seven short cross-cell transfers remain pixel-identical and only establish source ownership.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+        "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+        "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+        "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/idle.png",
+          "sourceSha256": "7ba01627ec6c4a914fa22d945d90d89c3f1ab04fd7aa9a67b1326cd536022a67",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                200,
+                409
+              ],
+              "landmark": [
+                200,
+                222
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                60,
+                91,
+                369,
+                409
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                186,
+                409
+              ],
+              "landmark": [
+                186,
+                216
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                36,
+                85,
+                313,
+                409
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                190,
+                410
+              ],
+              "landmark": [
+                190,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                8,
+                79,
+                300,
+                410
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                190,
+                409
+              ],
+              "landmark": [
+                190,
+                221
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                -5,
+                103,
+                284,
+                409
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacrum is independent of the proven 11-pixel left spill; projection reaches the complete padded foot plane."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                188,
+                374
+              ],
+              "landmark": [
+                188,
+                191
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                69,
+                69,
+                343,
+                374
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                185,
+                374
+              ],
+              "landmark": [
+                185,
+                188
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                36,
+                68,
+                310,
+                374
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                190,
+                374
+              ],
+              "landmark": [
+                190,
+                190
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                19,
+                69,
+                305,
+                374
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacral tail-root/hip projection to the lowest load-bearing feet; full extraction guard retained."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                190,
+                374
+              ],
+              "landmark": [
+                190,
+                192
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "sourceBounds": [
+                -4,
+                69,
+                284,
+                374
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-idle.jpg",
+              "note": "Sacrum is independent of the proven one-pixel left spill; full padded foot plane retained."
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/move.png",
+          "sourceSha256": "58ecf8337a7bd1e2744828ed7b778d0bc364b49ff3e0c4bc7b237f58cc503074",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                230,
+                390
+              ],
+              "landmark": [
+                230,
+                220
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                53,
+                87,
+                407,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                207,
+                385
+              ],
+              "landmark": [
+                207,
+                216
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                61,
+                94,
+                362,
+                385
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                202,
+                390
+              ],
+              "landmark": [
+                202,
+                218
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                9,
+                90,
+                413,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                216,
+                390
+              ],
+              "landmark": [
+                216,
+                212
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                -36,
+                82,
+                313,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Raised-knee pose; sacrum projects to the supporting foot. The 173-pixel left spill is ownership-only."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                210,
+                354
+              ],
+              "landmark": [
+                210,
+                187
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                42,
+                52,
+                397,
+                354
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                204,
+                356
+              ],
+              "landmark": [
+                204,
+                184
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                54,
+                58,
+                363,
+                356
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                194,
+                353
+              ],
+              "landmark": [
+                194,
+                186
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                0,
+                51,
+                330,
+                353
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Sacral tail-root projection to the stride's lowest load-bearing foot plane."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                210,
+                353
+              ],
+              "landmark": [
+                210,
+                181
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                -35,
+                42,
+                309,
+                353
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-move.jpg",
+              "note": "Raised-knee pose; sacrum projects to the supporting foot. The 129-pixel left spill is ownership-only."
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/attack.png",
+          "sourceSha256": "8255f7f6d9943a45d03ebc0598383243cf6fc7ef7858dc7ab313dac0436940a7",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                208,
+                390
+              ],
+              "landmark": [
+                208,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                126,
+                145,
+                350,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Anticipation sacrum projected to the lowest supporting foot plane."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                164,
+                390
+              ],
+              "landmark": [
+                164,
+                289
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                77,
+                205,
+                303,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Compressed lunge sacrum projected to the foot/knee support plane."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                164,
+                390
+              ],
+              "landmark": [
+                164,
+                288
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                19,
+                185,
+                336,
+                390
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Extended lunge sacrum projected to the lowest foot contact; reaching claws excluded."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                183,
+                388
+              ],
+              "landmark": [
+                183,
+                289
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                -16,
+                182,
+                368,
+                388
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Airborne maximum reach; sacrum projects to the lowest authored hind extremity. The 33-pixel left spill is ownership-only."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                185,
+                299
+              ],
+              "landmark": [
+                185,
+                193
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                98,
+                99,
+                504,
+                299
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Airborne extension; sacrum projects to the lowest authored hind extremity. The 910-pixel right spill is retained exactly."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                180,
+                301
+              ],
+              "landmark": [
+                180,
+                194
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                24,
+                103,
+                432,
+                301
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Landing recovery; sacrum projects to the lowest supporting foot plane."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                170,
+                301
+              ],
+              "landmark": [
+                170,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                89,
+                102,
+                321,
+                301
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Crouched recovery; sacrum projects to the foot/hand support plane."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                190,
+                306
+              ],
+              "landmark": [
+                190,
+                191
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                38,
+                75,
+                259,
+                306
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-attack.jpg",
+              "note": "Terminal recovery; sacrum projects to the lowest load-bearing feet."
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/death.png",
+          "sourceSha256": "d9ecada4977b9f06a79ea2c85519a97c19a1277054183087fa00da76b321d2d2",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                200,
+                408
+              ],
+              "landmark": [
+                200,
+                205
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                53,
+                63,
+                370,
+                408
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Pre-collapse sacrum projected to the load-bearing feet."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                190,
+                408
+              ],
+              "landmark": [
+                190,
+                224
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "sourceBounds": [
+                39,
+                98,
+                319,
+                408
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Buckling sacrum projected to the load-bearing feet."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                185,
+                409
+              ],
+              "landmark": [
+                185,
+                250
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "sourceBounds": [
+                -1,
+                135,
+                288,
+                409
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Crouched collapse; sacrum projects to the foot/hand support plane."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                164,
+                413
+              ],
+              "landmark": [
+                164,
+                312
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                -12,
+                196,
+                324,
+                413
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Kneeling collapse; sacrum projects to the knee/flank contact plane. The 241-pixel left spill is ownership-only."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                190,
+                346
+              ],
+              "landmark": [
+                190,
+                302
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                37,
+                147,
+                429,
+                346
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Prone transition; sacral mass projects to the lowest knee/flank/hand contact plane."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                170,
+                349
+              ],
+              "landmark": [
+                170,
+                305
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                39,
+                201,
+                407,
+                349
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Collapsed body; sacral mass projects to the flank/limb contact plane."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                164,
+                348
+              ],
+              "landmark": [
+                164,
+                309
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                11,
+                256,
+                397,
+                348
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Prone corpse; sacral mass projects to the lowest flank/limb contact plane."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                164,
+                348
+              ],
+              "landmark": [
+                164,
+                309
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "sourceBounds": [
+                7,
+                264,
+                360,
+                348
+              ],
+              "evidence": "docs/references/v66-worklot-001-protomorph-qa/anchors-death.jpg",
+              "note": "Terminal corpse; sacral mass projects to the final flank/limb contact plane."
+            }
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    },
+    "enemy-035-trilobite-echo": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual pose-by-pose inspection of the single radial basal-ring hub, projected vertically to the observed planted-tentacle support or, after collapse, the central-mantle body contact. The landmark is never a tentacle tip and the terminal death root is never placed under a loose extended limb. Every anchor includes the complete extracted source lower bound and guard pixel, so sourceBounds[3] - anchorY equals zero for all 32 poses. Attack was inspected on the lossless safe-reassignment ownership result because its selected source has proven short boundary spill.",
+      "reviewedPoseCount": 32,
+      "visualReview": "All 32 source poses and the four marked overlays were inspected. Yellow marks the basal-ring hub, cyan its vertical projection and green the support/body-contact anchor. This is physical registration evidence only: no source was normalized, accepted or integrated.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "562a3a50f34d475e1852e63de7e0f89f9fb7ce70824980eef6853b6bd33ea475",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                240,
+                378
+              ],
+              "landmark": [
+                240,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 1 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=378."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                235,
+                374
+              ],
+              "landmark": [
+                235,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 2 marked overlay: basal hub (235,255) projects to the complete planted lower-tentacle support and extraction guard at y=374."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                240,
+                385
+              ],
+              "landmark": [
+                240,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 3 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=385."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                240,
+                386
+              ],
+              "landmark": [
+                240,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 4 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=386."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                235,
+                377
+              ],
+              "landmark": [
+                235,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 5 marked overlay: basal hub (235,260) projects to the complete planted lower-tentacle support and extraction guard at y=377."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                240,
+                371
+              ],
+              "landmark": [
+                240,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 6 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=371."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                230,
+                372
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 7 marked overlay: basal hub (230,255) projects to the complete planted lower-tentacle support and extraction guard at y=372."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                235,
+                371
+              ],
+              "landmark": [
+                235,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Idle pose 8 marked overlay: basal hub (235,260) projects to the complete planted lower-tentacle support and extraction guard at y=371."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "a43b330804e8302cde0f7534a32f7b9bc384d3db3721fb170361267ec953c309",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                240,
+                377
+              ],
+              "landmark": [
+                240,
+                257
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 1 marked overlay: basal hub (240,257) projects to the complete planted support and extraction guard at y=377."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                233,
+                377
+              ],
+              "landmark": [
+                233,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 2 marked overlay: basal hub (233,255) projects to the complete planted support and extraction guard at y=377."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                235,
+                380
+              ],
+              "landmark": [
+                235,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 3 marked overlay: basal hub (235,255) projects to the complete planted support and extraction guard at y=380."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                230,
+                380
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 4 marked overlay: basal hub (230,255) projects to the complete planted support and extraction guard at y=380."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                235,
+                349
+              ],
+              "landmark": [
+                235,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 5 marked overlay: basal hub (235,255) projects to the complete planted lower-row support and extraction guard at y=349."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                230,
+                349
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 6 marked overlay: basal hub (230,255) projects to the complete planted lower-row support and extraction guard at y=349."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                235,
+                348
+              ],
+              "landmark": [
+                235,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 7 marked overlay: basal hub (235,255) projects to the complete recovery support and extraction guard at y=348."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                235,
+                361
+              ],
+              "landmark": [
+                235,
+                258
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Move pose 8 marked overlay: basal hub (235,258) projects to the complete recovery support and extraction guard at y=361."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "d2d14d01345ceec0f24997e972b05dc668267ccdb038506be701206c63e1b5bb",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                235,
+                379
+              ],
+              "landmark": [
+                235,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 1 safe-reassignment overlay: basal hub (235,255) projects to the complete braced support and guard at y=379."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                230,
+                380
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 2 safe-reassignment overlay: basal hub (230,255) projects to the complete compressed support and guard at y=380."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                230,
+                381
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 3 safe-reassignment overlay: basal hub (230,255) projects to the complete rear-brace support and guard at y=381."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                230,
+                385
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "evidence": "Attack pose 4 safe-reassignment overlay: basal hub (230,255) projects to the planted rear-brace plane at y=385 while forward primaries extend; short left spill remains owned by this pose."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                230,
+                355
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 5 safe-reassignment overlay: basal hub (230,255) projects to the complete grapple support and guard at y=355."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                225,
+                354
+              ],
+              "landmark": [
+                225,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 6 safe-reassignment overlay: basal hub (225,255) projects to the complete implantation-contact brace and guard at y=354."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                230,
+                355
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 7,
+              "evidence": "Attack pose 7 safe-reassignment overlay: basal hub (230,255) projects to the retracting brace plane at y=355; transferred short spill is preserved."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                230,
+                353
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Attack pose 8 safe-reassignment overlay: basal hub (230,255) projects to the complete closed-aperture recovery support and guard at y=353."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "bad472215467c9666c3959c82bcf85b056c59bf6df8b37736ed5fc7f1eadb917",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "reviewed": true,
+              "anchor": [
+                235,
+                377
+              ],
+              "landmark": [
+                235,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 1 marked overlay: basal hub (235,260) projects to the last stable support and extraction guard at y=377."
+            },
+            {
+              "frame": 1,
+              "reviewed": true,
+              "anchor": [
+                228,
+                381
+              ],
+              "landmark": [
+                228,
+                260
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 5,
+              "evidence": "Death pose 2 marked overlay: basal hub (228,260) projects to the recoiling support and extraction guard at y=381."
+            },
+            {
+              "frame": 2,
+              "reviewed": true,
+              "anchor": [
+                235,
+                374
+              ],
+              "landmark": [
+                235,
+                300
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 3 marked overlay: lowering hub (235,300) projects to first mantle/support contact and extraction guard at y=374."
+            },
+            {
+              "frame": 3,
+              "reviewed": true,
+              "anchor": [
+                235,
+                381
+              ],
+              "landmark": [
+                235,
+                320
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 4 marked overlay: dropped hub (235,320) projects to central-body contact and extraction guard at y=381, not to a loose tentacle extremity."
+            },
+            {
+              "frame": 4,
+              "reviewed": true,
+              "anchor": [
+                230,
+                306
+              ],
+              "landmark": [
+                230,
+                245
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 5 marked overlay: collapsed hub (230,245) projects to the mantle underside/body contact and extraction guard at y=306."
+            },
+            {
+              "frame": 5,
+              "reviewed": true,
+              "anchor": [
+                225,
+                300
+              ],
+              "landmark": [
+                225,
+                245
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 6 marked overlay: collapsed hub (225,245) projects to the mantle underside/body contact and extraction guard at y=300."
+            },
+            {
+              "frame": 6,
+              "reviewed": true,
+              "anchor": [
+                230,
+                302
+              ],
+              "landmark": [
+                230,
+                252
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 7 marked overlay: slackened hub (230,252) projects to prone central-body contact and extraction guard at y=302."
+            },
+            {
+              "frame": 7,
+              "reviewed": true,
+              "anchor": [
+                230,
+                302
+              ],
+              "landmark": [
+                230,
+                255
+              ],
+              "confidence": "medium",
+              "uncertaintyPx": 6,
+              "evidence": "Death pose 8 marked overlay: terminal hub (230,255) projects to motionless central-body contact and extraction guard at y=302, never to an extended tentacle tip."
+            }
+          ]
+        }
+      }
     }
   }
 }

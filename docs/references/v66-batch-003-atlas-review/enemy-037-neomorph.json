@@ -6,12 +6,12 @@
     {
       "profileId": "enemy-037-neomorph",
       "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-037-neomorph.webp",
-      "atlasSha256": "4a57feb12be969e23408854cc72219591b43d02821cbe3a1fa881afdfebc5cf1",
-      "metadataSha256": "2fb756cc47206b5ef83cb736be35e025b2e7da6549491a74f7a20bb3e989fb84",
+      "atlasSha256": "0f6491c0d4d72a50cda9cf9ab21128f1acf20e8c73cb479867d4f6550edcfdc3",
+      "metadataSha256": "a53c7784f52237022aa56aeb0d31f20ae4850af7e620cc44830a7d869a2756e9",
       "contactPath": "docs/references/v66-batch-003-atlas-review/enemy-037-neomorph.jpg",
-      "contactSha256": "ac8a4931a24b8f6f41e58ad6438a9207a2dcca3371eba8e87c00b268baebc5fb",
+      "contactSha256": "b33dcb4b3d79edb5faf0833a9e2636ee57a6eee51ec05194c15bb159eac0e09b",
       "frameCount": 32,
-      "anchorStatus": "pending",
+      "anchorStatus": "reviewed",
       "visualReviewStatus": "pending-inspection",
       "sourcePixelsModified": 0
     }

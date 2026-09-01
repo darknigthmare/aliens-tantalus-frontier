@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Physical pelvis registration only; no source edit, normalization, artistic acceptance or runtime integration.",
+  "profiles": {
+    "enemy-037-neomorph": {
+      "profileId": "enemy-037-neomorph",
+      "status": "reviewed",
+      "reviewer": "Codex finish_source_review",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 32,
+      "method": "Manual per-frame review in original 1774x887 4x2 source coordinates. The landmark is the visible pelvis/posterior hip articulation at the sacral tail root, never the tail tip, skull, hand or global bounding-box centre. Anchor x is the landmark's vertical projection. Anchor y equals the complete recovered sourceBounds bottom, including the full three-pixel extraction guard below the load-bearing feet, knees, hands, forearms or corpse flank. The attack frame-2 negative x bound is retained exactly after the separately proven safe ownership transfer; it does not alter pelvis or ground placement.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+        "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/idle.png",
+          "sourceSha256": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [226, 365], "landmark": [226, 250], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [112, 150, 314, 365], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 1, "reviewed": true, "anchor": [205, 365], "landmark": [205, 250], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [82, 150, 287, 365], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 2, "reviewed": true, "anchor": [190, 365], "landmark": [190, 250], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [68, 149, 275, 365], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 3, "reviewed": true, "anchor": [185, 365], "landmark": [185, 250], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [63, 150, 272, 365], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 4, "reviewed": true, "anchor": [222, 329], "landmark": [222, 215], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [108, 114, 315, 329], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 5, "reviewed": true, "anchor": [198, 329], "landmark": [198, 215], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [80, 116, 281, 329], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 6, "reviewed": true, "anchor": [184, 329], "landmark": [184, 215], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [67, 114, 273, 329], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."},
+            {"frame": 7, "reviewed": true, "anchor": [180, 329], "landmark": [180, 215], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [64, 115, 266, 329], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "note": "Pelvis/tail-root articulation; lowest load-bearing feet; full extraction guard retained."}
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/move.png",
+          "sourceSha256": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [225, 363], "landmark": [225, 255], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [94, 150, 327, 363], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 1, "reviewed": true, "anchor": [203, 364], "landmark": [203, 255], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [80, 161, 307, 364], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 2, "reviewed": true, "anchor": [183, 363], "landmark": [183, 255], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [53, 156, 282, 363], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 3, "reviewed": true, "anchor": [180, 363], "landmark": [180, 255], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [43, 155, 275, 363], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 4, "reviewed": true, "anchor": [221, 296], "landmark": [221, 193], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [96, 92, 328, 296], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 5, "reviewed": true, "anchor": [202, 297], "landmark": [202, 195], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [76, 95, 305, 297], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 6, "reviewed": true, "anchor": [186, 296], "landmark": [186, 195], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [56, 94, 289, 296], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."},
+            {"frame": 7, "reviewed": true, "anchor": [181, 296], "landmark": [181, 195], "confidence": "medium", "uncertaintyPx": 6, "sourceBounds": [46, 93, 280, 296], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "note": "Pelvis projection to the lowest carrying foot/feet; complete padded source floor retained."}
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/attack.png",
+          "sourceSha256": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [226, 379], "landmark": [226, 295], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [115, 211, 300, 379], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Pelvis projection to supporting feet; full padded floor retained."},
+            {"frame": 1, "reviewed": true, "anchor": [192, 379], "landmark": [192, 295], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [54, 225, 238, 379], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Compressed attack pose; pelvis projection to supporting feet; full padded floor retained."},
+            {"frame": 2, "reviewed": true, "anchor": [166, 379], "landmark": [166, 290], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [-5, 166, 201, 379], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Pelvis and supporting feet inspected after the exact safe-reassignment recovery. Negative x spill belongs to the same pose and does not determine the root."},
+            {"frame": 3, "reviewed": true, "anchor": [171, 380], "landmark": [171, 290], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [-1, 245, 281, 380], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Maximum reach; pelvis projection to supporting feet, never the extended claw; full padded floor retained."},
+            {"frame": 4, "reviewed": true, "anchor": [220, 263], "landmark": [220, 190], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [110, 132, 388, 263], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Low extended recovery; pelvis projection to supporting feet; reaching hand and tail excluded."},
+            {"frame": 5, "reviewed": true, "anchor": [194, 263], "landmark": [194, 180], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [79, 114, 279, 263], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Recovery; pelvis projection to supporting feet; full padded floor retained."},
+            {"frame": 6, "reviewed": true, "anchor": [169, 264], "landmark": [169, 170], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [51, 102, 225, 264], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Recovery; pelvis projection to supporting feet; full padded floor retained."},
+            {"frame": 7, "reviewed": true, "anchor": [165, 263], "landmark": [165, 170], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [38, 102, 203, 263], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "note": "Terminal recovery; pelvis projection to supporting feet; full padded floor retained."}
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-037-neomorph/death.png",
+          "sourceSha256": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [228, 382], "landmark": [228, 285], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [86, 149, 329, 382], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Pre-collapse pelvis projection to load-bearing feet; full padded floor retained."},
+            {"frame": 1, "reviewed": true, "anchor": [195, 382], "landmark": [195, 295], "confidence": "medium", "uncertaintyPx": 7, "sourceBounds": [43, 180, 294, 382], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Buckling pelvis projection to load-bearing feet; full padded floor retained."},
+            {"frame": 2, "reviewed": true, "anchor": [170, 380], "landmark": [170, 320], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [18, 235, 293, 380], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Kneeling collapse; pelvis projection to knee/foot/hand support plane; tail excluded."},
+            {"frame": 3, "reviewed": true, "anchor": [155, 380], "landmark": [155, 330], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [3, 279, 323, 380], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Grounded collapse; pelvis projection to limb/torso support plane; extended forelimb and tail excluded."},
+            {"frame": 4, "reviewed": true, "anchor": [200, 278], "landmark": [200, 220], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [86, 193, 378, 278], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."},
+            {"frame": 5, "reviewed": true, "anchor": [180, 278], "landmark": [180, 220], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [61, 193, 345, 278], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."},
+            {"frame": 6, "reviewed": true, "anchor": [175, 277], "landmark": [175, 220], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [26, 194, 319, 277], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Collapsed corpse; pelvis landmark follows visible sacral/hip mass and projects to flank/limb contact plane."},
+            {"frame": 7, "reviewed": true, "anchor": [172, 277], "landmark": [172, 220], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [24, 194, 312, 277], "evidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "note": "Terminal corpse; pelvis landmark follows visible sacral/hip mass and projects to final flank/limb contact plane."}
+          ]
+        }
+      },
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-038-protomorph",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:6d55476e46787962243e3ff6634b75f0b98dac6c596a5d983edc432c21689603",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root",
+  "sourceSha256": "6d55476e46787962243e3ff6634b75f0b98dac6c596a5d983edc432c21689603",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/rejected/move-r1-wrong-aspect-1536x1024.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-038-protomorph/move-r1.txt",
+  "candidateSelected": false,
+  "note": "Rejected before normalization: visually coherent 4x2 content, but the provider returned 1536x1024 instead of an exact 2:1 source canvas. Preserved for provenance only."
+}

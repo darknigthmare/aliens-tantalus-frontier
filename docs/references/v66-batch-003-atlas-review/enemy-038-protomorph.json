@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "acceptedAutomatically": 0,
+  "profiles": [
+    {
+      "profileId": "enemy-038-protomorph",
+      "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-038-protomorph.webp",
+      "atlasSha256": "448d594aeceb8eea8c46cf8e0bf82db1d6a81c46d41d8ad8867a161f73269ac8",
+      "metadataSha256": "2556d7315144ecb7962a1f365085b249ba9100b8ccfe3fb39ee5f9cdac068462",
+      "contactPath": "docs/references/v66-batch-003-atlas-review/enemy-038-protomorph.jpg",
+      "contactSha256": "0aa87eefcea1daeae806043c0327738bec33039741f7ec16cc10c781a2aac85d",
+      "frameCount": 32,
+      "anchorStatus": "reviewed",
+      "visualReviewStatus": "pending-inspection",
+      "sourcePixelsModified": 0
+    }
+  ],
+  "missingCandidates": []
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-038-protomorph",
+  "clipId": "move",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:58ecf8337a7bd1e2744828ed7b778d0bc364b49ff3e0c4bc7b237f58cc503074",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root",
+  "sourceSha256": "58ecf8337a7bd1e2744828ed7b778d0bc364b49ff3e0c4bc7b237f58cc503074",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/move.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-038-protomorph/move.txt",
+  "candidateSelected": true,
+  "note": "Content-addressed local receipt because this ImageGen response exposed image_url but no provider generation identifier. Exact 2:1 source with eight distinct right-facing locomotion poses. Candidate only: safe tail-fragment ownership, physical roots, anatomical scale calibration, normalized playback and loop review remain required."
+}

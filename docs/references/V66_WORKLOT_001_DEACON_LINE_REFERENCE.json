@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "worklotId": "V66_WORKLOT_001_DEACON_LINE_REFERENCE",
+  "profileId": "enemy-036-deacon-line",
+  "batchId": "batch-003",
+  "status": "reference-lock-reviewed-local-not-merged",
+  "reviewer": "Codex /root/produce_arcology_lurker",
+  "reviewedAt": "2026-09-01",
+  "canonExact": false,
+  "runtimeIntegrated": false,
+  "classification": "PROJECT_ADAPTATION",
+  "referenceMatch": "DERIVED_FROM_EXTERNAL_MODEL",
+  "continuity": "Prometheus (2012) screen Deacon extended as an internal project lineage",
+  "authorityRule": "The final on-screen Deacon in Prometheus controls. Abandoned Ultramorph and early Deacon concepts are exclusion evidence, not positive identity references.",
+  "sources": [
+    {
+      "url": "https://www.20thcenturystudios.com/movies/prometheus",
+      "authority": "PRIMARY_FILM_STUDIO",
+      "use": "Canonical film and continuity anchor."
+    },
+    {
+      "url": "https://d23.com/prometheus-10th-anniversary-celebration/",
+      "authority": "OFFICIAL_ARCHIVE",
+      "use": "Official archival production context and practical-creature provenance."
+    },
+    {
+      "url": "https://www.denofgeek.com/movies/prometheus-we-meet-the-designers-behind-the-film/",
+      "authority": "FIRSTHAND_PRODUCTION_INTERVIEW",
+      "use": "Neal Scanlan demonstrates the blue-hued, taloned Deacon rod puppet and describes the practical-effects direction."
+    },
+    {
+      "url": "https://www.avpgalaxy.net/website/interviews/carlos-huante/",
+      "authority": "FIRSTHAND_CONCEPT_ARTIST_INTERVIEW",
+      "use": "Defines the negative boundary: Huante states that his Deacon was not the screen-selected design and separates the earlier Gigeresque Ultramorph branch from the final creature."
+    },
+    {
+      "url": "https://monsterlegacy.net/2013/03/04/prometheus-trilobite-deacon-hammerpede-alien/",
+      "authority": "SECONDARY_PRODUCTION_SYNTHESIS",
+      "use": "Supports the bishop-mitre head etymology, gangly foal/giraffe proportions, placenta-like iridescent skin and goblin-shark jaw influence through attributed production quotations."
+    }
+  ],
+  "referenceFinding": {
+    "screenCanon": "One newborn Deacon is shown at the end of Prometheus. Its final screen anatomy is the visual authority.",
+    "projectAdaptation": "Deacon Line extrapolates that single film individual into a repeatable gameplay lineage. Population, adult scale and full locomotion cycles are project-authored rather than screen-certified.",
+    "conceptBoundary": "Ultramorph, Holloway-transformation and other abandoned preproduction branches must not be substituted for the final screen Deacon."
+  },
+  "identityLock": {
+    "silhouette": "Tall, slender, eyeless biped with a narrow organic torso, long gangly clawed limbs and a long cranium terminating in a pronounced rear/upward bishop-mitre point.",
+    "head": "Distinct pointed mitre silhouette; not a broad Big Chap dome, not a pale Ultramorph spearhead and not a Neomorph crown.",
+    "skin": "Midnight/navy blue organic membrane, subtly pearlescent and iridescent, wet placenta-like translucency, with natural muscles and joints rather than black ribbed biomechanical armor.",
+    "mouth": "Goblin-shark-like protrusive jaw action, grounded in the final Deacon design; no Predator mandibles or technological mouth parts.",
+    "limbs": "Long bipedal legs and long clawed arms; no quadrupedal default stance.",
+    "tail": "None.",
+    "dorsalTubes": "None.",
+    "equipment": "None.",
+    "eyes": "No visible eyes.",
+    "facing": "Strict right-facing profile in every source pose."
+  },
+  "redesignProhibitions": [
+    "No Ultramorph or Engineer-host giant anatomy, pale/albino palette, Giger-biomechanical ribbing or abandoned concept-art silhouette.",
+    "No tail and no dorsal tubes.",
+    "No Big Chap dome, Neomorph white spiked skull, Queen crest or warrior carapace.",
+    "No armor, clothing, harness, weapon, cybernetics, Predator technology, neon markings or visible eyes.",
+    "No quadrupedal baseline, wing, extra limb or tentacle.",
+    "No film logo, text, UI, watermark, environmental collage or cast shadow."
+  ],
+  "sourceContract": {
+    "grid": {
+      "columns": 4,
+      "rows": 2,
+      "frameCount": 8,
+      "readingOrder": "left-to-right, top-to-bottom"
+    },
+    "aspectRatio": "2:1",
+    "background": "flat magenta key or true alpha",
+    "poseRules": [
+      "Exactly eight unique chronological poses.",
+      "Complete head, hands, feet and full body inside each nominal cell with safe margins.",
+      "No frame may touch or overlap another frame.",
+      "No grid lines, labels, numbers, caption, floor, shadow or scenery.",
+      "Preserve the same individual, anatomy, scale, lighting and right-facing direction across all eight cells."
+    ]
+  },
+  "plannedClips": {
+    "idle": {
+      "fps": 6,
+      "loop": true,
+      "motionLock": "Grounded bipedal rest with subtle breathing and weight transfer; feet remain physically supported."
+    },
+    "move": {
+      "fps": 12,
+      "loop": true,
+      "motionLock": "Eight-pose bipedal walk/run cycle with contact, down, passing and up phases; no quadrupedal crawl and no teleporting stride."
+    },
+    "attack": {
+      "fps": 12,
+      "loop": false,
+      "motionLock": "Claw strike or protrusive goblin-shark jaw strike with anticipation, contact, follow-through and recovery; never a tail strike."
+    },
+    "death": {
+      "fps": 10,
+      "loop": false,
+      "motionLock": "Loss of support, progressive collapse and terminal grounded pose; no dissolve, explosion or excessive gore."
+    }
+  },
+  "scalePolicy": {
+    "legacyRuntimeBox": {
+      "width": 148,
+      "height": 136,
+      "hitbox": "xenomorph-standing",
+      "authority": "GAMEPLAY_LEGACY_ONLY"
+    },
+    "futureRigidLandmark": "Use a repeatable cranial chord from the front jaw hinge to the terminal mitre point on at least two readable poses per clip. Bounding-box height and width are posture diagnostics only, never the scale authority.",
+    "groundPolicy": "Standing and locomotion poses must share one support line; attack may lower the pelvis without changing anatomical scale; death may collapse below standing height."
+  },
+  "legacyV56Review": {
+    "raw": {
+      "path": "assets/openai/sprites/enemies/deacon-line-action-sheet-v56.png",
+      "size": [1254, 1254],
+      "mode": "RGBA",
+      "bytes": 548762,
+      "sha256": "3e9aae0e1bb05caff5ba8183839b77ba3cd65ef9f77757079bed3262288ff385"
+    },
+    "normalized": {
+      "path": "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+      "size": [1024, 1024],
+      "mode": "RGBA",
+      "bytes": 344836,
+      "sha256": "b1de6bc249f8d3fbad6c808edebac0c850c160d92c601f3ffd549df75008c4c8",
+      "alphaBounds": [49, 63, 1008, 1008]
+    },
+    "identityPass": [
+      "Blue organic bipedal identity is readable.",
+      "No tail or dorsal tubes are visible.",
+      "All active poses face right."
+    ],
+    "identityReservations": [
+      "The head sometimes reads as a broad horizontal cowling rather than a consistently sharp bishop-mitre point.",
+      "The V56 sheet has four poses per clip, not the eight chronological poses required by V66.",
+      "Legacy manifest identityVerified metadata is runtime bookkeeping and does not certify film-exact fidelity."
+    ],
+    "cellMeasurements": {
+      "cellSize": [256, 256],
+      "supportLineY": 240,
+      "clips": {
+        "idle": {
+          "heightRange": [171, 177],
+          "widthRange": [57, 71]
+        },
+        "move": {
+          "heightRange": [149, 153],
+          "widthRange": [130, 161]
+        },
+        "attack": {
+          "heightRange": [151, 161],
+          "widthRange": [141, 208]
+        },
+        "death": {
+          "heightRange": [42, 136],
+          "widthRange": [99, 224]
+        }
+      },
+      "interpretation": "Idle and move are internally stable in height, while attack and death bounds change with posture. These bounds cannot certify anatomical scale across clips because no rigid landmark was measured."
+    }
+  },
+  "gates": {
+    "referenceReadyLocal": true,
+    "imageGenerationCalled": false,
+    "sourceBoardsCreated": false,
+    "accepted": false,
+    "runtimeReady": false,
+    "globalRegistryMerged": false
+  }
+}

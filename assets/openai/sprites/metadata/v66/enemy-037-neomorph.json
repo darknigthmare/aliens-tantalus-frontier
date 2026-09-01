@@ -29,30 +29,37 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-037-neomorph.webp",
-  "normalizedSha256": "4a57feb12be969e23408854cc72219591b43d02821cbe3a1fa881afdfebc5cf1",
+  "normalizedSha256": "0f6491c0d4d72a50cda9cf9ab21128f1acf20e8c73cb479867d4f6550edcfdc3",
   "preview": "assets/openai/sprites/previews/v66/enemy-037-neomorph/all.gif",
-  "previewSha256": "11d93e4b64713306442a133ddc0dbe53d9f88e5c61ec9e49779272d55209ecb5",
+  "previewSha256": "53f28bdbb49ac019569a05c147dcbe5d992d1ef87cba3841fe7cdb4a90b0b830",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.7,
+  "scale": 0.504924726,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1.050117,
+    "attack": 1.278109,
+    "death": 0.931649
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "status": "pending",
-    "reason": "No source-anchor review file."
+    "path": "docs/references/V66_BATCH_003_ANCHOR_REVIEW.json",
+    "sha256": "25d77434a275c50803f033596d0047a713a4ff43e87256775f7973faf3128b4a",
+    "status": "reviewed",
+    "reviewer": "Codex finish_source_review",
+    "reviewedAt": "2026-09-01",
+    "method": "Manual per-frame review in original 1774x887 4x2 source coordinates. The landmark is the visible pelvis/posterior hip articulation at the sacral tail root, never the tail tip, skull, hand or global bounding-box centre. Anchor x is the landmark's vertical projection. Anchor y equals the complete recovered sourceBounds bottom, including the full three-pixel extraction guard below the load-bearing feet, knees, hands, forearms or corpse flank. The attack frame-2 negative x bound is retained exactly after the separately proven safe ownership transfer; it does not alter pelvis or ground placement.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -293,9 +300,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/idle.webp",
-      "sha256": "5867ed296d348b489b77afa53be13d19a98ec455cb9fc54465f2194c9fce8027",
+      "sha256": "2dca5cd1e4fe7e0d8a524c1ee48a8cca57511f72ec772d25b9ceb6bbc2841892",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-037-neomorph/idle.gif",
-      "previewSha256": "8c654db7e8a3cbea49bc2127bd23bb87fc6886e62665e3c3ce0f99cd4f1f3700"
+      "previewSha256": "141a42874daacc6d7fd1801969b10b5c4a5cb6b399a2d7d314b5a310b9bc8251"
     },
     {
       "id": "move",
@@ -312,9 +319,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/move.webp",
-      "sha256": "99b47b1730c8478dd9ddc56959fcb45ba2cd7137387dcbc0afb37af153917694",
+      "sha256": "b61573e46e632fab5b8ad8b1154c5474d9e3e6c45dddf9b043a4625f983da520",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-037-neomorph/move.gif",
-      "previewSha256": "874a67028336de0ee0640b35c5eae78032f7825339ab0228084523296b3cbd45"
+      "previewSha256": "0eb5e47934f3232d7f5ff9091602e3ec824a995cd00d7e7c27f22a6862c7d5e8"
     },
     {
       "id": "attack",
@@ -331,9 +338,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/attack.webp",
-      "sha256": "585e2cc0efcf82d5011e5ea911123e47660ddf98145d020db96d918b57e52c8b",
+      "sha256": "8635190e69aa9485db65a2914614a89e3a28d3b2a2c3e3f30f882b12401b61a0",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-037-neomorph/attack.gif",
-      "previewSha256": "e38050f7a43129b873017d94412542b39c94b56ff0d91504c8892e66b6ba0736"
+      "previewSha256": "aeb4205dcaec76123785ecdbe7a8fd7e04d0b9c70d056bfaddbaf443a0262468"
     },
     {
       "id": "death",
@@ -350,9 +357,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-037-neomorph/death.webp",
-      "sha256": "983be56530a2c0fcf48b2484faf2a500474ea6fac153607cddb607419d9f7cc0",
+      "sha256": "da2d6f3ef8e28c83019c05924f673a9ed4dce8e42b3cdee39e9d06603fbcf472",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-037-neomorph/death.gif",
-      "previewSha256": "b3117d44a5cd4f3f13a7efae6bd04f9d5e4c59e7dc0ba5e19ba8e118bb41d3ff"
+      "previewSha256": "780e191778b8f2ccf2246dcb8ed9b51d6530e5eb5e55167e53af293af1b6377f"
     }
   ],
   "placements": [
@@ -387,18 +394,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "161edec06aa6ae94171000d36ec4ca904fc52d6dc89d4d4f134a9d95eb1a49ff",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        365
+      ],
+      "sourceLandmark": [
+        226,
+        250
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        114.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        127.56435643564356,
+        240.0
+      ],
       "index": 0,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        58,
-        90,
-        199,
+        70,
+        131,
+        172,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -431,18 +470,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "fcdf87f1ca46204af5f454152f736150641051a22d0f66bfa0415b320467643f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        365
+      ],
+      "sourceLandmark": [
+        205,
+        250
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        123.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        128.4,
+        240.0
+      ],
       "index": 1,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        56,
-        90,
-        200,
+        66,
+        131,
+        170,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -475,18 +546,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2bdb360c43428653a100d0169b4f5cc8263e79e1e9e64ec560a79bfd5ffe5e11",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        190,
+        365
+      ],
+      "sourceLandmark": [
+        190,
+        250
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        122.0,
+        216.0
+      ],
+      "renderedAnchor": [
+        127.8840579710145,
+        240.0
+      ],
       "index": 2,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        56,
-        89,
-        201,
+        66,
+        131,
+        171,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -519,18 +622,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "696549e6ebfbf8c8fa7d95f246af7ad1d4d35301ead828d5e266939e9115fa89",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        185,
+        365
+      ],
+      "sourceLandmark": [
+        185,
+        250
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        122.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        127.8755980861244,
+        240.0
+      ],
       "index": 3,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        55,
-        90,
-        201,
+        66,
+        131,
+        172,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -563,18 +698,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e1086f92c7da32bf3873a219fb1b7cc97293e0a5a3ccf5e1cacc3daaefef96c6",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        329
+      ],
+      "sourceLandmark": [
+        222,
+        215
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        114.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        127.82608695652175,
+        240.0
+      ],
       "index": 4,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        56,
-        90,
-        201,
+        70,
+        131,
+        175,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -607,18 +774,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "30a3f6eee820828942851436f8f3ce9222c09ab4c65fdd9695df48631a025a3d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        198,
+        329
+      ],
+      "sourceLandmark": [
+        198,
+        215
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        118.0,
+        213.0
+      ],
+      "renderedAnchor": [
+        128.29353233830847,
+        240.0
+      ],
       "index": 5,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        58,
-        91,
-        199,
+        69,
+        132,
+        170,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -651,18 +850,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b5fe11a9c8825925f28c0101a620bc48db9fde2eb144c6ef1701fd3048878bfc",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        184,
+        329
+      ],
+      "sourceLandmark": [
+        184,
+        215
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        117.0,
+        215.0
+      ],
+      "renderedAnchor": [
+        128.06796116504853,
+        240.0
+      ],
       "index": 6,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        56,
-        90,
-        200,
+        69,
+        131,
+        173,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -695,18 +926,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4dedd47838cca5cfd7f80acde60bed664ef31f110d2d34e5366987a044b28f88",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        180,
+        329
+      ],
+      "sourceLandmark": [
+        180,
+        215
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        116.0,
+        214.0
+      ],
+      "renderedAnchor": [
+        127.57425742574257,
+        240.0
+      ],
       "index": 7,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1,
+      "appliedScale": 0.504924726,
       "renderedBounds": [
-        58,
-        90,
-        199,
+        69,
+        132,
+        171,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -739,18 +1002,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4676babccf1d88b8664a51e6840b92b5518f15ea85740c01c24edcce4248080c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        225,
+        363
+      ],
+      "sourceLandmark": [
+        225,
+        255
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        131.0,
+        213.0
+      ],
+      "renderedAnchor": [
+        127.71673819742489,
+        240.0
+      ],
       "index": 8,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        46,
-        91,
-        209,
+        58,
+        127,
+        182,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -783,18 +1078,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "25a18dfdc47e6d235afe0cc5814278eee771df2bbd3520cd521dc10cd76a0b35",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        203,
+        364
+      ],
+      "sourceLandmark": [
+        203,
+        255
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        123.0,
+        203.0
+      ],
+      "renderedAnchor": [
+        128.02202643171807,
+        240.0
+      ],
       "index": 9,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        48,
-        98,
-        207,
+        63,
+        132,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -827,18 +1154,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f609c27e32fb74b5240c455e7bd2efe9962fe86d724996b5c16a35936ad73576",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        183,
+        363
+      ],
+      "sourceLandmark": [
+        183,
+        255
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        130.0,
+        207.0
+      ],
+      "renderedAnchor": [
+        127.68995633187772,
+        240.0
+      ],
       "index": 10,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        48,
-        95,
-        208,
+        59,
+        130,
+        180,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 28,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -871,18 +1230,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6d3e5b8dcab0e3e25f38a869e0d663da45934768cfaf9b934a7ca808f9f1fed3",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        180,
+        363
+      ],
+      "sourceLandmark": [
+        180,
+        255
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        208.0
+      ],
+      "renderedAnchor": [
+        127.63362068965517,
+        240.0
+      ],
       "index": 11,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        47,
-        94,
-        209,
+        55,
+        130,
+        178,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -915,18 +1306,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "ce82feafbfdea0f673bde6c763fc79f75078f3cf617d3720fbd851a4217ef34c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        296
+      ],
+      "sourceLandmark": [
+        221,
+        193
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        125.0,
+        204.0
+      ],
+      "renderedAnchor": [
+        128.27155172413794,
+        240.0
+      ],
       "index": 12,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        47,
-        97,
-        209,
+        62,
+        132,
+        185,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -959,18 +1382,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9d578d1b7e4535039578826f99414bf824cb10caebdce9b328139e89da908c19",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        202,
+        297
+      ],
+      "sourceLandmark": [
+        202,
+        195
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        126.0,
+        202.0
+      ],
+      "renderedAnchor": [
+        127.5764192139738,
+        240.0
+      ],
       "index": 13,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        48,
-        99,
-        208,
+        61,
+        133,
+        182,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1003,18 +1458,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6a7a348329a2242de945e891e3e993fff4728e7bc0f927e633f34a832a615355",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        186,
+        296
+      ],
+      "sourceLandmark": [
+        186,
+        195
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        130.0,
+        202.0
+      ],
+      "renderedAnchor": [
+        128.18454935622316,
+        240.0
+      ],
       "index": 14,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        46,
-        99,
-        209,
+        59,
+        133,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1047,18 +1534,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "908ffddc06a5e41d0c708d134bb1753c370e4aa73bb15882987e7a6598aed36c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        181,
+        296
+      ],
+      "sourceLandmark": [
+        181,
+        195
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        135.0,
+        203.0
+      ],
+      "renderedAnchor": [
+        127.53846153846153,
+        240.0
+      ],
       "index": 15,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.050117,
+      "appliedScale": 0.530230039,
       "renderedBounds": [
-        46,
-        98,
-        210,
+        56,
+        132,
+        180,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1091,18 +1610,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a87a081eaaa79bc21ca5e28384be7df36127477e4b45cca98cd4986677ebaea0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        379
+      ],
+      "sourceLandmark": [
+        226,
+        295
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        111.0,
+        168.0
+      ],
+      "renderedAnchor": [
+        128.4,
+        240.0
+      ],
       "index": 16,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        63,
-        122,
-        193,
+        57,
+        132,
+        176,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1135,18 +1686,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2e3d26d308f10f66870e16787b831b44e0d9c09fa5da2db729d848b88ec238bb",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        192,
+        379
+      ],
+      "sourceLandmark": [
+        192,
+        295
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        138.0,
+        154.0
+      ],
+      "renderedAnchor": [
+        128.25,
+        240.0
+      ],
       "index": 17,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        64,
-        132,
-        193,
+        39,
+        141,
+        158,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1198,18 +1781,50 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        166,
+        379
+      ],
+      "sourceLandmark": [
+        166,
+        290
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        171.0,
+        213.0
+      ],
+      "renderedAnchor": [
+        128.40291262135923,
+        240.0
+      ],
       "index": 18,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        56,
-        91,
-        200,
+        18,
+        103,
+        151,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1242,18 +1857,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a5f07d4f2e4b8e69a3bc46e6231d1b0d45a4f8e96d025ab7e4e6f1bf4c9e9010",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        171,
+        380
+      ],
+      "sourceLandmark": [
+        171,
+        290
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        172.0,
+        135.0
+      ],
+      "renderedAnchor": [
+        128.00709219858157,
+        240.0
+      ],
       "index": 19,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        30,
-        146,
-        227,
+        17,
+        153,
+        199,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1286,18 +1933,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b9e55eb4f09d76aca18352848b0021bf1895c47efaf14237efa61e088587efb0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        263
+      ],
+      "sourceLandmark": [
+        220,
+        190
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        110.0,
+        131.0
+      ],
+      "renderedAnchor": [
+        127.8273381294964,
+        240.0
+      ],
       "index": 20,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        30,
-        148,
-        225,
+        57,
+        155,
+        236,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1330,18 +2009,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e6bb2c4c0fa5edbfa5f73ad0c6b64d39d53bc3490e419506bba80ba8138928a0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        194,
+        263
+      ],
+      "sourceLandmark": [
+        194,
+        180
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        115.0,
+        149.0
+      ],
+      "renderedAnchor": [
+        128.175,
+        240.0
+      ],
       "index": 21,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        58,
-        136,
-        198,
+        54,
+        144,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1374,18 +2085,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "49b7774a43b294f2b3980e0c00e5f18d515cf97e20d159d7e02410fcddabfb03",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        169,
+        264
+      ],
+      "sourceLandmark": [
+        169,
+        170
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        118.0,
+        162.0
+      ],
+      "renderedAnchor": [
+        127.95402298850574,
+        240.0
+      ],
       "index": 22,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        67,
-        127,
-        189,
+        52,
+        135,
+        164,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1418,18 +2161,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6de0f46e22b4a9b32448146e06b8ba2dcd2a324dbb7b4409514f4e4b52d215ea",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        165,
+        263
+      ],
+      "sourceLandmark": [
+        165,
+        170
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        127.0,
+        161.0
+      ],
+      "renderedAnchor": [
+        127.5878787878788,
+        240.0
+      ],
       "index": 23,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 1.278109,
+      "appliedScale": 0.645348837,
       "renderedBounds": [
-        70,
-        127,
-        185,
+        46,
+        136,
+        152,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1462,18 +2237,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "459c8ee50a830350952909e2cffffbdd2c3089276d328837686193ce4a06f8fa",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        228,
+        382
+      ],
+      "sourceLandmark": [
+        228,
+        285
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        142.0,
+        233.0
+      ],
+      "renderedAnchor": [
+        127.61728395061728,
+        240.0
+      ],
       "index": 24,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        43,
-        77,
-        213,
+        61,
+        130,
+        175,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 9,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1506,18 +2313,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "31316663ee17ea30aad2c3ddac7cf26e4ff7528d534cfc0f09951184816a0ed4",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        195,
+        382
+      ],
+      "sourceLandmark": [
+        195,
+        295
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        152.0,
+        202.0
+      ],
+      "renderedAnchor": [
+        128.45816733067727,
+        240.0
+      ],
       "index": 25,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        40,
-        99,
-        216,
+        57,
+        145,
+        175,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1550,18 +2389,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "040ee9a8c8d7a377c05e8314441608a4594efb6dc4c798ac5f2831a3d1dfe21f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        170,
+        380
+      ],
+      "sourceLandmark": [
+        170,
+        320
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        152.0,
+        145.0
+      ],
+      "renderedAnchor": [
+        128.3018181818182,
+        240.0
+      ],
       "index": 26,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        32,
-        138,
-        224,
+        57,
+        172,
+        186,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 9,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1594,18 +2465,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b622f2aa51f2fc6c1cbe052d9c9c77e3ab895a10ed5fa08182a81fa4684ea298",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        155,
+        380
+      ],
+      "sourceLandmark": [
+        155,
+        330
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        152.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        127.725,
+        240.0
+      ],
       "index": 27,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        16,
-        169,
-        240,
+        56,
+        192,
+        207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 15,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1638,18 +2541,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "44ca0038cf5e2efed2653ef14ae791d0aeb0b16207534bc232f058380a1b8f12",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        200,
+        278
+      ],
+      "sourceLandmark": [
+        200,
+        220
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        114.0,
+        85.0
+      ],
+      "renderedAnchor": [
+        128.486301369863,
+        240.0
+      ],
       "index": 28,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        26,
-        181,
-        230,
+        75,
+        200,
+        212,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 31,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1682,18 +2617,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "cc8d7b22b000d445390ab431f4ef195b3b27c3974c46b8170ccaedd4b29b38dc",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        180,
+        278
+      ],
+      "sourceLandmark": [
+        180,
+        220
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        119.0,
+        85.0
+      ],
+      "renderedAnchor": [
+        128.14788732394368,
+        240.0
+      ],
       "index": 29,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        28,
-        181,
-        227,
+        72,
+        200,
+        206,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1726,18 +2693,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d258a42abb41342268544e81fb01f6e5ded1fb25df4a8ddc32edbab30c3d7105",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        175,
+        277
+      ],
+      "sourceLandmark": [
+        175,
+        220
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        149.0,
+        83.0
+      ],
+      "renderedAnchor": [
+        128.17747440273038,
+        240.0
+      ],
       "index": 30,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        26,
-        182,
-        231,
+        58,
+        201,
+        196,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 25,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1770,18 +2769,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "0c05c91244bc19def23b8840da4738492d07a5bec0d1305aed191bb5b92dc3c3",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        172,
+        277
+      ],
+      "sourceLandmark": [
+        172,
+        220
+      ],
+      "sourceAnchorEvidence": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        148.0,
+        83.0
+      ],
+      "renderedAnchor": [
+        128.375,
+        240.0
+      ],
       "index": 31,
-      "scale": 0.7,
-      "sourceScale": 1.0,
-      "appliedScale": 0.7,
+      "scale": 0.504924726,
+      "sourceScale": 0.931649,
+      "appliedScale": 0.470412616,
       "renderedBounds": [
-        27,
-        182,
-        229,
+        59,
+        201,
+        194,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 34,
+        "remainingStrictPixelCount": 0
+      }
     }
   ],
   "validation": {
@@ -1789,466 +2820,510 @@
       {
         "index": 0,
         "alphaBounds": [
-          60,
-          92,
-          197,
-          238
+          71,
+          132,
+          171,
+          239
         ],
-        "foregroundPixels": 3580,
-        "width": 137,
-        "height": 146,
-        "relativeToRowMedian": 0.974547
+        "foregroundPixels": 1994,
+        "width": 100,
+        "height": 107,
+        "relativeToRowMedian": 0.98275
       },
       {
         "index": 1,
         "alphaBounds": [
-          58,
-          92,
-          198,
-          238
+          67,
+          132,
+          169,
+          239
         ],
-        "foregroundPixels": 3672,
-        "width": 140,
-        "height": 146,
-        "relativeToRowMedian": 0.999592
+        "foregroundPixels": 2019,
+        "width": 102,
+        "height": 107,
+        "relativeToRowMedian": 0.995071
       },
       {
         "index": 2,
         "alphaBounds": [
-          58,
-          91,
-          199,
-          238
+          67,
+          132,
+          170,
+          239
         ],
-        "foregroundPixels": 3675,
-        "width": 141,
-        "height": 147,
-        "relativeToRowMedian": 1.000408
+        "foregroundPixels": 2039,
+        "width": 103,
+        "height": 107,
+        "relativeToRowMedian": 1.004929
       },
       {
         "index": 3,
         "alphaBounds": [
-          57,
-          92,
-          199,
-          238
+          67,
+          132,
+          171,
+          239
         ],
-        "foregroundPixels": 3679,
-        "width": 142,
-        "height": 146,
-        "relativeToRowMedian": 1.001497
+        "foregroundPixels": 2055,
+        "width": 104,
+        "height": 107,
+        "relativeToRowMedian": 1.012814
       },
       {
         "index": 4,
         "alphaBounds": [
-          58,
-          92,
-          199,
-          238
+          71,
+          132,
+          174,
+          239
         ],
-        "foregroundPixels": 3653,
-        "width": 141,
-        "height": 146,
-        "relativeToRowMedian": 1.0
+        "foregroundPixels": 2020,
+        "width": 103,
+        "height": 107,
+        "relativeToRowMedian": 1.004475
       },
       {
         "index": 5,
         "alphaBounds": [
-          60,
-          93,
-          197,
-          238
+          70,
+          133,
+          169,
+          239
         ],
-        "foregroundPixels": 3647,
-        "width": 137,
-        "height": 145,
-        "relativeToRowMedian": 0.998358
+        "foregroundPixels": 2001,
+        "width": 99,
+        "height": 106,
+        "relativeToRowMedian": 0.995027
       },
       {
         "index": 6,
         "alphaBounds": [
-          58,
-          92,
-          198,
-          238
+          70,
+          132,
+          172,
+          239
         ],
-        "foregroundPixels": 3659,
-        "width": 140,
-        "height": 146,
-        "relativeToRowMedian": 1.001642
+        "foregroundPixels": 2024,
+        "width": 102,
+        "height": 107,
+        "relativeToRowMedian": 1.006464
       },
       {
         "index": 7,
         "alphaBounds": [
-          60,
-          92,
-          197,
-          238
+          70,
+          133,
+          170,
+          239
         ],
-        "foregroundPixels": 3653,
-        "width": 137,
-        "height": 146,
-        "relativeToRowMedian": 1.0
+        "foregroundPixels": 2002,
+        "width": 100,
+        "height": 106,
+        "relativeToRowMedian": 0.995525
       },
       {
         "index": 8,
         "alphaBounds": [
-          48,
-          93,
-          207,
-          238
+          59,
+          128,
+          181,
+          239
         ],
-        "foregroundPixels": 3533,
-        "width": 159,
-        "height": 145,
-        "relativeToRowMedian": 0.973815
+        "foregroundPixels": 2126,
+        "width": 122,
+        "height": 111,
+        "relativeToRowMedian": 0.975677
       },
       {
         "index": 9,
         "alphaBounds": [
-          50,
-          100,
-          205,
-          238
+          64,
+          133,
+          182,
+          239
         ],
-        "foregroundPixels": 3610,
-        "width": 155,
-        "height": 138,
-        "relativeToRowMedian": 0.995039
+        "foregroundPixels": 2160,
+        "width": 118,
+        "height": 106,
+        "relativeToRowMedian": 0.99128
       },
       {
         "index": 10,
         "alphaBounds": [
-          50,
-          97,
-          206,
-          238
+          60,
+          131,
+          179,
+          239
         ],
-        "foregroundPixels": 3646,
-        "width": 156,
-        "height": 141,
-        "relativeToRowMedian": 1.004961
+        "foregroundPixels": 2198,
+        "width": 119,
+        "height": 108,
+        "relativeToRowMedian": 1.00872
       },
       {
         "index": 11,
         "alphaBounds": [
-          49,
-          96,
-          207,
-          238
+          56,
+          131,
+          177,
+          239
         ],
-        "foregroundPixels": 3756,
-        "width": 158,
-        "height": 142,
-        "relativeToRowMedian": 1.035281
+        "foregroundPixels": 2245,
+        "width": 121,
+        "height": 108,
+        "relativeToRowMedian": 1.030289
       },
       {
         "index": 12,
         "alphaBounds": [
-          49,
-          99,
-          207,
-          238
+          63,
+          133,
+          184,
+          239
         ],
-        "foregroundPixels": 3649,
-        "width": 158,
-        "height": 139,
-        "relativeToRowMedian": 1.009685
+        "foregroundPixels": 2185,
+        "width": 121,
+        "height": 106,
+        "relativeToRowMedian": 1.003214
       },
       {
         "index": 13,
         "alphaBounds": [
-          50,
-          101,
-          206,
-          238
+          62,
+          134,
+          181,
+          239
         ],
-        "foregroundPixels": 3698,
-        "width": 156,
-        "height": 137,
-        "relativeToRowMedian": 1.023243
+        "foregroundPixels": 2240,
+        "width": 119,
+        "height": 105,
+        "relativeToRowMedian": 1.028466
       },
       {
         "index": 14,
         "alphaBounds": [
-          48,
-          101,
-          207,
-          238
+          60,
+          134,
+          182,
+          239
         ],
-        "foregroundPixels": 3571,
-        "width": 159,
-        "height": 137,
-        "relativeToRowMedian": 0.988102
+        "foregroundPixels": 2133,
+        "width": 122,
+        "height": 105,
+        "relativeToRowMedian": 0.979339
       },
       {
         "index": 15,
         "alphaBounds": [
-          48,
-          100,
-          208,
-          238
+          57,
+          133,
+          179,
+          239
         ],
-        "foregroundPixels": 3579,
-        "width": 160,
-        "height": 138,
-        "relativeToRowMedian": 0.990315
+        "foregroundPixels": 2171,
+        "width": 122,
+        "height": 106,
+        "relativeToRowMedian": 0.996786
       },
       {
         "index": 16,
         "alphaBounds": [
-          65,
-          124,
-          191,
-          238
+          58,
+          133,
+          175,
+          239
         ],
-        "foregroundPixels": 2411,
-        "width": 126,
-        "height": 114,
-        "relativeToRowMedian": 0.926061
+        "foregroundPixels": 2094,
+        "width": 117,
+        "height": 106,
+        "relativeToRowMedian": 0.926549
       },
       {
         "index": 17,
         "alphaBounds": [
-          66,
-          134,
-          191,
-          238
+          41,
+          142,
+          157,
+          239
         ],
-        "foregroundPixels": 2710,
-        "width": 125,
-        "height": 104,
-        "relativeToRowMedian": 1.040906
+        "foregroundPixels": 2340,
+        "width": 116,
+        "height": 97,
+        "relativeToRowMedian": 1.035398
       },
       {
         "index": 18,
         "alphaBounds": [
-          58,
-          93,
-          198,
-          238
+          20,
+          105,
+          150,
+          239
         ],
-        "foregroundPixels": 2967,
-        "width": 140,
-        "height": 145,
-        "relativeToRowMedian": 1.13962
+        "foregroundPixels": 2553,
+        "width": 130,
+        "height": 134,
+        "relativeToRowMedian": 1.129646
       },
       {
         "index": 19,
         "alphaBounds": [
-          32,
-          148,
-          225,
+          19,
+          154,
+          198,
           238
         ],
-        "foregroundPixels": 2497,
-        "width": 193,
-        "height": 90,
-        "relativeToRowMedian": 0.959094
+        "foregroundPixels": 2180,
+        "width": 179,
+        "height": 84,
+        "relativeToRowMedian": 0.964602
       },
       {
         "index": 20,
         "alphaBounds": [
-          32,
-          150,
-          223,
-          238
+          59,
+          156,
+          234,
+          239
         ],
-        "foregroundPixels": 2630,
-        "width": 191,
-        "height": 88,
-        "relativeToRowMedian": 1.084089
+        "foregroundPixels": 2263,
+        "width": 175,
+        "height": 83,
+        "relativeToRowMedian": 1.087197
       },
       {
         "index": 21,
         "alphaBounds": [
-          60,
-          138,
-          196,
+          56,
+          145,
+          182,
           238
         ],
-        "foregroundPixels": 2634,
-        "width": 136,
-        "height": 100,
-        "relativeToRowMedian": 1.085738
+        "foregroundPixels": 2293,
+        "width": 126,
+        "height": 93,
+        "relativeToRowMedian": 1.101609
       },
       {
         "index": 22,
         "alphaBounds": [
-          69,
-          129,
-          187,
+          54,
+          137,
+          163,
           238
         ],
-        "foregroundPixels": 2222,
-        "width": 118,
-        "height": 109,
-        "relativeToRowMedian": 0.915911
+        "foregroundPixels": 1900,
+        "width": 109,
+        "height": 101,
+        "relativeToRowMedian": 0.912803
       },
       {
         "index": 23,
         "alphaBounds": [
-          72,
-          129,
-          183,
-          238
+          48,
+          137,
+          151,
+          239
         ],
-        "foregroundPixels": 2148,
-        "width": 111,
-        "height": 109,
-        "relativeToRowMedian": 0.885408
+        "foregroundPixels": 1846,
+        "width": 103,
+        "height": 102,
+        "relativeToRowMedian": 0.88686
       },
       {
         "index": 24,
         "alphaBounds": [
-          45,
-          79,
-          211,
-          238
+          62,
+          131,
+          174,
+          239
         ],
-        "foregroundPixels": 4801,
-        "width": 166,
-        "height": 159,
-        "relativeToRowMedian": 0.957519
+        "foregroundPixels": 2287,
+        "width": 112,
+        "height": 108,
+        "relativeToRowMedian": 0.955105
       },
       {
         "index": 25,
         "alphaBounds": [
-          42,
-          101,
-          214,
-          238
+          58,
+          146,
+          174,
+          239
         ],
-        "foregroundPixels": 4727,
-        "width": 172,
-        "height": 137,
-        "relativeToRowMedian": 0.94276
+        "foregroundPixels": 2250,
+        "width": 116,
+        "height": 93,
+        "relativeToRowMedian": 0.939653
       },
       {
         "index": 26,
         "alphaBounds": [
-          34,
-          140,
-          222,
-          238
+          58,
+          173,
+          185,
+          239
         ],
-        "foregroundPixels": 5293,
-        "width": 188,
-        "height": 98,
-        "relativeToRowMedian": 1.055644
+        "foregroundPixels": 2505,
+        "width": 127,
+        "height": 66,
+        "relativeToRowMedian": 1.046147
       },
       {
         "index": 27,
         "alphaBounds": [
-          18,
-          171,
-          238,
-          238
+          57,
+          193,
+          206,
+          239
         ],
-        "foregroundPixels": 5227,
-        "width": 220,
-        "height": 67,
-        "relativeToRowMedian": 1.042481
+        "foregroundPixels": 2502,
+        "width": 149,
+        "height": 46,
+        "relativeToRowMedian": 1.044895
       },
       {
         "index": 28,
         "alphaBounds": [
-          28,
-          183,
-          228,
-          238
+          76,
+          201,
+          211,
+          239
         ],
-        "foregroundPixels": 5339,
-        "width": 200,
-        "height": 55,
-        "relativeToRowMedian": 0.888648
+        "foregroundPixels": 2538,
+        "width": 135,
+        "height": 38,
+        "relativeToRowMedian": 0.892405
       },
       {
         "index": 29,
         "alphaBounds": [
-          30,
-          183,
-          225,
-          238
+          73,
+          201,
+          205,
+          239
         ],
-        "foregroundPixels": 5842,
-        "width": 195,
-        "height": 55,
-        "relativeToRowMedian": 0.97237
+        "foregroundPixels": 2776,
+        "width": 132,
+        "height": 38,
+        "relativeToRowMedian": 0.97609
       },
       {
         "index": 30,
         "alphaBounds": [
-          28,
-          184,
-          229,
-          238
+          59,
+          202,
+          195,
+          239
         ],
-        "foregroundPixels": 6174,
-        "width": 201,
-        "height": 54,
-        "relativeToRowMedian": 1.02763
+        "foregroundPixels": 2912,
+        "width": 136,
+        "height": 37,
+        "relativeToRowMedian": 1.02391
       },
       {
         "index": 31,
         "alphaBounds": [
-          29,
-          184,
-          227,
-          238
+          60,
+          202,
+          193,
+          239
         ],
-        "foregroundPixels": 6269,
-        "width": 198,
-        "height": 54,
-        "relativeToRowMedian": 1.043442
+        "foregroundPixels": 2921,
+        "width": 133,
+        "height": 37,
+        "relativeToRowMedian": 1.027075
       }
     ],
     "rowMedianForegroundPixels": [
-      3673.5,
-      3653.0,
-      3628.0,
-      3614.0,
-      2603.5,
-      2426.0,
-      5014.0,
-      6008.0
+      2029.0,
+      2011.0,
+      2179.0,
+      2178.0,
+      2260.0,
+      2081.5,
+      2394.5,
+      2844.0
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "72b8beb5ec7caeb00204111b970999a27ca9cf3bac43474da11832c4c5fde957",
-      "4b88e66b1408078a6cdd61675ddadc07c29e4830596601c5a1a2e5dd3f70209e",
-      "5eed24ab5f520739b82dfcb8417c842863967522281f45a28362b704ee2b9044",
-      "94d4e68a335aa78223b1ed55ea1245f306d3c6966fc2d63e37efbd8c96846916",
-      "0644e8f8937a231b8aedead78a3b7858b696479d2bdbebba617daaf6476b8beb",
-      "26002504c5f595781e03042d3c2ad2b911617cff80c617bc34133793ecbc83d3",
-      "13d4c455d6a5f28db3cc18ae338b93c400abdfddd1e28f62030d6aee23cd4ee0",
-      "189cadad5dd87ffb43c911b232de426bed4880a0ed0f2557acc9dad9c50c8d07",
-      "7b55be4c29fb241769fe4403efe77d4bd8089774d20cd593f906ec9c7ccf6f5d",
-      "10871ce118fc12299b3191c96a9d3267c79a6248c4aba93d184c9276df173d53",
-      "96fc78951420ed9c9be959cd877ac90e6789c42858f50195e382fde0d60019f3",
-      "6aadaced9cf2e7d667aa6e856a1f7bcb24972dd26ccb0e529b857035e285ab04",
-      "c2de34fbaa31e6c22ea3eb808a4b0b238202d10c3780a3c3a1568de020f8a775",
-      "15cc5afc7ff00a26d6c4acb56b4fe301531a9ca442fb91afcdd5ab0d9b03800c",
-      "4a16fa8eeef653755b7cfff6f7e05ee14032e59fc0745e130bbfb64015366cab",
-      "6f42eb24458a2630e23bd31be3122226b0908216b5eaa42175f8d91e98eabb56",
-      "3f13d0175c661145124e27ab6fc3a308baa067b0cbd2089ce6c652013a0df202",
-      "591b020b07202a7b6007f49b3ffdad81fd718365596b00f0e62ec12dd0c4bdd3",
-      "d1eaf29d50ab05faf4ac1aba428df80bfe35fda3683c5e82866847a6d11ef1fc",
-      "0c9f6b8e750ef3b64f8490bf5e56678715bb04c573ae9b881baf485c8181156e",
-      "33becda71536bac5531c5f7f0ad4f9fb5ef0964719bb5dd280ded04fab32e74c",
-      "c0c238db61d13d89c2425c11dee971f56e8f03275a343f3fcd2a19ce71de2238",
-      "cf5f89117c207dd3857d84130c8d4762fa6dbafed065cd074af09e3b16a62efa",
-      "5e06779fba68e1b3831ee1b885c6c2297106d41f98d8ba9287f1fc736c0aeb23",
-      "5001d87fdced50edcb8fb1276abb521ff49d31aee8efb0c80217050f36c2dc78",
-      "c79d926ce5d47b5dbb2900306a6e3ac85cbc52cb923d8b12ab7ebb37cf254b72",
-      "0d3f44b7fcb3e26cd2667b7895b7274e0d123c95d625ce5c4668e80363a49eab",
-      "b278a7179af275ee79e85c55a643d11dd0b5a60703c0381ebcc553429186a7ae",
-      "32ad597197fdc290288cecc4cb3a7d80a9506cc613042995454470c83a5faed0",
-      "4adf6a882bc723bb86f082814b84ffe113b80fb3921bb7045e6648d2f2daed5f",
-      "8ab380a5f39597edb49dcefc06589c2a3c5544452b95446f0659a8f7ffc59ebc",
-      "8f799eedb7372f0892861185d056c592026a87a6cb573f36c1439b19dcbcc0fc"
+      "0dcb6132e9564ee1129e3588efd3127a4e47b135b06f3a448059f279290b6e09",
+      "3a4b4a9f1b670fc7e1db93319dc382676afe5c15c4b522524aea183baffc9e8d",
+      "bb9a46cc687b85b7007ddcb5ef8f29c921122553ab8031eba90ca59a0a168e2a",
+      "ca6db3537041830df25cdee571c1fd10f63834ca4cadf8385e5ff4f826fbb37e",
+      "6097e153d161d42a890c90d9dd66bfe195a1862b108a656bc3da57836f9dadcf",
+      "8581850079bd251bdd07b4b96a657b946977d2dfc817df6f6e5df8072a3dcf64",
+      "e575dc39634e8039551bce8ce79059f5f0b7060c94f3c8c08ec60fd229eb6390",
+      "a37d0c7b04c4bf6e004d03bc79f199ae6aff0fc3b34e2a155fb33bca03dedc36",
+      "43ad6ca5d2c45e8851326277d49ca7f45d5e4b5e80fd2ecb1c9efcc0314c6834",
+      "2cb78c66c33b92b34284daf079812a2f80030d9fdc5fd1eaafe81b79be028607",
+      "ddd232b9baf34dacf545b85fa1307e776a95aafe13c0e8ade13ca6bc3de8534a",
+      "17143d736b03389d167058e9aff414143a7630b3d64c3bb1bbdb426e310bd6a2",
+      "e717f2bc10744df898c493f5e18bac338666fde098cb915b3cc15a3b480b7a40",
+      "0a07c12200bd7d4804eac7baedbcf20f170ce5ffe2575f21bc3fa5e4d297d010",
+      "012e102b0403f5714670b2c76765b8e7faa016ca0334aaac2d67286251541db4",
+      "8f692e2df48a0b1b9fdf4abf13bc63e4027c003b5cca7041d4ff8b167861eeaa",
+      "3a1b8b087fef97740b6deccbea35efb457057194d2cc024c5a890d818b3b833a",
+      "7e8630ea18762c777c26773373446d42de0d7fd8e65c210797a0c761d4eb4d97",
+      "c1c41fd02bb7cbb8a7a6ba24fff452dea346aa7e3edef57ac638dab9d5208df8",
+      "fdc6332eb82fcf36c08380e4e1d32be9fb11d7a8da67123a4671a61a598583b8",
+      "ac2bb31dc1389cca182120a946a345004d220556dd46edb66f08493bebc9c89a",
+      "0205ade0eccddfd91380fd851bed0f1b1783ee09467cf23a9a7901f4ee4b4cd4",
+      "18dacf789da5ef85292fbbd7c5eeb0d0018865f44ba2d44a254035ec2f3e1591",
+      "bc8214f9da692c38f2ef5baba45fbb8331b692eca582d69a027d67bea2e327cc",
+      "da5028029a6509541d3fe1e7771af911ec3d5c17c42399a94cc794999ada1b58",
+      "64d18b95c8b2a79434f0fd356d928dd4b559ff93ea8e96d35a9b52e34b947878",
+      "61ca1fc9821ac8b654ba866f4ba512b101be22520bf25f2ee755168a7b06b33a",
+      "b5c36542d0b87b8439d6c962090c0726a72d43750bef12c781a059f43e1db04e",
+      "d46611d2210a4f2baf3cd196da343c483736ac48d85f46345bb4d93558ff5552",
+      "a512bffc536e4a47f9727153a3d631767f756a5929a27bbf8f8315d26b7f1899",
+      "c3b800336fe8306d78df8799df5a6df397be7070fc0d7a4c24e0ab420b9b00d1",
+      "d9db77b1ba4d4c1eae0b9fcdafeed9482e043621bb3ff870cb50e021bde8d30e"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/V66_BATCH_003_SCALE_REVIEW.json",
+    "sha256": "72e2c9eb391696e8414b6f64d880c86d3df796f9e70eee0da6d71ce695e5ec76",
+    "status": "reviewed",
+    "profileId": "enemy-037-neomorph",
+    "reviewer": "Codex finish_source_review",
+    "reviewedAt": "2026-09-01",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.050117,
+      "attack": 1.278109,
+      "death": 0.931649
+    },
+    "sourceSha256ByClip": {
+      "idle": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+      "move": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb",
+      "attack": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+      "death": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0"
+    },
+    "measurementCount": 12,
+    "evidence": [
+      {
+        "path": "docs/references/v66-worklot-001-neomorph-qa/cranial-chords.jpg",
+        "sha256": "2b874313a0439186b8f1c1cf605dd6107a4275af1718db9aea46e7d7898b7406"
+      }
+    ]
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 162,
+    "remainingStrictPixelCount": 0
   }
 }

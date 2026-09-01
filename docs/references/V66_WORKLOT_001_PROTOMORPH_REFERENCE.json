@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "profiles": {
+    "enemy-038-protomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-covenant",
+        "https://www.mpcvfx.com/en/filmography/alien-covenant/",
+        "https://vfxblog.com/2017/06/09/practical-creature-effects-alien-covenant/",
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.avpgalaxy.net/website/interviews/colin-shulver/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/protomorph-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png"
+      ],
+      "designLock": "Project-internal Protomorph label for the final adult Alien: Covenant creature lineage. The final film/VFX creature is described by MPC and the effects team as the Xenomorph; concept artist Colin Shulver reports that the production design work was called Protomorph. Do not present Protomorph as the official on-screen species name or promise a pixel-exact reconstruction. Preserve an approximately nine-foot/2.5-metre visual impression translated to gameplay scale: impossibly tall and very lean but still powerful, with a narrow waist, exposed rib cage, long sinewy arms, large clawed hands, long multi-jointed predatory legs and a hunched forward hunter posture. Exactly two arms and two legs. Eyeless elongated swept cranial dome, hard jaw, ivory teeth and a readable secondary inner jaw. Thin wet fascia over visible ribs, bone landmarks and sliding muscle; red-black, dark maroon, charcoal and bone palette with patchy wet highlights, not a solid blue-black metal shell. A long articulated organic tail must remain visibly connected at the sacrum in every frame and taper to one sharp tip. Exactly four principal dorsal tubes/processes remain attached to the upper back with stable count, shape and spacing across every clip. Strict orthographic right-facing gameplay profile; full dome, hands, feet, dorsal processes and entire tail inside every cell. Movement is contained, economical and observant at rest, then capable of a sudden great-cat/ape-like burst; head accents may use restrained bird/insect stabilization. Distinguish it from the pale ivory Neomorph with soft skin, sensory head and solid dorsal spines; from the tail-less, tube-less blue Deacon with a pointed mitre skull; and from the 1979 Big Chap's dominant blue-black biomechanical pipes, rigid suit-like mass and cleaner mechanical surface grammar. Retain Alien-family recognition without turning this Covenant form into Big Chap, a Queen, a Deacon or a Neomorph. No eyes, armor, clothing, technology, weapon, extra limbs, Queen crest, white skin, neon color, mechanical implant or magenta/pink anatomy. The V56 project sheet is a silhouette, palette and four-phase motion anchor only; it does not override the reviewed Covenant anatomy and must not be copied frame-for-frame.",
+      "reviewer": "Codex finish_source_review; 20th Century film page, MPC production page, Odd Studio creature-effects interview, MPC/Framestore VFX interview and Colin Shulver concept interview inspected; V56 raw and normalized project sheets visually reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    }
+  },
+  "evidence": [
+    {
+      "path": "assets/openai/sprites/enemies/protomorph-action-sheet-v56.png",
+      "sha256": "d11477e11b25ae4143aa3f91301e1af62dc4ed05a8222fb6a4939588a26572d2",
+      "role": "Existing project-generated 1254x1254 RGBA predecessor. Identity and motion reference only; not a V66 source board and no embedded prompt/provenance receipt was found."
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+      "sha256": "103633e135b17b7f74f3e86e05dfe846c45f9a7e304a3a4d3232f9cd9bae40e4",
+      "role": "Existing 1024x1024 transparent 4x4 gameplay predecessor with idle/chase/attack/death rows. Use only to preserve the project's red-black flayed silhouette and broad motion intent."
+    }
+  ],
+  "researchNote": "Authoritative film and effects sources were inspected as design evidence. No external film frame, concept art or licensed bitmap was downloaded, copied or used as a generation input during this reference-only phase.",
+  "reviewStatus": "Reference and design lock reviewed only. No ImageGen call was made. The current queue still requires this fragment to be merged and reinitialized before its BLOCKED prompts can become generation contracts; no generated art is accepted or runtime-integrated."
+}

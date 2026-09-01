@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-derived-content-sha256:69f8cc60fe0b2f60eceb5cfd422543f9d4564f8105896f4021e59104bf9c95ce",
+  "providerGenerationIdReturned": false,
+  "generationIdStatus": "not-exposed-by-built-in-response",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "referenceLockSha256": "56c4bdcddae8a57affec5974f67aa25849359f99254ef74d8cf5fdded4bbeeff",
+  "queuePromptSha256": "7848f80bab0c3a2b4313350423cd1990c04cb3d0b1c68e894b3f9e3421f38320",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/idle.txt",
+  "actualPromptFileSha256": "a643d3f9e092f2371639f1b1fb4ae33a34f038867830527066184e768530259b",
+  "repairPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/idle.repair.txt",
+  "repairPromptFileSha256": "000d2de1f8c11a2c19f54a98d8ecdca4b3cacea400c41b40eaa5de9bf670c750",
+  "sourceSha256": "69f8cc60fe0b2f60eceb5cfd422543f9d4564f8105896f4021e59104bf9c95ce",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/idle.png",
+  "candidateSelected": true,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "sourceRepairs": [
+    {
+      "kind": "imagegen-canvas-repair",
+      "inputRetained": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/idle-r3-nonuniform-magenta-5x4.png",
+      "outputRetained": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/idle-r4-repaired-unflattened.png",
+      "result": "1774x887 exact 2:1 canvas with four-by-two square-cell layout",
+      "pixelPreserving": false
+    },
+    {
+      "kind": "deterministic-border-connected-magenta-flatten",
+      "backgroundPixelsFlattened": 1414575,
+      "backgroundPixelsChanged": 1414535,
+      "nonBackgroundPixelsPreserved": 158963,
+      "result": "All border-connected magenta background pixels replaced by opaque RGB #FF00FF; character pixels outside the mask preserved byte-for-byte."
+    },
+    {
+      "kind": "deterministic-cell-translation",
+      "frames": [4, 5, 6, 7],
+      "translation": [0, 52],
+      "sourceSupportY": 376,
+      "targetSupportY": 428,
+      "pixelValuesPreserved": true,
+      "result": "All eight nominal cells now share the same local support pixel y=428."
+    }
+  ],
+  "note": "Source candidate only. The exact queue prompt was used for generation; a documented ImageGen canvas repair and deterministic source-only background/placement corrections were required. No acceptance, normalization or runtime integration is implied."
+}

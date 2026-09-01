@@ -11,9 +11,11 @@ export const QUEUE_PATH = 'docs/references/V66_ENEMY_BATCH_QUEUE.json';
 export const STATE_PATH = 'docs/references/V66_ENEMY_BATCH_STATE.json';
 export const REFERENCES_PATH = 'docs/references/V66_ENEMY_BATCH_REFERENCES.json';
 export const REVIEW_CHECKS = Object.freeze(['identity', 'anatomy', 'direction', 'scale', 'clipSemantics', 'continuity', 'alpha', 'cellBounds']);
+export const GENERATION_EVENT_KINDS = Object.freeze(['generated', 'generated-and-source-repaired', 'generated-candidate-selected']);
 const pad = (value) => String(value).padStart(3, '0');
 const fileHash = async (path) => createHash('sha256').update(await readFile(path)).digest('hex');
 const fileExists = async (path) => { try { await access(path); return true; } catch { return false; } };
+const isGenerationEvent = (event) => GENERATION_EVENT_KINDS.includes(event.kind);
 export function scopedPath(root, path) {
   if (typeof path !== 'string' || !path.trim() || isAbsolute(path) || path.includes('\\')) throw new Error(`Expected a repository-relative path: ${path}`);
   const target = resolve(root, path.replace(/^\//, ''));
@@ -124,15 +126,72 @@ export async function initializeEnemyBatchQueue({ root = ROOT, catalog = ENEMIES
 
 function eventsFor(state, profileId) { return state.events.filter((event) => event.profileId === profileId); }
 function requireActor(event) {
-  if (!String(event.actor || '').trim() || !String(event.note || '').trim()) throw new Error('Every production decision requires an actor and a meaningful note.');
+  const decisionNote = event.kind === 'generated-candidate-selected' ? event.selectionStatus : event.note;
+  if (!String(event.actor || '').trim() || !String(decisionNote || '').trim()) throw new Error('Every production decision requires an actor and a meaningful note or selection status.');
+}
+async function validateOptionalFileHash(event, pathKey, hashKey, root, label) {
+  if (event[hashKey] === undefined) return;
+  if (!String(event[pathKey] || '').trim()) throw new Error(`${label} SHA-256 requires its repository-relative path.`);
+  if (!/^[a-f0-9]{64}$/.test(event[hashKey]) || event[hashKey] !== await fileHash(scopedPath(root, event[pathKey]))) throw new Error(`${label} file changed or its SHA-256 is invalid.`);
+}
+async function validateRepairedGenerationEvent(event, root) {
+  if (!Array.isArray(event.sourceRepairs) || !event.sourceRepairs.length) throw new Error('A repaired generated clip needs non-empty sourceRepairs provenance.');
+  if (event.sourceRepairs.some((repair) => !repair || typeof repair !== 'object' || Array.isArray(repair) || !String(repair.kind || '').trim() || !String(repair.result || '').trim())) throw new Error('Every source repair needs a documented kind and result.');
+  const hasRepairPromptPath = event.repairPromptPath !== undefined;
+  const hasRepairPromptHash = event.repairPromptFileSha256 !== undefined;
+  if (hasRepairPromptPath !== hasRepairPromptHash) throw new Error('Repair prompt provenance requires both path and SHA-256 when documented.');
+  await validateOptionalFileHash(event, 'repairPromptPath', 'repairPromptFileSha256', root, 'Repair prompt');
+  const repairFilePairs = [
+    ['inputPath', 'inputSha256', 'Repair input'],
+    ['outputPath', 'outputSha256', 'Repair output'],
+    ['receiptPath', 'receiptSha256', 'Repair receipt'],
+    ['path', 'sha256', 'Repair file']
+  ];
+  for (const [index, repair] of event.sourceRepairs.entries()) {
+    for (const [pathKey, hashKey, label] of repairFilePairs) {
+      const hasPath = repair[pathKey] !== undefined;
+      const hasHash = repair[hashKey] !== undefined;
+      if (hasPath !== hasHash) throw new Error(`Source repair ${index + 1} requires both ${pathKey} and ${hashKey} when either is documented.`);
+      if (hasPath) await validateOptionalFileHash(repair, pathKey, hashKey, root, `${label} for source repair ${index + 1}`);
+    }
+  }
+}
+async function validateSelectedCandidateEvent(event, root) {
+  if (!Number.isInteger(event.iteration) || event.iteration < 1) throw new Error('A selected generated candidate needs a positive iteration number.');
+  if (!String(event.selectionStatus || '').startsWith('selected-')) throw new Error('A selected generated candidate needs explicit selectionStatus provenance.');
+  if (!String(event.promptDocumentPath || '').trim() || event.promptDocumentSha256 === undefined) throw new Error('Selected candidate prompt provenance requires both document path and SHA-256.');
+  await validateOptionalFileHash(event, 'promptDocumentPath', 'promptDocumentSha256', root, 'Selected candidate prompt document');
+  if (event.promptSha256 !== event.promptDocumentSha256) throw new Error('Selected candidate prompt SHA-256 differs from its documented prompt file.');
+  if (event.actualPromptText !== await readFile(scopedPath(root, event.promptDocumentPath), 'utf8')) throw new Error('Selected candidate prompt text changed since generation.');
+  if (event.providerGenerationIdReturned === false && !String(event.generationIdProvenance || '').trim()) throw new Error('Selected candidate needs generation ID provenance when the provider returned no ID.');
+  if (!String(event.persistence || '').trim()) throw new Error('Selected candidate needs source persistence provenance.');
+  if (event.accepted !== false || event.runtimeIntegrated !== false || event.canonExact !== false) throw new Error('Candidate selection must explicitly remain unaccepted, unintegrated and non-canon-exact.');
+  const source = await readFile(scopedPath(root, event.sourcePath));
+  if (!Number.isInteger(event.sourceBytes) || event.sourceBytes !== source.byteLength) throw new Error('Selected candidate source byte count does not match the active source.');
+  if (event.inputImages !== undefined) {
+    if (!Array.isArray(event.inputImages) || !event.inputImages.length) throw new Error('Selected candidate inputImages provenance must be a non-empty array when documented.');
+    for (const input of event.inputImages) {
+      if (!String(input?.role || '').trim() || !String(input?.path || '').trim() || input.sha256 === undefined) throw new Error('Every selected candidate input image needs role, path and SHA-256 provenance.');
+      await validateOptionalFileHash(input, 'path', 'sha256', root, 'Selected candidate input image');
+    }
+  }
 }
 async function validateGeneratedEvent(job, event, root) {
   const spec = job.clips.find((clip) => clip.id === event.clipId);
   if (!spec || event.provider !== 'OpenAI ImageGen' || !String(event.generationId || '').trim()) throw new Error('A generated clip needs a known clip, actual OpenAI provider and generation ID.');
   if (event.contractPromptSha256 !== spec.promptSha256 || event.referenceLockSha256 !== job.referenceLockSha256) throw new Error('Generated clip uses a stale contract or reference lock.');
-  if (!String(event.actualPromptText || '').trim() || event.promptSha256 !== contentHash(event.actualPromptText)) throw new Error('Actual ImageGen prompt provenance is missing or changed.');
+  if (event.queuePromptSha256 !== undefined && event.queuePromptSha256 !== spec.promptSha256) throw new Error('Documented queue prompt SHA-256 does not match the current clip contract.');
+  let promptSha256Matches = event.kind === 'generated-candidate-selected'
+    ? event.promptSha256 === event.promptDocumentSha256
+    : event.promptSha256 === contentHash(event.actualPromptText);
+  if (!promptSha256Matches && event.actualPromptPath) promptSha256Matches = event.promptSha256 === await fileHash(scopedPath(root, event.actualPromptPath));
+  if (!String(event.actualPromptText || '').trim() || !promptSha256Matches) throw new Error('Actual ImageGen prompt provenance is missing or changed.');
   if (event.actualPromptPath && event.actualPromptText !== await readFile(scopedPath(root, event.actualPromptPath), 'utf8')) throw new Error('Actual prompt file changed since generation.');
+  await validateOptionalFileHash(event, 'actualPromptPath', 'actualPromptFileSha256', root, 'Actual prompt');
+  if (event.savedSourcePath !== undefined && event.savedSourcePath !== spec.sourcePath) throw new Error('Documented saved source path is not the active clip source.');
   if (event.sourcePath !== spec.sourcePath || event.sourceSha256 !== await fileHash(scopedPath(root, spec.sourcePath))) throw new Error(`Generated source missing or changed: ${spec.sourcePath}`);
+  if (event.kind === 'generated-and-source-repaired') await validateRepairedGenerationEvent(event, root);
+  if (event.kind === 'generated-candidate-selected') await validateSelectedCandidateEvent(event, root);
 }
 async function acceptedEvidence(job, event, root) {
   if (REVIEW_CHECKS.some((key) => event.review?.[key] !== true)) throw new Error('Acceptance requires explicit visual review of every identity and animation criterion.');
@@ -161,7 +220,7 @@ export async function getJobStatus(job, state, root = ROOT) {
   const events = eventsFor(state, job.profileId);
   const generated = new Map();
   const issues = [];
-  const latestGeneration = new Map(events.filter((entry) => entry.kind === 'generated').map((event) => [event.clipId, event]));
+  const latestGeneration = new Map(events.filter(isGenerationEvent).map((event) => [event.clipId, event]));
   for (const event of latestGeneration.values()) {
     try { await validateGeneratedEvent(job, event, root); generated.set(event.clipId, event); } catch (error) { issues.push(error.message); }
   }
@@ -192,24 +251,52 @@ export async function appendProductionEvent(queue, state, source, root = ROOT) {
   if (!job || !job.reference) throw new Error('A reviewed reference and a known production job are required.');
   requireActor(source);
   const event = { ...source, at: source.at || new Date().toISOString() };
-  if (event.kind === 'generated') {
+  if (isGenerationEvent(event)) {
     const spec = job.clips.find((clip) => clip.id === event.clipId);
     if (!spec) throw new Error('Unknown animation clip.');
+    if (event.kind === 'generated-and-source-repaired') {
+      if (!String(event.actualPromptText || '').trim() && !String(event.actualPromptPath || '').trim()) throw new Error('A repaired generated clip requires actualPromptText or actualPromptPath provenance.');
+      if (event.sourcePath === undefined && event.savedSourcePath === undefined) throw new Error('A repaired generated clip must document the active source path.');
+      if (event.sourceSha256 === undefined) throw new Error('A repaired generated clip must document the active source SHA-256.');
+    }
+    if (event.kind === 'generated-candidate-selected') {
+      if (!String(event.promptDocumentPath || '').trim()) throw new Error('A selected generated candidate requires promptDocumentPath provenance.');
+      if (event.sourcePath === undefined && event.savedSourcePath === undefined) throw new Error('A selected generated candidate must document the active source path.');
+      if (event.sourceSha256 === undefined) throw new Error('A selected generated candidate must document the active source SHA-256.');
+    }
     const sourceSha256 = await fileHash(scopedPath(root, spec.sourcePath));
     // A saved generation receipt must not be rebound to replacement pixels.
     // Older receipts without an explicit hash retain the original import path.
+    if (event.sourcePath !== undefined && event.sourcePath !== spec.sourcePath) throw new Error('Supplied source path does not match the active clip source.');
+    if (event.savedSourcePath !== undefined && event.savedSourcePath !== spec.sourcePath) throw new Error('Supplied saved source path does not match the active clip source.');
     if (event.sourceSha256 !== undefined && event.sourceSha256 !== sourceSha256) throw new Error('Supplied source SHA-256 does not match the current clip source.');
+    if (event.contractPromptSha256 !== undefined && event.contractPromptSha256 !== spec.promptSha256) throw new Error('Supplied contract prompt SHA-256 is stale.');
+    if (event.queuePromptSha256 !== undefined && event.queuePromptSha256 !== spec.promptSha256) throw new Error('Supplied queue prompt SHA-256 is stale.');
+    if (event.referenceLockSha256 !== undefined && event.referenceLockSha256 !== job.referenceLockSha256) throw new Error('Supplied reference lock SHA-256 is stale.');
     event.sourcePath = spec.sourcePath;
     event.sourceSha256 = sourceSha256;
     event.contractPromptSha256 = spec.promptSha256;
-    if (event.actualPromptPath) {
+    if (event.kind === 'generated-candidate-selected') {
+      if (event.actualPromptPath !== undefined && event.actualPromptPath !== event.promptDocumentPath) throw new Error('Selected candidate actualPromptPath differs from promptDocumentPath.');
+      const promptText = await readFile(scopedPath(root, event.promptDocumentPath), 'utf8');
+      if (event.actualPromptText !== undefined && event.actualPromptText !== promptText) throw new Error('Supplied actual prompt text does not match the selected candidate prompt document.');
+      event.actualPromptText = promptText;
+    } else if (event.actualPromptPath) {
       const promptText = await readFile(scopedPath(root, event.actualPromptPath), 'utf8');
       if (event.actualPromptText !== undefined && event.actualPromptText !== promptText) throw new Error('Supplied actual prompt text does not match the prompt file.');
       event.actualPromptText = promptText;
     }
     if (!event.actualPromptText && event.usedQueuePrompt === true) event.actualPromptText = spec.prompt;
     if (!String(event.actualPromptText || '').trim()) throw new Error('Record the actual ImageGen prompt, or explicitly attest usedQueuePrompt: true.');
-    event.promptSha256 = contentHash(event.actualPromptText);
+    const promptSha256 = contentHash(event.actualPromptText);
+    if (event.kind === 'generated-candidate-selected') {
+      if (event.promptSha256 === undefined || event.promptSha256 !== event.promptDocumentSha256) throw new Error('Selected candidate prompt SHA-256 must retain its documented file hash.');
+    } else {
+      const suppliedPromptSha256 = event.promptSha256;
+      const suppliedHashMatchesFile = event.actualPromptPath && suppliedPromptSha256 === await fileHash(scopedPath(root, event.actualPromptPath));
+      if (suppliedPromptSha256 !== undefined && suppliedPromptSha256 !== promptSha256 && !suppliedHashMatchesFile) throw new Error('Supplied actual prompt SHA-256 does not match the recorded prompt or prompt file.');
+      if (suppliedPromptSha256 === undefined) event.promptSha256 = promptSha256;
+    }
     event.referenceLockSha256 = job.referenceLockSha256;
     await validateGeneratedEvent(job, event, root);
   } else if (event.kind === 'accepted') {
@@ -264,7 +351,7 @@ export async function main(args = process.argv.slice(2)) {
     for (const event of state.events) {
       const known = queue.jobs.find((job) => job.profileId === event.profileId);
       if (!known) throw new Error(`Unknown profile in state: ${event.profileId}`);
-      if (!['generated', 'accepted', 'review-rejected', 'integrated'].includes(event.kind)) throw new Error(`Invalid event kind: ${event.kind}`);
+      if (![...GENERATION_EVENT_KINDS, 'accepted', 'review-rejected', 'integrated'].includes(event.kind)) throw new Error(`Invalid event kind: ${event.kind}`);
       requireActor(event);
       reconstructed.events.push(event);
     }

@@ -1,0 +1,18 @@
+Use case: production 2D side-scroller death animation sprite sheet.
+Input images: Image 1 is the selected idle model sheet; Image 2 is the selected move model sheet; Image 3 is the selected attack model sheet for enemy-035-trilobite-echo. Treat them as immutable identity, palette, material, physical-scale and seven-tentacle topology anchors. Create a NEW irreversible death sequence of the exact same creature.
+
+Create ONE exact 2:1 landscape sprite sheet for Aliens: Tantalus Frontier, animation death, with an invisible 4-column by 2-row grid and exactly eight individually authored chronological poses in strict row-major order.
+
+Identity lock: original Tantalus PROJECT_ADAPTATION Trilobite Echo, pale milky-ivory and restrained rose-gray wet low central mantle with subtle veins, arcade sprite rendering and strict orthographic gameplay profile facing RIGHT. Preserve the same mantle length, thickness, hub and small anterior implantation bulb. No head, eyes, mouth, shell, xenomorph traits, humanoid anatomy or redesign.
+
+IMMUTABLE ATTACHED TOPOLOGY THROUGH THE ENTIRE DEATH: exactly SEVEN primary tentacles in every pose = exactly FIVE upper primaries plus exactly TWO lower primaries. All seven remain physically attached to the same basal hub until and including the final motionless frame. Every shaft stays continuous, non-branching, non-fused and anatomically accountable from its root or natural mantle occlusion to one complete tip. No limb may detach, dissolve, disappear behind the corpse, merge into a pile, split, spawn, swap position or become gore. The five upper paths and five tips remain countable even while folding; the two lower paths and two tips remain countable even after support fails. The compact anterior bulb remains separate and closed in all eight poses; no implantation nub.
+
+Death chronology: pose 1 lethal impact with the creature still supported; 2 sharp recoil without losing a limb; 3 the first existing support flexes and fails; 4 the mantle visibly drops while all seven remain attached; 5 the remaining supports release sequentially; 6 the intact mantle impacts the ground with all seven limbs still connected; 7 all five upper and two lower primaries slacken and curl inward without tangling or fusing; 8 terminal motionless low heap, all seven attached paths and tips still individually accountable. One-way collapse only—no recovery, idle reset, explosion, melting, dismemberment, detached gore, camera change or turnaround.
+
+Keep the central mantle's anatomical size and tissue identity consistent with the three anchors. During collapse the body may rotate downward only within the strict right-facing lateral gameplay read; the anterior bulb remains on the right side. Maintain the same clockwise limb order around the hub.
+
+HARD CELL GEOMETRY: one complete corpse/creature wholly inside each nominal cell. Even the widest collapse occupies no more than 82 percent of cell width and 68 percent of cell height. Keep at least 30 pixels of clean magenta at every left/right boundary and at least 25 pixels at top/bottom. No anatomical contact with cell boundaries, no cross-cell component, no crop and no detached fragment.
+
+Perfect flat opaque magenta background with fully magenta edges and gutters. Absolutely no cast shadow, contact shadow, floor, ground line, blood pool, gore, smoke, flash, glow, effects, scenery, checkerboard, grid lines, text, labels, UI, logo or watermark.
+
+Final mandatory audit for poses 1–8: count exactly five attached upper paths/tips; count exactly two attached lower paths/tips; total seven; verify the closed bulb remains separate; verify progressive irreversible support loss; verify final frame is motionless but intact; verify no cell contact and strict right-facing identity.

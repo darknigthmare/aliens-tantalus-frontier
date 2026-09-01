@@ -1,0 +1,14 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-038-protomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "openai-imagegen-content-sha256:8255f7f6d9943a45d03ebc0598383243cf6fc7ef7858dc7ab313dac0436940a7",
+  "providerGenerationIdReturned": false,
+  "actor": "Codex /root",
+  "sourceSha256": "8255f7f6d9943a45d03ebc0598383243cf6fc7ef7858dc7ab313dac0436940a7",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-038-protomorph/attack.png",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-038-protomorph/attack.txt",
+  "candidateSelected": true,
+  "note": "Content-addressed local receipt because this ImageGen response exposed image_url but no provider generation identifier. Eight distinct compact attack poses; strict profile preserves three visible dorsal tubes with the fourth on the far side. Safe ownership, roots, scale and playback review remain required."
+}

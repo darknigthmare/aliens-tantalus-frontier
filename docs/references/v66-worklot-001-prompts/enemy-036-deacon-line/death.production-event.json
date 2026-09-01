@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "death",
+  "provider": "OpenAI ImageGen",
+  "generationId": "sha256:6b3f8f9ffb5cae7347b8ea7d2262907cb7269af6d06c4fdf513ee8f195ff8032",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "The provider exposed no durable generation ID; the selected third ImageGen repair PNG SHA-256 identifies this capture.",
+  "actor": "Codex /root/produce_arcology_lurker",
+  "actualPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/death.repair-r3.txt",
+  "actualPromptFileSha256": "7837f987c95dc174d886744c1438a127e66bcd067d5afee2edf60fb61e2d94e2",
+  "repairPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/death.repair-r3.txt",
+  "repairPromptFileSha256": "7837f987c95dc174d886744c1438a127e66bcd067d5afee2edf60fb61e2d94e2",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/death.png",
+  "sourceSha256": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2",
+  "sourceRepairs": [
+    {
+      "kind": "openai-imagegen-repair-capture",
+      "result": "The third ImageGen cell/limb repair is the selected raw revision; the first two rejected revisions remain preserved by the linked receipt.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/death-r3-imagegen-repair-raw-selected.png",
+      "sha256": "6b3f8f9ffb5cae7347b8ea7d2262907cb7269af6d06c4fdf513ee8f195ff8032"
+    },
+    {
+      "kind": "documented-repair-and-deterministic-chain",
+      "result": "The selected ImageGen repair was flattened with 145822 foreground pixels preserved, then two short cross-cell components were reassigned at ownerShare 0.9985593609 and 0.9984664817 and contact-aligned without scaling or retained-pixel changes.",
+      "path": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/death.event.json",
+      "sha256": "9b100211e2864b0b5a6f01968afa002a5d1a4f277d7d0c98b7afcaac21a4de72"
+    },
+    {
+      "kind": "active-master-output",
+      "result": "The repaired 1774x887 4x2 eight-pose source candidate is the active queue source; this does not grant acceptance or runtime integration.",
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/death.png",
+      "sha256": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2"
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Source candidate only. The selected ImageGen repair and every deterministic source transformation are preserved and hash-locked; no acceptance, normalization or runtime status is implied."
+}

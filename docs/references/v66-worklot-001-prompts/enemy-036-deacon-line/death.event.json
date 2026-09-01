@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "batchId": "batch-003",
+  "profileId": "enemy-036-deacon-line",
+  "clip": "death",
+  "status": "candidate-not-accepted",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "normalized": false,
+  "provider": "OpenAI ImageGen",
+  "providerGenerationIdExposed": false,
+  "generationId": "sha256:6b3f8f9ffb5cae7347b8ea7d2262907cb7269af6d06c4fdf513ee8f195ff8032",
+  "exactPromptPath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/death.txt",
+  "queueDeclaredPromptSha256": "18b2870fe784a7fb6f576962981e478f6a660cd27fab593b95e0a99a1cce2c2c",
+  "recomputedPromptSha256": "fac5727cce9eea2b09a47f05157c5781e8775199b1d6bee350ed5b0b3643b1a9",
+  "referenceTransport": {
+    "mode": "recent-conversation-images",
+    "numLastImagesToInclude": 3,
+    "reason": "Local repository image attachment was blocked by the Windows sandbox ACL helper; the visually reviewed idle and prior clip boards were supplied through the ImageGen conversation image context."
+  },
+  "imageGenRaw": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/death-r3-imagegen-repair-raw-selected.png",
+    "bytes": 1369970,
+    "sha256": "6b3f8f9ffb5cae7347b8ea7d2262907cb7269af6d06c4fdf513ee8f195ff8032"
+  },
+  "selectedMaster": {
+    "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/death.png",
+    "bytes": 425373,
+    "sha256": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2"
+  },
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "frameCount": 8,
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "facing": "right",
+    "background": "#FF00FF opaque"
+  },
+  "transforms": [
+    {
+      "operation": "ImageGen cell/limb repair revision 3 selected after two rejected attempts",
+      "outputSha256": "6b3f8f9ffb5cae7347b8ea7d2262907cb7269af6d06c4fdf513ee8f195ff8032"
+    },
+    {
+      "operation": "flat-magenta cleanup",
+      "outputSha256": "4bf425269923059f4c591a0466c0b2512d01bef81ae2a8ccace26bedb4e57fdc",
+      "foregroundPixelsPreserved": 145822
+    },
+    {
+      "operation": "safe connected-component ownership reassignment plus contact alignment",
+      "outputSha256": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2",
+      "pixelValuesPreserved": true,
+      "scaleChanged": false,
+      "safeReassignmentEvidence": [
+        {
+          "ownerFrame": 6,
+          "pixels": 15271,
+          "ownerPixels": 15249,
+          "ownerShare": 0.9985593608800996,
+          "spillByNominalCell": {
+            "5": 22,
+            "6": 15249
+          }
+        },
+        {
+          "ownerFrame": 7,
+          "pixels": 13694,
+          "ownerPixels": 13673,
+          "ownerShare": 0.9984664816708048,
+          "spillByNominalCell": {
+            "6": 21,
+            "7": 13673
+          }
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/death-r1-imagegen-raw-debris-cell-contact.png",
+      "sha256": "08da8597e274d5b495370002355697f67745631b7943f47977f8a63cdbb8f30f",
+      "reason": "Debris and ground smear plus cell contacts."
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-036-deacon-line/rejected/derived/death-r2-imagegen-repair-raw-cell-contact.png",
+      "sha256": "2c689bf9d0b5b8c56e532e177e569d62fc795ee8536a4addc7880c1828ddb31a",
+      "reason": "Cleaner chronology but residual cell-edge contacts."
+    }
+  ],
+  "identityReview": "Visually reviewed: midnight/navy-blue organic Deacon, pronounced bishop-mitre cranium, exactly two arms and two legs, no tail, no dorsal tubes, strict right-facing side profile; no Ultramorph drift.",
+  "promotionNote": "Promoted only as a profile-local source candidate after 8/8 extraction, anatomy and physical-contact review. No artistic acceptance, normalization or runtime status is granted."
+}

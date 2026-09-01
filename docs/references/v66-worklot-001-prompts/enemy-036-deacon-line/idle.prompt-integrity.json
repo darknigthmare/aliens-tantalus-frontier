@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "profileId": "enemy-036-deacon-line",
+  "clipId": "idle",
+  "queuePath": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+  "promptFilePath": "docs/references/v66-worklot-001-prompts/enemy-036-deacon-line/idle.txt",
+  "exactQueueStringEqualsPromptFileAfterTerminalNewlineTrim": true,
+  "queuePromptLength": 2056,
+  "trimmedPromptFileLength": 2056,
+  "queueDeclaredPromptSha256": "7848f80bab0c3a2b4313350423cd1990c04cb3d0b1c68e894b3f9e3421f38320",
+  "queueStringRecomputedUtf8Sha256": "39e376eed250cd9dad73a238530e0f1fdf5c1bd108fb37c9d88990f1d725cc05",
+  "promptFileSha256IncludingTerminalNewline": "a643d3f9e092f2371639f1b1fb4ae33a34f038867830527066184e768530259b",
+  "status": "exact-string-verified-declared-queue-hash-mismatch",
+  "interpretation": "The exact queue prompt string was used. The queue's existing promptSha256 does not equal a fresh SHA-256 over its own decoded UTF-8 prompt string; the global queue was intentionally not modified in this profile-local worklot."
+}

@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "profileId": "enemy-037-neomorph",
+  "reviewer": "Codex finish_source_review",
+  "reviewedAt": "2026-09-01",
+  "scope": "Read-only post-generation QA on the four active masters and the existing pending-review atlas; no regeneration, normalization, registry merge, acceptance or runtime integration.",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "sourceSha256ByClip": {
+    "idle": "af90921a1f568839e4cb833db5f9dc1ab4576c45feb05456a5e3536bec951222",
+    "move": "cf3eaecea020e1cf0e2b011da79338d6ac62a829b1c254c89554d07b125a9dbb",
+    "attack": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+    "death": "11d1d36357be81d3ed49939261ec1da7700f4471b9a84dc396cf3c0a813effd0"
+  },
+  "scaleReview": {
+    "path": "docs/references/V66_WORKLOT_001_NEOMORPH_SCALE_REVIEW.json",
+    "baselineClip": "idle",
+    "measurementCount": 12,
+    "landmark": "rigid-cranial-dome-chord",
+    "sourceScaleByClip": {
+      "idle": 1.0,
+      "move": 1.050117,
+      "attack": 1.278109,
+      "death": 0.931649
+    },
+    "status": "standalone-reviewed-candidate-not-merged"
+  },
+  "physicalAnchorReview": {
+    "path": "docs/references/V66_WORKLOT_001_NEOMORPH_ANCHOR_REVIEW.json",
+    "reviewedPoseCount": 32,
+    "landmark": "pelvis-posterior-hip-at-sacral-tail-root",
+    "floor": "complete recovered sourceBounds bottom including three-pixel extraction guard",
+    "status": "standalone-reviewed-candidate-not-merged"
+  },
+  "attackSafeReassignment": {
+    "sourceSha256BeforeProbe": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+    "sourceSha256AfterProbe": "c82fdb62669215451302e1e161c9ccbd43b7ea5b7585c271276b5296d5cc45fe",
+    "sourceUnchanged": true,
+    "defaultExtraction": "blocked",
+    "safeProbeStatus": "proven-short-spill-extraction-pass",
+    "extractedFrames": 8,
+    "distinctExtractedPoseHashes": 8,
+    "sourcePixelsModified": 0,
+    "outputsNormalized": 0,
+    "accepted": false,
+    "transfer": {
+      "clipFrame": 2,
+      "ownerCell": 2,
+      "fromCells": [1],
+      "pixels": 2,
+      "componentPixels": 84,
+      "ownerShare": 0.97619,
+      "sourceBoundsGlobal": [885, 365, 931, 374],
+      "rgbaSha256": "aaec2ea48b4105404fec9af070d73f39c07820b6832018eff5cb83c881af68e4",
+      "pixelValuesPreserved": true,
+      "rules": ">=90% owner cell and <=15% boundary excursion"
+    },
+    "evidencePath": "docs/references/v66-worklot-001-neomorph-qa/attack-safe-reassignment.jpg"
+  },
+  "contactReview": {
+    "move": {
+      "reviewedFrames": 8,
+      "status": "all-poses-have-visible-load-bearing-foot-contact",
+      "paddedSupportYByFrame": [363, 364, 363, 363, 296, 297, 296, 296],
+      "note": "Every move root projects from the pelvis to the lowest carrying foot/feet. No tail tip or hand reach establishes the floor. This is physical-contact registration only; it does not certify a perfect alternating walk cycle."
+    },
+    "death": {
+      "reviewedFrames": 8,
+      "status": "progressive-contact-plane-reviewed",
+      "paddedSupportYByFrame": [382, 382, 380, 380, 278, 278, 277, 277],
+      "supportByFrame": [
+        "feet",
+        "feet",
+        "knee-foot-hand plane",
+        "limb-torso collapse plane",
+        "corpse flank-limb plane",
+        "corpse flank-limb plane",
+        "corpse flank-limb plane",
+        "terminal corpse flank-limb plane"
+      ],
+      "note": "The large transition into the collapsed poses remains visibly abrupt, but every proposed physical root follows the visible pelvis and the authored support plane rather than the tail or global bounds centre."
+    }
+  },
+  "strictMagentaSpillProbe": {
+    "evaluatedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-037-neomorph.webp",
+    "evaluatedSha256": "4a57feb12be969e23408854cc72219591b43d02821cbe3a1fa881afdfebc5cf1",
+    "evaluatedSize": [1024, 2048],
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "thresholdsChanged": false,
+    "strictPixelsByClipFrame": {
+      "idle": [0, 0, 0, 0, 0, 0, 0, 0],
+      "move": [0, 0, 52, 0, 0, 0, 0, 0],
+      "attack": [0, 1, 4, 0, 0, 0, 0, 0],
+      "death": [25, 4, 21, 25, 65, 16, 63, 86]
+    },
+    "strictPixelCountByClip": {
+      "idle": 0,
+      "move": 52,
+      "attack": 5,
+      "death": 305
+    },
+    "totalStrictPixelCount": 362,
+    "remainingAfterFixedClampInMemory": 0,
+    "sourceOrAtlasWritten": false,
+    "result": "The existing strict opt-in can neutralize every detected residual without widening thresholds. It must be requested explicitly during a later authorized rebuild so the resulting per-frame proof is bound to that rebuilt atlas; this QA did not rewrite the current atlas.",
+    "nonzeroCellBounds": [
+      {"clip": "move", "frame": 2, "count": 52, "bbox": [164, 141, 171, 154]},
+      {"clip": "attack", "frame": 1, "count": 1, "bbox": [174, 152, 175, 153]},
+      {"clip": "attack", "frame": 2, "count": 4, "bbox": [163, 147, 169, 152]},
+      {"clip": "death", "frame": 0, "count": 25, "bbox": [148, 94, 187, 120]},
+      {"clip": "death", "frame": 1, "count": 4, "bbox": [175, 111, 189, 122]},
+      {"clip": "death", "frame": 2, "count": 21, "bbox": [97, 180, 173, 230]},
+      {"clip": "death", "frame": 3, "count": 25, "bbox": [129, 190, 177, 225]},
+      {"clip": "death", "frame": 4, "count": 65, "bbox": [78, 191, 179, 220]},
+      {"clip": "death", "frame": 5, "count": 16, "bbox": [64, 196, 98, 218]},
+      {"clip": "death", "frame": 6, "count": 63, "bbox": [36, 201, 121, 230]},
+      {"clip": "death", "frame": 7, "count": 86, "bbox": [35, 198, 156, 228]}
+    ],
+    "evidencePath": "docs/references/v66-worklot-001-neomorph-qa/strict-magenta-spill-overlay.png"
+  },
+  "evidence": [
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/anchors-attack.jpg", "sha256": "db735ccbbc492495d4d517ad6a69c0c190e551d5a21e4d57e218775b499b102f"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/anchors-death.jpg", "sha256": "72f1ff2121cafc6286063119af641f071f409024cbaf51cb8d0181f5f9d84b30"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/anchors-idle.jpg", "sha256": "21e17f75bef6199d2d48e9b56d622c7c4c4c2be0c011fa911884d91634e0c082"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/anchors-move.jpg", "sha256": "70346bbf0d7c32c4e4e345252cd27b64b02ac1e78bbb06bd7990e647684e6201"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/attack-safe-reassignment.jpg", "sha256": "9a277dfec673aad2e66e0dc6a13eb2c33657d8b8a148f1c3d790dd1b47fe5848"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/cranial-chords.jpg", "sha256": "2b874313a0439186b8f1c1cf605dd6107a4275af1718db9aea46e7d7898b7406"},
+    {"path": "docs/references/v66-worklot-001-neomorph-qa/strict-magenta-spill-overlay.png", "sha256": "8f5062e9c97008df2c134ec9c54335446bd4b87d1f32ab4c756bbcda471c1dc3"}
+  ],
+  "finalStatus": "qa-reviewed-candidate-only-not-merged-not-accepted"
+}

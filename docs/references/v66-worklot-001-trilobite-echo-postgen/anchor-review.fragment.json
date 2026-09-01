@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-035-trilobite-echo": {
+      "status": "reviewed",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "method": "Manual pose-by-pose inspection of the single radial basal-ring hub, projected vertically to the observed planted-tentacle support or, after collapse, the central-mantle body contact. The landmark is never a tentacle tip and the terminal death root is never placed under a loose extended limb. Every anchor includes the complete extracted source lower bound and guard pixel, so sourceBounds[3] - anchorY equals zero for all 32 poses. Attack was inspected on the lossless safe-reassignment ownership result because its selected source has proven short boundary spill.",
+      "reviewedPoseCount": 32,
+      "visualReview": "All 32 source poses and the four marked overlays were inspected. Yellow marks the basal-ring hub, cyan its vertical projection and green the support/body-contact anchor. This is physical registration evidence only: no source was normalized, accepted or integrated.",
+      "clips": {
+        "idle": {
+          "sourceSha256": "562a3a50f34d475e1852e63de7e0f89f9fb7ce70824980eef6853b6bd33ea475",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [240, 378], "landmark": [240, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 1 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=378."},
+            {"frame": 1, "reviewed": true, "anchor": [235, 374], "landmark": [235, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 2 marked overlay: basal hub (235,255) projects to the complete planted lower-tentacle support and extraction guard at y=374."},
+            {"frame": 2, "reviewed": true, "anchor": [240, 385], "landmark": [240, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 3 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=385."},
+            {"frame": 3, "reviewed": true, "anchor": [240, 386], "landmark": [240, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 4 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=386."},
+            {"frame": 4, "reviewed": true, "anchor": [235, 377], "landmark": [235, 260], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 5 marked overlay: basal hub (235,260) projects to the complete planted lower-tentacle support and extraction guard at y=377."},
+            {"frame": 5, "reviewed": true, "anchor": [240, 371], "landmark": [240, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 6 marked overlay: basal hub (240,255) projects to the complete planted lower-tentacle support and extraction guard at y=371."},
+            {"frame": 6, "reviewed": true, "anchor": [230, 372], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 7 marked overlay: basal hub (230,255) projects to the complete planted lower-tentacle support and extraction guard at y=372."},
+            {"frame": 7, "reviewed": true, "anchor": [235, 371], "landmark": [235, 260], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Idle pose 8 marked overlay: basal hub (235,260) projects to the complete planted lower-tentacle support and extraction guard at y=371."}
+          ]
+        },
+        "move": {
+          "sourceSha256": "a43b330804e8302cde0f7534a32f7b9bc384d3db3721fb170361267ec953c309",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [240, 377], "landmark": [240, 257], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 1 marked overlay: basal hub (240,257) projects to the complete planted support and extraction guard at y=377."},
+            {"frame": 1, "reviewed": true, "anchor": [233, 377], "landmark": [233, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 2 marked overlay: basal hub (233,255) projects to the complete planted support and extraction guard at y=377."},
+            {"frame": 2, "reviewed": true, "anchor": [235, 380], "landmark": [235, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 3 marked overlay: basal hub (235,255) projects to the complete planted support and extraction guard at y=380."},
+            {"frame": 3, "reviewed": true, "anchor": [230, 380], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 4 marked overlay: basal hub (230,255) projects to the complete planted support and extraction guard at y=380."},
+            {"frame": 4, "reviewed": true, "anchor": [235, 349], "landmark": [235, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 5 marked overlay: basal hub (235,255) projects to the complete planted lower-row support and extraction guard at y=349."},
+            {"frame": 5, "reviewed": true, "anchor": [230, 349], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 6 marked overlay: basal hub (230,255) projects to the complete planted lower-row support and extraction guard at y=349."},
+            {"frame": 6, "reviewed": true, "anchor": [235, 348], "landmark": [235, 255], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 7 marked overlay: basal hub (235,255) projects to the complete recovery support and extraction guard at y=348."},
+            {"frame": 7, "reviewed": true, "anchor": [235, 361], "landmark": [235, 258], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Move pose 8 marked overlay: basal hub (235,258) projects to the complete recovery support and extraction guard at y=361."}
+          ]
+        },
+        "attack": {
+          "sourceSha256": "d2d14d01345ceec0f24997e972b05dc668267ccdb038506be701206c63e1b5bb",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [235, 379], "landmark": [235, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 1 safe-reassignment overlay: basal hub (235,255) projects to the complete braced support and guard at y=379."},
+            {"frame": 1, "reviewed": true, "anchor": [230, 380], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 2 safe-reassignment overlay: basal hub (230,255) projects to the complete compressed support and guard at y=380."},
+            {"frame": 2, "reviewed": true, "anchor": [230, 381], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 3 safe-reassignment overlay: basal hub (230,255) projects to the complete rear-brace support and guard at y=381."},
+            {"frame": 3, "reviewed": true, "anchor": [230, 385], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 7, "evidence": "Attack pose 4 safe-reassignment overlay: basal hub (230,255) projects to the planted rear-brace plane at y=385 while forward primaries extend; short left spill remains owned by this pose."},
+            {"frame": 4, "reviewed": true, "anchor": [230, 355], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 5 safe-reassignment overlay: basal hub (230,255) projects to the complete grapple support and guard at y=355."},
+            {"frame": 5, "reviewed": true, "anchor": [225, 354], "landmark": [225, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 6 safe-reassignment overlay: basal hub (225,255) projects to the complete implantation-contact brace and guard at y=354."},
+            {"frame": 6, "reviewed": true, "anchor": [230, 355], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 7, "evidence": "Attack pose 7 safe-reassignment overlay: basal hub (230,255) projects to the retracting brace plane at y=355; transferred short spill is preserved."},
+            {"frame": 7, "reviewed": true, "anchor": [230, 353], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Attack pose 8 safe-reassignment overlay: basal hub (230,255) projects to the complete closed-aperture recovery support and guard at y=353."}
+          ]
+        },
+        "death": {
+          "sourceSha256": "bad472215467c9666c3959c82bcf85b056c59bf6df8b37736ed5fc7f1eadb917",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [235, 377], "landmark": [235, 260], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Death pose 1 marked overlay: basal hub (235,260) projects to the last stable support and extraction guard at y=377."},
+            {"frame": 1, "reviewed": true, "anchor": [228, 381], "landmark": [228, 260], "confidence": "medium", "uncertaintyPx": 5, "evidence": "Death pose 2 marked overlay: basal hub (228,260) projects to the recoiling support and extraction guard at y=381."},
+            {"frame": 2, "reviewed": true, "anchor": [235, 374], "landmark": [235, 300], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 3 marked overlay: lowering hub (235,300) projects to first mantle/support contact and extraction guard at y=374."},
+            {"frame": 3, "reviewed": true, "anchor": [235, 381], "landmark": [235, 320], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 4 marked overlay: dropped hub (235,320) projects to central-body contact and extraction guard at y=381, not to a loose tentacle extremity."},
+            {"frame": 4, "reviewed": true, "anchor": [230, 306], "landmark": [230, 245], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 5 marked overlay: collapsed hub (230,245) projects to the mantle underside/body contact and extraction guard at y=306."},
+            {"frame": 5, "reviewed": true, "anchor": [225, 300], "landmark": [225, 245], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 6 marked overlay: collapsed hub (225,245) projects to the mantle underside/body contact and extraction guard at y=300."},
+            {"frame": 6, "reviewed": true, "anchor": [230, 302], "landmark": [230, 252], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 7 marked overlay: slackened hub (230,252) projects to prone central-body contact and extraction guard at y=302."},
+            {"frame": 7, "reviewed": true, "anchor": [230, 302], "landmark": [230, 255], "confidence": "medium", "uncertaintyPx": 6, "evidence": "Death pose 8 marked overlay: terminal hub (230,255) projects to motionless central-body contact and extraction guard at y=302, never to an extended tentacle tip."}
+          ]
+        }
+      }
+    }
+  }
+}

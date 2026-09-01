@@ -5,14 +5,16 @@ import { dirname, relative, isAbsolute, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 import { ENEMIES } from '../src/content-core-v50.js';
-import { ROOT, QUEUE_PATH, STATE_PATH, REFERENCES_PATH, scopedPath, buildEnemyBatchQueue, summarizeQueue } from './enemy-batch-production.mjs';
+import { ROOT, QUEUE_PATH, STATE_PATH, REFERENCES_PATH, GENERATION_EVENT_KINDS, scopedPath, buildEnemyBatchQueue, summarizeQueue } from './enemy-batch-production.mjs';
 
 export const WORKLOT_SIZE = 202;
-export const WORKLOTS_PATH = 'docs/references/V66_ENEMY_WORKLOTS_202.json';
+export const PREVIOUS_WORKLOTS_PATH = 'docs/references/V66_ENEMY_WORKLOTS_202.json';
+export const WORKLOTS_PATH = 'docs/references/V66_ENEMY_WORKLOTS_202_R2.json';
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const record = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = (value) => typeof value === 'string' && value.trim().length > 0;
 const statuses = ['pending-reference', 'ready-generation', 'generated', 'review-rejected', 'accepted', 'integrated'];
+const isGenerationEvent = (event) => GENERATION_EVENT_KINDS.includes(event.kind);
 const fail = (message) => { throw new Error('V66 worklots: ' + message); };
 
 function requireSize(size) {
@@ -52,10 +54,11 @@ export async function loadValidatedProduction({ root = ROOT, queuePath = QUEUE_P
   const jobs = new Map(queue.jobs.map((job) => [job.profileId, job]));
   for (const event of state.events) {
     if (!record(event) || !jobs.has(event.profileId)) fail('unknown profile in production state: ' + event?.profileId);
-    if (!['generated', 'accepted', 'review-rejected', 'integrated'].includes(event.kind)) fail('invalid production event kind');
-    if (!text(event.actor) || !text(event.note)) fail('production decisions need an actor and note');
+    if (![...GENERATION_EVENT_KINDS, 'accepted', 'review-rejected', 'integrated'].includes(event.kind)) fail('invalid production event kind');
+    const decisionNote = event.kind === 'generated-candidate-selected' ? event.selectionStatus : event.note;
+    if (!text(event.actor) || !text(decisionNote)) fail('production decisions need an actor and note or selection status');
     const job = jobs.get(event.profileId);
-    if (event.kind === 'generated' && (!job.reference || !job.clips.some((clip) => clip.id === event.clipId))) fail('generated event has no reviewed reference or known clip: ' + event.profileId);
+    if (isGenerationEvent(event) && (!job.reference || !job.clips.some((clip) => clip.id === event.clipId))) fail('generated event has no reviewed reference or known clip: ' + event.profileId);
   }
   const summary = await summarizeQueue(queue, state, root);
   const issues = summary.jobs.filter((job) => job.issues?.length);
@@ -135,7 +138,7 @@ function describeLot(lot, production) {
   const current = new Map(production.summary.jobs.map((job) => [job.profileId, job]));
   const profiles = lot.profiles.map(({ profileId }) => {
     const job = jobs.get(profileId), status = current.get(profileId);
-    const latest = new Map(production.state.events.filter((event) => event.profileId === profileId && event.kind === 'generated').map((event) => [event.clipId, event]));
+    const latest = new Map(production.state.events.filter((event) => event.profileId === profileId && isGenerationEvent(event)).map((event) => [event.clipId, event]));
     const generatedClipIds = job.clips.filter((clip) => latest.has(clip.id)).map((clip) => clip.id);
     if (generatedClipIds.length !== status.generatedClips) fail('verified clip count disagrees with latest events for ' + profileId);
     return { profileId, name: job.name, productionBatchId: job.batchId, status: status.status, referenceReviewed: job.reference?.status === 'reviewed',

@@ -1,0 +1,18 @@
+Use case: final compact geometry correction of a rejected attack sprite sheet.
+Input images: Image 1 is the selected idle model sheet; Image 2 is the selected move model sheet; Image 3 is the rejected attack r2. Images 1 and 2 are the immutable identity/topology truth. Image 3 demonstrates the desired chronology but is a NEGATIVE geometry example: shorten its long horizontal reaches, remove the extra underside stub, remove every shadow and isolate every cell.
+
+Create ONE exact 2:1 landscape sprite sheet, invisible 4 columns by 2 rows, exactly eight distinct chronological attack poses, strict row-major order, for the same right-facing Trilobite Echo.
+
+Identity must match Images 1 and 2 exactly: pale milky-ivory/rose-gray wet low mantle, subtle veins, five visible upper root collars, two lower trailing supports, one small separate anterior implantation apparatus, same arcade sprite style and physical mantle scale. No head, eyes, shell, xenomorph traits or redesign.
+
+ANATOMY COUNT IN EVERY CELL: exactly seven primary tentacles—five upper and two lower—and no other long or short limb. Keep all five upper root collars visible and separated in every pose. Exactly two of the five upper primaries perform the attack; they remain attached to two of those collars and extend only modestly, curling forward within the cell. The other three upper primaries remain curled above the hub and fully visible. Exactly two lower primaries remain as one separated trailing pair below-left of the mantle in every pose. Never place any third support, stump or tendril beneath the mantle. No branch, fusion, fork, spur, extra strand, detached limb or eighth arm.
+
+The small anterior implantation apparatus stays separate and closed except pose 6, where one short thick nub projects only a few pixels and is visibly part of the bulb—not a tentacle. No long filament or projectile.
+
+Chronology: 1 closed alert; 2 compact compression; 3 brace with the same two lower trailing supports; 4 the same two upper primaries uncurl forward by about 20 percent; 5 those two curl toward grapple contact while remaining fully inside the cell; 6 brief contact plus short central nub; 7 those same two upper primaries recoil; 8 closed recovery matching idle. Make the change visibly chronological but compact.
+
+HARD CELL GEOMETRY: each whole creature, including both reaching tips, must occupy no more than 82 percent of its own cell width and 68 percent of its cell height. Center it independently in its cell. Keep at least 35 pixels of clean magenta at the left and right boundary of every nominal cell and at least 30 pixels at top and bottom. No foreground component may touch or cross any cell boundary. No pose may borrow space from its neighbor.
+
+Perfect flat opaque magenta background, fully magenta edges and gutters. Absolutely no cast shadow, contact shadow, darker oval, floor, glow, ground line, effects, scenery, checkerboard, grid lines, text, UI, logo or watermark.
+
+Final per-cell audit: five upper collars and paths; two lower paths only; seven attached paths total; one separate bulb; no underside stub; no shadow; at least 35-pixel horizontal gutters; strict right-facing identity; complete anticipation-to-recovery sequence.

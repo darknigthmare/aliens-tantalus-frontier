@@ -6,7 +6,7 @@ import { join, dirname, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { FIRST_BATCH_IDS } from '../scripts/enemy-batch-contracts.mjs';
 import { QUEUE_PATH, STATE_PATH, REFERENCES_PATH, REVIEW_CHECKS, buildEnemyBatchQueue, emptyState, appendProductionEvent } from '../scripts/enemy-batch-production.mjs';
-import { WORKLOT_SIZE, WORKLOTS_PATH, loadValidatedProduction, buildWorklotManifest, validateWorklotManifest, summarizeWorklots, initializeWorklots, worklotStatus, main } from '../scripts/enemy-production-worklots-v66.mjs';
+import { WORKLOT_SIZE, PREVIOUS_WORKLOTS_PATH, WORKLOTS_PATH, loadValidatedProduction, buildWorklotManifest, validateWorklotManifest, summarizeWorklots, initializeWorklots, worklotStatus, main } from '../scripts/enemy-production-worklots-v66.mjs';
 
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const reference = { status: 'reviewed', urls: ['https://example.com/synthetic-reference'], localPaths: [], designLock: 'Synthetic test identity; never production art.', reviewer: 'test', reviewedAt: '2026-08-31', canonExact: false };
@@ -101,6 +101,48 @@ test('202-profile overlay counts actual latest sources and preserves all input b
   await assert.rejects(access(join(fix.root, WORKLOTS_PATH)));
 });
 
+test('worklots validate and count repaired and selected-candidate events as latest generation only', async (t) => {
+  const fix = await fixture(t);
+  const job = fix.queue.jobs[0];
+  for (const clip of job.clips) await put(fix.root, clip.sourcePath, `Synthetic mixed generation source: ${clip.id}`);
+  const [plain, repaired, selected, finalPlain] = job.clips;
+  fix.state = await appendProductionEvent(fix.queue, fix.state, { kind: 'generated', profileId: job.profileId, clipId: plain.id, provider: 'OpenAI ImageGen', generationId: 'synthetic-mixed-plain', actualPromptText: 'Synthetic plain candidate prompt.', actor: 'test', note: 'Synthetic plain candidate only.' }, fix.root);
+  fix.state = await appendProductionEvent(fix.queue, fix.state, {
+    kind: 'generated-and-source-repaired', profileId: job.profileId, clipId: repaired.id, provider: 'OpenAI ImageGen', generationId: 'synthetic-mixed-repaired',
+    actualPromptText: 'Synthetic repaired candidate prompt.', sourcePath: repaired.sourcePath,
+    sourceSha256: hash(await readFile(join(fix.root, repaired.sourcePath))), sourceRepairs: [{ kind: 'synthetic-repair', result: 'Synthetic repair evidence only.' }],
+    actor: 'test', note: 'Synthetic repaired candidate only; not accepted.'
+  }, fix.root);
+  fix.state = await appendProductionEvent(fix.queue, fix.state, { kind: 'generated', profileId: job.profileId, clipId: finalPlain.id, provider: 'OpenAI ImageGen', generationId: 'synthetic-mixed-final', actualPromptText: 'Synthetic final plain prompt.', actor: 'test', note: 'Synthetic plain candidate only.' }, fix.root);
+  fix.state = await appendProductionEvent(fix.queue, fix.state, { kind: 'review-rejected', profileId: job.profileId, actor: 'reviewer', note: 'Synthetic selection rejected; all source receipts retained.' }, fix.root);
+
+  const promptDocumentPath = `proofs/${job.profileId}-${selected.id}-selected.txt`;
+  const promptText = 'Synthetic selected-candidate prompt document.\n';
+  await put(fix.root, promptDocumentPath, promptText);
+  const selectedSource = await readFile(join(fix.root, selected.sourcePath));
+  fix.state = await appendProductionEvent(fix.queue, fix.state, {
+    kind: 'generated-candidate-selected', profileId: job.profileId, clipId: selected.id, iteration: 2,
+    provider: 'OpenAI ImageGen', generationId: 'synthetic-mixed-selected', providerGenerationIdReturned: false,
+    generationIdProvenance: 'Synthetic local receipt; provider returned no stable ID.', actor: 'test',
+    promptDocumentPath, promptDocumentSha256: hash(promptText), promptSha256: hash(promptText),
+    contractPromptSha256: selected.promptSha256, referenceLockSha256: job.referenceLockSha256,
+    selectionStatus: 'selected-synthetic-candidate-not-accepted', sourcePath: selected.sourcePath,
+    sourceSha256: hash(selectedSource), sourceBytes: selectedSource.byteLength,
+    persistence: 'Synthetic exact payload persistence evidence.', accepted: false, runtimeIntegrated: false, canonExact: false
+  }, fix.root);
+  await persist(fix);
+
+  const production = await loadValidatedProduction({ root: fix.root });
+  const report = summarizeWorklots(buildWorklotManifest(production), production);
+  const profile = report.worklots.flatMap((lot) => lot.profiles).find((entry) => entry.profileId === job.profileId);
+  assert.equal(production.summary.jobs.find((entry) => entry.profileId === job.profileId).status, 'generated');
+  assert.equal(production.summary.jobs.find((entry) => entry.profileId === job.profileId).generatedClips, job.clips.length);
+  assert.deepEqual(profile.verifiedGeneratedClipIds, job.clips.map((clip) => clip.id));
+  assert.deepEqual(profile.missingClipIds, []);
+  assert.equal(report.counts.verifiedGeneratedBoards, job.clips.length);
+  assert.deepEqual(fix.state.events.slice(-2).map((event) => event.kind), ['review-rejected', 'generated-candidate-selected']);
+});
+
 test('explicit init writes once; later integration refreshes counts without shifting frozen membership', async (t) => {
   const fix = await fixture(t, { pilot: true });
   const before = await inputHashes(fix.root);
@@ -122,6 +164,54 @@ test('explicit init writes once; later integration refreshes counts without shif
   assert.deepEqual(await readFile(join(fix.root, WORKLOTS_PATH)), frozenBytes);
   assert.deepEqual(report.initializationInputs, initial.manifest.initializationInputs);
   assert.notEqual(report.currentInputs.state.sha256, report.initializationInputs.state.sha256);
+});
+
+test('repository R2 manifest preserves the immutable previous membership and documented bindings', async () => {
+  const comparisonPath = 'docs/references/V66_ENEMY_WORKLOTS_202_R2_COMPARISON.json';
+  const fromRepository = (path) => new URL('../' + path, import.meta.url);
+  const [previousBytes, currentBytes, comparisonBytes] = await Promise.all([
+    readFile(fromRepository(PREVIOUS_WORKLOTS_PATH)),
+    readFile(fromRepository(WORKLOTS_PATH)),
+    readFile(fromRepository(comparisonPath))
+  ]);
+  const previous = JSON.parse(previousBytes), current = JSON.parse(currentBytes), comparison = JSON.parse(comparisonBytes);
+  const boundaries = (manifest) => manifest.worklots.map((lot) => ({
+    id: lot.id,
+    profileCount: lot.profiles.length,
+    firstProfileId: lot.profiles[0].profileId,
+    lastProfileId: lot.profiles.at(-1).profileId,
+    requiredBoards: lot.requiredBoards
+  }));
+
+  assert.equal(PREVIOUS_WORKLOTS_PATH, comparison.previousManifest.path);
+  assert.equal(WORKLOTS_PATH, comparison.currentManifest.path);
+  assert.equal(WORKLOTS_PATH, comparison.decision.defaultManifestPath);
+  assert.equal(hash(previousBytes), 'b6d1281a24f044c0a2bd2c09b730fba5b39cd780300cf71e4b4ee49997962542');
+  assert.equal(hash(currentBytes), 'ad5e1381b80e659f4e01013756622e3d4ca3ec77cfe1d29f1122ab9446a055fc');
+  assert.equal(hash(previousBytes), comparison.previousManifest.fileSha256);
+  assert.equal(hash(currentBytes), comparison.currentManifest.fileSha256);
+  assert.notEqual(previous.rosterSha256, current.rosterSha256);
+  assert.equal(previous.rosterSha256, comparison.previousManifest.rosterSha256);
+  assert.equal(current.rosterSha256, comparison.currentManifest.rosterSha256);
+  assert.deepEqual(current.worklots.map((lot) => lot.profiles), previous.worklots.map((lot) => lot.profiles));
+  assert.deepEqual(boundaries(current), boundaries(previous));
+  assert.deepEqual(boundaries(current), comparison.comparison.worklotBoundaries.lots);
+  assert.deepEqual(current.excludedIntegratedProfileIds, previous.excludedIntegratedProfileIds);
+  assert.deepEqual(current.excludedBaselineProfileIds, previous.excludedBaselineProfileIds);
+  assert.deepEqual(current.excludedIntegratedProfileIds, comparison.comparison.excludedMembership.integratedProfileIds);
+  assert.deepEqual(current.excludedBaselineProfileIds, comparison.comparison.excludedMembership.baselineProfileIds);
+  assert.equal(comparison.comparison.profileMembership.comparedProfiles, 565);
+  assert.equal(comparison.comparison.productionBindings.comparedProfiles, 565);
+  assert.equal(comparison.comparison.productionBindings.differenceCount, 0);
+  assert.deepEqual(comparison.comparison.productionBindings.comparedFields, ['profileId', 'batchId', 'clipIds', 'sourcePaths']);
+  for (const key of ['queue', 'state', 'references']) {
+    assert.equal(previous.initializationInputs[key].sha256, comparison.initializationInputChanges[key].previousSha256);
+    assert.equal(current.initializationInputs[key].sha256, comparison.initializationInputChanges[key].currentSha256);
+  }
+  assert.equal(comparison.decision.previousManifestModified, false);
+  assert.equal(comparison.decision.automaticRepartitionPerformed, false);
+  assert.equal(comparison.decision.automaticAcceptancePerformed, false);
+  assert.equal(comparison.decision.productionBatchIdsChanged, false);
 });
 
 test('default/status is read-only and never initializes; preview is explicitly unfrozen', async (t) => {

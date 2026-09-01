@@ -628,6 +628,43 @@
         ]
       }
     },
+    "enemy-035-trilobite-echo": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/prometheus",
+        "https://www.wetafx.co.nz/films/filmography/prometheus",
+        "https://necaonline.com/2012/10/coming-soon-prometheus-battle-damaged-engineer-vs-trilobite-2-pack-is-toys-r-us-exclusive/",
+        "https://bluescreenreveals.com/neville-page-designing-sci-fi-creatures-characters/",
+        "https://www.cgw.com/Press-Center/Web-Exclusives/2012/Beauty-and-the-Beast.aspx",
+        "https://monsterlegacy.net/2013/03/04/prometheus-trilobite-deacon-hammerpede-alien/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/trilobite-echo-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png"
+      ],
+      "designLock": "Original Tantalus Trilobite Echo lineage derived from the adult Prometheus Trilobite design grammar, not the unique screen organism or an attested published caste. One large low pale pathogen parasite with no head, eyes, skull, skeleton or humanoid torso: a soft central mantle, one ventral implantation apparatus and exactly seven muscular primary tentacles. All seven arise independently from one immutable radial basal ring and remain traceable base-to-tip without splitting, fusing, detaching, vanishing or changing order. The compact central implantation organ is not an eighth arm. Milky ivory and restrained translucent rose-gray wet invertebrate tissue with subtle veins; never black biomechanical chitin, hard fossil shell or a blue octopus. Strict right-facing gameplay profile with the anterior aperture and grapple reach pointing right. Large low apex gameplay envelope anchored beneath the central mantle hub; total tentacle reach never determines anatomical scale. No facehugger legs, xenomorph dome, dorsal tubes, tail blade, weapon, armor, projectile, extra limb, front-facing radial flower, crop or cell overlap. The V56 project sheet controls palette, lateral readability and broad motion only; its ambiguous overlaps do not override the exact seven-tentacle topology.",
+      "reviewer": "Codex /root/complete_variants; Prometheus production sources, direct designer topology and V56 project predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
+    "enemy-036-deacon-line": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/prometheus",
+        "https://d23.com/prometheus-10th-anniversary-celebration/",
+        "https://www.denofgeek.com/movies/prometheus-we-meet-the-designers-behind-the-film/",
+        "https://www.avpgalaxy.net/website/interviews/carlos-huante/",
+        "https://monsterlegacy.net/2013/03/04/prometheus-trilobite-deacon-hammerpede-alien/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/deacon-line-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png"
+      ],
+      "designLock": "Project Deacon Line extrapolated from the final on-screen Prometheus Deacon, never from the abandoned Ultramorph branch. Tall slender eyeless biped with a narrow organic torso, long gangly clawed limbs and a long cranium terminating in a pronounced rear/upward bishop-mitre point. Midnight/navy-blue subtly pearlescent wet organic membrane with visible natural muscles, not pale skin or black biomechanical armor. Goblin-shark-like protrusive jaw, exactly two arms and two legs, no tail and no dorsal tubes. Strict right-facing profile. No broad Big Chap dome, Neomorph crown, Queen crest, quadrupedal baseline, extra appendage, armor, clothing, weapon, technology, visible eye or Ultramorph/Engineer-host anatomy. The lineage, adult locomotion and repeatable population are project adaptations; generated pixels remain subject to review and are not certified film-exact.",
+      "reviewer": "Codex /root/produce_arcology_lurker; final screen identity, production interviews and V56 project predecessor reviewed",
+      "reviewedAt": "2026-09-01",
+      "canonExact": false
+    },
     "enemy-037-neomorph": {
       "status": "reviewed",
       "urls": [
@@ -640,6 +677,24 @@
       "designLock": "Alien Covenant (2017) adult Neomorph, based on the licensed NECA51659 photographic sculpture references, visually inspected. Pale ivory/cool-gray organic skin, not black biomechanical chitin; very lean biped with visible ribcage, narrow abdomen and pelvis, elongated forearms and large clawed hands. Smooth eyeless bulbous anterior skull extending rearward into a narrow swept point, recessed toothy facial opening, no visible human or animal eyes. Long thin solid dorsal spines, with prominent upper rods and smaller lower vertebral projections; no tubular Xenomorph exhausts or Queen crest. Exactly two arms and two long lean legs; slender articulated feet, no hooves. Long supple thin skin-covered segmented tail tapered to a small point, not a broad spear blade. Preserve its adult proportions in strict right-facing side view. Use grounded hunched biped locomotion and forearm/claw strike; no separate Xenomorph inner-jaw piston, no juvenile in the same sheet, no toy joints, no clothing, no armor, no pink/magenta material or reflected chroma light. The photographs are licensed sculpture references, not evidence of pixel-exact film reconstruction.",
       "reviewer": "Codex finish_source_review; two licensed NECA photos inspected directly",
       "reviewedAt": "2026-08-31",
+      "canonExact": false
+    },
+    "enemy-038-protomorph": {
+      "status": "reviewed",
+      "urls": [
+        "https://www.20thcenturystudios.com/movies/alien-covenant",
+        "https://www.mpcvfx.com/en/filmography/alien-covenant/",
+        "https://vfxblog.com/2017/06/09/practical-creature-effects-alien-covenant/",
+        "https://www.fxguide.com/fxfeatured/alien-covenant-by-land-and-air/",
+        "https://www.avpgalaxy.net/website/interviews/colin-shulver/"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/protomorph-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png"
+      ],
+      "designLock": "Project-internal Protomorph label for the final adult Alien: Covenant creature lineage; public film/VFX sources call the finished creature the Xenomorph, while production concept work used Protomorph. Impossibly tall, very lean red-black and dark-maroon flayed organic hunter with a narrow waist, exposed rib cage, long sinewy arms, large claws, long predatory legs and a forward hunched posture. Eyeless swept cranial dome, hard jaw, ivory teeth and readable inner jaw. Exactly two arms, two legs and exactly four stable principal dorsal tubes. One complete long articulated tail remains visibly connected at the sacrum and tapers to one point in every frame. Strict right-facing gameplay profile. Distinguish it from the pale Neomorph, tail-less tube-less blue Deacon and heavier blue-black biomechanical Big Chap. No eye, armor, clothing, weapon, extra limb, Queen crest, white skin, neon marking or magenta anatomy. The V56 project sheet is an identity and motion anchor only, not an eight-pose master or pixel-exact certification.",
+      "reviewer": "Codex finish_source_review; film studio, MPC, practical/VFX interviews and V56 project predecessor reviewed",
+      "reviewedAt": "2026-09-01",
       "canonExact": false
     },
     "enemy-041-working-joe": {
