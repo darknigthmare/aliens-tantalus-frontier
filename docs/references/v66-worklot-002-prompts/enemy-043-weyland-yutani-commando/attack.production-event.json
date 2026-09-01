@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "kind": "generated-candidate-selected",
+  "profileId": "enemy-043-weyland-yutani-commando",
+  "clipId": "attack",
+  "actor": "OpenAI Codex visual and technical QA",
+  "iteration": 1,
+  "selectionStatus": "selected-after-visual-and-technical-qa-not-accepted",
+  "note": "Active source selected after 8-cell, strict-right, identity, chroma, cell-bound and physical-support review; acceptance and runtime integration remain separate.",
+  "provider": "OpenAI ImageGen",
+  "generationId": "builtin-imagegen-no-provider-id-enemy-043-weyland-yutani-commando-attack-r1",
+  "providerGenerationIdReturned": false,
+  "generationIdProvenance": "Built-in ImageGen returned a persisted image data URL and no provider generation identifier.",
+  "contractPromptSha256": "53dd33e2dd0b4dafd98499d4f9e17200d652c330828a810784332d9d5a6a3621",
+  "queuePromptSha256": "53dd33e2dd0b4dafd98499d4f9e17200d652c330828a810784332d9d5a6a3621",
+  "referenceLockSha256": "6df04f1aaf18adae3294f738628d179bdbe0ec1d7feb9a63edea0cd9a0ddce50",
+  "promptDocumentPath": "docs/references/v66-worklot-002-prompts/enemy-043-weyland-yutani-commando/attack-r1.txt",
+  "promptDocumentSha256": "b6afe497b12c3c605035275e0a65daa10a95110032a1ac30dc57ec0691c80dd5",
+  "actualPromptPath": "docs/references/v66-worklot-002-prompts/enemy-043-weyland-yutani-commando/attack-r1.txt",
+  "actualPromptText": "Use the immediately preceding Weyland-Yutani Commando sheet as authoritative exact identity, armor, helmet, backpack, M41A, palette and scale. Create a NEW production sprite sheet for animation ATTACK/FIRE. Exact 1774x887 2:1 canvas, 4 equal columns by 2 equal rows, exactly 8 chronological full-body poses row-major. Same dirty off-white/tan bulky sealed APEsuit, gray cage helmet and green goggles down, compact backpack, fully hidden face, human anatomy, and exactly one identical dark charcoal M41A Pulse Rifle in both hands. TRUE strict orthographic side profile facing RIGHT in every cell; muzzle strictly right. Sequence: low ready; stock seats at shoulder; muzzle acquires; aim lock; one controlled shot; rearward recoil; muzzle recovery; return to low ready. Stable helmet size, shoulder-to-boot height and butt-to-muzzle rifle length; no weapon morph. A tiny attached muzzle flash appears ONLY in frame 5 (bottom-left cell), contained near the muzzle, with no smoke or detached particles; all other cells no effect. One complete character/rifle per cell, generous gutters, zero boundary contact. Flat fully opaque pure #FF00FF chroma only. No floor, shadow, scenery, text, grid, logo, UI, watermark, catch pole, knife, second weapon, loose magazine or energy beam. Original fan-made painted 2D game sprite, no official pixel copying.\n",
+  "promptSha256": "b6afe497b12c3c605035275e0a65daa10a95110032a1ac30dc57ec0691c80dd5",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-043-weyland-yutani-commando/attack.png",
+  "savedSourcePath": "assets/openai/sprites/frames/v66/batch-003/enemy-043-weyland-yutani-commando/attack.png",
+  "sourceSha256": "6e42e3f80870a849604e3ed3f8f14865c1381c78393f3a1609f8bb44e2ae0a23",
+  "sourceBytes": 925074,
+  "persistence": "ImageGen data URL decoded in 60000-character chunks, raw retained, chroma flattened conservatively, cells recomposed losslessly, selected derivative copied to active source path.",
+  "rawCandidatePath": "assets/openai/sprites/frames/v66/batch-003/enemy-043-weyland-yutani-commando/rejected/derived/attack-r1-imagegen-raw-candidate.png",
+  "rawCandidateSha256": "9dda37d9e9a044b976fb7c163fed9def370bf5b8753e1c381fff149a9e1f6a2f",
+  "derivedFiles": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-043-weyland-yutani-commando/rejected/derived/attack-r1-flat.png",
+      "sha256": "3295b91f9085fee64bf7b74073a4413642d97990e56f0b96ed9e39b30b1bd7d7",
+      "repair": "conservative-magenta-flatten",
+      "foregroundPixelsChanged": 0
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-003/enemy-043-weyland-yutani-commando/rejected/derived/attack-r1-flat-recomposed.png",
+      "sha256": "6e42e3f80870a849604e3ed3f8f14865c1381c78393f3a1609f8bb44e2ae0a23",
+      "repair": "lossless-cell-recomposition-baseline-428",
+      "scaleChanged": false
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}
