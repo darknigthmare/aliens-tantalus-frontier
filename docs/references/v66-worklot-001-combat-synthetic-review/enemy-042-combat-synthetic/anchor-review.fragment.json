@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-042-combat-synthetic": {
+      "status": "reviewed-candidate-with-art-gates",
+      "reviewer": "Codex /root/prepare_profile_042",
+      "reviewedAt": "2026-09-01",
+      "reviewedPoseCount": 40,
+      "method": "Per-pose pelvis or proximal hip-ring centre reviewed in nominal source-cell coordinates, then projected vertically to the physical support plane. Anchor y equals the current complete extraction lower exclusive sourceBounds value. For death frames 5-8, anchor x follows the collapsed pelvis/torso mass and explicitly excludes muzzle, magazine and farthest limb. Values are review candidates only and have not been normalized or merged.",
+      "visualReview": "Generation-result review plus deterministic coordinate, foreground-bound and root-registered playback overlays. All 40 landmarks lie within their foreground bounds; all 40 anchors use the reviewed support-plane convention. Uncertainty rises through the terminal death poses because the hip ring becomes partially occluded.",
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-anchor-review.png",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-anchor-review.png",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-anchor-review.png",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-anchor-review.png",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-anchor-review.png",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-anchor-playback.gif",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-anchor-playback.gif",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-anchor-playback.gif",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-anchor-playback.gif",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-anchor-playback.gif",
+        "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/orientation-weapon-anchor-contact.png"
+      ],
+      "clips": {
+        "idle": {
+          "sourceSha256": "bcafcba4982f825bb541799ad35576ff6dbed14e72564030ff74da1ec5bf4edf",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [212, 423], "landmark": [212, 242], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [161, 60, 364, 423], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 1, "reviewed": true, "anchor": [168, 423], "landmark": [168, 242], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [117, 60, 322, 423], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 2, "reviewed": true, "anchor": [140, 423], "landmark": [140, 240], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [90, 56, 290, 423], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 3, "reviewed": true, "anchor": [113, 423], "landmark": [113, 242], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [63, 60, 264, 423], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 4, "reviewed": true, "anchor": [209, 395], "landmark": [209, 220], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [157, 45, 364, 395], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 5, "reviewed": true, "anchor": [169, 396], "landmark": [169, 221], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [119, 45, 318, 396], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 6, "reviewed": true, "anchor": [141, 396], "landmark": [141, 221], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [91, 45, 291, 396], "evidence": "pelvis-to-loaded-foot support projection"},
+            {"frame": 7, "reviewed": true, "anchor": [113, 396], "landmark": [113, 221], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [63, 45, 263, 396], "evidence": "pelvis-to-loaded-foot support projection and loop closure"}
+          ]
+        },
+        "move": {
+          "sourceSha256": "8c71ca5f4f08b59609061adb0d1c15da5ef18b6cdfb27f23f8ca6e1a19e90501",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [199, 414], "landmark": [199, 262], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [152, 110, 338, 414], "evidence": "pelvis projected to near-foot contact plane"},
+            {"frame": 1, "reviewed": true, "anchor": [162, 413], "landmark": [162, 262], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [116, 110, 299, 413], "evidence": "pelvis projected through load phase"},
+            {"frame": 2, "reviewed": true, "anchor": [121, 414], "landmark": [121, 262], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [71, 110, 272, 414], "evidence": "pelvis root retained while support foot advances right"},
+            {"frame": 3, "reviewed": true, "anchor": [115, 413], "landmark": [115, 262], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [66, 110, 261, 413], "evidence": "pelvis projected through far-foot reach"},
+            {"frame": 4, "reviewed": true, "anchor": [186, 351], "landmark": [186, 198], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [136, 45, 338, 351], "evidence": "pelvis projected to far-foot contact plane"},
+            {"frame": 5, "reviewed": true, "anchor": [178, 351], "landmark": [178, 198], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [135, 45, 308, 351], "evidence": "pelvis projected through load phase"},
+            {"frame": 6, "reviewed": true, "anchor": [124, 351], "landmark": [124, 199], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [75, 46, 270, 351], "evidence": "pelvis projected through near-leg pass"},
+            {"frame": 7, "reviewed": true, "anchor": [124, 351], "landmark": [124, 198], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [80, 45, 256, 351], "evidence": "pelvis projected through cycle recovery"}
+          ]
+        },
+        "attack": {
+          "sourceSha256": "a391d47f1aa9cc6f1f1ab4e77d816e31bdb7ef93f0bd87f1f6912bd3da20cc70",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [164, 425], "landmark": [164, 257], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [116, 88, 309, 425], "evidence": "braced pelvis-to-foot support; weapon excluded"},
+            {"frame": 1, "reviewed": true, "anchor": [123, 425], "landmark": [123, 257], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [73, 88, 302, 425], "evidence": "braced pelvis-to-foot support; stock rise excluded"},
+            {"frame": 2, "reviewed": true, "anchor": [91, 425], "landmark": [91, 257], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [40, 88, 296, 425], "evidence": "braced pelvis-to-foot support; muzzle reach excluded"},
+            {"frame": 3, "reviewed": true, "anchor": [54, 425], "landmark": [54, 257], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [8, 88, 265, 425], "evidence": "braced pelvis-to-foot support; pre-fire aim excluded"},
+            {"frame": 4, "reviewed": true, "anchor": [161, 366], "landmark": [161, 202], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [111, 37, 362, 366], "evidence": "braced pelvis-to-foot support; recoil excluded"},
+            {"frame": 5, "reviewed": true, "anchor": [145, 366], "landmark": [145, 202], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [95, 37, 302, 366], "evidence": "braced pelvis-to-foot support; peak recoil excluded"},
+            {"frame": 6, "reviewed": true, "anchor": [82, 366], "landmark": [82, 202], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [29, 37, 282, 366], "evidence": "braced pelvis-to-foot support; settling weapon excluded"},
+            {"frame": 7, "reviewed": true, "anchor": [85, 366], "landmark": [85, 202], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [33, 37, 225, 366], "evidence": "braced pelvis-to-foot support and controlled return"}
+          ]
+        },
+        "death": {
+          "sourceSha256": "7bc9b41f17dff37933266059a33f9d373b42a6e0b9ae960eeaa8c9a7bf4a264e",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [190, 416], "landmark": [190, 258], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [144, 99, 327, 416], "evidence": "pelvis root before support loss"},
+            {"frame": 1, "reviewed": true, "anchor": [163, 416], "landmark": [163, 264], "confidence": "medium", "uncertaintyPx": 10, "sourceBounds": [106, 112, 309, 416], "evidence": "pelvis root during upper-body recoil"},
+            {"frame": 2, "reviewed": true, "anchor": [128, 415], "landmark": [128, 294], "confidence": "medium", "uncertaintyPx": 11, "sourceBounds": [65, 147, 276, 415], "evidence": "pelvis root during knee-load loss; advanced support foot excluded"},
+            {"frame": 3, "reviewed": true, "anchor": [81, 415], "landmark": [81, 313], "confidence": "medium", "uncertaintyPx": 11, "sourceBounds": [18, 189, 216, 415], "evidence": "descending pelvis projected to support plane"},
+            {"frame": 4, "reviewed": true, "anchor": [185, 289], "landmark": [185, 227], "confidence": "medium", "uncertaintyPx": 12, "sourceBounds": [129, 111, 364, 289], "evidence": "collapsed pelvis/torso projection; weapon extent excluded"},
+            {"frame": 5, "reviewed": true, "anchor": [148, 288], "landmark": [148, 232], "confidence": "medium", "uncertaintyPx": 12, "sourceBounds": [62, 149, 350, 288], "evidence": "collapsed pelvis/torso projection; weapon extent excluded"},
+            {"frame": 6, "reviewed": true, "anchor": [145, 288], "landmark": [145, 243], "confidence": "low", "uncertaintyPx": 13, "sourceBounds": [10, 187, 356, 288], "evidence": "settled pelvis/torso mass projection; muzzle and far limb excluded"},
+            {"frame": 7, "reviewed": true, "anchor": [144, 289], "landmark": [144, 248], "confidence": "low", "uncertaintyPx": 14, "sourceBounds": [4, 208, 355, 289], "evidence": "terminal pelvis/torso mass projection; muzzle, magazine and farthest limb excluded"}
+          ]
+        },
+        "reload": {
+          "sourceSha256": "11b18e312884f2fc605b5ebae08376b28b421372b79fb354da651a6dddd63a17",
+          "sourceSize": [1774, 887],
+          "frames": [
+            {"frame": 0, "reviewed": true, "anchor": [152, 412], "landmark": [152, 232], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [104, 52, 311, 412], "evidence": "stable pelvis-to-foot support"},
+            {"frame": 1, "reviewed": true, "anchor": [128, 412], "landmark": [128, 232], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [83, 51, 289, 412], "evidence": "stable pelvis-to-foot support; muzzle dip excluded"},
+            {"frame": 2, "reviewed": true, "anchor": [102, 412], "landmark": [102, 232], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [54, 51, 261, 412], "evidence": "stable pelvis-to-foot support; magazine manipulation excluded"},
+            {"frame": 3, "reviewed": true, "anchor": [68, 412], "landmark": [68, 232], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [19, 51, 234, 412], "evidence": "stable pelvis-to-foot support; removed magazine excluded"},
+            {"frame": 4, "reviewed": true, "anchor": [133, 379], "landmark": [133, 200], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [84, 22, 315, 379], "evidence": "stable pelvis-to-foot support; replacement handoff excluded"},
+            {"frame": 5, "reviewed": true, "anchor": [143, 378], "landmark": [143, 200], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [94, 22, 305, 378], "evidence": "stable pelvis-to-foot support; seating magazine excluded"},
+            {"frame": 6, "reviewed": true, "anchor": [112, 378], "landmark": [112, 200], "confidence": "medium", "uncertaintyPx": 9, "sourceBounds": [64, 22, 274, 378], "evidence": "stable pelvis-to-foot support; action operation excluded"},
+            {"frame": 7, "reviewed": true, "anchor": [88, 378], "landmark": [88, 200], "confidence": "medium", "uncertaintyPx": 8, "sourceBounds": [40, 22, 248, 378], "evidence": "stable pelvis-to-foot support and ready return"}
+          ]
+        }
+      },
+      "accepted": false,
+      "canonExact": false,
+      "integrationStatus": "standalone-reviewed-candidate-not-merged"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "worklotId": "worklot-001",
+  "batchId": "batch-003",
+  "profileId": "enemy-042-combat-synthetic",
+  "reviewedAt": "2026-09-01",
+  "status": "technical-review-complete-art-not-accepted",
+  "canonExact": false,
+  "sourceCandidates": [
+    {"clip": "idle", "path": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/idle.png", "bytes": 1531138, "sha256": "bcafcba4982f825bb541799ad35576ff6dbed14e72564030ff74da1ec5bf4edf", "size": [1774, 887], "mode": "RGB", "c2paInstanceId": "5e5ecd37-80a9-49b0-81a2-3e2073221983"},
+    {"clip": "move", "path": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/move.png", "bytes": 1424617, "sha256": "8c71ca5f4f08b59609061adb0d1c15da5ef18b6cdfb27f23f8ca6e1a19e90501", "size": [1774, 887], "mode": "RGB", "c2paInstanceId": "dbdb4a14-7e73-4e70-a2aa-0797ae763a2f"},
+    {"clip": "attack", "path": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/attack.png", "bytes": 1504956, "sha256": "a391d47f1aa9cc6f1f1ab4e77d816e31bdb7ef93f0bd87f1f6912bd3da20cc70", "size": [1774, 887], "mode": "RGB", "c2paInstanceId": "246e3200-c33f-47ac-b243-1e153a0eb9b5"},
+    {"clip": "death", "path": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/death.png", "bytes": 1365748, "sha256": "7bc9b41f17dff37933266059a33f9d373b42a6e0b9ae960eeaa8c9a7bf4a264e", "size": [1774, 887], "mode": "RGB", "c2paInstanceId": "2b7a9501-1b55-4088-a68d-2ef313cb89c7"},
+    {"clip": "reload", "path": "assets/openai/sprites/frames/v66/batch-003/enemy-042-combat-synthetic/reload.png", "bytes": 1580401, "sha256": "11b18e312884f2fc605b5ebae08376b28b421372b79fb354da651a6dddd63a17", "size": [1774, 887], "mode": "RGB", "c2paInstanceId": "257d4c74-418f-4ccc-b155-cfd78985f87f"}
+  ],
+  "activeSourceTotal": {"files": 5, "bytes": 7406860, "poses": 40},
+  "technicalReview": {
+    "physicalAnchors": {"reviewed": 40, "required": 40, "allLandmarksInsideForegroundBounds": true, "allSupportPlaneChecks": true, "fragmentPath": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/anchor-review.fragment.json", "fragmentSha256": "0adf91114fea999d274562bf2ebecfdd9f174b8a84b8a1d3d61b4a0bfc8b7e0b"},
+    "scale": {
+      "baselineClip": "idle",
+      "landmark": "uninterrupted armored cranial-shell lateral chord, right endpoint exclusive",
+      "sourceScaleByClip": {"idle": 1.0, "move": 1.216667, "attack": 1.089552, "death": 1.15873, "reload": 1.042857},
+      "observedRigidSizeVsIdlePercent": {"idle": 0.0, "move": -17.808, "attack": -8.219, "death": -13.699, "reload": -4.11},
+      "materialBlockers": ["move", "death"],
+      "factorsApplied": false,
+      "fragmentPath": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/scale-review.fragment.json",
+      "fragmentSha256": "9e0ac68567ab3293f41f694c9a7bc45f5352db947273e5e39cb451e4194a6098"
+    },
+    "orientation": {"visualFacing": "right", "rightwardExtentProxyPasses": 40, "required": 40, "proxyIsNotSemanticDetector": true},
+    "weaponContinuity": {"completeCarbineVisible": 40, "required": 40, "sameBroadWeaponIdentity": true, "reloadMagazineHandoff": "compact-ambiguous-human-signoff-required"},
+    "playback": {
+      "rowMajorEightFramesPerClip": true,
+      "idle": {"contractFps": 6, "loop": true, "gifFrames": 8, "gifDurationMs": 160, "gifLoopExtension": 0},
+      "move": {"contractFps": 12, "loop": true, "gifFrames": 8, "gifDurationMs": 80, "gifLoopExtension": 0},
+      "attack": {"contractFps": 12, "loop": false, "gifFrames": 8, "gifDurationMs": 80, "gifLoopExtension": null},
+      "death": {"contractFps": 10, "loop": false, "gifFrames": 8, "gifDurationMs": 100, "gifLoopExtension": null},
+      "reload": {"contractFps": 10, "loop": false, "gifFrames": 8, "gifDurationMs": 100, "gifLoopExtension": null},
+      "note": "GIF timing is a review derivative quantized to 10 ms; contract fps remains authoritative."
+    },
+    "strictOpenDefects": [
+      "All five boards fail perfectly uniform opaque #FF00FF matte.",
+      "Move is materially underscale relative to idle.",
+      "Death onset is materially underscale relative to idle independently of corpse width.",
+      "Reload R3 magazine handoff remains compact and ambiguous.",
+      "Reload combined boundary clearance is 54 px versus the 55 px target.",
+      "Idle poses 6/8 and attack poses 4/7 share coarse dHashes although their pixels are not exact duplicates.",
+      "Dedicated local preview bridge failed on Windows deny-read ACL injection; final human overlay/art sign-off remains required."
+    ]
+  },
+  "visualEvidence": [
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-coordinate-review.png", "bytes": 1531764, "sha256": "9028b5a923e68140eda1e3be6c86ead4c3bbeee66f90d71aa445765c1b2dd6f9", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-coordinate-review.png", "bytes": 1431843, "sha256": "933f1529bf2d4dfc7ab951314b8997b0386b7ae84d98d8432e7f4c723f78c165", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-coordinate-review.png", "bytes": 1511127, "sha256": "1703c49662c4e39c1809d3eb0e68cc341e09c066b7bc974f20ac797281b4ab64", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-coordinate-review.png", "bytes": 1365750, "sha256": "dc34fcd15221d923a4f0c32079c078b1cbb05abc735e09c221c633c285ad9608", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-coordinate-review.png", "bytes": 1579712, "sha256": "446b9232f9f080312890b175d8ba8379cad056b43969aa3de9f958b9d1ad6397", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-anchor-review.png", "bytes": 1488896, "sha256": "5e8cba0def29c207a06a01e95731423bcf3c6ced21ef28f67213e788f305b779", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-anchor-review.png", "bytes": 1389536, "sha256": "c1bec62e0c680cdf32b3901832916085a94fe2369281b169a6e59fd0e7bc1be5", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-anchor-review.png", "bytes": 1469609, "sha256": "38986ea439d6fdb0d85cf25df097793a5d2bad8b4bc326ae726aa6a424dcfeec", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-anchor-review.png", "bytes": 1334438, "sha256": "42bac41ea53e8e6233da56471b5c3cc76883d92bdcb326be8044d9b2fb501a1b", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-anchor-review.png", "bytes": 1546096, "sha256": "7622bc536201d84c2e324ec0017fef2bff7424080e32cb72df6c3b9c5b1fe537", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-scale-review.png", "bytes": 1509492, "sha256": "0a9e749c2c5a8e16642a6abf73424a97f0fbeeadaf99102713ae52c74548d9e4", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-scale-review.png", "bytes": 1404333, "sha256": "8338adc4697741a98a11db717855cceb82c01084db299e979d2b07b7c0c60486", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-scale-review.png", "bytes": 1485210, "sha256": "d03ceb4c30cacc2537194e8d3666c6201d37f137b9e81010e888c27164d8020d", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-scale-review.png", "bytes": 1343215, "sha256": "96f71be7c176eaf3f5a869e411a2aa31fedc4d8ee6cfff54449fdc5abc6a16ef", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-scale-review.png", "bytes": 1558306, "sha256": "9786c05bf7c9d805fc739ba266ab278e51aca97577f4141fbbc5947227e06f5b", "size": [1774, 887], "format": "PNG", "frames": 1},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/idle-anchor-playback.gif", "bytes": 259556, "sha256": "33729d090fb1bdc0d3b03ea0275dcc9e8f1853dcf742523764c51ae46e197fc0", "size": [560, 520], "format": "GIF", "frames": 8},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/move-anchor-playback.gif", "bytes": 231379, "sha256": "1b8366253151c81b94f40f06ecad89cdacaa1970f5cf511614c9b20fe67551ef", "size": [560, 520], "format": "GIF", "frames": 8},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/attack-anchor-playback.gif", "bytes": 247051, "sha256": "4add40aca95b5c3bdc16dee7e6e71e20388a2c266bda5d3d76f9dfdfd9496ec2", "size": [560, 520], "format": "GIF", "frames": 8},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/death-anchor-playback.gif", "bytes": 212282, "sha256": "10a8e4f5de1f0b6fb8d1f55c3bbada7bb8853f0beb3ecfe3aaa9ba71bfb297c0", "size": [560, 520], "format": "GIF", "frames": 8},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/reload-anchor-playback.gif", "bytes": 272653, "sha256": "d4cfe02a6ae6c5667be565f4a2a9616161986d033ff8c823487ae665a4b20198", "size": [560, 520], "format": "GIF", "frames": 8},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/orientation-weapon-anchor-contact.png", "bytes": 471490, "sha256": "021b6facce105c74cf3f33998b5faedb672a2e0891d031cc02b1e88999aaafa4", "size": [1560, 950], "format": "PNG", "frames": 1}
+  ],
+  "visualEvidenceTotal": {"files": 21, "bytes": 23643738},
+  "documents": [
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_REFERENCE.json", "sha256": "0ee3b7482aa559df21921d3d441afa1b99f50274ac8dfbdee6fb90219bad93e8"},
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_REFERENCE_AUDIT.md", "sha256": "47c77d8df2c3d77a8ba9543b6131b12c550985dab0bc93ae082f685fe613ee2e"},
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_SOURCE_QA.json", "sha256": "9b1d8123d308e8812b08147f670aa46a66c73ed45f3f575e122942d8e08a8c21"},
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_SOURCE_QA_AUDIT.md", "sha256": "9c9ed2e95c5f75a3819e76b45e3b6f9f7e5e6e60379ecb41b3cf9383106b33e9"},
+    {"path": "docs/references/v66-worklot-001-events/enemy-042-combat-synthetic/generation-events.json", "sha256": "a90c2c75bf4494a5b813de06938ad2b068c74d74207dae9048d3657b1d7dd97c"},
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_TECHNICAL_AUDIT.md", "bytes": 10370, "sha256": "dc9482220a2b7c02e0fbbbebc2e68c97ee307968532a30a240afbdeb626923a6"},
+    {"path": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_PRODUCTION_EVENT_AUDIT.md", "bytes": 2487, "sha256": "7278eb0da5d19cafaf5580eb836881e205120db61108d4dda88464c4527f4fbb"},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/production-event-validation.json", "bytes": 4005, "sha256": "087ee02cece9486e9acb92ed3a4ef16f420380e9ee3f54c5dfe4ce669f647e2f"}
+  ],
+  "renderers": [
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/render-combat-synthetic-overlays.py", "bytes": 4534, "sha256": "fe9fac5aba1312b625e58535290b635c1f053ad24430ce3e8c4a20245aab9c4c"},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/render-combat-synthetic-technical-review.py", "bytes": 18240, "sha256": "f4ad7879889a9792bf25b39ef76af9a79173ea3c4b39f06d2aeddecb427a5ef0"},
+    {"path": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/validate-production-events-standalone.mjs", "bytes": 2607, "sha256": "4894ed75da8dcf5373a2dc159c62711cdfd2f4d17fdafe1323d99977d9e68cca"}
+  ],
+  "productionEvents": [
+    {"clip": "idle", "path": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/idle.production-event.json", "bytes": 2593, "sha256": "5a8fd46eccedfe7072015518fd35464e5f7a9978ea11dd43dd8035dd0b260397"},
+    {"clip": "move", "path": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/move.production-event.json", "bytes": 2659, "sha256": "e39c4e2e831bd4b7403278f4811d1a490a3edf70af89287f5bf7d9de67047207"},
+    {"clip": "attack", "path": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/attack.production-event.json", "bytes": 2678, "sha256": "996cd5c497ba467dcf7e1d0419cc5f17f12e438ba61c783923e367896811990a"},
+    {"clip": "death", "path": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/death.production-event.json", "bytes": 2664, "sha256": "3367f04f572aa7de38d7c59b56fee22947fcd61647f0bfd66fb3852c4fd9ddb9"},
+    {"clip": "reload", "path": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/reload.production-event.json", "bytes": 2764, "sha256": "1d6e74d5657306592c9979300f7cad9eefe4102bb49a22211f08bf8368e744ff"}
+  ],
+  "productionEventValidation": {"implementation": "scripts/enemy-batch-production.mjs appendProductionEvent", "mode": "in-memory-only", "status": "generated", "generatedClips": 5, "requiredClips": 5, "issues": [], "accepted": false, "runtimeIntegrated": false, "canonExact": false, "globalStateWritten": false},
+  "sourceUsePolicy": {"officialOrLicensedBitmapEmbedded": false, "officialAssetCopiedOrTraced": false, "predecessorBytesTransmittedToProvider": false, "classification": "PROJECT_ADAPTATION"},
+  "scopeAssertions": {"artAccepted": false, "normalizationRun": false, "runtimeIntegrated": false, "globalReferenceMerged": false, "globalQueueEdited": false, "globalStateEdited": false, "globalScaleEdited": false, "globalAnchorEdited": false, "metadataEdited": false, "otherProfileEdited": false, "v65Edited": false, "gitTouched": false}
+}

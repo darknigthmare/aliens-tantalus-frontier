@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "profileId": "enemy-042-combat-synthetic",
+  "validatedAt": "2026-09-01",
+  "validation": "scripts/enemy-batch-production.mjs appendProductionEvent in memory only",
+  "validatorPath": "docs/references/v66-worklot-001-combat-synthetic-review/enemy-042-combat-synthetic/validate-production-events-standalone.mjs",
+  "referenceInputPath": "docs/references/V66_WORKLOT_001_COMBAT_SYNTHETIC_REFERENCE.json",
+  "referenceLockSha256ResolvedInMemory": "43a833414ebc5724a4c0343a8ed43c0ccd8aaa90bbe6b1ae934ee3a567b03324",
+  "wroteGlobalQueue": false,
+  "wroteGlobalState": false,
+  "wroteGlobalReferences": false,
+  "jobStatus": "generated",
+  "generatedClips": 5,
+  "requiredClips": 5,
+  "issues": [],
+  "events": [
+    {
+      "clipId": "idle",
+      "inputPath": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/idle.production-event.json",
+      "kind": "generated-candidate-selected",
+      "sourceSha256": "bcafcba4982f825bb541799ad35576ff6dbed14e72564030ff74da1ec5bf4edf",
+      "promptSha256": "38483ce4447610c80e42560c870b95f8f64a5fae5eeda9e699626e2fad82f466",
+      "contractPromptSha256ResolvedInMemory": "4c02f03031a9ae8a917d34f3c164d4aa626f2b421925ba05dff70b50745dce96",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "move",
+      "inputPath": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/move.production-event.json",
+      "kind": "generated-candidate-selected",
+      "sourceSha256": "8c71ca5f4f08b59609061adb0d1c15da5ef18b6cdfb27f23f8ca6e1a19e90501",
+      "promptSha256": "e5fd9c23a21631e49c9e4f8601eb042169d7ecd2ad76000b827d9083472d8feb",
+      "contractPromptSha256ResolvedInMemory": "b6bc9acf6e914ebb23dc427b9aebd032ffcddeaf5809e0ee83908a4bb82fbd17",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "attack",
+      "inputPath": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/attack.production-event.json",
+      "kind": "generated-candidate-selected",
+      "sourceSha256": "a391d47f1aa9cc6f1f1ab4e77d816e31bdb7ef93f0bd87f1f6912bd3da20cc70",
+      "promptSha256": "ccb0d282619b95ee8a9317fc2e59f1f466317d0771b43e1576ed18e9ffe20672",
+      "contractPromptSha256ResolvedInMemory": "00bf28d8b05f5899cae46582920fd12a177fc6f9f24f0bbfe1db2c282b91c88f",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "death",
+      "inputPath": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/death.production-event.json",
+      "kind": "generated-candidate-selected",
+      "sourceSha256": "7bc9b41f17dff37933266059a33f9d373b42a6e0b9ae960eeaa8c9a7bf4a264e",
+      "promptSha256": "c2ffe94ce2da24aa5ea527498afbd9ae66302ecf89535500297d05b57e1ba5f0",
+      "contractPromptSha256ResolvedInMemory": "614554fe70cbbf0e1503e27ce86d311d649df7ab6c60d8895c021d09222cd80e",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    },
+    {
+      "clipId": "reload",
+      "inputPath": "docs/references/v66-worklot-001-prompts/enemy-042-combat-synthetic/reload.production-event.json",
+      "kind": "generated-candidate-selected",
+      "sourceSha256": "11b18e312884f2fc605b5ebae08376b28b421372b79fb354da651a6dddd63a17",
+      "promptSha256": "a83713a7f452908821e104cde1d3e5fc7b8e1982a3b846c2bfc7c457d40440ca",
+      "contractPromptSha256ResolvedInMemory": "63f8ccad472bb232215c427c057b55482f4b9e5b14188b3d3117733c29fad508",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    }
+  ],
+  "note": "The five input documents are valid `record` inputs after the standalone reviewed reference is resolved. appendProductionEvent filled contractPromptSha256, referenceLockSha256, actualPromptText and at in memory. This receipt deliberately does not claim that the global queue currently contains the standalone reference and does not serialize the returned state."
+}
