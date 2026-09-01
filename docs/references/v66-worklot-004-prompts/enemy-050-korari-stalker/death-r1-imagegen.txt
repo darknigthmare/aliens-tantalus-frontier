@@ -1,0 +1,19 @@
+Use case: stylized-concept
+Asset type: raw production 2D side-view game animation sprite sheet
+Input images: Image 1 is the project-owned Korari Stalker identity reference only. Preserve its species identity, silhouette, palette and material language, but create wholly new original fan-made/project pixels and new poses; do not copy or trace any source pixels or exact source pose.
+
+Create ONE production sprite sheet of Korari Stalker for Aliens: Tantalus Frontier, animation death.
+Identity lock: PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.
+Archetype Korari Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.
+Animation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.
+Exactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.
+Strict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.
+Use one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.
+True transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.
+Preserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.
+
+Frame-by-frame motion lock, row-major: 1 lethal impact while still supported; 2 sensory/head recoil; 3 forelimb failure; 4 torso begins falling; 5 tail loses tension; 6 flank contacts the ground; 7 final settle; 8 fully motionless terminal corpse. The sequence is irreversible: no recovery, standing final frame, gore burst, detached limb or species change.
+Layout enforcement: use a wide landscape canvas with eight equal imaginary cells in exactly 4 columns by 2 rows. Do not draw cell borders. Every cell contains exactly one complete identical Korari Stalker, centered with generous empty gutters on every side. Keep the same long low 176x88 gameplay envelope, torso length, shoulder height and orthographic distance in all cells; the support line may lower naturally only as the body collapses. The muzzle remains oriented RIGHT until it rests laterally; never mirror the creature.
+Background enforcement: use one perfectly uniform solid pure #FF00FF chroma field over the entire canvas, including gutters. No transparency checkerboard, gradient, texture, floor, cast shadow, scenery, text, letters, numerals, captions, icons, logo, watermark, UI or grid.
+Anatomy exclusions: exactly one wedge head, one natural jaw, one visible lateral eye/sensor set, four distinct supple animal limbs and exactly one long flexible non-bladed tail. No inner jaw, dome, dorsal tubes, biomechanical ribs, acid, blade tail, mask, armor, dreadlocks, technology, active camouflage, extra limb, missing limb, Earth panther copy or borrowed-franchise creature.
+Original fan-made/project interpretation only; canonExact=false; no official or 1:1 claim.

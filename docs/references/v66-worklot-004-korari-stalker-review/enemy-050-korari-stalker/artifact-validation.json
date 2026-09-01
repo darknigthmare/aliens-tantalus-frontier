@@ -1,0 +1,900 @@
+{
+  "schema": 1,
+  "profileId": "enemy-050-korari-stalker",
+  "validatedFiles": 88,
+  "files": [
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png",
+      "sha256": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+      "bytes": 265370,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png",
+      "sha256": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1",
+      "bytes": 257700,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/attack-r1-imagegen-proven-magenta-keyed-source.png",
+      "sha256": "a9785d456d8a81664cf8c8298d736fd9c04f6b348f15bbcb2ce6bb03b4741e70",
+      "bytes": 391965,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/attack-r1-imagegen-rigid-calibrated-recomposed.png",
+      "sha256": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+      "bytes": 265370,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/death-r2-imagegen-proven-magenta-keyed-source.png",
+      "sha256": "7c96c12133c3e19b831a7c83014782c325bea0ea22a82be5325f7c8f4aaa5896",
+      "bytes": 421977,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/death-r2-imagegen-rigid-calibrated-recomposed.png",
+      "sha256": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1",
+      "bytes": 257700,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-01-raw-keyed.png",
+      "sha256": "61c310126a87e5049c4432cdcee4db35b7af8c91a035867de20a4750f305037b",
+      "bytes": 73115,
+      "size": [
+        354,
+        108
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-02-raw-keyed.png",
+      "sha256": "c291dac25748cbe998bc775a01fdc4026d01d96cd6a9c85ab206fd7b2af3b460",
+      "bytes": 82878,
+      "size": [
+        329,
+        145
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-03-raw-keyed.png",
+      "sha256": "31b109053ef5b1b30e6e4eb16917f1ecce3400e9aabd1e8fecacc87a6eed1793",
+      "bytes": 80685,
+      "size": [
+        325,
+        136
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-04-raw-keyed.png",
+      "sha256": "8ad52411b5db81da9ab7fa851e756ef049da18102ed303344235529ce04c0651",
+      "bytes": 81285,
+      "size": [
+        371,
+        123
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-05-raw-keyed.png",
+      "sha256": "0868d785531e776d46fefbc3a33a5e3314b04e11db4977276db46aa7b35b2049",
+      "bytes": 81236,
+      "size": [
+        354,
+        130
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-06-raw-keyed.png",
+      "sha256": "d3b8e0f35febc9a8bfc985a236dd07e76fcba978b080feb6f8b3403737b19fee",
+      "bytes": 69123,
+      "size": [
+        377,
+        98
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-07-raw-keyed.png",
+      "sha256": "269dc6928ad0735dfb940b45c635a178e92f59bad2a94dc595d7974f32742b89",
+      "bytes": 85374,
+      "size": [
+        336,
+        138
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/attack/frame-08-raw-keyed.png",
+      "sha256": "2ad532e8a74f5373d3409bfa413ecfda1e3ebb0bb5f31e6183318b553c5db008",
+      "bytes": 68255,
+      "size": [
+        318,
+        111
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-01-raw-keyed.png",
+      "sha256": "30d0569992a59515b99a2975d05a753b78abcabb740184a1367ccd679b947673",
+      "bytes": 93990,
+      "size": [
+        371,
+        138
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-02-raw-keyed.png",
+      "sha256": "dd500ebacaba75e4d6de7045c24dd775f33f125f627c038000a419f4448ad495",
+      "bytes": 112199,
+      "size": [
+        363,
+        196
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-03-raw-keyed.png",
+      "sha256": "e604abc3e23424fc47c101aad55074a88e0ff8a7864a9a34e462bd189bd98317",
+      "bytes": 95784,
+      "size": [
+        382,
+        140
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-04-raw-keyed.png",
+      "sha256": "cea5d48f549172ce183ba8452abccd4f0a21eb86bb838edcbd6023fd8bcaf018",
+      "bytes": 79793,
+      "size": [
+        407,
+        109
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-05-raw-keyed.png",
+      "sha256": "261beee6327a54c5ffc63a2f8ee4dcdbaa8a1b97120b96c87ca3138393837169",
+      "bytes": 80823,
+      "size": [
+        374,
+        112
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-06-raw-keyed.png",
+      "sha256": "4a3acbc6c66b9a0274e32e000074fd4ed928a3a586bfff5d70aa3a3dc18a065e",
+      "bytes": 72009,
+      "size": [
+        394,
+        94
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-07-raw-keyed.png",
+      "sha256": "3a527f6f759de6e7938cac035dad661240d8238c2338db588b51ccbc280e78ae",
+      "bytes": 61810,
+      "size": [
+        382,
+        81
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/death/frame-08-raw-keyed.png",
+      "sha256": "56fd450f811fe21a2158637305e3e59e90c7177700f038ee40e9c5422cca9745",
+      "bytes": 53578,
+      "size": [
+        390,
+        70
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-01-raw-keyed.png",
+      "sha256": "8f1821c68ddd409a15ddce05574854fbe2b20d3180d6c7c43ca121a3b0a7fb12",
+      "bytes": 65882,
+      "size": [
+        358,
+        96
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-02-raw-keyed.png",
+      "sha256": "2e29471f75c0a189e67a26ae212952cb5f14c5e2919d0412fa1166deea61f25c",
+      "bytes": 68021,
+      "size": [
+        345,
+        103
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-03-raw-keyed.png",
+      "sha256": "70f2791eb7a235fd055af86bb556a14b9ca687e37dfedb41846277bc187d1b85",
+      "bytes": 80089,
+      "size": [
+        355,
+        124
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-04-raw-keyed.png",
+      "sha256": "700b30b9ce3a1e93b96472a84489b74fa71563facc8e97d6bb7c62c8b6f5c23a",
+      "bytes": 80547,
+      "size": [
+        366,
+        130
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-05-raw-keyed.png",
+      "sha256": "fe3c2f15bac38d7d0040d37b445fc8005012361b173099d59e00c96e1ac9c998",
+      "bytes": 89090,
+      "size": [
+        365,
+        154
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-06-raw-keyed.png",
+      "sha256": "d7fa68186db76d0c74d129c645fa554fb7f21a19b5427ddc68da8faf8e46f51c",
+      "bytes": 74471,
+      "size": [
+        356,
+        111
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-07-raw-keyed.png",
+      "sha256": "bbd53c63a6340a92fa935201882dcce39fc5cc1f6116738f06e34a472cb7d2ed",
+      "bytes": 71278,
+      "size": [
+        347,
+        111
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/idle/frame-08-raw-keyed.png",
+      "sha256": "0c21d847b1bee3d001378acbcb325a810c0377015ad4f12624e0806215b0c8f4",
+      "bytes": 65041,
+      "size": [
+        352,
+        96
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-01-raw-keyed.png",
+      "sha256": "7751fa3798d38864da39d852f8bc522f49081d168bb9e66790aca433324e1a7a",
+      "bytes": 91947,
+      "size": [
+        387,
+        134
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-02-raw-keyed.png",
+      "sha256": "515568d9a16a6af957b73c873a6aae205876b379698ffcf5968d6401494b741a",
+      "bytes": 77967,
+      "size": [
+        353,
+        117
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-03-raw-keyed.png",
+      "sha256": "ec922a8471992d8db49bda3854e0def8c1412e6a0828b33425caa53150ff2a37",
+      "bytes": 87616,
+      "size": [
+        374,
+        127
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-04-raw-keyed.png",
+      "sha256": "97d2f7a9e0a60e331a2dc9abe5a846acdff9a27d8166a30b6b426d139df09d31",
+      "bytes": 83026,
+      "size": [
+        369,
+        123
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-05-raw-keyed.png",
+      "sha256": "d91f0d346b2c4fe4cafcced7ac2f823fa667c42fa62d9fcc460a47bb50f4a856",
+      "bytes": 93347,
+      "size": [
+        382,
+        134
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-06-raw-keyed.png",
+      "sha256": "d1ed87ff66d5f1d6a59d2657e17bbe62003e76f942484f5a71e12eb295cc5e6a",
+      "bytes": 73215,
+      "size": [
+        338,
+        114
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-07-raw-keyed.png",
+      "sha256": "acf6c8d0301bc91a60285055e9b88639e7e52236f924673085010546416c721f",
+      "bytes": 95096,
+      "size": [
+        401,
+        139
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/extracted/move/frame-08-raw-keyed.png",
+      "sha256": "53e50c8132a47ab835ee570b718aa6380b94b62f9d6f5eededcdc2fe4937d1b2",
+      "bytes": 76055,
+      "size": [
+        343,
+        119
+      ],
+      "format": "PNG",
+      "mode": "RGBA",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/idle-r2-imagegen-proven-magenta-keyed-source.png",
+      "sha256": "bb0fec36839899d707e5823c7e33311c42a79b021ff0b8729f1b1a055122fe6c",
+      "bytes": 367305,
+      "size": [
+        1610,
+        977
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/idle-r2-imagegen-rigid-calibrated-recomposed.png",
+      "sha256": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+      "bytes": 270311,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/move-r1-imagegen-proven-magenta-keyed-source.png",
+      "sha256": "a717a9d0f6cf0ab8ebb1a830f1af30d5a9e9b45fb7fccd8a88d413e7e00c1b57",
+      "bytes": 417973,
+      "size": [
+        1672,
+        941
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/move-r1-imagegen-rigid-calibrated-recomposed.png",
+      "sha256": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+      "bytes": 268871,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png",
+      "sha256": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+      "bytes": 270311,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png",
+      "sha256": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+      "bytes": 268871,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/attack-anchor-playback.gif",
+      "sha256": "659f88a400a7efcd373d1d1e7bad21100cf9e125eec2e205dd2957970454c293",
+      "bytes": 177159,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/attack-pounce-bite-review.png",
+      "sha256": "3859320550764f392d16992aaa46a520b606d04b2dd416756381e81a5eee3a5b",
+      "bytes": 253106,
+      "size": [
+        1680,
+        860
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/attack-raw-extraction-overlay.png",
+      "sha256": "62959d051dfa83f863c0d28925b46b44bd1deffb3db8f8904322b5f79fef67b7",
+      "bytes": 1231394,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/attack-technical-overlay.png",
+      "sha256": "13eb7c76cecb5a1ea41569f7e35949d94441e46651f484d6662281ac0d613fcc",
+      "bytes": 270540,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/death-anchor-playback.gif",
+      "sha256": "df08e0012798d63a3db4b107cd2853beb3683eb21d6a254a5fad3e5f7152a38f",
+      "bytes": 174222,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/death-raw-extraction-overlay.png",
+      "sha256": "291cc4c0de388c6c289f6c511f57ec4df0f09cccc91ebcb87694028a364714ae",
+      "bytes": 1265851,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/death-technical-overlay.png",
+      "sha256": "a805b9226e821de139bc93533d0daf9d2252ed9919ccb98ce0ebacbd8bb5031a",
+      "bytes": 263354,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/identity-motion-anchor-contact-sheet.png",
+      "sha256": "148505bc2de2eccc00446e0c3fecb260c01b6ce9106deb5208c29f94d8da92bc",
+      "bytes": 178256,
+      "size": [
+        1465,
+        700
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/idle-anchor-playback.gif",
+      "sha256": "70b16153c9e017091ca2d6e0381af28f91c4cfe8935267f3cab1af898420e882",
+      "bytes": 177966,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/idle-raw-extraction-overlay.png",
+      "sha256": "2d0667a85d613589433968b355b322f4c97bc00cbe3f5c4779d67d8ffb95b701",
+      "bytes": 1225767,
+      "size": [
+        1610,
+        977
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/idle-technical-overlay.png",
+      "sha256": "ec27ecb33075b2479969bb05561371b66491a5c87c485137b589e5a74b8cfdb3",
+      "bytes": 275776,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/move-anchor-playback.gif",
+      "sha256": "abaeb2a7d7d9634d5ecadd5ce8d7085ac8dcbe6a1564e72855ac623d8e4b752b",
+      "bytes": 177891,
+      "size": [
+        640,
+        520
+      ],
+      "format": "GIF",
+      "mode": "P",
+      "frames": 8
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/move-raw-extraction-overlay.png",
+      "sha256": "af77d9934acc7d2730e10e63c767c9f4aa657d721439e161ea67df6a497d341e",
+      "bytes": 1275529,
+      "size": [
+        1672,
+        941
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/move-technical-overlay.png",
+      "sha256": "6f975bca5b4cf25252d06f808fa1712de01d520d1770beb07e582169eee80857",
+      "bytes": 275747,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/neutral-background-despill-audit.png",
+      "sha256": "970571251d14ba9e20b9a112f08d15dd838df20ff3fcd640d6bfd5fcbec190bc",
+      "bytes": 276855,
+      "size": [
+        1790,
+        820
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/qa/rigid-body-measurement-review.png",
+      "sha256": "ba30debe5e5b6cf6e35e1124654d17e6a35341e215bd98de5cd6d780bb4eac2f",
+      "bytes": 554333,
+      "size": [
+        1550,
+        1320
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/attack-r1-imagegen.png",
+      "sha256": "a00cbad3a59073b0bbd39fbd6016b3f59d952ff1c683b6388201cc83449064a4",
+      "bytes": 1531014,
+      "size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/death-r2-imagegen.png",
+      "sha256": "e273e6fafa9b06989e5bd4ad4af0eb848e822dc30b54de4b071b5ffbc0eeee0a",
+      "bytes": 1292494,
+      "size": [
+        1774,
+        887
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/idle-r2-imagegen.png",
+      "sha256": "2e159f87cbfd70d41dff2a8837694775a970bd4d5e0b843d1bf8f2d00b6c4023",
+      "bytes": 1262427,
+      "size": [
+        1610,
+        977
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/move-r1-imagegen.png",
+      "sha256": "d24f91d853dbf47e8447d39ac95b07754cca68b93b9b6b22b04434de1ad64837",
+      "bytes": 1310078,
+      "size": [
+        1672,
+        941
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "frames": 1
+    },
+    {
+      "path": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+      "sha256": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+      "bytes": 6601705
+    },
+    {
+      "path": "docs/references/V66_WORKLOT_003_KORARI_STALKER_REFERENCE.json",
+      "sha256": "e08e3e869a365a12ca5097ee39e0d2baf017f7a2672dd18764ad7f56c7f84ebf",
+      "bytes": 10434
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/anchor-review.fragment.json",
+      "sha256": "ef41f5faf4ef7667d4c3b998dd8bda8db3ce412d70d828a7294a5e7affcfbbbb",
+      "bytes": 27336
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/derived-provenance.json",
+      "sha256": "682e41fb5a432281dc5d2f57eab6ebf359e1b9468e4cf65e724aa8a7129d4e73",
+      "bytes": 214895
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/events/attack.production-event.json",
+      "sha256": "f9e798963e195c204ad024796ff8c6bc37878db5b4a5f88d3c27459460860a68",
+      "bytes": 14356
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/events/death.production-event.json",
+      "sha256": "8a0984568a63f15e41d73c4cf33b085b28fa20d48782e921a19774da3d3ead81",
+      "bytes": 14567
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/events/idle.production-event.json",
+      "sha256": "3a7176ebc85f0e597b5ce7f9ddc92448cfe627ba664d11db59823b4b28c1c6f7",
+      "bytes": 14062
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/events/move.production-event.json",
+      "sha256": "0ae32cc55fe42719563e0b262a2b0fa8ebd1abf436b5b5bee210c5ba240b724e",
+      "bytes": 14120
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/generation-receipts.json",
+      "sha256": "03052e1a35f1533cb877b1bc4157d3ff8660abda49a755d2c33e4bb4713bf08e",
+      "bytes": 25765
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/neutral-background-audit.json",
+      "sha256": "74672cd8d097497c9092e079efd6fc9b558d2103cf9585f5e6baf631518dcca0",
+      "bytes": 9608
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/process_korari_stalker_profile.py",
+      "sha256": "9fdcfee6a105cb3796432d8ecb540fff8f76d2787acbead0c28188f5babb52f2",
+      "bytes": 123656
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/production-event-validation.json",
+      "sha256": "668ec6b64650f8ab2fd64ab60fc554eb7f355754d47915ff907d62381f94e17d",
+      "bytes": 3560
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/attack-queue-current.txt",
+      "sha256": "561aa7fe0f1068982bfa3d8865cc628a2c0ba002648ffe326c6e2201f1cacc44",
+      "bytes": 1730
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/death-queue-current.txt",
+      "sha256": "45a5a782942e89719f1dfa87f7a88d62c269b23738fdfb2f20e78ee1d24dc08e",
+      "bytes": 1659
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/idle-queue-current.txt",
+      "sha256": "406309995c022ccc3bd63e1beb76a3357991bb124633791dabd484328650f53c",
+      "bytes": 1620
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/move-queue-current.txt",
+      "sha256": "af26f54b8f3652391a9dfc94207f62cc6aaddfebb7ef437d780d0c3cbbe87056",
+      "bytes": 1639
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/queue-contract-snapshot.json",
+      "sha256": "d5363968c486c96dd9434ea133a9836601bb00239b36538cc898c541b101df53",
+      "bytes": 3733
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/scale-review.fragment.json",
+      "sha256": "b59dc3709129c94b0f715476bfec71fd5acf30335ab5a2b5559ea0b1726f6300",
+      "bytes": 13136
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json",
+      "sha256": "4586548981d304113bda97e984eb7a96c57adeeeeaf1f175649831e0f1e9fa39",
+      "bytes": 499427
+    },
+    {
+      "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/visual-review.json",
+      "sha256": "437aefa8417dd762cc001df8f4f4f9d2a369a1ba480fa23abe27377c5f9e47e2",
+      "bytes": 7614
+    },
+    {
+      "path": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/attack-r1-imagegen.txt",
+      "sha256": "41d23e77048c5c9a22a8993c59857ce1235110bd4f1434ff270a74414c1a5ffc",
+      "bytes": 3728
+    },
+    {
+      "path": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/death-r2-imagegen.txt",
+      "sha256": "160f43090d3d91aa0967f31901d424b228cf47e7f7a36a1e77ccf6d67f73b13c",
+      "bytes": 4093
+    },
+    {
+      "path": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/idle-r2-imagegen.txt",
+      "sha256": "bcf335b66c58a6362529726ca045ef29955844627a1040a81b7fefc62790be8f",
+      "bytes": 3600
+    },
+    {
+      "path": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/move-r1-imagegen.txt",
+      "sha256": "9b8989466a78df57e7404294670a04822fbf35920e0ae8a49191209f88d7964e",
+      "bytes": 3662
+    }
+  ],
+  "allPathsExist": true,
+  "manifestSelfExcluded": "Self-hash is excluded to avoid an impossible recursive digest; hash this file externally for final verification.",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

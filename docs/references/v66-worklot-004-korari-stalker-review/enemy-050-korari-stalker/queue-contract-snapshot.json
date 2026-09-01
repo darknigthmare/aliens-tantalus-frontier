@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "profileId": "enemy-050-korari-stalker",
+  "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+  "sourceSha256": "c9a114f42f651f3fcdbaed5c405ac8aab0e7a767db793f5917d28054ca33bce5",
+  "capturedAtReviewDate": "2026-09-01",
+  "readOnly": true,
+  "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+  "clips": {
+    "idle": {
+      "promptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/idle-queue-current.txt",
+      "promptFileBytesSha256": "406309995c022ccc3bd63e1beb76a3357991bb124633791dabd484328650f53c",
+      "promptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "computedJsonStringifyPromptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+      "fps": 6,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png"
+    },
+    "move": {
+      "promptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/move-queue-current.txt",
+      "promptFileBytesSha256": "af26f54b8f3652391a9dfc94207f62cc6aaddfebb7ef437d780d0c3cbbe87056",
+      "promptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "computedJsonStringifyPromptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Locomotion matches the species and reference limb count; no xenomorph anatomy added.",
+      "fps": 12,
+      "loop": true,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png"
+    },
+    "attack": {
+      "promptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/attack-queue-current.txt",
+      "promptFileBytesSha256": "561aa7fe0f1068982bfa3d8865cc628a2c0ba002648ffe326c6e2201f1cacc44",
+      "promptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "computedJsonStringifyPromptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Species-specific bite, tusk or claw action with anticipation and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+      "fps": 12,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png"
+    },
+    "death": {
+      "promptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/death-queue-current.txt",
+      "promptFileBytesSha256": "45a5a782942e89719f1dfa87f7a88d62c269b23738fdfb2f20e78ee1d24dc08e",
+      "promptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "computedJsonStringifyPromptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "contractHashMatches": true,
+      "textByteExactToCurrentQueue": true,
+      "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+      "fps": 10,
+      "loop": false,
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png"
+    }
+  },
+  "attackContractConflict": null,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

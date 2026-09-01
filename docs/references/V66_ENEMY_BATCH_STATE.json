@@ -7834,6 +7834,826 @@
       "canonExact": false,
       "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
       "at": "2026-09-01T08:03:50.421Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-050-korari-stalker",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:2e159f87cbfd70d41dff2a8837694775a970bd4d5e0b843d1bf8f2d00b6c4023",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/generate_profile_049",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production 2D side-view game animation sprite sheet\nInput images: Image 1 is the project-owned Korari Stalker identity reference only. Preserve its species identity, silhouette, palette and material language, but create wholly new original fan-made/project pixels and new poses; do not copy or trace any source pixels or exact source pose.\n\nCreate ONE production sprite sheet of Korari Stalker for Aliens: Tantalus Frontier, animation idle.\nIdentity lock: PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.\nArchetype Korari Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Subtle breathing and alert motion; all eight poses stay grounded.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.\n\nFrame-by-frame motion lock, row-major: 1 low alert inhale; 2 controlled exhale; 3 slight shoulder and flank expansion; 4 lateral natural sensor focus toward the right; 5 restrained tail counterbalance; 6 sparse flank photophores pulse only slightly; 7 body settles; 8 seamless return toward the first grounded pose. All eight frames remain meaningfully distinct but subtle, with no translation.\nLayout enforcement: use a wide landscape canvas with eight equal imaginary cells in exactly 4 columns by 2 rows. Do not draw cell borders. Every cell contains exactly one complete identical Korari Stalker, centered with generous empty gutters on every side. Keep the same long low 176x88 gameplay envelope, torso length, shoulder height, orthographic distance and ground line in all cells. The muzzle points RIGHT in all eight cells; never mirror it.\nBackground enforcement: use one perfectly uniform solid pure #FF00FF chroma field over the entire canvas, including gutters. No transparency checkerboard, gradient, texture, floor, cast shadow, scenery, text, letters, numerals, captions, icons, logo, watermark, UI or grid.\nAnatomy exclusions: exactly one wedge head, one natural jaw, one visible lateral eye/sensor set, four distinct supple animal limbs and exactly one long flexible non-bladed tail. No inner jaw, dome, dorsal tubes, biomechanical ribs, acid, blade tail, mask, armor, dreadlocks, technology, active camouflage, extra limb, missing limb, Earth panther copy or borrowed-franchise creature.\nOriginal fan-made/project interpretation only; canonExact=false; no official or 1:1 claim.\n",
+      "actualPromptPath": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/idle-r2-imagegen.txt",
+      "actualPromptFileSha256": "bcf335b66c58a6362529726ca045ef29955844627a1040a81b7fefc62790be8f",
+      "actualPromptSha256": "1e7195fdeba2f8c988e88b6cebe71d52de3afdded08cdf6eb38105974e78fd25",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/idle-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "406309995c022ccc3bd63e1beb76a3357991bb124633791dabd484328650f53c",
+      "promptSha256": "1e7195fdeba2f8c988e88b6cebe71d52de3afdded08cdf6eb38105974e78fd25",
+      "contractPromptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "queuePromptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "computedJsonStringifyPromptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-004 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png",
+      "sourceSha256": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+      "sourceBytes": 270311,
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_KORARI_STALKER_REFERENCE.json",
+      "referenceEvidenceSha256": "e08e3e869a365a12ca5097ee39e0d2baf017f7a2672dd18764ad7f56c7f84ebf",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/idle-r2-imagegen.png",
+        "sha256": "2e159f87cbfd70d41dff2a8837694775a970bd4d5e0b843d1bf8f2d00b6c4023",
+        "bytes": 1262427,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/idle-r2-imagegen.png",
+          "inputSha256": "2e159f87cbfd70d41dff2a8837694775a970bd4d5e0b843d1bf8f2d00b6c4023",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/idle-r2-imagegen-rigid-calibrated-recomposed.png",
+          "outputSha256": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+          "uniformClipScale": 0.816880187,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json",
+          "receiptSha256": "4586548981d304113bda97e984eb7a96c57adeeeeaf1f175649831e0f1e9fa39",
+          "derivedProvenancePath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/derived-provenance.json",
+          "derivedProvenanceSha256": "682e41fb5a432281dc5d2f57eab6ebf359e1b9468e4cf65e724aa8a7129d4e73"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; independent neutral-gray halo audit is zero and original cyan photophore pixels are unchanged.",
+          "neutralBackgroundAuditPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/neutral-background-audit.json",
+          "neutralBackgroundAuditSha256": "74672cd8d097497c9092e079efd6fc9b558d2103cf9585f5e6baf631518dcca0",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; natural moss and cyan pigments are excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "korariLowLuminanceHaloThreshold": {
+              "scope": "all pre-existing foreground pixels; safe because the locked Korari palette contains charcoal, moss and cyan but no authored purple/magenta pigment",
+              "redAndBlueInclusiveMin": 28,
+              "minRedBlueMinusGreenInclusiveMin": 10,
+              "absoluteRedMinusBlueInclusiveMax": 112
+            },
+            "independentNeutralBackgroundAuditThreshold": {
+              "redAndBlueInclusiveMin": 20,
+              "minRedBlueMinusGreenInclusiveMin": 6,
+              "absoluteRedMinusBlueInclusiveMax": 96,
+              "maxRedBlueMinusGreenInclusiveMin": 12,
+              "purpose": "looser independent final audit after compositing the corrected silhouettes over neutral gray"
+            },
+            "cyanPreservationThreshold": {
+              "blueInclusiveMin": 70,
+              "greenInclusiveMin": 55,
+              "blueMinusRedInclusiveMin": 28,
+              "greenMinusRedInclusiveMin": 12,
+              "requiredChangedPixels": 0
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 19143,
+          "modifiedPixels": 19143,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "cyanPhotophorePixelsBefore": 604,
+          "cyanPhotophorePixelsAfter": 620,
+          "changedCyanPhotophorePixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 2114,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 2143,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2636,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 2497,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2763,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 2577,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 2402,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 2011,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.816880187,
+        "despillModifiedPixels": 19143,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "neutralBackgroundResidualHaloPixels": 0,
+        "changedOriginalCyanPhotophorePixels": 0,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local idle candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:50:57.756Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-050-korari-stalker",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:d24f91d853dbf47e8447d39ac95b07754cca68b93b9b6b22b04434de1ad64837",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/generate_profile_049",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production 2D side-view game animation sprite sheet\nInput images: Image 1 is the project-owned Korari Stalker identity reference only. Preserve its species identity, silhouette, palette and material language, but create wholly new original fan-made/project pixels and new poses; do not copy or trace any source pixels or exact source pose.\n\nCreate ONE production sprite sheet of Korari Stalker for Aliens: Tantalus Frontier, animation move.\nIdentity lock: PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.\nArchetype Korari Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Locomotion matches the species and reference limb count; no xenomorph anatomy added.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.\n\nFrame-by-frame motion lock, row-major: 1 low rear-paw contact and forward reach; 2 weight compression; 3 first passing pose; 4 opposite forepaw reach; 5 opposing rear-paw contact; 6 second compression/passing pose; 7 final reach with tail counterbalance; 8 recovery that closes a seamless low stalking-run cycle. Four distinct limbs remain readable, with alternating contacts, supple spine motion and no subject translation across cells.\nLayout enforcement: use a wide landscape canvas with eight equal imaginary cells in exactly 4 columns by 2 rows. Do not draw cell borders. Every cell contains exactly one complete identical Korari Stalker, centered with generous empty gutters on every side. Keep the same long low 176x88 gameplay envelope, torso length, shoulder height, orthographic distance and ground line in all cells. The muzzle points RIGHT in all eight cells; never mirror it.\nBackground enforcement: use one perfectly uniform solid pure #FF00FF chroma field over the entire canvas, including gutters. No transparency checkerboard, gradient, texture, floor, cast shadow, scenery, text, letters, numerals, captions, icons, logo, watermark, UI or grid.\nAnatomy exclusions: exactly one wedge head, one natural jaw, one visible lateral eye/sensor set, four distinct supple animal limbs and exactly one long flexible non-bladed tail. No inner jaw, dome, dorsal tubes, biomechanical ribs, acid, blade tail, mask, armor, dreadlocks, technology, active camouflage, extra limb, missing limb, Earth panther copy or borrowed-franchise creature.\nOriginal fan-made/project interpretation only; canonExact=false; no official or 1:1 claim.\n",
+      "actualPromptPath": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/move-r1-imagegen.txt",
+      "actualPromptFileSha256": "9b8989466a78df57e7404294670a04822fbf35920e0ae8a49191209f88d7964e",
+      "actualPromptSha256": "39ccebaff83bf1a2e18acc25cd3aa14e45c5b76085068aa1a2f793ab6e12f9d2",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/move-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "af26f54b8f3652391a9dfc94207f62cc6aaddfebb7ef437d780d0c3cbbe87056",
+      "promptSha256": "39ccebaff83bf1a2e18acc25cd3aa14e45c5b76085068aa1a2f793ab6e12f9d2",
+      "contractPromptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "queuePromptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "computedJsonStringifyPromptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-004 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png",
+      "sourceSha256": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+      "sourceBytes": 268871,
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_KORARI_STALKER_REFERENCE.json",
+      "referenceEvidenceSha256": "e08e3e869a365a12ca5097ee39e0d2baf017f7a2672dd18764ad7f56c7f84ebf",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/move-r1-imagegen.png",
+        "sha256": "d24f91d853dbf47e8447d39ac95b07754cca68b93b9b6b22b04434de1ad64837",
+        "bytes": 1310078,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/move-r1-imagegen.png",
+          "inputSha256": "d24f91d853dbf47e8447d39ac95b07754cca68b93b9b6b22b04434de1ad64837",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/move-r1-imagegen-rigid-calibrated-recomposed.png",
+          "outputSha256": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+          "uniformClipScale": 0.7505051,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json",
+          "receiptSha256": "4586548981d304113bda97e984eb7a96c57adeeeeaf1f175649831e0f1e9fa39",
+          "derivedProvenancePath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/derived-provenance.json",
+          "derivedProvenanceSha256": "682e41fb5a432281dc5d2f57eab6ebf359e1b9468e4cf65e724aa8a7129d4e73"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; independent neutral-gray halo audit is zero and original cyan photophore pixels are unchanged.",
+          "neutralBackgroundAuditPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/neutral-background-audit.json",
+          "neutralBackgroundAuditSha256": "74672cd8d097497c9092e079efd6fc9b558d2103cf9585f5e6baf631518dcca0",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; natural moss and cyan pigments are excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "korariLowLuminanceHaloThreshold": {
+              "scope": "all pre-existing foreground pixels; safe because the locked Korari palette contains charcoal, moss and cyan but no authored purple/magenta pigment",
+              "redAndBlueInclusiveMin": 28,
+              "minRedBlueMinusGreenInclusiveMin": 10,
+              "absoluteRedMinusBlueInclusiveMax": 112
+            },
+            "independentNeutralBackgroundAuditThreshold": {
+              "redAndBlueInclusiveMin": 20,
+              "minRedBlueMinusGreenInclusiveMin": 6,
+              "absoluteRedMinusBlueInclusiveMax": 96,
+              "maxRedBlueMinusGreenInclusiveMin": 12,
+              "purpose": "looser independent final audit after compositing the corrected silhouettes over neutral gray"
+            },
+            "cyanPreservationThreshold": {
+              "blueInclusiveMin": 70,
+              "greenInclusiveMin": 55,
+              "blueMinusRedInclusiveMin": 28,
+              "greenMinusRedInclusiveMin": 12,
+              "requiredChangedPixels": 0
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 21455,
+          "modifiedPixels": 21455,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "cyanPhotophorePixelsBefore": 597,
+          "cyanPhotophorePixelsAfter": 597,
+          "changedCyanPhotophorePixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 2818,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 2509,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2855,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 2746,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2983,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 2344,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 2809,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 2391,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.7505051,
+        "despillModifiedPixels": 21455,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "neutralBackgroundResidualHaloPixels": 0,
+        "changedOriginalCyanPhotophorePixels": 0,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local move candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:51:03.843Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-050-korari-stalker",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:a00cbad3a59073b0bbd39fbd6016b3f59d952ff1c683b6388201cc83449064a4",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/generate_profile_049",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production 2D side-view game animation sprite sheet\nInput images: Image 1 is the project-owned Korari Stalker identity reference only. Preserve its species identity, silhouette, palette and material language, but create wholly new original fan-made/project pixels and new poses; do not copy or trace any source pixels or exact source pose.\n\nCreate ONE production sprite sheet of Korari Stalker for Aliens: Tantalus Frontier, animation attack.\nIdentity lock: PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.\nArchetype Korari Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Species-specific bite, tusk or claw action with anticipation and recovery. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.\n\nFrame-by-frame motion lock, row-major: 1 low grounded compression; 2 natural eye/sensors fix the target to the right; 3 hindquarters coil; 4 short forward pounce; 5 single natural-jaw bite with near foreclaw contact; 6 follow-through; 7 controlled four-limb landing; 8 guarded grounded recovery. The attack is animal bite/foreclaw contact only: no tusks, inner jaw, projectile, weapon, tail strike or technology.\nLayout enforcement: use a wide landscape canvas with eight equal imaginary cells in exactly 4 columns by 2 rows. Do not draw cell borders. Every cell contains exactly one complete identical Korari Stalker, centered with generous empty gutters on every side. Keep the same long low 176x88 gameplay envelope, torso length, shoulder height, orthographic distance and ground line in all cells. The muzzle points RIGHT in all eight cells; never mirror it.\nBackground enforcement: use one perfectly uniform solid pure #FF00FF chroma field over the entire canvas, including gutters. No transparency checkerboard, gradient, texture, floor, cast shadow, scenery, text, letters, numerals, captions, icons, logo, watermark, UI or grid.\nAnatomy exclusions: exactly one wedge head, one natural jaw, one visible lateral eye/sensor set, four distinct supple animal limbs and exactly one long flexible non-bladed tail. No inner jaw, dome, dorsal tubes, biomechanical ribs, acid, blade tail, mask, armor, dreadlocks, technology, active camouflage, extra limb, missing limb, Earth panther copy or borrowed-franchise creature.\nOriginal fan-made/project interpretation only; canonExact=false; no official or 1:1 claim.\n",
+      "actualPromptPath": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/attack-r1-imagegen.txt",
+      "actualPromptFileSha256": "41d23e77048c5c9a22a8993c59857ce1235110bd4f1434ff270a74414c1a5ffc",
+      "actualPromptSha256": "d47a6f45321737c580c4062362eef12374609daaa2e9498127c5e515d956a603",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/attack-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "561aa7fe0f1068982bfa3d8865cc628a2c0ba002648ffe326c6e2201f1cacc44",
+      "promptSha256": "d47a6f45321737c580c4062362eef12374609daaa2e9498127c5e515d956a603",
+      "contractPromptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "queuePromptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "computedJsonStringifyPromptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-004 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png",
+      "sourceSha256": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+      "sourceBytes": 265370,
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_KORARI_STALKER_REFERENCE.json",
+      "referenceEvidenceSha256": "e08e3e869a365a12ca5097ee39e0d2baf017f7a2672dd18764ad7f56c7f84ebf",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/attack-r1-imagegen.png",
+        "sha256": "a00cbad3a59073b0bbd39fbd6016b3f59d952ff1c683b6388201cc83449064a4",
+        "bytes": 1531014,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/attack-r1-imagegen.png",
+          "inputSha256": "a00cbad3a59073b0bbd39fbd6016b3f59d952ff1c683b6388201cc83449064a4",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/attack-r1-imagegen-rigid-calibrated-recomposed.png",
+          "outputSha256": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+          "uniformClipScale": 0.778891834,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json",
+          "receiptSha256": "4586548981d304113bda97e984eb7a96c57adeeeeaf1f175649831e0f1e9fa39",
+          "derivedProvenancePath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/derived-provenance.json",
+          "derivedProvenanceSha256": "682e41fb5a432281dc5d2f57eab6ebf359e1b9468e4cf65e724aa8a7129d4e73"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; independent neutral-gray halo audit is zero and original cyan photophore pixels are unchanged.",
+          "neutralBackgroundAuditPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/neutral-background-audit.json",
+          "neutralBackgroundAuditSha256": "74672cd8d097497c9092e079efd6fc9b558d2103cf9585f5e6baf631518dcca0",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; natural moss and cyan pigments are excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "korariLowLuminanceHaloThreshold": {
+              "scope": "all pre-existing foreground pixels; safe because the locked Korari palette contains charcoal, moss and cyan but no authored purple/magenta pigment",
+              "redAndBlueInclusiveMin": 28,
+              "minRedBlueMinusGreenInclusiveMin": 10,
+              "absoluteRedMinusBlueInclusiveMax": 112
+            },
+            "independentNeutralBackgroundAuditThreshold": {
+              "redAndBlueInclusiveMin": 20,
+              "minRedBlueMinusGreenInclusiveMin": 6,
+              "absoluteRedMinusBlueInclusiveMax": 96,
+              "maxRedBlueMinusGreenInclusiveMin": 12,
+              "purpose": "looser independent final audit after compositing the corrected silhouettes over neutral gray"
+            },
+            "cyanPreservationThreshold": {
+              "blueInclusiveMin": 70,
+              "greenInclusiveMin": 55,
+              "blueMinusRedInclusiveMin": 28,
+              "greenMinusRedInclusiveMin": 12,
+              "requiredChangedPixels": 0
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 18291,
+          "modifiedPixels": 18291,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "cyanPhotophorePixelsBefore": 579,
+          "cyanPhotophorePixelsAfter": 613,
+          "changedCyanPhotophorePixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 2083,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 2296,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2121,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 2527,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2480,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 2156,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 2474,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 2154,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.778891834,
+        "despillModifiedPixels": 18291,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "neutralBackgroundResidualHaloPixels": 0,
+        "changedOriginalCyanPhotophorePixels": 0,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": "Original right-facing Korari compresses, fixes target, coils, pounces, makes single-jaw/foreclaw contact, follows through, lands and recovers guarded."
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local attack candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:51:07.655Z"
+    },
+    {
+      "schema": 1,
+      "kind": "generated-and-source-repaired",
+      "profileId": "enemy-050-korari-stalker",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "sha256:e273e6fafa9b06989e5bd4ad4af0eb848e822dc30b54de4b071b5ffbc0eeee0a",
+      "providerGenerationIdReturned": false,
+      "generationIdProvenance": "No durable provider generation ID was retained; immutable raw-capture SHA-256 identifies this existing candidate.",
+      "actor": "Codex /root/generate_profile_049",
+      "actualGenerationPromptAvailable": true,
+      "actualPromptText": "Use case: stylized-concept\nAsset type: raw production 2D side-view game animation sprite sheet\nInput images: Image 1 is the project-owned Korari Stalker identity reference only. Preserve its species identity, silhouette, palette and material language, but create wholly new original fan-made/project pixels and new poses; do not copy or trace any source pixels or exact source pose.\n\nCreate ONE production sprite sheet of Korari Stalker for Aliens: Tantalus Frontier, animation death.\nIdentity lock: PROJECT_ORIGINAL / NO_EXTERNAL_MODEL: original Tantalus Frontier low forest quadruped predator, strict right profile, wedge head with natural lateral eye and sensors, one jaw, four supple limbs, charcoal/moss organic hide with bark patterning, sparse dim cyan flank photophores and one long flexible non-bladed balance tail. Korari is setting context only. Exclude xenomorph, Yautja, technological and borrowed-franchise anatomy.\nArchetype Korari Stalker; modifier Standard. This profile has its own authored source; do not silently reuse or recolor another profile.\nAnimation: Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.\nExactly eight individually authored chronological poses, four columns by two rows, strict row-major order. One character per cell. Each pose wholly inside its cell with generous equal gutters.\nStrict gameplay side view facing RIGHT, no camera rotation, no perspective change. Retain identical skull, limbs, materials, colors, outfit and proportions across all poses and all clips.\nUse one consistent physical scale and ground contact line. Full body and entire tail or weapon visible, no cut limbs, no cell overlap, no labels or grid lines, no logo, no UI.\nTrue transparent RGBA background if available; otherwise a perfectly flat pure magenta background, no shadow, checkerboard or scenery. No interpolation or duplicates.\nPreserve the supplied reference design as closely as possible; the output remains subject to visual review, not a guaranteed 1:1 replica.\n\nFrame-by-frame motion lock, row-major: 1 lethal impact while still supported; 2 sensory/head recoil; 3 forelimb failure; 4 torso begins falling; 5 tail loses tension; 6 flank contacts the ground; 7 final settle; 8 fully motionless terminal corpse. The sequence is irreversible: no recovery, standing final frame, gore burst, detached limb or species change.\nLayout enforcement: use a wide landscape canvas with eight equal imaginary cells in exactly 4 columns by 2 rows. Do not draw cell borders. Every cell contains exactly one complete identical Korari Stalker, centered with generous empty gutters on every side. Keep the same long low 176x88 gameplay envelope, torso length, shoulder height and orthographic distance in all cells; the support line may lower naturally only as the body collapses. The muzzle remains oriented RIGHT until it rests laterally; never mirror the creature.\nBackground enforcement: use one perfectly uniform solid pure #FF00FF chroma field over the entire canvas, including gutters. No transparency checkerboard, gradient, texture, floor, cast shadow, scenery, text, letters, numerals, captions, icons, logo, watermark, UI or grid.\nAnatomy exclusions: exactly one wedge head, one natural jaw, one visible lateral eye/sensor set, four distinct supple animal limbs and exactly one long flexible non-bladed tail. No inner jaw, dome, dorsal tubes, biomechanical ribs, acid, blade tail, mask, armor, dreadlocks, technology, active camouflage, extra limb, missing limb, Earth panther copy or borrowed-franchise creature.\nOriginal fan-made/project interpretation only; canonExact=false; no official or 1:1 claim.\n\nTargeted r2 correction only: remove every detached particle, chip, droplet, impact fleck, motion mark and floating fragment from all eight cells. The creature remains completely intact while collapsing; no piece separates from the head, sensor fins, hide, limbs or tail. Preserve the same locked identity, right-facing profile, 4x2 layout, scale, chronology and uniform #FF00FF background; change nothing else.\n\n",
+      "actualPromptPath": "docs/references/v66-worklot-004-prompts/enemy-050-korari-stalker/death-r2-imagegen.txt",
+      "actualPromptFileSha256": "160f43090d3d91aa0967f31901d424b228cf47e7f7a36a1e77ccf6d67f73b13c",
+      "actualPromptSha256": "7ee46c91629593149e28614fc80b32af5dda5715d43cd127cd47d5fe329dffd8",
+      "currentQueuePromptSnapshotPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/prompts/death-queue-current.txt",
+      "currentQueuePromptFileBytesSha256": "45a5a782942e89719f1dfa87f7a88d62c269b23738fdfb2f20e78ee1d24dc08e",
+      "promptSha256": "7ee46c91629593149e28614fc80b32af5dda5715d43cd127cd47d5fe329dffd8",
+      "contractPromptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "queuePromptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "computedJsonStringifyPromptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "queueContractHashMatches": true,
+      "actualPromptMatchesQueueContract": false,
+      "promptProvenanceNote": "The exact pre-call ImageGen prompt is preserved under the worklot-004 prompt directory. The current queue snapshot remains separate contract provenance.",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png",
+      "savedSourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png",
+      "sourceSha256": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1",
+      "sourceBytes": 257700,
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "referenceEvidencePath": "docs/references/V66_WORKLOT_003_KORARI_STALKER_REFERENCE.json",
+      "referenceEvidenceSha256": "e08e3e869a365a12ca5097ee39e0d2baf017f7a2672dd18764ad7f56c7f84ebf",
+      "rawCapture": {
+        "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/death-r2-imagegen.png",
+        "sha256": "e273e6fafa9b06989e5bd4ad4af0eb848e822dc30b54de4b071b5ffbc0eeee0a",
+        "bytes": 1292494,
+        "pixelEdits": 0,
+        "embeddedPromptMetadata": false
+      },
+      "sourceRepairs": [
+        {
+          "kind": "proven-magenta-component-extraction-and-per-clip-uniform-scale-recomposition",
+          "result": "Eight complete poses recovered across raw cell boundaries, uniformly scaled with one reviewed uniform factor for this complete clip, root/support aligned, and recomposed into an exact opaque-magenta 1774x887 board.",
+          "inputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/raw/death-r2-imagegen.png",
+          "inputSha256": "e273e6fafa9b06989e5bd4ad4af0eb848e822dc30b54de4b071b5ffbc0eeee0a",
+          "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/derived/death-r2-imagegen-rigid-calibrated-recomposed.png",
+          "outputSha256": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1",
+          "uniformClipScale": 0.734939759,
+          "nonUniformAnatomyStretch": false,
+          "receiptPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json",
+          "receiptSha256": "4586548981d304113bda97e984eb7a96c57adeeeeaf1f175649831e0f1e9fa39",
+          "derivedProvenancePath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/derived-provenance.json",
+          "derivedProvenanceSha256": "682e41fb5a432281dc5d2f57eab6ebf359e1b9468e4cf65e724aa8a7129d4e73"
+        },
+        {
+          "kind": "deterministic-foreground-edge-magenta-despill",
+          "result": "Only declared foreground edge-spill RGB pixels were replaced from nearest original non-spill foreground references; silhouette topology and exact #FF00FF background were unchanged; independent neutral-gray halo audit is zero and original cyan photophore pixels are unchanged.",
+          "neutralBackgroundAuditPath": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/neutral-background-audit.json",
+          "neutralBackgroundAuditSha256": "74672cd8d097497c9092e079efd6fc9b558d2103cf9585f5e6baf631518dcca0",
+          "spillThreshold": {
+            "topology": "foreground-only pixels within Chebyshev distance <= 8 px of exact opaque #FF00FF background",
+            "strictColourThreshold": {
+              "redExclusiveMin": 160,
+              "blueExclusiveMin": 160,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 35
+            },
+            "residualMatteHueThreshold": {
+              "foregroundBorderDepthPx": 3,
+              "redAndBlueInclusiveMin": 70,
+              "greenPlusExclusiveSeparationLessThanMinRedBlue": 25,
+              "absoluteRedMinusBlueInclusiveMax": 45,
+              "purpose": "remove only edge pixels retaining matte-like R/B parity; natural moss and cyan pigments are excluded"
+            },
+            "deliveryVioletMatteThreshold": {
+              "scope": "all pre-existing foreground pixels in one nominal target cell",
+              "redExclusiveMin": 90,
+              "blueExclusiveMin": 70,
+              "redMinusGreenExclusiveMin": 35,
+              "blueMinusGreenExclusiveMin": 25,
+              "absoluteRedMinusBlueExclusiveMax": 80,
+              "basis": "independent neutral-background audit of violet-magenta crest, belly, tail and leg contamination"
+            },
+            "korariLowLuminanceHaloThreshold": {
+              "scope": "all pre-existing foreground pixels; safe because the locked Korari palette contains charcoal, moss and cyan but no authored purple/magenta pigment",
+              "redAndBlueInclusiveMin": 28,
+              "minRedBlueMinusGreenInclusiveMin": 10,
+              "absoluteRedMinusBlueInclusiveMax": 112
+            },
+            "independentNeutralBackgroundAuditThreshold": {
+              "redAndBlueInclusiveMin": 20,
+              "minRedBlueMinusGreenInclusiveMin": 6,
+              "absoluteRedMinusBlueInclusiveMax": 96,
+              "maxRedBlueMinusGreenInclusiveMin": 12,
+              "purpose": "looser independent final audit after compositing the corrected silhouettes over neutral gray"
+            },
+            "cyanPreservationThreshold": {
+              "blueInclusiveMin": 70,
+              "greenInclusiveMin": 55,
+              "blueMinusRedInclusiveMin": 28,
+              "greenMinusRedInclusiveMin": 12,
+              "requiredChangedPixels": 0
+            },
+            "referenceSelection": "nearest original foreground pixel that fails the strict magenta threshold, by expanding Chebyshev radius; within the first non-empty radius choose minimum squared Euclidean distance, then row-major y/x tie-break",
+            "replacement": "copy only the selected reference RGB onto the declared spill foreground pixel; never alter alpha/topology because the active sheet is opaque RGB",
+            "foregroundBorderDepthPx": 8,
+            "maximumLocalReferenceRadiusPx": 12,
+            "fallback": "if no source exists inside the local radius, choose the globally nearest original foreground pixel that fails the soft threshold using the same deterministic distance/y/x ordering",
+            "invariants": [
+              "only pre-existing declared spill foreground pixels may change RGB",
+              "foreground/background membership must remain byte-identical",
+              "all exact #FF00FF background pixels must remain byte-identical",
+              "declared spill pixels after correction must equal zero"
+            ]
+          },
+          "spillPixelsBefore": 17112,
+          "modifiedPixels": 17112,
+          "spillPixelsAfter": 0,
+          "foregroundMasksUnchanged": true,
+          "changedBackgroundPixels": 0,
+          "cyanPhotophorePixelsBefore": 537,
+          "cyanPhotophorePixelsAfter": 540,
+          "changedCyanPhotophorePixels": 0,
+          "perPoseModifiedPixels": [
+            {
+              "frame": 0,
+              "modifiedPixels": 2595,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 1,
+              "modifiedPixels": 2823,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 2,
+              "modifiedPixels": 2679,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 3,
+              "modifiedPixels": 1980,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 4,
+              "modifiedPixels": 2182,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 5,
+              "modifiedPixels": 1730,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 6,
+              "modifiedPixels": 1649,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            },
+            {
+              "frame": 7,
+              "modifiedPixels": 1474,
+              "spillPixelsAfter": 0,
+              "foregroundMaskUnchanged": true
+            }
+          ]
+        }
+      ],
+      "generationAttempts": null,
+      "generationTimestamp": null,
+      "reviewedAt": "2026-09-01",
+      "qa": {
+        "size": [
+          1774,
+          887
+        ],
+        "grid": [
+          4,
+          2
+        ],
+        "poseCount": 8,
+        "facing": "right-manually-reviewed",
+        "cellBoundaryContacts": 0,
+        "minimumClearancePx": 38,
+        "uniformOpaqueExactMagenta": true,
+        "uniformClipScale": 0.734939759,
+        "despillModifiedPixels": 17112,
+        "despillResidualPixels": 0,
+        "despillForegroundMasksUnchanged": true,
+        "neutralBackgroundResidualHaloPixels": 0,
+        "changedOriginalCyanPhotophorePixels": 0,
+        "technicalReview": "layout-hash-root-despill-gates-pass-art-not-accepted",
+        "attackQualification": null
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
+      "at": "2026-09-01T08:51:18.093Z"
     }
   ]
 }
