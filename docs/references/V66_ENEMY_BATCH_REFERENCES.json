@@ -6709,6 +6709,1051 @@
         "The local game still and V66 base sheets are copyrighted/technical study evidence with unresolved visual, artifact and root issues; no pixel, pose or composition may be copied or recolored.",
         "No numeric scale or physical-anchor coordinate is inherited until new 072 measurements and retained evidence exist."
       ]
+    },
+    "enemy-073-albino-neuro-xeno-drone": {
+      "status": "reviewed",
+      "urls": [],
+      "localPaths": [
+        "assets/openai/sprites/enemies/neuro-xeno-drone-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/neuro-xeno-drone-action-sheet-v56.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/death.png",
+        "assets/openai/sprites/metadata/v66/enemy-021-neuro-xeno-drone.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "docs/references/V66_BATCH_002_REFERENCES_C.json",
+        "docs/references/V66_BATCH_002_SOURCE_AUDIT.json",
+        "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md",
+        "docs/references/V66_BATCH_002_ROOT_OVERLAY_REVIEW.md",
+        "docs/references/V66_BATCH_002_DELIVERY.md",
+        "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+        "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/idle.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/move.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/attack.jpg",
+        "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/death.jpg"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-021-neuro-xeno-drone project identity only. Preserve one lean controlled Drone with an intact elongated smooth eyeless cranial dome, telescoping inner jaw, narrow ribbed torso, exactly two long clawed arms, two digitigrade legs, four dorsal pipes and exactly one complete segmented spear-tipped tail. Preserve the compact gunmetal neural-control helmet over rather than instead of the skull, exactly two temporal clamps, one dark insulated spinal cable and tiny amber status indicators; no grafted weapon. Albino changes organic pigment and material response only to warm pearl-ivory and pale bone carapace, cool ash-gray biomechanical recesses, restrained translucent rose-taupe tissue, dark cavities, wet highlights and metallic ivory/silver teeth. Industrial hardware stays gunmetal with dark insulation and tiny amber indicators; never whiten it into anatomy or add broad glow. Keep strict right-facing orthographic gameplay profile, invariant dome/ribcage/pelvis/equipment proportions and the queue's four biped motions. The reviewed 021 root method may guide a new review, but none of its 32 coordinates transfers to newly authored 073 pixels. Do not inherit numeric sourceScaleByClip values or the historical pack scale because the predecessor has no completed measured scaleCalibrationReview or retained scale evidence. Do not reproduce predecessor cross-cell contacts, residual pink artifacts, compact unreadable attack or neck-height drift. No Xenoborg cannon, blue eye, humanoid robot face, full mechanical body, ivory Ripper plates, extra limb, copied predecessor pixels or official Albino Neuro-Xeno claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.",
+      "reviewer": "Codex /root/prepare_refs_069_070",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-073-albino-neuro-xeno-drone",
+      "name": "Albino Neuro-Xeno Drone",
+      "archetype": "Neuro-Xeno Drone",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "controlled",
+      "provenance": "systemic-variant",
+      "animationFamily": "biped",
+      "batchId": "batch-005",
+      "ordinal": 72,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-021-neuro-xeno-drone",
+      "baseReferenceLockSha256": "194bdf7e29e7ffb818a55b332e798f67a81bce8afb88d258984b9c77d313a947",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "Neuro-Xeno Drone is a PROJECT_ORIGINAL identity in the Tantalus Frontier continuity, with NO_EXTERNAL_MODEL in the V56 matrix. The reviewed V66 base lock and hashed local project sheets establish its anatomy and compact control rig, but do not make it an official franchise caste. No external source is promoted because no licensed Neuro-Xeno model exists. The albino phenotype is an original systemic project adaptation and may not copy or automatically recolor predecessor pixels.",
+      "sourcePolicy": {
+        "positiveAnatomyAuthority": "REVIEWED_V66_BASE_LOCK_HASHED_LOCAL_PROJECT_ACTION_SHEETS_AND_V56_PROJECT_INVARIANTS",
+        "externalSourcesAre": "none-applicable-project-original-base",
+        "excludedWebSourceClasses": [
+          "fan-wikis",
+          "fan-reference-sites",
+          "unlicensed-image-aggregators",
+          "project-repository-links-misrepresented-as-external-canon"
+        ],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "copiedPredecessorPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "One lean controlled Drone: intact long smooth eyeless dome under a compact neural helmet, narrow rib cage and waist, two long arms, two digitigrade legs, four readable dorsal pipes and one continuous segmented spear tail. Helmet, two temporal clamps and spinal cable remain compact enough that the Xenomorph silhouette dominates.",
+        "palette": "Warm pearl-ivory and pale bone organic carapace; cool ash-gray and gray-beige biomechanical recesses; restrained translucent rose-taupe soft tissue; dark mouth and joint cavities; wet highlights and metallic ivory/silver teeth. Neural hardware remains industrial gunmetal, cable insulation remains near-black and indicators remain tiny amber points.",
+        "surface": "Re-author every rib, tendon, dorsal pipe, limb plate and tail segment. Organic surfaces stay wet and biomechanical rather than chalk-white, crystalline or snowy. Helmet plates, clamp junctions and the insulated cable must remain visibly manufactured and may not dissolve into the pale shell.",
+        "anatomy": "One intact eyeless elongated head with telescoping inner jaw, one narrow ribbed torso, exactly two clawed arms, two digitigrade legs, four dorsal pipes and exactly one complete spear-tipped tail. The helmet sits over the skull; it does not replace the dome, jaw, neck or face with a robot head.",
+        "equipment": "Exactly one compact gunmetal neural helmet, two temporal clamps, one insulated cable following the dorsal/spinal route and tiny amber status indicators. No cannon, firearm, shoulder pack, giant eye, detachable module or added armor family.",
+        "orientation": "Strict orthographic gameplay side profile facing RIGHT in all 32 poses. Dome, jaw, limbs, four dorsal pipes, complete tail and the helmet/cable route remain inside their own cell; no frontal turn, three-quarter drift, mirroring or camera rotation.",
+        "scale": "Use predecessor dome-to-ribcage, shoulder-to-pelvis, control-rig and proximal-limb relationships as anatomical guidance only. The base historical pack scale is 0.456790123, but scaleCalibrationReview is null and scaleCalibrationEvidence is empty; neither it nor nominal per-clip values is inherited. The 073 sources require a new measured all-clip, 32-pose calibration.",
+        "root": "Reuse only the reviewed method: choose a stable ribcage/lower-torso landmark on the new source pixels, then register it to the actual planted support floor or terminal resting-body plane. Never reuse a 021 coordinate. Tail extrema, helmet/cable extrema, cross-cell fragments and bounds centers never define the physical root.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no shadow, scenery, laboratory, text, logo, UI or grid.",
+        "prohibitions": [
+          "Xenoborg laser cannons, blue eye, robot face, fully mechanical body, humanoid armor or ivory Ripper plates",
+          "missing or enlarged helmet, missing temporal clamp, rerouted cable, large amber glow or hardware bleached into organic tissue",
+          "flat pure-white silhouette, saturated colors, crystal, ice, snow, automatic recolor or copied predecessor pixels",
+          "missing or changing dorsal-pipe count, shortened tail, missing spear tip, extra tail, extra limb or anatomy drift",
+          "left-facing, frontal or three-quarter turn, crop, cell contact, cross-cell anatomy, duplicate pose or perspective drift",
+          "canon-exact, official Albino Neuro-Xeno model or 1:1 reproduction claim"
+        ]
+      },
+      "actionLocks": {
+        "idle": "Eight grounded alert/breathing poses with restrained organic motion; helmet, clamps and cable remain mechanically fixed to their anatomical attachment points.",
+        "move": "One complete planted biped locomotion cycle with readable contact, passing and recovery; no translation across cells, skating, cable detachment or tail-led root.",
+        "attack": "One readable claw or inner-jaw strike with anticipation, wind-up, extension/contact, follow-through and recovery; retain compact control gear but improve on the predecessor's weak amplitude and neck-height drift.",
+        "death": "Lethal impact, loss of support, fall and terminal motionless body; helmet, clamps and cable remain attached, and the final root follows the resting body plane rather than tail or dome."
+      },
+      "scaleCalibrationDecision": {
+        "inheritSourceScaleByClip": false,
+        "baseHistoricalFinalPackScale": 0.456790123,
+        "baseNominalSourceScaleByClip": {
+          "idle": 1,
+          "move": 1,
+          "attack": 1,
+          "death": 1
+        },
+        "baseScaleCalibrationReview": null,
+        "baseScaleCalibrationEvidenceCount": 0,
+        "reason": "The predecessor metadata records nominal all-one values and a historical pack scale but no completed measured scale calibration review or retained evidence. The completed root review is a different contract and does not validate scale.",
+        "requiredBeforeAcceptance": "Complete and retain a new all-clip, 32-pose scale calibration review for enemy-073 using stable dome, ribcage, pelvis, proximal-limb and neural-rig landmarks."
+      },
+      "physicalAnchorDecision": {
+        "baseStatus": "reviewed",
+        "baseAnchorRegistryEntryPresent": true,
+        "baseReviewedPoseCount": 32,
+        "basePlacementAnchorMethod": "measured-source-body-landmark",
+        "basePlacementAnchorMethodAcceptedForBase": true,
+        "baseRootMethodAcceptedAsMethodOnly": true,
+        "baseConfidence": "medium",
+        "baseUncertaintyPx": 14,
+        "evidencePath": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "baseEvidencePaths": [
+          "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/idle.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/move.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/attack.jpg",
+          "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/death.jpg"
+        ],
+        "inheritCoordinates": false,
+        "reason": "The 32 predecessor coordinates are measured evidence for the exact 021 pixels only. Newly authored 073 anatomy, pose extents and support contacts require independent measurements even when the same ribcage-to-support-floor method is reused.",
+        "crossCellDefects": [
+          {
+            "clip": "idle",
+            "affectedZeroBasedFrames": [
+              2,
+              3,
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 20,
+                "leftPixels": 17
+              },
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 25,
+                "leftPixels": 22
+              }
+            ]
+          },
+          {
+            "clip": "move",
+            "affectedZeroBasedFrames": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  1,
+                  2
+                ],
+                "rightPixels": 11,
+                "leftPixels": 16
+              },
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 20,
+                "leftPixels": 18
+              },
+              {
+                "frames": [
+                  5,
+                  6
+                ],
+                "rightPixels": 23,
+                "leftPixels": 26
+              },
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 25,
+                "leftPixels": 21
+              }
+            ]
+          },
+          {
+            "clip": "attack",
+            "affectedZeroBasedFrames": [
+              2,
+              3,
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 18,
+                "leftPixels": 18
+              },
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 20,
+                "leftPixels": 18
+              }
+            ]
+          },
+          {
+            "clip": "death",
+            "affectedZeroBasedFrames": [
+              2,
+              3,
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 15,
+                "leftPixels": 14
+              },
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 20,
+                "leftPixels": 20
+              }
+            ]
+          }
+        ],
+        "crossCellDecision": "These source-audit border contacts were handled as ownership clues for the predecessor normalizer; they are neither accepted root evidence nor a pattern that new 073 sheets may reproduce.",
+        "requiredBeforeAcceptance": "Review all 32 newly authored 073 physical roots on source pixels, retaining annotated evidence for support changes during locomotion, strike and collapse; reject every cross-cell contact."
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "9b95a470e411104ac2fd7688687cda4613fd70eadcd9b25d69549f5413495ee5",
+        "profileId": "enemy-073-albino-neuro-xeno-drone",
+        "name": "Albino Neuro-Xeno Drone",
+        "archetype": "Neuro-Xeno Drone",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "controlled",
+        "provenance": "systemic-variant",
+        "animationFamily": "biped",
+        "batchId": "batch-005",
+        "ordinal": 72,
+        "initialStatus": "pending-reference",
+        "reference": null,
+        "referenceLockSha256": null,
+        "generationProvider": "OpenAI ImageGen",
+        "canonExact": false,
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 8,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "requiredClipCount": 4,
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-073-albino-neuro-xeno-drone/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-073-albino-neuro-xeno-drone/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-073-albino-neuro-xeno-drone/idle.gif",
+            "promptSha256": "66ec1702b91ba2777d9f393b0f68eeabff9823d0ee6775e842251095b5be7e4e",
+            "contentHashRecomputedSha256": "66ec1702b91ba2777d9f393b0f68eeabff9823d0ee6775e842251095b5be7e4e",
+            "contentHashMatches": true
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-073-albino-neuro-xeno-drone/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-073-albino-neuro-xeno-drone/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-073-albino-neuro-xeno-drone/move.gif",
+            "promptSha256": "a05ae63d6fc1fc9577bb69a6194b169ce3e1ac7b46b042f614c0203aa87d207b",
+            "contentHashRecomputedSha256": "a05ae63d6fc1fc9577bb69a6194b169ce3e1ac7b46b042f614c0203aa87d207b",
+            "contentHashMatches": true
+          },
+          {
+            "id": "attack",
+            "motion": "Bipedal claw or inner-jaw strike preserving the exact locked design. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-073-albino-neuro-xeno-drone/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-073-albino-neuro-xeno-drone/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-073-albino-neuro-xeno-drone/attack.gif",
+            "promptSha256": "4e60437d383b7db1d875d066abfa4bf9665035877b0ce1e9f55cf13273d7d427",
+            "contentHashRecomputedSha256": "4e60437d383b7db1d875d066abfa4bf9665035877b0ce1e9f55cf13273d7d427",
+            "contentHashMatches": true
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-073-albino-neuro-xeno-drone/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-073-albino-neuro-xeno-drone/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-073-albino-neuro-xeno-drone/death.gif",
+            "promptSha256": "eace49551cc663a32ccd965af9eb2e0bbef547857d4843d46e08af3d9cb7fd8e",
+            "contentHashRecomputedSha256": "eace49551cc663a32ccd965af9eb2e0bbef547857d4843d46e08af3d9cb7fd8e",
+            "contentHashMatches": true
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-073-albino-neuro-xeno-drone.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-073-albino-neuro-xeno-drone.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-073-albino-neuro-xeno-drone/all.gif",
+        "promptHashAlgorithm": "SHA-256(JSON.stringify(prompt))",
+        "promptHashAudit": "All four queue promptSha256 values equal a fresh contentHash(prompt) recomputation. Raw UTF-8 text hashing is not the queue algorithm and is not used as validity or anomaly evidence. The BLOCKED texts remain queue snapshots and must be rebuilt from the merged design lock before generation."
+      },
+      "predecessorEvidence": {
+        "localVisualReview": "Both V56 Neuro-Xeno action sheets and all four active V66 base sheets were decoded and inspected as in-memory previews during this pass; no source bytes were written or modified.",
+        "v56ProjectActionSheets": [
+          {
+            "path": "assets/openai/sprites/enemies/neuro-xeno-drone-action-sheet-v56.png",
+            "dimensions": [
+              1254,
+              1254
+            ],
+            "mode": "RGB",
+            "bytes": 1340787,
+            "sha256": "2d84909648560b579b041c0693a151b588d3118b07436555b20347a41b551774",
+            "role": "Original project identity sheet; silhouette study only, never a pixel donor."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/neuro-xeno-drone-action-sheet-v56.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "bytes": 476241,
+            "sha256": "237e42ca98c3be8f3dc7a58d134a8979f38207ace361ac62cb0658255aec1809",
+            "role": "Normalized V56 identity sheet retained by the reviewed base lock; anatomy/equipment study only."
+          }
+        ],
+        "v66BaseSources": [
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/idle.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1489521,
+            "sha256": "fab5f92a4c64520bea9e159e588354e56da78d7cd05761634e01dd5f54447ce7"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/move.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1481782,
+            "sha256": "a8e9636175c4dd5b72ab342051fd29ffa2411e93c368fbbe4e6e1e37d062e4e1"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/attack.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1477600,
+            "sha256": "594dfcc2a8c94dd936cef71ce342d02a719f419d6a6e6363c0aa07a5fc234f5e"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/death.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1312633,
+            "sha256": "6dcd6e0a4bbe8ce5f8b2da915fe0ba5889c0edbc6a77dc83a3a3c9571dcb2406"
+          },
+          {
+            "path": "assets/openai/sprites/metadata/v66/enemy-021-neuro-xeno-drone.json",
+            "bytes": 78238,
+            "sha256": "9801bf4a659e997e9a70513dbc86ce342bef54f2b8d7bd67ce8f00ce9d769cc9",
+            "role": "Current technical normalization record; acceptance pending, runtimeIntegrated=false, scale review absent, physical roots reviewed for the predecessor only."
+          }
+        ],
+        "basePhysicalAnchorEvidence": {
+          "registrySha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+          "reviewedPoseCount": 32,
+          "confidence": "medium",
+          "uncertaintyPx": 14,
+          "overlays": [
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/idle.jpg",
+              "bytes": 376096,
+              "sha256": "643bee151cced633636a897a012704572b66c31f83e4482b9730051960f074b3"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/move.jpg",
+              "bytes": 371148,
+              "sha256": "9f8567bd4c1e2c8a8cdcde1c1793dffb0fd0bb218bcbee1125b66831594e5d8c"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/attack.jpg",
+              "bytes": 368246,
+              "sha256": "f95d498e35332fb5f0a5ff7428ab5e610f0068cd400aeec5029fb99a2983acea"
+            },
+            {
+              "path": "docs/references/v66-batch-002-anchor-review/enemy-021-neuro-xeno-drone/death.jpg",
+              "bytes": 310472,
+              "sha256": "29f35fb5d857fada77df05d4edeb486e33fb4dc00313293899d51e7018a5c140"
+            }
+          ]
+        },
+        "baseTechnicalLimitations": [
+          "The Neuro-Xeno is project-original and has no licensed external model or exact turnaround; the V56 sheets and reviewed project lock are design evidence, not franchise canon.",
+          "The atlas/root review documents residual pink or violet around dorsal attachments, hip and joints, a compact attack with unclear impact, neck-height changes and unvalidated temporal transitions.",
+          "The source audit certifies eight distinct cells per clip but records multiple nominal-cell boundary contacts; ownership reconstruction does not authorize repeating those contacts in new art.",
+          "The predecessor root registry is complete for 32 exact 021 poses, but registration-only review is separate from art, animation, gameplay and 073 root acceptance.",
+          "The base metadata has acceptanceStatus=pending-visual-review and runtimeIntegrated=false, with no measured scale calibration."
+        ]
+      },
+      "acceptanceGates": [
+        "four 1774x887 PNG sheets, each 4x2 with eight individually authored chronological row-major poses",
+        "32/32 cells contain exactly one complete right-facing Albino Neuro-Xeno Drone with no crop, cell contact, cross-cell anatomy or duplicate pose",
+        "smooth elongated eyeless dome, narrow ribcage, two arms, two digitigrade legs, four dorsal pipes and complete spear tail remain invariant",
+        "compact gunmetal helmet, two temporal clamps, one insulated spinal cable and tiny amber indicators remain attached, readable and unchanged across all clips",
+        "new independent all-clip scale review is retained; neither historical pack scale nor nominal predecessor sourceScaleByClip values is inherited",
+        "all 32 physical roots are newly reviewed on 073 pixels; the reviewed 021 ribcage/support-floor method may guide the review but no coordinate transfers",
+        "attack clearly shows anticipation, strike/contact, follow-through and recovery without predecessor neck-height drift, weak impact or cross-cell transfers",
+        "albino organic material stays distinct from gunmetal hardware without pure-white silhouette loss, residual fuchsia, glow, automatic recolor or copied pixels",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms original project adaptation and rejects Xenoborg, Ripper, robot-face and canon-exact readings"
+      ],
+      "limitations": [
+        "This fragment is a reference lock only; it authorizes no ImageGen call, source replacement, acceptance or runtime integration.",
+        "No external official Neuro-Xeno model exists; the identity and albino phenotype remain project-original and may not be presented as franchise canon.",
+        "The V56 and V66 predecessor sheets remain technical/design study evidence with unresolved artifacts and animation limitations; no pixel or pose may be copied or automatically recolored.",
+        "The predecessor's measured root coordinates are valid only for its exact pixels, and no numeric scale or coordinate is inherited by 073."
+      ]
+    },
+    "enemy-074-albino-xenoborg": {
+      "status": "reviewed",
+      "urls": [
+        "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3730/manuals/Aliens%20Versus%20Predator%20Classic%202000%20Manual.pdf?t=1579791217",
+        "https://store.steampowered.com/app/3730/Aliens_versus_Predator?l=english"
+      ],
+      "localPaths": [
+        "assets/openai/sprites/enemies/xenoborg-action-sheet-v56.png",
+        "assets/openai/sprites/normalized/enemies/xenoborg-action-sheet-v56.png",
+        "assets/openai/sprites/reference-masters/v66/batch-002/xenoborg-avp1999.webp",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/idle.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/move.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/attack.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/death.png",
+        "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/reload.png",
+        "assets/openai/sprites/metadata/v66/enemy-022-xenoborg.json",
+        "docs/references/V56_ENEMY_REFERENCE_MATRIX.json",
+        "docs/references/V66_BATCH_002_REFERENCES_C.json",
+        "docs/references/V66_BATCH_002_SOURCE_AUDIT.json",
+        "docs/references/V66_BATCH_002_ATLAS_ROOT_REVIEW.md",
+        "docs/references/V66_BATCH_002_DELIVERY.md",
+        "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "docs/references/V66_BATCH_002_SCALE_REVIEW.json"
+      ],
+      "designLock": "PROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-022-xenoborg identity from Aliens versus Predator (1999/Classic 2000) licensed crossover continuity. Preserve one slow heavy upright biped with a still-visible curved/ridged eyeless Xenomorph skull, jaws, ribbed organic chest, two legs and one complete segmented tail beneath silver/gunmetal cybernetic reinforcement. Preserve cranial targeting hardware, exactly two permanently grafted forearm laser-cannon assemblies with block housings and long cylindrical barrels, restrained yellow-black hazard markings, and one rectangular dorsal power module with vertical cylinders. Albino changes organic pigment and material response only to warm pearl-ivory, pale bone, cool ash-gray recesses and restrained rose-taupe tissue; mechanical reinforcement, barrels, cables, targeting hardware and dorsal module remain gunmetal/chrome-matte with restrained existing hazard marks. Never apply a white filter to the whole cyborg. Keep strict right-facing orthographic gameplay profile and the queue's armed family with five clips. Attack must brace, aim the fused cannons, discharge, recoil and recover; reload must visibly open cooling vents, build capacitor charge, close vents and return to ready. No handheld gun, shoulder rifle, detachable magazine, ammunition insertion or loose weapon. Do not inherit numeric sourceScaleByClip values, historical pack scale or legacy bounds-center-bottom roots: the base has no completed measured scaleCalibrationReview, no scale evidence and no reviewed anchor-registry entry. Do not reproduce the predecessor's three-quarter torso, border contacts, pink residue or reload that reads like idle. No natural Drone with a simple helmet, Neuro-Xeno rig, fully mechanical humanoid, hidden Xenomorph anatomy, copied game pixels or official Albino Xenoborg claim. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.",
+      "reviewer": "Codex /root/prepare_refs_069_070",
+      "reviewedAt": "2026-09-01",
+      "profileId": "enemy-074-albino-xenoborg",
+      "name": "Albino Xenoborg",
+      "archetype": "Xenoborg",
+      "modifier": "Albino",
+      "biology": "xenomorph",
+      "caste": "cybernetic",
+      "provenance": "systemic-variant",
+      "animationFamily": "armed",
+      "batchId": "batch-005",
+      "ordinal": 73,
+      "classification": "PROJECT_ADAPTATION",
+      "variantPolicy": "SYSTEMIC_VARIANT_ORGANIC_PIGMENT_MATERIAL_ONLY",
+      "referenceMatch": "DERIVED_FROM_REVIEWED_BASE_LOCK",
+      "baseProfileId": "enemy-022-xenoborg",
+      "baseReferenceLockSha256": "db9fa6dd40e09079b9cad3814e341a10a5ff9589a246a19ef152b415627113c3",
+      "canonExact": false,
+      "externalAlbinoModelExists": false,
+      "oneToOneClaimAllowed": false,
+      "continuityDecision": "The official Classic 2000 manual establishes the licensed Xenoborg concept as a captured Alien subjected to human control experiments with cybernetics and weapons grafted onto it; the official Steam product page establishes the currently distributed Rebellion title. The manual does not specify an albino phenotype, exact laser geometry, hazard placement or a capacitor/vent animation. Those visual/action particulars come from the reviewed base lock and hashed local game screenshot/project sheets. The new albino is an original systemic adaptation, not an official model or copy of game pixels.",
+      "sourcePolicy": {
+        "positiveConceptAuthority": "OFFICIAL_STEAM_HOSTED_MANUAL_AND_OFFICIAL_REBELLION_STEAM_PRODUCT_PAGE",
+        "positiveHardwareSilhouetteAuthority": "REVIEWED_V66_BASE_LOCK_HASHED_LOCAL_LICENSED_GAME_SCREENSHOT_AND_PROJECT_ACTION_SHEETS",
+        "officialEvidenceLimits": {
+          "manual": "Supports human control experiment, captured Alien basis, grafted cybernetics/weapons and high threat only; not albino color, exact cannon geometry or capacitor animation.",
+          "productPage": "Supports the official Rebellion title/distribution context only; not per-unit anatomy."
+        },
+        "excludedWebSourceClasses": [
+          "fan-wikis",
+          "fan-reference-sites-including-older-base-links",
+          "unlicensed-image-aggregators",
+          "third-party-editorial-pages-as-anatomy-authority"
+        ],
+        "futureArt": "original-fan-made-project-bitmap",
+        "copiedOfficialPixelsAllowed": false,
+        "copiedPredecessorPixelsAllowed": false,
+        "automaticRecolorAllowed": false
+      },
+      "designDetails": {
+        "silhouette": "One slow heavy upright Xenoborg: curved/ridged Xenomorph skull and jaws, exposed ribbed organic chest, augmented bipedal legs and one complete segmented tail, made angular by cranial targeting, dorsal power module and two permanently grafted forearm cannon assemblies.",
+        "palette": "Organic skull, chest, limbs and tail shift to warm pearl-ivory, pale parchment bone, cool ash-gray recesses and restrained translucent rose-taupe tissue. Cybernetic ribs, joints, housings, barrels, cables and dorsal module remain silver/gunmetal/chrome-matte with small dark cavities and restrained yellow-black hazard markings. No whole-body whitening or neon wash.",
+        "surface": "Keep wet organic ribs, jaws, limb tissue and tail segmentation visibly distinct from hard machined plates, pistons, cables, cannon blocks and cylindrical barrels. Re-author every detail; do not lift the screenshot's pixels, lighting, room or pose.",
+        "anatomy": "A complete Xenomorph base remains readable beneath augmentation: one eyeless skull with jaws, one ribbed torso, two legs and exactly one long segmented tail. Both biological arms terminate in integrated weapon grafts rather than human hands holding a gun. No human face, clothing or fully enclosed mech body.",
+        "equipment": "Cranial targeting hardware; exactly two permanent forearm laser-cannon block assemblies with long cylindrical barrels; restrained hazard markings; one rectangular dorsal power module with vertical cylinders and connected cabling. These are fused anatomy/equipment and never detach or become a handheld rifle.",
+        "orientation": "Strict orthographic gameplay side profile facing RIGHT in all 40 poses. The near cannon and its flesh-metal junction are fully readable; the far graft remains structurally consistent and may be partially occluded as correct side-profile depth, never exposed by a three-quarter torso turn. Skull, module, both graft identities, feet and complete tail remain inside their cells.",
+        "scale": "Use predecessor skull-to-ribcage, shoulder/pelvis, power-module and proximal-limb relationships as design guidance only. The base historical pack scale is 0.502242152, but scaleCalibrationReview is null and scaleCalibrationEvidence is empty; neither it nor nominal per-clip values is inherited. The 074 sources require a new measured all-clip, 40-pose calibration.",
+        "root": "Measure a stable pelvis/lower-ribcage body landmark on every new pose and project it to the actual planted support foot or terminal resting-body plane. Cannons, barrels, muzzle effects, dorsal module and tail extrema must never drive the physical root; the weapon brace may shift support, but not redefine anatomy.",
+        "background": "True transparent RGBA when available, otherwise perfectly uniform pure #FF00FF; no shadow, laboratory, screenshot composition, muzzle-lit room, text, logo, UI or grid.",
+        "prohibitions": [
+          "handheld gun, shoulder-fired rifle, detachable magazine, ammunition insertion, loose weapon or removable cannon",
+          "natural Drone with simple helmet, Neuro-Xeno amber rig, humanoid mech, hidden skull/ribcage/tail or human face",
+          "flat whole-body white filter, gunmetal hardware recolored as bone, broad neon glow, crystal, ice, snow or automatic recolor",
+          "missing second graft identity, changing cannon count/length, missing targeting hardware, missing dorsal module, shortened tail or extra limb",
+          "left-facing, frontal or three-quarter torso, crop, cell contact, cross-cell beam/anatomy, duplicate pose or perspective drift",
+          "copied licensed screenshot pixels, canon-exact, official Albino Xenoborg model or 1:1 reproduction claim"
+        ]
+      },
+      "actionLocks": {
+        "idle": "Eight grounded heavy alert/breathing poses; integrated cannons remain at a safe ready angle and all graft junctions, targeting hardware and dorsal module stay fixed.",
+        "move": "One complete slow weighted biped locomotion cycle with contact, passing and recovery; tail and cannon inertia follow the body without dragging the root or translating across cells.",
+        "attack": "Brace the body, align both fused forearm cannon assemblies, aim, discharge, show restrained recoil and recover. A compact barrel glow may remain inside the cell, but no detached projectile, long cross-cell beam, handheld weapon or missing graft is allowed.",
+        "death": "Lethal impact, support loss, collapse and terminal motionless body; cannons, targeting hardware and dorsal module remain physically attached, and the final root follows the resting body plane.",
+        "reload": "A clearly readable capacitor recharge and heat-venting cycle distinct from idle: vents open, heat/charge state changes within the grafted housings, charge builds, vents close, return to ready. No magazine removal, ammunition insertion, bolt manipulation or handheld gun."
+      },
+      "scaleCalibrationDecision": {
+        "inheritSourceScaleByClip": false,
+        "baseHistoricalFinalPackScale": 0.502242152,
+        "baseNominalSourceScaleByClip": {
+          "idle": 1,
+          "move": 1,
+          "attack": 1,
+          "death": 1,
+          "reload": 1
+        },
+        "baseScaleCalibrationReview": null,
+        "baseScaleCalibrationEvidenceCount": 0,
+        "reason": "The predecessor metadata records nominal all-one values and a historical pack scale but no completed measured scale calibration review or retained evidence. Weapon length and bounds packing are not anatomical calibration.",
+        "requiredBeforeAcceptance": "Complete and retain a new all-clip, 40-pose scale calibration review for enemy-074 using stable skull, ribcage, pelvis, proximal-limb, cannon-junction and dorsal-module landmarks; do not calibrate from barrel or tail extrema alone."
+      },
+      "physicalAnchorDecision": {
+        "baseStatus": "pending-body-root-review",
+        "baseAnchorRegistryEntryPresent": false,
+        "baseReviewedPoseCount": 0,
+        "basePlacementAnchorMethod": "legacy-bounds-center-bottom",
+        "basePlacementAnchorMethodAccepted": false,
+        "evidencePath": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
+        "inheritCoordinates": false,
+        "reason": "The anchor registry has no enemy-022 entry and all 40 predecessor placements remain legacy bounds-center-bottom. No coordinate or bounds-derived method transfers to 074.",
+        "crossCellDefects": [
+          {
+            "clip": "idle",
+            "affectedZeroBasedFrames": [
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 10,
+                "leftPixels": 10
+              }
+            ]
+          },
+          {
+            "clip": "move",
+            "affectedZeroBasedFrames": [
+              1,
+              2,
+              3
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  1,
+                  2
+                ],
+                "rightPixels": 9,
+                "leftPixels": 10
+              },
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 35,
+                "leftPixels": 37
+              }
+            ]
+          },
+          {
+            "clip": "attack",
+            "affectedZeroBasedFrames": [
+              6,
+              7
+            ],
+            "pairedContacts": [
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 11,
+                "leftPixels": 11
+              }
+            ]
+          },
+          {
+            "clip": "death",
+            "affectedZeroBasedFrames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "rowBoundaryContacts": [
+              {
+                "frames": [
+                  0,
+                  4
+                ],
+                "bottomPixels": 36,
+                "topPixels": 33
+              },
+              {
+                "frames": [
+                  1,
+                  5
+                ],
+                "bottomPixels": 41,
+                "topPixels": 38
+              },
+              {
+                "frames": [
+                  2,
+                  6
+                ],
+                "bottomPixels": 50,
+                "topPixels": 47
+              },
+              {
+                "frames": [
+                  3,
+                  7
+                ],
+                "bottomPixels": 71,
+                "topPixels": 67
+              }
+            ],
+            "horizontalPairedContacts": [
+              {
+                "frames": [
+                  1,
+                  2
+                ],
+                "rightPixels": 13,
+                "leftPixels": 12
+              },
+              {
+                "frames": [
+                  2,
+                  3
+                ],
+                "rightPixels": 22,
+                "leftPixels": 20
+              },
+              {
+                "frames": [
+                  6,
+                  7
+                ],
+                "rightPixels": 49,
+                "leftPixels": 50
+              }
+            ]
+          },
+          {
+            "clip": "reload",
+            "affectedZeroBasedFrames": [],
+            "pairedContacts": []
+          }
+        ],
+        "crossCellDecision": "These source-audit boundary contacts are extraction/ownership clues only, not physical-root evidence. The death sheet contacts every row-boundary pair and also has horizontal transfers, so none may be inherited or reproduced.",
+        "requiredBeforeAcceptance": "Review all 40 newly authored 074 physical roots on source pixels, retaining annotated evidence for heavy locomotion, weapon bracing, venting and collapse; reject every cross-cell contact or bounds-derived horizontal root."
+      },
+      "queueContractSnapshot": {
+        "source": "docs/references/V66_ENEMY_BATCH_QUEUE.json",
+        "sourceSha256AtReview": "9b95a470e411104ac2fd7688687cda4613fd70eadcd9b25d69549f5413495ee5",
+        "profileId": "enemy-074-albino-xenoborg",
+        "name": "Albino Xenoborg",
+        "archetype": "Xenoborg",
+        "modifier": "Albino",
+        "biology": "xenomorph",
+        "caste": "cybernetic",
+        "provenance": "systemic-variant",
+        "animationFamily": "armed",
+        "batchId": "batch-005",
+        "ordinal": 73,
+        "initialStatus": "pending-reference",
+        "reference": null,
+        "referenceLockSha256": null,
+        "generationProvider": "OpenAI ImageGen",
+        "canonExact": false,
+        "sourceFacing": "right",
+        "sourceGrid": {
+          "columns": 4,
+          "rows": 2,
+          "frameCount": 8
+        },
+        "grid": {
+          "columns": 4,
+          "rows": 10,
+          "cellWidth": 256,
+          "cellHeight": 256,
+          "guard": 16
+        },
+        "pivot": {
+          "x": 128,
+          "y": 240
+        },
+        "requiredClipCount": 5,
+        "clips": [
+          {
+            "id": "idle",
+            "motion": "Subtle breathing and alert motion; all eight poses stay grounded.",
+            "fps": 6,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-074-albino-xenoborg/idle.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-074-albino-xenoborg/idle.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/idle.gif",
+            "promptSha256": "ac69c0dd9ed6c352ecf2c69ea2cebce1ee7a944f92aca909d65ec5b99497ec7a",
+            "contentHashRecomputedSha256": "ac69c0dd9ed6c352ecf2c69ea2cebce1ee7a944f92aca909d65ec5b99497ec7a",
+            "contentHashMatches": true
+          },
+          {
+            "id": "move",
+            "motion": "One complete locomotion cycle with contact, passing and recovery poses; no translation across cells.",
+            "fps": 12,
+            "loop": true,
+            "frameCount": 8,
+            "frames": [
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-074-albino-xenoborg/move.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-074-albino-xenoborg/move.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/move.gif",
+            "promptSha256": "edcdae1c6d2c1ffcf5acf1624fa01b63dffb9dcf9a92ccaf99479f93d8e26035",
+            "contentHashRecomputedSha256": "edcdae1c6d2c1ffcf5acf1624fa01b63dffb9dcf9a92ccaf99479f93d8e26035",
+            "contentHashMatches": true
+          },
+          {
+            "id": "attack",
+            "motion": "Brace the body and aim its permanently grafted forearm laser cannons, discharge, recoil and recover. Cannons remain fused to the arms in every pose; no handheld gun, shoulder-fired rifle or detachable magazine. Eight chronological poses: anticipation, wind-up, extension, contact, follow-through and recovery.",
+            "fps": 12,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-074-albino-xenoborg/attack.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-074-albino-xenoborg/attack.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/attack.gif",
+            "promptSha256": "8e7e7be30566cd50170255bc66cfb78880b895d40218cf107681ada80f3bb04d",
+            "contentHashRecomputedSha256": "8e7e7be30566cd50170255bc66cfb78880b895d40218cf107681ada80f3bb04d",
+            "contentHashMatches": true
+          },
+          {
+            "id": "death",
+            "motion": "Lethal impact, loss of support, fall and terminal motionless body; never reuse this for nonlethal hurt.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-074-albino-xenoborg/death.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-074-albino-xenoborg/death.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/death.gif",
+            "promptSha256": "e94d11df325a6bd9eb5f1217172a9137640326436b65afe4e97e446f52799728",
+            "contentHashRecomputedSha256": "e94d11df325a6bd9eb5f1217172a9137640326436b65afe4e97e446f52799728",
+            "contentHashMatches": true
+          },
+          {
+            "id": "reload",
+            "motion": "One complete capacitor recharge and heat-venting cycle in the grafted forearm laser cannons: cooling vents open, charge builds, vents close, return to ready. No magazine removal, ammunition insertion or handheld gun.",
+            "fps": 10,
+            "loop": false,
+            "frameCount": 8,
+            "frames": [
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39
+            ],
+            "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-074-albino-xenoborg/reload.png",
+            "normalizedPath": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-074-albino-xenoborg/reload.webp",
+            "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/reload.gif",
+            "promptSha256": "ffd5fa16431b10321d60f79ce863a6ac3307e339c8d3bdf11f10484b46ab7d08",
+            "contentHashRecomputedSha256": "ffd5fa16431b10321d60f79ce863a6ac3307e339c8d3bdf11f10484b46ab7d08",
+            "contentHashMatches": true
+          }
+        ],
+        "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-074-albino-xenoborg.webp",
+        "metadataPath": "assets/openai/sprites/metadata/v66/enemy-074-albino-xenoborg.json",
+        "previewPath": "assets/openai/sprites/previews/v66/enemy-074-albino-xenoborg/all.gif",
+        "promptHashAlgorithm": "SHA-256(JSON.stringify(prompt))",
+        "promptHashAudit": "All five queue promptSha256 values equal a fresh contentHash(prompt) recomputation. Raw UTF-8 text hashing is not the queue algorithm and is not used as validity or anomaly evidence. The BLOCKED texts remain queue snapshots and must be rebuilt from the merged design lock before generation."
+      },
+      "predecessorEvidence": {
+        "localVisualReview": "Both V56 Xenoborg action sheets, the retained licensed-game screenshot and all five active V66 base sheets were decoded and inspected as in-memory previews during this pass; no source bytes were written or modified.",
+        "v56ProjectActionSheets": [
+          {
+            "path": "assets/openai/sprites/enemies/xenoborg-action-sheet-v56.png",
+            "dimensions": [
+              1254,
+              1254
+            ],
+            "mode": "RGBA",
+            "bytes": 1148932,
+            "sha256": "f4c91316a1f44157dd3e9e9ad96f956add8f1875389d585423464061dd810e8d",
+            "role": "Original project action study; hardware/action silhouette guidance only, never a pixel donor."
+          },
+          {
+            "path": "assets/openai/sprites/normalized/enemies/xenoborg-action-sheet-v56.png",
+            "dimensions": [
+              1024,
+              1024
+            ],
+            "mode": "RGBA",
+            "bytes": 559815,
+            "sha256": "2fc8648b364fa415850ec0d5243ca0224c939792436f81493775369d3baa70d0",
+            "role": "Normalized V56 project study; not measured scale, root evidence or licensed-source pixels."
+          }
+        ],
+        "licensedReferenceMaster": {
+          "path": "assets/openai/sprites/reference-masters/v66/batch-002/xenoborg-avp1999.webp",
+          "dimensions": [
+            1200,
+            800
+          ],
+          "mode": "RGB",
+          "bytes": 93448,
+          "sha256": "292ad5ba8223186b0433b90a8bc477096ded1409dff158b092e36eb75d15234e",
+          "role": "Locally retained AVP 1999 game screenshot used to study organic/cybernetic junctions, paired forearm cannon hardware, targeting and dorsal module. Do not copy its pixels, pose, laboratory composition or lighting."
+        },
+        "v66BaseSources": [
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/idle.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1817077,
+            "sha256": "f2b4cd8e38d6c2a489e648bb53fefa1451ae8fc8fd3567665be9aae78feca068"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/move.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1764886,
+            "sha256": "433c64938aa71368c2a7dabf48709b11bd0b435d83ea72ff6a6855897a2d08c2"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/attack.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1758947,
+            "sha256": "a3ed44dc6b43b17fe4a9eb81dd0a1c904c8dd05d8d61378a7547e1007c93de95"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/death.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1616349,
+            "sha256": "d9fee6baa2c6aedd4cb6f63527096ea85834fbd9b4c2e5b5136f4f6af120ac40"
+          },
+          {
+            "path": "assets/openai/sprites/frames/v66/batch-002/enemy-022-xenoborg/reload.png",
+            "dimensions": [
+              1774,
+              887
+            ],
+            "bytes": 1780036,
+            "sha256": "f5d7501012648a8b913f8ec56aac1b66c903f8577c6b690ec727e5d120a78f2f"
+          },
+          {
+            "path": "assets/openai/sprites/metadata/v66/enemy-022-xenoborg.json",
+            "bytes": 71004,
+            "sha256": "a67879d8bcba1c2ea93e152b4763321054ffe742aa26e80eddc9e4c0660e1dd4",
+            "role": "Current technical normalization record; acceptance pending, runtimeIntegrated=false, scale review absent and physical roots pending."
+          }
+        ],
+        "baseTechnicalLimitations": [
+          "The official manual establishes the Xenoborg concept and grafted weapons but not an albino model, exact cannon geometry, laser effect or capacitor/vent reload choreography.",
+          "The licensed screenshot is a single perspective/lit game view, not a mesh turnaround; it is copyrighted study evidence and no source pixel, pose, room or lighting may be copied.",
+          "The atlas/root review records a partly three-quarter upper torso, perspective variation, residual pink on weapon pipes/neck and a reload too visually close to idle.",
+          "The source audit certifies distinct cells but records lateral contacts in idle/move/attack and extensive horizontal plus row-boundary contacts in death; extraction clues are not roots.",
+          "The anchor registry has no enemy-022 entry; all 40 placements remain legacy-bounds-center-bottom.",
+          "The base metadata has acceptanceStatus=pending-visual-review and runtimeIntegrated=false, with no measured scale calibration."
+        ]
+      },
+      "acceptanceGates": [
+        "five 1774x887 PNG sheets, each 4x2 with eight individually authored chronological row-major poses",
+        "40/40 cells contain exactly one complete right-facing Albino Xenoborg with no crop, cell contact, cross-cell anatomy/effect or duplicate pose",
+        "visible Xenomorph skull, jaws, ribbed chest, two legs and complete segmented tail remain invariant beneath cybernetic reinforcement",
+        "two permanent forearm cannon grafts, cranial targeting, dorsal power module/cylinders and restrained hazard markings remain structurally consistent and attached",
+        "strict side profile is maintained; no predecessor three-quarter upper torso or perspective drift",
+        "attack visibly braces, aims, discharges, recoils and recovers without handheld gun, detachable magazine, long cross-cell beam or disappearing cannon",
+        "reload is unmistakably distinct from idle and visibly completes vents-open, charge-build, vents-close and ready states without ammunition handling",
+        "new independent all-clip scale review is retained; neither historical pack scale nor nominal predecessor sourceScaleByClip values is inherited",
+        "all 40 physical roots are reviewed on newly authored pixels using body/support evidence, never barrel, module, tail extrema or bounds center",
+        "albino organic material stays distinct from gunmetal hardware without pure-white filter, residual fuchsia, broad glow, automatic recolor or copied licensed pixels",
+        "background is true alpha or uniform #FF00FF only",
+        "reviewer confirms original project adaptation and rejects natural-Drone, Neuro-Xeno, humanoid-mech and canon-exact readings"
+      ],
+      "limitations": [
+        "This fragment is a reference lock only; it authorizes no ImageGen call, source replacement, acceptance or runtime integration.",
+        "The official/manual evidence controls the licensed Xenoborg concept but does not establish an Albino Xenoborg, exact side-view mesh or 1:1 target.",
+        "The local licensed screenshot and project sheets remain study evidence with unresolved orientation, artifact, animation and extraction defects; no pixel or pose may be copied or automatically recolored.",
+        "No numeric scale or physical-anchor coordinate is inherited until new 074 measurements and retained evidence exist."
+      ]
     }
   }
 }
