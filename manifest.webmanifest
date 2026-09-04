@@ -7,5 +7,30 @@
   "background_color": "#020806",
   "theme_color": "#7ec8a0",
   "orientation": "landscape",
-  "icons": []
+  "icons": [
+    {
+      "src": "/assets/openai/pwa/tantalus-frontier-icon-192-v68.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/openai/pwa/tantalus-frontier-icon-512-v68.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/openai/pwa/tantalus-frontier-maskable-192-v68.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/openai/pwa/tantalus-frontier-maskable-512-v68.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }

@@ -30,10 +30,22 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'narrative-collectables', chatId: '6a99e94f-ef7c-83ed-a229-7d42b85b6222', chatTitle: 'Étendre la liste des collectables',
-    promisedTitle: 'ARCHIVES NARRATIVES ÉTENDUES', kind: 'system', implementationStatus: 'partial', playable: false, productionOrder: 2,
+    promisedTitle: 'ARCHIVES NARRATIVES ÉTENDUES', kind: 'system', implementationStatus: 'partial', playable: true, productionOrder: 2,
+    campaignId: 'special-narrative-qz17',
+    campaign: Object.freeze({
+      pairId: null, mode: 'FRONTIER', worldId: 'world-05-lethe', objective: 'investigate the ghost cargo',
+      year: 2204, canon: 'project-continuity', routes: 4, templateId: 'ship-interior-vertical'
+    }),
     promiseSummary: 'PDA, e-mails, audio, vidéo, boîtes noires, preuves physiques, contradictions et chaînes à embranchements.',
     requiredMechanics: ['persistent-collectables', 'multi-entry-chains', 'conflicting-sources', 'environmental-investigation'],
-    evidence: ['src/game-v51-runtime.js:1401', 'src/infestation-chain-v62.js:94']
+    evidence: [
+      'src/narrative-collectables-v68.js',
+      'src/narrative-collectables-runtime-v68.js',
+      'src/narrative-archives-ui-v68.js',
+      'src/narrative-collectables-visuals-v68.js',
+      'tests/narrative-collectables-runtime-v68.test.mjs',
+      'docs/V68_QZ17_ART_QA.md'
+    ]
   }),
   freezeOperation({
     id: 'alpha-bravo-coop', chatId: '6a99e7de-0d14-83eb-9074-0cc76c50989b', chatTitle: 'Étendre coopération équipe Marines',
@@ -190,7 +202,7 @@ export function validateSpecialOperationsV67(operations = SPECIAL_OPERATIONS_V67
   if (!unique('id')) failures.push('duplicate operation ids');
   if (!unique('chatId')) failures.push('duplicate ChatGPT conversation ids');
   if (!operations.every((operation) => VALID_STATUSES.has(operation.implementationStatus))) failures.push('invalid implementation status');
-  if (!operations.every((operation) => !operation.playable || operation.kind === 'mission' && operation.implementationStatus === 'effective')) failures.push('playable mission is not effective');
+  if (!operations.every((operation) => !operation.playable || operation.implementationStatus !== 'missing' && operation.campaignId && operation.campaign)) failures.push('playable work lot lacks a campaign');
   if (!operations.every((operation) => operation.sourceProjectId === PROJECT_ID && operation.canonExact === false)) failures.push('source or canon disclosure missing');
   const productionOrders = operations.map((operation) => operation.productionOrder);
   if (new Set(productionOrders).size !== operations.length || productionOrders.some((order) => !Number.isInteger(order) || order < 1 || order > operations.length)) failures.push('invalid production order');

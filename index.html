@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v67 — hub physique, insertion jouable et première opération spéciale Cargo Brutal jouable.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v68 — Cargo Brutal et enquête QZ-17 jouables, archives persistantes et preuves physiques.">
+  <meta name="application-name" content="Tantalus Frontier">
+  <meta name="apple-mobile-web-app-title" content="Tantalus">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/openai/pwa/tantalus-frontier-icon-192-v68.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/openai/pwa/tantalus-frontier-icon-512-v68.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/assets/openai/pwa/tantalus-frontier-icon-192-v68.png">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/sprite-gallery.css">
   <link rel="stylesheet" href="/hub-level.css">
@@ -14,13 +20,13 @@
   <link rel="stylesheet" href="/hub-stations-v61.css">
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
-  <title>ALIENS: TANTALUS FRONTIER v67</title>
+  <title>ALIENS: TANTALUS FRONTIER v68</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v67</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v68</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -39,7 +45,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 67.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 68.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -50,12 +56,13 @@
         <button class="nav-button" data-view="command"><span>01</span> Commandement</button>
         <button class="nav-button" data-view="galaxy"><span>02</span> Carte galactique</button>
         <button class="nav-button" data-view="operations"><span>03</span> Opérations</button>
-        <button class="nav-button active" data-view="hub"><span>04</span> USS Tantalus</button>
-        <button class="nav-button" data-view="armory"><span>05</span> Armurerie</button>
-        <button class="nav-button" data-view="bestiary"><span>06</span> Xénobiologie</button>
-        <button class="nav-button" data-view="vehicles"><span>07</span> Véhicules</button>
-        <button class="nav-button" data-view="crew"><span>08</span> Echo-9</button>
-        <button class="nav-button" data-view="settings"><span>09</span> Système</button>
+        <button class="nav-button" data-view="archives"><span>04</span> Archives</button>
+        <button class="nav-button active" data-view="hub"><span>05</span> USS Tantalus</button>
+        <button class="nav-button" data-view="armory"><span>06</span> Armurerie</button>
+        <button class="nav-button" data-view="bestiary"><span>07</span> Xénobiologie</button>
+        <button class="nav-button" data-view="vehicles"><span>08</span> Véhicules</button>
+        <button class="nav-button" data-view="crew"><span>09</span> Echo-9</button>
+        <button class="nav-button" data-view="settings"><span>10</span> Système</button>
       </nav>
       <div class="rail-footer"><span class="status-dot"></span> Liaison MU/TH/UR active<small id="save-state">Chargement du profil</small></div>
     </aside>
@@ -64,13 +71,13 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v67.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v68.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
         <section class="view" data-panel="command">
           <div class="hero">
-            <div class="hero-copy"><p class="eyebrow">BOUCLE STRATÉGIQUE EXÉCUTABLE // CONSÉQUENCES PERSISTANTES</p><h2>Chaque ordre avance réellement la Frontière.</h2><p>Décidez, équipez Echo-9, gérez le Tantalus, combattez les crises puis déployez-vous dans des missions physiques.</p><div class="button-row"><button id="continue-operation" class="button primary">CONTINUER / DÉPLOYER</button><button id="new-timeline" class="button">NOUVELLE CHRONOLOGIE</button></div></div>
+            <div class="hero-copy"><p class="eyebrow">BOUCLE STRATÉGIQUE EXÉCUTABLE // CONSÉQUENCES PERSISTANTES</p><h2>Chaque ordre avance réellement la Frontière.</h2><p>Décidez, équipez Echo-9, gérez le Tantalus, combattez les crises puis déployez-vous dans des missions physiques.</p><div class="button-row"><button id="continue-operation" class="button primary">CONTINUER / DÉPLOYER</button><button id="open-archives-command" class="button">CONSULTER LES ARCHIVES</button><button id="new-timeline" class="button">NOUVELLE CHRONOLOGIE</button></div></div>
             <div class="hero-scan" aria-hidden="true"><span></span><i>USS TANTALUS // OPÉRATIONS FRONTIÈRE</i></div>
           </div>
           <div id="release-counts" class="metric-grid"></div>
@@ -98,9 +105,9 @@
 
         <section class="view" data-panel="operations">
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
-          <div class="section-intro"><div><p class="eyebrow">437 CAMPAGNES // 19 DIRECTIVES CHATGPT // 16 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
+          <div class="section-intro"><div><p class="eyebrow">438 CAMPAGNES // 19 DIRECTIVES CHATGPT // 20 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
           <section class="special-operations-registry" aria-labelledby="special-operations-heading">
-            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V67</h3></div><p>Les 19 conversations sont recensées sans faux statut : seul le contenu réellement exécutable peut être planifié.</p></header>
+            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V68</h3></div><p>Les 19 conversations sont recensées sans faux statut : les lots jouables peuvent être planifiés, même si leur promesse globale reste partielle.</p></header>
             <div id="special-operation-summary" class="special-operation-summary" aria-live="polite"></div>
             <div id="special-operation-list" class="special-operation-grid"></div>
           </section>
@@ -111,6 +118,11 @@
               <article class="panel"><header><h3>Interface Neuro-Xeno</h3></header><label>PROFIL<select id="neuro-profile-select"></select></label><label>CIBLE APEX<select id="apex-dossier-select"></select></label><div id="advanced-loadout-status" class="data-list"></div><p class="hint">Le signal, les modes d’échec et les restrictions Apex sont évalués dans le runtime.</p></article>
             </aside>
           </div>
+        </section>
+
+        <section class="view" data-panel="archives">
+          <div class="section-intro"><div><p class="eyebrow">MU/TH/UR // PREUVES PHYSIQUEMENT RÉCUPÉRÉES</p><h2>Archives de mission</h2><p>Consultez les documents trouvés sur le terrain et confrontez uniquement les déclarations dont les sources ont été récupérées.</p></div></div>
+          <div id="narrative-archives-v68"></div>
         </section>
 
         <section class="view active" data-panel="hub">
@@ -211,6 +223,12 @@
           <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable"></canvas>
             <div class="mission-touch-controls runtime-touch" aria-label="Contrôles tactiles de mission"><button data-mission-key="KeyA">←</button><button data-mission-key="KeyD">→</button><button data-mission-key="Space">↑</button><button data-mission-key="KeyF">F</button><button id="mission-interact">E</button><button id="mission-tracker">Q</button><button id="mission-vehicle">V</button><button id="mission-reload">R</button><button id="mission-medkit">H</button><button id="mission-neuro-counter" title="Contre-impulsion Neuro">X</button></div>
           </div>
+          <section id="mission-archives-overlay-v68" class="mission-archives-overlay-v68" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mission-archives-title-v68" hidden>
+            <div class="mission-archives-dialog-v68">
+              <header><div><p class="eyebrow">TERMINAL TERRAIN // MISSION EN PAUSE</p><h2 id="mission-archives-title-v68">Archive récupérée</h2></div><button id="close-mission-archives-v68" class="button primary" type="button">FERMER ET REPRENDRE</button></header>
+              <div id="mission-narrative-archives-v68"></div>
+            </div>
+          </section>
           <div id="mission-equipment-controls" class="button-row equipment-controls"></div>
           <div id="mission-log" class="mission-log" aria-live="polite">En attente du déploiement.</div>
         </section>

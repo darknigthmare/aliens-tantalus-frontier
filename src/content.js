@@ -11,7 +11,7 @@ export * from './content-core-v50.js';
 
 export const CAMPAIGNS = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 437 });
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 438 });
 
 export function validateContent() {
   const core = validateCoreContent();
@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '67.0.0',
-  subtitle: 'Opérations spéciales — Cargo Brutal jouable et audit des 19 conversations',
+  version: '68.0.0',
+  subtitle: 'Archives QZ-17 — collectables physiques, contradictions et route persistante',
   sourceVersion: '51.0.0'
 });

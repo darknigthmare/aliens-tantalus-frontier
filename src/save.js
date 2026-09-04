@@ -7,6 +7,12 @@ import {
 } from './npc-dialogue-v62.js';
 import { restoreMissionInsertionV62, serializeMissionInsertionV62 } from './mission-insertion-v62.js';
 import { normalizeHubVentStateV62 } from './hub-v62-runtime.js';
+import {
+  NARRATIVE_COLLECTABLES_V68,
+  NARRATIVE_OPERATION_V68,
+  createNarrativeArchivesV68,
+  normalizeNarrativeArchivesV68
+} from './narrative-collectables-v68.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 
 export const SAVE_SCHEMA = 52;
@@ -83,6 +89,9 @@ const DEFAULT_EQUIPMENT = ['equipment-001-motion-tracker', 'equipment-006-medkit
 const DEFAULT_VEHICLES = ['vehicle-001-m577-armored-personnel-carrier'];
 const CARGO_BRUTAL_CAMPAIGN_ID_V67 = 'special-cargo-brutal';
 const CARGO_BRUTAL_STRATEGIC_BONUS_V67 = Object.freeze({ credits: 300, alloy: 45 });
+export const QZ17_STRATEGIC_RESEARCH_BONUS_V68 = Object.freeze({
+  research: NARRATIVE_COLLECTABLES_V68.reduce((total, entry) => total + Math.max(0, Number(entry.rewards?.intel) || 0), 0)
+});
 
 function createStrategyState() {
   return {
@@ -171,6 +180,7 @@ export function createDefaultSave(profile = 1) {
       resources: { credits: 3200, alloy: 80, fuel: 64, medical: 22, research: 0, pathogen: 0 }
     },
     strategy: createStrategyState(),
+    narrativeArchives: createNarrativeArchivesV68(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -267,6 +277,30 @@ function resolveSpecialOperationBonusV67(operation, rewards) {
   const alloy = Number(rewards.strategicBonus.alloy ?? rewards.strategicBonus.salvage);
   if (credits !== CARGO_BRUTAL_STRATEGIC_BONUS_V67.credits || alloy !== CARGO_BRUTAL_STRATEGIC_BONUS_V67.alloy) return {};
   return { ...CARGO_BRUTAL_STRATEGIC_BONUS_V67 };
+}
+
+function resolveNarrativeResearchBonusV68(operation, rewards) {
+  if (operation?.campaignId !== NARRATIVE_OPERATION_V68.campaignId) return {};
+  const intel = Math.floor(Number(rewards?.intel));
+  if (!Number.isFinite(intel) || intel <= 0) return {};
+  return { research: Math.min(intel, QZ17_STRATEGIC_RESEARCH_BONUS_V68.research) };
+}
+
+function resolveSpecialOperationBonusV68(operation, rewards) {
+  const cargoBonus = resolveSpecialOperationBonusV67(operation, rewards);
+  if (Object.keys(cargoBonus).length) return cargoBonus;
+  return resolveNarrativeResearchBonusV68(operation, rewards);
+}
+
+function describeSpecialOperationBonusV68(operation, bonus) {
+  if (!Object.keys(bonus).length) return '';
+  if (operation?.campaignId === CARGO_BRUTAL_CAMPAIGN_ID_V67) {
+    return ` Bonus Cargo Brutal : +${bonus.credits} credits, +${bonus.alloy} alliage.`;
+  }
+  if (operation?.campaignId === NARRATIVE_OPERATION_V68.campaignId) {
+    return ` Bonus QZ-17 : +${bonus.research} recherche issue des archives.`;
+  }
+  return '';
 }
 
 export function canAfford(save, cost = {}) {
@@ -745,7 +779,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   if (!operation) return { ok: false, reason: 'no-operation' };
   const worldState = save.galaxy.worldState[operation.worldId];
   const containment = hasResearch(save, 'xeno-containment');
-  const specialOperationBonus = success ? resolveSpecialOperationBonusV67(operation, rewards) : {};
+  const specialOperationBonus = success ? resolveSpecialOperationBonusV68(operation, rewards) : {};
   let result = '';
   if (success) {
     for (const [key, value] of Object.entries(operation.reward)) changeStrategicValue(save, key, value);
@@ -762,9 +796,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       member.stress = clamp(member.stress + Math.ceil(operation.risk / 12));
     });
     save.statistics.campaigns += 1;
-    const bonusLabel = Object.keys(specialOperationBonus).length
-      ? ` Bonus Cargo Brutal : +${specialOperationBonus.credits} credits, +${specialOperationBonus.alloy} alliage.`
-      : '';
+    const bonusLabel = describeSpecialOperationBonusV68(operation, specialOperationBonus);
     result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel;
   } else {
     worldState.stability = clamp(worldState.stability - (reason === 'retreat' ? 2 : 6));
@@ -975,6 +1007,8 @@ export function migrateSave(input, profile = 1) {
       result: typeof entry.result === 'string' ? entry.result.slice(0, 500) : ''
     })) : []
   };
+
+  migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
 
   const editor = isRecord(source.editor) ? source.editor : {};
   migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };

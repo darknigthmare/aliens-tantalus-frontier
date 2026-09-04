@@ -33,6 +33,10 @@ import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
 import {
   SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V67, getSpecialOperationByCampaignIdV67
 } from './special-operations-v67.js';
+import {
+  getNarrativeInvestigationV68, markNarrativeCollectableReadV68, recordNarrativeDecisionV68
+} from './narrative-collectables-v68.js';
+import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -69,6 +73,9 @@ let enemyCatalogV62 = null;
 let vehicleCatalogV62 = null;
 let missionInsertionUiV62 = null;
 let pendingMissionLaunchV62 = null;
+let narrativeArchivesUiV68 = null;
+let missionNarrativeArchivesUiV68 = null;
+let missionArchiveOverlayV68 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -82,6 +89,7 @@ const VIEW_META = Object.freeze({
   command: ['COMMAND // STRATEGIE', 'Centre de commandement'],
   galaxy: ['NAV // FRONTIER MAP', 'Carte galactique'],
   operations: ['OPS // PLANIFICATION', 'Opérations'],
+  archives: ['MU/TH/UR // ARCHIVES', 'Archives de mission'],
   hub: ['SHIP // USS TANTALUS', 'USS Tantalus'],
   armory: ['LOGISTICS // ARMORY', 'Armurerie'],
   bestiary: ['SCIENCE // XENOBIOLOGY', 'Xénobiologie'],
@@ -337,6 +345,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   closeHubDialogue({ resume: false });
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
@@ -520,6 +529,7 @@ function renderCampaigns() {
 
 function specialOperationStatusV67(operation) {
   if (operation.implementationStatus === 'effective') return { label: 'JOUABLE', action: 'PLANIFIER', tone: 'effective' };
+  if (operation.implementationStatus === 'partial' && operation.playable) return { label: 'PARTIELLE · LOT JOUABLE', action: 'PLANIFIER LE LOT', tone: 'partial' };
   if (operation.implementationStatus === 'partial') return { label: 'PARTIELLE', action: 'INTÉGRATION PARTIELLE', tone: 'partial' };
   return { label: 'MANQUANTE', action: 'À PRODUIRE', tone: 'missing' };
 }
@@ -533,7 +543,7 @@ function renderSpecialOperationsV67(term = '') {
     .filter((operation) => !term || JSON.stringify(operation).toLowerCase().includes(term))
     .slice()
     .sort((left, right) => left.productionOrder - right.productionOrder);
-  summary.innerHTML = `<span><b>${SPECIAL_OPERATION_COUNTS_V67.total}</b>CHATS RECENSÉS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.effective}</b>JOUABLE</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.partial}</b>PARTIELS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.missing}</b>MANQUANTS</span>`;
+  summary.innerHTML = `<span><b>${SPECIAL_OPERATION_COUNTS_V67.total}</b>CHATS RECENSÉS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.playable}</b>LOTS JOUABLES</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.partial}</b>PARTIELS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.missing}</b>MANQUANTS</span>`;
   list.innerHTML = operations.map((operation) => {
     const status = specialOperationStatusV67(operation);
     const campaign = operation.campaignId ? CAMPAIGNS.find((entry) => entry.id === operation.campaignId) : null;
@@ -550,7 +560,7 @@ function renderSpecialOperationsV67(term = '') {
         : operation.implementationStatus === 'partial' ? 'Promesse recensée, intégration encore incomplète.'
           : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
             : '';
-    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V67'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V68'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
   }).join('') || '<p class="special-operation-empty">Aucune directive ChatGPT ne correspond à cette recherche.</p>';
 }
 
@@ -589,8 +599,13 @@ function renderOperationPlan() {
     : null;
   const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
   const operation = saveSystem.data.strategy.currentOperation;
+  const specialNoticeCopy = specialOperation?.id === 'cargo-brutal'
+    ? `Insertion à pied · ${escapeHtml(issuedVehicle?.name || 'matériel lourd')} fourni dans la zone de mission, sans modifier l’inventaire.`
+    : specialOperation?.id === 'narrative-collectables'
+      ? 'Enquête QZ-17 · quatre preuves physiques à récupérer · confronter les sources pour ouvrir une vraie route.'
+      : '';
   const specialNotice = specialOperation
-    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V67</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>Insertion à pied · ${escapeHtml(issuedVehicle?.name || 'matériel lourd')} fourni dans la zone de mission, sans modifier l’inventaire.</p></div>`
+    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V68</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : '';
   byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><button id="operation-launch" class="button primary wide" ${brief.ready || operation ? '' : 'disabled'}>${operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9'}</button>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
@@ -812,6 +827,71 @@ function renderAll() {
   renderHubStatus();
   renderEditorStatus();
   renderProfiles();
+  narrativeArchivesUiV68?.render();
+  missionNarrativeArchivesUiV68?.render();
+}
+
+function archiveResultMessageV68(result, action) {
+  if (action === 'read') {
+    if (result?.applied) return 'Lecture enregistrée dans le journal permanent.';
+    if (result?.reason === 'already-read') return 'Ce dossier était déjà marqué comme lu.';
+    return 'Ce dossier ne peut pas encore être lu.';
+  }
+  if (result?.applied) return `Décision enregistrée · route ${result.routeUnlockFlag || 'QZ-17'} débloquée.`;
+  if (result?.reason === 'already-applied') return 'Cette décision est déjà enregistrée.';
+  if (result?.reason === 'decision-locked') return 'La décision opposée est déjà irréversiblement enregistrée.';
+  return 'Les preuves nécessaires ne sont pas encore toutes récupérées.';
+}
+
+function narrativeArchivesUiOptionsV68(root, { focusFallback = null } = {}) {
+  return {
+    root,
+    focusFallback,
+    getState: () => getNarrativeInvestigationV68(saveSystem.data),
+    onMarkRead: (collectableId) => {
+      const result = markNarrativeCollectableReadV68(saveSystem.data, collectableId);
+      if (result.applied) saveSystem.commit();
+      return { ...result, message: archiveResultMessageV68(result, 'read') };
+    },
+    onDecision: (optionId) => {
+      const result = recordNarrativeDecisionV68(saveSystem.data, optionId);
+      if (result.applied) {
+        saveSystem.commit();
+        engine.setNarrativeArchivesV68?.(saveSystem.data.narrativeArchives);
+      }
+      return { ...result, message: archiveResultMessageV68(result, 'decision') };
+    }
+  };
+}
+
+function setupNarrativeArchivesUiV68() {
+  if (narrativeArchivesUiV68) return narrativeArchivesUiV68;
+  narrativeArchivesUiV68 = new NarrativeArchivesUiV68(narrativeArchivesUiOptionsV68(byId('narrative-archives-v68')));
+  return narrativeArchivesUiV68;
+}
+
+function setupMissionArchiveOverlayV68() {
+  if (missionArchiveOverlayV68) return missionArchiveOverlayV68;
+  missionNarrativeArchivesUiV68 = new NarrativeArchivesUiV68(narrativeArchivesUiOptionsV68(byId('mission-narrative-archives-v68'), {
+    focusFallback: byId('close-mission-archives-v68')
+  }));
+  missionArchiveOverlayV68 = new MissionArchiveOverlayV68({
+    root: byId('mission-archives-overlay-v68'),
+    reader: missionNarrativeArchivesUiV68,
+    engine,
+    canvas: byId('game-canvas'),
+    closeButton: byId('close-mission-archives-v68')
+  });
+  return missionArchiveOverlayV68;
+}
+
+function openNarrativeArchivesV68(entryId = '', { markRead = false } = {}) {
+  showView('archives');
+  setupNarrativeArchivesUiV68().open(entryId, { markRead });
+}
+
+function openMissionNarrativeArchivesV68(entryId = '') {
+  return setupMissionArchiveOverlayV68().open(entryId);
 }
 
 function captureMissionResumeState() {
@@ -965,7 +1045,12 @@ function startMissionRuntimeV62(context) {
     },
     editorProject: null,
     strategicBriefing: deployment.operation,
-    resumeState: operationLoadout.resumeState
+    resumeState: operationLoadout.resumeState,
+    narrativeArchiveSave: saveSystem.data,
+    onNarrativeArchivesChange: () => {
+      saveSystem.commit();
+      narrativeArchivesUiV68?.render();
+    }
   });
   if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
   renderMissionEquipment();
@@ -1160,6 +1245,12 @@ function handleGameEvent(event) {
   }
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (event.type === 'archive-reader-open') {
+    persistMissionResumeState();
+    saveSystem.commit();
+    document.dispatchEvent(createOpenArchivesEventV68(event.collectableId));
+    return;
+  }
   if (event.type === 'caption') {
     if (saveSystem.data.settings.subtitles) {
       log.dataset.captionUntil = String(Date.now() + 1800);
@@ -1172,6 +1263,12 @@ function handleGameEvent(event) {
   }
   if (event.type === 'mission-zone') {
     log.textContent = `ZONE · ${String(event.name || event.zoneId || '').toUpperCase()} · ${String(event.biome || 'inconnu').toUpperCase()}`;
+  }
+  if (event.type === 'narrative-collectable-discovered') {
+    log.textContent = `ARCHIVE RÉCUPÉRÉE · ${String(event.collectableId || '').toUpperCase()} · preuve persistée`;
+  }
+  if (event.type === 'narrative-route-unlocked') {
+    log.textContent = `ROUTE DÉBLOQUÉE · ${String(event.flag || event.doorId || '').toUpperCase()} · porte physique confirmée`;
   }
   if (event.type === 'mission-level-event') {
     recordOperationFlag(saveSystem.data, `level-event-${event.eventId}`);
@@ -1253,7 +1350,8 @@ function handleGameEvent(event) {
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
     'equipment-used', 'objective-action', 'mission-zone', 'mission-level-event',
     'squad-action', 'squad-down', 'squad-revived', 'squad-lost',
-    'mission-timer-started', 'mission-timer-complete'
+    'mission-timer-started', 'mission-timer-complete',
+    'narrative-collectable-discovered', 'narrative-route-unlocked'
   ]);
   if (persistentEvents.has(event.type) && saveSystem.data.strategy.currentOperation) {
     persistMissionResumeState();
@@ -1590,7 +1688,10 @@ function bind() {
   });
   globalThis.addEventListener('keydown', (event) => {
     if (event.code !== 'Escape') return;
-    if (!byId('hub-dialogue').hidden) {
+    if (missionArchiveOverlayV68?.openState) {
+      event.preventDefault();
+      missionArchiveOverlayV68.close();
+    } else if (!byId('hub-dialogue').hidden) {
       event.preventDefault();
       closeHubDialogue();
     } else if (activeHubStation) {
@@ -1605,6 +1706,12 @@ function bind() {
     }
   });
   byId('continue-operation').onclick = () => launchCampaign();
+  byId('open-archives-command').onclick = () => openNarrativeArchivesV68();
+  document.addEventListener('atf:open-archives', (event) => {
+    const entryId = event.detail?.entryId || '';
+    if (activeView === 'play' && engine.running) openMissionNarrativeArchivesV68(entryId);
+    else openNarrativeArchivesV68(entryId, { markRead: Boolean(entryId) });
+  });
   byId('new-timeline').onclick = () => { hubEngine.stop(false); engine.stop(); saveSystem.newGame(saveSystem.profile); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); showView('hub'); };
   ['world-search', 'campaign-search', 'costume-search', 'module-search'].forEach((id) => byId(id).addEventListener('input', () => ({
     'world-search': renderGalaxy, 'campaign-search': renderCampaigns, 'costume-search': renderCrew, 'module-search': renderModules
@@ -1671,6 +1778,8 @@ async function boot() {
   setupEditor();
   setupRuntimeControls();
   setupCatalogsV62();
+  setupNarrativeArchivesUiV68();
+  setupMissionArchiveOverlayV68();
   bind();
   applyRuntimeSettings();
   renderAll();
@@ -1701,6 +1810,10 @@ async function boot() {
       context: standaloneContext
     })
   };
+  globalThis.__ATF_V68__ = {
+    openArchives: (entryId = '') => document.dispatchEvent(createOpenArchivesEventV68(entryId)),
+    get investigation() { return getNarrativeInvestigationV68(saveSystem.data); }
+  };
   setTimeout(() => {
     byId('boot').remove();
     showTitleScreen();
@@ -1712,4 +1825,4 @@ boot().catch((error) => {
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen, openForgeContext };
+export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen, openForgeContext, openNarrativeArchivesV68, openMissionNarrativeArchivesV68 };

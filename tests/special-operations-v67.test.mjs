@@ -34,14 +34,14 @@ const CHAT_IDS = Object.freeze([
   '6a98dfcb-a2e4-83ed-b3c2-606a9384c6e4'
 ]);
 
-test('le registre V67 couvre exactement les 19 conversations avec le bilan 1/9/9/1', () => {
+test('le registre V68 couvre exactement les 19 conversations avec le bilan 1/9/9 et deux lots jouables', () => {
   assert.equal(SPECIAL_OPERATIONS_V67.length, 19);
   assert.deepEqual(SPECIAL_OPERATION_COUNTS_V67, {
     total: 19,
     effective: 1,
     partial: 9,
     missing: 9,
-    playable: 1
+    playable: 2
   });
   assert.deepEqual(validateSpecialOperationsV67(), {
     ok: true,
@@ -72,13 +72,13 @@ test('les identifiants internes et ChatGPT sont exacts, uniques et adressables',
   assert.equal(getSpecialOperationByChatIdV67('inconnu'), null);
 });
 
-test('Cargo Brutal ajoute une campagne jouable sans collision avec les 436 campagnes historiques', () => {
+test('Cargo Brutal et QZ-17 ajoutent deux campagnes jouables sans collision avec les 436 campagnes historiques', () => {
   const historicalIds = new Set(CORE_CAMPAIGNS.map((campaign) => campaign.id));
   assert.equal(CORE_CAMPAIGNS.length, 436);
   assert.equal(historicalIds.has('special-cargo-brutal'), false);
 
   const expanded = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
-  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 1);
+  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 2);
   assert.equal(new Set(expanded.map((campaign) => campaign.id)).size, expanded.length);
 
   const cargo = expanded.find((campaign) => campaign.id === 'special-cargo-brutal');
@@ -89,6 +89,15 @@ test('Cargo Brutal ajoute une campagne jouable sans collision avec les 436 campa
   assert.equal(cargo.pairId, null);
   assert.equal(getSpecialOperationByCampaignIdV67(cargo.id)?.id, 'cargo-brutal');
 
+  const qz17 = expanded.find((campaign) => campaign.id === 'special-narrative-qz17');
+  assert.ok(qz17);
+  assert.equal(qz17.specialOperationId, 'narrative-collectables');
+  assert.equal(qz17.objective, 'investigate the ghost cargo');
+  assert.equal(qz17.mode, 'FRONTIER');
+  assert.equal(qz17.pairId, null);
+  assert.equal(getSpecialOperationByCampaignIdV67(qz17.id)?.id, 'narrative-collectables');
+
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === cargo.id).length, 1);
+  assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === qz17.id).length, 1);
   assert.equal(CAMPAIGNS.length, expanded.length);
 });

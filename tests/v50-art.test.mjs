@@ -5,6 +5,7 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
 import { CARGO_BRUTAL_VISUAL_REGISTRY_V67 } from '../src/cargo-brutal-visuals-v67.js';
+import { QZ17_COLLECTABLES_SHEET_V68 } from '../src/narrative-collectables-visuals-v68.js';
 import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -12,7 +13,10 @@ const spriteRoot = resolve(repoRoot, 'assets/openai/sprites');
 const manifestPath = resolve(spriteRoot, 'manifest.json');
 const reportPath = resolve(repoRoot, 'assets/openai/v50-art-normalization-report.json');
 const includeBuildAsset = createBuildAssetFilter(repoRoot);
-const dedicatedV67Files = new Set(Object.values(CARGO_BRUTAL_VISUAL_REGISTRY_V67).map((entry) => entry.path.replace(/^\//, '')));
+const dedicatedRuntimeFiles = new Set([
+  ...Object.values(CARGO_BRUTAL_VISUAL_REGISTRY_V67).map((entry) => entry.path.replace(/^\//, '')),
+  QZ17_COLLECTABLES_SHEET_V68.path.replace(/^\//, '')
+]);
 
 const [
   manifest,
@@ -121,7 +125,7 @@ test('the shared sprite manifest covers every deployed raw and normalized sheet 
     .sort();
   const normalizedFiles = allPngs
     .map(repoPathFromAbsolute)
-    .filter((file) => file.includes('/normalized/') && !dedicatedV67Files.has(file) && includeBuildAsset(resolve(repoRoot, file)))
+    .filter((file) => file.includes('/normalized/') && !dedicatedRuntimeFiles.has(file) && includeBuildAsset(resolve(repoRoot, file)))
     .sort();
 
   assert.deepEqual(
