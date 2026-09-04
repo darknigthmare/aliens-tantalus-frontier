@@ -39,6 +39,7 @@ import {
 } from './narrative-collectables-v68.js';
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
+import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -59,6 +60,24 @@ const isAlphaBravoRuntimeEventV69 = (event) => typeof event?.type === 'string'
 const alphaBravoEventLabelV69 = (event) => {
   const detail = event.message || event.action || event.order || event.taskId || event.teamId || event.type;
   return `DOCTRINE A/B · ${String(detail || 'MISE À JOUR TACTIQUE').toUpperCase()}`;
+};
+const ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70 = new Set([
+  'alien-survival-started', 'alien-survival-welding-kit', 'alien-survival-power-routed',
+  'alien-survival-cctv-opened', 'alien-survival-cctv-feed-visited', 'alien-survival-cctv-closed',
+  'alien-survival-weld-started', 'alien-survival-weld-cancelled', 'alien-survival-door-welded',
+  'alien-survival-pressure-equalized', 'alien-survival-airlock-cycled',
+  'alien-survival-acid-created', 'alien-survival-acid-persisted', 'alien-survival-weld-corroded',
+  'alien-survival-self-destruct-authorized', 'alien-survival-self-destruct-armed',
+  'alien-survival-self-destruct-tick', 'alien-survival-self-destruct-expired'
+]);
+const isAlienSurvivalRuntimeEventV70 = (event) => typeof event?.type === 'string'
+  && event.type.startsWith('alien-survival-');
+const alienSurvivalEventLabelV70 = (event) => {
+  const detail = event.message || event.reason || event.circuitId || event.feedId
+    || event.doorId || event.stationId || event.type.replace('alien-survival-', '');
+  const remaining = Number(event.remainingSeconds ?? event.remaining);
+  const countdown = Number.isFinite(remaining) ? ` · T−${Math.max(0, Math.ceil(remaining))} S` : '';
+  return `SURVIE · ${String(detail || 'SYSTÈMES ACTUALISÉS').toUpperCase()}${countdown}`;
 };
 const memoryStorage = (() => {
   const values = new Map();
@@ -91,6 +110,7 @@ let narrativeArchivesUiV68 = null;
 let missionNarrativeArchivesUiV68 = null;
 let missionArchiveOverlayV68 = null;
 let alphaBravoCommandDockV69 = null;
+let alienSurvivalDockV70 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -630,9 +650,11 @@ function renderOperationPlan() {
       ? 'Enquête QZ-17 · quatre preuves physiques à récupérer · confronter les sources pour ouvrir une vraie route.'
       : specialOperation?.id === 'alpha-bravo-coop'
         ? 'Quatre opérateurs · deux binômes physiques · ordres, pings, tâches réservées, stress et cohésion dynamiques.'
-      : '';
+        : specialOperation?.id === 'alien-survival-systems'
+          ? 'Six systèmes physiques · énergie limitée, CCTV active, pression par salle, soudure temporisée, acide persistant et double autorisation d’autodestruction.'
+          : '';
   const specialNotice = specialOperation
-    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V69</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
+    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V70</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : '';
   byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
@@ -925,6 +947,16 @@ function setupAlphaBravoCommandDockV69() {
   return alphaBravoCommandDockV69;
 }
 
+function setupAlienSurvivalDockV70() {
+  if (alienSurvivalDockV70) return alienSurvivalDockV70;
+  alienSurvivalDockV70 = new AlienSurvivalDockV70({
+    root: byId('alien-survival-dock-v70'),
+    engine
+  });
+  alienSurvivalDockV70.startAutoRefresh({ frequencyHz: 8 });
+  return alienSurvivalDockV70;
+}
+
 function openNarrativeArchivesV68(entryId = '', { markRead = false } = {}) {
   showView('archives');
   setupNarrativeArchivesUiV68().open(entryId, { markRead });
@@ -1094,6 +1126,7 @@ function startMissionRuntimeV62(context) {
   });
   if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
   setupAlphaBravoCommandDockV69().refresh();
+  setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
 }
 
@@ -1269,6 +1302,10 @@ function handleForgePlaytestEvent(event) {
     alphaBravoCommandDockV69?.refresh();
     log.textContent = alphaBravoEventLabelV69(event);
   }
+  if (isAlienSurvivalRuntimeEventV70(event)) {
+    alienSurvivalDockV70?.refresh();
+    log.textContent = alienSurvivalEventLabelV70(event);
+  }
   const labels = {
     'mission-level-ready': 'NIVEAU FORGE COMPILÉ',
     'mission-level-event': 'ÉVÉNEMENT FORGE',
@@ -1296,6 +1333,11 @@ function handleGameEvent(event) {
     if (event.type === 'fireteam-task-complete' && event.taskId) recordOperationFlag(saveSystem.data, `alpha-bravo-task-${event.taskId}`);
     if (event.type === 'fireteam-certified') recordOperationFlag(saveSystem.data, 'alpha-bravo-cohesion-certified');
     log.textContent = alphaBravoEventLabelV69(event);
+  }
+  if (isAlienSurvivalRuntimeEventV70(event)) {
+    alienSurvivalDockV70?.refresh();
+    recordOperationFlag(saveSystem.data, event.type);
+    log.textContent = alienSurvivalEventLabelV70(event);
   }
   if (event.type === 'archive-reader-open') {
     persistMissionResumeState();
@@ -1399,6 +1441,11 @@ function handleGameEvent(event) {
   if (event.type === 'equipment-used') { log.textContent = `ÉQUIPEMENT · ${event.name || event.action || 'support terrain'}`; renderMissionEquipment(); }
   if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${String(event.action || 'progression').toUpperCase()}`;
   if (event.type === 'mission-complete') {
+    // The V70 resolution validator compares the terminal payload with the
+    // native checkpoint. Persist the exact extracted state before clearing the
+    // active operation so forged or stale rewards remain fail-closed.
+    persistMissionResumeState();
+    saveSystem.commit();
     const outcome = finalizeOperation(true, event);
     log.textContent = outcome?.result || 'OBJECTIF ACCOMPLI · conséquences enregistrées.';
     toast(outcome?.success
@@ -1414,7 +1461,10 @@ function handleGameEvent(event) {
     'mission-timer-started', 'mission-timer-complete',
     'narrative-collectable-discovered', 'narrative-route-unlocked'
   ]);
-  if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type)) && saveSystem.data.strategy.currentOperation) {
+  const survivalPersistenceDue = ALIEN_SURVIVAL_PERSISTENT_EVENTS_V70.has(event.type)
+    && (event.type !== 'alien-survival-self-destruct-tick'
+      || Math.max(0, Math.ceil(Number(event.remainingSeconds ?? event.remaining) || 0)) % 5 === 0);
+  if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type) || survivalPersistenceDue) && saveSystem.data.strategy.currentOperation) {
     persistMissionResumeState();
     saveSystem.commit();
   }
@@ -1527,6 +1577,7 @@ function retreatMission() {
   }, 'retreat');
   engine.stop();
   alphaBravoCommandDockV69?.refresh({ active: false });
+  alienSurvivalDockV70?.refresh({ active: false });
   toast(outcome?.result || 'Retraite enregistrée.');
   showView('hub');
 }
@@ -1541,6 +1592,7 @@ function abandonBlockedOperationV69() {
   destroyMissionInsertionUiV62();
   engine.stop();
   alphaBravoCommandDockV69?.refresh({ active: false });
+  alienSurvivalDockV70?.refresh({ active: false });
   saveSystem.data.scene = 'hub';
   saveSystem.commit();
   renderAll();
@@ -1616,6 +1668,8 @@ function launchForgeMissionPlaytest(project) {
     strategicBriefing: deployment.operation,
     resumeState: null
   });
+  setupAlphaBravoCommandDockV69().refresh();
+  setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
 }
 
@@ -1869,6 +1923,7 @@ async function boot() {
   setupNarrativeArchivesUiV68();
   setupMissionArchiveOverlayV68();
   setupAlphaBravoCommandDockV69();
+  setupAlienSurvivalDockV70();
   bind();
   applyRuntimeSettings();
   renderAll();

@@ -1,6 +1,6 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version de travail web jouable **v69.0.0**. Le contrat consolidé **v1→v69** conserve le Tantalus comme niveau physique persistant et ajoute trois lots Special Operations réellement accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68) et la **Doctrine Alpha / Bravo** (V69). Cette dernière déploie quatre opérateurs en deux binômes, avec sélection de groupe, ordres, pings, tâches réservées, stress, cohésion, blessures et bilan persistant. Le registre recense 19 conversations mais n’en classe encore qu’une `effective`, contre 9 `partial` et 9 `missing` : V69 ne prétend donc pas être le jeu commercial complet.
+Version de travail web jouable **v70.0.0**. Le contrat consolidé **v1→v70** conserve le Tantalus comme niveau physique persistant et expose quatre lots Special Operations réellement accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69) et **SYSTÈMES DE SURVIE ALIEN** (V70). Ce dernier transforme six promesses en actions de terrain : autodestruction, portes soudables, pression par salle, routage énergétique, caméras de sécurité et acide persistant. Le registre recense 19 conversations : 2 `effective`, 8 `partial` et 9 `missing`. V70 ne prétend donc ni achever les 19 conversations ni constituer encore le jeu commercial complet.
 
 Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La publication d’une release n’est considérée comme acquise qu’après vérification séparée du déploiement et de la réponse HTTP.
 
@@ -17,8 +17,9 @@ Ouvrir `http://127.0.0.1:4173`.
 - Commandement : décisions datées, ressources, recherches, modules, journal et pression de crise persistants ; la diplomatie avance l'horloge, applique une transaction unique puis verrouille le canal jusqu'à son cooldown.
 - Préparation : achat, inventaire, arme, équipement à charges, véhicule, équipage, soins, costume, dossier Apex et profil Neuro-Xeno.
 - Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
-- Special Operations : le registre expose 19 conversations auditées et seulement trois routes jouables. Cargo Brutal est `effective` ; QZ-17 et Alpha/Bravo restent `partial` tant que leurs promesses globales respectives ne sont pas entièrement produites.
+- Special Operations : le registre expose 19 conversations auditées et quatre routes jouables. Cargo Brutal et Systèmes de survie Alien sont `effective` ; QZ-17 et Alpha/Bravo restent `partial` tant que leurs promesses globales respectives ne sont pas entièrement produites.
 - Doctrine Alpha / Bravo : exactement quatre opérateurs actifs, deux binômes persistants, ordres et pings ancrés au terrain, trois consoles/tâches physiques et certification calculée depuis les résultats réels. Il s’agit d’une doctrine tactique dans le runtime local, pas d’un multijoueur réseau annoncé.
+- Systèmes de survie Alien : six salles physiques reliées, capacité énergétique limitée entre support-vie, sécurité et CCTV, pression/oxygène simulés, sas soudables, surveillance sans pause du monde, flaques d’acide persistantes et autodestruction à double autorisation avant extraction.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
 - Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, booth de contrôle, UD-4L, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique. La table d’opérations et le comptoir d’armurerie sont des landmarks bitmap collisionnables ; leur dialogue puis leur interface se superposent au hub mis en pause, qui reprend au même endroit.
@@ -27,9 +28,9 @@ Ouvrir `http://127.0.0.1:4173`.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le manifeste principal V64 comptait **195 atlas / 2 772 cellules** ; les atlas supplémentaires V65/V66 et les visuels d’opérations V67→V69 sont suivis par leurs propres contrats et ne sont pas additionnés ici sans inventaire consolidé. Les **571 profils ennemis gameplay** ne signifient donc pas 571 silhouettes bitmap dédiées. Une entrée catalogue n'est jamais présentée comme une plaque unique lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le manifeste principal V64 comptait **195 atlas / 2 772 cellules** ; les atlas supplémentaires V65/V66 et les visuels d’opérations V67→V70 sont suivis par leurs propres contrats et ne sont pas additionnés ici sans inventaire consolidé. Les **571 profils ennemis gameplay** ne signifient donc pas 571 silhouettes bitmap dédiées. Une entrée catalogue n'est jamais présentée comme une plaque unique lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
-Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d'arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables, la source UD-4L agrandie, les petits props finaux par salle, ainsi que les 18 conversations encore `partial` ou `missing`.
+Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d'arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables, la source UD-4L agrandie, les petits props finaux par salle, ainsi que les 17 conversations encore `partial` ou `missing`.
 
 ## Contrôles
 
@@ -49,11 +50,13 @@ Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise
 
 Doctrine Alpha / Bravo : `1`, `2` et `3` sélectionnent Alpha, Bravo ou les deux groupes ; `C` arme le ping terrain ; `B`, `N` et `M` appliquent respectivement `TENIR`, `FOCUS` et `RALLIER`.
 
+Systèmes de survie Alien : les consoles et sas s’utilisent physiquement avec `E`. Le dock diégétique distribue l’énergie, change de flux CCTV et annule une action temporisée ; les contrôles ne deviennent actifs qu’à portée de l’équipement correspondant.
+
 ## Contenu conservé et consommé
 
-| Catalogue | Total v69 |
+| Catalogue | Total v70 |
 | --- | ---: |
-| Campagnes | 439 |
+| Campagnes | 440 |
 | Mondes | 64 |
 | Armes | 146 |
 | Équipements | 106 |
@@ -74,10 +77,14 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-La dernière gate locale V69 consignée valide **840 tests réussis**, **1 test ignoré**, **0 échec**, **258 modules lintés** et un build de **3 449 entrées catalogue**. La QA navigateur V69 est documentée séparément : elle couvre le lancement réel de la mission Alpha/Bravo sur bureau et mobile, les contrôles tactiques, le placement sûr des contacts et l’accessibilité, sans transformer cette preuve ciblée en certification du jeu commercial complet.
+La gate locale V70 est validée : **46/46 tests V70 ciblés**, **887 tests réussis**, **1 test Windows ignoré comme prévu**, **0 échec**, **268 modules lintés** et un build v70.0.0 de **3 450 entrées catalogue**. Le navigateur a validé le checkpoint clavier, la traversée docking → cargo, le HUD live, le tactile 390 × 844, 0 erreur console et 0 violation axe. La publication Vercel reste consignée séparément après vérification HTTP publique.
 
 ## Dossier de production
 
+- [Historique et gates V70](docs/VERSION_HISTORY_V70.md)
+- [QA navigateur V70 — systèmes de survie](docs/V70_BROWSER_QA.md)
+- [QA artistique V70 — systèmes de survie](docs/V70_ALIEN_SURVIVAL_ART_QA.md)
+- [Parité des 19 conversations V70](docs/CHATGPT_PROJECT_PARITY_V70.md)
 - [Historique de validation V69](docs/VERSION_HISTORY_V69.md)
 - [QA navigateur V69 — Doctrine Alpha / Bravo](docs/V69_BROWSER_QA.md)
 - [QA artistique V69 — consoles Alpha / Bravo](docs/V69_ALPHA_BRAVO_ART_QA.md)

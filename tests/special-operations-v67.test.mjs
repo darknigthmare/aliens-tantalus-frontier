@@ -34,14 +34,14 @@ const CHAT_IDS = Object.freeze([
   '6a98dfcb-a2e4-83ed-b3c2-606a9384c6e4'
 ]);
 
-test('le registre V69 couvre exactement les 19 conversations avec le bilan 1/9/9 et trois lots jouables', () => {
+test('le registre V70 couvre exactement les 19 conversations avec le bilan 2/8/9 et quatre lots jouables', () => {
   assert.equal(SPECIAL_OPERATIONS_V67.length, 19);
   assert.deepEqual(SPECIAL_OPERATION_COUNTS_V67, {
     total: 19,
-    effective: 1,
-    partial: 9,
+    effective: 2,
+    partial: 8,
     missing: 9,
-    playable: 3
+    playable: 4
   });
   assert.deepEqual(validateSpecialOperationsV67(), {
     ok: true,
@@ -72,13 +72,13 @@ test('les identifiants internes et ChatGPT sont exacts, uniques et adressables',
   assert.equal(getSpecialOperationByChatIdV67('inconnu'), null);
 });
 
-test('Cargo Brutal, QZ-17 et Alpha/Bravo ajoutent trois campagnes jouables sans collision historique', () => {
+test('Cargo Brutal, QZ-17, Alpha/Bravo et Survie ajoutent quatre campagnes jouables sans collision historique', () => {
   const historicalIds = new Set(CORE_CAMPAIGNS.map((campaign) => campaign.id));
   assert.equal(CORE_CAMPAIGNS.length, 436);
   assert.equal(historicalIds.has('special-cargo-brutal'), false);
 
   const expanded = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
-  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 3);
+  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 4);
   assert.equal(new Set(expanded.map((campaign) => campaign.id)).size, expanded.length);
 
   const cargo = expanded.find((campaign) => campaign.id === 'special-cargo-brutal');
@@ -107,8 +107,19 @@ test('Cargo Brutal, QZ-17 et Alpha/Bravo ajoutent trois campagnes jouables sans 
   assert.equal(alphaBravo.routes, 5);
   assert.equal(getSpecialOperationByCampaignIdV67(alphaBravo.id)?.id, 'alpha-bravo-coop');
 
+  const survival = expanded.find((campaign) => campaign.id === 'special-alien-survival-systems');
+  assert.ok(survival);
+  assert.equal(survival.specialOperationId, 'alien-survival-systems');
+  assert.equal(survival.worldId, 'world-05-lethe');
+  assert.equal(survival.objective, 'escape the quarantine');
+  assert.equal(survival.templateId, 'ship-interior-vertical');
+  assert.equal(survival.mode, 'SURVIVAL');
+  assert.equal(survival.routes, 3);
+  assert.equal(getSpecialOperationByCampaignIdV67(survival.id)?.id, 'alien-survival-systems');
+
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === cargo.id).length, 1);
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === qz17.id).length, 1);
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === alphaBravo.id).length, 1);
+  assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === survival.id).length, 1);
   assert.equal(CAMPAIGNS.length, expanded.length);
 });

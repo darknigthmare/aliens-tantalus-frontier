@@ -164,6 +164,13 @@ test('V69 garde les masters ImageGen et métadonnées hors build sans exclure l�
   assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/normalized/props/alpha-bravo-task-consoles-atlas-v69.png')), true);
 });
 
+test('V70 garde le master ImageGen et les métadonnées hors build sans exclure l’atlas runtime', () => {
+  const filter = createBuildAssetFilter(process.cwd());
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v70/alien-survival-systems-atlas-openai-v70.png')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/metadata/v70/alien-survival-systems-v70.json')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png')), true);
+});
+
 test('Vercel exclut toutes les productions V66 et ne réadmet que les cinq atlas du lot001', async () => {
   const rules = (await readFile('.vercelignore', 'utf8')).split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   for (const directory of ['frames/v66', 'reference-masters/v66', 'previews/v66', 'metadata/v66', 'normalized/enemy-clips-v66', 'normalized/enemy-motion-v66']) {

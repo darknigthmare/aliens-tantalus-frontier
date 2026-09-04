@@ -1,8 +1,8 @@
-const CACHE = 'atf-v69-shell-1';
+const CACHE = 'atf-v70-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
-  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css',
+  '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
   '/assets/openai/pwa/tantalus-frontier-icon-192-v68.png',
   '/assets/openai/pwa/tantalus-frontier-icon-512-v68.png',
@@ -16,7 +16,7 @@ const CORE = [
   '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/VERSION_HISTORY_V64.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md', '/docs/ART_PROVENANCE_V64.md',
   '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
   '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json', '/docs/references/V64_ASSET_COMPLETION_MATRIX.md', '/docs/references/V64_ENEMY_SOURCES.json', '/docs/references/V64_IMAGEGEN_PROMPTS.md', '/docs/references/V64_PNG_ALPHA_AUDIT.json',
-  '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/narrative-collectables-v68.js', '/src/narrative-collectables-runtime-v68.js', '/src/narrative-collectables-visuals-v68.js', '/src/narrative-archives-ui-v68.js', '/src/alpha-bravo-coop-v69.js', '/src/alpha-bravo-coop-runtime-v69.js', '/src/alpha-bravo-visuals-v69.js', '/src/alpha-bravo-ui-v69.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/narrative-collectables-v68.js', '/src/narrative-collectables-runtime-v68.js', '/src/narrative-collectables-visuals-v68.js', '/src/narrative-archives-ui-v68.js', '/src/alpha-bravo-coop-v69.js', '/src/alpha-bravo-coop-runtime-v69.js', '/src/alpha-bravo-visuals-v69.js', '/src/alpha-bravo-ui-v69.js', '/src/alien-survival-systems-v70.js', '/src/alien-survival-runtime-v70.js', '/src/alien-survival-visuals-v70.js', '/src/alien-survival-ui-v70.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
   '/src/npc-dialogue-v62.js', '/src/vent-network-v62.js', '/src/hub-v62-runtime.js',
@@ -67,6 +67,7 @@ const CORE = [
   '/assets/openai/sprites/normalized/props/cargo-brutal-props-atlas-v67.png',
   '/assets/openai/sprites/normalized/props/qz17-narrative-collectables-atlas-v68.png',
   '/assets/openai/sprites/normalized/props/alpha-bravo-task-consoles-atlas-v69.png',
+  '/assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png',
   '/assets/openai/sprites/normalized/npcs/cargo-survivors-shaw-ruiz-kessler-v67.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',

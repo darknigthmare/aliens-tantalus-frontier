@@ -11,7 +11,7 @@ export * from './content-core-v50.js';
 
 export const CAMPAIGNS = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
 export const CONTENT_COUNTS = Object.freeze({ ...CORE_CONTENT_COUNTS, campaigns: CAMPAIGNS.length });
-export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 439 });
+export const CONTENT_TARGETS = Object.freeze({ ...CORE_CONTENT_TARGETS, campaigns: 440 });
 
 export function validateContent() {
   const core = validateCoreContent();
@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '69.0.0',
-  subtitle: 'Doctrine Alpha / Bravo — deux binômes, ordres physiques et cohésion persistante',
+  version: '70.0.0',
+  subtitle: 'Systèmes de survie — pression, énergie, soudure, CCTV, acide et autodestruction persistants',
   sourceVersion: '51.0.0'
 });

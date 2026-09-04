@@ -13,6 +13,16 @@ import {
   createNarrativeArchivesV68,
   normalizeNarrativeArchivesV68
 } from './narrative-collectables-v68.js';
+import {
+  ALIEN_SURVIVAL_CAMPAIGN_ID_V70,
+  ALIEN_SURVIVAL_OPERATION_ID_V70,
+  ALIEN_SURVIVAL_REQUIRED_MECHANICS_V70,
+  ALIEN_SURVIVAL_SCHEMA_V70,
+  buildAlienSurvivalResolutionPayloadV70,
+  createAlienSurvivalStateV70,
+  sanitizeAlienSurvivalStateV70,
+  validateAlienSurvivalCompletionV70
+} from './alien-survival-systems-v70.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 
 export const SAVE_SCHEMA = 52;
@@ -107,12 +117,23 @@ export const ALPHA_BRAVO_DOCTRINE_V69 = Object.freeze({
 export const ALPHA_BRAVO_STRATEGIC_BONUS_V69 = Object.freeze({ research: 8, morale: 6 });
 const ALPHA_BRAVO_MAX_RUNS_V69 = 64;
 const ALPHA_BRAVO_OPERATION_ID_PATTERN_V69 = /^operation-\d+-special-alpha-bravo-doctrine$/;
+export const ALIEN_SURVIVAL_STRATEGIC_BONUS_V70 = Object.freeze({ research: 10, morale: 8, alloy: 12 });
+const ALIEN_SURVIVAL_MAX_RUNS_V70 = 64;
+const ALIEN_SURVIVAL_DEPLOYMENT_ID_PATTERN_V70 = /^operation-\d+-special-alien-survival-systems$/;
 
 export function createAlphaBravoDoctrineV69() {
   return {
     schema: ALPHA_BRAVO_DOCTRINE_V69.schema,
     runs: [],
     summary: { completedRuns: 0, victories: 0, failures: 0, bestScore: 0, averageScore: 0, lastOperationId: null }
+  };
+}
+
+export function createAlienSurvivalSystemsV70() {
+  return {
+    schema: ALIEN_SURVIVAL_SCHEMA_V70,
+    runs: [],
+    summary: { completedRuns: 0, victories: 0, failures: 0, bestCountdownRemaining: 0, lastOperationId: null }
   };
 }
 
@@ -205,6 +226,7 @@ export function createDefaultSave(profile = 1) {
     strategy: createStrategyState(),
     narrativeArchives: createNarrativeArchivesV68(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
+    alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -357,6 +379,178 @@ export function getAlphaBravoDoctrineSnapshotV69(save) {
   return structuredClone(normalized);
 }
 
+const ALIEN_SURVIVAL_PAYLOAD_KEYS_V70 = Object.freeze([
+  'schema', 'operationId', 'campaignId', 'deploymentOperationId', 'complete', 'phase', 'mechanics',
+  'countdownRemaining', 'stableRoomIds', 'weldedDoorIds', 'cctvFeedIds', 'acidPools'
+]);
+const ALIEN_SURVIVAL_PHASES_V70 = new Set([
+  'restore-power', 'security-scan', 'contain-breach', 'authorize-destruct', 'escape', 'extracted', 'failed'
+]);
+
+const hasExactKeysV70 = (candidate, expected) => isRecord(candidate)
+  && Object.keys(candidate).sort().join('|') === [...expected].sort().join('|');
+
+const boundedIdentifiersV70 = (candidate, maximum) => {
+  if (!Array.isArray(candidate) || candidate.length > maximum || candidate.some((entry) => typeof entry !== 'string' || !/^[a-z0-9][a-z0-9:-]{0,95}$/.test(entry))) return null;
+  if (new Set(candidate).size !== candidate.length) return null;
+  return [...candidate];
+};
+
+function canonicalAlienSurvivalPayloadV70(candidate) {
+  if (!hasExactKeysV70(candidate, ALIEN_SURVIVAL_PAYLOAD_KEYS_V70)
+    || candidate.schema !== ALIEN_SURVIVAL_SCHEMA_V70
+    || candidate.operationId !== ALIEN_SURVIVAL_OPERATION_ID_V70
+    || candidate.campaignId !== ALIEN_SURVIVAL_CAMPAIGN_ID_V70
+    || !ALIEN_SURVIVAL_DEPLOYMENT_ID_PATTERN_V70.test(candidate.deploymentOperationId)
+    || typeof candidate.complete !== 'boolean'
+    || !ALIEN_SURVIVAL_PHASES_V70.has(candidate.phase)
+    || !Number.isFinite(candidate.countdownRemaining)
+    || candidate.countdownRemaining < 0
+    || candidate.countdownRemaining > 120) return null;
+  if (!Array.isArray(candidate.mechanics)
+    || candidate.mechanics.length !== ALIEN_SURVIVAL_REQUIRED_MECHANICS_V70.length
+    || candidate.mechanics.some((entry) => !hasExactKeysV70(entry, ['id', 'complete']) || typeof entry.complete !== 'boolean')) return null;
+  const mechanicById = new Map(candidate.mechanics.map((entry) => [entry.id, entry]));
+  if (mechanicById.size !== ALIEN_SURVIVAL_REQUIRED_MECHANICS_V70.length
+    || ALIEN_SURVIVAL_REQUIRED_MECHANICS_V70.some((id) => !mechanicById.has(id))) return null;
+  const stableRoomIds = boundedIdentifiersV70(candidate.stableRoomIds, 32);
+  const weldedDoorIds = boundedIdentifiersV70(candidate.weldedDoorIds, 64);
+  const cctvFeedIds = boundedIdentifiersV70(candidate.cctvFeedIds, 32);
+  if (!stableRoomIds || !weldedDoorIds || !cctvFeedIds
+    || !hasExactKeysV70(candidate.acidPools, ['total', 'active', 'maximumPersistenceSeconds'])) return null;
+  const acidPools = candidate.acidPools;
+  if (!Number.isInteger(acidPools.total) || acidPools.total < 0 || acidPools.total > 48
+    || !Number.isInteger(acidPools.active) || acidPools.active < 0 || acidPools.active > acidPools.total
+    || !Number.isFinite(acidPools.maximumPersistenceSeconds)
+    || acidPools.maximumPersistenceSeconds < 0 || acidPools.maximumPersistenceSeconds > 86400) return null;
+  const mechanics = ALIEN_SURVIVAL_REQUIRED_MECHANICS_V70.map((id) => ({ id, complete: mechanicById.get(id).complete }));
+  if (candidate.complete && !mechanics.every((entry) => entry.complete)) return null;
+  return {
+    schema: ALIEN_SURVIVAL_SCHEMA_V70,
+    operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+    campaignId: ALIEN_SURVIVAL_CAMPAIGN_ID_V70,
+    deploymentOperationId: candidate.deploymentOperationId,
+    complete: candidate.complete,
+    phase: candidate.phase,
+    mechanics,
+    countdownRemaining: candidate.countdownRemaining,
+    stableRoomIds,
+    weldedDoorIds,
+    cctvFeedIds,
+    acidPools: {
+      total: acidPools.total,
+      active: acidPools.active,
+      maximumPersistenceSeconds: acidPools.maximumPersistenceSeconds
+    }
+  };
+}
+
+function isAlienSurvivalOperationV70(operation) {
+  return Boolean(isRecord(operation)
+    && operation.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70
+    && operation.specialOperationId === ALIEN_SURVIVAL_OPERATION_ID_V70
+    && typeof operation.id === 'string'
+    && ALIEN_SURVIVAL_DEPLOYMENT_ID_PATTERN_V70.test(operation.id));
+}
+
+function sanitizeAlienSurvivalCheckpointV70(candidate, operation) {
+  if (!isAlienSurvivalOperationV70(operation)
+    || !isRecord(candidate)
+    || candidate.schema !== ALIEN_SURVIVAL_SCHEMA_V70
+    || candidate.operationId !== ALIEN_SURVIVAL_OPERATION_ID_V70
+    || candidate.campaignId !== ALIEN_SURVIVAL_CAMPAIGN_ID_V70
+    || candidate.deploymentOperationId !== operation.id) return null;
+  const state = sanitizeAlienSurvivalStateV70(candidate, {
+    deploymentOperationId: operation.id,
+    difficulty: operation.difficulty
+  });
+  return state.schema === ALIEN_SURVIVAL_SCHEMA_V70
+    && state.operationId === ALIEN_SURVIVAL_OPERATION_ID_V70
+    && state.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70
+    && state.deploymentOperationId === operation.id
+    ? state
+    : null;
+}
+
+function alienSurvivalCheckpointFromOperationV70(operation) {
+  const specialOperation = operation?.resumeState?.specialOperation;
+  if (!isRecord(specialOperation) || specialOperation.operationId !== ALIEN_SURVIVAL_OPERATION_ID_V70) return null;
+  return sanitizeAlienSurvivalCheckpointV70(specialOperation.alienSurvivalV70, operation);
+}
+
+function sanitizeAlienSurvivalRunV70(candidate) {
+  if (!isRecord(candidate)
+    || candidate.schema !== ALIEN_SURVIVAL_SCHEMA_V70
+    || candidate.operationId !== ALIEN_SURVIVAL_OPERATION_ID_V70
+    || candidate.campaignId !== ALIEN_SURVIVAL_CAMPAIGN_ID_V70
+    || !ALIEN_SURVIVAL_DEPLOYMENT_ID_PATTERN_V70.test(candidate.deploymentOperationId)
+    || typeof candidate.success !== 'boolean'
+    || typeof candidate.bonusApplied !== 'boolean') return null;
+  const payload = canonicalAlienSurvivalPayloadV70(candidate.payload);
+  if (!payload || payload.deploymentOperationId !== candidate.deploymentOperationId) return null;
+  const success = candidate.success && payload.complete;
+  return {
+    schema: ALIEN_SURVIVAL_SCHEMA_V70,
+    operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+    campaignId: ALIEN_SURVIVAL_CAMPAIGN_ID_V70,
+    deploymentOperationId: candidate.deploymentOperationId,
+    success,
+    bonusApplied: success && candidate.bonusApplied,
+    reason: typeof candidate.reason === 'string' ? candidate.reason.slice(0, 60) : success ? 'objective' : 'failure',
+    payload,
+    completedDay: Math.floor(numberBetween(candidate.completedDay, 1, 1, 100000)),
+    completedHour: Math.round(numberBetween(candidate.completedHour, 0, 0, 24) * 100) / 100
+  };
+}
+
+export function normalizeAlienSurvivalSystemsV70(candidate) {
+  const runsByDeployment = new Map();
+  for (const entry of Array.isArray(candidate?.runs) ? candidate.runs.slice(-256) : []) {
+    const run = sanitizeAlienSurvivalRunV70(entry);
+    if (!run) continue;
+    if (runsByDeployment.has(run.deploymentOperationId)) runsByDeployment.delete(run.deploymentOperationId);
+    runsByDeployment.set(run.deploymentOperationId, run);
+  }
+  const runs = [...runsByDeployment.values()].slice(-ALIEN_SURVIVAL_MAX_RUNS_V70);
+  return {
+    schema: ALIEN_SURVIVAL_SCHEMA_V70,
+    runs,
+    summary: {
+      completedRuns: runs.length,
+      victories: runs.filter((run) => run.success).length,
+      failures: runs.filter((run) => !run.success).length,
+      bestCountdownRemaining: runs.reduce((best, run) => Math.max(best, run.payload.countdownRemaining), 0),
+      lastOperationId: runs.at(-1)?.deploymentOperationId || null
+    }
+  };
+}
+
+export function getAlienSurvivalSystemsSnapshotV70(save) {
+  const normalized = normalizeAlienSurvivalSystemsV70(save?.alienSurvivalSystems);
+  if (isRecord(save)) save.alienSurvivalSystems = normalized;
+  return structuredClone(normalized);
+}
+
+export function validateAlienSurvivalResolutionPayloadV70(operation, rewards) {
+  const checkpoint = alienSurvivalCheckpointFromOperationV70(operation);
+  const expectedPayload = checkpoint
+    ? buildAlienSurvivalResolutionPayloadV70(checkpoint, { deploymentOperationId: operation.id })
+    : null;
+  const payload = canonicalAlienSurvivalPayloadV70(rewards?.alienSurvivalSystems);
+  const exact = Boolean(payload && expectedPayload && JSON.stringify(payload) === JSON.stringify(expectedPayload));
+  const completion = checkpoint
+    ? validateAlienSurvivalCompletionV70(checkpoint, { deploymentOperationId: operation.id })
+    : { complete: false, valid: false };
+  return {
+    structuralValid: Boolean(isAlienSurvivalOperationV70(operation) && exact),
+    qualified: Boolean(isAlienSurvivalOperationV70(operation) && exact && payload.complete && completion.complete),
+    payload,
+    expectedPayload,
+    checkpoint,
+    completion
+  };
+}
+
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
 const rarityFactor = (rarity) => ({ common: 1, uncommon: 1.22, rare: 1.58, epic: 2, legendary: 2.6 }[rarity] || 1.15);
 
@@ -481,7 +675,7 @@ function validateAlphaBravoCertificationV69(operation, rewards) {
   };
 }
 
-function resolveSpecialOperationBonusV69(operation, rewards, alphaBravoCertification) {
+function resolveSpecialOperationBonusV70(operation, rewards, alphaBravoCertification, alienSurvivalValidation) {
   const cargoBonus = resolveSpecialOperationBonusV67(operation, rewards);
   if (Object.keys(cargoBonus).length) return cargoBonus;
   const narrativeBonus = resolveNarrativeResearchBonusV68(operation, rewards);
@@ -489,10 +683,13 @@ function resolveSpecialOperationBonusV69(operation, rewards, alphaBravoCertifica
   if (operation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId && alphaBravoCertification?.qualified) {
     return { ...ALPHA_BRAVO_STRATEGIC_BONUS_V69 };
   }
+  if (operation?.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70 && alienSurvivalValidation?.qualified) {
+    return { ...ALIEN_SURVIVAL_STRATEGIC_BONUS_V70 };
+  }
   return {};
 }
 
-function describeSpecialOperationBonusV69(operation, bonus) {
+function describeSpecialOperationBonusV70(operation, bonus) {
   if (!Object.keys(bonus).length) return '';
   if (operation?.campaignId === CARGO_BRUTAL_CAMPAIGN_ID_V67) {
     return ` Bonus Cargo Brutal : +${bonus.credits} credits, +${bonus.alloy} alliage.`;
@@ -502,6 +699,9 @@ function describeSpecialOperationBonusV69(operation, bonus) {
   }
   if (operation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
     return ` Bonus Doctrine Alpha / Bravo : +${bonus.research} recherche, +${bonus.morale} morale.`;
+  }
+  if (operation?.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70) {
+    return ` Bonus Survie Alien : +${bonus.research} recherche, +${bonus.morale} morale, +${bonus.alloy} alliage.`;
   }
   return '';
 }
@@ -549,6 +749,35 @@ function appendAlphaBravoDoctrineRunV69(save, operation, certification, { succes
   });
   save.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(current);
   return save.alphaBravoDoctrine.runs.find((run) => run.operationId === operation.id) || null;
+}
+
+function appendAlienSurvivalRunV70(save, operation, validation, { success, reason, bonusApplied }) {
+  const current = normalizeAlienSurvivalSystemsV70(save.alienSurvivalSystems);
+  const existing = current.runs.find((run) => run.deploymentOperationId === operation.id);
+  if (existing) {
+    save.alienSurvivalSystems = current;
+    return existing;
+  }
+  const fallbackState = createAlienSurvivalStateV70({
+    deploymentOperationId: operation.id,
+    difficulty: operation.difficulty
+  });
+  const payload = canonicalAlienSurvivalPayloadV70(validation?.expectedPayload)
+    || buildAlienSurvivalResolutionPayloadV70(fallbackState, { deploymentOperationId: operation.id });
+  current.runs.push({
+    schema: ALIEN_SURVIVAL_SCHEMA_V70,
+    operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+    campaignId: ALIEN_SURVIVAL_CAMPAIGN_ID_V70,
+    deploymentOperationId: operation.id,
+    success: Boolean(success),
+    bonusApplied: Boolean(bonusApplied),
+    reason,
+    payload,
+    completedDay: save.clock.day,
+    completedHour: save.clock.hour
+  });
+  save.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(current);
+  return save.alienSurvivalSystems.runs.find((run) => run.deploymentOperationId === operation.id) || null;
 }
 
 export function canAfford(save, cost = {}) {
@@ -892,16 +1121,29 @@ const sanitizeNativeResumeValue = (value, depth = 0) => {
     .map(([key, entry]) => [key, sanitizeNativeResumeValue(entry, depth + 1)]));
 };
 
-const sanitizeNativeOperationResumeState = (candidate) => {
+const sanitizeNativeOperationResumeState = (candidate, { operation = null } = {}) => {
   const sanitized = sanitizeNativeResumeValue(candidate);
   if (!isRecord(sanitized) || Number(sanitized.schema) !== 1 || !isRecord(sanitized.identity)) return null;
   sanitized.schema = 1;
+  const requestedSpecialOperation = isRecord(candidate.specialOperation) ? candidate.specialOperation : null;
+  const requestsAlienSurvival = Boolean(requestedSpecialOperation
+    && (requestedSpecialOperation.operationId === ALIEN_SURVIVAL_OPERATION_ID_V70
+      || Object.hasOwn(requestedSpecialOperation, 'alienSurvivalV70')));
+  if (requestsAlienSurvival) {
+    const alienSurvivalV70 = sanitizeAlienSurvivalCheckpointV70(requestedSpecialOperation.alienSurvivalV70, operation);
+    if (!alienSurvivalV70) return null;
+    sanitized.specialOperation = {
+      ...(isRecord(sanitized.specialOperation) ? sanitized.specialOperation : {}),
+      operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+      alienSurvivalV70
+    };
+  }
   return sanitized;
 };
 
-export function sanitizeOperationResumeState(candidate) {
+export function sanitizeOperationResumeState(candidate, options = {}) {
   if (!isRecord(candidate)) return null;
-  if (Number(candidate.schema) === 1) return sanitizeNativeOperationResumeState(candidate);
+  if (Number(candidate.schema) === 1) return sanitizeNativeOperationResumeState(candidate, options);
   const checkpoint = sanitizeResumeEntity(candidate.checkpoint, [
     ['id', 'checkpoint', 0, 0], ['x', 0, 0, 6200], ['y', 0, 0, 1080]
   ]);
@@ -963,8 +1205,55 @@ export function sanitizeOperationResumeState(candidate) {
 export function recordOperationResumeState(save, candidate) {
   const operation = ensureStrategy(save).currentOperation;
   if (!operation) return false;
-  operation.resumeState = sanitizeOperationResumeState(candidate);
-  return Boolean(operation.resumeState);
+  const preservedAlienSurvivalV70 = Number(candidate?.schema) === 1
+    && !Object.hasOwn(candidate, 'specialOperation')
+    ? alienSurvivalCheckpointFromOperationV70(operation)
+    : null;
+  const candidateWithPreservedSpecialOperation = preservedAlienSurvivalV70
+    ? {
+        ...candidate,
+        specialOperation: {
+          operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+          alienSurvivalV70: preservedAlienSurvivalV70
+        }
+      }
+    : candidate;
+  const resumeState = sanitizeOperationResumeState(candidateWithPreservedSpecialOperation, { operation });
+  if (!resumeState) return false;
+  operation.resumeState = resumeState;
+  return true;
+}
+
+export function recordAlienSurvivalStateV70(save, candidate) {
+  const operation = ensureStrategy(save).currentOperation;
+  const alienSurvivalV70 = sanitizeAlienSurvivalCheckpointV70(candidate, operation);
+  if (!alienSurvivalV70) return false;
+  const previousResume = isRecord(operation.resumeState) && Number(operation.resumeState.schema) === 1
+    ? structuredClone(operation.resumeState)
+    : { schema: 1, identity: {} };
+  const resumeState = sanitizeOperationResumeState({
+    ...previousResume,
+    schema: 1,
+    identity: {
+      ...(isRecord(previousResume.identity) ? previousResume.identity : {}),
+      campaignId: operation.campaignId,
+      operationId: operation.id
+    },
+    specialOperation: {
+      ...(isRecord(previousResume.specialOperation) ? previousResume.specialOperation : {}),
+      operationId: ALIEN_SURVIVAL_OPERATION_ID_V70,
+      alienSurvivalV70
+    }
+  }, { operation });
+  if (!resumeState) return false;
+  operation.resumeState = resumeState;
+  return true;
+}
+
+export function getAlienSurvivalOperationStateV70(save) {
+  const operation = ensureStrategy(save).currentOperation;
+  const state = alienSurvivalCheckpointFromOperationV70(operation);
+  return state ? structuredClone(state) : null;
 }
 
 export function resolveOperationDeployment(save, {
@@ -1107,6 +1396,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
   const isAlphaBravo = operation.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId;
+  const isAlienSurvival = operation.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70;
   if (isAlphaBravo) {
     save.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(save.alphaBravoDoctrine);
     if (save.alphaBravoDoctrine.runs.some((run) => run.operationId === operation.id)) {
@@ -1114,15 +1404,29 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       return { ok: false, reason: 'operation-already-resolved' };
     }
   }
+  if (isAlienSurvival) {
+    save.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(save.alienSurvivalSystems);
+    if (save.alienSurvivalSystems.runs.some((run) => run.deploymentOperationId === operation.id)) {
+      strategy.currentOperation = null;
+      return { ok: false, reason: 'operation-already-resolved' };
+    }
+  }
   const worldState = save.galaxy.worldState[operation.worldId];
   const containment = hasResearch(save, 'xeno-containment');
   const alphaBravoCertification = validateAlphaBravoCertificationV69(operation, rewards);
+  const alienSurvivalValidation = validateAlienSurvivalResolutionPayloadV70(operation, rewards);
   const persistAlphaBravoCrewResults = isAlphaBravo && alphaBravoCertification.structuralValid;
-  const resolvedSuccess = Boolean(success) && (!isAlphaBravo || alphaBravoCertification.qualified);
+  const resolvedSuccess = Boolean(success)
+    && (!isAlphaBravo || alphaBravoCertification.qualified)
+    && (!isAlienSurvival || alienSurvivalValidation.qualified);
   const resolvedReason = isAlphaBravo && Boolean(success) && !alphaBravoCertification.qualified
     ? 'doctrine-certification'
+    : isAlienSurvival && Boolean(success) && !alienSurvivalValidation.qualified
+      ? 'survival-validation'
     : reason;
-  const specialOperationBonus = resolvedSuccess ? resolveSpecialOperationBonusV69(operation, rewards, alphaBravoCertification) : {};
+  const specialOperationBonus = resolvedSuccess
+    ? resolveSpecialOperationBonusV70(operation, rewards, alphaBravoCertification, alienSurvivalValidation)
+    : {};
   let result = '';
   if (resolvedSuccess) {
     for (const [key, value] of Object.entries(operation.reward)) changeStrategicValue(save, key, value);
@@ -1139,7 +1443,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       member.stress = clamp(member.stress + Math.ceil(operation.risk / 12));
     });
     save.statistics.campaigns += 1;
-    const bonusLabel = describeSpecialOperationBonusV69(operation, specialOperationBonus);
+    const bonusLabel = describeSpecialOperationBonusV70(operation, specialOperationBonus);
     result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel;
   } else {
     worldState.stability = clamp(worldState.stability - (resolvedReason === 'retreat' ? 2 : 6));
@@ -1162,11 +1466,20 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     result = resolvedReason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.'
       : resolvedReason === 'doctrine-certification'
         ? 'Echec Doctrine Alpha / Bravo : certificat, tâches ou score de cohésion invalides.'
+        : resolvedReason === 'survival-validation'
+          ? 'Echec Systèmes de survie : état persisté ou preuves de mission invalides.'
         : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
   }
   if (isAlphaBravo) applyAlphaBravoCrewResultsV69(save, operation, alphaBravoCertification);
   const alphaBravoDoctrineRun = isAlphaBravo
     ? appendAlphaBravoDoctrineRunV69(save, operation, alphaBravoCertification, {
+      success: resolvedSuccess,
+      reason: resolvedReason,
+      bonusApplied: Object.keys(specialOperationBonus).length > 0
+    })
+    : null;
+  const alienSurvivalRun = isAlienSurvival
+    ? appendAlienSurvivalRunV70(save, operation, alienSurvivalValidation, {
       success: resolvedSuccess,
       reason: resolvedReason,
       bonusApplied: Object.keys(specialOperationBonus).length > 0
@@ -1179,6 +1492,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     result,
     specialOperationBonus: structuredClone(specialOperationBonus),
     ...(alphaBravoDoctrineRun ? { alphaBravoDoctrineRun: structuredClone(alphaBravoDoctrineRun) } : {}),
+    ...(alienSurvivalRun ? { alienSurvivalRun: structuredClone(alienSurvivalRun) } : {}),
     completedDay: save.clock.day,
     completedHour: save.clock.hour
   };
@@ -1190,6 +1504,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
 export function getStrategySnapshot(save) {
   const strategy = ensureStrategy(save);
   const alphaBravoDoctrine = getAlphaBravoDoctrineSnapshotV69(save);
+  const alienSurvivalSystems = getAlienSurvivalSystemsSnapshotV70(save);
   return structuredClone({
     clock: save.clock,
     resources: save.galaxy.resources,
@@ -1202,6 +1517,7 @@ export function getStrategySnapshot(save) {
     currentOperation: strategy.currentOperation,
     lastOperation: strategy.lastOperation,
     alphaBravoDoctrine,
+    alienSurvivalSystems,
     log: strategy.log
   });
 }
@@ -1305,7 +1621,7 @@ export function migrateSave(input, profile = 1) {
     : {};
   const sanitizeOperation = (candidate) => {
     if (!isRecord(candidate) || typeof candidate.campaignId !== 'string' || typeof candidate.worldId !== 'string') return null;
-    return {
+    const operation = {
       id: typeof candidate.id === 'string' ? candidate.id.slice(0, 180) : 'migrated-operation',
       campaignId: candidate.campaignId.slice(0, 120),
       worldId: candidate.worldId.slice(0, 120),
@@ -1332,10 +1648,12 @@ export function migrateSave(input, profile = 1) {
         ? { issuedVehicleId: candidate.issuedVehicleId.trim().slice(0, 120) }
         : {}),
       difficulty: ['story', 'standard', 'nightmare'].includes(candidate.difficulty) ? candidate.difficulty : 'standard',
-      resumeState: sanitizeOperationResumeState(candidate.resumeState),
+      resumeState: null,
       insertionState: sanitizeMissionInsertionStateV62(candidate.insertionState),
       flags: isRecord(candidate.flags) ? Object.fromEntries(Object.entries(candidate.flags).slice(0, 32).map(([key, value]) => [key.slice(0, 60), Boolean(value)])) : {}
     };
+    operation.resumeState = sanitizeOperationResumeState(candidate.resumeState, { operation });
+    return operation;
   };
   migrated.strategy = {
     serial: Math.floor(numberBetween(strategy.serial, base.strategy.serial, 0, 999999999)),
@@ -1369,9 +1687,14 @@ export function migrateSave(input, profile = 1) {
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
+  migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
     const matchingRun = migrated.alphaBravoDoctrine.runs.find((run) => run.operationId === migrated.strategy.lastOperation.id);
     if (matchingRun) migrated.strategy.lastOperation.alphaBravoDoctrineRun = structuredClone(matchingRun);
+  }
+  if (migrated.strategy.lastOperation?.campaignId === ALIEN_SURVIVAL_CAMPAIGN_ID_V70) {
+    const matchingRun = migrated.alienSurvivalSystems.runs.find((run) => run.deploymentOperationId === migrated.strategy.lastOperation.id);
+    if (matchingRun) migrated.strategy.lastOperation.alienSurvivalRun = structuredClone(matchingRun);
   }
 
   const editor = isRecord(source.editor) ? source.editor : {};

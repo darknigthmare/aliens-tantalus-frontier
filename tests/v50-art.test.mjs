@@ -7,6 +7,7 @@ import { SPRITE_SHEETS } from '../src/sprite-animation-runtime.js';
 import { CARGO_BRUTAL_VISUAL_REGISTRY_V67 } from '../src/cargo-brutal-visuals-v67.js';
 import { QZ17_COLLECTABLES_SHEET_V68 } from '../src/narrative-collectables-visuals-v68.js';
 import { ALPHA_BRAVO_CONSOLE_SHEET_V69 } from '../src/alpha-bravo-visuals-v69.js';
+import { ALIEN_SURVIVAL_SYSTEMS_SHEET_V70 } from '../src/alien-survival-visuals-v70.js';
 import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -17,7 +18,8 @@ const includeBuildAsset = createBuildAssetFilter(repoRoot);
 const dedicatedRuntimeFiles = new Set([
   ...Object.values(CARGO_BRUTAL_VISUAL_REGISTRY_V67).map((entry) => entry.path.replace(/^\//, '')),
   QZ17_COLLECTABLES_SHEET_V68.path.replace(/^\//, ''),
-  ALPHA_BRAVO_CONSOLE_SHEET_V69.path.replace(/^\//, '')
+  ALPHA_BRAVO_CONSOLE_SHEET_V69.path.replace(/^\//, ''),
+  ALIEN_SURVIVAL_SYSTEMS_SHEET_V70.path.replace(/^\//, '')
 ]);
 
 const [

@@ -1,16 +1,16 @@
-# Contrat de contenu v1→v69
+# Contrat de contenu v1→v70
 
 ## Règle fondamentale
 
 Le projet est **additif** : une version ultérieure peut corriger, migrer ou enrichir un élément, jamais le supprimer silencieusement. Les identifiants sont stables, les sauvegardes anciennes sont migrées et chaque catalogue est validé au build.
 
-## Invariants v69
+## Invariants v70
 
 `src/content.js` est la source exécutable. `validateContent()` bloque le démarrage et le build si un total change ou si des IDs sont dupliqués.
 
 | Clé | Invariant | Surface runtime |
 |---|---:|---|
-| `campaigns` | 439 | Opérations MIRE, Frontier, Survival, Crucible et Special Operations |
+| `campaigns` | 440 | Opérations MIRE, Frontier, Survival, Crucible et Special Operations |
 | `worlds` | 64 | Carte galactique, états coloniaux |
 | `weapons` | 146 | Armurerie, combat |
 | `equipment` | 106 | Armurerie, utilitaires |
@@ -30,11 +30,13 @@ Les 206 paires ont exactement deux membres partageant `pairId` :
 1. `MIRE` — reconstitution historique isolée qui protège le contexte de la source.
 2. `FRONTIER` — descendant, clone, trace, programme corporatif ou conséquence cohérente en 2204.
 
-Les 27 campagnes sans `pairId` regroupent les 24 campagnes signature de la continuité Tantalus, Echo-9, Apex, Crucible, Neuro-Xeno et Red Hive, plus les trois lots jouables `special-cargo-brutal`, `special-narrative-qz17` et `special-alpha-bravo-doctrine`. Les 206 paires MIRE/Frontier, soit 412 campagnes appariées, restent inchangées et chaque paire contient exactement deux membres.
+Les 28 campagnes sans `pairId` regroupent les 24 campagnes signature de la continuité Tantalus, Echo-9, Apex, Crucible, Neuro-Xeno et Red Hive, plus les quatre lots jouables `special-cargo-brutal`, `special-narrative-qz17`, `special-alpha-bravo-doctrine` et `special-alien-survival-systems`. Les 206 paires MIRE/Frontier, soit 412 campagnes appariées, restent inchangées et chaque paire contient exactement deux membres.
 
-## Special Operations V69
+## Special Operations V70
 
-`src/special-operations-v67.js` recense exactement les 19 conversations auditées du projet ChatGPT « Aliens tantalus project ». Une entrée n'est ajoutée à `CAMPAIGNS` que lorsqu'elle dispose d'une route jouable réelle. V67 a ajouté **CARGO BRUTAL**, V68 **QZ-17 — La cargaison fantôme** et V69 **DOCTRINE ALPHA / BRAVO**. Le registre mesuré contient 3 lots jouables, mais seulement 1 promesse `effective`, 9 `partial` et 9 `missing` : les lots QZ-17 et Alpha/Bravo ne ferment donc pas à eux seuls leur conversation complète. Le registre conserve `canonExact: false` : les assets sont des créations originales du projet et non des pixels officiels recopiés.
+`src/special-operations-v67.js` recense exactement les 19 conversations auditées du projet ChatGPT « Aliens tantalus project ». Une entrée n'est ajoutée à `CAMPAIGNS` que lorsqu'elle dispose d'une route jouable réelle. V67 a ajouté **CARGO BRUTAL**, V68 **QZ-17 — La cargaison fantôme**, V69 **DOCTRINE ALPHA / BRAVO** et V70 **SYSTÈMES DE SURVIE ALIEN**. Le registre mesuré contient 4 lots jouables : 2 promesses `effective`, 8 `partial` et 9 `missing`. Cargo Brutal et Systèmes de survie Alien sont effectifs ; QZ-17 et Alpha/Bravo restent partiels à l’échelle de leur conversation complète. Le registre conserve `canonExact: false` : les assets sont des créations originales du projet et non des pixels officiels recopiés.
+
+Le lot V70 doit conserver exactement six mécaniques exécutables : `self-destruct`, `weldable-doors`, `room-pressure`, `power-routing`, `security-cameras` et `persistent-acid`. Le HUD diégétique expose ces systèmes mais ne remplace jamais l’action physique dans les six salles du niveau.
 
 ## Couverture fonctionnelle
 
@@ -42,8 +44,8 @@ Une entrée de catalogue est exploitable et pas seulement décorative : armes av
 
 ## Ce que « complet » signifie ici
 
-Le build contient l’intégralité des **contrats et quantités** annoncés jusqu'à la V69 ainsi qu’une surface consultable ou jouable pour chaque famille. Les centaines de variantes systémiques partagent volontairement des familles de logique et des masters artistiques ; elles ne prétendent pas constituer 571 dessins uniques faits à la main. Une boucle mécaniquement jouable ne vaut toutefois pas validation artistique commerciale : cette dernière exige encore des assets dédiés branchés et une QA visuelle documentée.
+Le contrat de build V70 exige l’intégralité des **contrats et quantités** annoncés jusqu'à la V70 ainsi qu’une surface consultable ou jouable pour chaque famille. Sa gate locale est validée par 888 tests sans échec, le lint des 268 modules, le build de 3 450 entrées et les parcours navigateur documentés. Les centaines de variantes systémiques partagent volontairement des familles de logique et des masters artistiques ; elles ne prétendent pas constituer 571 dessins uniques faits à la main. Une boucle mécaniquement jouable ne vaut toutefois pas validation artistique commerciale : cette dernière exige encore des assets dédiés branchés et une QA visuelle documentée.
 
-## Contrat PWA V69
+## Contrat PWA V70
 
-Le manifeste expose quatre icônes PNG exécutables : 192 px et 512 px avec `purpose: any`, puis 192 px et 512 px avec `purpose: maskable`. Les quatre chemins sont précachés par le service worker `atf-v69-shell-1`, existent dans le dépôt et correspondent à leurs dimensions encodées. Le master OpenAI 1254 px reste une source de production : il n’est ni déclaré dans le manifeste ni précaché. Le document `docs/V68_PWA_ICON_QA.md` fixe provenance, empreintes et contrôle de safe zone.
+Le manifeste continue d’exposer quatre icônes PNG exécutables : 192 px et 512 px avec `purpose: any`, puis 192 px et 512 px avec `purpose: maskable`. Le service worker V70 utilise le cache `atf-v70-shell-1` et précache les modules V70 ainsi que l’atlas normalisé, jamais le master ni ses métadonnées de production. La validation PWA locale est **RÉUSSIE** ; le document `docs/V68_PWA_ICON_QA.md` conserve la provenance, les empreintes et le contrôle de safe zone des icônes.

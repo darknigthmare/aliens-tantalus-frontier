@@ -88,10 +88,26 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'alien-survival-systems', chatId: '6a999dca-3efc-83eb-907a-623f11cf2388', chatTitle: 'Proposer mécaniques HUD Alien',
-    promisedTitle: 'SYSTÈMES DE SURVIE ALIEN', kind: 'system', implementationStatus: 'partial', playable: false, productionOrder: 4,
+    promisedTitle: 'SYSTÈMES DE SURVIE ALIEN', kind: 'system', implementationStatus: 'effective', playable: true, productionOrder: 4,
+    campaignId: 'special-alien-survival-systems',
+    campaign: Object.freeze({
+      pairId: null, mode: 'SURVIVAL', worldId: 'world-05-lethe', objective: 'escape the quarantine',
+      year: 2204, canon: 'project-continuity', routes: 3, templateId: 'ship-interior-vertical'
+    }),
     promiseSummary: 'HUD diégétique, auto-destruction, soudure, pression, sas, énergie, CCTV et acide persistant.',
     requiredMechanics: ['self-destruct', 'weldable-doors', 'room-pressure', 'power-routing', 'security-cameras', 'persistent-acid'],
-    evidence: ['src/game-v51-runtime.js:729', 'src/game-v51-runtime.js:1230', 'src/game-v51-runtime.js:1412']
+    evidence: [
+      'src/alien-survival-systems-v70.js',
+      'src/alien-survival-runtime-v70.js',
+      'src/alien-survival-ui-v70.js',
+      'src/alien-survival-visuals-v70.js',
+      'tests/alien-survival-systems-v70.test.mjs',
+      'tests/alien-survival-runtime-v70.test.mjs',
+      'tests/alien-survival-save-v70.test.mjs',
+      'tests/alien-survival-ui-v70.test.mjs',
+      'tests/alien-survival-art-v70.test.mjs',
+      'docs/V70_ALIEN_SURVIVAL_ART_QA.md'
+    ]
   }),
   freezeOperation({
     id: 'jeri-false-son', chatId: '6a999847-94b4-83ed-af17-c3b6b57da810', chatTitle: 'Mission avec Jerry synthétique',

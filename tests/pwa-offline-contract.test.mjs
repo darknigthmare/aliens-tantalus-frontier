@@ -31,7 +31,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v69 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
+test('le cache hors-ligne v70 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -118,8 +118,9 @@ test('le cache hors-ligne v69 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v62`);
   }
 
-  for (const stylesheetPath of ['/catalog-v62.css', '/mission-insertion-v62.css']) {
-    assert.ok(workerContains(worker, stylesheetPath), `${stylesheetPath} manque dans CORE v62`);
+  for (const stylesheetPath of ['/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css']) {
+    await access(localPath(stylesheetPath));
+    assert.ok(workerContains(worker, stylesheetPath), `${stylesheetPath} manque dans CORE`);
   }
   for (const bitmapPath of [
     '/assets/openai/hub/vents/tantalus-duct-interior-v62.png',
@@ -131,7 +132,7 @@ test('le cache hors-ligne v69 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v69-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v70-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -192,6 +193,7 @@ test('le build et le déploiement excluent les masters QA raw sans supprimer les
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'reference-masters', 'v64'\), \{ recursive: true, force: true \}\)/);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'previews', 'v64'\), \{ recursive: true, force: true \}\)/);
   assert.match(build, /rm\(join\(output, 'assets', 'openai', 'sprites', 'metadata', 'v64'\), \{ recursive: true, force: true \}\)/);
+  assert.match(build, /for \(const path of \[[^\]]*'alien-survival-v70\.css'[^\]]*\]\) \{/, 'le build doit copier la feuille V70 référencée par le shell et la PWA');
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/raw$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/raw\/\*\*$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/normalized\/equipment$/m);

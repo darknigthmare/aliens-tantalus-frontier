@@ -1,0 +1,129 @@
+{
+  "schema": 70,
+  "contractId": "alien-survival-systems-atlas-v70",
+  "pipeline": "OpenAI ImageGen master + deterministic checker cleanup",
+  "artProvider": "OpenAI ImageGen",
+  "canonExact": false,
+  "originalProjectAsset": true,
+  "source": "assets/openai/sprites/frames/v70/alien-survival-systems-atlas-openai-v70.png",
+  "sourceSha256": "433bc47f2806b774add9e36ff90132a4e1db11b2911359bcdf5755e51e1f4c22",
+  "sourceDimensions": [
+    1774,
+    887
+  ],
+  "sourceMode": "RGB",
+  "removedCheckerPixels": 747368,
+  "output": "assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png",
+  "outputSha256": "6f3d8d37c38d6528609e870adb815f550c4d98f998379e42dc49a4046a8ce366",
+  "dimensions": [
+    1024,
+    512
+  ],
+  "mode": "RGBA",
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 8
+  },
+  "transparentRatio": 0.46221,
+  "cells": [
+    {
+      "id": "power-distributor-off",
+      "column": 0,
+      "row": 0,
+      "occupiedPixels": 35502,
+      "bounds": [
+        29,
+        23,
+        234,
+        230
+      ]
+    },
+    {
+      "id": "life-support-powered",
+      "column": 1,
+      "row": 0,
+      "occupiedPixels": 35491,
+      "bounds": [
+        23,
+        23,
+        228,
+        230
+      ]
+    },
+    {
+      "id": "security-powered",
+      "column": 2,
+      "row": 0,
+      "occupiedPixels": 35421,
+      "bounds": [
+        18,
+        22,
+        221,
+        230
+      ]
+    },
+    {
+      "id": "cctv-powered",
+      "column": 3,
+      "row": 0,
+      "occupiedPixels": 34902,
+      "bounds": [
+        16,
+        23,
+        218,
+        230
+      ]
+    },
+    {
+      "id": "pressure-valve",
+      "column": 0,
+      "row": 1,
+      "occupiedPixels": 28548,
+      "bounds": [
+        23,
+        14,
+        247,
+        216
+      ]
+    },
+    {
+      "id": "cctv-console",
+      "column": 1,
+      "row": 1,
+      "occupiedPixels": 32624,
+      "bounds": [
+        34,
+        8,
+        214,
+        227
+      ]
+    },
+    {
+      "id": "airlock-welding",
+      "column": 2,
+      "row": 1,
+      "occupiedPixels": 46421,
+      "bounds": [
+        8,
+        8,
+        235,
+        222
+      ]
+    },
+    {
+      "id": "self-destruct-armed",
+      "column": 3,
+      "row": 1,
+      "occupiedPixels": 33048,
+      "bounds": [
+        25,
+        8,
+        210,
+        232
+      ]
+    }
+  ]
+}
