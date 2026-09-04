@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v66 — hub physique, insertion jouable et premier lot de cinq ennemis aux animations dédiées.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v67 — hub physique, insertion jouable et première opération spéciale Cargo Brutal jouable.">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/sprite-gallery.css">
@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="/hub-stations-v61.css">
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
-  <title>ALIENS: TANTALUS FRONTIER v66</title>
+  <title>ALIENS: TANTALUS FRONTIER v67</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v66</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v67</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -39,7 +39,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 66.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 67.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -61,10 +61,10 @@
     </aside>
 
     <section class="shell">
-      <header class="topbar">
+      <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v66.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v67.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -98,7 +98,12 @@
 
         <section class="view" data-panel="operations">
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
-          <div class="section-intro"><div><p class="eyebrow">436 CAMPAGNES // 16 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" placeholder="Source, monde, objectif…"></div></div>
+          <div class="section-intro"><div><p class="eyebrow">437 CAMPAGNES // 19 DIRECTIVES CHATGPT // 16 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
+          <section class="special-operations-registry" aria-labelledby="special-operations-heading">
+            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V67</h3></div><p>Les 19 conversations sont recensées sans faux statut : seul le contenu réellement exécutable peut être planifié.</p></header>
+            <div id="special-operation-summary" class="special-operation-summary" aria-live="polite"></div>
+            <div id="special-operation-list" class="special-operation-grid"></div>
+          </section>
           <div class="operations-layout">
             <div><div id="campaign-list" class="catalog-grid"></div></div>
             <aside class="operations-sidebar">

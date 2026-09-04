@@ -81,6 +81,8 @@ export const RESEARCH_PROJECTS = Object.freeze([
 const DEFAULT_WEAPONS = ['weapon-001-m41a-pulse-rifle', 'weapon-003-m4a3-service-pistol'];
 const DEFAULT_EQUIPMENT = ['equipment-001-motion-tracker', 'equipment-006-medkit'];
 const DEFAULT_VEHICLES = ['vehicle-001-m577-armored-personnel-carrier'];
+const CARGO_BRUTAL_CAMPAIGN_ID_V67 = 'special-cargo-brutal';
+const CARGO_BRUTAL_STRATEGIC_BONUS_V67 = Object.freeze({ credits: 300, alloy: 45 });
 
 function createStrategyState() {
   return {
@@ -257,6 +259,14 @@ function changeStrategicValue(save, key, delta) {
   const maximum = target === save.hub.systems ? 100 : 999999999;
   target[key] = Math.round(clamp(target[key] + delta, 0, maximum) * 100) / 100;
   return target[key];
+}
+
+function resolveSpecialOperationBonusV67(operation, rewards) {
+  if (operation?.campaignId !== CARGO_BRUTAL_CAMPAIGN_ID_V67 || rewards?.cargoBrutal !== true || !isRecord(rewards.strategicBonus)) return {};
+  const credits = Number(rewards.strategicBonus.credits);
+  const alloy = Number(rewards.strategicBonus.alloy ?? rewards.strategicBonus.salvage);
+  if (credits !== CARGO_BRUTAL_STRATEGIC_BONUS_V67.credits || alloy !== CARGO_BRUTAL_STRATEGIC_BONUS_V67.alloy) return {};
+  return { ...CARGO_BRUTAL_STRATEGIC_BONUS_V67 };
 }
 
 export function canAfford(save, cost = {}) {
@@ -729,15 +739,17 @@ export function recordOperationFlag(save, flag, value = true) {
   return true;
 }
 
-export function resolveOperation(save, { success, kills = 0, reason = success ? 'objective' : 'failure' } = {}) {
+export function resolveOperation(save, { success, kills = 0, reason = success ? 'objective' : 'failure', rewards = null } = {}) {
   const strategy = ensureStrategy(save);
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
   const worldState = save.galaxy.worldState[operation.worldId];
   const containment = hasResearch(save, 'xeno-containment');
+  const specialOperationBonus = success ? resolveSpecialOperationBonusV67(operation, rewards) : {};
   let result = '';
   if (success) {
     for (const [key, value] of Object.entries(operation.reward)) changeStrategicValue(save, key, value);
+    for (const [key, value] of Object.entries(specialOperationBonus)) changeStrategicValue(save, key, value);
     changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil(kills / 5)));
     worldState.stability = clamp(worldState.stability + 8);
     worldState.infestation = clamp(worldState.infestation - (containment ? 11 : 7));
@@ -750,7 +762,10 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       member.stress = clamp(member.stress + Math.ceil(operation.risk / 12));
     });
     save.statistics.campaigns += 1;
-    result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.';
+    const bonusLabel = Object.keys(specialOperationBonus).length
+      ? ` Bonus Cargo Brutal : +${specialOperationBonus.credits} credits, +${specialOperationBonus.alloy} alliage.`
+      : '';
+    result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel;
   } else {
     worldState.stability = clamp(worldState.stability - (reason === 'retreat' ? 2 : 6));
     worldState.infestation = clamp(worldState.infestation + (reason === 'retreat' ? 2 : 7));
@@ -769,10 +784,18 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     if (reason === 'retreat') save.statistics.retreats += 1;
     result = reason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.' : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
   }
-  strategy.lastOperation = { ...structuredClone(operation), success: Boolean(success), reason, result, completedDay: save.clock.day, completedHour: save.clock.hour };
+  strategy.lastOperation = {
+    ...structuredClone(operation),
+    success: Boolean(success),
+    reason,
+    result,
+    specialOperationBonus: structuredClone(specialOperationBonus),
+    completedDay: save.clock.day,
+    completedHour: save.clock.hour
+  };
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !success, result });
-  return { ok: true, success: Boolean(success), result, operation: strategy.lastOperation };
+  return { ok: true, success: Boolean(success), result, specialOperationBonus, operation: strategy.lastOperation };
 }
 
 export function getStrategySnapshot(save) {
@@ -911,6 +934,12 @@ export function migrateSave(input, profile = 1) {
       costumeId: typeof candidate.costumeId === 'string' ? candidate.costumeId.slice(0, 120) : null,
       neuroProfileId: typeof candidate.neuroProfileId === 'string' ? candidate.neuroProfileId.slice(0, 120) : null,
       apexDossierId: typeof candidate.apexDossierId === 'string' ? candidate.apexDossierId.slice(0, 120) : null,
+      ...(typeof candidate.specialOperationId === 'string' && candidate.specialOperationId.trim()
+        ? { specialOperationId: candidate.specialOperationId.trim().slice(0, 120) }
+        : {}),
+      ...(typeof candidate.issuedVehicleId === 'string' && candidate.issuedVehicleId.trim()
+        ? { issuedVehicleId: candidate.issuedVehicleId.trim().slice(0, 120) }
+        : {}),
       difficulty: ['story', 'standard', 'nightmare'].includes(candidate.difficulty) ? candidate.difficulty : 'standard',
       resumeState: sanitizeOperationResumeState(candidate.resumeState),
       insertionState: sanitizeMissionInsertionStateV62(candidate.insertionState),
@@ -932,7 +961,8 @@ export function migrateSave(input, profile = 1) {
       ...sanitizeOperation(strategy.lastOperation),
       success: Boolean(strategy.lastOperation.success),
       reason: typeof strategy.lastOperation.reason === 'string' ? strategy.lastOperation.reason.slice(0, 60) : 'migrated',
-      result: typeof strategy.lastOperation.result === 'string' ? strategy.lastOperation.result.slice(0, 500) : ''
+      result: typeof strategy.lastOperation.result === 'string' ? strategy.lastOperation.result.slice(0, 500) : '',
+      specialOperationBonus: sanitizeValues(strategy.lastOperation.specialOperationBonus)
     } : null,
     log: Array.isArray(strategy.log) ? strategy.log.filter(isRecord).slice(0, 40).map((entry, index) => ({
       id: typeof entry.id === 'string' ? entry.id.slice(0, 180) : 'migrated-log-' + index,

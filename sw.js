@@ -1,4 +1,4 @@
-const CACHE = 'atf-v66-shell-1';
+const CACHE = 'atf-v67-shell-2';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
@@ -12,7 +12,7 @@ const CORE = [
   '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/VERSION_HISTORY_V64.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md', '/docs/ART_PROVENANCE_V64.md',
   '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
   '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json', '/docs/references/V64_ASSET_COMPLETION_MATRIX.md', '/docs/references/V64_ENEMY_SOURCES.json', '/docs/references/V64_IMAGEGEN_PROMPTS.md', '/docs/references/V64_PNG_ALPHA_AUDIT.json',
-  '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/src/app.js', '/src/title-screen-v61.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
   '/src/npc-dialogue-v62.js', '/src/vent-network-v62.js', '/src/hub-v62-runtime.js',
@@ -60,6 +60,8 @@ const CORE = [
   '/assets/openai/hub/props/sensor-console.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+  '/assets/openai/sprites/normalized/props/cargo-brutal-props-atlas-v67.png',
+  '/assets/openai/sprites/normalized/npcs/cargo-survivors-shaw-ruiz-kessler-v67.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-warrior-combat-sheet.png',

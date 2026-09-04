@@ -34,6 +34,7 @@ test('resolveOperation comptabilise une victoire exactement une fois', async () 
   const app = await readFile(APP_URL, 'utf8');
   const finalize = app.match(/function finalizeOperation[\s\S]*?\n\}/)?.[0] || '';
   assert.doesNotMatch(finalize, /statistics\.(campaigns|retreats)\s*\+=/);
+  assert.match(finalize, /rewards:\s*event\.rewards\s*\|\|\s*null/);
 });
 
 test('resolveOperation comptabilise une retraite exactement une fois', () => {
@@ -125,6 +126,29 @@ test('resumeState survit à la migration avec progression, portes, inventaire et
   const loaded = migrateSave(JSON.parse(JSON.stringify(save)), 1);
   assert.deepEqual(loaded.strategy.currentOperation.resumeState, sanitizeOperationResumeState(candidate));
   assert.equal('ignored' in loaded.strategy.currentOperation.resumeState, false);
+});
+
+test('la migration borne les identifiants spéciaux sans modifier les opérations ordinaires', () => {
+  const { save, campaign, world } = availableOperation();
+  const deployment = beginOperation(save, campaign, world);
+  assert.equal(deployment.ok, true);
+  deployment.operation.specialOperationId = `special-${'x'.repeat(160)}`;
+  deployment.operation.issuedVehicleId = `vehicle-${'y'.repeat(160)}`;
+
+  const active = migrateSave(JSON.parse(JSON.stringify(save)), 1);
+  assert.equal(active.strategy.currentOperation.specialOperationId, deployment.operation.specialOperationId.slice(0, 120));
+  assert.equal(active.strategy.currentOperation.issuedVehicleId, deployment.operation.issuedVehicleId.slice(0, 120));
+
+  assert.equal(resolveOperation(active, { success: true, kills: 0 }).ok, true);
+  const completed = migrateSave(JSON.parse(JSON.stringify(active)), 1);
+  assert.equal(completed.strategy.lastOperation.specialOperationId, deployment.operation.specialOperationId.slice(0, 120));
+  assert.equal(completed.strategy.lastOperation.issuedVehicleId, deployment.operation.issuedVehicleId.slice(0, 120));
+
+  const normal = availableOperation();
+  assert.equal(beginOperation(normal.save, normal.campaign, normal.world).ok, true);
+  const normalOperation = migrateSave(JSON.parse(JSON.stringify(normal.save)), 1).strategy.currentOperation;
+  assert.equal(Object.hasOwn(normalOperation, 'specialOperationId'), false);
+  assert.equal(Object.hasOwn(normalOperation, 'issuedVehicleId'), false);
 });
 
 test('la migration ne conserve que les fenêtres diplomatiques finies de mondes connus', () => {

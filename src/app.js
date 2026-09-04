@@ -30,6 +30,9 @@ import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
+import {
+  SPECIAL_OPERATIONS_V67, SPECIAL_OPERATION_COUNTS_V67, getSpecialOperationByCampaignIdV67
+} from './special-operations-v67.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -511,7 +514,44 @@ function renderCampaigns() {
     const completed = saveSystem.data.galaxy.completedCampaignIds.includes(campaign.id);
     return `<article class="catalog-card ${planned ? 'selected' : ''}" data-index="${index + 1}"><span class="eyebrow">${escapeHtml(campaign.mode)} · ${escapeHtml(campaign.source)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.summary)}</p><div class="mini-tags"><span>${escapeHtml(world?.name || 'Frontier')}</span><span>${escapeHtml(campaign.objective)}</span><span>${campaign.routes} routes</span><span>${completed ? 'ACCOMPLIE' : unlocked ? 'OUVERTE' : 'VERROUILLÉE'}</span></div><footer><span>${escapeHtml(campaign.canon)}</span><button class="button compact" data-plan-campaign="${campaign.id}" ${unlocked ? '' : 'disabled'}>${planned ? 'PLANIFIÉE' : 'PLANIFIER'}</button></footer></article>`;
   }).join('');
+  renderSpecialOperationsV67(term);
   renderOperationPlan();
+}
+
+function specialOperationStatusV67(operation) {
+  if (operation.implementationStatus === 'effective') return { label: 'JOUABLE', action: 'PLANIFIER', tone: 'effective' };
+  if (operation.implementationStatus === 'partial') return { label: 'PARTIELLE', action: 'INTÉGRATION PARTIELLE', tone: 'partial' };
+  return { label: 'MANQUANTE', action: 'À PRODUIRE', tone: 'missing' };
+}
+
+function renderSpecialOperationsV67(term = '') {
+  const list = byId('special-operation-list');
+  const summary = byId('special-operation-summary');
+  if (!list || !summary) return;
+  const activeCampaignId = saveSystem.data.strategy.currentOperation?.campaignId || null;
+  const operations = SPECIAL_OPERATIONS_V67
+    .filter((operation) => !term || JSON.stringify(operation).toLowerCase().includes(term))
+    .slice()
+    .sort((left, right) => left.productionOrder - right.productionOrder);
+  summary.innerHTML = `<span><b>${SPECIAL_OPERATION_COUNTS_V67.total}</b>CHATS RECENSÉS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.effective}</b>JOUABLE</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.partial}</b>PARTIELS</span><span><b>${SPECIAL_OPERATION_COUNTS_V67.missing}</b>MANQUANTS</span>`;
+  list.innerHTML = operations.map((operation) => {
+    const status = specialOperationStatusV67(operation);
+    const campaign = operation.campaignId ? CAMPAIGNS.find((entry) => entry.id === operation.campaignId) : null;
+    const world = campaign ? WORLDS.find((entry) => entry.id === campaign.worldId) : null;
+    const worldUnlocked = world ? saveSystem.data.galaxy.unlockedWorldIds.includes(world.id) : false;
+    const planned = Boolean(campaign) && saveSystem.data.strategy.plannedCampaignId === campaign.id;
+    const active = Boolean(campaign) && activeCampaignId === campaign.id;
+    const blockedByOperation = Boolean(activeCampaignId) && !active;
+    const canPlan = operation.playable && worldUnlocked && !blockedByOperation;
+    const action = active ? 'OPÉRATION ACTIVE' : planned ? 'PLANIFIÉE' : status.action;
+    const mechanics = operation.requiredMechanics.slice(0, 3).map((mechanic) => `<span>${escapeHtml(mechanic.replaceAll('-', ' '))}</span>`).join('');
+    const unavailableReason = blockedByOperation ? 'Une autre opération est active.'
+      : operation.playable && !worldUnlocked ? 'Route verrouillée.'
+        : operation.implementationStatus === 'partial' ? 'Promesse recensée, intégration encore incomplète.'
+          : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
+            : '';
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V67'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+  }).join('') || '<p class="special-operation-empty">Aucune directive ChatGPT ne correspond à cette recherche.</p>';
 }
 
 function neuroName(profile) {
@@ -543,9 +583,16 @@ function renderOperationPlan() {
   const crewNames = brief.crewIds.map((id) => CREW.find((member) => member.id === id)?.name || id);
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
-  const vehicle = VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
+  const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
+  const issuedVehicle = specialOperation?.issuedVehicleId
+    ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId)
+    : null;
+  const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
   const operation = saveSystem.data.strategy.currentOperation;
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p><div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}</b></div><button id="operation-launch" class="button primary wide" ${brief.ready || operation ? '' : 'disabled'}>${operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9'}</button>`;
+  const specialNotice = specialOperation
+    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V67</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>Insertion à pied · ${escapeHtml(issuedVehicle?.name || 'matériel lourd')} fourni dans la zone de mission, sans modifier l’inventaire.</p></div>`
+    : '';
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><button id="operation-launch" class="button primary wide" ${brief.ready || operation ? '' : 'disabled'}>${operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9'}</button>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
 }
 
@@ -961,7 +1008,7 @@ function startMissionInsertionV62(context) {
     campaign: context.campaign,
     world: context.world,
     mission: context.missionLevel,
-    vehicle: context.vehicle,
+    vehicle: getSpecialOperationByCampaignIdV67(context.campaign?.id)?.id === 'cargo-brutal' ? null : context.vehicle,
     crew: context.crew,
     readReceipts: saveSystem.data.strategy.insertionReadReceipts,
     now: Date.now()
@@ -1037,7 +1084,10 @@ function launchCampaign(campaign = null) {
   const crew = operationLoadout.crew;
   const weapon = operationLoadout.weapon || WEAPONS[0];
   const equipment = operationLoadout.equipment;
-  const vehicle = operationLoadout.vehicle;
+  const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
+  const vehicle = specialOperation?.issuedVehicleId
+    ? VEHICLES.find((entry) => entry.id === specialOperation.issuedVehicleId) || operationLoadout.vehicle
+    : operationLoadout.vehicle;
   const costume = operationLoadout.costume;
   const missionLevel = buildMissionLevelV52({
     campaign,
@@ -1049,7 +1099,9 @@ function launchCampaign(campaign = null) {
   Object.assign(deployment.operation, {
     levelSeedId: levelSeed.id,
     missionTemplateId: missionLevel.templateId,
-    missionLevelSignature: missionLevel.signature
+    missionLevelSignature: missionLevel.signature,
+    specialOperationId: specialOperation?.id || null,
+    issuedVehicleId: specialOperation?.issuedVehicleId || null
   });
   Object.assign(saveSystem.data, { scene: 'mission', worldId: world.id, campaignId: campaign.id, levelSeedId: levelSeed.id });
   saveSystem.commit();
@@ -1069,7 +1121,12 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
   if (!operation) return null;
   const campaign = CAMPAIGNS.find((entry) => entry.id === operation.campaignId);
   const world = WORLDS.find((entry) => entry.id === operation.worldId || entry.id === campaign?.worldId);
-  const outcome = resolveOperation(saveSystem.data, { success, kills: event.kills || 0, reason });
+  const outcome = resolveOperation(saveSystem.data, {
+    success,
+    kills: event.kills || 0,
+    reason,
+    rewards: event.rewards || null
+  });
   if (campaign && world && outcome.ok) applyCampaignConsequence(saveSystem.data, campaign, world, { success });
   advanceGalaxy(saveSystem.data, { hours: success ? 4 : 8, generateCrisis: true });
   saveSystem.data.scene = 'hub';
