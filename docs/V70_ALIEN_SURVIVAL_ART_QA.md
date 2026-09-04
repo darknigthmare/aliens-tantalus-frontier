@@ -49,6 +49,7 @@ Le contrat, la provenance, le chemin de metadata et le hash sont épinglés dans
 
 - test art strict : **RÉUSSI**, dimensions, alpha, huit occupations et hash vérifiés ;
 - build/PWA : **RÉUSSI**, atlas normalisé inclus, master et metadata exclus ;
+- production Vercel : **RÉUSSIE**, atlas runtime en 200 ; master et metadata de production en 404 ;
 - inspection directe de l’atlas : **RÉUSSIE**, huit silhouettes système distinctes, perspective industrielle et marges de cellule cohérentes ;
 - inspection en jeu 1280 × 720 : **RÉUSSIE**, consoles posées sur leurs surfaces et atlas chargé par le vrai moteur ;
 - contrôle mobile 390 × 844 : **RÉUSSI**, dock défilable sans masquer définitivement les commandes avancées.

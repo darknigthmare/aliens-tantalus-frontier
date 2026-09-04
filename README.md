@@ -2,7 +2,7 @@
 
 Version de travail web jouable **v70.0.0**. Le contrat consolidé **v1→v70** conserve le Tantalus comme niveau physique persistant et expose quatre lots Special Operations réellement accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69) et **SYSTÈMES DE SURVIE ALIEN** (V70). Ce dernier transforme six promesses en actions de terrain : autodestruction, portes soudables, pression par salle, routage énergétique, caméras de sécurité et acide persistant. Le registre recense 19 conversations : 2 `effective`, 8 `partial` et 9 `missing`. V70 ne prétend donc ni achever les 19 conversations ni constituer encore le jeu commercial complet.
 
-Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La publication d’une release n’est considérée comme acquise qu’après vérification séparée du déploiement et de la réponse HTTP.
+Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La V70 y est publiée en état `READY` ; la page, `build-info.json`, le runtime, le CSS et l’atlas V70 répondent en HTTP 200.
 
 ## Lancer localement
 
@@ -77,7 +77,7 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-La gate locale V70 est validée : **46/46 tests V70 ciblés**, **887 tests réussis**, **1 test Windows ignoré comme prévu**, **0 échec**, **268 modules lintés** et un build v70.0.0 de **3 450 entrées catalogue**. Le navigateur a validé le checkpoint clavier, la traversée docking → cargo, le HUD live, le tactile 390 × 844, 0 erreur console et 0 violation axe. La publication Vercel reste consignée séparément après vérification HTTP publique.
+La gate V70 est validée : **46/46 tests V70 ciblés**, **887 tests réussis**, **1 test Windows ignoré comme prévu**, **0 échec**, **268 modules lintés** et un build v70.0.0 de **3 450 entrées catalogue**. Le navigateur a validé le checkpoint clavier, la traversée docking → cargo, le HUD live, le tactile 390 × 844, 0 erreur console et 0 violation axe. La production Vercel est `READY` et ses URLs runtime ont été vérifiées en HTTP.
 
 ## Dossier de production
 

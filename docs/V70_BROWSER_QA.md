@@ -49,4 +49,11 @@ Parcours exécuté dans le vrai shell `ALIENS: TANTALUS FRONTIER v70`, avec la c
 - build : v70.0.0, 3 450 entrées catalogue ;
 - sortie publique locale : CSS, runtime et atlas normalisé présents ; master ImageGen et metadata absents.
 
-La vérification HTTP de la cible Vercel est renseignée dans l’historique V70 après publication.
+## Production Vercel
+
+- état du déploiement : `READY`, cible `production` ;
+- alias canonique : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app) ;
+- page, `build-info.json`, CSS V70, runtime V70 et atlas normalisé : HTTP 200 ;
+- master OpenAI et metadata V70 : HTTP 404 conformément au filtre de production ;
+- titre public : `ALIENS: TANTALUS FRONTIER v70`, version visible `70.0.0` ;
+- erreurs navigateur public : 0 ; logs Vercel : aucun log d’erreur trouvé.

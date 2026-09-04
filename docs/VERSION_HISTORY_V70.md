@@ -75,6 +75,8 @@ Cargo Brutal et Systèmes de survie Alien sont les deux lots `effective`. QZ-17 
 | Reprise en dépressurisation | **RÉUSSI** | état pression/oxygène/acide restauré par test production |
 | Reprise pendant l’autodestruction | **RÉUSSI** | secondes restantes et autorisations restaurées sans horloge murale |
 | Console et accessibilité | **RÉUSSI** | 0 erreur navigateur, 0 violation axe ; 1 contrôle contraste indéterminé sur gradients |
-| Déploiement Vercel et HTTP public | **EN ATTENTE** | à renseigner |
+| Déploiement Vercel et HTTP public | **RÉUSSI** | production `READY` ; alias canonique, build-info, CSS, runtime et atlas en 200 ; master et metadata en 404 |
 
 Les détails du parcours réel et des défauts corrigés sont consignés dans `docs/V70_BROWSER_QA.md`.
+
+Production validée : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app), version publique `70.0.0` et 440 campagnes dans `build-info.json`. Le déploiement de validation `dpl_HEupyPagTeaEPGdjbKv9TpMKRnW9` était `READY` et sans log d’erreur serveur.

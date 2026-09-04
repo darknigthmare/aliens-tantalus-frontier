@@ -41,6 +41,6 @@ L’atlas dédié OpenAI ImageGen couvre huit états de console, vanne, soudure 
 
 ## Validation de release
 
-La gate locale est acquise : 46/46 tests V70 ciblés, 887 réussites et 1 skip Windows attendu sur 888 tests, lint de 268 modules, build v70.0.0 de 3 450 entrées, PWA filtrée, parcours bureau et mobile, reprises critiques, 0 erreur navigateur et 0 violation axe. La publication Vercel reste la seule gate en attente avant la clôture du lot.
+La gate complète est acquise : 46/46 tests V70 ciblés, 887 réussites et 1 skip Windows attendu sur 888 tests, lint de 268 modules, build v70.0.0 de 3 450 entrées, PWA filtrée, parcours bureau et mobile, reprises critiques, 0 erreur navigateur, 0 violation axe et production Vercel `READY` vérifiée en HTTP sur l’alias canonique.
 
 La QA navigateur a également supprimé deux faux succès de prototype : l’insertion létale causée par des menaces restaurées au spawn et le délai générique de quarantaine qui pouvait échouer avant l’armement physique de l’autodestruction.
