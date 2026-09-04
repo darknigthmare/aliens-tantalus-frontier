@@ -34,14 +34,14 @@ const CHAT_IDS = Object.freeze([
   '6a98dfcb-a2e4-83ed-b3c2-606a9384c6e4'
 ]);
 
-test('le registre V68 couvre exactement les 19 conversations avec le bilan 1/9/9 et deux lots jouables', () => {
+test('le registre V69 couvre exactement les 19 conversations avec le bilan 1/9/9 et trois lots jouables', () => {
   assert.equal(SPECIAL_OPERATIONS_V67.length, 19);
   assert.deepEqual(SPECIAL_OPERATION_COUNTS_V67, {
     total: 19,
     effective: 1,
     partial: 9,
     missing: 9,
-    playable: 2
+    playable: 3
   });
   assert.deepEqual(validateSpecialOperationsV67(), {
     ok: true,
@@ -72,13 +72,13 @@ test('les identifiants internes et ChatGPT sont exacts, uniques et adressables',
   assert.equal(getSpecialOperationByChatIdV67('inconnu'), null);
 });
 
-test('Cargo Brutal et QZ-17 ajoutent deux campagnes jouables sans collision avec les 436 campagnes historiques', () => {
+test('Cargo Brutal, QZ-17 et Alpha/Bravo ajoutent trois campagnes jouables sans collision historique', () => {
   const historicalIds = new Set(CORE_CAMPAIGNS.map((campaign) => campaign.id));
   assert.equal(CORE_CAMPAIGNS.length, 436);
   assert.equal(historicalIds.has('special-cargo-brutal'), false);
 
   const expanded = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
-  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 2);
+  assert.equal(expanded.length, CORE_CAMPAIGNS.length + 3);
   assert.equal(new Set(expanded.map((campaign) => campaign.id)).size, expanded.length);
 
   const cargo = expanded.find((campaign) => campaign.id === 'special-cargo-brutal');
@@ -97,7 +97,18 @@ test('Cargo Brutal et QZ-17 ajoutent deux campagnes jouables sans collision avec
   assert.equal(qz17.pairId, null);
   assert.equal(getSpecialOperationByCampaignIdV67(qz17.id)?.id, 'narrative-collectables');
 
+  const alphaBravo = expanded.find((campaign) => campaign.id === 'special-alpha-bravo-doctrine');
+  assert.ok(alphaBravo);
+  assert.equal(alphaBravo.specialOperationId, 'alpha-bravo-coop');
+  assert.equal(alphaBravo.worldId, 'world-05-lethe');
+  assert.equal(alphaBravo.objective, 'defend the colony');
+  assert.equal(alphaBravo.templateId, 'colony-multiroute');
+  assert.equal(alphaBravo.minimumCrew, 4);
+  assert.equal(alphaBravo.routes, 5);
+  assert.equal(getSpecialOperationByCampaignIdV67(alphaBravo.id)?.id, 'alpha-bravo-coop');
+
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === cargo.id).length, 1);
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === qz17.id).length, 1);
+  assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === alphaBravo.id).length, 1);
   assert.equal(CAMPAIGNS.length, expanded.length);
 });

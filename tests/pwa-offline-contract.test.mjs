@@ -31,7 +31,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v68 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
+test('le cache hors-ligne v69 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -131,7 +131,7 @@ test('le cache hors-ligne v68 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v68-shell-2['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v69-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',

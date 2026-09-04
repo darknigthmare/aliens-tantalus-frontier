@@ -2,10 +2,11 @@ import { access, cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { RELEASE, validateContent } from '../src/content.js';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
+import { resolveSafeBuildOutput } from './build-output-guard.mjs';
 
 const root = process.cwd();
 const assetFilter = createBuildAssetFilter(root);
-const output = join(root, 'dist');
+const output = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
 const validation = validateContent();
 if (!validation.ok) throw new Error(`Content contract failed: ${validation.failures.join(', ')}`);
 

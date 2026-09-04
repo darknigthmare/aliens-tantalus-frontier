@@ -6,6 +6,7 @@ import { withV52MissionRuntime } from './game-v52-runtime.js';
 import { withV52LevelRuntime } from './game-v52-level-runtime.js';
 import { withCargoBrutalRuntimeV67 } from './cargo-brutal-runtime-v67.js';
 import { withNarrativeCollectablesRuntimeV68 } from './narrative-collectables-runtime-v68.js';
+import { withAlphaBravoCoopRuntimeV69 } from './alpha-bravo-coop-runtime-v69.js';
 
 export * from './game-production-core.js';
 
@@ -13,6 +14,7 @@ const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const V52ProductionEngine = withV52MissionRuntime(withV52LevelRuntime(ProductionCoreEngine));
 const V67ProductionEngine = withCargoBrutalRuntimeV67(V52ProductionEngine);
 const V68ProductionEngine = withNarrativeCollectablesRuntimeV68(V67ProductionEngine);
+const V69ProductionEngine = withAlphaBravoCoopRuntimeV69(V68ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -25,7 +27,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V68ProductionEngine {
+export class GameEngine extends V69ProductionEngine {
   applyCostumeRuntime() {
     if (!this.costumeRuntime?.active || !this.player) return;
     this.player.maxArmor = 100 + this.costumeRuntime.armor;

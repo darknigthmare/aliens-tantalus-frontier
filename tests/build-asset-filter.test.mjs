@@ -32,7 +32,9 @@ test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les a
     'assets/openai/sprites/previews/v66/enemy-001-ovomorph/all.gif',
     'assets/openai/sprites/metadata/v66/enemy-001-ovomorph.json',
     'assets/openai/sprites/normalized/enemy-clips-v66/enemy-001-ovomorph/sealed.webp',
-    'assets/openai/sprites/normalized/enemy-motion-v66/enemy-001-ovomorph/sealed.webp'
+    'assets/openai/sprites/normalized/enemy-motion-v66/enemy-001-ovomorph/sealed.webp',
+    'assets/openai/sprites/frames/v69/alpha-bravo-source.png',
+    'assets/openai/sprites/metadata/v69/alpha-bravo-report.json'
   ];
   const runtimeFiles = [
     'src/app.js',
@@ -153,6 +155,13 @@ test('V66 references: le filtre ne deborde pas sur les autres versions ou les ra
     'src/V66_helper.js', 'assets/V66_runtime.json']) {
     assert.equal(filter(join(process.cwd(), path)), true, `${path}: hors du perimetre des preuves privees`);
   }
+});
+
+test('V69 garde les masters ImageGen et métadonnées hors build sans exclure l’atlas runtime', () => {
+  const filter = createBuildAssetFilter(process.cwd());
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v69/alpha-bravo-task-consoles-atlas-openai-v69.png')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/metadata/v69/alpha-bravo-task-consoles-v69.json')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/normalized/props/alpha-bravo-task-consoles-atlas-v69.png')), true);
 });
 
 test('Vercel exclut toutes les productions V66 et ne réadmet que les cinq atlas du lot001', async () => {

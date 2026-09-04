@@ -35,6 +35,9 @@ test('resolveOperation comptabilise une victoire exactement une fois', async () 
   const finalize = app.match(/function finalizeOperation[\s\S]*?\n\}/)?.[0] || '';
   assert.doesNotMatch(finalize, /statistics\.(campaigns|retreats)\s*\+=/);
   assert.match(finalize, /rewards:\s*event\.rewards\s*\|\|\s*null/);
+  assert.match(finalize, /resolvedSuccess\s*=\s*outcome\?\.ok\s*\?\s*outcome\.success\s*!==\s*false\s*:\s*false/);
+  assert.match(finalize, /applyCampaignConsequence\([\s\S]*\{\s*success:\s*resolvedSuccess\s*\}/);
+  assert.match(finalize, /hours:\s*resolvedSuccess\s*\?\s*4\s*:\s*8/);
 });
 
 test('resolveOperation comptabilise une retraite exactement une fois', () => {
@@ -185,6 +188,7 @@ test('app branche accessibilité, captions sans commit et cooldown diplomatique'
   assert.match(app, /data-crew-treat=[\s\S]*loadoutLocked \|\| member\.status/);
   assert.match(app, /data-costume-id=[\s\S]*selected \|\| loadoutLocked/);
   assert.match(app, /Opération active : manifeste verrouillé/);
+  assert.match(app, /operationId:\s*casualtyOperation\?\.id\s*\|\|\s*null/);
   assert.match(html, /id="setting-aim-assist"[\s\S]*value="off"[\s\S]*value="standard"[\s\S]*value="high"/);
   assert.match(html, /id="setting-screen-shake"[^>]*min="0"[^>]*max="1"/);
 });

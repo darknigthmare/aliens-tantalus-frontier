@@ -7,7 +7,8 @@ import {
   SaveSystem, COMMAND_ACTIONS, RESEARCH_PROJECTS, MAX_SQUAD_SIZE, canAfford,
   executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
-  getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation
+  getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
+  getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69
 } from './save.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
@@ -37,6 +38,7 @@ import {
   getNarrativeInvestigationV68, markNarrativeCollectableReadV68, recordNarrativeDecisionV68
 } from './narrative-collectables-v68.js';
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
+import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -46,6 +48,18 @@ const number = (value) => new Intl.NumberFormat('fr-FR').format(Math.round(Numbe
 const absoluteHours = (clock) => (Math.max(1, Number(clock?.day) || 1) - 1) * 24 + (Number(clock?.hour) || 0);
 const title = (value = '') => String(value).replace(/(^|[- ])\w/g, (letter) => letter.toUpperCase());
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+const ALPHA_BRAVO_PERSISTENT_EVENTS_V69 = new Set([
+  'fireteam-selected', 'fireteam-task-reserved', 'fireteam-order', 'fireteam-ping',
+  'fireteam-injury', 'fireteam-cohesion', 'fireteam-task-progress', 'fireteam-task-complete',
+  'fireteam-joint-hold', 'fireteam-certified'
+]);
+const isAlphaBravoRuntimeEventV69 = (event) => typeof event?.type === 'string'
+  && (event.type.startsWith('fireteam-') || (event.type === 'special-operation-started'
+    && event.operationId === 'alpha-bravo-coop'));
+const alphaBravoEventLabelV69 = (event) => {
+  const detail = event.message || event.action || event.order || event.taskId || event.teamId || event.type;
+  return `DOCTRINE A/B · ${String(detail || 'MISE À JOUR TACTIQUE').toUpperCase()}`;
+};
 const memoryStorage = (() => {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: (key) => values.delete(key) };
@@ -76,6 +90,7 @@ let pendingMissionLaunchV62 = null;
 let narrativeArchivesUiV68 = null;
 let missionNarrativeArchivesUiV68 = null;
 let missionArchiveOverlayV68 = null;
+let alphaBravoCommandDockV69 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -560,7 +575,7 @@ function renderSpecialOperationsV67(term = '') {
         : operation.implementationStatus === 'partial' ? 'Promesse recensée, intégration encore incomplète.'
           : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
             : '';
-    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V68'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V69'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
   }).join('') || '<p class="special-operation-empty">Aucune directive ChatGPT ne correspond à cette recherche.</p>';
 }
 
@@ -599,16 +614,30 @@ function renderOperationPlan() {
     : null;
   const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
   const operation = saveSystem.data.strategy.currentOperation;
+  const recovery = getAlphaBravoStrategicRecoveryV69(saveSystem.data);
+  const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => CREW.find((entry) => entry.id === id)?.name || id);
+  const recoveryNotice = recovery.canAbandon
+    ? `<div class="special-operation-notice"><span>REPRISE BLOQUÉE</span><b>ESCOUADE SOUS LE SEUIL DOCTRINAL</b><p>${recovery.activeCrewCount}/${recovery.minimumCrew} opérateurs actifs · indisponibles : ${escapeHtml(unavailableCrew.join(', ') || 'inconnus')}. Archivez cette sortie pour conserver les pertes sans appliquer de récompense.</p></div>`
+    : '';
+  const launchDisabled = recovery.canAbandon || (!brief.ready && !operation);
+  const launchLabel = recovery.canAbandon ? 'REPRISE IMPOSSIBLE' : operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9';
+  const recoveryAction = recovery.canAbandon
+    ? '<button id="operation-abandon-v69" class="button danger-outline wide">ARCHIVER L’OPÉRATION PERDUE</button>'
+    : '';
   const specialNoticeCopy = specialOperation?.id === 'cargo-brutal'
     ? `Insertion à pied · ${escapeHtml(issuedVehicle?.name || 'matériel lourd')} fourni dans la zone de mission, sans modifier l’inventaire.`
     : specialOperation?.id === 'narrative-collectables'
       ? 'Enquête QZ-17 · quatre preuves physiques à récupérer · confronter les sources pour ouvrir une vraie route.'
+      : specialOperation?.id === 'alpha-bravo-coop'
+        ? 'Quatre opérateurs · deux binômes physiques · ordres, pings, tâches réservées, stress et cohésion dynamiques.'
       : '';
   const specialNotice = specialOperation
-    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V68</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
+    ? `<div class="special-operation-notice"><span>ORDRE SPÉCIAL V69</span><b>${escapeHtml(specialOperation.promisedTitle)}</b><p>${specialNoticeCopy}</p></div>`
     : '';
-  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><button id="operation-launch" class="button primary wide" ${brief.ready || operation ? '' : 'disabled'}>${operation ? 'REPRENDRE L’OPÉRATION' : 'DÉPLOYER ECHO-9'}</button>`;
+  byId('operation-plan').innerHTML = `<span class="eyebrow">PLAN OPÉRATIONNEL · ${escapeHtml(campaign.mode)}</span><h3>${escapeHtml(campaign.name)}</h3><p>${escapeHtml(campaign.objective)} · ${escapeHtml(world.name)}</p>${specialNotice}${recoveryNotice}<div class="operation-risk"><b>${brief.risk}%</b><span>RISQUE</span></div><div class="data-list"><span>TRANSIT</span><b>${brief.hours} h</b><span>COÛT</span><b>${formatCost(brief.cost)}</b><span>RÉCOMPENSE</span><b>${formatCost(brief.reward)}</b><span>ESCOUADE</span><b>${escapeHtml(crewNames.join(', ') || 'AUCUNE')}</b><span>ARME</span><b>${escapeHtml(weapon?.name || 'AUCUNE')}</b><span>ÉQUIPEMENT</span><b>${escapeHtml(equipment.join(', ') || 'AUCUN')}</b><span>VÉHICULE</span><b>${escapeHtml(vehicle?.name || 'AUCUN')}${issuedVehicle ? ' · FOURNI SUR ZONE' : ''}</b></div><div class="button-row"><button id="operation-launch" class="button primary wide" ${launchDisabled ? 'disabled' : ''}>${launchLabel}</button>${recoveryAction}</div>`;
   byId('operation-launch').onclick = () => launchCampaign(campaign);
+  const abandonButton = byId('operation-abandon-v69');
+  if (abandonButton) abandonButton.onclick = abandonBlockedOperationV69;
 }
 
 function procurementActionsV62(record) {
@@ -885,6 +914,17 @@ function setupMissionArchiveOverlayV68() {
   return missionArchiveOverlayV68;
 }
 
+function setupAlphaBravoCommandDockV69() {
+  if (alphaBravoCommandDockV69) return alphaBravoCommandDockV69;
+  alphaBravoCommandDockV69 = new AlphaBravoCommandDockV69({
+    root: byId('alpha-bravo-command-dock-v69'),
+    targetLayer: byId('alpha-bravo-targeting-v69'),
+    canvas: byId('game-canvas'),
+    engine
+  });
+  return alphaBravoCommandDockV69;
+}
+
 function openNarrativeArchivesV68(entryId = '', { markRead = false } = {}) {
   showView('archives');
   setupNarrativeArchivesUiV68().open(entryId, { markRead });
@@ -1053,6 +1093,7 @@ function startMissionRuntimeV62(context) {
     }
   });
   if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
+  setupAlphaBravoCommandDockV69().refresh();
   renderMissionEquipment();
 }
 
@@ -1212,8 +1253,9 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
     reason,
     rewards: event.rewards || null
   });
-  if (campaign && world && outcome.ok) applyCampaignConsequence(saveSystem.data, campaign, world, { success });
-  advanceGalaxy(saveSystem.data, { hours: success ? 4 : 8, generateCrisis: true });
+  const resolvedSuccess = outcome?.ok ? outcome.success !== false : false;
+  if (campaign && world && outcome?.ok) applyCampaignConsequence(saveSystem.data, campaign, world, { success: resolvedSuccess });
+  if (outcome?.ok) advanceGalaxy(saveSystem.data, { hours: resolvedSuccess ? 4 : 8, generateCrisis: true });
   saveSystem.data.scene = 'hub';
   saveSystem.commit();
   renderAll();
@@ -1223,6 +1265,10 @@ function finalizeOperation(success, event = {}, reason = success ? 'objective' :
 function handleForgePlaytestEvent(event) {
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (isAlphaBravoRuntimeEventV69(event)) {
+    alphaBravoCommandDockV69?.refresh();
+    log.textContent = alphaBravoEventLabelV69(event);
+  }
   const labels = {
     'mission-level-ready': 'NIVEAU FORGE COMPILÉ',
     'mission-level-event': 'ÉVÉNEMENT FORGE',
@@ -1245,6 +1291,12 @@ function handleGameEvent(event) {
   }
   const log = byId('mission-log');
   if (!event?.type) return;
+  if (isAlphaBravoRuntimeEventV69(event)) {
+    alphaBravoCommandDockV69?.refresh();
+    if (event.type === 'fireteam-task-complete' && event.taskId) recordOperationFlag(saveSystem.data, `alpha-bravo-task-${event.taskId}`);
+    if (event.type === 'fireteam-certified') recordOperationFlag(saveSystem.data, 'alpha-bravo-cohesion-certified');
+    log.textContent = alphaBravoEventLabelV69(event);
+  }
   if (event.type === 'archive-reader-open') {
     persistMissionResumeState();
     saveSystem.commit();
@@ -1298,14 +1350,21 @@ function handleGameEvent(event) {
     log.textContent = `RÉANIMATION · ${event.crewId} a stabilisé ${event.targetId}`;
   }
   if (event.type === 'squad-lost') {
+    const casualtyOperation = saveSystem.data.strategy.currentOperation;
     const lost = saveSystem.data.crew.find((member) => member.id === event.crewId);
     if (lost && lost.status !== 'deceased') {
       lost.health = 0;
       lost.status = 'deceased';
       lost.injuries = Array.isArray(lost.injuries) ? lost.injuries : [];
-      lost.injuries.push({ type: 'mission-casualty', day: saveSystem.data.clock.day, severity: 100 });
-      if (!saveSystem.data.memorial.some((entry) => entry.crewId === lost.id && entry.campaignId === saveSystem.data.strategy.currentOperation?.campaignId)) {
-        saveSystem.data.memorial.push({ crewId: lost.id, day: saveSystem.data.clock.day, campaignId: saveSystem.data.strategy.currentOperation?.campaignId, reason: 'squad-lost' });
+      lost.injuries.push({ type: 'mission-casualty', day: saveSystem.data.clock.day, severity: 100, operationId: casualtyOperation?.id || null });
+      if (!saveSystem.data.memorial.some((entry) => entry.crewId === lost.id && entry.campaignId === casualtyOperation?.campaignId && entry.operationId === casualtyOperation?.id)) {
+        saveSystem.data.memorial.push({
+          crewId: lost.id,
+          day: saveSystem.data.clock.day,
+          campaignId: casualtyOperation?.campaignId,
+          operationId: casualtyOperation?.id || null,
+          reason: 'squad-lost'
+        });
       }
       saveSystem.data.statistics.deaths += 1;
     }
@@ -1342,7 +1401,9 @@ function handleGameEvent(event) {
   if (event.type === 'mission-complete') {
     const outcome = finalizeOperation(true, event);
     log.textContent = outcome?.result || 'OBJECTIF ACCOMPLI · conséquences enregistrées.';
-    toast('Victoire persistée : monde, équipage, économie et continuité mis à jour.');
+    toast(outcome?.success
+      ? 'Victoire persistée : monde, équipage, économie et continuité mis à jour.'
+      : outcome?.result || 'Résolution enregistrée : les conditions de victoire ne sont pas remplies.');
     return;
   }
   const persistentEvents = new Set([
@@ -1353,7 +1414,7 @@ function handleGameEvent(event) {
     'mission-timer-started', 'mission-timer-complete',
     'narrative-collectable-discovered', 'narrative-route-unlocked'
   ]);
-  if (persistentEvents.has(event.type) && saveSystem.data.strategy.currentOperation) {
+  if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type)) && saveSystem.data.strategy.currentOperation) {
     persistMissionResumeState();
     saveSystem.commit();
   }
@@ -1455,10 +1516,37 @@ function retreatMission() {
   }
   if (!saveSystem.data.strategy.currentOperation) { engine.stop(); showView('hub'); return; }
   destroyMissionInsertionUiV62();
-  const outcome = finalizeOperation(false, {}, 'retreat');
+  const currentOperation = saveSystem.data.strategy.currentOperation;
+  const alphaBravoDoctrine = currentOperation?.specialOperationId === 'alpha-bravo-coop'
+    && engine.isAlphaBravoMissionV69?.()
+    && typeof engine.buildAlphaBravoResolutionPayloadV69 === 'function'
+    ? engine.buildAlphaBravoResolutionPayloadV69()
+    : null;
+  const outcome = finalizeOperation(false, {
+    rewards: alphaBravoDoctrine ? { alphaBravoDoctrine } : null
+  }, 'retreat');
   engine.stop();
+  alphaBravoCommandDockV69?.refresh({ active: false });
   toast(outcome?.result || 'Retraite enregistrée.');
   showView('hub');
+}
+
+function abandonBlockedOperationV69() {
+  const outcome = abandonBlockedAlphaBravoOperationV69(saveSystem.data);
+  if (!outcome.ok) {
+    toast('Abandon stratégique indisponible : l’opération peut encore être reprise.');
+    renderOperationPlan();
+    return false;
+  }
+  destroyMissionInsertionUiV62();
+  engine.stop();
+  alphaBravoCommandDockV69?.refresh({ active: false });
+  saveSystem.data.scene = 'hub';
+  saveSystem.commit();
+  renderAll();
+  showView('operations');
+  toast(outcome.result);
+  return true;
 }
 
 function returnToForgeContext() {
@@ -1780,6 +1868,7 @@ async function boot() {
   setupCatalogsV62();
   setupNarrativeArchivesUiV68();
   setupMissionArchiveOverlayV68();
+  setupAlphaBravoCommandDockV69();
   bind();
   applyRuntimeSettings();
   renderAll();
@@ -1825,4 +1914,4 @@ boot().catch((error) => {
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, renderAll, showView, showTitleScreen, openForgeContext, openNarrativeArchivesV68, openMissionNarrativeArchivesV68 };
+export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, abandonBlockedOperationV69, renderAll, showView, showTitleScreen, openForgeContext, openNarrativeArchivesV68, openMissionNarrativeArchivesV68 };

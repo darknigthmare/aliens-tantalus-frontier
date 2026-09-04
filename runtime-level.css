@@ -108,7 +108,7 @@ html.mission-mode body {
   pointer-events: auto;
 }
 
-.mission-mode .game-frame {
+.mission-mode #mission-runtime-v62 {
   width: min(100vw, calc(100vh * 16 / 9));
   position: absolute;
   top: 50%;
@@ -214,15 +214,32 @@ html.mission-mode body {
 
 @media (orientation: portrait) and (max-width: 720px) {
   .hub-mode .hub-level-shell,
-  .mission-mode .game-frame {
+  .mission-mode #mission-runtime-v62 {
     position: fixed;
     z-index: 4;
-    top: clamp(180px, calc(48svh - 28.125vw), 360px);
+    top: clamp(264px, calc(48svh - 28.125vw), 360px);
     left: 0;
     width: 100vw;
     margin: 0;
     transform: none;
     overflow: hidden;
+  }
+
+  .mission-mode #mission-runtime-v62 {
+    overflow: visible;
+  }
+
+  .mission-mode .alpha-bravo-command-dock-v69 {
+    position: fixed;
+    z-index: 34;
+    top: max(58px, calc(env(safe-area-inset-top) + 48px));
+    right: 6px;
+    left: 6px;
+    width: auto;
+  }
+
+  .mission-mode #mission-equipment-controls {
+    display: none;
   }
 
   .hub-mode .hub-touch-controls,
@@ -260,7 +277,7 @@ html.mission-mode body {
 
   .mission-mode .mission-log {
     right: 10px;
-    bottom: max(72px, calc(env(safe-area-inset-bottom) + 66px));
+    bottom: max(118px, calc(env(safe-area-inset-bottom) + 112px));
     left: 10px;
     height: 44px;
     padding: 7px 10px;

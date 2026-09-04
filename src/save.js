@@ -92,6 +92,29 @@ const CARGO_BRUTAL_STRATEGIC_BONUS_V67 = Object.freeze({ credits: 300, alloy: 45
 export const QZ17_STRATEGIC_RESEARCH_BONUS_V68 = Object.freeze({
   research: NARRATIVE_COLLECTABLES_V68.reduce((total, entry) => total + Math.max(0, Number(entry.rewards?.intel) || 0), 0)
 });
+export const ALPHA_BRAVO_DOCTRINE_V69 = Object.freeze({
+  schema: 69,
+  campaignId: 'special-alpha-bravo-doctrine',
+  specialOperationId: 'alpha-bravo-coop',
+  minimumCrew: 4,
+  minimumScore: 60,
+  tasks: Object.freeze([
+    Object.freeze({ id: 'alpha-relay', fireteamId: 'alpha' }),
+    Object.freeze({ id: 'bravo-perimeter', fireteamId: 'bravo' }),
+    Object.freeze({ id: 'joint-certification', fireteamId: 'joint' })
+  ])
+});
+export const ALPHA_BRAVO_STRATEGIC_BONUS_V69 = Object.freeze({ research: 8, morale: 6 });
+const ALPHA_BRAVO_MAX_RUNS_V69 = 64;
+const ALPHA_BRAVO_OPERATION_ID_PATTERN_V69 = /^operation-\d+-special-alpha-bravo-doctrine$/;
+
+export function createAlphaBravoDoctrineV69() {
+  return {
+    schema: ALPHA_BRAVO_DOCTRINE_V69.schema,
+    runs: [],
+    summary: { completedRuns: 0, victories: 0, failures: 0, bestScore: 0, averageScore: 0, lastOperationId: null }
+  };
+}
 
 function createStrategyState() {
   return {
@@ -181,6 +204,7 @@ export function createDefaultSave(profile = 1) {
     },
     strategy: createStrategyState(),
     narrativeArchives: createNarrativeArchivesV68(),
+    alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -213,6 +237,125 @@ const mergeNumbers = (base, candidate, min = 0, max = Number.MAX_SAFE_INTEGER) =
   const source = isRecord(candidate) ? candidate : {};
   return Object.fromEntries(Object.entries(base).map(([key, fallback]) => [key, numberBetween(source[key], fallback, min, max)]));
 };
+
+const sanitizeAlphaBravoTasksV69 = (candidate) => {
+  const entries = Array.isArray(candidate) ? candidate.filter(isRecord).slice(0, 16) : [];
+  return ALPHA_BRAVO_DOCTRINE_V69.tasks.map((expected) => {
+    const source = entries.find((entry) => entry.id === expected.id && entry.fireteamId === expected.fireteamId);
+    return { ...expected, complete: Boolean(source?.complete) };
+  });
+};
+
+const sanitizeAlphaBravoInjuriesV69 = (candidate) => Array.isArray(candidate)
+  ? candidate.flatMap((entry) => {
+    const type = typeof entry === 'string' ? entry : isRecord(entry) && typeof entry.type === 'string' ? entry.type : '';
+    const normalized = type.trim().slice(0, 60);
+    return normalized ? [normalized] : [];
+  }).slice(0, 16)
+  : [];
+
+const sanitizeAlphaBravoCrewResultsV69 = (candidate, allowedCrewIds = null) => {
+  const allowed = allowedCrewIds instanceof Set ? allowedCrewIds : new Set(CREW.map((member) => member.id));
+  const byId = new Map();
+  for (const entry of Array.isArray(candidate) ? candidate.filter(isRecord).slice(0, 32) : []) {
+    const crewId = typeof entry.crewId === 'string' ? entry.crewId.trim().slice(0, 120) : '';
+    if (!crewId || !allowed.has(crewId) || byId.has(crewId)) continue;
+    byId.set(crewId, {
+      crewId,
+      health: Math.round(numberBetween(entry.health, 100, 0, 100) * 100) / 100,
+      stress: Math.round(numberBetween(entry.stress, 0, 0, 100) * 100) / 100,
+      injuries: sanitizeAlphaBravoInjuriesV69(entry.injuries)
+    });
+  }
+  return [...byId.values()].slice(0, ALPHA_BRAVO_DOCTRINE_V69.minimumCrew);
+};
+
+const sanitizeAlphaBravoRunV69 = (candidate) => {
+  if (!isRecord(candidate)) return null;
+  const operationId = typeof candidate.operationId === 'string' ? candidate.operationId.trim().slice(0, 180) : '';
+  if (!operationId) return null;
+  const rawTasks = Array.isArray(candidate.tasks) ? candidate.tasks : [];
+  const rawTaskRecords = rawTasks.filter(isRecord);
+  const taskKeys = new Set(rawTaskRecords.map((task) => `${task.id}:${task.fireteamId}`));
+  const taskStructureExact = rawTasks.length === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && rawTaskRecords.length === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && taskKeys.size === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && rawTaskRecords.every((task) => typeof task.complete === 'boolean')
+    && ALPHA_BRAVO_DOCTRINE_V69.tasks.every((expected) => rawTaskRecords.some((task) => (
+      task.id === expected.id && task.fireteamId === expected.fireteamId
+    )));
+  const tasks = sanitizeAlphaBravoTasksV69(rawTaskRecords);
+  const rawCrewResults = Array.isArray(candidate.crewResults) ? candidate.crewResults : [];
+  const crewResults = sanitizeAlphaBravoCrewResultsV69(rawCrewResults);
+  const crewStructureExact = rawCrewResults.length === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew
+    && rawCrewResults.every(isRecord)
+    && rawCrewResults.every((entry) => (
+      typeof entry.crewId === 'string'
+      && typeof entry.health === 'number' && Number.isFinite(entry.health)
+      && typeof entry.stress === 'number' && Number.isFinite(entry.stress)
+      && Array.isArray(entry.injuries)
+      && entry.injuries.every((injury) => typeof injury === 'string')
+    ))
+    && crewResults.length === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew;
+  const score = Math.round(numberBetween(candidate.score, 0, 0, 100) * 100) / 100;
+  const scoreValid = typeof candidate.score === 'number' && Number.isFinite(candidate.score);
+  const tasksComplete = tasks.every((task) => task.complete);
+  const identityValid = Number(candidate.schema) === ALPHA_BRAVO_DOCTRINE_V69.schema
+    && candidate.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId
+    && ALPHA_BRAVO_OPERATION_ID_PATTERN_V69.test(operationId);
+  const certificateCoherent = typeof candidate.certified === 'boolean' && candidate.certified === tasksComplete;
+  const terminalValid = identityValid && taskStructureExact && crewStructureExact && scoreValid
+    && certificateCoherent && typeof candidate.success === 'boolean';
+  if (!terminalValid) return null;
+  const certified = candidate.certified;
+  const success = Boolean(candidate.success) && certified && score >= ALPHA_BRAVO_DOCTRINE_V69.minimumScore;
+  return {
+    schema: ALPHA_BRAVO_DOCTRINE_V69.schema,
+    operationId,
+    campaignId: ALPHA_BRAVO_DOCTRINE_V69.campaignId,
+    score,
+    tasks,
+    crewResults,
+    terminal: true,
+    certified,
+    success,
+    bonusApplied: success && Boolean(candidate.bonusApplied),
+    reason: typeof candidate.reason === 'string' ? candidate.reason.slice(0, 60) : success ? 'objective' : 'failure',
+    completedDay: Math.floor(numberBetween(candidate.completedDay, 1, 1, 100000)),
+    completedHour: Math.round(numberBetween(candidate.completedHour, 0, 0, 24) * 100) / 100
+  };
+};
+
+export function normalizeAlphaBravoDoctrineV69(candidate) {
+  const runsByOperation = new Map();
+  for (const entry of Array.isArray(candidate?.runs) ? candidate.runs.slice(-256) : []) {
+    const run = sanitizeAlphaBravoRunV69(entry);
+    if (!run) continue;
+    if (runsByOperation.has(run.operationId)) runsByOperation.delete(run.operationId);
+    runsByOperation.set(run.operationId, run);
+  }
+  const runs = [...runsByOperation.values()].slice(-ALPHA_BRAVO_MAX_RUNS_V69);
+  const victories = runs.filter((run) => run.success).length;
+  const scoreTotal = runs.reduce((total, run) => total + run.score, 0);
+  return {
+    schema: ALPHA_BRAVO_DOCTRINE_V69.schema,
+    runs,
+    summary: {
+      completedRuns: runs.length,
+      victories,
+      failures: runs.length - victories,
+      bestScore: runs.reduce((best, run) => Math.max(best, run.score), 0),
+      averageScore: runs.length ? Math.round(scoreTotal / runs.length * 100) / 100 : 0,
+      lastOperationId: runs.at(-1)?.operationId || null
+    }
+  };
+}
+
+export function getAlphaBravoDoctrineSnapshotV69(save) {
+  const normalized = normalizeAlphaBravoDoctrineV69(save?.alphaBravoDoctrine);
+  if (isRecord(save)) save.alphaBravoDoctrine = normalized;
+  return structuredClone(normalized);
+}
 
 const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
 const rarityFactor = (rarity) => ({ common: 1, uncommon: 1.22, rare: 1.58, epic: 2, legendary: 2.6 }[rarity] || 1.15);
@@ -286,13 +429,70 @@ function resolveNarrativeResearchBonusV68(operation, rewards) {
   return { research: Math.min(intel, QZ17_STRATEGIC_RESEARCH_BONUS_V68.research) };
 }
 
-function resolveSpecialOperationBonusV68(operation, rewards) {
-  const cargoBonus = resolveSpecialOperationBonusV67(operation, rewards);
-  if (Object.keys(cargoBonus).length) return cargoBonus;
-  return resolveNarrativeResearchBonusV68(operation, rewards);
+function validateAlphaBravoCertificationV69(operation, rewards) {
+  const payload = isRecord(rewards?.alphaBravoDoctrine) ? rewards.alphaBravoDoctrine : null;
+  const rawTaskInput = Array.isArray(payload?.tasks) ? payload.tasks : [];
+  const rawTasks = rawTaskInput.filter(isRecord);
+  const taskKeys = new Set(rawTasks.map((task) => `${task.id}:${task.fireteamId}`));
+  const taskStructureExact = rawTaskInput.length === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && rawTasks.length === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && taskKeys.size === ALPHA_BRAVO_DOCTRINE_V69.tasks.length
+    && rawTasks.every((task) => typeof task.complete === 'boolean')
+    && ALPHA_BRAVO_DOCTRINE_V69.tasks.every((expected) => rawTasks.some((task) => (
+      task.id === expected.id && task.fireteamId === expected.fireteamId
+    )));
+  const tasks = sanitizeAlphaBravoTasksV69(rawTasks);
+  const tasksComplete = tasks.every((task) => task.complete);
+  const allowedCrewIds = new Set(stringList(operation?.crewIds).slice(0, MAX_SQUAD_SIZE));
+  const rawCrewResults = Array.isArray(payload?.crewResults) ? payload.crewResults : [];
+  const crewResults = sanitizeAlphaBravoCrewResultsV69(rawCrewResults, allowedCrewIds);
+  const crewExact = allowedCrewIds.size === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew
+    && rawCrewResults.length === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew
+    && rawCrewResults.every(isRecord)
+    && rawCrewResults.every((entry) => (
+      typeof entry.crewId === 'string'
+      && typeof entry.health === 'number' && Number.isFinite(entry.health)
+      && typeof entry.stress === 'number' && Number.isFinite(entry.stress)
+      && Array.isArray(entry.injuries)
+      && entry.injuries.every((injury) => typeof injury === 'string')
+    ))
+    && crewResults.length === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew
+    && crewResults.every((entry) => allowedCrewIds.has(entry.crewId));
+  const score = Math.round(numberBetween(payload?.score, 0, 0, 100) * 100) / 100;
+  const scoreValid = typeof payload?.score === 'number' && Number.isFinite(payload.score);
+  const structuralValid = operation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId
+    && operation?.specialOperationId === ALPHA_BRAVO_DOCTRINE_V69.specialOperationId
+    && typeof operation?.id === 'string'
+    && ALPHA_BRAVO_OPERATION_ID_PATTERN_V69.test(operation.id)
+    && Number(payload?.schema) === ALPHA_BRAVO_DOCTRINE_V69.schema
+    && payload?.operationId === operation?.id
+    && payload?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId
+    && taskStructureExact
+    && crewExact
+    && scoreValid;
+  const certified = structuralValid && payload?.certified === true && tasksComplete;
+  return {
+    structuralValid,
+    certified,
+    qualified: certified && score >= ALPHA_BRAVO_DOCTRINE_V69.minimumScore,
+    score,
+    tasks,
+    crewResults
+  };
 }
 
-function describeSpecialOperationBonusV68(operation, bonus) {
+function resolveSpecialOperationBonusV69(operation, rewards, alphaBravoCertification) {
+  const cargoBonus = resolveSpecialOperationBonusV67(operation, rewards);
+  if (Object.keys(cargoBonus).length) return cargoBonus;
+  const narrativeBonus = resolveNarrativeResearchBonusV68(operation, rewards);
+  if (Object.keys(narrativeBonus).length) return narrativeBonus;
+  if (operation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId && alphaBravoCertification?.qualified) {
+    return { ...ALPHA_BRAVO_STRATEGIC_BONUS_V69 };
+  }
+  return {};
+}
+
+function describeSpecialOperationBonusV69(operation, bonus) {
   if (!Object.keys(bonus).length) return '';
   if (operation?.campaignId === CARGO_BRUTAL_CAMPAIGN_ID_V67) {
     return ` Bonus Cargo Brutal : +${bonus.credits} credits, +${bonus.alloy} alliage.`;
@@ -300,7 +500,55 @@ function describeSpecialOperationBonusV68(operation, bonus) {
   if (operation?.campaignId === NARRATIVE_OPERATION_V68.campaignId) {
     return ` Bonus QZ-17 : +${bonus.research} recherche issue des archives.`;
   }
+  if (operation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
+    return ` Bonus Doctrine Alpha / Bravo : +${bonus.research} recherche, +${bonus.morale} morale.`;
+  }
   return '';
+}
+
+function applyAlphaBravoCrewResultsV69(save, operation, certification) {
+  if (!certification?.structuralValid) return;
+  for (const entry of certification.crewResults) {
+    const member = save.crew.find((candidate) => candidate.id === entry.crewId && operation.crewIds.includes(candidate.id));
+    if (!member) continue;
+    member.health = entry.health;
+    member.stress = entry.stress;
+    const newInjuries = entry.injuries.map((type) => ({
+      type,
+      day: save.clock.day,
+      severity: Math.max(1, Math.round(100 - entry.health)),
+      operationId: operation.id
+    }));
+    member.injuries = [...member.injuries, ...newInjuries].slice(-64);
+    if (entry.health <= 0) {
+      member.status = 'deceased';
+      if (!save.memorial.some((record) => record.crewId === member.id
+        && record.campaignId === operation.campaignId
+        && (!record.operationId || record.operationId === operation.id))) {
+        save.memorial.push({ crewId: member.id, day: save.clock.day, campaignId: operation.campaignId, operationId: operation.id, reason: 'alpha-bravo-casualty' });
+      }
+    } else if (entry.injuries.length || entry.health < 70) member.status = 'injured';
+  }
+}
+
+function appendAlphaBravoDoctrineRunV69(save, operation, certification, { success, reason, bonusApplied }) {
+  const current = normalizeAlphaBravoDoctrineV69(save.alphaBravoDoctrine);
+  current.runs.push({
+    schema: ALPHA_BRAVO_DOCTRINE_V69.schema,
+    operationId: operation.id,
+    campaignId: ALPHA_BRAVO_DOCTRINE_V69.campaignId,
+    score: certification.score,
+    tasks: certification.tasks,
+    crewResults: certification.crewResults,
+    certified: certification.certified,
+    success: Boolean(success),
+    bonusApplied: Boolean(bonusApplied),
+    reason,
+    completedDay: save.clock.day,
+    completedHour: save.clock.hour
+  });
+  save.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(current);
+  return save.alphaBravoDoctrine.runs.find((run) => run.operationId === operation.id) || null;
 }
 
 export function canAfford(save, cost = {}) {
@@ -541,13 +789,17 @@ export function getOperationBrief(save, campaign, world) {
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const reward = { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
+  const minimumCrew = Math.max(1, Math.min(MAX_SQUAD_SIZE, Math.floor(Number(campaign.minimumCrew) || 1)));
+  const crewReady = selectedCrew.length >= minimumCrew;
   return {
     risk,
     hours: Math.round((0.75 + world.danger * 0.2) * 100) / 100,
     cost,
     reward,
     crewIds: selectedCrew.map((member) => member.id),
-    ready: save.galaxy.unlockedWorldIds.includes(world.id) && selectedCrew.length > 0 && canAfford(save, cost),
+    minimumCrew,
+    crewReady,
+    ready: save.galaxy.unlockedWorldIds.includes(world.id) && crewReady && canAfford(save, cost),
     worldUnlocked: save.galaxy.unlockedWorldIds.includes(world.id)
   };
 }
@@ -556,6 +808,12 @@ export function beginOperation(save, campaign, world) {
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation?.campaignId === campaign.id) {
     const operation = strategy.currentOperation;
+    if (campaign.minimumCrew != null) {
+      const minimumCrew = Math.max(1, Math.min(MAX_SQUAD_SIZE, Math.floor(Number(campaign.minimumCrew) || 1)));
+      const operationCrewIds = new Set(stringList(operation.crewIds));
+      const activeCrewCount = save.crew.filter((member) => operationCrewIds.has(member.id) && member.status === 'active').length;
+      if (activeCrewCount < minimumCrew) throw new Error(`Escouade incomplete : ${minimumCrew} operateurs actifs requis.`);
+    }
     operation.vehicleId = resolveReadyVehicleIdV60(operation.vehicleId, strategy.inventory.vehicleIds, VEHICLES);
     operation.costumeId ??= save.player.costumeId || null;
     operation.neuroProfileId ??= strategy.selectedNeuroProfileId || null;
@@ -563,6 +821,7 @@ export function beginOperation(save, campaign, world) {
     operation.difficulty ??= save.settings?.difficulty || save.difficulty || 'standard';
     operation.resumeState ??= null;
     operation.insertionState ??= null;
+    if (campaign.specialOperationId) operation.specialOperationId ??= campaign.specialOperationId;
     return { ok: true, resumed: true, operation };
   }
   if (strategy.currentOperation) throw new Error('Une autre operation est deja en cours.');
@@ -570,6 +829,7 @@ export function beginOperation(save, campaign, world) {
   const brief = getOperationBrief(save, campaign, world);
   if (!brief.worldUnlocked) throw new Error('Route verrouillee : effectuez une reconnaissance.');
   if (!brief.crewIds.length) throw new Error('Aucun membre actif dans escouade.');
+  if (!brief.crewReady) throw new Error(`Escouade incomplete : ${brief.minimumCrew} operateurs actifs requis.`);
   payStrategicCost(save, brief.cost);
   strategy.serial += 1;
   advanceStrategicClock(save, brief.hours);
@@ -597,6 +857,7 @@ export function beginOperation(save, campaign, world) {
     difficulty: save.settings?.difficulty || save.difficulty || 'standard',
     resumeState: null,
     insertionState: null,
+    ...(campaign.specialOperationId ? { specialOperationId: campaign.specialOperationId } : {}),
     flags: {}
   };
   strategy.plannedCampaignId = campaign.id;
@@ -773,15 +1034,97 @@ export function recordOperationFlag(save, flag, value = true) {
   return true;
 }
 
+export function getAlphaBravoStrategicRecoveryV69(save) {
+  const operation = ensureStrategy(save).currentOperation;
+  if (!operation) return { canAbandon: false, reason: 'no-operation' };
+  const operationCrewIds = stringList(operation.crewIds).slice(0, MAX_SQUAD_SIZE);
+  const identityValid = operation.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId
+    && operation.specialOperationId === ALPHA_BRAVO_DOCTRINE_V69.specialOperationId
+    && ALPHA_BRAVO_OPERATION_ID_PATTERN_V69.test(operation.id)
+    && operationCrewIds.length === ALPHA_BRAVO_DOCTRINE_V69.minimumCrew;
+  if (!identityValid) return { canAbandon: false, reason: 'unsupported-operation', operationId: operation.id || null };
+  const operationCrew = new Set(operationCrewIds);
+  const activeCrewIds = save.crew
+    .filter((member) => operationCrew.has(member.id) && member.status === 'active')
+    .map((member) => member.id);
+  const activeCrew = new Set(activeCrewIds);
+  const unavailableCrewIds = operationCrewIds.filter((crewId) => !activeCrew.has(crewId));
+  const canAbandon = activeCrewIds.length < ALPHA_BRAVO_DOCTRINE_V69.minimumCrew;
+  return {
+    canAbandon,
+    reason: canAbandon ? 'crew-below-minimum' : 'operation-resumable',
+    operationId: operation.id,
+    minimumCrew: ALPHA_BRAVO_DOCTRINE_V69.minimumCrew,
+    activeCrewCount: activeCrewIds.length,
+    activeCrewIds,
+    unavailableCrewIds
+  };
+}
+
+export function abandonBlockedAlphaBravoOperationV69(save) {
+  const recovery = getAlphaBravoStrategicRecoveryV69(save);
+  if (!recovery.canAbandon) return { ok: false, reason: recovery.reason, recovery };
+  const strategy = ensureStrategy(save);
+  const operation = strategy.currentOperation;
+  save.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(save.alphaBravoDoctrine);
+  let alphaBravoDoctrineRun = save.alphaBravoDoctrine.runs.find((run) => run.operationId === operation.id) || null;
+  if (!alphaBravoDoctrineRun) {
+    const crewResults = stringList(operation.crewIds).slice(0, ALPHA_BRAVO_DOCTRINE_V69.minimumCrew).map((crewId) => {
+      const member = save.crew.find((candidate) => candidate.id === crewId);
+      return {
+        crewId,
+        health: numberBetween(member?.health, 0, 0, 100),
+        stress: numberBetween(member?.stress, 100, 0, 100),
+        injuries: sanitizeAlphaBravoInjuriesV69(member?.injuries)
+      };
+    });
+    alphaBravoDoctrineRun = appendAlphaBravoDoctrineRunV69(save, operation, {
+      score: 0,
+      tasks: ALPHA_BRAVO_DOCTRINE_V69.tasks.map((task) => ({ ...task, complete: false })),
+      crewResults,
+      certified: false
+    }, { success: false, reason: 'strategic-abandonment', bonusApplied: false });
+  }
+  const result = 'Abandon strategique : operation irrecuperable archivee, pertes conservees, aucune recompense.';
+  strategy.lastOperation = {
+    ...structuredClone(operation),
+    success: false,
+    reason: 'strategic-abandonment',
+    result,
+    specialOperationBonus: {},
+    ...(alphaBravoDoctrineRun ? { alphaBravoDoctrineRun: structuredClone(alphaBravoDoctrineRun) } : {}),
+    completedDay: save.clock.day,
+    completedHour: save.clock.hour
+  };
+  strategy.currentOperation = null;
+  save.statistics.retreats = Math.max(0, Number(save.statistics.retreats) || 0) + 1;
+  addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: true, result });
+  return { ok: true, success: false, result, operation: strategy.lastOperation, recovery };
+}
+
 export function resolveOperation(save, { success, kills = 0, reason = success ? 'objective' : 'failure', rewards = null } = {}) {
   const strategy = ensureStrategy(save);
   const operation = strategy.currentOperation;
   if (!operation) return { ok: false, reason: 'no-operation' };
+  const isAlphaBravo = operation.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId;
+  if (isAlphaBravo) {
+    save.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(save.alphaBravoDoctrine);
+    if (save.alphaBravoDoctrine.runs.some((run) => run.operationId === operation.id)) {
+      strategy.currentOperation = null;
+      return { ok: false, reason: 'operation-already-resolved' };
+    }
+  }
   const worldState = save.galaxy.worldState[operation.worldId];
   const containment = hasResearch(save, 'xeno-containment');
-  const specialOperationBonus = success ? resolveSpecialOperationBonusV68(operation, rewards) : {};
+  const alphaBravoCertification = validateAlphaBravoCertificationV69(operation, rewards);
+  const persistAlphaBravoCrewResults = isAlphaBravo && alphaBravoCertification.structuralValid;
+  const resolvedSuccess = Boolean(success) && (!isAlphaBravo || alphaBravoCertification.qualified);
+  const resolvedReason = isAlphaBravo && Boolean(success) && !alphaBravoCertification.qualified
+    ? 'doctrine-certification'
+    : reason;
+  const specialOperationBonus = resolvedSuccess ? resolveSpecialOperationBonusV69(operation, rewards, alphaBravoCertification) : {};
   let result = '';
-  if (success) {
+  if (resolvedSuccess) {
     for (const [key, value] of Object.entries(operation.reward)) changeStrategicValue(save, key, value);
     for (const [key, value] of Object.entries(specialOperationBonus)) changeStrategicValue(save, key, value);
     changeStrategicValue(save, 'pathogen', Math.max(1, Math.ceil(kills / 5)));
@@ -796,42 +1139,57 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
       member.stress = clamp(member.stress + Math.ceil(operation.risk / 12));
     });
     save.statistics.campaigns += 1;
-    const bonusLabel = describeSpecialOperationBonusV68(operation, specialOperationBonus);
+    const bonusLabel = describeSpecialOperationBonusV69(operation, specialOperationBonus);
     result = 'Objectif accompli : stabilite +8, infestation -' + (containment ? 11 : 7) + ', recompenses transferees.' + bonusLabel;
   } else {
-    worldState.stability = clamp(worldState.stability - (reason === 'retreat' ? 2 : 6));
-    worldState.infestation = clamp(worldState.infestation + (reason === 'retreat' ? 2 : 7));
-    const lead = save.crew.find((member) => operation.crewIds.includes(member.id) && member.status !== 'deceased');
-    if (lead) {
-      const damage = hasResearch(save, 'trauma-protocol') ? 24 : 38;
-      lead.health = clamp(lead.health - damage);
-      lead.stress = clamp(lead.stress + 18);
-      lead.injuries.push({ type: reason === 'retreat' ? 'combat-stress' : 'mission-trauma', day: save.clock.day, severity: damage });
-      if (lead.health <= 0) {
-        lead.status = 'deceased';
-        save.memorial.push({ crewId: lead.id, day: save.clock.day, campaignId: operation.campaignId, reason });
-      } else lead.status = 'injured';
+    worldState.stability = clamp(worldState.stability - (resolvedReason === 'retreat' ? 2 : 6));
+    worldState.infestation = clamp(worldState.infestation + (resolvedReason === 'retreat' ? 2 : 7));
+    if (!persistAlphaBravoCrewResults) {
+      const lead = save.crew.find((member) => operation.crewIds.includes(member.id) && member.status !== 'deceased');
+      if (lead) {
+        const damage = hasResearch(save, 'trauma-protocol') ? 24 : 38;
+        lead.health = clamp(lead.health - damage);
+        lead.stress = clamp(lead.stress + 18);
+        lead.injuries.push({ type: resolvedReason === 'retreat' ? 'combat-stress' : 'mission-trauma', day: save.clock.day, severity: damage });
+        if (lead.health <= 0) {
+          lead.status = 'deceased';
+          save.memorial.push({ crewId: lead.id, day: save.clock.day, campaignId: operation.campaignId, reason: resolvedReason });
+        } else lead.status = 'injured';
+      }
+      for (const member of save.crew.filter((entry) => operation.crewIds.includes(entry.id) && entry !== lead)) member.stress = clamp(member.stress + 9);
     }
-    for (const member of save.crew.filter((entry) => operation.crewIds.includes(entry.id) && entry !== lead)) member.stress = clamp(member.stress + 9);
-    if (reason === 'retreat') save.statistics.retreats += 1;
-    result = reason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.' : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
+    if (resolvedReason === 'retreat') save.statistics.retreats += 1;
+    result = resolvedReason === 'retreat' ? 'Retraite : stabilite -2, infestation +2.'
+      : resolvedReason === 'doctrine-certification'
+        ? 'Echec Doctrine Alpha / Bravo : certificat, tâches ou score de cohésion invalides.'
+        : 'Echec : stabilite -6, infestation +7 et un operateur blesse.';
   }
+  if (isAlphaBravo) applyAlphaBravoCrewResultsV69(save, operation, alphaBravoCertification);
+  const alphaBravoDoctrineRun = isAlphaBravo
+    ? appendAlphaBravoDoctrineRunV69(save, operation, alphaBravoCertification, {
+      success: resolvedSuccess,
+      reason: resolvedReason,
+      bonusApplied: Object.keys(specialOperationBonus).length > 0
+    })
+    : null;
   strategy.lastOperation = {
     ...structuredClone(operation),
-    success: Boolean(success),
-    reason,
+    success: resolvedSuccess,
+    reason: resolvedReason,
     result,
     specialOperationBonus: structuredClone(specialOperationBonus),
+    ...(alphaBravoDoctrineRun ? { alphaBravoDoctrineRun: structuredClone(alphaBravoDoctrineRun) } : {}),
     completedDay: save.clock.day,
     completedHour: save.clock.hour
   };
   strategy.currentOperation = null;
-  addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !success, result });
-  return { ok: true, success: Boolean(success), result, specialOperationBonus, operation: strategy.lastOperation };
+  addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
+  return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation };
 }
 
 export function getStrategySnapshot(save) {
   const strategy = ensureStrategy(save);
+  const alphaBravoDoctrine = getAlphaBravoDoctrineSnapshotV69(save);
   return structuredClone({
     clock: save.clock,
     resources: save.galaxy.resources,
@@ -843,6 +1201,7 @@ export function getStrategySnapshot(save) {
     unlockedResearchIds: strategy.unlockedResearchIds,
     currentOperation: strategy.currentOperation,
     lastOperation: strategy.lastOperation,
+    alphaBravoDoctrine,
     log: strategy.log
   });
 }
@@ -1009,6 +1368,11 @@ export function migrateSave(input, profile = 1) {
   };
 
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
+  migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
+  if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
+    const matchingRun = migrated.alphaBravoDoctrine.runs.find((run) => run.operationId === migrated.strategy.lastOperation.id);
+    if (matchingRun) migrated.strategy.lastOperation.alphaBravoDoctrineRun = structuredClone(matchingRun);
+  }
 
   const editor = isRecord(source.editor) ? source.editor : {};
   migrated.editor = { ...base.editor, ...editor, projects: Array.isArray(editor.projects) ? editor.projects.filter(isRecord).slice(0, 128) : base.editor.projects };

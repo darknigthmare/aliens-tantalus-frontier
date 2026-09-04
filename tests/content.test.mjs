@@ -5,7 +5,7 @@ import {
   CREW, COSTUMES, LEVEL_SEEDS, APEX_DOSSIERS, NEURO_XENO_PROFILES, validateContent
 } from '../src/content.js';
 
-test('v68 additive content contract is exact', () => {
+test('v69 additive content contract is exact', () => {
   assert.deepEqual(CONTENT_COUNTS, CONTENT_TARGETS);
   assert.deepEqual(validateContent(), { ok: true, failures: [], counts: CONTENT_COUNTS });
 });
@@ -18,7 +18,7 @@ test('every MIRE archive has exactly one Frontier counterpart', () => {
   }
   assert.equal(pairs.size, 206);
   for (const modes of pairs.values()) assert.deepEqual(modes.sort(), ['FRONTIER', 'MIRE']);
-  assert.equal(CAMPAIGNS.filter((item) => !item.pairId).length, 26);
+  assert.equal(CAMPAIGNS.filter((item) => !item.pairId).length, 27);
 });
 
 test('catalog relationships and gameplay payloads are usable', () => {

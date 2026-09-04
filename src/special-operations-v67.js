@@ -49,10 +49,24 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'alpha-bravo-coop', chatId: '6a99e7de-0d14-83eb-9074-0cc76c50989b', chatTitle: 'Étendre coopération équipe Marines',
-    promisedTitle: 'DOCTRINE ALPHA / BRAVO', kind: 'system', implementationStatus: 'partial', playable: false, productionOrder: 3,
+    promisedTitle: 'DOCTRINE ALPHA / BRAVO', kind: 'system', implementationStatus: 'partial', playable: true, productionOrder: 3,
+    campaignId: 'special-alpha-bravo-doctrine',
+    campaign: Object.freeze({
+      pairId: null, mode: 'FRONTIER', worldId: 'world-05-lethe', objective: 'defend the colony',
+      year: 2204, canon: 'project-continuity', routes: 5, templateId: 'colony-multiroute', minimumCrew: 4
+    }),
     promiseSummary: 'Deux groupes, ordres, pings, binômes, tâches réservées, blessures, stress et cohésion.',
     requiredMechanics: ['fireteams', 'orders-and-pings', 'task-reservation', 'dynamic-cohesion'],
-    evidence: ['src/game-v52-runtime.js:266', 'src/game-v52-runtime.js:1417']
+    evidence: [
+      'src/alpha-bravo-coop-v69.js',
+      'src/alpha-bravo-ui-v69.js',
+      'src/alpha-bravo-visuals-v69.js',
+      'tests/alpha-bravo-coop-v69.test.mjs',
+      'tests/alpha-bravo-save-v69.test.mjs',
+      'tests/alpha-bravo-ui-v69.test.mjs',
+      'tests/alpha-bravo-art-v69.test.mjs',
+      'docs/V69_ALPHA_BRAVO_ART_QA.md'
+    ]
   }),
   freezeOperation({
     id: 'eloise-uncrowned-queen', chatId: '6a99b3d2-0e58-83eb-abba-d955b5d73b2d', chatTitle: 'Écrire une mission xénomorphe',
