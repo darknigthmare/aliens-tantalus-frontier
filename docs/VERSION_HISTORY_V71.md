@@ -60,4 +60,4 @@ Passage complet final : **952 tests, 951 réussis, 0 échec, 1 ignoré**, en 22 
 
 Sur D, accueil et hub chargent sans erreur navigateur. Une fixture prépare l’approche de la porte Quarantine ; l’entrée BIOFORGE, sa traversée par contrôles runtime, la station, la reprise depuis le JSON de localStorage et le retour sont vérifiés. Les cinq couches sont prêtes. La station reste à une utilisation après reprise et sortie. À 390 × 844, la largeur reste de 390 px, le canvas mesure 390 × 219.375 px et les neuf boutons tactiles sont nommés. Cette recette ne revendique pas un parcours manuel depuis le pont ; ses valeurs actuelles figurent dans la validation. Le contrôle d’accessibilité final reste à actualiser.
 
-Publication Vercel et contrôles HTTP : **À COMPLÉTER**. V71 ne représente pas encore l’achèvement du hub commercial ou des 19 conversations.
+Publication Vercel : **READY**, déploiement initial `dpl_9G7C8wZ6Bfnheaz9wdoKERrYiV4w`, runtime `8b28119`, build distant de huit secondes. HTTP public vérifié (version 71.0.0, 440 campagnes, modules et WebP en 200, master en 404). V71 ne représente pas encore l’achèvement du hub commercial ou des 19 conversations.

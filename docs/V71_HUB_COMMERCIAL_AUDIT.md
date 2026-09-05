@@ -85,4 +85,4 @@ Le contrôle d’accessibilité final reste à actualiser dans [VALIDATION_V71](
 
 La recette antérieure avait parcouru Quarantine → plateformes → porte BIOFORGE → station → retour. Elle avait également mesuré un portrait 390 × 844 sans débordement et un audit axe-core à zéro violation, avec un contraste de gradient à revoir. Ces observations sont historiques : les anciens compteurs de ressources et l’ancien ensemble de sept boutons ne décrivent pas la dernière version des services et contrôles.
 
-Le déploiement Vercel et les contrôles HTTP V71 restent **À COMPLÉTER**. Leur réussite ne changera pas automatiquement le statut de production `partial`.
+Le déploiement Vercel V71 est **READY** et les contrôles HTTP sont réussis : accueil, build-info, quatre modules et deux WebP en 200 ; master source en 404. Le runtime publié provient de `8b28119`. Cette publication ne change pas le statut de production `partial` ni la revue d’accessibilité restant à compléter.

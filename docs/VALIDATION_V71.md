@@ -48,10 +48,11 @@ Ces observations historiques sont distinctes de la recette sur D consignée plus
 
 | Gate | État | Preuve attendue |
 |---|---|---|
-| Déploiement Vercel V71 | **À COMPLÉTER** | identifiant du déploiement, état `READY` et alias canonique |
-| HTTP public | **À COMPLÉTER** | accueil, `build-info.json`, modules V71 et échantillons WebP servis ; masters exclus |
+| Déploiement Vercel V71 | **RÉUSSI** | `dpl_9G7C8wZ6Bfnheaz9wdoKERrYiV4w`, état `READY`, runtime `8b28119`, build distant huit secondes ; alias `aliens-tantalus-frontier.vercel.app` |
+| HTTP public | **RÉUSSI** | accueil, build-info 71.0.0 / 440 campagnes, app et trois modules V71, BIOFORGE mid et Logistique door : 200 ; master backgrounds V71 : 404 |
+| Journaux Vercel après publication | **CONSULTÉS** | filtre erreur sur la dernière heure : aucun journal retourné pour ce déploiement statique ; aucune surveillance récurrente ajoutée |
 
-Les lignes de publication seront remplacées uniquement après observation du déploiement et des réponses HTTP.
+Ces résultats ont été observés sur le déploiement initial V71 avant le commit documentaire de clôture. La revue d’accessibilité finale et les cinq dettes de production restent indépendantes de la réussite de publication.
 
 ## Invariants et limites
 

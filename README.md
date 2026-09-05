@@ -2,7 +2,7 @@
 
 Version de travail web jouable **v71.0.0**. Le contrat consolidé **v1→v71** conserve le Tantalus comme niveau physique persistant et expose cinq surfaces Special Operations accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69), **SYSTÈMES DE SURVIE ALIEN** (V70) et le **HUB DE L’USS TANTALUS** (V71). V71 ajoute dix annexes physiques, des stations persistantes et 50 couches artistiques. Le hub reste **partial** : sa structure jouable ne clôt pas ses cinq dettes de production. Le registre recense 19 conversations, dont **2 effective, 8 partial et 9 missing** ; **17 conversations restent donc inachevées**.
 
-Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La dernière production documentée est la V70 en état `READY`. Le déploiement et les contrôles HTTP de la V71 restent à compléter ; aucune publication V71 n’est revendiquée avant cette vérification.
+Production V71 vérifiée : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app), état `READY`, runtime du commit `8b28119`. L’accueil, les modules V71, le build-info et les échantillons WebP répondent en HTTP 200 ; les masters restent exclus (404). La publication ne transforme pas les fonctionnalités encore partielles en fonctionnalités terminées.
 
 ## Lancer localement
 
@@ -80,7 +80,7 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Le dernier passage complet consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargent sans erreur navigateur. La recette BIOFORGE et ses neuf boutons tactiles a été revérifiée sur D ; le passage complet final confirme ces 952 tests. Le contrôle d’accessibilité final et la publication restent à compléter ; leurs preuves et chiffres seront actualisés dans [VALIDATION_V71](docs/VALIDATION_V71.md).
+Le dernier passage complet consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargent sans erreur navigateur. La recette BIOFORGE et ses neuf boutons tactiles a été revérifiée sur D ; le passage complet final confirme ces 952 tests. La publication Vercel et les contrôles HTTP sont vérifiés ; le contrôle d’accessibilité final reste à compléter. Voir [VALIDATION_V71](docs/VALIDATION_V71.md).
 
 Le workspace a été récupéré sur `D:\CodexWork\aliens-tantalus-frontier\project` : **4 808 fichiers aux empreintes identiques**, deux sources tronquées restaurées et **3 864 fixtures synthétiques** (1 459 999 407 octets) déplacées sur D après vérification taille/SHA-256. Ces fixtures sont conservées dans `recovered-test-fixtures-20260905` et restent récupérables.
 
