@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-09-05T16:38:38.658Z",
+  "base": "https://aliens-tantalus-frontier.vercel.app",
+  "rows": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 24251,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "bytes": 451,
+      "contentType": "application/json; charset=utf-8",
+      "build": {
+        "name": "ALIENS: TANTALUS FRONTIER",
+        "version": "72.1.0",
+        "sourceVersion": "51.0.0",
+        "builtAt": "2026-09-05T16:37:02.689Z",
+        "content": {
+          "worlds": 64,
+          "campaigns": 440,
+          "weapons": 146,
+          "equipment": 106,
+          "enemies": 571,
+          "vehicles": 279,
+          "apexDossiers": 244,
+          "neuroXenoProfiles": 234,
+          "crew": 16,
+          "costumes": 392,
+          "shipModules": 158,
+          "levelSeeds": 800
+        },
+        "artProvider": "OpenAI ImageGen"
+      }
+    },
+    {
+      "path": "/src/enemy-profile-assets-v66.js",
+      "status": 200,
+      "bytes": 5371,
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "bytes": 27451,
+      "contentType": "application/javascript; charset=utf-8",
+      "expectedCache": true
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+      "status": 200,
+      "bytes": 634082,
+      "contentType": "image/webp",
+      "sha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-042-combat-synthetic.webp",
+      "status": 404,
+      "bytes": 79,
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-071-albino-red-xenomorph.webp",
+      "status": 404,
+      "bytes": 79,
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-072-albino-k-series-yellow-xenomorph.webp",
+      "status": 404,
+      "bytes": 79,
+      "contentType": "text/plain; charset=utf-8"
+    },
+    {
+      "path": "/assets/openai/sprites/frames/v66/batch-005/enemy-071-albino-red-xenomorph/idle.png",
+      "status": 404,
+      "bytes": 79,
+      "contentType": "text/plain; charset=utf-8"
+    }
+  ]
+}

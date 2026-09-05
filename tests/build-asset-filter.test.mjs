@@ -183,7 +183,7 @@ test('V71 exclut les masters du hub mais conserve les cinquante couches WebP run
   assert.equal(filter(join(process.cwd(), 'assets/openai/hub/annexes/v71/bioforge/door.webp')), true);
 });
 
-test('Vercel exclut toutes les productions V66 et ne réadmet que les cinq atlas du lot001', async () => {
+test('Vercel exclut les candidats V66 et ne réadmet que le lot001 et le K-Series020 accepté', async () => {
   const rules = (await readFile('.vercelignore', 'utf8')).split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   for (const directory of ['frames/v66', 'reference-masters/v66', 'previews/v66', 'metadata/v66', 'normalized/enemy-clips-v66', 'normalized/enemy-motion-v66']) {
     assert.ok(rules.includes(`assets/openai/sprites/${directory}`));
@@ -192,7 +192,10 @@ test('Vercel exclut toutes les productions V66 et ne réadmet que les cinq atlas
   }
   assert.ok(rules.includes('assets/openai/sprites/normalized/enemy-profiles-v66/*'));
   const allowed = rules.filter((rule) => rule.startsWith('!assets/openai/sprites/normalized/enemy-profiles-v66/')).map((rule) => rule.slice(1));
-  assert.deepEqual(allowed.sort(), V66_BATCH_001_IDS.map(v66Path).sort());
+  assert.deepEqual(allowed.sort(), [...V66_BATCH_001_IDS, 'enemy-020-k-series-yellow-xenomorph'].map(v66Path).sort());
+  for (const candidate of ['enemy-042-combat-synthetic', 'enemy-071-albino-red-xenomorph', 'enemy-072-albino-k-series-yellow-xenomorph']) {
+    assert.ok(!allowed.includes(v66Path(candidate)), `${candidate}: candidat non admis en production`);
+  }
   for (const prefix of ['docs/references/V66_', 'docs/references/v66-']) {
     assert.ok(rules.includes(`${prefix}*`), 'exclut fichiers et racines de dossiers');
     assert.ok(rules.includes(`${prefix}*/**`), 'exclut aussi leurs descendants');

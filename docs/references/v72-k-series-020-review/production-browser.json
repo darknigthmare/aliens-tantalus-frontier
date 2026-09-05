@@ -1,0 +1,76 @@
+{
+  "controlsY": 445.46875,
+  "deathHeld": true,
+  "heading": "K-Series Yellow Xenomorph",
+  "runs": [
+    {
+      "clip": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "loaded": true,
+      "sheet": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
+      "src": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp"
+    },
+    {
+      "clip": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "loaded": true,
+      "sheet": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
+      "src": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp"
+    },
+    {
+      "clip": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "loaded": true,
+      "sheet": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
+      "src": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp"
+    },
+    {
+      "clip": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "loaded": true,
+      "sheet": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
+      "src": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp"
+    }
+  ],
+  "url": "https://aliens-tantalus-frontier.vercel.app/",
+  "viewport": [
+    1280,
+    720
+  ]
+}

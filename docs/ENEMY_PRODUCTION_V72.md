@@ -1,5 +1,7 @@
 # Production ennemie V72 — 5 septembre 2026
 
+V72.1 publiée sur GitHub et Vercel : [validation, preuves et limites de la livraison](VALIDATION_V72_1.md).
+
 La demande « tous les ennemis terminés, aucun placeholder, en une passe » **n'est pas atteinte**. Cette livraison conserve les fichiers effectivement produits et les défauts réellement observés. Elle ne remplace pas les fiches incomplètes par une autre espèce, ne supprime pas les ennemis du catalogue et ne considère pas un atlas simplement présent comme prêt.
 
 ## Nouvelles images réellement produites
