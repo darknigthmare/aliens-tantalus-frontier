@@ -29,4 +29,12 @@ L'audit PNG strict vérifie toujours **405 assets, 0 erreur et 13 revues existan
 
 ## Publication
 
-Déploiement V74 à confirmer après exécution. La version publique précédente reste V73 jusqu'à cette confirmation.
+Publication Vercel **READY**, issue de la copie propre au commit `939092f`, construite le `2026-09-05T20:03:07.664Z`. Déploiement vérifié : `dpl_FqWViBW8cXvJfDDPRPr5fdKH3k1W`.
+
+- [Site public](https://aliens-tantalus-frontier.vercel.app) et [déploiement immuable vérifié](https://aliens-tantalus-frontier-mfyrkf6dd-darknigthmares-projects.vercel.app).
+- GitHub : commits `4c33034`, `c86144f` et `939092f` poussés dans le dépôt privé `darknigthmare/aliens-tantalus-frontier`, branche `codex/v52-physical-worlds`. Le compte propriétaire et la permission ADMIN ont été confirmés avant l'envoi.
+- HTTP 200 : build-info version74.0.0, worker `atf-v74-enemy-combat-shell-1`, manifeste de10atlas, atlas016 et050. Leurs SHA-256 distants correspondent exactement aux fichiers acceptés.
+- HTTP 404 confirmé : atlas candidats049/054, master054R2, snapshot de production privé et rapport interne054.
+- Parcours public réel : accueil, entrée au Tantalus, commandement, Xénobiologie, recherche de050 puis016. Sur chacun, les quatre clips parcourent respectivement0–7,8–15,16–23,24–31. Attaque et mort tiennent23/31 ; l'image chargée mesure1024×2048. Les quatre silhouettes du comparateur restent dans le conteneur et partagent exactement le même sol. Aucune erreur JavaScript signalée ; session de vérification fermée.
+
+Preuve sérialisée et captures effectivement inspectées : `references/v74-enemy-fixes/release/production-verification.json`, `production-050.png` et `production-016.png`. Ce contrôle public n'est pas une campagne entière jouée. Les essais OpenAI refusés et les47profils du lot encore non finalisés restent déclarés comme tels.

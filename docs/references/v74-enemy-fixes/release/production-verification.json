@@ -1,0 +1,209 @@
+{
+  "release": "74.0.0",
+  "deployedCommit": "939092f83b6f3755b685ecf683029a7ae06d3bd6",
+  "deploymentId": "dpl_FqWViBW8cXvJfDDPRPr5fdKH3k1W",
+  "readyState": "READY",
+  "url": "https://aliens-tantalus-frontier.vercel.app",
+  "immutableUrl": "https://aliens-tantalus-frontier-mfyrkf6dd-darknigthmares-projects.vercel.app",
+  "builtAt": "2026-09-05T20:03:07.664Z",
+  "observedProfiles": [
+    {
+      "clips": [
+        {
+          "clip": "idle",
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "last": 2,
+          "sheet": "enemy.profile.enemy-016-burster.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp"
+        },
+        {
+          "clip": "move",
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "last": 12,
+          "sheet": "enemy.profile.enemy-016-burster.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp"
+        },
+        {
+          "clip": "attack",
+          "frames": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "last": 23,
+          "sheet": "enemy.profile.enemy-016-burster.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp"
+        },
+        {
+          "clip": "death",
+          "frames": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "last": 31,
+          "sheet": "enemy.profile.enemy-016-burster.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp"
+        }
+      ],
+      "comparisonCount": "4",
+      "groundSpread": 0,
+      "inside": true,
+      "title": "ALIENS: TANTALUS FRONTIER v74"
+    },
+    {
+      "clips": [
+        {
+          "clip": "idle",
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "last": 2,
+          "sheet": "enemy.profile.enemy-050-korari-stalker.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp"
+        },
+        {
+          "clip": "move",
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "last": 12,
+          "sheet": "enemy.profile.enemy-050-korari-stalker.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp"
+        },
+        {
+          "clip": "attack",
+          "frames": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "last": 23,
+          "sheet": "enemy.profile.enemy-050-korari-stalker.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp"
+        },
+        {
+          "clip": "death",
+          "frames": [
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+          ],
+          "last": 31,
+          "sheet": "enemy.profile.enemy-050-korari-stalker.v66",
+          "size": [
+            1024,
+            2048
+          ],
+          "src": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp"
+        }
+      ],
+      "comparisonCount": "4",
+      "groundSpread": 0,
+      "inside": true,
+      "title": "ALIENS: TANTALUS FRONTIER v74"
+    }
+  ],
+  "http": {
+    "runtimeAtlases": {
+      "enemy-016-burster": {
+        "status": 200,
+        "sha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df"
+      },
+      "enemy-050-korari-stalker": {
+        "status": 200,
+        "sha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df"
+      }
+    },
+    "supplementalAtlasCount": 10,
+    "serviceWorkerCache": "atf-v74-enemy-combat-shell-1",
+    "excludedStatus404": [
+      "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-049-wild-boar-host.webp",
+      "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-054-albino-facehugger.webp",
+      "/assets/openai/sprites/frames/v74/enemy-054-albino-facehugger/attack-clean-r2.png",
+      "/docs/references/V74_ENEMY_PROGRESS.json",
+      "/docs/references/v74-enemy-fixes/054/README_R2_BLOCKED.md"
+    ]
+  },
+  "scope": "Production title, hub entry, command and bestiary navigation; all32 poses of016/050 sampled in visible DOM, common-scale bounds checked. Not a full campaign playthrough."
+}
