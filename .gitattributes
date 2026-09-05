@@ -18,3 +18,9 @@ docs/references/v72-enemy-gap-prompts/*.txt text eol=lf
 docs/references/v72-k-series-020-review/*.json text eol=lf
 docs/references/v72-k-series-020-review/*.md text eol=lf
 docs/references/v72-k-series-020-review/*.py text eol=lf
+# Preserve four historical signed receipts byte-for-byte (original CRLF).
+# Their recorded SHA-256 values bind the original bytes, not normalized text.
+docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json -text
+docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/source-qa.json -text
+docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json -text
+docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json -text
