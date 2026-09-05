@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { HUB_DECKS, HUB_WORLD } from '../src/hub-game.js';
 
 const readText = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
@@ -30,7 +31,7 @@ test('V61 opens physical hub stations through a dialogue without replacing the l
   assert.match(hub, /resume\(\)/);
 });
 
-test('V61 gives briefing and armory large original bitmap landmarks', async () => {
+test('briefing et armurerie conservent leurs bitmaps originaux à une échelle cohérente avec un acteur de92px', async () => {
   const [hub, profiles, sw] = await Promise.all([
     readText('src/hub-game.js'),
     readText('src/hub-profiles-v53.js'),
@@ -39,11 +40,18 @@ test('V61 gives briefing and armory large original bitmap landmarks', async () =
 
   assert.match(hub, /operations-table-v61/);
   assert.match(hub, /armory-counter-v61/);
-  assert.match(hub, /'briefing'.*'operations-table-v61'.*260/);
-  assert.match(hub, /'armory'.*'armory-counter-v61'.*290/);
+  const briefing = HUB_DECKS.flatMap((deck) => deck.rooms).find((room) => room.id === 'briefing');
+  const armory = HUB_DECKS.flatMap((deck) => deck.rooms).find((room) => room.id === 'armory');
+  assert.equal(briefing.propRenderBounds.w, 520);
+  assert.ok(briefing.propRenderBounds.h >= 80 && briefing.propRenderBounds.h <= 90);
+  assert.equal(briefing.prop, '/assets/openai/hub/props/operations-table-side-v72.webp');
+  assert.equal(armory.propRenderBounds.h, 200);
+  assert.equal(briefing.propRenderBounds.y + briefing.propRenderBounds.h, HUB_WORLD.floorY);
+  assert.ok(briefing.propCollisionBounds.h <= 92);
+  assert.equal(armory.propCollisionBounds.h, 80, 'seul le comptoir bas est solide, pas son râtelier mural');
   assert.match(profiles, /briefing: defineRoomProfile\([^\n]+480, 142\)/);
-  assert.match(profiles, /armory: defineRoomProfile\([^\n]+520, 136\)/);
-  assert.match(sw, /operations-table-v61\.png/);
+  assert.match(profiles, /armory: defineRoomProfile\([^\n]+340, 80\)/);
+  assert.match(sw, /operations-table-side-v72\.webp/);
   assert.match(sw, /armory-counter-v61\.png/);
   assert.match(sw, /hangar-control-booth-v61\.png/);
 

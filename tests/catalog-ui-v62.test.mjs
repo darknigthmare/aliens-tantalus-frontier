@@ -100,7 +100,11 @@ class FakeElement {
     for (let current = this; current; current = current.parentNode) if (current.matches?.(selector)) return current;
     return null;
   }
-  focus() { this.focused = true; }
+  focus() {
+    if (this.ownerDocument.activeElement) this.ownerDocument.activeElement.focused = false;
+    this.focused = true;
+    this.ownerDocument.activeElement = this;
+  }
 }
 
 class FakeDocument {
@@ -110,7 +114,7 @@ class FakeDocument {
   createElement(tagName) { return new FakeElement(tagName, this); }
 }
 
-const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions } = {}) => {
+const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions, reducedMotion = true } = {}) => {
   const documentRef = new FakeDocument();
   const root = documentRef.createElement('section');
   const tree = documentRef.createElement('aside');
@@ -128,7 +132,7 @@ const makeWorkbench = ({ catalogs = ['enemies'], query = '', getActions } = {}) 
     catalogs,
     getActions,
     limit: 8,
-    reducedMotion: true
+    reducedMotion
   });
   return { workbench, root, tree, list, detail, search };
 };
@@ -236,6 +240,96 @@ test('les valeurs inconnues sont signalées sans inventer de donnée', () => {
   assert.equal(formatCatalogValueV62(CATALOG_UNKNOWN_V62), 'NON DOCUMENTÉ');
   assert.equal(formatCatalogValueV62([]), null);
   assert.equal(formatCatalogValueV62(false), 'NON');
+});
+
+test('V72 pages the complete roster and keeps list previews static', () => {
+  const { workbench, root, list } = makeWorkbench();
+  assert.match(list.textContent, /571/);
+  assert.equal(list.querySelectorAll('[data-catalog-entry-card]').length, 48);
+  assert.ok([...workbench.animator.animations].every((animation) => animation.timer === null));
+  const more = list.querySelector('[data-catalog-show-more]');
+  root.listeners.get('click')({ target: more });
+  assert.equal(list.querySelectorAll('[data-catalog-entry-card]').length, 96);
+  workbench.setQuery('queen');
+  assert.ok(list.querySelectorAll('[data-catalog-entry-card]').length <= 48);
+  workbench.destroy();
+});
+
+test('V72 keeps only the detail timer when motion is enabled, including after pagination', () => {
+  const previousSetInterval = globalThis.setInterval;
+  const previousClearInterval = globalThis.clearInterval;
+  const callbacks = new Map();
+  let nextTimer = 0;
+  globalThis.setInterval = (callback) => { const id = ++nextTimer; callbacks.set(id, callback); return id; };
+  globalThis.clearInterval = (id) => callbacks.delete(id);
+  let workbench;
+  try {
+    const fixture = makeWorkbench({ reducedMotion: false });
+    ({ workbench } = fixture);
+    const assertOnlyDetailAnimates = () => {
+      assert.equal(callbacks.size, 1);
+      const active = [...workbench.animator.animations].filter((animation) => animation.timer !== null);
+      assert.equal(active.length, 1);
+      assert.ok(fixture.detail.contains(active[0].image));
+      assert.equal(fixture.list.contains(active[0].image), false);
+    };
+    assertOnlyDetailAnimates();
+    const firstTimer = [...callbacks.keys()][0];
+    fixture.root.listeners.get('click')({ target: fixture.list.querySelector('[data-catalog-show-more]') });
+    assert.equal(fixture.list.querySelectorAll('[data-catalog-entry-card]').length, 96);
+    assert.equal(callbacks.has(firstTimer), false, 'rerender disposes the former detail timer');
+    assertOnlyDetailAnimates();
+  } finally {
+    workbench?.destroy();
+    assert.equal(callbacks.size, 0);
+    globalThis.setInterval = previousSetInterval;
+    globalThis.clearInterval = previousClearInterval;
+  }
+});
+
+test('V72 final page restores keyboard focus to the first newly revealed card', () => {
+  const { workbench, root, list } = makeWorkbench();
+  try {
+    let previousCount = 0;
+    for (let page = 0; page < 20; page += 1) {
+      const more = list.querySelector('[data-catalog-show-more]');
+      if (!more) break;
+      previousCount = list.querySelectorAll('[data-catalog-entry-card]').length;
+      more.focus();
+      root.listeners.get('click')({ target: more });
+      const nextMore = list.querySelector('[data-catalog-show-more]');
+      if (nextMore) assert.ok(list.ownerDocument.activeElement === nextMore, 'intermediate pages retain show-more focus');
+    }
+    assert.equal(list.querySelector('[data-catalog-show-more]'), null);
+    const cards = list.querySelectorAll('[data-catalog-entry]');
+    assert.equal(cards.length, Number(root.dataset.catalogCount));
+    assert.ok(list.ownerDocument.activeElement === cards[previousCount], 'the first new card receives final-page focus');
+  } finally {
+    workbench.destroy();
+  }
+});
+
+test('V72 identifies an unavailable sheet in its card, detail and comparison without fabricating art', () => {
+  const { workbench, list, detail } = makeWorkbench();
+  const id = 'enemy-019-red-xenomorph';
+  try {
+    assert.ok(getCatalogEntryV62(id).visual);
+    assert.equal(getCatalogSpriteFrameV62(getCatalogEntryV62(id).visual), null);
+    assert.equal(workbench.selectEntry(id), true);
+    const card = list.querySelector(`[data-catalog-entry="${id}"]`);
+    assert.ok(card.querySelector('[data-catalog-media-missing]'));
+    assert.match(card.textContent, /MÉDIA VISUEL NON DOCUMENTÉ/u);
+    assert.equal(card.querySelector('[data-sheet-id]'), null);
+    const comparison = detail.querySelector(`[data-comparison-entry="${id}"]`);
+    assert.ok(comparison.querySelector('[data-catalog-media-missing]'));
+    assert.equal(comparison.querySelector('[data-sheet-id]'), null);
+    assert.equal(detail.querySelectorAll('[data-catalog-media-missing]').length, 2,
+      'the detail portrait and selected comparison both explain the absent media');
+    assert.equal(detail.querySelectorAll('[data-sheet-id]').length, 3,
+      'only the three real reference sheets remain in the comparison');
+  } finally {
+    workbench.destroy();
+  }
 });
 
 test('le contrôleur DOM rend arbre, cellules réelles, détail et actions délégables', () => {

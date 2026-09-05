@@ -763,7 +763,7 @@ function setupCatalogsV62() {
       const biology = byId('biology-filter').value;
       return biology === 'all' || ENEMIES.find((entry) => entry.id === record.id)?.biology === biology;
     },
-    limit: 500
+    limit: ENEMIES.length
   });
   vehicleCatalogV62 = new CatalogWorkbenchV62({
     root: byId('vehicle-catalog-v62'),

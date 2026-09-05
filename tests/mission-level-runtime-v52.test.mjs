@@ -484,3 +484,59 @@ test('un occupant de véhicule ne subit pas une chute fantôme hors des limites 
   assert.deepEqual({ x: actor.x, y: actor.y, health: actor.health }, before);
   assert.equal(damageCalls, 0);
 }));
+
+test('une reprise de base refusée ne restaure aucun état de niveau même si sa signature de plan correspond', () => withBrowserMocks(() => {
+  const campaign = { ...CAMPAIGNS[0], id: 'runtime-rejected-resume', worldId: WORLDS[0].id };
+  const plan = buildMissionLevelV52({ campaign, world: WORLDS[0], levelSeeds: LEVEL_SEEDS, templateId: 'colony-multiroute', variant: 2 });
+  const engine = createEngine();
+  engine.start(optionsFor(plan));
+  const original = engine.captureResumeState();
+  const forged = structuredClone(original);
+  forged.schema = -99;
+  assert.equal(forged.missionLevel.signature, engine.missionLevelRuntime.signature);
+  for (const door of forged.missionLevel.doors) Object.assign(door, { open: !door.open, levelLocked: !door.levelLocked, progress: 0.75 });
+  for (const hazard of forged.missionLevel.hazards) hazard.active = !hazard.active;
+  for (const event of forged.missionLevel.events) Object.assign(event, { triggered: !event.triggered, triggerCount: 999 });
+  for (const spawn of forged.missionLevel.spawns) spawn.active = !spawn.active;
+  forged.missionLevel.visualState.activeZoneId = 'invalid-import-zone';
+  forged.missionLevel.telemetry.eventsTriggered = 999;
+  const result = engine.applyResumeState(forged);
+  assert.equal(result.applied, false);
+  assert.equal(result.missionLevelRestored, false);
+  assert.equal(result.missionLevelReason, 'base-resume-rejected');
+  assert.deepEqual(engine.captureResumeState().missionLevel, original.missionLevel);
+}));
+
+test('une mission sans réseau de conduits ne rend pas son joueur invulnérable par égalité undefined', () => withBrowserMocks(() => {
+  const engine = createEngine();
+  const plan = buildMissionLevelV52({ campaign: CAMPAIGNS[0], world: WORLDS[0], levelSeeds: LEVEL_SEEDS, templateId: 'colony-multiroute' });
+  engine.start(optionsFor(plan));
+  engine.missionVentNetworkV62 = null;
+  Object.assign(engine.player, { health: 100, armor: 0, ventTransit: null, inVehicle: false, alive: true });
+  engine.damagePlayer(engine.player, 20, { bypassCover: true });
+  assert.ok(engine.player.health < 100);
+  const health = engine.player.health;
+  engine.missionVentNetworkV62 = { id: 'real-vent-network' };
+  engine.player.ventTransit = { networkId: 'real-vent-network' };
+  engine.damagePlayer(engine.player, 20, { bypassCover: true });
+  assert.equal(engine.player.health, health, 'seul un vrai transit protège des tirs extérieurs');
+}));
+
+test('le runtime conserve le volume royal, trouve son arène ouverte et refuse un ascenseur humanoïde', () => withBrowserMocks(() => {
+  for (const templateId of MISSION_TEMPLATE_IDS_V52) {
+    const engine = createEngine();
+    const plan = buildMissionLevelV52({ campaign: CAMPAIGNS[0], world: WORLDS[0], levelSeeds: LEVEL_SEEDS, templateId });
+    engine.start(optionsFor(plan));
+    const boss = engine.enemies.find((enemy) => enemy.isBoss) || engine.enemies[0];
+    Object.assign(boss, { isBoss: true, alive: true, w: 336, h: 268.28125 });
+    engine.compileMissionLevelActors(plan);
+    assert.equal(boss.largeActorPlacementV72.valid, true, templateId);
+    assert.equal(boss.w, 336);
+    assert.equal(boss.h, 268.28125);
+    const before = { x: boss.x, y: boss.y };
+    const surface = engine.missionLevelSurfaceFor(boss);
+    assert.ok(surface);
+    assert.equal(engine.advanceEnemyMissionNavigation(boss, engine.player, surface, { ...surface, y: surface.y + 140 }, 0.25), false);
+    assert.deepEqual({ x: boss.x, y: boss.y }, before);
+  }
+}));

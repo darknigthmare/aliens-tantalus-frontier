@@ -11,6 +11,7 @@ export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
   'assets/openai/sprites/normalized/enemy-clips-v66',
   'assets/openai/sprites/normalized/enemy-motion-v66',
   'assets/openai/sprites/frames/v71',
+  'assets/openai/sprites/frames/v72',
   ...['v64', 'v65', 'v66', 'v69', 'v70'].flatMap((version) =>
     ['frames', 'reference-masters', 'previews', 'metadata'].map((directory) =>
       `assets/openai/sprites/${directory}/${version}`))

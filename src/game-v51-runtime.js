@@ -307,11 +307,19 @@ export class GameEngine {
 
   bind() {
     globalThis.addEventListener('keydown', (event) => {
-      if (!this.running) return;
+      if (!this.running || !this.canRouteGameplayKey(event)) return;
+      if (!event.repeat && (event.code === 'KeyP' || event.code === 'Escape')) {
+        this.togglePause();
+        return;
+      }
+      if (!event.repeat && event.code === 'Enter' && this.mission?.state === 'failed' && !this.paused) {
+        this.restartFromCheckpoint();
+        return;
+      }
+      if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active') return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
       this.keys.add(event.code);
       if (event.repeat) return;
-      if (event.code === 'KeyP' || event.code === 'Escape') this.togglePause();
       if (event.code === 'KeyQ') this.activateTracker(this.player);
       if (event.code === 'KeyV') this.toggleVehicle(this.player);
       if (event.code === 'KeyE') this.interact(this.player);
@@ -322,11 +330,36 @@ export class GameEngine {
       if (event.code === 'KeyY') this.interact(this.coop);
       if (event.code === 'KeyT') this.reload(this.coop);
       if (event.code === 'KeyG') this.useMedkit(this.coop);
-      if (event.code === 'Enter' && this.mission?.state === 'failed') this.restartFromCheckpoint();
     });
     globalThis.addEventListener('keyup', (event) => this.keys.delete(event.code));
-    globalThis.addEventListener('blur', () => this.keys.clear());
+    globalThis.addEventListener('blur', () => this.suspendForFocusLoss());
+    globalThis.document?.addEventListener?.('visibilitychange', () => {
+      if (globalThis.document.hidden) this.suspendForFocusLoss();
+    });
     this.canvas.addEventListener('pointerdown', () => { this.audio?.unlock(); this.fire(this.player); });
+  }
+
+  canRouteGameplayKey(event) {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing) return false;
+    const path = typeof event.composedPath === 'function' ? event.composedPath() : [event.target];
+    return !path.some((target) => target?.isContentEditable || target?.closest?.('input, textarea, select, button, a[href], [contenteditable]:not([contenteditable="false"]), [role="textbox"], [role="button"], [role="slider"], [role="dialog"], [aria-modal="true"]'));
+  }
+
+  clearGameplayInput() {
+    this.keys?.clear?.();
+    for (const actor of [this.player, this.coop]) {
+      if (!actor) continue;
+      actor.jumpBuffer = 0;
+      actor.vx = 0;
+    }
+  }
+
+  suspendForFocusLoss() {
+    this.clearGameplayInput();
+    if (this.running) {
+      this.focusLossVersionV72 = (this.focusLossVersionV72 || 0) + 1;
+      this.paused = true;
+    }
   }
 
   start({ seed = 426, world, campaign, enemyCatalog = [], weapon, editorProject = null } = {}) {
@@ -419,7 +452,10 @@ export class GameEngine {
     this.enemyAtlasLoadingPausedV65 = false;
     this.last = performance.now();
     this.animationTime = 0;
-    requestAnimationFrame((time) => this.loop(time));
+    this.clearGameplayInput();
+    // A stopped/restarted mission must invalidate RAF callbacks already queued by its predecessor.
+    const generation = this.loopGeneration = (this.loopGeneration || 0) + 1;
+    requestAnimationFrame((time) => this.loop(time, generation));
   }
 
   createPlayer(x, y, color, coop) {
@@ -448,8 +484,9 @@ export class GameEngine {
     const royal = isRoyalEnemyProfile(source) || spriteKey === 'xenoQueen';
     const isBoss = Boolean(boss);
     const biology = source.biology || 'xenomorph';
-    const profileSheet = visual.wave === 'v66' || visual.sheetId === 'enemy.profile.enemy-002-facehugger.v65'
-      ? resolveSpriteSheet(visual.sheetId) : null;
+    const resolvedSheet = resolveSpriteSheet(visual.sheetId);
+    const profileSheet = visual.wave === 'v66' || visual.sheetId === 'enemy.profile.enemy-002-facehugger.v65' || resolvedSheet?.hitbox === 'queen-standing'
+      ? resolvedSheet : null;
     const profileBody = profileSheet && SPRITE_HITBOXES[profileSheet.hitbox];
     const physical = profileBody ? {
       width: profileBody.width * profileSheet.renderWidth / profileSheet.cellWidth,
@@ -490,7 +527,7 @@ export class GameEngine {
       facing: -1, alert: false, attacking: false, alive: true, attackClock: this.random(),
       attackWindupClock: 0, attackAnimationClock: 0, pendingMelee: false, pendingMeleeTargetId: null,
       rangedClock: this.random() * 0.7, staggerClock: 0, hurtClock: 0, pounceClock: 0, revealed: 0, deathClock: 0,
-      isBoss, isRoyal: royal, keyCarrier, reward: isBoss ? 36 : royal ? 18 : 4 + (index % 4)
+      isBoss, isRoyal: royal, royalScaleV72: profileSheet?.hitbox === 'queen-standing', keyCarrier, reward: isBoss ? 36 : royal ? 18 : 4 + (index % 4)
     };
   }
 
@@ -596,20 +633,27 @@ export class GameEngine {
 
   stop() {
     this.running = false;
+    this.loopGeneration = (this.loopGeneration || 0) + 1;
+    this.clearGameplayInput();
     this.enemyAtlasLoadingPausedV65 = false;
     this.enemyAtlasLRUV65?.setWorkingSet([]);
   }
-  togglePause() { if (this.running) this.paused = !this.paused; }
+  togglePause() {
+    if (!this.running) return;
+    this.paused = !this.paused;
+    this.clearGameplayInput();
+    if (!this.paused) this.canvas?.focus?.({ preventScroll: true });
+  }
   setCoop(enabled) { this.coopEnabled = Boolean(enabled); }
 
-  loop(time) {
-    if (!this.running) return;
+  loop(time, generation = this.loopGeneration) {
+    if (!this.running || generation !== this.loopGeneration) return;
     const delta = Math.min(0.034, (time - this.last) / 1000 || 0);
     this.last = time;
     this.refreshEnemyAtlasAvailabilityV65();
     if (!this.paused && !this.enemyAtlasLoadingPausedV65) this.update(delta);
     this.draw();
-    requestAnimationFrame((next) => this.loop(next));
+    if (this.running && generation === this.loopGeneration) requestAnimationFrame((next) => this.loop(next, generation));
   }
 
   update(delta) {
@@ -851,7 +895,7 @@ export class GameEngine {
     if (!target) target = candidates.sort((a, b) => Math.abs(a.x - enemy.x) - Math.abs(b.x - enemy.x))[0] || null;
     if (!target) return;
     const targetEntity = target.inVehicle && this.vehicle?.active ? this.vehicle : target;
-    const distance = targetEntity.x - enemy.x;
+    const distance = targetEntity.x - enemy.x + (enemy.royalScaleV72 ? (targetEntity.w - enemy.w) / 2 : 0);
     const verticalDistance = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
     if (Math.abs(distance) < 620 || enemy.revealed > 0) enemy.alert = true;
     if (!enemy.alert) {
@@ -871,7 +915,7 @@ export class GameEngine {
       enemy.rangedClock = enemy.isBoss ? 1.2 : enemy.behavior === 'spitter' ? 1.55 : 1.15;
       enemy.attacking = true;
     } else if (!v64Melee) enemy.attacking = enemy.attackClock < 0.25 && Math.abs(distance) < 115;
-    const stopRange = v64Melee?.stopRange ?? (enemy.isBoss
+    const stopRange = v64Melee?.stopRange ?? (enemy.royalScaleV72 ? (enemy.w + targetEntity.w) / 2 + 28 : enemy.isBoss
             ? 94
             : enemy.behavior === 'pouncer'
               ? 42
@@ -895,7 +939,7 @@ export class GameEngine {
     }
     const meleeRange = v64Melee?.meleeRange ?? stopRange + 28;
     const rawMeleeContact = () => {
-      const currentDistance = targetEntity.x - enemy.x;
+      const currentDistance = targetEntity.x - enemy.x + (enemy.royalScaleV72 ? (targetEntity.w - enemy.w) / 2 : 0);
       const currentVertical = Math.abs((targetEntity.y + targetEntity.h) - (enemy.y + enemy.h));
       return combatOverlap(enemy, targetEntity) || (Math.abs(currentDistance) < meleeRange && currentVertical < 110);
     };

@@ -861,7 +861,8 @@ export class HubGame extends HubGameV50 {
       const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * 8 + npc.sheet) % 4;
       const image = this.npcSheets[npc.sheet] || this.crewSheet;
       const renderWidth = 92;
-      const renderHeight = 140;
+      // Crew and player share the same 92 px actor and 128 px sprite standard.
+      const renderHeight = 128;
       const renderY = npc.y + npc.h - renderHeight * (240 / 256);
       this.drawSheetCell(ctx, image, frame, 1, npc.x + npc.w / 2 - renderWidth / 2, renderY, renderWidth, renderHeight, npc.vx < 0, 4, 4);
     }

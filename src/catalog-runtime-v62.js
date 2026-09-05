@@ -155,6 +155,8 @@ const selectVisualFields = (profile, idle, extra = {}) => {
       cellHeight: sheet.cellHeight
     }) : null,
     idleClip: idle,
+    renderWidth: sheet?.renderWidth ?? null,
+    renderHeight: sheet?.renderHeight ?? null,
     identity: visualIdentity(profile),
     ...extra
   });
@@ -214,8 +216,8 @@ function enemyVisual(entry) {
     spriteKey: optionalString(profile.spriteKey),
     legacyImageKey: profile.legacy ? optionalString(profile.imageKey) : null,
     legacyRow: profile.legacy && Number.isInteger(profile.row) ? profile.row : null,
-    renderWidth: Number.isFinite(profile.width) ? profile.width : null,
-    renderHeight: Number.isFinite(profile.height) ? profile.height : null
+    renderWidth: sheet?.renderWidth ?? null,
+    renderHeight: sheet?.renderHeight ?? null
   });
 }
 
@@ -644,7 +646,7 @@ export function searchCatalogV62(query, options = {}) {
     ? options.catalog.trim().toLowerCase()
     : null;
   const limit = Number.isFinite(Number(options.limit))
-    ? Math.max(1, Math.min(250, Math.trunc(Number(options.limit))))
+    ? Math.max(1, Math.min(CATALOG_RECORDS_V62.length, Math.trunc(Number(options.limit))))
     : 24;
   const matches = searchIndex
     .filter((indexed) => (!requestedCatalog || indexed.record.catalog === requestedCatalog)

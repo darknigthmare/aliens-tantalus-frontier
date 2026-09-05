@@ -27,7 +27,8 @@ test('the v50 Tantalus hub is a camera-wide modular four-deck physical level', (
   assert.equal(new Set(rooms.map((room) => room.id)).size, 16);
   assert.equal(new Set(rooms.map((room) => room.background)).size, 16);
   assert.ok(rooms.every((room) => /^\/assets\/openai\/hub\/rooms\/[a-z0-9-]+\.png$/.test(room.background)));
-  assert.ok(rooms.every((room) => /^\/assets\/openai\/hub\/props\/[a-z0-9-]+\.png$/.test(room.prop)));
+  assert.ok(rooms.every((room) => /^\/assets\/openai\/hub\/props\/[a-z0-9-]+\.(?:png|webp)$/.test(room.prop)));
+  assert.ok(rooms.every((room) => HUB_MODULAR_ASSETS.includes(room.prop)), 'each independent room prop is preloaded');
   assert.ok(rooms.every((room) => room.action.includes(':')));
   assert.ok(rooms.every((room) => Number.isFinite(room.x)));
 

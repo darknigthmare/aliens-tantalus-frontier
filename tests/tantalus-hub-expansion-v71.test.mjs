@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import {
   HUB_ANNEX_BY_ID_V71,
@@ -19,6 +20,22 @@ import {
   validateHubCommercialCompletionV71,
   validateHubCommercialGraphV71
 } from '../src/tantalus-hub-expansion-v71.js';
+
+test('le cadrage runtime provient des bornes alpha vérifiées et les plateformes ne coupent aucun poste', () => {
+  const report = JSON.parse(readFileSync(new URL('../assets/openai/hub/annexes/v71/hub-commercial-art-report-v71.json', import.meta.url), 'utf8'));
+  for (const annex of HUB_ANNEXES_V71) {
+    for (const kind of ['prop', 'door', 'foreground']) {
+      assert.deepEqual(annex.art.alphaBounds[kind], report.outputs.find((entry) => entry.annexId === annex.id && entry.kind === kind).alpha.contentBounds);
+    }
+    const geometry = validateHubAnnexGeometryV71(annex);
+    assert.equal(geometry.modularPropsValid, true, annex.id);
+    assert.equal(geometry.stationClearOfCatwalks, true, annex.id);
+    for (const cargo of annex.props.filter((entry) => entry.role === 'cargo')) {
+      const support = annex.platforms.find((entry) => cargo.x >= entry.x && cargo.x + cargo.w <= entry.x + entry.w && cargo.y + cargo.h === entry.y);
+      assert.ok(support, `prop flottant: ${cargo.id}`);
+    }
+  }
+});
 
 const ANNEX_IDS = [
   'arrival-airlock',

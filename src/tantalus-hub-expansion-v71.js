@@ -1,3 +1,5 @@
+import { HUB_ANNEX_ALPHA_BOUNDS_V72, fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
+
 export const HUB_COMMERCIAL_SCHEMA_V71 = 71;
 export const HUB_COMMERCIAL_OPERATION_ID_V71 = 'tantalus-hub-expansion';
 export const HUB_COMMERCIAL_PRODUCTION_GAPS_V71 = Object.freeze([
@@ -101,8 +103,10 @@ function makeAnnex({
 }) {
   const westEntrance = entranceSide === 'west';
   const entranceLocalX = westEntrance ? 144 : HUB_ANNEX_WORLD_V71.width - 144;
-  const catwalkX = westEntrance ? 1040 : 420;
+  const catwalkX = westEntrance ? 760 : 740;
   const ladderX = westEntrance ? catwalkX + 72 : catwalkX + 348;
+  const alphaBounds = HUB_ANNEX_ALPHA_BOUNDS_V72[id];
+  const stationBody = fitHubBitmapV72(alphaBounds.prop, { x: stationX, y: 442, w: 276, h: 182 });
   const station = {
     id: `${id}-station`,
     label: stationLabel,
@@ -112,19 +116,20 @@ function makeAnnex({
     singleStation: true,
     upgradeId,
     capabilities,
-    bounds: makeBounds(`${id}-station-bounds`, stationX, 442, 276, 182, 'station')
+    bounds: makeBounds(`${id}-station-bounds`, stationBody.x, stationBody.y, stationBody.w, stationBody.h, 'station')
   };
   const basePath = `/assets/openai/hub/annexes/v71/${id}`;
   const props = [
-    makeBounds(`${id}-prop-console`, stationX + 22, 486, 112, 138, 'console', { collidable: true }),
-    makeBounds(`${id}-prop-crate-a`, westEntrance ? 520 : 1268, 552, 112, 72, 'cargo', { collidable: true }),
-    makeBounds(`${id}-prop-crate-b`, westEntrance ? 664 : 1124, 566, 92, 58, 'cargo', { collidable: true }),
-    makeBounds(`${id}-prop-wall-bank`, westEntrance ? 1500 : 188, 274, 184, 226, 'wall-service', { collidable: false }),
-    makeBounds(`${id}-prop-ceiling`, 790, 42, 340, 92, 'ceiling-service', { collidable: false }),
-    makeBounds(`${id}-prop-beacon`, westEntrance ? 352 : 1512, 516, 62, 108, 'navigation', { collidable: false })
+    { ...station.bounds, id: `${id}-prop-console`, role: 'console', collidable: true, artRole: 'prop' },
+    makeBounds(`${id}-prop-crate-a`, catwalkX + 160, 396, 79, 72, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
+    makeBounds(`${id}-prop-crate-b`, catwalkX + 270, 410, 64, 58, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
+    makeBounds(`${id}-prop-wall-bank`, westEntrance ? 1500 : 188, 274, 150, 132, 'wall-service', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' }),
+    makeBounds(`${id}-prop-ceiling`, 790, 42, 185, 138, 'ceiling-service', { collidable: false, asset: '/assets/openai/metroidvania/props/ceiling-cables.png' }),
+    makeBounds(`${id}-prop-beacon`, westEntrance ? 352 : 1512, 280, 75, 66, 'navigation', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' })
   ];
   const colliders = [
-    makeBounds(`${id}-collider-station`, stationX, 442, 276, 182, 'station'),
+    { ...station.bounds, id: `${id}-collider-station` },
+    ...props.filter((prop) => prop.role === 'cargo' && prop.collidable).map((prop) => ({ ...prop, id: `${prop.id}-collider` })),
     // These structural ribs remain overhead collision geometry. Their lower
     // edge deliberately leaves a 112 px standing lane above the floor so an
     // annex can never become a decorative cul-de-sac between its entrance
@@ -149,7 +154,7 @@ function makeAnnex({
       id: `${id}-annex-door`,
       x: entranceLocalX,
       y: HUB_ANNEX_WORLD_V71.floorY - 192,
-      w: 112,
+      w: Math.round(192 * (alphaBounds.door[2] - alphaBounds.door[0]) / (alphaBounds.door[3] - alphaBounds.door[1])),
       h: 192,
       bidirectional: true
     },
@@ -166,6 +171,7 @@ function makeAnnex({
     colliders,
     props,
     art: {
+      alphaBounds,
       basePath,
       far: `${basePath}/far.webp`,
       mid: `${basePath}/mid.webp`,
@@ -443,6 +449,19 @@ export function validateHubAnnexGeometryV71(annex) {
   if (!asList(annex?.platforms).every(inWorld)) errors.push('platform outside annex world');
   if (!asList(annex?.colliders).every(inWorld)) errors.push('collider outside annex world');
   if (!asList(annex?.props).every(inWorld)) errors.push('prop outside annex world');
+  const modularPropsValid = asList(annex?.props).every((prop) => (
+    (typeof prop.asset === 'string' || typeof annex?.art?.[prop.artRole] === 'string')
+    && (!prop.collidable || asList(annex?.colliders).some((collider) => (
+      collider.x === prop.x && collider.y === prop.y && collider.w === prop.w && collider.h === prop.h
+    )))
+  ));
+  if (!modularPropsValid) errors.push('prop bitmap or physical collider is missing');
+  const stationClearOfCatwalks = asList(annex?.platforms).filter((platform) => platform.role === 'catwalk').every((platform) => {
+    const station = annex?.station?.bounds;
+    return station && (station.x + station.w <= platform.x || station.x >= platform.x + platform.w
+      || station.y + station.h <= platform.y || station.y >= platform.y + platform.h);
+  });
+  if (!stationClearOfCatwalks) errors.push('station body intersects a catwalk');
   if (!inWorld(annex?.station?.bounds) || !annex?.station?.persistent) errors.push('missing persistent physical station');
   const entranceX = Number(annex?.entranceLocalX);
   const entranceSupported = floor && entranceX >= floor.x && entranceX <= floor.x + floor.w;
@@ -493,6 +512,8 @@ export function validateHubAnnexGeometryV71(annex) {
     colliderCount: asList(annex?.colliders).length,
     perspectiveLayerCount: artPaths.length,
     floorLaneClear,
+    modularPropsValid,
+    stationClearOfCatwalks,
     colliderCoverageRatio: Number(colliderCoverage.toFixed(4)),
     scaleValid,
     densityValid

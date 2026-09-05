@@ -1,7 +1,9 @@
-const CACHE = 'atf-v71-shell-1';
+const CACHE = 'atf-v72-audit-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/assets/openai/hub/props/operations-table-side-v72.webp',
+  '/src/catalog-scale-v72.js', '/src/gameplay-support-v72.js', '/src/hub-annex-art-layout-v72.js', '/src/mission-large-actor-placement-v72.js',
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css',
   '/manifest.webmanifest', SPRITE_MANIFEST,
   '/assets/openai/pwa/tantalus-frontier-icon-192-v68.png',

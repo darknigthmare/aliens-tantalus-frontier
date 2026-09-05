@@ -1,4 +1,5 @@
 import { GameEngine as CompleteGameEngine } from './game-complete.js';
+import { canSentryTargetV72, updateEnemySupportStatusesV72 } from './gameplay-support-v72.js';
 
 export * from './game-complete.js';
 
@@ -475,11 +476,9 @@ export class GameEngine extends CompleteGameEngine {
     const radius = this.stealthRuntime.detectionRadius * (enemy.isBoss ? 1.18 : enemy.behavior === 'stalker' ? 1.08 : 1);
     if (!wasAlert && distance <= radius) enemy.revealed = Math.max(enemy.revealed || 0, 0.12);
     if (enemy.jammedClock > 0) {
-      enemy.jammedClock = Math.max(0, enemy.jammedClock - delta);
       enemy.alert = false;
-      enemy.speed *= 0.985;
     }
-    super.updateEnemy(enemy, delta);
+    updateEnemySupportStatusesV72(enemy, delta, () => super.updateEnemy(enemy, delta));
     if (!wasAlert && enemy.alert && distance > radius && (enemy.revealed || 0) <= 0.01) enemy.alert = false;
     if (enemy.alert && distance > radius * 1.65 && (enemy.revealed || 0) <= 0.01) {
       enemy.searchClock = (enemy.searchClock || 0) + delta;
@@ -679,7 +678,7 @@ export class GameEngine extends CompleteGameEngine {
       this.fieldEffects.weaponBoostShots += Math.max(2, Math.floor(magnitude / 5));
     } else if (state.action === 'live-restraint') {
       const target = this.enemies.filter((enemy) => enemy.alive).sort((a, b) => entityDistance(actor, a) - entityDistance(actor, b))[0];
-      if (target) { target.speed *= 0.55; target.restrainedClock = 8; }
+      if (target) target.restrainedClock = Math.max(target.restrainedClock || 0, 8);
       this.fieldEffects.restraints += 1;
     } else if (state.action === 'checkpoint-beacon') {
       this.setCheckpoint(`beacon-${state.uses + 1}`, actor.x, actor.y);
@@ -706,7 +705,7 @@ export class GameEngine extends CompleteGameEngine {
     for (const deployment of this.supportDeployments) {
       if (deployment.kind === 'sentry') {
         deployment.cooldown = Math.max(0, deployment.cooldown - delta);
-        const target = this.enemies.filter((enemy) => enemy.alive && Math.abs(enemy.x - deployment.x) <= deployment.range).sort((a, b) => Math.abs(a.x - deployment.x) - Math.abs(b.x - deployment.x))[0];
+        const target = this.enemies.filter((enemy) => canSentryTargetV72(this, deployment, enemy)).sort((a, b) => entityDistance(a, deployment) - entityDistance(b, deployment))[0];
         if (target && deployment.ammo > 0 && deployment.cooldown === 0) {
           this.applyEnemyDamage(target, deployment.damage, { owner: this.player, kind: 'portable-sentry' });
           deployment.ammo -= 1;
@@ -714,12 +713,16 @@ export class GameEngine extends CompleteGameEngine {
         }
       } else if (deployment.kind === 'containment') {
         deployment.duration -= delta;
-        for (const enemy of this.enemies.filter((candidate) => candidate.alive && overlaps(candidate, deployment))) enemy.speed *= 0.99;
+        for (const enemy of this.enemies.filter((candidate) => candidate.alive && overlaps(candidate, deployment))) {
+          enemy.supportSlowFactorV72 = Math.min(enemy.supportSlowClockV72 > 0 ? enemy.supportSlowFactorV72 || 1 : 1, 0.45);
+          enemy.supportSlowClockV72 = Math.max(enemy.supportSlowClockV72 || 0, 0.12);
+        }
       } else if (deployment.armed) {
         const target = this.enemies.find((enemy) => enemy.alive && overlaps(enemy, deployment));
         if (target) {
           if (deployment.damage) this.applyEnemyDamage(target, deployment.damage, { owner: this.player, kind: deployment.kind });
-          target.speed *= deployment.slow;
+          target.supportSlowFactorV72 = Math.min(target.supportSlowClockV72 > 0 ? target.supportSlowFactorV72 || 1 : 1, deployment.slow);
+          target.supportSlowClockV72 = Math.max(target.supportSlowClockV72 || 0, deployment.kind === 'cryo-trap' ? 6 : 3);
           target.staggerClock = 1.5;
           deployment.armed = false;
         }

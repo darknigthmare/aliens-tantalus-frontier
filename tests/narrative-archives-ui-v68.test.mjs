@@ -141,6 +141,51 @@ test('normalise uniquement les preuves découvertes et indexe la contradiction v
   assert.equal(state.decisions[0].applied, false);
 });
 
+test('V72 un registre explicitement vide ne révèle aucune entrée implicite ni texte de relation', () => {
+  const input = fixture();
+  input.ledger = { discovered: {}, readIds: [] };
+  for (const entry of input.entries) delete entry.discovered;
+  input.relations[0].leftText = 'SPOILER NON RECUPERE A';
+  input.relations[0].rightText = 'SPOILER NON RECUPERE B';
+  const state = normalizeNarrativeArchivesUiStateV68(input);
+  assert.equal(state.entries.length, 0);
+  assert.equal(state.relations.length, 0);
+  assert.equal(state.qualifications.length, 0);
+  assert.equal(state.decisions[0].available, false);
+  assert.doesNotMatch(JSON.stringify(state), /SPOILER NON RECUPERE/u);
+});
+
+test('V72 une comparaison exige ses deux déclarations découvertes et garde leurs mots exacts', () => {
+  const input = fixture();
+  input.entries[1].discovered = false;
+  input.relations[0].rightText = 'Spoiler inline';
+  let state = normalizeNarrativeArchivesUiStateV68(input);
+  assert.equal(state.relations.length, 0);
+  assert.equal(state.qualifications.length, 0);
+  input.entries[1].discovered = true;
+  input.relations[0].leftText = 'Réécriture non vérifiée';
+  state = normalizeNarrativeArchivesUiStateV68(input);
+  assert.equal(state.relations[0].leftText, input.entries[0].claims[0].statement);
+  assert.equal(state.relations[0].rightText, input.entries[1].claims[0].statement);
+});
+
+test('V72 available=true ne contourne jamais les preuves manquantes ou un choix exclusif', () => {
+  const input = fixture();
+  input.decisions[0].available = true;
+  input.entries[1].discovered = false;
+  assert.equal(normalizeNarrativeArchivesUiStateV68(input).decisions[0].available, false);
+  input.entries[1].discovered = true;
+  input.decisions[0].lockedByChoice = true;
+  assert.equal(normalizeNarrativeArchivesUiStateV68(input).decisions[0].available, false);
+});
+
+test('V72 une action narrative rejetée ne promet pas une conclusion enregistrée', async () => {
+  const { ui } = mount(fixture(), { onDecision: () => ({ applied: false, reason: 'requirements-not-met' }) });
+  await ui.runAction('decision', 'qz17-confront', ui.onDecision);
+  assert.doesNotMatch(ui.lastStatus, /Conclusion enregistrée/u);
+  assert.match(ui.lastStatus, /non appliquée/u);
+});
+
 test('rend une bibliothèque accessible sans faux lecteur audio ou vidéo', () => {
   const { root } = mount();
   assert.equal(root.attributes.get('aria-label'), 'Bibliothèque des archives de mission');
@@ -451,6 +496,24 @@ test('l’overlay rend inertes tous ses frères puis restaure exactement leurs a
   assert.equal(equipment.inert, true);
   assert.equal(equipment.getAttribute('inert'), 'legacy');
   assert.equal(equipment.hasAttribute('aria-hidden'), false);
+});
+
+test('V72 fermer les archives après une perte de focus ne relance pas le combat', () => {
+  const documentRef = new FakeDocument();
+  const root = documentRef.createElement('section');
+  const closeButton = documentRef.createElement('button');
+  root.append(closeButton);
+  const canvas = documentRef.createElement('canvas');
+  const engine = {
+    running: true, paused: false, focusLossVersionV72: 0, player: { jumpBuffer: 0.14 },
+    clearGameplayInput() { this.player.jumpBuffer = 0; }
+  };
+  const overlay = new MissionArchiveOverlayV68({ root, reader: { open() {} }, engine, canvas, closeButton, documentRef });
+  overlay.open();
+  assert.equal(engine.player.jumpBuffer, 0);
+  engine.focusLossVersionV72 += 1;
+  overlay.close();
+  assert.equal(engine.paused, true);
 });
 
 test('le shell raccorde Commandement, navigation et événement terrain au lecteur V68', async () => {

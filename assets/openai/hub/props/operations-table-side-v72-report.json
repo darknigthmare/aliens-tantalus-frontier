@@ -1,0 +1,115 @@
+{
+  "schema": 72,
+  "provider": "OpenAI ImageGen",
+  "originalProjectAsset": true,
+  "canonExact": false,
+  "source": "assets/openai/sprites/frames/v72/props/operations-table-side-v72-source.png",
+  "sourceSha256": "e82aa014e331c4e81a02256b9642d21f726ab58013e5b28d65e36ac051230c03",
+  "sourceDimensions": [
+    1774,
+    887
+  ],
+  "output": "assets/openai/hub/props/operations-table-side-v72.webp",
+  "outputSha256": "0b92ad29b041fd218b791aa5659a71360b3c55af24b2368bb7ce0a8941c1be92",
+  "dimensions": [
+    1617,
+    262
+  ],
+  "contentBounds": [
+    3,
+    3,
+    1614,
+    259
+  ],
+  "extraction": {
+    "sourceCell": [
+      0,
+      0,
+      1774,
+      887
+    ],
+    "sourceBounds": [
+      77,
+      318,
+      1694,
+      580
+    ],
+    "sourceSize": [
+      1617,
+      262
+    ],
+    "foregroundPixels": 383837,
+    "mattePixels": 1189701,
+    "alphaProcessing": "v65-border-connected-magenta-key",
+    "discardedForegroundPixels": 0,
+    "sourcePoseRgbaSha256": "edd8dc9cb5fe52eb247369a4c6c3b1f4d51cff967cc477c19f7d43e8005f9826"
+  },
+  "enclosedMatte": {
+    "requested": true,
+    "applied": true,
+    "aaFringeRequested": true,
+    "aaFringeApplied": true,
+    "aaThresholds": {
+      "minimumRedBlue": 35,
+      "minimumChroma": 20,
+      "maximumRedBlueDifference": 32,
+      "maximumSourceRadius": 2
+    },
+    "strictCorePixelCount": 102,
+    "aaFringePixelCount": 78,
+    "strictCoreMaskSha256": "fe2719861da13af47a4b3f90b3b4bad097fc25fb8f9665f350fee3418b7da3bf",
+    "aaFringeMaskSha256": "36dd2dc34db5d1c6e6c97b921e4215d220610c0e5bfae2f9faafac19e41a9ee9",
+    "method": "strict-exterior-matched-magenta-v1",
+    "nativeAlphaPreserved": false,
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "thresholds": {
+      "minimumRedBlue": 190,
+      "maximumGreen": 60,
+      "minimumChroma": 150,
+      "maximumRedBlueDifference": 32,
+      "maximumReferenceChannelDistance": 24
+    },
+    "referenceRgb": [
+      241,
+      4,
+      248
+    ],
+    "removedPixelCount": 180,
+    "removedCoordinatesSha256": "539c7ebcce78a9a461e232e9572917016531e0f413999cc01166ec684d80b1f6",
+    "removedRgbaSha256": "40173649710a47455ef2d63ba41b7ab202fd486fb992c1368cae45045e3d585b",
+    "sourceRgbaSha256": "8aa02b2e8a9993fe9990ced5106a6e3668e7712d33b54ab4ed03ea263f116b71",
+    "recoloredPixels": 0,
+    "inpaintedPixels": 0
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "applied": true,
+    "nativeAlphaPreserved": false,
+    "neutralizedPixelCount": 67,
+    "remainingStrictPixelCount": 0
+  },
+  "edgeSpill": {
+    "neutralizedPixels": 133,
+    "maximumRadiusFromTransparency": 2,
+    "alphaChangedPixels": 0
+  },
+  "transparentPixels": 39817,
+  "occupiedPixels": 383837,
+  "hiddenRgbPixels": 0,
+  "opaqueWhitePixels": 0,
+  "guardPixels": 3,
+  "rescaled": false,
+  "inpaintedPixels": 0,
+  "projection": "orthographic-front-elevation",
+  "visualReview": "pending-runtime-review"
+}

@@ -11,6 +11,7 @@ import {
   buildHubCommercialGraphV71,
   createHubCommercialStateV71
 } from './tantalus-hub-expansion-v71.js';
+import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -100,6 +101,7 @@ export class HubGame extends HubGameV62 {
     this.hubCommercialGraphV71 = buildHubCommercialGraphV71();
     this.hubCommercialStateV71 = mutableCommercialState();
     this.annexImagesV71 = new Map();
+    this.annexModularImagesV72 = new Map();
     this.annexTransitionV71 = null;
     this.annexCameraV71 = { x: 0 };
     this.annexReturnPoseV71 = null;
@@ -241,6 +243,9 @@ export class HubGame extends HubGameV62 {
         createImage(annex.art[role])
       ])));
     }
+    for (const asset of [...annex.props.map((prop) => prop.asset), '/assets/openai/metroidvania/props/maintenance-pipe.png'].filter(Boolean)) {
+      if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
+    }
     return this.annexImagesV71.get(annex.id);
   }
 
@@ -258,12 +263,12 @@ export class HubGame extends HubGameV62 {
     const room = HUB_DECKS[this.state.deck].rooms.find((entry) => entry.id === annex.parentRoomId);
     if (!room) return null;
     const platforms = (this.v51Platforms || [])
-      .filter((platform) => platform.roomId === room.id && platform.w >= 150)
+      .filter((platform) => platform.roomId === room.id && platform.w >= annex.entrance.w + 64)
       .sort((left, right) => left.y - right.y || (
         annex.entranceSide === 'west' ? left.x - right.x : right.x - left.x
       ));
     const support = platforms[0];
-    const sideOffset = 76;
+    const sideOffset = annex.entrance.w / 2 + 32;
     const centerX = support
       ? (annex.entranceSide === 'west'
           ? support.x + sideOffset
@@ -324,8 +329,9 @@ export class HubGame extends HubGameV62 {
     const annex = this.currentAnnexV71();
     if (!annex) return null;
     const bounds = annex.station.bounds;
-    const feetAligned = this.player.y + this.player.h >= bounds.y - 34;
-    return feetAligned && horizontalGap(this.player, bounds) <= INTERACTION_MARGIN
+    const bodyAligned = this.player.y + this.player.h >= bounds.y - 34
+      && this.player.y <= bounds.y + bounds.h + 28;
+    return bodyAligned && horizontalGap(this.player, bounds) <= INTERACTION_MARGIN
       ? { ...annex.station, annexId: annex.id, interactionPriority: 120 }
       : null;
   }
@@ -604,6 +610,12 @@ export class HubGame extends HubGameV62 {
   }
 
   updateAnnexPhysicsV71(delta) {
+    // Fixed upper bound avoids tunnelling through thin props after a dropped frame.
+    const steps = Math.max(1, Math.ceil(delta / (1 / 120)));
+    for (let step = 0; step < steps; step += 1) this.stepAnnexPhysicsV72(delta / steps);
+  }
+
+  stepAnnexPhysicsV72(delta) {
     const annex = this.currentAnnexV71();
     if (!annex || !this.player) return;
     this.animationTime += delta;
@@ -620,7 +632,12 @@ export class HubGame extends HubGameV62 {
         && this.player.y + this.player.h >= entry.top - 18
         && this.player.y <= entry.bottom + 18;
     });
-    if (ladder && (up || down || this.player.climbing)) {
+    const horizontalExit = left || right;
+    const ladderJump = this.player.climbing && this.jumpQueued > 0;
+    const atLadderTop = ladder && this.player.y <= ladder.top - this.player.h + 1;
+    const atLadderBottom = ladder && this.player.y >= ladder.bottom - this.player.h - 1;
+    const leavingEndpoint = this.player.climbing && ((atLadderTop && up) || (atLadderBottom && down));
+    if (ladder && !horizontalExit && !ladderJump && !leavingEndpoint && (up || down || this.player.climbing)) {
       this.player.climbing = true;
       this.player.crouching = false;
       this.player.grounded = false;
@@ -630,6 +647,15 @@ export class HubGame extends HubGameV62 {
       this.player.y = clamp(this.player.y + this.player.vy * delta, ladder.top - this.player.h, ladder.bottom - this.player.h);
       if (!up && !down) this.player.vy = 0;
     } else {
+      if (this.player.climbing) {
+        this.player.grounded = Boolean(atLadderTop || atLadderBottom);
+        if (ladderJump) {
+          this.player.vy = -JUMP_SPEED;
+          this.player.grounded = false;
+          this.jumpQueued = 0;
+          this.coyoteTime = 0;
+        }
+      }
       this.player.climbing = false;
       this.player.crouching = crouching && this.player.grounded;
       const movementSpeed = this.player.crouching ? 105 : sprinting ? SPRINT_SPEED : WALK_SPEED;
@@ -682,6 +708,19 @@ export class HubGame extends HubGameV62 {
   }
 
   resolveAnnexVerticalV71(annex, previousBottom) {
+    if (this.player.vy < 0) {
+      const previousTop = previousBottom - this.player.h;
+      const ceilings = this.annexSolidCollidersV71(annex).filter((collider) => (
+        this.player.x + this.player.w > collider.x && this.player.x < collider.x + collider.w
+        && previousTop >= collider.y + collider.h - 1 && this.player.y < collider.y + collider.h
+      )).sort((left, right) => right.y + right.h - left.y - left.h);
+      if (ceilings[0]) {
+        this.player.y = ceilings[0].y + ceilings[0].h;
+        this.player.vy = 0;
+        return;
+      }
+      if (this.player.y < 0) { this.player.y = 0; this.player.vy = 0; }
+    }
     const surfaces = [
       ...annex.platforms.map((platform) => ({ ...platform })),
       ...annex.colliders.map((collider) => ({ ...collider, role: 'collider-top' }))
@@ -773,6 +812,7 @@ export class HubGame extends HubGameV62 {
     const loaded = groups.reduce((total, group) => total + group.size, 0);
     const ready = groups.reduce((total, group) => total + [...group.values()].filter(imageReady).length, 0);
     const activeGroup = this.currentAnnexV71() && this.annexImagesV71?.get(this.currentAnnexV71().id);
+    const modularReady = [...(this.annexModularImagesV72?.values() || [])].filter(imageReady).length;
     return {
       ...report,
       annexAssetCountV71: HUB_ANNEXES_V71.length * HUB_ANNEX_ART_ROLES_V71.length,
@@ -780,7 +820,9 @@ export class HubGame extends HubGameV62 {
       annexAssetsReadyV71: ready,
       annexAssetGroupsLoadedV71: groups.length,
       activeAnnexAssetsReadyV71: activeGroup ? [...activeGroup.values()].filter(imageReady).length : 0,
-      totalReadyAssetCount: (report.totalReadyAssetCount || 0) + ready
+      annexSharedModularAssetsLoadedV72: this.annexModularImagesV72?.size || 0,
+      annexSharedModularAssetsReadyV72: modularReady,
+      totalReadyAssetCount: (report.totalReadyAssetCount || 0) + ready + modularReady
     };
   }
 
@@ -824,7 +866,7 @@ export class HubGame extends HubGameV62 {
     const door = this.getParentAnnexDoorV71();
     if (!door) return;
     const images = this.ensureAnnexAssetsV71(door.annexId);
-    this.drawDoorBitmapV71(ctx, images?.get('door'), door.bounds, this.nearestParentAnnexDoorV71() ? 1 : 0);
+    this.drawDoorBitmapV71(ctx, images?.get('door'), door.bounds, this.nearestParentAnnexDoorV71() ? 1 : 0, door.annex.art.alphaBounds.door);
   }
 
   drawHud(ctx) {
@@ -877,12 +919,13 @@ export class HubGame extends HubGameV62 {
     ctx.save();
     ctx.translate(-this.annexCameraV71.x, 0);
     this.drawAnnexGeometryV71(ctx, annex);
+    this.drawAnnexModularPropsV72(ctx, annex);
     this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
-    this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds, this.nearestAnnexExitV71() ? 1 : 0);
+    this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds, this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door);
     super.drawPlayer(ctx);
+    this.drawAnnexForegroundV72(ctx, annex, images.get('foreground'));
     ctx.restore();
     this.drawAnnexLightingV71(ctx);
-    this.drawAnnexLayerV71(ctx, images.get('foreground'), 1, 1);
     this.drawAnnexHudV71(ctx);
     ctx.restore();
   }
@@ -923,15 +966,7 @@ export class HubGame extends HubGameV62 {
 
   drawAnnexPropLayerV71(ctx, annex, image) {
     if (!imageReady(image)) return;
-    const width = clamp(annex.station.bounds.w + 44, 300, 336);
-    const height = Math.round(width * (512 / 640));
-    const target = {
-      x: clamp(annex.station.bounds.x + annex.station.bounds.w / 2 - width / 2, 24, annex.world.width - width - 24),
-      y: annex.world.floorY - height,
-      w: width,
-      h: height
-    };
-    ctx.drawImage(image, target.x, target.y, target.w, target.h);
+    this.drawCroppedBitmapV72(ctx, image, annex.art.alphaBounds.prop, annex.station.bounds);
     if (this.nearestAnnexStationV71()) {
       ctx.save();
       ctx.strokeStyle = '#d9ca79';
@@ -941,13 +976,47 @@ export class HubGame extends HubGameV62 {
     }
   }
 
-  drawDoorBitmapV71(ctx, image, bounds, active = 0) {
+  drawCroppedBitmapV72(ctx, image, source, target) {
+    if (!imageReady(image)) return;
+    const fitted = fitHubBitmapV72(source, target);
+    ctx.drawImage(image, source[0], source[1], source[2] - source[0], source[3] - source[1], fitted.x, fitted.y, fitted.w, fitted.h);
+  }
+
+  drawAnnexModularPropsV72(ctx, annex) {
+    for (const prop of annex.props.filter((entry) => entry.asset)) {
+      const image = this.annexModularImagesV72.get(prop.asset);
+      if (imageReady(image)) this.drawCroppedBitmapV72(ctx, image, [0, 0, image.naturalWidth, image.naturalHeight], prop);
+    }
+    const pipe = this.annexModularImagesV72.get('/assets/openai/metroidvania/props/maintenance-pipe.png');
+    if (!imageReady(pipe)) return;
+    for (const collider of annex.colliders.filter((entry) => entry.role === 'structure')) {
+      // The collision rib sits inside the visible pipe silhouette, not in empty air.
+      const w = collider.h * pipe.naturalWidth / pipe.naturalHeight;
+      ctx.drawImage(pipe, collider.x + (collider.w - w) / 2, collider.y, w, collider.h);
+    }
+  }
+
+  drawAnnexForegroundV72(ctx, annex, image) {
+    if (!imageReady(image)) return;
+    const bounds = { x: annex.entranceSide === 'west' ? 1620 : 48, y: 444, w: 240, h: 212 };
+    ctx.save();
+    // Foreground equipment has its own world anchor. It must never be a
+    // viewport-sized opaque image hiding the traversal or the service console.
+    ctx.globalAlpha = overlaps(expanded(this.player, 24, 24), bounds) ? 0.2 : 0.86;
+    this.drawCroppedBitmapV72(ctx, image, annex.art.alphaBounds.foreground, bounds);
+    ctx.restore();
+  }
+
+  drawDoorBitmapV71(ctx, image, bounds, active = 0, source = null) {
     ctx.save();
     if (active) {
       ctx.shadowColor = 'rgba(142, 224, 169, .78)';
       ctx.shadowBlur = 16;
     }
-    if (imageReady(image)) ctx.drawImage(image, bounds.x, bounds.y, bounds.w, bounds.h);
+    if (imageReady(image)) {
+      if (source) this.drawCroppedBitmapV72(ctx, image, source, bounds);
+      else ctx.drawImage(image, bounds.x, bounds.y, bounds.w, bounds.h);
+    }
     else {
       ctx.fillStyle = '#17241f';
       ctx.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);

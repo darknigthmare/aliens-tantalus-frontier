@@ -62,6 +62,7 @@ const HUB_PROP_SOURCE_SIZES = Object.freeze({
   'bridge-terminal': Object.freeze({ width: 239, height: 157 }),
   'briefing-table': Object.freeze({ width: 219, height: 147 }),
   'operations-table-v61': Object.freeze({ width: 1024, height: 512 }),
+  'operations-table-side-v72': Object.freeze({ width: 1611, height: 256, file: 'operations-table-side-v72.webp', sourceBounds: Object.freeze([3, 3, 1614, 259]) }),
   'armory-counter-v61': Object.freeze({ width: 1024, height: 512 }),
   'sensor-console': Object.freeze({ width: 215, height: 188 }),
   cryopod: Object.freeze({ width: 241, height: 131 }),
@@ -125,7 +126,8 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     profile,
     collisionSource: profileGeometry ? 'room-profile' : 'fallback',
     background: `/assets/openai/hub/rooms/${art}.png`,
-    prop: `/assets/openai/hub/props/${prop}.png`,
+    prop: `/assets/openai/hub/props/${sourceSize.file || `${prop}.png`}`,
+    propSourceBounds: sourceSize.sourceBounds || null,
     propRenderBounds,
     propCollisionBounds,
     propInteractionBounds,
@@ -145,7 +147,7 @@ export const HUB_MODULAR_PROP_FILES = Object.freeze([
   '/assets/openai/hub/props/bulkhead-door.png',
   '/assets/openai/hub/props/lift-door.png',
   '/assets/openai/hub/props/bridge-terminal.png',
-  '/assets/openai/hub/props/operations-table-v61.png',
+  '/assets/openai/hub/props/operations-table-side-v72.webp',
   '/assets/openai/hub/props/armory-counter-v61.png',
   '/assets/openai/hub/props/cryopod.png',
   '/assets/openai/hub/props/bunk-module.png',
@@ -168,7 +170,7 @@ export const HUB_DECKS = Object.freeze([
     farBackground: '/assets/openai/hub/parallax/command-far.png',
     rooms: Object.freeze([
       makeRoom('bridge', 'Passerelle', 'navigate:galaxy', 'Tracer une route sur la Frontière.', 0, 0, 'command-bridge', 'bridge-terminal', 0, { x: 334, y: 248, w: 294, h: 118 }, 142),
-      makeRoom('briefing', 'Salle de briefing', 'navigate:operations', 'Préparer une opération avec Echo-9.', 1, 0, 'command-briefing', 'operations-table-v61', 1, { x: 108, y: 234, w: 240, h: 104 }, 260),
+      makeRoom('briefing', 'Salle de briefing', 'navigate:operations', 'Préparer une opération avec Echo-9.', 1, 0, 'command-briefing', 'operations-table-side-v72', 1, { x: 108, y: 234, w: 240, h: 104 }, 520 * 256 / 1611),
       makeRoom('combat-information', 'Centre d’information tactique', 'navigate:command', 'Consulter l’état du théâtre et les alertes.', 2, 0, 'command-cic', 'sensor-console', 2, { x: 354, y: 226, w: 254, h: 110 }, 136),
       makeRoom('cryo-bay', 'Baie cryogénique', 'navigate:crew', 'Réveiller, relever et inspecter l’équipage.', 3, 3, 'command-cryo', 'cryopod', 3, { x: 116, y: 244, w: 220, h: 96 }, 112)
     ])
@@ -192,7 +194,7 @@ export const HUB_DECKS = Object.freeze([
     farBackground: '/assets/openai/hub/parallax/industrial-far.png',
     rooms: Object.freeze([
       makeRoom('quarantine', 'Quarantaine', 'service:quarantine', 'Renforcer le confinement biologique.', 0, 3, 'industrial-quarantine', 'quarantine-unit', 2, { x: 338, y: 220, w: 266, h: 118 }, 140),
-      makeRoom('armory', 'Armurerie', 'navigate:armory', 'Modifier armes, munitions et équipements.', 1, 0, 'industrial-armory', 'armory-counter-v61', 3, { x: 116, y: 240, w: 224, h: 98 }, 290),
+      makeRoom('armory', 'Armurerie', 'navigate:armory', 'Modifier armes, munitions et équipements.', 1, 0, 'industrial-armory', 'armory-counter-v61', 3, { x: 116, y: 240, w: 224, h: 98 }, 200),
       makeRoom('workshop', 'Atelier', 'navigate:editor', 'Ouvrir Frontier Forge et les plans du vaisseau.', 2, 1, 'industrial-workshop', 'workbench', 0, { x: 354, y: 232, w: 238, h: 106 }, 128),
       makeRoom('vehicle-bay', 'Baie véhicules', 'navigate:vehicles', 'Inspecter les châssis et rôles par siège.', 3, 1, 'industrial-vehicle-bay', 'vehicle-lift', 1, { x: 112, y: 220, w: 248, h: 118 }, 110)
     ])
@@ -1062,9 +1064,12 @@ export class HubGame {
       ctx.fillRect(bounds.x - 24, bounds.y - 24, bounds.w + 48, bounds.h + 48);
     }
     if (assetReady(image)) {
-      const height = bounds.h * (active ? 1.04 : 1);
-      const width = bounds.w * (active ? 1.04 : 1);
-      ctx.drawImage(image, room.x - width / 2, FLOOR_Y - height, width, height);
+      const height = bounds.h;
+      const width = bounds.w;
+      if (room.propSourceBounds) {
+        const [left, top, right, bottom] = room.propSourceBounds;
+        ctx.drawImage(image, left, top, right - left, bottom - top, room.x - width / 2, FLOOR_Y - height, width, height);
+      } else ctx.drawImage(image, room.x - width / 2, FLOOR_Y - height, width, height);
     }
     ctx.fillStyle = active ? '#9be1ad' : '#d0a952';
     ctx.fillRect(room.x - 3, bounds.y - 14, 6, 6);

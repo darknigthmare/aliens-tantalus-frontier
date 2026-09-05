@@ -9,6 +9,7 @@ import {
   getHumanSizeComparisonV62,
   searchCatalogV62
 } from './catalog-runtime-v62.js';
+import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72 } from './catalog-scale-v72.js';
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -263,7 +264,7 @@ export class CatalogSpriteAnimatorV62 {
     return rootReduced || mediaReduced;
   }
 
-  mount(target, visual, label, { detail = false, controlsTarget = target } = {}) {
+  mount(target, visual, label, { detail = false, controlsTarget = target, worldScale = null, animate = true } = {}) {
     const firstFrame = getCatalogSpriteFrameV62(visual, 0);
     if (!isElementLike(target) || !firstFrame) return null;
     const documentRef = target.ownerDocument || this.document;
@@ -271,6 +272,19 @@ export class CatalogSpriteAnimatorV62 {
     viewport.setAttribute('aria-label', `${label} — animation ${visual.idleClip?.clip?.id || ''} issue de la plaquette dédiée`);
     viewport.dataset.sheetId = visual.sheetId || '';
     viewport.dataset.clipId = visual.idleClip?.clip?.id || '';
+    const dimensions = worldScale === null ? null : getCatalogGameplayScaleV72(visual, worldScale);
+    const proportions = getCatalogGameplayScaleV72(visual);
+    if (proportions && !dimensions) viewport.style.aspectRatio = `${proportions.worldWidth} / ${proportions.worldHeight}`;
+    if (dimensions) {
+      viewport.classList.add('catalog-v72__world-sprite');
+      viewport.style.width = `${dimensions.width}px`;
+      viewport.style.height = `${dimensions.height}px`;
+      viewport.style.flex = '0 0 auto';
+      viewport.style.aspectRatio = 'auto';
+      viewport.style.marginBottom = `${-dimensions.groundOffset}px`;
+      viewport.dataset.worldScale = String(dimensions.pixelsPerWorldPixel);
+      viewport.dataset.worldHeight = String(dimensions.worldHeight);
+    }
     const image = createElement(documentRef, 'img', 'catalog-v62__sheet');
     image.src = firstFrame.path;
     image.alt = '';
@@ -294,7 +308,7 @@ export class CatalogSpriteAnimatorV62 {
       state.timer = null;
       const clip = getCatalogPreviewClipV66(state.visual, state.clipId)?.clip;
       applyFrame();
-      if (!clip || this.isReducedMotion() || clip.frames.length < 2) return;
+      if (!animate || !clip || this.isReducedMotion() || clip.frames.length < 2) return;
       const fps = Math.max(1, Math.min(24, Number(clip.fps) || 1));
       state.timer = globalThis.setInterval(() => {
         state.index = clip.loop ? (state.index + 1) % clip.frames.length : Math.min(state.index + 1, clip.frames.length - 1);
@@ -367,8 +381,10 @@ export class CatalogWorkbenchV62 {
     this.onAction = typeof options.onAction === 'function' ? options.onAction : null;
     this.onSelect = typeof options.onSelect === 'function' ? options.onSelect : null;
     this.dimensions = options.dimensions;
-    this.limit = Math.max(1, Math.min(500, Number(options.limit) || 250));
+    this.limit = Math.max(1, Math.min(CATALOG_RECORDS_V62.length, Number(options.limit) || CATALOG_RECORDS_V62.length));
     this.emptyMessage = String(options.emptyMessage || 'Aucune entrée documentée ne correspond à cette recherche.');
+    this.resultLimitV72 = 48;
+    this.resultScopeV72 = '';
     this.state = {
       activeNodeId: null,
       selectedEntryId: null,
@@ -425,7 +441,7 @@ export class CatalogWorkbenchV62 {
     const record = getCatalogEntryV62(entryOrId);
     if (!record || !this.catalogs.includes(record.catalog) || (this.predicate && !this.predicate(record))) return false;
     if (this.state.query) {
-      const remainsVisible = searchCatalogV62(this.state.query, { catalog: record.catalog, limit: 250 })
+      const remainsVisible = searchCatalogV62(this.state.query, { catalog: record.catalog, limit: this.limit })
         .some((result) => result.entry.id === record.id);
       if (!remainsVisible) {
         this.state.query = '';
@@ -491,6 +507,11 @@ export class CatalogWorkbenchV62 {
       this.state.selectedEntryId = queryState.selectedEntry?.id || null;
     }
     this.renderTree();
+    const resultScope = `${this.catalogs.join(',')}|${queryState.query}|${this.state.activeNodeId || ''}|${queryState.records.map((record) => record.id).join(',')}`;
+    if (resultScope !== this.resultScopeV72) this.resultLimitV72 = 48;
+    this.resultScopeV72 = resultScope;
+    const selectedOrdinal = queryState.records.findIndex((record) => record.id === this.state.selectedEntryId);
+    if (selectedOrdinal >= this.resultLimitV72) this.resultLimitV72 = Math.ceil((selectedOrdinal + 1) / 48) * 48;
     this.renderResults(queryState.records);
     this.renderDetail(getCatalogEntryV62(this.state.selectedEntryId));
     this.root.dataset.catalogCount = String(queryState.records.length);
@@ -552,8 +573,14 @@ export class CatalogWorkbenchV62 {
       return;
     }
     const grid = createElement(this.document, 'div', 'catalog-v62__card-grid');
-    for (const record of records) grid.append(this.renderCard(record));
+    for (const record of records.slice(0, this.resultLimitV72)) grid.append(this.renderCard(record));
     this.list.append(grid);
+    if (records.length > this.resultLimitV72) {
+      const more = createElement(this.document, 'button', 'button compact', `AFFICHER LES SUIVANTS (${Math.min(this.resultLimitV72, records.length)}/${records.length})`);
+      more.type = 'button';
+      more.dataset.catalogShowMore = 'true';
+      this.list.append(more);
+    }
   }
 
   renderCard(record) {
@@ -565,11 +592,9 @@ export class CatalogWorkbenchV62 {
     select.dataset.catalogEntry = record.id;
     select.setAttribute('aria-pressed', String(record.id === this.state.selectedEntryId));
     const media = createElement(this.document, 'div', 'catalog-v62__card-media');
-    if (record.visual) this.animator.mount(media, record.visual, record.name);
-    else {
-      const noMedia = createElement(this.document, 'span', 'catalog-v62__media-status', 'MÉDIA VISUEL NON DOCUMENTÉ');
-      media.append(noMedia);
-    }
+    if (record.catalog === 'enemies') media.classList.add('catalog-v72__world-media');
+    const preview = record.visual && this.animator.mount(media, record.visual, record.name, { worldScale: record.catalog === 'enemies' ? 0.5 : null, animate: false });
+    if (!preview) this.renderMissingMedia(media, record);
     const body = createElement(this.document, 'span', 'catalog-v62__card-body');
     body.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', `${CATALOG_LABELS_V62[record.catalog]} · ${record.taxonomy.family === CATALOG_UNKNOWN_V62 ? UNKNOWN_LABEL : record.taxonomy.family}`),
@@ -582,6 +607,13 @@ export class CatalogWorkbenchV62 {
     const actions = normalizeCatalogActionsV62(this.getActions(record));
     if (actions.length) card.append(this.renderActions(record, actions, 'catalog-v62__card-actions'));
     return card;
+  }
+
+  renderMissingMedia(target, record) {
+    const message = createElement(this.document, 'span', 'catalog-v62__media-status', 'MÉDIA VISUEL NON DOCUMENTÉ');
+    message.dataset.catalogMediaMissing = record.id;
+    message.setAttribute('aria-label', `${record.name} — média visuel non documenté`);
+    target.append(message);
   }
 
   renderActions(record, actions, className) {
@@ -609,7 +641,8 @@ export class CatalogWorkbenchV62 {
     }
     const header = createElement(this.document, 'header', 'catalog-v62__detail-header');
     const animationControls = createElement(this.document, 'div');
-    if (record.visual) this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls });
+    const preview = record.visual && this.animator.mount(header, record.visual, record.name, { detail: true, controlsTarget: animationControls });
+    if (!preview) this.renderMissingMedia(header, record);
     const heading = createElement(this.document, 'div', 'catalog-v62__detail-heading');
     heading.append(
       createElement(this.document, 'span', 'catalog-v62__eyebrow', CATALOG_LABELS_V62[record.catalog]),
@@ -618,6 +651,7 @@ export class CatalogWorkbenchV62 {
     );
     header.append(heading);
     this.detail.append(header);
+    if (record.catalog === 'enemies') this.renderGameplayScaleV72(record);
     if (animationControls.children.length) this.detail.append(animationControls);
     this.detail.append(renderTaxonomyPath(this.document, record));
 
@@ -700,6 +734,31 @@ export class CatalogWorkbenchV62 {
     this.detail.append(section);
   }
 
+  renderGameplayScaleV72(record) {
+    const section = this.renderSection('ÉCHELLE COMMUNE DU JEU', 'gameplay-scale');
+    const stage = createElement(this.document, 'div', 'catalog-v72__comparison');
+    stage.setAttribute('role', 'group');
+    stage.setAttribute('aria-label', 'Comparaison facehugger, marine et reine à la même échelle de jeu');
+    const references = [getCatalogEntryV62('enemy-002-facehugger'),
+      { id: 'marine-reference', name: 'Marine', visual: getCatalogMarineReferenceV72() },
+      getCatalogEntryV62('enemy-008-queen')];
+    if (!references.some((entry) => entry.id === record.id)) references.push(record);
+    for (const entry of references) {
+      const item = createElement(this.document, 'div', 'catalog-v72__comparison-item');
+      item.dataset.comparisonEntry = entry.id;
+      const plane = createElement(this.document, 'div', 'catalog-v72__comparison-plane');
+      const size = getCatalogGameplayScaleV72(entry.visual, 0.35);
+      if (size) item.style.width = `${size.width}px`;
+      const preview = this.animator.mount(plane, entry.visual, entry.name, { worldScale: 0.35, animate: false });
+      if (!preview) this.renderMissingMedia(plane, entry);
+      item.append(plane, createElement(this.document, 'span', '', entry.name));
+      stage.append(item);
+    }
+    section.append(stage, createElement(this.document, 'p', 'catalog-v62__fact-note',
+      'Même échelle et même ligne de sol pour toutes les silhouettes. Dimensions du rendu en jeu, pas des mesures canoniques en mètres. Les vignettes de la liste utilisent aussi une échelle commune ; le portrait du dossier reste un zoom de détail.'));
+    this.detail.append(section);
+  }
+
   renderSizeSection(record) {
     const comparison = getHumanSizeComparisonV62(record.id, this.dimensions ? { dimensions: this.dimensions } : {});
     const section = this.renderSection('COMPARAISON HUMAINE', 'dimensions');
@@ -721,6 +780,19 @@ export class CatalogWorkbenchV62 {
   }
 
   handleClick(event) {
+    const more = event.target?.closest?.('[data-catalog-show-more]');
+    if (more && this.root.contains(more)) {
+      const previousCount = this.list.querySelectorAll('[data-catalog-entry]').length;
+      this.resultLimitV72 += 48;
+      this.render();
+      // The final page removes the focused button; continue at the first new
+      // card so keyboard users do not lose their place in the catalogue.
+      const nextFocus = this.list.querySelector('[data-catalog-show-more]')
+        || this.list.querySelectorAll('[data-catalog-entry]')[previousCount]
+        || this.list.querySelector('[data-catalog-entry]');
+      nextFocus?.focus?.();
+      return;
+    }
     const relation = event.target?.closest?.('[data-catalog-relation-entry]');
     if (relation && this.root.contains(relation)) {
       this.selectEntry(relation.dataset.catalogRelationEntry, { focus: true });
@@ -729,6 +801,9 @@ export class CatalogWorkbenchV62 {
     const entryButton = event.target?.closest?.('[data-catalog-entry]');
     if (entryButton && this.root.contains(entryButton)) {
       this.selectEntry(entryButton.dataset.catalogEntry);
+      if (globalThis.matchMedia?.('(max-width: 920px)')?.matches) {
+        this.detail.scrollIntoView?.({ block: 'start', behavior: this.animator.isReducedMotion() ? 'auto' : 'smooth' });
+      }
       return;
     }
     const nodeButton = event.target?.closest?.('[data-catalog-node]');

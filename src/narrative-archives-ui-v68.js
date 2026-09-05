@@ -66,7 +66,8 @@ function normalizeEntry(raw, index, discoveredIds, readIds) {
   const record = raw?.collectable && typeof raw.collectable === 'object' ? { ...raw.collectable, ...raw } : (raw || {});
   const id = identifier(record.id) || `archive-v68-${index + 1}`;
   const explicitlyDiscovered = record.discovered ?? record.isDiscovered ?? record.unlocked;
-  const discovered = explicitlyDiscovered === undefined ? (discoveredIds.size ? discoveredIds.has(id) : true) : Boolean(explicitlyDiscovered);
+  // Absence of discovery is not permission to reveal the catalogue on a new save.
+  const discovered = explicitlyDiscovered === undefined ? discoveredIds.has(id) : Boolean(explicitlyDiscovered);
   const explicitlyRead = record.read ?? record.isRead;
   const type = identifier(record.type || record.kind || record.mediaType || 'text').toLowerCase() || 'text';
   const atlasCell = resolveQz17CollectableCellV68(id);
@@ -155,13 +156,14 @@ export function normalizeNarrativeArchivesUiStateV68(rawState = {}) {
     const rightId = relationEndpoint(relation, 'right');
     const left = claimMap.get(leftId) || null;
     const right = claimMap.get(rightId) || null;
+    if (!left || !right) return null;
     return Object.freeze({
       id: identifier(relation.id) || `${type === 'qualifies' ? 'qualification' : 'contradiction'}-v68-${index + 1}`,
       type,
       left,
       right,
-      leftText: asText(relation.leftText || relation.leftStatement, left?.statement || 'Déclaration non récupérée.'),
-      rightText: asText(relation.rightText || relation.rightStatement, right?.statement || 'Déclaration non récupérée.'),
+      leftText: left.statement,
+      rightText: right.statement,
       label: asText(relation.label || relation.title || relation.explanation, type === 'qualifies' ? 'Portée de la preuve à nuancer' : 'Contradiction détectée')
     });
   }).filter(Boolean);
@@ -180,7 +182,8 @@ export function normalizeNarrativeArchivesUiStateV68(rawState = {}) {
     const unlockFlag = asText(decision.routeUnlockFlag || decision.unlockFlag || decision.flag);
     const applied = Boolean(decision.selected || decision.applied || decision.completed || completedDecisionIds.has(id) || (unlockFlag && unlockedFlags.has(unlockFlag)));
     const lockedByChoice = Boolean(decision.lockedByChoice);
-    const available = decision.available === undefined ? requirements.every((requirement) => evidenceIds.has(requirement)) : Boolean(decision.available);
+    const available = decision.available !== false && !applied && !lockedByChoice
+      && requirements.every((requirement) => evidenceIds.has(requirement));
     return Object.freeze({
       id,
       label: asText(decision.label || decision.title, 'CONFRONTER LES DONNÉES'),
@@ -313,7 +316,10 @@ export class NarrativeArchivesUiV68 {
     this.render();
     try {
       const result = await callback(id);
-      this.lastStatus = asText(result?.message || result?.result, kind === 'read' ? 'Dossier marqué comme lu.' : 'Conclusion enregistrée.');
+      const rejected = result === false || result?.applied === false || result?.ok === false;
+      const fallback = rejected ? 'Action non appliquée.' : result === null || result === undefined
+        ? 'Aucune modification confirmée.' : kind === 'read' ? 'Dossier marqué comme lu.' : 'Conclusion enregistrée.';
+      this.lastStatus = asText(result?.message || (typeof result?.result === 'string' ? result.result : ''), fallback);
       return result;
     } catch (error) {
       this.lastStatus = asText(error?.message, 'Action impossible.');
@@ -594,6 +600,7 @@ export class MissionArchiveOverlayV68 {
     if (!this.openState) {
       this.active = true;
       this.previousPaused = Boolean(this.engine.paused);
+      this.previousFocusLossVersionV72 = this.engine.focusLossVersionV72;
       const activeElement = this.document?.activeElement;
       this.previousFocus = activeElement && !this.root.contains(activeElement) ? activeElement : this.canvas;
       this.previousRootState = {
@@ -601,7 +608,8 @@ export class MissionArchiveOverlayV68 {
         ariaHidden: this.root.getAttribute?.('aria-hidden')
       };
       this.engine.paused = true;
-      this.engine.keys?.clear?.();
+      if (this.engine.clearGameplayInput) this.engine.clearGameplayInput();
+      else this.engine.keys?.clear?.();
       this.previousBackgroundStates = this.backgrounds.map((element) => ({
         element,
         ariaHidden: element.getAttribute?.('aria-hidden'),
@@ -635,13 +643,14 @@ export class MissionArchiveOverlayV68 {
       else state.element.removeAttribute?.('inert');
       state.element.inert = state.inertProperty;
     }
-    if (this.engine.running && this.previousPaused !== null) this.engine.paused = this.previousPaused;
+    if (this.engine.running && this.previousPaused !== null && this.previousFocusLossVersionV72 === this.engine.focusLossVersionV72) this.engine.paused = this.previousPaused;
     const focusTarget = this.previousFocus?.isConnected === false ? this.canvas : (this.previousFocus || this.canvas);
     this.previousPaused = null;
     this.previousBackgroundStates = [];
     this.previousFocus = null;
     this.previousRootState = null;
-    this.engine.keys?.clear?.();
+    if (this.engine.clearGameplayInput) this.engine.clearGameplayInput();
+    else this.engine.keys?.clear?.();
     if (restoreFocus && this.engine.running) focusTarget.focus?.({ preventScroll: true });
     return true;
   }

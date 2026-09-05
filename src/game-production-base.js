@@ -177,7 +177,7 @@ export class GameEngine extends FinalGameEngine {
   bind() {
     super.bind();
     globalThis.addEventListener('keydown', (event) => {
-      if (!this.running || event.repeat || event.code !== 'KeyX') return;
+      if (!this.running || !this.canRouteGameplayKey(event) || event.repeat || event.code !== 'KeyX') return;
       if (this.activateNeuroCountermeasure(this.player)) event.preventDefault();
     });
   }

@@ -465,11 +465,12 @@ test('le HUD V71 dessine un seul prompt à la fois dans le hub et dans l’annex
   prompts = trace.texts.map(([text]) => String(text)).filter((text) => text.startsWith('E — '));
   assert.equal(prompts.length, 1, prompts.join(' | '));
   assert.match(prompts[0], /INDEXER LES PREUVES/);
-  const propDraw = trace.drawImages.find(([image, , , width, height]) => image?.currentSrc?.endsWith('/prop.webp')
-    && Number.isFinite(width) && Number.isFinite(height));
+  const propDraw = trace.drawImages.find(([image]) => image?.currentSrc?.endsWith('/prop.webp'));
   assert.ok(propDraw, 'la couche prop doit être dessinée dans le sous-niveau');
-  assert.ok(propDraw[3] >= 300 && propDraw[3] <= 336, `prop trop large: ${propDraw[3]}`);
-  assert.ok(propDraw[4] <= 270, `prop trop haut: ${propDraw[4]}`);
+  assert.equal(propDraw.length, 9, 'le cadrage doit utiliser les bornes alpha de la source');
+  assert.equal(propDraw[7], archives.station.bounds.w);
+  assert.equal(propDraw[8], archives.station.bounds.h);
+  assert.equal(propDraw[6] + propDraw[8], archives.world.floorY, 'le pied visible ne doit pas flotter');
 }));
 
 test('l’API publique confirme aussi un état pur et refuse une activation runtime hors portée', () => withRuntime(() => {
@@ -503,4 +504,95 @@ test('les conduits et les seize routines V62 restent actifs hors des annexes', (
   hub.update(0.24);
   hub.update(0.24);
   assert.equal(hub.ventActorV62.ventTransit.phase, 'at-node');
+}));
+
+test('les dix échelles autorisent montée complète, sortie latérale et saut sans capturer le joueur', () => withRuntime(() => {
+  for (const annex of HUB_ANNEXES_V71) {
+    const { hub } = createHub();
+    hub.start(parentState(annex));
+    placeAtParentDoor(hub, annex);
+    hub.interact();
+    finishTransition(hub);
+    const ladder = annex.ladders[0];
+    const x = ladder.x + ladder.w / 2 - hub.player.w / 2;
+    Object.assign(hub.player, { x, y: ladder.bottom - hub.player.h, climbing: false, grounded: true, vx: 0, vy: 0 });
+    hub.setControl('up', true);
+    hub.keys.add('KeyW');
+    for (let i = 0; i < 70; i += 1) hub.update(1 / 60);
+    hub.keys.clear();
+    assert.ok(Math.abs(hub.player.y + hub.player.h - ladder.top) < 2, annex.id);
+    const dismount = annex.entranceSide === 'west' ? 'left' : 'right';
+    hub.setControl(dismount, true);
+    for (let i = 0; i < 20; i += 1) hub.update(1 / 60);
+    assert.equal(hub.player.climbing, false, annex.id);
+    assert.ok(Math.abs(hub.player.x - x) > 15, annex.id);
+    hub.keys.clear();
+    Object.assign(hub.player, { x, y: 430, climbing: true, grounded: false, vx: 0, vy: 0 });
+    hub.setControl('jump', true);
+    hub.update(1 / 60);
+    assert.equal(hub.player.climbing, false, annex.id);
+    assert.ok(hub.player.vy < 0, annex.id);
+    hub.stop(false);
+  }
+}));
+
+test('les plafonds solides bloquent la tête même après une frame longue et les passerelles restent à sens unique', () => withRuntime(() => {
+  const annex = HUB_ANNEXES_V71.find((entry) => entry.id === 'logistics');
+  const { hub } = createHub();
+  hub.start(parentState(annex));
+  placeAtParentDoor(hub, annex);
+  hub.interact();
+  finishTransition(hub);
+  const rib = annex.colliders.find((entry) => entry.role === 'structure');
+  Object.assign(hub.player, { x: rib.x + 4, y: annex.world.floorY - hub.player.h, vx: 0, vy: 0, grounded: true, climbing: false });
+  hub.setControl('jump', true);
+  hub.update(0.25);
+  assert.ok(hub.player.y >= rib.y + rib.h, 'la tête ne traverse pas la nervure');
+  assert.ok(hub.player.y + hub.player.h <= annex.world.floorY + 1);
+  hub.keys.clear();
+  const catwalk = annex.platforms.find((entry) => entry.role === 'catwalk');
+  Object.assign(hub.player, { x: catwalk.x + 8, y: annex.world.floorY - hub.player.h, vx: 0, vy: 0, grounded: true, climbing: false });
+  hub.setControl('jump', true);
+  for (let i = 0; i < 30; i += 1) hub.update(1 / 60);
+  assert.ok(hub.player.y < catwalk.y, 'la tête traverse la passerelle depuis dessous sans collision plafond');
+}));
+
+test('le foreground est un prop ancré de taille humaine et tous les accessoires déclarés possèdent un bitmap rendu', () => withRuntime(() => {
+  for (const annex of HUB_ANNEXES_V71) {
+    const trace = { texts: [], drawImages: [] };
+    const { hub } = createHub({}, trace);
+    hub.start(parentState(annex));
+    placeAtParentDoor(hub, annex);
+    hub.interact();
+    finishTransition(hub);
+    trace.drawImages.length = 0;
+    hub.draw();
+    const foreground = trace.drawImages.find(([image]) => image?.currentSrc === annex.art.foreground);
+    assert.ok(foreground, annex.id);
+    assert.equal(foreground.length, 9);
+    assert.ok(foreground[7] <= 240 && foreground[8] <= 212, 'pas d’objet géant étiré plein-écran');
+    assert.ok(Math.abs(foreground[3] / foreground[4] - foreground[7] / foreground[8]) < 0.001, 'aspect conservé');
+    for (const prop of annex.props) {
+      const asset = prop.asset || annex.art[prop.artRole];
+      assert.ok(asset, `aucun bitmap: ${prop.id}`);
+      assert.ok(trace.drawImages.some(([image]) => image?.currentSrc === asset), `non dessiné: ${prop.id}`);
+      if (prop.collidable) assert.ok(annex.colliders.some((entry) => entry.x === prop.x && entry.y === prop.y && entry.w === prop.w && entry.h === prop.h), `collider fantôme: ${prop.id}`);
+    }
+    hub.stop(false);
+  }
+}));
+
+test('le joueur et les PNJ humains du hub partagent le même étalon de rendu sans grandissement arbitraire', () => withRuntime(() => {
+  const trace = { texts: [], drawImages: [] };
+  const { hub } = createHub({}, trace);
+  hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
+  trace.drawImages.length = 0;
+  hub.draw();
+  const playerDraw = trace.drawImages.find(([image]) => image === hub.playerSheet);
+  assert.ok(playerDraw);
+  assert.equal(playerDraw[8], 128);
+  const npcSources = new Set([...hub.npcImagesBySheetId.values()]);
+  const npcDraws = trace.drawImages.filter(([image]) => npcSources.has(image));
+  assert.ok(npcDraws.length >= 4);
+  for (const npcDraw of npcDraws) assert.equal(npcDraw[8], playerDraw[8]);
 }));

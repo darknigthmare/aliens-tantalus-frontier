@@ -43,12 +43,15 @@ function captureActor(actor, enabled = true) {
   };
 }
 
-function restoreActor(actor, source) {
+function restoreActor(actor, source, weaponRuntime) {
   if (!actor || !isRecord(source)) return false;
   actor.x = bounded(source.x, actor.x, 0, WORLD_WIDTH - Math.max(1, actor.w || 1));
   actor.y = bounded(source.y, actor.y, 0, WORLD_HEIGHT);
   actor.armor = bounded(source.armor, actor.armor, 0, Math.max(0, Number(actor.maxArmor) || 100));
-  actor.ammo = integer(source.ammo, actor.ammo, 0, Math.max(1, Number(actor.magazineSize) || 999));
+  // The actor is initially spawned with a sidearm. Restore the equipped magazine before its rounds.
+  if (actorWeapons.has(source.weapon)) actor.weaponMode = source.weapon;
+  actor.magazineSize = actor.weaponMode === 'rifle' ? integer(weaponRuntime?.magazine, 30, 1, 200) : 12;
+  actor.ammo = integer(source.ammo, actor.ammo, 0, actor.magazineSize);
   actor.ammoReserve = integer(source.ammoReserve, actor.ammoReserve, 0, 99999);
   actor.kills = integer(source.kills, actor.kills, 0, 999999);
   actor.weaponMode = actorWeapons.has(source.weapon) ? source.weapon : actorWeapons.has(source.weaponMode) ? source.weaponMode : actor.weaponMode;
@@ -189,6 +192,7 @@ export class GameEngine extends ProductionBaseEngine {
       archiveTerminal: this.archiveTerminal ? { id: safeId(this.archiveTerminal.id), recovered: Boolean(this.archiveTerminal.recovered) } : null,
       enemies: asList(this.enemies).map((enemy) => ({
         id: safeId(enemy.id),
+        ...(enemy.royalScaleV72 ? { bodyHeight: enemy.h } : {}),
         alive: Boolean(enemy.alive),
         health: bounded(enemy.health, 0, 0, Math.max(1, Number(enemy.maxHealth) || 1)),
         x: bounded(enemy.x, 0, 0, WORLD_WIDTH),
@@ -242,8 +246,8 @@ export class GameEngine extends ProductionBaseEngine {
     if (!identityMatches(this.resumeIdentity || {}, rawState.identity)) return { applied: false, reason: 'identity-mismatch', restored: 0 };
     let restored = 0;
 
-    if (restoreActor(this.player, rawState.player)) restored += 1;
-    if (restoreActor(this.coop, rawState.coop)) restored += 1;
+    if (restoreActor(this.player, rawState.player, this.weaponRuntime)) restored += 1;
+    if (restoreActor(this.coop, rawState.coop, this.weaponRuntime)) restored += 1;
     if (isRecord(rawState.coop) && typeof rawState.coop.enabled === 'boolean') this.coopEnabled = rawState.coop.enabled;
 
     if (isRecord(rawState.checkpoint)) {
@@ -287,6 +291,11 @@ export class GameEngine extends ProductionBaseEngine {
       if (!enemy || !isRecord(source)) continue;
       enemy.x = bounded(source.x, enemy.x, 0, WORLD_WIDTH - Math.max(1, enemy.w || 1));
       enemy.y = bounded(source.y, enemy.y, 0, WORLD_HEIGHT);
+      if (enemy.royalScaleV72) {
+        // V71 royal actors used a 112px body. Migrate their feet, not their old top-left corner.
+        const savedHeight = bounded(source.bodyHeight, 112, 1, WORLD_HEIGHT);
+        enemy.y = clamp(enemy.y + savedHeight - enemy.h, 0, WORLD_HEIGHT - enemy.h);
+      }
       enemy.facing = Number(source.facing) < 0 ? -1 : 1;
       enemy.alert = Boolean(source.alert);
       enemy.revealed = bounded(source.revealed, enemy.revealed || 0, 0, 120);

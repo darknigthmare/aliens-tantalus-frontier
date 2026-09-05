@@ -21,6 +21,7 @@ import {
 import { cancelFacehuggerAttackV65 } from './enemy-facehugger-combat-v65.js';
 import { cancelEnemyBatchAttackV66, isEnemyBatchCombatV66, selectEnemyBatchTargetV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
+import { findLargeMissionActorPlacementV72, isLargeMissionActorV72, largeMissionActorFitsV72 } from './mission-large-actor-placement-v72.js';
 
 const WORLD_WIDTH = 6200;
 const WORLD_HEIGHT = 1080;
@@ -638,7 +639,7 @@ export function withV52LevelRuntime(BaseEngine) {
       this.enemies = [...activeEnemies, ...(boss ? [boss] : [])];
       const keyCarrier = activeEnemies.find((enemy) => enemy.alive) || null;
       if (keyCarrier) keyCarrier.keyCarrier = true;
-      for (const enemy of this.enemies.filter((candidate) => candidate.alive)) this.initializeEnemyMissionNavigation(enemy);
+      for (const enemy of this.enemies.filter((candidate) => candidate.alive || candidate.dormant)) this.initializeEnemyMissionNavigation(enemy);
     }
 
     missionLevelSurfaceFor(entity, { tolerance = 34, includeLifts = true, preferId = null } = {}) {
@@ -676,6 +677,16 @@ export function withV52LevelRuntime(BaseEngine) {
 
     initializeEnemyMissionNavigation(enemy) {
       if (!enemy) return null;
+      if (isLargeMissionActorV72(enemy)) {
+        const geometry = { platforms: this.platforms, doors: this.doors, ...this.missionLevelBounds };
+        const placement = findLargeMissionActorPlacementV72(enemy, geometry, {
+          x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h, zoneId: enemy.levelZoneId
+        });
+        enemy.largeActorPlacementV72 = placement ? { valid: true, surfaceId: placement.surfaceId } : { valid: false, reason: 'no-safe-large-actor-surface' };
+        if (placement) {
+          Object.assign(enemy, { x: placement.x, y: placement.y, groundY: placement.groundY, spawnX: placement.x, levelZoneId: placement.zoneId });
+        }
+      }
       const surface = this.missionLevelSurfaceFor(enemy, { tolerance: 48 }) || this.missionLevelSurfaceNear(enemy);
       if (surface) {
         enemy.y = surface.y - enemy.h;
@@ -764,6 +775,12 @@ export function withV52LevelRuntime(BaseEngine) {
       }
       enemy.y = surface.y - enemy.h;
       enemy.groundY = surface.y;
+      if (isLargeMissionActorV72(enemy) && !largeMissionActorFitsV72(enemy, { platforms: this.platforms, doors: this.doors, ...this.missionLevelBounds })) {
+        enemy.x = previousX;
+        enemy.y = previousY;
+        enemy.groundY = previousY + enemy.h;
+        return false;
+      }
       navigation.surfaceId = surface.id;
       navigation.lastSafeX = enemy.x;
       navigation.lastSafeY = enemy.y;
@@ -771,6 +788,9 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     advanceEnemyMissionNavigation(enemy, target, currentSurface, targetSurface, delta) {
+      // A royal body cannot board a 120 px lift or use a humanoid ladder.
+      // Keep its full physical scale in the reachable open arena instead.
+      if (isLargeMissionActorV72(enemy)) return false;
       const navigation = enemy.levelNavigation || (this.initializeEnemyMissionNavigation(enemy), enemy.levelNavigation);
       if (navigation.mode === 'ladder') {
         const ladder = (this.ladders || []).find((entry) => entry.id === navigation.connectorId);
@@ -890,7 +910,8 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     damagePlayer(actor, amount, options = {}) {
-      if (actor?.ventTransit?.networkId === this.missionVentNetworkV62?.id) return 0;
+      if (actor?.ventTransit && this.missionVentNetworkV62
+        && actor.ventTransit.networkId === this.missionVentNetworkV62.id) return 0;
       return super.damagePlayer(actor, amount, options);
     }
 
@@ -1281,7 +1302,8 @@ export function withV52LevelRuntime(BaseEngine) {
         return;
       }
       if (!this.missionLevelRuntime || !enemy) return super.updateEnemy(enemy, delta);
-      if (enemy.ventTransit?.networkId === this.missionVentNetworkV62?.id) {
+      if (enemy.ventTransit && this.missionVentNetworkV62
+        && enemy.ventTransit.networkId === this.missionVentNetworkV62.id) {
         cancelFacehuggerAttackV65(this, enemy, 'enemy-in-vent');
         cancelEnemyBatchAttackV66(this, enemy, 'enemy-in-vent');
         return;
@@ -1362,6 +1384,12 @@ export function withV52LevelRuntime(BaseEngine) {
       const support = this.missionLevelSurfaceFor(enemy, { tolerance: 42, preferId: navigation.surfaceId });
       if (support) {
         enemy.y = support.y - enemy.h;
+        if (isLargeMissionActorV72(enemy) && !largeMissionActorFitsV72(enemy, { platforms: this.platforms, doors: this.doors, ...this.missionLevelBounds })) {
+          enemy.x = previous.x;
+          enemy.y = previous.y;
+          enemy.groundY = previous.y + enemy.h;
+          return result;
+        }
         enemy.groundY = support.y;
         navigation.surfaceId = support.id;
         navigation.lastSafeX = enemy.x;
@@ -1975,6 +2003,9 @@ export function withV52LevelRuntime(BaseEngine) {
 
     applyResumeState(rawState) {
       const result = super.applyResumeState(rawState);
+      // Level state belongs to the same mission transaction. A rejected base
+      // save must not silently restore its doors, hazards, events or timers.
+      if (!result.applied) return { ...result, missionLevelRestored: false, missionLevelReason: 'base-resume-rejected' };
       const source = rawState?.missionLevel;
       if (!source || !this.missionLevelRuntime) return result;
       if (source.signature && source.signature !== this.missionLevelRuntime.signature) return { ...result, missionLevelRestored: false, missionLevelReason: 'signature-mismatch' };

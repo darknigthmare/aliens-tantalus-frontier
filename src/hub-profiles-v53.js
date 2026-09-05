@@ -24,7 +24,7 @@ export const HUB_ROOM_PROFILES = Object.freeze({
   medical: defineRoomProfile(1.04, 0.825, 184, 44),
   'science-lab': defineRoomProfile(1.03, 0.820, 174, 68),
   quarantine: defineRoomProfile(1.02, 0.830, 150, 104),
-  armory: defineRoomProfile(1.05, 0.820, 520, 136),
+  armory: defineRoomProfile(1.05, 0.820, 340, 80),
   workshop: defineRoomProfile(1.04, 0.820, 184, 64),
   'vehicle-bay': defineRoomProfile(1.00, 0.825, 204, 42),
   'dropship-hangar': defineRoomProfile(1.00, 0.825, 204, 42),

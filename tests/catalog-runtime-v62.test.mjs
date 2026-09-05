@@ -270,6 +270,7 @@ test('les alias d’équipement gardent une vignette déterministe même sans cl
 });
 
 test('les lectures inconnues retournent null ou une liste vide et les résultats sont immuables', () => {
+  assert.equal(searchCatalogV62('enemy', { catalog: 'enemies', limit: CATALOG_RECORDS_V62.length }).length, 571, 'all matching enemies remain searchable beyond the old 250 ceiling');
   assert.equal(getCatalogEntryV62('missing-entry'), null);
   assert.equal(getCatalogNodeV62('missing-node'), null);
   assert.equal(getCatalogPathV62('missing-entry'), null);

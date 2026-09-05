@@ -198,6 +198,13 @@
   contain: paint;
 }
 
+.catalog-v72__world-media { display: flex; align-items: flex-end; justify-content: center; height: 175px; padding-bottom: 18px; }
+.catalog-v72__world-sprite { max-width: none; border: 0; background: none; }
+.catalog-v72__comparison { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; max-width: 100%; padding: 6px 0 10px; }
+.catalog-v72__comparison-item { flex: 0 0 auto; min-width: 0; text-align: center; font: 700 9px/1.4 var(--mono, monospace); }
+.catalog-v72__comparison-item > span { display: block; overflow-wrap: anywhere; }
+.catalog-v72__comparison-plane { display: flex; align-items: flex-end; justify-content: center; height: 132px; border-bottom: 1px solid #72937e; margin-bottom: 8px; }
+
 .catalog-v62__sprite--detail {
   width: 138px;
   flex: 0 0 138px;
@@ -487,7 +494,10 @@
     grid-column: 1 / -1;
     border-top: 1px solid var(--catalog-v62-line);
     border-left: 0;
+    scroll-margin-top: 96px;
   }
+
+  .catalog-v62__results { max-height: 480px; }
 }
 
 @media (max-width: 640px) {
@@ -496,7 +506,7 @@
   }
 
   .catalog-v62__tree {
-    max-height: 260px;
+    max-height: 160px;
     border-right: 0;
     border-bottom: 1px solid var(--catalog-v62-line);
   }
@@ -504,6 +514,8 @@
   .catalog-v62__card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .catalog-v62__results { max-height: 360px; }
 
   .catalog-v62__detail-header {
     align-items: flex-start;

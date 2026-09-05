@@ -67,8 +67,8 @@ export const ENEMY_VISUAL_OVERRIDES_V56 = Object.freeze({
     sheetId: 'enemy.xenomorph-queen.action.v56',
     path: '/assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png',
     hitboxId: 'queen-standing',
-    width: 224,
-    height: 170,
+    width: 448,
+    height: 340,
     baseProfileId: 'enemy-008-queen'
   }),
   Xenoborg: override({

@@ -35,7 +35,9 @@ test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les a
     'assets/openai/sprites/normalized/enemy-motion-v66/enemy-001-ovomorph/sealed.webp',
     'assets/openai/sprites/frames/v69/alpha-bravo-source.png',
     'assets/openai/sprites/metadata/v69/alpha-bravo-report.json',
-    'assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png'
+    'assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png',
+    'assets/openai/sprites/frames/v72/props/operations-table-side-v72-source.png',
+    'assets/openai/sprites/frames/v72/enemy-083-albino-dust-runner/qa-candidates/atlas.webp'
   ];
   const runtimeFiles = [
     'src/app.js',
