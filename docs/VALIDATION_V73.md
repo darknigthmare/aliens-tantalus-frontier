@@ -27,4 +27,18 @@ Preuves dans le dépôt (volontairement exclues du site public) :
 
 ## Publication
 
-Le commit et le déploiement de cette livraison doivent encore être confirmés. Les vérifications locales ci-dessus ne sont pas présentées comme des contrôles de production.
+Commits `bbcdfbd` (lot et intégration) et `c6bbf12` (préservation exacte de la preuve de réparation051) poussés sur `codex/v52-physical-worlds`, dépôt privé `darknigthmare/aliens-tantalus-frontier`.
+
+La copie propre de publication, au commit `c6bbf12`, a passé de nouveau : queue, instantané V73, manifeste, normaliseur055, lint290, suite globale1 067 réussis/1 ignoré/0 échec et build73.0.0. Une normalisation Git des fins de ligne de la preuve051 a été détectée dans cette copie puis corrigée sans changer la source ni réécrire son empreinte historique.
+
+Déploiement Vercel confirmé **Ready**, `dpl_CgLwdrSKobn2z3CeHvQwnMCZ13Y7`, version73.0.0 construite à `2026-09-05T18:42:14.953Z` depuis cette copie propre.
+
+- Site : https://aliens-tantalus-frontier.vercel.app
+- Déploiement immuable : https://aliens-tantalus-frontier-paje5gkm5-darknigthmares-projects.vercel.app
+- `/`, `/build-info.json`, `/sw.js`, atlas runtime055 : HTTP200. Empreinte publique055 identique à l'acceptée : `c2ed130649fc57aeaf0509376f7601eb8987c853914595e5231689f636709ede`.
+- Cache du service worker : `atf-v73-enemy-055-shell-1`.
+- Ancien move055 refusé, candidat054 et reçu de génération055 : HTTP404, exclusions confirmées.
+
+Recette sur le site public : accueil → continuer → hub → commandement → xénobiologie → recherche Albino Chestburster. À1280×900, les32 indices de l'atlas ont été observés : idle0–7, move8–15, attack16–23, death24–31. L'attaque et la mort terminent à23 et31, sans reboucler. Le bon WebP est chargé; aucun débordement horizontal ni erreur JavaScript de l'application relevé. Capture de mort inspectée avec les quatre silhouettes à échelle commune. Résultats exacts et captures dans `references/v73-next50-audit/054-055/production-browser.json`, `production-055-idle.png`, `production-055-death.png` (dépôt seulement).
+
+La mise à jour documentaire de ces résultats intervient après le déploiement; elle ne constitue pas une seconde version du code de jeu publié. Les49 autres profils de ce lot restent non finalisés.
