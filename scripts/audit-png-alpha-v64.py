@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import subprocess
 from collections import Counter
 from pathlib import Path
 
@@ -29,7 +30,7 @@ V64_SHEET_IDS = {
 }
 IGNORED_PRODUCTION_PREFIXES = tuple(
     f"sprites/{directory}/{version}/"
-    for version in ("v65", "v66")
+    for version in ("v65", "v66", "v73", "v74")
     for directory in ("frames", "reference-masters", "previews", "metadata")
 ) + (
     "sprites/normalized/enemy-clips-v66/",
@@ -45,6 +46,45 @@ def load_base_audit():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def build_scoped_report(asset_root: Path, manifest_path: Path, repository_root: Path = ROOT) -> dict:
+    """Keep runtime checks strict without counting unpublished local backups.
+
+    Git controls only the inventory of non-runtime masters/unclassified files.
+    Every runtime-classified PNG is audited, including newly untracked files.
+    A source export without .git retains the deterministic filesystem scan.
+    """
+    audit = load_base_audit()
+    exclusions = list(IGNORED_PRODUCTION_PREFIXES)
+    if (repository_root / ".git").exists():
+        relative_root = asset_root.resolve().relative_to(repository_root.resolve()).as_posix()
+        result = subprocess.run(
+            ["git", "-C", str(repository_root), "ls-files", "-z", "--", relative_root],
+            capture_output=True, check=False,
+        )
+        if result.returncode:
+            raise RuntimeError("Cannot inspect Git PNG inventory: " + result.stderr.decode("utf-8", errors="replace"))
+        tracked = {
+            (repository_root / name.decode("utf-8")).resolve()
+            for name in result.stdout.split(b"\0") if name
+        }
+        normalized = audit.normalized_contracts(audit.load_manifest(manifest_path))
+        paths = list(asset_root.rglob("*.png"))
+        runtime_paths = [path.relative_to(asset_root).as_posix() for path in paths
+            if audit.classify_asset(audit.canonical_asset_path(path, asset_root), normalized) is not None]
+        for path in paths:
+            relative = path.relative_to(asset_root).as_posix()
+            if relative.startswith(IGNORED_PRODUCTION_PREFIXES) or path.resolve() in tracked:
+                continue
+            canonical = audit.canonical_asset_path(path, asset_root)
+            if audit.classify_asset(canonical, normalized) is None:
+                # The shared API accepts prefixes. A pathological filename
+                # collision must fail instead of masking a runtime PNG sibling.
+                if any(runtime.startswith(relative) for runtime in runtime_paths):
+                    raise RuntimeError("Unpublished PNG prefix overlaps a runtime asset: " + relative)
+                exclusions.append(relative)
+    return audit.build_report(asset_root, manifest_path, ignored_production_prefixes=tuple(exclusions))
 
 
 def parse_args() -> argparse.Namespace:
@@ -105,7 +145,7 @@ def main() -> None:
     # Future production candidates are not V64 runtime PNGs. The separate
     # V65/V66 gates verify accepted WebP pixels, alpha, cell geometry and sources.
     # Ignore production candidates before even the historical excluded count.
-    report = audit.build_report(audit.ASSET_ROOT, audit.MANIFEST, ignored_production_prefixes=IGNORED_PRODUCTION_PREFIXES)
+    report = build_scoped_report(audit.ASSET_ROOT, audit.MANIFEST)
     add_v64_cell_quality(report)
     report["release"] = "v64"
     report["generatedBy"] = "scripts/audit-png-alpha-v64.py"

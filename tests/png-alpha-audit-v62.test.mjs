@@ -135,11 +135,12 @@ test('V62 PNG audit separates opaque scenes and catches alpha/grid failures', as
   }
 });
 
-test('V64 historical PNG audit ignores V66 production before counting audited and excluded masters', async () => {
+test('V64 historical PNG audit ignores V65/V66/V73/V74 production before all counters', async () => {
   const fixture = await mkdtemp(join(tmpdir(), 'atf-v66-png-isolation-'));
   try {
     const png = encodePng(32, 32, 4, (x, y) => x >= 8 && x < 24 && y >= 8 && y < 24 ? [32, 48, 56, 255] : [0, 0, 0, 0]);
-    const ignored = ['frames', 'reference-masters', 'previews', 'metadata'].map((directory) => `sprites/${directory}/v66/fixture.png`);
+    const ignored = ['v65', 'v66', 'v73', 'v74'].flatMap((version) =>
+      ['frames', 'reference-masters', 'previews', 'metadata'].map((directory) => `sprites/${directory}/${version}/fixture.png`));
     ignored.push('sprites/frames/v66/batch-001/enemy-001-ovomorph/rejected/failed.png', 'sprites/normalized/enemy-clips-v66/fixture.png', 'sprites/normalized/enemy-motion-v66/fixture.png', 'sprites/normalized/enemy-profiles-v66/unaccepted.png');
     for (const path of [...ignored, 'sprites/normalized/player/runtime.png']) await put(fixture, path, png);
     const manifestPath = join(fixture, 'manifest.json');
@@ -163,4 +164,67 @@ test('V64 historical PNG audit ignores V66 production before counting audited an
     assert.equal(report.paths.length, 1);
     assert.match(report.paths[0], /sprites\/normalized\/player\/runtime\.png$/);
   } finally { await rm(fixture, { recursive: true, force: true }); }
+});
+
+test('V64 Git/export inventory ignores unpublished non-runtime PNGs but audits untracked runtime errors', async () => {
+  const fixture = await mkdtemp(join(tmpdir(), 'atf-v64-git-png-scope-'));
+  const repo = join(fixture, 'repo');
+  const exported = join(fixture, 'export');
+  const transparent = encodePng(32, 32, 4, (x,y) => x>=8 && x<24 && y>=8 && y<24 ? [32,48,56,255] : [0,0,0,0]);
+  const white = encodePng(32, 32, 4, () => [255,255,255,255]);
+  const manifest = JSON.stringify({ contracts: { grids: { fixture: { columns:1, rows:1, cellWidth:32, cellHeight:32, guard:1 } } },
+    sheets: [{ id:'fixture.runtime', grid:'fixture', files:{ normalized:'/assets/openai/sprites/normalized/player/runtime.png' } }] });
+  const audit = (directory) => {
+    const program = [
+      'import importlib.util,json,sys', 'from pathlib import Path', "sys.path.insert(0,'scripts')",
+      "spec=importlib.util.spec_from_file_location('v64_scope','scripts/audit-png-alpha-v64.py')",
+      'module=importlib.util.module_from_spec(spec)', 'spec.loader.exec_module(module)',
+      `root=Path(${JSON.stringify(directory)})`,
+      "print(json.dumps(module.build_scoped_report(root/'assets/openai',root/'assets/openai/sprites/manifest.json',root)))",
+    ].join('\n');
+    const result = spawnSync(process.platform==='win32'?'py':'python3',['-c',program],{encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr||result.stdout);
+    return JSON.parse(result.stdout);
+  };
+  try {
+    for (const directory of [repo,exported]) {
+      await put(directory,'assets/openai/sprites/normalized/player/runtime.png',transparent);
+      await put(directory,'assets/openai/sprites/raw/tracked-master.png',white);
+      await put(directory,'assets/openai/unused-master.png',white);
+      await put(directory,'assets/openai/sprites/manifest.json',manifest);
+    }
+    for (const args of [['init',repo],['-C',repo,'add','assets']]) {
+      const result=spawnSync('git',args,{encoding:'utf8'});
+      assert.equal(result.status,0,result.stderr||result.stdout);
+    }
+    await put(repo,'assets/openai/sprites/raw/tools/local-backup.png',white);
+    await put(repo,'assets/openai/sprites/normalized/equipment/unaccepted.png',white);
+    await put(repo,'assets/openai/sprites/frames/v66/batch-005/local-candidate.png',white);
+    await put(repo,'assets/openai/sprites/frames/v74/rejected.png',white);
+    const trackedReport=audit(repo);
+    assert.deepEqual(trackedReport,audit(exported),'same tracked assets produce byte-equivalent report content without Git');
+    assert.equal(trackedReport.summary.assetsAudited,1);
+    assert.equal(trackedReport.summary.rawMastersExcluded,1);
+    assert.equal(trackedReport.summary.unclassifiedNotAsserted,1);
+    assert.equal(trackedReport.summary.pngFilesDiscovered,3);
+    await put(repo,'assets/openai/hub/props/untracked-clean.png',white);
+    const changed=audit(repo);
+    assert.equal(changed.summary.assetsAudited,2,'new untracked runtime prop is not hidden by Git filtering');
+    assert.ok(changed.summary.findings.error>0,'opaque white runtime prop must still fail alpha QA');
+    assert.ok(changed.assets.some(asset=>asset.path.endsWith('/hub/props/untracked-clean.png')));
+    const declared = JSON.parse(manifest);
+    declared.sheets.push({ id:'fixture.newly-declared', grid:'fixture',
+      files:{normalized:'/assets/openai/sprites/normalized/equipment/unaccepted.png'} });
+    await put(repo,'assets/openai/sprites/manifest.json',JSON.stringify(declared));
+    const manifestDeclared=audit(repo);
+    assert.equal(manifestDeclared.summary.assetsAudited,3,'a newly manifest-declared PNG is audited even while untracked');
+    assert.ok(manifestDeclared.assets.find(asset=>asset.path.endsWith('/equipment/unaccepted.png')).findings.some(finding=>finding.severity==='error'));
+    const colliding = JSON.parse(manifest);
+    colliding.sheets.push({ id:'fixture.prefix-sibling',grid:'fixture',
+      files:{normalized:'/assets/openai/sprites/normalized/equipment/unaccepted.png-runtime.png'} });
+    await put(repo,'assets/openai/sprites/normalized/equipment/unaccepted.png-runtime.png',white);
+    await put(repo,'assets/openai/sprites/manifest.json',JSON.stringify(colliding));
+    assert.throws(()=>audit(repo),/Unpublished PNG prefix overlaps a runtime asset/,
+      'a pathological untracked filename must not hide a runtime sibling through prefix matching');
+  } finally { await rm(fixture,{recursive:true,force:true}); }
 });
