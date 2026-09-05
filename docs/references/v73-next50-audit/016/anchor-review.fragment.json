@@ -1,0 +1,538 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-016-burster": {
+      "status": "reviewed",
+      "reviewer": "Codex next50_art_review V73",
+      "reviewedAt": "2026-09-05",
+      "reviewedPoseCount": 32,
+      "method": "Existing 32 manually measured ribcage centers and their planted-foot or terminal-resting-body support projections were independently reinspected on the four active source boards and four marked anchor overlays. Values retained unchanged with +/-10 source pixels uncertainty. This is a quadruped grounded registration, not the Prowler airborne convention accidentally included in the older shared method text. Tail bounds never define the root. Review certifies physical registration only, not animation quality or exact canon.",
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/016/idle-physical-scale-review.jpg",
+        "docs/references/v73-next50-audit/016/move-physical-scale-review.jpg",
+        "docs/references/v73-next50-audit/016/attack-physical-scale-review.jpg",
+        "docs/references/v73-next50-audit/016/death-physical-scale-review.jpg"
+      ],
+      "clips": {
+        "idle": {
+          "sourceSha256": "cf23a2a08bdc743584ce4e8b81ce93ea499b0e449fc5613839da641f42dca18c",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "landmark": [
+                248,
+                255
+              ],
+              "anchor": [
+                248,
+                401
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 1,
+              "landmark": [
+                238,
+                252
+              ],
+              "anchor": [
+                238,
+                402
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 2,
+              "landmark": [
+                238,
+                255
+              ],
+              "anchor": [
+                238,
+                401
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 3,
+              "landmark": [
+                246,
+                256
+              ],
+              "anchor": [
+                246,
+                403
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 4,
+              "landmark": [
+                242,
+                212
+              ],
+              "anchor": [
+                242,
+                357
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 5,
+              "landmark": [
+                238,
+                212
+              ],
+              "anchor": [
+                238,
+                357
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 6,
+              "landmark": [
+                232,
+                212
+              ],
+              "anchor": [
+                232,
+                357
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 7,
+              "landmark": [
+                225,
+                215
+              ],
+              "anchor": [
+                225,
+                357
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            }
+          ]
+        },
+        "move": {
+          "sourceSha256": "5b85ad972b0434fd776a8552a45ab0d7ab9e7ee2e5e247a297d9fa60df64cbd8",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "landmark": [
+                247,
+                276
+              ],
+              "anchor": [
+                247,
+                394
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 1,
+              "landmark": [
+                253,
+                276
+              ],
+              "anchor": [
+                253,
+                391
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 2,
+              "landmark": [
+                246,
+                278
+              ],
+              "anchor": [
+                246,
+                394
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 3,
+              "landmark": [
+                248,
+                280
+              ],
+              "anchor": [
+                248,
+                392
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 4,
+              "landmark": [
+                241,
+                221
+              ],
+              "anchor": [
+                241,
+                341
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 5,
+              "landmark": [
+                240,
+                223
+              ],
+              "anchor": [
+                240,
+                345
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 6,
+              "landmark": [
+                229,
+                224
+              ],
+              "anchor": [
+                229,
+                345
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 7,
+              "landmark": [
+                231,
+                223
+              ],
+              "anchor": [
+                231,
+                351
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            }
+          ]
+        },
+        "attack": {
+          "sourceSha256": "f0cc76ff37b56ecb55b90f328aa33da02175cf2fd58e1ee789f5cd59d6fe4265",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "landmark": [
+                245,
+                274
+              ],
+              "anchor": [
+                245,
+                395
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 1,
+              "landmark": [
+                248,
+                300
+              ],
+              "anchor": [
+                248,
+                393
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 2,
+              "landmark": [
+                246,
+                286
+              ],
+              "anchor": [
+                246,
+                394
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 3,
+              "landmark": [
+                249,
+                295
+              ],
+              "anchor": [
+                249,
+                393
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 4,
+              "landmark": [
+                238,
+                228
+              ],
+              "anchor": [
+                238,
+                326
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 5,
+              "landmark": [
+                240,
+                233
+              ],
+              "anchor": [
+                240,
+                325
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 6,
+              "landmark": [
+                237,
+                226
+              ],
+              "anchor": [
+                237,
+                324
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 7,
+              "landmark": [
+                225,
+                235
+              ],
+              "anchor": [
+                225,
+                324
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            }
+          ]
+        },
+        "death": {
+          "sourceSha256": "d6417f8a916f4abf3ee2df215427bb7eeee7efc9a18b4ac8cf008a32bde22753",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "landmark": [
+                234,
+                279
+              ],
+              "anchor": [
+                234,
+                394
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 1,
+              "landmark": [
+                250,
+                313
+              ],
+              "anchor": [
+                250,
+                392
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 2,
+              "landmark": [
+                230,
+                325
+              ],
+              "anchor": [
+                230,
+                388
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 3,
+              "landmark": [
+                217,
+                334
+              ],
+              "anchor": [
+                217,
+                388
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 4,
+              "landmark": [
+                236,
+                247
+              ],
+              "anchor": [
+                236,
+                309
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 5,
+              "landmark": [
+                240,
+                255
+              ],
+              "anchor": [
+                240,
+                310
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 6,
+              "landmark": [
+                228,
+                272
+              ],
+              "anchor": [
+                228,
+                315
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            },
+            {
+              "frame": 7,
+              "landmark": [
+                232,
+                278
+              ],
+              "anchor": [
+                232,
+                315
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

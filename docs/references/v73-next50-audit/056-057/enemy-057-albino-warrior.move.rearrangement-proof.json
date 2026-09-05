@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "profileId": "enemy-057-albino-warrior",
+  "clipId": "move",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/move.png",
+  "sourceSha256": "78fd107ace41e663459bd3d3ca9b3f023a5fdb4570dac91c144657eceb3c8624",
+  "sourceSize": [
+    1774,
+    887
+  ],
+  "derivedPath": "docs/references/v73-next50-audit/056-057/enemy-057-albino-warrior.move.owned-rearranged.png",
+  "derivedSha256": "196b86cceee283f180f5a297b706010221923bbb39b4d722631369ab2766aacf",
+  "derivedSize": [
+    1774,
+    887
+  ],
+  "method": "independently-reviewed-source-spatial-ownership-and-whole-pose-integer-translation",
+  "reviewedOwnershipBasis": "Both rows: separators x444,855,1265. The third/fourth separator lies in the empty gap between pose3/7 body and pose4/8 tail; nominal x1330 cut two tail segments. Row separator y444 stays in empty space.",
+  "existingMatteRemoval": "Existing V66 border-connected+enclosed+AA key, VISUALLY REJECTED on this rose-taupe anatomy. This proof preserves only first-stage surviving foreground, not complete raw anatomy.",
+  "sourceConnectedComponentsSplit": 0,
+  "overlappingSourceForegroundPixels": 0,
+  "redraw": false,
+  "resize": false,
+  "interpolation": false,
+  "sourceFileUnchanged": true,
+  "poses": [
+    {
+      "frame": 0,
+      "firstStageKeyedForegroundBounds": [
+        86,
+        55,
+        407,
+        400
+      ],
+      "derivedForegroundBounds": [
+        86,
+        55,
+        407,
+        400
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 25451,
+      "firstStageKeyedForegroundRgbSha256": "9c463dd264f12e411ef16d536e98045068a295cd027b62e6ec5e1b603e644237",
+      "derivedForegroundRgbSha256": "9c463dd264f12e411ef16d536e98045068a295cd027b62e6ec5e1b603e644237",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 1,
+      "firstStageKeyedForegroundBounds": [
+        499,
+        55,
+        812,
+        401
+      ],
+      "derivedForegroundBounds": [
+        499,
+        55,
+        812,
+        401
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 25777,
+      "firstStageKeyedForegroundRgbSha256": "195f048c1ed54334ed279dd27eb8fff8ac6a5cb9c72f8c8a2fb0ee058d6f0b6d",
+      "derivedForegroundRgbSha256": "195f048c1ed54334ed279dd27eb8fff8ac6a5cb9c72f8c8a2fb0ee058d6f0b6d",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 2,
+      "firstStageKeyedForegroundBounds": [
+        897,
+        55,
+        1221,
+        400
+      ],
+      "derivedForegroundBounds": [
+        897,
+        55,
+        1221,
+        400
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 25389,
+      "firstStageKeyedForegroundRgbSha256": "dc18973f7a916bdbf7fb825ccdd95ab822f4354b9357602952ce2d5b1b68ff33",
+      "derivedForegroundRgbSha256": "dc18973f7a916bdbf7fb825ccdd95ab822f4354b9357602952ce2d5b1b68ff33",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 3,
+      "firstStageKeyedForegroundBounds": [
+        1318,
+        55,
+        1666,
+        400
+      ],
+      "derivedForegroundBounds": [
+        1333,
+        55,
+        1681,
+        400
+      ],
+      "integerOffset": [
+        15,
+        0
+      ],
+      "foregroundPixels": 27433,
+      "firstStageKeyedForegroundRgbSha256": "04f9121eaad6e951b89e5651e274334f877010a1a43fd4f4110cc312248f07e2",
+      "derivedForegroundRgbSha256": "04f9121eaad6e951b89e5651e274334f877010a1a43fd4f4110cc312248f07e2",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 4,
+      "firstStageKeyedForegroundBounds": [
+        51,
+        465,
+        409,
+        811
+      ],
+      "derivedForegroundBounds": [
+        51,
+        465,
+        409,
+        811
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 28455,
+      "firstStageKeyedForegroundRgbSha256": "9bdbcbe14c7c767a4d08afd0aeddd25f91438ec6a5921bff99e9924bfcb01c0d",
+      "derivedForegroundRgbSha256": "9bdbcbe14c7c767a4d08afd0aeddd25f91438ec6a5921bff99e9924bfcb01c0d",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 5,
+      "firstStageKeyedForegroundBounds": [
+        469,
+        465,
+        815,
+        810
+      ],
+      "derivedForegroundBounds": [
+        469,
+        465,
+        815,
+        810
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 26644,
+      "firstStageKeyedForegroundRgbSha256": "a9c32a9792b902dd89de96c24cc18e90e9cb588ac3b80cdb8e85a14c75b7a9f4",
+      "derivedForegroundRgbSha256": "a9c32a9792b902dd89de96c24cc18e90e9cb588ac3b80cdb8e85a14c75b7a9f4",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 6,
+      "firstStageKeyedForegroundBounds": [
+        893,
+        465,
+        1203,
+        809
+      ],
+      "derivedForegroundBounds": [
+        893,
+        465,
+        1203,
+        809
+      ],
+      "integerOffset": [
+        0,
+        0
+      ],
+      "foregroundPixels": 27092,
+      "firstStageKeyedForegroundRgbSha256": "f8a8b7ae2a7056f67f357880d2e2e5f83e0d1514c907d97db542ab1e9d2d07fd",
+      "derivedForegroundRgbSha256": "f8a8b7ae2a7056f67f357880d2e2e5f83e0d1514c907d97db542ab1e9d2d07fd",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    },
+    {
+      "frame": 7,
+      "firstStageKeyedForegroundBounds": [
+        1312,
+        465,
+        1660,
+        810
+      ],
+      "derivedForegroundBounds": [
+        1333,
+        465,
+        1681,
+        810
+      ],
+      "integerOffset": [
+        21,
+        0
+      ],
+      "foregroundPixels": 28278,
+      "firstStageKeyedForegroundRgbSha256": "a4c1c30e5364d3a62093e07c53f7ec5ad75c292f247828c6e596356b688332d3",
+      "derivedForegroundRgbSha256": "a4c1c30e5364d3a62093e07c53f7ec5ad75c292f247828c6e596356b688332d3",
+      "firstStageKeyedPixelsPreserved": true,
+      "rawAnatomicalPixelsPreserved": false
+    }
+  ],
+  "independentUniformCellSplit": "pass-eight-poses-with-default-strict-ownership",
+  "postRekeyForegroundPixels": 198755,
+  "postRekeyForegroundCountDelta": -15764,
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "artBlocker": "The existing key removes authored rose-taupe anatomy before translation, and rekeying removes more foreground. Source move also lacks demonstrated half-cycle leg exchange; physical roots and anatomical scale remain pending.",
+  "firstStageKeyedForegroundPixels": 214519,
+  "discardedDuringIntegerTranslationPixels": 0,
+  "rawAnatomicalPixelsPreserved": false,
+  "reviewStatus": "rejected-matte-damages-anatomy",
+  "safeAsProductionSource": false
+}

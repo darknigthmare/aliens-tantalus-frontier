@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-054-albino-facehugger",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v73_enemy-054-albino-facehugger_idle",
+  "providerGenerationId": null,
+  "actor": "Codex V73 next50 production",
+  "actualPromptText": "Create ONE production 2D game sprite sheet: Albino Facehugger, idle, 8 poses exactly, arranged FOUR COLUMNS by TWO ROWS in reading order on a wide 2:1 canvas. Use the two most recent reference previews ONLY: both show the locked original Facehugger anatomy. Do not borrow an egg or another previous creature. Author the albino material as described below, keeping exact base anatomy and profile. Exact systemic derivative of the validated V65 Facehugger: same low flattened central body, eight long articulated finger-like walking limbs in four bilateral pairs, paired ventral lobes/proboscis structure and one long flexible trailing tail; same realistic dimensions, motion, attack arc, scale, ground pivot and strict right-facing orientation. Albino changes only authored pigment/material response: pale warm ivory-beige flesh, translucent blush-pink joints and ventral tissue, faint cool gray folds and restrained wet highlights. Preserve readable segmentation and depth; never bleach to flat white or apply an automatic recolor. No extra limbs, new armor, eyes, mandibles, caste or official albino-model claim. All future pixels are original project adaptation art.\nAnimation: Eight distinct restrained breathing/alert phases, fixed belly height, four near-side fingers and four darker far-side fingers with unambiguous attachment. Tail makes a subtle S ripple. No translated duplicates.\nTechnical art: strict side profile facing RIGHT, stable camera and body scale, eight evenly spaced identical invisible cells, common per-row floor, generous gutters; tail and every finger entirely inside each cell even in flight, consistent anatomy in all8 cells, detailed hand-pixeled bitmap shading like the supplied references, sharp readable outlines. Background EXACT flat opaque chroma-magenta RGB255,0,255 everywhere outside animal; no gradients, no checkerboard, no alpha-preview pattern, no shadows, no scenery, no letters, numbers, labels, cell borders, UI or watermark. The result is actual art, not a diagram. No duplicated or mirrored half-cycle.",
+  "promptArchivePath": "docs/references/v73-next50-prompts/enemy-054-albino-facehugger-idle.txt",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Completed built-in image_gen call; original returned PNG persisted byte-for-byte on D:. Tool returned image bytes only. Local receipt label is not a provider generation ID. In-memory reference previews used after native path loading failed with Windows ACL-helper error."
+}

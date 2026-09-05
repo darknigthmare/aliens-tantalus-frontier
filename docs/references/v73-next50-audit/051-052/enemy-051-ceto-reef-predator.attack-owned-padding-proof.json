@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "profileId": "enemy-051-ceto-reef-predator",
+  "clipId": "attack",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+  "sourceSha256": "52a8b1cb56b2048c8b236a4341496ff55302f1fcd56dc337086e82270902affe",
+  "derivedPath": "docs/references/v73-next50-audit/051-052/enemy-051-ceto-reef-predator.attack.owned-padded-1794x897.png",
+  "derivedSha256": "a5489789acba2601480072a40ea329473efe898d4599964ad3f0659a0999e141",
+  "sourceSize": [
+    1754,
+    897
+  ],
+  "derivedSize": [
+    1794,
+    897
+  ],
+  "method": "existing-strict-matte-key-and-connected-ownership-then-minimal-integer-translation",
+  "matteHandling": "Existing proven exterior and enclosed-magenta key only; original RGB retained for every non-matte authored pixel. Output unused pixels are exact opaque FF00FF.",
+  "interpolation": false,
+  "resize": false,
+  "redraw": false,
+  "allAuthoredForegroundPixelsByteIdentical": true,
+  "authoredForegroundPixels": 206388,
+  "discardedAuthoredForegroundPixels": 0,
+  "overlappingAuthoredPixels": 0,
+  "sourceFileUnchanged": true,
+  "sourceXEdges": [
+    0,
+    438,
+    877,
+    1316,
+    1754
+  ],
+  "derivedXEdges": [
+    0,
+    448,
+    897,
+    1346,
+    1794
+  ],
+  "yEdges": [
+    0,
+    448,
+    897
+  ],
+  "cells": [
+    {
+      "frame": 0,
+      "sourceGlobalBounds": [
+        26,
+        213,
+        420,
+        328
+      ],
+      "derivedCopiedBounds": [
+        31,
+        213,
+        425,
+        328
+      ],
+      "sourceToDerivedOffset": [
+        5,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 0,
+      "foregroundPixels": 26940,
+      "sourceForegroundRgbSha256": "b96b68b9b19482252212437962dcf86b7c5ced67b75829141e887e19701330aa",
+      "derivedForegroundRgbSha256": "b96b68b9b19482252212437962dcf86b7c5ced67b75829141e887e19701330aa",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "frame": 1,
+      "sourceGlobalBounds": [
+        506,
+        214,
+        825,
+        371
+      ],
+      "derivedCopiedBounds": [
+        521,
+        214,
+        840,
+        371
+      ],
+      "sourceToDerivedOffset": [
+        15,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 0,
+      "foregroundPixels": 23791,
+      "sourceForegroundRgbSha256": "dae5e3a5fbeac25f03572743cbf99c62681aec0437df216b8b0a7670d35faf26",
+      "derivedForegroundRgbSha256": "dae5e3a5fbeac25f03572743cbf99c62681aec0437df216b8b0a7670d35faf26",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "frame": 2,
+      "sourceGlobalBounds": [
+        915,
+        226,
+        1237,
+        364
+      ],
+      "derivedCopiedBounds": [
+        940,
+        226,
+        1262,
+        364
+      ],
+      "sourceToDerivedOffset": [
+        25,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 0,
+      "foregroundPixels": 24777,
+      "sourceForegroundRgbSha256": "6abbb8a775c43b940c3ee5a226bce5b8c37c8e44c966ee40bac28b34ca99e2d8",
+      "derivedForegroundRgbSha256": "6abbb8a775c43b940c3ee5a226bce5b8c37c8e44c966ee40bac28b34ca99e2d8",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "frame": 3,
+      "sourceGlobalBounds": [
+        1281,
+        229,
+        1714,
+        354
+      ],
+      "derivedCopiedBounds": [
+        1349,
+        229,
+        1782,
+        354
+      ],
+      "sourceToDerivedOffset": [
+        68,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 33,
+      "foregroundPixels": 27896,
+      "sourceForegroundRgbSha256": "afbc4a4d986f6539572b50b275435b82b32dabc26da24c17a3526122356d53d4",
+      "derivedForegroundRgbSha256": "afbc4a4d986f6539572b50b275435b82b32dabc26da24c17a3526122356d53d4",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 1666,
+          "componentPixels": 27893,
+          "ownerShare": 0.940272,
+          "sourceBoundsGlobal": [
+            1284,
+            232,
+            1711,
+            351
+          ],
+          "rgbaSha256": "a3e8695181a5af23d67c2d9f472ee7699819b53b1af9e2b796e14782f530f07b",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "sourceGlobalBounds": [
+        26,
+        564,
+        446,
+        705
+      ],
+      "derivedCopiedBounds": [
+        25,
+        564,
+        445,
+        705
+      ],
+      "sourceToDerivedOffset": [
+        -1,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": -6,
+      "foregroundPixels": 28006,
+      "sourceForegroundRgbSha256": "79fe5259df06b505dfd489ee14a6de3b72d106af00a8c47bac2d9bc4a27307c1",
+      "derivedForegroundRgbSha256": "79fe5259df06b505dfd489ee14a6de3b72d106af00a8c47bac2d9bc4a27307c1",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 4,
+          "fromCells": [
+            5
+          ],
+          "pixels": 48,
+          "componentPixels": 28006,
+          "ownerShare": 0.998286,
+          "sourceBoundsGlobal": [
+            29,
+            567,
+            443,
+            702
+          ],
+          "rgbaSha256": "6113aac34136e7f283f48b6b72ce4cec8dc031aaa67476d32fe5febc63a6b95b",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "sourceGlobalBounds": [
+        508,
+        577,
+        831,
+        722
+      ],
+      "derivedCopiedBounds": [
+        523,
+        577,
+        846,
+        722
+      ],
+      "sourceToDerivedOffset": [
+        15,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 0,
+      "foregroundPixels": 24582,
+      "sourceForegroundRgbSha256": "5e07097f4eb99f3eceb612a393b6070571ca017c6b5d5ea9ae65c3b611f77b65",
+      "derivedForegroundRgbSha256": "5e07097f4eb99f3eceb612a393b6070571ca017c6b5d5ea9ae65c3b611f77b65",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "frame": 6,
+      "sourceGlobalBounds": [
+        882,
+        585,
+        1258,
+        697
+      ],
+      "derivedCopiedBounds": [
+        907,
+        585,
+        1283,
+        697
+      ],
+      "sourceToDerivedOffset": [
+        25,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 0,
+      "foregroundPixels": 25180,
+      "sourceForegroundRgbSha256": "199326b07dddfa78ca7cf38f7f2ad0ff44f522eaa171d980469006619048fac5",
+      "derivedForegroundRgbSha256": "199326b07dddfa78ca7cf38f7f2ad0ff44f522eaa171d980469006619048fac5",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    },
+    {
+      "frame": 7,
+      "sourceGlobalBounds": [
+        1313,
+        585,
+        1693,
+        697
+      ],
+      "derivedCopiedBounds": [
+        1349,
+        585,
+        1729,
+        697
+      ],
+      "sourceToDerivedOffset": [
+        36,
+        0
+      ],
+      "extraShiftAfterNominalPaddingX": 1,
+      "foregroundPixels": 25216,
+      "sourceForegroundRgbSha256": "3ec68ca0f73cf0e4828b563743509a8a5b67ab800b6ca95695e9a8d4f4965315",
+      "derivedForegroundRgbSha256": "3ec68ca0f73cf0e4828b563743509a8a5b67ab800b6ca95695e9a8d4f4965315",
+      "allForegroundPixelsByteIdentical": true,
+      "sourceOwnershipTransfers": []
+    }
+  ],
+  "newIndependentCellExtraction": "pass-eight-complete-subjects",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "rejectedPriorAttempt": "enemy-051-ceto-reef-predator.attack.padded-1794x897.png separates fragments at nominal borders and must not be used"
+}

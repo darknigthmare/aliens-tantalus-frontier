@@ -1,0 +1,3383 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-055-albino-chestburster",
+  "subject": "Albino Chestburster",
+  "batchId": "batch-004",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://www.20thcenturystudios.com/movies/alien",
+    "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/"
+  ],
+  "referenceLockSha256": "137158a552341304cb448d5a72cd671cdc945bc889f1770f122796caafbd7fba",
+  "animationFamily": "juvenile",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-055-albino-chestburster.webp",
+  "normalizedSha256": "c2ed130649fc57aeaf0509376f7601eb8987c853914595e5231689f636709ede",
+  "preview": "assets/openai/sprites/previews/v66/enemy-055-albino-chestburster/all.gif",
+  "previewSha256": "bf7b007644fdf8f9bea8a1c6287772522f14e050793f2687f64416771eb741d2",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.326725184,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.068719,
+    "attack": 1.078524,
+    "death": 1.007652
+  },
+  "scaleCalibrationReview": null,
+  "scaleCalibrationEvidence": [],
+  "physicalAnchorReview": {
+    "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster.anchor-review.fragment.json",
+    "sha256": "e19e276f7d71c8a7519f8742770d259f3b62c07dd97ba8b8873722dcefa66f88",
+    "status": "reviewed",
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-idle-root-review.jpg",
+        "sha256": "92c889bcd22f9facbd172150eb6aadc05e22c93b7e9170ddc19d883bfdb4dea9"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-move-root-review.jpg",
+        "sha256": "a31e6425d9449d9e16e70b5081b1e8b88658be89d7a76b8fb5665a3ce7e0d893"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-attack-root-review.jpg",
+        "sha256": "f69ecf923431e0addb015d91c070a121496b8280b30764a40e55a29f3a1ed8f3"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-death-root-review.jpg",
+        "sha256": "0e034a88568fdfa3e61596f19749dd7811560a729fb60d948b0c41ef8139beb4"
+      }
+    ],
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
+    "method": "Manual per-pose ventral cervical/anterior trunk junction directly behind the skull, following the base003 contract; not the long tail midpoint. Each observed supported pose projects onto its complete source lower contact bound including extraction guard. The limbless juvenile stays grounded and one body is followed per pose.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": true,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 0,
+    "aaFringePixelCount": 0,
+    "removedPixelCount": 0,
+    "sourceProofSha256": "1ecbab1849e0a0b8357ee1ca92457512901b9dbbc603db1b9dc737cb158d255d"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-055-albino-chestburster/idle.png",
+      "sha256": "95a850efa5a6a37da9501d6d2e2663e53e28f86c809f4f07550ce162c1cfa182",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "c77ccc862d909261e1f62c64cbf45d0dfa17e1d218c5a6f7a9182b4e2c1c9b7c",
+      "referenceLockSha256": "137158a552341304cb448d5a72cd671cdc945bc889f1770f122796caafbd7fba",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          239,
+          11,
+          230
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "d7de18d0fdd98fffba93e55ca41f2405a5357980eea91c7bd746d097a72d6d71",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-055-albino-chestburster/move.png",
+      "sha256": "6439f1b59768e83429973f3b7ded04c5715598cd29562c86ed2aec5d404d3006",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "f26c1587638e2a9004672cea82ac19affc934aa06939fe3b7a2aeca1c6f365a1",
+      "referenceLockSha256": "137158a552341304cb448d5a72cd671cdc945bc889f1770f122796caafbd7fba",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          232,
+          12,
+          226
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "eb9a4c848ad41cbbc31fa285712c9aa86f8d50a65a731aa18eff7f39ba89b7e8",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-055-albino-chestburster/attack.png",
+      "sha256": "c981028002d0331f32ea704685879d67df7a21fe8afd37297d88c50eb9a92e27",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "16c926e5f66b90f82562aca731628682ab61cc907a18da1e12dc05bd8f5b8307",
+      "referenceLockSha256": "137158a552341304cb448d5a72cd671cdc945bc889f1770f122796caafbd7fba",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          237,
+          18,
+          231
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "ca58423bbf88d552cd2234d1c0af91cd38613011279f0a56b4e2b7fe777082be",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-055-albino-chestburster/death.png",
+      "sha256": "aca6ba398634f3dd7940acd63ac3599160bbcbe07288b6c38b02b156c129f887",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "11d60b2b7f86c85dc244388129f9966d58ee7305eb755f6bab608b0745683056",
+      "referenceLockSha256": "137158a552341304cb448d5a72cd671cdc945bc889f1770f122796caafbd7fba",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 0,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          235,
+          21,
+          220
+        ],
+        "removedPixelCount": 0,
+        "removedCoordinatesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "removedRgbaSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sourceRgbaSha256": "a800582a3a4f192fd495df61e1ed04172a991abcf6899c214db703b85dcb8b5d",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-055-albino-chestburster/idle.webp",
+      "sha256": "021589b5b086fb035dc4e82df8e1590db16b903324bbfd65235e0ac6f2954585",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-055-albino-chestburster/idle.gif",
+      "previewSha256": "19f17ee3605e627512af836610468ed62cfccba4f16dcfb9a2e24c61f51c8290"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-055-albino-chestburster/move.webp",
+      "sha256": "b93afe2c00bcbf86adbe94e33c2f187c3cb3805a2299299a04f3b7d194c45d61",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-055-albino-chestburster/move.gif",
+      "previewSha256": "445da6b22d803d886f9e9c90ab340ae60e49002ae107c40f052d49ed1ed58434"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-055-albino-chestburster/attack.webp",
+      "sha256": "4b63ae105be04b9bc4a2f07a3b23ee51213f5016eeef8b5672bad581035787b2",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-055-albino-chestburster/attack.gif",
+      "previewSha256": "d167f266479a2888568aa769e25309fd3c53cbd006747e1078b89a72db275cec"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-055-albino-chestburster/death.webp",
+      "sha256": "c4833a1494f18442361c3c1eb75d8afa18b43560fd5371d9716bd4323be9f265",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-055-albino-chestburster/death.gif",
+      "previewSha256": "f620f17477d8f9e89c0d4f0342a2ec88b657aa5f5e149dc657b4ad1b55350a04"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        53,
+        284,
+        401,
+        354
+      ],
+      "sourceGlobalBounds": [
+        53,
+        284,
+        401,
+        354
+      ],
+      "sourceSize": [
+        348,
+        70
+      ],
+      "foregroundPixels": 10046,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "53245a86379d813c650be66e4eb0487e839ceb6e83879bd797e108f82e37693b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        313,
+        354
+      ],
+      "sourceLandmark": [
+        313,
+        330
+      ],
+      "sourceAnchorEvidence": "idle pose 1: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (313,330) projects to observed guarded support y=354. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        260.0,
+        70.0
+      ],
+      "renderedAnchor": [
+        128.17241379310343,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        43,
+        217,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        61,
+        243,
+        425,
+        354
+      ],
+      "sourceGlobalBounds": [
+        505,
+        243,
+        869,
+        354
+      ],
+      "sourceSize": [
+        364,
+        111
+      ],
+      "foregroundPixels": 11741,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "db76ade146e87cc5c01d1aeb001747d8553f40f6aef82acc4100cd67f43e0c59",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        334,
+        354
+      ],
+      "sourceLandmark": [
+        334,
+        295
+      ],
+      "sourceAnchorEvidence": "idle pose 2: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (334,295) projects to observed guarded support y=354. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        273.0,
+        111.0
+      ],
+      "renderedAnchor": [
+        128.25,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        39,
+        204,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        45,
+        221,
+        410,
+        354
+      ],
+      "sourceGlobalBounds": [
+        932,
+        221,
+        1297,
+        354
+      ],
+      "sourceSize": [
+        365,
+        133
+      ],
+      "foregroundPixels": 12592,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d3678742a38e525fa173ae66c13a01134d6b4ee6cc40d5e9bc92551c509c549a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        321,
+        354
+      ],
+      "sourceLandmark": [
+        321,
+        272
+      ],
+      "sourceAnchorEvidence": "idle pose 3: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (321,272) projects to observed guarded support y=354. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        276.0,
+        133.0
+      ],
+      "renderedAnchor": [
+        127.98356164383561,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        38,
+        197,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        27,
+        205,
+        364,
+        354
+      ],
+      "sourceGlobalBounds": [
+        1357,
+        205,
+        1694,
+        354
+      ],
+      "sourceSize": [
+        337,
+        149
+      ],
+      "foregroundPixels": 13126,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "33cbc486186db9e6eb40cc9196dbdfc5a3e4eaeaf0c229991f04f676bfb33e9b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        276,
+        354
+      ],
+      "sourceLandmark": [
+        276,
+        258
+      ],
+      "sourceAnchorEvidence": "idle pose 4: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (276,258) projects to observed guarded support y=354. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        249.0,
+        149.0
+      ],
+      "renderedAnchor": [
+        128.2759643916914,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        47,
+        191,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        45,
+        113,
+        366,
+        258
+      ],
+      "sourceGlobalBounds": [
+        45,
+        557,
+        366,
+        702
+      ],
+      "sourceSize": [
+        321,
+        145
+      ],
+      "foregroundPixels": 12465,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9f7893f0cff791a70846c7549b632cd3f7212fb41b2121ed25264ec91b2d6f78",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        285,
+        258
+      ],
+      "sourceLandmark": [
+        285,
+        165
+      ],
+      "sourceAnchorEvidence": "idle pose 5: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (285,165) projects to observed guarded support y=258. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        240.0,
+        145.0
+      ],
+      "renderedAnchor": [
+        127.50467289719626,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        49,
+        193,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        -8,
+        150,
+        320,
+        258
+      ],
+      "sourceGlobalBounds": [
+        436,
+        594,
+        764,
+        702
+      ],
+      "sourceSize": [
+        328,
+        108
+      ],
+      "foregroundPixels": 11028,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ab34fed1f7df5f49b7073038c84f23bad3096ec620f987c1e73fc400b7f3b6e6",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 5,
+          "fromCells": [
+            4
+          ],
+          "pixels": 16,
+          "componentPixels": 11028,
+          "ownerShare": 0.998549,
+          "sourceBoundsGlobal": [
+            439,
+            597,
+            761,
+            699
+          ],
+          "rgbaSha256": "63246d814ebe79aa49ece1159dbc2c654ca52b47dd83d8e4655690b3a2baeb87",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        258
+      ],
+      "sourceLandmark": [
+        235,
+        207
+      ],
+      "sourceAnchorEvidence": "idle pose 6: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (235,207) projects to observed guarded support y=258. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        243.0,
+        108.0
+      ],
+      "renderedAnchor": [
+        128.27134146341461,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        49,
+        205,
+        156,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -14,
+        176,
+        316,
+        258
+      ],
+      "sourceGlobalBounds": [
+        873,
+        620,
+        1203,
+        702
+      ],
+      "sourceSize": [
+        330,
+        82
+      ],
+      "foregroundPixels": 10110,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5e7795316ac76c130219bf0385f24a561372063f5b686684417cf748d4bc49b0",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 52,
+          "componentPixels": 10104,
+          "ownerShare": 0.994854,
+          "sourceBoundsGlobal": [
+            876,
+            623,
+            1200,
+            699
+          ],
+          "rgbaSha256": "f3b15602570ddbda4d14e72597c5b39a07c57c21543ca036e0f462765495344b",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        258
+      ],
+      "sourceLandmark": [
+        231,
+        229
+      ],
+      "sourceAnchorEvidence": "idle pose 7: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (231,229) projects to observed guarded support y=258. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        245.0,
+        82.0
+      ],
+      "renderedAnchor": [
+        128.1818181818182,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        48,
+        213,
+        156,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        9,
+        193,
+        336,
+        258
+      ],
+      "sourceGlobalBounds": [
+        1339,
+        637,
+        1666,
+        702
+      ],
+      "sourceSize": [
+        327,
+        65
+      ],
+      "foregroundPixels": 9433,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fd0a782b1f68f0a0e19c01448887d42b230d6a6a29da933165d7679f02a2a7b5",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        270,
+        258
+      ],
+      "sourceLandmark": [
+        270,
+        237
+      ],
+      "sourceAnchorEvidence": "idle pose 8: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (270,237) projects to observed guarded support y=258. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        261.0,
+        65.0
+      ],
+      "renderedAnchor": [
+        128.40366972477062,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.326725184,
+      "sourceScale": 1,
+      "appliedScale": 0.326725184,
+      "renderedBounds": [
+        43,
+        219,
+        150,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        42,
+        307,
+        412,
+        362
+      ],
+      "sourceGlobalBounds": [
+        42,
+        307,
+        412,
+        362
+      ],
+      "sourceSize": [
+        370,
+        55
+      ],
+      "foregroundPixels": 9919,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4c8ab9b2ac669848b1a0a739db2d0f76e87b7c72c66d678f8af70d6ea935a82e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        329,
+        362
+      ],
+      "sourceLandmark": [
+        329,
+        339
+      ],
+      "sourceAnchorEvidence": "move pose 1: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (329,339) projects to observed guarded support y=362. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        287.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        128.06216216216217,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        28,
+        221,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        44,
+        304,
+        405,
+        362
+      ],
+      "sourceGlobalBounds": [
+        488,
+        304,
+        849,
+        362
+      ],
+      "sourceSize": [
+        361,
+        58
+      ],
+      "foregroundPixels": 10005,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2cf86ae10ad65e1b1699c027777fd760050f33bb75edc79922475d45ff204e38",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        321,
+        362
+      ],
+      "sourceLandmark": [
+        321,
+        339
+      ],
+      "sourceAnchorEvidence": "move pose 2: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (321,339) projects to observed guarded support y=362. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        277.0,
+        58.0
+      ],
+      "renderedAnchor": [
+        127.68144044321329,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        31,
+        220,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        41,
+        307,
+        406,
+        362
+      ],
+      "sourceGlobalBounds": [
+        928,
+        307,
+        1293,
+        362
+      ],
+      "sourceSize": [
+        365,
+        55
+      ],
+      "foregroundPixels": 10099,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3ed996cd70d2252138204f0ea0d3c67d380bb274e379c4f97893a61f62abd74b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        320,
+        362
+      ],
+      "sourceLandmark": [
+        320,
+        339
+      ],
+      "sourceAnchorEvidence": "move pose 3: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (320,339) projects to observed guarded support y=362. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        279.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        128.07671232876714,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        31,
+        221,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        307,
+        394,
+        362
+      ],
+      "sourceGlobalBounds": [
+        1360,
+        307,
+        1724,
+        362
+      ],
+      "sourceSize": [
+        364,
+        55
+      ],
+      "foregroundPixels": 9805,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1fa15c3e10c67a7340c859b0a66e51729411d1e64dea9e3d21b0a682ec2eb7df",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        305,
+        362
+      ],
+      "sourceLandmark": [
+        305,
+        339
+      ],
+      "sourceAnchorEvidence": "move pose 4: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (305,339) projects to observed guarded support y=362. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        275.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        127.9478021978022,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        32,
+        221,
+        159,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        38,
+        160,
+        409,
+        215
+      ],
+      "sourceGlobalBounds": [
+        38,
+        604,
+        409,
+        659
+      ],
+      "sourceSize": [
+        371,
+        55
+      ],
+      "foregroundPixels": 9901,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "95a5c0224531de195ccc2bba1e67b0c38266ab98ee7becb1827780e1e8ed5235",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        323,
+        215
+      ],
+      "sourceLandmark": [
+        323,
+        192
+      ],
+      "sourceAnchorEvidence": "move pose 5: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (323,192) projects to observed guarded support y=215. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        285.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        127.86522911051213,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        28,
+        221,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        35,
+        149,
+        404,
+        215
+      ],
+      "sourceGlobalBounds": [
+        479,
+        593,
+        848,
+        659
+      ],
+      "sourceSize": [
+        369,
+        66
+      ],
+      "foregroundPixels": 10285,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2f7207f3209458ac2e80a4542a567338a43e044f3847f52a65e5ce019e287c8a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        320,
+        215
+      ],
+      "sourceLandmark": [
+        320,
+        192
+      ],
+      "sourceAnchorEvidence": "move pose 6: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (320,192) projects to observed guarded support y=215. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        285.0,
+        66.0
+      ],
+      "renderedAnchor": [
+        127.63414634146342,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        28,
+        217,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        29,
+        160,
+        390,
+        215
+      ],
+      "sourceGlobalBounds": [
+        916,
+        604,
+        1277,
+        659
+      ],
+      "sourceSize": [
+        361,
+        55
+      ],
+      "foregroundPixels": 10299,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a3d599b8eb927ba42dd719c84dc04564a0b176e7b2410ef9a84136029697465e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        309,
+        215
+      ],
+      "sourceLandmark": [
+        309,
+        192
+      ],
+      "sourceAnchorEvidence": "move pose 7: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (309,192) projects to observed guarded support y=215. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        280.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        127.72853185595568,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        30,
+        221,
+        156,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        26,
+        160,
+        393,
+        215
+      ],
+      "sourceGlobalBounds": [
+        1356,
+        604,
+        1723,
+        659
+      ],
+      "sourceSize": [
+        367,
+        55
+      ],
+      "foregroundPixels": 9763,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0d94daf8c51c6925f69ec55c94657ab16b7bd7386fdb506a950d63e1a00791ce",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        303,
+        215
+      ],
+      "sourceLandmark": [
+        303,
+        192
+      ],
+      "sourceAnchorEvidence": "move pose 8: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (303,192) projects to observed guarded support y=215. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        277.0,
+        55.0
+      ],
+      "renderedAnchor": [
+        127.61035422343325,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.326725184,
+      "sourceScale": 1.068719,
+      "appliedScale": 0.349177412,
+      "renderedBounds": [
+        31,
+        221,
+        159,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        53,
+        320,
+        367,
+        385
+      ],
+      "sourceGlobalBounds": [
+        53,
+        320,
+        367,
+        385
+      ],
+      "sourceSize": [
+        314,
+        65
+      ],
+      "foregroundPixels": 8628,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "17597be0185356891cb1330b6c32391827b814bd5de4ee63db461f5731d94c47",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        287,
+        385
+      ],
+      "sourceLandmark": [
+        287,
+        361
+      ],
+      "sourceAnchorEvidence": "attack pose 1: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (287,361) projects to observed guarded support y=385. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        234.0,
+        65.0
+      ],
+      "renderedAnchor": [
+        127.71974522292993,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        45,
+        217,
+        156,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        60,
+        325,
+        359,
+        393
+      ],
+      "sourceGlobalBounds": [
+        504,
+        325,
+        803,
+        393
+      ],
+      "sourceSize": [
+        299,
+        68
+      ],
+      "foregroundPixels": 8732,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "555f921e9a9f0608683e9cde17e488553784b9635fadcf58effa3293019450bb",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        284,
+        393
+      ],
+      "sourceLandmark": [
+        284,
+        363
+      ],
+      "sourceAnchorEvidence": "attack pose 2: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (284,363) projects to observed guarded support y=393. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        224.0,
+        68.0
+      ],
+      "renderedAnchor": [
+        127.66220735785953,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        49,
+        216,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        55,
+        258,
+        335,
+        385
+      ],
+      "sourceGlobalBounds": [
+        942,
+        258,
+        1222,
+        385
+      ],
+      "sourceSize": [
+        280,
+        127
+      ],
+      "foregroundPixels": 10374,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6926685111f62406ab0f3b021a799270553f397ee0c8e3cf8a13ded4060cac90",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        261,
+        385
+      ],
+      "sourceLandmark": [
+        261,
+        311
+      ],
+      "sourceAnchorEvidence": "attack pose 3: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (261,311) projects to observed guarded support y=385. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        206.0,
+        127.0
+      ],
+      "renderedAnchor": [
+        127.83571428571429,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        55,
+        195,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        0,
+        291,
+        389,
+        385
+      ],
+      "sourceGlobalBounds": [
+        1330,
+        291,
+        1719,
+        385
+      ],
+      "sourceSize": [
+        389,
+        94
+      ],
+      "foregroundPixels": 11889,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ea017162847171ff64e07f88cd8e0c9c37e65a3c0206ad7eb089d9a86b612e78",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        315,
+        385
+      ],
+      "sourceLandmark": [
+        315,
+        339
+      ],
+      "sourceAnchorEvidence": "attack pose 4: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (315,339) projects to observed guarded support y=385. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        315.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.93830334190231,
+        240.0
+      ],
+      "index": 19,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        17,
+        207,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        45,
+        151,
+        424,
+        245
+      ],
+      "sourceGlobalBounds": [
+        45,
+        595,
+        424,
+        689
+      ],
+      "sourceSize": [
+        379,
+        94
+      ],
+      "foregroundPixels": 11788,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "bf33feb7f02d5ec24b5a8b82b40f2cda320b3888322a6ae871a1e7f6b1236049",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        341,
+        245
+      ],
+      "sourceLandmark": [
+        341,
+        198
+      ],
+      "sourceAnchorEvidence": "attack pose 5: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (341,198) projects to observed guarded support y=245. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        296.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.65435356200528,
+        240.0
+      ],
+      "index": 20,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        23,
+        207,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        50,
+        180,
+        368,
+        245
+      ],
+      "sourceGlobalBounds": [
+        494,
+        624,
+        812,
+        689
+      ],
+      "sourceSize": [
+        318,
+        65
+      ],
+      "foregroundPixels": 8864,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0f8bdd273690f417ffe9e85e84a7c3371c2e60e518098b09b83e33bc4e9ee712",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        295,
+        245
+      ],
+      "sourceLandmark": [
+        295,
+        222
+      ],
+      "sourceAnchorEvidence": "attack pose 6: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (295,222) projects to observed guarded support y=245. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        245.0,
+        65.0
+      ],
+      "renderedAnchor": [
+        128.28930817610063,
+        240.0
+      ],
+      "index": 21,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        42,
+        217,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        60,
+        183,
+        361,
+        251
+      ],
+      "sourceGlobalBounds": [
+        947,
+        627,
+        1248,
+        695
+      ],
+      "sourceSize": [
+        301,
+        68
+      ],
+      "foregroundPixels": 9047,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "eae6707ee1f4df27ad81ca3edce109b302e378005f7332310c87c777adb63bef",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        278,
+        251
+      ],
+      "sourceLandmark": [
+        278,
+        227
+      ],
+      "sourceAnchorEvidence": "attack pose 7: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (278,227) projects to observed guarded support y=251. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        68.0
+      ],
+      "renderedAnchor": [
+        127.77076411960132,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        51,
+        216,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        25,
+        184,
+        328,
+        245
+      ],
+      "sourceGlobalBounds": [
+        1355,
+        628,
+        1658,
+        689
+      ],
+      "sourceSize": [
+        303,
+        61
+      ],
+      "foregroundPixels": 8229,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "48bcb720cca81633cebfaf24783d47ae9df08dee00d439a7d2998bdcd01104e0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        247,
+        245
+      ],
+      "sourceLandmark": [
+        247,
+        225
+      ],
+      "sourceAnchorEvidence": "attack pose 8: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (247,225) projects to observed guarded support y=245. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        222.0,
+        61.0
+      ],
+      "renderedAnchor": [
+        128.3960396039604,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.326725184,
+      "sourceScale": 1.078524,
+      "appliedScale": 0.352380952,
+      "renderedBounds": [
+        50,
+        219,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        38,
+        254,
+        383,
+        378
+      ],
+      "sourceGlobalBounds": [
+        38,
+        254,
+        383,
+        378
+      ],
+      "sourceSize": [
+        345,
+        124
+      ],
+      "foregroundPixels": 11816,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2bed0e51762248c91d8a1f5238f6c8cea61a09ce66f9010b349f26d2a9452016",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        293,
+        378
+      ],
+      "sourceLandmark": [
+        293,
+        310
+      ],
+      "sourceAnchorEvidence": "death pose 1: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (293,310) projects to observed guarded support y=378. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        255.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        128.26086956521738,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        44,
+        199,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        26,
+        279,
+        377,
+        380
+      ],
+      "sourceGlobalBounds": [
+        470,
+        279,
+        821,
+        380
+      ],
+      "sourceSize": [
+        351,
+        101
+      ],
+      "foregroundPixels": 12227,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "beb7ca38f10f43bbab8baf70d46809f6d4769758ba87aa09b3e91f28714291c0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        290,
+        380
+      ],
+      "sourceLandmark": [
+        290,
+        323
+      ],
+      "sourceAnchorEvidence": "death pose 2: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (290,323) projects to observed guarded support y=380. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        264.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        128.24786324786325,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        41,
+        207,
+        157,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        21,
+        313,
+        377,
+        379
+      ],
+      "sourceGlobalBounds": [
+        908,
+        313,
+        1264,
+        379
+      ],
+      "sourceSize": [
+        356,
+        66
+      ],
+      "foregroundPixels": 10388,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8fdf7cae756be8511695871aad8e119b52346fbee3228591d33f9c34ef8f6524",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        293,
+        379
+      ],
+      "sourceLandmark": [
+        293,
+        354
+      ],
+      "sourceAnchorEvidence": "death pose 3: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (293,354) projects to observed guarded support y=379. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        272.0,
+        66.0
+      ],
+      "renderedAnchor": [
+        128.3932584269663,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        39,
+        218,
+        156,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        18,
+        321,
+        366,
+        381
+      ],
+      "sourceGlobalBounds": [
+        1348,
+        321,
+        1696,
+        381
+      ],
+      "sourceSize": [
+        348,
+        60
+      ],
+      "foregroundPixels": 9763,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7ac4c0b62f3a59e43339ba5eea01357780cc29023f824c6d5ef395525a5e100d",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        286,
+        381
+      ],
+      "sourceLandmark": [
+        286,
+        360
+      ],
+      "sourceAnchorEvidence": "death pose 4: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (286,360) projects to observed guarded support y=381. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        268.0,
+        60.0
+      ],
+      "renderedAnchor": [
+        127.5632183908046,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        39,
+        220,
+        154,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        25,
+        220,
+        393,
+        280
+      ],
+      "sourceGlobalBounds": [
+        25,
+        664,
+        393,
+        724
+      ],
+      "sourceSize": [
+        368,
+        60
+      ],
+      "foregroundPixels": 10180,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "855770d2a84478ca9e11bca2affdc1c445a79dfb86cf066e5e272f2c75e62de7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        300,
+        280
+      ],
+      "sourceLandmark": [
+        300,
+        258
+      ],
+      "sourceAnchorEvidence": "death pose 5: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (300,258) projects to observed guarded support y=280. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        275.0,
+        60.0
+      ],
+      "renderedAnchor": [
+        128.4211956521739,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        38,
+        220,
+        159,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        12,
+        224,
+        388,
+        281
+      ],
+      "sourceGlobalBounds": [
+        456,
+        668,
+        832,
+        725
+      ],
+      "sourceSize": [
+        376,
+        57
+      ],
+      "foregroundPixels": 9362,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cfa7f94f0b3cc02c6c03a4cdc45bffb4653c1a96d6d2020f9ad7a0a2f12a90c3",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        306,
+        281
+      ],
+      "sourceLandmark": [
+        306,
+        261
+      ],
+      "sourceAnchorEvidence": "death pose 6: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (306,261) projects to observed guarded support y=281. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        294.0,
+        57.0
+      ],
+      "renderedAnchor": [
+        127.95744680851064,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        31,
+        221,
+        155,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        7,
+        229,
+        386,
+        281
+      ],
+      "sourceGlobalBounds": [
+        894,
+        673,
+        1273,
+        725
+      ],
+      "sourceSize": [
+        379,
+        52
+      ],
+      "foregroundPixels": 8933,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0d4741d08f7d37405afcbf5ead8ab2898e1579cf907538c7c856a7a8d42ee757",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        313,
+        281
+      ],
+      "sourceLandmark": [
+        313,
+        265
+      ],
+      "sourceAnchorEvidence": "death pose 7: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (313,265) projects to observed guarded support y=281. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        306.0,
+        52.0
+      ],
+      "renderedAnchor": [
+        127.92348284960423,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        27,
+        223,
+        152,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        5,
+        232,
+        384,
+        280
+      ],
+      "sourceGlobalBounds": [
+        1335,
+        676,
+        1714,
+        724
+      ],
+      "sourceSize": [
+        379,
+        48
+      ],
+      "foregroundPixels": 8607,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6605c263c157132ea09ce781d07bbc87c5df85270ffe021c40a33cc81740b584",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        310,
+        280
+      ],
+      "sourceLandmark": [
+        310,
+        266
+      ],
+      "sourceAnchorEvidence": "death pose 8: Ventral cervical/anterior trunk junction immediately behind the single skull; excludes the segmented tail and mobile jaw. Visible landmark (310,266) projects to observed guarded support y=280. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        305.0,
+        48.0
+      ],
+      "renderedAnchor": [
+        127.59366754617415,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.326725184,
+      "sourceScale": 1.007652,
+      "appliedScale": 0.329225285,
+      "renderedBounds": [
+        27,
+        224,
+        152,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          43,
+          217,
+          157,
+          240
+        ],
+        "foregroundPixels": 1220,
+        "width": 114,
+        "height": 23,
+        "relativeToRowMedian": 0.847811
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          40,
+          204,
+          158,
+          240
+        ],
+        "foregroundPixels": 1399,
+        "width": 118,
+        "height": 36,
+        "relativeToRowMedian": 0.972203
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          38,
+          197,
+          157,
+          240
+        ],
+        "foregroundPixels": 1479,
+        "width": 119,
+        "height": 43,
+        "relativeToRowMedian": 1.027797
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          48,
+          191,
+          157,
+          240
+        ],
+        "foregroundPixels": 1570,
+        "width": 109,
+        "height": 49,
+        "relativeToRowMedian": 1.091035
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          50,
+          193,
+          154,
+          240
+        ],
+        "foregroundPixels": 1489,
+        "width": 104,
+        "height": 47,
+        "relativeToRowMedian": 1.16876
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          50,
+          205,
+          156,
+          240
+        ],
+        "foregroundPixels": 1322,
+        "width": 106,
+        "height": 35,
+        "relativeToRowMedian": 1.037677
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          49,
+          213,
+          156,
+          240
+        ],
+        "foregroundPixels": 1226,
+        "width": 107,
+        "height": 27,
+        "relativeToRowMedian": 0.962323
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          43,
+          219,
+          149,
+          240
+        ],
+        "foregroundPixels": 1121,
+        "width": 106,
+        "height": 21,
+        "relativeToRowMedian": 0.879906
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          29,
+          222,
+          156,
+          239
+        ],
+        "foregroundPixels": 1319,
+        "width": 127,
+        "height": 17,
+        "relativeToRowMedian": 0.994721
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          32,
+          221,
+          156,
+          239
+        ],
+        "foregroundPixels": 1333,
+        "width": 124,
+        "height": 18,
+        "relativeToRowMedian": 1.005279
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          32,
+          222,
+          157,
+          239
+        ],
+        "foregroundPixels": 1349,
+        "width": 125,
+        "height": 17,
+        "relativeToRowMedian": 1.017345
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          33,
+          222,
+          158,
+          239
+        ],
+        "foregroundPixels": 1309,
+        "width": 125,
+        "height": 17,
+        "relativeToRowMedian": 0.987179
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          29,
+          222,
+          157,
+          239
+        ],
+        "foregroundPixels": 1325,
+        "width": 128,
+        "height": 17,
+        "relativeToRowMedian": 0.981118
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          29,
+          218,
+          156,
+          239
+        ],
+        "foregroundPixels": 1389,
+        "width": 127,
+        "height": 21,
+        "relativeToRowMedian": 1.028508
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          31,
+          222,
+          156,
+          239
+        ],
+        "foregroundPixels": 1376,
+        "width": 125,
+        "height": 17,
+        "relativeToRowMedian": 1.018882
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          32,
+          222,
+          158,
+          239
+        ],
+        "foregroundPixels": 1296,
+        "width": 126,
+        "height": 17,
+        "relativeToRowMedian": 0.959645
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          46,
+          218,
+          155,
+          239
+        ],
+        "foregroundPixels": 1198,
+        "width": 109,
+        "height": 21,
+        "relativeToRowMedian": 0.90792
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          50,
+          217,
+          153,
+          239
+        ],
+        "foregroundPixels": 1221,
+        "width": 103,
+        "height": 22,
+        "relativeToRowMedian": 0.925351
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          56,
+          196,
+          153,
+          239
+        ],
+        "foregroundPixels": 1418,
+        "width": 97,
+        "height": 43,
+        "relativeToRowMedian": 1.074649
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          18,
+          208,
+          154,
+          239
+        ],
+        "foregroundPixels": 1599,
+        "width": 136,
+        "height": 31,
+        "relativeToRowMedian": 1.211823
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          24,
+          208,
+          156,
+          239
+        ],
+        "foregroundPixels": 1602,
+        "width": 132,
+        "height": 31,
+        "relativeToRowMedian": 1.308824
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          43,
+          218,
+          153,
+          239
+        ],
+        "foregroundPixels": 1216,
+        "width": 110,
+        "height": 21,
+        "relativeToRowMedian": 0.993464
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          52,
+          217,
+          156,
+          239
+        ],
+        "foregroundPixels": 1232,
+        "width": 104,
+        "height": 22,
+        "relativeToRowMedian": 1.006536
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          51,
+          220,
+          156,
+          239
+        ],
+        "foregroundPixels": 1085,
+        "width": 105,
+        "height": 19,
+        "relativeToRowMedian": 0.886438
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          44,
+          200,
+          158,
+          240
+        ],
+        "foregroundPixels": 1438,
+        "width": 114,
+        "height": 40,
+        "relativeToRowMedian": 1.051554
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          42,
+          207,
+          157,
+          239
+        ],
+        "foregroundPixels": 1463,
+        "width": 115,
+        "height": 32,
+        "relativeToRowMedian": 1.069835
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          40,
+          218,
+          156,
+          240
+        ],
+        "foregroundPixels": 1297,
+        "width": 116,
+        "height": 22,
+        "relativeToRowMedian": 0.948446
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          40,
+          220,
+          154,
+          239
+        ],
+        "foregroundPixels": 1232,
+        "width": 114,
+        "height": 19,
+        "relativeToRowMedian": 0.900914
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          39,
+          220,
+          159,
+          240
+        ],
+        "foregroundPixels": 1254,
+        "width": 120,
+        "height": 20,
+        "relativeToRowMedian": 1.101449
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          32,
+          222,
+          155,
+          240
+        ],
+        "foregroundPixels": 1171,
+        "width": 123,
+        "height": 18,
+        "relativeToRowMedian": 1.028546
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          27,
+          223,
+          152,
+          240
+        ],
+        "foregroundPixels": 1106,
+        "width": 125,
+        "height": 17,
+        "relativeToRowMedian": 0.971454
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          28,
+          224,
+          151,
+          240
+        ],
+        "foregroundPixels": 1084,
+        "width": 123,
+        "height": 16,
+        "relativeToRowMedian": 0.95213
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      1439.0,
+      1274.0,
+      1326.0,
+      1350.5,
+      1319.5,
+      1224.0,
+      1367.5,
+      1138.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "ffeeda4822e70f6e142208c111441c39be9901766b6e88cae8114f0000788b90",
+      "58556763c36b17a97365192e5e10d1f95f37fa87486fdcad77215c6972cbbb13",
+      "b2a03d0c0cfe9edc61fea685084cd049e30cc7b4f9120526d0fa592854b885e9",
+      "954637fc31521138377a9417634ff02b0d63951313a131f70bf247b064096084",
+      "7275413ae2c1533226cc00def73fb65f88ccb4379efb43ee5a81875717eef8b7",
+      "52ca3bb5a2730f011b3367122d0e7603340caabfe8c002e0168fa2787a922bb0",
+      "017a2df1429eb9e7aa37dcfd213f92b5b72a7e34a51dbd0624b0f5b024972f15",
+      "043145a5e09923922b0b87efdcbae13e08e17392ed5f92f586c8a836106f1e58",
+      "c9822e0db9dd10a258b0f29c98940718226caba0d881b07a042ee9a902c15f4e",
+      "521bb711634fa099e93c7e896b5752d0a10d22acd73e6ee145adcd9fa8d3b448",
+      "da48f57405cf229855c70633d5755b42c1ad23cab4534fda758c8dc9b96cb2e5",
+      "446db6c01ae8e4703a864b3e0589028c2869c54be8ce7a140e93143c1b884932",
+      "d548f0c5fdc440782db0ae01e92b605ef1b13005ac57333ebab86eb683bce78a",
+      "c23f0f10107f4643bebaf0ab4052726ba3623cd700dd3747bbaaf9b3781a12f6",
+      "af8ee9669f51193d1fe66218f903626d372eafd2a1aa51833c397fb7bcf163f6",
+      "7eba64bd34cb9d406f391d2594e759b9a42702b6bb470005b4bd12b1be241d4a",
+      "6b69db61b189672e94383c4752943e2a8e6f26569734fcd8db11095f66a1ce69",
+      "a29f7aee80efcff59befb8a5a229babcfbd8710610c2c60793f615e6fb5dc26a",
+      "c0dfb0c5820dccb52936332b791df98b66638024472f13f172c75949d135923f",
+      "f87e3d4bca1ec7b7443bc61453bed57aa7cbe0995dc377e0c601a6369d85d675",
+      "2ba8c83c6b89d6f67239a6ec8dff1d8fe9cb4723412c0ee65ddff6439d01936a",
+      "b37b1e1ba826e2c31fa2749fb392658309c18584851381fd79abceed07fc3fee",
+      "ad0903835fff3041df1f684e32d17636445f3cbfef1a6d095762231323320058",
+      "5da141a8035b8e3e3f871351c0dd622d381d2b918e75fb19c4b4b6210dec0216",
+      "c05f8f0c9171211fe074ae36d35f16f38128a96821578a3553c6322df553f103",
+      "ef3738f6b99a768b8125e92d5cc0295d20cdfee7ed366b94a9c7c4aa9ab77064",
+      "d211211fc372191aa9a907688261373983b085a2390cbd39876b14a4399e2514",
+      "2b2dcfb0a6d8b567cd7c68868d75a453a070422b84dd5c1f078e21e198e58c6c",
+      "f45d07876f68d8080902a2766222cebe1c66401da71711bea46772fd2ba10ecf",
+      "e036fd0830667494d2b9ab6c118e8caaeb1d9669c04818d72bc5045f7874373f",
+      "6ead7b6e6f4c5f97aba6cf98a6f76ed037b307a4218dd88230949541fec53ff0",
+      "2f0eeb29905a861a3a81c184c943661050df3d7d581adfbaeadbd75aa8505924"
+    ],
+    "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster.scale-review.fragment.json",
+    "sha256": "ed6bf7aca320625b353af1a91e2730b285079160af3deb8762403d5baf15970e",
+    "status": "reviewed",
+    "profileId": "enemy-055-albino-chestburster",
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.068719,
+      "attack": 1.078524,
+      "death": 1.007652
+    },
+    "sourceSha256ByClip": {
+      "idle": "95a850efa5a6a37da9501d6d2e2663e53e28f86c809f4f07550ce162c1cfa182",
+      "move": "6439f1b59768e83429973f3b7ded04c5715598cd29562c86ed2aec5d404d3006",
+      "attack": "c981028002d0331f32ea704685879d67df7a21fe8afd37297d88c50eb9a92e27",
+      "death": "aca6ba398634f3dd7940acd63ac3599160bbcbe07288b6c38b02b156c129f887"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-idle-root-review.jpg",
+        "sha256": "92c889bcd22f9facbd172150eb6aadc05e22c93b7e9170ddc19d883bfdb4dea9"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-move-root-review.jpg",
+        "sha256": "a31e6425d9449d9e16e70b5081b1e8b88658be89d7a76b8fb5665a3ce7e0d893"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-attack-root-review.jpg",
+        "sha256": "f69ecf923431e0addb015d91c070a121496b8280b30764a40e55a29f3a1ed8f3"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-death-root-review.jpg",
+        "sha256": "0e034a88568fdfa3e61596f19749dd7811560a729fb60d948b0c41ef8139beb4"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster.anchor-review.fragment.json",
+    "scale": "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster.scale-review.fragment.json"
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 0,
+    "remainingStrictPixelCount": 0
+  }
+}

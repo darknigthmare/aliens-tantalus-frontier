@@ -1,0 +1,471 @@
+{
+  "historicalInputOnly": true,
+  "doNotUseForNormalization": "Independent V73 review invalidates these inherited coordinates. Use only the dedicated 036 fragment after its review; 035 is refused.",
+  "schema": 1,
+  "batchId": "batch-003",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-035-trilobite-echo": {
+      "status": "historical-invalidated-by-independent-review",
+      "reviewer": "Codex /root/complete_variants",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.969178,
+        "attack": 0.948324,
+        "death": 0.974063
+      },
+      "sourceSha256ByClip": {
+        "idle": "562a3a50f34d475e1852e63de7e0f89f9fb7ce70824980eef6853b6bd33ea475",
+        "move": "a43b330804e8302cde0f7534a32f7b9bc384d3db3721fb170361267ec953c309",
+        "attack": "d2d14d01345ceec0f24997e972b05dc668267ccdb038506be701206c63e1b5bb",
+        "death": "bad472215467c9666c3959c82bcf85b056c59bf6df8b37736ed5fc7f1eadb917"
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              242,
+              251
+            ],
+            [
+              302,
+              276
+            ]
+          ],
+          "lengthPx": 65,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              239,
+              253
+            ],
+            [
+              300,
+              272
+            ]
+          ],
+          "lengthPx": 63.890531,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "idle",
+          "frame": 2,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              242,
+              252
+            ],
+            [
+              306,
+              278
+            ]
+          ],
+          "lengthPx": 69.079664,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              240,
+              252
+            ],
+            [
+              303,
+              275
+            ]
+          ],
+          "lengthPx": 67.067131,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "move",
+          "frame": 1,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              227,
+              253
+            ],
+            [
+              288,
+              275
+            ]
+          ],
+          "lengthPx": 64.845971,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "move",
+          "frame": 2,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              231,
+              252
+            ],
+            [
+              294,
+              275
+            ]
+          ],
+          "lengthPx": 67.067131,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              235,
+              252
+            ],
+            [
+              300,
+              276
+            ]
+          ],
+          "lengthPx": 69.289249,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "attack",
+          "frame": 1,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              229,
+              253
+            ],
+            [
+              292,
+              280
+            ]
+          ],
+          "lengthPx": 68.541958,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "attack",
+          "frame": 2,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              230,
+              252
+            ],
+            [
+              286,
+              277
+            ]
+          ],
+          "lengthPx": 61.326992,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              234,
+              258
+            ],
+            [
+              297,
+              280
+            ]
+          ],
+          "lengthPx": 66.730802,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              226,
+              258
+            ],
+            [
+              298,
+              286
+            ]
+          ],
+          "lengthPx": 77.252832,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "landmark": "posterior radial-attachment centroid to closed anterior aperture center",
+          "endpoints": [
+            [
+              235,
+              298
+            ],
+            [
+              285,
+              330
+            ]
+          ],
+          "lengthPx": 59.363288,
+          "note": "Manual rigid central-mantle chord on the marked source; excludes every primary-tentacle tip and the external pose envelope."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-trilobite-echo-postgen/scale-idle.png",
+        "docs/references/v66-worklot-001-trilobite-echo-postgen/scale-move.png",
+        "docs/references/v66-worklot-001-trilobite-echo-postgen/scale-attack.png",
+        "docs/references/v66-worklot-001-trilobite-echo-postgen/scale-death.png"
+      ],
+      "note": "Twelve manually marked chords use the exact anatomical invariant from the reviewed 035 lock: radial attachment centroid to the closed anterior aperture. The idle median is 65px; factors are idle median divided by each clip median. They are post-generation candidates only and have not been applied to an atlas or runtime."
+    },
+    "enemy-036-deacon-line": {
+      "status": "historical-invalidated-by-independent-review",
+      "reviewer": "Codex /root/produce_arcology_lurker",
+      "reviewedAt": "2026-09-01",
+      "baselineClip": "idle",
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.038739,
+        "attack": 1.046164,
+        "death": 0.997424
+      },
+      "sourceSha256ByClip": {
+        "idle": "69f8cc60fe0b2f60eceb5cfd422543f9d4564f8105896f4021e59104bf9c95ce",
+        "move": "8404dcdfe7380fcee63819dd280304c36b533b7ad23c3ed3edce2181d10b196a",
+        "attack": "6d871e7dbbb45b1abd1e2d73c707b3c1fb3f9924e97a7e9dd039442dd612eb6e",
+        "death": "8127f78420ca16b07ca43605bb4bba28943802bd1401432768b40f2e612ffff2"
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              177,
+              65
+            ],
+            [
+              281,
+              114
+            ]
+          ],
+          "lengthPx": 114.965212,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              131,
+              66
+            ],
+            [
+              249,
+              107
+            ]
+          ],
+          "lengthPx": 124.919974,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "idle",
+          "frame": 2,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              176,
+              96
+            ],
+            [
+              285,
+              139
+            ]
+          ],
+          "lengthPx": 117.175083,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              142,
+              57
+            ],
+            [
+              254,
+              105
+            ]
+          ],
+          "lengthPx": 121.85237,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "move",
+          "frame": 1,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              117,
+              66
+            ],
+            [
+              220,
+              112
+            ]
+          ],
+          "lengthPx": 112.805142,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "move",
+          "frame": 2,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              132,
+              81
+            ],
+            [
+              226,
+              123
+            ]
+          ],
+          "lengthPx": 102.956301,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              152,
+              74
+            ],
+            [
+              255,
+              118
+            ]
+          ],
+          "lengthPx": 112.004464,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "attack",
+          "frame": 1,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              99,
+              105
+            ],
+            [
+              216,
+              145
+            ]
+          ],
+          "lengthPx": 123.648696,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "attack",
+          "frame": 2,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              209,
+              147
+            ],
+            [
+              311,
+              190
+            ]
+          ],
+          "lengthPx": 110.69327,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              171,
+              75
+            ],
+            [
+              266,
+              111
+            ]
+          ],
+          "lengthPx": 101.592323,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              18,
+              102
+            ],
+            [
+              138,
+              119
+            ]
+          ],
+          "lengthPx": 121.198185,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "landmark": "posterior mitre apex to anterior fixed cranial crest tip",
+          "endpoints": [
+            [
+              14,
+              208
+            ],
+            [
+              129,
+              184
+            ]
+          ],
+          "lengthPx": 117.477657,
+          "note": "Manual rigid cranium chord; excludes the mobile mandible and soft neck. Endpoints verified on the marked source overlay."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/idle-scale-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/move-scale-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/attack-scale-overlay.png",
+        "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/death-scale-overlay.png"
+      ],
+      "note": "Twelve individually marked rigid mitre chords, three distinct poses per clip. Median idle chord 117.175083px is the baseline; factors are idle median divided by each clip median. No per-frame bounding box rescaling and no runtime acceptance."
+    }
+  }
+}

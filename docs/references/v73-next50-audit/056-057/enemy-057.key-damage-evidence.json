@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "status": "rejected-key-damages-authored-anatomy",
+  "profileId": "enemy-057-albino-warrior",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-057-albino-warrior/move.png",
+  "sourceSha256": "78fd107ace41e663459bd3d3ca9b3f023a5fdb4570dac91c144657eceb3c8624",
+  "sourceUnchanged": true,
+  "displayScale": 2,
+  "displayInterpolation": "nearest-neighbour-for-inspection-only",
+  "renderedSourceCrop": [
+    0,
+    0,
+    444,
+    444
+  ],
+  "observations": [
+    "Source pose1 far forearm/elbow is drawn continuously; existing key disconnects it.",
+    "Source pose1 forward shin and rear foot have continuous solid shading; existing key removes substantial segments.",
+    "Not a count of destroyed anatomical pixels: the key mask also contains legitimate background."
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false
+}

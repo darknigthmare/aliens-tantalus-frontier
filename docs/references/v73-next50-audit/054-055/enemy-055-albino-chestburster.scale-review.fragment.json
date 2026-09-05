@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-055-albino-chestburster": {
+      "profileId": "enemy-055-albino-chestburster",
+      "status": "reviewed",
+      "reviewer": "Codex /root/gameplay_audit_fix",
+      "reviewedAt": "2026-09-05",
+      "baselineClip": "idle",
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.068719,
+        "attack": 1.078524,
+        "death": 1.007652
+      },
+      "sourceSha256ByClip": {
+        "idle": "95a850efa5a6a37da9501d6d2e2663e53e28f86c809f4f07550ce162c1cfa182",
+        "move": "6439f1b59768e83429973f3b7ded04c5715598cd29562c86ed2aec5d404d3006",
+        "attack": "c981028002d0331f32ea704685879d67df7a21fe8afd37297d88c50eb9a92e27",
+        "death": "aca6ba398634f3dd7940acd63ac3599160bbcbe07288b6c38b02b156c129f887"
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              299,
+              309
+            ],
+            [
+              396,
+              328
+            ]
+          ],
+          "lengthPx": 98.84331,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              327,
+              265
+            ],
+            [
+              420,
+              285
+            ]
+          ],
+          "lengthPx": 95.126232,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              317,
+              326
+            ],
+            [
+              408,
+              341
+            ]
+          ],
+          "lengthPx": 92.227978,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "move",
+          "frame": 1,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              312,
+              326
+            ],
+            [
+              400,
+              341
+            ]
+          ],
+          "lengthPx": 89.269256,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              272,
+              343
+            ],
+            [
+              362,
+              362
+            ]
+          ],
+          "lengthPx": 91.983694,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "attack",
+          "frame": 7,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              238,
+              206
+            ],
+            [
+              324,
+              224
+            ]
+          ],
+          "lengthPx": 87.863531,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              284,
+              280
+            ],
+            [
+              377,
+              299
+            ]
+          ],
+          "lengthPx": 94.92102,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "landmark": "fixed skull chord, posterior cranial rim to anterior upper-lip tip; mobile lower jaw excluded",
+          "endpoints": [
+            [
+              284,
+              315
+            ],
+            [
+              373,
+              355
+            ]
+          ],
+          "lengthPx": 97.575612,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-cranium comparison in two visible poses per clip. Lower-jaw opening and cervical bend are excluded. Endpoint uncertainty +/-5px in source space; no real-world size claim."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-idle-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-move-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-attack-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-055-albino-chestburster-death-root-review.jpg"
+      ],
+      "note": "Eight manual anatomical chords, two low-occlusion poses per clip. Factors are median idle chord / median clip chord. Original source is resized once with this factor and one final shared pack scale. No per-frame scale, automatic recolor, or artistic acceptance. Similarity to the base variant is a separate visual comparison, not encoded by borrowing another profile's pivot or pixels."
+    }
+  }
+}

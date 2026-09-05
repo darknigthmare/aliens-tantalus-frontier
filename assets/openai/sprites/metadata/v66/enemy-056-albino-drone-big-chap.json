@@ -1,0 +1,2814 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-056-albino-drone-big-chap",
+  "subject": "Albino Drone / Big Chap",
+  "batchId": "batch-004",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://www.20thcenturystudios.com/movies/alien",
+    "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/"
+  ],
+  "referenceLockSha256": "7f9e3ee75ec22d7ce9ac293436d8bb3b4906d752521624014a487ad184bb0118",
+  "animationFamily": "biped",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-056-albino-drone-big-chap.webp",
+  "normalizedSha256": "6ef6d31bc9f74dc9d89eee3129360d307cc2e957897793d350ba74d3d3a6b6c7",
+  "preview": "assets/openai/sprites/previews/v66/enemy-056-albino-drone-big-chap/all.gif",
+  "previewSha256": "aaa0b40f9f49552d7d07423c8a3bda59385ff2ef2ae009deb9be69e2663e9cd5",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.529550827,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1.0,
+    "move": 1.0,
+    "attack": 1.0,
+    "death": 1.0
+  },
+  "scaleCalibrationReview": null,
+  "scaleCalibrationEvidence": [],
+  "physicalAnchorReview": {
+    "status": "pending",
+    "reason": "No source-anchor review file."
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": true,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 4903,
+    "aaFringePixelCount": 4153,
+    "removedPixelCount": 9056,
+    "sourceProofSha256": "09eb4ef7549cf3da5deacf21438b967f1d15f53c01065d23da1a0c2a46833376"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-056-albino-drone-big-chap/idle.png",
+      "sha256": "b8b8492eb178c38fe912cddfe47e67dd507822ed19f01e99942c663bd4147a32",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "a4d58a96c9b689ddc460ae88dc58d88f7829fb6013d01c353e42ecca6a420fea",
+      "referenceLockSha256": "7f9e3ee75ec22d7ce9ac293436d8bb3b4906d752521624014a487ad184bb0118",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 1678,
+        "aaFringePixelCount": 1635,
+        "strictCoreMaskSha256": "ec92a8f66f37b4b4774ef2971f719ae97ad27be0d30b590a880de492822de91f",
+        "aaFringeMaskSha256": "78976692584d995951d06a73434a622914ebd55ebec7116ace1ed221b0e3d3d4",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          239,
+          4,
+          237
+        ],
+        "removedPixelCount": 3313,
+        "removedCoordinatesSha256": "0e48c936facee665d4f93b5fba769c44d0965d995c03edf47f6a9c7cb31e12be",
+        "removedRgbaSha256": "34250fdb333864df1179ded07e29e86b4b851b5158b24d286c91c6d4923a048c",
+        "sourceRgbaSha256": "619c8f585c4503714cf361099e9fa247af060515a51d0da763395cd0a59ab5d0",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-056-albino-drone-big-chap/move.png",
+      "sha256": "3f8e751c63723490e26eb952a440f1231d25bc0253443b565a635e016c5ab703",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "8b27fe5c251edb3c40e422a7c25363b5c6b1002f6d10e7042938eb33a8ebccae",
+      "referenceLockSha256": "7f9e3ee75ec22d7ce9ac293436d8bb3b4906d752521624014a487ad184bb0118",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 782,
+        "aaFringePixelCount": 290,
+        "strictCoreMaskSha256": "896b9adf3879746bf124883f791b94dc8fc4202335beff31ea478f909dfd4889",
+        "aaFringeMaskSha256": "4fe3b56fd7704735ef4140b479e60468b8aaaa870cd23d11ac6b176bcdd6b3e1",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          239,
+          6,
+          238
+        ],
+        "removedPixelCount": 1072,
+        "removedCoordinatesSha256": "9e2529194c1ab11a6b596ecd812c940fce2a85f509c380555613aec969307a21",
+        "removedRgbaSha256": "1b1283bfba4d4f320b6d9fb4837f6f52888ab43bc599b8931bdbebc0dbcee9f2",
+        "sourceRgbaSha256": "b35971c096d1abed56e94a5c34590901b738c7eab899548266828d4669e9d792",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-056-albino-drone-big-chap/attack.png",
+      "sha256": "640248ecf2b2a84cfa72aa4bfa402c1579044f420118dad54baba0d9b2901914",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "941e39c2b0faeba73b4bae9d6bee137152d594004d0d4dfcad71ea974bbf9f59",
+      "referenceLockSha256": "7f9e3ee75ec22d7ce9ac293436d8bb3b4906d752521624014a487ad184bb0118",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 1862,
+        "aaFringePixelCount": 1469,
+        "strictCoreMaskSha256": "6ce1e04a20d668b74a871e81867f43fb35dc695de6e89b3e7f1ef094eaf51d16",
+        "aaFringeMaskSha256": "3a7a66ee68f0536e7505b9d94b15b4165676200e89903c9914817394636f1025",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          229,
+          5,
+          232
+        ],
+        "removedPixelCount": 3331,
+        "removedCoordinatesSha256": "d5c347b790286cd98430aa6266c2690ec8213fc01f018bdcc0acbb4313ae9bac",
+        "removedRgbaSha256": "041e8aa618a21d58944883e09d140de9871a7109951c7f5c3445155a82f2e58e",
+        "sourceRgbaSha256": "ee58fd315468272f061f167cc6abcffdde1d8ae56e906bb78c6f61fa1f7b85ee",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-056-albino-drone-big-chap/death.png",
+      "sha256": "d49578b77f309c271b2d369f703be13913a0eb8fe1a09218153108c814a56c56",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "fbef59f602531b54b5b861f6327b6ff977e77093459d18f3de338b2b2ab21beb",
+      "referenceLockSha256": "7f9e3ee75ec22d7ce9ac293436d8bb3b4906d752521624014a487ad184bb0118",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 581,
+        "aaFringePixelCount": 759,
+        "strictCoreMaskSha256": "af9b474d26a464dace2529b03276baa2faf65df86c647b30e38bb6857c6db181",
+        "aaFringeMaskSha256": "b00c1df51dc335dbe1a96f91687a909bb52c594c599b885863e408ec2bfbe786",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          245,
+          5,
+          242
+        ],
+        "removedPixelCount": 1340,
+        "removedCoordinatesSha256": "6687e1a783f3d86e5c04e845827500d353791b3bacdbab8a9fcb67ba647412a4",
+        "removedRgbaSha256": "2044e4482ac3c86bd8a7fd989439add6dec166ad0c90bc5ce2fe1d4dbbfdb578",
+        "sourceRgbaSha256": "a49bcbda0d2b8d3b0c23e416e4bba5c3d836b790d5c6ba7f65e01774058515a6",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-056-albino-drone-big-chap/idle.webp",
+      "sha256": "1e28b90246d889c72a21cb184aa924472647878fcb5463ca287dff8550b621a3",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-056-albino-drone-big-chap/idle.gif",
+      "previewSha256": "fc2f8430d9e2dd50b725f9b614a44f45e6e09f269e636fd3970f70959d3043a7"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-056-albino-drone-big-chap/move.webp",
+      "sha256": "09772cbd318b41206078be0eb61de3eb61eec1ffe74660bb82ef5a240352def2",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-056-albino-drone-big-chap/move.gif",
+      "previewSha256": "1b1a0ef0e47920aa6022c548131d45eeb529e8404cce65bd54c43d87435e241b"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-056-albino-drone-big-chap/attack.webp",
+      "sha256": "f33f8efa5551547208b05b4c09ee71de4182e588e43cfb1c6e49fe7e9c998807",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-056-albino-drone-big-chap/attack.gif",
+      "previewSha256": "30f49705a52c304fe4c87c168454131b653b949c425ae5536a39a0e58e7f23c5"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-056-albino-drone-big-chap/death.webp",
+      "sha256": "03833da0fe5c802daf8f353c592741104599169a11eb3f470ba65a135847910d",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-056-albino-drone-big-chap/death.gif",
+      "previewSha256": "ca93690b995acb3b1e9e15502b9ae90dc0c890f6e33f7edcd7a2fca79950b4ea"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        60,
+        71,
+        413,
+        393
+      ],
+      "sourceGlobalBounds": [
+        60,
+        71,
+        413,
+        393
+      ],
+      "sourceSize": [
+        353,
+        322
+      ],
+      "foregroundPixels": 26349,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e6f407579c81fac0c0ed5f36d55fa3f0acb9c0ee0946692e23dda29aa91dc653",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 0,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        34,
+        69,
+        221,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        31,
+        71,
+        366,
+        394
+      ],
+      "sourceGlobalBounds": [
+        475,
+        71,
+        810,
+        394
+      ],
+      "sourceSize": [
+        335,
+        323
+      ],
+      "foregroundPixels": 27475,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "61da9e0e07ffbb880ad894c147155c43850a7b4ee7f87ce16fb823fa9d8fff09",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 1,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        40,
+        69,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        71,
+        368,
+        393
+      ],
+      "sourceGlobalBounds": [
+        917,
+        71,
+        1255,
+        393
+      ],
+      "sourceSize": [
+        338,
+        322
+      ],
+      "foregroundPixels": 27138,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "77efb217cb7bf0a80ace15089df2bc58d02250df371d5f32e919929cb10f2662",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 2,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        69,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -2,
+        70,
+        336,
+        393
+      ],
+      "sourceGlobalBounds": [
+        1328,
+        70,
+        1666,
+        393
+      ],
+      "sourceSize": [
+        338,
+        323
+      ],
+      "foregroundPixels": 27208,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "49b87eb31bd9e8892f2ff95c118fdcac3f8e645ae5cc6545ea8cdeaf42070a69",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 3,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        69,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        69,
+        32,
+        413,
+        356
+      ],
+      "sourceGlobalBounds": [
+        69,
+        476,
+        413,
+        800
+      ],
+      "sourceSize": [
+        344,
+        324
+      ],
+      "foregroundPixels": 27741,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b4a5a32f993416292cfaa281610e13cfbd7a6e72b7c04d02a025dd6b713a5ab4",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 4,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        37,
+        68,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        31,
+        32,
+        369,
+        356
+      ],
+      "sourceGlobalBounds": [
+        475,
+        476,
+        813,
+        800
+      ],
+      "sourceSize": [
+        338,
+        324
+      ],
+      "foregroundPixels": 28007,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "436e84d9f096169c2f6b2515d6f2bd41e4ea796559c76d58aae727879ebbf251",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 5,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        68,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        28,
+        32,
+        369,
+        356
+      ],
+      "sourceGlobalBounds": [
+        915,
+        476,
+        1256,
+        800
+      ],
+      "sourceSize": [
+        341,
+        324
+      ],
+      "foregroundPixels": 26960,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ded1c9dfe59d882ce554c421f51e640d64a3e79c266b8ff9eae595fc15dc1895",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 6,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        68,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -4,
+        32,
+        339,
+        356
+      ],
+      "sourceGlobalBounds": [
+        1326,
+        476,
+        1669,
+        800
+      ],
+      "sourceSize": [
+        343,
+        324
+      ],
+      "foregroundPixels": 27028,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c1969b4617f92e486de46559e497206db24be0f55033ea2b872c3e7fcb1fb17f",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 1,
+          "componentPixels": 1178,
+          "ownerShare": 0.999151,
+          "sourceBoundsGlobal": [
+            1329,
+            676,
+            1383,
+            758
+          ],
+          "rgbaSha256": "4ba7a9df4df784e60557d821ea7edcfa5df9ab7c99aa7118a3d85f9887c7728a",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 7,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        37,
+        68,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        70,
+        67,
+        407,
+        394
+      ],
+      "sourceGlobalBounds": [
+        70,
+        67,
+        407,
+        394
+      ],
+      "sourceSize": [
+        337,
+        327
+      ],
+      "foregroundPixels": 30438,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "728736b4fafeac6b0e90a9db5844cd97d84952d5f13d5e93a51468afb85be5d7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 8,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        67,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 18,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        32,
+        67,
+        369,
+        393
+      ],
+      "sourceGlobalBounds": [
+        476,
+        67,
+        813,
+        393
+      ],
+      "sourceSize": [
+        337,
+        326
+      ],
+      "foregroundPixels": 30573,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f188816108f8512f978affa594c5bc8ca212b76fbd652d17c3ad09ac1aca1438",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 9,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        67,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 15,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        32,
+        68,
+        369,
+        394
+      ],
+      "sourceGlobalBounds": [
+        919,
+        68,
+        1256,
+        394
+      ],
+      "sourceSize": [
+        337,
+        326
+      ],
+      "foregroundPixels": 30403,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f5e916fe14f9f67eba42ad222adadb084d2458a41853a8e0e78a53741192449a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 10,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        67,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 20,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -8,
+        72,
+        333,
+        393
+      ],
+      "sourceGlobalBounds": [
+        1322,
+        72,
+        1663,
+        393
+      ],
+      "sourceSize": [
+        341,
+        321
+      ],
+      "foregroundPixels": 29843,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2965fcfea38916334b9f6980b1e718a718fa399c1185bc3693a2f98e4971def3",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 80,
+          "componentPixels": 29841,
+          "ownerShare": 0.997319,
+          "sourceBoundsGlobal": [
+            1325,
+            75,
+            1660,
+            390
+          ],
+          "rgbaSha256": "4be02c60848d01e27c5943d9a03577f116b120587b975fa3143106644da350e0",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 11,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        70,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 11,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        69,
+        22,
+        406,
+        350
+      ],
+      "sourceGlobalBounds": [
+        69,
+        466,
+        406,
+        794
+      ],
+      "sourceSize": [
+        337,
+        328
+      ],
+      "foregroundPixels": 29011,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "204e3ed75b394217c7da5327d2694e2f6d24e557709e171ad3e5b79be954f732",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 12,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        66,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        32,
+        25,
+        369,
+        349
+      ],
+      "sourceGlobalBounds": [
+        476,
+        469,
+        813,
+        793
+      ],
+      "sourceSize": [
+        337,
+        324
+      ],
+      "foregroundPixels": 30207,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6135ef0b2c4a8c87447392c6a9d5b8965b157cde6e2f2ecb2f4749b1ecd23255",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 13,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        68,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        32,
+        17,
+        368,
+        348
+      ],
+      "sourceGlobalBounds": [
+        919,
+        461,
+        1255,
+        792
+      ],
+      "sourceSize": [
+        336,
+        331
+      ],
+      "foregroundPixels": 29590,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b2a91cd07af8401d829ac940e7c52523735c89d3e61ecacea511b556e0b27ea3",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 14,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        65,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -3,
+        24,
+        338,
+        350
+      ],
+      "sourceGlobalBounds": [
+        1327,
+        468,
+        1668,
+        794
+      ],
+      "sourceSize": [
+        341,
+        326
+      ],
+      "foregroundPixels": 30287,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d65c269006f9d424fed23d699f07e48f02165e493de4c2950ed8e89f252547f2",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 15,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        67,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        61,
+        75,
+        414,
+        395
+      ],
+      "sourceGlobalBounds": [
+        61,
+        75,
+        414,
+        395
+      ],
+      "sourceSize": [
+        353,
+        320
+      ],
+      "foregroundPixels": 25652,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "24ae54cfd3d44d37463d3e9416aae591f86f7d6c9f84fbe5abf33229721b964e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 16,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        34,
+        71,
+        221,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        75,
+        369,
+        395
+      ],
+      "sourceGlobalBounds": [
+        474,
+        75,
+        813,
+        395
+      ],
+      "sourceSize": [
+        339,
+        320
+      ],
+      "foregroundPixels": 26132,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ca0e85cca4d8f26096d66997ca882d66d1b9469474f73629df518408aee09a2c",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 17,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        38,
+        71,
+        218,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        26,
+        75,
+        369,
+        395
+      ],
+      "sourceGlobalBounds": [
+        913,
+        75,
+        1256,
+        395
+      ],
+      "sourceSize": [
+        343,
+        320
+      ],
+      "foregroundPixels": 25270,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "052d1ea0612623c52dfb6b268f73f546fe8d608abb5302ebb6ea334ad784f63e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 18,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        37,
+        71,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -1,
+        75,
+        364,
+        395
+      ],
+      "sourceGlobalBounds": [
+        1329,
+        75,
+        1694,
+        395
+      ],
+      "sourceSize": [
+        365,
+        320
+      ],
+      "foregroundPixels": 24868,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "be0f2e29f9bb57fc97bef78bc19b70204fbfa8d2ade73fe0acf2aa0e5c0d7ac0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 19,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        32,
+        71,
+        225,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        64,
+        38,
+        444,
+        358
+      ],
+      "sourceGlobalBounds": [
+        64,
+        482,
+        444,
+        802
+      ],
+      "sourceSize": [
+        380,
+        320
+      ],
+      "foregroundPixels": 25918,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "397c7a821cd3cc2ef454465e25eb56e98047c6e60377f9178bdb8e1b26bdedfb",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 20,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        28,
+        71,
+        229,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        30,
+        38,
+        384,
+        357
+      ],
+      "sourceGlobalBounds": [
+        474,
+        482,
+        828,
+        801
+      ],
+      "sourceSize": [
+        354,
+        319
+      ],
+      "foregroundPixels": 26202,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "83cd6bf733c34b8b31b8540b496e75e294761136084c131e564c85a40b8f63f7",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 21,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        34,
+        71,
+        221,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 8,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        26,
+        38,
+        389,
+        358
+      ],
+      "sourceGlobalBounds": [
+        913,
+        482,
+        1276,
+        802
+      ],
+      "sourceSize": [
+        363,
+        320
+      ],
+      "foregroundPixels": 25772,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ee4f757ce7bc3be540b1a8bb68068ac6f865d68b35df58aad9f3918ef72d3275",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 22,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        32,
+        71,
+        224,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -1,
+        38,
+        343,
+        357
+      ],
+      "sourceGlobalBounds": [
+        1329,
+        482,
+        1673,
+        801
+      ],
+      "sourceSize": [
+        344,
+        319
+      ],
+      "foregroundPixels": 25563,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3523a29012150a26a2f97a9b4311f989be774b57925264feb4dcd75b70a732fa",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 23,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        37,
+        71,
+        219,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        62,
+        73,
+        398,
+        390
+      ],
+      "sourceGlobalBounds": [
+        62,
+        73,
+        398,
+        390
+      ],
+      "sourceSize": [
+        336,
+        317
+      ],
+      "foregroundPixels": 27955,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fd8ccebb2fd1de922013d7f7a6bded3823b90bf089cc56357555c5a2290f018a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 24,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        72,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        26,
+        73,
+        363,
+        390
+      ],
+      "sourceGlobalBounds": [
+        470,
+        73,
+        807,
+        390
+      ],
+      "sourceSize": [
+        337,
+        317
+      ],
+      "foregroundPixels": 27997,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b434c83728e4a6a0bb468009e071423c08a352f8ad836f5123d02c9a2d197c6c",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 25,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        39,
+        72,
+        217,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 12,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        5,
+        147,
+        363,
+        388
+      ],
+      "sourceGlobalBounds": [
+        892,
+        147,
+        1250,
+        388
+      ],
+      "sourceSize": [
+        358,
+        241
+      ],
+      "foregroundPixels": 25162,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "609895b9490d7c7651939ca46ffbf9fddd345336c237b6febf851f9f7f473d94",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 26,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        33,
+        112,
+        223,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -7,
+        203,
+        361,
+        390
+      ],
+      "sourceGlobalBounds": [
+        1323,
+        203,
+        1691,
+        390
+      ],
+      "sourceSize": [
+        368,
+        187
+      ],
+      "foregroundPixels": 23028,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "f063c64288646648b78584234c9db0daddb27da0e33b960650f12a65bb8c5e83",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 69,
+          "componentPixels": 23013,
+          "ownerShare": 0.997002,
+          "sourceBoundsGlobal": [
+            1326,
+            206,
+            1688,
+            387
+          ],
+          "rgbaSha256": "b65916ecda6c88de1298edf20dca5689b759ca506bbfb252263ca24e8bc8c06b",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 27,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        30,
+        141,
+        225,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        25,
+        147,
+        384,
+        354
+      ],
+      "sourceGlobalBounds": [
+        25,
+        591,
+        384,
+        798
+      ],
+      "sourceSize": [
+        359,
+        207
+      ],
+      "foregroundPixels": 24700,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "11bb3448d6febe99c8fb166b296eec464d9d489e3415e7ce4ae6687beb63a062",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 28,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        33,
+        130,
+        223,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 24,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        -27,
+        246,
+        376,
+        354
+      ],
+      "sourceGlobalBounds": [
+        417,
+        690,
+        820,
+        798
+      ],
+      "sourceSize": [
+        403,
+        108
+      ],
+      "foregroundPixels": 18797,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1b513fd09293c3a9d3586181fce6f28ff3c0180559f00c9015a167376b7ca3b1",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 5,
+          "fromCells": [
+            4
+          ],
+          "pixels": 488,
+          "componentPixels": 18797,
+          "ownerShare": 0.974038,
+          "sourceBoundsGlobal": [
+            420,
+            693,
+            817,
+            795
+          ],
+          "rgbaSha256": "65070ebd8fa6e2aaf0a861190f8ad00b45dc1c341ce1ad78f003643a105bfb40",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 29,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        22,
+        183,
+        235,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 9,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -35,
+        289,
+        386,
+        354
+      ],
+      "sourceGlobalBounds": [
+        852,
+        733,
+        1273,
+        798
+      ],
+      "sourceSize": [
+        421,
+        65
+      ],
+      "foregroundPixels": 12467,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9ac61418572b76f91ad90fbbe40f950d8d301bc7ebcd2ae33f8b7af16858060a",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 213,
+          "componentPixels": 12467,
+          "ownerShare": 0.982915,
+          "sourceBoundsGlobal": [
+            855,
+            736,
+            1270,
+            795
+          ],
+          "rgbaSha256": "8e2cd7edcb92413333828d21db168c24b867f13251cd249c4c4063a7614b05b6",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 30,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        16,
+        206,
+        239,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -26,
+        301,
+        397,
+        354
+      ],
+      "sourceGlobalBounds": [
+        1304,
+        745,
+        1727,
+        798
+      ],
+      "sourceSize": [
+        423,
+        53
+      ],
+      "foregroundPixels": 9689,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "dbd86acd1665f84ea8fb8de0694867d5c7fa37277f7e7ba00adcea9830dafb37",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 115,
+          "componentPixels": 9689,
+          "ownerShare": 0.988131,
+          "sourceBoundsGlobal": [
+            1307,
+            748,
+            1724,
+            795
+          ],
+          "rgbaSha256": "eeeb894a572a4a965bd46d292dcb6a7b220c2c000624156e6f874b20c3bbcc29",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "pending-body-root-review",
+      "anchorMethod": "legacy-bounds-center-bottom",
+      "index": 31,
+      "scale": 0.529550827,
+      "sourceScale": 1.0,
+      "appliedScale": 0.529550827,
+      "renderedBounds": [
+        16,
+        212,
+        240,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          35,
+          70,
+          220,
+          239
+        ],
+        "foregroundPixels": 8421,
+        "width": 185,
+        "height": 169,
+        "relativeToRowMedian": 0.990648
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          41,
+          70,
+          216,
+          239
+        ],
+        "foregroundPixels": 8554,
+        "width": 175,
+        "height": 169,
+        "relativeToRowMedian": 1.006294
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          39,
+          70,
+          216,
+          239
+        ],
+        "foregroundPixels": 8528,
+        "width": 177,
+        "height": 169,
+        "relativeToRowMedian": 1.003235
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          39,
+          70,
+          216,
+          239
+        ],
+        "foregroundPixels": 8473,
+        "width": 177,
+        "height": 169,
+        "relativeToRowMedian": 0.996765
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          38,
+          69,
+          218,
+          239
+        ],
+        "foregroundPixels": 8705,
+        "width": 180,
+        "height": 170,
+        "relativeToRowMedian": 1.008282
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          39,
+          69,
+          216,
+          239
+        ],
+        "foregroundPixels": 8749,
+        "width": 177,
+        "height": 170,
+        "relativeToRowMedian": 1.013378
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          39,
+          69,
+          218,
+          239
+        ],
+        "foregroundPixels": 8526,
+        "width": 179,
+        "height": 170,
+        "relativeToRowMedian": 0.987549
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          38,
+          69,
+          218,
+          239
+        ],
+        "foregroundPixels": 8562,
+        "width": 180,
+        "height": 170,
+        "relativeToRowMedian": 0.991718
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          40,
+          68,
+          216,
+          239
+        ],
+        "foregroundPixels": 9274,
+        "width": 176,
+        "height": 171,
+        "relativeToRowMedian": 0.997687
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          40,
+          68,
+          216,
+          239
+        ],
+        "foregroundPixels": 9350,
+        "width": 176,
+        "height": 171,
+        "relativeToRowMedian": 1.005863
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          40,
+          68,
+          216,
+          239
+        ],
+        "foregroundPixels": 9317,
+        "width": 176,
+        "height": 171,
+        "relativeToRowMedian": 1.002313
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          39,
+          71,
+          218,
+          239
+        ],
+        "foregroundPixels": 9210,
+        "width": 179,
+        "height": 168,
+        "relativeToRowMedian": 0.990802
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          40,
+          67,
+          216,
+          239
+        ],
+        "foregroundPixels": 8918,
+        "width": 176,
+        "height": 172,
+        "relativeToRowMedian": 0.976192
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          40,
+          69,
+          216,
+          239
+        ],
+        "foregroundPixels": 9264,
+        "width": 176,
+        "height": 170,
+        "relativeToRowMedian": 1.014066
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          40,
+          66,
+          216,
+          239
+        ],
+        "foregroundPixels": 9007,
+        "width": 176,
+        "height": 173,
+        "relativeToRowMedian": 0.985934
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          39,
+          68,
+          218,
+          239
+        ],
+        "foregroundPixels": 9323,
+        "width": 179,
+        "height": 171,
+        "relativeToRowMedian": 1.020524
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          35,
+          72,
+          220,
+          239
+        ],
+        "foregroundPixels": 8207,
+        "width": 185,
+        "height": 167,
+        "relativeToRowMedian": 1.007736
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          39,
+          72,
+          217,
+          239
+        ],
+        "foregroundPixels": 8278,
+        "width": 178,
+        "height": 167,
+        "relativeToRowMedian": 1.016454
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          38,
+          72,
+          218,
+          239
+        ],
+        "foregroundPixels": 8081,
+        "width": 180,
+        "height": 167,
+        "relativeToRowMedian": 0.992264
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          33,
+          72,
+          224,
+          239
+        ],
+        "foregroundPixels": 8036,
+        "width": 191,
+        "height": 167,
+        "relativeToRowMedian": 0.986739
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          29,
+          72,
+          228,
+          239
+        ],
+        "foregroundPixels": 8270,
+        "width": 199,
+        "height": 167,
+        "relativeToRowMedian": 1.004494
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          35,
+          72,
+          220,
+          239
+        ],
+        "foregroundPixels": 8303,
+        "width": 185,
+        "height": 167,
+        "relativeToRowMedian": 1.008502
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          33,
+          72,
+          223,
+          239
+        ],
+        "foregroundPixels": 8196,
+        "width": 190,
+        "height": 167,
+        "relativeToRowMedian": 0.995506
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          38,
+          72,
+          218,
+          239
+        ],
+        "foregroundPixels": 8145,
+        "width": 180,
+        "height": 167,
+        "relativeToRowMedian": 0.989311
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          40,
+          73,
+          216,
+          239
+        ],
+        "foregroundPixels": 8573,
+        "width": 176,
+        "height": 166,
+        "relativeToRowMedian": 1.054165
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          40,
+          73,
+          216,
+          239
+        ],
+        "foregroundPixels": 8534,
+        "width": 176,
+        "height": 166,
+        "relativeToRowMedian": 1.04937
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          34,
+          113,
+          222,
+          239
+        ],
+        "foregroundPixels": 7731,
+        "width": 188,
+        "height": 126,
+        "relativeToRowMedian": 0.95063
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          31,
+          142,
+          224,
+          239
+        ],
+        "foregroundPixels": 7023,
+        "width": 193,
+        "height": 97,
+        "relativeToRowMedian": 0.863572
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          34,
+          131,
+          222,
+          239
+        ],
+        "foregroundPixels": 7518,
+        "width": 188,
+        "height": 108,
+        "relativeToRowMedian": 1.627449
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          23,
+          184,
+          234,
+          239
+        ],
+        "foregroundPixels": 5582,
+        "width": 211,
+        "height": 55,
+        "relativeToRowMedian": 1.208356
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          17,
+          207,
+          238,
+          239
+        ],
+        "foregroundPixels": 3657,
+        "width": 221,
+        "height": 32,
+        "relativeToRowMedian": 0.791644
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          17,
+          213,
+          239,
+          239
+        ],
+        "foregroundPixels": 2925,
+        "width": 222,
+        "height": 26,
+        "relativeToRowMedian": 0.633185
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      8500.5,
+      8633.5,
+      9295.5,
+      9135.5,
+      8144.0,
+      8233.0,
+      8132.5,
+      4619.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "4523fae41b0991d66d0d66d6426973b27710d9fed32a6568e52cb66bdfdb90ae",
+      "e9e7248f5947e99173c412dd38d6bd750326f37621d2841746342185893c95f1",
+      "2be13e48eb7dddbe3e507ebf648ebed11042c7ed99946ae383eab36c98fdb16b",
+      "d7f80e79b04799fa5b99dc94c23f24175fa4f677c7a7fcfe1949b68e3e0fc5af",
+      "ff0edc2625692b74dcc32a5ae6b6ec1e83abf485a17c66a01cfcef8ff315466b",
+      "64d6ea87978811420f29e86db100cc7bb55fa813f6f5373ac394448c63b36b46",
+      "a2691e95a38afedc5adfdde66f2bb35a14aaa092ea12d76c1c251567a24bb89b",
+      "a855df722c3923820404c977c3b0518eb005d627c17a4efb9e99c953aa8cf072",
+      "d667af91dfe57acc049bd587ff38eeab960124e6009f1a29493b372a8144b7ba",
+      "e42d57ebd78fc455a5e67280842854cdc24bc50c68fecc274f6d2e6178b3485e",
+      "5c7d992f70a13444afd8f238bef972ec89a7b451be5ed9bbd9a2fdb8d83ded11",
+      "82845e140592b91c3761cd0a5d0156efed2299caf9091a35a6c5a12a2e52b303",
+      "ecb65fc836e1bad794ee3fc4fa00fc48a8c84df06d573f775a71705c4ea5bc95",
+      "94d219956000fe7b8f8eff276ee45a60d157470bd9569d1f76a3002e692ef3bf",
+      "18a0622cce2ec3e53401c44b6ab829f1175d44d57b787a44f30e187fa42a83a8",
+      "e8fb4832e916bceaeb6b238d61055406fe20a4df32e9f99ece71653026ecc9a0",
+      "bccbb4ca0a5e6f2c3c551d662e7bd80b2003a008bb50276e958b3c71aa16c2e1",
+      "69d55a087ae62ced3419a81cbc355a3f95194282a450a6dc0db6a5e607246ec9",
+      "f0df6090c1164e5cdb16efd5ba66ccbda07c3c777558144b386796e10b4846ad",
+      "136d2b95d5ed69f380ca14b75cbb770d2551faf09a8be81be49b7f9284b43e0e",
+      "907aab217b9cb2613e2a7348936c456fc03dd2a87c0399c1dafa50c7b8ab9dd4",
+      "6512bce66942eafd099fb5c80a5353aa3507188e7bc17f56a6361d4313ade592",
+      "70218966962418d7b22edb95e2f555cddf4ae9fa62d7028d2a04db10358be374",
+      "eedd12b24d0e73dec9452f1af9b009cb383b18cc4fe83be186b9b90928808c8e",
+      "9b9292c8acac6fb7fb7a6bb518f5db02efbd413a6a22d8ec917985d5d67dac03",
+      "63bd035dee2a547cfc405cfedf305db7b866c43b19d3f03bdb0492a65f40f2eb",
+      "0dab5b67a4d95b0348406f2ded9b39fe0bd2e8935700f5dab30b4b0d9c05b366",
+      "2ac559201e6f3214cdcfa17a8641a7a3c3d4b897491a2d6ad22328e0fe780e87",
+      "693466f632011c0ddd1d124acd1860efa848e7df158c551e4512ac40cfd5e242",
+      "48cf0e6d127b40f7a0a5683c5dc8b4881948888f1b5bd24349b39ed4724ec773",
+      "0e64982160fa39771491cc0e88ad65af61419cee40fb7d9ab61eb3dfae76e34f",
+      "cd9df28d25fedebb95a2443e388ad6ec936bc0180b9d13fddd7fc74664b02ad4"
+    ],
+    "visualFidelityCertified": false
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 221,
+    "remainingStrictPixelCount": 0
+  }
+}

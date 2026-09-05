@@ -292,14 +292,53 @@ def scale_evidence_path(root: Path, value: object) -> Path:
     return path
 
 
-def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT) -> dict | None:
+def standalone_review_paths(job: dict, root: Path = ROOT, anchor_review: str | None = None, scale_review: str | None = None, metadata: dict | None = None) -> dict:
+    """Resolve explicit per-profile reviews without mutating shared batch files.
+
+    Checks reuse the exact recorded paths; supplied overrides may confirm but
+    never silently replace that provenance. All content and source checks below
+    still apply. A missing standalone review is an error, never a pending pass.
+    """
+    requested = {key: value for key, value in (("anchor", anchor_review), ("scale", scale_review)) if value is not None}
+    if metadata is not None:
+        recorded = metadata.get("normalizationReviewPaths", {})
+        if not isinstance(recorded, dict) or ("normalizationReviewPaths" in metadata and not recorded) or set(recorded) - {"anchor", "scale"}:
+            raise ValueError("Standalone review path metadata is invalid.")
+        if any(recorded.get(key) != value for key, value in requested.items()):
+            raise ValueError("Explicit standalone review path differs from recorded provenance.")
+        paths = dict(recorded)
+    else:
+        paths = requested
+    for kind, value in paths.items():
+        if not isinstance(value, str) or Path(value).suffix.lower() != ".json" or value == job.get("metadataPath"):
+            raise ValueError("Standalone review requires a separate repository-relative JSON file.")
+        path = scale_evidence_path(root, value)
+        document = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(document, dict) or type(document.get("schema")) is not int or document["schema"] != 1 or document.get("batchId") != job["batchId"] or document.get("coordinates") != "nominal-source-cell" or not isinstance(document.get("profiles"), dict) or set(document["profiles"]) != {job["profileId"]}:
+            raise ValueError("Standalone review must belong to exactly the selected profile and batch.")
+        entry = document["profiles"][job["profileId"]]
+        if not isinstance(entry, dict) or entry.get("status") != "reviewed" or entry.get("profileId", job["profileId"]) != job["profileId"]:
+            raise ValueError("Standalone review must be explicitly reviewed for this profile.")
+        if kind == "anchor":
+            if any(not isinstance(entry.get(field), str) or not entry[field].strip() for field in ("reviewer", "reviewedAt", "method")) or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", entry["reviewedAt"]):
+                raise ValueError("Standalone physical review requires reviewer, date and method.")
+            date.fromisoformat(entry["reviewedAt"])
+            evidence = entry.get("evidencePaths")
+            if not isinstance(evidence, list) or not evidence or any(not isinstance(item, str) for item in evidence) or len(set(evidence)) != len(evidence):
+                raise ValueError("Standalone physical review requires unique evidence paths.")
+            for item in evidence:
+                scale_evidence_path(root, item)
+    return paths
+
+
+def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT, review_path: str | None = None) -> dict | None:
     """Resolve a measured, clip-wide correction without changing generation locks.
 
     An absent entry leaves legacy behavior and metadata untouched. A present
     entry must prove every source, every correction and its rigid landmarks;
     it never supplies a factor per pose or relaxes the atlas safety guard.
     """
-    review_path = batch_scale_review_path(job)
+    review_path = review_path or batch_scale_review_path(job)
     path = scoped_path(root, review_path)
     if not path.exists():
         return None
@@ -322,19 +361,20 @@ def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT) -> 
     if not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", entry["reviewedAt"]):
         raise ValueError("Scale review date must be YYYY-MM-DD.")
     date.fromisoformat(entry["reviewedAt"])
-    if entry.get("baselineClip") != "idle":
-        raise ValueError("The post-generation scale baseline must be idle.")
+    baseline_clip = "sealed" if job.get("animationFamily") == "egg" else "idle"
+    if entry.get("baselineClip") != baseline_clip:
+        raise ValueError(f"The post-generation scale baseline must be {baseline_clip}.")
     clip_ids = [clip["id"] for clip in job["clips"]]
-    if not clip_ids or any(not isinstance(clip, str) or not clip for clip in clip_ids) or len(set(clip_ids)) != len(clip_ids) or "idle" not in clip_ids:
-        raise ValueError("Scale review requires unique authored clips including idle.")
+    if not clip_ids or any(not isinstance(clip, str) or not clip for clip in clip_ids) or len(set(clip_ids)) != len(clip_ids) or baseline_clip not in clip_ids:
+        raise ValueError(f"Scale review requires unique authored clips including {baseline_clip}.")
     factors, source_hashes = entry.get("sourceScaleByClip"), entry.get("sourceSha256ByClip")
     if not isinstance(factors, dict) or not isinstance(source_hashes, dict) or set(factors) != set(clip_ids) or set(source_hashes) != set(clip_ids):
         raise ValueError("Scale factors and SHA evidence must cover every source clip exactly once.")
     for value in factors.values():
         if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(value) or not 0.25 <= value <= 4:
             raise ValueError("Post-generation scale factors must be finite numbers in [0.25, 4].")
-    if factors["idle"] != 1:
-        raise ValueError("The idle baseline factor must be exactly 1.")
+    if factors[baseline_clip] != 1:
+        raise ValueError(f"The {baseline_clip} baseline factor must be exactly 1.")
     if any(not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value) for value in source_hashes.values()):
         raise ValueError("Scale source SHA-256 values must be lowercase 64-digit hashes.")
     if not isinstance(sources, list) or len(sources) != len(clip_ids) or any(not isinstance(source, dict) for source in sources) or [source.get("clip") for source in sources] != clip_ids:
@@ -385,9 +425,9 @@ def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT) -> 
         if not isinstance(length, (int, float)) or isinstance(length, bool) or not math.isfinite(length) or length <= 1 or abs(length - math.dist(*points)) > 1:
             raise ValueError("Scale length must agree with its Euclidean endpoints within one pixel.")
         lengths.setdefault(clip, []).append(length)
-    if len(lengths.get("idle", [])) < 2 or any(len(values) < 2 for values in lengths.values()) or any(factor != 1 and clip not in lengths for clip, factor in factors.items()):
+    if len(lengths.get(baseline_clip, [])) < 2 or any(len(values) < 2 for values in lengths.values()) or any(factor != 1 and clip not in lengths for clip, factor in factors.items()):
         raise ValueError("Scale review needs at least two distinct comparable poses for baseline and every measured or corrected clip.")
-    baseline_length = median(lengths["idle"])
+    baseline_length = median(lengths[baseline_clip])
     for clip, values in lengths.items():
         expected_factor = baseline_length / median(values)
         if abs(factors[clip] / expected_factor - 1) > 0.03:
@@ -397,18 +437,19 @@ def reviewed_source_scale(job: dict, sources: list[dict], root: Path = ROOT) -> 
         raise ValueError("Scale review requires unique nonempty evidence paths.")
     evidence = [{"path": value, "sha256": hash_file(scale_evidence_path(root, value))} for value in evidence_paths]
     return {"path": review_path, "sha256": hashlib.sha256(raw).hexdigest(), "status": "reviewed", "profileId": job["profileId"],
-            "reviewer": entry["reviewer"], "reviewedAt": entry["reviewedAt"], "coordinates": "nominal-source-cell", "baselineClip": "idle",
+            "reviewer": entry["reviewer"], "reviewedAt": entry["reviewedAt"], "coordinates": "nominal-source-cell", "baselineClip": baseline_clip,
             "sourceScaleByClip": factors, "sourceSha256ByClip": source_hashes, "measurementCount": len(measurements), "evidence": evidence}
 
 
-def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict], root: Path = ROOT) -> tuple[list[dict] | None, dict]:
+def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict], root: Path = ROOT, review_path: str | None = None) -> tuple[list[dict] | None, dict]:
     """Load only complete, individually reviewed physical roots; never guess them.
 
     Coordinates are relative to the nominal source cell, not the cropped pose.
     Thus a short, proven component spill keeps exactly the same physical root.
     Unmeasured profiles remain explicit pending work, not automatic approvals.
     """
-    review_path = batch_anchor_review_path(job)
+    standalone = review_path is not None
+    review_path = review_path or batch_anchor_review_path(job)
     path = scoped_path(root, review_path)
     if not path.is_file():
         return None, {"status": "pending", "reason": "No source-anchor review file."}
@@ -421,6 +462,8 @@ def reviewed_source_anchors(job: dict, reports: list[dict], sources: list[dict],
         return None, {**proof, "reason": "Profile anchors have not all been physically reviewed."}
     if not entry.get("reviewer") or not entry.get("reviewedAt") or not entry.get("method"):
         raise ValueError("Reviewed physical anchors require an explicit reviewer, date and measurement method.")
+    if standalone:
+        proof["evidence"] = [{"path": value, "sha256": hash_file(scale_evidence_path(root, value))} for value in entry["evidencePaths"]]
     clip_entries = entry.get("clips", {})
     if set(clip_entries) != {source["clip"] for source in sources}:
         raise ValueError("Reviewed physical anchors must cover every source clip exactly once.")
@@ -499,12 +542,35 @@ def magenta_spill_proof_summary(placements: list[dict]) -> dict:
             "remainingStrictPixelCount": sum(proof["remainingStrictPixelCount"] for proof in proofs)}
 
 
-def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict, pivot: dict, source_scale_by_clip: dict | None = None, source_anchors: list[dict] | None = None, remove_magenta_spill: bool = False) -> tuple[Image.Image, list[dict]]:
+def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict, pivot: dict, source_scale_by_clip: dict | None = None, source_anchors: list[dict] | None = None, remove_magenta_spill: bool = False, trim_transparent_padding: bool = False) -> tuple[Image.Image, list[dict]]:
     width, height, columns, rows, guard = (grid[key] for key in ("cellWidth", "cellHeight", "columns", "rows", "guard"))
     if not all(isinstance(value, int) and value > 0 for value in (width, height, columns, rows, guard)):
         raise ValueError("Grid dimensions must be positive integers.")
     if len(frames) != len(reports) or len(frames) != rows * columns:
         raise ValueError("Dynamic atlas grid must contain every authored pose exactly once.")
+    if not isinstance(trim_transparent_padding, bool):
+        raise ValueError("Transparent padding trim must be explicitly boolean.")
+    if trim_transparent_padding:
+        if source_anchors is None:
+            raise ValueError("Transparent padding trim requires reviewed physical roots.")
+        # Opt-in only: legacy atlas pixels and metadata stay byte-for-byte stable.
+        # Remove alpha==0 outside the true alpha bbox, never threshold faint art.
+        # Keep the extraction bounds intact as source provenance; record the
+        # tighter packing rectangle separately, in nominal source coordinates.
+        cropped_frames, cropped_reports = [], []
+        for frame, report in zip(frames, reports):
+            bounds = frame.getchannel("A").getbbox()
+            if bounds is None:
+                raise ValueError("Transparent padding trim cannot normalize an empty authored frame.")
+            left, top, right, bottom = bounds
+            source_left, source_top = report["sourceBounds"][:2]
+            packing_bounds = [source_left + left, source_top + top, source_left + right, source_top + bottom]
+            cropped_frames.append(frame.crop(bounds))
+            cropped_reports.append({**report, "transparentPaddingTrim": {
+                "method": "exact-zero-alpha-bbox-v1", "sourceBounds": packing_bounds,
+                "removedMargins": [left, top, frame.width - right, frame.height - bottom],
+                "removedVisiblePixelCount": 0}})
+        frames, reports = cropped_frames, cropped_reports
     if not (guard <= pivot["x"] <= width - guard and guard < pivot["y"] <= height - guard):
         raise ValueError("The shared pivot must remain within the guarded cell.")
     maximum_width = 2 * min(pivot["x"] - guard, width - guard - pivot["x"])
@@ -524,7 +590,8 @@ def normalize_frames(frames: list[Image.Image], reports: list[dict], grid: dict,
         available = (pivot["x"] - guard, width - guard - pivot["x"], pivot["y"] - guard, height - guard - pivot["y"])
         for frame, report, factor, reviewed in zip(frames, reports, source_scales, source_anchors):
             anchor_x, anchor_y = finite_pair(reviewed.get("anchor"), "Physical anchor")
-            offset_x, offset_y = anchor_x - report["sourceBounds"][0], anchor_y - report["sourceBounds"][1]
+            packing_bounds = report.get("transparentPaddingTrim", {}).get("sourceBounds", report["sourceBounds"])
+            offset_x, offset_y = anchor_x - packing_bounds[0], anchor_y - packing_bounds[1]
             offsets.append((offset_x, offset_y))
             for extent, space in zip((offset_x, frame.width - offset_x, offset_y, frame.height - offset_y), available):
                 if extent > 0:
@@ -614,7 +681,8 @@ def save_preview(atlas: Image.Image, path: Path, grid: dict, fps: int, loop: boo
             raise ValueError("Preview lost authored frames.")
 
 
-def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool = False, remove_enclosed_magenta_matte: bool = False, remove_enclosed_magenta_aa_fringe: bool = False, remove_magenta_spill: bool = False) -> dict:
+def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool = False, remove_enclosed_magenta_matte: bool = False, remove_enclosed_magenta_aa_fringe: bool = False, remove_magenta_spill: bool = False, anchor_review: str | None = None, scale_review: str | None = None, trim_transparent_padding: bool = False) -> dict:
+    review_paths = standalone_review_paths(job, root, anchor_review, scale_review)
     if not job.get("reference") or job["reference"].get("status") != "reviewed":
         raise ValueError(f'{job["profileId"]}: reviewed design references are required before normalization.')
     frames, reports, sources = [], [], []
@@ -630,7 +698,7 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         reports.extend(clip_reports)
     if len({tuple(source["size"]) for source in sources}) != 1:
         raise ValueError("All clips of a profile must share source resolution; mixed physical scales need visual review.")
-    post_generation_review = reviewed_source_scale(job, sources, root)
+    post_generation_review = reviewed_source_scale(job, sources, root, review_paths.get("scale"))
     source_scale_by_clip = job["reference"].get("sourceScaleByClip", {})
     calibration_review = job["reference"].get("scaleCalibrationReview")
     calibration_evidence = []
@@ -640,8 +708,8 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         calibration_evidence = [{"path": path, "sha256": hash_file(scoped_path(root, path))} for path in calibration_review["evidencePaths"]]
     if post_generation_review is not None:
         source_scale_by_clip = post_generation_review["sourceScaleByClip"]
-    source_anchors, anchor_review = reviewed_source_anchors(job, reports, sources, root)
-    atlas, placements = normalize_frames(frames, reports, job["grid"], job["pivot"], source_scale_by_clip, source_anchors, remove_magenta_spill)
+    source_anchors, anchor_review = reviewed_source_anchors(job, reports, sources, root, review_paths.get("anchor"))
+    atlas, placements = normalize_frames(frames, reports, job["grid"], job["pivot"], source_scale_by_clip, source_anchors, remove_magenta_spill, trim_transparent_padding)
     validation = validate_atlas(atlas, job["grid"])
     atlas_path = scoped_path(root, job["normalizedPath"])
     save_lossless(atlas, atlas_path)
@@ -677,20 +745,32 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
         "rawPreserved": True, "interpolatedFrames": 0, "duplicatedFrames": 0,
         "frameCount": len(frames), "sources": sources, "clips": clips, "placements": placements, "validation": validation}
     if post_generation_review is not None:
-        if reviewed_source_scale(job, sources, root) != post_generation_review:
+        if reviewed_source_scale(job, sources, root, review_paths.get("scale")) != post_generation_review:
             raise ValueError("Post-generation scale evidence changed during normalization.")
         metadata["postGenerationScaleReview"] = post_generation_review
+    if review_paths:
+        if reviewed_source_anchors(job, reports, sources, root, review_paths.get("anchor"))[1] != anchor_review:
+            raise ValueError("Standalone physical evidence changed during normalization.")
+        metadata["normalizationReviewPaths"] = review_paths
     if remove_magenta_spill:
         metadata["magentaSpill"] = magenta_spill_proof_summary(placements)
+    if trim_transparent_padding:
+        metadata["normalizationOptions"]["trimTransparentPadding"] = True
     json_write(scoped_path(root, job["metadataPath"]), metadata)
     return metadata
 
 
-def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: bool | None = None, remove_enclosed_magenta_aa_fringe: bool | None = None, remove_magenta_spill: bool | None = None) -> dict:
+def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: bool | None = None, remove_enclosed_magenta_aa_fringe: bool | None = None, remove_magenta_spill: bool | None = None, anchor_review: str | None = None, scale_review: str | None = None, trim_transparent_padding: bool | None = None) -> dict:
     metadata = json.loads(scoped_path(root, job["metadataPath"]).read_text(encoding="utf-8"))
+    review_paths = standalone_review_paths(job, root, anchor_review, scale_review, metadata)
     recorded_matte_option = metadata.get("normalizationOptions", {}).get("removeEnclosedMagentaMatte")
     recorded_aa_option = metadata.get("normalizationOptions", {}).get("removeEnclosedMagentaAaFringe")
     recorded_spill_option = metadata.get("normalizationOptions", {}).get("removeMagentaSpill", False)
+    recorded_padding_option = metadata.get("normalizationOptions", {}).get("trimTransparentPadding", False)
+    if not isinstance(recorded_padding_option, bool) or (trim_transparent_padding is not None and recorded_padding_option != trim_transparent_padding):
+        raise ValueError("Explicit transparent padding trim option changed.")
+    if not recorded_padding_option and any("transparentPaddingTrim" in placement for placement in metadata["placements"]):
+        raise ValueError("Transparent padding trim proof exists while its explicit option is disabled.")
     if not isinstance(recorded_matte_option, bool) or (remove_enclosed_magenta_matte is not None and recorded_matte_option != remove_enclosed_magenta_matte):
         raise ValueError("Explicit enclosed-magenta normalization option is missing or changed.")
     if not isinstance(recorded_aa_option, bool) or (remove_enclosed_magenta_aa_fringe is not None and recorded_aa_option != remove_enclosed_magenta_aa_fringe):
@@ -701,7 +781,7 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
         raise ValueError("Identity or reviewed reference changed since normalization.")
     if metadata["grid"] != job["grid"] or metadata["pivot"] != job["pivot"] or metadata["frameCount"] != len(job["clips"]) * 8:
         raise ValueError("Animation contract changed since normalization.")
-    expected_post_review = reviewed_source_scale(job, metadata["sources"], root)
+    expected_post_review = reviewed_source_scale(job, metadata["sources"], root, review_paths.get("scale"))
     if (expected_post_review is None and "postGenerationScaleReview" in metadata) or json.dumps(metadata.get("postGenerationScaleReview"), sort_keys=True) != json.dumps(expected_post_review, sort_keys=True):
         raise ValueError("Post-generation scale review or its evidence changed since normalization.")
     scale_by_clip = expected_post_review["sourceScaleByClip"] if expected_post_review is not None else job["reference"].get("sourceScaleByClip", {})
@@ -710,7 +790,7 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
         raise ValueError("Reviewed inter-clip scale calibration changed.")
     if expected_post_review is not None and (json.dumps(metadata.get("sourceScaleByClip"), sort_keys=True) != json.dumps(expected_calibration, sort_keys=True) or metadata.get("scaleCalibrationEvidence") != []):
         raise ValueError("Post-generation scale factors or legacy evidence fields are inconsistent.")
-    _, expected_anchor_review = reviewed_source_anchors(job, metadata["placements"], metadata["sources"], root)
+    _, expected_anchor_review = reviewed_source_anchors(job, metadata["placements"], metadata["sources"], root, review_paths.get("anchor"))
     if metadata.get("physicalAnchorReview") != expected_anchor_review:
         raise ValueError("Physical source-anchor review changed since normalization.")
     for evidence in metadata.get("scaleCalibrationEvidence", []):
@@ -724,7 +804,7 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
             raise ValueError(f'Source or prompt provenance changed for {clip["id"]}.')
         with Image.open(scoped_path(root, source["path"])) as original:
             expected_matte = source_matte_proof(original, recorded_matte_option, recorded_aa_option)
-            if expected_post_review is not None or recorded_spill_option:
+            if expected_post_review is not None or recorded_spill_option or recorded_padding_option:
                 reassignment = metadata.get("normalizationOptions", {}).get("safeReassignCellFragments")
                 if not isinstance(reassignment, bool):
                     raise ValueError("Post-generation scale check requires the recorded cell ownership option.")
@@ -739,11 +819,11 @@ def check_profile(job: dict, root: Path = ROOT, remove_enclosed_magenta_matte: b
         if hash_file(scoped_path(root, job[path_key])) != metadata[key]:
             raise ValueError(f"Published normalization checksum differs: {path_key}")
     expected_atlas = None
-    if expected_post_review is not None or recorded_spill_option:
+    if expected_post_review is not None or recorded_spill_option or recorded_padding_option:
         # Reapply the measured factors in memory only: metadata cannot claim a
         # new calibration while retaining pixels produced at an older scale.
-        anchors, _ = reviewed_source_anchors(job, reviewed_reports, metadata["sources"], root)
-        expected_atlas, expected_placements = normalize_frames(reviewed_frames, reviewed_reports, job["grid"], job["pivot"], scale_by_clip, anchors, recorded_spill_option)
+        anchors, _ = reviewed_source_anchors(job, reviewed_reports, metadata["sources"], root, review_paths.get("anchor"))
+        expected_atlas, expected_placements = normalize_frames(reviewed_frames, reviewed_reports, job["grid"], job["pivot"], scale_by_clip, anchors, recorded_spill_option, recorded_padding_option)
         if json.dumps(metadata["placements"], sort_keys=True) != json.dumps(expected_placements, sort_keys=True) or type(metadata.get("scale")) not in (int, float) or metadata["scale"] != expected_placements[0]["scale"]:
             raise ValueError("Recorded placements do not match the measured normalization options.")
         if recorded_spill_option and metadata.get("magentaSpill") != magenta_spill_proof_summary(expected_placements):
@@ -774,12 +854,19 @@ def main() -> None:
     selector.add_argument("--profile")
     selector.add_argument("--batch")
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--anchor-review", help="Explicit repository-relative, single-profile physical review JSON; recorded and reused by --check")
+    parser.add_argument("--scale-review", help="Explicit repository-relative, single-profile scale review JSON; recorded and reused by --check")
     parser.add_argument("--safe-reassign-cell-fragments", action="store_true", help="Preserve short connected spill with recorded source ownership proof; ambiguous overlap still fails")
     parser.add_argument("--remove-enclosed-magenta-matte", action="store_true", help="Opt in to strict exterior-color-matched removal of enclosed RGB magenta matte; native alpha and nonmatching colors stay untouched")
     parser.add_argument("--remove-enclosed-magenta-aa-fringe", action="store_true", help="Separately opt in to at most two source pixels of magenta AA fringe adjacent to a proven enclosed core; requires --remove-enclosed-magenta-matte")
     parser.add_argument("--remove-magenta-spill", action="store_true", help="Opt in to the strict V64 post-resize magenta channel clamp for opaque-matte frames; native-alpha frames are preserved")
+    parser.add_argument("--trim-transparent-padding", action="store_true", help="Opt in to exact-zero-alpha source padding removal before physical-root packing; requires reviewed roots and --profile")
     parser.add_argument("--dry-run", action="store_true", help="List required inputs without writing anything")
     args = parser.parse_args()
+    if (args.anchor_review is not None or args.scale_review is not None) and not args.profile:
+        parser.error("Standalone --anchor-review/--scale-review require --profile, never --batch.")
+    if args.trim_transparent_padding and not args.profile:
+        parser.error("Explicit --trim-transparent-padding requires --profile, never --batch.")
     queue = json.loads(args.manifest.read_text(encoding="utf-8"))
     jobs = [job for job in queue["jobs"] if job["profileId"] == args.profile or (args.batch and job["batchId"] == args.batch)]
     if not jobs:
@@ -793,7 +880,7 @@ def main() -> None:
         for clip in job["clips"]:
             if not scoped_path(ROOT, clip["sourcePath"]).is_file():
                 raise FileNotFoundError(clip["sourcePath"])
-    results = [check_profile(job, remove_enclosed_magenta_matte=True if args.remove_enclosed_magenta_matte else None, remove_enclosed_magenta_aa_fringe=True if args.remove_enclosed_magenta_aa_fringe else None, remove_magenta_spill=True if args.remove_magenta_spill else None) if args.check else process_profile(job, allow_cell_reassignment=args.safe_reassign_cell_fragments, remove_enclosed_magenta_matte=args.remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe=args.remove_enclosed_magenta_aa_fringe, remove_magenta_spill=args.remove_magenta_spill) for job in jobs]
+    results = [check_profile(job, remove_enclosed_magenta_matte=True if args.remove_enclosed_magenta_matte else None, remove_enclosed_magenta_aa_fringe=True if args.remove_enclosed_magenta_aa_fringe else None, remove_magenta_spill=True if args.remove_magenta_spill else None, anchor_review=args.anchor_review, scale_review=args.scale_review, trim_transparent_padding=True if args.trim_transparent_padding else None) if args.check else process_profile(job, allow_cell_reassignment=args.safe_reassign_cell_fragments, remove_enclosed_magenta_matte=args.remove_enclosed_magenta_matte, remove_enclosed_magenta_aa_fringe=args.remove_enclosed_magenta_aa_fringe, remove_magenta_spill=args.remove_magenta_spill, anchor_review=args.anchor_review, scale_review=args.scale_review, trim_transparent_padding=args.trim_transparent_padding) for job in jobs]
     print(json.dumps({"profiles": len(results), "poses": sum(result["frameCount"] for result in results), "acceptedAutomatically": 0,
                       "results": [{"profileId": result["profileId"], "path": result["normalized"], "findings": result["validation"]["findings"]} for result in results]}, indent=2))
 

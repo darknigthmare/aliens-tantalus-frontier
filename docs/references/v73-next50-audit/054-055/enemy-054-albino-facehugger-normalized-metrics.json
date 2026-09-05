@@ -1,0 +1,1045 @@
+{
+  "profileId": "enemy-054-albino-facehugger",
+  "reviewedAt": "2026-09-05",
+  "artAccepted": false,
+  "runtimeIntegratedByThisAudit": false,
+  "sourcePixelsModified": 0,
+  "uniquePoses": 32,
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "scaleInterpretation": "single-final-pack-scale applied once to immutable source plus one measured clip factor",
+  "packScale": 0.411017939,
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.003945,
+    "attack": 0.982782,
+    "death": 1.001809
+  },
+  "strictMagentaPixelCount": 0,
+  "lowValueVioletDiagnosticPixelCount": 237,
+  "lowValueVioletInterpretation": "Broader diagnostic, not automatically removable pixels; visual review required. Does not contradict the narrower strict-magenta gate.",
+  "evidence": [
+    {
+      "path": "assets/openai/sprites/metadata/v66/enemy-054-albino-facehugger.json",
+      "sha256": "9c67e40ccdf74d41d1f0cb5803a08e438442ef771a067a46b6d154720ced1ad0"
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-054-albino-facehugger.webp",
+      "sha256": "91d0c77c1354c2e367cc0a07a017ddf900357670441f37705a49064ddb9de31f"
+    },
+    {
+      "path": "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger.anchor-review.fragment.json",
+      "sha256": "af26adbc765bc4f76452221b35d0bbfd5c24a08a1cef56a38f31170ad098a439"
+    },
+    {
+      "path": "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger.scale-review.fragment.json",
+      "sha256": "7e8aff4c572d2279940fad352270f43e3368670edf24fd77a6481c7b2277eff9"
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/idle.png",
+      "sha256": "58411be70ad6f124dbdf06056b2ef42056bb2ddc8590b3391559af0e5eef6a14"
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/move.png",
+      "sha256": "496cafdb31fbeb68aaaa03b409970b8011e1986f6736ab17acf9c070de9a4192"
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/attack.png",
+      "sha256": "7111891dde424e3f97f8b49638448e6dffc7abfb53b29203e8ca63f5eaf5c66e"
+    },
+    {
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-054-albino-facehugger/death.png",
+      "sha256": "357603ce6d02bd62868af9eccbf35dc84583737de4a46f5c66cb709e85ad1cce"
+    }
+  ],
+  "poses": [
+    {
+      "clip": "idle",
+      "pose": 1,
+      "opaqueBoundsAlpha16": [
+        23,
+        187,
+        185,
+        239
+      ],
+      "opaqueHeightPx": 52,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        290,
+        270
+      ],
+      "sourceAnchor": [
+        290,
+        342
+      ],
+      "renderedRootMaxErrorPx": 0.45614035087720595,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "c98605a87d87d4c0a755d344b49f7be45c72d8c295b8aa9860ef115109cd804e"
+    },
+    {
+      "clip": "idle",
+      "pose": 2,
+      "opaqueBoundsAlpha16": [
+        26,
+        185,
+        188,
+        239
+      ],
+      "opaqueHeightPx": 54,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        270,
+        271
+      ],
+      "sourceAnchor": [
+        270,
+        347
+      ],
+      "renderedRootMaxErrorPx": 0.16791979949874758,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "747c4eab3a97994e973bf39e6dd610754b8039b98f18bffee9b9dfefa7eb35ca"
+    },
+    {
+      "clip": "idle",
+      "pose": 3,
+      "opaqueBoundsAlpha16": [
+        26,
+        186,
+        188,
+        239
+      ],
+      "opaqueHeightPx": 53,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        260,
+        270
+      ],
+      "sourceAnchor": [
+        260,
+        344
+      ],
+      "renderedRootMaxErrorPx": 0.09000000000000341,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 1,
+      "lowValueVioletBounds": [
+        169,
+        198,
+        170,
+        199
+      ],
+      "rgbaSha256": "160ae5222a1205e15608fa49a43fb5f47aac30bda9e2fbe4ff26f82fbe973f76"
+    },
+    {
+      "clip": "idle",
+      "pose": 4,
+      "opaqueBoundsAlpha16": [
+        25,
+        188,
+        187,
+        239
+      ],
+      "opaqueHeightPx": 51,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        253,
+        278
+      ],
+      "sourceAnchor": [
+        253,
+        349
+      ],
+      "renderedRootMaxErrorPx": 0.25125628140705203,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 9,
+      "lowValueVioletBounds": [
+        136,
+        217,
+        140,
+        224
+      ],
+      "rgbaSha256": "fc3bed1ee33c1fc66636d65ba0ad91c3484bcb28462aa7fe041f0f5a1ea37386"
+    },
+    {
+      "clip": "idle",
+      "pose": 5,
+      "opaqueBoundsAlpha16": [
+        26,
+        188,
+        188,
+        239
+      ],
+      "opaqueHeightPx": 51,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        280,
+        212
+      ],
+      "sourceAnchor": [
+        280,
+        286
+      ],
+      "renderedRootMaxErrorPx": 0.3969849246231121,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "9fb18b5505322c48ceae0416df577ac84f0eb380daaf9b37ab64b3f88611a4fe"
+    },
+    {
+      "clip": "idle",
+      "pose": 6,
+      "opaqueBoundsAlpha16": [
+        26,
+        189,
+        188,
+        239
+      ],
+      "opaqueHeightPx": 50,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        271,
+        215
+      ],
+      "sourceAnchor": [
+        271,
+        285
+      ],
+      "renderedRootMaxErrorPx": 0.3199999999999932,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 2,
+      "lowValueVioletBounds": [
+        168,
+        200,
+        170,
+        201
+      ],
+      "rgbaSha256": "064aef6893a4fc33b92291180e35ac95d6150b7efae08cc4a21215eb0028840b"
+    },
+    {
+      "clip": "idle",
+      "pose": 7,
+      "opaqueBoundsAlpha16": [
+        25,
+        189,
+        187,
+        239
+      ],
+      "opaqueHeightPx": 50,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        263,
+        216
+      ],
+      "sourceAnchor": [
+        263,
+        286
+      ],
+      "renderedRootMaxErrorPx": 0.25125628140705203,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 4,
+      "lowValueVioletBounds": [
+        98,
+        223,
+        105,
+        228
+      ],
+      "rgbaSha256": "08a1e24f7e82976deb93b10d14c1051ae0ffadec6adb30cba57ffd18a1eca34f"
+    },
+    {
+      "clip": "idle",
+      "pose": 8,
+      "opaqueBoundsAlpha16": [
+        26,
+        187,
+        189,
+        239
+      ],
+      "opaqueHeightPx": 52,
+      "opaqueWidthPx": 163,
+      "sourceLandmark": [
+        250,
+        210
+      ],
+      "sourceAnchor": [
+        250,
+        285
+      ],
+      "renderedRootMaxErrorPx": 0.13216957605985158,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 20,
+      "lowValueVioletBounds": [
+        138,
+        207,
+        182,
+        223
+      ],
+      "rgbaSha256": "9f39e01ad7845d7db661c39a7a5d58240c6331b26fa75013d69f747ef213b9d6"
+    },
+    {
+      "clip": "move",
+      "pose": 1,
+      "opaqueBoundsAlpha16": [
+        18,
+        195,
+        188,
+        239
+      ],
+      "opaqueHeightPx": 44,
+      "opaqueWidthPx": 170,
+      "sourceLandmark": [
+        305,
+        269
+      ],
+      "sourceAnchor": [
+        305,
+        329
+      ],
+      "renderedRootMaxErrorPx": 0.2211538461538396,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 6,
+      "lowValueVioletBounds": [
+        96,
+        206,
+        170,
+        214
+      ],
+      "rgbaSha256": "4ac7e509e31025f09747583304dab286a6232dbf68ef40dda2ad305202bee4a7"
+    },
+    {
+      "clip": "move",
+      "pose": 2,
+      "opaqueBoundsAlpha16": [
+        24,
+        194,
+        184,
+        239
+      ],
+      "opaqueHeightPx": 45,
+      "opaqueWidthPx": 160,
+      "sourceLandmark": [
+        289,
+        269
+      ],
+      "sourceAnchor": [
+        289,
+        331
+      ],
+      "renderedRootMaxErrorPx": 0.1145038167938992,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 8,
+      "lowValueVioletBounds": [
+        93,
+        204,
+        169,
+        214
+      ],
+      "rgbaSha256": "8d517ca09917dc4a0de4d1e81350cdde15ab90b188d99f249ee10aae258a2d4a"
+    },
+    {
+      "clip": "move",
+      "pose": 3,
+      "opaqueBoundsAlpha16": [
+        22,
+        195,
+        184,
+        239
+      ],
+      "opaqueHeightPx": 44,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        274,
+        270
+      ],
+      "sourceAnchor": [
+        274,
+        329
+      ],
+      "renderedRootMaxErrorPx": 0.42065491183879544,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 7,
+      "lowValueVioletBounds": [
+        32,
+        205,
+        181,
+        229
+      ],
+      "rgbaSha256": "1e147d025710ed5a6adcdf1f6f088ff9eb2e43e5974d1452221447305256ece8"
+    },
+    {
+      "clip": "move",
+      "pose": 4,
+      "opaqueBoundsAlpha16": [
+        20,
+        195,
+        182,
+        239
+      ],
+      "opaqueHeightPx": 44,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        269,
+        270
+      ],
+      "sourceAnchor": [
+        269,
+        330
+      ],
+      "renderedRootMaxErrorPx": 0.19597989949750172,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 16,
+      "lowValueVioletBounds": [
+        107,
+        205,
+        167,
+        232
+      ],
+      "rgbaSha256": "d0d95cb53f84876fe5502bba3c59c959b3346181ee0a65927a8288e39a033073"
+    },
+    {
+      "clip": "move",
+      "pose": 5,
+      "opaqueBoundsAlpha16": [
+        25,
+        195,
+        187,
+        239
+      ],
+      "opaqueHeightPx": 44,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        272,
+        193
+      ],
+      "sourceAnchor": [
+        272,
+        255
+      ],
+      "renderedRootMaxErrorPx": 0.1007556675062915,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 3,
+      "lowValueVioletBounds": [
+        166,
+        205,
+        170,
+        207
+      ],
+      "rgbaSha256": "da5f3d9da8589742a6512745badee0047b11d1ac707129de0ac407ef82679d5c"
+    },
+    {
+      "clip": "move",
+      "pose": 6,
+      "opaqueBoundsAlpha16": [
+        28,
+        196,
+        189,
+        239
+      ],
+      "opaqueHeightPx": 43,
+      "opaqueWidthPx": 161,
+      "sourceLandmark": [
+        247,
+        193
+      ],
+      "sourceAnchor": [
+        247,
+        252
+      ],
+      "renderedRootMaxErrorPx": 0.3578680203045792,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 11,
+      "lowValueVioletBounds": [
+        166,
+        204,
+        172,
+        207
+      ],
+      "rgbaSha256": "78a72bd3440d3df99d23de383811b369841bc0803355b075595b9fe99b7413c1"
+    },
+    {
+      "clip": "move",
+      "pose": 7,
+      "opaqueBoundsAlpha16": [
+        26,
+        196,
+        187,
+        239
+      ],
+      "opaqueHeightPx": 43,
+      "opaqueWidthPx": 161,
+      "sourceLandmark": [
+        251,
+        197
+      ],
+      "sourceAnchor": [
+        251,
+        254
+      ],
+      "renderedRootMaxErrorPx": 0.40101522842640236,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "36df0bd11025afd195004222dca85c98a0a714355facddcb6abfcb2cbc6fb52e"
+    },
+    {
+      "clip": "move",
+      "pose": 8,
+      "opaqueBoundsAlpha16": [
+        21,
+        196,
+        184,
+        239
+      ],
+      "opaqueHeightPx": 43,
+      "opaqueWidthPx": 163,
+      "sourceLandmark": [
+        263,
+        194
+      ],
+      "sourceAnchor": [
+        263,
+        254
+      ],
+      "renderedRootMaxErrorPx": 0.06766917293232666,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 8,
+      "lowValueVioletBounds": [
+        162,
+        206,
+        168,
+        208
+      ],
+      "rgbaSha256": "8c4ac26bcf72bf2cce0dd07ed5ad42641790b64716c49d4b05f1611ba6ce0f9a"
+    },
+    {
+      "clip": "attack",
+      "pose": 1,
+      "opaqueBoundsAlpha16": [
+        24,
+        197,
+        185,
+        239
+      ],
+      "opaqueHeightPx": 42,
+      "opaqueWidthPx": 161,
+      "sourceLandmark": [
+        294,
+        363
+      ],
+      "sourceAnchor": [
+        294,
+        422
+      ],
+      "renderedRootMaxErrorPx": 0.24317617866005037,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 4,
+      "lowValueVioletBounds": [
+        163,
+        206,
+        166,
+        208
+      ],
+      "rgbaSha256": "c3616ea939e20bb005fd21d169b048fc37d2e4b24aafc8b0214bc0e99e2e8228"
+    },
+    {
+      "clip": "attack",
+      "pose": 2,
+      "opaqueBoundsAlpha16": [
+        54,
+        176,
+        173,
+        237
+      ],
+      "opaqueHeightPx": 61,
+      "opaqueWidthPx": 119,
+      "sourceLandmark": [
+        253,
+        365
+      ],
+      "sourceAnchor": [
+        253,
+        422
+      ],
+      "renderedRootMaxErrorPx": 0.3949044585987167,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 35,
+      "lowValueVioletBounds": [
+        156,
+        220,
+        168,
+        229
+      ],
+      "rgbaSha256": "3fb81130e406076d79b993f5b5af65aca77ac26ba6f0723c15f42276c651c113"
+    },
+    {
+      "clip": "attack",
+      "pose": 3,
+      "opaqueBoundsAlpha16": [
+        48,
+        139,
+        176,
+        238
+      ],
+      "opaqueHeightPx": 99,
+      "opaqueWidthPx": 128,
+      "sourceLandmark": [
+        247,
+        352
+      ],
+      "sourceAnchor": [
+        247,
+        422
+      ],
+      "renderedRootMaxErrorPx": 0.2546583850931654,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "bafa5cab3c4a6cb2e2e9bddb3cb22dd9ee185f474de973dc8ef9eab5ca24ac2a"
+    },
+    {
+      "clip": "attack",
+      "pose": 4,
+      "opaqueBoundsAlpha16": [
+        38,
+        132,
+        191,
+        230
+      ],
+      "opaqueHeightPx": 98,
+      "opaqueWidthPx": 153,
+      "sourceLandmark": [
+        217,
+        229
+      ],
+      "sourceAnchor": [
+        217,
+        422
+      ],
+      "renderedRootMaxErrorPx": 0.2741935483871032,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 21,
+      "lowValueVioletBounds": [
+        93,
+        138,
+        172,
+        194
+      ],
+      "rgbaSha256": "1de11d3af9bbc22a87cfb2577862d70353deee864ce462b44d61e99b1c405ddd"
+    },
+    {
+      "clip": "attack",
+      "pose": 5,
+      "opaqueBoundsAlpha16": [
+        39,
+        127,
+        205,
+        209
+      ],
+      "opaqueHeightPx": 82,
+      "opaqueWidthPx": 166,
+      "sourceLandmark": [
+        258,
+        181
+      ],
+      "sourceAnchor": [
+        258,
+        377
+      ],
+      "renderedRootMaxErrorPx": 0.4347826086956559,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 27,
+      "lowValueVioletBounds": [
+        137,
+        133,
+        180,
+        177
+      ],
+      "rgbaSha256": "66ef56090bb5f304289fe9e2872f63e8565e5972eff77b7a328299275a8ca4ad"
+    },
+    {
+      "clip": "attack",
+      "pose": 6,
+      "opaqueBoundsAlpha16": [
+        28,
+        159,
+        181,
+        226
+      ],
+      "opaqueHeightPx": 67,
+      "opaqueWidthPx": 153,
+      "sourceLandmark": [
+        294,
+        238
+      ],
+      "sourceAnchor": [
+        294,
+        377
+      ],
+      "renderedRootMaxErrorPx": 0.41764705882354747,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "72e59472036bdc2e88a2743835833ac62a31cc9961c2bd7940f3b013c900eafd"
+    },
+    {
+      "clip": "attack",
+      "pose": 7,
+      "opaqueBoundsAlpha16": [
+        47,
+        178,
+        174,
+        239
+      ],
+      "opaqueHeightPx": 61,
+      "opaqueWidthPx": 127,
+      "sourceLandmark": [
+        263,
+        309
+      ],
+      "sourceAnchor": [
+        263,
+        377
+      ],
+      "renderedRootMaxErrorPx": 0.4038461538461604,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "607c4f653c5c4f2c051b33e37b155e304e38ecf3b43ce2083df3318586a9ea54"
+    },
+    {
+      "clip": "attack",
+      "pose": 8,
+      "opaqueBoundsAlpha16": [
+        22,
+        196,
+        182,
+        239
+      ],
+      "opaqueHeightPx": 43,
+      "opaqueWidthPx": 160,
+      "sourceLandmark": [
+        252,
+        318
+      ],
+      "sourceAnchor": [
+        252,
+        377
+      ],
+      "renderedRootMaxErrorPx": 0.20895522388059362,
+      "sourceScale": 0.982782,
+      "appliedScale": 0.403941033,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 3,
+      "lowValueVioletBounds": [
+        163,
+        207,
+        166,
+        208
+      ],
+      "rgbaSha256": "ef6d36ac93654958563b847b1cf8f8a24cacc13f1390c61e73ac4e48ee393969"
+    },
+    {
+      "clip": "death",
+      "pose": 1,
+      "opaqueBoundsAlpha16": [
+        23,
+        190,
+        185,
+        239
+      ],
+      "opaqueHeightPx": 49,
+      "opaqueWidthPx": 162,
+      "sourceLandmark": [
+        277,
+        272
+      ],
+      "sourceAnchor": [
+        277,
+        335
+      ],
+      "renderedRootMaxErrorPx": 0.10050251256281229,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 6,
+      "lowValueVioletBounds": [
+        163,
+        202,
+        166,
+        204
+      ],
+      "rgbaSha256": "27fec55e124d26b52640aa4a1e1ccfd796721a0c4c4966ea3eac3fa4c3ddbfc1"
+    },
+    {
+      "clip": "death",
+      "pose": 2,
+      "opaqueBoundsAlpha16": [
+        25,
+        197,
+        183,
+        239
+      ],
+      "opaqueHeightPx": 42,
+      "opaqueWidthPx": 158,
+      "sourceLandmark": [
+        269,
+        299
+      ],
+      "sourceAnchor": [
+        269,
+        356
+      ],
+      "renderedRootMaxErrorPx": 0.3298969072164937,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 6,
+      "lowValueVioletBounds": [
+        162,
+        208,
+        168,
+        211
+      ],
+      "rgbaSha256": "b98e1e9dd100c9f8bea416a663785c3bc3fac5754caaf052894b420d20119ce5"
+    },
+    {
+      "clip": "death",
+      "pose": 3,
+      "opaqueBoundsAlpha16": [
+        24,
+        201,
+        182,
+        239
+      ],
+      "opaqueHeightPx": 38,
+      "opaqueWidthPx": 158,
+      "sourceLandmark": [
+        268,
+        317
+      ],
+      "sourceAnchor": [
+        268,
+        362
+      ],
+      "renderedRootMaxErrorPx": 0.11568123393315943,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 8,
+      "lowValueVioletBounds": [
+        161,
+        213,
+        165,
+        216
+      ],
+      "rgbaSha256": "933d39f7586e85e2f49db95a0aa52d8b85f356ed9a68837d4c2226a989a28902"
+    },
+    {
+      "clip": "death",
+      "pose": 4,
+      "opaqueBoundsAlpha16": [
+        27,
+        204,
+        178,
+        239
+      ],
+      "opaqueHeightPx": 35,
+      "opaqueWidthPx": 151,
+      "sourceLandmark": [
+        253,
+        319
+      ],
+      "sourceAnchor": [
+        253,
+        359
+      ],
+      "renderedRootMaxErrorPx": 0.4112903225806406,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 10,
+      "lowValueVioletBounds": [
+        160,
+        218,
+        167,
+        229
+      ],
+      "rgbaSha256": "fee03f77e110118b02750263521e0810759425b074124ca1aec389e6ef12584a"
+    },
+    {
+      "clip": "death",
+      "pose": 5,
+      "opaqueBoundsAlpha16": [
+        31,
+        198,
+        172,
+        239
+      ],
+      "opaqueHeightPx": 41,
+      "opaqueWidthPx": 141,
+      "sourceLandmark": [
+        274,
+        213
+      ],
+      "sourceAnchor": [
+        274,
+        258
+      ],
+      "renderedRootMaxErrorPx": 0.33141210374640195,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 21,
+      "lowValueVioletBounds": [
+        110,
+        217,
+        162,
+        235
+      ],
+      "rgbaSha256": "4b3e9f99240a4ef77065f33646adfb8e77335c1ed7b746b70d5e1f0e20172846"
+    },
+    {
+      "clip": "death",
+      "pose": 6,
+      "opaqueBoundsAlpha16": [
+        28,
+        201,
+        158,
+        239
+      ],
+      "opaqueHeightPx": 38,
+      "opaqueWidthPx": 130,
+      "sourceLandmark": [
+        291,
+        226
+      ],
+      "sourceAnchor": [
+        291,
+        260
+      ],
+      "renderedRootMaxErrorPx": 0.252336448598129,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 1,
+      "lowValueVioletBounds": [
+        153,
+        223,
+        154,
+        224
+      ],
+      "rgbaSha256": "350d94d3b006a7c0ea40170295b1d0d9e55fe110211837e3cfa11739cf8cb854"
+    },
+    {
+      "clip": "death",
+      "pose": 7,
+      "opaqueBoundsAlpha16": [
+        27,
+        206,
+        157,
+        239
+      ],
+      "opaqueHeightPx": 33,
+      "opaqueWidthPx": 130,
+      "sourceLandmark": [
+        290,
+        235
+      ],
+      "sourceAnchor": [
+        290,
+        264
+      ],
+      "renderedRootMaxErrorPx": 0.30000000000001137,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "764c8a876c5f7ed1c5d9e06c495d54b2f4e3cd2771bb008d21922718cfa28dbd"
+    },
+    {
+      "clip": "death",
+      "pose": 8,
+      "opaqueBoundsAlpha16": [
+        26,
+        212,
+        157,
+        239
+      ],
+      "opaqueHeightPx": 27,
+      "opaqueWidthPx": 131,
+      "sourceLandmark": [
+        285,
+        249
+      ],
+      "sourceAnchor": [
+        285,
+        272
+      ],
+      "renderedRootMaxErrorPx": 0.15217391304348382,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "strictMagentaPixelCount": 0,
+      "lowValueVioletDiagnosticPixelCount": 0,
+      "lowValueVioletBounds": null,
+      "rgbaSha256": "00ac0f0a669803d8e4552808779873f4c00d69ec9e9ce5f8504caa1f196657ad"
+    }
+  ]
+}

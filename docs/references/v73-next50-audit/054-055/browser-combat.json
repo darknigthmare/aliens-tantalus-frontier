@@ -1,0 +1,23 @@
+{
+  "fixture": "isolated real GameEngine prototype and drawEnemy; not a full campaign",
+  "sheet": "enemy.profile.enemy-055-albino-chestburster.v66",
+  "image": "http://127.0.0.1:4173/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-055-albino-chestburster.webp",
+  "imageWidth": 1024,
+  "body": [
+    35,
+    20
+  ],
+  "feet": 930,
+  "playerFeet": 930,
+  "facing": 1,
+  "hpBefore": 100,
+  "atImpact": {
+    "hp": 85,
+    "hits": 1,
+    "localFrame": 4
+  },
+  "hpAfterRecovery": 85,
+  "hitsAfterRecovery": 1,
+  "attackEnded": true,
+  "saveUnchanged": true
+}

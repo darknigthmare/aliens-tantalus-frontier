@@ -12,9 +12,9 @@ import { getCatalogEntryV62 } from '../src/catalog-runtime-v62.js';
 import { getCatalogSpriteFrameV62 } from '../src/catalog-ui-v62.js';
 import { getEnemyAtlasSheetsForWorldV66 } from '../src/enemy-atlas-loader-v65.js';
 
-const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph'];
+const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster'];
 
-test('la readylist V66 pointe vers les octets et les192racines effectivement revus', async () => {
+test('la readylist V66 pointe vers les octets et les224racines effectivement revus', async () => {
   for (const asset of V66_READY_ENEMY_PROFILE_ASSETS) {
     const bytes = await readFile(new URL(`..${asset.path}`, import.meta.url));
     const metadataBytes = await readFile(new URL(`../assets/openai/sprites/metadata/v66/${asset.profileId}.json`, import.meta.url));
@@ -32,8 +32,8 @@ test('la readylist V66 pointe vers les octets et les192racines effectivement rev
   }
 });
 
-test('les six profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
-  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les six profils doivent être acceptés, pas seulement présents sur disque.');
+test('les sept profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
+  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les sept profils doivent être acceptés, pas seulement présents sur disque.');
   for (const id of expectedIds) {
     const source = ENEMIES.find((enemy) => enemy.id === id);
     const profile = resolveEnemyProfileVisualV66(source);
@@ -83,8 +83,8 @@ test('le vrai moteur nepréchargeaucunennemiV66audémarrage et charge seulement 
       await engine.ensureEnemyAtlas(sheet);
       assert.ok(engine.images.has(sheet.imageKey));
     }
-    assert.equal(requests.filter((path) => enemyPaths.has(path)).length, 6);
-    assert.equal(engine.enemyAtlasLRUV65.snapshot().ready, 6);
+    assert.equal(requests.filter((path) => enemyPaths.has(path)).length, expectedIds.length);
+    assert.equal(engine.enemyAtlasLRUV65.snapshot().ready, expectedIds.length);
     assert.equal(engine.enemyAtlasLRUV65.snapshot().maxEntries, 12);
   } finally { globalThis.Image = previousImage; globalThis.addEventListener = previousListener; }
 });

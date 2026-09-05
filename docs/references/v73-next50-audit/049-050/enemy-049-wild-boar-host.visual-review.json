@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "profileId": "enemy-049-wild-boar-host",
+  "reviewer": "Codex level_props_audit_fix independent V73 review",
+  "reviewedAt": "2026-09-05",
+  "referenceStatus": "PROJECT_ADAPTATION",
+  "reviewStatus": "blocked-active-attack-scale",
+  "posesReviewed": 32,
+  "sourceSha256ByClip": {
+    "idle": "40af647b8f28afb8f872cff0235da56afb7eca453d88f7cfb59b0abf1aae6270",
+    "move": "77e62563dac70cffd955fcb8a871c8cdd1593af4ed4c56e4f34f9445a7bf669b",
+    "attack": "68e70c5b8837e89e673c4cb65f9b2b65c81875ffef987c7b371d35fb2614e960",
+    "death": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27"
+  },
+  "checks": {
+    "broadIdentity": true,
+    "readableSingleHeadAndJaw": true,
+    "fourLeggedAnatomy": true,
+    "rightFacingPoses": 32,
+    "authoredPoseCount": 32,
+    "distinctPoseCount": 32,
+    "groundedPhysicalRoots": true,
+    "airbornePhysicalRoots": "no additional flight inferred",
+    "transparentBackground": true,
+    "cellBounds": true,
+    "perClipScale": false,
+    "exactMicroContinuity": false,
+    "runtimeCombatRecipe": false,
+    "runtimeDeathHoldTested": false
+  },
+  "remainingIssues": [
+    "Attack median163.869393px vs idle171.771625px: -4.600427%, exceeding3% gate.",
+    "Fur, ear and tusk microtexture varies; do not claim1:1.",
+    "No runtime acceptance."
+  ],
+  "evidencePaths": [
+    "docs/references/v73-next50-audit/049-050/FINAL_QA.md",
+    "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.normalized-root-contact.png",
+    "docs/references/v73-next50-audit/049-050/derived-qa.json",
+    "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.anchor-review.json",
+    "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.scale-review.json"
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

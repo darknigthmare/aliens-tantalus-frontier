@@ -86,7 +86,126 @@ async function fixture() {
   return fix;
 }
 const validate = (fix) => validatePostGenerationScaleReview(fix.job, fix.metadata, fix.root, scopedPath);
+
+test('V73 egg calibration uses sealed baseline without allowing arbitrary baseline clips', async () => {
+  const fix = await fixture();
+  fix.job.animationFamily = 'egg';
+  fix.job.clips.find((clip) => clip.id === 'idle').id = 'sealed';
+  fix.sources.find((source) => source.clip === 'idle').clip = 'sealed';
+  fix.entry.baselineClip = 'sealed';
+  for (const map of [fix.entry.sourceScaleByClip, fix.entry.sourceSha256ByClip, fix.metadata.sourceScaleByClip]) {
+    map.sealed = map.idle; delete map.idle;
+  }
+  for (const measurement of fix.entry.measurements) if (measurement.clip === 'idle') measurement.clip = 'sealed';
+  for (const pose of fix.metadata.placements) if (pose.clip === 'idle') pose.clip = 'sealed';
+  await fix.saveReview();
+  fix.metadata.postGenerationScaleReview = await resolvePostGenerationScaleReview(fix.job, fix.sources, fix.root, scopedPath);
+  assert.equal(fix.metadata.postGenerationScaleReview.baselineClip, 'sealed');
+  assert.equal(fix.metadata.sourceScaleByClip.sealed, 1);
+  await validate(fix);
+  fix.job.animationFamily = 'quadruped';
+  await assert.rejects(validate(fix), /baseline must be the idle/);
+  fix.job.animationFamily = 'egg';
+  fix.entry.sourceScaleByClip.sealed = 2; await fix.saveReview();
+  await assert.rejects(validate(fix), /sealed baseline factor/);
+});
 const accept = (fix, state = fix.state) => appendProductionEvent(fix.queue, state, { kind: 'accepted', profileId: fix.job.profileId, actor: 'test', note: 'Synthetic acceptance test only.', review: Object.fromEntries(REVIEW_CHECKS.map((key) => [key, true])) }, fix.root);
+
+async function standaloneFixture() {
+  const fix = await fixture();
+  fix.scalePath = 'proof/standalone-scale.json';
+  fix.anchorPath = 'proof/standalone-anchors.json';
+  fix.anchorEvidence = 'proof/physical-overlay.txt';
+  await writeJson(scopedPath(fix.root, fix.scalePath), fix.document);
+  await writeFile(scopedPath(fix.root, fix.anchorEvidence), 'Synthetic physical overlay evidence.');
+  fix.anchorEntry = {
+    status: 'reviewed', reviewer: 'test', reviewedAt: '2026-09-05', method: 'Synthetic complete source root measurement.',
+    evidencePaths: [fix.anchorEvidence],
+    clips: Object.fromEntries(fix.sources.map((source) => [source.clip, {
+      sourceSha256: source.sha256, sourceSize: source.size,
+      frames: Array.from({ length: 8 }, (_, frame) => ({ frame, anchor: [50,90], landmark: [50,50], reviewed: true, confidence: 'high', evidence: 'Synthetic observed physical root.' }))
+    }]))
+  };
+  fix.anchorDocument = { schema: 1, batchId: fix.job.batchId, coordinates: 'nominal-source-cell', profiles: { [fix.job.profileId]: fix.anchorEntry } };
+  fix.saveAnchor = () => writeJson(scopedPath(fix.root, fix.anchorPath), fix.anchorDocument);
+  await fix.saveAnchor();
+  fix.metadata.normalizationReviewPaths = { anchor: fix.anchorPath, scale: fix.scalePath };
+  fix.metadata.postGenerationScaleReview = await resolvePostGenerationScaleReview(fix.job, fix.sources, fix.root, scopedPath, fix.scalePath);
+  fix.metadata.physicalAnchorReview = {
+    path: fix.anchorPath, sha256: hash(await readFile(scopedPath(fix.root, fix.anchorPath))), status: 'reviewed',
+    evidence: [{ path: fix.anchorEvidence, sha256: hash(await readFile(scopedPath(fix.root, fix.anchorEvidence))) }],
+    reviewer: fix.anchorEntry.reviewer, reviewedAt: fix.anchorEntry.reviewedAt, method: fix.anchorEntry.method,
+    reviewedPoseCount: fix.job.clips.length * 8, coordinates: 'nominal-source-cell'
+  };
+  for (const pose of fix.metadata.placements) Object.assign(pose, { sourceAnchor: [50,90], sourceLandmark: [50,50], sourceBounds: [10,10,90,90] });
+  await fix.saveMetadata();
+  return fix;
+}
+
+test('V73 standalone normalization proofs pass acceptance and ignore unrelated shared review mutations', async () => {
+  const fix = await standaloneFixture();
+  await validate(fix);
+  const state = await accept(fix);
+  assert.equal((await getJobStatus(fix.job, state, fix.root)).status, 'accepted');
+  await writeFile(fix.reviewPath, 'Unrelated global review changed.');
+  assert.equal((await getJobStatus(fix.job, state, fix.root)).status, 'accepted');
+});
+
+test('V73 standalone paths are exact, confined, single-profile and reviewed', async (t) => {
+  for (const mode of ['empty-map','array-map','extra-key','null-scale','escape','absolute','backslash','missing','wrong-profile','extra-profile','pending']) await t.test(mode, async () => {
+    const fix = await standaloneFixture();
+    if (mode === 'empty-map') fix.metadata.normalizationReviewPaths = {};
+    else if (mode === 'array-map') fix.metadata.normalizationReviewPaths = [];
+    else if (mode === 'extra-key') fix.metadata.normalizationReviewPaths.other = fix.scalePath;
+    else if (mode === 'null-scale') fix.metadata.normalizationReviewPaths.scale = null;
+    else if (['escape','absolute','backslash','missing'].includes(mode)) fix.metadata.normalizationReviewPaths.scale = { escape: '../other.json', absolute: '/other.json', backslash: 'proof\\other.json', missing: 'proof/missing.json' }[mode];
+    else {
+      const doc = structuredClone(fix.document);
+      if (mode === 'wrong-profile') doc.profiles = { other: fix.entry };
+      if (mode === 'extra-profile') doc.profiles.other = fix.entry;
+      if (mode === 'pending') doc.profiles[fix.job.profileId].status = 'pending';
+      await writeJson(scopedPath(fix.root, fix.scalePath), doc);
+    }
+    await fix.saveMetadata();
+    await assert.rejects(accept(fix), /standalone|repository|ENOENT|Unsafe/);
+  });
+});
+
+test('V73 changing standalone review or overlay bytes invalidates existing acceptance', async (t) => {
+  for (const relativeKind of ['scalePath','anchorPath','anchorEvidence']) await t.test(relativeKind, async () => {
+    const fix = await standaloneFixture();
+    const state = await accept(fix);
+    const path = scopedPath(fix.root, fix[relativeKind]);
+    await writeFile(path, Buffer.concat([await readFile(path), Buffer.from('\n')]));
+    assert.notEqual((await getJobStatus(fix.job, state, fix.root)).status, 'accepted');
+    await assert.rejects(accept(fix), /missing or stale/);
+  });
+});
+
+test('V73 standalone physical evidence cannot certify missing, mismatched or unreviewed poses', async (t) => {
+  for (const mode of ['missing-pose','duplicate-pose','unreviewed-pose','source-sha','placement-anchor','placement-landmark','empty-evidence']) await t.test(mode, async () => {
+    const fix = await standaloneFixture();
+    const entry = fix.anchorEntry.clips[fix.job.clips[0].id];
+    if (mode === 'missing-pose') entry.frames.pop();
+    if (mode === 'duplicate-pose') entry.frames[1].frame = 0;
+    if (mode === 'unreviewed-pose') entry.frames[0].reviewed = false;
+    if (mode === 'source-sha') entry.sourceSha256 = 'f'.repeat(64);
+    if (mode === 'placement-anchor') fix.metadata.placements[0].sourceAnchor = [40,90];
+    if (mode === 'placement-landmark') fix.metadata.placements[0].sourceLandmark = [40,50];
+    if (mode === 'empty-evidence') fix.anchorEntry.evidencePaths = [];
+    await fix.saveAnchor();
+    fix.metadata.physicalAnchorReview.sha256 = hash(await readFile(scopedPath(fix.root, fix.anchorPath)));
+    await fix.saveMetadata();
+    await assert.rejects(accept(fix), /standalone physical/);
+  });
+});
+
+test('V73 removing explicit review declarations cannot fall back to a stale global calibration', async () => {
+  const fix = await standaloneFixture();
+  delete fix.metadata.normalizationReviewPaths;
+  await fix.saveMetadata();
+  await assert.rejects(accept(fix), /normalization proof is missing or stale/);
+});
 
 test('post-generation proof matches the complete contract and permits current acceptance', async () => {
   const fix = await fixture();

@@ -10,8 +10,8 @@ const contract = (profileId, options) => Object.freeze({
   ...baseContract, ...options, profileId, sheetId: `enemy.profile.${profileId}.v66`
 });
 
-// Explicit accepted identities only: an egg, an old atlas or a systemic variant
-// must never inherit these attacks merely because its display name is similar.
+// Explicit accepted identities only: a systemic variant needs its own contract;
+// an egg or another atlas must never inherit one through a similar display name.
 export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
   'enemy-003-chestburster': contract('enemy-003-chestburster', {
     action: 'low-bite', stopRange: 28, meleeRange: 56, speedMultiplier: 1.12, cooldown: 1.15
@@ -30,6 +30,11 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
     action: 'k-series-claw-lunge', stopRange: 62, meleeRange: 104,
     // Source attack pose5 is maximum extension; damage occurs once on that pose.
     impact: 4 / 12, lungeDistance: 56, cooldown: 1.05
+  }),
+  'enemy-055-albino-chestburster': contract('enemy-055-albino-chestburster', {
+    action: 'albino-low-bite', stopRange: 28, meleeRange: 56,
+    // Source pose5 is the bite contact; the limbless juvenile never pounces.
+    impact: 4 / 12, speedMultiplier: 1.12, cooldown: 1.15
   })
 });
 

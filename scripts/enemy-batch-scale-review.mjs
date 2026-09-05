@@ -57,14 +57,15 @@ async function resolvePostGenerationScaleReviewBytes(job, sources, root, scopedP
   if (Object.keys(job.reference?.sourceScaleByClip || {}).length || job.reference?.scaleCalibrationReview != null) fail('conflicts with legacy reference calibration');
   const clips = job.clips.map((clip) => clip.id);
   if (!clips.length || clips.some((clip) => !text(clip)) || new Set(clips).size !== clips.length) fail('authored clips must have unique nonempty identities');
-  if (entry.baselineClip !== 'idle' || !clips.includes('idle')) fail('baseline must be the idle clip');
+  const baselineClip = job.animationFamily === 'egg' ? 'sealed' : 'idle';
+  if (entry.baselineClip !== baselineClip || !clips.includes(baselineClip)) fail('baseline must be the ' + baselineClip + ' clip');
   if (!exactKeys(entry.sourceScaleByClip, clips) || !exactKeys(entry.sourceSha256ByClip, clips)) fail('source and scale maps must cover every clip exactly');
   for (const clip of clips) {
     const factor = entry.sourceScaleByClip[clip];
     if (!finite(factor) || factor < 0.25 || factor > 4) fail('scale factors must be finite numbers in [0.25,4]');
     if (typeof entry.sourceSha256ByClip[clip] !== 'string' || !/^[a-f0-9]{64}$/.test(entry.sourceSha256ByClip[clip])) fail('invalid source SHA-256');
   }
-  if (entry.sourceScaleByClip.idle !== 1) fail('idle baseline factor must equal one');
+  if (entry.sourceScaleByClip[baselineClip] !== 1) fail(baselineClip + ' baseline factor must equal one');
   if (!Array.isArray(sources) || sources.length !== clips.length || sources.some((source, index) => !record(source) || source.clip !== clips[index])) fail('metadata source coverage or ordered clips are incomplete');
   if (!isDeepStrictEqual(job.sourceGrid, { columns: 4, rows: 2, frameCount: 8 })) fail('source grid must be exactly eight poses in4x2');
   const sizes = new Map();
@@ -102,9 +103,9 @@ async function resolvePostGenerationScaleReviewBytes(job, sources, root, scopedP
     groups.get(measurement.clip).push(measurement.lengthPx);
   }
   if (landmarks.size !== 1) fail('measurements must use the same rigid landmark');
-  if (!groups.has('idle') || [...groups.values()].some((values) => values.length < 2)) fail('at least two distinct poses per measured clip and idle are required');
+  if (!groups.has(baselineClip) || [...groups.values()].some((values) => values.length < 2)) fail('at least two distinct poses per measured clip and baseline are required');
   for (const clip of clips) if (entry.sourceScaleByClip[clip] !== 1 && !groups.has(clip)) fail('a corrected clip has no measurements: ' + clip);
-  const baseline = median(groups.get('idle'));
+  const baseline = median(groups.get(baselineClip));
   for (const [clip, values] of groups) {
     const ratio = baseline / median(values);
     if (Math.abs(entry.sourceScaleByClip[clip] / ratio - 1) > 0.03) fail('factor disagrees with measured median ratio for ' + clip);
@@ -163,7 +164,63 @@ export async function resolvePostGenerationScaleReviewMergeCandidate(job, normal
   return { ...proof, staleNormalizedSourceClips };
 }
 
-export async function resolvePostGenerationScaleReview(job, sources, root, scopedPath) {
+async function standaloneDocument(job, path, root, scopedPath) {
+  if (!text(path) || !path.toLowerCase().endsWith('.json') || path === job.metadataPath) fail('standalone review requires a separate repository-relative JSON file');
+  const bytes = await readFile(await existingPath(root, path, scopedPath));
+  let document;
+  try { document = JSON.parse(bytes.toString('utf8')); } catch { fail('invalid standalone review JSON'); }
+  if (!record(document) || document.schema !== 1 || document.batchId !== job.batchId || document.coordinates !== 'nominal-source-cell'
+    || !exactKeys(document.profiles, [job.profileId])) fail('standalone review must belong to exactly the selected profile and batch');
+  const entry = document.profiles[job.profileId];
+  if (!record(entry) || entry.status !== 'reviewed' || (has(entry, 'profileId') && entry.profileId !== job.profileId)) fail('standalone review must be explicitly reviewed for this profile');
+  return { bytes, entry };
+}
+
+async function validateStandaloneAnchorReview(job, metadata, path, root, scopedPath) {
+  const { bytes, entry } = await standaloneDocument(job, path, root, scopedPath);
+  if (!text(entry.reviewer) || !validDate(entry.reviewedAt) || !text(entry.method)) fail('standalone physical review requires reviewer, date and method');
+  if (!Array.isArray(entry.evidencePaths) || !entry.evidencePaths.length || new Set(entry.evidencePaths).size !== entry.evidencePaths.length) fail('standalone physical review requires unique evidence paths');
+  const evidence = [];
+  for (const evidencePath of entry.evidencePaths) {
+    const data = await readFile(await existingPath(root, evidencePath, scopedPath));
+    if (!data.length) fail('empty standalone physical evidence');
+    evidence.push({ path: evidencePath, sha256: hash(data) });
+  }
+  const expected = { path, sha256: hash(bytes), status: 'reviewed', evidence, reviewer: entry.reviewer,
+    reviewedAt: entry.reviewedAt, method: entry.method, reviewedPoseCount: job.clips.length * 8, coordinates: 'nominal-source-cell' };
+  if (!isDeepStrictEqual(metadata.physicalAnchorReview, expected)) fail('standalone physical proof is missing or stale');
+  if (!exactKeys(entry.clips, job.clips.map((clip) => clip.id)) || !Array.isArray(metadata.sources)
+    || metadata.sources.length !== job.clips.length || !Array.isArray(metadata.placements) || metadata.placements.length !== job.clips.length * 8) fail('standalone physical clip or pose coverage is incomplete');
+  for (const [ordinal, clip] of job.clips.entries()) {
+    const source = metadata.sources[ordinal], reviewed = entry.clips[clip.id];
+    if (!record(source) || source.clip !== clip.id || source.path !== clip.sourcePath || !record(reviewed)) fail('standalone physical source identity changed');
+    const sourceBytes = await readFile(await existingPath(root, clip.sourcePath, scopedPath));
+    const sha256 = hash(sourceBytes), size = pngSize(sourceBytes);
+    if (source.sha256 !== sha256 || reviewed.sourceSha256 !== sha256 || !isDeepStrictEqual(source.size, size) || !isDeepStrictEqual(reviewed.sourceSize, size)) fail('standalone physical source hash or dimensions changed');
+    if (!Array.isArray(reviewed.frames) || reviewed.frames.length !== 8 || new Set(reviewed.frames.map((frame) => frame?.frame)).size !== 8) fail('standalone physical poses must cover every frame exactly once');
+    for (const frame of reviewed.frames) {
+      if (!record(frame) || !Number.isInteger(frame.frame) || frame.frame < 0 || frame.frame > 7 || frame.reviewed !== true
+        || !text(frame.evidence) || !['medium', 'high'].includes(frame.confidence)) fail('standalone physical pose lacks individual review');
+      const pose = metadata.placements[ordinal * 8 + frame.frame];
+      if (!record(pose) || pose.index !== ordinal * 8 + frame.frame || pose.clip !== clip.id || pose.clipFrame !== frame.frame
+        || pose.anchorStatus !== 'reviewed-physical-root' || !isDeepStrictEqual(pose.sourceAnchor, frame.anchor)
+        || !isDeepStrictEqual(pose.sourceLandmark, frame.landmark)) fail('standalone physical placement disagrees with reviewed pose');
+      for (const pair of [frame.anchor, frame.landmark]) if (!Array.isArray(pair) || pair.length !== 2 || pair.some((value) => !finite(value))) fail('standalone physical coordinates must be finite pairs');
+      const column = frame.frame % 4, row = Math.floor(frame.frame / 4);
+      const cellWidth = roundEven((column + 1) * size[0] / 4) - roundEven(column * size[0] / 4);
+      const cellHeight = roundEven((row + 1) * size[1] / 2) - roundEven(row * size[1] / 2);
+      if (frame.anchor[0] < -0.15 * cellWidth || frame.anchor[0] > 1.15 * cellWidth || frame.anchor[1] < -0.15 * cellHeight || frame.anchor[1] > 1.15 * cellHeight) fail('standalone physical anchor outside source-cell envelope');
+      const bounds = pose.sourceBounds;
+      if (!Array.isArray(bounds) || bounds.length !== 4 || bounds.some((value) => !finite(value)) || frame.landmark[0] < bounds[0] || frame.landmark[0] > bounds[2] || frame.landmark[1] < bounds[1] || frame.landmark[1] > bounds[3]) fail('standalone physical landmark outside source pose');
+    }
+  }
+}
+
+export async function resolvePostGenerationScaleReview(job, sources, root, scopedPath, standalonePath = null) {
+  if (standalonePath !== null) {
+    const { bytes } = await standaloneDocument(job, standalonePath, root, scopedPath);
+    return resolvePostGenerationScaleReviewBytes(job, sources, root, scopedPath, bytes, standalonePath);
+  }
   const path = `docs/references/V66_BATCH_${job.batchId.slice(-3)}_SCALE_REVIEW.json`;
   let bytes;
   try { bytes = await readFile(await existingPath(root, path, scopedPath)); }
@@ -172,7 +229,12 @@ export async function resolvePostGenerationScaleReview(job, sources, root, scope
 }
 
 export async function validatePostGenerationScaleReview(job, metadata, root, scopedPath) {
-  const expected = await resolvePostGenerationScaleReview(job, metadata.sources, root, scopedPath);
+  const paths = metadata.normalizationReviewPaths;
+  if (has(metadata, 'normalizationReviewPaths') && (!record(paths) || !Object.keys(paths).length
+    || Object.keys(paths).some((key) => !['anchor', 'scale'].includes(key)))) fail('standalone review path metadata is invalid');
+  if (paths && has(paths, 'anchor')) await validateStandaloneAnchorReview(job, metadata, paths.anchor, root, scopedPath);
+  if (paths && has(paths, 'scale') && !text(paths.scale)) fail('standalone scale path is invalid');
+  const expected = await resolvePostGenerationScaleReview(job, metadata.sources, root, scopedPath, paths?.scale ?? null);
   if (expected === null) {
     if (has(metadata, 'postGenerationScaleReview')) fail('recorded calibration is missing from the active review');
     return;

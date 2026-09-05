@@ -50,6 +50,8 @@ assets/openai/sprites/frames/v71
 assets/openai/sprites/frames/v71/**
 assets/openai/sprites/frames/v72
 assets/openai/sprites/frames/v72/**
+assets/openai/sprites/frames/v73
+assets/openai/sprites/frames/v73/**
 assets/openai/sprites/normalized/enemy-clips-v66
 assets/openai/sprites/normalized/enemy-clips-v66/**
 assets/openai/sprites/normalized/enemy-motion-v66
@@ -61,10 +63,15 @@ assets/openai/sprites/normalized/enemy-profiles-v66/*
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-005-warrior.webp
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-006-runner.webp
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp
+!assets/openai/sprites/normalized/enemy-profiles-v66/enemy-055-albino-chestburster.webp
 docs/references/V66_*
 docs/references/V66_*/**
 docs/references/v66-*
 docs/references/v66-*/**
+docs/references/V73_*
+docs/references/V73_*/**
+docs/references/v73-*
+docs/references/v73-*/**
 scripts/__pycache__
 scripts/__pycache__/**
 .qa

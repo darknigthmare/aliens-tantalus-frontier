@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-053-albino-ovomorph",
+  "clipId": "sealed",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v73_enemy-053-albino-ovomorph_sealed",
+  "providerGenerationId": null,
+  "actor": "Codex V73 next50 production",
+  "actualPromptText": "Use case: stylized-concept. Generate ONE actual 2D game animation sheet for Albino Ovomorph, sealed.\nThe two most recent images are the established brown Ovomorph sealed/opening references. Use these ONLY for identicalanatomy, shellshape, texture and fourlipstructure. Newly draw the same egg as the approved ALBINO projectvariant; do not paste or apply a colorfilter.\nIdentity: Exact systemic derivative of the locked V66 Ovomorph anatomy: same upright leathery ovoid, broad stable lower shell, narrower cap, exactly four apical lips, no root tentacles, no legs, no parasite baked into the egg, and identical sealed/opening/release/destroyed logic. Albino changes only authored pigmentation and material response: warm bone-ivory and pale gray-beige outer membrane with restrained translucent pink-beige veins and interior, subtle wet highlights and enough value separation to preserve pebbled relief. It is not pure white, glowing, crystalline or a flat automatic recolor. No new caste or official-model claim. Strict right-facing contract, unchanged scale, root and silhouette. Future pixels must be an original hand-authored adaptation of the base lock.\nMotion: 8 phases of a living SEALED egg pulse. The four cap lips NEVER separate. Same stationary broad basal footprint; slight membrane breathing volume and changing moist highlights, no translation. A complete closed ovoid in everyframe.\nExactly8 newly drawn chronologicalposes in a4column x2row invisiblegrid on1774x887 landscape2:1 canvas. Onecompleteegg percell. Strict2D side-on orthographiccamera, fixedbodyreference/footprint, consistentphysicalscale from base shell (not changing openlipwidth), no perspective rotation. Keep entirelargestopenlipspaninside itscell with32pxclearance. Same completefourlipanatomy throughout, lower shell doesn'tgrow/shrinkfromframefit.\nDetailed crisporganic bitmaprendering matchingreference, warmivory and graybeige pebbled leatherymembrane with restrained blushpink veins/interior and moist highlights, dark recesses. No flatwhitebleach, glowing, metal, ice or flowers.\nBACKGROUND exactlyuniformpureMAGENTA #FF00FF everywhereoutsideeachsubject and in allgaps. No checkerboard, whitefield, backdrop, shadow, ground, text, labels, lines, goreparticles or UI. Eight distinct chronologicalposes, no pastedduplicates or interpolation.",
+  "promptArchivePath": "docs/references/v73-next50-prompts/enemy-053-albino-ovomorph-sealed.txt",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Completed built-in image_gen call; original returned PNG persisted byte-for-byte on D:. Tool returned image bytes only. Local receipt label is not a provider generation ID. In-memory reference previews used after native path loading failed with Windows ACL-helper error."
+}

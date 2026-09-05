@@ -6,8 +6,8 @@
   "baseRelease": "v64",
   "supplemental": true,
   "sourceOfTruth": "Accepted profile registries must resolve to real runtime sheets and complete clip coverage. The V64 snapshot remains unchanged.",
-  "atlasCount": 7,
-  "cellCount": 224,
+  "atlasCount": 8,
+  "cellCount": 256,
   "contracts": {
     "grids": {
       "profile-4x8-256x256": {
@@ -67,6 +67,12 @@
         "y": 110.08955223880596,
         "width": 59.223880597014926,
         "height": 129.91044776119404
+      },
+      "enemy-055-albino-chestburster-body-v66": {
+        "x": 104.17021276595744,
+        "y": 212.7659574468085,
+        "width": 47.659574468085104,
+        "height": 27.23404255319149
       }
     }
   },
@@ -546,6 +552,44 @@
       "referenceUrls": [
         "https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp",
         "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.profile.enemy-055-albino-chestburster.v66",
+      "profileId": "enemy-055-albino-chestburster",
+      "subject": "Albino Chestburster",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-055-albino-chestburster",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-055-albino-chestburster.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-055-albino-chestburster.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "creature-ground",
+      "hitbox": "enemy-055-albino-chestburster-body-v66",
+      "renderWidth": 188,
+      "renderHeight": 188,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "PROJECT_ADAPTATION",
+      "referenceUrls": [
+        "https://www.20thcenturystudios.com/movies/alien",
+        "https://necaonline.com/2019/07/alien-7-scale-action-figure-ultimate-40th-anniversary-big-chap/"
       ],
       "runtime": {
         "status": "referenced",

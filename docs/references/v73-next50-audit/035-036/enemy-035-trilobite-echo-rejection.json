@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "profileId": "enemy-035-trilobite-echo",
+  "reviewer": "Codex /root/gameplay_audit_fix",
+  "reviewedAt": "2026-09-05",
+  "decision": "refused-requires-anatomy-consistent-sources",
+  "artAccepted": false,
+  "runtimeIntegratedByThisAudit": false,
+  "sourcePixelsModified": 0,
+  "sourceSha256ByClip": {
+    "idle": "562a3a50f34d475e1852e63de7e0f89f9fb7ce70824980eef6853b6bd33ea475",
+    "move": "a43b330804e8302cde0f7534a32f7b9bc384d3db3721fb170361267ec953c309",
+    "attack": "d2d14d01345ceec0f24997e972b05dc668267ccdb038506be701206c63e1b5bb",
+    "death": "bad472215467c9666c3959c82bcf85b056c59bf6df8b37736ed5fc7f1eadb917"
+  },
+  "inspectionMethod": "Eight-pose boards inspected in authored order, with inherited anchor/scale overlays. This is an independent visual counter-review, not a continuous runtime playtest.",
+  "findings": [
+    {
+      "priority": "P1",
+      "clips": [
+        "idle",
+        "move"
+      ],
+      "poses": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "finding": "Only six independent appendage contours can be reliably traced: four upper/radial tentacles and two lower support tentacles. A seventh independent limb cannot be demonstrated separately from the central implantation organ. This does not substantiate the old claim of invariant seven-limb anatomy.",
+      "requiredChange": "Regenerate from a single locked anatomy plate with seven separately traceable tentacles, using overlap only when identity is preserved."
+    },
+    {
+      "priority": "P1",
+      "clips": [
+        "attack"
+      ],
+      "poses": [
+        4,
+        5
+      ],
+      "finding": "An additional extension appears near the implantation organ; its continuity with one of the previous six independently traceable limbs is not established. The organ must not silently become the counted seventh locomotor tentacle.",
+      "requiredChange": "Keep the same seven tentacles through anticipation, contact and recovery; make the implantation organ visually distinct."
+    },
+    {
+      "priority": "P1",
+      "clips": [
+        "attack"
+      ],
+      "poses": [
+        3,
+        6
+      ],
+      "finding": "Inherited scale pose3 endpoint (286,277) appears on an extended appendage, rather than the closed central aperture centre claimed by the old rigid chord. The inherited pose6 root is near the implantation organ and requires remeasurement on the basal body ring.",
+      "requiredChange": "After corrected anatomy, measure the same rigid basal-ring feature in every clip and all physical roots; do not copy old scale/root claims."
+    }
+  ],
+  "historicalFragments": "anchor-review.fragment.json and scale-review.fragment.json are explicitly invalidated historical input, never approved normalization evidence.",
+  "eligibleForNormalization": false,
+  "eligibleForRuntimeIntegration": false
+}

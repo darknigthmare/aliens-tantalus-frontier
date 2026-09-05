@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "sourceSha256": {
+    "enemy-056-albino-drone-big-chap": "3f8e751c63723490e26eb952a440f1231d25bc0253443b565a635e016c5ab703",
+    "enemy-057-albino-warrior": "78fd107ace41e663459bd3d3ca9b3f023a5fdb4570dac91c144657eceb3c8624"
+  },
+  "scope": "source poses1 and5 visual half-cycle comparison, not anatomical scale or root calibration",
+  "displayScale": 2,
+  "displayInterpolation": "nearest-neighbour-for-inspection-only",
+  "accepted": false
+}

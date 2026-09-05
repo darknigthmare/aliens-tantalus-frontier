@@ -1,0 +1,537 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-053-albino-ovomorph": {
+      "status": "reviewed",
+      "reviewer": "Codex next50_art_review V73",
+      "reviewedAt": "2026-09-05",
+      "method": "Lower-shell center measured from the median centers of occupied scanlines in the bottom45 source pixels, excluding the last8 edge pixels; individually reinspected on the four source boards and corresponding marked overlays. Physical support is the exact visible lower shell edge (exclusive pixel boundary), not the extractor's additional3 transparent pixels. Landmark is60px above that support within lower shell/remains. Uncertainty +/-4 source pixels. Every pose is grounded; terminal destroyed poses use the center/support of flattened remains. This reviews registration only, not art acceptance. OpeningR1 was rejected for a lower-shell jump; openingR2 is measured here anew without carrying old source coordinates forward.",
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/053/sealed-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/opening-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/hatch-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/destroyed-source-diagnostic-r2.jpg"
+      ],
+      "clips": {
+        "sealed": {
+          "sourceSha256": "7ed9d701a1ff2a75247cb1d5abdc6e90213143a1d4007d025b862272cfa18254",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                409
+              ],
+              "landmark": [
+                222,
+                349
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 1 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                220.5,
+                409
+              ],
+              "landmark": [
+                220.5,
+                349
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 2 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                219.5,
+                409
+              ],
+              "landmark": [
+                219.5,
+                349
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 3 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                220.5,
+                408
+              ],
+              "landmark": [
+                220.5,
+                348
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 4 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                221.5,
+                411
+              ],
+              "landmark": [
+                221.5,
+                351
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 5 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                220.5,
+                411
+              ],
+              "landmark": [
+                220.5,
+                351
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 6 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                220.5,
+                411
+              ],
+              "landmark": [
+                220.5,
+                351
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 7 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                221,
+                411
+              ],
+              "landmark": [
+                221,
+                351
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked sealed pose 8 on current source and sealed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            }
+          ]
+        },
+        "opening": {
+          "sourceSha256": "f63b9ba11f4b3e61e778158811cb36f43777cd9a85d54a4d9adc79bcb691d0ee",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                346
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 1 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                215.5,
+                406
+              ],
+              "landmark": [
+                215.5,
+                346
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 2 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                210.5,
+                407
+              ],
+              "landmark": [
+                210.5,
+                347
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 3 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                210,
+                407
+              ],
+              "landmark": [
+                210,
+                347
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 4 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                221.5,
+                404
+              ],
+              "landmark": [
+                221.5,
+                344
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 5 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                215.5,
+                404
+              ],
+              "landmark": [
+                215.5,
+                344
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 6 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                210.5,
+                404
+              ],
+              "landmark": [
+                210.5,
+                344
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 7 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                209.5,
+                405
+              ],
+              "landmark": [
+                209.5,
+                345
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked opening pose 8 on current source and opening-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            }
+          ]
+        },
+        "hatch": {
+          "sourceSha256": "193d25721fd6be1278d9ea3031adcb9a66051b8b5b3f2b8947339de7c6a9106a",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                204,
+                398
+              ],
+              "landmark": [
+                204,
+                338
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 1 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                177.5,
+                398
+              ],
+              "landmark": [
+                177.5,
+                338
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 2 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                180,
+                398
+              ],
+              "landmark": [
+                180,
+                338
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 3 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                198,
+                399
+              ],
+              "landmark": [
+                198,
+                339
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 4 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                201.5,
+                382
+              ],
+              "landmark": [
+                201.5,
+                322
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 5 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                175,
+                382
+              ],
+              "landmark": [
+                175,
+                322
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 6 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                180.5,
+                383
+              ],
+              "landmark": [
+                180.5,
+                323
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 7 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                197.5,
+                382
+              ],
+              "landmark": [
+                197.5,
+                322
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked hatch pose 8 on current source and hatch-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            }
+          ]
+        },
+        "destroyed": {
+          "sourceSha256": "af590b614a4f5e6e86c2fc870ffa9c59149f9b61dcdb030f41f6a939cd0f3368",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                230.5,
+                427
+              ],
+              "landmark": [
+                230.5,
+                367
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 1 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                219,
+                429
+              ],
+              "landmark": [
+                219,
+                369
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 2 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                216.5,
+                428
+              ],
+              "landmark": [
+                216.5,
+                368
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 3 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                216,
+                425
+              ],
+              "landmark": [
+                216,
+                365
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 4 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                221.5,
+                395
+              ],
+              "landmark": [
+                221.5,
+                335
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 5 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                215.5,
+                394
+              ],
+              "landmark": [
+                215.5,
+                334
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 6 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                209,
+                393
+              ],
+              "landmark": [
+                209,
+                333
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 7 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                215,
+                393
+              ],
+              "landmark": [
+                215,
+                333
+              ],
+              "reviewed": true,
+              "confidence": "high",
+              "uncertaintyPx": 4,
+              "evidence": "Individually checked destroyed pose 8 on current source and destroyed-source-diagnostic-r2.jpg: lower shell/remains center and planted underside, not apical petal width; green support meets the visible alpha edge and yellow landmark stays inside lower shell. +/-4 source pixels."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

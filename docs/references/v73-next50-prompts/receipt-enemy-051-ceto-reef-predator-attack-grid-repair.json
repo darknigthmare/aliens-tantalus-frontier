@@ -1,0 +1,33 @@
+{
+  "kind": "generated-and-source-repaired",
+  "profileId": "enemy-051-ceto-reef-predator",
+  "clipId": "attack",
+  "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+  "sourceSha256": "f5d0d9f3eeefd16ca8973eafeb11a331f7baa3e97d4e9463dedfae62da314fd0",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v73_enemy-051-ceto-reef-predator_attack",
+  "providerGenerationId": null,
+  "actor": "Codex V73 verified grid repair",
+  "actualPromptText": "Use case: stylized-concept. Generate ONE new game animation sprite sheet for Ceto Reef Predator, clip attack. The most recent magenta8-pose Ceto image is the single identity/style reference; create newly drawn action poses, not color variants.\nIdentity: Original Tantalus Frontier aquatic fauna with no external model: one streamlined amphibious quadruped predator in strict right-facing orthographic profile, with one flat wedge head, lateral natural eye, visible gill slits, short neck, long tapered trunk, exactly four articulated weight-capable paddle limbs, one low dorsal crest and one deep non-bladed caudal swimming fin. Preserve the V56 identity, 186x82 logical runtime envelope, stable aquatic center/root, body length, head size, crest height and caudal depth across all 32 future poses. Materials are organic blue-black/deep-green wet hide with fine dark plates, subtle reef abrasion and only restrained cyan flank bioluminescence. Never add xenomorph anatomy, biomechanical metal, walking legs during swim, extra fins, leviathan scale or full-body neon. All future pixels must be original project art, canonExact=false.\nAnimation: Draw a single swimming bite/lunge in8poses:1neutral,2bodycompresses and tailcoils,3jawopens and paddlelimbs fold,4tailpowerstroke and head advances,5maximum open-jaw strike toward the right,6jawcloses and paddles brake,7headreturns,8settles to neutral. One anatomically coherent jaw, stable skull length, continuous caudal fin. Visible anticipation, attack and recovery, no victim or separate projectile.\nComposition: exactly8 chronological full-body poses,4equalcolumns x2equalrows on1774x887 landscape canvas. Oneanimal percell, strict orthographic profile facingRIGHT. Identical biological individual, skull length, body mass and limb count in all frames, no camera anglechanges. Leave at least24px of emptyspace around eachcompleteanimal at nativecellsize; entire tail and all limbsinside eachcell. Freezephysicalscale and body registration; do not fit individual frames to their bounds or repeat halfcycles.\nStyle: detailed crisp2D handpainted game sprite, identicalblueblack/deepgreen hide, restrainedcyan flank dots, darkorganic plates, naturaleye, no biomechanicalAlienparts, no blur.\nBackground MUST be perfectly FLAT pure#FF00FF magenta, including everygap; NOcheckerboard, transparency preview, white pixels outside anatomy, shadow, scenery, text, gridlines, HUD or labels. All8poses independently drawn.",
+  "sourceRepairs": [
+    {
+      "kind": "lossless-owned-pose-grid-repacking",
+      "result": "pass: eight complete cells, zero authored pixels changed or discarded",
+      "method": "strict-matte-key-and-owned-component-integer-translation-only",
+      "inputPath": "assets/openai/sprites/frames/v73/enemy-051-ceto-reef-predator/attack-native-1754x897.png",
+      "inputSha256": "52a8b1cb56b2048c8b236a4341496ff55302f1fcd56dc337086e82270902affe",
+      "outputPath": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+      "outputSha256": "f5d0d9f3eeefd16ca8973eafeb11a331f7baa3e97d4e9463dedfae62da314fd0",
+      "receiptPath": "docs/references/v73-next50-audit/051-052/enemy-051-ceto-reef-predator.attack-owned-padding-1774-proof.json",
+      "receiptSha256": "ed55ac0b9873d18b2e40e0b04f6e54079541403dc3b234b081e1c0e3cd2dcad9",
+      "authoredPixelsPreserved": 206388,
+      "discardedAuthoredPixels": 0,
+      "resize": false,
+      "redraw": false
+    }
+  ],
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Native output had1754x897 dimensions and two appendages crossing nominal cells. All creature pixels preserved byte-for-byte. Corrected4x2 packing1774x887 matches other clips; no new image generation and no invented poses. Native original archived."
+}

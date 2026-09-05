@@ -1,0 +1,675 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-049-wild-boar-host": {
+      "status": "reviewed",
+      "reviewer": "Codex level_props_audit_fix independent V73 review",
+      "reviewedAt": "2026-09-05",
+      "reviewedPoseCount": 32,
+      "method": "Visually traced thoracic mass immediately behind the shoulder on all active source poses. Existing source-local body points were independently checked against the actual torso, not rederived from tail/head bounding-box extents. Grounded roots use the observed hoof/paw or resting-body support plane exactly. Three transparent extraction-padding pixels are explicitly excluded from the physical root; the normalizer must trim alpha-zero padding rather than shift the measured support. Airborne Korari pounce roots recover the raw authored clearance relative to grounded neighbours before recomposition erased it; one prior uniform clip factor converts that distance only, never rescaling the active body.",
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/049-050/FINAL_QA.md",
+        "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/anchor-review.fragment.json",
+        "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.idle.anchor-overlay.png",
+        "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.move.anchor-overlay.png",
+        "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.attack.anchor-overlay.png",
+        "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.death.anchor-overlay.png"
+      ],
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/idle.png",
+          "sourceSha256": "40af647b8f28afb8f872cff0235da56afb7eca453d88f7cfb59b0abf1aae6270",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                300
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 1: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,300); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                285
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 2: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,285); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                297
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 3: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,297); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                310
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 4: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,310); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                276
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 5: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,276); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                299
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 6: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,299); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                300
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 7: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,300); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                300
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 8: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,300); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/move.png",
+          "sourceSha256": "77e62563dac70cffd955fcb8a871c8cdd1593af4ed4c56e4f34f9445a7bf669b",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                318
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 1: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,318); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                326
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 2: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,326); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                318
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 3: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,318); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                320
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 4: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,320); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                314
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 5: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,314); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                325
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 6: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,325); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                315
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 7: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,315); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                319
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 8: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,319); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/attack.png",
+          "sourceSha256": "68e70c5b8837e89e673c4cb65f9b2b65c81875ffef987c7b371d35fb2614e960",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                299
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 1: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (222,299); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                308
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 2: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (221,308); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                318
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 3: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (221,318); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                317
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 4: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (222,317); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                297
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 5: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (222,297); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                286
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 6: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (221,286); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                299
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 7: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (221,299); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                306
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Pose 8: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (222,306); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-004/enemy-049-wild-boar-host/death.png",
+          "sourceSha256": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                306
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 9,
+              "evidence": "Pose 1: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (222,306); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                320
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 10,
+              "evidence": "Pose 2: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (221,320); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                221,
+                406
+              ],
+              "landmark": [
+                221,
+                332
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 11,
+              "evidence": "Pose 3: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (221,332); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                222,
+                406
+              ],
+              "landmark": [
+                222,
+                341
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 12,
+              "evidence": "Pose 4: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,341); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 406,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                339
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 13,
+              "evidence": "Pose 5: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,339); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                347
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 14,
+              "evidence": "Pose 6: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (221,347); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                221,
+                405
+              ],
+              "landmark": [
+                221,
+                355
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 14,
+              "evidence": "Pose 7: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (221,355); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                405
+              ],
+              "landmark": [
+                222,
+                357
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 14,
+              "evidence": "Pose 8: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,357); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+              "physicalSupportY": 405,
+              "transparentExtractionGuardPx": 3,
+              "airborne": false,
+              "authoredClearanceSourcePx": 0
+            }
+          ]
+        }
+      },
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    }
+  }
+}

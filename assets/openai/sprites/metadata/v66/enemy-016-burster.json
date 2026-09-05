@@ -30,36 +30,55 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
-  "normalizedSha256": "fc5f6cfc15016a4a1b25a5a3ad700137c5a92254fd75b2bca6bad17dc28a6c8c",
+  "normalizedSha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df",
   "preview": "assets/openai/sprites/previews/v66/enemy-016-burster/all.gif",
-  "previewSha256": "0578c78e3bf4c125bc2ed9b07c1e9a116a8623d0fd589f846b4ac38a378a95e3",
+  "previewSha256": "0b049762f1cf21db54a852cdf1fb875ecadffc1d6406f6a03f2e3b4748d3cd3e",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.5,
+  "scale": 0.474857258,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1.047649,
+    "attack": 1.040246,
+    "death": 1.052948
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
-    "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+    "path": "docs/references/v73-next50-audit/016/anchor-review.fragment.json",
+    "sha256": "b3e28e6b209530533b76f4ba9475dcd8d6576be94503994d438a57b289cd3375",
     "status": "reviewed",
-    "reviewer": "Codex complete_variants",
-    "reviewedAt": "2026-08-31",
-    "method": "Manually observed center of ribcage immediately behind front shoulder, not silhouette or tail bounds center. Landmarks measured individually on 1400x700 diagnostic source views with 350px cells, converted through actual source cell offsets to 1774x887 nominal coordinates. Grounded support uses complete pose padded bottom (three-pixel extraction guard) visually checked against planted limbs or collapsed body. Confidence medium, uncertainty 10 source pixels. Prowler airborne attack poses 3-5 use the preceding grounded anticipation floor y=384 as an explicit projected support-plane estimate, preserving authored flight height; this does not certify animation trajectory or runtime root motion.",
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/016/idle-physical-scale-review.jpg",
+        "sha256": "57652f43e3de2106a5c9223d4369b585b2c33edb22781b9d40eb228fbc98b087"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/move-physical-scale-review.jpg",
+        "sha256": "9850bee9612cf418ab0aa972c0cbeb7b4e463c7247a41a2575900e96b9638e7b"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/attack-physical-scale-review.jpg",
+        "sha256": "4422ceac6c8db08c4e72ef386726a77a081eac950eda191104ad9bce8eda9235"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/death-physical-scale-review.jpg",
+        "sha256": "0b6b42a725984084b063bf9fbe119a69aea8c30dbcabaf51d6983ac882977be6"
+      }
+    ],
+    "reviewer": "Codex next50_art_review V73",
+    "reviewedAt": "2026-09-05",
+    "method": "Existing 32 manually measured ribcage centers and their planted-foot or terminal-resting-body support projections were independently reinspected on the four active source boards and four marked anchor overlays. Values retained unchanged with +/-10 source pixels uncertainty. This is a quadruped grounded registration, not the Prowler airborne convention accidentally included in the older shared method text. Tail bounds never define the root. Review certifies physical registration only, not animation quality or exact canon.",
     "reviewedPoseCount": 32,
     "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -300,9 +319,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-016-burster/idle.webp",
-      "sha256": "288d72dc4ccff7f032d1961915bd0427c1d003608c426155277d04f14ae856f9",
+      "sha256": "22494a435855580d341a458726c3dd092317b1c4794a052d3a527aaa1e4898df",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-016-burster/idle.gif",
-      "previewSha256": "79bd7938d49b30aa085d1d1b63e1ddd6bd56957816f0119f396cdc366fa638d8"
+      "previewSha256": "d99bb53d8fc7c785e1c76655f624a85e9fc2ce3e16512bf2a742db4a6a9d0f0a"
     },
     {
       "id": "move",
@@ -319,9 +338,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-016-burster/move.webp",
-      "sha256": "dcb779aeed3dedb6afd28474f73248253734dd104c8c70729eca433184ba054c",
+      "sha256": "886bf4d0d0a92bdae28b2a962fe4bb97e8b37055097d92e2fa0d45a383b1b2b9",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-016-burster/move.gif",
-      "previewSha256": "9b1250e6bee5afa3b5499af3f138de47fdd19f425ae15723fd82213f291f3d61"
+      "previewSha256": "0953d946b36f7c27b52e8ed7e10d64da3168a4ff2c6f86e61ce00e0fe0044825"
     },
     {
       "id": "attack",
@@ -338,9 +357,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-016-burster/attack.webp",
-      "sha256": "477f4328cd82a9bd8667751a8460ad006c2ecf3acf0f7e5008ecad2de5f77a27",
+      "sha256": "7fdb7d340872d0ad9457db898f545f49f01cb4c9e13b62cc005f3b68de123213",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-016-burster/attack.gif",
-      "previewSha256": "f25e7694c273c3f9028a45382e8c726fe9eb67000920b7a7a97fed886ca8e605"
+      "previewSha256": "1173da862531213e7d4858255cc1146448f1df3467d9f851d3395b08f51fb599"
     },
     {
       "id": "death",
@@ -357,9 +376,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-016-burster/death.webp",
-      "sha256": "94908e0eeff298fde681aea3bcbe11bf7ca491a9c35d5b5e212cfb893f6019be",
+      "sha256": "ed67589428a3f8dcfefbe4cc006d9627bdbe2f3fb1612b0f789cbbb0e5072e0c",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-016-burster/death.gif",
-      "previewSha256": "2b25bc25032c1a63122ac70c059b486ed2cb07359eaea65eb084bd1630231320"
+      "previewSha256": "acc9b923f548231701b9d56ae32ff2f9a33293e10e33fdf3e98fbe5cdb06bc34"
     }
   ],
   "placements": [
@@ -404,26 +423,40 @@
         248,
         255
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (248,255) on source diagnostic; vertical projection to y=401. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         199.0,
         266.0
       ],
       "renderedAnchor": [
-        127.5,
+        127.60655737704919,
         240.0
       ],
       "index": 0,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        28,
-        107,
-        211,
+        33,
+        114,
+        207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -466,26 +499,40 @@
         238,
         252
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (238,252) on source diagnostic; vertical projection to y=402. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         198.0,
         267.0
       ],
       "renderedAnchor": [
-        128.26975476839237,
+        127.87465940054496,
         240.0
       ],
       "index": 1,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        29,
-        106,
-        213,
+        34,
+        113,
+        208,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -528,26 +575,40 @@
         238,
         255
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (238,255) on source diagnostic; vertical projection to y=401. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         204.0,
         265.0
       ],
       "renderedAnchor": [
-        127.73506493506494,
+        127.96623376623377,
         240.0
       ],
       "index": 2,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        26,
-        108,
-        218,
+        31,
+        114,
+        214,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -590,26 +651,40 @@
         246,
         256
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (246,256) on source diagnostic; vertical projection to y=403. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         211.0,
         263.0
       ],
       "renderedAnchor": [
-        128.2230971128609,
+        128.23884514435696,
         240.0
       ],
       "index": 3,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        23,
-        108,
-        213,
+        28,
+        115,
+        209,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -652,26 +727,40 @@
         242,
         212
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (242,212) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         202.0,
         267.0
       ],
       "renderedAnchor": [
-        128.26933333333335,
+        127.88266666666667,
         240.0
       ],
       "index": 4,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        27,
-        106,
-        215,
+        32,
+        113,
+        210,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -714,26 +803,40 @@
         238,
         212
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (238,212) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         204.0,
         270.0
       ],
       "renderedAnchor": [
-        128.272,
+        127.832,
         240.0
       ],
       "index": 5,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        26,
-        105,
-        214,
+        31,
+        112,
+        209,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -776,26 +879,40 @@
         232,
         212
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (232,212) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         202.0,
         268.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.05978260869566,
         240.0
       ],
       "index": 6,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        27,
-        106,
-        211,
+        32,
+        113,
+        207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -838,26 +955,40 @@
         225,
         215
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (225,215) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         198.0,
         266.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.10439560439562,
         240.0
       ],
       "index": 7,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1,
+      "appliedScale": 0.474857258,
       "renderedBounds": [
-        29,
-        107,
-        211,
+        34,
+        114,
+        207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -900,7 +1031,7 @@
         247,
         276
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (247,276) on source diagnostic; vertical projection to y=394. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         199.0,
@@ -911,15 +1042,29 @@
         240.0
       ],
       "index": 8,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
         29,
         116,
         215,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -962,26 +1107,40 @@
         253,
         276
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (253,276) on source diagnostic; vertical projection to y=391. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         209.0,
         246.0
       ],
       "renderedAnchor": [
-        128.5,
+        127.92582417582418,
         240.0
       ],
       "index": 9,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
         24,
-        117,
-        206,
+        118,
+        205,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1024,26 +1183,40 @@
         246,
         278
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (246,278) on source diagnostic; vertical projection to y=394. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         209.0,
         249.0
       ],
       "renderedAnchor": [
-        127.78474114441417,
+        128.21525885558583,
         240.0
       ],
       "index": 10,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
-        23,
+        24,
         116,
         207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1086,26 +1259,40 @@
         248,
         280
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (248,280) on source diagnostic; vertical projection to y=392. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         216.0,
         247.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.4162162162162,
         240.0
       ],
       "index": 11,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
-        20,
-        116,
+        21,
+        117,
         205,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1148,26 +1335,40 @@
         241,
         221
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (241,221) on source diagnostic; vertical projection to y=341. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         196.0,
         247.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.47027027027028,
         240.0
       ],
       "index": 12,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
-        30,
-        116,
+        31,
+        117,
         215,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1210,26 +1411,40 @@
         240,
         223
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (240,223) on source diagnostic; vertical projection to y=345. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         202.0,
         251.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.44808743169398,
         240.0
       ],
       "index": 13,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
-        27,
-        114,
+        28,
+        115,
         210,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1272,26 +1487,40 @@
         229,
         224
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (229,224) on source diagnostic; vertical projection to y=345. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         196.0,
         252.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.45555555555555,
         240.0
       ],
       "index": 14,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
-        30,
-        114,
+        31,
+        115,
         210,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1334,7 +1563,7 @@
         231,
         223
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (231,223) on source diagnostic; vertical projection to y=351. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         211.0,
@@ -1345,15 +1574,29 @@
         240.0
       ],
       "index": 15,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.047649,
+      "appliedScale": 0.497483731,
       "renderedBounds": [
         23,
         112,
         201,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1396,26 +1639,40 @@
         245,
         274
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (245,274) on source diagnostic; vertical projection to y=395. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         194.0,
         250.0
       ],
       "renderedAnchor": [
-        127.73424657534247,
+        127.67123287671232,
         240.0
       ],
       "index": 16,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        31,
-        115,
-        213,
+        32,
+        117,
+        212,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1458,26 +1715,40 @@
         248,
         300
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (248,300) on source diagnostic; vertical projection to y=393. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         211.0,
         216.0
       ],
       "renderedAnchor": [
-        127.79718309859155,
+        128.01408450704224,
         240.0
       ],
       "index": 17,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        22,
-        132,
-        200,
+        24,
+        133,
+        199,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1520,26 +1791,40 @@
         246,
         286
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (246,286) on source diagnostic; vertical projection to y=394. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         218.0,
         208.0
       ],
       "renderedAnchor": [
-        128.29700272479565,
+        127.5149863760218,
         240.0
       ],
       "index": 18,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        19,
-        136,
-        203,
+        20,
+        137,
+        201,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1582,26 +1867,40 @@
         249,
         295
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (249,295) on source diagnostic; vertical projection to y=393. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         220.0,
         208.0
       ],
       "renderedAnchor": [
-        127.68838526912181,
+        128.44192634560906,
         240.0
       ],
       "index": 19,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        18,
-        136,
+        20,
+        137,
         194,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1644,26 +1943,40 @@
         238,
         228
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (238,228) on source diagnostic; vertical projection to y=326. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         191.0,
         231.0
       ],
       "renderedAnchor": [
-        127.5,
+        128.42090395480227,
         240.0
       ],
       "index": 20,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        32,
-        124,
+        34,
+        126,
         209,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1706,26 +2019,40 @@
         240,
         233
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (240,233) on source diagnostic; vertical projection to y=325. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         195.0,
         231.0
       ],
       "renderedAnchor": [
-        127.78761061946902,
+        128.06194690265488,
         240.0
       ],
       "index": 21,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        30,
-        124,
-        200,
+        32,
+        126,
+        199,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1768,26 +2095,40 @@
         237,
         226
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (237,226) on source diagnostic; vertical projection to y=324. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         214.0,
         223.0
       ],
       "renderedAnchor": [
-        127.710027100271,
+        127.55013550135502,
         240.0
       ],
       "index": 22,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        21,
-        128,
-        205,
+        22,
+        130,
+        204,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1830,26 +2171,40 @@
         225,
         235
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (225,235) on source diagnostic; vertical projection to y=324. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         207.0,
         200.0
       ],
       "renderedAnchor": [
-        128.21329639889197,
+        128.06648199445982,
         240.0
       ],
       "index": 23,
-      "scale": 0.5,
-      "sourceScale": 1.0,
-      "appliedScale": 0.5,
+      "scale": 0.474857258,
+      "sourceScale": 1.040246,
+      "appliedScale": 0.493968363,
       "renderedBounds": [
-        25,
-        140,
-        205,
+        26,
+        141,
+        204,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1892,7 +2247,7 @@
         234,
         279
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (234,279) on source diagnostic; vertical projection to y=394. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         193.0,
@@ -1903,15 +2258,29 @@
         240.0
       ],
       "index": 24,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         31,
         129,
         219,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1954,7 +2323,7 @@
         250,
         313
       ],
-      "sourceAnchorEvidence": "Individually observed ribcage landmark (250,313) on source diagnostic; vertical projection to y=392. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         212.0,
@@ -1965,15 +2334,29 @@
         240.0
       ],
       "index": 25,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         22,
         141,
         212,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2016,7 +2399,7 @@
         230,
         325
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (230,325) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=388. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         200.0,
@@ -2027,15 +2410,29 @@
         240.0
       ],
       "index": 26,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         28,
         150,
         216,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2078,7 +2475,7 @@
         217,
         334
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (217,334) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=388. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         195.0,
@@ -2089,15 +2486,29 @@
         240.0
       ],
       "index": 27,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         30,
         156,
         214,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2140,7 +2551,7 @@
         236,
         247
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (236,247) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=309. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         189.0,
@@ -2151,15 +2562,29 @@
         240.0
       ],
       "index": 28,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         33,
         152,
         215,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2202,7 +2627,7 @@
         240,
         255
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (240,255) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=310. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         184.0,
@@ -2213,15 +2638,29 @@
         240.0
       ],
       "index": 29,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         36,
         146,
         212,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2264,7 +2703,7 @@
         228,
         272
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (228,272) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=315. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         195.0,
@@ -2275,15 +2714,29 @@
         240.0
       ],
       "index": 30,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         30,
         172,
         214,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2326,7 +2779,7 @@
         232,
         278
       ],
-      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (232,278) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=315. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorEvidence": "2026-09-05 independent reinspection of active source and old marked overlay confirms the previously measured ribcage center and support projection, including 3 source pixels of extraction guard. No coordinate changed.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
         222.0,
@@ -2337,15 +2790,29 @@
         240.0
       ],
       "index": 31,
-      "scale": 0.5,
-      "sourceScale": 1.0,
+      "scale": 0.474857258,
+      "sourceScale": 1.052948,
       "appliedScale": 0.5,
       "renderedBounds": [
         17,
         205,
         207,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     }
   ],
   "validation": {
@@ -2353,106 +2820,106 @@
       {
         "index": 0,
         "alphaBounds": [
-          29,
-          108,
-          210,
+          34,
+          115,
+          206,
           239
         ],
-        "foregroundPixels": 7947,
-        "width": 181,
-        "height": 131,
-        "relativeToRowMedian": 0.974494
+        "foregroundPixels": 7258,
+        "width": 172,
+        "height": 124,
+        "relativeToRowMedian": 0.985472
       },
       {
         "index": 1,
         "alphaBounds": [
-          30,
-          107,
-          212,
+          35,
+          114,
+          207,
           239
         ],
-        "foregroundPixels": 8138,
-        "width": 182,
-        "height": 132,
-        "relativeToRowMedian": 0.997915
+        "foregroundPixels": 7336,
+        "width": 172,
+        "height": 125,
+        "relativeToRowMedian": 0.996062
       },
       {
         "index": 2,
         "alphaBounds": [
-          27,
-          109,
-          217,
+          32,
+          115,
+          213,
           239
         ],
-        "foregroundPixels": 8180,
-        "width": 190,
-        "height": 130,
-        "relativeToRowMedian": 1.003066
+        "foregroundPixels": 7467,
+        "width": 181,
+        "height": 124,
+        "relativeToRowMedian": 1.013849
       },
       {
         "index": 3,
         "alphaBounds": [
-          24,
-          109,
-          212,
+          29,
+          116,
+          208,
           239
         ],
-        "foregroundPixels": 8172,
-        "width": 188,
-        "height": 130,
-        "relativeToRowMedian": 1.002085
+        "foregroundPixels": 7394,
+        "width": 179,
+        "height": 123,
+        "relativeToRowMedian": 1.003938
       },
       {
         "index": 4,
         "alphaBounds": [
-          28,
-          107,
-          214,
+          33,
+          114,
+          209,
           239
         ],
-        "foregroundPixels": 8160,
-        "width": 186,
-        "height": 132,
-        "relativeToRowMedian": 1.018282
+        "foregroundPixels": 7346,
+        "width": 176,
+        "height": 125,
+        "relativeToRowMedian": 1.008927
       },
       {
         "index": 5,
         "alphaBounds": [
-          27,
-          106,
-          213,
+          32,
+          113,
+          208,
           239
         ],
-        "foregroundPixels": 8072,
-        "width": 186,
-        "height": 133,
-        "relativeToRowMedian": 1.0073
+        "foregroundPixels": 7287,
+        "width": 176,
+        "height": 126,
+        "relativeToRowMedian": 1.000824
       },
       {
         "index": 6,
         "alphaBounds": [
-          28,
-          107,
-          210,
+          33,
+          114,
+          206,
           239
         ],
-        "foregroundPixels": 7955,
-        "width": 182,
-        "height": 132,
-        "relativeToRowMedian": 0.9927
+        "foregroundPixels": 7275,
+        "width": 173,
+        "height": 125,
+        "relativeToRowMedian": 0.999176
       },
       {
         "index": 7,
         "alphaBounds": [
-          30,
-          108,
-          210,
+          35,
+          115,
+          206,
           239
         ],
-        "foregroundPixels": 7932,
-        "width": 180,
-        "height": 131,
-        "relativeToRowMedian": 0.98983
+        "foregroundPixels": 7211,
+        "width": 171,
+        "height": 124,
+        "relativeToRowMedian": 0.990386
       },
       {
         "index": 8,
@@ -2465,85 +2932,85 @@
         "foregroundPixels": 7331,
         "width": 184,
         "height": 122,
-        "relativeToRowMedian": 1.01397
+        "relativeToRowMedian": 1.019752
       },
       {
         "index": 9,
         "alphaBounds": [
           25,
-          118,
-          205,
+          119,
+          204,
           239
         ],
-        "foregroundPixels": 7251,
-        "width": 180,
-        "height": 121,
-        "relativeToRowMedian": 1.002905
+        "foregroundPixels": 7222,
+        "width": 179,
+        "height": 120,
+        "relativeToRowMedian": 1.00459
       },
       {
         "index": 10,
         "alphaBounds": [
-          24,
+          25,
           117,
           206,
           239
         ],
-        "foregroundPixels": 6977,
-        "width": 182,
+        "foregroundPixels": 6939,
+        "width": 181,
         "height": 122,
-        "relativeToRowMedian": 0.965007
+        "relativeToRowMedian": 0.965225
       },
       {
         "index": 11,
         "alphaBounds": [
-          21,
-          117,
+          22,
+          118,
           204,
           239
         ],
-        "foregroundPixels": 7209,
-        "width": 183,
-        "height": 122,
-        "relativeToRowMedian": 0.997095
+        "foregroundPixels": 7156,
+        "width": 182,
+        "height": 121,
+        "relativeToRowMedian": 0.99541
       },
       {
         "index": 12,
         "alphaBounds": [
-          31,
-          117,
+          32,
+          118,
           214,
           239
         ],
-        "foregroundPixels": 7341,
-        "width": 183,
-        "height": 122,
-        "relativeToRowMedian": 1.041424
+        "foregroundPixels": 7291,
+        "width": 182,
+        "height": 121,
+        "relativeToRowMedian": 1.03816
       },
       {
         "index": 13,
         "alphaBounds": [
-          28,
-          115,
+          29,
+          116,
           209,
           239
         ],
-        "foregroundPixels": 7101,
-        "width": 181,
-        "height": 124,
-        "relativeToRowMedian": 1.007377
+        "foregroundPixels": 7049,
+        "width": 180,
+        "height": 123,
+        "relativeToRowMedian": 1.003702
       },
       {
         "index": 14,
         "alphaBounds": [
-          31,
-          115,
+          32,
+          116,
           209,
           239
         ],
-        "foregroundPixels": 6680,
-        "width": 178,
-        "height": 124,
-        "relativeToRowMedian": 0.947652
+        "foregroundPixels": 6646,
+        "width": 177,
+        "height": 123,
+        "relativeToRowMedian": 0.946319
       },
       {
         "index": 15,
@@ -2556,111 +3023,111 @@
         "foregroundPixels": 6997,
         "width": 176,
         "height": 126,
-        "relativeToRowMedian": 0.992623
+        "relativeToRowMedian": 0.996298
       },
       {
         "index": 16,
         "alphaBounds": [
-          32,
-          116,
-          212,
+          33,
+          118,
+          211,
           239
         ],
-        "foregroundPixels": 7215,
-        "width": 180,
-        "height": 123,
-        "relativeToRowMedian": 1.013699
+        "foregroundPixels": 7081,
+        "width": 178,
+        "height": 121,
+        "relativeToRowMedian": 1.013599
       },
       {
         "index": 17,
         "alphaBounds": [
-          23,
-          133,
-          199,
+          25,
+          134,
+          198,
           239
         ],
-        "foregroundPixels": 7095,
-        "width": 176,
-        "height": 106,
-        "relativeToRowMedian": 0.996839
+        "foregroundPixels": 6964,
+        "width": 173,
+        "height": 105,
+        "relativeToRowMedian": 0.996851
       },
       {
         "index": 18,
         "alphaBounds": [
-          20,
-          137,
-          202,
+          21,
+          138,
+          200,
           239
         ],
-        "foregroundPixels": 7140,
-        "width": 182,
-        "height": 102,
-        "relativeToRowMedian": 1.003161
+        "foregroundPixels": 7008,
+        "width": 179,
+        "height": 101,
+        "relativeToRowMedian": 1.003149
       },
       {
         "index": 19,
         "alphaBounds": [
-          19,
-          137,
+          21,
+          138,
           193,
           239
         ],
-        "foregroundPixels": 6745,
-        "width": 174,
-        "height": 102,
-        "relativeToRowMedian": 0.947664
+        "foregroundPixels": 6660,
+        "width": 172,
+        "height": 101,
+        "relativeToRowMedian": 0.953335
       },
       {
         "index": 20,
         "alphaBounds": [
-          33,
-          125,
+          35,
+          127,
           208,
           239
         ],
-        "foregroundPixels": 7619,
-        "width": 175,
-        "height": 114,
-        "relativeToRowMedian": 1.039285
+        "foregroundPixels": 7453,
+        "width": 173,
+        "height": 112,
+        "relativeToRowMedian": 1.048389
       },
       {
         "index": 21,
         "alphaBounds": [
-          31,
-          125,
-          199,
+          33,
+          127,
+          198,
           239
         ],
-        "foregroundPixels": 7411,
-        "width": 168,
-        "height": 114,
-        "relativeToRowMedian": 1.010913
+        "foregroundPixels": 7171,
+        "width": 165,
+        "height": 112,
+        "relativeToRowMedian": 1.008721
       },
       {
         "index": 22,
         "alphaBounds": [
-          22,
-          129,
-          204,
+          23,
+          131,
+          203,
           239
         ],
-        "foregroundPixels": 7251,
-        "width": 182,
-        "height": 110,
-        "relativeToRowMedian": 0.989087
+        "foregroundPixels": 7047,
+        "width": 180,
+        "height": 108,
+        "relativeToRowMedian": 0.991279
       },
       {
         "index": 23,
         "alphaBounds": [
-          26,
-          141,
-          204,
+          27,
+          142,
+          203,
           239
         ],
-        "foregroundPixels": 6733,
-        "width": 178,
-        "height": 98,
-        "relativeToRowMedian": 0.918429
+        "foregroundPixels": 6624,
+        "width": 176,
+        "height": 97,
+        "relativeToRowMedian": 0.931777
       },
       {
         "index": 24,
@@ -2768,51 +3235,111 @@
       }
     ],
     "rowMedianForegroundPixels": [
-      8155.0,
-      8013.5,
-      7230.0,
-      7049.0,
-      7117.5,
-      7331.0,
+      7365.0,
+      7281.0,
+      7189.0,
+      7023.0,
+      6986.0,
+      7109.0,
       6721.5,
       4936.5
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "82db03a827981ba52533dbdf32bcdf2ab9b875298142bfecfaf436e91491d57d",
-      "c3298e32fb5fa0ee5a919cabbd390b729330aa31083f635f7449167ce6cd4c0d",
-      "bc0d5faf5e88870a9bceac7866e68dd3d46c9088d8058dd2ff2e854ead3abab7",
-      "00542cd7ee4e04ea3133f04dc8912e0946cd2aae4d197227380d8b22a562852f",
-      "cd6a83de76de125918bd5f7171641d8f74fe0efa9be720324724c5bff7d62fcf",
-      "a820f73231f5f882b86741be60b402ed9bd1a622592e4873d4a387b92b9342da",
-      "7da2ad272940669a161cfa99ddf445aee2970a5b137feffa6a4527c4a824c637",
-      "1cf3a4ad8e18e780f63497face866d7497fb882c631d0ad1801d72406e6a317e",
-      "16abbcd7266a4f1bfe77aedddea6bd5eae8e1b4ea1d61dfa57cd3d3bfc51f4fa",
-      "569a1797022884fbf31ee9976dae726bf7188700787293903fa2599fd755bb50",
-      "6800e797bc00d37cbfc79b2f90754a70420919e9d848647c439e996d8af30e63",
-      "536c7261d1baa7cdce86829dcd4cb6e84f3e2c352d5afe6306d710ce74b3f1fa",
-      "5e03e371f6d0a86491adf73440406b90f681a48e27b17eeab3cae91a30482a37",
-      "d43d34c4f3c78cd1b0600480d930670847f79abeab29af05fab4261b59efb0a0",
-      "65d7c205b056075b11da8f532ad5cf8c7a093124b542565c41c72bf1f639c458",
+      "e09d7ce0cd74879081a9e3658e1f20df544dbf3c6266f3fe31321b9b3f7d127a",
+      "c8224def5bbf73106d1c85ee2914417fa4234dcb580a6403a3b27b8b3138c52f",
+      "3f1b3a918ce611cf41d287882b814d6c058d5542c1cae21207d8bac84d1b80ba",
+      "f682636b85175255de9a741341d3af2f37465555ca00fb4b65e455315e419845",
+      "884f89043bf2f2b604aac2bfa0f6173d72407e1465ba4acccd042fdec86923bd",
+      "e0e317eea148a812d9becdb7c0ca211ad56f2a989f732ca2fb6f4aa106211a93",
+      "221a619ea12001733356a784a8c371e26d60c98f5f853c95e494fdb9d8fb68b2",
+      "cf479d73b45aa3d577d839ca3755d338c60016c0ed89794d0f43bfe71475c74d",
+      "afc68ad52ecc785bf384b035216650169fb261ca1df260b3d3c12051b2179300",
+      "5c925fca594efaa1774e6521a02958f6a633559bfc1b110ffbfd4b81931e3017",
+      "12549b6172404f03c18aa8ccde9a1064be3fd435b88dcf00d9783025e9894b62",
+      "91f05ec99a17e447cce6a100968b0dc76d3c15364c9ae0f27c0a4cdfa52b7f44",
+      "93b01da35b74ffdde75fe8b551ada7cc92c663bd229d0671a887be639b3d78ce",
+      "395b0e1112440897303cb24c38ee107823484776a24e2fbc3a1f4e27d9bbb42c",
+      "791f82442a5802075c4ad32eae906093523c495a14aa3418370865ed7eb5ece1",
       "fd345b85c743efb91a37e3ec189ac6c4a692a57bba8eb2a3b185aa9a6863822a",
-      "a7fc90b9fcd7b422ff8876215d9b7b1ff4a3de6097f8b7e1b2c478f6fd873820",
-      "5c1398fe26a99e363cd184db85ac5a720a183ba52c372214c0b5743ec887bac8",
-      "c21d39d195a4ba354d5d6820108e99b60f2d2638a3daf92740677b39be4fb9f2",
-      "9fbd3d10c7aaa069f00113b3888f00b8f35e00f4915bb8575e0b22d44efc6a8c",
-      "303b3a8b16d189729e4d5b6606d2a7604cc1e5b17ca8cc5f22ad832e38091055",
-      "a3fad93e11c94d479e60f47be87f4445eef09882e16ecac5f2f46c20da9e845d",
-      "53afd7cee531102b651195c72afa5fced89e895dbb4462fc8b3c7fccd7adb9d6",
-      "0d2e6d9aec335c73d32322e194571791ae520fc5f572d48d733f8797508c6404",
-      "b6ad7d62b81cb3b5a193e938df07427b694fd1cc26614bfe52863105b7cd229e",
-      "9a3137571fbf64ea51caa1039386df52950e35136875f62a593b57c1a5052e3b",
+      "f8d8da6275a627c6fc7c5097a5ad4d343129fa42939ebc836c472b0886d101d6",
+      "ca556ed11f4b8f5666b2b8e435d14dbf6b1d8e29092816bc7ac3802925fd5fde",
+      "96dcda28e8ce62da0fbc760a98b3c14e29f5069ddfed0709b7d17fefde426129",
+      "7b77af10a1ecb42755c4c275394b451c72b2ac470b937cc28f978bfe98102170",
+      "ccb812993ae6eecd99cf3b48197ccf5a9745c3608facfa13385bf7342149c02d",
+      "307e68ed8532dcd9b5fc3a5f775821063117bbb43087f876a2830c9b8af2241e",
+      "0333629302a6f9eca47e367db24c22ba82e5a3a6f87d74d5d3e105d97d1784b0",
+      "f521aa8b0a8e88df754ede41678c529736cdd5ee227541e6ef241bc6c53f6fbd",
+      "9fe8efad69b1ed715a40f335a5de24480a6a16a58cef6d3a95b14fd5cc63929d",
+      "ca374e9ed645e30c58e6f34c7fd84b59509630691642d3f23d5a345194b932ef",
       "62e82163fa442c0ef4ef6a45bd76b954b42582556dbce42b3f530f4f3fbc179d",
-      "d3d416d38518fc12c6b4de3ecbb265f167ac002eaa27d6c2e94bb4c904a74fe5",
+      "28bef097bdccf5d90078fb6cd7d1c5b97f6f7f312ae537b048c5d388caae1d75",
       "937a488bddfb44c7204b60d78e9dce1a4bd7705f997637c7fa0c6ab2f1ff5bbe",
-      "806a8fccbe42e7890eeb08df940fa80531e76292309244a62e28e8e0667a5a73",
+      "292f73fedeeab4fbd10f0ad0084ddbc2ec70a7051d66beed8b746b0692e9a6ff",
       "c361240e07eaab5aaecf0900c1f682d3f67abae9dab830d6b989a265ab76b00c",
       "c587749b2a52a900105e5c40d3d59fb3ffe9c98f2c6aa31eb0f165cbc37af4fa"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v73-next50-audit/016/scale-review.fragment.json",
+    "sha256": "d7e0c0f32593ba1dc3dbfa9bca2a7e48c1d660017cb8d81b4d1ccd54b4972d03",
+    "status": "reviewed",
+    "profileId": "enemy-016-burster",
+    "reviewer": "Codex next50_art_review V73",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.047649,
+      "attack": 1.040246,
+      "death": 1.052948
+    },
+    "sourceSha256ByClip": {
+      "idle": "cf23a2a08bdc743584ce4e8b81ce93ea499b0e449fc5613839da641f42dca18c",
+      "move": "5b85ad972b0434fd776a8552a45ab0d7ab9e7ee2e5e247a297d9fa60df64cbd8",
+      "attack": "f0cc76ff37b56ecb55b90f328aa33da02175cf2fd58e1ee789f5cd59d6fe4265",
+      "death": "d6417f8a916f4abf3ee2df215427bb7eeee7efc9a18b4ac8cf008a32bde22753"
+    },
+    "measurementCount": 12,
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/016/idle-physical-scale-review.jpg",
+        "sha256": "57652f43e3de2106a5c9223d4369b585b2c33edb22781b9d40eb228fbc98b087"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/move-physical-scale-review.jpg",
+        "sha256": "9850bee9612cf418ab0aa972c0cbeb7b4e463c7247a41a2575900e96b9638e7b"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/attack-physical-scale-review.jpg",
+        "sha256": "4422ceac6c8db08c4e72ef386726a77a081eac950eda191104ad9bce8eda9235"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/016/death-physical-scale-review.jpg",
+        "sha256": "0b6b42a725984084b063bf9fbe119a69aea8c30dbcabaf51d6983ac882977be6"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v73-next50-audit/016/anchor-review.fragment.json",
+    "scale": "docs/references/v73-next50-audit/016/scale-review.fragment.json"
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 33,
+    "remainingStrictPixelCount": 0
   }
 }

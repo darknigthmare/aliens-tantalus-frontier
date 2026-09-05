@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '72.1.0',
-  subtitle: 'Audit jouabilité — échelles cohérentes, props 2D, collisions, sauvegardes et enquête corrigés',
+  version: '73.0.0',
+  subtitle: 'Production ennemie — lot de 50 audité, Chestburster albinos animé et intégré',
   sourceVersion: '51.0.0'
 });

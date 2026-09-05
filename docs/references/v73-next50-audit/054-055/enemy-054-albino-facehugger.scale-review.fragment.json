@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-054-albino-facehugger": {
+      "profileId": "enemy-054-albino-facehugger",
+      "status": "reviewed",
+      "reviewer": "Codex /root/gameplay_audit_fix",
+      "reviewedAt": "2026-09-05",
+      "baselineClip": "idle",
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1.003945,
+        "attack": 0.982782,
+        "death": 1.001809
+      },
+      "sourceSha256ByClip": {
+        "idle": "58411be70ad6f124dbdf06056b2ef42056bb2ddc8590b3391559af0e5eef6a14",
+        "move": "496cafdb31fbeb68aaaa03b409970b8011e1986f6736ab17acf9c070de9a4192",
+        "attack": "7111891dde424e3f97f8b49638448e6dffc7abfb53b29203e8ca63f5eaf5c66e",
+        "death": "357603ce6d02bd62868af9eccbf35dc84583737de4a46f5c66cb709e85ad1cce"
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              216,
+              248
+            ],
+            [
+              321,
+              259
+            ]
+          ],
+          "lengthPx": 105.574618,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              205,
+              249
+            ],
+            [
+              306,
+              260
+            ]
+          ],
+          "lengthPx": 101.597244,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              236,
+              251
+            ],
+            [
+              340,
+              258
+            ]
+          ],
+          "lengthPx": 104.235311,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "move",
+          "frame": 1,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              219,
+              253
+            ],
+            [
+              321,
+              258
+            ]
+          ],
+          "lengthPx": 102.122475,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              225,
+              350
+            ],
+            [
+              328,
+              357
+            ]
+          ],
+          "lengthPx": 103.23759,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "attack",
+          "frame": 7,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              181,
+              306
+            ],
+            [
+              288,
+              317
+            ]
+          ],
+          "lengthPx": 107.563934,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              208,
+              249
+            ],
+            [
+              312,
+              261
+            ]
+          ],
+          "lengthPx": 104.690019,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "landmark": "central dorsal body plate chord, posterior tail-body junction to anterior walking-finger root; appendages excluded",
+          "endpoints": [
+            [
+              194,
+              284
+            ],
+            [
+              295,
+              299
+            ]
+          ],
+          "lengthPx": 102.107786,
+          "endpointUncertaintyPx": 5,
+          "note": "Manual same-body-plate comparison in two low-rotation poses per clip. Tail, walking fingers and inflatable ventral structures are excluded. Body tissue is not rigid bone, so this is an approximate project-registration chord with +/-5px endpoint uncertainty; it is not a canon dimension."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger-idle-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger-move-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger-attack-root-review.jpg",
+        "docs/references/v73-next50-audit/054-055/enemy-054-albino-facehugger-death-root-review.jpg"
+      ],
+      "note": "Eight manual anatomical chords, two low-occlusion poses per clip. Factors are median idle chord / median clip chord. Original source is resized once with this factor and one final shared pack scale. No per-frame scale, automatic recolor, or artistic acceptance. Similarity to the base variant is a separate visual comparison, not encoded by borrowing another profile's pivot or pixels."
+    }
+  }
+}

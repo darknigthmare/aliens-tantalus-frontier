@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-057-albino-warrior",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v73_enemy-057-albino-warrior_idle",
+  "providerGenerationId": null,
+  "actor": "Codex V73 next50 production",
+  "actualPromptText": "Generate ONE complete production sprite sheet Albino Warrior idle,8distinctchronologicalposes arranged4columns x2rows onwide2:1 canvas. The SINGLEmostrecentreference is the dark ridged1986Warrior sheet; derive ONLY from that exact anatomy. PROJECT_ADAPTATION systemic albino derivative of V66 enemy-005-warrior only: preserve the reviewed Aliens (1986) Warrior identity as one tall lean eyeless biped with a long exposed ridged elongated cranial carapace, narrow biomechanical waist, ribbed torso, two long arms, two digitigrade legs, four dorsal tubes, metallic teeth with telescoping inner jaw and exactly one long articulated segmented tail. Albino changes newly authored pigment and material response only: warm pearl-ivory and pale gray-beige carapace, cool blue-gray recesses, restrained translucent rose-taupe subsurface structures and moist highlights; never pure flat white, glow, ice or an automatic recolor. Preserve strict right-facing orthographic profile, base physical scale, pelvis/support-foot root and all idle/move/attack/death topology. No smooth Big Chap dome, Runner quadruped, royal crown, armor, clothing, weapon, eyes, missing tubes or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nMOTION Eight subtle alert breathing phases; plantedfeet, slightchestpulse and tiny handflex, continuous quiettailwave, stablepelvis, identicalheadlength.\nCrisp detailed hand-pixeled bitmap gameart, ivory/graybeige surfaces with coolrecesses and restrainedrose tissue, consistentlight. RIDGED LONG EXPOSED CRANIUM, never smooth BigChapdome. Strictorthographic RIGHTsideview, sameanatomy, constantcamera/scale and commonfloor perrow, broad equalcellgutters, everything includingentiretailinside. Fourdorsaltubes atfixedattachments, exactly2arms2legs1tail. Outside subject is exactflatopaquemagenta RGB255,0,255. No text labels UI numbers grid shadows scenery checkerboard motiontrails extrasubjects or watermark.",
+  "promptArchivePath": "docs/references/v73-next50-prompts/enemy-057-albino-warrior-idle.txt",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Completed built-in image_gen call; original returned PNG persisted byte-for-byte on D:. Tool returned image bytes only. Local receipt label is not a provider generation ID. In-memory reference previews used after native path loading failed with Windows ACL-helper error."
+}

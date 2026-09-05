@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "reviewedAt": "2026-09-05",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "profiles": {
+    "enemy-051-ceto-reef-predator": {
+      "sourceClips": {
+        "idle": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/idle.png",
+          "sha256": "2712b5fb05271b5e149757c5cc8dbcc4a77fe9c2c809c2c2ad97238bfb4df281",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 210320,
+          "ownershipTransfers": []
+        },
+        "move": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/move.png",
+          "sha256": "c1b60283496ae8a5cc0a134d6572be5126d49d31880711b0bcbb63253f7b53f5",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 215989,
+          "ownershipTransfers": []
+        },
+        "attack": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/attack.png",
+          "sha256": "f5d0d9f3eeefd16ca8973eafeb11a331f7baa3e97d4e9463dedfae62da314fd0",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 206335,
+          "ownershipTransfers": []
+        },
+        "death": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-051-ceto-reef-predator/death.png",
+          "sha256": "b5591d1a278116e1ed82035d43c0e6fd2993a981f0cf7c885e334b23ac309a5a",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 174145,
+          "ownershipTransfers": []
+        }
+      },
+      "physicalRoots": "pending-independent-anatomical-review",
+      "scale": "pending-cross-clip-anatomical-measurement",
+      "candidateAtlas": {
+        "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+        "sha256": "a62072b6889cfcb29283556773ce21b3d8b1851e914d2a8aa3f9bb3038da172d",
+        "bytes": 494114,
+        "frameCount": 32,
+        "uniqueFrames": 32,
+        "strictMagentaPixels": 0,
+        "hiddenRgbPixels": 0,
+        "sourceHashesCurrent": true,
+        "findings": [],
+        "physicalAnchorReview": {
+          "status": "pending",
+          "reason": "No source-anchor review file."
+        },
+        "sourceScaleByClip": {
+          "idle": 1.0,
+          "move": 1.0,
+          "attack": 1.0,
+          "death": 1.0
+        },
+        "runtimeIntegrated": false,
+        "acceptanceStatus": "pending-visual-review"
+      }
+    },
+    "enemy-052-tantalus-tunnel-vermin": {
+      "sourceClips": {
+        "idle": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/idle.png",
+          "sha256": "04f1627f8b5f6997b9ba5b37361ad412aabc06955473848a7211f600deb4a319",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 193473,
+          "ownershipTransfers": []
+        },
+        "move": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/move.png",
+          "sha256": "4fe4d40b763e7b2dc2dc2cad79e64c8d487bca7ca2b7ee77d9dccda25f506fd1",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 157485,
+          "ownershipTransfers": []
+        },
+        "attack": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/attack.png",
+          "sha256": "1c6164a87d9aa512e3abdf5e8847a81d19565d0afb246414588e8bbe707898fa",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 184727,
+          "ownershipTransfers": []
+        },
+        "death": {
+          "path": "assets/openai/sprites/frames/v66/batch-004/enemy-052-tantalus-tunnel-vermin/death.png",
+          "sha256": "82e9099d85572fd44419636073f1d5b74c4660331fa17089ea99d0ed6a8ad706",
+          "size": [
+            1774,
+            887
+          ],
+          "sourceFileUnchanged": true,
+          "frameCount": 8,
+          "foregroundPixels": 175920,
+          "ownershipTransfers": []
+        }
+      },
+      "physicalRoots": "pending-independent-anatomical-review",
+      "scale": "pending-cross-clip-anatomical-measurement",
+      "candidateAtlas": {
+        "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-052-tantalus-tunnel-vermin.webp",
+        "sha256": "13caa6be79e01d9d463e2acd413a3ad5c1c4998a2895859d5abc4c40e19e057d",
+        "bytes": 609282,
+        "frameCount": 32,
+        "uniqueFrames": 32,
+        "strictMagentaPixels": 0,
+        "hiddenRgbPixels": 0,
+        "sourceHashesCurrent": true,
+        "findings": [],
+        "physicalAnchorReview": {
+          "status": "pending",
+          "reason": "No source-anchor review file."
+        },
+        "sourceScaleByClip": {
+          "idle": 1.0,
+          "move": 1.0,
+          "attack": 1.0,
+          "death": 1.0
+        },
+        "runtimeIntegrated": false,
+        "acceptanceStatus": "pending-visual-review"
+      },
+      "manualLimbObservation": {
+        "clip": "idle",
+        "frame": 0,
+        "distinctTraceableFeet": 6,
+        "sourceLocalMarkedFootCoordinates": [
+          [
+            52,
+            347
+          ],
+          [
+            96,
+            347
+          ],
+          [
+            175,
+            347
+          ],
+          [
+            214,
+            347
+          ],
+          [
+            305,
+            347
+          ],
+          [
+            339,
+            347
+          ]
+        ],
+        "notClaimed": "This does not prove two legs absent behind the shell; it proves the contract of eight independently readable locomotor limbs is not met in this pose."
+      }
+    }
+  }
+}

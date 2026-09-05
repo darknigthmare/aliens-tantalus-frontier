@@ -13,11 +13,22 @@ scripts/enemy-batch-*.mjs text eol=lf
 tests/*v66*.mjs text eol=lf
 tests/test_enemy_batch_normalizer_v66.py text eol=lf
 docs/references/V72_*.json text eol=lf
+docs/references/V73_*.json text eol=lf
 docs/references/v72-enemy-gap-prompts/*.json text eol=lf
 docs/references/v72-enemy-gap-prompts/*.txt text eol=lf
 docs/references/v72-k-series-020-review/*.json text eol=lf
 docs/references/v72-k-series-020-review/*.md text eol=lf
 docs/references/v72-k-series-020-review/*.py text eol=lf
+docs/references/v73-*/**/*.json text eol=lf
+docs/references/v73-*/**/*.txt text eol=lf
+docs/references/v73-*/**/*.md text eol=lf
+docs/references/v73-*/**/*.py text eol=lf
+docs/references/v73-*/**/*.mjs text eol=lf
+docs/references/v73-*/**/*.html text eol=lf
+tests/*v73*.mjs text eol=lf
+tests/*v73*.py text eol=lf
+# V73 source-repair receipt was signed before LF normalization; preserve its bytes.
+docs/references/v73-next50-audit/051-052/enemy-051-ceto-reef-predator.attack-owned-padding-1774-proof.json -text whitespace=cr-at-eol
 # Preserve four historical signed receipts byte-for-byte (original CRLF).
 # Their recorded SHA-256 values bind the original bytes, not normalized text.
 docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-controller/source-qa.json -text

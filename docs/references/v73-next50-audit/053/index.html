@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>053 · Revue des animations de l’ovomorphe albinos</title>
+<style>
+  :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0b1218; color: #dfede9; }
+  body { max-width: 1240px; margin: 24px auto; padding: 0 16px; }
+  h1 { font-size: 22px; } .warning { color: #ffc875; } .controls { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+  label { display: grid; gap: 6px; } button, select { padding: 10px; border: 1px solid #53616b; background: #1c2934; color: inherit; border-radius: 4px; }
+  .review { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 24px; } #stage { width: 256px; height: 256px; }
+  canvas { background: #14212a; border: 1px solid #50616b; image-rendering: pixelated; } #details { white-space: pre-wrap; line-height: 1.6; max-width: 390px; }
+  #poses { display: grid; grid-template-columns: repeat(4, 160px); gap: 12px; } #poses canvas { width: 160px; height: 160px; } figure { margin: 0; } figcaption { font-size: 12px; }
+  #poses canvas.active { border-color: #5eedc0; box-shadow: 0 0 0 1px #5eedc0; } a { color: #80d6c5; }
+  @media (max-width: 700px) { #poses { grid-template-columns: repeat(2, 144px); } #poses canvas { width: 144px; height: 144px; } }
+</style>
+<h1>053 · Contrôle des animations de l’ovomorphe albinos</h1>
+<p class="warning">Revue technique locale : cette page n’accepte ni n’intègre aucun ennemi.</p>
+<div class="controls">
+  <label>Animation<select id="clip"></select></label>
+  <label>Vitesse<select id="speed"><option value="0.25">25%</option><option value="0.5">50%</option><option value="1" selected>100%</option></select></label>
+  <label>Sens<select id="facing"><option value="1">Droite</option><option value="-1">Gauche · miroir</option></select></label>
+  <button id="play" disabled>Lire</button><button id="restart" disabled>Recommencer</button><button id="previous" disabled>Pose précédente</button><button id="next" disabled>Pose suivante</button>
+</div>
+<p id="status">Chargement de l’atlas signé…</p>
+<div class="review"><section><canvas id="stage" width="256" height="256" aria-label="Animation active à256pixels"></canvas><p id="details"></p></section><section><div id="poses"></div><p>Repère vert : appui physique. Taille biologique/collisions à vérifier en salle.</p><a id="metadata">Métadonnées signées</a></section></div>
+<script type="module" src="./player.mjs"></script>
+</html>

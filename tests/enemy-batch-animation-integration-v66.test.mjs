@@ -78,8 +78,8 @@ function assertCell(sample, sheetId, clipId, frame) {
   assert.ok(sample.clip.frames.includes(frame), 'aucun passage dans la ligne d une autre action');
 }
 
-test('V66 et K-Series020: les six profils acceptes resolvent leurs propres plaques de32poses', () => {
-  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph']);
+test('V66, K-Series020 et Albino055: les sept profils acceptes resolvent leurs propres plaques de32poses', () => {
+  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster']);
   const paths = new Set();
   for (const profileId of readyIds) {
     const sheet = requireSheet(profileId);
@@ -101,7 +101,7 @@ test('V66 et K-Series020: les six profils acceptes resolvent leurs propres plaqu
     assert.equal(shouldFlipSprite(sheet.id, -1), true);
     paths.add(sheet.path);
   }
-  assert.equal(paths.size, 6, 'aucune plaque partagee entre deux identites');
+  assert.equal(paths.size, 7, 'aucune plaque partagee entre deux identites');
 });
 
 test('lookup V66: ID exact prioritaire, aucun emprunt par nom contradictoire, variante ou espèce voisine', () => {
@@ -117,8 +117,10 @@ test('lookup V66: ID exact prioritaire, aucun emprunt par nom contradictoire, va
       assert.equal(resolveEnemyProfileVisualV66(input), null);
       assert.notEqual(resolveEnemyVisualProfile(input).sheetId, sheet.id);
     }
-    const variant = ENEMIES.find((entry) => entry.id !== profileId
-      && entry.modifier && entry.modifier !== 'Standard' && entry.name.endsWith(source.name));
+    const baseName = source.modifier && source.modifier !== 'Standard'
+      ? source.name.slice(source.modifier.length + 1) : source.name;
+    const variant = ENEMIES.find((entry) => entry.id !== profileId && !readyIds.includes(entry.id)
+      && entry.modifier && entry.modifier !== 'Standard' && entry.name.endsWith(baseName));
     assert.ok(variant, `variante cataloguée attendue pour ${profileId}`);
     assert.equal(resolveEnemyProfileVisualV66(variant), null);
     assert.equal(resolveEnemyProfileVisualV66({ id: variant.id, name: source.name }), null);

@@ -85,21 +85,31 @@ test('inventory v55 preserves its release batch and reports the current shared v
   assert.equal(inventory.enemies.coverage.total, 571);
   assert.equal(inventory.enemies.coverage.modern, 539);
   assert.equal(inventory.enemies.coverage.legacy, 32);
-  // Keep the V55 batch/snapshot fixed. The shared resolver relabels accepted
-  // standard V66 replacements as source-locked adaptations, never pixel exact.
-  const v66Replacements = READY_ENEMY_PROFILE_REGISTRY_V66.length;
-  assert.ok(READY_ENEMY_PROFILE_REGISTRY_V66.every((profile) => profile.modifier === 'Standard'
-    && profile.asset.identityStatus === 'source-locked-adaptation'));
+  // Preserve the V55 snapshot. Six explicit standard replacements change
+  // their former exact label; Albino055 replaces one authored-family entry.
+  const v66Standards = new Set(['enemy-001-ovomorph', 'enemy-003-chestburster',
+    'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner',
+    'enemy-020-k-series-yellow-xenomorph']);
+  const albinoId = 'enemy-055-albino-chestburster';
+  assert.deepEqual(READY_ENEMY_PROFILE_REGISTRY_V66.map((profile) => profile.profileId).sort(),
+    [...v66Standards, albinoId].sort(), 'aucune acceptation implicite d’une autre variante');
+  for (const profile of READY_ENEMY_PROFILE_REGISTRY_V66) {
+    const standard = v66Standards.has(profile.profileId);
+    assert.equal(profile.modifier, standard ? 'Standard' : 'Albino');
+    assert.equal(profile.asset.identityStatus, standard ? 'source-locked-adaptation' : 'source-locked-project-adaptation');
+    assert.equal(profile.asset.canonExact, false, 'plaque dédiée ne signifie pas copie canonique 1:1');
+  }
   const expectedIdentityCounts = {
-    exact: 29 - v66Replacements,
-    'source-locked-adaptation': 1 + v66Replacements,
+    exact: 29 - v66Standards.size,
+    'source-locked-adaptation': 1 + v66Standards.size,
+    'source-locked-project-adaptation': 1,
     'project-adaptation': 18,
     'project-original': 7,
-    'authored-family': 516
+    'authored-family': 515
   };
   assert.deepEqual(inventory.enemies.coverage.byIdentityStatus, expectedIdentityCounts);
   assert.equal(inventory.enemies.exactProfileCount, expectedIdentityCounts.exact);
-  assert.equal(inventory.enemies.familyReuseProfileCount, 516);
+  assert.equal(inventory.enemies.familyReuseProfileCount, 515);
   assert.equal(inventory.enemies.missingDedicatedProfileCount, 0);
   assert.equal(inventory.vehicles.v55DedicatedChassisCount, 4);
   assert.equal(inventory.vehicles.v55ResolvedProfileCount, 32);

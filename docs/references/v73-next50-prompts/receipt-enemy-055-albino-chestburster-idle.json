@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-055-albino-chestburster",
+  "clipId": "idle",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v73_enemy-055-albino-chestburster_idle",
+  "providerGenerationId": null,
+  "actor": "Codex V73 next50 production",
+  "actualPromptText": "Generate ONE complete high-quality 2D sprite sheet for Albino Chestburster: idle. EXACTLY eight distinct chronological frames, 4 columns x2 rows, wide2:1 canvas. The two most recent reference previews are the BASE CHESTBURSTER, use only these for identity, never earlier Facehugger. PROJECT_ADAPTATION systemic albino derivative of V66 enemy-003-chestburster only: preserve the locked 1979 juvenile identity as one limbless, eyeless, pale ribbed serpentine organism with a smooth rounded elongated head, small metallic teeth and one long ring-segmented tapering tail. Albino changes authored pigment and material response only: warm bone-ivory and pale gray-beige tissue, restrained translucent pink-beige veining and cool gray relief shadows, never flat pure white, glowing, icy or a global recolor. Preserve strict right-facing orthographic profile, base physical scale, cervical root and all idle/move/attack/death anatomy. No arms, legs, adult dorsal tubes, adult xenomorph body, Bambi/Runner anatomy, blood paint or official albino-model claim. Every future pixel must be original project art; canonExact=false.\nAnimation: 8 restrained breathing/alert phases. Slight head elevation and lowering with continuous cervical curve, quiet tail ripple. One stable body length and head size. No action attack.\nAuthor this ivory albino variant faithfully to the base; crisp hand-pixeled bitmap game rendering, consistent highlights and head/neck/tail topology. Strict orthographic side view facing RIGHT in all8 frames. Common camera, stable scale, common ground per row, invisible equal cells with broad margins containing the complete tapering tail and head even during extension. Entire outside area exact solid chroma magenta RGB255,0,255, no gradients/checkerboard/shadows/scenery/text/labels/grid/numbers/watermark. No eyes, no arms, no legs, no tentacles, no adult anatomy, no gore. No extra unrelated subjects or repeated/mirrored poses.",
+  "promptArchivePath": "docs/references/v73-next50-prompts/enemy-055-albino-chestburster-idle.txt",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Completed built-in image_gen call; original returned PNG persisted byte-for-byte on D:. Tool returned image bytes only. Local receipt label is not a provider generation ID. In-memory reference previews used after native path loading failed with Windows ACL-helper error."
+}

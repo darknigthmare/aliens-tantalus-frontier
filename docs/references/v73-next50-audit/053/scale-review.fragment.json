@@ -1,0 +1,520 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-053-albino-ovomorph": {
+      "status": "reviewed",
+      "reviewer": "Codex next50_art_review V73",
+      "reviewedAt": "2026-09-05",
+      "note": "Twenty-seven lower-shell transverse spans at100 source pixels above visible support, individually inspected on marked boards. Sealed/opening/hatch use all8 poses; destroyed uses only first3 with intact lower shell, never flattened remains. Median perclip establishes one uniform clip-wide size correction; the four-lip envelope and changing silhouette never determine scale. Soft membrane flexion remains authored; +/-4source pixels measurement uncertainty. OpeningR1 contraction rejected and replaced by R2; chronology of the final opening-to-hatch transition remains separate art QA, not guaranteed by scale.",
+      "baselineClip": "sealed",
+      "sourceScaleByClip": {
+        "sealed": 1,
+        "opening": 1.014463,
+        "hatch": 1.191748,
+        "destroyed": 1.006148
+      },
+      "sourceSha256ByClip": {
+        "sealed": "7ed9d701a1ff2a75247cb1d5abdc6e90213143a1d4007d025b862272cfa18254",
+        "opening": "f63b9ba11f4b3e61e778158811cb36f43777cd9a85d54a4d9adc79bcb691d0ee",
+        "hatch": "193d25721fd6be1278d9ea3031adcb9a66051b8b5b3f2b8947339de7c6a9106a",
+        "destroyed": "af590b614a4f5e6e86c2fc870ffa9c59149f9b61dcdb030f41f6a939cd0f3368"
+      },
+      "measurements": [
+        {
+          "clip": "sealed",
+          "frame": 0,
+          "endpoints": [
+            [
+              98,
+              309
+            ],
+            [
+              342,
+              309
+            ]
+          ],
+          "lengthPx": 244,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 1,
+          "endpoints": [
+            [
+              97,
+              309
+            ],
+            [
+              342,
+              309
+            ]
+          ],
+          "lengthPx": 245,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 2,
+          "endpoints": [
+            [
+              96,
+              309
+            ],
+            [
+              342,
+              309
+            ]
+          ],
+          "lengthPx": 246,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 3,
+          "endpoints": [
+            [
+              96,
+              308
+            ],
+            [
+              343,
+              308
+            ]
+          ],
+          "lengthPx": 247,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 4,
+          "endpoints": [
+            [
+              98,
+              311
+            ],
+            [
+              343,
+              311
+            ]
+          ],
+          "lengthPx": 245,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 5,
+          "endpoints": [
+            [
+              97,
+              311
+            ],
+            [
+              342,
+              311
+            ]
+          ],
+          "lengthPx": 245,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 6,
+          "endpoints": [
+            [
+              96,
+              311
+            ],
+            [
+              342,
+              311
+            ]
+          ],
+          "lengthPx": 246,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "sealed",
+          "frame": 7,
+          "endpoints": [
+            [
+              96,
+              311
+            ],
+            [
+              345,
+              311
+            ]
+          ],
+          "lengthPx": 249,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 0,
+          "endpoints": [
+            [
+              101,
+              306
+            ],
+            [
+              339,
+              306
+            ]
+          ],
+          "lengthPx": 238,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 1,
+          "endpoints": [
+            [
+              95,
+              306
+            ],
+            [
+              334,
+              306
+            ]
+          ],
+          "lengthPx": 239,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 2,
+          "endpoints": [
+            [
+              89,
+              307
+            ],
+            [
+              331,
+              307
+            ]
+          ],
+          "lengthPx": 242,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 3,
+          "endpoints": [
+            [
+              88,
+              307
+            ],
+            [
+              330,
+              307
+            ]
+          ],
+          "lengthPx": 242,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 4,
+          "endpoints": [
+            [
+              100,
+              304
+            ],
+            [
+              342,
+              304
+            ]
+          ],
+          "lengthPx": 242,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 5,
+          "endpoints": [
+            [
+              94,
+              304
+            ],
+            [
+              336,
+              304
+            ]
+          ],
+          "lengthPx": 242,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 6,
+          "endpoints": [
+            [
+              88,
+              304
+            ],
+            [
+              332,
+              304
+            ]
+          ],
+          "lengthPx": 244,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "opening",
+          "frame": 7,
+          "endpoints": [
+            [
+              86,
+              305
+            ],
+            [
+              332,
+              305
+            ]
+          ],
+          "lengthPx": 246,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 0,
+          "endpoints": [
+            [
+              104,
+              298
+            ],
+            [
+              304,
+              298
+            ]
+          ],
+          "lengthPx": 200,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 1,
+          "endpoints": [
+            [
+              76,
+              298
+            ],
+            [
+              279,
+              298
+            ]
+          ],
+          "lengthPx": 203,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 2,
+          "endpoints": [
+            [
+              77,
+              298
+            ],
+            [
+              283,
+              298
+            ]
+          ],
+          "lengthPx": 206,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 3,
+          "endpoints": [
+            [
+              93,
+              299
+            ],
+            [
+              304,
+              299
+            ]
+          ],
+          "lengthPx": 211,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 4,
+          "endpoints": [
+            [
+              102,
+              282
+            ],
+            [
+              302,
+              282
+            ]
+          ],
+          "lengthPx": 200,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 5,
+          "endpoints": [
+            [
+              72,
+              282
+            ],
+            [
+              278,
+              282
+            ]
+          ],
+          "lengthPx": 206,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 6,
+          "endpoints": [
+            [
+              77,
+              283
+            ],
+            [
+              284,
+              283
+            ]
+          ],
+          "lengthPx": 207,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "hatch",
+          "frame": 7,
+          "endpoints": [
+            [
+              94,
+              282
+            ],
+            [
+              301,
+              282
+            ]
+          ],
+          "lengthPx": 207,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "destroyed",
+          "frame": 0,
+          "endpoints": [
+            [
+              107,
+              327
+            ],
+            [
+              351,
+              327
+            ]
+          ],
+          "lengthPx": 244,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "destroyed",
+          "frame": 1,
+          "endpoints": [
+            [
+              96,
+              329
+            ],
+            [
+              341,
+              329
+            ]
+          ],
+          "lengthPx": 245,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        },
+        {
+          "clip": "destroyed",
+          "frame": 2,
+          "endpoints": [
+            [
+              94,
+              328
+            ],
+            [
+              338,
+              328
+            ]
+          ],
+          "lengthPx": 244,
+          "landmark": "lower-shell-transverse-span",
+          "uncertaintyPx": 4,
+          "note": "Alpha-informed span, manually verified against cyan marked source. Lower shell100px above support, below mobile apical petals. Only still-intact shell measurements enter the destroyed clip calibration; +/-4 source pixels."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v73-next50-audit/053/sealed-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/opening-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/hatch-source-diagnostic-r2.jpg",
+        "docs/references/v73-next50-audit/053/destroyed-source-diagnostic-r2.jpg"
+      ]
+    }
+  }
+}

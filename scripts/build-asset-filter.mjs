@@ -12,6 +12,7 @@ export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
   'assets/openai/sprites/normalized/enemy-motion-v66',
   'assets/openai/sprites/frames/v71',
   'assets/openai/sprites/frames/v72',
+  'assets/openai/sprites/frames/v73',
   ...['v64', 'v65', 'v66', 'v69', 'v70'].flatMap((version) =>
     ['frames', 'reference-masters', 'previews', 'metadata'].map((directory) =>
       `assets/openai/sprites/${directory}/${version}`))
@@ -31,7 +32,7 @@ export function createBuildAssetFilter(projectRoot, { readyV66Assets = V66_READY
     // Production references also contain source-contact sheets, anchors and
     // full generation prompts. Reject their root before cp descends into it;
     // public provenance/version/validation reports outside this scope remain.
-    if (/^docs\/references\/(?:V66_|v66-)/.test(sourcePath)) return false;
+    if (/^docs\/references\/(?:V(?:66|73)_|v(?:66|73)-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/normalized/enemy-profiles-v65/')) {
       return readyV65Paths.has(sourcePath);
     }

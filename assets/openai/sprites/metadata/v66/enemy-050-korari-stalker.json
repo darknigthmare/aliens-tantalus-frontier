@@ -1,0 +1,3670 @@
+{
+  "schema": 1,
+  "release": "v66",
+  "profileId": "enemy-050-korari-stalker",
+  "subject": "Korari Stalker",
+  "batchId": "batch-004",
+  "generatedBy": "scripts/process-v66-enemy-batch.py",
+  "generationProvider": "OpenAI ImageGen",
+  "normalizationStatus": "validated",
+  "acceptanceStatus": "pending-visual-review",
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
+  "referenceUrls": [
+    "https://oldgamesdownload.com/wp-content/uploads/Aliens_versus_Predator_2_Prima_Guide.pdf",
+    "https://github.com/darknigthmare/aliens-tantalus-frontier"
+  ],
+  "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+  "animationFamily": "fauna",
+  "grid": {
+    "columns": 4,
+    "rows": 8,
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceFacing": "right",
+  "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+  "normalizedSha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df",
+  "preview": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/all.gif",
+  "previewSha256": "9a81608614702c5604e700c961715b4cd789d4e81c7f6604f9c546cad6ac2ba9",
+  "runtimeFormat": "image/webp",
+  "encoding": "lossless-rgba",
+  "scale": 0.606557377,
+  "scaleScope": "all-profile-clips",
+  "scaleInterpretation": "single-final-pack-scale",
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1,
+    "attack": 1,
+    "death": 1
+  },
+  "scaleCalibrationReview": null,
+  "scaleCalibrationEvidence": [],
+  "physicalAnchorReview": {
+    "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.anchor-review.json",
+    "sha256": "d4365fe8ba2b7db42130fc1107d76d98ad6dd9563608cb73e07b99c1c611acc0",
+    "status": "reviewed",
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/049-050/FINAL_QA.md",
+        "sha256": "9107c74cc735a89f98b387c4ecc295e20bf5fff3b882d26804e7bd6b45cceb5d"
+      },
+      {
+        "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/anchor-review.fragment.json",
+        "sha256": "ef41f5faf4ef7667d4c3b998dd8bda8db3ce412d70d828a7294a5e7affcfbbbb"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.idle.anchor-overlay.png",
+        "sha256": "e9564cd5d6b6a79c58c6bccd89632ec49a856555fdcd25d1ba6569ceace399ba"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.move.anchor-overlay.png",
+        "sha256": "248b713fa479e4928e6e1d89159e1fff07ad22dfdff5cb69d4443217e5e5b51e"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.attack.anchor-overlay.png",
+        "sha256": "b9d80d117c2336a061c2031f7b39264204ff19be4a61728e7921d1c0bfb7d4fd"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.death.anchor-overlay.png",
+        "sha256": "b9bb7223fefadef5e1c3d87032034b296778a18de001c486a47a6b3bcbbdc2af"
+      }
+    ],
+    "reviewer": "Codex level_props_audit_fix independent V73 review",
+    "reviewedAt": "2026-09-05",
+    "method": "Visually traced thoracic mass immediately behind the shoulder on all active source poses. Existing source-local body points were independently checked against the actual torso, not rederived from tail/head bounding-box extents. Grounded roots use the observed hoof/paw or resting-body support plane exactly. Three transparent extraction-padding pixels are explicitly excluded from the physical root; the normalizer must trim alpha-zero padding rather than shift the measured support. Airborne Korari pounce roots recover the raw authored clearance relative to grounded neighbours before recomposition erased it; one prior uniform clip factor converts that distance only, never rescaling the active body.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
+  },
+  "normalizationOptions": {
+    "safeReassignCellFragments": false,
+    "removeEnclosedMagentaMatte": true,
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true,
+    "trimTransparentPadding": true
+  },
+  "enclosedMagentaMatte": {
+    "enabled": true,
+    "aaFringeEnabled": true,
+    "method": "strict-exterior-matched-magenta-v1",
+    "strictCorePixelCount": 2567,
+    "aaFringePixelCount": 0,
+    "removedPixelCount": 2567,
+    "sourceProofSha256": "7c772ab216fdfe2379460ba8d289760a6777126fbfeb65e48c986fa2dbdc6fdd"
+  },
+  "rawPreserved": true,
+  "interpolatedFrames": 0,
+  "duplicatedFrames": 0,
+  "frameCount": 32,
+  "sources": [
+    {
+      "clip": "idle",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/idle.png",
+      "sha256": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "3f305b1204ef2f5f0d8858c421a7644cae64faa7746d73a1df99540199451ae3",
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 270,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "ab40c9cf80cb0bba0bb1395567e0d46e6e2972c0f3d718b8ded97c7689aad26f",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          255,
+          0,
+          255
+        ],
+        "removedPixelCount": 270,
+        "removedCoordinatesSha256": "efd4b7821e45777d8dab523fb60b5cd67c8571fae78d12e4fa18d9f1f452a974",
+        "removedRgbaSha256": "7a4bcfea649e9ea5822f616bf30c4604b077a29cdd1dba55d5caf569196ed21d",
+        "sourceRgbaSha256": "c7012fc2982248cc0e8b9bfa57c4fcfd2e3352b8e3fd9cd7c4d4e6c22b827db1",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "move",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/move.png",
+      "sha256": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "c5337e5076c4adc31877d00d9bce4884d209c1000ae494be01e9627ad01ff6fb",
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 882,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "03dfc785dfbdbb6ac4152765c0a19a3ca56838ce3515d21f7afca212c20d1f59",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          255,
+          0,
+          255
+        ],
+        "removedPixelCount": 882,
+        "removedCoordinatesSha256": "9ad11ddf4978d9bfef4a8412aa285f72711d3fe7cd9d2004f37b747fe5158444",
+        "removedRgbaSha256": "7b9a9f4f033fa029fe7bb4d9bf13005ca5baa12bdd3d88404980d036612a6c11",
+        "sourceRgbaSha256": "130b99ef075c1c297119214654f1fbbd7aab20c965cbea649dfb9681b980ce6c",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/attack.png",
+      "sha256": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "e3ba04a565dfb0da621aaada548dba6ceb644c8a5da0d6b2ba51726efc9f3d0d",
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 952,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "ad25c8aca628ef6037759ebd3d92d64d7279e23e206febeb75b2f18e050d15bb",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          255,
+          0,
+          255
+        ],
+        "removedPixelCount": 952,
+        "removedCoordinatesSha256": "563b3d9324e24d82efc0ed723451ec21cae00f3d95e0096d727fba2ca4e690ed",
+        "removedRgbaSha256": "d1cc7fbd456521873db9ce30b6de02653dc2a1932556ef4a5b60075605742a99",
+        "sourceRgbaSha256": "5fc757e3dd21d77cd1a347cba78f2634aa479ad6710273826c0f8e0ea9994348",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    },
+    {
+      "clip": "death",
+      "path": "assets/openai/sprites/frames/v66/batch-004/enemy-050-korari-stalker/death.png",
+      "sha256": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "promptSha256": "ea3e54944cf80ec4c08c6eaef2b8ea526e85ea6566a207c64ec33443b6c6a976",
+      "referenceLockSha256": "c8b5fa29188742e5f7b8554c9e7f55e181e4f97f82436761904c438d1d02dd79",
+      "enclosedMagentaMatte": {
+        "requested": true,
+        "applied": true,
+        "aaFringeRequested": true,
+        "aaFringeApplied": true,
+        "aaThresholds": {
+          "minimumRedBlue": 35,
+          "minimumChroma": 20,
+          "maximumRedBlueDifference": 32,
+          "maximumSourceRadius": 2
+        },
+        "strictCorePixelCount": 463,
+        "aaFringePixelCount": 0,
+        "strictCoreMaskSha256": "7835426901a77917f1d24ad2f26056a6dc8efc2b70cdbb6ed83bc6aa651dbcbc",
+        "aaFringeMaskSha256": "96dbffa3904e6184649f617aed302ed5167c497c1da328c1b8c1e45d6a1be168",
+        "method": "strict-exterior-matched-magenta-v1",
+        "nativeAlphaPreserved": false,
+        "sourceSize": [
+          1774,
+          887
+        ],
+        "thresholds": {
+          "minimumRedBlue": 190,
+          "maximumGreen": 60,
+          "minimumChroma": 150,
+          "maximumRedBlueDifference": 32,
+          "maximumReferenceChannelDistance": 24
+        },
+        "referenceRgb": [
+          255,
+          0,
+          255
+        ],
+        "removedPixelCount": 463,
+        "removedCoordinatesSha256": "fb0527f00e793e281391b2236ed789a8cc5952455dfc413f7be47db8ef334e76",
+        "removedRgbaSha256": "b7f3594f15606fadc0d83176e2e91a9a43c9d08c7f63666972b9c3f4dc336a89",
+        "sourceRgbaSha256": "8613a813b1f8633263d6cf9d77835095496dd3fe4360be012d0bb45e9703af49",
+        "recoloredPixels": 0,
+        "inpaintedPixels": 0
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "idle",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "fps": 6,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-050-korari-stalker/idle.webp",
+      "sha256": "474b612bf53dce45af56693aef49c245a14fffcdc6b3fe37d8e3a77acef24832",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/idle.gif",
+      "previewSha256": "c9624ffde7254ac7dba7882a7ff96013fe10880c07826f594a01e6ccd1be61b2"
+    },
+    {
+      "id": "move",
+      "frames": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "fps": 12,
+      "loop": true,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-050-korari-stalker/move.webp",
+      "sha256": "0f479cca8921d309734c79a980252788c6e37842778130435791d2f6099ba255",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/move.gif",
+      "previewSha256": "4db51b47ad027dede86c3432c56a4c70ede4bc63574a4af923faeac162ce6d48"
+    },
+    {
+      "id": "attack",
+      "frames": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "fps": 12,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-050-korari-stalker/attack.webp",
+      "sha256": "ddfbb3790a4fd95e1a3c05cc6513657fc314fc55d05fb2ca74587ad1953e5eb8",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/attack.gif",
+      "previewSha256": "c12b405b9623b0a98c6776abdac6c36a65824d3f185ada20344f046dea5ec6a0"
+    },
+    {
+      "id": "death",
+      "frames": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "fps": 10,
+      "loop": false,
+      "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-050-korari-stalker/death.webp",
+      "sha256": "be4d7830f3b77b27b4b5c094372d2bcd8632a86044558cc2fa36d3492277b0e1",
+      "previewPath": "assets/openai/sprites/previews/v66/enemy-050-korari-stalker/death.gif",
+      "previewSha256": "9c5ba22c3b30619a66b329ae55900a269e784aeed807e2f30bd65d8bf014b66b"
+    }
+  ],
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        36,
+        325,
+        334,
+        409
+      ],
+      "sourceSize": [
+        298,
+        84
+      ],
+      "foregroundPixels": 13177,
+      "mattePixels": 183959,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0321e3e17be6a80d7d6396012af6eb1429e1c1d9ea601d797d184b0f317cf96a",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          39,
+          328,
+          331,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        369
+      ],
+      "sourceAnchorEvidence": "Pose 1: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,369); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        183.0,
+        78.0
+      ],
+      "renderedAnchor": [
+        127.92808219178082,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        17,
+        193,
+        194,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        44,
+        319,
+        332,
+        409
+      ],
+      "sourceSize": [
+        288,
+        90
+      ],
+      "foregroundPixels": 13467,
+      "mattePixels": 183225,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c8c28d906e5b200d0be8d2410fcec8bd424ff703f892c24d29c66665f1cde072",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          47,
+          322,
+          329,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        364
+      ],
+      "sourceAnchorEvidence": "Pose 2: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,364); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        174.0,
+        84.0
+      ],
+      "renderedAnchor": [
+        127.51063829787235,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        22,
+        189,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        39,
+        302,
+        335,
+        409
+      ],
+      "sourceSize": [
+        296,
+        107
+      ],
+      "foregroundPixels": 14523,
+      "mattePixels": 182169,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7355e77e7e357a7ded9e26e9c92870a9987990811a17a5c97e901a5f7594ee4d",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          42,
+          305,
+          332,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        355
+      ],
+      "sourceAnchorEvidence": "Pose 3: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,355); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        179.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        127.63448275862069,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        19,
+        179,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        48,
+        297,
+        353,
+        409
+      ],
+      "sourceSize": [
+        305,
+        112
+      ],
+      "foregroundPixels": 14004,
+      "mattePixels": 183132,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7a9f19929a05f061296d06cad02951f9fda016f6a847b3de7e3d4ef1569a4c9a",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          51,
+          300,
+          350,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        352
+      ],
+      "sourceAnchorEvidence": "Pose 4: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,352); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        171.0,
+        106.0
+      ],
+      "renderedAnchor": [
+        127.51505016722408,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        24,
+        176,
+        205,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        276,
+        341,
+        408
+      ],
+      "sourceSize": [
+        304,
+        132
+      ],
+      "foregroundPixels": 14367,
+      "mattePixels": 182325,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "770c3b29866dfc8a28e1e98d775db6c0b2d52ca0f774b77a4ccd77040cfbea3c",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          40,
+          279,
+          338,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        343
+      ],
+      "sourceAnchorEvidence": "Pose 5: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,343); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        182.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.54362416107382,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        17,
+        164,
+        198,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        311,
+        334,
+        408
+      ],
+      "sourceSize": [
+        297,
+        97
+      ],
+      "foregroundPixels": 14094,
+      "mattePixels": 182155,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3159b10c082dfba2eeceb37105d1dbf16ff8622a6a064af03face31812d9df35",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          40,
+          314,
+          331,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        359
+      ],
+      "sourceAnchorEvidence": "Pose 6: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,359); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        181.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        128.09278350515464,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        18,
+        185,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        42,
+        311,
+        331,
+        408
+      ],
+      "sourceSize": [
+        289,
+        97
+      ],
+      "foregroundPixels": 13431,
+      "mattePixels": 182818,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "33bd6c21db620af9c603f4089596cdea990a7c00f179cbbe1e562c58eece13c5",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          45,
+          314,
+          328,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        360
+      ],
+      "sourceAnchorEvidence": "Pose 7: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (221,360); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        176.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        127.96819787985866,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        21,
+        185,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        38,
+        324,
+        332,
+        408
+      ],
+      "sourceSize": [
+        294,
+        84
+      ],
+      "foregroundPixels": 12803,
+      "mattePixels": 183889,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9d159398870c2e42296ff0b9f5c5924a7a62b07a535f52ff513de8c78c16c357",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          41,
+          327,
+          329,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        367
+      ],
+      "sourceAnchorEvidence": "Pose 8: grounded idle; shoulder/thorax remains above planted support. Independently inspected active source and registered contact. Thoracic point (222,367); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        181.0,
+        78.0
+      ],
+      "renderedAnchor": [
+        127.98263888888889,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        18,
+        193,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        51,
+        302,
+        347,
+        409
+      ],
+      "sourceSize": [
+        296,
+        107
+      ],
+      "foregroundPixels": 14086,
+      "mattePixels": 183050,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5cbd09ca874311715331bc6e4b24f39af793209b99a57984f92fac8f3162295c",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          54,
+          305,
+          344,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        353
+      ],
+      "sourceAnchorEvidence": "Pose 1: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,353); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        168.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        127.95862068965518,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        26,
+        179,
+        202,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        56,
+        315,
+        327,
+        409
+      ],
+      "sourceSize": [
+        271,
+        94
+      ],
+      "foregroundPixels": 12313,
+      "mattePixels": 184379,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7d31d78b757ea0c7444238dcead1aab9d97b7aedc09bae100455afe8fc531a8f",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          59,
+          318,
+          324,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        361
+      ],
+      "sourceAnchorEvidence": "Pose 2: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,361); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        162.0,
+        88.0
+      ],
+      "renderedAnchor": [
+        128.42264150943396,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        30,
+        187,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        65,
+        308,
+        352,
+        409
+      ],
+      "sourceSize": [
+        287,
+        101
+      ],
+      "foregroundPixels": 13803,
+      "mattePixels": 182889,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "eea0c9b6c5ab020dcf2447002bbe00148b648b1109ec594cd580cc121a7741c2",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          68,
+          311,
+          349,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        356
+      ],
+      "sourceAnchorEvidence": "Pose 3: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,356); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        153.0,
+        95.0
+      ],
+      "renderedAnchor": [
+        127.56227758007117,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        35,
+        182,
+        205,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        63,
+        311,
+        346,
+        409
+      ],
+      "sourceSize": [
+        283,
+        98
+      ],
+      "foregroundPixels": 12719,
+      "mattePixels": 184417,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "732539a849733e74fabe67a883b25a45b149824bec03f6ad271dac25d36fc3e8",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          66,
+          314,
+          343,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        358
+      ],
+      "sourceAnchorEvidence": "Pose 4: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,358); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        156.0,
+        92.0
+      ],
+      "renderedAnchor": [
+        127.61371841155234,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        33,
+        184,
+        201,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        46,
+        301,
+        339,
+        408
+      ],
+      "sourceSize": [
+        293,
+        107
+      ],
+      "foregroundPixels": 14548,
+      "mattePixels": 182144,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a4a44ccc6852de9bcdafe41bd0498c2f693566976df58c8ddcf01be85106d13f",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          49,
+          304,
+          336,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        351
+      ],
+      "sourceAnchorEvidence": "Pose 5: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,351); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        127.88501742160278,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        23,
+        179,
+        197,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        60,
+        316,
+        320,
+        408
+      ],
+      "sourceSize": [
+        260,
+        92
+      ],
+      "foregroundPixels": 11765,
+      "mattePixels": 184484,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a0f8dc1b101170a8e2d5cd8e738377888eed9ae4338ea3427295de7b569fb299",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          63,
+          319,
+          317,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        362
+      ],
+      "sourceAnchorEvidence": "Pose 6: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,362); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        158.0,
+        86.0
+      ],
+      "renderedAnchor": [
+        127.79527559055119,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        32,
+        188,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        48,
+        298,
+        355,
+        408
+      ],
+      "sourceSize": [
+        307,
+        110
+      ],
+      "foregroundPixels": 14656,
+      "mattePixels": 181593,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b70baf492d39641079aaf5d4d8b57e4627c81eea729d9b9e93ad44d57ec0cfa8",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          51,
+          301,
+          352,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        351
+      ],
+      "sourceAnchorEvidence": "Pose 7: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (221,351); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        170.0,
+        104.0
+      ],
+      "renderedAnchor": [
+        128.35548172757476,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        25,
+        177,
+        208,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        62,
+        313,
+        325,
+        408
+      ],
+      "sourceSize": [
+        263,
+        95
+      ],
+      "foregroundPixels": 11955,
+      "mattePixels": 184737,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3c8ba06a90c8cc81f871f4ca2f186cc6028cc3e836d515ac32f6df7a6c7d98a7",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          65,
+          316,
+          322,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        360
+      ],
+      "sourceAnchorEvidence": "Pose 8: quadruped gait; visible supporting hoof/paw, no tail-derived ground. Independently inspected active source and registered contact. Thoracic point (222,360); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        157.0,
+        89.0
+      ],
+      "renderedAnchor": [
+        128.29961089494162,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        33,
+        186,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        49,
+        319,
+        331,
+        409
+      ],
+      "sourceSize": [
+        282,
+        90
+      ],
+      "foregroundPixels": 12805,
+      "mattePixels": 184331,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5ed21520825b75e2057ac205c6e34084bcfcd7f4980d8923eb79dca15e7b5e25",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          52,
+          322,
+          328,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        366
+      ],
+      "sourceAnchorEvidence": "Pose 1: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (222,366); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        170.0,
+        84.0
+      ],
+      "renderedAnchor": [
+        127.8623188405797,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        25,
+        189,
+        192,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        75,
+        290,
+        337,
+        409
+      ],
+      "sourceSize": [
+        262,
+        119
+      ],
+      "foregroundPixels": 13107,
+      "mattePixels": 183585,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0ac91beb0187b9f31b2273f367644323536e43e78ed4b96fd0c5dd0c6766a1f9",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          78,
+          293,
+          334,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        348
+      ],
+      "sourceAnchorEvidence": "Pose 2: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (221,348); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        143.0,
+        113.0
+      ],
+      "renderedAnchor": [
+        127.58203125,
+        240.0
+      ],
+      "index": 17,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        41,
+        171,
+        196,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        72,
+        297,
+        331,
+        409
+      ],
+      "sourceSize": [
+        259,
+        112
+      ],
+      "foregroundPixels": 13348,
+      "mattePixels": 183344,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3624736ec676d43f58fa622e400726e25cf5a59765eaa80380b669fd0eb76d3e",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          75,
+          300,
+          328,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        358
+      ],
+      "sourceAnchorEvidence": "Pose 3: anticipation with planted paws/hooves. Independently inspected active source and registered contact. Thoracic point (221,358); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        146.0,
+        106.0
+      ],
+      "renderedAnchor": [
+        128.29249011857706,
+        240.0
+      ],
+      "index": 18,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        40,
+        176,
+        193,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        52,
+        307,
+        347,
+        409
+      ],
+      "sourceSize": [
+        295,
+        102
+      ],
+      "foregroundPixels": 13495,
+      "mattePixels": 183641,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8e88f0817a4c1c4e102ace0801c269925f39fc59b9e53447f7c756c87a248027",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          55,
+          310,
+          344,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        422
+      ],
+      "sourceLandmark": [
+        222,
+        355
+      ],
+      "sourceAnchorEvidence": "Pose 4: authored pounce, no forced paw contact. Independently inspected active source and registered contact. Thoracic point (222,355); source support y=406, physical root excludes the 3 px transparent extraction padding. Raw pose bottom=433, observed neighbour support=453; prior factor=0.778891834 gives 16 active-source px of clearance, restored in root only.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        167.0,
+        112.0
+      ],
+      "renderedAnchor": [
+        128.12456747404843,
+        239.66666666666669
+      ],
+      "index": 19,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        27,
+        172,
+        202,
+        230
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        64,
+        301,
+        346,
+        408
+      ],
+      "sourceSize": [
+        282,
+        107
+      ],
+      "foregroundPixels": 13261,
+      "mattePixels": 183431,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3fc643e73844a10498c749ca49a0b36ef2acfdc758d477f5074c582f4e177398",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          67,
+          304,
+          343,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        409
+      ],
+      "sourceLandmark": [
+        222,
+        353
+      ],
+      "sourceAnchorEvidence": "Pose 5: authored pounce, no forced paw contact. Independently inspected active source and registered contact. Thoracic point (222,353); source support y=405, physical root excludes the 3 px transparent extraction padding. Raw pose bottom=803, observed neighbour support=808; prior factor=0.778891834 gives 4 active-source px of clearance, restored in root only.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        155.0,
+        105.0
+      ],
+      "renderedAnchor": [
+        127.78623188405797,
+        240.41584158415841
+      ],
+      "index": 20,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        34,
+        177,
+        201,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        36,
+        326,
+        336,
+        408
+      ],
+      "sourceSize": [
+        300,
+        82
+      ],
+      "foregroundPixels": 12097,
+      "mattePixels": 184152,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "441f1e5eea6261e40a4c8a7c044d2b0d7691bdaa28608b302d64103d98e89e21",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          39,
+          329,
+          333,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        422
+      ],
+      "sourceLandmark": [
+        221,
+        367
+      ],
+      "sourceAnchorEvidence": "Pose 6: authored pounce, no forced paw contact. Independently inspected active source and registered contact. Thoracic point (221,367); source support y=405, physical root excludes the 3 px transparent extraction padding. Raw pose bottom=786, observed neighbour support=808; prior factor=0.778891834 gives 17 active-source px of clearance, restored in root only.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        182.0,
+        93.0
+      ],
+      "renderedAnchor": [
+        128.1904761904762,
+        240.28947368421052
+      ],
+      "index": 21,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        18,
+        184,
+        196,
+        230
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        64,
+        295,
+        332,
+        408
+      ],
+      "sourceSize": [
+        268,
+        113
+      ],
+      "foregroundPixels": 14165,
+      "mattePixels": 182084,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "15db1aa51611dbc53983488d54757ee2d16fec55b382ab6bbab47529889dfdbb",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          67,
+          298,
+          329,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        349
+      ],
+      "sourceAnchorEvidence": "Pose 7: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (221,349); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        154.0,
+        107.0
+      ],
+      "renderedAnchor": [
+        128.45801526717557,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        35,
+        175,
+        194,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        65,
+        316,
+        319,
+        408
+      ],
+      "sourceSize": [
+        254,
+        92
+      ],
+      "foregroundPixels": 11718,
+      "mattePixels": 184974,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5cb6133ec722e17bd1410dd470fc54c011712d3d9b89bc7e4d11e42fe2f21bd6",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          68,
+          319,
+          316,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        363
+      ],
+      "sourceAnchorEvidence": "Pose 8: contact/recovery with planted support. Independently inspected active source and registered contact. Thoracic point (222,363); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        154.0,
+        86.0
+      ],
+      "renderedAnchor": [
+        128.14516129032256,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        35,
+        188,
+        185,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        57,
+        302,
+        336,
+        409
+      ],
+      "sourceSize": [
+        279,
+        107
+      ],
+      "foregroundPixels": 14224,
+      "mattePixels": 182912,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1d3a36c21be1ddb52b7e812a7a30ef2c5065285546fee85a395166a7a005a2ca",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          60,
+          305,
+          333,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        353
+      ],
+      "sourceAnchorEvidence": "Pose 1: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (222,353); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        162.0,
+        101.0
+      ],
+      "renderedAnchor": [
+        127.50549450549451,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        29,
+        179,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        51,
+        259,
+        324,
+        409
+      ],
+      "sourceSize": [
+        273,
+        150
+      ],
+      "foregroundPixels": 14494,
+      "mattePixels": 182198,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c390db7461d19cfbae3d5ed083531decefed60691a266cdcf5c4f7ce9dcdf167",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          54,
+          262,
+          321,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        339
+      ],
+      "sourceAnchorEvidence": "Pose 2: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (221,339); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        167.0,
+        144.0
+      ],
+      "renderedAnchor": [
+        128.3258426966292,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        27,
+        153,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        35,
+        300,
+        322,
+        409
+      ],
+      "sourceSize": [
+        287,
+        109
+      ],
+      "foregroundPixels": 13958,
+      "mattePixels": 182734,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "811e31ff99c79366d778098ad0cb9b2b3f3e3ec03575d97c8e74278e69606262",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          38,
+          303,
+          319,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        406
+      ],
+      "sourceLandmark": [
+        221,
+        354
+      ],
+      "sourceAnchorEvidence": "Pose 3: loss of support, thorax behind shoulder. Independently inspected active source and registered contact. Thoracic point (221,354); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        183.0,
+        103.0
+      ],
+      "renderedAnchor": [
+        127.71174377224199,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        17,
+        178,
+        187,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        40,
+        323,
+        345,
+        409
+      ],
+      "sourceSize": [
+        305,
+        86
+      ],
+      "foregroundPixels": 12488,
+      "mattePixels": 184648,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "319aa4602dab2b9bff821c08f14d87bd76e3d26280c551628e6e0b0a7c86e815",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          43,
+          326,
+          342,
+          406
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        406
+      ],
+      "sourceLandmark": [
+        222,
+        368
+      ],
+      "sourceAnchorEvidence": "Pose 4: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,368); source support y=406, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        179.0,
+        80.0
+      ],
+      "renderedAnchor": [
+        128.3578595317726,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        20,
+        191,
+        201,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        48,
+        320,
+        329,
+        408
+      ],
+      "sourceSize": [
+        281,
+        88
+      ],
+      "foregroundPixels": 13410,
+      "mattePixels": 183282,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7c64b3fa5f2e4523ec332e0372a4519c6c502e8046cefbc3990dcfb7c4502d55",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          51,
+          323,
+          326,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        366
+      ],
+      "sourceAnchorEvidence": "Pose 5: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,366); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        171.0,
+        82.0
+      ],
+      "renderedAnchor": [
+        127.84363636363636,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        24,
+        190,
+        191,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        45,
+        333,
+        341,
+        408
+      ],
+      "sourceSize": [
+        296,
+        75
+      ],
+      "foregroundPixels": 12396,
+      "mattePixels": 183853,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b58480e01474119d702665ef7fdfe8dba0be7395be36d94473ea4db1d8eecba9",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          48,
+          336,
+          338,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        372
+      ],
+      "sourceAnchorEvidence": "Pose 6: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (221,372); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        69.0
+      ],
+      "renderedAnchor": [
+        127.99310344827586,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        23,
+        198,
+        199,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        53,
+        342,
+        340,
+        408
+      ],
+      "sourceSize": [
+        287,
+        66
+      ],
+      "foregroundPixels": 10996,
+      "mattePixels": 185253,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2f1222e530ea19d8b65c7d7338842779719c0865a19f4bbddb5f3f69f817eecc",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          56,
+          345,
+          337,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        405
+      ],
+      "sourceLandmark": [
+        221,
+        376
+      ],
+      "sourceAnchorEvidence": "Pose 7: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (221,376); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        165.0,
+        60.0
+      ],
+      "renderedAnchor": [
+        127.8220640569395,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        28,
+        204,
+        198,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        46,
+        351,
+        339,
+        408
+      ],
+      "sourceSize": [
+        293,
+        57
+      ],
+      "foregroundPixels": 9392,
+      "mattePixels": 187300,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "09e025edf3e5b636de77b419dffde9b3e8781c9a57c7f3b4717c720e3839b384",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          49,
+          354,
+          336,
+          405
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        405
+      ],
+      "sourceLandmark": [
+        222,
+        381
+      ],
+      "sourceAnchorEvidence": "Pose 8: lateral collapse, thorax above resting body. Independently inspected active source and registered contact. Thoracic point (222,381); source support y=405, physical root excludes the 3 px transparent extraction padding. No anatomical scale or bounding-box-centre formula applied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        51.0
+      ],
+      "renderedAnchor": [
+        127.88501742160278,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.606557377,
+      "sourceScale": 1,
+      "appliedScale": 0.606557377,
+      "renderedBounds": [
+        23,
+        209,
+        197,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          17,
+          193,
+          194,
+          240
+        ],
+        "foregroundPixels": 5305,
+        "width": 177,
+        "height": 47,
+        "relativeToRowMedian": 0.952851
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          22,
+          189,
+          193,
+          240
+        ],
+        "foregroundPixels": 5442,
+        "width": 171,
+        "height": 51,
+        "relativeToRowMedian": 0.977458
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          19,
+          179,
+          195,
+          240
+        ],
+        "foregroundPixels": 5940,
+        "width": 176,
+        "height": 61,
+        "relativeToRowMedian": 1.066906
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          24,
+          176,
+          205,
+          240
+        ],
+        "foregroundPixels": 5693,
+        "width": 181,
+        "height": 64,
+        "relativeToRowMedian": 1.022542
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          17,
+          164,
+          198,
+          240
+        ],
+        "foregroundPixels": 5923,
+        "width": 181,
+        "height": 76,
+        "relativeToRowMedian": 1.055887
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          18,
+          185,
+          195,
+          240
+        ],
+        "foregroundPixels": 5758,
+        "width": 177,
+        "height": 55,
+        "relativeToRowMedian": 1.026473
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          21,
+          185,
+          193,
+          240
+        ],
+        "foregroundPixels": 5461,
+        "width": 172,
+        "height": 55,
+        "relativeToRowMedian": 0.973527
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          18,
+          193,
+          193,
+          240
+        ],
+        "foregroundPixels": 5174,
+        "width": 175,
+        "height": 47,
+        "relativeToRowMedian": 0.922364
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          26,
+          179,
+          202,
+          240
+        ],
+        "foregroundPixels": 5839,
+        "width": 176,
+        "height": 61,
+        "relativeToRowMedian": 1.052262
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          30,
+          187,
+          191,
+          240
+        ],
+        "foregroundPixels": 5042,
+        "width": 161,
+        "height": 53,
+        "relativeToRowMedian": 0.908632
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          35,
+          182,
+          205,
+          240
+        ],
+        "foregroundPixels": 5746,
+        "width": 170,
+        "height": 58,
+        "relativeToRowMedian": 1.035502
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          33,
+          184,
+          201,
+          240
+        ],
+        "foregroundPixels": 5352,
+        "width": 168,
+        "height": 56,
+        "relativeToRowMedian": 0.964498
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          23,
+          179,
+          197,
+          240
+        ],
+        "foregroundPixels": 6012,
+        "width": 174,
+        "height": 61,
+        "relativeToRowMedian": 1.102512
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          32,
+          188,
+          186,
+          240
+        ],
+        "foregroundPixels": 4766,
+        "width": 154,
+        "height": 52,
+        "relativeToRowMedian": 0.874014
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          25,
+          177,
+          208,
+          240
+        ],
+        "foregroundPixels": 6054,
+        "width": 183,
+        "height": 63,
+        "relativeToRowMedian": 1.110215
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          33,
+          186,
+          189,
+          240
+        ],
+        "foregroundPixels": 4894,
+        "width": 156,
+        "height": 54,
+        "relativeToRowMedian": 0.897488
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          25,
+          189,
+          192,
+          240
+        ],
+        "foregroundPixels": 5176,
+        "width": 167,
+        "height": 51,
+        "relativeToRowMedian": 0.96244
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          41,
+          171,
+          196,
+          240
+        ],
+        "foregroundPixels": 5403,
+        "width": 155,
+        "height": 69,
+        "relativeToRowMedian": 1.004649
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          40,
+          176,
+          193,
+          240
+        ],
+        "foregroundPixels": 5353,
+        "width": 153,
+        "height": 64,
+        "relativeToRowMedian": 0.995351
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          27,
+          172,
+          202,
+          230
+        ],
+        "foregroundPixels": 5569,
+        "width": 175,
+        "height": 58,
+        "relativeToRowMedian": 1.035515
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          34,
+          177,
+          201,
+          238
+        ],
+        "foregroundPixels": 5424,
+        "width": 167,
+        "height": 61,
+        "relativeToRowMedian": 1.043679
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          18,
+          184,
+          196,
+          230
+        ],
+        "foregroundPixels": 4970,
+        "width": 178,
+        "height": 46,
+        "relativeToRowMedian": 0.956321
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          35,
+          175,
+          194,
+          240
+        ],
+        "foregroundPixels": 5831,
+        "width": 159,
+        "height": 65,
+        "relativeToRowMedian": 1.121993
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          35,
+          188,
+          185,
+          240
+        ],
+        "foregroundPixels": 4735,
+        "width": 150,
+        "height": 52,
+        "relativeToRowMedian": 0.911103
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          29,
+          179,
+          195,
+          240
+        ],
+        "foregroundPixels": 5794,
+        "width": 166,
+        "height": 61,
+        "relativeToRowMedian": 1.008529
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          27,
+          153,
+          189,
+          240
+        ],
+        "foregroundPixels": 5945,
+        "width": 162,
+        "height": 87,
+        "relativeToRowMedian": 1.034813
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          17,
+          178,
+          187,
+          240
+        ],
+        "foregroundPixels": 5696,
+        "width": 170,
+        "height": 62,
+        "relativeToRowMedian": 0.991471
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          20,
+          191,
+          201,
+          240
+        ],
+        "foregroundPixels": 5044,
+        "width": 181,
+        "height": 49,
+        "relativeToRowMedian": 0.877981
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          24,
+          190,
+          191,
+          240
+        ],
+        "foregroundPixels": 5433,
+        "width": 167,
+        "height": 50,
+        "relativeToRowMedian": 1.174322
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          23,
+          198,
+          199,
+          240
+        ],
+        "foregroundPixels": 4922,
+        "width": 176,
+        "height": 42,
+        "relativeToRowMedian": 1.063871
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          28,
+          204,
+          198,
+          240
+        ],
+        "foregroundPixels": 4331,
+        "width": 170,
+        "height": 36,
+        "relativeToRowMedian": 0.936129
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          23,
+          209,
+          197,
+          240
+        ],
+        "foregroundPixels": 3768,
+        "width": 174,
+        "height": 31,
+        "relativeToRowMedian": 0.814439
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      5567.5,
+      5609.5,
+      5549.0,
+      5453.0,
+      5378.0,
+      5197.0,
+      5745.0,
+      4626.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "b10a1b4752a98d066194a40be832696913dcf572a097a1393d1ab2821241644a",
+      "a6302791ab854f8b25255e6f32c3ba3486b6367513ef2e7c26f3935d95d79812",
+      "0db83a5dd4422a5341fad0da7bf93f59c17eaa8155917562a0a61e29cd35b701",
+      "c30cdf03bbe3b204d7207ccd5a90ce934404775657f6f8a778eb01eca3eba398",
+      "2ae7b9bf17c11a969921a13b3b4d195a49137fed3237fcc55839049f2da6c945",
+      "abbe3ebbb6e81ec16b95513a31809b484f311209de7131981f13a888079c1aaa",
+      "70591a88571bf23aafe21d9042b8845d27f0a43573e40cc0685272812acc4018",
+      "33f2ef472a703d61522229e29081e2f2a3a7a105581af133d852a9960e92a5dc",
+      "de8103178aafb8ca96031677146c572fcff1a49b46559cdb61786457187a277b",
+      "114afaad4ba29491c564462929c3b15cfe23e977f0d0cea93fa8bfc7663422c1",
+      "c0bcdcadb681d0c029136f02c87c31709c3069683585343cea1f0e7a22a92379",
+      "6df548bb26c7a6e58a5615f8a6ebdf74cc138ef93df0f3e7ca3959c7ec8b598b",
+      "a4f887de40670dced14b6128df5fb989ccce9c9db06a49a6f7d7f46bf1a36dc6",
+      "3b3e81f7a278fe320d28934e0a625c36520ee93e0861c8b3112c5204c49dea88",
+      "8c37874a73680bc9c9c393876d4e6c7663b3384ce1bc658a922e80867486e0c9",
+      "482d446903b7d2fc85a000c30f578c7b20fe4094274ec6893c55309d55fd3965",
+      "caef8908cd0065d83b0222ca01cd8638be3915d25d36974052d6393d38611ede",
+      "c345b0397d971a08681643a46b8fd7daf8374ed224e0bbc63ef9117b169637b6",
+      "3c25dcfc4f0e8c07096679b3efa2a655b2aa6d8bfaeb17001e3827a3ca38bc0b",
+      "2b1fd0699a85f487b072a5801abefc152611b87cf486c1fb89493f919c488b91",
+      "5d44b9ba1735c1c6554b5ecb3865a79d5e7981953673f324a1c79dd2b5e2cce1",
+      "b7443934035de9544f4b8a4dadbb49f2cd2fd14373d4804b5264fb0405fd5f51",
+      "c20dfc11418e54bc34efed2cbe46db67f056585204150e23b6f12ffd68d918e0",
+      "a041a9a97013d561e976947f5d6caf67f1be4306321338aeb86591992bc1561c",
+      "6f78cc71af7a4341433807cbf76b5f97b8ea86181bc296da1add73359526eacf",
+      "2ce0f9a1cafc0c5bbd1559c5ce8d0a7eaa6e0cc10d2cb23440867bff44d31c69",
+      "e604c89d1081fd2cd3c78ce2a547de66b9f459b6f25abceaa4215fe74a972fe6",
+      "5094501f465e7fd3e5a92b25d9c439b1916b68d2190341843a939b6c45739b74",
+      "903f6718b88677ce7cf20f72a7ccc89113cd65df9eb090e50441bf528bb53d4e",
+      "01f65f54917597081f0353d2529aa168602cab8740e6fe79ebeee3f3405ba899",
+      "4911cfbfa30e7ba5113094c9171439acf710046c0956283bceec3134a75b9170",
+      "7c53eeae6d916e178bbde954159ba45016962903fa5e5f905386cd769ae146b0"
+    ],
+    "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.scale-review.json",
+    "sha256": "c8d310fa5aa489c959531011e4b20914c0ac0870a36ab1210b7be9388ed2a0a4",
+    "status": "reviewed",
+    "profileId": "enemy-050-korari-stalker",
+    "reviewer": "Codex level_props_audit_fix independent V73 review",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1,
+      "attack": 1,
+      "death": 1
+    },
+    "sourceSha256ByClip": {
+      "idle": "b0ee56534f6e4bbcdc7874415a30e0f519dc2651d6e2d08feeb7bcd07f40a058",
+      "move": "0cdf73c81fb2863abd7da02ade49a16472aafcd372108454d418627a6275485c",
+      "attack": "06d3ebe61d87a435b67cf8935b4a9f4dc8b5799e52237c89bc965a8b810943fa",
+      "death": "8554cb0888ff7eae75b13803e551eb5fbf187667c1ecfc4ee14723b70e61fba1"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/049-050/FINAL_QA.md",
+        "sha256": "9107c74cc735a89f98b387c4ecc295e20bf5fff3b882d26804e7bd6b45cceb5d"
+      },
+      {
+        "path": "docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/scale-review.fragment.json",
+        "sha256": "b59dc3709129c94b0f715476bfec71fd5acf30335ab5a2b5559ea0b1726f6300"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.active-scale-measurements.png",
+        "sha256": "004b77ddaa2a0acf9d721e1b09653832ad4fab31030cc533cd95a96f877e48c7"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.anchor-review.json",
+    "scale": "docs/references/v73-next50-audit/049-050/enemy-050-korari-stalker.scale-review.json"
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 0,
+    "remainingStrictPixelCount": 0
+  }
+}

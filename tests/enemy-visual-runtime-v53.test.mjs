@@ -49,7 +49,8 @@ const signature = (profile) => JSON.stringify([
 ]);
 
 // EXPECTED above remains the historical family mapping. Only these exact
-// standard IDs migrate to V66; their ten unproduced variants keep that mapping.
+// standard IDs migrate to V66. A separately accepted variant needs its own ID;
+// all other variants retain the historical mapping, never the new base atlas.
 const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-001-ovomorph', ['Ovomorph', 'ovomorph', 'enemy.ovomorph.cycle']],
   ['enemy-003-chestburster', ['Chestburster', 'chestburster', 'enemy.chestburster.action']],
@@ -58,11 +59,16 @@ const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-006-runner', ['Runner', 'xenoRunner', 'enemy.xenomorph-runner.action']],
   ['enemy-020-k-series-yellow-xenomorph', ['K-Series Yellow Xenomorph', 'xenoWarrior', null]]
 ]);
+const V66_VARIANT_IDENTITIES = new Map([
+  ['enemy-055-albino-chestburster', ['Chestburster', 'chestburster', 'enemy.chestburster.action']]
+]);
+const V66_DEDICATED_IDENTITIES = new Map([...V66_STANDARD_IDENTITIES, ...V66_VARIANT_IDENTITIES]);
 const readyV66ById = new Map(READY_ENEMY_PROFILE_REGISTRY_V66.map((profile) => [profile.profileId, profile]));
 const readyDedicatedById = new Map([...READY_ENEMY_PROFILE_REGISTRY_V65, ...READY_ENEMY_PROFILE_REGISTRY_V66]
   .map((profile) => [profile.profileId, profile]));
 
 test('le registre visuel couvre exactement les 55 archétypes du catalogue V64', () => {
+  assert.deepEqual([...readyV66ById.keys()].sort(), [...V66_DEDICATED_IDENTITIES.keys()].sort(), 'seuls les IDs explicitement acceptés migrent');
   const baseEnemies = ENEMIES.filter((enemy) => enemy.modifier === 'Standard');
   const baseArchetypes = baseEnemies.map((enemy) => enemy.name);
   assert.equal(ENEMY_VISUAL_PROFILE_COUNT, 55);
@@ -98,7 +104,14 @@ test('les 571 profils distinguent les standards dedies des variantes a identite 
       assert.equal(resolved.profileId, enemy.id);
       assert.equal(resolved.sheetId, dedicated.asset.sheetId);
       assert.equal(resolved.spriteKey, readyV66ById.has(enemy.id)
-        ? V66_STANDARD_IDENTITIES.get(enemy.id)?.[1] : dedicated.asset.spriteKey);
+        ? V66_DEDICATED_IDENTITIES.get(enemy.id)?.[1] : dedicated.asset.spriteKey);
+      if (readyV66ById.has(enemy.id)) {
+        assert.equal(resolved.canonExact, false, 'un atlas V66 dédié ne certifie jamais une copie canonique 1:1');
+      }
+      if (V66_VARIANT_IDENTITIES.has(enemy.id)) {
+        assert.equal(enemy.modifier, 'Albino');
+        assert.equal(resolved.identityStatus, 'source-locked-project-adaptation');
+      }
       continue;
     }
     assert.deepEqual([resolved.spriteKey, resolved.imageKey, resolved.row], EXPECTED.get(archetype),
@@ -108,16 +121,25 @@ test('les 571 profils distinguent les standards dedies des variantes a identite 
   }
   assert.equal(signaturesByArchetype.size, 55);
   for (const [archetype, signatures] of signaturesByArchetype) assert.equal(signatures.size, 1, `${archetype}: mapping instable`);
-  for (const [profileId] of readyV66ById) {
-    const [archetype, standardKey, legacySheetId] = V66_STANDARD_IDENTITIES.get(profileId);
+  for (const [profileId, [archetype, standardKey, legacySheetId]] of V66_STANDARD_IDENTITIES) {
     const family = ENEMIES.filter((enemy) => resolveEnemyArchetype(enemy) === archetype);
     const standards = family.filter((enemy) => enemy.modifier === 'Standard');
     const variants = family.filter((enemy) => enemy.modifier !== 'Standard');
     assert.deepEqual(standards.map((enemy) => enemy.id), [profileId]);
-    assert.equal(variants.length, 10, `${archetype}: dix variantes heritees conservees`);
+    assert.equal(variants.length, 10, `${archetype}: dix variantes cataloguées conservées`);
+    assert.equal(variants.filter((variant) => !V66_VARIANT_IDENTITIES.has(variant.id)).length,
+      archetype === 'Chestburster' ? 9 : 10, 'seul Albino055 quitte le mapping hérité');
     assert.equal(resolveEnemyVisualProfile(standards[0]).spriteKey, standardKey);
     for (const variant of variants) {
       const visual = resolveEnemyVisualProfile(variant);
+      if (V66_VARIANT_IDENTITIES.has(variant.id)) {
+        assert.equal(visual.sheetId, `enemy.profile.${variant.id}.v66`);
+        assert.notEqual(visual.sheetId, `enemy.profile.${profileId}.v66`);
+        assert.equal(visual.identityStatus, 'source-locked-project-adaptation');
+        assert.equal(visual.canonExact, false);
+        assert.equal(visual.approximate, false);
+        continue;
+      }
       assert.equal(visual.spriteKey, EXPECTED.get(archetype)[0], variant.id);
       assert.equal(visual.sheetId, legacySheetId, variant.id);
       assert.notEqual(visual.sheetId, `enemy.profile.${profileId}.v66`, variant.id);
@@ -150,9 +172,10 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
     newbornV64: 1, offspringV64: 1, predalienV64: 1
   };
   for (const [profileId, profile] of readyV66ById) {
-    const [archetype, spriteKey] = V66_STANDARD_IDENTITIES.get(profileId);
+    const [archetype, spriteKey] = V66_DEDICATED_IDENTITIES.get(profileId);
     const previousKey = EXPECTED.get(archetype)[0];
-    assert.equal(profile.modifier, 'Standard');
+    assert.equal(profile.modifier, V66_VARIANT_IDENTITIES.has(profileId) ? 'Albino' : 'Standard');
+    assert.equal(profile.asset.canonExact, false);
     assert.equal(profile.asset.spriteKey, spriteKey);
     if (spriteKey !== previousKey) {
       expectedBySpriteKey[previousKey] -= 1;
@@ -162,11 +185,12 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   assert.deepEqual(report.bySpriteKey, expectedBySpriteKey);
   assert.deepEqual(report.byImageKey, { neuroXeno: 21, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
-    exact: 30 - readyDedicatedById.size,
-    'source-locked-adaptation': readyDedicatedById.size,
+    exact: 30 - (readyDedicatedById.size - V66_VARIANT_IDENTITIES.size),
+    'source-locked-adaptation': readyDedicatedById.size - V66_VARIANT_IDENTITIES.size,
+    'source-locked-project-adaptation': V66_VARIANT_IDENTITIES.size,
     'project-adaptation': 18,
     'project-original': 7,
-    'authored-family': 516
+    'authored-family': 516 - V66_VARIANT_IDENTITIES.size
   });
 });
 

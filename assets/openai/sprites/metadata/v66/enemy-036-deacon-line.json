@@ -33,34 +33,52 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-036-deacon-line.webp",
-  "normalizedSha256": "4dff0c0c15bd06d2f8beda00d747929f594cfcd236dec37363184d0a7fa7d8f4",
+  "normalizedSha256": "3c46b5b942e6d20c4184dfb2ce8aad3e3d98e52b2219688d99e47bf8ca66745b",
   "preview": "assets/openai/sprites/previews/v66/enemy-036-deacon-line/all.gif",
-  "previewSha256": "8a666b4a7133ff23ae0cd1ac926bee027076de9797cc6cbec441cba484cafc7b",
+  "previewSha256": "430ca8a98574090d3acd38d8cb6145de9d1d9fad3a907fdf9f91133af1ccd5f1",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.357245493,
+  "scale": 0.364967761,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
     "idle": 1,
-    "move": 1.038739,
-    "attack": 1.046164,
-    "death": 0.997424
+    "move": 1.042041,
+    "attack": 1.070903,
+    "death": 1.096555
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "path": "docs/references/V66_BATCH_003_ANCHOR_REVIEW.json",
-    "sha256": "25d77434a275c50803f033596d0047a713a4ff43e87256775f7973faf3128b4a",
+    "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line.anchor-review.fragment.json",
+    "sha256": "ccd625834e7777f483eb17e84b7069ae17043a1a87616fc205d87eda03921ecc",
     "status": "reviewed",
-    "reviewer": "Codex /root/produce_arcology_lurker",
-    "reviewedAt": "2026-09-01",
-    "method": "Manual per-pose pelvis-center landmark at the proximal leg junction, vertically projected to the complete extracted support/contact guard required by runtime pivot y=240. Idle/move grounded anchors use y=431; attack uses y=430 except frame 2 at y=429; grounded/contact death uses y=429. Airborne death frames 1-2 intentionally remain on the adjacent y=427 ground plane to preserve fall height. Every non-airborne anchor is therefore >= sourceBounds[3]. Whole-body extrema and the cranial mitre are never used as roots.",
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-idle-source-review.jpg",
+        "sha256": "598ee586e3933698a52870af9ebce00a15ac4177f5da7e82a9e3c841d47afe6d"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-move-source-review.jpg",
+        "sha256": "1e48722bdd8dab1e12c9b4c25115c9315ddb2f8c07dd99f31dab0475c911ad32"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-attack-source-review.jpg",
+        "sha256": "b03de481ca5fc9a8b71ae9becaa92b5809830f68afb22ba150d4c13483d89d7c"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-death-source-review.jpg",
+        "sha256": "6130c3f4ee7c0c917435e52a85afa5182f28aa9a9204224ad5292823cedab69c"
+      }
+    ],
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
+    "method": "Manual per-pose visible proximal thigh / pelvic articulation in nominal source-cell coordinates, projected vertically to the authored support plane including the 3px extraction guard. No bounding-box centre, cranial tip, knee or automatic anatomy detector is used. Source floors are retained: idle/move 431; attack 430 (pose3 429); death 429 (airborne poses2-3 427). Inferred airborne floors preserve fall height.",
     "reviewedPoseCount": 32,
     "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
-    "safeReassignCellFragments": false,
+    "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
     "removeEnclosedMagentaAaFringe": true,
     "removeMagentaSpill": true
@@ -304,9 +322,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-036-deacon-line/idle.webp",
-      "sha256": "09f34a6e047e0b44e9f1dea169b423f977b302a81717af392b2d066b55e845eb",
+      "sha256": "b60d50a94fdefd3bb8e06c53d4ebc7cae597cafcd3f86e63009a61f6d6461a70",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-036-deacon-line/idle.gif",
-      "previewSha256": "a6ead2933f56dfeb78d14b8bea72ca3d1d1ea0e43bf29484f8a40d890661e445"
+      "previewSha256": "542fcbe2e5819b0b299b2393a191b423ef5ac8acb50c9253ded300ee16f999ba"
     },
     {
       "id": "move",
@@ -323,9 +341,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-036-deacon-line/move.webp",
-      "sha256": "c0844c58d96155e27b39f66fbe0ebfe33d2f3d870ad6083bc7ca7544853510f9",
+      "sha256": "c6510084663d630de5302f2b1c83f6247c13fc25e39eb4cc6d9f7e30e4b22e2b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-036-deacon-line/move.gif",
-      "previewSha256": "44fc472ff3d4de62420a5a9d1c8a98361a689a75847e5951376917996719db28"
+      "previewSha256": "e4438767ef5524fde33d5b2cb8d478aefae5e782d2542dd793efaead3d2cc95b"
     },
     {
       "id": "attack",
@@ -342,9 +360,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-036-deacon-line/attack.webp",
-      "sha256": "1a697b4bdf781b503e6e2d94d81f6f10f825a5803417bd97e86e3ac20813783f",
+      "sha256": "262ef9a5a65a18e1fe2ed4ea4755a419159ff72831981ae4c9bae94c6745f8f2",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-036-deacon-line/attack.gif",
-      "previewSha256": "d61066cb41c59da51363cf25e627b1b8a0ab6f278c14d1490f15513881cd9ec1"
+      "previewSha256": "88c4046878509e4d4ea6ac441efcf704ba33acd348800070d501b8abf6873c34"
     },
     {
       "id": "death",
@@ -361,9 +379,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-036-deacon-line/death.webp",
-      "sha256": "1f438d2d3f82fa3d86bbee4f6161788d0f0d7ae24ded6da676a391e10c98ad86",
+      "sha256": "15b4481bb7dc0042fa4f913ba58d3e7ef68ef660fa596737f203b66e56ef36ee",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-036-deacon-line/death.gif",
-      "previewSha256": "3c60c935b962ae8a1d8e3dd08845885d6ff357e04b5fff89471fb6d3ca75b881"
+      "previewSha256": "1ac3df15abf818d4279d5385690f98252d2ec5b63f554654883660e1ba39ecda"
     }
   ],
   "placements": [
@@ -383,43 +401,49 @@
         294,
         431
       ],
+      "sourceGlobalBounds": [
+        175,
+        63,
+        294,
+        431
+      ],
       "sourceSize": [
         119,
         368
       ],
       "foregroundPixels": 17555,
-      "mattePixels": 179581,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "cce507044707264af6044bc0ca4507f8678b4c36da57d30c953561fc68f8891a",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        221,
+        232,
         431
       ],
       "sourceLandmark": [
-        221,
-        316
+        232,
+        246
       ],
-      "sourceAnchorEvidence": "Idle pose 1 source and regenerated marked overlay inspected: pelvis (221,316) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 1: Proximal near thigh attaches below the narrow ribbed abdomen, behind the lowered forearm. Landmark (232,246) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        46.0,
+        57.0,
         368.0
       ],
       "renderedAnchor": [
-        127.6218487394958,
+        127.59663865546219,
         240.0
       ],
       "index": 0,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        111,
-        109,
-        154,
+        107,
+        106,
+        150,
         240
       ],
       "magentaSpill": {
@@ -453,43 +477,49 @@
         258,
         431
       ],
+      "sourceGlobalBounds": [
+        574,
+        64,
+        702,
+        431
+      ],
       "sourceSize": [
         128,
         367
       ],
       "foregroundPixels": 18833,
-      "mattePixels": 177859,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "358437fe3d840d942e58a6868de294d5b659a6345e286c42af16e7505a17e709",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        194,
+        210,
         431
       ],
       "sourceLandmark": [
-        194,
-        316
+        210,
+        248
       ],
-      "sourceAnchorEvidence": "Idle pose 2 source and regenerated marked overlay inspected: pelvis (194,316) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 2: Groin-side upper thigh joint is visible at the lower abdomen; the previous point was the bent knee. Landmark (210,248) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        64.0,
+        80.0,
         367.0
       ],
       "renderedAnchor": [
-        128.0,
+        128.375,
         240.0
       ],
       "index": 1,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        105,
-        109,
-        151,
+        99,
+        106,
+        146,
         240
       ],
       "magentaSpill": {
@@ -503,7 +533,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 1,
+        "neutralizedPixelCount": 0,
         "remainingStrictPixelCount": 0
       }
     },
@@ -523,43 +553,49 @@
         295,
         431
       ],
+      "sourceGlobalBounds": [
+        1044,
+        94,
+        1182,
+        431
+      ],
       "sourceSize": [
         138,
         337
       ],
       "foregroundPixels": 18011,
-      "mattePixels": 178681,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9798365f0e6b5c95f1894154aa00bf034b7185c200d8be4640c2a858746d279f",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        222,
+        206,
         431
       ],
       "sourceLandmark": [
-        222,
-        318
+        206,
+        251
       ],
-      "sourceAnchorEvidence": "Idle pose 3 source and regenerated marked overlay inspected: pelvis (222,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 3: Hip articulation sits behind the crossing forearm; outline of the proximal thigh, not its lower knee, provides the centre. Landmark (206,251) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        65.0,
+        49.0,
         337.0
       ],
       "renderedAnchor": [
-        128.07971014492753,
+        127.7536231884058,
         240.0
       ],
       "index": 2,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        105,
-        120,
-        154,
+        110,
+        117,
+        160,
         240
       ],
       "magentaSpill": {
@@ -593,42 +629,48 @@
         282,
         431
       ],
+      "sourceGlobalBounds": [
+        1468,
+        66,
+        1612,
+        431
+      ],
       "sourceSize": [
         144,
         365
       ],
       "foregroundPixels": 18816,
-      "mattePixels": 178320,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "fdb311fdcff91fe50fde7781ea4c39d0beaa008d432cbea38dbc4db3eaa01b89",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        206,
+        210,
         431
       ],
       "sourceLandmark": [
-        206,
-        318
+        210,
+        242
       ],
-      "sourceAnchorEvidence": "Idle pose 4 source and regenerated marked overlay inspected: pelvis (206,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 4: Proximal upper leg begins below the ribbed abdomen; the forearm occludes its forward edge. Landmark (210,242) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        68.0,
+        72.0,
         365.0
       ],
       "renderedAnchor": [
-        128.08333333333334,
+        128.5,
         240.0
       ],
       "index": 3,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        104,
-        110,
+        102,
+        107,
         155,
         240
       ],
@@ -663,43 +705,49 @@
         320,
         431
       ],
+      "sourceGlobalBounds": [
+        159,
+        553,
+        320,
+        875
+      ],
       "sourceSize": [
         161,
         322
       ],
       "foregroundPixels": 18180,
-      "mattePixels": 178512,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "215bb02b90e8519672b3079a7e2b1df3ca07655a031511b465339b1cae07fec0",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        206,
+        174,
         431
       ],
       "sourceLandmark": [
-        206,
-        326
+        174,
+        265
       ],
-      "sourceAnchorEvidence": "Idle pose 5 source and regenerated marked overlay inspected: pelvis (206,326) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 5: Crouched pelvic bend is above the diagonally forward thigh; the knee is far below/right. Landmark (174,265) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        47.0,
+        15.0,
         322.0
       ],
       "renderedAnchor": [
-        127.93167701863354,
+        128.49689440993788,
         240.0
       ],
       "index": 4,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        111,
-        125,
-        169,
+        123,
+        122,
+        182,
         240
       ],
       "magentaSpill": {
@@ -733,43 +781,49 @@
         269,
         431
       ],
+      "sourceGlobalBounds": [
+        562,
+        554,
+        713,
+        875
+      ],
       "sourceSize": [
         151,
         321
       ],
       "foregroundPixels": 18119,
-      "mattePixels": 178130,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "1e699014fd94405513f5ddf9d1829de0ea7356203182a5331ed9543fb74589c4",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        189,
+        157,
         431
       ],
       "sourceLandmark": [
-        189,
-        324
+        157,
+        261
       ],
-      "sourceAnchorEvidence": "Idle pose 6 source and regenerated marked overlay inspected: pelvis (189,324) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 6: Upper thigh enters the tilted abdomen at the left end of the visible femoral segment. Landmark (157,261) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        71.0,
+        39.0,
         321.0
       ],
       "renderedAnchor": [
-        128.39072847682118,
+        128.20529801324503,
         240.0
       ],
       "index": 5,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        103,
-        125,
-        157,
+        114,
+        123,
+        169,
         240
       ],
       "magentaSpill": {
@@ -803,43 +857,49 @@
         307,
         431
       ],
+      "sourceGlobalBounds": [
+        1033,
+        580,
+        1194,
+        875
+      ],
       "sourceSize": [
         161,
         295
       ],
       "foregroundPixels": 18272,
-      "mattePixels": 177977,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "7583479cf83bd23eec111b83d9d30c391bc2287b28be7a16bb7a147cc03ffd9c",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        213,
+        174,
         431
       ],
       "sourceLandmark": [
-        213,
-        330
+        174,
+        277
       ],
-      "sourceAnchorEvidence": "Idle pose 7 source and regenerated marked overlay inspected: pelvis (213,330) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 7: Low crouch exposes the abdomen-to-thigh crease; overlapping dark limb contours limit precision. Landmark (174,277) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        67.0,
+        28.0,
         295.0
       ],
       "renderedAnchor": [
-        128.13664596273293,
+        128.26086956521738,
         240.0
       ],
       "index": 6,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        104,
-        135,
-        162,
+        118,
+        132,
+        177,
         240
       ],
       "magentaSpill": {
@@ -873,43 +933,49 @@
         275,
         431
       ],
+      "sourceGlobalBounds": [
+        1477,
+        514,
+        1605,
+        875
+      ],
       "sourceSize": [
         128,
         361
       ],
       "foregroundPixels": 17696,
-      "mattePixels": 178996,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "bf56824ca3ef6a4fcb0ce7509aa1b014a8e30fb491540d6727fa65afa568fa11",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        205,
+        182,
         431
       ],
       "sourceLandmark": [
-        205,
-        318
+        182,
+        263
       ],
-      "sourceAnchorEvidence": "Idle pose 8 source and regenerated marked overlay inspected: pelvis (205,318) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "idle pose 8: Proximal thigh attaches just below the abdominal plates behind the lowered wrist. Landmark (182,263) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        58.0,
+        35.0,
         361.0
       ],
       "renderedAnchor": [
-        127.84375,
+        127.8515625,
         240.0
       ],
       "index": 7,
-      "scale": 0.357245493,
+      "scale": 0.364967761,
       "sourceScale": 1,
-      "appliedScale": 0.357245493,
+      "appliedScale": 0.364967761,
       "renderedBounds": [
-        107,
-        111,
-        153,
+        115,
+        108,
+        162,
         240
       ],
       "magentaSpill": {
@@ -943,43 +1009,49 @@
         271,
         431
       ],
+      "sourceGlobalBounds": [
+        141,
+        55,
+        271,
+        431
+      ],
       "sourceSize": [
         130,
         376
       ],
       "foregroundPixels": 17716,
-      "mattePixels": 179420,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8644d615fa231a323978299ea3d77a87ac0e5bdc0900f9782754f8e39d5ebbdf",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        201,
+        184,
         431
       ],
       "sourceLandmark": [
-        201,
-        321
+        184,
+        245
       ],
-      "sourceAnchorEvidence": "Move pose 1 source and regenerated marked overlay inspected: pelvis (201,321) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 1: Upper femoral attachment under the abdomen precedes the long visible thigh. Landmark (184,245) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        60.0,
+        43.0,
         376.0
       ],
       "renderedAnchor": [
-        128.15384615384616,
+        128.2076923076923,
         240.0
       ],
       "index": 8,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        106,
-        100,
-        154,
+        112,
+        97,
+        161,
         240
       ],
       "magentaSpill": {
@@ -1013,43 +1085,49 @@
         277,
         431
       ],
+      "sourceGlobalBounds": [
+        528,
+        63,
+        721,
+        431
+      ],
       "sourceSize": [
         193,
         368
       ],
       "foregroundPixels": 18948,
-      "mattePixels": 177744,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "5e779021f5a055bb8b2cfd5e540bbfef67959ec4bef6ee247988e8ef94f73b64",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        184,
+        166,
         431
       ],
       "sourceLandmark": [
-        184,
-        294
+        166,
+        255
       ],
-      "sourceAnchorEvidence": "Move pose 2 source and regenerated marked overlay inspected: pelvis (184,294) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 2: Bent lead thigh leaves the lower abdomen; old landmark followed the lower knee. Landmark (166,255) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        100.0,
+        82.0,
         368.0
       ],
       "renderedAnchor": [
-        128.30569948186528,
+        128.01554404145077,
         240.0
       ],
       "index": 9,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        91,
-        103,
-        163,
+        97,
+        100,
+        170,
         240
       ],
       "magentaSpill": {
@@ -1083,43 +1161,49 @@
         280,
         431
       ],
+      "sourceGlobalBounds": [
+        967,
+        79,
+        1167,
+        431
+      ],
       "sourceSize": [
         200,
         352
       ],
       "foregroundPixels": 19448,
-      "mattePixels": 177244,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f2baeec7c9487b596df485d4a909c93e77438c7f68d623a46b9bc640546c49b6",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        184,
+        168,
         431
       ],
       "sourceLandmark": [
-        184,
-        292
+        168,
+        257
       ],
-      "sourceAnchorEvidence": "Move pose 3 source and regenerated marked overlay inspected: pelvis (184,292) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 3: Hip seam below the abdomen is behind the high thigh; the lower knee is not the root. Landmark (168,257) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        104.0,
+        88.0,
         352.0
       ],
       "renderedAnchor": [
-        128.48,
+        128.44,
         240.0
       ],
       "index": 10,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        90,
-        109,
-        164,
+        95,
+        106,
+        171,
         240
       ],
       "magentaSpill": {
@@ -1153,43 +1237,49 @@
         276,
         431
       ],
+      "sourceGlobalBounds": [
+        1394,
+        83,
+        1606,
+        431
+      ],
       "sourceSize": [
         212,
         348
       ],
       "foregroundPixels": 20231,
-      "mattePixels": 176905,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "811ac2f5f4dfb81f688032748de682cc6735145ebc8edac5b9ae0bcebb71fb1f",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        178,
+        160,
         431
       ],
       "sourceLandmark": [
-        178,
-        293
+        160,
+        255
       ],
-      "sourceAnchorEvidence": "Move pose 4 source and regenerated marked overlay inspected: pelvis (178,293) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 4: Rear pelvic curve and proximal thigh junction are visible below the tilted trunk. Landmark (160,255) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        114.0,
+        96.0,
         348.0
       ],
       "renderedAnchor": [
-        128.4811320754717,
+        127.67924528301887,
         240.0
       ],
       "index": 11,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        86,
-        111,
-        165,
+        91,
+        108,
+        172,
         240
       ],
       "magentaSpill": {
@@ -1203,7 +1293,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 1,
+        "neutralizedPixelCount": 7,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1223,43 +1313,49 @@
         286,
         431
       ],
+      "sourceGlobalBounds": [
+        134,
+        564,
+        286,
+        875
+      ],
       "sourceSize": [
         152,
         311
       ],
       "foregroundPixels": 16966,
-      "mattePixels": 179726,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3d2f9296ecbe40c2fbe390cd4a5e7e3d4cfb77e9944fea9663c626555d83a822",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        190,
+        159,
         431
       ],
       "sourceLandmark": [
-        190,
-        310
+        159,
+        269
       ],
-      "sourceAnchorEvidence": "Move pose 5 source and regenerated marked overlay inspected: pelvis (190,310) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 5: Crouch joins the tilted abdomen to the upper femur; the knee projects to the right. Landmark (159,269) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        56.0,
+        25.0,
         311.0
       ],
       "renderedAnchor": [
-        127.63157894736842,
+        127.53947368421052,
         240.0
       ],
       "index": 12,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        107,
-        125,
-        163,
+        118,
+        122,
+        176,
         240
       ],
       "magentaSpill": {
@@ -1273,7 +1369,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 2,
+        "neutralizedPixelCount": 1,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1293,43 +1389,49 @@
         307,
         431
       ],
+      "sourceGlobalBounds": [
+        517,
+        563,
+        751,
+        875
+      ],
       "sourceSize": [
         234,
         312
       ],
       "foregroundPixels": 17929,
-      "mattePixels": 178320,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "81ccc0e9d1a6eadfb7d6d71d2d5bb1bd4dec65ee741e497c05787710462e127d",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        182,
+        158,
         431
       ],
       "sourceLandmark": [
-        182,
-        300
+        158,
+        274
       ],
-      "sourceAnchorEvidence": "Move pose 6 source and regenerated marked overlay inspected: pelvis (182,300) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 6: Pelvis is at the upper end of the flexed thigh below the lower ribs. Landmark (158,274) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        109.0,
+        85.0,
         312.0
       ],
       "renderedAnchor": [
-        127.52564102564102,
+        128.32905982905982,
         240.0
       ],
       "index": 13,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        87,
-        124,
-        174,
+        96,
+        121,
+        185,
         240
       ],
       "magentaSpill": {
@@ -1363,43 +1465,49 @@
         234,
         431
       ],
+      "sourceGlobalBounds": [
+        1012,
+        549,
+        1121,
+        875
+      ],
       "sourceSize": [
         109,
         326
       ],
       "foregroundPixels": 15526,
-      "mattePixels": 180723,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2b71df2de372ae9de31b84050057faf218b56fe4f3b9e5832fcf8c0f8a835c2c",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        183,
+        161,
         431
       ],
       "sourceLandmark": [
-        183,
-        325
+        161,
+        269
       ],
-      "sourceAnchorEvidence": "Move pose 7 source and regenerated marked overlay inspected: pelvis (183,325) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 7: Hip lies behind the extended near thigh at the narrow waist-to-leg junction. Landmark (161,269) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        58.0,
+        36.0,
         326.0
       ],
       "renderedAnchor": [
-        128.28440366972478,
+        127.54128440366972,
         240.0
       ],
       "index": 14,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        107,
-        119,
-        147,
+        114,
+        116,
+        155,
         240
       ],
       "magentaSpill": {
@@ -1433,43 +1541,49 @@
         216,
         431
       ],
+      "sourceGlobalBounds": [
+        1425,
+        526,
+        1546,
+        875
+      ],
       "sourceSize": [
         121,
         349
       ],
       "foregroundPixels": 15698,
-      "mattePixels": 180994,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "24298d1a091194cc892285a326235e0bd746ff780358448e6456a68aa8c63182",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        171,
+        157,
         431
       ],
       "sourceLandmark": [
-        171,
-        315
+        157,
+        259
       ],
-      "sourceAnchorEvidence": "Move pose 8 source and regenerated marked overlay inspected: pelvis (171,315) projects to complete extracted support/contact guard y=431; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "move pose 8: Upper femur joins the abdomen before the angled knee and shin. Landmark (157,259) projects to support y=431. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        76.0,
+        62.0,
         349.0
       ],
       "renderedAnchor": [
-        128.26446280991735,
+        127.5702479338843,
         240.0
       ],
       "index": 15,
-      "scale": 0.357245493,
-      "sourceScale": 1.038739,
-      "appliedScale": 0.371084826,
+      "scale": 0.364967761,
+      "sourceScale": 1.042041,
+      "appliedScale": 0.380311371,
       "renderedBounds": [
-        100,
-        110,
-        145,
+        104,
+        107,
+        150,
         240
       ],
       "magentaSpill": {
@@ -1483,7 +1597,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 0,
+        "neutralizedPixelCount": 1,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1503,43 +1617,49 @@
         275,
         430
       ],
+      "sourceGlobalBounds": [
+        150,
+        71,
+        275,
+        430
+      ],
       "sourceSize": [
         125,
         359
       ],
       "foregroundPixels": 18259,
-      "mattePixels": 178877,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e610731f953cce09c6d0ee8b4bfb3ab0ac430a9e82aabbd455b5f4bbc9321bdc",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        202,
+        204,
         430
       ],
       "sourceLandmark": [
-        202,
-        318
+        204,
+        246
       ],
-      "sourceAnchorEvidence": "Attack pose 1 source and regenerated marked overlay inspected: pelvis (202,318) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 1: Visible groin/upper femur directly below the extended ribcage. Landmark (204,246) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        52.0,
+        54.0,
         359.0
       ],
       "renderedAnchor": [
-        127.55199999999999,
+        128.168,
         240.0
       ],
       "index": 16,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        108,
-        106,
-        155,
+        107,
+        100,
+        156,
         240
       ],
       "magentaSpill": {
@@ -1573,43 +1693,49 @@
         264,
         430
       ],
+      "sourceGlobalBounds": [
+        509,
+        101,
+        708,
+        430
+      ],
       "sourceSize": [
         199,
         329
       ],
       "foregroundPixels": 19116,
-      "mattePixels": 177576,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "c4eb122594ba05073bacb06a5cf3372e0a7e4878bda309c5559fe9a9f415fb63",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        176,
+        147,
         430
       ],
       "sourceLandmark": [
-        176,
-        299
+        147,
+        268
       ],
-      "sourceAnchorEvidence": "Attack pose 2 source and regenerated marked overlay inspected: pelvis (176,299) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 2: Prepared crouch shows the proximal femoral bend below the tilted trunk. Landmark (147,268) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        111.0,
+        82.0,
         329.0
       ],
       "renderedAnchor": [
-        128.27638190954775,
+        128.14070351758795,
         240.0
       ],
       "index": 17,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        87,
-        117,
-        161,
+        96,
+        111,
+        174,
         240
       ],
       "magentaSpill": {
@@ -1643,42 +1769,48 @@
         441,
         429
       ],
+      "sourceGlobalBounds": [
+        893,
+        145,
+        1328,
+        429
+      ],
       "sourceSize": [
         435,
         284
       ],
       "foregroundPixels": 19815,
-      "mattePixels": 176877,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b2ce34a2df048d552d3a6e96265bee2101184f70dcccd54be3ec6666e57d2ad7",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        144,
+        157,
         429
       ],
       "sourceLandmark": [
-        144,
-        287
+        157,
+        268
       ],
-      "sourceAnchorEvidence": "Attack pose 3 source and regenerated marked overlay inspected: pelvis (144,287) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 3: Pelvic crease behind the extended lead thigh; forearm overlaps the forward torso. Landmark (157,268) projects to support y=429. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        138.0,
+        151.0,
         284.0
       ],
       "renderedAnchor": [
-        127.7103448275862,
+        128.01149425287355,
         240.0
       ],
       "index": 18,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        76,
-        134,
+        69,
+        129,
         239,
         240
       ],
@@ -1713,43 +1845,49 @@
         353,
         430
       ],
+      "sourceGlobalBounds": [
+        1369,
+        133,
+        1683,
+        430
+      ],
       "sourceSize": [
         314,
         297
       ],
       "foregroundPixels": 19858,
-      "mattePixels": 177278,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8dff8d8817df6cfba574ac7bb18108a288044ed1f34fef103d3a777c1ef9279e",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        148,
+        142,
         430
       ],
       "sourceLandmark": [
-        148,
-        286
+        142,
+        267
       ],
-      "sourceAnchorEvidence": "Attack pose 4 source and regenerated marked overlay inspected: pelvis (148,286) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 4: Low attack places the upper leg joint below/back of the outstretched torso. Landmark (142,267) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        109.0,
+        103.0,
         297.0
       ],
       "renderedAnchor": [
-        127.61464968152866,
+        128.34713375796179,
         240.0
       ],
       "index": 19,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        87,
-        129,
-        204,
+        88,
+        124,
+        211,
         240
       ],
       "magentaSpill": {
@@ -1783,43 +1921,49 @@
         442,
         430
       ],
+      "sourceGlobalBounds": [
+        108,
+        566,
+        442,
+        874
+      ],
       "sourceSize": [
         334,
         308
       ],
       "foregroundPixels": 18592,
-      "mattePixels": 178100,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "1997c95f56f369d0f4e18feb307f99bc1f48f6c80edd6e94b9b8bdfa18425a9e",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        152,
+        214,
         430
       ],
       "sourceLandmark": [
-        152,
-        290
+        214,
+        266
       ],
-      "sourceAnchorEvidence": "Attack pose 5 source and regenerated marked overlay inspected: pelvis (152,290) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 5: Large forward extension moves the real pelvis rightward; historical point at (152,290) lies in magenta, not in the body. Landmark (214,266) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        44.0,
+        106.0,
         308.0
       ],
       "renderedAnchor": [
-        128.46706586826346,
+        127.57485029940119,
         240.0
       ],
       "index": 20,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        112,
-        125,
-        237,
+        86,
+        120,
+        217,
         240
       ],
       "magentaSpill": {
@@ -1853,43 +1997,49 @@
         381,
         430
       ],
+      "sourceGlobalBounds": [
+        567,
+        570,
+        825,
+        874
+      ],
       "sourceSize": [
         258,
         304
       ],
       "foregroundPixels": 19309,
-      "mattePixels": 176940,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3f4bd3343dd7f0253548e705319a60780d3ebb54bbda23c783347481bc868ac6",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        170,
+        173,
         430
       ],
       "sourceLandmark": [
-        170,
-        300
+        173,
+        269
       ],
-      "sourceAnchorEvidence": "Attack pose 6 source and regenerated marked overlay inspected: pelvis (170,300) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 6: Recovery upper femur joins the lower trunk above the sharply bent knee. Landmark (173,269) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        47.0,
+        50.0,
         304.0
       ],
       "renderedAnchor": [
-        128.48837209302326,
+        127.57364341085271,
         240.0
       ],
       "index": 21,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        111,
-        126,
-        207,
+        108,
+        121,
+        209,
         240
       ],
       "magentaSpill": {
@@ -1923,43 +2073,49 @@
         265,
         430
       ],
+      "sourceGlobalBounds": [
+        1013,
+        548,
+        1152,
+        874
+      ],
       "sourceSize": [
         139,
         326
       ],
       "foregroundPixels": 17185,
-      "mattePixels": 179064,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "cf0b1b576f33f226c8ca4fd7628f0547ab19c84e03bdc7156f8b6028b2e12e0a",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        190,
+        164,
         430
       ],
       "sourceLandmark": [
-        190,
-        321
+        164,
+        275
       ],
-      "sourceAnchorEvidence": "Attack pose 7 source and regenerated marked overlay inspected: pelvis (190,321) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 7: Recovering crouch has the hip behind the forward near thigh. Landmark (164,275) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        64.0,
+        38.0,
         326.0
       ],
       "renderedAnchor": [
-        127.94244604316546,
+        127.76258992805755,
         240.0
       ],
       "index": 22,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
-        104,
-        118,
-        156,
+        113,
+        113,
+        167,
         240
       ],
       "magentaSpill": {
@@ -1993,43 +2149,49 @@
         183,
         430
       ],
+      "sourceGlobalBounds": [
+        1400,
+        526,
+        1513,
+        874
+      ],
       "sourceSize": [
         113,
         348
       ],
       "foregroundPixels": 16791,
-      "mattePixels": 179901,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "24c80363b60f9e1fe0cf2606d590d2acbecaaa9f847967aca1d230febf896038",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        135,
+        119,
         430
       ],
       "sourceLandmark": [
-        135,
-        320
+        119,
+        259
       ],
-      "sourceAnchorEvidence": "Attack pose 8 source and regenerated marked overlay inspected: pelvis (135,320) projects to complete extracted support/contact guard y=430; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "attack pose 8: Rear proximal leg attachment below the upright recovering torso, not the extended lower knee. Landmark (119,259) projects to support y=430. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        65.0,
+        49.0,
         348.0
       ],
       "renderedAnchor": [
-        128.15929203539824,
+        128.0796460176991,
         240.0
       ],
       "index": 23,
-      "scale": 0.357245493,
-      "sourceScale": 1.046164,
-      "appliedScale": 0.373737374,
+      "scale": 0.364967761,
+      "sourceScale": 1.070903,
+      "appliedScale": 0.39084507,
       "renderedBounds": [
+        109,
         104,
-        110,
-        146,
+        153,
         240
       ],
       "magentaSpill": {
@@ -2063,42 +2225,48 @@
         277,
         429
       ],
+      "sourceGlobalBounds": [
+        157,
+        73,
+        277,
+        429
+      ],
       "sourceSize": [
         120,
         356
       ],
       "foregroundPixels": 18387,
-      "mattePixels": 178749,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "c87d30dd60515a10a1c98acc09d4923772e2b54bd691ac5fbd226697182fba77",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        204,
+        212,
         429
       ],
       "sourceLandmark": [
-        204,
-        314
+        212,
+        250
       ],
-      "sourceAnchorEvidence": "Death pose 1 source and regenerated marked overlay inspected: pelvis (204,314) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 1: Still-upright proximal thigh attachment below the narrow abdomen. Landmark (212,250) projects to support y=429. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        47.0,
+        55.0,
         356.0
       ],
       "renderedAnchor": [
-        127.84166666666667,
+        128.0,
         240.0
       ],
       "index": 24,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        111,
-        113,
+        106,
+        98,
         154,
         240
       ],
@@ -2133,43 +2301,49 @@
         335,
         421
       ],
+      "sourceGlobalBounds": [
+        462,
+        100,
+        779,
+        421
+      ],
       "sourceSize": [
         317,
         321
       ],
       "foregroundPixels": 19398,
-      "mattePixels": 177294,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "87a83f92997bda4871fe443f01bc5e9355a2f91cd76fa9ee661d06df486d71ea",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        183,
+        163,
         427
       ],
       "sourceLandmark": [
-        183,
-        285
+        163,
+        240
       ],
-      "sourceAnchorEvidence": "Death pose 2 source and regenerated marked overlay inspected: pelvis (183,285) projects to the adjacent grounded contact plane y=427, below airborne sourceBounds[3]=421 and preserving the visible fall gap.",
+      "sourceAnchorEvidence": "death pose 2: Backwards fall: hip is at the bent waist-to-thigh junction, not the raised knee; projected floor remains inferred from neighbouring grounded poses. Landmark (163,240) projects to support y=427. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        165.0,
+        145.0,
         327.0
       ],
       "renderedAnchor": [
-        127.81703470031546,
-        240.13084112149534
+        128.09148264984228,
+        240.39252336448598
       ],
       "index": 25,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        69,
-        124,
-        182,
+        70,
+        110,
+        197,
         238
       ],
       "magentaSpill": {
@@ -2203,44 +2377,50 @@
         356,
         415
       ],
+      "sourceGlobalBounds": [
+        899,
+        174,
+        1243,
+        415
+      ],
       "sourceSize": [
         344,
         241
       ],
       "foregroundPixels": 19270,
-      "mattePixels": 177422,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6c1d491dc44b2e8967f62f9bae7331b15fae9300902ff1c07f08b4db023b7908",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        207,
+        169,
         427
       ],
       "sourceLandmark": [
-        207,
-        288
+        169,
+        309
       ],
-      "sourceAnchorEvidence": "Death pose 3 source and regenerated marked overlay inspected: pelvis (207,288) projects to the adjacent grounded contact plane y=427, below airborne sourceBounds[3]=415 and preserving the visible fall gap.",
+      "sourceAnchorEvidence": "death pose 3: Falling body: visible lower trunk-to-proximal femur junction, with the support plane retained below the airborne feet. Landmark (169,309) projects to support y=427. Manual contour uncertainty +/-10px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        195.0,
+        157.0,
         253.0
       ],
       "renderedAnchor": [
-        127.72383720930233,
-        240.28215767634856
+        127.98255813953489,
+        239.78008298755185
       ],
       "index": 26,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        58,
-        150,
-        181,
-        236
+        65,
+        139,
+        203,
+        235
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2273,43 +2453,49 @@
         348,
         429
       ],
+      "sourceGlobalBounds": [
+        1341,
+        227,
+        1678,
+        429
+      ],
       "sourceSize": [
         337,
         202
       ],
       "foregroundPixels": 19346,
-      "mattePixels": 177790,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "93cbd12ebd30105d7f6698227e37760fe7da44405c105628515fee6c51293072",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        183,
+        193,
         429
       ],
       "sourceLandmark": [
-        183,
-        305
+        193,
+        402
       ],
-      "sourceAnchorEvidence": "Death pose 4 source and regenerated marked overlay inspected: pelvis (183,305) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 4: On the back: the rounded posterior pelvis meets the raised proximal femur near the floor. Historical point (183,305) was background above the body; overlap warrants 14px uncertainty. Landmark (193,402) projects to support y=429. Manual contour uncertainty +/-14px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        172.0,
+        182.0,
         202.0
       ],
       "renderedAnchor": [
-        128.24629080118694,
+        127.90801186943621,
         240.0
       ],
       "index": 27,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        67,
-        168,
-        187,
+        55,
+        159,
+        190,
         240
       ],
       "magentaSpill": {
@@ -2343,43 +2529,49 @@
         387,
         429
       ],
+      "sourceGlobalBounds": [
+        81,
+        732,
+        387,
+        873
+      ],
       "sourceSize": [
         306,
         141
       ],
       "foregroundPixels": 15436,
-      "mattePixels": 181256,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9fa94aef54444fb6b37c140e10114dee249a86e0651487e3d9cba1ff44e4291b",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        235,
+        228,
         429
       ],
       "sourceLandmark": [
-        235,
-        361
+        228,
+        330
       ],
-      "sourceAnchorEvidence": "Death pose 5 source and regenerated marked overlay inspected: pelvis (235,361) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 5: Rebounding/prone rotation: rounded upper hip crest joins the folded thigh behind the lowered ribcage. Landmark (228,330) projects to support y=429. Manual contour uncertainty +/-12px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        154.0,
+        147.0,
         141.0
       ],
       "renderedAnchor": [
-        127.8562091503268,
+        127.6078431372549,
         240.0
       ],
       "index": 28,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        73,
-        190,
-        182,
+        69,
+        184,
+        191,
         240
       ],
       "magentaSpill": {
@@ -2413,43 +2605,49 @@
         364,
         429
       ],
+      "sourceGlobalBounds": [
+        481,
+        762,
+        808,
+        873
+      ],
       "sourceSize": [
         327,
         111
       ],
       "foregroundPixels": 15551,
-      "mattePixels": 180698,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "56bf8b8e0156e5f5edf4031ee43a3810e10f5d4bc77e3145bae4db6cd7ac0250",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        213,
+        195,
         429
       ],
       "sourceLandmark": [
-        213,
-        372
+        195,
+        340
       ],
-      "sourceAnchorEvidence": "Death pose 6 source and regenerated marked overlay inspected: pelvis (213,372) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 6: Prone lowering: posterior trunk ends at the proximal flexed thigh; overlapping far limb warrants 12px uncertainty. Landmark (195,340) projects to support y=429. Manual contour uncertainty +/-12px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        176.0,
+        158.0,
         111.0
       ],
       "renderedAnchor": [
-        127.97247706422019,
+        128.29663608562691,
         240.0
       ],
       "index": 29,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
         65,
-        200,
-        182,
+        196,
+        196,
         240
       ],
       "magentaSpill": {
@@ -2483,43 +2681,49 @@
         407,
         429
       ],
+      "sourceGlobalBounds": [
+        901,
+        793,
+        1294,
+        873
+      ],
       "sourceSize": [
         393,
         80
       ],
       "foregroundPixels": 14541,
-      "mattePixels": 181708,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "80f1ef7a0c34f5702c89c09dad5179dce69dfda43024d3410c7559536f19866c",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        225,
+        182,
         429
       ],
       "sourceLandmark": [
-        225,
-        390
+        182,
+        381
       ],
-      "sourceAnchorEvidence": "Death pose 7 source and regenerated marked overlay inspected: pelvis (225,390) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 7: Near-final prone pose: posterior pelvis-to-thigh hinge is just behind the ribcage, rather than the right-side body/head mass. Landmark (182,381) projects to support y=429. Manual contour uncertainty +/-12px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        211.0,
+        168.0,
         80.0
       ],
       "renderedAnchor": [
-        128.16539440203562,
+        128.1145038167939,
         240.0
       ],
       "index": 30,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        53,
-        211,
-        193,
+        61,
+        208,
+        218,
         240
       ],
       "magentaSpill": {
@@ -2553,43 +2757,49 @@
         410,
         429
       ],
+      "sourceGlobalBounds": [
+        1342,
+        808,
+        1740,
+        873
+      ],
       "sourceSize": [
         398,
         65
       ],
       "foregroundPixels": 13006,
-      "mattePixels": 183686,
       "alphaProcessing": "v65-border-connected-magenta-key",
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3f64b26239a52639507591d165266dcad215f17cebc891c27976b5b660165d07",
+      "sourceOwnershipTransfers": [],
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
-        225,
+        187,
         429
       ],
       "sourceLandmark": [
-        225,
-        397
+        187,
+        389
       ],
-      "sourceAnchorEvidence": "Death pose 8 source and regenerated marked overlay inspected: pelvis (225,397) projects to complete extracted support/contact guard y=429; runtime audit confirms sourceBounds[3]-anchorY=0.",
+      "sourceAnchorEvidence": "death pose 8: Terminal prone pose: low pelvic hinge behind the ribcage; folded thigh overlaps its contour, so 12px uncertainty is retained. Landmark (187,389) projects to support y=429. Manual contour uncertainty +/-12px in source space.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        213.0,
+        175.0,
         65.0
       ],
       "renderedAnchor": [
-        127.99497487437186,
+        127.91206030150754,
         240.0
       ],
       "index": 31,
-      "scale": 0.357245493,
-      "sourceScale": 0.997424,
-      "appliedScale": 0.356325228,
+      "scale": 0.364967761,
+      "sourceScale": 1.096555,
+      "appliedScale": 0.400207223,
       "renderedBounds": [
-        52,
+        58,
+        214,
         217,
-        194,
         240
       ],
       "magentaSpill": {
@@ -2613,482 +2823,482 @@
       {
         "index": 0,
         "alphaBounds": [
-          112,
-          109,
-          153,
+          108,
+          106,
+          149,
           239
         ],
-        "foregroundPixels": 2523,
+        "foregroundPixels": 2584,
         "width": 41,
-        "height": 130,
-        "relativeToRowMedian": 0.967223
+        "height": 133,
+        "relativeToRowMedian": 0.943238
       },
       {
         "index": 1,
         "alphaBounds": [
-          106,
-          110,
-          150,
+          100,
+          107,
+          145,
           239
         ],
-        "foregroundPixels": 2706,
-        "width": 44,
-        "height": 129,
-        "relativeToRowMedian": 1.037378
+        "foregroundPixels": 2810,
+        "width": 45,
+        "height": 132,
+        "relativeToRowMedian": 1.025735
       },
       {
         "index": 2,
         "alphaBounds": [
-          106,
-          120,
-          153,
+          111,
+          118,
+          159,
           239
         ],
-        "foregroundPixels": 2551,
-        "width": 47,
-        "height": 119,
-        "relativeToRowMedian": 0.977957
+        "foregroundPixels": 2669,
+        "width": 48,
+        "height": 121,
+        "relativeToRowMedian": 0.974265
       },
       {
         "index": 3,
         "alphaBounds": [
-          105,
-          111,
+          103,
+          108,
           154,
           239
         ],
-        "foregroundPixels": 2666,
-        "width": 49,
-        "height": 128,
-        "relativeToRowMedian": 1.022043
+        "foregroundPixels": 2824,
+        "width": 51,
+        "height": 131,
+        "relativeToRowMedian": 1.030845
       },
       {
         "index": 4,
         "alphaBounds": [
-          112,
-          126,
-          169,
+          124,
+          123,
+          182,
           239
         ],
-        "foregroundPixels": 2600,
-        "width": 57,
-        "height": 113,
-        "relativeToRowMedian": 1.002313
+        "foregroundPixels": 2726,
+        "width": 58,
+        "height": 116,
+        "relativeToRowMedian": 1.008136
       },
       {
         "index": 5,
         "alphaBounds": [
-          104,
-          126,
-          156,
+          115,
+          124,
+          168,
           239
         ],
-        "foregroundPixels": 2608,
-        "width": 52,
-        "height": 113,
-        "relativeToRowMedian": 1.005397
+        "foregroundPixels": 2691,
+        "width": 53,
+        "height": 115,
+        "relativeToRowMedian": 0.995192
       },
       {
         "index": 6,
         "alphaBounds": [
-          105,
-          136,
-          161,
+          119,
+          133,
+          176,
           239
         ],
-        "foregroundPixels": 2588,
-        "width": 56,
-        "height": 103,
-        "relativeToRowMedian": 0.997687
+        "foregroundPixels": 2717,
+        "width": 57,
+        "height": 106,
+        "relativeToRowMedian": 1.004808
       },
       {
         "index": 7,
         "alphaBounds": [
-          108,
-          112,
-          153,
+          116,
+          109,
+          161,
           239
         ],
-        "foregroundPixels": 2551,
+        "foregroundPixels": 2665,
         "width": 45,
-        "height": 127,
-        "relativeToRowMedian": 0.983423
+        "height": 130,
+        "relativeToRowMedian": 0.985577
       },
       {
         "index": 8,
         "alphaBounds": [
-          107,
-          101,
-          153,
+          113,
+          98,
+          160,
           239
         ],
-        "foregroundPixels": 2759,
-        "width": 46,
-        "height": 138,
-        "relativeToRowMedian": 0.913727
+        "foregroundPixels": 2856,
+        "width": 47,
+        "height": 141,
+        "relativeToRowMedian": 0.909844
       },
       {
         "index": 9,
         "alphaBounds": [
-          92,
-          104,
-          162,
+          98,
+          101,
+          169,
           239
         ],
-        "foregroundPixels": 2978,
-        "width": 70,
-        "height": 135,
-        "relativeToRowMedian": 0.986256
+        "foregroundPixels": 3083,
+        "width": 71,
+        "height": 138,
+        "relativeToRowMedian": 0.98216
       },
       {
         "index": 10,
         "alphaBounds": [
-          91,
-          110,
-          163,
+          96,
+          107,
+          170,
           239
         ],
-        "foregroundPixels": 3061,
-        "width": 72,
-        "height": 129,
-        "relativeToRowMedian": 1.013744
+        "foregroundPixels": 3195,
+        "width": 74,
+        "height": 132,
+        "relativeToRowMedian": 1.01784
       },
       {
         "index": 11,
         "alphaBounds": [
-          87,
-          112,
-          164,
+          92,
+          109,
+          171,
           239
         ],
-        "foregroundPixels": 3135,
-        "width": 77,
-        "height": 127,
-        "relativeToRowMedian": 1.038251
+        "foregroundPixels": 3310,
+        "width": 79,
+        "height": 130,
+        "relativeToRowMedian": 1.054476
       },
       {
         "index": 12,
         "alphaBounds": [
-          108,
-          126,
-          163,
+          119,
+          123,
+          176,
           239
         ],
-        "foregroundPixels": 2571,
-        "width": 55,
-        "height": 113,
-        "relativeToRowMedian": 1.027783
+        "foregroundPixels": 2717,
+        "width": 57,
+        "height": 116,
+        "relativeToRowMedian": 1.031903
       },
       {
         "index": 13,
         "alphaBounds": [
-          88,
-          125,
-          173,
+          97,
+          122,
+          184,
           239
         ],
-        "foregroundPixels": 2834,
-        "width": 85,
-        "height": 114,
-        "relativeToRowMedian": 1.13292
+        "foregroundPixels": 2959,
+        "width": 87,
+        "height": 117,
+        "relativeToRowMedian": 1.123813
       },
       {
         "index": 14,
         "alphaBounds": [
-          108,
-          120,
-          146,
+          115,
+          117,
+          154,
           239
         ],
-        "foregroundPixels": 2365,
-        "width": 38,
-        "height": 119,
-        "relativeToRowMedian": 0.945433
+        "foregroundPixels": 2485,
+        "width": 39,
+        "height": 122,
+        "relativeToRowMedian": 0.94379
       },
       {
         "index": 15,
         "alphaBounds": [
-          101,
-          111,
-          144,
+          105,
+          108,
+          149,
           239
         ],
-        "foregroundPixels": 2432,
-        "width": 43,
-        "height": 128,
-        "relativeToRowMedian": 0.972217
+        "foregroundPixels": 2549,
+        "width": 44,
+        "height": 131,
+        "relativeToRowMedian": 0.968097
       },
       {
         "index": 16,
         "alphaBounds": [
-          109,
-          107,
-          154,
+          108,
+          101,
+          155,
           239
         ],
-        "foregroundPixels": 2867,
-        "width": 45,
-        "height": 132,
-        "relativeToRowMedian": 0.942627
+        "foregroundPixels": 3102,
+        "width": 47,
+        "height": 138,
+        "relativeToRowMedian": 0.932932
       },
       {
         "index": 17,
         "alphaBounds": [
-          88,
-          118,
-          161,
+          97,
+          112,
+          173,
           239
         ],
-        "foregroundPixels": 2981,
-        "width": 73,
-        "height": 121,
-        "relativeToRowMedian": 0.980108
+        "foregroundPixels": 3282,
+        "width": 76,
+        "height": 127,
+        "relativeToRowMedian": 0.987068
       },
       {
         "index": 18,
         "alphaBounds": [
-          77,
-          135,
+          70,
+          130,
           238,
           239
         ],
-        "foregroundPixels": 3102,
-        "width": 161,
-        "height": 104,
-        "relativeToRowMedian": 1.019892
+        "foregroundPixels": 3368,
+        "width": 168,
+        "height": 109,
+        "relativeToRowMedian": 1.012932
       },
       {
         "index": 19,
         "alphaBounds": [
-          88,
-          130,
-          203,
+          89,
+          125,
+          210,
           239
         ],
-        "foregroundPixels": 3140,
-        "width": 115,
-        "height": 109,
-        "relativeToRowMedian": 1.032385
+        "foregroundPixels": 3432,
+        "width": 121,
+        "height": 114,
+        "relativeToRowMedian": 1.03218
       },
       {
         "index": 20,
         "alphaBounds": [
-          113,
-          126,
-          236,
+          87,
+          121,
+          216,
           239
         ],
-        "foregroundPixels": 2920,
-        "width": 123,
-        "height": 113,
-        "relativeToRowMedian": 1.037669
+        "foregroundPixels": 3179,
+        "width": 129,
+        "height": 118,
+        "relativeToRowMedian": 1.042124
       },
       {
         "index": 21,
         "alphaBounds": [
-          112,
-          127,
-          206,
+          109,
+          122,
+          208,
           239
         ],
-        "foregroundPixels": 3057,
-        "width": 94,
-        "height": 112,
-        "relativeToRowMedian": 1.086354
+        "foregroundPixels": 3351,
+        "width": 99,
+        "height": 117,
+        "relativeToRowMedian": 1.098508
       },
       {
         "index": 22,
         "alphaBounds": [
-          105,
-          119,
-          155,
+          114,
+          114,
+          166,
           239
         ],
-        "foregroundPixels": 2708,
-        "width": 50,
-        "height": 120,
-        "relativeToRowMedian": 0.962331
+        "foregroundPixels": 2922,
+        "width": 52,
+        "height": 125,
+        "relativeToRowMedian": 0.957876
       },
       {
         "index": 23,
         "alphaBounds": [
+          110,
           105,
-          111,
-          145,
+          152,
           239
         ],
-        "foregroundPixels": 2610,
-        "width": 40,
-        "height": 128,
-        "relativeToRowMedian": 0.927505
+        "foregroundPixels": 2837,
+        "width": 42,
+        "height": 134,
+        "relativeToRowMedian": 0.930011
       },
       {
         "index": 24,
         "alphaBounds": [
-          112,
-          113,
+          107,
+          99,
           153,
           239
         ],
-        "foregroundPixels": 2643,
-        "width": 41,
-        "height": 126,
-        "relativeToRowMedian": 0.951062
+        "foregroundPixels": 3239,
+        "width": 46,
+        "height": 140,
+        "relativeToRowMedian": 0.937211
       },
       {
         "index": 25,
         "alphaBounds": [
-          70,
-          125,
-          181,
+          71,
+          111,
+          196,
           237
         ],
-        "foregroundPixels": 2796,
-        "width": 111,
-        "height": 112,
-        "relativeToRowMedian": 1.006117
+        "foregroundPixels": 3472,
+        "width": 125,
+        "height": 126,
+        "relativeToRowMedian": 1.00463
       },
       {
         "index": 26,
         "alphaBounds": [
-          59,
-          151,
-          180,
-          235
+          66,
+          140,
+          202,
+          234
         ],
-        "foregroundPixels": 2784,
-        "width": 121,
-        "height": 84,
-        "relativeToRowMedian": 1.001799
+        "foregroundPixels": 3444,
+        "width": 136,
+        "height": 94,
+        "relativeToRowMedian": 0.996528
       },
       {
         "index": 27,
         "alphaBounds": [
-          68,
-          169,
-          186,
+          56,
+          160,
+          189,
           239
         ],
-        "foregroundPixels": 2774,
-        "width": 118,
-        "height": 70,
-        "relativeToRowMedian": 0.998201
+        "foregroundPixels": 3468,
+        "width": 133,
+        "height": 79,
+        "relativeToRowMedian": 1.003472
       },
       {
         "index": 28,
         "alphaBounds": [
-          74,
-          191,
-          181,
+          70,
+          185,
+          190,
           239
         ],
-        "foregroundPixels": 2161,
-        "width": 107,
-        "height": 48,
-        "relativeToRowMedian": 1.029293
+        "foregroundPixels": 2695,
+        "width": 120,
+        "height": 54,
+        "relativeToRowMedian": 1.038536
       },
       {
         "index": 29,
         "alphaBounds": [
           66,
-          201,
-          182,
+          197,
+          195,
           239
         ],
-        "foregroundPixels": 2227,
-        "width": 116,
-        "height": 38,
-        "relativeToRowMedian": 1.060729
+        "foregroundPixels": 2727,
+        "width": 129,
+        "height": 42,
+        "relativeToRowMedian": 1.050867
       },
       {
         "index": 30,
         "alphaBounds": [
-          54,
-          212,
-          192,
+          62,
+          209,
+          217,
           239
         ],
-        "foregroundPixels": 2038,
-        "width": 138,
-        "height": 27,
-        "relativeToRowMedian": 0.970707
+        "foregroundPixels": 2495,
+        "width": 155,
+        "height": 30,
+        "relativeToRowMedian": 0.961464
       },
       {
         "index": 31,
         "alphaBounds": [
-          53,
-          218,
-          193,
+          59,
+          215,
+          216,
           239
         ],
-        "foregroundPixels": 1790,
-        "width": 140,
-        "height": 21,
-        "relativeToRowMedian": 0.852584
+        "foregroundPixels": 2241,
+        "width": 157,
+        "height": 24,
+        "relativeToRowMedian": 0.863584
       }
     ],
     "rowMedianForegroundPixels": [
-      2608.5,
-      2594.0,
-      3019.5,
-      2501.5,
-      3041.5,
-      2814.0,
-      2779.0,
-      2099.5
+      2739.5,
+      2704.0,
+      3139.0,
+      2633.0,
+      3325.0,
+      3050.5,
+      3456.0,
+      2595.0
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "d2e092c7476d155162bbc6a3b106d86cf5e6d77538866f4c580e493c57bb9773",
-      "aadc3a2abc5c2fab7f4043b55d210e9011ae3f5c9dd52559b93565043ea65402",
-      "6674e9e1f2504c3bb339e909806f300df4073d68d076692ac53d34f7a6de1a84",
-      "c19d76b3c4a256a3de762c8d5d72f5ce0bb89158d4b1ee3a6880c2a5adbc8cce",
-      "387a2c77cb56d937048c909ffed3ebb2628ef3263650033c5f91fb9c390a1d0d",
-      "b3fa3ec047a71b10547da297699585d4cbf26c6307dd2323d313ebdc6ea3477f",
-      "8d982c6967dff1268054e27e4b808535eb8960a86df8cc5dc69add8f07ff1e3a",
-      "89babc1984a0961d17b9a845c6ab11418f0fb7890527fee963f44c60ad81fece",
-      "534664eba26bce7c44c4a04353c449383037a5b520ea3a35cbc8a3e0032658f8",
-      "7be1cff7d84489b7259dbd4b8b583d37e6aa03079d02c61c227b32398c3d5277",
-      "ada16e9ec15978cd40d2a89262eb5a4a2fae44968491915827cd5761ee8e695a",
-      "1f7a8aff9cc8f08d8375c9445dbf67f1a488439c443b8a79d0f2e166e03bb11a",
-      "ab4ca2ca2e19f6fe179ce103fcc5c5c0f2ca3210a1b849f901dc1555fbed58a4",
-      "221a34c0930ae667b13e70bb315f3190364ec44de5eeaa3382b37e534ac36db7",
-      "e0b78dd73b0af3de4270c350bc93d19b0b466a6b2532583005ad58e2286076a7",
-      "921318a70dc35764fd27a139675d57d3e53c83799d541760176f961f137c6129",
-      "ace2595056ffda92106dae7fc0e0bae67583fb32195a03224283f3585da45c19",
-      "de1f710d42a2ac7cc6bbd207f2e9af795948460f540cd3c203c3308c39b6a9de",
-      "044df3af0e71f94f539125901998e3ee050e0b319f6562d6710139701e3c25c7",
-      "a5ca8d79115a41e9e93eb25cfe4b9ba25241a1fd18691592095e172fb6af1d7b",
-      "b76891ef0f06364efe2884e9061c5a1f1dc087fccbee6de956d394f585c46078",
-      "fe537095a769f7d2a622426ae5b11243e95e3b55e77f60df5cf8bec4bfa38fc5",
-      "9e592ab6e77ed27c4d5ffe35254d57826da0f7a3b088d69055d6a6e7c8331422",
-      "2cf8429b7dd9b9ef95c40996769c3043b1038172294c2bc7845dde852fade4c7",
-      "154739f59230e5c823beb03f98e5dba6e602961cef9e0a519fd4f920d65db42f",
-      "156c2d8b1b7acd175ccdac1f0d2f15da42018221872b71a7582eeddc123238dc",
-      "96865319eda2c513856d5be40d25d7bd0089f584c23978982a48435dd58dd6fd",
-      "52b066d0c3c698718525f7d6d197aefb12cdb685c3a31985264c62592cda471d",
-      "0b4db5220a2d53c8d340a98b7a1ef05d5896d528de0660174963dd1c4d1fd49a",
-      "b7b9e5c20cd84221562b9e453694caca60325a10f7a6f99b9b11d039be5b62b6",
-      "d3976ede5bcfedd39d8f01a531215f885f0af11b11338c49fa56ecbc1f9e476f",
-      "bf2d9d9a99a530ef05d95f9b98dc5390679cb4803afd0a29abd163250c5303b2"
+      "232b1b94a3df0b703a4b029e0097bd3d37c452014e3da9726c8430205c295c4a",
+      "be781d36abd3d10b330b50335b188380934dd2fe6bc2d5eaf992c492b2be21c8",
+      "98e0caef2244f4295a6428e337d39bbefc6912e33de52f5c8e07649fb84bef2f",
+      "96e91b0ab36015dbc635230057e4ff490fe1036be3a823c70ed5c7e334cfcc1f",
+      "0bb31c7969b508c01ee4047af62464f6e57ecfde06c7750679a96c20300c31c7",
+      "3323adb7b279a81da94e2ade85bb3dd72af5b04770d1dd82573d92673685a25d",
+      "5245a3a99eb72db954a63c39bcca89fa7f4eb896f74c6b8f29bf4fd6f7799209",
+      "f0893c7d912641e93b30719a5f080f10d2f3a1da5a989c5ed3d29f93fb62b019",
+      "0743aaebb81206a99698ced4241524ca597e04eb6861a401ddbee7198a1d6d70",
+      "4207c28e0a829dead6e07b7d7b21fa8ff03824bfc0403a546993abfc29e1d638",
+      "6ad6402a29dd38a606e01eb259e9b293b44bbb7695020d6d1b49edc05be678be",
+      "dc35dcf97afa8ce707558725cdf4cf3d0ebafcd0f4f6a2328ffce99a7a96cdda",
+      "6bb47ae1434484da421355ed7f8f6fafe9e782811018ecc3273736f145494d10",
+      "79503fb34f8a1c03ddee874b0aecb16a7994da2c670b9344545244df9dfc47d2",
+      "4081f90f7ae1df6eafdf17e5ed292a19ff61c3f4263529374d453a77f16d2480",
+      "585a0a3e1dbcb144c69dcb991a0ce6c8c3fa7f369108e3978baf26533750791e",
+      "12dc48467af842668dad4c1cc3998a5c679e011e6759981aca1a6073f212a28d",
+      "b50acaf1047db770f3a33fdd13557854d43be57a8ff64ae04a6a997b215b8f22",
+      "3bfc227f8eaeb6c257e3d46ff5385c2b10c422482c50704e856cbabc356fdb58",
+      "11cbff6642e81118e81453dc31b9d02a303325c407a7756c9c6e6235a3f43862",
+      "2ca7a16b93782310a05948ce6de505549a08c664f164f59c68be438284375277",
+      "6ca0216e77fa2dc17fad10777ec576d451d0f4cd01830468a72513f24634b2f8",
+      "cff63b558e5408e369fe18c0ee7567e9c934e26293bd74137f635d8a03be9019",
+      "6f1effedfffbb94b87c65e6af74d7c7e416606b541a185aa4360cf8b8ac2d69a",
+      "0019a7456eb9dc5aeed6a41e75385c9e886726ca288c778e801eb00e710f67cb",
+      "3d43d4b9ec79b72ea087ea0cf8496f28df75210037e95f5e25e2aef6bfe37ca7",
+      "6e7ce27c8c56a63b56421aab7ce67514111b65786054771b3038b9d2c325eaca",
+      "b3e858eb6374dc6c4aab227b55e35aec1c81565ebef2bf33f94b14a5baaf8fc8",
+      "d362d104819fa20fbf8252f9d0bba3ec3e3b9eac2e289a3f21a17f3dad7d6b57",
+      "37953bec414d417ab735b4cb52e043026bc4c0d2abeb439efe6832242610c863",
+      "08054e25e6b3392cfe47f3bc9e316595e3e1a6af1f9ce619242c74204f2d2b6c",
+      "a89f58787d11ff72790caf3c1badec80b86ca7fbc96a93e957c3771e45123850"
     ],
     "visualFidelityCertified": false
   },
   "postGenerationScaleReview": {
-    "path": "docs/references/V66_BATCH_003_SCALE_REVIEW.json",
-    "sha256": "72e2c9eb391696e8414b6f64d880c86d3df796f9e70eee0da6d71ce695e5ec76",
+    "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line.scale-review.fragment.json",
+    "sha256": "470abb81a0628e0073f59f404042ada9d894a4486e5228899a42e9acfafd88ca",
     "status": "reviewed",
     "profileId": "enemy-036-deacon-line",
-    "reviewer": "Codex /root/produce_arcology_lurker",
-    "reviewedAt": "2026-09-01",
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
     "coordinates": "nominal-source-cell",
     "baselineClip": "idle",
     "sourceScaleByClip": {
       "idle": 1,
-      "move": 1.038739,
-      "attack": 1.046164,
-      "death": 0.997424
+      "move": 1.042041,
+      "attack": 1.070903,
+      "death": 1.096555
     },
     "sourceSha256ByClip": {
       "idle": "69f8cc60fe0b2f60eceb5cfd422543f9d4564f8105896f4021e59104bf9c95ce",
@@ -3099,22 +3309,26 @@
     "measurementCount": 12,
     "evidence": [
       {
-        "path": "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/idle-scale-overlay.png",
-        "sha256": "cc5ca6924b9c1a49eb578c489a49efa487dda33ac50998e75df64f2b41ca9629"
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-idle-source-review.jpg",
+        "sha256": "598ee586e3933698a52870af9ebce00a15ac4177f5da7e82a9e3c841d47afe6d"
       },
       {
-        "path": "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/move-scale-overlay.png",
-        "sha256": "c3d8fcd5e324f13a5e20dbbae65e17ee9d479b6673506e4b32b07f5aa1725e52"
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-move-source-review.jpg",
+        "sha256": "1e48722bdd8dab1e12c9b4c25115c9315ddb2f8c07dd99f31dab0475c911ad32"
       },
       {
-        "path": "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/attack-scale-overlay.png",
-        "sha256": "a32d2bd9587c8414fa0f88a8baaf1e6e30edea05e9bfd1093768b196858f57b6"
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-attack-source-review.jpg",
+        "sha256": "b03de481ca5fc9a8b71ae9becaa92b5809830f68afb22ba150d4c13483d89d7c"
       },
       {
-        "path": "docs/references/v66-worklot-001-deacon-line-review/enemy-036-deacon-line/death-scale-overlay.png",
-        "sha256": "1637738ac17b8138447d8a61d81052c8a2046aa1f80a8c231f5347eac5ae5268"
+        "path": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line-death-source-review.jpg",
+        "sha256": "6130c3f4ee7c0c917435e52a85afa5182f28aa9a9204224ad5292823cedab69c"
       }
     ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line.anchor-review.fragment.json",
+    "scale": "docs/references/v73-next50-audit/035-036/enemy-036-deacon-line.scale-review.fragment.json"
   },
   "magentaSpill": {
     "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -3128,7 +3342,7 @@
     "frameCount": 32,
     "opaqueMatteFrameCount": 32,
     "nativeAlphaBypassedFrameCount": 0,
-    "neutralizedPixelCount": 7,
+    "neutralizedPixelCount": 12,
     "remainingStrictPixelCount": 0
   }
 }
