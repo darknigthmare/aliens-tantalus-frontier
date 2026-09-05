@@ -55,7 +55,8 @@ const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-003-chestburster', ['Chestburster', 'chestburster', 'enemy.chestburster.action']],
   ['enemy-004-drone-big-chap', ['Drone / Big Chap', 'xenoDrone', 'enemy.xenomorph-big-chap.action.v56']],
   ['enemy-005-warrior', ['Warrior', 'xenoWarrior', 'enemy.xenomorph-warrior.action.v56']],
-  ['enemy-006-runner', ['Runner', 'xenoRunner', 'enemy.xenomorph-runner.action']]
+  ['enemy-006-runner', ['Runner', 'xenoRunner', 'enemy.xenomorph-runner.action']],
+  ['enemy-020-k-series-yellow-xenomorph', ['K-Series Yellow Xenomorph', 'xenoWarrior', null]]
 ]);
 const readyV66ById = new Map(READY_ENEMY_PROFILE_REGISTRY_V66.map((profile) => [profile.profileId, profile]));
 const readyDedicatedById = new Map([...READY_ENEMY_PROFILE_REGISTRY_V65, ...READY_ENEMY_PROFILE_REGISTRY_V66]
@@ -75,8 +76,8 @@ test('le registre visuel couvre exactement les 55 archétypes du catalogue V64',
     const spriteKey = dedicated ? V66_STANDARD_IDENTITIES.get(enemy.id)?.[1] : legacySpriteKey;
     assert.equal(resolved.archetype, enemy.name);
     assert.equal(resolved.spriteKey, spriteKey, enemy.name);
-    assert.equal(resolved.imageKey, imageKey, enemy.name);
-    assert.equal(resolved.row, row, enemy.name);
+    assert.equal(resolved.imageKey, dedicated ? null : imageKey, enemy.name);
+    assert.equal(resolved.row, dedicated ? null : row, enemy.name);
     if (dedicated) {
       assert.equal(resolved.profileId, enemy.id);
       assert.equal(resolved.sheetId, `enemy.profile.${enemy.id}.v66`);
@@ -130,8 +131,8 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   const report = enemyVisualCoverageReport(ENEMIES);
   assert.equal(report.total, 571);
   assert.equal(report.uniqueArchetypes, 55);
-  assert.equal(report.modern, 538);
-  assert.equal(report.legacy, 33);
+  assert.equal(report.modern, 539);
+  assert.equal(report.legacy, 32);
   const expectedBySpriteKey = {
     ovomorph: 11, facehugger: 11, chestburster: 11, xenoBigChapV56: 11, xenoWarriorV56: 11,
     xenoRunner: 11, xenoPraetorian: 11, xenoQueenV56: 11, xenoCrusher: 11, xenoSpitter: 11,
@@ -159,7 +160,7 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
     }
   }
   assert.deepEqual(report.bySpriteKey, expectedBySpriteKey);
-  assert.deepEqual(report.byImageKey, { neuroXeno: 22, synthetic: 11 });
+  assert.deepEqual(report.byImageKey, { neuroXeno: 21, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
     exact: 30 - readyDedicatedById.size,
     'source-locked-adaptation': readyDedicatedById.size,
@@ -206,12 +207,38 @@ test('le Combat Synthetic ne devient jamais silencieusement un Working Joe', () 
 
 test('les identités neuro-xéno legacy utilisent des lignes fixes et ne retombent pas sur Drone', () => {
   const expectedRows = new Map([
-    ['Red Xenomorph', 0], ['K-Series Yellow Xenomorph', 1]
+    ['Red Xenomorph', 0],
+    ...ENEMIES.filter((enemy) => resolveEnemyArchetype(enemy) === 'K-Series Yellow Xenomorph'
+      && enemy.modifier !== 'Standard').map((enemy) => [enemy.name, 1])
   ]);
+  assert.equal(expectedRows.size, 11, 'Red standard et les dix variantes K-Series restent legacy');
   for (const [name, row] of expectedRows) {
     const resolved = resolveEnemyVisualProfile({ name, biology: 'xenomorph' });
     assert.deepEqual([resolved.spriteKey, resolved.imageKey, resolved.row], ['legacy', 'neuroXeno', row], name);
     assert.equal(resolveEnemyAnimation({ ...resolved, biology: 'xenomorph', alive: true }), null, name);
+  }
+});
+
+test('seul le standard K-Series 020 utilise ses quatre clips V66 sans emprunter le Warrior générique', () => {
+  const profileId = 'enemy-020-k-series-yellow-xenomorph';
+  const sheetId = `enemy.profile.${profileId}.v66`;
+  const standard = ENEMIES.find((enemy) => enemy.id === profileId);
+  assert.ok(standard);
+  for (const source of [standard, { name: standard.name, biology: standard.biology }]) {
+    const resolved = resolveEnemyVisualProfile(source);
+    assert.deepEqual([resolved.spriteKey, resolved.imageKey, resolved.row], ['xenoWarrior', null, null]);
+    assert.equal(resolved.profileId, profileId);
+    assert.equal(resolved.sheetId, sheetId);
+    assert.equal(resolved.identityStatus, 'source-locked-adaptation');
+    assert.equal(resolved.canonExact, false);
+    assert.equal(resolved.legacy, false);
+    for (const [state, clipId] of [
+      [{ alive: true }, 'idle'], [{ alive: true, vx: 30 }, 'move'],
+      [{ alive: true, attacking: true }, 'attack'], [{ alive: false }, 'death']
+    ]) {
+      assert.deepEqual(resolveEnemyAnimation({ ...resolved, visualSheetId: resolved.sheetId, ...state }),
+        { sheetId, clipId });
+    }
   }
 });
 

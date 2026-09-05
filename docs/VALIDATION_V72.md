@@ -31,4 +31,13 @@ Les régressions gameplay/narratives et36plans d'arène sont testés automatique
 
 ## Publication
 
-En attente de l'identifiant de commit et de la confirmation Vercel ; un build local ne vaut pas une mise en ligne.
+Commit `3ba7171` poussé sur `codex/v52-physical-worlds` du dépôt privé `darknigthmare/aliens-tantalus-frontier`.
+
+Déploiement de production Vercel confirmé **Ready** : `dpl_DKP44C7WG32WyaMA49mHPS3AaUho`, depuis le worktree de publication propre à ce commit.
+
+- Alias public : https://aliens-tantalus-frontier.vercel.app
+- `/`, `/build-info.json`, les modules V72 de comparaison et de placement des grandes créatures, ainsi que le WebP runtime de la table : HTTP 200.
+- `build-info.json` : version `72.0.0`, construction `2026-09-05T14:19:43.575Z`.
+- Master PNG V72 de la table : HTTP 404, exclusion de publication respectée.
+
+Ces vérifications concernent la V72 publiée. Les générations ennemies supplémentaires du 5 septembre sont des candidats séparés tant que leur acceptation et leur intégration ne sont pas prouvées.

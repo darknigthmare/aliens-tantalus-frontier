@@ -6,12 +6,12 @@
     {
       "profileId": "enemy-020-k-series-yellow-xenomorph",
       "atlasPath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
-      "atlasSha256": "c1cbe9ca1df5de1fd535c1fae1d0d4d6f847d6a1ee54e43529d1f09e8451e817",
-      "metadataSha256": "7e4fab907877e9494284034d3783631ee7a70d48f3343012941506d7383c4356",
+      "atlasSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+      "metadataSha256": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
       "contactPath": "docs/references/v66-batch-002-atlas-review/enemy-020-k-series-yellow-xenomorph.jpg",
-      "contactSha256": "13c4faa62e67bc63c903a9163e0472961dea81055b8b18d54eef322363ba9009",
+      "contactSha256": "cefb3378cc953495483678ce6b67c9d13ec9ce0566683c2f42438395aaeff154",
       "frameCount": 32,
-      "anchorStatus": "pending",
+      "anchorStatus": "reviewed",
       "visualReviewStatus": "pending-inspection",
       "sourcePixelsModified": 0
     }

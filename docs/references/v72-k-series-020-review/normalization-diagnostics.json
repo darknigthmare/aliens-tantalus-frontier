@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "reviewedAt": "2026-09-05",
+  "acceptedAutomatically": 0,
+  "runtimeIntegratedByThisReview": false,
+  "clips": {
+    "idle": {
+      "uniqueRgbaFrames": 8,
+      "strictMagentaPixelsByFrame": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gifFrames": 8,
+      "gifDurationsMs": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ],
+      "loopSeamOverMedianStepRgba": 1.095979,
+      "loopExpected": true
+    },
+    "move": {
+      "uniqueRgbaFrames": 8,
+      "strictMagentaPixelsByFrame": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gifFrames": 8,
+      "gifDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loopSeamOverMedianStepRgba": 0.922508,
+      "loopExpected": true
+    },
+    "attack": {
+      "uniqueRgbaFrames": 8,
+      "strictMagentaPixelsByFrame": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gifFrames": 8,
+      "gifDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "loopSeamOverMedianStepRgba": 0.844679,
+      "loopExpected": false
+    },
+    "death": {
+      "uniqueRgbaFrames": 8,
+      "strictMagentaPixelsByFrame": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gifFrames": 8,
+      "gifDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "loopSeamOverMedianStepRgba": 1.763298,
+      "loopExpected": false
+    }
+  },
+  "idleOpaqueBody": {
+    "alphaThreshold": 128,
+    "heightExcludesTail": true,
+    "frames": [
+      {
+        "frame": 0,
+        "craniumTopY": 109,
+        "supportBottomY": 238,
+        "inclusiveHeight": 130
+      },
+      {
+        "frame": 1,
+        "craniumTopY": 108,
+        "supportBottomY": 238,
+        "inclusiveHeight": 131
+      },
+      {
+        "frame": 2,
+        "craniumTopY": 111,
+        "supportBottomY": 238,
+        "inclusiveHeight": 128
+      },
+      {
+        "frame": 3,
+        "craniumTopY": 116,
+        "supportBottomY": 238,
+        "inclusiveHeight": 123
+      },
+      {
+        "frame": 4,
+        "craniumTopY": 113,
+        "supportBottomY": 238,
+        "inclusiveHeight": 126
+      },
+      {
+        "frame": 5,
+        "craniumTopY": 114,
+        "supportBottomY": 238,
+        "inclusiveHeight": 125
+      },
+      {
+        "frame": 6,
+        "craniumTopY": 113,
+        "supportBottomY": 238,
+        "inclusiveHeight": 126
+      },
+      {
+        "frame": 7,
+        "craniumTopY": 113,
+        "supportBottomY": 238,
+        "inclusiveHeight": 126
+      }
+    ],
+    "medianHeight": 126.0,
+    "firstFrameApproximateWidthExcludingTail": 84,
+    "manualWidthUncertaintyPx": 4
+  },
+  "strictSpillNeutralizedPixels": 77,
+  "staleOtherCandidateProofs": [
+    {
+      "profileId": "enemy-007-praetorian",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-008-queen",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-009-crusher",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "staleProofFields": [
+        "physicalAnchorReview",
+        "postGenerationScaleReview"
+      ]
+    },
+    {
+      "profileId": "enemy-011-lurker",
+      "staleProofFields": [
+        "physicalAnchorReview",
+        "postGenerationScaleReview"
+      ]
+    },
+    {
+      "profileId": "enemy-012-carrier",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-013-ravager",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-014-boiler",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-015-prowler",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-016-burster",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-017-monica-line",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-018-specimen-six-line",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-019-red-xenomorph",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-021-neuro-xeno-drone",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-022-xenoborg",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-023-atarax-ripper",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-024-ripper-queen",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-025-foundry-drone",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    },
+    {
+      "profileId": "enemy-026-foundry-crusher",
+      "staleProofFields": [
+        "physicalAnchorReview"
+      ]
+    }
+  ],
+  "fileSha256": {
+    "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+    "assets/openai/sprites/metadata/v66/enemy-020-k-series-yellow-xenomorph.json": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
+    "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json": "bfee05aa952eb24c3fd4a64906cb975d045a41bb08fa11dbb3908f22188c9034",
+    "docs/references/V66_BATCH_002_SCALE_REVIEW.json": "cfe843cdbd6afc139bb3d2376345eb85c1996e1630cc18d28d10871adc3e4dc6",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/idle.png": "83eef5901c0be909927f46243ff2458ae35b74c76731a5f7de4414fd933438ab",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/move.png": "f69d357baeda430e6b8214f2cd69cc9b5de15d60f8473d99c5738f45ed72abcc",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/attack.png": "d6e5a210f54637b7f26c43d451ad4788552655daa03268e561adebd627a57e98",
+    "assets/openai/sprites/frames/v66/batch-002/enemy-020-k-series-yellow-xenomorph/death.png": "a2c7dc6a1d91fa5f40818d266bc3c41446091cb1991efb7391e9ed5c3cb5bb15",
+    "docs/references/v72-k-series-020-review/anchor-review.fragment.json": "1663f3c3a76ab2f063ac74bd8bdb2059530bef199846c6f37d51b3d6a4f974ed",
+    "docs/references/v72-k-series-020-review/art-acceptance.json": "65b72f9460a15fccb04479c46bbf593a0cd508b91268210ed5a530f41036a474",
+    "docs/references/v72-k-series-020-review/attack-physical-scale-review.jpg": "eb4075dae9e420cd3934a4cfe5d9854a8d0c5c20e578f75b308e610164b5f887",
+    "docs/references/v72-k-series-020-review/audit-normalized.py": "f1109ae036f4b934ff31703688eccb4a994646e417304bdea4b4ed9c374d6240",
+    "docs/references/v72-k-series-020-review/death-physical-scale-review.jpg": "ddd155c372f104f29e02dfb8685ee7f7b469d49c290eddd8d7bd6f8b428f6445",
+    "docs/references/v72-k-series-020-review/idle-physical-scale-review.jpg": "0aff178dd4815f1905cdbe974f8a54b99a5647c4f635fef513ed0196d8516d7b",
+    "docs/references/v72-k-series-020-review/move-physical-scale-review.jpg": "0950e74973fd18164f35c7a2f09a344602195eba23e0b957c33c82c7ee754e65",
+    "docs/references/v72-k-series-020-review/render-review.py": "963bb611b3000d7772d935755c87722c3870260b9e4039d3465978d7cc128d3e",
+    "docs/references/v72-k-series-020-review/scale-review.fragment.json": "d5c122decadf83604826cd3e7e3eaaf1b2b416bea9012e0d22a2f2d201ea0cef",
+    "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/attack.webp": "4bf0320ef9ec391e5d2ad7599546f16547a3a7663de70d561f090eb8a4be89d5",
+    "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/death.webp": "424b0e987c71b8acac0d47f3a6b7da59e497ee28a5ac015934388d8d01fac344",
+    "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/idle.webp": "dc6601730e5a1ca4c2dfe9adcfa9191695df8cd3ccf16f4ea64b1080fc3b2e0e",
+    "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/move.webp": "a83b3e448f5e147fc2408f88307ddca83448656300eae4c765e405b313504a15",
+    "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/all.gif": "531baaea2ac01293c806e5771843c08ba3be10baebb3ee1e5bf72317b1ede254",
+    "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/attack.gif": "9ef80f1a17428dd7ecf4f90082838fb43b07a83cd20693b221f205d7c70caedc",
+    "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/death.gif": "ac9fdd125329da0632aaea0ab2491170920209912713449ca3bb85b14d9ecc24",
+    "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/idle.gif": "48bc56d886c8e5b72a10cd0918ff63a6a3a7ad69bb2bd9c030ec93ae2ebf007e",
+    "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/move.gif": "e8e3511ad9b7b90c2c5068d16ef1619f993035e8ef2245d0c706025da9f25eec",
+    "docs/references/v66-batch-002-atlas-review/enemy-020-k-series-yellow-xenomorph.jpg": "cefb3378cc953495483678ce6b67c9d13ec9ce0566683c2f42438395aaeff154",
+    "docs/references/v66-batch-002-atlas-review/enemy-020-k-series-yellow-xenomorph.json": "8ee670bb97875bf2675b8aec48bb4b8e3cfabc37e16a61ca126c0d1a654e79b9"
+  },
+  "limits": [
+    "Image-sequence diagnostics are not a live motion or combat acceptance.",
+    "Width is manually observed; height is a thresholded ROI measurement, not canonical metres."
+  ]
+}

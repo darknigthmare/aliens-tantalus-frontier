@@ -309,6 +309,22 @@ test('V72 final page restores keyboard focus to the first newly revealed card', 
   }
 });
 
+test('V72 playback controls precede the wrapping scale comparison for K-Series020', () => {
+  const { workbench, detail } = makeWorkbench();
+  try {
+    workbench.selectEntry('enemy-020-k-series-yellow-xenomorph');
+    const controls = detail.querySelector('[data-animation-controls]');
+    const comparison = detail.querySelector('[data-comparison-entry]');
+    assert.ok(controls && comparison);
+    const directChild = (node) => {
+      while (node.parentNode !== detail) node = node.parentNode;
+      return node;
+    };
+    assert.ok(detail.children.indexOf(directChild(controls)) < detail.children.indexOf(directChild(comparison)),
+      'the clip selector remains adjacent to its portrait when a fourth silhouette wraps');
+  } finally { workbench.destroy(); }
+});
+
 test('V72 identifies an unavailable sheet in its card, detail and comparison without fabricating art', () => {
   const { workbench, list, detail } = makeWorkbench();
   const id = 'enemy-019-red-xenomorph';

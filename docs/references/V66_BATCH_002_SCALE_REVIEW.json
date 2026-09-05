@@ -4,6 +4,133 @@
   "coordinates": "nominal-source-cell",
   "reviewScope": "Post-generation inter-clip cranial scale calibration authorized by the user on 2026-08-31. The factors do not alter generation reference locks or constitute artistic acceptance.",
   "profiles": {
+    "enemy-010-spitter": {
+      "status": "reviewed",
+      "reviewer": "Codex complete_royal",
+      "reviewedAt": "2026-08-31",
+      "note": "Three idle and first two death poses share a sufficiently comparable lateral head attitude. Longitudinal rigid cranial chord includes the back edge of the head shell and the forward blue-black dome tip, excluding teeth, yellow reservoir highlights, dorsal spines and arms. Death pose2 is excluded because yaw/foreshortening is greater. Move/attack are not calibrated in this pass because their head attitude and ridge shape differ; factors stay1, not a claim of verified equal size.",
+      "baselineClip": "idle",
+      "sourceSha256ByClip": {
+        "idle": "2bd3ac8fd02539ff39db3eb0f0c0f2a157b2b209f0300dc011b07bfda0cb8521",
+        "move": "2aa70bc08f3178397053eef92d3cbdd9a8b4f890a687bb57dca9b123f6de4815",
+        "attack": "d490c27134831a5444d97613263181b7dd45bd05e68160c6f84fcdfbc02750c7",
+        "death": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5"
+      },
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 1,
+        "attack": 1,
+        "death": 1.615297
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "endpoints": [
+            [
+              263,
+              120
+            ],
+            [
+              353,
+              201
+            ]
+          ],
+          "lengthPx": 121.0826,
+          "landmark": "rigid-cranial-length",
+          "uncertaintyPx": 4,
+          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "endpoints": [
+            [
+              253,
+              121
+            ],
+            [
+              348,
+              201
+            ]
+          ],
+          "lengthPx": 124.1974,
+          "landmark": "rigid-cranial-length",
+          "uncertaintyPx": 4,
+          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+        },
+        {
+          "clip": "idle",
+          "frame": 7,
+          "endpoints": [
+            [
+              209,
+              89
+            ],
+            [
+              302,
+              167
+            ]
+          ],
+          "lengthPx": 121.3796,
+          "landmark": "rigid-cranial-length",
+          "uncertaintyPx": 4,
+          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "endpoints": [
+            [
+              258,
+              188
+            ],
+            [
+              312,
+              238
+            ]
+          ],
+          "lengthPx": 73.5935,
+          "landmark": "rigid-cranial-length",
+          "uncertaintyPx": 4,
+          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+        },
+        {
+          "clip": "death",
+          "frame": 1,
+          "endpoints": [
+            [
+              247,
+              205
+            ],
+            [
+              296,
+              264
+            ]
+          ],
+          "lengthPx": 76.6942,
+          "landmark": "rigid-cranial-length",
+          "uncertaintyPx": 4,
+          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-idle.jpg",
+        "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-death.jpg"
+      ],
+      "medianLengthPxByClip": {
+        "idle": 121.3796,
+        "death": 75.14385
+      },
+      "calibratedClips": [
+        "idle",
+        "death"
+      ],
+      "unchangedUnreviewedClips": [
+        "move",
+        "attack"
+      ]
+    },
     "enemy-011-lurker": {
       "status": "reviewed",
       "reviewer": "Codex complete_royal",
@@ -260,23 +387,22 @@
       ],
       "unchangedUnreviewedClips": []
     },
-    "enemy-010-spitter": {
+    "enemy-020-k-series-yellow-xenomorph": {
       "status": "reviewed",
-      "reviewer": "Codex complete_royal",
-      "reviewedAt": "2026-08-31",
-      "note": "Three idle and first two death poses share a sufficiently comparable lateral head attitude. Longitudinal rigid cranial chord includes the back edge of the head shell and the forward blue-black dome tip, excluding teeth, yellow reservoir highlights, dorsal spines and arms. Death pose2 is excluded because yaw/foreshortening is greater. Move/attack are not calibrated in this pass because their head attitude and ridge shape differ; factors stay1, not a claim of verified equal size.",
+      "reviewer": "Codex gameplay_audit_fix V72",
+      "reviewedAt": "2026-09-05",
       "baselineClip": "idle",
-      "sourceSha256ByClip": {
-        "idle": "2bd3ac8fd02539ff39db3eb0f0c0f2a157b2b209f0300dc011b07bfda0cb8521",
-        "move": "2aa70bc08f3178397053eef92d3cbdd9a8b4f890a687bb57dca9b123f6de4815",
-        "attack": "d490c27134831a5444d97613263181b7dd45bd05e68160c6f84fcdfbc02750c7",
-        "death": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5"
-      },
       "sourceScaleByClip": {
         "idle": 1,
-        "move": 1,
-        "attack": 1,
-        "death": 1.615297
+        "move": 1.067263,
+        "attack": 1.04937,
+        "death": 1.115053
+      },
+      "sourceSha256ByClip": {
+        "idle": "83eef5901c0be909927f46243ff2458ae35b74c76731a5f7de4414fd933438ab",
+        "move": "f69d357baeda430e6b8214f2cd69cc9b5de15d60f8473d99c5738f45ed72abcc",
+        "attack": "d6e5a210f54637b7f26c43d451ad4788552655daa03268e561adebd627a57e98",
+        "death": "a2c7dc6a1d91fa5f40818d266bc3c41446091cb1991efb7391e9ed5c3cb5bb15"
       },
       "measurements": [
         {
@@ -284,108 +410,228 @@
           "frame": 0,
           "endpoints": [
             [
-              263,
-              120
+              213,
+              96
             ],
             [
-              353,
-              201
+              342,
+              147
             ]
           ],
-          "lengthPx": 121.0826,
-          "landmark": "rigid-cranial-length",
-          "uncertaintyPx": 4,
-          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+          "lengthPx": 138.7155,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
         },
         {
           "clip": "idle",
           "frame": 1,
           "endpoints": [
             [
-              253,
-              121
+              209,
+              99
             ],
             [
-              348,
-              201
+              340,
+              145
             ]
           ],
-          "lengthPx": 124.1974,
-          "landmark": "rigid-cranial-length",
-          "uncertaintyPx": 4,
-          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+          "lengthPx": 138.8416,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
         },
         {
           "clip": "idle",
-          "frame": 7,
+          "frame": 2,
           "endpoints": [
             [
-              209,
-              89
+              198,
+              103
             ],
             [
-              302,
+              325,
+              150
+            ]
+          ],
+          "lengthPx": 135.4179,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "endpoints": [
+            [
+              242,
+              114
+            ],
+            [
+              362,
               167
             ]
           ],
-          "lengthPx": 121.3796,
-          "landmark": "rigid-cranial-length",
-          "uncertaintyPx": 4,
-          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+          "lengthPx": 131.1831,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "move",
+          "frame": 1,
+          "endpoints": [
+            [
+              216,
+              143
+            ],
+            [
+              339,
+              185
+            ]
+          ],
+          "lengthPx": 129.9731,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "move",
+          "frame": 2,
+          "endpoints": [
+            [
+              192,
+              136
+            ],
+            [
+              313,
+              180
+            ]
+          ],
+          "lengthPx": 128.7517,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "endpoints": [
+            [
+              214,
+              128
+            ],
+            [
+              342,
+              170
+            ]
+          ],
+          "lengthPx": 134.7145,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "attack",
+          "frame": 1,
+          "endpoints": [
+            [
+              208,
+              200
+            ],
+            [
+              333,
+              243
+            ]
+          ],
+          "lengthPx": 132.1893,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "attack",
+          "frame": 2,
+          "endpoints": [
+            [
+              134,
+              225
+            ],
+            [
+              257,
+              268
+            ]
+          ],
+          "lengthPx": 130.2997,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
         },
         {
           "clip": "death",
           "frame": 0,
           "endpoints": [
             [
-              258,
-              188
+              165,
+              138
             ],
             [
-              312,
-              238
+              294,
+              140
             ]
           ],
-          "lengthPx": 73.5935,
-          "landmark": "rigid-cranial-length",
-          "uncertaintyPx": 4,
-          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+          "lengthPx": 129.0155,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
         },
         {
           "clip": "death",
           "frame": 1,
           "endpoints": [
             [
-              247,
-              205
+              131,
+              221
             ],
             [
-              296,
-              264
+              231,
+              147
             ]
           ],
-          "lengthPx": 76.6942,
-          "landmark": "rigid-cranial-length",
-          "uncertaintyPx": 4,
-          "note": "Manually measured posterior cranial contour to anterior dome tip; jaw and external appendages excluded. Marked overlay and source individually inspected; fixed endpoints and source SHA verified unchanged."
+          "lengthPx": 124.4026,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "endpoints": [
+            [
+              167,
+              242
+            ],
+            [
+              287,
+              269
+            ]
+          ],
+          "lengthPx": 123,
+          "landmark": "rigid-cranial-shell-longitudinal-chord",
+          "uncertaintyPx": 5,
+          "note": "Posterior rounded cranial-shell contour to anterior shell edge, excluding lower jaw/teeth. Source and marked cyan overlay individually inspected. Euclidean chord handles side-view head pitch; endpoints retain declared manual uncertainty."
         }
       ],
       "evidencePaths": [
-        "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-idle.jpg",
-        "docs/references/v66-batch-002-royal-qa/enemy-010-spitter/scale-death.jpg"
+        "docs/references/v72-k-series-020-review/idle-physical-scale-review.jpg",
+        "docs/references/v72-k-series-020-review/move-physical-scale-review.jpg",
+        "docs/references/v72-k-series-020-review/attack-physical-scale-review.jpg",
+        "docs/references/v72-k-series-020-review/death-physical-scale-review.jpg"
       ],
-      "medianLengthPxByClip": {
-        "idle": 121.3796,
-        "death": 75.14385
-      },
-      "calibratedClips": [
-        "idle",
-        "death"
-      ],
-      "unchangedUnreviewedClips": [
-        "move",
-        "attack"
-      ]
+      "note": "The same longitudinal rigid cranial-shell chord was manually measured on three head-readable poses per clip; all twelve cyan overlays were individually displayed and visually checked against current source pixels. Posterior rounded shell to anterior shell edge, excluding jaw and teeth; Euclidean length handles pitch, including death frame1. Median factors preserve idle as baseline. Five-source-pixel endpoint uncertainty remains; factors are registration corrections, not canon dimensions or a redesign. No art acceptance or runtime integration.",
+      "accepted": false,
+      "canonExact": false,
+      "runtimeIntegrated": false
     }
   }
 }

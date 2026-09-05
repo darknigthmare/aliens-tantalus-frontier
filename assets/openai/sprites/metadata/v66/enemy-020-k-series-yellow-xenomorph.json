@@ -31,32 +31,37 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
-  "normalizedSha256": "c1cbe9ca1df5de1fd535c1fae1d0d4d6f847d6a1ee54e43529d1f09e8451e817",
+  "normalizedSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
   "preview": "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/all.gif",
-  "previewSha256": "a6597fbfc0e9a54dc35f2707cae808cc9eb8bda150b3d1951df5d788f9a1178a",
+  "previewSha256": "531baaea2ac01293c806e5771843c08ba3be10baebb3ee1e5bf72317b1ede254",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.532066508,
+  "scale": 0.400673304,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1.067263,
+    "attack": 1.04937,
+    "death": 1.115053
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
     "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
-    "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
-    "status": "pending",
-    "reason": "Profile anchors have not all been physically reviewed."
+    "sha256": "bfee05aa952eb24c3fd4a64906cb975d045a41bb08fa11dbb3908f22188c9034",
+    "status": "reviewed",
+    "reviewer": "Codex gameplay_audit_fix V72",
+    "reviewedAt": "2026-09-05",
+    "method": "Manual source-image inspection of pelvis/hip-ring center for each pose, vertically projected to individually verified physical support. Ground coordinate uses exclusive occupied support bound plus existing three-source-pixel extraction guard, not a tail/weapon centroid. No source edits; target pivot is separate from observed roots. For this ground-run contract, the lowest visible plantar contact is the support convention; no undocumented airborne root motion is invented. Support is individually checked rather than inferred from total silhouette width.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -297,9 +302,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/idle.webp",
-      "sha256": "b2627d17d286893416f6e5079ea5cb5719ba7b90b491426c3864f42efd23afeb",
+      "sha256": "dc6601730e5a1ca4c2dfe9adcfa9191695df8cd3ccf16f4ea64b1080fc3b2e0e",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/idle.gif",
-      "previewSha256": "243cb6b142fa297047ab74f06a0232c733d2d7b73686da0f9291676b74658c1b"
+      "previewSha256": "48bc56d886c8e5b72a10cd0918ff63a6a3a7ad69bb2bd9c030ec93ae2ebf007e"
     },
     {
       "id": "move",
@@ -316,9 +321,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/move.webp",
-      "sha256": "2d7d8924cd84de4a0ea7e7ec3ab99a57b7d4f04925e94a74b6500724c4bc7154",
+      "sha256": "a83b3e448f5e147fc2408f88307ddca83448656300eae4c765e405b313504a15",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/move.gif",
-      "previewSha256": "c38eb1c9d3580b8081d331e19e5868827eaf3501e39e2bb37577f408a9fafea9"
+      "previewSha256": "e8e3511ad9b7b90c2c5068d16ef1619f993035e8ef2245d0c706025da9f25eec"
     },
     {
       "id": "attack",
@@ -335,9 +340,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/attack.webp",
-      "sha256": "adb26785a13d5426821e80347f3b44ef49d69eda3439756a41939d6884d47e88",
+      "sha256": "4bf0320ef9ec391e5d2ad7599546f16547a3a7663de70d561f090eb8a4be89d5",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/attack.gif",
-      "previewSha256": "965c0d524d4b7f8d285f2c01f8b2fbd011417098ad74b990265bb054493cce70"
+      "previewSha256": "9ef80f1a17428dd7ecf4f90082838fb43b07a83cd20693b221f205d7c70caedc"
     },
     {
       "id": "death",
@@ -354,9 +359,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-020-k-series-yellow-xenomorph/death.webp",
-      "sha256": "62d4546358a3943fd39c1b0f298aea12ddece471a1056708e83f63ff3cd69ae7",
+      "sha256": "424b0e987c71b8acac0d47f3a6b7da59e497ee28a5ac015934388d8d01fac344",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-020-k-series-yellow-xenomorph/death.gif",
-      "previewSha256": "207cb640b4edc02ea08eaddf939a880a1e893f84cfff1115bf03f749396951aa"
+      "previewSha256": "ac9fdd125329da0632aaea0ab2491170920209912713449ca3bb85b14d9ecc24"
     }
   ],
   "placements": [
@@ -391,18 +396,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "78bddf1c451660ab1136d6b80540d06274276967572f3328913c61aab79d882d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        228,
+        403
+      ],
+      "sourceLandmark": [
+        228,
+        254
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 1 and marked overlay visually inspected. Pelvis/hip-ring at (228,254); vertical projection x=228 onto visible plantar support y=403 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        170.0,
+        347.0
+      ],
+      "renderedAnchor": [
+        128.31288343558282,
+        240.0
+      ],
       "index": 0,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        42,
-        55,
-        215,
+        60,
+        101,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -435,18 +472,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3c46bb1225bd5aa025e506808dcd40adf421398d56a933858ecb9d2ace4b97ba",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        228,
+        404
+      ],
+      "sourceLandmark": [
+        228,
+        262
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 2 and marked overlay visually inspected. Pelvis/hip-ring at (228,262); vertical projection x=228 onto visible plantar support y=404 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        336.0
+      ],
+      "renderedAnchor": [
+        128.2,
+        240.0
+      ],
       "index": 1,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        42,
-        61,
-        215,
+        59,
+        105,
+        189,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -479,18 +548,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e2c139867abc0430570e029e8865714cbad6b5def35e77f9fb3f82893f163e1e",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 2,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
-      "renderedBounds": [
-        43,
-        65,
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
         213,
+        405
+      ],
+      "sourceLandmark": [
+        213,
+        266
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 3 and marked overlay visually inspected. Pelvis/hip-ring at (213,266); vertical projection x=213 onto visible plantar support y=405 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        166.0,
+        329.0
+      ],
+      "renderedAnchor": [
+        128.4,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
+      "renderedBounds": [
+        62,
+        108,
+        190,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -523,18 +624,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "01f7c3973c2abf42708a0dcae3c020b5065014a179dcd91bdaa05e2cedc2bf48",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        201,
+        406
+      ],
+      "sourceLandmark": [
+        201,
+        277
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 4 and marked overlay visually inspected. Pelvis/hip-ring at (201,277); vertical projection x=201 onto visible plantar support y=406 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        168.0,
+        318.0
+      ],
+      "renderedAnchor": [
+        127.51898734177215,
+        240.0
+      ],
       "index": 3,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        44,
-        71,
-        212,
+        60,
+        113,
+        187,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -567,18 +700,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "791369ca7f64d74dd19db7aecdf4f602217db63d5cb6bfc06e0be5b6a51cd6ea",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        223,
+        398
+      ],
+      "sourceLandmark": [
+        223,
+        263
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 5 and marked overlay visually inspected. Pelvis/hip-ring at (223,263); vertical projection x=223 onto visible plantar support y=398 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        161.0,
+        331.0
+      ],
+      "renderedAnchor": [
+        128.2987421383648,
+        240.0
+      ],
       "index": 4,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        44,
         64,
-        213,
+        107,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -611,18 +776,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6370a8ad16e1096615d5a72e31aea43e08b0f626533748f26a83ce796e716dc1",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        398
+      ],
+      "sourceLandmark": [
+        221,
+        262
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 6 and marked overlay visually inspected. Pelvis/hip-ring at (221,262); vertical projection x=221 onto visible plantar support y=398 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        171.0,
+        339.0
+      ],
+      "renderedAnchor": [
+        128.4,
+        240.0
+      ],
       "index": 5,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        43,
         60,
-        213,
+        104,
+        188,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -655,18 +852,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e281b8366948d47f95f455bef656b5e8af1963e6a21f0940a7ec186ec9e80565",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        211,
+        400
+      ],
+      "sourceLandmark": [
+        211,
+        262
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 7 and marked overlay visually inspected. Pelvis/hip-ring at (211,262); vertical projection x=211 onto visible plantar support y=400 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        163.0,
+        341.0
+      ],
+      "renderedAnchor": [
+        128.2,
+        240.0
+      ],
       "index": 6,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        43,
-        59,
-        213,
+        63,
+        103,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -699,18 +928,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4c6ed50ee746f713e09c58a94b309e76e77962e2143b063f9c1047566c75b06b",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        199,
+        400
+      ],
+      "sourceLandmark": [
+        199,
+        263
+      ],
+      "sourceAnchorEvidence": "Current idle source pose 8 and marked overlay visually inspected. Pelvis/hip-ring at (199,263); vertical projection x=199 onto visible plantar support y=400 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        162.0,
+        341.0
+      ],
+      "renderedAnchor": [
+        128.00313479623824,
+        240.0
+      ],
       "index": 7,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1,
+      "appliedScale": 0.400673304,
       "renderedBounds": [
-        43,
-        59,
-        213,
+        63,
+        103,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -743,18 +1004,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "17e56183c66689d07c7f24ceb68df04eebb4309fc2b371cb612160cd158a8cc4",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        236,
+        403
+      ],
+      "sourceLandmark": [
+        236,
+        260
+      ],
+      "sourceAnchorEvidence": "Current move source pose 1 and marked overlay visually inspected. Pelvis/hip-ring at (236,260); vertical projection x=236 onto visible plantar support y=403 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        141.0,
+        334.0
+      ],
+      "renderedAnchor": [
+        128.2929292929293,
+        240.0
+      ],
       "index": 8,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        49,
-        62,
-        207,
+        68,
+        97,
+        195,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -787,18 +1080,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "346db8afb698722ec1c3d321abfedbcc452f5643846c8e7c631a31fb626a8e00",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        212,
+        403
+      ],
+      "sourceLandmark": [
+        212,
+        276
+      ],
+      "sourceAnchorEvidence": "Current move source pose 2 and marked overlay visually inspected. Pelvis/hip-ring at (212,276); vertical projection x=212 onto visible plantar support y=403 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        127.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.4962686567164,
+        240.0
+      ],
       "index": 9,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        56,
-        76,
-        199,
+        74,
+        108,
+        189,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -831,18 +1156,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2c9491791ed5c181c6743dbb9bc9cad1a5edbcdfa1034a540bb6433e139f68b2",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        201,
+        402
+      ],
+      "sourceLandmark": [
+        201,
+        271
+      ],
+      "sourceAnchorEvidence": "Current move source pose 3 and marked overlay visually inspected. Pelvis/hip-ring at (201,271); vertical projection x=201 onto visible plantar support y=402 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        158.0,
+        313.0
+      ],
+      "renderedAnchor": [
+        128.34426229508196,
+        240.0
+      ],
       "index": 10,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        47,
-        73,
-        209,
+        61,
+        106,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -875,18 +1232,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2f83905405ef6dea190aeff932e33f0fadd6b0b786abe203a4d39944ec8504e1",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        164,
+        403
+      ],
+      "sourceLandmark": [
+        164,
+        274
+      ],
+      "sourceAnchorEvidence": "Current move source pose 4 and marked overlay visually inspected. Pelvis/hip-ring at (164,274); vertical projection x=164 onto visible plantar support y=403 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        116.0,
+        315.0
+      ],
+      "renderedAnchor": [
+        127.59107806691449,
+        240.0
+      ],
       "index": 11,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        56,
-        72,
-        199,
+        78,
+        105,
+        193,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -919,18 +1308,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "cf8efa1e995b4e61986bb62373a2f3784ce90b320acfc97c8b20cd6dcfed428f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 12,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
-      "renderedBounds": [
-        48,
-        69,
-        207,
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        388
+      ],
+      "sourceLandmark": [
+        235,
         240
-      ]
+      ],
+      "sourceAnchorEvidence": "Current move source pose 5 and marked overlay visually inspected. Pelvis/hip-ring at (235,240); vertical projection x=235 onto visible plantar support y=388 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        142.0,
+        321.0
+      ],
+      "renderedAnchor": [
+        127.78929765886288,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
+      "renderedBounds": [
+        67,
+        103,
+        195,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -963,18 +1384,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "49bee3906875fcb33993b044a22438a0f60b2fd3b2a94c05096affb62785fa96",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        213,
+        393
+      ],
+      "sourceLandmark": [
+        213,
+        261
+      ],
+      "sourceAnchorEvidence": "Current move source pose 6 and marked overlay visually inspected. Pelvis/hip-ring at (213,261); vertical projection x=213 onto visible plantar support y=393 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        125.0,
+        327.0
+      ],
+      "renderedAnchor": [
+        128.44202898550725,
+        240.0
+      ],
       "index": 13,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        54,
-        66,
-        201,
+        75,
+        100,
+        193,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1007,18 +1460,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "5420d7975df24549aa82e66dac052cd3abb93b6c139b736957fc273339a29f6d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        204,
+        388
+      ],
+      "sourceLandmark": [
+        204,
+        249
+      ],
+      "sourceAnchorEvidence": "Current move source pose 7 and marked overlay visually inspected. Pelvis/hip-ring at (204,249); vertical projection x=204 onto visible plantar support y=388 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        166.0,
+        315.0
+      ],
+      "renderedAnchor": [
+        127.9126213592233,
+        240.0
+      ],
       "index": 14,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        46,
-        72,
-        210,
+        57,
+        105,
+        189,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1051,18 +1536,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "ba0bbbdd59f82a04e437f1f2160f207824b99dff0b963f9f7b8198f896e14bf0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        169,
+        395
+      ],
+      "sourceLandmark": [
+        169,
+        261
+      ],
+      "sourceAnchorEvidence": "Current move source pose 8 and marked overlay visually inspected. Pelvis/hip-ring at (169,261); vertical projection x=169 onto visible plantar support y=395 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        128.0,
+        325.0
+      ],
+      "renderedAnchor": [
+        127.72463768115942,
+        240.0
+      ],
       "index": 15,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.067263,
+      "appliedScale": 0.427623793,
       "renderedBounds": [
-        54,
-        67,
-        201,
+        73,
+        101,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1095,18 +1612,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3e8e6d3a225555909a5a2ad9d3ed5092b202d1f91170a3b48e8ac0ca1f9a53a0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        409
+      ],
+      "sourceLandmark": [
+        235,
+        282
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 1 and marked overlay visually inspected. Pelvis/hip-ring at (235,282); vertical projection x=235 onto visible plantar support y=409 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        161.0,
+        317.0
+      ],
+      "renderedAnchor": [
+        127.81672025723472,
+        240.0
+      ],
       "index": 16,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        46,
-        71,
-        211,
+        60,
+        107,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1139,18 +1688,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d5ea15b0e29755127215bca184d3486bfca229e804be16a7ed5606590012f6eb",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        178,
+        409
+      ],
+      "sourceLandmark": [
+        178,
+        318
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 2 and marked overlay visually inspected. Pelvis/hip-ring at (178,318); vertical projection x=178 onto visible plantar support y=409 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        138.0,
+        281.0
+      ],
+      "renderedAnchor": [
+        127.88590604026845,
+        240.0
+      ],
       "index": 17,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        48,
-        90,
-        207,
+        70,
+        122,
+        195,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 15,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1183,18 +1764,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3657d1f5370896b28bbd4d55295842f8bf4018cc27565da42348b08109be5545",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        163,
+        409
+      ],
+      "sourceLandmark": [
+        163,
+        348
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 3 and marked overlay visually inspected. Pelvis/hip-ring at (163,348); vertical projection x=163 onto visible plantar support y=409 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        146.0,
+        270.0
+      ],
+      "renderedAnchor": [
+        128.28395061728395,
+        240.0
+      ],
       "index": 18,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        64,
-        96,
-        193,
+        67,
+        126,
+        169,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1246,18 +1859,50 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        124,
+        409
+      ],
+      "sourceLandmark": [
+        124,
+        334
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 4 and marked overlay visually inspected. Pelvis/hip-ring at (124,334); vertical projection x=124 onto visible plantar support y=409 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        161.0,
+        278.0
+      ],
+      "renderedAnchor": [
+        127.68883610451306,
+        240.0
+      ],
       "index": 19,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        16,
-        92,
-        240,
+        60,
+        123,
+        237,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 8,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1309,18 +1954,50 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        239,
+        355
+      ],
+      "sourceLandmark": [
+        239,
+        266
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 5 and marked overlay visually inspected. Pelvis/hip-ring at (239,266); vertical projection x=239 onto visible plantar support y=355 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        155.0,
+        280.0
+      ],
+      "renderedAnchor": [
+        128.1073985680191,
+        240.0
+      ],
       "index": 20,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        16,
-        91,
+        63,
+        122,
         239,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 9,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1353,18 +2030,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "81ee6cef279fb6887ab9251314ca43f0956a1e712e0d4c8d62979a94b6fbd8b4",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        237,
+        367
+      ],
+      "sourceLandmark": [
+        237,
+        267
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 6 and marked overlay visually inspected. Pelvis/hip-ring at (237,267); vertical projection x=237 onto visible plantar support y=367 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        210.0,
+        283.0
+      ],
+      "renderedAnchor": [
+        127.58407079646018,
+        240.0
+      ],
       "index": 21,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        38,
-        89,
-        218,
+        39,
+        121,
+        182,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1397,18 +2106,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6daa0a0ccf4fe3b15245d5661adaf84f6cfa07b6701ebcc61124fb8eec94f217",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        183,
+        384
+      ],
+      "sourceLandmark": [
+        183,
+        267
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 7 and marked overlay visually inspected. Pelvis/hip-ring at (183,267); vertical projection x=183 onto visible plantar support y=384 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        161.0,
+        312.0
+      ],
+      "renderedAnchor": [
+        127.64236111111111,
+        240.0
+      ],
       "index": 22,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        52,
-        74,
-        205,
+        60,
+        109,
+        181,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1460,18 +2201,50 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        155,
+        384
+      ],
+      "sourceLandmark": [
+        155,
+        263
+      ],
+      "sourceAnchorEvidence": "Current attack source pose 8 and marked overlay visually inspected. Pelvis/hip-ring at (155,263); vertical projection x=155 onto visible plantar support y=384 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        166.0,
+        316.0
+      ],
+      "renderedAnchor": [
+        127.86531986531986,
+        240.0
+      ],
       "index": 23,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.04937,
+      "appliedScale": 0.420454545,
       "renderedBounds": [
-        49,
-        72,
-        207,
+        58,
+        107,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1504,18 +2277,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b2f9a36278ad38dffebfdcee1cdf703f1a93832e315fed04c9ae187da19b90d3",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        266,
+        419
+      ],
+      "sourceLandmark": [
+        266,
+        273
+      ],
+      "sourceAnchorEvidence": "Current death source pose 1 and marked overlay visually inspected. Pelvis/hip-ring at (266,273); vertical projection x=266 onto visible plantar support y=419 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        232.0,
+        318.0
+      ],
+      "renderedAnchor": [
+        127.73983739837398,
+        240.0
+      ],
       "index": 24,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        30,
-        71,
-        226,
+        24,
+        98,
+        189,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1548,18 +2353,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "91cac037369e9add38e9eeb7f0fd5acf770a7637ab355b496b976e5c844ddbdf",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        246,
+        430
+      ],
+      "sourceLandmark": [
+        246,
+        316
+      ],
+      "sourceAnchorEvidence": "Current death source pose 2 and marked overlay visually inspected. Pelvis/hip-ring at (246,316); vertical projection x=246 onto visible plantar support y=430 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        190.0,
+        297.0
+      ],
+      "renderedAnchor": [
+        128.08241758241758,
+        240.0
+      ],
       "index": 25,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        31,
-        82,
-        225,
+        43,
+        107,
+        206,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1592,18 +2429,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "c49ba299664649b5a6ce423d4dcedfb48fa95fa49a4864022e141035f0ac3414",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        194,
+        438
+      ],
+      "sourceLandmark": [
+        194,
+        368
+      ],
+      "sourceAnchorEvidence": "Current death source pose 3 and marked overlay visually inspected. Pelvis/hip-ring at (194,368); vertical projection x=194 onto lowered limb/resting body support y=438 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        155.0,
+        244.0
+      ],
+      "renderedAnchor": [
+        128.40298507462688,
+        240.0
+      ],
       "index": 26,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        39,
-        110,
-        217,
+        59,
+        131,
+        209,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1636,18 +2505,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6851e878a2f5deb3c0a75626899b4733eac1f3a363b8630d1772286667e1d49d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        174,
+        438
+      ],
+      "sourceLandmark": [
+        174,
+        395
+      ],
+      "sourceAnchorEvidence": "Current death source pose 4 and marked overlay visually inspected. Pelvis/hip-ring at (174,395); vertical projection x=174 onto lowered limb/resting body support y=438 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        151.0,
+        232.0
+      ],
+      "renderedAnchor": [
+        127.5166163141994,
+        240.0
+      ],
       "index": 27,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        40,
-        117,
-        216,
+        60,
+        136,
+        208,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1680,18 +2581,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f7571a2641b40ef5fd208dca455f0664e79993b0f3b66c85347fc00cd496633f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        218,
+        383
+      ],
+      "sourceLandmark": [
+        218,
+        333
+      ],
+      "sourceAnchorEvidence": "Current death source pose 5 and marked overlay visually inspected. Pelvis/hip-ring at (218,333); vertical projection x=218 onto lowered limb/resting body support y=383 including the existing three-source-pixel extraction guard. Tail extremum never defines body-root x. Manual uncertainty +/-8px.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        161.0,
+        241.0
+      ],
+      "renderedAnchor": [
+        128.03773584905662,
+        240.0
+      ],
       "index": 28,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        30,
-        112,
-        227,
+        56,
+        132,
+        222,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1724,18 +2657,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "62d23bb29a2f2e0deb3e2b611d7d4ecd64f981c35f34ea1cecf8f3b22d3de8bc",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        383
+      ],
+      "sourceLandmark": [
+        210,
+        328
+      ],
+      "sourceAnchorEvidence": "Current death source pose 6 inspected both in original full board and close terminal crop, then revised marked overlay. The visible proximal femoral/hip-ring arch immediately below the tail-base/spine junction and behind the extended forearm locates the pelvis. The prior draft point was 13 source pixels too low on the femoral plate; the close crop and revised overlay correct it. The folded rear shin plus thorax/forearm share the terminal support. Coordinates (210,328), support y=383 includes existing 3px extraction guard. Uncertainty +/-10 source pixels due to partial anatomical overlap; no source pixels altered.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        157.0,
+        192.0
+      ],
+      "renderedAnchor": [
+        128.15803814713897,
+        240.0
+      ],
       "index": 29,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        30,
-        138,
-        225,
+        58,
+        154,
+        222,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1768,18 +2733,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "654fd6b9281e77a16777ac58255a95ff3a663555395740ac2f58ef5f32317664",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        182,
+        383
+      ],
+      "sourceLandmark": [
+        182,
+        330
+      ],
+      "sourceAnchorEvidence": "Current death source pose 7 inspected both in original full board and close terminal crop, then revised marked overlay. The visible ring at the top of the folded hind thigh, directly below the curved tail root and behind the shoulder/rib cage, locates the pelvis. The refined point is six source pixels higher than the initial overlay. The bent shin and resting torso define support, not the lifted tail arc. Coordinates (182,330), support y=383 includes existing 3px extraction guard. Uncertainty +/-10 source pixels due to partial anatomical overlap; no source pixels altered.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        152.0,
+        131.0
+      ],
+      "renderedAnchor": [
+        127.83471074380165,
+        240.0
+      ],
       "index": 30,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
       "renderedBounds": [
-        32,
-        170,
-        225,
+        60,
+        181,
+        222,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 8,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1812,18 +2809,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2d531d85fc433ba9b5fc446e3e1bbbdfa9cda9f6380cb1d882fe701c910eec85",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 31,
-      "scale": 0.532066508,
-      "sourceScale": 1.0,
-      "appliedScale": 0.532066508,
-      "renderedBounds": [
-        36,
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
         192,
-        221,
+        383
+      ],
+      "sourceLandmark": [
+        192,
+        330
+      ],
+      "sourceAnchorEvidence": "Current death source pose 8 inspected both in original full board and close terminal crop, then revised marked overlay. The circular proximal hind-thigh ring directly below the tail-base/rib-cage junction locates the pelvis. The first draft point lay leftward on the femoral segment; the close crop separates that segment from the visible hip ring and moves the root 18 source pixels right. The prone body/forelimb and folded shin define support; the tail does not define root x. Coordinates (192,330), support y=383 includes existing 3px extraction guard. Uncertainty +/-10 source pixels due to partial anatomical overlap; no source pixels altered.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        91.0
+      ],
+      "renderedAnchor": [
+        128.27665706051874,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.400673304,
+      "sourceScale": 1.115053,
+      "appliedScale": 0.44677197,
+      "renderedBounds": [
+        51,
+        199,
+        206,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     }
   ],
   "validation": {
@@ -1831,466 +2860,522 @@
       {
         "index": 0,
         "alphaBounds": [
-          43,
-          56,
-          214,
+          61,
+          102,
+          190,
           239
         ],
-        "foregroundPixels": 10675,
-        "width": 171,
-        "height": 183,
-        "relativeToRowMedian": 1.010029
+        "foregroundPixels": 6207,
+        "width": 129,
+        "height": 137,
+        "relativeToRowMedian": 1.008776
       },
       {
         "index": 1,
         "alphaBounds": [
-          43,
-          62,
-          214,
+          60,
+          106,
+          188,
           239
         ],
-        "foregroundPixels": 10813,
-        "width": 171,
-        "height": 177,
-        "relativeToRowMedian": 1.023086
+        "foregroundPixels": 6260,
+        "width": 128,
+        "height": 133,
+        "relativeToRowMedian": 1.01739
       },
       {
         "index": 2,
         "alphaBounds": [
-          44,
-          66,
-          212,
+          63,
+          109,
+          189,
           239
         ],
-        "foregroundPixels": 10463,
-        "width": 168,
-        "height": 173,
-        "relativeToRowMedian": 0.989971
+        "foregroundPixels": 6099,
+        "width": 126,
+        "height": 130,
+        "relativeToRowMedian": 0.991224
       },
       {
         "index": 3,
         "alphaBounds": [
-          45,
-          72,
-          211,
+          61,
+          114,
+          186,
           239
         ],
-        "foregroundPixels": 10172,
-        "width": 166,
-        "height": 167,
-        "relativeToRowMedian": 0.962437
+        "foregroundPixels": 5917,
+        "width": 125,
+        "height": 125,
+        "relativeToRowMedian": 0.961645
       },
       {
         "index": 4,
         "alphaBounds": [
-          45,
           65,
-          212,
+          108,
+          190,
           239
         ],
-        "foregroundPixels": 10339,
-        "width": 167,
-        "height": 174,
-        "relativeToRowMedian": 1.002375
+        "foregroundPixels": 6000,
+        "width": 125,
+        "height": 131,
+        "relativeToRowMedian": 0.999417
       },
       {
         "index": 5,
         "alphaBounds": [
-          44,
           61,
-          212,
+          105,
+          187,
           239
         ],
-        "foregroundPixels": 10326,
-        "width": 168,
-        "height": 178,
-        "relativeToRowMedian": 1.001115
+        "foregroundPixels": 5977,
+        "width": 126,
+        "height": 134,
+        "relativeToRowMedian": 0.995586
       },
       {
         "index": 6,
         "alphaBounds": [
-          44,
-          60,
-          212,
+          64,
+          104,
+          190,
           239
         ],
-        "foregroundPixels": 10303,
-        "width": 168,
-        "height": 179,
-        "relativeToRowMedian": 0.998885
+        "foregroundPixels": 6034,
+        "width": 126,
+        "height": 135,
+        "relativeToRowMedian": 1.00508
       },
       {
         "index": 7,
         "alphaBounds": [
-          44,
-          60,
-          212,
+          64,
+          104,
+          190,
           239
         ],
-        "foregroundPixels": 10288,
-        "width": 168,
-        "height": 179,
-        "relativeToRowMedian": 0.997431
+        "foregroundPixels": 6007,
+        "width": 126,
+        "height": 135,
+        "relativeToRowMedian": 1.000583
       },
       {
         "index": 8,
         "alphaBounds": [
-          50,
-          63,
-          206,
+          69,
+          98,
+          194,
           239
         ],
-        "foregroundPixels": 9247,
-        "width": 156,
-        "height": 176,
-        "relativeToRowMedian": 1.057828
+        "foregroundPixels": 6066,
+        "width": 125,
+        "height": 141,
+        "relativeToRowMedian": 1.059656
       },
       {
         "index": 9,
         "alphaBounds": [
-          57,
-          77,
-          198,
+          75,
+          109,
+          188,
           239
         ],
-        "foregroundPixels": 8470,
-        "width": 141,
-        "height": 162,
-        "relativeToRowMedian": 0.968941
+        "foregroundPixels": 5572,
+        "width": 113,
+        "height": 130,
+        "relativeToRowMedian": 0.97336
       },
       {
         "index": 10,
         "alphaBounds": [
-          48,
-          74,
-          208,
+          62,
+          107,
+          190,
           239
         ],
-        "foregroundPixels": 8874,
-        "width": 160,
-        "height": 165,
-        "relativeToRowMedian": 1.015158
+        "foregroundPixels": 5810,
+        "width": 128,
+        "height": 132,
+        "relativeToRowMedian": 1.014936
       },
       {
         "index": 11,
         "alphaBounds": [
-          57,
-          73,
-          198,
+          79,
+          106,
+          192,
           239
         ],
-        "foregroundPixels": 8609,
-        "width": 141,
-        "height": 166,
-        "relativeToRowMedian": 0.984842
+        "foregroundPixels": 5639,
+        "width": 113,
+        "height": 133,
+        "relativeToRowMedian": 0.985064
       },
       {
         "index": 12,
         "alphaBounds": [
-          49,
-          70,
-          206,
+          68,
+          104,
+          194,
           239
         ],
-        "foregroundPixels": 9267,
-        "width": 157,
-        "height": 169,
-        "relativeToRowMedian": 1.042642
+        "foregroundPixels": 6113,
+        "width": 126,
+        "height": 135,
+        "relativeToRowMedian": 1.046478
       },
       {
         "index": 13,
         "alphaBounds": [
-          55,
-          67,
-          200,
+          76,
+          101,
+          192,
           239
         ],
-        "foregroundPixels": 8791,
-        "width": 145,
-        "height": 172,
-        "relativeToRowMedian": 0.989086
+        "foregroundPixels": 5798,
+        "width": 116,
+        "height": 138,
+        "relativeToRowMedian": 0.992553
       },
       {
         "index": 14,
         "alphaBounds": [
-          47,
-          73,
-          209,
+          58,
+          106,
+          188,
           239
         ],
-        "foregroundPixels": 8667,
-        "width": 162,
-        "height": 166,
-        "relativeToRowMedian": 0.975135
+        "foregroundPixels": 5722,
+        "width": 130,
+        "height": 133,
+        "relativeToRowMedian": 0.979543
       },
       {
         "index": 15,
         "alphaBounds": [
-          55,
-          68,
-          200,
+          74,
+          102,
+          190,
           239
         ],
-        "foregroundPixels": 8985,
-        "width": 145,
-        "height": 171,
-        "relativeToRowMedian": 1.010914
+        "foregroundPixels": 5885,
+        "width": 116,
+        "height": 137,
+        "relativeToRowMedian": 1.007447
       },
       {
         "index": 16,
         "alphaBounds": [
-          47,
-          72,
-          210,
+          61,
+          108,
+          190,
           239
         ],
-        "foregroundPixels": 9230,
-        "width": 163,
-        "height": 167,
-        "relativeToRowMedian": 1.088443
+        "foregroundPixels": 5865,
+        "width": 129,
+        "height": 131,
+        "relativeToRowMedian": 1.093095
       },
       {
         "index": 17,
         "alphaBounds": [
-          49,
-          91,
-          206,
+          71,
+          123,
+          194,
           239
         ],
-        "foregroundPixels": 8520,
-        "width": 157,
-        "height": 148,
-        "relativeToRowMedian": 1.004717
+        "foregroundPixels": 5365,
+        "width": 123,
+        "height": 116,
+        "relativeToRowMedian": 0.999907
       },
       {
         "index": 18,
         "alphaBounds": [
-          65,
-          97,
-          192,
+          68,
+          127,
+          168,
           239
         ],
-        "foregroundPixels": 6763,
-        "width": 127,
-        "height": 142,
-        "relativeToRowMedian": 0.797524
+        "foregroundPixels": 4303,
+        "width": 100,
+        "height": 112,
+        "relativeToRowMedian": 0.801976
       },
       {
         "index": 19,
         "alphaBounds": [
-          17,
-          93,
-          239,
+          61,
+          124,
+          236,
           239
         ],
-        "foregroundPixels": 8440,
-        "width": 222,
-        "height": 146,
-        "relativeToRowMedian": 0.995283
+        "foregroundPixels": 5366,
+        "width": 175,
+        "height": 115,
+        "relativeToRowMedian": 1.000093
       },
       {
         "index": 20,
         "alphaBounds": [
-          17,
-          92,
+          64,
+          123,
           238,
           239
         ],
-        "foregroundPixels": 8378,
-        "width": 221,
-        "height": 147,
-        "relativeToRowMedian": 0.99994
+        "foregroundPixels": 5343,
+        "width": 174,
+        "height": 116,
+        "relativeToRowMedian": 0.999158
       },
       {
         "index": 21,
         "alphaBounds": [
-          39,
-          90,
-          217,
+          40,
+          122,
+          181,
           239
         ],
-        "foregroundPixels": 7617,
-        "width": 178,
-        "height": 149,
-        "relativeToRowMedian": 0.909113
+        "foregroundPixels": 4854,
+        "width": 141,
+        "height": 117,
+        "relativeToRowMedian": 0.907714
       },
       {
         "index": 22,
         "alphaBounds": [
-          53,
-          75,
-          204,
+          61,
+          110,
+          180,
           239
         ],
-        "foregroundPixels": 8379,
-        "width": 151,
-        "height": 164,
-        "relativeToRowMedian": 1.00006
+        "foregroundPixels": 5352,
+        "width": 119,
+        "height": 129,
+        "relativeToRowMedian": 1.000842
       },
       {
         "index": 23,
         "alphaBounds": [
-          50,
-          73,
-          206,
+          59,
+          108,
+          182,
           239
         ],
-        "foregroundPixels": 8755,
-        "width": 156,
-        "height": 166,
-        "relativeToRowMedian": 1.044936
+        "foregroundPixels": 5593,
+        "width": 123,
+        "height": 131,
+        "relativeToRowMedian": 1.045909
       },
       {
         "index": 24,
         "alphaBounds": [
-          31,
-          72,
-          225,
+          25,
+          99,
+          188,
           239
         ],
-        "foregroundPixels": 9340,
-        "width": 194,
-        "height": 167,
-        "relativeToRowMedian": 1.032215
+        "foregroundPixels": 6700,
+        "width": 163,
+        "height": 140,
+        "relativeToRowMedian": 1.033392
       },
       {
         "index": 25,
         "alphaBounds": [
-          32,
-          83,
-          224,
+          44,
+          108,
+          205,
           239
         ],
-        "foregroundPixels": 9660,
-        "width": 192,
-        "height": 156,
-        "relativeToRowMedian": 1.06758
+        "foregroundPixels": 6913,
+        "width": 161,
+        "height": 131,
+        "relativeToRowMedian": 1.066245
       },
       {
         "index": 26,
         "alphaBounds": [
-          40,
-          111,
-          216,
+          60,
+          132,
+          208,
           239
         ],
-        "foregroundPixels": 8757,
-        "width": 176,
-        "height": 128,
-        "relativeToRowMedian": 0.967785
+        "foregroundPixels": 6267,
+        "width": 148,
+        "height": 107,
+        "relativeToRowMedian": 0.966608
       },
       {
         "index": 27,
         "alphaBounds": [
-          41,
-          118,
-          215,
+          61,
+          137,
+          207,
           239
         ],
-        "foregroundPixels": 7727,
-        "width": 174,
-        "height": 121,
-        "relativeToRowMedian": 0.853954
+        "foregroundPixels": 5528,
+        "width": 146,
+        "height": 102,
+        "relativeToRowMedian": 0.852626
       },
       {
         "index": 28,
         "alphaBounds": [
-          31,
-          113,
-          226,
+          57,
+          133,
+          221,
           239
         ],
-        "foregroundPixels": 8356,
-        "width": 195,
-        "height": 126,
-        "relativeToRowMedian": 1.253807
+        "foregroundPixels": 5986,
+        "width": 164,
+        "height": 106,
+        "relativeToRowMedian": 1.262869
       },
       {
         "index": 29,
         "alphaBounds": [
-          31,
-          139,
-          224,
+          59,
+          155,
+          221,
           239
         ],
-        "foregroundPixels": 6824,
-        "width": 193,
-        "height": 100,
-        "relativeToRowMedian": 1.023933
+        "foregroundPixels": 4847,
+        "width": 162,
+        "height": 84,
+        "relativeToRowMedian": 1.022574
       },
       {
         "index": 30,
         "alphaBounds": [
-          33,
-          171,
-          224,
+          61,
+          182,
+          221,
           239
         ],
-        "foregroundPixels": 6505,
-        "width": 191,
-        "height": 68,
-        "relativeToRowMedian": 0.976067
+        "foregroundPixels": 4633,
+        "width": 160,
+        "height": 57,
+        "relativeToRowMedian": 0.977426
       },
       {
         "index": 31,
         "alphaBounds": [
-          37,
-          193,
-          220,
+          52,
+          200,
+          205,
           239
         ],
-        "foregroundPixels": 5993,
-        "width": 183,
-        "height": 46,
-        "relativeToRowMedian": 0.899242
+        "foregroundPixels": 4301,
+        "width": 153,
+        "height": 39,
+        "relativeToRowMedian": 0.907384
       }
     ],
     "rowMedianForegroundPixels": [
-      10569.0,
-      10314.5,
-      8741.5,
-      8888.0,
-      8480.0,
-      8378.5,
-      9048.5,
-      6664.5
+      6153.0,
+      6003.5,
+      5724.5,
+      5841.5,
+      5365.5,
+      5347.5,
+      6483.5,
+      4740.0
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "23464da939dc1c4a6ec5dda5d4660da4b8fecb7abf6e479c6552f46598b89e61",
-      "c350b197817e534ea30c5e8afe42b32ebbb35e3ce6656d30dcdc5e81c3ddd69e",
-      "57af8967219a5324dba667cdb488cfe24a729eda36caf65c8dea9e389bfd6daa",
-      "91beaa864b01eff5722598c4bd311e049b7a5da4ac92db72ffd5c0a3852fbf88",
-      "df976bf77a5ad50ff24cb3ae81a2bd96cfaf31355ffa4bc8b1117e6986dad278",
-      "5f7222fe4ef3a2c36699b044e7dd418ca69f1fc8d27f2b45e89bb2576bf44747",
-      "b0e6e148f0e2a5705ff82943d8d040288d2a1d1ddef50d8f3f2c7206dbb15629",
-      "e2a2dc8f1fcec81728cc5b8adbd72ab6a40a80b1f5901f70b35bbf4adb678e0e",
-      "173d3e940d13b410fad2ff7bea4f00f01d04ea4c6e5fed0c8977100fc13f6cd0",
-      "2cc578f42d0710debc91e26986de02dc49d6a5ee8d133018d78e919ad6b82603",
-      "72ee2e2d980fc0dd61228039f92d773e092faedb179b4bc6a464fd15556373dc",
-      "fc695b981b228017582eb32eb20f862118541cb6421eb2165562a4e9416ffc77",
-      "c84e1bc369554802a1739e00824be976c40c96dbf3325a9e1367ce707635a952",
-      "4e3b571124f4e11ef1be279e475f594252feab088fad94df23eb9cc7a1a0b853",
-      "13d59a9a5647635183c1407d57f2e3c5d57798369834c58c1bdc61fc8d9d4d08",
-      "43b53d766802529a0f445541715c2e5f14056d83e9936da35a63084b1b67518c",
-      "732efa0eaa6366548fc41ed32afdfc67fc4d1ca3206488fb8a32ccc1ced63fe4",
-      "02e4874c34c127a62511e75bd7e90e9291871a8142cdf797b48b0afb6e8243b4",
-      "2552dc3e47c8c2233c19c2db3de0287fa57c038f99461f9f6d931f613d548a07",
-      "73a367a462fad2263c56e190e5be2951005d71366f43693cf05c6892b97749d4",
-      "5075992a137bfb090e3085eaa608121b9946bf973979e331a179e9d15325db88",
-      "4c2c3ad491838e155902ca14f5483caadf5d2e2520fa4c0a009cf82e58e25057",
-      "a0cad135723454622d6166901ee7a26e52ab2c1ebcbf08b9f11ac7d37b355e09",
-      "e6284884c4e9659cb21ceb4f361382bff891e030d3e32f2522ed21f9782e5099",
-      "aff68366ba2ceb6c5b6c55475a55a366da536b442be9d6eb43c001ea6c1421db",
-      "d287f363e30b208347335d9fe0cb485c36a9db802834042ed0a922b6f496a88c",
-      "0fa9761e6a089666e055a74e5ed0b40d2c37dbf78782f17e3f41cf94838ef934",
-      "97387746bcc4fa7b9953dab692f9d1feede4bea7b9e868043548b1fbc5a8fe78",
-      "1404a62c6fd77fd39d2ba677037fb80e74b3a1dc3042add6625eac759807747a",
-      "cf171bfa13e5bb95768a352840f9468a1836ba7957940fb887772b8936947de7",
-      "7dc16bf6eac288ab6cb44314e8fb9bece4bad362c082ef878d91246175f9a3be",
-      "5f193f417be42e93098852bb6fadc79752f04c8d87cac085d9c368c1d29e6618"
+      "522473b38a80ea8914148f7a7c908371d0f9b228e2fe07fc1ba4e0cfd34d3989",
+      "7fbca08d9fd583c723d72e55ee2ef6f9b97c01ad686e658d58bd15137a9cbb63",
+      "ed84c834323fddcdb1f57d7462d8c9815c0c2694e97d325156b4c43ea05e7e80",
+      "49c1da29ece23f63243815867afbbbdaaf69c1fe7aefbe952f24946795b891be",
+      "f4ea6fae9d2a30fa7cdd4f51db75d6e8356bec4aacc50aeb830dad92c9c3a1a2",
+      "c63c9ec798e6a934ed5bddd763484b2fff9474ba8ed813df19b4ecee6282e20c",
+      "b1e22b2905be526d134179f34309596f6dffb59ee3441ce2ed428f79d544d229",
+      "816056a4484ac300f3b0cfce52339d9d5b3b1783222b23eec5862f2497f2c8fa",
+      "6799861cdbc8ac47b0372a90faf26b2b42cf590c7f20216233a26a89ffdbdcab",
+      "8bc8a4df51df02bd3660134be5464f54cf44307b9254c72ddc5f9348eb2109a3",
+      "0628cd51f75a7b48f3ce78377e268426c237e087b412980252d8a7eb458c5e07",
+      "0860c3cebf612ed7654535dcf9466e8ad81a3101d614890a7129843b49231910",
+      "9a82bac4a9fb37c8ba8f867354ffb062789ada318a2453fe3019ef9c9d5c4063",
+      "305517b6ac330d9966820b357f3fb62e90431409afdcc67e452f7650db7ac264",
+      "b12efa9263ef6671f034920170f02c036e2d22dbe7e4dff567dd74b07f909af3",
+      "d3079964f53a990339ac7ea7333fc265f41e556dde164447acc0ccb4598b98dc",
+      "b237bf4c8906a1fc0b86fc6b39f1eed4a008727805a849da5e856d5da9494b18",
+      "7a4a766146d356614e16b3647979b35fb8bfc237bde7aa64e6e992a9ce39d8c0",
+      "53c5bf8aae38ee381502c2b5373af7ad1f864cde07a5416628e41a065e3536f5",
+      "e9753844dc6b39207c5e89b8df8b1ca1b9f2733d642e010cd75f66e949cf8218",
+      "7e26542476b2905883e0c67ed24e649d01ee6b9ef3af5eeea047a5a98f3382a3",
+      "691bf710d4124081a9ea692cbabbc25e85a4697e134a6d833a154c00c08acec6",
+      "6f07f175588fc165eab5a1a78ad6eeb128eb497e1aff9e3b47abe1dd61cf7c65",
+      "072cb0cfc43720dd83cf24dc32aab8a8d1d13e5178abea62f5fd333f9a127aba",
+      "ecbdd4144fc45738ed71c71b3e2be3d5d83faf6c99527f7ad53c5e6edce9f105",
+      "5d43a41e56aacd05fe6b1161fe7b3337b866f533da323d102a12f71d20753eea",
+      "4eb04f2d08a77684881e83cfc1eee209c2c69c22d2f8eab1613792cd79d14291",
+      "ee6524328228f22fce4102f114e333afc76255f61a92a0d6184908ae53ffa245",
+      "63ac46cc4efaa06acc9c8270b47f0664911637b9a1c6f3227fee243f9df3646a",
+      "93be4a56aeb5e1d3468ac60237631678d04a21d2e0238d9273f099ddbdb3e92d",
+      "f85fb10fe2605be2d878ffbc0f0eabc3456a59d060703bf97b5a0ca12f1ddfd6",
+      "e1ad03db4f03f90ae2811c40a39888b8ae0b5bcaeb112cf8536059b39405825c"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/V66_BATCH_002_SCALE_REVIEW.json",
+    "sha256": "cfe843cdbd6afc139bb3d2376345eb85c1996e1630cc18d28d10871adc3e4dc6",
+    "status": "reviewed",
+    "profileId": "enemy-020-k-series-yellow-xenomorph",
+    "reviewer": "Codex gameplay_audit_fix V72",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1.067263,
+      "attack": 1.04937,
+      "death": 1.115053
+    },
+    "sourceSha256ByClip": {
+      "idle": "83eef5901c0be909927f46243ff2458ae35b74c76731a5f7de4414fd933438ab",
+      "move": "f69d357baeda430e6b8214f2cd69cc9b5de15d60f8473d99c5738f45ed72abcc",
+      "attack": "d6e5a210f54637b7f26c43d451ad4788552655daa03268e561adebd627a57e98",
+      "death": "a2c7dc6a1d91fa5f40818d266bc3c41446091cb1991efb7391e9ed5c3cb5bb15"
+    },
+    "measurementCount": 12,
+    "evidence": [
+      {
+        "path": "docs/references/v72-k-series-020-review/idle-physical-scale-review.jpg",
+        "sha256": "0aff178dd4815f1905cdbe974f8a54b99a5647c4f635fef513ed0196d8516d7b"
+      },
+      {
+        "path": "docs/references/v72-k-series-020-review/move-physical-scale-review.jpg",
+        "sha256": "0950e74973fd18164f35c7a2f09a344602195eba23e0b957c33c82c7ee754e65"
+      },
+      {
+        "path": "docs/references/v72-k-series-020-review/attack-physical-scale-review.jpg",
+        "sha256": "eb4075dae9e420cd3934a4cfe5d9854a8d0c5c20e578f75b308e610164b5f887"
+      },
+      {
+        "path": "docs/references/v72-k-series-020-review/death-physical-scale-review.jpg",
+        "sha256": "ddd155c372f104f29e02dfb8685ee7f7b469d49c290eddd8d7bd6f8b428f6445"
+      }
+    ]
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 77,
+    "remainingStrictPixelCount": 0
   }
 }

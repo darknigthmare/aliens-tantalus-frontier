@@ -1,0 +1,19 @@
+{
+  "kind": "integrated",
+  "profileId": "enemy-020-k-series-yellow-xenomorph",
+  "actor": "Codex V72.1 runtime verification",
+  "note": "K-Series020 exact ID is wired to its own32-pose atlas in the catalog and real GameEngine. Browser verified every clip, shared source identity, death hold, movement, left-facing flip,136px body, ground930, and one30HP hit on global frame20 at4/12s with no repeated damage during recovery. Saved campaign state unchanged in isolated QA.",
+  "runtimeEvidence": {
+    "result": "pass",
+    "command": "npm test",
+    "registry": {
+      "path": "src/enemy-profile-assets-v66.js"
+    },
+    "test": {
+      "path": "tests/enemy-batch-animation-integration-v66.test.mjs"
+    },
+    "log": {
+      "path": "docs/references/v72-k-series-020-review/runtime-test-output.md"
+    }
+  }
+}

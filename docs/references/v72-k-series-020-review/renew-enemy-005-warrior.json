@@ -1,0 +1,19 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-005-warrior",
+  "actor": "Codex V72.1 release revalidation",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  },
+  "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+  "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29",
+  "canonExact": false,
+  "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately."
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "generated",
+  "profileId": "enemy-071-albino-red-xenomorph",
+  "clipId": "attack",
+  "provider": "OpenAI ImageGen",
+  "generationId": "local-call-receipt-2026-09-05-v72_071_attack",
+  "providerGenerationId": null,
+  "actor": "Codex V72 enemy gap generation",
+  "actualPromptText": "Use case: stylized-concept. Image2 is the ONLY design reference: Albino Red-caste Warrior071 idle. Ignore Image1. Create ONE newly authored animation sheet of precisely the SAME creature, preserving skull, four dorsal tubes, long segmented spear tail, pearl bone/ashgray/rose palette, material shading and limb lengths. Pixel-art game sprites matching reference, strict RIGHT-facing side-on orthographic view, NO camera rotation.\nExactly8poses in4columns×2rows,1774×887canvas, everywholebodytailandclaw within central70% of itscell, uniform30pxclearblankgutters. Same rigid skull/pelvis scale in everycell. Animation plays in place, no horizontalrootdrift. Fullbodies, nooverlap,no cut-offlimbs,noextraanatomy. GenuinelytransparentRGBA ifpossible;otherwise FLAT PURE MAGENTA #FF00FF. NO checkerboard,whitebackdrop,shadow,ground,particles,text,grid,labels,watermark.\nCRITICAL MOTION: ONE COMPLETE BIPED CLAW LUNGE. Pose1 guard; pose2 rear leg loads and torso coils back; pose3 front knee steps forward, striking arm drawn back; pose4 torso thrusts forward and front claw fully extended at target; pose5 contact and follow-through over bent front knee; pose6 rear support catches body; pose7 torso rises and arm retracts; pose8 returns near guard. Large clearly distinct anticipation, impact and recovery, real pelvis/torso weight transfer, no static arm waving. Keep 2arms/2legs only.",
+  "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_071_attack.txt",
+  "accepted": false,
+  "runtimeIntegrated": false,
+  "canonExact": false,
+  "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate."
+}

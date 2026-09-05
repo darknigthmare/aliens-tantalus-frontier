@@ -79,7 +79,7 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
 test('le cache V71 conserve les quatre exports V68 runtime mais exclut le master 1254', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v72-audit-shell-1['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v72-enemy-020-shell-2['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }

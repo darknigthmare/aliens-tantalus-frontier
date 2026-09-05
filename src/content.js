@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '72.0.0',
+  version: '72.1.0',
   subtitle: 'Audit jouabilité — échelles cohérentes, props 2D, collisions, sauvegardes et enquête corrigés',
   sourceVersion: '51.0.0'
 });

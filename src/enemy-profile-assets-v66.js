@@ -1,6 +1,6 @@
-// Batch001 only: twenty real OpenAI sheets, reviewed body roots and matte.
+// Batch001 plus individually reviewed K-Series020: dedicated authored sheets.
 // Canonical identity adaptation, not a certification of pixel-for-pixel copies.
-// Other profiles keep their previous coverage until their own whole batch passes.
+// Other profiles keep their previous coverage until their own full clip set passes.
 export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
   Object.freeze({
     profileId: 'enemy-001-ovomorph',
@@ -61,5 +61,18 @@ export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     referenceUrls: Object.freeze(['https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/']),
     identityVerified: true, reviewStatus: 'accepted', canonExact: false,
     normalizedSha256: 'c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3'
+  }),
+  Object.freeze({
+    profileId: 'enemy-020-k-series-yellow-xenomorph',
+    path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp',
+    spriteKey: 'xenoWarrior', clipSet: 'enemy-action-v66',
+    pivot: 'creature-ground', hitbox: 'enemy-020-k-series-yellow-xenomorph-body-v66',
+    // 130 opaque cranial-to-plantar pixels become 136px; tail padding is not body size.
+    renderWidth: 268, renderHeight: 268, sourceFacing: 1,
+    identityStatus: 'source-locked-adaptation', referenceStatus: 'CANON_REFERENCE_ADAPTATION',
+    provider: 'openai-imagegen', promptId: 'V66_BATCH_002_enemy-020-k-series-yellow-xenomorph',
+    referenceUrls: Object.freeze(['https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp', 'https://www.avpgalaxy.net/games/avp-extinction/aliens/']),
+    identityVerified: true, reviewStatus: 'accepted', canonExact: false,
+    normalizedSha256: '9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6'
   })
 ]);

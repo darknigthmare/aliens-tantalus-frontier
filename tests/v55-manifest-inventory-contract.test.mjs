@@ -83,8 +83,8 @@ test('inventory v55 preserves its release batch and reports the current shared v
   assert.equal(inventory.enemies.v55ExactProfileCount, 8);
   assert.equal(inventory.enemies.v55FamilyReuseProfileCount, 80);
   assert.equal(inventory.enemies.coverage.total, 571);
-  assert.equal(inventory.enemies.coverage.modern, 538);
-  assert.equal(inventory.enemies.coverage.legacy, 33);
+  assert.equal(inventory.enemies.coverage.modern, 539);
+  assert.equal(inventory.enemies.coverage.legacy, 32);
   // Keep the V55 batch/snapshot fixed. The shared resolver relabels accepted
   // standard V66 replacements as source-locked adaptations, never pixel exact.
   const v66Replacements = READY_ENEMY_PROFILE_REGISTRY_V66.length;

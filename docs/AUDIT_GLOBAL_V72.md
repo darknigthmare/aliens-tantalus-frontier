@@ -60,7 +60,7 @@ Le catalogue possède 538 fiches ennemies avec une feuille et des dimensions ré
 | Bestiaire desktop | Inspection à 1280 pixels : échelle commune facehugger/marine/reine, portrait à ratio corrigé. | La visibilité d'un clip n'est pas une revue de continuité de tout le roster. |
 | Bestiaire mobile | À390×844, largeur document390px ; liste bornée360px et sélection défilant vers le dossier. Capture finale inspectée : comparateur complet, commandes du clip accessibles. | La première inspection plaçait le dossier à3568px ; après correction il commence à827px avant sélection et s'aligne sous l'en-tête au clic. |
 | Table OpenAI | Export accepté et branché, contrôles alpha/hash/cadrage/placement et extraction reproductible réussis. Capture de la salle de briefing inspectée : table frontale entière, acteurs et table au même sol, sans fond blanc. | Approche préparée dans une session QA locale ; ce n'est pas un parcours complet de toutes les salles. |
-| Publication | Commit, push et déploiement relèvent de la clôture par l'intégrateur. | Aucune réussite de publication n'est déduite ici d'un build local. |
+| Publication | Commit `3ba7171` poussé ; déploiement Vercel `dpl_DKP44C7WG32WyaMA49mHPS3AaUho` confirmé Ready ; alias public et fichiers runtime V72 répondent HTTP 200. | Les nouveaux candidats ennemis non acceptés ne sont pas déclarés intégrés. Voir VALIDATION_V72.md pour les contrôles exacts. |
 
 Les rapports de sous-audit gardent leurs compteurs intermédiaires : ils documentent le moment de chaque preuve, pas un échec du dernier lot. La clôture doit enregistrer les nouvelles preuves navigateur et les résultats de revalidation après les dernières retouches, puis seulement l'identifiant de commit et l'état de déploiement réellement obtenus.
 

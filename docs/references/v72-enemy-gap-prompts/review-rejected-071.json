@@ -1,0 +1,8 @@
+{
+  "kind": "review-rejected",
+  "profileId": "enemy-071-albino-red-xenomorph",
+  "actor": "Codex V72 independent animation review",
+  "note": "Four newly generated clips and normalized atlas preserved. Run repeats an insufficiently distinguishable near/far leg half-cycle; the targeted r2 retry did not resolve this. No reviewed airborne body roots or anatomical scale yet. See docs/references/V72_071_ALBINO_RED_CANDIDATE_REVIEW.md. Technical alpha/cell checks do not imply visual acceptance.",
+  "canonExact": false,
+  "runtimeIntegrated": false
+}

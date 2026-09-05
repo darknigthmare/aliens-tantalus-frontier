@@ -1,4 +1,4 @@
-const CACHE = 'atf-v72-audit-shell-1';
+const CACHE = 'atf-v72-enemy-020-shell-2';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [

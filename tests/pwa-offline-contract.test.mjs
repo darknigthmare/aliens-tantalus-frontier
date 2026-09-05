@@ -147,7 +147,7 @@ test('le cache hors-ligne v71 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v72-audit-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v72-enemy-020-shell-2['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',

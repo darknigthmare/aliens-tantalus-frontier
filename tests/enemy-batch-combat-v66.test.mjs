@@ -51,8 +51,8 @@ function fixture(profileId = runnerId) {
   return { entry, enemy, engine, events, motions, step };
 }
 
-test('V66 ne prend en charge que les quatre plaques standard du lot, pas les variantes, oeufs ou anciens sprites', () => {
-  assert.equal(profileIds.length, 4);
+test('V66 prend en charge les cinq combattants acceptés, pas les variantes, oeufs ou anciens sprites', () => {
+  assert.deepEqual([...profileIds].sort(), ['enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph']);
   for (const entry of Object.values(contracts)) {
     assert.equal(resolveEnemyBatchCombatContractV66({ visualSheetId: entry.sheetId }), entry);
     assert.equal(Object.isFrozen(entry), true);
@@ -73,7 +73,7 @@ test('V66 ne prend en charge que les quatre plaques standard du lot, pas les var
 });
 
 for (const profileId of profileIds) {
-  test(`${profileId}: huit poses, impact unique a 5/12s et recuperation jusqu'a 8/12s`, () => {
+  test(`${profileId}: huit poses, impact unique au timing du clip et recuperation jusqu'a 8/12s`, () => {
     const { entry, enemy, engine, events, motions, step } = fixture(profileId);
     assert.equal(step(0), true);
     assert.equal(enemy.batchAttackV66.targetId, 'player');
@@ -83,7 +83,7 @@ for (const profileId of profileIds) {
     for (let tick = 1; tick <= 40; tick += 1) {
       step(1 / 60);
       if (tick <= 10) assert.equal(enemy.x, 600, 'anticipation immobile');
-      if (tick < 25) assert.equal(engine.player.health, 100, 'aucun impact anticipe');
+      if (tick < Math.round(entry.impact * 60)) assert.equal(engine.player.health, 100, 'aucun impact anticipe');
       else assert.equal(engine.player.health, 88, 'exactement un impact');
       if (tick < 40) {
         assert.equal(enemy.attacking, true);

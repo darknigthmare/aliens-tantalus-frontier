@@ -25,6 +25,11 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
   'enemy-006-runner': contract('enemy-006-runner', {
     action: 'pounce-bite', stopRange: 42, meleeRange: 78,
     lungeDistance: 92, speedMultiplier: 1.38, cooldown: 1.3
+  }),
+  'enemy-020-k-series-yellow-xenomorph': contract('enemy-020-k-series-yellow-xenomorph', {
+    action: 'k-series-claw-lunge', stopRange: 62, meleeRange: 104,
+    // Source attack pose5 is maximum extension; damage occurs once on that pose.
+    impact: 4 / 12, lungeDistance: 56, cooldown: 1.05
   })
 });
 

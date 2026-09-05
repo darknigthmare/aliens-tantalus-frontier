@@ -1,0 +1,19 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-004-drone-big-chap",
+  "actor": "Codex V72.1 release revalidation",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  },
+  "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+  "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb",
+  "canonExact": false,
+  "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately."
+}

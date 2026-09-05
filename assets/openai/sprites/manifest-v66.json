@@ -6,8 +6,8 @@
   "baseRelease": "v64",
   "supplemental": true,
   "sourceOfTruth": "Accepted profile registries must resolve to real runtime sheets and complete clip coverage. The V64 snapshot remains unchanged.",
-  "atlasCount": 6,
-  "cellCount": 192,
+  "atlasCount": 7,
+  "cellCount": 224,
   "contracts": {
     "grids": {
       "profile-4x8-256x256": {
@@ -61,6 +61,12 @@
         "y": 158,
         "width": 78,
         "height": 82
+      },
+      "enemy-020-k-series-yellow-xenomorph-body-v66": {
+        "x": 98.38805970149254,
+        "y": 110.08955223880596,
+        "width": 59.223880597014926,
+        "height": 129.91044776119404
       }
     }
   },
@@ -502,6 +508,44 @@
       "referenceStatus": "CANON_REFERENCE_ADAPTATION",
       "referenceUrls": [
         "https://necaonline.com/2019/07/alien-3-7-scale-action-figure-ultimate-dog-alien/"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "subject": "K-Series Yellow Xenomorph",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-020-k-series-yellow-xenomorph",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-020-k-series-yellow-xenomorph.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "creature-ground",
+      "hitbox": "enemy-020-k-series-yellow-xenomorph-body-v66",
+      "renderWidth": 268,
+      "renderHeight": 268,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "CANON_REFERENCE_ADAPTATION",
+      "referenceUrls": [
+        "https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp",
+        "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
       ],
       "runtime": {
         "status": "referenced",

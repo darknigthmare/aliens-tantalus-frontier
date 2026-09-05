@@ -1,0 +1,27 @@
+{
+  "attackEnded": true,
+  "body": [
+    62,
+    136
+  ],
+  "damage": 30,
+  "facing": -1,
+  "feet": 930,
+  "fixture": "isolated real GameEngine canvas, existing world/campaign data, no save mutation",
+  "hpAfterRecovery": 70,
+  "hpAt": 70,
+  "hpBefore": 100,
+  "impactCount": 1,
+  "impactCountAfterRecovery": 1,
+  "impactFrame": 20,
+  "impactSeconds": 0.3333333333333333,
+  "moved": {
+    "clip": "move",
+    "vx": -131.29999999999995,
+    "x": 456.87
+  },
+  "movedFrom": 470,
+  "playerFeet": 930,
+  "saveUnchanged": true,
+  "sheet": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66"
+}

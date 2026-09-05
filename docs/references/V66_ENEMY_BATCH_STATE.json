@@ -8654,6 +8654,450 @@
       "canonExact": false,
       "note": "Profile-local death candidate only; processing and technical QA do not imply art acceptance, normalization, runtime integration or a global state write.",
       "at": "2026-09-01T08:51:18.093Z"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-071-albino-red-xenomorph",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_071_idle",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Asset: dedicated 2D enemy sprite sheet for Aliens Tantalus Frontier.\nInput images: Image 1 is the ONLY anatomy/style reference for this job. Ignore the other image. Newly draw Albino Red-caste Warrior, preserving its exact skeletal design but with the approved original project albino materials below; this is not a simple recolor.\nPROJECT_ADAPTATION systemic albino derivative of the reviewed V66 enemy-019-red-xenomorph identity only. Preserve one adult rival-hive Red-caste Warrior: long ridged eyeless dome, double jaw, narrow ribbed torso, lean waist, exactly two long clawed arms, two digitigrade legs, four dorsal tubes and exactly one complete segmented spear-tipped tail. Red denotes the Genocide hive lineage, not a required red coat: albino changes pigment and material response only to warm pearl-ivory and pale bone carapace, cool ash-gray biomechanical recesses, restrained translucent rose-taupe soft tissue, dark desaturated cavities, wet highlights and metallic ivory/silver teeth; no saturated vermilion shell, flat pure white, glow or automatic recolor. Keep strict right-facing orthographic gameplay profile, invariant dome/ribcage/pelvis proportions and the queue's biped motions. Do not inherit numeric sourceScaleByClip values, the historical final-pack scale or legacy bounds-center-bottom roots: the base has no completed measured scaleCalibrationReview, no retained scaleCalibrationEvidence and no reviewed anchor-registry entry. Do not reproduce the base move sheet's cross-cell boundary contacts or its weak locomotion/attack weight transfer. No Queen crown, Red King bulk, Prowler quadruped, yellow K-Series coat, equipment, extra limb or copied comic composition. Every future pixel must be original fan-made/project art; canonExact=false and no 1:1 claim.\nProduce EXACTLY EIGHT IDLE poses, four columns by two rows, row-major: relaxed guard, slight chest expansion, higher breathing chest, alert claws flex, pause high inhale, exhale, claws relax, settle back toward first pose. Feet stay planted at exactly same baseline, tail stays fully inside each cell. Same skull/pelvis rigid scale across eight poses.\nCrisp detailed pixel-art sprite rendering matching the reference, strict right-facing side-on orthographic game view. The entire anatomy including tail and dorsal tubes fits within the central70% of each square cell; generous30px blank gutters. Canvas1774x887. No rotation or perspective change, no extra limbs, no crown, no equipment.\nGenuinely transparent RGBA background if possible; if unavailable use perfectly uniform solid MAGENTA #FF00FF only. Absolutely NO white/gray checkerboard, ground, shadow, scene, label, text, border, watermark or glow. Every background area including limb gaps must be clean. Preserve consistent flat lighting and authored distinct poses.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_071_idle.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:25.558Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-071-albino-red-xenomorph/idle.png",
+      "sourceSha256": "21dd3d8b8157797fadad9fe1d07e43361af9249af509edb25b41b4318ccb6bae",
+      "contractPromptSha256": "46f42b308e3af7bf9e648275429f0209986dee627d4ba389f3d4569f48e8599a",
+      "promptSha256": "267081fe5310899fa9de72ba0702d382a70a76304d0358e78933d52964da8dda",
+      "referenceLockSha256": "d73e1905f679ff40f2fcd4c53c406ffb45f32ffbaaa1f9ec5715771957513657"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-071-albino-red-xenomorph",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_071_move",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Image2 is the ONLY design reference: Albino Red-caste Warrior071 idle. Ignore Image1. Create ONE newly authored animation sheet of precisely the SAME creature, preserving skull, four dorsal tubes, long segmented spear tail, pearl bone/ashgray/rose palette, material shading and limb lengths. Pixel-art game sprites matching reference, strict RIGHT-facing side-on orthographic view, NO camera rotation.\nExactly8poses in4columns×2rows,1774×887canvas, everywholebodytailandclaw within central70% of itscell, uniform30pxclearblankgutters. Same rigid skull/pelvis scale in everycell. Animation plays in place, no horizontalrootdrift. Fullbodies, nooverlap,no cut-offlimbs,noextraanatomy. GenuinelytransparentRGBA ifpossible;otherwise FLAT PURE MAGENTA #FF00FF. NO checkerboard,whitebackdrop,shadow,ground,particles,text,grid,labels,watermark.\nCRITICAL MOTION: ONE COMPLETE BIPED RUN CYCLE, not idle. Pose1 left foot far forward contacting ground, right leg far back; pose2 left support compressed with hip lower, right knee swings forward; pose3 right knee passes supporting left leg and left arm swings forward; pose4 push-off, both feet briefly offground; pose5 RIGHT foot far forward contacts with left leg far back (opposite pose1); pose6 right support compressed, left knee swings; pose7 left knee passes, right arm forward; pose8 push-off suspended returning toward pose1. Visibly alternating opposite legs and counter-swinging arms, clear weight transfer. Body remains oriented RIGHT and hip horizontally fixed in every cell; no eight copies of same stance.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_071_move.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:25.713Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-071-albino-red-xenomorph/move.png",
+      "sourceSha256": "01419ffd04eebef58d5a1d17929499d7bad7f78acdf9ce6cccda5a0932fef5c5",
+      "contractPromptSha256": "4bd71c3419becb75f7de6ce9b8b43264becf8616ce6316a8de13972076317971",
+      "promptSha256": "4b17609268268d0ec9f2cb4eebd01952ae58b70c03e0c5f8ad9bec8db826c96d",
+      "referenceLockSha256": "d73e1905f679ff40f2fcd4c53c406ffb45f32ffbaaa1f9ec5715771957513657"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-071-albino-red-xenomorph",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_071_attack",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Image2 is the ONLY design reference: Albino Red-caste Warrior071 idle. Ignore Image1. Create ONE newly authored animation sheet of precisely the SAME creature, preserving skull, four dorsal tubes, long segmented spear tail, pearl bone/ashgray/rose palette, material shading and limb lengths. Pixel-art game sprites matching reference, strict RIGHT-facing side-on orthographic view, NO camera rotation.\nExactly8poses in4columns×2rows,1774×887canvas, everywholebodytailandclaw within central70% of itscell, uniform30pxclearblankgutters. Same rigid skull/pelvis scale in everycell. Animation plays in place, no horizontalrootdrift. Fullbodies, nooverlap,no cut-offlimbs,noextraanatomy. GenuinelytransparentRGBA ifpossible;otherwise FLAT PURE MAGENTA #FF00FF. NO checkerboard,whitebackdrop,shadow,ground,particles,text,grid,labels,watermark.\nCRITICAL MOTION: ONE COMPLETE BIPED CLAW LUNGE. Pose1 guard; pose2 rear leg loads and torso coils back; pose3 front knee steps forward, striking arm drawn back; pose4 torso thrusts forward and front claw fully extended at target; pose5 contact and follow-through over bent front knee; pose6 rear support catches body; pose7 torso rises and arm retracts; pose8 returns near guard. Large clearly distinct anticipation, impact and recovery, real pelvis/torso weight transfer, no static arm waving. Keep 2arms/2legs only.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_071_attack.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:25.879Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-071-albino-red-xenomorph/attack.png",
+      "sourceSha256": "6cda591520f436b597691b48463968704f58a13fd30fa47d89ecb96409dd12b7",
+      "contractPromptSha256": "ed94823e1eb5d49ea69a31a7769e8ccb580dbc6877a7b39bc6e055e23275564b",
+      "promptSha256": "5fe3edd9306b0ca9894d2726b09efe8524267467c8498a6b6448c186816d6830",
+      "referenceLockSha256": "d73e1905f679ff40f2fcd4c53c406ffb45f32ffbaaa1f9ec5715771957513657"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-071-albino-red-xenomorph",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_071_death",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Image2 is the ONLY design reference: Albino Red-caste Warrior071 idle. Ignore Image1. Create ONE newly authored animation sheet of precisely the SAME creature, preserving skull, four dorsal tubes, long segmented spear tail, pearl bone/ashgray/rose palette, material shading and limb lengths. Pixel-art game sprites matching reference, strict RIGHT-facing side-on orthographic view, NO camera rotation.\nExactly8poses in4columns×2rows,1774×887canvas, everywholebodytailandclaw within central70% of itscell, uniform30pxclearblankgutters. Same rigid skull/pelvis scale in everycell. Animation plays in place, no horizontalrootdrift. Fullbodies, nooverlap,no cut-offlimbs,noextraanatomy. GenuinelytransparentRGBA ifpossible;otherwise FLAT PURE MAGENTA #FF00FF. NO checkerboard,whitebackdrop,shadow,ground,particles,text,grid,labels,watermark.\nCRITICAL MOTION: ONE IRREVERSIBLE DEATH SEQUENCE. Pose1 lethal flinch standing; pose2 knees buckle and head drops; pose3 one knee contacts ground; pose4 body falls forward/down, forearm catches; pose5 hip drops and torso lies side-on low; pose6 completely prone fallen body; pose7 tail settles around motionless prone body; pose8 terminal dead prone body. Last three poses must be a collapsed corpse on ground, never standing or recovering. Entire anatomy attached, no gore or fragments.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_071_death.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:26.042Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-071-albino-red-xenomorph/death.png",
+      "sourceSha256": "eb81fe89237b19a0e151429ebe9663187e7bd6788841104bf95d9e0c70379daa",
+      "contractPromptSha256": "8a62244e3b4cafbb0660cf65b58d053163510a3640628c85f9eb709dcbcd6307",
+      "promptSha256": "aaa32a25b543aaaca471fcd284133bdfcb9cb38642d91e9c0f12c2efe887abf2",
+      "referenceLockSha256": "d73e1905f679ff40f2fcd4c53c406ffb45f32ffbaaa1f9ec5715771957513657"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+      "clipId": "idle",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_072_idle_tailfix",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: precise-object-edit. EDIT ONLY IMAGE1, the Albino K-Series Warrior072 idle sheet. Image2 is NOT a target and must be ignored. Preserve all8poses, exact head and body design, originalcreamybone/lowchromastraw palette and 4x2layout. Correct ONLY the tail tip in EACH pose: the K-Series tail ends in a large broad hooked crescent blade, pale bone edged, abouthalf the craniallength, like a curved leaf spear with sharply recurvedpoint. NOT the presentthinpoint. Keepthesegmentedtail fulllength andsamecurve, leave30pxemptycellmargins around the larger tip, nooverlap. Flatmagenta background unchanged, no white/checkerboard/shadows/text. Allotheranatomy andeightidlemotions unchanged, right-facingorthographic view.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_072_idle_tailfix.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:26.209Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-072-albino-k-series-yellow-xenomorph/idle.png",
+      "sourceSha256": "572308512b0765d5e3b0e5c056561907e450acc8fa58986eae611977d5ca0f30",
+      "contractPromptSha256": "5227f8879a73c2b7b17b1f1f738b02393599be8a549dafc1cac45186fb0acd15",
+      "promptSha256": "2d3dbf24da1577ac7de428a457686ece23bfe5b9755a208abc49c9f005b0ebdd",
+      "referenceLockSha256": "05b04d0c6f7567d3f585c760d9078199d2c0e8bf54c904f0beebfee4c3dde312"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+      "clipId": "move",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_072_move",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Input Image 1 is the ONLY identity reference, the corrected Albino K-Series Warrior 072 idle sheet with its broad hooked tail blade. Create a newly authored sprite animation of exactly this SAME creature. Preserve the long eyeless ridged skull and raised central keel, four dorsal tubes, narrow rib cage and waist, exactly two arms and two digitigrade legs, segmented tail with the LARGE BROAD HOOKED CRESCENT BLADE clearly retained in every pose. Same pale bone / low-chroma straw / grey-olive material palette and fine pixel-art shading. Strict RIGHT-facing 2D side-on orthographic camera.\nEight complete poses, exactly 4 columns by 2 rows, 1774x887 canvas. Keep each whole body, claws and entire tail within its own cell with at least 30 pixels of blank gutter on every side. Same physical skull, rib cage and pelvis size across all poses; no resizing the dead or crouching poses. In-place movement with a stationary horizontal pelvis root. Prefer genuine transparent RGBA; otherwise an absolutely uniform solid #FF00FF magenta backdrop. No checkerboard, white, shadows, platforms, grid lines, labels, text, particles, extra limbs or camera rotation.\nMOTION: one complete fluid biped RUN, not idle. Read left-to-right then next row: 1 left foot forward contact/right foot back, 2 left leg compressed and right knee swinging forward, 3 right knee passes left supporting leg, 4 airborne push-off, 5 right foot forward contact/left leg back, 6 right support compressed and left knee swings, 7 left knee passes right support, 8 airborne push-off returning to pose1. Arms counter-swing. Clearly distinguish support, compression, passing and flight, opposite legs exchange leading position. Preserve tail blade in each frame, with secondary tail follow-through.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_072_move.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:26.383Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-072-albino-k-series-yellow-xenomorph/move.png",
+      "sourceSha256": "353d21c03aab51f7449d03938fd89c0739598340665da7e635c06d084bf26dd4",
+      "contractPromptSha256": "ee609f6ad149b3d2a01357bda23655baecc9cd718f2225c623705bae85b4727a",
+      "promptSha256": "0183066e5553244945e447cfd6b715fe82faae1446253e3dc59924b2cd4856cc",
+      "referenceLockSha256": "05b04d0c6f7567d3f585c760d9078199d2c0e8bf54c904f0beebfee4c3dde312"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+      "clipId": "attack",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_072_attack",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Input Image 1 is the ONLY identity reference, the corrected Albino K-Series Warrior 072 idle sheet with its broad hooked tail blade. Create a newly authored sprite animation of exactly this SAME creature. Preserve the long eyeless ridged skull and raised central keel, four dorsal tubes, narrow rib cage and waist, exactly two arms and two digitigrade legs, segmented tail with the LARGE BROAD HOOKED CRESCENT BLADE clearly retained in every pose. Same pale bone / low-chroma straw / grey-olive material palette and fine pixel-art shading. Strict RIGHT-facing 2D side-on orthographic camera.\nEight complete poses, exactly 4 columns by 2 rows, 1774x887 canvas. Keep each whole body, claws and entire tail within its own cell with at least 30 pixels of blank gutter on every side. Same physical skull, rib cage and pelvis size across all poses; no resizing the dead or crouching poses. In-place movement with a stationary horizontal pelvis root. Prefer genuine transparent RGBA; otherwise an absolutely uniform solid #FF00FF magenta backdrop. No checkerboard, white, shadows, platforms, grid lines, labels, text, particles, extra limbs or camera rotation.\nMOTION: one complete claw LUNGE with anticipation and recovery. Pose1 guard, 2 rear leg loads with hips pulled back, 3 forward knee advances and striking claw cocks, 4 long forward thrust with fully extended claw and torso lowered, 5 contact follow-through with front knee compressed, 6 rear leg catches forward weight, 7 torso rises and arm withdraws, 8 guard restored. Show visible hip/torso transfer, no static arm waving, no alternate creature. Full tail blade remains visible inside each cell.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_072_attack.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:26.552Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-072-albino-k-series-yellow-xenomorph/attack.png",
+      "sourceSha256": "3522daa76dae89fc8a64781e71b1a73425707565805754d627af1ba8266afc65",
+      "contractPromptSha256": "5023df809480968bdadf8ae21960974a04d2b700e31d41bdc26b3f83833dfd8e",
+      "promptSha256": "2cf2f0d724f1c0eab5355a18aee123b7675523cdb22733d6ac17fa53b87a09da",
+      "referenceLockSha256": "05b04d0c6f7567d3f585c760d9078199d2c0e8bf54c904f0beebfee4c3dde312"
+    },
+    {
+      "kind": "generated",
+      "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+      "clipId": "death",
+      "provider": "OpenAI ImageGen",
+      "generationId": "local-call-receipt-2026-09-05-v72_072_death",
+      "providerGenerationId": null,
+      "actor": "Codex V72 enemy gap generation",
+      "actualPromptText": "Use case: stylized-concept. Input Image 1 is the ONLY identity reference, the corrected Albino K-Series Warrior 072 idle sheet with its broad hooked tail blade. Create a newly authored sprite animation of exactly this SAME creature. Preserve the long eyeless ridged skull and raised central keel, four dorsal tubes, narrow rib cage and waist, exactly two arms and two digitigrade legs, segmented tail with the LARGE BROAD HOOKED CRESCENT BLADE clearly retained in every pose. Same pale bone / low-chroma straw / grey-olive material palette and fine pixel-art shading. Strict RIGHT-facing 2D side-on orthographic camera.\nEight complete poses, exactly 4 columns by 2 rows, 1774x887 canvas. Keep each whole body, claws and entire tail within its own cell with at least 30 pixels of blank gutter on every side. Same physical skull, rib cage and pelvis size across all poses; no resizing the dead or crouching poses. In-place movement with a stationary horizontal pelvis root. Prefer genuine transparent RGBA; otherwise an absolutely uniform solid #FF00FF magenta backdrop. No checkerboard, white, shadows, platforms, grid lines, labels, text, particles, extra limbs or camera rotation.\nMOTION: one irreversible DEATH collapse. Pose1 standing lethal flinch, 2 knees buckle and head dips, 3 one knee hits ground, 4 body falls forward with forearm catching, 5 hip lands and torso lies low, 6 fully prone dead body, 7 tail settles, 8 final completely prone motionless corpse. Last three frames never stand or recover. Same anatomical size, do not miniaturize collapsed corpse. No gore, no detached pieces. Keep the large tail blade and skull wholly inside every cell.",
+      "promptArchivePath": "docs/references/v72-enemy-gap-prompts/v72_072_death.txt",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Completed built-in image_gen call. Tool returned image bytes only, with no provider generation ID; generationId is explicitly a local receipt label, not a provider ID. Original returned PNG saved unchanged. Source SHA and current contract/reference hashes are validated by the existing recorder. Physical/animation acceptance remains separate.",
+      "at": "2026-09-05T14:59:26.868Z",
+      "sourcePath": "assets/openai/sprites/frames/v66/batch-005/enemy-072-albino-k-series-yellow-xenomorph/death.png",
+      "sourceSha256": "ec60f60facf2dbcc4f380a6a4b36f44b842f2eb37cd20f24bfb097cf5ce2b806",
+      "contractPromptSha256": "539a6ee404d0647b45eec0e890fccd9ec7c7f56aef6f90892dbc93e44c38b3c4",
+      "promptSha256": "b5c150aa12c406ba9207fe8e2d1fe7e08c0f4fdbfd363f203bf5d6f22aba19fe",
+      "referenceLockSha256": "05b04d0c6f7567d3f585c760d9078199d2c0e8bf54c904f0beebfee4c3dde312"
+    },
+    {
+      "kind": "review-rejected",
+      "profileId": "enemy-071-albino-red-xenomorph",
+      "actor": "Codex V72 independent animation review",
+      "note": "Four newly generated clips and normalized atlas preserved. Run repeats an insufficiently distinguishable near/far leg half-cycle; the targeted r2 retry did not resolve this. No reviewed airborne body roots or anatomical scale yet. See docs/references/V72_071_ALBINO_RED_CANDIDATE_REVIEW.md. Technical alpha/cell checks do not imply visual acceptance.",
+      "canonExact": false,
+      "runtimeIntegrated": false,
+      "at": "2026-09-05T15:11:01.919Z"
+    },
+    {
+      "kind": "review-rejected",
+      "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
+      "actor": "Codex V72 independent animation review",
+      "note": "Four newly generated clips and normalized atlas preserved. Run repeats its first half-cycle; front-foot loop needs anatomy review. Broad hooked tail and terminal death are retained, but 32 physical roots and anatomical scale remain pending. See docs/references/V72_072_ALBINO_K_SERIES_CANDIDATE_REVIEW.md. No runtime integration.",
+      "canonExact": false,
+      "runtimeIntegrated": false,
+      "at": "2026-09-05T15:11:14.245Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V72 root integration review",
+      "note": "Individual K-Series standard profile reviewed against its retained locked project identity and 32-pose contact sheet. Independent source/landmark review inspected all four originals and measured 32 physical roots plus 12 rigid cranial chords. Root inspected the original move and full 768x1780 final contact without aspect distortion: contact/compression/passing, claw anticipation/lunge/recovery and irreversible terminal collapse are distinct; side-facing identity and palette remain consistent. Final normalization is lossless, guarded and has zero strict magenta spill; post-generation scale proof and every physical root validate. This is acceptance of this authored adaptation, not pixel-identical canon certification or completion of its batch. Runtime integration is a separate subsequent gate.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "canonExact": false,
+      "at": "2026-09-05T15:18:06.061Z",
+      "metadataSha256": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
+      "atlasSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V72.1 release revalidation",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "metadataSha256": "3e3ce83deee2559570e2c1f5383032fad69b07dd13b8a474067d714e9832f2dd",
+      "atlasSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4",
+      "canonExact": false,
+      "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately.",
+      "at": "2026-09-05T16:23:09.094Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V72.1 release revalidation",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "metadataSha256": "bbccd2738d3686aa2e4fbb0d277b9ef4edcb295a63dc2f487fbb9e37cd07cdca",
+      "atlasSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259",
+      "canonExact": false,
+      "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately.",
+      "at": "2026-09-05T16:23:09.318Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V72.1 release revalidation",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+      "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb",
+      "canonExact": false,
+      "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately.",
+      "at": "2026-09-05T16:23:09.522Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V72.1 release revalidation",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+      "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29",
+      "canonExact": false,
+      "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately.",
+      "at": "2026-09-05T16:23:09.740Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V72.1 release revalidation",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "metadataSha256": "254a421e7cabcaa0fae3402a2beb9952f7fbe5648ea77994475388a7f9afa1d0",
+      "atlasSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+      "canonExact": false,
+      "note": "Renew unchanged earlier acceptance only: current source atlas and normalization metadata SHA-256 were compared to the previous accepted event and are identical. No new generation or art completion counted. The shared runtime registry/test changed for K-Series020, so the complete runtime suite was rerun (999 tests,998 pass,1 skip,0 fail) and its integration evidence is renewed separately.",
+      "at": "2026-09-05T16:23:09.948Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "Unchanged previously integrated profile revalidated by the passing full999-test suite after shared registry/tests changed to add K-Series020. This renews stale shared runtime hashes; it is not a new authored enemy.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:10.168Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "Unchanged previously integrated profile revalidated by the passing full999-test suite after shared registry/tests changed to add K-Series020. This renews stale shared runtime hashes; it is not a new authored enemy.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:10.375Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "Unchanged previously integrated profile revalidated by the passing full999-test suite after shared registry/tests changed to add K-Series020. This renews stale shared runtime hashes; it is not a new authored enemy.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:10.572Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "Unchanged previously integrated profile revalidated by the passing full999-test suite after shared registry/tests changed to add K-Series020. This renews stale shared runtime hashes; it is not a new authored enemy.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:10.775Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "Unchanged previously integrated profile revalidated by the passing full999-test suite after shared registry/tests changed to add K-Series020. This renews stale shared runtime hashes; it is not a new authored enemy.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:10.976Z"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V72.1 runtime verification",
+      "note": "K-Series020 exact ID is wired to its own32-pose atlas in the catalog and real GameEngine. Browser verified every clip, shared source identity, death hold, movement, left-facing flip,136px body, ground930, and one30HP hit on global frame20 at4/12s with no repeated damage during recovery. Saved campaign state unchanged in isolated QA.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "npm test",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "828b7ffb15205c91888d6968aa9849bf90fe338a7d1e3f7e363715d46756dea7"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "f745f137a52141943a6de14956e683da5c9398e78367ff50b544bb5e2fae61ec"
+        },
+        "log": {
+          "path": "docs/references/v72-k-series-020-review/runtime-test-output.md",
+          "sha256": "dba9058c32d1e3e34734751b936522745fc0b7c2fe1ce9e5814a3045df2d181f"
+        }
+      },
+      "at": "2026-09-05T16:23:11.167Z"
     }
   ]
 }

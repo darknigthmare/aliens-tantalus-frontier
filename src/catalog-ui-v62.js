@@ -651,8 +651,9 @@ export class CatalogWorkbenchV62 {
     );
     header.append(heading);
     this.detail.append(header);
-    if (record.catalog === 'enemies') this.renderGameplayScaleV72(record);
+    // Keep playback next to its portrait even when a fourth comparison wraps.
     if (animationControls.children.length) this.detail.append(animationControls);
+    if (record.catalog === 'enemies') this.renderGameplayScaleV72(record);
     this.detail.append(renderTaxonomyPath(this.document, record));
 
     const canonSection = this.renderSection('FAITS DE RÉFÉRENCE', 'canon');

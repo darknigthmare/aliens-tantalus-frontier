@@ -78,8 +78,8 @@ function assertCell(sample, sheetId, clipId, frame) {
   assert.ok(sample.clip.frames.includes(frame), 'aucun passage dans la ligne d une autre action');
 }
 
-test('V66 batch001: les cinq profils acceptes resolvent leurs propres plaques de32poses', () => {
-  assert.equal(readyIds.length, 5);
+test('V66 et K-Series020: les six profils acceptes resolvent leurs propres plaques de32poses', () => {
+  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph']);
   const paths = new Set();
   for (const profileId of readyIds) {
     const sheet = requireSheet(profileId);
@@ -101,7 +101,7 @@ test('V66 batch001: les cinq profils acceptes resolvent leurs propres plaques de
     assert.equal(shouldFlipSprite(sheet.id, -1), true);
     paths.add(sheet.path);
   }
-  assert.equal(paths.size, 5, 'aucune plaque partagee entre deux identites');
+  assert.equal(paths.size, 6, 'aucune plaque partagee entre deux identites');
 });
 
 test('lookup V66: ID exact prioritaire, aucun emprunt par nom contradictoire, variante ou espèce voisine', () => {
@@ -204,23 +204,24 @@ for (const profileId of combatIds) {
     assert.deepEqual(frames, Array.from({ length: 32 }, (_, index) => index));
   });
 
-  test(`${profileId}: premier rendu tardif et horloge graphique decalee respectent l impact combat5/12`, () => {
+  test(`${profileId}: premier rendu tardif et horloge graphique decalee respectent l impact propre au clip`, () => {
     const { engine, enemy, events } = fixture(profileId);
     const contract = combatContracts[profileId];
     engine.player.x = enemy.x + contract.meleeRange - 12;
     updateEnemyBatchCombatV66(engine, enemy, 0);
     assert.equal(enemy.attacking, true);
-    updateEnemyBatchCombatV66(engine, enemy, 5 / 12);
+    const impactFrame = Math.floor(contract.impact * contract.fps + 1e-9);
+    updateEnemyBatchCombatV66(engine, enemy, contract.impact);
     assert.equal(engine.player.health, 100 - enemy.damage);
     const request = resolveEnemyAnimation(enemy);
-    assert.equal(request.frame, 21, 'le temps combat prime meme au tout premier rendu');
+    assert.equal(request.frame, 16 + impactFrame, 'le temps combat prime meme au tout premier rendu');
     const controller = new SpriteAnimationController();
     for (const drawTime of [4096, 4096.01, 8192, 0]) {
-      assertCell(controller.sample(enemy.id, request, drawTime, { reducedMotion: true }), enemy.visualSheetId, 'attack', 21);
+      assertCell(controller.sample(enemy.id, request, drawTime, { reducedMotion: true }), enemy.visualSheetId, 'attack', 16 + impactFrame);
     }
     assert.equal(engine.player.health, 100 - enemy.damage, 'echantillonner une image ne rejoue aucun degat');
     assert.equal(events.filter((event) => event.type === 'enemy-attack-impact').length, 1);
-    updateEnemyBatchCombatV66(engine, enemy, 2 / 12);
+    updateEnemyBatchCombatV66(engine, enemy, (7 - impactFrame) / contract.fps);
     assertCell(controller.sample(enemy.id, resolveEnemyAnimation(enemy), 9000), enemy.visualSheetId, 'attack', 23);
     updateEnemyBatchCombatV66(engine, enemy, 1 / 12);
     assert.notEqual(resolveEnemyAnimation(enemy).clipId, 'attack');
