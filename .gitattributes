@@ -51,3 +51,8 @@ docs/references/v66-worklot-002-atarax-controller-review/enemy-047-atarax-contro
 docs/references/v66-worklot-002-cult-host-review/enemy-048-cult-host/source-qa.json -text
 docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/source-qa.json -text
 docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/source-qa.json -text
+# These four older physical fragments are also bound to their original CRLF bytes.
+docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/anchor-review.fragment.json -text whitespace=cr-at-eol
+docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/scale-review.fragment.json -text whitespace=cr-at-eol
+docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/anchor-review.fragment.json -text whitespace=cr-at-eol
+docs/references/v66-worklot-004-korari-stalker-review/enemy-050-korari-stalker/scale-review.fragment.json -text whitespace=cr-at-eol
