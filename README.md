@@ -1,8 +1,8 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version de travail web jouable **v70.0.0**. Le contrat consolidé **v1→v70** conserve le Tantalus comme niveau physique persistant et expose quatre lots Special Operations réellement accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69) et **SYSTÈMES DE SURVIE ALIEN** (V70). Ce dernier transforme six promesses en actions de terrain : autodestruction, portes soudables, pression par salle, routage énergétique, caméras de sécurité et acide persistant. Le registre recense 19 conversations : 2 `effective`, 8 `partial` et 9 `missing`. V70 ne prétend donc ni achever les 19 conversations ni constituer encore le jeu commercial complet.
+Version de travail web jouable **v71.0.0**. Le contrat consolidé **v1→v71** conserve le Tantalus comme niveau physique persistant et expose cinq surfaces Special Operations accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69), **SYSTÈMES DE SURVIE ALIEN** (V70) et le **HUB DE L’USS TANTALUS** (V71). V71 ajoute dix annexes physiques, des stations persistantes et 50 couches artistiques. Le hub reste **partial** : sa structure jouable ne clôt pas ses cinq dettes de production. Le registre recense 19 conversations, dont **2 effective, 8 partial et 9 missing** ; **17 conversations restent donc inachevées**.
 
-Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La V70 y est publiée en état `READY` ; la page, `build-info.json`, le runtime, le CSS et l’atlas V70 répondent en HTTP 200.
+Cible publique du projet : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app). La dernière production documentée est la V70 en état `READY`. Le déploiement et les contrôles HTTP de la V71 restent à compléter ; aucune publication V71 n’est revendiquée avant cette vérification.
 
 ## Lancer localement
 
@@ -12,25 +12,26 @@ npm.cmd run dev
 
 Ouvrir `http://127.0.0.1:4173`.
 
-## Boucle désormais effective
+## Boucle jouable et portée actuelle
 
 - Commandement : décisions datées, ressources, recherches, modules, journal et pression de crise persistants ; la diplomatie avance l'horloge, applique une transaction unique puis verrouille le canal jusqu'à son cooldown.
 - Préparation : achat, inventaire, arme, équipement à charges, véhicule, équipage, soins, costume, dossier Apex et profil Neuro-Xeno.
 - Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
-- Special Operations : le registre expose 19 conversations auditées et quatre routes jouables. Cargo Brutal et Systèmes de survie Alien sont `effective` ; QZ-17 et Alpha/Bravo restent `partial` tant que leurs promesses globales respectives ne sont pas entièrement produites.
+- Special Operations : 19 conversations auditées et cinq surfaces jouables. Cargo Brutal et Systèmes de survie Alien sont `effective` ; QZ-17, Alpha/Bravo et Hub commercial sont jouables mais `partial`. Quatre surfaces sont des campagnes ; le hub utilise `accessSurface: hub` et conserve le total à 440.
 - Doctrine Alpha / Bravo : exactement quatre opérateurs actifs, deux binômes persistants, ordres et pings ancrés au terrain, trois consoles/tâches physiques et certification calculée depuis les résultats réels. Il s’agit d’une doctrine tactique dans le runtime local, pas d’un multijoueur réseau annoncé.
 - Systèmes de survie Alien : six salles physiques reliées, capacité énergétique limitée entre support-vie, sécurité et CCTV, pression/oxygène simulés, sas soudables, surveillance sans pause du monde, flaques d’acide persistantes et autodestruction à double autorisation avant extraction.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : 4 ponts, 16 salles et 16 PNJ nommés avec feuille, spécialité, animation et interaction persistante ; portes, ascenseurs, conduits, objectifs et crises xénomorphe, synthétique ou pathogène sont neutralisés dans le niveau avant résolution stratégique. Le hangar dropship assemble arrière-plan, booth de contrôle, UD-4L, portes/props, danger et premier plan indépendants au lieu d’une scène monolithique. La table d’opérations et le comptoir d’armurerie sont des landmarks bitmap collisionnables ; leur dialogue puis leur interface se superposent au hub mis en pause, qui reprend au même endroit.
+- Hub : 4 ponts, 16 salles historiques, 10 annexes V71 et 16 PNJ nommés dans le hub historique. Chaque annexe est un sous-niveau 1 920 × 720 relié par une porte réciproque, avec sol, passerelle, échelle, colliders, six placements logiques, station persistante et cinq couches WebP (`far`, `mid`, `prop`, `foreground`, `door`). Les dix branches se parcourent physiquement ; leurs PNJ dédiés et les bitmaps autonomes de chaque prop restent à produire. Le vestibule BIOFORGE est vide en usage normal ; le niveau expérimental complet est toujours `missing`.
+- Services V71 : Logistique exécute les ordres de module, MIRE indexe les archives, CCTV effectue un scan, Proving Ground prépare un soutien et Capsules arme une mitigation de crise. La relecture physique des archives, les commandes CCTV/lockdown et les exercices de tir/P-5000/tutoriels restent à réaliser. Les Capsules n’exécutent pas de scénario d’autodestruction et les visites ne délivrent aucun certificat d’exercice.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
 - Logistique durable : récupération industrielle, récupération de mission et commerce diplomatique peuvent renouveler le carburant ; une campagne n'est pas condamnée par une réserve finie sans source.
 
-Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le manifeste principal V64 comptait **195 atlas / 2 772 cellules** ; les atlas supplémentaires V65/V66 et les visuels d’opérations V67→V70 sont suivis par leurs propres contrats et ne sont pas additionnés ici sans inventaire consolidé. Les **571 profils ennemis gameplay** ne signifient donc pas 571 silhouettes bitmap dédiées. Une entrée catalogue n'est jamais présentée comme une plaque unique lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
+Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le manifeste principal V64 comptait **195 atlas / 2 772 cellules** ; les atlas supplémentaires V65/V66 et les visuels d’opérations V67→V71 sont suivis par leurs propres contrats et ne sont pas additionnés ici sans inventaire consolidé. Les **571 profils ennemis gameplay** ne signifient donc pas 571 silhouettes bitmap dédiées. Une entrée catalogue n'est jamais présentée comme une plaque unique lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
-Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d'arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables, la source UD-4L agrandie, les petits props finaux par salle, ainsi que les 17 conversations encore `partial` ou `missing`.
+Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d’arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie. Pour le hub V71, cinq dettes restent explicites : props bitmap autonomes, PNJ dédiés, exercices physiques, relecture physique des archives et commandes CCTV/lockdown. Le validateur peut valider la structure tout en conservant `productionReady: false` et `complete: false`. Le BIOFORGE complet et les autres promesses des **17 conversations partial ou missing** restent à produire.
 
 ## Contrôles
 
@@ -48,13 +49,15 @@ Coop locale : `J/L`, `I/K`, `U`, `O`, `Y`, `T`, `G`.
 
 Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise. Les commandes tactiles restent sous la scène en portrait.
 
+Annexes V71 : approcher une porte et utiliser `E` pour entrer ; parcourir le sous-niveau horizontal puis activer sa station avec `E`. La même porte ramène à la salle parente et la position/les améliorations sont persistées.
+
 Doctrine Alpha / Bravo : `1`, `2` et `3` sélectionnent Alpha, Bravo ou les deux groupes ; `C` arme le ping terrain ; `B`, `N` et `M` appliquent respectivement `TENIR`, `FOCUS` et `RALLIER`.
 
 Systèmes de survie Alien : les consoles et sas s’utilisent physiquement avec `E`. Le dock diégétique distribue l’énergie, change de flux CCTV et annule une action temporisée ; les contrôles ne deviennent actifs qu’à portée de l’équipement correspondant.
 
 ## Contenu conservé et consommé
 
-| Catalogue | Total v70 |
+| Catalogue | Total v71 |
 | --- | ---: |
 | Campagnes | 440 |
 | Mondes | 64 |
@@ -77,10 +80,16 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-La gate V70 est validée : **46/46 tests V70 ciblés**, **887 tests réussis**, **1 test Windows ignoré comme prévu**, **0 échec**, **268 modules lintés** et un build v70.0.0 de **3 450 entrées catalogue**. Le navigateur a validé le checkpoint clavier, la traversée docking → cargo, le HUD live, le tactile 390 × 844, 0 erreur console et 0 violation axe. La production Vercel est `READY` et ses URLs runtime ont été vérifiées en HTTP.
+Le dernier passage complet consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargent sans erreur navigateur. La recette BIOFORGE et ses neuf boutons tactiles a été revérifiée sur D ; le passage complet final confirme ces 952 tests. Le contrôle d’accessibilité final et la publication restent à compléter ; leurs preuves et chiffres seront actualisés dans [VALIDATION_V71](docs/VALIDATION_V71.md).
+
+Le workspace a été récupéré sur `D:\CodexWork\aliens-tantalus-frontier\project` : **4 808 fichiers aux empreintes identiques**, deux sources tronquées restaurées et **3 864 fixtures synthétiques** (1 459 999 407 octets) déplacées sur D après vérification taille/SHA-256. Ces fixtures sont conservées dans `recovered-test-fixtures-20260905` et restent récupérables.
 
 ## Dossier de production
 
+- [Historique et gates V71](docs/VERSION_HISTORY_V71.md)
+- [Audit level design et cohérence du hub V71](docs/V71_HUB_COMMERCIAL_AUDIT.md)
+- [Provenance artistique V71](docs/ART_PROVENANCE_V71.md)
+- [Validation V71](docs/VALIDATION_V71.md)
 - [Historique et gates V70](docs/VERSION_HISTORY_V70.md)
 - [QA navigateur V70 — systèmes de survie](docs/V70_BROWSER_QA.md)
 - [QA artistique V70 — systèmes de survie](docs/V70_ALIEN_SURVIVAL_ART_QA.md)

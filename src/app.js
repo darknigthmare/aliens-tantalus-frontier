@@ -15,11 +15,12 @@ import {
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
   performDiplomacy
 } from './advanced-systems.js';
+import { HUB_ANNEX_SYSTEM_EFFECTS_V71, applyHubAnnexBusinessV71 } from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { GameEngine } from './game-production-runtime.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v62-runtime.js';
+import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v71-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
@@ -238,17 +239,27 @@ function assertOperationMutable() {
 }
 
 function runTimedMutation(mutation, successMessage) {
+  const previous = clone(saveSystem.data);
   const before = absoluteHours(saveSystem.data.clock);
+  let result;
   try {
-    const result = mutation();
+    result = mutation();
     simulateElapsed(before);
-    commit(successMessage || result?.result || 'Action confirmée.');
-    return result;
+    ensureAdvancedState(saveSystem.data);
+    saveSystem.commit();
   } catch (error) {
-    toast(error.message);
-    renderAll();
+    saveSystem.data = previous;
+    try { toast(error.message); renderAll(); } catch { /* L'action reste refusée même si l'interface échoue. */ }
     return null;
   }
+  // Le stockage est confirmé : une erreur visuelle ne doit jamais rejouer la transaction.
+  try {
+    renderAll();
+    toast(successMessage || result?.result || 'Action confirmée.');
+  } catch (error) {
+    console.error('Action enregistrée ; actualisation visuelle incomplète.', error);
+  }
+  return result;
 }
 
 function applyRuntimeSettings() {
@@ -494,6 +505,8 @@ function renderStrategy() {
 
 function renderModules() {
   const summary = getShipModuleEffects(saveSystem.data);
+  const pending = saveSystem.data.hub.pendingModuleActionV71;
+  const hasPending = Boolean(pending);
   byId('module-summary').innerHTML = `<span><b>${summary.powerLoad}/${summary.powerCapacity}</b>CHARGE</span><span><b>${summary.sparePower}</b>MARGE</span><span><b>${summary.operational}</b>ACTIFS</span>`;
   const term = byId('module-search').value.trim().toLowerCase();
   const modules = SHIP_MODULES.filter((module) => JSON.stringify(module).toLowerCase().includes(term));
@@ -502,9 +515,12 @@ function renderModules() {
     const integrity = Math.round(saveSystem.data.hub.moduleIntegrity?.[module.id] ?? 100);
     const quote = getModuleQuote(module);
     const available = !saveSystem.data.strategy.currentOperation && summary.sparePower >= module.power && canAfford(saveSystem.data, quote);
-    const action = installed
-      ? `<button class="button compact" data-module-repair="${module.id}" ${integrity >= 100 ? 'disabled' : ''}>RÉPARER</button>`
-      : `<button class="button compact" data-module-install="${module.id}" ${available ? '' : 'disabled'}>INSTALLER</button>`;
+    const queued = pending?.moduleId === module.id && pending?.type === (installed ? 'repair' : 'install');
+    const action = queued
+      ? `<button class="button compact danger" data-module-cancel="${module.id}">ANNULER ORDRE</button>`
+      : installed
+        ? `<button class="button compact" data-module-repair="${module.id}" ${integrity >= 100 || hasPending ? 'disabled' : ''}>PLANIFIER RÉPARATION</button>`
+        : `<button class="button compact" data-module-install="${module.id}" ${available && !hasPending ? '' : 'disabled'}>PLANIFIER INSTALLATION</button>`;
     return `<article class="catalog-card"><span class="eyebrow">${escapeHtml(module.category)} · ${module.power} MW</span><h3>${escapeHtml(module.name)}</h3><p>${escapeHtml((module.effects || []).join(' · '))}</p><div class="mini-tags"><span>NIV ${module.level}</span><span>${installed ? `${integrity}% INTÉGRITÉ` : formatCost(quote)}</span></div><footer><span>${module.id}</span>${action}</footer></article>`;
   }).join('');
 }
@@ -563,6 +579,9 @@ function renderCampaigns() {
 }
 
 function specialOperationStatusV67(operation) {
+  if (operation.playable && operation.accessSurface === 'hub') {
+    return { label: operation.implementationStatus === 'effective' ? 'ACTIF DANS LE HUB' : 'PARTIEL · HUB JOUABLE', action: 'OUVRIR LE HUB', tone: operation.implementationStatus };
+  }
   if (operation.implementationStatus === 'effective') return { label: 'JOUABLE', action: 'PLANIFIER', tone: 'effective' };
   if (operation.implementationStatus === 'partial' && operation.playable) return { label: 'PARTIELLE · LOT JOUABLE', action: 'PLANIFIER LE LOT', tone: 'partial' };
   if (operation.implementationStatus === 'partial') return { label: 'PARTIELLE', action: 'INTÉGRATION PARTIELLE', tone: 'partial' };
@@ -587,15 +606,17 @@ function renderSpecialOperationsV67(term = '') {
     const planned = Boolean(campaign) && saveSystem.data.strategy.plannedCampaignId === campaign.id;
     const active = Boolean(campaign) && activeCampaignId === campaign.id;
     const blockedByOperation = Boolean(activeCampaignId) && !active;
-    const canPlan = operation.playable && worldUnlocked && !blockedByOperation;
+    const hubSurface = operation.accessSurface === 'hub';
+    const canPlan = operation.playable && (hubSurface || worldUnlocked) && !blockedByOperation;
     const action = active ? 'OPÉRATION ACTIVE' : planned ? 'PLANIFIÉE' : status.action;
     const mechanics = operation.requiredMechanics.slice(0, 3).map((mechanic) => `<span>${escapeHtml(mechanic.replaceAll('-', ' '))}</span>`).join('');
     const unavailableReason = blockedByOperation ? 'Une autre opération est active.'
-      : operation.playable && !worldUnlocked ? 'Route verrouillée.'
+      : operation.playable && !hubSurface && !worldUnlocked ? 'Route verrouillée.'
         : operation.implementationStatus === 'partial' ? 'Promesse recensée, intégration encore incomplète.'
           : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
             : '';
-    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : 'CHATGPT · REGISTRE V69'}</span><button class="button compact" ${campaign ? `data-plan-campaign="${campaign.id}"` : ''} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+    const actionAttribute = campaign ? `data-plan-campaign="${campaign.id}"` : hubSurface ? 'data-open-hub' : '';
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : hubSurface ? 'USS TANTALUS · HUB PHYSIQUE' : 'CHATGPT · REGISTRE V71'}</span><button class="button compact" ${actionAttribute} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
   }).join('') || '<p class="special-operation-empty">Aucune directive ChatGPT ne correspond à cette recherche.</p>';
 }
 
@@ -1513,6 +1534,125 @@ function applyHubService(action) {
   return true;
 }
 
+function queuePhysicalModuleActionV71(type, moduleId) {
+  assertOperationMutable();
+  if (saveSystem.data.hub.pendingModuleActionV71) {
+    throw new Error('Un ordre logistique est déjà en attente. Annulez-le avant d’en planifier un autre.');
+  }
+  const module = SHIP_MODULES.find((entry) => entry.id === moduleId);
+  if (!module) throw new Error('Module inconnu.');
+  const installed = saveSystem.data.hub.moduleIds.includes(module.id);
+  if (type === 'install') {
+    if (installed) throw new Error('Module déjà installé.');
+    const summary = getShipModuleEffects(saveSystem.data);
+    if (summary.sparePower < module.power) throw new Error('Puissance disponible insuffisante.');
+    if (!canAfford(saveSystem.data, getModuleQuote(module))) throw new Error('Ressources insuffisantes.');
+  } else if (type === 'repair') {
+    if (!installed) throw new Error('Module non installé.');
+    if ((saveSystem.data.hub.moduleIntegrity?.[module.id] ?? 100) >= 100) throw new Error('Module déjà à pleine intégrité.');
+  } else {
+    throw new Error('Ordre logistique invalide.');
+  }
+  saveSystem.data.hub.pendingModuleActionV71 = {
+    schema: 71,
+    type,
+    moduleId: module.id,
+    queuedAt: Date.now()
+  };
+  commit(`Ordre enregistré · rejoignez la Soute / Logistique pour ${type === 'install' ? 'installer' : 'réparer'} ${module.name}.`);
+}
+
+function cancelPhysicalModuleActionV71(moduleId) {
+  assertOperationMutable();
+  const pending = saveSystem.data.hub.pendingModuleActionV71;
+  if (!pending || pending.moduleId !== moduleId) throw new Error('Cet ordre logistique n’est plus en attente.');
+  const module = SHIP_MODULES.find((entry) => entry.id === pending.moduleId);
+  saveSystem.data.hub.pendingModuleActionV71 = null;
+  commit(`Ordre logistique annulé · ${module?.name || pending.moduleId}.`);
+  return true;
+}
+
+function assertAnnexServiceAvailableV71(save, annexId) {
+  const effects = HUB_ANNEX_SYSTEM_EFFECTS_V71[annexId];
+  if (!effects) throw new Error('Station d’annexe inconnue.');
+  const key = `annex:${annexId}`;
+  const windowId = Math.floor(absoluteHours(save.clock) / 6);
+  if (save.hub.services[key] === windowId) throw new Error('Station déjà utilisée pendant cette relève.');
+  for (const [system, amount] of Object.entries(effects)) {
+    if (amount < 0 && (Number(save.hub.systems[system]) || 0) < -amount) {
+      throw new Error(`Réserve ${system} insuffisante : ${-amount} requis.`);
+    }
+  }
+  return { effects, key, windowId };
+}
+
+function completeAnnexServiceV71(save, ticket) {
+  for (const [system, amount] of Object.entries(ticket.effects)) {
+    save.hub.systems[system] = clamp((save.hub.systems[system] ?? 0) + amount);
+  }
+  save.hub.services[ticket.key] = ticket.windowId;
+  save.clock.hour += 1;
+  if (save.clock.hour >= 24) {
+    save.clock.day += Math.floor(save.clock.hour / 24);
+    save.clock.hour %= 24;
+  }
+}
+
+function runAnnexStationTransactionV71(annexId, stationMutation = null) {
+  const working = clone(saveSystem.data);
+  const ticket = assertAnnexServiceAvailableV71(working, annexId);
+  const stationResult = stationMutation?.(working) || null;
+  completeAnnexServiceV71(working, ticket);
+  const business = applyHubAnnexBusinessV71(working, annexId);
+  working.strategy.log.unshift({
+    id: `annex-v71-${annexId}-${Date.now()}`,
+    day: working.clock.day,
+    hour: working.clock.hour,
+    title: `ANNEXE · ${annexId.toUpperCase()}`,
+    result: business.message,
+    type: 'hub-annex',
+    risk: 0,
+    incident: false
+  });
+  working.strategy.log = working.strategy.log.slice(0, 40);
+  saveSystem.data = working;
+  return {
+    result: [stationResult?.result, business.message].filter(Boolean).join(' · '),
+    business,
+    stationResult
+  };
+}
+
+function exposeAnnexStationResultV71(result) {
+  if (!result) return false;
+  const status = byId('hub-status');
+  if (status && result.business?.message) status.textContent = result.business.message;
+  return true;
+}
+
+function resolveAnnexStationV71(interaction) {
+  const annexId = interaction?.annexId;
+  if (!annexId || !interaction.effect) {
+    toast('La station physique n’a pas confirmé son action.');
+    return false;
+  }
+  const pending = saveSystem.data.hub.pendingModuleActionV71;
+  if (annexId === 'logistics' && pending) {
+    const module = SHIP_MODULES.find((entry) => entry.id === pending.moduleId);
+    const actionLabel = pending.type === 'install' ? 'installé et alimenté' : 'réparé';
+    const result = runTimedMutation(() => runAnnexStationTransactionV71(annexId, (working) => {
+      const result = pending.type === 'install'
+        ? installShipModule(working, pending.moduleId)
+        : repairShipModule(working, pending.moduleId);
+      working.hub.pendingModuleActionV71 = null;
+      return result;
+    }), `${module?.name || pending.moduleId} ${actionLabel} depuis la station logistique.`);
+    return exposeAnnexStationResultV71(result);
+  }
+  const result = runTimedMutation(() => runAnnexStationTransactionV71(annexId));
+  return exposeAnnexStationResultV71(result);
+}
+
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
   if (standaloneContext === 'forge-playtest') {
@@ -1521,6 +1661,14 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.type === 'hub:annex-transition') {
+    const status = byId('hub-status');
+    if (status) status.textContent = `${interaction.action.includes('complete') ? 'SAS STABILISÉ' : 'SAS EN MOUVEMENT'} · ${interaction.annexId.toUpperCase()}`;
+    return;
+  }
+  if (interaction.type === 'hub:annex-station') {
+    return resolveAnnexStationV71(interaction);
+  }
   if (interaction.action.startsWith('hub:vent-')) {
     const status = byId('hub-status');
     if (status) status.textContent = interaction.action === 'hub:vent-contact'
@@ -1743,8 +1891,15 @@ function bindDelegatedActions() {
     if (target.dataset.openHub !== undefined) showView('hub');
     if (target.dataset.strategyAction) runTimedMutation(() => executeStrategicAction(saveSystem.data, target.dataset.strategyAction));
     if (target.dataset.researchId) runTimedMutation(() => completeResearchProject(saveSystem.data, target.dataset.researchId));
-    if (target.dataset.moduleInstall) runTimedMutation(() => installShipModule(saveSystem.data, target.dataset.moduleInstall), 'Module installé et alimenté.');
-    if (target.dataset.moduleRepair) runTimedMutation(() => repairShipModule(saveSystem.data, target.dataset.moduleRepair), 'Module réparé.');
+    if (target.dataset.moduleInstall) {
+      try { queuePhysicalModuleActionV71('install', target.dataset.moduleInstall); } catch (error) { toast(error.message); renderModules(); }
+    }
+    if (target.dataset.moduleRepair) {
+      try { queuePhysicalModuleActionV71('repair', target.dataset.moduleRepair); } catch (error) { toast(error.message); renderModules(); }
+    }
+    if (target.dataset.moduleCancel) {
+      try { cancelPhysicalModuleActionV71(target.dataset.moduleCancel); } catch (error) { toast(error.message); renderModules(); }
+    }
     if (target.dataset.planCampaign) {
       saveSystem.data.strategy.plannedCampaignId = target.dataset.planCampaign;
       saveSystem.commit(); renderCampaigns(); toast('Campagne ajoutée au plan opérationnel.');

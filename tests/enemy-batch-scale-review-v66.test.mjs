@@ -1,8 +1,8 @@
-import test from 'node:test';
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, writeFile, unlink, symlink } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile, unlink, symlink, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, dirname } from 'node:path';
+import { join, dirname, basename, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { deflateSync } from 'node:zlib';
 import { buildEnemyBatchQueue, emptyState, appendProductionEvent, getJobStatus, REVIEW_CHECKS, scopedPath } from '../scripts/enemy-batch-production.mjs';
@@ -30,8 +30,17 @@ function syntheticPng(width = 400, height = 200, shade = 30) {
   return Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]), chunk('IHDR', header), chunk('IDAT', deflateSync(pixels)), chunk('IEND', Buffer.alloc(0))]);
 }
 async function writeJson(path, data) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, JSON.stringify(data)); }
+const fixtureRoots = new Set();
+after(async () => {
+  for (const root of fixtureRoots) {
+    assert.equal(dirname(root), resolve(tmpdir()));
+    assert.ok(basename(root).startsWith('atf-v66-scale-test-'));
+    await rm(root, { recursive: true, force: true });
+  }
+});
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'atf-v66-scale-test-'));
+  fixtureRoots.add(root);
   const references = { profiles: Object.fromEntries(FIRST_BATCH_IDS.map((id) => [id, reference])) };
   const queue = buildEnemyBatchQueue({ references });
   const job = queue.jobs.find((entry) => entry.reference && entry.clips.some((clip) => clip.id === 'idle'));

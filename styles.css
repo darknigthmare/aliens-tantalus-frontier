@@ -439,6 +439,12 @@ button:disabled {
     touch-action: none;
   }
 
+  .runtime-touch.hub-touch-controls {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(44px, 52px));
+    justify-content: center;
+  }
+
   .hub-level-shell,
   .game-frame {
     position: relative;

@@ -1,5 +1,6 @@
 const PROJECT_ID = 'g-p-6a945bfa0d3c8191befd9a84068b90a4';
 const VALID_STATUSES = new Set(['effective', 'partial', 'missing']);
+const VALID_ACCESS_SURFACES = new Set(['hub']);
 
 const freezeOperation = (operation) => Object.freeze({
   sourceProjectId: PROJECT_ID,
@@ -124,10 +125,18 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'tantalus-hub-expansion', chatId: '6a98fa78-6db8-83eb-bc72-cf41bc6833b1', chatTitle: 'Audit du level hub USS Tentalus',
-    promisedTitle: 'USS TANTALUS — HUB COMMERCIAL', kind: 'system', implementationStatus: 'partial', playable: false, productionOrder: 5,
+    promisedTitle: 'USS TANTALUS — HUB COMMERCIAL', kind: 'system', implementationStatus: 'partial', playable: true, accessSurface: 'hub', productionOrder: 5,
     promiseSummary: 'Cohérence d’échelle et perspective, densité par salle et dix annexes physiques supplémentaires.',
     requiredMechanics: ['ten-annexes', 'room-scale-pass', 'physical-upgrades', 'commercial-prop-density'],
-    evidence: ['src/hub-game.js:163', 'src/hub-game.js:214', 'docs/V62_IMPLEMENTATION_AUDIT.md:114']
+    remainingMechanics: ['independent-prop-bitmaps', 'dedicated-annex-npcs', 'physical-training-exercises', 'physical-archive-replay', 'cctv-lockdown-controls'],
+    evidence: [
+      'src/tantalus-hub-expansion-v71.js',
+      'src/hub-v71-runtime.js',
+      'tests/tantalus-hub-expansion-v71.test.mjs',
+      'tests/hub-v71-art.test.mjs',
+      'assets/openai/hub/annexes/v71/hub-commercial-art-report-v71.json',
+      'docs/V71_HUB_COMMERCIAL_AUDIT.md'
+    ]
   }),
   freezeOperation({
     id: 'bioforge', chatId: '6a98c871-61ac-83ed-be5c-600c473690e2', chatTitle: 'Idée spawn ennemis Tentalus',
@@ -191,7 +200,9 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
 
 const BY_ID = new Map(SPECIAL_OPERATIONS_V67.map((operation) => [operation.id, operation]));
 const BY_CHAT_ID = new Map(SPECIAL_OPERATIONS_V67.map((operation) => [operation.chatId, operation]));
-const BY_CAMPAIGN_ID = new Map(SPECIAL_OPERATIONS_V67.filter((operation) => operation.campaignId).map((operation) => [operation.campaignId, operation]));
+const BY_CAMPAIGN_ID = new Map(SPECIAL_OPERATIONS_V67
+  .filter((operation) => operation.campaignId && operation.campaign)
+  .map((operation) => [operation.campaignId, operation]));
 
 export const SPECIAL_OPERATION_COUNTS_V67 = Object.freeze({
   total: SPECIAL_OPERATIONS_V67.length,
@@ -214,7 +225,9 @@ export function getSpecialOperationByCampaignIdV67(campaignId) {
 }
 
 export function buildCampaignsWithSpecialOperationsV67(campaigns = []) {
-  const additions = SPECIAL_OPERATIONS_V67.filter((operation) => operation.playable).map((operation) => Object.freeze({
+  const additions = SPECIAL_OPERATIONS_V67
+    .filter((operation) => operation.playable && operation.campaignId && operation.campaign)
+    .map((operation) => Object.freeze({
       id: operation.campaignId,
       ...operation.campaign,
       name: operation.promisedTitle,
@@ -232,7 +245,12 @@ export function validateSpecialOperationsV67(operations = SPECIAL_OPERATIONS_V67
   if (!unique('id')) failures.push('duplicate operation ids');
   if (!unique('chatId')) failures.push('duplicate ChatGPT conversation ids');
   if (!operations.every((operation) => VALID_STATUSES.has(operation.implementationStatus))) failures.push('invalid implementation status');
-  if (!operations.every((operation) => !operation.playable || operation.implementationStatus !== 'missing' && operation.campaignId && operation.campaign)) failures.push('playable work lot lacks a campaign');
+  if (!operations.every((operation) => Boolean(operation.campaignId) === Boolean(operation.campaign))) failures.push('incomplete campaign routing metadata');
+  if (!operations.every((operation) => !operation.accessSurface || VALID_ACCESS_SURFACES.has(operation.accessSurface) && operation.playable)) failures.push('invalid playable access surface');
+  if (!operations.every((operation) => !operation.playable || (
+    operation.implementationStatus !== 'missing'
+    && (Boolean(operation.campaignId && operation.campaign) || VALID_ACCESS_SURFACES.has(operation.accessSurface))
+  ))) failures.push('playable work lot lacks an access route');
   if (!operations.every((operation) => operation.sourceProjectId === PROJECT_ID && operation.canonExact === false)) failures.push('source or canon disclosure missing');
   const productionOrders = operations.map((operation) => operation.productionOrder);
   if (new Set(productionOrders).size !== operations.length || productionOrders.some((order) => !Number.isInteger(order) || order < 1 || order > operations.length)) failures.push('invalid production order');

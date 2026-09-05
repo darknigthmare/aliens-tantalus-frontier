@@ -34,7 +34,8 @@ test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les a
     'assets/openai/sprites/normalized/enemy-clips-v66/enemy-001-ovomorph/sealed.webp',
     'assets/openai/sprites/normalized/enemy-motion-v66/enemy-001-ovomorph/sealed.webp',
     'assets/openai/sprites/frames/v69/alpha-bravo-source.png',
-    'assets/openai/sprites/metadata/v69/alpha-bravo-report.json'
+    'assets/openai/sprites/metadata/v69/alpha-bravo-report.json',
+    'assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png'
   ];
   const runtimeFiles = [
     'src/app.js',
@@ -44,7 +45,8 @@ test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les a
     'assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp',
     'assets/openai/sprites/normalized/equipment-v56/equipment.png',
     'assets/openai/sprites/frames/v63/frame.png',
-    'assets/openai/sprites/previews/v650/preview.png'
+    'assets/openai/sprites/previews/v650/preview.png',
+    'assets/openai/hub/annexes/v71/arrival-airlock/far.webp'
   ];
   for (const file of [...excludedFiles, ...runtimeFiles]) {
     const source = join(sourceRoot, file);
@@ -169,6 +171,14 @@ test('V70 garde le master ImageGen et les métadonnées hors build sans exclure 
   assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v70/alien-survival-systems-atlas-openai-v70.png')), false);
   assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/metadata/v70/alien-survival-systems-v70.json')), false);
   assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png')), true);
+});
+
+test('V71 exclut les masters du hub mais conserve les cinquante couches WebP runtime', () => {
+  const filter = createBuildAssetFilter(process.cwd());
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png')), false);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/hub/annexes/v71/arrival-airlock/far.webp')), true);
+  assert.equal(filter(join(process.cwd(), 'assets/openai/hub/annexes/v71/bioforge/door.webp')), true);
 });
 
 test('Vercel exclut toutes les productions V66 et ne réadmet que les cinq atlas du lot001', async () => {

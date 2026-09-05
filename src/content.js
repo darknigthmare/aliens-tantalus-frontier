@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '70.0.0',
-  subtitle: 'Systèmes de survie — pression, énergie, soudure, CCTV, acide et autodestruction persistants',
+  version: '71.0.0',
+  subtitle: 'Hub commercial — dix annexes physiques, stations persistantes et cinq couches artistiques par salle',
   sourceVersion: '51.0.0'
 });

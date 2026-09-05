@@ -23,6 +23,18 @@ import {
   sanitizeAlienSurvivalStateV70,
   validateAlienSurvivalCompletionV70
 } from './alien-survival-systems-v70.js';
+import {
+  HUB_ANNEX_BY_ID_V71,
+  HUB_COMMERCIAL_SCHEMA_V71,
+  createHubCommercialStateV71,
+  sanitizeHubCommercialStateV71
+} from './tantalus-hub-expansion-v71.js';
+import {
+  createHubAnnexOperationsV71,
+  sanitizeHubAnnexOperationsV71,
+  getHubAnnexDeploymentSupportV71,
+  consumeHubAnnexDeploymentSupportV71
+} from './hub-annex-services-v71.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 
 export const SAVE_SCHEMA = 52;
@@ -206,7 +218,10 @@ export function createDefaultSave(profile = 1) {
       ventTransitV62: null,
       npcInteractions: {},
       dialogueMemory: normalizeDialogueMemoryV62(),
-      npcRoutineState: normalizeNpcRoutineStateV62()
+      npcRoutineState: normalizeNpcRoutineStateV62(),
+      commercialV71: createHubCommercialStateV71(),
+      annexOperationsV71: createHubAnnexOperationsV71(),
+      pendingModuleActionV71: null
     },
     galaxy: {
       unlockedWorldIds: WORLDS.slice(0, 8).map((world) => world.id),
@@ -248,6 +263,27 @@ export function createDefaultSave(profile = 1) {
 
 const isRecord = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const CREW_STATUSES = new Set(['active', 'injured', 'recovering', 'missing', 'captured', 'deceased']);
+
+export function sanitizePendingModuleActionV71(candidate) {
+  if (!isRecord(candidate)
+    || Number(candidate.schema) !== HUB_COMMERCIAL_SCHEMA_V71
+    || !['install', 'repair'].includes(candidate.type)
+    || typeof candidate.moduleId !== 'string'
+    || !/^module-\d{3}$/.test(candidate.moduleId)
+    || !Number.isFinite(Number(candidate.queuedAt))
+    || Number(candidate.queuedAt) < 0) return null;
+  return {
+    schema: HUB_COMMERCIAL_SCHEMA_V71,
+    type: candidate.type,
+    moduleId: candidate.moduleId,
+    queuedAt: Math.min(Number.MAX_SAFE_INTEGER, Math.floor(Number(candidate.queuedAt)))
+  };
+}
+
+const isHubServiceCooldownKeyV71 = (key) => (
+  /^service:[a-z-]{1,32}$/.test(key)
+  || (key.startsWith('annex:') && Boolean(HUB_ANNEX_BY_ID_V71[key.slice('annex:'.length)]))
+);
 const numberBetween = (value, fallback, min = 0, max = Number.MAX_SAFE_INTEGER) => {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? Math.max(min, Math.min(max, parsed)) : fallback;
@@ -1012,9 +1048,12 @@ export function getOperationBrief(save, campaign, world) {
   let risk = 10 + world.danger * 4 + state.infestation * 0.28 + averageStress * 0.16 + averageFatigue * 0.12 - Math.max(0, campaign.routes - 1) * 1.5;
   if (hasResearch(save, 'motion-analysis')) risk -= 8;
   if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) risk -= 7;
+  const annexSupportV71 = getHubAnnexDeploymentSupportV71(save, deployableVehicleId);
+  risk -= annexSupportV71.riskReduction;
   risk = Math.round(clamp(risk, 5, 95));
   let fuel = 2 + Math.ceil(world.danger / 3);
   if (deployableVehicleId && hasResearch(save, 'vehicle-doctrine')) fuel = Math.max(1, fuel - 1);
+  fuel = Math.max(1, fuel - annexSupportV71.powerLoaderFuelReduction);
   const cost = { fuel, supplies: 3 + Math.ceil(world.danger / 2) };
   if (world.atmosphere !== 'breathable') cost.medical = 1;
   const reward = { credits: 420 + world.danger * 85 + Math.max(0, campaign.routes - 1) * 35, research: 4 + Math.ceil(world.danger / 2), alloy: 4 + Math.ceil(world.danger / 2) };
@@ -1029,7 +1068,8 @@ export function getOperationBrief(save, campaign, world) {
     minimumCrew,
     crewReady,
     ready: save.galaxy.unlockedWorldIds.includes(world.id) && crewReady && canAfford(save, cost),
-    worldUnlocked: save.galaxy.unlockedWorldIds.includes(world.id)
+    worldUnlocked: save.galaxy.unlockedWorldIds.includes(world.id),
+    annexSupportV71
   };
 }
 
@@ -1087,8 +1127,12 @@ export function beginOperation(save, campaign, world) {
     resumeState: null,
     insertionState: null,
     ...(campaign.specialOperationId ? { specialOperationId: campaign.specialOperationId } : {}),
-    flags: {}
+    flags: {
+      ...(brief.annexSupportV71.provingGround ? { 'v71-proving-ground-support': true } : {}),
+      ...(brief.annexSupportV71.durandal ? { 'v71-durandal-ew-support': true } : {})
+    }
   };
+  consumeHubAnnexDeploymentSupportV71(save);
   strategy.plannedCampaignId = campaign.id;
   addStrategyLog(save, { type: 'operation', title: campaign.name, risk: brief.risk, incident: false, result: 'Deploiement lance vers ' + world.name + '.' });
   return { ok: true, resumed: false, brief, operation: strategy.currentOperation };
@@ -1547,7 +1591,7 @@ export function migrateSave(input, profile = 1) {
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
   migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})
-    .filter(([key, value]) => /^service:[a-z-]{1,32}$/.test(key) && Number.isFinite(Number(value)))
+    .filter(([key, value]) => isHubServiceCooldownKeyV71(key) && Number.isFinite(Number(value)))
     .map(([key, value]) => [key, Math.max(0, Math.floor(Number(value)))]));
   migrated.hub.visited = stringList(hub.visited, base.hub.visited).filter((id) => /^[a-z0-9-]{1,40}$/.test(id));
   migrated.hub.moduleIds = stringList(hub.moduleIds, base.hub.moduleIds);
@@ -1556,6 +1600,12 @@ export function migrateSave(input, profile = 1) {
   const dialogueHub = migrateNpcDialogueHubStateV62(migrated.hub);
   migrated.hub.dialogueMemory = dialogueHub.dialogueMemory;
   migrated.hub.npcRoutineState = dialogueHub.npcRoutineState;
+  const commercialV71 = hub.hubCommercialV71 ?? hub.commercialV71 ?? hub.hubExpansionV71;
+  migrated.hub.commercialV71 = sanitizeHubCommercialStateV71(commercialV71);
+  migrated.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(hub.annexOperationsV71);
+  migrated.hub.pendingModuleActionV71 = sanitizePendingModuleActionV71(hub.pendingModuleActionV71);
+  delete migrated.hub.hubCommercialV71;
+  delete migrated.hub.hubExpansionV71;
 
   const galaxy = isRecord(source.galaxy) ? source.galaxy : {};
   Object.assign(migrated.galaxy, galaxy);

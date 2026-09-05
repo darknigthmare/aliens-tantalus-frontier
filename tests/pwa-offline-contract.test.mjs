@@ -16,6 +16,7 @@ import { HUB_ROOM_FAR_ASSETS_V58, HUB_ROOM_MID_ASSETS_V58 } from '../src/hub-art
 import { MISSION_DOOR_ATLAS_V58 } from '../src/mission-door-art-v58.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
+import { HUB_ANNEXES_V71 } from '../src/tantalus-hub-expansion-v71.js';
 
 const relativeImports = (source) => {
   const imports = [];
@@ -31,7 +32,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v70 précache seulement le shell et garde les atlases ennemis à la demande', async () => {
+test('le cache hors-ligne v71 précache seulement le shell et garde les atlases lourds à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -118,6 +119,20 @@ test('le cache hors-ligne v70 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE v62`);
   }
 
+  const hubAnnexArtV71 = HUB_ANNEXES_V71.flatMap((annex) => [
+    annex.art.far,
+    annex.art.mid,
+    annex.art.prop,
+    annex.art.foreground,
+    annex.art.door
+  ]);
+  assert.equal(hubAnnexArtV71.length, 50);
+  assert.equal(new Set(hubAnnexArtV71).size, 50);
+  for (const assetPath of hubAnnexArtV71) {
+    await access(localPath(assetPath));
+    assert.ok(workerContains(worker, assetPath), `${assetPath} manque dans CORE V71`);
+  }
+
   for (const stylesheetPath of ['/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css']) {
     await access(localPath(stylesheetPath));
     assert.ok(workerContains(worker, stylesheetPath), `${stylesheetPath} manque dans CORE`);
@@ -132,7 +147,7 @@ test('le cache hors-ligne v70 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v70-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v71-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -161,7 +176,11 @@ test('le cache hors-ligne v70 précache seulement le shell et garde les atlases 
     '/docs/references/V64_IMAGEGEN_PROMPTS.md',
     '/docs/references/V64_PNG_ALPHA_AUDIT.json',
     '/docs/references/V61_ASSET_COMPLETION_MATRIX.md',
-    '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md'
+    '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md',
+    '/docs/VERSION_HISTORY_V71.md',
+    '/docs/V71_HUB_COMMERCIAL_AUDIT.md',
+    '/docs/ART_PROVENANCE_V71.md',
+    '/docs/VALIDATION_V71.md'
   ]) {
     assert.ok(workerContains(worker, documentPath), `${documentPath} manque dans CORE v62`);
   }

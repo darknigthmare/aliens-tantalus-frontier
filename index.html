@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v70 — survie physique jouable avec pression, énergie, soudure, CCTV, acide et autodestruction.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v71 — hub commercial jouable avec dix annexes physiques, stations persistantes et décors multicouches.">
   <meta name="application-name" content="Tantalus Frontier">
   <meta name="apple-mobile-web-app-title" content="Tantalus">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,13 +21,13 @@
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
-  <title>ALIENS: TANTALUS FRONTIER v70</title>
+  <title>ALIENS: TANTALUS FRONTIER v71</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v70</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v71</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -46,7 +46,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 70.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 71.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -72,7 +72,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v70.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v71.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -108,7 +108,7 @@
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
           <div class="section-intro"><div><p class="eyebrow">440 CAMPAGNES // 19 DIRECTIVES CHATGPT // 23 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
           <section class="special-operations-registry" aria-labelledby="special-operations-heading">
-            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V70</h3></div><p>Les 19 conversations sont recensées sans faux statut : quatre lots sont désormais jouables, tandis que les promesses plus larges restent correctement signalées.</p></header>
+            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V71</h3></div><p>Les 19 conversations sont recensées sans faux statut : cinq lots sont désormais jouables, dont le hub commercial accessible directement dans l’USS Tantalus.</p></header>
             <div id="special-operation-summary" class="special-operation-summary" aria-live="polite"></div>
             <div id="special-operation-list" class="special-operation-grid"></div>
           </section>
@@ -127,12 +127,13 @@
         </section>
 
         <section class="view active" data-panel="hub">
+          <h1 class="sr-only">Niveau jouable de l’USS Tantalus</h1>
           <button id="exit-hub" class="button runtime-exit" type="button">QUITTER VERS COMMANDEMENT</button>
-          <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES // CRISES COMBATTUES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
+          <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES + 10 ANNEXES // CRISES COMBATTUES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
           <div class="hub-level-shell">
             <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
             <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub">
-              <button type="button" data-hub-control="left">←</button><button type="button" data-hub-control="right">→</button><button type="button" data-hub-control="jump">↑</button><button type="button" data-hub-control="crouch">C</button><button type="button" data-hub-control="depth">Q</button><button type="button" data-hub-control="fire">F</button><button type="button" data-hub-control="interact">E</button>
+              <button type="button" data-hub-control="left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" aria-label="Monter">W</button><button type="button" data-hub-control="down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" aria-label="Changer de profondeur">Q</button><button type="button" data-hub-control="fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
             </div>
             <section id="hub-dialogue" class="hub-dialogue" role="dialog" aria-modal="true" aria-labelledby="hub-dialogue-speaker" hidden>
               <div class="hub-dialogue-portrait">

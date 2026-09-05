@@ -1,0 +1,3640 @@
+{
+  "schema": 71,
+  "contractId": "tantalus-hub-commercial-annex-art-v71",
+  "pipeline": "OpenAI ImageGen masters + deterministic exact 5x2 split + dedicated neutral BIOFORGE door + border-connected checker cleanup",
+  "artProvider": "OpenAI ImageGen",
+  "originalProjectAsset": true,
+  "canonExact": false,
+  "normalHubCreaturesVisible": false,
+  "notes": {
+    "bioforge": "Accès isolé vers un niveau séparé; les cuves du hub restent vides.",
+    "archives": "Palimpsest couvre bestiaire, rapports et replays historiques."
+  },
+  "grid": {
+    "columns": 5,
+    "rows": 2,
+    "order": [
+      "arrival-airlock",
+      "logistics",
+      "mire-archives",
+      "synthetic-bay",
+      "cctv",
+      "proving-ground",
+      "morgue",
+      "escape-pods",
+      "durandal",
+      "bioforge"
+    ]
+  },
+  "layerContract": {
+    "far": {
+      "dimensions": [
+        1920,
+        720
+      ],
+      "alpha": false,
+      "derivedFrom": "mid"
+    },
+    "mid": {
+      "dimensions": [
+        1920,
+        720
+      ],
+      "alpha": false
+    },
+    "prop": {
+      "dimensions": [
+        640,
+        512
+      ],
+      "alpha": true,
+      "padding": 32
+    },
+    "foreground": {
+      "dimensions": [
+        1920,
+        720
+      ],
+      "alpha": true,
+      "padding": 24
+    },
+    "door": {
+      "dimensions": [
+        384,
+        512
+      ],
+      "alpha": true,
+      "padding": 24
+    }
+  },
+  "provenance": {
+    "provider": "OpenAI ImageGen",
+    "kind": "original-project-art",
+    "originalProjectAsset": true,
+    "canonExact": false
+  },
+  "sources": [
+    {
+      "kind": "background",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sha256": "9a1d07dacad1a72ea8e5dfe93f8379786be3266a1ff0d441b1d3895d454e15ba",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "grid": {
+        "columns": 5,
+        "rows": 2,
+        "xEdges": [
+          0,
+          397,
+          793,
+          1190,
+          1586,
+          1983
+        ],
+        "yEdges": [
+          0,
+          396,
+          793
+        ]
+      }
+    },
+    {
+      "kind": "prop",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sha256": "4a8e31da6c84f9ffb5ffc4a6e3dc6e26ca840cc283e5634ee1b714fd1e49a8a2",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "grid": {
+        "columns": 5,
+        "rows": 2,
+        "xEdges": [
+          0,
+          355,
+          710,
+          1064,
+          1419,
+          1774
+        ],
+        "yEdges": [
+          0,
+          444,
+          887
+        ]
+      }
+    },
+    {
+      "kind": "foreground",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sha256": "8eaf4c14587da67c3584230993e7f8e56b090d10cea4243b1ea861a6f0f70202",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1983,
+        793
+      ],
+      "grid": {
+        "columns": 5,
+        "rows": 2,
+        "xEdges": [
+          0,
+          397,
+          793,
+          1190,
+          1586,
+          1983
+        ],
+        "yEdges": [
+          0,
+          396,
+          793
+        ]
+      }
+    },
+    {
+      "kind": "door",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sha256": "7a3e3809278cc99896e0b9ce119fb9067586d1836d18191f6951fbae2ba9d1c6",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "grid": {
+        "columns": 5,
+        "rows": 2,
+        "xEdges": [
+          0,
+          307,
+          614,
+          922,
+          1229,
+          1536
+        ],
+        "yEdges": [
+          0,
+          512,
+          1024
+        ]
+      }
+    },
+    {
+      "kind": "bioforge-background",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-access-background-neutral-openai-v71.png",
+      "sha256": "fdc9899ed7e5a3afc96fb9fe13a6c77881cca877a5bef243b94123caf3a84487",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "standalone": true,
+      "creatureVisible": false
+    },
+    {
+      "kind": "bioforge-prop",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-access-console-neutral-openai-v71.png",
+      "sha256": "d54133643658aea337ae4294c68a6614befb49c961eaf75c275013b31fcce2a9",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1367,
+        1151
+      ],
+      "standalone": true,
+      "creatureVisible": false
+    },
+    {
+      "kind": "bioforge-door",
+      "path": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-door-neutral-openai-v71.png",
+      "sha256": "f5ee344422f619c12b8cbf1a454d74e2bbbc62095eb50986716ec9442db7ec92",
+      "format": "PNG",
+      "mode": "RGB",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "standalone": true,
+      "creatureVisible": false
+    }
+  ],
+  "annexes": [
+    {
+      "id": "arrival-airlock",
+      "label": "Sas d'arrivée",
+      "role": "arrivée, contrôle de pression et sas physique",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/arrival-airlock/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/arrival-airlock/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/arrival-airlock/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/arrival-airlock/door.webp"
+      }
+    },
+    {
+      "id": "logistics",
+      "label": "Logistique",
+      "role": "stockage, manutention et préparation matérielle",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/logistics/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/logistics/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/logistics/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/logistics/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/logistics/door.webp"
+      }
+    },
+    {
+      "id": "mire-archives",
+      "label": "Archives / Palimpsest",
+      "role": "bestiaire, rapports et replays historiques",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/mire-archives/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/mire-archives/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/mire-archives/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/mire-archives/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/mire-archives/door.webp"
+      }
+    },
+    {
+      "id": "synthetic-bay",
+      "label": "Baie synthétique",
+      "role": "maintenance et diagnostic des synthétiques",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/synthetic-bay/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/synthetic-bay/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/synthetic-bay/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/synthetic-bay/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/synthetic-bay/door.webp"
+      }
+    },
+    {
+      "id": "cctv",
+      "label": "CCTV / Surveillance",
+      "role": "vidéosurveillance et supervision du vaisseau",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/cctv/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/cctv/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/cctv/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/cctv/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/cctv/door.webp"
+      }
+    },
+    {
+      "id": "proving-ground",
+      "label": "Terrain d'essai",
+      "role": "essais contrôlés, entraînement et calibration",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/proving-ground/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/proving-ground/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/proving-ground/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/proving-ground/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/proving-ground/door.webp"
+      }
+    },
+    {
+      "id": "morgue",
+      "label": "Morgue",
+      "role": "autopsie, conservation et examen médico-légal",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/morgue/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/morgue/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/morgue/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/morgue/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/morgue/door.webp"
+      }
+    },
+    {
+      "id": "escape-pods",
+      "label": "Capsules de sauvetage",
+      "role": "évacuation et destruction d'urgence",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/escape-pods/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/escape-pods/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/escape-pods/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/escape-pods/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/escape-pods/door.webp"
+      }
+    },
+    {
+      "id": "durandal",
+      "label": "Noyau Durandal Ω",
+      "role": "IA de bord et guerre électronique",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/durandal/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/durandal/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/durandal/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/durandal/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/durandal/door.webp"
+      }
+    },
+    {
+      "id": "bioforge",
+      "label": "Accès BIOFORGE isolé",
+      "role": "accès étanche vers le niveau BIOFORGE séparé; cuves vides",
+      "normalHubCreaturesVisible": false,
+      "files": {
+        "far": "assets/openai/hub/annexes/v71/bioforge/far.webp",
+        "mid": "assets/openai/hub/annexes/v71/bioforge/mid.webp",
+        "prop": "assets/openai/hub/annexes/v71/bioforge/prop.webp",
+        "foreground": "assets/openai/hub/annexes/v71/bioforge/foreground.webp",
+        "door": "assets/openai/hub/annexes/v71/bioforge/door.webp"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "annexId": "arrival-airlock",
+      "annexLabel": "Sas d'arrivée",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/arrival-airlock/far.webp",
+      "sha256": "85150b3a41f040b26241a7ee5fe5acd338ded7a63a77176f79d8378fa1afdc99",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 0,
+        "column": 0,
+        "row": 0,
+        "bounds": [
+          0,
+          0,
+          397,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          9,
+          14,
+          394,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "arrival-airlock",
+      "annexLabel": "Sas d'arrivée",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/arrival-airlock/mid.webp",
+      "sha256": "adc9b9f8add6ae42ce5e5cebbcd7658e803c9bb9d56fe3746b462ac554bdf42a",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 0,
+        "column": 0,
+        "row": 0,
+        "bounds": [
+          0,
+          0,
+          397,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          9,
+          14,
+          394,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "arrival-airlock",
+      "annexLabel": "Sas d'arrivée",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/arrival-airlock/prop.webp",
+      "sha256": "3cbd5c9263ba046e43991b303ae58033a19eb61a9a7d0cf1750ed4278971e9da",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 163935,
+        "partialAlphaPixels": 8269,
+        "opaquePixels": 155476,
+        "occupiedPixels": 163745,
+        "transparentRatio": 0.50029,
+        "contentBounds": [
+          75,
+          43,
+          565,
+          469
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 0,
+        "column": 0,
+        "row": 0,
+        "bounds": [
+          0,
+          0,
+          355,
+          444
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 98261,
+        "checkerRemovedRatio": 0.623404,
+        "sourceContentBounds": [
+          35,
+          145,
+          329,
+          400
+        ],
+        "sourceCropWithPadding": [
+          26,
+          136,
+          338,
+          409
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.641026,
+        "placement": [
+          64,
+          32,
+          512,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "arrival-airlock",
+      "annexLabel": "Sas d'arrivée",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp",
+      "sha256": "158d572d40d9943861e82cfe45db41a193d6bd4c61b1ad3ab1007dfb058564ab",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1125233,
+        "partialAlphaPixels": 32609,
+        "opaquePixels": 224558,
+        "occupiedPixels": 257167,
+        "transparentRatio": 0.813971,
+        "contentBounds": [
+          591,
+          40,
+          1329,
+          680
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 0,
+        "column": 0,
+        "row": 0,
+        "bounds": [
+          0,
+          0,
+          397,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 103584,
+        "checkerRemovedRatio": 0.658881,
+        "sourceContentBounds": [
+          31,
+          66,
+          374,
+          363
+        ],
+        "sourceCropWithPadding": [
+          21,
+          56,
+          384,
+          373
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.119874,
+        "placement": [
+          575,
+          24,
+          770,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "arrival-airlock",
+      "annexLabel": "Sas d'arrivée",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/arrival-airlock/door.webp",
+      "sha256": "052009387399d7be8f8537fdbf06a2a37f30b1725f3e803f504fcafda6e87603",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 86328,
+        "partialAlphaPixels": 4362,
+        "opaquePixels": 105918,
+        "occupiedPixels": 110280,
+        "transparentRatio": 0.439087,
+        "contentBounds": [
+          30,
+          98,
+          354,
+          482
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 0,
+        "column": 0,
+        "row": 0,
+        "bounds": [
+          0,
+          0,
+          307,
+          512
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 75952,
+        "checkerRemovedRatio": 0.483204,
+        "sourceContentBounds": [
+          16,
+          167,
+          291,
+          494
+        ],
+        "sourceCropWithPadding": [
+          8,
+          159,
+          299,
+          502
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.154639,
+        "placement": [
+          24,
+          92,
+          336,
+          396
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "logistics",
+      "annexLabel": "Logistique",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/logistics/far.webp",
+      "sha256": "18558ed11835d3f0845d8e305f34b35053b171870583ff6837b6b14190806a31",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 1,
+        "column": 1,
+        "row": 0,
+        "bounds": [
+          397,
+          0,
+          793,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          6,
+          14,
+          393,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "logistics",
+      "annexLabel": "Logistique",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/logistics/mid.webp",
+      "sha256": "db22d8d1cb61a1f72aeb2f04541ad1e34b065cf0e8e21b0cfa48d87e3955c1d6",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 1,
+        "column": 1,
+        "row": 0,
+        "bounds": [
+          397,
+          0,
+          793,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          6,
+          14,
+          393,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "logistics",
+      "annexLabel": "Logistique",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/logistics/prop.webp",
+      "sha256": "e93c640ab9ab26f6b91b1c2c6d994dd9623702976a57421c8dd444c60ef38271",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 187126,
+        "partialAlphaPixels": 9149,
+        "opaquePixels": 131405,
+        "occupiedPixels": 140554,
+        "transparentRatio": 0.571063,
+        "contentBounds": [
+          50,
+          42,
+          596,
+          470
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 1,
+        "column": 1,
+        "row": 0,
+        "bounds": [
+          355,
+          0,
+          710,
+          444
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 101396,
+        "checkerRemovedRatio": 0.643294,
+        "sourceContentBounds": [
+          6,
+          132,
+          355,
+          402
+        ],
+        "sourceCropWithPadding": [
+          0,
+          123,
+          355,
+          411
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.555556,
+        "placement": [
+          44,
+          32,
+          552,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "logistics",
+      "annexLabel": "Logistique",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/logistics/foreground.webp",
+      "sha256": "3a004bac07eba0cf72654ab6eccb345c87b1c22bd99e52b01c01029b99b0f5c4",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1154757,
+        "partialAlphaPixels": 53192,
+        "opaquePixels": 174451,
+        "occupiedPixels": 227643,
+        "transparentRatio": 0.835328,
+        "contentBounds": [
+          587,
+          41,
+          1332,
+          679
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 1,
+        "column": 1,
+        "row": 0,
+        "bounds": [
+          397,
+          0,
+          793,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 113943,
+        "checkerRemovedRatio": 0.726603,
+        "sourceContentBounds": [
+          31,
+          74,
+          369,
+          363
+        ],
+        "sourceCropWithPadding": [
+          21,
+          64,
+          379,
+          373
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.174757,
+        "placement": [
+          570,
+          24,
+          779,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "logistics",
+      "annexLabel": "Logistique",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/logistics/door.webp",
+      "sha256": "81967883ee57d1df7a69280316f11d6468b3c471a28058772af39dcded26c1a8",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 82510,
+        "partialAlphaPixels": 4401,
+        "opaquePixels": 109697,
+        "occupiedPixels": 114098,
+        "transparentRatio": 0.419668,
+        "contentBounds": [
+          31,
+          89,
+          353,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 1,
+        "column": 1,
+        "row": 0,
+        "bounds": [
+          307,
+          0,
+          614,
+          512
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 76000,
+        "checkerRemovedRatio": 0.48351,
+        "sourceContentBounds": [
+          11,
+          164,
+          281,
+          494
+        ],
+        "sourceCropWithPadding": [
+          3,
+          156,
+          289,
+          502
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.174825,
+        "placement": [
+          24,
+          82,
+          336,
+          406
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "mire-archives",
+      "annexLabel": "Archives / Palimpsest",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/mire-archives/far.webp",
+      "sha256": "49f080e92e0815456b5abc17a7604326af0c9b9586eda745d1b3934ca592a7be",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 2,
+        "column": 2,
+        "row": 0,
+        "bounds": [
+          793,
+          0,
+          1190,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          5,
+          14,
+          391,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "mire-archives",
+      "annexLabel": "Archives / Palimpsest",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/mire-archives/mid.webp",
+      "sha256": "d4e3a577fd054f5479ca93e99f1ebba760fbe3a5dee88bdb3cb4a4c3c165ba69",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 2,
+        "column": 2,
+        "row": 0,
+        "bounds": [
+          793,
+          0,
+          1190,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          5,
+          14,
+          391,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "mire-archives",
+      "annexLabel": "Archives / Palimpsest",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/mire-archives/prop.webp",
+      "sha256": "bef15e027e87f7f3070cba711816a30c2e502b846f3c4a7ffc04bcbe5f3e04b7",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 192631,
+        "partialAlphaPixels": 12473,
+        "opaquePixels": 122576,
+        "occupiedPixels": 135049,
+        "transparentRatio": 0.587863,
+        "contentBounds": [
+          32,
+          102,
+          608,
+          469
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 2,
+        "column": 2,
+        "row": 0,
+        "bounds": [
+          710,
+          0,
+          1064,
+          444
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 108512,
+        "checkerRemovedRatio": 0.690385,
+        "sourceContentBounds": [
+          0,
+          182,
+          354,
+          403
+        ],
+        "sourceCropWithPadding": [
+          0,
+          173,
+          354,
+          412
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.627119,
+        "placement": [
+          32,
+          91,
+          576,
+          389
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "mire-archives",
+      "annexLabel": "Archives / Palimpsest",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/mire-archives/foreground.webp",
+      "sha256": "6717a432f1d659e53e4100c3ad956883b3916526c97b24b178f426da46f43678",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1192030,
+        "partialAlphaPixels": 40269,
+        "opaquePixels": 150101,
+        "occupiedPixels": 190370,
+        "transparentRatio": 0.86229,
+        "contentBounds": [
+          622,
+          40,
+          1298,
+          680
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 2,
+        "column": 2,
+        "row": 0,
+        "bounds": [
+          793,
+          0,
+          1190,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 119131,
+        "checkerRemovedRatio": 0.757773,
+        "sourceContentBounds": [
+          48,
+          66,
+          363,
+          364
+        ],
+        "sourceCropWithPadding": [
+          38,
+          56,
+          373,
+          374
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.113208,
+        "placement": [
+          606,
+          24,
+          708,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "mire-archives",
+      "annexLabel": "Archives / Palimpsest",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/mire-archives/door.webp",
+      "sha256": "b9b54813c9d81e7fd746a7be2c5b4db17c6715a0d999aad2712a8c468d2bed9f",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 85850,
+        "partialAlphaPixels": 4315,
+        "opaquePixels": 106443,
+        "occupiedPixels": 110758,
+        "transparentRatio": 0.436656,
+        "contentBounds": [
+          27,
+          95,
+          354,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 2,
+        "column": 2,
+        "row": 0,
+        "bounds": [
+          614,
+          0,
+          922,
+          512
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 76256,
+        "checkerRemovedRatio": 0.483563,
+        "sourceContentBounds": [
+          5,
+          165,
+          283,
+          495
+        ],
+        "sourceCropWithPadding": [
+          0,
+          157,
+          291,
+          503
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.154639,
+        "placement": [
+          24,
+          88,
+          336,
+          400
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "synthetic-bay",
+      "annexLabel": "Baie synthétique",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/synthetic-bay/far.webp",
+      "sha256": "fde4d32edb16236da5b4fd336e6ac9a2e81654f2461924bb61912cd71b071a9c",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 3,
+        "column": 3,
+        "row": 0,
+        "bounds": [
+          1190,
+          0,
+          1586,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          3,
+          14,
+          389,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "synthetic-bay",
+      "annexLabel": "Baie synthétique",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/synthetic-bay/mid.webp",
+      "sha256": "3604cdefe538adb860a1440285788476db67254ece28a12e416b35f2dc762959",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 3,
+        "column": 3,
+        "row": 0,
+        "bounds": [
+          1190,
+          0,
+          1586,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          3,
+          14,
+          389,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "synthetic-bay",
+      "annexLabel": "Baie synthétique",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/synthetic-bay/prop.webp",
+      "sha256": "587a183e950797a6e48d80abc6773a7ea9de2bb6323b47e87dcac9b678816441",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 184102,
+        "partialAlphaPixels": 14693,
+        "opaquePixels": 128885,
+        "occupiedPixels": 143578,
+        "transparentRatio": 0.561835,
+        "contentBounds": [
+          45,
+          43,
+          583,
+          469
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 3,
+        "column": 3,
+        "row": 0,
+        "bounds": [
+          1064,
+          0,
+          1419,
+          444
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 107784,
+        "checkerRemovedRatio": 0.683822,
+        "sourceContentBounds": [
+          0,
+          153,
+          323,
+          406
+        ],
+        "sourceCropWithPadding": [
+          0,
+          144,
+          332,
+          415
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.653137,
+        "placement": [
+          45,
+          32,
+          549,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "synthetic-bay",
+      "annexLabel": "Baie synthétique",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/synthetic-bay/foreground.webp",
+      "sha256": "29c16b13b172b5587f1fb2b4fa5773b58124f4106e2d508fec8a45c917ee9adc",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1211066,
+        "partialAlphaPixels": 37853,
+        "opaquePixels": 133481,
+        "occupiedPixels": 171334,
+        "transparentRatio": 0.87606,
+        "contentBounds": [
+          619,
+          40,
+          1301,
+          680
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 3,
+        "column": 3,
+        "row": 0,
+        "bounds": [
+          1190,
+          0,
+          1586,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 122753,
+        "checkerRemovedRatio": 0.782784,
+        "sourceContentBounds": [
+          35,
+          66,
+          353,
+          364
+        ],
+        "sourceCropWithPadding": [
+          25,
+          56,
+          363,
+          374
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.113208,
+        "placement": [
+          603,
+          24,
+          714,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "synthetic-bay",
+      "annexLabel": "Baie synthétique",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/synthetic-bay/door.webp",
+      "sha256": "8298b42f611a587badfffba409dd20f95fcdda114b572cd442fd2c06874a5c53",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 89830,
+        "partialAlphaPixels": 4328,
+        "opaquePixels": 102450,
+        "occupiedPixels": 106778,
+        "transparentRatio": 0.456899,
+        "contentBounds": [
+          24,
+          113,
+          353,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 3,
+        "column": 3,
+        "row": 0,
+        "bounds": [
+          922,
+          0,
+          1229,
+          512
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 80951,
+        "checkerRemovedRatio": 0.515008,
+        "sourceContentBounds": [
+          1,
+          185,
+          279,
+          495
+        ],
+        "sourceCropWithPadding": [
+          0,
+          177,
+          287,
+          503
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.170732,
+        "placement": [
+          24,
+          106,
+          336,
+          382
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "cctv",
+      "annexLabel": "CCTV / Surveillance",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/cctv/far.webp",
+      "sha256": "7a11343eea2bd2ac4cd11737ff5553ca92117ab0fb58448dcc02c39123034f57",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 4,
+        "column": 4,
+        "row": 0,
+        "bounds": [
+          1586,
+          0,
+          1983,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          2,
+          14,
+          387,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "cctv",
+      "annexLabel": "CCTV / Surveillance",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/cctv/mid.webp",
+      "sha256": "0c15c7118c08923e6d24141a7bdef84476156a5a0c3f194bfeebf01fe716fb15",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 4,
+        "column": 4,
+        "row": 0,
+        "bounds": [
+          1586,
+          0,
+          1983,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          2,
+          14,
+          387,
+          393
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "cctv",
+      "annexLabel": "CCTV / Surveillance",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/cctv/prop.webp",
+      "sha256": "43e49f63097a231086e19afea75e45bb6a4522a4dc6101f72b56117b75647888",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 168763,
+        "partialAlphaPixels": 8432,
+        "opaquePixels": 150485,
+        "occupiedPixels": 158917,
+        "transparentRatio": 0.515024,
+        "contentBounds": [
+          73,
+          42,
+          560,
+          470
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 4,
+        "column": 4,
+        "row": 0,
+        "bounds": [
+          1419,
+          0,
+          1774,
+          444
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 95002,
+        "checkerRemovedRatio": 0.602728,
+        "sourceContentBounds": [
+          4,
+          148,
+          309,
+          415
+        ],
+        "sourceCropWithPadding": [
+          0,
+          139,
+          318,
+          424
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.57193,
+        "placement": [
+          70,
+          32,
+          500,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "cctv",
+      "annexLabel": "CCTV / Surveillance",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/cctv/foreground.webp",
+      "sha256": "888d589caa4cf2c6fa1e678c06ac10dd5598a5b0bc3064f48377be09ac32ef8b",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1221294,
+        "partialAlphaPixels": 33181,
+        "opaquePixels": 127925,
+        "occupiedPixels": 161106,
+        "transparentRatio": 0.883459,
+        "contentBounds": [
+          598,
+          40,
+          1322,
+          680
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 4,
+        "column": 4,
+        "row": 0,
+        "bounds": [
+          1586,
+          0,
+          1983,
+          396
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 124305,
+        "checkerRemovedRatio": 0.790684,
+        "sourceContentBounds": [
+          25,
+          64,
+          365,
+          364
+        ],
+        "sourceCropWithPadding": [
+          15,
+          54,
+          375,
+          374
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.1,
+        "placement": [
+          582,
+          24,
+          756,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "cctv",
+      "annexLabel": "CCTV / Surveillance",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/cctv/door.webp",
+      "sha256": "7b2c742df23fdcd719c1e13dc4baf905b650c9023d23afb02d085509525ebc81",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 91848,
+        "partialAlphaPixels": 4356,
+        "opaquePixels": 100404,
+        "occupiedPixels": 104760,
+        "transparentRatio": 0.467163,
+        "contentBounds": [
+          24,
+          103,
+          353,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 4,
+        "column": 4,
+        "row": 0,
+        "bounds": [
+          1229,
+          0,
+          1536,
+          512
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 85903,
+        "checkerRemovedRatio": 0.546512,
+        "sourceContentBounds": [
+          2,
+          184,
+          272,
+          495
+        ],
+        "sourceCropWithPadding": [
+          0,
+          176,
+          280,
+          503
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.2,
+        "placement": [
+          24,
+          96,
+          336,
+          392
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "proving-ground",
+      "annexLabel": "Terrain d'essai",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/proving-ground/far.webp",
+      "sha256": "7fcbb303373b9c8dc16c3bc24eb14675858ca07dce3a0479440a93f41cd9ada5",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 5,
+        "column": 0,
+        "row": 1,
+        "bounds": [
+          0,
+          396,
+          397,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          9,
+          4,
+          395,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "proving-ground",
+      "annexLabel": "Terrain d'essai",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/proving-ground/mid.webp",
+      "sha256": "27355e7f2ab969de386f04bf85c8bcf79139ead496454a81dc0b0ace86ff39c5",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 5,
+        "column": 0,
+        "row": 1,
+        "bounds": [
+          0,
+          396,
+          397,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          9,
+          4,
+          395,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "proving-ground",
+      "annexLabel": "Terrain d'essai",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/proving-ground/prop.webp",
+      "sha256": "bd9fe69742f727b4dbe8a46e7144547d37691365ddda81dc890380cd60993dfc",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 214545,
+        "partialAlphaPixels": 8925,
+        "opaquePixels": 104210,
+        "occupiedPixels": 113135,
+        "transparentRatio": 0.654739,
+        "contentBounds": [
+          106,
+          42,
+          534,
+          470
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 5,
+        "column": 0,
+        "row": 1,
+        "bounds": [
+          0,
+          444,
+          355,
+          887
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 107473,
+        "checkerRemovedRatio": 0.683388,
+        "sourceContentBounds": [
+          32,
+          41,
+          317,
+          326
+        ],
+        "sourceCropWithPadding": [
+          23,
+          32,
+          326,
+          335
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.478548,
+        "placement": [
+          96,
+          32,
+          448,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "proving-ground",
+      "annexLabel": "Terrain d'essai",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/proving-ground/foreground.webp",
+      "sha256": "e5b729eede71fa9ec94a1a0986fc3c369e6c6c51350242c1b7632ca2d47e0046",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1133336,
+        "partialAlphaPixels": 20966,
+        "opaquePixels": 228098,
+        "occupiedPixels": 249064,
+        "transparentRatio": 0.819832,
+        "contentBounds": [
+          558,
+          41,
+          1361,
+          679
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 5,
+        "column": 0,
+        "row": 1,
+        "bounds": [
+          0,
+          396,
+          397,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 111936,
+        "checkerRemovedRatio": 0.710213,
+        "sourceContentBounds": [
+          32,
+          53,
+          378,
+          327
+        ],
+        "sourceCropWithPadding": [
+          22,
+          43,
+          388,
+          337
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.285714,
+        "placement": [
+          541,
+          24,
+          837,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "proving-ground",
+      "annexLabel": "Terrain d'essai",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/proving-ground/door.webp",
+      "sha256": "328b63cea9cfcbd45ed7134c34b85f55182c5abaf7f132fc968571b4060e62da",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 86801,
+        "partialAlphaPixels": 4176,
+        "opaquePixels": 105631,
+        "occupiedPixels": 109807,
+        "transparentRatio": 0.441493,
+        "contentBounds": [
+          31,
+          104,
+          353,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 5,
+        "column": 0,
+        "row": 1,
+        "bounds": [
+          0,
+          512,
+          307,
+          1024
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 78072,
+        "checkerRemovedRatio": 0.496692,
+        "sourceContentBounds": [
+          16,
+          80,
+          288,
+          399
+        ],
+        "sourceCropWithPadding": [
+          8,
+          72,
+          296,
+          407
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.166667,
+        "placement": [
+          24,
+          97,
+          336,
+          391
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "morgue",
+      "annexLabel": "Morgue",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/morgue/far.webp",
+      "sha256": "4c6bfcbee0ddef692cf7b7499bc0ff46ebb43a02aac8d2fb36ef49a603990f51",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 6,
+        "column": 1,
+        "row": 1,
+        "bounds": [
+          397,
+          396,
+          793,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          6,
+          4,
+          393,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "morgue",
+      "annexLabel": "Morgue",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/morgue/mid.webp",
+      "sha256": "3d4efe6275101c1c708de8b3ac037c835bfa33dfba2d654511467ff021bd4553",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 6,
+        "column": 1,
+        "row": 1,
+        "bounds": [
+          397,
+          396,
+          793,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          6,
+          4,
+          393,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "morgue",
+      "annexLabel": "Morgue",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/morgue/prop.webp",
+      "sha256": "fbd232c41ff6d05fa2fc05548310c8b483d6dd243a182026b2f3d44317a3efde",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 205150,
+        "partialAlphaPixels": 15349,
+        "opaquePixels": 107181,
+        "occupiedPixels": 122530,
+        "transparentRatio": 0.626068,
+        "contentBounds": [
+          43,
+          132,
+          608,
+          469
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 6,
+        "column": 1,
+        "row": 1,
+        "bounds": [
+          355,
+          444,
+          710,
+          887
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 114048,
+        "checkerRemovedRatio": 0.725196,
+        "sourceContentBounds": [
+          11,
+          119,
+          353,
+          321
+        ],
+        "sourceCropWithPadding": [
+          2,
+          110,
+          355,
+          330
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.631728,
+        "placement": [
+          32,
+          121,
+          576,
+          359
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "morgue",
+      "annexLabel": "Morgue",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/morgue/foreground.webp",
+      "sha256": "792f8859dce7bbecd3cfa64ac9475b29b7a27b1af8aa97a861da36cfc7ec6913",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1118418,
+        "partialAlphaPixels": 44425,
+        "opaquePixels": 219557,
+        "occupiedPixels": 263982,
+        "transparentRatio": 0.809041,
+        "contentBounds": [
+          580,
+          42,
+          1340,
+          678
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 6,
+        "column": 1,
+        "row": 1,
+        "bounds": [
+          397,
+          396,
+          793,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 112881,
+        "checkerRemovedRatio": 0.718018,
+        "sourceContentBounds": [
+          36,
+          59,
+          357,
+          327
+        ],
+        "sourceCropWithPadding": [
+          26,
+          49,
+          367,
+          337
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.333333,
+        "placement": [
+          562,
+          24,
+          796,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "morgue",
+      "annexLabel": "Morgue",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/morgue/door.webp",
+      "sha256": "de2c3836abc279f7c761d68cbe7d967845dbb1f1d776c529837556c335a5d8b3",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 90782,
+        "partialAlphaPixels": 4302,
+        "opaquePixels": 101524,
+        "occupiedPixels": 105826,
+        "transparentRatio": 0.461741,
+        "contentBounds": [
+          28,
+          114,
+          353,
+          481
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 6,
+        "column": 1,
+        "row": 1,
+        "bounds": [
+          307,
+          512,
+          614,
+          1024
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 83153,
+        "checkerRemovedRatio": 0.529017,
+        "sourceContentBounds": [
+          6,
+          93,
+          276,
+          399
+        ],
+        "sourceCropWithPadding": [
+          0,
+          85,
+          284,
+          407
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.183099,
+        "placement": [
+          24,
+          107,
+          336,
+          381
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "escape-pods",
+      "annexLabel": "Capsules de sauvetage",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/far.webp",
+      "sha256": "f2ec2d7a6afc1aa6fe4135ad69973aae558764dfc2be348b80df0627df851766",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 7,
+        "column": 2,
+        "row": 1,
+        "bounds": [
+          793,
+          396,
+          1190,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          6,
+          4,
+          391,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "escape-pods",
+      "annexLabel": "Capsules de sauvetage",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/mid.webp",
+      "sha256": "915bc28663c5d13e0544cd08d462ba8426fa7ddfbb20465d61166a53a8e6c229",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 7,
+        "column": 2,
+        "row": 1,
+        "bounds": [
+          793,
+          396,
+          1190,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          6,
+          4,
+          391,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "escape-pods",
+      "annexLabel": "Capsules de sauvetage",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/prop.webp",
+      "sha256": "fd4db993ffe0579772123540e86d3afcc907388d1cac845c03cc59c8be60961a",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 252849,
+        "partialAlphaPixels": 7100,
+        "opaquePixels": 67731,
+        "occupiedPixels": 74831,
+        "transparentRatio": 0.771634,
+        "contentBounds": [
+          101,
+          42,
+          548,
+          470
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 7,
+        "column": 2,
+        "row": 1,
+        "bounds": [
+          710,
+          444,
+          1064,
+          887
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 122916,
+        "checkerRemovedRatio": 0.783793,
+        "sourceContentBounds": [
+          48,
+          42,
+          354,
+          333
+        ],
+        "sourceCropWithPadding": [
+          39,
+          33,
+          354,
+          342
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.449838,
+        "placement": [
+          91,
+          32,
+          457,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "escape-pods",
+      "annexLabel": "Capsules de sauvetage",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/foreground.webp",
+      "sha256": "ffd0ae47ab9164a3a7cd79cff200a498d6e11974f9ee92703ec972bec4a823e1",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1187381,
+        "partialAlphaPixels": 40717,
+        "opaquePixels": 154302,
+        "occupiedPixels": 195019,
+        "transparentRatio": 0.858927,
+        "contentBounds": [
+          592,
+          41,
+          1328,
+          679
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 7,
+        "column": 2,
+        "row": 1,
+        "bounds": [
+          793,
+          396,
+          1190,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 122615,
+        "checkerRemovedRatio": 0.77797,
+        "sourceContentBounds": [
+          43,
+          47,
+          368,
+          328
+        ],
+        "sourceCropWithPadding": [
+          33,
+          37,
+          378,
+          338
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.232558,
+        "placement": [
+          575,
+          24,
+          770,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "escape-pods",
+      "annexLabel": "Capsules de sauvetage",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/escape-pods/door.webp",
+      "sha256": "e3aaab7dad4409878b0e392c2cb9a301de2c8190802e1cff1140066af70dc8c4",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 102610,
+        "partialAlphaPixels": 3859,
+        "opaquePixels": 90139,
+        "occupiedPixels": 93998,
+        "transparentRatio": 0.521901,
+        "contentBounds": [
+          24,
+          133,
+          360,
+          482
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 7,
+        "column": 2,
+        "row": 1,
+        "bounds": [
+          614,
+          512,
+          922,
+          1024
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 80390,
+        "checkerRemovedRatio": 0.509778,
+        "sourceContentBounds": [
+          2,
+          85,
+          308,
+          400
+        ],
+        "sourceCropWithPadding": [
+          0,
+          77,
+          308,
+          408
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.090909,
+        "placement": [
+          24,
+          127,
+          336,
+          361
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "durandal",
+      "annexLabel": "Noyau Durandal Ω",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/durandal/far.webp",
+      "sha256": "f877978ad528f0be3e4ab772e04295a2fc2fe18e6a681baa7e49cc99c31064a9",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 8,
+        "column": 3,
+        "row": 1,
+        "bounds": [
+          1190,
+          396,
+          1586,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          3,
+          4,
+          389,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "durandal",
+      "annexLabel": "Noyau Durandal Ω",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/durandal/mid.webp",
+      "sha256": "dd68bca8e86557f42b871a1c1448ae4c44c39fece264aa59dfde34e82e7d2375",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 8,
+        "column": 3,
+        "row": 1,
+        "bounds": [
+          1190,
+          396,
+          1586,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          3,
+          4,
+          389,
+          383
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "durandal",
+      "annexLabel": "Noyau Durandal Ω",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/durandal/prop.webp",
+      "sha256": "08b2635a35a5a48feed3c429e924bbe02fd25708b5c4ee06fdb6e924bd677500",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 219538,
+        "partialAlphaPixels": 10188,
+        "opaquePixels": 97954,
+        "occupiedPixels": 108142,
+        "transparentRatio": 0.669977,
+        "contentBounds": [
+          82,
+          41,
+          558,
+          471
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-props-master-openai-v71.png",
+      "sourceCell": {
+        "index": 8,
+        "column": 3,
+        "row": 1,
+        "bounds": [
+          1064,
+          444,
+          1419,
+          887
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 100014,
+        "checkerRemovedRatio": 0.635958,
+        "sourceContentBounds": [
+          0,
+          25,
+          355,
+          341
+        ],
+        "sourceCropWithPadding": [
+          0,
+          16,
+          355,
+          350
+        ],
+        "sourcePadding": 9,
+        "targetPadding": 32,
+        "scale": 1.341317,
+        "placement": [
+          82,
+          32,
+          476,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "durandal",
+      "annexLabel": "Noyau Durandal Ω",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/durandal/foreground.webp",
+      "sha256": "6efa61b9f5d7e8c5ea3d81014b54d09e79d3efc23d2f6bd8c6bb3bb716828916",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1116484,
+        "partialAlphaPixels": 36581,
+        "opaquePixels": 229335,
+        "occupiedPixels": 265916,
+        "transparentRatio": 0.807642,
+        "contentBounds": [
+          601,
+          41,
+          1318,
+          679
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 8,
+        "column": 3,
+        "row": 1,
+        "bounds": [
+          1190,
+          396,
+          1586,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 106259,
+        "checkerRemovedRatio": 0.675896,
+        "sourceContentBounds": [
+          37,
+          43,
+          358,
+          328
+        ],
+        "sourceCropWithPadding": [
+          27,
+          33,
+          368,
+          338
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.203279,
+        "placement": [
+          584,
+          24,
+          751,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "durandal",
+      "annexLabel": "Noyau Durandal Ω",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/durandal/door.webp",
+      "sha256": "5199aa5ca01b9ead639b2c4cab9c2dd24584ab4b8c7cce8d76550413709e69db",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 105004,
+        "partialAlphaPixels": 3778,
+        "opaquePixels": 87826,
+        "occupiedPixels": 91604,
+        "transparentRatio": 0.534078,
+        "contentBounds": [
+          24,
+          144,
+          360,
+          482
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-doors-master-openai-v71.png",
+      "sourceCell": {
+        "index": 8,
+        "column": 3,
+        "row": 1,
+        "bounds": [
+          922,
+          512,
+          1229,
+          1024
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 82385,
+        "checkerRemovedRatio": 0.524131,
+        "sourceContentBounds": [
+          0,
+          96,
+          307,
+          400
+        ],
+        "sourceCropWithPadding": [
+          0,
+          88,
+          307,
+          408
+        ],
+        "sourcePadding": 8,
+        "targetPadding": 24,
+        "scale": 1.094463,
+        "placement": [
+          24,
+          138,
+          336,
+          350
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "bioforge",
+      "annexLabel": "Accès BIOFORGE isolé",
+      "kind": "far",
+      "path": "assets/openai/hub/annexes/v71/bioforge/far.webp",
+      "sha256": "1f8f7cd113fc5f410978d85119fb9268f6a77b2ba77bc15da1248f47e72f36a5",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-access-background-neutral-openai-v71.png",
+      "sourceCell": {
+        "standalone": true,
+        "bounds": [
+          0,
+          0,
+          1672,
+          941
+        ]
+      },
+      "processing": {
+        "operation": "derived-from-mid + gaussian-blur + desaturation + darkening",
+        "darkFrameTrim": [
+          2,
+          22,
+          1672,
+          940
+        ],
+        "target": [
+          1920,
+          720
+        ],
+        "derivedFrom": "mid.webp",
+        "gaussianBlurRadius": 7.0,
+        "brightness": 0.48,
+        "color": 0.62
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "bioforge",
+      "annexLabel": "Accès BIOFORGE isolé",
+      "kind": "mid",
+      "path": "assets/openai/hub/annexes/v71/bioforge/mid.webp",
+      "sha256": "b2dcfde8db8643e4389e53dfae682a348e1bdd3e1898b539846eb3edc22e5968",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGB",
+      "alpha": {
+        "hasAlpha": false,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "occupiedPixels": 1382400,
+        "transparentRatio": 0.0,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-access-background-neutral-openai-v71.png",
+      "sourceCell": {
+        "standalone": true,
+        "bounds": [
+          0,
+          0,
+          1672,
+          941
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + narrow-dark-frame-trim + cover-resize",
+        "darkFrameTrim": [
+          2,
+          22,
+          1672,
+          940
+        ],
+        "target": [
+          1920,
+          720
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "bioforge",
+      "annexLabel": "Accès BIOFORGE isolé",
+      "kind": "prop",
+      "path": "assets/openai/hub/annexes/v71/bioforge/prop.webp",
+      "sha256": "222d9325cf37a63545130b5fcd0b1dfede84920454cf4fe861a307074c408add",
+      "dimensions": [
+        640,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 180312,
+        "partialAlphaPixels": 5868,
+        "opaquePixels": 141500,
+        "occupiedPixels": 147368,
+        "transparentRatio": 0.550269,
+        "contentBounds": [
+          59,
+          43,
+          581,
+          469
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-access-console-neutral-openai-v71.png",
+      "sourceCell": {
+        "standalone": true,
+        "bounds": [
+          0,
+          0,
+          1367,
+          1151
+        ]
+      },
+      "processing": {
+        "operation": "standalone-neutral-bioforge-prop + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 900044,
+        "checkerRemovedRatio": 0.572031,
+        "sourceContentBounds": [
+          123,
+          130,
+          1240,
+          1039
+        ],
+        "sourceCropWithPadding": [
+          94,
+          101,
+          1269,
+          1068
+        ],
+        "sourcePadding": 29,
+        "targetPadding": 32,
+        "scale": 0.463289,
+        "placement": [
+          48,
+          32,
+          544,
+          448
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "bioforge",
+      "annexLabel": "Accès BIOFORGE isolé",
+      "kind": "foreground",
+      "path": "assets/openai/hub/annexes/v71/bioforge/foreground.webp",
+      "sha256": "3f12fd62dadb4bb972d0f08200294c11705a3fb2174909e5d8477cedc6bd1082",
+      "dimensions": [
+        1920,
+        720
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 1052118,
+        "partialAlphaPixels": 19011,
+        "opaquePixels": 311271,
+        "occupiedPixels": 330282,
+        "transparentRatio": 0.761081,
+        "contentBounds": [
+          578,
+          41,
+          1342,
+          679
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/annex-foregrounds-master-openai-v71.png",
+      "sourceCell": {
+        "index": 9,
+        "column": 4,
+        "row": 1,
+        "bounds": [
+          1586,
+          396,
+          1983,
+          793
+        ]
+      },
+      "processing": {
+        "operation": "exact-5x2-cell + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 92475,
+        "checkerRemovedRatio": 0.586737,
+        "sourceContentBounds": [
+          25,
+          46,
+          365,
+          329
+        ],
+        "sourceCropWithPadding": [
+          15,
+          36,
+          375,
+          339
+        ],
+        "sourcePadding": 10,
+        "targetPadding": 24,
+        "scale": 2.217822,
+        "placement": [
+          561,
+          24,
+          798,
+          672
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    },
+    {
+      "annexId": "bioforge",
+      "annexLabel": "Accès BIOFORGE isolé",
+      "kind": "door",
+      "path": "assets/openai/hub/annexes/v71/bioforge/door.webp",
+      "sha256": "671bbd4a80002fa5dc9e28a5773d7a61760654df2570e97cf968eadc1e05ba43",
+      "dimensions": [
+        384,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha": {
+        "hasAlpha": true,
+        "transparentPixels": 83104,
+        "partialAlphaPixels": 4519,
+        "opaquePixels": 108985,
+        "occupiedPixels": 113504,
+        "transparentRatio": 0.422689,
+        "contentBounds": [
+          53,
+          29,
+          330,
+          483
+        ],
+        "hiddenRgbPixels": 0
+      },
+      "source": "assets/openai/sprites/frames/v71/hub-commercial/bioforge-door-neutral-openai-v71.png",
+      "sourceCell": {
+        "standalone": true,
+        "bounds": [
+          0,
+          0,
+          1024,
+          1536
+        ]
+      },
+      "processing": {
+        "operation": "standalone-neutral-bioforge-door + border-connected-RGB-checker-flood-fill + enclosed-checker-cleanup + bbox-padding",
+        "checkerRemovedPixels": 397567,
+        "checkerRemovedRatio": 0.252766,
+        "sourceContentBounds": [
+          69,
+          38,
+          950,
+          1494
+        ],
+        "sourceCropWithPadding": [
+          43,
+          12,
+          976,
+          1520
+        ],
+        "sourcePadding": 26,
+        "targetPadding": 24,
+        "scale": 0.307692,
+        "placement": [
+          48,
+          24,
+          287,
+          464
+        ]
+      },
+      "provenance": {
+        "provider": "OpenAI ImageGen",
+        "originalProjectAsset": true,
+        "canonExact": false
+      }
+    }
+  ],
+  "counts": {
+    "annexes": 10,
+    "layersPerAnnex": 5,
+    "files": 50
+  }
+}

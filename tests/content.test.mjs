@@ -5,7 +5,7 @@ import {
   CREW, COSTUMES, LEVEL_SEEDS, APEX_DOSSIERS, NEURO_XENO_PROFILES, validateContent
 } from '../src/content.js';
 
-test('v70 additive content contract is exact', () => {
+test('v71 additive content contract is exact', () => {
   assert.deepEqual(CONTENT_COUNTS, CONTENT_TARGETS);
   assert.deepEqual(validateContent(), { ok: true, failures: [], counts: CONTENT_COUNTS });
 });

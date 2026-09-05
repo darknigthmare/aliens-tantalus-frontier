@@ -1,8 +1,8 @@
-import test from 'node:test';
+import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, dirname } from 'node:path';
+import { join, dirname, basename, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { ENEMIES } from '../src/content-core-v50.js';
 import { ANIMATION_CONTRACTS, BATCH_SIZE, FIRST_BATCH_IDS, animationContractFor, normalizeEnemyIdentity, reviewedReference } from '../scripts/enemy-batch-contracts.mjs';
@@ -11,8 +11,17 @@ import { QUEUE_PATH, STATE_PATH, REFERENCES_PATH, REVIEW_CHECKS, buildEnemyBatch
 const reference = { status: 'reviewed', urls: ['https://example.com/canonical-reference'], localPaths: [], designLock: 'Test-only reference lock, not production art.', reviewer: 'test', reviewedAt: '2026-08-31', canonExact: false };
 const refs = { profiles: Object.fromEntries(FIRST_BATCH_IDS.map((id) => [id, reference])) };
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
+const fixtureRoots = new Set();
+after(async () => {
+  for (const root of fixtureRoots) {
+    assert.equal(dirname(root), resolve(tmpdir()));
+    assert.ok(basename(root).startsWith('atf-v66-batch-test-'));
+    await rm(root, { recursive: true, force: true });
+  }
+});
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'atf-v66-batch-test-'));
+  fixtureRoots.add(root);
   const queue = buildEnemyBatchQueue({ references: refs });
   const job = queue.jobs[0];
   for (const clip of job.clips) {

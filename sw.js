@@ -1,4 +1,4 @@
-const CACHE = 'atf-v70-shell-1';
+const CACHE = 'atf-v71-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
@@ -29,6 +29,7 @@ const CORE = [
   '/src/enemy-profile-assets-v66.js', '/src/enemy-profile-registry-v66.js',
   '/src/enemy-profile-geometry-v66.js',
   '/docs/VERSION_HISTORY_V65.md', '/docs/ART_PROVENANCE_V65.md',
+  '/docs/VERSION_HISTORY_V71.md', '/docs/V71_HUB_COMMERCIAL_AUDIT.md', '/docs/ART_PROVENANCE_V71.md', '/docs/VALIDATION_V71.md',
   '/src/game-v52-runtime.js', '/src/game-v52-level-runtime.js', '/src/sprite-animation-runtime.js', '/src/enemy-visual-runtime-v53.js', '/src/enemy-profile-assets-v65.js', '/src/enemy-profile-registry-v65.js', '/src/enemy-atlas-loader-v65.js', '/src/enemy-combat-runtime-v64.js', '/src/mission-levels-v52.js',
   '/src/enemy-visual-overrides-v55.js', '/src/enemy-visual-overrides-v56.js', '/src/enemy-visual-overrides-v64.js', '/src/npc-mission-runtime-v55.js',
   '/src/vehicle-visual-runtime-v55.js', '/src/vehicle-visual-overrides-v56.js',
@@ -36,7 +37,7 @@ const CORE = [
   '/src/weapon-visual-runtime-v56.js', '/src/weapon-visual-runtime-v61.js', '/src/weapon-visual-runtime-v63.js', '/src/equipment-visual-runtime-v56.js',
   '/src/mission-interactive-art-v56.js', '/src/mission-door-art-v58.js', '/src/topology-coherence-v58.js',
   '/src/hub-art-runtime-v55.js', '/src/hub-art-runtime-v56.js', '/src/hub-art-runtime-v58.js',
-  '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
+  '/src/hub-v51-runtime.js', '/src/hub-v52-runtime.js', '/src/hub-v71-runtime.js', '/src/tantalus-hub-expansion-v71.js', '/src/hub-annex-services-v71.js', '/src/hub-game.js', '/src/hub-profiles-v53.js', '/src/editor.js', '/src/audio.js',
   '/assets/openai/ui/title/tantalus-frontier-title-background-v61.png',
   '/assets/openai/ui/dialogue/mara-vega-operations-v61.png',
   '/assets/openai/ui/dialogue/sanaa-doyle-armory-v61.png',
@@ -68,6 +69,16 @@ const CORE = [
   '/assets/openai/sprites/normalized/props/qz17-narrative-collectables-atlas-v68.png',
   '/assets/openai/sprites/normalized/props/alpha-bravo-task-consoles-atlas-v69.png',
   '/assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png',
+  '/assets/openai/hub/annexes/v71/arrival-airlock/far.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/mid.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/prop.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/door.webp',
+  '/assets/openai/hub/annexes/v71/logistics/far.webp', '/assets/openai/hub/annexes/v71/logistics/mid.webp', '/assets/openai/hub/annexes/v71/logistics/prop.webp', '/assets/openai/hub/annexes/v71/logistics/foreground.webp', '/assets/openai/hub/annexes/v71/logistics/door.webp',
+  '/assets/openai/hub/annexes/v71/mire-archives/far.webp', '/assets/openai/hub/annexes/v71/mire-archives/mid.webp', '/assets/openai/hub/annexes/v71/mire-archives/prop.webp', '/assets/openai/hub/annexes/v71/mire-archives/foreground.webp', '/assets/openai/hub/annexes/v71/mire-archives/door.webp',
+  '/assets/openai/hub/annexes/v71/synthetic-bay/far.webp', '/assets/openai/hub/annexes/v71/synthetic-bay/mid.webp', '/assets/openai/hub/annexes/v71/synthetic-bay/prop.webp', '/assets/openai/hub/annexes/v71/synthetic-bay/foreground.webp', '/assets/openai/hub/annexes/v71/synthetic-bay/door.webp',
+  '/assets/openai/hub/annexes/v71/cctv/far.webp', '/assets/openai/hub/annexes/v71/cctv/mid.webp', '/assets/openai/hub/annexes/v71/cctv/prop.webp', '/assets/openai/hub/annexes/v71/cctv/foreground.webp', '/assets/openai/hub/annexes/v71/cctv/door.webp',
+  '/assets/openai/hub/annexes/v71/proving-ground/far.webp', '/assets/openai/hub/annexes/v71/proving-ground/mid.webp', '/assets/openai/hub/annexes/v71/proving-ground/prop.webp', '/assets/openai/hub/annexes/v71/proving-ground/foreground.webp', '/assets/openai/hub/annexes/v71/proving-ground/door.webp',
+  '/assets/openai/hub/annexes/v71/morgue/far.webp', '/assets/openai/hub/annexes/v71/morgue/mid.webp', '/assets/openai/hub/annexes/v71/morgue/prop.webp', '/assets/openai/hub/annexes/v71/morgue/foreground.webp', '/assets/openai/hub/annexes/v71/morgue/door.webp',
+  '/assets/openai/hub/annexes/v71/escape-pods/far.webp', '/assets/openai/hub/annexes/v71/escape-pods/mid.webp', '/assets/openai/hub/annexes/v71/escape-pods/prop.webp', '/assets/openai/hub/annexes/v71/escape-pods/foreground.webp', '/assets/openai/hub/annexes/v71/escape-pods/door.webp',
+  '/assets/openai/hub/annexes/v71/durandal/far.webp', '/assets/openai/hub/annexes/v71/durandal/mid.webp', '/assets/openai/hub/annexes/v71/durandal/prop.webp', '/assets/openai/hub/annexes/v71/durandal/foreground.webp', '/assets/openai/hub/annexes/v71/durandal/door.webp',
+  '/assets/openai/hub/annexes/v71/bioforge/far.webp', '/assets/openai/hub/annexes/v71/bioforge/mid.webp', '/assets/openai/hub/annexes/v71/bioforge/prop.webp', '/assets/openai/hub/annexes/v71/bioforge/foreground.webp', '/assets/openai/hub/annexes/v71/bioforge/door.webp',
   '/assets/openai/sprites/normalized/npcs/cargo-survivors-shaw-ruiz-kessler-v67.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',

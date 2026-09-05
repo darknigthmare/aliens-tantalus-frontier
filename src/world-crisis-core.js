@@ -1,4 +1,5 @@
 import { WORLDS } from './content.js';
+import { consumeHubEscapePodMitigationV71 } from './hub-annex-services-v71.js';
 
 export const CRISIS_KINDS = Object.freeze(['xenomorph', 'synthetic', 'pathogen']);
 export const HUB_CRISIS_ACTIONS = Object.freeze({
@@ -307,7 +308,18 @@ export function planHubCrisisResolution(save, rawEvent = {}) {
   const nextSave = clone(save);
   const crisis = normalizeCrisis(lookup.crisis);
   const outcome = action === HUB_CRISIS_ACTIONS.resolved ? 'resolved' : 'player-down';
-  const rule = CRISIS_EFFECTS[crisis.kind][outcome === 'resolved' ? 'resolved' : 'playerDown'];
+  const baseRule = CRISIS_EFFECTS[crisis.kind][outcome === 'resolved' ? 'resolved' : 'playerDown'];
+  const evacuation = outcome === 'player-down'
+    ? consumeHubEscapePodMitigationV71(nextSave)
+    : { applied: false, injuryDamage: 0, stress: 0, moduleDamage: 0 };
+  const rule = evacuation.applied
+    ? {
+        ...baseRule,
+        injuryDamage: Math.max(0, baseRule.injuryDamage - evacuation.injuryDamage),
+        stress: Math.max(0, baseRule.stress - evacuation.stress),
+        moduleDamage: Math.max(0, baseRule.moduleDamage - evacuation.moduleDamage)
+      }
+    : baseRule;
   const systemChanges = applyDeltas(nextSave.hub.systems, rule.systems, 100);
   const resourceChanges = applyDeltas(nextSave.galaxy.resources, rule.resources);
 
@@ -357,7 +369,9 @@ export function planHubCrisisResolution(save, rawEvent = {}) {
     severity: outcome === 'resolved' ? 'info' : 'critical',
     message: outcome === 'resolved'
       ? `Incident ${crisis.kind} contenu sur le pont ${crisis.deck + 1}.`
-      : `Équipe à terre pendant l'incident ${crisis.kind} sur le pont ${crisis.deck + 1}.`,
+      : evacuation.applied
+        ? `Équipe extraite par capsule pendant l'incident ${crisis.kind} sur le pont ${crisis.deck + 1} ; pertes amorties.`
+        : `Équipe à terre pendant l'incident ${crisis.kind} sur le pont ${crisis.deck + 1}.`,
     day: Math.max(1, Math.floor(Number(nextSave.clock.day) || 1)),
     hour: round(nextSave.clock.hour)
   };
@@ -367,7 +381,7 @@ export function planHubCrisisResolution(save, rawEvent = {}) {
     handled: true,
     outcome,
     crisis: clone(nextSave.hub.activeCrisis),
-    effects: { systems: systemChanges, resources: resourceChanges, module: moduleChange, injury },
+    effects: { systems: systemChanges, resources: resourceChanges, module: moduleChange, injury, evacuation },
     save: nextSave
   };
 }

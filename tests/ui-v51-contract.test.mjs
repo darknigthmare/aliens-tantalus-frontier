@@ -16,7 +16,7 @@ test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et cons
   for (const contract of [
     "from './game-production-runtime.js'",
     "from './mission-levels-v52.js'",
-    "from './hub-v62-runtime.js'",
+    "from './hub-v71-runtime.js'",
     "from './mission-insertion-ui-v62.js'",
     "from './world-crisis.js'",
     "from './campaign-consequences.js'",
@@ -70,8 +70,19 @@ test('index public expose chaque contrôle actionnable sans écran catalogue mor
   ];
   for (const id of requiredIds) assert.match(html, new RegExp(`id=["']${id}["']`), `#${id} manque`);
 
-  for (const control of ['left', 'right', 'jump', 'crouch', 'depth', 'fire', 'interact']) {
-    assert.match(html, new RegExp(`data-hub-control=["']${control}["']`));
+  const hubTouchControls = new Map([
+    ['left', 'Aller à gauche'],
+    ['right', 'Aller à droite'],
+    ['up', 'Monter'],
+    ['down', 'Descendre'],
+    ['jump', 'Sauter'],
+    ['crouch', 'S’accroupir'],
+    ['depth', 'Changer de profondeur'],
+    ['fire', 'Tirer'],
+    ['interact', 'Interagir'],
+  ]);
+  for (const [control, label] of hubTouchControls) {
+    assert.match(html, new RegExp(`<button[^>]*data-hub-control=["']${control}["'][^>]*aria-label=["']${label}["']`));
   }
   for (const code of ['KeyA', 'KeyD', 'Space', 'KeyF']) assert.match(html, new RegExp(`data-mission-key=["']${code}["']`));
   assert.match(html, /src=["']\/src\/app\.js["']/);

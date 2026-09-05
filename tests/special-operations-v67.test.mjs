@@ -34,14 +34,14 @@ const CHAT_IDS = Object.freeze([
   '6a98dfcb-a2e4-83ed-b3c2-606a9384c6e4'
 ]);
 
-test('le registre V70 couvre exactement les 19 conversations avec le bilan 2/8/9 et quatre lots jouables', () => {
+test('le registre V71 couvre exactement les 19 conversations avec le bilan 2/8/9 et cinq surfaces jouables', () => {
   assert.equal(SPECIAL_OPERATIONS_V67.length, 19);
   assert.deepEqual(SPECIAL_OPERATION_COUNTS_V67, {
     total: 19,
     effective: 2,
     partial: 8,
     missing: 9,
-    playable: 4
+    playable: 5
   });
   assert.deepEqual(validateSpecialOperationsV67(), {
     ok: true,
@@ -72,7 +72,7 @@ test('les identifiants internes et ChatGPT sont exacts, uniques et adressables',
   assert.equal(getSpecialOperationByChatIdV67('inconnu'), null);
 });
 
-test('Cargo Brutal, QZ-17, Alpha/Bravo et Survie ajoutent quatre campagnes jouables sans collision historique', () => {
+test('quatre opérations ajoutent des campagnes, tandis que le hub jouable conserve le total 440', () => {
   const historicalIds = new Set(CORE_CAMPAIGNS.map((campaign) => campaign.id));
   assert.equal(CORE_CAMPAIGNS.length, 436);
   assert.equal(historicalIds.has('special-cargo-brutal'), false);
@@ -80,6 +80,15 @@ test('Cargo Brutal, QZ-17, Alpha/Bravo et Survie ajoutent quatre campagnes jouab
   const expanded = buildCampaignsWithSpecialOperationsV67(CORE_CAMPAIGNS);
   assert.equal(expanded.length, CORE_CAMPAIGNS.length + 4);
   assert.equal(new Set(expanded.map((campaign) => campaign.id)).size, expanded.length);
+
+  const hub = getSpecialOperationV67('tantalus-hub-expansion');
+  assert.ok(hub);
+  assert.equal(hub.implementationStatus, 'partial');
+  assert.equal(hub.playable, true);
+  assert.equal(hub.accessSurface, 'hub');
+  assert.equal(hub.campaignId, undefined);
+  assert.equal(hub.campaign, undefined);
+  assert.equal(expanded.some((campaign) => campaign.specialOperationId === hub.id), false);
 
   const cargo = expanded.find((campaign) => campaign.id === 'special-cargo-brutal');
   assert.ok(cargo);
@@ -121,5 +130,24 @@ test('Cargo Brutal, QZ-17, Alpha/Bravo et Survie ajoutent quatre campagnes jouab
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === qz17.id).length, 1);
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === alphaBravo.id).length, 1);
   assert.equal(CAMPAIGNS.filter((campaign) => campaign.id === survival.id).length, 1);
+  assert.equal(CAMPAIGNS.length, 440);
   assert.equal(CAMPAIGNS.length, expanded.length);
+});
+
+test('la validation distingue une campagne complète d’une surface hub et refuse les routes incomplètes', () => {
+  const hub = getSpecialOperationV67('tantalus-hub-expansion');
+  const invalidHub = SPECIAL_OPERATIONS_V67.map((operation) => operation === hub
+    ? { ...operation, accessSurface: undefined }
+    : operation);
+  const invalidHubValidation = validateSpecialOperationsV67(invalidHub);
+  assert.equal(invalidHubValidation.ok, false);
+  assert.ok(invalidHubValidation.failures.includes('playable work lot lacks an access route'));
+
+  const cargo = getSpecialOperationV67('cargo-brutal');
+  const incompleteCampaign = SPECIAL_OPERATIONS_V67.map((operation) => operation === cargo
+    ? { ...operation, campaign: undefined }
+    : operation);
+  const incompleteCampaignValidation = validateSpecialOperationsV67(incompleteCampaign);
+  assert.equal(incompleteCampaignValidation.ok, false);
+  assert.ok(incompleteCampaignValidation.failures.includes('incomplete campaign routing metadata'));
 });
