@@ -8,7 +8,9 @@ export const V66_ENEMY_BODY_DIMENSIONS = Object.freeze({
   'enemy-004-drone-big-chap': Object.freeze({ width: 54, height: 146 }),
   'enemy-005-warrior': Object.freeze({ width: 62, height: 136 }),
   'enemy-006-runner': Object.freeze({ width: 78, height: 82 }),
+  'enemy-016-burster': Object.freeze({ width: 88, height: 88 }),
   'enemy-020-k-series-yellow-xenomorph': Object.freeze({ width: 62, height: 136 }),
+  'enemy-050-korari-stalker': Object.freeze({ width: 96, height: 60 }),
   'enemy-055-albino-chestburster': Object.freeze({ width: 35, height: 20 })
 });
 

@@ -1,4 +1,4 @@
-// Batch001 plus individually reviewed K-Series020 and Albino Chestburster055.
+// Batch001 plus individually reviewed profiles; no family-wide promotion.
 // Canonical identity adaptation, not a certification of pixel-for-pixel copies.
 // Other profiles keep their previous coverage until their own full clip set passes.
 export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
@@ -63,6 +63,19 @@ export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     normalizedSha256: 'c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3'
   }),
   Object.freeze({
+    profileId: 'enemy-016-burster',
+    path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp',
+    spriteKey: 'xenoBursterV56', clipSet: 'enemy-action-v66',
+    pivot: 'creature-ground', hitbox: 'enemy-016-burster-body-v66',
+    // Cranial height99px; the raised tail is not biological standing height.
+    renderWidth: 256, renderHeight: 256, sourceFacing: 1,
+    identityStatus: 'source-locked-adaptation', referenceStatus: 'CANON_REFERENCE_ADAPTATION',
+    provider: 'openai-imagegen', promptId: 'V66_BATCH_002_enemy-016-burster',
+    referenceUrls: Object.freeze(['https://store.necaonline.com/products/aliens-fireteam-elite-burster-alien-7-inch-scale-action-figure', 'https://www.focus-entmt.com/en/games/aliens-fireteam-elite']),
+    identityVerified: true, reviewStatus: 'accepted', canonExact: false,
+    normalizedSha256: '3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df'
+  }),
+  Object.freeze({
     profileId: 'enemy-020-k-series-yellow-xenomorph',
     path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp',
     spriteKey: 'xenoWarrior', clipSet: 'enemy-action-v66',
@@ -74,6 +87,19 @@ export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     referenceUrls: Object.freeze(['https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp', 'https://www.avpgalaxy.net/games/avp-extinction/aliens/']),
     identityVerified: true, reviewStatus: 'accepted', canonExact: false,
     normalizedSha256: '9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6'
+  }),
+  Object.freeze({
+    profileId: 'enemy-050-korari-stalker',
+    path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp',
+    spriteKey: 'korariStalkerV56', clipSet: 'enemy-action-v66',
+    pivot: 'creature-ground', hitbox: 'enemy-050-korari-stalker-body-v66',
+    // Reviewed low quadruped: opaque idle height52.875 world px, excluding tail.
+    renderWidth: 288, renderHeight: 288, sourceFacing: 1,
+    identityStatus: 'project-original', referenceStatus: 'PROJECT_ORIGINAL',
+    provider: 'openai-imagegen', promptId: 'V66_BATCH_004_enemy-050-korari-stalker',
+    referenceUrls: Object.freeze(['https://github.com/darknigthmare/aliens-tantalus-frontier']),
+    identityVerified: true, reviewStatus: 'accepted', canonExact: false,
+    normalizedSha256: '01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df'
   }),
   Object.freeze({
     profileId: 'enemy-055-albino-chestburster',

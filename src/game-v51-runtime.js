@@ -24,7 +24,7 @@ import { resolveEquipmentVisualProfileV56 } from './equipment-visual-runtime-v56
 import { MISSION_DOOR_ATLAS_V58, resolveMissionDoorArtV58 } from './mission-door-art-v58.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
-import { updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
+import { detonateBursterV74, isBursterCombatV74, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
@@ -852,6 +852,8 @@ export class GameEngine {
     this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0 && bullet.x > -100 && bullet.x < WORLD_WIDTH + 100);
   }
   detonateEnemy(enemy, target) {
+    // Burster016 requires its full compression clock, even for a direct call.
+    if (isBursterCombatV74(enemy)) return detonateBursterV74(this, enemy, target);
     if (!enemy?.alive || !target) return false;
     const blastDamage = Math.max(20, Math.round((Number(enemy.damage) || 16) * 1.35));
     enemy.attacking = true;

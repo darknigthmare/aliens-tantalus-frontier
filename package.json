@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "73.0.0",
+  "version": "74.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -37,6 +37,8 @@
     "batch:v66:status": "node scripts/enemy-batch-production.mjs status",
     "batch:v66:worklots": "node scripts/enemy-production-worklots-v66.mjs status",
     "batch:v66:check": "node scripts/enemy-batch-production.mjs check",
+    "batch:v74:check": "node scripts/enemy-progress-v74.mjs --check",
+    "art:v74:check": "py scripts/process-v66-enemy-batch.py --profile enemy-016-burster --check && py scripts/process-v66-enemy-batch.py --profile enemy-050-korari-stalker --check && py scripts/process-v66-enemy-batch.py --profile enemy-049-wild-boar-host --check",
     "sprites:v66:check": "node scripts/sync-sprite-manifest-v66.mjs --check",
     "art:v62:check": "py scripts/audit-png-alpha-v62.py --fail-on error",
     "build": "node scripts/build.mjs",
@@ -52,7 +54,7 @@
     "qa:browser:v62": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v63": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v64": "node scripts/browser-qa-v52.mjs",
-    "qa": "npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run lint && npm test && npm run build",
+    "qa": "npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run batch:v74:check && npm run art:v74:check && npm run lint && npm test && npm run build",
     "qa:release": "npm run qa && npm run qa:browser:v64"
   },
   "engines": {

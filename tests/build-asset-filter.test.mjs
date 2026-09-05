@@ -239,7 +239,70 @@ test('V73 Vercel exclut sources et preuves sans réadmission et conserve exactem
   for (const id of ['enemy-053-albino-ovomorph', 'enemy-054-albino-facehugger']) assert.ok(!rules.includes(`!${v66Path(id)}`));
 });
 
-test('Vercel exclut les candidats V66 et ne réadmet que le lot001, le K-Series020 et le Chestburster055 acceptés', async () => {
+test('V74 publie 016/050 et les rapports publics, sans descendre dans les sources, diagnostics ou prompts', async (t) => {
+  const fixture = await mkdtemp(join(tmpdir(), 'tantalus-v74-publication-filter-'));
+  t.after(() => rm(fixture, { recursive: true, force: true }));
+  const sourceRoot = join(fixture, 'source');
+  const outputRoot = join(fixture, 'output');
+  const privateRoots = ['assets/openai/sprites/frames/v74', 'docs/references/v74-enemy-fixes',
+    'docs/references/v74-prompts', 'docs/references/V74_PRIVATE_REVIEW'];
+  const excludedFiles = [
+    'assets/openai/sprites/frames/v74/enemy-016-burster/nested/source.png',
+    'docs/references/v74-enemy-fixes/049/fringe-review-light.png',
+    'docs/references/v74-enemy-fixes/catalog/055-390x844.png',
+    'docs/references/v74-prompts/enemy-050-korari-stalker/attack.txt',
+    'docs/references/V74_PRIVATE_REVIEW/nested/source.json',
+    'docs/references/V74_STATUS.json', 'docs/references/v74-diagnostics.json',
+    v66Path('enemy-054-albino-facehugger'), v66Path('enemy-049-wild-boar-host')
+  ];
+  const publicFiles = [v66Path('enemy-016-burster'), v66Path('enemy-050-korari-stalker'),
+    'docs/ART_PROVENANCE_V74.md', 'docs/VERSION_HISTORY_V74.md', 'docs/VALIDATION_V74.md',
+    'docs/V74_PUBLIC_REPORT.md', 'docs/v74-public-report.md',
+    'docs/references/V740_PUBLIC.json', 'docs/references/v740-public.txt',
+    'assets/openai/sprites/frames/v740/runtime.png'];
+  for (const path of [...excludedFiles, ...publicFiles]) {
+    await mkdir(dirname(join(sourceRoot, path)), { recursive: true });
+    await writeFile(join(sourceRoot, path), `fixture:${path}`);
+  }
+  const filter = createBuildAssetFilter(sourceRoot);
+  const visited = new Set();
+  await cp(sourceRoot, outputRoot, { recursive: true, filter(source) {
+    visited.add(relative(sourceRoot, source).replaceAll('\\', '/'));
+    return filter(source);
+  } });
+  for (const path of excludedFiles) {
+    assert.equal(filter(join(sourceRoot, path)), false, path);
+    await assert.rejects(access(join(outputRoot, path)), { code: 'ENOENT' });
+    assert.equal(await readFile(join(sourceRoot, path), 'utf8'), `fixture:${path}`, 'source locale conservée');
+  }
+  for (const path of privateRoots) {
+    assert.equal(filter(join(sourceRoot, path)), false, 'racine privée refusée elle-même');
+    assert.equal(visited.has(path), true, 'racine rencontrée');
+    assert.equal([...visited].some((entry) => entry.startsWith(`${path}/`)), false, 'refus avant toute descente');
+    await assert.rejects(access(join(outputRoot, path)), { code: 'ENOENT' });
+  }
+  for (const path of publicFiles) assert.equal(await readFile(join(outputRoot, path), 'utf8'), `fixture:${path}`);
+});
+
+test('V74 Vercel ferme sources et preuves, préserve 016/050 et rapports publics, sans admettre 054', async () => {
+  const rules = (await readFile('.vercelignore', 'utf8')).split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  const raw = 'assets/openai/sprites/frames/v74';
+  assert.ok(rules.includes(raw), 'la racine source elle-même est exclue');
+  assert.ok(rules.includes(`${raw}/**`));
+  assert.ok(!rules.some((rule) => rule.startsWith(`!${raw}`)), 'pas de réadmission de sources V74');
+  for (const prefix of ['docs/references/V74_', 'docs/references/v74-']) {
+    assert.ok(rules.includes(`${prefix}*`), 'fichiers et racines de dossiers privés');
+    assert.ok(rules.includes(`${prefix}*/**`), 'tous les descendants privés');
+    assert.ok(!rules.some((rule) => rule.startsWith(`!${prefix}`)), 'aucune réadmission de preuve');
+  }
+  for (const id of ['enemy-016-burster', 'enemy-050-korari-stalker']) assert.ok(rules.includes(`!${v66Path(id)}`));
+  assert.ok(rules.includes('assets/openai/sprites/normalized/enemy-profiles-v66/*'));
+  for (const id of ['enemy-054-albino-facehugger', 'enemy-049-wild-boar-host']) assert.ok(!rules.includes(`!${v66Path(id)}`), `${id} reste candidat`);
+  for (const path of ['docs/ART_PROVENANCE_V74.md', 'docs/VERSION_HISTORY_V74.md', 'docs/VALIDATION_V74.md',
+    'docs/V74_PUBLIC_REPORT.md', 'docs/v74-public-report.md']) assert.ok(!rules.includes(path), `${path}: rapport public non exclu`);
+});
+
+test('Vercel exclut les candidats V66 et ne réadmet que les neuf profils individuellement acceptés', async () => {
   const rules = (await readFile('.vercelignore', 'utf8')).split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   for (const directory of ['frames/v66', 'reference-masters/v66', 'previews/v66', 'metadata/v66', 'normalized/enemy-clips-v66', 'normalized/enemy-motion-v66']) {
     assert.ok(rules.includes(`assets/openai/sprites/${directory}`));
@@ -248,7 +311,7 @@ test('Vercel exclut les candidats V66 et ne réadmet que le lot001, le K-Series0
   }
   assert.ok(rules.includes('assets/openai/sprites/normalized/enemy-profiles-v66/*'));
   const allowed = rules.filter((rule) => rule.startsWith('!assets/openai/sprites/normalized/enemy-profiles-v66/')).map((rule) => rule.slice(1));
-  assert.deepEqual(allowed.sort(), [...V66_BATCH_001_IDS, 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster'].map(v66Path).sort());
+  assert.deepEqual(allowed.sort(), [...V66_BATCH_001_IDS, 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster'].map(v66Path).sort());
   for (const candidate of ['enemy-042-combat-synthetic', 'enemy-071-albino-red-xenomorph', 'enemy-072-albino-k-series-yellow-xenomorph']) {
     assert.ok(!allowed.includes(v66Path(candidate)), `${candidate}: candidat non admis en production`);
   }

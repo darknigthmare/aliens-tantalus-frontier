@@ -1,8 +1,14 @@
 # ALIENS: TANTALUS FRONTIER
 
-Version de travail web jouable **v71.0.0**. Le contrat consolidé **v1→v71** conserve le Tantalus comme niveau physique persistant et expose cinq surfaces Special Operations accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69), **SYSTÈMES DE SURVIE ALIEN** (V70) et le **HUB DE L’USS TANTALUS** (V71). V71 ajoute dix annexes physiques, des stations persistantes et 50 couches artistiques. Le hub reste **partial** : sa structure jouable ne clôt pas ses cinq dettes de production. Le registre recense 19 conversations, dont **2 effective, 8 partial et 9 missing** ; **17 conversations restent donc inachevées**.
+## Travail courant V74
 
-Production V71 vérifiée : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app), état `READY`, runtime du commit `8b28119`. L’accueil, les modules V71, le build-info et les échantillons WebP répondent en HTTP 200 ; les masters restent exclus (404). La publication ne transforme pas les fonctionnalités encore partielles en fonctionnalités terminées.
+Version 74.0.0 : Burster 016 et Korari 050 disposent de leurs atlas dédiés32 poses avec combat, dimensions, portée symétrique et reprise contrôlés. Le comparateur du bestiaire garde ses trois/quatre silhouettes sur un sol et une échelle communs, y compris sur mobile. Le recalage du sanglier 049 est corrigé, mais sa frange violette reste à traiter ; les deux nouvelles retouches OpenAI 054 restent refusées après revue.
+
+Le lot reste les **mêmes50 profils** (007–057, hors020), pas cinquante nouveaux à chaque passe. État actualisé : [production V74](docs/ENEMY_PRODUCTION_V74.md), [validation V74](docs/VALIDATION_V74.md). Les entrées catalogue ou fichiers de production ne sont jamais un certificat de jeu terminé. Les fonctions et dettes V71 décrites ci-dessous restent une référence historique, pas une clôture des demandes restantes.
+
+Référence fonctionnelle historique **v71.0.0**. Le contrat consolidé **v1→v71** conserve le Tantalus comme niveau physique persistant et expose cinq surfaces Special Operations accessibles : **CARGO BRUTAL** (V67), l’enquête **QZ-17** (V68), la **Doctrine Alpha / Bravo** (V69), **SYSTÈMES DE SURVIE ALIEN** (V70) et le **HUB DE L’USS TANTALUS** (V71). V71 ajoute dix annexes physiques, des stations persistantes et 50 couches artistiques. Le hub reste **partial** : sa structure jouable ne clôt pas ses cinq dettes de production. Le registre recense 19 conversations, dont **2 effective, 8 partial et 9 missing** ; **17 conversations restent donc inachevées**.
+
+Publication historique V71 vérifiée : [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app), état `READY`, runtime du commit `8b28119`. L’accueil, les modules V71, le build-info et les échantillons WebP répondent en HTTP 200 ; les masters restent exclus (404). La publication ne transforme pas les fonctionnalités encore partielles en fonctionnalités terminées.
 
 ## Lancer localement
 

@@ -57,7 +57,9 @@ const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-004-drone-big-chap', ['Drone / Big Chap', 'xenoDrone', 'enemy.xenomorph-big-chap.action.v56']],
   ['enemy-005-warrior', ['Warrior', 'xenoWarrior', 'enemy.xenomorph-warrior.action.v56']],
   ['enemy-006-runner', ['Runner', 'xenoRunner', 'enemy.xenomorph-runner.action']],
-  ['enemy-020-k-series-yellow-xenomorph', ['K-Series Yellow Xenomorph', 'xenoWarrior', null]]
+  ['enemy-016-burster', ['Burster', 'xenoBursterV56', 'enemy.xenomorph-burster.action.v56']],
+  ['enemy-020-k-series-yellow-xenomorph', ['K-Series Yellow Xenomorph', 'xenoWarrior', null]],
+  ['enemy-050-korari-stalker', ['Korari Stalker', 'korariStalkerV56', 'enemy.korari-stalker.action.v56']]
 ]);
 const V66_VARIANT_IDENTITIES = new Map([
   ['enemy-055-albino-chestburster', ['Chestburster', 'chestburster', 'enemy.chestburster.action']]
@@ -87,7 +89,7 @@ test('le registre visuel couvre exactement les 55 archétypes du catalogue V64',
     if (dedicated) {
       assert.equal(resolved.profileId, enemy.id);
       assert.equal(resolved.sheetId, `enemy.profile.${enemy.id}.v66`);
-      assert.equal(resolved.identityStatus, 'source-locked-adaptation');
+      assert.equal(resolved.identityStatus, enemy.id === 'enemy-050-korari-stalker' ? 'project-original' : 'source-locked-adaptation');
     }
   }
 });
@@ -126,9 +128,9 @@ test('les 571 profils distinguent les standards dedies des variantes a identite 
     const standards = family.filter((enemy) => enemy.modifier === 'Standard');
     const variants = family.filter((enemy) => enemy.modifier !== 'Standard');
     assert.deepEqual(standards.map((enemy) => enemy.id), [profileId]);
-    assert.equal(variants.length, 10, `${archetype}: dix variantes cataloguées conservées`);
+    assert.equal(variants.length, archetype === 'Korari Stalker' ? 9 : 10, `${archetype}: dix variantes cataloguées conservées`);
     assert.equal(variants.filter((variant) => !V66_VARIANT_IDENTITIES.has(variant.id)).length,
-      archetype === 'Chestburster' ? 9 : 10, 'seul Albino055 quitte le mapping hérité');
+      ['Chestburster', 'Korari Stalker'].includes(archetype) ? 9 : 10, 'seul Albino055 quitte le mapping hérité');
     assert.equal(resolveEnemyVisualProfile(standards[0]).spriteKey, standardKey);
     for (const variant of variants) {
       const visual = resolveEnemyVisualProfile(variant);
@@ -185,8 +187,8 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   assert.deepEqual(report.bySpriteKey, expectedBySpriteKey);
   assert.deepEqual(report.byImageKey, { neuroXeno: 21, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
-    exact: 30 - (readyDedicatedById.size - V66_VARIANT_IDENTITIES.size),
-    'source-locked-adaptation': readyDedicatedById.size - V66_VARIANT_IDENTITIES.size,
+    exact: 30 - (readyDedicatedById.size - V66_VARIANT_IDENTITIES.size - 1),
+    'source-locked-adaptation': readyDedicatedById.size - V66_VARIANT_IDENTITIES.size - 1,
     'source-locked-project-adaptation': V66_VARIANT_IDENTITIES.size,
     'project-adaptation': 18,
     'project-original': 7,

@@ -12,9 +12,9 @@ import { getCatalogEntryV62 } from '../src/catalog-runtime-v62.js';
 import { getCatalogSpriteFrameV62 } from '../src/catalog-ui-v62.js';
 import { getEnemyAtlasSheetsForWorldV66 } from '../src/enemy-atlas-loader-v65.js';
 
-const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster'];
+const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster'];
 
-test('la readylist V66 pointe vers les octets et les224racines effectivement revus', async () => {
+test('la readylist V66 pointe vers les octets et les288 racines effectivement revus', async () => {
   for (const asset of V66_READY_ENEMY_PROFILE_ASSETS) {
     const bytes = await readFile(new URL(`..${asset.path}`, import.meta.url));
     const metadataBytes = await readFile(new URL(`../assets/openai/sprites/metadata/v66/${asset.profileId}.json`, import.meta.url));
@@ -22,6 +22,7 @@ test('la readylist V66 pointe vers les octets et les224racines effectivement rev
     const hash = createHash('sha256').update(bytes).digest('hex');
     assert.equal(hash, asset.normalizedSha256);
     assert.equal(hash, metadata.normalizedSha256);
+    assert.equal(asset.promptId, `V66_${metadata.batchId.toUpperCase().replaceAll('-', '_')}_${asset.profileId}`, 'Le prompt de catalogue garde le vrai lot de production.');
     assert.equal(metadata.physicalAnchorReview.status, 'reviewed');
     assert.equal(metadata.physicalAnchorReview.reviewedPoseCount, 32);
     assert.equal(metadata.validation.uniqueFrameCount, 32);
@@ -32,8 +33,8 @@ test('la readylist V66 pointe vers les octets et les224racines effectivement rev
   }
 });
 
-test('les sept profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
-  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les sept profils doivent être acceptés, pas seulement présents sur disque.');
+test('les neuf profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
+  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les neuf profils doivent être acceptés, pas seulement présents sur disque.');
   for (const id of expectedIds) {
     const source = ENEMIES.find((enemy) => enemy.id === id);
     const profile = resolveEnemyProfileVisualV66(source);

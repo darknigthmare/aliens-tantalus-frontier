@@ -1,0 +1,17 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-001-ovomorph",
+  "actor": "Codex V74 root review",
+  "canonExact": false,
+  "note": "Evidence renewal only: atlas and metadata checked byte-for-byte against previous acceptance. No new art or old review alteration. Current V74 runtime gate covers the expanded readylist.",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

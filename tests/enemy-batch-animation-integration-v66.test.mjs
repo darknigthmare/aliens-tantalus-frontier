@@ -7,6 +7,7 @@ import { resolveEnemyVisualProfile } from '../src/enemy-visual-runtime-v53.js';
 import { resolveEnemyProfileVisualV66 } from '../src/enemy-profile-registry-v66.js';
 import {
   ENEMY_BATCH_COMBAT_CONTRACTS_V66 as combatContracts,
+  BURSTER_COMBAT_V74,
   updateEnemyBatchCombatV66
 } from '../src/enemy-batch-combat-v66.js';
 import {
@@ -25,7 +26,7 @@ import {
 } from '../src/sprite-animation-runtime.js';
 
 const combatIds = Object.keys(combatContracts);
-const readyIds = [eggContract.profileId, ...combatIds];
+const readyIds = [eggContract.profileId, BURSTER_COMBAT_V74.profileId, ...combatIds];
 const actor = (x) => ({ x, y: 838, w: 42, h: 92, alive: true, health: 100 });
 const sheetIdFor = (profileId) => `enemy.profile.${profileId}.v66`;
 
@@ -78,8 +79,8 @@ function assertCell(sample, sheetId, clipId, frame) {
   assert.ok(sample.clip.frames.includes(frame), 'aucun passage dans la ligne d une autre action');
 }
 
-test('V66, K-Series020 et Albino055: les sept profils acceptes resolvent leurs propres plaques de32poses', () => {
-  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster']);
+test('V74: les neuf profils acceptes resolvent leurs propres plaques de32poses', () => {
+  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
   const paths = new Set();
   for (const profileId of readyIds) {
     const sheet = requireSheet(profileId);
@@ -101,7 +102,7 @@ test('V66, K-Series020 et Albino055: les sept profils acceptes resolvent leurs p
     assert.equal(shouldFlipSprite(sheet.id, -1), true);
     paths.add(sheet.path);
   }
-  assert.equal(paths.size, 7, 'aucune plaque partagee entre deux identites');
+  assert.equal(paths.size, 9, 'aucune plaque partagee entre deux identites');
 });
 
 test('lookup V66: ID exact prioritaire, aucun emprunt par nom contradictoire, variante ou espèce voisine', () => {
@@ -188,13 +189,17 @@ for (const profileId of combatIds) {
         vx: clipId === 'move' ? -100 : 0, alert: false, attacking: clipId === 'attack' };
       const controller = new SpriteAnimationController();
       if (clipId === 'attack') enemy.batchAttackV66 = { elapsed: 0 };
+      const savedDeathClock = profileId === 'enemy-050-korari-stalker' && clipId === 'death';
+      if (savedDeathClock) enemy.deathClock = 2.8;
       controller.sample(enemy.id, resolveEnemyAnimation(enemy), 0);
       for (let index = 0; index < 8; index += 1) {
         const elapsed = (index + 0.01) / clip.fps;
         if (clipId === 'attack') enemy.batchAttackV66.elapsed = elapsed;
+        if (savedDeathClock) enemy.deathClock = Math.max(0, 2.8 - elapsed);
         const request = resolveEnemyAnimation(enemy);
         assert.equal(request.clipId, clipId);
         if (clipId === 'attack') assert.equal(request.frame, 16 + index);
+        if (savedDeathClock) assert.equal(request.frame, 24 + index, 'horloge de mort persistante050');
         const sample = controller.sample(enemy.id, request, elapsed);
         assertCell(sample, sheet.id, clipId, clip.frames[index]);
         frames.push(sample.frame);
@@ -243,10 +248,12 @@ for (const profileId of combatIds) {
     assert.equal(hurt.reaction, 'hurt');
     assert.equal(hurt.frame, undefined);
     enemy.alive = false;
+    if (profileId === 'enemy-050-korari-stalker') enemy.deathClock = 2.8;
     const dead = resolveEnemyAnimation(enemy);
     assert.equal(dead.clipId, 'death');
     assert.equal(dead.sheetId, sheet.id);
-    assert.equal(dead.frame, undefined, 'ne pas transporter la frame21 d attaque dans la mort');
+    assert.equal(dead.frame, profileId === 'enemy-050-korari-stalker' ? 24 : undefined,
+      'mort050 explicite ou horlogelegacy, jamais la frame21 d attaque');
     assertCell(new SpriteAnimationController().sample(enemy.id, dead, 500), sheet.id, 'death', 24);
   });
 }

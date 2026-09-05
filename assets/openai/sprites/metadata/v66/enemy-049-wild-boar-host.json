@@ -31,19 +31,19 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-049-wild-boar-host.webp",
-  "normalizedSha256": "e9eb1133573633a0a24d75c746edebbe8d38616f572db7cfc84ce28dce98d68e",
+  "normalizedSha256": "1d09249b09d24ea38227863c8df56eccf73a75d4879adab442493e908698937b",
   "preview": "assets/openai/sprites/previews/v66/enemy-049-wild-boar-host/all.gif",
-  "previewSha256": "5cbfa65f3617e973cd90416a311b592314862346bd00a349cf37b589af93fd75",
+  "previewSha256": "611477642debac3ae1154561842cef5dfdf57447b86f9a0424d2c3458f617c20",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.60326087,
+  "scale": 0.575508288,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 1,
+    "attack": 1.048222732,
+    "death": 1
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
@@ -329,9 +329,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-049-wild-boar-host/idle.webp",
-      "sha256": "b9dc7deae34c9bb0b55399f59b71b4342128547a73f8377514d6762c317fdb15",
+      "sha256": "e333dc07a5eb05e0a5f533db7cb3fa0c1e4e5446c09d9931d4a6db2c5ea78aa5",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-049-wild-boar-host/idle.gif",
-      "previewSha256": "dbe3aac1822b123be8b8b718e80fb3503d6519bf13e499e14ac4b4b2173c0aae"
+      "previewSha256": "ed304526074d7b85b624ffa03898fdb1cee30fa80a905cc4a33007d236d5a838"
     },
     {
       "id": "move",
@@ -348,9 +348,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-049-wild-boar-host/move.webp",
-      "sha256": "273a91a5cd296d8e01866737d3b4fe20ca652163c6a9d4a706cb503fd478ab35",
+      "sha256": "953b69c05e30220615cdc6921cd6c07005d7745db23f90612a5ec7eb17e765f4",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-049-wild-boar-host/move.gif",
-      "previewSha256": "a2e90c449bd9891a975c95a476ef0d97ab35f6f82f4ea85a0394b4c65b4b162f"
+      "previewSha256": "67b5f4cf8834ba70d4ca07506d7fac43c301ebe28b3ac066ad330b083c03a21f"
     },
     {
       "id": "attack",
@@ -386,9 +386,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-049-wild-boar-host/death.webp",
-      "sha256": "fd047fb84504f6ee8ab3189cebb639f2e5be34da66b734435129c3d3b841bcbf",
+      "sha256": "828224d9d5defe5b6fea18e5766f345d89cc4e0d7d9bb9a9823f13791d659db0",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-049-wild-boar-host/death.gif",
-      "previewSha256": "1f279cac33e22fefa366b1bce2e27201c77b474eeeb2c79ae7b5b28164c8f1a5"
+      "previewSha256": "0eb9c35666eee9f73a407fedf5aab60e3bea5ecf69579ae5aa05546ef3c81d2c"
     }
   ],
   "placements": [
@@ -450,17 +450,17 @@
         218.0
       ],
       "renderedAnchor": [
-        128.09726443768997,
+        127.63829787234043,
         240.0
       ],
       "index": 0,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        30,
-        108,
-        228,
+        34,
+        115,
+        223,
         240
       ],
       "magentaSpill": {
@@ -536,17 +536,17 @@
         230.0
       ],
       "renderedAnchor": [
-        127.57097791798107,
+        128.39747634069403,
         240.0
       ],
       "index": 1,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        39,
-        101,
-        230,
+        44,
+        108,
+        226,
         240
       ],
       "magentaSpill": {
@@ -622,17 +622,17 @@
         219.0
       ],
       "renderedAnchor": [
-        128.17891373801916,
+        127.8370607028754,
         240.0
       ],
       "index": 2,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        37,
-        108,
-        226,
+        41,
+        114,
+        221,
         240
       ],
       "magentaSpill": {
@@ -708,17 +708,17 @@
         198.0
       ],
       "renderedAnchor": [
-        128.37179487179486,
+        127.65384615384616,
         240.0
       ],
       "index": 3,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        41,
-        121,
-        229,
+        44,
+        126,
+        224,
         240
       ],
       "magentaSpill": {
@@ -794,17 +794,17 @@
         248.0
       ],
       "renderedAnchor": [
-        128.04242424242426,
+        128.06060606060606,
         240.0
       ],
       "index": 4,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        40,
-        90,
-        239,
+        44,
+        97,
+        234,
         240
       ],
       "magentaSpill": {
@@ -880,17 +880,17 @@
         219.0
       ],
       "renderedAnchor": [
-        127.89556962025317,
+        128.4240506329114,
         240.0
       ],
       "index": 5,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        33,
-        108,
-        224,
+        38,
+        114,
+        220,
         240
       ],
       "magentaSpill": {
@@ -966,17 +966,17 @@
         218.0
       ],
       "renderedAnchor": [
-        127.68253968253968,
+        128.33968253968254,
         240.0
       ],
       "index": 6,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        36,
-        108,
-        226,
+        41,
+        115,
+        222,
         240
       ],
       "magentaSpill": {
@@ -1052,17 +1052,17 @@
         216.0
       ],
       "renderedAnchor": [
-        128.4887459807074,
+        128.06109324758842,
         240.0
       ],
       "index": 7,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        36,
-        110,
-        224,
+        40,
+        116,
+        219,
         240
       ],
       "magentaSpill": {
@@ -1138,17 +1138,17 @@
         177.0
       ],
       "renderedAnchor": [
-        128.006734006734,
+        127.93939393939394,
         240.0
       ],
       "index": 8,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        37,
-        133,
-        216,
+        41,
+        138,
+        212,
         240
       ],
       "magentaSpill": {
@@ -1224,17 +1224,17 @@
         163.0
       ],
       "renderedAnchor": [
-        128.22916666666669,
+        128.03472222222223,
         240.0
       ],
       "index": 9,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        37,
-        142,
-        211,
+        41,
+        146,
+        207,
         240
       ],
       "magentaSpill": {
@@ -1310,17 +1310,17 @@
         176.0
       ],
       "renderedAnchor": [
-        128.41059602649005,
+        128.3046357615894,
         240.0
       ],
       "index": 10,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        35,
-        134,
-        217,
+        39,
+        139,
+        213,
         240
       ],
       "magentaSpill": {
@@ -1396,17 +1396,17 @@
         173.0
       ],
       "renderedAnchor": [
-        128.3258064516129,
+        127.59354838709677,
         240.0
       ],
       "index": 11,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        30,
-        136,
-        217,
+        34,
+        140,
+        212,
         240
       ],
       "magentaSpill": {
@@ -1482,17 +1482,17 @@
         178.0
       ],
       "renderedAnchor": [
-        127.70945945945945,
+        128.14864864864865,
         240.0
       ],
       "index": 12,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        37,
-        133,
-        216,
+        42,
+        138,
+        212,
         240
       ],
       "magentaSpill": {
@@ -1568,17 +1568,17 @@
         164.0
       ],
       "renderedAnchor": [
-        127.81533101045297,
+        127.66202090592334,
         240.0
       ],
       "index": 13,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        38,
-        141,
-        211,
+        42,
+        146,
+        207,
         240
       ],
       "magentaSpill": {
@@ -1654,17 +1654,17 @@
         179.0
       ],
       "renderedAnchor": [
-        127.71475409836066,
+        127.5967213114754,
         240.0
       ],
       "index": 14,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        33,
-        132,
-        217,
+        37,
+        137,
+        213,
         240
       ],
       "magentaSpill": {
@@ -1740,17 +1740,17 @@
         177.0
       ],
       "renderedAnchor": [
-        127.71475409836066,
+        127.5967213114754,
         240.0
       ],
       "index": 15,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        33,
-        133,
-        217,
+        37,
+        138,
+        213,
         240
       ],
       "magentaSpill": {
@@ -1830,8 +1830,8 @@
         240.0
       ],
       "index": 16,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         38,
@@ -1916,8 +1916,8 @@
         240.0
       ],
       "index": 17,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         43,
@@ -2002,8 +2002,8 @@
         240.0
       ],
       "index": 18,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         41,
@@ -2088,8 +2088,8 @@
         240.0
       ],
       "index": 19,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         24,
@@ -2174,8 +2174,8 @@
         240.0
       ],
       "index": 20,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         33,
@@ -2260,8 +2260,8 @@
         240.0
       ],
       "index": 21,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         31,
@@ -2346,8 +2346,8 @@
         240.0
       ],
       "index": 22,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         42,
@@ -2432,8 +2432,8 @@
         240.0
       ],
       "index": 23,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
+      "scale": 0.575508288,
+      "sourceScale": 1.048222732,
       "appliedScale": 0.60326087,
       "renderedBounds": [
         40,
@@ -2514,17 +2514,17 @@
         204.0
       ],
       "renderedAnchor": [
-        127.70625,
+        128.15,
         240.0
       ],
       "index": 24,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        30,
-        117,
-        223,
+        35,
+        123,
+        219,
         240
       ],
       "magentaSpill": {
@@ -2600,17 +2600,17 @@
         177.0
       ],
       "renderedAnchor": [
-        128.21212121212122,
+        128.0909090909091,
         240.0
       ],
       "index": 25,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        36,
-        133,
-        215,
+        40,
+        138,
+        211,
         240
       ],
       "magentaSpill": {
@@ -2686,17 +2686,17 @@
         153.0
       ],
       "renderedAnchor": [
-        128.2935483870968,
+        127.85161290322581,
         240.0
       ],
       "index": 26,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        36,
-        148,
-        223,
+        40,
+        152,
+        218,
         240
       ],
       "magentaSpill": {
@@ -2772,17 +2772,17 @@
         136.0
       ],
       "renderedAnchor": [
-        128.40575079872204,
+        127.8626198083067,
         240.0
       ],
       "index": 27,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        33,
-        158,
-        222,
+        37,
+        162,
+        217,
         240
       ],
       "magentaSpill": {
@@ -2858,17 +2858,17 @@
         137.0
       ],
       "renderedAnchor": [
-        128.3009708737864,
+        128.28802588996763,
         240.0
       ],
       "index": 28,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        35,
-        157,
-        221,
+        39,
+        161,
+        217,
         240
       ],
       "magentaSpill": {
@@ -2944,17 +2944,17 @@
         120.0
       ],
       "renderedAnchor": [
-        127.9125,
+        128.3,
         240.0
       ],
       "index": 29,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        29,
-        168,
-        222,
+        34,
+        171,
+        218,
         240
       ],
       "magentaSpill": {
@@ -3030,17 +3030,17 @@
         104.0
       ],
       "renderedAnchor": [
-        127.52083333333333,
+        128.3720238095238,
         240.0
       ],
       "index": 30,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        23,
-        177,
-        226,
+        29,
+        180,
+        222,
         240
       ],
       "magentaSpill": {
@@ -3116,17 +3116,17 @@
         101.0
       ],
       "renderedAnchor": [
-        127.81981981981981,
+        128.17117117117118,
         240.0
       ],
       "index": 31,
-      "scale": 0.60326087,
-      "sourceScale": 1.0,
-      "appliedScale": 0.60326087,
+      "scale": 0.575508288,
+      "sourceScale": 1,
+      "appliedScale": 0.575508288,
       "renderedBounds": [
-        24,
-        179,
-        225,
+        29,
+        182,
+        221,
         240
       ],
       "magentaSpill": {
@@ -3150,210 +3150,210 @@
       {
         "index": 0,
         "alphaBounds": [
-          30,
-          108,
-          228,
+          34,
+          115,
+          223,
           240
         ],
-        "foregroundPixels": 15815,
-        "width": 198,
-        "height": 132,
-        "relativeToRowMedian": 1.052229
+        "foregroundPixels": 14307,
+        "width": 189,
+        "height": 125,
+        "relativeToRowMedian": 1.04817
       },
       {
         "index": 1,
         "alphaBounds": [
-          39,
-          101,
-          230,
+          44,
+          108,
+          226,
           240
         ],
-        "foregroundPixels": 15114,
-        "width": 191,
-        "height": 139,
-        "relativeToRowMedian": 1.005589
+        "foregroundPixels": 13698,
+        "width": 182,
+        "height": 132,
+        "relativeToRowMedian": 1.003553
       },
       {
         "index": 2,
         "alphaBounds": [
-          37,
-          108,
-          226,
+          41,
+          114,
+          221,
           240
         ],
-        "foregroundPixels": 14946,
-        "width": 189,
-        "height": 132,
-        "relativeToRowMedian": 0.994411
+        "foregroundPixels": 13596,
+        "width": 180,
+        "height": 126,
+        "relativeToRowMedian": 0.99608
       },
       {
         "index": 3,
         "alphaBounds": [
-          41,
-          121,
-          229,
+          44,
+          126,
+          224,
           240
         ],
-        "foregroundPixels": 14810,
-        "width": 188,
-        "height": 119,
-        "relativeToRowMedian": 0.985363
+        "foregroundPixels": 13601,
+        "width": 180,
+        "height": 114,
+        "relativeToRowMedian": 0.996447
       },
       {
         "index": 4,
         "alphaBounds": [
-          40,
-          90,
-          239,
+          44,
+          97,
+          234,
           240
         ],
-        "foregroundPixels": 16188,
-        "width": 199,
-        "height": 150,
-        "relativeToRowMedian": 1.057279
+        "foregroundPixels": 14813,
+        "width": 190,
+        "height": 143,
+        "relativeToRowMedian": 1.065453
       },
       {
         "index": 5,
         "alphaBounds": [
-          33,
-          108,
-          224,
+          38,
+          114,
+          220,
           240
         ],
-        "foregroundPixels": 15434,
-        "width": 191,
-        "height": 132,
-        "relativeToRowMedian": 1.008033
+        "foregroundPixels": 14072,
+        "width": 182,
+        "height": 126,
+        "relativeToRowMedian": 1.012156
       },
       {
         "index": 6,
         "alphaBounds": [
-          36,
-          108,
-          226,
+          41,
+          115,
+          222,
           240
         ],
-        "foregroundPixels": 15188,
-        "width": 190,
-        "height": 132,
-        "relativeToRowMedian": 0.991967
+        "foregroundPixels": 13734,
+        "width": 181,
+        "height": 125,
+        "relativeToRowMedian": 0.987844
       },
       {
         "index": 7,
         "alphaBounds": [
-          36,
-          110,
-          224,
+          40,
+          116,
+          219,
           240
         ],
-        "foregroundPixels": 14803,
-        "width": 188,
-        "height": 130,
-        "relativeToRowMedian": 0.966821
+        "foregroundPixels": 13476,
+        "width": 179,
+        "height": 124,
+        "relativeToRowMedian": 0.969287
       },
       {
         "index": 8,
         "alphaBounds": [
-          37,
-          133,
-          216,
+          41,
+          138,
+          212,
           240
         ],
-        "foregroundPixels": 10780,
-        "width": 179,
-        "height": 107,
-        "relativeToRowMedian": 1.032617
+        "foregroundPixels": 9839,
+        "width": 171,
+        "height": 102,
+        "relativeToRowMedian": 1.030747
       },
       {
         "index": 9,
         "alphaBounds": [
-          37,
-          142,
-          211,
+          41,
+          146,
+          207,
           240
         ],
-        "foregroundPixels": 9679,
-        "width": 174,
-        "height": 98,
-        "relativeToRowMedian": 0.927152
+        "foregroundPixels": 8882,
+        "width": 166,
+        "height": 94,
+        "relativeToRowMedian": 0.930491
       },
       {
         "index": 10,
         "alphaBounds": [
-          35,
-          134,
-          217,
+          39,
+          139,
+          213,
           240
         ],
-        "foregroundPixels": 10323,
-        "width": 182,
-        "height": 106,
-        "relativeToRowMedian": 0.98884
+        "foregroundPixels": 9428,
+        "width": 174,
+        "height": 101,
+        "relativeToRowMedian": 0.987691
       },
       {
         "index": 11,
         "alphaBounds": [
-          30,
-          136,
-          217,
+          34,
+          140,
+          212,
           240
         ],
-        "foregroundPixels": 10556,
-        "width": 187,
-        "height": 104,
-        "relativeToRowMedian": 1.01116
+        "foregroundPixels": 9663,
+        "width": 178,
+        "height": 100,
+        "relativeToRowMedian": 1.012309
       },
       {
         "index": 12,
         "alphaBounds": [
-          37,
-          133,
-          216,
+          42,
+          138,
+          212,
           240
         ],
-        "foregroundPixels": 10226,
-        "width": 179,
-        "height": 107,
-        "relativeToRowMedian": 0.982042
+        "foregroundPixels": 9267,
+        "width": 170,
+        "height": 102,
+        "relativeToRowMedian": 0.977583
       },
       {
         "index": 13,
         "alphaBounds": [
-          38,
-          141,
-          211,
+          42,
+          146,
+          207,
           240
         ],
-        "foregroundPixels": 9627,
-        "width": 173,
-        "height": 99,
-        "relativeToRowMedian": 0.924517
+        "foregroundPixels": 8756,
+        "width": 165,
+        "height": 94,
+        "relativeToRowMedian": 0.923677
       },
       {
         "index": 14,
         "alphaBounds": [
-          33,
-          132,
-          217,
+          37,
+          137,
+          213,
           240
         ],
-        "foregroundPixels": 10600,
-        "width": 184,
-        "height": 108,
-        "relativeToRowMedian": 1.017958
+        "foregroundPixels": 9692,
+        "width": 176,
+        "height": 103,
+        "relativeToRowMedian": 1.022417
       },
       {
         "index": 15,
         "alphaBounds": [
-          33,
-          133,
-          217,
+          37,
+          138,
+          213,
           240
         ],
-        "foregroundPixels": 10987,
-        "width": 184,
-        "height": 107,
-        "relativeToRowMedian": 1.055123
+        "foregroundPixels": 10013,
+        "width": 176,
+        "height": 102,
+        "relativeToRowMedian": 1.056279
       },
       {
         "index": 16,
@@ -3462,137 +3462,137 @@
       {
         "index": 24,
         "alphaBounds": [
-          30,
-          117,
-          223,
+          35,
+          123,
+          219,
           240
         ],
-        "foregroundPixels": 12561,
-        "width": 193,
-        "height": 123,
-        "relativeToRowMedian": 1.138648
+        "foregroundPixels": 11434,
+        "width": 184,
+        "height": 117,
+        "relativeToRowMedian": 1.135283
       },
       {
         "index": 25,
         "alphaBounds": [
-          36,
-          133,
-          215,
+          40,
+          138,
+          211,
           240
         ],
-        "foregroundPixels": 11242,
-        "width": 179,
-        "height": 107,
-        "relativeToRowMedian": 1.019082
+        "foregroundPixels": 10262,
+        "width": 171,
+        "height": 102,
+        "relativeToRowMedian": 1.018915
       },
       {
         "index": 26,
         "alphaBounds": [
-          36,
-          148,
-          223,
+          40,
+          152,
+          218,
           240
         ],
-        "foregroundPixels": 10821,
-        "width": 187,
-        "height": 92,
-        "relativeToRowMedian": 0.980918
+        "foregroundPixels": 9881,
+        "width": 178,
+        "height": 88,
+        "relativeToRowMedian": 0.981085
       },
       {
         "index": 27,
         "alphaBounds": [
-          33,
-          158,
-          222,
+          37,
+          162,
+          217,
           240
         ],
-        "foregroundPixels": 9873,
-        "width": 189,
-        "height": 82,
-        "relativeToRowMedian": 0.894983
+        "foregroundPixels": 8979,
+        "width": 180,
+        "height": 78,
+        "relativeToRowMedian": 0.891526
       },
       {
         "index": 28,
         "alphaBounds": [
-          35,
-          157,
-          221,
+          39,
+          161,
+          217,
           240
         ],
-        "foregroundPixels": 9968,
-        "width": 186,
-        "height": 83,
-        "relativeToRowMedian": 1.086075
+        "foregroundPixels": 9101,
+        "width": 178,
+        "height": 79,
+        "relativeToRowMedian": 1.088962
       },
       {
         "index": 29,
         "alphaBounds": [
-          29,
-          168,
-          222,
+          34,
+          171,
+          218,
           240
         ],
-        "foregroundPixels": 9373,
-        "width": 193,
-        "height": 72,
-        "relativeToRowMedian": 1.021246
+        "foregroundPixels": 8568,
+        "width": 184,
+        "height": 69,
+        "relativeToRowMedian": 1.025187
       },
       {
         "index": 30,
         "alphaBounds": [
-          23,
-          177,
-          226,
+          29,
+          180,
+          222,
           240
         ],
-        "foregroundPixels": 8983,
-        "width": 203,
-        "height": 63,
-        "relativeToRowMedian": 0.978754
+        "foregroundPixels": 8147,
+        "width": 193,
+        "height": 60,
+        "relativeToRowMedian": 0.974813
       },
       {
         "index": 31,
         "alphaBounds": [
-          24,
-          179,
-          225,
+          29,
+          182,
+          221,
           240
         ],
-        "foregroundPixels": 8404,
-        "width": 201,
-        "height": 61,
-        "relativeToRowMedian": 0.915668
+        "foregroundPixels": 7654,
+        "width": 192,
+        "height": 58,
+        "relativeToRowMedian": 0.915824
       }
     ],
     "rowMedianForegroundPixels": [
-      15030.0,
-      15311.0,
-      10439.5,
-      10413.0,
+      13649.5,
+      13903.0,
+      9545.5,
+      9479.5,
       13554.5,
       13835.5,
-      11031.5,
-      9178.0
+      10071.5,
+      8357.5
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "6b83f0b87e65bc7992b3c671f489ff72dfa2a6cfea93250be6e4f3e125aecb8c",
-      "fdc1b24898360d4a0623b6d59eefac69dbce21e475398de7d5725f638b5cd11a",
-      "431f0aae5f7822dbde2e5ca05fa022de7e99e88a4fe1b3bada8e69c2a8289ae8",
-      "a7bd5a7ab236727ebd8b58cf589277ac3f1c6e1844938dd6d8e844b1868da743",
-      "121d02b32a70813de32f33af31e06a02b825093b24434147f63e208d87e8a871",
-      "b8ac4c56d6b2ef36f5e10c05bf93b210e3dce62ecca3856d02ff8d115f3ac7b0",
-      "d7f2b53ad8369883961835abb8034ed7c7619146b445567a911d1a637ef136b5",
-      "dc2282b21926b0b86428973ada6776a9a9ba89f32138a332f9cf84fe911a615b",
-      "e3d532ab9be56fd229bc456cb72bd32df9c9f71c68db6b4275c9b148bb4ac7ad",
-      "3a3b4911ca6ac03ccb6951b571eac4d58de3171aa90cd9d15b8b0109c61b1d25",
-      "905d325c0fac47b7d08270ff683a44c82dba9b89280183ac1b2856c36fa21ba9",
-      "5ae7361127f6151a76dd7f8d0a17905c5ab7c70a318f438b050e53ac3274afed",
-      "d9dd13ad6dfdb03400fe0f209465ed5f9e6a7fa99782b14f4415f59e850d8b75",
-      "37dbbcdd9e33739ca1b183ecd5dcf8ef8c231f57eef37b918bc1a52e0be9da05",
-      "9585cd48509e04fd99d298c6ed898ab92b5e671104749e99cc1232e5f43fc804",
-      "8b8e3ec6a7cdedd44774c17f20acf864af6e9631399e46163b9c40bce65b009a",
+      "34de4467294f1d3960ad8e8d4501f971f8844ddccf813279c95e23a6fa54f12d",
+      "2523ddf1bd7abc53a03529f358c39adaaf439808e7cbc2b704f6f6f3eec27899",
+      "fe25561713183bc0125f26574423472ebafa1e4152c6e5fa4e1aa3b600c3f9ee",
+      "30ff46164c4bb9547151d347104bd016c83bd803615f4c3f5121a37023c9d6fe",
+      "2c06db6d02490a2bafad12e2a42f430f1dec15f81b99b0781bff83aa535fbc7e",
+      "b162e259e73f58d146948e805f67053408f8dbe354d71ccdd36ed6220540fd6f",
+      "32c0e6255e751ebfd7f8d7d5a00bb560846dbe5cb87f0e4f6bc6d82a2cd354d5",
+      "1bdd280d03a68f7c4078a33f59e13b4c53707b7b7d71d206eac833f80c58e5dc",
+      "83cb9393889c95b9f7ea03f18564dbab67ebb4d6f8632959c0ea93e81ad98c91",
+      "9cdd4fb10c7a56216e8f7d5221208404e9a92332445d5ed836d6c95bb8093577",
+      "30d16f6d683902296da14ede5f2be47c32c16b26d00a901645afe4fb1cf6eca6",
+      "a3527ad816f10a38d0b378555acd7728f341d107cb9a26385db52fb04947bbb1",
+      "4e51380f95baf17986b72a89bafe7ebcb34939ef07a3f9f13510c0b58b479d39",
+      "0eee91fdaba9e6ea76abc810ec8572733f5f75786899228b48f15d902af08276",
+      "c7eae80b9bc1ee88982762dd738a8abbb174e14fd5d9ce7e60d62d5a931484e2",
+      "3ea8cba3bf33c20c59cab1fb6c23d7032c64e9bf2565f820c8b995da2900b4a1",
       "9fab72b5d87718d8d5a72acf05a2eb7a8d14725890d95b751b432271814cd427",
       "760829dfe1dab96419b3873a623263f4d901736894ccc0082b4b54558376a6d0",
       "bbf3378dddd66ddb65b3e1439f739b302f009f781556f95808a37608bc304d28",
@@ -3601,19 +3601,61 @@
       "66814036dbce68335f699e5ce8e058c3a6a73bb5e6bfa3fbceb3383378b8a19a",
       "a305440be1d6d6ed551dcac8b3c857eb77d02d2a12103c8ea220eff8137891f2",
       "e214880258f3f0e3d9d1cd4cd7ec0872653c30000cb7de3cbbe935bfd83a93ff",
-      "3165e199e26b858eccc2d8317246d226f850dff0e6cca06f1f3513f6d74ac03b",
-      "a93f57cd132d7efd133810bd2d6e7f8f50f6e69b616a58dded17bd3d2ef1159a",
-      "52668652f6069211413f71bc3797d40e9092a7534de1cdd7a45538ac71505a2a",
-      "f83149f800646f0a8ecfbae301a870a48ea8e519cf905efb5bc8c440b13e7de7",
-      "0f430f13fd7dff8803b81888d0049e7804c36fc9b4c61e831c28a8e61adf48df",
-      "4c8aa879b11cb7841c9cd68c027fc5384653a9865172ad27bd36129094345c8d",
-      "847eff3fe3e66a5345bb3d2becec1216d455661d4a9162a4baf7c2f7180409c4",
-      "212f5bcb74721fe0da28dfcbf4325b7a144fbba3486d62dda73cc3b5e1708a28"
+      "459cbbd138808d8bfe368cb767e7be3a3a4932dd3ee7e6bd059e982573396580",
+      "c0f80f23c78931e63a1362bfce214bb2565b24a7c28839eae132185033ce97e4",
+      "c7c8314f37552c398310d4a2b252da4a548ae6397004c38e3ad4ddbe4fa6769b",
+      "5dc8d4a3598b128aa1c29c6af72828140bf244a450491731bb1928e515332795",
+      "27138ceb30f11d84e2cce12f08f1dbd2644ec351f223594ce6ed2c9dbde128f6",
+      "a737a3f884a10c53721aeb5ed13117291019a7d5cd4d33ccb850d5eb16f53a89",
+      "c87f03f54c951faf0d4d812ec0de2952af3efcaadba92d92fa112d63c3d8a655",
+      "806dd4c45d3cec90ffa9a551d4a056a9d4d70633d628ce3abb520e43d08be102"
     ],
     "visualFidelityCertified": false
   },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v74-enemy-fixes/049/scale-review.json",
+    "sha256": "453dde1520ce392d836dc62d143d4f021f99e55a0f6f4eaf27277e03f437f23f",
+    "status": "reviewed",
+    "profileId": "enemy-049-wild-boar-host",
+    "reviewer": "Codex V74 root residual-scale correction",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 1,
+      "attack": 1.048222732,
+      "death": 1
+    },
+    "sourceSha256ByClip": {
+      "idle": "40af647b8f28afb8f872cff0235da56afb7eca453d88f7cfb59b0abf1aae6270",
+      "move": "77e62563dac70cffd955fcb8a871c8cdd1593af4ed4c56e4f34f9445a7bf669b",
+      "attack": "68e70c5b8837e89e673c4cb65f9b2b65c81875ffef987c7b371d35fb2614e960",
+      "death": "ac48e4cbe343feca8c6874aaeedf9685dc0da85704eb3d1dbe0f27e90bc4fe27"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v73-next50-audit/049-050/FINAL_QA.md",
+        "sha256": "9107c74cc735a89f98b387c4ecc295e20bf5fff3b882d26804e7bd6b45cceb5d"
+      },
+      {
+        "path": "docs/references/v66-worklot-003-wild-boar-host-review/enemy-049-wild-boar-host/scale-review.fragment.json",
+        "sha256": "220bafae2ddb9232b553bb638819e0737b8a810186599f85f4fac74da82d1310"
+      },
+      {
+        "path": "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.active-scale-measurements.png",
+        "sha256": "6fd5ee83cc04bf52935e280855e5ea871422c52252d8977af38dd3b1dd37d6f4"
+      },
+      {
+        "path": "docs/references/v74-enemy-fixes/049/RESIDUAL_SCALE.md",
+        "sha256": "1f6ea028262475ce05061664c19710fd52a12fc9172f54b6e488ad84d4be7a96"
+      }
+    ]
+  },
   "normalizationReviewPaths": {
-    "anchor": "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.anchor-review.json"
+    "anchor": "docs/references/v73-next50-audit/049-050/enemy-049-wild-boar-host.anchor-review.json",
+    "scale": "docs/references/v74-enemy-fixes/049/scale-review.json"
   },
   "magentaSpill": {
     "method": "v64-strict-post-resize-green-plus-eight-v1",

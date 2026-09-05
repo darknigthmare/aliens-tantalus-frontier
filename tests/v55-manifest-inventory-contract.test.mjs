@@ -85,18 +85,20 @@ test('inventory v55 preserves its release batch and reports the current shared v
   assert.equal(inventory.enemies.coverage.total, 571);
   assert.equal(inventory.enemies.coverage.modern, 539);
   assert.equal(inventory.enemies.coverage.legacy, 32);
-  // Preserve the V55 snapshot. Six explicit standard replacements change
+  // Preserve the V55 snapshot. Seven explicit canonical standard replacements change
   // their former exact label; Albino055 replaces one authored-family entry.
   const v66Standards = new Set(['enemy-001-ovomorph', 'enemy-003-chestburster',
     'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner',
-    'enemy-020-k-series-yellow-xenomorph']);
+    'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph']);
+  const projectOriginalId = 'enemy-050-korari-stalker';
   const albinoId = 'enemy-055-albino-chestburster';
   assert.deepEqual(READY_ENEMY_PROFILE_REGISTRY_V66.map((profile) => profile.profileId).sort(),
-    [...v66Standards, albinoId].sort(), 'aucune acceptation implicite d’une autre variante');
+    [...v66Standards, projectOriginalId, albinoId].sort(), 'aucune acceptation implicite d’une autre variante');
   for (const profile of READY_ENEMY_PROFILE_REGISTRY_V66) {
-    const standard = v66Standards.has(profile.profileId);
+    const projectOriginal = profile.profileId === projectOriginalId;
+    const standard = v66Standards.has(profile.profileId) || projectOriginal;
     assert.equal(profile.modifier, standard ? 'Standard' : 'Albino');
-    assert.equal(profile.asset.identityStatus, standard ? 'source-locked-adaptation' : 'source-locked-project-adaptation');
+    assert.equal(profile.asset.identityStatus, projectOriginal ? 'project-original' : standard ? 'source-locked-adaptation' : 'source-locked-project-adaptation');
     assert.equal(profile.asset.canonExact, false, 'plaque dédiée ne signifie pas copie canonique 1:1');
   }
   const expectedIdentityCounts = {

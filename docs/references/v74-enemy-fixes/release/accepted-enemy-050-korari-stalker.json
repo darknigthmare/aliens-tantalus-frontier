@@ -1,0 +1,17 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-050-korari-stalker",
+  "actor": "Codex V74 root review",
+  "canonExact": false,
+  "note": "Root and independent visual review of all32 poses, source identity, alpha, direction, physical roots and scale. Same source atlas as V73. Dedicated original quadruped, render288 square/body96x60. Bite-pounce impact at4/12s once, obstacles and both directions exercised in real V51/V52 fixture. Project-original, never canonical1:1.",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

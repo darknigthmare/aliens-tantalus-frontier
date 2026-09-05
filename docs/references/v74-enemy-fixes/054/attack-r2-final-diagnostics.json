@@ -1,0 +1,3456 @@
+{
+  "schema": 1,
+  "diagnosticOnly": true,
+  "acceptedAutomatically": 0,
+  "grid": {
+    "cellWidth": 256,
+    "cellHeight": 256,
+    "columns": 4,
+    "rows": 8,
+    "guard": 16
+  },
+  "pivot": {
+    "x": 128,
+    "y": 240
+  },
+  "sourceSha256": {
+    "assets\\openai\\sprites\\frames\\v66\\batch-004\\enemy-054-albino-facehugger\\idle.png": "58411be70ad6f124dbdf06056b2ef42056bb2ddc8590b3391559af0e5eef6a14",
+    "assets\\openai\\sprites\\frames\\v66\\batch-004\\enemy-054-albino-facehugger\\move.png": "496cafdb31fbeb68aaaa03b409970b8011e1986f6736ab17acf9c070de9a4192",
+    "assets\\openai\\sprites\\frames\\v74\\enemy-054-albino-facehugger\\attack-clean-r2.png": "d6b06b49d08a409d4b2ba21a3595e0a382ec862bd7981b23e20102a7c4c2fa67",
+    "assets\\openai\\sprites\\frames\\v66\\batch-004\\enemy-054-albino-facehugger\\death.png": "357603ce6d02bd62868af9eccbf35dc84583737de4a46f5c66cb709e85ad1cce"
+  },
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.003945,
+    "attack": 0.988875,
+    "death": 1.001809
+  },
+  "atlasSha256": "f80d875241796f305496db618a912be63eee7451d54a67b07a746fbb3b050c8b",
+  "activeAtlasSha256": "91d0c77c1354c2e367cc0a07a017ddf900357670441f37705a49064ddb9de31f",
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        31,
+        210,
+        430,
+        342
+      ],
+      "sourceGlobalBounds": [
+        31,
+        210,
+        430,
+        342
+      ],
+      "sourceSize": [
+        399,
+        132
+      ],
+      "foregroundPixels": 18909,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "722cca7bed38c6f46e0e55edd7e022e6f10b0e6d196535e2f7b9b8b58ea49487",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        290,
+        342
+      ],
+      "sourceLandmark": [
+        290,
+        270
+      ],
+      "sourceAnchorEvidence": "idle pose 1: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (290,270) projects to observed guarded support y=342. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        259.0,
+        132.0
+      ],
+      "renderedAnchor": [
+        128.4561403508772,
+        240.0
+      ],
+      "index": 0,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        22,
+        186,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        19,
+        211,
+        418,
+        347
+      ],
+      "sourceGlobalBounds": [
+        463,
+        211,
+        862,
+        347
+      ],
+      "sourceSize": [
+        399,
+        136
+      ],
+      "foregroundPixels": 19774,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fa537103eea9994ef44a0894487d294bf512e5324d6c96b604626912a38d67d8",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        270,
+        347
+      ],
+      "sourceLandmark": [
+        270,
+        271
+      ],
+      "sourceAnchorEvidence": "idle pose 2: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (270,271) projects to observed guarded support y=347. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        251.0,
+        136.0
+      ],
+      "renderedAnchor": [
+        128.16791979949875,
+        240.0
+      ],
+      "index": 1,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        25,
+        184,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        9,
+        211,
+        409,
+        344
+      ],
+      "sourceGlobalBounds": [
+        896,
+        211,
+        1296,
+        344
+      ],
+      "sourceSize": [
+        400,
+        133
+      ],
+      "foregroundPixels": 19079,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "83f6cf6ad6214d1f6d2a8a2413496b71cac9ee5b4284032c19774d8acad69662",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        260,
+        344
+      ],
+      "sourceLandmark": [
+        260,
+        270
+      ],
+      "sourceAnchorEvidence": "idle pose 3: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (260,270) projects to observed guarded support y=344. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        251.0,
+        133.0
+      ],
+      "renderedAnchor": [
+        127.91,
+        240.0
+      ],
+      "index": 2,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        25,
+        185,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        0,
+        219,
+        398,
+        349
+      ],
+      "sourceGlobalBounds": [
+        1330,
+        219,
+        1728,
+        349
+      ],
+      "sourceSize": [
+        398,
+        130
+      ],
+      "foregroundPixels": 18865,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3869b0afc0df4017e12dcc0d05c412968be8b96e168907a0161402e43f8c0ee0",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        253,
+        349
+      ],
+      "sourceLandmark": [
+        253,
+        278
+      ],
+      "sourceAnchorEvidence": "idle pose 4: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (253,278) projects to observed guarded support y=349. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        253.0,
+        130.0
+      ],
+      "renderedAnchor": [
+        128.25125628140705,
+        240.0
+      ],
+      "index": 3,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        24,
+        187,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        31,
+        156,
+        429,
+        286
+      ],
+      "sourceGlobalBounds": [
+        31,
+        600,
+        429,
+        730
+      ],
+      "sourceSize": [
+        398,
+        130
+      ],
+      "foregroundPixels": 19171,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "5e0998dc393de672d59927e63c4526c8082500de2a0c7b167a695d730f60e31e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        280,
+        286
+      ],
+      "sourceLandmark": [
+        280,
+        212
+      ],
+      "sourceAnchorEvidence": "idle pose 5: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (280,212) projects to observed guarded support y=286. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        249.0,
+        130.0
+      ],
+      "renderedAnchor": [
+        127.60301507537689,
+        240.0
+      ],
+      "index": 4,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        25,
+        187,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        19,
+        158,
+        419,
+        285
+      ],
+      "sourceGlobalBounds": [
+        463,
+        602,
+        863,
+        729
+      ],
+      "sourceSize": [
+        400,
+        127
+      ],
+      "foregroundPixels": 18935,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "3b977276aeb9660c13f1a8ffde85ef52895084c75d6b37f9631c06d9558d3cea",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        271,
+        285
+      ],
+      "sourceLandmark": [
+        271,
+        215
+      ],
+      "sourceAnchorEvidence": "idle pose 6: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (271,215) projects to observed guarded support y=285. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        252.0,
+        127.0
+      ],
+      "renderedAnchor": [
+        128.32,
+        240.0
+      ],
+      "index": 5,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        25,
+        188,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        10,
+        160,
+        408,
+        286
+      ],
+      "sourceGlobalBounds": [
+        897,
+        604,
+        1295,
+        730
+      ],
+      "sourceSize": [
+        398,
+        126
+      ],
+      "foregroundPixels": 18836,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a174c6f9d71c7229f870f0cc5f567300b952639c4466ad79edb81195d0ba17d4",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        263,
+        286
+      ],
+      "sourceLandmark": [
+        263,
+        216
+      ],
+      "sourceAnchorEvidence": "idle pose 7: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (263,216) projects to observed guarded support y=286. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        253.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        128.25125628140705,
+        240.0
+      ],
+      "index": 6,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        24,
+        188,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        0,
+        153,
+        401,
+        285
+      ],
+      "sourceGlobalBounds": [
+        1330,
+        597,
+        1731,
+        729
+      ],
+      "sourceSize": [
+        401,
+        132
+      ],
+      "foregroundPixels": 18690,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "279544849c6f81ec762da9efd1644eec83d1fc2354b6116223fe89f9efd516f9",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        250,
+        285
+      ],
+      "sourceLandmark": [
+        250,
+        210
+      ],
+      "sourceAnchorEvidence": "idle pose 8: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (250,210) projects to observed guarded support y=285. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        250.0,
+        132.0
+      ],
+      "renderedAnchor": [
+        127.86783042394015,
+        240.0
+      ],
+      "index": 7,
+      "scale": 0.411017939,
+      "sourceScale": 1,
+      "appliedScale": 0.411017939,
+      "renderedBounds": [
+        25,
+        186,
+        190,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 22,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        36,
+        217,
+        452,
+        329
+      ],
+      "sourceGlobalBounds": [
+        36,
+        217,
+        452,
+        329
+      ],
+      "sourceSize": [
+        416,
+        112
+      ],
+      "foregroundPixels": 16426,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a5a00d28b6a4d0bd54dbde197da6877c4e02e8ad2919c880f6751a7468891f12",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 0,
+          "fromCells": [
+            1
+          ],
+          "pixels": 55,
+          "componentPixels": 16402,
+          "ownerShare": 0.996647,
+          "sourceBoundsGlobal": [
+            39,
+            220,
+            449,
+            326
+          ],
+          "rgbaSha256": "129393bf6c86662234648c4b518b31b30550d71f006d704b7597f38d58331e64",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        305,
+        329
+      ],
+      "sourceLandmark": [
+        305,
+        269
+      ],
+      "sourceAnchorEvidence": "move pose 1: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (305,269) projects to observed guarded support y=329. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        269.0,
+        112.0
+      ],
+      "renderedAnchor": [
+        128.22115384615384,
+        240.0
+      ],
+      "index": 8,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        17,
+        194,
+        189,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        34,
+        216,
+        427,
+        331
+      ],
+      "sourceGlobalBounds": [
+        478,
+        216,
+        871,
+        331
+      ],
+      "sourceSize": [
+        393,
+        115
+      ],
+      "foregroundPixels": 15827,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "24fdebd4e82698ce81839e0861d04fe11c8dab123a667a7724fbe4ad2e39e554",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        289,
+        331
+      ],
+      "sourceLandmark": [
+        289,
+        269
+      ],
+      "sourceAnchorEvidence": "move pose 2: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (289,269) projects to observed guarded support y=331. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        255.0,
+        115.0
+      ],
+      "renderedAnchor": [
+        128.1145038167939,
+        240.0
+      ],
+      "index": 9,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        23,
+        193,
+        185,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        16,
+        218,
+        413,
+        329
+      ],
+      "sourceGlobalBounds": [
+        903,
+        218,
+        1300,
+        329
+      ],
+      "sourceSize": [
+        397,
+        111
+      ],
+      "foregroundPixels": 16089,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d5d2ec3dd86909b5e29df202ec162f2f621a0d8b4b52f77b0c762e8e1452bcc6",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        274,
+        329
+      ],
+      "sourceLandmark": [
+        274,
+        270
+      ],
+      "sourceAnchorEvidence": "move pose 3: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (274,270) projects to observed guarded support y=329. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        258.0,
+        111.0
+      ],
+      "renderedAnchor": [
+        127.5793450881612,
+        240.0
+      ],
+      "index": 10,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        21,
+        194,
+        185,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        4,
+        218,
+        402,
+        330
+      ],
+      "sourceGlobalBounds": [
+        1334,
+        218,
+        1732,
+        330
+      ],
+      "sourceSize": [
+        398,
+        112
+      ],
+      "foregroundPixels": 16185,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "32ad2ecec87945dbe6b3c3c4ef1f4cd6dcd3fd1aab8c43ba0a17661f5fa80d4b",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        269,
+        330
+      ],
+      "sourceLandmark": [
+        269,
+        270
+      ],
+      "sourceAnchorEvidence": "move pose 4: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (269,270) projects to observed guarded support y=330. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        265.0,
+        112.0
+      ],
+      "renderedAnchor": [
+        128.1959798994975,
+        240.0
+      ],
+      "index": 11,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        19,
+        194,
+        183,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        20,
+        143,
+        417,
+        255
+      ],
+      "sourceGlobalBounds": [
+        20,
+        587,
+        417,
+        699
+      ],
+      "sourceSize": [
+        397,
+        112
+      ],
+      "foregroundPixels": 15782,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e5c307bebd288c8e9ca4c4dcfb96eb18cd33cb227284ff39e2a7ce28acbc25e9",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        272,
+        255
+      ],
+      "sourceLandmark": [
+        272,
+        193
+      ],
+      "sourceAnchorEvidence": "move pose 5: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (272,193) projects to observed guarded support y=255. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        252.0,
+        112.0
+      ],
+      "renderedAnchor": [
+        128.1007556675063,
+        240.0
+      ],
+      "index": 12,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        24,
+        194,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        2,
+        144,
+        396,
+        252
+      ],
+      "sourceGlobalBounds": [
+        446,
+        588,
+        840,
+        696
+      ],
+      "sourceSize": [
+        394,
+        108
+      ],
+      "foregroundPixels": 15487,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "04d470862ff2cf5f080b6a01e24d83153a7d52f25ad27d6b1de0d23d64694208",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        247,
+        252
+      ],
+      "sourceLandmark": [
+        247,
+        193
+      ],
+      "sourceAnchorEvidence": "move pose 6: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (247,193) projects to observed guarded support y=252. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        245.0,
+        108.0
+      ],
+      "renderedAnchor": [
+        128.35786802030458,
+        240.0
+      ],
+      "index": 13,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        27,
+        195,
+        190,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        3,
+        144,
+        397,
+        254
+      ],
+      "sourceGlobalBounds": [
+        890,
+        588,
+        1284,
+        698
+      ],
+      "sourceSize": [
+        394,
+        110
+      ],
+      "foregroundPixels": 15561,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ad93f1cc3169d775810769153fd969f9b97f3c85448b987f13f808061fc803d1",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        251,
+        254
+      ],
+      "sourceLandmark": [
+        251,
+        197
+      ],
+      "sourceAnchorEvidence": "move pose 7: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (251,197) projects to observed guarded support y=254. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        248.0,
+        110.0
+      ],
+      "renderedAnchor": [
+        127.5989847715736,
+        240.0
+      ],
+      "index": 14,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        25,
+        195,
+        188,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        2,
+        144,
+        401,
+        254
+      ],
+      "sourceGlobalBounds": [
+        1332,
+        588,
+        1731,
+        698
+      ],
+      "sourceSize": [
+        399,
+        110
+      ],
+      "foregroundPixels": 15909,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "aa3a46b70849376d27a74ba1f35a301118ebc9b05b0d03837e0f84a7714fc030",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        263,
+        254
+      ],
+      "sourceLandmark": [
+        263,
+        194
+      ],
+      "sourceAnchorEvidence": "move pose 8: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (263,194) projects to observed guarded support y=254. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        261.0,
+        110.0
+      ],
+      "renderedAnchor": [
+        127.93233082706767,
+        240.0
+      ],
+      "index": 15,
+      "scale": 0.411017939,
+      "sourceScale": 1.003945,
+      "appliedScale": 0.412639405,
+      "renderedBounds": [
+        20,
+        195,
+        185,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        310,
+        417,
+        417
+      ],
+      "sourceGlobalBounds": [
+        30,
+        310,
+        417,
+        417
+      ],
+      "sourceSize": [
+        387,
+        107
+      ],
+      "foregroundPixels": 15967,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4e679e50eab8a760ba678234a9eedf20b30057d277c795f1612ef64965e74d4a",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        286,
+        417
+      ],
+      "sourceLandmark": [
+        286,
+        361
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 1: visible ventral main-body hub where the proximal walking fingers join at (286,361); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=417 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        256.0,
+        107.0
+      ],
+      "renderedAnchor": [
+        127.85529715762274,
+        240.0
+      ],
+      "index": 16,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        24,
+        197,
+        181,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        49,
+        256,
+        346,
+        412
+      ],
+      "sourceGlobalBounds": [
+        493,
+        256,
+        790,
+        412
+      ],
+      "sourceSize": [
+        297,
+        156
+      ],
+      "foregroundPixels": 18603,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "55e85402fbe6b8782fadc39337bfa501c0c78db42a46ad3e9e74a270df6dd679",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        248,
+        417
+      ],
+      "sourceLandmark": [
+        248,
+        365
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 2: visible ventral main-body hub where the proximal walking fingers join at (248,365); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=417 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        199.0,
+        161.0
+      ],
+      "renderedAnchor": [
+        128.07407407407408,
+        240.01923076923077
+      ],
+      "index": 17,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        47,
+        175,
+        168,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        31,
+        169,
+        349,
+        416
+      ],
+      "sourceGlobalBounds": [
+        918,
+        169,
+        1236,
+        416
+      ],
+      "sourceSize": [
+        318,
+        247
+      ],
+      "foregroundPixels": 19893,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "7e9b4b3d2bd02883e906a05e69ecbd485ae6bbf63385aee3d3bf924a689ffa84",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        242,
+        417
+      ],
+      "sourceLandmark": [
+        242,
+        354
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 3: visible ventral main-body hub where the proximal walking fingers join at (242,354); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=417 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        211.0,
+        248.0
+      ],
+      "renderedAnchor": [
+        127.59433962264151,
+        240.40485829959516
+      ],
+      "index": 18,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        42,
+        140,
+        171,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -5,
+        152,
+        372,
+        396
+      ],
+      "sourceGlobalBounds": [
+        1325,
+        152,
+        1702,
+        396
+      ],
+      "sourceSize": [
+        377,
+        244
+      ],
+      "foregroundPixels": 23057,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "fe672bdf8f129d294a953de441a8de2ac8c4f525847bc614a492ad102687344b",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 48,
+          "componentPixels": 23057,
+          "ownerShare": 0.997918,
+          "sourceBoundsGlobal": [
+            1328,
+            155,
+            1699,
+            393
+          ],
+          "rgbaSha256": "e177be5e692f3137a6cb67d02cc6490fe7161329022804ff61daab7ec1f8c8b5",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        216,
+        417
+      ],
+      "sourceLandmark": [
+        216,
+        243
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 4: visible ventral main-body hub where the proximal walking fingers join at (216,243); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=417 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        265.0
+      ],
+      "renderedAnchor": [
+        127.6896551724138,
+        239.52049180327867
+      ],
+      "index": 19,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        38,
+        132,
+        191,
+        231
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 31,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        30,
+        87,
+        434,
+        289
+      ],
+      "sourceGlobalBounds": [
+        30,
+        531,
+        434,
+        733
+      ],
+      "sourceSize": [
+        404,
+        202
+      ],
+      "foregroundPixels": 22929,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "edfa046517b5c9c4979cf339a9142d18797811c2266603d27044f43fa6d9c251",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        256,
+        364
+      ],
+      "sourceLandmark": [
+        256,
+        188
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 5: visible ventral main-body hub where the proximal walking fingers join at (256,188); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=364 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        226.0,
+        277.0
+      ],
+      "renderedAnchor": [
+        127.74257425742574,
+        240.44554455445547
+      ],
+      "index": 20,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        36,
+        128,
+        200,
+        210
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 16,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        28,
+        166,
+        404,
+        333
+      ],
+      "sourceGlobalBounds": [
+        472,
+        610,
+        848,
+        777
+      ],
+      "sourceSize": [
+        376,
+        167
+      ],
+      "foregroundPixels": 18091,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6190f1cdb0295c6c11b68e3872d7833c7fe4fc3ebc10ac7afc621e9bc1d065dc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        289,
+        364
+      ],
+      "sourceLandmark": [
+        289,
+        250
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 6: visible ventral main-body hub where the proximal walking fingers join at (289,250); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=364 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        261.0,
+        198.0
+      ],
+      "renderedAnchor": [
+        128.20478723404256,
+        239.62275449101796
+      ],
+      "index": 21,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        22,
+        159,
+        175,
+        227
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        48,
+        211,
+        360,
+        364
+      ],
+      "sourceGlobalBounds": [
+        935,
+        655,
+        1247,
+        808
+      ],
+      "sourceSize": [
+        312,
+        153
+      ],
+      "foregroundPixels": 18107,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a78f29a5335fb0588e3030ef0f01452a941e916fefb546d9e5becbdd794fbd80",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        253,
+        364
+      ],
+      "sourceLandmark": [
+        253,
+        309
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 7: visible ventral main-body hub where the proximal walking fingers join at (253,309); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=364 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        205.0,
+        153.0
+      ],
+      "renderedAnchor": [
+        128.44551282051282,
+        240.0
+      ],
+      "index": 22,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        45,
+        178,
+        172,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -9,
+        256,
+        382,
+        364
+      ],
+      "sourceGlobalBounds": [
+        1321,
+        700,
+        1712,
+        808
+      ],
+      "sourceSize": [
+        391,
+        108
+      ],
+      "foregroundPixels": 15679,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d29cb9f9a529d373c6fad1a62202c064193224badc9f565c462de207f06023bb",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 7,
+          "fromCells": [
+            6
+          ],
+          "pixels": 49,
+          "componentPixels": 15679,
+          "ownerShare": 0.996875,
+          "sourceBoundsGlobal": [
+            1324,
+            703,
+            1709,
+            805
+          ],
+          "rgbaSha256": "db5e592a0f91275c03fb2c9b99144ae9593ac7d419f0d651b33886439aaed509",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        250,
+        364
+      ],
+      "sourceLandmark": [
+        250,
+        314
+      ],
+      "sourceAnchorEvidence": "R2 attack pose 8: visible ventral main-body hub where the proximal walking fingers join at (250,314); excludes tail and finger tips. Vertical projection to neighbouring grounded row support plus extraction guard y=364 preserves the launch/landing arc. Manual uncertainty +/-10 source pixels; no per-pose rescaling.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        259.0,
+        108.0
+      ],
+      "renderedAnchor": [
+        128.3222506393862,
+        240.0
+      ],
+      "index": 23,
+      "scale": 0.411017939,
+      "sourceScale": 0.988875,
+      "appliedScale": 0.406445365,
+      "renderedBounds": [
+        23,
+        196,
+        182,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        20,
+        212,
+        418,
+        335
+      ],
+      "sourceGlobalBounds": [
+        20,
+        212,
+        418,
+        335
+      ],
+      "sourceSize": [
+        398,
+        123
+      ],
+      "foregroundPixels": 15984,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "07b1b4e9b01d42f68c02322a25a850ab5be9f28114644c63624e7ac2027b8dcb",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        277,
+        335
+      ],
+      "sourceLandmark": [
+        277,
+        272
+      ],
+      "sourceAnchorEvidence": "death pose 1: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (277,272) projects to observed guarded support y=335. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        257.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        127.89949748743719,
+        240.0
+      ],
+      "index": 24,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        22,
+        189,
+        186,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        16,
+        248,
+        404,
+        356
+      ],
+      "sourceGlobalBounds": [
+        460,
+        248,
+        848,
+        356
+      ],
+      "sourceSize": [
+        388,
+        108
+      ],
+      "foregroundPixels": 15034,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "255edaa28e94fcbf905024d98e3b00874d398b548502487f04e058edde711def",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        269,
+        356
+      ],
+      "sourceLandmark": [
+        269,
+        299
+      ],
+      "sourceAnchorEvidence": "death pose 2: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (269,299) projects to observed guarded support y=356. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        253.0,
+        108.0
+      ],
+      "renderedAnchor": [
+        128.3298969072165,
+        240.0
+      ],
+      "index": 25,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        24,
+        196,
+        184,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        13,
+        266,
+        402,
+        362
+      ],
+      "sourceGlobalBounds": [
+        900,
+        266,
+        1289,
+        362
+      ],
+      "sourceSize": [
+        389,
+        96
+      ],
+      "foregroundPixels": 14695,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "6ceca6ea19be32c5de2d6a154f071ab7893e462035c5720ea5418b8b118d37dc",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        268,
+        362
+      ],
+      "sourceLandmark": [
+        268,
+        317
+      ],
+      "sourceAnchorEvidence": "death pose 3: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (268,317) projects to observed guarded support y=362. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        255.0,
+        96.0
+      ],
+      "renderedAnchor": [
+        127.88431876606684,
+        240.0
+      ],
+      "index": 26,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        23,
+        200,
+        183,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        6,
+        269,
+        378,
+        359
+      ],
+      "sourceGlobalBounds": [
+        1336,
+        269,
+        1708,
+        359
+      ],
+      "sourceSize": [
+        372,
+        90
+      ],
+      "foregroundPixels": 13591,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "83b94973c526d78e7c2edd55b0d1ead15398f86ccd245f3521ee088de81dab8e",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        253,
+        359
+      ],
+      "sourceLandmark": [
+        253,
+        319
+      ],
+      "sourceAnchorEvidence": "death pose 4: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (253,319) projects to observed guarded support y=359. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        247.0,
+        90.0
+      ],
+      "renderedAnchor": [
+        127.58870967741936,
+        240.0
+      ],
+      "index": 27,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        26,
+        203,
+        179,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        154,
+        384,
+        258
+      ],
+      "sourceGlobalBounds": [
+        37,
+        598,
+        384,
+        702
+      ],
+      "sourceSize": [
+        347,
+        104
+      ],
+      "foregroundPixels": 13290,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2789bd5ff96cc9e09e81e17f1cbf080f8ebaf6ceccaad5f2af2488501b1d0578",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        274,
+        258
+      ],
+      "sourceLandmark": [
+        274,
+        213
+      ],
+      "sourceAnchorEvidence": "death pose 5: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (274,213) projects to observed guarded support y=258. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        237.0,
+        104.0
+      ],
+      "renderedAnchor": [
+        127.6685878962536,
+        240.0
+      ],
+      "index": 28,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        30,
+        197,
+        173,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        46,
+        164,
+        367,
+        260
+      ],
+      "sourceGlobalBounds": [
+        490,
+        608,
+        811,
+        704
+      ],
+      "sourceSize": [
+        321,
+        96
+      ],
+      "foregroundPixels": 12454,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2d456ea7ca6e5d9023728f4c9dd780f76507e66a9e0fb3c38511a7da558186cd",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        291,
+        260
+      ],
+      "sourceLandmark": [
+        291,
+        226
+      ],
+      "sourceAnchorEvidence": "death pose 6: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (291,226) projects to observed guarded support y=260. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        245.0,
+        96.0
+      ],
+      "renderedAnchor": [
+        127.74766355140187,
+        240.0
+      ],
+      "index": 29,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        27,
+        200,
+        159,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        42,
+        179,
+        362,
+        264
+      ],
+      "sourceGlobalBounds": [
+        929,
+        623,
+        1249,
+        708
+      ],
+      "sourceSize": [
+        320,
+        85
+      ],
+      "foregroundPixels": 11590,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "2d1c3bbfbd4c99551929c6f303cf8d9bc4a07de441717da18a7180e84ccb4096",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        290,
+        264
+      ],
+      "sourceLandmark": [
+        290,
+        235
+      ],
+      "sourceAnchorEvidence": "death pose 7: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (290,235) projects to observed guarded support y=264. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        248.0,
+        85.0
+      ],
+      "renderedAnchor": [
+        128.3,
+        240.0
+      ],
+      "index": 30,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        26,
+        205,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        36,
+        202,
+        358,
+        272
+      ],
+      "sourceGlobalBounds": [
+        1366,
+        646,
+        1688,
+        716
+      ],
+      "sourceSize": [
+        322,
+        70
+      ],
+      "foregroundPixels": 10133,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4d44bbe58965db5ab2809d0ca7228dcbccd35a54d160e19c891872c3ec5f4e07",
+      "sourceOwnershipTransfers": [],
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        285,
+        272
+      ],
+      "sourceLandmark": [
+        285,
+        249
+      ],
+      "sourceAnchorEvidence": "death pose 8: Ventral centre of the low main body, where the proximal finger limbs join; excludes the single trailing tail and peripheral finger tips. Visible landmark (285,249) projects to observed guarded support y=272. Manual anatomy uncertainty +/-10px; source RGB is not edited.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        249.0,
+        70.0
+      ],
+      "renderedAnchor": [
+        127.84782608695652,
+        240.0
+      ],
+      "index": 31,
+      "scale": 0.411017939,
+      "sourceScale": 1.001809,
+      "appliedScale": 0.411761471,
+      "renderedBounds": [
+        25,
+        211,
+        158,
+        240
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          23,
+          187,
+          185,
+          239
+        ],
+        "foregroundPixels": 3494,
+        "width": 162,
+        "height": 52,
+        "relativeToRowMedian": 0.996435
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          26,
+          185,
+          188,
+          239
+        ],
+        "foregroundPixels": 3646,
+        "width": 162,
+        "height": 54,
+        "relativeToRowMedian": 1.039783
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          26,
+          186,
+          188,
+          239
+        ],
+        "foregroundPixels": 3519,
+        "width": 162,
+        "height": 53,
+        "relativeToRowMedian": 1.003565
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          25,
+          188,
+          187,
+          239
+        ],
+        "foregroundPixels": 3461,
+        "width": 162,
+        "height": 51,
+        "relativeToRowMedian": 0.987024
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          26,
+          188,
+          188,
+          239
+        ],
+        "foregroundPixels": 3547,
+        "width": 162,
+        "height": 51,
+        "relativeToRowMedian": 1.019692
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          26,
+          189,
+          188,
+          239
+        ],
+        "foregroundPixels": 3469,
+        "width": 162,
+        "height": 50,
+        "relativeToRowMedian": 0.997269
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          25,
+          189,
+          187,
+          239
+        ],
+        "foregroundPixels": 3488,
+        "width": 162,
+        "height": 50,
+        "relativeToRowMedian": 1.002731
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          26,
+          187,
+          189,
+          239
+        ],
+        "foregroundPixels": 3415,
+        "width": 163,
+        "height": 52,
+        "relativeToRowMedian": 0.981745
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          18,
+          195,
+          188,
+          239
+        ],
+        "foregroundPixels": 3089,
+        "width": 170,
+        "height": 44,
+        "relativeToRowMedian": 1.015951
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          24,
+          194,
+          184,
+          239
+        ],
+        "foregroundPixels": 2946,
+        "width": 160,
+        "height": 45,
+        "relativeToRowMedian": 0.96892
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          22,
+          195,
+          184,
+          239
+        ],
+        "foregroundPixels": 3050,
+        "width": 162,
+        "height": 44,
+        "relativeToRowMedian": 1.003124
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          20,
+          195,
+          182,
+          239
+        ],
+        "foregroundPixels": 3031,
+        "width": 162,
+        "height": 44,
+        "relativeToRowMedian": 0.996876
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          25,
+          195,
+          187,
+          239
+        ],
+        "foregroundPixels": 2954,
+        "width": 162,
+        "height": 44,
+        "relativeToRowMedian": 1.00442
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          28,
+          196,
+          189,
+          239
+        ],
+        "foregroundPixels": 2928,
+        "width": 161,
+        "height": 43,
+        "relativeToRowMedian": 0.99558
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          26,
+          196,
+          187,
+          239
+        ],
+        "foregroundPixels": 2922,
+        "width": 161,
+        "height": 43,
+        "relativeToRowMedian": 0.99354
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          21,
+          196,
+          184,
+          239
+        ],
+        "foregroundPixels": 2962,
+        "width": 163,
+        "height": 43,
+        "relativeToRowMedian": 1.00714
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          25,
+          198,
+          180,
+          239
+        ],
+        "foregroundPixels": 2849,
+        "width": 155,
+        "height": 41,
+        "relativeToRowMedian": 0.827236
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          48,
+          176,
+          167,
+          237
+        ],
+        "foregroundPixels": 3304,
+        "width": 119,
+        "height": 61,
+        "relativeToRowMedian": 0.95935
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          43,
+          141,
+          170,
+          239
+        ],
+        "foregroundPixels": 3584,
+        "width": 127,
+        "height": 98,
+        "relativeToRowMedian": 1.04065
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          39,
+          133,
+          190,
+          230
+        ],
+        "foregroundPixels": 4159,
+        "width": 151,
+        "height": 97,
+        "relativeToRowMedian": 1.207607
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          37,
+          129,
+          199,
+          209
+        ],
+        "foregroundPixels": 4141,
+        "width": 162,
+        "height": 80,
+        "relativeToRowMedian": 1.265587
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          23,
+          160,
+          174,
+          226
+        ],
+        "foregroundPixels": 3283,
+        "width": 151,
+        "height": 66,
+        "relativeToRowMedian": 1.003362
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          46,
+          179,
+          171,
+          239
+        ],
+        "foregroundPixels": 3261,
+        "width": 125,
+        "height": 60,
+        "relativeToRowMedian": 0.996638
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          24,
+          197,
+          181,
+          239
+        ],
+        "foregroundPixels": 2860,
+        "width": 157,
+        "height": 42,
+        "relativeToRowMedian": 0.874083
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          23,
+          190,
+          185,
+          239
+        ],
+        "foregroundPixels": 3030,
+        "width": 162,
+        "height": 49,
+        "relativeToRowMedian": 1.087581
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          25,
+          197,
+          183,
+          239
+        ],
+        "foregroundPixels": 2810,
+        "width": 158,
+        "height": 42,
+        "relativeToRowMedian": 1.008615
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          24,
+          201,
+          182,
+          239
+        ],
+        "foregroundPixels": 2762,
+        "width": 158,
+        "height": 38,
+        "relativeToRowMedian": 0.991385
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          27,
+          204,
+          178,
+          239
+        ],
+        "foregroundPixels": 2510,
+        "width": 151,
+        "height": 35,
+        "relativeToRowMedian": 0.900933
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          31,
+          198,
+          172,
+          239
+        ],
+        "foregroundPixels": 2529,
+        "width": 141,
+        "height": 41,
+        "relativeToRowMedian": 1.134335
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          28,
+          201,
+          158,
+          239
+        ],
+        "foregroundPixels": 2306,
+        "width": 130,
+        "height": 38,
+        "relativeToRowMedian": 1.034313
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          27,
+          206,
+          157,
+          239
+        ],
+        "foregroundPixels": 2153,
+        "width": 130,
+        "height": 33,
+        "relativeToRowMedian": 0.965687
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          26,
+          212,
+          157,
+          239
+        ],
+        "foregroundPixels": 1900,
+        "width": 131,
+        "height": 27,
+        "relativeToRowMedian": 0.852209
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      3506.5,
+      3478.5,
+      3040.5,
+      2941.0,
+      3444.0,
+      3272.0,
+      2786.0,
+      2229.5
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "c98605a87d87d4c0a755d344b49f7be45c72d8c295b8aa9860ef115109cd804e",
+      "747c4eab3a97994e973bf39e6dd610754b8039b98f18bffee9b9dfefa7eb35ca",
+      "160ae5222a1205e15608fa49a43fb5f47aac30bda9e2fbe4ff26f82fbe973f76",
+      "fc3bed1ee33c1fc66636d65ba0ad91c3484bcb28462aa7fe041f0f5a1ea37386",
+      "9fb18b5505322c48ceae0416df577ac84f0eb380daaf9b37ab64b3f88611a4fe",
+      "064aef6893a4fc33b92291180e35ac95d6150b7efae08cc4a21215eb0028840b",
+      "08a1e24f7e82976deb93b10d14c1051ae0ffadec6adb30cba57ffd18a1eca34f",
+      "9f39e01ad7845d7db661c39a7a5d58240c6331b26fa75013d69f747ef213b9d6",
+      "4ac7e509e31025f09747583304dab286a6232dbf68ef40dda2ad305202bee4a7",
+      "8d517ca09917dc4a0de4d1e81350cdde15ab90b188d99f249ee10aae258a2d4a",
+      "1e147d025710ed5a6adcdf1f6f088ff9eb2e43e5974d1452221447305256ece8",
+      "d0d95cb53f84876fe5502bba3c59c959b3346181ee0a65927a8288e39a033073",
+      "da5f3d9da8589742a6512745badee0047b11d1ac707129de0ac407ef82679d5c",
+      "78a72bd3440d3df99d23de383811b369841bc0803355b075595b9fe99b7413c1",
+      "36df0bd11025afd195004222dca85c98a0a714355facddcb6abfcb2cbc6fb52e",
+      "8c4ac26bcf72bf2cce0dd07ed5ad42641790b64716c49d4b05f1611ba6ce0f9a",
+      "b6b8d2f82609c57287fe15b572f5fbc8a9cb91a36822848b27d655b96b1bedaf",
+      "41a28782ea90a9ad9df4ed01fdb99049d214a0937a5953a1e132f392c77dafb0",
+      "da7fe5118c71915a8eeb18a1abfc0fa96dc8460fee87a48cafe084db6dbc90f8",
+      "341d46e45d2aa749bb91ae711b14cd6b16ac9c20ae0bfb03389221a14663c712",
+      "e873939c6c7c686bd7db80b9d368059c0aa1f78fee00b6fd61c73dc21a04a0db",
+      "b39407195c6172f2dfbc704514cb3cead356c026a0ef30b3530a5d6a29571fdf",
+      "975bff42927a99bc2c344b6eec54ac70663c1fb527a14e228f8558e2a0e7889d",
+      "c960748fd317a8dc139c7c421a57ca9e7a63e551f6e83aabeb8adb18f2c0cf61",
+      "27fec55e124d26b52640aa4a1e1ccfd796721a0c4c4966ea3eac3fa4c3ddbfc1",
+      "b98e1e9dd100c9f8bea416a663785c3bc3fac5754caaf052894b420d20119ce5",
+      "933d39f7586e85e2f49db95a0aa52d8b85f356ed9a68837d4c2226a989a28902",
+      "fee03f77e110118b02750263521e0810759425b074124ca1aec389e6ef12584a",
+      "4b3e9f99240a4ef77065f33646adfb8e77335c1ed7b746b70d5e1f0e20172846",
+      "350d94d3b006a7c0ea40170295b1d0d9e55fe110211837e3cfa11739cf8cb854",
+      "764c8a876c5f7ed1c5d9e06c495d54b2f4e3cd2771bb008d21922718cfa28dbd",
+      "00ac0f0a669803d8e4552808779873f4c00d69ec9e9ce5f8504caa1f196657ad"
+    ],
+    "visualFidelityCertified": false
+  },
+  "focusedVisualReview": {
+    "roi": [
+      140,
+      205,
+      178,
+      241
+    ],
+    "magnification": 12,
+    "V73EnclosedZeroAlphaHoles": [
+      {
+        "area": 1,
+        "bounds": [
+          56,
+          187,
+          57,
+          188
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          55,
+          189,
+          56,
+          190
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          54,
+          191,
+          55,
+          192
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          63,
+          192,
+          64,
+          193
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          65,
+          204,
+          66,
+          205
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          54,
+          205,
+          55,
+          206
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          55,
+          207,
+          56,
+          208
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          170,
+          212,
+          171,
+          213
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          170,
+          214,
+          172,
+          216
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          84,
+          225,
+          85,
+          227
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          101,
+          225,
+          102,
+          226
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          164,
+          226,
+          166,
+          227
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          130,
+          227,
+          131,
+          228
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          147,
+          227,
+          149,
+          228
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          155,
+          229,
+          157,
+          230
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          133,
+          232,
+          134,
+          233
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          152,
+          234,
+          153,
+          236
+        ]
+      }
+    ],
+    "R2EnclosedZeroAlphaHoles": [
+      {
+        "area": 1,
+        "bounds": [
+          49,
+          189,
+          50,
+          190
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          48,
+          191,
+          49,
+          192
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          57,
+          193,
+          58,
+          194
+        ]
+      },
+      {
+        "area": 4,
+        "bounds": [
+          57,
+          195,
+          58,
+          199
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          57,
+          200,
+          58,
+          201
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          58,
+          202,
+          59,
+          203
+        ]
+      },
+      {
+        "area": 2,
+        "bounds": [
+          48,
+          205,
+          49,
+          207
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          164,
+          214,
+          165,
+          215
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          165,
+          216,
+          166,
+          217
+        ]
+      },
+      {
+        "area": 3,
+        "bounds": [
+          78,
+          225,
+          79,
+          228
+        ]
+      },
+      {
+        "area": 9,
+        "bounds": [
+          90,
+          225,
+          97,
+          229
+        ]
+      },
+      {
+        "area": 1,
+        "bounds": [
+          145,
+          233,
+          146,
+          234
+        ]
+      }
+    ],
+    "verdict": "BLOCKED: formerly transparent finger gap is filled by opaque rose/ivory pixels; residual purple pixels remain. Visual inspection on dark/light backgrounds confirms this is not the requested empty aperture."
+  },
+  "protectedActiveFilesSha256": {
+    "assets\\openai\\sprites\\frames\\v66\\batch-004\\enemy-054-albino-facehugger\\attack.png": "7111891dde424e3f97f8b49638448e6dffc7abfb53b29203e8ca63f5eaf5c66e",
+    "docs\\references\\v73-next50-audit\\054-055\\enemy-054-albino-facehugger.anchor-review.fragment.json": "af26adbc765bc4f76452221b35d0bbfd5c24a08a1cef56a38f31170ad098a439",
+    "docs\\references\\v73-next50-audit\\054-055\\enemy-054-albino-facehugger.scale-review.fragment.json": "7e8aff4c572d2279940fad352270f43e3368670edf24fd77a6481c7b2277eff9",
+    "assets\\openai\\sprites\\normalized\\enemy-profiles-v66\\enemy-054-albino-facehugger.webp": "91d0c77c1354c2e367cc0a07a017ddf900357670441f37705a49064ddb9de31f"
+  },
+  "attackCounts": [
+    {
+      "frame": 0,
+      "V73": {
+        "broadVioletPixels": 4,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          23,
+          196,
+          186,
+          240
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 6,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          24,
+          197,
+          181,
+          240
+        ]
+      }
+    },
+    {
+      "frame": 1,
+      "V73": {
+        "broadVioletPixels": 35,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          53,
+          175,
+          174,
+          238
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 8,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          47,
+          175,
+          168,
+          238
+        ]
+      }
+    },
+    {
+      "frame": 2,
+      "V73": {
+        "broadVioletPixels": 0,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          47,
+          138,
+          177,
+          239
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 0,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          42,
+          140,
+          171,
+          240
+        ]
+      }
+    },
+    {
+      "frame": 3,
+      "V73": {
+        "broadVioletPixels": 21,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          37,
+          131,
+          192,
+          231
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 19,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          38,
+          132,
+          191,
+          231
+        ]
+      }
+    },
+    {
+      "frame": 4,
+      "V73": {
+        "broadVioletPixels": 27,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          38,
+          126,
+          206,
+          210
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 10,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          36,
+          128,
+          200,
+          210
+        ]
+      }
+    },
+    {
+      "frame": 5,
+      "V73": {
+        "broadVioletPixels": 0,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          27,
+          158,
+          182,
+          227
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 0,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          22,
+          159,
+          175,
+          227
+        ]
+      }
+    },
+    {
+      "frame": 6,
+      "V73": {
+        "broadVioletPixels": 0,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          46,
+          177,
+          175,
+          240
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 3,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          45,
+          178,
+          172,
+          240
+        ]
+      }
+    },
+    {
+      "frame": 7,
+      "V73": {
+        "broadVioletPixels": 3,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          21,
+          195,
+          183,
+          240
+        ]
+      },
+      "R2": {
+        "broadVioletPixels": 3,
+        "strictMagentaPixels": 0,
+        "opaqueBounds": [
+          23,
+          196,
+          182,
+          240
+        ]
+      }
+    }
+  ],
+  "note": "Broad violet is a diagnostic including legitimate pink anatomy, never an automatic rejection or color-edit rule. Same production normalization, strict despill enabled; no threshold change and no active source replacement."
+}

@@ -27,6 +27,22 @@ docs/references/v73-*/**/*.mjs text eol=lf
 docs/references/v73-*/**/*.html text eol=lf
 tests/*v73*.mjs text eol=lf
 tests/*v73*.py text eol=lf
+docs/references/V74_*.json text eol=lf
+docs/references/v74-*/**/*.json text eol=lf
+docs/references/v74-*/**/*.txt text eol=lf
+docs/references/v74-*/**/*.md text eol=lf
+docs/references/v74-*/**/*.py text eol=lf
+docs/references/v74-*/**/*.mjs text eol=lf
+docs/references/v74-*/**/*.html text eol=lf
+tests/*v74*.mjs text eol=lf
+tests/*v74*.py text eol=lf
+# V74 diagnostic receipts were written and signed as CRLF. Preserve their bytes.
+docs/references/v74-enemy-fixes/016/scale/burster-scale-measurements.json -text whitespace=cr-at-eol
+docs/references/v74-enemy-fixes/049/diagnostics.json -text whitespace=cr-at-eol
+docs/references/v74-enemy-fixes/050/korari-raster-measurements.json -text whitespace=cr-at-eol
+docs/references/v74-enemy-fixes/054/attack-r2-anchor-review.proposed.json -text whitespace=cr-at-eol
+docs/references/v74-enemy-fixes/054/attack-r2-final-diagnostics.json -text whitespace=cr-at-eol
+docs/references/v74-enemy-fixes/054/attack-r2-scale-review.proposed.json -text whitespace=cr-at-eol
 # V73 source-repair receipt was signed before LF normalization; preserve its bytes.
 docs/references/v73-next50-audit/051-052/enemy-051-ceto-reef-predator.attack-owned-padding-1774-proof.json -text whitespace=cr-at-eol
 # Preserve four historical signed receipts byte-for-byte (original CRLF).

@@ -9,7 +9,7 @@ import {
   getHumanSizeComparisonV62,
   searchCatalogV62
 } from './catalog-runtime-v62.js';
-import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72 } from './catalog-scale-v72.js';
+import { getCatalogGameplayScaleV72, getCatalogMarineReferenceV72, getCatalogComparisonLayoutV72 } from './catalog-scale-v72.js';
 
 const VALID_CATALOGS = new Set(CATALOG_TREE_V62.map((root) => root.catalog));
 const EMPTY_ARRAY = Object.freeze([]);
@@ -739,24 +739,40 @@ export class CatalogWorkbenchV62 {
     const section = this.renderSection('ÉCHELLE COMMUNE DU JEU', 'gameplay-scale');
     const stage = createElement(this.document, 'div', 'catalog-v72__comparison');
     stage.setAttribute('role', 'group');
-    stage.setAttribute('aria-label', 'Comparaison facehugger, marine et reine à la même échelle de jeu');
     const references = [getCatalogEntryV62('enemy-002-facehugger'),
       { id: 'marine-reference', name: 'Marine', visual: getCatalogMarineReferenceV72() },
       getCatalogEntryV62('enemy-008-queen')];
     if (!references.some((entry) => entry.id === record.id)) references.push(record);
-    for (const entry of references) {
+    stage.setAttribute('aria-label', `Même échelle de jeu : ${references.map((entry) => entry.name).join(', ')}`);
+    const layout = getCatalogComparisonLayoutV72(references.map((entry) => entry.visual));
+    const legend = createElement(this.document, 'ol', 'catalog-v72__comparison-legend');
+    stage.style.setProperty('--catalog-world-unit', layout.cssWorldUnit);
+    stage.style.setProperty('--catalog-above-ground', String(layout.aboveGround));
+    stage.style.setProperty('--catalog-below-ground', String(layout.belowGround));
+    stage.dataset.comparisonCount = String(references.length);
+    for (const [index, entry] of references.entries()) {
       const item = createElement(this.document, 'div', 'catalog-v72__comparison-item');
       item.dataset.comparisonEntry = entry.id;
       const plane = createElement(this.document, 'div', 'catalog-v72__comparison-plane');
-      const size = getCatalogGameplayScaleV72(entry.visual, 0.35);
-      if (size) item.style.width = `${size.width}px`;
+      const size = layout.sizes[index];
+      item.style.width = `calc(${layout.slots[index]} * var(--catalog-world-unit))`;
       const preview = this.animator.mount(plane, entry.visual, entry.name, { worldScale: 0.35, animate: false });
       if (!preview) this.renderMissingMedia(plane, entry);
-      item.append(plane, createElement(this.document, 'span', '', entry.name));
+      if (preview && size) {
+        // CSS container units resize the whole line together, including pivots.
+        preview.style.width = `calc(${size.worldWidth} * var(--catalog-world-unit))`;
+        preview.style.height = `calc(${size.worldHeight} * var(--catalog-world-unit))`;
+        preview.style.marginBottom = `calc(${-size.groundOffset} * var(--catalog-world-unit))`;
+        preview.dataset.worldScale = 'responsive-common';
+      }
+      const marker = createElement(this.document, 'span', '', index + 1);
+      marker.setAttribute('aria-label', `${index + 1} : ${entry.name}`);
+      item.append(plane, marker);
       stage.append(item);
+      legend.append(createElement(this.document, 'li', '', entry.name));
     }
-    section.append(stage, createElement(this.document, 'p', 'catalog-v62__fact-note',
-      'Même échelle et même ligne de sol pour toutes les silhouettes. Dimensions du rendu en jeu, pas des mesures canoniques en mètres. Les vignettes de la liste utilisent aussi une échelle commune ; le portrait du dossier reste un zoom de détail.'));
+    section.append(stage, legend, createElement(this.document, 'p', 'catalog-v62__fact-note',
+      'Même facteur adapté à la largeur et même ligne de sol pour toutes les silhouettes. Dimensions du rendu en jeu, pas des mètres canoniques. Le portrait reste un zoom de détail.'));
     this.detail.append(section);
   }
 

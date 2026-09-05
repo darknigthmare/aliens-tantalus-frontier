@@ -1,0 +1,17 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-016-burster",
+  "actor": "Codex V74 root review",
+  "canonExact": false,
+  "note": "Root and independent visual review: V73 source identity,32 physical roots and32 distinct poses preserved. V74 calibrated body88x88/render256 square. Compression is coupled at0.5s to exactly one real blast then terminal death. Browser tests verify both directions, obstacles and save roundtrips. Existing particles provide the blast; no dedicated explosion bitmap or canon1:1 claim.",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

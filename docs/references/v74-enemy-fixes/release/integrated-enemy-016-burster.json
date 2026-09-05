@@ -1,0 +1,19 @@
+{
+  "kind": "integrated",
+  "profileId": "enemy-016-burster",
+  "actor": "Codex V74 runtime verification",
+  "note": "Root and independent visual review: V73 source identity,32 physical roots and32 distinct poses preserved. V74 calibrated body88x88/render256 square. Compression is coupled at0.5s to exactly one real blast then terminal death. Browser tests verify both directions, obstacles and save roundtrips. Existing particles provide the blast; no dedicated explosion bitmap or canon1:1 claim.",
+  "runtimeEvidence": {
+    "result": "pass",
+    "command": "node --test tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+    "registry": {
+      "path": "src/enemy-profile-assets-v66.js"
+    },
+    "test": {
+      "path": "tests/enemy-burster-v74.test.mjs"
+    },
+    "log": {
+      "path": "docs/references/v74-enemy-fixes/runtime-test-output.txt"
+    }
+  }
+}

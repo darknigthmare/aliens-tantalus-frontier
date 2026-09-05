@@ -100,6 +100,13 @@ const PROJECT_ORIGINALS = Object.freeze([
   })
 ]);
 
+// Keep historical V56 contracts intact; only the accepted standard050 migrates.
+const currentRuntime = (entry) => entry.id === 'enemy-050-korari-stalker' ? {
+  ...entry, sheetId: 'enemy.profile.enemy-050-korari-stalker.v66',
+  path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp',
+  width: 288, height: 288
+} : entry;
+
 class MockImage {
   constructor() {
     this.complete = true;
@@ -181,7 +188,7 @@ test('les variantes réemploient seulement leur famille dédiée et restent expl
       assert.equal(direct.approximate, !isBase, source.id);
       assert.equal(runtime.identityStatus, identityStatus, source.id);
       assert.equal(runtime.spriteKey, expected.spriteKey, source.id);
-      assert.equal(runtime.sheetId, expected.sheetId, source.id);
+      assert.equal(runtime.sheetId, isBase ? currentRuntime(expected).sheetId : expected.sheetId, source.id);
       if (isBase) assert.equal(direct.fallbackReason, null, source.id);
       else assert.match(direct.fallbackReason, /modifier systémique/, source.id);
     }
@@ -204,7 +211,8 @@ test('le GameEngine charge, dessine et spécialise les sept identités PROJECT_O
     const engine = new GameEngine(canvas);
     engine.random = () => 0.25;
 
-    for (const expected of PROJECT_ORIGINALS) {
+    for (const historical of PROJECT_ORIGINALS) {
+      const expected = currentRuntime(historical);
       const source = ENEMIES.find((enemy) => enemy.id === expected.id);
       const enemy = engine.createEnemy(source, 0, 320, 930);
       assert.equal(enemy.spriteKey, expected.spriteKey, expected.name);
@@ -212,7 +220,7 @@ test('le GameEngine charge, dessine et spécialise les sept identités PROJECT_O
       assert.equal(enemy.visualIdentityStatus, 'project-original', expected.name);
       assert.equal(enemy.behavior, expected.behavior, expected.name);
       await engine.ensureEnemyAtlas(SPRITE_SHEETS[enemy.visualSheetId]);
-      assert.equal(engine.images.get(expected.spriteKey)?.currentSrc, expected.path, expected.name);
+      assert.equal(engine.images.get(SPRITE_SHEETS[expected.sheetId].imageKey)?.currentSrc, expected.path, expected.name);
 
       const drawCalls = [];
       const context = {

@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '73.0.0',
-  subtitle: 'Production ennemie — lot de 50 audité, Chestburster albinos animé et intégré',
+  version: '74.0.0',
+  subtitle: 'Ennemis — détonation télégraphiée, bond du Korari et échelles corrigées',
   sourceVersion: '51.0.0'
 });

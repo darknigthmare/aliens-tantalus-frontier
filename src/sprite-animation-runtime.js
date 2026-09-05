@@ -11,7 +11,7 @@ import {
 import { resolveVehicleAccessAnimationV59 } from './vehicle-access-runtime-v59.js';
 import { V65_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v65.js';
 import { V66_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v66.js';
-import { getEnemyBatchAttackFrameV66 } from './enemy-batch-combat-v66.js';
+import { getBursterTerminalAnimationV74, getEnemyBatchAttackFrameV66 } from './enemy-batch-combat-v66.js';
 import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
 import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 
@@ -623,6 +623,15 @@ export function resolveEnemyAnimation(enemy = {}) {
     return { sheetId: enemy.visualSheetId, ...getOvomorphAnimationV66(enemy) };
   }
   if (dedicatedClipSet === 'enemy-action-v66') {
+    const terminal = getBursterTerminalAnimationV74(enemy);
+    if (terminal) return { sheetId: enemy.visualSheetId, ...terminal };
+    if (dead && enemy.visualSheetId === 'enemy.profile.enemy-050-korari-stalker.v66') {
+      // Death is a saved actor lifecycle, not a fresh controller animation.
+      // V51 defeat starts at2.8s; a resumed terminal corpse must stay prone.
+      const remaining = Number.isFinite(Number(enemy.deathClock)) ? Number(enemy.deathClock) : 0;
+      const elapsed = Math.max(0, 2.8 - remaining);
+      return { sheetId: enemy.visualSheetId, clipId: 'death', frame: 24 + Math.min(7, Math.floor(elapsed * 10 + 1e-9)) };
+    }
     const clipId = dead ? 'death' : hurt ? 'idle' : attacking ? 'attack' : Math.abs(enemy.vx || 0) > 8 ? 'move' : 'idle';
     const localAttackFrame = clipId === 'attack' ? getEnemyBatchAttackFrameV66(enemy) : null;
     return { sheetId: enemy.visualSheetId, clipId,

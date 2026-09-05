@@ -31,6 +31,12 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
     // Source attack pose5 is maximum extension; damage occurs once on that pose.
     impact: 4 / 12, lungeDistance: 56, cooldown: 1.05
   }),
+  'enemy-050-korari-stalker': contract('enemy-050-korari-stalker', {
+    action: 'korari-bite-pounce', distanceMetric: 'centers',
+    vehicleSurfaceReferenceHalfWidth: 21,
+    stopRange: 98, meleeRange: 104, lungeDistance: 72, windup: 3 / 12,
+    impact: 4 / 12, speedMultiplier: 1.18, cooldown: 1.35, verticalRange: 90
+  }),
   'enemy-055-albino-chestburster': contract('enemy-055-albino-chestburster', {
     action: 'albino-low-bite', stopRange: 28, meleeRange: 56,
     // Source pose5 is the bite contact; the limbless juvenile never pounces.
@@ -38,7 +44,15 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
   })
 });
 
-const bySheet = new Map(Object.values(ENEMY_BATCH_COMBAT_CONTRACTS_V66).map((entry) => [entry.sheetId, entry]));
+// Separate from repeatable melee contracts: compression consumes this actor.
+// This contract never grants visual acceptance to a candidate or its variants.
+export const BURSTER_COMBAT_V74 = contract('enemy-016-burster', {
+  action: 'compression-detonation', distanceMetric: 'centers', windup: 6 / 12, impact: 6 / 12,
+  stopRange: 68, meleeRange: 108, blastRadius: 132, cooldown: 1.25,
+  deathLifetime: 2.8
+});
+const bySheet = new Map([...Object.values(ENEMY_BATCH_COMBAT_CONTRACTS_V66), BURSTER_COMBAT_V74]
+  .map((entry) => [entry.sheetId, entry]));
 const finite = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const boundedCooldown = (value, entry, fallback = 0) => Math.max(0, Math.min(entry.cooldown, finite(value, fallback)));
 const validTarget = (target) => isEnemyMeleeTargetValidV64(target) && !target.ventTransit;
@@ -47,6 +61,22 @@ const validEngineTarget = (engine, target) => validTarget(target)
 const targetEntity = (engine, target) => target?.inVehicle && engine.vehicle?.active ? engine.vehicle : target;
 const feetDistance = (enemy, target) => Math.abs((target.y + target.h) - (enemy.y + enemy.h));
 const directionTo = (enemy, target) => Math.sign((target.x + target.w / 2) - (enemy.x + enemy.w / 2));
+const horizontalDistance = (enemy, target, entry, vehicleTarget = false) => {
+  if (entry.distanceMetric !== 'centers') return target.x - enemy.x;
+  const origin = enemy.x + enemy.w / 2;
+  if (vehicleTarget && (entry === BURSTER_COMBAT_V74 || entry === ENEMY_BATCH_COMBAT_CONTRACTS_V66['enemy-050-korari-stalker'])) {
+    // Large hulls must not require penetration to reach their centre. Burster
+    // uses the hull surface directly. Korari's marine-calibrated centre range
+    // adds back the reference half-width21: stop98=>surface77, hit104=>83.
+    // Humanoids and all legacy contracts retain their existing measurements.
+    const hull = blastBounds(target);
+    if (hull) {
+      const distance = Math.max(hull.x, Math.min(hull.x + hull.w, origin)) - origin;
+      return distance + Math.sign(distance) * finite(entry.vehicleSurfaceReferenceHalfWidth);
+    }
+  }
+  return target.x + target.w / 2 - origin;
+};
 const pathClear = (engine, enemy, target) => {
   if (!engine.enemyMeleePathClearV64(enemy, target)) return false;
   // The legacy strike ray includes walls/doors but omits physical covers.
@@ -72,6 +102,23 @@ export function resolveEnemyBatchCombatContractV66(enemy) {
 
 export function isEnemyBatchCombatV66(enemy) {
   return Boolean(resolveEnemyBatchCombatContractV66(enemy));
+}
+
+export function isBursterCombatV74(enemy) {
+  return enemy?.visualSheetId === BURSTER_COMBAT_V74.sheetId;
+}
+
+// The actor is already dead during the last two pressure poses. Deriving this
+// short visual release from the saved corpse clock prevents a second attack.
+export function getBursterTerminalAnimationV74(enemy) {
+  if (!isBursterCombatV74(enemy) || enemy.alive) return null;
+  const entry = BURSTER_COMBAT_V74;
+  const elapsed = Math.max(0, entry.deathLifetime - finite(enemy.deathClock));
+  const release = enemy.bursterDetonatedV74 === true ? entry.duration - entry.impact : 0;
+  if (elapsed + 1e-9 < release) {
+    return { clipId: 'attack', frame: 16 + Math.min(7, Math.floor((entry.impact + elapsed) * entry.fps + 1e-9)) };
+  }
+  return { clipId: 'death', frame: 24 + Math.min(7, Math.floor(Math.max(0, elapsed - release) * 10 + 1e-9)) };
 }
 
 // A renderer can sample this same timeline instead of advancing an independent
@@ -155,12 +202,103 @@ function withinDetectionRange(engine, enemy, entity, entry) {
   });
 }
 
+const blastBounds = (entity) => {
+  if (!entity) return null;
+  const local = entity.spriteHitbox?.local;
+  const box = local ? { x: entity.x + local.x, y: entity.y + local.y, w: local.w, h: local.h } : entity;
+  return [box.x, box.y, box.w, box.h].every(Number.isFinite) && box.w > 0 && box.h > 0 ? box : null;
+};
+
+function blastSegmentBlocked(origin, destination, obstacle) {
+  const bounds = blastBounds(obstacle);
+  if (!bounds) return false;
+  let enter = 0, leave = 1;
+  for (const [axis, extent] of [['x', 'w'], ['y', 'h']]) {
+    const distance = destination[axis] - origin[axis];
+    if (Math.abs(distance) < 1e-9) {
+      if (origin[axis] < bounds[axis] || origin[axis] > bounds[axis] + bounds[extent]) return false;
+      continue;
+    }
+    const a = (bounds[axis] - origin[axis]) / distance;
+    const b = (bounds[axis] + bounds[extent] - origin[axis]) / distance;
+    enter = Math.max(enter, Math.min(a, b));
+    leave = Math.min(leave, Math.max(a, b));
+    if (enter > leave) return false;
+  }
+  return leave >= 0 && enter <= 1;
+}
+
+function bursterBlastRecipients(engine, enemy, origin) {
+  const entry = BURSTER_COMBAT_V74;
+  const obstacles = [...engine.closedDoorColliders(), ...(engine.walls || []),
+    ...(engine.covers || []).filter((cover) => !cover.destroyed), ...(engine.platforms || [])];
+  // Snapshot occupants BEFORE hull damage ejects them. One physical vehicle is
+  // hit once, never once per passenger and again after a destruction callback.
+  const candidates = candidatePool(engine).filter((target) => validTarget(target) && !target.inVehicle)
+    .map((target) => ({ target, targetId: resolveEnemyMeleeTargetIdV64(target), vehicle: false }));
+  if (engine.vehicle?.active && !engine.vehicle.destroyed) {
+    candidates.push({ target: engine.vehicle, targetId: 'vehicle', vehicle: true });
+  }
+  const seen = new Set();
+  return candidates.filter((candidate) => {
+    if (seen.has(candidate.targetId)) return false;
+    seen.add(candidate.targetId);
+    const bounds = blastBounds(candidate.target);
+    if (!bounds) return false;
+    const nearest = { x: Math.max(bounds.x, Math.min(origin.x, bounds.x + bounds.w)),
+      y: Math.max(bounds.y, Math.min(origin.y, bounds.y + bounds.h)) };
+    return Math.hypot(nearest.x - origin.x, nearest.y - origin.y) <= entry.blastRadius
+      && !obstacles.some((obstacle) => blastSegmentBlocked(origin, nearest, obstacle));
+  });
+}
+
+export function detonateBursterV74(engine, enemy, target) {
+  const entry = BURSTER_COMBAT_V74;
+  const state = enemy?.batchAttackV66;
+  if (!isBursterCombatV74(enemy) || !enemy.alive || enemy.captured || enemy.ventTransit
+    || enemy.bursterDetonatedV74 || !state || state.impactResolved
+    || !Number.isFinite(state.elapsed) || state.elapsed + 1e-9 < entry.impact
+    || !validEngineTarget(engine, target) || resolveEnemyMeleeTargetIdV64(target) !== state.targetId
+    || Boolean(target.inVehicle) !== state.targetInVehicle || !enemy.alert || interrupted(enemy)) return false;
+  const entity = targetEntity(engine, target);
+  if (!pathClear(engine, enemy, entity) || directionTo(enemy, entity) === -state.facing
+    || feetDistance(enemy, entity) >= entry.verticalRange) return false;
+  const origin = { x: enemy.x + enemy.w / 2, y: enemy.y + enemy.h / 2 };
+  const recipients = bursterBlastRecipients(engine, enemy, origin);
+  const damage = Math.max(20, Math.round(Math.max(0, finite(enemy.damage, 16)) * 1.35));
+  // Commit the terminal latch before ALL callbacks, including kill/reward hooks.
+  // Defeat once through the real engine, with no armor-dependent self-damage.
+  state.impactResolved = true;
+  enemy.bursterDetonatedV74 = true;
+  enemy.batchAttackV66 = null;
+  enemy.attacking = false;
+  enemy.attackAnimationClock = 0;
+  enemy.attackWindupClock = 0;
+  enemy.attackClock = entry.cooldown;
+  engine.defeatEnemy(enemy, null);
+  enemy.vx = 0;
+  for (const recipient of recipients) {
+    const source = `${enemy.name}:detonation`;
+    if (recipient.vehicle) engine.damageVehicle(damage, source);
+    else if (recipient.target.squadMember) engine.damageSquadMember(recipient.target, damage, { source });
+    else engine.damagePlayer(recipient.target, damage, { source });
+  }
+  for (let index = 0; index < 3; index += 1) engine.spawnImpact(origin.x, origin.y + (index - 1) * enemy.h * 0.16, '#b7cf4c');
+  engine.audio?.hit();
+  const hitTargetIds = recipients.map((recipient) => recipient.targetId);
+  report(engine, enemy, entry, { type: 'enemy-attack-impact', targetId: state.targetId,
+    hit: recipients.length > 0, hitTargetIds, reason: recipients.length ? null : 'target-out-of-range' });
+  report(engine, enemy, entry, { type: 'enemy-detonation', targetId: state.targetId,
+    hitTargetIds, damage, radius: entry.blastRadius, x: origin.x, y: origin.y });
+  return true;
+}
+
 function beginAttack(engine, enemy, target, entity, entry) {
   enemy.facing = directionTo(enemy, entity) || enemy.facing || 1;
   enemy.batchAttackV66 = {
     targetId: resolveEnemyMeleeTargetIdV64(target), targetInVehicle: Boolean(target.inVehicle),
     facing: enemy.facing, elapsed: 0, impactResolved: false,
-    distance: Math.min(entry.lungeDistance, Math.max(0, Math.abs(entity.x - enemy.x) - entry.stopRange))
+    distance: Math.min(entry.lungeDistance, Math.max(0, Math.abs(horizontalDistance(enemy, entity, entry, target.inVehicle)) - entry.stopRange))
   };
   enemy.attackClock = entry.cooldown;
   enemy.attackWindupClock = entry.windup;
@@ -190,7 +328,7 @@ function advanceAttack(engine, enemy, target, delta, entry) {
   const previous = state.elapsed;
   state.elapsed = Math.min(entry.duration, previous + delta);
   const progress = (time) => Math.max(0, Math.min(1, (time - entry.windup) / (entry.impact - entry.windup)));
-  const displacement = state.facing * state.distance * (progress(state.elapsed) - progress(previous));
+  const displacement = state.distance ? state.facing * state.distance * (progress(state.elapsed) - progress(previous)) : 0;
   enemy.facing = state.facing;
   if (displacement && moveEnemyBatchHorizontallyV66(engine, enemy, displacement).blocked) {
     cancelEnemyBatchAttackV66(engine, enemy, 'collision-blocked');
@@ -199,11 +337,15 @@ function advanceAttack(engine, enemy, target, delta, entry) {
   enemy.attackAnimationClock = Math.max(0, entry.duration - state.elapsed);
   enemy.attackWindupClock = Math.max(0, entry.windup - state.elapsed);
   enemy.attacking = true;
+  if (entry === BURSTER_COMBAT_V74 && state.elapsed + 1e-9 >= entry.impact) {
+    engine.detonateEnemy(enemy, target);
+    return;
+  }
   if (!state.impactResolved && state.elapsed + 1e-9 >= entry.impact) {
     // Mark resolved before invoking gameplay callbacks: reentrant damage or
     // later recovery frames cannot replay this impact or transfer its target.
     state.impactResolved = true;
-    const inRange = Math.abs(entity.x - enemy.x) < entry.meleeRange
+    const inRange = Math.abs(horizontalDistance(enemy, entity, entry, target.inVehicle)) < entry.meleeRange
       && feetDistance(enemy, entity) < entry.verticalRange;
     const clear = pathClear(engine, enemy, entity);
     const inFront = directionTo(enemy, entity) !== -state.facing;
@@ -266,7 +408,7 @@ function advanceEnemyBatchCombatV66(engine, enemy, delta) {
   const target = selectEnemyBatchTargetV66(engine, enemy);
   if (!target) return true;
   const entity = targetEntity(engine, target);
-  const horizontal = entity.x - enemy.x;
+  const horizontal = horizontalDistance(enemy, entity, entry, target.inVehicle);
   const vertical = feetDistance(enemy, entity);
   const visible = pathClear(engine, enemy, entity);
   if (visible && vertical < 160 && (withinDetectionRange(engine, enemy, entity, entry) || enemy.revealed > 0)) enemy.alert = true;
@@ -295,7 +437,8 @@ export function captureEnemyBatchCombatResumeV66(enemy) {
   const entry = resolveEnemyBatchCombatContractV66(enemy);
   return entry ? {
     attackClock: boundedCooldown(enemy.attackClock, entry),
-    batchAttackActiveV66: Boolean(enemy.batchAttackV66)
+    batchAttackActiveV66: Boolean(enemy.batchAttackV66),
+    ...(entry === BURSTER_COMBAT_V74 ? { bursterDetonatedV74: !enemy.alive && enemy.bursterDetonatedV74 === true } : {})
   } : {};
 }
 
@@ -311,5 +454,6 @@ export function restoreEnemyBatchCombatResumeV66(enemy, source = {}) {
   enemy.attacking = false;
   enemy.pendingMelee = false;
   enemy.pendingMeleeTargetId = null;
+  if (entry === BURSTER_COMBAT_V74) enemy.bursterDetonatedV74 = !enemy.alive && source?.bursterDetonatedV74 === true;
   return true;
 }

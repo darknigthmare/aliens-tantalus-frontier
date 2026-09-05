@@ -13,6 +13,7 @@ import {
   restoreEnemyBatchCombatResumeV66
 } from '../src/enemy-batch-combat-v66.js';
 
+// Burster016 has a separate consuming-combat suite in enemy-burster-v74.
 const profileIds = Object.keys(contracts);
 const runnerId = 'enemy-006-runner';
 const actor = (x, extra = {}) => ({
@@ -33,7 +34,9 @@ function fixture(profileId = runnerId) {
     v52HurtClock: 0, jammedClock: 0, revealed: 0
   };
   const engine = {
-    player: actor(600 + (entry.lungeDistance ? 140 : entry.meleeRange - 12)),
+    player: actor(entry.distanceMetric === 'centers'
+      ? 600 + entry.stopRange + entry.lungeDistance + (enemy.w - 42) / 2
+      : 600 + (entry.lungeDistance ? 140 : entry.meleeRange - 12)),
     coop: actor(1600, { coop: true }), coopEnabled: false,
     squadActors: [], covers: [], walls: [], doors: [], animationTime: 0,
     activeSquadActors() { return this.squadActors; },
@@ -51,8 +54,8 @@ function fixture(profileId = runnerId) {
   return { entry, enemy, engine, events, motions, step };
 }
 
-test('V66 prend en charge les six combattants acceptés, pas les variantes non revues, oeufs ou anciens sprites', () => {
-  assert.deepEqual([...profileIds].sort(), ['enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-055-albino-chestburster']);
+test('V66 prend en charge les sept combattants à attaque répétable acceptés, pas les variantes non revues, oeufs ou anciens sprites', () => {
+  assert.deepEqual([...profileIds].sort(), ['enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
   for (const entry of Object.values(contracts)) {
     assert.equal(resolveEnemyBatchCombatContractV66({ visualSheetId: entry.sheetId }), entry);
     assert.equal(Object.isFrozen(entry), true);

@@ -6,8 +6,8 @@
   "baseRelease": "v64",
   "supplemental": true,
   "sourceOfTruth": "Accepted profile registries must resolve to real runtime sheets and complete clip coverage. The V64 snapshot remains unchanged.",
-  "atlasCount": 8,
-  "cellCount": 256,
+  "atlasCount": 10,
+  "cellCount": 320,
   "contracts": {
     "grids": {
       "profile-4x8-256x256": {
@@ -62,11 +62,23 @@
         "width": 78,
         "height": 82
       },
+      "enemy-016-burster-body-v66": {
+        "x": 84,
+        "y": 152,
+        "width": 88,
+        "height": 88
+      },
       "enemy-020-k-series-yellow-xenomorph-body-v66": {
         "x": 98.38805970149254,
         "y": 110.08955223880596,
         "width": 59.223880597014926,
         "height": 129.91044776119404
+      },
+      "enemy-050-korari-stalker-body-v66": {
+        "x": 85.33333333333334,
+        "y": 186.66666666666666,
+        "width": 85.33333333333333,
+        "height": 53.333333333333336
       },
       "enemy-055-albino-chestburster-body-v66": {
         "x": 104.17021276595744,
@@ -528,6 +540,44 @@
       }
     },
     {
+      "id": "enemy.profile.enemy-016-burster.v66",
+      "profileId": "enemy-016-burster",
+      "subject": "Burster",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-016-burster",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-016-burster.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "creature-ground",
+      "hitbox": "enemy-016-burster-body-v66",
+      "renderWidth": 256,
+      "renderHeight": 256,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "CANON_REFERENCE_ADAPTATION",
+      "referenceUrls": [
+        "https://store.necaonline.com/products/aliens-fireteam-elite-burster-alien-7-inch-scale-action-figure",
+        "https://www.focus-entmt.com/en/games/aliens-fireteam-elite"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.profile.enemy-020-k-series-yellow-xenomorph.v66",
       "profileId": "enemy-020-k-series-yellow-xenomorph",
       "subject": "K-Series Yellow Xenomorph",
@@ -552,6 +602,43 @@
       "referenceUrls": [
         "https://www.avpcentral.com/images/xenomorph-types/k-series-xenomorph.webp",
         "https://www.avpgalaxy.net/games/avp-extinction/aliens/"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.profile.enemy-050-korari-stalker.v66",
+      "profileId": "enemy-050-korari-stalker",
+      "subject": "Korari Stalker",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-050-korari-stalker",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-050-korari-stalker.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "creature-ground",
+      "hitbox": "enemy-050-korari-stalker-body-v66",
+      "renderWidth": 288,
+      "renderHeight": 288,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceUrls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
       ],
       "runtime": {
         "status": "referenced",
