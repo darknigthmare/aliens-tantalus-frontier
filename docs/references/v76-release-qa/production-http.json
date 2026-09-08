@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "checkedAt": "2026-09-08T04:15:56.040Z",
+  "commit": "7804645",
+  "target": "production",
+  "base": "https://aliens-tantalus-frontier.vercel.app",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp",
+      "status": 200,
+      "sha256": "5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52",
+      "matchesCommit": "7804645"
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+      "status": 200,
+      "sha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
+      "matchesCommit": "7804645"
+    },
+    {
+      "path": "src/enemy-ceto-v75.js",
+      "status": 200,
+      "sha256": "efdef49fef593a6854631375efb1b20e7fad9d44b77a76e9487b166f15bb72cc",
+      "matchesCommit": "7804645"
+    },
+    {
+      "path": "src/hub-dialogue-ui-v76.js",
+      "status": 200,
+      "sha256": "70605130e24b5bd23e33e5a72ce294be5e5ea0d0240b907a5938f22ba6a0910d",
+      "matchesCommit": "7804645"
+    },
+    {
+      "path": "hub-stations-v61.css",
+      "status": 200,
+      "sha256": "5b0a09c03dde1edc41f9e72e1d1dda0c9ca7121e01c0e159488443d37f829fde",
+      "matchesCommit": "7804645"
+    },
+    {
+      "path": "/docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md",
+      "status": 404,
+      "excluded": true
+    },
+    {
+      "path": "/assets/openai/sprites/frames/v75/enemy-011-lurker/attack-pounce-r1.png",
+      "status": 404,
+      "excluded": true
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-023-atarax-ripper.webp",
+      "status": 404,
+      "excluded": true
+    }
+  ]
+}

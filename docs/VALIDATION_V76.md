@@ -16,7 +16,12 @@
 
 La QA navigateur des ennemis confirme les deux atlas HTTP200 et leurs SHA exacts, 32 poses distinctes chacun, 128 rendus de production (32 poses × 2 orientations × 2 profils), les tailles physiques 96×88 / 156×100 et un seul Ceto dans son bassin. Rapport : `docs/references/v76-browser-qa/enemies-v75-browser-report.json`. Il s’agit de démarrages contrôlés et de rendu, pas d’un parcours Abysse Noir complet ; le décor métallique du bassin reste à améliorer.
 
-Le commit, le push, le déploiement Ready et les contrôles distants seront consignés après leur réussite. Ce document ne les déclare pas acquis à partir du seul build local.
+- Commit de production : `7804645`, poussé sur `origin/codex/v52-physical-worlds`. Les autres travaux locaux ont été conservés hors staging.
+- Vercel : déploiement `dpl_AmraC3p3GPcf76cKQYChYsMp3bij`, cible **production**, état **Ready**, alias [jeu public](https://aliens-tantalus-frontier.vercel.app). Build distant réussi en9secondes, version76.0.0,3450entrées. Le build CLI Windows avait échoué avec `spawn cmd.exe ENOENT`; il n’est pas compté comme réussi.
+- Contrôle du8septembre2026 à04:15:56UTC : accueil, build-info et service worker HTTP200/version76 ; SHA des atlas Prowler/Ceto, module Ceto, contrôleur hub et CSS identiques au commit. Références privées, master Lurker rejeté et atlas Atarax non accepté : HTTP404 attendu.
+- QA navigateur **publique** réussie aux3tailles : dialogues, défilement/focus visibles, retour au contrôle ; atlas/rendus des deux ennemis et Ceto contenu dans son bassin. Aucune exception JavaScript ni erreur console dans ces parcours ciblés.
+- Inspection Vercel confirme Ready et les alias. Recherche ponctuelle des logs de niveau error : aucun log retourné pour ce déploiement statique ; cela ne remplace pas la QA client. Aucune surveillance récurrente n’est installée par cette livraison.
+- Preuves : `docs/references/v76-release-qa/production-http.json` et `public-browser/`. Reproduction du contrôle HTTP : `node scripts/verify-production-v76.mjs`.
 
 ## Limites connues
 
