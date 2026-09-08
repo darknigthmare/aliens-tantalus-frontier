@@ -22,6 +22,7 @@ import { cancelFacehuggerAttackV65 } from './enemy-facehugger-combat-v65.js';
 import { cancelEnemyBatchAttackV66, isEnemyBatchCombatV66, selectEnemyBatchTargetV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, isCetoV75, updateCetoV75 } from './enemy-ceto-v75.js';
+import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { findLargeMissionActorPlacementV72, isLargeMissionActorV72, largeMissionActorFitsV72 } from './mission-large-actor-placement-v72.js';
 
 const WORLD_WIDTH = 6200;
@@ -937,6 +938,7 @@ export function withV52LevelRuntime(BaseEngine) {
     updatePlayer(actor, delta, controls) {
       if (actor?.ventTransit && this.missionVentNetworkV62
         && actor.ventTransit.networkId === this.missionVentNetworkV62.id) {
+        if (actor.tacticalReload) this.advancePlayerReloadV77(actor, delta);
         actor.vx = 0;
         actor.vy = 0;
         actor.jumpBuffer = 0;
@@ -1068,6 +1070,7 @@ export function withV52LevelRuntime(BaseEngine) {
       actor.ventRuntimeIdV62 = actorId;
       actor.ventActorKind = actorKind;
       actor.ventTransit = cloneV62(entered.ventTransit);
+      cancelTacticalReloadV77(actor, 'vent-transit');
       actor.ventPlanV62 = plan ? cloneV62(plan) : null;
       this.concealMissionVentActorV62(actor, actorKind);
       this.missionVentActorsV62.set(actorId, actor);

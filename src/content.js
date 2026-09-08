@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '76.0.0',
-  subtitle: 'Ennemis — détonation télégraphiée, bond du Korari et échelles corrigées',
+  version: '77.0.0',
+  subtitle: 'Rechargement tactique, coopération locale et audio optionnel réel',
   sourceVersion: '51.0.0'
 });

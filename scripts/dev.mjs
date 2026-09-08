@@ -1,10 +1,13 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
+import { AUDIO_MIME_V77 } from '../src/audio-assets-v77.js';
+import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
 
 const root = process.cwd();
 const port = Number(process.env.PORT || 4173);
 const mime = {
+  ...AUDIO_MIME_V77,
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8', '.png': 'image/png',
   '.webp': 'image/webp', '.gif': 'image/gif',
@@ -18,6 +21,7 @@ function safePath(url) {
   return join(root, relative);
 }
 
+await writeAudioManifestV77(root);
 createServer(async (request, response) => {
   let file = safePath(request.url);
   if (!file) { response.writeHead(403).end('Forbidden'); return; }

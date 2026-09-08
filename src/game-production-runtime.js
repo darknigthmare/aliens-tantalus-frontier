@@ -9,6 +9,8 @@ import { withNarrativeCollectablesRuntimeV68 } from './narrative-collectables-ru
 import { withAlphaBravoCoopRuntimeV69 } from './alpha-bravo-coop-runtime-v69.js';
 import { withAlienSurvivalRuntimeV70 } from './alien-survival-runtime-v70.js';
 import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay-support-v72.js';
+import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
+import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
 
 export * from './game-production-core.js';
 
@@ -38,14 +40,21 @@ export class GameEngine extends V70ProductionEngine {
   }
 
   captureResumeState() {
-    return { ...super.captureResumeState(), gameplaySupportV72: captureGameplaySupportV72(this) };
+    const state = super.captureResumeState();
+    for (const role of ['player', 'coop']) if (state[role]) state[role].tacticalReloadV77 = captureTacticalReloadV77(this[role]);
+    return { ...state, gameplaySupportV72: captureGameplaySupportV72(this) };
   }
 
   applyResumeState(rawState) {
     const result = super.applyResumeState(rawState);
     if (!result?.applied) return result;
     const supportRestoredV72 = restoreGameplaySupportV72(this, rawState?.gameplaySupportV72);
-    return { ...result, supportRestoredV72 };
+    const tacticalReloadRestoredV77 = {};
+    for (const role of ['player', 'coop']) {
+      tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(this[role], rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(this[role]));
+      if (this[role]?.reloading) this[role].actionClock = this[role].reloadClock;
+    }
+    return { ...result, supportRestoredV72, tacticalReloadRestoredV77 };
   }
 
   canPerformGameplayAction(actor = this.player) {
@@ -76,7 +85,14 @@ export class GameEngine extends V70ProductionEngine {
   }
 
   toggleVehicle(actor = this.player) {
-    return this.canPerformGameplayAction(actor) ? super.toggleVehicle(actor) : false;
+    const changed = this.canPerformGameplayAction(actor) ? super.toggleVehicle(actor) : false;
+    if (changed) cancelTacticalReloadV77(actor, 'vehicle');
+    return changed;
+  }
+
+  drawHud(ctx) {
+    super.drawHud(ctx);
+    drawTacticalReloadHudV77(this, ctx);
   }
 
   useEquipment(equipmentId, actor = this.player) {

@@ -133,7 +133,7 @@ test('V72 rifle resume preserves the real magazine instead of truncating it to a
   engine.player.ammo = 0;
   engine.player.ammoReserve = engine.player.magazineSize;
   assert.equal(engine.reload(engine.player), true);
-  engine.finishReload(engine.player);
+  engine.advancePlayerReloadV77(engine.player, engine.player.reloadClock);
   assert.equal(engine.player.ammo, engine.weaponRuntime.magazine);
 }));
 

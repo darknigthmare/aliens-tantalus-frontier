@@ -1,0 +1,712 @@
+{
+  "ok": true,
+  "url": "http://127.0.0.1:4176/",
+  "requestedScenarios": "landscape",
+  "keyboard": [],
+  "coop": [
+    {
+      "viewport": {
+        "name": "landscape",
+        "width": 844,
+        "height": 390,
+        "mobile": true
+      },
+      "inventory": {
+        "player": {
+          "ammo": 7,
+          "reserve": 201,
+          "magazine": 99
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "state": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 7,
+          "ammoReserve": 201,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "perfect",
+            "label": "Rechargement parfait",
+            "animation": "reload_perfect",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.600827586206896,
+            "progress": 0.8583251231527087,
+            "remaining": 0.1438000000000007,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.5651724137931037,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": {
+          "x": 112,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 7,
+          "ammoReserve": 61,
+          "weapon": "sidearm",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "failed",
+            "label": "Récupération du chargeur",
+            "animation": "reload_fail_recover",
+            "weaponKey": "sidearm",
+            "family": "sidearm",
+            "cursor": 0.7167272727272718,
+            "progress": 0.5255999999999993,
+            "remaining": 0.711600000000001,
+            "successWindow": [
+              0.36,
+              0.68
+            ],
+            "perfectWindow": [
+              0.48,
+              0.56
+            ],
+            "attempted": true,
+            "attemptCursor": 0.13700000000000065,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "playerClock": {
+          "elapsed": 0.8711999999999992,
+          "completeAt": 1.015,
+          "duration": 1.45,
+          "attemptAt": 0.8195000000000002
+        },
+        "coopClock": {
+          "elapsed": 0.788399999999999,
+          "completeAt": 1.5,
+          "duration": 1.1,
+          "attemptAt": 0.15070000000000072
+        },
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 44.308025150429316,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 44.308025150429316,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 680.6156897212269,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.8 S",
+            "x": 680.6156897212269,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 44.308025150429316,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.2 S",
+            "x": 44.308025150429316,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 680.6156897212269,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.7 S",
+            "x": 680.6156897212269,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 44.308025150429316,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.1 S",
+            "x": 44.308025150429316,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 680.6156897212269,
+            "y": 500.30604196245463,
+            "font": "bold 22.154px monospace"
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.7 S",
+            "x": 680.6156897212269,
+            "y": 555.6910734004913,
+            "font": "20.3078px monospace"
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload",
+            "coop": true,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": true,
+            "result": "failed"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "perfect"
+          }
+        ]
+      },
+      "geometry": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "canvas": {
+          "left": 75.3359375,
+          "top": 0.0078125,
+          "width": 693.328125,
+          "height": 389.984375
+        },
+        "approximateLabelPixels": 12,
+        "approximateHintPixels": 11,
+        "compact": true,
+        "stacked": false,
+        "panels": [
+          {
+            "index": 0,
+            "left": 87.3359375,
+            "top": 252.0048828125,
+            "right": 412,
+            "bottom": 308.0048828125,
+            "visible": true,
+            "hitCanvas": true,
+            "hitId": "game-canvas",
+            "samples": [
+              {
+                "x": 103.569140625,
+                "y": 257.6048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 395.766796875,
+                "y": 257.6048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 249.66796875,
+                "y": 280.0048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 103.569140625,
+                "y": 302.4048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 395.766796875,
+                "y": 302.4048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              }
+            ],
+            "visualOverlaps": []
+          },
+          {
+            "index": 1,
+            "left": 432,
+            "top": 252.0048828125,
+            "right": 756.6640625,
+            "bottom": 308.0048828125,
+            "visible": true,
+            "hitCanvas": true,
+            "hitId": "game-canvas",
+            "samples": [
+              {
+                "x": 448.233203125,
+                "y": 257.6048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 740.430859375,
+                "y": 257.6048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 594.33203125,
+                "y": 280.0048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 448.233203125,
+                "y": 302.4048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              },
+              {
+                "x": 740.430859375,
+                "y": 302.4048828125,
+                "hitCanvas": true,
+                "id": "game-canvas"
+              }
+            ],
+            "visualOverlaps": []
+          }
+        ],
+        "overlays": [
+          {
+            "id": "KeyA",
+            "left": 10,
+            "top": 328,
+            "right": 62,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "KeyD",
+            "left": 95.765625,
+            "top": 328,
+            "right": 147.765625,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "Space",
+            "left": 181.53125,
+            "top": 328,
+            "right": 233.53125,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "KeyF",
+            "left": 267.296875,
+            "top": 328,
+            "right": 319.296875,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-interact",
+            "left": 353.0625,
+            "top": 328,
+            "right": 405.0625,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-tracker",
+            "left": 438.828125,
+            "top": 328,
+            "right": 490.828125,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-vehicle",
+            "left": 524.59375,
+            "top": 328,
+            "right": 576.59375,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-reload",
+            "left": 610.359375,
+            "top": 328,
+            "right": 662.359375,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-medkit",
+            "left": 696.125,
+            "top": 328,
+            "right": 748.125,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-neuro-counter",
+            "left": 781.890625,
+            "top": 328,
+            "right": 833.890625,
+            "bottom": 380,
+            "visible": true
+          },
+          {
+            "id": "mission-log",
+            "left": 42,
+            "top": 218,
+            "right": 802,
+            "bottom": 246,
+            "visible": true
+          }
+        ]
+      },
+      "targetFraction": 0.51,
+      "input": "CDP touch contact for J1, keyboard T for J2"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "coop-reload-landscape.jpg",
+      "bytes": 39205
+    }
+  ],
+  "warnings": [],
+  "scope": "Isolated controlled mission. Actual CDP keyboard and touch events, real running simulation clocks. Gamepad check uses simulated standard objects; no physical controller claim. Player art identity and dedicated branch animation are not validated.",
+  "setup": {
+    "title": "ALIENS: TANTALUS FRONTIER v77",
+    "weaponId": "weapon-001-m41a-pulse-rifle",
+    "weaponName": "M41A Pulse Rifle",
+    "magazine": 99,
+    "reload": 1.45,
+    "fireRate": 7.7,
+    "presentation": {
+      "dedicatedBranchAnimations": false,
+      "sharedReloadSheet": "player.echo9-marine.combat",
+      "sharedReloadClip": "reload",
+      "identityFallbackSheet": "player.echo9-marine.locomotion",
+      "identityFallbackClip": "idle"
+    }
+  },
+  "touchProbe": {
+    "x": 636.359375,
+    "y": 359.64727783203125,
+    "width": 52,
+    "height": 52,
+    "hit": true,
+    "hitElement": {
+      "tag": "BUTTON",
+      "id": "mission-reload",
+      "className": ""
+    },
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "coarse": true
+    },
+    "ancestors": [
+      {
+        "tag": "BUTTON",
+        "id": "mission-reload",
+        "className": "",
+        "display": "block",
+        "visibility": "visible",
+        "position": "static",
+        "zIndex": "auto",
+        "overflow": "visible",
+        "box": {
+          "x": 610.359375,
+          "y": 333.64727783203125,
+          "width": 52,
+          "height": 52
+        }
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "mission-touch-controls runtime-touch",
+        "display": "grid",
+        "visibility": "visible",
+        "position": "fixed",
+        "zIndex": "32",
+        "overflow": "visible",
+        "box": {
+          "x": 10,
+          "y": 333.64727783203125,
+          "width": 824,
+          "height": 52
+        }
+      },
+      {
+        "tag": "SECTION",
+        "id": "",
+        "className": "view play-view active",
+        "display": "grid",
+        "visibility": "visible",
+        "position": "relative",
+        "zIndex": "auto",
+        "overflow": "visible",
+        "box": {
+          "x": 0,
+          "y": 5.64727783203125,
+          "width": 844,
+          "height": 390
+        }
+      }
+    ]
+  },
+  "lastLayout": {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "canvas": {
+      "left": 75.3359375,
+      "top": 0.0078125,
+      "width": 693.328125,
+      "height": 389.984375
+    },
+    "approximateLabelPixels": 12,
+    "approximateHintPixels": 11,
+    "compact": true,
+    "stacked": false,
+    "panels": [
+      {
+        "index": 0,
+        "left": 87.3359375,
+        "top": 252.0048828125,
+        "right": 412,
+        "bottom": 308.0048828125,
+        "visible": true,
+        "hitCanvas": true,
+        "hitId": "game-canvas",
+        "samples": [
+          {
+            "x": 103.569140625,
+            "y": 257.6048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 395.766796875,
+            "y": 257.6048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 249.66796875,
+            "y": 280.0048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 103.569140625,
+            "y": 302.4048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 395.766796875,
+            "y": 302.4048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          }
+        ],
+        "visualOverlaps": []
+      },
+      {
+        "index": 1,
+        "left": 432,
+        "top": 252.0048828125,
+        "right": 756.6640625,
+        "bottom": 308.0048828125,
+        "visible": true,
+        "hitCanvas": true,
+        "hitId": "game-canvas",
+        "samples": [
+          {
+            "x": 448.233203125,
+            "y": 257.6048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 740.430859375,
+            "y": 257.6048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 594.33203125,
+            "y": 280.0048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 448.233203125,
+            "y": 302.4048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          },
+          {
+            "x": 740.430859375,
+            "y": 302.4048828125,
+            "hitCanvas": true,
+            "id": "game-canvas"
+          }
+        ],
+        "visualOverlaps": []
+      }
+    ],
+    "overlays": [
+      {
+        "id": "KeyA",
+        "left": 10,
+        "top": 328,
+        "right": 62,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "KeyD",
+        "left": 95.765625,
+        "top": 328,
+        "right": 147.765625,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "Space",
+        "left": 181.53125,
+        "top": 328,
+        "right": 233.53125,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "KeyF",
+        "left": 267.296875,
+        "top": 328,
+        "right": 319.296875,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-interact",
+        "left": 353.0625,
+        "top": 328,
+        "right": 405.0625,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-tracker",
+        "left": 438.828125,
+        "top": 328,
+        "right": 490.828125,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-vehicle",
+        "left": 524.59375,
+        "top": 328,
+        "right": 576.59375,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-reload",
+        "left": 610.359375,
+        "top": 328,
+        "right": 662.359375,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-medkit",
+        "left": 696.125,
+        "top": 328,
+        "right": 748.125,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-neuro-counter",
+        "left": 781.890625,
+        "top": 328,
+        "right": 833.890625,
+        "bottom": 380,
+        "visible": true
+      },
+      {
+        "id": "mission-log",
+        "left": 42,
+        "top": 218,
+        "right": 802,
+        "bottom": 246,
+        "visible": true
+      }
+    ]
+  },
+  "gamepad": {
+    "simulated": true,
+    "physicalControllerTested": false,
+    "heldConnectionIgnored": true,
+    "bothStarted": true,
+    "repeatedPollDidNotAttempt": true
+  },
+  "errors": []
+}

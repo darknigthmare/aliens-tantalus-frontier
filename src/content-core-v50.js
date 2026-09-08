@@ -188,6 +188,11 @@ export const WEAPONS = Object.freeze(Array.from({ length: 146 }, (_, index) => {
     name, family: seed[1], source: seed[2], mark,
     damage, fireRate: 2 + ((index * 13) % 110) / 10,
     magazine: 1 + ((index * 17) % 99), reload: 0.8 + ((index * 7) % 28) / 10,
+    // The original modulo recipe gave the default pulse rifle a one-round magazine.
+    // Capacity follows the M41A reference; cadence/reload are project gameplay tuning,
+    // shared by its authored finish variants, never asserted as film measurements.
+    ...(seed[0] === 'M41A Pulse Rifle' ? { magazine: 99, fireRate: 7.7, reload: 1.45 } : {}),
+    statsPolicy: seed[0] === 'M41A Pulse Rifle' ? 'm41a-reviewed-v77' : 'legacy-generated-pending-review',
     penetration: clamp(10 + (index * 19) % 95, 0, 100),
     rarity: rarity(index), provenance: index < weaponSeeds.length ? 'licensed-reference' : 'gameplay-variant',
     tags: [seed[1], index % 3 === 0 ? 'acid-safe' : 'field', index % 5 === 0 ? 'heavy' : 'portable']

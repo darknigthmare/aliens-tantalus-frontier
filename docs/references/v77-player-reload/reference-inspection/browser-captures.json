@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+    "naturalWidth": 1024,
+    "naturalHeight": 1024,
+    "rect": {
+      "x": 128,
+      "y": 128,
+      "width": 1024,
+      "height": 1024
+    },
+    "path": "D:/CodexWork/aliens-tantalus-frontier/project/docs/references/v77-player-reload/reference-inspection/echo9-marine-locomotion-sheet-browser.jpg",
+    "quality": 75,
+    "bytes": 93277
+  },
+  {
+    "url": "https://aliens-tantalus-frontier.vercel.app/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png",
+    "naturalWidth": 1024,
+    "naturalHeight": 1024,
+    "rect": {
+      "x": 128,
+      "y": 128,
+      "width": 1024,
+      "height": 1024
+    },
+    "path": "D:/CodexWork/aliens-tantalus-frontier/project/docs/references/v77-player-reload/reference-inspection/echo9-marine-combat-sheet-browser.jpg",
+    "quality": 75,
+    "bytes": 85587
+  }
+]

@@ -379,12 +379,6 @@ export class GameEngine extends MissionEngine {
     return { ...profile, damage: this.weaponRuntime.damage, interval: 1 / this.weaponRuntime.fireRate, penetration: this.weaponRuntime.penetration };
   }
 
-  reload(player) {
-    const started = super.reload(player);
-    if (started && player.weaponMode === 'rifle') player.reloadClock = this.weaponRuntime.reload;
-    return started;
-  }
-
   interact(actor = this.player) {
     const rifleWasTaken = this.weaponPickup?.taken;
     const result = super.interact(actor);

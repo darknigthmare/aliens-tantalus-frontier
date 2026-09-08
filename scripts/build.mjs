@@ -3,8 +3,10 @@ import { join } from 'node:path';
 import { RELEASE, validateContent } from '../src/content.js';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { resolveSafeBuildOutput } from './build-output-guard.mjs';
+import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
 
 const root = process.cwd();
+await writeAudioManifestV77(root);
 const assetFilter = createBuildAssetFilter(root);
 const output = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
 const validation = validateContent();

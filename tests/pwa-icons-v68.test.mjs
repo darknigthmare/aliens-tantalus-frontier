@@ -76,18 +76,18 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
   assert.match(html, /<link rel="apple-touch-icon" sizes="192x192" href="\/assets\/openai\/pwa\/tantalus-frontier-icon-192-v68\.png">/u);
 });
 
-test('le cache V76 conserve les quatre exports V68 runtime mais exclut le master 1254', async () => {
+test('le cache V77 conserve les quatre exports V68 runtime mais exclut le master 1254', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v76-hub-enemy-shell-1['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v77-tactical-audio-shell-1['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }
   assert.equal(shell.includes(`/${SOURCE.path}`), false);
   assert.deepEqual(
     [...shell.filter((path) => path.startsWith('/assets/'))].sort(),
-    ICONS.map(({ src }) => src).sort(),
-    'seuls les quatre exports PWA doivent franchir le filtre des assets lourds'
+    ['/assets/audio/manifest.json', ...ICONS.map(({ src }) => src)].sort(),
+    'seuls les quatre exports PWA et le petit manifeste audio franchissent le filtre des assets lourds'
   );
 });
 

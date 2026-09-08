@@ -326,17 +326,22 @@ test('tuer le boss depuis l’habitation avant l’embuscade ne reverrouille pas
   assert.equal(engine.missionLevelVisualState.activeZoneId, 'ship-habitation');
   assert.equal(engine.missionLevelEvents.get('ship-bridge-ambush').triggered, false);
   const initialReserve = engine.player.ammoReserve;
+  const initialRounds = engine.player.ammo + initialReserve;
+  const initialShots = engine.player.shots;
 
   // Isoler la balistique du déplacement IA : projectiles et réserve réels,
   // sans retirer de santé au boss ni inventer des munitions pour le scénario.
   for (let attempt = 0; attempt < 100 && boss.alive; attempt += 1) {
     engine.player.fireClock = 0;
-    if (engine.player.reloading) engine.finishReload(engine.player);
+    if (engine.player.reloading) engine.advancePlayerReloadV77(engine.player, engine.player.reloadClock);
     engine.fire(engine.player);
     for (let frame = 0; frame < 80; frame += 1) engine.updateBullets(1 / 60);
   }
   assert.equal(boss.alive, false, 'les tirs atteignent et tuent le boss depuis la salle adjacente');
-  assert.ok(engine.player.ammoReserve < initialReserve && engine.player.ammoReserve >= 0);
+  assert.ok(engine.player.ammoReserve <= initialReserve && engine.player.ammoReserve >= 0);
+  assert.ok(engine.player.shots > initialShots);
+  assert.equal(initialRounds - engine.player.ammo - engine.player.ammoReserve, engine.player.shots - initialShots,
+    'un vrai tir dépense une cartouche : le M41A99 peut tuer sans devoir entamer la réserve');
   assert.equal(engine.mission.objectives.boss, true);
   assert.equal(engine.missionLevelEvents.get('ship-bridge-ambush').triggered, false);
 

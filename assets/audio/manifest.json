@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "tracks": {
+    "sfx": {
+      "shot": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "tracker": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "hit": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "ui": {
+        "sources": [],
+        "fallback": "synth"
+      },
+      "alarm": {
+        "sources": [],
+        "fallback": "synth"
+      }
+    },
+    "music": {
+      "menu": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "hub": {
+        "sources": [],
+        "fallback": "silence"
+      },
+      "mission": {
+        "sources": [],
+        "fallback": "silence"
+      }
+    }
+  }
+}

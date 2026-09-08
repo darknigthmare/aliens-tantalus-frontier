@@ -63,9 +63,9 @@
     }
   ],
   "summary": {
-    "pngFilesDiscovered": 661,
+    "pngFilesDiscovered": 663,
     "assetsAudited": 405,
-    "rawMastersExcluded": 229,
+    "rawMastersExcluded": 231,
     "unclassifiedNotAsserted": 27,
     "runtimeCoverNormalizedAssets": 3,
     "byRule": {

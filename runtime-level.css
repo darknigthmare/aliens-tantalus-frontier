@@ -108,6 +108,11 @@ html.mission-mode body {
   pointer-events: auto;
 }
 
+.mission-mode .game-toolbar .button-row {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
 .mission-mode #mission-runtime-v62 {
   width: min(100vw, calc(100vh * 16 / 9));
   position: absolute;
@@ -289,4 +294,40 @@ html.mission-mode body {
     min-width: 0;
     height: 48px;
   }
+}
+
+/* V77: world transforms must not trap touch controls below the mission log.
+   Controls are siblings of the canvas container; insertion still hides them. */
+.mission-mode .mission-log { pointer-events: none; }
+.mission-mode #mission-runtime-v62[hidden] ~ .mission-touch-controls { display: none; }
+
+@media (pointer: coarse), (max-width: 900px) {
+  .mission-mode .mission-touch-controls {
+    position: fixed;
+    z-index: 32;
+    left: max(10px, env(safe-area-inset-left));
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (orientation: landscape) and (pointer: coarse), (orientation: landscape) and (max-width: 900px) {
+  .mission-mode .mission-touch-controls {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(44px, 52px));
+    justify-content: space-between;
+    gap: 6px;
+  }
+  .mission-mode .mission-log {
+    bottom: max(144px, calc(env(safe-area-inset-bottom) + 136px));
+    height: 28px;
+    padding: 4px 10px;
+    overflow: hidden;
+    font-size: 11px;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 520px) {
+  .mission-mode .mission-touch-controls { grid-template-columns: repeat(5, minmax(44px, 1fr)); }
+  .mission-mode .mission-log { display: none; }
 }

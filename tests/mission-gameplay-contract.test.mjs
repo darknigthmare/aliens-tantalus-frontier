@@ -147,7 +147,7 @@ test('combat, resources, cover, tracker, gates, boss, archive and extraction cha
   engine.player.fireClock = 0;
   engine.player.ammo = 0;
   assert.equal(engine.reload(engine.player), true);
-  engine.finishReload(engine.player);
+  engine.advancePlayerReloadV77(engine.player, engine.player.reloadClock);
   assert.ok(engine.player.ammo > 0);
 
   const trackerEnergy = engine.tracker.energy;

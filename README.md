@@ -1,5 +1,13 @@
 # ALIENS: TANTALUS FRONTIER
 
+## Travail courant V77
+
+Reprise fondée sur les26conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict reste à0conversation intégralement terminée,15partielles et11manquantes : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
+
+V77 ajoute un vrai rechargement tactique avec seconde pression, quatre résultats, HUD J1/J2 et sauvegarde exacte, ainsi qu’un lecteur de sons/musiques optionnels réellement raccordé. Les fichiers audio définitifs sont absents (0/8) ; les nouvelles animations de rechargement ne sont pas produites et l’identité de l’ancienne plaque de combat reste à corriger. Les captures, tests, limites et publication sont consignés dans [validation V77](docs/VALIDATION_V77.md).
+
+Les sections V74/V71 ci-dessous sont historiques et ne remplacent pas cet audit plus strict.
+
 ## Travail courant V74
 
 Version 74.0.0 : Burster 016 et Korari 050 disposent de leurs atlas dédiés32 poses avec combat, dimensions, portée symétrique et reprise contrôlés. Le comparateur du bestiaire garde ses trois/quatre silhouettes sur un sol et une échelle communs, y compris sur mobile. Le recalage du sanglier 049 est corrigé, mais sa frange violette reste à traiter ; les deux nouvelles retouches OpenAI 054 restent refusées après revue.

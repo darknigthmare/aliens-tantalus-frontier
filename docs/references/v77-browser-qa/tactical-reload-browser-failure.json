@@ -1,0 +1,1433 @@
+{
+  "ok": false,
+  "url": "http://127.0.0.1:4176/",
+  "keyboard": [
+    {
+      "result": "normal",
+      "inventory": {
+        "player": {
+          "ammo": 0,
+          "reserve": 61,
+          "magazine": 1
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "attempted": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 0,
+          "ammoReserve": 61,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "normal",
+            "label": "Rechargement",
+            "animation": "reload_normal",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.20924999999999958,
+            "progress": 0.20924999999999958,
+            "remaining": 0.6326000000000004,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": false,
+            "attemptCursor": null,
+            "canAttempt": true,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.16739999999999966,
+          "completeAt": 0.8,
+          "duration": 0.8,
+          "attemptAt": null
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          }
+        ]
+      },
+      "completed": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 1,
+          "ammoReserve": 60,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "complete",
+            "result": "normal",
+            "label": "Rechargement",
+            "animation": "reload_normal",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 1,
+            "progress": 1,
+            "remaining": 0,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": false,
+            "attemptCursor": null,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.8,
+          "completeAt": 0.8,
+          "duration": 0.8,
+          "attemptAt": null
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-complete",
+            "coop": false,
+            "result": "normal",
+            "loaded": 1
+          }
+        ]
+      }
+    },
+    {
+      "result": "success",
+      "inventory": {
+        "player": {
+          "ammo": 0,
+          "reserve": 61,
+          "magazine": 1
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "attempted": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 0,
+          "ammoReserve": 61,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "success",
+            "label": "Rechargement réussi",
+            "animation": "reload_success",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.456875,
+            "progress": 0.5571646341463414,
+            "remaining": 0.29050000000000004,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.456875,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.3655,
+          "completeAt": 0.656,
+          "duration": 0.8,
+          "attemptAt": 0.3655
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "success"
+          }
+        ]
+      },
+      "completed": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 1,
+          "ammoReserve": 60,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "complete",
+            "result": "success",
+            "label": "Rechargement réussi",
+            "animation": "reload_success",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.82,
+            "progress": 1,
+            "remaining": 0,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.456875,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.656,
+          "completeAt": 0.656,
+          "duration": 0.8,
+          "attemptAt": 0.3655
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RÉCUPÉRATION · 0.1 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.1 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RECHARGEMENT RÉUSSI",
+            "x": 30,
+            "y": 567
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "success"
+          },
+          {
+            "type": "reload-complete",
+            "coop": false,
+            "result": "success",
+            "loaded": 1
+          }
+        ]
+      }
+    },
+    {
+      "result": "perfect",
+      "inventory": {
+        "player": {
+          "ammo": 0,
+          "reserve": 61,
+          "magazine": 1
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "attempted": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 0,
+          "ammoReserve": 61,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "perfect",
+            "label": "Rechargement parfait",
+            "animation": "reload_perfect",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.5610000000000014,
+            "progress": 0.7890295358649794,
+            "remaining": 0.11999999999999994,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.5610000000000014,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.44880000000000114,
+          "completeAt": 0.5688000000000011,
+          "duration": 0.8,
+          "attemptAt": 0.44880000000000114
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "perfect"
+          }
+        ]
+      },
+      "completed": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 1,
+          "ammoReserve": 60,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "complete",
+            "result": "perfect",
+            "label": "Rechargement parfait",
+            "animation": "reload_perfect",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.7110000000000013,
+            "progress": 1,
+            "remaining": 0,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.5610000000000014,
+            "canAttempt": false,
+            "bonusRemaining": 1,
+            "bonusMultiplier": 1.15,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.5688000000000011,
+          "completeAt": 0.5688000000000011,
+          "duration": 0.8,
+          "attemptAt": 0.44880000000000114
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT PARFAIT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "+15 % · 1 TIRS MAX.",
+            "x": 30,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "perfect"
+          },
+          {
+            "type": "reload-complete",
+            "coop": false,
+            "result": "perfect",
+            "loaded": 1
+          }
+        ]
+      }
+    },
+    {
+      "result": "failed",
+      "inventory": {
+        "player": {
+          "ammo": 0,
+          "reserve": 61,
+          "magazine": 1
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "attempted": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 0,
+          "ammoReserve": 61,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "failed",
+            "label": "Récupération du chargeur",
+            "animation": "reload_fail_recover",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.125,
+            "progress": 0.07692307692307693,
+            "remaining": 1.2,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.104375,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 0.1,
+          "completeAt": 1.3,
+          "duration": 0.8,
+          "attemptAt": 0.0835
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 1.2 S",
+            "x": 30,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "failed"
+          }
+        ]
+      },
+      "completed": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 1,
+          "ammoReserve": 60,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "complete",
+            "result": "failed",
+            "label": "Récupération du chargeur",
+            "animation": "reload_fail_recover",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 1,
+            "progress": 1,
+            "remaining": 0,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.104375,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": null,
+        "playerClock": {
+          "elapsed": 1.3,
+          "completeAt": 1.3,
+          "duration": 0.8,
+          "attemptAt": 0.0835
+        },
+        "coopClock": null,
+        "paint": [
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.1 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.1 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 0.0 S",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION DU CHARGEUR",
+            "x": 30,
+            "y": 567
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "failed"
+          },
+          {
+            "type": "reload-complete",
+            "coop": false,
+            "result": "failed",
+            "loaded": 1
+          }
+        ]
+      }
+    }
+  ],
+  "coop": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720,
+        "mobile": false
+      },
+      "inventory": {
+        "player": {
+          "ammo": 0,
+          "reserve": 61,
+          "magazine": 1
+        },
+        "coop": {
+          "ammo": 7,
+          "reserve": 61,
+          "magazine": 12
+        }
+      },
+      "state": {
+        "player": {
+          "x": 160,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 0,
+          "ammoReserve": 61,
+          "weapon": "rifle",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "perfect",
+            "label": "Rechargement parfait",
+            "animation": "reload_perfect",
+            "weaponKey": "weapon-001-m41a-pulse-rifle",
+            "family": "rifle",
+            "cursor": 0.565625,
+            "progress": 0.7903930131004367,
+            "remaining": 0.11999999999999994,
+            "successWindow": [
+              0.4,
+              0.7
+            ],
+            "perfectWindow": [
+              0.51,
+              0.58
+            ],
+            "attempted": true,
+            "attemptCursor": 0.565625,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "coop": {
+          "x": 112,
+          "y": 838,
+          "w": 42,
+          "h": 92,
+          "health": 100,
+          "armor": 50,
+          "ammo": 7,
+          "ammoReserve": 61,
+          "weapon": "sidearm",
+          "alive": true,
+          "downed": false,
+          "climbing": false,
+          "inCover": false,
+          "inVehicle": false,
+          "kills": 0,
+          "tacticalReloadV77": {
+            "visible": true,
+            "phase": "reloading",
+            "result": "failed",
+            "label": "Récupération du chargeur",
+            "animation": "reload_fail_recover",
+            "weaponKey": "sidearm",
+            "family": "sidearm",
+            "cursor": 0.4113636363636364,
+            "progress": 0.3016666666666667,
+            "remaining": 1.0474999999999999,
+            "successWindow": [
+              0.36,
+              0.68
+            ],
+            "perfectWindow": [
+              0.48,
+              0.56
+            ],
+            "attempted": true,
+            "attemptCursor": 0.10763636363636166,
+            "canAttempt": false,
+            "bonusRemaining": 0,
+            "bonusMultiplier": 1,
+            "cancelReason": null
+          }
+        },
+        "playerClock": {
+          "elapsed": 0.45250000000000007,
+          "completeAt": 0.5725,
+          "duration": 0.8,
+          "attemptAt": 0.45250000000000007
+        },
+        "coopClock": {
+          "elapsed": 0.45250000000000007,
+          "completeAt": 1.5,
+          "duration": 1.1,
+          "attemptAt": 0.11839999999999783
+        },
+        "paint": [
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 402,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 1.1 S",
+            "x": 402,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 402,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 1.1 S",
+            "x": 402,
+            "y": 597
+          },
+          {
+            "text": "RECHARGEMENT",
+            "x": 30,
+            "y": 567
+          },
+          {
+            "text": "R / X · SECONDE PRESSION",
+            "x": 30,
+            "y": 597
+          },
+          {
+            "text": "J2 · RÉCUPÉRATION DU CHARGEUR",
+            "x": 402,
+            "y": 567
+          },
+          {
+            "text": "RÉCUPÉRATION · 1.0 S",
+            "x": 402,
+            "y": 597
+          }
+        ],
+        "events": [
+          {
+            "type": "reload",
+            "coop": false,
+            "result": "normal"
+          },
+          {
+            "type": "reload",
+            "coop": true,
+            "result": "normal"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": true,
+            "result": "failed"
+          },
+          {
+            "type": "reload-attempt",
+            "coop": false,
+            "result": "perfect"
+          }
+        ]
+      },
+      "geometry": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "canvas": {
+          "left": 0,
+          "top": 0,
+          "width": 1280,
+          "height": 720
+        },
+        "approximateLabelPixels": 12,
+        "approximateHintPixels": 10,
+        "panels": [
+          {
+            "index": 0,
+            "left": 18,
+            "top": 548,
+            "right": 370,
+            "bottom": 604,
+            "visible": true,
+            "hitCanvas": true,
+            "hitId": "game-canvas"
+          },
+          {
+            "index": 1,
+            "left": 390,
+            "top": 548,
+            "right": 742,
+            "bottom": 604,
+            "visible": true,
+            "hitCanvas": true,
+            "hitId": "game-canvas"
+          }
+        ]
+      },
+      "input": "keyboard R and T"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-reload-normal.jpg",
+      "bytes": 95947
+    },
+    {
+      "name": "desktop-reload-success.jpg",
+      "bytes": 96704
+    },
+    {
+      "name": "desktop-reload-perfect.jpg",
+      "bytes": 96771
+    },
+    {
+      "name": "desktop-reload-failed.jpg",
+      "bytes": 97106
+    },
+    {
+      "name": "coop-reload-desktop.jpg",
+      "bytes": 97943
+    },
+    {
+      "name": "failure.jpg",
+      "bytes": 34235
+    }
+  ],
+  "warnings": [],
+  "scope": "Isolated controlled mission. Actual CDP keyboard and touch events, real running simulation clocks. Gamepad check uses simulated standard objects; no physical controller claim. Player art identity and dedicated branch animation are not validated.",
+  "setup": {
+    "title": "ALIENS: TANTALUS FRONTIER v77",
+    "weaponId": "weapon-001-m41a-pulse-rifle",
+    "weaponName": "M41A Pulse Rifle",
+    "presentation": {
+      "dedicatedBranchAnimations": false,
+      "sharedReloadSheet": "player.echo9-marine.combat",
+      "sharedReloadClip": "reload",
+      "identityFallbackSheet": "player.echo9-marine.locomotion",
+      "identityFallbackClip": "idle"
+    }
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: bouton tactile R inaccessible\n    at touchReload (file:///D:/CodexWork/aliens-tantalus-frontier/project/tests/browser-tactical-reload-v77.mjs:57:10)\n    at async file:///D:/CodexWork/aliens-tantalus-frontier/project/tests/browser-tactical-reload-v77.mjs:184:5",
+  "errors": [],
+  "lastState": {
+    "player": {
+      "x": 160,
+      "y": 838,
+      "w": 42,
+      "h": 92,
+      "health": 100,
+      "armor": 50,
+      "ammo": 0,
+      "ammoReserve": 61,
+      "weapon": "rifle",
+      "alive": true,
+      "downed": false,
+      "climbing": false,
+      "inCover": false,
+      "inVehicle": false,
+      "kills": 0,
+      "tacticalReloadV77": {
+        "visible": false,
+        "phase": "idle",
+        "animation": null,
+        "bonusRemaining": 0
+      }
+    },
+    "coop": {
+      "x": 112,
+      "y": 838,
+      "w": 42,
+      "h": 92,
+      "health": 100,
+      "armor": 50,
+      "ammo": 7,
+      "ammoReserve": 61,
+      "weapon": "sidearm",
+      "alive": true,
+      "downed": false,
+      "climbing": false,
+      "inCover": false,
+      "inVehicle": false,
+      "kills": 0,
+      "tacticalReloadV77": {
+        "visible": false,
+        "phase": "idle",
+        "animation": null,
+        "bonusRemaining": 0
+      }
+    },
+    "playerClock": null,
+    "coopClock": null,
+    "paint": [],
+    "events": []
+  }
+}

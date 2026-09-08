@@ -19,6 +19,8 @@ import { HUB_ANNEX_SYSTEM_EFFECTS_V71, applyHubAnnexBusinessV71 } from './hub-an
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { GameEngine } from './game-production-runtime.js';
+import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
+import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
 import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v71-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
@@ -278,8 +280,7 @@ function applyRuntimeSettings() {
   document.documentElement.dataset.subtitles = settings.subtitles ? 'on' : 'off';
   hubEngine.setReducedMotion(Boolean(settings.reducedMotion));
   engine.setCoop(Boolean(settings.coop));
-  audio.enabled = Number(settings.effects ?? 0.7) > 0;
-  if (audio.master) audio.master.gain.value = clamp(settings.effects ?? 0.7, 0, 1) * 0.26;
+  audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
 }
 
 function currentEditorProject(kind = null) {
@@ -401,6 +402,7 @@ function showView(name) {
   if (activeView === 'play' && name !== 'play') engine.stop();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
   activeView = name;
+  audio.setScene(resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   document.documentElement.classList.toggle('hub-mode', name === 'hub');
@@ -469,6 +471,7 @@ function showTitleScreen() {
   byId('return-title').textContent = 'MENU PRINCIPAL';
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   titleScreen.show();
+  audio.setScene('menu');
 }
 
 function renderClock() {
@@ -882,6 +885,7 @@ function renderProfiles() {
   byId('setting-aim-assist').value = saveSystem.data.settings.aimAssist || 'standard';
   byId('setting-screen-shake').value = saveSystem.data.settings.screenShake ?? 0.7;
   byId('setting-effects').value = saveSystem.data.settings.effects ?? 0.7;
+  byId('setting-music').value = saveSystem.data.settings.music ?? 0.45;
 }
 
 function renderMissionEquipment() {
@@ -1861,8 +1865,8 @@ function setupEditor() {
 }
 
 function bindHoldControl(button, target, code) {
-  const activate = (event) => { event.preventDefault(); audio.unlock(); target.keys.add(code); };
-  const release = (event) => { event.preventDefault(); target.keys.delete(code); };
+  const activate = (event) => { event.preventDefault(); audio.unlock(); target.setHeldGameplayKeyV77(code, true, 'touch-' + code); };
+  const release = (event) => { event.preventDefault(); target.setHeldGameplayKeyV77(code, false, 'touch-' + code); };
   button.addEventListener('pointerdown', activate);
   ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => button.addEventListener(name, release));
 }
@@ -1879,7 +1883,7 @@ function setupRuntimeControls() {
   byId('mission-interact').onclick = () => engine.interact(engine.player);
   byId('mission-tracker').onclick = () => engine.activateTracker(engine.player);
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
-  byId('mission-reload').onclick = () => engine.reload(engine.player);
+  bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
   byId('mission-equipment-controls').onclick = (event) => {
@@ -2057,7 +2061,8 @@ function bind() {
     'setting-coop': ['coop', (element) => element.checked],
     'setting-motion': ['reducedMotion', (element) => element.checked],
     'setting-subtitles': ['subtitles', (element) => element.checked],
-    'setting-effects': ['effects', (element) => Number(element.value)]
+    'setting-effects': ['effects', (element) => Number(element.value)],
+    'setting-music': ['music', (element) => Number(element.value)]
   };
   for (const [id, [key, read]] of Object.entries(settingBindings)) byId(id).onchange = (event) => { saveSystem.data.settings[key] = read(event.target); applyRuntimeSettings(); saveSystem.commit(); };
   byId('save-export').onclick = () => download(`aliens-tantalus-frontier-profile-${saveSystem.profile}.json`, saveSystem.export());
@@ -2066,6 +2071,7 @@ function bind() {
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
     hubDialogueUiV76.destroy({ restoreFocus: false });
+    audio.dispose();
     hubEngine.stop();
     engine.stop();
     if (standaloneContext) return;
@@ -2090,6 +2096,8 @@ async function boot() {
   applyRuntimeSettings();
   renderAll();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
+  void audio.prepare();
+  globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
   globalThis.__ATF_HUB__ = hubEngine;
   globalThis.__ATF_V51__ = {

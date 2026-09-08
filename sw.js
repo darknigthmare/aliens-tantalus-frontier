@@ -1,7 +1,9 @@
-const CACHE = 'atf-v76-hub-enemy-shell-1';
+const CACHE = 'atf-v77-tactical-audio-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/tactical-reload-v77.js', '/src/mission-input-v77.js', '/src/tactical-reload-hud-v77.js',
+  '/src/audio-assets-v77.js', '/assets/audio/manifest.json',
   '/assets/openai/hub/props/operations-table-side-v72.webp',
   '/src/catalog-scale-v72.js', '/src/gameplay-support-v72.js', '/src/hub-annex-art-layout-v72.js', '/src/mission-large-actor-placement-v72.js',
   '/', '/index.html', '/styles.css', '/styles-v50.css', '/sprite-gallery.css', '/hub-level.css', '/runtime-level.css', '/title-screen-v61.css', '/hub-stations-v61.css', '/catalog-v62.css', '/mission-insertion-v62.css', '/alien-survival-v70.css',
@@ -298,7 +300,7 @@ const CORE = [
 ];
 
 const SHELL = Object.freeze(CORE.filter((path) => (
-  (!path.startsWith('/assets/') || path.startsWith('/assets/openai/pwa/'))
+  (!path.startsWith('/assets/') || path.startsWith('/assets/openai/pwa/') || path === '/assets/audio/manifest.json')
   && !path.startsWith('/docs/')
 )));
 
@@ -308,6 +310,17 @@ async function precacheV65Shell() {
 }
 
 const isCacheableResponse = (response) => Boolean(response?.ok && response.type !== 'opaque');
+// Keep optional audio cache entries complete and decodable. HTML fallbacks and
+// partial media responses must never masquerade as a cached sound file.
+const isAudioResponseV77 = (response) => Boolean(isCacheableResponse(response) && response.status !== 206
+  && /^(audio\/(mpeg|mp3|wav|wave|x-wav|ogg|mp4|x-m4a|webm)|application\/ogg|video\/webm)$/.test(
+    String(response?.headers?.get?.('content-type') || '').split(';')[0].trim().toLowerCase()));
+const isAudioRequestV77 = (request) => {
+  try {
+    const url = new URL(request.url, self.location.origin);
+    return url.origin === self.location.origin && /^\/assets\/audio\/(sfx|music)\//.test(url.pathname);
+  } catch { return false; }
+};
 const isEnemyAtlasPathV65 = (value) => {
   try {
     const url = new URL(String(value), self.location.origin);
@@ -347,15 +360,17 @@ self.addEventListener('activate', (event) => event.waitUntil(
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  const audioRequest = isAudioRequestV77(event.request);
+  if (audioRequest && event.request.headers?.has?.('range')) return;
   event.respondWith(
     fetch(event.request).then((response) => {
-      if (isCacheableResponse(response)) {
+      if (isCacheableResponse(response) && (!audioRequest || isAudioResponseV77(response))) {
         const clone = response.clone();
-        caches.open(CACHE).then((cache) => cache.put(event.request, clone));
+        event.waitUntil?.(caches.open(CACHE).then((cache) => cache.put(event.request, clone)).catch(() => {}));
       }
       return response;
     }).catch(() => caches.match(event.request).then((cached) => {
-      if (cached) return cached;
+      if (cached && (!audioRequest || isAudioResponseV77(cached))) return cached;
       if (event.request.mode === 'navigate') return caches.match('/index.html');
       return Response.error();
     }))

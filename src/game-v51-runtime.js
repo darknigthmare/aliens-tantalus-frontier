@@ -27,6 +27,8 @@ import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { detonateBursterV74, isBursterCombatV74, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
+import { pressTacticalReloadV77, updateTacticalReloadV77, cancelTacticalReloadV77, consumeTacticalReloadBonusV77, getTacticalReloadHudV77 } from './tactical-reload-v77.js';
+import { MissionGamepadInputV77 } from './mission-input-v77.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -286,6 +288,8 @@ export class GameEngine {
     this.audio = audio;
     this.onEvent = onEvent;
     this.keys = new Set();
+    this.heldGameplayKeysV77 = new Map();
+    this.gamepadInputV77 = new MissionGamepadInputV77(this);
     this.running = false;
     this.paused = false;
     this.enemyAtlasLoadingPausedV65 = false;
@@ -319,7 +323,7 @@ export class GameEngine {
       }
       if (this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active') return;
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) event.preventDefault();
-      this.keys.add(event.code);
+      this.setHeldGameplayKeyV77(event.code, true, 'keyboard');
       if (event.repeat) return;
       if (event.code === 'KeyQ') this.activateTracker(this.player);
       if (event.code === 'KeyV') this.toggleVehicle(this.player);
@@ -332,7 +336,7 @@ export class GameEngine {
       if (event.code === 'KeyT') this.reload(this.coop);
       if (event.code === 'KeyG') this.useMedkit(this.coop);
     });
-    globalThis.addEventListener('keyup', (event) => this.keys.delete(event.code));
+    globalThis.addEventListener('keyup', (event) => this.setHeldGameplayKeyV77(event.code, false, 'keyboard'));
     globalThis.addEventListener('blur', () => this.suspendForFocusLoss());
     globalThis.document?.addEventListener?.('visibilitychange', () => {
       if (globalThis.document.hidden) this.suspendForFocusLoss();
@@ -348,11 +352,22 @@ export class GameEngine {
 
   clearGameplayInput() {
     this.keys?.clear?.();
+    this.heldGameplayKeysV77?.clear();
+    this.gamepadInputV77?.reset();
     for (const actor of [this.player, this.coop]) {
       if (!actor) continue;
       actor.jumpBuffer = 0;
       actor.vx = 0;
     }
+  }
+
+  setHeldGameplayKeyV77(code, active, source = 'keyboard') {
+    if (!this.heldGameplayKeysV77) this.heldGameplayKeysV77 = new Map();
+    const sources = this.heldGameplayKeysV77.get(code) || new Set();
+    if (active) sources.add(source);
+    else sources.delete(source);
+    if (sources.size) { this.heldGameplayKeysV77.set(code, sources); this.keys.add(code); }
+    else if (this.heldGameplayKeysV77.has(code) || source === 'keyboard') { this.heldGameplayKeysV77.delete(code); this.keys.delete(code); }
   }
 
   suspendForFocusLoss() {
@@ -647,12 +662,16 @@ export class GameEngine {
     this.clearGameplayInput();
     if (!this.paused) this.canvas?.focus?.({ preventScroll: true });
   }
-  setCoop(enabled) { this.coopEnabled = Boolean(enabled); }
+  setCoop(enabled) {
+    if (!enabled && this.coop) cancelTacticalReloadV77(this.coop, 'coop-disabled');
+    this.coopEnabled = Boolean(enabled);
+  }
 
   loop(time, generation = this.loopGeneration) {
     if (!this.running || generation !== this.loopGeneration) return;
     const delta = Math.min(0.034, (time - this.last) / 1000 || 0);
     this.last = time;
+    this.gamepadInputV77?.poll();
     this.refreshEnemyAtlasAvailabilityV65();
     if (!this.paused && !this.enemyAtlasLoadingPausedV65) this.update(delta);
     this.draw();
@@ -725,10 +744,7 @@ export class GameEngine {
     player.toolUseClock = Math.max(0, Number(player.toolUseClock) - delta || 0);
     player.interactionClock = Math.max(0, Number(player.interactionClock) - delta || 0);
     player.grappledClock = Math.max(0, Number(player.grappledClock) - delta || 0);
-    if (player.reloading) {
-      player.reloadClock -= delta;
-      if (player.reloadClock <= 0) this.finishReload(player);
-    }
+    if (player.tacticalReload) this.advancePlayerReloadV77(player, delta);
     if (!player.alive) { this.updateDowned(player, delta); return; }
     if (player.inVehicle) {
       this.updateVehicleDriver(player, delta, controls);
@@ -1246,12 +1262,13 @@ export class GameEngine {
     player.shots += 1;
     if (profile.mode === 'apc-turret') this.vehicle.turretAmmo -= 1;
     else player.ammo -= 1;
+    const reloadBonus = profile.mode === 'apc-turret' ? 1 : consumeTacticalReloadBonusV77(player, this.reloadWeaponV77(player));
     const origin = profile.mode === 'apc-turret'
       ? { x: this.vehicle.x + this.vehicle.w / 2 + player.facing * 62, y: this.vehicle.y + 28 }
       : { x: player.x + player.w / 2 + player.facing * 24, y: player.y + (player.crouching ? 51 : 37) };
     this.bullets.push({
       ...origin, w: profile.mode === 'apc-turret' ? 26 : 18, h: profile.mode === 'apc-turret' ? 7 : 5,
-      vx: player.facing * (profile.mode === 'apc-turret' ? 1100 : 890), damage: profile.damage,
+      vx: player.facing * (profile.mode === 'apc-turret' ? 1100 : 890), damage: profile.damage * reloadBonus, tacticalReloadBonusV77: reloadBonus,
       owner: player, kind: profile.mode, life: 1.25, hit: false
     });
     for (const enemy of this.enemies) if (enemy.alive && Math.abs(enemy.x - origin.x) < 760) enemy.alert = true;
@@ -1261,21 +1278,32 @@ export class GameEngine {
   }
 
   reload(player) {
-    if (!player?.alive || player.inVehicle || player.reloading || player.ammo >= player.magazineSize || player.ammoReserve <= 0) return false;
-    player.reloading = true;
-    player.reloadClock = player.weaponMode === 'rifle' ? 1.45 : 1.1;
+    if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active' || player === this.coop && !this.coopEnabled) return false;
+    const alreadyReloading = player?.tacticalReload?.phase === 'reloading';
+    if (!pressTacticalReloadV77(player, this.reloadWeaponV77(player))) return false;
     player.actionClock = player.reloadClock;
-    this.onEvent({ type: 'reload', coop: player.coop });
+    this.audio?.ui?.();
+    this.onEvent({ type: alreadyReloading ? 'reload-attempt' : 'reload', coop: player.coop, result: player.tacticalReload.result });
     return true;
   }
 
+  reloadWeaponV77(player) {
+    return player?.weaponMode === 'rifle' ? this.weaponRuntime || this.weapon || 'rifle' : player?.weaponMode || 'sidearm';
+  }
+
+  advancePlayerReloadV77(player, delta) {
+    if (!player || !this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.mission?.state !== 'active') return false;
+    const event = updateTacticalReloadV77(player, delta, { weapon: this.reloadWeaponV77(player) });
+    if (player.reloading) player.actionClock = player.reloadClock;
+    if (!event) return false;
+    player.actionClock = 0;
+    this.onEvent({ type: 'reload-' + event.type, coop: player.coop, result: event.result, loaded: event.loaded, reason: event.reason });
+    return event.type === 'complete';
+  }
+
   finishReload(player) {
-    const needed = player.magazineSize - player.ammo;
-    const loaded = Math.min(needed, player.ammoReserve);
-    player.ammo += loaded;
-    player.ammoReserve -= loaded;
-    player.reloadClock = 0;
-    player.reloading = false;
+    // Compatibility entry point cannot bypass the simulation clock or duplicate a transfer.
+    return this.advancePlayerReloadV77(player, 0);
   }
 
   useMedkit(player) {
@@ -1358,6 +1386,7 @@ export class GameEngine {
   }
 
   downPlayer(player, source) {
+    cancelTacticalReloadV77(player, 'incapacitated');
     player.health = 0;
     player.alive = false;
     player.downed = true;
@@ -1435,6 +1464,7 @@ export class GameEngine {
     const supply = this.supplies.find((candidate) => !candidate.used && distanceBetween(actor, candidate) < 105);
     if (supply) return this.collectSupply(actor, supply);
     if (!this.weaponPickup.taken && distanceBetween(actor, this.weaponPickup) < 118) {
+      cancelTacticalReloadV77(actor, 'weapon-changed');
       this.weaponPickup.taken = true;
       actor.weaponMode = 'rifle';
       actor.magazineSize = MAGAZINE_SIZE;
@@ -1561,6 +1591,7 @@ export class GameEngine {
       else this.vehicle.passengers.push(actor);
     }
     this.vehicle.occupied = Boolean(this.vehicle.driver);
+    cancelTacticalReloadV77(actor, 'vehicle');
     this.audio?.ui();
     this.onEvent({ type: 'vehicle', occupied: this.vehicle.occupied, coop: actor.coop });
     return true;
@@ -1585,6 +1616,7 @@ export class GameEngine {
 
   failMission(reason) {
     if (this.mission.state !== 'active') return;
+    for (const actor of [this.player, this.coop]) cancelTacticalReloadV77(actor, 'mission-ended');
     this.mission.state = 'failed';
     this.mission.failureReason = reason;
     this.hostileProjectiles = [];
@@ -1618,6 +1650,7 @@ export class GameEngine {
 
   completeMission(actor) {
     if (this.mission.state !== 'active' || this.missingExtractionRequirement()) return false;
+    for (const marine of [this.player, this.coop]) cancelTacticalReloadV77(marine, 'mission-ended');
     this.objective.complete = true;
     this.mission.objectives.extract = true;
     this.mission.state = 'complete';
@@ -2317,7 +2350,8 @@ export class GameEngine {
     const actorSnapshot = (actor) => actor ? {
       x: Math.round(actor.x), y: Math.round(actor.y), w: actor.w, h: actor.h, health: Math.round(actor.health), armor: Math.round(actor.armor),
       ammo: actor.ammo, ammoReserve: actor.ammoReserve, weapon: actor.weaponMode, alive: actor.alive, downed: actor.downed,
-      climbing: actor.climbing, inCover: Boolean(actor.inCover), inVehicle: actor.inVehicle, kills: actor.kills
+      climbing: actor.climbing, inCover: Boolean(actor.inCover), inVehicle: actor.inVehicle, kills: actor.kills,
+      tacticalReloadV77: getTacticalReloadHudV77(actor)
     } : null;
     return {
       running: this.running,
