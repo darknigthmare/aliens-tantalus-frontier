@@ -26,6 +26,13 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
     action: 'pounce-bite', stopRange: 42, meleeRange: 78,
     lungeDistance: 92, speedMultiplier: 1.38, cooldown: 1.3
   }),
+  'enemy-015-prowler': contract('enemy-015-prowler', {
+    action: 'prowler-ambush-pounce', distanceMetric: 'centers',
+    vehicleSurfaceReferenceHalfWidth: 21,
+    stopRange: 72, meleeRange: 76, lungeDistance: 100,
+    windup: 2 / 12, impact: 4 / 12, duration: 8 / 12,
+    speedMultiplier: 1.28, cooldown: 1.4, verticalRange: 96
+  }),
   'enemy-020-k-series-yellow-xenomorph': contract('enemy-020-k-series-yellow-xenomorph', {
     action: 'k-series-claw-lunge', stopRange: 62, meleeRange: 104,
     // Source attack pose5 is maximum extension; damage occurs once on that pose.
@@ -64,7 +71,7 @@ const directionTo = (enemy, target) => Math.sign((target.x + target.w / 2) - (en
 const horizontalDistance = (enemy, target, entry, vehicleTarget = false) => {
   if (entry.distanceMetric !== 'centers') return target.x - enemy.x;
   const origin = enemy.x + enemy.w / 2;
-  if (vehicleTarget && (entry === BURSTER_COMBAT_V74 || entry === ENEMY_BATCH_COMBAT_CONTRACTS_V66['enemy-050-korari-stalker'])) {
+  if (vehicleTarget && (entry === BURSTER_COMBAT_V74 || Number.isFinite(entry.vehicleSurfaceReferenceHalfWidth))) {
     // Large hulls must not require penetration to reach their centre. Burster
     // uses the hull surface directly. Korari's marine-calibrated centre range
     // adds back the reference half-width21: stop98=>surface77, hit104=>83.

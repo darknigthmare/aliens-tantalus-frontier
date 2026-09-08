@@ -1,0 +1,3787 @@
+{
+  "schema": 1,
+  "candidateOnly": true,
+  "accepted": false,
+  "atlasSha256": "9e6d9d40a86979a149c3067be71f311f66d6da3014037d50d3f53e6e74828da5",
+  "sourceSha256": "6488486842aa69e119ae8891f8ab5f155fea9ae9311b054620d9cebd3329b75b",
+  "packScale": 0.32239016,
+  "sourceScaleByClip": {
+    "idle": 1,
+    "move": 1.062929,
+    "attack": 1.484066,
+    "death": 1.822337
+  },
+  "placements": [
+    {
+      "clip": "idle",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        55,
+        86,
+        405,
+        397
+      ],
+      "sourceGlobalBounds": [
+        55,
+        86,
+        405,
+        397
+      ],
+      "sourceSize": [
+        350,
+        311
+      ],
+      "foregroundPixels": 31436,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e71b5a6de20a7fc60429404b3e4c75b9b2d1b74458b71673690677168b5a598e",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          58,
+          89,
+          402,
+          394
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        213,
+        397
+      ],
+      "sourceLandmark": [
+        213,
+        256
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (213,256); grounded support floor y=397 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        155.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.01453488372093,
+        239.9639344262295
+      ],
+      "index": 0,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        78,
+        141,
+        189,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        32,
+        79,
+        391,
+        396
+      ],
+      "sourceGlobalBounds": [
+        476,
+        79,
+        835,
+        396
+      ],
+      "sourceSize": [
+        359,
+        317
+      ],
+      "foregroundPixels": 32285,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "edc0f825d02c853c3ad6cb4dc4583fd280ee211ffe01d14f1d42a5b243202b74",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          35,
+          82,
+          388,
+          393
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        396
+      ],
+      "sourceLandmark": [
+        205,
+        253
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (205,253); grounded support floor y=396 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        170.0,
+        314.0
+      ],
+      "renderedAnchor": [
+        127.90084985835693,
+        239.96463022508038
+      ],
+      "index": 1,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        73,
+        139,
+        187,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        29,
+        79,
+        389,
+        396
+      ],
+      "sourceGlobalBounds": [
+        916,
+        79,
+        1276,
+        396
+      ],
+      "sourceSize": [
+        360,
+        317
+      ],
+      "foregroundPixels": 32434,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c0894c86c9ab538738ca8ab33a6f9670c3eb4afa03bf98baf660ee257f0e2801",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          82,
+          386,
+          393
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        396
+      ],
+      "sourceLandmark": [
+        205,
+        253
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (205,253); grounded support floor y=396 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        314.0
+      ],
+      "renderedAnchor": [
+        127.71186440677965,
+        239.96463022508038
+      ],
+      "index": 2,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        72,
+        139,
+        186,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        10,
+        81,
+        383,
+        397
+      ],
+      "sourceGlobalBounds": [
+        1340,
+        81,
+        1713,
+        397
+      ],
+      "sourceSize": [
+        373,
+        316
+      ],
+      "foregroundPixels": 32514,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9a34c7a116a3e8f492727eb909f5d245c059dc5a1c6a82b15dd3956247021ec3",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          13,
+          84,
+          380,
+          394
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        191,
+        397
+      ],
+      "sourceLandmark": [
+        191,
+        253
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (191,253); grounded support floor y=397 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        178.0,
+        313.0
+      ],
+      "renderedAnchor": [
+        128.2316076294278,
+        239.96774193548387
+      ],
+      "index": 3,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        71,
+        139,
+        189,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        38,
+        71,
+        402,
+        385
+      ],
+      "sourceGlobalBounds": [
+        38,
+        515,
+        402,
+        829
+      ],
+      "sourceSize": [
+        364,
+        314
+      ],
+      "foregroundPixels": 32068,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1d16a4d61e9fbbbd37ccff57d3a13f565c8b6c5d3148f1e41f671d67933329a1",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          41,
+          74,
+          399,
+          382
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        385
+      ],
+      "sourceLandmark": [
+        210,
+        244
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (210,244); grounded support floor y=385 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        169.0,
+        311.0
+      ],
+      "renderedAnchor": [
+        128.28770949720672,
+        239.96428571428572
+      ],
+      "index": 4,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        74,
+        140,
+        189,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        28,
+        74,
+        391,
+        385
+      ],
+      "sourceGlobalBounds": [
+        472,
+        518,
+        835,
+        829
+      ],
+      "sourceSize": [
+        363,
+        311
+      ],
+      "foregroundPixels": 31805,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4955e45d22871c85e3a5496b060b1319cec760308ac01ae94631e617cfb6561e",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          77,
+          388,
+          382
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        203,
+        385
+      ],
+      "sourceLandmark": [
+        203,
+        246
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (203,246); grounded support floor y=385 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        172.0,
+        308.0
+      ],
+      "renderedAnchor": [
+        128.40616246498598,
+        239.9639344262295
+      ],
+      "index": 5,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        73,
+        141,
+        188,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        29,
+        78,
+        389,
+        385
+      ],
+      "sourceGlobalBounds": [
+        916,
+        522,
+        1276,
+        829
+      ],
+      "sourceSize": [
+        360,
+        307
+      ],
+      "foregroundPixels": 31668,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d3a939ef7141a2cc9bfe4db0f39f49d926f33ff8987823802d99308c7df4b833",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          81,
+          386,
+          382
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        385
+      ],
+      "sourceLandmark": [
+        205,
+        249
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (205,249); grounded support floor y=385 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        173.0,
+        304.0
+      ],
+      "renderedAnchor": [
+        127.71186440677965,
+        239.96677740863788
+      ],
+      "index": 6,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        72,
+        142,
+        186,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "idle",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        19,
+        77,
+        381,
+        384
+      ],
+      "sourceGlobalBounds": [
+        1349,
+        521,
+        1711,
+        828
+      ],
+      "sourceSize": [
+        362,
+        307
+      ],
+      "foregroundPixels": 31677,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "89f26e841924134bc720a4884046542ed75b3388b54f9e5b6e24f1e4fedc1e25",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          22,
+          80,
+          378,
+          381
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        191,
+        384
+      ],
+      "sourceLandmark": [
+        191,
+        245
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (191,245); grounded support floor y=384 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        169.0,
+        304.0
+      ],
+      "renderedAnchor": [
+        127.59269662921349,
+        239.96677740863788
+      ],
+      "index": 7,
+      "scale": 0.32239016,
+      "sourceScale": 1,
+      "appliedScale": 0.32239016,
+      "renderedBounds": [
+        73,
+        142,
+        188,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        43,
+        107,
+        396,
+        377
+      ],
+      "sourceGlobalBounds": [
+        43,
+        107,
+        396,
+        377
+      ],
+      "sourceSize": [
+        353,
+        270
+      ],
+      "foregroundPixels": 26712,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a93bc0f2ece88ec4167d6f9033dd3224eebd7428bff79ff5f1e0f8ecc4854b42",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          46,
+          110,
+          393,
+          374
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        186,
+        377
+      ],
+      "sourceLandmark": [
+        186,
+        269
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (186,269); grounded support floor y=377 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        140.0,
+        267.0
+      ],
+      "renderedAnchor": [
+        128.01152737752162,
+        240.02272727272725
+      ],
+      "index": 8,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        80,
+        149,
+        199,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        30,
+        112,
+        406,
+        375
+      ],
+      "sourceGlobalBounds": [
+        474,
+        112,
+        850,
+        375
+      ],
+      "sourceSize": [
+        376,
+        263
+      ],
+      "foregroundPixels": 25949,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "0d162d1f1a27f641487f5d4871a8aaae66416cc849fabe47868d236ecc5824f7",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          33,
+          115,
+          403,
+          372
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        173,
+        375
+      ],
+      "sourceLandmark": [
+        173,
+        265
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (173,265); grounded support floor y=375 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        140.0,
+        260.0
+      ],
+      "renderedAnchor": [
+        128.05405405405406,
+        240.0272373540856
+      ],
+      "index": 9,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        80,
+        151,
+        207,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        -3,
+        123,
+        418,
+        378
+      ],
+      "sourceGlobalBounds": [
+        884,
+        123,
+        1305,
+        378
+      ],
+      "sourceSize": [
+        421,
+        255
+      ],
+      "foregroundPixels": 26844,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a4b5a43a55b23251edc5585db3d7b3121564dc5450062854cbddb58e28f23a69",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          0,
+          126,
+          415,
+          375
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        176,
+        378
+      ],
+      "sourceLandmark": [
+        176,
+        294
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (176,294); grounded support floor y=378 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        176.0,
+        252.0
+      ],
+      "renderedAnchor": [
+        128.22168674698796,
+        240.02409638554218
+      ],
+      "index": 10,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        68,
+        154,
+        210,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        -5,
+        108,
+        383,
+        374
+      ],
+      "sourceGlobalBounds": [
+        1325,
+        108,
+        1713,
+        374
+      ],
+      "sourceSize": [
+        388,
+        266
+      ],
+      "foregroundPixels": 25428,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "62be966104369259fe099ad30c67d12b5e0ee770de79b08fb31f1e91e2af96ad",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 3,
+          "fromCells": [
+            2
+          ],
+          "pixels": 19,
+          "componentPixels": 25375,
+          "ownerShare": 0.999251,
+          "sourceBoundsGlobal": [
+            1328,
+            111,
+            1706,
+            371
+          ],
+          "rgbaSha256": "27d1e63511a88bec796690d892c36d1a3439560a825b403bcc0b8d6f519afc9c",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -2,
+          111,
+          380,
+          371
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        158,
+        374
+      ],
+      "sourceLandmark": [
+        158,
+        281
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (158,281); grounded support floor y=374 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        160.0,
+        263.0
+      ],
+      "renderedAnchor": [
+        127.86910994764398,
+        240.02692307692308
+      ],
+      "index": 11,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        73,
+        150,
+        204,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        37,
+        51,
+        428,
+        331
+      ],
+      "sourceGlobalBounds": [
+        37,
+        495,
+        428,
+        775
+      ],
+      "sourceSize": [
+        391,
+        280
+      ],
+      "foregroundPixels": 24870,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "d442bb541c574a292a480657ae194d432eb4947a6feb8f923d2ea33653a9e43e",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          40,
+          54,
+          425,
+          328
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        198,
+        331
+      ],
+      "sourceLandmark": [
+        198,
+        237
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (198,237); grounded support floor y=331 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        158.0,
+        277.0
+      ],
+      "renderedAnchor": [
+        128.17142857142858,
+        240.02919708029196
+      ],
+      "index": 12,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        74,
+        145,
+        206,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        21,
+        75,
+        395,
+        331
+      ],
+      "sourceGlobalBounds": [
+        465,
+        519,
+        839,
+        775
+      ],
+      "sourceSize": [
+        374,
+        256
+      ],
+      "foregroundPixels": 26542,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "cfd166c82e11b24e25a313e05878e9775712d0018eb41ca8fce6ba803ac61136",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          24,
+          78,
+          392,
+          328
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        181,
+        331
+      ],
+      "sourceLandmark": [
+        181,
+        237
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (181,237); grounded support floor y=331 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        157.0,
+        253.0
+      ],
+      "renderedAnchor": [
+        127.75543478260869,
+        240.03199999999998
+      ],
+      "index": 13,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        74,
+        153,
+        200,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        -7,
+        82,
+        414,
+        337
+      ],
+      "sourceGlobalBounds": [
+        880,
+        526,
+        1301,
+        781
+      ],
+      "sourceSize": [
+        421,
+        255
+      ],
+      "foregroundPixels": 27101,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "9a4ec66a3aa798c714c2ab097689f592a5206d93522794a62c2954b40c2a7151",
+      "sourceOwnershipTransfers": [
+        {
+          "ownerCell": 6,
+          "fromCells": [
+            5
+          ],
+          "pixels": 63,
+          "componentPixels": 27057,
+          "ownerShare": 0.997672,
+          "sourceBoundsGlobal": [
+            883,
+            529,
+            1292,
+            772
+          ],
+          "rgbaSha256": "5210aee172be47987df5e1bb4eed42a7587461bdf5179ef70069f038df13058c",
+          "pixelValuesPreserved": true,
+          "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
+        }
+      ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -4,
+          85,
+          411,
+          334
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        190,
+        337
+      ],
+      "sourceLandmark": [
+        190,
+        254
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (190,254); grounded support floor y=337 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        194.0,
+        252.0
+      ],
+      "renderedAnchor": [
+        128.38072289156628,
+        240.02409638554218
+      ],
+      "index": 14,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        62,
+        154,
+        204,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "move",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        -2,
+        66,
+        384,
+        331
+      ],
+      "sourceGlobalBounds": [
+        1328,
+        510,
+        1714,
+        775
+      ],
+      "sourceSize": [
+        386,
+        265
+      ],
+      "foregroundPixels": 26133,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "b878a4cf4ddfb75af6829d1dda50067e41f406d671e6a71850dbe09f1ec31811",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          1,
+          69,
+          381,
+          328
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        154,
+        331
+      ],
+      "sourceLandmark": [
+        154,
+        231
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (154,231); grounded support floor y=331 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        153.0,
+        262.0
+      ],
+      "renderedAnchor": [
+        128.3421052631579,
+        240.03088803088804
+      ],
+      "index": 15,
+      "scale": 0.32239016,
+      "sourceScale": 1.062929,
+      "appliedScale": 0.342677851,
+      "renderedBounds": [
+        76,
+        150,
+        206,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        69,
+        153,
+        400,
+        366
+      ],
+      "sourceGlobalBounds": [
+        69,
+        153,
+        400,
+        366
+      ],
+      "sourceSize": [
+        331,
+        213
+      ],
+      "foregroundPixels": 16351,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "c4f82d90a5e6c2f75de5142c8795df8cf2afcdb7c6cf15c76bab34b434222c15",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          72,
+          156,
+          397,
+          363
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        190,
+        366
+      ],
+      "sourceLandmark": [
+        190,
+        305
+      ],
+      "sourceAnchorEvidence": "New R1 pose1: proximal hind-leg pelvis joint (190,305) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        118.0,
+        210.0
+      ],
+      "renderedAnchor": [
+        128.27692307692308,
+        240.43478260869566
+      ],
+      "index": 16,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        72,
+        140,
+        227,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        54,
+        141,
+        325,
+        364
+      ],
+      "sourceGlobalBounds": [
+        498,
+        141,
+        769,
+        364
+      ],
+      "sourceSize": [
+        271,
+        223
+      ],
+      "foregroundPixels": 14349,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "feed571b76a3a3c1734d684a15ec9a8b609fb5f4a7cd0fbe02bb0b4e21242d2f",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          57,
+          144,
+          322,
+          361
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        199,
+        366
+      ],
+      "sourceLandmark": [
+        199,
+        300
+      ],
+      "sourceAnchorEvidence": "New R1 pose2: proximal hind-leg pelvis joint (199,300) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        142.0,
+        222.0
+      ],
+      "renderedAnchor": [
+        128.05283018867925,
+        240.3963133640553
+      ],
+      "index": 17,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        60,
+        134,
+        187,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        40,
+        107,
+        392,
+        360
+      ],
+      "sourceGlobalBounds": [
+        927,
+        107,
+        1279,
+        360
+      ],
+      "sourceSize": [
+        352,
+        253
+      ],
+      "foregroundPixels": 18728,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "e34cbfb8bc92131a102f88f5a08e5b41e86bfce34b33f745f4d14acf01b1ebe6",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          43,
+          110,
+          389,
+          357
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        176,
+        366
+      ],
+      "sourceLandmark": [
+        176,
+        263
+      ],
+      "sourceAnchorEvidence": "New R1 pose3: proximal hind-leg pelvis joint (176,263) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        133.0,
+        256.0
+      ],
+      "renderedAnchor": [
+        127.8092485549133,
+        240.29959514170042
+      ],
+      "index": 18,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        64,
+        118,
+        230,
+        236
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        53,
+        78,
+        384,
+        313
+      ],
+      "sourceGlobalBounds": [
+        1383,
+        78,
+        1714,
+        313
+      ],
+      "sourceSize": [
+        331,
+        235
+      ],
+      "foregroundPixels": 16647,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "003344cceb493aa602a4e3619127890e1b559dc148c9758b94448df0cad4ec31",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          56,
+          81,
+          381,
+          310
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        168,
+        366
+      ],
+      "sourceLandmark": [
+        168,
+        231
+      ],
+      "sourceAnchorEvidence": "New R1 pose4: proximal hind-leg pelvis joint (168,231) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        112.0,
+        285.0
+      ],
+      "renderedAnchor": [
+        128.41538461538462,
+        239.8995633187773
+      ],
+      "index": 19,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        75,
+        103,
+        230,
+        213
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        55,
+        37,
+        396,
+        255
+      ],
+      "sourceGlobalBounds": [
+        55,
+        481,
+        396,
+        699
+      ],
+      "sourceSize": [
+        341,
+        218
+      ],
+      "foregroundPixels": 16679,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "1b5aec0dc536909d932e5a6e90d1eea5b7342cb160a487dd933f95c7479bce81",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          58,
+          40,
+          393,
+          252
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        161,
+        293
+      ],
+      "sourceLandmark": [
+        161,
+        172
+      ],
+      "sourceAnchorEvidence": "New R1 pose5: proximal hind-leg pelvis joint (161,172) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        103.0,
+        253.0
+      ],
+      "renderedAnchor": [
+        128.19402985074626,
+        239.5330188679245
+      ],
+      "index": 20,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        79,
+        119,
+        239,
+        220
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        53,
+        67,
+        384,
+        289
+      ],
+      "sourceGlobalBounds": [
+        497,
+        511,
+        828,
+        733
+      ],
+      "sourceSize": [
+        331,
+        222
+      ],
+      "foregroundPixels": 16685,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "a8edac6085da845003e5e72d65c6cf6032f538464ebfbbdf4e363fac4e08334e",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          56,
+          70,
+          381,
+          286
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        160,
+        293
+      ],
+      "sourceLandmark": [
+        160,
+        213
+      ],
+      "sourceAnchorEvidence": "New R1 pose6: proximal hind-leg pelvis joint (160,213) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        104.0,
+        223.0
+      ],
+      "renderedAnchor": [
+        127.6,
+        240.33796296296296
+      ],
+      "index": 21,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        78,
+        134,
+        233,
+        237
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        29,
+        76,
+        312,
+        289
+      ],
+      "sourceGlobalBounds": [
+        916,
+        520,
+        1199,
+        733
+      ],
+      "sourceSize": [
+        283,
+        213
+      ],
+      "foregroundPixels": 15855,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4ec3163eff56c8e6c0bcd4ba85723c372b94ac4b381408cf08292885e412a738",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          79,
+          309,
+          286
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        143,
+        293
+      ],
+      "sourceLandmark": [
+        143,
+        229
+      ],
+      "sourceAnchorEvidence": "New R1 pose7: proximal hind-leg pelvis joint (143,229) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        111.0,
+        214.0
+      ],
+      "renderedAnchor": [
+        128.29602888086643,
+        240.3478260869565
+      ],
+      "index": 22,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        75,
+        138,
+        208,
+        237
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "attack",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        38,
+        79,
+        358,
+        293
+      ],
+      "sourceGlobalBounds": [
+        1368,
+        523,
+        1688,
+        737
+      ],
+      "sourceSize": [
+        320,
+        214
+      ],
+      "foregroundPixels": 15461,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "04acdd527ec868800cf7d27a9038c995260f83f502af6d29617784163c88f62f",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          41,
+          82,
+          355,
+          290
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        165,
+        293
+      ],
+      "sourceLandmark": [
+        165,
+        235
+      ],
+      "sourceAnchorEvidence": "New R1 pose8: proximal hind-leg pelvis joint (165,235) projected to grounded row support. Airborne poses3-5 retain clearance. Manual uncertainty +/-10 source pixels, not canon measurement.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        124.0,
+        211.0
+      ],
+      "renderedAnchor": [
+        128.23566878980893,
+        240.44230769230768
+      ],
+      "index": 23,
+      "scale": 0.32239016,
+      "sourceScale": 1.484066,
+      "appliedScale": 0.478448276,
+      "renderedBounds": [
+        69,
+        139,
+        219,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 0,
+      "sourceRow": 0,
+      "sourceCell": [
+        0,
+        0,
+        444,
+        444
+      ],
+      "sourceBounds": [
+        152,
+        206,
+        365,
+        357
+      ],
+      "sourceGlobalBounds": [
+        152,
+        206,
+        365,
+        357
+      ],
+      "sourceSize": [
+        213,
+        151
+      ],
+      "foregroundPixels": 7771,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "db920f3aa16475a5050e9ad8cd30532ba95d99ce4e374afae726800085ee3cab",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          155,
+          209,
+          362,
+          354
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        357
+      ],
+      "sourceLandmark": [
+        238,
+        303
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (238,303); grounded support floor y=357 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        83.0,
+        148.0
+      ],
+      "renderedAnchor": [
+        127.91787439613526,
+        239.75862068965517
+      ],
+      "index": 24,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        79,
+        153,
+        201,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 1,
+      "sourceRow": 0,
+      "sourceCell": [
+        444,
+        0,
+        887,
+        444
+      ],
+      "sourceBounds": [
+        134,
+        216,
+        287,
+        357
+      ],
+      "sourceGlobalBounds": [
+        578,
+        216,
+        731,
+        357
+      ],
+      "sourceSize": [
+        153,
+        141
+      ],
+      "foregroundPixels": 7014,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "ce57a6310d86a5831d63834d193a7a938b83be19dfbb63a0fe1b91e858959a57",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          137,
+          219,
+          284,
+          354
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        191,
+        357
+      ],
+      "sourceLandmark": [
+        191,
+        321
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (191,321); grounded support floor y=357 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        54.0,
+        138.0
+      ],
+      "renderedAnchor": [
+        127.59183673469389,
+        239.75555555555556
+      ],
+      "index": 25,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        96,
+        159,
+        182,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 2,
+      "sourceRow": 0,
+      "sourceCell": [
+        887,
+        0,
+        1330,
+        444
+      ],
+      "sourceBounds": [
+        76,
+        228,
+        269,
+        358
+      ],
+      "sourceGlobalBounds": [
+        963,
+        228,
+        1156,
+        358
+      ],
+      "sourceSize": [
+        193,
+        130
+      ],
+      "foregroundPixels": 7102,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "edb3e71b90bb22057dc10c2b35c8275a036c7e619b504ed0a5a916eb2c769667",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          79,
+          231,
+          266,
+          355
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        145,
+        358
+      ],
+      "sourceLandmark": [
+        145,
+        323
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (145,323); grounded support floor y=358 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        66.0,
+        127.0
+      ],
+      "renderedAnchor": [
+        127.8235294117647,
+        239.76612903225805
+      ],
+      "index": 26,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        89,
+        165,
+        199,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 3,
+      "sourceRow": 0,
+      "sourceCell": [
+        1330,
+        0,
+        1774,
+        444
+      ],
+      "sourceBounds": [
+        43,
+        233,
+        287,
+        362
+      ],
+      "sourceGlobalBounds": [
+        1373,
+        233,
+        1617,
+        362
+      ],
+      "sourceSize": [
+        244,
+        129
+      ],
+      "foregroundPixels": 6214,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4133a97ffc813cc1243cee24cbdbd803ca877bbb66d6f8527d982e17ca9ea796",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          46,
+          236,
+          284,
+          359
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        125,
+        362
+      ],
+      "sourceLandmark": [
+        125,
+        335
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (125,335); grounded support floor y=362 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        79.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        128.47058823529412,
+        239.7560975609756
+      ],
+      "index": 27,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        82,
+        166,
+        222,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 4,
+      "sourceRow": 1,
+      "sourceCell": [
+        0,
+        444,
+        444,
+        887
+      ],
+      "sourceBounds": [
+        135,
+        88,
+        378,
+        229
+      ],
+      "sourceGlobalBounds": [
+        135,
+        532,
+        378,
+        673
+      ],
+      "sourceSize": [
+        243,
+        141
+      ],
+      "foregroundPixels": 6072,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "8b199493b5b5615977e6a0b41249627c61ee99ba97800748ac6f41998096900b",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          138,
+          91,
+          375,
+          226
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        229
+      ],
+      "sourceLandmark": [
+        226,
+        204
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (226,204); grounded support floor y=229 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        88.0,
+        138.0
+      ],
+      "renderedAnchor": [
+        127.61181434599156,
+        239.75555555555556
+      ],
+      "index": 28,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        76,
+        159,
+        215,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 5,
+      "sourceRow": 1,
+      "sourceCell": [
+        444,
+        444,
+        887,
+        887
+      ],
+      "sourceBounds": [
+        106,
+        98,
+        320,
+        230
+      ],
+      "sourceGlobalBounds": [
+        550,
+        542,
+        764,
+        674
+      ],
+      "sourceSize": [
+        214,
+        132
+      ],
+      "foregroundPixels": 5264,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "4e21a214c766445fba71b28713fdb072d87ac1dbbe8c600b455150ca871bebdf",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          109,
+          101,
+          317,
+          227
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        193,
+        230
+      ],
+      "sourceLandmark": [
+        193,
+        211
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (193,211); grounded support floor y=230 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        84.0,
+        129.0
+      ],
+      "renderedAnchor": [
+        128.26923076923077,
+        239.76190476190476
+      ],
+      "index": 29,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        79,
+        164,
+        201,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 6,
+      "sourceRow": 1,
+      "sourceCell": [
+        887,
+        444,
+        1330,
+        887
+      ],
+      "sourceBounds": [
+        54,
+        141,
+        288,
+        232
+      ],
+      "sourceGlobalBounds": [
+        941,
+        585,
+        1175,
+        676
+      ],
+      "sourceSize": [
+        234,
+        91
+      ],
+      "foregroundPixels": 4620,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "63c2b667081a674904f4bdea3888f89255a8649a00906babf3c982a0da2612e4",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          57,
+          144,
+          285,
+          229
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        163,
+        232
+      ],
+      "sourceLandmark": [
+        163,
+        215
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (163,215); grounded support floor y=232 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        106.0,
+        88.0
+      ],
+      "renderedAnchor": [
+        128.2982456140351,
+        239.76470588235293
+      ],
+      "index": 30,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        66,
+        188,
+        200,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    },
+    {
+      "clip": "death",
+      "clipFrame": 7,
+      "sourceRow": 1,
+      "sourceCell": [
+        1330,
+        444,
+        1774,
+        887
+      ],
+      "sourceBounds": [
+        43,
+        185,
+        297,
+        232
+      ],
+      "sourceGlobalBounds": [
+        1373,
+        629,
+        1627,
+        676
+      ],
+      "sourceSize": [
+        254,
+        47
+      ],
+      "foregroundPixels": 4102,
+      "alphaProcessing": "v65-border-connected-magenta-key",
+      "discardedForegroundPixels": 0,
+      "sourcePoseRgbaSha256": "36b6cbf671ca481aadee157eed7d0548f1a29fbbce41a1882d1bafe06690779a",
+      "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          46,
+          188,
+          294,
+          229
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        181,
+        232
+      ],
+      "sourceLandmark": [
+        181,
+        215
+      ],
+      "sourceAnchorEvidence": "Manual pelvis center immediately ahead of tail base at (181,215); grounded support floor y=232 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        135.0,
+        44.0
+      ],
+      "renderedAnchor": [
+        128.4758064516129,
+        239.7560975609756
+      ],
+      "index": 31,
+      "scale": 0.32239016,
+      "sourceScale": 1.822337,
+      "appliedScale": 0.587503518,
+      "renderedBounds": [
+        49,
+        214,
+        195,
+        238
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
+    }
+  ],
+  "validation": {
+    "cells": [
+      {
+        "index": 0,
+        "alphaBounds": [
+          78,
+          141,
+          189,
+          239
+        ],
+        "foregroundPixels": 3737,
+        "width": 111,
+        "height": 98,
+        "relativeToRowMedian": 0.9747
+      },
+      {
+        "index": 1,
+        "alphaBounds": [
+          73,
+          139,
+          187,
+          239
+        ],
+        "foregroundPixels": 3830,
+        "width": 114,
+        "height": 100,
+        "relativeToRowMedian": 0.998957
+      },
+      {
+        "index": 2,
+        "alphaBounds": [
+          72,
+          139,
+          186,
+          239
+        ],
+        "foregroundPixels": 3838,
+        "width": 114,
+        "height": 100,
+        "relativeToRowMedian": 1.001043
+      },
+      {
+        "index": 3,
+        "alphaBounds": [
+          71,
+          139,
+          189,
+          239
+        ],
+        "foregroundPixels": 3870,
+        "width": 118,
+        "height": 100,
+        "relativeToRowMedian": 1.00939
+      },
+      {
+        "index": 4,
+        "alphaBounds": [
+          74,
+          140,
+          189,
+          239
+        ],
+        "foregroundPixels": 3795,
+        "width": 115,
+        "height": 99,
+        "relativeToRowMedian": 1.00304
+      },
+      {
+        "index": 5,
+        "alphaBounds": [
+          73,
+          141,
+          188,
+          239
+        ],
+        "foregroundPixels": 3784,
+        "width": 115,
+        "height": 98,
+        "relativeToRowMedian": 1.000132
+      },
+      {
+        "index": 6,
+        "alphaBounds": [
+          72,
+          142,
+          186,
+          239
+        ],
+        "foregroundPixels": 3760,
+        "width": 114,
+        "height": 97,
+        "relativeToRowMedian": 0.993789
+      },
+      {
+        "index": 7,
+        "alphaBounds": [
+          73,
+          142,
+          188,
+          239
+        ],
+        "foregroundPixels": 3783,
+        "width": 115,
+        "height": 97,
+        "relativeToRowMedian": 0.999868
+      },
+      {
+        "index": 8,
+        "alphaBounds": [
+          80,
+          149,
+          199,
+          239
+        ],
+        "foregroundPixels": 3565,
+        "width": 119,
+        "height": 90,
+        "relativeToRowMedian": 1.008629
+      },
+      {
+        "index": 9,
+        "alphaBounds": [
+          80,
+          151,
+          207,
+          239
+        ],
+        "foregroundPixels": 3504,
+        "width": 127,
+        "height": 88,
+        "relativeToRowMedian": 0.991371
+      },
+      {
+        "index": 10,
+        "alphaBounds": [
+          68,
+          154,
+          210,
+          239
+        ],
+        "foregroundPixels": 3595,
+        "width": 142,
+        "height": 85,
+        "relativeToRowMedian": 1.017117
+      },
+      {
+        "index": 11,
+        "alphaBounds": [
+          73,
+          150,
+          204,
+          239
+        ],
+        "foregroundPixels": 3456,
+        "width": 131,
+        "height": 89,
+        "relativeToRowMedian": 0.97779
+      },
+      {
+        "index": 12,
+        "alphaBounds": [
+          74,
+          145,
+          206,
+          239
+        ],
+        "foregroundPixels": 3353,
+        "width": 132,
+        "height": 94,
+        "relativeToRowMedian": 0.943311
+      },
+      {
+        "index": 13,
+        "alphaBounds": [
+          74,
+          153,
+          200,
+          239
+        ],
+        "foregroundPixels": 3586,
+        "width": 126,
+        "height": 86,
+        "relativeToRowMedian": 1.008862
+      },
+      {
+        "index": 14,
+        "alphaBounds": [
+          62,
+          154,
+          204,
+          239
+        ],
+        "foregroundPixels": 3627,
+        "width": 142,
+        "height": 85,
+        "relativeToRowMedian": 1.020397
+      },
+      {
+        "index": 15,
+        "alphaBounds": [
+          76,
+          150,
+          206,
+          239
+        ],
+        "foregroundPixels": 3523,
+        "width": 130,
+        "height": 89,
+        "relativeToRowMedian": 0.991138
+      },
+      {
+        "index": 16,
+        "alphaBounds": [
+          72,
+          140,
+          227,
+          239
+        ],
+        "foregroundPixels": 4235,
+        "width": 155,
+        "height": 99,
+        "relativeToRowMedian": 0.986145
+      },
+      {
+        "index": 17,
+        "alphaBounds": [
+          60,
+          134,
+          187,
+          238
+        ],
+        "foregroundPixels": 3643,
+        "width": 127,
+        "height": 104,
+        "relativeToRowMedian": 0.848294
+      },
+      {
+        "index": 18,
+        "alphaBounds": [
+          64,
+          118,
+          230,
+          236
+        ],
+        "foregroundPixels": 4875,
+        "width": 166,
+        "height": 118,
+        "relativeToRowMedian": 1.135173
+      },
+      {
+        "index": 19,
+        "alphaBounds": [
+          75,
+          103,
+          230,
+          213
+        ],
+        "foregroundPixels": 4354,
+        "width": 155,
+        "height": 110,
+        "relativeToRowMedian": 1.013855
+      },
+      {
+        "index": 20,
+        "alphaBounds": [
+          79,
+          119,
+          239,
+          220
+        ],
+        "foregroundPixels": 4395,
+        "width": 160,
+        "height": 101,
+        "relativeToRowMedian": 1.051687
+      },
+      {
+        "index": 21,
+        "alphaBounds": [
+          78,
+          134,
+          233,
+          237
+        ],
+        "foregroundPixels": 4265,
+        "width": 155,
+        "height": 103,
+        "relativeToRowMedian": 1.020579
+      },
+      {
+        "index": 22,
+        "alphaBounds": [
+          75,
+          138,
+          208,
+          237
+        ],
+        "foregroundPixels": 4093,
+        "width": 133,
+        "height": 99,
+        "relativeToRowMedian": 0.979421
+      },
+      {
+        "index": 23,
+        "alphaBounds": [
+          69,
+          139,
+          219,
+          239
+        ],
+        "foregroundPixels": 4034,
+        "width": 150,
+        "height": 100,
+        "relativeToRowMedian": 0.965303
+      },
+      {
+        "index": 24,
+        "alphaBounds": [
+          79,
+          153,
+          201,
+          238
+        ],
+        "foregroundPixels": 3090,
+        "width": 122,
+        "height": 85,
+        "relativeToRowMedian": 1.126709
+      },
+      {
+        "index": 25,
+        "alphaBounds": [
+          96,
+          159,
+          182,
+          238
+        ],
+        "foregroundPixels": 2696,
+        "width": 86,
+        "height": 79,
+        "relativeToRowMedian": 0.983045
+      },
+      {
+        "index": 26,
+        "alphaBounds": [
+          89,
+          165,
+          199,
+          238
+        ],
+        "foregroundPixels": 2789,
+        "width": 110,
+        "height": 73,
+        "relativeToRowMedian": 1.016955
+      },
+      {
+        "index": 27,
+        "alphaBounds": [
+          82,
+          166,
+          222,
+          238
+        ],
+        "foregroundPixels": 2413,
+        "width": 140,
+        "height": 72,
+        "relativeToRowMedian": 0.879854
+      },
+      {
+        "index": 28,
+        "alphaBounds": [
+          76,
+          159,
+          215,
+          238
+        ],
+        "foregroundPixels": 2398,
+        "width": 139,
+        "height": 79,
+        "relativeToRowMedian": 1.238636
+      },
+      {
+        "index": 29,
+        "alphaBounds": [
+          79,
+          164,
+          201,
+          238
+        ],
+        "foregroundPixels": 2059,
+        "width": 122,
+        "height": 74,
+        "relativeToRowMedian": 1.063533
+      },
+      {
+        "index": 30,
+        "alphaBounds": [
+          66,
+          188,
+          200,
+          238
+        ],
+        "foregroundPixels": 1813,
+        "width": 134,
+        "height": 50,
+        "relativeToRowMedian": 0.936467
+      },
+      {
+        "index": 31,
+        "alphaBounds": [
+          49,
+          214,
+          195,
+          238
+        ],
+        "foregroundPixels": 1580,
+        "width": 146,
+        "height": 24,
+        "relativeToRowMedian": 0.816116
+      }
+    ],
+    "rowMedianForegroundPixels": [
+      3834.0,
+      3783.5,
+      3534.5,
+      3554.5,
+      4294.5,
+      4179.0,
+      2742.5,
+      1936.0
+    ],
+    "findings": [],
+    "uniqueFrameCount": 32,
+    "cellRgbaSha256": [
+      "3e794076be6e83dcaeb47639aeafe177730ed7858f69b464844ef65521faf72e",
+      "57bff83dfd11bf6359c5aacc27aa42d0c4da1e4ff97bb9f286d7f03758dd3881",
+      "21c0dfd2555768122fb4332f12808141fb1c799beddf2d25bd684638418094e3",
+      "f4cfa600997c3139e122bcb1d7f2345143f41e4c5ca2dd7f9f6d089c89d54a29",
+      "7cad9aeccf046b9f862f05eadffe1f3d1e9ac78cfe15b011e50324a9bfbfa0cc",
+      "eaed67e642ffa8e2fad74ee1f4ba1a9073cd1cf1269bc18ba93aa05705f443a1",
+      "76e7e8ed15b0d73d24b7ecb5611acf7c1d5b04d339e9d65aeddaadca5e9a61bc",
+      "9229b6be80e449f7750356a13007925f63a793455d9e63493e03604110322719",
+      "a231105755b1ecd6cbad42611ae1bae2de8514cef50d517ff546b97ef8b87ec2",
+      "be063c8998b297ab32657f624ccc0402b747e8f3bc898d89fffa014d5a5d9d0c",
+      "be36a8f71981f1206d7bb1e72386ac5b39c54bb80dad4ac964fbb7116c7f095b",
+      "1b21861cd0ab121e95c50b93cc92a66ca6c22506f1f0d9b72c7ba1a4e834df3c",
+      "0d5df2ef7d968232bb55640bc59ed7b2133aac60c979290e4644ccc615b96ca9",
+      "c72626e242e0e4aa97d493f4e67f106652e8e93eba6444fce97afaf309ab4c80",
+      "1a3f296a85e920e684d4a87c80b63e71997af04fbca2fe4b9924b6c7deef861f",
+      "6b60cf462d3504f9fcd28e44e38a503fb73cef2a7bb42edc2173177afc410ed3",
+      "1d82d744305e72f4c604fa1d9c7723b61b4b3e6cd744cabab099774fdc9cbb37",
+      "03fc7d736242582926d3f29b276083bd82204b3736c0f478c62045acd374b081",
+      "78426e24ce8747ec94633114a9413bef44b99b32c66baf029c33ec192311bd9f",
+      "8597e78bf6f72bb419dd25ffebe5cdc5e4e1f302c255f01ed45928a5c0096e7f",
+      "5e4300fc3943613ee16ef347b65011dd8554bea5ed8d9202994ad09da4ee8d01",
+      "abf8bc89269cdafc319113f0ed089903f0e489447e82d9547505f1b5434a2833",
+      "48fee767afe2ef4e181c8a2b990fd80fa7908f9f7ce2191ecb340c9d802bcf49",
+      "64865233a17377a82b3a2621582cf69dd8b284c926afd0c1fb047e773d9f14e5",
+      "2d652b03cdda09ee3070dde824a47ee847505b2cda7bd1c3f7654c662c97e7d0",
+      "f93b6bdddbe0f3b169a1d3d222370274d7048b5afe996c875fb85ea7a543102c",
+      "a130bd4188fa0cce1d349ad397d2654ff5a5fb9586c423b3b1a7d8c111f51169",
+      "e4e008d6bb6627d61e6d99ff881e711ae41827974031b866f2669666b7662d66",
+      "cd723a44fda44e2b67f46faf62f9fc3fd53c9080d015f56b1248132e8668b60d",
+      "1d5f280ee33caa5c5b322cc0d850dc51c1e9d1055d17488bf47c5eee1af17c2b",
+      "30174cdf6db5f9015ec804ed05c8d38c1fbea565d47e8cd7362db9b96ac0dd57",
+      "d87150a00749cfed20237ac35c5d31ceb0a4cbc087b32763da20723178c8f1ce"
+    ],
+    "visualFidelityCertified": false
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "bounds": [
+        78,
+        141,
+        189,
+        239
+      ],
+      "broadVioletDiagnostic": 2
+    },
+    {
+      "frame": 1,
+      "bounds": [
+        73,
+        139,
+        187,
+        239
+      ],
+      "broadVioletDiagnostic": 5
+    },
+    {
+      "frame": 2,
+      "bounds": [
+        72,
+        139,
+        186,
+        239
+      ],
+      "broadVioletDiagnostic": 1
+    },
+    {
+      "frame": 3,
+      "bounds": [
+        71,
+        139,
+        189,
+        239
+      ],
+      "broadVioletDiagnostic": 4
+    },
+    {
+      "frame": 4,
+      "bounds": [
+        74,
+        140,
+        189,
+        239
+      ],
+      "broadVioletDiagnostic": 3
+    },
+    {
+      "frame": 5,
+      "bounds": [
+        73,
+        141,
+        188,
+        239
+      ],
+      "broadVioletDiagnostic": 2
+    },
+    {
+      "frame": 6,
+      "bounds": [
+        72,
+        142,
+        186,
+        239
+      ],
+      "broadVioletDiagnostic": 5
+    },
+    {
+      "frame": 7,
+      "bounds": [
+        73,
+        142,
+        188,
+        239
+      ],
+      "broadVioletDiagnostic": 2
+    },
+    {
+      "frame": 8,
+      "bounds": [
+        80,
+        149,
+        199,
+        239
+      ],
+      "broadVioletDiagnostic": 9
+    },
+    {
+      "frame": 9,
+      "bounds": [
+        80,
+        151,
+        207,
+        239
+      ],
+      "broadVioletDiagnostic": 3
+    },
+    {
+      "frame": 10,
+      "bounds": [
+        68,
+        154,
+        210,
+        239
+      ],
+      "broadVioletDiagnostic": 5
+    },
+    {
+      "frame": 11,
+      "bounds": [
+        73,
+        150,
+        204,
+        239
+      ],
+      "broadVioletDiagnostic": 9
+    },
+    {
+      "frame": 12,
+      "bounds": [
+        74,
+        145,
+        206,
+        239
+      ],
+      "broadVioletDiagnostic": 6
+    },
+    {
+      "frame": 13,
+      "bounds": [
+        74,
+        153,
+        200,
+        239
+      ],
+      "broadVioletDiagnostic": 7
+    },
+    {
+      "frame": 14,
+      "bounds": [
+        62,
+        154,
+        204,
+        239
+      ],
+      "broadVioletDiagnostic": 11
+    },
+    {
+      "frame": 15,
+      "bounds": [
+        76,
+        150,
+        206,
+        239
+      ],
+      "broadVioletDiagnostic": 5
+    },
+    {
+      "frame": 16,
+      "bounds": [
+        72,
+        140,
+        227,
+        239
+      ],
+      "broadVioletDiagnostic": 8
+    },
+    {
+      "frame": 17,
+      "bounds": [
+        60,
+        134,
+        187,
+        238
+      ],
+      "broadVioletDiagnostic": 15
+    },
+    {
+      "frame": 18,
+      "bounds": [
+        64,
+        118,
+        230,
+        236
+      ],
+      "broadVioletDiagnostic": 24
+    },
+    {
+      "frame": 19,
+      "bounds": [
+        75,
+        103,
+        230,
+        213
+      ],
+      "broadVioletDiagnostic": 27
+    },
+    {
+      "frame": 20,
+      "bounds": [
+        79,
+        119,
+        239,
+        220
+      ],
+      "broadVioletDiagnostic": 15
+    },
+    {
+      "frame": 21,
+      "bounds": [
+        78,
+        134,
+        233,
+        237
+      ],
+      "broadVioletDiagnostic": 21
+    },
+    {
+      "frame": 22,
+      "bounds": [
+        75,
+        138,
+        208,
+        237
+      ],
+      "broadVioletDiagnostic": 32
+    },
+    {
+      "frame": 23,
+      "bounds": [
+        69,
+        139,
+        219,
+        239
+      ],
+      "broadVioletDiagnostic": 12
+    },
+    {
+      "frame": 24,
+      "bounds": [
+        79,
+        153,
+        201,
+        238
+      ],
+      "broadVioletDiagnostic": 6
+    },
+    {
+      "frame": 25,
+      "bounds": [
+        96,
+        159,
+        182,
+        238
+      ],
+      "broadVioletDiagnostic": 12
+    },
+    {
+      "frame": 26,
+      "bounds": [
+        89,
+        165,
+        199,
+        238
+      ],
+      "broadVioletDiagnostic": 6
+    },
+    {
+      "frame": 27,
+      "bounds": [
+        82,
+        166,
+        222,
+        238
+      ],
+      "broadVioletDiagnostic": 4
+    },
+    {
+      "frame": 28,
+      "bounds": [
+        76,
+        159,
+        215,
+        238
+      ],
+      "broadVioletDiagnostic": 1
+    },
+    {
+      "frame": 29,
+      "bounds": [
+        79,
+        164,
+        201,
+        238
+      ],
+      "broadVioletDiagnostic": 0
+    },
+    {
+      "frame": 30,
+      "bounds": [
+        66,
+        188,
+        200,
+        238
+      ],
+      "broadVioletDiagnostic": 0
+    },
+    {
+      "frame": 31,
+      "bounds": [
+        49,
+        214,
+        195,
+        238
+      ],
+      "broadVioletDiagnostic": 0
+    }
+  ]
+}

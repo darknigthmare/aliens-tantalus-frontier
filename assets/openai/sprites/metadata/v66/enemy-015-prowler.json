@@ -29,32 +29,55 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp",
-  "normalizedSha256": "3c830342368cf91ec020e6233d1d18b255392fc5f62e05a753358f3841516c60",
+  "normalizedSha256": "5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52",
   "preview": "assets/openai/sprites/previews/v66/enemy-015-prowler/all.gif",
-  "previewSha256": "84e8d0c978fb3a56816dea000f910de798a4ae318eec03caf300082223d0f0ea",
+  "previewSha256": "53039dfc3e1812b2f081379825c4abe53a6cd6f053f93e8d4fd5278acbdfbfb3",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.539759036,
+  "scale": 0.270532932,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
     "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "move": 1.208856,
+    "attack": 1.34525,
+    "death": 1.194166
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
-    "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
-    "status": "pending",
-    "reason": "Profile anchors have not all been physically reviewed."
+    "path": "docs/references/v75-enemy-fixes/015/anchor-review.json",
+    "sha256": "696aec77182f4d2291d6713f56186d9aa7ef7c7b1feec275c80bfe595b2bde58",
+    "status": "reviewed",
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/015/idle-physical-review.jpg",
+        "sha256": "de8107dbf73226387f98dff00f92c4a11a37aad5aec1d608f596c4fcbda002ca"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/move-physical-review.jpg",
+        "sha256": "f79908aac80ddf122935a3153bf83eaeea22618ef651817fd1bd1813b41012ca"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/attack-physical-review.jpg",
+        "sha256": "4399b613c8d386a65136147a070bcc28f285642650d9939bf7806b70e8621b51"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/death-physical-review.jpg",
+        "sha256": "b522c3a6023c8b93f52be5ff825ef4679b7725cd10bf6e62fcfe8e6d2193069e"
+      }
+    ],
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
+    "method": "32 individually observed ribcage roots retained and visually counterchecked on full sources. Airborne attack3/4 use row1 grounded plane384 (contacts384/381); attack5 uses row2 median support372 (landing/recovery368/372/379), not the bottom of an airborne foot or the previous row origin. No per-pose scale. Source-plane estimates retain +/-10px uncertainty and do not certify world-space path traversal.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -295,9 +318,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-015-prowler/idle.webp",
-      "sha256": "ddd347496a0cec3cae74807e5f598caa015b4ee269aa3202a46666e2f3041ac6",
+      "sha256": "fb032d92ce727319d7d1a270ce167f1e4e4ec331047eac60c135255c901101a4",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-015-prowler/idle.gif",
-      "previewSha256": "b4c2b213db0a13639bea2bc77aec27823b249cba12caa91a69e49324a7019054"
+      "previewSha256": "a2a1076cdfe5e73018da0aad9215ea6556b4f6583366b5689c492b13b5e7a034"
     },
     {
       "id": "move",
@@ -314,9 +337,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-015-prowler/move.webp",
-      "sha256": "ccdf4ffca81c33b62a7d992cfa7ea4892ba80114b966cc216a7de2182ceafe21",
+      "sha256": "defa11800c36e275e68d349dc18a3487db4bc6bfc1aafe89e2f98fea03c06012",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-015-prowler/move.gif",
-      "previewSha256": "e0372a780d1659539dc9415716891ba8458763d24c3202bbfad83b6eae9f987d"
+      "previewSha256": "0ac1bf435bb5e1e78ae8fb41cdd24e6b175e78664d9cfb6ec37e8b6ced4283a9"
     },
     {
       "id": "attack",
@@ -333,9 +356,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-015-prowler/attack.webp",
-      "sha256": "4d2b8837554e4949bab313790f10642bed2ac2e5b61d33217ab5abca0cb41e2e",
+      "sha256": "f6d79b80c285f288eddebbd0c2826fdbc6d56640135f1f51ced9a63e592d01f9",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-015-prowler/attack.gif",
-      "previewSha256": "b0353b1a7a8ff4386bf4534bed64eb5eef75f15f01208a42af5d7ecb7973624a"
+      "previewSha256": "7a8d01c1b50a6007a877eddaa385eb5777d1e0fef31754ac9089564520914a72"
     },
     {
       "id": "death",
@@ -352,9 +375,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-015-prowler/death.webp",
-      "sha256": "326780013f4f485c8a12d637efe7eaa74079d8e9f52ec994cd9ac53e1635bd7a",
+      "sha256": "3ea668d0a93ea2611ddd25632609889186282246c5e7fda7349fec22ceafdb2b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-015-prowler/death.gif",
-      "previewSha256": "dd4bb6242fee6d6d2319639965b2228a59b4b0e29289cc05e20118d82cfbb6f5"
+      "previewSha256": "b39383989e6e14ddba0b8fc4735df8aceffbe8ff9d8b4cbb61f76eb9c2946c46"
     }
   ],
   "placements": [
@@ -389,18 +412,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a94aaa6cdc931c72d7a68b1a3a0cbb1b53806a6c4e6345274b2f93e902149621",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        251,
+        402
+      ],
+      "sourceLandmark": [
+        251,
+        272
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (251,272) on source diagnostic; vertical projection to y=402. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        200.0,
+        313.0
+      ],
+      "renderedAnchor": [
+        127.97727272727272,
+        240.0
+      ],
       "index": 0,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        33,
-        71,
-        223,
+        74,
+        155,
+        169,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -433,18 +488,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3b21c615b7c37cca5e40dec7d2a0219ac7b1158a8667fa3460d12d932ff0d88e",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        402
+      ],
+      "sourceLandmark": [
+        226,
+        272
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (226,272) on source diagnostic; vertical projection to y=402. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        200.0,
+        329.0
+      ],
+      "renderedAnchor": [
+        127.84615384615384,
+        240.0
+      ],
       "index": 1,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        37,
-        62,
-        219,
+        74,
+        151,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -477,18 +564,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "dbe7f96421377e3e3ae04b091444ac1a25c6d1485d20dc9fba89e3500ca14725",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        402
+      ],
+      "sourceLandmark": [
+        222,
+        271
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (222,271) on source diagnostic; vertical projection to y=402. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        192.0,
+        329.0
+      ],
+      "renderedAnchor": [
+        127.87577639751552,
+        240.0
+      ],
       "index": 2,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        41,
-        62,
-        215,
+        76,
+        151,
+        163,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -521,18 +640,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b96b162af70c28a7de13f033c2f659628062755592f6745b22890a81360e8cb5",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        402
+      ],
+      "sourceLandmark": [
+        226,
+        276
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (226,276) on source diagnostic; vertical projection to y=402. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        207.0,
+        330.0
+      ],
+      "renderedAnchor": [
+        128.23699421965318,
+        240.0
+      ],
       "index": 3,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        34,
-        62,
-        221,
+        72,
+        151,
+        166,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -565,18 +716,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "1ba99d9aeae5f25ded2670fec6f9c5503e824a94075588af3da64bd3acddb07c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        251,
+        357
+      ],
+      "sourceLandmark": [
+        251,
+        223
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (251,223) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        201.0,
+        335.0
+      ],
+      "renderedAnchor": [
+        128.29310344827587,
+        240.0
+      ],
       "index": 4,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        34,
-        59,
-        222,
+        74,
+        149,
+        168,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -609,18 +792,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2c80b858223a889deacc4f02259a9680f55f6bc8f41ac2d3f37f1d8d1f905930",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        357
+      ],
+      "sourceLandmark": [
+        238,
+        224
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (238,224) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        215.0,
+        296.0
+      ],
+      "renderedAnchor": [
+        128.1908831908832,
+        240.0
+      ],
       "index": 5,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        34,
-        80,
-        223,
+        70,
+        160,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -653,18 +868,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6965527e1a6af34e9fac7eab27aaf0d781e5c4cc8248da0858cca00168ca7f2d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        357
+      ],
+      "sourceLandmark": [
+        226,
+        226
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (226,226) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        209.0,
+        311.0
+      ],
+      "renderedAnchor": [
+        127.83333333333334,
+        240.0
+      ],
       "index": 6,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        36,
-        72,
-        221,
+        71,
+        156,
+        164,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -697,18 +944,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "70f82fb01bc5762a9f2389aef729cca825c3d6636aae8d4dc6e4df6df1657846",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        224,
+        357
+      ],
+      "sourceLandmark": [
+        224,
+        224
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (224,224) on source diagnostic; vertical projection to y=357. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        203.0,
+        311.0
+      ],
+      "renderedAnchor": [
+        127.88081395348837,
+        240.0
+      ],
       "index": 7,
-      "scale": 0.539759036,
+      "scale": 0.270532932,
       "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "appliedScale": 0.270532932,
       "renderedBounds": [
-        35,
-        72,
-        221,
+        73,
+        156,
+        166,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -741,18 +1020,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2ed9d863f43f663609c8c988aaa4628817f676c72b393649c5e001994bdc11f3",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        241,
+        387
+      ],
+      "sourceLandmark": [
+        241,
+        274
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (241,274) on source diagnostic; vertical projection to y=387. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        210.0,
+        314.0
+      ],
+      "renderedAnchor": [
+        128.45303867403317,
+        240.0
+      ],
       "index": 8,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        30,
-        71,
-        225,
+        60,
+        137,
+        178,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -785,18 +1096,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9a4c11437ccbc54b39fd27013ae2eca9e0aa3f4577446f23d3e725657682193f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        258,
+        387
+      ],
+      "sourceLandmark": [
+        258,
+        291
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (258,291) on source diagnostic; vertical projection to y=387. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        229.0,
+        314.0
+      ],
+      "renderedAnchor": [
+        128.09214092140923,
+        240.0
+      ],
       "index": 9,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        28,
-        71,
-        227,
+        53,
+        137,
+        174,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -829,18 +1172,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f5ed735688434aabedfba7d101516b9f7d40c84b82c37c661a1d38f35c971b70",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        258,
+        387
+      ],
+      "sourceLandmark": [
+        258,
+        293
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (258,293) on source diagnostic; vertical projection to y=387. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        226.0,
+        314.0
+      ],
+      "renderedAnchor": [
+        127.69565217391305,
+        240.0
+      ],
       "index": 10,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        28,
-        71,
-        227,
+        54,
+        137,
+        174,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -873,18 +1248,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f30570f628939a360e07192821f1129103b42d62af6cfd7f40891f3de902f29a",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        263,
+        387
+      ],
+      "sourceLandmark": [
+        263,
+        304
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (263,304) on source diagnostic; vertical projection to y=387. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        226.0,
+        309.0
+      ],
+      "renderedAnchor": [
+        127.69565217391305,
+        240.0
+      ],
       "index": 11,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        28,
-        73,
-        227,
+        54,
+        139,
+        174,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -917,18 +1324,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3c633477904db5ce91c9893842b113e9973b6e9f0b2a2fb08eef882759c5714d",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        245,
+        384
+      ],
+      "sourceLandmark": [
+        245,
+        287
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (245,287) on source diagnostic; vertical projection to y=384. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        199.0,
+        331.0
+      ],
+      "renderedAnchor": [
+        128.2090395480226,
+        240.0
+      ],
       "index": 12,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        32,
-        61,
-        223,
+        63,
+        132,
+        179,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -961,18 +1400,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9a442b593f02d9845cb4cc016c08c8dcc054a9b7be060d5002ce4d89b2989b2b",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        254,
+        385
+      ],
+      "sourceLandmark": [
+        254,
+        292
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (254,292) on source diagnostic; vertical projection to y=385. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        209.0,
+        332.0
+      ],
+      "renderedAnchor": [
+        128.1142061281337,
+        240.0
+      ],
       "index": 13,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        31,
-        61,
-        225,
+        60,
+        131,
+        177,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1005,18 +1476,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "bb27295152e3493601d866c131f44ec044cf768386311cee52894a96dd6972c2",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        260,
+        386
+      ],
+      "sourceLandmark": [
+        260,
+        300
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (260,300) on source diagnostic; vertical projection to y=386. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        212.0,
+        333.0
+      ],
+      "renderedAnchor": [
+        128.27323943661972,
+        240.0
+      ],
       "index": 14,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        32,
-        60,
-        224,
+        59,
+        131,
+        175,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1049,18 +1552,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d835816e2abc2b616b89e7aefa67406d069bdab37de694d219eb9529fbdbd88c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        264,
+        386
+      ],
+      "sourceLandmark": [
+        264,
+        300
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (264,300) on source diagnostic; vertical projection to y=386. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        221.0,
+        327.0
+      ],
+      "renderedAnchor": [
+        128.2382271468144,
+        240.0
+      ],
       "index": 15,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.208856,
+      "appliedScale": 0.327035358,
       "renderedBounds": [
-        30,
-        63,
-        225,
+        56,
+        133,
+        174,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1093,18 +1628,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b8a7d991a35af523fa350548d2b2dc818d35675d547587935e1aad146085756b",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        243,
+        384
+      ],
+      "sourceLandmark": [
+        243,
+        293
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (243,293) on source diagnostic; vertical projection to y=384. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        193.0,
+        305.0
+      ],
+      "renderedAnchor": [
+        128.49700598802394,
+        240.0
+      ],
       "index": 16,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        38,
-        75,
-        218,
+        58,
+        129,
+        180,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1137,18 +1704,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b057043f00804e9d7642770e61520239c8f40f05702e70763a22c256b38d941b",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        233,
+        381
+      ],
+      "sourceLandmark": [
+        233,
+        318
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (233,318) on source diagnostic; vertical projection to y=381. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        255.0
+      ],
+      "renderedAnchor": [
+        128.21884498480244,
+        240.0
+      ],
       "index": 17,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        39,
-        102,
-        217,
+        56,
+        147,
+        176,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1181,18 +1780,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "c47e7883bffcee8b47253fd170d8b3860aa7941d14600a4d9a8f776a47d458b1",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        238,
+        384
+      ],
+      "sourceLandmark": [
+        238,
+        261
+      ],
+      "sourceAnchorEvidence": "Attack pose3: visible ribcage root [238, 261]. Flight support y=384 is projected from the same nominal row: preceding planted claws at guarded y384/381; source bottom is not used as a false airborne landing. Estimate uncertainty +/-10source pixels. Positive authored clearance retained; world collision path and runtime motion require separate tests.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        200.0,
+        318.0
+      ],
+      "renderedAnchor": [
+        127.63157894736842,
+        240.45222929936307
+      ],
       "index": 18,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        26,
-        71,
-        231,
-        240
-      ]
+        55,
+        125,
+        193,
+        239
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1225,18 +1856,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "0a9794d13420c1fe26d0dd60e9f4543227731caea4238e1e738d062c15a96750",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        315,
+        384
+      ],
+      "sourceLandmark": [
+        315,
+        295
+      ],
+      "sourceAnchorEvidence": "Attack pose4: visible ribcage root [315, 295]. Flight support y=384 is projected from the same nominal row: preceding planted claws at guarded y384/381; source bottom is not used as a false airborne landing. Estimate uncertainty +/-10source pixels. Positive authored clearance retained; world collision path and runtime motion require separate tests.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        294.0,
+        160.0
+      ],
+      "renderedAnchor": [
+        128.04615384615386,
+        240.43478260869566
+      ],
       "index": 19,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        22,
-        178,
-        233,
-        240
-      ]
+        21,
+        182,
+        163,
+        224
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1269,18 +1932,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "6a7cbc9bcd05b48a65f99f438c2e9ee277bcdeb7b30d530feec270db8624251e",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        321,
+        372
+      ],
+      "sourceLandmark": [
+        321,
+        266
+      ],
+      "sourceAnchorEvidence": "Attack pose5: visible ribcage root [321, 266]. Flight support y=372 is projected from the same nominal row: following planted landing/recovery at guarded y368/372/379, median372. Previous row plane384 would insert a false12px step between row origins. Estimate uncertainty +/-10source pixels. Positive authored clearance retained; world collision path and runtime motion require separate tests.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        305.0,
+        213.0
+      ],
+      "renderedAnchor": [
+        127.97590361445783,
+        239.9879518072289
+      ],
       "index": 20,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        16,
-        150,
-        240,
-        240
-      ]
+        17,
+        163,
+        168,
+        223
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1313,18 +2008,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "18937f1f05363558ce415f01c86a12fb1a670a496e0075ce12641cba4c9392f8",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        252,
+        368
+      ],
+      "sourceLandmark": [
+        252,
+        278
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (252,278) on source diagnostic; vertical projection to y=368. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        212.0,
+        312.0
+      ],
+      "renderedAnchor": [
+        127.92571428571429,
+        240.0
+      ],
       "index": 21,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        34,
-        72,
-        223,
+        51,
+        126,
+        178,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1357,18 +2084,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4cc66b2ee60d38ca1d289b046a786d0acec6fc3b374fba15af85dfa0a444bb43",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        372
+      ],
+      "sourceLandmark": [
+        234,
+        281
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (234,281) on source diagnostic; vertical projection to y=372. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        196.0,
+        319.0
+      ],
+      "renderedAnchor": [
+        128.4823529411765,
+        240.0
+      ],
       "index": 22,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        36,
-        68,
-        220,
+        57,
+        124,
+        181,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1401,18 +2160,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b1c078221ab7ae83ff697c591d568fd842150c97c63628ff283c4698b2a30f57",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        379
+      ],
+      "sourceLandmark": [
+        232,
+        290
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (232,290) on source diagnostic; vertical projection to y=379. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        163.0,
+        299.0
+      ],
+      "renderedAnchor": [
+        128.0809061488673,
+        240.0
+      ],
       "index": 23,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.34525,
+      "appliedScale": 0.363934426,
       "renderedBounds": [
-        44,
-        79,
-        211,
+        69,
+        131,
+        181,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1445,18 +2236,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "36f68bb39d918122f8506eb32a884aacc0399c1dd9a9b1e3d24c81b1f51ae030",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        284,
+        413
+      ],
+      "sourceLandmark": [
+        284,
+        284
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (284,284) on source diagnostic; vertical projection to y=413. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        219.0,
+        346.0
+      ],
+      "renderedAnchor": [
+        127.92613636363636,
+        240.0
+      ],
       "index": 24,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        33,
-        53,
-        223,
+        57,
+        128,
+        171,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1489,18 +2312,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f6e56d87dca464e6c8c96678c834f52f8dc87b06f25519b50b62853d091e24dc",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        413
+      ],
+      "sourceLandmark": [
+        234,
+        297
+      ],
+      "sourceAnchorEvidence": "Individually observed ribcage landmark (234,297) on source diagnostic; vertical projection to y=413. Grounded limb support at padded source bottom visually checked; the ribcage is distinct from tail and rear hip.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        169.0,
+        330.0
+      ],
+      "renderedAnchor": [
+        128.34083601286173,
+        240.0
+      ],
       "index": 25,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        44,
-        62,
-        212,
+        74,
+        133,
+        174,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1533,18 +2388,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a172ae8c44032db8a77d231a59f25ed1e09acf24daea4424331783f10fecf65a",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        205,
+        416
+      ],
+      "sourceLandmark": [
+        205,
+        318
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (205,318) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=416. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        147.0,
+        277.0
+      ],
+      "renderedAnchor": [
+        128.23104693140795,
+        240.0
+      ],
       "index": 26,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        53,
-        90,
-        203,
+        81,
+        151,
+        170,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1577,18 +2464,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3dea1d17cf5c524ccf62a0aadac73ad2ea97e03dd9a9b7b4394625f5ef7321d9",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        179,
+        427
+      ],
+      "sourceLandmark": [
+        179,
+        355
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (179,355) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=427. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        144.0,
+        201.0
+      ],
+      "renderedAnchor": [
+        128.48101265822785,
+        240.0
+      ],
       "index": 27,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        42,
-        132,
-        213,
+        82,
+        175,
+        184,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1621,18 +2540,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "25b123869fc9838e92116a45a9c96149398506f2f5af3936286c9cfbca1a6543",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        337
+      ],
+      "sourceLandmark": [
+        235,
+        255
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (235,255) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=337. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        190.0,
+        244.0
+      ],
+      "renderedAnchor": [
+        128.34285714285716,
+        240.0
+      ],
       "index": 28,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        34,
-        108,
-        223,
+        67,
+        161,
+        180,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1665,18 +2616,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "230845f553c329b21e5471cdc9877bd4e0abf16b796cba031101bf5bdd38adb9",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        217,
+        342
+      ],
+      "sourceLandmark": [
+        217,
+        270
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (217,270) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=342. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        193.0,
+        195.0
+      ],
+      "renderedAnchor": [
+        128.34550561797752,
+        240.0
+      ],
       "index": 29,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        32,
-        135,
-        224,
+        66,
+        177,
+        181,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1709,18 +2692,50 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "86eacaf62e6dbc5cf954dd4943adf6086e70f92625c42ecf414f3bc9168f7d93",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        207,
+        344
+      ],
+      "sourceLandmark": [
+        207,
+        278
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (207,278) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=344. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        205.0,
+        162.0
+      ],
+      "renderedAnchor": [
+        128.44044321329642,
+        240.0
+      ],
       "index": 30,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        30,
-        153,
-        225,
+        62,
+        188,
+        179,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1772,18 +2787,50 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        225,
+        342
+      ],
+      "sourceLandmark": [
+        225,
+        288
+      ],
+      "sourceAnchorEvidence": "Individually remeasured ribcage landmark (225,288) on the marked full-source overlay, shifted off the folded front limb onto the remaining torso ribs; vertical projection to y=342. Ground/resting body floor is visually observed at padded source bottom. Foreshortened anatomy is a medium-confidence measurement, not a fidelity or animation acceptance.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        232.0,
+        99.0
+      ],
+      "renderedAnchor": [
+        128.09178743961354,
+        240.0
+      ],
       "index": 31,
-      "scale": 0.539759036,
-      "sourceScale": 1.0,
-      "appliedScale": 0.539759036,
+      "scale": 0.270532932,
+      "sourceScale": 1.194166,
+      "appliedScale": 0.323061229,
       "renderedBounds": [
-        16,
+        53,
+        208,
         187,
-        239,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     }
   ],
   "validation": {
@@ -1791,466 +2838,526 @@
       {
         "index": 0,
         "alphaBounds": [
-          34,
-          72,
-          222,
+          74,
+          155,
+          169,
           239
         ],
-        "foregroundPixels": 11023,
-        "width": 188,
-        "height": 167,
-        "relativeToRowMedian": 1.00282
+        "foregroundPixels": 2919,
+        "width": 95,
+        "height": 84,
+        "relativeToRowMedian": 1.00292
       },
       {
         "index": 1,
         "alphaBounds": [
-          38,
-          63,
-          218,
+          74,
+          151,
+          165,
           239
         ],
-        "foregroundPixels": 10990,
-        "width": 180,
-        "height": 176,
-        "relativeToRowMedian": 0.999818
+        "foregroundPixels": 2895,
+        "width": 91,
+        "height": 88,
+        "relativeToRowMedian": 0.994674
       },
       {
         "index": 2,
         "alphaBounds": [
-          42,
-          63,
-          214,
+          76,
+          151,
+          163,
           239
         ],
-        "foregroundPixels": 10994,
-        "width": 172,
-        "height": 176,
-        "relativeToRowMedian": 1.000182
+        "foregroundPixels": 2902,
+        "width": 87,
+        "height": 88,
+        "relativeToRowMedian": 0.99708
       },
       {
         "index": 3,
         "alphaBounds": [
-          35,
-          63,
-          220,
+          72,
+          151,
+          166,
           239
         ],
-        "foregroundPixels": 10982,
-        "width": 185,
-        "height": 176,
-        "relativeToRowMedian": 0.99909
+        "foregroundPixels": 2924,
+        "width": 94,
+        "height": 88,
+        "relativeToRowMedian": 1.004638
       },
       {
         "index": 4,
         "alphaBounds": [
-          35,
-          60,
-          221,
-          239
+          74,
+          149,
+          168,
+          240
         ],
-        "foregroundPixels": 11418,
-        "width": 186,
-        "height": 179,
-        "relativeToRowMedian": 1.034708
+        "foregroundPixels": 3017,
+        "width": 94,
+        "height": 91,
+        "relativeToRowMedian": 1.031982
       },
       {
         "index": 5,
         "alphaBounds": [
-          35,
-          81,
-          222,
-          239
+          70,
+          160,
+          165,
+          240
         ],
-        "foregroundPixels": 11079,
-        "width": 187,
-        "height": 158,
-        "relativeToRowMedian": 1.003987
+        "foregroundPixels": 2935,
+        "width": 95,
+        "height": 80,
+        "relativeToRowMedian": 1.003934
       },
       {
         "index": 6,
         "alphaBounds": [
-          37,
-          73,
-          220,
+          71,
+          156,
+          164,
           239
         ],
-        "foregroundPixels": 10960,
-        "width": 183,
-        "height": 166,
-        "relativeToRowMedian": 0.993203
+        "foregroundPixels": 2912,
+        "width": 93,
+        "height": 83,
+        "relativeToRowMedian": 0.996066
       },
       {
         "index": 7,
         "alphaBounds": [
-          36,
           73,
-          220,
-          239
+          156,
+          166,
+          240
         ],
-        "foregroundPixels": 10991,
-        "width": 184,
-        "height": 166,
-        "relativeToRowMedian": 0.996013
+        "foregroundPixels": 2903,
+        "width": 93,
+        "height": 84,
+        "relativeToRowMedian": 0.992988
       },
       {
         "index": 8,
         "alphaBounds": [
-          31,
-          72,
-          224,
-          239
+          60,
+          137,
+          177,
+          240
         ],
-        "foregroundPixels": 9169,
-        "width": 193,
-        "height": 167,
-        "relativeToRowMedian": 1.008192
+        "foregroundPixels": 3517,
+        "width": 117,
+        "height": 103,
+        "relativeToRowMedian": 1.007592
       },
       {
         "index": 9,
         "alphaBounds": [
-          29,
-          72,
-          226,
+          53,
+          137,
+          174,
           239
         ],
-        "foregroundPixels": 9174,
-        "width": 197,
-        "height": 167,
-        "relativeToRowMedian": 1.008742
+        "foregroundPixels": 3543,
+        "width": 121,
+        "height": 102,
+        "relativeToRowMedian": 1.015041
       },
       {
         "index": 10,
         "alphaBounds": [
-          29,
-          72,
-          226,
-          239
+          54,
+          137,
+          174,
+          240
         ],
-        "foregroundPixels": 9020,
-        "width": 197,
-        "height": 167,
-        "relativeToRowMedian": 0.991808
+        "foregroundPixels": 3464,
+        "width": 120,
+        "height": 103,
+        "relativeToRowMedian": 0.992408
       },
       {
         "index": 11,
         "alphaBounds": [
-          29,
-          74,
-          226,
-          239
+          54,
+          140,
+          174,
+          240
         ],
-        "foregroundPixels": 9016,
-        "width": 197,
-        "height": 165,
-        "relativeToRowMedian": 0.991368
+        "foregroundPixels": 3448,
+        "width": 120,
+        "height": 100,
+        "relativeToRowMedian": 0.987824
       },
       {
         "index": 12,
         "alphaBounds": [
-          33,
-          62,
-          222,
-          239
+          63,
+          133,
+          179,
+          240
         ],
-        "foregroundPixels": 8854,
-        "width": 189,
-        "height": 177,
-        "relativeToRowMedian": 0.999436
+        "foregroundPixels": 3413,
+        "width": 116,
+        "height": 107,
+        "relativeToRowMedian": 1.001908
       },
       {
         "index": 13,
         "alphaBounds": [
-          32,
-          62,
-          224,
+          60,
+          132,
+          177,
           239
         ],
-        "foregroundPixels": 9162,
-        "width": 192,
-        "height": 177,
-        "relativeToRowMedian": 1.034203
+        "foregroundPixels": 3508,
+        "width": 117,
+        "height": 107,
+        "relativeToRowMedian": 1.029796
       },
       {
         "index": 14,
         "alphaBounds": [
-          33,
-          61,
-          223,
+          59,
+          132,
+          174,
           239
         ],
-        "foregroundPixels": 8864,
-        "width": 190,
-        "height": 178,
-        "relativeToRowMedian": 1.000564
+        "foregroundPixels": 3400,
+        "width": 115,
+        "height": 107,
+        "relativeToRowMedian": 0.998092
       },
       {
         "index": 15,
         "alphaBounds": [
-          31,
-          64,
-          224,
+          56,
+          134,
+          174,
           239
         ],
-        "foregroundPixels": 8693,
-        "width": 193,
-        "height": 175,
-        "relativeToRowMedian": 0.981262
+        "foregroundPixels": 3330,
+        "width": 118,
+        "height": 105,
+        "relativeToRowMedian": 0.977543
       },
       {
         "index": 16,
         "alphaBounds": [
-          39,
-          76,
-          217,
+          59,
+          130,
+          179,
           239
         ],
-        "foregroundPixels": 7520,
-        "width": 178,
-        "height": 163,
-        "relativeToRowMedian": 1.020007
+        "foregroundPixels": 3566,
+        "width": 120,
+        "height": 109,
+        "relativeToRowMedian": 1.025007
       },
       {
         "index": 17,
         "alphaBounds": [
-          40,
-          103,
-          216,
+          57,
+          148,
+          175,
           239
         ],
-        "foregroundPixels": 7225,
-        "width": 176,
-        "height": 136,
-        "relativeToRowMedian": 0.979993
+        "foregroundPixels": 3392,
+        "width": 118,
+        "height": 91,
+        "relativeToRowMedian": 0.974993
       },
       {
         "index": 18,
         "alphaBounds": [
-          27,
-          72,
-          230,
-          239
+          56,
+          126,
+          192,
+          238
         ],
-        "foregroundPixels": 7626,
-        "width": 203,
-        "height": 167,
-        "relativeToRowMedian": 1.034385
+        "foregroundPixels": 3589,
+        "width": 136,
+        "height": 112,
+        "relativeToRowMedian": 1.031618
       },
       {
         "index": 19,
         "alphaBounds": [
-          23,
-          179,
-          232,
-          239
+          22,
+          183,
+          162,
+          223
         ],
-        "foregroundPixels": 5419,
-        "width": 209,
-        "height": 60,
-        "relativeToRowMedian": 0.735029
+        "foregroundPixels": 2548,
+        "width": 140,
+        "height": 40,
+        "relativeToRowMedian": 0.732394
       },
       {
         "index": 20,
         "alphaBounds": [
-          17,
-          151,
-          239,
-          239
+          18,
+          164,
+          167,
+          222
         ],
-        "foregroundPixels": 5716,
-        "width": 222,
-        "height": 88,
-        "relativeToRowMedian": 0.77061
+        "foregroundPixels": 2639,
+        "width": 149,
+        "height": 58,
+        "relativeToRowMedian": 0.754431
       },
       {
         "index": 21,
         "alphaBounds": [
-          35,
-          73,
-          222,
+          52,
+          127,
+          177,
           239
         ],
-        "foregroundPixels": 7625,
-        "width": 187,
-        "height": 166,
-        "relativeToRowMedian": 1.027974
+        "foregroundPixels": 3601,
+        "width": 125,
+        "height": 112,
+        "relativeToRowMedian": 1.029445
       },
       {
         "index": 22,
         "alphaBounds": [
-          37,
-          69,
-          219,
+          58,
+          125,
+          180,
           239
         ],
-        "foregroundPixels": 7725,
-        "width": 182,
-        "height": 170,
-        "relativeToRowMedian": 1.041456
+        "foregroundPixels": 3644,
+        "width": 122,
+        "height": 114,
+        "relativeToRowMedian": 1.041738
       },
       {
         "index": 23,
         "alphaBounds": [
-          45,
-          80,
-          210,
+          70,
+          132,
+          180,
           239
         ],
-        "foregroundPixels": 7210,
-        "width": 165,
-        "height": 159,
-        "relativeToRowMedian": 0.972026
+        "foregroundPixels": 3395,
+        "width": 110,
+        "height": 107,
+        "relativeToRowMedian": 0.970555
       },
       {
         "index": 24,
         "alphaBounds": [
-          34,
-          54,
-          222,
+          57,
+          128,
+          170,
           239
         ],
-        "foregroundPixels": 9135,
-        "width": 188,
-        "height": 185,
-        "relativeToRowMedian": 1.064127
+        "foregroundPixels": 3425,
+        "width": 113,
+        "height": 111,
+        "relativeToRowMedian": 1.076875
       },
       {
         "index": 25,
         "alphaBounds": [
-          45,
-          63,
-          211,
-          239
+          74,
+          133,
+          174,
+          240
         ],
-        "foregroundPixels": 9065,
-        "width": 166,
-        "height": 176,
-        "relativeToRowMedian": 1.055973
+        "foregroundPixels": 3400,
+        "width": 100,
+        "height": 107,
+        "relativeToRowMedian": 1.069014
       },
       {
         "index": 26,
         "alphaBounds": [
-          54,
-          91,
-          202,
+          81,
+          151,
+          170,
           239
         ],
-        "foregroundPixels": 8104,
-        "width": 148,
-        "height": 148,
-        "relativeToRowMedian": 0.944027
+        "foregroundPixels": 2961,
+        "width": 89,
+        "height": 88,
+        "relativeToRowMedian": 0.930986
       },
       {
         "index": 27,
         "alphaBounds": [
-          43,
-          133,
-          212,
-          239
+          82,
+          176,
+          184,
+          240
         ],
-        "foregroundPixels": 7834,
-        "width": 169,
-        "height": 106,
-        "relativeToRowMedian": 0.912575
+        "foregroundPixels": 2913,
+        "width": 102,
+        "height": 64,
+        "relativeToRowMedian": 0.915894
       },
       {
         "index": 28,
         "alphaBounds": [
-          35,
-          109,
-          222,
-          239
+          67,
+          161,
+          180,
+          240
         ],
-        "foregroundPixels": 8885,
-        "width": 187,
-        "height": 130,
-        "relativeToRowMedian": 1.204582
+        "foregroundPixels": 3291,
+        "width": 113,
+        "height": 79,
+        "relativeToRowMedian": 1.192823
       },
       {
         "index": 29,
         "alphaBounds": [
-          33,
-          136,
-          223,
+          66,
+          178,
+          181,
           239
         ],
-        "foregroundPixels": 7657,
-        "width": 190,
-        "height": 103,
-        "relativeToRowMedian": 1.038097
+        "foregroundPixels": 2874,
+        "width": 115,
+        "height": 61,
+        "relativeToRowMedian": 1.041682
       },
       {
         "index": 30,
         "alphaBounds": [
-          31,
-          154,
-          224,
-          239
+          62,
+          188,
+          179,
+          240
         ],
-        "foregroundPixels": 7095,
-        "width": 193,
-        "height": 85,
-        "relativeToRowMedian": 0.961903
+        "foregroundPixels": 2644,
+        "width": 117,
+        "height": 52,
+        "relativeToRowMedian": 0.958318
       },
       {
         "index": 31,
         "alphaBounds": [
-          17,
-          188,
-          238,
-          239
+          53,
+          209,
+          186,
+          240
         ],
-        "foregroundPixels": 7041,
-        "width": 221,
-        "height": 51,
-        "relativeToRowMedian": 0.954582
+        "foregroundPixels": 2638,
+        "width": 133,
+        "height": 31,
+        "relativeToRowMedian": 0.956144
       }
     ],
     "rowMedianForegroundPixels": [
-      10992.0,
-      11035.0,
-      9094.5,
-      8859.0,
-      7372.5,
-      7417.5,
-      8584.5,
-      7376.0
+      2910.5,
+      2923.5,
+      3490.5,
+      3406.5,
+      3479.0,
+      3498.0,
+      3180.5,
+      2759.0
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "ad8cd17d79a9f7b6f5ad7241837da531191324bef6ce6b16bdd571458864ca1c",
-      "160abb279af712e3e4b0d00190c81012294e8e6b11dc9f10ff19b30b3c7d5b3f",
-      "67aeb83f7da02a41164101172988afac0132c21109797cef1777d5bb92f70dab",
-      "e8fd78d82b80299ef06321491b5700f18b12489565a60ff8e8d8a7f37eda207e",
-      "1dc8de61dcb19256f4e07257a7ee665f66810b33659919663b4baf97ddc3e180",
-      "14a4d5f3fd2108fbcf1a691955bc555f0c519b6ff28301f76decdde0219a64de",
-      "492bffbc60413e5a679bd49e51e6b27b4171ea170a592eaafbd57fa0431e25ac",
-      "fddf168b02e72f9f14c67cb01bec8760958311981c3dd2d6b88a7a9c5a622400",
-      "e5fa0257e878d07c0a60b6a0112cbcaecae65b72ecd8f4039c371215695a17b4",
-      "02b75cfccb6c36145196d6261aea413eb47031704e6928bc1f32e8ab60418d47",
-      "7ec12fd573dd2bdafbe5d4886f9d4846e7a9184c2312fe3587d55d107176acb3",
-      "3af50ab761d2df097ce59b053e334f99fa31c5f541180c1a58ed2984f7102988",
-      "6df3aa5c47461c8f3174200c03f76597c1f8e778ecd722bc49dcb523a96c7c82",
-      "9121b4ea7b0c32d40581008ceb507802fb7566a3271df9dfe60eadded1b63855",
-      "ee3dab765782e2151e7f86219dbac5d2643fd7d9f1227223adbbe15ca168002f",
-      "577cc0caead656e5a66e7451dfb15d3ddc3ea13b54ee3076dc9be2a8ce4a8c11",
-      "d01dc45044eab5183170988d8a02a7f1bc7e3a7fa071d492537e4aba3d93f1b9",
-      "d6e9977dc30c56701e20e32566b7e1191ab0bef10ad236256c1ca5df6dbd0329",
-      "783f72455e4d80452c962daf95c8890b32c2d8f3fb3ce24fae86d815f4bf1810",
-      "dd9a18595199d11dfc66997d49a429fefd7570ddf1a2ab01fab7ae0847299d3c",
-      "0a01a1018694c80ba91a2e65a97d44a550ea4ccd48c135e0be5b3e5ae53ae7f3",
-      "12ddf56318e9709847eadf516a8d451d55895f8bc3e22cff27a6eb6237096af5",
-      "ffb1654b1dc32d18c4d9d075fd2c87ce3eac45f215dbe421978f539496e45064",
-      "49c335dd94f1ea20a9f35b48776c4dec7a195982e5d6a9a17e96d3105b468361",
-      "95fbaea48d30db707bef072fb48f432032c2d1c5d6c0f1f996b1407b2f69ace5",
-      "348809a3ab9c8240cf0f848c8a0b4a42ec54a62e063342522ce08610d1fd6834",
-      "a5856ac3e5b56739f7346d65d4e9ac8141a8fe85fcd306dd2f371e7ec08570e3",
-      "08fb82ab69cafaec930bcd04c628ba0946bf7a62cdc25ea03570cadf9e5940cf",
-      "3c6433a04c1b047edc8f0615057dc6235964ae22f0b4d49d284f3610ba66004b",
-      "b262b386ada84b641eee67d0232bfd58c68542ae88470406083d500392157c7d",
-      "caea50e60fd22dabe5e1bd05dd50bc01169bead78902d5604e4f2c155cfac2a7",
-      "d27c26ab7ed2f3ae8b5c8396b329a8cd8b35f3434e80a65323250a68e1936352"
+      "532d2c001346bbd5d296d13fb5f0079cd5cc64131813ab87f978358448adec56",
+      "9344f7b418749ec88326ca0b69cc73fb938e29dd492d51cc7c82bfd4f913948a",
+      "3681a2a025288f71965a9957f10795e25b8825deabbccbc605fbd0bfb1e7b033",
+      "29c1aac2ae3e884ea6228c394b024082fd2af852429ae6ba06d2385febda7311",
+      "4fe8ef0a74e0edfdeeb4fdd33f29e694ed80cd3851b9deec8d5df293c015af54",
+      "e5fed18a65526b9c7084b079be533258bd14d7281c3f82c75415e24e8a3afe75",
+      "7e5476dc457ce861c216b64afe52b7e4c8dab376755e6d67524ff557d43771d7",
+      "cbabd30b453ea7fcc9615d11b2e7118131004a5927d3927a46921547779e8db9",
+      "b775758c41ea76fd968b70dcd825411cf52ec306f2692cfb4b92b8f199f4197d",
+      "ec4b28fd7bc1bffb71ee7cd469183abaabf8103cd076dd00ea292868d834058a",
+      "e66c4961f3af7bb4df40d920e0d137c3e43374dae8aee66c9e886ad3dbff9447",
+      "6079a71f1dba1c212f56a45d8c5b92fa0be7af69275a506f5f9f429622f3d77b",
+      "8b686cdae63a34c0a2c004b306ff80f4332bebb696ef76cf0c38a3b1abe258eb",
+      "c387fbf888fcfc1df256152d56c216a74ad25c7ad2f72ea52ffec6f3c2603a3c",
+      "acabd12ed633163f69cef7f5a20e24b98888615c2b3b5a6508d31d32ccfe03b3",
+      "f9405c38f8a56256477144989903e44995bdc347ebec5344d610e1d0eee2da8c",
+      "de4b51d3b15c4c1d9f8082cdd70b98398107a863d51ce355b0a77abe5c2c5dbd",
+      "ff26dd68c2eaa71dea6cc2141e5815383eae5fa9937244c65bad4d98e1c685a0",
+      "bac11abd81c476b711c6fa2157cfa6a77cbb1a7c91b88aaf0f13ae6d7449c91c",
+      "3797adb7c11ff9e8b180fef538241f2a0ec0fd7326973375966d1e82751165eb",
+      "25f34d1190d82488c24bc2f7793871baff68bc8b20e4d2c0d3caf5a9e5c144b0",
+      "4a9d4763237984801fc76d1f068f6aaa56f3e5ffaedc8f8a4a14f3f4efa26c9f",
+      "79bc933b182fa5ce84ce3d90be3334ab3dc7fe9fcaccd16dd6e13adf5b5676f9",
+      "979762ef515194334709009063d640159c7be437245cc57876ed5832c5e9479b",
+      "23ec736c64e092571dabdf1420147ba3ef0c66bf0788f47fb82653b8311b22bd",
+      "4117e59c9ca2a2f4c099260d0f56f00c3681916353d882fcc77ecdededd4fbe9",
+      "f5805602850cb7e270dea114c13acb4fd20f7c69a63d1c2679c2c6e4a6705372",
+      "3797f3564f3d52ee723229c3f3ac2af83f9491e2169d84e8a6bfcbc003a51eea",
+      "1003a05bed9b18f83b1650c97e18ebf054e448f77dd6722c3c91b79b94390ef7",
+      "5aaf81eacf9676f2754a5a441bd0014e0e1aadcd89df42463b98577c9467313e",
+      "0928f218ef0cd5cb36f1b0845981ba051c873fd7ce350c5ca2842fcf2a3065b2",
+      "6dc3a6a3240b5b54ab75735b4164d571541819908249820e85325c81dc291f71"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v75-enemy-fixes/015/scale-review.json",
+    "sha256": "0e893ffd604ad3e1dd68d7eb61209a528dc8aa8e2978befba3fbea72fea71770",
+    "status": "reviewed",
+    "profileId": "enemy-015-prowler",
+    "reviewer": "Codex /root/gameplay_audit_fix",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1.0,
+      "move": 1.208856,
+      "attack": 1.34525,
+      "death": 1.194166
+    },
+    "sourceSha256ByClip": {
+      "idle": "ddcdb6a1da2b1cdba558f0f6c191029ab07b90a9dcbaa5e0661aeaabd2805c4f",
+      "move": "c406d7a3383afa8d70053a9344763e7031a40d72a9e369fc69cbd5b8039af403",
+      "attack": "3e22f9bd66f51e8f82d81ff8358a3fc71055961673448365f8747ee88e288546",
+      "death": "59f89194dbe40b1b3446b9a75d7c7055e50a751ee5632e94daf9ff14e1074cfa"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/015/idle-physical-review.jpg",
+        "sha256": "de8107dbf73226387f98dff00f92c4a11a37aad5aec1d608f596c4fcbda002ca"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/move-physical-review.jpg",
+        "sha256": "f79908aac80ddf122935a3153bf83eaeea22618ef651817fd1bd1813b41012ca"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/attack-physical-review.jpg",
+        "sha256": "4399b613c8d386a65136147a070bcc28f285642650d9939bf7806b70e8621b51"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/015/death-physical-review.jpg",
+        "sha256": "b522c3a6023c8b93f52be5ff825ef4679b7725cd10bf6e62fcfe8e6d2193069e"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v75-enemy-fixes/015/anchor-review.json",
+    "scale": "docs/references/v75-enemy-fixes/015/scale-review.json"
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 15,
+    "remainingStrictPixelCount": 0
   }
 }

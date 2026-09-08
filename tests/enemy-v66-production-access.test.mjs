@@ -12,7 +12,7 @@ import { getCatalogEntryV62 } from '../src/catalog-runtime-v62.js';
 import { getCatalogSpriteFrameV62 } from '../src/catalog-ui-v62.js';
 import { getEnemyAtlasSheetsForWorldV66 } from '../src/enemy-atlas-loader-v65.js';
 
-const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster'];
+const expectedIds = ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-015-prowler', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-051-ceto-reef-predator', 'enemy-055-albino-chestburster'];
 
 test('la readylist V66 pointe vers les octets et les288 racines effectivement revus', async () => {
   for (const asset of V66_READY_ENEMY_PROFILE_ASSETS) {
@@ -33,8 +33,8 @@ test('la readylist V66 pointe vers les octets et les288 racines effectivement re
   }
 });
 
-test('les neuf profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
-  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les neuf profils doivent être acceptés, pas seulement présents sur disque.');
+test('les onze profils V66 acceptés sont accessibles au même atlas depuis mission et laboratoire', () => {
+  assert.deepEqual(V66_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.profileId).sort(), [...expectedIds].sort(), 'Les onze profils doivent être acceptés, pas seulement présents sur disque.');
   for (const id of expectedIds) {
     const source = ENEMIES.find((enemy) => enemy.id === id);
     const profile = resolveEnemyProfileVisualV66(source);

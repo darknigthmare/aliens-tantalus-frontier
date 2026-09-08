@@ -30,6 +30,7 @@ import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
 import { beginNpcConversationV62, applyNpcDialogueChoiceV62 } from './npc-dialogue-v62.js';
+import { HubDialogueUiV76 } from './hub-dialogue-ui-v76.js';
 import { createMissionInsertionV62, restoreMissionInsertionV62 } from './mission-insertion-v62.js';
 import { MissionInsertionUiV62 } from './mission-insertion-ui-v62.js';
 import {
@@ -119,6 +120,13 @@ const hubEngine = new HubGame(byId('hub-canvas'), {
   onAction: handleHubAction,
   onPersist: persistHub,
   onStatus: renderHubStatus
+});
+const hubDialogueUiV76 = new HubDialogueUiV76({
+  layer: byId('hub-dialogue-layer'),
+  dialog: byId('hub-dialogue'),
+  background: byId('app'),
+  documentRef: document,
+  onRequestClose: () => closeHubDialogue()
 });
 
 const VIEW_META = Object.freeze({
@@ -284,17 +292,15 @@ function currentEditorProject(kind = null) {
   return clone(project);
 }
 
-function closeHubDialogue({ resume = true } = {}) {
-  const dialogue = byId('hub-dialogue');
-  if (!dialogue || dialogue.hidden) return;
-  dialogue.hidden = true;
-  document.documentElement.classList.remove('hub-dialogue-mode');
+function closeHubDialogue({ resume = true, restoreFocus = true } = {}) {
+  const wasOpen = hubDialogueUiV76.close({ restoreFocus });
   pendingHubInteraction = null;
   pendingNpcConversationV62 = null;
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
   byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
   if (resume && activeView === 'hub' && !activeHubStation) hubEngine.resume();
+  return wasOpen;
 }
 
 function closeHubStation({ resume = true } = {}) {
@@ -334,9 +340,7 @@ function openHubDialogue(interaction) {
   byId('hub-dialogue-choices').replaceChildren();
   byId('hub-dialogue-continue').hidden = false;
   byId('hub-dialogue-continue').textContent = 'OUVRIR LA STATION';
-  byId('hub-dialogue').hidden = false;
-  document.documentElement.classList.add('hub-dialogue-mode');
-  byId('hub-dialogue-continue').focus({ preventScroll: true });
+  hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
   return true;
 }
 
@@ -363,9 +367,9 @@ function openNpcDialogueV62(interaction) {
   const choices = byId('hub-dialogue-choices');
   choices.innerHTML = conversation.choices.map((choice) => `<button class="hub-dialogue-choice" type="button" data-npc-dialogue-choice="${escapeHtml(choice.id)}" ${choice.available ? '' : `disabled title="${escapeHtml(choice.blockedReason)}"`}>${escapeHtml(choice.label)}</button>`).join('');
   byId('hub-dialogue-continue').hidden = true;
-  byId('hub-dialogue').hidden = false;
-  document.documentElement.classList.add('hub-dialogue-mode');
-  choices.querySelector('button:not(:disabled)')?.focus({ preventScroll: true });
+  hubDialogueUiV76.open({
+    initialFocus: choices.querySelector('button:not(:disabled)') || byId('hub-dialogue-cancel')
+  });
   return true;
 }
 
@@ -392,7 +396,7 @@ function chooseNpcDialogueV62(choiceId) {
 function showView(name) {
   if (!VIEW_META[name]) return;
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
-  closeHubDialogue({ resume: false });
+  closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
@@ -455,6 +459,7 @@ function openForgeContext() {
 }
 
 function showTitleScreen() {
+  closeHubDialogue({ resume: false, restoreFocus: false });
   hubEngine.stop(false);
   engine.stop();
   destroyMissionInsertionUiV62();
@@ -1973,7 +1978,7 @@ function bind() {
       return;
     }
     const view = pendingHubInteraction?.contract?.view;
-    closeHubDialogue({ resume: false });
+    closeHubDialogue({ resume: false, restoreFocus: false });
     if (!openHubStation(view)) hubEngine.resume();
   };
   byId('hub-dialogue-choices').onclick = (event) => {
@@ -1984,12 +1989,13 @@ function bind() {
     button.onclick = () => closeHubStation();
   });
   globalThis.addEventListener('keydown', (event) => {
-    if (event.code !== 'Escape') return;
+    if (event.key !== 'Escape' && event.code !== 'Escape') return;
     if (missionArchiveOverlayV68?.openState) {
       event.preventDefault();
       missionArchiveOverlayV68.close();
-    } else if (!byId('hub-dialogue').hidden) {
+    } else if (hubDialogueUiV76.openState) {
       event.preventDefault();
+      event.stopPropagation?.();
       closeHubDialogue();
     } else if (activeHubStation) {
       event.preventDefault();
@@ -2059,6 +2065,7 @@ function bind() {
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
+    hubDialogueUiV76.destroy({ restoreFocus: false });
     hubEngine.stop();
     engine.stop();
     if (standaloneContext) return;

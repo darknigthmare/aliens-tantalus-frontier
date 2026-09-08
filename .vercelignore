@@ -1,6 +1,8 @@
 node_modules
 dist
 .tmp
+tmp
+tmp/**
 .tmp/**
 .tmp*
 .tmp*/**
@@ -54,6 +56,8 @@ assets/openai/sprites/frames/v73
 assets/openai/sprites/frames/v73/**
 assets/openai/sprites/frames/v74
 assets/openai/sprites/frames/v74/**
+assets/openai/sprites/frames/v75
+assets/openai/sprites/frames/v75/**
 assets/openai/sprites/normalized/enemy-clips-v66
 assets/openai/sprites/normalized/enemy-clips-v66/**
 assets/openai/sprites/normalized/enemy-motion-v66
@@ -68,6 +72,8 @@ assets/openai/sprites/normalized/enemy-profiles-v66/*
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-055-albino-chestburster.webp
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp
 !assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp
+!assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp
+!assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp
 docs/references/V66_*
 docs/references/V66_*/**
 docs/references/v66-*
@@ -80,6 +86,14 @@ docs/references/V74_*
 docs/references/V74_*/**
 docs/references/v74-*
 docs/references/v74-*/**
+docs/references/V75_*
+docs/references/V75_*/**
+docs/references/v75-*
+docs/references/v75-*/**
+docs/references/V76_*
+docs/references/V76_*/**
+docs/references/v76-*
+docs/references/v76-*/**
 scripts/__pycache__
 scripts/__pycache__/**
 .qa

@@ -25,35 +25,64 @@
   },
   "pivot": {
     "x": 128,
-    "y": 240
+    "y": 192
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
-  "normalizedSha256": "a62072b6889cfcb29283556773ce21b3d8b1851e914d2a8aa3f9bb3038da172d",
+  "normalizedSha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
   "preview": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/all.gif",
-  "previewSha256": "8231345aff21a35ae607745d6c1eed5d5ba0d3e8d97d21cd0e94c777adfbeea0",
+  "previewSha256": "68a0f8f83f33a9b481804df7780b5993cbce9d12184904967113baf7172b7626",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.517321016,
+  "scale": 0.459837218,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
-    "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "idle": 1,
+    "move": 0.97021318,
+    "attack": 1.014242729,
+    "death": 0.987309064
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "status": "pending",
-    "reason": "No source-anchor review file."
+    "path": "docs/references/v75-enemy-fixes/051/anchor-review.json",
+    "sha256": "f835571520f4bbcbd3ea7f7d0a39ed96bdcc4080e373496452818e7818c91c73",
+    "status": "reviewed",
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/051/idle.manual-landmarks.png",
+        "sha256": "33e7e7ac6dc82513604b09d13b23d232e2ab5b62537cf2f63a1b0529c800fd98"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/move.manual-landmarks.png",
+        "sha256": "81f689890d78e99a28d158c4589dfed06548cb821348907ee7e90790ca64b764"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/attack.manual-landmarks.png",
+        "sha256": "86eb76e5474f15eeb52aade15c305996c8f32211eef4d6d6cde1e2d4b8965ce3"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/death.manual-landmarks.png",
+        "sha256": "a984f72798e51d60ce5e3fab02ec39eb585fc9605118afbbcea0505368c48ed9"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/MEASUREMENT_NOTES.md",
+        "sha256": "83d7de94ab9e0c83c27f6823f4901649fc946b684c06fe73c7814426f3c5bf9b"
+      }
+    ],
+    "reviewer": "Codex level_props_audit_fix V75 independent manual review",
+    "reviewedAt": "2026-09-05",
+    "method": "All32 source thoracic points and eight corpse support planes were manually read on unchanged native sources, plotted and visually checked. Living roots use the observed thorax plus72px ventral datum, preserving paddling and tail motion; not bbox centering, bottom alignment or planted feet. Corpse roots independently use lower paddle/body substrate planes to retain collapse.",
+    "reviewedPoseCount": 32,
+    "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
     "removeEnclosedMagentaAaFringe": true,
-    "removeMagentaSpill": true
+    "removeMagentaSpill": true,
+    "trimTransparentPadding": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -294,9 +323,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-051-ceto-reef-predator/idle.webp",
-      "sha256": "b26a177da02959d4a37d0b6dc06279d51605a64430ab08b7ce0ce9f240f4ed9c",
+      "sha256": "42d3f3bae7424c8a8c42fb117bd55c970d4007573ef207dae8c1818760ed5ce0",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/idle.gif",
-      "previewSha256": "fe8808f1c15c2dd30d7ef136e44b7cc195c65b8bd6acf213888ac1e8b81c4b6d"
+      "previewSha256": "8f699a0e0ebf53016aa897d6e93993d45fb86d77fb9e127ed13211337991a5c7"
     },
     {
       "id": "move",
@@ -313,9 +342,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-051-ceto-reef-predator/move.webp",
-      "sha256": "b2a6cd90734bd94ff09ebea8af9f37ee70c6b7b16476cd2e60b95bfb3c707852",
+      "sha256": "9a304501648519fa63710d612aac1f3e5e87f88c24ae91f8f43283c7eacedd33",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/move.gif",
-      "previewSha256": "9401befb6a7790d1520d377e93f9865e95ce4085497e67c182b40cabc9472ae6"
+      "previewSha256": "01c2a86b32431ca9c0561d3f4184bf477425e80c13bebea37fe2247c5963c550"
     },
     {
       "id": "attack",
@@ -332,9 +361,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-051-ceto-reef-predator/attack.webp",
-      "sha256": "2558802d8c4b8aec35407dbcf0f8a273a5616d3d612cdfcec1b906c44f80a2d6",
+      "sha256": "964bf34401c75374eeba5e2543ad97edde7cdaeae0069e660cdbd74dfd851e64",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/attack.gif",
-      "previewSha256": "d87e2e8d393eb703a9475607d808f021e04b5f75f2636823c5ad5410f9af762b"
+      "previewSha256": "3e7a1370d83b757f00a43e3500eaddd25c14f613994987a53bdaa0a3690eb168"
     },
     {
       "id": "death",
@@ -351,9 +380,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-051-ceto-reef-predator/death.webp",
-      "sha256": "3af8bc3f503c05f9f7e90172cf67c01997697b5385af417b0374b9b0c8c8770d",
+      "sha256": "c0927ef97c827299be4b73fc28dd9237de3fa9cce9faf95921ff5a1800ef571b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-051-ceto-reef-predator/death.gif",
-      "previewSha256": "762980d56e87681023d9f6d4daaf4abde78c18b0942146fb256221f857b448d6"
+      "previewSha256": "139a4f783c014a4c259690e9606a86ce5bb1af7409b060b7c03eb91240fc75b9"
     }
   ],
   "placements": [
@@ -388,17 +417,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "46e48d187b695a1d28dbcfe8fefe97a6c7f58811a6025bc5f73e40ab57c26819",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          38,
+          214,
+          425,
+          322
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        236,
+        337
+      ],
+      "sourceLandmark": [
+        236,
+        265
+      ],
+      "sourceAnchorEvidence": "Pose1. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        128.06976744186045,
+        191.94444444444446
+      ],
       "index": 0,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        26,
-        181,
-        229,
-        240
+        37,
+        135,
+        215,
+        185
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -411,7 +474,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 1,
+        "neutralizedPixelCount": 2,
         "remainingStrictPixelCount": 0
       }
     },
@@ -446,17 +509,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "06aafc0365f1aa87e4506f0d0fe71f0361637813db7f9f52abc8efe53cd94dbf",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          35,
+          214,
+          417,
+          322
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        337
+      ],
+      "sourceLandmark": [
+        231,
+        265
+      ],
+      "sourceAnchorEvidence": "Pose2. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        196.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        128.30366492146595,
+        191.94444444444446
+      ],
       "index": 1,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        181,
-        229,
-        240
+        38,
+        135,
+        214,
+        185
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -504,17 +601,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8d5b7bba9acdaaaddee92a94517630fa3ed99853486107bb6a28d2809bc65717",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          214,
+          415,
+          322
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        230,
+        338
+      ],
+      "sourceLandmark": [
+        230,
+        266
+      ],
+      "sourceAnchorEvidence": "Pose3. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        127.9869451697128,
+        192.4074074074074
+      ],
       "index": 2,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        181,
-        229,
-        240
+        37,
+        135,
+        213,
+        185
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -562,17 +693,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9708cb774f6d215a2a4d08318e01c0075855e138b474083539da8394ca731fdb",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          214,
+          412,
+          322
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        229,
+        337
+      ],
+      "sourceLandmark": [
+        229,
+        265
+      ],
+      "sourceAnchorEvidence": "Pose4. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        127.94488188976378,
+        191.94444444444446
+      ],
       "index": 3,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        181,
-        228,
-        240
+        37,
+        135,
+        212,
+        185
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -620,17 +785,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "318fd912825317827f5749c9f893a1f7b15b915990c503f163b99d4d76752fea",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          38,
+          141,
+          425,
+          248
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        265
+      ],
+      "sourceLandmark": [
+        235,
+        193
+      ],
+      "sourceAnchorEvidence": "Pose5. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        197.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        127.60981912144703,
+        191.78504672897196
+      ],
       "index": 4,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        26,
-        182,
-        229,
-        240
+        37,
+        135,
+        215,
+        184
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -678,17 +877,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9a844acd156c734fab62d3dfd9cb5b1f07d0c0f042520b1237e7148d214b7d2c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          35,
+          141,
+          417,
+          248
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        265
+      ],
+      "sourceLandmark": [
+        231,
+        193
+      ],
+      "sourceAnchorEvidence": "Pose6. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        196.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        128.30366492146595,
+        191.78504672897196
+      ],
       "index": 5,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        182,
-        229,
-        240
+        38,
+        135,
+        214,
+        184
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -736,17 +969,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "66ea35df9c04d7a262f117f70ce4144e1d225a24590743756fe5691ab4bd2601",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          140,
+          412,
+          248
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        227,
+        266
+      ],
+      "sourceLandmark": [
+        227,
+        194
+      ],
+      "sourceAnchorEvidence": "Pose7. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        195.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.80263157894737,
+        192.33333333333334
+      ],
       "index": 6,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        181,
-        228,
-        240
+        38,
+        134,
+        213,
+        184
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -794,17 +1061,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "0582bbbd4ae45b0ceaec759d20d41fb7f49553f1e358d0b49249acbc52294aff",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          141,
+          412,
+          248
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        226,
+        266
+      ],
+      "sourceLandmark": [
+        226,
+        194
+      ],
+      "sourceAnchorEvidence": "Pose8. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        195.0,
+        125.0
+      ],
+      "renderedAnchor": [
+        127.56692913385827,
+        192.2429906542056
+      ],
       "index": 7,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1,
+      "appliedScale": 0.459837218,
       "renderedBounds": [
-        28,
-        182,
-        228,
-        240
+        38,
+        135,
+        213,
+        184
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -852,17 +1153,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "45aa251444e60e443e0c247beeb3ed56083b4358ae266d00c94f59aefe2cb7f4",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          46,
+          215,
+          424,
+          342
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        234,
+        338
+      ],
+      "sourceLandmark": [
+        234,
+        266
+      ],
+      "sourceAnchorEvidence": "Pose1. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        188.0,
+        123.0
+      ],
+      "renderedAnchor": [
+        128.05291005291005,
+        192.20472440944883
+      ],
       "index": 8,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        28,
-        171,
-        227,
-        240
+        44,
+        137,
+        213,
+        194
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -910,17 +1245,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a3fa6184d564016ac1c9b395cdf0fd96574e341ed4c1e48349368a30126ec98f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          18,
+          217,
+          413,
+          341
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        224,
+        343
+      ],
+      "sourceLandmark": [
+        224,
+        271
+      ],
+      "sourceAnchorEvidence": "Pose2. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        206.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.7873417721519,
+        191.88709677419354
+      ],
       "index": 9,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        24,
-        173,
-        231,
-        240
+        36,
+        136,
+        212,
+        191
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -968,17 +1337,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "01a28589509e31e72c0f0f4fa106c0b0edf1cb8c6a8dccb705719289ce6b1fbf",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          13,
+          216,
+          413,
+          340
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        345
+      ],
+      "sourceLandmark": [
+        231,
+        273
+      ],
+      "sourceAnchorEvidence": "Pose3. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        129.0
+      ],
+      "renderedAnchor": [
+        128.01,
+        192.21774193548387
+      ],
       "index": 10,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        23,
-        173,
-        233,
-        240
+        31,
+        135,
+        209,
+        190
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -991,7 +1394,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 1,
+        "neutralizedPixelCount": 0,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1026,17 +1429,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b91790237b572b062d9d2db12f9587d1a587cdb153abaa295dfa5fee1a18da1f",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          17,
+          216,
+          411,
+          339
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        235,
+        343
+      ],
+      "sourceLandmark": [
+        235,
+        271
+      ],
+      "sourceAnchorEvidence": "Pose4. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        218.0,
+        127.0
+      ],
+      "renderedAnchor": [
+        128.38071065989848,
+        191.78861788617886
+      ],
       "index": 11,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        24,
-        173,
-        231,
-        240
+        31,
+        135,
+        207,
+        190
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1084,17 +1521,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a3356753c5418c343647e187109c30a3d5858ef46169c6988abbb085f145a1f0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          34,
+          117,
+          424,
+          263
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        270
+      ],
+      "sourceLandmark": [
+        232,
+        198
+      ],
+      "sourceAnchorEvidence": "Pose5. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        198.0,
+        153.0
+      ],
+      "renderedAnchor": [
+        128.33846153846156,
+        192.1164383561644
+      ],
       "index": 12,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        26,
-        161,
-        231,
-        240
+        40,
+        124,
+        214,
+        189
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1142,17 +1613,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9a4912c8397949bfbfe2383ebde97bcb44650bfd7fc04e8496b76873047b8926",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          78,
+          410,
+          260
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        215,
+        268
+      ],
+      "sourceLandmark": [
+        215,
+        196
+      ],
+      "sourceAnchorEvidence": "Pose6. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        184.0,
+        190.0
+      ],
+      "renderedAnchor": [
+        128.04749340369392,
+        191.56043956043956
+      ],
       "index": 13,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        28,
-        143,
-        227,
-        240
+        46,
+        107,
+        215,
+        188
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1200,17 +1705,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d54c9d23613ab54fef8c26546380025fe316980cbadfcf486b6814901bb56c0c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          14,
+          141,
+          407,
+          255
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        223,
+        278
+      ],
+      "sourceLandmark": [
+        223,
+        206
+      ],
+      "sourceAnchorEvidence": "Pose7. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        209.0,
+        137.0
+      ],
+      "renderedAnchor": [
+        128.06615776081424,
+        192.28947368421052
+      ],
       "index": 14,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        25,
-        178,
-        231,
-        240
+        35,
+        131,
+        210,
+        182
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1258,17 +1797,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b9034a8e226a20d895b05537991b7ca750d80e599bf319e4396807ad81be1972",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          17,
+          141,
+          411,
+          259
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        220,
+        270
+      ],
+      "sourceLandmark": [
+        220,
+        198
+      ],
+      "sourceAnchorEvidence": "Pose8. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        203.0,
+        129.0
+      ],
+      "renderedAnchor": [
+        127.68020304568527,
+        191.9406779661017
+      ],
       "index": 15,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.97021318,
+      "appliedScale": 0.446140129,
       "renderedBounds": [
-        24,
-        176,
-        231,
-        240
+        37,
+        134,
+        213,
+        187
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1281,7 +1854,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 2,
+        "neutralizedPixelCount": 1,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1316,17 +1889,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d2e8d20ec8568634bcc2bd46bf0a0237fcbce73ad0b45d410a70cc418464a217",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          214,
+          420,
+          323
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        232,
+        338
+      ],
+      "sourceLandmark": [
+        232,
+        266
+      ],
+      "sourceAnchorEvidence": "Pose1. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        200.0,
+        124.0
+      ],
+      "renderedAnchor": [
+        128.29896907216494,
+        192.01834862385323
+      ],
       "index": 16,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        26,
-        181,
-        230,
-        240
+        35,
+        134,
+        216,
+        185
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1374,17 +1981,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4d35ec6dc658fc6f74955b6a3573a51567778cb1d9c0543e4335fa84842d9a41",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          73,
+          215,
+          386,
+          366
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        210,
+        341
+      ],
+      "sourceLandmark": [
+        210,
+        269
+      ],
+      "sourceAnchorEvidence": "Pose2. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        137.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        127.9041533546326,
+        192.41059602649005
+      ],
       "index": 17,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        46,
-        159,
-        211,
-        240
+        64,
+        134,
+        210,
+        204
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1432,17 +2073,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d09f1262619f8ac1ca637c1b6207be670afc16d01a23348ee9aa3f2576d179ae",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          43,
+          227,
+          359,
+          359
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        179,
+        353
+      ],
+      "sourceLandmark": [
+        179,
+        281
+      ],
+      "sourceAnchorEvidence": "Pose3. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        136.0,
+        126.0
+      ],
+      "renderedAnchor": [
+        128.26582278481013,
+        192.1818181818182
+      ],
       "index": 18,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        44,
-        169,
-        211,
-        240
+        65,
+        133,
+        212,
+        195
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1490,17 +2165,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "46617ac73cd5b167c641c49920fa8418addf8f972117ee90788cbb64793400eb",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          6,
+          230,
+          433,
+          349
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        244,
+        350
+      ],
+      "sourceLandmark": [
+        244,
+        278
+      ],
+      "sourceAnchorEvidence": "Pose4. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        238.0,
+        120.0
+      ],
+      "renderedAnchor": [
+        127.91803278688525,
+        192.46218487394958
+      ],
       "index": 19,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        16,
-        175,
-        240,
-        240
+        17,
+        137,
+        216,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1548,17 +2257,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b48243a5f0fb0f8a4ed7a8e6d1540397ae079fa1bae69de6f2c7644b893e6a66",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          24,
+          116,
+          438,
+          251
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        256,
+        254
+      ],
+      "sourceLandmark": [
+        256,
+        182
+      ],
+      "sourceAnchorEvidence": "Pose5. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        232.0,
+        138.0
+      ],
+      "renderedAnchor": [
+        128.15458937198068,
+        192.4
+      ],
       "index": 20,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
         20,
-        167,
-        237,
-        240
+        128,
+        213,
+        191
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1606,17 +2349,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "901abf8d0786313d499577ff9c59dc4594b01a1882e038242163d1438ebc4ffb",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          75,
+          129,
+          392,
+          268
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        231,
+        250
+      ],
+      "sourceLandmark": [
+        231,
+        178
+      ],
+      "sourceAnchorEvidence": "Pose6. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        156.0,
+        121.0
+      ],
+      "renderedAnchor": [
+        127.83280757097792,
+        191.58273381294964
+      ],
       "index": 21,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        44,
-        165,
-        211,
-        240
+        55,
+        135,
+        203,
+        200
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1629,7 +2406,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 0,
+        "neutralizedPixelCount": 1,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1664,17 +2441,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "93f1d052720a9c965a2fcf2bc6041b9e17e2375dec7a66dbb99f9b3f0fb3cadf",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          10,
+          137,
+          380,
+          243
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        204,
+        269
+      ],
+      "sourceLandmark": [
+        204,
+        197
+      ],
+      "sourceAnchorEvidence": "Pose7. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        194.0,
+        132.0
+      ],
+      "renderedAnchor": [
+        127.7081081081081,
+        192.0188679245283
+      ],
       "index": 22,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        30,
-        182,
-        225,
-        240
+        37,
+        131,
+        210,
+        180
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1722,17 +2533,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2b3b60efaa0fb9052b217332f73e87492a6b294d0f8d7818a7ac441782108071",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          6,
+          137,
+          380,
+          243
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        195,
+        268
+      ],
+      "sourceLandmark": [
+        195,
+        196
+      ],
+      "sourceAnchorEvidence": "Pose8. Aquatic thoracic-mass datum plus a fixed72 native-pixel ventral offset. This is a virtual collision-keel/root, NOT a lowest-foot contact or bounding-box bottom. Paddling limbs and tail may move independently without vertical body snapping.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        189.0,
+        131.0
+      ],
+      "renderedAnchor": [
+        127.93048128342247,
+        191.5566037735849
+      ],
       "index": 23,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 1.014242729,
+      "appliedScale": 0.466386555,
       "renderedBounds": [
-        30,
-        182,
-        227,
-        240
+        40,
+        131,
+        214,
+        180
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1780,17 +2625,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "7b1f7dc8431bac25c8b2a070625c4ccc46907b771de8272c40b8547ecd592342",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          32,
+          209,
+          414,
+          337
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        228,
+        337
+      ],
+      "sourceLandmark": [
+        228,
+        267
+      ],
+      "sourceAnchorEvidence": "Pose1. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        196.0,
+        128.0
+      ],
+      "renderedAnchor": [
+        127.76439790575917,
+        192.0
+      ],
       "index": 24,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        28,
-        171,
-        229,
-        240
+        39,
+        134,
+        212,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1803,7 +2682,7 @@
         },
         "applied": true,
         "nativeAlphaPreserved": false,
-        "neutralizedPixelCount": 1,
+        "neutralizedPixelCount": 0,
         "remainingStrictPixelCount": 0
       }
     },
@@ -1838,17 +2717,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "817d290f0e6ed93a1f4eb31f7e54b5f07e24101e463f46c6443700381944499c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          43,
+          230,
+          389,
+          360
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        207,
+        360
+      ],
+      "sourceLandmark": [
+        207,
+        280
+      ],
+      "sourceAnchorEvidence": "Pose2. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        164.0,
+        130.0
+      ],
+      "renderedAnchor": [
+        128.41618497109826,
+        192.0
+      ],
       "index": 25,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        37,
-        170,
-        219,
-        240
+        54,
+        133,
+        211,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1896,17 +2809,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "e8f2e65dd732b1e82fc608a23fd5eb4d87052023f5f87d2c1bc35624b620443b",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          22,
+          257,
+          413,
+          363
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        221,
+        361
+      ],
+      "sourceLandmark": [
+        221,
+        309
+      ],
+      "sourceAnchorEvidence": "Pose3. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        199.0,
+        104.0
+      ],
+      "renderedAnchor": [
+        127.59335038363172,
+        192.0943396226415
+      ],
       "index": 26,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        26,
-        182,
-        231,
-        240
+        37,
+        145,
+        215,
+        193
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -1954,17 +2901,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "23eee9f525f70a3894dd062602ee137ec26322eca795b9b5b5b24502155bfa1c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          29,
+          263,
+          412,
+          360
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        211,
+        357
+      ],
+      "sourceLandmark": [
+        211,
+        315
+      ],
+      "sourceAnchorEvidence": "Pose4. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        182.0,
+        94.0
+      ],
+      "renderedAnchor": [
+        127.68407310704961,
+        191.63917525773195
+      ],
       "index": 27,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        28,
-        187,
-        229,
-        240
+        45,
+        149,
+        219,
+        193
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2012,17 +2993,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "4f651bed9de88f64eb18fd3bf586036aa782ac9603b4deb6ad02534dd4620ce0",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 28,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
-      "renderedBounds": [
-        28,
-        188,
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          34,
+          155,
+          414,
+          250
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
         228,
-        240
+        250
+      ],
+      "sourceLandmark": [
+        228,
+        205
+      ],
+      "sourceAnchorEvidence": "Pose5. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        194.0,
+        95.0
+      ],
+      "renderedAnchor": [
+        128.32105263157894,
+        192.0
+      ],
+      "index": 28,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
+      "renderedBounds": [
+        40,
+        149,
+        213,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2070,17 +3085,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a1c493db30cc5b95bb8f116d12199a1f1cb757b7606c25ca34c86450023c738e",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          160,
+          396,
+          246
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        222,
+        248
+      ],
+      "sourceLandmark": [
+        222,
+        207
+      ],
+      "sourceAnchorEvidence": "Pose6. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        191.0,
+        88.0
+      ],
+      "renderedAnchor": [
+        127.86575342465754,
+        191.90697674418604
+      ],
       "index": 29,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        32,
-        192,
-        224,
-        240
+        41,
+        152,
+        207,
+        191
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2128,17 +3177,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d10b774a7e875ac52736b263081c472e28561a3834930d12413a60bd79f48a0c",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          23,
+          181,
+          395,
+          246
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
+        218,
+        246
+      ],
+      "sourceLandmark": [
+        218,
+        220
+      ],
+      "sourceAnchorEvidence": "Pose7. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        195.0,
+        65.0
+      ],
+      "renderedAnchor": [
+        127.58870967741936,
+        192.0
+      ],
       "index": 30,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
       "renderedBounds": [
-        30,
-        203,
-        226,
-        240
+        39,
+        162,
+        208,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2186,17 +3269,51 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "87cf3577276088d6c39a29e335a5eea393ace6c2e4c592289a506b3b5becc2c4",
       "sourceOwnershipTransfers": [],
-      "anchorStatus": "pending-body-root-review",
-      "anchorMethod": "legacy-bounds-center-bottom",
-      "index": 31,
-      "scale": 0.517321016,
-      "sourceScale": 1.0,
-      "appliedScale": 0.517321016,
-      "renderedBounds": [
-        30,
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          29,
+          189,
+          401,
+          245
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
+      "anchorStatus": "reviewed-physical-root",
+      "anchorMethod": "measured-source-body-landmark",
+      "sourceAnchor": [
         208,
-        226,
-        240
+        246
+      ],
+      "sourceLandmark": [
+        208,
+        225
+      ],
+      "sourceAnchorEvidence": "Pose8. Postmortem lower paddle/body support plane, manually observed independently of the caudal fin. Root follows the substrate datum while the thorax collapses toward it; not a new swimming body centre.",
+      "sourceAnchorConfidence": "medium",
+      "anchorOffsetInCroppedSource": [
+        179.0,
+        57.0
+      ],
+      "renderedAnchor": [
+        128.31989247311827,
+        192.44642857142858
+      ],
+      "index": 31,
+      "scale": 0.459837218,
+      "sourceScale": 0.987309064,
+      "appliedScale": 0.454001453,
+      "renderedBounds": [
+        47,
+        167,
+        216,
+        192
       ],
       "magentaSpill": {
         "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2219,467 +3336,516 @@
       {
         "index": 0,
         "alphaBounds": [
-          27,
-          182,
-          228,
-          239
+          37,
+          135,
+          215,
+          185
         ],
-        "foregroundPixels": 7341,
-        "width": 201,
-        "height": 57,
-        "relativeToRowMedian": 1.006375
+        "foregroundPixels": 5874,
+        "width": 178,
+        "height": 50,
+        "relativeToRowMedian": 1.00772
       },
       {
         "index": 1,
         "alphaBounds": [
-          29,
-          182,
-          228,
-          239
+          38,
+          135,
+          214,
+          185
         ],
-        "foregroundPixels": 7259,
-        "width": 199,
-        "height": 57,
-        "relativeToRowMedian": 0.995133
+        "foregroundPixels": 5801,
+        "width": 176,
+        "height": 50,
+        "relativeToRowMedian": 0.995196
       },
       {
         "index": 2,
         "alphaBounds": [
-          29,
-          182,
-          228,
-          239
+          37,
+          135,
+          213,
+          185
         ],
-        "foregroundPixels": 7330,
-        "width": 199,
-        "height": 57,
-        "relativeToRowMedian": 1.004867
+        "foregroundPixels": 5857,
+        "width": 176,
+        "height": 50,
+        "relativeToRowMedian": 1.004804
       },
       {
         "index": 3,
         "alphaBounds": [
-          29,
-          182,
-          227,
-          239
+          37,
+          135,
+          212,
+          185
         ],
-        "foregroundPixels": 7224,
-        "width": 198,
-        "height": 57,
-        "relativeToRowMedian": 0.990335
+        "foregroundPixels": 5769,
+        "width": 175,
+        "height": 50,
+        "relativeToRowMedian": 0.989707
       },
       {
         "index": 4,
         "alphaBounds": [
-          27,
-          183,
-          228,
-          239
+          37,
+          135,
+          215,
+          184
         ],
-        "foregroundPixels": 7254,
-        "width": 201,
-        "height": 56,
-        "relativeToRowMedian": 1.003875
+        "foregroundPixels": 5802,
+        "width": 178,
+        "height": 49,
+        "relativeToRowMedian": 1.004501
       },
       {
         "index": 5,
         "alphaBounds": [
-          29,
-          183,
-          228,
-          239
+          38,
+          135,
+          214,
+          184
         ],
-        "foregroundPixels": 7198,
-        "width": 199,
-        "height": 56,
-        "relativeToRowMedian": 0.996125
+        "foregroundPixels": 5750,
+        "width": 176,
+        "height": 49,
+        "relativeToRowMedian": 0.995499
       },
       {
         "index": 6,
         "alphaBounds": [
-          29,
-          182,
-          227,
-          239
+          38,
+          134,
+          213,
+          184
         ],
-        "foregroundPixels": 7322,
-        "width": 198,
-        "height": 57,
-        "relativeToRowMedian": 1.013285
+        "foregroundPixels": 5860,
+        "width": 175,
+        "height": 50,
+        "relativeToRowMedian": 1.014543
       },
       {
         "index": 7,
         "alphaBounds": [
-          29,
-          183,
-          227,
-          239
+          38,
+          135,
+          213,
+          184
         ],
-        "foregroundPixels": 7192,
-        "width": 198,
-        "height": 56,
-        "relativeToRowMedian": 0.995295
+        "foregroundPixels": 5729,
+        "width": 175,
+        "height": 49,
+        "relativeToRowMedian": 0.991863
       },
       {
         "index": 8,
         "alphaBounds": [
-          29,
-          172,
-          226,
-          239
+          44,
+          137,
+          213,
+          194
         ],
-        "foregroundPixels": 7281,
-        "width": 197,
-        "height": 67,
-        "relativeToRowMedian": 0.976594
+        "foregroundPixels": 5459,
+        "width": 169,
+        "height": 57,
+        "relativeToRowMedian": 0.980424
       },
       {
         "index": 9,
         "alphaBounds": [
-          25,
-          174,
-          230,
-          239
+          36,
+          136,
+          212,
+          191
         ],
-        "foregroundPixels": 7582,
-        "width": 205,
-        "height": 65,
-        "relativeToRowMedian": 1.016967
+        "foregroundPixels": 5663,
+        "width": 176,
+        "height": 55,
+        "relativeToRowMedian": 1.017062
       },
       {
         "index": 10,
         "alphaBounds": [
-          24,
-          174,
-          232,
-          239
+          31,
+          135,
+          209,
+          190
         ],
-        "foregroundPixels": 7661,
-        "width": 208,
-        "height": 65,
-        "relativeToRowMedian": 1.027564
+        "foregroundPixels": 5711,
+        "width": 178,
+        "height": 55,
+        "relativeToRowMedian": 1.025682
       },
       {
         "index": 11,
         "alphaBounds": [
-          25,
-          174,
-          230,
-          239
+          31,
+          135,
+          207,
+          190
         ],
-        "foregroundPixels": 7329,
-        "width": 205,
-        "height": 65,
-        "relativeToRowMedian": 0.983033
+        "foregroundPixels": 5473,
+        "width": 176,
+        "height": 55,
+        "relativeToRowMedian": 0.982938
       },
       {
         "index": 12,
         "alphaBounds": [
-          27,
-          162,
-          230,
-          239
+          40,
+          124,
+          214,
+          189
         ],
-        "foregroundPixels": 7604,
-        "width": 203,
-        "height": 77,
-        "relativeToRowMedian": 0.996919
+        "foregroundPixels": 5646,
+        "width": 174,
+        "height": 65,
+        "relativeToRowMedian": 0.991048
       },
       {
         "index": 13,
         "alphaBounds": [
-          29,
-          144,
-          226,
-          239
+          46,
+          107,
+          215,
+          188
         ],
-        "foregroundPixels": 7680,
-        "width": 197,
-        "height": 95,
-        "relativeToRowMedian": 1.006883
+        "foregroundPixels": 5764,
+        "width": 169,
+        "height": 81,
+        "relativeToRowMedian": 1.011761
       },
       {
         "index": 14,
         "alphaBounds": [
-          26,
-          179,
-          230,
-          239
+          35,
+          131,
+          210,
+          182
         ],
-        "foregroundPixels": 7651,
-        "width": 204,
-        "height": 60,
-        "relativeToRowMedian": 1.003081
+        "foregroundPixels": 5748,
+        "width": 175,
+        "height": 51,
+        "relativeToRowMedian": 1.008952
       },
       {
         "index": 15,
         "alphaBounds": [
-          25,
-          177,
-          230,
-          239
+          37,
+          134,
+          213,
+          187
         ],
-        "foregroundPixels": 7327,
-        "width": 205,
-        "height": 62,
-        "relativeToRowMedian": 0.960603
+        "foregroundPixels": 5541,
+        "width": 176,
+        "height": 53,
+        "relativeToRowMedian": 0.972617
       },
       {
         "index": 16,
         "alphaBounds": [
-          27,
-          182,
-          229,
-          239
+          35,
+          134,
+          216,
+          185
         ],
-        "foregroundPixels": 7408,
-        "width": 202,
-        "height": 57,
-        "relativeToRowMedian": 1.035432
+        "foregroundPixels": 6118,
+        "width": 181,
+        "height": 51,
+        "relativeToRowMedian": 1.038357
       },
       {
         "index": 17,
         "alphaBounds": [
-          47,
-          160,
+          64,
+          134,
           210,
-          239
+          204
         ],
-        "foregroundPixels": 6595,
-        "width": 163,
-        "height": 79,
-        "relativeToRowMedian": 0.921797
+        "foregroundPixels": 5365,
+        "width": 146,
+        "height": 70,
+        "relativeToRowMedian": 0.910557
       },
       {
         "index": 18,
         "alphaBounds": [
-          45,
-          170,
-          210,
-          239
+          65,
+          133,
+          212,
+          195
         ],
-        "foregroundPixels": 6901,
-        "width": 165,
-        "height": 69,
-        "relativeToRowMedian": 0.964568
+        "foregroundPixels": 5666,
+        "width": 147,
+        "height": 62,
+        "relativeToRowMedian": 0.961643
       },
       {
         "index": 19,
         "alphaBounds": [
           17,
-          176,
-          239,
-          239
+          137,
+          216,
+          192
         ],
-        "foregroundPixels": 7807,
-        "width": 222,
-        "height": 63,
-        "relativeToRowMedian": 1.091201
+        "foregroundPixels": 6285,
+        "width": 199,
+        "height": 55,
+        "relativeToRowMedian": 1.066701
       },
       {
         "index": 20,
         "alphaBounds": [
-          21,
-          168,
-          236,
-          239
+          20,
+          128,
+          213,
+          191
         ],
-        "foregroundPixels": 7814,
-        "width": 215,
-        "height": 71,
-        "relativeToRowMedian": 1.113105
+        "foregroundPixels": 6369,
+        "width": 193,
+        "height": 63,
+        "relativeToRowMedian": 1.126758
       },
       {
         "index": 21,
         "alphaBounds": [
-          45,
-          166,
-          210,
-          239
+          55,
+          135,
+          203,
+          200
         ],
-        "foregroundPixels": 6832,
-        "width": 165,
-        "height": 73,
-        "relativeToRowMedian": 0.973219
+        "foregroundPixels": 5588,
+        "width": 148,
+        "height": 65,
+        "relativeToRowMedian": 0.988589
       },
       {
         "index": 22,
         "alphaBounds": [
-          31,
-          183,
-          224,
-          239
+          37,
+          131,
+          210,
+          180
         ],
-        "foregroundPixels": 7010,
-        "width": 193,
-        "height": 56,
-        "relativeToRowMedian": 0.998575
+        "foregroundPixels": 5659,
+        "width": 173,
+        "height": 49,
+        "relativeToRowMedian": 1.00115
       },
       {
         "index": 23,
         "alphaBounds": [
-          31,
-          183,
-          226,
-          239
+          40,
+          131,
+          214,
+          180
         ],
-        "foregroundPixels": 7030,
-        "width": 195,
-        "height": 56,
-        "relativeToRowMedian": 1.001425
+        "foregroundPixels": 5646,
+        "width": 174,
+        "height": 49,
+        "relativeToRowMedian": 0.99885
       },
       {
         "index": 24,
         "alphaBounds": [
-          29,
-          172,
-          228,
-          239
+          39,
+          134,
+          212,
+          192
         ],
-        "foregroundPixels": 7636,
-        "width": 199,
-        "height": 67,
-        "relativeToRowMedian": 1.130004
+        "foregroundPixels": 5917,
+        "width": 173,
+        "height": 58,
+        "relativeToRowMedian": 1.128445
       },
       {
         "index": 25,
         "alphaBounds": [
-          38,
-          171,
-          218,
-          239
+          54,
+          133,
+          211,
+          192
         ],
-        "foregroundPixels": 6599,
-        "width": 180,
-        "height": 68,
-        "relativeToRowMedian": 0.976545
+        "foregroundPixels": 5149,
+        "width": 157,
+        "height": 59,
+        "relativeToRowMedian": 0.981978
       },
       {
         "index": 26,
         "alphaBounds": [
-          27,
-          183,
-          230,
-          239
+          37,
+          145,
+          215,
+          193
         ],
-        "foregroundPixels": 6916,
-        "width": 203,
-        "height": 56,
-        "relativeToRowMedian": 1.023455
+        "foregroundPixels": 5338,
+        "width": 178,
+        "height": 48,
+        "relativeToRowMedian": 1.018022
       },
       {
         "index": 27,
         "alphaBounds": [
-          29,
-          188,
-          228,
-          239
+          45,
+          149,
+          219,
+          193
         ],
-        "foregroundPixels": 6597,
-        "width": 199,
-        "height": 51,
-        "relativeToRowMedian": 0.976249
+        "foregroundPixels": 5131,
+        "width": 174,
+        "height": 44,
+        "relativeToRowMedian": 0.978545
       },
       {
         "index": 28,
         "alphaBounds": [
-          29,
-          189,
-          227,
-          239
+          40,
+          149,
+          213,
+          192
         ],
-        "foregroundPixels": 6402,
-        "width": 198,
-        "height": 50,
-        "relativeToRowMedian": 1.232932
+        "foregroundPixels": 4989,
+        "width": 173,
+        "height": 43,
+        "relativeToRowMedian": 1.240273
       },
       {
         "index": 29,
         "alphaBounds": [
-          33,
-          193,
-          223,
-          239
+          41,
+          152,
+          207,
+          191
         ],
-        "foregroundPixels": 5793,
-        "width": 190,
-        "height": 46,
-        "relativeToRowMedian": 1.115648
+        "foregroundPixels": 4462,
+        "width": 166,
+        "height": 39,
+        "relativeToRowMedian": 1.10926
       },
       {
         "index": 30,
         "alphaBounds": [
-          31,
-          204,
-          225,
-          239
+          39,
+          162,
+          208,
+          192
         ],
-        "foregroundPixels": 4592,
-        "width": 194,
-        "height": 35,
-        "relativeToRowMedian": 0.884352
+        "foregroundPixels": 3583,
+        "width": 169,
+        "height": 30,
+        "relativeToRowMedian": 0.89074
       },
       {
         "index": 31,
         "alphaBounds": [
-          31,
-          209,
-          225,
-          239
+          47,
+          167,
+          216,
+          192
         ],
-        "foregroundPixels": 4030,
-        "width": 194,
-        "height": 30,
-        "relativeToRowMedian": 0.776119
+        "foregroundPixels": 3078,
+        "width": 169,
+        "height": 25,
+        "relativeToRowMedian": 0.765196
       }
     ],
     "rowMedianForegroundPixels": [
-      7294.5,
-      7226.0,
-      7455.5,
-      7627.5,
-      7154.5,
-      7020.0,
-      6757.5,
-      5192.5
+      5829.0,
+      5776.0,
+      5568.0,
+      5697.0,
+      5892.0,
+      5652.5,
+      5243.5,
+      4022.5
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "92cf461ef116705878d1e2ca730dd3bc51bd0e2a22d6725618a8cc7ac8bdf383",
-      "c59eb514b7318af10c417a730013a46ac1543517ab39b60d856db72ffbd2c2b1",
-      "5483646a8fbd6842e5fac8052831ab5f7716d04e6627f3ec0932a7495eefbb20",
-      "b9e9428069a8f6ee812d4db9ab88aa2822619e82fa41f21c12c9a6d763064217",
-      "245c27c231153373b9722afadf2da5c001ee2b03225f80a5cbaadb990aa07644",
-      "5e742b531f4b2984c7bef963742d9cefd8bec88b1e7d2856c5331fc39b867a91",
-      "cdfaccaf77980d5d9c24688795e9ed30a9dc896c7f0c341c490cbbe3e623d1ee",
-      "b4206ca98374eccda2c847eae39504c08bc3365d6356ae1b6a7f61a5f56d4dea",
-      "ed6b1e660454f5633f30f4ea5c053917cfa9805ead602ea497ddbb93cf60a5a1",
-      "5eaa9d5f24829b04986d01918c90797ac8b653fc33976f14c468adb05446f35b",
-      "0be89935446d56e037d6bacef8a29aec77af2a4e4e55dffd0b51f85acac67028",
-      "dab225e4849d8196ad16da886fe43f416473df03ad33519e3e95694c069a18fe",
-      "57d680f3dec279fe9c5e55f479b3094b4c226647db7f37cd338edeb9723bf72b",
-      "ef9bff69216f9266e9b16927b5cfddd8c270b9358c04c253867e1d9fb4383972",
-      "e401ffcfcb12837c044acd60e417acc3bf1273f8ac56994655f8cb6316b9c5fd",
-      "742c1f6009e03add3f5ddf814459224510734220b82fa6e7be126980990d39d4",
-      "92ece02aeca037b76c5bef2cd816689c1e3ae9482eb8636b8b492b7a3bfbd3a4",
-      "ba3eadec2ea4da3cef5ae385eb638268758a56220d2f11da63729c78a4e31522",
-      "d6abd972c2573dd8b8d151b793cbf1cdd86747bd892961c2ac002deba4639eb5",
-      "58ae2e99b4c59e15dec3deb09f2f2a92758c62b2ad33253991ae028b6a8f0962",
-      "6d36eeeeeb287576b5c2cd07a7bcf3f0b8e61cb4094961d0415ff804747816c4",
-      "705b4113f84bd5a3957f43a6626bd823e193289d01ad4593d3589132068a906b",
-      "a10860c53fd5a6ea29c056cad009d575f19d70de0950109b02500bc89449d1e2",
-      "609c1f417487cc6731d0c9f2e7b5449c679f567eac7299b870b780d1f4065d77",
-      "323e5f28738b9ecd026f41f61721f271ca4de3c7a85223769062f276f9b5ea54",
-      "74ee07a66ea8af2901b47b6bc57851fcea7ad7c3079b3135dfcce2e257784acb",
-      "4fc6a6cf3b2734f36bb25a2e4510bf2bfda1fd5205fce8c0c568a8c7796c6071",
-      "58dcb70f66c7908c1681aaa8ffe41f98de591496f326ae67ee846a3e6fe5cb70",
-      "6e1a587bd88ac2230d8c5b0311c807e2866e6294f12690463ab46bce02617854",
-      "56f7b03ef0213731cd01e3bb14411e03da0915d576c4fb2677c8f4fe6199e9ac",
-      "53039800038d906c113a5233fa93c6109d040f86b0503d059ff31597dc69d3fb",
-      "70e77f99d312c7bdb1de2381657dd9e72f49d9726fb4a8c2dd4999c83c8258c9"
+      "e0dddd1129612539ca83e1490e330705348e91b914e9e18653c2f88917a49b52",
+      "e0dea0fb33cdd824913c504eabbb80b86e5d7e0766bae4501269d1abff37db89",
+      "9776970ef89bf79bafeb749ca10925e759e54d38f1e675efddae51e7091b3014",
+      "47280ab234d7f571d8f8f69a040ca3ac01f4b5ed66a9cf1fbe062509fab65024",
+      "5e6c30b38ed4524c3c1de16773ad62303f2907fcaa2b64a362915acd4fa0c29f",
+      "ba178875f10076a6dbee7b55ed289cd2c49cc24a8e66dbd33a2c5076ad34baec",
+      "c8cee4ea763ba62f297f7dad6af9ddd6a9275e3b94c9de0fc5afb8e2f6fe4a6a",
+      "ba54adf92e1973513497569440bd080660fbdd2117f5cd257e26cdf76463fd45",
+      "3a5feca07bc47bb2ac72cbaa646c98c7d4898b2eff3c2e5a1e0cf5d7fc074a0b",
+      "b2570ca3c5f38fac57df68b0dc4dfe9db6cfb2db2d4b1dca2f73ef541e414244",
+      "945b4b1f0ddec80cbf2e55481b3e7a0bc36242fda5604de1b759345f96ee7a05",
+      "84561f0bf336a790773bbe3df07f9ee4c3d2544193cdd36184e2040a42a3d9ad",
+      "9d8226fd7f8ed3090f9fea99cb87e9a09ed6721061622123ae4db7319973b470",
+      "c3867da0ab821b3498040045558a4093bafd590352288a15932bebda86d50a58",
+      "50b0e962c720af2217998a27f7eb6c55006b20ca187e413c3453ffee60f94f8b",
+      "7cfc4e5de12d5addcf020d118f4395cb669e4186359374ccfc3939d91caf45c8",
+      "096a2148bc52f7ba7950bdee14a29c6b362bc7a834d22753e77f0e0b5a0735b6",
+      "205aaea74e07a1c51c54e0954b517af068e24092658b4ae2096c0ac9b3291dd4",
+      "fd2775cb971c7be759771a1dc7124061a17320768166a3b543097ee694f1eb36",
+      "b330a2c7c9e7b1b4733dd438b9e9f2f1fa9f1deaec6d0a842c8b1bd04f3401db",
+      "6088a102ff2aaf8c0349c322b3e0d8c3c5bcf0c87112341d73b39d85e9248ae1",
+      "0118b9585ed31ae5918571e89c77029ad8c3c4b19978808479a821ee18f520c2",
+      "f7e8aae01fb8ab9b34c1bbb2c24d44cd7eed9ac5321008878a294804ee2c8387",
+      "c78a431282f6f20419458b76e9d225c466b1301730f96524ce42af302600e897",
+      "3a611a0a242aff8ddbdb284c5f0759875a0f9866a34fcecc7bd71c46c078f4b1",
+      "cc993ee31379d8dcbe4a233d473307e2a28e04dbe11ee22a00e020bd1483fd5a",
+      "f69cc5fe725d437d199b3860e54b27b4d88741dd6c30f3b39a9d73243a958952",
+      "6c4494d2562fa1e364f35bc1618441450b2782ebdac77f519d4b2f23aa3202a6",
+      "98fe6604e7f999f1e00a3fb0fcc04dba255168995b5006b884b9e9886fcb9c74",
+      "e59c4992802a6ceb242c1396eaadf2589030d0b9dc4fa0c0ba8546f8f6458148",
+      "d3353d4df0efdf41c4d75fd9063188d90ffd4b8666f4b69f283a8d61278b9056",
+      "418b6e3d08bb578366b835be4415f976e9880ca3d0b127bdd1fd0bd8325a82b3"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v75-enemy-fixes/051/scale-review.json",
+    "sha256": "5e0fe9fc34fbd387d6fc2d3388b6986ec9ceb3bd7aab9e8db55c7363c6840254",
+    "status": "reviewed",
+    "profileId": "enemy-051-ceto-reef-predator",
+    "reviewer": "Codex level_props_audit_fix V75 independent manual review",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1,
+      "move": 0.97021318,
+      "attack": 1.014242729,
+      "death": 0.987309064
+    },
+    "sourceSha256ByClip": {
+      "idle": "2712b5fb05271b5e149757c5cc8dbcc4a77fe9c2c809c2c2ad97238bfb4df281",
+      "move": "c1b60283496ae8a5cc0a134d6572be5126d49d31880711b0bcbb63253f7b53f5",
+      "attack": "f5d0d9f3eeefd16ca8973eafeb11a331f7baa3e97d4e9463dedfae62da314fd0",
+      "death": "b5591d1a278116e1ed82035d43c0e6fd2993a981f0cf7c885e334b23ac309a5a"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/051/idle.manual-landmarks.png",
+        "sha256": "33e7e7ac6dc82513604b09d13b23d232e2ab5b62537cf2f63a1b0529c800fd98"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/move.manual-landmarks.png",
+        "sha256": "81f689890d78e99a28d158c4589dfed06548cb821348907ee7e90790ca64b764"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/attack.manual-landmarks.png",
+        "sha256": "86eb76e5474f15eeb52aade15c305996c8f32211eef4d6d6cde1e2d4b8965ce3"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/death.manual-landmarks.png",
+        "sha256": "a984f72798e51d60ce5e3fab02ec39eb585fc9605118afbbcea0505368c48ed9"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/051/MEASUREMENT_NOTES.md",
+        "sha256": "83d7de94ab9e0c83c27f6823f4901649fc946b684c06fe73c7814426f3c5bf9b"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v75-enemy-fixes/051/anchor-review.json",
+    "scale": "docs/references/v75-enemy-fixes/051/scale-review.json"
   },
   "magentaSpill": {
     "method": "v64-strict-post-resize-green-plus-eight-v1",
@@ -2693,7 +3859,7 @@
     "frameCount": 32,
     "opaqueMatteFrameCount": 32,
     "nativeAlphaBypassedFrameCount": 0,
-    "neutralizedPixelCount": 11,
+    "neutralizedPixelCount": 10,
     "remainingStrictPixelCount": 0
   }
 }

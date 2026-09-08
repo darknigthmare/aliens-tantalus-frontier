@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "batchId": "batch-004",
+  "coordinates": "nominal-source-cell",
+  "profiles": {
+    "enemy-051-ceto-reef-predator": {
+      "status": "reviewed",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "reviewer": "Codex level_props_audit_fix V75 independent manual review",
+      "reviewedAt": "2026-09-05",
+      "baselineClip": "idle",
+      "note": "First anatomical source calibration for051, based on eight measured hip/shoulder axes from comparable non-coiled poses. Clip-wide factors only, calculated from medians, no per-pose resizing. Native sources remain unchanged and are not already calibrated. +/-6px joint-reading uncertainty remains explicit.",
+      "sourceScaleByClip": {
+        "idle": 1,
+        "move": 0.97021318,
+        "attack": 1.014242729,
+        "death": 0.987309064
+      },
+      "sourceSha256ByClip": {
+        "idle": "2712b5fb05271b5e149757c5cc8dbcc4a77fe9c2c809c2c2ad97238bfb4df281",
+        "move": "c1b60283496ae8a5cc0a134d6572be5126d49d31880711b0bcbb63253f7b53f5",
+        "attack": "f5d0d9f3eeefd16ca8973eafeb11a331f7baa3e97d4e9463dedfae62da314fd0",
+        "death": "b5591d1a278116e1ed82035d43c0e6fd2993a981f0cf7c885e334b23ac309a5a"
+      },
+      "measurements": [
+        {
+          "clip": "idle",
+          "frame": 0,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              185,
+              282
+            ],
+            [
+              285,
+              269
+            ]
+          ],
+          "lengthPx": 100.84146,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "idle",
+          "frame": 1,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              180,
+              283
+            ],
+            [
+              279,
+              269
+            ]
+          ],
+          "lengthPx": 99.984999,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "move",
+          "frame": 0,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              186,
+              287
+            ],
+            [
+              286,
+              269
+            ]
+          ],
+          "lengthPx": 101.607086,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "move",
+          "frame": 7,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              180,
+              210
+            ],
+            [
+              285,
+              201
+            ]
+          ],
+          "lengthPx": 105.385008,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "attack",
+          "frame": 0,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              186,
+              282
+            ],
+            [
+              279,
+              270
+            ]
+          ],
+          "lengthPx": 93.770998,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "attack",
+          "frame": 7,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              137,
+              222
+            ],
+            [
+              240,
+              206
+            ]
+          ],
+          "lengthPx": 104.235311,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "death",
+          "frame": 0,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              179,
+              284
+            ],
+            [
+              275,
+              271
+            ]
+          ],
+          "lengthPx": 96.87621,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        },
+        {
+          "clip": "death",
+          "frame": 2,
+          "landmark": "posterior-hip-to-anterior-shoulder-rigid-torso-axis",
+          "endpoints": [
+            [
+              151,
+              326
+            ],
+            [
+              256,
+              308
+            ]
+          ],
+          "lengthPx": 106.531685,
+          "uncertaintyPx": 6,
+          "note": "Manual native-source joint trace, visible posterior hip/croup to anterior shoulder. Excludes flexible tail, jaw, crest and limbs; +/-6px reflects broad painted joints and modest pose rotation, not exact skeletal metrology. Chosen non-coiled poses are comparable; all eight poses are reviewed for gross continuity."
+        }
+      ],
+      "evidencePaths": [
+        "docs/references/v75-enemy-fixes/051/idle.manual-landmarks.png",
+        "docs/references/v75-enemy-fixes/051/move.manual-landmarks.png",
+        "docs/references/v75-enemy-fixes/051/attack.manual-landmarks.png",
+        "docs/references/v75-enemy-fixes/051/death.manual-landmarks.png",
+        "docs/references/v75-enemy-fixes/051/MEASUREMENT_NOTES.md"
+      ],
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false
+    }
+  }
+}

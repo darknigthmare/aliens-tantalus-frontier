@@ -1,0 +1,352 @@
+[
+  {
+    "profileId": "enemy-021-neuro-xeno-drone",
+    "sourcesPreserved": {
+      "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/idle.png": "fab5f92a4c64520bea9e159e588354e56da78d7cd05761634e01dd5f54447ce7",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/move.png": "a8e9636175c4dd5b72ab342051fd29ffa2411e93c368fbbe4e6e1e37d062e4e1",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/attack.png": "594dfcc2a8c94dd936cef71ce342d02a719f419d6a6e6363c0aa07a5fc234f5e",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-021-neuro-xeno-drone/death.png": "6dcd6e0a4bbe8ce5f8b2da915fe0ba5889c0edbc6a77dc83a3a3c9571dcb2406"
+    },
+    "currentAtlasSha256": "37609580676f06203192c1be968576470b79dbaf357b67869b80f826914fed86",
+    "currentUniquePoses": 32,
+    "poses": [
+      {
+        "index": 0,
+        "strictMagentaCurrent": 4,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 1,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 2,
+        "strictMagentaCurrent": 9,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 3,
+        "strictMagentaCurrent": 13,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 4,
+        "strictMagentaCurrent": 16,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 5,
+        "strictMagentaCurrent": 4,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 6,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 7,
+        "strictMagentaCurrent": 9,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 8,
+        "strictMagentaCurrent": 12,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 9,
+        "strictMagentaCurrent": 9,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 10,
+        "strictMagentaCurrent": 15,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 11,
+        "strictMagentaCurrent": 13,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 12,
+        "strictMagentaCurrent": 9,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 13,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 14,
+        "strictMagentaCurrent": 8,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 15,
+        "strictMagentaCurrent": 10,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 16,
+        "strictMagentaCurrent": 3,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 17,
+        "strictMagentaCurrent": 7,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 18,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 19,
+        "strictMagentaCurrent": 7,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 20,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 21,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 22,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 23,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 24,
+        "strictMagentaCurrent": 7,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 25,
+        "strictMagentaCurrent": 12,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 26,
+        "strictMagentaCurrent": 12,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 27,
+        "strictMagentaCurrent": 17,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 28,
+        "strictMagentaCurrent": 11,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 29,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 30,
+        "strictMagentaCurrent": 10,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 31,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      }
+    ],
+    "diagnosticValidation": [],
+    "runtimePromotionAllowed": false
+  },
+  {
+    "profileId": "enemy-023-atarax-ripper",
+    "sourcesPreserved": {
+      "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/idle.png": "ce72dfd572f7cc0f6af150e293b3141c185f3370ff32ab8ac171e8d3bffc82e4",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/move.png": "a65cbf185220e89eba507db1db21753bd44f25847cad2d358d798e5511f2fd2e",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/attack.png": "f4324058328ce38ceb9a220d13188c7fe8f10e63e47a873a648fe5324929e086",
+      "assets/openai/sprites/frames/v66/batch-002/enemy-023-atarax-ripper/death.png": "cf6ca1cfc67a1aa032bc453d64d7920ba1a4049ffea2f2bce7171842312e59a2"
+    },
+    "currentAtlasSha256": "0a2ed906baca014b3d361b803b5e37325a479bab7f8403d741531050bf3a08d6",
+    "currentUniquePoses": 32,
+    "poses": [
+      {
+        "index": 0,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 1,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 2,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 3,
+        "strictMagentaCurrent": 3,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 4,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 5,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 6,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 7,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 8,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 9,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 10,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 11,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 12,
+        "strictMagentaCurrent": 1,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 13,
+        "strictMagentaCurrent": 1,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 14,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 15,
+        "strictMagentaCurrent": 3,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 16,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 17,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 18,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 19,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 20,
+        "strictMagentaCurrent": 1,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 21,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 22,
+        "strictMagentaCurrent": 1,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 23,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 24,
+        "strictMagentaCurrent": 6,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 25,
+        "strictMagentaCurrent": 4,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 26,
+        "strictMagentaCurrent": 1,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 27,
+        "strictMagentaCurrent": 3,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 28,
+        "strictMagentaCurrent": 5,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 29,
+        "strictMagentaCurrent": 0,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 30,
+        "strictMagentaCurrent": 7,
+        "strictMagentaDiagnostic": 0
+      },
+      {
+        "index": 31,
+        "strictMagentaCurrent": 2,
+        "strictMagentaDiagnostic": 0
+      }
+    ],
+    "diagnosticValidation": [],
+    "runtimePromotionAllowed": false
+  }
+]

@@ -21,6 +21,7 @@ import {
 import { cancelFacehuggerAttackV65 } from './enemy-facehugger-combat-v65.js';
 import { cancelEnemyBatchAttackV66, isEnemyBatchCombatV66, selectEnemyBatchTargetV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
+import { CETO_V75, isCetoV75, updateCetoV75 } from './enemy-ceto-v75.js';
 import { findLargeMissionActorPlacementV72, isLargeMissionActorV72, largeMissionActorFitsV72 } from './mission-large-actor-placement-v72.js';
 
 const WORLD_WIDTH = 6200;
@@ -333,7 +334,8 @@ function zoneLayerKey(templateId, zoneId, kind) {
 
 function sourceForSpawn(engine, index) {
   const selected = asList(engine.encounterSelection?.selected);
-  const sources = selected.length ? selected : asList(engine.v52EnemyCatalog);
+  const sources = (selected.length ? selected : asList(engine.v52EnemyCatalog))
+    .filter(source => source.id !== CETO_V75.profileId);
   return sources[index % Math.max(1, sources.length)] || { id: `frontier-contact-${index}`, name: 'Frontier Contact', biology: 'xenomorph', health: 80, damage: 12, speed: 1.2 };
 }
 
@@ -590,8 +592,10 @@ export function withV52LevelRuntime(BaseEngine) {
     compileMissionLevelActors(plan) {
       const desiredStandard = asList(plan.spawns).reduce((total, spawn) => total + Number(spawn.count || spawn.baseCount || 0), 0);
       const fallbackGroundY = Number(plan.anchors?.spawn?.y) || Math.max(80, this.missionLevelBounds.height - 150);
-      const boss = asList(this.enemies).find((enemy) => enemy.isBoss) || null;
-      const standard = asList(this.enemies).filter((enemy) => enemy !== boss);
+      const terrestrial = asList(this.enemies).filter(enemy => !isCetoV75(enemy)
+        && !String(enemy.id).startsWith(CETO_V75.profileId + ':'));
+      const boss = terrestrial.find((enemy) => enemy.isBoss) || null;
+      const standard = terrestrial.filter((enemy) => enemy !== boss);
       while (standard.length < Math.min(28, desiredStandard)) {
         const index = standard.length;
         standard.push(this.createEnemy(sourceForSpawn(this, index), this.enemies.length + index, 700 + index * 140, fallbackGroundY, { boss: false, keyCarrier: false }));
@@ -639,6 +643,16 @@ export function withV52LevelRuntime(BaseEngine) {
       this.enemies = [...activeEnemies, ...(boss ? [boss] : [])];
       const keyCarrier = activeEnemies.find((enemy) => enemy.alive) || null;
       if (keyCarrier) keyCarrier.keyCarrier = true;
+      const cetoSource = asList(this.v52EnemyCatalog).find(source => source.id === CETO_V75.profileId);
+      if (cetoSource) for (const volume of asList(plan.aquaticHabitats)) {
+        const predator = this.createEnemy(cetoSource, this.enemies.length, volume.spawnRoot.x - CETO_V75.bodyWidth / 2,
+          volume.spawnRoot.y, { boss: false, keyCarrier: false });
+        // A candidate source or legacy sheet is not sufficient for release.
+        if (isCetoV75(predator)) this.enemies.push(Object.assign(predator, {
+          cetoHabitatId: volume.id, levelZoneId: volume.zoneId, levelSpawnId: volume.id,
+          dormant: false, alive: true, alert: false, attackClock: 0
+        }));
+      }
       for (const enemy of this.enemies.filter((candidate) => candidate.alive || candidate.dormant)) this.initializeEnemyMissionNavigation(enemy);
     }
 
@@ -677,6 +691,11 @@ export function withV52LevelRuntime(BaseEngine) {
 
     initializeEnemyMissionNavigation(enemy) {
       if (!enemy) return null;
+      if (isCetoV75(enemy)) {
+        enemy.levelNavigation = { mode: 'aquatic', surfaceId: null, connectorId: null,
+          destinationY: null, riding: false, lastSafeX: enemy.x, lastSafeY: enemy.y };
+        return null;
+      }
       if (isLargeMissionActorV72(enemy)) {
         const geometry = { platforms: this.platforms, doors: this.doors, ...this.missionLevelBounds };
         const placement = findLargeMissionActorPlacementV72(enemy, geometry, {
@@ -1296,6 +1315,8 @@ export function withV52LevelRuntime(BaseEngine) {
     }
 
     updateEnemyOnMissionLevelV66(enemy, delta) {
+      // Aquatic actors must not enter the subsequent surface/ladder snap path.
+      if (updateCetoV75(this, enemy, delta)) return;
       if (enemy?.dormant) {
         cancelFacehuggerAttackV65(this, enemy, 'enemy-dormant');
         cancelEnemyBatchAttackV66(this, enemy, 'enemy-dormant');

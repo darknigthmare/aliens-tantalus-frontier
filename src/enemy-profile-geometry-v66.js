@@ -8,9 +8,11 @@ export const V66_ENEMY_BODY_DIMENSIONS = Object.freeze({
   'enemy-004-drone-big-chap': Object.freeze({ width: 54, height: 146 }),
   'enemy-005-warrior': Object.freeze({ width: 62, height: 136 }),
   'enemy-006-runner': Object.freeze({ width: 78, height: 82 }),
+  'enemy-015-prowler': Object.freeze({ width: 96, height: 88 }),
   'enemy-016-burster': Object.freeze({ width: 88, height: 88 }),
   'enemy-020-k-series-yellow-xenomorph': Object.freeze({ width: 62, height: 136 }),
   'enemy-050-korari-stalker': Object.freeze({ width: 96, height: 60 }),
+  'enemy-051-ceto-reef-predator': Object.freeze({ width: 156, height: 100, pivotY: 192 }),
   'enemy-055-albino-chestburster': Object.freeze({ width: 35, height: 20 })
 });
 
@@ -20,6 +22,7 @@ export function buildEnemyBodyHitboxesV66(sheets = V66_ENEMY_PROFILE_SPRITE_SHEE
     if (!dimensions) throw new Error('V66 body dimensions need a reviewed profile: ' + sheet.profileId);
     const width = dimensions.width * sheet.cellWidth / sheet.renderWidth;
     const height = dimensions.height * sheet.cellHeight / sheet.renderHeight;
-    return [sheet.hitbox, Object.freeze({ x: 128 - width / 2, y: 240 - height, width, height })];
+    const pivotY = dimensions.pivotY ?? 240;
+    return [sheet.hitbox, Object.freeze({ x: 128 - width / 2, y: pivotY - height, width, height })];
   })));
 }

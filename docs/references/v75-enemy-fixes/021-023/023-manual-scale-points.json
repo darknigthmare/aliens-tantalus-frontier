@@ -1,0 +1,17 @@
+{
+  "profileId": "enemy-023-atarax-ripper",
+  "coordinates": "nominal-source-cell",
+  "landmark": "rear-cranial-plate-tip-to-front-shell-above-temple-sensor",
+  "uncertaintyPx": 8,
+  "note": "Manual source-image measurement of the rearward tip of the upper ivory cranial plate to the front dark shell just above the blue temple sensor. Excludes separate dorsal cables, jaw gape, limb reach and tail. Two approximately lateral poses per clip; death uses poses 2/3 rather than the first backward-tilted head. Endpoints are approximate anatomical registration, not canon dimensions or pixel-perfect identity certification.",
+  "measurements": [
+    {"clip":"idle", "frame":0, "endpoints":[[265,158],[368,216]]},
+    {"clip":"idle", "frame":1, "endpoints":[[269,157],[372,217]]},
+    {"clip":"move", "frame":0, "endpoints":[[249,86],[356,144]]},
+    {"clip":"move", "frame":1, "endpoints":[[232,96],[337,154]]},
+    {"clip":"attack", "frame":0, "endpoints":[[265,168],[367,222]]},
+    {"clip":"attack", "frame":1, "endpoints":[[252,175],[343,226]]},
+    {"clip":"death", "frame":1, "endpoints":[[249,187],[348,255]]},
+    {"clip":"death", "frame":2, "endpoints":[[257,224],[347,306]]}
+  ]
+}

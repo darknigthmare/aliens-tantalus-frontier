@@ -1,0 +1,17 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-051-ceto-reef-predator",
+  "actor": "Codex V75 root review",
+  "canonExact": false,
+  "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

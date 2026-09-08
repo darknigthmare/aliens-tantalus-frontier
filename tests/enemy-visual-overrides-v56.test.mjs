@@ -100,11 +100,15 @@ const PROJECT_ORIGINALS = Object.freeze([
   })
 ]);
 
-// Keep historical V56 contracts intact; only the accepted standard050 migrates.
+// Keep historical V56 contracts intact; only accepted standards050/051 migrate.
 const currentRuntime = (entry) => entry.id === 'enemy-050-korari-stalker' ? {
   ...entry, sheetId: 'enemy.profile.enemy-050-korari-stalker.v66',
   path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp',
   width: 288, height: 288
+} : entry.id === 'enemy-051-ceto-reef-predator' ? {
+  ...entry, sheetId: 'enemy.profile.enemy-051-ceto-reef-predator.v66',
+  path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp',
+  width: 384, height: 384
 } : entry;
 
 class MockImage {

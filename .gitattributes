@@ -36,6 +36,23 @@ docs/references/v74-*/**/*.mjs text eol=lf
 docs/references/v74-*/**/*.html text eol=lf
 tests/*v74*.mjs text eol=lf
 tests/*v74*.py text eol=lf
+docs/references/V75_*.json text eol=lf
+docs/references/V76_*.md text eol=lf
+docs/references/v75-*/**/*.json text eol=lf
+docs/references/v75-*/**/*.txt text eol=lf
+docs/references/v75-*/**/*.md text eol=lf
+docs/references/v75-*/**/*.py text eol=lf
+docs/references/v75-*/**/*.mjs text eol=lf
+docs/references/v75-*/**/*.html text eol=lf
+docs/references/v76-*/**/*.md text eol=lf
+scripts/*v75* text eol=lf
+tests/*v75*.mjs text eol=lf
+src/*v75.js text eol=lf
+# V75 physical review receipts were signed as CRLF before integration.
+docs/references/v75-enemy-fixes/015/anchor-review.json -text whitespace=cr-at-eol
+docs/references/v75-enemy-fixes/015/scale-review.json -text whitespace=cr-at-eol
+docs/references/v75-enemy-fixes/051/anchor-review.json -text whitespace=cr-at-eol
+docs/references/v75-enemy-fixes/051/scale-review.json -text whitespace=cr-at-eol
 # V74 diagnostic receipts were written and signed as CRLF. Preserve their bytes.
 docs/references/v74-enemy-fixes/016/scale/burster-scale-measurements.json -text whitespace=cr-at-eol
 docs/references/v74-enemy-fixes/049/diagnostics.json -text whitespace=cr-at-eol

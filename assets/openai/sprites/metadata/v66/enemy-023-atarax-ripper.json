@@ -29,36 +29,60 @@
   },
   "sourceFacing": "right",
   "normalized": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-023-atarax-ripper.webp",
-  "normalizedSha256": "0a2ed906baca014b3d361b803b5e37325a479bab7f8403d741531050bf3a08d6",
+  "normalizedSha256": "cd4b52f7cf1128515e9fd784bdca82bb2f170eb6a9a203e97733348939637d75",
   "preview": "assets/openai/sprites/previews/v66/enemy-023-atarax-ripper/all.gif",
-  "previewSha256": "40ce0d84f44cce1432d944dcba4c103d4668ce60266506e766f22ee598f808d9",
+  "previewSha256": "07706a4049a7d5aed7012529fccc2962067d84a1d6dbf608a3fb0c477bba62cf",
   "runtimeFormat": "image/webp",
   "encoding": "lossless-rgba",
-  "scale": 0.399280576,
+  "scale": 0.411200395,
   "scaleScope": "all-profile-clips",
   "scaleInterpretation": "single-final-pack-scale",
   "sourceScaleByClip": {
     "idle": 1.0,
-    "move": 1.0,
-    "attack": 1.0,
-    "death": 1.0
+    "move": 0.982397,
+    "attack": 1.080462,
+    "death": 0.981605
   },
   "scaleCalibrationReview": null,
   "scaleCalibrationEvidence": [],
   "physicalAnchorReview": {
-    "path": "docs/references/V66_BATCH_002_ANCHOR_REVIEW.json",
-    "sha256": "31426022398546429ea8ad7defdfbf642c4fd854b3bb64270df0a725acd121e3",
+    "path": "docs/references/v75-enemy-fixes/021-023/023-anchor-review.json",
+    "sha256": "01bfad52345cead1ee6bb46e18e5e23c8f00a91741d817b2014c05156f1a6fb2",
     "status": "reviewed",
-    "reviewer": "Codex root",
-    "reviewedAt": "2026-08-31",
-    "method": "Manually chosen ribcage points on displayed source images, global preview coordinates. Grounded support floor verified visually then registered at the padded complete-pose bottom. No bounding-box-derived horizontal roots.",
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-idle-physical-review.png",
+        "sha256": "41ebe0acfef2a6d8720f9316c4684d0a25e8a05fd3ca5d0cec40e6361b6fb0ab"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-move-physical-review.png",
+        "sha256": "f033ad962852e831b7b88f9bcb5d9390d557fed144809c18d3be978f26512e96"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-attack-physical-review.png",
+        "sha256": "a4aaebac103e125e95c580588b92c755d211b4e07309c068cc9711977966bdea"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-death-physical-review.png",
+        "sha256": "ec3ddfe5bc60439eeec86e9c3f2084da25e4ebda4fab3f42ce0d38292d021e6d"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-manual-scale-points.json",
+        "sha256": "a2edc46965cd0a19b6802e1cec83c743ee00812f87544f0c9bea2d2c3a2f5b96"
+      }
+    ],
+    "reviewer": "Codex next50_art_review V75",
+    "reviewedAt": "2026-09-05",
+    "method": "All 32 prior manually observed thoracic landmarks independently checked on the four unchanged active source boards and prior marked overlays. Horizontal body points retained; root Y is the observed planted-foot/resting-body support edge, exactly three transparent extraction-padding pixels above the former guarded root. Trim transparent padding is required, never fit each frame to its bounds. No aerial pose occurs in these four clips.",
     "reviewedPoseCount": 32,
     "coordinates": "nominal-source-cell"
   },
   "normalizationOptions": {
     "safeReassignCellFragments": true,
     "removeEnclosedMagentaMatte": true,
-    "removeEnclosedMagentaAaFringe": true
+    "removeEnclosedMagentaAaFringe": true,
+    "removeMagentaSpill": true,
+    "trimTransparentPadding": true
   },
   "enclosedMagentaMatte": {
     "enabled": true,
@@ -299,9 +323,9 @@
       "fps": 6,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-023-atarax-ripper/idle.webp",
-      "sha256": "3d3a88e79d4843fdf48d86f7c9626ffa6badb8b3a601485785017622ffe24cc4",
+      "sha256": "570a3ad3258a4efcd8830d33650d712f8615e47a0b013ba24c17167997d25a4a",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-023-atarax-ripper/idle.gif",
-      "previewSha256": "2fd07fd152af45461fe5bccf76316f6844900bcbc38c8321ea4e63d2fd25cce7"
+      "previewSha256": "52f7a59962560190f16d485f8a75b0b0b8513f7ec6ad78c4c91cc78eb4bcf122"
     },
     {
       "id": "move",
@@ -318,9 +342,9 @@
       "fps": 12,
       "loop": true,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-023-atarax-ripper/move.webp",
-      "sha256": "2120f8432ad0885c1940d851397ee316540a9808a4f5d8596fe06fbd52dbce5b",
+      "sha256": "63d59975a284ccd84f11e17d31bc9b0d41ac6453dad390b5bfe431b5eb581495",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-023-atarax-ripper/move.gif",
-      "previewSha256": "aa6cedaf45535026f2a2f418c685baeca1c206874030cc89176b20517273f28a"
+      "previewSha256": "a8b25d825cfa6a209ed65c0946091e6e84b8f24e36cedcc2e68e98ab252cb2c8"
     },
     {
       "id": "attack",
@@ -337,9 +361,9 @@
       "fps": 12,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-023-atarax-ripper/attack.webp",
-      "sha256": "d87d087162eec4851d1a516b4e52afab1b3650d11054ca2da44111e194e009fc",
+      "sha256": "6801909d92e391593bdc7f9eeb1f7d08afd7bb3ec661d9a55113eb097fa4898b",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-023-atarax-ripper/attack.gif",
-      "previewSha256": "deb322f0b9d158af63af23a2380cd4eb3a8323240807bcba95b669caa158f034"
+      "previewSha256": "3857067f00c8c718caa91f5aeaa0cb2b3b962fe489ef68f850f500ac95e8848f"
     },
     {
       "id": "death",
@@ -356,9 +380,9 @@
       "fps": 10,
       "loop": false,
       "path": "assets/openai/sprites/normalized/enemy-clips-v66/enemy-023-atarax-ripper/death.webp",
-      "sha256": "fde2bda6fe0f8b65334e3e27fc939510c016c20b50248d33ef2d4324653825fb",
+      "sha256": "f83bd9a15ff632202bb37107e1eb714d31644e8e5afafe2fafb1c8541f548974",
       "previewPath": "assets/openai/sprites/previews/v66/enemy-023-atarax-ripper/death.gif",
-      "previewSha256": "b7ec310c0827dd01c1b752e3ab83422b5823caafec5f53686e9f6c8d979ba730"
+      "previewSha256": "09033e5dea684b3bc5d637ff9b1bb416e96fc9d3944b607357c66ea44a7f03f2"
     }
   ],
   "placements": [
@@ -393,36 +417,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "53cbd0954425cbd7664154a548306d28e42668a7ddf13332e8566ced413252db",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          54,
+          153,
+          372,
+          420
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         290,
-        423
+        420
       ],
       "sourceLandmark": [
         290,
         269
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (183,170) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        239.0,
-        273.0
+        236.0,
+        267.0
       ],
       "renderedAnchor": [
-        128.1574074074074,
+        128.22012578616352,
         240.0
       ],
       "index": 0,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        33,
-        131,
+        31,
+        130,
         162,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -455,36 +509,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "0ce2242b3d5ad3f224d6c93c7d29a3a6880b2e98b18d34f62337018110b9e9c3",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          58,
+          153,
+          376,
+          420
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         283,
-        423
+        420
       ],
       "sourceLandmark": [
         283,
         274
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (459,173) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        228.0,
-        273.0
+        225.0,
+        267.0
       ],
       "renderedAnchor": [
-        127.77777777777777,
+        127.68867924528301,
         240.0
       ],
       "index": 1,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        37,
-        131,
+        35,
+        130,
         166,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -517,36 +601,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "88d6ae4a2bbbf25205c00557fbc062f0f559b4ddeda2f3f7ab7d909fe1b57480",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          29,
+          153,
+          334,
+          420
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         247,
-        423
+        420
       ],
       "sourceLandmark": [
         247,
         272
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (716,172) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        221.0,
-        273.0
+        218.0,
+        267.0
       ],
       "renderedAnchor": [
-        128.11575562700966,
+        128.34426229508196,
         240.0
       ],
       "index": 2,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        40,
-        131,
+        39,
+        130,
         164,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -598,36 +712,66 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -10,
+          154,
+          300,
+          420
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         224,
-        423
+        420
       ],
       "sourceLandmark": [
         224,
         274
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (981,173) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        237.0,
-        272.0
+        234.0,
+        266.0
       ],
       "renderedAnchor": [
-        128.5,
+        127.86451612903225,
         240.0
       ],
       "index": 3,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        34,
+        32,
         131,
-        160,
+        159,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -660,36 +804,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9ea5a34dbed3e2a5770bab496720eee0a74a3a5af3239ec28b60992830fd3ab4",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          54,
+          98,
+          370,
+          352
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         285,
-        355
+        352
       ],
       "sourceLandmark": [
         285,
         205
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (180,410) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        234.0,
-        260.0
+        231.0,
+        254.0
       ],
       "renderedAnchor": [
-        127.74534161490683,
+        128.03164556962025,
         240.0
       ],
       "index": 4,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        34,
+        33,
         136,
         163,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -722,36 +896,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b02bbbdfeb64f0beaea258c584f274b7d20d5d1a151a4efe18158c5a27f4c284",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          63,
+          99,
+          369,
+          352
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         285,
-        355
+        352
       ],
       "sourceLandmark": [
         285,
         212
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (460,414) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        225.0,
-        259.0
+        222.0,
+        253.0
       ],
       "renderedAnchor": [
-        128.14423076923077,
+        128.41176470588235,
         240.0
       ],
       "index": 5,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        38,
-        137,
+        37,
+        136,
         163,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -784,36 +988,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "7007c066168f1cd46c04f7211d0860aec560ca9949e114254ebc0bc0cd04610c",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          36,
+          102,
+          336,
+          352
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         247,
-        355
+        352
       ],
       "sourceLandmark": [
         247,
         215
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (716,416) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        214.0,
-        256.0
+        211.0,
+        250.0
       ],
       "renderedAnchor": [
-        128.3202614379085,
+        127.51,
         240.0
       ],
       "index": 6,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        43,
-        138,
-        165,
+        41,
+        137,
+        164,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "idle",
@@ -865,36 +1099,66 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -3,
+          99,
+          297,
+          352
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         225,
-        355
+        352
       ],
       "sourceLandmark": [
         225,
         218
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (982,418) at 1120x560; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        231.0,
-        259.0
+        228.0,
+        253.0
       ],
       "renderedAnchor": [
-        128.09803921568627,
+        128.48000000000002,
         240.0
       ],
       "index": 7,
-      "scale": 0.399280576,
+      "scale": 0.411200395,
       "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "appliedScale": 0.411200395,
       "renderedBounds": [
-        36,
-        137,
+        35,
+        136,
         158,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -927,36 +1191,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "dffebfa8311f8b61a7f726093207f8d94ac242ee189e9f88abe6c8ba92e5f923",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          63,
+          80,
+          363,
+          372
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         271,
-        375
+        372
       ],
       "sourceLandmark": [
         271,
         210
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (214,166) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        211.0,
-        298.0
+        208.0,
+        292.0
       ],
       "renderedAnchor": [
-        128.12418300653593,
+        127.89333333333333,
         240.0
       ],
       "index": 8,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         44,
-        121,
-        166,
+        122,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 5,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -989,36 +1283,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "ae3b15a14509e51468dfdd7ee3616699b49afc50fbf11b3565ba8c79944703b9",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          90,
+          353,
+          371
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         262,
-        374
+        371
       ],
       "sourceLandmark": [
         262,
         214
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (557,169) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        234.0,
-        287.0
+        231.0,
+        281.0
       ],
       "renderedAnchor": [
-        128.4573170731707,
+        128.26086956521738,
         240.0
       ],
       "index": 9,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         35,
-        125,
-        166,
+        126,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1051,36 +1375,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "d9b26a9185cccbdc42497e40c1d0f4d75e8d49ad86cdd714dcc79a80793ca6b5",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          7,
+          91,
+          342,
+          371
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         236,
-        374
+        371
       ],
       "sourceLandmark": [
         236,
         215
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (886,170) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        232.0,
-        286.0
+        229.0,
+        280.0
       ],
       "renderedAnchor": [
-        127.52785923753666,
+        128.28358208955223,
         240.0
       ],
       "index": 10,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
-        35,
-        126,
+        36,
+        127,
         171,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 7,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1113,36 +1467,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "a3d269e4cb214018e7354f28c231973f29aec1593589f2dcce6b0b1658ed0dd9",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          1,
+          91,
+          315,
+          371
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         226,
-        374
+        371
       ],
       "sourceLandmark": [
         226,
         217
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (1228,171) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        228.0,
-        286.0
+        225.0,
+        280.0
       ],
       "renderedAnchor": [
-        128.2,
+        128.0031847133758,
         240.0
       ],
       "index": 11,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         37,
-        126,
-        165,
+        127,
+        164,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1175,36 +1559,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8d581b6f9a56d86b79976e447e429646584a5be9b604c2624507be1312eea48a",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          52,
+          52,
+          359,
+          336
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         267,
-        339
+        336
       ],
       "sourceLandmark": [
         267,
         177
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (211,490) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        218.0,
-        290.0
+        215.0,
+        284.0
       ],
       "renderedAnchor": [
-        128.06070287539936,
+        127.84039087947883,
         240.0
       ],
       "index": 12,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         41,
-        124,
-        166,
+        125,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1237,36 +1651,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "61d18fff4f0548d6fc2b20bf056028e5a7ee0609609d3a7ca857131f61a177d2",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          31,
+          53,
+          349,
+          336
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         254,
-        339
+        336
       ],
       "sourceLandmark": [
         254,
         181
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (551,493) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        226.0,
-        289.0
+        223.0,
+        283.0
       ],
       "renderedAnchor": [
-        127.98148148148148,
+        127.76100628930817,
         240.0
       ],
       "index": 13,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         38,
-        125,
-        167,
+        126,
+        166,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1299,36 +1743,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "60d42d676c615d1a4b0224cae87ae379edb476cd35a320d303ea75dc1a7f8af4",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          24,
+          54,
+          338,
+          336
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         236,
-        339
+        336
       ],
       "sourceLandmark": [
         236,
         181
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (886,493) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        215.0,
-        288.0
+        212.0,
+        282.0
       ],
       "renderedAnchor": [
-        128.0,
+        127.7452229299363,
         240.0
       ],
       "index": 14,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         42,
-        125,
-        170,
+        126,
+        169,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "move",
@@ -1361,36 +1835,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "eaf8142264bf2a16d9e8663d5fdb810babd40aa83f5edb1856188f26327b8b03",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          7,
+          55,
+          322,
+          335
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         229,
-        338
+        335
       ],
       "sourceLandmark": [
         229,
         182
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (1230,494) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        225.0,
-        286.0
+        222.0,
+        280.0
       ],
       "renderedAnchor": [
-        127.7196261682243,
+        127.5047619047619,
         240.0
       ],
       "index": 15,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.982397,
+      "appliedScale": 0.403962034,
       "renderedBounds": [
         38,
-        126,
-        166,
+        127,
+        165,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1423,36 +1927,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "77621acca9faf00e276d7771828362c9955f04e236138dec169830a50c311080",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          57,
+          161,
+          370,
+          417
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         293,
-        420
+        417
       ],
       "sourceLandmark": [
         293,
         276
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (231,218) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        239.0,
-        262.0
+        236.0,
+        256.0
       ],
       "renderedAnchor": [
-        128.15047021943573,
+        127.80511182108626,
         240.0
       ],
       "index": 16,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        33,
-        135,
-        160,
+        23,
+        126,
+        162,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1485,36 +2019,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "60ec73c298142bbf1f3aeba841367cb4864713164fedf06a6e6600e61f29782d",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          40,
+          165,
+          381,
+          417
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         264,
-        420
+        417
       ],
       "sourceLandmark": [
         264,
         279
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (559,220) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        227.0,
-        258.0
+        224.0,
+        252.0
       ],
       "renderedAnchor": [
-        127.93083573487031,
+        127.8475073313783,
         240.0
       ],
       "index": 17,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        37,
-        137,
-        176,
+        28,
+        128,
+        180,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1547,36 +2111,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "989519c64729a691a565dae1ef197f7a1eb771eafbb151a114b841d4ba7e70b5",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          17,
+          165,
+          360,
+          417
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         237,
-        420
+        417
       ],
       "sourceLandmark": [
         237,
         279
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (887,220) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        223.0,
-        258.0
+        220.0,
+        252.0
       ],
       "renderedAnchor": [
-        127.81661891117479,
+        128.49271137026238,
         240.0
       ],
       "index": 18,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        39,
-        137,
-        178,
+        31,
+        128,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1609,36 +2203,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "1071a0807a9ddec1096d5b895505f422302e8d3a3fd710780daff3dd52a20313",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          1,
+          167,
+          380,
+          417
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         230,
-        420
+        417
       ],
       "sourceLandmark": [
         230,
         279
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (1231,220) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        232.0,
-        256.0
+        229.0,
+        250.0
       ],
       "renderedAnchor": [
-        127.8,
+        127.50923482849605,
         240.0
       ],
       "index": 19,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        35,
-        138,
-        189,
+        26,
+        129,
+        194,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 10,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1671,36 +2295,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "54751319467a62077deaaac9cbf96b5b72002319101eebd527ab65673c545679",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          51,
+          118,
+          439,
+          355
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         272,
-        358
+        355
       ],
       "sourceLandmark": [
         272,
         225
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (215,528) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        224.0,
-        243.0
+        221.0,
+        237.0
       ],
       "renderedAnchor": [
-        128.25888324873097,
+        127.96907216494846,
         240.0
       ],
       "index": 20,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        39,
-        143,
-        196,
+        30,
+        135,
+        202,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1733,36 +2387,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "3a45ce4d80ff6370ceeb58d8a7bde7b4e4c2040c8d45dbe16b7f205f5dd627b5",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          65,
+          119,
+          394,
+          355
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         269,
-        358
+        355
       ],
       "sourceLandmark": [
         269,
         228
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (563,530) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        207.0,
-        242.0
+        204.0,
+        236.0
       ],
       "renderedAnchor": [
-        127.8,
+        127.52887537993921,
         240.0
       ],
       "index": 21,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        45,
-        143,
-        179,
+        37,
+        135,
+        183,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1795,36 +2479,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "b3421f5ff39333176219435f6d57c29f67b5e7755ef5dbbef83db32d49b98964",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          37,
+          119,
+          323,
+          355
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         245,
-        358
+        355
       ],
       "sourceLandmark": [
         245,
         228
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (893,530) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        211.0,
-        242.0
+        208.0,
+        236.0
       ],
       "renderedAnchor": [
-        127.54452054794521,
+        128.36363636363637,
         240.0
       ],
       "index": 22,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        43,
-        143,
-        160,
+        36,
+        135,
+        163,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "attack",
@@ -1857,36 +2571,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "2a868e24b0b8aa32b10cb284c493ffcc3b8cf4c0a9e57ccd3c89d573b5c92726",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          21,
+          116,
+          309,
+          354
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         237,
-        357
+        354
       ],
       "sourceLandmark": [
         237,
         228
       ],
-      "sourceAnchorEvidence": "Manual ribcage landmark from displayed source (1237,530) at 1400x700; visually grounded complete pose, registered at padded support floor. Source and annotated overlay individually inspected; no body root inferred from tail extrema.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        219.0,
-        244.0
+        216.0,
+        238.0
       ],
       "renderedAnchor": [
-        128.1530612244898,
+        128.0,
         240.0
       ],
       "index": 23,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 1.080462,
+      "appliedScale": 0.444286401,
       "renderedBounds": [
-        41,
-        143,
-        158,
+        32,
+        134,
+        160,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1919,36 +2663,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "805dbfe412a01c6371259b245f291b3232e42176f280bacaebc704e7f390ddb9",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          52,
+          153,
+          404,
+          423
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         248,
-        426
+        423
       ],
       "sourceLandmark": [
         248,
         241
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (196,190) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        199.0,
-        276.0
+        196.0,
+        270.0
       ],
       "renderedAnchor": [
-        128.48882681564245,
+        128.0681818181818,
         240.0
       ],
       "index": 24,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         49,
-        130,
-        192,
+        131,
+        191,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -1981,36 +2755,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "8cef75b050b8783550d92e2ceaca2a94b93a9050a874f3b58b3b1cc609b120fb",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          22,
+          187,
+          353,
+          423
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         278,
-        426
+        423
       ],
       "sourceLandmark": [
         278,
         276
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (570,218) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        259.0,
-        242.0
+        256.0,
+        236.0
       ],
       "renderedAnchor": [
-        127.75370919881306,
+        127.63746223564955,
         240.0
       ],
       "index": 25,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         24,
-        143,
-        159,
+        145,
+        158,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 3,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2043,36 +2847,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "f7448b773b5847b967b1612cf2b2510f66cc3241a22668f41e40f6ee0bf2b492",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          9,
+          225,
+          358,
+          423
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         276,
-        426
+        423
       ],
       "sourceLandmark": [
         276,
         321
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (918,253) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        270.0,
-        204.0
+        267.0,
+        198.0
       ],
       "renderedAnchor": [
-        128.0,
+        127.87106017191977,
         240.0
       ],
       "index": 26,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         20,
-        159,
-        162,
+        160,
+        161,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 1,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2124,36 +2958,66 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -2,
+          259,
+          358,
+          423
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         273,
-        426
+        423
       ],
       "sourceLandmark": [
         273,
         352
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (1265,278) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        278.0,
-        170.0
+        275.0,
+        164.0
       ],
       "renderedAnchor": [
-        127.89617486338798,
+        127.76388888888889,
         240.0
       ],
       "index": 27,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         17,
-        172,
-        163,
+        174,
+        162,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2186,36 +3050,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "30a21b48d548ec9759818025e1e3c426593d7e2079b2f886477bdf446c29c88b",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          53,
+          196,
+          441,
+          332
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         310,
-        335
+        332
       ],
       "sourceLandmark": [
         310,
         282
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (245,573) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        260.0,
-        142.0
+        257.0,
+        136.0
       ],
       "renderedAnchor": [
-        127.60406091370558,
+        127.99226804123711,
         240.0
       ],
       "index": 28,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         24,
-        183,
+        185,
         181,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 4,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2248,36 +3142,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "be74c227264d4d8844434b202ffdd38da18c65ad7b59cc51ece4305bb0cc8d0d",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          50,
+          241,
+          409,
+          332
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         259,
-        335
+        332
       ],
       "sourceLandmark": [
         259,
         299
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (555,586) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        212.0,
-        97.0
+        209.0,
+        91.0
       ],
       "renderedAnchor": [
-        127.8,
+        128.41504178272982,
         240.0
       ],
       "index": 29,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
-        43,
-        201,
+        44,
+        203,
         189,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 0,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2310,36 +3234,66 @@
       "discardedForegroundPixels": 0,
       "sourcePoseRgbaSha256": "9c1ef13c0103616e3b4419e70413e4a1339a129a26e9a0044b22ca382200ae53",
       "sourceOwnershipTransfers": [],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          9,
+          254,
+          396,
+          332
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         234,
-        335
+        332
       ],
       "sourceLandmark": [
         234,
         305
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (885,591) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        228.0,
-        84.0
+        225.0,
+        78.0
       ],
       "renderedAnchor": [
-        128.08396946564886,
+        127.69767441860465,
         240.0
       ],
       "index": 30,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         37,
-        206,
-        194,
+        209,
+        193,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 6,
+        "remainingStrictPixelCount": 0
+      }
     },
     {
       "clip": "death",
@@ -2391,36 +3345,66 @@
           "ownershipEvidence": "single eight-connected component; >=90% owner cell; <=15% cell-boundary excursion"
         }
       ],
+      "transparentPaddingTrim": {
+        "method": "exact-zero-alpha-bbox-v1",
+        "sourceBounds": [
+          -7,
+          268,
+          382,
+          332
+        ],
+        "removedMargins": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "removedVisiblePixelCount": 0
+      },
       "anchorStatus": "reviewed-physical-root",
       "anchorMethod": "measured-source-body-landmark",
       "sourceAnchor": [
         210,
-        335
+        332
       ],
       "sourceLandmark": [
         210,
         307
       ],
-      "sourceAnchorEvidence": "Manual thoracic landmark corrected from displayed source (1215,593) at 1400x700; reference follows the ribcage behind shoulder, not the forward skull or wrist. Grounded complete pose at padded support floor. Revised overlay individually inspected; marker confirmed on thorax rather than skull.",
+      "sourceAnchorEvidence": "V75 independent reinspection: marked thorax remains on the same ribcage mass, not a tail or skull bound. Grounded sole/resting-body support is three source pixels above the old transparent extraction guard. New overlay shows the actual root without the former padding.",
       "sourceAnchorConfidence": "medium",
       "anchorOffsetInCroppedSource": [
-        220.0,
-        70.0
+        217.0,
+        64.0
       ],
       "renderedAnchor": [
-        128.0,
+        127.58097686375321,
         240.0
       ],
       "index": 31,
-      "scale": 0.399280576,
-      "sourceScale": 1.0,
-      "appliedScale": 0.399280576,
+      "scale": 0.411200395,
+      "sourceScale": 0.981605,
+      "appliedScale": 0.403636364,
       "renderedBounds": [
         40,
-        212,
-        198,
+        214,
+        197,
         240
-      ]
+      ],
+      "magentaSpill": {
+        "method": "v64-strict-post-resize-green-plus-eight-v1",
+        "thresholds": {
+          "minimumAlphaInclusive": 16,
+          "minimumRedExclusive": 160,
+          "minimumBlueExclusive": 160,
+          "minimumRedBlueOverGreenExclusive": 35,
+          "replacementRedBlueOverGreen": 8
+        },
+        "applied": true,
+        "nativeAlphaPreserved": false,
+        "neutralizedPixelCount": 2,
+        "remainingStrictPixelCount": 0
+      }
     }
   ],
   "validation": {
@@ -2428,466 +3412,530 @@
       {
         "index": 0,
         "alphaBounds": [
-          34,
-          132,
-          161,
-          239
+          31,
+          130,
+          162,
+          240
         ],
-        "foregroundPixels": 5034,
-        "width": 127,
-        "height": 107,
-        "relativeToRowMedian": 1.015226
+        "foregroundPixels": 5346,
+        "width": 131,
+        "height": 110,
+        "relativeToRowMedian": 1.022473
       },
       {
         "index": 1,
         "alphaBounds": [
-          38,
-          132,
-          165,
-          239
+          35,
+          130,
+          166,
+          240
         ],
-        "foregroundPixels": 4953,
-        "width": 127,
-        "height": 107,
-        "relativeToRowMedian": 0.998891
+        "foregroundPixels": 5267,
+        "width": 131,
+        "height": 110,
+        "relativeToRowMedian": 1.007363
       },
       {
         "index": 2,
         "alphaBounds": [
-          41,
-          132,
-          163,
-          239
+          39,
+          130,
+          164,
+          240
         ],
-        "foregroundPixels": 4903,
-        "width": 122,
-        "height": 107,
-        "relativeToRowMedian": 0.988807
+        "foregroundPixels": 5169,
+        "width": 125,
+        "height": 110,
+        "relativeToRowMedian": 0.98862
       },
       {
         "index": 3,
         "alphaBounds": [
-          35,
-          132,
+          32,
+          131,
           159,
-          239
+          240
         ],
-        "foregroundPixels": 4964,
-        "width": 124,
-        "height": 107,
-        "relativeToRowMedian": 1.001109
+        "foregroundPixels": 5190,
+        "width": 127,
+        "height": 109,
+        "relativeToRowMedian": 0.992637
       },
       {
         "index": 4,
         "alphaBounds": [
-          35,
-          137,
-          162,
-          239
+          33,
+          136,
+          163,
+          240
         ],
-        "foregroundPixels": 4779,
-        "width": 127,
-        "height": 102,
-        "relativeToRowMedian": 1.018977
+        "foregroundPixels": 4979,
+        "width": 130,
+        "height": 104,
+        "relativeToRowMedian": 1.004641
       },
       {
         "index": 5,
         "alphaBounds": [
-          39,
-          138,
-          162,
-          239
+          37,
+          136,
+          163,
+          240
         ],
-        "foregroundPixels": 4713,
-        "width": 123,
-        "height": 101,
-        "relativeToRowMedian": 1.004904
+        "foregroundPixels": 4989,
+        "width": 126,
+        "height": 104,
+        "relativeToRowMedian": 1.006659
       },
       {
         "index": 6,
         "alphaBounds": [
-          44,
-          139,
+          41,
+          137,
           164,
-          239
+          240
         ],
-        "foregroundPixels": 4561,
-        "width": 120,
-        "height": 100,
-        "relativeToRowMedian": 0.972495
+        "foregroundPixels": 4828,
+        "width": 123,
+        "height": 103,
+        "relativeToRowMedian": 0.974173
       },
       {
         "index": 7,
         "alphaBounds": [
-          37,
-          138,
-          157,
-          239
+          35,
+          136,
+          158,
+          240
         ],
-        "foregroundPixels": 4667,
-        "width": 120,
-        "height": 101,
-        "relativeToRowMedian": 0.995096
+        "foregroundPixels": 4933,
+        "width": 123,
+        "height": 104,
+        "relativeToRowMedian": 0.995359
       },
       {
         "index": 8,
         "alphaBounds": [
-          45,
+          44,
           122,
           165,
-          239
+          240
         ],
-        "foregroundPixels": 5171,
-        "width": 120,
-        "height": 117,
-        "relativeToRowMedian": 1.006913
+        "foregroundPixels": 5294,
+        "width": 121,
+        "height": 118,
+        "relativeToRowMedian": 1.005317
       },
       {
         "index": 9,
         "alphaBounds": [
-          36,
+          35,
           126,
           165,
-          239
+          240
         ],
-        "foregroundPixels": 5100,
-        "width": 129,
-        "height": 113,
-        "relativeToRowMedian": 0.993087
+        "foregroundPixels": 5200,
+        "width": 130,
+        "height": 114,
+        "relativeToRowMedian": 0.987467
       },
       {
         "index": 10,
         "alphaBounds": [
           36,
           127,
-          170,
-          239
+          171,
+          240
         ],
-        "foregroundPixels": 5255,
-        "width": 134,
-        "height": 112,
-        "relativeToRowMedian": 1.023269
+        "foregroundPixels": 5363,
+        "width": 135,
+        "height": 113,
+        "relativeToRowMedian": 1.01842
       },
       {
         "index": 11,
         "alphaBounds": [
-          38,
+          37,
           127,
           164,
-          239
+          240
         ],
-        "foregroundPixels": 5097,
-        "width": 126,
-        "height": 112,
-        "relativeToRowMedian": 0.992503
+        "foregroundPixels": 5238,
+        "width": 127,
+        "height": 113,
+        "relativeToRowMedian": 0.994683
       },
       {
         "index": 12,
         "alphaBounds": [
-          42,
+          41,
           125,
           165,
-          239
+          240
         ],
-        "foregroundPixels": 5166,
-        "width": 123,
-        "height": 114,
-        "relativeToRowMedian": 1.01533
+        "foregroundPixels": 5275,
+        "width": 124,
+        "height": 115,
+        "relativeToRowMedian": 1.019619
       },
       {
         "index": 13,
         "alphaBounds": [
-          39,
+          38,
           126,
           166,
-          239
+          240
         ],
-        "foregroundPixels": 4898,
-        "width": 127,
-        "height": 113,
-        "relativeToRowMedian": 0.962657
+        "foregroundPixels": 5014,
+        "width": 128,
+        "height": 114,
+        "relativeToRowMedian": 0.96917
       },
       {
         "index": 14,
         "alphaBounds": [
-          43,
+          42,
           126,
           169,
-          239
+          240
         ],
-        "foregroundPixels": 5136,
-        "width": 126,
-        "height": 113,
-        "relativeToRowMedian": 1.009434
+        "foregroundPixels": 5221,
+        "width": 127,
+        "height": 114,
+        "relativeToRowMedian": 1.009181
       },
       {
         "index": 15,
         "alphaBounds": [
-          39,
+          38,
           127,
           165,
-          239
+          240
         ],
-        "foregroundPixels": 5040,
-        "width": 126,
-        "height": 112,
-        "relativeToRowMedian": 0.990566
+        "foregroundPixels": 5126,
+        "width": 127,
+        "height": 113,
+        "relativeToRowMedian": 0.990819
       },
       {
         "index": 16,
         "alphaBounds": [
-          34,
-          136,
-          159,
-          239
+          23,
+          126,
+          162,
+          240
         ],
-        "foregroundPixels": 4633,
-        "width": 125,
-        "height": 103,
-        "relativeToRowMedian": 1.02534
+        "foregroundPixels": 5702,
+        "width": 139,
+        "height": 114,
+        "relativeToRowMedian": 1.026832
       },
       {
         "index": 17,
         "alphaBounds": [
-          38,
-          138,
-          175,
-          239
+          28,
+          128,
+          180,
+          240
         ],
-        "foregroundPixels": 4538,
-        "width": 137,
-        "height": 101,
-        "relativeToRowMedian": 1.004316
+        "foregroundPixels": 5591,
+        "width": 152,
+        "height": 112,
+        "relativeToRowMedian": 1.006843
       },
       {
         "index": 18,
         "alphaBounds": [
-          40,
-          138,
-          177,
-          239
+          31,
+          128,
+          183,
+          240
         ],
-        "foregroundPixels": 4418,
-        "width": 137,
-        "height": 101,
-        "relativeToRowMedian": 0.977758
+        "foregroundPixels": 5426,
+        "width": 152,
+        "height": 112,
+        "relativeToRowMedian": 0.977129
       },
       {
         "index": 19,
         "alphaBounds": [
-          36,
-          139,
-          188,
-          239
+          26,
+          129,
+          194,
+          240
         ],
-        "foregroundPixels": 4499,
-        "width": 152,
-        "height": 100,
-        "relativeToRowMedian": 0.995684
+        "foregroundPixels": 5515,
+        "width": 168,
+        "height": 111,
+        "relativeToRowMedian": 0.993157
       },
       {
         "index": 20,
         "alphaBounds": [
-          40,
-          144,
-          195,
-          239
+          30,
+          135,
+          202,
+          240
         ],
-        "foregroundPixels": 4268,
-        "width": 155,
-        "height": 95,
-        "relativeToRowMedian": 1.038948
+        "foregroundPixels": 5243,
+        "width": 172,
+        "height": 105,
+        "relativeToRowMedian": 1.042864
       },
       {
         "index": 21,
         "alphaBounds": [
-          46,
-          144,
-          178,
-          239
+          37,
+          135,
+          183,
+          240
         ],
-        "foregroundPixels": 4171,
-        "width": 132,
-        "height": 95,
-        "relativeToRowMedian": 1.015336
+        "foregroundPixels": 5077,
+        "width": 146,
+        "height": 105,
+        "relativeToRowMedian": 1.009846
       },
       {
         "index": 22,
         "alphaBounds": [
-          44,
-          144,
-          159,
-          239
+          36,
+          135,
+          163,
+          240
         ],
-        "foregroundPixels": 4045,
-        "width": 115,
-        "height": 95,
-        "relativeToRowMedian": 0.984664
+        "foregroundPixels": 4942,
+        "width": 127,
+        "height": 105,
+        "relativeToRowMedian": 0.982994
       },
       {
         "index": 23,
         "alphaBounds": [
-          42,
-          144,
-          157,
-          239
+          32,
+          134,
+          160,
+          240
         ],
-        "foregroundPixels": 4010,
-        "width": 115,
-        "height": 95,
-        "relativeToRowMedian": 0.976144
+        "foregroundPixels": 4978,
+        "width": 128,
+        "height": 106,
+        "relativeToRowMedian": 0.990154
       },
       {
         "index": 24,
         "alphaBounds": [
-          50,
+          49,
           131,
           191,
-          239
+          240
         ],
-        "foregroundPixels": 5680,
-        "width": 141,
-        "height": 108,
-        "relativeToRowMedian": 1.092938
+        "foregroundPixels": 5797,
+        "width": 142,
+        "height": 109,
+        "relativeToRowMedian": 1.091405
       },
       {
         "index": 25,
         "alphaBounds": [
-          25,
-          144,
+          24,
+          145,
           158,
-          239
+          240
         ],
-        "foregroundPixels": 5188,
-        "width": 133,
+        "foregroundPixels": 5269,
+        "width": 134,
         "height": 95,
-        "relativeToRowMedian": 0.998268
+        "relativeToRowMedian": 0.991998
       },
       {
         "index": 26,
         "alphaBounds": [
-          21,
+          20,
           160,
           161,
-          239
+          240
         ],
-        "foregroundPixels": 5206,
-        "width": 140,
-        "height": 79,
-        "relativeToRowMedian": 1.001732
+        "foregroundPixels": 5354,
+        "width": 141,
+        "height": 80,
+        "relativeToRowMedian": 1.008002
       },
       {
         "index": 27,
         "alphaBounds": [
-          18,
-          173,
+          17,
+          174,
           162,
-          239
+          240
         ],
-        "foregroundPixels": 4749,
-        "width": 144,
+        "foregroundPixels": 4815,
+        "width": 145,
         "height": 66,
-        "relativeToRowMedian": 0.913796
+        "relativeToRowMedian": 0.906524
       },
       {
         "index": 28,
         "alphaBounds": [
-          25,
-          184,
-          180,
-          239
+          24,
+          185,
+          181,
+          240
         ],
-        "foregroundPixels": 4646,
-        "width": 155,
+        "foregroundPixels": 4751,
+        "width": 157,
         "height": 55,
-        "relativeToRowMedian": 1.474687
+        "relativeToRowMedian": 1.500395
       },
       {
         "index": 29,
         "alphaBounds": [
           44,
-          202,
-          188,
-          239
+          203,
+          189,
+          240
         ],
-        "foregroundPixels": 3402,
-        "width": 144,
+        "foregroundPixels": 3468,
+        "width": 145,
         "height": 37,
-        "relativeToRowMedian": 1.079829
+        "relativeToRowMedian": 1.095216
       },
       {
         "index": 30,
         "alphaBounds": [
-          38,
-          207,
+          37,
+          209,
           193,
-          239
+          240
         ],
-        "foregroundPixels": 2899,
-        "width": 155,
-        "height": 32,
-        "relativeToRowMedian": 0.920171
+        "foregroundPixels": 2865,
+        "width": 156,
+        "height": 31,
+        "relativeToRowMedian": 0.904784
       },
       {
         "index": 31,
         "alphaBounds": [
-          41,
-          213,
+          40,
+          214,
           197,
-          239
+          240
         ],
-        "foregroundPixels": 2563,
-        "width": 156,
+        "foregroundPixels": 2602,
+        "width": 157,
         "height": 26,
-        "relativeToRowMedian": 0.813522
+        "relativeToRowMedian": 0.821727
       }
     ],
     "rowMedianForegroundPixels": [
-      4958.5,
-      4690.0,
-      5135.5,
-      5088.0,
-      4518.5,
-      4108.0,
-      5197.0,
-      3150.5
+      5228.5,
+      4956.0,
+      5266.0,
+      5173.5,
+      5553.0,
+      5027.5,
+      5311.5,
+      3166.5
     ],
     "findings": [],
     "uniqueFrameCount": 32,
     "cellRgbaSha256": [
-      "b3921afc7b7f1dd87e0a75837acfdaf9937038a751eed2b99ca29d382f161570",
-      "ff2259a9330e89be701622d4d65f2692378ea658edec61fc9f9ef374bc1b8958",
-      "5ccafbac8b4c43f1bcec3d9e6d3c4aa00bb19c91a0281281bc3f2d4e40b46f35",
-      "4ce29d1642fa13435381dcc0bf6b717a99767d102848e5e9b8adf7cc388eef36",
-      "ab999026184fe336fec28f07245292628c01619d472bc5594d41eced443bf1ec",
-      "8b36b687a3e56e6a3a8cd351c08891b53cf597d8920f79aa539a5dd401f7f6c8",
-      "66faa68ddfa88ab955aa65f156cb488a67fd910b915fc5d9debe7985d8dda8dc",
-      "25714d4a688aea0d360e9e0dfd480f7108c7a5e7c8911f8d0e8fee6eaf3f302c",
-      "e809df9f0c915040916ca1ec17aa8f8685d361a8779861d91334041b3e5d7458",
-      "77f9e69109e68564dfadc6d8bf0d8c32f997da7f5a9788cda198af614bbbca0f",
-      "1f3cffb68e6a3d00745e7256eb3323d8a7b546679bfaeacba3beab1f74524c8b",
-      "ad72a7e90f7efe65719b4587bd3ab0d95288687af11411aea704dd4d80529321",
-      "94c5436927bc302396d7433aef0d7322ac2c68f06006e5caedd9ac4d7829ab31",
-      "be0b6da4bad2699b2fcca1c14c009a2b747484524cd4b6429a2676094f3d630f",
-      "dec176cde69641f646896bbaab981ffbe9000897e45e5b597c8d8a9c6d8915a0",
-      "f28e493f0bfdaa092021cc9769cf2039ed085b00e3d9abeb47ef83cd664da797",
-      "7d64477f6bf0ecefe6fbe77c083f6951d56bed83e97ae663e226321cf4012d66",
-      "ba4fcb3acec6497a403ec4a6105fc37661beae305aae781d37b9a7c51ffbe0b6",
-      "72cba845906b09df64b28eca3630cd68226e082f33f9f05908513178ddc42cd4",
-      "4cd9da5f5842fc2d9db3b037151061ced5be0d65c49dd3a2e527a061e4cfcd02",
-      "9457d3efbf3b4a440415148e6adc0522ed119268cb75364866e9f7672799dce9",
-      "81122f56f3f40531403224eaffd78ddc99254a6726c7dbf0ac5015a074839b44",
-      "8ed3f403f27a4d963a87cffcc9dd323fea769e2db3808025b3ff02025de957ae",
-      "48f4eff7a2ea357ba393d32822327e777af520d413106d06c5171bf23579ba3e",
-      "58837573e9bfe612bea4aff1e51b6459921efe80c1e22b35039e88afa6f59d30",
-      "66361606fbec8e1a06a97eef124e4bb703ec7c33d5c094308d310623ff4edc4d",
-      "7152c24a1bc21814fdea42083ee23b4c73dfe07e6b5af654be15964d81858d42",
-      "3c9df5e455bdefd233e4e63d2da7d735f94cbc5daf9a01d94c3981a75511f749",
-      "a984f6802ef9f95f9d417963565a9a733245eb5eb0078bd259c728078fa3ca53",
-      "1cdac674b9070f9d2bfb94cbf5865005e69a5f6d7ddee2f3c7d0f489390fd68e",
-      "6a9bf5f9ea4b966e7c1e831573b88006045f6924cceb043d85cb4eb157b94029",
-      "5194acc284cef0be529eead0f51153a6a84a7253eb8833e1789ee31937e2109a"
+      "2c8de39020d6aff7eea06e7bf5800aecb1395f0a4cda0aaa1335368051aaf399",
+      "4c5b535bec80b790b6ff84bebbeadd3278cf834e4828f39c1134ea97a50f3084",
+      "fda7a50fb51b2271839e2c43fb006ebca1bda270e086afbbcd98f789bf72c339",
+      "95775146c2f6c7e67e1c5361cf1d95ab5de2da77d0636b07bb859808abea6d03",
+      "b8bd3989a251c8fa13cad3c9c28e4a716757baaf1f670081c156e2e97857fc5f",
+      "538411631e7e552159bcf8181a4d136038ee54970670187e824961ee5495126c",
+      "26f0617b7a4b6a20ae8030b69f5b1dc13d189fdef85bddd16a15321ee2e36511",
+      "dd236b831d1ba873c35d5b68cabc808ff67506778e4fe392e2e93266e57f8012",
+      "98995642364c350149b498419ae2670029bc5bf6c597a843108135e3c11dc377",
+      "58d2002746c6c5ce5ef6b72137af65f57b7fb89ae57ef8540a097bd1fae026dc",
+      "face2c07e67f9280bff805b77fc934d03165c4f43cc5c55925c048a9126724bc",
+      "27cb95822a6f5accddf01b2a1eead2bbae537f7851375bca3e8728fabc0ab37a",
+      "ba7db99d422639de31242a9340d1292f191d55bff2de51e5051e818df9b9fef1",
+      "a4938cd753ec65f485472dbffd73ecbc3eaadf86a960fe12908eab2a8ba38b38",
+      "fa5f270d68ff7c632dd126400f81571c38a2480306d40a8f1207db143844c545",
+      "28505b18aeb51f31802e2dc8e7a33a7c765afa708ae630a97aac639fa087f67e",
+      "9a6ef3b52e7b879dea608c9da068d8fed18aff2423f66043dc8382c06d77aa90",
+      "f0c0192f4c8b5a93f35b42752909a703ca72a1e2014e89ad524eda258cf0a831",
+      "2655ef47473c4bd89d393cb01d30f3c56e441a8a711476f14898e521097609d8",
+      "bed0bb2bb87a0fbbeed023f2691bacf48429094fdac4fbba5c7a1baee948f078",
+      "05af09168a2fc156b8b5585f91e3f46b85bf78feea01db699e8c76a1d8f014cf",
+      "7fbb159e3b504257f60940e06c51c2d9a881adf03b49147674af162081035df5",
+      "c9cf09849b1e687f9233ff25bdd04926d0de79474600dc7c1051a327ab96525c",
+      "587d8288ffd4d0bb259ecc80d2928f1a75667d5c329ef5569134294a268ea1ea",
+      "f5d6ff908283a998681969b8b7decc872d1320492adb1d9ed5b1fab63fa02e2f",
+      "55f0a8f987824e1d89f971502e369a75b82d2196270bbdbacd071d7e69823e47",
+      "6f6caa98b74342e6b8e8067a515b2f5fd88998e75fa0d263a9ef4c7c6e723329",
+      "729efbb204b543725b81e151f96c2806f5eb25f6939d8e6a0646e08a8f33340c",
+      "16b3105a5e4b224bcd78ee0e4b0de297c5fdb3fa1305c748c78586e97585f560",
+      "d52264a4963d902ff1a6364a16f0e1d55b67b7287f3bfdf6601768e5b57d85e8",
+      "f14a34526714cbbcd34df4edee90c4358b15f2603f3310ad2d688e76201c1389",
+      "f017a9d989950e41200acad8718f4bd6ab09e050b6b918f042802939f959484f"
     ],
     "visualFidelityCertified": false
+  },
+  "postGenerationScaleReview": {
+    "path": "docs/references/v75-enemy-fixes/021-023/023-scale-review.json",
+    "sha256": "027b5beeaa8917cb670ed3c71a6a2b65d19188f87f981c57cfcab09e7d83cd00",
+    "status": "reviewed",
+    "profileId": "enemy-023-atarax-ripper",
+    "reviewer": "Codex next50_art_review V75",
+    "reviewedAt": "2026-09-05",
+    "coordinates": "nominal-source-cell",
+    "baselineClip": "idle",
+    "sourceScaleByClip": {
+      "idle": 1.0,
+      "move": 0.982397,
+      "attack": 1.080462,
+      "death": 0.981605
+    },
+    "sourceSha256ByClip": {
+      "idle": "ce72dfd572f7cc0f6af150e293b3141c185f3370ff32ab8ac171e8d3bffc82e4",
+      "move": "a65cbf185220e89eba507db1db21753bd44f25847cad2d358d798e5511f2fd2e",
+      "attack": "f4324058328ce38ceb9a220d13188c7fe8f10e63e47a873a648fe5324929e086",
+      "death": "cf6ca1cfc67a1aa032bc453d64d7920ba1a4049ffea2f2bce7171842312e59a2"
+    },
+    "measurementCount": 8,
+    "evidence": [
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-idle-physical-review.png",
+        "sha256": "41ebe0acfef2a6d8720f9316c4684d0a25e8a05fd3ca5d0cec40e6361b6fb0ab"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-move-physical-review.png",
+        "sha256": "f033ad962852e831b7b88f9bcb5d9390d557fed144809c18d3be978f26512e96"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-attack-physical-review.png",
+        "sha256": "a4aaebac103e125e95c580588b92c755d211b4e07309c068cc9711977966bdea"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-death-physical-review.png",
+        "sha256": "ec3ddfe5bc60439eeec86e9c3f2084da25e4ebda4fab3f42ce0d38292d021e6d"
+      },
+      {
+        "path": "docs/references/v75-enemy-fixes/021-023/023-manual-scale-points.json",
+        "sha256": "a2edc46965cd0a19b6802e1cec83c743ee00812f87544f0c9bea2d2c3a2f5b96"
+      }
+    ]
+  },
+  "normalizationReviewPaths": {
+    "anchor": "docs/references/v75-enemy-fixes/021-023/023-anchor-review.json",
+    "scale": "docs/references/v75-enemy-fixes/021-023/023-scale-review.json"
+  },
+  "magentaSpill": {
+    "method": "v64-strict-post-resize-green-plus-eight-v1",
+    "thresholds": {
+      "minimumAlphaInclusive": 16,
+      "minimumRedExclusive": 160,
+      "minimumBlueExclusive": 160,
+      "minimumRedBlueOverGreenExclusive": 35,
+      "replacementRedBlueOverGreen": 8
+    },
+    "frameCount": 32,
+    "opaqueMatteFrameCount": 32,
+    "nativeAlphaBypassedFrameCount": 0,
+    "neutralizedPixelCount": 60,
+    "remainingStrictPixelCount": 0
   }
 }

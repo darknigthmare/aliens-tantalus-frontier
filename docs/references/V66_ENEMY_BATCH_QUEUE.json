@@ -2,7 +2,7 @@
   "schema": 1,
   "release": "v66",
   "generatedBy": "scripts/enemy-batch-production.mjs",
-  "rosterSha256": "d34b53589e1766ad071c76f8229d0704388289f99d51ecc4483b8355ee4ad43e",
+  "rosterSha256": "b3d241ff7fc64ebd364aea77c24351011f3b7eb6468cd61fea981352e7d8ec36",
   "totalProfiles": 571,
   "archetypeCount": 55,
   "batchSize": 20,
@@ -8288,7 +8288,7 @@
       "modifier": "Standard",
       "biology": "fauna",
       "caste": "aquatic",
-      "provenance": "licensed-reference",
+      "provenance": "project-original",
       "animationFamily": "aquatic",
       "batchId": "batch-004",
       "ordinal": 50,
@@ -8326,7 +8326,7 @@
       },
       "pivot": {
         "x": 128,
-        "y": 240
+        "y": 192
       },
       "sourceFacing": "right",
       "clips": [

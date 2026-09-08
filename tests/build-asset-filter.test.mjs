@@ -37,7 +37,8 @@ test('la copie ne traverse pas les intermédiaires V64/V65/V66 et conserve les a
     'assets/openai/sprites/metadata/v69/alpha-bravo-report.json',
     'assets/openai/sprites/frames/v71/hub-commercial/annex-backgrounds-master-openai-v71.png',
     'assets/openai/sprites/frames/v72/props/operations-table-side-v72-source.png',
-    'assets/openai/sprites/frames/v72/enemy-083-albino-dust-runner/qa-candidates/atlas.webp'
+    'assets/openai/sprites/frames/v72/enemy-083-albino-dust-runner/qa-candidates/atlas.webp',
+    'assets/openai/sprites/frames/v75/lurker/rejected.png'
   ];
   const runtimeFiles = [
     'src/app.js',
@@ -120,9 +121,12 @@ test('V66 garde les preuves sous docs/references hors copie et refuse leurs doss
   const directFiles = [
     'docs/references/V66_ENEMY_BATCH_QUEUE.json',
     'docs/references/V66_RUNNER_IMAGEGEN.md',
-    'docs/references/v66-batch-001-source-scale-contact.jpg'
+    'docs/references/v66-batch-001-source-scale-contact.jpg',
+    'docs/references/V75_ENEMY_PROGRESS.json',
+    'docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md'
   ];
-  const privateRoots = ['docs/references/V66_PRIVATE_REVIEW', 'docs/references/v66-atlas-review'];
+  const privateRoots = ['docs/references/V66_PRIVATE_REVIEW', 'docs/references/v66-atlas-review',
+    'docs/references/v75-enemy-fixes', 'docs/references/v76-conversation-audit', 'docs/references/v76-browser-qa'];
   const nestedFiles = privateRoots.map((root) => `${root}/nested/source-review.png`);
   const publicFiles = ['docs/ART_PROVENANCE_V66.md', 'docs/VERSION_HISTORY_V66.md', 'docs/VALIDATION_V66.md'];
   for (const path of [...directFiles, ...nestedFiles, ...publicFiles]) {
@@ -302,7 +306,7 @@ test('V74 Vercel ferme sources et preuves, préserve 016/050 et rapports publics
     'docs/V74_PUBLIC_REPORT.md', 'docs/v74-public-report.md']) assert.ok(!rules.includes(path), `${path}: rapport public non exclu`);
 });
 
-test('Vercel exclut les candidats V66 et ne réadmet que les neuf profils individuellement acceptés', async () => {
+test('Vercel exclut les candidats V66 et ne réadmet que les onze profils individuellement acceptés', async () => {
   const rules = (await readFile('.vercelignore', 'utf8')).split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
   for (const directory of ['frames/v66', 'reference-masters/v66', 'previews/v66', 'metadata/v66', 'normalized/enemy-clips-v66', 'normalized/enemy-motion-v66']) {
     assert.ok(rules.includes(`assets/openai/sprites/${directory}`));
@@ -311,7 +315,7 @@ test('Vercel exclut les candidats V66 et ne réadmet que les neuf profils indivi
   }
   assert.ok(rules.includes('assets/openai/sprites/normalized/enemy-profiles-v66/*'));
   const allowed = rules.filter((rule) => rule.startsWith('!assets/openai/sprites/normalized/enemy-profiles-v66/')).map((rule) => rule.slice(1));
-  assert.deepEqual(allowed.sort(), [...V66_BATCH_001_IDS, 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster'].map(v66Path).sort());
+  assert.deepEqual(allowed.sort(), [...V66_BATCH_001_IDS, 'enemy-015-prowler', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-051-ceto-reef-predator', 'enemy-055-albino-chestburster'].map(v66Path).sort());
   for (const candidate of ['enemy-042-combat-synthetic', 'enemy-071-albino-red-xenomorph', 'enemy-072-albino-k-series-yellow-xenomorph']) {
     assert.ok(!allowed.includes(v66Path(candidate)), `${candidate}: candidat non admis en production`);
   }

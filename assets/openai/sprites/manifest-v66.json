@@ -6,8 +6,8 @@
   "baseRelease": "v64",
   "supplemental": true,
   "sourceOfTruth": "Accepted profile registries must resolve to real runtime sheets and complete clip coverage. The V64 snapshot remains unchanged.",
-  "atlasCount": 10,
-  "cellCount": 320,
+  "atlasCount": 12,
+  "cellCount": 384,
   "contracts": {
     "grids": {
       "profile-4x8-256x256": {
@@ -23,6 +23,11 @@
         "kind": "ground-contact",
         "x": 128,
         "y": 240
+      },
+      "ceto-aquatic-keel-v75": {
+        "kind": "aquatic-ventral-datum",
+        "x": 128,
+        "y": 192
       }
     },
     "hitboxes": {
@@ -62,6 +67,12 @@
         "width": 78,
         "height": 82
       },
+      "enemy-015-prowler-body-v66": {
+        "x": 93.0909090909091,
+        "y": 176,
+        "width": 69.81818181818181,
+        "height": 64
+      },
       "enemy-016-burster-body-v66": {
         "x": 84,
         "y": 152,
@@ -79,6 +90,12 @@
         "y": 186.66666666666666,
         "width": 85.33333333333333,
         "height": 53.333333333333336
+      },
+      "enemy-051-ceto-reef-predator-body-v66": {
+        "x": 76,
+        "y": 125.33333333333333,
+        "width": 104,
+        "height": 66.66666666666667
       },
       "enemy-055-albino-chestburster-body-v66": {
         "x": 104.17021276595744,
@@ -540,6 +557,43 @@
       }
     },
     {
+      "id": "enemy.profile.enemy-015-prowler.v66",
+      "profileId": "enemy-015-prowler",
+      "subject": "Prowler",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-015-prowler",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-015-prowler.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "creature-ground",
+      "hitbox": "enemy-015-prowler-body-v66",
+      "renderWidth": 352,
+      "renderHeight": 352,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "CANON_REFERENCE_ADAPTATION",
+      "referenceUrls": [
+        "https://store.necaonline.com/products/aliens-fireteam-elite-7-scale-action-figure-prowler-alien"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
       "id": "enemy.profile.enemy-016-burster.v66",
       "profileId": "enemy-016-burster",
       "subject": "Burster",
@@ -633,6 +687,43 @@
       "hitbox": "enemy-050-korari-stalker-body-v66",
       "renderWidth": 288,
       "renderHeight": 288,
+      "sourceFacing": 1,
+      "frameCount": 32,
+      "canonExact": false,
+      "referenceStatus": "PROJECT_ORIGINAL",
+      "referenceUrls": [
+        "https://github.com/darknigthmare/aliens-tantalus-frontier"
+      ],
+      "runtime": {
+        "status": "referenced",
+        "loading": "visible-enemy-lru-or-explicit-world-preload",
+        "consumers": [
+          "src/enemy-atlas-loader-v65.js",
+          "src/catalog-runtime-v62.js",
+          "src/catalog-ui-v62.js",
+          "src/game-v51-runtime.js",
+          "src/game-v52-runtime.js"
+        ]
+      }
+    },
+    {
+      "id": "enemy.profile.enemy-051-ceto-reef-predator.v66",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "subject": "Ceto Reef Predator",
+      "wave": "v66",
+      "family": "enemy",
+      "imageKey": "enemy-profile-v66:enemy-051-ceto-reef-predator",
+      "files": {
+        "normalized": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+        "normalizedStatus": "ready"
+      },
+      "metadataSource": "/assets/openai/sprites/metadata/v66/enemy-051-ceto-reef-predator.json",
+      "grid": "profile-4x8-256x256",
+      "clips": "enemy-action-v66",
+      "pivot": "ceto-aquatic-keel-v75",
+      "hitbox": "enemy-051-ceto-reef-predator-body-v66",
+      "renderWidth": 384,
+      "renderHeight": 384,
       "sourceFacing": 1,
       "frameCount": 32,
       "canonExact": false,

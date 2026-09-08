@@ -2,6 +2,7 @@ import { GameEngine as ProductionBaseEngine } from './game-production-base.js';
 import { FACEHUGGER_COMBAT_V65, isFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { captureEnemyBatchCombatResumeV66, restoreEnemyBatchCombatResumeV66 } from './enemy-batch-combat-v66.js';
 import { captureOvomorphCycleResumeV66, prepareOvomorphResumeChildrenV66, restoreOvomorphCycleResumeV66 } from './enemy-ovomorph-cycle-v66.js';
+import { captureCetoResumeV75, restoreCetoResumeV75 } from './enemy-ceto-v75.js';
 
 export * from './game-production-base.js';
 
@@ -204,6 +205,7 @@ export class GameEngine extends ProductionBaseEngine {
         deathClock: bounded(enemy.deathClock, 0, 0, 30),
         ...captureEnemyBatchCombatResumeV66(enemy),
         ...captureOvomorphCycleResumeV66(enemy),
+        ...captureCetoResumeV75(enemy),
         ...(isFacehuggerCombatV65(enemy) ? {
           attackClock: bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown),
           facehuggerAttackActiveV65: Boolean(enemy.facehuggerAttackV65)
@@ -305,6 +307,7 @@ export class GameEngine extends ProductionBaseEngine {
       enemy.deathClock = enemy.alive ? 0 : bounded(source.deathClock, enemy.deathClock || 0, 0, 30);
       restoreEnemyBatchCombatResumeV66(enemy, source);
       restoreOvomorphCycleResumeV66(enemy, source);
+      restoreCetoResumeV75(enemy, source);
       if (isFacehuggerCombatV65(enemy)) {
         // A saved leap resumes at rest: never replay its target lock or impact.
         const existingCooldown = bounded(enemy.attackClock, 0, 0, FACEHUGGER_COMBAT_V65.cooldown);

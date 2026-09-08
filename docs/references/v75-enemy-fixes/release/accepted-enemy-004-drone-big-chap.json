@@ -1,0 +1,17 @@
+{
+  "kind": "accepted",
+  "profileId": "enemy-004-drone-big-chap",
+  "actor": "Codex V75 root review",
+  "canonExact": false,
+  "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+  "review": {
+    "identity": true,
+    "anatomy": true,
+    "direction": true,
+    "scale": true,
+    "clipSemantics": true,
+    "continuity": true,
+    "alpha": true,
+    "cellBounds": true
+  }
+}

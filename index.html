@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v74 — détonation du Burster, bond du Korari et comparaison des tailles corrigés. Développement en cours.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v76 — Prowler et Ceto jouables, dialogue du hub corrigé et audit traçable des 26 conversations. Développement en cours.">
   <meta name="application-name" content="Tantalus Frontier">
   <meta name="apple-mobile-web-app-title" content="Tantalus">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -21,13 +21,13 @@
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
-  <title>ALIENS: TANTALUS FRONTIER v74</title>
+  <title>ALIENS: TANTALUS FRONTIER v76</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v74</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v76</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -46,7 +46,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 74.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 76.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -72,7 +72,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v74.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v76.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -135,21 +135,6 @@
             <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub">
               <button type="button" data-hub-control="left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" aria-label="Monter">W</button><button type="button" data-hub-control="down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" aria-label="Changer de profondeur">Q</button><button type="button" data-hub-control="fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
             </div>
-            <section id="hub-dialogue" class="hub-dialogue" role="dialog" aria-modal="true" aria-labelledby="hub-dialogue-speaker" hidden>
-              <div class="hub-dialogue-portrait">
-                <img id="hub-dialogue-image" src="/assets/openai/ui/dialogue/mara-vega-operations-v61.png" alt="">
-              </div>
-              <div class="hub-dialogue-copy">
-                <p class="eyebrow">TRANSMISSION LOCALE // USS TANTALUS</p>
-                <h3 id="hub-dialogue-speaker">LT. MARA VEGA</h3>
-                <p id="hub-dialogue-text"></p>
-                <div id="hub-dialogue-choices" class="hub-dialogue-choices" role="group" aria-label="Réponses disponibles"></div>
-                <div class="button-row">
-                  <button id="hub-dialogue-cancel" class="button" type="button">REPRENDRE LE CONTRÔLE</button>
-                  <button id="hub-dialogue-continue" class="button primary" type="button">OUVRIR LA STATION</button>
-                </div>
-              </div>
-            </section>
           </div>
           <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · Q profondeur · F tirer · E utiliser</span></div>
         </section>
@@ -239,6 +224,24 @@
           <div id="mission-log" class="mission-log" aria-live="polite">En attente du déploiement.</div>
         </section>
       </main>
+    </section>
+  </div>
+  <div id="hub-dialogue-layer" class="hub-dialogue-layer" aria-hidden="true" hidden>
+    <div class="hub-dialogue-veil" aria-hidden="true"></div>
+    <section id="hub-dialogue" class="hub-dialogue" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="hub-dialogue-speaker" aria-describedby="hub-dialogue-text" tabindex="-1" hidden>
+      <div class="hub-dialogue-portrait">
+        <img id="hub-dialogue-image" src="/assets/openai/ui/dialogue/mara-vega-operations-v61.png" alt="">
+      </div>
+      <div class="hub-dialogue-copy">
+        <p class="eyebrow">TRANSMISSION LOCALE // USS TANTALUS</p>
+        <h3 id="hub-dialogue-speaker">LT. MARA VEGA</h3>
+        <p id="hub-dialogue-text"></p>
+        <div id="hub-dialogue-choices" class="hub-dialogue-choices" role="group" aria-label="Réponses disponibles"></div>
+        <div class="button-row">
+          <button id="hub-dialogue-cancel" class="button" type="button">REPRENDRE LE CONTRÔLE</button>
+          <button id="hub-dialogue-continue" class="button primary" type="button">OUVRIR LA STATION</button>
+        </div>
+      </div>
     </section>
   </div>
   <div id="toast-region" class="toast-region" aria-live="polite"></div>

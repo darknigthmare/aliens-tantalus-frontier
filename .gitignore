@@ -6,6 +6,7 @@ node_modules/
 .qa-*.jpg
 .tmp-chrome-profile*/
 .tmp/
+tmp/
 .tmp-*/
 .tmp-*
 audit-v*-captures/

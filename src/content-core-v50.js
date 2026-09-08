@@ -267,7 +267,11 @@ const GENERATED_ENEMIES_V50 = Array.from({ length: 568 }, (_, index) => {
     encounterWorldIds: [world.id, WORLDS[(index + 17) % WORLDS.length].id],
     habitats: [world.biomes[0], pick(['vents', 'hive', 'surface', 'reactor', 'water', 'ruins'], index)],
     behavior: pick(['stalk', 'rush', 'flank', 'ambush', 'guard', 'control', 'siege', 'swarm'], index),
-    provenance: seed[2].startsWith('concept-') ? 'licensed-concept-adaptation' : index < enemySeeds.length ? 'licensed-reference' : 'systemic-variant'
+    provenance: seed[2].startsWith('concept-') ? 'licensed-concept-adaptation' : index < enemySeeds.length ? 'licensed-reference' : 'systemic-variant',
+    // Base051 is the project-authored Ceto fauna, not a cyclic terrestrial spawn.
+    // Variants retain their separate unfinished contracts; no family-wide promotion.
+    ...(index === 50 ? { encounterWorldIds: ['world-10-ceto'], habitats: ['aquatic', 'caves'],
+      behavior: 'aquatic', provenance: 'project-original' } : {})
   };
 });
 

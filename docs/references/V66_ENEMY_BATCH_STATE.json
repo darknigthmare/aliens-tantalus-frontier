@@ -10876,6 +10876,1424 @@
         }
       },
       "at": "2026-09-05T19:48:58.328Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:26:59.456Z",
+      "metadataSha256": "3e3ce83deee2559570e2c1f5383032fad69b07dd13b8a474067d714e9832f2dd",
+      "atlasSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:00.192Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:01.046Z",
+      "metadataSha256": "bbccd2738d3686aa2e4fbb0d277b9ef4edcb295a63dc2f487fbb9e37cd07cdca",
+      "atlasSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:01.847Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:03.391Z",
+      "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+      "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:04.904Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:05.788Z",
+      "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+      "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:06.419Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:07.029Z",
+      "metadataSha256": "254a421e7cabcaa0fae3402a2beb9952f7fbe5648ea77994475388a7f9afa1d0",
+      "atlasSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:07.671Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:08.217Z",
+      "metadataSha256": "c888f17d3eaa821b5469dd2266a2f68bba2df5a5d82acd94e6eb38c1969d3df7",
+      "atlasSha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:08.993Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:09.713Z",
+      "metadataSha256": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
+      "atlasSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:10.252Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:10.758Z",
+      "metadataSha256": "23ff24162c5725b6ac5787220835f3c8751a61214a7547252c6b9337216a35ce",
+      "atlasSha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:11.339Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:11.928Z",
+      "metadataSha256": "c5b605b79c351209aaae59d344475f8a7c4558e3bb8acbfb01b465c9201d1200",
+      "atlasSha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 runtime verification",
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-ceto-v75.test.mjs",
+          "sha256": "8119b71540677ee8f77ddb071e95658144809fc5a75cdcddfd13de4e016c7a1b"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:12.372Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:27:12.991Z",
+      "metadataSha256": "b8b8deef9aa8eee92183153a570fe654a8709393347a6fdac9dc9b80e05cee42",
+      "atlasSha256": "c2ed130649fc57aeaf0509376f7601eb8987c853914595e5231689f636709ede"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "0a58c6e0b5593bd6836f04df75c8fb8e0ac83e20bce1eddc1b553987e3f9cbce"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "87dec6dfda86a6c717cb48e708f2ab90c7c51cb9a86c100f7641776ec1a3f9ce"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "3e42c1b5758a84fa8b4ceb30632a929e6408a1d9946400b34fa4336137c71c22"
+        }
+      },
+      "at": "2026-09-08T02:27:13.429Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:39:59.147Z",
+      "metadataSha256": "3e3ce83deee2559570e2c1f5383032fad69b07dd13b8a474067d714e9832f2dd",
+      "atlasSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:00.180Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:00.987Z",
+      "metadataSha256": "bbccd2738d3686aa2e4fbb0d277b9ef4edcb295a63dc2f487fbb9e37cd07cdca",
+      "atlasSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:02.082Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:02.650Z",
+      "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+      "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:03.251Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:03.912Z",
+      "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+      "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:04.733Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:05.580Z",
+      "metadataSha256": "254a421e7cabcaa0fae3402a2beb9952f7fbe5648ea77994475388a7f9afa1d0",
+      "atlasSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:06.106Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-015-prowler",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Root and independent review of the licensed-reference adaptation: all32 poses, alpha cleanup, direction, measured cranial scale and physical ribcage roots. Render352 square/body96x88. The authored crouch, takeoff, airborne strike and landing are coupled to a100px swept pounce; impact occurs once on pose5, obstacles, unsupported gaps, vehicles, both directions and resume are tested. Generated adaptation, never an official-pixel or canon1:1 claim.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:06.662Z",
+      "metadataSha256": "f34736d503e6631079548e9c72f5d7b30760472d9835a8cbdef0b99c7af5e711",
+      "atlasSha256": "5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-015-prowler",
+      "actor": "Codex V75 runtime verification",
+      "note": "Root and independent review of the licensed-reference adaptation: all32 poses, alpha cleanup, direction, measured cranial scale and physical ribcage roots. Render352 square/body96x88. The authored crouch, takeoff, airborne strike and landing are coupled to a100px swept pounce; impact occurs once on pose5, obstacles, unsupported gaps, vehicles, both directions and resume are tested. Generated adaptation, never an official-pixel or canon1:1 claim.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-prowler-v75.test.mjs",
+          "sha256": "81dcf7e01b22f93f642848a558e1ff61414a92942cba4ce56d7676fc2740d55a"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:07.330Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:08.395Z",
+      "metadataSha256": "c888f17d3eaa821b5469dd2266a2f68bba2df5a5d82acd94e6eb38c1969d3df7",
+      "atlasSha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:09.306Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:10.263Z",
+      "metadataSha256": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
+      "atlasSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:11.070Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:11.784Z",
+      "metadataSha256": "23ff24162c5725b6ac5787220835f3c8751a61214a7547252c6b9337216a35ce",
+      "atlasSha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:12.548Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:13.400Z",
+      "metadataSha256": "c5b605b79c351209aaae59d344475f8a7c4558e3bb8acbfb01b465c9201d1200",
+      "atlasSha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 runtime verification",
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-ceto-v75.test.mjs",
+          "sha256": "8119b71540677ee8f77ddb071e95658144809fc5a75cdcddfd13de4e016c7a1b"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:14.085Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T02:40:15.121Z",
+      "metadataSha256": "b8b8deef9aa8eee92183153a570fe654a8709393347a6fdac9dc9b80e05cee42",
+      "atlasSha256": "c2ed130649fc57aeaf0509376f7601eb8987c853914595e5231689f636709ede"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "9ad1fe7339eff53c572dd2c56cbea2c57f77bc9878f1521083d64ba2d7aad394"
+        }
+      },
+      "at": "2026-09-08T02:40:15.697Z"
+    },
+    {
+      "schema": 1,
+      "release": "v75",
+      "kind": "review-rejected",
+      "profileId": "enemy-011-lurker",
+      "actor": "Codex V75 visual review",
+      "at": "2026-09-08T03:00:00.000Z",
+      "provider": "OpenAI ImageGen",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "Attack pounce candidates R1 and R2 are preserved for traceability but rejected: purple/magenta material contamination remains on the creature and the pounce does not yet meet the stable-identity commercial animation gate. The reviewed V66 runtime source remains unchanged; no V75 Lurker promotion or 1:1 claim.",
+      "candidatePaths": [
+        "assets/openai/sprites/frames/v75/enemy-011-lurker/attack-pounce-r1.png",
+        "assets/openai/sprites/frames/v75/enemy-011-lurker/attack-pounce-r2.png"
+      ],
+      "evidencePaths": [
+        "docs/references/v75-enemy-fixes/011/lurker-r1-diagnostics.json",
+        "docs/references/v75-enemy-fixes/011/anchor-review.proposed.json",
+        "docs/references/v75-enemy-fixes/011/scale-review.proposed.json"
+      ]
+    },
+    {
+      "schema": 1,
+      "release": "v75",
+      "kind": "review-rejected",
+      "profileId": "enemy-023-atarax-ripper",
+      "actor": "Codex V75 visual review",
+      "at": "2026-09-08T03:00:01.000Z",
+      "provider": "OpenAI ImageGen",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "note": "The repaired 32-pose candidate clears technical alpha, cell and scale checks but is rejected for gameplay animation quality: locomotion has insufficient weight transfer and the attack is largely an arm extension instead of a committed strike. Candidate outputs stay archived and are not exposed by the runtime registry.",
+      "candidatePath": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-023-atarax-ripper.webp",
+      "evidencePaths": [
+        "docs/references/v75-enemy-fixes/021-023/023-anchor-review.json",
+        "docs/references/v75-enemy-fixes/021-023/023-scale-review.json",
+        "docs/references/v75-enemy-fixes/021-023/023-attack-physical-review.png",
+        "docs/references/v75-enemy-fixes/021-023/023-move-physical-review.png"
+      ]
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:50.899Z",
+      "metadataSha256": "3e3ce83deee2559570e2c1f5383032fad69b07dd13b8a474067d714e9832f2dd",
+      "atlasSha256": "6a128018e56629d2777ba97c71ab1a1ef83a69bf6d6151928b89e6021d08f1e4"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-001-ovomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:51.258Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:51.594Z",
+      "metadataSha256": "bbccd2738d3686aa2e4fbb0d277b9ef4edcb295a63dc2f487fbb9e37cd07cdca",
+      "atlasSha256": "46f9ed429d28399ae94125a80aac8476a4784a4880849ffd4e820a473be7b259"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-003-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:51.892Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:52.193Z",
+      "metadataSha256": "c6d527f615ca07fff63a8630cdf12c540abcb98a99c838c5cde41f559d21d556",
+      "atlasSha256": "fcbe7d2625a8878afc5d91fc34636d27f8ac6f4f40ed34bebf052a5883ccd9fb"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-004-drone-big-chap",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:52.473Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:52.784Z",
+      "metadataSha256": "b35c1fc884a3461b6b06307ba809d1da1b16d01e3096a117358035209f3134f0",
+      "atlasSha256": "ec93792a895ca987d4196e75d88953278dd9fe6f03992e657077736bae000e29"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-005-warrior",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:53.095Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:53.536Z",
+      "metadataSha256": "254a421e7cabcaa0fae3402a2beb9952f7fbe5648ea77994475388a7f9afa1d0",
+      "atlasSha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-006-runner",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:53.939Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-015-prowler",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Root and independent review of the licensed-reference adaptation: all32 poses, alpha cleanup, direction, measured cranial scale and physical ribcage roots. Render352 square/body96x88. The authored crouch, takeoff, airborne strike and landing are coupled to a100px swept pounce; impact occurs once on pose5, obstacles, unsupported gaps, vehicles, both directions and resume are tested. Generated adaptation, never an official-pixel or canon1:1 claim.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:54.224Z",
+      "metadataSha256": "f34736d503e6631079548e9c72f5d7b30760472d9835a8cbdef0b99c7af5e711",
+      "atlasSha256": "5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-015-prowler",
+      "actor": "Codex V75 runtime verification",
+      "note": "Root and independent review of the licensed-reference adaptation: all32 poses, alpha cleanup, direction, measured cranial scale and physical ribcage roots. Render352 square/body96x88. The authored crouch, takeoff, airborne strike and landing are coupled to a100px swept pounce; impact occurs once on pose5, obstacles, unsupported gaps, vehicles, both directions and resume are tested. Generated adaptation, never an official-pixel or canon1:1 claim.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-prowler-v75.test.mjs",
+          "sha256": "81dcf7e01b22f93f642848a558e1ff61414a92942cba4ce56d7676fc2740d55a"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:54.594Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:54.972Z",
+      "metadataSha256": "c888f17d3eaa821b5469dd2266a2f68bba2df5a5d82acd94e6eb38c1969d3df7",
+      "atlasSha256": "3ad1538aef3dd62354950f7cf7f63e875ff2cd6688bfb06c8f2fa9abf80ff3df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-016-burster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:55.331Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:55.723Z",
+      "metadataSha256": "4ed6e98b7439e794353b64fb922c424994a3468aa4b047d154b66b36905debd9",
+      "atlasSha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-020-k-series-yellow-xenomorph",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:56.062Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:56.383Z",
+      "metadataSha256": "23ff24162c5725b6ac5787220835f3c8751a61214a7547252c6b9337216a35ce",
+      "atlasSha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-050-korari-stalker",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:56.988Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:57.368Z",
+      "metadataSha256": "c5b605b79c351209aaae59d344475f8a7c4558e3bb8acbfb01b465c9201d1200",
+      "atlasSha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-051-ceto-reef-predator",
+      "actor": "Codex V75 runtime verification",
+      "note": "Root and independent calibration review of all32 poses, alpha, right-facing identity, aquatic keel registration and cross-clip scale. Dedicated project-original fauna, render384 square/body156x100/pivot192. It spawns only inside the authored Ceto cave basin; movement cannot leave the volume, line-of-sight blocks bites and impact frame4 delivers damage once in both directions. Death holds frame31. No free-swim or canon1:1 claim.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-ceto-v75.test.mjs",
+          "sha256": "15c25edb33906b2e670a2ae624dda97f5ef2a260a11249c55e90eeeb59d1efb0"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:57.728Z"
+    },
+    {
+      "kind": "accepted",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 root review",
+      "canonExact": false,
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "review": {
+        "identity": true,
+        "anatomy": true,
+        "direction": true,
+        "scale": true,
+        "clipSemantics": true,
+        "continuity": true,
+        "alpha": true,
+        "cellBounds": true
+      },
+      "at": "2026-09-08T03:53:58.128Z",
+      "metadataSha256": "b8b8deef9aa8eee92183153a570fe654a8709393347a6fdac9dc9b80e05cee42",
+      "atlasSha256": "c2ed130649fc57aeaf0509376f7601eb8987c853914595e5231689f636709ede"
+    },
+    {
+      "kind": "integrated",
+      "profileId": "enemy-055-albino-chestburster",
+      "actor": "Codex V75 runtime verification",
+      "note": "Evidence renewal only: atlas and metadata are byte-identical to the previous accepted review. V75 changes only the registry membership and adds no sibling-variant promotion.",
+      "runtimeEvidence": {
+        "result": "pass",
+        "command": "node --test tests/enemy-prowler-v75.test.mjs tests/enemy-ceto-v75.test.mjs tests/enemy-ceto-pivot-v75.test.mjs tests/enemy-ceto-resume-v76.test.mjs tests/water-movement-v76.test.mjs tests/enemy-burster-v74.test.mjs tests/enemy-korari-v74.test.mjs tests/enemy-korari-vehicle-resume-v74.test.mjs tests/enemy-albino-chestburster-v73.test.mjs tests/enemy-batch-animation-integration-v66.test.mjs tests/enemy-batch-combat-v66.test.mjs tests/enemy-v66-production-access.test.mjs",
+        "registry": {
+          "path": "src/enemy-profile-assets-v66.js",
+          "sha256": "c10c9cb24e350d0246c508c2c80652ccff4fabad70fc30500625b12031b02d96"
+        },
+        "test": {
+          "path": "tests/enemy-batch-animation-integration-v66.test.mjs",
+          "sha256": "29948f5901673a8c090b30d3d3fcafa18e29dd18e20739614595fc8b53d35412"
+        },
+        "log": {
+          "path": "docs/references/v75-enemy-fixes/runtime-test-output.txt",
+          "sha256": "08c0f51daa847ed6a1149a554e95fcde4981722082f22edc7185dc78d6be7f4b"
+        }
+      },
+      "at": "2026-09-08T03:53:58.509Z"
     }
   ]
 }

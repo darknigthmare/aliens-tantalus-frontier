@@ -26,6 +26,7 @@ import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
 import { detonateBursterV74, isBursterCombatV74, updateEnemyBatchCombatV66 } from './enemy-batch-combat-v66.js';
 import { updateOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
+import { CETO_V75, updateCetoV75 } from './enemy-ceto-v75.js';
 
 export const MISSION_TOOL_PICKUP_VISUAL_V56 = resolveEquipmentVisualProfileV56({
   id: 'equipment-004-cutting-torch',
@@ -532,7 +533,9 @@ export class GameEngine {
   }
 
   buildDefaultEnemies(enemyCatalog) {
-    const catalog = enemyCatalog.length ? enemyCatalog : [{ id: 'warrior', name: 'Xenomorph Warrior', health: 80, damage: 12, speed: 1.2, biology: 'xenomorph' }];
+    //051 is spawned by its explicit aquatic habitat, never by dry random slots.
+    const terrestrial = enemyCatalog.filter(source => source.id !== CETO_V75.profileId);
+    const catalog = terrestrial.length ? terrestrial : [{ id: 'warrior', name: 'Xenomorph Warrior', health: 80, damage: 12, speed: 1.2, biology: 'xenomorph' }];
     const worldId = String(this.world?.id || '').trim();
     const contextSafeCatalog = catalog.filter((source) => !source.defaultEncounter
       || (worldId && Array.isArray(source.encounterWorldIds) && source.encounterWorldIds.includes(worldId)));
@@ -743,9 +746,20 @@ export class GameEngine {
     if (player.climbing && !ladder) player.climbing = false;
     player.crouching = down && !player.climbing && player.grounded;
     const grappleScale = player.grappledClock > 0 ? 0.42 : 1;
-    const speed = (player.crouching ? 105 : 245) * grappleScale;
+    const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
+    const water = (this.hazards || []).find((hazard) => hazard.active && hazard.kind === 'flood' && overlap(feet, hazard));
+    const waterScale = water ? clamp(Number(water.slow) || 0.45, 0.05, 1) : 1;
+    const speed = (player.crouching ? 105 : 245) * grappleScale * waterScale;
     const targetVelocity = (Number(right) - Number(left)) * speed;
-    player.vx += (targetVelocity - player.vx) * Math.min(1, delta * (player.grounded ? 16 : 8));
+    const response = player.grounded ? 16 : 8;
+    const previousVelocity = player.vx;
+    const blend = water ? -Math.expm1(-response * delta) : Math.min(1, delta * response);
+    player.vx += (targetVelocity - player.vx) * blend;
+    // Integrate the same velocity response over elapsed seconds while wading.
+    // Multiplying velocity once per rendered frame made faster screens slower.
+    const horizontalStep = water
+      ? targetVelocity * delta + (previousVelocity - targetVelocity) * blend / response
+      : player.vx * delta;
     if (!left && !right && Math.abs(player.vx) < 0.5) player.vx = 0;
     if (player.vx) player.facing = Math.sign(player.vx);
     if (player.climbing && ladder) {
@@ -774,7 +788,7 @@ export class GameEngine {
       this.resolveVertical(player, previousBottom);
     }
     const previousX = player.x;
-    player.x = clamp(player.x + player.vx * delta, 0, WORLD_WIDTH - player.w);
+    player.x = clamp(player.x + horizontalStep, 0, WORLD_WIDTH - player.w);
     this.resolveHorizontal(player, previousX);
     player.inCover = Boolean(player.crouching && this.findCover(player));
     if (!stunned && this.keys.has(controls.fire)) this.fire(player);
@@ -874,6 +888,7 @@ export class GameEngine {
   }
 
   updateEnemy(enemy, delta) {
+    if (updateCetoV75(this, enemy, delta)) return;
     if (updateOvomorphCycleV66(this, enemy, delta)) return;
     if (updateEnemyBatchCombatV66(this, enemy, delta)) return;
     if (updateFacehuggerCombatV65(this, enemy, delta)) return;
@@ -1381,12 +1396,15 @@ export class GameEngine {
   }
 
   applyHazards(player) {
-    if (!player.alive || player.inVehicle || player.hazardClock > 0) return;
+    if (!player.alive || player.inVehicle) return;
     const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
     const hazard = this.hazards.find((candidate) => candidate.active && overlap(feet, candidate));
     if (!hazard) return;
     const kind = hazard.kind || 'acid';
     player.hazardKind = kind;
+    // Flood changes the locomotion target in updatePlayer, independent of the
+    // damage cooldown and frame rate. This hook only applies physical hazards.
+    if (player.hazardClock > 0) return;
     if ((Number(hazard.damage) || 0) > 0) this.damagePlayer(player, hazard.damage, { bypassCover: true, source: kind });
     player.hazardClock = Math.max(0.72, Number(hazard.stun) || Number(hazard.stunSeconds) || 0);
     if (kind === 'electrical') {
@@ -1394,7 +1412,7 @@ export class GameEngine {
       player.actionClock = Math.max(player.actionClock || 0, player.hazardClock);
       player.vy = -120;
     } else if (kind === 'steam') player.vy = -240;
-    else if (kind === 'flood') player.vx *= 0.45;
+    else if (kind === 'flood') return;
     else if (kind === 'vacuum') player.vx *= 1.35;
   }
 
@@ -1881,6 +1899,17 @@ export class GameEngine {
   drawHazard(ctx, hazard) {
     if (!hazard.active) return;
     const profile = resolveMissionHazardArtV56(hazard.kind);
+    if (hazard.cetoHabitatId && profile) {
+      // Existing OpenAI bitmap water tiles repeat independently across this
+      // actual volume. Do not stretch one wave sheet across an entire room.
+      const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * profile.fps);
+      ctx.save(); ctx.beginPath(); ctx.rect(hazard.x, hazard.y, hazard.w, hazard.h); ctx.clip();
+      for (let x = hazard.x; x < hazard.x + hazard.w; x += 256) {
+        this.drawAtlasFrame(ctx, profile.world, frame, x, hazard.y, 256, hazard.h);
+        this.drawAtlasFrame(ctx, profile.accent, frame, x, hazard.y - 10, 256, 48);
+      }
+      ctx.restore(); return;
+    }
     if (profile) {
       const frame = this.reducedMotion
         ? 0

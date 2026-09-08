@@ -54,8 +54,8 @@ function fixture(profileId = runnerId) {
   return { entry, enemy, engine, events, motions, step };
 }
 
-test('V66 prend en charge les sept combattants à attaque répétable acceptés, pas les variantes non revues, oeufs ou anciens sprites', () => {
-  assert.deepEqual([...profileIds].sort(), ['enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
+test('V75 prend en charge les huit combattants à attaque répétable acceptés, pas les variantes non revues, oeufs ou anciens sprites', () => {
+  assert.deepEqual([...profileIds].sort(), ['enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-015-prowler', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
   for (const entry of Object.values(contracts)) {
     assert.equal(resolveEnemyBatchCombatContractV66({ visualSheetId: entry.sheetId }), entry);
     assert.equal(Object.isFrozen(entry), true);

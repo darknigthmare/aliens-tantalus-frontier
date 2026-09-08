@@ -63,6 +63,19 @@ export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     normalizedSha256: 'c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3'
   }),
   Object.freeze({
+    profileId: 'enemy-015-prowler',
+    path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp',
+    spriteKey: 'xenoProwlerV56', clipSet: 'enemy-action-v66',
+    pivot: 'creature-ground', hitbox: 'enemy-015-prowler-body-v66',
+    // Compact ambush quadruped; all clips share one measured cranial scale.
+    renderWidth: 352, renderHeight: 352, sourceFacing: 1,
+    identityStatus: 'source-locked-adaptation', referenceStatus: 'CANON_REFERENCE_ADAPTATION',
+    provider: 'openai-imagegen', promptId: 'V66_BATCH_002_enemy-015-prowler',
+    referenceUrls: Object.freeze(['https://store.necaonline.com/products/aliens-fireteam-elite-7-scale-action-figure-prowler-alien']),
+    identityVerified: true, reviewStatus: 'accepted', canonExact: false,
+    normalizedSha256: '5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52'
+  }),
+  Object.freeze({
     profileId: 'enemy-016-burster',
     path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-016-burster.webp',
     spriteKey: 'xenoBursterV56', clipSet: 'enemy-action-v66',
@@ -100,6 +113,20 @@ export const V66_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     referenceUrls: Object.freeze(['https://github.com/darknigthmare/aliens-tantalus-frontier']),
     identityVerified: true, reviewStatus: 'accepted', canonExact: false,
     normalizedSha256: '01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df'
+  }),
+  Object.freeze({
+    profileId: 'enemy-051-ceto-reef-predator',
+    path: '/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp',
+    spriteKey: 'cetoReefPredatorV56', clipSet: 'enemy-action-v66',
+    pivot: 'ceto-aquatic-keel-v75', hitbox: 'enemy-051-ceto-reef-predator-body-v66',
+    // Aquatic body: the keel pivot stays inside the water column instead of
+    // borrowing the terrestrial 240px foot line.
+    renderWidth: 384, renderHeight: 384, sourceFacing: 1,
+    identityStatus: 'project-original', referenceStatus: 'PROJECT_ORIGINAL',
+    provider: 'openai-imagegen', promptId: 'V66_BATCH_004_enemy-051-ceto-reef-predator',
+    referenceUrls: Object.freeze(['https://github.com/darknigthmare/aliens-tantalus-frontier']),
+    identityVerified: true, reviewStatus: 'accepted', canonExact: false,
+    normalizedSha256: '0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168'
   }),
   Object.freeze({
     profileId: 'enemy-055-albino-chestburster',

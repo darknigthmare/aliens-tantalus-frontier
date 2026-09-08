@@ -23,8 +23,7 @@
   margin: 0 0 14px 18px;
 }
 
-html.station-mode::after,
-html.hub-dialogue-mode::after {
+html.station-mode::after {
   position: fixed;
   inset: 0;
   z-index: 70;
@@ -33,14 +32,39 @@ html.hub-dialogue-mode::after {
   backdrop-filter: blur(5px);
 }
 
-.hub-dialogue {
+.hub-dialogue-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  overflow: hidden;
+  padding: clamp(18px, 4vh, 40px) clamp(18px, 5vw, 72px) max(40px, env(safe-area-inset-bottom));
+}
+
+.hub-dialogue-layer[hidden] {
+  display: none;
+}
+
+.hub-dialogue-veil {
   position: absolute;
-  inset: auto clamp(18px, 5vw, 72px) 40px;
-  z-index: 72;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0, 0, 0, .72);
+  backdrop-filter: blur(5px);
+}
+
+.hub-dialogue {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(180px, 29%) minmax(0, 1fr);
+  width: min(1120px, 100%);
   min-height: 250px;
-  overflow: hidden;
+  max-height: calc(100svh - max(64px, env(safe-area-inset-bottom)));
+  overflow: auto;
   border: 1px solid rgba(223, 180, 81, .72);
   background: rgba(5, 9, 11, .97);
   box-shadow: 0 22px 72px rgba(0, 0, 0, .76);
@@ -51,7 +75,9 @@ html.hub-dialogue-mode::after {
 }
 
 .hub-dialogue-portrait {
+  position: relative;
   min-height: 250px;
+  container-type: size;
   overflow: hidden;
   border-right: 1px solid rgba(223, 180, 81, .42);
   background: #0b1114;
@@ -65,13 +91,17 @@ html.hub-dialogue-mode::after {
 }
 
 .hub-dialogue-portrait img.is-sprite-cell-v62 {
-  width: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 400cqmin;
   max-width: none;
-  height: 400%;
+  height: auto;
   object-fit: fill;
   object-position: left top;
   image-rendering: pixelated;
-  transform: translate3d(0, 0, 0);
+  clip-path: inset(0 75% 75% 0);
+  transform: translate3d(-12.5%, -12.5%, 0);
 }
 
 .hub-dialogue-copy {
@@ -192,14 +222,20 @@ html.hub-dialogue-mode::after {
     border: 0;
   }
 
+  .hub-dialogue-layer {
+    padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  }
+
   .hub-dialogue {
-    inset: 12px;
     grid-template-columns: 1fr;
-    max-height: calc(100% - 24px);
+    width: 100%;
+    min-height: 0;
+    max-height: 100%;
     overflow: auto;
   }
 
   .hub-dialogue-portrait {
+    height: clamp(180px, 34vh, 286px);
     min-height: 180px;
     max-height: 34vh;
     border-right: 0;

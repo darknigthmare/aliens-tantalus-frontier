@@ -59,7 +59,9 @@ export function buildEnemyBatchQueue({ catalog = ENEMIES, references = { profile
     return { ...profile, batchId, ordinal: index + 1, initialStatus: reference ? 'ready-generation' : 'pending-reference', reference,
       referenceLockSha256: reference ? contentHash(reference) : null, generationProvider: 'OpenAI ImageGen', canonExact: false,
       sourceGrid: SOURCE_GRID, grid: { columns: 4, rows: clips.length * 2, cellWidth: 256, cellHeight: 256, guard: 16 },
-      pivot: { x: 128, y: 240 }, sourceFacing: 'right', clips,
+      // The aquatic051 root needs guarded space below its ventral datum.
+      // All historical jobs retain their original feet pivot unchanged.
+      pivot: { x: 128, y: profile.profileId === 'enemy-051-ceto-reef-predator' ? 192 : 240 }, sourceFacing: 'right', clips,
       normalizedPath: `assets/openai/sprites/normalized/enemy-profiles-v66/${profile.profileId}.webp`,
       metadataPath: `assets/openai/sprites/metadata/v66/${profile.profileId}.json`,
       previewPath: `assets/openai/sprites/previews/v66/${profile.profileId}/all.gif`,

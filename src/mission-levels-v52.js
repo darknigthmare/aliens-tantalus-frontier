@@ -1,4 +1,5 @@
 import { validateMissionTopologyV58 } from './topology-coherence-v58.js';
+import { buildCetoHabitatsV75, cetoHabitatHazardsV75 } from './enemy-ceto-v75.js';
 
 const WORLD_WIDTH = 5200;
 const FLOOR_Y = 510;
@@ -682,7 +683,9 @@ export function buildMissionLevelV52({
   const geometry = compileGeometry(graph);
   const routeNodes = compileRouteNodes(graph);
   const biomeZones = compileBiomeZones(template, world);
-  const hazards = compileHazards(template, selectedSeed, world, random, geometry);
+  const aquaticHabitats = buildCetoHabitatsV75({ world, templateId: selectedTemplateId, geometry, graph });
+  const hazards = Object.freeze([...compileHazards(template, selectedSeed, world, random, geometry),
+    ...cetoHabitatHazardsV75(aquaticHabitats)]);
   const events = compileEvents(template, campaign);
   const insertion = compileInsertionContractV62(events, template, campaign);
   const spawns = compileSpawns(template, world, campaign);
@@ -723,6 +726,7 @@ export function buildMissionLevelV52({
     levelSeed: selectedSeed,
     graph: Object.freeze({ nodes: graph.nodes, edges: graph.edges, routes: graph.routes }),
     geometry,
+    aquaticHabitats,
     anchors,
     hazards,
     events,

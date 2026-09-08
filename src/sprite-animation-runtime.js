@@ -14,6 +14,7 @@ import { V66_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v66.js
 import { getBursterTerminalAnimationV74, getEnemyBatchAttackFrameV66 } from './enemy-batch-combat-v66.js';
 import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
 import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
+import { CETO_V75, getCetoAnimationV75 } from './enemy-ceto-v75.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -24,6 +25,7 @@ const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
 export const SPRITE_GRID = Object.freeze({ columns: 4, rows: 4, cellWidth: 256, cellHeight: 256, guard: 16 });
 
 export const SPRITE_PIVOTS = Object.freeze({
+  'ceto-aquatic-keel-v75': Object.freeze({ kind: 'aquatic-ventral-datum', ...CETO_V75.pivot }),
   'humanoid-feet': Object.freeze({ kind: 'feet', x: 128, y: 240 }),
   'creature-ground': Object.freeze({ kind: 'ground-contact', x: 128, y: 240 }),
   'vehicle-ground': Object.freeze({ kind: 'wheel-contact', x: 128, y: 240 }),
@@ -611,6 +613,8 @@ const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
 ]);
 
 export function resolveEnemyAnimation(enemy = {}) {
+  const ceto = getCetoAnimationV75(enemy);
+  if (ceto) return ceto;
   const hurt = (enemy.hurtClock || 0) > 0 || (enemy.v52HurtClock || 0) > 0;
   const dead = !enemy.alive;
   const attacking = Boolean(enemy.attacking);
@@ -625,7 +629,7 @@ export function resolveEnemyAnimation(enemy = {}) {
   if (dedicatedClipSet === 'enemy-action-v66') {
     const terminal = getBursterTerminalAnimationV74(enemy);
     if (terminal) return { sheetId: enemy.visualSheetId, ...terminal };
-    if (dead && enemy.visualSheetId === 'enemy.profile.enemy-050-korari-stalker.v66') {
+    if (dead && ['enemy.profile.enemy-015-prowler.v66', 'enemy.profile.enemy-050-korari-stalker.v66'].includes(enemy.visualSheetId)) {
       // Death is a saved actor lifecycle, not a fresh controller animation.
       // V51 defeat starts at2.8s; a resumed terminal corpse must stay prone.
       const remaining = Number.isFinite(Number(enemy.deathClock)) ? Number(enemy.deathClock) : 0;

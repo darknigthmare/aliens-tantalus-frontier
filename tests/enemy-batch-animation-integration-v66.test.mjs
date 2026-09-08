@@ -79,8 +79,8 @@ function assertCell(sample, sheetId, clipId, frame) {
   assert.ok(sample.clip.frames.includes(frame), 'aucun passage dans la ligne d une autre action');
 }
 
-test('V74: les neuf profils acceptes resolvent leurs propres plaques de32poses', () => {
-  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
+test('V75: les dix profils de combat acceptes resolvent leurs propres plaques de32poses', () => {
+  assert.deepEqual([...readyIds].sort(), ['enemy-001-ovomorph', 'enemy-003-chestburster', 'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner', 'enemy-015-prowler', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph', 'enemy-050-korari-stalker', 'enemy-055-albino-chestburster']);
   const paths = new Set();
   for (const profileId of readyIds) {
     const sheet = requireSheet(profileId);
@@ -102,7 +102,7 @@ test('V74: les neuf profils acceptes resolvent leurs propres plaques de32poses',
     assert.equal(shouldFlipSprite(sheet.id, -1), true);
     paths.add(sheet.path);
   }
-  assert.equal(paths.size, 9, 'aucune plaque partagee entre deux identites');
+  assert.equal(paths.size, 10, 'aucune plaque partagee entre deux identites');
 });
 
 test('lookup V66: ID exact prioritaire, aucun emprunt par nom contradictoire, variante ou espèce voisine', () => {
@@ -189,7 +189,7 @@ for (const profileId of combatIds) {
         vx: clipId === 'move' ? -100 : 0, alert: false, attacking: clipId === 'attack' };
       const controller = new SpriteAnimationController();
       if (clipId === 'attack') enemy.batchAttackV66 = { elapsed: 0 };
-      const savedDeathClock = profileId === 'enemy-050-korari-stalker' && clipId === 'death';
+      const savedDeathClock = ['enemy-015-prowler', 'enemy-050-korari-stalker'].includes(profileId) && clipId === 'death';
       if (savedDeathClock) enemy.deathClock = 2.8;
       controller.sample(enemy.id, resolveEnemyAnimation(enemy), 0);
       for (let index = 0; index < 8; index += 1) {
@@ -248,12 +248,12 @@ for (const profileId of combatIds) {
     assert.equal(hurt.reaction, 'hurt');
     assert.equal(hurt.frame, undefined);
     enemy.alive = false;
-    if (profileId === 'enemy-050-korari-stalker') enemy.deathClock = 2.8;
+    if (['enemy-015-prowler', 'enemy-050-korari-stalker'].includes(profileId)) enemy.deathClock = 2.8;
     const dead = resolveEnemyAnimation(enemy);
     assert.equal(dead.clipId, 'death');
     assert.equal(dead.sheetId, sheet.id);
-    assert.equal(dead.frame, profileId === 'enemy-050-korari-stalker' ? 24 : undefined,
-      'mort050 explicite ou horlogelegacy, jamais la frame21 d attaque');
+    assert.equal(dead.frame, ['enemy-015-prowler', 'enemy-050-korari-stalker'].includes(profileId) ? 24 : undefined,
+      'mort quadrupede explicite ou horloge legacy, jamais la frame21 d attaque');
     assertCell(new SpriteAnimationController().sample(enemy.id, dead, 500), sheet.id, 'death', 24);
   });
 }
