@@ -87,7 +87,10 @@ test('les fonctions exactes du transcript sont attachées aux salles physiques s
   assert.equal(HUB_ANNEX_BY_ID_V71['escape-pods'].scope, 'escape-and-ship-destruction-scenarios');
   assert.equal(HUB_ANNEX_BY_ID_V71.durandal.scope, 'ship-ai-and-electronic-warfare-core');
   assert.equal(HUB_ANNEX_BY_ID_V71.bioforge.scope, 'isolated-access-to-separate-experimental-level');
-  assert.deepEqual(HUB_ANNEX_BY_ID_V71.bioforge.deferredFeatures, [
+  assert.deepEqual(HUB_ANNEX_BY_ID_V71.bioforge.deferredFeatures, []);
+  assert.deepEqual(HUB_ANNEX_BY_ID_V71.bioforge.station.capabilities, [
+    'isolated-airlock',
+    'containment-control',
     'enemy-selection',
     'quantity-selection',
     'spawn-printing',

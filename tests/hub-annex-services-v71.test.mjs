@@ -215,6 +215,7 @@ test('Capsules arme une extraction unique et BIOFORGE reste un sas sans donnée 
   assert.equal(receipt.details.isolationVerified, true);
   assert.equal(receipt.details.containmentCycles, 1);
   assert.equal(receipt.details.organismsInHub, 0);
+  assert.match(receipt.message, /niveau V80 prêt · ouverture autorisée/);
   assert.doesNotMatch(JSON.stringify(save.hub.annexOperationsV71.bioforge), /spawn|enemy|quantity|printer/i);
 });
 

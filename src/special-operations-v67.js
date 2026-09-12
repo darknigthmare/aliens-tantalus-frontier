@@ -140,9 +140,21 @@ export const SPECIAL_OPERATIONS_V67 = Object.freeze([
   }),
   freezeOperation({
     id: 'bioforge', chatId: '6a98c871-61ac-83ed-be5c-600c473690e2', chatTitle: 'Idée spawn ennemis Tentalus',
-    promisedTitle: 'BIOFORGE', kind: 'system', implementationStatus: 'missing', playable: false, productionOrder: 6,
+    promisedTitle: 'BIOFORGE', kind: 'system', implementationStatus: 'partial', playable: true, accessSurface: 'hub', productionOrder: 6,
     promiseSummary: 'Zone physique isolée, sélection ennemi/quantité, impression, confinement et progression séparée.',
-    requiredMechanics: ['physical-bioforge-room', 'spawn-printer', 'quantity-selection', 'containment-loop'], evidence: []
+    requiredMechanics: ['physical-bioforge-room', 'spawn-printer', 'quantity-selection', 'containment-loop'],
+    remainingMechanics: ['full-enemy-roster', 'complete-dedicated-art-corpus'],
+    evidence: [
+      'src/bioforge-session-v80.js',
+      'src/bioforge-level-v80.js',
+      'src/bioforge-runtime-v80.js',
+      'src/bioforge-ui-v80.js',
+      'tests/bioforge-session-v80.test.mjs',
+      'tests/bioforge-level-v80.test.mjs',
+      'tests/bioforge-runtime-v80.test.mjs',
+      'tests/bioforge-save-v80.test.mjs',
+      'docs/V80_BIOFORGE_RUNTIME.md'
+    ]
   }),
   freezeOperation({
     id: 'protocol-z110', chatId: '6a98dfeb-7284-83eb-a015-bf964b8b1229', chatTitle: 'Mission extermination Power Loader',

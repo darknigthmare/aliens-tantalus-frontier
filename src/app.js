@@ -45,6 +45,8 @@ import {
 import { MissionArchiveOverlayV68, NarrativeArchivesUiV68, createOpenArchivesEventV68 } from './narrative-archives-ui-v68.js';
 import { AlphaBravoCommandDockV69 } from './alpha-bravo-ui-v69.js';
 import { AlienSurvivalDockV70 } from './alien-survival-ui-v70.js';
+import { BioforgeRuntimeV80 } from './bioforge-runtime-v80.js';
+import { BioforgeUiV80, buildBioforgeUiModelV80 } from './bioforge-ui-v80.js';
 
 const byId = (id) => document.getElementById(id);
 const all = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -120,6 +122,7 @@ let missionNarrativeArchivesUiV68 = null;
 let missionArchiveOverlayV68 = null;
 let alphaBravoCommandDockV69 = null;
 let alienSurvivalDockV70 = null;
+let bioforgeUiV80 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -127,6 +130,11 @@ const hubEngine = new HubGame(byId('hub-canvas'), {
   onAction: handleHubAction,
   onPersist: persistHub,
   onStatus: renderHubStatus
+});
+const bioforgeRuntimeV80 = new BioforgeRuntimeV80(byId('bioforge-canvas-v80'), {
+  audio,
+  onEvent: handleBioforgeEventV80,
+  onPersist: persistBioforgeV80
 });
 const hubDialogueUiV76 = new HubDialogueUiV76({
   layer: byId('hub-dialogue-layer'),
@@ -148,6 +156,7 @@ const VIEW_META = Object.freeze({
   crew: ['PERSONNEL // ECHO-9', 'Echo-9'],
   editor: ['FORGE // WORLD AUTHORING', 'Frontier Forge'],
   settings: ['SYSTEM // CONFIGURATION', 'Système'],
+  bioforge: ['BIOFORGE // CONFINEMENT 80', 'Niveau expérimental isolé'],
   play: ['OPS // LIVE', 'Opération en cours']
 });
 
@@ -288,6 +297,98 @@ function applyRuntimeSettings() {
   audio.setVolumes({ effects: settings.effects ?? 0.7, music: settings.music ?? 0.45 });
 }
 
+const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
+  'bioforge-runtime-prepared': 'NIVEAU PRÊT · AUCUNE SESSION CRÉÉE',
+  'bioforge-runtime-ready': 'SESSION ARMÉE · REJOIGNEZ LE DOUBLE SAS',
+  'bioforge-airlock-step': 'INTERVERROU PHYSIQUE VALIDÉ · POURSUIVEZ VERS L’IMPRIMANTE',
+  'bioforge-physical-transfer-completed': 'ARÈNE SCELLÉE · IMPRESSION AUTORISÉE',
+  'bioforge-sealing-started': 'SCELLEMENT INTÉGRAL EN COURS',
+  'bioforge-printer-ready': 'IMPRIMANTE BIOLOGIQUE SOUS CONTRÔLE',
+  'bioforge-specimen-printed': 'NOUVEAU SPÉCIMEN IMPRIMÉ DANS L’ARÈNE',
+  'bioforge-combat-started': 'COMBAT ACTIF · SORTIES VERROUILLÉES',
+  'bioforge-session-result': 'SESSION TERMINÉE · PURGE OBLIGATOIRE',
+  'bioforge-purge-started': 'PURGE ATOMIQUE EN COURS',
+  'bioforge-return-ready': 'PURGE CONFIRMÉE · RETOUR AU HUB AUTORISÉ',
+  'bioforge-invalid-resume-purged': 'REPRISE INVALIDE · PURGE DE SÉCURITÉ EXÉCUTÉE',
+  'bioforge-asset-error': 'ASSET BIOFORGE INDISPONIBLE · SESSION BLOQUÉE'
+});
+
+function persistBioforgeV80(state) {
+  saveSystem.data.bioforgeV80 = clone(state);
+  bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
+  try {
+    saveSystem.commit();
+  } catch (error) {
+    toast(`BIOFORGE non sauvegardé : ${error.message}`);
+  }
+}
+
+function handleBioforgeEventV80(event) {
+  const message = BIOFORGE_EVENT_MESSAGES_V80[event?.type];
+  const status = byId('bioforge-status-v80');
+  if (message && status) status.textContent = message;
+  if (event?.type === 'bioforge-asset-error') toast(`BIOFORGE · image indisponible : ${event.assetId || 'asset inconnu'}.`);
+  if (event?.type === 'bioforge-exit-locked') toast('BIOFORGE · sortie verrouillée tant que la purge n’est pas complète.');
+}
+
+function prepareBioforgeViewV80() {
+  const state = saveSystem.data.bioforgeV80;
+  try {
+    if (state?.recovery?.purgeRequired) {
+      bioforgeRuntimeV80.prepare(state);
+      bioforgeRuntimeV80.purgeBioforgeV80(state.recovery.reason || 'recovery-required');
+    } else if (state?.activeSession && state.activeSession.phase !== 'return') {
+      bioforgeRuntimeV80.start({ resumeState: state });
+    } else {
+      bioforgeRuntimeV80.prepare(state);
+    }
+  } catch (error) {
+    bioforgeRuntimeV80.prepare(state);
+    toast(error.message);
+  }
+  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
+}
+
+function startBioforgeFromTerminalV80(configuration) {
+  const result = bioforgeRuntimeV80.start({
+    configuration,
+    resumeState: saveSystem.data.bioforgeV80,
+    seed: 80000 + Number(saveSystem.data.bioforgeV80?.serial || 0) + 1
+  });
+  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
+  byId('bioforge-canvas-v80').focus({ preventScroll: true });
+  return result;
+}
+
+function purgeBioforgeFromTerminalV80() {
+  const result = bioforgeRuntimeV80.purgeBioforgeV80('operator-emergency-purge');
+  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
+  return result;
+}
+
+function returnBioforgeToHubV80() {
+  const model = buildBioforgeUiModelV80(bioforgeRuntimeV80.bioforgeRootV80 || saveSystem.data.bioforgeV80);
+  if (!model.canReturn) {
+    toast('BIOFORGE · purge obligatoire avant tout retour au Tantalus.');
+    return false;
+  }
+  bioforgeRuntimeV80.stop({ purge: false });
+  showView('hub');
+  return true;
+}
+
+function setupBioforgeUiV80() {
+  bioforgeUiV80 = new BioforgeUiV80({
+    root: byId('bioforge-ui-v80'),
+    onStart: startBioforgeFromTerminalV80,
+    onPurge: purgeBioforgeFromTerminalV80,
+    onReturn: returnBioforgeToHubV80,
+    onError: (error) => toast(error.message)
+  });
+  bioforgeRuntimeV80.prepare(saveSystem.data.bioforgeV80);
+  bioforgeUiV80.render(saveSystem.data.bioforgeV80);
+}
+
 function currentEditorProject(kind = null) {
   const snapshot = editor?.serialize?.();
   if (snapshot && (!kind || snapshot.kind === kind) && snapshot.validation?.ok) return snapshot;
@@ -407,12 +508,16 @@ function showView(name) {
   closeHubStation({ resume: false });
   if (activeView === 'play' && name !== 'play') engine.stop();
   if (activeView === 'hub' && name !== 'hub') hubEngine.stop();
+  if (activeView === 'bioforge' && name !== 'bioforge') {
+    bioforgeRuntimeV80.stop({ reason: 'view-change' });
+  }
   activeView = name;
   audio.setScene(resolveViewAudioSceneV77(name));
   all('.view').forEach((view) => view.classList.toggle('active', view.dataset.panel === name));
   all('.nav-button').forEach((button) => button.classList.toggle('active', button.dataset.view === name));
   document.documentElement.classList.toggle('hub-mode', name === 'hub');
   document.documentElement.classList.toggle('mission-mode', name === 'play');
+  document.documentElement.classList.toggle('bioforge-mode', name === 'bioforge');
   byId('breadcrumb').textContent = VIEW_META[name][0];
   byId('view-title').textContent = VIEW_META[name][1];
   document.querySelector('.rail').classList.remove('open');
@@ -420,8 +525,16 @@ function showView(name) {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62() });
   }
-  if (name === 'hub' || name === 'play') {
-    byId(name === 'hub' ? 'hub-canvas' : 'game-canvas').focus({ preventScroll: true });
+  if (name === 'bioforge') prepareBioforgeViewV80();
+  if (name === 'hub' || name === 'play' || name === 'bioforge') {
+    const focusTarget = name === 'hub'
+      ? byId('hub-canvas')
+      : name === 'play'
+        ? byId('game-canvas')
+        : buildBioforgeUiModelV80(saveSystem.data.bioforgeV80).active
+          ? byId('bioforge-canvas-v80')
+          : byId('bioforge-profile-v80');
+    focusTarget.focus({ preventScroll: true });
   } else {
     const heading = document.querySelector(`.view[data-panel="${name}"] .section-intro h2`) || byId('view-title');
     heading.setAttribute('tabindex', '-1');
@@ -471,6 +584,7 @@ function openForgeContext() {
   missionOwnerV78 = null;
   hubEngine.stop(false);
   engine.stop();
+  bioforgeRuntimeV80.stop({ reason: 'forge-open' });
   forgePlaytest = null;
   if (!titleScreen.root.hidden) titleScreen.hide();
   standaloneContext = 'forge';
@@ -487,10 +601,11 @@ function showTitleScreen() {
   if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   hubEngine.stop(false);
   engine.stop();
+  bioforgeRuntimeV80.stop({ reason: 'title-return' });
   destroyMissionInsertionUiV62();
   forgePlaytest = null;
   standaloneContext = null;
-  document.documentElement.classList.remove('hub-mode', 'mission-mode', 'forge-mode');
+  document.documentElement.classList.remove('hub-mode', 'mission-mode', 'bioforge-mode', 'forge-mode');
   byId('return-title').textContent = 'MENU PRINCIPAL';
   byId('retreat-mission').textContent = 'BATTRE EN RETRAITE';
   titleScreen.show();
@@ -937,6 +1052,7 @@ function renderAll() {
   renderHubStatus();
   renderEditorStatus();
   renderProfiles();
+  bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
   narrativeArchivesUiV68?.render();
   missionNarrativeArchivesUiV68?.render();
 }
@@ -1164,6 +1280,7 @@ function discardProfileRuntimeV78() {
   pendingMissionLaunchV62 = null;
   hubEngine.stop(false);
   engine.stop();
+  bioforgeRuntimeV80.stop({ reason: 'profile-change' });
   destroyMissionInsertionUiV62();
 }
 
@@ -1700,6 +1817,20 @@ function resolveAnnexStationV71(interaction) {
     return false;
   }
   const pending = saveSystem.data.hub.pendingModuleActionV71;
+  if (annexId === 'bioforge') {
+    const key = 'annex:bioforge';
+    const windowId = Math.floor(absoluteHours(saveSystem.data.clock) / 6);
+    if (saveSystem.data.hub.services[key] !== windowId) {
+      const result = runTimedMutation(() => runAnnexStationTransactionV71(annexId));
+      if (!result) return false;
+      exposeAnnexStationResultV71(result);
+    } else {
+      const status = byId('hub-status');
+      if (status) status.textContent = 'BIOFORGE · confinement déjà vérifié pour cette relève · accès maintenu.';
+    }
+    showView('bioforge');
+    return true;
+  }
   if (annexId === 'logistics' && pending) {
     const module = SHIP_MODULES.find((entry) => entry.id === pending.moduleId);
     const actionLabel = pending.type === 'install' ? 'installé et alimenté' : 'réparé';
@@ -1934,12 +2065,16 @@ function setupRuntimeControls() {
     ['pointerup', 'pointercancel', 'pointerleave'].forEach((name) => button.addEventListener(name, release));
   });
   all('[data-mission-key]').forEach((button) => bindHoldControl(button, engine, button.dataset.missionKey));
+  all('[data-bioforge-key]').forEach((button) => bindHoldControl(button, bioforgeRuntimeV80, button.dataset.bioforgeKey));
   byId('mission-interact').onclick = () => engine.interact(engine.player);
   byId('mission-tracker').onclick = () => engine.activateTracker(engine.player);
   byId('mission-vehicle').onclick = () => engine.toggleVehicle(engine.player);
   bindTacticalReloadButtonV77(byId('mission-reload'), engine, audio);
   byId('mission-medkit').onclick = () => engine.useMedkit(engine.player);
   byId('mission-neuro-counter').onclick = () => engine.activateNeuroCountermeasure(engine.player);
+  byId('bioforge-interact-v80').onclick = () => bioforgeRuntimeV80.interact(bioforgeRuntimeV80.player);
+  byId('bioforge-reload-v80').onclick = () => bioforgeRuntimeV80.reload(bioforgeRuntimeV80.player);
+  byId('bioforge-medkit-v80').onclick = () => bioforgeRuntimeV80.useMedkit(bioforgeRuntimeV80.player);
   byId('mission-equipment-controls').onclick = (event) => {
     const id = event.target.closest('[data-use-equipment]')?.dataset.useEquipment;
     if (!id) return;
@@ -2068,6 +2203,9 @@ function bind() {
     } else if (activeHubStation) {
       event.preventDefault();
       closeHubStation();
+    } else if (activeView === 'bioforge') {
+      event.preventDefault();
+      returnBioforgeToHubV80();
     } else if (standaloneContext === 'forge-playtest') {
       event.preventDefault();
       returnToForgeContext();
@@ -2168,6 +2306,7 @@ function bind() {
     audio.dispose();
     hubEngine.stop(!saveSystem.recoveryNeeded);
     engine.stop();
+    bioforgeRuntimeV80.stop({ reason: 'page-unload' });
     if (standaloneContext || saveSystem.recoveryNeeded) return;
     persistMissionResumeState();
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
@@ -2180,6 +2319,7 @@ async function boot() {
   const validation = validateContent();
   if (!validation.ok) throw new Error(`Contrat de contenu invalide : ${validation.failures.join(', ')}`);
   setupEditor();
+  setupBioforgeUiV80();
   setupRuntimeControls();
   setupCatalogsV62();
   setupNarrativeArchivesUiV68();
@@ -2194,11 +2334,21 @@ async function boot() {
   globalThis.__ATF_AUDIO_V77__ = audio;
   globalThis.__ATF_GAME__ = engine;
   globalThis.__ATF_HUB__ = hubEngine;
+  globalThis.__ATF_BIOFORGE_V80__ = {
+    runtime: bioforgeRuntimeV80,
+    ui: bioforgeUiV80,
+    open: () => showView('bioforge'),
+    purge: purgeBioforgeFromTerminalV80,
+    snapshot: () => ({
+      state: clone(saveSystem.data.bioforgeV80),
+      runtime: bioforgeRuntimeV80.getBioforgeSnapshotV80()
+    })
+  };
   globalThis.__ATF_V51__ = {
-    saveSystem, engine, hubEngine, get editor() { return editor; },
+    saveSystem, engine, hubEngine, bioforgeRuntimeV80, get editor() { return editor; },
     renderAll, showView, launchCampaign, retreatMission,
     simulateGalaxy: (hours = 6) => { const result = advanceGalaxy(saveSystem.data, { hours }); commit(); return result; },
-    snapshot: () => ({ save: clone(saveSystem.data), mission: engine.getSnapshot?.(), hub: hubEngine.getSnapshot?.(), editor: editor.getSnapshot() })
+    snapshot: () => ({ save: clone(saveSystem.data), mission: engine.getSnapshot?.(), hub: hubEngine.getSnapshot?.(), bioforge: bioforgeRuntimeV80.getBioforgeSnapshotV80(), editor: editor.getSnapshot() })
   };
   globalThis.__ATF_V61__ = {
     titleScreen,
@@ -2233,4 +2383,4 @@ boot().catch((error) => {
   byId('boot').innerHTML = `<div class="boot-mark">ERR</div><p>${escapeHtml(error.message)}</p>`;
 });
 
-export { saveSystem, forgeSaveSystem, engine, hubEngine, titleScreen, launchCampaign, retreatMission, abandonBlockedOperationV69, renderAll, showView, showTitleScreen, openForgeContext, openNarrativeArchivesV68, openMissionNarrativeArchivesV68 };
+export { saveSystem, forgeSaveSystem, engine, hubEngine, bioforgeRuntimeV80, titleScreen, launchCampaign, retreatMission, abandonBlockedOperationV69, renderAll, showView, showTitleScreen, openForgeContext, openNarrativeArchivesV68, openMissionNarrativeArchivesV68 };

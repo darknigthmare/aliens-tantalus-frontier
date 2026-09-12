@@ -6,7 +6,7 @@ export const AUDIO_FORMATS_V77 = Object.freeze([
 export const AUDIO_MIME_V77 = Object.freeze(Object.fromEntries(AUDIO_FORMATS_V77.map(x => ['.' + x.extension, x.mime])));
 export const AUDIO_SLOTS_V77 = Object.freeze({ sfx: Object.freeze(['shot', 'tracker', 'hit', 'ui', 'alarm']), music: Object.freeze(['menu', 'hub', 'mission']) });
 // Leaving a playable world must invalidate its pending music and delayed effects.
-export const resolveViewAudioSceneV77 = view => view === 'play' ? 'mission' : view === 'hub' ? 'hub' : 'menu';
+export const resolveViewAudioSceneV77 = view => ['play', 'bioforge'].includes(view) ? 'mission' : view === 'hub' ? 'hub' : 'menu';
 export const emptyAudioManifestV77 = () => ({ schema: 1, tracks: Object.fromEntries(Object.entries(AUDIO_SLOTS_V77)
   .map(([kind, ids]) => [kind, Object.fromEntries(ids.map(id => [id, { sources: [], fallback: kind === 'sfx' ? 'synth' : 'silence' }]))])) });
 

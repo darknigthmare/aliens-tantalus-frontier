@@ -14,7 +14,7 @@ if (!validation.ok) throw new Error(`Content contract failed: ${validation.failu
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-gallery.css', 'hub-level.css', 'runtime-level.css', 'title-screen-v61.css', 'title-scene-v79.css', 'hub-stations-v61.css', 'catalog-v62.css', 'mission-insertion-v62.css', 'alien-survival-v70.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
+for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-gallery.css', 'hub-level.css', 'runtime-level.css', 'title-screen-v61.css', 'title-scene-v79.css', 'hub-stations-v61.css', 'catalog-v62.css', 'mission-insertion-v62.css', 'alien-survival-v70.css', 'bioforge-v80.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
   await cp(join(root, path), join(output, path));
 }
 for (const directory of ['src', 'assets', 'docs']) {
@@ -43,7 +43,7 @@ for (const excludedPath of EXCLUDED_BUILD_ASSET_PATHS) {
   await assertBuildExclusion(...excludedPath.split('/'));
 }
 const index = await readFile(join(output, 'index.html'), 'utf8');
-if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas')) throw new Error('Built shell is incomplete.');
+if (!index.includes('/src/app.js') || !index.includes('game-canvas') || !index.includes('hub-canvas') || !index.includes('bioforge-canvas-v80')) throw new Error('Built shell is incomplete.');
 await writeFile(join(output, 'build-info.json'), JSON.stringify({
   name: RELEASE.name, version: RELEASE.version, sourceVersion: RELEASE.sourceVersion,
   builtAt: new Date().toISOString(), content: validation.counts, artProvider: 'OpenAI ImageGen'

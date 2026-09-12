@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '79.0.0',
-  subtitle: 'Scène titre modulaire, trois orbites et dix-huit calques bitmap validés',
+  version: '80.0.0',
+  subtitle: 'BIOFORGE jouable, double sas physique et purge atomique isolée',
   sourceVersion: '51.0.0'
 });

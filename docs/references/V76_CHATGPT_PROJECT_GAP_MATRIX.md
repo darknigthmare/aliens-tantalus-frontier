@@ -1,6 +1,6 @@
-# V76 — Matrice maîtresse des écarts des conversations ChatGPT (suivi V78)
+# V76 — Matrice maîtresse des écarts des conversations ChatGPT (suivi V80)
 
-Date de consolidation : 2026-09-08
+Date de consolidation : 2026-09-12
 Dépôt observé : `D:\CodexWork\aliens-tantalus-frontier\project`
 Sources : `group-gameplay.md`, `group-missions.md`, `group-levels.md`
 
@@ -21,7 +21,7 @@ Les sous-lots terminés ne ferment pas automatiquement une conversation plus lar
 
 | Total | DONE | PARTIAL | MISSING | BLOCKED | P0 | P1 | P2 |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| **26** | **0** | **16** | **10** | **0** | **4** | **16** | **6** |
+| **26** | **0** | **17** | **9** | **0** | **4** | **16** | **6** |
 
 ## Matrice des 26 conversations
 
@@ -58,7 +58,7 @@ Les sous-lots terminés ne ferment pas automatiquement une conversation plus lar
 | # | Conversation exacte et demande | Réponse ChatGPT / promesse | Runtime réellement branché | Statut | Prio | Preuves principales | Dépendances / prochain verrou |
 |---:|---|---|---|---:|---:|---|---|
 | 19 | `6a98fa78-6db8-83eb-bc72-cf41bc6833b1` — audit complet du hub USS Tantalus, perspective/échelle/cohérence et art manquant | Hub traversable multi-salles, audit franchise/Infestation, table corrigée, annexes et 303 fichiers annoncés | 16 salles + 10 annexes, graphe 26 nœuds, 50 WebP et table latérale V72 réels ; cinq dettes fonctionnelles/art restent explicites | **PARTIAL** | P1 | `docs/V71_HUB_COMMERCIAL_AUDIT.md`, `src/tantalus-hub-expansion-v71.js`, `src/hub-v71-runtime.js`, `docs/AUDIT_LEVEL_PROPS_V72.md`, tests hub V71/V72 | Props bitmaps indépendants, PNJ d'annexes, entraînement, replay MIRE et contrôles CCTV/verrouillage |
-| 20 | `6a98c871-61ac-83ed-be5c-600c473690e2` — BIOFORGE : choisir type/quantité et imprimer des ennemis dans une zone confinée | Arène isolée, terminal/roster/quantité, printer, purge, session séparée et 666 entrées art annoncées | Annexe/sas de confinement seulement ; test exige l'absence de données spawn, roster, quantité et printer | **MISSING** | P0 | `src/tantalus-hub-expansion-v71.js`, `src/hub-annex-services-v71.js`, `tests/hub-annex-services-v71.test.mjs`, `src/special-operations-v67.js` | Sécurité/purge atomique, session et progression isolées, budget entités, directeur/terminal avant atlases |
+| 20 | `6a98c871-61ac-83ed-be5c-600c473690e2` — BIOFORGE : choisir type/quantité et imprimer des ennemis dans une zone confinée | Arène isolée, terminal/roster/quantité, printer, purge, session séparée et 666 entrées art annoncées | V80 branche un niveau latéral séparé de 2 880 × 720, un terminal type/quantité, 11 profils terrestres validés, budget pondéré/plafond 12, impression déterministe, combat, sas verrouillés, purge atomique et sauvegarde racine isolée | **PARTIAL** | P0 | `src/bioforge-session-v80.js`, `src/bioforge-level-v80.js`, `src/bioforge-runtime-v80.js`, `src/bioforge-ui-v80.js`, tests BIOFORGE V80, `docs/V80_BIOFORGE_RUNTIME.md` | Étendre au roster ennemi total et au corpus artistique dédié annoncé ; terminer QA navigateur, performance, animation et accessibilité sans relâcher l’isolation |
 | 21 | `6a98dfeb-7284-83eb-a015-bf964b8b1229` — extermination en Power Loaders nouvelle génération | Protocole Z-110, routes rouge/noire, Atlas/Vulcain/Cerbère/Méduse, chaleur/hydraulique/dégâts et Morrigan | Entrée de registre seulement, `missing`, non jouable ; aucun mécha ou boss dédié | **MISSING** | P1 | `src/special-operations-v67.js` ; absence confirmée dans `src`, `tests` et assets | Runtime mécha commun, arène/collisions quatre gabarits, loadouts, boss/reprise puis sheets dédiées |
 | 22 | `6a98e050-1748-83eb-8c5b-a7dd4bc1ac26` — rejouer les événements d'`Alien` via MIRE | Chronique Nostromo/Derelict isolée, équipage, chapitres, synchronisation, embranchements et sauvegarde distincte | Mode MIRE générique et campagne « Alien 1979 — Reconstitution 001 » avec objectif générique ; aucune chronique/niveaux/équipage dédiés | **PARTIAL** | P1 | `src/content-core-v50.js`, `src/campaign-consequences.js`, `assets/openai/hub/annexes/v71/mire-archives/`, tests contenu/conséquences | Graphe chronologique/spatial, contrôleur de replay, save isolée, personnages/props/environnements puis QA chapitre |
 | 23 | `6a98d47d-68f4-83eb-9ed3-4063af4e7496` — mission aérienne dropship, xénos volants et Flying Queen | BROODSTORM, vol multi-altitude, castes/essaims, boss et base pour escorte/bombardement/extraction/défense | Pilotage aérien générique et approche dropship V62 ; aucune campagne, caste volante, Flying Queen ou directeur aérien | **PARTIAL** | P1 | `src/game-final-runtime.js`, `src/mission-insertion-v62.js`, tests insertion V62, sheets UD-4L/UD-4B | Repère/couloirs/caméra, directeur combat, ciblage/sous-systèmes, première caste + boss, parallaxes/HUD |
@@ -94,10 +94,19 @@ Pour chaque vague, l'ordre doit rester : **contrat runtime → level design/cam�
 - Dialogue du hub : couche modale hors du shell transformé, fond inerte, focus contenu et retour au contrôle; longs dialogues défilables et portrait limité à une cellule. Vérifié sur ordinateur et mobile portrait/paysage.
 - Lurker011 et Atarax023 restent explicitement rejetés, non promus dans le runtime.
 - Le contrat Ceto déclare toujours `marineMode: 'wading-on-existing-bed'` et `freeSwimImplemented: false`. Aucun de ces sous-lots ne prouve Abysse Noir, HADAL/MANTA-6, la nage libre ou l’ensemble des campagnes.
-- Le statut de publication et les résultats exacts sont consignés dans `docs/VALIDATION_V76.md`; les26conversations conservent leur statut global tant que leurs contrats entiers ne sont pas satisfaits.
+- Le statut de publication et les résultats exacts sont consignés dans `docs/VALIDATION_V76.md`; les 26 conversations conservent leur statut global tant que leurs contrats entiers ne sont pas satisfaits.
+
+## Sous-lot V80, sans fermer la conversation BIOFORGE
+
+- La station V71 ne stocke toujours aucune donnée de spawn : elle vérifie le confinement et ouvre une surface séparée.
+- La racine `bioforgeV80` contient seule configuration, session, file d’impression, historique et records. Les ressources, opérations, statistiques de campagne, équipage et état du hub ne reçoivent aucune progression BIOFORGE.
+- Le plan auteur comporte six salles, cinq portes, un double sas, une baie d’impression, une arène, un sas retour, deux passerelles et douze points de spawn confinés.
+- Les 11 profils du roster initial possèdent un asset dédié validé ; aucun fallback `legacy`, boss, véhicule ou pickup n’entre dans la sélection.
+- Les cinq compteurs de purge doivent tous être entiers et nuls avant la phase `return`.
+- Ce vertical slice ne prouve ni les 571 profils ennemis, ni les 666 entrées art annoncées dans la conversation, ni un corpus complet d’animations dédié.
 
 ## Conclusion de traçabilité
 
-Suivi V79 : #2 passe de MISSING à PARTIAL grâce à la scène modulaire, aux trois presets dédiés et aux 18 assets intégrés, mais 35 slots et 17 planètes dédiées restent à produire ; le contrat des vingt presets n’est pas clos. #7 conserve PARTIAL malgré les défauts reproductibles fermés en V78 ; Echo-9, prologue, tir diagonal, refonte Commandement et corrections artistiques globales restent. #6 et #1 conservent PARTIAL. Les sources V76 restent l’audit initial non réécrit. Aucun chat complet n’est déclaré DONE ; les résultats du lot courant sont suivis dans `docs/VALIDATION_V79.md`.
+Suivi V80 : #20 passe de MISSING à PARTIAL grâce à sa boucle physique séparée, ses 11 profils validés, sa quantité bornée et sa purge atomique ; le roster total et le corpus d’art annoncé restent ouverts. #2 reste PARTIAL malgré les trois presets et 18 assets V79 ; 35 slots et 17 planètes dédiées manquent encore. #7, #6 et #1 restent PARTIAL. Les sources V76 demeurent l’audit initial non réécrit. Aucun chat complet n’est déclaré DONE.
 
 La présence d'une entrée dans `src/special-operations-v67.js`, d'un concept ChatGPT, d'une fiche de catalogue ou d'une sheet non reliée ne change jamais un statut. Au constat consolidé : **aucune des 26 conversations n'est intégralement DONE**, même si plusieurs sous-lots sont réels et testés. Les trois rapports sources conservent le verbatim, les détails de tests et les écarts complets ; cette matrice fournit l'ordre de décision et d'exécution.

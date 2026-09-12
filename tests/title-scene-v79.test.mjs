@@ -232,7 +232,7 @@ test('un navigateur sans gradients conserve le bitmap V61 et ne laisse pas une s
   assert.equal(supportsTitleSceneV79({}), false);
 });
 
-test('le shell, le build et la PWA chargent les modules V79 avec un responsive dédié', async () => {
+test('le shell V80 conserve la scène titre V79, son build et son responsive dédié', async () => {
   const [html, app, controller, css, build, worker] = await Promise.all([
     readFile('index.html', 'utf8'),
     readFile('src/app.js', 'utf8'),
@@ -250,9 +250,9 @@ test('le shell, le build et la PWA chargent les modules V79 avec un responsive d
   assert.match(controller, /this\.scene\?\.hide\?\.\(\)/u);
   assert.match(build, /'title-scene-v79\.css'/u);
   for (const path of ['/title-scene-v79.css', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js']) assert.ok(worker.includes(`'${path}'`));
-  assert.match(html, /ALIENS: TANTALUS FRONTIER v79/u);
-  assert.match(html, /VERSION 79\.0\.0/u);
-  assert.match(worker, /atf-v79-modular-title-shell-1/u);
+  assert.match(html, /ALIENS: TANTALUS FRONTIER v80/u);
+  assert.match(html, /VERSION 80\.0\.0/u);
+  assert.match(worker, /atf-v80-bioforge-shell-1/u);
   assert.match(css, /@media \(max-width: 760px\)/u);
   assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)/u);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/u);

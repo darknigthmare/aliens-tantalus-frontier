@@ -38,6 +38,7 @@ import {
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV78, assertSaveProfileIdV78, inspectSaveSlotV78, parseImportedSaveV78 } from './save-profile-v78.js';
 import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
+import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -245,6 +246,7 @@ export function createDefaultSave(profile = 1) {
     narrativeArchives: createNarrativeArchivesV68(),
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
+    bioforgeV80: createBioforgeV80(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -1744,6 +1746,7 @@ export function migrateSave(input, profile = 1) {
   migrated.narrativeArchives = normalizeNarrativeArchivesV68(source.narrativeArchives);
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
+  migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
   if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
     const matchingRun = migrated.alphaBravoDoctrine.runs.find((run) => run.operationId === migrated.strategy.lastOperation.id);
     if (matchingRun) migrated.strategy.lastOperation.alphaBravoDoctrineRun = structuredClone(matchingRun);

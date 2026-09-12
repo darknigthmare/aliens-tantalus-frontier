@@ -325,8 +325,15 @@ export const HUB_ANNEXES_V71 = Object.freeze([
     upgradeId: 'bioforge-containment-integrity',
     stationX: 390,
     scope: 'isolated-access-to-separate-experimental-level',
-    deferredFeatures: ['enemy-selection', 'quantity-selection', 'spawn-printing', 'separate-progression'],
-    capabilities: ['isolated-airlock', 'containment-control'],
+    deferredFeatures: [],
+    capabilities: [
+      'isolated-airlock',
+      'containment-control',
+      'enemy-selection',
+      'quantity-selection',
+      'spawn-printing',
+      'separate-progression'
+    ],
     normalHubCreaturesVisible: false,
     isolatedLevelTarget: 'bioforge-experimental-level'
   })

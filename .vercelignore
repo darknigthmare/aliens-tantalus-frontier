@@ -106,6 +106,10 @@ docs/references/V79_*
 docs/references/V79_*/**
 docs/references/v79-*
 docs/references/v79-*/**
+docs/references/V80_*
+docs/references/V80_*/**
+docs/references/v80-*
+docs/references/v80-*/**
 scripts/__pycache__
 scripts/__pycache__/**
 .qa

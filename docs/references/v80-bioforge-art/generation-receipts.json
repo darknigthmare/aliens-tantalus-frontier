@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "release": "V80",
+  "provider": "OpenAI ImageGen",
+  "toolMode": "built-in",
+  "rightsPolicy": "original-ai-generated-no-official-copy",
+  "receiptPolicy": "Each PNG below is the unmodified master returned by its single ImageGen call.",
+  "accepted": [
+    { "assetId": "bioforge-far-industrial-shell-v80", "receiptId": "exec-ce3823b8-7b39-4045-a05c-54b659c8c169", "sourceFile": "source-receipts/exec-ce3823b8-7b39-4045-a05c-54b659c8c169.png", "sourceSha256": "2cd45f10c83ca09803a2203f4a94cd63a5a76af7b660ae9f9c227d0c7a231db8", "generatedAt": "2026-09-12T15:44:45.400157Z" },
+    { "assetId": "bioforge-mid-process-modules-v80", "receiptId": "exec-97730469-bc41-4b7d-a20f-54545278ee71", "sourceFile": "source-receipts/exec-97730469-bc41-4b7d-a20f-54545278ee71.png", "sourceSha256": "36087242cd3f050254c9841f5d567f14929e5853e6f41043b267929c713f7f7f", "generatedAt": "2026-09-12T15:45:29.326076Z" },
+    { "assetId": "bioforge-foreground-service-frame-v80", "receiptId": "exec-da7ec657-558e-43f9-b93c-f08e97a742d9", "sourceFile": "source-receipts/exec-da7ec657-558e-43f9-b93c-f08e97a742d9.png", "sourceSha256": "c053ecc5365a8a360cfcbb01d42e326ff7836535fbaadfee7b8f4df79f8a251f", "generatedAt": "2026-09-12T15:46:23.072521Z" },
+    { "assetId": "bioforge-tissue-printer-v80", "receiptId": "exec-a79da0bc-cf21-4d13-8054-59ef833344c6", "sourceFile": "source-receipts/exec-a79da0bc-cf21-4d13-8054-59ef833344c6.png", "sourceSha256": "a15e574eeff6491f685de3785002adcb68cb91c4f827f36121e0f09a8c4bd577", "generatedAt": "2026-09-12T15:47:07.593347Z" },
+    { "assetId": "bioforge-bulkhead-cycle-v80", "receiptId": "exec-c0b8c50e-3124-4174-ae71-a9db2832489e", "sourceFile": "source-receipts/exec-c0b8c50e-3124-4174-ae71-a9db2832489e.png", "sourceSha256": "d0df9143b5ea3815c8c537f33376b4cd3600b3d4e44ddfeeba1257882d1425e2", "generatedAt": "2026-09-12T15:47:57.344332Z" },
+    { "assetId": "bioforge-purge-cycle-v80", "receiptId": "exec-d0509038-267b-4872-b607-749e2fceb446", "sourceFile": "source-receipts/exec-d0509038-267b-4872-b607-749e2fceb446.png", "sourceSha256": "41f3654d4e978f03ad540c6bbd14b0052a8f02c6c42cad4c3082e30295b00a62", "generatedAt": "2026-09-12T15:48:43.475968Z" }
+  ],
+  "rejected": [],
+  "rejectionSummary": "No candidate was rejected. All six first-call masters passed manual composition/originality review; technical alpha residue was handled only in normalized runtime derivatives."
+}

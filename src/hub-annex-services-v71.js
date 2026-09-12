@@ -293,7 +293,7 @@ export function applyHubAnnexBusinessV71(save, annexId) {
     operations.bioforge.isolationVerified = true;
     operations.bioforge.containmentCycles += 1;
     Object.assign(details, { ...operations.bioforge, containment, organismsInHub: 0 });
-    message = 'SAS BIOFORGE · isolation et confinement vérifiés · niveau expérimental non engagé.';
+    message = 'SAS BIOFORGE · isolation et confinement vérifiés · niveau V80 prêt · ouverture autorisée.';
   }
 
   return { applied: true, message, details };

@@ -34,14 +34,14 @@ const CHAT_IDS = Object.freeze([
   '6a98dfcb-a2e4-83ed-b3c2-606a9384c6e4'
 ]);
 
-test('le registre V71 couvre exactement les 19 conversations avec le bilan 2/8/9 et cinq surfaces jouables', () => {
+test('le registre couvre exactement les 19 conversations avec le bilan V80 2/9/8 et six surfaces jouables', () => {
   assert.equal(SPECIAL_OPERATIONS_V67.length, 19);
   assert.deepEqual(SPECIAL_OPERATION_COUNTS_V67, {
     total: 19,
     effective: 2,
-    partial: 8,
-    missing: 9,
-    playable: 5
+    partial: 9,
+    missing: 8,
+    playable: 6
   });
   assert.deepEqual(validateSpecialOperationsV67(), {
     ok: true,
@@ -72,7 +72,7 @@ test('les identifiants internes et ChatGPT sont exacts, uniques et adressables',
   assert.equal(getSpecialOperationByChatIdV67('inconnu'), null);
 });
 
-test('quatre opérations ajoutent des campagnes, tandis que le hub jouable conserve le total 440', () => {
+test('quatre opérations ajoutent des campagnes, tandis que le hub et BIOFORGE conservent le total 440', () => {
   const historicalIds = new Set(CORE_CAMPAIGNS.map((campaign) => campaign.id));
   assert.equal(CORE_CAMPAIGNS.length, 436);
   assert.equal(historicalIds.has('special-cargo-brutal'), false);
@@ -89,6 +89,16 @@ test('quatre opérations ajoutent des campagnes, tandis que le hub jouable conse
   assert.equal(hub.campaignId, undefined);
   assert.equal(hub.campaign, undefined);
   assert.equal(expanded.some((campaign) => campaign.specialOperationId === hub.id), false);
+
+  const bioforge = getSpecialOperationV67('bioforge');
+  assert.ok(bioforge);
+  assert.equal(bioforge.implementationStatus, 'partial');
+  assert.equal(bioforge.playable, true);
+  assert.equal(bioforge.accessSurface, 'hub');
+  assert.deepEqual(bioforge.remainingMechanics, ['full-enemy-roster', 'complete-dedicated-art-corpus']);
+  assert.ok(bioforge.evidence.includes('src/bioforge-runtime-v80.js'));
+  assert.ok(bioforge.evidence.includes('tests/bioforge-save-v80.test.mjs'));
+  assert.equal(expanded.some((campaign) => campaign.specialOperationId === bioforge.id), false);
 
   const cargo = expanded.find((campaign) => campaign.id === 'special-cargo-brutal');
   assert.ok(cargo);

@@ -1,8 +1,14 @@
 # ALIENS: TANTALUS FRONTIER
 
-## Travail courant V79
+## Travail courant V80
 
-Reprise fondée sur les 26 conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict est désormais de **0 conversation intégralement terminée, 16 partielles et 10 manquantes** : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
+Reprise fondée sur les 26 conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict est désormais de **0 conversation intégralement terminée, 17 partielles et 9 manquantes** : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
+
+V80 transforme BIOFORGE en niveau 2D séparé, accessible depuis son sas physique du Tantalus. Le terminal choisit un profil terrestre validé et une quantité bornée, puis la boucle ferme les sas, imprime les spécimens, joue le combat, impose une purge atomique et n’autorise le retour au hub qu’une fois la zone vide. L’état persiste uniquement sous la racine `bioforgeV80` : il ne crédite ni campagne, ni ressource stratégique, ni perte d’équipage.
+
+Le roster initial contient **11 profils validés**, avec un budget pondéré de 12 et un maximum absolu de 12 spécimens simultanés. BIOFORGE passe donc de **MISSING** à **PARTIAL** : la boucle dédiée existe, mais le roster ennemi total et le corpus artistique dédié annoncé dans la conversation ne sont pas terminés. Voir [le contrat runtime V80](docs/V80_BIOFORGE_RUNTIME.md), [l’audit level design V80](docs/V80_LEVEL_DESIGN_AUDIT.md) et [l’historique V80](docs/VERSION_HISTORY_V80.md).
+
+## Référence V79
 
 V79 livre une première tranche réelle de l’accueil spatial modulaire : couches bitmap indépendantes, sélection déterministe du monde, trois presets dédiés (Acheron, Ceto et Mire-9), modes Full/Reduced/Static, repli procédural par couche et ultime repli vers l’accueil V61. Le registre accepte exactement **18 assets OpenAI intégrés sur 53 slots planifiés** ; leurs dimensions, alpha, perspective, hash runtime et reçus source sont audités. Les contrats et limites vérifiés sont consignés dans [la validation V79](docs/VALIDATION_V79.md) et [le contrat runtime V79](docs/V79_TITLE_SCENE_RUNTIME.md).
 
@@ -33,12 +39,12 @@ Ouvrir `http://127.0.0.1:4173`.
 - Commandement : décisions datées, ressources, recherches, modules, journal et pression de crise persistants ; la diplomatie avance l'horloge, applique une transaction unique puis verrouille le canal jusqu'à son cooldown.
 - Préparation : achat, inventaire, arme, équipement à charges, véhicule, équipage, soins, costume, dossier Apex et profil Neuro-Xeno.
 - Opération : trois topologies connectées et distinctes (vaisseau vertical, colonie multi-route, extérieur planétaire), zones, sas, portes, conduits, échelles, événements et couches far/mid/foreground issus du monde/campagne/Forge ; danger, difficulté, rencontres contextuelles — reine comprise uniquement lorsque la campagne exige une ruche/reine —, combat, furtivité, véhicule, pertes, extraction et récompenses.
-- Special Operations : 19 conversations auditées et cinq surfaces jouables. Cargo Brutal et Systèmes de survie Alien sont `effective` ; QZ-17, Alpha/Bravo et Hub commercial sont jouables mais `partial`. Quatre surfaces sont des campagnes ; le hub utilise `accessSurface: hub` et conserve le total à 440.
+- Special Operations : 19 conversations auditées et six surfaces jouables. Cargo Brutal et Systèmes de survie Alien sont `effective` ; QZ-17, Alpha/Bravo, Hub commercial et BIOFORGE sont jouables mais `partial`. Quatre surfaces sont des campagnes ; le hub et BIOFORGE utilisent `accessSurface: hub` et conservent le total à 440.
 - Doctrine Alpha / Bravo : exactement quatre opérateurs actifs, deux binômes persistants, ordres et pings ancrés au terrain, trois consoles/tâches physiques et certification calculée depuis les résultats réels. Il s’agit d’une doctrine tactique dans le runtime local, pas d’un multijoueur réseau annoncé.
 - Systèmes de survie Alien : six salles physiques reliées, capacité énergétique limitée entre support-vie, sécurité et CCTV, pression/oxygène simulés, sas soudables, surveillance sans pause du monde, flaques d’acide persistantes et autodestruction à double autorisation avant extraction.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : 4 ponts, 16 salles historiques, 10 annexes V71 et 16 PNJ nommés dans le hub historique. Chaque annexe est un sous-niveau 1 920 × 720 relié par une porte réciproque, avec sol, passerelle, échelle, colliders, six placements logiques, station persistante et cinq couches WebP (`far`, `mid`, `prop`, `foreground`, `door`). Les dix branches se parcourent physiquement ; leurs PNJ dédiés et les bitmaps autonomes de chaque prop restent à produire. Le vestibule BIOFORGE est vide en usage normal ; le niveau expérimental complet est toujours `missing`.
+- Hub : 4 ponts, 16 salles historiques, 10 annexes V71 et 16 PNJ nommés dans le hub historique. Chaque annexe est un sous-niveau 1 920 × 720 relié par une porte réciproque, avec sol, passerelle, échelle, colliders, six placements logiques, station persistante et cinq couches WebP (`far`, `mid`, `prop`, `foreground`, `door`). Les dix branches se parcourent physiquement ; leurs PNJ dédiés et les bitmaps autonomes de chaque prop restent à produire. Le vestibule BIOFORGE reste sans créature ; il ouvre désormais le niveau V80 séparé et sa progression isolée.
 - Services V71 : Logistique exécute les ordres de module, MIRE indexe les archives, CCTV effectue un scan, Proving Ground prépare un soutien et Capsules arme une mitigation de crise. La relecture physique des archives, les commandes CCTV/lockdown et les exercices de tir/P-5000/tutoriels restent à réaliser. Les Capsules n’exécutent pas de scénario d’autodestruction et les visites ne délivrent aucun certificat d’exercice.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
@@ -47,7 +53,7 @@ Ouvrir `http://127.0.0.1:4173`.
 
 Les catalogues volumineux sont couverts par des adaptateurs systémiques testés. Le manifeste principal V64 comptait **195 atlas / 2 772 cellules** ; les atlas supplémentaires V65/V66 et les visuels d’opérations V67→V71 sont suivis par leurs propres contrats et ne sont pas additionnés ici sans inventaire consolidé. Les **571 profils ennemis gameplay** ne signifient donc pas 571 silhouettes bitmap dédiées. Une entrée catalogue n'est jamais présentée comme une plaque unique lorsqu'elle réemploie une famille visuelle ou reste bloquée par sa référence canonique.
 
-Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d’arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie. Pour le hub V71, cinq dettes restent explicites : props bitmap autonomes, PNJ dédiés, exercices physiques, relecture physique des archives et commandes CCTV/lockdown. Le validateur peut valider la structure tout en conservant `productionReady: false` et `complete: false`. Le BIOFORGE complet et les autres promesses des **17 conversations partial ou missing** restent à produire.
+Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGBA 1 774 × 887 corrigés. La Harpoon Gun / ASSO-400 ferme le dernier gap d’arme Excel relié sans ambiguïté. La dette connue conserve quatre identités d’armes ambiguës ou absentes (Heavy Pulse, Plasma, ES-4 et Compound Bow), trois châssis bloqués, les couches de costumes composables et la source UD-4L agrandie. Pour le hub V71, cinq dettes restent explicites : props bitmap autonomes, PNJ dédiés, exercices physiques, relecture physique des archives et commandes CCTV/lockdown. Le validateur peut valider la structure tout en conservant `productionReady: false` et `complete: false`. BIOFORGE doit encore étendre son roster et son corpus d’art dédiés ; les autres promesses des **26 conversations encore partial ou missing** restent également à produire.
 
 ## Contrôles
 
@@ -66,6 +72,8 @@ Coop locale : `J/L`, `I/K`, `U`, `O`, `Y`, `T`, `G`.
 Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise. Les commandes tactiles restent sous la scène en portrait.
 
 Annexes V71 : approcher une porte et utiliser `E` pour entrer ; parcourir le sous-niveau horizontal puis activer sa station avec `E`. La même porte ramène à la salle parente et la position/les améliorations sont persistées.
+
+BIOFORGE V80 : activer la station du sas avec `E`, choisir le profil et la quantité au terminal, lancer l’impression puis combattre dans l’arène physique. Le retour au Tantalus reste verrouillé pendant l’impression, le combat et la purge ; la commande de purge d’urgence termine la session sans récompenser la campagne.
 
 Doctrine Alpha / Bravo : `1`, `2` et `3` sélectionnent Alpha, Bravo ou les deux groupes ; `C` arme le ping terrain ; `B`, `N` et `M` appliquent respectivement `TENIR`, `FOCUS` et `RALLIER`.
 
@@ -96,12 +104,15 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Le dernier passage complet consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargent sans erreur navigateur. La recette BIOFORGE et ses neuf boutons tactiles a été revérifiée sur D ; le passage complet final confirme ces 952 tests. La publication Vercel et les contrôles HTTP sont vérifiés ; le contrôle d’accessibilité final reste à compléter. Voir [VALIDATION_V71](docs/VALIDATION_V71.md).
+Le dernier passage complet historique consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargeaient sans erreur navigateur. Cette preuve historique concerne le sas BIOFORGE V71, pas la boucle V80. La publication Vercel et les contrôles HTTP historiques sont vérifiés ; voir [VALIDATION_V71](docs/VALIDATION_V71.md).
 
 Le workspace a été récupéré sur `D:\CodexWork\aliens-tantalus-frontier\project` : **4 808 fichiers aux empreintes identiques**, deux sources tronquées restaurées et **3 864 fixtures synthétiques** (1 459 999 407 octets) déplacées sur D après vérification taille/SHA-256. Ces fixtures sont conservées dans `recovered-test-fixtures-20260905` et restent récupérables.
 
 ## Dossier de production
 
+- [Contrat runtime BIOFORGE V80](docs/V80_BIOFORGE_RUNTIME.md)
+- [Audit level design BIOFORGE V80](docs/V80_LEVEL_DESIGN_AUDIT.md)
+- [Historique V80](docs/VERSION_HISTORY_V80.md)
 - [Historique et gates V71](docs/VERSION_HISTORY_V71.md)
 - [Audit level design et cohérence du hub V71](docs/V71_HUB_COMMERCIAL_AUDIT.md)
 - [Provenance artistique V71](docs/ART_PROVENANCE_V71.md)

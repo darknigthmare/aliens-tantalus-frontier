@@ -1,0 +1,312 @@
+:root {
+  --bioforge-acid: #b8f56d;
+  --bioforge-amber: #d9a83f;
+  --bioforge-danger: #e15d53;
+  --bioforge-glass: rgba(3, 12, 10, .9);
+}
+
+html.bioforge-mode,
+html.bioforge-mode body {
+  overflow: hidden;
+  background: #010403;
+}
+
+.bioforge-mode .rail,
+.bioforge-mode .topbar {
+  display: none;
+}
+
+.bioforge-mode .shell,
+.bioforge-mode #workspace {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.bioforge-mode .bioforge-view {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #010403;
+}
+
+.bioforge-level-shell {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(100vw, calc(100vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  border: 1px solid rgba(100, 137, 111, .48);
+  background: #020706;
+  box-shadow: 0 0 80px rgba(0, 0, 0, .82);
+}
+
+#bioforge-canvas-v80 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #020706;
+}
+
+.bioforge-terminal-v80 {
+  position: absolute;
+  z-index: 22;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(12px, env(safe-area-inset-left));
+  width: min(330px, calc(100% - 24px));
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  padding: 14px;
+  border: 1px solid rgba(184, 245, 109, .42);
+  background: linear-gradient(145deg, rgba(5, 17, 13, .96), var(--bioforge-glass));
+  box-shadow: 0 18px 58px rgba(0, 0, 0, .55), inset 0 0 28px rgba(86, 158, 92, .06);
+  backdrop-filter: blur(10px);
+  font-family: var(--mono);
+}
+
+.bioforge-terminal-v80 header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 3px 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(127, 167, 135, .34);
+}
+
+.bioforge-terminal-v80 header .eyebrow {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 9px;
+}
+
+.bioforge-terminal-v80 h2 {
+  margin: 0;
+  font: 800 22px/1 var(--sans);
+  letter-spacing: .1em;
+}
+
+#bioforge-phase-v80 {
+  color: var(--bioforge-acid);
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.bioforge-config-v80 {
+  display: grid;
+  grid-template-columns: 1fr 92px;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.bioforge-config-v80 label {
+  display: grid;
+  gap: 5px;
+  color: #94a99a;
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+
+.bioforge-config-v80 select,
+.bioforge-config-v80 input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+  border-color: rgba(143, 213, 162, .35);
+  font-size: 11px;
+}
+
+.bioforge-profile-v80 {
+  position: relative;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 78px;
+  margin: 0;
+  border: 1px solid rgba(143, 213, 162, .2);
+  background: rgba(0, 0, 0, .24);
+}
+
+.bioforge-profile-thumbnail-v80 {
+  display: block;
+  width: 92px;
+  height: 76px;
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  background-size: 400% 800%;
+  background-color: rgba(8, 22, 17, .7);
+}
+
+.bioforge-profile-source-v80 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.bioforge-profile-v80 figcaption {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.bioforge-profile-v80 strong {
+  overflow: hidden;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bioforge-profile-v80 span,
+.bioforge-metrics-v80 {
+  color: #91a594;
+  font-size: 9px;
+  letter-spacing: .05em;
+}
+
+.bioforge-status-v80 {
+  min-height: 38px;
+  margin: 10px 0 4px;
+  color: var(--bioforge-acid);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.bioforge-metrics-v80 {
+  margin: 4px 0 10px;
+  line-height: 1.45;
+}
+
+.bioforge-actions-v80 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.bioforge-actions-v80 .button {
+  min-width: 0;
+  padding: 9px 7px;
+  font-size: 9px;
+}
+
+#bioforge-start-v80 {
+  grid-column: 1 / -1;
+}
+
+.bioforge-actions-v80 .button[hidden],
+.bioforge-view[data-session-active="true"] #bioforge-start-v80,
+.bioforge-view[data-session-active="true"] #bioforge-return-v80 {
+  display: none;
+}
+
+.bioforge-view[data-session-active="true"] #bioforge-purge-v80 {
+  grid-column: 1 / -1;
+}
+
+.bioforge-ui-v80[data-busy="true"] .bioforge-actions-v80,
+.bioforge-view[data-busy="true"] .bioforge-actions-v80 {
+  pointer-events: none;
+  opacity: .58;
+}
+
+.bioforge-view[data-phase="sealing"] .bioforge-config-v80,
+.bioforge-view[data-phase="printing"] .bioforge-config-v80,
+.bioforge-view[data-phase="combat"] .bioforge-config-v80,
+.bioforge-view[data-phase="result"] .bioforge-config-v80,
+.bioforge-view[data-phase="purging"] .bioforge-config-v80,
+.bioforge-view[data-session-active="true"] .bioforge-config-v80 {
+  display: none;
+}
+
+.bioforge-view[data-session-active="true"] .bioforge-terminal-v80 {
+  width: min(300px, calc(100% - 24px));
+}
+
+.bioforge-view[data-phase="purging"] #bioforge-phase-v80 {
+  color: var(--bioforge-danger);
+}
+
+.bioforge-touch-v80 {
+  position: absolute;
+  z-index: 24;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  grid-template-columns: repeat(7, minmax(44px, 52px));
+  gap: 6px;
+}
+
+@media (pointer: fine) and (min-width: 901px) {
+  .bioforge-touch-v80 {
+    display: none;
+  }
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+  .bioforge-terminal-v80 {
+    width: min(300px, calc(100% - 24px));
+    max-height: calc(100% - 86px);
+  }
+
+  .bioforge-touch-v80 {
+    display: grid;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 720px) {
+  .bioforge-mode .bioforge-view {
+    min-height: 100svh;
+    align-items: center;
+    background: radial-gradient(circle at 50% 44%, rgba(28, 65, 46, .24), transparent 48%), #010403;
+  }
+
+  .bioforge-level-shell {
+    position: fixed;
+    top: calc(50% - 28.125vw);
+    left: 0;
+    width: 100vw;
+    transform: none;
+    overflow: visible;
+  }
+
+  .bioforge-terminal-v80 {
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top));
+    left: max(8px, env(safe-area-inset-left));
+    width: calc(100vw - 16px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    max-height: 42svh;
+    padding: 10px;
+  }
+
+  .bioforge-config-v80 {
+    grid-template-columns: minmax(0, 1fr) 72px;
+  }
+
+  .bioforge-profile-v80 {
+    display: none;
+  }
+
+  .bioforge-touch-v80 {
+    position: fixed;
+    right: max(8px, env(safe-area-inset-right));
+    bottom: max(8px, env(safe-area-inset-bottom));
+    left: max(8px, env(safe-area-inset-left));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bioforge-terminal-v80 {
+    backdrop-filter: none;
+  }
+}
