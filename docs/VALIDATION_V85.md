@@ -56,7 +56,11 @@ Preuves dans `onboarding-built/`, `captions-built/` et `combat-built/` sous `ref
 
 ## Gate de livraison et publication
 
-Le vérificateur V85 exige un SHA de commit explicite, compare **52 fichiers critiques** et **12 images V81/V82 inchangées**, les types MIME, le cache, les métadonnées et la version. Les sources ChatGPT et preuves privées V81–V85 doivent répondre 404. Il utilise la liste Git avec séparateurs NUL, donc les chemins accentués et avec espaces ne peuvent pas échapper au contrôle. Ses 32 tests passent. La preuve HTTP locale contre le commit de contenu sera ajoutée après ce commit ; elle ne vaut pas déploiement Vercel.
+Le vérificateur V85 exige un SHA de commit explicite, compare **52 fichiers critiques** et **12 images V81/V82 inchangées**, les types MIME, le cache, les métadonnées et la version. Les sources ChatGPT et preuves privées V81–V85 doivent répondre 404. Il utilise la liste Git avec séparateurs NUL, donc les chemins accentués et avec espaces ne peuvent pas échapper au contrôle. Ses 32 tests passent.
+
+Le contrôle HTTP local a réussi contre le commit de contenu **`06629693e384bfca0fd11a877b7dcc1e3fd53dec`** : 52 fichiers critiques conformes, 12 images conformes (dont deux éléments modulaires), cache/version V85 conformes et **182 chemins de preuves privées répondant 404**. Rapport : `references/v85-release-qa/local-build-http.json`, cible déclarée `local-build`, jamais production Vercel.
+
+La première passe HTTP avait correctement refusé le MIME WebP `application/octet-stream` annoncé par le serveur Python Windows. Le serveur QA local a été remplacé par un handler statique avec correspondance explicite `image/webp`, sans changer les fichiers du build ni assouplir le gate ; la passe complète suivante a réussi. Les espaces Markdown et la fin de fichier de l'archive ChatGPT ont été conservés pour fidélité au verbatim ; le contrôle de whitespace des autres changements est propre.
 
 Aucun push GitHub ni déploiement Vercel V85 effectué. La publication reste suspendue à l'accord explicite demandé pour l'envoi des rapports et captures QA dans GitHub. Ces fichiers restent exclus du build public. Aucun appel API OpenAI facturé n'a été effectué.
 
