@@ -1,0 +1,1035 @@
+{
+  "schema": 1,
+  "release": "v82",
+  "kind": "lurker-attack-candidate-review-only",
+  "sourcePixelsModified": 0,
+  "normalizationPerformed": false,
+  "runtimeIntegrated": false,
+  "accepted": false,
+  "canonExact": false,
+  "referenceTransfer": "Official Lurker reference visually consulted, but ImageGen could not read its local attachment because of an ACL error. These successful calls used a descriptive prompt; no image-conditioned or 1:1 fidelity is claimed.",
+  "reviewLimits": [
+    "Only attack candidates, not an accepted complete enemy profile.",
+    "Eight distinct cell images do not prove anatomical identity, scale coherence or animation quality.",
+    "Fixed-cell GIF preserves authored leap height; no grounded per-frame normalization was applied.",
+    "Alpha bounds and border contacts do not prove all silhouettes are anatomically complete."
+  ],
+  "generator": {
+    "path": "scripts/audit-lurker-attack-v82.py",
+    "sha256": "5866745311869761640addf0c6b0145f621b362479f5721a005f759717c558bd"
+  },
+  "candidates": [
+    {
+      "candidate": "r1",
+      "sourcePath": "docs/references/v82-lurker-attack/source-receipts/lurker-attack-r1-original.png",
+      "sourceSha256": "64f6814174ed151e63962570e9ce08d7f1543e0fba04483ee4e0680b2eec5a2c",
+      "generationId": "exec-32b0e2ac-6430-4ebb-87b5-de50c9dfe273",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "sourceBytes": 1044472,
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelPercent": 76.1424,
+      "grid": [
+        4,
+        2
+      ],
+      "gridXEdges": [
+        0,
+        444,
+        887,
+        1330,
+        1774
+      ],
+      "gridYEdges": [
+        0,
+        444,
+        887
+      ],
+      "poseCount": 8,
+      "uniqueRgbaPoseCount": 8,
+      "cellBoundaryContactPoses": [
+        2,
+        3,
+        4
+      ],
+      "technicalCellIsolationPass": false,
+      "fixedDiagnosticGuideY": 396,
+      "guideMeaning": "Lowest alpha extent among all eight cells, NOT a measured anatomical foot/root or certified physical floor.",
+      "previewRegistration": "Nominal 444x444 cell origin fixed for every pose. No per-pose translation, rescale, foot alignment or fabricated in-between frames.",
+      "registrationReview": {
+        "initialClearancePx": 0,
+        "finalClearancePx": 12,
+        "interpretation": "Different lower extents are preserved as authored. A nonzero recovery offset requires an anatomical body-root and physical landing review; it is not silently repaired by grounding every frame.",
+        "physicalRootCalibrated": false
+      },
+      "visualFinding": "Rejected: cell boundaries cut the silhouettes of poses 2, 3 and 4. Pose 4 contacts its left cell edge, while its right edge retains 6 px clearance; the original broad right-edge suspicion is refined by measured bounds.",
+      "status": "rejected-visual-cutoff",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "frames": [
+        {
+          "pose": 1,
+          "sourceRect": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "cellSize": [
+            444,
+            444
+          ],
+          "alphaBoundsGt0": [
+            10,
+            19,
+            438,
+            444
+          ],
+          "alphaBoundsGe16": [
+            17,
+            158,
+            418,
+            397
+          ],
+          "alphaBoundsGe128": [
+            17,
+            159,
+            417,
+            396
+          ],
+          "foregroundPixelsGe16": 35412,
+          "semiTransparentPixels": 46101,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 17,
+            "top": 158,
+            "right": 26,
+            "bottom": 47
+          },
+          "rgbaSha256": "5524d525cac59e7763dc545e565a5bc0277337551b5518892c3d3ab7a01863e3",
+          "lowestAlphaPixelY": 396,
+          "clearanceAboveFixedGuidePx": 0
+        },
+        {
+          "pose": 2,
+          "sourceRect": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "cellSize": [
+            443,
+            444
+          ],
+          "alphaBoundsGt0": [
+            2,
+            21,
+            443,
+            443
+          ],
+          "alphaBoundsGe16": [
+            9,
+            120,
+            443,
+            397
+          ],
+          "alphaBoundsGe128": [
+            11,
+            121,
+            443,
+            396
+          ],
+          "foregroundPixelsGe16": 36808,
+          "semiTransparentPixels": 49566,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 58,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 55,
+            "bottom": 0
+          },
+          "cellBoundaryContact": true,
+          "clearancePx": {
+            "left": 9,
+            "top": 120,
+            "right": 0,
+            "bottom": 47
+          },
+          "rgbaSha256": "dca77fc8b9583abd53416790578daa92860dce1724658e516e9a2088a891ce8a",
+          "lowestAlphaPixelY": 396,
+          "clearanceAboveFixedGuidePx": 0
+        },
+        {
+          "pose": 3,
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "cellSize": [
+            443,
+            444
+          ],
+          "alphaBoundsGt0": [
+            0,
+            21,
+            443,
+            444
+          ],
+          "alphaBoundsGe16": [
+            0,
+            73,
+            443,
+            349
+          ],
+          "alphaBoundsGe128": [
+            0,
+            74,
+            443,
+            348
+          ],
+          "foregroundPixelsGe16": 34577,
+          "semiTransparentPixels": 48432,
+          "borderPixelsGe16": {
+            "left": 64,
+            "top": 0,
+            "right": 59,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 57,
+            "top": 0,
+            "right": 47,
+            "bottom": 0
+          },
+          "cellBoundaryContact": true,
+          "clearancePx": {
+            "left": 0,
+            "top": 73,
+            "right": 0,
+            "bottom": 95
+          },
+          "rgbaSha256": "c54592f9469a4463f9adde4e06f28540fe75f9ad3b0f912faf13584e977505dd",
+          "lowestAlphaPixelY": 348,
+          "clearanceAboveFixedGuidePx": 48
+        },
+        {
+          "pose": 4,
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "cellSize": [
+            444,
+            444
+          ],
+          "alphaBoundsGt0": [
+            0,
+            41,
+            444,
+            444
+          ],
+          "alphaBoundsGe16": [
+            0,
+            64,
+            438,
+            320
+          ],
+          "alphaBoundsGe128": [
+            0,
+            65,
+            435,
+            319
+          ],
+          "foregroundPixelsGe16": 32907,
+          "semiTransparentPixels": 43857,
+          "borderPixelsGe16": {
+            "left": 62,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 49,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": true,
+          "clearancePx": {
+            "left": 0,
+            "top": 64,
+            "right": 6,
+            "bottom": 124
+          },
+          "rgbaSha256": "28de82334dedf1e7686cf619ce2535096e3639f413fe105940ba34bea52ca899",
+          "lowestAlphaPixelY": 319,
+          "clearanceAboveFixedGuidePx": 77
+        },
+        {
+          "pose": 5,
+          "sourceRect": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "cellSize": [
+            444,
+            443
+          ],
+          "alphaBoundsGt0": [
+            25,
+            0,
+            436,
+            443
+          ],
+          "alphaBoundsGe16": [
+            30,
+            52,
+            419,
+            354
+          ],
+          "alphaBoundsGe128": [
+            31,
+            53,
+            418,
+            352
+          ],
+          "foregroundPixelsGe16": 34394,
+          "semiTransparentPixels": 44289,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 30,
+            "top": 52,
+            "right": 25,
+            "bottom": 89
+          },
+          "rgbaSha256": "de7687244ad612732d95be5d2403233f4a339823b15f467febaa4eef06e57865",
+          "lowestAlphaPixelY": 353,
+          "clearanceAboveFixedGuidePx": 43
+        },
+        {
+          "pose": 6,
+          "sourceRect": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "cellSize": [
+            443,
+            443
+          ],
+          "alphaBoundsGt0": [
+            8,
+            11,
+            428,
+            411
+          ],
+          "alphaBoundsGe16": [
+            19,
+            80,
+            426,
+            385
+          ],
+          "alphaBoundsGe128": [
+            20,
+            81,
+            425,
+            384
+          ],
+          "foregroundPixelsGe16": 35630,
+          "semiTransparentPixels": 45618,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 19,
+            "top": 80,
+            "right": 17,
+            "bottom": 58
+          },
+          "rgbaSha256": "536ac5076e849cd87d07338f43fdfc5417d5d443fcafd928b4b3e1d9ca82cba4",
+          "lowestAlphaPixelY": 384,
+          "clearanceAboveFixedGuidePx": 12
+        },
+        {
+          "pose": 7,
+          "sourceRect": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "cellSize": [
+            443,
+            443
+          ],
+          "alphaBoundsGt0": [
+            11,
+            0,
+            442,
+            393
+          ],
+          "alphaBoundsGe16": [
+            16,
+            135,
+            411,
+            385
+          ],
+          "alphaBoundsGe128": [
+            16,
+            136,
+            409,
+            384
+          ],
+          "foregroundPixelsGe16": 37166,
+          "semiTransparentPixels": 49724,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 16,
+            "top": 135,
+            "right": 32,
+            "bottom": 58
+          },
+          "rgbaSha256": "f575dea51a748261c89d6d8c38814b24688a6d9522a70e101e08d94135e1c757",
+          "lowestAlphaPixelY": 384,
+          "clearanceAboveFixedGuidePx": 12
+        },
+        {
+          "pose": 8,
+          "sourceRect": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "cellSize": [
+            444,
+            443
+          ],
+          "alphaBoundsGt0": [
+            6,
+            0,
+            421,
+            403
+          ],
+          "alphaBoundsGe16": [
+            10,
+            136,
+            415,
+            385
+          ],
+          "alphaBoundsGe128": [
+            11,
+            137,
+            414,
+            384
+          ],
+          "foregroundPixelsGe16": 36795,
+          "semiTransparentPixels": 47237,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 10,
+            "top": 136,
+            "right": 29,
+            "bottom": 58
+          },
+          "rgbaSha256": "fae268881ab0ec20233aa223474efb07a214996269d4f219f31cfe8b08c8face",
+          "lowestAlphaPixelY": 384,
+          "clearanceAboveFixedGuidePx": 12
+        }
+      ],
+      "diagnosticEvidence": [
+        {
+          "path": "docs/references/v82-lurker-attack/lurker-attack-r1-contact.jpg",
+          "sha256": "67b4a238f3e107700e4070cd4497ba89643ce189e398412b02216daa0973be5a",
+          "bytes": 129156
+        },
+        {
+          "path": "docs/references/v82-lurker-attack/lurker-attack-r1-fixed-cell-review.gif",
+          "sha256": "a7b608d1a95d33434429a6b97bfc8e164e2a994196b49406d8ec4d088b2e4450",
+          "bytes": 277222
+        }
+      ]
+    },
+    {
+      "candidate": "r2",
+      "sourcePath": "docs/references/v82-lurker-attack/source-receipts/lurker-attack-r2-original.png",
+      "sourceSha256": "1e857a7166c7ee72f523a950c0ca0b3dafecd4e303a3b30182f1fd8112032c4d",
+      "generationId": "exec-1b07d3b9-8bf1-4d2f-be41-a7d309410c15",
+      "sourceSize": [
+        1774,
+        887
+      ],
+      "sourceBytes": 709324,
+      "sourceAlphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixelPercent": 83.5369,
+      "grid": [
+        4,
+        2
+      ],
+      "gridXEdges": [
+        0,
+        444,
+        887,
+        1330,
+        1774
+      ],
+      "gridYEdges": [
+        0,
+        444,
+        887
+      ],
+      "poseCount": 8,
+      "uniqueRgbaPoseCount": 8,
+      "cellBoundaryContactPoses": [],
+      "technicalCellIsolationPass": true,
+      "fixedDiagnosticGuideY": 393,
+      "guideMeaning": "Lowest alpha extent among all eight cells, NOT a measured anatomical foot/root or certified physical floor.",
+      "previewRegistration": "Nominal 444x444 cell origin fixed for every pose. No per-pose translation, rescale, foot alignment or fabricated in-between frames.",
+      "registrationReview": {
+        "initialClearancePx": 1,
+        "finalClearancePx": 37,
+        "interpretation": "Different lower extents are preserved as authored. A nonzero recovery offset requires an anatomical body-root and physical landing review; it is not silently repaired by grounding every frame.",
+        "physicalRootCalibrated": false
+      },
+      "visualFinding": "Candidate: eight legible isolated poses and a visible leap. Recovery poses 6-8 retain 35-37 px clearance above the fixed source extent guide, versus 0-1 px initially; physical registration remains unresolved. Whole-profile identity, rigid scale and runtime cadence remain unverified.",
+      "status": "attack-candidate-pending-whole-profile-review",
+      "accepted": false,
+      "runtimeIntegrated": false,
+      "canonExact": false,
+      "frames": [
+        {
+          "pose": 1,
+          "sourceRect": [
+            0,
+            0,
+            444,
+            444
+          ],
+          "cellSize": [
+            444,
+            444
+          ],
+          "alphaBoundsGt0": [
+            57,
+            136,
+            444,
+            434
+          ],
+          "alphaBoundsGe16": [
+            72,
+            182,
+            413,
+            393
+          ],
+          "alphaBoundsGe128": [
+            73,
+            183,
+            412,
+            392
+          ],
+          "foregroundPixelsGe16": 24108,
+          "semiTransparentPixels": 32678,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 72,
+            "top": 182,
+            "right": 31,
+            "bottom": 51
+          },
+          "rgbaSha256": "c180f18038be9938ca4b8391f047be4d685fc9c16bc429e414a57184a98cf6f4",
+          "lowestAlphaPixelY": 392,
+          "clearanceAboveFixedGuidePx": 1
+        },
+        {
+          "pose": 2,
+          "sourceRect": [
+            444,
+            0,
+            887,
+            444
+          ],
+          "cellSize": [
+            443,
+            444
+          ],
+          "alphaBoundsGt0": [
+            2,
+            146,
+            437,
+            444
+          ],
+          "alphaBoundsGe16": [
+            41,
+            153,
+            407,
+            394
+          ],
+          "alphaBoundsGe128": [
+            42,
+            154,
+            407,
+            392
+          ],
+          "foregroundPixelsGe16": 26804,
+          "semiTransparentPixels": 36346,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 41,
+            "top": 153,
+            "right": 36,
+            "bottom": 50
+          },
+          "rgbaSha256": "14c64803808f9bbb57584040f9c118a7a6bbbbd4a665838989dd3ce42611733a",
+          "lowestAlphaPixelY": 393,
+          "clearanceAboveFixedGuidePx": 0
+        },
+        {
+          "pose": 3,
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            444
+          ],
+          "cellSize": [
+            443,
+            444
+          ],
+          "alphaBoundsGt0": [
+            7,
+            114,
+            436,
+            444
+          ],
+          "alphaBoundsGe16": [
+            11,
+            117,
+            432,
+            336
+          ],
+          "alphaBoundsGe128": [
+            13,
+            118,
+            430,
+            335
+          ],
+          "foregroundPixelsGe16": 23273,
+          "semiTransparentPixels": 33422,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 11,
+            "top": 117,
+            "right": 11,
+            "bottom": 108
+          },
+          "rgbaSha256": "07cb010c9c7aa05c3c72892c65139ab817f5464ef3e3cab32d7882c86887e164",
+          "lowestAlphaPixelY": 335,
+          "clearanceAboveFixedGuidePx": 58
+        },
+        {
+          "pose": 4,
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            444
+          ],
+          "cellSize": [
+            444,
+            444
+          ],
+          "alphaBoundsGt0": [
+            24,
+            39,
+            444,
+            429
+          ],
+          "alphaBoundsGe16": [
+            42,
+            121,
+            436,
+            297
+          ],
+          "alphaBoundsGe128": [
+            44,
+            122,
+            432,
+            296
+          ],
+          "foregroundPixelsGe16": 21933,
+          "semiTransparentPixels": 30342,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 42,
+            "top": 121,
+            "right": 8,
+            "bottom": 147
+          },
+          "rgbaSha256": "7d1581102c88e657857125079f6f0d1fea2b5d96c3be0d96265d602f2ac15f1d",
+          "lowestAlphaPixelY": 296,
+          "clearanceAboveFixedGuidePx": 97
+        },
+        {
+          "pose": 5,
+          "sourceRect": [
+            0,
+            444,
+            444,
+            887
+          ],
+          "cellSize": [
+            444,
+            443
+          ],
+          "alphaBoundsGt0": [
+            96,
+            26,
+            415,
+            406
+          ],
+          "alphaBoundsGe16": [
+            102,
+            89,
+            405,
+            345
+          ],
+          "alphaBoundsGe128": [
+            102,
+            90,
+            404,
+            344
+          ],
+          "foregroundPixelsGe16": 22380,
+          "semiTransparentPixels": 31126,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 102,
+            "top": 89,
+            "right": 39,
+            "bottom": 98
+          },
+          "rgbaSha256": "509a6173de637919e71d3a19df82265626e10e4b9aa26c132b2f6e16555bc6e1",
+          "lowestAlphaPixelY": 344,
+          "clearanceAboveFixedGuidePx": 49
+        },
+        {
+          "pose": 6,
+          "sourceRect": [
+            444,
+            444,
+            887,
+            887
+          ],
+          "cellSize": [
+            443,
+            443
+          ],
+          "alphaBoundsGt0": [
+            2,
+            8,
+            405,
+            419
+          ],
+          "alphaBoundsGe16": [
+            75,
+            121,
+            384,
+            359
+          ],
+          "alphaBoundsGe128": [
+            76,
+            122,
+            383,
+            357
+          ],
+          "foregroundPixelsGe16": 22587,
+          "semiTransparentPixels": 30968,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 75,
+            "top": 121,
+            "right": 59,
+            "bottom": 84
+          },
+          "rgbaSha256": "445254d8bd14eaf52768c1c4e09afbca84245e7aa3cfee86478e4f1ee6ccff41",
+          "lowestAlphaPixelY": 358,
+          "clearanceAboveFixedGuidePx": 35
+        },
+        {
+          "pose": 7,
+          "sourceRect": [
+            887,
+            444,
+            1330,
+            887
+          ],
+          "cellSize": [
+            443,
+            443
+          ],
+          "alphaBoundsGt0": [
+            41,
+            0,
+            431,
+            409
+          ],
+          "alphaBoundsGe16": [
+            87,
+            162,
+            385,
+            359
+          ],
+          "alphaBoundsGe128": [
+            87,
+            162,
+            384,
+            358
+          ],
+          "foregroundPixelsGe16": 22946,
+          "semiTransparentPixels": 32974,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 87,
+            "top": 162,
+            "right": 58,
+            "bottom": 84
+          },
+          "rgbaSha256": "edf405c780bc87bdab265086149fa3fd6be723c7440f6fc2163980c686fb0e3d",
+          "lowestAlphaPixelY": 358,
+          "clearanceAboveFixedGuidePx": 35
+        },
+        {
+          "pose": 8,
+          "sourceRect": [
+            1330,
+            444,
+            1774,
+            887
+          ],
+          "cellSize": [
+            444,
+            443
+          ],
+          "alphaBoundsGt0": [
+            1,
+            66,
+            416,
+            403
+          ],
+          "alphaBoundsGe16": [
+            48,
+            155,
+            378,
+            357
+          ],
+          "alphaBoundsGe128": [
+            49,
+            156,
+            378,
+            355
+          ],
+          "foregroundPixelsGe16": 23101,
+          "semiTransparentPixels": 30718,
+          "borderPixelsGe16": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "borderPixelsGe128": {
+            "left": 0,
+            "top": 0,
+            "right": 0,
+            "bottom": 0
+          },
+          "cellBoundaryContact": false,
+          "clearancePx": {
+            "left": 48,
+            "top": 155,
+            "right": 66,
+            "bottom": 86
+          },
+          "rgbaSha256": "6c43fe19871261522e7df2d1aa53e482876f37d95795b1fd77b48083ad368807",
+          "lowestAlphaPixelY": 356,
+          "clearanceAboveFixedGuidePx": 37
+        }
+      ],
+      "diagnosticEvidence": [
+        {
+          "path": "docs/references/v82-lurker-attack/lurker-attack-r2-contact.jpg",
+          "sha256": "4ee474b48d3deebe6eb2b9003a6bbad442fb61102ac2d4fd9b1b8807c7c8f4d4",
+          "bytes": 103549
+        },
+        {
+          "path": "docs/references/v82-lurker-attack/lurker-attack-r2-fixed-cell-review.gif",
+          "sha256": "83392c0bad7e508b995a3ffd3487a0738a84d0bfe5576dcfa50b9ddb405734d3",
+          "bytes": 201912
+        }
+      ]
+    }
+  ]
+}

@@ -3,12 +3,15 @@ import assert from 'node:assert/strict';
 
 import {
   HUB_ANNEX_BY_ID_V71,
+  HUB_ANNEX_MODULE_ART_V82,
   HUB_ANNEX_STATE_KEY_V71,
   HUB_ANNEX_TRANSITION_SECONDS_V71,
   HUB_DECKS,
   PROVING_GROUND_FIRING_PAD_V81,
   PROVING_GROUND_TARGETS_V81,
   PROVING_GROUND_STATE_KEY_V81,
+  PROVING_GROUND_ASSETS_V81,
+  PROVING_GROUND_TARGET_SUPPORT_V82,
   HubGame,
   createHubCommercialStateV71
 } from '../src/hub-v81-runtime.js';
@@ -92,6 +95,50 @@ function createHub(options = {}, trace = { texts: [], drawImages: [] }) {
 }
 
 const proving = HUB_ANNEX_BY_ID_V71['proving-ground'];
+
+test('les neuf cibles reposent sur des supports muraux bitmap continus peints derrière leurs sprites sans modifier le jeu', () => withRuntime(() => {
+  const trace = { texts: [], drawImages: [] };
+  const { hub } = createHub({}, trace);
+  hub.start(provingParentState());
+  hub.activateAnnexV71(proving);
+  hub.ensureProvingGroundAssetsV81();
+  const before = JSON.stringify({ targets: PROVING_GROUND_TARGETS_V81, colliders: proving.colliders, session: hub.provingGroundStateV81, player: hub.player });
+  trace.drawImages.length = 0;
+  hub.drawProvingTargetsV81(hub.ctx);
+  const after = JSON.stringify({ targets: PROVING_GROUND_TARGETS_V81, colliders: proving.colliders, session: hub.provingGroundStateV81, player: hub.player });
+  assert.equal(after, before, 'rendu seulement : pas de mutation de cible, collision, session ou joueur');
+  const art = HUB_ANNEX_MODULE_ART_V82;
+  const layout = PROVING_GROUND_TARGET_SUPPORT_V82;
+  const firstTargetIndex = trace.drawImages.findIndex(([image]) => image.currentSrc === PROVING_GROUND_ASSETS_V81.target.src);
+  assert.ok(firstTargetIndex > 0);
+  assert.equal(trace.drawImages.slice(firstTargetIndex).some(([image]) => [art.ladder, art.catwalk].includes(image.currentSrc)), false, 'aucun support ne passe devant une cible');
+  const brackets = trace.drawImages.filter(([image]) => image.currentSrc === art.catwalk);
+  assert.equal(brackets.length, 9);
+  for (const target of PROVING_GROUND_TARGETS_V81) {
+    const centerX = target.bounds.x + target.bounds.w / 2;
+    const bracket = brackets.find((draw) => Math.abs(draw[5] + draw[7] / 2 - centerX) < 0.001);
+    assert.ok(bracket, target.id);
+    assert.equal(bracket[7], layout.bracketWidth);
+    const minFootY = target.bounds.y + target.bounds.h * 441 / 512;
+    const maxFootY = target.bounds.y + target.bounds.h * 454 / 512;
+    assert.ok(bracket[6] <= minFootY && bracket[6] + bracket[8] >= maxFootY, 'le support rejoint le pied alpha de chacun des huit états');
+    const rails = trace.drawImages.filter(([image, , , , , x, , width]) => image.currentSrc === art.ladder && Math.abs(x + width / 2 - centerX) < 0.001);
+    assert.ok(rails.length > 0);
+    assert.equal(rails[0][6], 64);
+    for (let index = 0; index < rails.length; index += 1) {
+      const draw = rails[index];
+      assert.equal(draw[7], 6);
+      assert.ok(Math.abs(draw[3] / draw[4] - draw[7] / draw[8]) < 0.001, 'ratio bitmap conservé');
+      if (index) assert.ok(Math.abs(rails[index - 1][6] + rails[index - 1][8] - draw[6]) < 0.001, 'rail continu');
+    }
+    assert.ok(Math.abs(rails.at(-1)[6] + rails.at(-1)[8] - bracket[6] - bracket[8]) < 0.001, 'rail relié au socle');
+  }
+  trace.drawImages.length = 0;
+  hub.draw();
+  const firstRenderedTarget = trace.drawImages.findIndex(([image]) => image.currentSrc === PROVING_GROUND_ASSETS_V81.target.src);
+  const lastRearMachine = trace.drawImages.findLastIndex(([image]) => [art.pipe, art.provingCeiling].includes(image.currentSrc));
+  assert.ok(lastRearMachine >= 0 && firstRenderedTarget > lastRearMachine, 'les conduites et la poutre du mur arrière ne cachent pas les silhouettes actives');
+}));
 
 function provingParentState(commercialState = createHubCommercialStateV71()) {
   const deck = HUB_DECKS.findIndex((entry) => entry.id === proving.parentDeck);

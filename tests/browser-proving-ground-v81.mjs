@@ -14,7 +14,9 @@ const wait = (milliseconds) => new Promise((done) => setTimeout(done, millisecon
 const expectedAssets = Object.freeze({
   '/assets/openai/hub/proving-ground/v81/proving-ground-target-cycle-v81.png': Object.freeze([2048, 1024]),
   '/assets/openai/hub/proving-ground/v81/proving-ground-impact-cycle-v81.png': Object.freeze([2048, 1024]),
-  '/assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png': Object.freeze([1024, 1024])
+  '/assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png': Object.freeze([1024, 1024]),
+  '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp': Object.freeze([1920, 720]),
+  '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png': Object.freeze([1536, 450])
 });
 const allowedPlayerSheets = new Set([
   'player.echo9-marine.locomotion',
@@ -28,7 +30,7 @@ await mkdir(outputDir, { recursive: true });
 
 const report = {
   ok: false,
-  schema: 81,
+  schema: 82,
   target: targetKind,
   baseUrl: baseUrl.href,
   startedAt: new Date().toISOString(),
@@ -239,6 +241,13 @@ async function tap(selector) {
 }
 
 async function capture(name) {
+  if (!name.startsWith('failure-')) {
+    await untilPage(() => {
+      const hub = globalThis.__ATF_HUB__;
+      return hub?.currentAnnexV71?.()?.id !== 'proving-ground'
+        || hub.getAssetReport().provingGroundEnvironmentReadyV82 === true;
+    }, 'mur et poutre V82 chargés avant capture', [], 30000);
+  }
   const jpeg = name.endsWith('.jpg');
   const shot = await command('Page.captureScreenshot', {
     format: jpeg ? 'jpeg' : 'png',
@@ -392,9 +401,11 @@ async function reloadToTitle() {
 }
 
 async function decodeProvingAssets() {
-  return callPage(async () => {
+  return callPage(async (expectedPaths) => {
     const hub = globalThis.__ATF_HUB__;
-    const entries = [...hub.provingGroundImagesV81.values()];
+    const environment = [...(hub.annexModularImagesV72?.entries() || [])]
+      .filter(([path]) => expectedPaths.includes(path)).map(([, image]) => image);
+    const entries = [...hub.provingGroundImagesV81.values(), ...environment];
     await Promise.all(entries.map(async (image) => {
       if (typeof image.decode === 'function') await image.decode();
     }));
@@ -407,7 +418,7 @@ async function decodeProvingAssets() {
         height: image.naturalHeight
       };
     }).sort((left, right) => left.path.localeCompare(right.path));
-  });
+  }, Object.keys(expectedAssets));
 }
 
 async function fireCurrentTarget() {
@@ -539,7 +550,7 @@ try {
       const response = message.params.response;
       const entry = { status: response.status, url: response.url, mimeType: response.mimeType };
       if (response.status >= 400) httpErrors.push(entry);
-      if (response.url.includes('/assets/openai/hub/proving-ground/v81/')) provingResponses.push(entry);
+      if (/\/assets\/openai\/hub\/proving-ground\/v8[12]\//u.test(response.url)) provingResponses.push(entry);
     }
   });
 
@@ -594,8 +605,49 @@ try {
   assert.equal(report.checks.pageHealth.overlay, false);
   assert.equal(report.checks.pageHealth.titleVisible, true);
   assert.equal(report.checks.pageHealth.startFocus, 'title-start');
-  assert.match(report.checks.pageHealth.title, /v81/iu);
-  assert.match(report.checks.pageHealth.release || '', /^81\./u);
+  assert.match(report.checks.pageHealth.title, /v82/iu);
+  assert.match(report.checks.pageHealth.release || '', /^82\./u);
+  report.checks.titleLayersReady = await untilPage(async () => {
+    const root = document.querySelector('#title-scene-v79');
+    const scene = globalThis.__ATF_V61__?.titleScreen?.scene;
+    const modelImages = scene?.model?.layers?.filter((layer) => layer.renderer === 'image') || [];
+    const layers = [...(root?.querySelectorAll('[data-renderer="image"]') || [])];
+    const fallback = document.querySelector('#title-background-fallback-v61');
+    const images = layers.map((layer) => layer.querySelector('img'));
+    if (!root || root.hidden || root.dataset.status !== 'ready' || root.dataset.degraded !== 'false'
+      || !fallback?.hidden || modelImages.length === 0 || layers.length !== modelImages.length
+      || !layers.every((layer) => layer.dataset.assetStatus === 'ready' && !layer.hidden)
+      || !images.every((image) => image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0)) return false;
+    const preset = root.dataset.preset;
+    const mode = root.dataset.mode;
+    await Promise.all(images.map((image) => image.decode()));
+    await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
+    // Decode and composition must belong to the still-current preset, not detached layers.
+    if (root.dataset.preset !== preset || root.dataset.mode !== mode || root.hidden
+      || root.dataset.degraded !== 'false' || !fallback.hidden
+      || !layers.every((layer) => layer.parentElement === root && layer.dataset.assetStatus === 'ready' && !layer.hidden)) return false;
+    const procedural = [...root.querySelectorAll('[data-renderer="procedural"]')];
+    const visibleProcedural = procedural.filter((layer) => !layer.hidden);
+    if (visibleProcedural.some((layer) => layers.some((imageLayer) => imageLayer.dataset.fallbackLayerId === layer.dataset.layerId))) return false;
+    return {
+      preset,
+      mode,
+      degraded: root.dataset.degraded,
+      imageCount: layers.length,
+      decodedCount: images.length,
+      fallbackVisible: !fallback.hidden,
+      proceduralFallbacks: visibleProcedural.map((layer) => layer.dataset.layerId),
+      compositionFrames: 2,
+      images: layers.map((layer, index) => ({
+        assetId: layer.dataset.assetId,
+        runtimeId: layer.dataset.runtimeId,
+        status: layer.dataset.assetStatus,
+        path: new URL(images[index].currentSrc || images[index].src, location.href).pathname,
+        width: images[index].naturalWidth,
+        height: images[index].naturalHeight
+      }))
+    };
+  }, 'toutes les images du preset titre décodées et composées sans fallback de remplacement', [], 45000);
   await capture('01-title-v81.jpg');
 
   await enterFreshHubFromTitle();
@@ -693,10 +745,12 @@ try {
   assert.equal(report.checks.enteredAnnex.activeAnnexId, 'proving-ground');
   assert.equal(report.checks.enteredAnnex.proving.phase, 'idle');
   assert.equal(Boolean(report.checks.enteredAnnex.operations?.nextOperationCharge), false);
-  await untilPage(() => globalThis.__ATF_HUB__.getAssetReport().provingGroundAssetsReadyV81 === 3,
-    'trois images Proving Ground prêtes', [], 30000);
+  report.checks.provingEnvironmentReadyV82 = await untilPage(() => {
+    const assets = globalThis.__ATF_HUB__.getAssetReport();
+    return assets.provingGroundAssetsReadyV81 === 3 && assets.provingGroundEnvironmentReadyV82 === true;
+  }, 'trois images V81 et deux couches V82 prêtes', [], 30000);
   report.checks.assets = await decodeProvingAssets();
-  assert.equal(report.checks.assets.length, 3);
+  assert.equal(report.checks.assets.length, 5);
   for (const asset of report.checks.assets) {
     const expected = expectedAssets[asset.path];
     assert.ok(expected, 'Asset Proving Ground inattendu: ' + asset.path);

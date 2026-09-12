@@ -1,0 +1,217 @@
+{
+  "schema": 82,
+  "contractId": "proving-ground-independent-layers-v82",
+  "provider": "OpenAI ImageGen",
+  "toolMode": "built-in",
+  "rightsPolicy": "original-ai-generated-no-official-copy",
+  "canonExact": false,
+  "perspective": "strict-side-on-orthographic",
+  "normalizationPolicy": "crop-resize-lossless-packaging-only; alpha retained; RGB cleared only at alpha=0",
+  "pillowVersion": "12.3.0",
+  "assets": [
+    {
+      "id": "proving-ground-wall-v82",
+      "kind": "wall",
+      "source": "docs/references/v82-proving-ground-art/source-receipts/exec-5a4477ce-afa1-41fe-ab1b-1e05f088712c.png",
+      "sourceSha256": "f91a095a53e411709c8e52d6c22b7f010b34f714f0212d90970b045b12ced016",
+      "sourceMetrics": {
+        "mode": "RGB",
+        "dimensions": [
+          2048,
+          768
+        ],
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1572864,
+        "contentBounds": [
+          0,
+          0,
+          2048,
+          768
+        ],
+        "solidBounds": [
+          0,
+          0,
+          2048,
+          768
+        ],
+        "hiddenRgbPixels": 0,
+        "nearWhiteOpaquePixels": 856,
+        "nearWhiteOpaqueRatio": 0.00054423,
+        "borderPixels": 39228,
+        "opaqueBorderPixels": 39228,
+        "opaqueNearWhiteBorderPixels": 0
+      },
+      "receiptId": "exec-5a4477ce-afa1-41fe-ab1b-1e05f088712c",
+      "output": "assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp",
+      "outputSha256": "62c942325af5bb94f2ceae4018539a8ce2191c616fc5a688a42b87f3ae076160",
+      "outputBytes": 1179882,
+      "transform": {
+        "sourceCropBounds": [
+          0,
+          0,
+          2048,
+          768
+        ],
+        "cropPaddingPx": 0,
+        "resampler": "Pillow LANCZOS",
+        "preserveAspectRatio": true,
+        "sourceCropDimensions": [
+          2048,
+          768
+        ],
+        "pivot": {
+          "role": "background-top-left",
+          "pixels": [
+            0,
+            0
+          ],
+          "normalized": [
+            0,
+            0
+          ]
+        }
+      },
+      "metrics": {
+        "mode": "RGB",
+        "dimensions": [
+          1920,
+          720
+        ],
+        "alphaMin": 255,
+        "alphaMax": 255,
+        "transparentPixels": 0,
+        "partialAlphaPixels": 0,
+        "opaquePixels": 1382400,
+        "contentBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "solidBounds": [
+          0,
+          0,
+          1920,
+          720
+        ],
+        "hiddenRgbPixels": 0,
+        "nearWhiteOpaquePixels": 745,
+        "nearWhiteOpaqueRatio": 0.00053892,
+        "borderPixels": 36764,
+        "opaqueBorderPixels": 36764,
+        "opaqueNearWhiteBorderPixels": 0
+      },
+      "alphaPolicy": "opaque",
+      "qa": {
+        "losslessPixels": true,
+        "whiteBackgroundParasite": false,
+        "hiddenRgbParasite": false
+      }
+    },
+    {
+      "id": "proving-ground-ceiling-beam-v82",
+      "kind": "ceiling-beam",
+      "source": "docs/references/v82-proving-ground-art/source-receipts/exec-af3b58c0-eedc-4d23-b894-421aff748bc6.png",
+      "sourceSha256": "1475549b84483468f952b549a1c29e551598700e4d2cd6f9b2308329ddc985bb",
+      "sourceMetrics": {
+        "mode": "RGBA",
+        "dimensions": [
+          2172,
+          724
+        ],
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentPixels": 1158214,
+        "partialAlphaPixels": 412131,
+        "opaquePixels": 2183,
+        "contentBounds": [
+          21,
+          70,
+          2149,
+          682
+        ],
+        "solidBounds": [
+          29,
+          259,
+          2145,
+          457
+        ],
+        "hiddenRgbPixels": 0,
+        "nearWhiteOpaquePixels": 4933,
+        "nearWhiteOpaqueRatio": 0.00313699,
+        "borderPixels": 40348,
+        "opaqueBorderPixels": 0,
+        "opaqueNearWhiteBorderPixels": 0
+      },
+      "receiptId": "exec-af3b58c0-eedc-4d23-b894-421aff748bc6",
+      "output": "assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png",
+      "outputSha256": "86cb4a1d9ea2e47edf43a8dcbe0744fe2977cf55dfe7fd22f686fe5634d000f4",
+      "outputBytes": 373593,
+      "transform": {
+        "sourceCropBounds": [
+          13,
+          62,
+          2157,
+          690
+        ],
+        "cropPaddingPx": 8,
+        "resampler": "Pillow LANCZOS",
+        "preserveAspectRatio": true,
+        "sourceCropDimensions": [
+          2144,
+          628
+        ],
+        "pivot": {
+          "role": "ceiling-mount-top-center",
+          "pixels": [
+            768.0,
+            141
+          ],
+          "normalized": [
+            0.5,
+            0.31333333
+          ]
+        }
+      },
+      "metrics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1536,
+          450
+        ],
+        "alphaMin": 0,
+        "alphaMax": 255,
+        "transparentPixels": 477416,
+        "partialAlphaPixels": 211482,
+        "opaquePixels": 2302,
+        "contentBounds": [
+          6,
+          6,
+          1530,
+          444
+        ],
+        "solidBounds": [
+          11,
+          141,
+          1528,
+          283
+        ],
+        "hiddenRgbPixels": 0,
+        "nearWhiteOpaquePixels": 2434,
+        "nearWhiteOpaqueRatio": 0.00352141,
+        "borderPixels": 15824,
+        "opaqueBorderPixels": 0,
+        "opaqueNearWhiteBorderPixels": 0
+      },
+      "alphaPolicy": "generated-alpha-preserved",
+      "qa": {
+        "losslessPixels": true,
+        "whiteBackgroundParasite": false,
+        "hiddenRgbParasite": false
+      }
+    }
+  ]
+}

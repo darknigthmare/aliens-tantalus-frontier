@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   HUB_ANNEX_ART_ROLES_V71,
+  HUB_ANNEX_MODULE_ART_V82,
   HUB_ANNEXES_V71,
   HUB_ANNEX_STATE_KEY_V71,
   HUB_ANNEX_TRANSITION_SECONDS_V71,
@@ -27,6 +28,9 @@ class MockImage {
     if (value.endsWith('/echo9-marine-locomotion-sheet.png')) {
       this.naturalWidth = 1024;
       this.naturalHeight = 1024;
+    } else if (value.endsWith('/proving-ground-ceiling-beam-v82.png')) {
+      this.naturalWidth = 1536;
+      this.naturalHeight = 450;
     } else if (value.endsWith('/prop.webp')) {
       this.naturalWidth = 640;
       this.naturalHeight = 512;
@@ -579,7 +583,9 @@ test('le foreground est un prop ancré de taille humaine et tous les accessoires
     assert.ok(foreground[7] <= 240 && foreground[8] <= 212, 'pas d’objet géant étiré plein-écran');
     assert.ok(Math.abs(foreground[3] / foreground[4] - foreground[7] / foreground[8]) < 0.001, 'aspect conservé');
     for (const prop of annex.props) {
-      const asset = prop.asset || annex.art[prop.artRole];
+      const asset = annex.id === 'proving-ground' && prop.role === 'ceiling-service'
+        ? HUB_ANNEX_MODULE_ART_V82.provingCeiling
+        : prop.asset || annex.art[prop.artRole];
       assert.ok(asset, `aucun bitmap: ${prop.id}`);
       assert.ok(trace.drawImages.some(([image]) => image?.currentSrc === asset), `non dessiné: ${prop.id}`);
       if (prop.collidable) assert.ok(annex.colliders.some((entry) => entry.x === prop.x && entry.y === prop.y && entry.w === prop.w && entry.h === prop.h), `collider fantôme: ${prop.id}`);
@@ -601,6 +607,102 @@ test('le joueur et les PNJ humains du hub partagent le même étalon de rendu sa
   const npcDraws = trace.drawImages.filter(([image]) => npcSources.has(image));
   assert.ok(npcDraws.length >= 4);
   for (const npcDraw of npcDraws) assert.equal(npcDraw[8], playerDraw[8]);
+}));
+
+test('les passerelles bitmap recouvrent exactement les surfaces physiques et les échelles excluent leurs ouvertures blanches', () => withRuntime(() => {
+  const art = HUB_ANNEX_MODULE_ART_V82;
+  for (const annex of HUB_ANNEXES_V71) {
+    const trace = { texts: [], drawImages: [] };
+    const { hub } = createHub({}, trace);
+    hub.ensureAnnexAssetsV71(annex.id);
+    trace.drawImages.length = 0;
+    hub.drawAnnexGeometryV71(hub.ctx, annex);
+    const decks = trace.drawImages.filter(([image]) => image.currentSrc === art.catwalk);
+    const platform = annex.platforms.find((entry) => entry.role === 'catwalk');
+    assert.ok(decks.length > 1, annex.id);
+    assert.equal(decks[0][5], platform.x);
+    assert.ok(Math.abs(decks.at(-1)[5] + decks.at(-1)[7] - platform.x - platform.w) < 0.001);
+    for (const draw of decks) {
+      assert.equal(draw.length, 9);
+      assert.equal(draw[2], art.crops.catwalkDeck[1]);
+      assert.equal(draw[4], art.crops.catwalkDeck[3] - art.crops.catwalkDeck[1]);
+      assert.equal(draw[6], platform.y);
+      assert.equal(draw[8], platform.h);
+      assert.ok(Math.abs(draw[3] / draw[4] - draw[7] / draw[8]) < 0.001);
+    }
+    const ladder = annex.ladders[0];
+    const ladderDraws = trace.drawImages.filter(([image]) => image.currentSrc === art.ladder);
+    const rails = ladderDraws.filter((draw) => draw[6] === ladder.top && draw[8] === ladder.bottom - ladder.top);
+    assert.equal(rails.length, 2);
+    assert.deepEqual(rails.map((draw) => draw[5]), [ladder.x, ladder.x + ladder.w - 7]);
+    assert.ok(ladderDraws.every((draw) => draw.length === 9 && draw[1] >= 53 && draw[1] + draw[3] <= 109 && draw[2] + draw[4] <= 172));
+    const posts = ladderDraws.filter((draw) => draw[6] === platform.y + platform.h);
+    assert.equal(posts.length, 2);
+    assert.ok(posts.every((draw) => draw[6] + draw[8] === annex.world.floorY));
+  }
+}));
+
+test('les accessoires suspendus utilisent les pièces murales propres et les nervures rejoignent le plafond sans base flottante', () => withRuntime(() => {
+  const art = HUB_ANNEX_MODULE_ART_V82;
+  for (const annex of HUB_ANNEXES_V71) {
+    const trace = { texts: [], drawImages: [] };
+    const { hub } = createHub({}, trace);
+    hub.ensureAnnexAssetsV71(annex.id);
+    trace.drawImages.length = 0;
+    hub.drawAnnexModularPropsV72(hub.ctx, annex);
+    const pipeDraws = trace.drawImages.filter(([image]) => image.currentSrc === art.pipe);
+    assert.ok(pipeDraws.length > 2);
+    assert.ok(pipeDraws.every((draw) => draw.length === 9 && draw[2] + draw[4] <= art.crops.pipeBody[3]));
+    for (const collider of annex.colliders.filter((entry) => entry.role === 'structure')) {
+      const segments = pipeDraws.filter((draw) => Math.abs(draw[5] + draw[7] / 2 - collider.x - collider.w / 2) < 0.001);
+      assert.equal(segments[0][6], 0, annex.id);
+      assert.equal(segments.at(-1)[6], collider.y);
+      assert.equal(segments.at(-1)[6] + segments.at(-1)[8], collider.y + collider.h);
+      for (let index = 1; index < segments.length; index += 1) {
+        assert.ok(Math.abs(segments[index - 1][6] + segments[index - 1][8] - segments[index][6]) < 0.001, `${annex.id}: nervure interrompue`);
+      }
+    }
+    for (const prop of annex.props.filter((entry) => ['ceiling-service', 'wall-service', 'navigation'].includes(entry.role))) {
+      if (annex.id === 'proving-ground' && prop.role === 'ceiling-service') continue;
+      const source = prop.role === 'ceiling-service' ? art.crops.ceilingRaceway : art.crops.wallScreen;
+      const draw = trace.drawImages.find(([image, , , , , x]) => image.currentSrc === prop.asset && Math.abs(x - prop.x) < 0.001);
+      assert.ok(draw, prop.id);
+      assert.deepEqual(draw.slice(1, 5), [source[0], source[1], source[2] - source[0], source[3] - source[1]]);
+      assert.equal(draw[6], prop.y);
+      assert.ok(draw[8] < prop.h, `${prop.id}: pas de pieds ni de boucles opaques suspendus`);
+    }
+  }
+}));
+
+test('Proving Ground utilise le mur sans fausses cibles et la poutre indépendants, y compris si un module ancien tarde à charger', () => withRuntime(() => {
+  const art = HUB_ANNEX_MODULE_ART_V82;
+  const annex = HUB_ANNEXES_V71.find((entry) => entry.id === 'proving-ground');
+  const trace = { texts: [], drawImages: [] };
+  const { hub } = createHub({}, trace);
+  hub.start(parentState(annex));
+  hub.activateAnnexV71(annex);
+  trace.drawImages.length = 0;
+  hub.draw();
+  assert.ok(trace.drawImages.some(([image]) => image.currentSrc === art.provingWall));
+  assert.ok(trace.drawImages.some(([image]) => image.currentSrc === art.provingCeiling));
+  const ceilingDraws = trace.drawImages.filter(([image]) => image.currentSrc === art.provingCeiling);
+  const solid = art.crops.provingCeilingSolid;
+  for (const draw of ceilingDraws) {
+    const scale = draw[8] / draw[4];
+    assert.equal(draw[1], solid[0]);
+    assert.ok(Math.abs(draw[6] + solid[1] * scale) < 0.001, 'la matière du plafond rejoint y=0, pas la marge alpha');
+    assert.ok(Math.abs((solid[3] - solid[1]) * scale - 64) < 0.001, 'hauteur physique de la poutre : 64 px');
+  }
+  assert.equal(trace.drawImages.some(([image]) => [annex.art.far, annex.art.mid].includes(image.currentSrc)), false);
+  assert.equal(hub.getAssetReport().provingGroundEnvironmentReadyV82, true);
+
+  hub.annexModularImagesV72.get(art.pipe).complete = false;
+  hub.annexModularImagesV72.get(art.provingWall).complete = false;
+  trace.drawImages.length = 0;
+  hub.draw();
+  assert.equal(hub.getAssetReport().provingGroundEnvironmentReadyV82, false);
+  assert.equal(trace.drawImages.some(([image]) => [annex.art.far, annex.art.mid].includes(image.currentSrc)), false, 'pas de retour aux cibles peintes pendant le chargement');
+  assert.ok(trace.drawImages.some(([image]) => image.currentSrc === art.provingCeiling), 'la poutre ne dépend pas du chargement de la vieille conduite');
 }));
 
 test('le facing Echo-9 survit à une persistance et une reprise complète du hub', () => withRuntime(() => {

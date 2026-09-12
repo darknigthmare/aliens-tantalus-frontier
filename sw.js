@@ -1,4 +1,4 @@
-const CACHE = 'atf-v81-proving-ground-shell-1';
+const CACHE = 'atf-v82-modular-proving-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
@@ -83,6 +83,8 @@ const CORE = [
   '/assets/openai/bioforge/v80/props/bioforge-tissue-printer-v80.png',
   '/assets/openai/bioforge/v80/props/bioforge-bulkhead-cycle-v80.png',
   '/assets/openai/bioforge/v80/vfx/bioforge-purge-cycle-v80.png',
+  '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp',
+  '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png',
   '/assets/openai/hub/proving-ground/v81/proving-ground-target-cycle-v81.png',
   '/assets/openai/hub/proving-ground/v81/proving-ground-impact-cycle-v81.png',
   '/assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png',
@@ -317,6 +319,7 @@ const CORE = [
 const SHELL = Object.freeze(CORE.filter((path) => (
   (!path.startsWith('/assets/') || path.startsWith('/assets/openai/pwa/')
     || path.startsWith('/assets/openai/bioforge/v80/')
+    || path.startsWith('/assets/openai/hub/proving-ground/v82/')
     || path.startsWith('/assets/openai/hub/proving-ground/v81/')
     || path.startsWith('/assets/openai/sprites/normalized/player/')
     || path.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v81/')

@@ -130,6 +130,10 @@ docs/references/V81_*
 docs/references/V81_*/**
 docs/references/v81-*
 docs/references/v81-*/**
+docs/references/V82_*
+docs/references/V82_*/**
+docs/references/v82-*
+docs/references/v82-*/**
 scripts/__pycache__
 scripts/__pycache__/**
 .qa

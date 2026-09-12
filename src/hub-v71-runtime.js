@@ -22,6 +22,28 @@ export const HUB_ANNEX_STATE_KEY_V71 = 'hubCommercialV71';
 export const HUB_ANNEX_TRANSITION_SECONDS_V71 = 0.42;
 export const HUB_ANNEX_ART_ROLES_V71 = Object.freeze(['far', 'mid', 'prop', 'foreground', 'door']);
 
+// These small source regions are separate authored pieces inside legacy PNGs.
+// Their surrounding sheets contain detached bases or opaque white openings;
+// drawing the whole sheet would put those defects directly in the walking lane.
+export const HUB_ANNEX_MODULE_ART_V82 = Object.freeze({
+  catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
+  ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
+  pipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
+  provingWall: '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp',
+  provingCeiling: '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png',
+  crops: Object.freeze({
+    catwalkDeck: Object.freeze([40, 43, 228, 70]),
+    ladderLeft: Object.freeze([53, 4, 62, 172]),
+    ladderRight: Object.freeze([100, 4, 109, 172]),
+    ladderRung: Object.freeze([62, 36, 100, 40]),
+    pipeBody: Object.freeze([43, 4, 107, 178]),
+    pipeShaft: Object.freeze([49, 34, 99, 120]),
+    ceilingRaceway: Object.freeze([4, 4, 186, 29]),
+    wallScreen: Object.freeze([25, 8, 183, 99]),
+    provingCeilingSolid: Object.freeze([11, 141, 1528, 283])
+  })
+});
+
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
 const GRAVITY = 1900;
@@ -244,7 +266,10 @@ export class HubGame extends HubGameV62 {
         createImage(annex.art[role])
       ])));
     }
-    for (const asset of [...annex.props.map((prop) => prop.asset), '/assets/openai/metroidvania/props/maintenance-pipe.png'].filter(Boolean)) {
+    const provingAssets = annex.id === 'proving-ground'
+      ? [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
+      : [];
+    for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets].filter(Boolean)) {
       if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
     }
     return this.annexImagesV71.get(annex.id);
@@ -834,6 +859,8 @@ export class HubGame extends HubGameV62 {
       activeAnnexAssetsReadyV71: activeGroup ? [...activeGroup.values()].filter(imageReady).length : 0,
       annexSharedModularAssetsLoadedV72: this.annexModularImagesV72?.size || 0,
       annexSharedModularAssetsReadyV72: modularReady,
+      provingGroundEnvironmentReadyV82: [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
+        .every((asset) => imageReady(this.annexModularImagesV72?.get(asset))),
       totalReadyAssetCount: (report.totalReadyAssetCount || 0) + ready + modularReady
     };
   }
@@ -926,8 +953,14 @@ export class HubGame extends HubGameV62 {
     ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     ctx.fillStyle = '#020606';
     ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
-    this.drawAnnexLayerV71(ctx, images.get('far'), 0.18, 1);
-    this.drawAnnexLayerV71(ctx, images.get('mid'), 1, 0.92);
+    if (annex.id === 'proving-ground') {
+      // The old painted range has false targets and a perspective floor. Only
+      // the orthographic V82 wall belongs behind the actual physical targets.
+      this.drawAnnexLayerV71(ctx, this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingWall), 0.18, 1);
+    } else {
+      this.drawAnnexLayerV71(ctx, images.get('far'), 0.18, 1);
+      this.drawAnnexLayerV71(ctx, images.get('mid'), 1, 0.92);
+    }
     ctx.save();
     ctx.translate(-this.annexCameraV71.x, 0);
     this.drawAnnexGeometryV71(ctx, annex);
@@ -952,17 +985,52 @@ export class HubGame extends HubGameV62 {
   }
 
   drawAnnexGeometryV71(ctx, annex) {
+    const moduleArt = HUB_ANNEX_MODULE_ART_V82;
+    const deckImage = this.annexModularImagesV72.get(moduleArt.catwalk);
+    const ladderImage = this.annexModularImagesV72.get(moduleArt.ladder);
     ctx.fillStyle = 'rgba(4, 10, 9, .8)';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, annex.world.floorHeight);
     ctx.fillStyle = '#789080';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, 4);
     for (const platform of annex.platforms.filter((entry) => entry.role !== 'floor')) {
-      ctx.fillStyle = '#273832';
-      ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
-      ctx.fillStyle = '#789080';
-      ctx.fillRect(platform.x, platform.y, platform.w, 4);
+      // The visible walking edge uses precisely the physical platform bounds.
+      // Crop only the truss: the legacy railing has opaque white openings.
+      if (imageReady(deckImage)) {
+        const source = moduleArt.crops.catwalkDeck;
+        const scale = platform.h / (source[3] - source[1]);
+        const tileWidth = (source[2] - source[0]) * scale;
+        for (let x = platform.x; x < platform.x + platform.w; x += tileWidth) {
+          const width = Math.min(tileWidth, platform.x + platform.w - x);
+          ctx.drawImage(deckImage, source[0], source[1], width / scale, source[3] - source[1], x, platform.y, width, platform.h);
+        }
+      } else {
+        ctx.fillStyle = '#273832';
+        ctx.fillRect(platform.x, platform.y, platform.w, platform.h);
+        ctx.fillStyle = '#789080';
+        ctx.fillRect(platform.x, platform.y, platform.w, 4);
+      }
+      if (imageReady(ladderImage)) {
+        // Rear support posts meet the floor; they do not obstruct the walkway.
+        const source = moduleArt.crops.ladderLeft;
+        const postTop = platform.y + platform.h;
+        for (const x of [platform.x + 14, platform.x + platform.w - 23]) {
+          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, postTop, 9, annex.world.floorY - postTop);
+        }
+      }
     }
     for (const ladder of annex.ladders) {
+      if (imageReady(ladderImage)) {
+        // Assemble rails and one clean rung, leaving real transparency between
+        // them instead of drawing the white-filled holes of the source sheet.
+        for (const [source, x] of [[moduleArt.crops.ladderLeft, ladder.x], [moduleArt.crops.ladderRight, ladder.x + ladder.w - 7]]) {
+          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], x, ladder.top, 7, ladder.bottom - ladder.top);
+        }
+        const source = moduleArt.crops.ladderRung;
+        for (let y = ladder.top + 10; y < ladder.bottom - 4; y += 22) {
+          ctx.drawImage(ladderImage, source[0], source[1], source[2] - source[0], source[3] - source[1], ladder.x + 7, y, ladder.w - 14, 4);
+        }
+        continue;
+      }
       ctx.strokeStyle = '#829789';
       ctx.lineWidth = 5;
       ctx.strokeRect(ladder.x, ladder.top, ladder.w, ladder.bottom - ladder.top);
@@ -997,14 +1065,52 @@ export class HubGame extends HubGameV62 {
   drawAnnexModularPropsV72(ctx, annex) {
     for (const prop of annex.props.filter((entry) => entry.asset)) {
       const image = this.annexModularImagesV72.get(prop.asset);
-      if (imageReady(image)) this.drawCroppedBitmapV72(ctx, image, [0, 0, image.naturalWidth, image.naturalHeight], prop);
+      if (!imageReady(image)) continue;
+      if (prop.role === 'ceiling-service') {
+        if (annex.id === 'proving-ground') continue;
+        const source = HUB_ANNEX_MODULE_ART_V82.crops.ceilingRaceway;
+        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
+        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
+      } else if (prop.role === 'wall-service' || prop.role === 'navigation') {
+        // This source is a floor console. Only its detachable display belongs
+        // on a wall; the keyboard and floor plinth must not hang in mid-air.
+        const source = HUB_ANNEX_MODULE_ART_V82.crops.wallScreen;
+        const height = prop.w * (source[3] - source[1]) / (source[2] - source[0]);
+        this.drawCroppedBitmapV72(ctx, image, source, { ...prop, h: height });
+      } else {
+        this.drawCroppedBitmapV72(ctx, image, [0, 0, image.naturalWidth, image.naturalHeight], prop);
+      }
     }
-    const pipe = this.annexModularImagesV72.get('/assets/openai/metroidvania/props/maintenance-pipe.png');
-    if (!imageReady(pipe)) return;
-    for (const collider of annex.colliders.filter((entry) => entry.role === 'structure')) {
-      // The collision rib sits inside the visible pipe silhouette, not in empty air.
-      const w = collider.h * pipe.naturalWidth / pipe.naturalHeight;
-      ctx.drawImage(pipe, collider.x + (collider.w - w) / 2, collider.y, w, collider.h);
+    const pipe = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.pipe);
+    for (const collider of annex.colliders.filter((entry) => imageReady(pipe) && entry.role === 'structure')) {
+      const body = HUB_ANNEX_MODULE_ART_V82.crops.pipeBody;
+      const scale = collider.h / (body[3] - body[1]);
+      const width = (body[2] - body[0]) * scale;
+      const x = collider.x + (collider.w - width) / 2;
+      // Extend the shaft up to the ceiling. The collidable lower fitting is
+      // visually supported and its secondary loose base is never sampled.
+      const shaft = HUB_ANNEX_MODULE_ART_V82.crops.pipeShaft;
+      const shaftWidth = (shaft[2] - shaft[0]) * scale;
+      const shaftHeight = (shaft[3] - shaft[1]) * scale;
+      for (let y = 0; y < collider.y; y += shaftHeight) {
+        const height = Math.min(shaftHeight, collider.y - y);
+        ctx.drawImage(pipe, shaft[0], shaft[1], shaft[2] - shaft[0], height / scale, collider.x + (collider.w - shaftWidth) / 2, y, shaftWidth, height);
+      }
+      ctx.drawImage(pipe, body[0], body[1], body[2] - body[0], body[3] - body[1], x, collider.y, width, collider.h);
+    }
+    if (annex.id === 'proving-ground') {
+      const ceiling = this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingCeiling);
+      if (imageReady(ceiling)) {
+        // Mount the opaque beam, not its transparent image padding, to y=0.
+        const solid = HUB_ANNEX_MODULE_ART_V82.crops.provingCeilingSolid;
+        const scale = 64 / (solid[3] - solid[1]);
+        const height = ceiling.naturalHeight * scale;
+        const tileWidth = (solid[2] - solid[0]) * scale;
+        for (let x = 0; x < annex.world.width; x += tileWidth) {
+          const width = Math.min(tileWidth, annex.world.width - x);
+          ctx.drawImage(ceiling, solid[0], 0, width / scale, ceiling.naturalHeight, x, -solid[1] * scale, width, height);
+        }
+      }
     }
   }
 

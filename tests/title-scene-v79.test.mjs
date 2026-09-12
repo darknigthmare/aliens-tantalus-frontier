@@ -232,6 +232,77 @@ test('un navigateur sans gradients conserve le bitmap V61 et ne laisse pas une s
   assert.equal(supportsTitleSceneV79({}), false);
 });
 
+test('les réponses image d’un ancien preset ne dégradent pas la scène titre courante', () => {
+  const surface = fakeSurface();
+  const scene = new TitleSceneControllerV79({
+    root: surface.root,
+    fallback: surface.fallback,
+    supportsScene: () => true,
+    matchMedia: () => ({ matches: false })
+  });
+  scene.show(baseSave({ presentation: { titleScene: { presetId: 'frontier-night' } } }));
+  const oldBitmap = surface.root.children.find((layer) => layer.dataset.renderer === 'image');
+  scene.show(baseSave({ presentation: { titleScene: { presetId: 'storm-terminator' } } }));
+  const currentChildren = [...surface.root.children];
+  const currentState = scene.getSnapshot();
+
+  oldBitmap.children[0].listeners.get('error')();
+  oldBitmap.children[0].listeners.get('load')();
+
+  assert.equal(surface.root.dataset.degraded, 'false');
+  assert.deepEqual(scene.getSnapshot(), currentState);
+  assert.deepEqual(surface.root.children, currentChildren);
+  assert.equal(oldBitmap.dataset.assetStatus, 'loading');
+  scene.dispose();
+});
+
+test('un retour au titre retente les bitmaps manquants après une panne transitoire', () => {
+  const surface = fakeSurface();
+  const scene = new TitleSceneControllerV79({
+    root: surface.root,
+    fallback: surface.fallback,
+    supportsScene: () => true,
+    matchMedia: () => ({ matches: false })
+  });
+  const save = baseSave({ presentation: { titleScene: { presetId: 'frontier-night' } } });
+  scene.show(save);
+  const oldBitmap = surface.root.children.find((layer) => layer.dataset.assetId === 'planet-01-acheron');
+  oldBitmap.children[0].listeners.get('error')();
+  assert.equal(scene.getSnapshot().missingAssetCount, 1);
+  scene.hide();
+  scene.show(save);
+  const retry = surface.root.children.find((layer) => layer.dataset.assetId === oldBitmap.dataset.assetId);
+
+  assert.notEqual(retry, oldBitmap, 'une nouvelle requête doit pouvoir récupérer le bitmap');
+  assert.equal(retry.hidden, false);
+  assert.equal(retry.dataset.assetStatus, 'loading');
+  retry.children[0].listeners.get('load')();
+  assert.equal(scene.getSnapshot().missingAssetCount, 0);
+  assert.equal(scene.getSnapshot().readyAssetCount, 1);
+  assert.equal(surface.root.children.find((layer) => layer.dataset.layerId === 'frontier-world').hidden, true);
+  assert.equal(surface.root.dataset.degraded, 'false');
+  scene.dispose();
+});
+
+test('les images en vol ne peuvent pas réanimer un contrôleur titre détruit', () => {
+  const surface = fakeSurface();
+  const scene = new TitleSceneControllerV79({
+    root: surface.root,
+    fallback: surface.fallback,
+    supportsScene: () => true,
+    matchMedia: () => ({ matches: false })
+  });
+  scene.show(baseSave());
+  const bitmap = surface.root.children.find((layer) => layer.dataset.renderer === 'image');
+  scene.dispose();
+  const disposedState = scene.getSnapshot();
+  bitmap.children[0].listeners.get('error')();
+  bitmap.children[0].listeners.get('load')();
+  assert.deepEqual(scene.getSnapshot(), disposedState);
+  assert.equal(surface.root.dataset.degraded, 'false');
+  assert.equal(bitmap.dataset.assetStatus, 'loading');
+});
+
 test('le shell V80 conserve la scène titre V79, son build et son responsive dédié', async () => {
   const [html, app, controller, css, build, worker] = await Promise.all([
     readFile('index.html', 'utf8'),
@@ -250,9 +321,9 @@ test('le shell V80 conserve la scène titre V79, son build et son responsive dé
   assert.match(controller, /this\.scene\?\.hide\?\.\(\)/u);
   assert.match(build, /'title-scene-v79\.css'/u);
   for (const path of ['/title-scene-v79.css', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js']) assert.ok(worker.includes(`'${path}'`));
-  assert.match(html, /ALIENS: TANTALUS FRONTIER v81/u);
-  assert.match(html, /VERSION 81\.0\.0/u);
-  assert.match(worker, /atf-v81-proving-ground-shell-1/u);
+  assert.match(html, /ALIENS: TANTALUS FRONTIER v82/u);
+  assert.match(html, /VERSION 82\.0\.0/u);
+  assert.match(worker, /atf-v82-modular-proving-shell-1/u);
   assert.match(css, /@media \(max-width: 760px\)/u);
   assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)/u);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/u);
