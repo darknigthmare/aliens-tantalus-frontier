@@ -99,6 +99,7 @@ const makeRoom = (id, name, action, description, index, npcRow, art, prop, geome
     h: propHeight
   });
   const propCollisionBounds = profile?.propCollider ? Object.freeze({
+    ...(profile.propCollider.collisionMode ? { collisionMode: profile.propCollider.collisionMode } : {}),
     x: propX - Math.min(profile.propCollider.width, renderWidth) / 2,
     y: FLOOR_Y - Math.min(profile.propCollider.height, propHeight),
     w: Math.min(profile.propCollider.width, renderWidth),
@@ -500,6 +501,7 @@ export class HubGame {
       this.player.vx = 0;
     }
     for (const obstacle of this.obstacles) {
+      if (obstacle.collisionMode === 'one-way-top') continue;
       if (!overlap(this.player, obstacle)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= obstacle.x + 7) {
         this.player.x = obstacle.x - this.player.w;
@@ -515,7 +517,8 @@ export class HubGame {
   resolveVertical(previousBottom) {
     for (const obstacle of this.obstacles) {
       const horizontal = this.player.x + this.player.w > obstacle.x + 4 && this.player.x < obstacle.x + obstacle.w - 4;
-      if (horizontal && this.player.vy >= 0 && previousBottom <= obstacle.y + 8 && this.player.y + this.player.h >= obstacle.y) {
+      const landingTolerance = obstacle.collisionMode === 'one-way-top' ? 0.001 : 8;
+      if (horizontal && this.player.vy >= 0 && previousBottom <= obstacle.y + landingTolerance && this.player.y + this.player.h >= obstacle.y) {
         this.player.y = obstacle.y - this.player.h;
         this.player.vy = 0;
         this.player.grounded = true;

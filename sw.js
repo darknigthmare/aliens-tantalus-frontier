@@ -1,7 +1,8 @@
-const CACHE = 'atf-v77-tactical-audio-shell-1';
+const CACHE = 'atf-v78-title-save-briefing-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/save-profile-v78.js',
   '/src/tactical-reload-v77.js', '/src/mission-input-v77.js', '/src/tactical-reload-hud-v77.js',
   '/src/audio-assets-v77.js', '/assets/audio/manifest.json',
   '/assets/openai/hub/props/operations-table-side-v72.webp',

@@ -49,7 +49,7 @@ test('briefing et armurerie conservent leurs bitmaps originaux à une échelle c
   assert.equal(briefing.propRenderBounds.y + briefing.propRenderBounds.h, HUB_WORLD.floorY);
   assert.ok(briefing.propCollisionBounds.h <= 92);
   assert.equal(armory.propCollisionBounds.h, 80, 'seul le comptoir bas est solide, pas son râtelier mural');
-  assert.match(profiles, /briefing: defineRoomProfile\([^\n]+480, 142\)/);
+  assert.deepEqual(briefing.profile.propCollider, { width: 480, height: 142, collisionMode: 'one-way-top' });
   assert.match(profiles, /armory: defineRoomProfile\([^\n]+340, 80\)/);
   assert.match(sw, /operations-table-side-v72\.webp/);
   assert.match(sw, /armory-counter-v61\.png/);

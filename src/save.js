@@ -36,6 +36,7 @@ import {
   consumeHubAnnexDeploymentSupportV71
 } from './hub-annex-services-v71.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
+import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV78, assertSaveProfileIdV78, inspectSaveSlotV78, parseImportedSaveV78 } from './save-profile-v78.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -1773,72 +1774,170 @@ export function migrateSave(input, profile = 1) {
   return migrated;
 }
 
-const safeParse = (text) => {
-  try { return JSON.parse(text); } catch { return null; }
-};
-
 export class SaveSystem {
   constructor(storage = globalThis.localStorage) {
     this.storage = storage;
     this.profile = 1;
     this.data = createDefaultSave(this.profile);
+    this.protectedProfilesV78 = new Set();
+    this.recoveryNeeded = null;
+    this.selectionPersistenceV78 = null;
   }
 
-  key(profile = this.profile) { return `${SAVE_PREFIX}${profile}`; }
+  key(profile = this.profile) { return `${SAVE_PREFIX}${assertSaveProfileIdV78(profile)}`; }
+
+  loadLastProfileV78() {
+    let profile = 1;
+    try { profile = assertSaveProfileIdV78(this.storage?.getItem(SAVE_SELECTED_PROFILE_KEY_V78)); } catch { /* An invalid marker never chooses an arbitrary slot. */ }
+    return this.load(profile);
+  }
+
+  rememberProfileV78(profile) {
+    try {
+      if (typeof this.storage?.setItem !== 'function') throw new Error('Stockage indisponible.');
+      this.storage.setItem(SAVE_SELECTED_PROFILE_KEY_V78, String(profile));
+      this.selectionPersistenceV78 = { profile, persisted: true, code: null };
+    } catch {
+      // The slot transaction already succeeded. A marker failure must not
+      // pretend that its save was rolled back or erase the previous marker.
+      this.selectionPersistenceV78 = { profile, persisted: false, code: 'SAVE_SELECTION_WRITE_FAILED' };
+    }
+  }
+
+  exportRawProfileV78(profile = this.recoveryNeeded?.profile ?? this.profile) {
+    const target = assertSaveProfileIdV78(profile);
+    let raw;
+    try { raw = this.storage?.getItem(this.key(target)); } catch (cause) {
+      throw new SaveProfileErrorV78('SAVE_READ_FAILED', 'Lecture du fichier original impossible.', { profile: target, cause });
+    }
+    if (typeof raw !== 'string') throw new SaveProfileErrorV78('SAVE_SLOT_EMPTY', 'Aucun fichier original dans cet emplacement.', { profile: target });
+    return raw;
+  }
+
+  readSlotV78(profile) {
+    try {
+      if (typeof this.storage?.getItem !== 'function') throw new Error('Stockage indisponible.');
+      return inspectSaveSlotV78(this.storage.getItem(this.key(profile)));
+    } catch (cause) {
+      throw new SaveProfileErrorV78('SAVE_READ_FAILED', 'Lecture du profil impossible. La partie active est conservée.', { profile, cause });
+    }
+  }
 
   listProfiles() {
-    return [1, 2, 3].map((profile) => {
-      const data = safeParse(this.storage?.getItem(this.key(profile)) || '');
+    return SAVE_PROFILE_IDS_V78.map((profile) => {
+      let slot;
+      try { slot = this.readSlotV78(profile); } catch {
+        return { profile, empty: false, status: 'unavailable', release: 'Stockage inaccessible — partie conservée' };
+      }
+      if (slot.status === 'corrupt') return { profile, empty: false, status: 'corrupt', corrupt: true, release: 'Sauvegarde illisible — non remplacée', reason: slot.reason };
+      const data = slot.data;
       return data ? {
         profile,
+        empty: false,
+        status: 'ready',
         updatedAt: data.updatedAt,
         release: data.release,
         worldId: data.worldId,
         campaigns: data.statistics?.campaigns || 0,
         playSeconds: data.statistics?.playSeconds || 0
-      } : { profile, empty: true };
+      } : { profile, empty: true, status: 'empty' };
     });
   }
 
   discoverLegacy() {
     for (const key of LEGACY_KEYS) {
-      const candidate = safeParse(this.storage?.getItem(key) || '');
-      if (candidate) return { key, data: candidate };
+      const slot = inspectSaveSlotV78(this.storage?.getItem(key));
+      if (slot.status === 'ready') return { key, data: slot.data };
     }
     return null;
   }
 
   load(profile = 1) {
-    this.profile = Math.max(1, Math.min(3, Number(profile) || 1));
-    const current = safeParse(this.storage?.getItem(this.key()) || '');
-    if (current) {
-      this.data = migrateSave(current, this.profile);
-      return this.data;
+    const target = assertSaveProfileIdV78(profile);
+    let slot;
+    try { slot = this.readSlotV78(target); } catch (error) {
+      this.protectedProfilesV78.add(target);
+      this.recoveryNeeded = { profile: target, status: 'unavailable', code: error.code, reason: 'storage-read-failed' };
+      throw error;
     }
-    const legacy = this.discoverLegacy();
-    this.data = migrateSave(legacy?.data, this.profile);
-    if (legacy) this.data.migratedFromKey = legacy.key;
+    if (slot.status === 'corrupt') {
+      this.protectedProfilesV78.add(target);
+      this.recoveryNeeded = { profile: target, status: 'corrupt', code: 'SAVE_CORRUPT', reason: slot.reason };
+      throw new SaveProfileErrorV78('SAVE_CORRUPT', 'Sauvegarde illisible. Les données originales sont conservées ; importez une sauvegarde valide ou confirmez une nouvelle partie.', { profile: target });
+    }
+    // A shared legacy save belongs to the primary slot; empty secondary slots
+    // must not silently clone another timeline. Explicit import remains available.
+    let legacy;
+    try { legacy = slot.status === 'empty' && target === 1 ? this.discoverLegacy() : null; } catch (cause) {
+      this.protectedProfilesV78.add(target);
+      this.recoveryNeeded = { profile: target, status: 'unavailable', code: 'SAVE_READ_FAILED', reason: 'legacy-read-failed' };
+      throw new SaveProfileErrorV78('SAVE_READ_FAILED', 'Lecture de la sauvegarde historique impossible. Aucune partie n’a été remplacée.', { profile: target, cause });
+    }
+    const candidate = migrateSave(slot.data || legacy?.data, target);
+    if (legacy) candidate.migratedFromKey = legacy.key;
+    this.profile = target;
+    this.data = candidate;
+    this.protectedProfilesV78.delete(target);
+    this.recoveryNeeded = null;
+    this.rememberProfileV78(target);
     return this.data;
   }
 
   newGame(profile = 1) {
-    this.profile = profile;
-    this.data = createDefaultSave(profile);
-    this.commit();
-    return this.data;
+    const target = assertSaveProfileIdV78(profile);
+    return this.writeCandidateV78(createDefaultSave(target), target, { replace: true });
   }
 
   commit(patch = null) {
-    if (patch && typeof patch === 'object') this.data = migrateSave({ ...this.data, ...patch }, this.profile);
-    this.data.updatedAt = Date.now();
-    this.storage?.setItem(this.key(), JSON.stringify(this.data));
-    globalThis.dispatchEvent?.(new CustomEvent('atf:saved', { detail: { profile: this.profile, updatedAt: this.data.updatedAt } }));
+    const candidate = patch && typeof patch === 'object' ? migrateSave({ ...this.data, ...patch }, this.profile) : this.data;
+    return this.writeCandidateV78(candidate, this.profile);
+  }
+
+  writeCandidateV78(candidate, profile, { replace = false } = {}) {
+    const target = assertSaveProfileIdV78(profile);
+    if (!replace && this.recoveryNeeded) {
+      throw new SaveProfileErrorV78('SAVE_RECOVERY_REQUIRED', 'Récupération requise : les sauvegardes automatiques sont bloquées pour préserver les données originales.', { profile: this.recoveryNeeded.profile });
+    }
+    if (!replace && this.protectedProfilesV78.has(target)) {
+      throw new SaveProfileErrorV78('SAVE_PROTECTED', 'Profil protégé : aucune sauvegarde automatique ne peut remplacer les données illisibles.', { profile: target });
+    }
+    const updatedAt = Date.now();
+    try {
+      if (typeof this.storage?.setItem !== 'function') throw new Error('Stockage indisponible.');
+      this.storage.setItem(this.key(target), JSON.stringify({ ...candidate, profile: target, updatedAt }));
+    } catch (cause) {
+      throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Sauvegarde impossible. La partie active et le profil précédent sont conservés.', { profile: target, cause });
+    }
+    // Publish the in-memory switch only after storage accepted the whole save.
+    // Ordinary commits retain the active root object because live mission
+    // systems (notably the narrative archive ledger) hold that reference.
+    // Explicit profile replacement/import still receives a fresh root.
+    let published = candidate;
+    if (!replace && this.profile === target && isRecord(this.data) && this.data !== candidate) {
+      for (const key of Object.keys(this.data)) if (!Object.hasOwn(candidate, key)) delete this.data[key];
+      Object.assign(this.data, candidate);
+      published = this.data;
+    }
+    published.profile = target;
+    published.updatedAt = updatedAt;
+    this.profile = target;
+    this.data = published;
+    this.protectedProfilesV78.delete(target);
+    this.recoveryNeeded = null;
+    if (this.selectionPersistenceV78?.profile !== target || !this.selectionPersistenceV78?.persisted) this.rememberProfileV78(target);
+    try {
+      if (typeof globalThis.CustomEvent === 'function') globalThis.dispatchEvent?.(new CustomEvent('atf:saved', { detail: { profile: target, updatedAt } }));
+    } catch { /* A notification consumer cannot roll back a successful write. */ }
     return this.data;
   }
 
   delete(profile = this.profile) {
-    this.storage?.removeItem(this.key(profile));
-    if (profile === this.profile) this.data = createDefaultSave(profile);
+    const target = assertSaveProfileIdV78(profile);
+    if (typeof this.storage?.removeItem !== 'function') throw new SaveProfileErrorV78('SAVE_WRITE_FAILED', 'Suppression impossible : stockage indisponible.', { profile: target });
+    this.storage.removeItem(this.key(target));
+    this.protectedProfilesV78.delete(target);
+    if (this.recoveryNeeded?.profile === target) this.recoveryNeeded = null;
+    if (target === this.profile) this.data = createDefaultSave(target);
   }
 
   export() {
@@ -1846,11 +1945,8 @@ export class SaveSystem {
   }
 
   import(text, profile = this.profile) {
-    const parsed = safeParse(text);
-    if (!parsed) throw new Error('Fichier de sauvegarde invalide.');
-    this.profile = profile;
-    this.data = migrateSave(parsed, profile);
-    this.commit();
-    return this.data;
+    const target = assertSaveProfileIdV78(profile);
+    const parsed = parseImportedSaveV78(text);
+    return this.writeCandidateV78(migrateSave(parsed, target), target, { replace: true });
   }
 }

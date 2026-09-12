@@ -106,6 +106,7 @@ class FakeElement {
   removeAttribute(name) { this.attributes.delete(name); }
   addEventListener(name, listener) { this.listeners.set(name, listener); }
   removeEventListener(name) { this.listeners.delete(name); }
+  focus() { this.ownerDocument.activeElement = this; }
   contains(element) {
     for (let current = element; current; current = current.parentNode) if (current === this) return true;
     return false;
@@ -135,7 +136,7 @@ class FakeElement {
 }
 
 class FakeDocument {
-  constructor() { this.listeners = new Map(); }
+  constructor() { this.listeners = new Map(); this.activeElement = null; }
   createElement(tagName) { return new FakeElement(tagName, this); }
   addEventListener(name, listener) { this.listeners.set(name, listener); }
   removeEventListener(name) { this.listeners.delete(name); }
@@ -209,6 +210,8 @@ test('le contrôleur DOM rend média réel, rail, progression, hooks et actions 
   assert.equal(root.querySelectorAll('[data-hook-channel]').length, 3);
   const action = root.querySelector('[data-insertion-action="advance"]');
   assert.equal(action.dataset.requiredAction, 'acknowledge-briefing');
+  assert.strictEqual(ui.focusPrimary(), action);
+  assert.strictEqual(root.ownerDocument.activeElement, action);
   assert.equal(hooks.length, 1);
   assert.equal(hooks[0].metadata.reason, 'initial-phase');
   assert.deepEqual(new Set(hooks[0].entries.map((entry) => entry.channel)), new Set(['audio', 'camera', 'objective']));
@@ -216,6 +219,7 @@ test('le contrôleur DOM rend média réel, rail, progression, hooks et actions 
   const advanced = ui.advance();
   assert.equal(advanced.ok, true);
   assert.equal(root.dataset.insertionPhase, 'preparation');
+  assert.strictEqual(root.ownerDocument.activeElement, root.querySelector('[data-insertion-action="advance"]'));
   assert.equal(persisted.at(-1).meta.reason, 'phase-action');
   assert.equal(hooks.length, 2);
   assert.equal(hooks[1].metadata.reason, 'phase-action');

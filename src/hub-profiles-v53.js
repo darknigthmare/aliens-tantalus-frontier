@@ -1,12 +1,12 @@
 const ROOM_WIDTH = 1280;
 const FLOOR_Y = 624;
 
-const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight) => Object.freeze({
+const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight, collisionMode = null) => Object.freeze({
   worldWidth: ROOM_WIDTH,
   sceneScale,
   floorRatio,
   authoredCollision: true,
-  propCollider: Object.freeze({ width: colliderWidth, height: colliderHeight })
+  propCollider: Object.freeze({ width: colliderWidth, height: colliderHeight, ...(collisionMode ? { collisionMode } : {}) })
 });
 
 /**
@@ -16,7 +16,8 @@ const defineRoomProfile = (sceneScale, floorRatio, colliderWidth, colliderHeight
  */
 export const HUB_ROOM_PROFILES = Object.freeze({
   bridge: defineRoomProfile(1.01, 0.820, 184, 76),
-  briefing: defineRoomProfile(1.05, 0.815, 480, 142),
+  // The table is behind the walking lane; only its tabletop supports a descending actor.
+  briefing: defineRoomProfile(1.05, 0.815, 480, 142, 'one-way-top'),
   'combat-information': defineRoomProfile(1.03, 0.820, 168, 70),
   'cryo-bay': defineRoomProfile(1.06, 0.825, 188, 54),
   'crew-quarters': defineRoomProfile(1.06, 0.820, 174, 82),

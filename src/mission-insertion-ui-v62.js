@@ -481,7 +481,14 @@ export class MissionInsertionUiV62 {
     container.append(controls);
   }
 
+  focusPrimary() {
+    const target = this.root.querySelector?.('[data-insertion-action]') || this.root;
+    target.focus?.({ preventScroll: true });
+    return target;
+  }
+
   render() {
+    const restoreFocus = this.root.contains?.(this.document.activeElement) === true;
     const model = getMissionInsertionUiModelV62(this.state, {
       mediaRegistry: this.mediaRegistry,
       resolveMedia: this.resolveMedia
@@ -531,6 +538,7 @@ export class MissionInsertionUiV62 {
     live.setAttribute('role', 'status');
     live.setAttribute('aria-live', 'polite');
     this.root.append(header, phaseRail, body, live);
+    if (restoreFocus) this.focusPrimary();
     return this.getSnapshot();
   }
 

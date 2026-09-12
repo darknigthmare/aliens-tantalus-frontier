@@ -1,10 +1,12 @@
 # ALIENS: TANTALUS FRONTIER
 
-## Travail courant V77
+## Travail courant V78
 
 Reprise fondée sur les26conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict reste à0conversation intégralement terminée,15partielles et11manquantes : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
 
-V77 ajoute un vrai rechargement tactique avec seconde pression, quatre résultats, HUD J1/J2 et sauvegarde exacte, ainsi qu’un lecteur de sons/musiques optionnels réellement raccordé. Les fichiers audio définitifs sont absents (0/8) ; les nouvelles animations de rechargement ne sont pas produites et l’identité de l’ancienne plaque de combat reste à corriger. Les captures, tests, limites et publication sont consignés dans [validation V77](docs/VALIDATION_V77.md).
+V78 sécurise réellement les trois profils et leur reprise : dernier profil restauré, imports structurels, transactions atomiques, protection des octets corrompus, export brut de récupération et confirmation avant toute nouvelle chronologie. L’accueil dispose maintenant d’une navigation clavier/manette standard complète, d’un layout mobile vérifié et d’un focus continu titre → hub ou insertion → mission. La table de briefing laisse passer les acteurs devant elle tout en restant une plateforme accessible par saut. Les preuves, limites et publication sont consignées dans [validation V78](docs/VALIDATION_V78.md).
+
+Le fond d’accueil reste toutefois un bitmap composite unique : le contrat distinct des vingt planètes/presets modulaires est toujours **MISSING** et appartient au lot V79. V78 ne produit aucun nouveau sprite ni asset ImageGen. Les fichiers audio définitifs restent absents (0/8), et 559 profils ennemis restent inachevés.
 
 Les sections V74/V71 ci-dessous sont historiques et ne remplacent pas cet audit plus strict.
 

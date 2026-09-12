@@ -83,15 +83,16 @@ const alienSurvivalEventLabelV70 = (event) => {
   const countdown = Number.isFinite(remaining) ? ` · T−${Math.max(0, Math.ceil(remaining))} S` : '';
   return `SURVIE · ${String(detail || 'SYSTÈMES ACTUALISÉS').toUpperCase()}${countdown}`;
 };
-const memoryStorage = (() => {
-  const values = new Map();
-  return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: (key) => values.delete(key) };
+const persistentStorageV78 = (() => {
+  try { if (globalThis.localStorage) return globalThis.localStorage; } catch { /* Present a recovery screen, never claim volatile memory is a saved profile. */ }
+  const unavailable = () => { throw new Error('Stockage local inaccessible.'); };
+  return { getItem: unavailable, setItem: unavailable, removeItem: unavailable };
 })();
 
-const saveSystem = new SaveSystem(globalThis.localStorage || memoryStorage);
-saveSystem.load(1);
+const saveSystem = new SaveSystem(persistentStorageV78);
+try { saveSystem.loadLastProfileV78(); } catch { /* SaveSystem protects the original bytes; the title exposes recovery. */ }
 ensureAdvancedState(saveSystem.data);
-const forgeSaveSystem = new ForgeSaveSystemV62(globalThis.localStorage || memoryStorage);
+const forgeSaveSystem = new ForgeSaveSystemV62(persistentStorageV78);
 forgeSaveSystem.load();
 const audio = new AudioDirector();
 let editor = null;
@@ -110,6 +111,9 @@ let enemyCatalogV62 = null;
 let vehicleCatalogV62 = null;
 let missionInsertionUiV62 = null;
 let pendingMissionLaunchV62 = null;
+let profileEpochV78 = 0;
+let profileImportRequestV78 = 0;
+let missionOwnerV78 = null;
 let narrativeArchivesUiV68 = null;
 let missionNarrativeArchivesUiV68 = null;
 let missionArchiveOverlayV68 = null;
@@ -396,6 +400,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  if (saveSystem.recoveryNeeded && !['settings', 'editor'].includes(name)) name = 'settings';
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
@@ -413,6 +418,13 @@ function showView(name) {
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
     hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62() });
+  }
+  if (name === 'hub' || name === 'play') {
+    byId(name === 'hub' ? 'hub-canvas' : 'game-canvas').focus({ preventScroll: true });
+  } else {
+    const heading = document.querySelector(`.view[data-panel="${name}"] .section-intro h2`) || byId('view-title');
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
   }
   globalThis.scrollTo?.({ top: 0, behavior: saveSystem.data.settings.reducedMotion ? 'auto' : 'smooth' });
 }
@@ -432,12 +444,13 @@ const titleScreen = new TitleScreenController({
   root: byId('title-screen'),
   app: byId('app'),
   getSave: () => saveSystem.data,
+  getRecoveryStatus: () => saveSystem.recoveryNeeded,
   onUnlock: () => { audio.unlock(); audio.ui(); },
   onContinue: (view) => showView(view),
   onNewTimeline: () => {
-    hubEngine.stop(false);
-    engine.stop();
-    saveSystem.newGame(saveSystem.profile);
+    saveSystem.newGame(saveSystem.recoveryNeeded?.profile || saveSystem.profile);
+    discardProfileRuntimeV78();
+    sessionStart = Date.now();
     ensureAdvancedState(saveSystem.data);
     activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
     applyRuntimeSettings();
@@ -448,6 +461,7 @@ const titleScreen = new TitleScreenController({
 });
 
 function openForgeContext() {
+  missionOwnerV78 = null;
   hubEngine.stop(false);
   engine.stop();
   forgePlaytest = null;
@@ -462,6 +476,8 @@ function openForgeContext() {
 
 function showTitleScreen() {
   closeHubDialogue({ resume: false, restoreFocus: false });
+  closeHubStation({ resume: false });
+  if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   hubEngine.stop(false);
   engine.stop();
   destroyMissionInsertionUiV62();
@@ -875,7 +891,13 @@ function renderEditorStatus() {
 }
 
 function renderProfiles() {
-  byId('profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<article class="profile-row"><div><strong>PROFIL ${profile.profile}</strong><span>${profile.empty ? 'Emplacement vide' : escapeHtml(profile.release)}</span></div><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : 'CHARGER'}</button></article>`).join('');
+  const recovery = saveSystem.recoveryNeeded;
+  byId('save-recovery-notice').hidden = !recovery;
+  byId('save-recovery-message').textContent = recovery ? `Profil ${recovery.profile} : ${recovery.status === 'corrupt' ? 'fichier illisible' : 'stockage inaccessible'}. Les sauvegardes automatiques sont suspendues.` : '';
+  byId('profile-list').innerHTML = saveSystem.listProfiles().map((profile) => `<article class="profile-row"><div><strong>PROFIL ${profile.profile}${profile.profile === saveSystem.profile && !recovery ? ' · ACTIF' : ''}</strong><span>${profile.empty ? 'Emplacement vide' : escapeHtml(profile.release || 'Sauvegarde locale')}</span></div><div class="button-row"><button class="button compact" data-profile="${profile.profile}">${profile.empty ? 'CRÉER' : profile.status === 'ready' ? 'CHARGER' : 'RÉESSAYER'}</button>${profile.status === 'corrupt' ? `<button class="button compact" data-export-profile="${profile.profile}">EXPORTER LE FICHIER BRUT</button>` : ''}</div></article>`).join('');
+  all('.view[data-panel="settings"] [id^="setting-"]').forEach((control) => { control.disabled = Boolean(recovery); });
+  byId('quick-save').disabled = Boolean(recovery);
+  byId('save-export').textContent = recovery ? 'EXPORTER LE FICHIER ORIGINAL' : 'EXPORTER LA SAUVEGARDE';
   byId('setting-difficulty').value = saveSystem.data.settings.difficulty;
   byId('setting-coop').checked = saveSystem.data.settings.coop;
   byId('setting-motion').checked = saveSystem.data.settings.reducedMotion;
@@ -997,7 +1019,10 @@ function openMissionNarrativeArchivesV68(entryId = '') {
 }
 
 function captureMissionResumeState() {
-  if (!saveSystem.data.strategy.currentOperation || !engine.mission) return null;
+  const operation = saveSystem.data.strategy.currentOperation;
+  if (!operation || !engine.mission || standaloneContext || saveSystem.recoveryNeeded
+    || missionOwnerV78?.epoch !== profileEpochV78 || missionOwnerV78?.profile !== saveSystem.profile
+    || missionOwnerV78?.operationId !== operation.id) return null;
   const nativeState = engine.captureResumeState?.();
   if (nativeState?.schema === 1 && nativeState.identity) return nativeState;
   const snapshot = engine.getSnapshot?.() || {};
@@ -1030,6 +1055,14 @@ function captureMissionResumeState() {
 function persistMissionResumeState() {
   const state = captureMissionResumeState();
   return state ? recordOperationResumeState(saveSystem.data, state) : false;
+}
+
+function commitCurrentRuntimeV78({ includeSessionTime = false } = {}) {
+  const candidate = clone(saveSystem.data);
+  const state = captureMissionResumeState();
+  if (state) recordOperationResumeState(candidate, state);
+  if (includeSessionTime) candidate.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
+  return saveSystem.commit(candidate);
 }
 
 function applyMissionResumeState(state) {
@@ -1116,6 +1149,17 @@ function destroyMissionInsertionUiV62() {
   byId('mission-runtime-v62').hidden = false;
 }
 
+// A replacement save invalidates delayed insertion callbacks and the old
+// native mission, even when two profiles contain the same operation ID.
+function discardProfileRuntimeV78() {
+  profileEpochV78 += 1;
+  missionOwnerV78 = null;
+  pendingMissionLaunchV62 = null;
+  hubEngine.stop(false);
+  engine.stop();
+  destroyMissionInsertionUiV62();
+}
+
 function startMissionRuntimeV62(context) {
   destroyMissionInsertionUiV62();
   pendingMissionLaunchV62 = null;
@@ -1124,6 +1168,7 @@ function startMissionRuntimeV62(context) {
     weapon, equipment, crew, vehicle, costume, deployment, operationLoadout
   } = context;
   engine.setCoop(saveSystem.data.settings.coop);
+  missionOwnerV78 = { epoch: profileEpochV78, profile: saveSystem.profile, operationId: saveSystem.data.strategy.currentOperation?.id };
   engine.start({
     seed: levelSeed.seed,
     world: { ...world, ...worldState },
@@ -1158,6 +1203,7 @@ function startMissionRuntimeV62(context) {
   setupAlphaBravoCommandDockV69().refresh();
   setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
+  byId('game-canvas').focus({ preventScroll: true });
 }
 
 function handleMissionInsertionHooksV62(hooks) {
@@ -1239,6 +1285,7 @@ function startMissionInsertionV62(context) {
       startMissionRuntimeV62(pendingMissionLaunchV62 || context);
     }
   });
+  missionInsertionUiV62.focusPrimary();
 }
 
 function launchCampaign(campaign = null) {
@@ -1937,11 +1984,18 @@ function bindDelegatedActions() {
     }
     if (target.dataset.profile) {
       const profile = Number(target.dataset.profile);
-      hubEngine.stop(false); engine.stop();
-      const slot = saveSystem.listProfiles().find((entry) => entry.profile === profile);
-      slot?.empty ? saveSystem.newGame(profile) : saveSystem.load(profile);
-      ensureAdvancedState(saveSystem.data); activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
-      applyRuntimeSettings(); renderAll(); toast(`Profil ${profile} actif.`);
+      try {
+        const slot = saveSystem.listProfiles().find((entry) => entry.profile === profile);
+        slot?.empty ? saveSystem.newGame(profile) : saveSystem.load(profile);
+        discardProfileRuntimeV78(); sessionStart = Date.now();
+        ensureAdvancedState(saveSystem.data); activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
+        applyRuntimeSettings(); renderAll();
+        toast(saveSystem.selectionPersistenceV78?.persisted === false ? `Profil ${profile} actif. Sa sélection n’a pas pu être mémorisée pour le prochain lancement.` : `Profil ${profile} actif.`);
+      } catch (error) { renderProfiles(); toast(error.message); }
+    }
+    if (target.dataset.exportProfile) {
+      try { download(`tantalus-profil-${Number(target.dataset.exportProfile)}-original.txt`, saveSystem.exportRawProfileV78(Number(target.dataset.exportProfile))); }
+      catch (error) { toast(error.message); }
     }
     if (target.dataset.editorTool) {
       editor.setTool(target.dataset.editorTool);
@@ -1959,8 +2013,10 @@ function bind() {
   byId('menu-toggle').onclick = () => document.querySelector('.rail').classList.toggle('open');
   byId('quick-save').onclick = () => {
     if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return; }
-    saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
-    sessionStart = Date.now(); persistMissionResumeState(); saveSystem.commit(); renderClock(); toast('Sauvegarde locale confirmée.');
+    try {
+      commitCurrentRuntimeV78({ includeSessionTime: true });
+      sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
+    } catch (error) { toast(error.message); }
   };
   byId('return-title').onclick = () => {
     if (standaloneContext === 'forge-playtest') {
@@ -1971,9 +2027,10 @@ function bind() {
       showTitleScreen();
       return;
     }
-    persistMissionResumeState();
-    saveSystem.commit();
-    showTitleScreen();
+    try {
+      if (!saveSystem.recoveryNeeded) commitCurrentRuntimeV78();
+      showTitleScreen();
+    } catch (error) { toast(error.message); }
   };
   byId('hub-dialogue-cancel').onclick = () => closeHubDialogue();
   byId('hub-dialogue-continue').onclick = () => {
@@ -2019,7 +2076,14 @@ function bind() {
     if (activeView === 'play' && engine.running) openMissionNarrativeArchivesV68(entryId);
     else openNarrativeArchivesV68(entryId, { markRead: Boolean(entryId) });
   });
-  byId('new-timeline').onclick = () => { hubEngine.stop(false); engine.stop(); saveSystem.newGame(saveSystem.profile); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); showView('hub'); };
+  byId('new-timeline').onclick = () => {
+    try {
+      if (!saveSystem.recoveryNeeded) commitCurrentRuntimeV78();
+      showTitleScreen(); titleScreen.openMenu();
+      titleScreen.scheduleFocus(titleScreen.newButton, 'menu');
+      titleScreen.requestNewTimeline();
+    } catch (error) { toast(error.message); }
+  };
   ['world-search', 'campaign-search', 'costume-search', 'module-search'].forEach((id) => byId(id).addEventListener('input', () => ({
     'world-search': renderGalaxy, 'campaign-search': renderCampaigns, 'costume-search': renderCrew, 'module-search': renderModules
   })[id]()));
@@ -2064,20 +2128,43 @@ function bind() {
     'setting-effects': ['effects', (element) => Number(element.value)],
     'setting-music': ['music', (element) => Number(element.value)]
   };
-  for (const [id, [key, read]] of Object.entries(settingBindings)) byId(id).onchange = (event) => { saveSystem.data.settings[key] = read(event.target); applyRuntimeSettings(); saveSystem.commit(); };
-  byId('save-export').onclick = () => download(`aliens-tantalus-frontier-profile-${saveSystem.profile}.json`, saveSystem.export());
-  byId('save-import').onchange = async (event) => { try { hubEngine.stop(false); engine.stop(); saveSystem.import(await event.target.files[0].text()); ensureAdvancedState(saveSystem.data); applyRuntimeSettings(); renderAll(); toast('Sauvegarde importée et migrée vers le schéma v51.'); } catch (error) { toast(error.message); } };
+  for (const [id, [key, read]] of Object.entries(settingBindings)) byId(id).onchange = (event) => {
+    try { saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings(); }
+    catch (error) { renderProfiles(); toast(error.message); }
+  };
+  byId('save-export').onclick = () => {
+    try {
+      const recovery = saveSystem.recoveryNeeded;
+      download(`aliens-tantalus-frontier-profile-${recovery?.profile || saveSystem.profile}${recovery ? '-original.txt' : '.json'}`, recovery ? saveSystem.exportRawProfileV78() : saveSystem.export());
+    } catch (error) { toast(error.message); }
+  };
+  byId('save-import').onchange = async (event) => {
+    const file = event.target.files?.[0]; if (!file) return;
+    const targetProfile = saveSystem.recoveryNeeded?.profile || saveSystem.profile;
+    const importEpoch = profileEpochV78;
+    const importRequest = ++profileImportRequestV78;
+    try {
+      const text = await file.text();
+      if (importRequest !== profileImportRequestV78) return;
+      if (importEpoch !== profileEpochV78 || targetProfile !== (saveSystem.recoveryNeeded?.profile || saveSystem.profile)) throw new Error('La partie a changé pendant la lecture. Sélectionnez à nouveau le fichier.');
+      saveSystem.import(text, targetProfile);
+      discardProfileRuntimeV78(); sessionStart = Date.now();
+      ensureAdvancedState(saveSystem.data); activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
+      applyRuntimeSettings(); renderAll(); toast('Sauvegarde importée et migrée.');
+    } catch (error) { renderProfiles(); toast(error.message); }
+    finally { event.target.value = ''; }
+  };
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
     hubDialogueUiV76.destroy({ restoreFocus: false });
     audio.dispose();
-    hubEngine.stop();
+    hubEngine.stop(!saveSystem.recoveryNeeded);
     engine.stop();
-    if (standaloneContext) return;
+    if (standaloneContext || saveSystem.recoveryNeeded) return;
     persistMissionResumeState();
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
-    saveSystem.commit();
+    try { saveSystem.commit(); } catch { /* No successful-save claim during unload; original storage stays intact. */ }
   });
   bindDelegatedActions();
 }

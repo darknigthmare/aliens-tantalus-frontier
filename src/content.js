@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '77.0.0',
-  subtitle: 'Rechargement tactique, coopération locale et audio optionnel réel',
+  version: '78.0.0',
+  subtitle: 'Accueil accessible, sauvegardes protégées et table de briefing traversable',
   sourceVersion: '51.0.0'
 });

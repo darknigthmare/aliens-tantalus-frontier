@@ -147,7 +147,7 @@ test('le cache hors-ligne v77 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v77-tactical-audio-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v78-title-save-briefing-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',

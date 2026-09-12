@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "77.0.0",
+  "version": "78.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -58,6 +58,7 @@
     "qa:browser:v62": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v63": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v64": "node scripts/browser-qa-v52.mjs",
+    "qa:browser:v78": "node tests/browser-title-screen-v78.mjs",
     "qa": "npm run audio:check && npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run batch:v75:check && npm run art:v75:check && npm run lint && npm test && npm run build",
     "qa:release": "npm run qa && npm run qa:browser:v64"
   },

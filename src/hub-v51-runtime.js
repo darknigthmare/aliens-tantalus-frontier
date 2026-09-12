@@ -621,6 +621,7 @@ export class HubGame extends HubGameV50 {
     colliders.push(...this.obstacles, ...this.v51Walls);
     if (!this.player.crouching) colliders.push(...this.v51Vents);
     for (const collider of colliders) {
+      if (collider.collisionMode === 'one-way-top') continue;
       if (!overlap(this.player, collider)) continue;
       if (this.player.vx > 0 && previousX + this.player.w <= collider.x + 9) this.player.x = collider.x - this.player.w;
       else if (this.player.vx < 0 && previousX >= collider.x + collider.w - 9) this.player.x = collider.x + collider.w;
@@ -632,7 +633,9 @@ export class HubGame extends HubGameV50 {
     const landingSurfaces = [...this.v51Platforms, ...this.obstacles, ...this.v51Walls];
     for (const platform of landingSurfaces) {
       const horizontal = this.player.x + this.player.w > platform.x + 4 && this.player.x < platform.x + platform.w - 4;
-      if (horizontal && this.player.vy >= 0 && previousBottom <= platform.y + 12 && this.player.y + this.player.h >= platform.y) {
+      // A background tabletop cannot pull up feet that entered from its side/below.
+      const landingTolerance = platform.collisionMode === 'one-way-top' ? 0.001 : 12;
+      if (horizontal && this.player.vy >= 0 && previousBottom <= platform.y + landingTolerance && this.player.y + this.player.h >= platform.y) {
         this.player.y = platform.y - this.player.h;
         this.player.vy = 0;
         this.player.grounded = true;
@@ -679,7 +682,7 @@ export class HubGame extends HubGameV50 {
         const previous = enemy.x;
         enemy.x = clamp(enemy.x + enemy.facing * enemy.speed * delta, 10, HUB_WORLD.width - enemy.w - 10);
         const blockers = [...this.v51Walls, ...this.obstacles, ...this.v51Doors.filter((door) => door.progress < 0.82)];
-        if (blockers.some((blocker) => overlap(enemy, blocker))) enemy.x = previous;
+        if (blockers.some((blocker) => blocker.collisionMode !== 'one-way-top' && overlap(enemy, blocker))) enemy.x = previous;
       }
       if (overlap(enemy, this.player) && enemy.attackClock <= 0) {
         this.damagePlayer(enemy.damage);

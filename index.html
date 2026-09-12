@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
-  <title>ALIENS: TANTALUS FRONTIER v77</title>
+  <title>ALIENS: TANTALUS FRONTIER v78</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
@@ -37,6 +37,7 @@
       <p class="title-franchise">ALIENS</p>
       <p class="title-project">TANTALUS FRONTIER</p>
       <span class="title-divider" aria-hidden="true"></span>
+      <p id="title-recovery-warning" class="title-recovery-warning" role="alert" hidden></p>
       <button id="title-start" class="title-start" type="button">APPUYER POUR COMMENCER</button>
       <nav id="title-menu" class="title-menu" aria-label="Menu principal" hidden>
         <button id="title-continue" type="button">CONTINUER</button>
@@ -46,7 +47,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 77.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 78.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -72,7 +73,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v77.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v78.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -197,6 +198,7 @@
 
         <section class="view" data-panel="settings">
           <div class="section-intro"><div><p class="eyebrow">SAUVEGARDE // ACCESSIBILITÉ // RUNTIME</p><h2>Système</h2></div></div>
+          <article id="save-recovery-notice" class="panel" role="alert" hidden><h3>Sauvegarde protégée</h3><p id="save-recovery-message"></p><p>Le fichier original n’a pas été remplacé. Exportez ses données brutes, choisissez un autre profil ou importez une sauvegarde valide. Une nouvelle partie ne remplace ce profil qu’après confirmation dans le menu principal.</p></article>
           <div class="settings-grid">
             <article class="panel"><header><h3>Profils</h3></header><div id="profile-list"></div></article>
             <article class="panel"><header><h3>Expérience</h3></header><label>DIFFICULTÉ<select id="setting-difficulty"><option value="story">Histoire</option><option value="standard">Standard</option><option value="nightmare">Cauchemar</option></select></label><label>QUALITÉ<select id="setting-quality"><option value="low">Basse</option><option value="high">Haute</option></select></label><label>CONTRASTE<select id="setting-contrast"><option value="standard">Standard</option><option value="high">Renforcé</option></select></label><label>AIDE À LA VISÉE<select id="setting-aim-assist"><option value="off">Désactivée</option><option value="standard">Standard</option><option value="high">Forte</option></select></label><label>SECOUSSES CAMÉRA<input id="setting-screen-shake" type="range" min="0" max="1" step="0.05"></label><label><input id="setting-coop" type="checkbox"> Coop locale</label><label><input id="setting-motion" type="checkbox"> Réduire les mouvements</label><label><input id="setting-subtitles" type="checkbox"> Sous-titres</label><label>EFFETS AUDIO<input id="setting-effects" type="range" min="0" max="1" step="0.05"></label><label>MUSIQUE<input id="setting-music" type="range" min="0" max="1" step="0.05"></label></article>
