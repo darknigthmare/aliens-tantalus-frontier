@@ -522,6 +522,9 @@ test('les dix échelles autorisent montée complète, sortie latérale et saut s
     hub.setControl('up', true);
     hub.keys.add('KeyW');
     for (let i = 0; i < 70; i += 1) hub.update(1 / 60);
+    assert.equal(hub.player.climbing, false, `${annex.id}: la sortie haute doit libérer l’échelle`);
+    assert.equal(hub.player.grounded, true, `${annex.id}: la sortie haute doit poser le joueur`);
+    assert.equal(hub.player.vy, 0, `${annex.id}: la vitesse d’échelle ne doit pas lancer le joueur`);
     hub.keys.clear();
     assert.ok(Math.abs(hub.player.y + hub.player.h - ladder.top) < 2, annex.id);
     const dismount = annex.entranceSide === 'west' ? 'left' : 'right';

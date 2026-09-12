@@ -641,8 +641,8 @@ export class HubGame extends HubGameV62 {
     const ladderJump = this.player.climbing && this.jumpQueued > 0;
     const atLadderTop = ladder && this.player.y <= ladder.top - this.player.h + 1;
     const atLadderBottom = ladder && this.player.y >= ladder.bottom - this.player.h - 1;
-    const leavingEndpoint = this.player.climbing && ((atLadderTop && up) || (atLadderBottom && down));
-    if (ladder && !horizontalExit && !ladderJump && !leavingEndpoint && (up || down || this.player.climbing)) {
+    const movingBeyondEndpoint = Boolean(ladder && ((atLadderTop && up) || (atLadderBottom && down)));
+    if (ladder && !horizontalExit && !ladderJump && !movingBeyondEndpoint && (up || down || this.player.climbing)) {
       this.player.climbing = true;
       this.player.crouching = false;
       this.player.grounded = false;
@@ -653,6 +653,13 @@ export class HubGame extends HubGameV62 {
       if (!up && !down) this.player.vy = 0;
     } else {
       if (this.player.climbing) {
+        if (atLadderTop && up) {
+          this.player.y = ladder.top - this.player.h;
+          this.player.vy = 0;
+        } else if (atLadderBottom && down) {
+          this.player.y = ladder.bottom - this.player.h;
+          this.player.vy = 0;
+        }
         this.player.grounded = Boolean(atLadderTop || atLadderBottom);
         if (ladderJump) {
           this.player.vy = -JUMP_SPEED;

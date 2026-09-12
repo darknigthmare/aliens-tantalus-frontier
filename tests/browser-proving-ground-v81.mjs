@@ -730,6 +730,10 @@ try {
     const ladder = hub.currentAnnexV71()?.ladders?.[0];
     return Boolean(ladder && hub.player.y + hub.player.h <= ladder.top + 1);
   }, 'montée réelle de l’échelle vers passerelle', 5000);
+  await untilPage(() => {
+    const player = globalThis.__ATF_HUB__.player;
+    return player.grounded && !player.climbing && Math.abs(player.y + player.h - 468) <= 2;
+  }, 'stabilisation physique sur la passerelle', [], 1500);
   const ladderTop = await pageSnapshot();
   assert.ok(Math.abs(ladderTop.player.feet - 468) <= 2, 'Echo-9 n’est pas sur la passerelle: ' + JSON.stringify(ladderTop.player));
 
