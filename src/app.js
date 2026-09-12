@@ -8,8 +8,12 @@ import {
   executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
   getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
-  getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69
+  getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
+  RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
+import { CrewUiV85 } from './crew-ui-v85.js';
+import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
@@ -134,6 +138,7 @@ let creatorOwnerV84 = null;
 let hubOwnerV84 = null;
 let bioforgeOwnerV84 = null;
 let pendingOnboardingDialogV84 = null;
+let crewUiV85 = null;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -524,6 +529,7 @@ function showView(name) {
     toast('Terminez l’accueil et rejoignez le briefing à pied sur le pont Commandement.');
   }
   if (saveSystem.recoveryNeeded && !['settings', 'editor'].includes(name)) name = 'settings';
+  if (name !== 'crew' && typeof crewUiV85 !== 'undefined') crewUiV85?.close();
   if (activeView === 'hub' && name === 'hub') Object.assign(saveSystem.data.hub, captureHubPoseV84());
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   closeHubDialogue({ resume: false, restoreFocus: false });
@@ -896,7 +902,7 @@ function renderOperationPlan() {
   const operationWorldId = saveSystem.data.strategy.currentOperation?.worldId;
   const world = WORLDS.find((entry) => entry.id === (operationWorldId || campaign.worldId)) || WORLDS[0];
   const brief = getOperationBrief(saveSystem.data, campaign, world);
-  const crewNames = brief.crewIds.map((id) => CREW.find((member) => member.id === id)?.name || id);
+  const crewNames = brief.crewIds.map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
@@ -906,7 +912,7 @@ function renderOperationPlan() {
   const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
   const operation = saveSystem.data.strategy.currentOperation;
   const recovery = getAlphaBravoStrategicRecoveryV69(saveSystem.data);
-  const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => CREW.find((entry) => entry.id === id)?.name || id);
+  const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
   const recoveryNotice = recovery.canAbandon
     ? `<div class="special-operation-notice"><span>REPRISE BLOQUÉE</span><b>ESCOUADE SOUS LE SEUIL DOCTRINAL</b><p>${recovery.activeCrewCount}/${recovery.minimumCrew} opérateurs actifs · indisponibles : ${escapeHtml(unavailableCrew.join(', ') || 'inconnus')}. Archivez cette sortie pour conserver les pertes sans appliquer de récompense.</p></div>`
     : '';
@@ -1058,15 +1064,26 @@ function ensureCostumeFilterOptions(id, field) {
   }
 }
 
+function runCrewActionV85(action, args, owner) {
+  if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
+  const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
+    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember };
+  const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
+    action: actions[action], args, prepare: ensureAdvancedState,
+    advanceTime: (candidate, hours) => advanceGalaxy(candidate, { hours, advanceClock: false }) });
+  try { refreshActiveHubNpcRoutinesV62(); renderAll(); toast('Dossier Echo-9 enregistré.'); }
+  catch (error) { console.error('Dossier enregistré ; actualisation visuelle incomplète.', error); }
+  return result;
+}
+
 function renderCrew() {
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
   const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
   byId('crew-readiness').textContent = `${saveSystem.data.strategy.selectedCrewIds.length}/${MAX_SQUAD_SIZE} AFFECTÉS`;
-  byId('crew-list').innerHTML = CREW.map((definition) => {
-    const member = saveSystem.data.crew.find((entry) => entry.id === definition.id);
-    const selected = saveSystem.data.strategy.selectedCrewIds.includes(member.id);
-    return `<article class="crew-card ${selected ? 'selected' : ''}"><span class="eyebrow">${escapeHtml(definition.role)} · ${escapeHtml(member.status)}</span><h3>${escapeHtml(definition.name)}</h3>${meter('SANTÉ', member.health)}${meter('STRESS', member.stress, true)}${meter('FATIGUE', member.fatigue, true)}<div class="button-row"><button class="button compact" data-crew-assign="${member.id}" ${loadoutLocked || member.status !== 'active' && !selected ? 'disabled' : ''}${operationLockTitle}>${selected ? 'RETIRER' : 'AFFECTER'}</button><button class="button compact" data-crew-treat="${member.id}" ${loadoutLocked || member.status === 'deceased' || saveSystem.data.galaxy.resources.medical < 1 ? 'disabled' : ''}${operationLockTitle}>SOIGNER</button></div></article>`;
-  }).join('');
+  if (!crewUiV85) crewUiV85 = new CrewUiV85({ root: byId('crew-list'), catalog: CREW,
+    itemCatalog: [...WEAPONS, ...EQUIPMENT], rules: RECRUITMENT_RULES_V85,
+    getOwner: currentOwnerV84, onAction: runCrewActionV85 });
+  crewUiV85.update(saveSystem.data);
   ensureCostumeFilterOptions('costume-part-filter', 'part');
   ensureCostumeFilterOptions('costume-body-filter', 'body');
   ensureCostumeFilterOptions('costume-palette-filter', 'palette');
@@ -1397,6 +1414,7 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  if (typeof crewUiV85 !== 'undefined') crewUiV85?.close();
   hubOwnerV84 = null;
   bioforgeOwnerV84 = null;
   pendingOnboardingDialogV84 = null;
@@ -1454,7 +1472,12 @@ function startMissionRuntimeV62(context) {
     }
   });
   if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
+  // Restore the saved actors first, then honor the current explicit local-coop
+  // setting. The transfer hook preserves their personal equipment and charges.
+  engine.setCoop(Boolean(saveSystem.data.settings.coop));
   setupAlphaBravoCommandDockV69().refresh();
+  const activeAlliesV85 = engine.activeSquadActors?.();
+  if (Array.isArray(activeAlliesV85)) byId('mission-log').textContent = `ESCOUADE DÉPLOYÉE · ${activeAlliesV85.length} alliés IA physiques · ${engine.spriteRuntime?.report?.sheets || 0} plaques animées`;
   setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
   byId('game-canvas').focus({ preventScroll: true });

@@ -143,6 +143,10 @@ docs/references/V84_*/**
 docs/references/v84-*
 docs/references/v84-*/**
 scripts/__pycache__
+docs/references/V85_*
+docs/references/V85_*/**
+docs/references/v85-*
+docs/references/v85-*/**
 scripts/__pycache__/**
 .qa
 .qa/**

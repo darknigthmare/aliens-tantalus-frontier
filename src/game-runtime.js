@@ -1,6 +1,8 @@
 import { GameEngine as MissionEngine } from './game-v51-runtime.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { validatePlayerIdentityV84 } from './player-onboarding-v84.js';
+import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { CREW } from './content-core-v50.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -117,7 +119,7 @@ export function buildEquipmentRuntime(equipment = []) {
 }
 
 export function buildCrewRuntime(crew = []) {
-  return Object.freeze(list(crew).map((member) => Object.freeze({
+  return Object.freeze(list(crew).map(member => member?.recruitV85 || member?.trainingV85 || member?.gearV85 ? resolveCrewDefinitionV85(member, CREW) : member).filter(Boolean).map((member) => Object.freeze({
     id: String(member.id || 'crew-runtime'),
     name: String(member.name || 'Echo-9 Marine'),
     role: String(member.role || 'Marine'),
@@ -130,7 +132,12 @@ export function buildCrewRuntime(crew = []) {
     status: String(member.status || 'active'),
     injuries: list(member.injuries),
     missions: Math.round(finite(member.missions, 0, 0)),
-    kills: Math.round(finite(member.kills, 0, 0))
+    kills: Math.round(finite(member.kills, 0, 0)),
+    ...(member.recruitV85 || member.trainingV85 || member.gearV85 ? {
+      callsign: member.callsign, recruitV85: structuredClone(member.recruitV85),
+      trainingV85: structuredClone(member.trainingV85 || {}),
+      aptitudesV85: structuredClone(member.aptitudesV85), gearV85: structuredClone(member.gearV85)
+    } : {})
   })));
 }
 
@@ -284,9 +291,9 @@ export class GameEngine extends MissionEngine {
     if (equipment.some((item) => /motion tracker|scanner/i.test(item.name))) this.tracker.energy = 100;
     const activeCrew = plan.crew.filter((member) => member.status === 'active');
     this.crewRuntime = activeCrew;
-    const medic = activeCrew.some((member) => member.specialty === 'medical');
-    const engineer = activeCrew.some((member) => member.specialty === 'engineering');
-    const vehicleChief = activeCrew.some((member) => member.specialty === 'vehicle');
+    const medic = activeCrew.some((member) => !member.recruitV85 && !Array.isArray(member.gearV85) && member.specialty === 'medical');
+    const engineer = activeCrew.some((member) => !member.recruitV85 && !Array.isArray(member.gearV85) && member.specialty === 'engineering');
+    const vehicleChief = activeCrew.some((member) => !member.recruitV85 && !Array.isArray(member.gearV85) && member.specialty === 'vehicle');
     if (medic) this.inventory.medkits += 1;
     if (engineer && this.vehicle?.active) this.vehicle.hull = Math.min(this.vehicle.maxHull, this.vehicle.hull + 30);
     if (vehicleChief && this.vehicle?.active) this.vehicle.fuel = 100;
@@ -393,8 +400,18 @@ export class GameEngine extends MissionEngine {
   weaponProfile(player) {
     const profile = super.weaponProfile(player);
     if (profile.mode === 'apc-turret' && !this.vehicle.canFire) return { ...profile, ammo: 0, damage: 0 };
+    if (player?.crewV85?.personalEquipment && profile.mode !== 'apc-turret') {
+      const weapon = player.crewV85.weaponRuntime;
+      return weapon ? { ...profile, mode: 'rifle', ammo: player.ammo, damage: weapon.damage,
+        interval: 1 / weapon.fireRate, penetration: weapon.penetration, weaponId: weapon.id }
+        : { ...profile, ammo: 0, damage: 0, mode: 'unarmed' };
+    }
     if (profile.mode !== 'rifle') return profile;
     return { ...profile, damage: this.weaponRuntime.damage, interval: 1 / this.weaponRuntime.fireRate, penetration: this.weaponRuntime.penetration };
+  }
+
+  reloadWeaponV77(actor) {
+    return actor?.crewV85?.personalEquipment ? actor.crewV85.weaponRuntime || { id: 'unarmed', family: 'melee' } : super.reloadWeaponV77(actor);
   }
 
   interact(actor = this.player) {

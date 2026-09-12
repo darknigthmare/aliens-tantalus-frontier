@@ -81,3 +81,12 @@ Les personnages V62 sont explicitement des créations Tantalus Frontier : `src/n
 - Contrôle visuel de l'identité, du pivot, de l'échelle, de la perspective et des animations. Les fichiers existants ne suffisent pas à certifier les nouveaux usages.
 
 Ces critères restent **MISSING/PARTIAL** tant que leur implémentation et leurs preuves runtime n'existent pas. Ce document ne modifie pas les audits historiques V76/V78/V81.
+
+
+## Addendum V85 — 2026-09-13 : source directe du recrutement retrouvée
+
+Ce complément ne réécrit pas le constat historique fondé sur les seules archives locales. Une nouvelle lecture directe de la conversation **Créer des marines uniques**, thread `6a9df801-9e7c-83ed-8104-244ed10c8587`, a retourné son unique tour complet, sans message tronqué (`hasMore: false`, `nextCursor: null`). Le verbatim et les horodatages sont conservés dans [V85_CHATGPT_RECRUITMENT_SOURCE.md](references/V85_CHATGPT_RECRUITMENT_SOURCE.md).
+
+La réserve ancienne « ni nom des huit aptitudes, ni table de génération chiffrée » concernait le compte rendu local alors disponible. La source directe précise maintenant **Tir, Physique, Mobilité, Sang-froid, Technique, Secourisme, Perception et Cohésion**, la formule **socle de formation + expériences antérieures + formations complémentaires**, un exemple expliqué **Technique 74 = 50 + 16 + 8**, ainsi que quatre recrues originales indicatives de total égal (400, les aptitudes non mentionnées valant 50). Elle impose des budgets séparés pour aptitudes et matériel, sans chiffrer le budget matériel ni les formules finales de gameplay.
+
+Ces éléments sont désormais des exigences retrouvées, et non une reconstruction à inventer. Leurs exemples demeurent des propositions originales Tantalus Frontier, pas des personnages canoniques. Les IDs techniques de recrues, objets, aptitudes et événements ne sont pas définis par le chat et doivent être conçus explicitement dans le projet. Les pièces jointes autonomes évoquées pour #7 ne sont pas récupérées par cette nouvelle preuve. Aucune implémentation du recrutement ni clôture de #5 n'est revendiquée par cet addendum.

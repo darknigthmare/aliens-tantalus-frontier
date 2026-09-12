@@ -234,5 +234,5 @@ test('current release, package lock, HTML, SW and QA scripts agree without relab
   for (const path of RUNTIME_ASSET_PATHS_V82) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(packageJson.scripts['verify:production:v83'], 'node scripts/verify-production-v83.mjs');
   assert.equal(packageJson.scripts['qa:browser:v83'], 'node tests/browser-combat-v83.mjs');
-  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84');
+  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84 && npm run qa:browser:v85');
 });

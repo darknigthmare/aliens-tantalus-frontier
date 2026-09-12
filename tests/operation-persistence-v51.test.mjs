@@ -184,8 +184,10 @@ test('app branche accessibilité, captions sans commit et cooldown diplomatique'
   assert.match(app, /apex-dossier-select'[\s\S]*assertOperationMutable\(\)/);
   assert.match(app, /disabled: loadoutLocked \|\| !canAfford\(saveSystem\.data, quote\)[\s\S]*dataset: \{ procureKind: kind, procureId: item\.id \}/);
   assert.match(app, /disabled: equipped \|\| loadoutLocked[\s\S]*\? \{ selectVehicle: item\.id \}/);
-  assert.match(app, /data-crew-assign=[\s\S]*loadoutLocked \|\| member\.status/);
-  assert.match(app, /data-crew-treat=[\s\S]*loadoutLocked \|\| member\.status/);
+  const crewUi = await readFile(new URL('../src/crew-ui-v85.js', import.meta.url), 'utf8');
+  assert.match(app, /new CrewUiV85\([\s\S]*onAction: runCrewActionV85/);
+  assert.match(crewUi, /data-v85-action="assign"[\s\S]*this\.model\.locked \|\| \(member\.status !== 'active'/);
+  assert.match(crewUi, /data-v85-action="treat"[\s\S]*this\.model\.locked \|\| member\.status === 'deceased'/);
   assert.match(app, /data-costume-id=[\s\S]*selected \|\| loadoutLocked/);
   assert.match(app, /Opération active : manifeste verrouillé/);
   assert.match(app, /operationId:\s*casualtyOperation\?\.id\s*\|\|\s*null/);

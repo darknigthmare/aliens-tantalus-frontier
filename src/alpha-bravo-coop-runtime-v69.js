@@ -1,3 +1,4 @@
+import { crewMovementV85 } from './crew-runtime-v85.js';
 import {
   ALPHA_BRAVO_CAMPAIGN_ID_V69,
   ALPHA_BRAVO_OPERATION_ID_V69,
@@ -640,6 +641,7 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
     }
 
     alphaBravoMoveMemberV69(member, target, teamId, delta) {
+      const individual = crewMovementV85(member);
       const frame = finiteDelta(delta);
       const team = this.alphaBravoV69.teams[teamId];
       if (!target) {
@@ -662,7 +664,7 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
           member.climbing = true;
           member.x += ladderGap * Math.min(1, frame * 10);
           member.vx = 0;
-          member.vy = Math.sign(gapY) * 170;
+          member.vy = Math.sign(gapY) * 170 * individual.climb;
           member.y = clampAlphaBravoV69(member.y + member.vy * frame, Number(ladder.top) - member.h + 8, Number(ladder.bottom) - member.h);
           member.grounded = false;
           return true;
@@ -670,10 +672,10 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       }
       member.climbing = false;
       const performance = this.alphaBravoPerformanceV69(teamId);
-      const speed = (team.order === 'rally' ? 238 : team.order === 'move' ? 220 : 202) * performance;
+      const speed = (team.order === 'rally' ? 238 : team.order === 'move' ? 220 : 202) * performance * individual.speed;
       const stopDistance = target.taskId ? 24 : 38;
       const desiredVelocity = Math.abs(gapX) > stopDistance ? Math.sign(gapX) * speed : 0;
-      member.vx = (Number(member.vx) || 0) + (desiredVelocity - (Number(member.vx) || 0)) * Math.min(1, frame * (member.grounded ? 11 : 7));
+      member.vx = (Number(member.vx) || 0) + (desiredVelocity - (Number(member.vx) || 0)) * Math.min(1, frame * (member.grounded ? 11 : 7) * individual.acceleration);
       if (Math.abs(member.vx) > 4) member.facing = Math.sign(member.vx);
       const beforeX = Number(member.x) || 0;
       const bounds = this.alphaBravoWorldBoundsV69();
@@ -683,7 +685,7 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       const blocked = travelled < Math.max(0.35, Math.abs(member.vx * frame) * 0.16) && Math.abs(gapX) > 70;
       member.stuckClock = blocked ? (Number(member.stuckClock) || 0) + frame : Math.max(0, (Number(member.stuckClock) || 0) - frame * 2);
       if (member.grounded && (member.stuckClock > 0.28 || gapY < -95)) {
-        member.vy = -520;
+        member.vy = -520 * individual.jump;
         member.grounded = false;
         member.stuckClock = 0;
       }

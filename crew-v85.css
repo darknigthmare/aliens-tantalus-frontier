@@ -1,0 +1,22 @@
+.view[data-panel="crew"] .customization-filters{grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr))}
+.view[data-panel="crew"] .customization-filters label,.view[data-panel="crew"] .customization-catalog{min-width:0}
+.view[data-panel="crew"] .customization-filters select{min-width:0;width:100%;max-width:100%}
+.crew-roster-v85 .crew-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;min-width:0}
+.crew-roster-v85 .crew-card{display:flex;flex-direction:column;grid-template-columns:none;gap:12px;min-width:0;padding:18px;overflow-wrap:anywhere}
+.crew-roster-v85 .crew-card p{margin:0;line-height:1.5}.crew-roster-v85 .crew-card .button-row{margin-top:auto;flex-wrap:wrap}
+.crew-tabs-v85,.crew-offer-v85{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.crew-tabs-v85 .button,.crew-roster-v85 .button{min-height:44px}.crew-note-v85{color:#c7d5c9;line-height:1.5;max-width:85ch;font-size:.85rem}
+.crew-gear-summary-v85,.crew-tradeoffs-v85{font-size:.78rem;line-height:1.6;color:#c0d1c1}.crew-card small{font-size:.72em;color:#a9c4ad}
+.crew-vitals-v85{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.crew-vitals-v85 label{font-size:.72rem}.crew-vitals-v85 b{float:right}
+.crew-vitals-v85 meter,.crew-aptitudes-v85 meter{width:100%;height:12px;accent-color:#a5cda1}.crew-action-status-v85{min-height:1.4em;color:#dce7ac;line-height:1.5}
+.crew-dossier-v85{position:fixed;inset:16px 16px 16px auto;width:min(840px,calc(100vw - 32px));height:calc(100dvh - 32px);max-width:none;max-height:none;margin:0;border:1px solid #6a8570;padding:0;background:#111b18;color:#e1eadf;box-shadow:0 20px 80px #000a;font-family:inherit}
+.crew-dossier-v85[open]{display:flex;flex-direction:column}.crew-dossier-v85::backdrop{background:#020907d9}.crew-dossier-v85 header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid #405a48;flex:none}
+.crew-dossier-v85 h2{margin:5px 0;font-size:1.3rem}.crew-dossier-v85 header small{color:#93ac99;overflow-wrap:anywhere}.crew-dossier-v85 .button{min-height:44px;white-space:normal}
+.crew-dossier-body-v85{overflow:auto;overscroll-behavior:contain;min-height:0;padding:16px 22px;flex:1}.crew-dossier-v85 footer{padding:8px 22px;border-top:1px solid #405a48;flex:none}.crew-dossier-v85 section{margin-top:24px}
+.crew-dossier-v85 button:focus-visible,.crew-dossier-v85 select:focus-visible,.crew-tabs-v85 button:focus-visible{outline:3px solid #d9f5a5;outline-offset:3px}
+.crew-biography-v85{display:grid;grid-template-columns:1fr 1fr;gap:14px}.crew-biography-v85 dt{color:#94b19c;font-size:.76rem;text-transform:uppercase}.crew-biography-v85 dd{margin:3px 0;line-height:1.5;font-size:.9rem}
+.crew-compare-v85{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.crew-dossier-v85 select{min-height:44px;min-width:0;max-width:100%;background:#0a1310;border:1px solid #6a8570;color:#edf3e8;padding:8px}.crew-gear-row-v85 select{width:100%}
+.crew-aptitudes-v85{display:grid;grid-template-columns:1fr 1fr;gap:12px}.crew-aptitudes-v85 article{padding:12px;background:#1b2820;border:1px solid #394c3e}.crew-aptitudes-v85 article>div{display:flex;justify-content:space-between;gap:8px}.crew-aptitudes-v85 p{font-size:.75rem;line-height:1.5;color:#b7c7b9}.crew-delta-v85{color:#d4dbad}
+.crew-gear-row-v85{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,160px) auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #364b3c}.crew-gear-row-v85 p{font-size:.8rem}.crew-gear-row-v85 small{font-size:.67rem;overflow-wrap:anywhere;color:#a9b9ac}.crew-gear-row-v85 label{display:grid;gap:5px;font-size:.75rem}
+.crew-dossier-v85 li{margin:8px 0;line-height:1.5;overflow-wrap:anywhere}.crew-dossier-v85 blockquote{margin:12px 0;padding:12px;border-left:2px solid #91ac80;color:#bfd1b6}
+@media(max-width:600px){.crew-dossier-v85{inset:0;width:100vw;height:100dvh;border:0}.crew-dossier-v85 header,.crew-dossier-body-v85,.crew-dossier-v85 footer{padding:12px 14px}.crew-biography-v85,.crew-aptitudes-v85{grid-template-columns:1fr}.crew-gear-row-v85{grid-template-columns:1fr}.crew-dossier-v85 h2{font-size:1.05rem}.crew-tabs-v85{gap:6px}.crew-tabs-v85 .button{flex:1;font-size:.72rem}.crew-vitals-v85{gap:5px}}

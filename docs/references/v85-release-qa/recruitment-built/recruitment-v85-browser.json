@@ -1,0 +1,250 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4186/",
+  "scope": "One explicitly seeded legacy fixture before boot. Every recruitment, assignment, training, transfer and refused refresh is a real mouse/touch/keyboard action; application state reads are assertions only. Shared uniform/individual portrait debt remains.",
+  "checks": {
+    "server": {
+      "title": "ALIENS: TANTALUS FRONTIER v85",
+      "content": 209,
+      "overlay": false
+    },
+    "layouts": {
+      "01-active-legacy": {
+        "innerWidth": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 1265,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "02-four-candidates": {
+        "innerWidth": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 1265,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "03-causal-comparison": {
+        "innerWidth": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 1265,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "04-trained-recruit": {
+        "innerWidth": 1280,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 1265,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "05-mobile-dossier-top": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 390,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "06-mobile-dossier-scroll": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 390,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      },
+      "07-mobile-write-refusal": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "scrollX": 0,
+        "visualViewport": {
+          "width": 390,
+          "offsetLeft": 0,
+          "offsetTop": 0
+        },
+        "overflow": []
+      }
+    },
+    "legacyNoPrologue": true,
+    "comparison": [
+      {
+        "stat": "Tir",
+        "delta": "(+0)"
+      },
+      {
+        "stat": "Physique",
+        "delta": "(+12)"
+      },
+      {
+        "stat": "Mobilité",
+        "delta": "(-12)"
+      },
+      {
+        "stat": "Sang-froid",
+        "delta": "(+0)"
+      },
+      {
+        "stat": "Technique",
+        "delta": "(+24)"
+      },
+      {
+        "stat": "Secourisme",
+        "delta": "(-24)"
+      },
+      {
+        "stat": "Perception",
+        "delta": "(+0)"
+      },
+      {
+        "stat": "Cohésion",
+        "delta": "(+0)"
+      }
+    ],
+    "recruited": [
+      {
+        "id": "recruit-v85-9e3779b1-000001",
+        "name": "Mara Voss"
+      },
+      {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd"
+      }
+    ],
+    "poolAndHiresSurviveReload": true,
+    "reserveAssignment": true,
+    "training": {
+      "gain": 2,
+      "hours": 4,
+      "credits": 80,
+      "supplies": 1
+    },
+    "transfer": {
+      "instanceId": "recruit-v85-9e3779b1-000001-gear-02",
+      "from": "recruit-v85-9e3779b1-000001",
+      "to": "recruit-v85-9e3779b1-000002"
+    },
+    "refreshBeforeDeadlineRefused": true,
+    "transferSurvivesReload": true,
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "inside": true,
+      "scrollable": true,
+      "buttons": [
+        {
+          "text": "FERMER",
+          "height": 44,
+          "width": 72.828125
+        },
+        {
+          "text": "Aucune comparaisonMara VegaTam",
+          "height": 44,
+          "width": 197
+        },
+        {
+          "text": "RECRUTER · 600 crédits",
+          "height": 44,
+          "width": 176.328125
+        }
+      ],
+      "focusContained": true,
+      "focusSequence": [
+        {
+          "contained": true,
+          "active": "<select data-v85-compare=\"\"><option value=\"\">Aucune comparaison</option><option value=\"crew-01-mara-vega\">Mara Vega</option><option value=\"crew-02-tamsin-velez\">Tamsin Velez</optio",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<button type=\"button\" class=\"button primary\" data-v85-action=\"recruit\" data-v85-id=\"recruit-v85-9e3779b1-000003\">RECRUTER · 600 crédits</button>",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<button type=\"button\" class=\"button\" data-v85-close=\"\">FERMER</button>",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<select data-v85-compare=\"\"><option value=\"\">Aucune comparaison</option><option value=\"crew-01-mara-vega\">Mara Vega</option><option value=\"crew-02-tamsin-velez\">Tamsin Velez</optio",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<button type=\"button\" class=\"button primary\" data-v85-action=\"recruit\" data-v85-id=\"recruit-v85-9e3779b1-000003\">RECRUTER · 600 crédits</button>",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<button type=\"button\" class=\"button\" data-v85-close=\"\">FERMER</button>",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<select data-v85-compare=\"\"><option value=\"\">Aucune comparaison</option><option value=\"crew-01-mara-vega\">Mara Vega</option><option value=\"crew-02-tamsin-velez\">Tamsin Velez</optio",
+          "documentFocused": true
+        },
+        {
+          "contained": true,
+          "active": "<button type=\"button\" class=\"button primary\" data-v85-action=\"recruit\" data-v85-id=\"recruit-v85-9e3779b1-000003\">RECRUTER · 600 crédits</button>",
+          "documentFocused": true
+        }
+      ],
+      "realTouchScroll": true
+    },
+    "escapeRestoresFocus": true,
+    "quotaPreservesCampaignAndDialog": true
+  },
+  "screenshots": [
+    "01-active-legacy.jpg",
+    "02-four-candidates.jpg",
+    "03-causal-comparison.jpg",
+    "04-trained-recruit.jpg",
+    "05-mobile-dossier-top.jpg",
+    "06-mobile-dossier-scroll.jpg",
+    "07-mobile-write-refusal.jpg"
+  ],
+  "errors": [],
+  "fixture": {
+    "purpose": "Legacy migration and preserved campaign markers, never live user storage",
+    "profile": 1,
+    "day": 1,
+    "hour": 6,
+    "credits": 3200,
+    "campaigns": 3,
+    "missingFields": [
+      "needsPlayerCreationV84",
+      "onboardingV84",
+      "recruitmentV85"
+    ]
+  }
+}

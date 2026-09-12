@@ -1,0 +1,1751 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4186/",
+  "scope": "Explicit fixture: completed onboarding, four recruits hired and assigned through save actions before app boot. Native UI deploys the mission, changes coop setting and resumes; actual CDP keyboard fires, reloads and heals. One declared J2 injury fixture tests a medkit without waiting for random damage. No business calls through Runtime.evaluate; no claim of full campaign or individually drawn recruits.",
+  "checks": {
+    "initial": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": false,
+      "missionLog": "SOUS-TITRE · Impact: Juvenile Foundry Drone.",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 4 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 100,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 105,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 103,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 2,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 6
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 99,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 0,
+          "actions": 0,
+          "x": 35.81220491318601,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 99.93551085449592,
+            "stress": 5.84812
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 35,
+          "reserve": 105,
+          "magazine": 35,
+          "shots": 0,
+          "actions": 0,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.836143999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 4,
+          "reserve": 24,
+          "magazine": 4,
+          "shots": 0,
+          "actions": 0,
+          "x": 157.812204913186,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.837495999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 99,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 0,
+          "actions": 1,
+          "x": 279.812204913186,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 100,
+            "stress": 5.858459999999999
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": false,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "persistedBeforeCoop": {
+      "schema": 1,
+      "vehicleId": null,
+      "members": [
+        {
+          "crewId": "recruit-v85-9e3779b1-000001",
+          "x": 35.81220491318601,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "ammo": 99,
+            "ammoReserve": 297,
+            "endurance": 99.93551085449592,
+            "stress": 5.84812,
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "fireClock": 0.13339999999999963,
+            "supportClock": 0,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": -1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 5,
+          "kills": 0,
+          "shots": 0,
+          "actions": 0
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "x": 282.9585649577751,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "ammo": 35,
+            "ammoReserve": 105,
+            "endurance": 100,
+            "stress": 5.836143999999999,
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "fireClock": 0.2533999999999996,
+            "supportClock": 0,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 5,
+          "kills": 0,
+          "shots": 0,
+          "actions": 0
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000003",
+          "x": 157.812204913186,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "ammo": 4,
+            "ammoReserve": 24,
+            "endurance": 100,
+            "stress": 5.837495999999999,
+            "charges": {},
+            "fireClock": 0.3733999999999996,
+            "supportClock": 0,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 20,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 0,
+          "kills": 0,
+          "shots": 0,
+          "actions": 0
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000004",
+          "x": 279.812204913186,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "ammo": 99,
+            "ammoReserve": 297,
+            "endurance": 100,
+            "stress": 5.858459999999999,
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "fireClock": 0.4933999999999996,
+            "supportClock": 5.9666999999999994,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 4,
+          "kills": 0,
+          "shots": 0,
+          "actions": 1
+        }
+      ]
+    },
+    "takeover": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": true,
+      "missionLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 100,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 105,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 282.9585649577751,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 2,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 5.570911999999998
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 98,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 1,
+          "actions": 1,
+          "x": 30.782706833207165,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.57686
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 35,
+          "reserve": 105,
+          "magazine": 35,
+          "shots": 0,
+          "actions": 0,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.836143999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 88.625,
+          "maxHealth": 100,
+          "ammo": 4,
+          "reserve": 24,
+          "magazine": 4,
+          "shots": 0,
+          "actions": 0,
+          "x": 152.78270683320716,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 99.59358454173228,
+            "stress": 12.355068
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 99,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 0,
+          "actions": 1,
+          "x": 274.78270683320716,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 99.45342058289964,
+            "stress": 5.617339999999998
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": true,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "fired": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": true,
+      "missionLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 100,
+        "maxHealth": 100,
+        "ammo": 34,
+        "reserve": 105,
+        "magazine": 35,
+        "shots": 1,
+        "actions": 0,
+        "x": 282.9585649577751,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 2,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 5.189519999999998
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 97,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 2,
+          "actions": 2,
+          "x": 29.718679881362448,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.186800000000001
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 35,
+          "reserve": 105,
+          "magazine": 35,
+          "shots": 0,
+          "actions": 0,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.836143999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 88.625,
+          "maxHealth": 100,
+          "ammo": 4,
+          "reserve": 24,
+          "magazine": 4,
+          "shots": 0,
+          "actions": 0,
+          "x": 151.71867988136245,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 98.71376206614171,
+            "stress": 11.912999999999998
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 99,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 0,
+          "actions": 1,
+          "x": 273.71867988136245,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 98.43847834052048,
+            "stress": 5.270619999999997
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": true,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "projectiles": [
+      {
+        "weaponId": "weapon-003-m4a3-service-pistol",
+        "damage": 35,
+        "ownerId": "recruit-v85-9e3779b1-000002",
+        "vx": 0,
+        "vy": -890
+      }
+    ],
+    "reloaded": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": true,
+      "missionLog": "MENACE NEUTRALISÉE · Elder UPP Vanguard · 3 éliminations",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 100,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 104,
+        "magazine": 35,
+        "shots": 1,
+        "actions": 0,
+        "x": 282.9585649577751,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 2,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 1.44054399999999
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 91,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 8,
+          "actions": 8,
+          "x": 38.00817342027666,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 0.4556080000000073
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 35,
+          "reserve": 105,
+          "magazine": 35,
+          "shots": 0,
+          "actions": 0,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.836143999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 88.625,
+          "maxHealth": 100,
+          "ammo": 0,
+          "reserve": 24,
+          "magazine": 4,
+          "shots": 4,
+          "actions": 4,
+          "x": 161.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 94.11495107401575,
+            "stress": 7.117775999999998
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 82,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 17,
+          "actions": 18,
+          "x": 39.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 93.0733269858737,
+            "stress": 0.8845200000000025
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": true,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "healed": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": true,
+      "missionLog": "ESCOUADE · HEAL · recruit-v85-9e3779b1-000002",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 3 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 99.16,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 104,
+        "magazine": 35,
+        "shots": 1,
+        "actions": 1,
+        "x": 282.9585649577751,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 1,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 1.111159999999989
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 89,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 10,
+          "actions": 10,
+          "x": 38,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 99.54741051498638,
+            "stress": 0.013540000000005735
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 35,
+          "reserve": 105,
+          "magazine": 35,
+          "shots": 0,
+          "actions": 0,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 2,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 5.836143999999999
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 88.625,
+          "maxHealth": 100,
+          "ammo": 0,
+          "reserve": 24,
+          "magazine": 4,
+          "shots": 4,
+          "actions": 4,
+          "x": 161.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 93.9535673322835,
+            "stress": 6.6757079999999975
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 80,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 19,
+          "actions": 20,
+          "x": 39.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 92.88446638513022,
+            "stress": 0.4727900000000008
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": true,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "persistedBeforeAi": {
+      "schema": 1,
+      "vehicleId": null,
+      "members": [
+        {
+          "crewId": "recruit-v85-9e3779b1-000001",
+          "x": 38,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "ammo": 89,
+            "ammoReserve": 297,
+            "endurance": 99.54741051498638,
+            "stress": 0.013540000000005735,
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "fireClock": 0.12987364675324675,
+            "supportClock": 0,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 5,
+          "kills": 0,
+          "shots": 10,
+          "actions": 10
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "x": 282.9585649577751,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "ammo": 35,
+            "ammoReserve": 104,
+            "endurance": 100,
+            "stress": 1.111159999999989,
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 1,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "fireClock": 0,
+            "supportClock": 4.02,
+            "tacticalReloadV77": {
+              "schema": 1,
+              "weaponKey": "weapon-003-m4a3-service-pistol",
+              "weaponMode": "rifle",
+              "magazineSize": 35,
+              "profile": {
+                "family": "sidearm",
+                "duration": 2.2,
+                "successWindow": [
+                  0.36,
+                  0.68
+                ],
+                "perfectWindow": [
+                  0.48,
+                  0.56
+                ],
+                "successFactor": 0.82,
+                "perfectFactor": 0.7,
+                "failedDelay": 0.4,
+                "recovery": 0.12,
+                "perfectBonusRounds": 3,
+                "perfectBonusMultiplier": 1.15
+              },
+              "phase": "complete",
+              "result": "normal",
+              "elapsed": 2.2,
+              "completeAt": 2.2,
+              "attemptAt": null,
+              "transferred": true,
+              "roundsLoaded": 1,
+              "bonusRemaining": 0,
+              "feedbackRemaining": 0.4327999999999985,
+              "cancelReason": null
+            }
+          },
+          "y": 378,
+          "health": 99.16,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 4,
+          "kills": 0,
+          "shots": 1,
+          "actions": 1
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000003",
+          "x": 161.95856495777508,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "ammo": 0,
+            "ammoReserve": 24,
+            "endurance": 93.9535673322835,
+            "stress": 6.6757079999999975,
+            "charges": {},
+            "fireClock": 0,
+            "supportClock": 0,
+            "tacticalReloadV77": {
+              "schema": 1,
+              "weaponKey": "weapon-007-m37a2-pump-shotgun",
+              "weaponMode": "rifle",
+              "magazineSize": 4,
+              "profile": {
+                "family": "shotgun",
+                "duration": 2.2,
+                "successWindow": [
+                  0.43,
+                  0.72
+                ],
+                "perfectWindow": [
+                  0.55,
+                  0.61
+                ],
+                "successFactor": 0.82,
+                "perfectFactor": 0.7,
+                "failedDelay": 0.6,
+                "recovery": 0.12,
+                "perfectBonusRounds": 3,
+                "perfectBonusMultiplier": 1.15
+              },
+              "phase": "reloading",
+              "result": "normal",
+              "elapsed": 2.083900000000001,
+              "completeAt": 2.2,
+              "attemptAt": null,
+              "transferred": false,
+              "roundsLoaded": 0,
+              "bonusRemaining": 0,
+              "feedbackRemaining": 0,
+              "cancelReason": null
+            }
+          },
+          "y": 380,
+          "health": 88.625,
+          "armor": 8.625,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 0,
+          "kills": 3,
+          "shots": 4,
+          "actions": 4
+        },
+        {
+          "crewId": "recruit-v85-9e3779b1-000004",
+          "x": 39.95856495777508,
+          "crewRuntimeV85": {
+            "schema": 85,
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "ammo": 80,
+            "ammoReserve": 297,
+            "endurance": 92.88446638513022,
+            "stress": 0.4727900000000008,
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "fireClock": 0.09660941558441503,
+            "supportClock": 3.0319999999999987,
+            "tacticalReloadV77": null
+          },
+          "y": 380,
+          "health": 100,
+          "armor": 0,
+          "alive": true,
+          "downed": false,
+          "lost": false,
+          "bleedOut": 0,
+          "facing": 1,
+          "inVehicle": false,
+          "vehicleSeatId": null,
+          "supportCharges": 4,
+          "kills": 0,
+          "shots": 19,
+          "actions": 20
+        }
+      ]
+    },
+    "returnedToAi": {
+      "running": true,
+      "paused": true,
+      "coopEnabled": false,
+      "missionLog": "ESCOUADE DÉPLOYÉE · 4 alliés IA physiques · 209 plaques animées",
+      "deploymentLog": "ESCOUADE DÉPLOYÉE · 4 alliés IA physiques · 209 plaques animées",
+      "player": {
+        "id": "player-echo9",
+        "name": "QA Mission Operator",
+        "callsign": "SMOKE-85",
+        "health": 89.7625,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 72,
+        "magazine": 35,
+        "shots": 0,
+        "actions": 0,
+        "x": 159,
+        "y": 378,
+        "spriteId": "player.echo9-marine.locomotion",
+        "individual": null
+      },
+      "coop": {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "callsign": "SUTURE",
+        "health": 99.16,
+        "maxHealth": 100,
+        "ammo": 35,
+        "reserve": 104,
+        "magazine": 35,
+        "shots": 1,
+        "actions": 1,
+        "x": 282.9585649577751,
+        "y": 378,
+        "individual": {
+          "crewId": "recruit-v85-9e3779b1-000002",
+          "weaponId": "weapon-003-m4a3-service-pistol",
+          "visualProfileId": "echo9-standard-v85",
+          "artStatus": "shared-standard-uniform-no-individual-portrait",
+          "charges": {
+            "recruit-v85-9e3779b1-000002-gear-02": 1,
+            "recruit-v85-9e3779b1-000002-gear-03": 3
+          },
+          "aptitudes": {
+            "tir": 34,
+            "physique": 34,
+            "mobilite": 50,
+            "sangFroid": 60,
+            "technique": 50,
+            "secourisme": 72,
+            "perception": 50,
+            "cohesion": 50
+          },
+          "endurance": 100,
+          "stress": 1.111159999999989
+        }
+      },
+      "allies": [
+        {
+          "id": "recruit-v85-9e3779b1-000001",
+          "name": "Mara Voss",
+          "callsign": "RIVET",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 88,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 11,
+          "actions": 11,
+          "x": 38,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000001",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000001-gear-02": 2,
+              "recruit-v85-9e3779b1-000001-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 62,
+              "mobilite": 38,
+              "sangFroid": 50,
+              "technique": 74,
+              "secourisme": 26,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 99.67600031716621,
+            "stress": 0
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000002",
+          "name": "Nadia Bensaïd",
+          "callsign": "SUTURE",
+          "health": 99.16,
+          "maxHealth": 100,
+          "ammo": 34,
+          "reserve": 104,
+          "magazine": 35,
+          "shots": 2,
+          "actions": 2,
+          "x": 282.9585649577751,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000002",
+            "weaponId": "weapon-003-m4a3-service-pistol",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000002-gear-02": 1,
+              "recruit-v85-9e3779b1-000002-gear-03": 3
+            },
+            "aptitudes": {
+              "tir": 34,
+              "physique": 34,
+              "mobilite": 50,
+              "sangFroid": 60,
+              "technique": 50,
+              "secourisme": 72,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 100,
+            "stress": 0.8536879999999892
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000003",
+          "name": "Jonas Reed",
+          "callsign": "BASTION",
+          "health": 88.625,
+          "maxHealth": 100,
+          "ammo": 3,
+          "reserve": 20,
+          "magazine": 4,
+          "shots": 5,
+          "actions": 5,
+          "x": 160.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000003",
+            "weaponId": "weapon-007-m37a2-pump-shotgun",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {},
+            "aptitudes": {
+              "tir": 70,
+              "physique": 66,
+              "mobilite": 34,
+              "sangFroid": 50,
+              "technique": 30,
+              "secourisme": 50,
+              "perception": 50,
+              "cohesion": 50
+            },
+            "endurance": 95.33211533228352,
+            "stress": 6.3485039999999975
+          }
+        },
+        {
+          "id": "recruit-v85-9e3779b1-000004",
+          "name": "Jun Seo",
+          "callsign": "BALISE",
+          "health": 100,
+          "maxHealth": 100,
+          "ammo": 79,
+          "reserve": 297,
+          "magazine": 99,
+          "shots": 20,
+          "actions": 21,
+          "x": 38.95856495777508,
+          "y": 380,
+          "spriteId": "player.echo9-marine.locomotion",
+          "individual": {
+            "crewId": "recruit-v85-9e3779b1-000004",
+            "weaponId": "weapon-001-m41a-pulse-rifle",
+            "visualProfileId": "echo9-standard-v85",
+            "artStatus": "shared-standard-uniform-no-individual-portrait",
+            "charges": {
+              "recruit-v85-9e3779b1-000004-gear-02": 2,
+              "recruit-v85-9e3779b1-000004-gear-03": 2
+            },
+            "aptitudes": {
+              "tir": 50,
+              "physique": 34,
+              "mobilite": 64,
+              "sangFroid": 50,
+              "technique": 50,
+              "secourisme": 50,
+              "perception": 72,
+              "cohesion": 30
+            },
+            "endurance": 93.91971838513021,
+            "stress": 0.21800000000000097
+          }
+        }
+      ],
+      "activeAllyIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ],
+      "resumeApplied": true,
+      "operationId": "operation-5-pair-001-mire",
+      "manifestIds": [
+        "recruit-v85-9e3779b1-000001",
+        "recruit-v85-9e3779b1-000002",
+        "recruit-v85-9e3779b1-000003",
+        "recruit-v85-9e3779b1-000004"
+      ]
+    },
+    "postResumeShots": 1
+  },
+  "screenshots": [
+    "01-native-four-recruits.jpg",
+    "02-native-coop-fire-reload-medkit.jpg",
+    "03-native-resume-back-to-ai.jpg"
+  ],
+  "errors": [],
+  "fixture": {
+    "identity": {
+      "id": "player-echo9",
+      "schema": 84,
+      "name": "QA Mission Operator",
+      "callsign": "SMOKE-85",
+      "canonStatus": "project-fiction-not-franchise-canon"
+    },
+    "campaignId": "pair-001-mire",
+    "resources": {
+      "credits": 10000,
+      "supplies": 100
+    },
+    "sourceActions": [
+      "recruitCandidateV85 x4",
+      "assignCrewMember x8"
+    ],
+    "selectedCrewIds": [
+      "recruit-v85-9e3779b1-000001",
+      "recruit-v85-9e3779b1-000002",
+      "recruit-v85-9e3779b1-000003",
+      "recruit-v85-9e3779b1-000004"
+    ],
+    "candidates": [
+      {
+        "id": "recruit-v85-9e3779b1-000001",
+        "name": "Mara Voss",
+        "gear": [
+          "weapon-001-m41a-pulse-rifle",
+          "equipment-004-cutting-torch",
+          "equipment-013-welding-kit"
+        ]
+      },
+      {
+        "id": "recruit-v85-9e3779b1-000002",
+        "name": "Nadia Bensaïd",
+        "gear": [
+          "weapon-003-m4a3-service-pistol",
+          "equipment-006-medkit",
+          "equipment-007-trauma-kit"
+        ]
+      },
+      {
+        "id": "recruit-v85-9e3779b1-000003",
+        "name": "Jonas Reed",
+        "gear": [
+          "weapon-007-m37a2-pump-shotgun",
+          "equipment-009-m3-personnel-armor",
+          "equipment-021-ammo-satchel"
+        ]
+      },
+      {
+        "id": "recruit-v85-9e3779b1-000004",
+        "name": "Jun Seo",
+        "gear": [
+          "weapon-001-m41a-pulse-rifle",
+          "equipment-001-motion-tracker",
+          "equipment-030-colony-beacon"
+        ]
+      }
+    ],
+    "injury": {
+      "crewId": "recruit-v85-9e3779b1-000002",
+      "health": 65,
+      "maxHealth": 100,
+      "reason": "Bounded medkit input test, not campaign damage"
+    }
+  }
+}

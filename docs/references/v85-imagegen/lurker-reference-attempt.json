@@ -1,0 +1,15 @@
+{
+  "schema": 85,
+  "status": "blocked-before-generation",
+  "generatedAssets": 0,
+  "provider": "OpenAI built-in ImageGen",
+  "reference": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/references/square-enix-lurker-official.jpg",
+  "referenceSha256": "ae1f7fcff61a91e247e253f393033f88661d4414e01b8ffda9b8f3503bc10a41",
+  "referenceInspected": true,
+  "copyOnWritableCWorkspaceSha256Verified": true,
+  "prompt": "Use case: identity-preserve. Asset type: eight-frame enemy pounce animation sprite sheet for the 2D side-scrolling game Aliens Tantalus Frontier. Input image 1 is the anatomical reference of the Aliens Colonial Marines Lurker; preserve this precise creature design, not the image background or pose. Same smooth long curved black cranial dome with ribbed lower edge, thin ribbed biomechanical torso, four dorsal tubes, two long clawed arms, two digitigrade legs, one long segmented tail ending in a pointed blade. Gunmetal black with subtle bronze highlights; no redesign, no purple, horns, wings, extra tails or limbs. Strict orthographic SIDE PROFILE facing RIGHT in every frame. Generate a FOUR equal columns by TWO equal rows sheet, eight full isolated sequential poses. Transparent RGBA background, no painted checkerboard, no ground shadow, no text or grid. Each invisible cell has identical dimensions, camera, scale, skull length, and pelvis horizontal anchor. Draw each complete creature small inside the cell with at least 15% transparent margins at every boundary, including extended hands and whole tail. Grounded contact line is at exactly 80% of each cell height: frame1 loaded crouch, frame2 launch extension, frame3 lifting fully airborne, frame4 stretched airborne apex, frame5 descending claws forward, frame6 foreclaws TOUCH THE ORIGINAL GROUND LINE, frame7 hindfeet TOUCH THE SAME GROUND LINE as frame1 while body compresses, frame8 returns to the SAME GROUNDED CROUCH as frame1. Frames6-8 MUST land, not hover. Root world horizontal movement will be applied by the game. Keep true continuous anatomical motion, distinct poses, no shrinking or changing anatomy. Crisp detailed game bitmap art, consistent upper-left illumination, no blur, no trails, no scenery, no other character.",
+  "error": "unable to read referenced image: windows sandbox failed: helper_unknown_error: apply deny-read ACLs",
+  "fallbackApi": "declined-by-user-remain-on-built-in",
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

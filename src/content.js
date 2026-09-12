@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '84.0.0',
-  subtitle: 'Création du joueur, prologue physique, visée huit directions et BIOFORGE jouable',
+  version: '85.0.0',
+  subtitle: 'Recrutement causal, dossiers Echo-9, dotations individuelles et prologue jouable',
   sourceVersion: '51.0.0'
 });

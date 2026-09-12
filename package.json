@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "84.0.0",
+  "version": "85.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -53,8 +53,10 @@
     "verify:production:v82": "node scripts/verify-production-v82.mjs",
     "verify:production:v83": "node scripts/verify-production-v83.mjs",
     "verify:production:v84": "node scripts/verify-production-v84.mjs",
+    "verify:production:v85": "node scripts/verify-production-v85.mjs",
     "qa:browser:v83": "node tests/browser-combat-v83.mjs",
     "qa:browser:v84": "node tests/browser-onboarding-v84.mjs && node tests/browser-captions-v84.mjs",
+    "qa:browser:v85": "node tests/browser-recruitment-v85.mjs && node tests/browser-crew-runtime-v85.mjs",
     "build": "node scripts/build.mjs",
     "qa:browser:v52": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v54": "node scripts/browser-qa-v52.mjs",
@@ -76,7 +78,7 @@
     "verify:production:v80": "node scripts/verify-production-v80.mjs",
     "verify:production:v81": "node scripts/verify-production-v81.mjs",
     "qa": "npm run art:proving:v82 && npm run batch:v82:check && npm run audio:check && npm run audit:bioforge:v80 && npm run art:proving:v81 && npm run art:enemy:v81 && npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run batch:v75:check && npm run art:v75:check && npm run lint && npm test && npm run build",
-    "qa:release": "npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84"
+    "qa:release": "npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84 && npm run qa:browser:v85"
   },
   "engines": {
     "node": ">=20"
