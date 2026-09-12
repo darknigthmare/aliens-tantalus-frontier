@@ -40,6 +40,7 @@ import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV7
 import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { createPlayerOnboardingV84, normalizePlayerOnboardingV84, validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -187,6 +188,8 @@ export function createDefaultSave(profile = 1) {
     campaignId: null,
     levelSeedId: 'level-001',
     difficulty: 'standard',
+    onboardingV84: null,
+    needsPlayerCreationV84: true,
     presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
       name: 'Mara Vega',
@@ -1081,6 +1084,7 @@ export function getOperationBrief(save, campaign, world) {
 }
 
 export function beginOperation(save, campaign, world) {
+  if (save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez le réveil et le briefing dans le Tantalus avant un déploiement.');
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation?.campaignId === campaign.id) {
     const operation = strategy.currentOperation;
@@ -1124,6 +1128,7 @@ export function beginOperation(save, campaign, world) {
     cost: structuredClone(brief.cost),
     reward: structuredClone(brief.reward),
     crewIds: [...brief.crewIds],
+    playerIdentityV84: save.onboardingV84?.identity ? structuredClone(save.onboardingV84.identity) : null,
     weaponIds: [...save.player.weaponIds],
     equipmentIds: [...save.player.equipmentIds],
     vehicleId: strategy.selectedVehicleId,
@@ -1578,11 +1583,18 @@ export function migrateSave(input, profile = 1) {
   if (!isRecord(input)) return base;
   const migrated = structuredClone(base);
   const source = structuredClone(input);
+  migrated.onboardingV84 = normalizePlayerOnboardingV84(source.onboardingV84);
+  migrated.needsPlayerCreationV84 = source.needsPlayerCreationV84 === true && !migrated.onboardingV84;
 
   const player = isRecord(source.player) ? source.player : {};
   Object.assign(migrated.player, player);
   for (const key of ['visualSheetId', 'spriteKey', 'visualForm', 'neuroVisualContract']) delete migrated.player[key];
   migrated.player.name = typeof player.name === 'string' ? player.name.slice(0, 80) : base.player.name;
+  if (migrated.onboardingV84) {
+    migrated.player.name = migrated.onboardingV84.identity.name;
+    migrated.player.callsign = migrated.onboardingV84.identity.callsign;
+    migrated.player.operatorId = migrated.onboardingV84.identity.id;
+  }
   for (const key of ['health', 'armor', 'stress']) migrated.player[key] = numberBetween(player[key], base.player[key], 0, 100);
   migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
   migrated.player.equipmentIds = stringList(player.equipmentIds, base.player.equipmentIds);
@@ -1693,6 +1705,7 @@ export function migrateSave(input, profile = 1) {
       cost: sanitizeValues(candidate.cost),
       reward: sanitizeValues(candidate.reward),
       crewIds: stringList(candidate.crewIds).filter((id) => knownCrewIds.has(id)).slice(0, MAX_SQUAD_SIZE),
+      playerIdentityV84: candidate.playerIdentityV84?.schema === 84 ? validatePlayerIdentityV84(candidate.playerIdentityV84).identity : null,
       weaponIds: stringList(candidate.weaponIds).slice(0, 8),
       equipmentIds: stringList(candidate.equipmentIds).slice(0, 8),
       vehicleId: resolveReadyVehicleIdV60(
@@ -1898,6 +1911,19 @@ export class SaveSystem {
   newGame(profile = 1) {
     const target = assertSaveProfileIdV78(profile);
     return this.writeCandidateV78(createDefaultSave(target), target, { replace: true });
+  }
+
+  newPlayerTimelineV84(identity, profile = this.profile) {
+    const target = assertSaveProfileIdV78(profile);
+    const checked = validatePlayerIdentityV84(identity);
+    if (!checked.ok) throw new Error(Object.values(checked.errors).join(' '));
+    const candidate = createDefaultSave(target);
+    candidate.onboardingV84 = createPlayerOnboardingV84(checked.identity);
+    candidate.needsPlayerCreationV84 = false;
+    Object.assign(candidate.player, { name: checked.identity.name, callsign: checked.identity.callsign, operatorId: checked.identity.id, classId: 'marine' });
+    Object.assign(candidate.hub, { deck: 0, roomId: 'cryo-bay', positionX: 4560, facing: -1, visited: ['cryo-bay'] });
+    candidate.scene = 'hub';
+    return this.writeCandidateV78(candidate, target, { replace: true });
   }
 
   commit(patch = null) {

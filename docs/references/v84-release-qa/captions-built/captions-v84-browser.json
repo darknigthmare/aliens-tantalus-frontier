@@ -1,0 +1,616 @@
+{
+  "ok": true,
+  "scope": "Actual application CSS and mission caption events; isolated browser storage; authored mission setup; no campaign completion claim.",
+  "layouts": [
+    {
+      "name": "desktop",
+      "viewport": [
+        1280,
+        720
+      ],
+      "canvas": {
+        "left": 43.40625,
+        "top": 0,
+        "right": 1236.59375,
+        "bottom": 671.15625,
+        "width": 1193.1875,
+        "height": 671.15625
+      },
+      "caption": {
+        "left": 355,
+        "top": 671.171875,
+        "right": 925,
+        "bottom": 720,
+        "width": 570,
+        "height": 48.828125
+      },
+      "text": "SOUS-TITRE · MARA : Rétablissez le courant, puis rejoignez le sas. Je couvre votre retraite.",
+      "captionDisplay": "block",
+      "captionFont": 12.8,
+      "ariaLive": "polite",
+      "controls": [
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        },
+        {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "name": "mobile-landscape",
+      "viewport": [
+        844,
+        390
+      ],
+      "canvas": {
+        "left": 177.1875,
+        "top": 0,
+        "right": 666.796875,
+        "bottom": 275.390625,
+        "width": 489.609375,
+        "height": 275.390625
+      },
+      "caption": {
+        "left": 154.8125,
+        "top": 275.40625,
+        "right": 689.1875,
+        "bottom": 322,
+        "width": 534.375,
+        "height": 46.59375
+      },
+      "text": "SOUS-TITRE · MARA : Rétablissez le courant, puis rejoignez le sas. Je couvre votre retraite.",
+      "captionDisplay": "block",
+      "captionFont": 12,
+      "ariaLive": "polite",
+      "controls": [
+        {
+          "left": 10,
+          "top": 328,
+          "right": 62,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 95.765625,
+          "top": 328,
+          "right": 147.765625,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 181.53125,
+          "top": 328,
+          "right": 233.53125,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 267.296875,
+          "top": 328,
+          "right": 319.296875,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 353.0625,
+          "top": 328,
+          "right": 405.0625,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 438.828125,
+          "top": 328,
+          "right": 490.828125,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 524.59375,
+          "top": 328,
+          "right": 576.59375,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 610.359375,
+          "top": 328,
+          "right": 662.359375,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 696.125,
+          "top": 328,
+          "right": 748.125,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        },
+        {
+          "left": 781.890625,
+          "top": 328,
+          "right": 833.890625,
+          "bottom": 380,
+          "width": 52,
+          "height": 52,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "name": "mobile-portrait",
+      "viewport": [
+        390,
+        844
+      ],
+      "canvas": {
+        "left": 0,
+        "top": 356.609375,
+        "right": 390,
+        "bottom": 575.984375,
+        "width": 390,
+        "height": 219.375
+      },
+      "caption": {
+        "left": 0,
+        "top": 679.40625,
+        "right": 390,
+        "bottom": 726,
+        "width": 390,
+        "height": 46.59375
+      },
+      "text": "SOUS-TITRE · MARA : Rétablissez le courant, puis rejoignez le sas. Je couvre votre retraite.",
+      "captionDisplay": "block",
+      "captionFont": 12,
+      "ariaLive": "polite",
+      "controls": [
+        {
+          "left": 10,
+          "top": 732,
+          "right": 79.1875,
+          "bottom": 780,
+          "width": 69.1875,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 85.1875,
+          "top": 732,
+          "right": 154.390625,
+          "bottom": 780,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 160.390625,
+          "top": 732,
+          "right": 229.59375,
+          "bottom": 780,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 235.59375,
+          "top": 732,
+          "right": 304.796875,
+          "bottom": 780,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 310.796875,
+          "top": 732,
+          "right": 379.984375,
+          "bottom": 780,
+          "width": 69.1875,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 10,
+          "top": 786,
+          "right": 79.1875,
+          "bottom": 834,
+          "width": 69.1875,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 85.1875,
+          "top": 786,
+          "right": 154.390625,
+          "bottom": 834,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 160.390625,
+          "top": 786,
+          "right": 229.59375,
+          "bottom": 834,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 235.59375,
+          "top": 786,
+          "right": 304.796875,
+          "bottom": 834,
+          "width": 69.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 310.796875,
+          "top": 786,
+          "right": 379.984375,
+          "bottom": 834,
+          "width": 69.1875,
+          "height": 48,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "name": "small-landscape",
+      "viewport": [
+        480,
+        320
+      ],
+      "canvas": {
+        "left": 94.75,
+        "top": 0,
+        "right": 385.25,
+        "bottom": 163.40625,
+        "width": 290.5,
+        "height": 163.40625
+      },
+      "caption": {
+        "left": 0,
+        "top": 163.40625,
+        "right": 480,
+        "bottom": 210,
+        "width": 480,
+        "height": 46.59375
+      },
+      "text": "SOUS-TITRE · MARA : Rétablissez le courant, puis rejoignez le sas. Je couvre votre retraite.",
+      "captionDisplay": "block",
+      "captionFont": 12,
+      "ariaLive": "polite",
+      "controls": [
+        {
+          "left": 10,
+          "top": 216,
+          "right": 54,
+          "bottom": 260,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 103.1875,
+          "top": 216,
+          "right": 147.1875,
+          "bottom": 260,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 196.390625,
+          "top": 216,
+          "right": 240.390625,
+          "bottom": 260,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 289.59375,
+          "top": 216,
+          "right": 333.59375,
+          "bottom": 260,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 382.796875,
+          "top": 216,
+          "right": 426.796875,
+          "bottom": 260,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 10,
+          "top": 266,
+          "right": 54,
+          "bottom": 310,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 103.1875,
+          "top": 266,
+          "right": 147.1875,
+          "bottom": 310,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 196.390625,
+          "top": 266,
+          "right": 240.390625,
+          "bottom": 310,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 289.59375,
+          "top": 266,
+          "right": 333.59375,
+          "bottom": 310,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        },
+        {
+          "left": 382.796875,
+          "top": 266,
+          "right": 426.796875,
+          "bottom": 310,
+          "width": 44,
+          "height": 44,
+          "hit": true
+        }
+      ]
+    },
+    {
+      "name": "small-portrait",
+      "viewport": [
+        320,
+        568
+      ],
+      "canvas": {
+        "left": 0,
+        "top": 193.296875,
+        "right": 320,
+        "bottom": 373.296875,
+        "width": 320,
+        "height": 180
+      },
+      "caption": {
+        "left": 0,
+        "top": 386.609375,
+        "right": 320,
+        "bottom": 450,
+        "width": 320,
+        "height": 63.390625
+      },
+      "text": "SOUS-TITRE · MARA : Rétablissez le courant, puis rejoignez le sas. Je couvre votre retraite.",
+      "captionDisplay": "block",
+      "captionFont": 12,
+      "ariaLive": "polite",
+      "controls": [
+        {
+          "left": 10,
+          "top": 456,
+          "right": 65.1875,
+          "bottom": 504,
+          "width": 55.1875,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 71.1875,
+          "top": 456,
+          "right": 126.390625,
+          "bottom": 504,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 132.390625,
+          "top": 456,
+          "right": 187.59375,
+          "bottom": 504,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 193.59375,
+          "top": 456,
+          "right": 248.796875,
+          "bottom": 504,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 254.796875,
+          "top": 456,
+          "right": 310,
+          "bottom": 504,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 10,
+          "top": 510,
+          "right": 65.1875,
+          "bottom": 558,
+          "width": 55.1875,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 71.1875,
+          "top": 510,
+          "right": 126.390625,
+          "bottom": 558,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 132.390625,
+          "top": 510,
+          "right": 187.59375,
+          "bottom": 558,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 193.59375,
+          "top": 510,
+          "right": 248.796875,
+          "bottom": 558,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        },
+        {
+          "left": 254.796875,
+          "top": 510,
+          "right": 310,
+          "bottom": 558,
+          "width": 55.203125,
+          "height": 48,
+          "hit": true
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    "desktop.jpg",
+    "mobile-landscape.jpg",
+    "mobile-portrait.jpg",
+    "small-landscape.jpg",
+    "small-portrait.jpg"
+  ],
+  "errors": [],
+  "longDialogue": {
+    "length": 676,
+    "overflow": "auto",
+    "pointerEvents": "auto",
+    "scrollHeight": 298,
+    "clientHeight": 135
+  }
+}

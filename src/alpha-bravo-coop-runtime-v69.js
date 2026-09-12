@@ -145,13 +145,26 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       };
     }
 
+    isIndependentAlphaBravoCommanderV84(actor = this.player) {
+      return Boolean(actor && actor === this.player
+        && this.playerIdentityV84?.id === 'player-echo9'
+        && actorCrewId(actor) === this.playerIdentityV84.id);
+    }
+
+    alphaBravoCommandTeamsForTaskV84(task) {
+      return this.alphaBravoSelectedTeamsV69()
+        .filter((teamId) => task?.fireteamId === 'joint' || task?.fireteamId === teamId);
+    }
+
     alphaBravoCrewIdsV69() {
       const ids = [];
       const push = (value) => {
         const id = boundedText(value, '', 96);
         if (id && !ids.includes(id) && ids.length < 4) ids.push(id);
       };
-      push(actorCrewId(this.player));
+      // The independent V84 commander is a fifth physical actor, not a fifth
+      // member of the two pairs or a substitute for a manifested Marine.
+      if (!this.isIndependentAlphaBravoCommanderV84()) push(actorCrewId(this.player));
       for (const actor of asList(this.squadActors)) push(actorCrewId(actor));
       for (const member of asList(this.crewRuntime).filter((entry) => entry?.status === 'active')) push(member.id);
       return ids;
@@ -919,6 +932,33 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.interact(actor);
       const nearby = this.alphaBravoNearestStationV69(actor);
       if (!nearby) return super.interact(actor);
+      if (this.isIndependentAlphaBravoCommanderV84(actor)) {
+        if (!this.running || this.paused || !actor.alive || actor.downed) return false;
+        const teams = this.alphaBravoCommandTeamsForTaskV84(nearby.task);
+        if (!teams.length) {
+          this.onEvent?.({ type: 'fireteam-task-denied', operationId: ALPHA_BRAVO_OPERATION_ID_V69,
+            taskId: nearby.task.id, teamId: this.alphaBravoV69.selectedTeam, reservedFor: nearby.task.fireteamId });
+          return false;
+        }
+        let ordered = false;
+        for (const teamId of teams) {
+          if (!this.reserveAlphaBravoTaskV69(teamId, nearby.task.id)) continue;
+          const team = this.alphaBravoV69.teams[teamId];
+          team.order = 'focus';
+          team.reservedTask = nearby.task.id;
+          team.orderSequence += 1;
+          team.lastOrderAt = Number(this.mission?.elapsed) || 0;
+          this.alphaBravoV69.telemetry.ordersIssued += 1;
+          this.onEvent?.({ type: 'fireteam-order', operationId: ALPHA_BRAVO_OPERATION_ID_V69,
+            teamId, order: 'focus', sequence: team.orderSequence, taskId: nearby.task.id,
+            issuedBy: this.playerIdentityV84.id });
+          ordered = true;
+        }
+        // A command is not a task participant: only the two/four real Marines
+        // can advance the existing physical task and certification contracts.
+        if (ordered) actor.workClock = Math.max(Number(actor.workClock) || 0, 0.32);
+        return ordered;
+      }
       const teamId = this.alphaBravoTeamForActorV69(actor);
       if (!teamId) return false;
       const { task } = nearby;
@@ -939,6 +979,14 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
       if (!this.isAlphaBravoMissionV69() || !this.alphaBravoV69) return super.getInteractionPrompt(actor);
       const nearby = this.alphaBravoNearestStationV69(actor);
       if (!nearby) return super.getInteractionPrompt(actor);
+      if (this.isIndependentAlphaBravoCommanderV84(actor)) {
+        const { task } = nearby;
+        const teams = this.alphaBravoCommandTeamsForTaskV84(task);
+        if (!teams.length) return `SÉLECTIONNEZ LE BINÔME ${task.fireteamId.toUpperCase()}`;
+        const ready = this.alphaBravoTaskReadyActorsV69(task).length;
+        const expected = task.fireteamId === 'joint' ? 4 : 2;
+        return `E  ORDONNER ${teams.join(' / ').toUpperCase()} · MARINES EN POSITION ${ready}/${expected}`;
+      }
       const teamId = this.alphaBravoTeamForActorV69(actor);
       const task = nearby.task;
       if (task.fireteamId !== 'joint' && task.fireteamId !== teamId) return `RÉSERVÉ AU BINÔME ${task.fireteamId.toUpperCase()}`;
@@ -1204,6 +1252,11 @@ export function withAlphaBravoCoopRuntimeV69(BaseEngine) {
         certified: state.certified,
         score: alphaBravoScoreV69(state),
         selectedTeam: state.selectedTeam,
+        ...(this.isIndependentAlphaBravoCommanderV84() ? { commanderV84: {
+          id: this.playerIdentityV84.id, name: this.playerIdentityV84.name,
+          callsign: this.playerIdentityV84.callsign, role: 'independent-commander',
+          countsTowardCertification: false
+        } } : {}),
         awaitingPing: Boolean(this.alphaBravoAwaitingPingV69),
         extractionBlocked: Boolean(this.missingAlphaBravoRequirementV69()),
         prompt: this.missingAlphaBravoRequirementV69() || 'CERTIFICATION ACQUISE · EXTRACTION DISPONIBLE',

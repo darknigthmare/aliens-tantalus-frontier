@@ -1,5 +1,6 @@
 import { GameEngine as MissionEngine } from './game-v51-runtime.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
+import { validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const distance = (a, b) => Math.hypot((a.x + a.w / 2) - (b.x + b.w / 2), (a.y + a.h / 2) - (b.y + b.h / 2));
@@ -192,6 +193,10 @@ export function buildMissionPlan({ campaign = {}, world = {}, levelSeed = {}, di
 
 export class GameEngine extends MissionEngine {
   start(options = {}) {
+    // The frozen deployment identity owns J1; a later profile/form edit cannot
+    // rename an already running operation. Missing/invalid identities stay legacy.
+    const identityResultV84 = validatePlayerIdentityV84(options.playerIdentityV84);
+    this.playerIdentityV84 = identityResultV84.ok ? Object.freeze({ ...identityResultV84.identity }) : null;
     const difficulty = DIFFICULTIES[options.difficulty] ? options.difficulty : 'standard';
     this.difficultyRuntime = DIFFICULTIES[difficulty];
     this.weaponRuntime = buildWeaponRuntime(options.weapon);
@@ -285,7 +290,11 @@ export class GameEngine extends MissionEngine {
     if (medic) this.inventory.medkits += 1;
     if (engineer && this.vehicle?.active) this.vehicle.hull = Math.min(this.vehicle.maxHull, this.vehicle.hull + 30);
     if (vehicleChief && this.vehicle?.active) this.vehicle.fuel = 100;
-    if (activeCrew[0]) this.player.operatorId = activeCrew[0].id;
+    if (this.playerIdentityV84) {
+      this.player.operatorId = this.playerIdentityV84.id;
+      this.player.name = this.playerIdentityV84.name;
+      this.player.callsign = this.playerIdentityV84.callsign;
+    } else if (activeCrew[0]) this.player.operatorId = activeCrew[0].id;
     if (activeCrew[1]) this.coop.operatorId = activeCrew[1].id;
     if (plan.apex) {
       const boss = this.enemies.find((enemy) => enemy.isBoss);
@@ -485,6 +494,13 @@ export class GameEngine extends MissionEngine {
     const snapshot = super.getSnapshot();
     return {
       ...snapshot,
+      playerIdentityV84: this.playerIdentityV84 ? { ...this.playerIdentityV84 } : null,
+      ...(this.playerIdentityV84 && snapshot.player ? { player: {
+        ...snapshot.player,
+        operatorId: this.player.operatorId,
+        name: this.player.name,
+        callsign: this.player.callsign
+      } } : {}),
       difficulty: this.difficulty,
       missionContract: this.mission?.contract ? { ...this.mission.contract } : null,
       environment: this.environmentRuntime ? { ...this.environmentRuntime, biomes: [...this.environmentRuntime.biomes], hazardTypes: [...this.environmentRuntime.hazardTypes] } : null,

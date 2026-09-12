@@ -1,0 +1,356 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4177/",
+  "scope": "Fresh isolated storage; native title/form/keyboard input and actual cryo-to-briefing movement. No teleport or direct phase mutation. Sprite wake animation is not certified.",
+  "screenshots": [
+    "01-creator.jpg",
+    "02-cryo.jpg",
+    "03-welcome.jpg",
+    "04-briefing.jpg",
+    "05-complete.jpg",
+    "06-mobile-creator.jpg"
+  ],
+  "checks": {
+    "cancelPreservesBytes": true,
+    "spawn": {
+      "player": {
+        "name": "Alex Moreau",
+        "classId": "marine",
+        "health": 100,
+        "armor": 50,
+        "stress": 0,
+        "weaponIds": [
+          "weapon-001-m41a-pulse-rifle",
+          "weapon-003-m4a3-service-pistol"
+        ],
+        "equipmentIds": [
+          "equipment-001-motion-tracker",
+          "equipment-006-medkit"
+        ],
+        "costumeId": "costume-001",
+        "ammo": {
+          "primary": 420,
+          "secondary": 96,
+          "grenades": 4
+        },
+        "callsign": "ECHO-17",
+        "operatorId": "player-echo9"
+      },
+      "room": "cryo-bay",
+      "x": 4560,
+      "crew": [
+        "crew-01-mara-vega",
+        "crew-14-echo-a",
+        "crew-10-david-8r",
+        "crew-02-tamsin-velez"
+      ]
+    },
+    "midDialogueReload": true,
+    "route": [
+      {
+        "x": 4353,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4312.072806916702,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4258.486804737613,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4204.4729172106,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4145.937335153237,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4091.937344978045,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 4037.937345289243,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 3983.9103452990953,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 3940.720157062645,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 3894.0639834360236,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 3840.297021510111,
+        "y": 532,
+        "room": "cryo-bay"
+      },
+      {
+        "x": 3786.2774022990898,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3727.7686375876615,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3673.741643126937,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3619.7146433021203,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3565.714643307659,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3511.687643307835,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3457.660643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3403.660643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3349.660643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3295.633643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3237.0976433078413,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3183.1246433078413,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3129.0976433078413,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3075.0706433078412,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 3021.043643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2967.043643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2913.016643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2859.016643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2805.016643307841,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2750.9896433078425,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2692.4806433078443,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2651.598489811561,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2600.6749894005916,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2546.773146399557,
+        "y": 532,
+        "room": "combat-information"
+      },
+      {
+        "x": 2492.776253936947,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2438.7493523535895,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2384.7493554654084,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2330.695355563973,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2276.6953555670843,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2218.1863555671835,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2164.1593555671866,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2110.1593555671884,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2056.13235556719,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 2002.1053555671897,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1948.1053555671895,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1889.5963555671885,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1839.9163555671885,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1785.8893555671875,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1731.8893555671866,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1677.8623555671857,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1623.8353555671854,
+        "y": 532,
+        "room": "briefing"
+      },
+      {
+        "x": 1569.835355567185,
+        "y": 532,
+        "room": "briefing",
+        "contact": "crew-02-tamsin-velez"
+      }
+    ],
+    "complete": {
+      "schema": 84,
+      "identity": {
+        "id": "player-echo9",
+        "schema": 84,
+        "name": "Alex Moreau",
+        "callsign": "ECHO-17",
+        "canonStatus": "project-fiction-not-franchise-canon"
+      },
+      "phase": "complete",
+      "dialogueNode": 0,
+      "choices": [
+        "wake-confirmed",
+        "medical-next:0",
+        "medical-next:1",
+        "medical-complete",
+        "briefing-next:0",
+        "briefing-next:1",
+        "briefing-complete"
+      ],
+      "completedEvents": [
+        "wake-confirmed",
+        "medical-next:0",
+        "medical-next:1",
+        "medical-complete",
+        "briefing-next:0",
+        "briefing-next:1",
+        "briefing-complete"
+      ]
+    },
+    "completedReload": true,
+    "mobileCreator": {
+      "inside": true,
+      "scrollable": true
+    },
+    "writeFailurePreservesCompletedCampaign": true,
+    "cancelCompletedCampaignPreservesBytes": true
+  },
+  "errors": []
+}

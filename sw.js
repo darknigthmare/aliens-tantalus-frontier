@@ -1,7 +1,9 @@
-const CACHE = 'atf-v83-eight-way-combat-shell-1';
+const CACHE = 'atf-v84-player-onboarding-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/player-onboarding-v84.js', '/src/player-creator-ui-v84.js', '/src/hub-onboarding-v84.js',
+  '/src/combat-captions-v84.js', '/player-onboarding-v84.css',
   '/src/combat-aim-v83.js', '/src/projectile-collision-v83.js',
   '/src/save-profile-v78.js',
   '/src/tactical-reload-v77.js', '/src/mission-input-v77.js', '/src/tactical-reload-hud-v77.js',

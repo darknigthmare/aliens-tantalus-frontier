@@ -474,8 +474,12 @@ export function withV52MissionRuntime(BaseEngine) {
 
     configureMissionSquad() {
       const activeCrew = asList(this.crewRuntime).filter((member) => member?.status === 'active');
+      const explicitPlayerV84 = this.playerIdentityV84?.id === 'player-echo9'
+        && this.player?.operatorId === this.playerIdentityV84.id;
       const operatorId = this.player?.operatorId || activeCrew[0]?.id;
-      const companions = activeCrew.filter((member) => member.id !== operatorId).slice(0, 3);
+      // V84 J1 is not a catalogue crew member. Keep all four manifested allies;
+      // J2 still takes over its existing counterpart instead of spawning a clone.
+      const companions = activeCrew.filter((member) => member.id !== operatorId).slice(0, explicitPlayerV84 ? 4 : 3);
       this.squadActors = companions.map((member, index) => createSquadActor(member, index, this.player));
       this.squadTelemetry = {
         configured: this.squadActors.length,

@@ -18,7 +18,10 @@ export const HUB_ROOM_PROFILES = Object.freeze({
   bridge: defineRoomProfile(1.01, 0.820, 184, 76),
   // The table is behind the walking lane; only its tabletop supports a descending actor.
   briefing: defineRoomProfile(1.05, 0.815, 480, 142, 'one-way-top'),
-  'combat-information': defineRoomProfile(1.03, 0.820, 168, 70),
+  // Like the briefing table, the CIC console is painted behind the walking
+  // lane. Its keyboard surface supports landing, not a side wall: the service
+  // duct above otherwise leaves only 60px for a 92px Marine to jump through.
+  'combat-information': defineRoomProfile(1.03, 0.820, 168, 70, 'one-way-top'),
   'cryo-bay': defineRoomProfile(1.06, 0.825, 188, 54),
   'crew-quarters': defineRoomProfile(1.06, 0.820, 174, 82),
   mess: defineRoomProfile(1.05, 0.815, 174, 44),

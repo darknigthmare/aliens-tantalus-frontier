@@ -1,6 +1,7 @@
 import { GameEngine as FinalGameEngine } from './game-final-runtime.js';
 import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
+import { CombatCaptionDirectorV84 } from './combat-captions-v84.js';
 
 export * from './game-final-runtime.js';
 
@@ -187,6 +188,7 @@ export class GameEngine extends FinalGameEngine {
   start(options = {}) {
     this.accessibilityRuntime = buildAccessibilityRuntime(options);
     this.captions = [];
+    this.captionDirectorV84 = new CombatCaptionDirectorV84();
     this.cameraShake = 0;
     this.penetrationTelemetry = { shots: 0, hits: 0, passThroughs: 0, familyEffects: {} };
     this.encounterSelection = selectEnemyEncounterCatalog(options.enemyCatalog, { world: options.world, campaign: options.campaign, levelSeed: options.levelSeed }, 18 + (Number(options.world?.danger) || 5) * 2);
@@ -484,7 +486,9 @@ export class GameEngine extends FinalGameEngine {
 
   pushCaption(channel, text) {
     if (!this.accessibilityRuntime?.subtitles || !text) return false;
-    const caption = { id: `${channel}-${this.captions.length + 1}`, channel, text: String(text), at: Math.round((this.mission?.elapsed || 0) * 10) / 10 };
+    this.captionDirectorV84 ||= new CombatCaptionDirectorV84();
+    const caption = this.captionDirectorV84.offer(channel, text, this.mission?.elapsed || 0);
+    if (!caption) return false;
     this.captions.push(caption);
     if (this.captions.length > 12) this.captions.shift();
     this.onEvent({ type: 'caption', ...caption });

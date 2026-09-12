@@ -1,6 +1,6 @@
-# V76 — Matrice maîtresse des écarts des conversations ChatGPT (suivi V83)
+# V76 — Matrice maîtresse des écarts des conversations ChatGPT (suivi V84)
 
-Date de consolidation : 2026-09-12
+Date de consolidation : 2026-09-13
 Dépôt observé : `D:\CodexWork\aliens-tantalus-frontier\project`
 Sources : `group-gameplay.md`, `group-missions.md`, `group-levels.md`
 
@@ -124,5 +124,11 @@ Suivi V81 : #6, #7 et #19 restent PARTIAL malgré le verrou d’identité Echo-9
 Le tir physique huit directions est désormais connecté aux missions J1/J2, aux tourelles et à BIOFORGE ; les alliés visent les cibles en hauteur. La visée explicite n’est plus écrasée par l’assistance ou une mêlée automatique. Les projectiles rencontrent les obstacles dans l’ordre spatial, y compris à grande vitesse. Les contrôles et les pertes de focus disposent de régressions ; le navigateur teste les entrées réelles clavier/souris/tactile dans une mission isolée, pas une campagne entière.
 
 Les animations de bras/corps directionnelles, les comportements propres au lance-flammes/harpon/tir chargé, le prologue et le recrutement causal restent à implémenter. La tentative de génération Lurker référencée V83 a échoué avant production pour une erreur d’accès Windows ; elle ajoute **zéro** image et **zéro** ennemi intégré. Le bilan vérifiable reste 14/571 ennemis intégrés, 557 non intégrés. Les 26 conversations restent 0 DONE, 17 PARTIAL et 9 MISSING.
+
+## Suivi V84 — accueil physique, aucune conversation clôturée
+
+La sous-demande de parcours créateur/prologue de #7 possède maintenant une boucle fonctionnelle : identité enregistrée atomiquement, réveil à la capsule, accueil de DAVID-8R, marche cryo/CIC/briefing et dialogue avec Tamsin. Les phases et les répliques se reprennent après rechargement. Le joueur n'usurpe plus l'identité de Mara en mission. Le goulot du CIC, les sous-titres mobiles et les écritures tardives entre profils ont reçu des corrections et des régressions dédiées. Détails et limites : `docs/VERSION_HISTORY_V84.md` et `docs/VALIDATION_V84.md`.
+
+Ce suivi remplace uniquement le constat « aucun parcours créateur/prologue » des audits antérieurs : leurs autres réserves restent ouvertes. Le réveil animé dédié, les variantes corporelles, aptitudes, portraits et le recrutement causal ne sont pas livrés. Aucun nouvel ennemi ni nouvelle image ; 14/571 ennemis intégrés. #7 reste PARTIAL, #5 reste MISSING ; total inchangé : 0 DONE, 17 PARTIAL, 9 MISSING.
 
 La présence d'une entrée dans `src/special-operations-v67.js`, d'un concept ChatGPT, d'une fiche de catalogue ou d'une sheet non reliée ne change jamais un statut. Au constat consolidé : **aucune des 26 conversations n'est intégralement DONE**, même si plusieurs sous-lots sont réels et testés. Les trois rapports sources conservent le verbatim, les détails de tests et les écarts complets ; cette matrice fournit l'ordre de décision et d'exécution.

@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '83.0.0',
-  subtitle: 'Visée huit directions, collisions continues et BIOFORGE jouable',
+  version: '84.0.0',
+  subtitle: 'Création du joueur, prologue physique, visée huit directions et BIOFORGE jouable',
   sourceVersion: '51.0.0'
 });

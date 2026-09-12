@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { RELEASE } from '../src/content.js';
+import { createDefaultSave, SAVE_PREFIX } from '../src/save.js';
+import { SAVE_SELECTED_PROFILE_KEY_V78 } from '../src/save-profile-v78.js';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -31,13 +33,15 @@ await mkdir(outputDir, { recursive: true });
 
 const report = {
   ok: false,
-  schema: 83,
+  schema: 84,
   target: targetKind,
   baseUrl: baseUrl.href,
   startedAt: new Date().toISOString(),
   scope: [
     'Contexte Chromium et stockage entièrement isolés.',
-    'Écran titre puis nouveau profil et reprises ouverts par événements CDP réels.',
+    'Sauvegarde legacy pré-V84 explicite, injectée dans le stockage isolé avant le chargement de l’application.',
+    'Écran titre puis bouton Continuer et reprises ouverts par événements CDP réels, sans création de nouveau profil.',
+    'Le créateur et le prologue V84 sont hors de ce scénario et couverts séparément par browser-onboarding-v84.mjs.',
     'Un fixture QA contrôlé place Echo-9 dans Armory, avant la porte authorée du Proving Ground.',
     'Depuis ce point, aucune téléportation ni mutation d’état de jeu pendant la qualification.',
     'Porte, console, marche, échelle, pad, visées, tirs et rechargements utilisent les entrées joueur réelles.',
@@ -46,9 +50,14 @@ const report = {
   ],
   hooksUsed: [
     {
+      id: 'legacy-profile-storage-fixture-v84',
+      reason: 'Qualifier la compatibilité des sauvegardes pré-V84 sans dupliquer le parcours créateur/prologue testé séparément.',
+      boundary: 'Profil 1, release 83.0.0, needsPlayerCreationV84=false et onboardingV84=null ; écriture unique avant le premier chargement, jamais réinjectée aux reprises.'
+    },
+    {
       id: 'armory-authored-door-start-fixture',
       reason: 'La route Bridge vers Armory traverse plusieurs salles et ascenseurs hors du périmètre de cette gate.',
-      boundary: 'Pose initiale seulement, environ 140 px avant la zone d’interaction de la porte authorée.'
+      boundary: 'Pose initiale seulement, environ 140 px avant la zone d’interaction de la porte authorée ; passage technique par Options pour ne pas écraser cette fixture avec la conservation normale de la pose active.'
     },
     {
       id: 'player-identity-observer',
@@ -365,19 +374,6 @@ async function openTitleMenu() {
   }, 'menu titre ouvert et focus Continuer');
 }
 
-async function enterFreshHubFromTitle() {
-  await openTitleMenu();
-  await click('#title-new');
-  assert.equal(await callPage(() => document.querySelector('#title-new').dataset.confirm), 'true');
-  await click('#title-new');
-  return untilPage(() => (
-    globalThis.__ATF_HUB__?.running
-    && document.querySelector('.view.active')?.dataset.panel === 'hub'
-    && document.activeElement?.id === 'hub-canvas'
-    && document.querySelector('#title-screen')?.hidden
-  ), 'nouveau profil vers hub réel', [], 30000);
-}
-
 async function continueHubFromTitle() {
   await openTitleMenu();
   assert.equal(await callPage(() => document.querySelector('#title-continue').disabled), false);
@@ -586,6 +582,20 @@ try {
 
   const navigationUrl = new URL(baseUrl.href);
   navigationUrl.searchParams.set('qa', 'proving-ground-v81-' + targetKind + '-' + Date.now());
+  const legacyFixture = {
+    ...createDefaultSave(1),
+    release: '83.0.0',
+    needsPlayerCreationV84: false,
+    onboardingV84: null
+  };
+  const legacySaveKey = SAVE_PREFIX + legacyFixture.profile;
+  const { identifier: legacyFixtureScriptId } = await command('Page.addScriptToEvaluateOnNewDocument', {
+    source: pageExpression((origin, key, selectedKey, fixture) => {
+      if (location.origin !== origin) return;
+      localStorage.setItem(key, JSON.stringify(fixture));
+      localStorage.setItem(selectedKey, String(fixture.profile));
+    }, [baseUrl.origin, legacySaveKey, SAVE_SELECTED_PROFILE_KEY_V78, legacyFixture])
+  });
   await command('Page.navigate', { url: navigationUrl.href });
   await untilPage(() => (
     Boolean(globalThis.__ATF_V51__ && globalThis.__ATF_V61__ && globalThis.__ATF_HUB__)
@@ -593,6 +603,30 @@ try {
     && !document.querySelector('#title-screen')?.hidden
     && document.activeElement?.id === 'title-start'
   ), 'boot V81 sur écran titre', [], 45000);
+  // The fixture belongs only to initial boot: reloading must read earned progress.
+  await command('Page.removeScriptToEvaluateOnNewDocument', { identifier: legacyFixtureScriptId });
+  report.checks.legacyProfileFixture = await callPage((key, selectedKey) => {
+    const stored = JSON.parse(localStorage.getItem(key));
+    const saveSystem = globalThis.__ATF_V51__.saveSystem;
+    return {
+      key,
+      selectedProfile: localStorage.getItem(selectedKey),
+      sourceRelease: stored.release,
+      loadedRelease: saveSystem.data.release,
+      profile: saveSystem.profile,
+      needsPlayerCreationV84: saveSystem.data.needsPlayerCreationV84,
+      onboardingV84: saveSystem.data.onboardingV84,
+      titleVisibleBeforeContinue: !document.querySelector('#title-screen')?.hidden,
+      initialInjectionRemoved: true
+    };
+  }, legacySaveKey, SAVE_SELECTED_PROFILE_KEY_V78);
+  assert.equal(report.checks.legacyProfileFixture.sourceRelease, '83.0.0');
+  assert.equal(report.checks.legacyProfileFixture.loadedRelease, RELEASE.version);
+  assert.equal(report.checks.legacyProfileFixture.selectedProfile, '1');
+  assert.equal(report.checks.legacyProfileFixture.profile, 1);
+  assert.equal(report.checks.legacyProfileFixture.needsPlayerCreationV84, false);
+  assert.equal(report.checks.legacyProfileFixture.onboardingV84, null);
+  assert.equal(report.checks.legacyProfileFixture.titleVisibleBeforeContinue, true);
 
   report.checks.pageHealth = await callPage(() => ({
     title: document.title,
@@ -651,7 +685,7 @@ try {
   }, 'toutes les images du preset titre décodées et composées sans fallback de remplacement', [], 45000);
   await capture('01-title-v81.jpg');
 
-  await enterFreshHubFromTitle();
+  await continueHubFromTitle();
   report.checks.titleToHub = await pageSnapshot();
   assert.equal(report.checks.titleToHub.activeView, 'hub');
   assert.equal(report.checks.titleToHub.hubRunning, true);
@@ -663,7 +697,7 @@ try {
   }, 'cinq plaques Echo-9 prêtes', [], 30000);
   assert.equal(report.checks.playerSheetsReady.length, 5);
   await installIdentityObserver('pre-reload');
-  await capture('02-fresh-hub.jpg');
+  await capture('02-legacy-hub.jpg');
 
   report.checks.armoryFixture = await callPage(async () => {
     const module = await import('/src/hub-v81-runtime.js');
@@ -673,6 +707,9 @@ try {
     const deck = module.HUB_DECKS.findIndex((entry) => entry.id === proving.parentDeck);
     const room = module.HUB_DECKS[deck].rooms.find((entry) => entry.id === proving.parentRoomId);
     if (!proving || deck < 0 || !room) throw new Error('Route Armory vers Proving Ground absente');
+    // Same-view hub refresh preserves the live pose in V84. Leave the view before
+    // installing the declared initial-position fixture; subsequent play is real.
+    globalThis.__ATF_V51__.showView('settings');
     hub.stop(false);
     const commercial = structuredClone(module.createHubCommercialStateV71());
     saveSystem.data.hub = {

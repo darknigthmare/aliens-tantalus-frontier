@@ -43,7 +43,7 @@ function withHub(run) {
 const tick = (hub, seconds, fps = 60) => { for (let index = 0; index < Math.round(seconds * fps); index++) hub.update(1 / fps); };
 const close = (actual, expected, message) => assert.ok(Math.abs(actual - expected) < 0.001, `${message}: ${actual} vs ${expected}`);
 
-test('briefing V78: only the authored table becomes one-way; render and interaction bounds stay intact', () => {
+test('briefing V78: the authored table stays one-way; the V84 CIC rear console follows the same lane contract', () => {
   assert.equal(room.profile.propCollider.collisionMode, 'one-way-top');
   assert.equal(table.collisionMode, 'one-way-top');
   assert.equal(room.propCollisionBounds.collisionMode, 'one-way-top');
@@ -52,8 +52,9 @@ test('briefing V78: only the authored table becomes one-way; render and interact
   assert.equal(table.y, room.propRenderBounds.y);
   assert.ok(room.propInteractionBounds.w > table.w);
   for (const other of HUB_DECKS.flatMap(deck => deck.rooms).filter(entry => entry.id !== room.id)) {
-    assert.equal(other.profile.propCollider.collisionMode, undefined, other.id);
-    assert.equal(other.geometry[0].collisionMode, undefined, other.id);
+    const expectedMode = other.id === 'combat-information' ? 'one-way-top' : undefined;
+    assert.equal(other.profile.propCollider.collisionMode, expectedMode, other.id);
+    assert.equal(other.geometry[0].collisionMode, expectedMode, other.id);
   }
 });
 

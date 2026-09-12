@@ -1,0 +1,145 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4177/",
+  "scope": "Isolated Chromium storage; authored mission setup fixture, real CDP keyboard/mouse/touch. Shot observer records the genuine firing method without changing its result. No full campaign or diagonal body-animation claim.",
+  "screenshots": [
+    "01-title.jpg",
+    "02-keyboard-up-right.jpg",
+    "03-pointer-up-right.jpg",
+    "04-mobile-controls.jpg"
+  ],
+  "checks": {
+    "initial": {
+      "title": "ALIENS: TANTALUS FRONTIER v84",
+      "text": 209,
+      "buttons": 1726,
+      "overlay": false
+    },
+    "fixture": {
+      "version": "84.0.0",
+      "weapon": "M41A Pulse Rifle"
+    },
+    "keyboard": [
+      {
+        "vx": 629.3250352560273,
+        "vy": -629.3250352560273,
+        "x": 537.9705627484772,
+        "y": 805.3572302917352,
+        "role": "player",
+        "direction": "up-right"
+      },
+      {
+        "vx": 629.3250352560273,
+        "vy": -629.3250352560273,
+        "x": 537.9705627484772,
+        "y": 751.4148812735111,
+        "role": "player",
+        "direction": "up-right"
+      },
+      {
+        "vx": 0,
+        "vy": -890,
+        "x": 621,
+        "y": 724.7633460061425,
+        "role": "coop",
+        "direction": "up"
+      }
+    ],
+    "pointer": {
+      "shots": [
+        {
+          "vx": 629.3250352560273,
+          "vy": -629.3250352560273,
+          "x": 537.9705627484772,
+          "y": 736.3056563224119,
+          "role": "player",
+          "direction": "up-right"
+        },
+        {
+          "vx": 629.3250352560273,
+          "vy": -629.3250352560273,
+          "x": 537.9705627484772,
+          "y": 736.3056563224119,
+          "role": "player",
+          "direction": "up-right"
+        },
+        {
+          "vx": 629.3250352560273,
+          "vy": -629.3250352560273,
+          "x": 537.9705627484772,
+          "y": 736.3056563224119,
+          "role": "player",
+          "direction": "up-right"
+        },
+        {
+          "vx": 629.3250352560273,
+          "vy": -629.3250352560273,
+          "x": 537.9705627484772,
+          "y": 736.3056563224119,
+          "role": "player",
+          "direction": "up-right"
+        }
+      ],
+      "released": true,
+      "fireHeld": false
+    },
+    "mobile": {
+      "viewport": [
+        844,
+        390
+      ],
+      "canvas": [
+        177.1875,
+        0,
+        489.609375,
+        275.390625
+      ],
+      "controls": [
+        {
+          "key": "KeyA",
+          "visible": true,
+          "inside": true,
+          "hit": true
+        },
+        {
+          "key": "KeyD",
+          "visible": true,
+          "inside": true,
+          "hit": true
+        },
+        {
+          "key": "Space",
+          "visible": true,
+          "inside": true,
+          "hit": true
+        },
+        {
+          "key": "KeyF",
+          "visible": true,
+          "inside": true,
+          "hit": true
+        }
+      ]
+    },
+    "touch": {
+      "shots": [
+        {
+          "vx": 629.3250352560273,
+          "vy": -629.3250352560273,
+          "x": 537.9705627484772,
+          "y": 736.3056563224119,
+          "role": "player",
+          "direction": "up-right"
+        }
+      ],
+      "released": true,
+      "fireHeld": false
+    },
+    "pause": {
+      "paused": true,
+      "held": 0,
+      "aim": null
+    }
+  },
+  "errors": []
+}

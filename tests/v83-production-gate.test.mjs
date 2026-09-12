@@ -224,15 +224,15 @@ test('current release, package lock, HTML, SW and QA scripts agree without relab
     readFile('package.json', 'utf8'), readFile('package-lock.json', 'utf8'), readFile('index.html', 'utf8'), readFile('sw.js', 'utf8')
   ]);
   const packageJson = JSON.parse(packageSource), lock = JSON.parse(lockSource);
-  assert.equal(RELEASE.version, '83.0.0');
+  assert.ok(Number(RELEASE.version.split('.')[0]) >= 83, 'current release still includes V83 combat');
   for (const version of [packageJson.version, lock.version, lock.packages[''].version]) assert.equal(version, RELEASE.version);
-  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v83<\/title>/u);
-  assert.match(html, /<meta name="atf-release" content="83\.0\.0">/u);
+  assert.ok(html.includes(`<title>ALIENS: TANTALUS FRONTIER v${RELEASE.version.split('.')[0]}</title>`));
+  assert.ok(html.includes(`<meta name="atf-release" content="${RELEASE.version}">`));
   assert.match(html, /contenu ennemi encore en cours/u);
-  assert.ok(worker.includes(PRODUCTION_CACHE_V83));
+  assert.ok(worker.includes(`atf-v${RELEASE.version.split('.')[0]}-`));
   for (const path of COMBAT_RUNTIME_PATHS_V83) assert.ok(worker.includes("'/" + path + "'"), path);
   for (const path of RUNTIME_ASSET_PATHS_V82) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(packageJson.scripts['verify:production:v83'], 'node scripts/verify-production-v83.mjs');
   assert.equal(packageJson.scripts['qa:browser:v83'], 'node tests/browser-combat-v83.mjs');
-  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83');
+  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84');
 });
