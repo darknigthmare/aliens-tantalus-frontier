@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "checkedAt": "2026-09-12T13:47:37.092Z",
+  "commit": "44d5ae358d2d96fabc034763039d600ea4fa444f",
+  "target": "production",
+  "base": "https://aliens-tantalus-frontier.vercel.app",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "versionVerified": true
+    },
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "0fef669b93488f7ad3880824dbeaff5b6569740d4e86deabc49e37dc15c33818",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "title-screen-v61.css",
+      "status": 200,
+      "sha256": "35032ded698ef649eaa4435bcf890c367c98cdc5cd883075eed22d0b53116e84",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "runtime-level.css",
+      "status": 200,
+      "sha256": "320e2c3a2b82ae49041c4224a6bcf7757caa5c3e70f88401baeb530ba164ce7e",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/app.js",
+      "status": 200,
+      "sha256": "b2bcdf8974acf90f38f1e83258da8579ceb4e38dfd40f050c9069efced5c660d",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/content.js",
+      "status": 200,
+      "sha256": "a93c2810c232ea057fb5c5a5f0eebb8bbe7874456709d5151c9180b110a91bd9",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/save.js",
+      "status": 200,
+      "sha256": "6ce60959bb2bc4f9f83017429041299fb268e51ad640b25a54047f2d22f594a1",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/save-profile-v78.js",
+      "status": 200,
+      "sha256": "2f8894393f64b16c79bf3ea22fbb580eb34eb68813c9cb504dad97cd8f0579fc",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/title-screen-v61.js",
+      "status": 200,
+      "sha256": "0043064395677ca909c86829d6862fe3fe74f89ed380136e751a5dcfbd5b9bd7",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/hub-game.js",
+      "status": 200,
+      "sha256": "29e5444cd55cdd6bcdc9eaa672e32ecf6a07108ca8683f0701d129deda986fd9",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/hub-profiles-v53.js",
+      "status": 200,
+      "sha256": "cfe2e869075d6ab9e1af13d476ab7d581d61fef3f5935180f27dbb3482cf8961",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/hub-v51-runtime.js",
+      "status": 200,
+      "sha256": "d63d196a1572f749b0c29a61e317a96d78f565614a1b1e1a3a5a9c81601624fd",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/tactical-reload-v77.js",
+      "status": 200,
+      "sha256": "58e7d35023867a4272f51e7345f4ac610c458f1c9a15726cf98552e26d926506",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/audio.js",
+      "status": 200,
+      "sha256": "6bf4ea2e45038d1458ecd555cb3afae952d75d17b48aa5345b23f9e6c8906de3",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "src/audio-assets-v77.js",
+      "status": 200,
+      "sha256": "1a9c7d0de15c59a6d441f2d705cfe117b8fdd5a5216b1b30b0737c609e761a17",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "assets/audio/manifest.json",
+      "status": 200,
+      "sha256": "d5bb17256e1518dfbad92c3d1b33e50f96b4e53855dddc8c316ba80e5eba7727",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-015-prowler.webp",
+      "status": 200,
+      "sha256": "5462eb30975dcdf83b29e02bf5aff8e65de5fbe92aecb0958c09af1e887e6b52",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+      "status": 200,
+      "sha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
+      "matchesCommit": "44d5ae358d2d96fabc034763039d600ea4fa444f"
+    },
+    {
+      "path": "/assets/audio/music/menu.mp3",
+      "status": 404,
+      "absentOrExcluded": true
+    },
+    {
+      "path": "/assets/audio/sfx/shot.wav",
+      "status": 404,
+      "absentOrExcluded": true
+    },
+    {
+      "path": "/docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md",
+      "status": 404,
+      "absentOrExcluded": true
+    },
+    {
+      "path": "/docs/references/v78-browser-qa/final-local/desktop-idle.jpg",
+      "status": 404,
+      "absentOrExcluded": true
+    },
+    {
+      "path": "/assets/openai/sprites/frames/v75/enemy-011-lurker/attack-pounce-r1.png",
+      "status": 404,
+      "absentOrExcluded": true
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v66/enemy-023-atarax-ripper.webp",
+      "status": 404,
+      "absentOrExcluded": true
+    }
+  ]
+}

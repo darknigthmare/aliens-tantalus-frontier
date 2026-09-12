@@ -37,7 +37,13 @@ Une seconde lecture a détecté puis fait corriger une racine de sauvegarde obso
 
 ## Publication
 
-L’utilisateur a explicitement autorisé le 2026-09-12 la publication publique du code, des captures et des preuves sur `darknigthmare/aliens-tantalus-frontier`, puis Vercel. Au moment de ce document de contenu, commit/push/déploiement V78 restent à exécuter ; la preuve HTTP et le statut exact seront ajoutés après publication, sans les inventer à l’avance.
+L’utilisateur a explicitement autorisé le 2026-09-12 la publication publique du code, des captures et des preuves sur `darknigthmare/aliens-tantalus-frontier`, puis Vercel.
+
+- Commit de contenu V78 : `44d5ae358d2d96fabc034763039d600ea4fa444f`, poussé sur `codex/v52-physical-worlds` avec son parent V77.
+- La commande directe `vercel deploy --prod` a d’abord été refusée avec `Not authorized` ; aucun faux succès n’est revendiqué. La Preview GitHub V78 `frdb2brb8` était `Ready`, puis sa promotion explicite a créé le déploiement production `dpl_54vko8AoKMAVhRDoYA7xPpX6BuMg`.
+- Déploiement production : `https://aliens-tantalus-frontier-2c1nhyvgh-darknigthmares-projects.vercel.app`, statut `Ready`, alias canonique `https://aliens-tantalus-frontier.vercel.app`.
+- `node scripts/verify-production-v78.mjs --commit=44d5ae358d2d96fabc034763039d600ea4fa444f` : **réussi**. Le rapport `docs/references/v78-release-qa/production-http.json` confirme la version V78, le cache PWA, la parité SHA-256 de chaque fichier exécuté contrôlé et le maintien en 404 des masters, preuves, rejets et fichiers audio absents.
+- Recette navigateur publique : `docs/references/v78-release-qa/browser-production/title-browser-report.json`, **ok=true**, 27 groupes, 4 layouts, 9 captures, 0 issue, 0 erreur console/HTTP. SHA-256 du rapport : `4380efa19530b492dc9a53c24fdd60b908370b283d24d8d7fa3c5e3310e1ebd1`.
 
 ## Limites maintenues
 
