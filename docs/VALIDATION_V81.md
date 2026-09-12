@@ -1,12 +1,12 @@
-# Validation V81 — État local
+# Validation V81 — État local et production
 
-Date de validation locale : 2026-09-12.
+Date de validation : 2026-09-12.
 
 ## Verdict
 
 Les portes locales V81 sont vertes pour le code, les tests et le build. Elles couvrent la qualification M41A physique, le verrouillage de l’identité Echo-9, les trois assets Proving Ground et les atlas/comportements Crusher et Spitter.
 
-Cette validation inclut désormais une preuve navigateur locale complète. Elle n’est pas encore une preuve de publication canonique et ne ferme aucune des 26 conversations du projet.
+Cette validation inclut une preuve navigateur locale et une preuve distincte sur la production canonique. Elle ne ferme aucune des 26 conversations du projet.
 
 ## QA globale exécutée
 
@@ -40,11 +40,11 @@ Le rapport alpha couvre 423 PNG runtime avec 0 erreur ; 13 candidats de halo his
 
 ## QA navigateur
 
-`npm.cmd run qa:browser:v81` est vert sur `http://127.0.0.1:4176/` :
+`npm.cmd run qa:browser:v81` est vert sur `http://127.0.0.1:4176/` après le hotfix de sortie d’échelle :
 
 - parcours écran titre → hub → Armory → porte physique → console → échelle → pad → qualification ;
 - 14 captures, dont trois preuves dédiées aux cibles 04, 07 et 08 auparavant hors écran ;
-- 1 147 échantillons d’identité joueur, tous avec `fallback: false` et `reason: null` ;
+- 1 143 échantillons d’identité joueur, tous avec `fallback: false` et `reason: null` ;
 - cinq feuilles Echo-9 décodées en 1 024 × 1 024 ; locomotion et combat observés dans ce scénario ;
 - neuf cibles entièrement cadrées avec Echo-9, neuf impacts sur dix tirs et un rechargement ;
 - reprise pendant un projectile puis après qualification, sans projectile sérialisé ni reçu rejoué ;
@@ -55,16 +55,16 @@ Le rapport et les captures se trouvent sous `docs/references/v81-release-qa/brow
 
 ## Publication
 
-**En attente.** Aucun commit de contenu V81, push GitHub, déploiement Vercel, état `Ready`, promotion canonique ou contrôle HTTP n’est revendiqué ici. Après publication réelle, `npm.cmd run verify:production:v81 -- --commit=<sha>` devra vérifier le commit exact, les assets et l’exclusion des preuves privées.
+La V81 est publiée sur [aliens-tantalus-frontier.vercel.app](https://aliens-tantalus-frontier.vercel.app) depuis le commit final `178ff8b5f3d3ffd51988e8287e53e200466683d3`, poussé sur `codex/v52-physical-worlds` et `main`. L’intégration GitHub/Vercel a terminé le déploiement `dpl_7D2pV41jGofDwgEUZngdmwRNHY8w` avec le statut `success`.
 
-## Critères de sortie restants
+`npm.cmd run verify:production:v81 -- --commit=178ff8b5f3d3ffd51988e8287e53e200466683d3` est vert :
 
-1. committer sélectivement sans inclure les candidats/revues protégés non liés ;
-2. pousser le commit de contenu ;
-3. déployer sur Vercel et attendre `Ready` ;
-4. vérifier la production canonique et le commit exact ;
-5. rejouer la QA navigateur sur la production ;
-6. consigner uniquement les preuves réellement obtenues.
+- version `81.0.0`, cache `atf-v81-proving-ground-shell-1` et HTTP 200 ;
+- **34 fichiers runtime critiques** identiques octet pour octet au commit final ;
+- **10 assets runtime V81** présents : 5 feuilles Echo-9, 3 assets Proving Ground et 2 atlas ennemis ;
+- **30 chemins de preuves privées** confirmés absents de la publication par HTTP 404.
+
+Le premier passage navigateur production a détecté une vitesse verticale résiduelle à la sortie haute de l’échelle. Le moteur a été corrigé pour ancrer le joueur, annuler cette vitesse et empêcher une ré-accroche en poussant au-delà de l’extrémité. Après redéploiement du commit final, le parcours production est vert avec **14 captures**, **1 167 échantillons d’identité sans fallback**, neuf impacts sur dix tirs, un rechargement, deux reprises et zéro exception, erreur console, requête échouée ou réponse HTTP en erreur. Les preuves sont conservées sous `docs/references/v81-release-qa/production-http.json` et `docs/references/v81-release-qa/browser-production/`.
 
 ## Limites explicites
 

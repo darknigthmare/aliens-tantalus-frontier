@@ -14,7 +14,7 @@ Le parcours ne passe pas par un menu de boutons :
 
 L’annexe conserve le gabarit V71 de 1 920 × 720. Son sol principal est à `y = 624`. La ligne de tir est une passerelle indépendante placée à `x = 748`, `y = 438`, avec une surface marchable à `y = 468`. Après armement à portée de la console, la session démarre uniquement lorsque le joueur atteint cette zone. Pendant l’épreuve, le Marine est maintenu sur le repère et orienté vers les cibles ; sortir de l’annexe abandonne proprement la session active.
 
-Le premier parcours navigateur a révélé deux caisses collidables sur la liaison échelle–pad. Elles ont été déplacées dans l’alcôve de service au sol et le gabarit des dix annexes possède maintenant une régression `catwalkRouteClear`.
+Le premier parcours navigateur a révélé deux caisses collidables sur la liaison échelle–pad. Elles ont été déplacées dans l’alcôve de service au sol et le gabarit des dix annexes possède maintenant une régression `catwalkRouteClear`. Le premier passage en production a ensuite exposé une vitesse verticale résiduelle à la sortie haute : le runtime ancre maintenant les pieds sur la passerelle, remet la vitesse à zéro et empêche la ré-accroche tant que le joueur pousse au-delà de l’extrémité.
 
 ## Contrat de session
 
@@ -82,6 +82,10 @@ Les champs `powerLoaderCertified` et `advancedTutorialsComplete` restent forcés
 - `src/proving-ground-assets-v81.js` : registre des trois assets ;
 - suites `tests/proving-ground-*-v81.test.mjs`, `tests/hub-v81-runtime.test.mjs` et `tests/hub-annex-services-v71.test.mjs`.
 
+## Preuve production
+
+Le commit `178ff8b5f3d3ffd51988e8287e53e200466683d3` est servi par la production canonique. La gate HTTP valide 34 fichiers critiques, les 10 assets V81 et 30 exclusions privées. Le parcours navigateur production traverse réellement la porte, la console, l’échelle, les neuf cibles, le rechargement et les deux reprises avec 14 captures, 1 167 échantillons d’identité et zéro erreur navigateur/réseau.
+
 ## Dette conservée
 
 - exercice P-5000 physique et certification associée ;
@@ -89,4 +93,4 @@ Les champs `powerLoaderCertified` et `advancedTutorialsComplete` restent forcés
 - props bitmap autonomes et variations d’état pour toutes les autres annexes ;
 - PNJ dédiés des annexes ;
 - replay MIRE et commandes CCTV/verrouillage physiques ;
-- preuve navigateur de production, à consigner seulement après déploiement ; la preuve locale est verte avec 14 captures, 1 147 échantillons d’identité et zéro erreur navigateur/réseau.
+- QA ennemie multi-topologies et couverture des navigateurs hors Chromium.

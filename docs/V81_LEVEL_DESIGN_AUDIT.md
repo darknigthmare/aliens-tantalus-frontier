@@ -14,6 +14,7 @@ Le sous-niveau est cohérent comme stand de qualification M41A. Le hub complet r
 | Récompense | Bonus possible par simple visite | Reçu de qualification validé et idempotent | Corrigé |
 | Placement | Aucun lien mesuré entre canon et cibles | Centres placés sur trois rayons issus de la bouche du M41A | Corrigé |
 | Circulation | Deux caisses collidables coupaient la sortie d’échelle vers le pad | Cargaison déplacée dans l’alcôve au sol derrière la station ; contrat commun aux dix annexes | Corrigé |
+| Sortie d’échelle | La vitesse de montée pouvait projeter Echo-9 quelques pixels au-dessus de la passerelle | Ancrage au niveau exact, vitesse verticale annulée et ré-accroche extérieure interdite | Corrigé |
 | Verticalité | Passerelles décoratives sans usage d’entraînement | Ligne de tir sur la passerelle à `y = 468` | Corrigé pour ce parcours |
 | Caméra | Cibles 04, 07 et 08 hors écran ou presque invisibles depuis le pad | Focus entre Echo-9 et la cible active, easing et marge garantie de 36 px | Corrigé |
 | Collisions | Risque de silhouettes créant des murs | Cibles non collidables ; seule l’active reçoit les tirs | Corrigé |
@@ -69,7 +70,7 @@ Le service stratégique dépend du résultat spatial. L’entraînement n’acco
 
 ## Risques et dettes
 
-- la preuve navigateur locale desktop/mobile est verte ; la même séquence reste à confirmer sur la production canonique ;
+- la séquence desktop/mobile Chromium est verte en local et sur la production canonique ; Safari et Firefox restent à couvrir ;
 - la QA ennemie navigateur Crusher/Spitter dans plusieurs topologies reste à faire ;
 - l’annexe a encore besoin de variations de murs, racks, impacts persistants et éclairages endommagés ;
 - le P-5000 nécessite son propre volume, ses collisions, son tutoriel et sa certification ;

@@ -16,7 +16,7 @@ La matrice reste strictement à **0 DONE / 17 PARTIAL / 9 MISSING**.
 - qualification à 7/9, une touche dans chaque hauteur et un rechargement terminé ;
 - projectile, collision, VFX, HUD, tactile, reprise et abandon ;
 - reçu idempotent obligatoire avant le bonus de prochaine opération ;
-- passerelle débarrassée des caisses bloquantes et caméra garantissant joueur + cible entièrement visibles ;
+- passerelle débarrassée des caisses bloquantes, sortie haute d’échelle stabilisée et caméra garantissant joueur + cible entièrement visibles ;
 - P-5000 et tutoriels avancés maintenus à `false`.
 
 ## Identité joueur
@@ -48,7 +48,9 @@ Trois créations OpenAI ImageGen modulaires sont intégrées : cible 8 images, i
 - tests : **1 554 au total, 1 553 réussis, 0 échec, 1 ignoré** ;
 - build : **81.0.0**, **3 450 entrées catalogue**.
 
-Les contrôles d’assets Proving Ground et ennemis V81 sont inclus dans cette commande. La QA navigateur locale est verte : 14 captures, neuf cibles cadrées, 1 147 échantillons Echo-9 sans fallback, reprise, tactile 390 × 844 et zéro erreur. La publication canonique reste en attente à ce stade.
+Les contrôles d’assets Proving Ground et ennemis V81 sont inclus dans cette commande. Après le hotfix de sortie d’échelle, la QA navigateur locale est verte : 14 captures, neuf cibles cadrées, 1 143 échantillons Echo-9 sans fallback, reprise, tactile 390 × 844 et zéro erreur.
+
+La production canonique sert le commit `178ff8b5f3d3ffd51988e8287e53e200466683d3` via le déploiement Vercel `dpl_7D2pV41jGofDwgEUZngdmwRNHY8w`. La gate HTTP valide 34 fichiers critiques identiques au commit, 10 assets V81 présents et 30 chemins privés en 404. Le parcours navigateur production est vert avec 14 captures, 1 167 échantillons d’identité, neuf impacts sur dix tirs, un rechargement, deux reprises et zéro erreur navigateur/réseau.
 
 ## Fichiers structurants
 
@@ -68,4 +70,4 @@ Les contrôles d’assets Proving Ground et ennemis V81 sont inclus dans cette c
 - prologue, créateur, tir diagonal global et animations d’armes/rechargement dédiées ;
 - props autonomes, PNJ d’annexes, replay MIRE et commandes CCTV/verrouillage ;
 - corpus artistique complet des ennemis, personnages, véhicules, armes, décors et VFX ;
-- QA production, commit, push et publication, à documenter seulement après preuves réelles.
+- QA navigateur Crusher/Spitter multi-topologies et couverture hors Chromium.

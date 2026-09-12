@@ -111,7 +111,7 @@ Pour chaque vague, l'ordre doit rester : **contrat runtime → level design/cam�
 - L’identité joueur accepte exactement cinq feuilles Echo-9 et applique un pivot pieds, un facing et trois tailles de surface cohérentes. Les animations dédiées aux armes/rechargements, le prologue, le créateur et le tir diagonal global restent ouverts.
 - Trois assets OpenAI modulaires sont branchés pour la cible, l’impact et la console ; ils ne constituent pas le corpus complet de props et décors du hub.
 - Crusher 009 reçoit 40 poses et Spitter 010 reçoit 32 poses avec leurs comportements réels. Ces créations sont des adaptations originales `canonExact: false`, pas des copies officielles 1:1.
-- Le QA navigateur local traverse le titre, le hub, l’Armory, la porte, la console, l’échelle et les neuf cibles : 14 captures, 1 147 échantillons Echo-9 sans fallback, tactile 390 × 844 et zéro erreur. Cette preuve améliore #6/#7/#19 sans les fermer.
+- Les QA navigateur locale et production traversent le titre, le hub, l’Armory, la porte, la console, l’échelle et les neuf cibles : 14 captures chacune, 1 143 puis 1 167 échantillons Echo-9 sans fallback, tactile 390 × 844 et zéro erreur. La production correspond au commit `178ff8b5f3d3ffd51988e8287e53e200466683d3` ; cette preuve améliore #6/#7/#19 sans les fermer.
 - Les props autonomes, PNJ d’annexes, replay MIRE, commandes CCTV/verrouillage et le reste du corpus artistique demeurent des dettes explicites.
 - Le compteur global ne change pas : **0 DONE / 17 PARTIAL / 9 MISSING**.
 
