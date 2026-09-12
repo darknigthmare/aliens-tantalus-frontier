@@ -1,0 +1,1025 @@
+{
+  "ok": true,
+  "checkedAt": "2026-09-12T21:36:45.406Z",
+  "commit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+  "target": "local-build",
+  "base": "http://127.0.0.1:4177",
+  "release": "83.0.0",
+  "cache": "atf-v83-eight-way-combat-shell-1",
+  "totals": {
+    "criticalRuntime": 39,
+    "runtimeAssets": 12,
+    "modularProvingAssets": 2,
+    "privateEvidence": 102
+  },
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "version": "83.0.0",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7"
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "version": "83.0.0",
+      "builtAt": "2026-09-12T21:35:50.505Z"
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "sha256": "53c13bcf208c6818a2e2bc930ea2029f66714e246350f962bddd370df5ff49c5",
+      "commitSha256": "953b9e793b5f049949a2101c91ed4a822a21aa55c913c862c3ebe2016e91f6a9",
+      "normalizedSha256": "953b9e793b5f049949a2101c91ed4a822a21aa55c913c862c3ebe2016e91f6a9",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "sha256": "794084b6499b2adb03a5f043da741bb590e85e0f74db24520571f05656af9c35",
+      "commitSha256": "c681e337f4fae0efa3e3b6d707b9b84cbcf59d21132840378ab2580ed3ae1fa4",
+      "normalizedSha256": "c681e337f4fae0efa3e3b6d707b9b84cbcf59d21132840378ab2580ed3ae1fa4",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/styles.css",
+      "status": 200,
+      "sha256": "3b5eae6d80d1b537d114c6909e9e0f28c327e27a44929043b117fa3abf59a4f1",
+      "commitSha256": "6d1ea6fcc6044f297639bb02d50cdfcfca4693438920e5b3b7d127281222c182",
+      "normalizedSha256": "6d1ea6fcc6044f297639bb02d50cdfcfca4693438920e5b3b7d127281222c182",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/hub-level.css",
+      "status": 200,
+      "sha256": "774e85ee98aadf71cad70117d7acce46f9d8ffc71811ea780a6f4be7fbc0cf6e",
+      "commitSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
+      "normalizedSha256": "13e29b3719e1246d595dadca4c786cbeb5a471dece902104b0ccd29a1de9908d",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/bioforge-v80.css",
+      "status": 200,
+      "sha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "commitSha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "normalizedSha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/runtime-level.css",
+      "status": 200,
+      "sha256": "07e808f39afa97cafd9d8251e825b1bfcde6cb1d38e4b1c2259d2671427d8d4b",
+      "commitSha256": "320e2c3a2b82ae49041c4224a6bcf7757caa5c3e70f88401baeb530ba164ce7e",
+      "normalizedSha256": "320e2c3a2b82ae49041c4224a6bcf7757caa5c3e70f88401baeb530ba164ce7e",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/app.js",
+      "status": 200,
+      "sha256": "7396d370d57d855ad39348af66b28b302aa59b67d8a8ea9813ab5463b5639bae",
+      "commitSha256": "7396d370d57d855ad39348af66b28b302aa59b67d8a8ea9813ab5463b5639bae",
+      "normalizedSha256": "7396d370d57d855ad39348af66b28b302aa59b67d8a8ea9813ab5463b5639bae",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/content.js",
+      "status": 200,
+      "sha256": "3af238f03b68812cb462d20689688df47a362e7e01de0935a446b5c21ae3cd88",
+      "commitSha256": "3af238f03b68812cb462d20689688df47a362e7e01de0935a446b5c21ae3cd88",
+      "normalizedSha256": "3af238f03b68812cb462d20689688df47a362e7e01de0935a446b5c21ae3cd88",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/save.js",
+      "status": 200,
+      "sha256": "2588d296c16dc222a1f9f43f6a2da74e57cab85d273b2466eaac213ce81b3acf",
+      "commitSha256": "2588d296c16dc222a1f9f43f6a2da74e57cab85d273b2466eaac213ce81b3acf",
+      "normalizedSha256": "2588d296c16dc222a1f9f43f6a2da74e57cab85d273b2466eaac213ce81b3acf",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/save-profile-v78.js",
+      "status": 200,
+      "sha256": "56a999e92e1619b2770c4b22ee9aaddb356fa520b475c2e2dff36ec626bb493c",
+      "commitSha256": "56a999e92e1619b2770c4b22ee9aaddb356fa520b475c2e2dff36ec626bb493c",
+      "normalizedSha256": "56a999e92e1619b2770c4b22ee9aaddb356fa520b475c2e2dff36ec626bb493c",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/sprite-animation-runtime.js",
+      "status": 200,
+      "sha256": "61f21f4d2af4de7a1dd2a20fb3b6604a7088878b225318b703ca8f272a90e35b",
+      "commitSha256": "f491a1679c00767f72a07ec30c364733ad7a6b9c94870f6f7e083ce8209c9251",
+      "normalizedSha256": "f491a1679c00767f72a07ec30c364733ad7a6b9c94870f6f7e083ce8209c9251",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/player-visual-contract-v81.js",
+      "status": 200,
+      "sha256": "097d88afcd661dd0cdb5531132c74482dfa2de56eb806d3402ea5102877d2a3f",
+      "commitSha256": "097d88afcd661dd0cdb5531132c74482dfa2de56eb806d3402ea5102877d2a3f",
+      "normalizedSha256": "097d88afcd661dd0cdb5531132c74482dfa2de56eb806d3402ea5102877d2a3f",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/game-runtime.js",
+      "status": 200,
+      "sha256": "9aa0481522958486593f611b61f697c4b667fa6fa24b71e1e1eaf03d2cfd333a",
+      "commitSha256": "a2d62e9b5e288d040fffafc374fbe4a0e6fd80a55239b48d7d89c8622cac877f",
+      "normalizedSha256": "a2d62e9b5e288d040fffafc374fbe4a0e6fd80a55239b48d7d89c8622cac877f",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/game-v51-runtime.js",
+      "status": 200,
+      "sha256": "140c17134b71395d774a1c0695fdac77671f33acca04d287e68d62f81be82b18",
+      "commitSha256": "964e699cca6595a526076a5f22ef96637aa6697a4f264b46220240d791030042",
+      "normalizedSha256": "964e699cca6595a526076a5f22ef96637aa6697a4f264b46220240d791030042",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/game-v52-runtime.js",
+      "status": 200,
+      "sha256": "f1b2f813a9c7e3e525894bd98a5b204c84e38fae05ebb552c6a6a36567d9c425",
+      "commitSha256": "57ea6d51fb5baed51b470c58579a02e152a0f5c175823ece4c407ca25e29b5e9",
+      "normalizedSha256": "57ea6d51fb5baed51b470c58579a02e152a0f5c175823ece4c407ca25e29b5e9",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-game.js",
+      "status": 200,
+      "sha256": "5df95c433524393449d526ae4d12507db78faba3fdcc1700c94729b5e5bb5e74",
+      "commitSha256": "bdf5728bbb2dd09b78b9ac58fb64f9fd6e10cdfba17412f5b4563dce4f6009f3",
+      "normalizedSha256": "bdf5728bbb2dd09b78b9ac58fb64f9fd6e10cdfba17412f5b4563dce4f6009f3",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-v51-runtime.js",
+      "status": 200,
+      "sha256": "42b4b4468e0200301c1896e5de178ba1199121b4516bdbcfdbfb30aead2c47f3",
+      "commitSha256": "b6f26038fabacfd95a648f220721174bad51e096dd18ce371f78356733f54a86",
+      "normalizedSha256": "b6f26038fabacfd95a648f220721174bad51e096dd18ce371f78356733f54a86",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-v52-runtime.js",
+      "status": 200,
+      "sha256": "a1aa3f9b42a58725b0b1978bd3a3d15495309c6c33bcca817f3f7afd7bf4c34e",
+      "commitSha256": "c8a94de4049d9d49555cab0795a7bb4aafd948e7f222f73fe5bd3820104c159f",
+      "normalizedSha256": "c8a94de4049d9d49555cab0795a7bb4aafd948e7f222f73fe5bd3820104c159f",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-v71-runtime.js",
+      "status": 200,
+      "sha256": "fdf9fcaee49f49d3eaf7ea6e1d9fcc0292c629f09bd1b0fbbef170f9ef3acbf5",
+      "commitSha256": "fdf9fcaee49f49d3eaf7ea6e1d9fcc0292c629f09bd1b0fbbef170f9ef3acbf5",
+      "normalizedSha256": "fdf9fcaee49f49d3eaf7ea6e1d9fcc0292c629f09bd1b0fbbef170f9ef3acbf5",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-v81-runtime.js",
+      "status": 200,
+      "sha256": "f23ecbbc9065b484a3ad85f89f13f8a4c8a4f06a68d240c954a548e597c61fc9",
+      "commitSha256": "f23ecbbc9065b484a3ad85f89f13f8a4c8a4f06a68d240c954a548e597c61fc9",
+      "normalizedSha256": "f23ecbbc9065b484a3ad85f89f13f8a4c8a4f06a68d240c954a548e597c61fc9",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-annex-services-v71.js",
+      "status": 200,
+      "sha256": "2ad44e02983f63ec876cc84ee6e1d31ae879b43f46d50c7d10accd198ebdc38e",
+      "commitSha256": "2ad44e02983f63ec876cc84ee6e1d31ae879b43f46d50c7d10accd198ebdc38e",
+      "normalizedSha256": "2ad44e02983f63ec876cc84ee6e1d31ae879b43f46d50c7d10accd198ebdc38e",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/tantalus-hub-expansion-v71.js",
+      "status": 200,
+      "sha256": "c55479d4e3f1b992010f826434d7e27d2daa911e7d69aa10cbb622fda8ab2ff4",
+      "commitSha256": "c55479d4e3f1b992010f826434d7e27d2daa911e7d69aa10cbb622fda8ab2ff4",
+      "normalizedSha256": "c55479d4e3f1b992010f826434d7e27d2daa911e7d69aa10cbb622fda8ab2ff4",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/proving-ground-assets-v81.js",
+      "status": 200,
+      "sha256": "3ea017bd984502994b5b61c0165da7e031d6d1c1144b5eabf6a4f9f9579526af",
+      "commitSha256": "3ea017bd984502994b5b61c0165da7e031d6d1c1144b5eabf6a4f9f9579526af",
+      "normalizedSha256": "3ea017bd984502994b5b61c0165da7e031d6d1c1144b5eabf6a4f9f9579526af",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/proving-ground-session-v81.js",
+      "status": 200,
+      "sha256": "4b18470da6b17c01b5a7d5970fc782da7c91ef090351ee7f5b58e0d37917b772",
+      "commitSha256": "4b18470da6b17c01b5a7d5970fc782da7c91ef090351ee7f5b58e0d37917b772",
+      "normalizedSha256": "4b18470da6b17c01b5a7d5970fc782da7c91ef090351ee7f5b58e0d37917b772",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/tantalus-proving-ground-v81.js",
+      "status": 200,
+      "sha256": "eb02f6fa0b666e70ff4708045fd0f8d9027a7edfd5d719c4a326c9119b3784ff",
+      "commitSha256": "eb02f6fa0b666e70ff4708045fd0f8d9027a7edfd5d719c4a326c9119b3784ff",
+      "normalizedSha256": "eb02f6fa0b666e70ff4708045fd0f8d9027a7edfd5d719c4a326c9119b3784ff",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-assets-v80.js",
+      "status": 200,
+      "sha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "commitSha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "normalizedSha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-session-v80.js",
+      "status": 200,
+      "sha256": "3dd1ac5583e64ab350312e5a02080455d92d1bb36bcc9271dd72e1768bf298b3",
+      "commitSha256": "3dd1ac5583e64ab350312e5a02080455d92d1bb36bcc9271dd72e1768bf298b3",
+      "normalizedSha256": "3dd1ac5583e64ab350312e5a02080455d92d1bb36bcc9271dd72e1768bf298b3",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-level-v80.js",
+      "status": 200,
+      "sha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "commitSha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "normalizedSha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-runtime-v80.js",
+      "status": 200,
+      "sha256": "4309200d670adc1defcce781e4d54a8463007a35509a3085e56489e843a16799",
+      "commitSha256": "4309200d670adc1defcce781e4d54a8463007a35509a3085e56489e843a16799",
+      "normalizedSha256": "4309200d670adc1defcce781e4d54a8463007a35509a3085e56489e843a16799",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-ui-v80.js",
+      "status": 200,
+      "sha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "commitSha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "normalizedSha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/enemy-profile-assets-v81.js",
+      "status": 200,
+      "sha256": "74b499d67e4b1c4ffc3d4fe263385bed8ab02510454cf02745b9c80550f10010",
+      "commitSha256": "74b499d67e4b1c4ffc3d4fe263385bed8ab02510454cf02745b9c80550f10010",
+      "normalizedSha256": "74b499d67e4b1c4ffc3d4fe263385bed8ab02510454cf02745b9c80550f10010",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/enemy-profile-registry-v66.js",
+      "status": 200,
+      "sha256": "36becb7143db98acdad0951939d6f6241dcd73f8263b5d6042befa04bc94b338",
+      "commitSha256": "36becb7143db98acdad0951939d6f6241dcd73f8263b5d6042befa04bc94b338",
+      "normalizedSha256": "36becb7143db98acdad0951939d6f6241dcd73f8263b5d6042befa04bc94b338",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/enemy-profile-geometry-v66.js",
+      "status": 200,
+      "sha256": "f7f2d33490b40d7864e753839790e9c333246794914c6008f5aafbcba7c87239",
+      "commitSha256": "f7f2d33490b40d7864e753839790e9c333246794914c6008f5aafbcba7c87239",
+      "normalizedSha256": "f7f2d33490b40d7864e753839790e9c333246794914c6008f5aafbcba7c87239",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/enemy-batch-combat-v66.js",
+      "status": 200,
+      "sha256": "f6b419bccc1e467f1ffd99103394549e1554ffa2d49f87f53f4a4e93f5a55310",
+      "commitSha256": "f6b419bccc1e467f1ffd99103394549e1554ffa2d49f87f53f4a4e93f5a55310",
+      "normalizedSha256": "f6b419bccc1e467f1ffd99103394549e1554ffa2d49f87f53f4a4e93f5a55310",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/title-scene-v79.js",
+      "status": 200,
+      "sha256": "192618b62ed7d5d0d44ee6166bf4f2cf917343e351862ccced40314cf8f5ad49",
+      "commitSha256": "192618b62ed7d5d0d44ee6166bf4f2cf917343e351862ccced40314cf8f5ad49",
+      "normalizedSha256": "192618b62ed7d5d0d44ee6166bf4f2cf917343e351862ccced40314cf8f5ad49",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/combat-aim-v83.js",
+      "status": 200,
+      "sha256": "d0f90aaa7973de6b84d085dd31a6b00cb2ef8cd15b7221ba89d715400f8fc3ed",
+      "commitSha256": "d0f90aaa7973de6b84d085dd31a6b00cb2ef8cd15b7221ba89d715400f8fc3ed",
+      "normalizedSha256": "d0f90aaa7973de6b84d085dd31a6b00cb2ef8cd15b7221ba89d715400f8fc3ed",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/projectile-collision-v83.js",
+      "status": 200,
+      "sha256": "792d87ae7479801571581c5be81ab4622c6b2ecf9016036a823fe1dd89b99ef7",
+      "commitSha256": "792d87ae7479801571581c5be81ab4622c6b2ecf9016036a823fe1dd89b99ef7",
+      "normalizedSha256": "792d87ae7479801571581c5be81ab4622c6b2ecf9016036a823fe1dd89b99ef7",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/game-production-base.js",
+      "status": 200,
+      "sha256": "8fcdb49d9fe9c7d3a4fd162e5d2fc94d227163abb64abbf714889da18d471f9b",
+      "commitSha256": "8fcdb49d9fe9c7d3a4fd162e5d2fc94d227163abb64abbf714889da18d471f9b",
+      "normalizedSha256": "8fcdb49d9fe9c7d3a4fd162e5d2fc94d227163abb64abbf714889da18d471f9b",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/mission-input-v77.js",
+      "status": 200,
+      "sha256": "0530569a9506b2d55a1f400292fe0a1550b95fcdfc791ecde3b3773b315a6d66",
+      "commitSha256": "0530569a9506b2d55a1f400292fe0a1550b95fcdfc791ecde3b3773b315a6d66",
+      "normalizedSha256": "0530569a9506b2d55a1f400292fe0a1550b95fcdfc791ecde3b3773b315a6d66",
+      "parity": "exact-bytes",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png",
+      "status": 200,
+      "sha256": "f5b25ca6189d0a2891d1a6f60635417238d7dc52bfece7ae20a2cd9dffa21ca3",
+      "runtimeId": "player.echo9-marine.locomotion",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "player-visual-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png",
+      "status": 200,
+      "sha256": "a0880c628fe8b4892bcbab525d7e56583f21b8e92229d75370a608ab0d370e55",
+      "runtimeId": "player.echo9-marine.combat",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "player-visual-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png",
+      "status": 200,
+      "sha256": "5f04200b84c7d6bf0df84390c450fdf258e6c60e7c0993ddf4b236bf88a87a26",
+      "runtimeId": "player.echo9-marine.melee",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "player-visual-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png",
+      "status": 200,
+      "sha256": "c4b88d736089c23caf60d33baf2153482a57522e17ab345d390d805b3f2d5ab6",
+      "runtimeId": "player.echo9-marine.interaction",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "player-visual-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png",
+      "status": 200,
+      "sha256": "3cc7517794997202608308a493e2ac649a76671034e1d825a40f127d4a1a0053",
+      "runtimeId": "player.echo9-marine.tool-use",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "player-visual-asset"
+    },
+    {
+      "path": "/assets/openai/hub/proving-ground/v81/proving-ground-target-cycle-v81.png",
+      "status": 200,
+      "sha256": "96d34adc91a8a5310b9cc8c57f0bc402cb1c8e04f3acde3309bc1f274a8ad8a6",
+      "runtimeId": "proving-ground-target-v81",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "proving-ground-asset"
+    },
+    {
+      "path": "/assets/openai/hub/proving-ground/v81/proving-ground-impact-cycle-v81.png",
+      "status": 200,
+      "sha256": "1bb000c29718c54b72159d178c9a53fcf6f59149655ec7d906e826be0215df37",
+      "runtimeId": "proving-ground-impact-v81",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "proving-ground-asset"
+    },
+    {
+      "path": "/assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png",
+      "status": 200,
+      "sha256": "20e3a8412f1be182198d2cf3e49f8dcb07f1a33517073fb6482404bfcd88bbe8",
+      "runtimeId": "proving-ground-console-v81",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "proving-ground-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v81/enemy-009-crusher.webp",
+      "status": 200,
+      "sha256": "ccac0fc3ad73aa0c7026ef13acedafe27fba6819d43b3226992406d4787b2e85",
+      "runtimeId": "enemy-009-crusher",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "enemy-profile-asset"
+    },
+    {
+      "path": "/assets/openai/sprites/normalized/enemy-profiles-v81/enemy-010-spitter.webp",
+      "status": 200,
+      "sha256": "fc39cbfc4315950e43998c50b5014c6b29a3a912efe855694f7239a48636adea",
+      "runtimeId": "enemy-010-spitter",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "enemy-profile-asset"
+    },
+    {
+      "path": "/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp",
+      "status": 200,
+      "sha256": "62c942325af5bb94f2ceae4018539a8ce2191c616fc5a688a42b87f3ae076160",
+      "runtimeId": "provingWall",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "modular-proving-asset"
+    },
+    {
+      "path": "/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png",
+      "status": 200,
+      "sha256": "86cb4a1d9ea2e47edf43a8dcbe0744fe2977cf55dfe7fd22f686fe5634d000f4",
+      "runtimeId": "provingCeiling",
+      "matchesCommit": "3b719e9e7731b200152c5c304a2de07bbb899ce7",
+      "kind": "modular-proving-asset"
+    },
+    {
+      "path": "/docs/references/V81_ENEMY_009_ANCHOR_REVIEW.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/V81_ENEMY_010_ANCHOR_REVIEW.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/V81_ENEMY_010_SCALE_REVIEW.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/V82_ENEMY_PROGRESS.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/V83_GAMEPLAY_RUNTIME_QA.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-enemy-wave-review/enemy-010-spitter/anchor-attack.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-enemy-wave-review/enemy-010-spitter/anchor-death.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-enemy-wave-review/enemy-010-spitter/anchor-idle.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-enemy-wave-review/enemy-010-spitter/anchor-move.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/art-audit.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/asset-manifest.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/exact-generation-prompts.md",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/generation-receipts.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/source-receipts/exec-02a8be9a-c609-4dde-932f-c1ed58a4d1b0.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/source-receipts/exec-659f1605-c7fb-4226-868f-13343802a819.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-proving-ground-art/source-receipts/exec-dd0ed932-9f0f-4a49-be62-b6540c9e483b.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/01-title-v81.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/02-fresh-hub.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/03-armory-proving-door.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/04-proving-ground-entered.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/05-console-armed.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/06-course-active.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/07-resumed-without-projectile.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/08-mandatory-reload-one.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/09a-target-04-mid-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/09b-target-07-high-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/09c-target-08-level-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/10-qualified-receipt-and-bonus.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/11-qualified-resume-stable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/12-mobile-controls-reachable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-local/proving-ground-v81-browser-report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/01-title-v81.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/02-fresh-hub.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/03-armory-proving-door.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/04-proving-ground-entered.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/05-console-armed.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/06-course-active.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/07-resumed-without-projectile.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/08-mandatory-reload-one.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/09a-target-04-mid-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/09b-target-07-high-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/09c-target-08-level-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/10-qualified-receipt-and-bonus.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/11-qualified-resume-stable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/12-mobile-controls-reachable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/browser-production/proving-ground-v81-browser-report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v81-release-qa/production-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/exact-generation-prompts.md",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/lurker-attack-r1-contact.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/lurker-attack-r1-fixed-cell-review.gif",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/lurker-attack-r2-contact.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/lurker-attack-r2-fixed-cell-review.gif",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/source-receipts/lurker-attack-r1-original.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/source-receipts/lurker-attack-r2-original.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/technical-audit.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-lurker-attack/technical-review.md",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-proving-ground-art/art-audit.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-proving-ground-art/exact-generation-prompts.md",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-proving-ground-art/source-receipts/exec-5a4477ce-afa1-41fe-ab1b-1e05f088712c.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-proving-ground-art/source-receipts/exec-af3b58c0-eedc-4d23-b894-421aff748bc6.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/01-title-v81.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/02-fresh-hub.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/03-armory-proving-door.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/04-proving-ground-entered.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/05-console-armed.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/06-course-active.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/07-resumed-without-projectile.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/08-mandatory-reload-one.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/09a-target-04-mid-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/09b-target-07-high-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/09c-target-08-level-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/10-qualified-receipt-and-bonus.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/11-qualified-resume-stable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/12-mobile-controls-reachable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/browser-local/proving-ground-v81-browser-report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/local-build-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v82-release-qa/production-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-browser-qa/report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-imagegen/lurker-reference-attempt.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/browser-local/01-title.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/browser-local/02-keyboard-up-right.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/browser-local/03-pointer-up-right.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/browser-local/04-mobile-controls.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/browser-local/combat-v83-browser.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/local-build-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/preview-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/production-http.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/01-title-v81.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/02-fresh-hub.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/03-armory-proving-door.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/04-proving-ground-entered.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/05-console-armed.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/06-course-active.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/07-resumed-without-projectile.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/08-mandatory-reload-one.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/09a-target-04-mid-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/09b-target-07-high-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/09c-target-08-level-far-visible.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/10-qualified-receipt-and-bonus.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/11-qualified-resume-stable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/12-mobile-controls-reachable.jpg",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v83-release-qa/proving-regression/proving-ground-v81-browser-report.json",
+      "status": 404,
+      "privateEvidence": true
+    }
+  ]
+}
