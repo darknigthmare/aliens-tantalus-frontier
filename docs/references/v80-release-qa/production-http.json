@@ -1,0 +1,336 @@
+{
+  "ok": true,
+  "checkedAt": "2026-09-12T17:22:24.323Z",
+  "commit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+  "target": "production",
+  "base": "https://aliens-tantalus-frontier.vercel.app",
+  "release": "80.0.0",
+  "cache": "atf-v80-bioforge-shell-1",
+  "totals": {
+    "criticalRuntime": 16,
+    "bioforgeAssets": 6,
+    "privateEvidence": 19
+  },
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "version": "80.0.0",
+      "bioforgeLevel": "v80"
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "version": "80.0.0",
+      "builtAt": "2026-09-12T17:16:41.421Z"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "cache": "atf-v80-bioforge-shell-1"
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "sha256": "e99b8b1d4d187046eeac03ef31cf8cd49d88534c4e74c4ede9451759f280e500",
+      "commitSha256": "bf241cf64a183bcd0fe5d864348592dcce316aa03c0825dc8b555cb78616142b",
+      "normalizedSha256": "bf241cf64a183bcd0fe5d864348592dcce316aa03c0825dc8b555cb78616142b",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "sha256": "8df8bf9ac13e4aec16511218354062cc2ade2f78a0ff2f97de918bf2c18e9797",
+      "commitSha256": "fdb047fde32a3fdb5aacd35fe1fe671d56172c67408c570cb62f61c0962322df",
+      "normalizedSha256": "fdb047fde32a3fdb5aacd35fe1fe671d56172c67408c570cb62f61c0962322df",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/bioforge-v80.css",
+      "status": 200,
+      "sha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "commitSha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "normalizedSha256": "401bf38726eb30dd6597b95403356eb5556cc5b91c1e7a66f75a6e1216cdc309",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/runtime-level.css",
+      "status": 200,
+      "sha256": "07e808f39afa97cafd9d8251e825b1bfcde6cb1d38e4b1c2259d2671427d8d4b",
+      "commitSha256": "320e2c3a2b82ae49041c4224a6bcf7757caa5c3e70f88401baeb530ba164ce7e",
+      "normalizedSha256": "320e2c3a2b82ae49041c4224a6bcf7757caa5c3e70f88401baeb530ba164ce7e",
+      "parity": "line-ending-normalized",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/app.js",
+      "status": 200,
+      "sha256": "604b817d6f1589743c6d2b04b72aabc5e3d13cb0d36aaa23e16bd873889371e4",
+      "commitSha256": "604b817d6f1589743c6d2b04b72aabc5e3d13cb0d36aaa23e16bd873889371e4",
+      "normalizedSha256": "604b817d6f1589743c6d2b04b72aabc5e3d13cb0d36aaa23e16bd873889371e4",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/audio-assets-v77.js",
+      "status": 200,
+      "sha256": "6a0fe90b0981dd9b45094202bd9d23394d00472f823c31b815d6d45f425d8683",
+      "commitSha256": "6a0fe90b0981dd9b45094202bd9d23394d00472f823c31b815d6d45f425d8683",
+      "normalizedSha256": "6a0fe90b0981dd9b45094202bd9d23394d00472f823c31b815d6d45f425d8683",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/content.js",
+      "status": 200,
+      "sha256": "8d73c89dd5bc00543b0b50b022089de957cf0519dcc1ef7364acc2c8146cc070",
+      "commitSha256": "8d73c89dd5bc00543b0b50b022089de957cf0519dcc1ef7364acc2c8146cc070",
+      "normalizedSha256": "8d73c89dd5bc00543b0b50b022089de957cf0519dcc1ef7364acc2c8146cc070",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/save.js",
+      "status": 200,
+      "sha256": "54e7b4162026ace605a9933b716baeed36d56d5047b204e5e969f516a40f1739",
+      "commitSha256": "54e7b4162026ace605a9933b716baeed36d56d5047b204e5e969f516a40f1739",
+      "normalizedSha256": "54e7b4162026ace605a9933b716baeed36d56d5047b204e5e969f516a40f1739",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/hub-annex-services-v71.js",
+      "status": 200,
+      "sha256": "b0eda784deec4f9115330956a7ce053df5d04f3a4cd3a7ba214c9e471de73e67",
+      "commitSha256": "b0eda784deec4f9115330956a7ce053df5d04f3a4cd3a7ba214c9e471de73e67",
+      "normalizedSha256": "b0eda784deec4f9115330956a7ce053df5d04f3a4cd3a7ba214c9e471de73e67",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/tantalus-hub-expansion-v71.js",
+      "status": 200,
+      "sha256": "e3389359f3e282d408a3e1c543960b2369de643455cc17aa0cddd111280a01ff",
+      "commitSha256": "e3389359f3e282d408a3e1c543960b2369de643455cc17aa0cddd111280a01ff",
+      "normalizedSha256": "e3389359f3e282d408a3e1c543960b2369de643455cc17aa0cddd111280a01ff",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/special-operations-v67.js",
+      "status": 200,
+      "sha256": "97c89d69918bae7a9474c9ce227831b36a4b8ed1bef7801755ef794e4fe92072",
+      "commitSha256": "97c89d69918bae7a9474c9ce227831b36a4b8ed1bef7801755ef794e4fe92072",
+      "normalizedSha256": "97c89d69918bae7a9474c9ce227831b36a4b8ed1bef7801755ef794e4fe92072",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-assets-v80.js",
+      "status": 200,
+      "sha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "commitSha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "normalizedSha256": "9ec9ffdcd3bd9561b5afca02976d1532b93fe541f3d68ddddcbf943181a6cc96",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-level-v80.js",
+      "status": 200,
+      "sha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "commitSha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "normalizedSha256": "f7e92990c0d7c31c069f910fd45b8e1029621015364ebfdecd7f14e3cfd5c7eb",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-runtime-v80.js",
+      "status": 200,
+      "sha256": "e8a388804c88d0df430acf20edb5a101b281da75c60752cdad05d34f4ff8d7e8",
+      "commitSha256": "e8a388804c88d0df430acf20edb5a101b281da75c60752cdad05d34f4ff8d7e8",
+      "normalizedSha256": "e8a388804c88d0df430acf20edb5a101b281da75c60752cdad05d34f4ff8d7e8",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-session-v80.js",
+      "status": 200,
+      "sha256": "771b8af97854c9af216c550f61a660d60fdec8e53413e702fb3362a245ec0783",
+      "commitSha256": "771b8af97854c9af216c550f61a660d60fdec8e53413e702fb3362a245ec0783",
+      "normalizedSha256": "771b8af97854c9af216c550f61a660d60fdec8e53413e702fb3362a245ec0783",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/src/bioforge-ui-v80.js",
+      "status": 200,
+      "sha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "commitSha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "normalizedSha256": "0de4844cf527f66ffb6e56f1c1aff3090fb9da62beb40ac36a1ec878e3d3c2a4",
+      "parity": "exact-bytes",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "critical-runtime"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/far/bioforge-far-industrial-shell-v80.png",
+      "status": 200,
+      "sha256": "9cdf6371ff690f333567522354f53ceda740667b84b8d163461bd51e9690497d",
+      "runtimeId": "bioforge.v80.layer.far",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/mid/bioforge-mid-process-modules-v80.png",
+      "status": 200,
+      "sha256": "e59b737619fa4c39bd7c4c381fb390c6d30abf093a77bddb83b2331df15fa0d8",
+      "runtimeId": "bioforge.v80.layer.mid",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/foreground/bioforge-foreground-service-frame-v80.png",
+      "status": 200,
+      "sha256": "4527da5d4884bfcae99e11eab62ef932827f8962ba746c340989b82b9b5e222d",
+      "runtimeId": "bioforge.v80.layer.foreground",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/props/bioforge-tissue-printer-v80.png",
+      "status": 200,
+      "sha256": "17e7c5751c7bd98ae9af5b79f91ef07e5ca6ddc57a58e9c0e918205e38cb5add",
+      "runtimeId": "bioforge.v80.prop.tissue-printer",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/props/bioforge-bulkhead-cycle-v80.png",
+      "status": 200,
+      "sha256": "a261312df67e995374d5caca87d328376fcf4ad7b56cbbbf611a830a5dc02d34",
+      "runtimeId": "bioforge.v80.prop.bulkhead-cycle",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/assets/openai/bioforge/v80/vfx/bioforge-purge-cycle-v80.png",
+      "status": 200,
+      "sha256": "5416450f03e1173ec41ac330e61972d96a9920fb2253f968cc1c5e3eec6701cf",
+      "runtimeId": "bioforge.v80.vfx.purge-cycle",
+      "matchesCommit": "e189da0ad1d1d5e12588c36d52b521e6b85bf0d0",
+      "kind": "bioforge-asset"
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/asset-manifest.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/audit-report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/exact-generation-prompts.md",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/generation-receipts.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-97730469-bc41-4b7d-a20f-54545278ee71.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-a79da0bc-cf21-4d13-8054-59ef833344c6.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-c0b8c50e-3124-4174-ae71-a9db2832489e.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-ce3823b8-7b39-4045-a05c-54b659c8c169.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-d0509038-267b-4872-b607-749e2fceb446.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-bioforge-art/source-receipts/exec-da7ec657-558e-43f9-b93c-f08e97a742d9.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/01-bioforge-configuration-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/02-bioforge-session-armed-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/03-bioforge-printer-armed-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/04-bioforge-combat-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/05-bioforge-result-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/06-bioforge-purge-complete-desktop.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/07-bioforge-return-mobile-390x844.png",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/browser-local/bioforge-v80-browser-report.json",
+      "status": 404,
+      "privateEvidence": true
+    },
+    {
+      "path": "/docs/references/v80-release-qa/production-http.json",
+      "status": 404,
+      "privateEvidence": true
+    }
+  ]
+}

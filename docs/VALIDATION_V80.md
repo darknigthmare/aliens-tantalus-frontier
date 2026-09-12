@@ -56,7 +56,27 @@ Une seconde vérification isolée avec `agent-browser` a confirmé un document n
 
 ## Publication
 
-Le commit de contenu, le déploiement preview, la promotion canonique et la vérification HTTP de production doivent être inscrits ici uniquement après leur exécution réelle. Aucun statut de publication n'est anticipé dans cette première preuve locale.
+Le contenu V80 a été commité sous `e189da0ad1d1d5e12588c36d52b521e6b85bf0d0` puis poussé sur `origin/codex/v52-physical-worlds`.
+
+La preview `dpl_FiQmGgL3pC4QkANNiyPYZYgqizat` a atteint l'état `Ready`. Sa protection Vercel est restée active. Le canal authentifié a confirmé le build-info 80.0.0, un asset BIOFORGE HTTP 200 avec SHA-256 identique au registre et le manifeste artistique privé HTTP 404.
+
+La preview validée a ensuite été promue vers la production `dpl_9a5uTBimLQG6MoDxPPMgJixXkLD8`, état `Ready`, avec les alias :
+
+- `https://aliens-tantalus-frontier.vercel.app` ;
+- `https://aliens-tantalus-frontier-darknigthmares-projects.vercel.app`.
+
+La gate HTTP canonique, exécutée le 2026-09-12 à `17:22:24.323Z`, valide le commit de contenu exact :
+
+- 16/16 fichiers runtime critiques en HTTP 200 ;
+- 13 fichiers identiques octet pour octet ;
+- `index.html`, `sw.js` et `runtime-level.css` identiques après la seule normalisation CRLF vers LF ;
+- 6/6 PNG BIOFORGE identiques octet pour octet au commit et aux hashes du registre ;
+- 19/19 chemins de preuves privées en HTTP 404 ;
+- cache `atf-v80-bioforge-shell-1` actif.
+
+Le scénario navigateur a ensuite été rejoué sur la production canonique entre `17:23:44.658Z` et `17:24:02.297Z` : `ok: true`, sept captures, six assets décodés, parcours x2, purge, retour, mobile et x12 réussis. Les contributions de pixels mesurées sont 27,35 % pour le joueur, 22,44 % et 11,11 % pour les deux Facehuggers. Le déplacement tactile réel est de 202,85 px. Le rapport conserve 0 exception, 0 erreur console, 0 log d'erreur, 0 requête échouée et 0 erreur HTTP.
+
+Les preuves sont enregistrées sous `docs/references/v80-release-qa/production-http.json` et `docs/references/v80-release-qa/browser-production/` ; elles restent exclues du site publié.
 
 ## Limites explicites
 

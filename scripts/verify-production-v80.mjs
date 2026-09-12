@@ -52,6 +52,10 @@ export const PRIVATE_V80_PROOF_PATHS = Object.freeze([
 
 export const sha256V80 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 
+export const normalizeTextLineEndingsV80 = (bytes) => Buffer.from(
+  Buffer.from(bytes).toString('utf8').replace(/\r\n/gu, '\n')
+);
+
 const runGitV80 = (args, { spawn = spawnSync, encoding = null, label = args.join(' ') } = {}) => {
   const result = spawn('git', args, {
     encoding,
@@ -151,11 +155,17 @@ export async function verifyProductionV80({
     assert.equal(remote.response.status, 200, path);
     const remoteHash = sha256V80(remote.bytes);
     const commitHash = sha256V80(committed);
-    assert.equal(remoteHash, commitHash, `production bytes ${path}`);
+    const remoteNormalizedHash = sha256V80(normalizeTextLineEndingsV80(remote.bytes));
+    const commitNormalizedHash = sha256V80(normalizeTextLineEndingsV80(committed));
+    assert.equal(remoteNormalizedHash, commitNormalizedHash, `production text after CRLF normalization ${path}`);
+    const parity = remoteHash === commitHash ? 'exact-bytes' : 'line-ending-normalized';
     results.push({
       path: '/' + path,
       status: 200,
       sha256: remoteHash,
+      commitSha256: commitHash,
+      normalizedSha256: remoteNormalizedHash,
+      parity,
       matchesCommit: deployedCommit,
       kind: 'critical-runtime'
     });

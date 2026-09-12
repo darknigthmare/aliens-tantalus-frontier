@@ -12,6 +12,7 @@ import {
   PRODUCTION_CACHE_V80,
   PRODUCTION_REPORT_PATH_V80,
   PRODUCTION_VERSION_V80,
+  normalizeTextLineEndingsV80,
   resolveProductionCommitV80,
   sha256V80
 } from '../scripts/verify-production-v80.mjs';
@@ -31,6 +32,21 @@ test('les fichiers critiques couvrent le shell, la sauvegarde et tous les module
     'src/bioforge-assets-v80.js', 'src/bioforge-level-v80.js', 'src/bioforge-runtime-v80.js',
     'src/bioforge-session-v80.js', 'src/bioforge-ui-v80.js'
   ]) assert.ok(CRITICAL_RUNTIME_PATHS_V80.includes(path), path);
+  assert.equal(CRITICAL_RUNTIME_PATHS_V80.every((path) => /\.(?:css|html|js)$/u.test(path)), true);
+});
+
+test('la parité texte tolère uniquement les fins de ligne Windows, jamais une mutation de contenu', () => {
+  const committed = Buffer.from('TANTALUS\nBIOFORGE\n');
+  const windows = Buffer.from('TANTALUS\r\nBIOFORGE\r\n');
+  const mutated = Buffer.from('TANTALUS\r\nBIOFORGE-X\r\n');
+  assert.equal(
+    sha256V80(normalizeTextLineEndingsV80(windows)),
+    sha256V80(normalizeTextLineEndingsV80(committed))
+  );
+  assert.notEqual(
+    sha256V80(normalizeTextLineEndingsV80(mutated)),
+    sha256V80(normalizeTextLineEndingsV80(committed))
+  );
 });
 
 test('les six PNG runtime correspondent exactement au registre BIOFORGE accepté', () => {
@@ -54,7 +70,8 @@ test('le contrat V80 exige git show/ls-tree, HTTP 200/404, SHA registre et commi
   assert.match(source, /\['ls-tree', '-r', '--name-only'/u);
   assert.match(source, /assert\.equal\(remote\.response\.status, 200/u);
   assert.match(source, /assert\.equal\(remote\.response\.status, 404/u);
-  assert.match(source, /assert\.equal\(remoteHash, commitHash/u);
+  assert.match(source, /assert\.equal\(remoteNormalizedHash, commitNormalizedHash/u);
+  assert.match(source, /line-ending-normalized/u);
   assert.match(source, /assert\.equal\(sha256V80\(remote\.bytes\), asset\.sha256/u);
 
   const full = '1234567890abcdef1234567890abcdef12345678';
