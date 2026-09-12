@@ -43,7 +43,7 @@ Preuves : `references/v84-release-qa/proving-regression/`. Les **33 fichiers arc
 
 `scripts/verify-production-v84.mjs` vérifie un commit déterminé : **46 fichiers critiques**, les **12 images V81/V82 inchangées** (dont deux éléments modulaires), les métadonnées de build, les types MIME et le cache V84. Les preuves QA V81–V84 suivies dans Git doivent répondre 404 sur le build public. La normalisation CRLF/LF est explicitement distinguée d'une égalité binaire.
 
-Le rapport HTTP local après commit, lorsqu'il est produit, est rangé en `references/v84-release-qa/local-build-http.json`. Un résultat loopback n'est jamais une preuve de déploiement Vercel.
+Le contrôle HTTP local a réussi pour le commit contenu `453a1ddb78c38430bbb828aa13ca3f0403f46c78` : 46 fichiers critiques conformes, 12 images conformes dont deux éléments modulaires, et **145 chemins de preuves privées répondant 404**. Version, cache et métadonnées de build correspondent à la V84. Rapport : `references/v84-release-qa/local-build-http.json`. Un résultat loopback n'est jamais une preuve de déploiement Vercel.
 
 Aucun push GitHub ni déploiement Vercel V84 effectué. L'envoi des rapports et captures QA reste en attente d'un accord explicite, demandé précédemment après le refus du contrôle de publication. Ces preuves sont exclues du build public ; aucun secret ni configuration privée ne fait partie du lot.
 
