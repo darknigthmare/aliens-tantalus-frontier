@@ -3,6 +3,7 @@ import { applyInfestationActionV62, INFESTATION_ACTIONS_V62 } from './infestatio
 
 export const HUB_ANNEX_OPERATIONS_SCHEMA_V71 = 71;
 export const P5000_VEHICLE_ID_V71 = 'vehicle-007-p-5000-powered-work-loader';
+export const PROVING_GROUND_COURSE_ID_V81 = 'm41a-qualification-v81';
 
 export const HUB_ANNEX_SYSTEM_EFFECTS_V71 = Object.freeze({
   'arrival-airlock': Object.freeze({ quarantine: 5, oxygen: 3 }),
@@ -62,6 +63,10 @@ export function createHubAnnexOperationsV71() {
     processedMorgueEvidenceIds: [],
     provingGround: {
       nextOperationCharge: false,
+      lastQualificationIdV81: null,
+      qualificationReceiptIdsV81: [],
+      qualificationsCompletedV81: 0,
+      bestScoreV81: 0,
       powerLoaderCertified: false,
       advancedTutorialsComplete: false
     },
@@ -100,8 +105,26 @@ export function sanitizeHubAnnexOperationsV71(raw) {
   safe.processedMorgueCaseKeys = idList(raw.processedMorgueCaseKeys, MAX_MORGUE_CASES_V71, 400);
   safe.processedMorgueEvidenceIds = idList(raw.processedMorgueEvidenceIds, MAX_MORGUE_EVIDENCE_V71);
   const proving = isRecord(raw.provingGround) ? raw.provingGround : {};
+  const lastQualificationIdV81 = typeof proving.lastQualificationIdV81 === 'string'
+    && /^m41a-qualification-v81:session-\d+:qualification$/u.test(proving.lastQualificationIdV81)
+    ? proving.lastQualificationIdV81
+    : null;
+  const qualificationReceiptIdsV81 = [...new Set((Array.isArray(proving.qualificationReceiptIdsV81)
+    ? proving.qualificationReceiptIdsV81
+    : []).filter((id) => typeof id === 'string'
+      && /^m41a-qualification-v81:session-\d+:qualification$/u.test(id)))].slice(-32);
+  if (lastQualificationIdV81 && !qualificationReceiptIdsV81.includes(lastQualificationIdV81)) {
+    qualificationReceiptIdsV81.push(lastQualificationIdV81);
+    if (qualificationReceiptIdsV81.length > 32) qualificationReceiptIdsV81.shift();
+  }
   safe.provingGround = {
-    nextOperationCharge: Boolean(proving.nextOperationCharge),
+    // A V71 station visit could arm this flag without any exercise. V81 only
+    // accepts a charge backed by a canonical completion receipt.
+    nextOperationCharge: Boolean(proving.nextOperationCharge && lastQualificationIdV81),
+    lastQualificationIdV81,
+    qualificationReceiptIdsV81,
+    qualificationsCompletedV81: finiteInteger(proving.qualificationsCompletedV81, 0, 0, 999999),
+    bestScoreV81: finiteInteger(proving.bestScoreV81, 0, 0, 999999),
     // Legacy station visits awarded these flags without an exercise. No V71
     // gameplay produces a valid certificate, so migration must discard them.
     powerLoaderCertified: false,
@@ -129,6 +152,39 @@ function ensureHubAnnexOperationsV71(save) {
   if (!isRecord(save) || !isRecord(save.hub)) throw new Error('Sauvegarde du Tantalus invalide.');
   save.hub.annexOperationsV71 = sanitizeHubAnnexOperationsV71(save.hub.annexOperationsV71);
   return save.hub.annexOperationsV71;
+}
+
+export function applyProvingGroundQualificationV81(save, receipt) {
+  const id = optionalId(receipt?.id || receipt?.idempotencyKey, 180);
+  const valid = receipt?.schemaVersion === 81
+    && receipt?.type === 'proving-ground-qualification'
+    && receipt?.courseId === PROVING_GROUND_COURSE_ID_V81
+    && receipt?.qualified === true
+    && receipt?.bonus?.nextOperationCharge === true
+    && typeof id === 'string'
+    && /^m41a-qualification-v81:session-\d+:qualification$/u.test(id);
+  if (!valid) return { applied: false, duplicate: false, reason: 'invalid-receipt' };
+  const operations = ensureHubAnnexOperationsV71(save);
+  if (operations.provingGround.qualificationReceiptIdsV81.includes(id)) {
+    return { applied: false, duplicate: true, reason: 'already-applied' };
+  }
+  operations.provingGround = {
+    nextOperationCharge: true,
+    lastQualificationIdV81: id,
+    qualificationReceiptIdsV81: [...operations.provingGround.qualificationReceiptIdsV81, id].slice(-32),
+    qualificationsCompletedV81: Math.min(999999, operations.provingGround.qualificationsCompletedV81 + 1),
+    bestScoreV81: Math.max(operations.provingGround.bestScoreV81, finiteInteger(receipt.score, 0, 0, 999999)),
+    powerLoaderCertified: false,
+    advancedTutorialsComplete: false
+  };
+  return {
+    applied: true,
+    duplicate: false,
+    reason: null,
+    id,
+    score: operations.provingGround.bestScoreV81,
+    nextOperationCharge: true
+  };
 }
 
 function applyContainmentActionV71(save, action) {
@@ -251,13 +307,10 @@ export function applyHubAnnexBusinessV71(save, annexId) {
     const scanResult = crisisId ? 'incident actif détecté' : containment.applied ? 'preuve capteur enregistrée' : 'aucun incident actif détecté';
     message = `CCTV · ${accessRecords} salles historisées · balayage sécurité effectué · ${scanResult}.`;
   } else if (annexId === 'proving-ground') {
-    operations.provingGround = {
-      nextOperationCharge: true,
-      powerLoaderCertified: false,
-      advancedTutorialsComplete: false
-    };
-    Object.assign(details, operations.provingGround);
-    message = 'PROVING GROUND · préparation tactique effectuée · soutien armé pour la prochaine opération.';
+    Object.assign(details, operations.provingGround, { qualificationRequiredV81: true });
+    message = operations.provingGround.nextOperationCharge
+      ? 'PROVING GROUND · soutien déjà armé par une qualification M41A validée.'
+      : 'PROVING GROUND · console prête · terminez physiquement la qualification M41A pour armer le soutien.';
   } else if (annexId === 'morgue') {
     const knownCases = new Set(operations.processedMorgueCaseKeys);
     const knownEvidence = new Set(operations.processedMorgueEvidenceIds);
@@ -301,7 +354,10 @@ export function applyHubAnnexBusinessV71(save, annexId) {
 
 export function getHubAnnexDeploymentSupportV71(save, vehicleId = null) {
   const operations = sanitizeHubAnnexOperationsV71(save?.hub?.annexOperationsV71);
-  const provingGround = Boolean(operations.provingGround.nextOperationCharge);
+  const provingGround = Boolean(
+    operations.provingGround.nextOperationCharge
+    && operations.provingGround.lastQualificationIdV81
+  );
   const durandal = Boolean(operations.durandal.ewCharge);
   return {
     provingGround,

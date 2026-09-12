@@ -12,6 +12,18 @@ const DIFFICULTIES = Object.freeze({
 
 const finite = (value, fallback, min = -Infinity, max = Infinity) => clamp(Number.isFinite(Number(value)) ? Number(value) : fallback, min, max);
 const list = (value) => Array.isArray(value) ? [...value] : [];
+const EXACT_ENEMY_RUNTIME_BEHAVIORS = Object.freeze({
+  'enemy-009-crusher': 'charger'
+});
+
+function resolveExactEnemyRuntimeBehavior(enemy = {}) {
+  for (const identity of [enemy.profileId, enemy.id]) {
+    if (typeof identity === 'string' && Object.hasOwn(EXACT_ENEMY_RUNTIME_BEHAVIORS, identity)) {
+      return EXACT_ENEMY_RUNTIME_BEHAVIORS[identity];
+    }
+  }
+  return null;
+}
 
 export function buildWeaponRuntime(weapon = {}) {
   return Object.freeze({
@@ -37,6 +49,7 @@ export function buildEnemyRuntime(enemy = {}, difficulty = 'standard') {
   const behaviorMap = { stalk: 'stalker', rush: 'hunter', flank: 'hunter', ambush: 'pouncer', guard: 'bruiser', control: 'shooter', siege: 'bruiser', swarm: 'pouncer' };
   const caste = String(enemy.caste || 'stalker');
   const acid = finite(enemy.acid, 0, 0, 100);
+  const exactRuntimeBehavior = resolveExactEnemyRuntimeBehavior(enemy);
   return Object.freeze({
     id: String(enemy.id || 'enemy-runtime-default'),
     name: String(enemy.name || 'Xenomorph Warrior'),
@@ -52,7 +65,7 @@ export function buildEnemyRuntime(enemy = {}, difficulty = 'standard') {
     encounterWorldIds: list(enemy.encounterWorldIds),
     habitats: list(enemy.habitats),
     sourceBehavior: behavior,
-    runtimeBehavior: caste === 'royal' ? 'boss' : acid > 60 || /spitter|ranged/i.test(caste) ? 'spitter' : behaviorMap[behavior] || 'stalker',
+    runtimeBehavior: exactRuntimeBehavior || (caste === 'royal' ? 'boss' : acid > 60 || /spitter|ranged/i.test(caste) ? 'spitter' : behaviorMap[behavior] || 'stalker'),
     provenance: String(enemy.provenance || 'runtime-default')
   });
 }
@@ -294,13 +307,9 @@ export class GameEngine extends MissionEngine {
       failureTriggered: false
     };
     if (this.neuro.active) {
-      const baseline = this.player.y + this.player.h;
       this.player.playerClass = 'neuro-xeno';
       this.player.visualForm = 'xenomorph';
       this.player.weaponMode = 'neuro-melee';
-      this.player.w = 52;
-      this.player.h = 74;
-      this.player.y = baseline - this.player.h;
       this.player.armor = Math.max(this.player.armor, 24);
       this.onEvent({ type: 'neuro-link', profileId: this.neuro.id, harness: this.neuro.harness, signal: this.neuro.signal });
     } else {
@@ -434,16 +443,7 @@ export class GameEngine extends MissionEngine {
   }
 
   drawActor(ctx, actor) {
-    if (!this.neuro?.active || actor !== this.player) return super.drawActor(ctx, actor);
-    const image = this.images.get(actor.actionClock > 0 ? 'xenoCombat' : 'xenoLocomotion');
-    const moving = Math.abs(actor.vx) > 12;
-    const row = actor.actionClock > 0 ? 1 : actor.climbing || actor.crouching ? 3 : !actor.grounded ? 2 : moving ? 1 : 0;
-    const frame = Math.floor(this.animationTime * (moving ? 10 : 5)) % 4;
-    const width = 142;
-    const height = 106;
-    const x = actor.x + actor.w / 2 - width / 2;
-    const y = actor.y + actor.h - height * (240 / 256);
-    this.drawSheetCell(ctx, image, frame, row, x, y, width, height, actor.facing < 0);
+    return super.drawActor(ctx, actor);
   }
 
   drawHud(ctx) {

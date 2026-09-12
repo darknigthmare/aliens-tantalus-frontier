@@ -90,7 +90,9 @@ test('inventory v55 preserves its release batch and reports the current shared v
   // admitted only through their reviewed V66 ownership records.
   const v66Standards = new Set(['enemy-001-ovomorph', 'enemy-003-chestburster',
     'enemy-004-drone-big-chap', 'enemy-005-warrior', 'enemy-006-runner',
-    'enemy-015-prowler', 'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph']);
+    'enemy-009-crusher', 'enemy-010-spitter', 'enemy-015-prowler',
+    'enemy-016-burster', 'enemy-020-k-series-yellow-xenomorph']);
+  const v81ProjectAdaptations = new Set(['enemy-009-crusher', 'enemy-010-spitter']);
   const projectOriginalIds = new Set(['enemy-050-korari-stalker', 'enemy-051-ceto-reef-predator']);
   const albinoId = 'enemy-055-albino-chestburster';
   assert.deepEqual(READY_ENEMY_PROFILE_REGISTRY_V66.map((profile) => profile.profileId).sort(),
@@ -99,13 +101,15 @@ test('inventory v55 preserves its release batch and reports the current shared v
     const projectOriginal = projectOriginalIds.has(profile.profileId);
     const standard = v66Standards.has(profile.profileId) || projectOriginal;
     assert.equal(profile.modifier, standard ? 'Standard' : 'Albino');
-    assert.equal(profile.asset.identityStatus, projectOriginal ? 'project-original' : standard ? 'source-locked-adaptation' : 'source-locked-project-adaptation');
+    assert.equal(profile.asset.identityStatus, projectOriginal ? 'project-original'
+      : v81ProjectAdaptations.has(profile.profileId) ? 'source-locked-project-adaptation'
+        : standard ? 'source-locked-adaptation' : 'source-locked-project-adaptation');
     assert.equal(profile.asset.canonExact, false, 'plaque dédiée ne signifie pas copie canonique 1:1');
   }
   const expectedIdentityCounts = {
     exact: 29 - v66Standards.size,
-    'source-locked-adaptation': 1 + v66Standards.size,
-    'source-locked-project-adaptation': 1,
+    'source-locked-adaptation': 1 + v66Standards.size - v81ProjectAdaptations.size,
+    'source-locked-project-adaptation': 1 + v81ProjectAdaptations.size,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 515

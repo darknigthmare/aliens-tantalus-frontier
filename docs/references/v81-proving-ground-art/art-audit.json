@@ -1,0 +1,102 @@
+{
+  "schema": 81,
+  "contractId": "proving-ground-original-art-v81",
+  "provider": "OpenAI ImageGen",
+  "toolMode": "built-in",
+  "rightsPolicy": "original-ai-generated-no-official-copy",
+  "canonExact": false,
+  "perspective": "strict-side-on-orthographic",
+  "marineReferenceHeightPx": 92,
+  "assets": [
+    {
+      "id": "proving-ground-target-v81",
+      "kind": "target",
+      "source": "docs/references/v81-proving-ground-art/source-receipts/exec-dd0ed932-9f0f-4a49-be62-b6540c9e483b.png",
+      "sourceSha256": "5f42d5829c4c4e0b7cbe2a120a9f58893570a768c11069a5920428c5e2a69e27",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "output": "assets/openai/hub/proving-ground/v81/proving-ground-target-cycle-v81.png",
+      "outputSha256": "96d34adc91a8a5310b9cc8c57f0bc402cb1c8e04f3acde3309bc1f274a8ad8a6",
+      "metrics": {
+        "mode": "RGBA",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "transparentPixels": 1821691,
+        "partialAlphaPixels": 273774,
+        "opaquePixels": 1687,
+        "visibleRatio": 0.13135,
+        "contentBounds": [
+          118,
+          69,
+          1930,
+          953
+        ],
+        "hiddenRgbPixels": 0
+      }
+    },
+    {
+      "id": "proving-ground-impact-v81",
+      "kind": "impact",
+      "source": "docs/references/v81-proving-ground-art/source-receipts/exec-659f1605-c7fb-4226-868f-13343802a819.png",
+      "sourceSha256": "b80f60efc17135420a498918319fb25de320e3262f549079ad91524a06034cda",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "output": "assets/openai/hub/proving-ground/v81/proving-ground-impact-cycle-v81.png",
+      "outputSha256": "1bb000c29718c54b72159d178c9a53fcf6f59149655ec7d906e826be0215df37",
+      "metrics": {
+        "mode": "RGBA",
+        "dimensions": [
+          2048,
+          1024
+        ],
+        "transparentPixels": 1778606,
+        "partialAlphaPixels": 318538,
+        "opaquePixels": 8,
+        "visibleRatio": 0.151895,
+        "contentBounds": [
+          120,
+          69,
+          1966,
+          932
+        ],
+        "hiddenRgbPixels": 0
+      }
+    },
+    {
+      "id": "proving-ground-console-v81",
+      "kind": "console",
+      "source": "docs/references/v81-proving-ground-art/source-receipts/exec-02a8be9a-c609-4dde-932f-c1ed58a4d1b0.png",
+      "sourceSha256": "25fa5d64af26481c2f89984fecde1ac49a0a0280cdca05159b1f4b92eed1ec14",
+      "sourceDimensions": [
+        1239,
+        1269
+      ],
+      "output": "assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png",
+      "outputSha256": "20e3a8412f1be182198d2cf3e49f8dcb07f1a33517073fb6482404bfcd88bbe8",
+      "metrics": {
+        "mode": "RGBA",
+        "dimensions": [
+          1024,
+          1024
+        ],
+        "transparentPixels": 765560,
+        "partialAlphaPixels": 282470,
+        "opaquePixels": 546,
+        "visibleRatio": 0.269905,
+        "contentBounds": [
+          239,
+          69,
+          784,
+          994
+        ],
+        "hiddenRgbPixels": 0
+      }
+    }
+  ]
+}

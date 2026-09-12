@@ -1,5 +1,11 @@
 import { ENEMIES } from './content-core-v50.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
+import { V81_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v81.js';
+
+const READY_ENEMY_PROFILE_ASSETS = Object.freeze([
+  ...V66_READY_ENEMY_PROFILE_ASSETS,
+  ...V81_READY_ENEMY_PROFILE_ASSETS
+]);
 
 const gridForClips = (count) => Object.freeze({ columns: 4, rows: count * 2, cellWidth: 256, cellHeight: 256 });
 const actionGrid = gridForClips(4);
@@ -30,10 +36,12 @@ function catalogProfile(source, index) {
 }
 
 function readyAsset(source, profile) {
+  const wave = clean(source.wave || 'v66');
+  if (!['v66', 'v81'].includes(wave)) throw new Error(`Unsupported enemy profile asset wave: ${wave}`);
   for (const key of ['path', 'spriteKey', 'pivot', 'hitbox', 'identityStatus', 'referenceStatus', 'promptId']) {
-    if (!clean(source[key])) throw new Error(`V66 ${profile.profileId}: ${key} is required.`);
+    if (!clean(source[key])) throw new Error(`${wave.toUpperCase()} ${profile.profileId}: ${key} is required.`);
   }
-  if (source.path !== `/assets/openai/sprites/normalized/enemy-profiles-v66/${profile.profileId}.webp`) throw new Error(`V66 ${profile.profileId}: atlas path must belong to this exact profile.`);
+  if (source.path !== `/assets/openai/sprites/normalized/enemy-profiles-${wave}/${profile.profileId}.webp`) throw new Error(`${wave.toUpperCase()} ${profile.profileId}: atlas path must belong to this exact profile.`);
   if (source.identityVerified !== true || source.reviewStatus !== 'accepted') throw new Error(`V66 ${profile.profileId}: explicit accepted identity review is required.`);
   if (source.canonExact === true) throw new Error(`V66 ${profile.profileId}: generated adaptation cannot certify 1:1 pixels.`);
   const provider = clean(source.provider || source.generationProvider);
@@ -51,8 +59,9 @@ function readyAsset(source, profile) {
   if (Math.abs(renderWidth - renderHeight) > 1e-6) throw new Error(`V66 ${profile.profileId}: square source cells must keep an isotropic render scale.`);
   if (source.sourceFacing !== 1 && source.sourceFacing !== -1) throw new Error(`V66 ${profile.profileId}: explicit sourceFacing +/-1 is required.`);
   if (source.normalizedSha256 !== undefined && !/^[a-f0-9]{64}$/.test(source.normalizedSha256)) throw new Error(`V66 ${profile.profileId}: invalid atlas hash.`);
-  return Object.freeze({ schema: 66, profileId: profile.profileId,
-    sheetId: `enemy.profile.${profile.profileId}.v66`, imageKey: `enemy-profile-v66:${profile.profileId}`,
+  const schema = wave === 'v81' ? 81 : 66;
+  return Object.freeze({ schema, wave, profileId: profile.profileId,
+    sheetId: `enemy.profile.${profile.profileId}.${wave}`, imageKey: `enemy-profile-${wave}:${profile.profileId}`,
     path: source.path, spriteKey: clean(source.spriteKey), clipSet, grid,
     pivot: clean(source.pivot), hitbox: clean(source.hitbox), renderWidth, renderHeight, sourceFacing: source.sourceFacing,
     identityStatus: clean(source.identityStatus), referenceStatus: clean(source.referenceStatus), identityVerified: true,
@@ -61,7 +70,7 @@ function readyAsset(source, profile) {
   });
 }
 
-export function buildEnemyProfileRegistryV66(catalog = ENEMIES, readyAssets = V66_READY_ENEMY_PROFILE_ASSETS) {
+export function buildEnemyProfileRegistryV66(catalog = ENEMIES, readyAssets = READY_ENEMY_PROFILE_ASSETS) {
   const profiles = catalog.map(catalogProfile);
   const profileById = new Map(profiles.map((profile) => [profile.profileId, profile]));
   if (profileById.size !== profiles.length) throw new Error('Duplicate V66 catalog profile IDs.');
@@ -88,7 +97,7 @@ export function buildEnemyProfileSpriteSheetsV66(registry) {
     return [asset.sheetId, Object.freeze({ id: asset.sheetId, imageKey: asset.imageKey, path: asset.path, clipSet: asset.clipSet,
       pivot: asset.pivot, hitbox: asset.hitbox, renderWidth: asset.renderWidth, renderHeight: asset.renderHeight,
       family: 'enemy', ...asset.grid, sourceFacing: asset.sourceFacing, releaseReady: true, identityVerified: true,
-      assetFormat: asset.assetFormat, profileId: profile.profileId, wave: 'v66', canonExact: false })];
+      assetFormat: asset.assetFormat, profileId: profile.profileId, wave: asset.wave, canonExact: false })];
   })));
 }
 
@@ -101,7 +110,7 @@ function resolveIndexed(source, registryIndexes) {
   const profile = id && registryIndexes.byId.has(id) ? registryIndexes.byId.get(id) : id && typeof source !== 'string' ? null : registryIndexes.byName.get(name);
   if (!profile?.ready || !profile.asset) return null;
   const asset = profile.asset;
-  return Object.freeze({ schema: 66, wave: 'v66', profileId: profile.profileId, archetype: profile.archetype,
+  return Object.freeze({ schema: asset.schema, wave: asset.wave, profileId: profile.profileId, archetype: profile.archetype,
     spriteKey: asset.spriteKey, sheetId: asset.sheetId, imageKey: null, row: null, artSubject: profile.name,
     legacy: false, identityStatus: asset.identityStatus, referenceStatus: asset.referenceStatus, sourceFacing: asset.sourceFacing,
     approximate: false, canonExact: false, fallbackReason: null,

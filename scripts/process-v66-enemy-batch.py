@@ -728,8 +728,8 @@ def process_profile(job: dict, root: Path = ROOT, allow_cell_reassignment: bool 
     for source in sources:
         if hash_file(scoped_path(root, source["path"])) != source["sha256"]:
             raise ValueError("Source changed during normalization.")
-    metadata = {"schema": 1, "release": "v66", "profileId": job["profileId"], "subject": job["name"], "batchId": job["batchId"],
-        "generatedBy": "scripts/process-v66-enemy-batch.py", "generationProvider": "OpenAI ImageGen", "normalizationStatus": "validated",
+    metadata = {"schema": 1, "release": job.get("normalizationRelease", "v66"), "profileId": job["profileId"], "subject": job["name"], "batchId": job["batchId"],
+        "generatedBy": job.get("normalizationScript", "scripts/process-v66-enemy-batch.py"), "generationProvider": "OpenAI ImageGen", "normalizationStatus": "validated",
         "acceptanceStatus": "pending-visual-review", "runtimeIntegrated": False, "canonExact": False,
         "promptProvenance": "Source prompt hashes identify the production contract; actual ImageGen prompts are separately preserved in the production state.",
         "referenceUrls": job["reference"]["urls"], "referenceLockSha256": job["referenceLockSha256"],

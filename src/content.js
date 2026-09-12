@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '80.0.0',
-  subtitle: 'BIOFORGE jouable, double sas physique et purge atomique isolée',
+  version: '81.0.0',
+  subtitle: 'Qualification M41A physique, identité Echo-9 stable et BIOFORGE jouable',
   sourceVersion: '51.0.0'
 });

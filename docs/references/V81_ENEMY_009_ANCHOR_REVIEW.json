@@ -1,0 +1,675 @@
+{
+  "schema": 1,
+  "batchId": "batch-002",
+  "coordinates": "nominal-source-cell",
+  "reviewScope": "Frozen V81 physical-root evidence for the unchanged reviewed V66 source boards; no 1:1 or official-art claim.",
+  "profiles": {
+    "enemy-009-crusher": {
+      "status": "reviewed",
+      "reviewer": "Codex complete_royal",
+      "reviewedAt": "2026-08-31",
+      "reviewedPoseCount": 40,
+      "evidencePaths": [
+        "docs/references/v66-batch-002-royal-qa/enemy-009-crusher/anchor-idle.jpg",
+        "docs/references/v66-batch-002-royal-qa/enemy-009-crusher/anchor-move.jpg",
+        "docs/references/v66-batch-002-royal-qa/enemy-009-crusher/anchor-attack.jpg",
+        "docs/references/v66-batch-002-royal-qa/enemy-009-crusher/anchor-death.jpg",
+        "docs/references/v66-batch-002-royal-qa/enemy-009-crusher/anchor-charge.jpg"
+      ],
+      "visualReview": "Every source pose and every marked overlay individually inspected. Marks stay on the defined body landmark and project to grounded support or resting body. This is approximate manual physical registration only, not approval of art, animation timing, scale consistency or 1:1 fidelity. Lurker attack/death have a clear interclip size discontinuity and need separate measured calibration before acceptance; Crusher terminal thorax partly occluded by shield has wider uncertainty. Source hashes and manual coordinates rechecked unchanged after overlay review.",
+      "method": "Manually observed ribcage center behind the front shoulder, projected vertically to the support floor. Death 6/7 use visible posterior thorax behind the partly occluding shield; uncertainty is explicitly wider. Support floor is complete recovered pose padded bottom, visually checked against planted limbs or terminal resting body; three source pixels of extraction guard included. No airborne pose established in these sources. Never uses tail or shield extents for root x.",
+      "clips": {
+        "idle": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/idle.png",
+          "sourceSha256": "6c8cb194f4840e619addeba71b1ca90ddc3d34a22b364f55ff02c835bb33e19a",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                225,
+                364
+              ],
+              "landmark": [
+                225,
+                251
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (225,251); grounded support floor y=364 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                225,
+                362
+              ],
+              "landmark": [
+                225,
+                249
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (225,249); grounded support floor y=362 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                224,
+                364
+              ],
+              "landmark": [
+                224,
+                250
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (224,250); grounded support floor y=364 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                225,
+                363
+              ],
+              "landmark": [
+                225,
+                250
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (225,250); grounded support floor y=363 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                223,
+                326
+              ],
+              "landmark": [
+                223,
+                211
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (223,211); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                224,
+                326
+              ],
+              "landmark": [
+                224,
+                210
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (224,210); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                224,
+                326
+              ],
+              "landmark": [
+                224,
+                211
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (224,211); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                222,
+                326
+              ],
+              "landmark": [
+                222,
+                213
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (222,213); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            }
+          ]
+        },
+        "move": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/move.png",
+          "sourceSha256": "e784172d3caaee046e6fd0ad96f66b85bb883cb34179aede4539ed3dc5f469aa",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                211,
+                367
+              ],
+              "landmark": [
+                211,
+                245
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (211,245); grounded support floor y=367 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                211,
+                367
+              ],
+              "landmark": [
+                211,
+                245
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (211,245); grounded support floor y=367 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                211,
+                372
+              ],
+              "landmark": [
+                211,
+                254
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (211,254); grounded support floor y=372 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                211,
+                374
+              ],
+              "landmark": [
+                211,
+                257
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (211,257); grounded support floor y=374 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                212,
+                338
+              ],
+              "landmark": [
+                212,
+                215
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (212,215); grounded support floor y=338 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                212,
+                344
+              ],
+              "landmark": [
+                212,
+                215
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (212,215); grounded support floor y=344 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                213,
+                345
+              ],
+              "landmark": [
+                213,
+                225
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (213,225); grounded support floor y=345 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                213,
+                347
+              ],
+              "landmark": [
+                213,
+                229
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (213,229); grounded support floor y=347 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            }
+          ]
+        },
+        "attack": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/attack.png",
+          "sourceSha256": "eb6cfd32247635265c89415e1afbd430458e7ab19ff76f364c81fec34a92e471",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                202,
+                410
+              ],
+              "landmark": [
+                202,
+                273
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (202,273); grounded support floor y=410 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                205,
+                410
+              ],
+              "landmark": [
+                205,
+                282
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (205,282); grounded support floor y=410 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                205,
+                410
+              ],
+              "landmark": [
+                205,
+                286
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (205,286); grounded support floor y=410 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                205,
+                410
+              ],
+              "landmark": [
+                205,
+                297
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (205,297); grounded support floor y=410 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                203,
+                375
+              ],
+              "landmark": [
+                203,
+                246
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (203,246); grounded support floor y=375 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                206,
+                375
+              ],
+              "landmark": [
+                206,
+                245
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (206,245); grounded support floor y=375 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                202,
+                375
+              ],
+              "landmark": [
+                202,
+                236
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (202,236); grounded support floor y=375 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                204,
+                375
+              ],
+              "landmark": [
+                204,
+                239
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (204,239); grounded support floor y=375 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            }
+          ]
+        },
+        "death": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/death.png",
+          "sourceSha256": "f232a3c3637c6098f8af0bcfb15c181d13b8ce1165ffe606df339520e387b03b",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                212,
+                380
+              ],
+              "landmark": [
+                212,
+                242
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (212,242); grounded support floor y=380 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                210,
+                381
+              ],
+              "landmark": [
+                210,
+                269
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (210,269); grounded support floor y=381 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                212,
+                381
+              ],
+              "landmark": [
+                212,
+                281
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (212,281); grounded support floor y=381 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                208,
+                380
+              ],
+              "landmark": [
+                208,
+                290
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (208,290); grounded support floor y=380 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                190,
+                324
+              ],
+              "landmark": [
+                190,
+                240
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (190,240); grounded support floor y=324 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                186,
+                327
+              ],
+              "landmark": [
+                186,
+                271
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 12,
+              "evidence": "Manual ribcage center behind front shoulder at (186,271); grounded support floor y=327 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                179,
+                326
+              ],
+              "landmark": [
+                179,
+                281
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 12,
+              "evidence": "Manual ribcage center behind front shoulder at (179,281); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                180,
+                326
+              ],
+              "landmark": [
+                180,
+                287
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 12,
+              "evidence": "Manual ribcage center behind front shoulder at (180,287); grounded support floor y=326 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            }
+          ]
+        },
+        "charge": {
+          "sourcePath": "assets/openai/sprites/frames/v66/batch-002/enemy-009-crusher/charge.png",
+          "sourceSha256": "fbc93c7aa29757c3b443238b62450dfbf0cc27c6dd9ba5089c5c5d43a7266d69",
+          "sourceSize": [
+            1774,
+            887
+          ],
+          "frames": [
+            {
+              "frame": 0,
+              "anchor": [
+                215,
+                369
+              ],
+              "landmark": [
+                215,
+                237
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (215,237); grounded support floor y=369 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 1,
+              "anchor": [
+                213,
+                368
+              ],
+              "landmark": [
+                213,
+                269
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (213,269); grounded support floor y=368 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 2,
+              "anchor": [
+                222,
+                369
+              ],
+              "landmark": [
+                222,
+                267
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (222,267); grounded support floor y=369 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 3,
+              "anchor": [
+                208,
+                369
+              ],
+              "landmark": [
+                208,
+                270
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (208,270); grounded support floor y=369 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 4,
+              "anchor": [
+                214,
+                333
+              ],
+              "landmark": [
+                214,
+                231
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (214,231); grounded support floor y=333 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 5,
+              "anchor": [
+                213,
+                332
+              ],
+              "landmark": [
+                213,
+                232
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (213,232); grounded support floor y=332 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 6,
+              "anchor": [
+                221,
+                333
+              ],
+              "landmark": [
+                221,
+                230
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (221,230); grounded support floor y=333 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            },
+            {
+              "frame": 7,
+              "anchor": [
+                213,
+                333
+              ],
+              "landmark": [
+                213,
+                235
+              ],
+              "reviewed": true,
+              "confidence": "medium",
+              "uncertaintyPx": 8,
+              "evidence": "Manual ribcage center behind front shoulder at (213,235); grounded support floor y=333 including three-pixel extraction guard. Source and marked overlay individually inspected; landmark and support floor confirmed. No art acceptance implied."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

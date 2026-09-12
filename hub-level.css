@@ -74,8 +74,9 @@
   display: none;
   position: absolute;
   inset: auto 14px 14px;
-  grid-template-columns: repeat(4, 54px);
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(46px, 54px));
+  justify-content: center;
+  gap: 8px;
   pointer-events: none;
 }
 
@@ -93,6 +94,12 @@
 }
 
 .hub-touch-controls button:active { background: rgba(92, 145, 105, .82); }
+.hub-touch-controls [hidden] { display: none !important; }
+.view[data-panel="hub"][data-proving-ground-active-v81="true"] .hub-touch-controls {
+  border: 1px solid rgba(175, 203, 126, .32);
+  background: rgba(2, 8, 5, .42);
+  padding: 7px;
+}
 
 @media (max-width: 900px) {
   .galaxy-layout { grid-template-columns: 1fr; }
@@ -111,7 +118,7 @@
   .hub-system-readout { grid-template-columns: repeat(2, 1fr); }
   .hub-system-readout span:nth-child(3) { border-left: 0; border-top: 1px solid #26382e; }
   .hub-system-readout span:nth-child(4) { border-top: 1px solid #26382e; }
-  .hub-touch-controls { inset: auto 8px 8px; grid-template-columns: repeat(4, 46px); }
+  .hub-touch-controls { inset: auto 8px 8px; grid-template-columns: repeat(auto-fit, 46px); }
   .hub-touch-controls button { width: 46px; height: 46px; font-size: 17px; }
 }
 

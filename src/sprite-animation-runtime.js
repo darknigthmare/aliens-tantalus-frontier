@@ -11,10 +11,11 @@ import {
 import { resolveVehicleAccessAnimationV59 } from './vehicle-access-runtime-v59.js';
 import { V65_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v65.js';
 import { V66_ENEMY_PROFILE_SPRITE_SHEETS } from './enemy-profile-registry-v66.js';
-import { getBursterTerminalAnimationV74, getEnemyBatchAttackFrameV66 } from './enemy-batch-combat-v66.js';
+import { getBursterTerminalAnimationV74, getEnemyBatchActionAnimationV66 } from './enemy-batch-combat-v66.js';
 import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
 import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 import { CETO_V75, getCetoAnimationV75 } from './enemy-ceto-v75.js';
+import { enforcePlayerAnimationRequestV81 } from './player-visual-contract-v81.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -104,6 +105,13 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'move', frames: [8, 9, 10, 11, 12, 13, 14, 15], fps: 12, loop: true },
     { id: 'attack', frames: [16, 17, 18, 19, 20, 21, 22, 23], fps: 12, loop: false },
     { id: 'death', frames: [24, 25, 26, 27, 28, 29, 30, 31], fps: 10, loop: false }
+  ]),
+  'siege-action-v66': freezeList([
+    { id: 'idle', frames: [0, 1, 2, 3, 4, 5, 6, 7], fps: 6, loop: true },
+    { id: 'move', frames: [8, 9, 10, 11, 12, 13, 14, 15], fps: 12, loop: true },
+    { id: 'attack', frames: [16, 17, 18, 19, 20, 21, 22, 23], fps: 12, loop: false },
+    { id: 'death', frames: [24, 25, 26, 27, 28, 29, 30, 31], fps: 10, loop: false },
+    { id: 'charge', frames: [32, 33, 34, 35, 36, 37, 38, 39], fps: 12, loop: false }
   ]),
   'ovomorph-cycle-v66': freezeList([
     { id: 'sealed', frames: [0, 1, 2, 3, 4, 5, 6, 7], fps: 6, loop: true },
@@ -521,17 +529,8 @@ export function resolveVerifiedPlayerCombat(clipId) {
   };
 }
 
-export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
-  if (isExplicitXenomorphAnimationEntity(actor, neuroActive)) {
-    if (!actor.alive) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
-    if ((actor.v52HurtClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'hurt-death' };
-    if ((actor.v52FireClock || 0) > 0) return { sheetId: 'enemy.xenomorph-drone.combat', clipId: 'claw-attack' };
-    if (!actor.grounded) return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'leap' };
-    if (actor.crouching) return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'crawl' };
-    if (Math.abs(actor.vx || 0) > 12) return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'stalk-run' };
-    return { sheetId: 'enemy.xenomorph-drone.locomotion', clipId: 'idle' };
-  }
-  if (!actor.alive) return resolveVerifiedPlayerCombat('hurt-death');
+function resolveEcho9MarineAnimationV81(actor = {}) {
+  if (actor.alive === false) return resolveVerifiedPlayerCombat('hurt-death');
   if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt-death');
   if ((actor.meleeClock || 0) > 0) return {
     sheetId: 'player.echo9-marine.melee',
@@ -548,12 +547,21 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
     return { sheetId: 'player.echo9-marine.interaction', clipId: interactionClip };
   }
   if (actor.reloading) return resolveVerifiedPlayerCombat('reload');
-  if ((actor.v52FireClock || 0) > 0) return resolveVerifiedPlayerCombat('primary-fire');
+  if (Math.max(Number(actor.v52FireClock) || 0, Number(actor.fireClock) || 0) > 0) {
+    return resolveVerifiedPlayerCombat('primary-fire');
+  }
   if (actor.climbing) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'climb' };
   if (actor.crouching) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'crouch' };
   if (!actor.grounded) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'jump-fall' };
   if (Math.abs(actor.vx || 0) > 12) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'walk-run' };
   return { sheetId: 'player.echo9-marine.locomotion', clipId: 'idle' };
+}
+
+export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
+  const request = resolveEcho9MarineAnimationV81(actor);
+  return isExplicitXenomorphAnimationEntity(actor, neuroActive)
+    ? { ...request, degraded: 'neuro-player-echo9-fallback-v81' }
+    : request;
 }
 
 export function resolveNpcAnimation(actor = {}) {
@@ -576,6 +584,9 @@ export function resolveNpcAnimation(actor = {}) {
 
 export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { role = 'player', neuroActive = false } = {}) {
   const requestedSheet = resolveSpriteSheet(request?.sheetId);
+  if (role === 'player') {
+    return enforcePlayerAnimationRequestV81(request, resolvePlayerAnimation(actor, false));
+  }
   const explicitXenomorph = isExplicitXenomorphAnimationEntity(actor, neuroActive);
   const contractedSheetId = typeof actor.neuroVisualContract?.sheetId === 'string'
     ? actor.neuroVisualContract.sheetId
@@ -626,7 +637,7 @@ export function resolveEnemyAnimation(enemy = {}) {
   if (dedicatedClipSet === 'ovomorph-cycle-v66') {
     return { sheetId: enemy.visualSheetId, ...getOvomorphAnimationV66(enemy) };
   }
-  if (dedicatedClipSet === 'enemy-action-v66') {
+  if (dedicatedClipSet === 'enemy-action-v66' || dedicatedClipSet === 'siege-action-v66') {
     const terminal = getBursterTerminalAnimationV74(enemy);
     if (terminal) return { sheetId: enemy.visualSheetId, ...terminal };
     if (dead && ['enemy.profile.enemy-015-prowler.v66', 'enemy.profile.enemy-050-korari-stalker.v66'].includes(enemy.visualSheetId)) {
@@ -636,10 +647,10 @@ export function resolveEnemyAnimation(enemy = {}) {
       const elapsed = Math.max(0, 2.8 - remaining);
       return { sheetId: enemy.visualSheetId, clipId: 'death', frame: 24 + Math.min(7, Math.floor(elapsed * 10 + 1e-9)) };
     }
-    const clipId = dead ? 'death' : hurt ? 'idle' : attacking ? 'attack' : Math.abs(enemy.vx || 0) > 8 ? 'move' : 'idle';
-    const localAttackFrame = clipId === 'attack' ? getEnemyBatchAttackFrameV66(enemy) : null;
+    const actionAnimation = !dead && !hurt && attacking ? getEnemyBatchActionAnimationV66(enemy) : null;
+    const clipId = dead ? 'death' : hurt ? 'idle' : attacking ? actionAnimation?.clipId || 'attack' : Math.abs(enemy.vx || 0) > 8 ? 'move' : 'idle';
     return { sheetId: enemy.visualSheetId, clipId,
-      ...(localAttackFrame === null ? {} : { frame: 16 + localAttackFrame }),
+      ...(actionAnimation ? { frame: actionAnimation.frame } : {}),
       ...(hurt && !dead ? { reaction: 'hurt' } : {}) };
   }
   const dedicatedActionSheet = DEDICATED_ENEMY_ACTION_CLIP_SETS.has(dedicatedClipSet)

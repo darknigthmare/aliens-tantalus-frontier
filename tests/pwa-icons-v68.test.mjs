@@ -5,6 +5,9 @@ import test from 'node:test';
 import { runInNewContext } from 'node:vm';
 
 import { BIOFORGE_ASSET_LIST_V80 } from '../src/bioforge-assets-v80.js';
+import { PROVING_GROUND_ASSET_LIST_V81 } from '../src/proving-ground-assets-v81.js';
+import { V81_READY_ENEMY_PROFILE_ASSETS } from '../src/enemy-profile-assets-v81.js';
+import { PLAYER_VISUAL_ASSETS_V81 } from '../src/player-visual-contract-v81.js';
 import { spriteImageDimensions } from './helpers/sprite-image-dimensions.mjs';
 
 const ICONS = Object.freeze([
@@ -77,18 +80,25 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
   assert.match(html, /<link rel="apple-touch-icon" sizes="192x192" href="\/assets\/openai\/pwa\/tantalus-frontier-icon-192-v68\.png">/u);
 });
 
-test('le cache V80 conserve les exports V68 et les six bitmaps BIOFORGE mais exclut le master 1254', async () => {
+test('le cache V81 conserve les assets runtime acceptés mais exclut le master PWA', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v80-bioforge-shell-1['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v81-proving-ground-shell-1['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }
   assert.equal(shell.includes(`/${SOURCE.path}`), false);
   assert.deepEqual(
     [...shell.filter((path) => path.startsWith('/assets/'))].sort(),
-    ['/assets/audio/manifest.json', ...ICONS.map(({ src }) => src), ...BIOFORGE_ASSET_LIST_V80.map(({ src }) => src)].sort(),
-    'seuls les exports PWA, le manifeste audio et les six bitmaps jouables BIOFORGE franchissent le filtre des assets lourds'
+    [
+      '/assets/audio/manifest.json',
+      ...ICONS.map(({ src }) => src),
+      ...BIOFORGE_ASSET_LIST_V80.map(({ src }) => src),
+      ...PLAYER_VISUAL_ASSETS_V81.map(({ path }) => path),
+      ...PROVING_GROUND_ASSET_LIST_V81.map(({ src }) => src),
+      ...V81_READY_ENEMY_PROFILE_ASSETS.map(({ path }) => path)
+    ].sort(),
+    'seuls les assets runtime explicitement acceptés franchissent le filtre des assets lourds'
   );
 });
 

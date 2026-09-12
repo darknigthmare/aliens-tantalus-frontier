@@ -1,12 +1,14 @@
 # ALIENS: TANTALUS FRONTIER
 
-## Travail courant V80
+## Travail courant V81
 
 Reprise fondée sur les 26 conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict est désormais de **0 conversation intégralement terminée, 17 partielles et 9 manquantes** : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
 
-V80 transforme BIOFORGE en niveau 2D séparé, accessible depuis son sas physique du Tantalus. Le terminal choisit un profil terrestre validé et une quantité bornée, puis la boucle ferme les sas, imprime les spécimens, joue le combat, impose une purge atomique et n’autorise le retour au hub qu’une fois la zone vide. L’état persiste uniquement sous la racine `bioforgeV80` : il ne crédite ni campagne, ni ressource stratégique, ni perte d’équipage.
+V81 transforme le Proving Ground de l’Armory en première activité d’entraînement physique : console à portée, ligne de tir à rejoindre, neuf cibles en trois hauteurs, M41A à munitions réelles, recharge obligatoire, score, reprise et reçu de qualification anti-rejeu. Une visite de station ne suffit plus à armer le soutien de la prochaine opération. Le P-5000 et les tutoriels avancés restent à produire.
 
-Le roster initial contient **11 profils validés**, avec un budget pondéré de 12 et un maximum absolu de 12 spécimens simultanés. BIOFORGE passe donc de **MISSING** à **PARTIAL** : la boucle dédiée existe, mais le roster ennemi total et le corpus artistique dédié annoncé dans la conversation ne sont pas terminés. Voir [le contrat runtime V80](docs/V80_BIOFORGE_RUNTIME.md), [l’audit level design V80](docs/V80_LEVEL_DESIGN_AUDIT.md) et [l’historique V80](docs/VERSION_HISTORY_V80.md).
+Le lot verrouille aussi l’identité du joueur sur exactement cinq feuilles Echo-9, avec pivot pieds et tailles propres à la mission, au hub et à BIOFORGE. Crusher 009 reçoit 40 poses et une charge balayée ; Spitter 010 reçoit 32 poses et un projectile acide réel. Les deux sont des adaptations originales de projet OpenAI, déclarées `canonExact: false`. Voir [le runtime Proving Ground V81](docs/V81_PROVING_GROUND_RUNTIME.md), [l’audit identité Echo-9](docs/V81_PLAYER_IDENTITY_AUDIT.md), [la vague ennemie V81](docs/V81_ENEMY_WAVE.md) et [la validation V81](docs/VALIDATION_V81.md).
+
+V80 reste la tranche historique qui a rendu BIOFORGE jouable et isolé, avec 11 profils terrestres, un budget de 12 et une purge atomique : [contrat V80](docs/V80_BIOFORGE_RUNTIME.md). Son roster total et son corpus artistique restent eux aussi partiels.
 
 ## Référence V79
 
@@ -44,8 +46,8 @@ Ouvrir `http://127.0.0.1:4173`.
 - Systèmes de survie Alien : six salles physiques reliées, capacité énergétique limitée entre support-vie, sécurité et CCTV, pression/oxygène simulés, sas soudables, surveillance sans pause du monde, flaques d’acide persistantes et autodestruction à double autorisation avant extraction.
 - Escouade physique : les trois équipiers sélectionnés suivent, se mettent en couverture, tirent, soignent, réparent, scannent, réaniment, occupent le véhicule et conservent leur état à la reprise ; le coop local peut prendre ou rendre un poste sans dupliquer l'acteur IA.
 - Seize contrats physiques : sauvetage, atmosphère, ruche, boîte noire, escorte, purge, abordage, défense, traque Apex, synthétique, capture, relais Neuro-Xeno, protection, conduits, véhicule et fuite.
-- Hub : 4 ponts, 16 salles historiques, 10 annexes V71 et 16 PNJ nommés dans le hub historique. Chaque annexe est un sous-niveau 1 920 × 720 relié par une porte réciproque, avec sol, passerelle, échelle, colliders, six placements logiques, station persistante et cinq couches WebP (`far`, `mid`, `prop`, `foreground`, `door`). Les dix branches se parcourent physiquement ; leurs PNJ dédiés et les bitmaps autonomes de chaque prop restent à produire. Le vestibule BIOFORGE reste sans créature ; il ouvre désormais le niveau V80 séparé et sa progression isolée.
-- Services V71 : Logistique exécute les ordres de module, MIRE indexe les archives, CCTV effectue un scan, Proving Ground prépare un soutien et Capsules arme une mitigation de crise. La relecture physique des archives, les commandes CCTV/lockdown et les exercices de tir/P-5000/tutoriels restent à réaliser. Les Capsules n’exécutent pas de scénario d’autodestruction et les visites ne délivrent aucun certificat d’exercice.
+- Hub : 4 ponts, 16 salles historiques, 10 annexes V71 et 16 PNJ nommés dans le hub historique. Chaque annexe est un sous-niveau 1 920 × 720 relié par une porte réciproque, avec sol, passerelle, échelle, colliders, six placements logiques, station persistante et cinq couches WebP (`far`, `mid`, `prop`, `foreground`, `door`). Le Proving Ground ajoute en V81 une console autonome, un pad et neuf cibles physiques ; les PNJ dédiés et les bitmaps autonomes des autres props restent à produire. Le vestibule BIOFORGE reste sans créature ; il ouvre le niveau V80 séparé et sa progression isolée.
+- Services V71/V81 : Logistique exécute les ordres de module, MIRE indexe les archives, CCTV effectue un scan et Capsules arme une mitigation de crise. Proving Ground n’accorde plus rien par simple interaction : une qualification M41A physique réussie produit le seul reçu capable d’armer le soutien. L’exercice P-5000, les tutoriels avancés, la relecture physique MIRE et les commandes CCTV/lockdown restent à réaliser. Les Capsules n’exécutent pas de scénario d’autodestruction.
 - Frontier Forge : validation, annuler/rétablir, sauvegarde/import/export et playtest réel des tuiles mission ou vaisseau.
 - Conséquences : ressources, équipage, état des mondes, routes, factions, crise et progression restent après rechargement.
 - Reprise native : l'opération recharge checkpoint, joueur/coop/escouade, niveau v52 et zones, mission et objectifs, inventaire/tracker, portes/conduits, ressources ramassables, ennemis et drops, véhicule/passagers, charges d'équipement et état Neuro-Xeno. Les identifiants et signatures sont recoupés, les seeds 32 bits restent intacts, les nombres sont bornés et aucun projectile n'est sérialisé ou recréé ; un ennemi mort ou un pickup pris ne peut donc pas être refarmé après rechargement.
@@ -57,7 +59,7 @@ Les MID Medical, Science Lab, Quarantine et Life Support sont quatre bitmaps RGB
 
 ## Contrôles
 
-Le contrat d’identité des animations est strict : le profil `neuro-002` dérive `enemy-002-facehugger` et utilise `enemy.facehugger.locomotion`; aucune plaque Drone ne peut le remplacer silencieusement. Sans profil Neuro actif, le joueur revient aux animations `player.echo9-marine`.
+Le contrat d’identité des animations est strict : `neuro-002` conserve son lien de gameplay avec `enemy-002-facehugger`, mais son rendu joueur reste dans les cinq feuilles `player.echo9-marine`. Tant qu’un corps Neuro dédié n’est pas produit, le runtime signale explicitement le repli Echo-9 au lieu d’afficher une caste ennemie.
 
 
 Mission joueur 1 :
@@ -72,6 +74,8 @@ Coop locale : `J/L`, `I/K`, `U`, `O`, `Y`, `T`, `G`.
 Hub : `A/D`, `W/S`, `Espace`, `E`, `C` pour s'accroupir et `F` pendant une crise. Les commandes tactiles restent sous la scène en portrait.
 
 Annexes V71 : approcher une porte et utiliser `E` pour entrer ; parcourir le sous-niveau horizontal puis activer sa station avec `E`. La même porte ramène à la salle parente et la position/les améliorations sont persistées.
+
+Proving Ground V81 : entrer depuis l’Armory, activer la console avec `E`, rejoindre le repère sur la passerelle, puis utiliser `F` pour tirer, `W/S` ou les flèches pour viser haut/bas et `R` pour recharger. Il faut toucher au moins 7/9 cibles, couvrir les trois hauteurs et terminer un rechargement. Les boutons tactiles `HAUT`, `BAS`, `TIR` et `R` n’apparaissent que dans l’annexe.
 
 BIOFORGE V80 : activer la station du sas avec `E`, choisir le profil et la quantité au terminal, lancer l’impression puis combattre dans l’arène physique. Le retour au Tantalus reste verrouillé pendant l’impression, le combat et la purge ; la commande de purge d’urgence termine la session sans récompenser la campagne.
 
@@ -104,12 +108,18 @@ Les armes consomment leur famille et leur pénétration ; les ennemis leur fréq
 npm.cmd run qa
 ```
 
-Le dernier passage complet historique consigné valide **952 tests : 951 réussis, 0 échec, 1 ignoré**, et le lint **278 modules**. Les **50 WebP** issus de **sept masters OpenAI** ont été contrôlés. Le build `71.0.0` contient **3 450 entrées catalogue**, 440 campagnes et les 50 couches du hub, tout en excluant les masters V71. Sur le miroir D, accueil et hub chargeaient sans erreur navigateur. Cette preuve historique concerne le sas BIOFORGE V71, pas la boucle V80. La publication Vercel et les contrôles HTTP historiques sont vérifiés ; voir [VALIDATION_V71](docs/VALIDATION_V71.md).
+Le passage local V81 consigné valide **1 554 tests : 1 553 réussis, 0 échec, 1 ignoré**, le lint **372 modules** et le build **81.0.0 / 3 450 entrées catalogue**. Les gates V81 contrôlent les trois assets Proving Ground, les 40 poses Crusher, les 32 poses Spitter et le contrat Echo-9. La QA navigateur locale passe avec 14 captures, neuf cibles cadrées, 1 147 échantillons joueur sans fallback et zéro erreur ; la publication canonique reste à prouver séparément. Voir [VALIDATION_V81](docs/VALIDATION_V81.md).
 
 Le workspace a été récupéré sur `D:\CodexWork\aliens-tantalus-frontier\project` : **4 808 fichiers aux empreintes identiques**, deux sources tronquées restaurées et **3 864 fixtures synthétiques** (1 459 999 407 octets) déplacées sur D après vérification taille/SHA-256. Ces fixtures sont conservées dans `recovered-test-fixtures-20260905` et restent récupérables.
 
 ## Dossier de production
 
+- [Contrat runtime Proving Ground V81](docs/V81_PROVING_GROUND_RUNTIME.md)
+- [Audit identité joueur Echo-9 V81](docs/V81_PLAYER_IDENTITY_AUDIT.md)
+- [Vague ennemie Crusher / Spitter V81](docs/V81_ENEMY_WAVE.md)
+- [Audit level design V81](docs/V81_LEVEL_DESIGN_AUDIT.md)
+- [Historique V81](docs/VERSION_HISTORY_V81.md)
+- [Validation V81](docs/VALIDATION_V81.md)
 - [Contrat runtime BIOFORGE V80](docs/V80_BIOFORGE_RUNTIME.md)
 - [Audit level design BIOFORGE V80](docs/V80_LEVEL_DESIGN_AUDIT.md)
 - [Historique V80](docs/VERSION_HISTORY_V80.md)

@@ -12,7 +12,15 @@ globalThis.Image = class TestImage {
     this.width = 1600;
     this.height = 900;
   }
-  set src(value) { this.currentSrc = value; }
+  set src(value) {
+    this.currentSrc = value;
+    if (value.includes('/echo9-marine-') && value.endsWith('-sheet.png')) {
+      this.naturalWidth = 1024;
+      this.naturalHeight = 1024;
+      this.width = 1024;
+      this.height = 1024;
+    }
+  }
   get src() { return this.currentSrc; }
 };
 
@@ -330,6 +338,32 @@ test('la reprise restaure exactement les imprimés vivants et une reprise corrom
   assert.equal(rejected.bioforgeLastErrorV80, 'invalid-resume-state');
 });
 
+test('runtimeV81 persiste position et facing du joueur pendant configuration, scellement, impression et combat', () => {
+  const source = runtime().engine;
+  startConfigured(source, 2);
+  const verifyPhase = (phase, x) => {
+    Object.assign(source.player, { x, y: 510, facing: -1, vx: 0, vy: 0 });
+    const saved = source.persistBioforgeV80();
+    assert.equal(saved.runtimeV81.player.facing, -1);
+    assert.equal(saved.runtimeV81.player.x, x);
+    const resumed = runtime().engine;
+    const snapshot = resumed.start({ resumeState: saved, autoLoop: false, testMode: true, assets: {} });
+    assert.equal(snapshot.phase, phase);
+    assert.equal(resumed.player.x, x);
+    assert.equal(resumed.player.y, 510);
+    assert.equal(resumed.player.facing, -1);
+  };
+
+  verifyPhase('configuration', 220);
+  physicallyEnterArena(source);
+  verifyPhase('sealing', 1400);
+  assert.equal(source.getBioforgeQaHooksV80().advance().event.type, 'bioforge-printer-ready');
+  verifyPhase('printing', 1420);
+  source.getBioforgeQaHooksV80().advance();
+  source.getBioforgeQaHooksV80().advance();
+  verifyPhase('combat', 1440);
+});
+
 test('le fallback procédural est explicitement réservé aux tests et la persistance ne reçoit que la racine BIOFORGE', () => {
   const strategic = { credits: 41, campaignId: 'must-not-change' };
   const production = runtime({ testMode: false, assets: {} });
@@ -410,7 +444,7 @@ test('le foreground reste indépendant mais ne masque plus les acteurs ni les pr
   engine.draw();
 
   const foreground = engine.images.get('bioforge:v80:foreground');
-  const player = engine.images.get('playerLocomotion');
+  const player = engine.images.get('playerCombat');
   const foregroundIndexes = [];
   const enemyIndexes = [];
   const bulletIndexes = [];

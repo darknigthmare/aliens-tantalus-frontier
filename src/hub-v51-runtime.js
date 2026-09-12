@@ -9,6 +9,7 @@ import {
   HUB_WORLD
 } from './hub-game.js';
 import { DROPSHIP_HANGAR_ART_V55 } from './hub-art-runtime-v55.js';
+import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export const HUB_TRAVERSAL_ART_FILES = Object.freeze({
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
@@ -753,6 +754,7 @@ export class HubGame extends HubGameV50 {
       deck: this.state.deck,
       roomId: this.state.roomId,
       positionX: Math.round(this.player.x),
+      facing: normalizePlayerFacingV81(this.player.facing),
       visited: [...new Set(this.state.visited)]
     };
     if (this.v51Initialized) {

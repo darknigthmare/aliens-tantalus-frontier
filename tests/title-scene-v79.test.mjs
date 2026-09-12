@@ -250,9 +250,9 @@ test('le shell V80 conserve la scène titre V79, son build et son responsive dé
   assert.match(controller, /this\.scene\?\.hide\?\.\(\)/u);
   assert.match(build, /'title-scene-v79\.css'/u);
   for (const path of ['/title-scene-v79.css', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js']) assert.ok(worker.includes(`'${path}'`));
-  assert.match(html, /ALIENS: TANTALUS FRONTIER v80/u);
-  assert.match(html, /VERSION 80\.0\.0/u);
-  assert.match(worker, /atf-v80-bioforge-shell-1/u);
+  assert.match(html, /ALIENS: TANTALUS FRONTIER v81/u);
+  assert.match(html, /VERSION 81\.0\.0/u);
+  assert.match(worker, /atf-v81-proving-ground-shell-1/u);
   assert.match(css, /@media \(max-width: 760px\)/u);
   assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)/u);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/u);

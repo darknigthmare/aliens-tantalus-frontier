@@ -16,7 +16,7 @@ test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et cons
   for (const contract of [
     "from './game-production-runtime.js'",
     "from './mission-levels-v52.js'",
-    "from './hub-v71-runtime.js'",
+    "from './hub-v81-runtime.js'",
     "from './mission-insertion-ui-v62.js'",
     "from './world-crisis.js'",
     "from './campaign-consequences.js'",

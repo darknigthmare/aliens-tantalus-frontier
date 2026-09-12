@@ -27,15 +27,15 @@ const readSources = async () => {
   };
 };
 
-test('le shell V80 expose le niveau BIOFORGE et ses contrôles sans masquer la dette de contenu', async () => {
+test('le shell V81 conserve le niveau BIOFORGE et ses contrôles sans masquer la dette de contenu', async () => {
   const { html, css } = await readSources();
-  assert.equal(RELEASE.version, '80.0.0');
+  assert.equal(RELEASE.version, '81.0.0');
   assert.match(RELEASE.subtitle, /BIOFORGE jouable/u);
-  assert.match(html, /<meta name="description" content="[^"]*v80[^"]*BIOFORGE jouable[^"]*contenu ennemi encore en cours/u);
-  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v80<\/title>/u);
-  assert.match(html, /INITIALISATION DU RUNTIME v80/u);
-  assert.match(html, /VERSION 80\.0\.0 · BUILD FRONTIER/u);
-  assert.match(html, /<b>v80\.0\.0<\/b>RUNTIME/u);
+  assert.match(html, /<meta name="description" content="[^"]*v81[^"]*BIOFORGE jouable[^"]*contenu ennemi encore en cours/u);
+  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v81<\/title>/u);
+  assert.match(html, /INITIALISATION DU RUNTIME v81/u);
+  assert.match(html, /VERSION 81\.0\.0 · BUILD FRONTIER/u);
+  assert.match(html, /<b>v81\.0\.0<\/b>RUNTIME/u);
   assert.match(html, /href="\/bioforge-v80\.css"/u);
   assert.match(html, /id="bioforge-ui-v80"[^>]+data-panel="bioforge"/u);
   assert.match(html, /id="bioforge-canvas-v80"[^>]+width="1280"[^>]+height="720"/u);
@@ -88,19 +88,19 @@ test('le sas BIOFORGE vérifie le confinement sans créer de spawn ni muter la s
   assert.deepEqual(save.bioforgeV80, isolatedBefore);
 });
 
-test('le build, le paquet et le service worker publient le contrat hors ligne BIOFORGE V80', async () => {
+test('le build et le service worker V81 conservent le contrat hors ligne BIOFORGE V80', async () => {
   const { build, worker, packageJson, packageLock } = await readSources();
-  assert.equal(packageJson.version, '80.0.0');
-  assert.equal(packageLock.version, '80.0.0');
-  assert.equal(packageLock.packages[''].version, '80.0.0');
+  assert.equal(packageJson.version, '81.0.0');
+  assert.equal(packageLock.version, '81.0.0');
+  assert.equal(packageLock.packages[''].version, '81.0.0');
   assert.equal(packageJson.scripts['audit:bioforge:v80'], 'node scripts/audit-bioforge-assets-v80.mjs');
   assert.equal(packageJson.scripts['qa:browser:v80'], 'node tests/browser-bioforge-v80.mjs');
   assert.equal(packageJson.scripts['verify:production:v80'], 'node scripts/verify-production-v80.mjs');
   assert.match(packageJson.scripts.qa, /npm run audit:bioforge:v80/u);
-  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v80');
+  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81');
   assert.match(build, /'bioforge-v80\.css'/u);
   assert.match(build, /index\.includes\('bioforge-canvas-v80'\)/u);
-  assert.match(worker, /const CACHE = 'atf-v80-bioforge-shell-1'/u);
+  assert.match(worker, /const CACHE = 'atf-v81-proving-ground-shell-1'/u);
   assert.match(worker, /path\.startsWith\('\/assets\/openai\/bioforge\/v80\/'\)/u);
   for (const path of [
     '/bioforge-v80.css',

@@ -107,6 +107,10 @@ function makeAnnex({
   const ladderX = westEntrance ? catwalkX + 72 : catwalkX + 348;
   const alphaBounds = HUB_ANNEX_ALPHA_BOUNDS_V72[id];
   const stationBody = fitHubBitmapV72(alphaBounds.prop, { x: stationX, y: 442, w: 276, h: 182 });
+  // Cargo lives in the dead-end service alcove behind the station. Keeping
+  // these physical props off the catwalk preserves a clear ladder-to-deck
+  // route in every annex, including the Proving Ground firing position.
+  const cargoX = westEntrance ? 1580 : 208;
   const station = {
     id: `${id}-station`,
     label: stationLabel,
@@ -121,8 +125,8 @@ function makeAnnex({
   const basePath = `/assets/openai/hub/annexes/v71/${id}`;
   const props = [
     { ...station.bounds, id: `${id}-prop-console`, role: 'console', collidable: true, artRole: 'prop' },
-    makeBounds(`${id}-prop-crate-a`, catwalkX + 160, 396, 79, 72, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
-    makeBounds(`${id}-prop-crate-b`, catwalkX + 270, 410, 64, 58, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
+    makeBounds(`${id}-prop-crate-a`, cargoX, HUB_ANNEX_WORLD_V71.floorY - 72, 79, 72, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
+    makeBounds(`${id}-prop-crate-b`, cargoX + 92, HUB_ANNEX_WORLD_V71.floorY - 58, 64, 58, 'cargo', { collidable: true, asset: '/assets/openai/metroidvania/props/supply-crates.png' }),
     makeBounds(`${id}-prop-wall-bank`, westEntrance ? 1500 : 188, 274, 150, 132, 'wall-service', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' }),
     makeBounds(`${id}-prop-ceiling`, 790, 42, 185, 138, 'ceiling-service', { collidable: false, asset: '/assets/openai/metroidvania/props/ceiling-cables.png' }),
     makeBounds(`${id}-prop-beacon`, westEntrance ? 352 : 1512, 280, 75, 66, 'navigation', { collidable: false, asset: '/assets/openai/hub/props/sensor-console.png' })
@@ -469,6 +473,17 @@ export function validateHubAnnexGeometryV71(annex) {
       || station.y + station.h <= platform.y || station.y >= platform.y + platform.h);
   });
   if (!stationClearOfCatwalks) errors.push('station body intersects a catwalk');
+  const catwalkRouteClear = asList(annex?.platforms)
+    .filter((platform) => platform.role === 'catwalk')
+    .every((platform) => asList(annex?.props)
+      .filter((prop) => prop.collidable)
+      .every((prop) => (
+        prop.x + prop.w <= platform.x
+        || prop.x >= platform.x + platform.w
+        || prop.y >= platform.y + platform.h
+        || prop.y + prop.h < platform.y
+      )));
+  if (!catwalkRouteClear) errors.push('collidable prop obstructs a catwalk route');
   if (!inWorld(annex?.station?.bounds) || !annex?.station?.persistent) errors.push('missing persistent physical station');
   const entranceX = Number(annex?.entranceLocalX);
   const entranceSupported = floor && entranceX >= floor.x && entranceX <= floor.x + floor.w;
@@ -521,6 +536,7 @@ export function validateHubAnnexGeometryV71(annex) {
     floorLaneClear,
     modularPropsValid,
     stationClearOfCatwalks,
+    catwalkRouteClear,
     colliderCoverageRatio: Number(colliderCoverage.toFixed(4)),
     scaleValid,
     densityValid
@@ -699,11 +715,13 @@ export function sanitizeHubCommercialStateV71(rawState) {
   if (fallback.activeAnnexId) {
     const activeAnnex = HUB_ANNEX_BY_ID_V71[fallback.activeAnnexId];
     const context = isRecord(rawState.returnContext) ? rawState.returnContext : {};
-    fallback.returnContext = {
+    const safeReturnContext = {
       deckId: activeAnnex.parentDeck,
       roomId: activeAnnex.parentRoomId,
       x: integer(context.x, 0, 5120, 0)
     };
+    if (Number(context.facing) === -1 || Number(context.facing) === 1) safeReturnContext.facing = Number(context.facing);
+    fallback.returnContext = safeReturnContext;
   }
   fallback.lastAnnexId = identifier(rawState.lastAnnexId) || null;
   rebuildEvidence(fallback);

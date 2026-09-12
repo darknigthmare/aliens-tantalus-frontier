@@ -1,5 +1,7 @@
 import { V65_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v65.js';
 import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
+import { BIOFORGE_WORLD_V80 } from './bioforge-level-v80.js';
+import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export const BIOFORGE_SCHEMA_V80 = 80;
 export const BIOFORGE_ROOT_KEY_V80 = 'bioforgeV80';
@@ -201,11 +203,31 @@ export function createBioforgeV80() {
     lastSessionId: null,
     history: [],
     records: createRecordsV80(),
+    runtimeV81: null,
     recovery: { purgeRequired: false, reason: null }
   };
 }
 
 export const createBioforgeRootV80 = createBioforgeV80;
+
+export function sanitizeBioforgeRuntimeV81(raw) {
+  if (!isRecord(raw) || !isRecord(raw.player)) return null;
+  const x = Number(raw.player.x);
+  const y = Number(raw.player.y);
+  const seed = Number(raw.seed);
+  const phaseClock = Number(raw.phaseClock);
+  return {
+    schema: 81,
+    player: {
+      x: Number.isFinite(x) ? Math.max(BIOFORGE_WORLD_V80.x, Math.min(BIOFORGE_WORLD_V80.width, x)) : 0,
+      y: Number.isFinite(y) ? Math.max(BIOFORGE_WORLD_V80.ceilingY, Math.min(BIOFORGE_WORLD_V80.floorY, y)) : BIOFORGE_WORLD_V80.floorY,
+      facing: normalizePlayerFacingV81(raw.player.facing)
+    },
+    seed: Number.isFinite(seed) ? seed : 80,
+    phaseClock: Number.isFinite(phaseClock) ? Math.max(0, phaseClock) : 0,
+    transferStage: integer(raw.transferStage, 0, 0, 3)
+  };
+}
 
 function sanitizeRecordV80(raw, profileId) {
   const safe = createRecordV80(profileId);
@@ -387,6 +409,7 @@ export function sanitizeBioforgeV80(raw) {
     activeSession?.serial || 0
   );
   safe.lastSessionId = optionalText(raw.lastSessionId, 120);
+  safe.runtimeV81 = sanitizeBioforgeRuntimeV81(raw.runtimeV81);
   safe.recovery = {
     purgeRequired: Boolean(raw.recovery?.purgeRequired),
     reason: optionalText(raw.recovery?.reason, 160)

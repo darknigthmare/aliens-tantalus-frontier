@@ -51,6 +51,7 @@ const DEDICATED_ENEMY_ACTION_CLIP_SETS = new Set([
   'enemy-action-v56',
   'facehugger-action-v65',
   'enemy-action-v66',
+  'siege-action-v66',
   'ovomorph-cycle-v66',
   'ovomorph-cycle-v55',
   'newborn-action-v64',
@@ -126,6 +127,9 @@ const ASSETS = Object.freeze({
   foreground: '/assets/openai/metroidvania/tantalus-mission-foreground.png',
   playerLocomotion: '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   playerCombat: '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+  playerMeleeV56: '/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png',
+  playerInteractionV56: '/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png',
+  playerToolUseV56: '/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png',
   xenoLocomotion: '/assets/openai/sprites/normalized/enemies/xenomorph-drone-locomotion-sheet.png',
   xenoCombat: '/assets/openai/sprites/normalized/enemies/xenomorph-drone-combat-sheet.png',
   facehugger: '/assets/openai/sprites/normalized/enemies/facehugger-locomotion-sheet.png',
@@ -223,7 +227,9 @@ function createImage(source) {
 }
 
 
-function enemyBehavior(spriteKey, biology) {
+function enemyBehavior(spriteKey, biology, profileId = null) {
+  if (profileId === 'enemy-009-crusher') return 'charger';
+  if (profileId === 'enemy-010-spitter') return 'spitter';
   if (spriteKey === 'newbornV64') return 'grappler';
   if (spriteKey === 'offspringV64') return 'reach-hunter';
   if (spriteKey === 'predalienV64') return 'hybrid-boss';
@@ -501,7 +507,7 @@ export class GameEngine {
     const isBoss = Boolean(boss);
     const biology = source.biology || 'xenomorph';
     const resolvedSheet = resolveSpriteSheet(visual.sheetId);
-    const profileSheet = visual.wave === 'v66' || visual.sheetId === 'enemy.profile.enemy-002-facehugger.v65' || resolvedSheet?.hitbox === 'queen-standing'
+    const profileSheet = ['v66', 'v81'].includes(visual.wave) || visual.sheetId === 'enemy.profile.enemy-002-facehugger.v65' || resolvedSheet?.hitbox === 'queen-standing'
       ? resolvedSheet : null;
     const profileBody = profileSheet && SPRITE_HITBOXES[profileSheet.hitbox];
     const physical = profileBody ? {
@@ -532,7 +538,7 @@ export class GameEngine {
       visualApproximation: visual.approximate,
       visualFallbackReason: visual.fallbackReason,
       spriteKey,
-      behavior: enemyBehavior(spriteKey, biology),
+      behavior: enemyBehavior(spriteKey, biology, visual.profileId),
       animationPhase: index % 4,
       row: visual.row ?? 0,
       x, spawnX: x, y: groundY - height, groundY,
@@ -1037,6 +1043,7 @@ export class GameEngine {
   updateHostileProjectiles(delta) {
     for (const projectile of this.hostileProjectiles) {
       projectile.x += projectile.vx * delta;
+      projectile.y += (Number(projectile.vy) || 0) * delta;
       projectile.life -= delta;
       for (const cover of this.covers) if (!cover.destroyed && overlap(projectile, cover)) projectile.hit = true;
       for (const wall of this.walls) if (!projectile.hit && overlap(projectile, wall)) projectile.hit = true;
@@ -1806,12 +1813,15 @@ export class GameEngine {
     const sheets = this.getVisibleEnemyAtlasSheetsV65();
     loader.setWorkingSet(sheets);
     const unavailable = sheets.filter((sheet) => {
-      const record = loader.recordStatus(sheet);
-      return record && record.status !== 'ready' && record.consecutiveFailures > 0;
+      let record = loader.recordStatus(sheet);
+      if (!record || record.status !== 'ready') {
+        void this.ensureEnemyAtlas(sheet);
+        record = loader.recordStatus(sheet);
+      }
+      return !record || record.status !== 'ready';
     });
-    // Continuer les essais pendant la pause réseau, indépendamment de P/Échap.
+    // Les demandes et retries ont été amorcés ci-dessus indépendamment de P/Échap.
     // La simulation ne redémarre qu'après chargement, sans retirer la pause utilisateur.
-    for (const sheet of unavailable) void this.ensureEnemyAtlas(sheet);
     this.enemyAtlasLoadingPausedV65 = unavailable.length > 0;
   }
 

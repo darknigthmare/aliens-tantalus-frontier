@@ -24,7 +24,10 @@ class MockImage {
   set src(value) {
     this.currentSrc = value;
     MockImage.sources.push(value);
-    if (value.endsWith('/prop.webp')) {
+    if (value.endsWith('/echo9-marine-locomotion-sheet.png')) {
+      this.naturalWidth = 1024;
+      this.naturalHeight = 1024;
+    } else if (value.endsWith('/prop.webp')) {
       this.naturalWidth = 640;
       this.naturalHeight = 512;
     } else if (value.endsWith('/door.webp')) {
@@ -595,4 +598,50 @@ test('le joueur et les PNJ humains du hub partagent le même étalon de rendu sa
   const npcDraws = trace.drawImages.filter(([image]) => npcSources.has(image));
   assert.ok(npcDraws.length >= 4);
   for (const npcDraw of npcDraws) assert.equal(npcDraw[8], playerDraw[8]);
+}));
+
+test('le facing Echo-9 survit à une persistance et une reprise complète du hub', () => withRuntime(() => {
+  const persisted = [];
+  const first = createHub({ onPersist: (patch) => persisted.push(structuredClone(patch)) }).hub;
+  first.start({ deck: 0, roomId: 'bridge', positionX: 180, facing: -1 });
+  assert.equal(first.player.facing, -1);
+  first.persist();
+  assert.equal(persisted.at(-1).facing, -1);
+  first.stop(false);
+
+  const resumed = createHub().hub;
+  resumed.start(persisted.at(-1));
+  assert.equal(resumed.player.facing, -1);
+  resumed.player.vx = 0;
+  resumed.update(0.016);
+  assert.equal(resumed.player.facing, -1, 'le repos ne doit pas réinitialiser le facing');
+  resumed.stop(false);
+}));
+
+test('le facing Echo-9 survit à une station, une reprise et une sortie d annexe', () => withRuntime(() => {
+  const logistics = HUB_ANNEXES_V71.find((annex) => annex.id === 'logistics');
+  const persisted = [];
+  const first = createHub({ onPersist: (patch) => persisted.push(structuredClone(patch)) }).hub;
+  first.start({ ...parentState(logistics), facing: -1 });
+  placeAtParentDoor(first, logistics);
+  first.player.facing = -1;
+  first.interact();
+  finishTransition(first);
+  first.player.facing = -1;
+  placeAtStation(first, logistics);
+  assert.equal(first.confirmHubPhysicalUpgradeV71(logistics.id).applied, true);
+  first.persist();
+
+  const patch = persisted.at(-1);
+  assert.equal(patch.facing, -1);
+  assert.equal(patch[HUB_ANNEX_STATE_KEY_V71].returnContext.facing, -1);
+  first.stop(false);
+
+  const resumed = createHub().hub;
+  resumed.start(patch);
+  assert.equal(resumed.player.facing, -1);
+  assert.equal(resumed.annexReturnPoseV71.facing, -1);
+  resumed.deactivateAnnexV71(logistics);
+  assert.equal(resumed.player.facing, -1);
+  resumed.stop(false);
 }));

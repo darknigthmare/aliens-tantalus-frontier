@@ -21,7 +21,13 @@ class MockImage {
     this.naturalWidth = 1774;
     this.naturalHeight = 887;
   }
-  set src(value) { this.currentSrc = value; }
+  set src(value) {
+    this.currentSrc = value;
+    if (value.includes('/echo9-marine-') && value.endsWith('-sheet.png')) {
+      this.naturalWidth = 1024;
+      this.naturalHeight = 1024;
+    }
+  }
 }
 
 function mockContext(draws) {
@@ -111,4 +117,23 @@ test('le vrai HubGame dessine chaque plafond avant les acteurs et chaque premier
     assert.ok(foreground > player, contract.foreground.asset);
     assert.equal(draws.includes(room.background), false, room.background);
   }
+}));
+
+test('le hub échantillonne la plaque combat Echo-9 au tir et quand le joueur est neutralisé', () => withBrowserRuntime(() => {
+  const draws = [];
+  const context = mockContext(draws);
+  const canvas = { width: 1280, height: 720, getContext: () => context, addEventListener() {} };
+  const hub = new HubGame(canvas);
+  hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
+  hub.player.alive = false;
+  draws.length = 0;
+  hub.drawPlayer(context);
+  assert.ok(draws.includes('/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png'));
+  assert.equal(draws.includes('/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png'), false);
+  hub.player.alive = true;
+  hub.player.fireClock = 0.1;
+  draws.length = 0;
+  hub.drawPlayer(context);
+  assert.ok(draws.includes('/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png'));
+  assert.equal(hub.player.playerVisualV81.sheetId, 'player.echo9-marine.combat');
 }));

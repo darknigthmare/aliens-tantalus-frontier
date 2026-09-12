@@ -30,9 +30,11 @@ test('le cadrage runtime provient des bornes alpha vérifiées et les plateforme
     const geometry = validateHubAnnexGeometryV71(annex);
     assert.equal(geometry.modularPropsValid, true, annex.id);
     assert.equal(geometry.stationClearOfCatwalks, true, annex.id);
+    assert.equal(geometry.catwalkRouteClear, true, annex.id);
     for (const cargo of annex.props.filter((entry) => entry.role === 'cargo')) {
       const support = annex.platforms.find((entry) => cargo.x >= entry.x && cargo.x + cargo.w <= entry.x + entry.w && cargo.y + cargo.h === entry.y);
       assert.ok(support, `prop flottant: ${cargo.id}`);
+      assert.equal(support.role, 'floor', `la cargaison ne doit pas couper la passerelle: ${cargo.id}`);
     }
   }
 });
@@ -120,6 +122,7 @@ test('chaque annexe possède une salle 1920x720, une entrée sûre et cinq couch
     assert.equal(result.worldHeight, 720, annex.id);
     assert.equal(result.perspectiveLayerCount, 5, annex.id);
     assert.equal(result.floorLaneClear, true, `${annex.id}: la station doit rester accessible depuis l'entrée`);
+    assert.equal(result.catwalkRouteClear, true, `${annex.id}: la route échelle-passerelle doit rester libre`);
     assert.ok(result.propCount >= HUB_COMMERCIAL_CRITERIA_V71.density.minimumProps, annex.id);
     assert.ok(result.colliderCoverageRatio <= HUB_COMMERCIAL_CRITERIA_V71.density.maximumColliderCoverageRatio, annex.id);
     assert.equal(annex.platforms.some((platform) => (

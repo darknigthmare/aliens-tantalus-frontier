@@ -22,7 +22,7 @@ export function assertSaveProfileIdV78(value) {
 const record = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 const sections = {
   player: ['name', 'health', 'armor', 'stress', 'weaponIds', 'equipmentIds', 'ammo'],
-  hub: ['deck', 'roomId', 'positionX', 'systems', 'visited', 'moduleIds'],
+  hub: ['deck', 'roomId', 'positionX', 'facing', 'systems', 'visited', 'moduleIds'],
   galaxy: ['resources', 'worldState', 'unlockedWorldIds'],
   statistics: ['kills', 'deaths', 'campaigns', 'playSeconds', 'shots'],
   clock: ['day', 'hour'],

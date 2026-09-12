@@ -16,8 +16,8 @@ function between(startMarker, endMarker) {
   return source.slice(start, end);
 }
 
-test('app instancie exclusivement le HubGame composite V71', () => {
-  assert.match(source, /import\s*\{\s*HubGame,\s*HUB_DECKS,\s*HUB_NPC_ROSTER\s*\}\s*from\s*'\.\/hub-v71-runtime\.js';/);
+test('app instancie exclusivement le HubGame composite V81', () => {
+  assert.match(source, /import\s*\{\s*HubGame,\s*HUB_DECKS,\s*HUB_NPC_ROSTER\s*\}\s*from\s*'\.\/hub-v81-runtime\.js';/);
   assert.match(source, /const hubEngine = new HubGame\(byId\('hub-canvas'\),\s*\{[\s\S]*?onAction:\s*handleHubAction,[\s\S]*?onPersist:\s*persistHub,[\s\S]*?onStatus:\s*renderHubStatus/);
   assert.doesNotMatch(source, /from\s*'\.\/hub-v(?:51|58|60|61|62)-runtime\.js';/);
 });

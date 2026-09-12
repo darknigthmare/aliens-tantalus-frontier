@@ -119,29 +119,25 @@ test('le garde-fou rejette toute plaque ennemie injectée sur un marine ou un PN
   assert.match(protectedCrew.sheetId, /^npc[.]idris-kwan[.]/);
 
   const explicitNeuroXeno = { ...marine, visualForm: 'xenomorph', playerClass: 'neuro-xeno' };
-  assert.deepEqual(
-    enforceHumanoidAnimationIdentity(explicitNeuroXeno, enemyRequest, { role: 'player', neuroActive: true }),
-    enemyRequest,
-    'sans contrat catalogue, la forme Neuro-Xéno explicite conserve le fallback Drone'
-  );
+  const protectedNeuro = enforceHumanoidAnimationIdentity(explicitNeuroXeno, enemyRequest, { role: 'player', neuroActive: true });
+  assertFamily(protectedNeuro, 'player');
+  assert.equal(protectedNeuro.sheetId, 'player.echo9-marine.combat');
+  assert.equal(protectedNeuro.degraded, 'player-sheet-family-rejected-v81');
 
   const contractedFacehugger = {
     ...explicitNeuroXeno,
     neuroVisualContract: { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', sheetId: 'enemy.facehugger.locomotion' }
   };
-  assert.equal(
-    enforceHumanoidAnimationIdentity(contractedFacehugger, enemyRequest, { role: 'player', neuroActive: true }),
-    null,
-    'un contrat Facehugger refuse explicitement la plaque Drone'
-  );
+  const rejectedDrone = enforceHumanoidAnimationIdentity(contractedFacehugger, enemyRequest, { role: 'player', neuroActive: true });
+  assertFamily(rejectedDrone, 'player');
+  assert.equal(rejectedDrone.degraded, 'player-sheet-family-rejected-v81');
   const facehuggerRequest = { sheetId: 'enemy.facehugger.locomotion', clipId: 'hurt-death' };
-  assert.deepEqual(
-    enforceHumanoidAnimationIdentity(contractedFacehugger, facehuggerRequest, { role: 'player', neuroActive: true }),
-    facehuggerRequest
-  );
+  const rejectedFacehugger = enforceHumanoidAnimationIdentity(contractedFacehugger, facehuggerRequest, { role: 'player', neuroActive: true });
+  assertFamily(rejectedFacehugger, 'player');
+  assert.equal(rejectedFacehugger.degraded, 'player-sheet-family-rejected-v81');
 });
 
-test('neuro-002 dérive le Facehugger V65 sans prétendre au pixel exact et le marine reste humain', () => withBrowserMocks(() => {
+test('neuro-002 conserve ses données de gameplay mais rend toujours le fallback Echo-9 V81', () => withBrowserMocks(() => {
   const profile = NEURO_XENO_PROFILES.find((entry) => entry.id === 'neuro-002');
   assert.ok(profile?.playerClassCompatible);
   const canvas = { width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} };
@@ -150,27 +146,45 @@ test('neuro-002 dérive le Facehugger V65 sans prétendre au pixel exact et le m
   const contract = neuroEngine.player.neuroVisualContract;
   assert.deepEqual(
     { profileId: contract?.profileId, enemyId: contract?.enemyId, spriteKey: contract?.spriteKey, sheetId: contract?.sheetId, exact: contract?.exact },
-    { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', spriteKey: 'facehugger', sheetId: 'enemy.profile.enemy-002-facehugger.v65', exact: false }
+    { profileId: 'neuro-002', enemyId: 'enemy-002-facehugger', spriteKey: 'echo9-marine', sheetId: 'player.echo9-marine.locomotion', exact: false }
   );
 
   const baseState = { alive: true, grounded: true, vx: 0, fireClock: 0, actionClock: 0, v52FireClock: 0, v52HurtClock: 0 };
   for (const [state, clipId] of [
     [{}, 'idle'],
-    [{ vx: 60 }, 'chase'],
-    [{ fireClock: 0.4 }, 'attack'],
-    [{ v52HurtClock: 0.4 }, 'idle'],
-    [{ alive: false }, 'death']
+    [{ vx: 60 }, 'walk-run'],
+    [{ fireClock: 0.4 }, 'primary-fire'],
+    [{ v52HurtClock: 0.4 }, 'hurt-death'],
+    [{ alive: false }, 'hurt-death']
   ]) {
     Object.assign(neuroEngine.player, baseState, state);
     const request = resolveIdentitySafePlayerAnimationV57(neuroEngine.player, true);
-    assert.deepEqual({ sheetId: request?.sheetId, clipId: request?.clipId }, { sheetId: contract.sheetId, clipId });
+    assertFamily(request, 'player');
+    assert.equal(request?.clipId, clipId);
   }
   Object.assign(neuroEngine.player, baseState, { v52HurtClock: 0.4 });
   neuroEngine.updateSpriteAnimationEvents();
   const neuroSnapshot = neuroEngine.getSnapshot();
   const neuroKey = getAnimationEntityKeyV57('player', neuroEngine.player, 'primary');
-  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'enemy.profile.enemy-002-facehugger.v65:idle');
-  assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'enemy.profile.enemy-002-facehugger.v65');
+  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'player.echo9-marine.combat:hurt-death');
+  assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'player.echo9-marine.locomotion');
+  assert.deepEqual([neuroEngine.player.w, neuroEngine.player.h], [42, 92], 'le mode neuro ne change pas le gabarit canonique du joueur');
+
+  const drawImages = [];
+  const drawContext = new Proxy({
+    drawImage: (...args) => drawImages.push(args)
+  }, {
+    get: (target, key) => key in target ? target[key] : () => {},
+    set: (target, key, value) => { target[key] = value; return true; }
+  });
+  neuroEngine.drawActor(drawContext, neuroEngine.player);
+  assert.equal(neuroEngine.player.playerVisualV81.fallback, false);
+  assert.equal(neuroEngine.player.playerVisualV81.sheetId, 'player.echo9-marine.combat');
+  assert.equal(drawImages.length, 1, 'un seul sprite joueur doit être dessiné');
+  assert.match(drawImages[0][0]?.currentSrc || '', /\/normalized\/player\/echo9-marine-/);
+  assert.doesNotMatch(drawImages[0][0]?.currentSrc || '', /\/enemies?\//);
+  assert.deepEqual(drawImages[0].slice(3, 5), [256, 256], 'la lecture doit rester dans une cellule 256x256');
+  assert.deepEqual(drawImages[0].slice(7, 9), [110, 148], 'le rendu mission garde le gabarit V81');
 
   const marineEngine = new GameEngine(canvas, { onEvent: () => {} });
   marineEngine.start(missionOptions({ neuroProfile: null }));
@@ -209,7 +223,7 @@ test('la télémétrie sépare le rôle joueur du crewId et ne contamine jamais 
   engine.neuro.active = true;
   engine.updateSpriteAnimationEvents();
   clips = engine.getSnapshot().animationRuntime.activeClips;
-  assert.equal(clips[playerKey], 'enemy.xenomorph-drone.combat:hurt-death');
+  assert.equal(clips[playerKey], 'player.echo9-marine.combat:hurt-death');
   assert.doesNotMatch(clips[crew03Key], /^enemy[.]/);
   assert.doesNotMatch(clips[crew04Key], /^enemy[.]/);
 }));

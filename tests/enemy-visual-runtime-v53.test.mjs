@@ -57,6 +57,8 @@ const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-004-drone-big-chap', ['Drone / Big Chap', 'xenoDrone', 'enemy.xenomorph-big-chap.action.v56']],
   ['enemy-005-warrior', ['Warrior', 'xenoWarrior', 'enemy.xenomorph-warrior.action.v56']],
   ['enemy-006-runner', ['Runner', 'xenoRunner', 'enemy.xenomorph-runner.action']],
+  ['enemy-009-crusher', ['Crusher', 'xenoCrusher', 'enemy.xenomorph-crusher.action']],
+  ['enemy-010-spitter', ['Spitter', 'xenoSpitter', 'enemy.xenomorph-spitter.action']],
   ['enemy-015-prowler', ['Prowler', 'xenoProwlerV56', 'enemy.xenomorph-prowler.action.v56']],
   ['enemy-016-burster', ['Burster', 'xenoBursterV56', 'enemy.xenomorph-burster.action.v56']],
   ['enemy-020-k-series-yellow-xenomorph', ['K-Series Yellow Xenomorph', 'xenoWarrior', null]],
@@ -64,6 +66,7 @@ const V66_STANDARD_IDENTITIES = new Map([
   ['enemy-051-ceto-reef-predator', ['Ceto Reef Predator', 'cetoReefPredatorV56', 'enemy.ceto-reef-predator.action.v56']]
 ]);
 const V66_PROJECT_ORIGINAL_IDS = new Set(['enemy-050-korari-stalker', 'enemy-051-ceto-reef-predator']);
+const V81_PROJECT_ADAPTATION_IDS = new Set(['enemy-009-crusher', 'enemy-010-spitter']);
 const V66_VARIANT_IDENTITIES = new Map([
   ['enemy-055-albino-chestburster', ['Chestburster', 'chestburster', 'enemy.chestburster.action']]
 ]);
@@ -91,8 +94,10 @@ test('le registre visuel couvre exactement les 55 archétypes du catalogue V64',
     assert.equal(resolved.row, dedicated ? null : row, enemy.name);
     if (dedicated) {
       assert.equal(resolved.profileId, enemy.id);
-      assert.equal(resolved.sheetId, `enemy.profile.${enemy.id}.v66`);
-      assert.equal(resolved.identityStatus, V66_PROJECT_ORIGINAL_IDS.has(enemy.id) ? 'project-original' : 'source-locked-adaptation');
+      assert.equal(resolved.sheetId, dedicated.asset.sheetId);
+      assert.equal(resolved.identityStatus, V66_PROJECT_ORIGINAL_IDS.has(enemy.id)
+        ? 'project-original' : V81_PROJECT_ADAPTATION_IDS.has(enemy.id)
+          ? 'source-locked-project-adaptation' : 'source-locked-adaptation');
     }
   }
 });
@@ -139,7 +144,7 @@ test('les 571 profils distinguent les standards dedies des variantes a identite 
       const visual = resolveEnemyVisualProfile(variant);
       if (V66_VARIANT_IDENTITIES.has(variant.id)) {
         assert.equal(visual.sheetId, `enemy.profile.${variant.id}.v66`);
-        assert.notEqual(visual.sheetId, `enemy.profile.${profileId}.v66`);
+        assert.notEqual(visual.sheetId, readyV66ById.get(profileId).asset.sheetId);
         assert.equal(visual.identityStatus, 'source-locked-project-adaptation');
         assert.equal(visual.canonExact, false);
         assert.equal(visual.approximate, false);
@@ -147,7 +152,7 @@ test('les 571 profils distinguent les standards dedies des variantes a identite 
       }
       assert.equal(visual.spriteKey, EXPECTED.get(archetype)[0], variant.id);
       assert.equal(visual.sheetId, legacySheetId, variant.id);
-      assert.notEqual(visual.sheetId, `enemy.profile.${profileId}.v66`, variant.id);
+      assert.notEqual(visual.sheetId, readyV66ById.get(profileId).asset.sheetId, variant.id);
       assert.equal(visual.identityStatus, 'authored-family', variant.id);
       assert.equal(visual.approximate, true, variant.id);
     }
@@ -191,8 +196,8 @@ test('la couverture v53 conserve les comptes auditables du catalogue complet', (
   assert.deepEqual(report.byImageKey, { neuroXeno: 21, synthetic: 11 });
   assert.deepEqual(report.byIdentityStatus, {
     exact: 30 - (readyDedicatedById.size - V66_VARIANT_IDENTITIES.size - V66_PROJECT_ORIGINAL_IDS.size),
-    'source-locked-adaptation': readyDedicatedById.size - V66_VARIANT_IDENTITIES.size - V66_PROJECT_ORIGINAL_IDS.size,
-    'source-locked-project-adaptation': V66_VARIANT_IDENTITIES.size,
+    'source-locked-adaptation': readyDedicatedById.size - V66_VARIANT_IDENTITIES.size - V66_PROJECT_ORIGINAL_IDS.size - V81_PROJECT_ADAPTATION_IDS.size,
+    'source-locked-project-adaptation': V66_VARIANT_IDENTITIES.size + V81_PROJECT_ADAPTATION_IDS.size,
     'project-adaptation': 18,
     'project-original': 7,
     'authored-family': 516 - V66_VARIANT_IDENTITIES.size

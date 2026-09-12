@@ -25,6 +25,13 @@ import {
   syncBioforgeDoorsV80,
   validateBioforgeLevelV80
 } from './bioforge-level-v80.js';
+import {
+  SPRITE_PIVOTS,
+  SpriteAnimationController,
+  resolvePlayerAnimation,
+  resolveSpriteSheet
+} from './sprite-animation-runtime.js';
+import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export const BIOFORGE_SEAL_SECONDS_V80 = 0.72;
 export const BIOFORGE_PRINT_INTERVAL_SECONDS_V80 = 0.46;
@@ -169,9 +176,25 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     persistBioforgeV80(event = null) {
+      this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
       const state = clone(this.bioforgeRootV80);
       this.onBioforgePersistV80(state, Object.freeze({ event: event ? clone(event) : null, snapshot: this.getBioforgeSnapshotV80() }));
       return state;
+    }
+
+    captureBioforgeRuntimeStateV81() {
+      if (!this.player) return null;
+      return {
+        schema: 81,
+        seed: this.bioforgeSeedV80,
+        phaseClock: this.bioforgePhaseClockV80,
+        transferStage: this.bioforgeTransferStageV80,
+        player: {
+          x: this.player.x,
+          y: this.player.y,
+          facing: normalizePlayerFacingV81(this.player.facing)
+        }
+      };
     }
 
     applyBioforgeOperationV80(operation, { persist = true } = {}) {
@@ -234,6 +257,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgeTransferStageV80 = 0;
       this.queueJump = 0;
       this.animationTime = 0;
+      if (!this.bioforgePlayerAnimationV81) this.bioforgePlayerAnimationV81 = new SpriteAnimationController();
+      else this.bioforgePlayerAnimationV81.reset('bioforge:player:echo9');
       this.paused = false;
       this.loadBioforgeAssetsV80();
       this.syncBioforgePhaseV80();
@@ -297,9 +322,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     start(options = {}) {
       if (this.running) this.purgeBioforgeV80('runtime-restart');
       const resumeEnvelope = options.resumeState || null;
-      this.bioforgeSeedV80 = Number.isFinite(Number(options.seed ?? resumeEnvelope?.seed)) ? Number(options.seed ?? resumeEnvelope?.seed) : 80;
+      const embeddedRuntimeV81 = resumeEnvelope?.runtimeV81 || resumeEnvelope?.bioforge?.runtimeV81 || resumeEnvelope?.state?.runtimeV81 || null;
+      this.bioforgeSeedV80 = Number.isFinite(Number(options.seed ?? resumeEnvelope?.seed ?? embeddedRuntimeV81?.seed)) ? Number(options.seed ?? resumeEnvelope?.seed ?? embeddedRuntimeV81?.seed) : 80;
       this.random = seeded(this.bioforgeSeedV80);
-      this.bioforgePhaseClockV80 = Math.max(0, Number(options.phaseClock ?? resumeEnvelope?.phaseClock) || 0);
+      this.bioforgePhaseClockV80 = Math.max(0, Number(options.phaseClock ?? resumeEnvelope?.phaseClock ?? embeddedRuntimeV81?.phaseClock) || 0);
       if (options.assets) this.bioforgeAssetsV80 = options.assets;
       if (options.testMode != null) this.bioforgeTestModeV80 = options.testMode === true;
       if (options.autoLoop != null) this.bioforgeAutoLoopV80 = options.autoLoop !== false;
@@ -348,16 +374,16 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         const result = this.purgeBioforgeV80('invalid-session-phase');
         return { ...this.getBioforgeSnapshotV80(), started: false, purge: result };
       }
-      if (session.phase === 'configuration') {
-        this.bioforgeTransferStageV80 = clamp(resumeEnvelope?.transferStage, 0, 3);
-        const restoredPlayer = resumeEnvelope?.player;
-        if (isRecord(restoredPlayer)) {
-          this.player.x = clamp(restoredPlayer.x, 0, this.bioforgeLevelV80.world.width - this.player.w);
-          this.player.y = clamp(restoredPlayer.y, this.bioforgeLevelV80.world.ceilingY, this.bioforgeLevelV80.world.floorY - this.player.h);
-          this.player.facing = Number(restoredPlayer.facing) < 0 ? -1 : 1;
-        }
-      } else {
+      const runtimeV81 = this.bioforgeRootV80.runtimeV81 || embeddedRuntimeV81;
+      this.bioforgeTransferStageV80 = clamp(Number(resumeEnvelope?.transferStage ?? runtimeV81?.transferStage) || 0, 0, 3);
+      if (session.phase !== 'configuration') {
         Object.assign(this.player, this.bioforgeLevelV80.arenaPlayerSpawn, { vx: 0, vy: 0, grounded: true });
+      }
+      const restoredPlayer = resumeEnvelope?.player || runtimeV81?.player;
+      if (isRecord(restoredPlayer)) {
+        this.player.x = clamp(restoredPlayer.x, 0, this.bioforgeLevelV80.world.width - this.player.w);
+        this.player.y = clamp(restoredPlayer.y, this.bioforgeLevelV80.world.ceilingY, this.bioforgeLevelV80.world.floorY - this.player.h);
+        this.player.facing = normalizePlayerFacingV81(restoredPlayer.facing);
       }
       this.rebuildBioforgeSpecimensV80();
       this.syncBioforgePhaseV80();
@@ -810,13 +836,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     captureBioforgeResumeStateV80() {
+      const runtimeV81 = this.captureBioforgeRuntimeStateV81();
+      this.bioforgeRootV80.runtimeV81 = runtimeV81;
       return {
         schema: 80,
         state: clone(this.bioforgeRootV80),
         seed: this.bioforgeSeedV80,
         phaseClock: this.bioforgePhaseClockV80,
         transferStage: this.bioforgeTransferStageV80,
-        player: this.player ? { x: this.player.x, y: this.player.y, facing: this.player.facing } : null
+        player: runtimeV81?.player ? clone(runtimeV81.player) : null
       };
     }
 
@@ -1020,17 +1048,19 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
 
     drawBioforgePlayerV80(ctx) {
       const actor = this.player;
-      const image = this.images?.get('playerLocomotion');
-      if (!actor || !imageReady(image) || typeof this.drawSheetCell !== 'function') return;
-      const moving = Math.abs(Number(actor.vx) || 0) > 12;
-      const row = !actor.grounded ? 2 : actor.crouching ? 3 : moving ? 1 : 0;
-      const fps = row === 0 ? 4 : row === 1 ? 9 : 7;
-      const frame = Math.floor(this.animationTime * fps) % 4;
-      const renderHeight = 98;
-      const renderWidth = 73;
-      const x = actor.x + actor.w / 2 - renderWidth / 2;
-      const y = actor.y + actor.h - renderHeight * (240 / 256);
-      this.drawSheetCell(ctx, image, frame, row, x, y, renderWidth, renderHeight, actor.facing < 0);
+      if (!actor) return;
+      const request = resolvePlayerAnimation(actor, false);
+      const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false });
+      const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
+      const render = drawPlayerSpriteV81(ctx, {
+        sheet,
+        image: this.images?.get(sheet?.imageKey),
+        sample,
+        pivot: SPRITE_PIVOTS[sheet?.pivot],
+        entity: actor,
+        surface: 'bioforge'
+      });
+      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
     }
 
     drawBioforgeForegroundV80(ctx) {

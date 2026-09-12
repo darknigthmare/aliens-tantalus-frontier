@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "release": "v81",
+  "generatedBy": "scripts/process-v81-enemy-wave.py",
+  "review": {
+    "status": "accepted-project-visual-review",
+    "reviewedAt": "2026-09-12",
+    "reviewer": "Codex V81 visual and technical review",
+    "scope": "Original project adaptations normalized from immutable OpenAI ImageGen source boards; runtime acceptance is not a 1:1 or official-pixel claim."
+  },
+  "canonExact": false,
+  "profiles": [
+    {
+      "profileId": "enemy-009-crusher",
+      "generationProvider": "OpenAI ImageGen",
+      "referenceUrls": [
+        "https://www.toyark.com/2018/09/24/hiya-toys-aliens-colonial-marines-raven-alien-and-crusher-alien-toyark-photo-shoot-317207"
+      ],
+      "referenceLockSha256": "23bf279e69381465f01c6e2671b62c57b1d76aad06d1f6609a4ccc9206ac6355",
+      "sourceFacing": "right",
+      "sourceRelease": "v66",
+      "sourceSha256ByClip": {
+        "idle": "6c8cb194f4840e619addeba71b1ca90ddc3d34a22b364f55ff02c835bb33e19a",
+        "move": "e784172d3caaee046e6fd0ad96f66b85bb883cb34179aede4539ed3dc5f469aa",
+        "attack": "eb6cfd32247635265c89415e1afbd430458e7ab19ff76f364c81fec34a92e471",
+        "death": "f232a3c3637c6098f8af0bcfb15c181d13b8ce1165ffe606df339520e387b03b",
+        "charge": "fbc93c7aa29757c3b443238b62450dfbf0cc27c6dd9ba5089c5c5d43a7266d69"
+      },
+      "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v81/enemy-009-crusher.webp",
+      "normalizedSha256": "ccac0fc3ad73aa0c7026ef13acedafe27fba6819d43b3226992406d4787b2e85",
+      "metadataPath": "assets/openai/sprites/metadata/v81/enemy-009-crusher.json",
+      "metadataSha256": "6cbc86e7b29f6cb81fa58734ded3e14f8172d4a41b2325418cc303a6d4302c67",
+      "physicalAnchorReviewPath": "docs/references/V81_ENEMY_009_ANCHOR_REVIEW.json",
+      "physicalAnchorReviewSha256": "96bc0ae0ebf6f18e56a2881cd70f4e229fd7ab8cdca388e7f5f12aba480f7d91",
+      "grid": { "columns": 4, "rows": 10, "cellWidth": 256, "cellHeight": 256 },
+      "frameCount": 40,
+      "remainingStrictMagentaPixels": 0
+    },
+    {
+      "profileId": "enemy-010-spitter",
+      "generationProvider": "OpenAI ImageGen",
+      "referenceUrls": [
+        "https://www.square-enix-shop.com/uk/play_arts.html"
+      ],
+      "referenceLockSha256": "9a34037ea9047674e3d14f9a57d41e7c0a23427b3b8190aff78f7c30754e569b",
+      "sourceFacing": "right",
+      "sourceRelease": "v66",
+      "sourceSha256ByClip": {
+        "idle": "2bd3ac8fd02539ff39db3eb0f0c0f2a157b2b209f0300dc011b07bfda0cb8521",
+        "move": "2aa70bc08f3178397053eef92d3cbdd9a8b4f890a687bb57dca9b123f6de4815",
+        "attack": "d490c27134831a5444d97613263181b7dd45bd05e68160c6f84fcdfbc02750c7",
+        "death": "c6ed9686547ccbe44470bc65853dce77e960a3c4936096a1eee2e84a1e4fd9d5"
+      },
+      "normalizedPath": "assets/openai/sprites/normalized/enemy-profiles-v81/enemy-010-spitter.webp",
+      "normalizedSha256": "fc39cbfc4315950e43998c50b5014c6b29a3a912efe855694f7239a48636adea",
+      "metadataPath": "assets/openai/sprites/metadata/v81/enemy-010-spitter.json",
+      "metadataSha256": "81a885fddea8223642d1f2d60728c6313be3e8cfae6f27c8d018456d50a4a702",
+      "physicalAnchorReviewPath": "docs/references/V81_ENEMY_010_ANCHOR_REVIEW.json",
+      "physicalAnchorReviewSha256": "24a685194247ce6bc929828f14bce953a5de74e9f2f0038cf75b59e03199e319",
+      "scaleReviewPath": "docs/references/V81_ENEMY_010_SCALE_REVIEW.json",
+      "scaleReviewSha256": "c680fc22e2364ee4f63a77aebd86fc630dbfb4acb8f712a617db9db05d7610ca",
+      "sourceScaleByClip": { "idle": 1, "move": 1, "attack": 1, "death": 1.615297 },
+      "grid": { "columns": 4, "rows": 8, "cellWidth": 256, "cellHeight": 256 },
+      "frameCount": 32,
+      "remainingStrictMagentaPixels": 0
+    }
+  ]
+}

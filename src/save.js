@@ -39,6 +39,7 @@ import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle
 import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV78, assertSaveProfileIdV78, inspectSaveSlotV78, parseImportedSaveV78 } from './save-profile-v78.js';
 import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.js';
+import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -212,6 +213,7 @@ export function createDefaultSave(profile = 1) {
     hub: {
       deck: 0,
       positionX: 180,
+      facing: 1,
       roomId: 'bridge',
       visited: ['bridge'],
       systems: { hull: 100, power: 92, oxygen: 100, security: 76, quarantine: 64, morale: 72, supplies: 78, research: 0 },
@@ -1579,6 +1581,7 @@ export function migrateSave(input, profile = 1) {
 
   const player = isRecord(source.player) ? source.player : {};
   Object.assign(migrated.player, player);
+  for (const key of ['visualSheetId', 'spriteKey', 'visualForm', 'neuroVisualContract']) delete migrated.player[key];
   migrated.player.name = typeof player.name === 'string' ? player.name.slice(0, 80) : base.player.name;
   for (const key of ['health', 'armor', 'stress']) migrated.player[key] = numberBetween(player[key], base.player[key], 0, 100);
   migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
@@ -1593,6 +1596,7 @@ export function migrateSave(input, profile = 1) {
   const v50HubPosition = sourceSchema === 48 ? legacyHubPosition * 2
     : sourceSchema === 49 ? legacyHubPosition * (4 / 3) : legacyHubPosition;
   migrated.hub.positionX = numberBetween(v50HubPosition, base.hub.positionX, 40, 5030);
+  migrated.hub.facing = normalizePlayerFacingV81(hub.facing);
   migrated.hub.roomId = typeof hub.roomId === 'string' && /^[a-z0-9-]{1,40}$/.test(hub.roomId) ? hub.roomId : base.hub.roomId;
   migrated.hub.systems = mergeNumbers(base.hub.systems, hub.systems, 0, 100);
   migrated.hub.services = Object.fromEntries(Object.entries(isRecord(hub.services) ? hub.services : {})

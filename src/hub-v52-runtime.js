@@ -15,6 +15,7 @@ import {
   resolveNpcAnimation,
   resolveSpriteSheet
 } from './sprite-animation-runtime.js';
+import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export { HUB_DECKS, HUB_MODULAR_ASSETS, HUB_MODULAR_PROP_FILES, HUB_ROOM_COUNT, HUB_WORLD, compileShipProject };
 
@@ -361,6 +362,7 @@ export class HubGame extends HubGameV51 {
       deck: this.state.deck,
       roomId: this.state.roomId,
       positionX: Math.round(this.player.x),
+      facing: normalizePlayerFacingV81(this.player.facing),
       visited: [...new Set(this.state.visited)],
       npcInteractions: cloneLedger(this.hubNpcInteractions || {})
     };

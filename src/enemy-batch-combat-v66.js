@@ -6,9 +6,12 @@ const baseContract = Object.freeze({
   lungeDistance: 0, speedMultiplier: 1, cooldown: 1.05
 });
 
-const contract = (profileId, options) => Object.freeze({
-  ...baseContract, ...options, profileId, sheetId: `enemy.profile.${profileId}.v66`
-});
+const contract = (profileId, options) => {
+  const { wave = 'v66', ...values } = options;
+  return Object.freeze({
+    ...baseContract, ...values, profileId, wave, sheetId: `enemy.profile.${profileId}.${wave}`
+  });
+};
 
 // Explicit accepted identities only: a systemic variant needs its own contract;
 // an egg or another atlas must never inherit one through a similar display name.
@@ -51,6 +54,27 @@ export const ENEMY_BATCH_COMBAT_CONTRACTS_V66 = Object.freeze({
   })
 });
 
+export const ENEMY_COMBAT_CONTRACTS_V81 = Object.freeze({
+  'enemy-009-crusher': contract('enemy-009-crusher', {
+    wave: 'v81', combatMode: 'charge', action: 'armored-ground-charge',
+    animationClip: 'charge', animationFrameOffset: 32, distanceMetric: 'centers',
+    vehicleSurfaceReferenceHalfWidth: 42,
+    stopRange: 108, meleeRange: 150, lungeDistance: 320,
+    windup: 3 / 12, impact: 7 / 12, duration: 8 / 12,
+    speedMultiplier: 1.08, cooldown: 2.2, verticalRange: 104
+  }),
+  'enemy-010-spitter': contract('enemy-010-spitter', {
+    wave: 'v81', combatMode: 'projectile', action: 'acid-spit',
+    animationClip: 'attack', animationFrameOffset: 16, distanceMetric: 'centers',
+    vehicleSurfaceReferenceHalfWidth: 21,
+    stopRange: 360, preferredMinRange: 180, preferredMaxRange: 480,
+    projectileRange: 540, projectileSpeed: 360, projectileLifetime: 2.2,
+    projectileWidth: 14, projectileHeight: 10,
+    windup: 3 / 12, impact: 4 / 12, duration: 8 / 12,
+    speedMultiplier: 0.9, cooldown: 1.65, detectionRange: 680, verticalRange: 180
+  })
+});
+
 // Separate from repeatable melee contracts: compression consumes this actor.
 // This contract never grants visual acceptance to a candidate or its variants.
 export const BURSTER_COMBAT_V74 = contract('enemy-016-burster', {
@@ -58,7 +82,8 @@ export const BURSTER_COMBAT_V74 = contract('enemy-016-burster', {
   stopRange: 68, meleeRange: 108, blastRadius: 132, cooldown: 1.25,
   deathLifetime: 2.8
 });
-const bySheet = new Map([...Object.values(ENEMY_BATCH_COMBAT_CONTRACTS_V66), BURSTER_COMBAT_V74]
+const bySheet = new Map([...Object.values(ENEMY_BATCH_COMBAT_CONTRACTS_V66),
+  ...Object.values(ENEMY_COMBAT_CONTRACTS_V81), BURSTER_COMBAT_V74]
   .map((entry) => [entry.sheetId, entry]));
 const finite = (value, fallback = 0) => Number.isFinite(Number(value)) ? Number(value) : fallback;
 const boundedCooldown = (value, entry, fallback = 0) => Math.max(0, Math.min(entry.cooldown, finite(value, fallback)));
@@ -134,6 +159,16 @@ export function getEnemyBatchAttackFrameV66(enemy) {
   const entry = resolveEnemyBatchCombatContractV66(enemy);
   if (!entry || !enemy.batchAttackV66) return null;
   return Math.max(0, Math.min(7, Math.floor(finite(enemy.batchAttackV66.elapsed) * entry.fps + 1e-9)));
+}
+
+export function getEnemyBatchActionAnimationV66(enemy) {
+  const entry = resolveEnemyBatchCombatContractV66(enemy);
+  const localFrame = getEnemyBatchAttackFrameV66(enemy);
+  if (!entry || localFrame === null) return null;
+  return {
+    clipId: entry.animationClip || 'attack',
+    frame: finite(entry.animationFrameOffset, 16) + localFrame
+  };
 }
 
 export function moveEnemyBatchHorizontallyV66(engine, enemy, displacement) {
@@ -317,6 +352,38 @@ function beginAttack(engine, enemy, target, entity, entry) {
   });
 }
 
+function releaseEnemyProjectileV81(engine, enemy, target, entry, state) {
+  const width = finite(entry.projectileWidth, 14);
+  const height = finite(entry.projectileHeight, 10);
+  const originX = enemy.x + (state.facing > 0 ? enemy.w : 0) - width / 2;
+  const originY = enemy.y + enemy.h * 0.36 - height / 2;
+  const targetX = target.x + target.w / 2;
+  const targetY = target.y + target.h * 0.42;
+  const deltaX = targetX - (originX + width / 2);
+  const deltaY = targetY - (originY + height / 2);
+  const magnitude = Math.hypot(deltaX, deltaY) || 1;
+  const speed = finite(entry.projectileSpeed, 340);
+  const projectile = {
+    x: originX,
+    y: originY,
+    w: width, h: height,
+    vx: deltaX / magnitude * speed,
+    vy: deltaY / magnitude * speed,
+    damage: Math.max(1, Math.round(finite(enemy.damage, 16))),
+    life: finite(entry.projectileLifetime, 2.2),
+    acid: true, ownerId: enemy.id, hit: false,
+    profileId: entry.profileId, action: entry.action
+  };
+  if (!Array.isArray(engine.hostileProjectiles)) engine.hostileProjectiles = [];
+  engine.hostileProjectiles.push(projectile);
+  report(engine, enemy, entry, {
+    type: 'enemy-projectile-released', targetId: state.targetId,
+    projectileId: `${enemy.id || entry.profileId}:acid:${engine.hostileProjectiles.length - 1}`,
+    x: projectile.x, y: projectile.y, vx: projectile.vx, vy: projectile.vy
+  });
+  return projectile;
+}
+
 function advanceAttack(engine, enemy, target, delta, entry) {
   const state = enemy.batchAttackV66;
   if (!validEngineTarget(engine, target) || Boolean(target.inVehicle) !== state.targetInVehicle) {
@@ -325,9 +392,12 @@ function advanceAttack(engine, enemy, target, delta, entry) {
   }
   const entity = targetEntity(engine, target);
   let cancellation = !enemy.alert ? 'lost-target' : null;
-  if (!cancellation && !pathClear(engine, enemy, entity)) cancellation = 'path-blocked';
-  if (!cancellation && directionTo(enemy, entity) === -state.facing) cancellation = 'target-crossed';
-  if (!cancellation && feetDistance(enemy, entity) >= entry.verticalRange) cancellation = 'target-out-of-range';
+  const pendingProjectile = entry.combatMode !== 'projectile' || !state.impactResolved;
+  if (!cancellation && pendingProjectile && !pathClear(engine, enemy, entity)) cancellation = 'path-blocked';
+  if (!cancellation && pendingProjectile && directionTo(enemy, entity) === -state.facing) cancellation = 'target-crossed';
+  if (!cancellation && pendingProjectile && feetDistance(enemy, entity) >= entry.verticalRange) cancellation = 'target-out-of-range';
+  if (!cancellation && pendingProjectile && entry.combatMode === 'projectile'
+    && Math.abs(horizontalDistance(enemy, entity, entry, target.inVehicle)) > entry.projectileRange) cancellation = 'target-out-of-range';
   if (cancellation) {
     cancelEnemyBatchAttackV66(engine, enemy, cancellation);
     return;
@@ -352,6 +422,10 @@ function advanceAttack(engine, enemy, target, delta, entry) {
     // Mark resolved before invoking gameplay callbacks: reentrant damage or
     // later recovery frames cannot replay this impact or transfer its target.
     state.impactResolved = true;
+    if (entry.combatMode === 'projectile') {
+      releaseEnemyProjectileV81(engine, enemy, entity, entry, state);
+      return;
+    }
     const inRange = Math.abs(horizontalDistance(enemy, entity, entry, target.inVehicle)) < entry.meleeRange
       && feetDistance(enemy, entity) < entry.verticalRange;
     const clear = pathClear(engine, enemy, entity);
@@ -418,7 +492,7 @@ function advanceEnemyBatchCombatV66(engine, enemy, delta) {
   const horizontal = horizontalDistance(enemy, entity, entry, target.inVehicle);
   const vertical = feetDistance(enemy, entity);
   const visible = pathClear(engine, enemy, entity);
-  if (visible && vertical < 160 && (withinDetectionRange(engine, enemy, entity, entry) || enemy.revealed > 0)) enemy.alert = true;
+  if (visible && vertical < entry.verticalRange && (withinDetectionRange(engine, enemy, entity, entry) || enemy.revealed > 0)) enemy.alert = true;
   if (!enemy.alert) {
     enemy.facing = Math.sin(finite(engine.animationTime) * 0.6 + finite(enemy.animationPhase)) > 0 ? 1 : -1;
     const spawnX = finite(enemy.spawnX, enemy.x);
@@ -428,6 +502,26 @@ function advanceEnemyBatchCombatV66(engine, enemy, delta) {
     return true;
   }
   enemy.facing = directionTo(enemy, entity) || enemy.facing || 1;
+  if (entry.combatMode === 'projectile') {
+    const distance = Math.abs(horizontal);
+    if (visible && vertical < entry.verticalRange
+      && distance >= entry.preferredMinRange && distance <= entry.preferredMaxRange
+      && enemy.attackClock <= 0) {
+      beginAttack(engine, enemy, target, entity, entry);
+    } else if (distance < entry.preferredMinRange && vertical < entry.verticalRange) {
+      const towardTarget = directionTo(enemy, entity) || enemy.facing || 1;
+      const retreat = Math.min(entry.preferredMinRange - distance,
+        Math.max(0, finite(enemy.speed)) * entry.speedMultiplier * safeDelta);
+      const movement = moveEnemyBatchHorizontallyV66(engine, enemy, -towardTarget * retreat);
+      enemy.facing = towardTarget;
+      if (movement.blocked && visible && enemy.attackClock <= 0) beginAttack(engine, enemy, target, entity, entry);
+    } else if (distance > entry.preferredMaxRange && vertical < entry.verticalRange) {
+      const approach = Math.min(distance - entry.preferredMaxRange,
+        Math.max(0, finite(enemy.speed)) * entry.speedMultiplier * safeDelta);
+      moveEnemyBatchHorizontallyV66(engine, enemy, enemy.facing * approach);
+    }
+    return true;
+  }
   if (visible && vertical < entry.verticalRange && Math.abs(horizontal) < entry.lungeDistance + entry.meleeRange && enemy.attackClock <= 0) {
     beginAttack(engine, enemy, target, entity, entry);
   } else if (Math.abs(horizontal) > entry.stopRange && vertical < 160) {

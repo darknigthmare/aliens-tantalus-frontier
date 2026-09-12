@@ -18,6 +18,13 @@ import {
   resolveHubVehicleArtV58
 } from './hub-art-runtime-v58.js';
 import { buildHubDoorNetworkV58 } from './topology-coherence-v58.js';
+import {
+  SPRITE_PIVOTS,
+  SpriteAnimationController,
+  resolvePlayerAnimation,
+  resolveSpriteSheet
+} from './sprite-animation-runtime.js';
+import { drawPlayerSpriteV81, normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 const LOGICAL_WIDTH = 1280;
 const LOGICAL_HEIGHT = 720;
@@ -38,7 +45,13 @@ const NPC_SPRITE_FILES = Object.freeze([
   '/assets/openai/sprites/normalized/npcs/sanaa-doyle-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/npcs/maksim-orlov-locomotion-sheet.png'
 ]);
-const PLAYER_SPRITE_FILE = '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png';
+const PLAYER_SPRITE_FILES = Object.freeze({
+  playerLocomotion: '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
+  playerCombat: '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+  playerMeleeV56: '/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png',
+  playerInteractionV56: '/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png',
+  playerToolUseV56: '/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png'
+});
 
 export const HUB_WORLD = Object.freeze({ width: WORLD_WIDTH, roomWidth: ROOM_WIDTH, floorY: FLOOR_Y });
 export { HUB_DOOR_PROFILES, HUB_ROOM_PROFILES, getHubDoorBounds };
@@ -248,7 +261,9 @@ export class HubGame {
     this.propImages = new Map(HUB_MODULAR_PROP_FILES.map((source) => [source, createImage(source)]));
     this.hubArtImages = new Map(HUB_ART_ASSETS_V55.map((source) => [source, createImage(source)]));
     this.vehicleArtImages = new Map(HUB_VEHICLE_ART_ASSETS_V58.map((source) => [source, createImage(source)]));
-    this.playerSheet = createImage(PLAYER_SPRITE_FILE);
+    this.playerSheets = new Map(Object.entries(PLAYER_SPRITE_FILES).map(([key, source]) => [key, createImage(source)]));
+    this.playerSheet = this.playerSheets.get('playerLocomotion');
+    this.playerAnimationV81 = new SpriteAnimationController();
     this.npcSheets = NPC_SPRITE_FILES.map(createImage);
     this.crewSheet = this.npcSheets[0];
     this.keys = new Set();
@@ -289,10 +304,12 @@ export class HubGame {
       deck,
       roomId: savedRoom?.id || HUB_DECKS[deck].rooms[0].id,
       positionX: clamp(Number(hubState.positionX) || defaultX, 40, WORLD_WIDTH - 90),
+      facing: normalizePlayerFacingV81(hubState.facing),
       visited: Array.isArray(hubState.visited) ? [...new Set(hubState.visited)] : []
     };
     this.doorStates = buildHubDoorNetworkV58(HUB_DECKS, HUB_WORLD, deck).map((door) => ({ ...door }));
-    this.player = { x: this.state.positionX, y: FLOOR_Y - 92, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: 1, health: 100, maxHealth: 100, shockClock: 0, shockHits: 0 };
+    this.player = { x: this.state.positionX, y: FLOOR_Y - 92, w: 44, h: 92, vx: 0, vy: 0, grounded: true, facing: this.state.facing, health: 100, maxHealth: 100, alive: true, shockClock: 0, shockHits: 0 };
+    this.playerAnimationV81.reset('hub:player:echo9');
     this.hangarHazardCooldown = 0;
     this.camera = { x: clamp(this.player.x - LOGICAL_WIDTH / 2, 0, WORLD_WIDTH - LOGICAL_WIDTH) };
     this.npcs = this.createNpcs(deck);
@@ -373,6 +390,7 @@ export class HubGame {
     this.player.vx += (targetVelocity - this.player.vx) * Math.min(1, delta * acceleration);
     if (Math.abs(this.player.vx) < 0.4 && !left && !right) this.player.vx = 0;
     if (this.player.vx) this.player.facing = Math.sign(this.player.vx);
+    this.state.facing = normalizePlayerFacingV81(this.player.facing);
 
     if (this.player.grounded) this.coyoteTime = 0.1;
     else this.coyoteTime = Math.max(0, this.coyoteTime - delta);
@@ -648,6 +666,7 @@ export class HubGame {
       deck: this.state.deck,
       roomId: this.state.roomId,
       positionX: Math.round(this.player.x),
+      facing: normalizePlayerFacingV81(this.player.facing),
       visited: [...new Set(this.state.visited)]
     });
   }
@@ -686,7 +705,7 @@ export class HubGame {
     const propAssetsReady = [...this.propImages.values()].filter(assetReady).length;
     const hubArtAssetsReady = [...this.hubArtImages.values()].filter(assetReady).length;
     const vehicleArtAssetsReady = [...this.vehicleArtImages.values()].filter(assetReady).length;
-    const runtimeArtReady = [this.playerSheet, ...this.npcSheets].filter(assetReady).length;
+    const runtimeArtReady = [...this.playerSheets.values(), ...this.npcSheets].filter(assetReady).length;
     return {
       roomAssetsReady,
       roomAssetCount: this.roomImages.size,
@@ -1135,26 +1154,21 @@ export class HubGame {
   }
 
   drawPlayer(ctx) {
-    const moving = Math.abs(this.player.vx) > 8;
-    const airborne = !this.player.grounded;
-    const row = airborne ? 2 : moving ? 1 : 0;
-    const frame = this.reducedMotion ? 0 : Math.floor(this.animationTime * (airborne ? 8 : Math.abs(this.player.vx) > 300 ? 12 : moving ? 9 : 4)) % 4;
-    if (assetReady(this.playerSheet)) {
-      const width = 92;
-      const height = 128;
-      const x = this.player.x + this.player.w / 2 - width / 2;
-      const y = this.player.y + this.player.h - height * (240 / 256);
-      this.drawSheetCell(ctx, this.playerSheet, frame, row, x, y, width, height, this.player.facing < 0, 4, 4);
-      return;
-    }
-    ctx.save();
-    ctx.translate(this.player.x + this.player.w / 2, this.player.y);
-    ctx.scale(this.player.facing, 1);
-    ctx.fillStyle = '#8fbc91'; ctx.fillRect(-18, 26, 36, 54);
-    ctx.fillStyle = '#c9b08d'; ctx.fillRect(-12, 5, 24, 22);
-    ctx.fillStyle = '#27342e'; ctx.fillRect(-17, 80, 13, 24); ctx.fillRect(5, 80, 13, 24);
-    ctx.fillStyle = '#b6c1b8'; ctx.fillRect(8, 42, 44, 9);
-    ctx.restore();
+    const request = resolvePlayerAnimation(this.player, false);
+    const sample = this.playerAnimationV81.sample('hub:player:echo9', request, this.animationTime, {
+      emit: false,
+      reducedMotion: Boolean(this.reducedMotion)
+    });
+    const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
+    const render = drawPlayerSpriteV81(ctx, {
+      sheet,
+      image: this.playerSheets.get(sheet?.imageKey) || this.playerSheet,
+      sample,
+      pivot: SPRITE_PIVOTS[sheet?.pivot],
+      entity: this.player,
+      surface: 'hub'
+    });
+    this.player.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
   }
 
   drawSheetCell(ctx, image, column, row, x, y, width, height, flip, columns, rows) {

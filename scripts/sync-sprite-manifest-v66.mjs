@@ -37,10 +37,10 @@ export function buildSupplementalSpriteManifestV66({ registryV65 = ENEMY_PROFILE
     contracts.pivots[runtime.pivot] = clone(pivot);
     contracts.hitboxes[runtime.hitbox] = clone(hitbox);
     usedClips[runtime.clipSet] = clone(clips);
-    const version = profile.schema === 65 ? 'v65' : 'v66';
+    const version = profile.schema === 65 ? 'v65' : asset.wave || 'v66';
     sheets.push({ id: asset.sheetId, profileId: profile.profileId, subject: profile.name, wave: version, family: 'enemy',
       imageKey: asset.imageKey, files: { normalized: asset.path, normalizedStatus: 'ready' },
-      metadataSource: version === 'v65' ? '/assets/openai/sprites/metadata/v65/facehugger-motion/enemy-002-facehugger.json' : `/assets/openai/sprites/metadata/v66/${profile.profileId}.json`,
+      metadataSource: version === 'v65' ? '/assets/openai/sprites/metadata/v65/facehugger-motion/enemy-002-facehugger.json' : `/assets/openai/sprites/metadata/${version}/${profile.profileId}.json`,
       grid: gridId, clips: runtime.clipSet, pivot: runtime.pivot, hitbox: runtime.hitbox,
       renderWidth: runtime.renderWidth, renderHeight: runtime.renderHeight, sourceFacing: runtime.sourceFacing,
       frameCount, canonExact: false, referenceStatus: asset.referenceStatus, referenceUrls: [...asset.referenceUrls],

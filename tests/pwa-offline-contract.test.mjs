@@ -148,7 +148,7 @@ test('le cache hors-ligne V80 précache le shell et le niveau BIOFORGE, les autr
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v80-bioforge-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v81-proving-ground-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -201,7 +201,7 @@ test('le cache hors-ligne V80 précache le shell et le niveau BIOFORGE, les autr
     assert.ok(entry.assets.runtime.rawAtlas.startsWith('/assets/'));
     assert.ok(entry.assets.runtime.normalizedAtlas.startsWith('/assets/'));
   }
-  assert.match(worker, /async function precacheV80Shell\(\)/);
+  assert.match(worker, /async function precacheV81Shell\(\)/);
   assert.match(worker, /event\.request\.mode === ['"]navigate['"]/);
   assert.doesNotMatch(worker, /cached\s*\|\|\s*caches\.match\(['"]\/index\.html/);
 });

@@ -12,6 +12,7 @@ import {
   createHubCommercialStateV71
 } from './tantalus-hub-expansion-v71.js';
 import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
+import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
 export * from './hub-v62-runtime.js';
 export * from './tantalus-hub-expansion-v71.js';
@@ -447,7 +448,8 @@ export class HubGame extends HubGameV62 {
     state.returnContext = {
       deckId: annex.parentDeck,
       roomId: annex.parentRoomId,
-      x: Math.round(this.annexReturnPoseV71?.x ?? this.player.x)
+      x: Math.round(this.annexReturnPoseV71?.x ?? this.player.x),
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
     };
     state.lastAnnexId = annex.id;
     this.hubCommercialStateV71 = mutableCommercialState(state);
@@ -489,7 +491,7 @@ export class HubGame extends HubGameV62 {
       grounded: true,
       crouching: false,
       climbing: false,
-      facing: pose.facing || 1
+      facing: normalizePlayerFacingV81(pose.facing)
     });
     this.state.positionX = Math.round(this.player.x);
     this.camera.x = clamp(pose.cameraX, 0, HUB_WORLD.width - VIEW_WIDTH);
@@ -512,7 +514,9 @@ export class HubGame extends HubGameV62 {
     return {
       x,
       y: door ? door.bounds.y + door.bounds.h - this.player.h : HUB_WORLD.floorY - this.player.h,
-      facing: annex.entranceSide === 'west' ? -1 : 1,
+      facing: returnContext?.facing === -1 || returnContext?.facing === 1
+        ? returnContext.facing
+        : annex.entranceSide === 'west' ? -1 : 1,
       cameraX: clamp(x - VIEW_WIDTH / 2, 0, HUB_WORLD.width - VIEW_WIDTH),
       door
     };
@@ -536,7 +540,8 @@ export class HubGame extends HubGameV62 {
     proposedState.returnContext = {
       deckId: annex.parentDeck,
       roomId: annex.parentRoomId,
-      x: Math.round(this.annexReturnPoseV71?.x ?? this.state.positionX)
+      x: Math.round(this.annexReturnPoseV71?.x ?? this.state.positionX),
+      facing: normalizePlayerFacingV81(this.annexReturnPoseV71?.facing ?? this.player.facing)
     };
     const actionResult = this.onAction({
       type: 'hub:annex-station',

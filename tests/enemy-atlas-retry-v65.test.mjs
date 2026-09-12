@@ -59,6 +59,50 @@ test('un atlas indisponible attend un backoff exponentiel plafonné à 30s puis 
   assert.deepEqual(loader.snapshot().unavailable, []);
 });
 
+test('un atlas visible suspend la simulation dès sa toute première requête jusqu’au vrai onload', async () => {
+  const previousRaf = globalThis.requestAnimationFrame;
+  globalThis.requestAnimationFrame = () => 0;
+  try {
+    const sheet = resolveSpriteSheet('enemy.profile.enemy-010-spitter.v81');
+    let pendingImage = null;
+    class DeferredImage {
+      complete = false;
+      naturalWidth = 0;
+      naturalHeight = 0;
+      set src(_value) { pendingImage = this; }
+    }
+    const engine = Object.create(GameEngine.prototype);
+    engine.images = new Map();
+    engine.enemyAtlasLRUV65 = new EnemyAtlasLRUV65({ imageStore: engine.images, ImageCtor: DeferredImage });
+    engine.enemies = [{ id: 'spitter-loading', visualSheetId: sheet.id, alive: true, dormant: false, deathClock: 0, x: 100, y: 250, w: 90, h: 118 }];
+    engine.camera = { x: 0, y: 0 };
+    engine.player = { health: 100 };
+    engine.running = true;
+    engine.paused = false;
+    engine.last = 0;
+    engine.mission = { state: 'active' };
+    let simulationSteps = 0;
+    engine.update = () => { simulationSteps += 1; };
+    engine.draw = () => {};
+
+    engine.loop(16);
+    assert.equal(engine.enemyAtlasLRUV65.recordStatus(sheet).status, 'loading');
+    assert.equal(engine.enemyAtlasLoadingPausedV65, true);
+    assert.equal(simulationSteps, 0, 'un ennemi dont la plaque charge ne doit jamais agir invisible');
+
+    pendingImage.complete = true;
+    pendingImage.naturalWidth = 1024;
+    pendingImage.naturalHeight = 2048;
+    pendingImage.onload();
+    await Promise.resolve();
+    engine.loop(32);
+    assert.equal(engine.enemyAtlasLoadingPausedV65, false);
+    assert.equal(simulationSteps, 1);
+  } finally {
+    globalThis.requestAnimationFrame = previousRaf;
+  }
+});
+
 test('l’échec visible suspend la simulation et affiche le message sans retirer la pause utilisateur après récupération', async () => {
   const previousRaf = globalThis.requestAnimationFrame;
   globalThis.requestAnimationFrame = () => 0;

@@ -14,6 +14,11 @@ import {
   shouldFlipSprite,
   spriteRuntimeReport
 } from './sprite-animation-runtime.js';
+import {
+  PLAYER_VISUAL_CONTRACT_V81,
+  buildPlayerNeuroVisualContractV81,
+  drawPlayerSpriteV81
+} from './player-visual-contract-v81.js';
 import { resolveEnemyVisualProfile } from './enemy-visual-runtime-v53.js';
 import { EnemyAtlasLRUV65 } from './enemy-atlas-loader-v65.js';
 import { updateFacehuggerCombatV65 } from './enemy-facehugger-combat-v65.js';
@@ -86,26 +91,10 @@ export function buildNeuroPlayerVisualContractV57(neuroProfile = null, enemyCata
 }
 
 export function resolveNeuroPlayerAnimationV57(actor = {}) {
-  const contract = actor.neuroVisualContract;
-  if (!contract?.sheetId || !contract.spriteKey) return null;
-  const attacking = Boolean(
-    actor.attacking
-    || (actor.v52FireClock || 0) > 0
-    || (actor.fireClock || 0) > 0
-    || (actor.actionClock || 0) > 0
-    || (actor.meleeClock || 0) > 0
-    || actor.grounded === false
-  );
-  return resolveEnemyAnimation({
-    alive: actor.alive,
-    v52HurtClock: actor.v52HurtClock,
-    attacking,
-    vx: actor.vx,
-    alert: actor.alert || Math.abs(actor.vx || 0) > 8,
-    spriteKey: contract.spriteKey,
-    visualSheetId: contract.sheetId,
-    biology: contract.biology
-  });
+  return {
+    ...resolvePlayerAnimation(actor, false),
+    degraded: 'neuro-player-echo9-fallback-v81'
+  };
 }
 
 export function resolveIdentitySafePlayerAnimationV57(actor = {}, neuroActive = false) {
@@ -375,19 +364,15 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     configureNeuroPlayerVisualContract(options = {}) {
-      const contract = buildNeuroPlayerVisualContractV57(options.neuroProfile, options.enemyCatalog);
+      const sourceContract = buildNeuroPlayerVisualContractV57(options.neuroProfile, options.enemyCatalog);
+      const contract = buildPlayerNeuroVisualContractV81(sourceContract);
       if (!this.player) return contract;
       this.player.neuroVisualContract = contract;
+      this.player.playerVisualContractV81 = PLAYER_VISUAL_CONTRACT_V81;
       this.player.neuroActive = Boolean(this.neuro?.active);
       this.player.neuroEnemyId = contract?.enemyId || null;
-      if (contract) {
-        this.player.spriteKey = contract.spriteKey;
-        this.player.visualSheetId = contract.sheetId;
-        this.player.biology = contract.biology;
-      } else {
-        this.player.spriteKey = null;
-        this.player.visualSheetId = null;
-      }
+      this.player.spriteKey = 'echo9-marine';
+      this.player.visualSheetId = PLAYER_VISUAL_CONTRACT_V81.fallback.sheetId;
       return contract;
     }
 
@@ -1973,7 +1958,20 @@ export function withV52MissionRuntime(BaseEngine) {
       const request = resolveIdentitySafePlayerAnimationV57(actor, Boolean(this.neuro?.active && actor === this.player));
       const entityId = getAnimationEntityKeyV57(isCoop ? 'coop' : 'player', actor, isCoop ? 'secondary' : 'primary');
       const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
-      if (!this.drawSpriteSample(ctx, sample, actor)) return super.drawActor(ctx, actor);
+      const entry = sample?.sheet || null;
+      const image = entry ? this.images?.get(entry.imageKey) : null;
+      const render = drawPlayerSpriteV81(ctx, {
+        sheet: entry,
+        image,
+        sample,
+        pivot: entry ? SPRITE_PIVOTS[entry.pivot] : null,
+        entity: actor,
+        surface: 'mission'
+      });
+      const runtime = render.fallback ? null : buildSpriteHitboxRuntime(actor, entry);
+      actor.spriteHitbox = runtime;
+      actor.spritePivot = runtime?.pivot || render.pivot;
+      actor.playerVisualV81 = { schema: 81, sheetId: render.sheetId, fallback: render.fallback, reason: render.reason, facing: render.facing };
       if (actor.inCover) {
         ctx.strokeStyle = '#79c895';
         ctx.strokeRect(actor.x - 3, actor.y + 32, actor.w + 6, actor.h - 29);

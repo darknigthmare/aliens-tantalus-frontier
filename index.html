@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v80 — BIOFORGE jouable en niveau 2D isolé, double sas physique et purge atomique. Production artistique et contenu ennemi encore en cours.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v81 — qualification M41A physique, identité Echo-9 verrouillée et BIOFORGE jouable. Production artistique et contenu ennemi encore en cours.">
+  <meta name="atf-release" content="81.0.0">
   <meta name="application-name" content="Tantalus Frontier">
   <meta name="apple-mobile-web-app-title" content="Tantalus">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,13 +24,13 @@
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
   <link rel="stylesheet" href="/bioforge-v80.css">
-  <title>ALIENS: TANTALUS FRONTIER v80</title>
+  <title>ALIENS: TANTALUS FRONTIER v81</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v80</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v81</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -50,7 +51,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 80.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 81.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -76,7 +77,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v80.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v81.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -133,11 +134,11 @@
         <section class="view active" data-panel="hub">
           <h1 class="sr-only">Niveau jouable de l’USS Tantalus</h1>
           <button id="exit-hub" class="button runtime-exit" type="button">QUITTER VERS COMMANDEMENT</button>
-          <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES + 10 ANNEXES // CRISES COMBATTUES</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
+          <div class="hub-level-heading"><div><p class="eyebrow">NIVEAU HUB // 4 PONTS // 16 SALLES + 10 ANNEXES // QUALIFICATION M41A V81</p><h2>USS Tantalus</h2></div><div id="hub-system-readout" class="hub-system-readout"></div></div>
           <div class="hub-level-shell">
             <canvas id="hub-canvas" width="1280" height="720" tabindex="0" aria-label="Niveau jouable de l’USS Tantalus"></canvas>
             <div class="hub-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles du hub">
-              <button type="button" data-hub-control="left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" aria-label="Monter">W</button><button type="button" data-hub-control="down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" aria-label="Changer de profondeur">Q</button><button type="button" data-hub-control="fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
+              <button type="button" data-hub-control="left" aria-label="Aller à gauche">←</button><button type="button" data-hub-control="right" aria-label="Aller à droite">→</button><button type="button" data-hub-control="up" aria-label="Monter">W</button><button type="button" data-hub-control="down" aria-label="Descendre">S</button><button type="button" data-hub-control="jump" aria-label="Sauter">↑</button><button type="button" data-hub-control="crouch" aria-label="S’accroupir">C</button><button type="button" data-hub-control="depth" aria-label="Changer de profondeur">Q</button><button type="button" data-hub-control="aim-high" data-proving-ground-control-v81 hidden disabled aria-label="Viser la cible haute">↗</button><button type="button" data-hub-control="aim-low" data-proving-ground-control-v81 hidden disabled aria-label="Viser la cible basse">↘</button><button type="button" data-hub-control="reload" data-proving-ground-control-v81 hidden disabled aria-label="Recharger le M41A">R</button><button type="button" data-hub-control="fire" aria-label="Tirer">F</button><button type="button" data-hub-control="interact" aria-label="Interagir">E</button>
             </div>
           </div>
           <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · Q profondeur · F tirer · E utiliser</span></div>

@@ -15,14 +15,18 @@ import {
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
   performDiplomacy
 } from './advanced-systems.js';
-import { HUB_ANNEX_SYSTEM_EFFECTS_V71, applyHubAnnexBusinessV71 } from './hub-annex-services-v71.js';
+import {
+  HUB_ANNEX_SYSTEM_EFFECTS_V71,
+  applyHubAnnexBusinessV71,
+  applyProvingGroundQualificationV81
+} from './hub-annex-services-v71.js';
 import { advanceGalaxy, resolveHubCrisisEvent } from './world-crisis.js';
 import { applyCampaignConsequence } from './campaign-consequences.js';
 import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v71-runtime.js';
+import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v81-runtime.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
@@ -996,8 +1000,22 @@ function renderHubStatus(status = lastHubStatus) {
   const room = status?.roomName || HUB_DECKS[deck]?.rooms.find((entry) => entry.id === saveSystem.data.hub.roomId)?.name || saveSystem.data.hub.roomId;
   byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
   byId('hub-room-label').textContent = room;
+  const provingGroundActiveV81 = Boolean(
+    status?.provingGroundActiveV81
+    || status?.activeAnnexId === 'proving-ground'
+    || status?.roomId === 'proving-ground'
+  );
+  const provingPhaseV81 = String(status?.provingGroundPhaseV81 || 'idle').toUpperCase();
+  const provingScoreV81 = Math.max(0, Number(status?.provingGroundScoreV81) || 0);
+  const provingAmmoV81 = `${Math.max(0, Number(status?.provingGroundMagazineV81) || 0)}/${Math.max(0, Number(status?.provingGroundReserveV81) || 0)}`;
   byId('hub-prompt').textContent = status?.prompt || 'A/D marcher · W/S grimper · C ramper · F tirer · E utiliser';
-  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span>`;
+  byId('hub-system-readout').innerHTML = `<span>SANTÉ <b>${Math.round(status?.health ?? saveSystem.data.hub.playerHealth ?? 100)}%</b></span><span>MENACES <b>${status?.threats ?? saveSystem.data.hub.activeCrisis?.count ?? 0}</b></span><span>ROUTE <b>${status?.route?.source || 'TANTALUS'}</b></span><span>${provingGroundActiveV81 ? 'QUALIF M41A' : 'NIVEAU'} <b>${provingGroundActiveV81 ? `${escapeHtml(provingPhaseV81)} · ${provingScoreV81} · ${provingAmmoV81}` : `${status?.route?.nodeCount || 26} ZONES`}</b></span>`;
+  const hubView = document.querySelector('.view[data-panel="hub"]');
+  if (hubView) hubView.dataset.provingGroundActiveV81 = String(provingGroundActiveV81);
+  all('[data-proving-ground-control-v81]').forEach((button) => {
+    button.hidden = !provingGroundActiveV81;
+    button.disabled = !provingGroundActiveV81;
+  });
 }
 
 function renderEditorStatus() {
@@ -1847,6 +1865,23 @@ function resolveAnnexStationV71(interaction) {
   return exposeAnnexStationResultV71(result);
 }
 
+function resolveProvingGroundQualificationV81(interaction) {
+  const result = applyProvingGroundQualificationV81(saveSystem.data, interaction?.receipt);
+  if (!result.applied) {
+    if (!result.duplicate) toast('Qualification M41A refusée : reçu runtime invalide.');
+    return Boolean(result.duplicate);
+  }
+  strategyLog(
+    'PROVING GROUND · QUALIFICATION M41A',
+    `Qualification physique validée · score ${Math.max(0, Number(interaction.receipt?.score) || 0)} · soutien armé pour la prochaine opération.`,
+    'hub-annex'
+  );
+  saveSystem.commit();
+  renderAll();
+  toast('Qualification M41A validée · soutien tactique armé.');
+  return true;
+}
+
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
   if (standaloneContext === 'forge-playtest') {
@@ -1855,6 +1890,16 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.action === 'hub:proving-ground-qualified') {
+    return resolveProvingGroundQualificationV81(interaction);
+  }
+  if (interaction.action === 'hub:proving-ground-armed' || interaction.action === 'hub:proving-ground-started') {
+    const status = byId('hub-status');
+    if (status) status.textContent = interaction.action.endsWith('started')
+      ? 'PROVING GROUND · qualification M41A en cours · 9 cibles · recharge obligatoire.'
+      : 'PROVING GROUND · ligne de tir armée · placez-vous au repère et confirmez.';
+    return true;
+  }
   if (interaction.type === 'hub:annex-transition') {
     const status = byId('hub-status');
     if (status) status.textContent = `${interaction.action.includes('complete') ? 'SAS STABILISÉ' : 'SAS EN MOUVEMENT'} · ${interaction.annexId.toUpperCase()}`;

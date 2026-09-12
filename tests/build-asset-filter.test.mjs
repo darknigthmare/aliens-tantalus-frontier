@@ -165,6 +165,22 @@ test('V66 references: le filtre ne deborde pas sur les autres versions ou les ra
   }
 });
 
+test('V81 garde masters, reçus et captures de production hors du paquet public', () => {
+  const filter = createBuildAssetFilter(process.cwd());
+  for (const path of [
+    'docs/references/v81-proving-ground-art',
+    'docs/references/v81-proving-ground-art/source-receipts/exec-source.png',
+    'docs/references/v81-release-qa/browser-report.json',
+    'docs/references/V81_PRIVATE_REVIEW'
+  ]) assert.equal(filter(join(process.cwd(), path)), false, path);
+  for (const path of [
+    'docs/VALIDATION_V81.md',
+    'docs/VERSION_HISTORY_V81.md',
+    'docs/references/V810_PUBLIC.json',
+    'docs/references/v810-public.txt'
+  ]) assert.equal(filter(join(process.cwd(), path)), true, path);
+});
+
 test('V69 garde les masters ImageGen et métadonnées hors build sans exclure l’atlas runtime', () => {
   const filter = createBuildAssetFilter(process.cwd());
   assert.equal(filter(join(process.cwd(), 'assets/openai/sprites/frames/v69/alpha-bravo-task-consoles-atlas-openai-v69.png')), false);

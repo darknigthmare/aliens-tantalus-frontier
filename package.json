@@ -1,6 +1,6 @@
 {
   "name": "aliens-tantalus-frontier",
-  "version": "80.0.0",
+  "version": "81.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -46,6 +46,8 @@
     "sprites:v66:check": "node scripts/sync-sprite-manifest-v66.mjs --check",
     "art:v62:check": "py scripts/audit-png-alpha-v62.py --fail-on error",
     "audit:bioforge:v80": "node scripts/audit-bioforge-assets-v80.mjs",
+    "art:proving:v81": "py scripts/process-proving-ground-art-v81.py --check",
+    "art:enemy:v81": "py scripts/process-v81-enemy-wave.py --check",
     "build": "node scripts/build.mjs",
     "qa:browser:v52": "node scripts/browser-qa-v52.mjs",
     "qa:browser:v54": "node scripts/browser-qa-v52.mjs",
@@ -62,10 +64,12 @@
     "qa:browser:v78": "node tests/browser-title-screen-v78.mjs",
     "qa:browser:v79": "node tests/browser-title-screen-v78.mjs",
     "qa:browser:v80": "node tests/browser-bioforge-v80.mjs",
+    "qa:browser:v81": "node tests/browser-proving-ground-v81.mjs",
     "verify:production:v79": "node scripts/verify-production-v79.mjs",
     "verify:production:v80": "node scripts/verify-production-v80.mjs",
-    "qa": "npm run audio:check && npm run audit:bioforge:v80 && npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run batch:v75:check && npm run art:v75:check && npm run lint && npm test && npm run build",
-    "qa:release": "npm run qa && npm run qa:browser:v80"
+    "verify:production:v81": "node scripts/verify-production-v81.mjs",
+    "qa": "npm run audio:check && npm run audit:bioforge:v80 && npm run art:proving:v81 && npm run art:enemy:v81 && npm run inventory:v56:check && npm run sprites:v64:check && npm run sprites:v66:check && npm run art:v64:check && npm run art:v64:png && npm run art:v65:check && npm run art:v66:check && npm run batch:v66:check && npm run batch:v75:check && npm run art:v75:check && npm run lint && npm test && npm run build",
+    "qa:release": "npm run qa && npm run qa:browser:v81"
   },
   "engines": {
     "node": ">=20"

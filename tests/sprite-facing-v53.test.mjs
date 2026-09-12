@@ -41,7 +41,8 @@ test('la plaque combat joueur v54 conserve son identité et ses actions dédiée
   const marine = resolvePlayerAnimation({ alive: true, grounded: true, v52FireClock: 1 }, true);
   const xeno = resolvePlayerAnimation({ alive: true, grounded: true, visualForm: 'xenomorph', v52FireClock: 1 }, true);
   assert.equal(marine.sheetId, 'player.echo9-marine.combat');
-  assert.equal(xeno.sheetId, 'enemy.xenomorph-drone.combat');
+  assert.equal(xeno.sheetId, 'player.echo9-marine.combat');
+  assert.equal(xeno.degraded, 'neuro-player-echo9-fallback-v81');
 });
 
 test('un PNJ inconnu ne prend jamais silencieusement l’identité de Mara', () => {

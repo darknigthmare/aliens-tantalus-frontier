@@ -14,12 +14,34 @@ import {
   HUB_ANNEX_BUSINESS_IDS_V71,
   P5000_VEHICLE_ID_V71,
   applyHubAnnexBusinessV71,
+  applyProvingGroundQualificationV81,
   consumeHubAnnexDeploymentSupportV71,
   consumeHubEscapePodMitigationV71,
   createHubAnnexOperationsV71,
   getHubAnnexDeploymentSupportV71,
   sanitizeHubAnnexOperationsV71
 } from '../src/hub-annex-services-v71.js';
+
+function provingGroundReceiptV81(ordinal = 1, score = 900) {
+  const id = `m41a-qualification-v81:session-${ordinal}:qualification`;
+  return {
+    id,
+    idempotencyKey: id,
+    schemaVersion: 81,
+    type: 'proving-ground-qualification',
+    courseId: 'm41a-qualification-v81',
+    weaponId: 'weapon-001-m41a-pulse-rifle',
+    sessionId: `m41a-qualification-v81:session-${ordinal}`,
+    qualified: true,
+    score,
+    hits: 9,
+    targetCount: 9,
+    remainingSeconds: 18,
+    bonus: { nextOperationCharge: true },
+    powerLoaderCertified: false,
+    advancedTutorialsComplete: false
+  };
+}
 
 function activeInfestation(save, id = 'v71-exposure') {
   createInfestationExposureV62(save, {
@@ -71,6 +93,9 @@ test('l’état opérationnel V71 se normalise sans clés forgées ni tableaux i
   assert.equal(safe.processedMorgueCaseKeys.length, 512);
   assert.equal(safe.processedMorgueEvidenceIds.length, 512);
   assert.equal(safe.provingGround.powerLoaderCertified, false);
+  assert.equal(safe.provingGround.nextOperationCharge, false);
+  assert.equal(safe.provingGround.lastQualificationIdV81, null);
+  assert.deepEqual(safe.provingGround.qualificationReceiptIdsV81, []);
   assert.equal(Object.hasOwn(safe, 'forged'), false);
   assert.equal(Object.hasOwn(safe.provingGround, 'forged'), false);
 });
@@ -180,9 +205,33 @@ test('la morgue ne rémunère jamais deux fois le même dossier ou la même preu
   assert.equal(save.galaxy.resources.research, before + 3);
 });
 
-test('Proving Ground et DURANDAL arment puis consomment un soutien de risque réel', () => {
+test('seule une qualification physique V81 valide arme le soutien Proving Ground', () => {
   const save = createDefaultSave();
-  applyHubAnnexBusinessV71(save, 'proving-ground');
+  const station = applyHubAnnexBusinessV71(save, 'proving-ground');
+  assert.equal(station.details.qualificationRequiredV81, true);
+  assert.equal(getHubAnnexDeploymentSupportV71(save).provingGround, false);
+  assert.equal(applyProvingGroundQualificationV81(save, { qualified: true }).reason, 'invalid-receipt');
+  const receipt = provingGroundReceiptV81(1, 1234);
+  assert.deepEqual(applyProvingGroundQualificationV81(save, receipt), {
+    applied: true,
+    duplicate: false,
+    reason: null,
+    id: receipt.id,
+    score: 1234,
+    nextOperationCharge: true
+  });
+  assert.deepEqual(applyProvingGroundQualificationV81(save, receipt), {
+    applied: false,
+    duplicate: true,
+    reason: 'already-applied'
+  });
+  const secondReceipt = provingGroundReceiptV81(2, 1300);
+  assert.equal(applyProvingGroundQualificationV81(save, secondReceipt).applied, true);
+  assert.deepEqual(applyProvingGroundQualificationV81(save, receipt), {
+    applied: false,
+    duplicate: true,
+    reason: 'already-applied'
+  });
   applyHubAnnexBusinessV71(save, 'durandal');
   const armed = getHubAnnexDeploymentSupportV71(save, P5000_VEHICLE_ID_V71);
   assert.deepEqual(armed, {
@@ -201,6 +250,8 @@ test('Proving Ground et DURANDAL arment puis consomment un soutien de risque ré
   assert.equal(save.hub.annexOperationsV71.durandal.ewCharge, false);
   assert.equal(save.hub.annexOperationsV71.provingGround.powerLoaderCertified, false);
   assert.equal(save.hub.annexOperationsV71.provingGround.advancedTutorialsComplete, false);
+  assert.equal(save.hub.annexOperationsV71.provingGround.lastQualificationIdV81, secondReceipt.id);
+  assert.deepEqual(save.hub.annexOperationsV71.provingGround.qualificationReceiptIdsV81, [receipt.id, secondReceipt.id]);
 });
 
 test('Capsules arme une extraction unique et BIOFORGE reste un sas sans donnée de spawn', () => {
@@ -221,13 +272,18 @@ test('Capsules arme une extraction unique et BIOFORGE reste un sas sans donnée 
 
 test('migration et round-trip conservent uniquement l’état métier V71 canonique', () => {
   const save = createDefaultSave();
-  applyHubAnnexBusinessV71(save, 'proving-ground');
+  const receipt = provingGroundReceiptV81(2, 777);
+  applyProvingGroundQualificationV81(save, receipt);
   applyHubAnnexBusinessV71(save, 'escape-pods');
   applyHubAnnexBusinessV71(save, 'durandal');
   save.hub.annexOperationsV71.processedMorgueCaseKeys = ['crew-01:operation-1:2'];
   save.hub.annexOperationsV71.forged = { spawn: 999 };
   const restored = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
   assert.equal(restored.hub.annexOperationsV71.provingGround.nextOperationCharge, true);
+  assert.equal(restored.hub.annexOperationsV71.provingGround.lastQualificationIdV81, receipt.id);
+  assert.deepEqual(restored.hub.annexOperationsV71.provingGround.qualificationReceiptIdsV81, [receipt.id]);
+  assert.equal(restored.hub.annexOperationsV71.provingGround.qualificationsCompletedV81, 1);
+  assert.equal(restored.hub.annexOperationsV71.provingGround.bestScoreV81, 777);
   assert.equal(restored.hub.annexOperationsV71.escapePods.evacuationCharge, true);
   assert.equal(restored.hub.annexOperationsV71.durandal.ewCharge, true);
   assert.deepEqual(restored.hub.annexOperationsV71.processedMorgueCaseKeys, ['crew-01:operation-1:2']);
@@ -243,7 +299,7 @@ test('le calcul stratégique applique -10 risque sans faux bonus P-5000 puis con
   const plainBrief = getOperationBrief(baseline, campaign, world);
 
   const supported = structuredClone(baseline);
-  applyHubAnnexBusinessV71(supported, 'proving-ground');
+  applyProvingGroundQualificationV81(supported, provingGroundReceiptV81(3));
   applyHubAnnexBusinessV71(supported, 'durandal');
   const supportedBrief = getOperationBrief(supported, campaign, world);
   assert.equal(supportedBrief.risk, plainBrief.risk - 10);
@@ -309,7 +365,11 @@ test('les anciennes certifications de simple visite sont neutralisées à la mig
   });
   const restored = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
   assert.deepEqual(restored.hub.annexOperationsV71.provingGround, {
-    nextOperationCharge: true,
+    nextOperationCharge: false,
+    lastQualificationIdV81: null,
+    qualificationReceiptIdsV81: [],
+    qualificationsCompletedV81: 0,
+    bestScoreV81: 0,
     powerLoaderCertified: false,
     advancedTutorialsComplete: false
   });
@@ -323,6 +383,7 @@ test('les anciennes certifications de simple visite sont neutralisées à la mig
   assert.doesNotMatch(proving.message, /certifi|tutoriel/i);
   assert.doesNotMatch(pods.message, /certifi|autodestruction/i);
   assert.equal(proving.details.powerLoaderCertified, false);
+  assert.equal(proving.details.qualificationRequiredV81, true);
   assert.equal(pods.details.destructionDrillCertified, false);
 });
 

@@ -63,10 +63,10 @@
     }
   ],
   "summary": {
-    "pngFilesDiscovered": 681,
+    "pngFilesDiscovered": 687,
     "assetsAudited": 423,
     "rawMastersExcluded": 231,
-    "unclassifiedNotAsserted": 27,
+    "unclassifiedNotAsserted": 33,
     "runtimeCoverNormalizedAssets": 3,
     "byRule": {
       "hub-composite-layer": 48,

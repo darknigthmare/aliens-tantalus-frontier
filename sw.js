@@ -1,4 +1,4 @@
-const CACHE = 'atf-v80-bioforge-shell-1';
+const CACHE = 'atf-v81-proving-ground-shell-1';
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
@@ -21,7 +21,7 @@ const CORE = [
   '/docs/VERSION_HISTORY_V61.md', '/docs/VERSION_HISTORY_V62.md', '/docs/VERSION_HISTORY_V63.md', '/docs/VERSION_HISTORY_V64.md', '/docs/V61_LEVEL_DESIGN_AUDIT.md', '/docs/ART_PROVENANCE_V61.md', '/docs/ART_PROVENANCE_V62.md', '/docs/ART_PROVENANCE_V63.md', '/docs/ART_PROVENANCE_V64.md',
   '/docs/V62_IMPLEMENTATION_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.md', '/docs/references/V62_PNG_ALPHA_AUDIT.json',
   '/docs/references/V61_ASSET_COMPLETION_MATRIX.md', '/docs/references/V61_EXCEL_CONTENT_GAP_AUDIT.md', '/docs/references/V63_ASSET_COMPLETION_MATRIX.md', '/docs/references/V63_PNG_ALPHA_AUDIT.md', '/docs/references/V63_PNG_ALPHA_AUDIT.json', '/docs/references/V64_ASSET_COMPLETION_MATRIX.md', '/docs/references/V64_ENEMY_SOURCES.json', '/docs/references/V64_IMAGEGEN_PROMPTS.md', '/docs/references/V64_PNG_ALPHA_AUDIT.json',
-  '/src/app.js', '/src/title-screen-v61.js', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js', '/src/hub-dialogue-ui-v76.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/narrative-collectables-v68.js', '/src/narrative-collectables-runtime-v68.js', '/src/narrative-collectables-visuals-v68.js', '/src/narrative-archives-ui-v68.js', '/src/alpha-bravo-coop-v69.js', '/src/alpha-bravo-coop-runtime-v69.js', '/src/alpha-bravo-visuals-v69.js', '/src/alpha-bravo-ui-v69.js', '/src/alien-survival-systems-v70.js', '/src/alien-survival-runtime-v70.js', '/src/alien-survival-visuals-v70.js', '/src/alien-survival-ui-v70.js', '/src/bioforge-assets-v80.js', '/src/bioforge-session-v80.js', '/src/bioforge-level-v80.js', '/src/bioforge-runtime-v80.js', '/src/bioforge-ui-v80.js', '/src/visuals.js', '/src/v50-visuals.js',
+  '/src/app.js', '/src/title-screen-v61.js', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js', '/src/hub-dialogue-ui-v76.js', '/src/content.js', '/src/content-core-v50.js', '/src/special-operations-v67.js', '/src/cargo-brutal-runtime-v67.js', '/src/cargo-brutal-visuals-v67.js', '/src/narrative-collectables-v68.js', '/src/narrative-collectables-runtime-v68.js', '/src/narrative-collectables-visuals-v68.js', '/src/narrative-archives-ui-v68.js', '/src/alpha-bravo-coop-v69.js', '/src/alpha-bravo-coop-runtime-v69.js', '/src/alpha-bravo-visuals-v69.js', '/src/alpha-bravo-ui-v69.js', '/src/alien-survival-systems-v70.js', '/src/alien-survival-runtime-v70.js', '/src/alien-survival-visuals-v70.js', '/src/alien-survival-ui-v70.js', '/src/bioforge-assets-v80.js', '/src/bioforge-session-v80.js', '/src/bioforge-level-v80.js', '/src/bioforge-runtime-v80.js', '/src/bioforge-ui-v80.js', '/src/proving-ground-assets-v81.js', '/src/proving-ground-session-v81.js', '/src/tantalus-proving-ground-v81.js', '/src/hub-v81-runtime.js', '/src/player-visual-contract-v81.js', '/src/enemy-profile-assets-v81.js', '/src/visuals.js', '/src/v50-visuals.js',
   '/src/excel-content-bridge-v61.js', '/src/excel-content-bridge-v63.js', '/src/catalog-runtime-v62.js', '/src/catalog-ui-v62.js', '/src/forge-save-v62.js',
   '/src/infestation-chain-v62.js', '/src/mission-insertion-v62.js', '/src/mission-insertion-ui-v62.js',
   '/src/npc-dialogue-v62.js', '/src/vent-network-v62.js', '/src/hub-v62-runtime.js',
@@ -70,6 +70,9 @@ const CORE = [
   '/assets/openai/hub/props/sensor-console.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png',
   '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+  '/assets/openai/sprites/normalized/player/echo9-marine-melee-sheet.png',
+  '/assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png',
+  '/assets/openai/sprites/normalized/player/echo9-marine-tool-use-sheet.png',
   '/assets/openai/sprites/normalized/props/cargo-brutal-props-atlas-v67.png',
   '/assets/openai/sprites/normalized/props/qz17-narrative-collectables-atlas-v68.png',
   '/assets/openai/sprites/normalized/props/alpha-bravo-task-consoles-atlas-v69.png',
@@ -80,6 +83,11 @@ const CORE = [
   '/assets/openai/bioforge/v80/props/bioforge-tissue-printer-v80.png',
   '/assets/openai/bioforge/v80/props/bioforge-bulkhead-cycle-v80.png',
   '/assets/openai/bioforge/v80/vfx/bioforge-purge-cycle-v80.png',
+  '/assets/openai/hub/proving-ground/v81/proving-ground-target-cycle-v81.png',
+  '/assets/openai/hub/proving-ground/v81/proving-ground-impact-cycle-v81.png',
+  '/assets/openai/hub/proving-ground/v81/proving-ground-range-console-v81.png',
+  '/assets/openai/sprites/normalized/enemy-profiles-v81/enemy-009-crusher.webp',
+  '/assets/openai/sprites/normalized/enemy-profiles-v81/enemy-010-spitter.webp',
   '/assets/openai/hub/annexes/v71/arrival-airlock/far.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/mid.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/prop.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/foreground.webp', '/assets/openai/hub/annexes/v71/arrival-airlock/door.webp',
   '/assets/openai/hub/annexes/v71/logistics/far.webp', '/assets/openai/hub/annexes/v71/logistics/mid.webp', '/assets/openai/hub/annexes/v71/logistics/prop.webp', '/assets/openai/hub/annexes/v71/logistics/foreground.webp', '/assets/openai/hub/annexes/v71/logistics/door.webp',
   '/assets/openai/hub/annexes/v71/mire-archives/far.webp', '/assets/openai/hub/annexes/v71/mire-archives/mid.webp', '/assets/openai/hub/annexes/v71/mire-archives/prop.webp', '/assets/openai/hub/annexes/v71/mire-archives/foreground.webp', '/assets/openai/hub/annexes/v71/mire-archives/door.webp',
@@ -308,11 +316,15 @@ const CORE = [
 
 const SHELL = Object.freeze(CORE.filter((path) => (
   (!path.startsWith('/assets/') || path.startsWith('/assets/openai/pwa/')
-    || path.startsWith('/assets/openai/bioforge/v80/') || path === '/assets/audio/manifest.json')
+    || path.startsWith('/assets/openai/bioforge/v80/')
+    || path.startsWith('/assets/openai/hub/proving-ground/v81/')
+    || path.startsWith('/assets/openai/sprites/normalized/player/')
+    || path.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v81/')
+    || path === '/assets/audio/manifest.json')
   && !path.startsWith('/docs/')
 )));
 
-async function precacheV80Shell() {
+async function precacheV81Shell() {
   const cache = await caches.open(CACHE);
   await cache.addAll(SHELL);
 }
@@ -339,7 +351,9 @@ const isEnemyAtlasPathV65 = (value) => {
       && url.pathname.endsWith('.webp');
     const dedicatedV66Webp = url.pathname.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v66/')
       && url.pathname.endsWith('.webp');
-    return legacyPng || dedicatedV65Webp || dedicatedV66Webp;
+    const dedicatedV81Webp = url.pathname.startsWith('/assets/openai/sprites/normalized/enemy-profiles-v81/')
+      && url.pathname.endsWith('.webp');
+    return legacyPng || dedicatedV65Webp || dedicatedV66Webp || dedicatedV81Webp;
   } catch {
     return false;
   }
@@ -358,7 +372,7 @@ async function cacheEnemyAtlasesV65(paths = []) {
 }
 
 self.addEventListener('install', (event) => event.waitUntil(
-  precacheV80Shell().then(() => self.skipWaiting())
+  precacheV81Shell().then(() => self.skipWaiting())
 ));
 
 self.addEventListener('activate', (event) => event.waitUntil(

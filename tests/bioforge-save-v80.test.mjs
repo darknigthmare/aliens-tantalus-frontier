@@ -7,6 +7,7 @@ import {
   advanceBioforgeSessionV80,
   beginBioforgePurgeV80,
   completeBioforgePurgeV80,
+  sanitizeBioforgeRuntimeV81,
   startBioforgeSessionV80
 } from '../src/bioforge-session-v80.js';
 
@@ -22,8 +23,27 @@ test('la sauvegarde V80 possède une racine BIOFORGE séparée du hub et de la c
   const save = createDefaultSave();
   assert.equal(save.bioforgeV80.schema, BIOFORGE_SCHEMA_V80);
   assert.equal(save.bioforgeV80.activeSession, null);
+  assert.equal(save.bioforgeV80.runtimeV81, null);
   assert.equal(Object.hasOwn(save.hub, 'bioforgeV80'), false);
   assert.doesNotMatch(JSON.stringify(save.hub.annexOperationsV71.bioforge), /spawn|enemy|quantity|printer/i);
+});
+
+test('le bloc runtimeV81 BIOFORGE normalise les bornes et refuse un facing non canonique', () => {
+  assert.equal(sanitizeBioforgeRuntimeV81(null), null);
+  const runtimeV81 = sanitizeBioforgeRuntimeV81({
+    seed: 123,
+    phaseClock: -4,
+    transferStage: 99,
+    player: { x: 99999, y: -50, facing: 'enemy' }
+  });
+  assert.deepEqual(runtimeV81, {
+    schema: 81,
+    seed: 123,
+    phaseClock: 0,
+    transferStage: 3,
+    player: { x: 2880, y: 84, facing: 1 }
+  });
+  assert.equal(sanitizeBioforgeRuntimeV81({ player: { x: 1400, y: 510, facing: -1 } }).player.facing, -1);
 });
 
 test('un cycle BIOFORGE persiste sans modifier les ressources, opérations, équipage ou statistiques campagne', () => {
