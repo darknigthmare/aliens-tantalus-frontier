@@ -17,6 +17,7 @@ import { MISSION_DOOR_ATLAS_V58 } from '../src/mission-door-art-v58.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V65 } from '../src/enemy-profile-registry-v65.js';
 import { READY_ENEMY_PROFILE_REGISTRY_V66 } from '../src/enemy-profile-registry-v66.js';
 import { HUB_ANNEXES_V71 } from '../src/tantalus-hub-expansion-v71.js';
+import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 
 const relativeImports = (source) => {
   const imports = [];
@@ -32,7 +33,7 @@ const relativeImports = (source) => {
 const localPath = (webPath) => path.join(process.cwd(), ...webPath.split('/').filter(Boolean));
 const workerContains = (worker, webPath) => worker.includes(`'${webPath}'`) || worker.includes(`"${webPath}"`);
 
-test('le cache hors-ligne v77 précache seulement le shell et garde les atlases lourds à la demande', async () => {
+test('le cache hors-ligne V79 précache seulement le shell et garde les bitmaps lourds à la demande', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const visited = new Set();
 
@@ -147,7 +148,7 @@ test('le cache hors-ligne v77 précache seulement le shell et garde les atlases 
     assert.ok(workerContains(worker, bitmapPath), `${bitmapPath} manque dans CORE v62`);
   }
 
-  assert.match(worker, /const CACHE = ['"]atf-v78-title-save-briefing-shell-1['"]/);
+  assert.match(worker, /const CACHE = ['"]atf-v79-modular-title-shell-1['"]/);
   for (const documentPath of [
     '/docs/GAMEPLAY_PROMISE_AUDIT_V55.md',
     '/docs/V58_ROOM_COHERENCE_AUDIT.md',
@@ -186,7 +187,12 @@ test('le cache hors-ligne v77 précache seulement le shell et garde les atlases 
   }
   const pngAudit = JSON.parse(await readFile(localPath('/docs/references/V64_PNG_ALPHA_AUDIT.json'), 'utf8'));
   assert.equal(pngAudit.release, 'v64');
-  assert.equal(pngAudit.summary.assetsAudited, 405);
+  assert.equal(pngAudit.summary.assetsAudited, 423);
+  assert.equal(
+    pngAudit.assets.filter(({ path }) => path.startsWith('assets/openai/ui/title/v79/')).length,
+    18,
+    'les dix-huit PNG runtime du titre V79 doivent rester couverts par le rapport global'
+  );
   assert.equal(pngAudit.summary.findings.error, 0);
   const enemySources = JSON.parse(await readFile(localPath('/docs/references/V64_ENEMY_SOURCES.json'), 'utf8'));
   for (const entry of enemySources.entries) {
@@ -225,6 +231,26 @@ test('le build et le déploiement excluent les masters QA raw sans supprimer les
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/previews\/v64\/\*\*$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/metadata\/v64$/m);
   assert.match(vercelIgnore, /^assets\/openai\/sprites\/metadata\/v64\/\*\*$/m);
+  const includeBuildAsset = createBuildAssetFilter(process.cwd());
+  for (const excludedPath of [
+    'docs/references/V79_PRIVATE_PROOF.md',
+    'docs/references/v79-title-scene-production',
+    'docs/references/v79-title-scene-production/asset-manifest.json',
+    'docs/references/v79-title-scene-production/openai-prompt-recipes.json',
+    'docs/references/v79-title-scene-production/source-receipts',
+    'docs/references/v79-title-scene-production/source-receipts/receipt.png',
+    'docs/references/v79-title-scene-production/rejected',
+    'docs/references/v79-title-scene-production/rejected/candidate.png',
+    'docs/references/v79-browser-qa/final-local/title-browser-report.json',
+    'docs/references/v79-browser-qa/final-local/title-preset-acheron.jpg',
+    'docs/references/v79-release-qa/production-http.json'
+  ]) {
+    assert.equal(includeBuildAsset(path.resolve(excludedPath)), false, `${excludedPath} ne doit pas entrer dans dist`);
+  }
+  assert.match(vercelIgnore, /^docs\/references\/V79_\*$/m);
+  assert.match(vercelIgnore, /^docs\/references\/V79_\*\/\*\*$/m);
+  assert.match(vercelIgnore, /^docs\/references\/v79-\*$/m);
+  assert.match(vercelIgnore, /^docs\/references\/v79-\*\/\*\*$/m);
   assert.match(vercelIgnore, /^\.tmp\/\*\*$/m);
   assert.match(vercelIgnore, /^node_modules$/m);
   assert.match(vercelIgnore, /^dist$/m);

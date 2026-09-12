@@ -28,6 +28,7 @@ import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
+import { TitleSceneControllerV79 } from './title-scene-v79.js';
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
@@ -440,9 +441,15 @@ function getHubRoutineContextV62(source = saveSystem.data) {
   };
 }
 
+const titleSceneV79 = new TitleSceneControllerV79({
+  root: byId('title-scene-v79'),
+  fallback: byId('title-background-fallback-v61')
+});
+
 const titleScreen = new TitleScreenController({
   root: byId('title-screen'),
   app: byId('app'),
+  scene: titleSceneV79,
   getSave: () => saveSystem.data,
   getRecoveryStatus: () => saveSystem.recoveryNeeded,
   onUnlock: () => { audio.unlock(); audio.ui(); },

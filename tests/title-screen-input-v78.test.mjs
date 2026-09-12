@@ -60,6 +60,25 @@ test('title V78 displays actual profile minutes and cancels stale scheduled focu
   assert.equal(m.root.dataset.state, 'closed');
 });
 
+test('focus, resize and show always clear horizontal title scroll drift', t => {
+  const m = mount(t);
+  const button = m.nodes['#title-start'];
+  button.scrollIntoView = () => { m.root.scrollLeft = 320; };
+  m.root.scrollLeft = 140;
+  m.ui.focusButton(button);
+  assert.equal(m.root.scrollLeft, 0);
+
+  m.root.scrollLeft = 96;
+  m.listeners.get('resize')();
+  assert.equal(m.root.scrollLeft, 0);
+
+  m.root.scrollLeft = 72;
+  m.ui.show();
+  assert.equal(m.root.scrollLeft, 0);
+  m.flush();
+  assert.equal(m.root.scrollLeft, 0);
+});
+
 test('keyboard navigation wraps only visible enabled menu actions', t => {
   const m = mount(t); m.menu();
   assert.equal(m.doc.activeElement.id, 'title-continue');

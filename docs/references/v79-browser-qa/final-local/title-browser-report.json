@@ -1,0 +1,1779 @@
+{
+  "ok": true,
+  "base": "http://127.0.0.1:4176/",
+  "scope": "Isolated browser storage; real CDP keyboard/mouse/touch; standard-mapping gamepad is simulated and explicitly not a physical controller; controlled save and hub-position fixtures are labelled; insertion phases are advanced through their native DOM button after focus assertions; no runtime edits.",
+  "checks": {
+    "pageHealth": {
+      "bodyTextLength": 209,
+      "errorOverlay": false,
+      "release": "ALIENS: TANTALUS FRONTIER v79"
+    },
+    "titleScenePresets": [
+      {
+        "name": "acheron",
+        "preset": "frontier-night",
+        "mode": "full",
+        "degraded": "false",
+        "imageCount": 14,
+        "readyCount": 14,
+        "missingCount": 0,
+        "runtimeIds": [
+          "title.v79.space.deep-frontier",
+          "title.v79.stars.distant-field",
+          "title.v79.stars.near-sparks",
+          "title.v79.nebula.cold-ion",
+          "title.v79.orbitals.tantalus-transport",
+          "title.v79.traffic.utility-shuttle",
+          "title.v79.debris.wreck-field",
+          "title.v79.foreground.port-hull",
+          "title.v79.foreground.starboard-truss",
+          "title.v79.vfx.ion-exhaust",
+          "title.v79.vfx.scan-sweep",
+          "title.v79.planet.acheron",
+          "title.v79.atmosphere.acheron-storm",
+          "title.v79.clouds.acheron-storm"
+        ],
+        "sources": [
+          "/assets/openai/ui/title/v79/space/space-01-deep-frontier.png",
+          "/assets/openai/ui/title/v79/stars/stars-01-distant-field.png",
+          "/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png",
+          "/assets/openai/ui/title/v79/nebula/nebula-01-cold-ion.png",
+          "/assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png",
+          "/assets/openai/ui/title/v79/traffic/traffic-01-utility-shuttle.png",
+          "/assets/openai/ui/title/v79/debris/debris-01-wreck-field.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-01-port-hull.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-02-starboard-truss.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-01-ion-exhaust.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-03-scan-sweep.png",
+          "/assets/openai/ui/title/v79/planet/planet-01-acheron.png",
+          "/assets/openai/ui/title/v79/atmosphere/atmosphere-02-acheron-storm.png",
+          "/assets/openai/ui/title/v79/clouds/clouds-01-acheron-storm.png"
+        ],
+        "proceduralFallbacks": [
+          "patrol-traffic",
+          "near-debris"
+        ],
+        "fallbackVisible": false
+      },
+      {
+        "name": "ceto",
+        "preset": "storm-terminator",
+        "mode": "full",
+        "degraded": "false",
+        "imageCount": 13,
+        "readyCount": 13,
+        "missingCount": 0,
+        "runtimeIds": [
+          "title.v79.space.deep-frontier",
+          "title.v79.stars.distant-field",
+          "title.v79.stars.near-sparks",
+          "title.v79.nebula.cold-ion",
+          "title.v79.orbitals.tantalus-transport",
+          "title.v79.traffic.utility-shuttle",
+          "title.v79.debris.wreck-field",
+          "title.v79.foreground.port-hull",
+          "title.v79.foreground.starboard-truss",
+          "title.v79.vfx.ion-exhaust",
+          "title.v79.vfx.scan-sweep",
+          "title.v79.planet.ceto-basin",
+          "title.v79.atmosphere.ceto-cyan"
+        ],
+        "sources": [
+          "/assets/openai/ui/title/v79/space/space-01-deep-frontier.png",
+          "/assets/openai/ui/title/v79/stars/stars-01-distant-field.png",
+          "/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png",
+          "/assets/openai/ui/title/v79/nebula/nebula-01-cold-ion.png",
+          "/assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png",
+          "/assets/openai/ui/title/v79/traffic/traffic-01-utility-shuttle.png",
+          "/assets/openai/ui/title/v79/debris/debris-01-wreck-field.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-01-port-hull.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-02-starboard-truss.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-01-ion-exhaust.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-03-scan-sweep.png",
+          "/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png",
+          "/assets/openai/ui/title/v79/atmosphere/atmosphere-01-ceto-cyan.png"
+        ],
+        "proceduralFallbacks": [
+          "storm-bands",
+          "patrol-traffic",
+          "near-debris"
+        ],
+        "fallbackVisible": false
+      },
+      {
+        "name": "mire-9",
+        "preset": "ember-quarantine",
+        "mode": "full",
+        "degraded": "false",
+        "imageCount": 13,
+        "readyCount": 13,
+        "missingCount": 0,
+        "runtimeIds": [
+          "title.v79.space.deep-frontier",
+          "title.v79.stars.distant-field",
+          "title.v79.stars.near-sparks",
+          "title.v79.nebula.cold-ion",
+          "title.v79.orbitals.tantalus-transport",
+          "title.v79.traffic.utility-shuttle",
+          "title.v79.debris.wreck-field",
+          "title.v79.foreground.port-hull",
+          "title.v79.foreground.starboard-truss",
+          "title.v79.vfx.ion-exhaust",
+          "title.v79.vfx.scan-sweep",
+          "title.v79.planet.mire-9",
+          "title.v79.atmosphere.mire-9"
+        ],
+        "sources": [
+          "/assets/openai/ui/title/v79/space/space-01-deep-frontier.png",
+          "/assets/openai/ui/title/v79/stars/stars-01-distant-field.png",
+          "/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png",
+          "/assets/openai/ui/title/v79/nebula/nebula-01-cold-ion.png",
+          "/assets/openai/ui/title/v79/orbitals/orbitals-01-tantalus-transport.png",
+          "/assets/openai/ui/title/v79/traffic/traffic-01-utility-shuttle.png",
+          "/assets/openai/ui/title/v79/debris/debris-01-wreck-field.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-01-port-hull.png",
+          "/assets/openai/ui/title/v79/foreground/foreground-02-starboard-truss.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-01-ion-exhaust.png",
+          "/assets/openai/ui/title/v79/vfx/vfx-03-scan-sweep.png",
+          "/assets/openai/ui/title/v79/planet/planet-03-mire-9.png",
+          "/assets/openai/ui/title/v79/atmosphere/atmosphere-03-mire-9.png"
+        ],
+        "proceduralFallbacks": [
+          "storm-bands",
+          "patrol-traffic",
+          "near-debris"
+        ],
+        "fallbackVisible": false
+      }
+    ],
+    "directionalKeys": [
+      {
+        "code": "ArrowDown",
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-new",
+        "activeTag": "BUTTON",
+        "activeText": "NOUVELLE PARTIE",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "code": "End",
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-options",
+        "activeTag": "BUTTON",
+        "activeText": "SYSTÈME",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "code": "ArrowDown",
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-continue",
+        "activeTag": "BUTTON",
+        "activeText": "ENTRER SUR LE TANTALUS",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "code": "Home",
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-continue",
+        "activeTag": "BUTTON",
+        "activeText": "ENTRER SUR LE TANTALUS",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "code": "ArrowUp",
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-options",
+        "activeTag": "BUTTON",
+        "activeText": "SYSTÈME",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      }
+    ],
+    "tabOrder": [
+      {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-new",
+        "activeTag": "BUTTON",
+        "activeText": "NOUVELLE PARTIE",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-forge",
+        "activeTag": "BUTTON",
+        "activeText": "FRONTIER FORGE",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-options",
+        "activeTag": "BUTTON",
+        "activeText": "SYSTÈME",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-continue",
+        "activeTag": "BUTTON",
+        "activeText": "ENTRER SUR LE TANTALUS",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      },
+      {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": true,
+        "titleState": "menu",
+        "menuVisible": true,
+        "activeId": "title-new",
+        "activeTag": "BUTTON",
+        "activeText": "NOUVELLE PARTIE",
+        "focusInTitle": true,
+        "view": "settings",
+        "appHidden": true,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "title",
+          "music": 0.45,
+          "currentOperation": null
+        },
+        "game": {
+          "running": false,
+          "paused": false
+        },
+        "hubRunning": false
+      }
+    ],
+    "escape": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "idle",
+      "menuVisible": false,
+      "activeId": "title-start",
+      "activeTag": "BUTTON",
+      "activeText": "APPUYER POUR COMMENCER",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "heldStart": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-continue",
+      "activeTag": "BUTTON",
+      "activeText": "ENTRER SUR LE TANTALUS",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "simulatedStandardGamepad": {
+      "mode": "simulated-standard-mapping",
+      "physicalDevice": false,
+      "documentHadFocus": true,
+      "openedMenu": true,
+      "movedToNewGame": true,
+      "heldAcceptDidNotConfirm": true,
+      "cancelEdgeWorked": true,
+      "backEdgeWorked": true
+    },
+    "newFirstEdge": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "CONFIRMER LA NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "true",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "newHeldRepeat": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "CONFIRMER LA NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "true",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "options": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "",
+      "activeTag": "H2",
+      "activeText": "Système",
+      "focusInTitle": false,
+      "view": "settings",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "musicAfterKey": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "setting-music",
+      "activeTag": "INPUT",
+      "activeText": "",
+      "focusInTitle": false,
+      "view": "settings",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "returnButton": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "idle",
+      "menuVisible": false,
+      "activeId": "title-start",
+      "activeTag": "BUTTON",
+      "activeText": "APPUYER POUR COMMENCER",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "musicReopened": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "",
+      "activeTag": "H2",
+      "activeText": "Système",
+      "focusInTitle": false,
+      "view": "settings",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "newConfirmation": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "CONFIRMER LA NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "true",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "newCancelled": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 98765,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "newConfirmed": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "hub-canvas",
+      "activeTag": "CANVAS",
+      "activeText": "",
+      "focusInTitle": false,
+      "view": "hub",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": true
+    },
+    "continueHub": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "hub-canvas",
+      "activeTag": "CANVAS",
+      "activeText": "",
+      "focusInTitle": false,
+      "view": "hub",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": true
+    },
+    "missionFocus": {
+      "launched": true,
+      "initial": {
+        "activeId": "",
+        "action": "advance",
+        "inside": true,
+        "phase": "briefing",
+        "status": "active"
+      },
+      "afterRerender": {
+        "activeId": "",
+        "action": "advance",
+        "inside": true,
+        "phase": "preparation",
+        "status": "active"
+      },
+      "steps": [
+        {
+          "stage": "initial",
+          "activeId": "",
+          "action": "advance",
+          "inside": true,
+          "phase": "briefing",
+          "status": "active"
+        },
+        {
+          "stage": "after-rerender",
+          "activeId": "",
+          "action": "advance",
+          "inside": true,
+          "phase": "preparation",
+          "status": "active"
+        },
+        {
+          "stage": "advance-2",
+          "before": {
+            "phase": "preparation",
+            "status": "active",
+            "hasAdvance": true,
+            "focused": true
+          },
+          "after": {
+            "phase": "approach",
+            "status": "active",
+            "gameRunning": false,
+            "activeId": "",
+            "action": "advance",
+            "inside": true
+          }
+        },
+        {
+          "stage": "advance-3",
+          "before": {
+            "phase": "approach",
+            "status": "active",
+            "hasAdvance": true,
+            "focused": true
+          },
+          "after": {
+            "phase": "incident",
+            "status": "active",
+            "gameRunning": false,
+            "activeId": "",
+            "action": "advance",
+            "inside": true
+          }
+        },
+        {
+          "stage": "advance-4",
+          "before": {
+            "phase": "incident",
+            "status": "active",
+            "hasAdvance": true,
+            "focused": true
+          },
+          "after": {
+            "phase": "deployment",
+            "status": "active",
+            "gameRunning": false,
+            "activeId": "",
+            "action": "advance",
+            "inside": true
+          }
+        },
+        {
+          "stage": "advance-5",
+          "before": {
+            "phase": "deployment",
+            "status": "active",
+            "hasAdvance": true,
+            "focused": true
+          },
+          "after": {
+            "phase": "player-control",
+            "status": "active",
+            "gameRunning": false,
+            "activeId": "",
+            "action": "advance",
+            "inside": true
+          }
+        },
+        {
+          "stage": "advance-6",
+          "before": {
+            "phase": "player-control",
+            "status": "active",
+            "hasAdvance": true,
+            "focused": true
+          },
+          "after": {
+            "phase": "player-control",
+            "status": "completed",
+            "gameRunning": true,
+            "activeId": "game-canvas",
+            "action": "",
+            "inside": false
+          }
+        }
+      ],
+      "runtime": {
+        "title": "ALIENS: TANTALUS FRONTIER v79",
+        "titleVisible": false,
+        "titleState": "closed",
+        "menuVisible": true,
+        "activeId": "game-canvas",
+        "activeTag": "CANVAS",
+        "activeText": "",
+        "focusInTitle": false,
+        "view": "play",
+        "appHidden": false,
+        "confirmation": "false",
+        "save": {
+          "profile": 1,
+          "playerName": "Mara Vega",
+          "kills": 0,
+          "playSeconds": 0,
+          "scene": "mission",
+          "music": 0.45,
+          "currentOperation": "operation-1-pair-001-mire"
+        },
+        "game": {
+          "running": true,
+          "paused": false
+        },
+        "hubRunning": false
+      }
+    },
+    "forge": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": false,
+      "titleState": "closed",
+      "menuVisible": true,
+      "activeId": "",
+      "activeTag": "H2",
+      "activeText": "Éditeur bloc/écran",
+      "focusInTitle": false,
+      "view": "editor",
+      "appHidden": false,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "mission",
+        "music": 0.45,
+        "currentOperation": "operation-1-pair-001-mire"
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "forgeReturn": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "idle",
+      "menuVisible": false,
+      "activeId": "title-start",
+      "activeTag": "BUTTON",
+      "activeText": "APPUYER POUR COMMENCER",
+      "focusInTitle": true,
+      "view": "editor",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "mission",
+        "music": 0.45,
+        "currentOperation": "operation-1-pair-001-mire"
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "profiles": [
+      {
+        "profile": 2,
+        "before": {
+          "title": "ALIENS: TANTALUS FRONTIER v79",
+          "titleVisible": false,
+          "titleState": "closed",
+          "menuVisible": true,
+          "activeId": "setting-music",
+          "activeTag": "INPUT",
+          "activeText": "",
+          "focusInTitle": false,
+          "view": "settings",
+          "appHidden": false,
+          "confirmation": "false",
+          "save": {
+            "profile": 2,
+            "playerName": "Mara Vega",
+            "kills": 0,
+            "playSeconds": 0,
+            "scene": "title",
+            "music": 0.5,
+            "currentOperation": null
+          },
+          "game": {
+            "running": false,
+            "paused": false
+          },
+          "hubRunning": false
+        },
+        "after": {
+          "title": "ALIENS: TANTALUS FRONTIER v79",
+          "titleVisible": true,
+          "titleState": "idle",
+          "menuVisible": false,
+          "activeId": "title-start",
+          "activeTag": "BUTTON",
+          "activeText": "APPUYER POUR COMMENCER",
+          "focusInTitle": true,
+          "view": "hub",
+          "appHidden": true,
+          "confirmation": "false",
+          "save": {
+            "profile": 2,
+            "playerName": "Mara Vega",
+            "kills": 0,
+            "playSeconds": 0,
+            "scene": "title",
+            "music": 0.5,
+            "currentOperation": null
+          },
+          "game": {
+            "running": false,
+            "paused": false
+          },
+          "hubRunning": false
+        },
+        "marker": "2"
+      },
+      {
+        "profile": 3,
+        "before": {
+          "title": "ALIENS: TANTALUS FRONTIER v79",
+          "titleVisible": false,
+          "titleState": "closed",
+          "menuVisible": true,
+          "activeId": "setting-music",
+          "activeTag": "INPUT",
+          "activeText": "",
+          "focusInTitle": false,
+          "view": "settings",
+          "appHidden": false,
+          "confirmation": "false",
+          "save": {
+            "profile": 3,
+            "playerName": "Mara Vega",
+            "kills": 0,
+            "playSeconds": 0,
+            "scene": "title",
+            "music": 0.5,
+            "currentOperation": null
+          },
+          "game": {
+            "running": false,
+            "paused": false
+          },
+          "hubRunning": false
+        },
+        "after": {
+          "title": "ALIENS: TANTALUS FRONTIER v79",
+          "titleVisible": true,
+          "titleState": "idle",
+          "menuVisible": false,
+          "activeId": "title-start",
+          "activeTag": "BUTTON",
+          "activeText": "APPUYER POUR COMMENCER",
+          "focusInTitle": true,
+          "view": "hub",
+          "appHidden": true,
+          "confirmation": "false",
+          "save": {
+            "profile": 3,
+            "playerName": "Mara Vega",
+            "kills": 0,
+            "playSeconds": 0,
+            "scene": "title",
+            "music": 0.5,
+            "currentOperation": null
+          },
+          "game": {
+            "running": false,
+            "paused": false
+          },
+          "hubRunning": false
+        },
+        "marker": "3"
+      }
+    ],
+    "invalidImport": {
+      "unchanged": true,
+      "profile": 3,
+      "runtimeFlagsUnchanged": true,
+      "toast": "Fichier de sauvegarde invalide. Aucune partie n’a été remplacée.",
+      "beforeRuntime": {
+        "game": false,
+        "hub": false
+      },
+      "afterRuntime": {
+        "game": false,
+        "hub": false
+      }
+    },
+    "legacyTimelineCancelled": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "command",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 3,
+        "playerName": "V78 QA TIMELINE PRESERVED",
+        "kills": 78,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.5,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    },
+    "briefingTable": {
+      "start": {
+        "player": {
+          "x": 1586,
+          "y": 532,
+          "w": 44,
+          "h": 92,
+          "vx": 0,
+          "vy": 0,
+          "grounded": true,
+          "facing": 1,
+          "health": 100,
+          "maxHealth": 100,
+          "shockClock": 0,
+          "shockHits": 0,
+          "alive": true,
+          "crouching": false,
+          "climbing": false,
+          "fireClock": 0,
+          "invulnerability": 0
+        },
+        "table": {
+          "collisionMode": "one-way-top",
+          "x": 1680,
+          "y": 541.3680943513345,
+          "w": 480,
+          "h": 82.63190564866542,
+          "role": "interaction-prop",
+          "collisionOnly": true,
+          "roomId": "briefing"
+        },
+        "floor": 624,
+        "controlledFixture": "deck 0 / briefing / 94px left of authored one-way tabletop"
+      },
+      "foreground": {
+        "player": {
+          "x": 1883.9337649675647,
+          "y": 532,
+          "w": 44,
+          "h": 92
+        },
+        "table": {
+          "collisionMode": "one-way-top",
+          "x": 1680,
+          "y": 541.3680943513345,
+          "w": 480,
+          "h": 82.63190564866542,
+          "role": "interaction-prop",
+          "collisionOnly": true,
+          "roomId": "briefing"
+        },
+        "horizontalOverlap": true,
+        "feet": 624,
+        "grounded": true
+      },
+      "passed": {
+        "player": {
+          "x": 2163.1947649429226,
+          "y": 532,
+          "w": 44,
+          "h": 92
+        },
+        "table": {
+          "collisionMode": "one-way-top",
+          "x": 1680,
+          "y": 541.3680943513345,
+          "w": 480,
+          "h": 82.63190564866542,
+          "role": "interaction-prop",
+          "collisionOnly": true,
+          "roomId": "briefing"
+        },
+        "feet": 624,
+        "floor": 624,
+        "grounded": true,
+        "roomId": "briefing"
+      },
+      "jump": {
+        "airborne": true,
+        "landed": true,
+        "highestFeet": 513.4823960000001,
+        "landing": {
+          "feet": 541.3680943513345,
+          "y": 449.36809435133455,
+          "vy": 0,
+          "grounded": true,
+          "tableTop": 541.3680943513345
+        }
+      },
+      "afterWalkOff": {
+        "x": 2190.0528171850633,
+        "feet": 624,
+        "grounded": true
+      }
+    },
+    "corruptBoot": {
+      "status": {
+        "profile": 3,
+        "status": "corrupt",
+        "code": "SAVE_CORRUPT",
+        "reason": "invalid-json"
+      },
+      "raw": "{ \"qa\": \"V78 malformed original\",",
+      "warning": "Profil 3 inaccessible. Sauvegarde préservée. Ouvrez Système pour récupérer les données ou choisir un autre profil.",
+      "warningVisible": true,
+      "continueDisabled": true
+    },
+    "recoveryOptions": {
+      "notice": "Sauvegarde protégéeProfil 3 : fichier illisible. Les sauvegardes automatiques sont suspendues.Le fichier original n’a pas été remplacé. Exportez ses données brutes, choisissez un autre profil ou importez une sauvegarde valide. Une nouvelle partie ne remplace ce profil qu’après confirmation dans le menu principal.",
+      "noticeVisible": true,
+      "raw": "{ \"qa\": \"V78 malformed original\",",
+      "exportText": "EXPORTER LE FICHIER ORIGINAL"
+    },
+    "rawCorruptExport": {
+      "name": "aliens-tantalus-frontier-profile-3-original.txt",
+      "text": "{ \"qa\": \"V78 malformed original\",",
+      "byteLength": 33,
+      "expectedByteLength": 33,
+      "byteIdentical": true
+    },
+    "corruptCancelled": {
+      "title": "ALIENS: TANTALUS FRONTIER v79",
+      "titleVisible": true,
+      "titleState": "menu",
+      "menuVisible": true,
+      "activeId": "title-new",
+      "activeTag": "BUTTON",
+      "activeText": "NOUVELLE PARTIE",
+      "focusInTitle": true,
+      "view": "settings",
+      "appHidden": true,
+      "confirmation": "false",
+      "save": {
+        "profile": 1,
+        "playerName": "Mara Vega",
+        "kills": 0,
+        "playSeconds": 0,
+        "scene": "title",
+        "music": 0.45,
+        "currentOperation": null
+      },
+      "game": {
+        "running": false,
+        "paused": false
+      },
+      "hubRunning": false
+    }
+  },
+  "layouts": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "coarse": false
+      },
+      "boxes": [
+        {
+          "id": "title-start",
+          "text": "APPUYER POUR COMMENCER",
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "visible": false,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-continue",
+          "text": "ENTRER SUR LE TANTALUS",
+          "left": 117.796875,
+          "top": 317.1875,
+          "right": 547.796875,
+          "bottom": 365.1875,
+          "width": 430,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-new",
+          "text": "NOUVELLE PARTIE",
+          "left": 117.796875,
+          "top": 373.1875,
+          "right": 547.796875,
+          "bottom": 421.1875,
+          "width": 430,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-forge",
+          "text": "FRONTIER FORGE",
+          "left": 117.796875,
+          "top": 429.1875,
+          "right": 547.796875,
+          "bottom": 477.1875,
+          "width": 430,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-options",
+          "text": "SYSTÈME",
+          "left": 117.796875,
+          "top": 485.1875,
+          "right": 547.796875,
+          "bottom": 533.1875,
+          "width": 430,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-profile-status",
+          "text": "PROFIL 1 · J01 06:00 · SAUVEGARDE LOCALE",
+          "left": 89.59375,
+          "top": 673.5,
+          "right": 336.53125,
+          "bottom": 687,
+          "width": 246.9375,
+          "height": 13.5,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        }
+      ],
+      "copy": {
+        "top": 0,
+        "bottom": 720,
+        "height": 720,
+        "scrollHeight": 720,
+        "clientHeight": 720,
+        "overflow": "visible"
+      },
+      "root": {
+        "scrollHeight": 737,
+        "clientHeight": 720,
+        "overflow": "hidden auto"
+      },
+      "background": {
+        "complete": true,
+        "width": 1672,
+        "height": 941,
+        "src": "http://127.0.0.1:4176/assets/openai/ui/title/tantalus-frontier-title-background-v61.png"
+      }
+    },
+    {
+      "name": "portrait",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "coarse": true
+      },
+      "boxes": [
+        {
+          "id": "title-start",
+          "text": "APPUYER POUR COMMENCER",
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "visible": false,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-continue",
+          "text": "ENTRER SUR LE TANTALUS",
+          "left": 22,
+          "top": 365.890625,
+          "right": 368,
+          "bottom": 413.890625,
+          "width": 346,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-new",
+          "text": "NOUVELLE PARTIE",
+          "left": 22,
+          "top": 421.890625,
+          "right": 368,
+          "bottom": 469.890625,
+          "width": 346,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-forge",
+          "text": "FRONTIER FORGE",
+          "left": 22,
+          "top": 477.890625,
+          "right": 368,
+          "bottom": 525.890625,
+          "width": 346,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-options",
+          "text": "SYSTÈME",
+          "left": 22,
+          "top": 533.890625,
+          "right": 368,
+          "bottom": 581.890625,
+          "width": 346,
+          "height": 48,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-profile-status",
+          "text": "PROFIL 1 · J01 06:00 · SAUVEGARDE LOCALE",
+          "left": 22,
+          "top": 773.5,
+          "right": 368,
+          "bottom": 787,
+          "width": 346,
+          "height": 13.5,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        }
+      ],
+      "copy": {
+        "top": 0,
+        "bottom": 844,
+        "height": 844,
+        "scrollHeight": 844,
+        "clientHeight": 844,
+        "overflow": "visible"
+      },
+      "root": {
+        "scrollHeight": 861,
+        "clientHeight": 844,
+        "overflow": "hidden auto"
+      },
+      "background": {
+        "complete": true,
+        "width": 1672,
+        "height": 941,
+        "src": "http://127.0.0.1:4176/assets/openai/ui/title/tantalus-frontier-title-background-v61.png"
+      }
+    },
+    {
+      "name": "landscape",
+      "viewport": {
+        "width": 844,
+        "height": 390,
+        "coarse": true
+      },
+      "boxes": [
+        {
+          "id": "title-start",
+          "text": "APPUYER POUR COMMENCER",
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "visible": false,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-continue",
+          "text": "ENTRER SUR LE TANTALUS",
+          "left": 122,
+          "top": 146.328125,
+          "right": 418,
+          "bottom": 190.328125,
+          "width": 296,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-new",
+          "text": "NOUVELLE PARTIE",
+          "left": 426,
+          "top": 146.328125,
+          "right": 722,
+          "bottom": 190.328125,
+          "width": 296,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-forge",
+          "text": "FRONTIER FORGE",
+          "left": 122,
+          "top": 198.328125,
+          "right": 418,
+          "bottom": 242.328125,
+          "width": 296,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-options",
+          "text": "SYSTÈME",
+          "left": 426,
+          "top": 198.328125,
+          "right": 722,
+          "bottom": 242.328125,
+          "width": 296,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-profile-status",
+          "text": "PROFIL 1 · J01 06:00 · SAUVEGARDE LOCALE",
+          "left": 24,
+          "top": 319.5,
+          "right": 820,
+          "bottom": 333,
+          "width": 796,
+          "height": 13.5,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        }
+      ],
+      "copy": {
+        "top": 0,
+        "bottom": 390,
+        "height": 390,
+        "scrollHeight": 390,
+        "clientHeight": 390,
+        "overflow": "visible"
+      },
+      "root": {
+        "scrollHeight": 407,
+        "clientHeight": 390,
+        "overflow": "hidden auto"
+      },
+      "background": {
+        "complete": true,
+        "width": 1672,
+        "height": 941,
+        "src": "http://127.0.0.1:4176/assets/openai/ui/title/tantalus-frontier-title-background-v61.png"
+      }
+    },
+    {
+      "name": "compact-landscape",
+      "viewport": {
+        "width": 480,
+        "height": 320,
+        "coarse": true
+      },
+      "boxes": [
+        {
+          "id": "title-start",
+          "text": "APPUYER POUR COMMENCER",
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "bottom": 0,
+          "width": 0,
+          "height": 0,
+          "visible": false,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-continue",
+          "text": "ENTRER SUR LE TANTALUS",
+          "left": 24,
+          "top": 110.734375,
+          "right": 236,
+          "bottom": 154.734375,
+          "width": 212,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-new",
+          "text": "NOUVELLE PARTIE",
+          "left": 244,
+          "top": 110.734375,
+          "right": 456,
+          "bottom": 154.734375,
+          "width": 212,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-forge",
+          "text": "FRONTIER FORGE",
+          "left": 24,
+          "top": 162.734375,
+          "right": 236,
+          "bottom": 206.734375,
+          "width": 212,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-options",
+          "text": "SYSTÈME",
+          "left": 244,
+          "top": 162.734375,
+          "right": 456,
+          "bottom": 206.734375,
+          "width": 212,
+          "height": 44,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        },
+        {
+          "id": "title-profile-status",
+          "text": "PROFIL 1 · J01 06:00 · SAUVEGARDE LOCALE",
+          "left": 24,
+          "top": 249.5,
+          "right": 456,
+          "bottom": 263,
+          "width": 432,
+          "height": 13.5,
+          "visible": true,
+          "fullyInViewport": true,
+          "hit": true
+        }
+      ],
+      "copy": {
+        "top": 0,
+        "bottom": 320,
+        "height": 320,
+        "scrollHeight": 320,
+        "clientHeight": 320,
+        "overflow": "visible"
+      },
+      "root": {
+        "scrollHeight": 337,
+        "clientHeight": 320,
+        "overflow": "hidden auto"
+      },
+      "background": {
+        "complete": true,
+        "width": 1672,
+        "height": 941,
+        "src": "http://127.0.0.1:4176/assets/openai/ui/title/tantalus-frontier-title-background-v61.png"
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desktop-idle.jpg",
+      "bytes": 26804
+    },
+    {
+      "name": "title-menu-desktop.jpg",
+      "bytes": 83584
+    },
+    {
+      "name": "title-menu-portrait.jpg",
+      "bytes": 27824
+    },
+    {
+      "name": "title-menu-landscape.jpg",
+      "bytes": 30539
+    },
+    {
+      "name": "title-menu-compact-landscape.jpg",
+      "bytes": 17567
+    },
+    {
+      "name": "title-preset-acheron.jpg",
+      "bytes": 92639
+    },
+    {
+      "name": "title-preset-ceto.jpg",
+      "bytes": 99751
+    },
+    {
+      "name": "title-preset-mire-9.jpg",
+      "bytes": 91427
+    },
+    {
+      "name": "mission-game-canvas-focus.jpg",
+      "bytes": 80829
+    },
+    {
+      "name": "briefing-pass-in-front.jpg",
+      "bytes": 133246
+    },
+    {
+      "name": "briefing-landed-on-table.jpg",
+      "bytes": 133918
+    },
+    {
+      "name": "title-corrupt-profile.jpg",
+      "bytes": 32742
+    }
+  ],
+  "issues": [],
+  "initial": {
+    "title": "ALIENS: TANTALUS FRONTIER v79",
+    "titleVisible": true,
+    "titleState": "idle",
+    "menuVisible": false,
+    "activeId": "title-start",
+    "activeTag": "BUTTON",
+    "activeText": "APPUYER POUR COMMENCER",
+    "focusInTitle": true,
+    "view": "hub",
+    "appHidden": true,
+    "confirmation": "false",
+    "save": {
+      "profile": 1,
+      "playerName": "Mara Vega",
+      "kills": 0,
+      "playSeconds": 0,
+      "scene": "title",
+      "music": 0.45,
+      "currentOperation": null
+    },
+    "game": {
+      "running": false,
+      "paused": false
+    },
+    "hubRunning": false
+  },
+  "errors": []
+}

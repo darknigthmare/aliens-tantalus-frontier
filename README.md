@@ -1,14 +1,14 @@
 # ALIENS: TANTALUS FRONTIER
 
-## Travail courant V78
+## Travail courant V79
 
-Reprise fondée sur les26conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict reste à0conversation intégralement terminée,15partielles et11manquantes : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
+Reprise fondée sur les 26 conversations du projet ChatGPT « Aliens tantalus project ». Le suivi strict est désormais de **0 conversation intégralement terminée, 16 partielles et 10 manquantes** : [matrice de suivi](docs/references/V76_CHATGPT_PROJECT_GAP_MATRIX.md).
 
-V78 sécurise réellement les trois profils et leur reprise : dernier profil restauré, imports structurels, transactions atomiques, protection des octets corrompus, export brut de récupération et confirmation avant toute nouvelle chronologie. L’accueil dispose maintenant d’une navigation clavier/manette standard complète, d’un layout mobile vérifié et d’un focus continu titre → hub ou insertion → mission. La table de briefing laisse passer les acteurs devant elle tout en restant une plateforme accessible par saut. Les preuves, limites et publication sont consignées dans [validation V78](docs/VALIDATION_V78.md).
+V79 livre une première tranche réelle de l’accueil spatial modulaire : couches bitmap indépendantes, sélection déterministe du monde, trois presets dédiés (Acheron, Ceto et Mire-9), modes Full/Reduced/Static, repli procédural par couche et ultime repli vers l’accueil V61. Le registre accepte exactement **18 assets OpenAI intégrés sur 53 slots planifiés** ; leurs dimensions, alpha, perspective, hash runtime et reçus source sont audités. Les contrats et limites vérifiés sont consignés dans [la validation V79](docs/VALIDATION_V79.md) et [le contrat runtime V79](docs/V79_TITLE_SCENE_RUNTIME.md).
 
-Le fond d’accueil reste toutefois un bitmap composite unique : le contrat distinct des vingt planètes/presets modulaires est toujours **MISSING** et appartient au lot V79. V78 ne produit aucun nouveau sprite ni asset ImageGen. Les fichiers audio définitifs restent absents (0/8), et 559 profils ennemis restent inachevés.
+Le contrat de vingt presets n’est donc pas terminé : **35 slots restent manquants**, dont 17 planètes dédiées, et seuls 3 presets de production sont disponibles. Cette tranche V79 est **PARTIAL**, pas une déclaration de jeu commercial complet ; les banques audio finales restent absentes (0/8) et les autres conversations conservent leurs écarts propres.
 
-Les sections V74/V71 ci-dessous sont historiques et ne remplacent pas cet audit plus strict.
+V78 reste la tranche historique qui a renforcé la sauvegarde/reprise, la navigation de l’accueil et la table de briefing : [validation V78](docs/VALIDATION_V78.md). Les sections V74/V71 ci-dessous sont elles aussi historiques et ne remplacent pas l’audit strict courant.
 
 ## Travail courant V74
 

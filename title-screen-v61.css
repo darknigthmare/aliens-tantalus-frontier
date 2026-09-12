@@ -8,12 +8,18 @@
   position: fixed;
   z-index: 90;
   inset: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: auto;
+  scrollbar-width: none;
   overscroll-behavior: contain;
   background: #020403;
   color: #eef4ef;
   font-family: var(--sans);
+}
+
+.title-screen::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .title-screen[hidden],

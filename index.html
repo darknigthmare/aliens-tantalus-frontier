@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v77 — rechargement tactique, commandes coop et audio optionnel réel. Animations dédiées et banques audio finales encore en cours.">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v79 — scène titre orbitale modulaire, profils protégés et hub jouable. Production artistique et contenu ennemi encore en cours.">
   <meta name="application-name" content="Tantalus Frontier">
   <meta name="apple-mobile-web-app-title" content="Tantalus">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,22 +17,24 @@
   <link rel="stylesheet" href="/hub-level.css">
   <link rel="stylesheet" href="/runtime-level.css">
   <link rel="stylesheet" href="/title-screen-v61.css">
+  <link rel="stylesheet" href="/title-scene-v79.css">
   <link rel="stylesheet" href="/hub-stations-v61.css">
   <link rel="stylesheet" href="/catalog-v62.css">
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
-  <title>ALIENS: TANTALUS FRONTIER v78</title>
+  <title>ALIENS: TANTALUS FRONTIER v79</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v77</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v79</p>
     <div class="boot-track"><span></span></div>
   </div>
 
   <section id="title-screen" class="title-screen" data-state="idle" aria-label="Écran titre" hidden>
-    <img class="title-background" src="/assets/openai/ui/title/tantalus-frontier-title-background-v61.png" alt="L’USS Tantalus survole une planète frontière ravagée">
+    <img id="title-background-fallback-v61" class="title-background" src="/assets/openai/ui/title/tantalus-frontier-title-background-v61.png" alt="L’USS Tantalus survole une planète frontière ravagée">
+    <div id="title-scene-v79" class="title-scene-v79" data-status="pending" data-active="false" aria-hidden="true" hidden></div>
     <div class="title-screen-copy">
       <p class="title-franchise">ALIENS</p>
       <p class="title-project">TANTALUS FRONTIER</p>
@@ -47,7 +49,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 78.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 79.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -73,7 +75,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v78.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v79.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">

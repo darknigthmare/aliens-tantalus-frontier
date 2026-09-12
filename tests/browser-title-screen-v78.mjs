@@ -182,7 +182,7 @@ try {
     release: document.querySelector('meta[name="atf-release"]')?.content || document.title
   }))()`);
   check(report.checks.pageHealth.bodyTextLength > 100 && !report.checks.pageHealth.errorOverlay, 'page-health', report.checks.pageHealth);
-  check(/v78/i.test(report.initial.title), 'wrong-browser-release-title', report.initial.title);
+  check(/v79/i.test(report.initial.title), 'wrong-browser-release-title', report.initial.title);
   await capture('desktop-idle.jpg');
   for (const viewport of [{name:'desktop',width:1280,height:720,mobile:false},{name:'portrait',width:390,height:844,mobile:true},{name:'landscape',width:844,height:390,mobile:true},{name:'compact-landscape',width:480,height:320,mobile:true}]) {
     await cdp('Emulation.setDeviceMetricsOverride', {width:viewport.width,height:viewport.height,screenWidth:viewport.width,screenHeight:viewport.height,mobile:viewport.mobile,deviceScaleFactor:1});
@@ -202,6 +202,45 @@ try {
   }
   await cdp('Emulation.setDeviceMetricsOverride',{width:1280,height:720,mobile:false,deviceScaleFactor:1});
   await cdp('Emulation.setTouchEmulationEnabled',{enabled:false});
+  await returnTitle(); await openMenu();
+  report.checks.titleScenePresets = [];
+  for (const preset of [
+    { name:'acheron', worldId:'world-01-acheron-lv-426', presetId:'frontier-night', imageCount:14, proceduralFallbackCount:2 },
+    { name:'ceto', worldId:'world-10-ceto', presetId:'storm-terminator', imageCount:13, proceduralFallbackCount:3 },
+    { name:'mire-9', worldId:'world-26-mire-9', presetId:'ember-quarantine', imageCount:13, proceduralFallbackCount:3 }
+  ]) {
+    await evaluate(`(() => {
+      const save=structuredClone(__ATF_V51__.saveSystem.data);
+      save.worldId=${JSON.stringify(preset.worldId)};
+      save.presentation={...(save.presentation||{}),titleScene:{presetId:null,motionMode:'full',seed:'qa-v79'}};
+      __ATF_V61__.titleScreen.scene.show(save);
+    })()`);
+    await until(`(() => {
+      const root=document.querySelector('#title-scene-v79');
+      return root?.dataset.preset===${JSON.stringify(preset.presetId)}
+        && !root.querySelector('[data-renderer="image"][data-asset-status="loading"]');
+    })()`, 'V79 preset assets '+preset.name);
+    await evaluate('new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))');
+    await wait(120);
+    const scene=await evaluate(`(() => {
+      const root=document.querySelector('#title-scene-v79');
+      const images=[...root.querySelectorAll('[data-renderer="image"]')];
+      const procedural=[...root.querySelectorAll('[data-renderer="procedural"]')];
+      return {preset:root.dataset.preset,mode:root.dataset.mode,degraded:root.dataset.degraded,
+        imageCount:images.length,readyCount:images.filter(layer=>layer.dataset.assetStatus==='ready'&&!layer.hidden).length,
+        missingCount:images.filter(layer=>layer.dataset.assetStatus==='missing').length,
+        runtimeIds:images.map(layer=>layer.dataset.runtimeId),
+        sources:images.map(layer=>layer.querySelector('img')?.getAttribute('src')),
+        proceduralFallbacks:procedural.filter(layer=>!layer.hidden).map(layer=>layer.dataset.layerId),
+        fallbackVisible:!document.querySelector('#title-background-fallback-v61').hidden};
+    })()`);
+    report.checks.titleScenePresets.push({name:preset.name,...scene});
+    check(scene.preset===preset.presetId&&scene.mode==='full','title-scene-preset-'+preset.name,scene);
+    check(scene.imageCount===preset.imageCount&&scene.readyCount===preset.imageCount&&scene.missingCount===0,'title-scene-assets-'+preset.name,scene);
+    check(scene.proceduralFallbacks.length===preset.proceduralFallbackCount&&!scene.fallbackVisible&&scene.degraded==='false','title-scene-fallback-'+preset.name,scene);
+    check(new Set(scene.runtimeIds).size===scene.imageCount&&scene.sources.every(src=>src?.startsWith('/assets/openai/ui/title/v79/')&&!src.includes('comms-relay')),'title-scene-contract-'+preset.name,scene);
+    await capture('title-preset-'+preset.name+'.jpg');
+  }
   await returnTitle(); await openMenu();
   await until('document.activeElement?.id === "title-continue"', 'menu focus');
   report.checks.directionalKeys = [];

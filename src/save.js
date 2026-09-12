@@ -37,6 +37,7 @@ import {
 } from './hub-annex-services-v71.js';
 import { getVehicleDeploymentGateV60, resolveReadyVehicleIdV60 } from './vehicle-deployment-gates-v60.js';
 import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV78, assertSaveProfileIdV78, inspectSaveSlotV78, parseImportedSaveV78 } from './save-profile-v78.js';
+import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -184,6 +185,7 @@ export function createDefaultSave(profile = 1) {
     campaignId: null,
     levelSeedId: 'level-001',
     difficulty: 'standard',
+    presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
       name: 'Mara Vega',
       classId: 'commander',
@@ -1641,6 +1643,9 @@ export function migrateSave(input, profile = 1) {
     if (typeof source[key] === 'string') migrated[key] = source[key].slice(0, 120);
   }
   if (typeof source.campaignId === 'string' || source.campaignId === null) migrated.campaignId = source.campaignId;
+  migrated.presentation = {
+    titleScene: sanitizeTitleScenePresentationV79(source.presentation?.titleScene)
+  };
 
   const importedCrew = Array.isArray(source.crew) ? source.crew.filter(isRecord) : [];
   migrated.crew = base.crew.map((fallback, index) => {

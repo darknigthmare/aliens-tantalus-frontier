@@ -10,10 +10,11 @@ const START_KEYS = new Set(['Enter', 'Space', 'NumpadEnter']);
 const MENU_KEYS = new Set([...START_KEYS, 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Tab', 'Escape']);
 
 export class TitleScreenController {
-  constructor({ root, app, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
+  constructor({ root, app, scene = null, getSave, getRecoveryStatus = () => null, onUnlock, onContinue, onNewTimeline, onForge, onOptions }) {
     if (!root || !app) throw new Error('Surface écran titre V61 absente.');
     this.root = root;
     this.app = app;
+    this.scene = scene;
     this.getSave = getSave;
     this.getRecoveryStatus = getRecoveryStatus;
     this.onUnlock = onUnlock;
@@ -55,6 +56,7 @@ export class TitleScreenController {
     }
     listen(this.newButton, 'blur', () => this.cancelNewTimelineConfirmation());
     listen(globalThis, 'keydown', (event) => this.handleKeydown(event));
+    listen(globalThis, 'resize', () => this.resetHorizontalScroll());
     listen(globalThis, 'blur', () => this.suspendInput());
     listen(document, 'visibilitychange', () => { if (document.hidden) this.suspendInput(); });
   }
@@ -67,6 +69,11 @@ export class TitleScreenController {
   focusButton(button) {
     button?.focus({ preventScroll: true });
     button?.scrollIntoView?.({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+    this.resetHorizontalScroll();
+  }
+
+  resetHorizontalScroll() {
+    if (this.root) this.root.scrollLeft = 0;
   }
 
   scheduleFocus(button, state) {
@@ -104,6 +111,7 @@ export class TitleScreenController {
     const recovery = this.getRecoveryStatus();
     this.cancelNewTimelineConfirmation();
     this.root.hidden = false;
+    this.resetHorizontalScroll();
     this.app.hidden = true;
     this.root.dataset.state = 'idle';
     this.state = 'idle';
@@ -124,6 +132,7 @@ export class TitleScreenController {
     if (recovery) this.profileStatus.textContent = `PROFIL ${recovery.profile} · RÉCUPÉRATION REQUISE`;
     this.liveStatus.textContent = 'Écran titre. Appuyez pour ouvrir le menu principal.';
     document.documentElement.classList.add('title-mode');
+    this.scene?.show?.(save);
     this.scheduleFocus(this.startButton, 'idle');
     this.startGamepadPolling();
   }
@@ -135,6 +144,7 @@ export class TitleScreenController {
     this.focusFrame = 0;
     this.root.hidden = true;
     this.app.hidden = false;
+    this.scene?.hide?.();
     document.documentElement.classList.remove('title-mode');
     this.state = 'closed';
     this.root.dataset.state = 'closed';
@@ -300,6 +310,7 @@ export class TitleScreenController {
   dispose() {
     this.hide();
     this.listeners.splice(0).forEach((remove) => remove());
+    this.scene?.dispose?.();
   }
 
   getSnapshot() {
@@ -309,7 +320,8 @@ export class TitleScreenController {
       state: this.state,
       menuVisible: !this.menu.hidden,
       forgeAvailable: Boolean(this.forgeButton),
-      continueTarget: resolveTitleContinueTarget(this.getSave())
+      continueTarget: resolveTitleContinueTarget(this.getSave()),
+      scene: this.scene?.getSnapshot?.() || null
     };
   }
 }

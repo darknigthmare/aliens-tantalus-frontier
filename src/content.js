@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '78.0.0',
-  subtitle: 'Accueil accessible, sauvegardes protégées et table de briefing traversable',
+  version: '79.0.0',
+  subtitle: 'Scène titre modulaire, trois orbites et dix-huit calques bitmap validés',
   sourceVersion: '51.0.0'
 });
