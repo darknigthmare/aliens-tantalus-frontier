@@ -1,4 +1,6 @@
 import { GameEngine } from './game-production-runtime.js';
+import { resolveCombatAimV83, readKeyboardCombatAimV83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
 import { BIOFORGE_ASSETS_V80 } from './bioforge-assets-v80.js';
 import {
   BIOFORGE_MAX_CONCURRENT_V80,
@@ -544,7 +546,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     update(delta) {
-      if (!this.running || this.paused) return;
+      this.gamepadInputV77?.poll();
+      if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65) return;
       const dt = clamp(delta, 0, MAX_DELTA);
       this.animationTime += dt;
       this.mission.elapsed += dt;
@@ -563,9 +566,12 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     updateBioforgePlayerV80(delta) {
       const actor = this.player;
       if (!actor?.alive) return;
-      const left = this.keys?.has?.('KeyA') || this.keys?.has?.('ArrowLeft');
-      const right = this.keys?.has?.('KeyD') || this.keys?.has?.('ArrowRight');
-      const jump = this.keys?.has?.('Space') || this.queueJump > 0;
+      const locked = this.keys?.has?.('ShiftLeft');
+      if (locked) actor.vx = 0;
+      const left = !locked && (this.keys?.has?.('KeyA') || this.keys?.has?.('ArrowLeft'));
+      const right = !locked && (this.keys?.has?.('KeyD') || this.keys?.has?.('ArrowRight'));
+      const jump = this.keys?.has?.('Space') || this.queueJump > 0 || actor.jumpBuffer > 0;
+      actor.jumpBuffer = Math.max(0, Number(actor.jumpBuffer || 0) - delta);
       const targetVx = (Number(right) - Number(left)) * PLAYER_SPEED;
       actor.vx += (targetVx - actor.vx) * Math.min(1, delta * (actor.grounded ? 16 : 8));
       if (actor.vx) actor.facing = Math.sign(actor.vx);
@@ -573,6 +579,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         actor.vy = -PLAYER_JUMP_SPEED;
         actor.grounded = false;
         this.queueJump = 0;
+        actor.jumpBuffer = 0;
       }
       actor.vy += GRAVITY * delta;
       const previous = { x: actor.x, y: actor.y, bottom: actor.y + actor.h };
@@ -619,19 +626,26 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     fire(actor = this.player) {
-      if (!this.running || this.paused || this.bioforgeRootV80.activeSession?.phase !== 'combat'
+      if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.bioforgeRootV80.activeSession?.phase !== 'combat'
         || !actor?.alive || Number(actor.fireClock || 0) > 0 || Number(actor.ammo || 0) <= 0) return false;
       actor.fireClock = 0.13;
       actor.actionClock = 0.22;
       actor.ammo -= 1;
       actor.shots = Number(actor.shots || 0) + 1;
+      const aim = this.resolvePlayerCombatAimV83?.(actor) || resolveCombatAimV83({ ...readKeyboardCombatAimV83(this.keys), facing: actor.facing });
+      actor.facing = aim.facing;
+      const muzzle = resolveCombatMuzzleV83(actor, aim);
+      const shot = buildCombatShotVectorsV83(aim)[0];
       this.bullets.push({
         id: `bioforge-shot-${actor.shots}`,
-        x: actor.x + actor.w / 2 + actor.facing * 24,
-        y: actor.y + 37,
+        x: muzzle.x,
+        y: muzzle.y,
         w: 18,
         h: 5,
-        vx: actor.facing * 890,
+        vx: shot.vx,
+        vy: shot.vy,
+        angleRadians: shot.angleRadians,
+        aimExplicitV83: aim.active,
         damage: 28,
         owner: actor,
         life: 1.4,
@@ -646,8 +660,25 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     updateBioforgeCombatV80(delta) {
       const bounds = this.bioforgeLevelV80.arenaBounds;
       for (const bullet of this.bullets) {
-        bullet.x += bullet.vx * delta;
-        bullet.life -= delta;
+        const duration = Math.min(Math.max(0, delta), Math.max(0, bullet.life));
+        const step = { x: bullet.vx * duration, y: (bullet.vy || 0) * duration };
+        const boundaries = [
+          { x: bounds.x - 32, y: bounds.y - 32, w: 32, h: bounds.h + 64 },
+          { x: bounds.x + bounds.w, y: bounds.y - 32, w: 32, h: bounds.h + 64 },
+          { x: bounds.x, y: bounds.y - 32, w: bounds.w, h: 32 },
+          { x: bounds.x, y: bounds.y + bounds.h, w: bounds.w, h: 32 }
+        ];
+        const impact = collectProjectileCollisionsV83(bullet, step, { walls: boundaries, platforms: this.platforms, enemies: this.enemies })[0];
+        bullet.x = impact?.x ?? bullet.x + step.x;
+        bullet.y = impact?.y ?? bullet.y + step.y;
+        bullet.life -= Math.max(0, delta);
+        if (impact) {
+          bullet.hit = true;
+          if (impact.kind === 'enemy') {
+            impact.target.health -= bullet.damage;
+            if (impact.target.health <= 0) this.killBioforgeSpecimenV80(impact.target.id, 'combat');
+          }
+        }
       }
       for (const enemy of this.enemies) {
         if (!enemy.alive) continue;
@@ -670,15 +701,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
             return;
           }
         }
-        for (const bullet of this.bullets) {
-          if (bullet.hit || !overlap(bullet, enemy)) continue;
-          bullet.hit = true;
-          enemy.health -= bullet.damage;
-          if (enemy.health <= 0) this.killBioforgeSpecimenV80(enemy.id, 'combat');
-        }
       }
       this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0
-        && bullet.x >= bounds.x && bullet.x + bullet.w <= bounds.x + bounds.w);
+        && bullet.x >= bounds.x && bullet.x + bullet.w <= bounds.x + bounds.w
+        && bullet.y >= bounds.y && bullet.y + bullet.h <= bounds.y + bounds.h);
       if (this.bioforgeRootV80.activeSession?.phase === 'combat' && this.enemies.every((enemy) => !enemy.alive)) {
         this.finishBioforgeV80('cleared', 'batch-cleared');
       }
@@ -826,7 +852,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     getBioforgeIsolationReportV80() {
       const escapedEnemies = this.enemies.filter((enemy) => enemy.alive && !isInsideBioforgeArenaV80(enemy, this.bioforgeLevelV80));
       const arena = this.bioforgeLevelV80.arenaBounds;
-      const escapedProjectiles = [...this.bullets, ...this.hostileProjectiles].filter((entry) => entry.x < arena.x || entry.x + entry.w > arena.x + arena.w);
+      const escapedProjectiles = [...this.bullets, ...this.hostileProjectiles].filter((entry) =>
+        ![entry.x, entry.y, entry.w, entry.h].every(Number.isFinite)
+        || entry.x < arena.x || entry.x + entry.w > arena.x + arena.w
+        || entry.y < arena.y || entry.y + entry.h > arena.y + arena.h);
       return Object.freeze({
         secure: escapedEnemies.length === 0 && escapedProjectiles.length === 0,
         escapedEnemyIds: Object.freeze(escapedEnemies.map(({ id }) => id)),
@@ -975,7 +1004,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         ctx.shadowColor = 'rgba(255, 224, 133, .82)';
         ctx.shadowBlur = 7;
         ctx.fillStyle = '#f5d87a';
-        ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+        ctx.translate(bullet.x + bullet.w / 2, bullet.y + bullet.h / 2);
+        ctx.rotate(Math.atan2(bullet.vy || 0, bullet.vx || 0));
+        ctx.fillRect(-bullet.w / 2, -bullet.h / 2, bullet.w, bullet.h);
         ctx.restore();
       }
     }

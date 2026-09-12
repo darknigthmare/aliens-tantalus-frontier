@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { RELEASE } from '../src/content.js';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -30,7 +31,7 @@ await mkdir(outputDir, { recursive: true });
 
 const report = {
   ok: false,
-  schema: 82,
+  schema: 83,
   target: targetKind,
   baseUrl: baseUrl.href,
   startedAt: new Date().toISOString(),
@@ -605,8 +606,8 @@ try {
   assert.equal(report.checks.pageHealth.overlay, false);
   assert.equal(report.checks.pageHealth.titleVisible, true);
   assert.equal(report.checks.pageHealth.startFocus, 'title-start');
-  assert.match(report.checks.pageHealth.title, /v82/iu);
-  assert.match(report.checks.pageHealth.release || '', /^82\./u);
+  assert.ok(report.checks.pageHealth.title.endsWith('v' + RELEASE.version.split('.')[0]));
+  assert.equal(report.checks.pageHealth.release, RELEASE.version);
   report.checks.titleLayersReady = await untilPage(async () => {
     const root = document.querySelector('#title-scene-v79');
     const scene = globalThis.__ATF_V61__?.titleScreen?.scene;

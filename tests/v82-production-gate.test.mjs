@@ -11,6 +11,7 @@ import {
   RUNTIME_ASSET_PATHS_V82, REPORT_PATHS_V82, classifyVerificationTargetV82, verifyProductionV82
 } from '../scripts/verify-production-v82.mjs';
 
+const RELEASE_FIXTURE_V82 = Object.freeze({ ...RELEASE, version: '82.0.0' });
 const FULL_COMMIT = '1234567890abcdef1234567890abcdef12345678';
 
 async function fixture() {
@@ -41,7 +42,7 @@ async function fixture() {
     const entry = remote.get(new URL(url).pathname) || { status: 404, bytes: Buffer.from('missing'), type: 'text/plain' };
     return new Response(entry.bytes, { status: entry.status, headers: { 'content-type': entry.type } });
   };
-  return { remote, calls, options: { commit: '1234567', base: 'https://fixture.invalid', fetchImpl, spawn, reportPath: null } };
+  return { remote, calls, options: { release: RELEASE_FIXTURE_V82, commit: '1234567', base: 'https://fixture.invalid', fetchImpl, spawn, reportPath: null } };
 }
 
 test('V82 keeps every V81 runtime gate and adds title plus independent wall and ceiling', () => {

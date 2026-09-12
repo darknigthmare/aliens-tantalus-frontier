@@ -1,0 +1,13 @@
+{
+  "schema": 83,
+  "status": "blocked-before-generation",
+  "generatedAssets": 0,
+  "provider": "OpenAI built-in imagegen",
+  "reference": "assets/openai/sprites/frames/v66/batch-002/enemy-011-lurker/references/square-enix-lurker-official.jpg",
+  "referenceInspected": true,
+  "referenceInspectionMethod": "read-only local bytes rendered after view_image sandbox helper failure",
+  "prompt": "Use case: identity-preserve. Asset type: 2D side-scrolling game enemy sprite sheet. Input image 1 is an anatomical reference of the Aliens Colonial Marines Lurker, NOT a background or composition to reproduce. Generate one 4-column by 2-row sprite sheet with eight sequential frames of this SAME Lurker preparing a low pounce, springing forward, landing, then recovering. Strict orthographic side profile facing RIGHT, genuinely transparent RGBA background. Match the reference's smooth long curved black dome, thin ribbed torso, four rear tubes, long clawed arms, two digitigrade hind legs, single segmented long tail. Dark gunmetal and subtle bronze highlights, finely shaded crisp pixel-game art. Preserve exact character anatomy and proportions in all eight cells, no redesign, no extra limbs, no horns, no wings. Every cell equal size; all eight poses fully isolated with generous 12% transparent cell margins including entire tail. Stable pelvis horizontal anchor, feet at identical ground line in grounded frames 1,2,6,7,8; airborne frames 3,4,5 lift anatomically, not whole-character rescale. Sequence left-to-right then next row: anticipation crouch; compressed launch; leaving ground; airborne pounce; descending claws forward; landing at initial floor baseline; compressed recovery on floor; return to initial pose on same baseline. No labels, captions, text, watermark, grid lines, floor plane, scenery, shadow beneath feet, decorative panels or smeared motion trails. One consistent scale and camera throughout.",
+  "error": "unable to read referenced image: windows sandbox failed: helper_unknown_error: apply deny-read ACLs",
+  "runtimeIntegrated": false,
+  "canonExact": false
+}

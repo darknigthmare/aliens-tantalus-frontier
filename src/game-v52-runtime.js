@@ -1,3 +1,4 @@
+import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import {
   CREW_SPRITE_IDS,
   SPRITE_GRID,
@@ -1621,13 +1622,18 @@ export function withV52MissionRuntime(BaseEngine) {
       member.actions += 1;
       target.alert = true;
       const explosive = member.specialty === 'demolition';
+      const pivot = { x: member.x + member.w / 2, y: member.y + 36 };
+      const aim = { x: target.x + target.w / 2 - pivot.x, y: target.y + target.h / 2 - pivot.y };
+      const muzzle = resolveCombatMuzzleV83(member, aim, { pivotX: pivot.x, pivotY: pivot.y, barrelLength: 22 });
+      const shot = buildCombatShotVectorsV83(aim, { speed: explosive ? 700 : 850 })[0];
       const bullet = {
-        x: member.x + member.w / 2 + direction * 22,
-        y: member.y + 36,
+        x: muzzle.x,
+        y: muzzle.y,
         w: explosive ? 16 : 12,
         h: explosive ? 8 : 4,
-        vx: direction * (explosive ? 700 : 850),
-        vy: 0,
+        vx: shot.vx,
+        vy: shot.vy,
+        angleRadians: shot.angleRadians,
         damage: member.profile.damage,
         owner: member,
         kind: `squad-${member.specialty}`,

@@ -44,7 +44,7 @@ export function createBuildAssetFilter(projectRoot, {
     // Production references also contain source-contact sheets, anchors and
     // full generation prompts. Reject their root before cp descends into it;
     // public provenance/version/validation reports outside this scope remain.
-    if (/^docs\/references\/(?:V(?:66|73|74|75|76|77|78|79|80|81|82)_|v(?:66|73|74|75|76|77|78|79|80|81|82)-)/.test(sourcePath)) return false;
+    if (/^docs\/references\/(?:V(?:66|73|74|75|76|77|78|79|80|81|82|83)_|v(?:66|73|74|75|76|77|78|79|80|81|82|83)-)/.test(sourcePath)) return false;
     if (sourcePath.startsWith('assets/openai/sprites/normalized/enemy-profiles-v65/')) {
       return readyV65Paths.has(sourcePath);
     }

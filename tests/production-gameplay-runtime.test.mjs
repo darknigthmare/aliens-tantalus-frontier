@@ -337,7 +337,9 @@ test('accessibility settings make aim assist effective, reduced motion suppress 
   const target = assisted.enemies.find((enemy) => !enemy.isBoss);
   for (const enemy of assisted.enemies) enemy.alive = enemy === target;
   Object.assign(assisted.player, { x: 260, y: 820, facing: 1, fireClock: 0, reloading: false });
-  Object.assign(target, { x: 720, y: 590, spawnX: 720 });
+  // V83 accessibility assist is a bounded cone, not an off-screen auto-target.
+  Object.assign(target, { x: 720, y: 812 - target.h / 2, spawnX: 720 });
+  assisted.walls = []; assisted.doors = []; assisted.platforms = [];
   assert.equal(assisted.fire(assisted.player), true);
   const assistedBullet = assisted.bullets.at(-1);
   assert.equal(assistedBullet.aimAssistTargetId, target.id);

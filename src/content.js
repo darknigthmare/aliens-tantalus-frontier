@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '82.0.0',
-  subtitle: 'Stand M41A modulaire, accueil fiabilisé et BIOFORGE jouable',
+  version: '83.0.0',
+  subtitle: 'Visée huit directions, collisions continues et BIOFORGE jouable',
   sourceVersion: '51.0.0'
 });
