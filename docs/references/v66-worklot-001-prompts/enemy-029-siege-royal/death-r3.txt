@@ -1,5 +1,0 @@
-EDIT ONLY THE ATTACHED SIEGE ROYAL DEATH-R2 SHEET. Preserve exact pixel-scale, identity, anatomy, palette, eight chronological poses, ground baselines and uniform #FF00FF background. Do not shrink, enlarge, redraw, rotate, mirror or retime anything.
-
-Make one rigid translation only: in the TOP ROW, FOURTH CELL, move that complete fourth collapsing pose approximately 70 pixels to the right within its own cell, including tail, body, crest, hands and feet together. Its rear tail currently touches the divider at x=1330; after translation leave at least 55 pixels of pure #FF00FF between the tail and the fourth cell's left edge, while keeping the front hand at least 55 pixels inside the right canvas edge. Do not move or change the other seven poses. Exact 1774 x 887 canvas, invisible 4-by-2 grid, eight distinct poses.
-
-Restore the old pixels to perfectly uniform opaque #FF00FF. No shadow, floor, gradient, halo, glow, transparency, checkerboard, grid, text, scenery, props, blood or effects. Rigid cell-centering edit only.

@@ -1,3 +1,6 @@
+import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
+import { crewMovementV85 } from './crew-runtime-v85.js';
 import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
 import {
@@ -347,7 +350,9 @@ export class GameEngine {
     globalThis.document?.addEventListener?.('visibilitychange', () => {
       if (globalThis.document.hidden) this.suspendForFocusLoss();
     });
-    this.canvas.addEventListener('pointerdown', () => { this.audio?.unlock(); this.fire(this.player); });
+    bindCombatPointerAimV83(this.canvas, this, () => {
+      this.audio?.unlock(); this.fire(this.player);
+    });
   }
 
   canRouteGameplayKey(event) {
@@ -364,6 +369,9 @@ export class GameEngine {
       if (!actor) continue;
       actor.jumpBuffer = 0;
       actor.vx = 0;
+      actor.gamepadAimV83 = null;
+      actor.pointerAimV83 = null;
+      actor.combatAimV83 = null;
     }
   }
 
@@ -742,6 +750,7 @@ export class GameEngine {
 
   updatePlayer(player, delta, controls) {
     if (!player) return;
+    const individualV85 = crewMovementV85(player);
     player.jumpBuffer = Math.max(0, player.jumpBuffer - delta);
     player.fireClock = Math.max(0, player.fireClock - delta);
     player.actionClock = Math.max(0, player.actionClock - delta);
@@ -758,10 +767,12 @@ export class GameEngine {
       return;
     }
     const stunned = player.hazardKind === 'electrical' && player.hazardClock > 0;
-    const left = !stunned && (this.keys.has(controls.left) || (!player.coop && this.keys.has('ArrowLeft')));
-    const right = !stunned && (this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight')));
-    const up = !stunned && (this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp')));
-    const down = !stunned && (this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown')));
+    const aimLocked = this.keys.has(player.coop ? 'ShiftRight' : 'ShiftLeft');
+    if (aimLocked) player.vx = 0;
+    const left = !stunned && !aimLocked && (this.keys.has(controls.left) || (!player.coop && this.keys.has('ArrowLeft')));
+    const right = !stunned && !aimLocked && (this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight')));
+    const up = !stunned && !aimLocked && (this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp')));
+    const down = !stunned && !aimLocked && (this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown')));
     const ladder = this.nearestLadder(player);
     if (stunned) player.climbing = false;
     if (ladder && (up || down)) player.climbing = true;
@@ -771,9 +782,9 @@ export class GameEngine {
     const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
     const water = (this.hazards || []).find((hazard) => hazard.active && hazard.kind === 'flood' && overlap(feet, hazard));
     const waterScale = water ? clamp(Number(water.slow) || 0.45, 0.05, 1) : 1;
-    const speed = (player.crouching ? 105 : 245) * grappleScale * waterScale;
+    const speed = (player.crouching ? 105 : 245) * grappleScale * waterScale * individualV85.speed;
     const targetVelocity = (Number(right) - Number(left)) * speed;
-    const response = player.grounded ? 16 : 8;
+    const response = (player.grounded ? 16 : 8) * individualV85.acceleration;
     const previousVelocity = player.vx;
     const blend = water ? -Math.expm1(-response * delta) : Math.min(1, delta * response);
     player.vx += (targetVelocity - player.vx) * blend;
@@ -785,20 +796,20 @@ export class GameEngine {
     if (!left && !right && Math.abs(player.vx) < 0.5) player.vx = 0;
     if (player.vx) player.facing = Math.sign(player.vx);
     if (player.climbing && ladder) {
-      player.x += (ladder.x - player.w / 2 - player.x) * Math.min(1, delta * 12);
-      player.vy = (Number(down) - Number(up)) * 185;
+      if (!aimLocked) player.x += (ladder.x - player.w / 2 - player.x) * Math.min(1, delta * 12);
+      player.vy = (Number(down) - Number(up)) * 185 * individualV85.climb;
       player.y = clamp(player.y + player.vy * delta, ladder.top - player.h + 12, ladder.bottom - player.h);
       player.grounded = false;
       if (player.jumpBuffer > 0 || this.keys.has(controls.jump)) {
         player.climbing = false;
-        player.vy = -470;
+        player.vy = -470 * individualV85.jump;
         player.jumpBuffer = 0;
       }
     } else {
       if (player.grounded) player.coyoteTime = 0.1;
       else player.coyoteTime = Math.max(0, player.coyoteTime - delta);
       if (!stunned && (player.jumpBuffer > 0 || this.keys.has(controls.jump)) && player.coyoteTime > 0) {
-        player.vy = -665;
+        player.vy = -665 * individualV85.jump;
         player.grounded = false;
         player.coyoteTime = 0;
         player.jumpBuffer = 0;
@@ -1259,9 +1270,20 @@ export class GameEngine {
     return true;
   }
 
+  resolvePlayerCombatAimV83(player = this.player) {
+    refreshCombatPointerAimV83(this.canvas, this);
+    const keyboard = readKeyboardCombatAimV83(this.keys, player === this.coop ? COMBAT_AIM_KEY_BINDINGS_V83.coop : COMBAT_AIM_KEY_BINDINGS_V83.player);
+    const input = [player?.pointerAimV83, player?.gamepadAimV83].find((entry) => entry && Math.hypot(entry.x || 0, entry.y || 0) > 0.25) || keyboard;
+    const aim = resolveCombatAimV83({ ...input, facing: player?.facing });
+    if (player) { player.combatAimV83 = aim; player.facing = aim.facing; }
+    return aim;
+  }
+
   fire(player) {
     if (!player?.alive || player.fireClock > 0 || player.reloading || this.paused || this.mission?.state !== 'active') return false;
-    if (this.performContextualMelee(player)) return true;
+    const aim = this.resolvePlayerCombatAimV83(player);
+    // An explicit direction is a shot request, not permission to turn toward a nearby melee target.
+    if (!aim.active && this.performContextualMelee(player)) return true;
     const profile = this.weaponProfile(player);
     if (profile.ammo <= 0) { this.reload(player); return false; }
     player.fireClock = profile.interval;
@@ -1270,12 +1292,14 @@ export class GameEngine {
     if (profile.mode === 'apc-turret') this.vehicle.turretAmmo -= 1;
     else player.ammo -= 1;
     const reloadBonus = profile.mode === 'apc-turret' ? 1 : consumeTacticalReloadBonusV77(player, this.reloadWeaponV77(player));
-    const origin = profile.mode === 'apc-turret'
-      ? { x: this.vehicle.x + this.vehicle.w / 2 + player.facing * 62, y: this.vehicle.y + 28 }
-      : { x: player.x + player.w / 2 + player.facing * 24, y: player.y + (player.crouching ? 51 : 37) };
+    const mounted = profile.mode === 'apc-turret';
+    const origin = resolveCombatMuzzleV83(player, aim, mounted
+      ? { pivotX: this.vehicle.x + this.vehicle.w / 2, pivotY: this.vehicle.y + 28, barrelLength: 62 } : {});
+    const shot = buildCombatShotVectorsV83(aim, { speed: mounted ? 1100 : 890 })[0];
     this.bullets.push({
       ...origin, w: profile.mode === 'apc-turret' ? 26 : 18, h: profile.mode === 'apc-turret' ? 7 : 5,
-      vx: player.facing * (profile.mode === 'apc-turret' ? 1100 : 890), damage: profile.damage * reloadBonus, tacticalReloadBonusV77: reloadBonus,
+      vx: shot.vx, vy: shot.vy, angleRadians: shot.angleRadians, aimExplicitV83: aim.active,
+      damage: profile.damage * reloadBonus, tacticalReloadBonusV77: reloadBonus,
       owner: player, kind: profile.mode, life: 1.25, hit: false
     });
     for (const enemy of this.enemies) if (enemy.alive && Math.abs(enemy.x - origin.x) < 760) enemy.alert = true;
@@ -1470,7 +1494,9 @@ export class GameEngine {
     }
     const supply = this.supplies.find((candidate) => !candidate.used && distanceBetween(actor, candidate) < 105);
     if (supply) return this.collectSupply(actor, supply);
-    if (!this.weaponPickup.taken && distanceBetween(actor, this.weaponPickup) < 118) {
+    // This legacy field pickup supplies the global M41A loadout. Personal V85
+    // inventories cannot be replaced or refilled by that unmanifested object.
+    if (!actor.crewV85?.personalEquipment && !this.weaponPickup.taken && distanceBetween(actor, this.weaponPickup) < 118) {
       cancelTacticalReloadV77(actor, 'weapon-changed');
       this.weaponPickup.taken = true;
       actor.weaponMode = 'rifle';
@@ -2183,12 +2209,19 @@ export class GameEngine {
 
   drawBullet(ctx, bullet) {
     const image = this.images.get('vfx');
+    ctx.save();
+    ctx.translate(bullet.x + bullet.w / 2, bullet.y + bullet.h / 2);
+    ctx.rotate(Math.atan2(bullet.vy || 0, bullet.vx || 0));
     if (ready(image)) {
       const frame = 1 + (Math.floor(this.animationTime * 24) % 3);
-      this.drawSheetCell(ctx, image, frame, 0, bullet.x - 8, bullet.y - 8, bullet.kind === 'apc-turret' ? 44 : 34, bullet.kind === 'apc-turret' ? 22 : 18, bullet.vx < 0);
+      const width = bullet.kind === 'apc-turret' ? 44 : 34;
+      const height = bullet.kind === 'apc-turret' ? 22 : 18;
+      this.drawSheetCell(ctx, image, frame, 0, -width / 2, -height / 2, width, height, false);
+      ctx.restore();
       return;
     }
-    ctx.fillStyle = '#f5d87a'; ctx.fillRect(bullet.x, bullet.y, bullet.w, bullet.h);
+    ctx.fillStyle = '#f5d87a'; ctx.fillRect(-bullet.w / 2, -bullet.h / 2, bullet.w, bullet.h);
+    ctx.restore();
   }
 
   drawHostileProjectile(ctx, projectile) {

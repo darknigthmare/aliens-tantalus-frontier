@@ -31,6 +31,7 @@ export class TitleSceneControllerV79 {
     this.model = null;
     this.signature = '';
     this.reason = 'not-rendered';
+    this.renderGeneration = 0;
     this.motionQuery = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
     this.onMotionPreference = () => { if (this.active) this.show(this.lastSave); };
     if (typeof this.motionQuery?.addEventListener === 'function') this.motionQuery.addEventListener('change', this.onMotionPreference);
@@ -39,6 +40,7 @@ export class TitleSceneControllerV79 {
   }
 
   useFallback(reason = 'fallback') {
+    this.renderGeneration += 1;
     this.reason = reason;
     this.model = null;
     this.signature = '';
@@ -67,7 +69,7 @@ export class TitleSceneControllerV79 {
     }
   }
 
-  createLayer(layer, documentRef) {
+  createLayer(layer, documentRef, generation = this.renderGeneration) {
     const element = documentRef.createElement('div');
     element.className = `title-scene-layer-v79 title-scene-layer-v79--${layer.role} title-scene-layer-v79--${layer.id}`;
     element.dataset.layerId = layer.id;
@@ -85,19 +87,22 @@ export class TitleSceneControllerV79 {
       image.decoding = 'async';
       image.draggable = false;
       image.addEventListener?.('load', () => {
+        // A previous preset may finish loading after replacement or controller disposal.
+        if (generation !== this.renderGeneration) return;
         element.dataset.assetStatus = 'ready';
         this.syncProceduralFallback(layer.fallbackLayerId);
       }, { once: true });
       image.addEventListener?.('error', () => {
+        if (generation !== this.renderGeneration) return;
         element.dataset.assetStatus = 'missing';
         element.hidden = true;
         if (this.root) this.root.dataset.degraded = 'true';
         this.syncProceduralFallback(layer.fallbackLayerId);
         if (layer.required) this.useFallback(`missing:${layer.id}`);
       }, { once: true });
+      element.dataset.assetStatus = 'loading';
       image.src = layer.assetSrc;
       element.append?.(image);
-      element.dataset.assetStatus = 'loading';
     }
     return element;
   }
@@ -107,7 +112,8 @@ export class TitleSceneControllerV79 {
     if (!this.root || !documentRef?.createElement || typeof this.root.replaceChildren !== 'function') {
       return this.useFallback('dom-unsupported');
     }
-    const layers = model.layers.map((layer) => this.createLayer(layer, documentRef));
+    const generation = ++this.renderGeneration;
+    const layers = model.layers.map((layer) => this.createLayer(layer, documentRef, generation));
     this.root.replaceChildren(...layers);
     this.root.hidden = false;
     this.root.dataset.status = 'ready';
@@ -126,13 +132,15 @@ export class TitleSceneControllerV79 {
   }
 
   show(save = {}) {
+    const retryMissingAssets = !this.active && this.root?.dataset?.degraded === 'true';
     this.active = true;
     this.lastSave = save;
     let supported = false;
     try { supported = Boolean(this.root && this.supportsScene()); } catch { supported = false; }
     if (!supported) return this.useFallback('css-unsupported');
     const model = buildTitleSceneModelV79(save, { prefersReducedMotion: Boolean(this.motionQuery?.matches) });
-    if (this.signature !== `${model.presetId}:${model.mode}` || this.root.dataset.status !== 'ready') {
+    // An offline visit must not permanently replace the art with procedural layers.
+    if (retryMissingAssets || this.signature !== `${model.presetId}:${model.mode}` || this.root.dataset.status !== 'ready') {
       try { this.render(model); } catch { return this.useFallback('render-error'); }
     }
     else {

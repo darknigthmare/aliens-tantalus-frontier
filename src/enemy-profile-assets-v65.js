@@ -1,5 +1,5 @@
-// Cette liste est remplie par le pipeline d'acceptation V65 seulement après
-// génération, contrôle de la grille déclarée et enregistrement de sa provenance.
+// Registre public des sprites disponibles. Le champ historique promptId contient
+// uniquement l'identité publique du sprite, pas une référence de production privée.
 // Garder une entrée absente signifie explicitement « art en attente » : le
 // runtime conserve alors le profil visuel V64/V56/V55 existant.
 export const V65_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
@@ -17,7 +17,7 @@ export const V65_READY_ENEMY_PROFILE_ASSETS = Object.freeze([
     identityStatus: 'source-locked-adaptation',
     referenceStatus: 'CANON_REFERENCE_ADAPTATION',
     provider: 'openai-imagegen',
-    promptId: 'V65_FACEHUGGER_IMAGEGEN',
+    promptId: 'enemy.profile.enemy-002-facehugger.v65',
     referenceUrls: Object.freeze(['https://necaonline.com/2016/05/aliens-foam-prop-replica-life-size-facehugger/']),
     identityVerified: true
   })

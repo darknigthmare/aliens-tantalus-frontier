@@ -1,9 +1,0 @@
-Use case: identity-preserve
-Asset type: production 2D game animation sprite sheet
-Input images: Image 1 is the selected Caravan Stalker idle board and the exact identity, anatomy, material, scale and layout anchor.
-Primary request: create the Caravan Stalker MOVE animation board for ALIENS: TANTALUS FRONTIER using the identical creature.
-Animation: exactly eight individually authored chronological poses of one complete low four-legged running cycle: initial diagonal contact, compression, passing, extension, opposite diagonal contact, compression, passing, recovery. The creature stays quadrupedal and travels in place; no bipedal locomotion, no leap, no duplicated pose.
-Identity invariants: same smooth eyeless skull, four XX121 limbs, reduced dorsal tubes, long segmented balancing tail, black-brown sand-worn biomechanical carapace and proportions as Image 1. Strict orthographic side view facing RIGHT in every pose.
-Layout: EXACT 2:1 wide landscape sheet, exactly 4 columns by 2 rows, square cells, strict row-major chronology. One full creature centered per cell, same physical scale and ground line as the idle reference. Entire tail, skull, claws and limbs visible with at least 8 percent empty gutter on all cell edges. No cell contact or overlap.
-Background: perfectly flat uniform pure #FF00FF magenta.
-Constraints: no camera rotation; no three-quarter view; no anatomical drift; no added tubes; no clothing, equipment or rider; no grid lines; no text; no labels; no shadow; no scenery; no logo; no watermark.

@@ -1,9 +1,0 @@
-Use case: stylized-concept
-Asset type: production side-scroller enemy spritesheet.
-Image1: exact character identity reference ONLY,nooriginalbackgroundorlogos.
-Subject:SPITTER from ALIENS COLONIAL MARINES, exact SquareEnix PlayArtsKai licensed subject in Image1. Glossy blackblue organicchitin, broad smooth domed head with flattened flared rearcrest, prominent YELLOWGREEN acid sacs visibly nested along both sides of rearcranium (NOT eyes), FOUR long upward/backwardcurving dorsal spines with smallbarbs, ribbedchest, narrowwaist, two longclawedarms with spikedforearms, two digitigradelegs withanklespurs, longpointedsegmentedtail. TWOarmsnotQueen. Keepdistinctacidreservoirs, noorangeFireteamspitterredesign, nobigroyalfancrown, nocannons.
-Detailed handpainted hard-edge raster sprite with restrainedpixeltexture andgame-readableanatomy.
-CANVAS: WIDEexact2:1(e.g.2048x1024),FOURcolumns byTWOrows,EIGHTposes inrows1-4then5-8,eachcellSQUARE. ALL strictORTHOGRAPHICSIDEVIEWFACINGRIGHT. Sameanatomyscaleandperspectiveallframes.
-SPACING CRITICAL: wholecreature includingFULLTAIL occupies AT MOST65percent ofeachcellwidth, central288pixels inside444pixelcell. Atleast70puremagentapixelsleftANDrightofeachpose. Groundline82percentheight. Centerposeandcoilfulltailup/backinsideitscell; neverlettail/finger crossneighborcell. No crop/stretch/morphing.
-FLAT PURE MAGENTA #FF00FF everywhereoutsidecharacter. No checkers,no shadows,no texture,no gradients,no grid,no text/watermarks,no environment. Exactlyeight individuallyauthoredposes.
-Animation:One complete BIPEDAL walking in-placecycle eightframes:1rightcontact2down3leftpassing4rise5leftcontact6down7rightpassing8rise. Pelvisfixedx;headcrestlevel,sacsanddorsalspinesremainintact. No crouch-pounce, no attack, no fourlegmovement. Tailcurlsinsideframe.

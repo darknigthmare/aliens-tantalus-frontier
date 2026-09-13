@@ -1,4 +1,4 @@
-import { HUB_DECKS, HubGame as HubGameV71 } from './hub-v71-runtime.js';
+import { HUB_ANNEX_MODULE_ART_V82, HUB_DECKS, HubGame as HubGameV71 } from './hub-v71-runtime.js';
 import {
   PROVING_GROUND_ASSETS_V81,
   PROVING_GROUND_ASSET_LIST_V81
@@ -31,6 +31,16 @@ export * from './proving-ground-session-v81.js';
 export * from './tantalus-proving-ground-v81.js';
 
 export const HUB_PROVING_GROUND_RUNTIME_SCHEMA_V81 = 81;
+
+export const PROVING_GROUND_TARGET_SUPPORT_V82 = Object.freeze({
+  ceilingY: 64,
+  railWidth: 6,
+  bracketWidth: 44,
+  // Measured lower alpha edges across the existing eight atlas states. The
+  // bracket overlaps this 441..454 range from behind; no target pose is moved.
+  footSourceY: 441,
+  targetFrameHeight: 512
+});
 
 const VIEW_WIDTH = 1280;
 const VIEW_HEIGHT = 720;
@@ -564,6 +574,13 @@ export class HubGame extends HubGameV71 {
     }
     ctx.setLineDash?.([]);
     ctx.restore();
+  }
+
+  drawAnnexModularPropsV72(ctx, annex) {
+    super.drawAnnexModularPropsV72(ctx, annex);
+    if (annex?.id !== PROVING_GROUND_ANNEX_ID_V81) return;
+    // Targets sit in front of the rear-wall machinery. Drawing them in the
+    // geometry pass let later maintenance shafts conceal active silhouettes.
     this.drawProvingTargetsV81(ctx);
     this.drawProvingProjectilesV81(ctx);
     this.drawProvingImpactsV81(ctx);
@@ -589,9 +606,38 @@ export class HubGame extends HubGameV71 {
     }
   }
 
+  drawProvingTargetSupportsV82(ctx) {
+    const art = HUB_ANNEX_MODULE_ART_V82;
+    const layout = PROVING_GROUND_TARGET_SUPPORT_V82;
+    const railImage = this.annexModularImagesV72?.get(art.ladder);
+    const bracketImage = this.annexModularImagesV72?.get(art.catwalk);
+    for (const target of PROVING_GROUND_TARGETS_V81) {
+      const centerX = target.bounds.x + target.bounds.w / 2;
+      const bracketSource = art.crops.catwalkDeck;
+      const bracketHeight = layout.bracketWidth * (bracketSource[3] - bracketSource[1]) / (bracketSource[2] - bracketSource[0]);
+      const bracketY = target.bounds.y + target.bounds.h * layout.footSourceY / layout.targetFrameHeight - 1;
+      const supportBottom = bracketY + bracketHeight;
+      if (imageReady(railImage)) {
+        const source = art.crops.ladderLeft;
+        const scale = layout.railWidth / (source[2] - source[0]);
+        const tileHeight = (source[3] - source[1]) * scale;
+        for (let y = layout.ceilingY; y < supportBottom; y += tileHeight) {
+          const height = Math.min(tileHeight, supportBottom - y);
+          ctx.drawImage(railImage, source[0], source[1], source[2] - source[0], height / scale, centerX - layout.railWidth / 2, y, layout.railWidth, height);
+        }
+      }
+      if (imageReady(bracketImage)) {
+        ctx.drawImage(bracketImage, bracketSource[0], bracketSource[1], bracketSource[2] - bracketSource[0], bracketSource[3] - bracketSource[1], centerX - layout.bracketWidth / 2, bracketY, layout.bracketWidth, bracketHeight);
+      }
+    }
+  }
+
   drawProvingTargetsV81(ctx) {
     const image = this.provingGroundImagesV81.get(PROVING_GROUND_ASSETS_V81.target.runtimeId);
     const states = new Map(this.provingGroundStateV81.targets.map((target) => [target.id, target]));
+    // Draw every rear support first, so no later rail can paint over an
+    // adjacent target. These wall-mounted pieces have no collision or hitbox.
+    this.drawProvingTargetSupportsV82(ctx);
     for (const target of PROVING_GROUND_TARGETS_V81) {
       const state = states.get(target.id);
       const status = state?.status || 'queued';

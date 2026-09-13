@@ -8,8 +8,13 @@ import {
   executeStrategicAction, completeResearchProject, getProcurementQuote, procureCatalogItem,
   equipCatalogItem, selectStrategicVehicle, assignCrewMember, treatCrewMember, applyCostume,
   getOperationBrief, beginOperation, resolveOperationDeployment, recordOperationFlag, recordOperationResumeState, resolveOperation,
-  getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69
+  getAlphaBravoStrategicRecoveryV69, abandonBlockedAlphaBravoOperationV69,
+  RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
+import { CrewUiV85 } from './crew-ui-v85.js';
+import { PlaceablesDockV86 } from './placeables-ui-v86.js';
+import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import {
   ensureAdvancedState, getShipModuleEffects, getModuleQuote, installShipModule, repairShipModule,
   selectNeuroProfile, clearNeuroProfile, selectApexDossier, getSelectedAdvancedLoadout,
@@ -26,7 +31,10 @@ import { GameEngine } from './game-production-runtime.js';
 import { bindTacticalReloadButtonV77 } from './mission-input-v77.js';
 import { resolveViewAudioSceneV77 } from './audio-assets-v77.js';
 import { buildMissionLevelV52 } from './mission-levels-v52.js';
-import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-v81-runtime.js';
+import { HubGame, HUB_DECKS, HUB_NPC_ROSTER } from './hub-onboarding-v84.js';
+import { PlayerCreatorUiV84 } from './player-creator-ui-v84.js';
+import { captionReadingMillisecondsV84 } from './combat-captions-v84.js';
+import { advancePlayerOnboardingV84, ONBOARDING_DIALOGUES_V84, getPlayerOnboardingObjectiveV84 } from './player-onboarding-v84.js';
 import { LevelEditor, TILE_TYPES } from './editor.js';
 import { AudioDirector } from './audio.js';
 import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
@@ -127,6 +135,13 @@ let missionArchiveOverlayV68 = null;
 let alphaBravoCommandDockV69 = null;
 let alienSurvivalDockV70 = null;
 let bioforgeUiV80 = null;
+let creatorOwnerV84 = null;
+let hubOwnerV84 = null;
+let bioforgeOwnerV84 = null;
+let pendingOnboardingDialogV84 = null;
+let crewUiV85 = null;
+let placeablesDockV86 = null;
+let lastMissionSaveFailureToastV86 = -Infinity;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -318,16 +333,19 @@ const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
 });
 
 function persistBioforgeV80(state) {
-  saveSystem.data.bioforgeV80 = clone(state);
-  bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
+  if (!ownsTimelineV84(bioforgeOwnerV84)) return false;
   try {
-    saveSystem.commit();
+    saveSystem.commit({ bioforgeV80: clone(state) });
+    bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
+    return true;
   } catch (error) {
     toast(`BIOFORGE non sauvegardé : ${error.message}`);
+    return false;
   }
 }
 
 function handleBioforgeEventV80(event) {
+  if (!ownsTimelineV84(bioforgeOwnerV84)) return;
   const message = BIOFORGE_EVENT_MESSAGES_V80[event?.type];
   const status = byId('bioforge-status-v80');
   if (message && status) status.textContent = message;
@@ -336,6 +354,7 @@ function handleBioforgeEventV80(event) {
 }
 
 function prepareBioforgeViewV80() {
+  bioforgeOwnerV84 = currentOwnerV84();
   const state = saveSystem.data.bioforgeV80;
   try {
     if (state?.recovery?.purgeRequired) {
@@ -354,6 +373,7 @@ function prepareBioforgeViewV80() {
 }
 
 function startBioforgeFromTerminalV80(configuration) {
+  bioforgeOwnerV84 = currentOwnerV84();
   const result = bioforgeRuntimeV80.start({
     configuration,
     resumeState: saveSystem.data.bioforgeV80,
@@ -404,6 +424,7 @@ function currentEditorProject(kind = null) {
 }
 
 function closeHubDialogue({ resume = true, restoreFocus = true } = {}) {
+  pendingOnboardingDialogV84 = null;
   const wasOpen = hubDialogueUiV76.close({ restoreFocus });
   pendingHubInteraction = null;
   pendingNpcConversationV62 = null;
@@ -506,7 +527,13 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete' && !['hub', 'settings'].includes(name) && !standaloneContext) {
+    name = 'hub';
+    toast('Terminez l’accueil et rejoignez le briefing à pied sur le pont Commandement.');
+  }
   if (saveSystem.recoveryNeeded && !['settings', 'editor'].includes(name)) name = 'settings';
+  if (name !== 'crew' && typeof crewUiV85 !== 'undefined') crewUiV85?.close();
+  if (activeView === 'hub' && name === 'hub') Object.assign(saveSystem.data.hub, captureHubPoseV84());
   if (name !== 'play' && missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
@@ -527,7 +554,8 @@ function showView(name) {
   document.querySelector('.rail').classList.remove('open');
   if (name === 'hub') {
     hubEngine.setReducedMotion(saveSystem.data.settings.reducedMotion);
-    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62() });
+    hubOwnerV84 = currentOwnerV84();
+    hubEngine.start(saveSystem.data.hub, { routineContextV62: getHubRoutineContextV62(), onboardingV84: saveSystem.data.onboardingV84 });
   }
   if (name === 'bioforge') prepareBioforgeViewV80();
   if (name === 'hub' || name === 'play' || name === 'bioforge') {
@@ -570,19 +598,100 @@ const titleScreen = new TitleScreenController({
   getSave: () => saveSystem.data,
   getRecoveryStatus: () => saveSystem.recoveryNeeded,
   onUnlock: () => { audio.unlock(); audio.ui(); },
-  onContinue: (view) => showView(view),
+  onContinue: (view) => {
+    try {
+      if (saveSystem.data.needsPlayerCreationV84) return openPlayerCreatorV84(saveSystem.profile);
+      showView(view);
+    } catch (error) {
+      titleScreen.show(); titleScreen.openMenu();
+      titleScreen.liveStatus.textContent = error.message || 'La reprise est indisponible. Votre sauvegarde est conservée.';
+    }
+  },
   onNewTimeline: () => {
-    saveSystem.newGame(saveSystem.recoveryNeeded?.profile || saveSystem.profile);
-    discardProfileRuntimeV78();
-    sessionStart = Date.now();
-    ensureAdvancedState(saveSystem.data);
-    activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
-    applyRuntimeSettings();
-    renderAll();
+    openPlayerCreatorV84(saveSystem.recoveryNeeded?.profile || saveSystem.profile);
+    return false;
   },
   onForge: () => openForgeContext(),
   onOptions: () => showView('settings')
 });
+
+function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profileEpochV78, timeline: saveSystem.data.createdAt }; }
+function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.profile && owner.epoch === profileEpochV78 && owner.timeline === saveSystem.data.createdAt; }
+function captureHubPoseV84() {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || !hubEngine.player || standaloneContext) return {};
+  return { deck: hubEngine.state.deck, roomId: hubEngine.currentRoom().id,
+    positionX: Math.round(hubEngine.player.x), facing: hubEngine.player.facing,
+    visited: [...new Set(hubEngine.state.visited)] };
+}
+const playerCreatorUiV84 = new PlayerCreatorUiV84({
+  onSubmit: (identity) => {
+    const owner = creatorOwnerV84;
+    if (!ownsTimelineV84(owner)) throw new Error('Le profil a changé. Annulez puis rouvrez le dossier.');
+    if (saveSystem.storage.getItem(saveSystem.key(owner.target)) !== owner.original) throw new Error('Ce profil a changé dans un autre onglet. Annulez pour le recharger sans l’écraser.');
+    saveSystem.newPlayerTimelineV84(identity, owner.target);
+  },
+  onComplete: () => {
+    creatorOwnerV84 = null;
+    discardProfileRuntimeV78();
+    sessionStart = Date.now();
+    ensureAdvancedState(saveSystem.data);
+    activeWorld = WORLDS.find(world => world.id === saveSystem.data.worldId) || WORLDS[0];
+    applyRuntimeSettings(); renderAll(); showView('hub');
+  },
+  onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
+});
+function openPlayerCreatorV84(profile) {
+  if (creatorOwnerV84) return false;
+  creatorOwnerV84 = { ...currentOwnerV84(), target: profile, original: saveSystem.storage.getItem(saveSystem.key(profile)) };
+  hubEngine.stop(false); engine.stop(); bioforgeRuntimeV80.stop({ reason: 'player-creation' });
+  titleScreen.hide();
+  playerCreatorUiV84.open(profile);
+  return false;
+}
+function commitOnboardingEventV84(event, owner = hubOwnerV84) {
+  if (!ownsTimelineV84(owner)) throw new Error('Cette relève n’appartient plus au profil actif.');
+  const result = advancePlayerOnboardingV84(saveSystem.data.onboardingV84, event);
+  if (!result.ok) throw new Error('Cette étape a déjà été traitée ou n’est pas encore disponible.');
+  const candidate = clone(saveSystem.data);
+  candidate.onboardingV84 = result.state;
+  Object.assign(candidate.hub, captureHubPoseV84());
+  saveSystem.commit(candidate);
+  hubEngine.setOnboardingV84(saveSystem.data.onboardingV84);
+  renderHubStatus();
+  return result.state;
+}
+function openOnboardingDialogueV84(interaction) {
+  const state = saveSystem.data.onboardingV84;
+  const contact = hubEngine.onboardingContactV84();
+  if (!contact || contact.crewId !== interaction.crewId || contact.phase !== state?.phase) return false;
+  const contract = ONBOARDING_DIALOGUES_V84[state.phase];
+  hubEngine.pause();
+  pendingOnboardingDialogV84 = { owner: currentOwnerV84(), phase: state.phase, node: state.dialogueNode };
+  byId('hub-dialogue-speaker').textContent = `${contract.speaker.name} · ${contract.speaker.role}`;
+  byId('hub-dialogue-text').textContent = contract.lines[state.dialogueNode];
+  const portrait = byId('hub-dialogue-image');
+  portrait.classList.add('is-sprite-cell-v62');
+  portrait.src = HUB_NPC_ROSTER.find(npc => npc.crewId === contact.crewId).spritePath;
+  portrait.alt = `Cellule d’animation de ${contract.speaker.name}`;
+  byId('hub-dialogue-choices').replaceChildren();
+  byId('hub-dialogue-continue').hidden = false;
+  byId('hub-dialogue-continue').textContent = state.dialogueNode === contract.lines.length - 1 ? 'CONSIGNES REÇUES' : 'ÉCOUTER LA SUITE';
+  hubDialogueUiV76.open({ initialFocus: byId('hub-dialogue-continue') });
+  return true;
+}
+function advanceOnboardingDialogueV84() {
+  const pending = pendingOnboardingDialogV84;
+  if (!pending) return false;
+  try {
+    const state = saveSystem.data.onboardingV84;
+    if (state?.phase !== pending.phase || state.dialogueNode !== pending.node) throw new Error('Échange périmé. Reparlez au personnel.');
+    const complete = state.dialogueNode === ONBOARDING_DIALOGUES_V84[state.phase].lines.length - 1;
+    commitOnboardingEventV84({ type: `${state.phase}-${complete ? 'complete' : 'next'}`, dialogueNode: state.dialogueNode }, pending.owner);
+    if (complete) { closeHubDialogue(); renderAll(); }
+    else openOnboardingDialogueV84({ crewId: ONBOARDING_DIALOGUES_V84[state.phase].speaker.crewId });
+  } catch (error) { toast(error.message); }
+  return true;
+}
 
 function openForgeContext() {
   missionOwnerV78 = null;
@@ -766,8 +875,8 @@ function renderSpecialOperationsV67(term = '') {
           : operation.implementationStatus === 'missing' ? 'Promesse recensée, runtime non produit.'
             : '';
     const actionAttribute = campaign ? `data-plan-campaign="${campaign.id}"` : hubSurface ? 'data-open-hub' : '';
-    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml(operation.chatTitle)}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : hubSurface ? 'USS TANTALUS · HUB PHYSIQUE' : 'CHATGPT · REGISTRE V71'}</span><button class="button compact" ${actionAttribute} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
-  }).join('') || '<p class="special-operation-empty">Aucune directive ChatGPT ne correspond à cette recherche.</p>';
+    return `<article class="special-operation-card ${status.tone} ${planned || active ? 'selected' : ''}" data-special-operation="${operation.id}"><header><span class="special-operation-order">ORDRE ${String(operation.productionOrder).padStart(2, '0')}</span><span class="special-operation-status ${status.tone}">${status.label}</span></header><p class="eyebrow">${escapeHtml(operation.kind === 'system' ? 'SYSTÈME' : 'MISSION')} · ${escapeHtml('REGISTRE TANTALUS')}</p><h3>${escapeHtml(operation.promisedTitle)}</h3><p>${escapeHtml(operation.promiseSummary)}</p><div class="mini-tags">${mechanics}</div><footer><span>${campaign ? escapeHtml(world?.name || 'Frontier') : hubSurface ? 'USS TANTALUS · HUB PHYSIQUE' : 'REGISTRE DES OPÉRATIONS'}</span><button class="button compact" ${actionAttribute} ${canPlan ? '' : 'disabled'} title="${escapeHtml(unavailableReason)}">${action}</button></footer></article>`;
+  }).join('') || '<p class="special-operation-empty">Aucune opération ne correspond à cette recherche.</p>';
 }
 
 function neuroName(profile) {
@@ -796,7 +905,7 @@ function renderOperationPlan() {
   const operationWorldId = saveSystem.data.strategy.currentOperation?.worldId;
   const world = WORLDS.find((entry) => entry.id === (operationWorldId || campaign.worldId)) || WORLDS[0];
   const brief = getOperationBrief(saveSystem.data, campaign, world);
-  const crewNames = brief.crewIds.map((id) => CREW.find((member) => member.id === id)?.name || id);
+  const crewNames = brief.crewIds.map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
   const weapon = WEAPONS.find((entry) => entry.id === saveSystem.data.player.weaponIds.at(-1));
   const equipment = saveSystem.data.player.equipmentIds.map((id) => EQUIPMENT.find((entry) => entry.id === id)?.name || id);
   const specialOperation = getSpecialOperationByCampaignIdV67(campaign.id);
@@ -806,7 +915,7 @@ function renderOperationPlan() {
   const vehicle = issuedVehicle || VEHICLES.find((entry) => entry.id === saveSystem.data.strategy.selectedVehicleId);
   const operation = saveSystem.data.strategy.currentOperation;
   const recovery = getAlphaBravoStrategicRecoveryV69(saveSystem.data);
-  const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => CREW.find((entry) => entry.id === id)?.name || id);
+  const unavailableCrew = (recovery.unavailableCrewIds || []).map((id) => resolveCrewDefinitionV85(saveSystem.data.crew.find(member => member.id === id) || { id }, CREW)?.name || id);
   const recoveryNotice = recovery.canAbandon
     ? `<div class="special-operation-notice"><span>REPRISE BLOQUÉE</span><b>ESCOUADE SOUS LE SEUIL DOCTRINAL</b><p>${recovery.activeCrewCount}/${recovery.minimumCrew} opérateurs actifs · indisponibles : ${escapeHtml(unavailableCrew.join(', ') || 'inconnus')}. Archivez cette sortie pour conserver les pertes sans appliquer de récompense.</p></div>`
     : '';
@@ -958,15 +1067,26 @@ function ensureCostumeFilterOptions(id, field) {
   }
 }
 
+function runCrewActionV85(action, args, owner) {
+  if (standaloneContext || activeView !== 'crew') throw new Error('Ouvrez Echo-9 depuis votre campagne pour gérer le personnel.');
+  const actions = { recruit: recruitCandidateV85, refresh: refreshRecruitmentV85, train: trainCrewAptitudeV85,
+    transfer: transferCrewGearV85, assign: assignCrewMember, treat: treatCrewMember };
+  const result = commitCrewTransactionV85({ saveSystem, owner, ownsOwner: ownsTimelineV84,
+    action: actions[action], args, prepare: ensureAdvancedState,
+    advanceTime: (candidate, hours) => advanceGalaxy(candidate, { hours, advanceClock: false }) });
+  try { refreshActiveHubNpcRoutinesV62(); renderAll(); toast('Dossier Echo-9 enregistré.'); }
+  catch (error) { console.error('Dossier enregistré ; actualisation visuelle incomplète.', error); }
+  return result;
+}
+
 function renderCrew() {
   const loadoutLocked = Boolean(saveSystem.data.strategy.currentOperation);
   const operationLockTitle = loadoutLocked ? ' title="Opération active : manifeste verrouillé"' : '';
   byId('crew-readiness').textContent = `${saveSystem.data.strategy.selectedCrewIds.length}/${MAX_SQUAD_SIZE} AFFECTÉS`;
-  byId('crew-list').innerHTML = CREW.map((definition) => {
-    const member = saveSystem.data.crew.find((entry) => entry.id === definition.id);
-    const selected = saveSystem.data.strategy.selectedCrewIds.includes(member.id);
-    return `<article class="crew-card ${selected ? 'selected' : ''}"><span class="eyebrow">${escapeHtml(definition.role)} · ${escapeHtml(member.status)}</span><h3>${escapeHtml(definition.name)}</h3>${meter('SANTÉ', member.health)}${meter('STRESS', member.stress, true)}${meter('FATIGUE', member.fatigue, true)}<div class="button-row"><button class="button compact" data-crew-assign="${member.id}" ${loadoutLocked || member.status !== 'active' && !selected ? 'disabled' : ''}${operationLockTitle}>${selected ? 'RETIRER' : 'AFFECTER'}</button><button class="button compact" data-crew-treat="${member.id}" ${loadoutLocked || member.status === 'deceased' || saveSystem.data.galaxy.resources.medical < 1 ? 'disabled' : ''}${operationLockTitle}>SOIGNER</button></div></article>`;
-  }).join('');
+  if (!crewUiV85) crewUiV85 = new CrewUiV85({ root: byId('crew-list'), catalog: CREW,
+    itemCatalog: [...WEAPONS, ...EQUIPMENT], rules: RECRUITMENT_RULES_V85,
+    getOwner: currentOwnerV84, onAction: runCrewActionV85 });
+  crewUiV85.update(saveSystem.data);
   ensureCostumeFilterOptions('costume-part-filter', 'part');
   ensureCostumeFilterOptions('costume-body-filter', 'body');
   ensureCostumeFilterOptions('costume-palette-filter', 'palette');
@@ -1000,6 +1120,8 @@ function renderHubStatus(status = lastHubStatus) {
   const room = status?.roomName || HUB_DECKS[deck]?.rooms.find((entry) => entry.id === saveSystem.data.hub.roomId)?.name || saveSystem.data.hub.roomId;
   byId('hub-deck-label').textContent = status?.deckName || HUB_DECKS[deck]?.name || `PONT ${deck + 1}`;
   byId('hub-room-label').textContent = room;
+  const objectiveV84 = getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84);
+  byId('hub-onboarding-objective-v84').textContent = objectiveV84 && !objectiveV84.completed ? `${saveSystem.data.player.name} · ${objectiveV84.text} ${objectiveV84.phase === 'wake' ? 'E / UTILISER : reprendre le contrôle.' : 'A/D : marcher · ESPACE : franchir · E / UTILISER : interagir.'}` : '';
   const provingGroundActiveV81 = Boolean(
     status?.provingGroundActiveV81
     || status?.activeAnnexId === 'proving-ground'
@@ -1051,8 +1173,7 @@ function renderProfiles() {
 }
 
 function renderMissionEquipment() {
-  const states = engine.getSnapshot?.().equipmentRuntime || [];
-  byId('mission-equipment-controls').innerHTML = states.map((item, index) => `<button class="button compact" data-use-equipment="${item.id}" ${item.remaining < 1 ? 'disabled' : ''}>${index + 1}. ${escapeHtml(item.name)} · ${item.remaining}/${item.maxCharges}</button>`).join('') || '<span class="hint">Aucun équipement actif.</span>';
+  placeablesDockV86?.render();
 }
 
 function renderAll() {
@@ -1199,11 +1320,28 @@ function persistMissionResumeState() {
 }
 
 function commitCurrentRuntimeV78({ includeSessionTime = false } = {}) {
+  if (creatorOwnerV84) return saveSystem.data;
   const candidate = clone(saveSystem.data);
+  Object.assign(candidate.hub, captureHubPoseV84());
   const state = captureMissionResumeState();
   if (state) recordOperationResumeState(candidate, state);
   if (includeSessionTime) candidate.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
   return saveSystem.commit(candidate);
+}
+
+function handleQuickSaveV86() {
+  if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return false; }
+  if (creatorOwnerV84) { toast('Terminez ou annulez la création du personnage avant de sauvegarder.'); return false; }
+  try {
+    // A visible mission must belong to this profile before claiming it was saved.
+    // Recovery errors still come from SaveSystem, with their original explanation.
+    if (!saveSystem.recoveryNeeded && engine.running && engine.mission && !captureMissionResumeState()) {
+      throw new Error('Mission non enregistrée : cette session ne correspond plus au profil actif.');
+    }
+    commitCurrentRuntimeV78({ includeSessionTime: true });
+    sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
+    return true;
+  } catch (error) { toast(error.message); return false; }
 }
 
 function applyMissionResumeState(state) {
@@ -1293,12 +1431,20 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  if (typeof crewUiV85 !== 'undefined') crewUiV85?.close();
+  hubOwnerV84 = null;
+  bioforgeOwnerV84 = null;
+  pendingOnboardingDialogV84 = null;
+  creatorOwnerV84 = null;
+  if (playerCreatorUiV84.dialog.open) playerCreatorUiV84.dialog.close();
+  closeHubDialogue({ resume: false, restoreFocus: false });
+  closeHubStation({ resume: false });
   profileEpochV78 += 1;
   missionOwnerV78 = null;
   pendingMissionLaunchV62 = null;
   hubEngine.stop(false);
   engine.stop();
-  bioforgeRuntimeV80.stop({ reason: 'profile-change' });
+  bioforgeRuntimeV80.stop({ purge: false, reason: 'profile-change' });
   destroyMissionInsertionUiV62();
 }
 
@@ -1334,6 +1480,7 @@ function startMissionRuntimeV62(context) {
     },
     editorProject: null,
     strategicBriefing: deployment.operation,
+    playerIdentityV84: deployment.operation.playerIdentityV84 || null,
     resumeState: operationLoadout.resumeState,
     narrativeArchiveSave: saveSystem.data,
     onNarrativeArchivesChange: () => {
@@ -1342,7 +1489,12 @@ function startMissionRuntimeV62(context) {
     }
   });
   if (operationLoadout.resumeState && !engine.lastResumeResult?.applied) applyMissionResumeState(operationLoadout.resumeState);
+  // Restore the saved actors first, then honor the current explicit local-coop
+  // setting. The transfer hook preserves their personal equipment and charges.
+  engine.setCoop(Boolean(saveSystem.data.settings.coop));
   setupAlphaBravoCommandDockV69().refresh();
+  const activeAlliesV85 = engine.activeSquadActors?.();
+  if (Array.isArray(activeAlliesV85)) byId('mission-log').textContent = `ESCOUADE DÉPLOYÉE · ${activeAlliesV85.length} alliés IA physiques · ${engine.spriteRuntime?.report?.sheets || 0} plaques animées`;
   setupAlienSurvivalDockV70().refresh();
   renderMissionEquipment();
   byId('game-canvas').focus({ preventScroll: true });
@@ -1566,7 +1718,7 @@ function handleGameEvent(event) {
   }
   if (event.type === 'caption') {
     if (saveSystem.data.settings.subtitles) {
-      log.dataset.captionUntil = String(Date.now() + 1800);
+      log.dataset.captionUntil = String(Date.now() + captionReadingMillisecondsV84(event.text || event.channel));
       log.textContent = `SOUS-TITRE · ${event.text || event.channel || ''}`;
     }
     return;
@@ -1658,6 +1810,10 @@ function handleGameEvent(event) {
   }
   if (event.type === 'mission-restarted') log.textContent = `REPRISE CHECKPOINT ${event.checkpoint} · pénalité de récupération appliquée.`;
   if (event.type === 'equipment-used') { log.textContent = `ÉQUIPEMENT · ${event.name || event.action || 'support terrain'}`; renderMissionEquipment(); }
+  if (event.type?.startsWith('placeable-')) {
+    if (event.message || event.reason) log.textContent = `MATÉRIEL · ${event.message || event.reason}`;
+    renderMissionEquipment();
+  }
   if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${String(event.action || 'progression').toUpperCase()}`;
   if (event.type === 'mission-complete') {
     // The V70 resolution validator compares the terminal payload with the
@@ -1675,7 +1831,7 @@ function handleGameEvent(event) {
   const persistentEvents = new Set([
     'checkpoint', 'power-restored', 'shortcut', 'archive-recovered', 'supply', 'resource',
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
-    'equipment-used', 'objective-action', 'mission-zone', 'mission-level-event',
+    'equipment-used', 'placeable-deployed', 'placeable-recovered', 'placeable-destroyed', 'placeable-spent', 'objective-action', 'mission-zone', 'mission-level-event',
     'squad-action', 'squad-down', 'squad-revived', 'squad-lost',
     'mission-timer-started', 'mission-timer-complete',
     'narrative-collectable-discovered', 'narrative-route-unlocked'
@@ -1684,8 +1840,25 @@ function handleGameEvent(event) {
     && (event.type !== 'alien-survival-self-destruct-tick'
       || Math.max(0, Math.ceil(Number(event.remainingSeconds ?? event.remaining) || 0)) % 5 === 0);
   if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type) || survivalPersistenceDue) && saveSystem.data.strategy.currentOperation) {
-    persistMissionResumeState();
-    saveSystem.commit();
+    try {
+      const state = captureMissionResumeState();
+      if (!state) return false;
+      // Publish the new checkpoint only after the whole profile was written.
+      // Gameplay stays live on quota failure; the previous resume and bytes do not change.
+      const candidate = clone(saveSystem.data);
+      if (!recordOperationResumeState(candidate, state)) return false;
+      saveSystem.commit(candidate);
+      lastMissionSaveFailureToastV86 = -Infinity;
+      return true;
+    } catch {
+      log.textContent = 'PROGRESSION NON ENREGISTRÉE · sauvegarde indisponible ; la partie continue en mémoire.';
+      const now = Date.now();
+      if (now - lastMissionSaveFailureToastV86 >= 10000) {
+        lastMissionSaveFailureToastV86 = now;
+        toast('Progression non enregistrée. La sauvegarde précédente est conservée ; libérez du stockage puis réessayez de sauvegarder.');
+      }
+      return false;
+    }
   }
 }
 
@@ -1694,8 +1867,8 @@ function persistHub(patch) {
     forgePlaytest.hubState = { ...(forgePlaytest.hubState || {}), ...clone(patch) };
     return;
   }
-  Object.assign(saveSystem.data.hub, patch);
-  saveSystem.commit();
+  if (!ownsTimelineV84(hubOwnerV84) || creatorOwnerV84) return;
+  saveSystem.commit({ hub: { ...clone(saveSystem.data.hub), ...patch } });
 }
 
 function applyHubService(action) {
@@ -1887,6 +2060,19 @@ function handleHubAction(interaction) {
   if (standaloneContext === 'forge-playtest') {
     const status = byId('hub-status');
     if (status) status.textContent = `PLAYTEST FORGE · ${interaction.action} · CAMPAGNE INCHANGÉE`;
+    return;
+  }
+  if (interaction.action === 'hub:onboarding-wake') {
+    try { commitOnboardingEventV84('wake-confirmed'); toast('Relève rétablie. DAVID-8R vous attend à gauche de la capsule.'); }
+    catch (error) { toast(error.message); }
+    return;
+  }
+  if (interaction.action === 'hub:onboarding-dialogue') {
+    try { return openOnboardingDialogueV84(interaction); }
+    catch (error) { toast(error.message); return false; }
+  }
+  if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete') {
+    toast(getPlayerOnboardingObjectiveV84(saveSystem.data.onboardingV84).text);
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
@@ -2120,11 +2306,8 @@ function setupRuntimeControls() {
   byId('bioforge-interact-v80').onclick = () => bioforgeRuntimeV80.interact(bioforgeRuntimeV80.player);
   byId('bioforge-reload-v80').onclick = () => bioforgeRuntimeV80.reload(bioforgeRuntimeV80.player);
   byId('bioforge-medkit-v80').onclick = () => bioforgeRuntimeV80.useMedkit(bioforgeRuntimeV80.player);
-  byId('mission-equipment-controls').onclick = (event) => {
-    const id = event.target.closest('[data-use-equipment]')?.dataset.useEquipment;
-    if (!id) return;
-    try { engine.useEquipment(id); renderMissionEquipment(); } catch (error) { toast(error.message); }
-  };
+  placeablesDockV86 ||= new PlaceablesDockV86(byId('mission-equipment-controls'), engine, { onError: toast, onActivate: () => audio.unlock(), onSave: handleQuickSaveV86 });
+  placeablesDockV86.render();
 }
 
 function bindDelegatedActions() {
@@ -2173,7 +2356,8 @@ function bindDelegatedActions() {
       const profile = Number(target.dataset.profile);
       try {
         const slot = saveSystem.listProfiles().find((entry) => entry.profile === profile);
-        slot?.empty ? saveSystem.newGame(profile) : saveSystem.load(profile);
+        if (slot?.empty) { openPlayerCreatorV84(profile); return; }
+        saveSystem.load(profile);
         discardProfileRuntimeV78(); sessionStart = Date.now();
         ensureAdvancedState(saveSystem.data); activeWorld = WORLDS.find((world) => world.id === saveSystem.data.worldId) || WORLDS[0];
         applyRuntimeSettings(); renderAll();
@@ -2198,13 +2382,7 @@ function bind() {
     audio.unlock(); audio.ui(); showView(target.dataset.view);
   };
   byId('menu-toggle').onclick = () => document.querySelector('.rail').classList.toggle('open');
-  byId('quick-save').onclick = () => {
-    if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return; }
-    try {
-      commitCurrentRuntimeV78({ includeSessionTime: true });
-      sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
-    } catch (error) { toast(error.message); }
-  };
+  byId('quick-save').onclick = handleQuickSaveV86;
   byId('return-title').onclick = () => {
     if (standaloneContext === 'forge-playtest') {
       returnToForgeContext();
@@ -2221,6 +2399,7 @@ function bind() {
   };
   byId('hub-dialogue-cancel').onclick = () => closeHubDialogue();
   byId('hub-dialogue-continue').onclick = () => {
+    if (pendingOnboardingDialogV84) { advanceOnboardingDialogueV84(); return; }
     if (pendingNpcConversationV62) {
       closeHubDialogue();
       return;
@@ -2347,6 +2526,7 @@ function bind() {
   globalThis.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredInstall = event; byId('install-app').hidden = false; });
   byId('install-app').onclick = async () => { if (!deferredInstall) return; deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; byId('install-app').hidden = true; };
   globalThis.addEventListener('beforeunload', () => {
+    if (creatorOwnerV84 || saveSystem.data.needsPlayerCreationV84) return;
     hubDialogueUiV76.destroy({ restoreFocus: false });
     audio.dispose();
     hubEngine.stop(!saveSystem.recoveryNeeded);

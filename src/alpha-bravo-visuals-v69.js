@@ -7,7 +7,7 @@ export const ALPHA_BRAVO_CONSOLE_SHEET_V69 = Object.freeze({
   cellWidth: 256,
   cellHeight: 256,
   guard: 10,
-  provenance: 'OpenAI ImageGen + deterministic checker cleanup',
+  provenance: 'OpenAI ImageGen',
   originalProjectAsset: true,
   canonExact: false,
   releaseReady: true

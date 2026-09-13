@@ -1,6 +1,0 @@
-Use case: precise-object-edit
-Asset type: production 2D game sprite animation source board
-Input image: the immediately preceding eight-pose Abomination attack sheet is the edit target.
-Primary request: remove every painted motion streak, speed line, impact line, glow and detached effect from the entire sheet, especially the diagonal purple streaks behind pose 5 at the lower-left. Replace only those effect pixels with the same perfectly flat opaque pure #FF00FF background.
-Preserve exactly: the same original fan-made Abomination identity, anatomy, materials, strict right-facing side camera, 1774×887-style exact 2:1 canvas, invisible 4×2 row-major layout, eight chronological double-ground-slam poses, pose sizes, support line, generous gutters, and every attached body pixel. Exactly two legs, exactly two arms, exactly two attached terminal fist growths, no tail.
-Constraints: change only the forbidden detached effect pixels. Do not redesign, move, scale, crop, mirror or redraw the creature; do not add or remove anatomy. No floor, cast shadow, shockwave, dust, debris, motion streak, impact burst, grid, separator, text, logo, UI, watermark, or official/licensed bitmap. Keep all eight complete silhouettes isolated inside their own cells and facing right. Output only the corrected sheet.

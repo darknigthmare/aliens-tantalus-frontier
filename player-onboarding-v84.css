@@ -1,0 +1,18 @@
+#player-creator-v84 { width: min(880px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 24px; overflow: auto; color: #c9ded2; background: #081310; border: 1px solid #698876; border-radius: 3px; }
+#player-creator-v84::backdrop { background: rgba(0, 7, 5, .93); }
+#player-creator-v84 h1 { font-size: clamp(24px, 4vw, 36px); margin: 10px 0; }
+#player-creator-v84 p { max-width: 65ch; line-height: 1.5; }
+#player-creator-v84 .creator-grid-v84 { display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: center; }
+#player-creator-v84 figure { margin: 0; }
+#player-creator-v84 img { width: 100%; height: 300px; object-fit: contain; }
+#player-creator-v84 figcaption, #player-creator-v84 .creator-note-v84 { color: #9eaea5; font-size: 12px; }
+#player-creator-v84 label { display: block; margin: 14px 0 7px; }
+#player-creator-v84 input { display: block; box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px; background: #0f2119; color: #e9f8ef; border: 1px solid #658b75; font: inherit; }
+#player-creator-v84 [role="alert"] { color: #ffd190; min-height: 1.4em; }
+#player-creator-v84 footer { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+#player-creator-v84 button { min-height: 44px; padding: 10px 16px; font: inherit; color: #d9efdf; border: 1px solid #769985; background: #132a20; cursor: pointer; }
+#player-creator-v84 :focus-visible { outline: 2px solid #eece84; outline-offset: 3px; }
+#hub-onboarding-objective-v84 { position: fixed; z-index: 45; top: 104px; right: 20px; width: min(420px, calc(100vw - 40px)); box-sizing: border-box; margin: 0; padding: 10px 14px; pointer-events: none; color: #e5cf8c; background: rgba(4, 14, 10, .94); border: 1px solid #657958; font-size: 13px; line-height: 1.4; }
+.hub-dialogue-mode #hub-onboarding-objective-v84 { visibility: hidden; }
+#hub-onboarding-objective-v84:empty { display: none; }
+@media (max-width: 640px), (max-height: 520px) { #player-creator-v84 { padding: 16px; } #player-creator-v84 .creator-grid-v84 { grid-template-columns: 1fr; gap: 8px; } #player-creator-v84 figure { display: none; } #player-creator-v84 header p { font-size: 13px; } #player-creator-v84 footer button { flex: 1; } }

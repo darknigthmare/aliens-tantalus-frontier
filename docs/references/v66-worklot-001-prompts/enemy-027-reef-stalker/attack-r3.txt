@@ -1,6 +1,0 @@
-Use case: precise-object-edit
-Asset type: targeted interclip scale repair of current Reef Stalker ATTACK r2 sheet.
-Input image1: edit target, current small eight-pose4x2 attack sheet.
-Change ONLY scale: enlarge every complete creature uniformly to EXACTLY120% of its current size around its own center, maintaining the SAME center in its SAME square cell. Preserve every attack pose, chronology, right-facing orientation, eyeless skull, exactly four limbs, ribs, three/four low dorsal fin-plates, tail blade, color, texture and magenta matte. Do not redraw, change pose, reorder, independently resize or shift ground contact.
-Exact1774x8872:1 canvas, invisible4x2 cells. After enlargement every full tail, nose, foot and plate must remain within its own cell, with at least4% pure magenta clearance from edges; no contacts, spill, clipping or overlap. Uniform120% applies to all eight equally.
-No new elements, shadows, floor, effects, labels, grid, text, UI or color change. Pure opaque #FF00FF background.

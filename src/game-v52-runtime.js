@@ -1,3 +1,9 @@
+import { resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
+import { attachCrewDeploymentV85, crewMovementV85, crewAimOffsetV85, crewSupportProfileV85,
+  tickCrewRuntimeV85, stressCrewOnDamageV85, crewToolChargesV85, spendCrewToolV85,
+  captureCrewRuntimeV85, restoreCrewRuntimeV85 } from './crew-runtime-v85.js';
+import { buildWeaponBallisticsRuntime } from './game-production-base.js';
+import { startTacticalReloadV77 } from './tactical-reload-v77.js';
 import {
   CREW_SPRITE_IDS,
   SPRITE_GRID,
@@ -287,7 +293,7 @@ export function buildSquadRoleRuntime(member = {}) {
 
 function createSquadActor(member, index, leader) {
   const profile = buildSquadRoleRuntime(member);
-  const spriteId = CREW_SPRITE_IDS[member.id] || CREW_SPRITE_IDS['crew-01-mara-vega'];
+  const spriteId = member.recruitV85 ? 'player.echo9-marine.locomotion' : CREW_SPRITE_IDS[member.id] || CREW_SPRITE_IDS['crew-01-mara-vega'];
   const actor = {
     id: `squad:${member.id}`,
     crewId: member.id,
@@ -336,6 +342,15 @@ function createSquadActor(member, index, leader) {
     squadMember: true,
     formationIndex: index
   };
+  if (attachCrewDeploymentV85(actor, member) && actor.crewV85.personalEquipment) {
+    const state = actor.crewV85;
+    actor.supportCharges = Object.values(state.charges).reduce((sum, value) => sum + value, 0);
+    actor.armor = state.armor;
+    actor.profile = Object.freeze({ ...profile, action: 'individual-loadout-v85',
+      damage: state.weaponRuntime?.damage || 0, interval: state.weaponRuntime ? 1 / state.weaponRuntime.fireRate : 1,
+      range: crewSupportProfileV85(actor).detectionRange, armor: state.armor, supportCharges: actor.supportCharges });
+    actor.action = 'individual-loadout-v85';
+  }
   actor.visualWidth = getSquadVisualWidth(actor);
   actor.formationSlot = actor.visualWidth + SQUAD_FORMATION_GAP;
   return actor;
@@ -345,6 +360,7 @@ export function withV52MissionRuntime(BaseEngine) {
   return class V52MissionRuntime extends BaseEngine {
     start(options = {}) {
       this.pendingSquadResume = null;
+      this.missionSquadConfiguredV85 = false;
       const snapshot = super.start(options);
       this.configureNeuroPlayerVisualContract(options);
       this.configureSpriteRuntime();
@@ -473,8 +489,16 @@ export function withV52MissionRuntime(BaseEngine) {
 
     configureMissionSquad() {
       const activeCrew = asList(this.crewRuntime).filter((member) => member?.status === 'active');
+      const explicitPlayerV84 = this.playerIdentityV84?.id === 'player-echo9'
+        && this.player?.operatorId === this.playerIdentityV84.id;
       const operatorId = this.player?.operatorId || activeCrew[0]?.id;
-      const companions = activeCrew.filter((member) => member.id !== operatorId).slice(0, 3);
+      // Legacy profiles still embody the first selected Marine. Attach that
+      // Marine's actual training/equipment; V84's independent commander is not it.
+      const playerMember = !explicitPlayerV84 && activeCrew.find(member => member.id === operatorId);
+      if (playerMember) attachCrewDeploymentV85(this.player, playerMember);
+      // V84 J1 is not a catalogue crew member. Keep all four manifested allies;
+      // J2 still takes over its existing counterpart instead of spawning a clone.
+      const companions = activeCrew.filter((member) => member.id !== operatorId).slice(0, explicitPlayerV84 ? 4 : 3);
       this.squadActors = companions.map((member, index) => createSquadActor(member, index, this.player));
       this.squadTelemetry = {
         configured: this.squadActors.length,
@@ -498,9 +522,12 @@ export function withV52MissionRuntime(BaseEngine) {
         this.vehicle.squadAccessRuntime = null;
         this.vehicle.squadAccessBoardingComplete = false;
       }
-      this.squadCommandMultiplier = this.squadActors.some((member) => member.specialty === 'command') ? 1.12 : 1;
-      this.squadCohesionMultiplier = this.squadActors.some((member) => member.specialty === 'diplomacy') ? 1.1 : 1;
+      this.squadCommandMultiplier = this.squadActors.some((member) => !member.crewV85?.visualProfileId && member.specialty === 'command') ? 1.12 : 1;
+      this.squadCohesionMultiplier = this.squadActors.some((member) => !member.crewV85?.visualProfileId && member.specialty === 'diplomacy') ? 1.1 : 1;
+      const coopMember = activeCrew.find(member => member.id === this.coop?.operatorId);
+      if (coopMember) attachCrewDeploymentV85(this.coop, coopMember);
       if (this.squadCommandMultiplier > 1 && this.player) this.player.maxArmor += 6;
+      this.missionSquadConfiguredV85 = true;
     }
 
     activeSquadActors() {
@@ -537,7 +564,8 @@ export function withV52MissionRuntime(BaseEngine) {
       if (counterpart && switchingRole) {
         const from = next ? counterpart : this.coop;
         const to = next ? this.coop : counterpart;
-        for (const key of ['x', 'y', 'health', 'armor', 'alive', 'downed', 'bleedOut', 'facing', 'kills', 'inVehicle', 'vehicleSeatId']) {
+        if (from.crewV85 && to.crewV85) restoreCrewRuntimeV85(to, captureCrewRuntimeV85(from));
+        for (const key of ['x', 'y', 'health', 'armor', 'alive', 'downed', 'bleedOut', 'facing', 'kills', 'shots', 'actions', 'inVehicle', 'vehicleSeatId']) {
           if (from?.[key] !== undefined) to[key] = from[key];
         }
         to.vx = 0;
@@ -760,16 +788,22 @@ export function withV52MissionRuntime(BaseEngine) {
 
     useMedkit(actor = this.player) {
       if (this.isVehicleAccessLockedV59(actor)) return false;
+      if (actor?.crewV85?.personalEquipment) return this.useCrewToolV85(actor, 'medical');
       return super.useMedkit(actor);
     }
 
     activateTracker(actor = this.player) {
       if (this.isVehicleAccessLockedV59(actor)) return false;
+      if (actor?.crewV85?.personalEquipment) return this.useCrewToolV85(actor, 'scan');
       return super.activateTracker(actor);
     }
 
     useEquipment(equipmentId, actor = this.player) {
       if (this.isVehicleAccessLockedV59(actor)) return false;
+      if (actor?.crewV85?.personalEquipment) {
+        const item = actor.crewV85.gear.find(entry => entry.instanceId === equipmentId || entry.catalogId === equipmentId);
+        return item ? this.useCrewToolV85(actor, item.function) : false;
+      }
       return super.useEquipment(equipmentId, actor);
     }
 
@@ -780,7 +814,21 @@ export function withV52MissionRuntime(BaseEngine) {
 
     fire(actor) {
       if (this.isVehicleAccessLockedV59(actor)) return false;
-      const fired = super.fire(actor);
+      const personal = actor?.crewV85?.personalEquipment && !actor.inVehicle;
+      if (personal && !actor.crewV85.weaponRuntime) return false;
+      const previousWeapon = this.weaponRuntime;
+      const previousBallistics = this.weaponBallistics;
+      let fired;
+      try {
+        if (personal) {
+          this.weaponRuntime = actor.crewV85.weaponRuntime;
+          this.weaponBallistics = buildWeaponBallisticsRuntime(this.weaponRuntime);
+        }
+        fired = super.fire(actor);
+      } finally {
+        this.weaponRuntime = previousWeapon;
+        this.weaponBallistics = previousBallistics;
+      }
       if (fired && actor) {
         actor.v52FireClock = actor.inVehicle ? 0.48 : 0.34;
         if (actor.inVehicle && this.vehicle) this.vehicle.v52TurretClock = 0.52;
@@ -791,6 +839,7 @@ export function withV52MissionRuntime(BaseEngine) {
     damagePlayer(actor, amount, options = {}) {
       if (actor?.squadMember) return this.damageSquadMember(actor, amount, options);
       const result = super.damagePlayer(actor, amount, options);
+      stressCrewOnDamageV85(actor, Math.max(0, Number(result) || 0));
       if (actor) actor.v52HurtClock = Math.max(actor.v52HurtClock || 0, 0.42);
       if (actor === this.player && actor.downed) this.tryEmergencySquadRevive(actor);
       return result;
@@ -1403,9 +1452,13 @@ export function withV52MissionRuntime(BaseEngine) {
       const leader = this.player?.alive ? this.player : this.coopEnabled && this.coop?.alive ? this.coop : this.player;
       if (!leader) return;
       const active = this.activeSquadActors();
+      if (this.player?.crewV85) tickCrewRuntimeV85(this.player, delta, [...active, this.coopEnabled ? this.coop : null]);
+      if (this.coopEnabled && this.coop?.crewV85) tickCrewRuntimeV85(this.coop, delta, active);
       const vehicleAccessControlled = this.updateSquadVehicleAccessRuntimeV60(active, leader, delta);
       const fixedActors = [this.player, this.coopEnabled ? this.coop : null].filter((actor) => actor?.alive && !actor.inVehicle);
       for (const [index, member] of active.entries()) {
+        tickCrewRuntimeV85(member, delta, [...active, leader]);
+        if (member.crewV85) member.v52FireClock = Math.max(0, (member.v52FireClock || 0) - delta);
         member.fireClock = Math.max(0, member.fireClock - delta);
         member.supportClock = Math.max(0, member.supportClock - delta);
         member.workClock = Math.max(0, member.workClock - delta);
@@ -1529,6 +1582,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateSquadMovement(member, index, leader, delta) {
+      const individual = crewMovementV85(member);
       const targetEnemy = this.closestEnemy(member, member.profile.range);
       const formationIndex = member.formationIndex ?? index;
       const formationSlot = Math.max(
@@ -1558,7 +1612,7 @@ export function withV52MissionRuntime(BaseEngine) {
         if (Math.abs(ladderGap) < 34) {
           member.climbing = true;
           member.x += ladderGap * Math.min(1, delta * 10);
-          member.vy = Math.sign(gapY) * 170;
+          member.vy = Math.sign(gapY) * 170 * individual.climb;
           member.y = clamp(member.y + member.vy * delta, ladder.top - member.h + 8, ladder.bottom - member.h);
           member.vx = 0;
           member.grounded = false;
@@ -1567,8 +1621,8 @@ export function withV52MissionRuntime(BaseEngine) {
       }
       member.climbing = false;
       const grappleScale = member.grappledClock > 0 ? 0.42 : 1;
-      const desiredVelocity = Math.abs(gapX) > 34 ? Math.sign(gapX) * (targetEnemy ? 165 : 215) * grappleScale : 0;
-      member.vx += (desiredVelocity - member.vx) * Math.min(1, delta * (member.grounded ? 12 : 7));
+      const desiredVelocity = Math.abs(gapX) > 34 ? Math.sign(gapX) * (targetEnemy ? 165 : 215) * grappleScale * individual.speed : 0;
+      member.vx += (desiredVelocity - member.vx) * Math.min(1, delta * (member.grounded ? 12 : 7) * individual.acceleration);
       if (Math.abs(member.vx) > 4) member.facing = Math.sign(member.vx);
       const previousX = member.x;
       member.x = clamp(member.x + member.vx * delta, 0, WORLD_WIDTH - member.w);
@@ -1576,7 +1630,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const blocked = Math.abs(member.x - previousX) < Math.max(0.4, Math.abs(member.vx * delta) * 0.2) && Math.abs(gapX) > 70;
       member.stuckClock = blocked ? member.stuckClock + delta : Math.max(0, member.stuckClock - delta * 2);
       if (member.grounded && (member.stuckClock > 0.22 || gapY < -95)) {
-        member.vy = -540;
+        member.vy = -540 * individual.jump;
         member.grounded = false;
         member.stuckClock = 0;
       }
@@ -1610,6 +1664,7 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     updateSquadCombat(member) {
+      if (member.crewV85?.personalEquipment) return this.fireCrewWeaponV85(member);
       const target = this.closestEnemy(member, member.profile.range);
       if (!target || member.fireClock > 0 || member.downed) return false;
       const direction = Math.sign(target.x - member.x) || member.facing || 1;
@@ -1621,13 +1676,19 @@ export function withV52MissionRuntime(BaseEngine) {
       member.actions += 1;
       target.alert = true;
       const explosive = member.specialty === 'demolition';
+      const pivot = { x: member.x + member.w / 2, y: member.y + 36 };
+      const angle = Math.atan2(target.y + target.h / 2 - pivot.y, target.x + target.w / 2 - pivot.x) + crewAimOffsetV85(member);
+      const aim = { x: Math.cos(angle), y: Math.sin(angle) };
+      const muzzle = resolveCombatMuzzleV83(member, aim, { pivotX: pivot.x, pivotY: pivot.y, barrelLength: 22 });
+      const shot = buildCombatShotVectorsV83(aim, { speed: explosive ? 700 : 850 })[0];
       const bullet = {
-        x: member.x + member.w / 2 + direction * 22,
-        y: member.y + 36,
+        x: muzzle.x,
+        y: muzzle.y,
         w: explosive ? 16 : 12,
         h: explosive ? 8 : 4,
-        vx: direction * (explosive ? 700 : 850),
-        vy: 0,
+        vx: shot.vx,
+        vy: shot.vy,
+        angleRadians: shot.angleRadians,
         damage: member.profile.damage,
         owner: member,
         kind: `squad-${member.specialty}`,
@@ -1649,7 +1710,126 @@ export function withV52MissionRuntime(BaseEngine) {
       return true;
     }
 
+    fireCrewWeaponV85(member) {
+      const state = member.crewV85;
+      const weapon = state?.weaponRuntime;
+      const target = this.closestEnemy(member, crewSupportProfileV85(member).detectionRange);
+      if (!weapon || !target || !member.alive || member.downed || member.inVehicle || member.fireClock > 0 || member.reloading) return false;
+      if (member.ammo <= 0) { startTacticalReloadV77(member, weapon); return false; }
+      const pivot = { x: member.x + member.w / 2, y: member.y + 36 };
+      const angle = Math.atan2(target.y + target.h / 2 - pivot.y, target.x + target.w / 2 - pivot.x) + crewAimOffsetV85(member);
+      const aim = { x: Math.cos(angle), y: Math.sin(angle) };
+      const ballistics = buildWeaponBallisticsRuntime(weapon);
+      const shot = buildCombatShotVectorsV83(aim, { speed: 850 })[0];
+      const muzzle = resolveCombatMuzzleV83(member, aim, { pivotX: pivot.x, pivotY: pivot.y, barrelLength: 22 });
+      member.facing = Math.sign(aim.x) || member.facing;
+      member.ammo -= 1;
+      member.fireClock = (1 + state.stress * 0.002) / weapon.fireRate / this.squadCommandMultiplier;
+      member.v52FireClock = 0.22;
+      member.workClock = 0.22;
+      member.shots += 1;
+      member.actions += 1;
+      target.alert = true;
+      this.bullets.push({ ...muzzle, w: 12, h: 4, vx: shot.vx, vy: shot.vy, angleRadians: shot.angleRadians,
+        damage: weapon.damage, owner: member, crewId: member.crewId, weaponId: weapon.id,
+        kind: 'squad-personal-v85', family: ballistics.family, penetration: ballistics.penetration,
+        remainingPenetration: ballistics.penetrationBudget, armorBypass: ballistics.armorBypass,
+        maxHits: ballistics.maxHits, status: ballistics.status, splash: ballistics.splash,
+        hitCount: 0, hitEnemyIds: new Set(), life: 1.15, hit: false });
+      this.squadTelemetry.shots += 1;
+      this.onEvent({ type: 'squad-fire', crewId: member.crewId, targetId: target.id, weaponId: weapon.id, damage: weapon.damage });
+      return true;
+    }
+
+    crewCanSupportV85(member, kind) {
+      if (member?.crewV85?.personalEquipment) return crewToolChargesV85(member, kind) > 0;
+      const specialties = { medical: ['medical'], repair: ['engineering', 'vehicle'], scan: ['science', 'recon', 'infiltration'] };
+      return member?.supportCharges > 0 && specialties[kind]?.includes(member.specialty);
+    }
+
+    spendCrewSupportV85(member, kind) {
+      if (member?.crewV85?.personalEquipment) return spendCrewToolV85(member, kind);
+      if (!this.crewCanSupportV85(member, kind)) return false;
+      member.supportCharges -= 1;
+      return true;
+    }
+
+    updateCrewSupportV85(member, active, leader) {
+      if (!member.alive || member.downed || member.inVehicle || member.supportClock > 0) return false;
+      const support = crewSupportProfileV85(member);
+      const targets = [...new Set([leader, this.coopEnabled ? this.coop : null, ...active].filter(Boolean))];
+      if (this.crewCanSupportV85(member, 'medical')) {
+        const downed = targets.find(target => target.downed && distance(member, target) < 260);
+        if (downed) return this.reviveFromSquad(member, downed);
+        const injured = targets.filter(target => target.alive && target.health < target.maxHealth * 0.62 && distance(member, target) < 220)
+          .sort((a, b) => a.health / a.maxHealth - b.health / b.maxHealth)[0];
+        if (injured && this.spendCrewSupportV85(member, 'medical')) {
+          const amount = Math.min(support.heal, injured.maxHealth - injured.health);
+          injured.health += amount;
+          member.supportClock = support.medicalInterval;
+          member.workClock = 0.7;
+          this.squadTelemetry.heals += 1;
+          this.recordSquadConsequence(member, 'heal', { targetId: injured.crewId || injured.operatorId || 'player', amount });
+          return true;
+        }
+      }
+      if (this.crewCanSupportV85(member, 'repair') && this.vehicle?.active && !this.vehicle.destroyed
+        && this.vehicle.hull < this.vehicle.maxHull && distance(member, this.vehicle) < 300 && this.spendCrewSupportV85(member, 'repair')) {
+        const amount = Math.min(support.repair, this.vehicle.maxHull - this.vehicle.hull);
+        this.vehicle.hull += amount;
+        member.supportClock = support.repairInterval;
+        member.workClock = 0.8;
+        this.squadTelemetry.repairs += 1;
+        this.recordSquadConsequence(member, 'repair', { vehicleId: this.vehicle.id, amount });
+        return true;
+      }
+      if (this.crewCanSupportV85(member, 'scan')) {
+        const contacts = asList(this.enemies).filter(enemy => enemy.alive && distance(member, enemy) < support.detectionRange && (enemy.revealed || 0) < 1);
+        if (contacts.length && this.spendCrewSupportV85(member, 'scan')) {
+          for (const enemy of contacts) enemy.revealed = Math.max(enemy.revealed || 0, support.revealDuration);
+          member.supportClock = 6;
+          member.workClock = 0.7;
+          this.squadTelemetry.scans += 1;
+          this.recordSquadConsequence(member, 'scan', { contacts: contacts.length });
+          return true;
+        }
+      }
+      return false;
+    }
+
+    useCrewToolV85(actor, kind) {
+      if (!this.running || this.paused || this.mission?.state !== 'active' || !actor.alive || actor.downed || actor.inVehicle
+        || (actor === this.coop && !this.coopEnabled) || actor.supportClock > 0 || !this.crewCanSupportV85(actor, kind)) return false;
+      const profile = crewSupportProfileV85(actor);
+      if (kind === 'medical' && actor.health < actor.maxHealth && this.spendCrewSupportV85(actor, kind)) {
+        const amount = Math.min(profile.heal, actor.maxHealth - actor.health);
+        actor.health += amount; actor.supportClock = profile.medicalInterval;
+        this.squadTelemetry.heals += 1;
+        this.recordSquadConsequence(actor, 'heal', { targetId: actor.crewId || actor.operatorId, amount });
+        return true;
+      }
+      if (kind === 'repair' && this.vehicle?.active && !this.vehicle.destroyed && this.vehicle.hull < this.vehicle.maxHull
+        && distance(actor, this.vehicle) < 300 && this.spendCrewSupportV85(actor, kind)) {
+        const amount = Math.min(profile.repair, this.vehicle.maxHull - this.vehicle.hull);
+        this.vehicle.hull += amount; actor.supportClock = profile.repairInterval;
+        this.squadTelemetry.repairs += 1;
+        this.recordSquadConsequence(actor, 'repair', { vehicleId: this.vehicle.id, amount });
+        return true;
+      }
+      if (kind === 'scan') {
+        const contacts = this.enemies.filter(enemy => enemy.alive && distance(actor, enemy) < profile.detectionRange);
+        if (!contacts.length || !this.spendCrewSupportV85(actor, kind)) return false;
+        for (const enemy of contacts) enemy.revealed = Math.max(enemy.revealed || 0, profile.revealDuration);
+        actor.supportClock = 6;
+        this.squadTelemetry.scans += 1;
+        this.recordSquadConsequence(actor, 'scan', { contacts: contacts.length });
+        return true;
+      }
+      return false;
+    }
+
     updateSquadSupport(member, active, leader) {
+      if (member.crewV85) return this.updateCrewSupportV85(member, active, leader);
       if (member.supportClock > 0 || member.supportCharges <= 0) return false;
       if (member.specialty === 'medical') {
         const downed = [leader, this.coopEnabled ? this.coop : null, ...active].find((actor) => actor?.downed && distance(member, actor) < 260);
@@ -1727,6 +1907,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const absorbed = Math.min(member.armor, adjusted * 0.5);
       member.armor -= absorbed;
       const damage = adjusted - absorbed;
+      stressCrewOnDamageV85(member, damage);
       member.health -= damage;
       member.damageTaken += damage;
       member.v52HurtClock = 0.42;
@@ -1749,23 +1930,23 @@ export function withV52MissionRuntime(BaseEngine) {
             index: member.formationIndex || 0
           });
         }
-        this.onEvent({ type: 'squad-down', crewId: member.crewId, source, revivable: this.activeSquadActors().some((ally) => ally.alive && ally.specialty === 'medical') });
+        this.onEvent({ type: 'squad-down', crewId: member.crewId, source, revivable: this.activeSquadActors().some((ally) => ally.alive && this.crewCanSupportV85(ally, 'medical')) });
       }
       return damage;
     }
 
     tryEmergencySquadRevive(target) {
-      const medic = this.activeSquadActors().find((member) => member.alive && member.specialty === 'medical' && member.supportCharges > 0 && distance(member, target) <= 260);
+      const medic = this.activeSquadActors().find((member) => member.alive && this.crewCanSupportV85(member, 'medical') && distance(member, target) <= 260);
       if (!medic) return false;
       target.alive = true;
       target.downed = false;
       target.bleedOut = 0;
-      target.health = Math.min(Number(target.maxHealth) || 100, 32);
+      target.health = Math.min(Number(target.maxHealth) || 100, medic.crewV85 ? crewSupportProfileV85(medic).heal : 32);
       target.armor = 0;
       target.actionClock = 0.9;
       target.v52HurtClock = 0.45;
-      medic.supportCharges -= 1;
-      medic.supportClock = 7;
+      this.spendCrewSupportV85(medic, 'medical');
+      medic.supportClock = medic.crewV85 ? crewSupportProfileV85(medic).medicalInterval : 7;
       medic.workClock = 0.9;
       if (this.mission?.state === 'failed') {
         this.mission.state = 'active';
@@ -1778,14 +1959,15 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     reviveFromSquad(medic, target) {
+      if (!this.crewCanSupportV85(medic, 'medical')) return false;
       target.alive = true;
       target.downed = false;
       target.bleedOut = 0;
-      target.health = Math.min(target.maxHealth, Math.max(Math.min(34, target.maxHealth), target.health || 0));
+      target.health = Math.min(target.maxHealth, Math.max(Math.min(medic.crewV85 ? crewSupportProfileV85(medic).heal : 34, target.maxHealth), target.health || 0));
       target.armor = Math.max(0, target.armor || 0);
       target.v52HurtClock = 0.4;
-      medic.supportCharges -= 1;
-      medic.supportClock = 7;
+      this.spendCrewSupportV85(medic, 'medical');
+      medic.supportClock = medic.crewV85 ? crewSupportProfileV85(medic).medicalInterval : 7;
       medic.workClock = 0.9;
       this.squadTelemetry.revives += 1;
       this.recordSquadConsequence(medic, 'revive', { targetId: target.crewId || target.operatorId || 'player' });
@@ -1853,8 +2035,8 @@ export function withV52MissionRuntime(BaseEngine) {
     }
 
     recordSquadConsequence(member, action, detail = {}) {
-      member.actions += 1;
-      const consequence = { crewId: member.crewId, action, at: Math.round((this.mission?.elapsed || 0) * 10) / 10, ...detail };
+      member.actions = (Number(member.actions) || 0) + 1;
+      const consequence = { crewId: member.crewId || member.operatorId, action, at: Math.round((this.mission?.elapsed || 0) * 10) / 10, ...detail };
       this.squadTelemetry.consequences.push(consequence);
       if (this.squadTelemetry.consequences.length > 48) this.squadTelemetry.consequences.shift();
       this.onEvent({ type: 'squad-action', ...consequence });
@@ -2124,10 +2306,19 @@ export function withV52MissionRuntime(BaseEngine) {
       const boarded = asList(this.squadActors).some((member) => member.inVehicle);
       return {
         schema: 1,
+        ...(this.player?.crewV85 ? { playerV85: {
+          crewRuntimeV85: captureCrewRuntimeV85(this.player),
+          shots: clamp(Math.round(this.player.shots || 0), 0, 999999),
+          actions: clamp(Math.round(this.player.actions || 0), 0, 999999)
+        } } : {}),
         vehicleId: boarded && this.vehicle?.active ? String(this.vehicle.id || '') : null,
-        members: asList(this.squadActors).map((member) => ({
+        members: asList(this.squadActors).map((original) => {
+          const member = original.crewV85 && this.coopEnabled && this.coop?.operatorId === original.crewId
+            ? { ...original, ...this.coop, crewId: original.crewId } : original;
+          return {
           crewId: member.crewId,
           x: clamp(member.x, 0, WORLD_WIDTH),
+          ...(member.crewV85 ? { crewRuntimeV85: captureCrewRuntimeV85(this.coopEnabled && this.coop?.operatorId === member.crewId ? this.coop : member) } : {}),
           y: clamp(member.y, 0, WORLD_HEIGHT),
           health: clamp(member.health, 0, member.maxHealth),
           armor: clamp(member.armor, 0, member.maxArmor),
@@ -2142,15 +2333,20 @@ export function withV52MissionRuntime(BaseEngine) {
           kills: clamp(Math.round(member.kills), 0, 99999),
           shots: clamp(Math.round(member.shots), 0, 999999),
           actions: clamp(Math.round(member.actions), 0, 999999)
-        }))
+          };
+        })
       };
     }
 
     restoreSquadState(rawSquad) {
       const sources = asList(rawSquad?.members);
-      if (!this.squadActors?.length) {
+      if (this.missionSquadConfiguredV85 === false || (!this.squadActors?.length && !this.player?.crewV85)) {
         this.pendingSquadResume = rawSquad;
         return 0;
+      }
+      if (restoreCrewRuntimeV85(this.player, rawSquad?.playerV85?.crewRuntimeV85)) {
+        this.player.shots = clamp(Math.round(Number(rawSquad.playerV85.shots) || 0), 0, 999999);
+        this.player.actions = clamp(Math.round(Number(rawSquad.playerV85.actions) || 0), 0, 999999);
       }
       const byId = new Map(this.squadActors.map((member) => [member.crewId, member]));
       const sourceVehicleId = typeof rawSquad?.vehicleId === 'string' ? rawSquad.vehicleId : '';
@@ -2191,6 +2387,13 @@ export function withV52MissionRuntime(BaseEngine) {
         member.kills = clamp(Math.round(Number(source.kills) || 0), 0, 99999);
         member.shots = clamp(Math.round(Number(source.shots) || 0), 0, 999999);
         member.actions = clamp(Math.round(Number(source.actions) || 0), 0, 999999);
+        if (member.crewV85) {
+          restoreCrewRuntimeV85(member, source.crewRuntimeV85);
+          if (this.coop?.operatorId === member.crewId) {
+            restoreCrewRuntimeV85(this.coop, source.crewRuntimeV85);
+            for (const key of ['shots', 'actions', 'kills']) this.coop[key] = member[key];
+          }
+        }
         member.vx = 0;
         member.vy = 0;
         if (member.inVehicle && this.vehicle && !this.vehicle.passengers.includes(member)) this.vehicle.passengers.push(member);
@@ -2228,6 +2431,8 @@ export function withV52MissionRuntime(BaseEngine) {
             role: member.role,
             specialty: member.specialty,
             action: member.action,
+            ...(member.crewV85 ? { individualV85: { ...captureCrewRuntimeV85(member), aptitudes: { ...member.crewV85.aptitudes },
+              mass: member.crewV85.mass, capacity: member.crewV85.capacity, visualProfileId: member.crewV85.visualProfileId, artStatus: member.crewV85.artStatus } } : {}),
             spriteId: member.spriteId,
             alive: member.alive,
             downed: member.downed,

@@ -31,8 +31,8 @@ const normalizeProvenance = (candidate) => {
 };
 
 /**
- * Creates the immutable runtime sheet contract. Production injects the pinned
- * hash and generation receipt only after the normalized bitmap passes art QA.
+ * Creates the immutable runtime sheet contract for the distributed asset.
+ * Public metadata identifies this registry and the shipped bitmap, not source-production records.
  */
 export function createAlienSurvivalSystemsSheetV70({
   contractId = '',
@@ -65,11 +65,10 @@ export function createAlienSurvivalSystemsSheetV70({
 export const ALIEN_SURVIVAL_SYSTEMS_SHEET_V70 = createAlienSurvivalSystemsSheetV70({
   contractId: 'alien-survival-systems-atlas-v70',
   expectedSha256: '6f3d8d37c38d6528609e870adb815f550c4d98f998379e42dc49a4046a8ce366',
-  metadataPath: 'assets/openai/sprites/metadata/v70/alien-survival-systems-v70.json',
+  metadataPath: 'src/alien-survival-visuals-v70.js',
   provenance: {
     provider: 'OpenAI ImageGen',
-    sourceAsset: 'assets/openai/sprites/frames/v70/alien-survival-systems-atlas-openai-v70.png',
-    pipeline: 'OpenAI ImageGen master + deterministic checker cleanup'
+    sourceAsset: 'assets/openai/sprites/normalized/props/alien-survival-systems-atlas-v70.png'
   }
 });
 

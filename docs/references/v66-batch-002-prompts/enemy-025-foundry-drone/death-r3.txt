@@ -1,5 +1,0 @@
-Use case: precise-object-edit.
-Image1 edit target: eight chronological Foundry Drone death poses.
-Change ONLY layout and padding, do NOT redesign any creature or change its pose. Reduce EACH complete pose uniformly to75percentofitscurrentsize and center it within its same square cell. Apply exactly the same reduction to ALL8poses so relativebodysize remainsconstant. Keep their entire tails, feet, heads and claws, no cropping. Move first-row poses UP so their feet leave at least15percentcellheightEMPTYbeneaththem; they currently touchthemiddle horizontal rowboundary. Ensurethewidecorpsesalsofitwellwithintheir owncell.
-Preserve EXACT8poses in readingorder,4columns2rowsequalSQUAREcells, exact2:1landscape canvas. Sameblackgunmetal/brownsootidentity, lighting, crispbitmapart, right-facing orientation and full terminaldeathsequence. Nochanges toanatomy/proportions orposing, nocelloverlaps, no addedposes, no mirroring.
-UniformperfectlyflatMAGENTA#FF00FFthroughbackgroundincludinggaps, no castshadows, text, grid, checkerboard orscenery.

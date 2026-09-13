@@ -11,6 +11,7 @@ import { withAlienSurvivalRuntimeV70 } from './alien-survival-runtime-v70.js';
 import { captureGameplaySupportV72, restoreGameplaySupportV72 } from './gameplay-support-v72.js';
 import { captureTacticalReloadV77, restoreTacticalReloadV77, cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { drawTacticalReloadHudV77 } from './tactical-reload-hud-v77.js';
+import { withPlaceablesRuntimeV86 } from './placeables-runtime-v86.js';
 
 export * from './game-production-core.js';
 
@@ -20,6 +21,7 @@ const V67ProductionEngine = withCargoBrutalRuntimeV67(V52ProductionEngine);
 const V68ProductionEngine = withNarrativeCollectablesRuntimeV68(V67ProductionEngine);
 const V69ProductionEngine = withAlphaBravoCoopRuntimeV69(V68ProductionEngine);
 const V70ProductionEngine = withAlienSurvivalRuntimeV70(V69ProductionEngine);
+const V86ProductionEngine = withPlaceablesRuntimeV86(V70ProductionEngine);
 
 export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   const result = buildCoreEnemyEncounterEligibility(enemy, context);
@@ -32,7 +34,7 @@ export function buildEnemyEncounterEligibility(enemy = {}, context = {}) {
   });
 }
 
-export class GameEngine extends V70ProductionEngine {
+export class GameEngine extends V86ProductionEngine {
   start(options = {}) {
     const snapshot = super.start(options);
     this.canvas.focus?.({ preventScroll: true });
@@ -54,13 +56,14 @@ export class GameEngine extends V70ProductionEngine {
       tacticalReloadRestoredV77[role] = restoreTacticalReloadV77(this[role], rawState?.[role]?.tacticalReloadV77, this.reloadWeaponV77(this[role]));
       if (this[role]?.reloading) this[role].actionClock = this[role].reloadClock;
     }
-    return { ...result, supportRestoredV72, tacticalReloadRestoredV77 };
+    const placeablesRestoredV86 = this.restorePlaceablesAfterSupportV86(rawState);
+    return { ...result, supportRestoredV72, tacticalReloadRestoredV77, placeablesRestoredV86 };
   }
 
   canPerformGameplayAction(actor = this.player) {
     return Boolean(this.running && !this.paused && !this.enemyAtlasLoadingPausedV65
       && this.mission?.state === 'active' && actor?.alive
-      && (actor !== this.coop || this.coopEnabled));
+      && (actor !== this.coop || this.coopEnabled) && !this.isPlaceableBusyV86(actor));
   }
 
   // Guard the outermost runtime so keyboard, touch/UI and internal dispatch share the same contract.
@@ -85,6 +88,7 @@ export class GameEngine extends V70ProductionEngine {
   }
 
   toggleVehicle(actor = this.player) {
+    if (!this.paused && this.running) this.cancelPlaceableV86(actor, 'vehicle');
     const changed = this.canPerformGameplayAction(actor) ? super.toggleVehicle(actor) : false;
     if (changed) cancelTacticalReloadV77(actor, 'vehicle');
     return changed;

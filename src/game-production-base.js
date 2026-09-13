@@ -1,4 +1,7 @@
 import { GameEngine as FinalGameEngine } from './game-final-runtime.js';
+import { firstProjectileObstacleV83 } from './projectile-collision-v83.js';
+import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
+import { CombatCaptionDirectorV84 } from './combat-captions-v84.js';
 
 export * from './game-final-runtime.js';
 
@@ -185,6 +188,7 @@ export class GameEngine extends FinalGameEngine {
   start(options = {}) {
     this.accessibilityRuntime = buildAccessibilityRuntime(options);
     this.captions = [];
+    this.captionDirectorV84 = new CombatCaptionDirectorV84();
     this.cameraShake = 0;
     this.penetrationTelemetry = { shots: 0, hits: 0, passThroughs: 0, familyEffects: {} };
     this.encounterSelection = selectEnemyEncounterCatalog(options.enemyCatalog, { world: options.world, campaign: options.campaign, levelSeed: options.levelSeed }, 18 + (Number(options.world?.danger) || 5) * 2);
@@ -369,42 +373,73 @@ export class GameEngine extends FinalGameEngine {
 
   applyAimAssist(bullet, player) {
     const strength = this.accessibilityRuntime?.aimAssistStrength || 0;
-    if (!strength || !bullet || !player) return false;
-    const facing = Math.sign(bullet.vx) || player.facing || 1;
-    const targets = this.enemies.filter((enemy) => enemy.alive && Math.sign(enemy.x - bullet.x) === facing && Math.abs(enemy.x - bullet.x) < 950);
-    const target = targets.sort((a, b) => {
-      const aScore = Math.abs((a.y + a.h / 2) - bullet.y) + Math.abs(a.x - bullet.x) * 0.08;
-      const bScore = Math.abs((b.y + b.h / 2) - bullet.y) + Math.abs(b.x - bullet.x) * 0.08;
-      return aScore - bScore;
-    })[0];
+    if (!strength || !bullet || !player || bullet.aimExplicitV83) return false;
+    const speed = Math.hypot(bullet.vx, bullet.vy || 0);
+    if (!speed) return false;
+    const angle = Math.atan2(bullet.vy || 0, bullet.vx);
+    const origin = { x: bullet.x, y: bullet.y, w: 0, h: 0 };
+    const world = { walls: this.walls, doors: this.doors, platforms: this.platforms };
+    const targets = (this.enemies || []).filter((enemy) => enemy.alive).map((enemy) => {
+      const dx = enemy.x + enemy.w / 2 - origin.x, dy = enemy.y + enemy.h / 2 - origin.y;
+      const offset = Math.atan2(Math.sin(Math.atan2(dy, dx) - angle), Math.cos(Math.atan2(dy, dx) - angle));
+      return { enemy, dx, dy, offset, distance: Math.hypot(dx, dy) };
+    }).filter((entry) => entry.distance > 0 && entry.distance <= 950 && Math.abs(entry.offset) <= Math.PI / 15)
+      .filter((entry) => !firstProjectileObstacleV83(origin, { x: entry.dx, y: entry.dy }, world))
+      .sort((a, b) => Math.abs(a.offset) - Math.abs(b.offset) || a.distance - b.distance);
+    const target = targets[0];
     if (!target) return false;
-    const travelTime = Math.max(0.08, Math.abs((target.x + target.w / 2) - bullet.x) / Math.abs(bullet.vx));
-    bullet.vy = ((target.y + target.h / 2) - bullet.y) / travelTime * strength;
-    bullet.aimAssistTargetId = target.id;
+    const corrected = angle + target.offset * clamp(strength, 0, 1);
+    bullet.vx = Math.cos(corrected) * speed;
+    bullet.vy = Math.sin(corrected) * speed;
+    bullet.angleRadians = corrected;
+    bullet.aimAssistTargetId = target.enemy.id;
     return true;
   }
 
   updateBullets(delta) {
+    const frameDelta = Number.isFinite(delta) ? Math.max(0, delta) : 0;
+    const bounds = this.missionLevelBounds || { width: WORLD_WIDTH, height: 1080 };
     for (const bullet of this.bullets) {
-      bullet.x += bullet.vx * delta;
-      bullet.y += (bullet.vy || 0) * delta;
-      bullet.life -= delta;
+      if (bullet.hit || !(bullet.life > 0)) continue;
+      // Do not travel (or damage a target) beyond this projectile's remaining lifetime.
+      const travelDelta = Math.min(frameDelta, bullet.life);
+      const displacement = { x: (Number(bullet.vx) || 0) * travelDelta, y: (Number(bullet.vy) || 0) * travelDelta };
+      const destination = { x: bullet.x + displacement.x, y: bullet.y + displacement.y };
+      bullet.life -= frameDelta;
       if (!(bullet.hitEnemyIds instanceof Set)) bullet.hitEnemyIds = new Set();
       if (!Number.isFinite(bullet.remainingPenetration)) bullet.remainingPenetration = 0;
       if (!Number.isFinite(bullet.maxHits)) bullet.maxHits = 1;
-      for (const wall of this.walls) if (!bullet.hit && !wall.destroyed && overlaps(bullet, wall)) bullet.hit = true;
-      for (const door of this.doors) if (!bullet.hit && door.progress < 0.82 && overlaps(bullet, door)) bullet.hit = true;
-      for (const enemy of this.enemies) {
-        if (bullet.hit || !enemy.alive || bullet.hitEnemyIds.has(enemy.id) || !overlaps(bullet, enemy)) continue;
+      const collisions = collectProjectileCollisionsV83(bullet, displacement, {
+        walls: this.walls, doors: this.doors, platforms: this.platforms, enemies: this.enemies, bounds
+      });
+      for (const collision of collisions) {
+        if (bullet.hit) break;
+        if (collision.kind !== 'enemy') {
+          bullet.x = collision.x;
+          bullet.y = collision.y;
+          bullet.hit = true;
+          break;
+        }
+        const enemy = collision.target;
+        const enemyKey = enemy.id ?? enemy;
+        if (!enemy.alive || bullet.hitEnemyIds.has(enemyKey)) continue;
+        bullet.x = collision.x;
+        bullet.y = collision.y;
         const armorBypass = clamp(Number(bullet.armorBypass) || 0, 0, 1);
         const compensatedDamage = bullet.damage + enemy.armor * 0.35 * armorBypass;
         this.applyEnemyDamage(enemy, compensatedDamage, bullet);
         this.applyProjectileStatus(enemy, bullet);
-        bullet.hitEnemyIds.add(enemy.id);
+        bullet.hitEnemyIds.add(enemyKey);
         bullet.hitCount = (bullet.hitCount || 0) + 1;
         this.penetrationTelemetry.hits += 1;
         if (bullet.splash > 0) {
-          for (const secondary of this.enemies.filter((candidate) => candidate.alive && candidate.id !== enemy.id && distance(enemy, candidate) <= bullet.splash)) this.applyEnemyDamage(secondary, bullet.damage * 0.48, { ...bullet, kind: 'explosive-splash' });
+          const splashHitIds = new Set([enemyKey]);
+          for (const secondary of this.enemies) {
+            const secondaryKey = secondary.id ?? secondary;
+            if (!secondary.alive || splashHitIds.has(secondaryKey) || distance(enemy, secondary) > bullet.splash) continue;
+            splashHitIds.add(secondaryKey);
+            this.applyEnemyDamage(secondary, bullet.damage * 0.48, { ...bullet, kind: 'explosive-splash' });
+          }
           bullet.hit = true;
           continue;
         }
@@ -413,8 +448,11 @@ export class GameEngine extends FinalGameEngine {
         if (bullet.remainingPenetration > 0 && bullet.hitCount < bullet.maxHits) this.penetrationTelemetry.passThroughs += 1;
         else bullet.hit = true;
       }
+      if (!bullet.hit) Object.assign(bullet, destination);
     }
-    this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0 && bullet.x > -100 && bullet.x < WORLD_WIDTH + 100 && bullet.y > -100 && bullet.y < 1180);
+    this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0
+      && Number.isFinite(bullet.x) && Number.isFinite(bullet.y)
+      && bullet.x >= 0 && bullet.x + bullet.w <= bounds.width && bullet.y >= 0 && bullet.y + bullet.h <= bounds.height);
   }
 
   applyProjectileStatus(enemy, bullet) {
@@ -448,7 +486,9 @@ export class GameEngine extends FinalGameEngine {
 
   pushCaption(channel, text) {
     if (!this.accessibilityRuntime?.subtitles || !text) return false;
-    const caption = { id: `${channel}-${this.captions.length + 1}`, channel, text: String(text), at: Math.round((this.mission?.elapsed || 0) * 10) / 10 };
+    this.captionDirectorV84 ||= new CombatCaptionDirectorV84();
+    const caption = this.captionDirectorV84.offer(channel, text, this.mission?.elapsed || 0);
+    if (!caption) return false;
     this.captions.push(caption);
     if (this.captions.length > 12) this.captions.shift();
     this.onEvent({ type: 'caption', ...caption });

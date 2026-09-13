@@ -1,8 +1,0 @@
-Use case: precise-object-edit
-Asset type: production 2D game animation sprite sheet
-Input images: Image 1 is the approved-content Caravan Stalker idle board: correct identity, eight poses, scale, gutters, 4 columns and 2 rows, but the overall canvas is incorrectly square.
-Primary request: change ONLY the canvas/layout aspect to an EXACT 2:1 WIDE LANDSCAPE SPRITE SHEET. Preserve the exact eight creatures, poses, anatomy, colors, right-facing side views and chronological order.
-Layout invariant: exactly 4 columns by 2 rows; the total canvas must be exactly twice as wide as it is tall, so every one of the eight cells is square. Poses 1-4 across the top row; poses 5-8 across the bottom row. Keep each creature centered in its square cell with at least 8 percent empty magenta gutter on every side. No creature pixel may touch or cross a cell boundary.
-Do not stretch or squash the creatures: preserve their aspect ratio and uniform physical scale. Reposition them only as needed within the new 2:1 canvas.
-Background invariant: flat uniform pure #FF00FF magenta only.
-Constraints: not a square canvas; not 2 columns by 4 rows; exactly eight poses; no redesign; no added or removed anatomy; no overlap; no grid lines; no text; no labels; no shadow; no scenery; no watermark.

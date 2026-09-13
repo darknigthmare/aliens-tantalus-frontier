@@ -237,9 +237,11 @@ export const HUB_TRAVERSAL_PROFILES_V60 = Object.freeze({
     [vent('briefing-vent', 126, 320)],
     [occluder('briefing-pipe', 'maintenancePipe', 810, 182, 184, 250, 0.5)]),
   'combat-information': traversalProfile('command-data-spine',
-    [platform('cic-low', 650, 494, 450, 'catwalk'), platform('cic-high', 280, 374, 520, 'drop'), platform('cic-side', 120, 506, 170, 'ledge')],
+    // Keep the service duct on the catwalk, clear of the rear console's
+    // keyboard landing area. The old overlap trapped a 92px actor in 60px.
+    [platform('cic-low', 600, 494, 500, 'catwalk'), platform('cic-high', 280, 374, 520, 'drop'), platform('cic-side', 120, 506, 170, 'ledge')],
     [ladder('cic-floor', 1010, 494, 624), ladder('cic-tier', 720, 374, 494), ladder('cic-side-link', 200, 506, 624, 46)],
-    [vent('cic-upper-vent', 298, 316), vent('cic-service-vent', 850, 436, 120, 58)],
+    [vent('cic-upper-vent', 298, 316), vent('cic-service-vent', 610, 436, 120, 58)],
     [occluder('cic-cables', 'ceilingCables', 650, -8, 420, 118, 0.4)]),
   'cryo-bay': traversalProfile('command-cryo-service',
     [platform('cryo-low', 160, 500, 480, 'ledge'), platform('cryo-high', 620, 386, 300, 'drop')],

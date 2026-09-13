@@ -1,8 +1,0 @@
-{
-  "kind": "review-rejected",
-  "profileId": "enemy-072-albino-k-series-yellow-xenomorph",
-  "actor": "Codex V72 independent animation review",
-  "note": "Four newly generated clips and normalized atlas preserved. Run repeats its first half-cycle; front-foot loop needs anatomy review. Broad hooked tail and terminal death are retained, but 32 physical roots and anatomical scale remain pending. See docs/references/V72_072_ALBINO_K_SERIES_CANDIDATE_REVIEW.md. No runtime integration.",
-  "canonExact": false,
-  "runtimeIntegrated": false
-}

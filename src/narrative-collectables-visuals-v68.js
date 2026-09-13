@@ -7,7 +7,7 @@ export const QZ17_COLLECTABLES_SHEET_V68 = Object.freeze({
   cellWidth: 512,
   cellHeight: 512,
   guard: 16,
-  provenance: 'OpenAI ImageGen + deterministic chroma-key normalization',
+  provenance: 'OpenAI ImageGen',
   originalProjectAsset: true,
   releaseReady: true
 });

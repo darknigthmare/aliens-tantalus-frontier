@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '81.0.0',
-  subtitle: 'Qualification M41A physique, identité Echo-9 stable et BIOFORGE jouable',
+  version: '86.0.0',
+  subtitle: 'Équipements physiques, placement ancré, récupération et dotations persistantes',
   sourceVersion: '51.0.0'
 });

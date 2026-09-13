@@ -1,0 +1,40 @@
+.placeables-dock-v86 { display: grid; gap: .5rem; width: 100%; min-width: 0; }
+.placeable-items-v86 { display: flex; flex-wrap: wrap; gap: .4rem; min-width: 0; }
+.placeables-dock-v86 button { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.placeable-operator-v86 { display: flex; align-items: center; gap: .7rem; }
+.placeable-operator-v86 select { width: auto; min-width: 70px; min-height: 44px; }
+.placeable-context-v86 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .65rem; border: 1px solid #477a6e; background: #0a1a20; }
+.placeable-context-v86 [role="status"] { flex: 1 1 250px; }
+.placeable-nearby-v86 { min-width: 0; padding: .4rem; border: 1px solid #394e59; }
+.placeable-nearby-v86 summary { cursor: pointer; padding: .65rem; min-height: 44px; box-sizing: border-box; }
+.placeable-nearby-v86 > div { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .4rem; }
+.placeable-nearby-v86 > div > span { flex: 1 1 200px; overflow-wrap: anywhere; }
+.placeables-dock-v86 :focus-visible { outline: 2px solid #9fffdc; outline-offset: 3px; }
+
+/* Reserve layout space instead of intercepting pointer aim over the canvas.
+   Long loadouts/recovery lists scroll inside the dock, never over the actors. */
+.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  padding-top: 0;
+}
+.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) > #mission-equipment-controls {
+  display: grid;
+  position: relative;
+  grid-row: 1;
+  grid-column: 1;
+  inset: auto;
+  align-self: stretch;
+  box-sizing: border-box;
+  max-height: min(32svh, 250px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 10px max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left));
+}
+.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) > #mission-equipment-controls:has(.placeable-items-v86 .hint):not(:has(#mission-save-v86)) { display: none; }
+.mission-mode .play-view > #mission-runtime-v62:not([hidden]) { grid-row: 2; }
+.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) > .mission-log { grid-row: 3; }
+.mission-mode .play-view:has(> #mission-runtime-v62:not([hidden])) > .mission-touch-controls { grid-row: 4; }
+.mission-mode .placeable-operator-v86,
+.mission-mode #mission-save-v86 { margin-right: 180px; }
+.mission-mode #mission-save-v86 { justify-self: start; }

@@ -1,4 +1,5 @@
 import { resolveVehicleVisualAnimationV56 } from './vehicle-visual-overrides-v56.js';
+import { hasCrewUniformV85 } from './crew-runtime-v85.js';
 import {
   NPC_MISSION_CLIP_SETS_V56,
   resolveNpcMissionAnimationV55
@@ -15,7 +16,7 @@ import { getBursterTerminalAnimationV74, getEnemyBatchActionAnimationV66 } from 
 import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
 import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 import { CETO_V75, getCetoAnimationV75 } from './enemy-ceto-v75.js';
-import { enforcePlayerAnimationRequestV81 } from './player-visual-contract-v81.js';
+import { enforcePlayerAnimationRequestV81, PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -565,6 +566,8 @@ export function resolvePlayerAnimation(actor = {}, neuroActive = false) {
 }
 
 export function resolveNpcAnimation(actor = {}) {
+  if (hasCrewUniformV85(actor)) return { ...resolveEcho9MarineAnimationV81({ ...actor, fireClock: actor.v52FireClock || 0 }),
+    visualProfileId: 'echo9-standard-v85', artStatus: 'shared-standard-uniform-no-individual-portrait' };
   const dedicatedV55 = resolveNpcMissionAnimationV55(actor);
   const allowedSheetIds = new Set([
     CREW_SPRITE_IDS[actor.crewId],
@@ -601,6 +604,10 @@ export function enforceHumanoidAnimationIdentity(actor = {}, request = null, { r
   }
 
   if (role === 'npc') {
+    if (hasCrewUniformV85(actor)) {
+      const allowed = PLAYER_VISUAL_CONTRACT_V81.sheetIds.includes(requestedSheet?.id);
+      return allowed ? request : { ...resolveNpcAnimation(actor), degraded: 'recruit-uniform-identity-rejected-v85' };
+    }
     const allowedSheetIds = new Set([
       CREW_SPRITE_IDS[actor.crewId],
       CREW_MISSION_SPRITE_IDS[actor.crewId]

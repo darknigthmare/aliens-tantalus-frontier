@@ -1,5 +1,0 @@
-EDIT ONLY THE ATTACHED SIEGE ROYAL ATTACK-R2 SHEET. Preserve the exact pixel-scale, identity, anatomy, palette, pose drawings, eight-frame order, ground baselines and flat #FF00FF background. Do not shrink, enlarge, redraw, rotate, mirror or re-time any creature.
-
-Make one targeted translation only: in the TOP ROW, FOURTH CELL, move that complete fourth pose approximately 70 pixels to the right inside its own cell, including its entire tail, body and forward claws as one rigid group. Its rear tail currently touches the divider at x=1330; after translation leave at least 60 pixels of pure #FF00FF between that tail and the left edge of the fourth cell. Keep the pose's forward claws at least 60 pixels inside the overall right canvas edge. Do not move or change the other seven poses. Exact canvas 1774 x 887, invisible 4-by-2 grid, eight distinct poses.
-
-Erase the old fourth-pose pixels completely back to uniform opaque #FF00FF. No shadow, halo, glow, transparency, checkerboard, grid, text, scenery, props or effects. This is a rigid cell-centering edit only.

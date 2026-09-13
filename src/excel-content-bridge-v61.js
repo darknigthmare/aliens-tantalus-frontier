@@ -1,7 +1,7 @@
 export const EXCEL_SOURCE_V61 = Object.freeze({
-  localSource: '.tmp/Alien_Franchise_Encyclopedie_Exhaustive.xlsx',
+  localSource: null,
   publicAsset: null,
-  sha256: '2A82ACA78FDAD882D913F93833CA9A1CC50E9195AAAD0478A4D8B6D0B1EA420B',
+  sha256: null,
   sheets: 19,
   globalEntities: 2363,
   thematicEntities: 2929

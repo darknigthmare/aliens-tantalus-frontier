@@ -1,5 +1,0 @@
-EDIT ONLY THE ATTACHED SIEGE ROYAL ATTACK SHEET. Preserve all eight exact right-facing attack poses, frame order, anatomy, identity, palette and perfectly flat #FF00FF background. Do not redraw or change action timing.
-
-Final cell-safe correction: uniformly reduce all eight creatures to 70 percent of their current size and recenter each independently in the geometric center of its own invisible 4-by-2 cell. Guarantee at least 70 pixels of pure #FF00FF between every creature silhouette and both vertical cell dividers, including the rear tail of frame 4 and the forward claws of frame 3. Keep full tails, claws, crests and feet wholly inside their own cells, with consistent row ground baselines. Exact 1774 x 887 canvas, exact 2:1, eight distinct poses, no visible grid.
-
-Fill exposed space with uniform opaque #FF00FF. No shadow, floor, gradient, texture, halo, glow, reflected pink, transparency, checkerboard, text, UI, scenery, props or effects. Packing correction only; identity and animation remain unchanged.

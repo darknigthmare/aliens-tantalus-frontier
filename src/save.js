@@ -40,6 +40,8 @@ import { SAVE_PROFILE_IDS_V78, SAVE_SELECTED_PROFILE_KEY_V78, SaveProfileErrorV7
 import { sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
+import { createPlayerOnboardingV84, normalizePlayerOnboardingV84, validatePlayerIdentityV84 } from './player-onboarding-v84.js';
+import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -53,6 +55,14 @@ export const LEGACY_KEYS = [
 ];
 
 export const MAX_SQUAD_SIZE = 4;
+
+// V85 project balancing, not values imposed by the source conversation. Aptitude
+// and equipment budgets are independent; issued objects never unlock procurement.
+export const RECRUITMENT_RULES_V85 = Object.freeze({
+  recruitCost: Object.freeze({ credits: 600 }), trainingCost: Object.freeze({ credits: 80, supplies: 1 }),
+  trainingHours: 4, trainingGain: 2, refreshHours: 24, maxRecruits: 64, refreshCost: Object.freeze({})
+});
+const CREW_APTITUDES_V85 = Object.freeze(['tir', 'physique', 'mobilite', 'sangFroid', 'technique', 'secourisme', 'perception', 'cohesion']);
 
 export const COMMAND_ACTIONS = Object.freeze([
   {
@@ -182,11 +192,14 @@ export function createDefaultSave(profile = 1) {
     createdAt: Date.now(),
     updatedAt: Date.now(),
     clock: { day: 1, hour: 6 },
+    recruitmentV85: { ...createRecruitmentV85(Math.imul(Number(profile) || 1, 2654435761) >>> 0), lastOfferHour: 6 },
     scene: 'title',
     worldId: WORLDS[0].id,
     campaignId: null,
     levelSeedId: 'level-001',
     difficulty: 'standard',
+    onboardingV84: null,
+    needsPlayerCreationV84: true,
     presentation: { titleScene: sanitizeTitleScenePresentationV79() },
     player: {
       name: 'Mara Vega',
@@ -1020,6 +1033,214 @@ export function assignCrewMember(save, crewId) {
   return { assigned: true, crewId };
 }
 
+const recruitmentClockV85 = (save) => (save.clock.day - 1) * 24 + save.clock.hour;
+function requireRecruitmentAccessV85(save) {
+  if (!isRecord(save) || !Array.isArray(save.crew) || !isRecord(save.clock)) throw new Error('Dossier de recrutement indisponible.');
+  if (save.strategy?.currentOperation) throw new Error('Recrutement, formation et dotation verrouillés pendant une opération.');
+  if (save.needsPlayerCreationV84 || save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez l’accueil du Tantalus avant de gérer les recrues.');
+}
+
+function sanitizeTrainingV85(raw, profile = null) {
+  return Object.fromEntries(CREW_APTITUDES_V85.map((id) => [id,
+    Math.floor(numberBetween(isRecord(raw) ? raw[id] : 0, 0, 0, 100 - (profile?.aptitudes[id] ?? 50)))
+  ]));
+}
+
+const operationSerialV85 = (id) => typeof id === 'string' && /^operation-\d+-/.test(id)
+  ? Number(id.match(/^operation-(\d+)-/)[1]) : 0;
+function sanitizeCrewProgressV85(member, raw, profile = null) {
+  const hasProgress = profile || ['trainingV85', 'serviceHistoryV85', 'relationsV85', 'lastServiceOperationSerialV85'].some((key) => Object.hasOwn(raw, key));
+  if (!hasProgress) return member;
+  member.trainingV85 = sanitizeTrainingV85(raw.trainingV85, profile);
+  const seen = new Set();
+  member.serviceHistoryV85 = (Array.isArray(raw.serviceHistoryV85) ? raw.serviceHistoryV85 : []).slice(-128)
+    .filter((entry) => isRecord(entry) && entry.schema === 85 && entry.type === 'mission'
+      && typeof entry.operationId === 'string' && entry.operationId.length <= 180 && operationSerialV85(entry.operationId) > 0
+      && ['success', 'failure', 'retreat'].includes(entry.outcome) && !seen.has(entry.operationId) && seen.add(entry.operationId))
+    .map((entry) => ({ schema: 85, type: 'mission', operationId: entry.operationId,
+      campaignId: typeof entry.campaignId === 'string' ? entry.campaignId.slice(0, 120) : '',
+      worldId: typeof entry.worldId === 'string' ? entry.worldId.slice(0, 120) : '', outcome: entry.outcome,
+      day: Math.floor(numberBetween(entry.day, 1, 1, 100000)), hour: numberBetween(entry.hour, 0, 0, 24)
+    })).slice(-64);
+  const relationsSeen = new Set();
+  member.relationsV85 = (Array.isArray(raw.relationsV85) ? raw.relationsV85 : []).slice(0, 128)
+    .filter((entry) => isRecord(entry) && typeof entry.crewId === 'string' && entry.crewId.length <= 120
+      && entry.crewId !== member.id && !relationsSeen.has(entry.crewId) && relationsSeen.add(entry.crewId))
+    .map((entry) => ({ crewId: entry.crewId, sharedMissions: Math.floor(numberBetween(entry.sharedMissions, 0, 0, 9999)) }))
+    .filter((entry) => entry.sharedMissions > 0).slice(-64);
+  member.lastServiceOperationSerialV85 = Math.max(Math.floor(numberBetween(raw.lastServiceOperationSerialV85, 0, 0, 999999999)),
+    ...member.serviceHistoryV85.map((entry) => operationSerialV85(entry.operationId)));
+  return member;
+}
+
+function issuedRecruitGearV85(members) {
+  const issued = new Map();
+  for (const member of members) {
+    const profile = sanitizeRecruitProfileV85(member.recruitV85);
+    if (!profile || profile.id !== member.id) continue;
+    for (const gear of profile.gear) if (!issued.has(gear.instanceId)) issued.set(gear.instanceId, gear);
+  }
+  return issued;
+}
+
+function recruitmentForCrewV85(raw, crew) {
+  const state = sanitizeRecruitmentV85(raw);
+  const engaged = new Set(crew.map((member) => member.id));
+  for (const member of crew) {
+    const profile = sanitizeRecruitProfileV85(member.recruitV85);
+    const parts = profile?.id.match(/^recruit-v85-([0-9a-f]{8})-(\d{6})$/);
+    if (profile?.id === member.id && parts && parseInt(parts[1], 16) === state.seed) state.serial = Math.max(state.serial, Number(parts[2]));
+  }
+  state.candidates = state.candidates.filter((profile) => !engaged.has(profile.id));
+  return state;
+}
+
+function sanitizeCurrentGearV85(raw, issued, seen = new Set()) {
+  return (Array.isArray(raw) ? raw : []).slice(0, 32).flatMap((entry) => {
+    const canonical = isRecord(entry) ? issued.get(entry.instanceId) : null;
+    if (!canonical || canonical.catalogId !== entry.catalogId || canonical.kind !== entry.kind || seen.has(canonical.instanceId)) return [];
+    seen.add(canonical.instanceId);
+    return [structuredClone(canonical)];
+  });
+}
+
+function sanitizeCrewRecordV85(raw, fallback, profile = null) {
+  const member = {
+    ...fallback, ...raw, id: fallback.id,
+    status: CREW_STATUSES.has(raw.status) ? raw.status : fallback.status,
+    health: numberBetween(raw.health, fallback.health, 0, 100), stress: numberBetween(raw.stress, fallback.stress, 0, 100),
+    fatigue: numberBetween(raw.fatigue, fallback.fatigue, 0, 100), loyalty: numberBetween(raw.loyalty, fallback.loyalty, 0, 100),
+    missions: Math.floor(numberBetween(raw.missions, fallback.missions, 0, 999999)),
+    kills: Math.floor(numberBetween(raw.kills, fallback.kills, 0, 999999)),
+    injuries: Array.isArray(raw.injuries) ? raw.injuries.filter(isRecord).slice(0, 64) : fallback.injuries
+  };
+  delete member.aptitudesV85; // Derived, never trust an imported effective-stat override.
+  if (profile) Object.assign(member, { recruitV85: profile, name: profile.name, callsign: profile.callsign });
+  else delete member.recruitV85;
+  return sanitizeCrewProgressV85(member, raw, profile);
+}
+
+function recruitFallbackV85(id) {
+  return { id, status: 'active', health: 100, stress: 0, fatigue: 0, loyalty: 50, missions: 0, kills: 0, injuries: [] };
+}
+
+function sanitizeCrewManifestV85(raw, crewIds, liveCrew) {
+  const seenIds = new Set();
+  const snapshots = (Array.isArray(raw) ? raw : []).slice(0, MAX_SQUAD_SIZE).flatMap((entry) => {
+    if (!isRecord(entry) || !crewIds.includes(entry.id) || seenIds.has(entry.id)) return [];
+    const legacy = CREW.find((member) => member.id === entry.id);
+    const profile = legacy ? null : sanitizeRecruitProfileV85(entry.recruitV85);
+    if (!legacy && (!profile || profile.id !== entry.id)) return [];
+    seenIds.add(entry.id);
+    return [sanitizeCrewRecordV85(entry, recruitFallbackV85(entry.id), profile)];
+  });
+  const issued = issuedRecruitGearV85([...snapshots, ...liveCrew]);
+  const seenGear = new Set();
+  return snapshots.map((member) => {
+    if (Object.hasOwn(member, 'gearV85') || member.recruitV85) member.gearV85 = sanitizeCurrentGearV85(
+      Object.hasOwn(member, 'gearV85') ? member.gearV85 : member.recruitV85.gear, issued, seenGear);
+    return resolveCrewDefinitionV85(member, CREW);
+  }).filter(Boolean);
+}
+
+// These actions operate on a caller-owned candidate. The application publishes it
+// only after SaveSystem.commit succeeds; every refusal below precedes mutation.
+export function recruitCandidateV85(save, candidateId) {
+  requireRecruitmentAccessV85(save);
+  const recruitment = recruitmentForCrewV85(save.recruitmentV85, save.crew);
+  const profile = recruitment.candidates.find((entry) => entry.id === candidateId);
+  if (!profile) throw new Error('Candidat absent de la sélection actuelle.');
+  if (save.crew.some((member) => member.id === profile.id)) throw new Error('Cette recrue est déjà affectée.');
+  if (save.crew.filter((member) => member.recruitV85).length >= RECRUITMENT_RULES_V85.maxRecruits) throw new Error('Capacité atteinte : 64 recrues au maximum.');
+  const existingInstances = new Set(save.crew.flatMap((member) => member.gearV85 || []).map((gear) => gear.instanceId));
+  if (profile.gear.some((gear) => existingInstances.has(gear.instanceId))) throw new Error('Dotation déjà attribuée : aucun doublon autorisé.');
+  const member = {
+    id: profile.id, name: profile.name, callsign: profile.callsign, status: 'active', health: 100,
+    stress: 0, fatigue: 0, loyalty: 50, missions: 0, kills: 0, injuries: [],
+    recruitV85: structuredClone(profile), trainingV85: sanitizeTrainingV85(null, profile),
+    gearV85: structuredClone(profile.gear), serviceHistoryV85: [], relationsV85: [], lastServiceOperationSerialV85: 0
+  };
+  payStrategicCost(save, RECRUITMENT_RULES_V85.recruitCost);
+  save.crew.push(member);
+  save.recruitmentV85 = { ...recruitment, candidates: recruitment.candidates.filter((entry) => entry.id !== profile.id) };
+  ensureStrategy(save).serial += 1;
+  return { ok: true, member, quote: { ...RECRUITMENT_RULES_V85.recruitCost }, hours: 0 };
+}
+
+export function refreshRecruitmentV85(save) {
+  requireRecruitmentAccessV85(save);
+  const current = recruitmentForCrewV85(save.recruitmentV85, save.crew);
+  const now = recruitmentClockV85(save);
+  if (!Number.isFinite(now) || now - current.lastOfferHour < RECRUITMENT_RULES_V85.refreshHours) throw new Error('La prochaine relève sera disponible après 24 heures de jeu.');
+  const next = generateNextRecruitmentPoolV85(current, now);
+  if (next.serial === current.serial) throw new Error('La prochaine relève ne peut pas être générée.');
+  const recruited = new Set(save.crew.map((member) => member.id));
+  next.candidates = next.candidates.filter((profile) => !recruited.has(profile.id));
+  save.recruitmentV85 = next;
+  return { ok: true, recruitment: next, nextOfferHour: next.lastOfferHour + RECRUITMENT_RULES_V85.refreshHours, quote: {}, hours: 0 };
+}
+
+export function trainCrewAptitudeV85(save, crewId, aptitudeId) {
+  requireRecruitmentAccessV85(save);
+  if (!CREW_APTITUDES_V85.includes(aptitudeId)) throw new Error('Aptitude inconnue.');
+  const member = save.crew.find((entry) => entry.id === crewId);
+  if (!member || !['active', 'recovering'].includes(member.status)) throw new Error('Marine indisponible pour la formation.');
+  const profile = member.recruitV85 ? sanitizeRecruitProfileV85(member.recruitV85) : null;
+  if (member.recruitV85 && !profile) throw new Error('Dossier individuel invalide.');
+  const training = sanitizeTrainingV85(member.trainingV85, profile);
+  const baseline = profile?.aptitudes[aptitudeId] ?? 50;
+  const current = baseline + training[aptitudeId];
+  if (current >= 100) throw new Error('Aptitude déjà au niveau maximal.');
+  training[aptitudeId] += Math.min(RECRUITMENT_RULES_V85.trainingGain, 100 - current);
+  payStrategicCost(save, RECRUITMENT_RULES_V85.trainingCost);
+  member.trainingV85 = training;
+  advanceStrategicClock(save, RECRUITMENT_RULES_V85.trainingHours);
+  ensureStrategy(save).serial += 1;
+  return { ok: true, crewId, aptitudeId, quote: { ...RECRUITMENT_RULES_V85.trainingCost },
+    hours: RECRUITMENT_RULES_V85.trainingHours, value: baseline + training[aptitudeId] };
+}
+
+export function transferCrewGearV85(save, fromCrewId, toCrewId, instanceId) {
+  requireRecruitmentAccessV85(save);
+  if (fromCrewId === toCrewId) throw new Error('Choisissez deux Marines distincts.');
+  const from = save.crew.find((entry) => entry.id === fromCrewId);
+  const to = save.crew.find((entry) => entry.id === toCrewId);
+  if (!from || !to || ['deceased', 'missing', 'captured'].some((status) => from.status === status || to.status === status)) throw new Error('Marine indisponible pour le transfert.');
+  const occurrences = save.crew.flatMap((member) => (member.gearV85 || []).map((gear) => ({ member, gear }))).filter(({ gear }) => gear.instanceId === instanceId);
+  const canonical = issuedRecruitGearV85(save.crew).get(instanceId);
+  if (occurrences.length !== 1 || occurrences[0].member !== from || !canonical
+    || canonical.catalogId !== occurrences[0].gear.catalogId || canonical.kind !== occurrences[0].gear.kind) throw new Error('Objet individuel absent ou dupliqué.');
+  if ((to.gearV85 || []).length >= 32) throw new Error('Dotation individuelle pleine.');
+  from.gearV85 = from.gearV85.filter((gear) => gear.instanceId !== instanceId);
+  to.gearV85 = [...(to.gearV85 || []), structuredClone(canonical)];
+  return { ok: true, instanceId, fromCrewId, toCrewId, quote: {}, hours: 0 };
+}
+
+function recordCrewMissionV85(save, operation, success, reason) {
+  const serial = operationSerialV85(operation.id);
+  if (!serial) return;
+  const participants = save.crew.filter((member) => operation.crewIds.includes(member.id));
+  const newlyRecorded = new Set();
+  for (const member of participants) {
+    if (serial <= (member.lastServiceOperationSerialV85 || 0) || member.serviceHistoryV85?.some((event) => event.operationId === operation.id)) continue;
+    member.serviceHistoryV85 = [...(member.serviceHistoryV85 || []), {
+      schema: 85, type: 'mission', operationId: operation.id, campaignId: operation.campaignId, worldId: operation.worldId,
+      outcome: success ? 'success' : reason === 'retreat' ? 'retreat' : 'failure', day: save.clock.day, hour: save.clock.hour
+    }].slice(-64);
+    member.lastServiceOperationSerialV85 = serial;
+    newlyRecorded.add(member.id);
+  }
+  for (const member of participants.filter((entry) => newlyRecorded.has(entry.id))) {
+    const relations = new Map((member.relationsV85 || []).map((entry) => [entry.crewId, { ...entry }]));
+    for (const peer of participants.filter((entry) => entry.id !== member.id && newlyRecorded.has(entry.id))) {
+      const relation = relations.get(peer.id) || { crewId: peer.id, sharedMissions: 0 };
+      relation.sharedMissions = Math.min(9999, relation.sharedMissions + 1);
+      relations.set(peer.id, relation);
+    }
+    member.relationsV85 = [...relations.values()].slice(-64);
+  }
+}
+
 export function treatCrewMember(save, crewId) {
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation) throw new Error('Soins indisponibles pendant une operation.');
@@ -1081,6 +1302,7 @@ export function getOperationBrief(save, campaign, world) {
 }
 
 export function beginOperation(save, campaign, world) {
+  if (save.onboardingV84 && save.onboardingV84.phase !== 'complete') throw new Error('Terminez le réveil et le briefing dans le Tantalus avant un déploiement.');
   const strategy = ensureStrategy(save);
   if (strategy.currentOperation?.campaignId === campaign.id) {
     const operation = strategy.currentOperation;
@@ -1124,6 +1346,8 @@ export function beginOperation(save, campaign, world) {
     cost: structuredClone(brief.cost),
     reward: structuredClone(brief.reward),
     crewIds: [...brief.crewIds],
+    crewManifestV85: brief.crewIds.map((id) => resolveCrewDefinitionV85(save.crew.find((member) => member.id === id), CREW)).filter(Boolean).map((member) => structuredClone(member)),
+    playerIdentityV84: save.onboardingV84?.identity ? structuredClone(save.onboardingV84.identity) : null,
     weaponIds: [...save.player.weaponIds],
     equipmentIds: [...save.player.equipmentIds],
     vehicleId: strategy.selectedVehicleId,
@@ -1326,10 +1550,10 @@ export function resolveOperationDeployment(save, {
   const costumeId = typeof operation.costumeId === 'string' ? operation.costumeId : null;
   const neuroProfileId = typeof operation.neuroProfileId === 'string' ? operation.neuroProfileId : null;
   const apexDossierId = typeof operation.apexDossierId === 'string' ? operation.apexDossierId : null;
-  const crew = crewIds.map((id) => ({
-    ...crewCatalog.find((entry) => entry.id === id),
-    ...save.crew.find((entry) => entry.id === id)
-  })).filter((entry) => entry.id);
+  const crew = crewIds.map((id) => Array.isArray(operation.crewManifestV85)
+    ? operation.crewManifestV85.find((entry) => entry.id === id)
+    : resolveCrewDefinitionV85(save.crew.find((entry) => entry.id === id), crewCatalog))
+    .filter((entry) => entry?.id).map((entry) => structuredClone(entry));
   const weapons = weaponIds.map((id) => weaponCatalog.find((entry) => entry.id === id)).filter(Boolean);
   const equipment = equipmentIds.map((id) => equipmentCatalog.find((entry) => entry.id === id)).filter(Boolean);
   const vehicle = vehicleId ? vehicleCatalog.find((entry) => entry.id === vehicleId) || null : null;
@@ -1489,8 +1713,9 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     if (worldState.stability >= 70 && worldState.infestation <= 35) worldState.colonyLevel = Math.min(100, worldState.colonyLevel + 1);
     if (!save.galaxy.completedCampaignIds.includes(operation.campaignId)) save.galaxy.completedCampaignIds.push(operation.campaignId);
     const crew = save.crew.filter((member) => operation.crewIds.includes(member.id));
-    crew.forEach((member, index) => {
-      member.kills += Math.floor(kills / Math.max(1, crew.length)) + (index < kills % Math.max(1, crew.length) ? 1 : 0);
+    crew.forEach((member) => {
+      // Mission totals do not identify an individual shooter. Do not invent a
+      // per-Marine kill count by distributing the player's total among the squad.
       member.stress = clamp(member.stress + Math.ceil(operation.risk / 12));
     });
     save.statistics.campaigns += 1;
@@ -1547,6 +1772,7 @@ export function resolveOperation(save, { success, kills = 0, reason = success ? 
     completedDay: save.clock.day,
     completedHour: save.clock.hour
   };
+  recordCrewMissionV85(save, operation, resolvedSuccess, resolvedReason);
   strategy.currentOperation = null;
   addStrategyLog(save, { type: 'operation-result', title: operation.campaignId, risk: operation.risk, incident: !resolvedSuccess, result });
   return { ok: true, success: resolvedSuccess, result, specialOperationBonus, operation: strategy.lastOperation };
@@ -1578,11 +1804,18 @@ export function migrateSave(input, profile = 1) {
   if (!isRecord(input)) return base;
   const migrated = structuredClone(base);
   const source = structuredClone(input);
+  migrated.onboardingV84 = normalizePlayerOnboardingV84(source.onboardingV84);
+  migrated.needsPlayerCreationV84 = source.needsPlayerCreationV84 === true && !migrated.onboardingV84;
 
   const player = isRecord(source.player) ? source.player : {};
   Object.assign(migrated.player, player);
   for (const key of ['visualSheetId', 'spriteKey', 'visualForm', 'neuroVisualContract']) delete migrated.player[key];
   migrated.player.name = typeof player.name === 'string' ? player.name.slice(0, 80) : base.player.name;
+  if (migrated.onboardingV84) {
+    migrated.player.name = migrated.onboardingV84.identity.name;
+    migrated.player.callsign = migrated.onboardingV84.identity.callsign;
+    migrated.player.operatorId = migrated.onboardingV84.identity.id;
+  }
   for (const key of ['health', 'armor', 'stress']) migrated.player[key] = numberBetween(player[key], base.player[key], 0, 100);
   migrated.player.weaponIds = stringList(player.weaponIds, base.player.weaponIds);
   migrated.player.equipmentIds = stringList(player.equipmentIds, base.player.equipmentIds);
@@ -1653,27 +1886,40 @@ export function migrateSave(input, profile = 1) {
     titleScene: sanitizeTitleScenePresentationV79(source.presentation?.titleScene)
   };
 
-  const importedCrew = Array.isArray(source.crew) ? source.crew.filter(isRecord) : [];
+  const importedCrew = Array.isArray(source.crew) ? source.crew.filter(isRecord).slice(0, 256) : [];
   migrated.crew = base.crew.map((fallback, index) => {
-    const candidate = importedCrew.find((member) => member.id === fallback.id) || importedCrew[index] || {};
-    return {
-      ...fallback,
-      ...candidate,
-      id: fallback.id,
-      status: CREW_STATUSES.has(candidate.status) ? candidate.status : fallback.status,
-      health: numberBetween(candidate.health, fallback.health, 0, 100),
-      stress: numberBetween(candidate.stress, fallback.stress, 0, 100),
-      fatigue: numberBetween(candidate.fatigue, fallback.fatigue, 0, 100),
-      loyalty: numberBetween(candidate.loyalty, fallback.loyalty, 0, 100),
-      missions: Math.floor(numberBetween(candidate.missions, fallback.missions, 0, 999999)),
-      kills: Math.floor(numberBetween(candidate.kills, fallback.kills, 0, 999999)),
-      injuries: Array.isArray(candidate.injuries) ? candidate.injuries.slice(0, 64) : fallback.injuries
-    };
+    // Positional migration is only for genuinely ID-less old formats. A known
+    // Marine/recruit moved in the array must never overwrite another identity.
+    const positional = importedCrew[index];
+    const candidate = importedCrew.find((member) => member.id === fallback.id)
+      || (positional && (typeof positional.id !== 'string' || !positional.id) ? positional : {});
+    return sanitizeCrewRecordV85(candidate, fallback);
   });
+  const seenCrewIdsV85 = new Set(migrated.crew.map((member) => member.id));
+  let recruitCountV85 = 0;
+  for (const candidate of importedCrew) {
+    if (seenCrewIdsV85.has(candidate.id) || recruitCountV85 >= RECRUITMENT_RULES_V85.maxRecruits) continue;
+    const profile = sanitizeRecruitProfileV85(candidate.recruitV85);
+    if (!profile || profile.id !== candidate.id) continue;
+    seenCrewIdsV85.add(candidate.id);
+    recruitCountV85 += 1;
+    migrated.crew.push(sanitizeCrewRecordV85(candidate, recruitFallbackV85(profile.id), profile));
+  }
+  const issuedV85 = issuedRecruitGearV85(migrated.crew);
+  const seenGearV85 = new Set();
+  for (const member of migrated.crew) {
+    if (Object.hasOwn(member, 'gearV85') || member.recruitV85) member.gearV85 = sanitizeCurrentGearV85(
+      Object.hasOwn(member, 'gearV85') ? member.gearV85 : member.recruitV85.gear, issuedV85, seenGearV85);
+    if (member.relationsV85) member.relationsV85 = member.relationsV85.filter((entry) => seenCrewIdsV85.has(entry.crewId));
+  }
+  migrated.recruitmentV85 = Object.hasOwn(source, 'recruitmentV85')
+    ? recruitmentForCrewV85(source.recruitmentV85, migrated.crew)
+    : { ...base.recruitmentV85, lastOfferHour: recruitmentClockV85(migrated) };
+  migrated.recruitmentV85.candidates = migrated.recruitmentV85.candidates.filter((profile) => !seenCrewIdsV85.has(profile.id));
 
   const strategy = isRecord(source.strategy) ? source.strategy : {};
   const inventory = isRecord(strategy.inventory) ? strategy.inventory : {};
-  const knownCrewIds = new Set(base.crew.map((member) => member.id));
+  const knownCrewIds = new Set(migrated.crew.map((member) => member.id));
   const selectedCrewIds = stringList(strategy.selectedCrewIds, base.strategy.selectedCrewIds).filter((id) => knownCrewIds.has(id)).slice(0, MAX_SQUAD_SIZE);
   const weaponIds = [...new Set([...base.strategy.inventory.weaponIds, ...migrated.player.weaponIds, ...stringList(inventory.weaponIds)])];
   const equipmentIds = [...new Set([...base.strategy.inventory.equipmentIds, ...migrated.player.equipmentIds, ...stringList(inventory.equipmentIds)])];
@@ -1693,6 +1939,7 @@ export function migrateSave(input, profile = 1) {
       cost: sanitizeValues(candidate.cost),
       reward: sanitizeValues(candidate.reward),
       crewIds: stringList(candidate.crewIds).filter((id) => knownCrewIds.has(id)).slice(0, MAX_SQUAD_SIZE),
+      playerIdentityV84: candidate.playerIdentityV84?.schema === 84 ? validatePlayerIdentityV84(candidate.playerIdentityV84).identity : null,
       weaponIds: stringList(candidate.weaponIds).slice(0, 8),
       equipmentIds: stringList(candidate.equipmentIds).slice(0, 8),
       vehicleId: resolveReadyVehicleIdV60(
@@ -1714,11 +1961,13 @@ export function migrateSave(input, profile = 1) {
       insertionState: sanitizeMissionInsertionStateV62(candidate.insertionState),
       flags: isRecord(candidate.flags) ? Object.fromEntries(Object.entries(candidate.flags).slice(0, 32).map(([key, value]) => [key.slice(0, 60), Boolean(value)])) : {}
     };
+    if (Array.isArray(candidate.crewManifestV85)) operation.crewManifestV85 = sanitizeCrewManifestV85(candidate.crewManifestV85, operation.crewIds, migrated.crew);
     operation.resumeState = sanitizeOperationResumeState(candidate.resumeState, { operation });
     return operation;
   };
   migrated.strategy = {
-    serial: Math.floor(numberBetween(strategy.serial, base.strategy.serial, 0, 999999999)),
+    serial: Math.max(Math.floor(numberBetween(strategy.serial, base.strategy.serial, 0, 999999999)),
+      ...migrated.crew.map((member) => member.lastServiceOperationSerialV85 || 0)),
     selectedCrewIds: selectedCrewIds.length ? selectedCrewIds : [...base.strategy.selectedCrewIds],
     inventory: { weaponIds, equipmentIds, vehicleIds },
     selectedVehicleId: resolveReadyVehicleIdV60(strategy.selectedVehicleId, vehicleIds, VEHICLES),
@@ -1898,6 +2147,19 @@ export class SaveSystem {
   newGame(profile = 1) {
     const target = assertSaveProfileIdV78(profile);
     return this.writeCandidateV78(createDefaultSave(target), target, { replace: true });
+  }
+
+  newPlayerTimelineV84(identity, profile = this.profile) {
+    const target = assertSaveProfileIdV78(profile);
+    const checked = validatePlayerIdentityV84(identity);
+    if (!checked.ok) throw new Error(Object.values(checked.errors).join(' '));
+    const candidate = createDefaultSave(target);
+    candidate.onboardingV84 = createPlayerOnboardingV84(checked.identity);
+    candidate.needsPlayerCreationV84 = false;
+    Object.assign(candidate.player, { name: checked.identity.name, callsign: checked.identity.callsign, operatorId: checked.identity.id, classId: 'marine' });
+    Object.assign(candidate.hub, { deck: 0, roomId: 'cryo-bay', positionX: 4560, facing: -1, visited: ['cryo-bay'] });
+    candidate.scene = 'hub';
+    return this.writeCandidateV78(candidate, target, { replace: true });
   }
 
   commit(patch = null) {

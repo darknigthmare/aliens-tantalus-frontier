@@ -4,8 +4,10 @@ import { RELEASE, validateContent } from '../src/content.js';
 import { createBuildAssetFilter, EXCLUDED_BUILD_ASSET_PATHS } from './build-asset-filter.mjs';
 import { resolveSafeBuildOutput } from './build-output-guard.mjs';
 import { writeAudioManifestV77 } from './audio-scan-v77.mjs';
+import { verifyPublicReleaseV86 } from './verify-public-release-v86.mjs';
 
 const root = process.cwd();
+await verifyPublicReleaseV86(root);
 await writeAudioManifestV77(root);
 const assetFilter = createBuildAssetFilter(root);
 const output = resolveSafeBuildOutput(root, process.env.ATF_BUILD_OUTPUT || 'dist');
@@ -14,13 +16,11 @@ if (!validation.ok) throw new Error(`Content contract failed: ${validation.failu
 
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
-for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-gallery.css', 'hub-level.css', 'runtime-level.css', 'title-screen-v61.css', 'title-scene-v79.css', 'hub-stations-v61.css', 'catalog-v62.css', 'mission-insertion-v62.css', 'alien-survival-v70.css', 'bioforge-v80.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
+for (const path of ['index.html', 'styles.css', 'styles-v50.css', 'sprite-gallery.css', 'hub-level.css', 'runtime-level.css', 'title-screen-v61.css', 'title-scene-v79.css', 'hub-stations-v61.css', 'catalog-v62.css', 'mission-insertion-v62.css', 'alien-survival-v70.css', 'bioforge-v80.css', 'player-onboarding-v84.css', 'crew-v85.css', 'placeables-v86.css', 'manifest.webmanifest', 'sw.js', 'LICENSE_NOTICE.md']) {
   await cp(join(root, path), join(output, path));
 }
-for (const directory of ['src', 'assets', 'docs']) {
-  try { await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter }); } catch (error) {
-    if (directory !== 'docs') throw error;
-  }
+for (const directory of ['src', 'assets']) {
+  await cp(join(root, directory), join(output, directory), { recursive: true, filter: assetFilter });
 }
 // QA masters, production intermediates and superseded duplicate atlases remain local, never deployed.
 await rm(join(output, 'assets', 'openai', 'sprites', 'raw'), { recursive: true, force: true });

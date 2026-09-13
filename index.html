@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07100c">
-  <meta name="description" content="ALIENS: TANTALUS FRONTIER v81 — qualification M41A physique, identité Echo-9 verrouillée et BIOFORGE jouable. Production artistique et contenu ennemi encore en cours.">
-  <meta name="atf-release" content="81.0.0">
+  <meta name="description" content="ALIENS: TANTALUS FRONTIER v86 — équipements physiques, installation, récupération et dotations persistantes. Production artistique et contenu ennemi encore en cours.">
+  <meta name="atf-release" content="86.0.0">
   <meta name="application-name" content="Tantalus Frontier">
   <meta name="apple-mobile-web-app-title" content="Tantalus">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,13 +24,16 @@
   <link rel="stylesheet" href="/mission-insertion-v62.css">
   <link rel="stylesheet" href="/alien-survival-v70.css">
   <link rel="stylesheet" href="/bioforge-v80.css">
-  <title>ALIENS: TANTALUS FRONTIER v81</title>
+  <link rel="stylesheet" href="/player-onboarding-v84.css">
+  <link rel="stylesheet" href="/crew-v85.css">
+  <link rel="stylesheet" href="/placeables-v86.css">
+  <title>ALIENS: TANTALUS FRONTIER v86</title>
 </head>
 <body>
   <a class="skip-link" href="#workspace">Aller au contenu</a>
   <div id="boot" class="boot" role="status">
     <div class="boot-mark">ATF</div>
-    <p>MU/TH/UR // INITIALISATION DU RUNTIME v81</p>
+    <p>MU/TH/UR // INITIALISATION DU RUNTIME v86</p>
     <div class="boot-track"><span></span></div>
   </div>
 
@@ -51,7 +54,7 @@
       </nav>
       <p id="title-profile-status" class="title-profile-status">PROFIL 1 · SAUVEGARDE LOCALE</p>
     </div>
-    <p class="title-build">DARKNIGHTMARE<br>VERSION 81.0.0 · BUILD FRONTIER</p>
+    <p class="title-build">DARKNIGHTMARE<br>VERSION 86.0.0 · BUILD FRONTIER</p>
     <p id="title-live-status" class="sr-only" aria-live="polite">Écran titre chargé.</p>
   </section>
 
@@ -77,7 +80,7 @@
       <header class="topbar" role="banner">
         <button id="menu-toggle" class="icon-button" aria-label="Ouvrir la navigation">☰</button>
         <div><span id="breadcrumb">SHIP // USS TANTALUS</span><h1 id="view-title">USS Tantalus</h1></div>
-        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v81.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
+        <div class="top-metrics"><span><b id="clock">J01 06:00</b>TEMPS NAVIRE</span><span><b>v86.0.0</b>RUNTIME</span><button id="return-title" class="button compact">MENU PRINCIPAL</button><button id="quick-save" class="button compact">SAUVEGARDER</button></div>
       </header>
 
       <main id="workspace" tabindex="-1">
@@ -113,7 +116,7 @@
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
           <div class="section-intro"><div><p class="eyebrow">440 CAMPAGNES // 19 DIRECTIVES CHATGPT // 23 OBJECTIFS PHYSIQUES</p><h2>Planification opérationnelle</h2></div><div class="filter-row"><select id="campaign-mode" aria-label="Filtrer les campagnes par mode"><option value="all">Tous modes</option><option>MIRE</option><option>FRONTIER</option><option>SURVIVAL</option><option>CRUCIBLE</option></select><input id="campaign-search" type="search" aria-label="Rechercher une campagne" placeholder="Source, monde, objectif…"></div></div>
           <section class="special-operations-registry" aria-labelledby="special-operations-heading">
-            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution V71</h3></div><p>Les 19 conversations sont recensées sans faux statut : cinq lots sont désormais jouables, dont le hub commercial accessible directement dans l’USS Tantalus.</p></header>
+            <header class="special-operations-heading"><div><p class="eyebrow">PROJET CHATGPT // ALIENS TANTALUS</p><h3 id="special-operations-heading">Registre d’exécution — suivi de production</h3></div><p>Ce registre suit 19 directives ; l’audit global couvre 26 conversations. Les statuts détaillés distinguent les systèmes jouables, partiels et manquants : ils ne certifient pas un jeu commercial terminé.</p></header>
             <div id="special-operation-summary" class="special-operation-summary" aria-live="polite"></div>
             <div id="special-operation-list" class="special-operation-grid"></div>
           </section>
@@ -142,6 +145,7 @@
             </div>
           </div>
           <div class="hub-level-readout" aria-live="polite"><span id="hub-deck-label">PONT COMMANDEMENT</span><strong id="hub-room-label">Passerelle</strong><span id="hub-prompt">A/D marcher · W/S grimper · C ramper · Q profondeur · F tirer · E utiliser</span></div>
+          <p id="hub-onboarding-objective-v84" role="status"></p>
         </section>
 
         <section id="bioforge-ui-v80" class="view bioforge-view" data-panel="bioforge" data-phase="configuration">
@@ -217,8 +221,8 @@
 
         <section class="view" data-panel="crew">
           <button class="button station-close" type="button" data-close-hub-station>RETOUR AU NIVEAU</button>
-          <div class="section-intro"><div><p class="eyebrow">16 MEMBRES // BLESSURES & MORT PERMANENTE</p><h2>Équipe Echo-9</h2></div><span id="crew-readiness" class="chip success">0/4 AFFECTÉS</span></div>
-          <div id="crew-list" class="crew-grid"></div>
+          <div class="section-intro"><div><p class="eyebrow">PERSONNEL // DOSSIERS, DOTATIONS & RELÈVES</p><h2>Équipe Echo-9</h2></div><span id="crew-readiness" class="chip success">0/4 AFFECTÉS</span></div>
+          <div id="crew-list" class="crew-roster-v85"></div>
           <div class="section-intro compact-intro"><div><p class="eyebrow">392 COMBINAISONS // APERÇU BITMAP V61</p><h2>Personnalisation de la tenue</h2></div><input id="costume-search" type="search" placeholder="M3, pression, Tantalus…"></div>
           <div class="customization-layout">
             <aside class="customization-preview panel">
@@ -257,12 +261,13 @@
           <h1 class="sr-only">Mission tactique — USS Tantalus</h1>
           <div class="game-toolbar"><div><span class="eyebrow">RUNTIME PRODUCTION // OBJECTIFS & CONSÉQUENCES</span><h2 id="mission-title">Opération</h2></div><div class="button-row"><span class="controls">A/D · W/S · ESPACE · E/F · Q/V/R/H/X · 1/2/3 GROUPES · C PING · B/N/M ORDRES</span><button id="retreat-mission" class="button danger-outline">BATTRE EN RETRAITE</button></div></div>
           <section id="mission-insertion-v62" aria-label="Séquence d’insertion opérationnelle" hidden></section>
-          <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable"></canvas>
+          <div id="mission-runtime-v62" class="game-frame"><canvas id="game-canvas" width="1280" height="720" tabindex="0" aria-label="Mission Metroidvania jouable" aria-describedby="mission-aim-help-v83" title="Directions + F ; MAJ gauche : visée fixe ; souris/toucher maintenu : viser et tirer ; stick droit + RT"></canvas>
             <div id="alpha-bravo-targeting-v69" class="alpha-bravo-targeting-v69" role="region" aria-label="Choisir une destination tactique sur le terrain. Échap annule." aria-hidden="true" tabindex="-1" hidden><span>PLACER LE POINT TACTIQUE · ÉCHAP ANNULER</span></div>
             <section id="alpha-bravo-command-dock-v69" class="alpha-bravo-command-dock-v69" aria-label="Commandement des groupes Alpha et Bravo" aria-hidden="true" hidden></section>
             <section id="alien-survival-dock-v70" class="alien-survival-dock-v70" aria-label="Systèmes de survie physiques du secteur" aria-hidden="true" hidden></section>
           </div>
-          <div class="mission-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles de mission"><button data-mission-key="KeyA">←</button><button data-mission-key="KeyD">→</button><button data-mission-key="Space">↑</button><button data-mission-key="KeyF">F</button><button id="mission-interact">E</button><button id="mission-tracker">Q</button><button id="mission-vehicle">V</button><button id="mission-reload">R</button><button id="mission-medkit">H</button><button id="mission-neuro-counter" title="Contre-impulsion Neuro">X</button></div>
+          <div class="mission-touch-controls runtime-touch" role="group" aria-label="Contrôles tactiles de mission"><button data-mission-key="KeyA" aria-label="Aller à gauche">←</button><button data-mission-key="KeyD" aria-label="Aller à droite">→</button><button data-mission-key="Space" aria-label="Sauter">SAUT</button><button data-mission-key="KeyF" aria-label="Tirer">F</button><button id="mission-interact">E</button><button id="mission-tracker">Q</button><button id="mission-vehicle">V</button><button id="mission-reload">R</button><button id="mission-medkit">H</button><button id="mission-neuro-counter" title="Contre-impulsion Neuro">X</button></div>
+          <p id="mission-aim-help-v83" class="sr-only">Visée huit directions : directions + F. MAJ gauche : viser sur place. Souris ou toucher maintenu sur le terrain : viser et tirer. Manette : stick droit + RT. J2 : J/L/I/K + O ; MAJ droite : viser sur place.</p>
           <section id="mission-archives-overlay-v68" class="mission-archives-overlay-v68" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="mission-archives-title-v68" hidden>
             <div class="mission-archives-dialog-v68">
               <header><div><p class="eyebrow">TERMINAL TERRAIN // MISSION EN PAUSE</p><h2 id="mission-archives-title-v68">Archive récupérée</h2></div><button id="close-mission-archives-v68" class="button primary" type="button">FERMER ET REPRENDRE</button></header>

@@ -1,7 +1,0 @@
-Use case: precise-object-edit
-Asset type: production 2D game animation sprite sheet
-Input images: Image 1 is the correct Caravan Stalker death sequence, but tails in poses 3, 4, 7 and 8 touch nominal cell separators.
-Primary request: change ONLY uniform scale and centering. Preserve exact identity, eight death poses, chronology, right-facing orientation, colors, 2:1 canvas and pure magenta background.
-Correction: uniformly reduce every creature to 84 percent of current size, preserve aspect ratio and center each in its own square cell. Keep one consistent physical scale across the sequence. Every tail tip, skull, claw and limb must remain at least 24 pixels inside all four edges of its own cell. No creature pixel may touch or cross any cell boundary.
-Layout invariant: exact 2:1 wide landscape, exactly 4 columns by 2 rows, row-major order, eight poses only.
-Constraints: no redesign; no pose change; no anatomy change; no recovery added; no grid lines; no text; no labels; no shadow; no scenery; flat uniform #FF00FF only; no watermark.

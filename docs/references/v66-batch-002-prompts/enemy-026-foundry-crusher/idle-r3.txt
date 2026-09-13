@@ -1,7 +1,0 @@
-Use case: precise-object-edit
-Asset type: existing Foundry Crusher idle eight-pose sprite sheet, 4columns by2rows.
-Input image1: EDIT TARGET, the existing idle animation. This creature's identity and eight authored poses are locked.
-Primary request: remove unwanted hot-pink/purple/magenta specular contamination ON THE CREATURE, especially tiny glowing spots under the crest, on neck/shoulder seams, ribs, hips and feet. Recolor only those contaminated material areas as the immediately adjacent neutral black/gunmetal/brown chitin with the same hard metallic detail. The creature has no pink flesh, pink eyes, pink lamps or emissive purple parts. Its complete body palette is low-saturation neutral black, gunmetal gray and dark bronze, unchanged apart from removal of that accidental pink spill.
-Preserve the entire flat solid #FF00FF background and all true empty gaps. Magenta is only the empty matte, never a reflected light on anatomy. No need for transparency. No checkerboard.
-Invariants: preserve exact creature shape and all8 poses, locations, proportions, head/crest volume, leg count, full long tails, feet, claws, material detailing and rightward facing. Preserve subtle grounded breathing. No new pose, no copied pose, no missing appendage, no body distortion, no camera rotation. Canvas exactly2:1, four equal columns and two equal rows, same margins and relative scale.
-Constraints: a surgical color-cleanup pass only, without smoothing, repainting style or redesigning anatomy. No text, grid, labels, borders, extra subjects, floor shadow or watermark.
