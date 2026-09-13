@@ -12,6 +12,7 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { CrewUiV85 } from './crew-ui-v85.js';
+import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
 import {
@@ -139,6 +140,8 @@ let hubOwnerV84 = null;
 let bioforgeOwnerV84 = null;
 let pendingOnboardingDialogV84 = null;
 let crewUiV85 = null;
+let placeablesDockV86 = null;
+let lastMissionSaveFailureToastV86 = -Infinity;
 
 const engine = new GameEngine(byId('game-canvas'), { audio, onEvent: handleGameEvent });
 const hubEngine = new HubGame(byId('hub-canvas'), {
@@ -1170,8 +1173,7 @@ function renderProfiles() {
 }
 
 function renderMissionEquipment() {
-  const states = engine.getSnapshot?.().equipmentRuntime || [];
-  byId('mission-equipment-controls').innerHTML = states.map((item, index) => `<button class="button compact" data-use-equipment="${item.id}" ${item.remaining < 1 ? 'disabled' : ''}>${index + 1}. ${escapeHtml(item.name)} · ${item.remaining}/${item.maxCharges}</button>`).join('') || '<span class="hint">Aucun équipement actif.</span>';
+  placeablesDockV86?.render();
 }
 
 function renderAll() {
@@ -1325,6 +1327,21 @@ function commitCurrentRuntimeV78({ includeSessionTime = false } = {}) {
   if (state) recordOperationResumeState(candidate, state);
   if (includeSessionTime) candidate.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
   return saveSystem.commit(candidate);
+}
+
+function handleQuickSaveV86() {
+  if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return false; }
+  if (creatorOwnerV84) { toast('Terminez ou annulez la création du personnage avant de sauvegarder.'); return false; }
+  try {
+    // A visible mission must belong to this profile before claiming it was saved.
+    // Recovery errors still come from SaveSystem, with their original explanation.
+    if (!saveSystem.recoveryNeeded && engine.running && engine.mission && !captureMissionResumeState()) {
+      throw new Error('Mission non enregistrée : cette session ne correspond plus au profil actif.');
+    }
+    commitCurrentRuntimeV78({ includeSessionTime: true });
+    sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
+    return true;
+  } catch (error) { toast(error.message); return false; }
 }
 
 function applyMissionResumeState(state) {
@@ -1793,6 +1810,10 @@ function handleGameEvent(event) {
   }
   if (event.type === 'mission-restarted') log.textContent = `REPRISE CHECKPOINT ${event.checkpoint} · pénalité de récupération appliquée.`;
   if (event.type === 'equipment-used') { log.textContent = `ÉQUIPEMENT · ${event.name || event.action || 'support terrain'}`; renderMissionEquipment(); }
+  if (event.type?.startsWith('placeable-')) {
+    if (event.message || event.reason) log.textContent = `MATÉRIEL · ${event.message || event.reason}`;
+    renderMissionEquipment();
+  }
   if (event.type === 'objective-action') log.textContent = `OBJECTIF · ${String(event.action || 'progression').toUpperCase()}`;
   if (event.type === 'mission-complete') {
     // The V70 resolution validator compares the terminal payload with the
@@ -1810,7 +1831,7 @@ function handleGameEvent(event) {
   const persistentEvents = new Set([
     'checkpoint', 'power-restored', 'shortcut', 'archive-recovered', 'supply', 'resource',
     'player-down', 'mission-failed', 'objective-failed', 'neuro-failure', 'mission-restarted',
-    'equipment-used', 'objective-action', 'mission-zone', 'mission-level-event',
+    'equipment-used', 'placeable-deployed', 'placeable-recovered', 'placeable-destroyed', 'placeable-spent', 'objective-action', 'mission-zone', 'mission-level-event',
     'squad-action', 'squad-down', 'squad-revived', 'squad-lost',
     'mission-timer-started', 'mission-timer-complete',
     'narrative-collectable-discovered', 'narrative-route-unlocked'
@@ -1819,8 +1840,25 @@ function handleGameEvent(event) {
     && (event.type !== 'alien-survival-self-destruct-tick'
       || Math.max(0, Math.ceil(Number(event.remainingSeconds ?? event.remaining) || 0)) % 5 === 0);
   if ((persistentEvents.has(event.type) || ALPHA_BRAVO_PERSISTENT_EVENTS_V69.has(event.type) || survivalPersistenceDue) && saveSystem.data.strategy.currentOperation) {
-    persistMissionResumeState();
-    saveSystem.commit();
+    try {
+      const state = captureMissionResumeState();
+      if (!state) return false;
+      // Publish the new checkpoint only after the whole profile was written.
+      // Gameplay stays live on quota failure; the previous resume and bytes do not change.
+      const candidate = clone(saveSystem.data);
+      if (!recordOperationResumeState(candidate, state)) return false;
+      saveSystem.commit(candidate);
+      lastMissionSaveFailureToastV86 = -Infinity;
+      return true;
+    } catch {
+      log.textContent = 'PROGRESSION NON ENREGISTRÉE · sauvegarde indisponible ; la partie continue en mémoire.';
+      const now = Date.now();
+      if (now - lastMissionSaveFailureToastV86 >= 10000) {
+        lastMissionSaveFailureToastV86 = now;
+        toast('Progression non enregistrée. La sauvegarde précédente est conservée ; libérez du stockage puis réessayez de sauvegarder.');
+      }
+      return false;
+    }
   }
 }
 
@@ -2268,11 +2306,8 @@ function setupRuntimeControls() {
   byId('bioforge-interact-v80').onclick = () => bioforgeRuntimeV80.interact(bioforgeRuntimeV80.player);
   byId('bioforge-reload-v80').onclick = () => bioforgeRuntimeV80.reload(bioforgeRuntimeV80.player);
   byId('bioforge-medkit-v80').onclick = () => bioforgeRuntimeV80.useMedkit(bioforgeRuntimeV80.player);
-  byId('mission-equipment-controls').onclick = (event) => {
-    const id = event.target.closest('[data-use-equipment]')?.dataset.useEquipment;
-    if (!id) return;
-    try { engine.useEquipment(id); renderMissionEquipment(); } catch (error) { toast(error.message); }
-  };
+  placeablesDockV86 ||= new PlaceablesDockV86(byId('mission-equipment-controls'), engine, { onError: toast, onActivate: () => audio.unlock(), onSave: handleQuickSaveV86 });
+  placeablesDockV86.render();
 }
 
 function bindDelegatedActions() {
@@ -2347,13 +2382,7 @@ function bind() {
     audio.unlock(); audio.ui(); showView(target.dataset.view);
   };
   byId('menu-toggle').onclick = () => document.querySelector('.rail').classList.toggle('open');
-  byId('quick-save').onclick = () => {
-    if (standaloneContext) { toast('La campagne est verrouillée dans Frontier Forge.'); return; }
-    try {
-      commitCurrentRuntimeV78({ includeSessionTime: true });
-      sessionStart = Date.now(); renderClock(); toast('Sauvegarde locale confirmée.');
-    } catch (error) { toast(error.message); }
-  };
+  byId('quick-save').onclick = handleQuickSaveV86;
   byId('return-title').onclick = () => {
     if (standaloneContext === 'forge-playtest') {
       returnToForgeContext();

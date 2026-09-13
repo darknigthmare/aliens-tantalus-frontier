@@ -157,3 +157,7 @@ scripts/clean-sprite-components.py
 scripts/qa-normalize-v56-remaining-sheets*.py
 scripts/repair-v56-cross-boundary-tools.py
 scripts/report-sprite-components.py
+docs/references/V86_*
+docs/references/V86_*/**
+docs/references/v86-*
+docs/references/v86-*/**

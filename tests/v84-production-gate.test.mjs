@@ -225,17 +225,17 @@ test('current release, package lock, HTML, SW and QA scripts agree without relab
     readFile('package.json', 'utf8'), readFile('package-lock.json', 'utf8'), readFile('index.html', 'utf8'), readFile('sw.js', 'utf8')
   ]);
   const packageJson = JSON.parse(packageSource), lock = JSON.parse(lockSource);
-  assert.equal(RELEASE.version, '85.0.0');
+  assert.equal(RELEASE.version, '86.0.0');
   for (const version of [packageJson.version, lock.version, lock.packages[''].version]) assert.equal(version, RELEASE.version);
-  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v85<\/title>/u);
-  assert.match(html, /<meta name="atf-release" content="85\.0\.0">/u);
+  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v86<\/title>/u);
+  assert.match(html, /<meta name="atf-release" content="86\.0\.0">/u);
   assert.match(html, /contenu ennemi encore en cours/u);
-  assert.ok(worker.includes('atf-v85-causal-recruitment-shell-1'));
+  assert.ok(worker.includes('atf-v86-physical-placeables-shell-1'));
   for (const path of ONBOARDING_RUNTIME_PATHS_V84) assert.ok(worker.includes("'/" + path + "'"), path);
   for (const path of RUNTIME_ASSET_PATHS_V83) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(packageJson.scripts['verify:production:v84'], 'node scripts/verify-production-v84.mjs');
   assert.equal(packageJson.scripts['qa:browser:v84'], 'node tests/browser-onboarding-v84.mjs && node tests/browser-captions-v84.mjs');
-  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84 && npm run qa:browser:v85');
+  assert.equal(packageJson.scripts['qa:release'], 'npm run qa && npm run qa:browser:v81 && npm run qa:browser:v83 && npm run qa:browser:v84 && npm run qa:browser:v85 && npm run qa:browser:v86');
 });
 
 test('V84 refuses a stylesheet served with a script MIME even when its committed bytes match', async () => {

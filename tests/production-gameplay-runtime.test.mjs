@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { getPlaceableDefinitionV86 } from '../src/placeables-state-v86.js';
 import {
   GameEngine,
   buildAccessibilityRuntime,
@@ -124,15 +125,37 @@ test('all 106 equipment entries have a charged gameplay action and can mutate th
   engine.player.health = 20;
   engine.player.armor = 0;
   engine.environmentStatus.oxygen = 5;
-  for (const item of EQUIPMENT) assert.equal(engine.useEquipment(item.id), true, item.id);
+  // Every catalogue item still runs through the exported production engine.
+  // V86's twelve physical variants now require a valid level location and a
+  // completed task; preview alone must not consume their source charges.
+  engine.platforms = [{ id: 'equipment-test-floor', x: 0, y: 930, w: 6200, h: 150, floor: true }];
+  for (const name of ['walls', 'covers', 'doors', 'ladders', 'vents', 'lifts', 'enemies']) engine[name] = [];
+  engine.objective = engine.powerNode = engine.archiveTerminal = null;
+  for (const [index, actor] of engine.squadActors.entries()) Object.assign(actor, { x: 5000 + index * 140, y: 930 - actor.h });
+  let physicalCount = 0;
+  for (const item of EQUIPMENT) {
+    const definition = getPlaceableDefinitionV86(item.id);
+    if (definition) Object.assign(engine.player, { x: 400 + physicalCount * 220, y: 930 - engine.player.h, grounded: true, inVehicle: false, climbing: false, facing: 1 });
+    const state = engine.equipmentActions.get(item.id);
+    const remaining = state.remaining;
+    assert.equal(engine.useEquipment(item.id), true, item.id);
+    if (!definition) continue;
+    assert.equal(state.uses, 0, 'preview is not a consumed charge'); assert.equal(state.remaining, remaining);
+    assert.equal(engine.confirmPlaceableV86(), true, item.id);
+    for (let frame = 0; frame < Math.round(definition.installSeconds * 60); frame++) engine.updateEquipmentDeployments(1 / 60);
+    assert.equal(engine.placeableTasksV86.size, 0, item.id); assert.equal(state.uses, 1, item.id);
+    physicalCount++;
+  }
+  assert.equal(physicalCount, 12);
   const snapshot = engine.getSnapshot();
   assert.equal(snapshot.equipmentRuntime.length, EQUIPMENT.length);
   assert.ok(snapshot.equipmentRuntime.every((item) => item.uses === 1));
   assert.ok(snapshot.equipmentRuntime.every((item) => item.remaining === item.maxCharges - 1));
-  assert.equal(events.filter((event) => event.type === 'equipment-used').length, EQUIPMENT.length);
+  assert.equal(events.filter((event) => event.type === 'equipment-used').length, EQUIPMENT.length - physicalCount);
+  assert.equal(events.filter((event) => event.type === 'placeable-deployed').length, physicalCount);
   assert.ok(snapshot.fieldEffects.scans > 0);
   assert.ok(snapshot.fieldEffects.repairs > 0);
-  assert.ok(snapshot.equipmentDeployments.length > 0);
+  assert.equal(snapshot.placeablesV86.instances.filter(item => item.onGround).length, physicalCount);
 }));
 
 test('all 392 costumes compile armor, mobility, stealth, faction, provenance and a visual marking', () => withBrowserMocks(() => {

@@ -250,19 +250,19 @@ test('build filtering excludes all V85 private roots before descent, preserving 
   }
 });
 
-test('current package, lock, release, HTML, worker and QA commands consistently ship V85 without renaming old art', async () => {
+test('current package, lock, release, HTML, worker and QA commands consistently ship V86 without renaming old art', async () => {
   const [pkg, lock, html, worker] = await Promise.all([readFile('package.json', 'utf8').then(JSON.parse),
     readFile('package-lock.json', 'utf8').then(JSON.parse), readFile('index.html', 'utf8'), readFile('sw.js', 'utf8')]);
-  assert.equal(RELEASE.version, '85.0.0');
-  for (const version of [pkg.version, lock.version, lock.packages[''].version]) assert.equal(version, '85.0.0');
-  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v85<\/title>/u);
-  assert.match(html, /<meta name="atf-release" content="85\.0\.0">/u);
+  assert.equal(RELEASE.version, '86.0.0');
+  for (const version of [pkg.version, lock.version, lock.packages[''].version]) assert.equal(version, '86.0.0');
+  assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v86<\/title>/u);
+  assert.match(html, /<meta name="atf-release" content="86\.0\.0">/u);
   assert.match(html, /href="\/crew-v85\.css"/u);
   assert.match(html, /id="crew-list" class="crew-roster-v85"/u);
-  assert.ok(worker.includes(PRODUCTION_CACHE_V85));
+  assert.ok(worker.includes('atf-v86-physical-placeables-shell-1'));
   for (const path of [...RUNTIME_ASSET_PATHS_V85, ...RECRUITMENT_RUNTIME_PATHS_V85.map(path => '/' + path)]) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(pkg.scripts['verify:production:v85'], 'node scripts/verify-production-v85.mjs');
   assert.equal(pkg.scripts['verify:production:v84'], 'node scripts/verify-production-v84.mjs');
   assert.equal(pkg.scripts['qa:browser:v85'], 'node tests/browser-recruitment-v85.mjs && node tests/browser-crew-runtime-v85.mjs');
-  assert.match(pkg.scripts['qa:release'], /npm run qa:browser:v84 && npm run qa:browser:v85$/u);
+  assert.match(pkg.scripts['qa:release'], /npm run qa:browser:v84 && npm run qa:browser:v85 && npm run qa:browser:v86$/u);
 });

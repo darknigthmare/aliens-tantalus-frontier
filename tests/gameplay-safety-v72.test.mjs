@@ -1,14 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GameEngine } from '../src/game-production-runtime.js';
+import { GameEngine as LegacyProductionCoreEngine } from '../src/game-production-core.js';
 import { GameEngine as BaseMissionEngine } from '../src/game-v51-runtime.js';
 import { buildSpriteHitboxRuntime } from '../src/game-v52-runtime.js';
 import { SPRITE_HITBOXES, resolveSpriteSheet } from '../src/sprite-animation-runtime.js';
-import { updateEnemySupportStatusesV72, restoreGameplaySupportV72 } from '../src/gameplay-support-v72.js';
+import { updateEnemySupportStatusesV72, captureGameplaySupportV72, restoreGameplaySupportV72 } from '../src/gameplay-support-v72.js';
 import { beginOperation, createDefaultSave, migrateSave, resolveOperation, sanitizeOperationResumeState } from '../src/save.js';
 import { CAMPAIGNS, CREW, ENEMIES, EQUIPMENT, LEVEL_SEEDS, VEHICLES, WEAPONS, WORLDS } from '../src/content.js';
 
-function withRuntime(run) {
+// Historical V72 serialization/instant-deployment fixture, retained for migration.
+// The live V86 chain is exercised separately by placeables-integration-v86.test.mjs.
+class LegacyV72SupportEngine extends LegacyProductionCoreEngine {
+  captureResumeState() { return { ...super.captureResumeState(), gameplaySupportV72: captureGameplaySupportV72(this) }; }
+  applyResumeState(raw) {
+    const result = super.applyResumeState(raw);
+    return result.applied ? { ...result, supportRestoredV72: restoreGameplaySupportV72(this, raw?.gameplaySupportV72) } : result;
+  }
+}
+
+function withRuntime(run, Engine = GameEngine) {
   const saved = Object.fromEntries(['Image', 'addEventListener', 'requestAnimationFrame', 'document'].map((key) => [key, globalThis[key]]));
   const listeners = new Map();
   const frames = [];
@@ -25,7 +36,7 @@ function withRuntime(run) {
     enemyCatalog: ENEMIES.slice(0, 52), weapon: WEAPONS.find((entry) => entry.magazine >= 30), equipment: EQUIPMENT.slice(0, 8), crew: CREW,
     vehicle: VEHICLES.find((entry) => entry.family === 'ground'), difficulty: 'standard'
   };
-  const engine = new GameEngine({ width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} });
+  const engine = new Engine({ width: 1280, height: 720, getContext: () => ({}), addEventListener: () => {} });
   const dispatch = (type, overrides = {}) => {
     const event = { code: '', repeat: false, preventDefault() { this.prevented = true; }, ...overrides };
     for (const listener of listeners.get(type) || []) listener(event);
@@ -153,7 +164,7 @@ test('V72 temporary slow effects expire and do not compound with 30/60/120 FPS u
   }
 });
 
-test('V72 sentry requires 2D range and clear fire path through real doors/platforms', () => withRuntime(({ engine }) => {
+test('historical V72 sentry requires 2D range and clear fire path through real doors/platforms', () => withRuntime(({ engine }) => {
   const enemy = { ...engine.enemies[0], alive: true, dormant: false, ventTransit: null, x: 300, y: 80, w: 40, h: 60, health: 1000, maxHealth: 1000 };
   const sentry = { id: 'test-sentry', kind: 'sentry', x: 50, y: 80, w: 38, h: 42, range: 620, ammo: 9, damage: 20, cooldown: 0 };
   engine.enemies = [enemy];
@@ -181,9 +192,9 @@ test('V72 sentry requires 2D range and clear fire path through real doors/platfo
   engine.updateEquipmentDeployments(0.1);
   assert.equal(sentry.ammo, 8, 'clear target is actually attacked');
   assert.ok(enemy.health < 1000);
-}));
+}, LegacyV72SupportEngine));
 
-test('V72 oxygen, equipped effects and deployed consumables survive the native save roundtrip', () => withRuntime(({ engine, options }) => {
+test('historical V72 oxygen, equipped effects and deployed consumables survive the native save roundtrip', () => withRuntime(({ engine, options }) => {
   const allOptions = { ...options, equipment: EQUIPMENT };
   engine.start(allOptions);
   for (const action of ['deploy-sentry', 'cryo-trap', 'containment-field', 'protective-layer', 'incendiary-load']) {
@@ -221,9 +232,9 @@ test('V72 oxygen, equipped effects and deployed consumables survive the native s
   const before = JSON.stringify(engine.captureResumeState().gameplaySupportV72);
   engine.applyResumeState(state);
   assert.equal(JSON.stringify(engine.captureResumeState().gameplaySupportV72), before, 'restoring repeatedly does not duplicate deployments or reset duration');
-}));
+}, LegacyV72SupportEngine));
 
-test('V72 support restore rejects unknown/duplicate deployments and derives damage from equipment', () => withRuntime(({ engine, options }) => {
+test('historical V72 support restore rejects unknown/duplicate deployments and derives damage from equipment', () => withRuntime(({ engine, options }) => {
   engine.start({ ...options, equipment: EQUIPMENT });
   const equipment = [...engine.equipmentActions.values()].find((entry) => entry.action === 'deploy-sentry');
   engine.useEquipment(equipment.id);
@@ -236,7 +247,7 @@ test('V72 support restore rejects unknown/duplicate deployments and derives dama
   assert.equal(engine.supportDeployments.length, 1);
   assert.equal(engine.supportDeployments[0].damage, 8 + equipment.magnitude * 0.45);
   assert.equal(engine.supportDeployments[0].ammo, 12 + Math.floor(equipment.magnitude / 2));
-}));
+}, LegacyV72SupportEngine));
 
 test('V72 une victoire ordinaire sérialisée ne peut pas repayer ses ressources ou sa progression', () => {
   const save = createDefaultSave(1);

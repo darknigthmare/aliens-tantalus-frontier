@@ -23,7 +23,7 @@ export function validateContent() {
 
 export const RELEASE = Object.freeze({
   ...PREVIOUS_RELEASE,
-  version: '85.0.0',
-  subtitle: 'Recrutement causal, dossiers Echo-9, dotations individuelles et prologue jouable',
+  version: '86.0.0',
+  subtitle: 'Équipements physiques, placement ancré, récupération et dotations persistantes',
   sourceVersion: '51.0.0'
 });

@@ -54,6 +54,9 @@ try {
   await cdp('Network.setBypassServiceWorker', { bypass: true });
   await cdp('Emulation.setFocusEmulationEnabled', { enabled: true });
   await cdp('Page.navigate', { url: base + '?qa=captions-v84' });
+  // A fresh isolated headless tab may start backgrounded; boot animation
+  // frames need the same real foreground focus as the other browser suites.
+  await cdp('Page.bringToFront');
   await until('globalThis.__ATF_GAME__ && globalThis.__ATF_V61__ && !document.querySelector("#boot")');
   await evaluate(`(async () => {
     const c = await import('/src/content.js'), game = __ATF_GAME__;

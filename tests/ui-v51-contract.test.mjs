@@ -12,7 +12,7 @@ const [app, html, styles] = await Promise.all([
   readFile(stylesPath, 'utf8')
 ]);
 
-test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et conséquences de production', () => {
+test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et conséquences de production', async () => {
   for (const contract of [
     "from './game-production-runtime.js'",
     "from './mission-levels-v52.js'",
@@ -45,7 +45,11 @@ test('le point d’entrée v62 branche niveaux, escouade, hub, insertion et cons
   assert.match(app, /startMissionInsertionV62/);
   assert.match(app, /function launchForgeMissionPlaytest\(project\)/);
   assert.match(app, /new ForgeSaveSystemV62/);
-  assert.match(app, /engine\.useEquipment\(id\)/);
+  assert.match(app, /new PlaceablesDockV86\(byId\('mission-equipment-controls'\), engine/);
+  const dock = await readFile(new URL('../src/placeables-ui-v86.js', import.meta.url), 'utf8');
+  assert.match(dock, /engine\.useEquipment\(button\.dataset\.useEquipment, actor\)/);
+  assert.match(dock, /engine\.confirmPlaceableV86\(actor\)/);
+  assert.match(dock, /engine\.recoverPlaceableV86\(button\.dataset\.placeableRecover, actor\)/);
   assert.match(app, /engine\.activateNeuroCountermeasure\(engine\.player\)/);
   assert.match(app, /function retreatMission\(\)/);
   assert.match(app, /globalThis\.__ATF_V51__/);

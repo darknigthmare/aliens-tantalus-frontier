@@ -1,8 +1,13 @@
-const CACHE = 'atf-v85-causal-recruitment-shell-1';
+const CACHE = 'atf-v86-physical-placeables-shell-1';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css', '/src/game-final-runtime.js'];
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/placeables-state-v86.js', '/src/placeables-runtime-v86.js', '/src/placeables-visual-v86.js', '/src/placeables-ui-v86.js', '/placeables-v86.css',
+  '/assets/openai/sprites/normalized/tools/portable-sentry-use-sheet.png',
+  '/assets/openai/sprites/normalized/tools/cryo-mine-use-sheet.png',
+  '/assets/openai/sprites/normalized/tools/electroshock-trap-use-sheet.png',
+  '/assets/openai/sprites/normalized/tools/portable-quarantine-use-sheet.png',
   ...CREW_V85,
   '/src/player-onboarding-v84.js', '/src/player-creator-ui-v84.js', '/src/hub-onboarding-v84.js',
   '/src/combat-captions-v84.js', '/player-onboarding-v84.css',
