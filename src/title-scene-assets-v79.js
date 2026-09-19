@@ -1,4 +1,20 @@
-const ready = (asset) => Object.freeze({ ...asset, status: 'ready', worldIds: Object.freeze(asset.worldIds ?? []) });
+// Measured alpha silhouettes in the unchanged 1024px source PNGs (alpha >=16).
+// A square registration preserves native aspect; all spherical layers then share
+// one world-space limb instead of treating transparent padding as planet surface.
+export const TITLE_SPHERE_REGISTRATION_V87 = Object.freeze(Object.fromEntries(Object.entries({
+  'planet-01-acheron': { x: 74, y: 71.5, size: 876 },
+  'planet-02-ceto-basin': { x: 62, y: 66, size: 887 },
+  'planet-03-mire-9': { x: 105, y: 101.5, size: 820 },
+  'atmosphere-01-ceto-cyan': { x: 137, y: 118, size: 791 },
+  'atmosphere-02-acheron-storm': { x: 146.5, y: 110, size: 796 },
+  'atmosphere-03-mire-9': { x: 118, y: 102.5, size: 805 },
+  'clouds-01-acheron-storm': { x: 75.5, y: 65, size: 900 }
+}).map(([id, bounds]) => [id, Object.freeze({ ...bounds, sourceSize: 1024 })])));
+
+const ready = (asset) => Object.freeze({
+  ...asset, status: 'ready', worldIds: Object.freeze(asset.worldIds ?? []),
+  sphereRegistration: TITLE_SPHERE_REGISTRATION_V87[asset.id] || null
+});
 
 export const TITLE_SCENE_READY_ASSETS_V79 = Object.freeze([
   ready({ id: 'space-01-deep-frontier', runtimeId: 'title.v79.space.deep-frontier', role: 'space', layerHint: 'deep-space', src: '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png', sha256: '5393ac4e5ef8900e0988e2585d808c54dbf227b2dda2b4febb7d268940734e8e' }),

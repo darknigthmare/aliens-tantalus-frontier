@@ -1,7 +1,9 @@
-const CACHE = 'atf-v86-public-shell-11';
+const CACHE = 'atf-v86-public-shell-12';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',
+  '/assets/openai/ship-animals/v87/mica-atlas-v2.png', '/assets/openai/ship-animals/v87/terrarium-props.png',
   '/src/player-airborne-presentation-v87.js',
   '/src/refuge-personal-state-v87.js', '/src/refuge-controller-v87.js', '/src/refuge-ui-v87.js',
   '/src/refuge-save-v87.js', '/src/refuge-room-v87.js', '/src/refuge-art-v87.js', '/src/refuge-v87.css',

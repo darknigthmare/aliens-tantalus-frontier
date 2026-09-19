@@ -1,4 +1,5 @@
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
+import { SHIP_MICA_TERRARIUM_GRAPH_V87 } from './ship-animal-terrarium-navigation-v87.js';
 
 const freeze = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -61,7 +62,14 @@ export const SHIP_ANIMAL_HABITATS_V87 = freeze([
       'animal-tic': { food: 1506, stroll: 1482, foodFacing: 1, minX: 1477, maxX: 1507 },
       'animal-tac': { food: 1538, stroll: 1562, foodFacing: -1, minX: 1538, maxX: 1566 }
     },
-    requirements: ['safe-enclosure', 'rest-hide', 'feeding-station', 'water-station', 'hygiene-station', 'enrichment'] }
+    requirements: ['safe-enclosure', 'rest-hide', 'feeding-station', 'water-station', 'hygiene-station', 'enrichment'] },
+  { id: 'mica-terrarium-v87', type: 'terrarium', label: 'Terrarium aménagé',
+    designatedAnimalId: 'animal-mica', compatibleFamilyIds: ['gecko'], capacity: 1,
+    navigationDomain: 'terrarium-volume', enclosureBounds: { ...SHIP_MICA_TERRARIUM_GRAPH_V87.bounds },
+    installX: 1800, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1800, y: 612 },
+    receivingPoint: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1800, y: 624 },
+    routineTargets: { food: 1816, stroll: 1880, foodFacing: 1 },
+    requirements: ['safe-enclosure', 'climate-system', 'rest-hide', 'feeding-station', 'cleaning-system'] }
 ]);
 // Props sit behind the walking lane. They never become full-height barriers to
 // a small resident; the hygiene cabinet/counter serves all three berths.
@@ -95,7 +103,7 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
     action: 'ship-animal:care', description: 'Contrôler les équipements et la capacité d’accueil',
     persistent: true, singleStation: true, upgradeId: 'animal-care-services-v87',
     capabilities: ['companion-care'], bounds: { x: props[0].x, y: props[0].y, w: props[0].w, h: props[0].h } },
-  action: 'ship-animal:care', description: 'Trois logements individuels et deux parcs pour paires liées à équiper avant acquisition. Aucune boutique à bord.',
+  action: 'ship-animal:care', description: 'Trois logements individuels, deux parcs pour paires liées et un terrarium à équiper avant acquisition. Aucune boutique à bord.',
   scope: 'companion-care', implementedFeatures: ['local-docked-counter', 'physical-arrival-transfer'],
   deferredFeatures: ['dedicated-human-carry-animation'],
   normalHubCreaturesVisible: false, isolatedLevelTarget: null,
@@ -155,7 +163,7 @@ export function getShipAnimalRoomInteractionV87(hub, save) {
     .sort((a, b) => Math.abs(x - a.installX) - Math.abs(x - b.installX))[0];
   if (uninstalled) return { action: 'ship-animal:install', habitatId: uninstalled.id,
     prompt: 'E — INSTALLER : ' + uninstalled.label.toUpperCase() };
-  const enclosure = habitats.find(habitat => habitat.installed && habitat.navigationDomain === 'enclosure-volume'
+  const enclosure = habitats.find(habitat => habitat.installed && ['enclosure-volume', 'terrarium-volume'].includes(habitat.navigationDomain)
     && Math.abs(x - habitat.installX) <= 52);
   if (enclosure) return { action: 'ship-animal:observe', habitatId: enclosure.id,
     prompt: 'E — OBSERVER : ' + enclosure.label.toUpperCase() };

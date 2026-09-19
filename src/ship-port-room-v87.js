@@ -3,6 +3,7 @@ import { PORT_ART_V87, drawPortVendorV87, drawPortPropV87, getPortPropBoundsV87 
 import { drawShipAnimalV87, SHIP_ANIMAL_ATLASES_V87 } from './ship-animal-art-v87.js';
 import { canAccessPortCounterV87 } from './ship-port-state-v87.js';
 import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87, drawClosedShipAnimalPenV87, isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
+import { SHIP_ANIMAL_TERRARIUM_ASSET_V87, drawClosedShipTerrariumV87, isShipAnimalTerrariumAtlasReadyV87 } from './ship-animal-terrarium-art-v87.js';
 
 const ROOT = '/assets/openai/ship-animals/v87';
 const freeze = value => { if (value && typeof value === 'object') { Object.values(value).forEach(freeze); Object.freeze(value); } return value; };
@@ -33,13 +34,14 @@ export const SHIP_PORT_ANNEX_V87 = freeze({
   criteria: { ...structuredClone(SHIP_ANIMAL_ANNEX_V87.criteria), scale: {
     ...SHIP_ANIMAL_ANNEX_V87.criteria.scale, logicalWidth: 2560 } },
   props: portProps,
-  artRoles: ['far', 'prop', 'door', 'vendor', 'moka', 'brume', 'luciole', 'noisette', 'cafe', 'tic', 'tac', 'enclosure'],
+  artRoles: ['far', 'prop', 'door', 'vendor', 'moka', 'brume', 'luciole', 'noisette', 'cafe', 'tic', 'tac', 'enclosure', 'mica', 'terrarium'],
   art: { far: ROOT + '/habitat-wall.png', prop: ROOT + '/port-props.png', vendor: ROOT + '/port-vendor-atlas.png',
     moka: SHIP_ANIMAL_ATLASES_V87['animal-moka'].path, brume: SHIP_ANIMAL_ATLASES_V87['animal-brume'].path,
     luciole: SHIP_ANIMAL_ATLASES_V87['animal-luciole'].path,
     noisette: SHIP_ANIMAL_ATLASES_V87['animal-noisette'].path, cafe: SHIP_ANIMAL_ATLASES_V87['animal-cafe'].path,
     tic: SHIP_ANIMAL_ATLASES_V87['animal-tic'].path, tac: SHIP_ANIMAL_ATLASES_V87['animal-tac'].path,
     enclosure: SHIP_ANIMAL_ENCLOSURE_ASSET_V87,
+    mica: SHIP_ANIMAL_ATLASES_V87['animal-mica'].path, terrarium: SHIP_ANIMAL_TERRARIUM_ASSET_V87,
     door: SHIP_ANIMAL_ANNEX_V87.art.door, alphaBounds: { door: [...SHIP_ANIMAL_ANNEX_V87.art.alphaBounds.door] } }
 });
 
@@ -62,7 +64,8 @@ export const SHIP_PORT_MEETINGS_V87 = freeze([
   { animalId: 'animal-noisette', offerId: 'offer-noisette-cafe', vendorId: 'colony-shelter', x: 2130, drawX: 2105, name: 'Noisette', imageRole: 'noisette' },
   { animalId: 'animal-cafe', offerId: 'offer-noisette-cafe', vendorId: 'colony-shelter', x: 2130, drawX: 2155, name: 'Café', imageRole: 'cafe' },
   { animalId: 'animal-tic', offerId: 'offer-tic-tac', vendorId: 'colony-shelter', x: 2420, drawX: 2402, name: 'Tic', imageRole: 'tic' },
-  { animalId: 'animal-tac', offerId: 'offer-tic-tac', vendorId: 'colony-shelter', x: 2420, drawX: 2438, name: 'Tac', imageRole: 'tac' }
+  { animalId: 'animal-tac', offerId: 'offer-tic-tac', vendorId: 'colony-shelter', x: 2420, drawX: 2438, name: 'Tac', imageRole: 'tac' },
+  { animalId: 'animal-mica', offerId: 'offer-animal-mica', vendorId: 'station-shop', x: 810, drawX:768, interactionRadius:60, name: 'Mica', imageRole: 'mica' }
 ]);
 export const SHIP_PORT_VENDORS_V87 = freeze({
   'station-shop': { id: 'station-shop', name: 'Compagnons de la Frontière' },
@@ -79,7 +82,8 @@ export function getShipPortInteractionV87(hub) {
   if (roomId !== SHIP_PORT_ANNEX_V87.id) return null;
   if (x >= 410 && x <= 755) return { action: 'ship-port:shop', vendorId: 'station-shop', prompt: 'E — PARLER À LA RESPONSABLE DU COMPTOIR' };
   if (x >= 1930 && x <= 2000) return { action: 'ship-port:shop', vendorId: 'colony-shelter', prompt: 'E — CONSULTER LE REFUGE COLONIAL' };
-  const meeting = SHIP_PORT_MEETINGS_V87.find(entry => Math.abs(x - entry.x) <= 105);
+  const meeting = SHIP_PORT_MEETINGS_V87.filter(entry => Math.abs(x - entry.x) <= (entry.interactionRadius ?? 105))
+    .sort((a,b) => Math.abs(x-a.x)-Math.abs(x-b.x))[0];
   const group = meeting && SHIP_PORT_MEETINGS_V87.filter(entry => entry.offerId === meeting.offerId);
   return meeting ? { action: 'ship-port:shop', animalId: meeting.animalId, offerId: meeting.offerId, vendorId: meeting.vendorId,
     prompt: 'E — RENCONTRER ' + group.map(entry => entry.name.toUpperCase()).join(' ET ') } : null;
@@ -97,15 +101,19 @@ export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion =
   for (const meeting of SHIP_PORT_MEETINGS_V87) {
     const stock = save?.shipAnimalsV1?.stock?.[meeting.offerId];
     const pen = SHIP_PORT_PENS_V87[meeting.offerId], enclosure = images?.get('enclosure');
+    const mica = meeting.animalId === 'animal-mica';
+    const terrarium = images?.get('terrarium'), terrariumBounds = {x:750,y:536,w:120,h:88};
     // A supervised meeting space: its fence is behind the animal, not an
     // opaque foreground cage concealing the individual the player meets.
     if (!drawnOffers.has(meeting.offerId)) {
-      if (pen) drawClosedShipAnimalPenV87(ctx, enclosure, { ...pen, layer: 'back' });
+      if (mica) drawClosedShipTerrariumV87(ctx, terrarium, { bounds:terrariumBounds, layer:'back' });
+      else if (pen) drawClosedShipAnimalPenV87(ctx, enclosure, { ...pen, layer: 'back' });
       else drawPortPropV87(ctx, props, 'gate', { x: meeting.x - 115, width: 230, bottom: 626 });
     }
-    if (stock?.status === 'available' && (!pen || isShipAnimalEnclosureAtlasReadyV87(enclosure))) drawShipAnimalV87(ctx, images?.get(meeting.imageRole), {
-      animalId: meeting.animalId, x: meeting.drawX ?? meeting.x, y: pen ? 612 : 624, facing: -1, clipId: 'idle', elapsed: reducedMotion ? 0 : time
+    if (stock?.status === 'available' && (mica ? isShipAnimalTerrariumAtlasReadyV87(terrarium) : !pen || isShipAnimalEnclosureAtlasReadyV87(enclosure))) drawShipAnimalV87(ctx, images?.get(meeting.imageRole), {
+      animalId: meeting.animalId, x: meeting.drawX ?? meeting.x, y: pen || mica ? 612 : 624, facing: -1, clipId: 'idle', elapsed: reducedMotion ? 0 : time
     });
+    if (mica) drawClosedShipTerrariumV87(ctx, terrarium, { bounds:terrariumBounds, layer:'front' });
     // This is the vendor's visitor area, never a resident on the Tantalus.
     if (!drawnOffers.has(meeting.offerId)) {
       ctx.save(); ctx.font = '12px ui-monospace, monospace'; ctx.textAlign = 'center'; ctx.fillStyle = '#c6d1c5';

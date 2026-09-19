@@ -1,5 +1,5 @@
 // These individuals are original Tantalus companions, not named canon animals.
-export const SHIP_ANIMAL_CATALOG_REVISION_V87 = 3;
+export const SHIP_ANIMAL_CATALOG_REVISION_V87 = 4;
 export const SHIP_ANIMAL_DEFINITIONS_V87 = Object.freeze({
   'animal-moka': Object.freeze({ id: 'animal-moka', name: 'Moka', familyId: 'cat-domestic',
     visualId: 'original-moka', nature: 'biological', habitatType: 'cat-berth', defaultHabitatId: 'moka-berth-v87',
@@ -40,7 +40,13 @@ export const SHIP_ANIMAL_DEFINITIONS_V87 = Object.freeze({
     bondedGroupId: 'tic-tac', appearance: 'Rat domestique brun et blanc, silhouette trapue.',
     biography: 'Compagnon de Tic, identité et familiarité propres.',
     traits: Object.freeze(['calme', 'sociable', 'observateur']),
-    preferences: Object.freeze({ likes: 'Un refuge partagé', avoids: 'Les manipulations trop rapides' }) })
+    preferences: Object.freeze({ likes: 'Un refuge partagé', avoids: 'Les manipulations trop rapides' }) }),
+  'animal-mica': Object.freeze({ id: 'animal-mica', name: 'Mica', familyId: 'gecko',
+    visualId: 'original-mica', nature: 'biological', habitatType: 'terrarium', defaultHabitatId: 'mica-terrarium-v87',
+    appearance: 'Petit gecko tacheté, doigts et queue lisibles.',
+    biography: 'Résident d’un terrarium entretenu par une équipe scientifique civile ; placé avec son dossier de maintenance.',
+    traits: Object.freeze(['discret', 'calme', 'observateur']),
+    preferences: Object.freeze({ likes: 'Un abri de terrarium', avoids: 'Les transferts répétés' }) })
 });
 export const SHIP_ANIMAL_OFFERS_V87 = Object.freeze({
   'offer-animal-moka': Object.freeze({ id: 'offer-animal-moka', animalId: 'animal-moka', vendorId: 'station-shop', costCredits: 220 }),
@@ -49,7 +55,8 @@ export const SHIP_ANIMAL_OFFERS_V87 = Object.freeze({
   'offer-noisette-cafe': Object.freeze({ id: 'offer-noisette-cafe', animalIds: Object.freeze(['animal-noisette', 'animal-cafe']),
     bondedGroupId: 'noisette-cafe', groupIndivisible: true, vendorId: 'colony-shelter', costCredits: 260 }),
   'offer-tic-tac': Object.freeze({ id: 'offer-tic-tac', animalIds: Object.freeze(['animal-tic', 'animal-tac']),
-    bondedGroupId: 'tic-tac', groupIndivisible: true, vendorId: 'colony-shelter', costCredits: 240 })
+    bondedGroupId: 'tic-tac', groupIndivisible: true, vendorId: 'colony-shelter', costCredits: 240 }),
+  'offer-animal-mica': Object.freeze({ id: 'offer-animal-mica', animalId: 'animal-mica', vendorId: 'station-shop', costCredits: 180 })
 });
 export const SHIP_ANIMAL_LOCATION_KINDS_V87 = Object.freeze(['transit', 'intake', 'acclimating', 'resident', 'stasis', 'boarding']);
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
@@ -243,7 +250,7 @@ export function migrateShipAnimalStateV87(raw) {
     // Only genuinely new offers may be added by an older catalogue migration.
     // Existing missing stock, or any trace of a prior member, can never restock.
     const members = getShipAnimalOfferMembersV87(offer);
-    const introduced = offer.groupIndivisible ? 3 : offer.id === 'offer-animal-luciole' ? 2 : 1;
+    const introduced = offer.id === 'offer-animal-mica' ? 4 : offer.groupIndivisible ? 3 : offer.id === 'offer-animal-luciole' ? 2 : 1;
     const priorMember = members.some(member => own(raw.animals, member) || own(raw.reservations, member))
       || ['receipts', 'transitions'].some(bucket => Object.values(record(raw[bucket]) ? raw[bucket] : {})
         .some(entry => entry?.offerId === offer.id || entryMembers(entry).some(member => members.includes(member))))
@@ -288,13 +295,19 @@ export function acquireShipAnimalV87(save, request = {}, context = {}) {
   }
   if (own(state.animals, offer.animalId)) return failure(save, 'already-owned');
   if (state.stock[offer.id]?.status !== 'available') return failure(save, 'sold-or-unavailable');
-  if (context.vendorAccessible !== true) return failure(save, 'vendor-inaccessible');
+  if (context.vendorAccessible !== true || (definition.id === 'animal-mica' && context.vendorId !== offer.vendorId))
+    return failure(save, 'vendor-inaccessible');
   if (!Array.isArray(context.artReadyIds) || !context.artReadyIds.includes(offer.animalId)) return failure(save, 'art-not-ready');
   const habitats = Array.isArray(context.habitats) ? context.habitats : [];
   const habitat = habitats.find(candidate => candidate?.id === request.habitatId);
   if (!habitat || habitat.installed !== true || habitat.type !== definition.habitatType
     || (habitat.designatedAnimalId !== undefined && habitat.designatedAnimalId !== definition.id)
     || !id(habitat.id) || !integer(habitat.capacity) || !isPlace(habitat.location)) return failure(save, 'habitat-unavailable');
+  if (definition.id === 'animal-mica' && (habitat.id !== definition.defaultHabitatId
+    || habitat.designatedAnimalId !== definition.id || habitat.capacity !== 1
+    || habitat.navigationDomain !== 'terrarium-volume'
+    || !Array.isArray(habitat.compatibleFamilyIds) || !habitat.compatibleFamilyIds.includes(definition.familyId)))
+    return failure(save, 'habitat-unavailable');
   const reserved = Object.values(state.reservations);
   if (reserved.filter(entry => entry.habitatId === habitat.id).length >= habitat.capacity) return failure(save, 'habitat-full');
   if (context.care?.available !== true || !integer(context.care.capacity) || reserved.length >= Math.min(8, context.care.capacity)) return failure(save, 'care-unavailable');
@@ -313,7 +326,8 @@ export function acquireShipAnimalV87(save, request = {}, context = {}) {
     habitatId: habitat.id, location, acquisition: { transactionId: request.transactionId, offerId: offer.id,
       vendorId: offer.vendorId, costCredits: offer.costCredits, simulationTime },
     activity: 'transport', needs: { comfort: 100, rest: 100, satiety: 100, social: 75, health: 100 },
-    links: {}, preferences: {}, eventIds: [], personalObjectId: null, revision: 1, lastSimulationTime: simulationTime };
+    links: {}, preferences: definition.id === 'animal-mica' ? clone(definition.preferences) : {},
+    eventIds: [], personalObjectId: null, revision: 1, lastSimulationTime: simulationTime };
   state.animals[animal.id] = animal;
   state.stock[offer.id] = { status: 'sold', animalId: animal.id, transactionId: request.transactionId };
   state.reservations[animal.id] = { animalId: animal.id, habitatId: habitat.id, slots: 1 };
@@ -430,6 +444,8 @@ export function transitionShipAnimalV87(save, request = {}, context = {}) {
   // Enclosure routines move individual residents inside their validated sub-volume.
   // The public logistics API must never publish one half of a bonded transition.
   if (animal.bondedGroupId) return failure(save, 'group-transition-required');
+  if (animal.familyId === 'gecko' && animal.location.kind === 'resident' && request.location.kind === 'resident'
+    && !samePlace(animal.location, request.location)) return failure(save, 'enclosure-routine-required');
   if (!integer(state.revision + 1) || !integer(animal.revision + 1)) return failure(save, 'invalid-revision');
   const simulationTime = context.simulationTime ?? state.lastSimulationTime;
   if (!nonnegative(simulationTime) || simulationTime < state.lastSimulationTime) return failure(save, 'invalid-simulation-time');

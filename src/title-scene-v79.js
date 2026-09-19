@@ -80,6 +80,12 @@ export class TitleSceneControllerV79 {
     if (layer.runtimeId) element.dataset.runtimeId = layer.runtimeId;
     element.setAttribute('aria-hidden', 'true');
     element.style?.setProperty?.('--title-scene-depth-v79', String(layer.depth));
+    if (layer.sphereRegistration) {
+      const { x, y, size, sourceSize } = layer.sphereRegistration;
+      element.style?.setProperty?.('--title-art-left-v87', `${-x / size * 100}%`);
+      element.style?.setProperty?.('--title-art-top-v87', `${-y / size * 100}%`);
+      element.style?.setProperty?.('--title-art-size-v87', `${sourceSize / size * 100}%`);
+    }
 
     if (layer.renderer === 'image') {
       const image = documentRef.createElement('img');

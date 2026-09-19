@@ -2,6 +2,9 @@ import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 import { SHIP_ANIMAL_ANNEX_V87, SHIP_ANIMAL_HABITATS_V87, getShipAnimalHabitatsV87 } from './ship-animal-habitat-v87.js';
 import { buildShipAnimalNavigationV87, planShipAnimalRouteV87, stepShipAnimalRouteV87,
   sampleShipAnimalRouteV87 } from './ship-animal-navigation-v87.js';
+import { SHIP_MICA_TERRARIUM_GRAPH_V87 as MICA_GRAPH, getMicaTerrariumTargetV87,
+  isMicaTerrariumPointV87, planMicaTerrariumRouteV87, sampleMicaTerrariumRouteV87,
+  stepMicaTerrariumRouteV87 } from './ship-animal-terrarium-navigation-v87.js';
 
 export const SHIP_ANIMAL_ROUTINE_BODIES_V87 = Object.freeze({
   'animal-moka': Object.freeze({ w: 38, h: 38, speed: 42 }),
@@ -10,7 +13,8 @@ export const SHIP_ANIMAL_ROUTINE_BODIES_V87 = Object.freeze({
   'animal-noisette': Object.freeze({ w: 44, h: 30, speed: 18, movement: 'enclosure-hop', hopHeight: 3 }),
   'animal-cafe': Object.freeze({ w: 36, h: 32, speed: 17, movement: 'enclosure-hop', hopHeight: 3 }),
   'animal-tic': Object.freeze({ w: 30, h: 16, speed: 16, movement: 'enclosure-walk', hopHeight: 0 }),
-  'animal-tac': Object.freeze({ w: 32, h: 16, speed: 15, movement: 'enclosure-walk', hopHeight: 0 })
+  'animal-tac': Object.freeze({ w: 32, h: 16, speed: 15, movement: 'enclosure-walk', hopHeight: 0 }),
+  'animal-mica': Object.freeze({ w: 20, h: 10, speed: 10, movement: 'terrarium-supported', hopHeight: 0 })
 });
 const clone = value => structuredClone(value);
 const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -30,6 +34,39 @@ const fail = (save, code) => ({ ok: false, changed: false, code, save: clone(sav
 const unchanged = (save, code = 'unchanged') => ({ ok: true, changed: false, code, save: clone(save), events: [] });
 
 const enclosed = animal => Boolean(SHIP_ANIMAL_ROUTINE_BODIES_V87[animal?.id]?.movement);
+const terrarium = animal => animal?.id === MICA_GRAPH.actorId;
+function terrariumHabitat(animal) {
+  const h = SHIP_ANIMAL_HABITATS_V87.find(habitat => habitat.id === animal.habitatId);
+  return h?.id === MICA_GRAPH.habitatId && h.designatedAnimalId === animal.id
+    && h.navigationDomain === 'terrarium-volume' && h.compatibleFamilyIds.includes('gecko')
+    && ['x','y','w','h'].every(k => h.enclosureBounds?.[k] === MICA_GRAPH.bounds[k]) ? h : null;
+}
+function validateTerrariumRoutine(animal, routine, clock) {
+  if (!terrariumHabitat(animal) || animal.location.kind !== 'resident' || routine.phase === 'pet'
+    || !isMicaTerrariumPointV87(animal.location, { stationary: routine.phase !== 'walk' }))
+    return 'unsafe-terrarium-origin';
+  if (routine.phase !== 'walk') return routine.route !== null || routine.elapsed > DURATION[routine.phase] + EPS
+    || (routine.phase === 'eat' && !samePlace(animal.location, getMicaTerrariumTargetV87('food')))
+    || (routine.phase === 'sleep' && !samePlace(animal.location, getMicaTerrariumTargetV87('bed')))
+    ? 'invalid-terrarium-routine' : null;
+  const projection = sampleMicaTerrariumRouteV87(routine.route);
+  return !projection || routine.route.status !== 'moving' || routine.route.simulationTime > clock + EPS
+    || Math.abs(routine.elapsed - routine.route.elapsed) > EPS || !samePlace(animal.location, projection.location)
+    ? 'invalid-terrarium-route' : null;
+}
+function beginTerrariumWalk(animal, target, afterWalk, time, blockedRoomIds) {
+  if (!terrariumHabitat(animal)) return { ok: false, reason: 'terrarium-habitat-required' };
+  if (blockedRoomIds.includes(MICA_GRAPH.roomId)) return { ok: false, reason: 'terrarium-protected' };
+  const planned = planMicaTerrariumRouteV87(animal.location, target, { simulationTime: time });
+  if (!planned.ok) return planned;
+  const routine = animal.routineV87;
+  routine.phase = planned.state.status === 'arrived' ? afterWalk : 'walk';
+  routine.elapsed = 0; routine.afterWalk = afterWalk;
+  routine.route = planned.state.status === 'arrived' ? null : planned.state;
+  if (routine.route) routine.facing = sampleMicaTerrariumRouteV87(routine.route).facing;
+  animal.activity = routine.phase;
+  return { ok: true };
+}
 const enclosureFor = animal => SHIP_ANIMAL_HABITATS_V87.find(habitat => habitat.id === animal?.habitatId
   && habitat.navigationDomain === 'enclosure-volume' && own(habitat.memberLocations, animal.id)
   && habitat.compatibleFamilyIds.includes(animal.familyId));
@@ -151,6 +188,7 @@ function validateRoutine(animal, graph, clock) {
     || !['food', 'bed', 'stroll'].includes(routine.next)
     || !finite(routine.petCooldownUntil) || routine.petCooldownUntil < 0
     || !(routine.lastPetEventId === null || eventIdValid(routine.lastPetEventId))) return 'invalid-routine';
+  if (terrarium(animal)) return validateTerrariumRoutine(animal, routine, clock);
   if (enclosed(animal)) return validateEnclosureRoutine(animal, routine, clock);
   if (routine.phase !== 'walk') return routine.route !== null || animal.location.kind !== 'resident'
     || routine.elapsed > DURATION[routine.phase] + EPS ? 'invalid-routine' : null;
@@ -168,6 +206,8 @@ function eligible(animal) {
     || (animal.location.kind === 'transit' && animal.routineV87?.phase === 'walk');
 }
 function physicalOrigin(animal, graph) {
+  if (terrarium(animal)) return Boolean(terrariumHabitat(animal)) && animal.location.kind === 'resident'
+    && isMicaTerrariumPointV87(animal.location, { stationary: animal.routineV87?.phase !== 'walk' });
   if (enclosed(animal)) return animal.location.kind === 'resident'
     && enclosurePointValid(animal, animal.location, animal.routineV87?.phase !== 'walk');
   if (animal.location.kind === 'transit') return true; // Validated itinerary owns this edge.
@@ -180,12 +220,14 @@ function habitatFor(save, animal) {
   return getShipAnimalHabitatsV87(save).find(entry => entry.id === animal.habitatId && entry.installed);
 }
 function targetFor(habitat, next, animal) {
+  if (terrarium(animal)) return getMicaTerrariumTargetV87(next);
   // Paw anchors place each mouth at its separate food dish, never at room centre.
   const home = habitat.memberLocations?.[animal.id] || habitat.location;
   const x = next === 'food' || next === 'stroll' ? targetsFor(habitat, animal)[next] : home.x;
   return { ...home, x };
 }
 function beginWalk(animal, graph, target, afterWalk, time, blockedRoomIds) {
+  if (terrarium(animal)) return beginTerrariumWalk(animal, target, afterWalk, time, blockedRoomIds);
   if (enclosed(animal)) return beginEnclosureWalk(animal, target, afterWalk, time, blockedRoomIds);
   const body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
   const planned = planShipAnimalRouteV87(graph, { actorId: animal.id,
@@ -245,6 +287,18 @@ export function stepShipAnimalRoutinesV87(save, {
       const time = start + elapsed - remaining;
       if (routine.phase === 'walk') {
         const route = routine.route;
+        if (terrarium(animal)) {
+          if (blockedRoomIds.includes(animal.location.roomId)) { remaining = 0; break; }
+          const stepped = stepMicaTerrariumRouteV87(route, remaining);
+          if (!stepped.ok) return fail(save, 'invalid-terrarium-route');
+          routine.route = stepped.state; routine.route.simulationTime = time + stepped.consumed;
+          const projected = sampleMicaTerrariumRouteV87(routine.route);
+          if (!projected) return fail(save, 'invalid-terrarium-route');
+          animal.location = projected.location; routine.facing = projected.facing;
+          routine.elapsed = routine.route.elapsed; remaining -= stepped.consumed;
+          if (routine.route.status === 'arrived') { routine.phase = routine.afterWalk; routine.route = null; routine.elapsed = 0; }
+          continue;
+        }
         if (enclosed(animal)) {
           if (blockedRoomIds.includes(animal.location.roomId)) { remaining = 0; break; }
           const dt = Math.min(remaining, Math.max(0, route.duration - route.elapsed));
@@ -306,7 +360,8 @@ export function stepShipAnimalRoutinesV87(save, {
     // The mouth faces the actual dish after arrival, independent of approach direction.
     // Walking keeps its movement-facing; this also repairs a saved backward eat pose.
     if (routine.phase === 'eat') routine.facing = targetsFor(habitats.get(animal.id), animal).foodFacing;
-    animal.activity = routine.phase;
+    animal.activity = terrarium(animal) && routine.phase === 'walk'
+      ? sampleMicaTerrariumRouteV87(routine.route).clipId : routine.phase;
     animal.lastSimulationTime = start + elapsed;
     animal.revision += 1;
   }
@@ -376,7 +431,7 @@ export function observeShipAnimalEnclosureV87(save, { habitatId } = {}, { player
   const { state, error } = load(save, graph);
   if (error) return fail(save, error);
   const habitat = getShipAnimalHabitatsV87(save).find(entry => entry.id === habitatId
-    && entry.installed && entry.navigationDomain === 'enclosure-volume');
+    && entry.installed && ['enclosure-volume', 'terrarium-volume'].includes(entry.navigationDomain));
   if (!habitat) return fail(save, 'habitat-unavailable');
   if (!player || player.alive !== true || player.roomId !== habitat.location.roomId
     || player.deckId !== habitat.location.deckId || !finite(player.x) || !finite(player.y)
@@ -401,10 +456,12 @@ export function sampleShipAnimalRoutinesV87(save, { roomId, deckId = 'habitat', 
       ? sampleShipAnimalRouteV87(routine.route) : animal.location;
     if (!location || location.roomId !== roomId || location.deckId !== deckId) return [];
     const moving = routine?.phase === 'walk' && routine.route?.status === 'moving';
-    const phase = moving ? 'walk' : routine?.phase === 'walk' ? 'idle' : routine?.phase || 'idle';
+    const support = terrarium(animal) && moving ? sampleMicaTerrariumRouteV87(routine.route) : null;
+    const phase = support?.clipId || (moving ? 'walk' : routine?.phase === 'walk' ? 'idle' : routine?.phase || 'idle');
     return [{ animalId: animal.id, name: animal.name, x: location.x, y: location.y,
       roomId: location.roomId, deckId: location.deckId, clipId: phase,
-      elapsed: routine?.elapsed || 0, facing: routine?.facing || 1,
+      elapsed: support?.elapsed ?? routine?.elapsed ?? 0, facing: support?.facing ?? routine?.facing ?? 1,
+      supportSegmentId: support?.segmentId ?? null,
       enclosed: enclosed(animal), habitatId: animal.habitatId, observationOnly: enclosed(animal),
       transit: location.kind === 'transit', depthProgress: location.depthProgress ?? null }];
   });

@@ -73,6 +73,7 @@ const bitmapLayer = (id, depth, modes = ALL_MODES) => {
     runtimeId: asset.runtimeId,
     assetSrc: asset.src,
     sha256: asset.sha256,
+    sphereRegistration: asset.sphereRegistration,
     fallbackLayerId: asset.layerHint
   });
 };
@@ -87,7 +88,8 @@ const SHARED_BITMAP_LAYERS_V79 = Object.freeze([
   bitmapLayer('debris-01-wreck-field', 67),
   bitmapLayer('foreground-01-port-hull', 83),
   bitmapLayer('foreground-02-starboard-truss', 84, FULL_AND_REDUCED),
-  bitmapLayer('vfx-01-ion-exhaust', 91, FULL_ONLY),
+  // Engine exhaust belongs behind the transport, not above the near foreground.
+  bitmapLayer('vfx-01-ion-exhaust', 46, FULL_ONLY),
   bitmapLayer('vfx-03-scan-sweep', 93, FULL_AND_REDUCED)
 ]);
 
