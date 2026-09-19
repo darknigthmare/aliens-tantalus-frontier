@@ -1,6 +1,9 @@
 import { SHIP_ANIMAL_ATLASES_V87, drawShipAnimalV87, isShipAnimalAtlasReadyV87 } from './ship-animal-art-v87.js';
+import { SHIP_ANIMAL_DEFINITIONS_V87 } from './ship-animal-state-v87.js';
 
-const ANIMAL_IDS = Object.freeze(['animal-moka', 'animal-brume']);
+// Definitions own identities and labels; model data cannot invent another
+// animal or redirect its preview to an arbitrary/hostile asset.
+const ANIMAL_IDS = Object.freeze(Object.keys(SHIP_ANIMAL_DEFINITIONS_V87));
 const ABORTABLE_PHASES = new Set(['requesting', 'authorized', 'approach', 'approaching', 'alignment', 'aligning', 'docking']);
 const PHASE_LABELS = Object.freeze({ undocked: 'Non amarré', idle: 'Non amarré', requesting: 'Autorisation demandée',
   authorized: 'Approche autorisée', approach: 'Approche locale', approaching: 'Approche locale', alignment: 'Alignement',
@@ -17,7 +20,7 @@ export class ShipPortUiV87 {
     this.document = documentRef; this.window = documentRef.defaultView || globalThis;
     this.getModel = getModel; this.onAction = onAction; this.onClose = onClose;
     this.destroyed = false; this.opened = false; this.pending = false; this.mode = 'terminal';
-    this.selectedAnimalId = 'animal-moka'; this.examinedSignature = null; this.epoch = 0;
+    this.selectedAnimalId = ANIMAL_IDS[0] || null; this.examinedSignature = null; this.epoch = 0;
     this.frameHandle = null; this.animationSeconds = 0; this.lastFrameTime = null;
     this.error = ''; this.model = {}; this.images = new Map(); this.previousFocus = null;
     this.build();
@@ -72,7 +75,7 @@ export class ShipPortUiV87 {
     this.tabs = this.node('div', 'ship-port-v87__tabs'); this.tabs.setAttribute('role', 'tablist'); this.tabs.setAttribute('aria-label', 'Individus disponibles');
     this.tabButtons = new Map();
     for (const id of ANIMAL_IDS) {
-      const button = this.button(id === 'animal-moka' ? 'Moka' : 'Brume', () => this.select(id));
+      const button = this.button(SHIP_ANIMAL_DEFINITIONS_V87[id].name, () => this.select(id));
       button.id = `ship-port-v87-tab-${id}`; button.dataset.animalId = id; button.setAttribute('role', 'tab');
       button.setAttribute('aria-controls', 'ship-port-v87-dossier');
       button.addEventListener('keydown', event => {
@@ -118,6 +121,7 @@ export class ShipPortUiV87 {
   }
 
   offerFrom(model = this.model) {
+    if (!ANIMAL_IDS.includes(this.selectedAnimalId)) return null;
     return Array.isArray(model.offers) ? model.offers.find(offer => record(offer) && offer.animalId === this.selectedAnimalId) || null : null;
   }
 
@@ -169,7 +173,7 @@ export class ShipPortUiV87 {
     if (this.destroyed) return false;
     this.model = this.readModel(); const model = this.model;
     const offerIds = Array.isArray(model.offers) ? model.offers.filter(record).map(offer => offer.animalId) : [];
-    if (!offerIds.includes(this.selectedAnimalId)) this.selectedAnimalId = ANIMAL_IDS.find(id => offerIds.includes(id)) || 'animal-moka';
+    if (!offerIds.includes(this.selectedAnimalId)) this.selectedAnimalId = ANIMAL_IDS.find(id => offerIds.includes(id)) || null;
     const offer = this.offerFrom(), locked = this.pending || model.busy === true;
     if (this.examinedSignature !== this.signature(offer)) this.examinedSignature = null;
     const phaseLabel = Object.hasOwn(PHASE_LABELS, model.phase) ? PHASE_LABELS[model.phase] : string(model.phase);
@@ -184,7 +188,7 @@ export class ShipPortUiV87 {
       const selected = id === this.selectedAnimalId; button.hidden = !offerIds.includes(id); button.disabled = locked;
       button.tabIndex = selected ? 0 : -1; button.setAttribute('aria-selected', String(selected));
       const entry = Array.isArray(model.offers) && model.offers.find(candidate => candidate?.animalId === id);
-      button.textContent = string(entry?.name) || (id === 'animal-moka' ? 'Moka' : 'Brume');
+      button.textContent = string(entry?.name) || SHIP_ANIMAL_DEFINITIONS_V87[id].name;
     }
     this.dossier.setAttribute('aria-labelledby', `ship-port-v87-tab-${this.selectedAnimalId}`);
     this.offerName.textContent = string(offer?.name) || 'Aucune offre disponible';
@@ -227,7 +231,7 @@ export class ShipPortUiV87 {
   }
 
   imageFor(animalId) {
-    if (!ANIMAL_IDS.includes(animalId)) return null;
+    if (!ANIMAL_IDS.includes(animalId) || !Object.hasOwn(SHIP_ANIMAL_ATLASES_V87, animalId)) return null;
     if (!this.images.has(animalId)) {
       const image = this.document.createElement('img');
       image.onload = () => { if (this.isOpen) this.paintPreview(); };

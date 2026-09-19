@@ -8,7 +8,7 @@ const freeze = value => { if (value && typeof value === 'object') { Object.value
 const portProps = [
   { id: 'port-counter', ...getPortPropBoundsV87('counter', { x: 480, width: 165, bottom: 624 }),
     asset: ROOT + '/port-props.png', collidable: false },
-  { id: 'port-shelf', ...getPortPropBoundsV87('shelf', { x: 1740, width: 97, bottom: 624 }),
+  { id: 'port-shelf', ...getPortPropBoundsV87('shelf', { x: 1825, width: 90, bottom: 624 }),
     asset: ROOT + '/port-props.png', collidable: false }
 ];
 // The relay is a new, original LOCAL service rendezvous, not Gateway/Pioneer.
@@ -27,9 +27,10 @@ export const SHIP_PORT_ANNEX_V87 = freeze({
   scope: 'original-civil-rendezvous', deferredFeatures: ['full-station-hub', 'interstellar-civil-routes'],
   platforms: [{ ...SHIP_ANIMAL_ANNEX_V87.platforms[0], id: 'frontier-civil-counter-floor' }],
   props: portProps,
-  artRoles: ['far', 'prop', 'door', 'vendor', 'moka', 'brume'],
+  artRoles: ['far', 'prop', 'door', 'vendor', 'moka', 'brume', 'luciole'],
   art: { far: ROOT + '/habitat-wall.png', prop: ROOT + '/port-props.png', vendor: ROOT + '/port-vendor-atlas.png',
     moka: SHIP_ANIMAL_ATLASES_V87['animal-moka'].path, brume: SHIP_ANIMAL_ATLASES_V87['animal-brume'].path,
+    luciole: SHIP_ANIMAL_ATLASES_V87['animal-luciole'].path,
     door: SHIP_ANIMAL_ANNEX_V87.art.door, alphaBounds: { door: [...SHIP_ANIMAL_ANNEX_V87.art.alphaBounds.door] } }
 });
 
@@ -38,7 +39,10 @@ export const SHIP_PORT_TERMINAL_V87 = freeze({
 });
 export const SHIP_PORT_MEETINGS_V87 = freeze([
   { animalId: 'animal-moka', offerId: 'offer-animal-moka', x: 990, name: 'Moka', imageRole: 'moka' },
-  { animalId: 'animal-brume', offerId: 'offer-animal-brume', x: 1435, name: 'Brume', imageRole: 'brume' }
+  // Persisted deliveries bind their origin to this meeting; keep Brume's
+  // historical x1435 so an already purchased companion remains collectible.
+  { animalId: 'animal-brume', offerId: 'offer-animal-brume', x: 1435, name: 'Brume', imageRole: 'brume' },
+  { animalId: 'animal-luciole', offerId: 'offer-animal-luciole', x: 1705, name: 'Luciole', imageRole: 'luciole' }
 ]);
 
 export function getShipPortInteractionV87(hub) {
@@ -58,7 +62,7 @@ export function getShipPortInteractionV87(hub) {
 export function drawShipPortRoomV87(ctx, images, save, time = 0, reducedMotion = false) {
   const props = images?.get('prop');
   drawPortPropV87(ctx, props, 'counter', { x: 480, width: 165, bottom: 624 });
-  drawPortPropV87(ctx, props, 'shelf', { x: 1740, width: 97, bottom: 624 });
+  drawPortPropV87(ctx, props, 'shelf', { x: 1825, width: 90, bottom: 624 });
   drawPortPropV87(ctx, props, 'lamp', { x: 425, width: 310, bottom: 480 });
   drawPortPropV87(ctx, props, 'lamp', { x: 1250, width: 310, bottom: 480 });
   drawPortVendorV87(ctx, images?.get('vendor'), { x: 668, feetY: 624, facing: -1, time, reducedMotion });

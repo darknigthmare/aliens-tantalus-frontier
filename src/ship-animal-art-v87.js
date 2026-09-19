@@ -32,13 +32,22 @@ const BRUME_RECTS = [
   [9,873,177,86,90,81], [200,873,176,86,89,81], [392,873,178,86,89.5,81], [586,873,173,86,87.5,81],
   [784,782,156,191,72.5,186], [964,786,160,187,83,182], [1156,782,152,190,81.5,186], [1346,784,158,188,82,184]
 ];
-function atlas(animalId, name, rectangles, worldScale, sha256, excludedFrames = []) {
+const LUCIOLE_RECTS = [
+  [9,55,182,170,91,167], [202,55,181,169,90,166], [392,55,182,170,92,167], [586,55,178,170,90,167],
+  [775,55,181,170,93,167], [967,55,182,169,93,166], [1160,55,179,170,92,167], [1350,54,181,171,94,168],
+  [11,294,180,179,89,176], [204,294,180,179,88,176], [396,294,178,179,88,176], [588,294,178,179,88,176],
+  [792,290,166,183,76,180], [987,312,162,161,73,157], [1164,313,173,161,88,156], [1351,314,174,161,93,155],
+  [16,531,184,181,84,178], [201,540,190,171,91,169], [390,539,194,173,94,170], [580,540,192,172,96,169],
+  [772,540,192,172,96,169], [965,540,191,172,95,169], [1156,543,191,169,96,166], [1349,530,180,184,95,179],
+  [23,848,169,97,77,94], [212,848,171,97,80,94], [407,848,169,97,77,94], [598,848,169,97,78,94],
+  [783,780,168,167,85,164], [961,770,175,177,99,174], [1153,772,174,175,99,172], [1346,773,175,174,98,171]
+];
+function atlas(animalId, name, rectangles, worldScale, sha256, excludedFrames = [], clipOverrides = {}) {
   const frames = rectangles.map(([x, y, w, h, pivotX, pivotY], index) => Object.freeze({
     index, x, y, w, h, pivotX, pivotY, safe: !excludedFrames.includes(index),
     exclusionReason: excludedFrames.includes(index) ? 'adjacent-silhouette-alpha-fringe' : null
   }));
-  const clips = name === 'brume' ? Object.freeze({ ...SHIP_ANIMAL_CLIPS_V87,
-    idle: clip('idle', [8, 9], 2, true, 'reduced-two-pose-idle-needs-regeneration') }) : SHIP_ANIMAL_CLIPS_V87;
+  const clips = Object.freeze({ ...SHIP_ANIMAL_CLIPS_V87, ...clipOverrides });
   return Object.freeze({ animalId, path: `/assets/openai/ship-animals/v87/${name}-atlas.png`,
     width: 1536, height: 1024, worldScale, sourceFacing: 1, sha256,
     frames: Object.freeze(frames), clips,
@@ -50,7 +59,12 @@ export const SHIP_ANIMAL_ATLASES_V87 = Object.freeze({
     'e154e8dae89a090bfcf14709dd984ade40f640a3b085af0347b0d7fdfcd828ad'),
   // Poses 10/11 share alpha fringes at x577. They are never sampled or repainted.
   'animal-brume': atlas('animal-brume', 'brume', BRUME_RECTS, 0.30,
-    '74cfd0abd381be41a095bb2a194e056c9519339c91df481740937d5996b20335', [10, 11])
+    '74cfd0abd381be41a095bb2a194e056c9519339c91df481740937d5996b20335', [10, 11], {
+      idle: clip('idle', [8, 9], 2, true, 'reduced-two-pose-idle-needs-regeneration') }),
+  // Eating poses 18/19 contain neighboring alpha. Keep the evidence, never draw them.
+  'animal-luciole': atlas('animal-luciole', 'luciole', LUCIOLE_RECTS, 0.20,
+    '8bef1544aa5cb78f3a2aeec25657e42779620b62f13fe118639399ee2468030a', [18, 19], {
+      eat: clip('eat', [16, 17, 20, 21, 22, 23], 4, true, 'reduced-six-pose-eating-needs-regeneration') })
 });
 const knownAtlas = animalId => Object.hasOwn(SHIP_ANIMAL_ATLASES_V87, animalId) ? SHIP_ANIMAL_ATLASES_V87[animalId] : null;
 const finite = value => typeof value === 'number' && Number.isFinite(value);

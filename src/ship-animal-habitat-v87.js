@@ -23,14 +23,20 @@ const prop = (id, kind, x, width, bottom = 624, habitatId = null) => {
 };
 export const SHIP_ANIMAL_HABITATS_V87 = freeze([
   { id: 'moka-berth-v87', type: 'cat-berth', label: 'Coin de repos félin',
+    designatedAnimalId: 'animal-moka', routineTargets: { food: 790, stroll: 560, foodFacing: 1 },
     capacity: 1, installX: 690, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 690, y: 624 },
     requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'scratching-post'] },
   { id: 'brume-berth-v87', type: 'dog-berth', label: 'Logement canin',
+    designatedAnimalId: 'animal-brume', routineTargets: { food: 1315, stroll: 1420, foodFacing: 1 },
     capacity: 1, installX: 1160, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1160, y: 624 },
-    requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'toy'] }
+    requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'toy'] },
+  { id: 'luciole-berth-v87', type: 'cat-berth', label: 'Second coin de repos félin',
+    designatedAnimalId: 'animal-luciole', routineTargets: { food: 442, stroll: 394, foodFacing: 1 },
+    capacity: 1, installX: 354, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 354, y: 624 },
+    requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'scratching-post', 'toy'] }
 ]);
 // Props sit behind the walking lane. They never become full-height barriers to
-// a small resident; the hygiene cabinet/counter serves both berths.
+// a small resident; the hygiene cabinet/counter serves all three berths.
 const props = [
   prop('care-counter', 'counter', 1610, 94),
   prop('hygiene-cabinet', 'cabinet', 1738, 40, 548),
@@ -42,7 +48,13 @@ const props = [
   prop('dog-bed', 'dogBed', 1116, 88, 624, 'brume-berth-v87'),
   prop('dog-water', 'water', 1265, 22, 624, 'brume-berth-v87'),
   prop('dog-food', 'food', 1330, 22, 624, 'brume-berth-v87'),
-  prop('dog-toy', 'toy', 1410, 28, 624, 'brume-berth-v87')
+  prop('dog-toy', 'toy', 1410, 28, 624, 'brume-berth-v87'),
+  prop('luciole-bed', 'catBed', 328, 52, 624, 'luciole-berth-v87'),
+  prop('luciole-water', 'water', 418, 16, 624, 'luciole-berth-v87'),
+  prop('luciole-food', 'food', 452, 16, 624, 'luciole-berth-v87'),
+  prop('luciole-hygiene', 'litter', 268, 47, 624, 'luciole-berth-v87'),
+  prop('luciole-scratch', 'scratch', 480, 28, 624, 'luciole-berth-v87'),
+  prop('luciole-toy', 'toy', 394, 20, 624, 'luciole-berth-v87')
 ];
 export const SHIP_ANIMAL_ANNEX_V87 = freeze({
   id: 'animal-care', name: 'Accueil des compagnons', shortName: 'ACCUEIL ANIMALIER',
@@ -55,7 +67,7 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
     action: 'ship-animal:care', description: 'Contrôler les équipements et la capacité d’accueil',
     persistent: true, singleStation: true, upgradeId: 'animal-care-services-v87',
     capabilities: ['companion-care'], bounds: { x: props[0].x, y: props[0].y, w: props[0].w, h: props[0].h } },
-  action: 'ship-animal:care', description: 'Deux logements à équiper avant toute acquisition. Aucune boutique à bord.',
+  action: 'ship-animal:care', description: 'Trois logements individuels à équiper avant toute acquisition. Aucune boutique à bord.',
   scope: 'companion-care', implementedFeatures: ['local-docked-counter', 'physical-arrival-transfer'],
   deferredFeatures: ['dedicated-human-carry-animation'],
   normalHubCreaturesVisible: false, isolatedLevelTarget: null,
@@ -67,7 +79,7 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
     alphaBounds: { prop: SHIP_ANIMAL_PROP_RECTS_V87.counter, door: [53, 29, 330, 483] } },
   criteria: { scale: { logicalWidth: 1920, logicalHeight: 720, floorY: 624, minimumWalkableWidth: 1536,
     minimumCeilingHeight: 432, minimumEntranceClearance: 112, requiredPerspectiveLayers: 3 },
-    density: { minimumProps: 2, maximumProps: 11, minimumColliders: 0, maximumColliderCoverageRatio: .32, requiredInteractiveStations: 1 } }
+    density: { minimumProps: 2, maximumProps: 17, minimumColliders: 0, maximumColliderCoverageRatio: .32, requiredInteractiveStations: 1 } }
 });
 
 export function getShipAnimalHabitatsV87(save) {

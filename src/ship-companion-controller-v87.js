@@ -124,11 +124,14 @@ export class ShipCompanionControllerV87 {
       message: this.ui?.mode === 'shop' ? 'Rencontrez un compagnon, consultez son dossier et vérifiez son logement avant de signer.' : PORT.costLabel + ' ' + PORT.timingLabel,
       offers: Object.values(SHIP_ANIMAL_OFFERS_V87).map(offer => {
         const definition = SHIP_ANIMAL_DEFINITIONS_V87[offer.animalId];
-        const habitat = habitats.find(entry => entry.type === definition.habitatType);
+        const habitat = habitats.find(entry => entry.id === definition.defaultHabitatId);
         const owned = Boolean(save.shipAnimalsV1?.animals?.[offer.animalId]);
         const conditions = [];
         if (!atShop || !canAccessPortCounterV87(save) || !this.safe()) conditions.push('Comptoir physique inaccessible ou accès civil suspendu.');
         if (!habitat?.installed) conditions.push('Équipez le logement dans l’accueil animalier.');
+        const reservations = Object.values(save.shipAnimalsV1?.reservations || {});
+        if (habitat && reservations.filter(entry => entry.habitatId === habitat.id).length >= habitat.capacity && !owned)
+          conditions.push('Ce logement individuel est déjà réservé.');
         if (!shopReady || !isShipAnimalAtlasReadyV87(offer.animalId, this.images.get(offer.animalId))) conditions.push('Images en cours de chargement.');
         if (save.galaxy?.resources?.credits < offer.costCredits) conditions.push('Crédits insuffisants.');
         if (save.hub?.systems?.supplies < 1) conditions.push('Ravitaillement de soin insuffisant.');
@@ -181,12 +184,15 @@ export class ShipCompanionControllerV87 {
       const offerModel = this.model().offers.find(entry => entry.animalId === action.animalId);
       if (!offerModel?.canBuy) { this.toast(offerModel?.conditions.join(' ') || 'Offre indisponible.'); return false; }
       const definition = SHIP_ANIMAL_DEFINITIONS_V87[action.animalId];
-      const habitat = getShipAnimalHabitatsV87(save).find(entry => entry.type === definition.habitatType);
+      const habitats = getShipAnimalHabitatsV87(save);
+      const habitat = habitats.find(entry => entry.id === definition.defaultHabitatId);
       const meeting = SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === action.animalId);
       result = acquireShipAnimalV87(save, { offerId: meeting.offerId, habitatId: habitat.id,
         transactionId: 'adopt:' + action.animalId + ':' + save.shipPortV1.sessionId.split(':').at(-1) }, {
         vendorAccessible: true, artReadyIds: [action.animalId], habitats: getShipAnimalHabitatsV87(save),
-        care: { available: save.hub.systems.supplies > 0, capacity: 2 }, simulationTime: save.shipAnimalsV1.lastSimulationTime,
+        care: { available: save.hub.systems.supplies > 0,
+          capacity: habitats.filter(entry => entry.installed).reduce((sum, entry) => sum + entry.capacity, 0) },
+        simulationTime: save.shipAnimalsV1.lastSimulationTime,
         transit: { edgeId: 'carried-port-to-habitat', from: { hubId: PORT.id, roomId: PORT.counterRoomId,
           deckId: 'engineering', x: meeting.x, y: 624 }, to: habitat.location }
       });

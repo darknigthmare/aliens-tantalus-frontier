@@ -1280,9 +1280,9 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(annex.shortName, 36, 67);
     ctx.fillStyle = annexState.station.activated ? '#9bdcac' : '#d4c778';
     ctx.font = '700 12px ui-monospace, monospace';
-    const fitted = annex.id === 'animal-care'
-      ? getShipAnimalHabitatsV87(this.npcRoutineContextV62?.save).filter(habitat => habitat.installed).length : null;
-    ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/2`
+    const habitats = getShipAnimalHabitatsV87(this.npcRoutineContextV62?.save);
+    const fitted = annex.id === 'animal-care' ? habitats.filter(habitat => habitat.installed).length : null;
+    ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/${habitats.length}`
       : annex.id === SHIP_PORT_ANNEX_V87.id ? 'COMPTOIR CIVIL · AMARRÉ'
       : this.isRefugeActiveV87() ? 'ESPACE PERSONNEL · SANS COMBAT'
       : annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);

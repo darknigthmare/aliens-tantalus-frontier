@@ -2095,9 +2095,10 @@ function handleShipAnimalRoomActionV87(interaction) {
   const verified = getShipAnimalRoomInteractionV87(hubEngine, saveSystem.data);
   if (!verified || verified.action !== interaction.action || verified.habitatId !== interaction.habitatId) return false;
   if (interaction.action === 'ship-animal:care') {
-    const fitted = getShipAnimalHabitatsV87(saveSystem.data).filter(entry => entry.installed).length;
+    const habitats = getShipAnimalHabitatsV87(saveSystem.data);
+    const fitted = habitats.filter(entry => entry.installed).length;
     const owned = Object.keys(saveSystem.data.shipAnimalsV1?.animals || {}).length;
-    toast(`Accueil : ${fitted}/2 logements ; ${owned} compagnon(s) acquis. Pour rencontrer les animaux : pupitre d’amarrage civil au sol du hangar, puis comptoir portuaire. Déposez les caisses dans leur logement avec E.`);
+    toast(`Accueil : ${fitted}/${habitats.length} logements ; ${owned} compagnon(s) acquis. Pour rencontrer les animaux : pupitre d’amarrage civil au sol du hangar, puis comptoir portuaire. Déposez les caisses dans leur logement avec E.`);
     return true;
   }
   const player = hubEngine.player;
