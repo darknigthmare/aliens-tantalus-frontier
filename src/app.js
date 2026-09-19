@@ -13,6 +13,8 @@ import {
 } from './save.js';
 import { CrewUiV85 } from './crew-ui-v85.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
+import { ShipCompanionControllerV87 } from './ship-companion-controller-v87.js';
+import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
@@ -156,6 +158,9 @@ const bioforgeRuntimeV80 = new BioforgeRuntimeV80(byId('bioforge-canvas-v80'), {
   onEvent: handleBioforgeEventV80,
   onPersist: persistBioforgeV80
 });
+const shipCompanionControllerV87 = new ShipCompanionControllerV87({ hub: hubEngine, saveSystem, toast,
+  isActive: () => ownsTimelineV84(hubOwnerV84) && activeView === 'hub' && !creatorOwnerV84
+    && !standaloneContext && !hubEngine.annexStateReadOnlyV87 });
 const hubDialogueUiV76 = new HubDialogueUiV76({
   layer: byId('hub-dialogue-layer'),
   dialog: byId('hub-dialogue'),
@@ -528,6 +533,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  shipCompanionControllerV87.close();
   if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete' && !['hub', 'settings'].includes(name) && !standaloneContext) {
     name = 'hub';
     toast('Terminez l’accueil et rejoignez le briefing à pied sur le pont Commandement.');
@@ -1432,6 +1438,7 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  shipCompanionControllerV87.close();
   if (typeof crewUiV85 !== 'undefined') crewUiV85?.close();
   hubOwnerV84 = null;
   bioforgeOwnerV84 = null;
@@ -1584,6 +1591,14 @@ function startMissionInsertionV62(context) {
 }
 
 function launchCampaign(campaign = null) {
+  const portPhase = saveSystem.data.shipPortV1?.phase;
+  if (portPhase && !['undocked', 'departed'].includes(portPhase)) {
+    toast('Larguez le relais civil au pupitre du hangar avant le départ en opération.'); return false;
+  }
+  const manifest = validateShipPortDepartureV87(saveSystem.data, { physical: { roomId: 'dropship-hangar' } });
+  if (!manifest.ok) {
+    toast('Départ suspendu : terminez les transferts et vérifiez le manifeste animalier.'); return false;
+  }
   const activeOperation = saveSystem.data.strategy.currentOperation;
   const resumedCampaign = activeOperation
     ? CAMPAIGNS.find((entry) => entry.id === activeOperation.campaignId)
@@ -2063,7 +2078,7 @@ function handleShipAnimalRoomActionV87(interaction) {
   if (interaction.action === 'ship-animal:care') {
     const fitted = getShipAnimalHabitatsV87(saveSystem.data).filter(entry => entry.installed).length;
     const owned = Object.keys(saveSystem.data.shipAnimalsV1?.animals || {}).length;
-    toast(`Accueil préparé : ${fitted}/2 logements ; ${owned} compagnon(s) acquis. Le comptoir marchand d’escale n’est pas encore raccordé ; aucun achat disponible ici.`);
+    toast(`Accueil : ${fitted}/2 logements ; ${owned} compagnon(s) acquis. Pour rencontrer les animaux : pupitre d’amarrage civil au sol du hangar, puis comptoir portuaire. Déposez les caisses dans leur logement avec E.`);
     return true;
   }
   const player = hubEngine.player;
@@ -2109,6 +2124,8 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet'].includes(interaction.action))
+    return shipCompanionControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-animal:')) return handleShipAnimalRoomActionV87(interaction);
   if (interaction.action === 'hub:proving-ground-qualified') {
     return resolveProvingGroundQualificationV81(interaction);

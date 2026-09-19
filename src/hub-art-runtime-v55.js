@@ -89,8 +89,11 @@ const HANGAR_FOREGROUND_V55 = Object.freeze({
   phase: 'front',
   asset: '/assets/openai/hub/layers/engineering-hangar-foreground.png',
   sourceSize: Object.freeze({ width: 1774, height: 887 }),
-  sourceCrop: rect(12, 600, 1747, 240),
-  renderBounds: rect(0, 548, 1280, 172),
+  // Keep the existing bitmap scale but crop its lower plumbing. The opaque
+  // front lip begins at the physical floor, never across the marine/crate.
+  sourceCrop: rect(12, 600, 1747, (HUB_ART_LEVEL_V55.height - HUB_ART_LEVEL_V55.floorY) * 240 / 172),
+  renderBounds: rect(0, HUB_ART_LEVEL_V55.floorY, HUB_ART_LEVEL_V55.width,
+    HUB_ART_LEVEL_V55.height - HUB_ART_LEVEL_V55.floorY),
   anchor: point(640, 720, 'bottom-center'),
   collidable: false
 });

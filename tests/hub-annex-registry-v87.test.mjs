@@ -6,6 +6,7 @@ import {
   validateHubCommercialCompletionV71
 } from '../src/tantalus-hub-expansion-v71.js';
 import { SHIP_ANIMAL_ANNEX_V87 } from '../src/ship-animal-habitat-v87.js';
+import { SHIP_PORT_ANNEX_V87 } from '../src/ship-port-room-v87.js';
 import {
   HUB_ANNEXES_V87, HUB_ANNEX_BY_ID_V87, HUB_ANNEX_EXTENSIONS_V87,
   createHubCommercialStateV87, sanitizeHubCommercialStateV87,
@@ -28,12 +29,12 @@ function visitedState() {
   return state;
 }
 
-test('runtime registry adds one explicit room without changing or cloning the historical ten descriptors', () => {
+test('runtime registry adds two explicit rooms without changing or cloning the historical ten descriptors', () => {
   assert.equal(HUB_ANNEXES_V71.length, 10);
   assert.equal(Object.keys(HUB_ANNEX_BY_ID_V71).length, 10);
-  assert.equal(HUB_ANNEXES_V87.length, 11);
-  assert.equal(new Set(HUB_ANNEXES_V87.map(annex => annex.id)).size, 11);
-  assert.deepEqual(HUB_ANNEX_EXTENSIONS_V87, [animal]);
+  assert.equal(HUB_ANNEXES_V87.length, 12);
+  assert.equal(new Set(HUB_ANNEXES_V87.map(annex => annex.id)).size, 12);
+  assert.deepEqual(HUB_ANNEX_EXTENSIONS_V87, [animal, SHIP_PORT_ANNEX_V87]);
   assert.equal(HUB_ANNEX_BY_ID_V87[animal.id], animal);
   assert.equal(HUB_ANNEX_BY_ID_V71[animal.id], undefined);
   for (const annex of HUB_ANNEXES_V71) assert.equal(HUB_ANNEX_BY_ID_V87[annex.id], annex);
@@ -45,8 +46,8 @@ test('fresh extension state has no visit, service activation, upgrade or housing
   const state = createHubCommercialStateV87();
   assert.equal(state.schema, 71);
   assert.equal(state.registryVersion, 87);
-  assert.equal(Object.keys(state.annexes).length, 11);
-  assert.equal(Object.keys(state.stationUses).length, 11);
+  assert.equal(Object.keys(state.annexes).length, 12);
+  assert.equal(Object.keys(state.stationUses).length, 12);
   assert.equal(state.annexes[animal.id].visited, false);
   assert.equal(state.annexes[animal.id].visitCount, 0);
   assert.equal(state.annexes[animal.id].station.activated, false);
@@ -218,22 +219,23 @@ for (const field of [{ schema: 88 }, { registryVersion: 99 }, { schema: '99' }, 
   });
 }
 
-test('runtime graph has 16+11 reciprocal connected rooms while V71 proof remains exactly 16+10', () => {
+test('runtime graph has 16+12 reciprocal connected rooms while V71 proof remains exactly 16+10', () => {
   const historical = buildHubCommercialGraphV71();
   const before = clone(historical);
   const graph = buildHubRuntimeGraphV87();
-  assert.equal(graph.nodes.length, 27);
+  assert.equal(graph.nodes.length, 28);
   assert.equal(graph.baseRoomCount, 16);
-  assert.equal(graph.annexRoomCount, 11);
-  assert.equal(graph.edges.length, historical.edges.length + 1);
+  assert.equal(graph.annexRoomCount, 12);
+  assert.equal(graph.edges.length, historical.edges.length + 2);
   assert.deepEqual(graph.nodes.slice(0, historical.nodes.length), historical.nodes);
   assert.deepEqual(graph.edges.slice(0, historical.edges.length), historical.edges);
-  const edge = graph.edges.at(-1);
-  assert.equal(edge.doorId, animal.entrance.id);
-  assert.equal(edge.deckId, animal.parentDeck);
-  assert.equal(edge.destinations[animal.id], animal.parentRoomId);
-  assert.equal(edge.destinations[animal.parentRoomId], animal.id);
-  assert.deepEqual(graph.adjacency[animal.id], [animal.parentRoomId]);
+  for (const extension of HUB_ANNEX_EXTENSIONS_V87) {
+    const edge = graph.edges.find(candidate => candidate.doorId === extension.entrance.id);
+    assert.equal(edge.deckId, extension.parentDeck);
+    assert.equal(edge.destinations[extension.id], extension.parentRoomId);
+    assert.equal(edge.destinations[extension.parentRoomId], extension.id);
+    assert.deepEqual(graph.adjacency[extension.id], [extension.parentRoomId]);
+  }
   const seen = new Set(['bridge']);
   const queue = ['bridge'];
   while (queue.length) for (const next of graph.adjacency[queue.shift()]) if (!seen.has(next)) { seen.add(next); queue.push(next); }

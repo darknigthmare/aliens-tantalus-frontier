@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import { SaveSystem, SAVE_PREFIX, createDefaultSave } from '../src/save.js';
 import { WORLDS } from '../src/content.js';
 import { ONBOARDING_DIALOGUES_V84, advancePlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
+import { ShipCompanionControllerV87 } from '../src/ship-companion-controller-v87.js';
 
 // Run the real application functions with an in-memory SaveSystem and UI/engine ports.
 // No copied transaction implementation, filesystem writes, DOM or browser global is needed.
@@ -83,6 +84,16 @@ function harness() {
     captureMissionResumeState: () => null, recordOperationResumeState() {}, persistMissionResumeState() {},
     audio: { dispose: () => calls.push(['audio-dispose']) }
   };
+  // Exercise the actual controller close method: it must clear its active-time
+  // remainder and close silently, never resume a runtime owned by the old profile.
+  context.shipCompanionControllerV87 = Object.assign(Object.create(ShipCompanionControllerV87.prototype), {
+    tickRemainder: .15,
+    previousActors: [{ animalId: 'old-profile-moka', x: 600 }],
+    ui: { isOpen: false, close(options) {
+      calls.push(['close-companions', options]); this.isOpen = false;
+      if (options?.notify !== false) context.hubEngine.resume();
+    } }
+  });
   vm.createContext(context);
   const names = ['currentOwnerV84', 'ownsTimelineV84', 'captureHubPoseV84', 'closeHubDialogue', 'persistHub',
     'persistBioforgeV80', 'handleBioforgeEventV80', 'discardProfileRuntimeV78', 'openPlayerCreatorV84', 'commitOnboardingEventV84',
@@ -186,6 +197,9 @@ test('successful creator submit switches only after writing and completion inval
   assert.equal(context.creatorOwnerV84, null);
   assert.equal(context.hubOwnerV84, null);
   assert.equal(context.creatorUI.dialog.open, false);
+  assert.equal(context.shipCompanionControllerV87.tickRemainder, 0);
+  assert.deepEqual(context.shipCompanionControllerV87.previousActors, []);
+  assert.deepEqual(calls.filter(([kind]) => kind === 'close-companions'), [['close-companions', { notify: false }]]);
   assert.equal(calls.some(([kind]) => kind === 'title-menu'), false);
   assert.ok(calls.some(([kind, view]) => kind === 'show-view' && view === 'hub'));
 });
@@ -196,6 +210,7 @@ test('discard closes stale hub/native modals without resume or cancellation when
   context.pendingOnboardingDialogV84 = { owner: context.currentOwnerV84(), phase: 'medical', node: 0 };
   context.creatorOwnerV84 = { ...context.currentOwnerV84(), target: 2 };
   context.creatorUI.dialog.open = true;
+  context.shipCompanionControllerV87.ui.isOpen = true;
   context.discardProfileRuntimeV78();
   assert.equal(context.hubDialogueUiV76.openState, false);
   assert.equal(context.creatorUI.dialog.open, false);
@@ -203,19 +218,27 @@ test('discard closes stale hub/native modals without resume or cancellation when
   assert.equal(context.creatorOwnerV84, null);
   assert.equal(context.hubOwnerV84, null);
   assert.equal(context.profileEpochV78, 2);
+  assert.equal(context.shipCompanionControllerV87.ui.isOpen, false);
+  assert.equal(context.shipCompanionControllerV87.tickRemainder, 0);
+  assert.deepEqual(calls.filter(([kind]) => kind === 'close-companions'), [['close-companions', { notify: false }]]);
   assert.equal(calls.some(([kind]) => ['hub-resume', 'title-menu'].includes(kind)), false);
 });
 
 test('a file import completed while an old dialogue is open closes that dialogue and rejects old autosave callbacks', async () => {
-  const { context, nodes, backend, saveSystem } = harness();
+  const { context, nodes, backend, saveSystem, calls } = harness();
   const pending = deferredImport(nodes);
   context.hubDialogueUiV76.openState = true;
+  context.shipCompanionControllerV87.ui.isOpen = true;
   context.pendingOnboardingDialogV84 = { owner: context.currentOwnerV84(), phase: 'medical', node: 0 };
   pending.resolve(importBytes('Imported operator'));
   await pending.completion;
   assert.equal(saveSystem.data.player.name, 'Imported operator');
   assert.equal(context.hubDialogueUiV76.openState, false);
   assert.equal(context.pendingOnboardingDialogV84, null);
+  assert.equal(context.shipCompanionControllerV87.ui.isOpen, false);
+  assert.equal(context.shipCompanionControllerV87.tickRemainder, 0);
+  assert.deepEqual(calls.filter(([kind]) => kind === 'close-companions'), [['close-companions', { notify: false }]]);
+  assert.equal(calls.some(([kind]) => kind === 'hub-resume'), false);
   const bytes = backend.values.get(SAVE_PREFIX + '1');
   context.persistHub({ positionX: 777 });
   assert.equal(backend.values.get(SAVE_PREFIX + '1'), bytes);

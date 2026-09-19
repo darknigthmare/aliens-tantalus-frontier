@@ -289,13 +289,19 @@ export const HUB_TRAVERSAL_PROFILES_V60 = Object.freeze({
     [vent('vehicle-vent', 110, 312)],
     [occluder('vehicle-cables', 'ceilingCables', 710, -8, 390, 118, 0.38)]),
   'dropship-hangar': traversalProfile('engineering-flightline',
-    [platform('hangar-observation', 70, 360, 260, 'catwalk')],
+    // The observation deck is the pedestrian maintenance route, above the
+    // flightline and the live electrical arc. It joins the reactor balcony.
+    [platform('hangar-observation', 70, 360, 1210, 'catwalk')],
     [ladder('hangar-observation-link', 160, 360, 624, 48)],
     [vent('hangar-vent', 90, 302)],
     [occluder('hangar-cables', 'ceilingCables', 40, -16, 420, 124, 0.38)]),
   reactor: traversalProfile('engineering-reactor-ring',
-    [platform('reactor-low', 500, 492, 380, 'drop'), platform('reactor-high', 130, 372, 420, 'catwalk')],
-    [ladder('reactor-floor', 760, 492, 624), ladder('reactor-tier', 540, 372, 492)],
+    // A 12px step joins the hangar gantry. The lower service deck crosses the
+    // real reactor console and has an east egress before the median lift;
+    // returning with cargo must not require a maximum-height precision jump.
+    [platform('reactor-low', 500, 492, 550, 'drop'), platform('reactor-high', 0, 372, 550, 'catwalk')],
+    [ladder('reactor-floor', 760, 492, 624), ladder('reactor-tier', 540, 372, 492),
+      ladder('reactor-service-egress', 1000, 492, 624)],
     [vent('reactor-vent', 146, 314)],
     [occluder('reactor-pipes', 'foregroundPipes', 0, 500, 270, 198, 0.32)]),
   'life-support': traversalProfile('engineering-filtration-stack',
@@ -339,6 +345,9 @@ function fallbackTraversal(deck) {
     }
   };
 }
+
+// Shared campaign geometry for off-screen simulation; identical to the live hub.
+export { fallbackTraversal as buildHubTraversalGeometryV87 };
 
 function crisisKind(value) {
   const label = String(value?.kind || value?.type || value?.enemyType || value?.id || value || '').toLowerCase();

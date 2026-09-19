@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-19",
+  "provider": "Integrated OpenAI ImageGen",
+  "apiFallback": false,
+  "scope": "Original local mobile civilian rendezvous. Not a canonical Gateway/Pioneer station.",
+  "assets": [
+    {
+      "id": "port-vendor-atlas",
+      "prompt": "Use case: stylized-concept\nAsset type: production sprite atlas for a 2D side-scrolling science-fiction game, genuine transparent RGBA background.\nPrimary request: EXACTLY 16 separate full-body sprites of ONE consistent original civilian animal-care shopkeeper, woman about 45 with short silver-grey hair, dark teal industrial coveralls, beige work boots and small utility belt. Original Tantalus Frontier character, not any existing franchise actor. Calm professional, unarmed. Crisp painted pixel-game rendering, readable when downscaled to 92px tall, restrained industrial palette. Strict side profile facing RIGHT in every frame; NO isometric / three-quarter camera.\nCanvas 1536x1024 divided into an INVISIBLE 4 columns x 4 rows grid of 384x256 cells. In each cell keep the person compact (190px height), centered x=192, shoes baseline y=228; maximum silhouette width130px. Large transparent margins, no pixels touch neighboring cells. Exactly one person per cell and identical anatomy/clothes/scale all frames.\nRow 1 four subtle continuous idle-breathing poses. Row 2 four distinct gentle speaking/hand-explanation poses, no props. Rows 3 and 4 eight chronological phases of one smooth rightward walking cycle, feet alternately contact the same baseline, physically coherent stride and arm swing. No duplicate contact shadows, detached parts or extra limbs. Full hair, hands and boots visible. Transparent empty cells and all space outside the character silhouettes. No floor, scene, contact shadow, labels, lettering, panels, grid lines or watermark.",
+      "source": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-f0327108-0d37-41d5-a424-82f56c621418.png",
+      "runtime": "assets/openai/ship-animals/v87/port-vendor-atlas.png",
+      "acceptedRuntime": "4 idle + 4 talk frames. Eight additional walk frames are not certified or used."
+    },
+    {
+      "id": "port-props",
+      "prompt": "Use case: stylized-concept\nAsset type: transparent modular prop atlas for a 2D side-scrolling industrial science-fiction game.\nPrimary request: EXACTLY EIGHT independent functional props, not an assembled scene. Genuine transparent RGBA background. Crisp hand-painted pixel-game detail; orthographic front elevation for a side-view playable room, absolutely no isometric/three-quarter perspective. Scratched warm grey metal, desaturated teal inset panels, subtle amber status lights. No person, animal, floor scene or lettering.\nCanvas1536x1024, invisible 4 columns by2 rows; each384x512 cell, large 35px transparent guard. Each item fully in its cell.\nTop row left to right: 1 docking gangway bulkhead with TWO sliding steel door leaves CLOSED inside its rectangular structural frame, human doorway, frontal and rectangular; 2 freestanding narrow waist-high docking authorization terminal with small luminous screen, screen blank; 3 a low reception counter with front cabinets and thin countertop, straight horizontal rectangular elevation, NOT deep perspective; 4 a wide waist-high open pet meeting enclosure barrier with a small central gate, wire/mesh sections genuinely transparent between bars.\nBottom row left to right: 5 tall supply shelf with neatly stored plain small packages, frontal elevation; 6 compact sealed animal transporter crate front elevation with transparent barred ventilation, no animal, door closed; 7 freestanding docking clamp mechanism with heavy mechanical joints, readable profile; 8 overhead service-light rail, straight narrow horizontal beam with two small warm lamps.\nKeep all silhouettes separated. No text, labels, letters, numbers, watermark, grid lines, contact shadows, white matte, checkerboard picture or background gradients. Transparency through all gaps. Each item independently crop-able, same realistic industrial scale language.",
+      "source": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-3b3b5bd1-455b-4736-acc9-5e2f40ea3109.png",
+      "runtime": "assets/openai/ship-animals/v87/port-props.png",
+      "acceptedRuntime": "Measured independent rectangles; transparency and dimensions checked, real room play QA required."
+    }
+  ]
+}

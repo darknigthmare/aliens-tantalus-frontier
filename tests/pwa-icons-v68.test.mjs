@@ -102,6 +102,8 @@ test('le cache V84 conserve les assets runtime acceptés mais exclut le master P
       '/assets/openai/ship-animals/v87/brume-atlas.png',
       '/assets/openai/ship-animals/v87/habitat-wall.png',
       '/assets/openai/ship-animals/v87/habitat-props.png',
+      '/assets/openai/ship-animals/v87/port-props.png',
+      '/assets/openai/ship-animals/v87/port-vendor-atlas.png',
       ...V81_READY_ENEMY_PROFILE_ASSETS.map(({ path }) => path)
     ].sort(),
     'seuls les assets runtime explicitement acceptés franchissent le filtre des assets lourds'

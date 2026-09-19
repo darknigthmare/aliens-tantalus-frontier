@@ -156,7 +156,7 @@ function decodeRgbaPng(url) {
 
 test('the physical animal annex extends the current registry without rewriting the historical ten rooms', () => {
   assert.equal(HUB_ANNEXES_V71.length, 10);
-  assert.equal(HUB_ANNEXES_V87.length, 11);
+  assert.equal(HUB_ANNEXES_V87.length, 12);
   assert.equal(HUB_ANNEX_BY_ID_V87[ANNEX.id], ANNEX);
   assert.equal(ANNEX.parentRoomId, 'crew-quarters');
   assert.equal(ANNEX.parentDeck, 'habitat');
@@ -496,5 +496,6 @@ test('actual annex renderer repeats world-anchored wall tiles at native aspect r
   assert.ok(props.every(call => call.length === 9 && call[3] < 1536));
   assert.equal(trace.drawImages.some(call => /moka|brume/i.test(call[0]?.currentSrc || '')), false,
     'no default resident exists merely because its art was generated');
-  assert.deepEqual(ANNEX.deferredFeatures, ['docked-station-shop', 'arrival-transfer']);
+  assert.deepEqual(ANNEX.implementedFeatures, ['local-docked-counter', 'physical-arrival-transfer']);
+  assert.deepEqual(ANNEX.deferredFeatures, ['dedicated-human-carry-animation']);
 }));

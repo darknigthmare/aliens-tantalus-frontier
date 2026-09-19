@@ -34,7 +34,7 @@ test('le profil par défaut garde le schéma 52 et ajoute les trois états persi
   assert.equal(save.hub.commercialV71.operationId, 'tantalus-hub-expansion');
   assert.equal(save.hub.commercialV71.activeAnnexId, null);
   assert.deepEqual(save.hub.commercialV71.visitedAnnexIds, []);
-  assert.equal(Object.keys(save.hub.commercialV71.stationUses).length, 11);
+  assert.equal(Object.keys(save.hub.commercialV71.stationUses).length, 12);
   assert.equal(save.hub.annexOperationsV71.schema, 71);
   assert.equal(save.hub.annexOperationsV71.provingGround.nextOperationCharge, false);
   assert.equal(save.hub.annexOperationsV71.escapePods.evacuationCharge, false);
