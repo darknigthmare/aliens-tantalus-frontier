@@ -1,8 +1,13 @@
-const CACHE = 'atf-v86-physical-placeables-shell-2';
+const CACHE = 'atf-v86-physical-placeables-shell-3';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/refuge-personal-state-v87.js', '/src/refuge-controller-v87.js', '/src/refuge-ui-v87.js',
+  '/src/refuge-save-v87.js', '/src/refuge-room-v87.js', '/src/refuge-art-v87.js', '/src/refuge-v87.css',
+  '/assets/openai/refuge/v87/refuge-props-atlas.png', '/assets/openai/refuge/v87/refuge-hologram-atlas.png',
+  '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
+  '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
   '/src/ship-carrier-presentation-v87.js',
   '/src/ship-animal-habitat-graph-v87.js',
   '/src/ship-port-state-v87.js', '/src/ship-port-room-v87.js', '/src/ship-port-art-v87.js',
@@ -341,6 +346,12 @@ const SHELL = Object.freeze(CORE.filter((path) => (
   (!path.startsWith('/assets/') || path.startsWith('/assets/openai/pwa/')
     || path.startsWith('/assets/openai/bioforge/v80/')
     || path.startsWith('/assets/openai/ship-animals/v87/')
+    || path.startsWith('/assets/openai/refuge/v87/')
+    || ['/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
+      '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
+      '/assets/openai/hub/layers/habitat-quarters-overhead.png',
+      '/assets/openai/hub/layers/habitat-quarters-foreground.png',
+      '/assets/openai/metroidvania/props/floor-segment.png'].includes(path)
     || path.startsWith('/assets/openai/hub/proving-ground/v82/')
     || path.startsWith('/assets/openai/hub/proving-ground/v81/')
     || path.startsWith('/assets/openai/sprites/normalized/player/')

@@ -156,7 +156,7 @@ function decodeRgbaPng(url) {
 
 test('the physical animal annex extends the current registry without rewriting the historical ten rooms', () => {
   assert.equal(HUB_ANNEXES_V71.length, 10);
-  assert.equal(HUB_ANNEXES_V87.length, 12);
+  assert.equal(HUB_ANNEXES_V87.length, 13);
   assert.equal(HUB_ANNEX_BY_ID_V87[ANNEX.id], ANNEX);
   assert.equal(ANNEX.parentRoomId, 'crew-quarters');
   assert.equal(ANNEX.parentDeck, 'habitat');

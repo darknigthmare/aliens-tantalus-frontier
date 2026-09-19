@@ -7,6 +7,7 @@ import {
 } from '../src/tantalus-hub-expansion-v71.js';
 import { SHIP_ANIMAL_ANNEX_V87 } from '../src/ship-animal-habitat-v87.js';
 import { SHIP_PORT_ANNEX_V87 } from '../src/ship-port-room-v87.js';
+import { SHIP_REFUGE_ANNEX_V87 } from '../src/refuge-room-v87.js';
 import {
   HUB_ANNEXES_V87, HUB_ANNEX_BY_ID_V87, HUB_ANNEX_EXTENSIONS_V87,
   createHubCommercialStateV87, sanitizeHubCommercialStateV87,
@@ -29,15 +30,15 @@ function visitedState() {
   return state;
 }
 
-test('runtime registry adds two explicit rooms without changing or cloning the historical ten descriptors', () => {
+test('runtime registry adds three explicit rooms without changing or cloning the historical ten descriptors', () => {
   assert.equal(HUB_ANNEXES_V71.length, 10);
   assert.equal(Object.keys(HUB_ANNEX_BY_ID_V71).length, 10);
-  assert.equal(HUB_ANNEXES_V87.length, 12);
-  assert.equal(new Set(HUB_ANNEXES_V87.map(annex => annex.id)).size, 12);
-  assert.deepEqual(HUB_ANNEX_EXTENSIONS_V87, [animal, SHIP_PORT_ANNEX_V87]);
+  assert.equal(HUB_ANNEXES_V87.length, 13);
+  assert.equal(new Set(HUB_ANNEXES_V87.map(annex => annex.id)).size, 13);
+  assert.deepEqual(HUB_ANNEX_EXTENSIONS_V87, [animal, SHIP_PORT_ANNEX_V87, SHIP_REFUGE_ANNEX_V87]);
   assert.equal(HUB_ANNEX_BY_ID_V87[animal.id], animal);
   assert.equal(HUB_ANNEX_BY_ID_V71[animal.id], undefined);
-  for (const annex of HUB_ANNEXES_V71) assert.equal(HUB_ANNEX_BY_ID_V87[annex.id], annex);
+  for (const annex of [...HUB_ANNEXES_V71, animal, SHIP_PORT_ANNEX_V87]) assert.equal(HUB_ANNEX_BY_ID_V87[annex.id], annex);
   assert.ok(Object.isFrozen(HUB_ANNEXES_V87));
   assert.ok(Object.isFrozen(HUB_ANNEX_BY_ID_V87));
 });
@@ -46,8 +47,8 @@ test('fresh extension state has no visit, service activation, upgrade or housing
   const state = createHubCommercialStateV87();
   assert.equal(state.schema, 71);
   assert.equal(state.registryVersion, 87);
-  assert.equal(Object.keys(state.annexes).length, 12);
-  assert.equal(Object.keys(state.stationUses).length, 12);
+  assert.equal(Object.keys(state.annexes).length, 13);
+  assert.equal(Object.keys(state.stationUses).length, 13);
   assert.equal(state.annexes[animal.id].visited, false);
   assert.equal(state.annexes[animal.id].visitCount, 0);
   assert.equal(state.annexes[animal.id].station.activated, false);
@@ -219,14 +220,15 @@ for (const field of [{ schema: 88 }, { registryVersion: 99 }, { schema: '99' }, 
   });
 }
 
-test('runtime graph has 16+12 reciprocal connected rooms while V71 proof remains exactly 16+10', () => {
+test('runtime graph has 16+13 reciprocal connected rooms while V71 proof remains exactly 16+10', () => {
   const historical = buildHubCommercialGraphV71();
   const before = clone(historical);
   const graph = buildHubRuntimeGraphV87();
-  assert.equal(graph.nodes.length, 28);
+  assert.equal(graph.nodes.length, 29);
   assert.equal(graph.baseRoomCount, 16);
-  assert.equal(graph.annexRoomCount, 12);
-  assert.equal(graph.edges.length, historical.edges.length + 2);
+  assert.equal(graph.annexRoomCount, 13);
+  assert.equal(graph.edges.length, historical.edges.length + 3);
+  assert.equal(graph.edges.length, 31);
   assert.deepEqual(graph.nodes.slice(0, historical.nodes.length), historical.nodes);
   assert.deepEqual(graph.edges.slice(0, historical.edges.length), historical.edges);
   for (const extension of HUB_ANNEX_EXTENSIONS_V87) {

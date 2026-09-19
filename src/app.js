@@ -14,6 +14,8 @@ import {
 import { CrewUiV85 } from './crew-ui-v85.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { ShipCompanionControllerV87 } from './ship-companion-controller-v87.js';
+import { RefugeControllerV87 } from './refuge-controller-v87.js';
+import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { validateShipPortDepartureV87 } from './ship-port-state-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
@@ -159,6 +161,9 @@ const bioforgeRuntimeV80 = new BioforgeRuntimeV80(byId('bioforge-canvas-v80'), {
   onPersist: persistBioforgeV80
 });
 const shipCompanionControllerV87 = new ShipCompanionControllerV87({ hub: hubEngine, saveSystem, toast,
+  isActive: () => ownsTimelineV84(hubOwnerV84) && activeView === 'hub' && !creatorOwnerV84
+    && !standaloneContext && !hubEngine.annexStateReadOnlyV87 });
+const refugeControllerV87 = new RefugeControllerV87({ hub: hubEngine, saveSystem, toast,
   isActive: () => ownsTimelineV84(hubOwnerV84) && activeView === 'hub' && !creatorOwnerV84
     && !standaloneContext && !hubEngine.annexStateReadOnlyV87 });
 const hubDialogueUiV76 = new HubDialogueUiV76({
@@ -533,6 +538,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  refugeControllerV87.close();
   shipCompanionControllerV87.close();
   if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete' && !['hub', 'settings'].includes(name) && !standaloneContext) {
     name = 'hub';
@@ -626,6 +632,15 @@ function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profil
 function ownsTimelineV84(owner) { return owner && owner.profile === saveSystem.profile && owner.epoch === profileEpochV78 && owner.timeline === saveSystem.data.createdAt; }
 function captureHubPoseV84() {
   if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || !hubEngine.player || standaloneContext) return {};
+  const annex = hubEngine.currentAnnexV71();
+  if (annex) return projectRefugeHubSaveV87({
+    deck: hubEngine.state.deck, roomId: annex.parentRoomId,
+    positionX: Math.round(hubEngine.hubCommercialStateV71.returnContext?.x ?? saveSystem.data.hub.positionX),
+    facing: hubEngine.hubCommercialStateV71.returnContext?.facing ?? hubEngine.player.facing,
+    visited: [...new Set(hubEngine.state.visited)],
+    commercialV71: { ...clone(hubEngine.hubCommercialStateV71), annexPositionX: Math.round(hubEngine.player.x),
+      annexPositionY: Math.round(hubEngine.player.y), annexClimbing: Boolean(hubEngine.player.climbing) }
+  });
   return { deck: hubEngine.state.deck, roomId: hubEngine.currentRoom().id,
     positionX: Math.round(hubEngine.player.x), facing: hubEngine.player.facing,
     visited: [...new Set(hubEngine.state.visited)] };
@@ -648,6 +663,7 @@ const playerCreatorUiV84 = new PlayerCreatorUiV84({
   onCancel: () => { creatorOwnerV84 = null; titleScreen.show(); titleScreen.openMenu(); }
 });
 function openPlayerCreatorV84(profile) {
+  refugeControllerV87.close();
   if (creatorOwnerV84) return false;
   creatorOwnerV84 = { ...currentOwnerV84(), target: profile, original: saveSystem.storage.getItem(saveSystem.key(profile)) };
   hubEngine.stop(false); engine.stop(); bioforgeRuntimeV80.stop({ reason: 'player-creation' });
@@ -701,6 +717,7 @@ function advanceOnboardingDialogueV84() {
 }
 
 function openForgeContext() {
+  refugeControllerV87.close();
   missionOwnerV78 = null;
   hubEngine.stop(false);
   engine.stop();
@@ -716,6 +733,7 @@ function openForgeContext() {
 }
 
 function showTitleScreen() {
+  refugeControllerV87.close();
   closeHubDialogue({ resume: false, restoreFocus: false });
   closeHubStation({ resume: false });
   if (missionArchiveOverlayV68?.openState) missionArchiveOverlayV68.close({ restoreFocus: false });
@@ -1438,6 +1456,7 @@ function destroyMissionInsertionUiV62() {
 // A replacement save invalidates delayed insertion callbacks and the old
 // native mission, even when two profiles contain the same operation ID.
 function discardProfileRuntimeV78() {
+  refugeControllerV87.close();
   shipCompanionControllerV87.close();
   if (typeof crewUiV85 !== 'undefined') crewUiV85?.close();
   hubOwnerV84 = null;
@@ -2124,6 +2143,7 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.action.startsWith('refuge:')) return refugeControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet'].includes(interaction.action))
     return shipCompanionControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-animal:')) return handleShipAnimalRoomActionV87(interaction);
@@ -2468,7 +2488,11 @@ function bind() {
   });
   globalThis.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape' && event.code !== 'Escape') return;
-    if (missionArchiveOverlayV68?.openState) {
+    if (refugeControllerV87.ui.isOpen) {
+      event.preventDefault(); refugeControllerV87.ui.close();
+    } else if (refugeControllerV87.cancelContemplation()) {
+      event.preventDefault();
+    } else if (missionArchiveOverlayV68?.openState) {
       event.preventDefault();
       missionArchiveOverlayV68.close();
     } else if (hubDialogueUiV76.openState) {

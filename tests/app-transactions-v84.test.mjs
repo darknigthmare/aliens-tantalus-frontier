@@ -6,6 +6,7 @@ import { SaveSystem, SAVE_PREFIX, createDefaultSave } from '../src/save.js';
 import { WORLDS } from '../src/content.js';
 import { ONBOARDING_DIALOGUES_V84, advancePlayerOnboardingV84 } from '../src/player-onboarding-v84.js';
 import { ShipCompanionControllerV87 } from '../src/ship-companion-controller-v87.js';
+import { RefugeControllerV87 } from '../src/refuge-controller-v87.js';
 
 // Run the real application functions with an in-memory SaveSystem and UI/engine ports.
 // No copied transaction implementation, filesystem writes, DOM or browser global is needed.
@@ -91,6 +92,17 @@ function harness() {
     previousActors: [{ animalId: 'old-profile-moka', x: 600 }],
     ui: { isOpen: false, close(options) {
       calls.push(['close-companions', options]); this.isOpen = false;
+      if (options?.notify !== false) context.hubEngine.resume();
+    } }
+  });
+  // Exercise the real personal-data cleanup too, without constructing DOM or private storage.
+  context.refugeControllerV87 = Object.assign(Object.create(RefugeControllerV87.prototype), {
+    hub: context.hubEngine, modalOwner: { stamp: 'old-profile' }, ownerStamp: 'old-profile',
+    contemplating: true, greetingRemaining: 1, imageEpoch: 0,
+    photoImage: { oldOwner: true }, photoSource: 'old-private-photo', error: 'old-private-error',
+    state: { name: 'Old private name', dedication: 'Old private dedication', photoDataUrl: 'old-private-photo' },
+    ui: { isOpen: false, close(options) {
+      calls.push(['close-refuge', options]); this.isOpen = false;
       if (options?.notify !== false) context.hubEngine.resume();
     } }
   });
@@ -211,6 +223,7 @@ test('discard closes stale hub/native modals without resume or cancellation when
   context.creatorOwnerV84 = { ...context.currentOwnerV84(), target: 2 };
   context.creatorUI.dialog.open = true;
   context.shipCompanionControllerV87.ui.isOpen = true;
+  context.refugeControllerV87.ui.isOpen = true;
   context.discardProfileRuntimeV78();
   assert.equal(context.hubDialogueUiV76.openState, false);
   assert.equal(context.creatorUI.dialog.open, false);
@@ -220,6 +233,11 @@ test('discard closes stale hub/native modals without resume or cancellation when
   assert.equal(context.profileEpochV78, 2);
   assert.equal(context.shipCompanionControllerV87.ui.isOpen, false);
   assert.equal(context.shipCompanionControllerV87.tickRemainder, 0);
+  assert.equal(context.refugeControllerV87.ui.isOpen, false);
+  assert.equal(context.refugeControllerV87.photoSource, null);
+  assert.equal(context.refugeControllerV87.state.name, '');
+  assert.equal(context.refugeControllerV87.modalOwner, null);
+  assert.deepEqual(calls.filter(([kind]) => kind === 'close-refuge'), [['close-refuge', { notify: false, restoreFocus: false }]]);
   assert.deepEqual(calls.filter(([kind]) => kind === 'close-companions'), [['close-companions', { notify: false }]]);
   assert.equal(calls.some(([kind]) => ['hub-resume', 'title-menu'].includes(kind)), false);
 });
@@ -229,6 +247,7 @@ test('a file import completed while an old dialogue is open closes that dialogue
   const pending = deferredImport(nodes);
   context.hubDialogueUiV76.openState = true;
   context.shipCompanionControllerV87.ui.isOpen = true;
+  context.refugeControllerV87.ui.isOpen = true;
   context.pendingOnboardingDialogV84 = { owner: context.currentOwnerV84(), phase: 'medical', node: 0 };
   pending.resolve(importBytes('Imported operator'));
   await pending.completion;
@@ -237,6 +256,11 @@ test('a file import completed while an old dialogue is open closes that dialogue
   assert.equal(context.pendingOnboardingDialogV84, null);
   assert.equal(context.shipCompanionControllerV87.ui.isOpen, false);
   assert.equal(context.shipCompanionControllerV87.tickRemainder, 0);
+  assert.equal(context.refugeControllerV87.ui.isOpen, false);
+  assert.equal(context.refugeControllerV87.photoSource, null);
+  assert.equal(context.refugeControllerV87.state.dedication, '');
+  assert.equal(context.refugeControllerV87.ownerStamp, null);
+  assert.deepEqual(calls.filter(([kind]) => kind === 'close-refuge'), [['close-refuge', { notify: false, restoreFocus: false }]]);
   assert.deepEqual(calls.filter(([kind]) => kind === 'close-companions'), [['close-companions', { notify: false }]]);
   assert.equal(calls.some(([kind]) => kind === 'hub-resume'), false);
   const bytes = backend.values.get(SAVE_PREFIX + '1');

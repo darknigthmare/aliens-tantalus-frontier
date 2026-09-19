@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "private": true,
+  "recordedOn": "2026-09-19",
+  "scope": "Provenance of two REFUGE bitmap generations only; not a full game asset or visual-quality audit.",
+  "tool": "image_gen__imagegen",
+  "executionMode": "integrated-tool",
+  "apiFallbackUsed": false,
+  "referenceImagesUsed": false,
+  "personalLikenessClaimed": false,
+  "sourceJournal": "C:/Users/chuck/.codex/sessions/2026/08/20/rollout-2026-08-20T10-38-44-01a01e52-9788-7491-b0fc-ec4c277f25d1.jsonl",
+  "evidenceMethod": "Read-only line stream restricted to the two identified 2026-09-19 response_item records. Actual journal payload type is custom_tool_call, name exec, input JavaScript. Prompts are decoded directly from its JSON string literals; no compacted summaries, unrelated conversations, image output data or secrets are included.",
+  "hashMethod": "PowerShell Get-FileHash -Algorithm SHA256 on each original PNG and each runtime copy.",
+  "assets": [
+    {
+      "id": "refuge-props-atlas",
+      "runtimePath": "/assets/openai/refuge/v87/refuge-props-atlas.png",
+      "originalPath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-f9888770-f23d-41ee-bfd7-69743f8f83dd.png",
+      "sha256": "f6c43df454f3bb9d6e1477acadfd479e5675d69c35dab6be6d2fbf4217958bc6",
+      "originalSha256": "f6c43df454f3bb9d6e1477acadfd479e5675d69c35dab6be6d2fbf4217958bc6",
+      "byteIdenticalRuntimeCopy": true,
+      "prompt": {
+        "status": "exact-tool-input",
+        "text": "Use case: stylized-concept. Asset type: production modular prop atlas for a 2D side-scrolling sci-fi ship game, a quiet personal memorial room called REFUGE. Primary request: ONE transparent RGBA sprite sheet, 2048x1024, exactly 4 columns by 2 rows of 512x512 cells. Each cell contains ONE complete isolated prop, all fully inside its own cell with generous transparent padding. Top row left to right: a small wall-mounted metal bookcase containing personal books; a rectangular empty photograph frame with genuinely transparent central opening; a compact floor-standing retro CRT memorial terminal; a small physical LED remembrance lamp with its base and a softly glowing warm amber bulb. Bottom row: a soft worn cloth cat cushion, EMPTY; a modest two-seat shipboard bench; a rectangular rounded-corner ship porthole frame with genuinely transparent opening, NO view painted inside; a single sliding bulkhead door in its frame, closed. Orthographic SIDE-SCROLLER ELEVATION: camera level and perfectly perpendicular to the ship wall, flat screen plane, NOT isometric, no visible top faces, no three-quarter angle, no converging perspective. Crisp detailed pixel-art bitmap, utilitarian late-twentieth-century industrial spaceship aesthetic, warm subdued interior light, olive grey metal and restrained fabric colors, compatible with a serious Alien-inspired metroidvania. All objects separate and independently placeable, not a painting of a furnished room. Clean real alpha, preserve empty frame and window openings; no white matte, checkerboard painted background, floor, ground shadow, background wall, characters, animal, portrait, name, date, labels, text, HUD, logo, watermark, cell borders or extra props. Object scale can be normalized in-game; each source cell should use its available area while keeping the complete silhouette safely within the cell.",
+        "timestamp": "2026-09-19T19:56:17.048Z",
+        "callId": "call_hbWqfML2AvpPNJ81AN7YJQHp",
+        "recordId": "ctc_0d18f46d00b1e4e2016aaee8d5433087d0ae3271b3447114b8",
+        "recordType": "custom_tool_call",
+        "recordName": "exec",
+        "referenceImagesUsed": false
+      },
+      "requested": {
+        "width": 2048,
+        "height": 1024,
+        "columns": 4,
+        "rows": 2,
+        "items": 8
+      },
+      "observed": {
+        "format": "PNG",
+        "width": 1774,
+        "height": 887,
+        "bytes": 1204443
+      },
+      "runtimeCropping": "Measured silhouette rectangles in src/refuge-art-v87.js; not an assumed regular 4-by-2 grid.",
+      "visualIdentity": "Generic modular shipboard remembrance props; empty portrait frame.",
+      "limitations": [
+        "Requested dimensions and grid are not evidence of actual PNG dimensions or uniform cell boundaries.",
+        "This provenance proves tool input and byte identity, not animation fluidity, 1:1 fidelity or complete visual QA."
+      ]
+    },
+    {
+      "id": "refuge-hologram-atlas",
+      "runtimePath": "/assets/openai/refuge/v87/refuge-hologram-atlas.png",
+      "originalPath": "C:/Users/chuck/.codex/generated_images/01a01e52-9788-7491-b0fc-ec4c277f25d1/exec-109e3b98-295b-4acf-8fee-2a57cea7b0e7.png",
+      "sha256": "70068a4751b4ce5662168d48b88662fe17756165df9177ed038a23ef8a2d91a5",
+      "originalSha256": "70068a4751b4ce5662168d48b88662fe17756165df9177ed038a23ef8a2d91a5",
+      "byteIdenticalRuntimeCopy": true,
+      "prompt": {
+        "status": "exact-tool-input",
+        "text": "Use case: stylized-concept. Asset type: production animation sprite sheet for a GENERIC CAT HOLOGRAM in a quiet 2D side-scrolling spaceship memorial room, not a portrait of a real pet. One transparent RGBA bitmap atlas, 2048x1024, exactly 8 columns by 4 rows of equal 256x256 cells, 32 full-body poses. Same small short-haired domestic cat identity in every frame, sitting on its haunches facing RIGHT in strict orthographic side profile, subtle cyan-blue holographic body with readable fur anatomy and thin scanline texture, crisp detailed pixel art not blurry neon. No physical projector, pedestal, cushion or floor in the sprite; all separate game objects. Row1: eight consecutive subtle breathing idle poses, calm upright sitting. Row2: eight consecutive natural tail-swish poses while body remains seated, tail always fully inside cell. Row3: eight successive blink sequence poses open eyes, eyelids lowering, closed, reopening, including tiny ear twitches. Row4: eight successive greeting sequence poses: seated cat turns head slightly toward the viewer, one forepaw rises in a gentle greeting and returns to rest; never stands, no extra limbs. Keep hips/paws on same baseline y224 in every256pxcell, body centeredx128, full visible height145px, consistent scale and silhouette, 24px clear padding, no adjacent cell overlap. Genuine alpha transparency, transparent empty space between poses, no white matte or painted checkerboard. No humans, extra cats per cell, text, dates, names, portrait frame, labels, row numbers, borders, UI, shadows, ground, background, logos, watermarks, weapons or excessive glow. Smoothly distinguish the consecutive poses, do not simply duplicate one pose 32 times. Entire atlas only.",
+        "timestamp": "2026-09-19T19:57:47.920Z",
+        "callId": "call_u0kKXTglrhWuZZnY0S77B9Nn",
+        "recordId": "ctc_0d18f46d00b1e4e2016aaee930137c87d08028c6f343090e93",
+        "recordType": "custom_tool_call",
+        "recordName": "exec",
+        "referenceImagesUsed": false
+      },
+      "requested": {
+        "width": 2048,
+        "height": 1024,
+        "columns": 8,
+        "rows": 4,
+        "items": 32
+      },
+      "observed": {
+        "format": "PNG",
+        "width": 1774,
+        "height": 887,
+        "bytes": 1586060
+      },
+      "runtimeCropping": "Measured pose rectangles with registered paw pivots in src/refuge-art-v87.js; not an assumed regular 8-by-4 grid.",
+      "visualIdentity": "Generic feline holographic simulation; not a portrait or likeness of a personal pet.",
+      "limitations": [
+        "Requested dimensions and grid are not evidence of actual PNG dimensions or uniform cell boundaries.",
+        "This provenance proves tool input and byte identity, not animation fluidity, 1:1 fidelity or complete visual QA."
+      ]
+    }
+  ],
+  "privacy": "Private development record. Exclude this JSON, journal paths, prompts and personal REFUGE data from game publication, game saves, game export and service-worker precache."
+}

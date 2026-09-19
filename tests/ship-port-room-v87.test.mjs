@@ -86,7 +86,7 @@ function finishTransition(hub) {
 }
 
 test('the port is an explicit second extension with a separate parent and no rewritten historical rooms', () => {
-  assert.equal(HUB_ANNEXES_V71.length, 10); assert.equal(HUB_ANNEXES_V87.length, 12);
+  assert.equal(HUB_ANNEXES_V71.length, 10); assert.equal(HUB_ANNEXES_V87.length, 13);
   assert.equal(ANNEX.parentDeck, 'engineering'); assert.equal(ANNEX.parentRoomId, 'dropship-hangar');
   assert.equal(ANNEX.navigationKind, 'external-civil-compartment');
   assert.equal(validateHubAnnexGeometryV87(ANNEX).valid, true);
@@ -94,7 +94,7 @@ test('the port is an explicit second extension with a separate parent and no rew
   assert.equal(ANNEX.station.upgradeId, null);
   assert.ok(Object.isFrozen(ANNEX)); assert.ok(Object.isFrozen(ANNEX.props));
   const graph = buildHubRuntimeGraphV87();
-  assert.equal(graph.nodes.length, 28); assert.equal(graph.edges.length, 30);
+  assert.equal(graph.nodes.length, 29); assert.equal(graph.edges.length, 31);
   assert.ok(graph.adjacency['dropship-hangar'].includes('arrival-airlock'));
   assert.ok(graph.adjacency['dropship-hangar'].includes(ANNEX.id));
 });

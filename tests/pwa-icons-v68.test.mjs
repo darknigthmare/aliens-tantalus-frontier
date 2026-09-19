@@ -83,7 +83,7 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
 test('le cache V84 conserve les assets runtime acceptés mais exclut le master PWA', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-2['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-3['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }
@@ -104,6 +104,13 @@ test('le cache V84 conserve les assets runtime acceptés mais exclut le master P
       '/assets/openai/ship-animals/v87/habitat-props.png',
       '/assets/openai/ship-animals/v87/port-props.png',
       '/assets/openai/ship-animals/v87/port-vendor-atlas.png',
+      '/assets/openai/refuge/v87/refuge-props-atlas.png',
+      '/assets/openai/refuge/v87/refuge-hologram-atlas.png',
+      '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
+      '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
+      '/assets/openai/hub/layers/habitat-quarters-overhead.png',
+      '/assets/openai/hub/layers/habitat-quarters-foreground.png',
+      '/assets/openai/metroidvania/props/floor-segment.png',
       ...V81_READY_ENEMY_PROFILE_ASSETS.map(({ path }) => path)
     ].sort(),
     'seuls les assets runtime explicitement acceptés franchissent le filtre des assets lourds'

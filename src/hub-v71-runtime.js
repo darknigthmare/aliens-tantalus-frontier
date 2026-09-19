@@ -15,6 +15,9 @@ import {
 } from './hub-annex-registry-v87.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, drawShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { SHIP_PORT_ANNEX_V87, getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from './ship-port-room-v87.js';
+import { SHIP_REFUGE_ANNEX_V87, getRefugeInteractionV87 } from './refuge-room-v87.js';
+import { drawRefugeLayerV87 } from './refuge-art-v87.js';
+import { normalizeRefugeHubResumeV87, projectRefugeHubSaveV87 } from './refuge-save-v87.js';
 import { canAccessPortCounterV87, getShipPortSafetyCodeV87 } from './ship-port-state-v87.js';
 import { drawTiledMissionCropV87, MISSION_STRUCTURE_CROPS_V87 } from './mission-structure-art-v87.js';
 import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
@@ -142,6 +145,8 @@ export class HubGame extends HubGameV62 {
   }
 
   start(hubState = {}, options = {}) {
+    hubState = normalizeRefugeHubResumeV87(hubState);
+    this.refugeMovementLockedV87 = false;
     const sourceRegistry = hubState[HUB_ANNEX_STATE_KEY_V71] || hubState.hubExpansionV71 || hubState.commercialV71;
     this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > 87;
     const restored = mutableCommercialState(
@@ -193,6 +198,8 @@ export class HubGame extends HubGameV62 {
   currentAnnexV71() {
     return annexFromState(this.hubCommercialStateV71);
   }
+
+  isRefugeActiveV87() { return this.currentAnnexV71()?.id === SHIP_REFUGE_ANNEX_V87.id; }
 
   restoreAnnexPlayerPoseV71(annex, state = this.hubCommercialStateV71) {
     const minimumX = 24;
@@ -279,7 +286,7 @@ export class HubGame extends HubGameV62 {
     }
     const provingAssets = annex.id === 'proving-ground'
       ? [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
-      : ['animal-care', SHIP_PORT_ANNEX_V87.id].includes(annex.id) ? [HUB_ANNEX_MODULE_ART_V82.floor] : [];
+      : ['animal-care', SHIP_PORT_ANNEX_V87.id, SHIP_REFUGE_ANNEX_V87.id].includes(annex.id) ? [HUB_ANNEX_MODULE_ART_V82.floor] : [];
     for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets].filter(Boolean)) {
       if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
     }
@@ -376,6 +383,7 @@ export class HubGame extends HubGameV62 {
   }
 
   nearestInteraction() {
+    if (this.isRefugeActiveV87()) return getRefugeInteractionV87(this);
     if (this.isAnnexActiveV71()) return this.nearestAnnexStationV71();
     return this.nearestParentAnnexDoorV71() || super.nearestInteraction();
   }
@@ -393,6 +401,9 @@ export class HubGame extends HubGameV62 {
     if (this.isAnnexActiveV71()) {
       const annex = this.currentAnnexV71();
       if (this.nearestAnnexExitV71()) return `E — SORTIR VERS ${annex.parentRoomId.toUpperCase()}`;
+      if (this.isRefugeActiveV87()) return this.refugeMovementLockedV87
+        ? 'CONTEMPLATION · E / ÉCHAP / DÉPLACEMENT — REPRENDRE LA MARCHE'
+        : getRefugeInteractionV87(this)?.prompt || 'REFUGE · ESPACE PERSONNEL · A / D — MARCHER · E — INTERAGIR';
       if (annex.id === 'animal-care') {
         const interaction = getShipAnimalRoomInteractionV87(this, this.npcRoutineContextV62?.save);
         return interaction?.prompt || 'ACCUEIL ANIMALIER · ÉQUIPEZ LES LOGEMENTS AU SOL · E — UTILISER';
@@ -415,6 +426,11 @@ export class HubGame extends HubGameV62 {
     if (this.isAnnexActiveV71()) {
       if (this.nearestAnnexExitV71()) {
         this.beginAnnexTransitionV71(this.currentAnnexV71().id, 'exit');
+        return;
+      }
+      if (this.isRefugeActiveV87()) {
+        const interaction = this.refugeMovementLockedV87 ? { action: 'refuge:contemplate' } : getRefugeInteractionV87(this);
+        if (interaction) this.onAction(interaction);
         return;
       }
       if (this.currentAnnexV71()?.id === 'animal-care') {
@@ -635,6 +651,7 @@ export class HubGame extends HubGameV62 {
   }
 
   setControl(control, active) {
+    if (this.isRefugeActiveV87() && !this.running) return;
     if (this.annexTransitionV71) return;
     if (this.isAnnexActiveV71() && ['depth', 'fire'].includes(control)) return;
     super.setControl(control, active);
@@ -653,7 +670,8 @@ export class HubGame extends HubGameV62 {
   update(delta) {
     const elapsed = clamp(delta, 0, 0.25);
     const runningBeforeCompanions = this.running;
-    this.onCompanionTickV87?.(elapsed);
+    this.onRefugeTickV87?.(elapsed);
+    if (!this.isRefugeActiveV87()) this.onCompanionTickV87?.(elapsed);
     // A refused durable commit stops this frame before physics or a sas can
     // change rooms and persist again. Keep explicit already-paused updates compatible.
     if (runningBeforeCompanions && !this.running) return;
@@ -675,6 +693,10 @@ export class HubGame extends HubGameV62 {
     if (!this.isAnnexActiveV71()) {
       super.update(delta);
       return;
+    }
+    if (this.isRefugeActiveV87() && this.refugeMovementLockedV87) {
+      this.animationTime += elapsed; this.jumpQueued = 0;
+      this.player.vx = 0; this.player.vy = 0; this.emitStatus(); return;
     }
     this.updateAnnexPhysicsV71(elapsed);
   }
@@ -877,10 +899,10 @@ export class HubGame extends HubGameV62 {
         this.state.positionX = statePosition;
       }
     }
-    originalOnPersist({
+    originalOnPersist(projectRefugeHubSaveV87({
       ...(inheritedPatch || {}),
       [HUB_ANNEX_STATE_KEY_V71]: clone(this.hubCommercialStateV71)
-    });
+    }));
   }
 
   getAssetReport() {
@@ -927,6 +949,7 @@ export class HubGame extends HubGameV62 {
       hubCommercialGraphConnectionCountV71: this.hubCommercialGraphV71.edges.length,
       activeAnnexV71: Boolean(annex),
       activeAnnexIdV71: annex?.id || null,
+      refugeV87: this.isRefugeActiveV87() ? this.getRefugeSnapshotV87?.() || { active: true } : null,
       annexTransitionV71: this.annexTransitionV71 ? clone(this.annexTransitionV71) : null,
       hubCommercialV71: clone(this.hubCommercialStateV71),
       visitedAnnexIdsV71: [...this.hubCommercialStateV71.visitedAnnexIds],
@@ -948,15 +971,15 @@ export class HubGame extends HubGameV62 {
       const images = this.ensureAnnexAssetsV71(door.annexId);
       const active = this.nearestParentAnnexDoorV71()?.annexId === annex.id
         && (annex.id !== SHIP_PORT_ANNEX_V87.id || canAccessPortCounterV87(this.npcRoutineContextV62?.save));
-      this.drawDoorBitmapV71(ctx, images?.get('door'), door.bounds, active ? 1 : 0, door.annex.art.alphaBounds.door);
+      this.drawDoorBitmapV71(ctx, images?.get('door'), door.bounds, active ? 1 : 0, door.annex.art.alphaBounds.door, annex.id === SHIP_REFUGE_ANNEX_V87.id);
       if (annex.id === SHIP_PORT_ANNEX_V87.id) drawShipPortTerminalV87(ctx, images?.get('prop'), this.npcRoutineContextV62?.save);
     }
   }
 
   drawPlayer(ctx) {
-    this.drawCompanionsV87?.(ctx);
+    if (!this.isRefugeActiveV87()) this.drawCompanionsV87?.(ctx);
     super.drawPlayer(ctx);
-    this.drawCarriedCompanionV87?.(ctx);
+    if (!this.isRefugeActiveV87()) this.drawCarriedCompanionV87?.(ctx);
   }
 
   drawHud(ctx) {
@@ -1004,6 +1027,19 @@ export class HubGame extends HubGameV62 {
     ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     ctx.fillStyle = '#020606';
     ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+    if (this.isRefugeActiveV87()) {
+      const presentation = { cameraX: this.annexCameraV71.x, time: this.animationTime,
+        reducedMotion: this.reducedMotion, ...this.getRefugePresentationV87?.() };
+      drawRefugeLayerV87(ctx, images, { ...presentation, layer: 'far' });
+      ctx.save(); ctx.translate(-this.annexCameraV71.x, 0);
+      this.drawAnnexGeometryV71(ctx, annex);
+      drawRefugeLayerV87(ctx, images, { ...presentation, layer: 'decor' });
+      this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds,
+        this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door, true);
+      this.drawPlayer(ctx);
+      drawRefugeLayerV87(ctx, images, { ...presentation, layer: 'front' });
+      ctx.restore(); this.drawAnnexHudV71(ctx); ctx.restore(); return;
+    }
     if (['animal-care', SHIP_PORT_ANNEX_V87.id].includes(annex.id)) {
       const wall = images.get('far');
       if (imageReady(wall)) {
@@ -1058,7 +1094,7 @@ export class HubGame extends HubGameV62 {
     const ladderImage = this.annexModularImagesV72.get(moduleArt.ladder);
     ctx.fillStyle = 'rgba(4, 10, 9, .8)';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, annex.world.floorHeight);
-    if (['animal-care', SHIP_PORT_ANNEX_V87.id].includes(annex.id)) drawTiledMissionCropV87(ctx,
+    if (['animal-care', SHIP_PORT_ANNEX_V87.id, SHIP_REFUGE_ANNEX_V87.id].includes(annex.id)) drawTiledMissionCropV87(ctx,
       this.annexModularImagesV72.get(moduleArt.floor), MISSION_STRUCTURE_CROPS_V87.floorPanel,
       { x: 0, y: annex.world.floorY, w: annex.world.width, h: annex.world.floorHeight });
     ctx.fillStyle = '#789080';
@@ -1196,14 +1232,19 @@ export class HubGame extends HubGameV62 {
     ctx.restore();
   }
 
-  drawDoorBitmapV71(ctx, image, bounds, active = 0, source = null) {
+  drawDoorBitmapV71(ctx, image, bounds, active = 0, source = null, preserveAspect = false) {
     ctx.save();
     if (active) {
       ctx.shadowColor = 'rgba(142, 224, 169, .78)';
       ctx.shadowBlur = 16;
     }
     if (imageReady(image)) {
-      if (source) this.drawCroppedBitmapV72(ctx, image, source, bounds);
+      if (source && preserveAspect) {
+        const width = source[2] - source[0], height = source[3] - source[1];
+        const scale = Math.min(bounds.w / width, bounds.h / height);
+        ctx.drawImage(image, source[0], source[1], width, height,
+          bounds.x + (bounds.w - width * scale) / 2, bounds.y + bounds.h - height * scale, width * scale, height * scale);
+      } else if (source) this.drawCroppedBitmapV72(ctx, image, source, bounds);
       else ctx.drawImage(image, bounds.x, bounds.y, bounds.w, bounds.h);
     }
     else {
@@ -1243,6 +1284,7 @@ export class HubGame extends HubGameV62 {
       ? getShipAnimalHabitatsV87(this.npcRoutineContextV62?.save).filter(habitat => habitat.installed).length : null;
     ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/2`
       : annex.id === SHIP_PORT_ANNEX_V87.id ? 'COMPTOIR CIVIL · AMARRÉ'
+      : this.isRefugeActiveV87() ? 'ESPACE PERSONNEL · SANS COMBAT'
       : annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);
     this.drawSinglePromptV71(ctx, this.statusPrompt());
   }
