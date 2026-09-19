@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-public-shell-2';
+const CACHE = 'atf-v86-public-shell-3';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
