@@ -1,6 +1,8 @@
 import { resolveCombatAimV83, readKeyboardCombatAimV83, COMBAT_AIM_KEY_BINDINGS_V83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { bindCombatPointerAimV83, refreshCombatPointerAimV83 } from './mission-input-v77.js';
 import { crewMovementV85 } from './crew-runtime-v85.js';
+import { MISSION_STRUCTURE_CROPS_V87, drawTiledMissionCropV87, drawMissionLadderV87 } from './mission-structure-art-v87.js';
+import { getMissionStructureLayoutV87 } from './mission-structure-layout-v87.js';
 import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
 import {
@@ -93,15 +95,16 @@ export const MISSION_STRUCTURAL_PROP_FILES = Object.freeze({
 
 export const MISSION_SURFACE_PROFILES = Object.freeze({
   floor: Object.freeze({ renderHeight: 92, surfaceOffset: 0 }),
-  catwalk: Object.freeze({ renderHeight: 64, surfaceOffset: 42 }),
-  ledge: Object.freeze({ renderHeight: 72, surfaceOffset: 0 }),
-  drop: Object.freeze({ renderHeight: 64, surfaceOffset: 0 })
+  catwalk: Object.freeze({ renderHeight: 24, surfaceOffset: 0 }),
+  ledge: Object.freeze({ renderHeight: 24, surfaceOffset: 0 }),
+  drop: Object.freeze({ renderHeight: 24, surfaceOffset: 0 })
 });
 
 export function getMissionSurfaceMetrics(platform = {}) {
   const key = platform.floor ? 'floor' : platform.art;
   const profile = MISSION_SURFACE_PROFILES[key] || MISSION_SURFACE_PROFILES.catwalk;
-  const renderHeight = Number.isFinite(platform.renderHeight) ? platform.renderHeight : profile.renderHeight;
+  const structuralHeight = !platform.floor && Number.isFinite(platform.h) && platform.h > 0 ? platform.h : profile.renderHeight;
+  const renderHeight = Number.isFinite(platform.renderHeight) && platform.renderHeight > 0 ? platform.renderHeight : structuralHeight;
   const scaledOffset = profile.surfaceOffset * (renderHeight / profile.renderHeight);
   const surfaceOffset = Number.isFinite(platform.surfaceOffset) ? platform.surfaceOffset : scaledOffset;
   const surfaceY = Number(platform.y) || 0;
@@ -628,7 +631,7 @@ export class GameEngine {
     });
     this.ladders = byType('ladder').map((tile, index) => ({ id: `editor-ladder-${index}`, x: tile.x + tileWidth * 0.5, top: tile.y, bottom: Math.min(WORLD_HEIGHT - 20, tile.y + tileHeight * 4), w: 52 }));
     this.lifts = byType('lift').map((tile, index) => ({
-      id: `editor-lift-${index}`, x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(80, tile.y - tileHeight * 4),
+      id: `editor-lift-${index}`, kind: 'lift', x: tile.x, y: tile.y, baseY: tile.y, topY: Math.max(80, tile.y - tileHeight * 4),
       w: tileWidth, h: 24, art: 'drop', phase: index * 0.9, previousY: tile.y
     }));
     this.platforms.push(...this.lifts);
@@ -752,6 +755,7 @@ export class GameEngine {
     if (!player) return;
     const individualV85 = crewMovementV85(player);
     player.jumpBuffer = Math.max(0, player.jumpBuffer - delta);
+    player.ladderDetachClock = Math.max(0, (Number(player.ladderDetachClock) || 0) - delta);
     player.fireClock = Math.max(0, player.fireClock - delta);
     player.actionClock = Math.max(0, player.actionClock - delta);
     player.hazardClock = Math.max(0, player.hazardClock - delta);
@@ -773,10 +777,12 @@ export class GameEngine {
     const right = !stunned && !aimLocked && (this.keys.has(controls.right) || (!player.coop && this.keys.has('ArrowRight')));
     const up = !stunned && !aimLocked && (this.keys.has(controls.up) || (!player.coop && this.keys.has('ArrowUp')));
     const down = !stunned && !aimLocked && (this.keys.has(controls.down) || (!player.coop && this.keys.has('ArrowDown')));
-    const ladder = this.nearestLadder(player);
+    const climbDirection = Number(down) - Number(up);
+    const ladder = player.ladderDetachClock > 0 ? null : this.nearestLadder(player, climbDirection);
     if (stunned) player.climbing = false;
-    if (ladder && (up || down)) player.climbing = true;
+    if (ladder && climbDirection) player.climbing = true;
     if (player.climbing && !ladder) player.climbing = false;
+    if (!player.climbing) player.ladderId = null;
     player.crouching = down && !player.climbing && player.grounded;
     const grappleScale = player.grappledClock > 0 ? 0.42 : 1;
     const feet = { x: player.x + 6, y: player.y + player.h - 14, w: player.w - 12, h: 14 };
@@ -796,12 +802,28 @@ export class GameEngine {
     if (!left && !right && Math.abs(player.vx) < 0.5) player.vx = 0;
     if (player.vx) player.facing = Math.sign(player.vx);
     if (player.climbing && ladder) {
+      player.ladderId = ladder.id || null;
       if (!aimLocked) player.x += (ladder.x - player.w / 2 - player.x) * Math.min(1, delta * 12);
-      player.vy = (Number(down) - Number(up)) * 185 * individualV85.climb;
-      player.y = clamp(player.y + player.vy * delta, ladder.top - player.h + 12, ladder.bottom - player.h);
+      player.vy = climbDirection * 185 * individualV85.climb;
+      player.y = clamp(player.y + player.vy * delta, ladder.top - player.h, ladder.bottom - player.h);
       player.grounded = false;
+      // The feet reach the authored landing, then ordinary walking takes over.
+      // Stacked ladders are selected on the next tick from the requested direction.
+      const footY = player.y + player.h;
+      if ((climbDirection < 0 && footY <= ladder.top) || (climbDirection > 0 && footY >= ladder.bottom)) {
+        player.climbing = false;
+        player.ladderId = null;
+        player.vy = 0;
+        player.grounded = this.platforms.some((platform) => (
+          Math.abs(getMissionSurfaceMetrics(platform).surfaceY - footY) <= 2
+          && player.x + player.w > platform.x + 4 && player.x < platform.x + platform.w - 4
+        ));
+      }
       if (player.jumpBuffer > 0 || this.keys.has(controls.jump)) {
         player.climbing = false;
+        player.ladderId = null;
+        player.ladderDetachClock = 0.2;
+        player.grounded = false;
         player.vy = -470 * individualV85.jump;
         player.jumpBuffer = 0;
       }
@@ -1107,9 +1129,20 @@ export class GameEngine {
     }
   }
 
-  nearestLadder(entity) {
+  nearestLadder(entity, direction = 0) {
     const center = entity.x + entity.w / 2;
-    return this.ladders.find((ladder) => Math.abs(center - ladder.x) < 46 && entity.y + entity.h > ladder.top - 25 && entity.y < ladder.bottom + 20);
+    const feet = entity.y + entity.h;
+    // A body overlapping the next storey must not capture its ladder early.
+    // At a shared landing, up chooses the ladder above and down the one below.
+    return this.ladders.filter((ladder) => (
+      Math.abs(center - ladder.x) < 46
+      && feet >= ladder.top - 2 && feet <= ladder.bottom + 2
+      && (direction >= 0 || feet > ladder.top + 0.01)
+      && (direction <= 0 || feet < ladder.bottom - 0.01)
+    )).sort((left, right) => (
+      Number(right.id === entity.ladderId) - Number(left.id === entity.ladderId)
+      || Math.abs(center - left.x) - Math.abs(center - right.x)
+    ))[0];
   }
 
   findCover(entity) {
@@ -1771,22 +1804,12 @@ export class GameEngine {
     if (!this.usesShipStructuralProps()) return 0;
     const image = this.images.get('maintenancePipe');
     if (!ready(image)) return 0;
-    const anchors = this.platforms
-      .filter((platform) => !platform.floor)
-      .filter((_, index) => index % 4 === 1)
-      .slice(0, 10);
-    const height = 176;
-    const width = image.naturalWidth * (height / image.naturalHeight);
+    const spans = getMissionStructureLayoutV87(this.platforms).supports;
     ctx.save();
-    ctx.globalAlpha = 0.78;
-    for (const platform of anchors) {
-      const x = platform.x + Math.max(8, (platform.w - width) * 0.5);
-      const { surfaceY } = getMissionSurfaceMetrics(platform);
-      const baseline = surfaceY + Math.min(18, platform.h || 0);
-      ctx.drawImage(image, x, baseline - height, width, height);
-    }
+    ctx.globalAlpha = 0.52;
+    for (const span of spans) drawTiledMissionCropV87(ctx, image, MISSION_STRUCTURE_CROPS_V87.pipeShaft, span, { axis: 'y' });
     ctx.restore();
-    return anchors.length;
+    return spans.length;
   }
 
   drawBackdrop(ctx) {
@@ -1856,7 +1879,9 @@ export class GameEngine {
     this.enemyAtlasLRUV65?.setWorkingSet(this.getVisibleEnemyAtlasSheetsV65(visibleEnemies));
     this.drawFloors(ctx);
     this.drawMaintenancePipes(ctx);
-    for (const platform of this.platforms.filter((item) => !item.floor)) this.drawPlatform(ctx, platform);
+    const structure = getMissionStructureLayoutV87(this.platforms);
+    for (const platform of structure.decks) this.drawPlatform(ctx, platform);
+    for (const lift of structure.lifts) this.drawPlatform(ctx, lift);
     for (const wall of this.walls) this.drawWall(ctx, wall);
     for (const ladder of this.ladders) this.drawLadder(ctx, ladder);
     for (const cover of this.covers) if (!cover.destroyed) this.drawWorldProp(ctx, cover.art, cover.x, cover.y + cover.h, cover.h, cover.w);
@@ -1891,31 +1916,19 @@ export class GameEngine {
       ctx.fillStyle = '#121a18';
       ctx.fillRect(floor.x, metrics.surfaceY, floor.w, Math.max(floor.h, 52));
       if (!ready(image)) continue;
-      const width = image.naturalWidth * (metrics.renderHeight / image.naturalHeight);
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(floor.x, metrics.renderY, floor.w, metrics.renderHeight);
-      ctx.clip();
-      for (let x = floor.x; x < floor.x + floor.w + width; x += width - 4) {
-        ctx.drawImage(image, x, metrics.renderY, width, metrics.renderHeight);
-      }
-      ctx.restore();
+      drawTiledMissionCropV87(ctx, image, MISSION_STRUCTURE_CROPS_V87.floorPanel,
+        { x: floor.x, y: metrics.surfaceY, w: floor.w, h: metrics.renderHeight });
     }
   }
 
   drawPlatform(ctx, platform) {
-    const image = this.images.get(platform.art);
+    // Side-on truss only: no opaque railing holes, detached base or 3/4 deck.
+    const image = this.images.get('catwalk');
     const metrics = getMissionSurfaceMetrics(platform);
+    if (drawTiledMissionCropV87(ctx, image, MISSION_STRUCTURE_CROPS_V87.catwalkDeck,
+      { x: platform.x, y: metrics.surfaceY, w: platform.w, h: metrics.renderHeight })) return;
     ctx.fillStyle = '#19231f';
     ctx.fillRect(platform.x, metrics.surfaceY, platform.w, platform.h);
-    if (!ready(image)) return;
-    const width = image.naturalWidth * (metrics.renderHeight / image.naturalHeight);
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(platform.x, metrics.renderY, platform.w, metrics.renderHeight + 12);
-    ctx.clip();
-    for (let x = platform.x; x < platform.x + platform.w + width; x += Math.max(24, width - 8)) ctx.drawImage(image, x, metrics.renderY, width, metrics.renderHeight);
-    ctx.restore();
   }
 
   drawWall(ctx, wall) {
@@ -1927,15 +1940,10 @@ export class GameEngine {
   drawLadder(ctx, ladder) {
     const image = this.images.get('ladder');
     const height = ladder.bottom - ladder.top;
-    if (!ready(image)) { ctx.fillStyle = '#786a51'; ctx.fillRect(ladder.x - 18, ladder.top, 36, height); return; }
-    const width = 58;
-    const unitHeight = image.naturalHeight * (width / image.naturalWidth);
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(ladder.x - width / 2, ladder.top, width, height);
-    ctx.clip();
-    for (let y = ladder.top; y < ladder.bottom; y += unitHeight - 8) ctx.drawImage(image, ladder.x - width / 2, y, width, unitHeight);
-    ctx.restore();
+    if (drawMissionLadderV87(ctx, image, ladder)) return;
+    ctx.fillStyle = '#786a51';
+    for (const x of [ladder.x - 18, ladder.x + 13]) ctx.fillRect(x, ladder.top, 5, height);
+    for (let y = ladder.top + 10; y < ladder.bottom - 3; y += 22) ctx.fillRect(ladder.x - 13, y, 26, 3);
   }
 
   drawWorldProp(ctx, key, x, baseline, maxHeight, fallbackWidth) {

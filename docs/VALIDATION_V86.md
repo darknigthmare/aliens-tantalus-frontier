@@ -55,4 +55,6 @@ Le gate V86 exige un SHA de commit explicite, compare **57 fichiers critiques et
 
 Le correctif suivant et la récupération des nouvelles sources sont documentés dans `V87_SOURCE_RECOVERY_AND_PLAYER_HOTFIX.md`, privé lui aussi.
 
+Le sous-lot structure/traversée suivant est documenté dans `V87_MISSION_STRUCTURE_AUDIT.md` : commit public `e9ff82dd80a55a964e106c9e6890d7f5162d520a`, déploiement `dpl_2NsmXh8Vtqb27UE6wDC2uefde1B6` READY, contrôles clavier sur trois gabarits et cache hors ligne validés en production. Le nouveau contrôle HTTP public compare 68 modules et 16 assets et refuse toujours 216 chemins privés. Cette correction ne change pas le périmètre de complétude ci-dessous.
+
 La matrice des 26 conversations reste **0 DONE / 18 PARTIAL / 8 MISSING**. Les ennemis restent **14/571 intégrés et 557 non intégrés**. Ni fidélité graphique 1:1, ni toutes les promesses réalisées, ni jeu commercial complet ne sont revendiqués.
