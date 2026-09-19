@@ -1,7 +1,17 @@
-const CACHE = 'atf-v86-public-shell-5';
+const CACHE = 'atf-v86-public-shell-6';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/ship-port-state-v87.js',
+  '/src/ship-port-art-v87.js',
+  '/src/ship-port-room-v87.js',
+  '/src/ship-port-ui-v87.js',
+  '/src/ship-port-v87.css',
+  '/src/ship-animal-routines-v87.js',
+  '/src/ship-animal-delivery-v87.js',
+  '/src/ship-companion-controller-v87.js',
+  '/src/ship-animal-habitat-graph-v87.js',
+  '/assets/openai/ship-animals/v87/port-vendor-atlas.png', '/assets/openai/ship-animals/v87/port-props.png',
   '/src/ship-animal-state-v87.js', '/src/ship-animal-habitat-v87.js', '/src/hub-annex-registry-v87.js',
   '/src/ship-animal-art-v87.js', '/src/ship-animal-navigation-v87.js',
   '/assets/openai/ship-animals/v87/moka-atlas.png', '/assets/openai/ship-animals/v87/brume-atlas.png',

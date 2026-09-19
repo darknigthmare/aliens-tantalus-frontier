@@ -247,6 +247,41 @@ function createImage(source) {
   return image;
 }
 
+/** Pure collision source shared by the visible hub and off-screen simulation. */
+export function buildHubObstacleGeometryV87(deckIndex) {
+  const deck = HUB_DECKS[deckIndex];
+  const geometry = deck.rooms.flatMap((room) => room.geometry
+    .filter(() => room.id !== DROPSHIP_HANGAR_ART_V55.roomId)
+    .map((item) => ({ ...item, roomId: room.id })));
+  const hangar = deck.rooms.find((room) => room.id === DROPSHIP_HANGAR_ART_V55.roomId);
+  if (hangar) {
+    const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
+    const segments = dropship.collisionSegments?.length
+      ? dropship.collisionSegments
+      : [dropship.collisionBounds];
+    for (const bounds of segments) {
+      geometry.push({
+        x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+        id: bounds.id || `${dropship.id}-collision`,
+        roomId: hangar.id,
+        role: bounds.role || 'dropship-hull',
+        actorId: dropship.id,
+        collisionOnly: true
+      });
+    }
+  }
+  const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
+  if (vehicleBay) {
+    const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
+    const bounds = actor.collisionBounds;
+    geometry.push({
+      x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
+      roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
+    });
+  }
+  return geometry;
+}
+
 export class HubGame {
   constructor(canvas, { audio, onAction = () => {}, onPersist = () => {}, onStatus = () => {} } = {}) {
     this.canvas = canvas;
@@ -473,37 +508,7 @@ export class HubGame {
   }
 
   createObstacles(deckIndex) {
-    const deck = HUB_DECKS[deckIndex];
-    const geometry = deck.rooms.flatMap((room) => room.geometry
-      .filter(() => room.id !== DROPSHIP_HANGAR_ART_V55.roomId)
-      .map((item) => ({ ...item, roomId: room.id })));
-    const hangar = deck.rooms.find((room) => room.id === DROPSHIP_HANGAR_ART_V55.roomId);
-    if (hangar) {
-      const dropship = DROPSHIP_HANGAR_ART_V55.dropship;
-      const segments = dropship.collisionSegments?.length
-        ? dropship.collisionSegments
-        : [dropship.collisionBounds];
-      for (const bounds of segments) {
-        geometry.push({
-          x: hangar.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
-          id: bounds.id || `${dropship.id}-collision`,
-          roomId: hangar.id,
-          role: bounds.role || 'dropship-hull',
-          actorId: dropship.id,
-          collisionOnly: true
-        });
-      }
-    }
-    const vehicleBay = deck.rooms.find((room) => resolveHubVehicleArtV58(room.id));
-    if (vehicleBay) {
-      const actor = resolveHubVehicleArtV58(vehicleBay.id).vehicle;
-      const bounds = actor.collisionBounds;
-      geometry.push({
-        x: vehicleBay.xStart + bounds.x, y: bounds.y, w: bounds.w, h: bounds.h,
-        roomId: vehicleBay.id, role: 'vehicle-hull', actorId: actor.id, collisionOnly: true
-      });
-    }
-    return geometry;
+    return buildHubObstacleGeometryV87(deckIndex);
   }
 
   resolveHorizontal(previousX) {

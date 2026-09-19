@@ -45,6 +45,7 @@ import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { createPlayerOnboardingV84, normalizePlayerOnboardingV84, validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
+import { createShipPortStateV87, migrateShipPortStateV87 } from './ship-port-state-v87.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -266,6 +267,7 @@ export function createDefaultSave(profile = 1) {
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
     shipAnimalsV1: migrateShipAnimalStateV87(),
+    shipPortV1: createShipPortStateV87(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -2005,6 +2007,7 @@ export function migrateSave(input, profile = 1) {
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
   migrated.shipAnimalsV1 = migrateShipAnimalStateV87(source.shipAnimalsV1);
+  migrated.shipPortV1 = migrateShipPortStateV87(source.shipPortV1);
   if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
     const matchingRun = migrated.alphaBravoDoctrine.runs.find((run) => run.operationId === migrated.strategy.lastOperation.id);
     if (matchingRun) migrated.strategy.lastOperation.alphaBravoDoctrineRun = structuredClone(matchingRun);
