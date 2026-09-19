@@ -33,7 +33,35 @@ export const SHIP_ANIMAL_HABITATS_V87 = freeze([
   { id: 'luciole-berth-v87', type: 'cat-berth', label: 'Second coin de repos félin',
     designatedAnimalId: 'animal-luciole', routineTargets: { food: 442, stroll: 394, foodFacing: 1 },
     capacity: 1, installX: 354, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 354, y: 624 },
-    requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'scratching-post', 'toy'] }
+    requirements: ['bed', 'water-station', 'feeding-station', 'hygiene-station', 'scratching-post', 'toy'] },
+  { id: 'noisette-cafe-pen-v87', type: 'small-pen', label: 'Parc fermé pour deux lapins',
+    designatedGroupId: 'noisette-cafe', compatibleFamilyIds: ['rabbit-domestic'], capacity: 2,
+    navigationDomain: 'enclosure-volume', enclosureBounds: { x: 936, y: 550, w: 154, h: 62 },
+    installX: 1013, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1013, y: 624 },
+    receivingPoint: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1013, y: 624 },
+    memberLocations: {
+      'animal-noisette': { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 962, y: 612 },
+      'animal-cafe': { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1064, y: 612 }
+    },
+    memberRoutineTargets: {
+      'animal-noisette': { food: 988, stroll: 974, foodFacing: 1, minX: 958, maxX: 991 },
+      'animal-cafe': { food: 1038, stroll: 1050, foodFacing: -1, minX: 1031, maxX: 1072 }
+    },
+    requirements: ['safe-enclosure', 'rest-hide', 'feeding-station', 'water-station', 'hygiene-station', 'enrichment'] },
+  { id: 'tic-tac-pen-v87', type: 'small-pen', label: 'Parc fermé pour deux rats',
+    designatedGroupId: 'tic-tac', compatibleFamilyIds: ['rat-domestic'], capacity: 2,
+    navigationDomain: 'enclosure-volume', enclosureBounds: { x: 1462, y: 556, w: 120, h: 56 },
+    installX: 1522, location: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1522, y: 624 },
+    receivingPoint: { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1522, y: 624 },
+    memberLocations: {
+      'animal-tic': { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1490, y: 612 },
+      'animal-tac': { hubId: 'tantalus', deckId: 'habitat', roomId: 'animal-care', x: 1554, y: 612 }
+    },
+    memberRoutineTargets: {
+      'animal-tic': { food: 1506, stroll: 1482, foodFacing: 1, minX: 1477, maxX: 1507 },
+      'animal-tac': { food: 1538, stroll: 1562, foodFacing: -1, minX: 1538, maxX: 1566 }
+    },
+    requirements: ['safe-enclosure', 'rest-hide', 'feeding-station', 'water-station', 'hygiene-station', 'enrichment'] }
 ]);
 // Props sit behind the walking lane. They never become full-height barriers to
 // a small resident; the hygiene cabinet/counter serves all three berths.
@@ -67,7 +95,7 @@ export const SHIP_ANIMAL_ANNEX_V87 = freeze({
     action: 'ship-animal:care', description: 'Contrôler les équipements et la capacité d’accueil',
     persistent: true, singleStation: true, upgradeId: 'animal-care-services-v87',
     capabilities: ['companion-care'], bounds: { x: props[0].x, y: props[0].y, w: props[0].w, h: props[0].h } },
-  action: 'ship-animal:care', description: 'Trois logements individuels à équiper avant toute acquisition. Aucune boutique à bord.',
+  action: 'ship-animal:care', description: 'Trois logements individuels et deux parcs pour paires liées à équiper avant acquisition. Aucune boutique à bord.',
   scope: 'companion-care', implementedFeatures: ['local-docked-counter', 'physical-arrival-transfer'],
   deferredFeatures: ['dedicated-human-carry-animation'],
   normalHubCreaturesVisible: false, isolatedLevelTarget: null,
@@ -103,7 +131,7 @@ export function installShipAnimalHabitatV87(save, habitatId, context = {}) {
   if (state.schema !== 1 || state.quarantined.length) return failure('state-needs-review');
   if (getShipAnimalHabitatsV87(save).find(entry => entry.id === habitatId)?.installed)
     return { ok: true, changed: false, code: 'already-installed', save: structuredClone(save) };
-  if (context.roomId !== 'animal-care' || context.artReady !== true
+  if (context.paused === true || context.playerAlive === false || context.roomId !== 'animal-care' || context.artReady !== true
     || !Number.isFinite(context.playerX) || Math.abs(context.playerX - definition.installX) > 92
     || !Number.isFinite(context.feetY) || Math.abs(context.feetY - 624) > 12)
     return failure('physical-installation-required');
@@ -122,9 +150,15 @@ export function getShipAnimalRoomInteractionV87(hub, save) {
   const x = hub.player.x + hub.player.w / 2;
   const feetY = hub.player.y + hub.player.h;
   if (Math.abs(feetY - 624) > 12) return null;
-  const uninstalled = getShipAnimalHabitatsV87(save).find(habitat => !habitat.installed && Math.abs(x - habitat.installX) <= 92);
+  const habitats = getShipAnimalHabitatsV87(save);
+  const uninstalled = habitats.filter(habitat => !habitat.installed && Math.abs(x - habitat.installX) <= 92)
+    .sort((a, b) => Math.abs(x - a.installX) - Math.abs(x - b.installX))[0];
   if (uninstalled) return { action: 'ship-animal:install', habitatId: uninstalled.id,
     prompt: 'E — INSTALLER : ' + uninstalled.label.toUpperCase() };
+  const enclosure = habitats.find(habitat => habitat.installed && habitat.navigationDomain === 'enclosure-volume'
+    && Math.abs(x - habitat.installX) <= 52);
+  if (enclosure) return { action: 'ship-animal:observe', habitatId: enclosure.id,
+    prompt: 'E — OBSERVER : ' + enclosure.label.toUpperCase() };
   if (x >= 1525 && x <= 1840) return { action: 'ship-animal:care', prompt: 'E — CONTRÔLER L’ACCUEIL ANIMALIER' };
   return null;
 }

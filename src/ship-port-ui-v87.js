@@ -1,5 +1,5 @@
 import { SHIP_ANIMAL_ATLASES_V87, drawShipAnimalV87, isShipAnimalAtlasReadyV87 } from './ship-animal-art-v87.js';
-import { SHIP_ANIMAL_DEFINITIONS_V87 } from './ship-animal-state-v87.js';
+import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87, getShipAnimalOfferMembersV87 } from './ship-animal-state-v87.js';
 
 // Definitions own identities and labels; model data cannot invent another
 // animal or redirect its preview to an arbitrary/hostile asset.
@@ -10,6 +10,7 @@ const PHASE_LABELS = Object.freeze({ undocked: 'Non amarré', idle: 'Non amarré
   aligning: 'Alignement', docking: 'Verrouillage du raccord', docked: 'Amarré', undocking: 'Largage', departing: 'Éloignement' });
 const string = value => typeof value === 'string' ? value : '';
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
+const memberIds = offer => Array.isArray(offer?.animalIds) ? offer.animalIds : offer?.animalId ? [offer.animalId] : [];
 const focus = element => { if (element?.isConnected !== false && typeof element?.focus === 'function') element.focus({ preventScroll: true }); };
 
 /** Presentation only. Every action is revalidated and committed by the active game owner. */
@@ -53,7 +54,7 @@ export class ShipPortUiV87 {
     const dialog = this.node('dialog', 'ship-port-v87'); dialog.setAttribute('aria-labelledby', 'ship-port-v87-heading');
     dialog.setAttribute('aria-describedby', 'ship-port-v87-description');
     const header = this.node('header', 'ship-port-v87__header');
-    const heading = this.node('h2', 'ship-port-v87__heading', 'Relais civil de la Frontière'); heading.id = 'ship-port-v87-heading';
+    const heading = this.node('h2', 'ship-port-v87__heading', 'Relais civil de la Frontière'); heading.id = 'ship-port-v87-heading'; this.heading = heading;
     this.closeButton = this.button('Fermer', () => this.close(), 'close'); this.closeButton.setAttribute('aria-label', 'Fermer le comptoir et revenir au jeu');
     header.append(heading, this.closeButton);
     const description = this.node('p', 'ship-port-v87__description',
@@ -98,6 +99,8 @@ export class ShipPortUiV87 {
     this.previewStatus = this.node('figcaption', 'ship-port-v87__caption'); visual.append(this.canvas, this.previewStatus);
     this.offerName = this.node('h3', 'ship-port-v87__name'); this.appearance = this.node('p', 'ship-port-v87__appearance');
     this.traits = this.node('p', 'ship-port-v87__traits');
+    this.memberDossiers = this.node('section', 'ship-port-v87__members');
+    this.memberDossiers.setAttribute('aria-label', 'Dossiers des deux membres du duo'); this.memberDossiers.hidden = true;
     this.details = this.node('div', 'ship-port-v87__details'); this.details.hidden = true;
     this.biography = this.node('p', 'ship-port-v87__biography'); this.habitat = this.node('p', 'ship-port-v87__habitat');
     this.price = this.node('p', 'ship-port-v87__price');
@@ -109,7 +112,7 @@ export class ShipPortUiV87 {
     this.confirmButton = this.button('Confirmation indisponible', () => { void this.dispatch('buy'); }, 'buy'); this.confirmButton.disabled = true;
     shopActions.append(this.examineButton, this.confirmButton);
     const information = this.node('div', 'ship-port-v87__information');
-    information.append(this.offerName, this.appearance, this.traits, this.details, this.conditions, shopActions);
+    information.append(this.offerName, this.appearance, this.traits, this.memberDossiers, this.details, this.conditions, shopActions);
     dossier.append(visual, information); this.shopPanel.append(this.tabs, dossier);
     dialog.append(header, description, this.phaseLabel, this.progress, this.message, this.errorLabel, this.terminalPanel, this.shopPanel);
     this.document.body.append(dialog); this.dialog = dialog;
@@ -122,18 +125,23 @@ export class ShipPortUiV87 {
 
   offerFrom(model = this.model) {
     if (!ANIMAL_IDS.includes(this.selectedAnimalId)) return null;
-    return Array.isArray(model.offers) ? model.offers.find(offer => record(offer) && offer.animalId === this.selectedAnimalId) || null : null;
+    return Array.isArray(model.offers) ? model.offers.find(offer => record(offer) && memberIds(offer).includes(this.selectedAnimalId)) || null : null;
   }
 
   signature(offer) {
-    return offer ? JSON.stringify([offer.animalId, offer.costCredits, string(offer.name), string(offer.appearance),
-      string(offer.biography), string(offer.habitatLabel), Array.isArray(offer.traits) ? offer.traits.map(string) : []]) : null;
+    return offer ? JSON.stringify([offer.offerId, offer.vendorId, memberIds(offer), offer.costCredits, string(offer.name), string(offer.appearance),
+      string(offer.biography), string(offer.habitatLabel), Array.isArray(offer.traits) ? offer.traits.map(string) : [],
+      Array.isArray(offer.members) ? offer.members.map(member => [member.id, string(member.name), string(member.appearance), string(member.biography), member.traits]) : []]) : null;
   }
 
   conditionsFor(offer) { return Array.isArray(offer?.conditions) ? offer.conditions.filter(value => typeof value === 'string' && value.trim()) : []; }
 
   canBuy(model, offer) {
+    const ids = memberIds(offer), source = SHIP_ANIMAL_OFFERS_V87[offer?.offerId];
+    const validGroup = ids.length <= 1 || source?.vendorId === offer.vendorId
+      && JSON.stringify(ids) === JSON.stringify(getShipAnimalOfferMembersV87(source));
     return this.mode === 'shop' && !this.pending && model.busy !== true && offer?.owned !== true && offer?.canBuy === true
+      && ids.length > 0 && ids.every(id => ANIMAL_IDS.includes(id)) && validGroup
       && Number.isSafeInteger(offer.costCredits) && offer.costCredits >= 0 && this.conditionsFor(offer).length === 0
       && this.examinedSignature !== null && this.examinedSignature === this.signature(offer);
   }
@@ -172,11 +180,12 @@ export class ShipPortUiV87 {
   refresh() {
     if (this.destroyed) return false;
     this.model = this.readModel(); const model = this.model;
-    const offerIds = Array.isArray(model.offers) ? model.offers.filter(record).map(offer => offer.animalId) : [];
+    const offerIds = Array.isArray(model.offers) ? model.offers.filter(record).flatMap(memberIds) : [];
     if (!offerIds.includes(this.selectedAnimalId)) this.selectedAnimalId = ANIMAL_IDS.find(id => offerIds.includes(id)) || null;
     const offer = this.offerFrom(), locked = this.pending || model.busy === true;
     if (this.examinedSignature !== this.signature(offer)) this.examinedSignature = null;
     const phaseLabel = Object.hasOwn(PHASE_LABELS, model.phase) ? PHASE_LABELS[model.phase] : string(model.phase);
+    this.heading.textContent = this.mode === 'shop' && string(model.vendorName) ? model.vendorName : 'Relais civil de la Frontière';
     this.phaseLabel.textContent = `ESCALE · ${phaseLabel || 'État indisponible'}`;
     this.progress.value = typeof model.progress === 'number' && Number.isFinite(model.progress) ? Math.max(0, Math.min(1, model.progress)) : 0;
     this.message.textContent = string(model.message); this.errorLabel.textContent = this.error; this.errorLabel.hidden = !this.error;
@@ -187,23 +196,34 @@ export class ShipPortUiV87 {
     for (const [id, button] of this.tabButtons) {
       const selected = id === this.selectedAnimalId; button.hidden = !offerIds.includes(id); button.disabled = locked;
       button.tabIndex = selected ? 0 : -1; button.setAttribute('aria-selected', String(selected));
-      const entry = Array.isArray(model.offers) && model.offers.find(candidate => candidate?.animalId === id);
-      button.textContent = string(entry?.name) || SHIP_ANIMAL_DEFINITIONS_V87[id].name;
+      const entry = Array.isArray(model.offers) && model.offers.find(candidate => memberIds(candidate).includes(id));
+      button.textContent = memberIds(entry).length > 1 ? SHIP_ANIMAL_DEFINITIONS_V87[id].name
+        : string(entry?.name) || SHIP_ANIMAL_DEFINITIONS_V87[id].name;
     }
     this.dossier.setAttribute('aria-labelledby', `ship-port-v87-tab-${this.selectedAnimalId}`);
     this.offerName.textContent = string(offer?.name) || 'Aucune offre disponible';
     this.appearance.textContent = string(offer?.appearance);
     this.traits.textContent = Array.isArray(offer?.traits) ? offer.traits.map(string).filter(Boolean).join(' · ') : string(offer?.traits);
     this.biography.textContent = string(offer?.biography);
+    const group = memberIds(offer).length > 1;
+    this.memberDossiers.hidden = !group;
+    this.appearance.hidden = group; this.traits.hidden = group; this.biography.hidden = group;
+    this.memberDossiers.replaceChildren(...(group ? memberIds(offer).map(id => {
+      const member = offer.members?.find(entry => entry.id === id) || SHIP_ANIMAL_DEFINITIONS_V87[id];
+      const section = this.node('section', 'ship-port-v87__member'); section.dataset.animalId = id;
+      section.append(this.node('h4', '', string(member?.name)), this.node('p', '', string(member?.appearance)),
+        this.node('p', '', string(member?.biography)), this.node('p', '', Array.isArray(member?.traits) ? member.traits.map(string).join(' · ') : ''));
+      return section;
+    }) : []));
     this.habitat.textContent = `Habitat requis : ${string(offer?.habitatLabel) || 'non disponible'}`;
     const validCost = Number.isSafeInteger(offer?.costCredits) && offer.costCredits >= 0;
-    this.price.textContent = validCost ? `Coût total : ${offer.costCredits} CR` : 'Tarif indisponible';
+    this.price.textContent = validCost ? `Coût total${group ? ' du duo indivisible' : ''} : ${offer.costCredits} CR` : 'Tarif indisponible';
     this.details.hidden = !offer || this.examinedSignature === null;
     this.conditions.replaceChildren(...this.conditionsFor(offer).map(condition => this.node('li', '', condition)));
     this.conditions.hidden = this.conditions.children.length === 0;
     this.examineButton.disabled = locked || !offer;
     this.examineButton.textContent = this.examinedSignature === null ? 'Examiner le dossier' : 'Dossier examiné';
-    this.confirmButton.textContent = offer?.owned === true ? 'Individu déjà acquis' : validCost ? `Confirmer ${offer.costCredits} CR` : 'Confirmation indisponible';
+    this.confirmButton.textContent = offer?.owned === true ? (group ? 'Duo déjà acquis' : 'Individu déjà acquis') : validCost ? `Confirmer${group ? ' le duo —' : ''} ${offer.costCredits} CR` : 'Confirmation indisponible';
     this.confirmButton.disabled = !this.canBuy(model, offer);
     this.canvas.setAttribute('aria-label', `Prévisualisation de ${string(offer?.name) || 'l’individu'} à échelle constante`);
     this.paintPreview(); this.syncAnimation(); return true;
@@ -216,7 +236,8 @@ export class ShipPortUiV87 {
       : this.mode === 'terminal' && (type === 'dock' ? model.canDock === true : type === 'undock' ? model.canUndock === true
         : type === 'abort' && ABORTABLE_PHASES.has(model.phase)));
     if (!allowed) { this.refresh(); return false; }
-    const epoch = this.epoch, action = type === 'buy' ? { type, animalId: offer.animalId } : { type };
+    const epoch = this.epoch, action = type === 'buy' ? memberIds(offer).length > 1
+      ? { type, offerId: offer.offerId } : { type, animalId: offer.animalId } : { type };
     this.pending = true; this.error = ''; this.refresh();
     try {
       const result = await this.onAction(action);
@@ -246,13 +267,13 @@ export class ShipPortUiV87 {
     const ctx = this.canvas.getContext?.('2d'), offer = this.offerFrom();
     if (!ctx) { this.previewStatus.textContent = 'Prévisualisation indisponible sur cet appareil.'; return; }
     ctx.clearRect(0, 0, 320, 144);
-    const image = offer && this.imageFor(offer.animalId);
-    if (!image || !isShipAnimalAtlasReadyV87(offer.animalId, image)) {
+    const ids = memberIds(offer), images = ids.map(id => this.imageFor(id));
+    if (!ids.length || images.some((image, index) => !image || !isShipAnimalAtlasReadyV87(ids[index], image))) {
       this.previewStatus.textContent = offer ? 'Planche dédiée indisponible ou en chargement.' : 'Aucune planche à afficher.'; return;
     }
     ctx.imageSmoothingEnabled = false;
-    drawShipAnimalV87(ctx, image, { animalId: offer.animalId, x: 160, y: 122, facing: 1,
-      clipId: 'idle', elapsed: this.model.reducedMotion === true ? 0 : this.animationSeconds });
+    ids.forEach((animalId, index) => drawShipAnimalV87(ctx, images[index], { animalId, x: ids.length === 1 ? 160 : 112 + index * 96,
+      y: 122, facing: 1, clipId: 'idle', elapsed: this.model.reducedMotion === true ? 0 : this.animationSeconds }));
     this.previewStatus.textContent = 'Échelle constante entre individus · marine de référence : 92 px.';
   }
 

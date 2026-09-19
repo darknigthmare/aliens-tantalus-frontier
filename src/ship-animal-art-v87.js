@@ -1,3 +1,5 @@
+import { NOISETTE_RECTS_V87, CAFE_RECTS_V87, TIC_RECTS_V87, TAC_RECTS_V87 } from './ship-animal-bonded-frames-v87.js';
+
 const clip = (id, indices, fps, loop, review = 'poses-inspected-motion-unverified') => Object.freeze({
   id, frames: Object.freeze(indices), fps, loop, review
 });
@@ -42,14 +44,20 @@ const LUCIOLE_RECTS = [
   [23,848,169,97,77,94], [212,848,171,97,80,94], [407,848,169,97,77,94], [598,848,169,97,78,94],
   [783,780,168,167,85,164], [961,770,175,177,99,174], [1153,772,174,175,99,172], [1346,773,175,174,98,171]
 ];
-function atlas(animalId, name, rectangles, worldScale, sha256, excludedFrames = [], clipOverrides = {}) {
+function atlas(animalId, name, rectangles, worldScale, sha256, excludedFrames = [], clipOverrides = {}, options = {}) {
   const frames = rectangles.map(([x, y, w, h, pivotX, pivotY], index) => Object.freeze({
     index, x, y, w, h, pivotX, pivotY, safe: !excludedFrames.includes(index),
     exclusionReason: excludedFrames.includes(index) ? 'adjacent-silhouette-alpha-fringe' : null
   }));
-  const clips = Object.freeze({ ...SHIP_ANIMAL_CLIPS_V87, ...clipOverrides });
-  return Object.freeze({ animalId, path: `/assets/openai/ship-animals/v87/${name}-atlas.png`,
+  const selectedClips = { ...SHIP_ANIMAL_CLIPS_V87, ...clipOverrides };
+  if (options.enclosed) {
+    delete selectedClips.pet;
+    selectedClips.groom = clip('groom', [28, 29, 30, 31], 3, false);
+  }
+  const clips = Object.freeze(selectedClips);
+  return Object.freeze({ animalId, path: `/assets/openai/ship-animals/v87/${name}-atlas${options.variant || ''}.png`,
     width: 1536, height: 1024, worldScale, sourceFacing: 1, sha256,
+    sourceLayout: Object.freeze({ columns: options.columns || 8, rows: options.rows || 4 }),
     frames: Object.freeze(frames), clips,
     coverage: Object.freeze({ totalAuthored: 32, runtimeSafe: 32 - excludedFrames.length,
       excludedFrames: Object.freeze([...excludedFrames]), fluidityCertified: false }) });
@@ -64,7 +72,15 @@ export const SHIP_ANIMAL_ATLASES_V87 = Object.freeze({
   // Eating poses 18/19 contain neighboring alpha. Keep the evidence, never draw them.
   'animal-luciole': atlas('animal-luciole', 'luciole', LUCIOLE_RECTS, 0.20,
     '8bef1544aa5cb78f3a2aeec25657e42779620b62f13fe118639399ee2468030a', [18, 19], {
-      eat: clip('eat', [16, 17, 20, 21, 22, 23], 4, true, 'reduced-six-pose-eating-needs-regeneration') })
+      eat: clip('eat', [16, 17, 20, 21, 22, 23], 4, true, 'reduced-six-pose-eating-needs-regeneration') }),
+  'animal-noisette': atlas('animal-noisette', 'noisette', NOISETTE_RECTS_V87, 0.2,
+    '8677223b6b12a054163711fa3214cb1610b2d364d934a6da88410dbe023f2aa8', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' }),
+  'animal-cafe': atlas('animal-cafe', 'cafe', CAFE_RECTS_V87, 0.17,
+    'e004a825fab476379f20dfd1430f62e35d53ec7ab3531d94e78a95ba1f320289', [], {}, { enclosed: true, columns: 8, rows: 4, variant: '' }),
+  'animal-tic': atlas('animal-tic', 'tic', TIC_RECTS_V87, 0.1,
+    '9d5f9bed93e5ae630eed274009c9088ea1ff0048e7b01c8e41f27506855f94a0', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' }),
+  'animal-tac': atlas('animal-tac', 'tac', TAC_RECTS_V87, 0.105,
+    '74623814bc277fb714c82437770cdf8c03e09c5e019967a09bca5610de102091', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' })
 });
 const knownAtlas = animalId => Object.hasOwn(SHIP_ANIMAL_ATLASES_V87, animalId) ? SHIP_ANIMAL_ATLASES_V87[animalId] : null;
 const finite = value => typeof value === 'number' && Number.isFinite(value);

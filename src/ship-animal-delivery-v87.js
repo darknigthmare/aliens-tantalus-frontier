@@ -1,4 +1,5 @@
-import { migrateShipAnimalStateV87, transitionShipAnimalV87 } from './ship-animal-state-v87.js';
+import { migrateShipAnimalStateV87, transitionShipAnimalV87, transitionShipAnimalGroupV87,
+  SHIP_ANIMAL_OFFERS_V87, getShipAnimalOfferMembersV87, getShipAnimalHabitatLocationV87 } from './ship-animal-state-v87.js';
 import { getShipAnimalHabitatsV87, SHIP_ANIMAL_ANNEX_V87 } from './ship-animal-habitat-v87.js';
 import { SHIP_PORT_ANNEX_V87, SHIP_PORT_MEETINGS_V87 } from './ship-port-room-v87.js';
 import { HUB_DECKS, HUB_WORLD } from './hub-game.js';
@@ -19,6 +20,20 @@ const unchanged = (save, code = 'unchanged') => ({ ok: true, changed: false, cod
 const berth = (save, animal) => getShipAnimalHabitatsV87(save).find(h => h.id === animal.habitatId && h.installed);
 const meeting = id => SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === id);
 const localTransit = animal => animal.routineV87?.phase === 'walk';
+const membersOf = animal => getShipAnimalOfferMembersV87(SHIP_ANIMAL_OFFERS_V87[animal?.acquisition?.offerId]);
+const leaderOf = (state, animalId) => {
+  const animal = Object.hasOwn(state.animals, animalId) && state.animals[animalId];
+  return animal ? state.animals[membersOf(animal)[0]] : null;
+};
+const anchorFor = (save, animal) => getShipAnimalHabitatLocationV87(berth(save, animal), animal.id);
+const receivingPoint = habitat => habitat.receivingPoint ? { ...habitat.location, ...habitat.receivingPoint } : habitat.location;
+function touchMembers(state, animal, { time = null, activity = null } = {}) {
+  for (const id of membersOf(animal)) {
+    const member = state.animals[id]; member.revision += 1;
+    if (time !== null) member.lastSimulationTime = time;
+    if (activity !== null) member.activity = activity;
+  }
+}
 function validPlayer(player) {
   if (!record(player) || player.alive === false || !finite(player.x) || !finite(player.y)
     || player.y < 0 || player.y > HUB_WORLD.floorY + 12) return false;
@@ -36,7 +51,7 @@ function expectedTransit(animal, habitat) {
   return offer && habitat && animal.location.kind === 'transit' && !localTransit(animal)
     && from?.hubId === 'frontier-civil-relay' && from.roomId === SHIP_PORT_ANNEX_V87.id
     && from.deckId === 'engineering' && from.x === offer.x && from.y === 624
-    && samePlace(animal.location.to, habitat.location);
+    && samePlace(animal.location.to, getShipAnimalHabitatLocationV87(habitat, animal.id));
 }
 function initialDelivery(time) {
   return { schema: 87, phase: 'awaiting-pickup', elapsed: 0, lastSimulationTime: time,
@@ -52,8 +67,7 @@ function checkpointMatches(point, index) {
   return index === 3 && point.roomId === 'animal-care' && point.deckId === 'habitat'
     && near(point.x, SHIP_ANIMAL_ANNEX_V87.entranceLocalX, 150);
 }
-function validateDelivery(save, animal) {
-  const delivery = animal.deliveryV87;
+function validateDelivery(save, animal, delivery = animal.deliveryV87) {
   if (delivery === undefined) return null;
   if (!record(delivery) || delivery.schema !== 87 || !PHASES.includes(delivery.phase)
     || !finite(delivery.elapsed) || delivery.elapsed < 0 || !finite(delivery.lastSimulationTime)
@@ -70,7 +84,7 @@ function validateDelivery(save, animal) {
     && delivery.checkpoints.length === 4 && (animal.location.kind === 'resident' || localTransit(animal))
     ? null : 'invalid-delivery';
   if (delivery.phase === 'intake' || delivery.phase === 'acclimating')
-    return animal.location.kind === delivery.phase && samePlace(animal.location, habitat.location)
+    return animal.location.kind === delivery.phase && samePlace(animal.location, getShipAnimalHabitatLocationV87(habitat, animal.id))
       && delivery.checkpoints.length === 4 && delivery.carrierLocation === null
       && delivery.elapsed < SHIP_ANIMAL_DELIVERY_TIMING_V87[delivery.phase] ? null : 'invalid-delivery';
   if (!expectedTransit(animal, habitat) || delivery.elapsed !== 0) return 'invalid-delivery';
@@ -90,9 +104,24 @@ function load(save) {
   if (state.quarantined.length) return { error: 'state-needs-review' };
   const candidate = { ...save, shipAnimalsV1: state };
   for (const animal of Object.values(state.animals)) {
-    const error = validateDelivery(candidate, animal);
+    const members = membersOf(animal), leader = state.animals[members[0]];
+    const delivery = leader.deliveryV87;
+    if (members.length > 1) {
+      const present = members.filter(id => state.animals[id].deliveryV87 !== undefined);
+      if (present.length && present.length !== members.length) return { error: 'invalid-group-delivery' };
+      if (present.length) {
+        const reference = state.animals[members[1]].deliveryV87;
+        if (!record(delivery) || delivery.unitId !== leader.acquisition.transactionId
+          || !Array.isArray(delivery.memberIds) || delivery.memberIds.length !== members.length
+          || delivery.memberIds.some((id, i) => id !== members[i]) || Object.hasOwn(delivery, 'leaderId')
+          || !record(reference) || reference.schema !== 87 || reference.unitId !== delivery.unitId
+          || reference.leaderId !== leader.id || Object.keys(reference).length !== 3) return { error: 'invalid-group-delivery' };
+      }
+    } else if (delivery && ['unitId', 'memberIds', 'leaderId'].some(key => Object.hasOwn(delivery, key)))
+      return { error: 'invalid-delivery' };
+    const error = validateDelivery(candidate, animal, delivery);
     if (error) return { error };
-    if (animal.deliveryV87?.lastSimulationTime > state.lastSimulationTime + EPS)
+    if (delivery?.lastSimulationTime > state.lastSimulationTime + EPS)
       return { error: 'invalid-delivery-clock' };
   }
   if (Object.values(state.animals).filter(a => a.deliveryV87?.phase === 'carried').length > 1)
@@ -113,12 +142,20 @@ function validContextTime(state, time) {
 export function initializeShipAnimalDeliveryV87(save, { animalId } = {}) {
   const { state, error } = load(save);
   if (error) return fail(save, error);
-  const animal = Object.hasOwn(state.animals, animalId) && state.animals[animalId];
+  const animal = leaderOf(state, animalId);
   if (!animal) return fail(save, 'animal-not-owned');
   if (animal.deliveryV87) return unchanged(save, 'already-initialized');
-  if (!expectedTransit(animal, berth(save, animal)) || animal.location.progress !== 0)
+  const members = membersOf(animal);
+  if (members.some(id => !expectedTransit(state.animals[id], berth(save, state.animals[id])) || state.animals[id].location.progress !== 0))
     return fail(save, 'invalid-commercial-transit');
-  animal.deliveryV87 = initialDelivery(state.lastSimulationTime); animal.revision += 1;
+  animal.deliveryV87 = initialDelivery(state.lastSimulationTime);
+  if (members.length > 1) {
+    animal.deliveryV87.unitId = animal.acquisition.transactionId;
+    animal.deliveryV87.memberIds = members;
+    for (const id of members.slice(1)) state.animals[id].deliveryV87 = {
+      schema: 87, unitId: animal.deliveryV87.unitId, leaderId: animal.id };
+  }
+  touchMembers(state, animal);
   return commitCandidate(save, state, [], 'delivery-initialized');
 }
 
@@ -129,7 +166,7 @@ export function pickupShipAnimalDeliveryV87(save, { animalId } = {}, {
   if (!prepared.ok) return prepared;
   const { state, error } = load(prepared.save);
   if (error) return fail(save, error);
-  const animal = state.animals[animalId];
+  const animal = leaderOf(state, animalId);
   const delivery = animal.deliveryV87;
   const recovering = delivery.phase === 'awaiting-recovery';
   if (delivery.phase !== 'awaiting-pickup' && !recovering) return unchanged(save, 'already-picked-up');
@@ -146,7 +183,7 @@ export function pickupShipAnimalDeliveryV87(save, { animalId } = {}, {
   delivery.carrierLocation = pose(player, state.lastSimulationTime);
   // A physical re-grasp may move within reach, but never resets the route proof.
   delivery.waypoints = [...(recovering ? delivery.waypoints : []), clone(delivery.carrierLocation)].slice(-32);
-  animal.activity = 'carried'; animal.revision += 1;
+  touchMembers(state, animal, { activity: 'carried' });
   return commitCandidate(save, state,
     [{ type: recovering ? 'animal-container-recovered' : 'animal-container-picked-up', animalId }],
     recovering ? 'recovered' : 'picked-up');
@@ -157,14 +194,14 @@ export function dropShipAnimalDeliveryV87(save, { animalId } = {}, { reason = 'c
   const { state, error } = load(save);
   if (error) return fail(save, error);
   if (reason !== 'carrier-discontinuity') return fail(save, 'invalid-drop-reason');
-  const animal = Object.hasOwn(state.animals, animalId) && state.animals[animalId];
+  const animal = leaderOf(state, animalId);
   if (!animal) return fail(save, 'animal-not-owned');
   const delivery = animal.deliveryV87;
   if (!delivery) return fail(save, 'delivery-not-started');
   if (delivery.phase === 'awaiting-recovery') return unchanged(save, 'already-awaiting-recovery');
   if (delivery.phase !== 'carried') return fail(save, 'container-not-carried');
   // Keep location, progress, waypoints, checkpoints and every simulation clock exact.
-  delivery.phase = 'awaiting-recovery'; animal.revision += 1;
+  delivery.phase = 'awaiting-recovery'; touchMembers(state, animal);
   return commitCandidate(save, state,
     [{ type: 'animal-container-dropped', animalId, reason }], 'awaiting-recovery');
 }
@@ -197,6 +234,16 @@ function continuousCarry(from, to, dt) {
       && destination.roomId === to.roomId && near(to.x, destination.destinationCenterX, 40)));
 }
 function transition(candidate, animalId, location, stage, time, extra = {}) {
+  const animal = candidate.shipAnimalsV1.animals[animalId];
+  const members = membersOf(animal);
+  if (members.length > 1) return transitionShipAnimalGroupV87(candidate, {
+    offerId: animal.acquisition.offerId, transactionId: 'delivery-v87-' + animal.bondedGroupId + '-' + stage,
+    locationsByAnimalId: Object.fromEntries(members.map(id => {
+      const member = candidate.shipAnimalsV1.animals[id];
+      return [id, location.kind === 'transit' ? { ...member.location, progress: location.progress }
+        : { kind: location.kind, ...anchorFor(candidate, member) }];
+    }))
+  }, { ...extra, simulationTime: time, canTransition: () => true });
   return transitionShipAnimalV87(candidate, {
     animalId, location, transactionId: 'delivery-v87-' + animalId + '-' + stage
   }, { ...extra, simulationTime: time, canTransition: () => true });
@@ -244,15 +291,15 @@ export function stepShipAnimalDeliveryV87(save, { delta = 0, simulationTime = nu
         events.push({ type: 'animal-carry-checkpoint', animalId: animal.id, checkpoint: stage + 1 });
       }
     } else {
-      const habitat = berth(candidate, animal);
-      if (player.roomId !== habitat.location.roomId || player.deckId !== habitat.location.deckId
-        || !near(player.x, habitat.location.x, 100) || !near(player.y, 624, 12)) continue;
+      const habitat = berth(candidate, animal), receiving = receivingPoint(habitat);
+      if (player.roomId !== receiving.roomId || player.deckId !== receiving.deckId
+        || !near(player.x, receiving.x, 100) || !near(player.y, receiving.y, 12)) continue;
       delivery.elapsed += dt;
       const duration = SHIP_ANIMAL_DELIVERY_TIMING_V87[delivery.phase];
       if (delivery.elapsed + EPS >= duration) {
         const next = delivery.phase === 'intake' ? 'acclimating' : 'resident';
         delivery.elapsed = 0;
-        const result = transition(candidate, animal.id, { kind: next, ...habitat.location }, next, target,
+        const result = transition(candidate, animal.id, { kind: next, ...anchorFor(candidate, animal) }, next, target,
           { arrivalCheckPassed: next === 'acclimating', acclimationComplete: next === 'resident' });
         if (!result.ok) return fail(save, result.code);
         candidate = result.save; animal = candidate.shipAnimalsV1.animals[original.id]; delivery = animal.deliveryV87;
@@ -260,7 +307,7 @@ export function stepShipAnimalDeliveryV87(save, { delta = 0, simulationTime = nu
         events.push({ type: 'animal-delivery-stage', animalId: animal.id, phase: delivery.phase });
       }
     }
-    delivery.lastSimulationTime = target; animal.lastSimulationTime = target; animal.revision += 1;
+    delivery.lastSimulationTime = target; touchMembers(candidate.shipAnimalsV1, animal, { time: target });
     changed = true;
   }
   if (!changed) return unchanged(save);
@@ -273,21 +320,21 @@ export function receiveShipAnimalDeliveryV87(save, { animalId } = {}, {
 } = {}) {
   const { state, error } = load(save);
   if (error) return fail(save, error);
-  const animal = Object.hasOwn(state.animals, animalId) && state.animals[animalId];
+  const animal = leaderOf(state, animalId);
   const delivery = animal?.deliveryV87;
   if (!delivery) return fail(save, 'delivery-not-started');
   if (['intake', 'acclimating', 'delivered'].includes(delivery.phase)) return unchanged(save, 'already-received');
   if (transferBlocked) return fail(save, 'transfer-blocked');
   if (!validContextTime(state, simulationTime)) return fail(save, 'invalid-simulation-time');
   if (delivery.phase !== 'carried' || delivery.checkpoints.length !== 4) return fail(save, 'physical-route-incomplete');
-  const habitat = berth(save, animal);
-  if (!validPlayer(player) || player.roomId !== habitat.location.roomId || player.deckId !== habitat.location.deckId
-    || !near(player.x, habitat.location.x, 85) || !near(player.y, 624, 12)
+  const habitat = berth(save, animal), receiving = receivingPoint(habitat);
+  if (!validPlayer(player) || player.roomId !== receiving.roomId || player.deckId !== receiving.deckId
+    || !near(player.x, receiving.x, 85) || !near(player.y, receiving.y, 12)
     || !equalPose(player, delivery.carrierLocation)) return fail(save, 'physical-reception-required');
   let candidate = { ...clone(save), shipAnimalsV1: state };
   const finished = transition(candidate, animal.id, { ...animal.location, progress: 1 }, 'transport-complete', state.lastSimulationTime);
   if (!finished.ok) return fail(save, finished.code);
-  const received = transition(finished.save, animal.id, { kind: 'intake', ...habitat.location },
+  const received = transition(finished.save, animal.id, { kind: 'intake', ...anchorFor(finished.save, animal) },
     'intake', state.lastSimulationTime, { transportComplete: true });
   if (!received.ok) return fail(save, received.code);
   candidate = received.save;
@@ -305,11 +352,23 @@ export function sampleShipAnimalDeliveriesV87(save) {
   if (error) return [];
   return Object.values(state.animals).flatMap(animal => {
     const delivery = animal.deliveryV87;
-    if (!delivery || delivery.phase === 'delivered' || localTransit(animal)) return [];
+    if (!delivery || !PHASES.includes(delivery.phase) || delivery.phase === 'delivered' || localTransit(animal)) return [];
     const location = delivery.phase === 'awaiting-pickup' ? animal.location.from
-      : ['carried', 'awaiting-recovery'].includes(delivery.phase) ? delivery.carrierLocation : animal.location;
-    return [{ animalId: animal.id, phase: delivery.phase, elapsed: delivery.elapsed,
+      : ['carried', 'awaiting-recovery'].includes(delivery.phase) ? delivery.carrierLocation
+        : delivery.memberIds ? receivingPoint(berth(save, animal)) : animal.location;
+    return [{ animalId: animal.id, ...(delivery.memberIds ? { animalIds: [...delivery.memberIds], unitId: delivery.unitId } : {}),
+      phase: delivery.phase, elapsed: delivery.elapsed,
       roomId: location.roomId, deckId: location.deckId, x: location.x, y: location.y,
       carried: delivery.phase === 'carried', checkpoints: delivery.checkpoints.length }];
   });
+}
+
+/** Read-only resolution from either member; never creates another ownership list or route. */
+export function getShipAnimalDeliveryUnitV87(save, animalId) {
+  const { state, error } = load(save);
+  if (error) return null;
+  const leader = leaderOf(state, animalId);
+  if (!leader?.deliveryV87) return null;
+  return { animalId: leader.id, animalIds: membersOf(leader), unitId: leader.deliveryV87.unitId || leader.id,
+    phase: leader.deliveryV87.phase, delivery: clone(leader.deliveryV87) };
 }
