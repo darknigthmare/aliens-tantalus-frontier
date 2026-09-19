@@ -24,11 +24,13 @@ import {
   validateAlienSurvivalCompletionV70
 } from './alien-survival-systems-v70.js';
 import {
-  HUB_ANNEX_BY_ID_V71,
   HUB_COMMERCIAL_SCHEMA_V71,
-  createHubCommercialStateV71,
-  sanitizeHubCommercialStateV71
 } from './tantalus-hub-expansion-v71.js';
+import {
+  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
+  createHubCommercialStateV87 as createHubCommercialStateV71,
+  sanitizeHubCommercialStateV87 as sanitizeHubCommercialStateV71
+} from './hub-annex-registry-v87.js';
 import {
   createHubAnnexOperationsV71,
   sanitizeHubAnnexOperationsV71,
@@ -42,6 +44,7 @@ import { createBioforgeV80, sanitizeBioforgeV80 } from './bioforge-session-v80.j
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { createPlayerOnboardingV84, normalizePlayerOnboardingV84, validatePlayerIdentityV84 } from './player-onboarding-v84.js';
 import { createRecruitmentV85, sanitizeRecruitmentV85, sanitizeRecruitProfileV85, generateNextRecruitmentPoolV85, resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
+import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
 
 export const SAVE_SCHEMA = 52;
 export const SAVE_PREFIX = 'atf-v47-profile-';
@@ -262,6 +265,7 @@ export function createDefaultSave(profile = 1) {
     alphaBravoDoctrine: createAlphaBravoDoctrineV69(),
     alienSurvivalSystems: createAlienSurvivalSystemsV70(),
     bioforgeV80: createBioforgeV80(),
+    shipAnimalsV1: migrateShipAnimalStateV87(),
     editor: { projects: [], activeProjectId: null },
     memorial: [],
     settings: {
@@ -2000,6 +2004,7 @@ export function migrateSave(input, profile = 1) {
   migrated.alphaBravoDoctrine = normalizeAlphaBravoDoctrineV69(source.alphaBravoDoctrine);
   migrated.alienSurvivalSystems = normalizeAlienSurvivalSystemsV70(source.alienSurvivalSystems);
   migrated.bioforgeV80 = sanitizeBioforgeV80(source.bioforgeV80);
+  migrated.shipAnimalsV1 = migrateShipAnimalStateV87(source.shipAnimalsV1);
   if (migrated.strategy.lastOperation?.campaignId === ALPHA_BRAVO_DOCTRINE_V69.campaignId) {
     const matchingRun = migrated.alphaBravoDoctrine.runs.find((run) => run.operationId === migrated.strategy.lastOperation.id);
     if (matchingRun) migrated.strategy.lastOperation.alphaBravoDoctrineRun = structuredClone(matchingRun);

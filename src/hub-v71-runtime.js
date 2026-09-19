@@ -4,13 +4,17 @@ import {
   HubGame as HubGameV62
 } from './hub-v62-runtime.js';
 import {
-  HUB_ANNEX_BY_ID_V71,
   HUB_ANNEX_WORLD_V71,
-  HUB_ANNEXES_V71,
-  applyHubAnnexStationV71,
-  buildHubCommercialGraphV71,
-  createHubCommercialStateV71
 } from './tantalus-hub-expansion-v71.js';
+import {
+  HUB_ANNEX_BY_ID_V87 as HUB_ANNEX_BY_ID_V71,
+  HUB_ANNEXES_V87 as HUB_ANNEXES_V71,
+  buildHubRuntimeGraphV87 as buildHubCommercialGraphV71,
+  applyHubAnnexStationV87 as applyHubAnnexStationV71,
+  createHubCommercialStateV87 as createHubCommercialStateV71
+} from './hub-annex-registry-v87.js';
+import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, drawShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
+import { drawTiledMissionCropV87, MISSION_STRUCTURE_CROPS_V87 } from './mission-structure-art-v87.js';
 import { fitHubBitmapV72 } from './hub-annex-art-layout-v72.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 
@@ -26,6 +30,7 @@ export const HUB_ANNEX_ART_ROLES_V71 = Object.freeze(['far', 'mid', 'prop', 'for
 // Their surrounding sheets contain detached bases or opaque white openings;
 // drawing the whole sheet would put those defects directly in the walking lane.
 export const HUB_ANNEX_MODULE_ART_V82 = Object.freeze({
+  floor: '/assets/openai/metroidvania/props/floor-segment.png',
   catwalk: '/assets/openai/metroidvania/props/overhead-catwalk.png',
   ladder: '/assets/openai/metroidvania/props/wall-ladder.png',
   pipe: '/assets/openai/metroidvania/props/maintenance-pipe.png',
@@ -103,7 +108,9 @@ function layerSourceRect(image, cameraX, factor = 1) {
 }
 
 function mutableCommercialState(rawState) {
-  return clone(createHubCommercialStateV71(rawState));
+  const normalized = createHubCommercialStateV71(rawState);
+  return clone(normalized.registryVersion === 87 && normalized.schema === 71
+    ? normalized : createHubCommercialStateV71());
 }
 
 /**
@@ -133,6 +140,8 @@ export class HubGame extends HubGameV62 {
   }
 
   start(hubState = {}, options = {}) {
+    const sourceRegistry = hubState[HUB_ANNEX_STATE_KEY_V71] || hubState.hubExpansionV71 || hubState.commercialV71;
+    this.annexStateReadOnlyV87 = Number(sourceRegistry?.schema) > 71 || Number(sourceRegistry?.registryVersion) > 87;
     const restored = mutableCommercialState(
       hubState[HUB_ANNEX_STATE_KEY_V71]
       || hubState.hubExpansionV71
@@ -261,14 +270,14 @@ export class HubGame extends HubGameV62 {
     const annex = HUB_ANNEX_BY_ID_V71[annexId];
     if (!annex) return null;
     if (!this.annexImagesV71.has(annex.id)) {
-      this.annexImagesV71.set(annex.id, new Map(HUB_ANNEX_ART_ROLES_V71.map((role) => [
+      this.annexImagesV71.set(annex.id, new Map((annex.artRoles || HUB_ANNEX_ART_ROLES_V71).map((role) => [
         role,
         createImage(annex.art[role])
       ])));
     }
     const provingAssets = annex.id === 'proving-ground'
       ? [HUB_ANNEX_MODULE_ART_V82.provingWall, HUB_ANNEX_MODULE_ART_V82.provingCeiling]
-      : [];
+      : annex.id === 'animal-care' ? [HUB_ANNEX_MODULE_ART_V82.floor] : [];
     for (const asset of [...annex.props.map((prop) => prop.asset), HUB_ANNEX_MODULE_ART_V82.pipe, HUB_ANNEX_MODULE_ART_V82.catwalk, HUB_ANNEX_MODULE_ART_V82.ladder, ...provingAssets].filter(Boolean)) {
       if (!this.annexModularImagesV72.has(asset)) this.annexModularImagesV72.set(asset, createImage(asset));
     }
@@ -301,7 +310,7 @@ export class HubGame extends HubGameV62 {
           : support.x + support.w - sideOffset)
       : room.xStart + (annex.entranceSide === 'west' ? 220 : HUB_WORLD.roomWidth - 220);
     const bottom = support?.y || HUB_WORLD.floorY;
-    const bounds = {
+    const bounds = annex.parentDoorBounds ? { ...annex.parentDoorBounds } : {
       x: centerX - annex.entrance.w / 2,
       y: bottom - annex.entrance.h,
       w: annex.entrance.w,
@@ -376,6 +385,10 @@ export class HubGame extends HubGameV62 {
     if (this.isAnnexActiveV71()) {
       const annex = this.currentAnnexV71();
       if (this.nearestAnnexExitV71()) return `E — SORTIR VERS ${annex.parentRoomId.toUpperCase()}`;
+      if (annex.id === 'animal-care') {
+        const interaction = getShipAnimalRoomInteractionV87(this, this.npcRoutineContextV62?.save);
+        return interaction?.prompt || 'ACCUEIL ANIMALIER · ÉQUIPEZ LES LOGEMENTS AU SOL · E — UTILISER';
+      }
       const station = this.nearestAnnexStationV71();
       if (station) return `E — ${station.description.toUpperCase()}`;
       return 'A / D — MARCHER · MAJ — COURIR · ESPACE — SAUTER · E — UTILISER';
@@ -386,10 +399,15 @@ export class HubGame extends HubGameV62 {
   }
 
   interact() {
-    if (!this.running || this.annexTransitionV71) return;
+    if (!this.running || this.annexTransitionV71 || this.annexStateReadOnlyV87) return;
     if (this.isAnnexActiveV71()) {
       if (this.nearestAnnexExitV71()) {
         this.beginAnnexTransitionV71(this.currentAnnexV71().id, 'exit');
+        return;
+      }
+      if (this.currentAnnexV71()?.id === 'animal-care') {
+        const interaction = getShipAnimalRoomInteractionV87(this, this.npcRoutineContextV62?.save);
+        if (interaction) this.onAction(interaction);
         return;
       }
       const station = this.nearestAnnexStationV71();
@@ -810,7 +828,7 @@ export class HubGame extends HubGameV62 {
   }
 
   persist() {
-    if (!this.state || !this.player) return;
+    if (!this.state || !this.player || this.annexStateReadOnlyV87) return;
     const annex = this.currentAnnexV71();
     if (annex) {
       this.hubCommercialStateV71.annexPositionX = Math.round(this.player.x);
@@ -852,7 +870,7 @@ export class HubGame extends HubGameV62 {
     const modularReady = [...(this.annexModularImagesV72?.values() || [])].filter(imageReady).length;
     return {
       ...report,
-      annexAssetCountV71: HUB_ANNEXES_V71.length * HUB_ANNEX_ART_ROLES_V71.length,
+      annexAssetCountV71: HUB_ANNEXES_V71.reduce((count, annex) => count + (annex.artRoles || HUB_ANNEX_ART_ROLES_V71).length, 0),
       annexAssetsLoadedV71: loaded,
       annexAssetsReadyV71: ready,
       annexAssetGroupsLoadedV71: groups.length,
@@ -929,7 +947,7 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(room.name.toUpperCase(), 36, 65);
     ctx.fillStyle = '#9cc9aa';
     ctx.font = '700 12px ui-monospace, monospace';
-    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats} · HUB 16 + ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/10`, 300, 65);
+    ctx.fillText(`SANTÉ ${Math.round(this.player.health)}% · MENACES ${threats} · HUB 16 + ANNEXES ${this.hubCommercialStateV71.visitedAnnexIds.length}/${HUB_ANNEXES_V71.length}`, 300, 65);
     this.drawSinglePromptV71(ctx, prompt);
   }
 
@@ -953,7 +971,18 @@ export class HubGame extends HubGameV62 {
     ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
     ctx.fillStyle = '#020606';
     ctx.fillRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
-    if (annex.id === 'proving-ground') {
+    if (annex.id === 'animal-care') {
+      const wall = images.get('far');
+      if (imageReady(wall)) {
+        // World-anchored wall modules, not a stretched painting of a whole room.
+        const scale = annex.world.floorY / wall.naturalHeight;
+        const tileWidth = wall.naturalWidth * scale;
+        for (let x = 0; x < annex.world.width; x += tileWidth) {
+          const width = Math.min(tileWidth, annex.world.width - x);
+          ctx.drawImage(wall, 0, 0, width / scale, wall.naturalHeight, x - this.annexCameraV71.x, 0, width, annex.world.floorY);
+        }
+      }
+    } else if (annex.id === 'proving-ground') {
       // The old painted range has false targets and a perspective floor. Only
       // the orthographic V82 wall belongs behind the actual physical targets.
       this.drawAnnexLayerV71(ctx, this.annexModularImagesV72.get(HUB_ANNEX_MODULE_ART_V82.provingWall), 0.18, 1);
@@ -964,8 +993,12 @@ export class HubGame extends HubGameV62 {
     ctx.save();
     ctx.translate(-this.annexCameraV71.x, 0);
     this.drawAnnexGeometryV71(ctx, annex);
-    this.drawAnnexModularPropsV72(ctx, annex);
-    this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
+    if (annex.id === 'animal-care') {
+      drawShipAnimalHabitatV87(ctx, images.get('prop'), this.npcRoutineContextV62?.save);
+    } else {
+      this.drawAnnexModularPropsV72(ctx, annex);
+      this.drawAnnexPropLayerV71(ctx, annex, images.get('prop'));
+    }
     this.drawDoorBitmapV71(ctx, images.get('door'), this.annexExitDoorV71().bounds, this.nearestAnnexExitV71() ? 1 : 0, annex.art.alphaBounds.door);
     super.drawPlayer(ctx);
     this.drawAnnexForegroundV72(ctx, annex, images.get('foreground'));
@@ -990,6 +1023,9 @@ export class HubGame extends HubGameV62 {
     const ladderImage = this.annexModularImagesV72.get(moduleArt.ladder);
     ctx.fillStyle = 'rgba(4, 10, 9, .8)';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, annex.world.floorHeight);
+    if (annex.id === 'animal-care') drawTiledMissionCropV87(ctx,
+      this.annexModularImagesV72.get(moduleArt.floor), MISSION_STRUCTURE_CROPS_V87.floorPanel,
+      { x: 0, y: annex.world.floorY, w: annex.world.width, h: annex.world.floorHeight });
     ctx.fillStyle = '#789080';
     ctx.fillRect(0, annex.world.floorY, annex.world.width, 4);
     for (const platform of annex.platforms.filter((entry) => entry.role !== 'floor')) {
@@ -1168,7 +1204,10 @@ export class HubGame extends HubGameV62 {
     ctx.fillText(annex.shortName, 36, 67);
     ctx.fillStyle = annexState.station.activated ? '#9bdcac' : '#d4c778';
     ctx.font = '700 12px ui-monospace, monospace';
-    ctx.fillText(annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);
+    const fitted = annex.id === 'animal-care'
+      ? getShipAnimalHabitatsV87(this.npcRoutineContextV62?.save).filter(habitat => habitat.installed).length : null;
+    ctx.fillText(fitted !== null ? `LOGEMENTS ÉQUIPÉS ${fitted}/2`
+      : annexState.station.activated ? 'STATION CALIBRÉE' : 'STATION À CALIBRER', 492, 67);
     this.drawSinglePromptV71(ctx, this.statusPrompt());
   }
 
