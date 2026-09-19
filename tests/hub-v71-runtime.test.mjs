@@ -147,10 +147,10 @@ function placeAtAnnexExit(hub) {
   });
 }
 
-test('le runtime V71 expose le graphe 26 nœuds et charge les cinq couches uniquement à l’approche de chaque annexe', () => withRuntime(() => {
+test('le runtime expose 27 nœuds (26 historiques + accueil) et charge les couches à l’approche', () => withRuntime(() => {
   const { hub } = createHub();
-  assert.equal(hub.hubCommercialGraphV71.nodes.length, 26);
-  assert.equal(hub.hubCommercialGraphV71.edges.length, 28);
+  assert.equal(hub.hubCommercialGraphV71.nodes.length, 27);
+  assert.equal(hub.hubCommercialGraphV71.edges.length, 29);
   assert.equal(hub.annexImagesV71.size, 0);
 
   hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
@@ -168,7 +168,7 @@ test('le runtime V71 expose le graphe 26 nœuds et charge les cinq couches uniqu
     HUB_ANNEX_ART_ROLES_V71.map((role) => archives.art[role])
   );
   const report = hub.getAssetReport();
-  assert.equal(report.annexAssetCountV71, 50);
+  assert.equal(report.annexAssetCountV71, 53);
   assert.equal(report.annexAssetsLoadedV71, 5);
   assert.equal(report.annexAssetsReadyV71, 5);
   assert.equal(report.annexAssetGroupsLoadedV71, 1);
@@ -200,7 +200,7 @@ test('les dix portes physiques permettent dix allers-retours animés et dix stat
     assert.equal(snapshot.activeAnnexV71, true, annex.id);
     assert.equal(snapshot.activeAnnexIdV71, annex.id);
     assert.equal(snapshot.roomId, annex.id);
-    assert.equal(snapshot.hubCommercialGraphRoomCountV71, 26);
+    assert.equal(snapshot.hubCommercialGraphRoomCountV71, 27);
     assert.equal(snapshot.activeAnnexAssetsReadyV71, 5);
     assert.ok(snapshot.x >= 24 && snapshot.x <= annex.world.width - hub.player.w - 24);
 
@@ -229,7 +229,7 @@ test('les dix portes physiques permettent dix allers-retours animés et dix stat
   assert.deepEqual(commercial.activatedStationIds, HUB_ANNEXES_V71.map((annex) => annex.station.id));
   assert.deepEqual(
     commercial.stationUses,
-    Object.fromEntries(HUB_ANNEXES_V71.map((annex) => [annex.id, 1]))
+    { ...Object.fromEntries(HUB_ANNEXES_V71.map((annex) => [annex.id, 1])), 'animal-care': 0 }
   );
   assert.ok(HUB_ANNEXES_V71.every((annex) => commercial.annexes[annex.id].visitCount === 1));
   assert.equal(actions.filter((event) => event.type === 'hub:annex-station').length, 10);

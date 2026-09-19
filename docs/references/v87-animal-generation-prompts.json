@@ -1,0 +1,36 @@
+{
+  "mode": "integrated-imagegen-only",
+  "date": "2026-09-19",
+  "assets": [
+    {
+      "file": "assets/openai/ship-animals/v87/moka-atlas.png",
+      "prompt": "Use case: stylized-concept. Asset type: production 2D side-view game animation sprite sheet, genuinely transparent PNG alpha, landscape 1536x1024. Subject: Moka, ONE consistent original adult ginger domestic cat with rounded ears, compact realistic adult-cat proportions, cream muzzle and chest, subtle darker ginger tabby stripes, warm amber eyes. This is an original companion for the Tantalus ship, not Jones and not a memorial pet. High-quality hand-painted pixel-art look, clean readable silhouette suitable for scaling down to 58 pixels high in a modern 2D metroidvania. Strict horizontal orthographic side view, animal faces RIGHT in every frame, camera never rotates. EXACTLY 32 separate full-body animation poses in a strict uniform 8 columns by 4 rows grid, cells 192x256. Each animal fits entirely within its cell with transparent padding on all sides, consistent body scale and grounded baseline at y=208 inside each cell; tail never crosses cell boundaries. Row1: 8 distinct sequential poses of ONE smoothly looping walk cycle, all paws naturally articulate and weight shifts, no duplicates. Row2: first4 standing relaxed breathing frames, last4 progressive sitting-down transition frames. Row3: 8 sequential lowered-head eating/licking poses, NO food bowl or other object. Row4: first4 curled sleeping breathing poses, last4 seated content head-tilt/blink petting-reaction poses, NO human hand. Keep markings, ear shape, anatomy and size identical in every pose. Soft neutral diffuse light, crisp edges, no environmental tint. No floor, no cast shadow, no scenery, no props, no grid lines, no numbers, no labels, no text, no watermark. Background must be actual alpha transparency, NOT white, black, checkerboard or a painted substitute.",
+      "authoredPoses": 32,
+      "runtimeSafePoses": 32
+    },
+    {
+      "file": "assets/openai/ship-animals/v87/brume-atlas.png",
+      "prompt": "Use case: stylized-concept. Create a transparent-background PNG sprite atlas cutout, 1536x1024, for a 2D side-scrolling game. Alpha channel transparency outside the animal is essential: no background illustration, no colored backdrop, no white matte, no floor and no shadow. Subject is one consistent original medium-sized grey female domestic dog, Brume, with a pale muzzle, soft folded ears, natural anatomy and calm expression. Hand-painted pixel game artwork, orthographic RIGHT-FACING side view in ALL poses, not three-quarter. Layout EXACTLY 8 equal columns x 4 equal rows, 32 complete body poses, within 192x256 cells. Same scale, all feet baseline local y208, center body horizontally, adequate empty alpha padding, no crossing cell edges. Row1 eight consecutive different phases of a smooth walking gait. Row2 four subtle standing-breathing frames followed by four smoothly sitting-down transition frames. Row3 eight consecutive lowered-head eating/licking frames with NO bowl. Row4 four lying asleep breathing frames followed by four seated contented petting-reaction frames with NO hand. Preserve identical grey coat, pale muzzle, folded ears, proportions and tail in every frame. No accessory, no object, no scenery, no letters, no grid, no numbers. Only dog pixels surrounded by actual empty transparency.",
+      "authoredPoses": 32,
+      "runtimeSafePoses": 30,
+      "excludedFrames": [
+        10,
+        11
+      ]
+    },
+    {
+      "file": "assets/openai/ship-animals/v87/habitat-wall.png",
+      "prompt": "Use case: stylized-concept. Asset type: modular environment REAR WALL tile only for a 2D side-scrolling spacecraft game. Wide 1536x1024 bitmap. Straight orthographic elevation, camera absolutely perpendicular to wall: no vanishing point, no floor, no ceiling plane, no side wall, no three-quarter perspective. A quiet utilitarian late-22nd-century civilian ship habitat wall, pale worn off-white bulkhead panels, dark desaturated blue metal lower panel band, narrow piping recessed into the wall, two small rectangular pressure windows high in the upper half with a dim starfield beyond. Hand-painted detailed pixel-art game texture, subtle wear, readable at gameplay size, soft neutral light. Entire wall is flat vertical surface edge-to-edge. Vertical panel joins are evenly spaced so it can be sliced into independent reusable wall sections by runtime; left and right edges visually compatible for horizontal repetition. The bottom 35% is clear plain wall so separately rendered animals, beds and props remain legible. NO doors, NO furniture, NO animals or characters, NO floor or perspective tiles, NO terminal console, NO textual label, NO logo. Not a full room painting: just the flat modular rear-wall layer."
+    },
+    {
+      "file": "assets/openai/ship-animals/v87/habitat-props.png",
+      "prompt": "Use case: stylized-concept. Asset type: transparent PNG atlas of TEN independent modular props for a 2D side-scrolling spacecraft animal habitat. 1536x1024, strict 5 columns x 2 rows regular grid, cells about307x512; all objects complete with ample empty transparent margins, no touching or overlapping. Camera STRAIGHT SIDE ELEVATION, no three-quarter perspective or overhead view, all props rest on one horizontal baseline inside their own cell, no floor plane. Hand-painted crisp pixel-art game rendering, utilitarian grey metal, desaturated blue cushions, subtle wear, neutral light, genuine alpha transparency. Row1 fromlefttoright: 1 small oval padded CAT BED viewed directly from the side; 2 larger rectangular padded DOG BED side view; 3 separate stainless low WATER BOWL side view; 4 separate stainless low FOOD BOWL side view with small kibble heap; 5 small low covered CAT LITTER TRAY side profile with a clear entry opening. Row2 fromlefttoright: 1 vertical SCRATCHING POST with narrow sturdy base; 2 small cloth DOG TOY knotted rope; 3 compact wall-mounted locked FOOD STORAGE CABINET straight frontal elevation; 4 compact freestanding VETERINARY CHECK COUNTER, straight-on 2D elevation, low practical console with small display and closed supply drawer; 5 separate enclosed animal TRANSPORT CRATE side profile with mesh access end at right. NO animals, NO characters, NO text or symbols or logo, NO scenery, NO background color, NO painted checkerboard, NO cast shadow, NO extra decorative objects. Each object will be rendered separately in-game at its physically appropriate scale, do not combine items.",
+      "separateObjects": 10
+    }
+  ],
+  "editAttempt": {
+    "prompt": "Use case: background-extraction. Edit the supplied sprite sheet only. Remove ALL of the brown background and preserve every cat pixel, the exact image dimensions, all 32 poses and their current coordinates. Output a PNG with genuine transparent alpha background. Do not repaint the cat, do not add a background color or a checkerboard image. Preserve fur outlines and fine whiskers. No shadow or surrounding halo.",
+    "status": "failed-windows-deny-read-ACL",
+    "note": "No edit produced. Inspection then proved generated originals already had genuine alpha. Colored preview was not opaque background."
+  }
+}

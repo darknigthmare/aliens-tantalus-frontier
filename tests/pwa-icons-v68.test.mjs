@@ -98,6 +98,10 @@ test('le cache V84 conserve les assets runtime acceptés mais exclut le master P
       ...PROVING_GROUND_ASSET_LIST_V81.map(({ src }) => src),
       '/assets/openai/hub/proving-ground/v82/proving-ground-wall-v82.webp',
       '/assets/openai/hub/proving-ground/v82/proving-ground-ceiling-beam-v82.png',
+      '/assets/openai/ship-animals/v87/moka-atlas.png',
+      '/assets/openai/ship-animals/v87/brume-atlas.png',
+      '/assets/openai/ship-animals/v87/habitat-wall.png',
+      '/assets/openai/ship-animals/v87/habitat-props.png',
       ...V81_READY_ENEMY_PROFILE_ASSETS.map(({ path }) => path)
     ].sort(),
     'seuls les assets runtime explicitement acceptés franchissent le filtre des assets lourds'

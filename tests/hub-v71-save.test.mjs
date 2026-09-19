@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { createHubCommercialStateV87 } from '../src/hub-annex-registry-v87.js';
 
 import {
   HUB_ANNEXES_V71,
@@ -33,7 +34,7 @@ test('le profil par défaut garde le schéma 52 et ajoute les trois états persi
   assert.equal(save.hub.commercialV71.operationId, 'tantalus-hub-expansion');
   assert.equal(save.hub.commercialV71.activeAnnexId, null);
   assert.deepEqual(save.hub.commercialV71.visitedAnnexIds, []);
-  assert.equal(Object.keys(save.hub.commercialV71.stationUses).length, 10);
+  assert.equal(Object.keys(save.hub.commercialV71.stationUses).length, 11);
   assert.equal(save.hub.annexOperationsV71.schema, 71);
   assert.equal(save.hub.annexOperationsV71.provingGround.nextOperationCharge, false);
   assert.equal(save.hub.annexOperationsV71.escapePods.evacuationCharge, false);
@@ -86,7 +87,7 @@ test('une ancienne sauvegarde sans V71 reçoit le contrat canonique sans perdre 
   assert.equal(migrated.statistics.kills, 77);
   assert.deepEqual(migrated.hub.visited, ['bridge', 'medical']);
   assert.equal(migrated.hub.services['service:medical'], 4);
-  assert.deepEqual(migrated.hub.commercialV71, createHubCommercialStateV71());
+  assert.deepEqual(migrated.hub.commercialV71, createHubCommercialStateV87());
   assert.equal(migrated.hub.pendingModuleActionV71, null);
 });
 

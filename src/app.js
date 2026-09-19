@@ -12,6 +12,7 @@ import {
   RECRUITMENT_RULES_V85, recruitCandidateV85, refreshRecruitmentV85, trainCrewAptitudeV85, transferCrewGearV85
 } from './save.js';
 import { CrewUiV85 } from './crew-ui-v85.js';
+import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { PlaceablesDockV86 } from './placeables-ui-v86.js';
 import { resolveCrewDefinitionV85 } from './crew-recruitment-v85.js';
 import { commitCrewTransactionV85 } from './crew-transactions-v85.js';
@@ -2055,6 +2056,38 @@ function resolveProvingGroundQualificationV81(interaction) {
   return true;
 }
 
+function handleShipAnimalRoomActionV87(interaction) {
+  if (!ownsTimelineV84(hubOwnerV84) || activeView !== 'hub' || creatorOwnerV84 || standaloneContext || hubEngine.annexStateReadOnlyV87) return false;
+  const verified = getShipAnimalRoomInteractionV87(hubEngine, saveSystem.data);
+  if (!verified || verified.action !== interaction.action || verified.habitatId !== interaction.habitatId) return false;
+  if (interaction.action === 'ship-animal:care') {
+    const fitted = getShipAnimalHabitatsV87(saveSystem.data).filter(entry => entry.installed).length;
+    const owned = Object.keys(saveSystem.data.shipAnimalsV1?.animals || {}).length;
+    toast(`Accueil préparé : ${fitted}/2 logements ; ${owned} compagnon(s) acquis. Le comptoir marchand d’escale n’est pas encore raccordé ; aucun achat disponible ici.`);
+    return true;
+  }
+  const player = hubEngine.player;
+  const images = hubEngine.getAnnexAssetGroupV71('animal-care');
+  const artReady = ['far', 'prop', 'door'].every(role => {
+    const image = images?.get(role); return image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
+  });
+  const prepared = installShipAnimalHabitatV87(saveSystem.data, interaction.habitatId, {
+    roomId: hubEngine.currentAnnexV71()?.id, playerX: player.x + player.w / 2,
+    feetY: player.y + player.h, artReady
+  });
+  if (!prepared.ok) { toast('Installation impossible : vérifiez la position, les équipements et le chargement des images.'); return false; }
+  try {
+    const commercialV71 = { ...clone(hubEngine.hubCommercialStateV71),
+      annexPositionX: Math.round(player.x), annexPositionY: Math.round(player.y), annexClimbing: false };
+    saveSystem.commit({ shipAnimalsV1: prepared.save.shipAnimalsV1,
+      hub: { ...clone(saveSystem.data.hub), commercialV71 } });
+    hubEngine.npcRoutineContextV62.save.shipAnimalsV1 = clone(saveSystem.data.shipAnimalsV1);
+    hubEngine.statusKey = ''; hubEngine.emitStatus(); hubEngine.draw();
+    toast(prepared.changed ? `${prepared.habitat.label} équipé. Aucun animal créé ni crédit débité.` : 'Ce logement est déjà équipé.');
+    return true;
+  } catch (error) { toast(`Installation non enregistrée : ${error.message}`); return false; }
+}
+
 function handleHubAction(interaction) {
   if (!interaction?.action) return;
   if (standaloneContext === 'forge-playtest') {
@@ -2076,6 +2109,7 @@ function handleHubAction(interaction) {
     return;
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
+  if (interaction.action.startsWith('ship-animal:')) return handleShipAnimalRoomActionV87(interaction);
   if (interaction.action === 'hub:proving-ground-qualified') {
     return resolveProvingGroundQualificationV81(interaction);
   }
