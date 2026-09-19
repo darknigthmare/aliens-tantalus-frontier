@@ -488,6 +488,7 @@ export class HubGame {
       this.player.vx = 0;
       this.player.vy = 0;
       this.player.shockClock = 0.45;
+      this.playerAnimationV81?.reset('hub:player:echo9');
     }
     this.statusKey = '';
     return true;
@@ -1162,6 +1163,8 @@ export class HubGame {
     const request = resolvePlayerAnimation(this.player, false);
     const sample = this.playerAnimationV81.sample('hub:player:echo9', request, this.animationTime, {
       emit: false,
+      physicalActor: this.player,
+      physicalContext: `hub:${this.state?.deck ?? ''}:${this.currentAnnexV71?.()?.id ?? 'deck'}`,
       reducedMotion: Boolean(this.reducedMotion)
     });
     const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
