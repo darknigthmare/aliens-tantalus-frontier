@@ -265,12 +265,99 @@ test('corrupt transport metadata stops without converting corruption into a reco
   assert.equal(draws.length, 0);
 });
 
-test('a carried crate is drawn at its persisted valid carrier anchor, never teleported to an uncommitted player pose', () => {
+test('a carried crate follows bounded live feet between commits but never crosses rooms or a respawn discontinuity', () => {
   const f = fixture({ delivery: 'carried' }); f.locate(PORT.counterRoomId, 1000);
+  const before = JSON.stringify(f.saveSystem.data), bytes = [...f.backend.values];
   const draws = []; f.controller.drawCarried(drawContext(draws));
-  assert.equal(draws.length, 1); assert.equal(draws[0][5], 990 + 12);
+  assert.equal(draws.length, 1); assert.equal(draws[0][5], 1000 + 12);
+  f.controller.tick(.1); f.locate(PORT.counterRoomId, 1027);
+  f.controller.drawCarried(drawContext(draws)); assert.equal(draws.at(-1)[5], 1027 + 12);
+  f.locate(PORT.counterRoomId, 118); draws.length = 0;
+  f.controller.drawCarried(drawContext(draws)); assert.equal(draws.length, 0);
   f.locate('animal-care', 690); draws.length = 0;
   f.controller.drawCarried(drawContext(draws)); assert.equal(draws.length, 0);
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.deepEqual([...f.backend.values], bytes);
+  assert.equal(f.backend.attempts, 0);
+});
+
+test('drawn carried crate mirrors exactly and follows a normal post-commit physics frame with unchanged collider', () => {
+  const f = fixture({ delivery: 'carried' }); f.locate(PORT.counterRoomId, 990);
+  const before = JSON.stringify(f.saveSystem.data), collider = [f.hub.player.w, f.hub.player.h];
+  const draws = []; f.controller.drawCarried(drawContext(draws));
+  const right = draws.at(-1); f.hub.player.facing = -1;
+  f.controller.drawCarried(drawContext(draws)); const left = draws.at(-1);
+  assert.equal(right[5] + right[7] / 2 - 990, 36);
+  assert.equal(left[5] + left[7] / 2 - 990, -36);
+  assert.equal(right[6], left[6]); assert.equal(right[7], left[7]); assert.equal(right[8], left[8]);
+  f.controller.tick(.034); f.locate(PORT.counterRoomId, 1002.58);
+  f.controller.drawCarried(drawContext(draws)); assert.equal(draws.at(-1)[5], 1002.58 - 60);
+  assert.deepEqual([f.hub.player.w, f.hub.player.h], collider);
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.equal(f.backend.attempts, 0);
+});
+
+test('a real sequence of pre-physics controller ticks and post-physics draws keeps every frame attached', () => {
+  const f = fixture({ delivery: 'carried' }); let x = 990; f.locate(PORT.counterRoomId, x);
+  const draws = [];
+  for (let frame = 0; frame < 60; frame += 1) {
+    f.controller.tick(.016); x += 370 * .016; f.locate(PORT.counterRoomId, x);
+    const bytes = [...f.backend.values], attempts = f.backend.attempts;
+    f.controller.drawCarried(drawContext(draws));
+    assert.equal(draws.length, frame + 1); assert.ok(Math.abs(draws.at(-1)[5] - (x + 12)) < 1e-9);
+    assert.deepEqual([...f.backend.values], bytes); assert.equal(f.backend.attempts, attempts);
+    assert.equal(f.hub.running, true);
+  }
+  assert.equal(f.saveSystem.data.shipAnimalsV1.animals['animal-moka'].deliveryV87.phase, 'carried');
+  assert.ok(f.backend.attempts > 0, 'regular transport commits must still occur');
+});
+
+test('a dropped crate stays on its anchor until physical recovery, then bounded frame tracking resumes', () => {
+  const f = fixture({ delivery: 'carried' }); f.locate(PORT.counterRoomId, 990);
+  const first = []; f.controller.drawCarried(drawContext(first));
+  f.locate('animal-care', 690); f.controller.tick(.2);
+  assert.equal(f.saveSystem.data.shipAnimalsV1.animals['animal-moka'].deliveryV87.phase, 'awaiting-recovery');
+  f.locate(PORT.counterRoomId, 1050);
+  const before = JSON.stringify(f.saveSystem.data), attempts = f.backend.attempts;
+  const world = []; f.controller.draw(drawContext(world)); f.controller.drawCarried(drawContext(world));
+  assert.equal(world.length, 1); assert.equal(world[0][5], 990 - 28);
+  assert.equal(f.controller.carriedPresentationV87, null);
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.equal(f.backend.attempts, attempts);
+  assert.equal(f.controller.handle(f.controller.interaction()), true);
+  const recovered = JSON.stringify(f.saveSystem.data); f.locate(PORT.counterRoomId, 1060);
+  const carried = []; f.controller.drawCarried(drawContext(carried));
+  assert.equal(carried.length, 1); assert.equal(carried[0][5], 1060 + 12);
+  assert.equal(JSON.stringify(f.saveSystem.data), recovered);
+});
+
+for (const condition of ['hub-paused', 'dialog-open', 'hidden']) test(`carried presentation ${condition} freezes its last approved pose without saving`, () => {
+  const f = fixture({ delivery: 'carried' }); f.controller.tick(.1); f.locate(PORT.counterRoomId, 1027);
+  const draws = []; f.controller.drawCarried(drawContext(draws)); const approved = [...draws.at(-1)];
+  if (condition === 'hub-paused') f.hub.running = false;
+  if (condition === 'dialog-open') f.controller.ui.isOpen = true;
+  if (condition === 'hidden') f.controller.documentRef.hidden = true;
+  const before = JSON.stringify(f.saveSystem.data), bytes = [...f.backend.values];
+  f.locate(PORT.counterRoomId, 1037); f.hub.player.facing = -1;
+  f.controller.tick(5); f.controller.drawCarried(drawContext(draws));
+  assert.deepEqual(draws.at(-1), approved);
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.deepEqual([...f.backend.values], bytes);
+  assert.equal(f.backend.attempts, 0);
+});
+
+test('carrier presentation clears on door transfer, profile mismatch, close or inactive owner', () => {
+  for (const condition of ['door', 'profile', 'close', 'inactive']) {
+    const f = fixture({ delivery: 'carried' }); f.locate(PORT.counterRoomId, 990);
+    const draws = []; f.controller.drawCarried(drawContext(draws)); assert.equal(draws.length, 1);
+    if (condition === 'door') f.hub.annexTransitionV71 = { annexId: PORT.counterRoomId, progress: .2 };
+    if (condition === 'profile') f.controller.ownerStamp = 'old-profile';
+    if (condition === 'inactive') f.control.active = false;
+    if (condition === 'close') {
+      f.controller.close(); assert.equal(f.controller.carriedPresentationV87, null);
+      assert.equal(f.controller.carryFrameDeltaV87, 0); continue;
+    }
+    const before = JSON.stringify(f.saveSystem.data);
+    draws.length = 0; f.controller.drawCarried(drawContext(draws));
+    assert.equal(draws.length, 0); assert.equal(f.controller.carriedPresentationV87, null);
+    assert.equal(JSON.stringify(f.saveSystem.data), before); assert.equal(f.backend.attempts, 0);
+  }
 });
 
 for (const phase of ['awaiting', 'carried']) test(`invalid ${phase} delivery metadata produces no crate bitmap`, () => {

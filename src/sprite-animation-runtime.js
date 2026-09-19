@@ -538,7 +538,9 @@ export function resolveVerifiedPlayerCombat(clipId) {
 
 function resolveEcho9MarineAnimationV81(actor = {}) {
   if (actor.alive === false) return resolveVerifiedPlayerCombat('death');
-  if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt');
+  // Hub electrical damage owns shockClock; it is still a living injury,
+  // below death priority and independent from the mission's hurt timer.
+  if ((actor.v52HurtClock || 0) > 0 || (actor.shockClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt');
   if ((actor.meleeClock || 0) > 0) return {
     sheetId: 'player.echo9-marine.melee',
     clipId: actor.meleeKind === 'rifle-bash' ? 'rifle-bash' : actor.meleeKind === 'defense' ? 'melee-defense' : 'knife-attack'

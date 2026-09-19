@@ -154,6 +154,26 @@ try {
   await capture('04-awaiting-crate'); await press('KeyE');
   await until(animalExpression + '.deliveryV87.phase==="carried"', 'pickup');
   milestone('pickup', await snapshot()); await capture('05-carried');
+  // Observe actual canvas draws, not a separately sampled helper. No state writes.
+  if (process.env.QA_CARRIER_PROJECTION === '1') await read(`(()=>{
+    const h=__ATF_HUB__, original=h.drawCarriedCompanionV87;
+    globalThis.__QA_CARRIER_V87__={frames:0,movingFrames:0,left:0,right:0,maxHorizontalError:0,maxVerticalError:0};
+    h.drawCarriedCompanionV87=function(ctx){
+      const draw=ctx.drawImage, samples=[];
+      ctx.drawImage=function(...args){
+        if(args.length===9 && String(args[0]?.currentSrc||args[0]?.src).endsWith('/ship-animals/v87/port-props.png')
+          && args[1]===408 && args[2]===664) samples.push(args.slice(5));
+        return draw.apply(this,args);
+      };
+      try { original.call(this,ctx); } finally { ctx.drawImage=draw; }
+      for(const [x,y,w,height] of samples){
+        const p=h.player,q=__QA_CARRIER_V87__;q.frames++;q[p.facing<0?'left':'right']++;
+        if(Math.abs(p.vx)>10)q.movingFrames++;
+        q.maxHorizontalError=Math.max(q.maxHorizontalError,Math.abs(x+w/2-(p.x+p.w/2)-p.facing*36));
+        q.maxVerticalError=Math.max(q.maxVerticalError,Math.abs(y+height-(p.y+p.h)+24));
+      }
+    };return true;
+  })()`);
   await walk(160, 'carry to port exit'); await wait(300); await press('KeyE');
   await until('!__ATF_HUB__.isAnnexActiveV71()&&!__ATF_HUB__.annexTransitionV71', 'return with crate to hangar');
   await wait(450); milestone('hangarCarry', await snapshot());
@@ -186,6 +206,14 @@ try {
   await until('__ATF_HUB__.currentAnnexV71()?.id==="animal-care"&&!__ATF_HUB__.annexTransitionV71', 'enter care room');
   await walk(subject.berthX, 'carry to ' + subject.name + ' fitted berth'); await wait(450);
   milestone('berth', await snapshot());
+  if (process.env.QA_CARRIER_PROJECTION === '1') {
+    const projection = await read('structuredClone(__QA_CARRIER_V87__)');
+    milestone('carrierProjection', projection);
+    assert.ok(projection.frames > 300 && projection.movingFrames > 100, 'Measure actual multi-frame movement');
+    assert.ok(projection.left > 10 && projection.right > 10, 'Both facings were really drawn');
+    assert.ok(projection.maxHorizontalError < 1e-6, 'Carrier center must stay exactly +/-36 from live player feet');
+    assert.ok(projection.maxVerticalError < 1e-6, 'Carrier height must stay exactly 24 above live player feet');
+  }
   assert.equal(report.checks.berth.animal.delivery.checkpoints.length, 4);
   await press('KeyE');
   await until(animalExpression + '.location.kind==="intake"', 'intake started');

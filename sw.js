@@ -1,8 +1,9 @@
-const CACHE = 'atf-v86-physical-placeables-shell-1';
+const CACHE = 'atf-v86-physical-placeables-shell-2';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/ship-carrier-presentation-v87.js',
   '/src/ship-animal-habitat-graph-v87.js',
   '/src/ship-port-state-v87.js', '/src/ship-port-room-v87.js', '/src/ship-port-art-v87.js',
   '/src/ship-port-ui-v87.js', '/src/ship-port-v87.css', '/src/ship-companion-controller-v87.js',

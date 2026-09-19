@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { SaveSystem, SAVE_PREFIX } from '../src/save.js';
+import { ShipCompanionControllerV87 } from '../src/ship-companion-controller-v87.js';
+import { SHIP_ANIMAL_ANNEX_V87 } from '../src/ship-animal-habitat-v87.js';
 
 import {
   HUB_ANNEX_ART_ROLES_V71,
@@ -146,6 +149,76 @@ function placeAtAnnexExit(hub) {
     grounded: true
   });
 }
+
+test('un refus quota du compagnon arrête le vrai sas avant activation et sans deuxième persist', () => withRuntime(() => {
+  const values = new Map();
+  const storage = { reject: false, attempts: 0,
+    getItem: key => values.get(key) ?? null,
+    setItem(key, value) {
+      if (key.startsWith(SAVE_PREFIX)) {
+        this.attempts += 1;
+        if (this.reject) throw new Error('QuotaExceededError');
+      }
+      values.set(key, value);
+    }, removeItem: key => values.delete(key)
+  };
+  const saveSystem = new SaveSystem(storage); saveSystem.newGame(1);
+  const annex = SHIP_ANIMAL_ANNEX_V87;
+  const { hub } = createHub(); hub.start(parentState(annex));
+  placeAtParentDoor(hub, annex);
+  assert.ok(hub.beginAnnexTransitionV71(annex.id, 'enter'));
+  const endFrame = hub.annexTransitionV71.duration - .008;
+  while (hub.annexTransitionV71.elapsed < endFrame - 1e-9) {
+    hub.update(Math.min(.016, endFrame - hub.annexTransitionV71.elapsed));
+  }
+  const root = saveSystem.data, durable = [...values], rootBytes = JSON.stringify(root);
+  const transition = hub.annexTransitionV71, beforeTransition = structuredClone(transition);
+  const beforePose = { x: hub.player.x, y: hub.player.y }, beforeAnimation = hub.animationTime;
+  const toasts = [], controller = Object.create(ShipCompanionControllerV87.prototype);
+  Object.assign(controller, { hub, saveSystem, graph: null, isActive: () => true,
+    toast: message => toasts.push(message) });
+  controller.ownerStamp = controller.stamp();
+  // Real production commit, stop, update and completion methods; only the
+  // prepared domain candidate and browser/storage boundary are test inputs.
+  hub.onCompanionTickV87 = () => controller.commit({ ok: true, changed: true, save: root });
+  let activations = 0;
+  const activate = hub.activateAnnexV71.bind(hub);
+  hub.activateAnnexV71 = entry => { activations += 1; return activate(entry); };
+  hub.onPersist = patch => saveSystem.commit({ hub: { ...saveSystem.data.hub, ...patch } });
+  storage.attempts = 0; storage.reject = true;
+  assert.doesNotThrow(() => hub.update(.016));
+  assert.equal(storage.attempts, 1, 'aucune seconde sauvegarde après stop(false)');
+  assert.equal(hub.running, false); assert.equal(activations, 0);
+  assert.equal(hub.currentAnnexV71(), null);
+  assert.equal(hub.annexTransitionV71, transition);
+  assert.deepEqual(transition, beforeTransition, 'la dernière frame du sas reste disponible');
+  assert.deepEqual({ x: hub.player.x, y: hub.player.y }, beforePose);
+  assert.equal(hub.animationTime, beforeAnimation);
+  assert.equal(saveSystem.data, root); assert.equal(JSON.stringify(root), rootBytes);
+  assert.deepEqual([...values], durable); assert.equal(toasts.length, 1);
+
+  storage.reject = false; hub.onCompanionTickV87 = null; hub.resume();
+  hub.update(.016);
+  assert.equal(activations, 1); assert.equal(storage.attempts, 2);
+  assert.equal(hub.currentAnnexV71()?.id, annex.id);
+  assert.equal(hub.annexTransitionV71, null, 'la reprise consomme normalement la frame préservée');
+}));
+
+test('le nouvel arrêt du compagnon bloque aussi la physique, sans modifier les updates explicites déjà en pause', () => withRuntime(() => {
+  const { hub } = createHub(); hub.start({ deck: 0, roomId: 'bridge', positionX: 180 });
+  const before = { x: hub.player.x, y: hub.player.y, animationTime: hub.animationTime };
+  hub.keys.add('KeyD');
+  hub.onCompanionTickV87 = () => hub.stop(false);
+  hub.update(.016);
+  assert.equal(hub.running, false);
+  assert.deepEqual({ x: hub.player.x, y: hub.player.y, animationTime: hub.animationTime }, before);
+  assert.equal(hub.keys.size, 0);
+
+  hub.onCompanionTickV87 = null;
+  hub.update(.016);
+  assert.equal(hub.running, false);
+  assert.ok(hub.animationTime > before.animationTime, 'un appel manuel déjà en pause garde son ancien contrat');
+}));
 
 test('le runtime expose 28 nœuds (26 historiques + accueil + comptoir) et charge les couches à l’approche', () => withRuntime(() => {
   const { hub } = createHub();

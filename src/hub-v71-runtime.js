@@ -652,7 +652,11 @@ export class HubGame extends HubGameV62 {
 
   update(delta) {
     const elapsed = clamp(delta, 0, 0.25);
+    const runningBeforeCompanions = this.running;
     this.onCompanionTickV87?.(elapsed);
+    // A refused durable commit stops this frame before physics or a sas can
+    // change rooms and persist again. Keep explicit already-paused updates compatible.
+    if (runningBeforeCompanions && !this.running) return;
     if (this.annexTransitionV71) {
       this.animationTime += elapsed;
       this.annexTransitionV71.elapsed += elapsed;

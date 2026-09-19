@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "date": "2026-09-19",
+  "provider": "OpenAI integrated ImageGen",
+  "mode": "reference-based generation",
+  "status": "blocked-before-generation",
+  "generatedFiles": [],
+  "referencePath": "assets/openai/sprites/normalized/player/echo9-marine-interaction-sheet.png",
+  "error": "unable to read referenced image: windows sandbox failed: helper_unknown_error: apply deny-read ACLs",
+  "apiFallbackUsed": false,
+  "prompt": "Use case: stylized-concept. Asset type: production sprite animation atlas for Echo-9 in the existing Aliens Tantalus Frontier 2D side-scrolling game. Input image 1 is the EXACT identity/style reference only, not a layout to reproduce. Preserve that same olive helmet, dark olive marine armor, shoulder skull patch, radio backpack, face, knee pads and boots. Create a NEW transparent RGBA sprite sheet, 2048x1024, exactly 8 columns x 4 rows of 256x256 equal cells. Each frame is one coherent full-body Echo-9, orthographic right-facing side view, feet anchored (128,240), standing visible body height about193 pixels. Row1:8 smoothly consecutive poses of idle while supporting an invisible waist-height crate. Row2:8 truly different successive poses covering one complete walking cycle while supporting the same invisible crate, no duplicate endframe. Row3:8 climbing poses, supporting the invisible carrier with one forearm while the other hand reaches an invisible ladder, coherent weight. Row4:8 consecutive short living hurt/recoil/recovery poses while retaining the same grip, NEVER a death or corpse. Hands positioned to support a separate waist-height object in front of torso. The held crate itself MUST NOT appear: no box, weapon, ladder, rail, muzzle flash, background, floor, ground shadow, caption, labels or cell borders. Crisp detailed pixel-art edges matching reference, not blurry painted sprites. Constant identity, consistent scale and foot baseline across the atlas, enough transparent padding around every limb, no pose clipped or crossing a cell. Genuine alpha transparency, not white or checkerboard painted background. Entire atlas only, no poster or explanatory text."
+}

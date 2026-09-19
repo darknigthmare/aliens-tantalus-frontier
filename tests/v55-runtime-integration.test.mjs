@@ -146,11 +146,21 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   assert.equal(snapshot.hubIntegrity, 78);
   assert.equal(snapshot.shockHits, 1);
   assert.ok(hub.player.shockClock > 1);
+  assert.equal(hub.player.alive, true, 'le choc ne sélectionne pas une mort');
+  assert.equal(hub.player.v52HurtClock || 0, 0, 'le hub utilise bien son horloge de choc indépendante');
 
   const interactionRooms = [];
   const drawInteractionProp = hub.drawInteractionProp.bind(hub);
   hub.drawInteractionProp = (ctx, room) => { interactionRooms.push(room.id); return drawInteractionProp(ctx, room); };
   draws.length = 0;
+  const playerBlits = [];
+  const recordDraw = context.drawImage;
+  context.drawImage = (image, ...args) => {
+    if (image?.currentSrc?.startsWith('/assets/openai/sprites/normalized/player/')) {
+      playerBlits.push({ source: image.currentSrc, cell: args.slice(0, 4) });
+    }
+    recordDraw(image, ...args);
+  };
   Object.assign(hub.npcs[0], { vx: 0, workClock: 1, alertClock: 0, alerted: false });
   hub.draw();
 
@@ -162,7 +172,7 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   const dropship = draws.indexOf('/assets/openai/sprites/normalized/vehicles/ud-4l-cheyenne-dropship-action-sheet.png');
   const electrical = draws.indexOf('/assets/openai/metroidvania/props/electrical-arc-hazard.png');
   const missionNpc = draws.indexOf('/assets/openai/sprites/normalized/npcs/maksim-orlov-mission-sheet.png');
-  const player = draws.indexOf('/assets/openai/sprites/normalized/player/echo9-marine-locomotion-sheet.png');
+  const player = draws.indexOf('/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png');
   const foreground = draws.lastIndexOf('/assets/openai/hub/layers/engineering-hangar-foreground.png');
   const monolith = draws.indexOf('/assets/openai/hub/rooms/engineering-hangar.png');
   assert.ok(far >= 0 && parallax > far && overhead > parallax, 'FAR puis parallaxe puis plafond');
@@ -170,6 +180,11 @@ test('le vrai runtime hub dessine back puis acteurs puis foreground et applique 
   assert.ok(missionNpc > electrical);
   assert.ok(player > missionNpc);
   assert.ok(foreground > player);
+  assert.deepEqual(playerBlits, [{
+    source: '/assets/openai/sprites/normalized/player/echo9-marine-combat-sheet.png',
+    cell: [0, 768, 256, 256]
+  }], 'le vrai rendu dessine exactement la frame 12 de blessure, sans locomotion ni frame de mort');
+  assert.equal(hub.player.playerVisualV81.fallback, false);
   assert.equal(monolith, -1);
   assert.equal(interactionRooms.includes('dropship-hangar'), false);
 
