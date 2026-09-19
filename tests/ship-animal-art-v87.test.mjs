@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
+import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87, SHIP_ANIMAL_ENCLOSURE_HASH_V87,
+  SHIP_ANIMAL_ENCLOSURE_CROPS_V87, SHIP_ANIMAL_ENCLOSURE_PLACEMENTS_V87,
+  isShipAnimalEnclosureAtlasReadyV87, drawClosedShipAnimalPenV87, drawShipBondedCarrierV87 } from '../src/ship-animal-enclosure-art-v87.js';
 import {
   SHIP_ANIMAL_ATLASES_V87, SHIP_ANIMAL_CLIPS_V87, resolveShipAnimalFrameV87,
   isShipAnimalAtlasReadyV87, drawShipAnimalV87
@@ -69,7 +72,7 @@ function alphaComponents({ width, height, pixels }, threshold = 8) {
 }
 
 test('art identities are explicit, immutable and report the reduced Brume coverage honestly', () => {
-  assert.deepEqual(Object.keys(SHIP_ANIMAL_ATLASES_V87), ['animal-moka', 'animal-brume', 'animal-luciole']);
+  assert.deepEqual(Object.keys(SHIP_ANIMAL_ATLASES_V87), ['animal-moka', 'animal-brume', 'animal-luciole', 'animal-noisette', 'animal-cafe', 'animal-tic', 'animal-tac']);
   const cat = SHIP_ANIMAL_ATLASES_V87['animal-moka'], dog = SHIP_ANIMAL_ATLASES_V87['animal-brume'];
   assert.deepEqual(cat.coverage, { totalAuthored: 32, runtimeSafe: 32, excludedFrames: [], fluidityCertified: false });
   assert.deepEqual(dog.coverage, { totalAuthored: 32, runtimeSafe: 30, excludedFrames: [10, 11], fluidityCertified: false });
@@ -94,8 +97,10 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
       for (const other of atlas.frames) if (other.index !== frame.index && frame.safe && other.safe) assert.equal(overlaps(frame, other), false,
         `crop overlap between ${frame.index}/${other.index}`);
     }
-    assert.ok(atlas.frames.some(frame => frame.x < frame.index % 8 * 192 || frame.x + frame.w > (frame.index % 8 + 1) * 192),
-      'the real crops intentionally do not use a fixed-width cell grid');
+    if (['animal-moka','animal-brume','animal-luciole'].includes(atlas.animalId)) {
+      assert.ok(atlas.frames.some(frame => frame.x < frame.index % 8 * 192 || frame.x + frame.w > (frame.index % 8 + 1) * 192),
+        'the legacy crops intentionally do not use a fixed-width cell grid');
+    } else assert.ok([4,8].includes(atlas.sourceLayout.columns) && atlas.sourceLayout.columns * atlas.sourceLayout.rows === 32);
     const used = new Set(Object.values(atlas.clips).flatMap(clip => clip.frames));
     assert.equal(used.size, atlas.coverage.runtimeSafe);
     assert.ok([...used].every(index => atlas.frames[index].safe));
@@ -118,6 +123,7 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
     assert.ok(transparent > image.width * image.height * (atlas.animalId === 'animal-luciole' ? .58 : .6));
     assert.ok(nearlyTransparent > image.width * image.height * .6);
     const { components, labels } = alphaComponents(image);
+    if (atlas.sourceLayout.rows === 8) components.sort((a,b)=>Math.floor((a.y+a.h/2)/128)-Math.floor((b.y+b.h/2)/128)||a.x-b.x);
     assert.equal(components.length, 32);
     const majorLabels = new Set(components.map(component => component.label));
     for (const frame of atlas.frames.filter(frame => frame.safe)) {
@@ -164,7 +170,7 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
   });
 
   test(`${atlas.animalId}: sitDown and pet are one-shots that hold their final pose`, () => {
-    for (const clipId of ['sitDown', 'pet']) {
+    for (const clipId of ['sitDown', Object.hasOwn(atlas.clips,'groom') ? 'groom' : 'pet']) {
       const clip = atlas.clips[clipId], duration = clip.frames.length / clip.fps;
       const initial = resolveShipAnimalFrameV87(atlas.animalId, clipId, 0);
       assert.equal(initial.index, clip.frames[0]); assert.equal(initial.complete, false);
@@ -199,6 +205,46 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
     }
   });
 }
+
+test('all four bonded atlases keep whole silhouettes at species-specific scales without a pet alias', () => {
+  for (const [id,width,height] of [['noisette',44,30],['cafe',36,32],['tic',30,16],['tac',32,16]]) {
+    const atlas = SHIP_ANIMAL_ATLASES_V87['animal-'+id];
+    assert.equal(atlas.coverage.runtimeSafe,32); assert.equal(atlas.coverage.fluidityCertified,false);
+    assert.equal(resolveShipAnimalFrameV87(atlas.animalId,'pet'),null);
+    assert.equal(atlas.clips.groom.id,'groom');
+    for(const f of atlas.frames) { assert.ok(f.w*atlas.worldScale<=width); assert.ok(f.h*atlas.worldScale<=height); }
+  }
+});
+
+test('enclosure bitmap alpha keeps grille openings clear and all modular crops inside the unchanged PNG', async () => {
+  const bytes = await readFile(new URL('..'+SHIP_ANIMAL_ENCLOSURE_ASSET_V87,import.meta.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),SHIP_ANIMAL_ENCLOSURE_HASH_V87);
+  const image=decodePng(bytes);
+  for(const [x,y,w,h] of Object.values(SHIP_ANIMAL_ENCLOSURE_CROPS_V87)) {
+    assert.ok(x>=0&&y>=0&&w>0&&h>0&&x+w<=1536&&y+h<=1024);
+  }
+  for(const [left,top,right,bottom] of [[62,713,469,871],[574,690,962,871]]) {
+    let clear=0,total=0;
+    for(let y=top;y<bottom;y++)for(let x=left;x<right;x++){total++;if(image.pixels[(y*1536+x)*4+3]<16)clear++;}
+    assert.ok(clear/total>.55,'grille must reveal the separate animal/background layers');
+  }
+});
+
+test('two-layer enclosures share exact floor anchors and carrier needs its genuine two-compartment image', () => {
+  const image={complete:true,naturalWidth:1536,naturalHeight:1024,src:SHIP_ANIMAL_ENCLOSURE_ASSET_V87};
+  assert.equal(isShipAnimalEnclosureAtlasReadyV87(image),true);
+  for(const entry of SHIP_ANIMAL_ENCLOSURE_PLACEMENTS_V87) for(const layer of ['back','front']) {
+    const {ctx,calls}=recorder(); assert.equal(drawClosedShipAnimalPenV87(ctx,image,{...entry,layer}),true);
+    const draws=calls.filter(c=>c[0]==='drawImage'); assert.equal(draws.length,2);
+    assert.equal(draws[0][7]+draws[0][9],612); assert.equal(draws[1][7],612); assert.equal(draws[1][9],12);
+  }
+  const {ctx,calls}=recorder();
+  assert.equal(drawShipBondedCarrierV87(ctx,{...image,src:'/other.png'},{x:10,width:76,bottom:600}),false);
+  assert.equal(calls.length,0);
+  assert.equal(drawShipBondedCarrierV87(ctx,image,{x:10,width:76,bottom:600}),true);
+  assert.deepEqual(calls[0].slice(2,6),SHIP_ANIMAL_ENCLOSURE_CROPS_V87.carrier);
+  assert.equal(drawClosedShipAnimalPenV87(ctx,image,{species:'rabbit',layer:'front',bounds:{x:0,y:0,w:0,h:20}}),false);
+});
 
 test('unknown identities, wrong clips, unready images and wrong-animal images never draw a substitute', () => {
   const cat = SHIP_ANIMAL_ATLASES_V87['animal-moka'], dog = SHIP_ANIMAL_ATLASES_V87['animal-brume'];

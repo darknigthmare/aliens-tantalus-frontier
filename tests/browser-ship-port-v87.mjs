@@ -152,7 +152,8 @@ try {
   await walk(subject.meetingX, 'walk to ' + subject.name + ' meeting'); await press('KeyE');
   await until('document.querySelector("dialog.ship-port-v87")?.open', subject.name + ' dossier open');
   milestone('meetingDossier', await read('({tabs:[...document.querySelectorAll("dialog.ship-port-v87 [role=tab]")].filter(el=>!el.hidden).map(el=>({id:el.dataset.animalId,name:el.textContent,selected:el.getAttribute("aria-selected")})),confirmDisabled:document.querySelector("[data-port-action=buy]").disabled,owned:Object.keys(__ATF_V51__.saveSystem.data.shipAnimalsV1.animals)})'));
-  assert.deepEqual(report.checks.meetingDossier.tabs.map(entry => entry.id), Object.keys(SHIP_ANIMAL_DEFINITIONS_V87));
+  assert.deepEqual(report.checks.meetingDossier.tabs.map(entry => entry.id), Object.values(SHIP_ANIMAL_OFFERS_V87)
+    .filter(entry => entry.vendorId === offer.vendorId).flatMap(entry => entry.animalIds || [entry.animalId]));
   assert.deepEqual(report.checks.meetingDossier.tabs.filter(entry => entry.selected === 'true').map(entry => entry.id), [subject.id]);
   assert.equal(report.checks.meetingDossier.confirmDisabled, true, 'An actual dossier examination is required before buying');
   assert.deepEqual(report.checks.meetingDossier.owned, [], 'Meeting an animal does not silently grant ownership');

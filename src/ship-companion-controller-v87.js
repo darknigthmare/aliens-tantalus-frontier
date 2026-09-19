@@ -1,11 +1,12 @@
 import { SHIP_PORT_DEFINITION_V87 as PORT, requestShipPortDockV87, requestShipPortUndockV87,
   abortShipPortDockV87, stepShipPortV87, canAccessPortCounterV87, getShipPortSafetyCodeV87 } from './ship-port-state-v87.js';
-import { SHIP_PORT_ANNEX_V87, SHIP_PORT_MEETINGS_V87, getShipPortInteractionV87 } from './ship-port-room-v87.js';
-import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87, acquireShipAnimalV87 } from './ship-animal-state-v87.js';
-import { getShipAnimalHabitatsV87 } from './ship-animal-habitat-v87.js';
+import { SHIP_PORT_ANNEX_V87, SHIP_PORT_MEETINGS_V87, SHIP_PORT_VENDORS_V87, getShipPortInteractionV87 } from './ship-port-room-v87.js';
+import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87, acquireShipAnimalV87, getShipAnimalOfferMembersV87 } from './ship-animal-state-v87.js';
+import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87 } from './ship-animal-habitat-v87.js';
 import { SHIP_ANIMAL_ATLASES_V87, isShipAnimalAtlasReadyV87, drawShipAnimalV87 } from './ship-animal-art-v87.js';
 import { stepShipAnimalRoutinesV87, sampleShipAnimalRoutinesV87,
-  petShipAnimalV87 } from './ship-animal-routines-v87.js';
+  petShipAnimalV87, observeShipAnimalEnclosureV87 } from './ship-animal-routines-v87.js';
+import { drawShipAnimalEnclosuresV87, drawShipBondedCarrierV87, isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
 import { createShipAnimalHabitatGraphV87 } from './ship-animal-habitat-graph-v87.js';
 import { initializeShipAnimalDeliveryV87, pickupShipAnimalDeliveryV87, stepShipAnimalDeliveryV87,
   receiveShipAnimalDeliveryV87, sampleShipAnimalDeliveriesV87, dropShipAnimalDeliveryV87 } from './ship-animal-delivery-v87.js';
@@ -112,31 +113,41 @@ export class ShipCompanionControllerV87 {
   model() {
     const save = this.saveSystem.data, state = save.shipPortV1;
     const habitats = getShipAnimalHabitatsV87(save);
-    const atShop = this.player()?.roomId === PORT.counterRoomId && Boolean(getShipPortInteractionV87(this.hub));
+    const physical = getShipPortInteractionV87(this.hub);
+    const vendorId = physical?.vendorId || 'station-shop';
+    const atShop = this.player()?.roomId === PORT.counterRoomId && physical?.action === 'ship-port:shop';
     const art = this.hub.getAnnexAssetGroupV71(PORT.counterRoomId);
-    const shopReady = SHIP_PORT_ANNEX_V87.artRoles.every(role => ready(art?.get(role)));
+    const shopReady = ['far', 'prop', 'door', 'vendor'].every(role => ready(art?.get(role)));
     return { phase: state?.phase || 'undocked', progress: state?.durationSeconds ? state.elapsedSeconds / state.durationSeconds : 0,
+      vendorId, vendorName: SHIP_PORT_VENDORS_V87[vendorId]?.name,
       canDock: ['undocked', 'departed'].includes(state?.phase) && this.safe(),
       canUndock: state?.phase === 'docked' && this.player()?.roomId === 'dropship-hangar',
       // Maneuver progress is not a pending transaction: abort must stay usable.
       // Actions commit synchronously; the dialog owns its submitting/double-click lock.
       busy: false, reducedMotion: save.settings?.reducedMotion === true,
       message: this.ui?.mode === 'shop' ? 'Rencontrez un compagnon, consultez son dossier et vérifiez son logement avant de signer.' : PORT.costLabel + ' ' + PORT.timingLabel,
-      offers: Object.values(SHIP_ANIMAL_OFFERS_V87).map(offer => {
-        const definition = SHIP_ANIMAL_DEFINITIONS_V87[offer.animalId];
+      offers: Object.values(SHIP_ANIMAL_OFFERS_V87).filter(offer => offer.vendorId === vendorId).map(offer => {
+        const animalIds = getShipAnimalOfferMembersV87(offer);
+        const members = animalIds.map(id => SHIP_ANIMAL_DEFINITIONS_V87[id]);
+        const definition = members[0];
         const habitat = habitats.find(entry => entry.id === definition.defaultHabitatId);
-        const owned = Boolean(save.shipAnimalsV1?.animals?.[offer.animalId]);
+        const owned = animalIds.some(id => Boolean(save.shipAnimalsV1?.animals?.[id]));
         const conditions = [];
         if (!atShop || !canAccessPortCounterV87(save) || !this.safe()) conditions.push('Comptoir physique inaccessible ou accès civil suspendu.');
         if (!habitat?.installed) conditions.push('Équipez le logement dans l’accueil animalier.');
         const reservations = Object.values(save.shipAnimalsV1?.reservations || {});
-        if (habitat && reservations.filter(entry => entry.habitatId === habitat.id).length >= habitat.capacity && !owned)
-          conditions.push('Ce logement individuel est déjà réservé.');
-        if (!shopReady || !isShipAnimalAtlasReadyV87(offer.animalId, this.images.get(offer.animalId))) conditions.push('Images en cours de chargement.');
+        if (habitat && reservations.filter(entry => entry.habitatId === habitat.id).length + animalIds.length > habitat.capacity && !owned)
+          conditions.push(animalIds.length > 1 ? 'Deux places libres sont requises dans le même parc.' : 'Ce logement individuel est déjà réservé.');
+        const careCapacity = Math.min(8, habitats.filter(entry => entry.installed).reduce((sum, entry) => sum + entry.capacity, 0));
+        if (!owned && reservations.length + animalIds.length > careCapacity) conditions.push('Capacité de soin insuffisante pour tous les membres.');
+        if (!shopReady || animalIds.some(id => !isShipAnimalAtlasReadyV87(id, this.images.get(id)))) conditions.push('Images en cours de chargement.');
+        if (animalIds.length > 1 && !isShipAnimalEnclosureAtlasReadyV87(art?.get('enclosure')))
+          conditions.push('Parc et caisse à deux compartiments en cours de chargement.');
         if (save.galaxy?.resources?.credits < offer.costCredits) conditions.push('Crédits insuffisants.');
         if (save.hub?.systems?.supplies < 1) conditions.push('Ravitaillement de soin insuffisant.');
         if (save.shipAnimalsV1?.stock?.[offer.id]?.status !== 'available') conditions.push(owned ? 'Déjà acquis dans cette campagne.' : 'Offre indisponible.');
-        return { ...definition, animalId: definition.id, costCredits: offer.costCredits,
+        return { ...definition, animalId: definition.id, animalIds, members, offerId: offer.id, vendorId: offer.vendorId,
+          groupIndivisible: animalIds.length > 1, name: members.map(member => member.name).join(' et '), costCredits: offer.costCredits,
           habitatLabel: habitat?.label || definition.habitatType, conditions, owned, canBuy: !conditions.length };
       }) };
   }
@@ -152,6 +163,17 @@ export class ShipCompanionControllerV87 {
       const opened = this.ui.open({ mode: interaction.action.endsWith('shop') ? 'shop' : 'terminal', animalId: interaction.animalId });
       if (!opened) { this.hub.resume(); this.toast('Le dialogue ne peut pas être affiché sur ce navigateur.'); }
       return Boolean(opened);
+    }
+    if (interaction.action === 'ship-animal:observe') {
+      const checked = getShipAnimalRoomInteractionV87(this.hub, this.saveSystem.data);
+      if (checked?.action !== interaction.action || checked.habitatId !== interaction.habitatId || !this.safe()) return false;
+      const result = observeShipAnimalEnclosureV87(this.saveSystem.data, { habitatId: interaction.habitatId },
+        { player: this.player(), graph: this.refreshGraph() });
+      if (!result.ok) { this.toast(textFor(result.code)); return false; }
+      const activities = { rest: 'au repos', idle: 'au repos', walk: 'explore le parc', eat: 'se nourrit', sleep: 'dort' };
+      this.toast(result.animals.length ? result.animals.map(animal => animal.name + ' : ' + (activities[animal.activity] || animal.activity)).join(' · ')
+        : 'Parc équipé. Aucun résident arrivé pour le moment.');
+      return true; // Observation has no reward, time advancement or persistence side effect.
     }
     const verified = this.interaction();
     if (!verified || verified.action !== interaction.action || verified.animalId !== interaction.animalId) return false;
@@ -181,22 +203,23 @@ export class ShipCompanionControllerV87 {
         : action.type === 'undock' ? requestShipPortUndockV87(save, request, context) : abortShipPortDockV87(save, request, context);
     } else if (action.type === 'buy') {
       if (physical?.action !== 'ship-port:shop') return false;
-      const offerModel = this.model().offers.find(entry => entry.animalId === action.animalId);
+      const offerModel = this.model().offers.find(entry => action.offerId ? entry.offerId === action.offerId : entry.animalIds.includes(action.animalId));
       if (!offerModel?.canBuy) { this.toast(offerModel?.conditions.join(' ') || 'Offre indisponible.'); return false; }
-      const definition = SHIP_ANIMAL_DEFINITIONS_V87[action.animalId];
+      if (offerModel.vendorId !== physical.vendorId) return false;
+      const definition = SHIP_ANIMAL_DEFINITIONS_V87[offerModel.animalId];
       const habitats = getShipAnimalHabitatsV87(save);
       const habitat = habitats.find(entry => entry.id === definition.defaultHabitatId);
-      const meeting = SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === action.animalId);
+      const meeting = SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === definition.id);
       result = acquireShipAnimalV87(save, { offerId: meeting.offerId, habitatId: habitat.id,
-        transactionId: 'adopt:' + action.animalId + ':' + save.shipPortV1.sessionId.split(':').at(-1) }, {
-        vendorAccessible: true, artReadyIds: [action.animalId], habitats: getShipAnimalHabitatsV87(save),
+        transactionId: 'adopt:' + offerModel.offerId + ':' + save.shipPortV1.sessionId.split(':').at(-1) }, {
+        vendorAccessible: true, vendorId: physical.vendorId, artReadyIds: offerModel.animalIds, habitats: getShipAnimalHabitatsV87(save),
         care: { available: save.hub.systems.supplies > 0,
           capacity: habitats.filter(entry => entry.installed).reduce((sum, entry) => sum + entry.capacity, 0) },
         simulationTime: save.shipAnimalsV1.lastSimulationTime,
         transit: { edgeId: 'carried-port-to-habitat', from: { hubId: PORT.id, roomId: PORT.counterRoomId,
           deckId: 'engineering', x: meeting.x, y: 624 }, to: habitat.location }
       });
-      if (result.ok && result.changed) result = initializeShipAnimalDeliveryV87(result.save, { animalId: action.animalId });
+      if (result.ok && result.changed) result = initializeShipAnimalDeliveryV87(result.save, { animalId: definition.id });
     } else return false;
     const success = this.commit(result);
     if (success) { this.ui.close(); this.toast(action.type === 'buy' ? 'Contrat enregistré. Prenez la caisse près de l’espace de rencontre avec E.' : 'Manœuvre enregistrée. Reprenez le contrôle du hangar pour la laisser se dérouler.'); }
@@ -253,16 +276,22 @@ export class ShipCompanionControllerV87 {
     const dropped = sampleShipAnimalDeliveriesV87(this.saveSystem.data).find(entry => entry.phase === 'awaiting-recovery'
       && entry.roomId === player.roomId && entry.deckId === player.deckId
       && Math.abs(entry.x - player.x) <= 85 && Math.abs(entry.y - player.y) <= 12);
+    const names = unit => (unit.animalIds || [unit.animalId]).map(id => SHIP_ANIMAL_DEFINITIONS_V87[id].name.toUpperCase()).join(' ET ');
     if (dropped) return { action: 'ship-animal:pickup', animalId: dropped.animalId,
-      prompt: 'E — REPRENDRE LA CAISSE DE ' + SHIP_ANIMAL_DEFINITIONS_V87[dropped.animalId].name.toUpperCase() };
-    for (const animal of Object.values(this.saveSystem.data.shipAnimalsV1?.animals || {})) {
-      const delivery = animal.deliveryV87;
-      if (delivery?.phase === 'awaiting-pickup' && player.roomId === PORT.counterRoomId
-        && Math.abs(player.x - animal.location.from.x) <= 85)
-        return { action: 'ship-animal:pickup', animalId: animal.id, prompt: 'E — PRENDRE LA CAISSE DE ' + animal.name.toUpperCase() };
+      prompt: 'E — REPRENDRE LA CAISSE DE ' + names(dropped) };
+    for (const delivery of sampleShipAnimalDeliveriesV87(this.saveSystem.data)) {
+      const animal = this.saveSystem.data.shipAnimalsV1.animals[delivery.animalId];
+      if (delivery.phase === 'awaiting-pickup' && player.roomId === delivery.roomId
+        && player.deckId === delivery.deckId && Math.abs(player.x - delivery.x) <= 85 && Math.abs(player.y - delivery.y) <= 12)
+        return { action: 'ship-animal:pickup', animalId: animal.id, prompt: 'E — PRENDRE LA CAISSE DE ' + names(delivery) };
       const habitat = getShipAnimalHabitatsV87(this.saveSystem.data).find(entry => entry.id === animal.habitatId);
-      if (delivery?.phase === 'carried' && player.roomId === 'animal-care' && Math.abs(player.x - habitat.location.x) <= 85)
-        return { action: 'ship-animal:receive', animalId: animal.id, prompt: 'E — DÉPOSER ET CONTRÔLER ' + animal.name.toUpperCase() };
+      const receivingPoint = habitat?.receivingPoint || habitat?.location;
+      if (delivery.carried && player.roomId === habitat?.location.roomId
+        && Math.abs(player.x - receivingPoint.x) <= 85 && Math.abs(player.y - receivingPoint.y) <= 12)
+        return { action: 'ship-animal:receive', animalId: animal.id, prompt: 'E — DÉPOSER ET CONTRÔLER ' + names(delivery) };
+    }
+    for (const animal of Object.values(this.saveSystem.data.shipAnimalsV1?.animals || {})) {
+      if (getShipAnimalHabitatsV87(this.saveSystem.data).find(habitat => habitat.id === animal.habitatId)?.navigationDomain === 'enclosure-volume') continue;
       if (animal.location.kind === 'resident' && animal.location.roomId === player.roomId && animal.location.deckId === player.deckId
         && Math.abs(animal.location.x - player.x) <= 70 && Math.abs(animal.location.y - player.y) <= 12)
         return { action: 'ship-animal:pet', animalId: animal.id, prompt: 'E — PROPOSER UN CONTACT À ' + animal.name.toUpperCase() };
@@ -274,16 +303,25 @@ export class ShipCompanionControllerV87 {
     const player = this.player(), save = this.saveSystem.data;
     if (!player) return;
     const graph = this.refreshGraph();
-    for (const actor of sampleShipAnimalRoutinesV87(save, { roomId: player.roomId, deckId: player.deckId, graph })) {
+    const portArt = this.hub.ensureAnnexAssetsV71(PORT.counterRoomId), enclosure = portArt?.get('enclosure');
+    const inCare = player.roomId === 'animal-care';
+    const actors = sampleShipAnimalRoutinesV87(save, { roomId: player.roomId, deckId: player.deckId, graph });
+    const drawActor = actor => {
       const previous = this.ownerStamp === this.stamp() ? this.previousActors?.find(entry => entry.animalId === actor.animalId) : null;
       const visual = sampleCompanionPresentationV87(actor, previous, this.tickRemainder,
         { paused: !this.hub.running || this.documentRef.hidden || this.ui.isOpen, reducedMotion: save.settings?.reducedMotion === true });
       drawShipAnimalV87(ctx, this.images.get(actor.animalId), visual);
-    }
-    const props = this.hub.ensureAnnexAssetsV71(PORT.counterRoomId)?.get('prop');
+    };
+    if (inCare) drawShipAnimalEnclosuresV87(ctx, enclosure, save, 'back');
+    if (inCare && isShipAnimalEnclosureAtlasReadyV87(enclosure)) actors.filter(actor => actor.enclosed).forEach(drawActor);
+    if (inCare) drawShipAnimalEnclosuresV87(ctx, enclosure, save, 'front');
+    actors.filter(actor => !actor.enclosed).forEach(drawActor);
+    const props = portArt?.get('prop');
     for (const delivery of sampleShipAnimalDeliveriesV87(save)) {
-      if (!delivery.carried && player.roomId === delivery.roomId && player.deckId === delivery.deckId)
-        drawPortPropV87(ctx, props, 'carrier', { x: delivery.x - 28, width: 56, bottom: delivery.y });
+      if (!delivery.carried && player.roomId === delivery.roomId && player.deckId === delivery.deckId) {
+        if (delivery.animalIds?.length === 2) drawShipBondedCarrierV87(ctx, enclosure, { x: delivery.x - 42, width: 84, bottom: delivery.y });
+        else drawPortPropV87(ctx, props, 'carrier', { x: delivery.x - 28, width: 56, bottom: delivery.y });
+      }
     }
   }
   drawCarried(ctx) {
@@ -298,7 +336,8 @@ export class ShipCompanionControllerV87 {
       transitioning: Boolean(this.hub.annexTransitionV71)
     });
     if (!this.carriedPresentationV87) return;
-    drawPortPropV87(ctx, this.hub.ensureAnnexAssetsV71(PORT.counterRoomId)?.get('prop'), 'carrier',
-      this.carriedPresentationV87.bounds);
+    const art = this.hub.ensureAnnexAssetsV71(PORT.counterRoomId);
+    if (delivery.animalIds?.length === 2) drawShipBondedCarrierV87(ctx, art?.get('enclosure'), this.carriedPresentationV87.bounds);
+    else drawPortPropV87(ctx, art?.get('prop'), 'carrier', this.carriedPresentationV87.bounds);
   }
 }

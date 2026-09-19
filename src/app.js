@@ -13,6 +13,7 @@ import {
 } from './save.js';
 import { CrewUiV85 } from './crew-ui-v85.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
+import { isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
 import { ShipCompanionControllerV87 } from './ship-companion-controller-v87.js';
 import { RefugeControllerV87 } from './refuge-controller-v87.js';
 import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
@@ -2103,9 +2104,11 @@ function handleShipAnimalRoomActionV87(interaction) {
   }
   const player = hubEngine.player;
   const images = hubEngine.getAnnexAssetGroupV71('animal-care');
+  const habitat = getShipAnimalHabitatsV87(saveSystem.data).find(entry => entry.id === interaction.habitatId);
+  const enclosed = habitat?.navigationDomain === 'enclosure-volume';
   const artReady = ['far', 'prop', 'door'].every(role => {
     const image = images?.get(role); return image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
-  });
+  }) && (!enclosed || isShipAnimalEnclosureAtlasReadyV87(hubEngine.ensureAnnexAssetsV71('frontier-civil-counter')?.get('enclosure')));
   const prepared = installShipAnimalHabitatV87(saveSystem.data, interaction.habitatId, {
     roomId: hubEngine.currentAnnexV71()?.id, playerX: player.x + player.w / 2,
     feetY: player.y + player.h, artReady
@@ -2145,7 +2148,7 @@ function handleHubAction(interaction) {
   }
   if (interaction.type === 'hub:npc-interaction' && openNpcDialogueV62(interaction)) return;
   if (interaction.action.startsWith('refuge:')) return refugeControllerV87.handle(interaction);
-  if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet'].includes(interaction.action))
+  if (interaction.action.startsWith('ship-port:') || ['ship-animal:pickup', 'ship-animal:receive', 'ship-animal:pet', 'ship-animal:observe'].includes(interaction.action))
     return shipCompanionControllerV87.handle(interaction);
   if (interaction.action.startsWith('ship-animal:')) return handleShipAnimalRoomActionV87(interaction);
   if (interaction.action === 'hub:proving-ground-qualified') {

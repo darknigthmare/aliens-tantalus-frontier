@@ -1,12 +1,16 @@
 import { migrateShipAnimalStateV87 } from './ship-animal-state-v87.js';
-import { SHIP_ANIMAL_ANNEX_V87, getShipAnimalHabitatsV87 } from './ship-animal-habitat-v87.js';
+import { SHIP_ANIMAL_ANNEX_V87, SHIP_ANIMAL_HABITATS_V87, getShipAnimalHabitatsV87 } from './ship-animal-habitat-v87.js';
 import { buildShipAnimalNavigationV87, planShipAnimalRouteV87, stepShipAnimalRouteV87,
   sampleShipAnimalRouteV87 } from './ship-animal-navigation-v87.js';
 
 export const SHIP_ANIMAL_ROUTINE_BODIES_V87 = Object.freeze({
   'animal-moka': Object.freeze({ w: 38, h: 38, speed: 42 }),
   'animal-brume': Object.freeze({ w: 60, h: 58, speed: 54 }),
-  'animal-luciole': Object.freeze({ w: 36, h: 36, speed: 42 })
+  'animal-luciole': Object.freeze({ w: 36, h: 36, speed: 42 }),
+  'animal-noisette': Object.freeze({ w: 44, h: 30, speed: 18, movement: 'enclosure-hop', hopHeight: 3 }),
+  'animal-cafe': Object.freeze({ w: 36, h: 32, speed: 17, movement: 'enclosure-hop', hopHeight: 3 }),
+  'animal-tic': Object.freeze({ w: 30, h: 16, speed: 16, movement: 'enclosure-walk', hopHeight: 0 }),
+  'animal-tac': Object.freeze({ w: 32, h: 16, speed: 15, movement: 'enclosure-walk', hopHeight: 0 })
 });
 const clone = value => structuredClone(value);
 const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -24,6 +28,68 @@ const eventIdValid = value => typeof value === 'string'
   && !['__proto__', 'prototype', 'constructor'].includes(value);
 const fail = (save, code) => ({ ok: false, changed: false, code, save: clone(save), events: [] });
 const unchanged = (save, code = 'unchanged') => ({ ok: true, changed: false, code, save: clone(save), events: [] });
+
+const enclosed = animal => Boolean(SHIP_ANIMAL_ROUTINE_BODIES_V87[animal?.id]?.movement);
+const enclosureFor = animal => SHIP_ANIMAL_HABITATS_V87.find(habitat => habitat.id === animal?.habitatId
+  && habitat.navigationDomain === 'enclosure-volume' && own(habitat.memberLocations, animal.id)
+  && habitat.compatibleFamilyIds.includes(animal.familyId));
+const targetsFor = (habitat, animal) => habitat.memberRoutineTargets?.[animal.id] || habitat.routineTargets;
+
+// Each member has a safe half-volume. The pair remains together in one enclosure
+// without two bodies being stacked, crossing a neighbour or reaching the human lane.
+function enclosurePointValid(animal, point, grounded = false) {
+  const habitat = enclosureFor(animal), body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
+  const home = habitat?.memberLocations[animal.id], bounds = habitat?.enclosureBounds;
+  const targets = habitat?.memberRoutineTargets[animal.id];
+  return Boolean(home && bounds && targets && body && point
+    && ['hubId', 'deckId', 'roomId'].every(key => point[key] === home[key])
+    && finite(point.x) && finite(point.y) && point.x >= targets.minX - EPS && point.x <= targets.maxX + EPS
+    && point.y <= home.y + EPS && point.y >= home.y - (grounded ? 0 : body.hopHeight) - EPS
+    && point.x - body.w / 2 >= bounds.x - EPS && point.x + body.w / 2 <= bounds.x + bounds.w + EPS
+    && point.y - body.h >= bounds.y - EPS && point.y <= bounds.y + bounds.h + EPS);
+}
+function enclosureRouteLocation(route) {
+  const progress = Math.min(1, route.elapsed / route.duration);
+  const hops = Math.max(1, Math.ceil(Math.abs(route.to.x - route.from.x) / 16));
+  const lift = progress <= EPS || progress >= 1 - EPS ? 0
+    : route.hopHeight * Math.sin(Math.PI * progress * hops) ** 2;
+  return { kind: 'resident', ...place(route.from),
+    x: route.from.x + (route.to.x - route.from.x) * progress, y: route.from.y - lift };
+}
+function validateEnclosureRoutine(animal, routine, clock) {
+  const habitat = enclosureFor(animal), body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
+  if (!habitat || !enclosurePointValid(animal, animal.location, routine.phase !== 'walk')
+    || animal.location.kind !== 'resident' || routine.phase === 'pet') return 'unsafe-enclosure-origin';
+  if (routine.phase !== 'walk') return routine.route !== null || routine.elapsed > DURATION[routine.phase] + EPS
+    ? 'invalid-enclosure-routine' : null;
+  const route = routine.route;
+  if (!object(route) || route.kind !== 'enclosure-volume' || route.schema !== 87
+    || route.habitatId !== habitat.id || route.actorId !== animal.id || route.speed !== body.speed
+    || route.body?.w !== body.w || route.body?.h !== body.h || route.hopHeight !== body.hopHeight
+    || !enclosurePointValid(animal, route.from, true) || !enclosurePointValid(animal, route.to, true)
+    || !finite(route.duration) || route.duration <= 0
+    || Math.abs(route.duration - Math.abs(route.to.x - route.from.x) / body.speed) > EPS
+    || !finite(route.elapsed) || route.elapsed < 0 || route.elapsed >= route.duration + EPS
+    || !finite(route.simulationTime) || route.simulationTime < 0 || route.simulationTime > clock + EPS
+    || route.status !== 'moving' || Math.abs(routine.elapsed - route.elapsed) > EPS
+    || !samePlace(animal.location, enclosureRouteLocation(route))) return 'invalid-enclosure-route';
+  return null;
+}
+function beginEnclosureWalk(animal, target, afterWalk, time, blockedRoomIds) {
+  const habitat = enclosureFor(animal), body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
+  if (!habitat || !enclosurePointValid(animal, animal.location, true)
+    || !enclosurePointValid(animal, target, true)) return { ok: false, reason: 'enclosure-boundary' };
+  if (blockedRoomIds.includes(habitat.location.roomId)) return { ok: false, reason: 'enclosure-protected' };
+  const duration = Math.abs(target.x - animal.location.x) / body.speed;
+  const routine = animal.routineV87;
+  routine.phase = duration <= EPS ? afterWalk : 'walk'; routine.elapsed = 0; routine.afterWalk = afterWalk;
+  routine.route = duration <= EPS ? null : { schema: 87, kind: 'enclosure-volume', habitatId: habitat.id,
+    actorId: animal.id, body: { w: body.w, h: body.h }, speed: body.speed, hopHeight: body.hopHeight,
+    from: place(animal.location), to: place(target), duration, elapsed: 0, simulationTime: time, status: 'moving' };
+  if (duration > EPS) routine.facing = target.x > animal.location.x ? 1 : -1;
+  animal.activity = routine.phase;
+  return { ok: true };
+}
 
 /** Adapt real hub geometry and the authored two-sided annex door. No auto-opening. */
 export function createShipAnimalRoutineGraphV87({
@@ -85,6 +151,7 @@ function validateRoutine(animal, graph, clock) {
     || !['food', 'bed', 'stroll'].includes(routine.next)
     || !finite(routine.petCooldownUntil) || routine.petCooldownUntil < 0
     || !(routine.lastPetEventId === null || eventIdValid(routine.lastPetEventId))) return 'invalid-routine';
+  if (enclosed(animal)) return validateEnclosureRoutine(animal, routine, clock);
   if (routine.phase !== 'walk') return routine.route !== null || animal.location.kind !== 'resident'
     || routine.elapsed > DURATION[routine.phase] + EPS ? 'invalid-routine' : null;
   const route = routine.route;
@@ -101,6 +168,8 @@ function eligible(animal) {
     || (animal.location.kind === 'transit' && animal.routineV87?.phase === 'walk');
 }
 function physicalOrigin(animal, graph) {
+  if (enclosed(animal)) return animal.location.kind === 'resident'
+    && enclosurePointValid(animal, animal.location, animal.routineV87?.phase !== 'walk');
   if (animal.location.kind === 'transit') return true; // Validated itinerary owns this edge.
   const body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
   return animal.location.hubId === 'tantalus' && body
@@ -110,12 +179,14 @@ function physicalOrigin(animal, graph) {
 function habitatFor(save, animal) {
   return getShipAnimalHabitatsV87(save).find(entry => entry.id === animal.habitatId && entry.installed);
 }
-function targetFor(habitat, next) {
+function targetFor(habitat, next, animal) {
   // Paw anchors place each mouth at its separate food dish, never at room centre.
-  const x = next === 'food' || next === 'stroll' ? habitat.routineTargets[next] : habitat.location.x;
-  return { ...habitat.location, x };
+  const home = habitat.memberLocations?.[animal.id] || habitat.location;
+  const x = next === 'food' || next === 'stroll' ? targetsFor(habitat, animal)[next] : home.x;
+  return { ...home, x };
 }
 function beginWalk(animal, graph, target, afterWalk, time, blockedRoomIds) {
+  if (enclosed(animal)) return beginEnclosureWalk(animal, target, afterWalk, time, blockedRoomIds);
   const body = SHIP_ANIMAL_ROUTINE_BODIES_V87[animal.id];
   const planned = planShipAnimalRouteV87(graph, { actorId: animal.id,
     location: animal.location, target, body, speed: body.speed,
@@ -174,6 +245,20 @@ export function stepShipAnimalRoutinesV87(save, {
       const time = start + elapsed - remaining;
       if (routine.phase === 'walk') {
         const route = routine.route;
+        if (enclosed(animal)) {
+          if (blockedRoomIds.includes(animal.location.roomId)) { remaining = 0; break; }
+          const dt = Math.min(remaining, Math.max(0, route.duration - route.elapsed));
+          route.elapsed += dt; route.simulationTime = time + dt;
+          routine.elapsed = route.elapsed;
+          animal.location = enclosureRouteLocation(route);
+          if (!enclosurePointValid(animal, animal.location)) return fail(save, 'enclosure-boundary');
+          remaining -= dt;
+          if (route.elapsed + EPS >= route.duration) {
+            animal.location = { kind: 'resident', ...place(route.to) };
+            routine.phase = routine.afterWalk; routine.route = null; routine.elapsed = 0;
+          }
+          continue;
+        }
         const durationLeft = route.segments.slice(route.segmentIndex)
           .reduce((sum, segment) => sum + segment.duration, 0) - route.segmentElapsed;
         const dt = Math.min(remaining, Math.max(EPS, durationLeft));
@@ -205,7 +290,7 @@ export function stepShipAnimalRoutinesV87(save, {
           routine.phase = 'idle'; routine.elapsed = 0; continue;
         }
         const next = routine.phase === 'eat' ? 'bed' : routine.phase === 'sleep' ? 'stroll' : routine.next;
-        const target = targetFor(habitats.get(animal.id), next);
+        const target = targetFor(habitats.get(animal.id), next, animal);
         const afterWalk = next === 'food' ? 'eat' : next === 'bed' ? 'sleep' : 'idle';
         const planned = beginWalk(animal, graph, target, afterWalk,
           time + consumed, blockedRoomIds);
@@ -220,7 +305,7 @@ export function stepShipAnimalRoutinesV87(save, {
     }
     // The mouth faces the actual dish after arrival, independent of approach direction.
     // Walking keeps its movement-facing; this also repairs a saved backward eat pose.
-    if (routine.phase === 'eat') routine.facing = habitats.get(animal.id).routineTargets.foodFacing;
+    if (routine.phase === 'eat') routine.facing = targetsFor(habitats.get(animal.id), animal).foodFacing;
     animal.activity = routine.phase;
     animal.lastSimulationTime = start + elapsed;
     animal.revision += 1;
@@ -237,6 +322,7 @@ export function requestShipAnimalWalkV87(save, { animalId, target } = {}, {
   if (error) return fail(save, error);
   const animal = own(state.animals, animalId) && state.animals[animalId];
   if (!animal || animal.location.kind !== 'resident') return fail(save, 'resident-required');
+  if (enclosed(animal)) return fail(save, 'enclosure-supervision-required');
   const invalid = validateRoutine(animal, graph, state.lastSimulationTime);
   if (invalid) return fail(save, invalid);
   if (!habitatFor(save, animal)) return fail(save, 'habitat-unavailable');
@@ -259,6 +345,7 @@ export function petShipAnimalV87(save, { animalId, eventId } = {}, {
   if (!eventIdValid(eventId)) return fail(save, 'invalid-event-id');
   const animal = own(state.animals, animalId) && state.animals[animalId];
   if (!animal || animal.location.kind !== 'resident') return fail(save, 'resident-required');
+  if (enclosed(animal)) return fail(save, 'enclosure-observation-only');
   const invalid = validateRoutine(animal, graph, state.lastSimulationTime);
   if (invalid) return fail(save, invalid);
   if (!habitatFor(save, animal) || !physicalOrigin(animal, graph)) return fail(save, 'unsafe-origin');
@@ -284,6 +371,24 @@ export function petShipAnimalV87(save, { animalId, eventId } = {}, {
   return publish(save, state, [{ type: 'animal-petted', animalId }], 'petted');
 }
 
+/** Observe from the human lane. No contact through a closed wall, rewards or time. */
+export function observeShipAnimalEnclosureV87(save, { habitatId } = {}, { player, graph } = {}) {
+  const { state, error } = load(save, graph);
+  if (error) return fail(save, error);
+  const habitat = getShipAnimalHabitatsV87(save).find(entry => entry.id === habitatId
+    && entry.installed && entry.navigationDomain === 'enclosure-volume');
+  if (!habitat) return fail(save, 'habitat-unavailable');
+  if (!player || player.alive !== true || player.roomId !== habitat.location.roomId
+    || player.deckId !== habitat.location.deckId || !finite(player.x) || !finite(player.y)
+    || Math.abs(player.x - habitat.installX) > 52 || Math.abs(player.y - habitat.receivingPoint.y) > 12)
+    return fail(save, 'physical-proximity-required');
+  const animals = Object.values(state.animals).filter(animal => animal.habitatId === habitat.id && eligible(animal));
+  if (animals.some(animal => !enclosed(animal) || !physicalOrigin(animal, graph)
+    || validateRoutine(animal, graph, state.lastSimulationTime))) return fail(save, 'unsafe-enclosure-origin');
+  return { ...unchanged(save, 'observed'), animals: animals.map(animal => ({ animalId: animal.id,
+    name: animal.name, activity: animal.activity, location: clone(animal.location), needs: clone(animal.needs) })) };
+}
+
 /** Projection only: no ticking, ownership creation, actor insertion or persistence. */
 export function sampleShipAnimalRoutinesV87(save, { roomId, deckId = 'habitat', graph } = {}) {
   const state = migrateShipAnimalStateV87(save?.shipAnimalsV1);
@@ -292,7 +397,7 @@ export function sampleShipAnimalRoutinesV87(save, { roomId, deckId = 'habitat', 
     if (validateRoutine(animal, graph, state.lastSimulationTime)
       || !physicalOrigin(animal, graph) || !habitatFor(save, animal)) return [];
     const routine = animal.routineV87;
-    const location = routine?.phase === 'walk' && routine.route
+    const location = !enclosed(animal) && routine?.phase === 'walk' && routine.route
       ? sampleShipAnimalRouteV87(routine.route) : animal.location;
     if (!location || location.roomId !== roomId || location.deckId !== deckId) return [];
     const moving = routine?.phase === 'walk' && routine.route?.status === 'moving';
@@ -300,6 +405,7 @@ export function sampleShipAnimalRoutinesV87(save, { roomId, deckId = 'habitat', 
     return [{ animalId: animal.id, name: animal.name, x: location.x, y: location.y,
       roomId: location.roomId, deckId: location.deckId, clipId: phase,
       elapsed: routine?.elapsed || 0, facing: routine?.facing || 1,
+      enclosed: enclosed(animal), habitatId: animal.habitatId, observationOnly: enclosed(animal),
       transit: location.kind === 'transit', depthProgress: location.depthProgress ?? null }];
   });
 }

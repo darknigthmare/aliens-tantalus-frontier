@@ -7,6 +7,21 @@ const delivery = Object.freeze({ animalId: 'animal-moka', phase: 'carried', carr
   roomId: 'dropship-hangar', deckId: 'engineering', x: 700, y: 624 });
 const player = Object.freeze({ roomId: delivery.roomId, deckId: delivery.deckId, x: 700, y: 624, alive: true });
 
+test('a bonded unit has one two-compartment presentation with immutable identity and preserved carry clearance', () => {
+  const duo = { ...delivery, animalId: 'animal-noisette', animalIds: ['animal-noisette', 'animal-cafe'], unitId: 'duo-contract' };
+  const before = structuredClone(duo), right = sample(duo, player), left = sample(duo, player, { facing: -1 });
+  assert.deepEqual(right.bounds, { x: 706, width: 76, bottom: 600 });
+  assert.deepEqual(left.bounds, { x: 618, width: 76, bottom: 600 });
+  assert.deepEqual(right.animalIds, duo.animalIds); assert.equal(right.unitId, duo.unitId);
+  assert.ok(Object.isFrozen(right.animalIds)); assert.deepEqual(duo, before);
+  const moved = sample(duo, { ...player, x: 750 }, { remainder: .1 });
+  assert.deepEqual(sample(duo, { ...player, x: 765 }, { previous: moved, paused: true }), moved);
+  const newContract = sample({ ...duo, unitId: 'other-contract' }, player, { previous: moved, paused: true });
+  assert.equal(newContract.x, 700, 'a former transaction cannot provide another paused carrier pose');
+  for (const patch of [{ animalIds: ['animal-noisette'] }, { animalIds: ['animal-noisette', 'animal-noisette'] },
+    { animalIds: ['animal-cafe', 'animal-noisette'] }, { unitId: '' }]) assert.equal(sample({ ...duo, ...patch }, player), null);
+});
+
 test('bounded presentation follows live feet between durable samples without modifying either input', () => {
   const next = Object.freeze({ ...player, x: 774, y: 580 });
   const result = sample(delivery, next, { remainder: .19, frameDelta: .034 });

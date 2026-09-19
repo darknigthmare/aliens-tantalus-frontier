@@ -41,8 +41,9 @@ function freezeDeep(value) {
   return value;
 }
 
-test('released original individuals are Moka, Brume and Luciole with authored IDs and all-inclusive proposed prices', () => {
-  assert.deepEqual(Object.keys(SHIP_ANIMAL_DEFINITIONS_V87), ['animal-moka', 'animal-brume', 'animal-luciole']);
+test('released originals retain the three singles and four authored members of indivisible pairs', () => {
+  assert.deepEqual(Object.keys(SHIP_ANIMAL_DEFINITIONS_V87), ['animal-moka', 'animal-brume', 'animal-luciole',
+    'animal-noisette', 'animal-cafe', 'animal-tic', 'animal-tac']);
   assert.equal(SHIP_ANIMAL_DEFINITIONS_V87['animal-moka'].familyId, 'cat-domestic');
   assert.equal(SHIP_ANIMAL_DEFINITIONS_V87['animal-brume'].familyId, 'dog-companion');
   assert.equal(SHIP_ANIMAL_OFFERS_V87['offer-animal-moka'].costCredits, 220);

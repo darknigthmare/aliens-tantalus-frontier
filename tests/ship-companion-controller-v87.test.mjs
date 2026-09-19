@@ -6,9 +6,10 @@ import { SHIP_PORT_DEFINITION_V87 as PORT, requestShipPortDockV87, stepShipPortV
 import { SHIP_PORT_ANNEX_V87 } from '../src/ship-port-room-v87.js';
 import { SHIP_ANIMAL_ANNEX_V87, getShipAnimalHabitatsV87, installShipAnimalHabitatV87 } from '../src/ship-animal-habitat-v87.js';
 import { SHIP_ANIMAL_ATLASES_V87 } from '../src/ship-animal-art-v87.js';
-import { acquireShipAnimalV87 } from '../src/ship-animal-state-v87.js';
+import { acquireShipAnimalV87, SHIP_ANIMAL_OFFERS_V87, getShipAnimalOfferMembersV87 } from '../src/ship-animal-state-v87.js';
+import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87 } from '../src/ship-animal-enclosure-art-v87.js';
 import { initializeShipAnimalDeliveryV87, pickupShipAnimalDeliveryV87, stepShipAnimalDeliveryV87,
-  sampleShipAnimalDeliveriesV87 } from '../src/ship-animal-delivery-v87.js';
+  sampleShipAnimalDeliveriesV87, getShipAnimalDeliveryUnitV87 } from '../src/ship-animal-delivery-v87.js';
 
 const clone = value => structuredClone(value);
 const success = result => { assert.equal(result.ok, true, result.code); return result.save; };
@@ -50,8 +51,8 @@ function purchased(save, carried = false) {
     { player: { roomId: PORT.counterRoomId, deckId: 'engineering', x: 990, y: 624, alive: true }, portAccessible: true }));
   return save;
 }
-function atBerth(save) {
-  let player = { roomId: PORT.counterRoomId, deckId: 'engineering', x: 990, y: 624, alive: true };
+function atBerth(save, finalX = 690) {
+  let player = { roomId: PORT.counterRoomId, deckId: 'engineering', x: sampleShipAnimalDeliveriesV87(save).find(entry => entry.carried).x, y: 624, alive: true };
   const tick = next => {
     save = success(stepShipAnimalDeliveryV87(save, { delta: .25, simulationTime: save.shipAnimalsV1.lastSimulationTime + .25 }, { player: next }));
     player = next;
@@ -61,7 +62,7 @@ function atBerth(save) {
     [SHIP_PORT_ANNEX_V87.parentDoorBounds.x + SHIP_PORT_ANNEX_V87.parentDoorBounds.w / 2, PORT.commandRoomId, 'engineering'],
     [1250, PORT.commandRoomId, 'engineering'], [1300, 'reactor', 'engineering'], [2372, 'reactor', 'engineering'],
     [2372, 'armory', 'industrial'], [2372, 'mess', 'habitat'], [1300, 'mess', 'habitat'],
-    [1250, 'crew-quarters', 'habitat'], [704, 'crew-quarters', 'habitat'], [255, 'animal-care', 'habitat'], [690, 'animal-care', 'habitat']
+    [1250, 'crew-quarters', 'habitat'], [704, 'crew-quarters', 'habitat'], [255, 'animal-care', 'habitat'], [finalX, 'animal-care', 'habitat']
   ]) {
     if (roomId !== player.roomId || deckId !== player.deckId) tick({ ...player, x, roomId, deckId });
     else while (Math.abs(x - player.x) > .001) tick({ ...player, x: player.x + Math.sign(x - player.x) * Math.min(150, Math.abs(x - player.x)) });
@@ -119,6 +120,115 @@ function fixture({ atPort = false, equipped = false, delivery = null } = {}) {
   return { controller, hub, backend, saveSystem, calls, control, locate };
 }
 const drawContext = draws => ({ drawImage: (...args) => draws.push(args), save() {}, restore() {}, translate() {}, scale() {} });
+
+for (const [offerId, x, cost] of [['offer-noisette-cafe', 2130, 260], ['offer-tic-tac', 2420, 240]]) {
+  test(`${offerId}: real colonial counter commits both individuals once and transports one inseparable unit`, () => {
+    const f = fixture({ atPort: true, equipped: true }), ids = getShipAnimalOfferMembersV87(offerId);
+    f.locate(PORT.counterRoomId, 600); const before = JSON.stringify(f.saveSystem.data);
+    assert.equal(f.controller.uiAction({ type: 'buy', offerId }), false);
+    assert.equal(JSON.stringify(f.saveSystem.data), before, 'station vendor cannot sell the colonial offer');
+    f.locate(PORT.counterRoomId, 1965); const model = f.controller.model();
+    assert.equal(model.vendorId, 'colony-shelter'); assert.match(model.vendorName, /Refuge colonial/);
+    assert.deepEqual(model.offers.map(entry => entry.offerId), ['offer-noisette-cafe', 'offer-tic-tac']);
+    const offer = model.offers.find(entry => entry.offerId === offerId);
+    assert.deepEqual(offer.animalIds, ids); assert.equal(offer.members.length, 2); assert.equal(offer.canBuy, true, offer.conditions.join(' '));
+    assert.equal(f.controller.uiAction({ type: 'buy', offerId }), true);
+    assert.equal(f.saveSystem.data.galaxy.resources.credits, 3200 - cost);
+    assert.deepEqual(Object.keys(f.saveSystem.data.shipAnimalsV1.animals), ids);
+    const receipts = Object.values(f.saveSystem.data.shipAnimalsV1.receipts);
+    assert.equal(receipts.length, 1); assert.deepEqual(receipts[0].animalIds, ids);
+    assert.equal(receipts[0].costCredits, cost);
+    assert.equal(Object.keys(f.saveSystem.data.shipAnimalsV1.reservations).length, 2);
+    let units = sampleShipAnimalDeliveriesV87(f.saveSystem.data);
+    assert.equal(units.length, 1); assert.deepEqual(units[0].animalIds, ids);
+    assert.equal(units[0].x, x); assert.equal(units[0].phase, 'awaiting-pickup');
+    assert.equal(f.controller.uiAction({ type: 'buy', offerId }), false);
+    assert.equal(f.saveSystem.data.galaxy.resources.credits, 3200 - cost);
+    f.locate(PORT.counterRoomId, x); const action = f.controller.interaction();
+    assert.equal(action.action, 'ship-animal:pickup');
+    for (const member of offer.members) assert.ok(action.prompt.includes(member.name.toUpperCase()));
+    assert.equal(f.controller.handle(action), true);
+    units = sampleShipAnimalDeliveriesV87(f.saveSystem.data);
+    assert.equal(units.length, 1); assert.equal(units[0].carried, true);
+    for (const id of ids) {
+      const unit = getShipAnimalDeliveryUnitV87(f.saveSystem.data, id);
+      assert.equal(unit.phase, 'carried'); assert.deepEqual(unit.animalIds, ids); assert.equal(unit.unitId, receipts[0].transactionId);
+    }
+    const draws = []; f.controller.drawCarried(drawContext(draws));
+    assert.equal(draws.length, 1); assert.equal(draws[0][0].currentSrc, SHIP_ANIMAL_ENCLOSURE_ASSET_V87);
+    assert.equal(draws[0][7], 76); assert.equal(draws[0][5], x + 44 - 38);
+    const saved = JSON.stringify(f.saveSystem.data), durable = [...f.backend.values];
+    f.controller.drawCarried(drawContext(draws)); assert.equal(JSON.stringify(f.saveSystem.data), saved);
+    assert.deepEqual([...f.backend.values], durable);
+    const resumed = new SaveSystem(f.backend); resumed.load(1);
+    assert.deepEqual(Object.keys(resumed.data.shipAnimalsV1.animals), ids);
+    assert.equal(Object.keys(resumed.data.shipAnimalsV1.receipts).length, 1);
+    assert.equal(sampleShipAnimalDeliveriesV87(resumed.data).length, 1);
+  });
+}
+
+test('a missing partner atlas, missing double carrier or quota cannot leave half a purchased duo', () => {
+  for (const condition of ['partner-art', 'carrier-art', 'quota']) {
+    const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 1965);
+    if (condition === 'partner-art') f.controller.images.get('animal-cafe').complete = false;
+    if (condition === 'carrier-art') f.hub.getAnnexAssetGroupV71().get('enclosure').complete = false;
+    if (condition === 'quota') f.backend.reject = true;
+    const before = JSON.stringify(f.saveSystem.data), bytes = [...f.backend.values]; f.backend.attempts = 0;
+    assert.equal(f.controller.uiAction({ type: 'buy', offerId: 'offer-noisette-cafe' }), false);
+    assert.equal(JSON.stringify(f.saveSystem.data), before); assert.deepEqual([...f.backend.values], bytes);
+    assert.equal(Object.keys(f.saveSystem.data.shipAnimalsV1.animals).length, 0);
+    assert.equal(f.backend.attempts, condition === 'quota' ? 1 : 0);
+  }
+});
+
+test('enclosure observation is a real proximity-checked read and never offers contact through its wall', () => {
+  const f = fixture({ atPort: true, equipped: true });
+  const habitat = getShipAnimalHabitatsV87(f.saveSystem.data).find(entry => entry.navigationDomain === 'enclosure-volume');
+  f.controller.refreshGraph = ShipCompanionControllerV87.prototype.refreshGraph.bind(f.controller);
+  f.locate('animal-care', habitat.installX); const before = JSON.stringify(f.saveSystem.data), attempts = f.backend.attempts;
+  assert.equal(f.controller.handle({ action: 'ship-animal:observe', habitatId: habitat.id }), true);
+  assert.match(f.calls.toasts.at(-1), /Aucun résident/); assert.equal(JSON.stringify(f.saveSystem.data), before);
+  assert.equal(f.backend.attempts, attempts); assert.equal(f.controller.interaction(), null);
+  f.locate('animal-care', 300);
+  assert.equal(f.controller.handle({ action: 'ship-animal:observe', habitatId: habitat.id }), false);
+});
+
+test('real duo arrival renders two residents between closed panels and observation does not mutate the save', () => {
+  const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 2130);
+  assert.equal(f.controller.uiAction({ type: 'buy', offerId: 'offer-noisette-cafe' }), true);
+  assert.equal(f.controller.handle(f.controller.interaction()), true);
+  const habitat = getShipAnimalHabitatsV87(f.saveSystem.data).find(entry => entry.id === 'noisette-cafe-pen-v87');
+  f.saveSystem.commit(atBerth(f.saveSystem.data, habitat.receivingPoint.x));
+  f.locate('animal-care', habitat.receivingPoint.x);
+  f.controller.refreshGraph = ShipCompanionControllerV87.prototype.refreshGraph.bind(f.controller);
+  assert.equal(f.controller.interaction().action, 'ship-animal:receive');
+  assert.equal(f.controller.handle(f.controller.interaction()), true);
+  const intakeDraws = []; f.controller.draw(drawContext(intakeDraws));
+  const intakeCrates = intakeDraws.filter(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87 && draw[1] === 1022);
+  assert.equal(intakeCrates.length, 1); assert.equal(intakeCrates[0][7], 84);
+  for (let step = 0; step < 30; step++) f.controller.tick(.2);
+  for (const id of ['animal-noisette', 'animal-cafe']) {
+    const animal = f.saveSystem.data.shipAnimalsV1.animals[id];
+    assert.equal(animal.location.kind, 'resident'); assert.equal(animal.location.y, 612);
+    assert.equal(animal.activity, 'rest', 'arrival can be observed before the first resident routine tick');
+    assert.equal(getShipAnimalDeliveryUnitV87(f.saveSystem.data, id).phase, 'delivered');
+  }
+  assert.equal(f.controller.interaction(), null, 'closed enclosure never offers pet through its wall');
+  const before = JSON.stringify(f.saveSystem.data), attempts = f.backend.attempts;
+  assert.equal(f.controller.handle({ action: 'ship-animal:observe', habitatId: habitat.id }), true);
+  assert.match(f.calls.toasts.at(-1), /Noisette/); assert.match(f.calls.toasts.at(-1), /Café/);
+  assert.equal(f.calls.toasts.at(-1), 'Noisette : au repos · Café : au repos');
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.equal(f.backend.attempts, attempts);
+  const draws = []; f.controller.draw(drawContext(draws));
+  const animalIndexes = draws.flatMap((draw, index) => Object.values(SHIP_ANIMAL_ATLASES_V87).some(atlas => atlas.path === draw[0].currentSrc) ? [index] : []);
+  assert.equal(animalIndexes.length, 2);
+  assert.ok(draws.slice(0, animalIndexes[0]).every(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87 && draw[2] < 600));
+  assert.ok(draws.slice(animalIndexes.at(-1) + 1).every(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87 && draw[2] > 600));
+  assert.ok(animalIndexes[0] >= 4 && draws.length - animalIndexes.at(-1) - 1 >= 4, 'both enclosures contribute real back/front bitmap slices');
+  f.hub.getAnnexAssetGroupV71().get('enclosure').complete = false;
+  const unavailable = []; f.controller.draw(drawContext(unavailable));
+  assert.equal(unavailable.length, 0, 'residents cannot float on the human lane without their closed enclosure');
+});
 
 test('quota rollback performs one write attempt, preserves durable/live state and stops without a second persist', () => {
   const f = fixture(); const { controller, backend, saveSystem, hub, calls } = f;

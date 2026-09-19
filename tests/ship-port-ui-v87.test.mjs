@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { ShipPortUiV87 } from '../src/ship-port-ui-v87.js';
 import { SHIP_ANIMAL_ATLASES_V87 } from '../src/ship-animal-art-v87.js';
-import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87 } from '../src/ship-animal-state-v87.js';
+import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87, getShipAnimalOfferMembersV87 } from '../src/ship-animal-state-v87.js';
 
 // DOM double for interaction/ownership tests. Native dialog and visual QA remain browser gates.
 function documentDouble() {
@@ -55,11 +55,80 @@ const offer = (animalId, costCredits) => ({ animalId, name: SHIP_ANIMAL_DEFINITI
 function harness(extra = {}) {
   const document = documentDouble(), actions = []; let closes = 0;
   const model = { phase: 'docked', progress: 1, message: 'Comptoir physique accessible', canDock: false, canUndock: true,
-    offers: Object.values(SHIP_ANIMAL_OFFERS_V87).map(entry => offer(entry.animalId, entry.costCredits)), busy: false, reducedMotion: false };
+    offers: Object.values(SHIP_ANIMAL_OFFERS_V87).filter(entry => entry.vendorId === 'station-shop').map(entry => offer(entry.animalId, entry.costCredits)), busy: false, reducedMotion: false };
   const ui = new ShipPortUiV87({ documentRef: document, getModel: () => model,
     onAction: action => { actions.push(action); return true; }, onClose: () => { closes++; }, ...extra });
   return { ui, model, document, actions, get closes() { return closes; } };
 }
+
+function colonyHarness(extra = {}) {
+  const h = harness(extra);
+  h.model.vendorId = 'colony-shelter'; h.model.vendorName = 'Refuge colonial · comptoir d’adoption';
+  h.model.offers = Object.values(SHIP_ANIMAL_OFFERS_V87).filter(entry => entry.vendorId === 'colony-shelter').map(entry => {
+    const animalIds = getShipAnimalOfferMembersV87(entry), members = animalIds.map(id => SHIP_ANIMAL_DEFINITIONS_V87[id]);
+    return { ...offer(animalIds[0], entry.costCredits), animalIds, members, offerId: entry.id, vendorId: entry.vendorId,
+      groupIndivisible: true, name: members.map(member => member.name).join(' et ') };
+  });
+  return h;
+}
+
+test('colonial counter shows four individual dossiers but only two indivisible purchase contracts', async () => {
+  const { ui, model, actions } = colonyHarness(); ui.open({ mode: 'shop', animalId: 'animal-cafe' });
+  assert.equal(ui.heading.textContent, model.vendorName);
+  assert.deepEqual([...ui.tabButtons].filter(([, button]) => !button.hidden).map(([id]) => id),
+    ['animal-noisette', 'animal-cafe', 'animal-tic', 'animal-tac']);
+  for (const entry of model.offers) {
+    ui.select(entry.animalIds[1]);
+    assert.equal(ui.offerName.textContent, entry.name); assert.equal(ui.confirmButton.disabled, true);
+    assert.equal(ui.memberDossiers.hidden, false);
+    assert.deepEqual(ui.memberDossiers.children.map(node => node.dataset.animalId), entry.animalIds);
+    for (const section of ui.memberDossiers.children) {
+      const member = SHIP_ANIMAL_DEFINITIONS_V87[section.dataset.animalId];
+      assert.deepEqual(section.children.map(node => node.textContent), [member.name, member.appearance, member.biography, member.traits.join(' · ')]);
+    }
+    assert.equal(await ui.dispatch('buy'), false);
+    ui.examine(); assert.equal(ui.price.textContent, `Coût total du duo indivisible : ${entry.costCredits} CR`);
+    assert.equal(ui.confirmButton.textContent, `Confirmer le duo — ${entry.costCredits} CR`);
+    assert.equal(await ui.dispatch('buy'), true);
+    assert.deepEqual(actions.at(-1), { type: 'buy', offerId: entry.offerId });
+  }
+  assert.equal(actions.length, 2); ui.destroy();
+});
+
+test('group examination binds both biographies, membership, price and vendor before dispatch', async () => {
+  for (const mutate of [entry => { entry.costCredits++; }, entry => { entry.vendorId = 'station-shop'; },
+    entry => { entry.members[1] = { ...entry.members[1], biography: 'Dossier actualisé' }; },
+    entry => { entry.animalIds = [entry.animalIds[0], 'animal-tac']; }]) {
+    const { ui, model, actions } = colonyHarness(); ui.open({ mode: 'shop' }); ui.examine();
+    mutate(model.offers[0]); assert.equal(await ui.dispatch('buy'), false);
+    assert.equal(actions.length, 0); assert.equal(ui.details.hidden, true); ui.destroy();
+  }
+  const { ui, model, actions } = colonyHarness();
+  model.offers[0].offerId = 'invented-duo'; ui.open({ mode: 'shop' }); ui.examine();
+  assert.equal(ui.confirmButton.disabled, true); assert.equal(await ui.dispatch('buy'), false); assert.equal(actions.length, 0); ui.destroy();
+});
+
+test('duo previews require both identity-gated atlases and draw each at its actual independent scale', () => {
+  const { ui, model, document } = colonyHarness(); ui.open({ mode: 'shop' });
+  for (const entry of model.offers) {
+    ui.select(entry.animalIds[0]); const images = entry.animalIds.map(id => ui.images.get(id));
+    for (let index = 0; index < images.length; index++) {
+      const atlas = SHIP_ANIMAL_ATLASES_V87[entry.animalIds[index]];
+      Object.assign(images[index], { complete: true, naturalWidth: atlas.width, naturalHeight: atlas.height });
+      document.draws.length = 0; images[index].onload();
+      if (index === 0) assert.equal(document.draws.filter(call => call[0] === 'drawImage').length, 0);
+    }
+    const draws = document.draws.filter(call => call[0] === 'drawImage'); assert.equal(draws.length, 2);
+    draws.forEach((draw, index) => {
+      assert.equal(draw.length, 10); assert.equal(draw[1], images[index]);
+      assert.equal(draw[8] / draw[4], SHIP_ANIMAL_ATLASES_V87[entry.animalIds[index]].worldScale);
+    });
+    const path = images[1].src; images[1].src = images[0].src; document.draws.length = 0; images[1].onload();
+    assert.equal(document.draws.filter(call => call[0] === 'drawImage').length, 0);
+    images[1].src = path;
+  }
+  ui.destroy();
+});
 
 test('native dialog lifecycle, modes and close callbacks are explicit and idempotent', () => {
   const h = harness(), { ui, document } = h, previous = document.createElement('button'); previous.focus();
@@ -173,9 +242,9 @@ test('model strings remain literal text, and arbitrary asset paths or unknown an
 });
 
 test('previews use genuine dedicated atlases at fixed relative scale and nine-argument crops', () => {
-  const { ui, document } = harness(); ui.open({ mode: 'shop' });
+  const { ui, document, model } = harness(); ui.open({ mode: 'shop' });
   assert.match(ui.previewStatus.textContent, /indisponible ou en chargement/);
-  for (const animalId of Object.keys(SHIP_ANIMAL_DEFINITIONS_V87)) {
+  for (const { animalId } of model.offers) {
     ui.select(animalId); const image = ui.images.get(animalId);
     const atlas = SHIP_ANIMAL_ATLASES_V87[animalId];
     Object.assign(image, { complete: true, naturalWidth: atlas.width, naturalHeight: atlas.height }); document.draws.length = 0; image.onload();
@@ -189,9 +258,10 @@ test('previews use genuine dedicated atlases at fixed relative scale and nine-ar
 
 test('Luciole has her own definition-backed tab, dossier and two-step 220 CR confirmation', async () => {
   const { ui, actions, model, document } = harness();
-  assert.deepEqual([...ui.tabButtons.keys()], ['animal-moka', 'animal-brume', 'animal-luciole']);
+  assert.deepEqual([...ui.tabButtons.keys()], Object.keys(SHIP_ANIMAL_DEFINITIONS_V87));
   ui.open({ mode: 'shop', animalId: 'animal-luciole' });
   const luciole = ui.tabButtons.get('animal-luciole');
+  assert.deepEqual([...ui.tabButtons].filter(([, button]) => !button.hidden).map(([id]) => id), ['animal-moka', 'animal-brume', 'animal-luciole']);
   assert.equal(luciole.textContent, 'Luciole'); assert.equal(luciole.hidden, false);
   assert.equal(luciole.getAttribute('aria-selected'), 'true'); assert.equal(ui.offerName.textContent, 'Luciole');
   assert.equal(ui.confirmButton.disabled, true); assert.equal(await ui.dispatch('buy'), false);

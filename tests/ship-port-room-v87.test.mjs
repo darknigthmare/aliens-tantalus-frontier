@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import { SHIP_PORT_ANNEX_V87 as ANNEX, SHIP_PORT_TERMINAL_V87 as TERMINAL, SHIP_PORT_MEETINGS_V87,
   getShipPortInteractionV87, drawShipPortRoomV87, drawShipPortTerminalV87 } from '../src/ship-port-room-v87.js';
 import { PORT_ART_V87, getPortPropBoundsV87 } from '../src/ship-port-art-v87.js';
+import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87 } from '../src/ship-animal-enclosure-art-v87.js';
 import { SHIP_ANIMAL_ATLASES_V87 } from '../src/ship-animal-art-v87.js';
-import { SHIP_ANIMAL_HABITATS_V87 } from '../src/ship-animal-habitat-v87.js';
+import { SHIP_ANIMAL_HABITATS_V87, SHIP_ANIMAL_ANNEX_V87 } from '../src/ship-animal-habitat-v87.js';
 import { SHIP_PORT_DEFINITION_V87, requestShipPortDockV87, stepShipPortV87 } from '../src/ship-port-state-v87.js';
 import { HUB_ANNEXES_V71 } from '../src/tantalus-hub-expansion-v71.js';
 import { HUB_ANNEXES_V87, validateHubAnnexGeometryV87, buildHubRuntimeGraphV87 } from '../src/hub-annex-registry-v87.js';
@@ -104,8 +105,11 @@ test('the port is an explicit second extension with a separate parent and no rew
   assert.ok(graph.adjacency['dropship-hangar'].includes(ANNEX.id));
 });
 
-test('port departure uses the exact internal hub identity of all three actual companion berths', () => {
-  assert.equal(SHIP_ANIMAL_HABITATS_V87.length, 3);
+test('port departure uses the exact internal hub identity of three berths and two duo enclosures', () => {
+  assert.equal(SHIP_ANIMAL_HABITATS_V87.length, 5);
+  assert.equal(SHIP_ANIMAL_HABITATS_V87.reduce((sum, habitat) => sum + habitat.capacity, 0), 7);
+  assert.equal(SHIP_ANIMAL_ANNEX_V87.world.width, 1920);
+  assert.equal(ANNEX.world.width, 2560); assert.equal(ANNEX.platforms[0].w, 2560);
   assert.ok(SHIP_ANIMAL_HABITATS_V87.every(berth => berth.location.hubId === SHIP_PORT_DEFINITION_V87.shipHubId));
 });
 
@@ -168,7 +172,7 @@ test('the locked port remains drawn but cannot activate its door while the legac
   hub.interact(); assert.equal(hub.annexTransitionV71?.annexId, 'arrival-airlock');
 }));
 
-test('terminal and gangway are reachable by walking, then counter and all three meeting areas are traversable on the same floor', () => withRuntime(() => {
+test('terminal and gangway are reachable by walking, then both vendors and all five meeting areas remain traversable', () => withRuntime(() => {
   const { hub, actions } = createHub(true); place(hub, 96);
   const health = hub.player.health;
   walk(hub, 46); assert.equal(getShipPortInteractionV87(hub)?.action, 'ship-port:terminal');
@@ -179,40 +183,53 @@ test('terminal and gangway are reachable by walking, then counter and all three 
   near(hub.player.x, 233); near(hub.player.y + hub.player.h, 624);
   walk(hub, 600); assert.equal(getShipPortInteractionV87(hub)?.action, 'ship-port:shop');
   for (const meeting of SHIP_PORT_MEETINGS_V87) {
-    walk(hub, meeting.x); assert.equal(getShipPortInteractionV87(hub)?.animalId, meeting.animalId);
+    walk(hub, meeting.x); assert.equal(getShipPortInteractionV87(hub)?.offerId, meeting.offerId);
+    assert.equal(getShipPortInteractionV87(hub)?.vendorId, meeting.vendorId);
   }
+  walk(hub, 1965); assert.equal(getShipPortInteractionV87(hub)?.vendorId, 'colony-shelter');
   walk(hub, 144); hub.interact(); finishTransition(hub);
   assert.equal(hub.currentAnnexV71(), null); assert.equal(hub.currentRoom().id, 'dropship-hangar');
   near(hub.player.y + hub.player.h, 624); near(hub.player.x + hub.player.w / 2, 99, 4);
   assert.equal(hub.player.health, health); assert.equal(hub.player.shockHits, 0);
 }));
 
-test('three meeting interaction zones and fences remain independent and clear of the exit, counter and shelf', () => {
-  assert.deepEqual(SHIP_PORT_MEETINGS_V87.map(entry => [entry.animalId, entry.x]),
+test('five meeting zones preserve old origins and keep both duos independent from vendors, props and exit', () => {
+  assert.deepEqual(SHIP_PORT_MEETINGS_V87.slice(0, 3).map(entry => [entry.animalId, entry.x]),
     [['animal-moka', 990], ['animal-brume', 1435], ['animal-luciole', 1705]]);
   // Brume's exact historical coordinate is part of saved transit origins.
   assert.equal(SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === 'animal-brume').x, 1435);
   const hub = { player: { x: 0, y: 532, w: 44, h: 92, alive: true }, currentAnnexV71: () => ANNEX };
-  const gates = SHIP_PORT_MEETINGS_V87.map(entry => getPortPropBoundsV87('gate', { x: entry.x - 115, width: 230, bottom: 626 }));
-  for (let index = 0; index < SHIP_PORT_MEETINGS_V87.length; index++) {
-    const meeting = SHIP_PORT_MEETINGS_V87[index];
+  const meetings = [...new Map(SHIP_PORT_MEETINGS_V87.map(entry => [entry.offerId, entry])).values()];
+  assert.equal(meetings.length, 5);
+  assert.deepEqual(SHIP_PORT_MEETINGS_V87.slice(3).map(entry => [entry.animalId, entry.x]),
+    [['animal-noisette', 2130], ['animal-cafe', 2130], ['animal-tic', 2420], ['animal-tac', 2420]]);
+  const gates = meetings.map(entry => getPortPropBoundsV87('gate', { x: entry.x - 115, width: 230, bottom: 626 }));
+  for (const meeting of SHIP_PORT_MEETINGS_V87) {
     assert.equal(ANNEX.art[meeting.imageRole], SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path);
     assert.ok(ANNEX.artRoles.includes(meeting.imageRole));
+  }
+  for (let index = 0; index < meetings.length; index++) {
+    const meeting = meetings[index];
     for (const offset of [-105, 0, 105]) {
       place(hub, meeting.x + offset);
-      assert.equal(getShipPortInteractionV87(hub)?.animalId, meeting.animalId);
+      assert.equal(getShipPortInteractionV87(hub)?.offerId, meeting.offerId);
+      assert.equal(getShipPortInteractionV87(hub)?.vendorId, meeting.vendorId);
     }
     for (const solid of [...ANNEX.props, ANNEX.entrance, ...gates.filter((_, other) => other !== index)]) {
       assert.equal(overlaps(gates[index], solid), false, 'fence overlap for ' + meeting.animalId);
     }
     if (index > 0) {
-      const previous = SHIP_PORT_MEETINGS_V87[index - 1];
+      const previous = meetings[index - 1];
       assert.ok(meeting.x - previous.x > 210, 'Prompt activation spans must not intersect');
-      place(hub, (previous.x + meeting.x) / 2); assert.equal(getShipPortInteractionV87(hub), null);
+      place(hub, (previous.x + meeting.x) / 2);
+      assert.equal(getShipPortInteractionV87(hub)?.offerId, undefined);
     }
   }
-  assert.equal(new Set(SHIP_PORT_MEETINGS_V87.map(entry => ANNEX.art[entry.imageRole])).size, 3);
-  assert.ok(gates.at(-1).x + gates.at(-1).w <= ANNEX.props.find(entry => entry.id === 'port-shelf').x);
+  assert.equal(new Set(SHIP_PORT_MEETINGS_V87.map(entry => ANNEX.art[entry.imageRole])).size, 7);
+  assert.ok(gates[2].x + gates[2].w <= ANNEX.props.find(entry => entry.id === 'port-shelf').x);
+  assert.ok(gates.at(-1).x + gates.at(-1).w < ANNEX.world.width);
+  place(hub, 1965); assert.equal(getShipPortInteractionV87(hub)?.vendorId, 'colony-shelter');
+  assert.equal(getShipPortInteractionV87(hub)?.animalId, undefined);
   assert.ok(ANNEX.props.every(prop => prop.x + prop.w <= ANNEX.world.width));
 });
 
@@ -227,20 +244,23 @@ test('port prompts reject airborne, dead, transitioning, editor and unrelated-ro
 
 test('independent vendor, props and available companions use cropped images and sold companions disappear from the shop', () => {
   const images = new Map([['prop', image(PORT_ART_V87.props.path)], ['vendor', image(PORT_ART_V87.vendor.path)],
+    ['enclosure', image(SHIP_ANIMAL_ENCLOSURE_ASSET_V87)],
     ...SHIP_PORT_MEETINGS_V87.map(entry => [entry.imageRole, image(SHIP_ANIMAL_ATLASES_V87[entry.animalId].path)])]);
   const trace = { texts: [], images: [], translations: [] }; const ctx = ctxFor(trace); const save = campaign();
   drawShipPortRoomV87(ctx, images, save, .5, false);
-  assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.props.path).length, 4 + SHIP_PORT_MEETINGS_V87.length);
+  const offers = [...new Set(SHIP_PORT_MEETINGS_V87.map(entry => entry.offerId))];
+  assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.props.path).length, 8);
+  assert.ok(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87));
   assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.vendor.path).length, 1);
   for (const meeting of SHIP_PORT_MEETINGS_V87)
     assert.equal(trace.images.filter(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path).length, 1);
   assert.ok(trace.images.every(args => args.length === 9));
   assert.ok(trace.translations.some(([x, y]) => x === 668 && y === 624));
-  for (const sold of SHIP_PORT_MEETINGS_V87) {
-    for (const meeting of SHIP_PORT_MEETINGS_V87) save.shipAnimalsV1.stock[meeting.offerId].status = meeting === sold ? 'sold' : 'available';
+  for (const sold of offers) {
+    for (const offerId of offers) save.shipAnimalsV1.stock[offerId].status = offerId === sold ? 'sold' : 'available';
     trace.images.length = 0; drawShipPortRoomV87(ctx, images, save, .5, true);
     for (const meeting of SHIP_PORT_MEETINGS_V87)
-      assert.equal(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path), meeting !== sold);
+      assert.equal(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path), meeting.offerId !== sold);
   }
 });
 

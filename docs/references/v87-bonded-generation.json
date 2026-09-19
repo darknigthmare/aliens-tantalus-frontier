@@ -1,0 +1,2847 @@
+{
+  "mode": "integrated-imagegen",
+  "date": "2026-09-20",
+  "status": "alpha-crops-and-both-physical-runtime-flows-verified",
+  "prompts": {
+    "noisette": "Use case: stylized-concept\nAsset type: production 2D side-scrolling game individual animation sprite atlas, genuinely transparent RGBA background.\nPrimary request: exactly 32 separate full-body poses of ONE original domestic rabbit named Noisette. Light hazelnut brown fur, upright slender ears, modest slender body, short cotton tail. No clothing. The identity and size must stay identical in every frame. Not a reference to any real person's pet.\nComposition: landscape1536x1024 canvas, EXACT regular8columns by4rows of192x256 cells. One complete isolated rabbit percell, centered on x=96, allfeetbaseline localy=220. Rabbit no wider than144px and no taller than164px INCLUDING ears. Transparent margin at least24pixels each side ofeverycell. Do not drawgridlines orcell numbers.\nView/style: strict horizontal orthographic SIDE PROFILE facing RIGHT throughout, clean detailed retro science-fiction game pixel art, fine pixel clusters, readable anatomical silhouette, soft neutral upper-left lighting. Never topdown or3/4. NO shadows beneath paws, nofloor, nobowl, notext, nologo, noextraobjects, noothercharacters.\nAnimation order lefttoright: row1=8 genuine sequential phases of a gentle rabbit hop, gathered crouch, rearlegpush, extending, lowairborne, forwardreach, forepawscontact, hindpawsfollow, settledcrouch; centerbody remainsnearx96, verticalmovement modest so normalpawanchorcanbeused. Row2 first4=standing rest breathing andearmovement; last4=gradual sitdown. Row3=8 gentle nibbling/eating phases, headslightlylowered and mouthmoving, WITHOUTanyfoodorbowl bakedintoanimal. Row4 first4=sleepingcurl subtlebreathing; last4=selfgrooming muzzle withforepaws. Frameactionsmustbe distinctbut coherent, stable head,ears,colorandbodyproportions. All32 silhouettescomplete, nointersections,noedgecropping, nohiddenbakedcheckerboard. Actual alpha=0 emptybackground.",
+    "cafe": "Use case: stylized-concept\nAsset type: production 2D side-scrolling game individual animation sprite atlas, genuinely transparent RGBA background.\nPrimary request: exactly 32 separate full-body poses of ONE original domestic rabbit named Café. Dark coffee-brown fur, small pale cream nose marking and pale under-chin, shorter thicker upright ears and a visibly compact rounded body, short dark cotton tail. Must be recognizably a second distinct rabbit, not a recolor of a slender rabbit. Preserve these same features in every pose. No clothing. The identity and size must stay identical in every frame. Not a reference to any real person's pet.\nComposition: landscape1536x1024 canvas, EXACT regular8columns by4rows of192x256 cells. One complete isolated rabbit percell, centered on x=96, allfeetbaseline localy=220. Rabbit no wider than144px and no taller than164px INCLUDING ears. Transparent margin at least24pixels each side ofeverycell. Do not drawgridlines orcell numbers.\nView/style: strict horizontal orthographic SIDE PROFILE facing RIGHT throughout, clean detailed retro science-fiction game pixel art, fine pixel clusters, readable anatomical silhouette, soft neutral upper-left lighting. Never topdown or3/4. NO shadows beneath paws, nofloor, nobowl, notext, nologo, noextraobjects, noothercharacters.\nAnimation order lefttoright: row1=8 genuine sequential phases of a gentle rabbit hop, gathered crouch, rearlegpush, extending, lowairborne, forwardreach, forepawscontact, hindpawsfollow, settledcrouch; centerbody remainsnearx96, verticalmovement modest so normalpawanchorcanbeused. Row2 first4=standing rest breathing andearmovement; last4=gradual sitdown. Row3=8 gentle nibbling/eating phases, headslightlylowered and mouthmoving, WITHOUTanyfoodorbowl bakedintoanimal. Row4 first4=sleepingcurl subtlebreathing; last4=selfgrooming muzzle withforepaws. Frameactionsmustbe distinctbut coherent, stable head,ears,colorandbodyproportions. All32 silhouettescomplete, nointersections,noedgecropping, nohiddenbakedcheckerboard. Actual alpha=0 emptybackground.",
+    "tic": "Use case: stylized-concept\nAsset type: production individual32pose 2D side-scroller animation sprite atlas on genuinely transparent RGBA.\nSubject: ONE original domestic pet rat named Tic, light silver-grey short fur, rounded pink ears, slender elongated body, small black eye, thin pink naked tail. SAME anatomy, scale and coloration all32poses. No clothing, no props.\nCanvas1536x1024, exact8columns4rows, cells192x256. One whole rat ineachcell. CENTER the complete silhouette includingtail within x24..168, paws localy215, headfacingRIGHT. Tail extends LEFT behindbody, naturalcurve nevercrossescell. Footprint max144px long tailincluded and90px tall, generous whollytransparent margins. NO opaque matte, realalpha0 background, no checkerboardgrid paintedin, no floor/shadow/text/labels/gridnumbers/logos.\nStyle: strict orthographic SIDEprofile, finelyclustered crisp pixelgame art for gritty sci-fi2Dgame, naturalanatomy not mascot. Not3/4 oroverhead. Stablelightingneutralupperleft.\nReadorder lefttoright: row1 eight genuinelysequential walkcycle poses with changing fore/hindfeet, tail gentlyfollowing, bodyheightalmoststable. Row2 first4 idlebreathing/whiskerandearmotion, last4 gradual crouch-to-seatedhindlegs. Row3 eight distinct gentle food-nibbling poses holding tiny imaginarymorsel betweenfrontpaws, nobakedfood orbowls. Row4 first4 curledsleep subtlebreathing, last4 facegrooming withfrontpaws. Eachpose anatomicallycomplete andseparated fromallneighbors. Maintain bodylength excludingtail about75px, tailabout60px, standingheight45px, riseonhindlegsmax85px. All32mustremain thesamerat andactualposechanges, notidenticalduplicates.",
+    "tac": "Use case: stylized-concept\nAsset type: production individual32pose 2D side-scroller animation sprite atlas on genuinely transparent RGBA.\nSubject: ONE original domestic pet rat named Tac, brown-and-white hooded coat: warm dark-brown head and shoulder hood, broad white flank and abdomen, rounded pink ears, noticeably stocky rounder body, small black eye, thin pink naked tail. SAME anatomy, scale and coloration all32poses. No clothing, no props.\nCanvas1536x1024, exact8columns4rows, cells192x256. One whole rat ineachcell. CENTER the complete silhouette includingtail within x24..168, paws localy215, headfacingRIGHT. Tail extends LEFT behindbody, naturalcurve nevercrossescell. Footprint max144px long tailincluded and90px tall, generous whollytransparent margins. NO opaque matte, realalpha0 background, no checkerboardgrid paintedin, no floor/shadow/text/labels/gridnumbers/logos.\nStyle: strict orthographic SIDEprofile, finelyclustered crisp pixelgame art for gritty sci-fi2Dgame, naturalanatomy not mascot. Not3/4 oroverhead. Stablelightingneutralupperleft.\nReadorder lefttoright: row1 eight genuinelysequential walkcycle poses with changing fore/hindfeet, tail gentlyfollowing, bodyheightalmoststable. Row2 first4 idlebreathing/whiskerandearmotion, last4 gradual crouch-to-seatedhindlegs. Row3 eight distinct gentle food-nibbling poses holding tiny imaginarymorsel betweenfrontpaws, nobakedfood orbowls. Row4 first4 curledsleep subtlebreathing, last4 facegrooming withfrontpaws. Eachpose anatomicallycomplete andseparated fromallneighbors. Maintain bodylength excludingtail about80px, tailabout60px, standingheight45px, riseonhindlegsmax85px. All32mustremain thesamerat andactualposechanges, notidenticalduplicates.",
+    "enclosure": "Use case: stylized-concept\nAsset type: six modular transparent PNG game prop sprites, a production parts atlas for a strict 2D side-scrolling industrial spaceship animal-care room. NOT a whole room screenshot.\nCanvas1536x1024 exact3columns2rows of512x512cells. ONE centered item/group percell with at least24px transparentmargin. Allitems front orthographic elevation, NO top or receding sidefaces, neverisometric/3quarter. Crisp pixel-cluster game illustration, detailed worn darkteal steel, warm clean bedding, small amber latches; visual silhouette readableat170pxwidth. NO text,logos,people,animals,background,floor,castshadow, paintedcheckerboard. Emptyspace trulyalpha0, including openings in grilles.\nSix cells, lefttoright:\nTOP LEFT: BACK module of an EMPTY enclosed rabbit pen, exterior440wide212high centered, rectangular flatbackwall with stout sideposts, thick supportive bottomplinth. Interior floorline26px above bottom, two separate small straw restniches atleftandright, two foodbowls and two waterspouts, separate littertray and central chewlog, spacious open middle playarea. NO frontmesh, NO foregroundbars. This is a recess behind the human walkway.\nTOP CENTER: BACK module of an EMPTY rat habitat, exterior420wide235high, samefrontalelevation flatbackwithposts andsupportplinth, interiorfloorline37pxabovebottom. Two separate tiny restniches, two bowls, twowaterspouts, hygienetray, chewblock and low tunnel, no ladder orplatform requiringclimb, spacious clearcenter. NO frontmesh/bars.\nTOP RIGHT: a SINGLE PORTABLE transport carrier with TWO CLEARLY SEPARATE equal-size side-by-side ventilated compartments, strongcenterpartition, topcarryhandle, solidbase, safetydoorlatchoneachcompartment. Exterior440wide230high, EMPTYinteriors visible behindmesh, industrialdarkteal. Noanimalportraitsorlabels.\nBOTTOM LEFT: ONLY the detachable FRONT frame and fine sparse vertical metalbargrille matchingexact440x212 rabbitpen. Absolutelytransparentemptyinterior between finebars (see-through, notwhite or coloredglass). Symmetricthinpostsouterframe,smallamberlatch, no backwall, nofloorfill, no otherprops.\nBOTTOM CENTER: ONLY detachableFRONTframe/finebargrille matching420x235 ratpen, transparentopenings; no backwall/props, nofillingbetweenbars.\nBOTTOM RIGHT: six small independent accessories in a tidy2columns3rows subgrid, allgeneroustransparentgaps: two strawresthides(row1), two food-waterdishes(row2), one shallowhygienetray and one woodenchewtunnel(row3). Eachsprite fullfrontal,elevationonly.\nKeep matching frame silhouettes exact betweenback/front module pair. Actual RGBA transparent background.",
+    "noisetteV2": "Use case: stylized-concept\nAsset type: 32frame originalrabbit animation sprite sheet for a2Dgame, transparentRGBA1536x1024. Exactly FOUR columns and EIGHT rows,4x8grid32sprites. Cells384x128. Wide EMPTY transparent gutters. Fullrabbit incl ears andtail no tallerthan100px, no widerthan190px, centered on localx192, standingpawsbaseline localy112. No frame shouldtouchanyother.\nONE consistent originaldomesticrabbit Noisette, hazelnut lightbrownfur, slenderbody,longuprightears, short cotton-tail, paleunderchin. Same anatomyandcolorandscale allposes. StrictorthographicSIDEprofile facingRIGHT, crispfinepixelcluster art,detailed naturalanatomy, neutralupperleftlighting. NO3/4view,notopdown,notext,nolabels,nogrid,nobowls,noshadows,nofloors,noobjects, noopaqueorcheckerboardbackground, actualalpha0.\nReadlefttoright: rows1+2=8successive completegentlehop phases(crouch,push,extension,lowflight,reach,forecontact,hindfollow,settle), actuallegmotionandlowbodybounce; row3=4standingidlebreathing;row4=4sittingdown;rows5+6=8nibbling/eatingheadlowered WITHOUT props;row7=4curledsleepbreathing;row8=4selfgroomingwithforepaws. Sparse wide horizontal margins are essential. Identicalrabbitidentity everyframe, separatewholesilhouettes, neveroverlap.",
+    "ticV2": "Use case: stylized-concept\nAsset type: production individual32pose 2D side-scroller animation sprite atlas on genuinely transparent RGBA.\nSubject: ONE original domestic pet rat named Tic, light silver-grey short fur, rounded pink ears, slender elongated body, small black eye, thin pink naked tail. SAME anatomy, scale and coloration all32poses. No clothing, no props.\nCanvas1536x1024, exact FOUR columns and EIGHT rows (4x8), cells384x128, 32 small well-separated rat sprites. One whole rat ineachcell. CENTER the complete silhouette includingtail within localx72..312, paws localy104, headfacingRIGHT. Tail extends LEFT behindbody, naturalcurve nevercrossescell. Footprint max200px long tailincluded and seventy(70)px tall, with very wide horizontal EMPTY gutters and32px verticalEMPTYgaps, generous whollytransparent margins. NO opaque matte, realalpha0 background, no checkerboardgrid paintedin, no floor/shadow/text/labels/gridnumbers/logos.\nStyle: strict orthographic SIDEprofile, finelyclustered crisp pixelgame art for gritty sci-fi2Dgame, naturalanatomy not mascot. Not3/4 oroverhead. Stablelightingneutralupperleft.\nReadorder lefttoright: rows1and2 eight genuinelysequential walkcycle poses with changing fore/hindfeet, tail gentlyfollowing, bodyheightalmoststable. Row3 four idlebreathing/whiskerandearmotion. Row4 four gradual crouch-to-seatedhindlegs. Rows5and6 eight distinct gentle food-nibbling poses holding tiny imaginarymorsel betweenfrontpaws, nobakedfood orbowls. Row7 four curledsleep subtlebreathing. Row8 four facegrooming withfrontpaws. Eachpose anatomicallycomplete andseparated fromallneighbors. Maintain bodylength excludingtail about75px, tailabout60px, standingheight45px, riseonhindlegsmax68px. All32mustremain thesamerat andactualposechanges, notidenticalduplicates.",
+    "tacV2": "Use case: stylized-concept\nAsset type: production individual32pose 2D side-scroller animation sprite atlas on genuinely transparent RGBA.\nSubject: ONE original domestic pet rat named Tac, brown-and-white hooded coat: warm dark-brown head and shoulder hood, broad white flank and abdomen, rounded pink ears, noticeably stocky rounder body, small black eye, thin pink naked tail. SAME anatomy, scale and coloration all32poses. No clothing, no props.\nCanvas1536x1024, exact FOUR columns and EIGHT rows (4x8), cells384x128, 32 small well-separated rat sprites. One whole rat ineachcell. CENTER the complete silhouette includingtail within localx72..312, paws localy104, headfacingRIGHT. Tail extends LEFT behindbody, naturalcurve nevercrossescell. Footprint max200px long tailincluded and seventy(70)px tall, with very wide horizontal EMPTY gutters and32px verticalEMPTYgaps, generous whollytransparent margins. NO opaque matte, realalpha0 background, no checkerboardgrid paintedin, no floor/shadow/text/labels/gridnumbers/logos.\nStyle: strict orthographic SIDEprofile, finelyclustered crisp pixelgame art for gritty sci-fi2Dgame, naturalanatomy not mascot. Not3/4 oroverhead. Stablelightingneutralupperleft.\nReadorder lefttoright: rows1and2 eight genuinelysequential walkcycle poses with changing fore/hindfeet, tail gentlyfollowing, bodyheightalmoststable. Row3 four idlebreathing/whiskerandearmotion. Row4 four gradual crouch-to-seatedhindlegs. Rows5and6 eight distinct gentle food-nibbling poses holding tiny imaginarymorsel betweenfrontpaws, nobakedfood orbowls. Row7 four curledsleep subtlebreathing. Row8 four facegrooming withfrontpaws. Eachpose anatomicallycomplete andseparated fromallneighbors. Maintain bodylength excludingtail about80px, tailabout60px, standingheight45px, riseonhindlegsmax68px. All32mustremain thesamerat andactualposechanges, notidenticalduplicates."
+  },
+  "selected": [
+    {
+      "name": "noisette",
+      "sha256": "8677223b6b12a054163711fa3214cb1610b2d364d934a6da88410dbe023f2aa8",
+      "alphaZero": 0.7575467427571615,
+      "alphaBelow8": 0.8199933369954427,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            144,
+            6,
+            163,
+            123,
+            81.5,
+            121
+          ],
+          "body": {
+            "label": 2,
+            "count": 9230,
+            "x": 145,
+            "y": 7,
+            "w": 161,
+            "h": 121
+          },
+          "neighbors": []
+        },
+        {
+          "index": 1,
+          "rect": [
+            498,
+            6,
+            163,
+            123,
+            81.5,
+            121
+          ],
+          "body": {
+            "label": 3,
+            "count": 8287,
+            "x": 499,
+            "y": 7,
+            "w": 161,
+            "h": 121
+          },
+          "neighbors": []
+        },
+        {
+          "index": 2,
+          "rect": [
+            857,
+            5,
+            200,
+            123,
+            100,
+            121
+          ],
+          "body": {
+            "label": 1,
+            "count": 9652,
+            "x": 858,
+            "y": 6,
+            "w": 198,
+            "h": 121
+          },
+          "neighbors": []
+        },
+        {
+          "index": 3,
+          "rect": [
+            1223,
+            11,
+            217,
+            108,
+            108.5,
+            105
+          ],
+          "body": {
+            "label": 4,
+            "count": 10025,
+            "x": 1224,
+            "y": 12,
+            "w": 215,
+            "h": 106
+          },
+          "neighbors": []
+        },
+        {
+          "index": 4,
+          "rect": [
+            121,
+            141,
+            190,
+            115,
+            95,
+            113
+          ],
+          "body": {
+            "label": 13,
+            "count": 9470,
+            "x": 122,
+            "y": 142,
+            "w": 188,
+            "h": 113
+          },
+          "neighbors": []
+        },
+        {
+          "index": 5,
+          "rect": [
+            512,
+            142,
+            159,
+            116,
+            79.5,
+            114
+          ],
+          "body": {
+            "label": 14,
+            "count": 8990,
+            "x": 513,
+            "y": 143,
+            "w": 157,
+            "h": 114
+          },
+          "neighbors": []
+        },
+        {
+          "index": 6,
+          "rect": [
+            885,
+            140,
+            158,
+            117,
+            79,
+            116
+          ],
+          "body": {
+            "label": 12,
+            "count": 8850,
+            "x": 886,
+            "y": 141,
+            "w": 156,
+            "h": 115
+          },
+          "neighbors": []
+        },
+        {
+          "index": 7,
+          "rect": [
+            1262,
+            136,
+            150,
+            122,
+            75,
+            120
+          ],
+          "body": {
+            "label": 11,
+            "count": 8831,
+            "x": 1263,
+            "y": 137,
+            "w": 148,
+            "h": 120
+          },
+          "neighbors": []
+        },
+        {
+          "index": 8,
+          "rect": [
+            137,
+            267,
+            156,
+            131,
+            78,
+            128
+          ],
+          "body": {
+            "label": 25,
+            "count": 8996,
+            "x": 138,
+            "y": 268,
+            "w": 154,
+            "h": 129
+          },
+          "neighbors": []
+        },
+        {
+          "index": 9,
+          "rect": [
+            512,
+            266,
+            152,
+            131,
+            76,
+            129
+          ],
+          "body": {
+            "label": 24,
+            "count": 8767,
+            "x": 513,
+            "y": 267,
+            "w": 150,
+            "h": 129
+          },
+          "neighbors": []
+        },
+        {
+          "index": 10,
+          "rect": [
+            882,
+            268,
+            156,
+            129,
+            78,
+            127
+          ],
+          "body": {
+            "label": 27,
+            "count": 8928,
+            "x": 883,
+            "y": 269,
+            "w": 154,
+            "h": 127
+          },
+          "neighbors": []
+        },
+        {
+          "index": 11,
+          "rect": [
+            1275,
+            267,
+            120,
+            131,
+            60,
+            128
+          ],
+          "body": {
+            "label": 26,
+            "count": 7225,
+            "x": 1276,
+            "y": 268,
+            "w": 118,
+            "h": 129
+          },
+          "neighbors": []
+        },
+        {
+          "index": 12,
+          "rect": [
+            139,
+            407,
+            152,
+            123,
+            76,
+            121
+          ],
+          "body": {
+            "label": 35,
+            "count": 9095,
+            "x": 140,
+            "y": 408,
+            "w": 150,
+            "h": 121
+          },
+          "neighbors": []
+        },
+        {
+          "index": 13,
+          "rect": [
+            516,
+            412,
+            144,
+            118,
+            72,
+            116
+          ],
+          "body": {
+            "label": 38,
+            "count": 8529,
+            "x": 517,
+            "y": 413,
+            "w": 142,
+            "h": 116
+          },
+          "neighbors": []
+        },
+        {
+          "index": 14,
+          "rect": [
+            891,
+            411,
+            136,
+            119,
+            68,
+            117
+          ],
+          "body": {
+            "label": 37,
+            "count": 7983,
+            "x": 892,
+            "y": 412,
+            "w": 134,
+            "h": 117
+          },
+          "neighbors": []
+        },
+        {
+          "index": 15,
+          "rect": [
+            1271,
+            410,
+            121,
+            120,
+            60.5,
+            118
+          ],
+          "body": {
+            "label": 36,
+            "count": 7620,
+            "x": 1272,
+            "y": 411,
+            "w": 119,
+            "h": 118
+          },
+          "neighbors": []
+        },
+        {
+          "index": 16,
+          "rect": [
+            124,
+            539,
+            170,
+            97,
+            85,
+            94
+          ],
+          "body": {
+            "label": 45,
+            "count": 9634,
+            "x": 125,
+            "y": 540,
+            "w": 168,
+            "h": 95
+          },
+          "neighbors": []
+        },
+        {
+          "index": 17,
+          "rect": [
+            493,
+            545,
+            172,
+            91,
+            86,
+            88
+          ],
+          "body": {
+            "label": 46,
+            "count": 9700,
+            "x": 494,
+            "y": 546,
+            "w": 170,
+            "h": 89
+          },
+          "neighbors": []
+        },
+        {
+          "index": 18,
+          "rect": [
+            874,
+            545,
+            171,
+            91,
+            85.5,
+            88
+          ],
+          "body": {
+            "label": 47,
+            "count": 9645,
+            "x": 875,
+            "y": 546,
+            "w": 169,
+            "h": 89
+          },
+          "neighbors": []
+        },
+        {
+          "index": 19,
+          "rect": [
+            1249,
+            545,
+            174,
+            91,
+            87,
+            88
+          ],
+          "body": {
+            "label": 48,
+            "count": 9494,
+            "x": 1250,
+            "y": 546,
+            "w": 172,
+            "h": 89
+          },
+          "neighbors": []
+        },
+        {
+          "index": 20,
+          "rect": [
+            127,
+            657,
+            170,
+            95,
+            85,
+            92
+          ],
+          "body": {
+            "label": 58,
+            "count": 9662,
+            "x": 128,
+            "y": 658,
+            "w": 168,
+            "h": 93
+          },
+          "neighbors": []
+        },
+        {
+          "index": 21,
+          "rect": [
+            492,
+            657,
+            174,
+            94,
+            87,
+            92
+          ],
+          "body": {
+            "label": 59,
+            "count": 9801,
+            "x": 493,
+            "y": 658,
+            "w": 172,
+            "h": 92
+          },
+          "neighbors": []
+        },
+        {
+          "index": 22,
+          "rect": [
+            873,
+            658,
+            173,
+            93,
+            86.5,
+            91
+          ],
+          "body": {
+            "label": 60,
+            "count": 9770,
+            "x": 874,
+            "y": 659,
+            "w": 171,
+            "h": 91
+          },
+          "neighbors": []
+        },
+        {
+          "index": 23,
+          "rect": [
+            1250,
+            658,
+            175,
+            93,
+            87.5,
+            91
+          ],
+          "body": {
+            "label": 61,
+            "count": 9646,
+            "x": 1251,
+            "y": 659,
+            "w": 173,
+            "h": 91
+          },
+          "neighbors": []
+        },
+        {
+          "index": 24,
+          "rect": [
+            138,
+            780,
+            150,
+            79,
+            75,
+            75
+          ],
+          "body": {
+            "label": 67,
+            "count": 8431,
+            "x": 139,
+            "y": 781,
+            "w": 148,
+            "h": 77
+          },
+          "neighbors": []
+        },
+        {
+          "index": 25,
+          "rect": [
+            511,
+            784,
+            144,
+            77,
+            72,
+            74
+          ],
+          "body": {
+            "label": 69,
+            "count": 7848,
+            "x": 512,
+            "y": 785,
+            "w": 142,
+            "h": 75
+          },
+          "neighbors": []
+        },
+        {
+          "index": 26,
+          "rect": [
+            880,
+            780,
+            141,
+            79,
+            70.5,
+            75
+          ],
+          "body": {
+            "label": 68,
+            "count": 7875,
+            "x": 881,
+            "y": 781,
+            "w": 139,
+            "h": 77
+          },
+          "neighbors": []
+        },
+        {
+          "index": 27,
+          "rect": [
+            1251,
+            775,
+            141,
+            82,
+            70.5,
+            80
+          ],
+          "body": {
+            "label": 66,
+            "count": 8057,
+            "x": 1252,
+            "y": 776,
+            "w": 139,
+            "h": 80
+          },
+          "neighbors": []
+        },
+        {
+          "index": 28,
+          "rect": [
+            151,
+            868,
+            115,
+            140,
+            57.5,
+            138
+          ],
+          "body": {
+            "label": 72,
+            "count": 7951,
+            "x": 152,
+            "y": 869,
+            "w": 113,
+            "h": 138
+          },
+          "neighbors": []
+        },
+        {
+          "index": 29,
+          "rect": [
+            513,
+            868,
+            124,
+            140,
+            62,
+            138
+          ],
+          "body": {
+            "label": 73,
+            "count": 8804,
+            "x": 514,
+            "y": 869,
+            "w": 122,
+            "h": 138
+          },
+          "neighbors": []
+        },
+        {
+          "index": 30,
+          "rect": [
+            896,
+            870,
+            111,
+            138,
+            55.5,
+            136
+          ],
+          "body": {
+            "label": 75,
+            "count": 8327,
+            "x": 897,
+            "y": 871,
+            "w": 109,
+            "h": 136
+          },
+          "neighbors": []
+        },
+        {
+          "index": 31,
+          "rect": [
+            1278,
+            868,
+            118,
+            140,
+            59,
+            138
+          ],
+          "body": {
+            "label": 74,
+            "count": 7957,
+            "x": 1279,
+            "y": 869,
+            "w": 116,
+            "h": 138
+          },
+          "neighbors": []
+        }
+      ]
+    },
+    {
+      "name": "cafe",
+      "sha256": "e004a825fab476379f20dfd1430f62e35d53ec7ab3531d94e78a95ba1f320289",
+      "alphaZero": 0.6625703175862631,
+      "alphaBelow8": 0.7240066528320312,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            21,
+            95,
+            172,
+            144,
+            79,
+            142
+          ],
+          "body": {
+            "label": 8,
+            "count": 13587,
+            "x": 22,
+            "y": 96,
+            "w": 170,
+            "h": 142
+          },
+          "neighbors": []
+        },
+        {
+          "index": 1,
+          "rect": [
+            218,
+            90,
+            167,
+            149,
+            74,
+            147
+          ],
+          "body": {
+            "label": 5,
+            "count": 12888,
+            "x": 219,
+            "y": 91,
+            "w": 165,
+            "h": 147
+          },
+          "neighbors": []
+        },
+        {
+          "index": 2,
+          "rect": [
+            404,
+            69,
+            170,
+            170,
+            80,
+            168
+          ],
+          "body": {
+            "label": 3,
+            "count": 13110,
+            "x": 405,
+            "y": 70,
+            "w": 168,
+            "h": 168
+          },
+          "neighbors": []
+        },
+        {
+          "index": 3,
+          "rect": [
+            589,
+            54,
+            174,
+            170,
+            87,
+            168
+          ],
+          "body": {
+            "label": 1,
+            "count": 13007,
+            "x": 590,
+            "y": 55,
+            "w": 172,
+            "h": 168
+          },
+          "neighbors": []
+        },
+        {
+          "index": 4,
+          "rect": [
+            768,
+            68,
+            192,
+            145,
+            100,
+            143
+          ],
+          "body": {
+            "label": 2,
+            "count": 13707,
+            "x": 769,
+            "y": 69,
+            "w": 190,
+            "h": 143
+          },
+          "neighbors": []
+        },
+        {
+          "index": 5,
+          "rect": [
+            977,
+            78,
+            173,
+            151,
+            83,
+            149
+          ],
+          "body": {
+            "label": 4,
+            "count": 14158,
+            "x": 978,
+            "y": 79,
+            "w": 171,
+            "h": 149
+          },
+          "neighbors": []
+        },
+        {
+          "index": 6,
+          "rect": [
+            1174,
+            90,
+            168,
+            149,
+            78,
+            147
+          ],
+          "body": {
+            "label": 6,
+            "count": 13533,
+            "x": 1175,
+            "y": 91,
+            "w": 166,
+            "h": 147
+          },
+          "neighbors": []
+        },
+        {
+          "index": 7,
+          "rect": [
+            1359,
+            90,
+            161,
+            149,
+            85,
+            147
+          ],
+          "body": {
+            "label": 7,
+            "count": 12942,
+            "x": 1360,
+            "y": 91,
+            "w": 159,
+            "h": 147
+          },
+          "neighbors": []
+        },
+        {
+          "index": 8,
+          "rect": [
+            18,
+            318,
+            168,
+            168,
+            82,
+            166
+          ],
+          "body": {
+            "label": 27,
+            "count": 14836,
+            "x": 19,
+            "y": 319,
+            "w": 166,
+            "h": 166
+          },
+          "neighbors": []
+        },
+        {
+          "index": 9,
+          "rect": [
+            211,
+            314,
+            167,
+            172,
+            81,
+            170
+          ],
+          "body": {
+            "label": 25,
+            "count": 14898,
+            "x": 212,
+            "y": 315,
+            "w": 165,
+            "h": 170
+          },
+          "neighbors": []
+        },
+        {
+          "index": 10,
+          "rect": [
+            403,
+            311,
+            167,
+            175,
+            81,
+            173
+          ],
+          "body": {
+            "label": 23,
+            "count": 15006,
+            "x": 404,
+            "y": 312,
+            "w": 165,
+            "h": 173
+          },
+          "neighbors": []
+        },
+        {
+          "index": 11,
+          "rect": [
+            595,
+            306,
+            169,
+            180,
+            81,
+            178
+          ],
+          "body": {
+            "label": 20,
+            "count": 15542,
+            "x": 596,
+            "y": 307,
+            "w": 167,
+            "h": 178
+          },
+          "neighbors": []
+        },
+        {
+          "index": 12,
+          "rect": [
+            785,
+            319,
+            168,
+            168,
+            83,
+            165
+          ],
+          "body": {
+            "label": 28,
+            "count": 14938,
+            "x": 786,
+            "y": 320,
+            "w": 166,
+            "h": 166
+          },
+          "neighbors": []
+        },
+        {
+          "index": 13,
+          "rect": [
+            976,
+            339,
+            166,
+            147,
+            84,
+            145
+          ],
+          "body": {
+            "label": 29,
+            "count": 13995,
+            "x": 977,
+            "y": 340,
+            "w": 164,
+            "h": 145
+          },
+          "neighbors": []
+        },
+        {
+          "index": 14,
+          "rect": [
+            1176,
+            344,
+            152,
+            142,
+            76,
+            140
+          ],
+          "body": {
+            "label": 31,
+            "count": 12728,
+            "x": 1177,
+            "y": 345,
+            "w": 150,
+            "h": 140
+          },
+          "neighbors": []
+        },
+        {
+          "index": 15,
+          "rect": [
+            1364,
+            307,
+            142,
+            180,
+            80,
+            177
+          ],
+          "body": {
+            "label": 21,
+            "count": 14404,
+            "x": 1365,
+            "y": 308,
+            "w": 140,
+            "h": 178
+          },
+          "neighbors": []
+        },
+        {
+          "index": 16,
+          "rect": [
+            13,
+            581,
+            170,
+            139,
+            87,
+            137
+          ],
+          "body": {
+            "label": 42,
+            "count": 13987,
+            "x": 14,
+            "y": 582,
+            "w": 168,
+            "h": 137
+          },
+          "neighbors": []
+        },
+        {
+          "index": 17,
+          "rect": [
+            207,
+            592,
+            171,
+            128,
+            85,
+            126
+          ],
+          "body": {
+            "label": 47,
+            "count": 13363,
+            "x": 208,
+            "y": 593,
+            "w": 169,
+            "h": 126
+          },
+          "neighbors": []
+        },
+        {
+          "index": 18,
+          "rect": [
+            399,
+            601,
+            171,
+            119,
+            85,
+            117
+          ],
+          "body": {
+            "label": 48,
+            "count": 13312,
+            "x": 400,
+            "y": 602,
+            "w": 169,
+            "h": 117
+          },
+          "neighbors": []
+        },
+        {
+          "index": 19,
+          "rect": [
+            591,
+            603,
+            169,
+            117,
+            85,
+            115
+          ],
+          "body": {
+            "label": 49,
+            "count": 13158,
+            "x": 592,
+            "y": 604,
+            "w": 167,
+            "h": 115
+          },
+          "neighbors": []
+        },
+        {
+          "index": 20,
+          "rect": [
+            781,
+            591,
+            172,
+            129,
+            87,
+            127
+          ],
+          "body": {
+            "label": 44,
+            "count": 13425,
+            "x": 782,
+            "y": 592,
+            "w": 170,
+            "h": 127
+          },
+          "neighbors": []
+        },
+        {
+          "index": 21,
+          "rect": [
+            973,
+            591,
+            171,
+            129,
+            87,
+            127
+          ],
+          "body": {
+            "label": 45,
+            "count": 13276,
+            "x": 974,
+            "y": 592,
+            "w": 169,
+            "h": 127
+          },
+          "neighbors": []
+        },
+        {
+          "index": 22,
+          "rect": [
+            1161,
+            591,
+            171,
+            129,
+            91,
+            127
+          ],
+          "body": {
+            "label": 46,
+            "count": 13231,
+            "x": 1162,
+            "y": 592,
+            "w": 169,
+            "h": 127
+          },
+          "neighbors": []
+        },
+        {
+          "index": 23,
+          "rect": [
+            1351,
+            586,
+            171,
+            134,
+            93,
+            132
+          ],
+          "body": {
+            "label": 43,
+            "count": 13220,
+            "x": 1352,
+            "y": 587,
+            "w": 169,
+            "h": 132
+          },
+          "neighbors": []
+        },
+        {
+          "index": 24,
+          "rect": [
+            19,
+            843,
+            163,
+            126,
+            81,
+            124
+          ],
+          "body": {
+            "label": 64,
+            "count": 13139,
+            "x": 20,
+            "y": 844,
+            "w": 161,
+            "h": 124
+          },
+          "neighbors": []
+        },
+        {
+          "index": 25,
+          "rect": [
+            206,
+            856,
+            172,
+            115,
+            86,
+            111
+          ],
+          "body": {
+            "label": 65,
+            "count": 12982,
+            "x": 207,
+            "y": 857,
+            "w": 170,
+            "h": 113
+          },
+          "neighbors": []
+        },
+        {
+          "index": 26,
+          "rect": [
+            399,
+            868,
+            171,
+            101,
+            85,
+            99
+          ],
+          "body": {
+            "label": 66,
+            "count": 12347,
+            "x": 400,
+            "y": 869,
+            "w": 169,
+            "h": 99
+          },
+          "neighbors": []
+        },
+        {
+          "index": 27,
+          "rect": [
+            593,
+            884,
+            163,
+            85,
+            83,
+            83
+          ],
+          "body": {
+            "label": 73,
+            "count": 10293,
+            "x": 594,
+            "y": 885,
+            "w": 161,
+            "h": 83
+          },
+          "neighbors": []
+        },
+        {
+          "index": 28,
+          "rect": [
+            799,
+            798,
+            135,
+            171,
+            69,
+            169
+          ],
+          "body": {
+            "label": 62,
+            "count": 13404,
+            "x": 800,
+            "y": 799,
+            "w": 133,
+            "h": 169
+          },
+          "neighbors": []
+        },
+        {
+          "index": 29,
+          "rect": [
+            984,
+            795,
+            148,
+            175,
+            76,
+            172
+          ],
+          "body": {
+            "label": 61,
+            "count": 14318,
+            "x": 985,
+            "y": 796,
+            "w": 146,
+            "h": 173
+          },
+          "neighbors": []
+        },
+        {
+          "index": 30,
+          "rect": [
+            1173,
+            793,
+            133,
+            176,
+            79,
+            174
+          ],
+          "body": {
+            "label": 60,
+            "count": 13432,
+            "x": 1174,
+            "y": 794,
+            "w": 131,
+            "h": 174
+          },
+          "neighbors": []
+        },
+        {
+          "index": 31,
+          "rect": [
+            1358,
+            787,
+            132,
+            182,
+            86,
+            180
+          ],
+          "body": {
+            "label": 59,
+            "count": 13875,
+            "x": 1359,
+            "y": 788,
+            "w": 130,
+            "h": 180
+          },
+          "neighbors": []
+        }
+      ]
+    },
+    {
+      "name": "tic",
+      "sha256": "9d5f9bed93e5ae630eed274009c9088ea1ff0048e7b01c8e41f27506855f94a0",
+      "alphaZero": 0.7236989339192709,
+      "alphaBelow8": 0.8290818532307943,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            120,
+            31,
+            264,
+            78,
+            132,
+            75
+          ],
+          "body": {
+            "label": 3,
+            "count": 8157,
+            "x": 121,
+            "y": 32,
+            "w": 262,
+            "h": 76
+          },
+          "neighbors": []
+        },
+        {
+          "index": 1,
+          "rect": [
+            460,
+            30,
+            274,
+            80,
+            137,
+            77
+          ],
+          "body": {
+            "label": 1,
+            "count": 8155,
+            "x": 461,
+            "y": 31,
+            "w": 272,
+            "h": 78
+          },
+          "neighbors": []
+        },
+        {
+          "index": 2,
+          "rect": [
+            800,
+            30,
+            288,
+            79,
+            144,
+            77
+          ],
+          "body": {
+            "label": 2,
+            "count": 9152,
+            "x": 801,
+            "y": 31,
+            "w": 286,
+            "h": 77
+          },
+          "neighbors": []
+        },
+        {
+          "index": 3,
+          "rect": [
+            1151,
+            31,
+            283,
+            79,
+            141.5,
+            76
+          ],
+          "body": {
+            "label": 4,
+            "count": 8664,
+            "x": 1152,
+            "y": 32,
+            "w": 281,
+            "h": 77
+          },
+          "neighbors": []
+        },
+        {
+          "index": 4,
+          "rect": [
+            100,
+            144,
+            296,
+            81,
+            148,
+            79
+          ],
+          "body": {
+            "label": 16,
+            "count": 8944,
+            "x": 101,
+            "y": 145,
+            "w": 294,
+            "h": 79
+          },
+          "neighbors": []
+        },
+        {
+          "index": 5,
+          "rect": [
+            462,
+            149,
+            282,
+            78,
+            141,
+            75
+          ],
+          "body": {
+            "label": 17,
+            "count": 8865,
+            "x": 463,
+            "y": 150,
+            "w": 280,
+            "h": 76
+          },
+          "neighbors": []
+        },
+        {
+          "index": 6,
+          "rect": [
+            808,
+            143,
+            286,
+            82,
+            143,
+            80
+          ],
+          "body": {
+            "label": 14,
+            "count": 9222,
+            "x": 809,
+            "y": 144,
+            "w": 284,
+            "h": 80
+          },
+          "neighbors": []
+        },
+        {
+          "index": 7,
+          "rect": [
+            1159,
+            143,
+            288,
+            81,
+            144,
+            79
+          ],
+          "body": {
+            "label": 15,
+            "count": 9276,
+            "x": 1160,
+            "y": 144,
+            "w": 286,
+            "h": 79
+          },
+          "neighbors": []
+        },
+        {
+          "index": 8,
+          "rect": [
+            114,
+            270,
+            267,
+            81,
+            133.5,
+            78
+          ],
+          "body": {
+            "label": 21,
+            "count": 8575,
+            "x": 115,
+            "y": 271,
+            "w": 265,
+            "h": 79
+          },
+          "neighbors": []
+        },
+        {
+          "index": 9,
+          "rect": [
+            464,
+            270,
+            273,
+            81,
+            136.5,
+            79
+          ],
+          "body": {
+            "label": 22,
+            "count": 8917,
+            "x": 465,
+            "y": 271,
+            "w": 271,
+            "h": 79
+          },
+          "neighbors": []
+        },
+        {
+          "index": 10,
+          "rect": [
+            815,
+            270,
+            274,
+            82,
+            137,
+            80
+          ],
+          "body": {
+            "label": 23,
+            "count": 9016,
+            "x": 816,
+            "y": 271,
+            "w": 272,
+            "h": 80
+          },
+          "neighbors": []
+        },
+        {
+          "index": 11,
+          "rect": [
+            1165,
+            271,
+            271,
+            82,
+            135.5,
+            80
+          ],
+          "body": {
+            "label": 24,
+            "count": 8907,
+            "x": 1166,
+            "y": 272,
+            "w": 269,
+            "h": 80
+          },
+          "neighbors": []
+        },
+        {
+          "index": 12,
+          "rect": [
+            113,
+            406,
+            278,
+            78,
+            139,
+            75
+          ],
+          "body": {
+            "label": 31,
+            "count": 8912,
+            "x": 114,
+            "y": 407,
+            "w": 276,
+            "h": 76
+          },
+          "neighbors": []
+        },
+        {
+          "index": 13,
+          "rect": [
+            474,
+            413,
+            273,
+            73,
+            136.5,
+            70
+          ],
+          "body": {
+            "label": 32,
+            "count": 8637,
+            "x": 475,
+            "y": 414,
+            "w": 271,
+            "h": 71
+          },
+          "neighbors": []
+        },
+        {
+          "index": 14,
+          "rect": [
+            829,
+            394,
+            248,
+            97,
+            124,
+            93
+          ],
+          "body": {
+            "label": 30,
+            "count": 8872,
+            "x": 830,
+            "y": 395,
+            "w": 246,
+            "h": 95
+          },
+          "neighbors": []
+        },
+        {
+          "index": 15,
+          "rect": [
+            1189,
+            368,
+            229,
+            121,
+            114.5,
+            118
+          ],
+          "body": {
+            "label": 28,
+            "count": 8140,
+            "x": 1190,
+            "y": 369,
+            "w": 227,
+            "h": 119
+          },
+          "neighbors": []
+        },
+        {
+          "index": 16,
+          "rect": [
+            144,
+            520,
+            209,
+            106,
+            104.5,
+            104
+          ],
+          "body": {
+            "label": 44,
+            "count": 7918,
+            "x": 145,
+            "y": 521,
+            "w": 207,
+            "h": 104
+          },
+          "neighbors": []
+        },
+        {
+          "index": 17,
+          "rect": [
+            496,
+            515,
+            211,
+            110,
+            105.5,
+            109
+          ],
+          "body": {
+            "label": 40,
+            "count": 8132,
+            "x": 497,
+            "y": 516,
+            "w": 209,
+            "h": 108
+          },
+          "neighbors": []
+        },
+        {
+          "index": 18,
+          "rect": [
+            838,
+            517,
+            217,
+            109,
+            108.5,
+            108
+          ],
+          "body": {
+            "label": 41,
+            "count": 8166,
+            "x": 839,
+            "y": 518,
+            "w": 215,
+            "h": 107
+          },
+          "neighbors": []
+        },
+        {
+          "index": 19,
+          "rect": [
+            1188,
+            519,
+            209,
+            111,
+            104.5,
+            108
+          ],
+          "body": {
+            "label": 42,
+            "count": 8195,
+            "x": 1189,
+            "y": 520,
+            "w": 207,
+            "h": 109
+          },
+          "neighbors": []
+        },
+        {
+          "index": 20,
+          "rect": [
+            133,
+            649,
+            216,
+            109,
+            108,
+            106
+          ],
+          "body": {
+            "label": 55,
+            "count": 8207,
+            "x": 134,
+            "y": 650,
+            "w": 214,
+            "h": 107
+          },
+          "neighbors": []
+        },
+        {
+          "index": 21,
+          "rect": [
+            490,
+            645,
+            209,
+            112,
+            104.5,
+            110
+          ],
+          "body": {
+            "label": 53,
+            "count": 8021,
+            "x": 491,
+            "y": 646,
+            "w": 207,
+            "h": 110
+          },
+          "neighbors": []
+        },
+        {
+          "index": 22,
+          "rect": [
+            852,
+            643,
+            207,
+            114,
+            103.5,
+            112
+          ],
+          "body": {
+            "label": 52,
+            "count": 8293,
+            "x": 853,
+            "y": 644,
+            "w": 205,
+            "h": 112
+          },
+          "neighbors": []
+        },
+        {
+          "index": 23,
+          "rect": [
+            1196,
+            645,
+            207,
+            112,
+            103.5,
+            110
+          ],
+          "body": {
+            "label": 54,
+            "count": 8273,
+            "x": 1197,
+            "y": 646,
+            "w": 205,
+            "h": 110
+          },
+          "neighbors": []
+        },
+        {
+          "index": 24,
+          "rect": [
+            197,
+            788,
+            154,
+            74,
+            77,
+            71
+          ],
+          "body": {
+            "label": 62,
+            "count": 7839,
+            "x": 198,
+            "y": 789,
+            "w": 152,
+            "h": 72
+          },
+          "neighbors": []
+        },
+        {
+          "index": 25,
+          "rect": [
+            543,
+            789,
+            156,
+            74,
+            78,
+            70
+          ],
+          "body": {
+            "label": 64,
+            "count": 7891,
+            "x": 544,
+            "y": 790,
+            "w": 154,
+            "h": 72
+          },
+          "neighbors": []
+        },
+        {
+          "index": 26,
+          "rect": [
+            896,
+            789,
+            155,
+            73,
+            77.5,
+            70
+          ],
+          "body": {
+            "label": 65,
+            "count": 7884,
+            "x": 897,
+            "y": 790,
+            "w": 153,
+            "h": 71
+          },
+          "neighbors": []
+        },
+        {
+          "index": 27,
+          "rect": [
+            1244,
+            788,
+            153,
+            74,
+            76.5,
+            70
+          ],
+          "body": {
+            "label": 63,
+            "count": 8031,
+            "x": 1245,
+            "y": 789,
+            "w": 151,
+            "h": 72
+          },
+          "neighbors": []
+        },
+        {
+          "index": 28,
+          "rect": [
+            150,
+            897,
+            185,
+            102,
+            92.5,
+            100
+          ],
+          "body": {
+            "label": 77,
+            "count": 7620,
+            "x": 151,
+            "y": 898,
+            "w": 183,
+            "h": 100
+          },
+          "neighbors": []
+        },
+        {
+          "index": 29,
+          "rect": [
+            497,
+            895,
+            187,
+            103,
+            93.5,
+            101
+          ],
+          "body": {
+            "label": 76,
+            "count": 7697,
+            "x": 498,
+            "y": 896,
+            "w": 185,
+            "h": 101
+          },
+          "neighbors": []
+        },
+        {
+          "index": 30,
+          "rect": [
+            848,
+            893,
+            188,
+            105,
+            94,
+            103
+          ],
+          "body": {
+            "label": 74,
+            "count": 8307,
+            "x": 849,
+            "y": 894,
+            "w": 186,
+            "h": 103
+          },
+          "neighbors": []
+        },
+        {
+          "index": 31,
+          "rect": [
+            1201,
+            893,
+            181,
+            105,
+            90.5,
+            103
+          ],
+          "body": {
+            "label": 75,
+            "count": 7891,
+            "x": 1202,
+            "y": 894,
+            "w": 179,
+            "h": 103
+          },
+          "neighbors": []
+        }
+      ]
+    },
+    {
+      "name": "tac",
+      "sha256": "74623814bc277fb714c82437770cdf8c03e09c5e019967a09bca5610de102091",
+      "alphaZero": 0.7120539347330729,
+      "alphaBelow8": 0.78265380859375,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            60,
+            18,
+            289,
+            86,
+            144.5,
+            84
+          ],
+          "body": {
+            "label": 1,
+            "count": 11144,
+            "x": 61,
+            "y": 19,
+            "w": 287,
+            "h": 84
+          },
+          "neighbors": []
+        },
+        {
+          "index": 1,
+          "rect": [
+            432,
+            18,
+            287,
+            86,
+            143.5,
+            84
+          ],
+          "body": {
+            "label": 2,
+            "count": 11352,
+            "x": 433,
+            "y": 19,
+            "w": 285,
+            "h": 84
+          },
+          "neighbors": []
+        },
+        {
+          "index": 2,
+          "rect": [
+            810,
+            19,
+            290,
+            85,
+            145,
+            83
+          ],
+          "body": {
+            "label": 4,
+            "count": 11495,
+            "x": 811,
+            "y": 20,
+            "w": 288,
+            "h": 83
+          },
+          "neighbors": []
+        },
+        {
+          "index": 3,
+          "rect": [
+            1182,
+            18,
+            287,
+            86,
+            143.5,
+            84
+          ],
+          "body": {
+            "label": 3,
+            "count": 11585,
+            "x": 1183,
+            "y": 19,
+            "w": 285,
+            "h": 84
+          },
+          "neighbors": []
+        },
+        {
+          "index": 4,
+          "rect": [
+            58,
+            144,
+            293,
+            86,
+            146.5,
+            84
+          ],
+          "body": {
+            "label": 17,
+            "count": 11765,
+            "x": 59,
+            "y": 145,
+            "w": 291,
+            "h": 84
+          },
+          "neighbors": []
+        },
+        {
+          "index": 5,
+          "rect": [
+            432,
+            141,
+            299,
+            89,
+            149.5,
+            87
+          ],
+          "body": {
+            "label": 16,
+            "count": 11826,
+            "x": 433,
+            "y": 142,
+            "w": 297,
+            "h": 87
+          },
+          "neighbors": []
+        },
+        {
+          "index": 6,
+          "rect": [
+            814,
+            145,
+            295,
+            85,
+            147.5,
+            83
+          ],
+          "body": {
+            "label": 18,
+            "count": 11401,
+            "x": 815,
+            "y": 146,
+            "w": 293,
+            "h": 83
+          },
+          "neighbors": []
+        },
+        {
+          "index": 7,
+          "rect": [
+            1191,
+            145,
+            296,
+            87,
+            148,
+            84
+          ],
+          "body": {
+            "label": 19,
+            "count": 11503,
+            "x": 1192,
+            "y": 146,
+            "w": 294,
+            "h": 85
+          },
+          "neighbors": []
+        },
+        {
+          "index": 8,
+          "rect": [
+            58,
+            271,
+            293,
+            80,
+            146.5,
+            78
+          ],
+          "body": {
+            "label": 33,
+            "count": 11427,
+            "x": 59,
+            "y": 272,
+            "w": 291,
+            "h": 78
+          },
+          "neighbors": []
+        },
+        {
+          "index": 9,
+          "rect": [
+            433,
+            268,
+            292,
+            83,
+            146,
+            81
+          ],
+          "body": {
+            "label": 32,
+            "count": 11206,
+            "x": 434,
+            "y": 269,
+            "w": 290,
+            "h": 81
+          },
+          "neighbors": []
+        },
+        {
+          "index": 10,
+          "rect": [
+            802,
+            264,
+            294,
+            87,
+            147,
+            85
+          ],
+          "body": {
+            "label": 31,
+            "count": 11519,
+            "x": 803,
+            "y": 265,
+            "w": 292,
+            "h": 85
+          },
+          "neighbors": []
+        },
+        {
+          "index": 11,
+          "rect": [
+            1178,
+            263,
+            280,
+            88,
+            140,
+            85
+          ],
+          "body": {
+            "label": 30,
+            "count": 11055,
+            "x": 1179,
+            "y": 264,
+            "w": 278,
+            "h": 86
+          },
+          "neighbors": []
+        },
+        {
+          "index": 12,
+          "rect": [
+            71,
+            401,
+            268,
+            88,
+            134,
+            86
+          ],
+          "body": {
+            "label": 39,
+            "count": 11420,
+            "x": 72,
+            "y": 402,
+            "w": 266,
+            "h": 86
+          },
+          "neighbors": []
+        },
+        {
+          "index": 13,
+          "rect": [
+            440,
+            401,
+            265,
+            90,
+            132.5,
+            88
+          ],
+          "body": {
+            "label": 40,
+            "count": 11206,
+            "x": 441,
+            "y": 402,
+            "w": 263,
+            "h": 88
+          },
+          "neighbors": []
+        },
+        {
+          "index": 14,
+          "rect": [
+            822,
+            380,
+            239,
+            115,
+            119.5,
+            113
+          ],
+          "body": {
+            "label": 38,
+            "count": 10306,
+            "x": 823,
+            "y": 381,
+            "w": 237,
+            "h": 113
+          },
+          "neighbors": []
+        },
+        {
+          "index": 15,
+          "rect": [
+            1210,
+            365,
+            229,
+            130,
+            114.5,
+            128
+          ],
+          "body": {
+            "label": 36,
+            "count": 10863,
+            "x": 1211,
+            "y": 366,
+            "w": 227,
+            "h": 128
+          },
+          "neighbors": []
+        },
+        {
+          "index": 16,
+          "rect": [
+            67,
+            512,
+            239,
+            110,
+            119.5,
+            107
+          ],
+          "body": {
+            "label": 46,
+            "count": 10430,
+            "x": 68,
+            "y": 513,
+            "w": 237,
+            "h": 108
+          },
+          "neighbors": []
+        },
+        {
+          "index": 17,
+          "rect": [
+            438,
+            518,
+            246,
+            104,
+            123,
+            102
+          ],
+          "body": {
+            "label": 48,
+            "count": 10112,
+            "x": 439,
+            "y": 519,
+            "w": 244,
+            "h": 102
+          },
+          "neighbors": []
+        },
+        {
+          "index": 18,
+          "rect": [
+            810,
+            517,
+            247,
+            106,
+            123.5,
+            103
+          ],
+          "body": {
+            "label": 47,
+            "count": 10314,
+            "x": 811,
+            "y": 518,
+            "w": 245,
+            "h": 104
+          },
+          "neighbors": []
+        },
+        {
+          "index": 19,
+          "rect": [
+            1189,
+            519,
+            250,
+            104,
+            125,
+            101
+          ],
+          "body": {
+            "label": 49,
+            "count": 10271,
+            "x": 1190,
+            "y": 520,
+            "w": 248,
+            "h": 102
+          },
+          "neighbors": []
+        },
+        {
+          "index": 20,
+          "rect": [
+            62,
+            645,
+            243,
+            106,
+            121.5,
+            104
+          ],
+          "body": {
+            "label": 52,
+            "count": 10262,
+            "x": 63,
+            "y": 646,
+            "w": 241,
+            "h": 104
+          },
+          "neighbors": []
+        },
+        {
+          "index": 21,
+          "rect": [
+            441,
+            643,
+            244,
+            108,
+            122,
+            106
+          ],
+          "body": {
+            "label": 51,
+            "count": 10107,
+            "x": 442,
+            "y": 644,
+            "w": 242,
+            "h": 106
+          },
+          "neighbors": []
+        },
+        {
+          "index": 22,
+          "rect": [
+            812,
+            650,
+            236,
+            101,
+            118,
+            99
+          ],
+          "body": {
+            "label": 54,
+            "count": 10198,
+            "x": 813,
+            "y": 651,
+            "w": 234,
+            "h": 99
+          },
+          "neighbors": []
+        },
+        {
+          "index": 23,
+          "rect": [
+            1190,
+            649,
+            247,
+            102,
+            123.5,
+            100
+          ],
+          "body": {
+            "label": 53,
+            "count": 10430,
+            "x": 1191,
+            "y": 650,
+            "w": 245,
+            "h": 100
+          },
+          "neighbors": []
+        },
+        {
+          "index": 24,
+          "rect": [
+            135,
+            775,
+            144,
+            90,
+            72,
+            88
+          ],
+          "body": {
+            "label": 58,
+            "count": 9813,
+            "x": 136,
+            "y": 776,
+            "w": 142,
+            "h": 88
+          },
+          "neighbors": []
+        },
+        {
+          "index": 25,
+          "rect": [
+            510,
+            777,
+            149,
+            89,
+            74.5,
+            87
+          ],
+          "body": {
+            "label": 59,
+            "count": 10066,
+            "x": 511,
+            "y": 778,
+            "w": 147,
+            "h": 87
+          },
+          "neighbors": []
+        },
+        {
+          "index": 26,
+          "rect": [
+            889,
+            777,
+            151,
+            89,
+            75.5,
+            87
+          ],
+          "body": {
+            "label": 60,
+            "count": 10256,
+            "x": 890,
+            "y": 778,
+            "w": 149,
+            "h": 87
+          },
+          "neighbors": []
+        },
+        {
+          "index": 27,
+          "rect": [
+            1266,
+            777,
+            146,
+            89,
+            73,
+            87
+          ],
+          "body": {
+            "label": 61,
+            "count": 9919,
+            "x": 1267,
+            "y": 778,
+            "w": 144,
+            "h": 87
+          },
+          "neighbors": []
+        },
+        {
+          "index": 28,
+          "rect": [
+            77,
+            883,
+            207,
+            111,
+            103.5,
+            109
+          ],
+          "body": {
+            "label": 64,
+            "count": 9659,
+            "x": 78,
+            "y": 884,
+            "w": 205,
+            "h": 109
+          },
+          "neighbors": []
+        },
+        {
+          "index": 29,
+          "rect": [
+            457,
+            881,
+            209,
+            114,
+            104.5,
+            113
+          ],
+          "body": {
+            "label": 63,
+            "count": 9546,
+            "x": 458,
+            "y": 882,
+            "w": 207,
+            "h": 112
+          },
+          "neighbors": []
+        },
+        {
+          "index": 30,
+          "rect": [
+            823,
+            880,
+            219,
+            115,
+            109.5,
+            114
+          ],
+          "body": {
+            "label": 62,
+            "count": 9676,
+            "x": 824,
+            "y": 881,
+            "w": 217,
+            "h": 113
+          },
+          "neighbors": []
+        },
+        {
+          "index": 31,
+          "rect": [
+            1211,
+            884,
+            216,
+            111,
+            108,
+            110
+          ],
+          "body": {
+            "label": 65,
+            "count": 9669,
+            "x": 1212,
+            "y": 885,
+            "w": 214,
+            "h": 109
+          },
+          "neighbors": []
+        }
+      ]
+    },
+    {
+      "name": "enclosure-props",
+      "sha256": "5ae6fc780db5f1bf57ab40a74514c7c01135b64c1d1233cb0979857f2d14ba23",
+      "alphaZero": 0.5216554005940756,
+      "alphaBelow8": 0.6222928365071615,
+      "frames": [
+        {
+          "index": 0,
+          "rect": [
+            18,
+            209,
+            497,
+            260,
+            82,
+            258
+          ],
+          "body": {
+            "label": 3,
+            "count": 115912,
+            "x": 19,
+            "y": 210,
+            "w": 495,
+            "h": 258
+          },
+          "neighbors": []
+        },
+        {
+          "index": 1,
+          "rect": [
+            529,
+            178,
+            478,
+            291,
+            -237,
+            289
+          ],
+          "body": {
+            "label": 2,
+            "count": 126389,
+            "x": 530,
+            "y": 179,
+            "w": 476,
+            "h": 289
+          },
+          "neighbors": []
+        },
+        {
+          "index": 2,
+          "rect": [
+            1022,
+            134,
+            508,
+            334,
+            -538,
+            333
+          ],
+          "body": {
+            "label": 1,
+            "count": 133047,
+            "x": 1023,
+            "y": 135,
+            "w": 506,
+            "h": 332
+          },
+          "neighbors": []
+        },
+        {
+          "index": 3,
+          "rect": [
+            18,
+            672,
+            497,
+            255,
+            658,
+            253
+          ],
+          "body": {
+            "label": 8,
+            "count": 67654,
+            "x": 19,
+            "y": 673,
+            "w": 495,
+            "h": 253
+          },
+          "neighbors": []
+        },
+        {
+          "index": 4,
+          "rect": [
+            529,
+            643,
+            478,
+            284,
+            339,
+            282
+          ],
+          "body": {
+            "label": 7,
+            "count": 72458,
+            "x": 530,
+            "y": 644,
+            "w": 476,
+            "h": 282
+          },
+          "neighbors": []
+        },
+        {
+          "index": 5,
+          "rect": [
+            1076,
+            560,
+            188,
+            140,
+            -16,
+            136
+          ],
+          "body": {
+            "label": 5,
+            "count": 19917,
+            "x": 1077,
+            "y": 561,
+            "w": 186,
+            "h": 138
+          },
+          "neighbors": []
+        },
+        {
+          "index": 6,
+          "rect": [
+            1108,
+            733,
+            126,
+            80,
+            144,
+            76
+          ],
+          "body": {
+            "label": 68,
+            "count": 7870,
+            "x": 1109,
+            "y": 734,
+            "w": 124,
+            "h": 78
+          },
+          "neighbors": []
+        },
+        {
+          "index": 7,
+          "rect": [
+            1313,
+            578,
+            150,
+            116,
+            131,
+            113
+          ],
+          "body": {
+            "label": 6,
+            "count": 12770,
+            "x": 1314,
+            "y": 579,
+            "w": 148,
+            "h": 114
+          },
+          "neighbors": []
+        },
+        {
+          "index": 8,
+          "rect": [
+            1320,
+            732,
+            130,
+            81,
+            -1220,
+            77
+          ],
+          "body": {
+            "label": 67,
+            "count": 8212,
+            "x": 1321,
+            "y": 733,
+            "w": 128,
+            "h": 79
+          },
+          "neighbors": []
+        },
+        {
+          "index": 9,
+          "rect": [
+            1069,
+            846,
+            185,
+            96,
+            -777,
+            93
+          ],
+          "body": {
+            "label": 111,
+            "count": 15430,
+            "x": 1070,
+            "y": 847,
+            "w": 183,
+            "h": 94
+          },
+          "neighbors": []
+        },
+        {
+          "index": 10,
+          "rect": [
+            1287,
+            844,
+            186,
+            94,
+            -803,
+            92
+          ],
+          "body": {
+            "label": 110,
+            "count": 14033,
+            "x": 1288,
+            "y": 845,
+            "w": 184,
+            "h": 92
+          },
+          "neighbors": []
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    "noisette-atlas.png",
+    "tic-atlas.png",
+    "tac-atlas.png"
+  ],
+  "limitations": [
+    "128 isolated source poses, not a full source animation bible",
+    "No blanket fluidity certification",
+    "Original species designs based on recovered written individual identities; no real pet photographs used"
+  ]
+}

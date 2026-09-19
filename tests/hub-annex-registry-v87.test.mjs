@@ -21,6 +21,24 @@ const deepFreeze = value => {
   return value;
 };
 
+test('only the actual external port receives a 2560-wide floor and persistent east-wing pose', () => {
+  assert.equal(SHIP_PORT_ANNEX_V87.world.width, 2560);
+  assert.equal(SHIP_PORT_ANNEX_V87.platforms[0].w, 2560);
+  assert.equal(animal.world.width, 1920); assert.equal(SHIP_REFUGE_ANNEX_V87.world.width, 1920);
+  for (const [source, width] of [[animal, 2560], [SHIP_REFUGE_ANNEX_V87, 2560], [SHIP_PORT_ANNEX_V87, 1920], [SHIP_PORT_ANNEX_V87, 3000]]) {
+    const candidate = clone(source); candidate.world.width = width; candidate.platforms[0].w = width;
+    assert.equal(validateHubAnnexGeometryV87(candidate).valid, false);
+  }
+  const raw = createHubCommercialStateV87(); Object.assign(raw, { activeAnnexId: SHIP_PORT_ANNEX_V87.id,
+    annexPositionX: 2430, annexPositionY: 532, annexClimbing: false,
+    returnContext: { deckId: 'engineering', roomId: 'dropship-hangar', x: 99, facing: 1 } });
+  const resumed = sanitizeHubCommercialStateV87(JSON.parse(JSON.stringify(raw)));
+  assert.equal(resumed.annexPositionX, 2430); assert.equal(resumed.annexPositionY, 532);
+  assert.equal(resumed.activeAnnexId, SHIP_PORT_ANNEX_V87.id); assert.deepEqual(resumed.returnContext, raw.returnContext);
+  raw.annexPositionX = 99999;
+  assert.equal(sanitizeHubCommercialStateV87(raw).annexPositionX, 2560 - 44 - 24);
+});
+
 function visitedState() {
   const state = createHubCommercialStateV87();
   Object.assign(state.annexes[animal.id], { visited: true, visitCount: 4, lastVisitedAt: 17 });
