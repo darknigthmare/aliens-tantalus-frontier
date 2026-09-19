@@ -5,10 +5,11 @@ import {
 } from './tantalus-hub-expansion-v71.js';
 import { SHIP_ANIMAL_ANNEX_V87 } from './ship-animal-habitat-v87.js';
 import { SHIP_PORT_ANNEX_V87 } from './ship-port-room-v87.js';
+import { SHIP_REFUGE_ANNEX_V87 } from './refuge-room-v87.js';
 
 export const HUB_ANNEX_REGISTRY_VERSION_V87 = 87;
 // The historical ten-annex catalogue stays immutable; future extensions are explicit.
-export const HUB_ANNEX_EXTENSIONS_V87 = Object.freeze([SHIP_ANIMAL_ANNEX_V87, SHIP_PORT_ANNEX_V87]);
+export const HUB_ANNEX_EXTENSIONS_V87 = Object.freeze([SHIP_ANIMAL_ANNEX_V87, SHIP_PORT_ANNEX_V87, SHIP_REFUGE_ANNEX_V87]);
 export const HUB_ANNEXES_V87 = Object.freeze([...HUB_ANNEXES_V71, ...HUB_ANNEX_EXTENSIONS_V87]);
 export const HUB_ANNEX_BY_ID_V87 = Object.freeze(Object.fromEntries(HUB_ANNEXES_V87.map(annex => [annex.id, annex])));
 

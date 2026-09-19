@@ -42,7 +42,7 @@ export function isPublicDistributionPathV86(path, { directory = false, built = f
     return segments[0] === 'assets' && segments.every(part => !part.startsWith('.') && !PRIVATE_FILENAME.test(part));
   }
   if (segments.length === 1) return ROOT_FILES.has(path) || built && path === 'build-info.json';
-  if (segments[0] === 'src') return path === 'src/ship-port-v87.css' || segments.length === 2 && /^[a-z0-9][a-z0-9-]*\.js$/i.test(segments[1]);
+  if (segments[0] === 'src') return ['src/ship-port-v87.css', 'src/refuge-v87.css'].includes(path) || segments.length === 2 && /^[a-z0-9][a-z0-9-]*\.js$/i.test(segments[1]);
   if (segments[0] === 'scripts') return segments.length === 2 && SCRIPT_FILES.has(segments[1]);
   if (path === 'assets/audio/manifest.json' || AUDIO_FILES.has(path)) return true;
   return segments[0] === 'assets' && segments.every(part => !part.startsWith('.') && !PRIVATE_FILENAME.test(part))
