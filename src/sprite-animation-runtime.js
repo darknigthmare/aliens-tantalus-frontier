@@ -17,6 +17,7 @@ import { getOvomorphAnimationV66 } from './enemy-ovomorph-cycle-v66.js';
 import { buildEnemyBodyHitboxesV66 } from './enemy-profile-geometry-v66.js';
 import { CETO_V75, getCetoAnimationV75 } from './enemy-ceto-v75.js';
 import { enforcePlayerAnimationRequestV81, PLAYER_VISUAL_CONTRACT_V81 } from './player-visual-contract-v81.js';
+import { PLAYER_AIR_POSES_V87, resolvePlayerAirClipV87, advancePlayerAirPresentationV87, applyPlayerAirPresentationV87 } from './player-airborne-presentation-v87.js';
 
 const freezeList = (items) => Object.freeze(items.map((item) => Object.freeze({
   ...item,
@@ -127,6 +128,9 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'idle', frames: [0, 1, 2, 3], fps: 4, loop: true, events: [{ frame: 2, type: 'body:breath' }] },
     { id: 'walk-run', frames: [4, 5, 6, 7], fps: 10, loop: true, events: [{ frame: 4, type: 'audio:footstep-right' }, { frame: 6, type: 'audio:footstep-left' }] },
     { id: 'jump-fall', frames: [8, 9, 10, 11], fps: 8, loop: false, events: [{ frame: 8, type: 'movement:takeoff' }, { frame: 10, type: 'movement:apex' }, { frame: 11, type: 'movement:land-ready' }] },
+    // Legacy jump-fall remains inspectable, but runtime phases are physics-owned.
+    // Reused poses only: no claim of new multi-frame or directional V87 art.
+    ...Object.entries(PLAYER_AIR_POSES_V87).map(([id, frame]) => ({ id, frames: [frame], fps: 12, loop: true, events: [] })),
     { id: 'crouch', frames: [12, 13], fps: 5, loop: true, events: [{ frame: 12, type: 'stance:crouch' }] },
     { id: 'climb', frames: [14, 15], fps: 8, loop: true, events: [{ frame: 15, type: 'movement:climb-contact' }] }
   ]),
@@ -561,7 +565,7 @@ function resolveEcho9MarineAnimationV81(actor = {}) {
   }
   if (actor.climbing) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'climb' };
   if (actor.crouching) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'crouch' };
-  if (!actor.grounded) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'jump-fall' };
+  if (!actor.grounded) return { sheetId: 'player.echo9-marine.locomotion', clipId: resolvePlayerAirClipV87(actor) };
   if (Math.abs(actor.vx || 0) > 12) return { sheetId: 'player.echo9-marine.locomotion', clipId: 'walk-run' };
   return { sheetId: 'player.echo9-marine.locomotion', clipId: 'idle' };
 }
@@ -793,18 +797,26 @@ export class SpriteAnimationController {
   constructor({ onEvent = () => {} } = {}) {
     this.onEvent = onEvent;
     this.states = new Map();
+    this.playerAirStatesV87 = new Map();
   }
 
   reset(entityId) {
-    if (entityId === undefined) this.states.clear();
-    else this.states.delete(String(entityId));
+    if (entityId === undefined) { this.states.clear(); this.playerAirStatesV87.clear(); }
+    else { this.states.delete(String(entityId)); this.playerAirStatesV87.delete(String(entityId)); }
   }
 
-  sample(entityId, request, timeSeconds, { emit = true, reducedMotion = false } = {}) {
+  sample(entityId, request, timeSeconds, { emit = true, reducedMotion = false, physicalActor = null, physicalContext = '' } = {}) {
+    const key = String(entityId);
+    const airState = physicalActor && resolveSpriteSheet(request?.sheetId)?.family === 'player'
+      ? advancePlayerAirPresentationV87(this.playerAirStatesV87.get(key), physicalActor, timeSeconds, physicalContext) : null;
+    if (physicalActor) {
+      if (airState) this.playerAirStatesV87.set(key, airState);
+      else this.playerAirStatesV87.delete(key);
+    }
+    request = applyPlayerAirPresentationV87(request, airState);
     const sheetEntry = resolveSpriteSheet(request?.sheetId);
     const clip = sheetEntry && resolveSpriteClip(sheetEntry.id, request?.clipId);
     if (!sheetEntry || !clip) return null;
-    const key = String(entityId);
     const signature = `${sheetEntry.id}:${clip.id}`;
     let state = this.states.get(key);
     const now = Math.max(0, Number(timeSeconds) || 0);
@@ -823,6 +835,10 @@ export class SpriteAnimationController {
     const localIndex = clip.loop ? step % clip.frames.length : step;
     const frame = clip.frames[localIndex];
     const events = [];
+    if (emit && airState) for (const event of airState.events) {
+      const payload = Object.freeze({ entityId: key, sheetId: sheetEntry.id, clipId: clip.id, frame, event, loop: 0, source: 'physical-state-v87' });
+      events.push(payload); this.onEvent(payload);
+    }
     if (emit && step > state.lastStep) {
       const maximumSteps = Math.min(step, state.lastStep + 64);
       for (let absoluteStep = state.lastStep + 1; absoluteStep <= maximumSteps; absoluteStep += 1) {
@@ -847,12 +863,14 @@ export class SpriteAnimationController {
       row: Math.floor(frame / (sheetEntry.columns || SPRITE_GRID.columns)),
       complete: !clip.loop && rawStep >= lastIndex,
       elapsed,
+      motionV87: airState ? Object.freeze({ phase: airState.phase, events: airState.events, reseeded: airState.reseeded, reusedPose: true }) : null,
       events: Object.freeze(events)
     });
   }
 
   snapshot() {
-    return [...this.states.entries()].map(([entityId, state]) => Object.freeze({ entityId, signature: state.signature, lastStep: state.lastStep, loops: state.loops }));
+    return [...this.states.entries()].map(([entityId, state]) => Object.freeze({ entityId, signature: state.signature, lastStep: state.lastStep, loops: state.loops,
+      ...(this.playerAirStatesV87.has(entityId) ? { motionV87: Object.freeze({ phase: this.playerAirStatesV87.get(entityId).phase, reusedPose: true }) } : {}) }));
   }
 }
 

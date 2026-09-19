@@ -2007,6 +2007,10 @@ export function withV52MissionRuntime(BaseEngine) {
         this.vehicle.accessSecureClock = 0;
         this.clearSquadVehicleOccupancyV60({ placement: 'checkpoint', includeAll: true });
       }
+      if (restarted) {
+        this.spriteAnimation?.reset(getAnimationEntityKeyV57('player', this.player, 'primary'));
+        this.spriteAnimation?.reset(getAnimationEntityKeyV57('coop', this.coop, 'secondary'));
+      }
       return restarted;
     }
 
@@ -2061,11 +2065,12 @@ export function withV52MissionRuntime(BaseEngine) {
           if (entity?.biology) this.animationTelemetry.fallbackFamilies.add(entity.biology);
           continue;
         }
-        const sample = this.spriteAnimation.sample(entityId, request, this.animationTime, { reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+        const sample = this.spriteAnimation.sample(entityId, request, this.animationTime, { reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: entity });
         if (!sample) continue;
-        entity.v52Animation = { sheetId: request.sheetId, clipId: request.clipId, frame: sample.frame, complete: sample.complete };
+        entity.v52Animation = { sheetId: sample.sheet.id, clipId: sample.clip.id, frame: sample.frame, complete: sample.complete,
+          ...(sample.motionV87 ? { motionV87: sample.motionV87 } : {}) };
         this.animationTelemetry.samples += 1;
-        this.animationTelemetry.activeClips[entityId] = `${request.sheetId}:${request.clipId}`;
+        this.animationTelemetry.activeClips[entityId] = `${sample.sheet.id}:${sample.clip.id}`;
       }
     }
 
@@ -2088,7 +2093,7 @@ export function withV52MissionRuntime(BaseEngine) {
           this.animationTelemetry.frameEffects += 1;
         }
       }
-      if (/^(weapon:|combat:|state:death|interaction:work|vehicle:critical)/.test(payload.event)) this.onEvent({ type: 'animation-frame', ...payload });
+      if (/^(weapon:|combat:|state:death|interaction:work|vehicle:critical|jump:|ground:contact)/.test(payload.event)) this.onEvent({ type: 'animation-frame', ...payload });
     }
 
     drawWorld(ctx) {
@@ -2139,7 +2144,7 @@ export function withV52MissionRuntime(BaseEngine) {
       const isCoop = actor === this.coop;
       const request = resolveIdentitySafePlayerAnimationV57(actor, Boolean(this.neuro?.active && actor === this.player));
       const entityId = getAnimationEntityKeyV57(isCoop ? 'coop' : 'player', actor, isCoop ? 'secondary' : 'primary');
-      const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(entityId, request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: actor });
       const entry = sample?.sheet || null;
       const image = entry ? this.images?.get(entry.imageKey) : null;
       const render = drawPlayerSpriteV81(ctx, {
@@ -2238,7 +2243,7 @@ export function withV52MissionRuntime(BaseEngine) {
 
     drawSquadActor(ctx, member) {
       const request = resolveIdentitySafeNpcAnimationV57(member);
-      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion) });
+      const sample = this.spriteAnimation?.sample(getAnimationEntityKeyV57('npc', member, 'crew'), request, this.animationTime, { emit: false, reducedMotion: Boolean(this.accessibilityRuntime?.reducedMotion), physicalActor: member });
       ctx.save();
       if (!member.alive) ctx.globalAlpha = member.downed ? 0.72 : 0.38;
       const drawn = this.drawSpriteSample(ctx, sample, member);

@@ -478,6 +478,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.player.vy = 0;
       this.player.grounded = true;
       this.bioforgeTransferStageV80 = 4;
+      this.bioforgePlayerAnimationV81?.reset('bioforge:player:echo9');
       const operation = this.advanceBioforgePhaseV80();
       this.emitBioforgeV80({ type: 'bioforge-physical-transfer-completed', sessionId: this.bioforgeRootV80.activeSession?.id });
       return Boolean(operation?.applied);
@@ -1081,7 +1082,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const actor = this.player;
       if (!actor) return;
       const request = resolvePlayerAnimation(actor, false);
-      const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false });
+      const sample = this.bioforgePlayerAnimationV81?.sample('bioforge:player:echo9', request, this.animationTime, { emit: false, physicalActor: actor });
       const sheet = sample?.sheet || resolveSpriteSheet('player.echo9-marine.locomotion');
       const render = drawPlayerSpriteV81(ctx, {
         sheet,
