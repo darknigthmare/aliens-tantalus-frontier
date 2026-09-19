@@ -1,7 +1,8 @@
-const CACHE = 'atf-v86-public-shell-3';
+const CACHE = 'atf-v86-public-shell-4';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/mission-structure-art-v87.js', '/src/mission-structure-layout-v87.js',
   '/src/placeables-state-v86.js', '/src/placeables-runtime-v86.js', '/src/placeables-visual-v86.js', '/src/placeables-ui-v86.js', '/placeables-v86.css',
   '/assets/openai/sprites/normalized/tools/portable-sentry-use-sheet.png',
   '/assets/openai/sprites/normalized/tools/cryo-mine-use-sheet.png',

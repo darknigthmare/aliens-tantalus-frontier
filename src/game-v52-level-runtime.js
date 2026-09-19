@@ -466,9 +466,10 @@ export function withV52LevelRuntime(BaseEngine) {
         height: Math.max(1, Number(plan.dimensions?.height) || WORLD_HEIGHT),
         voidY: Math.max(1, Number(plan.dimensions?.height) || WORLD_HEIGHT) + 100
       };
-      this.platforms = asList(plan.geometry?.platforms).map((platform, index) => ({
+      this.platforms = asList(plan.geometry?.platforms).map((platform) => ({
         ...platform,
-        art: platform.kind === 'terrain-step' ? 'ledge' : index % 3 === 0 ? 'ledge' : 'catwalk',
+        // Route surfaces are structural decks, not alternating furniture.
+        art: platform.kind === 'terrain-step' ? 'ledge' : 'catwalk',
         floor: false
       }));
       const connectors = asList(plan.geometry?.ladders);

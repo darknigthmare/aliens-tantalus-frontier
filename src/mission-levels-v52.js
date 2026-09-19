@@ -313,12 +313,12 @@ const PLANET_TEMPLATE = Object.freeze({
     edge('planet-e09', 'planet-ridge-entry', 'planet-ridge-a', 'slope', ['planet-ridge-route']),
     edge('planet-e10', 'planet-ridge-a', 'planet-ridge-b', 'slope', ['planet-ridge-route']),
     edge('planet-e11', 'planet-ridge-b', 'planet-ridge-c', 'slope', ['planet-ridge-route']),
-    edge('planet-e12', 'planet-ridge-c', 'planet-beacon', 'slope', ['planet-ridge-route']),
+    edge('planet-e12', 'planet-ridge-c', 'planet-beacon', 'ladder', ['planet-ridge-route'], { connectorOffsetFromTo: -70 }),
     edge('planet-e13', 'planet-surface-a', 'planet-cave-entry', 'ladder', ['planet-cave-route']),
     edge('planet-e14', 'planet-cave-entry', 'planet-cave-a', 'walk', ['planet-cave-route']),
     edge('planet-e15', 'planet-cave-a', 'planet-cave-b', 'walk', ['planet-cave-route']),
     edge('planet-e16', 'planet-cave-b', 'planet-cave-c', 'walk', ['planet-cave-route']),
-    edge('planet-e17', 'planet-cave-c', 'planet-beacon', 'slope', ['planet-cave-route']),
+    edge('planet-e17', 'planet-cave-c', 'planet-beacon', 'ladder', ['planet-cave-route'], { connectorOffsetFromTo: 70 }),
     edge('planet-e18', 'planet-ruin', 'planet-cave-b', 'ladder', []),
     edge('planet-e19', 'planet-surface-b', 'planet-ridge-b', 'ladder', [])
   ]),
@@ -426,7 +426,11 @@ function compileNodes(template, random) {
     const fixed = entry.anchor === 'spawn' || entry.anchor === 'extraction';
     const jitterX = fixed ? 0 : Math.round((random() - 0.5) * 24);
     const jitterY = fixed ? 0 : Math.round((random() - 0.5) * 10);
-    return Object.freeze({ ...entry, x: entry.x + jitterX, y: entry.y + jitterY });
+    // Artificial ship/colony decks share their authored elevation. Random
+    // independent heights produced stairs/seams inside one continuous room.
+    // Keep consuming the same RNG sample so hazard selection does not shift.
+    const terrainOffset = template.id === 'planet-exterior' ? jitterY : 0;
+    return Object.freeze({ ...entry, x: entry.x + jitterX, y: entry.y + terrainOffset });
   }));
 }
 
@@ -470,14 +474,19 @@ function compileGeometry(graph) {
     if (!from || !to) continue;
     if (['walk', 'slope', 'airlock', 'gate'].includes(link.kind)) {
       const distance = Math.hypot(to.x - from.x, to.y - from.y);
-      const steps = Math.max(1, Math.ceil(distance / 210));
+      // These are physical stairs, not continuous ramp colliders. Bound each
+      // riser below the player's 12 px step tolerance in either direction.
+      const steps = Math.max(1, Math.ceil(distance / 210), Math.ceil(Math.abs(to.y - from.y) / 10));
+      const stepWidth = link.kind === 'slope'
+        ? Math.min(240, Math.abs(to.x - from.x) / steps + 8)
+        : 240;
       for (let step = 1; step < steps; step += 1) {
         const progress = step / steps;
         platforms.push(Object.freeze({
           id: `${link.id}-step-${step}`,
-          x: Math.round(from.x + (to.x - from.x) * progress - 120),
+          x: Math.round(from.x + (to.x - from.x) * progress - stepWidth / 2),
           y: Math.round(from.y + (to.y - from.y) * progress),
-          w: 240,
+          w: Math.ceil(stepWidth),
           h: 20,
           zoneId: progress < 0.5 ? from.zoneId : to.zoneId,
           edgeId: link.id,
@@ -486,7 +495,11 @@ function compileGeometry(graph) {
       }
     }
     if (link.kind === 'ladder' || link.kind === 'lift') {
-      const connectorX = Math.round((from.x + to.x) / 2);
+      // At the evacuation junction, separate shafts expose a physical up/down
+      // choice instead of three overlapping slopes selecting a route silently.
+      const connectorX = Math.round(Number.isFinite(link.connectorOffsetFromTo)
+        ? to.x + link.connectorOffsetFromTo
+        : (from.x + to.x) / 2);
       const approachPadding = 34;
       for (const [side, endpoint] of [['from', from], ['to', to]]) {
         if (Math.abs(endpoint.x - connectorX) <= endpoint.width / 2 - 24) continue;
