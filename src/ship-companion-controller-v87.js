@@ -11,6 +11,7 @@ import { initializeShipAnimalDeliveryV87, pickupShipAnimalDeliveryV87, stepShipA
   receiveShipAnimalDeliveryV87, sampleShipAnimalDeliveriesV87, dropShipAnimalDeliveryV87 } from './ship-animal-delivery-v87.js';
 import { ShipPortUiV87 } from './ship-port-ui-v87.js';
 import { drawPortPropV87 } from './ship-port-art-v87.js';
+import { sampleShipCarrierPresentationV87 } from './ship-carrier-presentation-v87.js';
 import { HUB_DECKS } from './hub-game.js';
 
 const clone = value => structuredClone(value);
@@ -43,6 +44,7 @@ export class ShipCompanionControllerV87 {
     Object.assign(this, { hub, saveSystem, isActive, toast, documentRef });
     this.tickRemainder = 0; this.graph = null; this.ownerStamp = null; this.lastFailure = null;
     this.previousActors = [];
+    this.carriedPresentationV87 = null; this.carryFrameDeltaV87 = 0;
     this.images = new Map(Object.entries(SHIP_ANIMAL_ATLASES_V87).map(([animalId, atlas]) => {
       const image = new Image(); image.src = atlas.path; return [animalId, image];
     }));
@@ -57,7 +59,8 @@ export class ShipCompanionControllerV87 {
   }
 
   stamp() { const save = this.saveSystem.data; return `${this.saveSystem.profile}:${save.createdAt}:${save.onboardingV84?.identity?.id || ''}`; }
-  close() { this.ui.close({ notify: false }); this.tickRemainder = 0; this.previousActors = []; }
+  close() { this.ui.close({ notify: false }); this.tickRemainder = 0; this.previousActors = [];
+    this.carriedPresentationV87 = null; this.carryFrameDeltaV87 = 0; }
   player() {
     const { hub } = this, p = hub.player;
     return p ? { alive: p.alive, hubId: hub.currentAnnexV71?.()?.id === PORT.counterRoomId ? PORT.id : 'tantalus', roomId: hub.currentAnnexV71?.()?.id || hub.currentRoom?.()?.id,
@@ -198,10 +201,12 @@ export class ShipCompanionControllerV87 {
   tick(delta) {
     if (!this.isActive() || this.documentRef.hidden || this.ui.isOpen || !this.hub.running) return;
     const stamp = this.stamp();
-    if (this.ownerStamp !== stamp) { this.ownerStamp = stamp; this.tickRemainder = 0; this.graph = null; this.previousActors = []; }
+    if (this.ownerStamp !== stamp) { this.ownerStamp = stamp; this.tickRemainder = 0; this.graph = null; this.previousActors = [];
+      this.carriedPresentationV87 = null; this.carryFrameDeltaV87 = 0; }
     const save = this.saveSystem.data;
     if (!movingPort(save) && !Object.keys(save.shipAnimalsV1?.animals || {}).length) return;
-    this.tickRemainder += Math.max(0, Math.min(.25, delta));
+    this.carryFrameDeltaV87 = Number.isFinite(delta) ? Math.max(0, Math.min(.25, delta)) : 0;
+    this.tickRemainder += this.carryFrameDeltaV87;
     if (this.tickRemainder < .2) return;
     const dt = .2; this.tickRemainder -= dt;
     let next = save, changed = false;
@@ -276,12 +281,18 @@ export class ShipCompanionControllerV87 {
     }
   }
   drawCarried(ctx) {
+    if (!this.isActive() || this.ownerStamp !== this.stamp()) { this.carriedPresentationV87 = null; return; }
     const player = this.player();
     const delivery = sampleShipAnimalDeliveriesV87(this.saveSystem.data).find(entry => entry.carried
       && entry.roomId === player?.roomId && entry.deckId === player?.deckId);
-    if (!delivery) return;
-    const p = this.hub.player;
+    this.carriedPresentationV87 = sampleShipCarrierPresentationV87(delivery, player, {
+      remainder: this.tickRemainder, frameDelta: this.carryFrameDeltaV87,
+      facing: this.hub.player?.facing, previous: this.carriedPresentationV87,
+      paused: !this.hub.running || this.documentRef.hidden || this.ui.isOpen,
+      transitioning: Boolean(this.hub.annexTransitionV71)
+    });
+    if (!this.carriedPresentationV87) return;
     drawPortPropV87(ctx, this.hub.ensureAnnexAssetsV71(PORT.counterRoomId)?.get('prop'), 'carrier',
-      { x: delivery.x + (p.facing < 0 ? -52 : 12), width: 48, bottom: delivery.y - 24 });
+      this.carriedPresentationV87.bounds);
   }
 }
