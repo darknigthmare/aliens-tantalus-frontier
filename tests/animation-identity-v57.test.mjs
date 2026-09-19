@@ -154,8 +154,8 @@ test('neuro-002 conserve ses données de gameplay mais rend toujours le fallback
     [{}, 'idle'],
     [{ vx: 60 }, 'walk-run'],
     [{ fireClock: 0.4 }, 'primary-fire'],
-    [{ v52HurtClock: 0.4 }, 'hurt-death'],
-    [{ alive: false }, 'hurt-death']
+    [{ v52HurtClock: 0.4 }, 'hurt'],
+    [{ alive: false }, 'death']
   ]) {
     Object.assign(neuroEngine.player, baseState, state);
     const request = resolveIdentitySafePlayerAnimationV57(neuroEngine.player, true);
@@ -166,7 +166,7 @@ test('neuro-002 conserve ses données de gameplay mais rend toujours le fallback
   neuroEngine.updateSpriteAnimationEvents();
   const neuroSnapshot = neuroEngine.getSnapshot();
   const neuroKey = getAnimationEntityKeyV57('player', neuroEngine.player, 'primary');
-  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'player.echo9-marine.combat:hurt-death');
+  assert.equal(neuroSnapshot.animationRuntime.activeClips[neuroKey], 'player.echo9-marine.combat:hurt');
   assert.equal(neuroSnapshot.animationRuntime.neuroPlayerContract.sheetId, 'player.echo9-marine.locomotion');
   assert.deepEqual([neuroEngine.player.w, neuroEngine.player.h], [42, 92], 'le mode neuro ne change pas le gabarit canonique du joueur');
 
@@ -223,7 +223,7 @@ test('la télémétrie sépare le rôle joueur du crewId et ne contamine jamais 
   engine.neuro.active = true;
   engine.updateSpriteAnimationEvents();
   clips = engine.getSnapshot().animationRuntime.activeClips;
-  assert.equal(clips[playerKey], 'player.echo9-marine.combat:hurt-death');
+  assert.equal(clips[playerKey], 'player.echo9-marine.combat:hurt');
   assert.doesNotMatch(clips[crew03Key], /^enemy[.]/);
   assert.doesNotMatch(clips[crew04Key], /^enemy[.]/);
 }));

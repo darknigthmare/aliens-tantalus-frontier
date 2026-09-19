@@ -134,7 +134,11 @@ export const SPRITE_CLIP_SETS = Object.freeze({
     { id: 'aim-ready', frames: [0, 1, 2, 3], fps: 5, loop: true, events: [{ frame: 1, type: 'weapon:aim-ready' }] },
     { id: 'primary-fire', frames: [4, 5, 6, 7], fps: 13, loop: false, events: [{ frame: 4, type: 'weapon:shot' }, { frame: 5, type: 'weapon:recoil' }] },
     { id: 'reload', frames: [8, 9, 10, 11], fps: 9, loop: false, events: [{ frame: 9, type: 'weapon:magazine-out' }, { frame: 10, type: 'weapon:magazine-in' }, { frame: 11, type: 'weapon:chamber' }] },
-    { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }, { frame: 15, type: 'state:death-lock' }] }
+    // Living injuries must never advance into the fallen/corpse cells.
+    { id: 'hurt', frames: [12, 13], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }] },
+    { id: 'death', frames: [13, 14, 15], fps: 7, loop: false, events: [{ frame: 15, type: 'state:death-lock' }] },
+    // Retained for legacy sheet inspection; gameplay selects hurt or death explicitly.
+    { id: 'hurt-death', frames: [12, 13, 14, 15], fps: 7, loop: false, events: [{ frame: 12, type: 'state:hurt' }] }
   ]),
   'player-melee-v56': freezeList([
     { id: 'knife-ready', frames: [0, 1, 2, 3], fps: 6, loop: true, events: [{ frame: 1, type: 'combat:melee-ready' }] },
@@ -517,6 +521,8 @@ export function shouldFlipSprite(sheetOrId, actorFacing = 1) {
 const PLAYER_COMBAT_FALLBACKS = Object.freeze({
   'primary-fire': 'idle',
   reload: 'idle',
+  hurt: 'idle',
+  death: 'jump-fall',
   'hurt-death': 'jump-fall'
 });
 
@@ -531,8 +537,8 @@ export function resolveVerifiedPlayerCombat(clipId) {
 }
 
 function resolveEcho9MarineAnimationV81(actor = {}) {
-  if (actor.alive === false) return resolveVerifiedPlayerCombat('hurt-death');
-  if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt-death');
+  if (actor.alive === false) return resolveVerifiedPlayerCombat('death');
+  if ((actor.v52HurtClock || 0) > 0) return resolveVerifiedPlayerCombat('hurt');
   if ((actor.meleeClock || 0) > 0) return {
     sheetId: 'player.echo9-marine.melee',
     clipId: actor.meleeKind === 'rifle-bash' ? 'rifle-bash' : actor.meleeKind === 'defense' ? 'melee-defense' : 'knife-attack'
