@@ -41,12 +41,14 @@ function freezeDeep(value) {
   return value;
 }
 
-test('lot A contains exactly Moka and Brume with authored individual IDs and all-inclusive proposed prices', () => {
-  assert.deepEqual(Object.keys(SHIP_ANIMAL_DEFINITIONS_V87), ['animal-moka', 'animal-brume']);
+test('released original individuals are Moka, Brume and Luciole with authored IDs and all-inclusive proposed prices', () => {
+  assert.deepEqual(Object.keys(SHIP_ANIMAL_DEFINITIONS_V87), ['animal-moka', 'animal-brume', 'animal-luciole']);
   assert.equal(SHIP_ANIMAL_DEFINITIONS_V87['animal-moka'].familyId, 'cat-domestic');
   assert.equal(SHIP_ANIMAL_DEFINITIONS_V87['animal-brume'].familyId, 'dog-companion');
   assert.equal(SHIP_ANIMAL_OFFERS_V87['offer-animal-moka'].costCredits, 220);
   assert.equal(SHIP_ANIMAL_OFFERS_V87['offer-animal-brume'].costCredits, 300);
+  assert.equal(SHIP_ANIMAL_DEFINITIONS_V87['animal-luciole'].familyId, 'cat-domestic');
+  assert.equal(SHIP_ANIMAL_OFFERS_V87['offer-animal-luciole'].costCredits, 220);
   assert.ok(Object.values(SHIP_ANIMAL_DEFINITIONS_V87).every(Object.isFrozen));
 });
 

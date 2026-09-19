@@ -1,14 +1,23 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87 } from '../src/ship-animal-state-v87.js';
+import { SHIP_ANIMAL_HABITATS_V87 } from '../src/ship-animal-habitat-v87.js';
+import { SHIP_PORT_MEETINGS_V87 } from '../src/ship-port-room-v87.js';
 const base = process.env.APP_URL || 'http://127.0.0.1:4189';
-const subject = process.env.QA_ANIMAL === 'brume'
-  ? { id: 'animal-brume', name: 'Brume', meetingX: 1435, berthX: 1160, price: 300 }
-  : { id: 'animal-moka', name: 'Moka', meetingX: 990, berthX: 690, price: 220 };
+const selectedId = (process.env.QA_ANIMAL || 'moka').replace(/^(?!animal-)/, 'animal-');
+const definition = SHIP_ANIMAL_DEFINITIONS_V87[selectedId];
+const offer = Object.values(SHIP_ANIMAL_OFFERS_V87).find(entry => entry.animalId === selectedId);
+const meeting = SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === selectedId);
+const habitat = SHIP_ANIMAL_HABITATS_V87.find(entry => entry.id === definition?.defaultHabitatId);
+assert.ok(definition && offer && meeting && habitat, 'QA_ANIMAL must name a fully defined companion, never a silent Moka fallback');
+const subject = { id: definition.id, name: definition.name, meetingX: meeting.x, berthX: habitat.location.x,
+  habitatId: habitat.id, offerId: offer.id, imageRole: meeting.imageRole, price: offer.costCredits };
 const animalExpression = '__ATF_V51__.saveSystem.data.shipAnimalsV1.animals[' + JSON.stringify(subject.id) + ']';
 const output = resolve(process.env.QA_OUTPUT || 'I:/CodexQA/AliensTantalus/v87-port-20260919/e2e', process.env.QA_RUN || 'run-01');
 await mkdir(output, { recursive: true });
-const info = await fetch('http://127.0.0.1:9236/json/version').then(r => r.json());
+const cdpPort = Number(process.env.QA_CDP_PORT || 9237);
+const info = await fetch('http://127.0.0.1:' + cdpPort + '/json/version').then(r => r.json());
 const socket = new WebSocket(info.webSocketDebuggerUrl);
 await new Promise((ok, fail) => { socket.addEventListener('open', ok, { once: true }); socket.addEventListener('error', fail, { once: true }); });
 let sequence = 0, session, context, targetId; const pending = new Map(), errors = [], pressed = new Set();
@@ -64,7 +73,7 @@ function brief(data) {
 function milestone(name, data) { report.checks[name] = data; console.log(JSON.stringify({ stage: name, data: brief(data) })); }
 async function capture(name) { const r = await cdp('Page.captureScreenshot', { format: 'jpeg', quality: 85, captureBeyondViewport: false });
   await writeFile(resolve(output, name + '.jpg'), Buffer.from(r.data, 'base64')); report.screenshots.push(name + '.jpg'); }
-const poseExpression = `(()=>{const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data,a=s.shipAnimalsV1?.animals?.[${JSON.stringify(subject.id)}];return {x:h.player.x+h.player.w/2,y:h.player.y,feet:h.player.y+h.player.h,vx:h.player.vx,vy:h.player.vy,grounded:h.player.grounded,climbing:h.player.climbing,deck:h.state.deck,room:h.currentAnnexV71()?.id||h.currentRoom().id,health:h.player.health,running:h.running,transition:h.annexTransitionV71,prompt:h.statusPrompt(),animal:a?{location:a.location,delivery:a.deliveryV87,activity:a.activity}:null,toast:document.querySelector('#toast-region')?.innerText,hidden:document.hidden};})()`;
+const poseExpression = `(()=>{const h=__ATF_HUB__,s=__ATF_V51__.saveSystem.data,a=s.shipAnimalsV1?.animals?.[${JSON.stringify(subject.id)}];return {x:h.player.x+h.player.w/2,y:h.player.y,feet:h.player.y+h.player.h,vx:h.player.vx,vy:h.player.vy,grounded:h.player.grounded,climbing:h.player.climbing,deck:h.state.deck,room:h.currentAnnexV71()?.id||h.currentRoom().id,health:h.player.health,running:h.running,transition:h.annexTransitionV71,prompt:h.statusPrompt(),animal:a?{habitatId:a.habitatId,location:a.location,delivery:a.deliveryV87,activity:a.activity}:null,toast:document.querySelector('#toast-region')?.innerText,hidden:document.hidden};})()`;
 async function snapshot() { return read(poseExpression); }
 async function walk(target, label = 'walk', { jump = false } = {}) {
   const start = await snapshot(), direction = start.x < target ? 1 : -1, code = direction > 0 ? 'KeyD' : 'KeyA';
@@ -139,8 +148,14 @@ try {
   await until('__ATF_HUB__.currentAnnexV71()?.id==="frontier-civil-counter"&&!__ATF_HUB__.annexTransitionV71', 'enter port');
   await until('[...__ATF_HUB__.getAnnexAssetGroupV71("frontier-civil-counter").values()].every(i=>i.complete&&i.naturalWidth>0)', 'all port art');
   milestone('portArt', await read('Object.fromEntries([...__ATF_HUB__.getAnnexAssetGroupV71("frontier-civil-counter")].map(([k,v])=>[k,{width:v.naturalWidth,height:v.naturalHeight}]))'));
+  assert.ok(report.checks.portArt[subject.imageRole]?.width > 0, 'Dedicated subject atlas is loaded by the actual port');
   await walk(subject.meetingX, 'walk to ' + subject.name + ' meeting'); await press('KeyE');
   await until('document.querySelector("dialog.ship-port-v87")?.open', subject.name + ' dossier open');
+  milestone('meetingDossier', await read('({tabs:[...document.querySelectorAll("dialog.ship-port-v87 [role=tab]")].filter(el=>!el.hidden).map(el=>({id:el.dataset.animalId,name:el.textContent,selected:el.getAttribute("aria-selected")})),confirmDisabled:document.querySelector("[data-port-action=buy]").disabled,owned:Object.keys(__ATF_V51__.saveSystem.data.shipAnimalsV1.animals)})'));
+  assert.deepEqual(report.checks.meetingDossier.tabs.map(entry => entry.id), Object.keys(SHIP_ANIMAL_DEFINITIONS_V87));
+  assert.deepEqual(report.checks.meetingDossier.tabs.filter(entry => entry.selected === 'true').map(entry => entry.id), [subject.id]);
+  assert.equal(report.checks.meetingDossier.confirmDisabled, true, 'An actual dossier examination is required before buying');
+  assert.deepEqual(report.checks.meetingDossier.owned, [], 'Meeting an animal does not silently grant ownership');
   await click('[data-port-action="examine"]'); await capture('03-companion-dossier');
   assert.equal(await read('document.querySelector("[data-port-action=buy]").disabled'), false);
   await click('[data-port-action="buy"]');
@@ -150,7 +165,9 @@ try {
   assert.equal(Object.keys(report.checks.purchase.receipts).length, 1);
   assert.equal(Object.values(report.checks.purchase.receipts)[0].costCredits, subject.price);
   assert.equal(Object.values(report.checks.purchase.receipts)[0].animalId, subject.id);
-  assert.equal(report.checks.purchase.stock['offer-' + subject.id].status, 'sold');
+  assert.equal(Object.values(report.checks.purchase.receipts)[0].habitatId, subject.habitatId, 'Two cats must not reserve the same default berth');
+  for (const stockOffer of Object.values(SHIP_ANIMAL_OFFERS_V87))
+    assert.equal(report.checks.purchase.stock[stockOffer.id].status, stockOffer.id === subject.offerId ? 'sold' : 'available');
   await capture('04-awaiting-crate'); await press('KeyE');
   await until(animalExpression + '.deliveryV87.phase==="carried"', 'pickup');
   milestone('pickup', await snapshot()); await capture('05-carried');
@@ -206,6 +223,7 @@ try {
   await until('__ATF_HUB__.currentAnnexV71()?.id==="animal-care"&&!__ATF_HUB__.annexTransitionV71', 'enter care room');
   await walk(subject.berthX, 'carry to ' + subject.name + ' fitted berth'); await wait(450);
   milestone('berth', await snapshot());
+  assert.equal(report.checks.berth.animal.habitatId, subject.habitatId);
   if (process.env.QA_CARRIER_PROJECTION === '1') {
     const projection = await read('structuredClone(__QA_CARRIER_V87__)');
     milestone('carrierProjection', projection);
@@ -222,6 +240,8 @@ try {
   milestone('acclimating', await snapshot()); await capture('07-acclimation');
   await until(animalExpression + '.location.kind==="resident"', 'resident after active stages');
   milestone('resident', await snapshot()); await capture('08-resident');
+  assert.equal(report.checks.resident.animal.habitatId, subject.habitatId);
+  assert.equal(report.checks.resident.animal.location.roomId, habitat.location.roomId);
   await press('KeyE'); await until(animalExpression + '.activity==="pet"', 'nearby pet animation');
   milestone('pet', await snapshot()); await capture('09-pet');
   await until(animalExpression + '.activity==="walk"', 'resident starts real walk', 16000);
@@ -231,8 +251,13 @@ try {
   milestone('residentReload', await snapshot());
   assert.equal(report.checks.residentReload.animal.delivery.phase, 'delivered');
   assert.equal(report.checks.residentReload.animal.location.kind, 'resident');
+  assert.equal(report.checks.residentReload.animal.habitatId, subject.habitatId);
   assert.equal(await read('__ATF_V51__.saveSystem.data.galaxy.resources.credits'), 3200 - subject.price);
   assert.equal(await read('Object.keys(__ATF_V51__.saveSystem.data.shipAnimalsV1.receipts).length'), 1);
+  assert.deepEqual(await read('Object.keys(__ATF_V51__.saveSystem.data.shipAnimalsV1.animals)'), [subject.id]);
+  const reloadedStock = await read('structuredClone(__ATF_V51__.saveSystem.data.shipAnimalsV1.stock)');
+  for (const stockOffer of Object.values(SHIP_ANIMAL_OFFERS_V87))
+    assert.equal(reloadedStock[stockOffer.id].status, stockOffer.id === subject.offerId ? 'sold' : 'available');
   await capture('11-reloaded-companion'); assert.deepEqual(errors, []); report.ok = true;
   }
 } catch (error) {

@@ -5,7 +5,8 @@ import { buildShipAnimalNavigationV87, planShipAnimalRouteV87, stepShipAnimalRou
 
 export const SHIP_ANIMAL_ROUTINE_BODIES_V87 = Object.freeze({
   'animal-moka': Object.freeze({ w: 38, h: 38, speed: 42 }),
-  'animal-brume': Object.freeze({ w: 60, h: 58, speed: 54 })
+  'animal-brume': Object.freeze({ w: 60, h: 58, speed: 54 }),
+  'animal-luciole': Object.freeze({ w: 36, h: 36, speed: 42 })
 });
 const clone = value => structuredClone(value);
 const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -109,11 +110,9 @@ function physicalOrigin(animal, graph) {
 function habitatFor(save, animal) {
   return getShipAnimalHabitatsV87(save).find(entry => entry.id === animal.habitatId && entry.installed);
 }
-function targetFor(animal, habitat, next) {
-  const cat = animal.id === 'animal-moka';
+function targetFor(habitat, next) {
   // Paw anchors place each mouth at its separate food dish, never at room centre.
-  const x = next === 'food' ? (cat ? 790 : 1315)
-    : next === 'stroll' ? (cat ? 560 : 1420) : habitat.location.x;
+  const x = next === 'food' || next === 'stroll' ? habitat.routineTargets[next] : habitat.location.x;
   return { ...habitat.location, x };
 }
 function beginWalk(animal, graph, target, afterWalk, time, blockedRoomIds) {
@@ -206,7 +205,7 @@ export function stepShipAnimalRoutinesV87(save, {
           routine.phase = 'idle'; routine.elapsed = 0; continue;
         }
         const next = routine.phase === 'eat' ? 'bed' : routine.phase === 'sleep' ? 'stroll' : routine.next;
-        const target = targetFor(animal, habitats.get(animal.id), next);
+        const target = targetFor(habitats.get(animal.id), next);
         const afterWalk = next === 'food' ? 'eat' : next === 'bed' ? 'sleep' : 'idle';
         const planned = beginWalk(animal, graph, target, afterWalk,
           time + consumed, blockedRoomIds);
@@ -219,6 +218,9 @@ export function stepShipAnimalRoutinesV87(save, {
         }
       }
     }
+    // The mouth faces the actual dish after arrival, independent of approach direction.
+    // Walking keeps its movement-facing; this also repairs a saved backward eat pose.
+    if (routine.phase === 'eat') routine.facing = habitats.get(animal.id).routineTargets.foodFacing;
     animal.activity = routine.phase;
     animal.lastSimulationTime = start + elapsed;
     animal.revision += 1;

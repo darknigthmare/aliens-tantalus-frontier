@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-physical-placeables-shell-4';
+const CACHE = 'atf-v86-physical-placeables-shell-5';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
@@ -18,6 +18,7 @@ const CORE = [
   '/src/ship-animal-state-v87.js', '/src/ship-animal-habitat-v87.js', '/src/hub-annex-registry-v87.js',
   '/src/ship-animal-art-v87.js', '/src/ship-animal-navigation-v87.js',
   '/assets/openai/ship-animals/v87/moka-atlas.png', '/assets/openai/ship-animals/v87/brume-atlas.png',
+  '/assets/openai/ship-animals/v87/luciole-atlas.png',
   '/assets/openai/ship-animals/v87/habitat-wall.png', '/assets/openai/ship-animals/v87/habitat-props.png',
   '/src/mission-structure-art-v87.js', '/src/mission-structure-layout-v87.js',
   '/src/placeables-state-v86.js', '/src/placeables-runtime-v86.js', '/src/placeables-visual-v86.js', '/src/placeables-ui-v86.js', '/placeables-v86.css',

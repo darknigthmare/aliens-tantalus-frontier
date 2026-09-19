@@ -15,7 +15,10 @@ import { ELECTRICAL_HAZARD_ART_V55 } from '../src/hub-art-runtime-v55.js';
 const near = (a, b, tolerance = .001) => assert.ok(Math.abs(a - b) <= tolerance, `${a} != ${b}`);
 const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 const shape = value => Object.fromEntries(['x', 'y', 'w', 'h'].map(key => [key, value[key]]));
-const image = path => ({ currentSrc: path, complete: true, naturalWidth: 1536, naturalHeight: 1024 });
+const image = path => {
+  const atlas = Object.values(SHIP_ANIMAL_ATLASES_V87).find(entry => entry.path === path);
+  return { currentSrc: path, complete: true, naturalWidth: atlas?.width || 1536, naturalHeight: atlas?.height || 1024 };
+};
 function ctxFor(trace) {
   const gradient = { addColorStop() {} };
   return new Proxy({ measureText: text => ({ width: String(text).length * 8 }),
@@ -29,7 +32,9 @@ class MockImage {
   constructor() { this.complete = true; this.naturalWidth = 1920; this.naturalHeight = 720; }
   set src(value) {
     this.currentSrc = value;
-    if (value.includes('/ship-animals/v87/')) { this.naturalWidth = 1536; this.naturalHeight = 1024; }
+    const atlas = Object.values(SHIP_ANIMAL_ATLASES_V87).find(entry => entry.path === value);
+    if (atlas) { this.naturalWidth = atlas.width; this.naturalHeight = atlas.height; }
+    else if (value.includes('/ship-animals/v87/')) { this.naturalWidth = 1536; this.naturalHeight = 1024; }
     else if (value.endsWith('/door.webp')) { this.naturalWidth = 384; this.naturalHeight = 512; }
     else if (value.endsWith('/prop.webp')) { this.naturalWidth = 640; this.naturalHeight = 512; }
     else if (value.includes('echo9-marine-')) { this.naturalWidth = 1024; this.naturalHeight = 1024; }
@@ -99,7 +104,8 @@ test('the port is an explicit second extension with a separate parent and no rew
   assert.ok(graph.adjacency['dropship-hangar'].includes(ANNEX.id));
 });
 
-test('port departure uses the exact internal hub identity of both actual companion berths', () => {
+test('port departure uses the exact internal hub identity of all three actual companion berths', () => {
+  assert.equal(SHIP_ANIMAL_HABITATS_V87.length, 3);
   assert.ok(SHIP_ANIMAL_HABITATS_V87.every(berth => berth.location.hubId === SHIP_PORT_DEFINITION_V87.shipHubId));
 });
 
@@ -121,7 +127,7 @@ test('west hangar gangway x40..158 and wall terminal x0..36 sit on floor624 clea
 }));
 
 test('counter, shelf and terminal metadata match actual unstretched bitmap bounds', () => {
-  for (const [id, kind, x, width] of [['port-counter', 'counter', 480, 165], ['port-shelf', 'shelf', 1740, 97]]) {
+  for (const [id, kind, x, width] of [['port-counter', 'counter', 480, 165], ['port-shelf', 'shelf', 1825, 90]]) {
     const prop = ANNEX.props.find(entry => entry.id === id);
     assert.deepEqual(shape(prop), getPortPropBoundsV87(kind, { x, width, bottom: 624 }));
     assert.equal(prop.collidable, false); near(prop.y + prop.h, 624);
@@ -162,7 +168,7 @@ test('the locked port remains drawn but cannot activate its door while the legac
   hub.interact(); assert.equal(hub.annexTransitionV71?.annexId, 'arrival-airlock');
 }));
 
-test('terminal and gangway are reachable by walking, then counter and both meeting areas are traversable on the same floor', () => withRuntime(() => {
+test('terminal and gangway are reachable by walking, then counter and all three meeting areas are traversable on the same floor', () => withRuntime(() => {
   const { hub, actions } = createHub(true); place(hub, 96);
   const health = hub.player.health;
   walk(hub, 46); assert.equal(getShipPortInteractionV87(hub)?.action, 'ship-port:terminal');
@@ -181,6 +187,35 @@ test('terminal and gangway are reachable by walking, then counter and both meeti
   assert.equal(hub.player.health, health); assert.equal(hub.player.shockHits, 0);
 }));
 
+test('three meeting interaction zones and fences remain independent and clear of the exit, counter and shelf', () => {
+  assert.deepEqual(SHIP_PORT_MEETINGS_V87.map(entry => [entry.animalId, entry.x]),
+    [['animal-moka', 990], ['animal-brume', 1435], ['animal-luciole', 1705]]);
+  // Brume's exact historical coordinate is part of saved transit origins.
+  assert.equal(SHIP_PORT_MEETINGS_V87.find(entry => entry.animalId === 'animal-brume').x, 1435);
+  const hub = { player: { x: 0, y: 532, w: 44, h: 92, alive: true }, currentAnnexV71: () => ANNEX };
+  const gates = SHIP_PORT_MEETINGS_V87.map(entry => getPortPropBoundsV87('gate', { x: entry.x - 115, width: 230, bottom: 626 }));
+  for (let index = 0; index < SHIP_PORT_MEETINGS_V87.length; index++) {
+    const meeting = SHIP_PORT_MEETINGS_V87[index];
+    assert.equal(ANNEX.art[meeting.imageRole], SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path);
+    assert.ok(ANNEX.artRoles.includes(meeting.imageRole));
+    for (const offset of [-105, 0, 105]) {
+      place(hub, meeting.x + offset);
+      assert.equal(getShipPortInteractionV87(hub)?.animalId, meeting.animalId);
+    }
+    for (const solid of [...ANNEX.props, ANNEX.entrance, ...gates.filter((_, other) => other !== index)]) {
+      assert.equal(overlaps(gates[index], solid), false, 'fence overlap for ' + meeting.animalId);
+    }
+    if (index > 0) {
+      const previous = SHIP_PORT_MEETINGS_V87[index - 1];
+      assert.ok(meeting.x - previous.x > 210, 'Prompt activation spans must not intersect');
+      place(hub, (previous.x + meeting.x) / 2); assert.equal(getShipPortInteractionV87(hub), null);
+    }
+  }
+  assert.equal(new Set(SHIP_PORT_MEETINGS_V87.map(entry => ANNEX.art[entry.imageRole])).size, 3);
+  assert.ok(gates.at(-1).x + gates.at(-1).w <= ANNEX.props.find(entry => entry.id === 'port-shelf').x);
+  assert.ok(ANNEX.props.every(prop => prop.x + prop.w <= ANNEX.world.width));
+});
+
 test('port prompts reject airborne, dead, transitioning, editor and unrelated-room players', () => {
   const hub = { player: { x: 24, y: 532, w: 44, h: 92, alive: true }, currentRoom: () => ({ id: 'dropship-hangar' }) };
   assert.equal(getShipPortInteractionV87(hub)?.action, 'ship-port:terminal');
@@ -192,19 +227,21 @@ test('port prompts reject airborne, dead, transitioning, editor and unrelated-ro
 
 test('independent vendor, props and available companions use cropped images and sold companions disappear from the shop', () => {
   const images = new Map([['prop', image(PORT_ART_V87.props.path)], ['vendor', image(PORT_ART_V87.vendor.path)],
-    ['moka', image(SHIP_ANIMAL_ATLASES_V87['animal-moka'].path)], ['brume', image(SHIP_ANIMAL_ATLASES_V87['animal-brume'].path)]]);
+    ...SHIP_PORT_MEETINGS_V87.map(entry => [entry.imageRole, image(SHIP_ANIMAL_ATLASES_V87[entry.animalId].path)])]);
   const trace = { texts: [], images: [], translations: [] }; const ctx = ctxFor(trace); const save = campaign();
   drawShipPortRoomV87(ctx, images, save, .5, false);
-  assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.props.path).length, 6);
+  assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.props.path).length, 4 + SHIP_PORT_MEETINGS_V87.length);
   assert.equal(trace.images.filter(args => args[0].currentSrc === PORT_ART_V87.vendor.path).length, 1);
-  assert.equal(trace.images.filter(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87['animal-moka'].path).length, 1);
-  assert.equal(trace.images.filter(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87['animal-brume'].path).length, 1);
+  for (const meeting of SHIP_PORT_MEETINGS_V87)
+    assert.equal(trace.images.filter(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path).length, 1);
   assert.ok(trace.images.every(args => args.length === 9));
   assert.ok(trace.translations.some(([x, y]) => x === 668 && y === 624));
-  save.shipAnimalsV1.stock['offer-animal-moka'].status = 'sold'; trace.images.length = 0;
-  drawShipPortRoomV87(ctx, images, save, .5, true);
-  assert.equal(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87['animal-moka'].path), false);
-  assert.equal(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87['animal-brume'].path), true);
+  for (const sold of SHIP_PORT_MEETINGS_V87) {
+    for (const meeting of SHIP_PORT_MEETINGS_V87) save.shipAnimalsV1.stock[meeting.offerId].status = meeting === sold ? 'sold' : 'available';
+    trace.images.length = 0; drawShipPortRoomV87(ctx, images, save, .5, true);
+    for (const meeting of SHIP_PORT_MEETINGS_V87)
+      assert.equal(trace.images.some(args => args[0].currentSrc === SHIP_ANIMAL_ATLASES_V87[meeting.animalId].path), meeting !== sold);
+  }
 });
 
 test('terminal draws the exact recorded dimensions and communicates locked versus docked presence', () => {

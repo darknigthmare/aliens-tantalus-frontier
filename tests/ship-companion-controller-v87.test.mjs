@@ -174,10 +174,48 @@ test('a physical shop purchase atomically debits once and creates a pickup crate
   assert.equal(f.saveSystem.data.galaxy.resources.credits, 2980);
 });
 
+test('controller buys Luciole before Moka into separate berths and allows three companions only with three installed slots', () => {
+  const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 600);
+  for (const animalId of ['animal-luciole', 'animal-moka', 'animal-brume']) {
+    assert.equal(f.controller.model().offers.find(o => o.animalId === animalId).canBuy, true);
+    assert.equal(f.controller.uiAction({ type: 'buy', animalId }), true);
+    const owned = f.saveSystem.data.shipAnimalsV1.animals[animalId];
+    assert.equal(owned.habitatId, animalId.replace('animal-', '') + '-berth-v87');
+    assert.equal(owned.deliveryV87.phase, 'awaiting-pickup'); assert.equal(owned.location.kind, 'transit');
+  }
+  assert.equal(f.saveSystem.data.galaxy.resources.credits, 2460);
+  assert.equal(Object.keys(f.saveSystem.data.shipAnimalsV1.receipts).length, 3);
+  assert.equal(new Set(Object.values(f.saveSystem.data.shipAnimalsV1.reservations).map(r => r.habitatId)).size, 3);
+  assert.equal(f.controller.uiAction({ type: 'buy', animalId: 'animal-luciole' }), false);
+  assert.equal(f.saveSystem.data.galaxy.resources.credits, 2460);
+});
+
+test('controller never offers Moka berth as a substitute for missing Luciole fitting or missing dedicated art', () => {
+  const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 600);
+  const state = clone(f.saveSystem.data.shipAnimalsV1); delete state.habitats['luciole-berth-v87'];
+  f.saveSystem.commit({ shipAnimalsV1: state });
+  assert.equal(f.controller.model().offers.find(o => o.animalId === 'animal-moka').canBuy, true);
+  assert.equal(f.controller.model().offers.find(o => o.animalId === 'animal-luciole').canBuy, false);
+  const before = JSON.stringify(f.saveSystem.data);
+  assert.equal(f.controller.uiAction({ type: 'buy', animalId: 'animal-luciole' }), false);
+  assert.equal(JSON.stringify(f.saveSystem.data), before);
+  f.saveSystem.commit(equip(f.saveSystem.data)); f.controller.images.delete('animal-luciole');
+  assert.equal(f.controller.model().offers.find(o => o.animalId === 'animal-luciole').canBuy, false);
+  assert.equal(f.controller.uiAction({ type: 'buy', animalId: 'animal-luciole' }), false);
+});
+
+test('Luciole purchase quota failure never publishes ownership, money debit or a pickup crate', () => {
+  const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 600);
+  const before = JSON.stringify(f.saveSystem.data), bytes = [...f.backend.values]; f.backend.reject = true;
+  assert.equal(f.controller.uiAction({ type: 'buy', animalId: 'animal-luciole' }), false);
+  assert.equal(JSON.stringify(f.saveSystem.data), before); assert.deepEqual([...f.backend.values], bytes);
+  assert.equal(f.backend.attempts, 1); assert.deepEqual(sampleShipAnimalDeliveriesV87(f.saveSystem.data), []);
+});
+
 for (const reason of ['wrong-room', 'too-far', 'airborne', 'dead', 'danger', 'unknown-animal']) test(`purchase guard ${reason} preserves money and ownership`, () => {
   const f = fixture({ atPort: true, equipped: true }); f.locate(PORT.counterRoomId, 600);
   if (reason === 'wrong-room') f.locate(PORT.commandRoomId, 600);
-  if (reason === 'too-far') f.locate(PORT.counterRoomId, 1800);
+  if (reason === 'too-far') f.locate(PORT.counterRoomId, 1875);
   if (reason === 'airborne') f.hub.player.y -= 80;
   if (reason === 'dead') f.hub.player.alive = false;
   if (reason === 'danger') f.saveSystem.commit({ hub: { ...f.saveSystem.data.hub, activeCrisis: { id: 'controller-crisis', kind: 'xenomorph', resolved: false } } });

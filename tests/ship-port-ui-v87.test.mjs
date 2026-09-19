@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { ShipPortUiV87 } from '../src/ship-port-ui-v87.js';
 import { SHIP_ANIMAL_ATLASES_V87 } from '../src/ship-animal-art-v87.js';
+import { SHIP_ANIMAL_DEFINITIONS_V87, SHIP_ANIMAL_OFFERS_V87 } from '../src/ship-animal-state-v87.js';
 
 // DOM double for interaction/ownership tests. Native dialog and visual QA remain browser gates.
 function documentDouble() {
@@ -48,13 +49,13 @@ function documentDouble() {
   return document;
 }
 
-const offer = (animalId, costCredits) => ({ animalId, name: animalId === 'animal-moka' ? 'Moka' : 'Brume',
+const offer = (animalId, costCredits) => ({ animalId, name: SHIP_ANIMAL_DEFINITIONS_V87[animalId]?.name || animalId,
   appearance: 'Individu original biologique', biography: 'Histoire personnelle documentée', traits: ['Calme', 'Sociable'],
   costCredits, habitatLabel: 'Logement dédié', conditions: [], owned: false, canBuy: true });
 function harness(extra = {}) {
   const document = documentDouble(), actions = []; let closes = 0;
   const model = { phase: 'docked', progress: 1, message: 'Comptoir physique accessible', canDock: false, canUndock: true,
-    offers: [offer('animal-moka', 220), offer('animal-brume', 300)], busy: false, reducedMotion: false };
+    offers: Object.values(SHIP_ANIMAL_OFFERS_V87).map(entry => offer(entry.animalId, entry.costCredits)), busy: false, reducedMotion: false };
   const ui = new ShipPortUiV87({ documentRef: document, getModel: () => model,
     onAction: action => { actions.push(action); return true; }, onClose: () => { closes++; }, ...extra });
   return { ui, model, document, actions, get closes() { return closes; } };
@@ -174,15 +175,66 @@ test('model strings remain literal text, and arbitrary asset paths or unknown an
 test('previews use genuine dedicated atlases at fixed relative scale and nine-argument crops', () => {
   const { ui, document } = harness(); ui.open({ mode: 'shop' });
   assert.match(ui.previewStatus.textContent, /indisponible ou en chargement/);
-  for (const animalId of ['animal-moka', 'animal-brume']) {
+  for (const animalId of Object.keys(SHIP_ANIMAL_DEFINITIONS_V87)) {
     ui.select(animalId); const image = ui.images.get(animalId);
-    Object.assign(image, { complete: true, naturalWidth: 1536, naturalHeight: 1024 }); document.draws.length = 0; image.onload();
+    const atlas = SHIP_ANIMAL_ATLASES_V87[animalId];
+    Object.assign(image, { complete: true, naturalWidth: atlas.width, naturalHeight: atlas.height }); document.draws.length = 0; image.onload();
     const draw = document.draws.find(call => call[0] === 'drawImage').slice(1);
     assert.equal(draw.length, 9); assert.equal(draw[0], image);
     assert.equal(draw[7] / draw[3], SHIP_ANIMAL_ATLASES_V87[animalId].worldScale);
     assert.equal(ui.canvas.height, 144); assert.match(ui.previewStatus.textContent, /Échelle constante/);
   }
   ui.destroy();
+});
+
+test('Luciole has her own definition-backed tab, dossier and two-step 220 CR confirmation', async () => {
+  const { ui, actions, model, document } = harness();
+  assert.deepEqual([...ui.tabButtons.keys()], ['animal-moka', 'animal-brume', 'animal-luciole']);
+  ui.open({ mode: 'shop', animalId: 'animal-luciole' });
+  const luciole = ui.tabButtons.get('animal-luciole');
+  assert.equal(luciole.textContent, 'Luciole'); assert.equal(luciole.hidden, false);
+  assert.equal(luciole.getAttribute('aria-selected'), 'true'); assert.equal(ui.offerName.textContent, 'Luciole');
+  assert.equal(ui.confirmButton.disabled, true); assert.equal(await ui.dispatch('buy'), false);
+  ui.examine(); assert.equal(ui.confirmButton.textContent, 'Confirmer 220 CR');
+  assert.equal(ui.confirmButton.disabled, false);
+  luciole.fire('keydown', { key: 'ArrowRight' }); assert.equal(ui.selectedAnimalId, 'animal-moka');
+  assert.equal(ui.confirmButton.disabled, true);
+  ui.tabButtons.get('animal-moka').fire('keydown', { key: 'End' });
+  assert.equal(ui.selectedAnimalId, 'animal-luciole'); assert.equal(document.activeElement, luciole);
+  assert.equal(ui.confirmButton.disabled, true); ui.examine();
+  const selected = model.offers.find(entry => entry.animalId === 'animal-luciole');
+  selected.canBuy = false; assert.equal(await ui.dispatch('buy'), false); assert.deepEqual(actions, []);
+  selected.canBuy = true; ui.refresh(); assert.equal(await ui.dispatch('buy'), true);
+  assert.deepEqual(actions, [{ type: 'buy', animalId: 'animal-luciole' }]);
+  selected.owned = true; ui.refresh(); assert.equal(ui.confirmButton.disabled, true);
+  assert.equal(await ui.dispatch('buy'), false); assert.equal(actions.length, 1); ui.destroy();
+});
+
+test('missing offers hide tabs and keyboard navigation skips them without relabelling Luciole as another animal', () => {
+  const { ui, model, document } = harness();
+  model.offers = model.offers.filter(entry => entry.animalId !== 'animal-brume');
+  model.offers.find(entry => entry.animalId === 'animal-luciole').name = '';
+  ui.open({ mode: 'shop' });
+  assert.equal(ui.tabButtons.get('animal-brume').hidden, true);
+  ui.tabButtons.get('animal-moka').fire('keydown', { key: 'ArrowRight' });
+  assert.equal(ui.selectedAnimalId, 'animal-luciole');
+  assert.equal(ui.tabButtons.get('animal-luciole').textContent, 'Luciole');
+  assert.equal(document.activeElement, ui.tabButtons.get('animal-luciole'));
+  assert.equal(ui.dossier.getAttribute('aria-labelledby'), 'ship-port-v87-tab-animal-luciole'); ui.destroy();
+});
+
+test('Luciole preview rejects another cat atlas even with identical dimensions and has no substituted bitmap', () => {
+  const { ui, document } = harness(); ui.open({ mode: 'shop', animalId: 'animal-luciole' });
+  const image = ui.images.get('animal-luciole'), atlas = SHIP_ANIMAL_ATLASES_V87['animal-luciole'];
+  assert.equal(image.src, atlas.path); assert.notEqual(atlas.path, SHIP_ANIMAL_ATLASES_V87['animal-moka'].path);
+  Object.assign(image, { complete: true, naturalWidth: atlas.width, naturalHeight: atlas.height,
+    src: SHIP_ANIMAL_ATLASES_V87['animal-moka'].path });
+  document.draws.length = 0; image.onload();
+  assert.equal(document.draws.some(entry => entry[0] === 'drawImage'), false);
+  assert.match(ui.previewStatus.textContent, /indisponible ou en chargement/);
+  image.src = atlas.path; image.onload();
+  const draws = document.draws.filter(entry => entry[0] === 'drawImage');
+  assert.equal(draws.length, 1); assert.equal(draws[0][1], image); assert.equal(draws[0].length, 10); ui.destroy();
 });
 
 test('preview owns one RAF, pauses while hidden/reduced, and cancels all listeners on destroy', () => {

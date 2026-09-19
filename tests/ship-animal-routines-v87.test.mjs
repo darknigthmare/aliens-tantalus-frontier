@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { SaveSystem, SAVE_PREFIX } from '../src/save.js';
 import { HubGame } from '../src/hub-onboarding-v84.js';
 import { HUB_WORLD, getHubDoorBounds } from '../src/hub-game.js';
-import { acquireShipAnimalV87, transitionShipAnimalV87, migrateShipAnimalStateV87 } from '../src/ship-animal-state-v87.js';
+import { acquireShipAnimalV87, transitionShipAnimalV87, migrateShipAnimalStateV87, SHIP_ANIMAL_DEFINITIONS_V87 } from '../src/ship-animal-state-v87.js';
 import { getShipAnimalHabitatsV87, installShipAnimalHabitatV87, SHIP_ANIMAL_ANNEX_V87 } from '../src/ship-animal-habitat-v87.js';
 import { createShipAnimalRoutineGraphV87, stepShipAnimalRoutinesV87, petShipAnimalV87,
   requestShipAnimalWalkV87, sampleShipAnimalRoutinesV87 } from '../src/ship-animal-routines-v87.js';
@@ -39,10 +39,10 @@ function acquired(ids = ['animal-moka']) {
     assert.equal(result.ok, true); save = result.save;
   }
   for (const animalId of ids) {
-    const habitat = getShipAnimalHabitatsV87(save).find(h => h.type === (animalId === 'animal-moka' ? 'cat-berth' : 'dog-berth'));
+    const habitat = getShipAnimalHabitatsV87(save).find(h => h.id === SHIP_ANIMAL_DEFINITIONS_V87[animalId].defaultHabitatId);
     const result = acquireShipAnimalV87(save, { offerId: 'offer-' + animalId,
       habitatId: habitat.id, transactionId: 'purchase-' + animalId }, {
-      vendorAccessible: true, artReadyIds: ids, care: { available: true, capacity: 2 },
+      vendorAccessible: true, artReadyIds: ids, care: { available: true, capacity: 3 },
       habitats: getShipAnimalHabitatsV87(save), simulationTime: 0,
       transit: { edgeId: 'verified-test-transport', from: { ...habitat.location, roomId: 'port-shop', x: 40 },
         to: habitat.location }
@@ -116,6 +116,83 @@ test('full local routine actually reaches food and bed, eats, sleeps and walks b
   save = advance(save, 15); assert.equal(animal(save).activity, 'idle');
   near(animal(save).location.x, 560);
 });
+test('Luciole uses her own food, bed and stroll anchors with continuous 36px ground motion, reload and no bonuses', () => {
+  const original = resident(['animal-luciole', 'animal-moka', 'animal-brume']);
+  let save = original;
+  const seen = new Set();
+  for (let frame = 0; frame < 160; frame++) {
+    const prior = animal(save, 'animal-luciole');
+    save = advance(save, .25);
+    const current = animal(save, 'animal-luciole');
+    assert.ok(Math.abs(current.location.x - prior.location.x) <= 42 * .25 + 1e-6);
+    assert.equal(current.location.y, 624); assert.equal(current.location.roomId, 'animal-care');
+    if (current.activity === 'walk') assert.deepEqual(current.routineV87.route.body, { w: 36, h: 36 });
+    if (current.activity === 'eat') { near(current.location.x, 442); assert.equal(current.routineV87.facing, 1); seen.add('food'); }
+    if (current.activity === 'sleep') { near(current.location.x, 354); seen.add('bed'); }
+    if (current.activity === 'idle' && Math.abs(current.location.x - 394) < 1e-6) seen.add('stroll');
+    if (frame === 29) {
+      const loaded = { ...copy(save), shipAnimalsV1: migrateShipAnimalStateV87(JSON.parse(JSON.stringify(save.shipAnimalsV1))) };
+      assert.deepEqual(loaded, save); assert.deepEqual(advance(loaded, .25), advance(save, .25));
+    }
+  }
+  assert.deepEqual([...seen].sort(), ['bed', 'food', 'stroll']);
+  assert.equal(Object.keys(save.shipAnimalsV1.animals).length, 3);
+  for (const key of ['galaxy', 'crew', 'player', 'clock', 'createdAt', 'profile']) assert.deepEqual(save[key], original[key]);
+  for (const key of ['receipts', 'stock', 'reservations']) assert.deepEqual(save.shipAnimalsV1[key], original.shipAnimalsV1[key]);
+});
+
+for (const animalId of ['animal-moka', 'animal-brume', 'animal-luciole']) {
+  test(animalId + ': approach from the right faces left while walking but right towards its actual food dish when eating', () => {
+    const initial = resident([animalId]);
+    const habitat = getShipAnimalHabitatsV87(initial).find(h => h.id === SHIP_ANIMAL_DEFINITIONS_V87[animalId].defaultHabitatId);
+    let save = requestShipAnimalWalkV87(initial, { animalId,
+      target: { roomId: 'animal-care', x: habitat.routineTargets.food + 100, y: 624 } }, { graph: NAV }).save;
+    let leftWalking = false, eating = false;
+    for (let frame = 0; frame < 160; frame++) {
+      save = advance(save, .25);
+      const current = animal(save, animalId);
+      if (current.activity === 'walk' && current.routineV87.facing === -1) leftWalking = true;
+      if (current.activity === 'eat') {
+        eating = true; assert.equal(current.routineV87.facing, habitat.routineTargets.foodFacing);
+        assert.equal(current.routineV87.facing, 1); near(current.location.x, habitat.routineTargets.food); break;
+      }
+    }
+    assert.equal(leftWalking, true); assert.equal(eating, true);
+  });
+}
+
+test('Luciole petting is local, cooldown-bound and leaves Moka and Brume untouched', () => {
+  const initial = resident(['animal-luciole', 'animal-moka', 'animal-brume']);
+  const nearby = { alive: true, roomId: 'animal-care', deckId: 'habitat', x: 354, y: 624 };
+  const bad = petShipAnimalV87(initial, { animalId: 'animal-luciole', eventId: 'luciole-too-far' },
+    { graph: NAV, player: { ...nearby, x: 690 } });
+  assert.equal(bad.code, 'physical-proximity-required'); assert.deepEqual(bad.save, initial);
+  const result = petShipAnimalV87(initial, { animalId: 'animal-luciole', eventId: 'luciole-pet' }, { graph: NAV, player: nearby });
+  assert.equal(result.ok, true); assert.equal(animal(result.save, 'animal-luciole').activity, 'pet');
+  for (const id of ['animal-moka', 'animal-brume']) assert.deepEqual(animal(result.save, id), animal(initial, id));
+  const after = advance(result.save, 1.5);
+  assert.equal(petShipAnimalV87(after, { animalId: 'animal-luciole', eventId: 'luciole-pet-again' },
+    { graph: NAV, player: nearby }).code, 'pet-cooldown');
+  assert.deepEqual(result.save.galaxy, initial.galaxy); assert.deepEqual(result.save.player, initial.player);
+});
+
+test('Luciole obeys the exact annex door, locked state and quarters bunk collision; no additional route or teleport', () => {
+  const initial = resident(['animal-luciole']);
+  const blocked = requestShipAnimalWalkV87(initial, { animalId: 'animal-luciole', target: { roomId: 'crew-quarters', x: 1050, y: 624 } }, { graph: NAV });
+  assert.equal(blocked.code, 'no-authorized-ground-route'); assert.deepEqual(blocked.save, initial);
+  let save = requestShipAnimalWalkV87(initial, { animalId: 'animal-luciole', target: { roomId: 'crew-quarters', x: 520, y: 624 } }, { graph: NAV }).save;
+  save = advance(save, 6); near(animal(save, 'animal-luciole').location.x, 144);
+  assert.equal(animal(save, 'animal-luciole').routineV87.route.reason, 'door-closed');
+  const locked = advance(save, 1, { doors: NAV.doors.map(d => ({ ...d, progress: 1, locked: true })) });
+  near(animal(locked, 'animal-luciole').location.x, 144);
+  const open = NAV.doors.map(d => ({ ...d, progress: 1 }));
+  save = advance(save, .25, { doors: open });
+  assert.equal(animal(save, 'animal-luciole').location.kind, 'transit');
+  const loaded = JSON.parse(JSON.stringify(save)); assert.deepEqual(advance(loaded, 1, { doors: open }), advance(save, 1, { doors: open }));
+  save = advance(save, 5, { doors: open });
+  assert.equal(animal(save, 'animal-luciole').location.roomId, 'crew-quarters'); near(animal(save, 'animal-luciole').location.x, 520);
+});
+
 test('save/load mid-walk resumes the same position, animation and clock without duplicate simulation', () => {
   const current = advance(resident(), 7.25);
   const reloaded = { ...copy(current), shipAnimalsV1: migrateShipAnimalStateV87(JSON.parse(JSON.stringify(current.shipAnimalsV1))) };

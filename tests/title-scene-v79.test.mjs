@@ -323,7 +323,7 @@ test('le shell V80 conserve la scène titre V79, son build et son responsive dé
   for (const path of ['/title-scene-v79.css', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js']) assert.ok(worker.includes(`'${path}'`));
   assert.match(html, /ALIENS: TANTALUS FRONTIER v86/u);
   assert.match(html, /VERSION 86\.0\.0/u);
-  assert.match(worker, /atf-v86-physical-placeables-shell-4/u);
+  assert.match(worker, /atf-v86-physical-placeables-shell-5/u);
   assert.match(css, /@media \(max-width: 760px\)/u);
   assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)/u);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/u);

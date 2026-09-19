@@ -1,0 +1,24 @@
+{
+  "asset": "animal-luciole",
+  "source": "ATF_Animaux_USS_PACK_CODEX_v1/data/individus_originaux.json",
+  "mode": "integrated-imagegen",
+  "apiFallbackUsed": false,
+  "prompt": "Use case: stylized-concept\nAsset type: production animation sprite atlas for an original animal in a 2D side-scrolling science-fiction game.\nPrimary request: Luciole, an adult female domestic cat, white and ginger, fluffy tail, compact silhouette. She is an original Tantalus character, not Jonesy, not a hologram, not a human user's personal pet. Natural feline anatomy, consistent white-and-ginger coat markings in every frame.\nStyle: polished detailed pixel-art raster sprites, realistic adult-cat proportions, restrained warm ginger and ivory coat, crisp silhouette suitable for scaling down into a modern 2D metroidvania.\nComposition: exactly 32 full-body poses in an 8-column by 4-row atlas, landscape 1536x1024. Eight evenly spaced cells per row. Every pose in strict orthographic side view facing RIGHT. Same body scale, same lighting, same character markings. Generous transparent padding inside each cell around tail, ears and paws; no body part may touch a neighboring sprite. Feet at the same row-local baseline.\nAnimation sequence:\nRow 1: eight consecutive frames of a calm four-legged walk cycle, contact / down / passing / up then opposite contact / down / passing / up; naturally coordinated feline gait.\nRow 2: cells 1–4 standing idle with gentle breathing and blink; cells 5–8 gradual transition from standing into sitting.\nRow 3: eight consecutive frames lowering head and nibbling, while standing on all paws; NO bowl or food object, those are rendered separately.\nRow 4: cells 1–4 curled sleeping with subtle breathing; cells 5–8 seated relaxed affectionate response, head lifting slightly and blinking, no human hand.\nScene/backdrop: genuinely transparent alpha background, not white, black, checkerboard, ground, or colored matte.\nConstraints: full tail always visible; no duplicate extra limbs, no missing paws, no perspective rotation, no three-quarter views, no camera motion, no outlines around cells, no text, no numbers, no collar, no props, no floor shadow, no watermark. Produce only the isolated sprite atlas.",
+  "generatedPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a01e52-9788-7491-b0fc-ec4c277f25d1\\exec-8dbd59a1-b80c-49d9-b6be-64aa362c6317.png",
+  "status": "accepted-with-excluded-poses",
+  "review": {
+    "fluidityCertified": false,
+    "pixelsModified": false,
+    "excludedFrames": [
+      18,
+      19
+    ],
+    "reason": "adjacent alpha silhouettes at threshold 8",
+    "sha256": "8bef1544aa5cb78f3a2aeec25657e42779620b62f13fe118639399ee2468030a",
+    "runtimePath": "/assets/openai/ship-animals/v87/luciole-atlas.png",
+    "runtimeSafePoses": 30,
+    "width": 1536,
+    "height": 1024,
+    "authoredPoses": 32
+  }
+}

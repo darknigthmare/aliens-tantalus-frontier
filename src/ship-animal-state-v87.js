@@ -1,19 +1,27 @@
-// These two individuals are original Tantalus companions, not named canon animals.
+// These individuals are original Tantalus companions, not named canon animals.
+export const SHIP_ANIMAL_CATALOG_REVISION_V87 = 2;
 export const SHIP_ANIMAL_DEFINITIONS_V87 = Object.freeze({
   'animal-moka': Object.freeze({ id: 'animal-moka', name: 'Moka', familyId: 'cat-domestic',
-    visualId: 'original-moka', nature: 'biological', habitatType: 'cat-berth',
+    visualId: 'original-moka', nature: 'biological', habitatType: 'cat-berth', defaultHabitatId: 'moka-berth-v87',
     appearance: 'Chat roux adulte aux oreilles arrondies.',
     biography: 'A vécu près du comptoir d’un atelier de docking. Son foyer ferme après une réaffectation du personnel.',
     traits: Object.freeze(['sociable', 'observateur', 'casanier']) }),
   'animal-brume': Object.freeze({ id: 'animal-brume', name: 'Brume', familyId: 'dog-companion',
-    visualId: 'original-brume', nature: 'biological', habitatType: 'dog-berth',
+    visualId: 'original-brume', nature: 'biological', habitatType: 'dog-berth', defaultHabitatId: 'brume-berth-v87',
     appearance: 'Chienne grise de taille moyenne au museau clair.',
     biography: 'Habituée aux voyages courts sur une navette civile. Un transfert de propriété documenté permet son adoption.',
-    traits: Object.freeze(['calme', 'prudente', 'sociable']) })
+    traits: Object.freeze(['calme', 'prudente', 'sociable']) }),
+  'animal-luciole': Object.freeze({ id: 'animal-luciole', name: 'Luciole', familyId: 'cat-domestic',
+    visualId: 'original-luciole', nature: 'biological', habitatType: 'cat-berth', defaultHabitatId: 'luciole-berth-v87',
+    appearance: 'Chatte blanche et rousse, queue touffue, silhouette compacte.',
+    biography: 'Sa famille a demandé son placement après un départ vers une installation qui ne pouvait plus l’héberger.',
+    traits: Object.freeze(['sociable', 'joueuse', 'prudente']),
+    preferences: Object.freeze({ likes: 'Une balle légère', avoids: 'Les portes qui claquent' }) })
 });
 export const SHIP_ANIMAL_OFFERS_V87 = Object.freeze({
   'offer-animal-moka': Object.freeze({ id: 'offer-animal-moka', animalId: 'animal-moka', vendorId: 'station-shop', costCredits: 220 }),
-  'offer-animal-brume': Object.freeze({ id: 'offer-animal-brume', animalId: 'animal-brume', vendorId: 'station-shop', costCredits: 300 })
+  'offer-animal-brume': Object.freeze({ id: 'offer-animal-brume', animalId: 'animal-brume', vendorId: 'station-shop', costCredits: 300 }),
+  'offer-animal-luciole': Object.freeze({ id: 'offer-animal-luciole', animalId: 'animal-luciole', vendorId: 'station-shop', costCredits: 220 })
 });
 export const SHIP_ANIMAL_LOCATION_KINDS_V87 = Object.freeze(['transit', 'intake', 'acclimating', 'resident', 'stasis', 'boarding']);
 const own = (value, key) => Boolean(value && Object.hasOwn(value, key));
@@ -45,7 +53,7 @@ export function isShipAnimalLocationValidV87(location) {
 }
 
 export function createEmptyShipAnimalStateV87() {
-  return { schema: 1, revision: 0, animals: {},
+  return { schema: 1, catalogRevision: SHIP_ANIMAL_CATALOG_REVISION_V87, revision: 0, animals: {},
     stock: Object.fromEntries(Object.values(SHIP_ANIMAL_OFFERS_V87).map(offer =>
       [offer.id, { animalId: offer.animalId, status: 'available' }])),
     reservations: {}, receipts: {}, transitions: {}, lastSimulationTime: 0, quarantined: [], diagnostics: [] };
@@ -110,6 +118,11 @@ export function migrateShipAnimalStateV87(raw) {
   else if (raw.quarantined !== undefined) quarantine('quarantined', 'invalid-quarantine', raw.quarantined);
   if (Array.isArray(raw.diagnostics) && raw.diagnostics.every(entry => record(entry) && typeof entry.path === 'string' && typeof entry.code === 'string')) state.diagnostics.push(...clone(raw.diagnostics));
   else if (raw.diagnostics !== undefined) quarantine('diagnostics', 'invalid-diagnostics', raw.diagnostics);
+  const catalogRevision = raw.catalogRevision === undefined ? 1 : raw.catalogRevision;
+  if (!Number.isSafeInteger(catalogRevision) || catalogRevision < 1 || catalogRevision > SHIP_ANIMAL_CATALOG_REVISION_V87) {
+    state.catalogRevision = clone(raw.catalogRevision);
+    quarantine('catalogRevision', 'unsupported-catalog-revision', raw.catalogRevision);
+  }
   for (const field of ['revision', 'lastSimulationTime']) {
     if ((field === 'revision' ? integer : nonnegative)(raw[field])) state[field] = raw[field];
     else quarantine(field, 'invalid-clock-or-revision', raw[field]);
@@ -158,6 +171,17 @@ export function migrateShipAnimalStateV87(raw) {
     }
   }
   for (const offer of Object.values(SHIP_ANIMAL_OFFERS_V87)) if (!own(state.stock, offer.id)) {
+    // Catalog 1 predates Luciole. Introduce her offer only, never an animal,
+    // receipt or reserved berth. Missing/corrupt stock in catalog 2 stays blocked.
+    const priorLuciole = own(raw.animals, 'animal-luciole') || own(raw.reservations, 'animal-luciole')
+      || ['receipts', 'transitions'].some(bucket => Object.values(record(raw[bucket]) ? raw[bucket] : {})
+        .some(entry => entry?.animalId === 'animal-luciole' || entry?.offerId === 'offer-animal-luciole'))
+      || state.quarantined.some(entry => entry.path.includes('animal-luciole'));
+    if (catalogRevision === 1 && offer.id === 'offer-animal-luciole' && record(raw.stock)
+      && !own(raw.stock, offer.id) && !priorLuciole) {
+      state.stock[offer.id] = { animalId: offer.animalId, status: 'available' };
+      continue;
+    }
     if (!state.quarantined.some(entry => entry.path === `stock.${offer.id}`)) quarantine(`stock.${offer.id}`, 'missing-stock', undefined);
     state.stock[offer.id] = { animalId: offer.animalId, status: 'unavailable' };
   }
@@ -197,6 +221,7 @@ export function acquireShipAnimalV87(save, request = {}, context = {}) {
   const habitats = Array.isArray(context.habitats) ? context.habitats : [];
   const habitat = habitats.find(candidate => candidate?.id === request.habitatId);
   if (!habitat || habitat.installed !== true || habitat.type !== definition.habitatType
+    || (habitat.designatedAnimalId !== undefined && habitat.designatedAnimalId !== definition.id)
     || !id(habitat.id) || !integer(habitat.capacity) || !isPlace(habitat.location)) return failure(save, 'habitat-unavailable');
   const reserved = Object.values(state.reservations);
   if (reserved.filter(entry => entry.habitatId === habitat.id).length >= habitat.capacity) return failure(save, 'habitat-full');
