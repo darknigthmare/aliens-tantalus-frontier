@@ -241,7 +241,7 @@ test('le runtime expose 29 nœuds (26 historiques + accueil + comptoir + refuge)
     HUB_ANNEX_ART_ROLES_V71.map((role) => archives.art[role])
   );
   const report = hub.getAssetReport();
-  assert.equal(report.annexAssetCountV71, 73); // four distinct bonded atlases + enclosure modules
+  assert.equal(report.annexAssetCountV71, 75); // seven companions plus Mica and its separate terrarium modules
   assert.equal(report.annexAssetsLoadedV71, 5);
   assert.equal(report.annexAssetsReadyV71, 5);
   assert.equal(report.annexAssetGroupsLoadedV71, 1);

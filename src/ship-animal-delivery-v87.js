@@ -355,7 +355,7 @@ export function sampleShipAnimalDeliveriesV87(save) {
     if (!delivery || !PHASES.includes(delivery.phase) || delivery.phase === 'delivered' || localTransit(animal)) return [];
     const location = delivery.phase === 'awaiting-pickup' ? animal.location.from
       : ['carried', 'awaiting-recovery'].includes(delivery.phase) ? delivery.carrierLocation
-        : delivery.memberIds ? receivingPoint(berth(save, animal)) : animal.location;
+        : receivingPoint(berth(save, animal));
     return [{ animalId: animal.id, ...(delivery.memberIds ? { animalIds: [...delivery.memberIds], unitId: delivery.unitId } : {}),
       phase: delivery.phase, elapsed: delivery.elapsed,
       roomId: location.roomId, deckId: location.deckId, x: location.x, y: location.y,

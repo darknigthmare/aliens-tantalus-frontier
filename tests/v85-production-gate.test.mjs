@@ -259,7 +259,7 @@ test('current package, lock, release, HTML, worker and QA commands consistently 
   assert.match(html, /<meta name="atf-release" content="86\.0\.0">/u);
   assert.match(html, /href="\/crew-v85\.css"/u);
   assert.match(html, /id="crew-list" class="crew-roster-v85"/u);
-  assert.ok(worker.includes('atf-v86-physical-placeables-shell-6'));
+  assert.ok(worker.includes('atf-v86-physical-placeables-shell-7'));
   for (const path of [...RUNTIME_ASSET_PATHS_V85, ...RECRUITMENT_RUNTIME_PATHS_V85.map(path => '/' + path)]) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(pkg.scripts['verify:production:v85'], 'node scripts/verify-production-v85.mjs');
   assert.equal(pkg.scripts['verify:production:v84'], 'node scripts/verify-production-v84.mjs');

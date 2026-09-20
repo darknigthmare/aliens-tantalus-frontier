@@ -52,8 +52,8 @@ function inBounds(animal) {
 }
 
 test('two typed pens provide four places and distinct feet612, while the human receiving lane remains624', () => {
-  assert.equal(PENS.length, 2); assert.equal(SHIP_ANIMAL_HABITATS_V87.length, 5);
-  assert.equal(SHIP_ANIMAL_HABITATS_V87.reduce((sum, h) => sum + h.capacity, 0), 7);
+  assert.equal(PENS.length, 2); assert.equal(SHIP_ANIMAL_HABITATS_V87.length, 6);
+  assert.equal(SHIP_ANIMAL_HABITATS_V87.reduce((sum, h) => sum + h.capacity, 0), 8);
   assert.deepEqual(PENS.map(h => h.capacity), [2, 2]);
   assert.deepEqual(PENS.map(h => h.enclosureBounds), [{ x: 936, y: 550, w: 154, h: 62 }, { x: 1462, y: 556, w: 120, h: 56 }]);
   assert.deepEqual(PENS.map(h => h.receivingPoint.y), [624, 624]);

@@ -230,7 +230,7 @@ test('current release, package lock, HTML, SW and QA scripts agree without relab
   assert.match(html, /<title>ALIENS: TANTALUS FRONTIER v86<\/title>/u);
   assert.match(html, /<meta name="atf-release" content="86\.0\.0">/u);
   assert.match(html, /contenu ennemi encore en cours/u);
-  assert.ok(worker.includes('atf-v86-physical-placeables-shell-6'));
+  assert.ok(worker.includes('atf-v86-physical-placeables-shell-7'));
   for (const path of ONBOARDING_RUNTIME_PATHS_V84) assert.ok(worker.includes("'/" + path + "'"), path);
   for (const path of RUNTIME_ASSET_PATHS_V83) assert.ok(worker.includes("'" + path + "'"), path);
   assert.equal(packageJson.scripts['verify:production:v84'], 'node scripts/verify-production-v84.mjs');

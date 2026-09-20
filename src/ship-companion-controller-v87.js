@@ -7,6 +7,7 @@ import { SHIP_ANIMAL_ATLASES_V87, isShipAnimalAtlasReadyV87, drawShipAnimalV87 }
 import { stepShipAnimalRoutinesV87, sampleShipAnimalRoutinesV87,
   petShipAnimalV87, observeShipAnimalEnclosureV87 } from './ship-animal-routines-v87.js';
 import { drawShipAnimalEnclosuresV87, drawShipBondedCarrierV87, isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
+import { drawShipAnimalTerrariumV87, drawShipMicaCarrierV87, isShipAnimalTerrariumAtlasReadyV87 } from './ship-animal-terrarium-art-v87.js';
 import { createShipAnimalHabitatGraphV87 } from './ship-animal-habitat-graph-v87.js';
 import { initializeShipAnimalDeliveryV87, pickupShipAnimalDeliveryV87, stepShipAnimalDeliveryV87,
   receiveShipAnimalDeliveryV87, sampleShipAnimalDeliveriesV87, dropShipAnimalDeliveryV87 } from './ship-animal-delivery-v87.js';
@@ -143,6 +144,8 @@ export class ShipCompanionControllerV87 {
         if (!shopReady || animalIds.some(id => !isShipAnimalAtlasReadyV87(id, this.images.get(id)))) conditions.push('Images en cours de chargement.');
         if (animalIds.length > 1 && !isShipAnimalEnclosureAtlasReadyV87(art?.get('enclosure')))
           conditions.push('Parc et caisse à deux compartiments en cours de chargement.');
+        if (animalIds.includes('animal-mica') && !isShipAnimalTerrariumAtlasReadyV87(art?.get('terrarium')))
+          conditions.push('Terrarium et caisse de Mica en cours de chargement.');
         if (save.galaxy?.resources?.credits < offer.costCredits) conditions.push('Crédits insuffisants.');
         if (save.hub?.systems?.supplies < 1) conditions.push('Ravitaillement de soin insuffisant.');
         if (save.shipAnimalsV1?.stock?.[offer.id]?.status !== 'available') conditions.push(owned ? 'Déjà acquis dans cette campagne.' : 'Offre indisponible.');
@@ -170,7 +173,7 @@ export class ShipCompanionControllerV87 {
       const result = observeShipAnimalEnclosureV87(this.saveSystem.data, { habitatId: interaction.habitatId },
         { player: this.player(), graph: this.refreshGraph() });
       if (!result.ok) { this.toast(textFor(result.code)); return false; }
-      const activities = { rest: 'au repos', idle: 'au repos', walk: 'explore le parc', eat: 'se nourrit', sleep: 'dort' };
+      const activities = { rest: 'au repos', idle: 'au repos', walk: 'explore son habitat', eat: 'se nourrit', sleep: 'dort', climbUp: 'grimpe sur son support', climbDown: 'redescend de son support' };
       this.toast(result.animals.length ? result.animals.map(animal => animal.name + ' : ' + (activities[animal.activity] || animal.activity)).join(' · ')
         : 'Parc équipé. Aucun résident arrivé pour le moment.');
       return true; // Observation has no reward, time advancement or persistence side effect.
@@ -291,7 +294,7 @@ export class ShipCompanionControllerV87 {
         return { action: 'ship-animal:receive', animalId: animal.id, prompt: 'E — DÉPOSER ET CONTRÔLER ' + names(delivery) };
     }
     for (const animal of Object.values(this.saveSystem.data.shipAnimalsV1?.animals || {})) {
-      if (getShipAnimalHabitatsV87(this.saveSystem.data).find(habitat => habitat.id === animal.habitatId)?.navigationDomain === 'enclosure-volume') continue;
+      if (['enclosure-volume', 'terrarium-volume'].includes(getShipAnimalHabitatsV87(this.saveSystem.data).find(habitat => habitat.id === animal.habitatId)?.navigationDomain)) continue;
       if (animal.location.kind === 'resident' && animal.location.roomId === player.roomId && animal.location.deckId === player.deckId
         && Math.abs(animal.location.x - player.x) <= 70 && Math.abs(animal.location.y - player.y) <= 12)
         return { action: 'ship-animal:pet', animalId: animal.id, prompt: 'E — PROPOSER UN CONTACT À ' + animal.name.toUpperCase() };
@@ -304,6 +307,7 @@ export class ShipCompanionControllerV87 {
     if (!player) return;
     const graph = this.refreshGraph();
     const portArt = this.hub.ensureAnnexAssetsV71(PORT.counterRoomId), enclosure = portArt?.get('enclosure');
+    const terrariumImage = portArt?.get('terrarium');
     const inCare = player.roomId === 'animal-care';
     const actors = sampleShipAnimalRoutinesV87(save, { roomId: player.roomId, deckId: player.deckId, graph });
     const drawActor = actor => {
@@ -313,13 +317,17 @@ export class ShipCompanionControllerV87 {
       drawShipAnimalV87(ctx, this.images.get(actor.animalId), visual);
     };
     if (inCare) drawShipAnimalEnclosuresV87(ctx, enclosure, save, 'back');
-    if (inCare && isShipAnimalEnclosureAtlasReadyV87(enclosure)) actors.filter(actor => actor.enclosed).forEach(drawActor);
+    if (inCare) drawShipAnimalTerrariumV87(ctx, terrariumImage, save, 'back');
+    if (inCare && isShipAnimalEnclosureAtlasReadyV87(enclosure)) actors.filter(actor => actor.enclosed && actor.animalId !== 'animal-mica').forEach(drawActor);
+    if (inCare && isShipAnimalTerrariumAtlasReadyV87(terrariumImage)) actors.filter(actor => actor.animalId === 'animal-mica').forEach(drawActor);
     if (inCare) drawShipAnimalEnclosuresV87(ctx, enclosure, save, 'front');
+    if (inCare) drawShipAnimalTerrariumV87(ctx, terrariumImage, save, 'front');
     actors.filter(actor => !actor.enclosed).forEach(drawActor);
     const props = portArt?.get('prop');
     for (const delivery of sampleShipAnimalDeliveriesV87(save)) {
       if (!delivery.carried && player.roomId === delivery.roomId && player.deckId === delivery.deckId) {
         if (delivery.animalIds?.length === 2) drawShipBondedCarrierV87(ctx, enclosure, { x: delivery.x - 42, width: 84, bottom: delivery.y });
+        else if (delivery.animalId === 'animal-mica') drawShipMicaCarrierV87(ctx, terrariumImage, { x: delivery.x - 28, width: 56, bottom: delivery.y });
         else drawPortPropV87(ctx, props, 'carrier', { x: delivery.x - 28, width: 56, bottom: delivery.y });
       }
     }
@@ -338,6 +346,7 @@ export class ShipCompanionControllerV87 {
     if (!this.carriedPresentationV87) return;
     const art = this.hub.ensureAnnexAssetsV71(PORT.counterRoomId);
     if (delivery.animalIds?.length === 2) drawShipBondedCarrierV87(ctx, art?.get('enclosure'), this.carriedPresentationV87.bounds);
+    else if (delivery.animalId === 'animal-mica') drawShipMicaCarrierV87(ctx, art?.get('terrarium'), this.carriedPresentationV87.bounds);
     else drawPortPropV87(ctx, art?.get('prop'), 'carrier', this.carriedPresentationV87.bounds);
   }
 }

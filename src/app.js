@@ -14,6 +14,7 @@ import {
 import { CrewUiV85 } from './crew-ui-v85.js';
 import { getShipAnimalHabitatsV87, getShipAnimalRoomInteractionV87, installShipAnimalHabitatV87 } from './ship-animal-habitat-v87.js';
 import { isShipAnimalEnclosureAtlasReadyV87 } from './ship-animal-enclosure-art-v87.js';
+import { isShipAnimalTerrariumAtlasReadyV87 } from './ship-animal-terrarium-art-v87.js';
 import { ShipCompanionControllerV87 } from './ship-companion-controller-v87.js';
 import { RefugeControllerV87 } from './refuge-controller-v87.js';
 import { projectRefugeHubSaveV87 } from './refuge-save-v87.js';
@@ -2108,7 +2109,8 @@ function handleShipAnimalRoomActionV87(interaction) {
   const enclosed = habitat?.navigationDomain === 'enclosure-volume';
   const artReady = ['far', 'prop', 'door'].every(role => {
     const image = images?.get(role); return image?.complete && image.naturalWidth > 0 && image.naturalHeight > 0;
-  }) && (!enclosed || isShipAnimalEnclosureAtlasReadyV87(hubEngine.ensureAnnexAssetsV71('frontier-civil-counter')?.get('enclosure')));
+  }) && (!enclosed || isShipAnimalEnclosureAtlasReadyV87(hubEngine.ensureAnnexAssetsV71('frontier-civil-counter')?.get('enclosure')))
+    && (habitat?.navigationDomain !== 'terrarium-volume' || isShipAnimalTerrariumAtlasReadyV87(hubEngine.ensureAnnexAssetsV71('frontier-civil-counter')?.get('terrarium')));
   const prepared = installShipAnimalHabitatV87(saveSystem.data, interaction.habitatId, {
     roomId: hubEngine.currentAnnexV71()?.id, playerX: player.x + player.w / 2,
     feetY: player.y + player.h, artReady

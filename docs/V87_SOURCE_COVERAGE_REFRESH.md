@@ -1,6 +1,8 @@
 # V87 — Actualisation privée de la couverture des sources
 
-Date : 19 septembre 2026. Base privée contrôlée : `de1390d07ccbb88b2a63e95988b1a064a523cfa5`.
+Relevé initial : 19 septembre 2026, base privée `de1390d07ccbb88b2a63e95988b1a064a523cfa5`.
+
+Actualisation documentaire : 20 septembre 2026, base privée publiée `f27e6bbb9d8f7e1b5f1348ef878f8d91ff9907da`, commit public `4f318e43c2b5ed61d2be644f0cd9588ff8435ed9`. **Les sections 3 à 7 conservent le relevé initial daté, pas l'état courant.** Lire les sections 8 et 9 pour l'état livré et les nouvelles lectures gameplay. Les mentions historiques « deux animaux », « quatorze restants », « douze annexes » et « REFUGE absent » sont périmées. Mica est en cours de travail, non livré à cette base.
 
 **Document privé, exclu de la publication du jeu.** Les conversations, leurs extraits, les références personnelles, le classeur et les preuves QA ne sont pas autorisés à entrer dans le dépôt public. Ce rapport complète les audits historiques sans les réécrire.
 
@@ -8,7 +10,7 @@ Date : 19 septembre 2026. Base privée contrôlée : `de1390d07ccbb88b2a63e95988
 
 Le périmètre connu comprend **26 conversations du ledger V76 et trois conversations récentes V87**, soit 29 identifiants distincts identifiés ci-dessous. Ce nombre n'est ni un inventaire exhaustif certifié du projet ChatGPT, ni 29 exports intégraux, ni 29 contrats implémentés. D'autres conversations ajoutées par l'utilisateur peuvent encore manquer.
 
-Cette passe a lu les sources privées disponibles, leurs limites de récupération, les registres et les raccords du code. Elle a importé en lecture seule les registres actuels et revérifié les empreintes des paquets indiquées plus bas. Aucun test navigateur, aucune suite complète, aucune nouvelle génération et aucune publication ne sont revendiqués pour cette passe documentaire. Les preuves de jeu antérieures sont identifiées comme telles.
+La passe initiale du 19 septembre a lu les sources privées disponibles, leurs limites de récupération et les raccords du code à sa base ; elle a importé les registres d'alors et revérifié les empreintes indiquées plus bas. L'actualisation du 20 septembre vérifie les deux commits cités, les modules et rapports livrés, puis relit trois autres conversations gameplay. Aucun test navigateur, aucune suite complète, aucune nouvelle génération et aucune publication ne sont revendiqués comme nouvellement exécutés par ces passes documentaires. Les preuves de jeu antérieures sont identifiées comme telles.
 
 Les recherches sont restées dans `D:/CodexWork/aliens-tantalus-frontier/project` et les sorties privées/paquets connus de `C:/Users/chuck/Documents/Codex/2026-08-20/prend-la-conversation-chat-gpt-alien`. Aucun nouveau scan de Downloads ni examen d'autres projets.
 
@@ -69,7 +71,19 @@ Base privée P : `C:/Users/chuck/Documents/Codex/2026-08-20/prend-la-conversatio
 
 Les audits sont des documents dérivés. Ils ne remplacent pas les fichiers sources annoncés ni les réponses intégrales manquantes.
 
-## 3. Paquets, classeur et références réellement disponibles
+### 2.3 Relecture directe du 20 septembre : trois chats gameplay du ledger
+
+Projet confirmé par `list_projects` : **Aliens tantalus project**, `g-p-6a945bfa0d3c8191befd9a84068b90a4`. La fenêtre globale de 50 tâches n'expose pas d'autre identifiant de ce projet que les trois chats récents déjà connus ; elle ne constitue pas l'inventaire exhaustif du dossier. Les lectures suivantes portent sur des IDs existants : le total connu reste 29.
+
+| Titre exact retourné par `read_thread` | Identifiant | Texte effectivement lu |
+| --- | --- | --- |
+| Hordes d’ennemis'occasionnelles | `6a9e030f-a2c4-83ed-9832-259fa7a7b0c0` | Un tour, réponse complète de 13 566 caractères ; titre à ponctuation différente du ledger historique. |
+| Proposer mécaniques HUD Alien | `6a999dca-3efc-83eb-907a-623f11cf2388` | Un tour, réponse complète de 18 638 caractères ; quatre références internes 1–4. |
+| Idée spawn ennemis Tentalus | `6a98c871-61ac-83ed-be5c-600c473690e2` | Trois tours ; réponses initiale de 12 885 et finale de 16 651 caractères complètes ; réponse intermédiaire tronquée à 20 000 caractères. Quatre références internes 1–4. |
+
+Les trois résultats ont `attachments=[]`, `nextCursor=null`, `hasMore=false` et aucune URL HTTP(S) de livrable dans leur texte. Aucun ZIP, manifeste ou image supplémentaire n'est récupéré. Le texte BIOFORGE contient des noms d'assets et des budgets, pas les fichiers correspondants. Aucun navigateur, profil, cookie ou challenge utilisé dans cette relecture. Détails et IDs des messages : `docs/V87_GAMEPLAY_CHAT_GAPS_20260920.md`.
+
+## 3. Paquets, classeur et références — relevé du 19 septembre
 
 ### 3.1 Paquet animaux reçu, pas paquet artistique
 
@@ -92,7 +106,9 @@ Les anciens croisements se trouvent dans `docs/references/V56_EXCEL_CONTENT_CROS
 
 `P/retrieved-image-references-sept19/` contient 79 JPG et son `manifest.json`. Ce sont des références visuelles existantes, pas de nouvelles productions de cette passe ni les fichiers de la pièce personnelle. Elles ne remplacent pas les manifestes joueur V87 ou le paquet REFUGE.
 
-## 4. Sources strictement manquantes et récupération actuelle
+## 4. Sources manquantes et récupération — relevé historique du 19 septembre
+
+Le constat de navigateur/ACL ci-dessous est une preuve datée, pas une nouvelle vérification du 20 septembre. Le ZIP REFUGE annoncé est distinct du runtime depuis implémenté et publié à partir du texte reçu : l'absence de ZIP ne signifie plus l'absence de pièce jouable.
 
 « Manquant » signifie ici absent ou inexploitable dans le périmètre récupéré et inspecté ; cela ne prouve pas la suppression du fichier original dans ChatGPT.
 
@@ -104,7 +120,7 @@ Les anciens croisements se trouvent dans `docs/references/V56_EXCEL_CONTENT_CROS
 | Références personnelles REFUGE | Aucun nom, dédicace ou portrait personnel exploitable dans les fragments récupérés | Ne pas inventer l'identité ou les dates du chat personnel, ni présenter une image générique comme fidèle. |
 | Fin de la réponse posables et autres réponses tronquées du ledger | Extraits textuels réels mais limités à 20 000 caractères dans certains messages | Les demandes déjà visibles restent utilisables ; une pagination sans autre tour ne prouve pas la lecture de leur fin. |
 
-Point de récupération communiqué par l'agent principal pendant cette passe :
+Point de récupération communiqué par l'agent principal pendant la passe initiale du 19 septembre :
 
 - Nouvelle lecture des trois chats via `read_thread` réussie, sans nouveau livrable téléchargeable ; références internes sans URL et sans pièce jointe exploitable.
 - CUA, y compris après reset, et `node_repl` restent en échec Windows `apply deny-read ACLs`.
@@ -112,9 +128,11 @@ Point de récupération communiqué par l'agent principal pendant cette passe :
 - Aucun cookie, identifiant ou profil de navigateur n'a été extrait et aucun contrôle d'accès contourné.
 - **Aucun nouvel asset ni nouveau paquet récupéré dans cette passe.** Le ZIP animaux et les 79 JPG précités étaient déjà disponibles. Le problème de récupération des pièces jointes n'empêche pas de poursuivre les éléments dont le contrat textuel et le code sont suffisants, mais interdit de revendiquer la fidélité à des fichiers non reçus.
 
-## 5. Constats historiques remplacés par l'état actuel
+## 5. État relevé à la base historique `de1390d` — 19 septembre
 
-| Ancien constat à ne plus répéter comme actuel | État réel à la base contrôlée | Limite conservée |
+**Instantané conservé.** Les comptes de douze annexes et deux individus ainsi que l'absence de REFUGE dans ce tableau ne décrivent plus la livraison actuelle. Voir section 8 pour les treize annexes, sept individus et REFUGE publiés. Les essais cités ici appartiennent au premier lot et ne sont pas rejoués par cette actualisation.
+
+| Ancien constat examiné le 19 septembre | État réel à `de1390d` | Limite à cette date |
 | --- | --- | --- |
 | Aucun parcours créateur/prologue | V84 possède identité persistante, réveil, accueil DAVID-8R, déplacement cryo/CIC/briefing et dialogue Tamsin ; raccord de sauvegarde dans `src/save.js` | Ce sous-lot n'apporte pas les nouvelles animations de réveil ni toutes les variantes corporelles/portraits. Voir `docs/VERSION_HISTORY_V84.md` et `docs/VALIDATION_V84.md`. |
 | Aucun recrutement causal ; source tronquée | Source complète V85, quatre candidats persistants, huit aptitudes, recrutement/formation/dotation et consommateurs moteur ; `src/crew-recruitment-v85.js`, `src/crew-runtime-v85.js`, sauvegarde racine | Les portraits/silhouettes individuels, missions personnelles et corpus d'animations ne sont pas livrés par ce socle. |
@@ -128,7 +146,9 @@ Les preuves antérieures du premier lot animaux sont consignées dans `docs/V87_
 
 Le comportement de récupération physique d'une caisse interrompue, les protections de quota/profil et le premier plan du hangar corrigé sont aussi des acquis du lot port. L'animation humaine dédiée au portage n'est pas générée, le dropship historique reste moins net, et toutes les animations de la responsable ne sont pas certifiées. Ces réserves restent ouvertes.
 
-## 6. Priorités d'implémentation encore prouvées
+## 6. Priorités identifiées le 19 septembre — statut historique
+
+**Tous les « contrôles actuels » de cette section signifient actuels à `de1390d`, pas au 20 septembre.** REFUGE a depuis été livré, les phases aériennes ont reçu un correctif physique et cinq individus supplémentaires ont été intégrés. Les cibles plus vastes restent distinctes de ces sous-lots ; statut actualisé en section 8. Les comptes PALISADE de cette section n'ont pas été réexécutés dans la présente actualisation documentaire.
 
 ### P0 — Joueur V87 : mouvements et animations réellement séparés
 
@@ -140,7 +160,9 @@ Premier lot substantiel : **P0-A** avec idle/transitions, marche/course/sprint d
 
 Puis : poses complètes cohérentes exportées en couches synchronisées, deux orientations réellement dessinées, haut du corps huit directions, sockets par image, armes/outils/effets détachés, sept familles de recharge avec transfert réel au bon événement. La phase de pieds doit être conservée entre vitesses, les événements idempotents après reprise, les atlas chargés par contexte. Un rendu porté/tenu n'est pas une nouvelle animation humaine dédiée.
 
-### P1 — REFUGE : pièce personnelle autonome, non boutique
+### P1 historique — REFUGE : pièce personnelle autonome, depuis livrée
+
+Le constat d'absence ci-dessous est **périmé** ; le contrat suivant est conservé pour traçabilité. Livraison documentée dans `docs/V87_REFUGE_AUDIT.md`.
 
 Source directe : `P/memorial-2-1.json` ; contrat consolidé : `P/memorial-audit-final.md`, section A.
 
@@ -162,13 +184,15 @@ Premier lot substantiel : identifiants stables de région/chapitre, migration de
 
 Le puits PALISADE à sept strates, les boucles de transport, les sauvetages nominatifs, les régions mutées et l'aide causale des survivants à la finale restent à construire. Ne pas effacer un choix antérieur de quarantaine réussie pour imposer une intrusion ; ne pas remplacer DAVID-8R par Ivo, ni confondre Hélène Voss avec Mara Voss. Le Word manquant interdit de prétendre connaître toutes les vingt secondaires et les six arcs complets.
 
-### P1 — Compagnons : quatorze individus restant après Moka et Brume
+### P1 historique — Compagnons : quatorze individus restaient après Moka et Brume
+
+**Table historique, pas liste actuelle de travail.** Luciole, Noisette, Café, Tic et Tac sont depuis livrés ; neuf individus restent non livrés à la base publiée, dont Mica en cours. Les offres groupées et les parcs des duos sont maintenant effectifs.
 
 Source : paquet reçu, notamment `data/individus_originaux.json`, `habitats.json`, `offres_auteurs.json`, `quetes_proposees.json` et `politique_navigation.json`.
 
 Contrôle actuel : `src/ship-animal-state-v87.js:2` définit seulement `animal-moka` et `animal-brume` ; `src/ship-animal-habitat-v87.js:24` ne définit que leurs deux logements. Leurs états sont conservés sous `shipAnimalsV1` par `src/save.js`, avec routines et livraison dédiées. Aucun deuxième inventaire d'animaux possédés n'est nécessaire.
 
-| Individu restant | ID source | Famille | Contrainte particulière |
+| Individu restant au relevé `de1390d` | ID source | Famille | Contrainte particulière |
 | --- | --- | --- | --- |
 | Rivet | `animal-rivet` | `cat-domestic` | Quête proposée « La caisse 27 » ; adoption/refuge/restitution, pas possession imposée. |
 | Suie | `animal-suie` | `cat-domestic` | Identité et art propres. |
@@ -189,10 +213,49 @@ Ce n'est pas seulement un lot de quatorze images : il reste à relier les offres
 
 Conserver zéro possédé par défaut, acquisition et stock atomiques, transport physique, étapes d'accueil persistantes, absence de faim/mort hors ligne, permissions de portes et zones interdites. Les animaux biologiques et synthétiques ne partagent pas aveuglément les mêmes besoins. Les appels/jeux/suivis et la navigation hors écran doivent conserver une identité et un trajet réels, sans téléportation, sans buffs et sans modification de la hitbox/caméra humaines. Le relais civil actuel est un socle local, pas la livraison des quatre marchands et de tous les voyages de station.
 
-## 7. Conclusion de couverture
+## 7. Conclusion historique — 19 septembre à `de1390d`
+
+Le solde de quatorze animaux et le statut REFUGE de cette conclusion sont **remplacés par la section 8**. Cette conclusion conserve la portée du premier audit, pas une nouvelle certification.
 
 La progression V84/V85/V87 est réelle à son périmètre ; elle ne justifie ni « tout le dossier ChatGPT est fait », ni « tous les ennemis sont terminés », ni « fidélité 1:1 certifiée », ni « jeu commercial complet ». Les nombres historiques de sprites ou de campagnes ne sont pas une certification fraîche de leurs animations, leur accessibilité, leur cohérence artistique ou leur durée de vie.
 
 Les quatre priorités ci-dessus sont établies par des sources identifiées et des points de code contrôlés. Les trois premières restent des chantiers majeurs distincts ; le premier lot animaux est accompli à son périmètre, mais quatorze individus et les systèmes avancés du paquet restent à implémenter. Les autres promesses des 26 conversations ne sont pas annulées par cette sélection et nécessitent leur propre vérification actuelle.
 
 Ce document n'ajoute aucun asset, module de gameplay, test exécuté, commit ou déploiement. Il conserve explicitement la différence entre contenu reçu, contenu annoncé, code intégré, preuve de jeu et limites restantes.
+
+## 8. État livré actualisé — 20 septembre 2026
+
+Base privée vérifiée par Git : `f27e6bbb9d8f7e1b5f1348ef878f8d91ff9907da`. Commit public vérifié : `4f318e43c2b5ed61d2be644f0cd9588ff8435ed9`. Les constats utilisent cette base publiée, pas les modifications non commitées du lot suivant. Les preuves build/navigateur/production sont celles des rapports relus, non des essais rejoués pendant cette actualisation.
+
+| Sous-lot livré | Preuve et périmètre | Limite conservée |
+| --- | --- | --- |
+| Sept individus : Moka, Brume, Luciole, Noisette, Café, Tic, Tac | Définitions de `src/ship-animal-state-v87.js` à `f27e6bb`, cinq habitats / sept places ; `docs/V87_LUCIOLE_AUDIT.md` et `docs/V87_BONDED_ANIMALS_AUDIT.md`. Trois offres individuelles et deux groupées ; acquisition, portage, arrivée et résidence réels. | Zéro possédé par défaut. Neuf individus non livrés : Rivet, Suie, Boulon, Sable, M-17, ARC-4, Bip, Clé, Mica. **Mica en cours, pas une huitième livraison.** |
+| Duos indivisibles du Refuge colonial | Vendeur `colony-shelter` au comptoir réellement amarré, Noisette/Café 260 CR et Tic/Tac 240 CR ; caisse à deux compartiments, identités et ancres distinctes, parcs fermés et observation. Port seul élargi à 2560 px, accueil maintenu à 1920 px. | Pas de pension/restitution complète ni de huit quêtes scénarisées livrées ; escalade des rats absente. Les 178 clips proposés ne sont pas certifiés intégralement réalisés. |
+| REFUGE personnel | Treizième annexe `personal-refuge`, importée par `src/hub-annex-registry-v87.js:8` ; cinq interactions, art modulaire, stockage personnel local et reprise devant les quartiers. `docs/V87_REFUGE_AUDIT.md`. | Implémentation du texte reçu, pas récupération du ZIP. Portrait vide et hologramme générique avant personnalisation volontaire locale ; aucune identité personnelle inventée. |
+| Phases aériennes physiques | `src/player-airborne-presentation-v87.js` et raccords mission/hub/BIOFORGE ; montée/sommet/chute/contact par acteur et resets explicites. `docs/V87_PLAYER_AIR_PHASES_AUDIT.md`. | Réemploi des poses existantes, pas livraison des 507 clips, cycles denses, armes détachées ni animation humaine dédiée au portage. |
+
+Le rapport groupé consigne le push public, Vercel READY sur le SHA `4f318e4`, les contrôles HTTP/PWA et le parcours Tic/Tac en production à 30 jalons. Cette actualisation vérifie l'existence des commits et lit ces preuves ; ce n'est ni un nouveau déploiement ni un nouvel essai de production. Docs, conversations, photos personnelles et preuves QA restent exclus du jeu public.
+
+PALISADE, le système complet d'animations joueur et les systèmes animaux avancés ne sont pas déclarés terminés. L'inventaire reste **29 identifiants connus**, sans certification d'exhaustivité du projet ChatGPT ni de couverture intégrale de ses promesses.
+
+## 9. Écarts gameplay revérifiés — lectures du 20 septembre
+
+Rapport détaillé privé : `docs/V87_GAMEPLAY_CHAT_GAPS_20260920.md`. Les lignes ci-dessous correspondent au code inspecté lors de cette passe.
+
+- **Hordes d’ennemis'occasionnelles** : profil de rencontre fragile en un impact, densité réelle, entrées annoncées, tirs alliés cohérents, fin explicite et protection contre le farming demandés. Aucun directeur/profil horde identifié par la recherche ciblée `src/tests`. L'entrée APC porte seulement `continuous-horde`, `implementationStatus: 'partial'`, `playable: false` dans `src/special-operations-v67.js:188–190` ; elle ne prouve pas ce gameplay.
+- **Idée spawn ennemis Tentalus** : BIOFORGE existe, mais sa composition est un seul `profileId` et une quantité totale limitée à 12 (`src/bioforge-session-v80.js:127–167`). File monoprofil, contrôles désactivés pendant la session (`src/bioforge-ui-v80.js:183–185`). Composition mixte, total distinct du plafond simultané et renforts contrôlés restent à construire. Les 666 entrées / 571 atlas / 26 984 frames du texte sont des objectifs, pas des fichiers reçus ou une couverture actuelle certifiée.
+- **Proposer mécaniques HUD Alien** : soudure et autodestruction V70 réelles. La soudure ne vise que `cargo-bulkhead` (`src/alien-survival-runtime-v70.js:618–641`), sans découpe inverse dans ce module. Armement à deux autorisations et décompte produisant un échec réel (`:935–980`), mais aucune fenêtre d'annulation implémentée. Couverture de base réelle (`src/game-v51-runtime.js:848`, `:1439`) ; états de tir latéral/tir aveugle/franchissement avancés non identifiés dans le périmètre examiné.
+
+Ces relectures ajoutent des preuves et une proposition de prochain lot BIOFORGE, **aucune implémentation**. Aucune nouvelle URL exploitable ni pièce jointe n'a été exposée par ces chats.
+
+## 10. Livraison Mica et écran principal — 20 septembre 2026
+
+Le commit public `2fda1b42d989e6459cff380d33bc98302587dccd` est poussé, Vercel production `dpl_J9RjhoztADaLBstgSzqWZMWRinRe` est READY et le contrôle HTTP compare les fichiers servis à ce commit. Les tableaux historiques ci-dessus ne sont pas rétroactivement modifiés.
+
+Huit individus sur les seize du paquet sont désormais intégrés : les sept de la section 8 plus Mica. Six habitats / huit places, achat de Mica à 180 CR, caisse adaptée, terrarium modulaire, marche et montée/descente physiques, deux cycles et reprise mi-montée vérifiés localement. Rapport `docs/V87_MICA_AUDIT.md`. Restent Rivet, Suie, Boulon, Sable, M-17, ARC-4, Bip et Clé, ainsi que les systèmes et quêtes avancés. Ce n'est pas la réalisation complète du paquet.
+
+L'écran principal a reçu des corrections de taille/placement des deux vaisseaux, de profondeur et d'attache des jets, d'alignement planète/atmosphère/nuages et de mouvement réduit. Neuf compositions testées sur le build public puis sur Vercel ; la planète reste une illustration projetée, pas une sphère 3D animée. Rapport `docs/V87_TITLE_COMPOSITION_AUDIT.md`. Le parcours Mica de production passe aussi ses 54 jalons, deux cycles et reprise de sauvegarde ; le contrôle PWA de production passe à son périmètre documenté.
+
+Quatre nouvelles planches ECHO-9 existent réellement (portage, course, saut, échelle ; 16 poses chacune). Elles restent **candidates privées, non intégrées**, faute de validation d'identité 1:1, d'ancrages/sockets et de fluidité. Elles ne complètent ni les 507 clips ni l'animation humaine de portage. Rapport `docs/V87_PLAYER_FOUR_SHEETS_REVIEW.md`.
+
+Les trois chats de la section 9 n'ont livré aucune nouvelle pièce jointe récupérable pendant cette passe. L'inventaire de 29 identifiants reste non exhaustif ; les manques BIOFORGE, hordes, découpe inverse, couverture avancée et campagne demeurent ouverts.

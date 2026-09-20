@@ -1,4 +1,5 @@
 import { NOISETTE_RECTS_V87, CAFE_RECTS_V87, TIC_RECTS_V87, TAC_RECTS_V87 } from './ship-animal-bonded-frames-v87.js';
+import { MICA_RECTS_V87 } from './ship-animal-mica-frames-v87.js';
 
 const clip = (id, indices, fps, loop, review = 'poses-inspected-motion-unverified') => Object.freeze({
   id, frames: Object.freeze(indices), fps, loop, review
@@ -59,7 +60,7 @@ function atlas(animalId, name, rectangles, worldScale, sha256, excludedFrames = 
     width: 1536, height: 1024, worldScale, sourceFacing: 1, sha256,
     sourceLayout: Object.freeze({ columns: options.columns || 8, rows: options.rows || 4 }),
     frames: Object.freeze(frames), clips,
-    coverage: Object.freeze({ totalAuthored: 32, runtimeSafe: 32 - excludedFrames.length,
+    coverage: Object.freeze({ totalAuthored: frames.length, runtimeSafe: frames.length - excludedFrames.length,
       excludedFrames: Object.freeze([...excludedFrames]), fluidityCertified: false }) });
 }
 export const SHIP_ANIMAL_ATLASES_V87 = Object.freeze({
@@ -80,7 +81,12 @@ export const SHIP_ANIMAL_ATLASES_V87 = Object.freeze({
   'animal-tic': atlas('animal-tic', 'tic', TIC_RECTS_V87, 0.1,
     '9d5f9bed93e5ae630eed274009c9088ea1ff0048e7b01c8e41f27506855f94a0', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' }),
   'animal-tac': atlas('animal-tac', 'tac', TAC_RECTS_V87, 0.105,
-    '74623814bc277fb714c82437770cdf8c03e09c5e019967a09bca5610de102091', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' })
+    '74623814bc277fb714c82437770cdf8c03e09c5e019967a09bca5610de102091', [], {}, { enclosed: true, columns: 4, rows: 8, variant: '-v2' }),
+  'animal-mica': atlas('animal-mica', 'mica', MICA_RECTS_V87, 0.11,
+    '7c8671c538b2fdefa875a9b32f06cbe2c168111c4497b43072715cfb15f55617', [], {
+      climbUp: Object.freeze({ ...clip('climbUp', [32,33,34,35,36,37,38,39], 6, true), sourceFacing: 1 }),
+      climbDown: Object.freeze({ ...clip('climbDown', [40,41,42,43,44,45,46,47], 6, true), sourceFacing: -1 })
+    }, { enclosed: true, columns: 8, rows: 6, variant: '-v2' })
 });
 const knownAtlas = animalId => Object.hasOwn(SHIP_ANIMAL_ATLASES_V87, animalId) ? SHIP_ANIMAL_ATLASES_V87[animalId] : null;
 const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -121,7 +127,7 @@ export function drawShipAnimalV87(ctx, image, options = {}) {
   ctx.save();
   try {
     ctx.translate(x, y);
-    ctx.scale(facing === selectedAtlas.sourceFacing ? 1 : -1, 1);
+    ctx.scale(facing === (sample.clip.sourceFacing ?? selectedAtlas.sourceFacing) ? 1 : -1, 1);
     ctx.drawImage(image, frame.x, frame.y, frame.w, frame.h,
       -frame.pivotX * scale, -frame.pivotY * scale, frame.w * scale, frame.h * scale);
   } finally { ctx.restore(); }

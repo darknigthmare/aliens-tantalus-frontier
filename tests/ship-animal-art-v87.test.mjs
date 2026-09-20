@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
+import { SHIP_ANIMAL_TERRARIUM_ASSET_V87, SHIP_ANIMAL_TERRARIUM_HASH_V87, SHIP_ANIMAL_TERRARIUM_CROPS_V87,
+  SHIP_ANIMAL_TERRARIUM_PLACEMENT_V87, drawClosedShipTerrariumV87, isShipAnimalTerrariumAtlasReadyV87 } from '../src/ship-animal-terrarium-art-v87.js';
 import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87, SHIP_ANIMAL_ENCLOSURE_HASH_V87,
   SHIP_ANIMAL_ENCLOSURE_CROPS_V87, SHIP_ANIMAL_ENCLOSURE_PLACEMENTS_V87,
   isShipAnimalEnclosureAtlasReadyV87, drawClosedShipAnimalPenV87, drawShipBondedCarrierV87 } from '../src/ship-animal-enclosure-art-v87.js';
@@ -72,7 +74,7 @@ function alphaComponents({ width, height, pixels }, threshold = 8) {
 }
 
 test('art identities are explicit, immutable and report the reduced Brume coverage honestly', () => {
-  assert.deepEqual(Object.keys(SHIP_ANIMAL_ATLASES_V87), ['animal-moka', 'animal-brume', 'animal-luciole', 'animal-noisette', 'animal-cafe', 'animal-tic', 'animal-tac']);
+  assert.deepEqual(Object.keys(SHIP_ANIMAL_ATLASES_V87), ['animal-moka', 'animal-brume', 'animal-luciole', 'animal-noisette', 'animal-cafe', 'animal-tic', 'animal-tac', 'animal-mica']);
   const cat = SHIP_ANIMAL_ATLASES_V87['animal-moka'], dog = SHIP_ANIMAL_ATLASES_V87['animal-brume'];
   assert.deepEqual(cat.coverage, { totalAuthored: 32, runtimeSafe: 32, excludedFrames: [], fluidityCertified: false });
   assert.deepEqual(dog.coverage, { totalAuthored: 32, runtimeSafe: 30, excludedFrames: [10, 11], fluidityCertified: false });
@@ -87,20 +89,22 @@ test('art identities are explicit, immutable and report the reduced Brume covera
 
 for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
   test(`${atlas.animalId}: runtime-safe rectangles are disjoint, inside the image and have ground pivots`, () => {
-    assert.equal(atlas.frames.length, 32);
+    assert.equal(atlas.frames.length, atlas.animalId === 'animal-mica' ? 48 : 32);
     for (const frame of atlas.frames) {
       assert.ok([frame.x, frame.y, frame.w, frame.h].every(Number.isInteger));
       assert.ok(frame.x >= 0 && frame.y >= 0 && frame.w > 0 && frame.h > 0);
       assert.ok(frame.x + frame.w <= atlas.width && frame.y + frame.h <= atlas.height);
       assert.ok(frame.pivotX > 0 && frame.pivotX < frame.w);
-      assert.ok(frame.pivotY > 0 && frame.pivotY < frame.h && frame.h - frame.pivotY <= 12);
+      if (atlas.animalId === 'animal-mica' && frame.index >= 32) assert.ok(Number.isFinite(frame.pivotY) && frame.pivotY > 0
+        && frame.pivotY < frame.h + (frame.w - frame.pivotX) * 30 / 34, 'projected slope intercept; actual contact tested against PNG alpha below');
+      else assert.ok(frame.pivotY > 0 && frame.pivotY < frame.h && frame.h - frame.pivotY <= 12);
       for (const other of atlas.frames) if (other.index !== frame.index && frame.safe && other.safe) assert.equal(overlaps(frame, other), false,
         `crop overlap between ${frame.index}/${other.index}`);
     }
     if (['animal-moka','animal-brume','animal-luciole'].includes(atlas.animalId)) {
       assert.ok(atlas.frames.some(frame => frame.x < frame.index % 8 * 192 || frame.x + frame.w > (frame.index % 8 + 1) * 192),
         'the legacy crops intentionally do not use a fixed-width cell grid');
-    } else assert.ok([4,8].includes(atlas.sourceLayout.columns) && atlas.sourceLayout.columns * atlas.sourceLayout.rows === 32);
+    } else assert.ok([4,8].includes(atlas.sourceLayout.columns) && atlas.sourceLayout.columns * atlas.sourceLayout.rows === atlas.frames.length);
     const used = new Set(Object.values(atlas.clips).flatMap(clip => clip.frames));
     assert.equal(used.size, atlas.coverage.runtimeSafe);
     assert.ok([...used].every(index => atlas.frames[index].safe));
@@ -124,7 +128,8 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
     assert.ok(nearlyTransparent > image.width * image.height * .6);
     const { components, labels } = alphaComponents(image);
     if (atlas.sourceLayout.rows === 8) components.sort((a,b)=>Math.floor((a.y+a.h/2)/128)-Math.floor((b.y+b.h/2)/128)||a.x-b.x);
-    assert.equal(components.length, 32);
+    if (atlas.sourceLayout.rows === 6) components.sort((a,b)=>Math.floor((a.y+a.h/2)/(1024/6))-Math.floor((b.y+b.h/2)/(1024/6))||a.x-b.x);
+    assert.equal(components.length, atlas.animalId === 'animal-mica' ? 48 : 32);
     const majorLabels = new Set(components.map(component => component.label));
     for (const frame of atlas.frames.filter(frame => frame.safe)) {
       const body = components[frame.index];
@@ -137,7 +142,9 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
       for (let y = frame.y; y < frame.y + frame.h; y++) for (let x = frame.x; x < frame.x + frame.w; x++) {
         const index = y * image.width + x, label = labels[index];
         if (majorLabels.has(label)) assert.equal(label, body.label, `neighbor fragment in pose ${frame.index} at ${x},${y}`);
-        if (y < footY && y >= footY - 3 && image.pixels[index * 4 + 3] >= 128) contactPixels++;
+        const contactY = atlas.animalId === 'animal-mica' && frame.index >= 32
+          ? footY - (x - frame.x - frame.pivotX) * 30/34 : footY;
+        if (y <= contactY + .1 && y >= contactY - 3 && image.pixels[index * 4 + 3] >= 128) contactPixels++;
       }
       assert.ok(contactPixels >= 3, `pose ${frame.index} paw/body support must meet visible alpha`);
     }
@@ -194,7 +201,7 @@ for (const atlas of Object.values(SHIP_ANIMAL_ATLASES_V87)) {
         const sample = resolveShipAnimalFrameV87(atlas.animalId, clipId, elapsed);
         assert.equal(drawShipAnimalV87(ctx, image, { animalId: atlas.animalId, clipId, elapsed, x: 400, y: 610, facing }), true);
         assert.deepEqual(calls[0], ['save']); assert.deepEqual(calls[1], ['translate', 400, 610]);
-        assert.deepEqual(calls[2], ['scale', facing, 1]); assert.deepEqual(calls.at(-1), ['restore']);
+        assert.deepEqual(calls[2], ['scale', facing * (clip.sourceFacing ?? atlas.sourceFacing), 1]); assert.deepEqual(calls.at(-1), ['restore']);
         const draw = calls.find(call => call[0] === 'drawImage').slice(1);
         assert.equal(draw.length, 9); assert.equal(draw[0], image);
         assert.deepEqual(draw.slice(1, 5), [sample.frame.x, sample.frame.y, sample.frame.w, sample.frame.h]);
@@ -244,6 +251,35 @@ test('two-layer enclosures share exact floor anchors and carrier needs its genui
   assert.equal(drawShipBondedCarrierV87(ctx,image,{x:10,width:76,bottom:600}),true);
   assert.deepEqual(calls[0].slice(2,6),SHIP_ANIMAL_ENCLOSURE_CROPS_V87.carrier);
   assert.equal(drawClosedShipAnimalPenV87(ctx,image,{species:'rabbit',layer:'front',bounds:{x:0,y:0,w:0,h:20}}),false);
+});
+
+test('Mica terrarium contains twelve isolated props and a transparent front window', async () => {
+  const bytes=await readFile(new URL('..'+SHIP_ANIMAL_TERRARIUM_ASSET_V87,import.meta.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),SHIP_ANIMAL_TERRARIUM_HASH_V87);
+  const image=decodePng(bytes),{components,labels}=alphaComponents(image);
+  assert.equal(components.length,12); assert.equal(Object.keys(SHIP_ANIMAL_TERRARIUM_CROPS_V87).length,12);
+  const ids=new Set(components.map(c=>c.label));
+  for(const [role,[x,y,w,h]] of Object.entries(SHIP_ANIMAL_TERRARIUM_CROPS_V87)) {
+    assert.ok(x>=0&&y>=0&&x+w<=image.width&&y+h<=image.height);
+    const covered=new Set(); for(let py=y;py<y+h;py++)for(let px=x;px<x+w;px++){const id=labels[py*image.width+px];if(ids.has(id))covered.add(id);}
+    assert.equal(covered.size,1,role+' may not include another modular prop');
+  }
+  let clear=0,total=0;for(let y=100;y<265;y++)for(let x=478;x<785;x++){total++;if(image.pixels[(y*image.width+x)*4+3]<16)clear++;}
+  assert.ok(clear/total>.97,'transparent glass must expose Mica and independent backing');
+});
+
+test('Mica bitmap back and front align floor612 and support endpoints match the climb graph', () => {
+  const image={complete:true,naturalWidth:1536,naturalHeight:1024,src:SHIP_ANIMAL_TERRARIUM_ASSET_V87};
+  const entry=SHIP_ANIMAL_TERRARIUM_PLACEMENT_V87;
+  assert.equal(isShipAnimalTerrariumAtlasReadyV87(image),true);
+  for(const layer of ['back','front']) {
+    const {ctx,calls}=recorder();assert.equal(drawClosedShipTerrariumV87(ctx,image,{bounds:entry.bounds,layer}),true);
+    const draws=calls.filter(c=>c[0]==='drawImage');assert.equal(draws[0][7]+draws[0][9],612);assert.equal(draws[1][7],612);
+    assert.equal(draws.length,layer==='front'?2:11);
+  }
+  const crop=SHIP_ANIMAL_TERRARIUM_CROPS_V87.ramp,b=entry.supports[0].bounds;
+  entry.rampContactSource.forEach((p,i)=>{close(b.x+(p.x-crop[0])*b.w/crop[2],entry.rampContactWorld[i].x);close(b.y+(p.y-crop[1])*b.h/crop[3],entry.rampContactWorld[i].y);});
+  const {ctx,calls}=recorder();assert.equal(drawClosedShipTerrariumV87(ctx,{...image,src:'/wrong.png'},{bounds:entry.bounds}),false);assert.equal(calls.length,0);
 });
 
 test('unknown identities, wrong clips, unready images and wrong-animal images never draw a substitute', () => {

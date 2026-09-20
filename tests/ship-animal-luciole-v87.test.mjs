@@ -39,10 +39,10 @@ test('Luciole retains authored original identity, 220-credit offer, and a distin
   assert.deepEqual(DEFINITIONS[ID].preferences, { likes: 'Une balle légère', avoids: 'Les portes qui claquent' });
   assert.equal(OFFERS[OFFER].costCredits, 220); assert.equal(OFFERS[OFFER].vendorId, 'station-shop');
   const fresh = createEmptyShipAnimalStateV87();
-  assert.equal(fresh.catalogRevision, 3); assert.deepEqual(fresh.animals, {});
+  assert.equal(fresh.catalogRevision, 4); assert.deepEqual(fresh.animals, {});
   assert.deepEqual(fresh.reservations, {}); assert.deepEqual(fresh.receipts, {});
-  assert.equal(Object.keys(fresh.stock).length, 5);
-  const habitats = getShipAnimalHabitatsV87({}).filter(h => !h.designatedGroupId);
+  assert.equal(Object.keys(fresh.stock).length, 6);
+  const habitats = getShipAnimalHabitatsV87({}).filter(h => ['animal-moka', 'animal-brume', ID].includes(h.designatedAnimalId));
   assert.equal(new Set(habitats.map(h => h.id)).size, 3);
   assert.equal(new Set(habitats.map(h => h.location.x)).size, 3);
   assert.ok(habitats.every(h => h.capacity === 1 && !h.installed));
@@ -53,7 +53,7 @@ test('catalogue1 migration adds only the new unbought offer while preserving Mok
   const original = buy(fitted(), 'animal-moka');
   const raw = legacy(original.shipAnimalsV1), before = copy(raw);
   const next = migrateShipAnimalStateV87(raw);
-  assert.deepEqual(raw, before); assert.equal(next.catalogRevision, 3);
+  assert.deepEqual(raw, before); assert.equal(next.catalogRevision, 4);
   assert.deepEqual(next.quarantined, []); assert.equal(next.animals['animal-moka'].location.kind, 'transit');
   for (const key of ['animals', 'reservations', 'receipts', 'transitions', 'habitats', 'revision', 'lastSimulationTime'])
     assert.deepEqual(next[key], raw[key], key);
@@ -100,7 +100,7 @@ test('missing old stock and explicit corrupt or unavailable Luciole stock remain
 });
 
 test('unsupported catalogue revisions and future schemas are retained and cannot trigger a purchase', () => {
-  for (const revision of [4, 99, -1, '2', null]) {
+  for (const revision of [5, 99, -1, '2', null]) {
     const save = fitted(); save.shipAnimalsV1.catalogRevision = revision;
     const next = migrateShipAnimalStateV87(save.shipAnimalsV1);
     assert.deepEqual(next.catalogRevision, revision);
@@ -147,7 +147,7 @@ test('real SaveSystem persists the catalogue upgrade, isolates other profiles, a
   const initial = buy(fitted(system.data), 'animal-moka');
   system.commit({ ...initial, shipAnimalsV1: legacy(initial.shipAnimalsV1) });
   const reloaded = new SaveSystem(storage); reloaded.load(1);
-  assert.equal(reloaded.data.shipAnimalsV1.catalogRevision, 3);
+  assert.equal(reloaded.data.shipAnimalsV1.catalogRevision, 4);
   assert.equal(reloaded.data.shipAnimalsV1.stock[OFFER].status, 'available');
   const before = copy(reloaded.data), bytes = values.get(reloaded.key()); const candidate = buy(before);
   storage.reject = true;

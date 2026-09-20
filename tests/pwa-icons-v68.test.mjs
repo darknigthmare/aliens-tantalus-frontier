@@ -83,7 +83,7 @@ test('le document HTML expose les favicons et l’icône Apple depuis les export
 test('le cache V84 conserve les assets runtime acceptés mais exclut le master PWA', async () => {
   const worker = await readFile('sw.js', 'utf8');
   const shell = evaluatePrecacheShell(worker);
-  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-6['"]/u);
+  assert.match(worker, /const CACHE = ['"]atf-v86-physical-placeables-shell-7['"]/u);
   for (const icon of ICONS) {
     assert.ok(shell.includes(icon.src), `${icon.src} absent du tableau SHELL réellement précaché`);
   }
@@ -106,6 +106,8 @@ test('le cache V84 conserve les assets runtime acceptés mais exclut le master P
       '/assets/openai/ship-animals/v87/tic-atlas-v2.png',
       '/assets/openai/ship-animals/v87/tac-atlas-v2.png',
       '/assets/openai/ship-animals/v87/enclosure-props.png',
+      '/assets/openai/ship-animals/v87/mica-atlas-v2.png',
+      '/assets/openai/ship-animals/v87/terrarium-props.png',
       '/assets/openai/ship-animals/v87/habitat-wall.png',
       '/assets/openai/ship-animals/v87/habitat-props.png',
       '/assets/openai/ship-animals/v87/port-props.png',

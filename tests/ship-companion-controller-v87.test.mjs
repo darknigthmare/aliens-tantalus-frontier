@@ -8,6 +8,7 @@ import { SHIP_ANIMAL_ANNEX_V87, getShipAnimalHabitatsV87, installShipAnimalHabit
 import { SHIP_ANIMAL_ATLASES_V87 } from '../src/ship-animal-art-v87.js';
 import { acquireShipAnimalV87, SHIP_ANIMAL_OFFERS_V87, getShipAnimalOfferMembersV87 } from '../src/ship-animal-state-v87.js';
 import { SHIP_ANIMAL_ENCLOSURE_ASSET_V87 } from '../src/ship-animal-enclosure-art-v87.js';
+import { SHIP_ANIMAL_TERRARIUM_ASSET_V87 } from '../src/ship-animal-terrarium-art-v87.js';
 import { initializeShipAnimalDeliveryV87, pickupShipAnimalDeliveryV87, stepShipAnimalDeliveryV87,
   sampleShipAnimalDeliveriesV87, getShipAnimalDeliveryUnitV87 } from '../src/ship-animal-delivery-v87.js';
 
@@ -222,12 +223,22 @@ test('real duo arrival renders two residents between closed panels and observati
   const draws = []; f.controller.draw(drawContext(draws));
   const animalIndexes = draws.flatMap((draw, index) => Object.values(SHIP_ANIMAL_ATLASES_V87).some(atlas => atlas.path === draw[0].currentSrc) ? [index] : []);
   assert.equal(animalIndexes.length, 2);
-  assert.ok(draws.slice(0, animalIndexes[0]).every(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87 && draw[2] < 600));
-  assert.ok(draws.slice(animalIndexes.at(-1) + 1).every(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87 && draw[2] > 600));
-  assert.ok(animalIndexes[0] >= 4 && draws.length - animalIndexes.at(-1) - 1 >= 4, 'both enclosures contribute real back/front bitmap slices');
+  const beforeResidents = draws.slice(0, animalIndexes[0]);
+  const afterResidents = draws.slice(animalIndexes.at(-1) + 1);
+  assert.ok([...beforeResidents, ...afterResidents].every(draw =>
+    [SHIP_ANIMAL_ENCLOSURE_ASSET_V87, SHIP_ANIMAL_TERRARIUM_ASSET_V87].includes(draw[0].currentSrc)));
+  const penBacks = beforeResidents.filter(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87);
+  const penFronts = afterResidents.filter(draw => draw[0].currentSrc === SHIP_ANIMAL_ENCLOSURE_ASSET_V87);
+  assert.ok(penBacks.every(draw => draw[2] < 600));
+  assert.ok(penFronts.every(draw => draw[2] > 600));
+  assert.ok(penBacks.length >= 4 && penFronts.length >= 4, 'both enclosures contribute real back/front bitmap slices');
+  assert.ok(beforeResidents.some(draw => draw[0].currentSrc === SHIP_ANIMAL_TERRARIUM_ASSET_V87));
+  assert.ok(afterResidents.some(draw => draw[0].currentSrc === SHIP_ANIMAL_TERRARIUM_ASSET_V87));
   f.hub.getAnnexAssetGroupV71().get('enclosure').complete = false;
   const unavailable = []; f.controller.draw(drawContext(unavailable));
-  assert.equal(unavailable.length, 0, 'residents cannot float on the human lane without their closed enclosure');
+  assert.ok(unavailable.length > 0, 'the independently loaded empty terrarium still renders');
+  assert.ok(unavailable.every(draw => draw[0].currentSrc === SHIP_ANIMAL_TERRARIUM_ASSET_V87),
+    'residents cannot float on the human lane without their closed enclosure');
 });
 
 test('quota rollback performs one write attempt, preserves durable/live state and stops without a second persist', () => {

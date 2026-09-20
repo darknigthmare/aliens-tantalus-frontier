@@ -250,7 +250,8 @@ test('previews use genuine dedicated atlases at fixed relative scale and nine-ar
     Object.assign(image, { complete: true, naturalWidth: atlas.width, naturalHeight: atlas.height }); document.draws.length = 0; image.onload();
     const draw = document.draws.find(call => call[0] === 'drawImage').slice(1);
     assert.equal(draw.length, 9); assert.equal(draw[0], image);
-    assert.equal(draw[7] / draw[3], SHIP_ANIMAL_ATLASES_V87[animalId].worldScale);
+    assert.equal(draw[7], draw[3] * SHIP_ANIMAL_ATLASES_V87[animalId].worldScale);
+    assert.equal(draw[8], draw[4] * SHIP_ANIMAL_ATLASES_V87[animalId].worldScale);
     assert.equal(ui.canvas.height, 144); assert.match(ui.previewStatus.textContent, /Échelle constante/);
   }
   ui.destroy();
@@ -261,15 +262,19 @@ test('Luciole has her own definition-backed tab, dossier and two-step 220 CR con
   assert.deepEqual([...ui.tabButtons.keys()], Object.keys(SHIP_ANIMAL_DEFINITIONS_V87));
   ui.open({ mode: 'shop', animalId: 'animal-luciole' });
   const luciole = ui.tabButtons.get('animal-luciole');
-  assert.deepEqual([...ui.tabButtons].filter(([, button]) => !button.hidden).map(([id]) => id), ['animal-moka', 'animal-brume', 'animal-luciole']);
+  assert.deepEqual([...ui.tabButtons].filter(([, button]) => !button.hidden).map(([id]) => id), ['animal-moka', 'animal-brume', 'animal-luciole', 'animal-mica']);
   assert.equal(luciole.textContent, 'Luciole'); assert.equal(luciole.hidden, false);
   assert.equal(luciole.getAttribute('aria-selected'), 'true'); assert.equal(ui.offerName.textContent, 'Luciole');
   assert.equal(ui.confirmButton.disabled, true); assert.equal(await ui.dispatch('buy'), false);
   ui.examine(); assert.equal(ui.confirmButton.textContent, 'Confirmer 220 CR');
   assert.equal(ui.confirmButton.disabled, false);
-  luciole.fire('keydown', { key: 'ArrowRight' }); assert.equal(ui.selectedAnimalId, 'animal-moka');
+  luciole.fire('keydown', { key: 'ArrowRight' }); assert.equal(ui.selectedAnimalId, 'animal-mica');
+  assert.equal(ui.confirmButton.disabled, true);
+  ui.tabButtons.get('animal-mica').fire('keydown', { key: 'ArrowRight' }); assert.equal(ui.selectedAnimalId, 'animal-moka');
   assert.equal(ui.confirmButton.disabled, true);
   ui.tabButtons.get('animal-moka').fire('keydown', { key: 'End' });
+  assert.equal(ui.selectedAnimalId, 'animal-mica'); assert.equal(document.activeElement, ui.tabButtons.get('animal-mica'));
+  ui.tabButtons.get('animal-mica').fire('keydown', { key: 'ArrowLeft' });
   assert.equal(ui.selectedAnimalId, 'animal-luciole'); assert.equal(document.activeElement, luciole);
   assert.equal(ui.confirmButton.disabled, true); ui.examine();
   const selected = model.offers.find(entry => entry.animalId === 'animal-luciole');

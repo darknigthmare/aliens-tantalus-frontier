@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-physical-placeables-shell-6';
+const CACHE = 'atf-v86-physical-placeables-shell-7';
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
@@ -20,6 +20,8 @@ const CORE = [
   '/assets/openai/ship-animals/v87/moka-atlas.png', '/assets/openai/ship-animals/v87/brume-atlas.png',
   '/assets/openai/ship-animals/v87/luciole-atlas.png',
   '/src/ship-animal-bonded-frames-v87.js', '/src/ship-animal-enclosure-art-v87.js',
+  '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',
+  '/assets/openai/ship-animals/v87/mica-atlas-v2.png', '/assets/openai/ship-animals/v87/terrarium-props.png',
   '/assets/openai/ship-animals/v87/noisette-atlas-v2.png', '/assets/openai/ship-animals/v87/cafe-atlas.png',
   '/assets/openai/ship-animals/v87/tic-atlas-v2.png', '/assets/openai/ship-animals/v87/tac-atlas-v2.png',
   '/assets/openai/ship-animals/v87/enclosure-props.png',

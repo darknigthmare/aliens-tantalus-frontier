@@ -42,11 +42,11 @@ function residentFixture(offerId) {
   return { ...f, save };
 }
 
-test('catalogue3 exposes two indivisible original groups and five offers, with zero owned individuals', () => {
+test('catalogue4 preserves two indivisible original groups and exposes six offers, with zero owned individuals', () => {
   const fresh = createEmptyShipAnimalStateV87();
-  assert.equal(fresh.schema, 1); assert.equal(fresh.catalogRevision, 3);
+  assert.equal(fresh.schema, 1); assert.equal(fresh.catalogRevision, 4);
   assert.deepEqual(fresh.animals, {}); assert.deepEqual(fresh.receipts, {}); assert.deepEqual(fresh.reservations, {});
-  assert.equal(Object.keys(fresh.stock).length, 5);
+  assert.equal(Object.keys(fresh.stock).length, 6);
   assert.deepEqual(getShipAnimalOfferMembersV87('offer-noisette-cafe'), ['animal-noisette', 'animal-cafe']);
   assert.deepEqual(getShipAnimalOfferMembersV87('offer-tic-tac'), ['animal-tic', 'animal-tac']);
   assert.deepEqual(getShipAnimalOfferMembersV87('offer-animal-moka'), ['animal-moka']);
@@ -154,7 +154,7 @@ test('catalogue1/2 only introduces genuinely new stock; previous singleton recei
     for (const group of GROUPS) delete old.stock[group];
     if (version === 1) delete old.stock['offer-animal-luciole'];
     const before = copy(old), migrated = migrateShipAnimalStateV87(old);
-    assert.deepEqual(old, before); assert.deepEqual(migrated.quarantined, []); assert.equal(migrated.catalogRevision, 3);
+    assert.deepEqual(old, before); assert.deepEqual(migrated.quarantined, []); assert.equal(migrated.catalogRevision, 4);
     for (const key of ['animals', 'receipts', 'reservations', 'transitions', 'revision', 'lastSimulationTime']) assert.deepEqual(migrated[key], before[key]);
     for (const group of GROUPS) assert.equal(migrated.stock[group].status, 'available');
     assert.deepEqual(migrateShipAnimalStateV87(migrated), migrated);
@@ -166,7 +166,7 @@ test('catalogue3 lost group stock never replenishes; future revisions remain blo
   const next = migrateShipAnimalStateV87(f.save.shipAnimalsV1);
   assert.equal(next.stock[GROUPS[0]].status, 'unavailable'); assert.ok(next.quarantined.length);
   assert.equal(acquireShipAnimalV87(f.save, f.request, f.context).ok, false);
-  for (const version of [4, 99, '3', null, -1]) {
+  for (const version of [5, 99, '3', null, -1]) {
     const raw = createEmptyShipAnimalStateV87(); raw.catalogRevision = version;
     const state = migrateShipAnimalStateV87(raw);
     assert.deepEqual(state.catalogRevision, version); assert.ok(state.quarantined.length); assert.deepEqual(migrateShipAnimalStateV87(state), state);

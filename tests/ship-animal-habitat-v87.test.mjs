@@ -184,15 +184,15 @@ test('the 118px parent door is on the true 624 floor, clear of every bunk and up
   assert.ok(ANNEX.props.every(prop => prop.collidable === false));
 }));
 
-test('new and legacy saves contain zero animals and five uninstalled habitats with seven typed places', () => {
+test('new and legacy saves contain zero animals and six uninstalled habitats with eight typed places', () => {
   for (const save of [createDefaultSave(), migrateSave({ profile: 1 }), {}]) {
     const habitats = getShipAnimalHabitatsV87(save);
-    assert.equal(habitats.length, 5);
-    assert.deepEqual(habitats.map(entry => entry.installed), [false, false, false, false, false]);
+    assert.equal(habitats.length, 6);
+    assert.deepEqual(habitats.map(entry => entry.installed), [false, false, false, false, false, false]);
     assert.equal(Object.keys(save.shipAnimalsV1?.animals || {}).length, 0);
-    assert.deepEqual(habitats.map(entry => entry.capacity), [1, 1, 1, 2, 2]);
+    assert.deepEqual(habitats.map(entry => entry.capacity), [1, 1, 1, 2, 2, 1]);
   }
-  assert.deepEqual(HABITATS.map(entry => entry.id), ['moka-berth-v87', 'brume-berth-v87', 'luciole-berth-v87', 'noisette-cafe-pen-v87', 'tic-tac-pen-v87']);
+  assert.deepEqual(HABITATS.map(entry => entry.id), ['moka-berth-v87', 'brume-berth-v87', 'luciole-berth-v87', 'noisette-cafe-pen-v87', 'tic-tac-pen-v87', 'mica-terrarium-v87']);
 });
 
 for (const definition of HABITATS) {
@@ -261,7 +261,7 @@ test('malformed or incomplete saved equipment is never treated as an installed h
   }
 });
 
-test('real SaveSystem commit persists all five fittings across reloads without debiting credits or instantiating companions', () => {
+test('real SaveSystem commit persists all six fittings across reloads without debiting credits or instantiating companions', () => {
   const backend = storage();
   const system = new SaveSystem(backend);
   system.newGame(1);
@@ -275,8 +275,8 @@ test('real SaveSystem commit persists all five fittings across reloads without d
     assert.deepEqual(reloaded.shipAnimalsV1.animals, {});
   }
   const reloaded = new SaveSystem(backend).load(1);
-  assert.deepEqual(getShipAnimalHabitatsV87(reloaded).map(entry => entry.installed), [true, true, true, true, true]);
-  assert.equal(Object.keys(reloaded.shipAnimalsV1.habitats).length, 5);
+  assert.deepEqual(getShipAnimalHabitatsV87(reloaded).map(entry => entry.installed), [true, true, true, true, true, true]);
+  assert.equal(Object.keys(reloaded.shipAnimalsV1.habitats).length, 6);
 });
 
 test('quota failure keeps prior disk and live state; retry installs once only after durable commit', () => {
@@ -290,11 +290,11 @@ test('quota failure keeps prior disk and live state; retry installs once only af
   assert.throws(() => system.commit({ shipAnimalsV1: prepared.save.shipAnimalsV1 }), error => error.code === 'SAVE_WRITE_FAILED');
   assert.deepEqual(system.data, initial);
   assert.equal(backend.getItem(system.key()), initialDisk);
-  assert.deepEqual(getShipAnimalHabitatsV87(new SaveSystem(backend).load(1)).map(entry => entry.installed), [false, false, false, false, false]);
+  assert.deepEqual(getShipAnimalHabitatsV87(new SaveSystem(backend).load(1)).map(entry => entry.installed), [false, false, false, false, false, false]);
   backend.rejectSaveWrites = false;
   system.commit({ shipAnimalsV1: prepared.save.shipAnimalsV1 });
   const after = new SaveSystem(backend).load(1);
-  assert.deepEqual(getShipAnimalHabitatsV87(after).map(entry => entry.installed), [true, false, false, false, false]);
+  assert.deepEqual(getShipAnimalHabitatsV87(after).map(entry => entry.installed), [true, false, false, false, false, false]);
   assert.equal(after.shipAnimalsV1.revision, initial.shipAnimalsV1.revision + 1);
   assert.equal(after.galaxy.resources.credits, initial.galaxy.resources.credits);
 });
@@ -321,7 +321,7 @@ test('physical interaction requires a living grounded player and pauses during t
     { action: 'ship-animal:care', prompt: 'E — CONTRÔLER L’ACCUEIL ANIMALIER' });
 });
 
-test('actual hub walks from spawn233 through all five fitting points and the care counter, then reloads and exits on the parent floor', () => withRuntime(() => {
+test('actual hub walks from spawn233 through all six fitting points and the care counter, then reloads and exits on the parent floor', () => withRuntime(() => {
   const save = createDefaultSave();
   const { hub, actions, persisted } = createHub(save);
   const parent = enter(hub);
@@ -355,7 +355,7 @@ test('actual hub walks from spawn233 through all five fitting points and the car
   assert.equal(resumed.currentAnnexV71().id, ANNEX.id);
   near(resumed.player.x, Math.round(pose.x));
   near(resumed.player.y, pose.y);
-  assert.deepEqual(getShipAnimalHabitatsV87(resumed.npcRoutineContextV62.save).map(entry => entry.installed), [true, true, true, true, true]);
+  assert.deepEqual(getShipAnimalHabitatsV87(resumed.npcRoutineContextV62.save).map(entry => entry.installed), [true, true, true, true, true, true]);
   walkTo(resumed, 144);
   const exit = resumed.annexExitDoorV71();
   assert.ok(exit.bounds.w >= 112);
@@ -370,11 +370,11 @@ test('actual hub walks from spawn233 through all five fitting points and the car
   assert.equal(Object.keys(save.shipAnimalsV1.animals).length, 0);
 }));
 
-test('actual animal-care HUD counts all five physical fittings for new and fully equipped saves', () => withRuntime(() => {
-  for (const [save, fitted] of [[createDefaultSave(), 0], [equipped(createDefaultSave(), 5), 5]]) {
+test('actual animal-care HUD counts all six physical fittings for new and fully equipped saves', () => withRuntime(() => {
+  for (const [save, fitted] of [[createDefaultSave(), 0], [equipped(createDefaultSave(), 6), 6]]) {
     const { hub, trace } = createHub(save); enter(hub); trace.texts.length = 0;
     hub.draw();
-    assert.ok(trace.texts.some(args => args[0] === `LOGEMENTS ÉQUIPÉS ${fitted}/5`));
+    assert.ok(trace.texts.some(args => args[0] === `LOGEMENTS ÉQUIPÉS ${fitted}/6`));
     assert.equal(trace.texts.some(args => /LOGEMENTS ÉQUIPÉS .*\/2/.test(String(args[0]))), false);
   }
 }));
@@ -387,7 +387,7 @@ test('drawing independent cropped props paints2/7/11/17 entries as fitting progr
     const trace = { texts: [], drawImages: [] };
     assert.equal(drawShipAnimalHabitatV87(mockContext(trace), image, save), true);
     assert.equal(trace.drawImages.length, [2, 7, 11, 17][count]);
-    assert.equal(trace.texts.length, 5 - count);
+    assert.equal(trace.texts.length, 6 - count);
     for (const call of trace.drawImages) {
       assert.equal(call.length, 9, 'never draw the entire props board as background');
       assert.equal(call[0], image);
