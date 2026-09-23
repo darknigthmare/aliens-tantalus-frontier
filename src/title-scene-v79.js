@@ -1,7 +1,8 @@
 import {
   TITLE_SCENE_FALLBACK_V79,
   TITLE_SCENE_SCHEMA_V79,
-  buildTitleSceneModelV79
+  buildTitleSceneModelV79,
+  chooseTitleScenePlacementV87
 } from './title-scene-catalog-v79.js';
 
 export function supportsTitleSceneV79(scope = globalThis) {
@@ -21,12 +22,15 @@ export class TitleSceneControllerV79 {
     root,
     fallback,
     supportsScene = () => supportsTitleSceneV79(),
-    matchMedia = globalThis.matchMedia?.bind(globalThis)
+    matchMedia = globalThis.matchMedia?.bind(globalThis),
+    random = Math.random
   } = {}) {
     this.root = root || null;
     this.fallback = fallback || null;
     this.supportsScene = supportsScene;
     this.active = false;
+    this.random = random;
+    this.placementId = null;
     this.lastSave = null;
     this.model = null;
     this.signature = '';
@@ -75,16 +79,27 @@ export class TitleSceneControllerV79 {
     element.dataset.layerId = layer.id;
     element.dataset.role = layer.role;
     element.dataset.renderer = layer.renderer;
+    if (layer.planetAnchor) element.dataset.planetAnchor = 'true';
     if (layer.fallbackLayerId) element.dataset.fallbackLayerId = layer.fallbackLayerId;
     if (layer.assetId) element.dataset.assetId = layer.assetId;
     if (layer.runtimeId) element.dataset.runtimeId = layer.runtimeId;
     element.setAttribute('aria-hidden', 'true');
     element.style?.setProperty?.('--title-scene-depth-v79', String(layer.depth));
     if (layer.sphereRegistration) {
-      const { x, y, size, sourceSize } = layer.sphereRegistration;
+      const { x, y, size, sourceSize, sourceWidth = sourceSize, sourceHeight = sourceSize } = layer.sphereRegistration;
       element.style?.setProperty?.('--title-art-left-v87', `${-x / size * 100}%`);
       element.style?.setProperty?.('--title-art-top-v87', `${-y / size * 100}%`);
-      element.style?.setProperty?.('--title-art-size-v87', `${sourceSize / size * 100}%`);
+      element.style?.setProperty?.('--title-art-size-v87', `${sourceWidth / size * 100}%`);
+      element.style?.setProperty?.('--title-art-width-v87', `${sourceWidth / size * 100}%`);
+      element.style?.setProperty?.('--title-art-height-v87', `${sourceHeight / size * 100}%`);
+    }
+    if (layer.hullRegistration) {
+      const { x, y, width, height, sourceWidth, sourceHeight } = layer.hullRegistration;
+      element.style?.setProperty?.('--ship-ratio-v87', String(width / height));
+      element.style?.setProperty?.('--ship-image-left-v87', `${-x / width * 100}%`);
+      element.style?.setProperty?.('--ship-image-top-v87', `${-y / height * 100}%`);
+      element.style?.setProperty?.('--ship-image-width-v87', `${sourceWidth / width * 100}%`);
+      element.style?.setProperty?.('--ship-image-height-v87', `${sourceHeight / height * 100}%`);
     }
 
     if (layer.renderer === 'image') {
@@ -109,6 +124,21 @@ export class TitleSceneControllerV79 {
       element.dataset.assetStatus = 'loading';
       image.src = layer.assetSrc;
       element.append?.(image);
+      if (layer.namePlate && layer.hullRegistration && layer.shipName) {
+        const { x, y, width, height } = layer.hullRegistration;
+        const plate = layer.namePlate;
+        const marking = documentRef.createElement('span');
+        marking.className = 'title-ship-marking-v87';
+        marking.textContent = layer.shipName;
+        marking.setAttribute?.('aria-hidden', 'true');
+        marking.style?.setProperty?.('left', `${(plate.x - x) / width * 100}%`);
+        marking.style?.setProperty?.('top', `${(plate.y - y) / height * 100}%`);
+        marking.style?.setProperty?.('width', `${plate.width / width * 100}%`);
+        marking.style?.setProperty?.('height', `${plate.height / height * 100}%`);
+        const fontSize = Math.min(plate.height * .78, plate.width / (Math.max(1, layer.shipName.length) * .85));
+        marking.style?.setProperty?.('--ship-name-font-v87', String(fontSize / width * 100));
+        element.append?.(marking);
+      }
     }
     return element;
   }
@@ -125,6 +155,7 @@ export class TitleSceneControllerV79 {
     this.root.dataset.status = 'ready';
     this.root.dataset.active = 'true';
     this.root.dataset.preset = model.presetId;
+    this.root.dataset.placement = model.placementId;
     this.root.dataset.mode = model.mode;
     this.root.dataset.tone = model.tone;
     this.root.dataset.degraded = 'false';
@@ -132,21 +163,27 @@ export class TitleSceneControllerV79 {
     if (this.fallback) this.fallback.hidden = true;
     setParentStatus(this.root, 'ready');
     this.model = model;
-    this.signature = `${model.presetId}:${model.mode}`;
+    this.signature = `${model.presetId}:${model.mode}:${model.placementId}:${model.shipId}:${model.shipName}`;
     this.reason = 'ready';
     return this.getSnapshot();
   }
 
   show(save = {}) {
     const retryMissingAssets = !this.active && this.root?.dataset?.degraded === 'true';
+    if (!this.active) {
+      if (!this.preservePlacementOnce || !this.placementId) this.placementId = chooseTitleScenePlacementV87(this.placementId, this.random);
+      this.preservePlacementOnce = false;
+    }
     this.active = true;
     this.lastSave = save;
     let supported = false;
     try { supported = Boolean(this.root && this.supportsScene()); } catch { supported = false; }
     if (!supported) return this.useFallback('css-unsupported');
-    const model = buildTitleSceneModelV79(save, { prefersReducedMotion: Boolean(this.motionQuery?.matches) });
+    const model = buildTitleSceneModelV79(save, {
+      prefersReducedMotion: Boolean(this.motionQuery?.matches), placementId: this.placementId
+    });
     // An offline visit must not permanently replace the art with procedural layers.
-    if (retryMissingAssets || this.signature !== `${model.presetId}:${model.mode}` || this.root.dataset.status !== 'ready') {
+    if (retryMissingAssets || this.signature !== `${model.presetId}:${model.mode}:${model.placementId}:${model.shipId}:${model.shipName}` || this.root.dataset.status !== 'ready') {
       try { this.render(model); } catch { return this.useFallback('render-error'); }
     }
     else {
@@ -157,6 +194,10 @@ export class TitleSceneControllerV79 {
     }
     return this.getSnapshot();
   }
+
+  preservePlacementOnNextShowV87() { this.preservePlacementOnce = true; }
+
+  clearPlacementPreservationV87() { this.preservePlacementOnce = false; }
 
   hide() {
     this.active = false;
@@ -180,6 +221,9 @@ export class TitleSceneControllerV79 {
       active: this.active,
       status: this.reason,
       presetId: this.model?.presetId || null,
+      placementId: this.model?.placementId || null,
+      shipId: this.model?.shipId || null,
+      shipName: this.model?.shipName || null,
       mode: this.model?.mode || null,
       layerCount: layers.length,
       roles: Object.freeze([...new Set(layers.map((layer) => layer.role))]),

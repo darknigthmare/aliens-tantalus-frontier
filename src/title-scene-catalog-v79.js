@@ -1,6 +1,23 @@
-import { TITLE_SCENE_READY_ASSETS_V79, TITLE_SCENE_READY_BY_ID_V79 } from './title-scene-assets-v79.js';
+import { TITLE_SCENE_READY_ASSETS_V79, TITLE_SCENE_READY_BY_ID_V79, TITLE_RETIRED_ASSET_IDS_V87 } from './title-scene-assets-v79.js';
 
 export const TITLE_SCENE_SCHEMA_V79 = 79;
+
+// Presentation-only placements, chosen once per entrance without changing the save.
+export const TITLE_SCENE_PLACEMENTS_V87 = Object.freeze(['starboard', 'center', 'port']);
+
+export function chooseTitleScenePlacementV87(previous = null, random = Math.random) {
+  const choices = TITLE_SCENE_PLACEMENTS_V87.filter(id => id !== previous);
+  let sample = 0;
+  try { sample = Number(random()); } catch { sample = 0; }
+  if (!Number.isFinite(sample)) sample = 0;
+  return choices[Math.floor(Math.max(0, Math.min(1 - Number.EPSILON, sample)) * choices.length)];
+}
+
+// The existing PNG paints an arc, not a fullscreen scanner. Read-only bright-ridge
+// fit: 1600x900 source, centre (761,467), radius 320px. No image pixels are changed.
+export const TITLE_PLANET_EFFECT_REGISTRATION_V87 = Object.freeze({
+  'vfx-03-scan-sweep': Object.freeze({ x: 441, y: 147, size: 640, sourceWidth: 1600, sourceHeight: 900 })
+});
 
 export const TITLE_SCENE_MODES_V79 = Object.freeze({
   FULL: 'full',
@@ -32,11 +49,33 @@ const ALL_MODES = Object.freeze(Object.values(TITLE_SCENE_MODES_V79));
 const FULL_AND_REDUCED = Object.freeze([TITLE_SCENE_MODES_V79.FULL, TITLE_SCENE_MODES_V79.REDUCED]);
 const FULL_ONLY = Object.freeze([TITLE_SCENE_MODES_V79.FULL]);
 
+export const TITLE_RETIRED_SHIP_ASSET_IDS_V87 = TITLE_RETIRED_ASSET_IDS_V87;
+export const TITLE_SCENE_SHIP_MODELS_V87 = Object.freeze(Object.values(TITLE_SCENE_READY_BY_ID_V79)
+  .filter(asset => asset.role === 'orbitals' && asset.status === 'ready' && !TITLE_RETIRED_SHIP_ASSET_IDS_V87.includes(asset.id)));
+const DEFAULT_SHIP_BY_PRESET_V87 = Object.freeze({
+  'frontier-night': 'orbitals-uss-sulaco-reference-v87',
+  'storm-terminator': 'orbitals-uscss-nostromo-reference-v87',
+  'ember-quarantine': 'orbitals-narcissus-reference-v87'
+});
+const defaultShipIdV87 = presetId => DEFAULT_SHIP_BY_PRESET_V87[presetId];
+export function getTitleSceneShipOptionsV87() {
+  return Object.freeze(TITLE_SCENE_SHIP_MODELS_V87.map(asset => Object.freeze({
+    shipId: asset.shipId, assetId: asset.id, label: asset.label,
+    canRename: Boolean(asset.namePlate), defaultShipName: asset.defaultShipName || null
+  })));
+}
+export function sanitizeTitleShipNameV87(value) {
+  if (typeof value !== 'string') return null;
+  const name = value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ').toUpperCase();
+  return /^[A-Z0-9][A-Z0-9 .'-]{0,23}$/.test(name) ? name : null;
+}
+
 const proceduralLayer = (id, role, depth, modes = ALL_MODES) => Object.freeze({
   id,
   role,
   depth,
   renderer: 'procedural',
+  planetAnchor: ['planet', 'atmosphere', 'clouds'].includes(role) || id === 'sensor-sweep',
   modes
 });
 
@@ -73,7 +112,10 @@ const bitmapLayer = (id, depth, modes = ALL_MODES) => {
     runtimeId: asset.runtimeId,
     assetSrc: asset.src,
     sha256: asset.sha256,
-    sphereRegistration: asset.sphereRegistration,
+    sphereRegistration: asset.sphereRegistration || TITLE_PLANET_EFFECT_REGISTRATION_V87[id],
+    hullRegistration: asset.hullRegistration,
+    namePlate: asset.namePlate,
+    planetAnchor: ['planet', 'atmosphere', 'clouds'].includes(asset.role) || id === 'vfx-03-scan-sweep',
     fallbackLayerId: asset.layerHint
   });
 };
@@ -83,27 +125,26 @@ const SHARED_BITMAP_LAYERS_V79 = Object.freeze([
   bitmapLayer('stars-01-distant-field', 9),
   bitmapLayer('stars-02-near-sparks', 13, FULL_AND_REDUCED),
   bitmapLayer('nebula-01-cold-ion', 19),
-  bitmapLayer('orbitals-01-tantalus-transport', 47),
-  bitmapLayer('traffic-01-utility-shuttle', 59, FULL_ONLY),
   bitmapLayer('debris-01-wreck-field', 67),
   bitmapLayer('foreground-01-port-hull', 83),
   bitmapLayer('foreground-02-starboard-truss', 84, FULL_AND_REDUCED),
-  // Engine exhaust belongs behind the transport, not above the near foreground.
-  bitmapLayer('vfx-01-ion-exhaust', 46, FULL_ONLY),
-  bitmapLayer('vfx-03-scan-sweep', 93, FULL_AND_REDUCED)
+  bitmapLayer('vfx-03-scan-sweep', 36, FULL_AND_REDUCED)
 ]);
 
 const PRESET_BITMAP_LAYERS_V79 = Object.freeze({
   'frontier-night': Object.freeze([
+    bitmapLayer(defaultShipIdV87('frontier-night'), 47),
     bitmapLayer('planet-01-acheron', 31),
     bitmapLayer('atmosphere-02-acheron-storm', 35),
     bitmapLayer('clouds-01-acheron-storm', 39)
   ]),
   'storm-terminator': Object.freeze([
+    bitmapLayer(defaultShipIdV87('storm-terminator'), 47),
     bitmapLayer('planet-02-ceto-basin', 31),
     bitmapLayer('atmosphere-01-ceto-cyan', 35)
   ]),
   'ember-quarantine': Object.freeze([
+    bitmapLayer(defaultShipIdV87('ember-quarantine'), 47),
     bitmapLayer('planet-03-mire-9', 31),
     bitmapLayer('atmosphere-03-mire-9', 35)
   ])
@@ -136,7 +177,10 @@ export function sanitizeTitleScenePresentationV79(value = {}) {
   const presetId = TITLE_SCENE_PRESETS_V79.some((entry) => entry.id === source.presetId) ? source.presetId : null;
   const motionMode = ALL_MODES.includes(source.motionMode) ? source.motionMode : null;
   const seed = typeof source.seed === 'string' && source.seed.trim() ? source.seed.trim().slice(0, 80) : null;
-  return { presetId, motionMode, seed };
+  const ship = TITLE_SCENE_SHIP_MODELS_V87.find(asset => asset.shipId === source.shipId || asset.id === source.shipId);
+  const shipId = ship?.shipId || null;
+  const shipName = sanitizeTitleShipNameV87(source.shipName);
+  return { presetId, motionMode, seed, ...(shipId ? { shipId } : {}), ...(shipName ? { shipName } : {}) };
 }
 
 const safeExplicitPreset = (save) => {
@@ -192,7 +236,7 @@ export function validateTitleSceneCatalogV79(presets = TITLE_SCENE_PRESETS_V79) 
       roles.add(layer?.role);
       if (!TITLE_SCENE_LAYER_ROLES_V79.includes(layer?.role)) failures.push(`${entry.id}:${layer?.id}:role`);
       if (!['procedural', 'image'].includes(layer?.renderer)) failures.push(`${entry.id}:${layer?.id}:renderer`);
-      if (layer?.renderer === 'image' && !/^\/assets\/openai\/ui\/title\/v79\/[a-z0-9/_-]+\.(?:png|webp)$/u.test(layer.assetSrc || '')) {
+      if (layer?.renderer === 'image' && !/^\/assets\/openai\/ui\/title\/v(?:79|87)\/[a-z0-9/_-]+\.(?:png|webp)$/u.test(layer.assetSrc || '')) {
         failures.push(`${entry.id}:${layer?.id}:asset`);
       }
       if (layer?.renderer === 'image' && (!layer.runtimeId || !layer.assetId || !layer.fallbackLayerId || !layer.sha256)) {
@@ -208,22 +252,36 @@ export function validateTitleSceneCatalogV79(presets = TITLE_SCENE_PRESETS_V79) 
 }
 
 export function getTitleSceneRuntimeAssetsV79(presets = TITLE_SCENE_PRESETS_V79) {
-  return Object.freeze([...new Set(presets.flatMap((entry) => entry.layers)
+  return Object.freeze([...new Set([...presets.flatMap((entry) => entry.layers)
     .filter((layer) => layer.renderer === 'image' && typeof layer.assetSrc === 'string')
-    .map((layer) => layer.assetSrc))]);
+    .map((layer) => layer.assetSrc), ...TITLE_SCENE_SHIP_MODELS_V87.map(asset => asset.src)])]);
 }
 
 export function buildTitleSceneModelV79(save = {}, options = {}) {
   const preset = resolveTitleScenePresetV79(save);
   const mode = resolveTitleSceneModeV79(save, options);
+  const context = sanitizeTitleScenePresentationV79(save?.presentation?.titleScene);
+  const shipAssetId = TITLE_SCENE_SHIP_MODELS_V87.find(asset => asset.shipId === context.shipId)?.id || defaultShipIdV87(preset.id);
+  const shipAsset = TITLE_SCENE_READY_BY_ID_V79[shipAssetId];
+  const shipId = shipAsset.shipId;
+  const shipName = shipAsset.namePlate ? context.shipName || shipAsset.defaultShipName || 'TANTALUS' : null;
+  // One real ship, never an extra silhouette/utility craft or a generic exhaust.
+  const excluded = new Set(['high-orbit', 'patrol-traffic', 'near-traffic', 'ion-pulse']);
+  const layers = preset.layers.filter(layer => layer.modes.includes(mode) && !excluded.has(layer.id))
+    .map(layer => layer.renderer === 'image' && layer.role === 'orbitals'
+      ? Object.freeze({ ...bitmapLayer(shipAssetId, layer.depth), shipName }) : layer);
   return Object.freeze({
     schema: TITLE_SCENE_SCHEMA_V79,
+    placementId: TITLE_SCENE_PLACEMENTS_V87.includes(options.placementId) ? options.placementId : 'starboard',
     presetId: preset.id,
     presetLabel: preset.label,
+    shipId,
+    shipAssetId,
+    shipName,
     tone: preset.tone,
     seed: titleSceneSeedV79(save),
     mode,
-    layers: Object.freeze(preset.layers.filter((layer) => layer.modes.includes(mode))),
+    layers: Object.freeze(layers),
     fallback: TITLE_SCENE_FALLBACK_V79
   });
 }
@@ -231,6 +289,6 @@ export function buildTitleSceneModelV79(save = {}, options = {}) {
 const validation = validateTitleSceneCatalogV79();
 if (!validation.ok) throw new Error(`Catalogue scène titre V79 invalide : ${validation.failures.join(', ')}`);
 const catalogAssets = new Set(getTitleSceneRuntimeAssetsV79());
-if (TITLE_SCENE_READY_ASSETS_V79.some((asset) => !catalogAssets.has(asset.src))) {
+if (TITLE_SCENE_READY_ASSETS_V79.some((asset) => !TITLE_RETIRED_SHIP_ASSET_IDS_V87.includes(asset.id) && !catalogAssets.has(asset.src))) {
   throw new Error('Un asset titre V79 accepté n’est relié à aucun preset runtime.');
 }

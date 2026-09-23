@@ -1,15 +1,38 @@
-const CACHE = 'atf-v86-public-shell-12';
+const CACHE = 'atf-v86-public-shell-13';
+const TITLE_BITMAPS_V87 = [
+  '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
+  '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
+  '/assets/openai/ui/title/v79/stars/stars-02-near-sparks.png',
+  '/assets/openai/ui/title/v79/nebula/nebula-01-cold-ion.png',
+  '/assets/openai/ui/title/v79/planet/planet-01-acheron.png',
+  '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
+  '/assets/openai/ui/title/v79/planet/planet-03-mire-9.png',
+  '/assets/openai/ui/title/v79/atmosphere/atmosphere-01-ceto-cyan.png',
+  '/assets/openai/ui/title/v79/atmosphere/atmosphere-02-acheron-storm.png',
+  '/assets/openai/ui/title/v79/atmosphere/atmosphere-03-mire-9.png',
+  '/assets/openai/ui/title/v79/clouds/clouds-01-acheron-storm.png',
+  '/assets/openai/ui/title/v79/debris/debris-01-wreck-field.png',
+  '/assets/openai/ui/title/v79/foreground/foreground-01-port-hull.png',
+  '/assets/openai/ui/title/v79/foreground/foreground-02-starboard-truss.png',
+  '/assets/openai/ui/title/v79/vfx/vfx-03-scan-sweep.png',
+  '/assets/openai/ui/title/v87/orbitals/uss-sulaco-reference-v87.png',
+  '/assets/openai/ui/title/v87/orbitals/uscss-nostromo-reference-v87.png',
+  '/assets/openai/ui/title/v87/orbitals/narcissus-reference-v87.png',
+  '/assets/openai/ui/title/v87/orbitals/ud4l-cheyenne-reference-v87.png',
+  '/assets/openai/ui/title/v87/orbitals/usm-auriga-reference-v87.png',
+  '/assets/openai/ui/title/v87/orbitals/prometheus-reference-v87.png',
+];
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  ...TITLE_BITMAPS_V87,
+  '/src/bioforge-physical-state-v87.js',
   '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',
   '/assets/openai/ship-animals/v87/mica-atlas-v2.png', '/assets/openai/ship-animals/v87/terrarium-props.png',
   '/src/player-airborne-presentation-v87.js',
   '/src/refuge-personal-state-v87.js', '/src/refuge-controller-v87.js', '/src/refuge-ui-v87.js',
   '/src/refuge-save-v87.js', '/src/refuge-room-v87.js', '/src/refuge-art-v87.js', '/src/refuge-v87.css',
   '/assets/openai/refuge/v87/refuge-props-atlas.png', '/assets/openai/refuge/v87/refuge-hologram-atlas.png',
-  '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
-  '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
   '/src/ship-carrier-presentation-v87.js',
   '/src/ship-port-state-v87.js',
   '/src/ship-port-art-v87.js',
@@ -349,6 +372,7 @@ const SHELL = Object.freeze(CORE.filter((path) => (
     || path.startsWith('/assets/openai/bioforge/v80/')
     || path.startsWith('/assets/openai/ship-animals/v87/')
     || path.startsWith('/assets/openai/refuge/v87/')
+    || TITLE_BITMAPS_V87.includes(path)
     || ['/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
       '/assets/openai/ui/title/v79/planet/planet-02-ceto-basin.png',
       '/assets/openai/hub/layers/habitat-quarters-overhead.png',

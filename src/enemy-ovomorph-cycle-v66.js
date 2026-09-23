@@ -150,6 +150,12 @@ export function releaseOvomorphFacehuggerV66(engine, egg) {
     state.releaseBlocked = true;
     return null;
   }
+  // Optional host capacity guard. A refusal leaves the egg at its real release
+  // cursor and does not consume its one-time child marker (campaign has no gate).
+  if (typeof engine.canReleaseOvomorphChildV87 === 'function' && !engine.canReleaseOvomorphChildV87(egg, child)) {
+    state.releaseBlocked = true;
+    return null;
+  }
   child.x = selected;
   child.spawnX = selected;
   child.facing = direction;

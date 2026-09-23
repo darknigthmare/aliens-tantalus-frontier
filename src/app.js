@@ -48,6 +48,7 @@ import { resolveWeaponVisualProfileV63 } from './weapon-visual-runtime-v63.js';
 import { getVehicleDeploymentGateV60 } from './vehicle-deployment-gates-v60.js';
 import { TitleScreenController } from './title-screen-v61.js';
 import { TitleSceneControllerV79 } from './title-scene-v79.js';
+import { getTitleSceneShipOptionsV87, sanitizeTitleScenePresentationV79 } from './title-scene-catalog-v79.js';
 import { getExcelWeaponBridgeV63 } from './excel-content-bridge-v63.js';
 import { ForgeSaveSystemV62 } from './forge-save-v62.js';
 import { CatalogWorkbenchV62 } from './catalog-ui-v62.js';
@@ -330,7 +331,7 @@ function applyRuntimeSettings() {
 }
 
 const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
-  'bioforge-runtime-prepared': 'NIVEAU PRÊT · AUCUNE SESSION CRÉÉE',
+  'bioforge-runtime-prepared': 'NIVEAU LOCAL PRÊT · AUCUNE SESSION CRÉÉE · SANS RÉCOMPENSE CAMPAGNE',
   'bioforge-runtime-ready': 'SESSION ARMÉE · REJOIGNEZ LE DOUBLE SAS',
   'bioforge-airlock-step': 'INTERVERROU PHYSIQUE VALIDÉ · POURSUIVEZ VERS L’IMPRIMANTE',
   'bioforge-physical-transfer-completed': 'ARÈNE SCELLÉE · IMPRESSION AUTORISÉE',
@@ -342,19 +343,68 @@ const BIOFORGE_EVENT_MESSAGES_V80 = Object.freeze({
   'bioforge-purge-started': 'PURGE ATOMIQUE EN COURS',
   'bioforge-return-ready': 'PURGE CONFIRMÉE · RETOUR AU HUB AUTORISÉ',
   'bioforge-invalid-resume-purged': 'REPRISE INVALIDE · PURGE DE SÉCURITÉ EXÉCUTÉE',
-  'bioforge-asset-error': 'ASSET BIOFORGE INDISPONIBLE · SESSION BLOQUÉE'
+  'bioforge-asset-error': 'ASSET BIOFORGE INDISPONIBLE · SESSION BLOQUÉE',
+  'bioforge-printer-waiting': 'IMPRESSION EN ATTENTE · CAPACITÉ ACTIVE OU ÉCLOSION EN COURS',
+  'bioforge-printer-blocked': 'IMPRESSION EN ATTENTE · EMPLACEMENT SÛR OCCUPÉ',
+  'bioforge-persistence-failed': 'SAUVEGARDE REFUSÉE · SIMULATION ARRÊTÉE · AUCUN SUCCÈS CONFIRMÉ',
+  'bioforge-reinforcements-appended': 'RENFORTS AJOUTÉS À LA FILE · CAPACITÉ ACTIVE INCHANGÉE',
+  'bioforge-reinforcements-replayed': 'RENFORTS DÉJÀ ENREGISTRÉS · AUCUN DOUBLON AJOUTÉ',
+  'bioforge-pending-cancelled': 'ATTENTE ANNULÉE · SPÉCIMENS VIVANTS CONSERVÉS'
 });
+
+function renderBioforgeUiV87({ state = saveSystem.data.bioforgeV80, resetDraft = false } = {}) {
+  if (!bioforgeUiV80) return null;
+  const owner = currentOwnerV84();
+  const stamp = JSON.stringify([owner.profile, owner.epoch, owner.timeline]);
+  const ownerChanged = bioforgeUiV80.ownerStampV87 !== stamp;
+  bioforgeUiV80.ownerStampV87 = stamp;
+  return bioforgeUiV80.render(state, {
+    resetDraft: resetDraft || ownerChanged,
+    population: ownsTimelineV84(bioforgeOwnerV84) ? bioforgeRuntimeV80.getBioforgePopulationV87?.() : undefined
+  });
+}
+
+function bioforgeCommandReceiptV87(result) {
+  const reason = bioforgeRuntimeV80.bioforgeLastErrorV80 === 'persistence-failed' ? 'persistence-failed'
+    : result === false ? 'action-refused' : result?.reason;
+  if (result === false || result?.applied === false || result?.started === false || result?.completed === false
+    || reason === 'persistence-failed') {
+    const messages = {
+      'stale-bioforge-owner': 'Le profil ou la partie a changé. Rouvrez BIOFORGE avant de continuer.',
+      'persistence-failed': 'BIOFORGE non sauvegardé : simulation arrêtée. Les données précédemment enregistrées sont conservées.',
+      'composition-exceeds-total': 'Le total de cette session ne peut pas dépasser 48, y compris les entrées annulées.',
+      'duplicate-line-id': 'Cette ligne existe déjà. Rechargez le dossier avant de préparer un nouveau renfort.',
+      'reinforcement-request-conflict': 'Cette demande a déjà été enregistrée avec une autre composition.',
+      'invalid-request-id': 'La demande de renfort est invalide. Rouvrez le dossier.',
+      'unsupported-profile': 'Ce profil ne fait pas partie des onze organismes terrestres validés.',
+      'invalid-line-quantity': 'Chaque ligne doit contenir un nombre entier de 1 à 48 spécimens.',
+      'invalid-max-concurrent': 'Le maximum simultané doit être un entier de 1 à 12.',
+      'no-pending-specimen': 'Aucun spécimen en attente ne correspond à cette demande.',
+      'unknown-line-id': 'Cette ligne ne fait plus partie de la session actuelle.',
+      'combat-inactive': 'Les renforts et annulations sont disponibles pendant l’impression ou le combat.',
+      'purge-required': 'La session reste verrouillée jusqu’à une purge de récupération valide.',
+      'active-count-capacity': 'Impression en attente : le maximum de corps vivants est atteint.',
+      'active-cost-capacity': 'Impression en attente : le budget actif de 12 est atteint.',
+      'no-safe-spawn-position': 'Impression en attente : aucune position sûre n’est libre dans l’arène.'
+    };
+    return { ...(result && typeof result === 'object' ? result : {}), applied: false,
+      reason: reason || 'action-refused', message: messages[reason] || 'BIOFORGE : action refusée. La session reste dans son état vérifié.' };
+  }
+  return result;
+}
 
 function persistBioforgeV80(state) {
   if (!ownsTimelineV84(bioforgeOwnerV84)) return false;
   try {
     saveSystem.commit({ bioforgeV80: clone(state) });
-    bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
-    return true;
   } catch (error) {
     toast(`BIOFORGE non sauvegardé : ${error.message}`);
     return false;
   }
+  // Rendering failure cannot turn a successful storage commit into a false write failure.
+  try { renderBioforgeUiV87(); }
+  catch (error) { toast(`BIOFORGE enregistré ; affichage incomplet : ${error.message}`); }
+  return true;
 }
 
 function handleBioforgeEventV80(event) {
@@ -382,29 +432,52 @@ function prepareBioforgeViewV80() {
     bioforgeRuntimeV80.prepare(state);
     toast(error.message);
   }
-  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
+  renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80, resetDraft: true });
 }
 
 function startBioforgeFromTerminalV80(configuration) {
-  bioforgeOwnerV84 = currentOwnerV84();
-  const result = bioforgeRuntimeV80.start({
+  if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
+    return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
+  const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.start({
     configuration,
     resumeState: saveSystem.data.bioforgeV80,
     seed: 80000 + Number(saveSystem.data.bioforgeV80?.serial || 0) + 1
-  });
-  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
-  byId('bioforge-canvas-v80').focus({ preventScroll: true });
+  }));
+  if (result?.applied !== false) {
+    renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80 });
+    byId('bioforge-canvas-v80').focus({ preventScroll: true });
+  }
   return result;
 }
 
 function purgeBioforgeFromTerminalV80() {
-  const result = bioforgeRuntimeV80.purgeBioforgeV80('operator-emergency-purge');
-  bioforgeUiV80?.render(bioforgeRuntimeV80.bioforgeRootV80);
+  if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
+    return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
+  const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.purgeBioforgeV80('operator-emergency-purge'));
+  if (result?.applied !== false) renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80 });
+  return result;
+}
+
+function reinforceBioforgeFromTerminalV87(configuration, { requestId } = {}) {
+  if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
+    return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
+  const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.reinforceBioforgeV87(configuration, { requestId }));
+  if (result?.applied !== false) renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80 });
+  return result;
+}
+
+function cancelBioforgeFromTerminalV87({ lineId } = {}) {
+  if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84)
+    return bioforgeCommandReceiptV87({ applied: false, reason: 'stale-bioforge-owner' });
+  const result = bioforgeCommandReceiptV87(bioforgeRuntimeV80.cancelBioforgeQueueV87({ lineId }));
+  if (result?.applied !== false) renderBioforgeUiV87({ state: bioforgeRuntimeV80.bioforgeRootV80 });
   return result;
 }
 
 function returnBioforgeToHubV80() {
-  const model = buildBioforgeUiModelV80(bioforgeRuntimeV80.bioforgeRootV80 || saveSystem.data.bioforgeV80);
+  if (!ownsTimelineV84(bioforgeOwnerV84) || activeView !== 'bioforge' || creatorOwnerV84) return false;
+  const model = buildBioforgeUiModelV80(bioforgeRuntimeV80.bioforgeRootV80 || saveSystem.data.bioforgeV80,
+    { population: bioforgeRuntimeV80.getBioforgePopulationV87?.() });
   if (!model.canReturn) {
     toast('BIOFORGE · purge obligatoire avant tout retour au Tantalus.');
     return false;
@@ -420,10 +493,12 @@ function setupBioforgeUiV80() {
     onStart: startBioforgeFromTerminalV80,
     onPurge: purgeBioforgeFromTerminalV80,
     onReturn: returnBioforgeToHubV80,
+    onReinforce: reinforceBioforgeFromTerminalV87,
+    onCancelPending: cancelBioforgeFromTerminalV87,
     onError: (error) => toast(error.message)
   });
   bioforgeRuntimeV80.prepare(saveSystem.data.bioforgeV80);
-  bioforgeUiV80.render(saveSystem.data.bioforgeV80);
+  renderBioforgeUiV87({ resetDraft: true });
 }
 
 function currentEditorProject(kind = null) {
@@ -540,6 +615,7 @@ function chooseNpcDialogueV62(choiceId) {
 
 function showView(name) {
   if (!VIEW_META[name]) return;
+  if (name !== 'settings') titleSceneV79.clearPlacementPreservationV87();
   refugeControllerV87.close();
   shipCompanionControllerV87.close();
   if (saveSystem.data.onboardingV84 && saveSystem.data.onboardingV84.phase !== 'complete' && !['hub', 'settings'].includes(name) && !standaloneContext) {
@@ -627,7 +703,10 @@ const titleScreen = new TitleScreenController({
     return false;
   },
   onForge: () => openForgeContext(),
-  onOptions: () => showView('settings')
+  onOptions: () => {
+    titleSceneV79.preservePlacementOnNextShowV87();
+    showView('settings');
+  }
 });
 
 function currentOwnerV84() { return { profile: saveSystem.profile, epoch: profileEpochV78, timeline: saveSystem.data.createdAt }; }
@@ -1197,6 +1276,19 @@ function renderProfiles() {
   byId('setting-screen-shake').value = saveSystem.data.settings.screenShake ?? 0.7;
   byId('setting-effects').value = saveSystem.data.settings.effects ?? 0.7;
   byId('setting-music').value = saveSystem.data.settings.music ?? 0.45;
+  const titlePresentation = sanitizeTitleScenePresentationV79(saveSystem.data.presentation?.titleScene);
+  const shipOptions = getTitleSceneShipOptionsV87();
+  const shipSelect = byId('setting-title-ship-v87');
+  const shipName = byId('setting-title-ship-name-v87');
+  shipSelect.replaceChildren(...[{ shipId: '', label: 'Selon l’ambiance de la planète' }, ...shipOptions].map((option) => {
+    const element = document.createElement('option');
+    element.value = option.shipId;
+    element.textContent = option.label;
+    return element;
+  }));
+  shipSelect.value = titlePresentation.shipId || '';
+  shipName.value = titlePresentation.shipName || 'TANTALUS';
+  shipName.disabled = Boolean(recovery) || Boolean(titlePresentation.shipId && !shipOptions.find((option) => option.shipId === titlePresentation.shipId)?.canRename);
 }
 
 function renderMissionEquipment() {
@@ -1218,7 +1310,7 @@ function renderAll() {
   renderHubStatus();
   renderEditorStatus();
   renderProfiles();
-  bioforgeUiV80?.render(saveSystem.data.bioforgeV80);
+  renderBioforgeUiV87();
   narrativeArchivesUiV68?.render();
   missionNarrativeArchivesUiV68?.render();
 }
@@ -2582,6 +2674,25 @@ function bind() {
     try { saveSystem.commit({ settings: { ...saveSystem.data.settings, [key]: read(event.target) } }); applyRuntimeSettings(); }
     catch (error) { renderProfiles(); toast(error.message); }
   };
+  const updateTitleShipV87 = () => {
+    try {
+      if (saveSystem.recoveryNeeded) throw new Error('Récupérez le profil avant de modifier la présentation.');
+      const previous = saveSystem.data.presentation?.titleScene || {};
+      const candidate = {
+        ...previous,
+        shipId: byId('setting-title-ship-v87').value || undefined,
+        shipName: byId('setting-title-ship-name-v87').value.trim() || 'TANTALUS'
+      };
+      const presentation = sanitizeTitleScenePresentationV79(candidate);
+      if (!presentation.shipName) throw new Error('Nom de coque invalide : utilisez au plus 24 caractères alphanumériques, espaces ou tirets.');
+      saveSystem.commit({ presentation: { ...saveSystem.data.presentation, titleScene: presentation } });
+      renderProfiles();
+      byId('setting-title-ship-status-v87').textContent = 'Présentation sauvegardée pour ce profil. Aucun vaisseau de campagne modifié.';
+    } catch (error) { renderProfiles(); toast(error.message); }
+  };
+  byId('setting-title-ship-v87').onchange = updateTitleShipV87;
+  byId('setting-title-ship-name-v87').onchange = updateTitleShipV87;
+  byId('setting-title-preview-v87').onclick = () => showTitleScreen();
   byId('save-export').onclick = () => {
     try {
       const recovery = saveSystem.recoveryNeeded;
@@ -2612,7 +2723,8 @@ function bind() {
     audio.dispose();
     hubEngine.stop(!saveSystem.recoveryNeeded);
     engine.stop();
-    bioforgeRuntimeV80.stop({ reason: 'page-unload' });
+    // A reload suspends the laboratory; only an explicit purge may destroy its population.
+    bioforgeRuntimeV80.stop({ purge: false, reason: 'page-unload' });
     if (standaloneContext || saveSystem.recoveryNeeded) return;
     persistMissionResumeState();
     saveSystem.data.statistics.playSeconds += Math.floor((Date.now() - sessionStart) / 1000);
