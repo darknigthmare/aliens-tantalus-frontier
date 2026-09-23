@@ -7,6 +7,9 @@ import {
   advanceBioforgeSessionV80,
   beginBioforgePurgeV80,
   completeBioforgePurgeV80,
+  appendBioforgeReinforcementsV87,
+  cancelBioforgePendingV87,
+  recordBioforgeKillV80,
   sanitizeBioforgeRuntimeV81,
   startBioforgeSessionV80
 } from '../src/bioforge-session-v80.js';
@@ -104,4 +107,42 @@ test('une session active forgée ou corrompue force une purge de récupération 
     purgeRequired: true,
     reason: 'corrupt-active-session'
   });
+});
+
+test('MIX V87 traverse migrateSave avec morts, vivants, annulations et renforts sans modifier la campagne', () => {
+  const save = createDefaultSave();
+  const strategic = structuredClone({ galaxy: save.galaxy, strategy: save.strategy, crew: save.crew,
+    player: save.player, statistics: save.statistics, hub: save.hub });
+  let receipt = startBioforgeSessionV80(save.bioforgeV80, {
+    composition: [{ lineId: 'first', profileId: 'enemy-002-facehugger', quantity: 3 },
+      { lineId: 'second', profileId: 'enemy-006-runner', quantity: 3 }], maxConcurrent: 2
+  }, { now: 100 });
+  for (const now of [101, 102, 103, 104]) receipt = advanceBioforgeSessionV80(receipt.state, { now });
+  receipt = recordBioforgeKillV80(receipt.state, receipt.session.aliveIds[0], { now: 105 });
+  receipt = cancelBioforgePendingV87(receipt.state, { lineId: 'first', now: 106 });
+  receipt = appendBioforgeReinforcementsV87(receipt.state, {
+    composition: [{ lineId: 'reinforcement', profileId: 'enemy-005-warrior', quantity: 2 }]
+  }, { requestId: 'persisted-request', now: 107 });
+  assert.equal(receipt.applied, true);
+  save.bioforgeV80 = receipt.state;
+  for (let cycle = 0; cycle < 10; cycle++) {
+    const restored = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
+    assert.deepEqual(restored.bioforgeV80, receipt.state);
+    assert.deepEqual({ galaxy: restored.galaxy, strategy: restored.strategy, crew: restored.crew,
+      player: restored.player, statistics: restored.statistics, hub: restored.hub }, strategic);
+    save.bioforgeV80 = restored.bioforgeV80;
+  }
+});
+
+test('MIX V87 preserve future payload and physical corruption marker through actual game migration', () => {
+  const save = createDefaultSave();
+  save.bioforgeV80.configuration.mixSchemaV87 = 99;
+  save.bioforgeV80.configuration.future = { rows: ['do-not-delete'] };
+  save.bioforgeV80.runtimeV81 = { player: { x: 900, y: 528, facing: 1 }, physicalV87: { schema: 99 } };
+  const before = structuredClone(save.bioforgeV80);
+  const restored = migrateSave(JSON.parse(JSON.stringify(save)), save.profile);
+  assert.deepEqual(restored.bioforgeV80.unsupportedV87, before);
+  assert.equal(restored.bioforgeV80.recovery.purgeRequired, true);
+  assert.equal(restored.bioforgeV80.runtimeV81.physicalInvalidV87, true);
+  assert.deepEqual(migrateSave(JSON.parse(JSON.stringify(restored)), save.profile).bioforgeV80, restored.bioforgeV80);
 });

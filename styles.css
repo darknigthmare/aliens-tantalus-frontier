@@ -8,6 +8,41 @@
   --v51-danger: #dc6b63;
 }
 
+/* Settings use the shell's available width, not the viewport: the desktop rail
+   remains visible on landscape phones. Native control minima must not force
+   three min-content tracks outside the panel or hide controls behind clipping. */
+.settings-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+
+.settings-grid > *,
+.settings-grid label,
+.settings-grid input,
+.settings-grid select,
+.settings-grid .button {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.settings-grid label {
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+
+.settings-grid select,
+.settings-grid input:not([type='checkbox']):not([type='file']) {
+  width: 100%;
+}
+
+.settings-grid .profile-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.settings-grid .button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 .resource-strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));

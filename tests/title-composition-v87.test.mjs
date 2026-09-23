@@ -33,26 +33,32 @@ test('real title controller maps each source limb to one normalized square witho
       const r = layer.sphereRegistration;
       const left = parseFloat(element.style.values.get('--title-art-left-v87'));
       const top = parseFloat(element.style.values.get('--title-art-top-v87'));
-      const size = parseFloat(element.style.values.get('--title-art-size-v87'));
-      assert.ok(Math.abs(left + (r.x + r.size / 2) / r.sourceSize * size - 50) < 1e-10);
-      assert.ok(Math.abs(top + (r.y + r.size / 2) / r.sourceSize * size - 50) < 1e-10);
-      assert.ok(Math.abs(r.size / r.sourceSize * size - 100) < 1e-10);
+      const width = parseFloat(element.style.values.get('--title-art-width-v87'));
+      const height = parseFloat(element.style.values.get('--title-art-height-v87'));
+      const sourceWidth = r.sourceWidth || r.sourceSize;
+      const sourceHeight = r.sourceHeight || r.sourceSize;
+      assert.ok(Math.abs(left + (r.x + r.size / 2) / sourceWidth * width - 50) < 1e-10);
+      assert.ok(Math.abs(top + (r.y + r.size / 2) / sourceHeight * height - 50) < 1e-10);
+      assert.ok(Math.abs(r.size / sourceWidth * width - 100) < 1e-10);
+      assert.ok(Math.abs(r.size / sourceHeight * height - 100) < 1e-10);
+      assert.ok(Math.abs(width / height - sourceWidth / sourceHeight) < 1e-10);
     }
   }
 });
 
-test('transport and shuttle stay distinct authored actors and exhaust stays behind its owner', () => {
-  for (const presetId of ['frontier-night', 'storm-terminator', 'ember-quarantine']) {
+test('each preset carries one dedicated ship and no extra craft or generic exhaust', () => {
+  const defaults = { 'frontier-night': 'uss-sulaco', 'storm-terminator': 'uscss-nostromo', 'ember-quarantine': 'narcissus' };
+  for (const [presetId, shipId] of Object.entries(defaults)) {
     const model = buildTitleSceneModelV79({ presentation: { titleScene: { presetId } } });
     const images = model.layers.filter(l => l.renderer === 'image');
-    const ship = images.filter(l => l.assetId === 'orbitals-01-tantalus-transport');
-    const shuttle = images.filter(l => l.assetId === 'traffic-01-utility-shuttle');
+    const ship = images.filter(l => l.role === 'orbitals');
     assert.equal(ship.length, 1);
-    assert.equal(shuttle.length, 1);
-    assert.notEqual(ship[0].assetSrc, shuttle[0].assetSrc);
-    const exhaust = images.find(l => l.assetId === 'vfx-01-ion-exhaust');
-    assert.ok(exhaust.depth < ship[0].depth);
-    assert.ok(exhaust.depth > images.find(l => l.role === 'planet').depth);
+    assert.equal(ship[0].assetId, `orbitals-${shipId}-reference-v87`);
+    assert.equal(model.shipId, shipId);
+    assert.equal(model.layers.some(l => l.role === 'traffic'), false);
+    assert.equal(model.layers.some(l => ['high-orbit', 'ion-pulse'].includes(l.id)), false);
+    assert.equal(images.some(l => l.assetId === 'vfx-01-ion-exhaust'), false);
+    assert.ok(ship[0].depth > images.find(l => l.role === 'planet').depth);
   }
 });
 
@@ -62,9 +68,9 @@ test('CSS locks projected spherical art and prevents 3D culling and fullscreen s
   assert.match(css, /backface-visibility:\s*visible/);
   assert.doesNotMatch(css, /rotate\(360deg\)/);
   assert.match(css, /@keyframes title-cloud-light-v87\s*\{\s*from \{ opacity: \.12; \}\s*to \{ opacity: \.18; \}/);
-  assert.match(css, /data-asset-id='traffic-01-utility-shuttle'\]\s*\{[^}]*width: 16vw;/);
+  assert.doesNotMatch(css, /data-asset-id='traffic-01-utility-shuttle'/);
   assert.match(css, /data-asset-id='debris-01-wreck-field'\]\s*\{[^}]*width: 54vw;/);
-  assert.match(css, /data-asset-id='vfx-01-ion-exhaust'\] > img\s*\{[^}]*transform: translate\(68%, -4%\) scale\(1\.08\);/);
+  assert.doesNotMatch(css, /data-asset-id='vfx-01-ion-exhaust'/);
   assert.match(css, /@media \(max-width: 760px\)\s*\{\s*\.title-scene-v79\[data-preset\]/);
-  assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)\s*\{\s*\.title-scene-v79\[data-preset\]/);
+  assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)[\s\S]*?\.title-scene-v79\[data-preset\]/);
 });

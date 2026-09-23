@@ -16,7 +16,7 @@ import {
   sanitizeTitleScenePresentationV79,
   validateTitleSceneCatalogV79
 } from '../src/title-scene-catalog-v79.js';
-import { TITLE_SCENE_READY_ASSETS_V79 } from '../src/title-scene-assets-v79.js';
+import { TITLE_SCENE_READY_ASSETS_V79, TITLE_SHIP_ASSETS_V87, TITLE_RETIRED_ASSET_IDS_V87 } from '../src/title-scene-assets-v79.js';
 import { TitleSceneControllerV79, supportsTitleSceneV79 } from '../src/title-scene-v79.js';
 import { createDefaultSave, migrateSave } from '../src/save.js';
 
@@ -50,7 +50,7 @@ test('le catalogue V79 couvre chaque rôle avec les 18 bitmaps acceptés et leur
   assert.equal(new Set(TITLE_SCENE_READY_ASSETS_V79.map((asset) => asset.runtimeId)).size, 18);
   assert.deepEqual(
     [...getTitleSceneRuntimeAssetsV79()].sort(),
-    TITLE_SCENE_READY_ASSETS_V79.map((asset) => asset.src).sort()
+    [...TITLE_SCENE_READY_ASSETS_V79.filter(asset => !TITLE_RETIRED_ASSET_IDS_V87.includes(asset.id)), ...TITLE_SHIP_ASSETS_V87].map((asset) => asset.src).sort()
   );
   for (const asset of TITLE_SCENE_READY_ASSETS_V79) {
     assert.equal(asset.status, 'ready');
@@ -97,9 +97,11 @@ test('les modes full, reduced et static respectent qualité, sauvegarde et préf
   const full = buildTitleSceneModelV79(baseSave());
   const reduced = buildTitleSceneModelV79(baseSave({ settings: { quality: 'low', reducedMotion: false } }));
   const frozen = buildTitleSceneModelV79(baseSave(), { prefersReducedMotion: true });
-  assert.ok(full.layers.length > reduced.layers.length);
+  assert.equal(full.layers.length, reduced.layers.length, 'un seul vaisseau, sans réintroduire le trafic réservé au mode full');
+  assert.equal(full.mode, 'full');
+  assert.equal(reduced.mode, 'reduced');
   assert.ok(reduced.layers.length > frozen.layers.length);
-  assert.deepEqual([...new Set(frozen.layers.map((layer) => layer.role))].sort(), [...TITLE_SCENE_LAYER_ROLES_V79].sort());
+  assert.deepEqual([...new Set(frozen.layers.map((layer) => layer.role))].sort(), TITLE_SCENE_LAYER_ROLES_V79.filter(role => role !== 'traffic').sort());
 });
 
 test('le choix de scène explicite survit à la migration et les valeurs inconnues sont rejetées', () => {
@@ -163,7 +165,7 @@ test('le contrôleur compose les couches, réagit au reduced motion et suspend l
   let snapshot = scene.show(baseSave());
   assert.equal(snapshot.status, 'ready');
   assert.equal(snapshot.mode, 'full');
-  assert.equal(snapshot.roles.length, TITLE_SCENE_LAYER_ROLES_V79.length);
+  assert.deepEqual([...snapshot.roles].sort(), TITLE_SCENE_LAYER_ROLES_V79.filter(role => role !== 'traffic').sort());
   assert.equal(surface.root.children.length, snapshot.layerCount);
   assert.equal(surface.fallback.hidden, true);
   assert.equal(surface.title.dataset.titleSceneV79, 'ready');
@@ -323,7 +325,7 @@ test('le shell V80 conserve la scène titre V79, son build et son responsive dé
   for (const path of ['/title-scene-v79.css', '/src/title-scene-v79.js', '/src/title-scene-catalog-v79.js', '/src/title-scene-assets-v79.js']) assert.ok(worker.includes(`'${path}'`));
   assert.match(html, /ALIENS: TANTALUS FRONTIER v86/u);
   assert.match(html, /VERSION 86\.0\.0/u);
-  assert.match(worker, /atf-v86-physical-placeables-shell-7/u);
+  assert.match(worker, /atf-v86-physical-placeables-shell-8/u);
   assert.match(css, /@media \(max-width: 760px\)/u);
   assert.match(css, /@media \(max-height: 620px\) and \(orientation: landscape\)/u);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/u);

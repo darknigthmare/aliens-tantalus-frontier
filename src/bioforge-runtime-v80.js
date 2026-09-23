@@ -1,9 +1,14 @@
 import { GameEngine } from './game-production-runtime.js';
+import { ENEMIES } from './content-core-v50.js';
+import { getOvomorphChildIdV66, isOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
+import { captureBioforgePhysicalV87, restoreBioforgePlayerPhysicalV87, restoreBioforgeEnemyPhysicalV87 } from './bioforge-physical-state-v87.js';
+import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
 import { resolveCombatAimV83, readKeyboardCombatAimV83, resolveCombatMuzzleV83, buildCombatShotVectorsV83 } from './combat-aim-v83.js';
 import { collectProjectileCollisionsV83 } from './projectile-collision-v83.js';
 import { BIOFORGE_ASSETS_V80 } from './bioforge-assets-v80.js';
 import {
   BIOFORGE_MAX_CONCURRENT_V80,
+  BIOFORGE_MAX_BUDGET_V80,
   BIOFORGE_PHASES_V80,
   advanceBioforgeSessionV80,
   beginBioforgePurgeV80,
@@ -14,7 +19,10 @@ import {
   recordBioforgeKillV80,
   sanitizeBioforgeV80,
   startBioforgeSessionV80,
-  validateBioforgeSelectionV80
+  validateBioforgeCompositionV87,
+  getBioforgeCapacityV87,
+  appendBioforgeReinforcementsV87,
+  cancelBioforgePendingV87
 } from './bioforge-session-v80.js';
 import {
   BIOFORGE_LEVEL_SCHEMA_V80,
@@ -78,7 +86,8 @@ function editorSelection(editorProject) {
   for (const source of sources) {
     if (!isRecord(source)) continue;
     const profileId = source.profileId || source.selectedProfileId || source.enemyProfileId;
-    if (profileId != null || source.quantity != null) return { profileId, quantity: source.quantity };
+    if (source.composition != null) return { composition: source.composition, maxConcurrent: source.maxConcurrent };
+    if (profileId != null || source.quantity != null) return { profileId, quantity: source.quantity, maxConcurrent: source.maxConcurrent };
   }
   return null;
 }
@@ -91,7 +100,7 @@ export function resolveBioforgeConfigurationV80(options = {}) {
       : null;
   const candidate = explicit || editorSelection(options.editorProject);
   if (!candidate) return Object.freeze({ ok: false, reason: 'configuration-required', selection: null, source: null });
-  const selection = validateBioforgeSelectionV80(candidate);
+  const selection = validateBioforgeCompositionV87(candidate);
   return Object.freeze({
     ok: selection.ok,
     reason: selection.ok ? null : selection.errors[0] || 'invalid-selection',
@@ -170,6 +179,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgeTimersV80 = new Map();
       this.bioforgeTransferStageV80 = 0;
       this.bioforgePreparedV80 = false;
+      this.bioforgeBlockedV87 = null;
+      this.bioforgeSnapshotClockV87 = 0;
     }
 
     emitBioforgeV80(event) {
@@ -178,19 +189,63 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     persistBioforgeV80(event = null) {
+      // AI helpers finish their one-shot impact cursor after calling damage.
+      // Persist only after the complete mutation/tick, never halfway through it.
+      if (this.bioforgeUpdatingV87 || this.bioforgeMutationDepthV87 > 0) {
+        this.bioforgePendingPersistV87 = event || { type: 'bioforge-physical-checkpoint' };
+        return null;
+      }
       this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
       const state = clone(this.bioforgeRootV80);
-      this.onBioforgePersistV80(state, Object.freeze({ event: event ? clone(event) : null, snapshot: this.getBioforgeSnapshotV80() }));
+      try {
+        if (this.onBioforgePersistV80(state, Object.freeze({ event: event ? clone(event) : null, snapshot: this.getBioforgeSnapshotV80() })) === false) throw new Error('persistence-rejected');
+        this.bioforgeDurableStateV87 = clone(state);
+      } catch (error) {
+        // A failed local commit must not leave an uncommitted reinforcement or
+        // ammunition transfer in the visible session. No second write is tried.
+        if (this.bioforgeDurableStateV87) {
+          this.bioforgeRootV80 = clone(this.bioforgeDurableStateV87);
+          const saved = this.bioforgeRootV80.runtimeV81;
+          this.bioforgePhaseClockV80 = saved?.phaseClock || 0;
+          this.bioforgeTransferStageV80 = saved?.transferStage || 0;
+          this.rebuildBioforgeSpecimensV80(saved?.physicalV87);
+          if (saved?.physicalV87) restoreBioforgePlayerPhysicalV87(this.player, saved.physicalV87.player);
+          this.bullets = [];
+          this.hostileProjectiles = [];
+          this.syncBioforgePhaseV80();
+        }
+        this.bioforgeLastErrorV80 = 'persistence-failed';
+        this.clearGameplayInput?.();
+        this.running = false;
+        this.paused = true;
+        this.emitBioforgeV80({ type: 'bioforge-persistence-failed', reason: String(error?.message || error) });
+      }
       return state;
+    }
+
+    withBioforgeMutationV87(action) {
+      this.bioforgeMutationDepthV87 = Number(this.bioforgeMutationDepthV87 || 0) + 1;
+      try { return action(); }
+      finally {
+        this.bioforgeMutationDepthV87 -= 1;
+        if (!this.bioforgeMutationDepthV87 && !this.bioforgeUpdatingV87 && this.bioforgePendingPersistV87) {
+          const event = this.bioforgePendingPersistV87;
+          this.bioforgePendingPersistV87 = null;
+          this.persistBioforgeV80(event);
+        }
+      }
     }
 
     captureBioforgeRuntimeStateV81() {
       if (!this.player) return null;
+      const physicalV87 = captureBioforgePhysicalV87(this);
       return {
         schema: 81,
         seed: this.bioforgeSeedV80,
         phaseClock: this.bioforgePhaseClockV80,
         transferStage: this.bioforgeTransferStageV80,
+        physicalV87,
+        ...(physicalV87 ? {} : { physicalInvalidV87: true }),
         player: {
           x: this.player.x,
           y: this.player.y,
@@ -202,8 +257,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     applyBioforgeOperationV80(operation, { persist = true } = {}) {
       if (!operation) return null;
       this.bioforgeRootV80 = operation.state;
-      if (operation.event) this.emitBioforgeV80(operation.event);
       if (persist && operation.applied) this.persistBioforgeV80(operation.event);
+      if (this.bioforgeLastErrorV80 === 'persistence-failed') return { ...operation, applied: false, reason: 'persistence-failed', state: this.bioforgeRootV80, session: this.bioforgeRootV80.activeSession };
+      if (operation.event) this.emitBioforgeV80(operation.event);
       return operation;
     }
 
@@ -234,6 +290,24 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.ladders = level.ladders.map((entry) => ({ ...entry }));
       this.doors = level.doors.map((entry) => ({ ...entry, progress: 0 }));
       this.walls = [];
+      // Closed physical boundaries are seen by the same attack/path helpers as
+      // campaign enemies. Confinement is not just a post-movement correction.
+      const arena = level.arenaBounds;
+      this.walls = [
+        { x: arena.x - 24, y: arena.y, w: 24, h: arena.h },
+        { x: arena.x + arena.w, y: arena.y, w: 24, h: arena.h }
+      ];
+      this.missionLevelRuntime = null;
+      this.missionLevelBounds = { width: level.world.width, height: level.world.height };
+      this.inventory = { medkits: 3, salvage: 0, securityKeys: 0 };
+      this.accessibilityRuntime ||= { screenShake: 0, subtitles: false, reducedMotion: false };
+      this.cameraShake = 0;
+      this.captions = [];
+      this.squadActors = [];
+      this.weaponRuntime = null;
+      this.weapon = null;
+      // Explicit laboratory loan; never committed back to campaign equipment.
+      this.player.ammoReserve = 600;
       this.lifts = [];
       this.covers = [];
       this.vents = [];
@@ -257,6 +331,12 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.bioforgeReferencesV80 = {};
       this.bioforgeTimersV80 = new Map();
       this.bioforgeTransferStageV80 = 0;
+      this.bioforgeBlockedV87 = null;
+      this.bioforgeSnapshotClockV87 = 0;
+      this.bioforgeLastErrorV80 = null;
+      this.bioforgePendingPersistV87 = null;
+      this.bioforgeDurableStateV87 = null;
+      this.bioforgeMutationDepthV87 = 0;
       this.queueJump = 0;
       this.animationTime = 0;
       if (!this.bioforgePlayerAnimationV81) this.bioforgePlayerAnimationV81 = new SpriteAnimationController();
@@ -359,15 +439,19 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         if (!configuration.ok) throw new TypeError(`BIOFORGE V80: ${configuration.reason}`);
         const started = this.applyBioforgeOperationV80(startBioforgeSessionV80(
           this.bioforgeRootV80,
-          { profileId: configuration.selection.profileId, quantity: configuration.selection.quantity },
+          { composition: configuration.selection.composition, maxConcurrent: configuration.selection.maxConcurrent },
           { now: this.bioforgeNowV80() }
         ));
-        if (!started?.applied) throw new Error(`BIOFORGE V80: ${started?.reason || 'session-start-failed'}`);
+        if (!started?.applied) {
+          if (started?.reason === 'persistence-failed') return { ...this.getBioforgeSnapshotV80(), started: false, reason: started.reason };
+          throw new Error(`BIOFORGE V80: ${started?.reason || 'session-start-failed'}`);
+        }
         this.bioforgeSourceV80 = configuration.source;
         session = this.bioforgeRootV80.activeSession;
       } else {
         this.bioforgeSourceV80 = 'resume';
-        if (configuration.ok && (configuration.selection.profileId !== session.profileId || configuration.selection.quantity !== session.quantity)) {
+        if (configuration.ok && (JSON.stringify(configuration.selection.composition) !== JSON.stringify(session.composition)
+          || configuration.selection.maxConcurrent !== session.maxConcurrent)) {
           throw new TypeError('BIOFORGE V80: resume-configuration-mismatch');
         }
       }
@@ -377,6 +461,11 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         return { ...this.getBioforgeSnapshotV80(), started: false, purge: result };
       }
       const runtimeV81 = this.bioforgeRootV80.runtimeV81 || embeddedRuntimeV81;
+      this.bioforgePhaseClockV80 = Math.max(0, Number(options.phaseClock ?? runtimeV81?.phaseClock ?? this.bioforgePhaseClockV80) || 0);
+      if (runtimeV81?.physicalInvalidV87) {
+        const purge = this.purgeBioforgeV80('corrupt-physical-resume');
+        return { ...this.getBioforgeSnapshotV80(), started: false, purge };
+      }
       this.bioforgeTransferStageV80 = clamp(Number(resumeEnvelope?.transferStage ?? runtimeV81?.transferStage) || 0, 0, 3);
       if (session.phase !== 'configuration') {
         Object.assign(this.player, this.bioforgeLevelV80.arenaPlayerSpawn, { vx: 0, vy: 0, grounded: true });
@@ -387,7 +476,14 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         this.player.y = clamp(restoredPlayer.y, this.bioforgeLevelV80.world.ceilingY, this.bioforgeLevelV80.world.floorY - this.player.h);
         this.player.facing = normalizePlayerFacingV81(restoredPlayer.facing);
       }
-      this.rebuildBioforgeSpecimensV80();
+      if (!this.rebuildBioforgeSpecimensV80(runtimeV81?.physicalV87)) {
+        const purge = this.purgeBioforgeV80('invalid-specimen-resume');
+        return { ...this.getBioforgeSnapshotV80(), started: false, purge };
+      }
+      if (runtimeV81?.physicalV87 && !restoreBioforgePlayerPhysicalV87(this.player, runtimeV81.physicalV87.player)) {
+        const purge = this.purgeBioforgeV80('invalid-player-resume');
+        return { ...this.getBioforgeSnapshotV80(), started: false, purge };
+      }
       this.syncBioforgePhaseV80();
       if (session.phase === 'purging') {
         const result = this.purgeBioforgeV80(session.purge?.reason || 'resume-purge');
@@ -395,8 +491,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       }
       if (session.phase === 'return') return { ...this.getBioforgeSnapshotV80(), started: false };
 
+      // The resume envelope already represents a successful external commit.
+      this.bioforgeDurableStateV87 = clone(this.bioforgeRootV80);
+      // Input intentions are not physics: a saved pre-jump buffer must not
+      // manufacture a new jump when returning from the terminal.
+      this.player.jumpBuffer = 0;
+
       this.running = true;
       this.paused = false;
+      if (!this.player.alive && ['printing', 'combat', 'sealing'].includes(session.phase)) this.finishBioforgeV80('failed', 'operator-down');
       this.last = globalThis.performance?.now?.() || 0;
       const generation = this.loopGeneration = (this.loopGeneration || 0) + 1;
       if (this.bioforgeAutoLoopV80 && typeof globalThis.requestAnimationFrame === 'function') {
@@ -484,72 +587,169 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       return Boolean(operation?.applied);
     }
 
-    rebuildBioforgeSpecimensV80() {
+    rebuildBioforgeSpecimensV80(physical = null) {
       this.enemies = [];
       const session = this.bioforgeRootV80.activeSession;
-      if (!session) return 0;
+      if (!session) return true;
+      const records = new Map(asList(physical?.enemies).map((entry) => [entry.id, entry]));
+      const queueById = new Map(session.queue.map((entry) => [entry.id, entry]));
       for (const entry of session.queue) {
-        if (!session.aliveIds.includes(entry.id)) continue;
-        this.spawnBioforgeSpecimenV80(entry.id, entry.index, { restored: true });
+        if (entry.printedAt == null || ['purged', 'cancelled'].includes(entry.status)) continue;
+        const saved = records.get(entry.id);
+        if (physical && (!saved || saved.profileId !== entry.profileId || saved.parentId !== null
+          || saved.alive !== session.aliveIds.includes(entry.id))) return false;
+        if (!physical && !session.aliveIds.includes(entry.id)) continue;
+        const enemy = this.spawnBioforgeSpecimenV80(entry.id, entry.index, { restored: true, physical: saved });
+        if (!enemy) return false;
       }
-      return this.enemies.length;
+      for (const saved of records.values()) {
+        const own = queueById.get(saved.id);
+        if (own) {
+          if (own.printedAt == null || own.profileId !== saved.profileId || own.status === 'cancelled') return false;
+          continue;
+        }
+        const parent = queueById.get(saved.parentId);
+        const parentState = records.get(parent?.id);
+        if (!parent || parent.profileId !== 'enemy-001-ovomorph' || parent.printedAt == null
+          || saved.id !== getOvomorphChildIdV66(parent) || saved.profileId !== 'enemy-002-facehugger'
+          || !parentState?.ovomorphCycleV66?.spawned) return false;
+        // Dead child tombstones prevent a spent egg from releasing it again.
+        const child = this.createBioforgeActorV87({ ...parent, id: saved.id, profileId: saved.profileId });
+        if (!child || saved.maxHealth !== child.maxHealth || !restoreBioforgeEnemyPhysicalV87(child, saved)
+          || !isInsideBioforgeArenaV80(child, this.bioforgeLevelV80)) return false;
+        child.ovomorphParentIdV66 = parent.id;
+        this.enemies.push(child);
+        if (child.alive) this.bioforgeReferencesV80[child.id] = child;
+      }
+      if (physical) this.inventory = { salvage: 0, securityKeys: 0, ...clone(physical.inventory) };
+      const population = this.getBioforgePopulationV87();
+      return population.activeCount <= session.maxConcurrent && population.activeCost <= BIOFORGE_MAX_BUDGET_V80;
     }
 
-    spawnBioforgeSpecimenV80(specimenId, index, { restored = false } = {}) {
+    createBioforgeActorV87(entry) {
+      const roster = getBioforgeRosterEntryV80(entry?.profileId);
+      const source = ENEMIES.find((enemy) => enemy.id === entry?.profileId);
+      if (!roster || !source) return null;
+      const actor = this.createEnemy(source, entry.index || 0, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false });
+      return Object.assign(actor, {
+        id: entry.id, profileId: roster.profileId, bioforgeCostV87: roster.cost,
+        bioforgeSessionIdV87: this.bioforgeRootV80.activeSession?.id,
+        isBoss: false, isRoyal: false, keyCarrier: false, reward: 0, dropsDisabledV80: true
+      });
+    }
+
+    spawnBioforgeSpecimenV80(specimenId, index, { restored = false, entry: candidate = null, commit = true, physical = null } = {}) {
       if (this.enemies.some((enemy) => enemy.id === specimenId)) return null;
       const session = this.bioforgeRootV80.activeSession;
-      const roster = getBioforgeRosterEntryV80(session?.profileId);
-      if (!session || !roster || index < 0 || index >= session.quantity || index >= BIOFORGE_MAX_SPAWNS_V80) return null;
-      const source = {
-        id: roster.profileId,
-        name: roster.profileId,
-        biology: 'xenomorph',
-        health: 34 + roster.cost * 24,
-        damage: 5 + roster.cost * 3,
-        speed: 0.85 + roster.cost * 0.14,
-        caste: 'bioforge-specimen'
-      };
-      const provisional = typeof this.createEnemy === 'function'
-        ? this.createEnemy(source, index, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false })
-        : { ...source, w: 52, h: 82, health: source.health, maxHealth: source.health };
-      const placed = placeBioforgeSpecimenV80({
-        ...provisional,
-        id: specimenId,
-        profileId: roster.profileId,
-        sourceFacing: roster.sourceFacing,
-        spriteKey: roster.spriteKey,
-        clipSet: roster.clipSet,
-        visualAssetPath: roster.path,
-        isBoss: false,
-        isRoyal: false,
-        keyCarrier: false,
-        reward: 0,
-        dropsDisabledV80: true,
-        alive: true,
-        restored
-      }, index, this.bioforgeLevelV80, this.player);
+      const entry = candidate || session?.queue.find((item) => item.id === specimenId && item.index === index);
+      if (!session || !entry || index < 0) return null;
+      const provisional = this.createBioforgeActorV87(entry);
+      if (!provisional) return null;
+      let placed = null;
+      if (restored && physical) {
+        if (physical.maxHealth !== provisional.maxHealth || !restoreBioforgeEnemyPhysicalV87(provisional, physical) || !isInsideBioforgeArenaV80(provisional, this.bioforgeLevelV80)) return null;
+        placed = provisional;
+      } else {
+        for (let offset = 0; offset < BIOFORGE_MAX_SPAWNS_V80; offset += 1) {
+          const slot = (index + offset) % BIOFORGE_MAX_SPAWNS_V80;
+          const test = placeBioforgeSpecimenV80(provisional, slot, this.bioforgeLevelV80, this.player);
+          if (!test || test.w !== provisional.w || test.h !== provisional.h) continue;
+          const support = this.platforms.find((surface) => surface.y === test.groundY && test.x + test.w / 2 >= surface.x && test.x + test.w / 2 <= surface.x + surface.w);
+          if (!support || support.w < test.w) continue;
+          test.x = Math.max(support.x, Math.min(support.x + support.w - test.w, test.x));
+          if (!isInsideBioforgeArenaV80(test, this.bioforgeLevelV80) || this.walls.some((wall) => overlap(test, wall))) continue;
+          // A legacy save has no physical snapshot. Preserve its valid authored
+          // placement without imposing the new-print comfort margin retroactively.
+          // Actual body overlap is still refused, including against the operator.
+          const clearance = restored ? test : { x: test.x - 16, y: test.y - 4, w: test.w + 32, h: test.h + 8 };
+          if (this.enemies.some((enemy) => enemy.alive && overlap(clearance, enemy)) || overlap(clearance, this.player)) continue;
+          placed = test;
+          break;
+        }
+      }
       if (!placed) return null;
-      placed.attackClock = 0.5 + this.random() * 0.55;
-      this.enemies.push(placed);
-      this.bioforgeReferencesV80[specimenId] = placed;
-      this.emitBioforgeV80({ type: 'bioforge-specimen-spawned', specimenId, profileId: roster.profileId, index, restored, facing: placed.facing });
+      placed.restored = restored;
+      if (!physical) { placed.attackClock = 0.5 + this.random() * 0.55; placed.spawnX = placed.x; }
+      if (commit) this.commitBioforgeActorV87(placed, index, restored);
       return placed;
     }
 
+    commitBioforgeActorV87(actor, index, restored = false) {
+      this.enemies.push(actor);
+      if (actor.alive) this.bioforgeReferencesV80[actor.id] = actor;
+      this.emitBioforgeV80({ type: 'bioforge-specimen-spawned', specimenId: actor.id, profileId: actor.profileId, index, restored, facing: actor.facing });
+    }
+
+    getBioforgePopulationV87() {
+      const alive = this.enemies.filter((enemy) => enemy.alive);
+      return { activeCount: alive.length, activeCost: alive.reduce((sum, enemy) => sum + (getBioforgeRosterEntryV80(enemy.profileId)?.cost || BIOFORGE_MAX_BUDGET_V80), 0), reservedCount: 0, reservedCost: 0 };
+    }
+
+    canReleaseOvomorphChildV87(egg, child) {
+      const population = this.getBioforgePopulationV87();
+      const session = this.bioforgeRootV80.activeSession;
+      if (!session || !['printing', 'combat'].includes(session.phase)
+        || population.activeCount + 1 > session.maxConcurrent || population.activeCost + 1 > BIOFORGE_MAX_BUDGET_V80
+        || !isInsideBioforgeArenaV80(child, this.bioforgeLevelV80)) return false;
+      if (!this.platforms.some(surface => Math.abs(surface.y - child.y - child.h) < .01
+        && child.x >= surface.x && child.x + child.w <= surface.x + surface.w)) return false;
+      Object.assign(child, { profileId: 'enemy-002-facehugger', bioforgeCostV87: 1, bioforgeSessionIdV87: session.id, reward: 0, dropsDisabledV80: true });
+      return true;
+    }
+
     advanceBioforgePhaseV80() {
-      const operation = this.applyBioforgeOperationV80(advanceBioforgeSessionV80(this.bioforgeRootV80, { now: this.bioforgeNowV80() }));
-      if (operation?.event?.type === 'bioforge-specimen-printed') {
-        this.spawnBioforgeSpecimenV80(operation.event.specimenId, operation.event.index);
+      if (this.bioforgeLastErrorV80 === 'persistence-failed') return this.refuseBioforgeAfterPersistenceFailureV87();
+      this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
+      const operation = advanceBioforgeSessionV80(this.bioforgeRootV80, { now: this.bioforgeNowV80(), population: this.getBioforgePopulationV87() });
+      if (!operation.applied && /capacity/.test(operation.reason || '')) {
+        if (this.bioforgeBlockedV87 !== operation.reason) this.emitBioforgeV80({ type: 'bioforge-printer-waiting', reason: operation.reason });
+        this.bioforgeBlockedV87 = operation.reason;
       }
-      this.bioforgePhaseClockV80 = 0;
+      if (operation?.event?.type === 'bioforge-specimen-printed') {
+        const entry = operation.session.queue.find((item) => item.id === operation.event.specimenId);
+        const actor = this.spawnBioforgeSpecimenV80(entry.id, entry.index, { entry, commit: false });
+        if (!actor) {
+          if (this.bioforgeBlockedV87 !== entry.id) this.emitBioforgeV80({ type: 'bioforge-printer-blocked', specimenId: entry.id, reason: 'no-safe-spawn-position' });
+          this.bioforgeBlockedV87 = entry.id;
+          return { applied: false, reason: 'no-safe-spawn-position', state: this.bioforgeRootV80, session: this.bioforgeRootV80.activeSession };
+        }
+        this.bioforgeRootV80 = operation.state;
+        this.commitBioforgeActorV87(actor, entry.index);
+      }
+      if (operation.applied) { this.bioforgePhaseClockV80 = 0; this.bioforgeBlockedV87 = null; }
+      const applied = this.applyBioforgeOperationV80(operation);
+      this.syncBioforgePhaseV80();
+      return applied;
+    }
+
+    reinforceBioforgeV87(configuration, { requestId } = {}) {
+      if (this.bioforgeLastErrorV80 === 'persistence-failed') return this.refuseBioforgeAfterPersistenceFailureV87();
+      this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
+      const operation = this.applyBioforgeOperationV80(appendBioforgeReinforcementsV87(this.bioforgeRootV80, configuration, { requestId, now: this.bioforgeNowV80() }));
       this.syncBioforgePhaseV80();
       return operation;
     }
 
+    cancelBioforgeQueueV87({ lineId } = {}) {
+      if (this.bioforgeLastErrorV80 === 'persistence-failed') return this.refuseBioforgeAfterPersistenceFailureV87();
+      this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
+      const operation = this.applyBioforgeOperationV80(cancelBioforgePendingV87(this.bioforgeRootV80, { lineId, now: this.bioforgeNowV80() }));
+      this.syncBioforgePhaseV80();
+      return operation;
+    }
+
+    refuseBioforgeAfterPersistenceFailureV87() {
+      return { applied: false, reason: 'persistence-failed', state: this.bioforgeRootV80, session: this.bioforgeRootV80.activeSession };
+    }
+
     update(delta) {
+      if (this.isBioforgeFormFocusedV87()) this.clearGameplayInput?.();
       this.gamepadInputV77?.poll();
       if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65) return;
       const dt = clamp(delta, 0, MAX_DELTA);
+      if (!dt) return;
+      this.bioforgeUpdatingV87 = true;
+      try {
       this.animationTime += dt;
       this.mission.elapsed += dt;
       this.bioforgePhaseClockV80 += dt;
@@ -559,9 +759,37 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const phase = this.bioforgeRootV80.activeSession?.phase;
       if (phase === 'sealing' && this.bioforgePhaseClockV80 >= BIOFORGE_SEAL_SECONDS_V80) this.advanceBioforgePhaseV80();
       else if (phase === 'printing' && this.bioforgePhaseClockV80 >= BIOFORGE_PRINT_INTERVAL_SECONDS_V80) this.advanceBioforgePhaseV80();
-      else if (phase === 'combat') this.updateBioforgeCombatV80(dt);
       else if (phase === 'result' && this.bioforgePhaseClockV80 >= BIOFORGE_RESULT_SECONDS_V80) this.purgeBioforgeV80('session-complete');
+      if (['printing', 'combat'].includes(this.bioforgeRootV80.activeSession?.phase)) this.updateBioforgeCombatV80(dt);
       this.updateBioforgeCameraV80(dt);
+      this.bioforgeSnapshotClockV87 += dt;
+      if (this.bioforgeSnapshotClockV87 >= .5) {
+        this.bioforgeSnapshotClockV87 = 0;
+        this.bioforgePendingPersistV87 ||= { type: 'bioforge-physical-checkpoint' };
+      }
+      } finally {
+        this.bioforgeUpdatingV87 = false;
+        if (this.bioforgePendingPersistV87) {
+          const event = this.bioforgePendingPersistV87;
+          this.bioforgePendingPersistV87 = null;
+          this.persistBioforgeV80(event);
+        }
+      }
+    }
+
+    isBioforgeFormFocusedV87() {
+      return Boolean(globalThis.document?.activeElement?.closest?.('input, textarea, select, [contenteditable="true"], [role="textbox"], [role="slider"]'));
+    }
+
+    canRouteGameplayKey(event) {
+      const allowed = super.canRouteGameplayKey(event);
+      if (!allowed) this.clearGameplayInput?.();
+      return allowed;
+    }
+
+    setHeldGameplayKeyV77(code, active, source = 'keyboard') {
+      if (active && this.isBioforgeFormFocusedV87()) { this.clearGameplayInput?.(); return false; }
+      return super.setHeldGameplayKeyV77(code, active, source);
     }
 
     updateBioforgePlayerV80(delta) {
@@ -598,6 +826,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       actor.y = clamp(actor.y, this.bioforgeLevelV80.world.ceilingY, this.bioforgeLevelV80.world.floorY - actor.h);
       actor.fireClock = Math.max(0, Number(actor.fireClock || 0) - delta);
       actor.actionClock = Math.max(0, Number(actor.actionClock || 0) - delta);
+      actor.v52HurtClock = Math.max(0, Number(actor.v52HurtClock || 0) - delta);
+      if (actor.tacticalReload) this.advancePlayerReloadV77(actor, delta);
       if (this.keys?.has?.('KeyF')) this.fire(actor);
       if (this.bioforgeRootV80.activeSession?.phase === 'configuration'
         && this.bioforgeTransferStageV80 === 3
@@ -611,6 +841,12 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         else if (actor.x < previousX) actor.x = door.x + door.w;
         actor.vx = 0;
       }
+    }
+
+    closedDoorColliders() {
+      // Mission doors derive their collision from a different bitmap scale.
+      // BIOFORGE owns authored 40px bulkheads; never inflate them to 554px.
+      return (this.doors || []).filter(door => !door.open).map(({ id, x, y, w, h }) => ({ id, x, y, w, h }));
     }
 
     resolveBioforgeVerticalV80(actor, previousBottom) {
@@ -627,8 +863,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     fire(actor = this.player) {
-      if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.bioforgeRootV80.activeSession?.phase !== 'combat'
-        || !actor?.alive || Number(actor.fireClock || 0) > 0 || Number(actor.ammo || 0) <= 0) return false;
+      if (!this.running || this.paused || this.enemyAtlasLoadingPausedV65 || this.isBioforgeFormFocusedV87()
+        || !['printing', 'combat'].includes(this.bioforgeRootV80.activeSession?.phase)
+        || actor !== this.player || !actor?.alive || actor.reloading || Number(actor.reloadClock || 0) > 0
+        || Number(actor.fireClock || 0) > 0 || Number(actor.ammo || 0) <= 0) return false;
       actor.fireClock = 0.13;
       actor.actionClock = 0.22;
       actor.ammo -= 1;
@@ -655,6 +893,54 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       });
       this.audio?.shot?.();
       this.emitBioforgeV80({ type: 'bioforge-shot', sessionId: this.bioforgeRootV80.activeSession?.id });
+      this.persistBioforgeV80({ type: 'bioforge-shot-committed' });
+      return this.bioforgeLastErrorV80 !== 'persistence-failed';
+    }
+
+    reload(actor = this.player) {
+      if (actor !== this.player || this.isBioforgeFormFocusedV87()) return false;
+      const applied = super.reload(actor);
+      if (applied) this.persistBioforgeV80({ type: 'bioforge-reload-committed' });
+      return applied && this.bioforgeLastErrorV80 !== 'persistence-failed';
+    }
+
+    useMedkit(actor = this.player) {
+      if (actor !== this.player || this.isBioforgeFormFocusedV87()) return false;
+      const applied = super.useMedkit(actor);
+      if (applied) this.persistBioforgeV80({ type: 'bioforge-medkit-committed' });
+      return applied && this.bioforgeLastErrorV80 !== 'persistence-failed';
+    }
+
+    activateTracker() { return false; }
+
+    applyEnemyDamage(enemy, amount, source = {}) {
+      return this.withBioforgeMutationV87(() => {
+        const damage = super.applyEnemyDamage(enemy, amount, source);
+        if (damage > 0) this.persistBioforgeV80({ type: 'bioforge-enemy-damaged', specimenId: enemy.id });
+        return damage;
+      });
+    }
+
+    damagePlayer(actor, amount, options = {}) {
+      if (actor !== this.player) return 0;
+      return this.withBioforgeMutationV87(() => {
+        const damage = super.damagePlayer(actor, amount, options);
+        if (damage > 0) this.persistBioforgeV80({ type: 'bioforge-player-damaged' });
+        return damage;
+      });
+    }
+
+    defeatEnemy(enemy, owner = this.player) {
+      return this.killBioforgeSpecimenV80(enemy?.id, 'combat', owner);
+    }
+
+    downPlayer(actor, source) {
+      if (actor !== this.player || !actor.alive) return false;
+      cancelTacticalReloadV77(actor, 'incapacitated');
+      Object.assign(actor, { health: 0, alive: false, downed: true, bleedOut: 0, vx: 0, vy: 0 });
+      this.clearGameplayInput?.();
+      this.emitBioforgeV80({ type: 'bioforge-operator-down', source });
+      this.finishBioforgeV80('failed', 'operator-down');
       return true;
     }
 
@@ -676,33 +962,32 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         if (impact) {
           bullet.hit = true;
           if (impact.kind === 'enemy') {
-            impact.target.health -= bullet.damage;
-            if (impact.target.health <= 0) this.killBioforgeSpecimenV80(impact.target.id, 'combat');
+            this.applyEnemyDamage(impact.target, bullet.damage, { owner: bullet.owner, kind: 'bullet', x: impact.x, y: impact.y });
           }
         }
       }
-      for (const enemy of this.enemies) {
+      // Iterate the frame's population: a newly released child starts its own
+      // AI on the next tick, never receives an extra creation-frame attack.
+      for (const enemy of [...this.enemies]) {
         if (!enemy.alive) continue;
-        const distance = center(this.player).x - center(enemy).x;
-        enemy.facing = distance < 0 ? -1 : 1;
-        enemy.vx = enemy.facing * Math.min(112, Number(enemy.speed) || 82);
-        enemy.x += enemy.vx * delta;
-        confineBioforgeSpecimenV80(enemy, this.bioforgeLevelV80);
-        enemy.attackClock = Math.max(0, Number(enemy.attackClock || 0) - delta);
-        if (overlap(enemy, this.player) && enemy.attackClock <= 0) {
-          enemy.attackClock = 0.9;
-          const damage = Math.max(1, Number(enemy.damage) || 8);
-          const absorbed = Math.min(Number(this.player.armor || 0), damage * 0.5);
-          this.player.armor -= absorbed;
-          this.player.health -= damage - absorbed;
-          if (this.player.health <= 0) {
-            this.player.health = 0;
-            this.player.alive = false;
-            this.finishBioforgeV80('failed', 'operator-down');
-            return;
-          }
+        const previousX = enemy.x;
+        const support = this.platforms.find(surface => Math.abs(surface.y - enemy.groundY) < .01
+          && enemy.x + enemy.w / 2 >= surface.x && enemy.x + enemy.w / 2 <= surface.x + surface.w);
+        enemy.v52HurtClock = Math.max(0, Number(enemy.v52HurtClock || 0) - delta);
+        super.updateEnemy(enemy, delta);
+        // This laboratory has no inter-floor navigation contract yet. Preserve
+        // the authored support instead of allowing a walker to float over a gap.
+        if (support && !isOvomorphCycleV66(enemy)) {
+          const containedX = clamp(enemy.x, support.x, support.x + support.w - enemy.w);
+          if (containedX !== enemy.x) { enemy.x = containedX; enemy.vx = delta > 0 ? (containedX - previousX) / delta : 0; }
         }
+        confineBioforgeSpecimenV80(enemy, this.bioforgeLevelV80);
+        if (!this.player.alive) break;
       }
+      if (this.player.alive) super.updateHostileProjectiles(delta);
+      this.hostileProjectiles = this.hostileProjectiles.filter((entry) => isInsideBioforgeArenaV80(entry, this.bioforgeLevelV80));
+      for (const particle of this.particles) { particle.life -= delta; particle.x += Number(particle.vx || 0) * delta; particle.y += Number(particle.vy || 0) * delta; }
+      this.particles = this.particles.filter((particle) => particle.life > 0).slice(-256);
       this.bullets = this.bullets.filter((bullet) => !bullet.hit && bullet.life > 0
         && bullet.x >= bounds.x && bullet.x + bullet.w <= bounds.x + bounds.w
         && bullet.y >= bounds.y && bullet.y + bullet.h <= bounds.y + bounds.h);
@@ -711,33 +996,47 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       }
     }
 
-    killBioforgeSpecimenV80(specimenId, reason = 'qa') {
+    killBioforgeSpecimenV80(specimenId, reason = 'qa', owner = this.player) {
       const enemy = this.enemies.find((candidate) => candidate.id === specimenId && candidate.alive);
       if (!enemy) return false;
-      const operation = this.applyBioforgeOperationV80(recordBioforgeKillV80(this.bioforgeRootV80, specimenId, { now: this.bioforgeNowV80() }));
-      if (!operation?.applied) return false;
+      const child = Boolean(enemy.ovomorphParentIdV66);
+      const operation = child ? null : recordBioforgeKillV80(this.bioforgeRootV80, specimenId, { now: this.bioforgeNowV80() });
+      if (!child && !operation?.applied) return false;
       enemy.health = 0;
       enemy.alive = false;
       enemy.vx = 0;
       enemy.vy = 0;
+      enemy.attacking = false;
+      enemy.pendingMelee = false;
+      enemy.pendingMeleeTargetId = null;
+      enemy.facehuggerAttackV65 = null;
+      enemy.batchAttackV66 = null;
+      enemy.deathClock = 2.8;
+      if (isOvomorphCycleV66(enemy)) {
+        enemy.ovomorphCycleV66 = { ...(enemy.ovomorphCycleV66 || { spawned: false, childId: getOvomorphChildIdV66(enemy) }), phase: 'destroyed', elapsed: 0, releaseBlocked: false };
+      }
+      if (owner === this.player) owner.kills = Number(owner.kills || 0) + 1;
       delete this.bioforgeReferencesV80[specimenId];
+      if (operation) this.applyBioforgeOperationV80(operation, { persist: false });
       this.emitBioforgeV80({ type: 'bioforge-specimen-neutralized', specimenId, reason });
-      return true;
+      this.persistBioforgeV80({ type: 'bioforge-specimen-neutralized', specimenId, descendant: child });
+      return this.bioforgeLastErrorV80 !== 'persistence-failed';
     }
 
     finishBioforgeV80(outcome, reason = null, score = null) {
       const session = this.bioforgeRootV80.activeSession;
       const computedScore = score == null ? session?.killedIds?.length * 100 : score;
-      const operation = this.applyBioforgeOperationV80(finishBioforgeSessionV80(
+      const operation = finishBioforgeSessionV80(
         this.bioforgeRootV80,
         { outcome, reason, score: computedScore },
-        { now: this.bioforgeNowV80() }
-      ));
+        { now: this.bioforgeNowV80(), population: this.getBioforgePopulationV87() }
+      );
       if (operation?.applied) {
         this.bioforgePhaseClockV80 = 0;
-        this.syncBioforgePhaseV80();
       }
-      return operation;
+      const applied = this.applyBioforgeOperationV80(operation);
+      this.syncBioforgePhaseV80();
+      return applied;
     }
 
     clearBioforgeRuntimeReferencesV80() {
@@ -806,12 +1105,20 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       const normalized = typeof options === 'boolean' ? { purge: options } : isRecord(options) ? options : {};
       const phase = this.bioforgeRootV80.activeSession?.phase;
       if (normalized.purge !== false && phase && phase !== 'return') return this.purgeBioforgeV80(normalized.reason || 'runtime-stop');
+      if (normalized.purge === false && phase && phase !== 'return' && this.bioforgeLastErrorV80 !== 'persistence-failed') this.persistBioforgeV80({ type: 'bioforge-suspended' });
       this.stopBioforgeEngineOnlyV80();
       return true;
     }
 
+    togglePause() {
+      if (this.bioforgeLastErrorV80 === 'persistence-failed') return false;
+      const result = super.togglePause();
+      if (this.bioforgeRootV80?.activeSession) this.persistBioforgeV80({ type: 'bioforge-pause-changed', paused: this.paused });
+      return result;
+    }
+
     interact(actor = this.player) {
-      if (!actor || !this.running) return false;
+      if (actor !== this.player || !actor?.alive || !this.running || this.paused || this.isBioforgeFormFocusedV87()) return false;
       if (this.bioforgeRootV80.activeSession?.phase === 'configuration') {
         const actorCenter = center(actor);
         const controlDoor = this.doors.find(({ id }) => id === 'control-seal');
@@ -894,6 +1201,11 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         printed: session?.printedCount || 0,
         kills: session?.killedIds?.length || 0,
         alive: this.enemies.filter((enemy) => enemy.alive).length,
+        composition: Object.freeze(asList(session?.composition).map((line) => Object.freeze({ ...line }))),
+        population: Object.freeze(this.getBioforgePopulationV87()),
+        capacity: Object.freeze(getBioforgeCapacityV87(session, { population: this.getBioforgePopulationV87() })),
+        printerBlocked: this.bioforgeBlockedV87,
+        lastError: this.bioforgeLastErrorV80,
         source: this.bioforgeSourceV80,
         transferStage: this.bioforgeTransferStageV80,
         world: Object.freeze({ ...this.bioforgeLevelV80.world }),
@@ -1121,7 +1433,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       ctx.fillText(`BIOFORGE · ${String(snapshot.phase).toUpperCase()}`, 34, 40);
       ctx.fillStyle = '#ccd9cc';
       ctx.font = '12px monospace';
-      ctx.fillText(`${snapshot.profileId || 'AUCUN PROFIL'} · ${snapshot.printed}/${snapshot.quantity} IMPRIMÉS · ${snapshot.kills} NEUTRALISÉS`, 34, 64);
+      const profileCount = new Set(asList(snapshot.composition).map((line) => line.profileId)).size;
+      const profileLabel = snapshot.profileId || (profileCount > 0 ? `MIXTE (${profileCount} PROFILS)` : 'AUCUN PROFIL');
+      ctx.fillText(`${profileLabel} · ${snapshot.printed}/${snapshot.quantity} IMPRIMÉS · ${snapshot.kills} NEUTRALISÉS`, 34, 64);
       if (snapshot.phase === 'configuration') {
         const instruction = [
           'REJOINDRE LE SAS A · E POUR OUVRIR',

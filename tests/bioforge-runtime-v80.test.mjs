@@ -177,11 +177,12 @@ test('la configuration vient explicitement du terminal ou du projet éditeur et 
   const fromEditor = resolveBioforgeConfigurationV80({ editorProject: { kind: 'bioforge', bioforge: { selectedProfileId: 'enemy-003-chestburster', quantity: 4 } } });
   assert.equal(fromEditor.ok, true);
   assert.equal(fromEditor.source, 'editor-project');
-  assert.equal(fromEditor.selection.quantity, 4);
+  assert.equal(fromEditor.selection.totalQuantity, 4);
+  assert.equal(fromEditor.selection.composition[0].quantity, 4);
 
   const { engine } = runtime();
   assert.throws(() => engine.start({ autoLoop: false }), /configuration-required/);
-  assert.throws(() => engine.start({ configuration: { profileId: 'enemy-002-facehugger', quantity: BIOFORGE_MAX_CONCURRENT_V80 + 1 } }), /quantity-exceeds/);
+  assert.throws(() => engine.start({ configuration: { profileId: 'enemy-002-facehugger', quantity: 49 } }), /invalid-line-quantity/);
 });
 
 test('prepare dessine immédiatement le vrai niveau sans créer de session et permet ensuite une reprise préparée', () => {
@@ -228,6 +229,8 @@ test('l impression est séquentielle et produit exactement les douze spécimens 
   const { engine } = runtime();
   startConfigured(engine, 12);
   physicallyEnterArena(engine);
+  // Leave the authored printer slot its physical clearance from the operator.
+  engine.player.x = 1320;
   printBatch(engine, 12);
 
   assert.equal(engine.enemies.length, 12);

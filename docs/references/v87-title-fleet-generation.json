@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "date": "2026-09-20",
+  "provider": "OpenAI integrated imagegen",
+  "apiFallbackUsed": false,
+  "literalOneToOneCertified": false,
+  "referencePolicy": "Photographs and final-film images inspected, then included as visual inputs; not text-only guesses.",
+  "assets": [
+    {
+      "shipId": "uss-sulaco",
+      "receipt": "exec-b6b102c9-8191-49ac-9d0a-4b5df0647690.png",
+      "file": "assets/openai/ui/title/v87/orbitals/uss-sulaco-reference-v87.png",
+      "references": ["https://www.starshipmodeler.com/tech/othr_ref.htm", "https://www.starshipmodeler.com/tech/SULACO_-_50.JPG"],
+      "numLastImagesToInclude": 1,
+      "prompt": "Use case: identity-preserve / background-extraction. Asset type: transparent game title spacecraft hull with a dynamically replaceable nameplate. Input image 1 is the genuine USS SULACO filming miniature side-profile from Aliens (1986). Reproduce this EXACT ship, keeping full side silhouette, lengths and proportions, spacing of forward projecting prongs pointing RIGHT, blocky long hull, belly appendages and guns, small dorsal railgun, narrow rear neck and broad circular rear engine housing at LEFT. Remove photo room/person/stand, restore readable cool grey-blue film-miniature illumination and crisp engineering surface details. IMPORTANT deliberate variation: the black word SULACO on the lower right rectangular hull panel must be ABSENT. That specific panel must be blank matching grey-blue painted metal, leaving room for runtime lettering. No letters or logos anywhere. All other design remains faithful to the actual miniature, not a reinterpretation. Exactly ONE spacecraft on a genuine transparent RGBA background, no space/planet/exhaust/floor/shadow, no collage. Landscape canvas close to 3:1, entire ship including antenna/prong tips fully inside with ~6% transparent margin. Same camera as reference, no new wings, no generic spaceship substitutions. The blank lower-right hull panel should be clearly visible and relatively flat for in-game name compositing."
+    },
+    {
+      "shipId": "uscss-nostromo",
+      "receipt": "exec-32902f03-725f-4a54-bd0a-6333e0eff7d1.png",
+      "file": "assets/openai/ui/title/v87/orbitals/uscss-nostromo-reference-v87.png",
+      "references": ["https://propstore.com/the-prop-store-collection/alien/alien-nostromo/", "https://content.propstore.com/collectionimages/nostromo/nos/img3.jpg", "https://content.propstore.com/collectionimages/nostromo/nos/img4.jpg"],
+      "numLastImagesToInclude": 2,
+      "prompt": "Use case: identity-preserve / background-extraction. Asset type: transparent spacecraft game title art. Two input images are photographs of the ACTUAL Nostromo filming miniature from Alien (1979). Image 1 is the TARGET CAMERA and exact geometric reference (front three-quarter, bow to RIGHT, port engine on LEFT). Image 2 is only supporting rear-engine construction reference; do not combine views or create two ships. Produce ONE exact faithful reproduction of the USCSS NOSTROMO miniature with the silhouette, proportions, blocky central bridge with twin rectangular windows, three engine structures, paired quadrangular black duct openings, surface panel and piping detail, and long ventral forward antenna from image 1. Remove the display stand, white photo background and cast floor shadow. Keep every structural detail of the spacecraft itself, no redesign, no nearby approximation, do not confuse the smaller tug with the giant refinery it tows. Match image 1 camera, only the ship isolated on TRUE TRANSPARENT RGBA background, no stars/planet/exhaust, no watermark/labels/additional text. Clean neutral cool-grey film miniature lighting revealing detail with subtle high contrast suitable for dark-space title compositing. Full ship including antenna inside canvas, centered with 7% transparent padding, landscape. No collage, no generic spaceship additions. Strict source identity, same industrial used off-white hull. Retain the photographed landing gear if visible rather than inventing unseen retracted mechanisms."
+    },
+    {
+      "shipId": "narcissus",
+      "receipt": "exec-a7855628-cdc3-4e56-8c2c-63f957c04efd.png",
+      "file": "assets/openai/ui/title/v87/orbitals/narcissus-reference-v87.png",
+      "references": ["https://www.thepropgallery.com/alien-bts-narcissus", "https://www.thepropgallery.com/media/wysiwyg/alien-slide-18.png"],
+      "numLastImagesToInclude": 1,
+      "prompt": "Use case: background-extraction / identity-preserve. Asset type: transparent spacecraft game title cutout. The input image is a genuine behind-the-scenes photograph of the Narcissus lifeboat filming miniature from Alien (1979). Reproduce the EXACT spacecraft in this photograph, same camera and dimensions/proportions, NOT a similar shuttle. Preserve the unmistakable squat diamond/wedge overall body, flat angular nose to LEFT, sloping wedge cockpit on forward top, precisely two large upper rear engine nacelles and two lower rear nacelles to RIGHT, cylindrical ribbed exhaust lips, small thruster nozzles, all side triangular bracing and straight dorsal panel lines. This is NARCISSUS, NOT Nostromo, NOT Sulaco. Preserve the photograph's geometry without redesign, do not add fins or wings. Remove the workshop, mounting stand and any display supports. TRUE transparent RGBA background, no stars, no floor, no cast shadow, no smoke, no exhaust plume, no captions or watermark. One full ship only, same rear three-quarter perspective as photograph, facing left, camera unchanged. Clean subtly weathered off-white hull with neutral cool cinematic illumination and readable engineering detail, landscape canvas, entire ship centered with 7% transparent edge margin. Game compositing asset, not a new scene."
+    },
+    {
+      "shipId": "ud4l-cheyenne",
+      "receipt": "exec-534c62ad-19d6-47b5-ba88-9b2185003f04.png",
+      "file": "assets/openai/ui/title/v87/orbitals/ud4l-cheyenne-reference-v87.png",
+      "references": ["https://harryharris.com/ds.htm", "https://harryharris.com/graphics/ds4.jpg"],
+      "numLastImagesToInclude": 1,
+      "prompt": "Use case: background-extraction / identity-preserve. Asset type: independent transparent game title spacecraft. Image1 is the actual large Cheyenne UD-4L dropship filming miniature from Aliens (1986), photographed head-on with its weapon pylons unfolded. Reproduce the exact photographed dropship from this SAME FRONT CAMERA, faithfully, no redesign. Keep its distinct double broad rectangular engine/intake housings around the narrow central dark tandem cockpit, drooping lower stub pylons, long upper arms spreading out and upward ending in the box missile pods, with exactly the same span, asymmetry from perspective, and silhouette. Preserve the nose gun and visible cylindrical missiles and ribbed military details. Remove only black studio, supports and the small H watermark outside ship. Light the olive drab weathered metal more clearly with neutral film-miniature lighting, muted militaristic olive grey, not golden, not cartoon. ONE entire ship centered with 7% clear margins, TRUE RGBA transparent background, no stars/planet/exhaust/shadows/captions. No added spaceship structures or generic aircraft. Full visual identity of the Cheyenne from the reference, do not change the camera or fold the pylons."
+    },
+    {
+      "shipId": "usm-auriga",
+      "receipt": "exec-d6830acd-7307-4f4e-8d9d-c40e8c939674.png",
+      "file": "assets/openai/ui/title/v87/orbitals/usm-auriga-reference-v87.png",
+      "references": ["https://propstore.com/product/alien-resurrection-1997/lot-9-usm-auriga-model-miniature/", "https://images.propstore.com/246ab5e8876845233b358235bf31dbab.jpg"],
+      "numLastImagesToInclude": 1,
+      "prompt": "Use case: background-extraction / identity-preserve. Input image1 is the original USM AURIGA filming miniature from Alien Resurrection (1997), photographed by Propstore. Produce a faithful game title-screen cutout of THIS EXACT spacecraft, maintaining camera, geometry, proportions and all visual identity, not a generic approximation. Same three-quarter side view, long stepped tapering prow pointing RIGHT and broad stern at LEFT. Precisely preserve the massive dark grey rectangular ribbed middle body with its finger-like armor braces, downward boxy structures, stepped forward superstructure, narrow segmented forward neck and wedge tip, distinctive short dorsal pedestal with wide horizontal cap, irregular stern modules. Remove ONLY the white photo backdrop, black stand and floor shadow. No redesigned parts, no extra fins or ship blend. ONE entire spacecraft on truly transparent RGBA background, cinematic cool neutral lighting on charcoal weathered model surfaces, retain the exact industrial geometry. Landscape canvas, ship centered and fully inside with 7% clear margin; no stars/planet/halo/exhaust/mist, no captions/watermark. Preserve detailed miniature material rendering, not a cartoon."
+    },
+    {
+      "shipId": "prometheus",
+      "receipt": "exec-5abbce7e-7f2d-487c-8e45-5fed29ed2c6d.png",
+      "file": "assets/openai/ui/title/v87/orbitals/prometheus-reference-v87.png",
+      "references": ["https://www.mpcvfx.com/en/filmography/prometheus-ridley-scott/", "https://media.mpcvfx.com/app/uploads/2022/04/new_prom_0005_o_publicity_mpc_selects_v11014test2-1280x601.jpg", "https://media.mpcvfx.com/app/uploads/2022/04/image5-1280x601.png"],
+      "numLastImagesToInclude": 2,
+      "prompt": "Use case: identity-preserve / background-extraction. Asset type: independent transparent spacecraft cutout for a game title screen. These TWO reference images are FINAL FILM VISUALS of the USCSS PROMETHEUS from Ridley Scott's Prometheus (2012), published by MPC, NOT Stargate. Image2 is the TARGET CAMERA and configuration, the ship in flight above the cloud layer. Image1 is supporting material/structure detail only, not the pose. Reproduce the exact film ship seen in image2, same camera, shape and proportions: squat central armored fuselage with small cockpit toward lower LEFT, four large independent rotatable cylindrical engine nacelles carried on short blocky articulated arms around the body; keep actual overlaps/occluded fourth nacelle as reference, do not invent additional pods. Match the distinctive thick nacelle shapes and greebled metallic gray hull. Remove all planet, space, clouds, distant light and background. Neutral cool film lighting that makes the exact photographed structure more readable. Keep only small self-contained blue-white glow INSIDE the visible engine apertures; no external plumes/halos. ONE full ship centered with7% transparent margins on TRUE RGBA transparent background. Do not modernize, no Sulaco elements, no generic spacefighter, no long wings, no concept-art Magellan reinterpretation, no added lettering or watermark. Strict final-film visual fidelity; preserve the reference camera and flight configuration."
+    }
+  ]
+}

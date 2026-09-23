@@ -37,8 +37,34 @@ export const TITLE_SCENE_READY_ASSETS_V79 = Object.freeze([
   ready({ id: 'vfx-03-scan-sweep', runtimeId: 'title.v79.vfx.scan-sweep', role: 'vfx', layerHint: 'sensor-sweep', src: '/assets/openai/ui/title/v79/vfx/vfx-03-scan-sweep.png', sha256: 'c993293be4a3ea73ec527fb1336e8d7765111fdc69e06ce9b128fa367f8cd86f' })
 ]);
 
+// The original V79 receipt inventory stays immutable. V87 ships replace the
+// generic transport at presentation time; they do not rewrite historical QA.
+export const TITLE_RETIRED_ASSET_IDS_V87 = Object.freeze([
+  'orbitals-01-tantalus-transport', 'traffic-01-utility-shuttle', 'vfx-01-ion-exhaust'
+]);
+
+const ship = (id, label, width, height, sha256, extra = {}) => ready({
+  id: `orbitals-${id}-reference-v87`, runtimeId: `title.v87.ship.${id}`,
+  role: 'orbitals', layerHint: 'high-orbit', shipId: id, label,
+  src: `/assets/openai/ui/title/v87/orbitals/${id}-reference-v87.png`, sha256,
+  sourceWidth: width, sourceHeight: height,
+  hullRegistration: Object.freeze({ x: 0, y: 0, width, height, sourceWidth: width, sourceHeight: height }),
+  ...extra
+});
+
+export const TITLE_SHIP_ASSETS_V87 = Object.freeze([
+  ship('uss-sulaco', 'Classe Conestoga · Tantalus / Sulaco', 2170, 725, 'f5cb2d7e9e237721432b7ed27ff03e33819feaa670c5cffc440e1f78e1b59c75', {
+    defaultShipName: 'TANTALUS', namePlate: Object.freeze({ x: 1300, y: 403, width: 275, height: 44 })
+  }),
+  ship('uscss-nostromo', 'USCSS Nostromo', 1507, 1044, 'ebdc19375284a7da72670df26553cf7da1cc30921ff362926505325b102cbc5d'),
+  ship('narcissus', 'Narcissus', 1688, 932, 'e4b291d098a535f066793e838843f6ddc61c04baf7514e26662d319c1a3ea40c'),
+  ship('ud4l-cheyenne', 'UD-4L Cheyenne', 1490, 1055, '1c3734596f13bef0117b4b3b718d09ab61333ccc417746f4c606f272e80b57e5'),
+  ship('usm-auriga', 'USM Auriga', 1709, 920, 'd5997cb025b20f5e30f36b3bf322bd1355787b2455976cbc2e7e7721802b1252'),
+  ship('prometheus', 'USCSS Prometheus', 1829, 860, '6e72cc1c599c08aa082622b8595bd3dc620293fea3a803bf79e6b2606d4f1c8f')
+]);
+
 export const TITLE_SCENE_READY_BY_ID_V79 = Object.freeze(Object.fromEntries(
-  TITLE_SCENE_READY_ASSETS_V79.map((asset) => [asset.id, asset])
+  [...TITLE_SCENE_READY_ASSETS_V79, ...TITLE_SHIP_ASSETS_V87].map((asset) => [asset.id, asset])
 ));
 
 export const titleSceneAssetsForWorldV79 = (worldId) => TITLE_SCENE_READY_ASSETS_V79.filter(

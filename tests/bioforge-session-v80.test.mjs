@@ -139,6 +139,9 @@ test('la création et la configuration sont autonomes et ne mutent pas la source
   assert.equal(root.schema, 80);
   assert.equal(root.activeSession, null);
   assert.deepEqual(root.configuration, {
+    mixSchemaV87: 1,
+    composition: [{ lineId: 'legacy-1', profileId: BIOFORGE_DEFAULT_PROFILE_ID_V80, quantity: 1 }],
+    maxConcurrent: 12,
     profileId: BIOFORGE_DEFAULT_PROFILE_ID_V80,
     quantity: 1,
     unitCost: 3,
@@ -152,6 +155,9 @@ test('la création et la configuration sont autonomes et ne mutent pas la source
   });
   assert.equal(configured.applied, true);
   assert.deepEqual(configured.state.configuration, {
+    mixSchemaV87: 1,
+    composition: [{ lineId: 'legacy-1', profileId: 'enemy-001-ovomorph', quantity: 6 }],
+    maxConcurrent: 12,
     profileId: 'enemy-001-ovomorph',
     quantity: 6,
     unitCost: 2,
@@ -258,7 +264,9 @@ test('failed et aborted restent terminables sans faux clear', () => {
   );
   assert.equal(failed.applied, true);
   assert.equal(failed.session.result.outcome, 'failed');
-  assert.equal(failed.state.records['enemy-005-warrior'].failures, 1);
+  // V87 attributes records only to physically printed profiles, never an untouched selection.
+  assert.equal(failed.state.records['enemy-005-warrior'].failures, 0);
+  assert.equal(failed.state.records['enemy-005-warrior'].sessions, 0);
   assert.equal(failed.state.history[0].printed, 0);
 });
 
@@ -311,7 +319,7 @@ test('une session corrompue impose une purge de récupération avant redémarrag
   assert.equal(restarted.applied, true);
 });
 
-test('sanitize reconstruit la file canonique et filtre les IDs injectés', () => {
+test('MIX rejette une file augmentée et conserve intégralement la session importée', () => {
   let result = startSession('enemy-002-facehugger', 2, 9_000);
   result = advanceBioforgeSessionV80(result.state, { now: 9_001 });
   result = advanceBioforgeSessionV80(result.state, { now: 9_002 });
@@ -323,12 +331,52 @@ test('sanitize reconstruit la file canonique et filtre les IDs injectés', () =>
   tampered.activeSession.queue.push({ id: 'foreign-id', status: 'alive' });
   tampered.records.legacy = { sessions: 999 };
 
+  const before = structuredClone(tampered);
+  assert.equal(tampered.activeSession.mixSchemaV87, 1, 'startSession now creates the strict MIX contract');
   const safe = migrateBioforgeV80(tampered);
+  assert.deepEqual(tampered, before);
+  assert.equal(safe.activeSession, null);
+  assert.deepEqual(safe.recovery, { purgeRequired: true, reason: 'corrupt-active-session' });
+  assert.deepEqual(safe.rejectedSessionV87, before.activeSession);
+  assert.deepEqual(migrateBioforgeV80(safe), safe);
+  assert.equal(startBioforgeSessionV80(safe).applied, false);
+  assert.equal(Object.hasOwn(safe.records, 'legacy'), false);
+});
+
+test('la vraie sauvegarde legacy sans champs MIX reconstruit sa file et filtre les IDs injectés', () => {
+  let result = startSession('enemy-002-facehugger', 2, 9_000);
+  result = advanceBioforgeSessionV80(result.state, { now: 9_001 });
+  result = advanceBioforgeSessionV80(result.state, { now: 9_002 });
+  result = advanceBioforgeSessionV80(result.state, { now: 9_003 });
+  const tampered = structuredClone(result.state);
+  // V80 persisted a single profile/quantity, not the complete V87 MIX ledger.
+  // Only this explicitly old shape retains the established permissive migration.
+  for (const record of [tampered.configuration, tampered.activeSession]) {
+    delete record.mixSchemaV87;
+    delete record.composition;
+    delete record.maxConcurrent;
+  }
+  delete tampered.activeSession.queueBatchesV87;
+  delete tampered.activeSession.cancelledIds;
+  for (const entry of tampered.activeSession.queue) {
+    delete entry.lineId;
+    delete entry.cancelledAt;
+  }
+  const firstId = tampered.activeSession.queue[0].id;
+  tampered.activeSession.killedIds = [firstId, 'foreign-id', firstId];
+  tampered.activeSession.queue.push({ id: 'foreign-id', status: 'alive' });
+  tampered.records.legacy = { sessions: 999 };
+
+  const before = structuredClone(tampered);
+  const safe = migrateBioforgeV80(tampered);
+  assert.deepEqual(tampered, before);
+  assert.equal(safe.recovery.purgeRequired, false);
   assert.equal(safe.activeSession.queue.length, 2);
   assert.deepEqual(safe.activeSession.killedIds, [firstId]);
   assert.equal(safe.activeSession.queue[0].status, 'killed');
   assert.equal(safe.activeSession.queue[1].status, 'queued');
   assert.equal(Object.hasOwn(safe.records, 'legacy'), false);
+  assert.deepEqual(migrateBioforgeV80(safe), safe);
 });
 
 test('historique et records sont bornés même avec une sauvegarde hostile', () => {

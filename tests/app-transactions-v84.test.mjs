@@ -108,6 +108,7 @@ function harness() {
   });
   vm.createContext(context);
   const names = ['currentOwnerV84', 'ownsTimelineV84', 'captureHubPoseV84', 'closeHubDialogue', 'persistHub',
+    'renderBioforgeUiV87',
     'persistBioforgeV80', 'handleBioforgeEventV80', 'discardProfileRuntimeV78', 'openPlayerCreatorV84', 'commitOnboardingEventV84',
     'openOnboardingDialogueV84', 'handleHubAction', 'commitCurrentRuntimeV78'];
   vm.runInContext(bioforgeMessagesSource + '\n' + names.map(functionSource).join('\n') + '\n' + creatorSource

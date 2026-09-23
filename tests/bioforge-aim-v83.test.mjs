@@ -4,6 +4,7 @@ import { BioforgeRuntimeV80 } from '../src/bioforge-runtime-v80.js';
 import { COMBAT_AIM_DIRECTIONS_V83, resolveCombatMuzzleV83 } from '../src/combat-aim-v83.js';
 
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-7, `${actual} != ${expected}`);
+const shotHealth = enemy => enemy.maxHealth - Math.max(1, 28 - enemy.armor * .35);
 
 class EventTargetFixture {
   constructor() { this.listeners = new Map(); }
@@ -95,7 +96,6 @@ function fixture(t, quantity = 1) {
   assert.equal(engine.getBioforgeSnapshotV80().phase, 'combat');
   assert.equal(engine.enemies.length, quantity);
   Object.assign(engine.player, { x: 1850, y: 290, vx: 0, vy: 0, facing: 1, fireClock: 0, crouching: false });
-  for (const enemy of engine.enemies) Object.assign(enemy, { health: 1000, maxHealth: 1000 });
   return { engine, canvas, document, globals, events, pads };
 }
 
@@ -113,6 +113,10 @@ function putSpecimenOnRay(engine, enemy, aim, distance) {
     x: shoulder.x + aim.x * distance - enemy.w / 2,
     y: shoulder.y + aim.y * distance - enemy.h / 2
   });
+  // This geometric ray fixture relocates the body and its ground anchor
+  // together; real Facehugger AI must not snap it back to its old spawn floor.
+  enemy.groundY = enemy.y + enemy.h;
+  enemy.spawnX = enemy.x;
 }
 
 for (const direction of Object.keys(COMBAT_AIM_DIRECTIONS_V83)) {
@@ -134,7 +138,7 @@ for (const direction of Object.keys(COMBAT_AIM_DIRECTIONS_V83)) {
     assert.equal(engine.player.shots, initialShots + 1);
     assert.equal(events.filter(event => event.type === 'bioforge-shot').length, 1);
     engine.updateBioforgeCombatV80(0.25);
-    assert.equal(enemy.health, 972);
+    close(enemy.health, shotHealth(enemy));
     assert.equal(bullet.hit, true);
     assert.equal(engine.bullets.length, 0);
     assert.equal(engine.getBioforgeIsolationReportV80().secure, true);
@@ -151,11 +155,11 @@ for (const direction of ['up', 'down']) {
     const bullet = engine.bullets[0], startX = bullet.x;
     assert.equal(bullet.vx, 0);
     engine.updateBioforgeCombatV80(0.1);
-    assert.equal(enemy.health, 1000, 'aucun impact anticipé hors portée de cette frame');
+    assert.equal(enemy.health, enemy.maxHealth, 'aucun impact anticipé hors portée de cette frame');
     assert.equal(engine.bullets.length, 1);
     close(bullet.x, startX);
     engine.updateBioforgeCombatV80(0.2);
-    assert.equal(enemy.health, 972);
+    close(enemy.health, shotHealth(enemy));
     assert.equal(engine.bullets.length, 0);
   });
 }
@@ -175,7 +179,7 @@ for (const direction of ['right', 'left', 'up', 'down']) {
     if (direction === 'up') close(bullet.y, arena.y);
     if (direction === 'down') close(bullet.y + bullet.h, arena.y + arena.h);
     assert.equal(engine.bullets.length, 0);
-    assert.equal(engine.enemies[0].health, 1000);
+    assert.equal(engine.enemies[0].health, engine.enemies[0].maxHealth);
     assert.equal(engine.getBioforgeIsolationReportV80().secure, true);
   });
 }
@@ -209,14 +213,14 @@ test('BIOFORGE : un sweep traversant deux spécimens ne facture qu’une balle e
   assert.equal(engine.fire(), true);
   assert.equal(engine.fire(), false, 'le cooldown interdit le doublon du même contact');
   engine.updateBioforgeCombatV80(0.5);
-  assert.equal(near.health, 972);
-  assert.equal(far.health, 1000);
+  close(near.health, shotHealth(near));
+  assert.equal(far.health, far.maxHealth);
   assert.equal(engine.player.ammo, ammo - 1);
   assert.equal(events.filter(event => event.type === 'bioforge-shot').length, 1);
   assert.equal(engine.bullets.length, 0);
   engine.updateBioforgeCombatV80(0.5);
-  assert.equal(near.health, 972, 'un impact consommé ne se rejoue pas à la frame suivante');
-  assert.equal(far.health, 1000);
+  close(near.health, shotHealth(near));
+  assert.equal(far.health, far.maxHealth);
 });
 
 function standardPad() {
@@ -293,7 +297,8 @@ test('BIOFORGE : purge puis reprise réelle n’emportent aucune visée, touche,
   const actor = engine.player;
   const resume = engine.captureBioforgeResumeStateV80();
   const serialized = JSON.stringify(resume);
-  assert.doesNotMatch(serialized, /pointerAimV83|gamepadAimV83|combatAimV83|jumpBuffer|bioforge-shot-/);
+  assert.doesNotMatch(serialized, /pointerAimV83|gamepadAimV83|combatAimV83|bioforge-shot-/);
+  assert.equal(resume.state.runtimeV81.physicalV87.player.jumpBuffer, .14, 'le checkpoint physique garde le curseur mais la reprise efface cette intention de commande');
   engine.purgeBioforgeV80('aim-v83-regression');
   assert.equal(engine.bullets.length, 0);
   assert.equal(engine.hostileProjectiles.length, 0);
@@ -304,6 +309,7 @@ test('BIOFORGE : purge puis reprise réelle n’emportent aucune visée, touche,
   engine.start({ resumeState: resume, assets: {}, testMode: true, autoLoop: false });
   assert.equal(engine.getBioforgeSnapshotV80().phase, 'combat');
   assert.notEqual(engine.player, actor);
+  assert.equal(engine.player.jumpBuffer, 0);
   assert.equal(engine.bullets.length, 0);
   for (const key of ['pointerAimV83', 'gamepadAimV83', 'combatAimV83']) assert.equal(engine.player[key] ?? null, null);
   const ammo = engine.player.ammo;

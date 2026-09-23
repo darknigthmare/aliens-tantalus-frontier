@@ -36,10 +36,14 @@ class FakeElementV80 {
     this.style = {};
     this.textContent = '';
     this.value = '';
+    this.attributes = {};
   }
 
   addEventListener(type, listener) { this.listeners.set(type, listener); }
   replaceChildren(...children) { this.children = children; }
+  appendChild(child) { this.children.push(child); return child; }
+  setAttribute(name, value) { this.attributes[name] = String(value); }
+  focus() { this.focused = true; }
 }
 
 function createBioforgeUiHarnessV80() {
@@ -47,7 +51,11 @@ function createBioforgeUiHarnessV80() {
     '#bioforge-profile-v80', '#bioforge-quantity-v80', '#bioforge-profile-thumbnail-v80',
     '#bioforge-profile-preview-v80', '#bioforge-profile-name-v80', '#bioforge-cost-v80',
     '#bioforge-status-v80', '#bioforge-phase-v80', '#bioforge-session-metrics-v80',
-    '#bioforge-start-v80', '#bioforge-purge-v80', '#bioforge-return-v80'
+    '#bioforge-start-v80', '#bioforge-purge-v80', '#bioforge-return-v80',
+    '#bioforge-composition-editor-v87', '#bioforge-max-concurrent-v87', '#bioforge-add-line-v87',
+    '#bioforge-composition-v87', '#bioforge-composition-summary-v87', '#bioforge-queue-panel-v87',
+    '#bioforge-queue-v87', '#bioforge-cancel-pending-v87', '#bioforge-reinforcements-v87',
+    '#bioforge-reinforce-v87', '#bioforge-reinforcement-editor-v87'
   ];
   const nodes = Object.fromEntries(selectors.map((selector) => [selector, new FakeElementV80()]));
   const root = new FakeElementV80();

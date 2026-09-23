@@ -60,38 +60,60 @@
   object-fit: cover;
 }
 
-.title-scene-layer-v79[data-asset-id='orbitals-01-tantalus-transport'],
-.title-scene-layer-v79[data-asset-id='vfx-01-ion-exhaust'] {
-  inset: var(--transport-top-v87) var(--transport-right-v87) auto auto;
-  width: var(--transport-width-v87);
+.title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] {
+  inset: var(--title-ship-top-v87, 36vh) var(--title-ship-right-v87, 4vw) auto auto;
+  width: min(var(--title-ship-width-v87, 58vw), calc(52vh * var(--ship-ratio-v87, 1.77778)));
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--ship-ratio-v87, 1.77778);
+  container-type: inline-size;
 }
 
-.title-scene-layer-v79[data-asset-id='orbitals-01-tantalus-transport'] > img {
+.title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] > img {
+  position: absolute;
+  left: var(--ship-image-left-v87, 0%);
+  top: var(--ship-image-top-v87, 0%);
+  width: var(--ship-image-width-v87, 100%);
+  height: var(--ship-image-height-v87, 100%);
   object-fit: contain;
-  object-position: center;
-  transform: none;
 }
 
-/* Two native exhaust cores line up with the transport's two engine nozzles.
-   The outer frame and its motion are shared with the ship at every viewport. */
-.title-scene-layer-v79[data-asset-id='vfx-01-ion-exhaust'] > img {
-  object-fit: contain;
-  transform-origin: 0 0;
-  transform: translate(68%, -4%) scale(1.08);
-  opacity: .55;
+.title-scene-layer-v79[data-asset-id='orbitals-uss-sulaco-reference-v87'],
+.title-scene-layer-v79[data-asset-id='orbitals-usm-auriga-reference-v87'] {
+  --title-ship-width-v87: 62vw;
+  --title-ship-top-v87: 40vh;
 }
 
-.title-scene-layer-v79[data-asset-id='traffic-01-utility-shuttle'] {
-  inset: 16vh 22vw auto auto;
-  width: 16vw;
-  height: auto;
-  aspect-ratio: 16 / 9;
+.title-scene-layer-v79[data-asset-id='orbitals-uscss-nostromo-reference-v87'] {
+  --title-ship-width-v87: 46vw;
+  --title-ship-top-v87: 28vh;
 }
 
-.title-scene-layer-v79[data-asset-id='traffic-01-utility-shuttle'] > img {
-  object-fit: contain;
+.title-scene-layer-v79[data-asset-id='orbitals-narcissus-reference-v87'],
+.title-scene-layer-v79[data-asset-id='orbitals-ud4l-cheyenne-reference-v87'],
+.title-scene-layer-v79[data-asset-id='orbitals-prometheus-reference-v87'] {
+  --title-ship-width-v87: 43vw;
+  --title-ship-top-v87: 36vh;
+}
+
+/* A name belongs to the painted hull panel, not to a screen-space label.
+   Container units keep its typography scaled with the same moving image. */
+.title-ship-marking-v87 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #101816;
+  opacity: .9;
+  font: 900 calc(var(--ship-name-font-v87) * 1cqw) / 1 var(--mono);
+  letter-spacing: .1em;
+  white-space: nowrap;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.title-scene-layer-v79:not([data-asset-status='ready']) > .title-ship-marking-v87 {
+  visibility: hidden;
 }
 
 .title-scene-layer-v79[data-asset-id='debris-01-wreck-field'] {
@@ -129,8 +151,8 @@
   position: absolute;
   left: var(--title-art-left-v87, 0%);
   top: var(--title-art-top-v87, 0%);
-  width: var(--title-art-size-v87, 100%);
-  height: var(--title-art-size-v87, 100%);
+  width: var(--title-art-width-v87, var(--title-art-size-v87, 100%));
+  height: var(--title-art-height-v87, var(--title-art-size-v87, 100%));
 }
 
 /* Projected cloud/rim PNGs are not equirectangular textures. Spinning them in
@@ -333,14 +355,11 @@
 }
 
 .title-scene-layer-v79--sensor-sweep {
-  top: -30%;
-  bottom: -30%;
-  left: 48%;
-  width: 12%;
   opacity: .12;
-  background: linear-gradient(90deg, transparent, rgba(118, 215, 202, .32), transparent);
-  filter: blur(10px);
-  transform: rotate(8deg) translateX(-70vw);
+  border: 1px solid rgba(118, 215, 202, .2);
+  border-radius: 50%;
+  background: none;
+  transform: none;
 }
 
 .title-scene-layer-v79--ion-pulse {
@@ -352,6 +371,26 @@
   border-radius: 50%;
   opacity: 0;
   box-shadow: 0 0 5vmin rgba(102, 214, 196, .16);
+}
+
+/* The scanner's painted arc and every procedural/image atmosphere share the
+   exact world-space frame. Native padding stays inside the registered image. */
+.title-scene-layer-v79[data-planet-anchor='true'] {
+  inset: var(--planet-top-v79) var(--planet-right-v79) auto auto;
+  width: var(--planet-size-v79);
+  height: var(--planet-size-v79);
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.title-scene-layer-v79[data-renderer='image'][data-planet-anchor='true'] > img {
+  position: absolute;
+  left: var(--title-art-left-v87, 0%);
+  top: var(--title-art-top-v87, 0%);
+  width: var(--title-art-width-v87, 100%);
+  height: var(--title-art-height-v87, 100%);
+  object-fit: contain;
 }
 .title-scene-v79[data-preset='storm-terminator'] {
   --planet-right-v79: -10vw;
@@ -388,6 +427,17 @@
 .title-scene-v79[data-preset='ember-quarantine'] .title-scene-layer-v79--atmosphere[data-renderer='procedural'] {
   border-color: rgba(231, 175, 99, .48);
   box-shadow: inset 0 0 2.8vmin rgba(222, 135, 70, .18), 0 0 2.4vmin rgba(221, 139, 69, .16);
+}
+
+.title-scene-v79[data-placement='center'] {
+  --planet-right-v79: calc(52.4vw - var(--planet-size-v79) / 2);
+  --planet-top-v79: calc(52vh - var(--planet-size-v79) / 2);
+}
+
+.title-scene-v79[data-placement='port'] {
+  --planet-size-v79: min(66vw, 76vh);
+  --planet-right-v79: calc(72vw - var(--planet-size-v79) / 2);
+  --planet-top-v79: calc(50vh - var(--planet-size-v79) / 2);
 }
 
 .title-scene-v79[data-active='false'] .title-scene-layer-v79,
@@ -459,8 +509,7 @@
   animation: title-cloud-light-v87 24s ease-in-out infinite alternate;
 }
 
-.title-scene-v79[data-active='true'][data-mode='full'] .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'],
-.title-scene-v79[data-active='true'][data-mode='full'] .title-scene-layer-v79[data-asset-id='vfx-01-ion-exhaust'] {
+.title-scene-v79[data-active='true'][data-mode='full'] .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] {
   animation: title-image-float-v79 20s ease-in-out infinite alternate;
 }
 
@@ -522,15 +571,15 @@
 }
 
 @keyframes title-sweep-v79 {
-  0%, 28% { opacity: 0; transform: rotate(8deg) translateX(-70vw); }
+  0%, 28% { opacity: 0; }
   48% { opacity: .15; }
-  70%, 100% { opacity: 0; transform: rotate(8deg) translateX(70vw); }
+  70%, 100% { opacity: 0; }
 }
 
 @keyframes title-sweep-reduced-v79 {
-  0%, 36% { opacity: 0; transform: rotate(8deg) translateX(-70vw); }
+  0%, 36% { opacity: 0; }
   50% { opacity: .08; }
-  64%, 100% { opacity: 0; transform: rotate(8deg) translateX(70vw); }
+  64%, 100% { opacity: 0; }
 }
 
 @keyframes title-pulse-ring-v79 {
@@ -589,8 +638,20 @@
     --transport-top-v87: 26vh;
   }
 
+  .title-scene-v79[data-placement='center'] {
+    --planet-size-v79: 108vmin;
+    --planet-right-v79: calc(50vw - var(--planet-size-v79) / 2);
+    --planet-top-v79: 6vh;
+  }
+
+  .title-scene-v79[data-placement='port'] {
+    --planet-size-v79: 104vmin;
+    --planet-right-v79: calc(76vw - var(--planet-size-v79) / 2);
+    --planet-top-v79: 11vh;
+  }
+
   .title-screen[data-title-scene-v79='ready'] .title-screen-copy {
-    background: linear-gradient(180deg, rgba(1, 4, 4, .78) 0%, rgba(1, 4, 4, .28) 35%, rgba(1, 4, 4, .7) 77%, rgba(1, 4, 4, .9) 100%);
+    background: linear-gradient(180deg, rgba(1, 4, 4, .78) 0%, rgba(1, 4, 4, .62) 35%, rgba(1, 4, 4, .7) 77%, rgba(1, 4, 4, .9) 100%);
     box-shadow: none;
   }
 
@@ -599,9 +660,10 @@
     transform: scale(.72);
   }
 
-  .title-scene-layer-v79[data-asset-id='traffic-01-utility-shuttle'] {
-    inset: 15vh 34vw auto auto;
-    width: 25vw;
+  .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] {
+    --title-ship-width-v87: 94vw;
+    --title-ship-right-v87: -3vw;
+    --title-ship-top-v87: 32vh;
   }
 
   .title-scene-layer-v79[data-asset-id='debris-01-wreck-field'] {
@@ -611,11 +673,29 @@
 }
 
 @media (max-height: 620px) and (orientation: landscape) {
+  .title-scene-layer-v79[data-renderer='image'][data-role='orbitals'] {
+    --title-ship-width-v87: 54vw;
+    --title-ship-right-v87: 4vw;
+    --title-ship-top-v87: 42vh;
+  }
+
   .title-scene-v79[data-preset] {
     --planet-size-v79: 102vh;
     --planet-right-v79: -12vh;
     --planet-top-v79: 0;
     --transport-top-v87: 26vh;
+  }
+
+  .title-scene-v79[data-placement='center'] {
+    --planet-size-v79: 98vh;
+    --planet-right-v79: calc(52.4vw - var(--planet-size-v79) / 2);
+    --planet-top-v79: calc(52vh - var(--planet-size-v79) / 2);
+  }
+
+  .title-scene-v79[data-placement='port'] {
+    --planet-size-v79: 88vh;
+    --planet-right-v79: calc(72vw - var(--planet-size-v79) / 2);
+    --planet-top-v79: 7vh;
   }
 
   .title-screen[data-title-scene-v79='ready'] .title-screen-copy {
