@@ -1,3 +1,4 @@
+import { getEnemyUserCasteV87, getLegacyEnemyAlteredLabelV87 } from './enemy-user-castes-v87.js';
 import {
   BIOFORGE_TERRESTRIAL_ROSTER_V80,
   getBioforgeCapacityV87,
@@ -32,7 +33,9 @@ const PROFILE_LABELS_V80 = Object.freeze({
 });
 
 export function getBioforgeProfileLabelV80(profileId) {
-  return PROFILE_LABELS_V80[profileId] || String(profileId || 'Profil inconnu');
+  const supplied = getEnemyUserCasteV87(profileId);
+  if (supplied) return `${supplied.name} — ${supplied.work}`;
+  return getLegacyEnemyAlteredLabelV87(profileId, PROFILE_LABELS_V80[profileId] || String(profileId || 'Profil inconnu'));
 }
 
 
@@ -121,8 +124,8 @@ function thumbnailV87(document, profileId) {
   const profile = getBioforgeRosterEntryV80(profileId);
   node.style.backgroundImage = profile ? `url("${profile.path}")` : 'none';
   node.dataset.profileId = profileId;
-  node.dataset.atlasColumns = '4';
-  node.dataset.atlasRows = '8';
+  node.dataset.atlasColumns = profile?.visualMode === 'static-pose' ? '1' : '4';
+  node.dataset.atlasRows = profile?.visualMode === 'static-pose' ? '1' : '8';
   node.dataset.atlasFrame = '0';
   node.setAttribute('aria-hidden', 'true');
   return node;
@@ -324,19 +327,40 @@ export class BioforgeUiV80 {
     });
     this.reinforce.addEventListener('click', () => this.submitReinforcements());
     this.cancelPending.addEventListener('click', () => this.cancelQueue({}));
+    this.terminalExpandedV87 = false;
+    this.terminalToggleV87 = buttonV87(this.document, 'AFFICHER LE TERMINAL', 'Afficher le terminal BIOFORGE', () => {
+      this.terminalExpandedV87 = !this.terminalExpandedV87;
+      this.syncTerminalV87();
+    });
+    this.terminalToggleV87.id = 'bioforge-terminal-toggle-v87';
+    this.terminalToggleV87.className = 'button bioforge-terminal-toggle-v87';
+    const terminal = root.querySelector('.bioforge-terminal-v80') || root;
+    if (terminal.prepend) terminal.prepend(this.terminalToggleV87);
+    else terminal.appendChild(this.terminalToggleV87);
+  }
+  syncTerminalV87() {
+    const active = Boolean(this.model?.active);
+    this.root.dataset.terminalCompact = active && !this.terminalExpandedV87 ? 'true' : 'false';
+    this.terminalToggleV87.hidden = !active;
+    this.terminalToggleV87.textContent = this.terminalExpandedV87 ? 'RÉDUIRE LE TERMINAL' : 'AFFICHER LE TERMINAL';
+    this.terminalToggleV87.setAttribute('aria-label', this.terminalExpandedV87 ? 'Réduire le terminal BIOFORGE' : 'Afficher le terminal BIOFORGE');
+    this.terminalToggleV87.setAttribute('aria-expanded', String(this.terminalExpandedV87));
   }
   readSelection() { return this.editor.selection(); }
   syncSelection() {
     const profile = getBioforgeRosterEntryV80(this.profile.value);
     const source = profile?.path || '';
     this.preview.src = source;
-    this.preview.alt = profile ? `Plaque validée · ${getBioforgeProfileLabelV80(profile.profileId)}` : '';
+    const supplied = profile?.visualMode === 'static-pose';
+    this.preview.alt = profile ? `${supplied ? 'Pose fixe' : 'Plaque validée'} · ${getBioforgeProfileLabelV80(profile.profileId)}` : '';
     this.thumbnail.style.backgroundImage = source ? `url("${source}")` : 'none';
-    this.thumbnail.dataset.atlasColumns = '4';
-    this.thumbnail.dataset.atlasRows = '8';
+    this.thumbnail.dataset.atlasColumns = supplied ? '1' : '4';
+    this.thumbnail.dataset.atlasRows = supplied ? '1' : '8';
     this.thumbnail.dataset.atlasFrame = '0';
     this.profileName.textContent = getBioforgeProfileLabelV80(profile?.profileId);
-    this.cost.textContent = `COÛT ACTIF UNITAIRE ${profile?.cost || 0}/12 · APERÇU NON DÉFORMÉ`;
+    this.cost.textContent = `COÛT ACTIF UNITAIRE ${profile?.cost || 0}/12 · ${supplied
+      ? 'Pose fixe · animations manquantes · comportement labo simplifié'
+      : 'APERÇU NON DÉFORMÉ'}`;
   }
   async submitReinforcements() {
     if (this.busy || !this.model?.canEditQueue || typeof this.onReinforce !== 'function' || !this.reinforcementEditor.valid()) return false;
@@ -418,6 +442,7 @@ export class BioforgeUiV80 {
   render(raw, options = {}) {
     const model = buildBioforgeUiModelV80(raw, options);
     const previousSession = this.model?.state.activeSession?.id;
+    if (previousSession !== model.state.activeSession?.id) this.terminalExpandedV87 = false;
     this.model = model;
     this.state = model.state;
     const key = JSON.stringify([model.state.serial, model.state.configuration, model.active]);
@@ -443,6 +468,7 @@ export class BioforgeUiV80 {
       : `AUCUNE SESSION EN COURS · SESSIONS TERMINÉES ${model.historyCount}`;
     this.syncSelection();
     this.refreshActions();
+    this.syncTerminalV87();
     return model;
   }
 }

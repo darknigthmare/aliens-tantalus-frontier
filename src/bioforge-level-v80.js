@@ -1,3 +1,5 @@
+import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
+
 export const BIOFORGE_LEVEL_SCHEMA_V80 = 80;
 
 export const BIOFORGE_VIEWPORT_V80 = Object.freeze({
@@ -160,8 +162,9 @@ export function resolveBioforgeFacingV80(x, targetX) {
 export function placeBioforgeSpecimenV80(specimen, index, level = AUTHORED_LEVEL, target = level?.playerSpawn) {
   const slot = getBioforgeSpawnSlotV80(index, level);
   if (!slot || !specimen) return null;
-  const w = clamp(specimen.w || specimen.width || 52, 18, 180);
-  const h = clamp(specimen.h || specimen.height || 82, 18, 230);
+  const supplied = getEnemyUserCasteV87(specimen.profileId);
+  const w = supplied?.bodyWidth ?? clamp(specimen.w || specimen.width || 52, 18, 180);
+  const h = supplied?.bodyHeight ?? clamp(specimen.h || specimen.height || 82, 18, 230);
   const centerTarget = Number(target?.x || 0) + Number(target?.w || 0) / 2;
   return {
     ...specimen,

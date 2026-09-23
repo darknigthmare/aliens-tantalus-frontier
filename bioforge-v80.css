@@ -135,6 +135,11 @@ html.bioforge-mode body {
   background: rgba(0, 0, 0, .24);
 }
 
+.bioforge-profile-thumbnail-v80[data-atlas-columns="1"] {
+  background-size: contain;
+  background-position: center;
+}
+
 .bioforge-profile-thumbnail-v80 {
   display: block;
   width: 76px;
@@ -236,6 +241,23 @@ html.bioforge-mode body {
 
 .bioforge-view[data-session-active="true"] .bioforge-terminal-v80 {
   width: min(380px, calc(100% - 24px));
+}
+
+.bioforge-terminal-toggle-v87 {
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 8px;
+  font-size: 10px;
+}
+
+.bioforge-terminal-toggle-v87[hidden] { display: none; }
+
+.bioforge-view[data-terminal-compact="true"] .bioforge-terminal-v80 {
+  width: min(310px, calc(100% - 24px));
+}
+
+.bioforge-view[data-terminal-compact="true"] .bioforge-terminal-v80 > :not(header):not(.bioforge-terminal-toggle-v87):not(.bioforge-actions-v80) {
+  display: none;
 }
 
 .bioforge-composition-tools-v87 {
@@ -408,7 +430,12 @@ html.bioforge-mode body {
   }
 
   .bioforge-profile-v80 {
-    display: none;
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .bioforge-profile-thumbnail-v80 {
+    width: 56px;
+    height: 56px;
   }
 
   .bioforge-touch-v80 {

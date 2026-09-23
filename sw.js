@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-public-shell-13';
+const CACHE = 'atf-v86-public-shell-14';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
   '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
@@ -25,6 +25,8 @@ const TITLE_BITMAPS_V87 = [
 const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js', '/src/crew-ui-v85.js', '/src/crew-runtime-v85.js', '/crew-v85.css'];
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/enemy-user-castes-v87.js',
+  '/src/enemy-user-pose-runtime-v87.js',
   ...TITLE_BITMAPS_V87,
   '/src/bioforge-physical-state-v87.js',
   '/src/ship-animal-mica-frames-v87.js', '/src/ship-animal-terrarium-art-v87.js', '/src/ship-animal-terrarium-navigation-v87.js',

@@ -3,6 +3,7 @@ import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
 import { BIOFORGE_WORLD_V80 } from './bioforge-level-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { sanitizeBioforgePhysicalV87 } from './bioforge-physical-state-v87.js';
+import { ENEMY_USER_CASTES_IDS_V87, getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
 
 export const BIOFORGE_SCHEMA_V80 = 80;
 export const BIOFORGE_ROOT_KEY_V80 = 'bioforgeV80';
@@ -43,7 +44,8 @@ export const BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80 = Object.freeze([
   'enemy-016-burster',
   'enemy-020-k-series-yellow-xenomorph',
   'enemy-050-korari-stalker',
-  'enemy-055-albino-chestburster'
+  'enemy-055-albino-chestburster',
+  ...ENEMY_USER_CASTES_IDS_V87
 ]);
 
 const PROFILE_COST_V80 = Object.freeze({
@@ -84,6 +86,9 @@ const READY_ASSET_BY_ID_V80 = new Map([
 
 function buildTerrestrialRosterV80() {
   return BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.map((profileId) => {
+    // Supplied poses are deliberately not certified animation sheets.
+    const supplied = getEnemyUserCasteV87(profileId);
+    if (supplied) return Object.freeze({ ...supplied, terrestrial: true, spriteKey: 'user-caste-static' });
     const asset = READY_ASSET_BY_ID_V80.get(profileId);
     if (!asset
       || asset.identityVerified !== true
