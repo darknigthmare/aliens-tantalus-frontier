@@ -1,4 +1,5 @@
 import { captureTacticalReloadV77, restoreTacticalReloadV77 } from './tactical-reload-v77.js';
+import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
 import { captureOvomorphCycleResumeV66, getOvomorphChildIdV66,
   restoreOvomorphCycleResumeV66, OVOMORPH_CYCLE_V66 } from './enemy-ovomorph-cycle-v66.js';
 
@@ -11,7 +12,8 @@ const integer = (value, min = 0, max = 1e6) => Number.isSafeInteger(value) && va
 const text = (value, max = 180) => typeof value === 'string' && value.length > 0 && value.length <= max && value.trim() === value;
 const clone = value => JSON.parse(JSON.stringify(value));
 const facing = value => value === -1 || value === 1;
-const profile = value => typeof value === 'string' && /^enemy-[a-z0-9-]{1,140}$/.test(value);
+const profile = value => typeof value === 'string'
+  && (/^enemy-[a-z0-9-]{1,140}$/.test(value) || Boolean(getEnemyUserCasteV87(value)));
 const ownKeys = (value, allowed) => Object.keys(value).every(key => allowed.includes(key));
 const PLAYER_CLOCKS = ['fireClock', 'reloadClock', 'actionClock', 'hazardClock', 'jumpBuffer', 'coyoteTime',
   'meleeClock', 'toolUseClock', 'interactionClock', 'bleedOut'];

@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "checkedAt": "2026-09-23",
+  "provenance": "user-supplied-pack",
+  "sourcePack": "ALIENS_CASTES_FILMS_JEUX_V1",
+  "method": "Byte equality against supplied originals, SHA-256 and IHDR dimensions. No image generation or editing in this import.",
+  "count": 35,
+  "bytes": 64396633,
+  "files": [
+    {
+      "name": "film_chestburster_alien_1979.png",
+      "bytes": 1752675,
+      "sha256": "bab2dc1b8284650c97675220e95279a1533ab27713f0f0876a13d2863247521b"
+    },
+    {
+      "name": "film_facehugger_alien_1979.png",
+      "bytes": 2116496,
+      "sha256": "6adcc55496bf8d88f87573de36f54cbfab7e7c435a9dd15a9cdffd3294dbc308"
+    },
+    {
+      "name": "film_queen_chestburster_alien3_1992.png",
+      "bytes": 1708019,
+      "sha256": "1f8d468480b3a98e25a59a390d5bdadc3f7d29b5e07aeac5501f62b54d906d82"
+    },
+    {
+      "name": "film_runner_alien3_1992.png",
+      "bytes": 1606970,
+      "sha256": "f117c7ad0e6da9a02d3a4ce315066d75acfd67a909620f560ff6cd8c3d7b64b3"
+    },
+    {
+      "name": "film_runner_juvenile_alien3_1992.png",
+      "bytes": 1561925,
+      "sha256": "7077fa92454f92a901db226fd020e84efc37b5538c2ffa386933b7fe0b76434e"
+    },
+    {
+      "name": "film_grid_avp_2004.png",
+      "bytes": 1782091,
+      "sha256": "49d756a01928adb1c3fa787d47efbb158da988699fd9d0008bf9a723a7002a74"
+    },
+    {
+      "name": "film_neomorph_2017.png",
+      "bytes": 1840014,
+      "sha256": "0b1670263a48fb16f17e83adc3a3608eacba9f1f146818466e99f9cf1d4c1f84"
+    },
+    {
+      "name": "film_ovomorphe_aliens_1986.png",
+      "bytes": 2594158,
+      "sha256": "b7b3c189e4c39a0b12c5fc31828ed134bd2d19d4dcc133e801f913e7ef9077a3"
+    },
+    {
+      "name": "film_queen_aliens_1986.png",
+      "bytes": 1929156,
+      "sha256": "985abf27db63400d8a6a68101bfaa7dde3335da0e8986ea85c409ab30da5e991"
+    },
+    {
+      "name": "film_warrior_aliens_1986.png",
+      "bytes": 1801730,
+      "sha256": "c791a14045116531425d270c3edd61384b063d82a0bddf4e23195e9397ecb65f"
+    },
+    {
+      "name": "film_deacon_2012.png",
+      "bytes": 1150358,
+      "sha256": "6788ba772edfcb4b7989b1fa55606670c610a9fec74230316b5e36c906048853"
+    },
+    {
+      "name": "game_xenoborg_avp1999.png",
+      "bytes": 1769486,
+      "sha256": "d6532326d96fbdd14e7feb8d19946b92edac55a0f8ae88ccc916cc692b192a09"
+    },
+    {
+      "name": "game_predalien_avp2_primal_hunt.png",
+      "bytes": 1604259,
+      "sha256": "3c39acccb5bcfd571026d2511553946078be96b4f2c0e2c2470b39197f770bb5"
+    },
+    {
+      "name": "game_abomination_avp2010.png",
+      "bytes": 1956709,
+      "sha256": "d73620b4b9759de5baaa65c543407f45987b9013eda87b381e5a5460ab3a23ba"
+    },
+    {
+      "name": "game_avp_extinction_carrier.png",
+      "bytes": 1517335,
+      "sha256": "18dd4936cc8cdd0e8ae3f5b28fe2a2790f4a841a4f03cb9c3116ae9c8fd0a8f3"
+    },
+    {
+      "name": "game_avp_extinction_ravager.png",
+      "bytes": 1602219,
+      "sha256": "7e2d1e236ef7de411c5458aee40520951c2c6dec2dc932a21164eea087738cbe"
+    },
+    {
+      "name": "game_acm_boiler.png",
+      "bytes": 1729724,
+      "sha256": "c1385916ec2e5bb3f1d6ff421f2a58850cb907697bdbcc7845d3b1f729f00ac1"
+    },
+    {
+      "name": "game_acm_crusher.png",
+      "bytes": 1885823,
+      "sha256": "eca7855c29455b87bf9fc4e26afe2ab07adbd3ff4afa2c5ffb36dc6b4ebc2baa"
+    },
+    {
+      "name": "game_acm_spitter.png",
+      "bytes": 2167113,
+      "sha256": "c281ad7c020999e2796af1c904be45c028bd8643e45bfc45b93edaf5ba4642c7"
+    },
+    {
+      "name": "game_afe_burster.png",
+      "bytes": 1775455,
+      "sha256": "b2db2418502099d9f2551434cf207ef72fe0a09dc68914fbc85e18705720ce13"
+    },
+    {
+      "name": "game_afe_crusher.png",
+      "bytes": 2261639,
+      "sha256": "72137611a95e8134cade0e32fd17a3d9e0e7415a7ef9aab559018fe519a94f34"
+    },
+    {
+      "name": "game_afe_prowler.png",
+      "bytes": 2383160,
+      "sha256": "48edd1af2710048a065433b9e2c8dc20a03b05bc0a46a47394704f3a0c8bd544"
+    },
+    {
+      "name": "game_afe_pathogen_popper.png",
+      "bytes": 1850650,
+      "sha256": "fbae8b00fdd98c56f420f802532cb5efa4833e47285a62b926656f4a9e998d38"
+    },
+    {
+      "name": "game_afe_pathogen_stalker.png",
+      "bytes": 2264254,
+      "sha256": "262d3181e1951d2e888af3d3ddfd09f6137f548460782e507b8489f8c7ce7cc1"
+    },
+    {
+      "name": "game_pathogen_blight.png",
+      "bytes": 2095022,
+      "sha256": "0a8080a14a63f942bea16b811e0d3050e37c2b71fc89a9d57e75955da66d9a3f"
+    },
+    {
+      "name": "game_pathogen_brute.png",
+      "bytes": 2070736,
+      "sha256": "e565782f1505657f8d6ab447b3eda7d37775b248ebba6237a8b124549d99b2dc"
+    },
+    {
+      "name": "game_pathogen_queen.png",
+      "bytes": 2385872,
+      "sha256": "5e5e9ea0fc8af2c34753b2f56b40e017924762c571fe71c22db8b107bdfe270a"
+    },
+    {
+      "name": "game_pathogen_runner.png",
+      "bytes": 2121771,
+      "sha256": "cf67346994f7827e817c718b84768e79e0bedaa181394b6930af2ee7f4dc0bce"
+    },
+    {
+      "name": "game_alien3_thegun_super_facehugger.png",
+      "bytes": 1485994,
+      "sha256": "42652f8749b9d65f93ed27f7a91062710638166b9b986c975b8c2bd632386ba3"
+    },
+    {
+      "name": "game_avp_capcom_arachnoid.png",
+      "bytes": 1644894,
+      "sha256": "84f47e12acfa88b5658a736863e4ad8b61a9b43bfa5cb61a34abe87649b2e3ee"
+    },
+    {
+      "name": "game_avp_capcom_chrysalis.png",
+      "bytes": 1653990,
+      "sha256": "adfbb16a1a28996d4e0668b8be5c9ed66e105bd5f8e43f0e226b1deea1e46a8b"
+    },
+    {
+      "name": "game_avp_capcom_razor_claws.png",
+      "bytes": 1743461,
+      "sha256": "a1d024f5a20e4a7210b7f77f011ed2f81e6a177ba787afd07a430b5cd71d1987"
+    },
+    {
+      "name": "game_avp_capcom_royal_guard.png",
+      "bytes": 1629021,
+      "sha256": "f8678cd4d343ec643c79791258fc4d25540aba43de40fc4b20ae720818b04cd3"
+    },
+    {
+      "name": "game_avp_capcom_smasher.png",
+      "bytes": 1450422,
+      "sha256": "962806005136e2b82b1741cc77b4d9938886092dbd2c05fc2c45e7b5521bc96e"
+    },
+    {
+      "name": "game_avp_capcom_stalker.png",
+      "bytes": 1504032,
+      "sha256": "e1e4fd52067a1d69b170935855f21ed6f38686fed8804c890bb961c67d6e5ad7"
+    }
+  ]
+}

@@ -164,15 +164,37 @@ test('ouvrir pour un autre propriétaire réinitialise explicitement le brouillo
 test('tous les profils validés ont leur propre chemin de vignette sans substitution', () => {
   const { ui, nodes } = harness();
   ui.render(createBioforgeV80());
-  assert.equal(nodes['profile-v80'].children.length, 11);
+  assert.equal(nodes['profile-v80'].children.length, 46);
   const paths = new Set();
   for (const profile of BIOFORGE_TERRESTRIAL_ROSTER_V80) {
     change(nodes['profile-v80'], profile.profileId, 'change');
     assert.equal(nodes['profile-preview-v80'].src, profile.path);
+    assert.equal(nodes['profile-thumbnail-v80'].dataset.atlasColumns, profile.visualMode === 'static-pose' ? '1' : '4');
+    assert.equal(nodes['profile-thumbnail-v80'].dataset.atlasRows, profile.visualMode === 'static-pose' ? '1' : '8');
+    if (profile.visualMode === 'static-pose') assert.match(nodes['cost-v80'].textContent, /Pose fixe · animations manquantes · comportement labo simplifié/);
     assert.equal(nodes['composition-v87'].children[0].children[0].style.backgroundImage, `url("${profile.path}")`);
     paths.add(profile.path);
   }
-  assert.equal(paths.size, 11);
+  assert.equal(paths.size, 46);
+});
+
+test('active terminal folds by default, can reopen without losing draft, and keeps emergency purge enabled', () => {
+  const { ui, root, nodes } = harness();
+  const state = activeState();
+  ui.render(state);
+  assert.equal(root.dataset.terminalCompact, 'true');
+  assert.equal(ui.terminalToggleV87.attributes['aria-expanded'], 'false');
+  assert.equal(nodes['purge-v80'].disabled, false);
+  ui.terminalToggleV87.dispatch('click');
+  assert.equal(root.dataset.terminalCompact, 'false');
+  assert.equal(ui.terminalToggleV87.attributes['aria-expanded'], 'true');
+  ui.render(state);
+  assert.equal(root.dataset.terminalCompact, 'false', 'periodic rendering keeps the user choice');
+  ui.terminalToggleV87.dispatch('click');
+  assert.equal(root.dataset.terminalCompact, 'true');
+  ui.render(createBioforgeV80());
+  assert.equal(root.dataset.terminalCompact, 'false');
+  assert.equal(ui.terminalToggleV87.hidden, true);
 });
 
 test('en actif, anciens contrôles verrouillés, purge disponible et pas de boutons API absente', () => {

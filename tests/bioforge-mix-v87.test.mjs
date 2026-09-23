@@ -27,7 +27,7 @@ const reload = state => sanitizeBioforgeV80(clone(state));
 
 test('MIX separates allocation 48, concurrent 1..12 and budget12, keeping exactly11 profiles', () => {
   assert.equal(BIOFORGE_MAX_TOTAL_V87, 48);
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 11);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 46);
   const valid = validateBioforgeCompositionV87({ composition: three, maxConcurrent: 4 });
   assert.equal(valid.ok, true); assert.equal(valid.totalQuantity, 18); assert.equal(valid.totalCost, 36);
   assert.equal(validateBioforgeCompositionV87({ composition: [line('A', C, 48)], maxConcurrent: 1 }).ok, true);

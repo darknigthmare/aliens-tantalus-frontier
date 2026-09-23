@@ -1,5 +1,7 @@
 import { GameEngine } from './game-production-runtime.js';
 import { ENEMIES } from './content-core-v50.js';
+import { getEnemyUserCasteV87 } from './enemy-user-castes-v87.js';
+import { createUserCasteActorV87, drawUserCastePoseV87, isUserCasteImageReadyV87, updateUserCasteActorV87 } from './enemy-user-pose-runtime-v87.js';
 import { getOvomorphChildIdV66, isOvomorphCycleV66 } from './enemy-ovomorph-cycle-v66.js';
 import { captureBioforgePhysicalV87, restoreBioforgePlayerPhysicalV87, restoreBioforgeEnemyPhysicalV87 } from './bioforge-physical-state-v87.js';
 import { cancelTacticalReloadV77 } from './tactical-reload-v77.js';
@@ -307,7 +309,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.weaponRuntime = null;
       this.weapon = null;
       // Explicit laboratory loan; never committed back to campaign equipment.
-      this.player.ammoReserve = 600;
+      // Fixed fresh-session supply covers 48 armoured imported queens too.
+      // Physical resume restores the exact spent reserve afterwards.
+      this.player.ammoReserve = 1600;
       this.lifts = [];
       this.covers = [];
       this.vents = [];
@@ -629,8 +633,10 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     createBioforgeActorV87(entry) {
       const roster = getBioforgeRosterEntryV80(entry?.profileId);
       const source = ENEMIES.find((enemy) => enemy.id === entry?.profileId);
-      if (!roster || !source) return null;
-      const actor = this.createEnemy(source, entry.index || 0, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false });
+      const supplied = getEnemyUserCasteV87(entry?.profileId);
+      if (!roster || (!source && !supplied)) return null;
+      const actor = supplied ? createUserCasteActorV87(entry, this.bioforgeLevelV80.world.floorY)
+        : this.createEnemy(source, entry.index || 0, 0, this.bioforgeLevelV80.world.floorY, { boss: false, keyCarrier: false });
       return Object.assign(actor, {
         id: entry.id, profileId: roster.profileId, bioforgeCostV87: roster.cost,
         bioforgeSessionIdV87: this.bioforgeRootV80.activeSession?.id,
@@ -699,6 +705,17 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
 
     advanceBioforgePhaseV80() {
       if (this.bioforgeLastErrorV80 === 'persistence-failed') return this.refuseBioforgeAfterPersistenceFailureV87();
+      const session = this.bioforgeRootV80.activeSession;
+      const nextPose = session?.phase === 'printing'
+        ? getEnemyUserCasteV87(session.queue.find(entry => entry.status === 'queued')?.profileId) : null;
+      if (nextPose && !isUserCasteImageReadyV87(this.images.get(nextPose.imageKey), nextPose)) {
+        void this.ensureEnemyAtlas(nextPose);
+        const reason = this.getUserPoseIssueV87(nextPose);
+        this.bioforgeUserPoseIssueV87 = reason;
+        if (this.bioforgeBlockedV87 !== reason) this.emitBioforgeV80({ type: 'bioforge-printer-waiting', reason });
+        this.bioforgeBlockedV87 = reason;
+        return { applied: false, reason, state: this.bioforgeRootV80, session };
+      }
       this.bioforgeRootV80.runtimeV81 = this.captureBioforgeRuntimeStateV81();
       const operation = advanceBioforgeSessionV80(this.bioforgeRootV80, { now: this.bioforgeNowV80(), population: this.getBioforgePopulationV87() });
       if (!operation.applied && /capacity/.test(operation.reason || '')) {
@@ -974,7 +991,8 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         const support = this.platforms.find(surface => Math.abs(surface.y - enemy.groundY) < .01
           && enemy.x + enemy.w / 2 >= surface.x && enemy.x + enemy.w / 2 <= surface.x + surface.w);
         enemy.v52HurtClock = Math.max(0, Number(enemy.v52HurtClock || 0) - delta);
-        super.updateEnemy(enemy, delta);
+        if (getEnemyUserCasteV87(enemy.profileId)) updateUserCasteActorV87(this, enemy, delta);
+        else super.updateEnemy(enemy, delta);
         // This laboratory has no inter-floor navigation contract yet. Preserve
         // the authored support instead of allowing a walker to float over a gap.
         if (support && !isOvomorphCycleV66(enemy)) {
@@ -1040,6 +1058,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
     }
 
     clearBioforgeRuntimeReferencesV80() {
+      this.bioforgeUserPoseIssueV87 = null;
+      this.bioforgeBlockedV87 = null;
+      this.enemyAtlasLoadingPausedV65 = false;
       this.enemies = [];
       this.bullets = [];
       this.hostileProjectiles = [];
@@ -1205,6 +1226,7 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         population: Object.freeze(this.getBioforgePopulationV87()),
         capacity: Object.freeze(getBioforgeCapacityV87(session, { population: this.getBioforgePopulationV87() })),
         printerBlocked: this.bioforgeBlockedV87,
+        userPoseAssetIssue: this.bioforgeUserPoseIssueV87 || null,
         lastError: this.bioforgeLastErrorV80,
         source: this.bioforgeSourceV80,
         transferStage: this.bioforgeTransferStageV80,
@@ -1246,6 +1268,36 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       });
     }
 
+    // Keep the ordinary LRU contract, but never resolve an imported pose to a
+    // family atlas. Load only active imports and the next queued specimen.
+    getVisibleEnemyAtlasSheetsV65(visibleEnemies = this.enemies || []) {
+      const alive = visibleEnemies.filter(enemy => enemy.alive);
+      const sheets = super.getVisibleEnemyAtlasSheetsV65(alive.filter(enemy => !getEnemyUserCasteV87(enemy.profileId)));
+      const imported = alive.map(enemy => getEnemyUserCasteV87(enemy.profileId)).filter(Boolean);
+      const session = this.bioforgeRootV80?.activeSession;
+      if (['sealing', 'printing'].includes(session?.phase)) {
+        const next = getEnemyUserCasteV87(session.queue.find(entry => entry.status === 'queued')?.profileId);
+        if (next) imported.push(next);
+      }
+      return [...new Map([...sheets, ...imported].map(sheet => [sheet.imageKey, sheet])).values()];
+    }
+
+    getUserPoseIssueV87(definition) {
+      const image = this.images.get(definition.imageKey);
+      if (image?.complete && image.naturalWidth > 0) return 'user-pose-invalid-dimensions';
+      return this.enemyAtlasLRUV65?.recordStatus(definition)?.status === 'failed'
+        ? 'user-pose-unavailable' : 'user-pose-loading';
+    }
+
+    refreshEnemyAtlasAvailabilityV65() {
+      super.refreshEnemyAtlasAvailabilityV65();
+      const missing = this.getVisibleEnemyAtlasSheetsV65().find(sheet =>
+        sheet.visualMode === 'static-pose' && !isUserCasteImageReadyV87(this.images.get(sheet.imageKey), sheet));
+      this.bioforgeUserPoseIssueV87 = missing ? this.getUserPoseIssueV87(missing) : null;
+      // Incomplete or malformed assets never produce invisible combat.
+      if (missing) this.enemyAtlasLoadingPausedV65 = true;
+    }
+
     draw() {
       const ctx = this.ctx;
       if (!ctx) return;
@@ -1266,6 +1318,15 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
       this.drawBioforgePurgeV80(ctx);
       ctx.restore();
       this.drawBioforgeHudV80(ctx);
+      if (this.bioforgeUserPoseIssueV87) {
+        ctx.fillStyle = 'rgba(4, 10, 12, .94)';
+        ctx.fillRect(24, 96, 920, 38);
+        ctx.fillStyle = '#f4d394';
+        ctx.font = '16px monospace';
+        ctx.fillText(this.bioforgeUserPoseIssueV87 === 'user-pose-loading'
+          ? 'CHARGEMENT DE LA POSE FOURNIE · SIMULATION EN ATTENTE'
+          : 'POSE INDISPONIBLE OU INVALIDE · RÉESSAYER EN LIGNE OU PURGER', 36, 121);
+      }
       ctx.restore();
     }
 
@@ -1302,7 +1363,9 @@ export function withBioforgeRuntimeV80(BaseEngine = GameEngine) {
         ctx.save();
         ctx.shadowColor = 'rgba(166, 210, 116, .42)';
         ctx.shadowBlur = 7;
-        super.drawEnemy?.(ctx, enemy);
+        const supplied = getEnemyUserCasteV87(enemy.profileId);
+        if (supplied) drawUserCastePoseV87(ctx, enemy, this.images.get(supplied.imageKey));
+        else super.drawEnemy?.(ctx, enemy);
         ctx.restore();
       }
       if (this.player?.alive) {

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { ENEMY_USER_CASTES_V87 } from '../src/enemy-user-castes-v87.js';
 
 globalThis.addEventListener = () => {};
 globalThis.requestAnimationFrame = () => 1;
@@ -19,6 +20,9 @@ function fixture(configuration = { profileId: 'enemy-002-facehugger', quantity: 
   const engine = new BioforgeRuntimeV80({ width: 1280, height: 720, getContext: () => ctx, addEventListener: noop, focus: noop }, {
     assets: {}, testMode: true, autoLoop: false, now: () => ++clock,
     onEvent: event => events.push(event), onPersist: state => writes.push(structuredClone(state))
+  });
+  for (const d of ENEMY_USER_CASTES_V87) engine.images.set(d.imageKey, {
+    complete: true, naturalWidth: d.sourceWidth, naturalHeight: d.sourceHeight, src: d.path
   });
   if (configuration) engine.start({ configuration, autoLoop: false, testMode: true, assets: {} });
   return { engine, events, writes };
@@ -134,7 +138,7 @@ test('combat, armour damage and firing run while printing; local kills never awa
 test('reload uses simulation time, resumes its exact cursor and transfers the laboratory rounds only once', () => {
   const { engine } = fixture(); enter(engine); print(engine);
   Object.assign(engine.player, { ammo: 0, health: 42, armor: 11, shots: 77 });
-  assert.equal(engine.player.ammoReserve, 600);
+  assert.equal(engine.player.ammoReserve, 1600);
   assert.equal(engine.reload(), true);
   engine.update(.1); engine.update(.1);
   const elapsed = engine.player.tacticalReload.elapsed;
@@ -149,11 +153,11 @@ test('reload uses simulation time, resumes its exact cursor and transfers the la
   restored.paused = false;
   for (let i = 0; i < 20; i++) restored.update(.1);
   assert.equal(restored.player.ammo, 12);
-  assert.equal(restored.player.ammoReserve, 588);
+  assert.equal(restored.player.ammoReserve, 1588);
   assert.equal(restored.player.reloading, false);
   const again = resume(restored);
   assert.equal(again.player.ammo, 12);
-  assert.equal(again.player.ammoReserve, 588);
+  assert.equal(again.player.ammoReserve, 1588);
 });
 
 test('mixed reinforcement and per-line cancellation preserve old identities and affect only queued bodies', () => {
@@ -370,7 +374,7 @@ test('an upper catwalk walker remains on its actual support rather than floating
   }
 });
 
-test('the declared 600-round laboratory reserve covers48 actual profiles and48 egg descendants without rewards', () => {
+test('the declared 1600-round laboratory reserve covers48 actual profiles and48 egg descendants without rewards', () => {
   const { engine } = fixture();
   for (const [index, entry] of BIOFORGE_TERRESTRIAL_ROSTER_V80.entries()) {
     const actor = engine.createBioforgeActorV87({ id: `ammo-audit-${index}`, profileId: entry.profileId, index });
@@ -392,6 +396,79 @@ test('the canvas HUD names a real mixed composition instead of claiming no selec
   engine.drawBioforgeHudV80({ fillRect() {}, strokeRect() {}, fillText(text) { labels.push(text); } });
   assert.ok(labels.some(label => label.includes('MIXTE (2 PROFILS)')));
   assert.ok(labels.every(label => !label.includes('AUCUN PROFIL')));
+});
+
+test('a mixed imported/Altered session preserves separate identities, health, ammunition and attack clocks across resume', () => {
+  const d = ENEMY_USER_CASTES_V87.find(entry => entry.basename === 'film_warrior_aliens_1986');
+  const { engine } = fixture({ composition: [
+    { lineId: 'old-warrior', profileId: 'enemy-005-warrior', quantity: 1 },
+    { lineId: 'native-warrior', profileId: d.id, quantity: 1 }
+  ] });
+  enter(engine);
+  const old = print(engine), imported = print(engine);
+  assert.notEqual(old.profileId, imported.profileId);
+  assert.equal(imported.visualSheetId, null);
+  assert.equal(imported.visualMode, 'static-pose');
+  engine.applyEnemyDamage(imported, 35, { owner: engine.player });
+  imported.attackClock = .43;
+  Object.assign(engine.player, { ammo: 5, ammoReserve: 588 });
+  const saved = engine.captureBioforgeResumeStateV80();
+  assert.ok(saved.state.runtimeV81.physicalV87);
+  const next = resume(engine);
+  assert.deepEqual(next.enemies.map(actor => [actor.id, actor.profileId, actor.health, actor.attackClock]),
+    engine.enemies.map(actor => [actor.id, actor.profileId, actor.health, actor.attackClock]));
+  assert.equal(next.player.ammo, 5);
+  assert.equal(next.player.ammoReserve, 588, 'old reserve is never refilled by the new fresh-session allowance');
+  assert.equal(next.enemies[1].visualSheetId, null);
+  const sheets = next.getVisibleEnemyAtlasSheetsV65([next.enemies[1]]);
+  assert.deepEqual(sheets.map(sheet => sheet.path), [d.path], 'the imported branch never requests a family atlas');
+  next.purgeBioforgeV80('test-import-purge');
+  assert.equal(next.enemies.length, 0);
+});
+
+test('missing or malformed pose blocks printing without consuming queue, actors, clock or saved bytes', () => {
+  const d = ENEMY_USER_CASTES_V87[0];
+  const { engine, writes, events } = fixture({ profileId: d.id, quantity: 1 });
+  enter(engine);
+  engine.images.delete(d.imageKey);
+  engine.ensureEnemyAtlas = () => Promise.resolve(null);
+  const before = structuredClone(engine.bioforgeRootV80), writeCount = writes.length, eventCount = events.length;
+  engine.bioforgePhaseClockV80 = .8;
+  assert.equal(engine.advanceBioforgePhaseV80().reason, 'user-pose-loading');
+  assert.deepEqual(engine.bioforgeRootV80, before);
+  assert.equal(writes.length, writeCount);
+  assert.equal(engine.enemies.length, 0);
+  assert.equal(engine.bioforgePhaseClockV80, .8);
+  assert.ok(events.slice(eventCount).every(event => event.type === 'bioforge-printer-waiting'));
+  engine.images.set(d.imageKey, { complete: true, naturalWidth: 1024, naturalHeight: 1024 });
+  assert.equal(engine.advanceBioforgePhaseV80().reason, 'user-pose-invalid-dimensions');
+  assert.deepEqual(engine.bioforgeRootV80, before);
+  engine.images.set(d.imageKey, { complete: true, naturalWidth: d.sourceWidth, naturalHeight: d.sourceHeight });
+  assert.equal(print(engine).profileId, d.id);
+});
+
+test('restored imported combat freezes if its native pose is unavailable and remains purgeable', () => {
+  const d = ENEMY_USER_CASTES_V87.find(entry => entry.basename === 'film_warrior_aliens_1986');
+  const { engine } = fixture({ profileId: d.id, quantity: 1 });
+  enter(engine); print(engine);
+  const next = resume(engine);
+  next.images.delete(d.imageKey);
+  next.ensureEnemyAtlas = () => Promise.resolve(null);
+  next.refreshEnemyAtlasAvailabilityV65();
+  assert.equal(next.enemyAtlasLoadingPausedV65, true);
+  assert.equal(next.getBioforgeSnapshotV80().userPoseAssetIssue, 'user-pose-loading');
+  const before = next.enemies.map(actor => [actor.x, actor.y, actor.health]);
+  next.update(.1);
+  assert.deepEqual(next.enemies.map(actor => [actor.x, actor.y, actor.health]), before);
+  next.purgeBioforgeV80('missing-pose-purge');
+  assert.equal(next.enemies.length, 0);
+  assert.equal(next.getBioforgeSnapshotV80().userPoseAssetIssue, null);
+  assert.equal(next.enemyAtlasLoadingPausedV65, false);
+  const labels = [];
+  const context = new Proxy({ globalAlpha: 1, fillText: value => labels.push(value) }, { get: (target, key) => target[key] ?? (() => {}) });
+  next.ctx = context;
+  next.draw();
+  assert.ok(labels.every(label => !label.includes('SIMULATION EN ATTENTE')));
 });
 
 for (const entry of BIOFORGE_TERRESTRIAL_ROSTER_V80) {

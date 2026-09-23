@@ -108,6 +108,8 @@ try {
   assert.equal(report.checks.mixedDraft.composition.length, 2); assert.equal(report.checks.mixedDraft.maxConcurrent, 1);
   await capture('01-composition'); await click('#bioforge-start-v80');
   await until(`${R}.running`, 'start'); await canvasFocus();
+  const initialReserve = await read(`${R}.player.ammoReserve`);
+  assert.ok(initialReserve > 0, 'The lab supplies a positive ammunition reserve');
   const initialY = await read(`${R}.player.y`); await press('Space');
   await until(`${R}.player.y<${initialY-10}`, 'real jump');
   await until(`${R}.player.grounded`, 'real landing'); milestone('jump', await read(pose));
@@ -127,8 +129,11 @@ try {
   await pointClick(point.x, point.y); await until(`${R}.player.shots>=1`, 'real mouse shot');
   const shot = await read(pose); assert.equal(shot.player.ammo, 11); assert.equal(shot.player.shots, 1); milestone('realShot', shot);
   await press('KeyR'); await until(`!${R}.player.reloading&&${R}.player.ammo===12`, 'real tactical reload');
-  const reloaded = await read(pose); assert.equal(reloaded.player.reserve, 599); milestone('realReload', reloaded);
+  const reloaded = await read(pose); assert.equal(reloaded.player.reserve, initialReserve - 1); milestone('realReload', reloaded);
   await press('KeyP'); await until(`${R}.paused`, 'pause'); await capture('02-saturation');
+  assert.equal(await read("document.querySelector('#bioforge-ui-v80').dataset.terminalCompact"), 'true');
+  await click('#bioforge-terminal-toggle-v87');
+  assert.equal(await read("document.querySelector('#bioforge-terminal-toggle-v87').getAttribute('aria-expanded')"), 'true');
   await click('#bioforge-reinforcements-v87 summary');
   await select('#bioforge-reinforcement-editor-v87 select', 'enemy-003-chestburster');
   await number('#bioforge-reinforcement-editor-v87 input', 2);
@@ -137,6 +142,8 @@ try {
   await click('#bioforge-queue-v87 li:first-child button');
   await until(`${R}.bioforgeRootV80.activeSession.queue.filter(e=>e.status==='cancelled').length===1`, 'cancel only old egg line');
   milestone('cancelLine', (await read(pose)).snapshot); assert.equal(report.checks.cancelLine.alive, 1);
+  await click('#bioforge-terminal-toggle-v87');
+  assert.equal(await read("document.querySelector('#bioforge-ui-v80').dataset.terminalCompact"), 'true');
   await canvasFocus(); await press('KeyP');
   const firstId = saturated.physical.enemies[0].id;
   for (let i=0;i<10;i++) {
@@ -149,8 +156,12 @@ try {
   assert.equal(report.checks.progressiveCombat.snapshot.population.activeCount,1);
   assert.equal(report.checks.progressiveCombat.snapshot.capacity.pending,2);
   await capture('03-progressive-combat');
+  await click('#bioforge-terminal-toggle-v87');
+  assert.equal(await read("document.querySelector('#bioforge-terminal-toggle-v87').getAttribute('aria-expanded')"), 'true');
   await click('#bioforge-cancel-pending-v87'); await until(`${R}.getBioforgeSnapshotV80().capacity.pending===0`, 'cancel remaining only');
   const cancelled = await read(pose); assert.equal(cancelled.snapshot.alive,1); assert.equal(cancelled.snapshot.capacity.cancelled,3); milestone('cancelAll',cancelled.snapshot);
+  await click('#bioforge-terminal-toggle-v87');
+  assert.equal(await read("document.querySelector('#bioforge-ui-v80').dataset.terminalCompact"), 'true');
   const saved = await read('__ATF_BIOFORGE_V80__.snapshot().state.runtimeV81.physicalV87');
   await read('globalThis.__QA_OLD_DOCUMENT_V87__=true');
   await cdp('Page.reload', { ignoreCache: true }); await boot();

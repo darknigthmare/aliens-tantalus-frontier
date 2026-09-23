@@ -440,7 +440,8 @@ export class GameEngine extends MissionEngine {
 
   damagePlayer(player, amount, options = {}) {
     const environmental = ['acid', 'fall', 'vehicle-destroyed'].includes(options.source);
-    const multiplier = environmental ? 0.85 + this.missionPlan.world.danger * 0.04 : 1;
+    // Isolated laboratories have no campaign world/danger multiplier.
+    const multiplier = environmental && this.missionPlan?.world ? 0.85 + this.missionPlan.world.danger * 0.04 : 1;
     return super.damagePlayer(player, amount * multiplier, options);
   }
 

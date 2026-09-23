@@ -1,4 +1,4 @@
-const CACHE = 'atf-v86-physical-placeables-shell-8';
+const CACHE = 'atf-v86-physical-placeables-shell-9';
 const TITLE_BITMAPS_V87 = [
   '/assets/openai/ui/title/v79/space/space-01-deep-frontier.png',
   '/assets/openai/ui/title/v79/stars/stars-01-distant-field.png',
@@ -26,6 +26,8 @@ const CREW_V85 = ['/src/crew-recruitment-v85.js', '/src/crew-transactions-v85.js
 const SPRITE_MANIFEST = '/assets/openai/sprites/manifest.json';
 const MAX_ENEMY_ATLAS_BATCH_V65 = 12;
 const CORE = [
+  '/src/enemy-user-castes-v87.js',
+  '/src/enemy-user-pose-runtime-v87.js',
   ...TITLE_BITMAPS_V87,
   '/src/bioforge-physical-state-v87.js',
   '/src/player-airborne-presentation-v87.js',

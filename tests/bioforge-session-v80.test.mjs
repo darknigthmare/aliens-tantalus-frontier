@@ -70,16 +70,23 @@ test('V80 expose une racine séparée et toutes les phases contractuelles', () =
 });
 
 test('le roster terrestre est strict, validé et sans fallback legacy', () => {
-  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.length, 11);
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 11);
-  assert.equal(new Set(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80).size, 11);
+  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.length, 46);
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 46);
+  assert.equal(new Set(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80).size, 46);
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-051-ceto-reef-predator'), false);
 
   for (const profile of BIOFORGE_TERRESTRIAL_ROSTER_V80) {
     assert.equal(profile.terrestrial, true);
-    assert.equal(profile.identityVerified, true);
     assert.notEqual(profile.spriteKey, 'legacy');
-    assert.match(profile.path, /^\/assets\/openai\/sprites\/normalized\//);
+    if (profile.visualMode === 'static-pose') {
+      assert.equal(profile.identityVerified, false);
+      assert.equal(profile.animationStatus, 'missing');
+      assert.equal(profile.specializedBehaviorStatus, 'not-implemented');
+      assert.match(profile.path, /^\/assets\/user\/castes-v87\//);
+    } else {
+      assert.equal(profile.identityVerified, true);
+      assert.match(profile.path, /^\/assets\/openai\/sprites\/normalized\//);
+    }
     assert.equal(getBioforgeRosterEntryV80(profile.profileId), profile);
   }
   assert.equal(getBioforgeRosterEntryV80('enemy-999-placeholder'), null);
@@ -147,7 +154,7 @@ test('la création et la configuration sont autonomes et ne mutent pas la source
     unitCost: 3,
     budget: 3
   });
-  assert.equal(Object.keys(root.records).length, 11);
+  assert.equal(Object.keys(root.records).length, 46);
 
   const configured = configureBioforgeV80(root, {
     profileId: 'enemy-001-ovomorph',
