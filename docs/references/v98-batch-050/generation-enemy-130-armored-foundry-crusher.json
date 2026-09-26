@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-130-armored-foundry-crusher",
+  "name": "Armored Foundry Crusher",
+  "prompt": "Use case: stylized-concept.\nAsset type: one native transparent side-view game creature sprite.\nPrimary request: ONE newly authored Armored Foundry Crusher.\nInput image 1: exact base anatomy, palette and shaded-sprite style reference, not its sheet layout. Use the intact walking/standing quadruped reference.\nSubject: low heavy charcoal-brown quadrupedal organic creature, armored massive front crest shaped like a tall swept shield, broad heavy shoulder/forequarters, four distinct weight-bearing clawed limbs, plated haunches and ONE long tapering segmented tail. Preserve the distinctive shield cranium, squat quadruped proportions, bronze-brown edges and dark chitin recesses.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nThicken naturally layered carapace plates on its existing shield, shoulders, back and limbs without adding horns, limbs or mechanical equipment.\nComposition: one calm ready standing pose facing RIGHT. Show all FOUR grounded limbs separated in a slight side-three-quarter view, full cranial shield and full tail to tip. Entire silhouette at most 80% of the frame, with generous 10% transparent padding on every edge.\nBackground: real transparent alpha only, no scenery, floor or cast shadow.\nNo bipedal redesign, text, logo, grid, collage, sheet, other characters, crop, gore, blood, wounds, glow or weapon. Original systemic project adaptation, not an official model or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+    "sha256": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+    "visualNotes": "Low stocky charcoal-brown quadruped; tall swept cranial shield with bronze edges, four weight-bearing clawed limbs, heavy shoulders, plated haunches and long tapering tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-5234d63b-712c-4872-a672-e4de445da614.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-130-armored-foundry-crusher.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "a33dd70e916f6623ebfb07195c54633d264ed8728ef98af310cdba016b0053ce",
+    "bboxAlphaAtLeast16": [
+      87,
+      151,
+      1436,
+      887
+    ],
+    "alphaMin": 0,
+    "alpha0": 1094169,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing quadrupedal Foundry Crusher with retained tall cranial shield and four limbs (far forefoot partly behind near foreleg but visible), broad natural bronze-edged dark plates and full tapering tail. No bipedal substitution. Measured visible margins in pixels: {\"left\":87,\"top\":151,\"right\":100,\"bottom\":137}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.604,
+      "y": 0.865234375
+    },
+    "sourceFacing": 1
+  }
+}

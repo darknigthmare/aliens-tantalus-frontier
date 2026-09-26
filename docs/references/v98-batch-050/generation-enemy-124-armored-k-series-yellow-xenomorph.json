@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-124-armored-k-series-yellow-xenomorph",
+  "name": "Armored K-Series Yellow Xenomorph",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static character sprite for a 2D side-view game.\nPrimary request: ONE original Armored K-Series Yellow Xenomorph. Input image 1 is the base anatomy, identity and shaded sprite-style reference only; use an intact standing pose and do not reproduce its grid.\nSubject: gold-yellow biomechanical biped with short elongated ridged yellow skull, clearly visible ribbed black-yellow thorax, exactly two clawed arms and two digitigrade legs, dorsal tubes and ONE long curled segmented tail ending in the reference's spear-like tip.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nIntegrate thicker natural yellow chitin armor plates at existing shoulders, thorax, forearms and shins. Preserve all base proportions, golden-yellow identity, dark recesses and organic relief; not a robot or suit.\nComposition: one neutral-ready full-body pose facing RIGHT, leg and arm silhouettes clearly separated. Whole head, back tubes, claws, feet and entire tail including its tip visible, at least 10% empty padding all around.\nBackground: genuinely transparent alpha; no scenery, ground, cast shadow or glow.\nAvoid: text, watermark, logo, panels, grid, sprite sheet, repeated poses, collage, crop, new limbs, new equipment, blood, wounds or gore. One standalone creature only, an original systemic project adaptation, not certified canon or an animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+    "sha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+    "visualNotes": "Gold-yellow ridged short elongated head, dark ribbed recesses, exactly two arms and legs, dorsal tubes, high curled segmented tail with spear tip. Standing reference frame used; sheet layout excluded."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-6c8bb36e-c2b9-4af3-a3ad-c11d1e9894a8.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-124-armored-k-series-yellow-xenomorph.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "28fc592dc0e74dc7afe0d7ec34fa58165e24da5b69620ff997392693e80c5f54",
+    "bboxAlphaAtLeast16": [
+      295,
+      42,
+      1204,
+      977
+    ],
+    "alphaMin": 0,
+    "alpha0": 1198730,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing yellow-black organic armored biped; two hands, two legs, four dorsal tubes and full spear-tipped tail visually distinct. Real transparent alpha measured; hidden-RGB preview halo is not opaque background. Top/bottom visible margins 4.1/4.6% rather than requested 10%, no clipping."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.523,
+      "y": 0.953125
+    },
+    "sourceFacing": 1
+  }
+}

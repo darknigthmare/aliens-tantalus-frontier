@@ -18,7 +18,7 @@ import { PRIVATE_V83_PROOF_PATHS } from './verify-production-v83.mjs';
 import { PRIVATE_V82_PROOF_PATHS } from './verify-production-v82.mjs';
 
 export const PRODUCTION_VERSION_V86 = '86.0.0';
-export const PRODUCTION_CACHE_V86 = 'atf-v86-xeno-trials-v97-shell-1';
+export const PRODUCTION_CACHE_V86 = 'atf-v86-xeno-trials-v98-shell-1';
 export const PRODUCTION_REPORT_PATH_V86 = 'docs/references/v86-release-qa/production-http.json';
 export const REPORT_PATHS_V86 = Object.freeze({
   production: PRODUCTION_REPORT_PATH_V86,

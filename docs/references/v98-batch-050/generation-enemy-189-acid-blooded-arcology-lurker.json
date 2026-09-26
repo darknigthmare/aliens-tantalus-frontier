@@ -1,0 +1,24 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-189-acid-blooded-arcology-lurker",
+  "name": "Acid-Blooded Arcology Lurker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D game creature cutout.\nInput image 1 is base identity/style reference only, not an output grid. Generate Acid-Blooded Arcology Lurker. Viewed Arcology Lurker sheet: very slim charcoal-black alien with elongated smooth horizontal dome, narrow ribbed chest, two disproportionately long slender arms and spread clawed fingers, two lean digitigrade legs, only short dorsal stubs and one thin tapering tail. Neutral crouched and standing right-facing silhouettes.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nKeep the very slender long-armed anatomy, charcoal-black shell, horizontal smooth dome, lean bent legs and thin complete tail. Olive-amber sheen and restrained yellow-green seams stay subtle, not neon. One intact quiet alert crouched-standing pose facing RIGHT in side/three-quarter game view. Two arms/two legs, long fingers relaxed, feet on imaginary ground line.\nEntire head, all fingers, feet and tail fully within frame, at least 10% transparent margin every edge. Genuine RGBA transparent background, no floor or shadow patch. Fine painted realistic game relief and dark contour as reference. Original systemic project interpretation, no official-canon or animation claim.\nAvoid grid, panels, repeats, text, watermark, logo, label, scenery, cropped parts, extra limbs, wounds, exposed tissue, blood or fluids, spray, splashes, puddles, aura, glow outline, checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png",
+    "sha256": "7e8c2108fb90998185d28e9d158f98fe78bc4eafe756605b5f923145c2d1df3c",
+    "visualNotes": "Viewed Arcology Lurker sheet: very slim charcoal-black alien with elongated smooth horizontal dome, narrow ribbed chest, two disproportionately long slender arms and spread clawed fingers, two lean digitigrade legs, only short dorsal stubs and one thin tapering tail. Neutral crouched and standing right-facing silhouettes."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted.",
+    "requestId": "1cc664f9-5f08-4e61-b817-eee058a5abc8",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

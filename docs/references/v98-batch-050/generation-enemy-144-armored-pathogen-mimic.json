@@ -1,0 +1,31 @@
+{
+  "profileId": "enemy-144-armored-pathogen-mimic",
+  "name": "Armored Pathogen Mimic",
+  "prompt": "Create exactly ONE original static game enemy pose for Armored Pathogen Mimic. The attached local sheet is identity/anatomy/material/style reference ONLY: do not recreate its sheet, frame grid, sequence or multiple figures. Original systemic project adaptation, not a canonical 1:1 specimen or animated frame.\n\nReference anatomy lock: a low hunched pale taupe/ivory organic quadruped with a compact thick blunt head facing RIGHT, knotted closed sinewy ribbed torso, two forelimbs and two rear limbs ending in clawed feet, and the three thin flexible whip-like appendages sweeping backwards from the upper rear body. Keep those rear tendrils individually traceable with separated uncut tips. Preserve the reference's compact muscular asymmetric-looking organic relief, blunt crowded skull with small dark mouth, pale gray-brown flesh/chitin coloration, and four-limb grounded stance. No humanoid upright redesign, no extra limbs, no alien dome head, no mechanical armor, no weapons, no additional tail or invented appendages. All surfaces closed and intact; no gore, exposed organs, torn skin or blood.\n\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\n\nOne whole character only, isolated on genuine transparent alpha background. Side-on / slight three-quarter side view facing RIGHT, head and all claws to the right, still readable compact stance. Clearly separate all four weight-bearing feet and show the entire skull, all appendage roots and tips. Practical layered NATURAL carapace guards on shoulders/back/limbs must retain the same family silhouette and its pale organic surface relief. Keep crisp dark outlines, muted realistic pixel-painted/digitally painted 2D game-sprite shading matching reference, fine hard-edged highlights, no glossy toy/3D render look. No other poses or detached body pieces.\n\nCenter entire silhouette with at least 10% fully transparent padding on every side, no edge cropping or contact with image boundary. No environment, ground, cast-shadow blob, gradients, halo, background colors, checkerboard, captions, UI, text, symbols, logos or watermark. Return a fresh native PNG containing this one complete pose.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pathogen-mimic-action-sheet.png",
+    "sha256": "f5b8525e9c0f4d03c30e6c671d129b0e7147878de4ce9647ac78e5800ec631c2",
+    "visualNotes": "Low pale taupe organic quadruped with four weight-bearing limbs, compact blunt skull, knotted ribbed closed torso and three slender rearward upper-body tendrils."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-f7eb146b-d148-490b-af5b-7fdb4b0cb9fa.png",
+    "path": null,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "9c0597f146e041d6c81753764bc45d6d0360bf5748e230547f49dd8572301053",
+    "bboxAlphaAtLeast16": [
+      132,
+      222,
+      1329,
+      846
+    ],
+    "alphaMin": 0,
+    "alpha0": 1195429,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "notes": "One native generation attempted. Visual inspection shows FIVE distinct weight-bearing legs/feet instead of the reference quadruped's four (an additional middle foot is visible beneath the torso). Anatomy lock is not satisfied. Native provider PNG retained untouched outside runtime; no copy, retry, reformulation or image transformation."
+  },
+  "runtimeContract": null
+}

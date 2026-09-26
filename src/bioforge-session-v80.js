@@ -3,7 +3,7 @@ import { V66_READY_ENEMY_PROFILE_ASSETS } from './enemy-profile-assets-v66.js';
 import { BIOFORGE_WORLD_V80 } from './bioforge-level-v80.js';
 import { normalizePlayerFacingV81 } from './player-visual-contract-v81.js';
 import { sanitizeBioforgePhysicalV87 } from './bioforge-physical-state-v87.js';
-import { ENEMY_DEDICATED_POSE_IDS_V97 as ENEMY_DEDICATED_POSE_IDS_V96, getEnemyDedicatedPoseV97 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v97.js';
+import { ENEMY_DEDICATED_POSE_IDS_V98 as ENEMY_DEDICATED_POSE_IDS_V96, getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV96 } from './enemy-dedicated-poses-v98.js';
 import { ENEMY_STATIC_POSE_IDS_V96 as ENEMY_USER_CASTES_IDS_V87, getEnemyStaticPoseV96 as getEnemyUserCasteV87, sanitizeEnemyStaticPoseStateV96 as sanitizeEnemyStaticPoseStateV95 } from './enemy-static-poses-v96.js';
 
 export const BIOFORGE_SCHEMA_V80 = 80;

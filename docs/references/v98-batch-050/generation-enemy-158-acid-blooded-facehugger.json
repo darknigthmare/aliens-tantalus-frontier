@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-158-acid-blooded-facehugger",
+  "name": "Acid-Blooded Facehugger",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference side-view sequence of a tan small facehugger: low folded central body and paired rounded lateral sacs, eight finger-like jointed walking digits in four pairs, and one long tapering segmented tail trailing left. No eyes, no adult xenomorph skull.\nSubject: Acid-Blooded Facehugger. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Anatomy lock: ONE small tan facehugger in low right-facing side/three-quarter profile. Exactly eight finger-like jointed walking digits in four bilateral pairs around a compact folded body, with a pair of rounded lateral sacs, and ONE long thin tapering segmented tail extending gently left. Offset far-side digits so anatomy is clear. No independent head, eyes, adult elongated skull, wings or bipedal torso. Keep neutral crawling/resting pose with all digit tips and full tail visible. Subtle olive-amber material sheen and restrained seam accents, tan remains dominant.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v65/enemy-002-facehugger.webp",
+    "sha256": "6c945329f8e03e3473bba35367a99773cc8fecb115df508bfc06ebe4a67eab27",
+    "visualNotes": "Reference side-view sequence of a tan small facehugger: low folded central body and paired rounded lateral sacs, eight finger-like jointed walking digits in four pairs, and one long tapering segmented tail trailing left. No eyes, no adult xenomorph skull."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-e14afb7c-ece5-44a0-8c1e-1a3dd90dda95.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-158-acid-blooded-facehugger.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "1337c39f652949af095346152e102763743626a065c3c3827ce87e04775cdcaa",
+    "bboxAlphaAtLeast16": [
+      75,
+      319,
+      1699,
+      717
+    ],
+    "alphaMin": 0,
+    "alpha0": 1313637,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Tan low facehugger body, paired lateral sacs, four pairs of folded finger-like walking digits and single tapering segmented tail are preserved. Rightward crawling silhouette is complete, with far-side digits offset. Olive-yellow seam accents stay on intact skin without spray or aura. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.715,
+      "y": 0.8083427282976324
+    },
+    "sourceFacing": 1
+  }
+}

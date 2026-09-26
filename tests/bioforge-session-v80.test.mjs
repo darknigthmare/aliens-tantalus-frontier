@@ -1,6 +1,6 @@
 import { ENEMY_USER_CREATIONS_V95 as USER_ADDITIONS } from '../src/enemy-user-creations-v95.js';
 import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
-import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_DEDICATED_POSES_V98 as ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v98.js';
 import { ENEMY_STATIC_POSES_V96 as CURRENT_STATIC } from '../src/enemy-static-poses-v96.js';
 const DEDICATED = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.bioforgeEligible !== false);
 import test from 'node:test';
@@ -80,7 +80,18 @@ test('le roster terrestre est strict, validé et sans fallback legacy', () => {
   assert.equal(new Set(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80).size, 11 + CURRENT_STATIC.length + DEDICATED.length);
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-051-ceto-reef-predator'), false);
   assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-103-albino-ceto-reef-predator'), false);
-  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 159);
+  const batchV98 = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.batch === 'v98-050');
+  const batchV98Ids = new Set(batchV98.map(entry => entry.profileId));
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.filter(entry => !batchV98Ids.has(entry.profileId)).length, 159,
+    'the historical V97 roster remains unchanged outside the newly admitted batch');
+  assert.equal(BIOFORGE_TERRESTRIAL_ROSTER_V80.length, 198);
+  assert.equal(batchV98.length, 40);
+  assert.equal(batchV98.filter(entry => entry.bioforgeEligible !== false).length, 39);
+  assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes('enemy-155-armored-ceto-reef-predator'), false);
+  for (const definition of batchV98) {
+    assert.equal(BIOFORGE_TERRESTRIAL_PROFILE_IDS_V80.includes(definition.profileId), definition.bioforgeEligible !== false, definition.profileId);
+    assert.equal(definition.id, definition.profileId, 'a V98 dedicated pose preserves its historical identity');
+  }
   const batch = ENEMY_DEDICATED_POSES_V97.filter(entry => entry.batch === 'v97-050');
   assert.equal(batch.length, 43); assert.equal(batch.filter(entry => entry.bioforgeEligible !== false).length, 42);
   for (const definition of batch) {

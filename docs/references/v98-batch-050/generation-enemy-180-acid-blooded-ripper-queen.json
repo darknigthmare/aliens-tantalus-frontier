@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-180-acid-blooded-ripper-queen",
+  "name": "Acid-Blooded Ripper Queen",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D game creature cutout.\nImage 1: base Ripper Queen identity and painted realistic rendering reference only, NOT an output sprite sheet. Generate Acid-Blooded Ripper Queen. Viewed Ripper Queen sheet: heavy forward-hunched royal alien with intricate pale silver-gray layered crown extending backward, jagged dorsal carapace, dark charcoal ribbed body, two long powerful forelimbs bearing clawed hands, two strong bent hindlegs and a thick looping segmented tail. Narrow dark-red accents remain between armored relief; base neutral pose is intact.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nUse the intact neutral alert stance, facing RIGHT in side/three-quarter game view. Preserve exact base limb count, royal crown and dorsal ridge geometry, pale silver-gray shell, charcoal recesses and curled single tail. Add restrained olive-amber shell iridescence and fine muted yellow-green seams, not a global recolor. Royal imposing mass and low forward shoulders, no action effects.\nComposition: entire creature including crown, all claws, feet and complete tail must be visible with 10% transparent margin on every side. Weight-bearing feet/claws share imaginary ground line. Genuine transparent RGBA, no floor/cast shadow, background or glow. Match detailed realistic painted game texture and crisp relief, not cartoon. Original project variant, not canonical certification or animation.\nAvoid grids, panels, duplicated creature, text, label, logo, watermark, crop, invented appendages, wounds, exposed tissue, blood, fluids, spray, splatter, puddles, aura or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+    "sha256": "20878480f2538db0a9972743f1f5012845bdd898ea4188ab566c6efdbc1f7af8",
+    "visualNotes": "Viewed Ripper Queen sheet: heavy forward-hunched royal alien with intricate pale silver-gray layered crown extending backward, jagged dorsal carapace, dark charcoal ribbed body, two long powerful forelimbs bearing clawed hands, two strong bent hindlegs and a thick looping segmented tail. Narrow dark-red accents remain between armored relief; base neutral pose is intact."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-950b74fc-7bd0-44c7-91b4-ea5ddcea748f.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-180-acid-blooded-ripper-queen.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "2810b39839189f284a0def67d4f00f17b1d97eb5a1f63eb568801b429fab0ad2",
+    "bboxAlphaAtLeast16": [
+      149,
+      60,
+      1391,
+      949
+    ],
+    "alphaMin": 0,
+    "alpha0": 1050696,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single intact royal silhouette facing right: pale silver layered openwork crown and dorsal ridge, charcoal ribbed mass, two main forelimbs/two hindlimbs, one complete curved tail. Reference family retained with fine olive-yellow seams. No damage, action effects, text or grid. Complete silhouette with native transparency; actual margins below requested 10% on some edges recorded. Pixels unchanged.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 149,
+      "top": 60,
+      "right": 145,
+      "bottom": 75
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.9267578125
+    },
+    "sourceFacing": 1
+  }
+}

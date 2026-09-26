@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-140-armored-deacon-line",
+  "name": "Armored Deacon Line",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view fictional creature sprite.\nPrimary request: ONE original Armored Deacon Line.\nInput image 1 is this creature's exact anatomy, blue palette and shaded sprite-style reference, not a layout. Use the intact upright top-row pose.\nSubject: tall slender dark blue organic humanoid creature with a low smooth crest tapering sharply backward, narrow neck and ribbed torso, exactly TWO thin long arms with long fingered hands, TWO long jointed legs and narrow feet. Preserve the reference's tail-less, dorsal-tube-free silhouette, pointed backward head shape and dark teal-blue skin. No xenomorph tail or back spines.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nArmored variation: slim natural blue carapace plates on the existing shoulders, chest, forearms and shins, following the slender anatomy. Preserve the smooth cranial crest and its backward point.\nComposition: one entire static neutral-ready standing pose facing RIGHT, side-three-quarter angle, both arms, hands, legs and feet clearly separated. Entire crest and fingertips visible with at least 10% empty margin on each edge.\nBackground: true transparent alpha, no floor, shadow, scenery or glow.\nNo grid, sheet, repeated poses, other characters, text, labels, logos, crop, extra limbs, tail, machinery, weapons, wounds or gore. Original project systemic adaptation, not official model certification or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/deacon-line-action-sheet-v56.png",
+    "sha256": "b1de6bc249f8d3fbad6c808edebac0c850c160d92c601f3ffd549df75008c4c8",
+    "visualNotes": "Tall slender dark teal-blue tail-less biped, backward-pointing smooth low crest, narrow neck/ribbed torso, two long arms and fingered hands, two long jointed legs; no dorsal tubes."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-c4d2ebc7-2b1b-4775-814c-60a84f56cf67.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-140-armored-deacon-line.png",
+    "width": 1334,
+    "height": 1179,
+    "sha256": "3a5e7cf3e49698d9a5db12cd1fb19b9036addcfc6c14cd1c832c6e6dfe488791",
+    "bboxAlphaAtLeast16": [
+      496,
+      106,
+      919,
+      1118
+    ],
+    "alphaMin": 0,
+    "alpha0": 1357143,
+    "totalPixels": 1572786
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing tail-less blue Deacon form, two long arms and legs distinct. Backward-pointed smooth crest, slim dark-blue organic body and tube-free back preserved with integrated thin blue guards. Measured visible margins in pixels: {\"left\":496,\"top\":106,\"right\":415,\"bottom\":61}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.505,
+      "y": 0.9474130619168787
+    },
+    "sourceFacing": 1
+  }
+}

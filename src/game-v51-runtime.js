@@ -5,7 +5,7 @@ import { MISSION_STRUCTURE_CROPS_V87, drawTiledMissionCropV87, drawMissionLadder
 import { getMissionStructureLayoutV87 } from './mission-structure-layout-v87.js';
 import { SPRITE_SHEETS, SPRITE_HITBOXES, SpriteAnimationController, resolveEnemyAnimation, resolveSpriteSheet, resolveVehicleAnimation, shouldFlipSprite } from './sprite-animation-runtime.js';
 import { resolveEnemyVisualProfile, resolveLegacyEnemyCell } from './enemy-visual-runtime-v53.js';
-import { getEnemyDedicatedPoseV97 as getEnemyDedicatedPoseV96, drawEnemyDedicatedPoseV97 as drawEnemyDedicatedPoseV96, isEnemyDedicatedPoseReadyV97 as isEnemyDedicatedPoseReadyV96 } from './enemy-dedicated-poses-v97.js';
+import { getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV96, drawEnemyDedicatedPoseV98 as drawEnemyDedicatedPoseV96, isEnemyDedicatedPoseReadyV98 as isEnemyDedicatedPoseReadyV96 } from './enemy-dedicated-poses-v98.js';
 import {
   advanceEnemyMeleeAttackV64,
   armEnemyMeleeAttackV64,

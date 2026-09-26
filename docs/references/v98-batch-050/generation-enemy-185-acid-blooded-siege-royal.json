@@ -1,0 +1,24 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-185-acid-blooded-siege-royal",
+  "name": "Acid-Blooded Siege Royal",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D game creature cutout.\nInput image 1 is base identity and detailed painted style reference, NOT an output sheet. Generate Acid-Blooded Siege Royal. Viewed Siege Royal sheet: tall broad-shouldered black/gunmetal biped, large elongated high segmented layered head crest, ribbed chest, round shoulder shells, two heavy arms with clawed hands, two digitigrade legs and one thick tapering low segmented tail. Short dorsal tubes, silver-gray hard highlights.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve the tall two-arm/two-leg royal silhouette, wide layered cranial crest, graphite-black organic armor, silver-gray highlights and one complete low tail. Subtle olive-amber material iridescence and fine yellow-green seams, no mechanical suit. One healthy intact neutral standing stance facing RIGHT, side/three-quarter game view.\nAll head/crest/claws/feet/tail fully visible. Feet aligned on imaginary ground line. At least 10% transparent padding every edge, genuine transparent RGBA, no ground plane/shadow patch. Match realistic textured painting and natural silhouette contours of reference. Original project variant, no official-canon or animation claim.\nAvoid text, label, watermark, logo, grid, panels, repeat poses, background, crop, added limbs, wounds, exposed tissue, blood or fluid effects, splashes, puddles, aura, glow outline, checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/siege-royal-action-sheet-v56.png",
+    "sha256": "44fb95c87bca817f17a0539109364c7eda306459eeaafc790bc0a61f77aa2a26",
+    "visualNotes": "Viewed Siege Royal sheet: tall broad-shouldered black/gunmetal biped, large elongated high segmented layered head crest, ribbed chest, round shoulder shells, two heavy arms with clawed hands, two digitigrade legs and one thick tapering low segmented tail. Short dorsal tubes, silver-gray hard highlights."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted.",
+    "requestId": "39a45961-506f-4ee9-9831-e295d9cecd9f",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

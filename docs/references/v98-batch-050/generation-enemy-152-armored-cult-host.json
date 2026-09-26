@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-152-armored-cult-host",
+  "name": "Armored Cult Host",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference is a multi-pose sheet of a bald adult male cultist with gaunt face, beige short-sleeved shirt, dark brown trousers, boots, round metal canister on chest straps and orange marking patterns on forearms. Use the upright intact neutral first pose, not the injury/fall frames.\nSubject: Armored Cult Host. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Keep the bald adult human face, beige shirt, dark brown trousers, chest harness with round metal canister and boots. Add practical worn neutral-brown protective vest and shoulder/forearm/shin guards; leave sections of sleeves, torso and forearm markings recognisable. Exactly two normal human arms and two legs, empty hands, no weapon, no creature emerging from body; intact covered torso.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/cult-host-action-sheet-v56.png",
+    "sha256": "ea3ba3c83c55ee1d6b57d2f525135dc0a447de1493b5f4fa4caaa39ea85f0e2c",
+    "visualNotes": "Reference is a multi-pose sheet of a bald adult male cultist with gaunt face, beige short-sleeved shirt, dark brown trousers, boots, round metal canister on chest straps and orange marking patterns on forearms. Use the upright intact neutral first pose, not the injury/fall frames."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-62504675-d88d-4b9b-aaa8-b8823340e77e.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-152-armored-cult-host.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "41bb1fbad0d2359289e5542083174548614de393511f17e59d3b7e6ad354cb95",
+    "bboxAlphaAtLeast16": [
+      216,
+      93,
+      807,
+      1393
+    ],
+    "alphaMin": 0,
+    "alpha0": 1140082,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete intact bald human, gaunt face, beige shirt, brown trousers, round harness canister and orange forearm markings retained. Added worn protective guards. Empty hands; all limbs and feet visible. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.9069010416666666
+    },
+    "sourceFacing": 1
+  }
+}

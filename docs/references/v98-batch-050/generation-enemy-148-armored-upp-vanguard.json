@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-148-armored-upp-vanguard",
+  "name": "Armored UPP Vanguard",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1: anatomical and painted game-art style reference only, not a sheet to reproduce. Reference sheet of an olive-drab armored adult human soldier, smooth closed helmet with small red optic, fatigues, pouches, knee pads, boots and one compact boxy rifle. Use the first neutral standing ready pose only.\nSubject: Armored UPP Vanguard, original systemic project adaptation, not an official model or a canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE complete standing individual, right-facing near-side profile, neutral ready pose, head, hands, weapon and both boots entirely visible. Ten percent transparent padding on every side. Preserve precisely two arms and two legs; retain helmet/uniform and rifle design from the first neutral reference pose, adding practical layered shoulder, forearm and shin guards. Do not invent new equipment.\nStyle: detailed restrained science-fiction digital painted game sprite with crisp readable material relief and controlled highlights, same olive drab and dark charcoal identity as reference.\nBackground: genuine transparent PNG alpha. No scene, floor, shadow, grid, sheet, lettering, logo, watermark, muzzle flash, wounds, blood, gore or second pose.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/upp-vanguard-action-sheet-v56.png",
+    "sha256": "09d44286a91aaf143a6b638c6a4e500f290ef14ecfed5e6dd28cdc13b52ccf61",
+    "visualNotes": "Reference sheet of an olive-drab armored adult human soldier, smooth closed helmet with small red optic, fatigues, pouches, knee pads, boots and one compact boxy rifle. Use the first neutral standing ready pose only."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-25ec9cf3-f216-4a49-b3b3-cb56f452f39e.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-148-armored-upp-vanguard.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "3751876d7bf6999be9f6c1fae8cc4a522871c59d8601265387b026ab8cb13a8f",
+    "bboxAlphaAtLeast16": [
+      377,
+      112,
+      959,
+      1141
+    ],
+    "alphaMin": 0,
+    "alpha0": 1276146,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing intact UPP soldier retains olive uniform, closed red-optic helmet and compact rifle. Layered shoulder, arm and shin guards added; two arms/two legs. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.9098883572567783
+    },
+    "sourceFacing": 1
+  }
+}

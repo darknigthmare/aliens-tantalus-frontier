@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-182-acid-blooded-foundry-crusher",
+  "name": "Acid-Blooded Foundry Crusher",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static full-body 2D game creature cutout.\nInput image 1: Foundry Crusher identity and painted realistic rendering reference, not an output grid. Generate Acid-Blooded Foundry Crusher. Viewed Foundry Crusher base: heavy four-legged dark bronze-black alien with huge upright curved shield-like head crest, stout muscular forelegs and hindlegs, round organic shoulder joints, layered dorsal plates, short low neck and long heavy tapered segmented tail. Plate borders have worn bronze highlights. No machine suit.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve the massive upright shield crest, four-legged low powerful body, layered natural carapace, dark bronze-black color and single segmented tail. Add only newly painted restrained olive-amber sheen and fine yellow-green seams. Neutral intact quadrupedal stance facing RIGHT, slightly elevated side/three-quarter game viewpoint, four feet on imaginary ground line.\nFull crest, head, body, all four feet and entire tail visible. At least 10% transparent padding each side. Genuine transparent RGBA background with no floor or shadow. Detailed realistic painted game sprite and natural dark contours matching reference. Original project variant, no exact-canon or animation claim.\nNo grid, panels, duplicates, text, labels, watermark, logo, background, cropped parts, added appendages, wounds, blood, exposed tissue, fluid effects, splashes, puddles, aura, glow outline or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/foundry-crusher-action-sheet-v56.png",
+    "sha256": "3ada141e2d40c9354637aca6c8008afc069a59c3fa10396de1f99a9adb2db77f",
+    "visualNotes": "Viewed Foundry Crusher base: heavy four-legged dark bronze-black alien with huge upright curved shield-like head crest, stout muscular forelegs and hindlegs, round organic shoulder joints, layered dorsal plates, short low neck and long heavy tapered segmented tail. Plate borders have worn bronze highlights. No machine suit."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-d88281af-c0a8-4595-8e1a-5609eb0e27b1.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-182-acid-blooded-foundry-crusher.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "0d1c545f00ebeeebe0a90c0171b6f5ed40403558fcdb1783ae905f6028eff111",
+    "bboxAlphaAtLeast16": [
+      80,
+      125,
+      1457,
+      922
+    ],
+    "alphaMin": 0,
+    "alpha0": 1048601,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single intact right-facing Foundry Crusher, huge upright crest, four stout legs, dark bronze layered natural shell and complete low tapered tail. Restrained olive-yellow seams preserve original material family. No grid, text or effects; full silhouette unclipped, actual native margins recorded and pixels unaltered.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 80,
+      "top": 125,
+      "right": 79,
+      "bottom": 102
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.62,
+      "y": 0.900390625
+    },
+    "sourceFacing": 1
+  }
+}

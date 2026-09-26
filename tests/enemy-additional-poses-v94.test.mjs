@@ -8,7 +8,7 @@ import test from 'node:test';
 import { auditPngBuffer } from '../docs/references/v91-enemy-only/audit-candidate-png.mjs';
 import { createBuildAssetFilter } from '../scripts/build-asset-filter.mjs';
 import { ENEMY_ADDITIONAL_POSES_V94 as ADDITIONAL } from '../src/enemy-additional-poses-v94.js';
-import { ENEMY_DEDICATED_POSES_V97 as DEDICATED } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_DEDICATED_POSES_V98 as DEDICATED } from '../src/enemy-dedicated-poses-v98.js';
 import { ENEMY_STATIC_POSES_V94 as STATIC, ENEMY_STATIC_POSE_IDS_V94, ENEMY_STATIC_POSE_PATHS_V94, getEnemyStaticPoseV94, getEnemyStaticPoseRangedBehaviorV94 } from '../src/enemy-static-poses-v94.js';
 import { ENEMY_STATIC_POSES_V96 as ALL_STATIC } from '../src/enemy-static-poses-v96.js';
 import { ENEMY_USER_CASTES_ORIGINALS_V87 as ORIGINALS, ENEMY_USER_CASTES_V87, getEnemyUserCasteV87 } from '../src/enemy-user-castes-v87.js';

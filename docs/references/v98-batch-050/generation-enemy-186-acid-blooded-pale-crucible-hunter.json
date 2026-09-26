@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-186-acid-blooded-pale-crucible-hunter",
+  "name": "Acid-Blooded Pale Crucible Hunter",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static full-body 2D game creature cutout.\nInput image 1 is the existing base identity and painted realistic style reference only, not an output grid. Generate Acid-Blooded Pale Crucible Hunter. Viewed Pale Crucible Hunter: pale ivory/taupe lean crouching alien with smooth elongated domed head, two long slim forelimbs ending in clawed hands, two bent hindlegs, small ridged dorsal structures, ribbed sinewy carapace and one thin long curved tail. Four total limbs and a low forward alert stance.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nKeep the ivory/taupe shell and dark recessed detail, low lean four-limb stance, smooth elongated head and single long tail. Olive-amber iridescence and muted yellow-green seam detail are delicate, preserve pale identity. One intact neutral alert creature facing RIGHT, side/three-quarter game view, all supporting claws on an imaginary ground line.\nEntire head, limbs, claws and complete tail inside frame, 10% transparent margin all edges. Genuine RGBA transparency, no floor or cast-shadow patch. Match finely rendered realistic painted game material and directional highlights. Static project variant, not official canon or animation.\nAvoid grid, panels, repeats, text, watermark, labels, logo, scenery, cropped appendages, extra limbs, wounds, exposed tissue, blood, liquid effects, spray, splashes, puddles, aura, glow outline and checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png",
+    "sha256": "551267a12dc90b18ec206c5a853c5c3de0d30fcbe5fe5bea19391f952c4d977c",
+    "visualNotes": "Viewed Pale Crucible Hunter: pale ivory/taupe lean crouching alien with smooth elongated domed head, two long slim forelimbs ending in clawed hands, two bent hindlegs, small ridged dorsal structures, ribbed sinewy carapace and one thin long curved tail. Four total limbs and a low forward alert stance."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-1756f2e4-658f-4efd-963e-4a0a7c6518d8.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-186-acid-blooded-pale-crucible-hunter.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "ee024a7adf0cb18af409678d528fcb52c4c57fc64c53751bec49b30485ce9dfb",
+    "bboxAlphaAtLeast16": [
+      66,
+      226,
+      1482,
+      854
+    ],
+    "alphaMin": 0,
+    "alpha0": 1235099,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single intact pale ivory/taupe Crucible Hunter facing right, long dome, two long forelimbs and two bent hindlegs, small dorsal ridges and one thin complete tail. Pale identity retained with subtle yellow-green seams. No effects/grid/text; full-body silhouette visible, native alpha and actual margins recorded without pixel processing.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 66,
+      "top": 226,
+      "right": 54,
+      "bottom": 170
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.57,
+      "y": 0.833984375
+    },
+    "sourceFacing": 1
+  }
+}

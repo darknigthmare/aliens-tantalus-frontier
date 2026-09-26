@@ -1,0 +1,24 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-175-acid-blooded-red-xenomorph",
+  "name": "Acid-Blooded Red Xenomorph",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE static full-body 2D game creature cutout.\nImage 1 is a mixed base style sheet. Identity reference is ONLY the RED alien in its TOP ROW. Ignore all yellow and robotic figures. Generate one Acid-Blooded Red Xenomorph: Viewed mixed sheet: use ONLY top row red xenomorph, not yellow row or mechanical figures. Red form is a lean biped with two arms, two long bent legs, long swept burgundy dome, black ribbed torso, fan of backward dorsal spikes, red joint shells and sharp clawed hands. Preserve its compact tail behind the pelvis rather than borrowing other rows.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nDominant identity color must stay deep burgundy-red and black. Olive-amber iridescence and small yellow-green seams are restrained secondary material detail, never a yellow recolor. Preserve two arms, two legs, swept head and backward dorsal spines. Healthy intact neutral alert standing pose facing RIGHT, slight three-quarter side view.\nComplete body, head, all feet/claws and tail inside frame; 10% transparent padding on every side. Fine detailed painted game realism, directional highlights, textured carapace, no cartoon. Genuinely transparent RGBA background with no floor or shadow. Original project variant, not official canon or animation.\nAvoid grid, panels, duplicate subjects, text, logo, watermark, scenery, additional limbs, mechanical armor, cropped parts, wounds, exposed tissue, blood or liquid effects, sprays, puddles, glow outline, aura or checkerboard.",
+  "reference": {
+    "path": "assets/openai/neuro-xeno-animation-sheet.png",
+    "sha256": "9dc05f797a0e3acf936c9782dfeed9e9c6f8b30cfd2c7eaa2bb1b8105479b5c6",
+    "visualNotes": "Viewed mixed sheet: use ONLY top row red xenomorph, not yellow row or mechanical figures. Red form is a lean biped with two arms, two long bent legs, long swept burgundy dome, black ribbed torso, fan of backward dorsal spikes, red joint shells and sharp clawed hands. Preserve its compact tail behind the pelvis rather than borrowing other rows."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted.",
+    "requestId": "3824952a-cf0f-4a6f-b612-822cc1a95f8c",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

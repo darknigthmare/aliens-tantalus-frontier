@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-154-armored-korari-stalker",
+  "name": "Armored Korari Stalker",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of a low predatory reptilian quadruped with gray-green overlapping stony scales, narrow snout, low brow and small eyes, cyan flank dots, four muscular clawed limbs and one long tapered tail. Use a calm standing right-facing pose.\nSubject: Armored Korari Stalker. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Preserve a low gray-green reptilian quadruped, exactly four muscular clawed legs and one complete long tapered tail, low brow and narrow snout, cyan flank dotted markings. Thicken the existing natural rocklike overlapping carapace plates without adding horns or limbs. No manufactured armor or humanoid stance.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-050-korari-stalker.webp",
+    "sha256": "01f0627eee240ded94a36859e2d4dc8960d5881828d24753be04e78ad7a096df",
+    "visualNotes": "Reference sheet of a low predatory reptilian quadruped with gray-green overlapping stony scales, narrow snout, low brow and small eyes, cyan flank dots, four muscular clawed limbs and one long tapered tail. Use a calm standing right-facing pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-b6ee2c92-7991-4c4e-9cf8-9a7f9bebaec6.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-154-armored-korari-stalker.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "bd3759b5891d132d6bbda926f6d2ddb8cf25e1d4dd0bda43a0564af9c90a5a14",
+    "bboxAlphaAtLeast16": [
+      52,
+      228,
+      1726,
+      747
+    ],
+    "alphaMin": 0,
+    "alpha0": 1130357,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Low right-facing quadruped, four separated clawed feet, complete tapered tail, gray-green scale armor and cyan flank dots. Natural carapace thickened while preserving reptilian form. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.65,
+      "y": 0.8421645997745209
+    },
+    "sourceFacing": 1
+  }
+}

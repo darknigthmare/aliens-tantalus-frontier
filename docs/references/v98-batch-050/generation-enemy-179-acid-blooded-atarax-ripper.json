@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-179-acid-blooded-atarax-ripper",
+  "name": "Acid-Blooded ATARAX Ripper",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static 2D game creature cutout.\nImage 1: existing identity and painted realistic game rendering reference only, not an output grid. Generate Acid-Blooded ATARAX Ripper. Viewed ATARAX Ripper sheet: stocky hunched humanoid alien, two muscular arms and digitigrade legs, layered pale gunmetal natural shell on rounded shoulders and long ridged wedge skull, dark ribbed underbody, single curved tail with pointed end, tiny blue facial accent. No carried weapon or external equipment.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve stocky hunched body, pale gunmetal overlapping natural shell, dark underbody, two clawed arms, two legs and one tail. Subtle olive-amber sheen and restrained yellow-green seams integrated into intact shell, not replacing base colors. Neutral alert pose facing RIGHT, side/three-quarter view.\nEntire healthy intact creature visible including all claws and tail, no damage or action effects. Feet aligned with imaginary ground line. At least 10% transparent padding on all sides. Genuine RGBA transparent background, no floor or shadow blob. Fine painted game realism and clear silhouette like reference. Original project variant, not official canon, not animation.\nAvoid grid, panels, repeats, labels, text, logos, watermark, scene, crop, extra anatomy, wounds, exposed tissue, blood, fluid effects, splashes, puddles, aura, glow outline or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+    "sha256": "321b78c95da7374bd3cac8b2ae5d18fb26c146aaddae47b536132b16b8f261ae",
+    "visualNotes": "Viewed ATARAX Ripper sheet: stocky hunched humanoid alien, two muscular arms and digitigrade legs, layered pale gunmetal natural shell on rounded shoulders and long ridged wedge skull, dark ribbed underbody, single curved tail with pointed end, tiny blue facial accent. No carried weapon or external equipment."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-74ba3741-c25b-4512-9889-9bf12129164c.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-179-acid-blooded-atarax-ripper.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "aae93df2812ad6228d33dc9252fb21432d1bd5d111fdd51d1db03cf7b7372a6c",
+    "bboxAlphaAtLeast16": [
+      169,
+      138,
+      1349,
+      970
+    ],
+    "alphaMin": 0,
+    "alpha0": 1137573,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Viewed single intact right-facing stocky ATARAX Ripper, layered pale gunmetal natural shell, tiny blue face accent, two arms/two legs and one tail. Olive seams subtle and no action effect, wound, text or grid. Native alpha audited; colored preview background not converted. Full body unclipped, actual margins recorded, native bytes unchanged.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 169,
+      "top": 138,
+      "right": 187,
+      "bottom": 54
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.51,
+      "y": 0.947265625
+    },
+    "sourceFacing": 1
+  }
+}

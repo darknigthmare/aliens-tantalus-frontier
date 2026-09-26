@@ -1,5 +1,5 @@
 import { getEnemyStaticPoseV96 as getEnemyUserCasteV87 } from './enemy-static-poses-v96.js';
-import { getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v97.js';
+import { getEnemyDedicatedPoseV98 as getEnemyDedicatedPoseV97 } from './enemy-dedicated-poses-v98.js';
 
 export const BIOFORGE_LEVEL_SCHEMA_V80 = 80;
 

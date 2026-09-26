@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-131-armored-reef-stalker",
+  "name": "Armored Reef Stalker",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view game sprite.\nPrimary request: ONE original Armored Reef Stalker.\nInput image 1: base identity, anatomy and dark detailed game-sprite reference, not a grid to reproduce. Use its intact low standing pose.\nSubject: lean low crouching blue-black organic quadruped, smooth elongated cranial dome, ribbed flanks, swept dorsal spines, two long forelimbs with clawed hands, two angular hind legs with clawed feet, and ONE very long thin segmented tail. Retain the reference's streamlined Reef Stalker silhouette and cold blue highlights.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nNatural layered blue-black chitin guards over existing shoulders, flanks, forearms and shins; keep the smooth head dome, lean silhouette, four limbs and long narrow tail. No bulky humanoid conversion.\nComposition: one complete neutral stalking stance facing RIGHT, slight side-three-quarter view to expose all four limbs. All claws, feet, dorsal points, head and full tail tip visible. Subject fits within central 80% of canvas with 10% empty padding on every edge.\nBackground: genuinely transparent alpha, no scene, water, floor, shadow or aura.\nNo other creatures, grid, animation sheet, text, logos, border, crop, machinery, new appendages, weapons, injury or gore. An original systemic project adaptation only, not canonical certification.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+    "sha256": "a23097c5933b2ddd7b5e97b5c5985cf0901da2ec2f075ca20e28be113cefb10a",
+    "visualNotes": "Lean crouched blue-black quadruped with smooth elongated dome, ribbed flanks, swept dorsal spines, two clawed forelimbs and two angular hind legs, one long thin tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-0168660f-21b1-4590-bace-f29bf8a33cae.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-131-armored-reef-stalker.png",
+    "width": 1619,
+    "height": 971,
+    "sha256": "31d50e6f4080060e685339cbd9b74ecf7de8f27a44603ad258e287a61736e5f8",
+    "bboxAlphaAtLeast16": [
+      70,
+      237,
+      1565,
+      843
+    ],
+    "alphaMin": 0,
+    "alpha0": 1240769,
+    "totalPixels": 1572049
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "All four limbs are individually visible in the right-facing low stance; smooth dome, swept dorsal spines and long narrow tail retained. Blue-black organic layered guards follow the original lean silhouette. Measured visible margins in pixels: {\"left\":70,\"top\":237,\"right\":54,\"bottom\":128}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.674,
+      "y": 0.8671472708547889
+    },
+    "sourceFacing": 1
+  }
+}

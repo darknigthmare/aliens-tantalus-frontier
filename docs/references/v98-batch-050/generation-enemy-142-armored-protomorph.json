@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-142-armored-protomorph",
+  "name": "Armored Protomorph",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view game character sprite.\nPrimary request: ONE original Armored Protomorph.\nInput image 1 is the exact base anatomy, brown-charcoal palette and shaded game-sprite style reference, not the output layout. Use the intact upright top-row pose.\nSubject: tall lean dark brown and charcoal organic biped, narrow elongated smooth ridged-edged skull, sinewy but fully intact ribbed torso, TWO long clawed arms, TWO long digitigrade legs, paired long backward-curving dorsal tubes and ONE fine long curling segmented tail. Preserve its thin upright silhouette, small narrow head and warm brown natural surface relief.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nLayer modest natural brown carapace guards over existing shoulders, ribs, forearms and shins without adding bulk, new limbs or equipment. All body surfaces remain intact and closed.\nComposition: one whole static neutral-ready pose facing RIGHT, slight side-three-quarter viewpoint showing two arms and two legs distinctly. Entire skull, tubes, fingertips, feet, tail and tail tip visible; silhouette within central 80% with 10% empty transparent margin on every side.\nBackground: actual transparent alpha, no floor, shadow, aura or environment.\nNo grid, sheet, duplicate character, text, labels, logos, crop, machinery, weapons, injury, blood, exposed organs or gore. An original systemic project variant, not an official model or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/protomorph-action-sheet-v56.png",
+    "sha256": "103633e135b17b7f74f3e86e05dfe846c45f9a7e304a3a4d3232f9cd9bae40e4",
+    "visualNotes": "Tall lean brown/charcoal biped with narrow elongated smooth ridge-edged skull, intact sinewy ribbed torso, two long arms/legs, paired backward-curving dorsal tubes and one fine curled tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-c8092945-a7b9-4fc1-971b-67d5548d546e.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-142-armored-protomorph.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "69e84df69132b1fe575062569a5cb74e2620f9d18ccf953f3cb7523046608a3e",
+    "bboxAlphaAtLeast16": [
+      91,
+      110,
+      1028,
+      1163
+    ],
+    "alphaMin": 0,
+    "alpha0": 1290105,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Whole right-facing brown Protomorph with two distinct arms and legs, paired long dorsal tubes and one complete curved tail. Thin upright proportions and warm-brown closed organic surfaces retained under modest natural guards. Measured visible margins in pixels: {\"left\":91,\"top\":110,\"right\":226,\"bottom\":91}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.609,
+      "y": 0.9266347687400319
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-183-acid-blooded-reef-stalker",
+  "name": "Acid-Blooded Reef Stalker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE original static full-body game creature cutout.\nInput image 1 is base identity and painted realistic game style only, not an output grid. Generate Acid-Blooded Reef Stalker. Viewed Reef Stalker: streamlined deep blue-black low quadrupedal alien, smooth elongated dome, four slender bent clawed limbs, ribbed chest, swept backward fin-like dorsal spines and long thin whip tail. Cool blue highlights. Reference neutral top-row crouch intact, not swimming/death pose.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve deep blue-black sleek carapace, four-limb crouching anatomy, narrow fin-like dorsal spines, elongated head and single slender tail. Restrained olive-amber iridescence and muted yellow-green seams are secondary details on intact material. One neutral alert quadruped facing RIGHT, side/three-quarter game view, feet on an imaginary ground line.\nComplete silhouette including tail tip and all claws within frame; 10% transparent padding on all edges. Genuine RGBA transparent background; no water, terrain, cast-shadow blob or effects. Match detailed realistic painted sprite, cool highlights and sharp contour. Static original project variant, not official canon or animation.\nAvoid grid, repeated poses, panels, text, labels, watermark, logo, background, cropped parts, extra anatomy, wounds, exposed tissue, blood, fluids, sprays, splashes, puddles, glow outline, aura or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/reef-stalker-action-sheet-v56.png",
+    "sha256": "a23097c5933b2ddd7b5e97b5c5985cf0901da2ec2f075ca20e28be113cefb10a",
+    "visualNotes": "Viewed Reef Stalker: streamlined deep blue-black low quadrupedal alien, smooth elongated dome, four slender bent clawed limbs, ribbed chest, swept backward fin-like dorsal spines and long thin whip tail. Cool blue highlights. Reference neutral top-row crouch intact, not swimming/death pose."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-3a3c3715-0675-436a-9e78-2527646da374.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-183-acid-blooded-reef-stalker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "f8e4d2da0c591b242b86f88d8fce4de199d70c914d6845aac7213a0b196834ec",
+    "bboxAlphaAtLeast16": [
+      52,
+      205,
+      1500,
+      894
+    ],
+    "alphaMin": 0,
+    "alpha0": 1195290,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Viewed single intact right-facing Reef Stalker, dark blue-black smooth head and shell, swept dorsal fins, four slender bent limbs and single long tail. Original cool palette retained with muted olive seams. Full silhouette unclipped, no text/grid or fluid effects. Native transparent margins are narrower than requested on some edges; actual bounds recorded without editing.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 52,
+      "top": 205,
+      "right": 36,
+      "bottom": 130
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.63,
+      "y": 0.873046875
+    },
+    "sourceFacing": 1
+  }
+}

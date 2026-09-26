@@ -1,0 +1,31 @@
+{
+  "profileId": "enemy-139-armored-trilobite-echo",
+  "name": "Armored Trilobite Echo",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view fictional creature sprite.\nPrimary request: ONE original Armored Trilobite Echo.\nInput image 1 is the exact base anatomy and softly shaded game-sprite reference. Use the intact curled resting creature in the TOP LEFT frame as the sole anatomical guide; do not reproduce the sheet.\nPreserve the reference's low pale pink-beige oval mantle, tapered front oriented right, intact textured skin and the same arrangement and count of long curling tapered appendages spreading from the front collar across and above the mantle. Every appendage must be individually traceable to the same collar; no added legs, human limbs, eyes or unrelated body parts.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nThe armored variation adds thin flexible overlapping natural pale-beige plates to the mantle and the existing appendage bases. Keep the soft pink/ivory palette, oval body proportions and long flexible tips; no machine, hard suit or generic octopus redesign.\nComposition: one complete calm resting static silhouette facing RIGHT, side-three-quarter view. All curled appendage tips and the entire mantle inside frame with 10% transparent empty margin on all edges; no intersecting or fused anatomy.\nBackground: actual transparent alpha, no floor, shadow, scenery or aura.\nNo grid, animation sheet, duplicate creatures, text, logo, labels, crop, blood, wounds, exposed organs or gore. A fictional original project adaptation, not official canon or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/trilobite-echo-action-sheet-v56.png",
+    "sha256": "73c43b03c36146df4dd5481a4d0ef97d2e5fa89d74556bba66a59a3764926f77",
+    "visualNotes": "Low pale pink-beige oval mantle, tapered right-facing collar and multiple long fine curling appendages. Top-left resting pose inspected as anatomical anchor."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-1511aaa2-f055-44db-989c-45dacaa583fe.png",
+    "path": null,
+    "width": 1536,
+    "height": 1024,
+    "sha256": "eaacb7a06bd250709fa6877e664cbd4426f47783394639babf36b463653fce94",
+    "bboxAlphaAtLeast16": [
+      126,
+      157,
+      1412,
+      878
+    ],
+    "alphaMin": 0,
+    "alpha0": 1034268,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "held",
+    "notes": "Native PNG has real alpha and whole body, but appendage roots and free tips are not individually traceable. A prominent closed/occluded arch and overlapping thick appendages prevent certification of the reference appendage topology and count. Held for anatomical ambiguity; no runtime copy, no retry and no pixel edit."
+  },
+  "runtimeContract": null
+}

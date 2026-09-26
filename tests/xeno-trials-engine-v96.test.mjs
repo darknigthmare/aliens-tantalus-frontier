@@ -18,9 +18,9 @@ const activeMatch = (config = {}) => {
   return match;
 };
 
-test('V97 roster has 33 unique admitted dedicated images and 4 explicit fictional doctrines', () => {
-  assert.equal(XENO_TRIALS_FIGHTERS_V96.length, 33);
-  assert.equal(new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id)).size, 33);
+test('V97 roster has 43 unique admitted dedicated images and 4 explicit fictional doctrines', () => {
+  assert.equal(XENO_TRIALS_FIGHTERS_V96.length, 43);
+  assert.equal(new Set(XENO_TRIALS_FIGHTERS_V96.map(f => f.id)).size, 43);
   for (const entry of XENO_TRIALS_FIGHTERS_V96) {
     const art = getXenoTrialsArtV96(entry.id);
     assert.ok(art?.path.endsWith('.png'));

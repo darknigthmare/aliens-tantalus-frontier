@@ -1,0 +1,286 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "attempted": 16,
+  "received": 11,
+  "status": "completed-with-holds",
+  "poses": [
+    {
+      "id": "enemy-170-acid-blooded-boiler",
+      "profileId": "enemy-170-acid-blooded-boiler",
+      "name": "Acid-Blooded Boiler",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-170-acid-blooded-boiler.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        92,
+        130,
+        1183,
+        1145
+      ],
+      "sha256": "69a8b01cbef7625e2a7bf0e1243b9fb7c3c987cac97acb1ce5988237bc2f1cdc",
+      "pivot": {
+        "x": 0.625,
+        "y": 0.9130781499202552
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 110
+    },
+    {
+      "id": "enemy-172-acid-blooded-burster",
+      "profileId": "enemy-172-acid-blooded-burster",
+      "name": "Acid-Blooded Burster",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-172-acid-blooded-burster.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        75,
+        76,
+        1465,
+        976
+      ],
+      "sha256": "418d66579148161b258054357fa7a80eeff7505924a1cc1f2ae7c839c5091766",
+      "pivot": {
+        "x": 0.52,
+        "y": 0.953125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    },
+    {
+      "id": "enemy-176-acid-blooded-k-series-yellow-xenomorph",
+      "profileId": "enemy-176-acid-blooded-k-series-yellow-xenomorph",
+      "name": "Acid-Blooded K-Series Yellow Xenomorph",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-176-acid-blooded-k-series-yellow-xenomorph.png",
+      "sourceWidth": 1236,
+      "sourceHeight": 1273,
+      "alphaBounds": [
+        123,
+        116,
+        1172,
+        1183
+      ],
+      "sha256": "d202d52dc2e63f69e03c44e9fb09a8fe1910a6fd73a4763a77c2b0bb37a37b96",
+      "pivot": {
+        "x": 0.558,
+        "y": 0.9293008641005499
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 268
+    },
+    {
+      "id": "enemy-179-acid-blooded-atarax-ripper",
+      "profileId": "enemy-179-acid-blooded-atarax-ripper",
+      "name": "Acid-Blooded ATARAX Ripper",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-179-acid-blooded-atarax-ripper.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        169,
+        138,
+        1349,
+        970
+      ],
+      "sha256": "aae93df2812ad6228d33dc9252fb21432d1bd5d111fdd51d1db03cf7b7372a6c",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.947265625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 112
+    },
+    {
+      "id": "enemy-180-acid-blooded-ripper-queen",
+      "profileId": "enemy-180-acid-blooded-ripper-queen",
+      "name": "Acid-Blooded Ripper Queen",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-180-acid-blooded-ripper-queen.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        149,
+        60,
+        1391,
+        949
+      ],
+      "sha256": "2810b39839189f284a0def67d4f00f17b1d97eb5a1f63eb568801b429fab0ad2",
+      "pivot": {
+        "x": 0.51,
+        "y": 0.9267578125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 340
+    },
+    {
+      "id": "enemy-182-acid-blooded-foundry-crusher",
+      "profileId": "enemy-182-acid-blooded-foundry-crusher",
+      "name": "Acid-Blooded Foundry Crusher",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-182-acid-blooded-foundry-crusher.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        80,
+        125,
+        1457,
+        922
+      ],
+      "sha256": "0d1c545f00ebeeebe0a90c0171b6f5ed40403558fcdb1783ae905f6028eff111",
+      "pivot": {
+        "x": 0.62,
+        "y": 0.900390625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 128
+    },
+    {
+      "id": "enemy-183-acid-blooded-reef-stalker",
+      "profileId": "enemy-183-acid-blooded-reef-stalker",
+      "name": "Acid-Blooded Reef Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-183-acid-blooded-reef-stalker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        52,
+        205,
+        1500,
+        894
+      ],
+      "sha256": "f8e4d2da0c591b242b86f88d8fce4de199d70c914d6845aac7213a0b196834ec",
+      "pivot": {
+        "x": 0.63,
+        "y": 0.873046875
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-186-acid-blooded-pale-crucible-hunter",
+      "profileId": "enemy-186-acid-blooded-pale-crucible-hunter",
+      "name": "Acid-Blooded Pale Crucible Hunter",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-186-acid-blooded-pale-crucible-hunter.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        66,
+        226,
+        1482,
+        854
+      ],
+      "sha256": "ee024a7adf0cb18af409678d528fcb52c4c57fc64c53751bec49b30485ce9dfb",
+      "pivot": {
+        "x": 0.57,
+        "y": 0.833984375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 106
+    },
+    {
+      "id": "enemy-187-acid-blooded-dust-runner",
+      "profileId": "enemy-187-acid-blooded-dust-runner",
+      "name": "Acid-Blooded Dust Runner",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-187-acid-blooded-dust-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        38,
+        202,
+        1500,
+        897
+      ],
+      "sha256": "02ddb62adb11a21ce85e237dfe35937aeb4260200ed8586f5b9c48b0b0838f10",
+      "pivot": {
+        "x": 0.57,
+        "y": 0.8759765625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-188-acid-blooded-salvage-hive-brute",
+      "profileId": "enemy-188-acid-blooded-salvage-hive-brute",
+      "name": "Acid-Blooded Salvage Hive Brute",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-188-acid-blooded-salvage-hive-brute.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        80,
+        82,
+        1465,
+        963
+      ],
+      "sha256": "6eb4e9b0d4b2641944864232d9a9773f8d6f33b5811f2054c91627dfa4c3b897",
+      "pivot": {
+        "x": 0.65,
+        "y": 0.9404296875
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 124
+    },
+    {
+      "id": "enemy-190-acid-blooded-caravan-stalker",
+      "profileId": "enemy-190-acid-blooded-caravan-stalker",
+      "name": "Acid-Blooded Caravan Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-190-acid-blooded-caravan-stalker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        63,
+        225,
+        1468,
+        901
+      ],
+      "sha256": "8fc31c82177270ad20e8e3f44fe8daa3a3c1b9e2cb870b99115f3c20d937a8f9",
+      "pivot": {
+        "x": 0.64,
+        "y": 0.8798828125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    }
+  ],
+  "held": [
+    {
+      "id": "enemy-173-acid-blooded-monica-line",
+      "profileId": "enemy-173-acid-blooded-monica-line",
+      "name": "Acid-Blooded Monica Line",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "1fefd9c3-7d91-400d-9626-ec9c5136e11f"
+    },
+    {
+      "id": "enemy-174-acid-blooded-specimen-six-line",
+      "profileId": "enemy-174-acid-blooded-specimen-six-line",
+      "name": "Acid-Blooded Specimen Six Line",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "35cf7004-98e4-4d43-82e9-b265dc46b82c"
+    },
+    {
+      "id": "enemy-175-acid-blooded-red-xenomorph",
+      "profileId": "enemy-175-acid-blooded-red-xenomorph",
+      "name": "Acid-Blooded Red Xenomorph",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "3824952a-cf0f-4a6f-b612-822cc1a95f8c"
+    },
+    {
+      "id": "enemy-185-acid-blooded-siege-royal",
+      "profileId": "enemy-185-acid-blooded-siege-royal",
+      "name": "Acid-Blooded Siege Royal",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "39a45961-506f-4ee9-9831-e295d9cecd9f"
+    },
+    {
+      "id": "enemy-189-acid-blooded-arcology-lurker",
+      "profileId": "enemy-189-acid-blooded-arcology-lurker",
+      "name": "Acid-Blooded Arcology Lurker",
+      "status": "held",
+      "reason": "native-output-moderation-blocked",
+      "requestId": "1cc664f9-5f08-4e61-b817-eee058a5abc8"
+    }
+  ],
+  "canonExact": false,
+  "animationStatus": "missing",
+  "notes": "Each of the 16 jobs received exactly one sequential native OpenAI image_gen request after visual reference inspection. Eleven native RGBA static poses were visually inspected and alpha-audited, then copied byte-for-byte without pixel processing. Five independent requests were rejected at output moderation; no outputs were recovered, no retries or reformulations occurred, and none were admitted. Static authored project variants are not new official species or animated atlases. Individual receipts retain prompts, source SHA, provider paths, exact output SHA, alpha bounds, actual padding and pivots."
+}

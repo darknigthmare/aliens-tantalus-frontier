@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-149-armored-seegson-security",
+  "name": "Armored Seegson Security",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of an adult station guard with white helmet and face guard, light gray short-sleeved uniform over dark undersleeves, navy cargo trousers, black gloves/boots and a pump shotgun. Use intact first standing pose only.\nSubject: Armored Seegson Security. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Preserve white helmet/face guard, light-gray uniform, dark undersleeves and navy trousers, one pump shotgun held safely across the chest. Add practical neutral gray protective vest and shoulder/forearm/shin guards without covering the entire recognisable uniform. Exactly two arms and two legs.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/seegson-security-action-sheet-v56.png",
+    "sha256": "0572100615745fa2701d1d0b5f2bf6a6232e48da9748972b38ee64605b2e88d0",
+    "visualNotes": "Reference sheet of an adult station guard with white helmet and face guard, light gray short-sleeved uniform over dark undersleeves, navy cargo trousers, black gloves/boots and a pump shotgun. Use intact first standing pose only."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-754ec2ec-3627-458a-bc88-58a7f335c380.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-149-armored-seegson-security.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "e98b7496ef553d27f118289682ffa25e5de43c294a2bfad95551df0df6a0b61c",
+    "bboxAlphaAtLeast16": [
+      311,
+      108,
+      1024,
+      1170
+    ],
+    "alphaMin": 0,
+    "alpha0": 1251753,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Intact right-facing Seegson guard: white helmet and shirt, navy trousers, one shotgun and practical gray layered guards. Limbs and boots complete, base uniform recognisable. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.9330143540669856
+    },
+    "sourceFacing": 1
+  }
+}

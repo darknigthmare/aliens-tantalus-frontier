@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-176-acid-blooded-k-series-yellow-xenomorph",
+  "name": "Acid-Blooded K-Series Yellow Xenomorph",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D creature game cutout.\nImage 1 is the existing identity/style reference only; never reproduce its grid. Generate Acid-Blooded K-Series Yellow Xenomorph. Viewed K-Series Yellow sheet: saturated yellow-gold biomechanical biped, two long forward clawed arms, two bent digitigrade legs, ribbed yellow dome with black recesses, ribbed torso, short swept dorsal tubes, single segmented tail ending in an arrow-shaped blade. Neutral top-row stance faces right.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nRetain dominant yellow-gold shell and black recesses. Subtle olive-amber surface play and restrained green seams must not remove yellow identity. Match fine painted realistic biomechanical relief and crisp dark contours. ONE intact alert biped standing facing RIGHT in slightly elevated side/three-quarter game view; two arms/two legs/one complete tail.\nComposition: complete head, clawed hands, both feet and tail-blade visible. At least 10% genuinely transparent padding on every side. Feet rest on imaginary ground line, no ground plane/cast shadow. Native RGBA transparent background. Static original project variant, no official-canon or animation claim.\nAvoid panels, sprite sheet, duplicate creature, text, label, logo, watermark, environment, cropping, added limbs, wounds, exposed tissue, blood, fluids, spray, puddles, glow outline, aura or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-020-k-series-yellow-xenomorph.webp",
+    "sha256": "9e6b65302b32fe8c7448cf4f0bd1a8ff23eefc9e9004043c556be33e8bb6d3f6",
+    "visualNotes": "Viewed K-Series Yellow sheet: saturated yellow-gold biomechanical biped, two long forward clawed arms, two bent digitigrade legs, ribbed yellow dome with black recesses, ribbed torso, short swept dorsal tubes, single segmented tail ending in an arrow-shaped blade. Neutral top-row stance faces right."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-3c5288a8-4619-4188-9339-2918e155de77.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-176-acid-blooded-k-series-yellow-xenomorph.png",
+    "width": 1236,
+    "height": 1273,
+    "sha256": "d202d52dc2e63f69e03c44e9fb09a8fe1910a6fd73a4763a77c2b0bb37a37b96",
+    "bboxAlphaAtLeast16": [
+      123,
+      116,
+      1172,
+      1183
+    ],
+    "alphaMin": 0,
+    "alpha0": 1078054,
+    "totalPixels": 1573428
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single intact right-facing K-Series biped with yellow-gold shell, two arms/two legs, dorsal tubes and one complete bladed tail. Yellow identity preserved, olive material variation restrained. No grid, text, wounds or effects. Full silhouette has native transparent padding; actual margins recorded, some below requested 10%. No pixel edits.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 123,
+      "top": 116,
+      "right": 64,
+      "bottom": 90
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.558,
+      "y": 0.9293008641005499
+    },
+    "sourceFacing": 1
+  }
+}

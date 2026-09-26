@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-155-armored-ceto-reef-predator",
+  "name": "Armored Ceto Reef Predator",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of a low blue-teal aquatic reef predator, streamlined fishlike head with small gold eye, gill slits, low dorsal ridge, four short webbed/paddle limbs beneath the body and a long tail ending in a broad vertical fin. Preserve this aquatic plan, not a terrestrial xenomorph.\nSubject: Armored Ceto Reef Predator. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Preserve the aquatic blue-teal streamlined fishlike head with one visible small gold eye and gill slits, low dorsal ridge, exactly four short splayed webbed/paddle limbs and complete muscular tail ending in a broad vertical caudal fin. Thicken organic dermal plates along head, shoulders and flanks, retaining hydrodynamic outline. Low aquatic resting/hovering pose, not walking like a terrestrial dinosaur. Do not add upright human legs, alien dome, limbs, horns, equipment or weapons.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-051-ceto-reef-predator.webp",
+    "sha256": "0f40a56669c6a151ea02ffdcdf9ee18331bf495545a816eab75572c062142168",
+    "visualNotes": "Reference sheet of a low blue-teal aquatic reef predator, streamlined fishlike head with small gold eye, gill slits, low dorsal ridge, four short webbed/paddle limbs beneath the body and a long tail ending in a broad vertical fin. Preserve this aquatic plan, not a terrestrial xenomorph."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-eb8410a1-bc85-445a-a0bf-be7fdc63d1c3.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-155-armored-ceto-reef-predator.png",
+    "width": 1983,
+    "height": 793,
+    "sha256": "5bd3d7017f55ff490394484a38646f1bdf6a655fceabb11ad0fbc769f108c837",
+    "bboxAlphaAtLeast16": [
+      76,
+      172,
+      1916,
+      674
+    ],
+    "alphaMin": 0,
+    "alpha0": 1027107,
+    "totalPixels": 1572519
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Aquatic right-facing fish-like body retains four webbed paddle limbs, gill slits, golden eye, dorsal ridge and broad vertical tail fin. Natural layered armor follows the teal-blue reference body, without converting it into a terrestrial runner. Entire silhouette is in frame. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.66,
+      "y": 0.849936948297604
+    },
+    "sourceFacing": 1
+  }
+}

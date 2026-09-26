@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-127-armored-atarax-ripper",
+  "name": "Armored ATARAX Ripper",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view game sprite.\nPrimary request: ONE original Armored ATARAX Ripper.\nInput image 1 is only the base identity/anatomy/style reference, using its intact standing top-row pose. Do not reproduce its animation sheet.\nSubject: stocky silver-gray and charcoal organic biomechanical biped, sloping armored ridged cranium, blue-gray toothline accents, rounded plated shoulders, exactly two clawed arms, two bent digitigrade legs, and ONE long narrow segmented tail. Preserve its own compact head, heavy shoulder silhouette and layered surface relief.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nAdd natural thicker overlapping carapace protection to its existing shoulders, torso, forearms and shins, with no change in body plan. Preserve silver-gray/black colors and readable dark recesses.\nComposition: one complete neutral-ready static pose facing RIGHT, clean side view, arms and legs separated enough to count. Entire tail and tip, toes, claws, cranium and back fully inside the canvas. At least 10% empty transparent padding on every side.\nBackground: actual transparent alpha, no scenery or floor shadow.\nNo grid, sheets, duplicate poses, text, labels, border, logo, crop, new limbs, machinery, guns, blood, injury or gore. Original project adaptation, not official model certification and not animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-ripper-action-sheet-v56.png",
+    "sha256": "321b78c95da7374bd3cac8b2ae5d18fb26c146aaddae47b536132b16b8f261ae",
+    "visualNotes": "Stocky silver-gray/charcoal biped with compact sloping layered cranium, blue-gray toothline, rounded armored shoulders, two arms/legs and one slim tail; intact upright top row used."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-f61d2444-8f31-4e9c-ad77-d38a05ce8cf7.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-127-armored-atarax-ripper.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "48090b66b436696c579d82ae7715e4e78109490c323526106a76968c58e2bb69",
+    "bboxAlphaAtLeast16": [
+      206,
+      106,
+      1329,
+      944
+    ],
+    "alphaMin": 0,
+    "alpha0": 1182697,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing ATARAX Ripper, two arms and legs clearly separated, one full narrow tail, layered natural gray plates retaining compact cranial and shoulder identity. Blue-gray teeth and charcoal recesses retained. Measured visible margins in pixels: {\"left\":206,\"top\":106,\"right\":207,\"bottom\":80}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.575,
+      "y": 0.9208984375
+    },
+    "sourceFacing": 1
+  }
+}

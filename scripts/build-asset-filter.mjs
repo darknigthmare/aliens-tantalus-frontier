@@ -13,6 +13,7 @@ import { ENEMY_DEDICATED_POSES_V96 } from '../src/enemy-dedicated-poses-v96.js';
 import { ENEMY_EXPANSION_ASSETS_V96 } from '../src/enemy-expansion-assets-v96.js';
 import { ENEMY_EXPANSION_QUEEN_V96 } from '../src/enemy-expansion-queen-v96.js';
 import { ENEMY_DEDICATED_POSES_V97 } from '../src/enemy-dedicated-poses-v97.js';
+import { ENEMY_DEDICATED_POSES_V98 } from '../src/enemy-dedicated-poses-v98.js';
 
 // Production inputs stay in the source tree; only runtime atlases belong in dist.
 export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
@@ -20,6 +21,7 @@ export const EXCLUDED_BUILD_ASSET_PATHS = Object.freeze([
   'docs/references/v95-user-creatures',
   'docs/references/v96-xeno-trials',
   'docs/references/v97-batch-050',
+  'docs/references/v98-batch-050',
   'docs/V90_PORT_MERIDIEN_20260923.md',
   'docs/V90_CATALOG_BEHAVIORS_20260923.md',
   'docs/V90_NATIVE_CAMPAIGN_BEHAVIORS_20260923.md',
@@ -47,6 +49,9 @@ export function createBuildAssetFilter(projectRoot, {
   readyV81Assets = V81_READY_ENEMY_PROFILE_ASSETS
 } = {}) {
   const readyV65Paths = new Set(V65_READY_ENEMY_PROFILE_ASSETS.map((asset) => asset.path.replace(/^\//, '')));
+  const readyV98Paths = new Set(ENEMY_DEDICATED_POSES_V98.filter(asset => asset.batch === 'v98-050'
+    && asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
+    && asset.path === `/assets/openai/sprites/static-enemy-v98/${asset.profileId}.png`).map(asset => asset.path.slice(1)));
   const readyV97Paths = new Set(ENEMY_DEDICATED_POSES_V97.filter(asset => asset.batch === 'v97-050'
     && asset.reviewStatus === 'accepted-static-adaptation' && /^[a-f0-9]{64}$/.test(asset.sha256 || '')
     && asset.path === `/assets/openai/sprites/static-enemy-v97/${asset.profileId}.png`).map(asset => asset.path.slice(1)));
@@ -82,6 +87,7 @@ export function createBuildAssetFilter(projectRoot, {
     .map((asset) => asset.path.slice(1)));
   return (source) => {
     const sourcePath = relative(projectRoot, source).replaceAll('\\', '/');
+    if (sourcePath.startsWith('assets/openai/sprites/static-enemy-v98/')) return readyV98Paths.has(sourcePath);
     if (sourcePath.startsWith('assets/openai/sprites/static-enemy-v97/')) return readyV97Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/static-enemy-v96\//.test(sourcePath)) return readyV96Paths.has(sourcePath);
     if (/^assets\/openai\/sprites\/(?:static-enemy|user-equipment)-v95\//.test(sourcePath)) return readyV95Paths.has(sourcePath);

@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-187-acid-blooded-dust-runner",
+  "name": "Acid-Blooded Dust Runner",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static 2D full-body game creature cutout.\nInput image 1 is base identity/style reference only, NOT an output grid. Generate Acid-Blooded Dust Runner. Viewed Dust Runner base: very low lean quadrupedal biomechanical alien, two long forward supporting arms/clawed hands and two slender bent hindlegs, elongated smooth dark gunmetal dome, tan/bronze skeletal ribbed torso and limbs, single long curling segmented whip tail. No dorsal tubes on neutral pose.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve low lean runner anatomy, four limbs, tan/bronze ribbed body, dark smooth dome and single long whip tail. Add subtle olive-amber sheen and restrained yellow-green seams as material variation only, no effects. One intact neutral crouched alert stance facing RIGHT, side/three-quarter game view, supporting claws aligned on imaginary ground line.\nEntire body, head, all feet/hands and complete tail inside frame with at least 10% transparent padding on all edges. Genuine RGBA transparent background, no terrain/floor/shadow blob. Match fine realistic painted game sprite and contour contrast. Original project interpretation, no canonical or animation certification.\nAvoid panels, grid, duplicates, text, label, logo, watermark, scenery, crop, extra appendages, wounds, exposed tissue, blood, fluids, spray, splatter, puddles, glow outline, aura or checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+    "sha256": "0a327424631fbf0b11f547be8408fdf999e89dd29b9f51be93c71a1240cca5d7",
+    "visualNotes": "Viewed Dust Runner base: very low lean quadrupedal biomechanical alien, two long forward supporting arms/clawed hands and two slender bent hindlegs, elongated smooth dark gunmetal dome, tan/bronze skeletal ribbed torso and limbs, single long curling segmented whip tail. No dorsal tubes on neutral pose."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-5bebb2be-58d9-4038-b3c4-e61c76cefb00.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-187-acid-blooded-dust-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "02ddb62adb11a21ce85e237dfe35937aeb4260200ed8586f5b9c48b0b0838f10",
+    "bboxAlphaAtLeast16": [
+      38,
+      202,
+      1500,
+      897
+    ],
+    "alphaMin": 0,
+    "alpha0": 1210096,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Single low right-facing Dust Runner with tan-bronze ribbed body, dark smooth dome, four long lean limbs and complete curved tail; subdued olive-yellow seams distinguish project variant. No effects, wounds, text or grid. Full body uncropped with native alpha; actual margins below 10% on some edges recorded, no pixel alterations.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 38,
+      "top": 202,
+      "right": 36,
+      "bottom": 127
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.57,
+      "y": 0.8759765625
+    },
+    "sourceFacing": 1
+  }
+}

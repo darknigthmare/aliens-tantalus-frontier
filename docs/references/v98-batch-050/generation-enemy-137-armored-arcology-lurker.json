@@ -1,0 +1,24 @@
+{
+  "profileId": "enemy-137-armored-arcology-lurker",
+  "name": "Armored Arcology Lurker",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static character sprite for a 2D side-view game.\nPrimary request: ONE original Armored Arcology Lurker.\nInput image 1: base identity, proportions and shaded sprite-style reference ONLY. Use the intact slightly upright stalking poses in the top row, not the grid.\nSubject: exceptionally slender charcoal-black organic lurker with small elongated smooth dark dome, narrow ribbed chest, hunched shoulders, TWO very long thin arms ending in long clawed fingers, TWO long angular digitigrade legs, small dorsal nubs and ONE thin long segmented tail. Preserve the wiry stalking silhouette and understated dark-gray highlights.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nUse slim overlapping natural chitin guards only on existing shoulders, chest, forearms and shins, retaining lean joints and long limbs. Not a bulky warrior, robot or armored human.\nComposition: one complete static slightly crouched ready stance facing RIGHT, clean side-three-quarter view with both arms and both legs separately visible. Entire head, fingers, toes, dorsal points and tail tip included. Whole figure inside central 80%, 10% empty padding on all sides.\nBackground: actual transparent alpha, no floor, shadow, scenery or glow.\nNo text, labels, logos, grid, sheet, collage, duplicated poses, crop, new limbs or weapons, wounds or gore. Original systemic adaptation, not canon certification or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/arcology-lurker-action-sheet-v56.png",
+    "sha256": "7e8c2108fb90998185d28e9d158f98fe78bc4eafe756605b5f923145c2d1df3c",
+    "visualNotes": "Very slender charcoal lurker with small smooth dark dome, narrow ribbed torso, two very long thin clawed arms, two angular digitigrade legs, small dorsal nubs and one thin tail. Upright top-row stalking poses inspected."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "One native generation attempt refused at output moderation stage. No returned image, retry, reformulation or runtime copy.",
+    "providerError": {
+      "code": "moderation_blocked",
+      "stage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "7343fdfa-bff6-4cf6-a575-82a105e4c770"
+    }
+  },
+  "runtimeContract": null
+}

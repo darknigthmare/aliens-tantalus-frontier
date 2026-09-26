@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-138-armored-caravan-stalker",
+  "name": "Armored Caravan Stalker",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view game creature sprite.\nPrimary request: ONE original Armored Caravan Stalker.\nInput image 1 is this creature's exact base anatomy, palette and detailed shaded-sprite style reference ONLY; use the intact four-footed standing top-row pose and ignore the sheet.\nSubject: brown-charcoal organic quadruped with long smooth bronze-rimmed cranial dome, pronounced ribbed barrel chest, slender straight long forelegs with small clawed hands, two bent muscular hind legs, paired short dorsal tubes and ONE long tapered segmented tail. Preserve the Caravan Stalker's relatively high four-footed stance and restrained bronze highlights.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nAdd modest overlapping brown natural chitin protection along existing shoulders, rib surfaces, forelegs and hind shins without changing proportions, head smoothness or limb count.\nComposition: one full-body static standing alert pose facing RIGHT, side-three-quarter viewpoint with all FOUR limbs individually visible and separated. Entire tail to its tip, toes, claws, skull and dorsal tubes included, at least 10% empty space around the silhouette.\nBackground: genuinely transparent alpha only; no scenery, ground, cast shadow or glow.\nNo grid, animation sheet, multiple figures, text, logo, labels, crop, extra limbs, mechanical armor, weapons, wounds or gore. One original systemic project adaptation, not canonical certification.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png",
+    "sha256": "9e6a7124eea69aa18a51739b7eaf6006ef863355ef39d977a6dec66c3864f713",
+    "visualNotes": "Brown-charcoal quadruped with relatively high four-footed stance, long smooth bronze-rimmed dome, ribbed barrel chest, straight long forelegs, bent rear legs, paired short dorsal tubes and one tapered tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-6c93cf17-2959-4012-bf54-a1da190d5ef1.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-138-armored-caravan-stalker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "c244d655a9af48f5de1273d147edcf2b44417a312bd04322340bb70fdc055c28",
+    "bboxAlphaAtLeast16": [
+      93,
+      267,
+      1380,
+      875
+    ],
+    "alphaMin": 0,
+    "alpha0": 1290135,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing Caravan Stalker; four feet and limbs are distinctly separated, paired dorsal tubes and smooth bronze-rimmed dome retained. Natural brown layered guards preserve the higher quadrupedal stance and long full tail. Measured visible margins in pixels: {\"left\":93,\"top\":267,\"right\":156,\"bottom\":149}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.635,
+      "y": 0.853515625
+    },
+    "sourceFacing": 1
+  }
+}

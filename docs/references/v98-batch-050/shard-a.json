@@ -1,0 +1,266 @@
+{
+  "shard": "a",
+  "attempted": 17,
+  "accepted": 12,
+  "held": [
+    "enemy-122-armored-specimen-six-line",
+    "enemy-133-armored-siege-royal",
+    "enemy-137-armored-arcology-lurker",
+    "enemy-139-armored-trilobite-echo",
+    "enemy-144-armored-pathogen-mimic"
+  ],
+  "poses": [
+    {
+      "id": "enemy-123-armored-red-xenomorph",
+      "profileId": "enemy-123-armored-red-xenomorph",
+      "name": "Armored Red Xenomorph",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-123-armored-red-xenomorph.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        57,
+        69,
+        1469,
+        967
+      ],
+      "sha256": "416b5223221fdb44af5a96ae9d8353221591b20ae9ac336e467d27dafb25b142",
+      "pivot": {
+        "x": 0.545,
+        "y": 0.943359375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 104
+    },
+    {
+      "id": "enemy-124-armored-k-series-yellow-xenomorph",
+      "profileId": "enemy-124-armored-k-series-yellow-xenomorph",
+      "name": "Armored K-Series Yellow Xenomorph",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-124-armored-k-series-yellow-xenomorph.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        295,
+        42,
+        1204,
+        977
+      ],
+      "sha256": "28fc592dc0e74dc7afe0d7ec34fa58165e24da5b69620ff997392693e80c5f54",
+      "pivot": {
+        "x": 0.523,
+        "y": 0.953125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 268
+    },
+    {
+      "id": "enemy-127-armored-atarax-ripper",
+      "profileId": "enemy-127-armored-atarax-ripper",
+      "name": "Armored ATARAX Ripper",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-127-armored-atarax-ripper.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        206,
+        106,
+        1329,
+        944
+      ],
+      "sha256": "48090b66b436696c579d82ae7715e4e78109490c323526106a76968c58e2bb69",
+      "pivot": {
+        "x": 0.575,
+        "y": 0.9208984375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 112
+    },
+    {
+      "id": "enemy-128-armored-ripper-queen",
+      "profileId": "enemy-128-armored-ripper-queen",
+      "name": "Armored Ripper Queen",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-128-armored-ripper-queen.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        60,
+        14,
+        1457,
+        1011
+      ],
+      "sha256": "ff323a9e17b03011395212ddae1426a730df34ebe1d5d206f6f2f46fe489545f",
+      "pivot": {
+        "x": 0.536,
+        "y": 0.986328125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 340
+    },
+    {
+      "id": "enemy-130-armored-foundry-crusher",
+      "profileId": "enemy-130-armored-foundry-crusher",
+      "name": "Armored Foundry Crusher",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-130-armored-foundry-crusher.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        87,
+        151,
+        1436,
+        887
+      ],
+      "sha256": "a33dd70e916f6623ebfb07195c54633d264ed8728ef98af310cdba016b0053ce",
+      "pivot": {
+        "x": 0.604,
+        "y": 0.865234375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 128
+    },
+    {
+      "id": "enemy-131-armored-reef-stalker",
+      "profileId": "enemy-131-armored-reef-stalker",
+      "name": "Armored Reef Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-131-armored-reef-stalker.png",
+      "sourceWidth": 1619,
+      "sourceHeight": 971,
+      "alphaBounds": [
+        70,
+        237,
+        1565,
+        843
+      ],
+      "sha256": "31d50e6f4080060e685339cbd9b74ecf7de8f27a44603ad258e287a61736e5f8",
+      "pivot": {
+        "x": 0.674,
+        "y": 0.8671472708547889
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-134-armored-pale-crucible-hunter",
+      "profileId": "enemy-134-armored-pale-crucible-hunter",
+      "name": "Armored Pale Crucible Hunter",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-134-armored-pale-crucible-hunter.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        65,
+        231,
+        1469,
+        881
+      ],
+      "sha256": "ddda607d63df47f58bd1b3b960525386ff1d7357bdc1256269b438577ea22193",
+      "pivot": {
+        "x": 0.635,
+        "y": 0.859375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 106
+    },
+    {
+      "id": "enemy-135-armored-dust-runner",
+      "profileId": "enemy-135-armored-dust-runner",
+      "name": "Armored Dust Runner",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-135-armored-dust-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        71,
+        212,
+        1461,
+        914
+      ],
+      "sha256": "3ff7a1cf80c4f9ee0a2cf9823a30c804981f08c2a599b86bcd511e268415e2ce",
+      "pivot": {
+        "x": 0.594,
+        "y": 0.8916015625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-136-armored-salvage-hive-brute",
+      "profileId": "enemy-136-armored-salvage-hive-brute",
+      "name": "Armored Salvage Hive Brute",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-136-armored-salvage-hive-brute.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        46,
+        278,
+        1206,
+        1019
+      ],
+      "sha256": "243fa8b3fd29998168aca340e0cf9ad58b222b0e1765d7b14c5925d44623f4f3",
+      "pivot": {
+        "x": 0.66,
+        "y": 0.8118022328548644
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 124
+    },
+    {
+      "id": "enemy-138-armored-caravan-stalker",
+      "profileId": "enemy-138-armored-caravan-stalker",
+      "name": "Armored Caravan Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-138-armored-caravan-stalker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        93,
+        267,
+        1380,
+        875
+      ],
+      "sha256": "c244d655a9af48f5de1273d147edcf2b44417a312bd04322340bb70fdc055c28",
+      "pivot": {
+        "x": 0.635,
+        "y": 0.853515625
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-140-armored-deacon-line",
+      "profileId": "enemy-140-armored-deacon-line",
+      "name": "Armored Deacon Line",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-140-armored-deacon-line.png",
+      "sourceWidth": 1334,
+      "sourceHeight": 1179,
+      "alphaBounds": [
+        496,
+        106,
+        919,
+        1118
+      ],
+      "sha256": "3a5e7cf3e49698d9a5db12cd1fb19b9036addcfc6c14cd1c832c6e6dfe488791",
+      "pivot": {
+        "x": 0.505,
+        "y": 0.9474130619168787
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    },
+    {
+      "id": "enemy-142-armored-protomorph",
+      "profileId": "enemy-142-armored-protomorph",
+      "name": "Armored Protomorph",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-142-armored-protomorph.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        91,
+        110,
+        1028,
+        1163
+      ],
+      "sha256": "69e84df69132b1fe575062569a5cb74e2620f9d18ccf953f3cb7523046608a3e",
+      "pivot": {
+        "x": 0.609,
+        "y": 0.9266347687400319
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 136
+    }
+  ]
+}

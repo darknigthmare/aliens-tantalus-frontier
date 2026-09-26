@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-150-armored-colonial-raider",
+  "name": "Armored Colonial Raider",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of an adult male raider with short brown hair, lower-face respirator, weathered taupe long field coat, dark patchwork armor and webbing, red accent armband, knee protection, boots and compact rifle. Use first intact standing pose only.\nSubject: Armored Colonial Raider. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Retain short brown hair, respirator covering lower face, taupe field coat, dark webbing and knee pads, red armband accent, boots and the same compact rifle. Add practical patchwork shoulder/chest/forearm/shin protection over clothing. Exactly two arms and two legs.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/colonial-raider-action-sheet-v56.png",
+    "sha256": "438b0bc32e11984425a179c643645c3df01cb19232afc079735f3a21f0d01754",
+    "visualNotes": "Reference sheet of an adult male raider with short brown hair, lower-face respirator, weathered taupe long field coat, dark patchwork armor and webbing, red accent armband, knee protection, boots and compact rifle. Use first intact standing pose only."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-c1381048-c85c-4054-915a-7b88bc012bc5.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-150-armored-colonial-raider.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "85740fd0c8ec69a38ba00f643a63b349060ba9a078c99a4f26fa620900fd3703",
+    "bboxAlphaAtLeast16": [
+      336,
+      64,
+      975,
+      1182
+    ],
+    "alphaMin": 0,
+    "alpha0": 1219436,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing raider preserves respirator, brown hair, taupe coat, red armband and compact rifle. New scuffed guards are layered over original uniform; intact adult human anatomy. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.5,
+      "y": 0.9425837320574163
+    },
+    "sourceFacing": 1
+  }
+}

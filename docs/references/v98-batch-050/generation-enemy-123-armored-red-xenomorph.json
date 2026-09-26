@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-123-armored-red-xenomorph",
+  "name": "Armored Red Xenomorph",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view character sprite.\nPrimary request: ONE newly authored Armored Red Xenomorph, an original systemic project variant.\nInput image 1: base identity and detailed shaded sprite-style reference, ONLY the red organic creature in the TOP ROW. Ignore all yellow and mechanical rows and ignore the sheet layout.\nPreserve the top-row creature's red-black elongated ridged head, red ribbed thorax, dorsal organic spines, two long clawed arms and two digitigrade legs; one complete segmented tail behind, no mechanical components.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nShow a whole neutral-ready pose facing RIGHT, clear side view, limbs separated and countable. Practical thicker natural red carapace plates integrated into shoulders, thorax, forearms and shins, same base red-black identity and surface relief. Original material rendering, not flat recolor.\nGenuinely transparent alpha background. Entire silhouette including all claws, feet, back spines, tail and its tip within frame; 10% empty padding on all four edges.\nNo floor, shadow, text, logo, labels, grid, sheet, collage, duplicate character, crop, machinery, weapons, blood, wounds, gore, glow or additional limbs. Output one standalone full creature only.",
+  "reference": {
+    "path": "assets/openai/neuro-xeno-animation-sheet.png",
+    "sha256": "9dc05f797a0e3acf936c9782dfeed9e9c6f8b30cfd2c7eaa2bb1b8105479b5c6",
+    "visualNotes": "Only red top-row organic biped used. Red-black ridged elongated head, ribbed thorax, dorsal spines, two clawed arms and digitigrade legs; lower rows are unrelated yellow and mechanical forms."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-5167e01d-4c95-4197-b835-c57b420799f0.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-123-armored-red-xenomorph.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "416b5223221fdb44af5a96ae9d8353221591b20ae9ac336e467d27dafb25b142",
+    "bboxAlphaAtLeast16": [
+      57,
+      69,
+      1469,
+      967
+    ],
+    "alphaMin": 0,
+    "alpha0": 1145663,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "One full right-facing red organic armored biped, both clawed arms and legs separable, single complete tail, intact dorsal spines. Native alpha is real (72.84% fully transparent, mean body alpha 250.36); provider preview includes hidden-RGB background. Visible margins 3.7–6.7% rather than requested 10%, but no anatomy is clipped. Static systemic adaptation, not canon certification or animation."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.545,
+      "y": 0.943359375
+    },
+    "sourceFacing": 1
+  }
+}

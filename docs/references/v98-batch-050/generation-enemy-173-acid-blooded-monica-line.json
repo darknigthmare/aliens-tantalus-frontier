@@ -1,0 +1,24 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-173-acid-blooded-monica-line",
+  "name": "Acid-Blooded Monica Line",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D game creature cutout.\nInput image 1: existing Monica Line identity and painted realistic style reference only; not an output grid. Create the new Acid-Blooded Monica Line project variant as one healthy intact neutral standing creature facing RIGHT, side/three-quarter game view. Viewed Monica Line reference: intact dark graphite bipedal xenomorph with long smooth curved dome, ribbed side head and chest, two long arms, two digitigrade legs, dorsal tubes/spines and one tapering segmented tail. Neutral upright hunched right-facing poses. No human face or clothing.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nKeep the long smooth graphite dome, skeletal ribbed armor, lean two-arm/two-leg anatomy, dorsal tubes and single segmented tail. Add subtle olive-amber surface iridescence and restrained yellow-green seams integrated into intact organic armor, retaining dominant graphite black.\nComposition: full head, both feet, hands and entire tail fully within frame, at least 10% genuinely transparent padding on every side. Feet rest on an imaginary shared baseline. Genuine RGBA transparency, no floor or shadow patch. Fine painted game realism matching reference, sharp material relief and readable silhouette. Static original project interpretation, not an official design or animation.\nAvoid text, logo, labels, watermark, grid, panels, repeated figures, cropped parts, additional anatomy, scenery, wounds, exposed tissue, blood or liquid effects, glow aura, checkerboard.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/monica-line-action-sheet-v56.png",
+    "sha256": "7bea16e251795d207ec5796016513d8631399906864c171c3d6445fe2efc77b3",
+    "visualNotes": "Viewed Monica Line reference: intact dark graphite bipedal xenomorph with long smooth curved dome, ribbed side head and chest, two long arms, two digitigrade legs, dorsal tubes/spines and one tapering segmented tail. Neutral upright hunched right-facing poses. No human face or clothing."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native generation attempt rejected at output moderation. No output recovered, no retry or reformulation, no runtime image admitted. This is the distinct Acid-Blooded Monica Line job; the former V97 Armored Monica refusal remains untouched.",
+    "requestId": "1fefd9c3-7d91-400d-9626-ec9c5136e11f",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

@@ -1,0 +1,24 @@
+{
+  "profileId": "enemy-122-armored-specimen-six-line",
+  "name": "Armored Specimen Six Line",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static character sprite for a side-view 2D game.\nPrimary request: Create ONE newly authored Armored Specimen Six Line, a project systemic variant, not a canonical model or animation.\nInput image 1 is the base identity, anatomy, material and style reference ONLY. Its sheet layout is not the output. Use the intact upright poses in its top row as the anatomy reference.\nSubject: a dark bronze-black biomechanical biped, elongated ridged cranium, two distinct clawed arms, two digitigrade legs, back tubes/spines and ONE long segmented tail curled behind. Preserve the reference silhouette, head proportions and chitin relief.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: one whole static neutral-ready pose facing RIGHT, clean near-side view with enough separation to count the two arms and two legs. Entire head, back appendages, hands, feet, tail and tail tip visible. At least 10% clear padding on every edge.\nStyle: retain the detailed shaded game-sprite realism and dark bronze chitin of the reference; layer thicker natural carapace plates over existing thorax, shoulders, forearms and shins without changing body topology.\nBackground: genuinely transparent alpha, no backdrop, no floor or cast shadow.\nAvoid: grid, animation sheet, repeated characters, text, logo, labels, border, crop, armor suit, guns, wounds, blood, gore, glow, new appendages or redesign. Exactly one full creature.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png",
+    "sha256": "be902ad624e15ace97da27e4983a2a685891e7e221cf72aef282485f06c7d858",
+    "visualNotes": "Reference inspected: dark bronze-black ridged elongated cranium, bipedal biomechanical torso, two clawed arms, two digitigrade legs, dorsal tubes and one curled segmented tail; upright top-row pose used for identity."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "notes": "One native generation attempt refused at output moderation stage. No image returned, no retry or reformulation, no runtime copy.",
+    "providerError": {
+      "code": "moderation_blocked",
+      "stage": "output",
+      "categories": [
+        "other"
+      ],
+      "requestId": "5a6dc227-6f75-47f7-bebd-95cad90f4d2e"
+    }
+  },
+  "runtimeContract": null
+}

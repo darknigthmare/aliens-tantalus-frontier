@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-151-armored-atarax-controller",
+  "name": "Armored ATARAX Controller",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference is a multi-pose sheet of an adult male technical controller, short dark hair, exposed face, radio headset and antenna, charcoal padded uniform, backpack with cable runs, chest equipment module, belt pouches and heavy boots. Use the first calm unarmed standing pose only.\nSubject: Armored ATARAX Controller. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Keep headset, antenna, exposed adult male face, short dark hair, charcoal uniform, backpack cabling and chest equipment. Add practical armored vest, shoulder and forearm plates and shin guards while retaining the technician outline. Calm empty hands, no new gun. Exactly two arms and two legs.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/atarax-controller-action-sheet-v56.png",
+    "sha256": "3eabe8d1eccba7939d95db0c9de94a12a3e717a03ea0feb4c29296905d74f975",
+    "visualNotes": "Reference is a multi-pose sheet of an adult male technical controller, short dark hair, exposed face, radio headset and antenna, charcoal padded uniform, backpack with cable runs, chest equipment module, belt pouches and heavy boots. Use the first calm unarmed standing pose only."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-c72e2baf-8484-47eb-abd6-3f8b2fa4b3c1.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-151-armored-atarax-controller.png",
+    "width": 1024,
+    "height": 1536,
+    "sha256": "f208b1da52147bf3e92360c81fea0718294a0bb1cfcafba89221a505dc211211",
+    "bboxAlphaAtLeast16": [
+      286,
+      54,
+      737,
+      1464
+    ],
+    "alphaMin": 0,
+    "alpha0": 1184331,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Right-facing intact armored controller retains face, headset antenna, chest electronics and backpack. Preview has dark RGB haze but pixel probes around silhouette and under feet have alpha=0; haze is transparent, not a runtime backdrop. No new weapon. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.53,
+      "y": 0.953125
+    },
+    "sourceFacing": 1
+  }
+}

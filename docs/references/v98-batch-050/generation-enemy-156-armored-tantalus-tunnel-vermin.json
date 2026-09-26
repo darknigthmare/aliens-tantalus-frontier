@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-156-armored-tantalus-tunnel-vermin",
+  "name": "Armored Tantalus Tunnel Vermin",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of a low elongated pale beige armored arthropod with overlapping dorsal scutes, dark flexible segmented abdomen, a narrow tapered head bearing a pair of short curved feelers, rows of small jointed legs and cyan dots along the flank. Use the first intact calm right-facing pose.\nSubject: Armored Tantalus Tunnel Vermin. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Anatomy lock: ONE low elongated tan arthropod, exactly six short jointed walking legs in three bilateral pairs, a segmented dark abdomen at the rear, overlapping beige dorsal scutes, a narrow wedge head with short paired feelers, and restrained small cyan flank points. Thickened natural layered carapace, not a metal suit. Preserve the reference's low long body and short limbs. No fur, no mammalian paws, no new long tail. Pose all six legs readably with far-side limbs slightly offset.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/tantalus-tunnel-vermin-action-sheet-v56.png",
+    "sha256": "6a824553bf7b6355b32e5ea5933998e7de51c5ea7a8b6c1233cc3bf8c76aa104",
+    "visualNotes": "Reference sheet of a low elongated pale beige armored arthropod with overlapping dorsal scutes, dark flexible segmented abdomen, a narrow tapered head bearing a pair of short curved feelers, rows of small jointed legs and cyan dots along the flank. Use the first intact calm right-facing pose."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-4441f503-fad8-41c5-a084-2f9d3e3d1f41.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-156-armored-tantalus-tunnel-vermin.png",
+    "width": 1774,
+    "height": 887,
+    "sha256": "36fc4991f935e0a49aef66eb38764c6bed5ba1d8cf8703dd01f68b5bfbdcac59",
+    "bboxAlphaAtLeast16": [
+      190,
+      253,
+      1712,
+      750
+    ],
+    "alphaMin": 0,
+    "alpha0": 1193953,
+    "totalPixels": 1573538
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Low tan arthropod retains segmented rear abdomen, overlapping organic beige scutes, paired short feelers and small cyan flank points. Three paired leg stations are arranged in profile with far-side occlusion; no mammalian limbs, fur or new tail. Entire body and appendage tips remain in frame. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.48,
+      "y": 0.8455467869222097
+    },
+    "sourceFacing": 1
+  }
+}

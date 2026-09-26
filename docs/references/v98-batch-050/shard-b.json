@@ -1,0 +1,368 @@
+{
+  "shard": "b",
+  "status": "complete",
+  "count": 17,
+  "canonExact": false,
+  "animationStatus": "static-only",
+  "nativePixelsUnchanged": true,
+  "poses": [
+    {
+      "id": "enemy-148-armored-upp-vanguard",
+      "profileId": "enemy-148-armored-upp-vanguard",
+      "name": "Armored UPP Vanguard",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-148-armored-upp-vanguard.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        377,
+        112,
+        959,
+        1141
+      ],
+      "sha256": "3751876d7bf6999be9f6c1fae8cc4a522871c59d8601265387b026ab8cb13a8f",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.9098883572567783
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 134
+    },
+    {
+      "id": "enemy-149-armored-seegson-security",
+      "profileId": "enemy-149-armored-seegson-security",
+      "name": "Armored Seegson Security",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-149-armored-seegson-security.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        311,
+        108,
+        1024,
+        1170
+      ],
+      "sha256": "e98b7496ef553d27f118289682ffa25e5de43c294a2bfad95551df0df6a0b61c",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.9330143540669856
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 132
+    },
+    {
+      "id": "enemy-150-armored-colonial-raider",
+      "profileId": "enemy-150-armored-colonial-raider",
+      "name": "Armored Colonial Raider",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-150-armored-colonial-raider.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "alphaBounds": [
+        336,
+        64,
+        975,
+        1182
+      ],
+      "sha256": "85740fd0c8ec69a38ba00f643a63b349060ba9a078c99a4f26fa620900fd3703",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.9425837320574163
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 138
+    },
+    {
+      "id": "enemy-151-armored-atarax-controller",
+      "profileId": "enemy-151-armored-atarax-controller",
+      "name": "Armored ATARAX Controller",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-151-armored-atarax-controller.png",
+      "sourceWidth": 1024,
+      "sourceHeight": 1536,
+      "alphaBounds": [
+        286,
+        54,
+        737,
+        1464
+      ],
+      "sha256": "f208b1da52147bf3e92360c81fea0718294a0bb1cfcafba89221a505dc211211",
+      "pivot": {
+        "x": 0.53,
+        "y": 0.953125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 142
+    },
+    {
+      "id": "enemy-152-armored-cult-host",
+      "profileId": "enemy-152-armored-cult-host",
+      "name": "Armored Cult Host",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-152-armored-cult-host.png",
+      "sourceWidth": 1024,
+      "sourceHeight": 1536,
+      "alphaBounds": [
+        216,
+        93,
+        807,
+        1393
+      ],
+      "sha256": "41bb1fbad0d2359289e5542083174548614de393511f17e59d3b7e6ad354cb95",
+      "pivot": {
+        "x": 0.5,
+        "y": 0.9069010416666666
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 140
+    },
+    {
+      "id": "enemy-153-armored-wild-boar-host",
+      "profileId": "enemy-153-armored-wild-boar-host",
+      "name": "Armored Wild Boar Host",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-153-armored-wild-boar-host.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        101,
+        160,
+        1474,
+        923
+      ],
+      "sha256": "3f8553c6d7b65676717af2bff860b97029344c2be947828965e28231422f1cd7",
+      "pivot": {
+        "x": 0.48,
+        "y": 0.9013671875
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 88
+    },
+    {
+      "id": "enemy-154-armored-korari-stalker",
+      "profileId": "enemy-154-armored-korari-stalker",
+      "name": "Armored Korari Stalker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-154-armored-korari-stalker.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        52,
+        228,
+        1726,
+        747
+      ],
+      "sha256": "bd3759b5891d132d6bbda926f6d2ddb8cf25e1d4dd0bda43a0564af9c90a5a14",
+      "pivot": {
+        "x": 0.65,
+        "y": 0.8421645997745209
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 288
+    },
+    {
+      "id": "enemy-155-armored-ceto-reef-predator",
+      "profileId": "enemy-155-armored-ceto-reef-predator",
+      "name": "Armored Ceto Reef Predator",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-155-armored-ceto-reef-predator.png",
+      "sourceWidth": 1983,
+      "sourceHeight": 793,
+      "alphaBounds": [
+        76,
+        172,
+        1916,
+        674
+      ],
+      "sha256": "5bd3d7017f55ff490394484a38646f1bdf6a655fceabb11ad0fbc769f108c837",
+      "pivot": {
+        "x": 0.66,
+        "y": 0.849936948297604
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 384
+    },
+    {
+      "id": "enemy-156-armored-tantalus-tunnel-vermin",
+      "profileId": "enemy-156-armored-tantalus-tunnel-vermin",
+      "name": "Armored Tantalus Tunnel Vermin",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-156-armored-tantalus-tunnel-vermin.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        190,
+        253,
+        1712,
+        750
+      ],
+      "sha256": "36fc4991f935e0a49aef66eb38764c6bed5ba1d8cf8703dd01f68b5bfbdcac59",
+      "pivot": {
+        "x": 0.48,
+        "y": 0.8455467869222097
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 76
+    },
+    {
+      "id": "enemy-157-acid-blooded-ovomorph",
+      "profileId": "enemy-157-acid-blooded-ovomorph",
+      "name": "Acid-Blooded Ovomorph",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-157-acid-blooded-ovomorph.png",
+      "sourceWidth": 1224,
+      "sourceHeight": 1285,
+      "alphaBounds": [
+        259,
+        167,
+        964,
+        1158
+      ],
+      "sha256": "64198ec95c9b75624a87f2618ca380120223288b5c27a88500f94946744b9647",
+      "pivot": {
+        "x": 0.495,
+        "y": 0.9011673151750973
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 78
+    },
+    {
+      "id": "enemy-158-acid-blooded-facehugger",
+      "profileId": "enemy-158-acid-blooded-facehugger",
+      "name": "Acid-Blooded Facehugger",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-158-acid-blooded-facehugger.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        75,
+        319,
+        1699,
+        717
+      ],
+      "sha256": "1337c39f652949af095346152e102763743626a065c3c3827ce87e04775cdcaa",
+      "pivot": {
+        "x": 0.715,
+        "y": 0.8083427282976324
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 72
+    },
+    {
+      "id": "enemy-159-acid-blooded-chestburster",
+      "profileId": "enemy-159-acid-blooded-chestburster",
+      "name": "Acid-Blooded Chestburster",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-159-acid-blooded-chestburster.png",
+      "sourceWidth": 1774,
+      "sourceHeight": 887,
+      "alphaBounds": [
+        128,
+        225,
+        1660,
+        725
+      ],
+      "sha256": "d878756bcb6d23892098d5ebea327b3d8005fb3297c2192887a28eb37be41495",
+      "pivot": {
+        "x": 0.6,
+        "y": 0.8173618940248027
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 188
+    },
+    {
+      "id": "enemy-162-acid-blooded-runner",
+      "profileId": "enemy-162-acid-blooded-runner",
+      "name": "Acid-Blooded Runner",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-162-acid-blooded-runner.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        107,
+        219,
+        1442,
+        882
+      ],
+      "sha256": "cba49f56d6f5af3d0c54ba4d3000aac282b2a8dac9ff68fd8a187ae7b9e9dea6",
+      "pivot": {
+        "x": 0.6,
+        "y": 0.861328125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 256
+    },
+    {
+      "id": "enemy-164-acid-blooded-queen",
+      "profileId": "enemy-164-acid-blooded-queen",
+      "name": "Acid-Blooded Queen",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-164-acid-blooded-queen.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        109,
+        43,
+        1427,
+        991
+      ],
+      "sha256": "58149a549c93dcb5e08810acacc6db11812a0449629c8319fbedbe81b5e339b5",
+      "pivot": {
+        "x": 0.615,
+        "y": 0.9677734375
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 340
+    },
+    {
+      "id": "enemy-165-acid-blooded-crusher",
+      "profileId": "enemy-165-acid-blooded-crusher",
+      "name": "Acid-Blooded Crusher",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-165-acid-blooded-crusher.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        79,
+        140,
+        1475,
+        916
+      ],
+      "sha256": "9f61341d13979b151920acec31fa253dfc4a4a6c6f715195c19c3856af285ba3",
+      "pivot": {
+        "x": 0.61,
+        "y": 0.89453125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 320
+    },
+    {
+      "id": "enemy-167-acid-blooded-lurker",
+      "profileId": "enemy-167-acid-blooded-lurker",
+      "name": "Acid-Blooded Lurker",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-167-acid-blooded-lurker.png",
+      "sourceWidth": 1536,
+      "sourceHeight": 1024,
+      "alphaBounds": [
+        73,
+        213,
+        1476,
+        861
+      ],
+      "sha256": "8d1d59290bc721e2ca60b819666a0f02be3324836fb401c8456591045a6f935e",
+      "pivot": {
+        "x": 0.6,
+        "y": 0.8408203125
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 92
+    },
+    {
+      "id": "enemy-169-acid-blooded-ravager",
+      "profileId": "enemy-169-acid-blooded-ravager",
+      "name": "Acid-Blooded Ravager",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-169-acid-blooded-ravager.png",
+      "sourceWidth": 1402,
+      "sourceHeight": 1122,
+      "alphaBounds": [
+        93,
+        131,
+        1311,
+        1039
+      ],
+      "sha256": "fe9ca3ee2dea5bf75c6417660b177eb8278bda7303ce601bf004c58c1fefe159",
+      "pivot": {
+        "x": 0.555,
+        "y": 0.9260249554367201
+      },
+      "sourceFacing": 1,
+      "targetOpaqueHeight": 158
+    }
+  ],
+  "held": []
+}

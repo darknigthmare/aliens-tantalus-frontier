@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-134-armored-pale-crucible-hunter",
+  "name": "Armored Pale Crucible Hunter",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view creature sprite.\nPrimary request: ONE original Armored Pale Crucible Hunter.\nInput image 1: base identity, anatomy, ivory palette and shaded game-sprite style reference only; use its intact crouched top-row posture. Ignore the sheet layout.\nSubject: pale ivory-beige slender organic quadrupedal hunter with elongated smooth cranium, sharply ribbed narrow torso, small angular dorsal projections, two very long thin clawed forelimbs, two bent digitigrade hind legs and ONE long fine segmented curved tail. Retain its slender crouching proportions and warm pale shell over gray-beige recesses.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nIntegrate modest natural ivory chitin guards over the existing shoulders, ribs, forearms and shins, keeping a lean hunter rather than a heavy giant.\nComposition: one whole static crouched ready stance facing RIGHT, side-three-quarter view with all FOUR limbs separated and countable. Full tail and tip, claws, feet, dome and dorsal points visible; 10% clear padding around the whole silhouette.\nBackground: actual transparent alpha only. No terrain, floor shadow, glow or environment.\nNo grid, sheet, duplicated character, text, logo, labels, border, crop, extra appendages, mechanical suit, weapons, wounds or gore. Original systemic project adaptation, not an official model or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/pale-crucible-hunter-action-sheet.png",
+    "sha256": "551267a12dc90b18ec206c5a853c5c3de0d30fcbe5fe5bea19391f952c4d977c",
+    "visualNotes": "Pale ivory-beige slender hunter with smooth elongated skull, narrow ribbed torso, small dorsal points, two long thin forelimbs, two bent hind legs and one fine curved tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-28593bae-f4db-4d07-8115-3fa09ee20427.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-134-armored-pale-crucible-hunter.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "ddda607d63df47f58bd1b3b960525386ff1d7357bdc1256269b438577ea22193",
+    "bboxAlphaAtLeast16": [
+      65,
+      231,
+      1469,
+      881
+    ],
+    "alphaMin": 0,
+    "alpha0": 1229049,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete pale right-facing crouched hunter, all four limbs distinct, slender ribbed torso and smooth ivory cranium preserved. Natural ivory guards layered onto existing limbs and dorsal points; entire fine tail remains visible. Measured visible margins in pixels: {\"left\":65,\"top\":231,\"right\":67,\"bottom\":143}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.635,
+      "y": 0.859375
+    },
+    "sourceFacing": 1
+  }
+}

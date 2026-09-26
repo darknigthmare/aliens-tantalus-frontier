@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-162-acid-blooded-runner",
+  "name": "Acid-Blooded Runner",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference sheet of a copper/russet biomechanical runner in quadrupedal stance: elongated smooth dark domed eyeless skull, narrow ribbed torso, two long clawed forelimbs plus two digitigrade hind legs, one segmented thin tail curved left. No tall dorsal exhaust tube cluster on this base.\nSubject: Acid-Blooded Runner. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Anatomy lock: ONE lean copper-russet quadrupedal runner with elongated smooth domed eyeless head facing right, narrow ribbed torso, exactly two long forelimbs planted on clawed hands and two bent digitigrade hind legs with feet. Exactly one long segmented tail makes a low unobstructed curve to the left, entire pointed end visible. Neutral four-point crouched stance like the first intact reference, not bipedal, no secondary arms, no queen crest, no large dorsal exhaust tubes. Keep copper-brown identity with dark glossy dome and subdued olive-amber surface iridescence.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemy-profiles-v66/enemy-006-runner.webp",
+    "sha256": "c68f8b0b8605cc3db8c4b00628781e4d12d1da39c20b3e62db869f93d9485eb3",
+    "visualNotes": "Reference sheet of a copper/russet biomechanical runner in quadrupedal stance: elongated smooth dark domed eyeless skull, narrow ribbed torso, two long clawed forelimbs plus two digitigrade hind legs, one segmented thin tail curved left. No tall dorsal exhaust tube cluster on this base."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-3c9f064f-8012-4db7-be92-cbc10af70f8d.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-162-acid-blooded-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "cba49f56d6f5af3d0c54ba4d3000aac282b2a8dac9ff68fd8a187ae7b9e9dea6",
+    "bboxAlphaAtLeast16": [
+      107,
+      219,
+      1442,
+      882
+    ],
+    "alphaMin": 0,
+    "alpha0": 1188859,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Copper-russet quadrupedal runner has two planted long forelimbs, two digitigrade hind legs, smooth elongated eyeless dome, ribbed narrow torso and one complete curved segmented tail. No dorsal tube cluster or extra arms. Native preview brown haze is hidden RGB: five outside-silhouette pixels sampled have alpha=0; no alpha-visible backdrop was added. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.6,
+      "y": 0.861328125
+    },
+    "sourceFacing": 1
+  }
+}

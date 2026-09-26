@@ -1,0 +1,50 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-190-acid-blooded-caravan-stalker",
+  "name": "Acid-Blooded Caravan Stalker",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static full-body 2D game creature cutout.\nInput image 1 is base identity and rendering-style reference only, not an output grid. Create Acid-Blooded Caravan Stalker. Reference visual observations: The reference depicts a lean brown/bronze-black biomechanical quadrupedal alien, a long rounded smooth dome pointing right, ribbed thorax, four slender limbs (two long forearms with knuckle-claws and two digitigrade hindlegs), sparse short dorsal tube stubs, and one thin long segmented tail curling behind. Use its intact neutral standing right-facing top-row appearance. No carried equipment and no machine suit.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nPreserve the reference creature's exact four-limb anatomy, one head, one tail, bronze-brown and near-black identity palette, slender silhouette, long smooth domed skull, ribbed chest, sparse dorsal stubs and claw structure. Add only restrained intact olive-amber material iridescence and subtle yellow-green subdermal seams. Keep the natural creature appearance, not a robot. Single neutral alert grounded pose facing RIGHT, suitable for a side-view 2D game.\nComposition: entire body, dome, all four limbs, claws, dorsal stubs and whole tail visible. Leave approximately 10 percent clear transparent padding on every side. All supporting feet rest on an imaginary horizontal ground line. Detailed painterly biomechanical rendering consistent with reference, crisp readable silhouette. Genuine RGBA transparent background, no floor, no cast shadow, no background color.\nThis is an original project gameplay variant, not a new official species or a canon-exact claim. One static pose only, no animation sheet.\nAvoid grids, panels, repeats, text, logos, watermarks, scenery, cropping, extra heads/tails/limbs, wounds, exposed tissue, blood, fluid effects, spray, puddles, auras, glowing outlines, checkerboard pattern or painted background.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/caravan-stalker-action-sheet-v56.png",
+    "sha256": "9e6a7124eea69aa18a51739b7eaf6006ef863355ef39d977a6dec66c3864f713",
+    "visualNotes": "The reference depicts a lean brown/bronze-black biomechanical quadrupedal alien, a long rounded smooth dome pointing right, ribbed thorax, four slender limbs (two long forearms with knuckle-claws and two digitigrade hindlegs), sparse short dorsal tube stubs, and one thin long segmented tail curling behind. Use its intact neutral standing right-facing top-row appearance. No carried equipment and no machine suit."
+  },
+  "output": {
+    "providerPath": "C:\\Users\\chuck\\.codex\\generated_images\\01a0df72-5de7-7b13-b83e-245a21e05d37\\exec-d8118c1a-3abe-4dc4-bfd8-486ad45c4090.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-190-acid-blooded-caravan-stalker.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "8fc31c82177270ad20e8e3f44fe8daa3a3c1b9e2cb870b99115f3c20d937a8f9",
+    "bboxAlphaAtLeast16": [
+      63,
+      225,
+      1468,
+      901
+    ],
+    "alphaMin": 0,
+    "alpha0": 1221867,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Visually inspected native output: one intact right-facing lean bronze-black quadruped, one smooth domed head, four clawed limbs and one complete tapering tail; sparse dorsal stubs and ribbed biomechanical chest retained. Subtle olive-amber/yellow-green material accents, no wound or fluid effect, no duplicate figure/text/crop. Ground pivot uses the lowest supporting claw and the visual support span center. Requested 10% padding was not fully achieved horizontally, but all appendages remain inside native alpha bounds without clipping; no pixel adjustment performed.",
+    "canonExact": false,
+    "animationStatus": "missing",
+    "paddingRequestedPercent": 10,
+    "marginsAlphaAtLeast16": {
+      "left": 63,
+      "top": 225,
+      "right": 68,
+      "bottom": 123
+    }
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.64,
+      "y": 0.8798828125
+    },
+    "sourceFacing": 1
+  }
+}

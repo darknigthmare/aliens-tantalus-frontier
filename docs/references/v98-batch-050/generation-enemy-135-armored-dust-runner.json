@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-135-armored-dust-runner",
+  "name": "Armored Dust Runner",
+  "prompt": "Use case: stylized-concept.\nAsset type: one native transparent static side-view game creature sprite.\nPrimary request: ONE original Armored Dust Runner.\nInput image 1 is the exact base anatomy, color and shaded sprite-style reference, not a sheet layout. Use the intact low top-row runner pose.\nSubject: very lean low quadrupedal creature with bronze-brown ribbed organic body, small smooth charcoal oval cranium, two long slender clawed forelimbs, two angular digitigrade hind legs, small dorsal ridges and ONE long thin segmented tail curling upward behind. Preserve the Dust Runner's lightweight stretched crouching silhouette and bronze/black palette.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nAdd practical thin overlapping natural chitin reinforcement only on existing shoulders, ribs and limbs; do not turn this runner into a bulky crusher or change its smooth small head.\nComposition: one complete static low ready stance facing RIGHT, slight side-three-quarter view, all four limbs clear and separated, entire curled tail to tip visible. At least 10% transparent empty space around head, claws, feet and tail.\nBackground: genuine transparent alpha, no floor, shadow, scenery or glow.\nNo grid, sheet, collage, duplicate characters, text, labels, logo, crop, extra appendages, machinery, weapons, wounds or gore. Original systemic adaptation, not certified canon or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/dust-runner-action-sheet-v56.png",
+    "sha256": "0a327424631fbf0b11f547be8408fdf999e89dd29b9f51be93c71a1240cca5d7",
+    "visualNotes": "Very lean bronze/black low runner, small smooth charcoal oval cranium, thin elongated forelimbs, bent digitigrade hind legs, small dorsal ridges and one raised curling tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-254df85d-d14b-496e-9041-eac3b239b3e6.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-135-armored-dust-runner.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "3ff7a1cf80c4f9ee0a2cf9823a30c804981f08c2a599b86bcd511e268415e2ce",
+    "bboxAlphaAtLeast16": [
+      71,
+      212,
+      1461,
+      914
+    ],
+    "alphaMin": 0,
+    "alpha0": 1230512,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete low right-facing Dust Runner with all four limbs separately visible, small dark smooth dome and long high-curled tail. Thin bronze organic plating preserves runner proportions rather than a heavy tank silhouette. Measured visible margins in pixels: {\"left\":71,\"top\":212,\"right\":75,\"bottom\":110}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.594,
+      "y": 0.8916015625
+    },
+    "sourceFacing": 1
+  }
+}

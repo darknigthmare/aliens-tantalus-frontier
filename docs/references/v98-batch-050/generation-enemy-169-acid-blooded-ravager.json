@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-169-acid-blooded-ravager",
+  "name": "Acid-Blooded Ravager",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference crimson-burgundy Ravager in bipedal stance: ridged swept-back eyeless cranial shell, spiky shoulders/back, narrow ribbed torso, two arms terminating in very long curved scythe blades rather than normal hands, two digitigrade clawed feet and one thick segmented pointed tail curving left.\nSubject: Acid-Blooded Ravager. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Anatomy lock: ONE crimson-burgundy Ravager in neutral slightly forward-leaning upright combat-ready stance, right facing. Exactly two arms; EACH FOREARM ENDS IN ONE LONG CURVED ORGANIC SCYTHE BLADE, matching reference, not hands holding swords and not giant fingers. Exactly two digitigrade legs with clawed feet. Swept-back ridged eyeless cranial shell, pointed shoulder/back spines, narrow ribbed body, one complete segmented pointed tail curling left. Both scythes fully visible and separate with tips safely inside canvas. Preserve deep burgundy-red armor identity; subtle olive-amber iridescence and tiny muted yellow-green intact seams only. No other weapons, no wings, no extra arms.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-ravager-action-sheet.png",
+    "sha256": "f7c58823ce59b27aa2ebe779d380966f40fb48fa9e1dfe165fd38ad306999070",
+    "visualNotes": "Reference crimson-burgundy Ravager in bipedal stance: ridged swept-back eyeless cranial shell, spiky shoulders/back, narrow ribbed torso, two arms terminating in very long curved scythe blades rather than normal hands, two digitigrade clawed feet and one thick segmented pointed tail curving left."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-7f7974f7-86f8-46ab-b4ba-b269ce72be8e.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-169-acid-blooded-ravager.png",
+    "width": 1402,
+    "height": 1122,
+    "sha256": "fe9ca3ee2dea5bf75c6417660b177eb8278bda7303ce601bf004c58c1fefe159",
+    "bboxAlphaAtLeast16": [
+      93,
+      131,
+      1311,
+      1039
+    ],
+    "alphaMin": 0,
+    "alpha0": 1185847,
+    "totalPixels": 1573044
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Burgundy Ravager retains two organic forearm scythes rather than handheld weapons, two digitigrade legs, swept ridged eyeless cranial shell, shoulder/back spikes and one complete curved segmented tail. Both blades and feet are uncut. Dominant burgundy chitin and restrained olive seams preserve the base identity. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.555,
+      "y": 0.9260249554367201
+    },
+    "sourceFacing": 1
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-128-armored-ripper-queen",
+  "name": "Armored Ripper Queen",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static side-view creature sprite.\nPrimary request: ONE original Armored Ripper Queen. Input image 1 is the exact base identity and shaded-sprite style reference only, not a layout template.\nPreserve this reference's silver-gray/charcoal Ripper Queen anatomy: broad swept serrated cranial crown, armored shoulder shell and jagged spinal ridge, compact heavy torso, TWO long clawed arms, TWO powerful digitigrade legs, ONE narrow coiled segmented tail, restrained dark rust-orange seams. Do not substitute a generic four-armed movie queen; retain the two-armed anatomy visible in this specific reference.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nAdd natural overlapping chitin reinforcement at the already existing crown, shoulders, ribs and limbs, keeping identity colors and silhouette proportions.\nComposition: one intact full-body static ready stance, facing RIGHT in near-side view. Every hand, claw, foot, cranial point, dorsal point and tail tip visible with clear separated limbs and 10% empty margin on all edges.\nBackground: real transparent alpha, no floor, shadow, scenery or aura.\nNo repeated pose, grid, contact sheet, text, logos, new appendages, mechanical suit, weapons, crop, blood, exposed anatomy or gore. One original systemic project adaptation, not canonical certification or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/ripper-queen-action-sheet.png",
+    "sha256": "20878480f2538db0a9972743f1f5012845bdd898ea4188ab566c6efdbc1f7af8",
+    "visualNotes": "Reference-specific Ripper Queen with two long arms, two digitigrade legs, swept serrated crown, silver-gray shell over charcoal ribs, rust-orange seams, jagged spinal ridge and one curled tail. Top-row intact posture inspected."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-ae08bc87-9f1f-44dd-b575-544ddf5a48bb.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-128-armored-ripper-queen.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "ff323a9e17b03011395212ddae1426a730df34ebe1d5d206f6f2f46fe489545f",
+    "bboxAlphaAtLeast16": [
+      60,
+      14,
+      1457,
+      1011
+    ],
+    "alphaMin": 0,
+    "alpha0": 935788,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Full right-facing two-armed Ripper Queen with all four limbs distinct, swept serrated crown and one complete curved tail. Organic layered silver/charcoal protection and rust-orange identity seams retained. Tight but nonzero outer margins are an explicit framing caveat. Measured visible margins in pixels: {\"left\":60,\"top\":14,\"right\":79,\"bottom\":13}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.536,
+      "y": 0.986328125
+    },
+    "sourceFacing": 1
+  }
+}

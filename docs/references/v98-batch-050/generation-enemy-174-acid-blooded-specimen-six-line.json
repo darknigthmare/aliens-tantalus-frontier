@@ -1,0 +1,24 @@
+{
+  "schema": 98,
+  "batch": "050",
+  "shard": "c",
+  "profileId": "enemy-174-acid-blooded-specimen-six-line",
+  "name": "Acid-Blooded Specimen Six Line",
+  "provider": "OpenAI native image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: ONE dedicated static 2D game creature cutout.\nInput image 1 is identity/style reference only, not an output grid. Generate one Acid-Blooded Specimen Six Line, neutral alert standing pose facing RIGHT. Viewed Specimen Six Line sheet: slender dark brown-black biomechanical biped, elongated bronze-highlighted dome, circular ribbed shoulder, two long arms/clawed hands, two digitigrade legs, four short dorsal tubes and one long curved segmented tail. Side-facing game sprite with slightly elevated three-quarter body.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nMatch slender anatomy, elongated dome, dorsal tubes and dark brown-black shell with bronze highlights. New subtle olive-amber iridescence and restrained yellow-green seams remain material detail, no illumination effect.\nOne intact full-body creature, both feet on imaginary ground line, full single tail curved behind inside frame, generous 10% transparent padding each edge. Genuine transparent RGBA, no ground or cast shadow. Detailed painted realistic game sprite rendering matching reference. Original project variant, no canon or animation claim. No text, watermark, panels, grid, duplicates, crop, extra appendages, scenery, wounds, exposed tissue, blood, fluids, spray, puddles, glow outline or aura.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/specimen-six-line-action-sheet-v56.png",
+    "sha256": "be902ad624e15ace97da27e4983a2a685891e7e221cf72aef282485f06c7d858",
+    "visualNotes": "Viewed Specimen Six Line sheet: slender dark brown-black biomechanical biped, elongated bronze-highlighted dome, circular ribbed shoulder, two long arms/clawed hands, two digitigrade legs, four short dorsal tubes and one long curved segmented tail. Side-facing game sprite with slightly elevated three-quarter body."
+  },
+  "output": null,
+  "review": {
+    "status": "held",
+    "reason": "native-output-moderation-blocked",
+    "notes": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted.",
+    "requestId": "35cf7004-98e4-4d43-82e9-b265dc46b82c",
+    "canonExact": false,
+    "animationStatus": "missing"
+  },
+  "runtimeContract": null
+}

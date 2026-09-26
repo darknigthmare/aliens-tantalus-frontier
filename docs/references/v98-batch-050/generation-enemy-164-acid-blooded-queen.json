@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-164-acid-blooded-queen",
+  "name": "Acid-Blooded Queen",
+  "prompt": "Use case: stylized-concept\nAsset type: one dedicated static 2D gameplay sprite.\nInput image 1 is the anatomy and painted art style reference, not a sheet to reproduce. Reference blue-black queen: tall bipedal digitigrade legs, broad elongated swept-back fan-shaped cranial crest with pointed rear extensions, ribbed biomechanical torso, two primary long clawed arms and a smaller secondary pair on the chest, dorsal spines/tubes, one long segmented tail with pointed tip extending left.\nSubject: Acid-Blooded Queen. Original systemic project adaptation, not a new official species, official model or canonical 1:1 claim.\nVariant lock: Original systemic acid-blooded project variant: preserve exact base anatomy, appendage count, equipment, silhouette and identity colors. Subtle olive-amber iridescence and restrained yellow-green subdermal seams suggest its fictional acidic physiology. All skin and carapace are intact. No injury, exposed organs, blood, spray, splatter, puddle, aura, glow outline or extra appendages. Newly authored material detail, not an automatic recolor. This is not a new official species.\nComposition: ONE individual full body in neutral ready pose, near-side profile facing RIGHT. All head, limbs, feet and entire tail or equipment inside canvas with ten percent clear transparent padding on all four sides. Crucial Queen anatomy: ONE blue-black queen, tall biped with exactly TWO digitigrade legs, FOUR ARMS total: two long primary arms from the shoulders PLUS two distinctly smaller secondary arms attached at the front of the chest. Make the small secondary pair visible and separate, not fused with the primary pair. Preserve the reference's long broad swept-back fan-like cranial crown with pointed rear extensions, eyeless narrow forward face, ribbed biomechanical body, dorsal spines and ONE long segmented pointed tail extending in a low curve to the left. Keep all crest tips, four hands, feet and complete tail tip inside frame. No wings, egg sac, throne or additional creature. Dominant blue-black base with restrained olive-amber iridescence and faint yellow-green seam accents, not a green reskin.\nStyle: match the detailed restrained science-fiction digital painted game art of the reference, exact base proportions and identity colors, clean anatomical relief and controlled highlights.\nBackground: genuine transparent PNG alpha, no backdrop, scene, ground, shadow, sheet, grid, collage, UI, text, logo, watermark, muzzle flash, injury, blood, gore or second individual. Do not invent extra appendages or equipment.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/xenomorph-queen-action-sheet-v56.png",
+    "sha256": "4d014575b316fed25b5eb59f7adb6177dc17e1477e023e7f6799800e3fdc8e21",
+    "visualNotes": "Reference blue-black queen: tall bipedal digitigrade legs, broad elongated swept-back fan-shaped cranial crest with pointed rear extensions, ribbed biomechanical torso, two primary long clawed arms and a smaller secondary pair on the chest, dorsal spines/tubes, one long segmented tail with pointed tip extending left."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0df74-14de-75b1-b3d7-f6ab936c2784/exec-2f3f204b-dfae-474b-9894-69836bbdc8c1.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-164-acid-blooded-queen.png",
+    "width": 1536,
+    "height": 1024,
+    "sha256": "58149a549c93dcb5e08810acacc6db11812a0449629c8319fbedbe81b5e339b5",
+    "bboxAlphaAtLeast16": [
+      109,
+      43,
+      1427,
+      991
+    ],
+    "alphaMin": 0,
+    "alpha0": 1205059,
+    "totalPixels": 1572864
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Queen anatomy is preserved: two primary long arms plus two visibly smaller chest arms, two digitigrade legs, full broad swept-back crest, dorsal spines and one complete segmented pointed tail. Four hands are separately readable in the right-facing pose. Blue-black surface remains dominant. Apparent diffuse preview RGB was sampled outside the silhouette and has alpha=0. Native RGBA alpha, no pixel edits. Original systemic static project adaptation; canonExact=false, not an animation or official model. Clear uncut silhouette; margin can be below requested 10%."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.615,
+      "y": 0.9677734375
+    },
+    "sourceFacing": 1
+  }
+}

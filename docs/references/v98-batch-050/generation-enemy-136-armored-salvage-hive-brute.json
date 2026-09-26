@@ -1,0 +1,37 @@
+{
+  "profileId": "enemy-136-armored-salvage-hive-brute",
+  "name": "Armored Salvage Hive Brute",
+  "prompt": "Use case: stylized-concept.\nAsset type: native transparent static 2D game creature sprite.\nPrimary request: ONE original Armored Salvage Hive Brute.\nInput image 1 is the base identity/anatomy, palette and shaded sprite-style reference only; use the intact top-row stance, not the sheet layout.\nSubject: hunched charcoal-black and dark bronze heavy organic brute with compact low ridged head, massive rounded shoulders, broad ribbed torso, exactly TWO exceptionally thick long forearms with clawed hands resting low, TWO shorter powerful hind legs and ONE long tapered segmented tail. Preserve the distinctive huge forearms, stocky rear legs, small rear dorsal projections and restrained yellow-bronze carapace seams.\nVariant lock: Original systemic armored variant: preserve the exact base anatomy, equipment and silhouette family, with practical layered protection. Organic creatures have natural carapace plates, not mechanical suits. People retain recognizable uniforms and equipment with additional guards. Preserve base identity colors and surface relief. No extra appendages or new weapons.\nReinforce existing organic shoulders, forearm shells, ribs and shin guards with additional natural chitin layers; no mechanical armor or new body parts.\nComposition: one whole static heavy ready stance facing RIGHT, slight side-three-quarter angle making both forearms and both hind legs visible and countable. Full tail and tip, head, dorsal points, hands and feet inside the central 80% of the frame, 10% transparent margin around all edges.\nBackground: real transparent alpha only, no scenery, floor, shadow or aura.\nNo generic slender biped, no grid, sheet, duplicate creature, text, logos, labels, crop, new limbs, machinery, weapons, injury or gore. Original systemic project adaptation, not certified canon or animation.",
+  "reference": {
+    "path": "assets/openai/sprites/normalized/enemies/salvage-hive-brute-action-sheet-v56.png",
+    "sha256": "0446bd58418c9a4ab6ac7d4061cbb82484fbc1c37960a5eef22f7ecf89dc3bfe",
+    "visualNotes": "Hunched charcoal-black/bronze brute with compact ridged head, massive rounded shoulders, broad ribbed torso, two exceptionally thick forearms, two shorter rear legs, short dorsal projections and one long tapered tail."
+  },
+  "output": {
+    "providerPath": "C:/Users/chuck/.codex/generated_images/01a0dfac-686c-7292-a6bd-a26f9599abae/exec-3a2b04cc-1a47-4159-9de3-3e76b9bc9201.png",
+    "path": "assets/openai/sprites/static-enemy-v98/enemy-136-armored-salvage-hive-brute.png",
+    "width": 1254,
+    "height": 1254,
+    "sha256": "243fa8b3fd29998168aca340e0cf9ad58b222b0e1765d7b14c5925d44623f4f3",
+    "bboxAlphaAtLeast16": [
+      46,
+      278,
+      1206,
+      1019
+    ],
+    "alphaMin": 0,
+    "alpha0": 1155403,
+    "totalPixels": 1572516
+  },
+  "review": {
+    "status": "accepted-static-pose",
+    "notes": "Complete right-facing heavy Brute, both massive forearms and both shorter rear legs clearly visible and separable. Dark natural carapace with restrained bronze seams preserves the distinctive knuckle-low stance and compact cranium; full tail intact. Measured visible margins in pixels: {\"left\":46,\"top\":278,\"right\":48,\"bottom\":235}. Full silhouette intact; requested 10% padding is not certified. Static project adaptation only."
+  },
+  "runtimeContract": {
+    "pivot": {
+      "x": 0.66,
+      "y": 0.8118022328548644
+    },
+    "sourceFacing": 1
+  }
+}

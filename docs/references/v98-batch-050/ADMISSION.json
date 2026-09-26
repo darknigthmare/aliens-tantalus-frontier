@@ -1,0 +1,392 @@
+{
+  "schema": 98,
+  "date": "2026-09-27",
+  "attempted": 50,
+  "accepted": 40,
+  "held": 10,
+  "priorHoldsUnchanged": 24,
+  "animation": false,
+  "canonExact": false,
+  "outcomes": [
+    {
+      "ordinal": 1,
+      "profileId": "enemy-122-armored-specimen-six-line",
+      "status": "held",
+      "reason": "One native generation attempt refused at output moderation stage. No image returned, no retry or reformulation, no runtime copy."
+    },
+    {
+      "ordinal": 2,
+      "profileId": "enemy-123-armored-red-xenomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-123-armored-red-xenomorph.png",
+      "sha256": "416b5223221fdb44af5a96ae9d8353221591b20ae9ac336e467d27dafb25b142",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 3,
+      "profileId": "enemy-124-armored-k-series-yellow-xenomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-124-armored-k-series-yellow-xenomorph.png",
+      "sha256": "28fc592dc0e74dc7afe0d7ec34fa58165e24da5b69620ff997392693e80c5f54",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 4,
+      "profileId": "enemy-127-armored-atarax-ripper",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-127-armored-atarax-ripper.png",
+      "sha256": "48090b66b436696c579d82ae7715e4e78109490c323526106a76968c58e2bb69",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 5,
+      "profileId": "enemy-128-armored-ripper-queen",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-128-armored-ripper-queen.png",
+      "sha256": "ff323a9e17b03011395212ddae1426a730df34ebe1d5d206f6f2f46fe489545f",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 6,
+      "profileId": "enemy-130-armored-foundry-crusher",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-130-armored-foundry-crusher.png",
+      "sha256": "a33dd70e916f6623ebfb07195c54633d264ed8728ef98af310cdba016b0053ce",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 7,
+      "profileId": "enemy-131-armored-reef-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-131-armored-reef-stalker.png",
+      "sha256": "31d50e6f4080060e685339cbd9b74ecf7de8f27a44603ad258e287a61736e5f8",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 8,
+      "profileId": "enemy-133-armored-siege-royal",
+      "status": "held",
+      "reason": "One native generation attempt refused at output moderation stage. No image, no retry or reformulation and no runtime copy."
+    },
+    {
+      "ordinal": 9,
+      "profileId": "enemy-134-armored-pale-crucible-hunter",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-134-armored-pale-crucible-hunter.png",
+      "sha256": "ddda607d63df47f58bd1b3b960525386ff1d7357bdc1256269b438577ea22193",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 10,
+      "profileId": "enemy-135-armored-dust-runner",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-135-armored-dust-runner.png",
+      "sha256": "3ff7a1cf80c4f9ee0a2cf9823a30c804981f08c2a599b86bcd511e268415e2ce",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 11,
+      "profileId": "enemy-136-armored-salvage-hive-brute",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-136-armored-salvage-hive-brute.png",
+      "sha256": "243fa8b3fd29998168aca340e0cf9ad58b222b0e1765d7b14c5925d44623f4f3",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 12,
+      "profileId": "enemy-137-armored-arcology-lurker",
+      "status": "held",
+      "reason": "One native generation attempt refused at output moderation stage. No returned image, retry, reformulation or runtime copy."
+    },
+    {
+      "ordinal": 13,
+      "profileId": "enemy-138-armored-caravan-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-138-armored-caravan-stalker.png",
+      "sha256": "c244d655a9af48f5de1273d147edcf2b44417a312bd04322340bb70fdc055c28",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 14,
+      "profileId": "enemy-139-armored-trilobite-echo",
+      "status": "held",
+      "reason": "Native PNG has real alpha and whole body, but appendage roots and free tips are not individually traceable. A prominent closed/occluded arch and overlapping thick appendages prevent certification of the reference appendage topology and count. Held for anatomical ambiguity; no runtime copy, no retry and no pixel edit."
+    },
+    {
+      "ordinal": 15,
+      "profileId": "enemy-140-armored-deacon-line",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-140-armored-deacon-line.png",
+      "sha256": "3a5e7cf3e49698d9a5db12cd1fb19b9036addcfc6c14cd1c832c6e6dfe488791",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 16,
+      "profileId": "enemy-142-armored-protomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-142-armored-protomorph.png",
+      "sha256": "69e84df69132b1fe575062569a5cb74e2620f9d18ccf953f3cb7523046608a3e",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 17,
+      "profileId": "enemy-144-armored-pathogen-mimic",
+      "status": "held",
+      "reason": "One native generation attempted. Visual inspection shows FIVE distinct weight-bearing legs/feet instead of the reference quadruped's four (an additional middle foot is visible beneath the torso). Anatomy lock is not satisfied. Native provider PNG retained untouched outside runtime; no copy, retry, reformulation or image transformation."
+    },
+    {
+      "ordinal": 18,
+      "profileId": "enemy-148-armored-upp-vanguard",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-148-armored-upp-vanguard.png",
+      "sha256": "3751876d7bf6999be9f6c1fae8cc4a522871c59d8601265387b026ab8cb13a8f",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 19,
+      "profileId": "enemy-149-armored-seegson-security",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-149-armored-seegson-security.png",
+      "sha256": "e98b7496ef553d27f118289682ffa25e5de43c294a2bfad95551df0df6a0b61c",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 20,
+      "profileId": "enemy-150-armored-colonial-raider",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-150-armored-colonial-raider.png",
+      "sha256": "85740fd0c8ec69a38ba00f643a63b349060ba9a078c99a4f26fa620900fd3703",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 21,
+      "profileId": "enemy-151-armored-atarax-controller",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-151-armored-atarax-controller.png",
+      "sha256": "f208b1da52147bf3e92360c81fea0718294a0bb1cfcafba89221a505dc211211",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 22,
+      "profileId": "enemy-152-armored-cult-host",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-152-armored-cult-host.png",
+      "sha256": "41bb1fbad0d2359289e5542083174548614de393511f17e59d3b7e6ad354cb95",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 23,
+      "profileId": "enemy-153-armored-wild-boar-host",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-153-armored-wild-boar-host.png",
+      "sha256": "3f8553c6d7b65676717af2bff860b97029344c2be947828965e28231422f1cd7",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 24,
+      "profileId": "enemy-154-armored-korari-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-154-armored-korari-stalker.png",
+      "sha256": "bd3759b5891d132d6bbda926f6d2ddb8cf25e1d4dd0bda43a0564af9c90a5a14",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 25,
+      "profileId": "enemy-155-armored-ceto-reef-predator",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-155-armored-ceto-reef-predator.png",
+      "sha256": "5bd3d7017f55ff490394484a38646f1bdf6a655fceabb11ad0fbc769f108c837",
+      "bioforgeEligible": false
+    },
+    {
+      "ordinal": 26,
+      "profileId": "enemy-156-armored-tantalus-tunnel-vermin",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-156-armored-tantalus-tunnel-vermin.png",
+      "sha256": "36fc4991f935e0a49aef66eb38764c6bed5ba1d8cf8703dd01f68b5bfbdcac59",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 27,
+      "profileId": "enemy-157-acid-blooded-ovomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-157-acid-blooded-ovomorph.png",
+      "sha256": "64198ec95c9b75624a87f2618ca380120223288b5c27a88500f94946744b9647",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 28,
+      "profileId": "enemy-158-acid-blooded-facehugger",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-158-acid-blooded-facehugger.png",
+      "sha256": "1337c39f652949af095346152e102763743626a065c3c3827ce87e04775cdcaa",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 29,
+      "profileId": "enemy-159-acid-blooded-chestburster",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-159-acid-blooded-chestburster.png",
+      "sha256": "d878756bcb6d23892098d5ebea327b3d8005fb3297c2192887a28eb37be41495",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 30,
+      "profileId": "enemy-162-acid-blooded-runner",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-162-acid-blooded-runner.png",
+      "sha256": "cba49f56d6f5af3d0c54ba4d3000aac282b2a8dac9ff68fd8a187ae7b9e9dea6",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 31,
+      "profileId": "enemy-164-acid-blooded-queen",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-164-acid-blooded-queen.png",
+      "sha256": "58149a549c93dcb5e08810acacc6db11812a0449629c8319fbedbe81b5e339b5",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 32,
+      "profileId": "enemy-165-acid-blooded-crusher",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-165-acid-blooded-crusher.png",
+      "sha256": "9f61341d13979b151920acec31fa253dfc4a4a6c6f715195c19c3856af285ba3",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 33,
+      "profileId": "enemy-167-acid-blooded-lurker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-167-acid-blooded-lurker.png",
+      "sha256": "8d1d59290bc721e2ca60b819666a0f02be3324836fb401c8456591045a6f935e",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 34,
+      "profileId": "enemy-169-acid-blooded-ravager",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-169-acid-blooded-ravager.png",
+      "sha256": "fe9ca3ee2dea5bf75c6417660b177eb8278bda7303ce601bf004c58c1fefe159",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 35,
+      "profileId": "enemy-170-acid-blooded-boiler",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-170-acid-blooded-boiler.png",
+      "sha256": "69a8b01cbef7625e2a7bf0e1243b9fb7c3c987cac97acb1ce5988237bc2f1cdc",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 36,
+      "profileId": "enemy-172-acid-blooded-burster",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-172-acid-blooded-burster.png",
+      "sha256": "418d66579148161b258054357fa7a80eeff7505924a1cc1f2ae7c839c5091766",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 37,
+      "profileId": "enemy-173-acid-blooded-monica-line",
+      "status": "held",
+      "reason": "One native generation attempt rejected at output moderation. No output recovered, no retry or reformulation, no runtime image admitted. This is the distinct Acid-Blooded Monica Line job; the former V97 Armored Monica refusal remains untouched."
+    },
+    {
+      "ordinal": 38,
+      "profileId": "enemy-174-acid-blooded-specimen-six-line",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 39,
+      "profileId": "enemy-175-acid-blooded-red-xenomorph",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 40,
+      "profileId": "enemy-176-acid-blooded-k-series-yellow-xenomorph",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-176-acid-blooded-k-series-yellow-xenomorph.png",
+      "sha256": "d202d52dc2e63f69e03c44e9fb09a8fe1910a6fd73a4763a77c2b0bb37a37b96",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 41,
+      "profileId": "enemy-179-acid-blooded-atarax-ripper",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-179-acid-blooded-atarax-ripper.png",
+      "sha256": "aae93df2812ad6228d33dc9252fb21432d1bd5d111fdd51d1db03cf7b7372a6c",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 42,
+      "profileId": "enemy-180-acid-blooded-ripper-queen",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-180-acid-blooded-ripper-queen.png",
+      "sha256": "2810b39839189f284a0def67d4f00f17b1d97eb5a1f63eb568801b429fab0ad2",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 43,
+      "profileId": "enemy-182-acid-blooded-foundry-crusher",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-182-acid-blooded-foundry-crusher.png",
+      "sha256": "0d1c545f00ebeeebe0a90c0171b6f5ed40403558fcdb1783ae905f6028eff111",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 44,
+      "profileId": "enemy-183-acid-blooded-reef-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-183-acid-blooded-reef-stalker.png",
+      "sha256": "f8e4d2da0c591b242b86f88d8fce4de199d70c914d6845aac7213a0b196834ec",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 45,
+      "profileId": "enemy-185-acid-blooded-siege-royal",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 46,
+      "profileId": "enemy-186-acid-blooded-pale-crucible-hunter",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-186-acid-blooded-pale-crucible-hunter.png",
+      "sha256": "ee024a7adf0cb18af409678d528fcb52c4c57fc64c53751bec49b30485ce9dfb",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 47,
+      "profileId": "enemy-187-acid-blooded-dust-runner",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-187-acid-blooded-dust-runner.png",
+      "sha256": "02ddb62adb11a21ce85e237dfe35937aeb4260200ed8586f5b9c48b0b0838f10",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 48,
+      "profileId": "enemy-188-acid-blooded-salvage-hive-brute",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-188-acid-blooded-salvage-hive-brute.png",
+      "sha256": "6eb4e9b0d4b2641944864232d9a9773f8d6f33b5811f2054c91627dfa4c3b897",
+      "bioforgeEligible": true
+    },
+    {
+      "ordinal": 49,
+      "profileId": "enemy-189-acid-blooded-arcology-lurker",
+      "status": "held",
+      "reason": "One native attempt rejected at output moderation. No output recovered; no retry or reformulation; no runtime image admitted."
+    },
+    {
+      "ordinal": 50,
+      "profileId": "enemy-190-acid-blooded-caravan-stalker",
+      "status": "accepted-static-pose",
+      "path": "/assets/openai/sprites/static-enemy-v98/enemy-190-acid-blooded-caravan-stalker.png",
+      "sha256": "8fc31c82177270ad20e8e3f44fe8daa3a3c1b9e2cb870b99115f3c20d937a8f9",
+      "bioforgeEligible": true
+    }
+  ]
+}
